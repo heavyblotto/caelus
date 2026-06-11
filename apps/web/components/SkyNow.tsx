@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Engine, BODIES, fmtLon, mod, type Chart, type HouseSystem } from "caelus";
 import { embeddedData } from "caelus/data-embedded";
 
@@ -20,11 +20,17 @@ function houseOf(cusps: number[], lon: number) {
 }
 
 export default function SkyNow() {
-  const [iso, setIso] = useState(() => new Date().toISOString().slice(0, 16));
+  const [mounted, setMounted] = useState(false);
+  const [iso, setIso] = useState("2000-01-01T12:00");
   const [lat, setLat] = useState("27.94");
   const [lon, setLon] = useState("-82.46");
   const [sys, setSys] = useState<HouseSystem>("placidus");
   const [tab, setTab] = useState<"positions" | "aspects" | "json">("positions");
+
+  useEffect(() => {
+    setIso(new Date().toISOString().slice(0, 16));
+    setMounted(true);
+  }, []);
 
   const { chart, ms, error } = useMemo(() => {
     const la = Number(lat);
@@ -58,7 +64,8 @@ export default function SkyNow() {
         </select>
       </div>
       {error && <p style={{ color: "#e08a8a" }}>{error}</p>}
-      {chart && (
+      {!mounted && <p style={{ opacity: 0.55, fontSize: "0.85em" }}>computing…</p>}
+      {mounted && chart && (
         <>
           <p style={{ opacity: 0.55, fontSize: "0.85em" }}>
             {iso}Z · {lat}°, {lon}° (east+) · {chart.houseSystem}
@@ -67,7 +74,7 @@ export default function SkyNow() {
           </p>
           <div style={{ display: "flex", gap: "0.5rem", margin: "0.5rem 0" }}>
             {(["positions", "aspects", "json"] as const).map((t) => (
-              <button key={t} style={tabBtn(t)} onClick={() => setTab(t)}>{t}</button>
+              <button key={t} type="button" style={tabBtn(t)} onClick={() => setTab(t)}>{t}</button>
             ))}
           </div>
           {tab === "positions" && (
