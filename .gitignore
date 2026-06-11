@@ -1,0 +1,26 @@
+# dependencies
+node_modules/
+
+# build outputs
+dist/
+apps/web/.next/
+apps/web/out/
+
+# env
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# archives and extracted copies (monorepo is the source of truth)
+*.zip
+extracted/
+
+# logs
+*.log
+npm-debug.log*

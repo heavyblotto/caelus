@@ -1,0 +1,9 @@
+{
+  "name": "caelus-monorepo",
+  "private": true,
+  "workspaces": ["packages/*", "apps/*"],
+  "scripts": {
+    "build": "npm run build -w caelus && npm run build -w caelus-mcp && npm run build -w web",
+    "test": "npm run test -w caelus"
+  }
+}
