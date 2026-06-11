@@ -2,7 +2,7 @@ import { A, H2, P, Code, Nav } from "../../components/Prose";
 
 export const metadata = {
   title: "caelus — validation",
-  description: "Two-link verification chain: Swiss Ephemeris validates the reference engine; 1,438 golden checks validate the TypeScript port. CI enforces both.",
+  description: "Two-link verification chain: reference engine vs Swiss Ephemeris, TypeScript port vs 1,438 golden checks. CI on every commit.",
 };
 
 const BODY_TABLE: Array<[string, string, string, string]> = [
@@ -31,10 +31,8 @@ export default function Validation() {
       <Nav current="/validation" />
       <h1 style={{ letterSpacing: "0.05em" }}>how we know it&rsquo;s right</h1>
       <P>
-        An ephemeris you can&rsquo;t verify is an opinion. caelus ships its
-        verification as part of the project: a two-link chain in which each
-        implementation is held to a measurable standard, enforced by CI on
-        every commit.
+        Two-link chain, enforced by CI on every commit: reference engine vs
+        Swiss Ephemeris, then TypeScript port vs golden fixtures.
       </P>
       <H2>link 1 — reference engine vs Swiss Ephemeris</H2>
       <P>
@@ -97,7 +95,7 @@ export default function Validation() {
         and coordinates.
       </P>
       <P dim>
-        Honest limits: supported date range is 1800–2149 (1850–2150 for the
+        Limits: supported date range is 1800–2149 (1850–2150 for the
         precise Moon and Chiron tiers). No eclipses, heliacal events, or
         topocentric positions yet. Placidus is undefined above the polar
         circles — caelus falls back to whole-sign and{" "}

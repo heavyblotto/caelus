@@ -2,7 +2,7 @@ import { A, H2, P, Nav } from "../../components/Prose";
 
 export const metadata = {
   title: "caelus — provenance",
-  description: "Every byte of code and data traced to public sources. Swiss Ephemeris used as a test oracle, never as a source.",
+  description: "Coefficients from public sources. Swiss Ephemeris is a test oracle, not a source.",
 };
 
 export default function Provenance() {
@@ -45,11 +45,10 @@ export default function Provenance() {
         referee, never as a source. No Swiss Ephemeris code, data file, or
         derived coefficient ships in this package. The one temporary exception
         (an early Chiron fit sampled from its asteroid file while offline) was
-        replaced by a direct JPL Horizons fit before release — and the two
-        independent integrations agree to 0.85″ worst-case across 1900–2099,
-        which is its own kind of confirmation.
+        replaced by a direct JPL Horizons fit before release. The two
+        integrations agree to 0.85″ worst-case across 1900–2099.
       </P>
-      <H2>what this buys you</H2>
+      <H2>MIT license</H2>
       <P>
         MIT license, full stop. Ship caelus in closed-source products, SaaS,
         mobile apps, browser bundles, edge functions. No AGPL contagion, no
@@ -59,11 +58,8 @@ export default function Provenance() {
         and behind the <A href="https://www.npmjs.com/package/caelus-mcp">MCP server</A>.
       </P>
       <P dim>
-        The numbers themselves — planetary theory coefficients, lunar series
-        terms, IAU model constants — are scientific facts published for
-        exactly this purpose. caelus&rsquo;s contribution is the
-        implementation, the validation harness, and the packaging; that
-        implementation is what the MIT license covers.{" "}
+        The coefficients are published scientific facts. The MIT license
+        covers caelus&rsquo;s implementation, tests, and packaging.{" "}
         <A href="/validation">How we know it&rsquo;s right →</A>
       </P>
     </main>

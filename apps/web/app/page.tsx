@@ -10,8 +10,8 @@ export default function Home() {
       <p style={{ opacity: 0.7 }}>
         ~85 KB ephemeris, computed <em>in your browser</em>. No API call, no
         ephemeris files, no AGPL — <a href="/provenance" style={{ color: "#8a7fd4" }}>clean-room</a> from
-        the published record, <a href="/validation" style={{ color: "#8a7fd4" }}>validated</a> to the
-        arcsecond. MIT.
+        the published record, <a href="/validation" style={{ color: "#8a7fd4" }}>checked</a> to ~1″ vs
+        Swiss Ephemeris. MIT.
       </p>
       <SkyNow />
       <p style={{ marginTop: "2rem", display: "flex", gap: "1.2rem", flexWrap: "wrap" }}>

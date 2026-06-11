@@ -101,7 +101,7 @@ export default function SkyNow() {
       <table style={{ borderSpacing: "0.8rem 0.1rem", fontSize: "0.9em" }}>
         <tbody>{ACCURACY.map(([k, v]) => <tr key={k}><td style={{ opacity: 0.6 }}>{k}</td><td>{v}</td></tr>)}</tbody>
       </table>
-      <p style={{ opacity: 0.5, fontSize: "0.8em" }}>Within 1′ chart-display precision. Full table in package README.</p>
+      <p style={{ opacity: 0.5, fontSize: "0.8em" }}>Within 1′ chart-display precision. <a href="/validation" style={{ color: "#8a7fd4" }}>Full table →</a></p>
     </div>
   );
 }

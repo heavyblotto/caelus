@@ -2,7 +2,7 @@ import { A, H2, P, Nav } from "../../components/Prose";
 
 export const metadata = {
   title: "caelus — build notes",
-  description: "Field notes from building an ephemeris from the published record: the Delta T trap, the 11x node amplifier, the light-time double-count, and why the test suite is the product.",
+  description: "Build notes: ΔT extrapolation, node frame sensitivity, Chiron light-time double-count, aspect-search geometry.",
 };
 
 export default function Notes() {
@@ -16,8 +16,7 @@ export default function Notes() {
         professional ephemerides to the arcsecond on the first run. Every
         real bug lived somewhere subtler — in timescales, reference frames,
         and geometry. These notes exist because each bug was invisible to
-        eyeballing and instantly visible to the conformance suite, and that
-        asymmetry is the whole engineering philosophy of this project.
+        eyeballing, visible to the conformance suite.
       </P>
 
       <H2>the ΔT trap: Earth changed and the textbooks didn&rsquo;t</H2>
@@ -39,7 +38,7 @@ export default function Notes() {
 
       <H2>the 11× node amplifier</H2>
       <P>
-        The lunar nodes — astrologically load-bearing — are where the
+        The lunar nodes — widely used in chart work — are where the
         Moon&rsquo;s orbital plane crosses the ecliptic. But <em>which</em>
         ecliptic? The ecliptic plane itself drifts about 47″ per century, and
         because the Moon&rsquo;s orbit is inclined only 5.1°, any error in the
@@ -62,9 +61,8 @@ export default function Notes() {
         no single position check would flag as absurd. The staged diagnosis —
         validate the fit, then the Earth vector, then assemble geocentric
         positions from the oracle&rsquo;s own parts — isolated it in three
-        steps. Rule learned: always fit <em>geometric</em> states, and never
-        trust an ephemeris API&rsquo;s default frame without reading the fine
-        print twice.
+        steps. Always fit <em>geometric</em> states. Read an ephemeris API&rsquo;s
+        frame docs before sampling.
       </P>
 
       <H2>a square has two sides</H2>
@@ -77,22 +75,18 @@ export default function Notes() {
         engine&rsquo;s conformance suite structurally cannot see. The fix
         came with its own oracle test: seven years of Mars sextiles verified
         hit-for-hit against an independent scan, agreeing to the minute on
-        all nine events including a retrograde triple-pass. Every layer needs
-        its own referee.
+        all nine events including a retrograde triple-pass.
       </P>
 
-      <H2>why the test suite is the product</H2>
+      <H2>the test suite</H2>
       <P>
-        Each story above ends the same way: a measurable contract caught what
-        inspection could not. That is the actual asset. The Swiss Ephemeris
-        comparison validates the reference engine; 1,438 golden fixtures pin
-        the TypeScript port to it at nano-arcsecond tolerance; CI re-runs the
-        chain on every commit. It also changes how the project is built —
-        the TypeScript port was largely delegated to AI coding agents with
-        one acceptance criterion, <em>the suite stays green</em>, and the
-        result matched the reference to 1.6 nano-arcseconds. With a referee
-        that strict, contributions (human or agent) can be accepted on
-        evidence instead of trust.
+        Each bug above was caught by a measurable contract, not inspection.
+        Swiss Ephemeris comparison checks the reference engine; 1,438 golden
+        fixtures pin the TypeScript port at nano-arcsecond tolerance; CI
+        re-runs the chain on every commit. The TS port was largely delegated
+        to coding agents with one criterion — <em>the suite stays green</em> —
+        and matched the reference to 1.6 nano-arcseconds. Contributions
+        (human or agent) ship when the suite passes.
       </P>
 
       <P dim>
