@@ -60,8 +60,13 @@ class Engine:
         bodies = {b: self.position(b, jd_ut) for b in BODIES}
         asc, mc, armc, eps = H.angles(jd_ut, lat, lon_east)
         phi = lat * DEG
-        if house_system == "placidus" and abs(lat) < 66.0:
-            cusps = H.houses_placidus(armc, phi, eps)
+        used = house_system
+        if house_system == "placidus":
+            if abs(lat) < 66.0:
+                cusps = H.houses_placidus(armc, phi, eps)
+            else:
+                used = "whole_sign"  # Placidus undefined above polar circles
+                cusps = H.houses_whole_sign(asc)
         elif house_system == "porphyry":
             cusps = H.houses_porphyry(asc, mc)
         elif house_system == "equal":
@@ -70,6 +75,8 @@ class Engine:
             cusps = H.houses_whole_sign(asc)
         return {
             "jd_ut": jd_ut,
+            "house_system": used,
+            "house_system_requested": house_system,
             "bodies": bodies,
             "angles": {"asc": asc / DEG, "mc": mc / DEG},
             "cusps": [c / DEG for c in cusps],

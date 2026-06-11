@@ -72,7 +72,9 @@ function chartPayload(iso: string, lat: number, lon: number, hs: "placidus" | "w
     };
   }
   return {
-    utc: iso, houses: hs, bodies,
+    utc: iso, houses: c.houseSystem,
+    ...(c.houseSystem !== hs ? { houses_requested: hs, houses_fallback_reason: "placidus undefined above polar circles" } : {}),
+    bodies,
     angles: { asc: r2(c.angles.asc), ascPos: fmt(c.angles.asc), mc: r2(c.angles.mc), mcPos: fmt(c.angles.mc) },
     cusps: cusps.map(r2),
     aspects: c.aspects.map((a) => `${a.a} ${a.aspect} ${a.b} (${a.orb}°)`),
@@ -158,6 +160,20 @@ export function buildServer(): McpServer {
     const cb = chartPayload(b.date, b.lat, b.lon, "placidus");
     const ASP: Array<[string, number]> = [["conj", 0], ["sext", 60], ["sq", 90], ["tri", 120], ["opp", 180]];
     const inter: string[] = [];
+    const houseIn = (cusps: number[], bl: number) => {
+      for (let i = 0; i < 12; i++) {
+        if (mod(bl - cusps[i], 360) < mod(cusps[(i + 1) % 12] - cusps[i], 360)) return i + 1;
+      }
+      return 12;
+    };
+    const aInB: Record<string, number> = {};
+    const bInA: Record<string, number> = {};
+    for (const ba of BODIES) {
+      const la = (ca.bodies as Record<string, { lon: number }>)[ba].lon;
+      aInB[ba] = houseIn(cb.cusps as number[], la);
+      const lb = (cb.bodies as Record<string, { lon: number }>)[ba].lon;
+      bInA[ba] = houseIn(ca.cusps as number[], lb);
+    }
     for (const ba of BODIES) {
       for (const bb of BODIES) {
         const la = (ca.bodies as Record<string, { lon: number }>)[ba].lon;
@@ -169,7 +185,10 @@ export function buildServer(): McpServer {
         }
       }
     }
-    return text({ a: ca, b: cb, inter_aspects: inter });
+    return text({
+      a: ca, b: cb, inter_aspects: inter,
+      a_planets_in_b_houses: aInB, b_planets_in_a_houses: bInA,
+    });
   });
 
   server.registerTool("find_aspect_dates", {
@@ -188,32 +207,41 @@ export function buildServer(): McpServer {
     const jd0 = jdFromIso(start);
     const jd1 = jdFromIso(end);
     if (jd1 - jd0 > 50 * 366) throw new Error("Range too large (max 50 years)");
-    const f = (jd: number) => {
-      const tl = target_body !== undefined
-        ? engine.longitude(target_body as Body, jd)
-        : (target_lon as number);
-      return mod(engine.longitude(body as Body, jd) - tl - angle + 180, 360) - 180;
-    };
     if (target_lon === undefined && target_body === undefined) {
       throw new Error("Provide target_lon or target_body");
     }
-    const hits: string[] = [];
+    // A non-axial aspect (sextile/square/trine) is exact at BOTH +angle and
+    // -angle separation; conjunction/opposition have a single geometry.
+    const offsets = angle === 0 || angle === 180 ? [angle] : [angle, -angle];
+    const mkF = (off: number) => (jd: number) => {
+      const tl = target_body !== undefined
+        ? engine.longitude(target_body as Body, jd)
+        : (target_lon as number);
+      return mod(engine.longitude(body as Body, jd) - tl - off + 180, 360) - 180;
+    };
+    const hitsJd: number[] = [];
     const step = 1.0;
-    let prev = f(jd0);
-    for (let jd = jd0 + step; jd <= jd1 && hits.length < 60; jd += step) {
-      const cur = f(jd);
-      if (prev * cur < 0 && Math.abs(cur - prev) < 180) {
-        let a = jd - step;
-        let bj = jd;
-        for (let i = 0; i < 40; i++) {  // bisection to ~1 minute
-          const m = (a + bj) / 2;
-          if (f(a) * f(m) <= 0) bj = m; else a = m;
+    for (const off of offsets) {
+      const f = mkF(off);
+      let prev = f(jd0);
+      for (let jd = jd0 + step; jd <= jd1 && hitsJd.length < 120; jd += step) {
+        const cur = f(jd);
+        if (prev * cur < 0 && Math.abs(cur - prev) < 180) {
+          let a = jd - step;
+          let bj = jd;
+          for (let i = 0; i < 40; i++) {  // bisection to ~1 minute
+            const m = (a + bj) / 2;
+            if (f(a) * f(m) <= 0) bj = m; else a = m;
+          }
+          hitsJd.push((a + bj) / 2);
         }
-        const t = (a + bj) / 2;
-        hits.push(new Date((t - 2440587.5) * 86400000).toISOString().slice(0, 16) + "Z");
+        prev = cur;
       }
-      prev = cur;
     }
+    hitsJd.sort((x, y) => x - y);
+    const hits = hitsJd.slice(0, 60).map(
+      (t) => new Date((t - 2440587.5) * 86400000).toISOString().slice(0, 16) + "Z",
+    );
     return text({ query: `${body} ${aspect} ${target_body ?? target_lon}`, hits });
   });
 

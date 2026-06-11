@@ -14,6 +14,16 @@ export function GET(req: NextRequest) {
   if (Number.isNaN(d.getTime())) {
     return NextResponse.json({ error: "invalid date" }, { status: 400 });
   }
+  const y = d.getUTCFullYear();
+  if (y < 1800 || y > 2149) {
+    return NextResponse.json({ error: "date out of supported range 1800-2149" }, { status: 400 });
+  }
+  if (!Number.isFinite(lat) || lat < -90 || lat > 90) {
+    return NextResponse.json({ error: "lat must be a finite number in [-90, 90]" }, { status: 400 });
+  }
+  if (!Number.isFinite(lon) || lon < -180 || lon > 180) {
+    return NextResponse.json({ error: "lon must be a finite number in [-180, 180] (east positive)" }, { status: 400 });
+  }
   const chart = engine.chart(
     d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate(),
     d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(),

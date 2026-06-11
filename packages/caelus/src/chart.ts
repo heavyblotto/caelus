@@ -34,6 +34,10 @@ export interface Aspect { a: string; b: string; aspect: string; orb: number }
 
 export interface Chart {
   jdUt: number;
+  /** House system actually used. May differ from the request: Placidus is
+   *  undefined above the polar circles and falls back to whole_sign. */
+  houseSystem: HouseSystem;
+  houseSystemRequested: HouseSystem;
   bodies: Record<string, Position>;
   angles: { asc: number; mc: number };
   cusps: number[];
@@ -107,8 +111,14 @@ export class Engine {
     const [asc, mc, armc, eps] = H.angles(this.data, jdUt, lat, lonEast);
     const phi = lat * DEG;
     let cusps: number[];
-    if (houseSystem === "placidus" && Math.abs(lat) < 66.0) {
-      cusps = H.housesPlacidus(armc, phi, eps);
+    let used: HouseSystem = houseSystem;
+    if (houseSystem === "placidus") {
+      if (Math.abs(lat) < 66.0) {
+        cusps = H.housesPlacidus(armc, phi, eps);
+      } else {
+        used = "whole_sign"; // Placidus undefined above polar circles
+        cusps = H.housesWholeSign(asc);
+      }
     } else if (houseSystem === "porphyry") {
       cusps = H.housesPorphyry(asc, mc);
     } else if (houseSystem === "equal") {
@@ -118,6 +128,8 @@ export class Engine {
     }
     return {
       jdUt,
+      houseSystem: used,
+      houseSystemRequested: houseSystem,
       bodies,
       angles: { asc: asc / DEG, mc: mc / DEG },
       cusps: cusps.map((c) => c / DEG),

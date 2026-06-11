@@ -130,6 +130,17 @@ for (const g of G.houses) {
   }
 }
 
+// polar Placidus fallback contract
+{
+  const g = G.chart_polar;
+  const c = eng.chart(1985, 12, 1, 9, 0, 0, 78.2, 15.6, "placidus");
+  checks++;
+  if (c.houseSystem !== g.house_system || c.houseSystemRequested !== g.house_system_requested) {
+    failures++;
+    console.error(`FAIL polar fallback: ${c.houseSystem}/${c.houseSystemRequested}`);
+  }
+}
+
 console.log(`\n${checks} checks, ${failures} failures`);
 console.log(`worst diff: ${worst.what} = ${(worst.diff * 3600).toExponential(2)}" (${worst.diff.toExponential(2)} deg)`);
 process.exit(failures ? 1 : 0);

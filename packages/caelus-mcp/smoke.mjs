@@ -1,7 +1,9 @@
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+import { fileURLToPath } from "node:url";
 
-const transport = new StdioClientTransport({ command: "node", args: ["dist/src/server.js"] });
+const serverPath = fileURLToPath(new URL("./dist/src/server.js", import.meta.url));
+const transport = new StdioClientTransport({ command: "node", args: [serverPath] });
 const client = new Client({ name: "smoke", version: "0.0.1" });
 await client.connect(transport);
 

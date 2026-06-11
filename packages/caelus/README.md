@@ -1,4 +1,4 @@
-# astroengine (TypeScript)
+# caelus
 
 Clean-room astrological ephemeris engine. MIT-licensable: no Swiss Ephemeris
 code, no AGPL obligations, no ephemeris files to manage. 1:1 port of the
@@ -37,11 +37,15 @@ automatically when the data is present.
 ## Usage
 
 ```ts
-import { Engine, fmtLon } from "astroengine";
-import { loadNodeData } from "astroengine"; // Node only
+import { Engine, fmtLon } from "caelus";
+import { loadNodeData } from "caelus"; // Node only
 
 // Node: filesystem loader
 const engine = new Engine(loadNodeData("./data", "embedded", "full"));
+
+// Browser/edge: bundled embedded dataset (~85 KB gz)
+// import { embeddedData } from "caelus/data-embedded";
+// const engine = new Engine(embeddedData);
 
 // Browser: inject data yourself (bundle or fetch the JSON)
 // const engine = new Engine({ vsop, nutation, moonMeeus, pluto, chiron, moonCheb });
