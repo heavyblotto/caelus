@@ -21,6 +21,11 @@ apps/web/out/
 *.zip
 extracted/
 
+# python fitting caches (raw Horizons samples; fitted JSON is committed)
+python/chiron_horizons_cache.json
+python/__pycache__/
+python/astroengine/__pycache__/
+
 # logs
 *.log
 npm-debug.log*
