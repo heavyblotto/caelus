@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "caelus — the open ephemeris engine",
-  description: "Clean-room astrological ephemeris. 85 KB, client-side, validated to the arcsecond.",
+  title: "caelus",
+  description: "Astrological ephemeris. ~85 KB, client-side, checked to ~1″ vs Swiss Ephemeris.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

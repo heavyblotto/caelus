@@ -1,15 +1,15 @@
 # caelus
 
-Clean-room astrological ephemeris engine and monorepo. MIT-licensed, no Swiss
-Ephemeris code, no AGPL obligations, no ephemeris files to manage.
+Astrological ephemeris monorepo. MIT, no Swiss Ephemeris code, no AGPL, no
+ephemeris files.
 
 ## Packages
 
 | Path | Description |
 |------|-------------|
-| `packages/caelus` | TypeScript ephemeris engine (~85 KB gzipped, zero deps) |
-| `packages/caelus-mcp` | MCP server exposing chart computation to AI agents |
-| `apps/web` | Next.js 15 demo — client-side charts + edge API |
+| `packages/caelus` | TypeScript engine (~85 KB gzipped, zero deps) |
+| `packages/caelus-mcp` | MCP server for chart computation |
+| `apps/web` | Next.js demo — client-side charts + edge API |
 
 See [ARCHITECTURE.md](./ARCHITECTURE.md) for product strategy and [MCP_SPEC.md](./MCP_SPEC.md) for the MCP tool contract.
 
@@ -22,8 +22,8 @@ npm test
 npm run dev -w web
 ```
 
-Open http://localhost:3000 — the homepage computes a live chart in your browser.
-The edge API twin: `GET /api/chart?date=…&lat=…&lon=…`.
+http://localhost:3000 — live chart in the browser.
+Edge API: `GET /api/chart?date=…&lat=…&lon=…`.
 
 ## Branches
 

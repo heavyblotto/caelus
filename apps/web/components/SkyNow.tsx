@@ -97,11 +97,11 @@ export default function SkyNow() {
           )}
         </>
       )}
-      <h3 style={{ marginTop: "2.5rem", opacity: 0.8 }}>validated accuracy <span style={{ opacity: 0.5, fontWeight: "normal" }}>(vs Swiss Ephemeris, 1900–2099)</span></h3>
+      <h3 style={{ marginTop: "2.5rem", opacity: 0.8 }}>accuracy <span style={{ opacity: 0.5, fontWeight: "normal" }}>(vs Swiss Ephemeris, 1900–2099)</span></h3>
       <table style={{ borderSpacing: "0.8rem 0.1rem", fontSize: "0.9em" }}>
         <tbody>{ACCURACY.map(([k, v]) => <tr key={k}><td style={{ opacity: 0.6 }}>{k}</td><td>{v}</td></tr>)}</tbody>
       </table>
-      <p style={{ opacity: 0.5, fontSize: "0.8em" }}>All within the 1′ display precision of chart software. Full table in the package README.</p>
+      <p style={{ opacity: 0.5, fontSize: "0.8em" }}>Within 1′ chart-display precision. Full table in package README.</p>
     </div>
   );
 }

@@ -1,12 +1,11 @@
 # caelus
 
-Clean-room astrological ephemeris engine. MIT-licensable: no Swiss Ephemeris
-code, no AGPL obligations, no ephemeris files to manage. 1:1 port of the
-Python reference implementation, verified by a golden conformance suite.
+Astrological ephemeris engine. MIT, no Swiss Ephemeris code, no AGPL, no
+ephemeris files. 1:1 port of the Python reference, checked by golden fixtures.
 
 ## Verification chain
 
-1. Python engine validated against Swiss Ephemeris 2.10 across 1900–2099:
+1. Python engine checked against Swiss Ephemeris 2.10 across 1900–2099:
    every planet ≤ 1″ (Sun–Saturn), Moon ≤ 2.5″, Chiron ≤ 1″, angles and
    Placidus cusps ≤ 3.2″ — all invisible at the arcminute display precision
    chart software uses.
@@ -29,10 +28,9 @@ keep this suite green.
 | VSOP micro tier (alt.)             | 25 KB   |
 | precise Moon 1920–2080 (lazy-load) | 729 KB  |
 
-The 85 KB core computes complete natal charts client-side — planets to
-sub-arcsecond, Moon to ~10″ via the analytic series. Apps wanting the
-JPL-fit Moon (0.1″-class) lazy-load the 729 KB tier; the engine switches
-automatically when the data is present.
+The 85 KB core computes natal charts client-side — planets to sub-arcsecond,
+Moon to ~10″ via the analytic series. The 729 KB tier (1920–2080 JPL-fit Moon,
+0.1″-class) lazy-loads when present; the engine switches automatically.
 
 ## Usage
 

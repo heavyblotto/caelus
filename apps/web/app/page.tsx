@@ -6,9 +6,8 @@ export default function Home() {
     <main>
       <h1 style={{ letterSpacing: "0.05em" }}>caelus</h1>
       <p style={{ opacity: 0.7 }}>
-        The open astrological ephemeris. Everything below is computed{" "}
-        <em>in your browser</em> by an ~85 KB engine — no API call, no
-        ephemeris files, MIT licensed.
+        ~85 KB ephemeris, computed <em>in your browser</em>. No API call, no
+        ephemeris files. MIT.
       </p>
       <SkyNow />
       <p style={{ marginTop: "2rem", display: "flex", gap: "1.2rem", flexWrap: "wrap" }}>

@@ -1,7 +1,7 @@
 # caelus-engine (Python)
 
-Reference implementation and data-fitting toolchain. Validates against Swiss
-Ephemeris; mints Chebyshev JSON artifacts consumed by the TypeScript engine.
+Reference implementation and data-fitting toolchain. Checked against Swiss
+Ephemeris; writes Chebyshev JSON for the TypeScript engine.
 
 ## Chiron re-fit (JPL Horizons)
 

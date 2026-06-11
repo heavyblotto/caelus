@@ -1,7 +1,7 @@
 {
   "name": "caelus-mcp",
   "version": "0.1.0",
-  "description": "MCP server exposing the caelus astrological ephemeris engine to AI models.",
+  "description": "MCP server for caelus chart computation.",
   "type": "module",
   "bin": { "caelus-mcp": "dist/src/server.js" },
   "main": "dist/src/server.js",

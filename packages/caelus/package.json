@@ -1,7 +1,7 @@
 {
   "name": "caelus",
   "version": "0.1.0",
-  "description": "Clean-room astrological ephemeris engine. MIT. No AGPL, no ephemeris files. Validated against Swiss Ephemeris.",
+  "description": "Astrological ephemeris engine. MIT, no AGPL, no ephemeris files. Checked against Swiss Ephemeris.",
   "type": "module",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",

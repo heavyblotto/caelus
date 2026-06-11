@@ -89,14 +89,14 @@ export function buildServer(): McpServer {
 
   server.registerTool("natal_chart", {
     description:
-      "Compute a complete natal chart: planetary positions (sun..pluto, chiron, lunar nodes) with zodiac sign, house placement, retrograde flag and speed; Ascendant/MC; house cusps; major aspects with orbs. Positions are astronomically rigorous (validated to ~1 arcsecond against Swiss Ephemeris).",
+      "Natal chart: 13 bodies (sun–pluto, chiron, nodes) with sign, house, retrograde, speed; ASC/MC; cusps; major aspects with orbs. ~1″ vs Swiss Ephemeris.",
     inputSchema: { ...birth, house_system: houseSys },
   }, async ({ date, lat, lon, house_system }) =>
     text(chartPayload(date, lat, lon, house_system)));
 
   server.registerTool("current_sky", {
     description:
-      "Current planetary positions ('the sky right now') for a location: signs, houses, retrogrades, exact aspects in effect. Use for 'what's happening astrologically today/now'.",
+      "Sky at a date/time and location: positions, houses, retrogrades, aspects. Defaults to now.",
     inputSchema: {
       date: z.string().optional().describe("UTC ISO date-time; omit for now"),
       lat: z.number().default(0), lon: z.number().default(0),
@@ -107,7 +107,7 @@ export function buildServer(): McpServer {
 
   server.registerTool("transits", {
     description:
-      "Transits of current (or specified-date) planets against a natal chart: every transiting body aspecting a natal body within orb, with exact orb, applying/separating, and the natal house being transited. The core tool for 'what's affecting me now'.",
+      "Transiting planets vs natal chart: aspects within orb (applying/separating), natal house per transiting body.",
     inputSchema: {
       ...birth,
       transit_date: z.string().optional().describe("UTC ISO date-time of transit moment; omit for now"),
@@ -149,7 +149,7 @@ export function buildServer(): McpServer {
 
   server.registerTool("synastry", {
     description:
-      "Relationship synastry between two natal charts: inter-chart aspects with orbs, and each person's planets in the other's houses.",
+      "Two natal charts: inter-chart aspects with orbs, house overlays both ways.",
     inputSchema: {
       a: z.object(birth).describe("Person A birth data"),
       b: z.object(birth).describe("Person B birth data"),
@@ -193,7 +193,7 @@ export function buildServer(): McpServer {
 
   server.registerTool("find_aspect_dates", {
     description:
-      "Search a date range for when a transiting body makes an exact aspect to a fixed zodiac longitude (e.g. a natal planet's position) or to another transiting body. Returns exact hit dates (UTC) including retrograde re-hits. Use for 'when does Saturn square my natal moon', 'next Jupiter-Saturn conjunction', eclipse-season planning, electional work.",
+      "Exact aspect dates in a range: transiting body to fixed longitude or another body. Includes retrograde re-hits.",
     inputSchema: {
       body: z.enum(BODIES as unknown as [string, ...string[]]),
       aspect: z.enum(["conjunction", "sextile", "square", "trine", "opposition"]),
@@ -247,7 +247,7 @@ export function buildServer(): McpServer {
 
   server.registerTool("rectification_grid", {
     description:
-      "For birth-time rectification when the time is unknown or approximate: sweeps the given day (or a time window) and returns Ascendant sign/degree, MC, and house cusp changes at each step. The model uses this with the person's known life events and traits to narrow candidate birth times (e.g. 'Asc changes from Leo to Virgo at 14:22 UTC'). Returns sign-change boundaries explicitly.",
+      "Rectification sweep: ASC/MC at each step across a day or time window. Includes ASC sign-change times.",
     inputSchema: {
       date: z.string().describe("Birth DATE (UTC) as ISO, time portion ignored"),
       lat: z.number(), lon: z.number(),
