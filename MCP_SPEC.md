@@ -14,7 +14,8 @@ composable with a separate KG/corpus server (see ARCHITECTURE.md).
    positions, compact aspect strings (`t.saturn sq n.moon (0.4° applying)`).
 4. **Determinism + provenance.** Same input → same output. Tool descriptions
    state per-body accuracy vs Swiss Ephemeris — never a blanket figure
-   (planets ≤3″, Moon ≤0.5″ in 1920–2080, nodes ≤1″, Pluto valid 1885–2099).
+   (1900–2099: Sun–Saturn ≤1″, Uranus ≤1.9″, Neptune ≤4.6″, Moon ≤2.5″,
+   Pluto ≤2.5″ with series valid 1885–2099, Chiron ≤1″, nodes ≤1″).
 
 ## Tools
 

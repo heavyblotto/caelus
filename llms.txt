@@ -5,10 +5,11 @@ I/O in core (data injected). Computes apparent geocentric positions for
 sun, moon, mercury..pluto, chiron, mean_node, true_node; speeds and
 retrograde flags; ASC/MC; placidus/porphyry/equal/whole_sign houses;
 major aspects. Supported range 1800-2149 (1850-2150 Chebyshev tiers).
-Verified per-body vs Swiss Ephemeris (DE431): planets <=3", Moon <=0.5"
-(1920-2080 tier), nodes <=1"; Pluto series valid 1885-2099. TS engine
-pinned to a Python reference by 1,438 golden checks (worst diff
-1.6e-9 arcsec). Repo: https://github.com/heavyblotto/caelus
+Verified per-body vs Swiss Ephemeris (1900-2099): Sun-Saturn <=1",
+Uranus <=1.9", Neptune <=4.6", Moon <=2.5", Pluto <=2.5" (series valid
+1885-2099), Chiron <=1", nodes <=1". TS engine pinned to a Python
+reference by 1,438 golden checks (worst diff 0.82e-9 arcsec).
+Repo: https://github.com/heavyblotto/caelus
 
 ## Install
 
