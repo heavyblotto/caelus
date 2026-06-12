@@ -5,8 +5,8 @@ export const A = ({ href, children }: { href: string; children: React.ReactNode 
     ? <Link href={href} style={{ color: "#8a7fd4" }}>{children}</Link>
     : <a href={href} style={{ color: "#8a7fd4" }}>{children}</a>;
 
-export const H2 = ({ children }: { children: React.ReactNode }) => (
-  <h2 style={{ marginTop: "2.2rem", fontSize: "1.05rem", letterSpacing: "0.04em", opacity: 0.9 }}>{children}</h2>
+export const H2 = ({ children, id }: { children: React.ReactNode; id?: string }) => (
+  <h2 id={id} style={{ marginTop: "2.2rem", fontSize: "1.05rem", letterSpacing: "0.04em", opacity: 0.9 }}>{children}</h2>
 );
 
 export const P = ({ children, dim }: { children: React.ReactNode; dim?: boolean }) => (
@@ -15,6 +15,10 @@ export const P = ({ children, dim }: { children: React.ReactNode; dim?: boolean 
 
 export const Code = ({ children }: { children: React.ReactNode }) => (
   <code style={{ background: "#1a1626", padding: "0.1rem 0.35rem", borderRadius: 4 }}>{children}</code>
+);
+
+export const Pre = ({ children }: { children: React.ReactNode }) => (
+  <pre style={{ background: "#13101e", padding: "0.9rem 1rem", borderRadius: 6, overflow: "auto", fontSize: "0.8em", lineHeight: 1.55 }}>{children}</pre>
 );
 
 export function Nav({ current }: { current: string }) {
