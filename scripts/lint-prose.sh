@@ -19,4 +19,8 @@ echo "→ Extract + Vale on apps/web copy"
 node scripts/extract-web-prose.mjs
 vale .web-prose-extract.md || FAIL=1
 
+echo ""
+echo "→ Vale on packages/caelus/README.md"
+vale packages/caelus/README.md || FAIL=1
+
 exit "$FAIL"

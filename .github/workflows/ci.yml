@@ -22,8 +22,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: errata-ai/vale-action@v2
-        with:
-          files: docs/
-          version: "3.13.0"
-        continue-on-error: true
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Install Vale
+        run: |
+          curl -sfL https://install.vale.sh | sh -s -- -v 3.13.0
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - run: npm run lint:prose
