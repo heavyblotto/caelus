@@ -35,6 +35,10 @@ registered by the first publish itself. Re-check before tagging:
    and publishes all four packages with `--provenance`. A red suite
    blocks the publish.
 
+Publishes are idempotent: `scripts/publish-if-missing.sh` skips any
+package whose version is already on the registry, so pushing a tag after
+a dispatch release (or re-running a partially failed workflow) is safe.
+
 ## What ships
 
 `caelus` ships slim (~2.0 MB unpacked): embedded VSOP tiers, the
