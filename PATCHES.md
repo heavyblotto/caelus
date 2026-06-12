@@ -242,3 +242,70 @@ cause of the 1.6-nano drift above). Zero new dependencies.
   (out-of-range lat/lon, bad ISO, >50yr range, missing target → isError).
   Emits stats to CAELUS_STATS_OUT. Wired into the conformance job after
   verify_tools. Mutation-tested: corrupting a golden fails exactly its case.
+
+# Package rename sync — 2026-06-12
+
+- Upstream renamed the scoped packages `@caelus/birth` → `caelus-birth` and
+  `@caelus/wheel` → `caelus-wheel` (the `@caelus` npm scope was reserved); the
+  directory paths `packages/birth` / `packages/wheel` were unchanged. Synced
+  `dev` to the merge that reconciled Workstreams 1+3 with the rename.
+- Audited every Workstream 1/3 deliverable for stale package references:
+  `claims-registry.json`, `check-claims.mjs`, `export-mcp-golden.mjs`,
+  `integration.test.mjs`, `golden-mcp.json`, the `accuracy.json` imports, and
+  CI steps. None referenced the renamed packages — they touch only `caelus`
+  and `caelus-mcp` (neither renamed) — so no fixups were required and the
+  claims linter stayed green. Full suite re-run confirmed against the renamed
+  layout (golden 1438, verify_tools 166, integration 41, birth 269, wheel 33,
+  lint:claims, build).
+
+# Workstream 2: LLM function-calling consistency — 2026-06-12
+
+## 1 MCP schema/description fixes (the 8 D.1 ambiguities)
+- `server.ts` tool descriptions rewritten to encode intent and head off the
+  tool-selection and bad-arg pitfalls the audit catalogued:
+  - `natal_chart` / `current_sky` overlap: each description now states when to
+    use it ("a person's birth chart, requires date+place" vs "the sky at a
+    moment, not tied to a person; defaults to now / geocentric 0,0").
+  - `current_sky` / `rectification_grid` lat/lon got the east-positive describe
+    text and the "default 0 makes houses nominal" footgun note (bounds were
+    added in Workstream 3).
+  - Every datetime field ("convert from local first") on `current_sky.date`,
+    `transit_date`, and `find_aspect_dates.start/end`.
+  - `find_aspect_dates`: "provide exactly one of target_lon / target_body" at
+    the description level, plus a snake_case-body and abbreviated-output-token
+    note.
+  - `rectification_grid`: spelled out the date/window_*_hour interaction.
+  - `synastry`: documented that overlays always use Placidus (not
+    configurable) and each person needs date+lat+lon.
+  These change wording only; payloads are unchanged, so verify_tools (166) and
+  the integration goldens (41) stay green.
+
+## 2 Eval harness (`packages/caelus-mcp/eval/`)
+- `prompts.jsonl` — 49 fixtures: one+ clear case per tool, the D.1
+  tool-selection traps (sky-now vs natal, synastry, body-to-lon vs body-to-body
+  find, rectification, transits default-time), pitfall probes (local-time→UTC
+  for Tokyo/LA/Sydney, west/east longitude sign, southern latitude, polar
+  Svalbard fallback, historical 1855/1899, out-of-range pre-1800/post-2149,
+  >50yr range), and negative/should-refuse cases (pure interpretation, missing
+  birth data). Each fixture carries `expect.tool` (exact or accepted-set incl.
+  `null`), `expect.args` (exact / `{approx,tol}` for geocoded numerics / `"now"`
+  sentinel), `expect.argChecks`, and `tags`.
+- `score.mjs` — the named argCheck predicates (`date_is_utc`, `lon_sign_east/
+  west`, `lat_sign_south`, `orb_in_range`, `step_in_range`, `window_in_range`,
+  `exactly_one_target`, `exactly_one_date`, `range_le_50yr`, `snake_case_body`,
+  `synastry_both_present`), tool-match (accepts a set incl. `null`), numeric
+  tolerance comparison, and aggregation/markdown reporting (tool-selection
+  accuracy, schema-valid rate, per-predicate and per-tag breakdown).
+- `run.mjs` — model-agnostic orchestrator. **CI / self-check mode (default, no
+  model, no keys):** spawns the server, pulls each tool's live JSON Schema via
+  `listTools()`, and asserts every fixture's expected args are schema-valid
+  (ajv) and satisfy their own argChecks; emits `{suite:"mcp-eval-selfcheck"}`
+  to CAELUS_STATS_OUT. **Live mode (opt-in via `EVAL_MODEL=provider:model`):**
+  pluggable Anthropic/OpenAI adapters that read keys from the environment only,
+  capture {tool,args}, score, and write `report.json`/`report.md`. No keys are
+  read from disk or committed; live runs are not a CI gate. `ajv` added as the
+  single new dev dep (already in the tree transitively).
+- Wired the self-check into the conformance job after `integration.test.mjs`
+  (`node packages/caelus-mcp/eval/run.mjs`) and added `eval:selfcheck` to root
+  scripts. Mutation-tested: flipping an expected longitude sign fails its
+  predicate; an out-of-range expected orb fails ajv schema validation.

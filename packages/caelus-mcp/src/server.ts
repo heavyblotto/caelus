@@ -140,17 +140,18 @@ export function buildServer(): McpServer {
 
   server.registerTool("natal_chart", {
     description:
-      "Natal chart: 13 bodies (sun–pluto, chiron, nodes) with sign, house, retrograde, speed; ASC/MC; cusps; major aspects with orbs. Vs Swiss Ephemeris (1900–2099): Sun–Saturn ≤1″, Uranus ≤1.9″, Neptune ≤4.6″, Moon ≤2.5″, Pluto ≤2.5″ (series valid 1885–2099), Chiron ≤1″, nodes ≤1″.",
+      "A person's birth chart. Requires their exact birth date+time and birthplace (all three: date, lat, lon). Use this — not current_sky — whenever the question is about someone's natal/birth chart. Returns 13 bodies (sun–pluto, chiron, nodes) with sign, house, retrograde, speed; ASC/MC; cusps; major aspects with orbs. Vs Swiss Ephemeris (1900–2099): Sun–Saturn ≤1″, Uranus ≤1.9″, Neptune ≤4.6″, Moon ≤2.5″, Pluto ≤2.5″ (series valid 1885–2099), Chiron ≤1″, nodes ≤1″.",
     inputSchema: { ...birth, house_system: houseSys },
   }, async ({ date, lat, lon, house_system }) =>
     text(chartPayload(date, lat, lon, house_system)));
 
   server.registerTool("current_sky", {
     description:
-      "Sky at a date/time and location: positions, houses, retrogrades, aspects. Defaults to now.",
+      "The sky at a moment and place — not tied to any person. Use for \"what's the sky/transits right now\" or the chart of a non-birth event. Date defaults to now; lat/lon default to 0,0 (geocentric on the equator at the prime meridian), where houses and ASC/MC are nominal — pass a real location if houses matter. For a specific person's birth chart use natal_chart instead. Returns positions, houses, retrogrades, aspects.",
     inputSchema: {
-      date: z.string().optional().describe("UTC ISO date-time; omit for now"),
-      lat: latSchema.default(0), lon: lonSchema.default(0),
+      date: z.string().optional().describe("UTC ISO date-time (convert from local first); omit for now"),
+      lat: latSchema.default(0).describe("Latitude, north positive; default 0 makes houses nominal"),
+      lon: lonSchema.default(0).describe("Longitude, EAST positive (Americas are negative); default 0 makes houses nominal"),
       house_system: houseSys,
     },
   }, async ({ date, lat, lon, house_system }) =>
@@ -161,7 +162,7 @@ export function buildServer(): McpServer {
       "Transiting planets vs natal chart: aspects within orb (applying/separating), natal house per transiting body.",
     inputSchema: {
       ...birth,
-      transit_date: z.string().optional().describe("UTC ISO date-time of transit moment; omit for now"),
+      transit_date: z.string().optional().describe("UTC ISO date-time of transit moment (convert from local first); omit for now"),
       orb: z.number().min(0.5).max(10).default(3).describe("Max orb in degrees"),
       house_system: houseSys,
     },
@@ -200,11 +201,11 @@ export function buildServer(): McpServer {
 
   server.registerTool("synastry", {
     description:
-      "Two natal charts: inter-chart aspects with orbs, house overlays both ways.",
+      "Compare two people's birth charts: inter-chart aspects with orbs, house overlays both ways. Each person needs date+lat+lon. House overlays always use Placidus (not configurable here).",
     inputSchema: {
-      a: z.object(birth).describe("Person A birth data"),
-      b: z.object(birth).describe("Person B birth data"),
-      orb: z.number().min(0.5).max(10).default(4),
+      a: z.object(birth).describe("Person A birth data (UTC date, lat, lon)"),
+      b: z.object(birth).describe("Person B birth data (UTC date, lat, lon)"),
+      orb: z.number().min(0.5).max(10).default(4).describe("Max orb in degrees"),
     },
   }, async ({ a, b, orb }) => {
     const ca = chartPayload(a.date, a.lat, a.lon, "placidus");
@@ -244,14 +245,14 @@ export function buildServer(): McpServer {
 
   server.registerTool("find_aspect_dates", {
     description:
-      "Exact aspect dates in a range: transiting body to fixed longitude or another body. Includes retrograde re-hits.",
+      "Exact dates a transiting body makes an aspect, within a range: to a fixed longitude OR to another transiting body. Provide exactly one of target_lon / target_body. Includes retrograde re-hits. Body names are snake_case (mean_node, true_node); note the output uses abbreviated aspect tokens (conj/sext/sq/tri/opp).",
     inputSchema: {
-      body: z.enum(BODIES as unknown as [string, ...string[]]),
+      body: z.enum(BODIES as unknown as [string, ...string[]]).describe("Transiting body (snake_case, e.g. saturn, true_node)"),
       aspect: z.enum(["conjunction", "sextile", "square", "trine", "opposition"]),
-      target_lon: z.number().min(0).max(360).optional().describe("Fixed natal longitude in degrees"),
-      target_body: z.enum(BODIES as unknown as [string, ...string[]]).optional().describe("Or: another transiting body"),
-      start: z.string().describe("UTC ISO start date"),
-      end: z.string().describe("UTC ISO end date (range <= 50 years)"),
+      target_lon: z.number().min(0).max(360).optional().describe("Fixed natal longitude in degrees. Provide this OR target_body, not both."),
+      target_body: z.enum(BODIES as unknown as [string, ...string[]]).optional().describe("Another transiting body. Provide this OR target_lon, not both."),
+      start: z.string().describe("UTC ISO start date (convert from local first)"),
+      end: z.string().describe("UTC ISO end date (convert from local first); range <= 50 years"),
     },
   }, async ({ body, aspect, target_lon, target_body, start, end }) => {
     const angle = { conjunction: 0, sextile: 60, square: 90, trine: 120, opposition: 180 }[aspect];
@@ -298,13 +299,13 @@ export function buildServer(): McpServer {
 
   server.registerTool("rectification_grid", {
     description:
-      "Rectification sweep: ASC/MC at each step across a day or time window. Includes ASC sign-change times.",
+      "Rectification sweep: ASC/MC at each step across a window of UTC hours on one date, with ASC sign-change times. Use when the birth time is unknown and you want candidate times. The sweep runs over window_start_hour..window_end_hour (UTC hours of the given date); the date's time portion is ignored.",
     inputSchema: {
-      date: z.string().describe("Birth DATE (UTC) as ISO, time portion ignored"),
+      date: z.string().describe("Birth DATE (UTC) as ISO; only the calendar date is used, the time portion is ignored (the window_*_hour fields set the times swept)"),
       lat: latSchema, lon: lonSchema,
-      window_start_hour: z.number().min(0).max(24).default(0),
-      window_end_hour: z.number().min(0).max(24).default(24),
-      step_minutes: z.number().min(5).max(120).default(20),
+      window_start_hour: z.number().min(0).max(24).default(0).describe("First UTC hour of the date to sweep"),
+      window_end_hour: z.number().min(0).max(24).default(24).describe("Last UTC hour of the date to sweep"),
+      step_minutes: z.number().min(5).max(120).default(20).describe("Minutes between grid rows"),
     },
   }, async ({ date, lat, lon, window_start_hour, window_end_hour, step_minutes }) => {
     const d = new Date(date);

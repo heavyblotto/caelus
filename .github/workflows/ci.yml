@@ -21,6 +21,10 @@ jobs:
       - run: node packages/caelus-mcp/verify_tools.mjs
       # MCP integration suite: response schema validation + frozen golden payloads
       - run: node packages/caelus-mcp/integration.test.mjs
+      # MCP tool-selection eval, self-check mode: fixtures' expected args must be
+      # schema-valid against the live tool schemas and satisfy their own argChecks.
+      # No model calls, no API keys in CI; live runs are opt-in via EVAL_MODEL.
+      - run: node packages/caelus-mcp/eval/run.mjs
       # timezone resolution: tzdb golden cases + 200-case round-trip property
       - run: npm run build -w caelus-birth
       - run: node packages/birth/dist/test/golden.test.js
