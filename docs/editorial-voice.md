@@ -39,10 +39,11 @@ Never dress conviction as measurement. Never dress marketing as engineering.
 
 ## Web pages
 
+- Headings and nav: normal title case (`Build Notes`, `What This Is`). Keep `caelus` lowercase as the product name.
 - **Playground (`/`)**: one sentence on what it does; links to proof, not adjectives.
 - **Provenance (`/provenance`)**: table of sources; AGPL facts without sermonizing.
 - **Validation (`/validation`)**: tables and commands; CI is a fact, not a slogan.
-- **Build notes (`/notes`)**: postmortems with symptoms → cause → fix → test that caught it.
+- **Build Notes (`/notes`)**: postmortems with symptoms → cause → fix → test that caught it.
 
 ## For agents
 

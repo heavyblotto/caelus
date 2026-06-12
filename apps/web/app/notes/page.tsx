@@ -1,7 +1,7 @@
 import { A, H2, P, Code, Nav } from "../../components/Prose";
 
 export const metadata = {
-  title: "caelus — build notes",
+  title: "caelus — Build Notes",
   description: "Postmortems: ΔT extrapolation, node frame error, Chiron light-time double-count, aspect-search geometry.",
 };
 
@@ -9,14 +9,14 @@ export default function Notes() {
   return (
     <main>
       <Nav current="/notes" />
-      <h1 style={{ letterSpacing: "0.05em" }}>build notes</h1>
+      <h1 style={{ letterSpacing: "0.05em" }}>Build Notes</h1>
       <P>
         VSOP87 evaluation is a few hundred lines and matched professional ephemerides
         on the first pass. The bugs were in timescales, frames, and geometry: invisible
         in a spot check, obvious in the golden suite.
       </P>
 
-      <H2>ΔT: textbook extrapolation vs Earth since 2016</H2>
+      <H2>ΔT: Textbook Extrapolation vs Earth Since 2016</H2>
       <P>
         Ephemerides use TT; civil time follows Earth rotation. ΔT bridges the two.
         The{" "}
@@ -39,7 +39,7 @@ export default function Notes() {
         (Huber 2006), so a steeper slope would be false precision.
       </P>
 
-      <H2>Node longitude: 11× frame sensitivity</H2>
+      <H2>Node Longitude: 11× Frame Sensitivity</H2>
       <P>
         Lunar nodes mark where the Moon&apos;s plane crosses the ecliptic. The ecliptic
         of date drifts ~47″/century. With the Moon inclined only 5.1°, a frame error
@@ -48,7 +48,7 @@ export default function Notes() {
         longitudes barely moved.
       </P>
 
-      <H2>Chiron fit: double light-time</H2>
+      <H2>Chiron Fit: Double Light-Time</H2>
       <P>
         The first Chebyshev fit sampled Horizons &ldquo;heliocentric&rdquo; positions
         that already included Sun→body light-time (~6,900 s of motion, ~55,000 km).
@@ -57,7 +57,7 @@ export default function Notes() {
         assemble geocentric positions from the oracle&apos;s parts.
       </P>
 
-      <H2>Aspect dates: ±90° geometry</H2>
+      <H2>Aspect Dates: ±90° Geometry</H2>
       <P>
         Code review found <Code>find_aspect_dates</Code> root-finding only +90°
         separations, dropping half of sextile/square/trine hits. The engine was fine;
@@ -65,7 +65,7 @@ export default function Notes() {
         independent scan to the minute, including a retrograde triple pass.
       </P>
 
-      <H2>Golden suite</H2>
+      <H2>Golden Suite</H2>
       <P>
         Swiss Ephemeris checks the Python reference; 1,438 fixtures pin the TypeScript
         port (worst delta 1.6 nano-arcseconds). CI runs both on every commit. The
