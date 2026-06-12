@@ -164,6 +164,12 @@
       "max": "187",
       "rms": "—",
       "note": "hypersensitive to the lunar theory (~1/e amplification); SE's own Moshier-vs-DE difference dominates. 'True Lilith' values disagree across software at this scale"
+    },
+    {
+      "name": "Ceres, Pallas, Juno, Vesta, Pholus",
+      "max": "1.0",
+      "rms": "0.3",
+      "note": "JPL Horizons fits 1850-2150 (residual <5e-6 AU); same geocentric pipeline as Chiron. No independent SE oracle here: SE's asteroid files are unavailable in Moshier mode"
     }
   ],
   "summary": [
@@ -214,6 +220,10 @@
     {
       "label": "Crossings & phases",
       "bound": "≤ 4 s"
+    },
+    {
+      "label": "Asteroids (big 4 + Pholus)",
+      "bound": "≤ 1″"
     }
   ],
   "v03_harness": "python/validate_swiss.py regenerates every figure above the line against pyswisseph 2.10 (Moshier mode)",

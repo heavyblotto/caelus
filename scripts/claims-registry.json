@@ -5,10 +5,9 @@
       "id": "golden-check-count",
       "source": "stats.checks",
       "render": [
-        "3,112",
-        "3112"
+        "{value}"
       ],
-      "competing": "\\b1,4\\d\\d\\b(?=[^\\n]{0,40}(golden|check|fixture))",
+      "competing": "\\b\\d,\\d{3}\\b(?=[^\\n]{0,40}(golden|check|fixture))",
       "appearsIn": [
         "ARCHITECTURE.md",
         "apps/web/app/notes/page.tsx",
@@ -17,7 +16,8 @@
         "apps/web/public/llms.txt",
         "llms.txt",
         "packages/caelus/README.md"
-      ]
+      ],
+      "format": "thousands"
     },
     {
       "id": "worst-diff-nano-prose",

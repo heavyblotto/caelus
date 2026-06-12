@@ -10,8 +10,10 @@ from . import houses as H
 BODIES = ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn",
           "uranus", "neptune", "pluto", "chiron", "mean_node", "true_node"]
 
-# Computable on request (not in the default chart set).
-EXTRA_BODIES = ["mean_lilith", "true_lilith"]
+# Computable on request (not in the default chart set). Asteroids load
+# lazily from their Chebyshev packs (Horizons fits, 1850-2150).
+ASTEROIDS = ["ceres", "pallas", "juno", "vesta", "pholus"]
+EXTRA_BODIES = ["mean_lilith", "true_lilith"] + ASTEROIDS
 
 # Points: excluded from aspect search by default.
 NOT_ASPECTABLE = {"mean_node", "true_node", "mean_lilith", "true_lilith"}
@@ -52,6 +54,17 @@ def _parse_zodiac(zodiac):
 class Engine:
     def __init__(self, level="full"):
         self.vsop = Vsop(level)
+        self._packs = {}
+
+    def _pack(self, body):
+        if body not in self._packs:
+            from .chebyshev import ChebSeries
+            import os
+            path = os.path.join(core.DATA, f"{body}_cheb.json")
+            if not os.path.exists(path):
+                raise ValueError(f"no data pack for {body!r}")
+            self._packs[body] = ChebSeries.load(path)
+        return self._packs[body]
 
     def _ecliptic(self, body, jde):
         """Apparent geocentric (lon rad, lat rad, dist AU or None)."""
@@ -82,6 +95,8 @@ class Engine:
             else:
                 lon, lat, km = core.osc_apogee_series(jde)
             return lon, lat, km / KM_PER_AU
+        if body in ASTEROIDS:
+            return core.smallbody_apparent(self.vsop, self._pack(body), jde)
         return planet_apparent(self.vsop, body, jde)
 
     def _lon_only(self, body, jd_ut, mode, topo):
@@ -114,6 +129,12 @@ class Engine:
             if core._CHIRON is None:
                 core.chiron_apparent(self.vsop, jde)  # loads the fit
             x, y, z = core._CHIRON.xyz(jde)
+            r = math.sqrt(x * x + y * y + z * z)
+            l = math.atan2(y, x) % (2 * math.pi)
+            b = math.atan2(z, math.hypot(x, y))
+            l, b = core._precess_ecliptic(l, b, core.J2000, jde)
+        elif body in ASTEROIDS:
+            x, y, z = self._pack(body).xyz(jde)
             r = math.sqrt(x * x + y * y + z * z)
             l = math.atan2(y, x) % (2 * math.pi)
             b = math.atan2(z, math.hypot(x, y))

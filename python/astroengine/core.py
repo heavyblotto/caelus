@@ -383,14 +383,19 @@ _CHIRON = None
 
 
 def chiron_apparent(vsop, jde):
-    """Apparent geocentric Chiron from heliocentric Chebyshev fit (1850-2150).
-    Same outer-body pipeline as Pluto: geocentric assembly in J2000,
-    light-time, annual aberration, precession to date, nutation."""
+    """Apparent geocentric Chiron from heliocentric Chebyshev fit (1850-2150)."""
     global _CHIRON
     if _CHIRON is None:
         from .chebyshev import ChebSeries
         _CHIRON = ChebSeries.load(os.path.join(DATA, "chiron_cheb.json"))
+    return smallbody_apparent(vsop, _CHIRON, jde)
 
+
+def smallbody_apparent(vsop, cheb, jde):
+    """Apparent geocentric position from a heliocentric ecliptic-J2000
+    Chebyshev fit (Chiron, Ceres, Pallas, Juno, Vesta, Pholus, ...).
+    Same outer-body pipeline as Pluto: geocentric assembly in J2000,
+    light-time, annual aberration, precession to date, nutation."""
     L0, B0, R0 = vsop.heliocentric("earth", jde)
     Lj, Bj = _precess_ecliptic(L0, B0, jde, J2000)
     ex = R0 * math.cos(Bj) * math.cos(Lj)
@@ -398,7 +403,7 @@ def chiron_apparent(vsop, jde):
     ez = R0 * math.sin(Bj)
 
     def geo(t):
-        cx, cy, cz = _CHIRON.xyz(t)
+        cx, cy, cz = cheb.xyz(t)
         return cx - ex, cy - ey, cz - ez
 
     x, y, z = geo(jde)

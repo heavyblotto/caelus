@@ -6,7 +6,7 @@
   payloads for caelus-wheel).
 - ephemengine.com live on Vercel: playground, /validation, /provenance,
   edge `/api/chart`, `/llms.txt`.
-- Conformance suite: 3,112 checks green; per-body figures in
+- Conformance suite: 3,137 checks green; per-body figures in
   `packages/caelus/accuracy.json`.
 - v0.2+ scope: see `docs/gap-analysis.md` (Swiss Ephemeris comparison,
   three closure tiers, non-goals).
@@ -50,7 +50,7 @@ code serves:
 
 ## Durability decisions
 - **Conformance suite as the spine.** Swiss Ephemeris validates Python;
-  Python golden fixtures (3,112 checks) validate TS; CI keeps both green.
+  Python golden fixtures (3,137 checks) validate TS; CI keeps both green.
   Accuracy regressions are structurally impossible to ship silently.
 - **Data as versioned artifacts.** The JSON coefficient files are build
   outputs of the Python pipeline with documented provenance (VSOP87,
