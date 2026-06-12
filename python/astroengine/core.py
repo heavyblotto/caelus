@@ -423,29 +423,34 @@ def chiron_apparent(vsop, jde):
 # ---------------------------------------------------------------- pluto
 _PLUTO = None
 
-def pluto_apparent(vsop, jde):
-    """Meeus ch.37 Pluto (valid 1885-2099): heliocentric J2000 series,
-    -> geocentric, light-time+aberration, precess J2000 -> date, nutation."""
+def pluto_heliocentric(jde):
+    """Meeus ch.37 heliocentric Pluto, ecliptic J2000: (l rad, b rad, r AU)."""
     global _PLUTO
     if _PLUTO is None:
         _PLUTO = _load("pluto_meeus37.json")
+    T = (jde - J2000) / 36525.0
+    J = (34.35 + 3034.9057 * T) * DEG
+    S = (50.08 + 1222.1138 * T) * DEG
+    P = (238.96 + 144.96 * T) * DEG
+    l = b = r = 0.0
+    for i, j, k, lA, lB, bA, bB, rA, rB in _PLUTO:
+        a = i * J + j * S + k * P
+        sa, ca = math.sin(a), math.cos(a)
+        l += lA * sa + lB * ca
+        b += bA * sa + bB * ca
+        r += rA * sa + rB * ca
+    l = (l + 238.958116 + 144.96 * T) * DEG  # lA etc. already deg in table
+    b = (b - 3.908239) * DEG
+    r += 40.7241346
+    return l, b, r
+
+
+def pluto_apparent(vsop, jde):
+    """Meeus ch.37 Pluto (valid 1885-2099): heliocentric J2000 series,
+    -> geocentric, light-time+aberration, precess J2000 -> date, nutation."""
 
     def helio_j2000(t_jde):
-        T = (t_jde - J2000) / 36525.0
-        J = (34.35 + 3034.9057 * T) * DEG
-        S = (50.08 + 1222.1138 * T) * DEG
-        P = (238.96 + 144.96 * T) * DEG
-        l = b = r = 0.0
-        for i, j, k, lA, lB, bA, bB, rA, rB in _PLUTO:
-            a = i * J + j * S + k * P
-            sa, ca = math.sin(a), math.cos(a)
-            l += lA * sa + lB * ca
-            b += bA * sa + bB * ca
-            r += rA * sa + rB * ca
-        l = (l + 238.958116 + 144.96 * T) * DEG  # lA etc. already deg in table
-        b = (b - 3.908239) * DEG
-        r += 40.7241346
-        return l, b, r
+        return pluto_heliocentric(t_jde)
 
     def earth_j2000(t_jde):
         # VSOP87D is of-date; rotate ecliptic-of-date -> J2000 by -precession in longitude
@@ -482,6 +487,86 @@ def pluto_apparent(vsop, jde):
     lon, lat = _precess_ecliptic(lon, lat, J2000, jde)
     lon = (lon + nutation(jde)[0]) % (2 * math.pi)
     return lon, lat, delta
+
+
+# ---------------------------------------------------------------- frames+
+def equatorial(lon, lat, eps):
+    """Ecliptic lon/lat -> right ascension, declination (all radians)."""
+    ra = math.atan2(
+        math.sin(lon) * math.cos(eps) - math.tan(lat) * math.sin(eps), math.cos(lon)
+    ) % (2 * math.pi)
+    dec = math.asin(
+        math.sin(lat) * math.cos(eps) + math.cos(lat) * math.sin(eps) * math.sin(lon)
+    )
+    return ra, dec
+
+
+# Mean ayanamsa at J2000.0 (degrees) per mode. Values are the standard
+# epoch anchors (matched to Swiss Ephemeris 2.10 to 1e-9 deg); propagation
+# uses our IAU 1976 ecliptic precession. Agreement with Swiss Ephemeris
+# over 1900-2099 is <=0.30 arcsec (precession-model difference: SE uses
+# Vondrak 2011).
+AYANAMSA_J2000 = {
+    "lahiri": 23.857092325,
+    "fagan_bradley": 24.740299966,
+    "krishnamurti": 23.760240012,
+    "raman": 22.410791012,
+    "yukteshwar": 22.478803000,
+}
+
+
+def ayanamsa(jde, mode):
+    """Mean ayanamsa in degrees. Sidereal longitude = (tropical true-equinox
+    longitude - nutation in longitude) - ayanamsa: the sidereal zodiac is
+    anchored to the mean equinox."""
+    a0 = AYANAMSA_J2000[mode]
+    lon, _ = _precess_ecliptic(a0 * DEG, 0.0, J2000, jde)
+    return lon / DEG
+
+
+def mean_lilith(jde):
+    """Mean lunar apogee (Black Moon Lilith) on the inclined lunar orbit:
+    apparent lon (true equinox) and orbital latitude, radians."""
+    T = (jde - J2000) / 36525.0
+    Lp, D, M, Mp, F = _moon_fundamental(T)
+    apog = Lp - Mp + math.pi          # mean perigee + 180
+    om = (125.0445479 - 1934.1362891 * T + 0.0020754 * T * T
+          + T**3 / 467441 - T**4 / 60616000) * DEG
+    inc = 5.145396374 * DEG
+    u = apog - om
+    lat = math.asin(math.sin(inc) * math.sin(u))
+    lon = om + math.atan2(math.cos(inc) * math.sin(u), math.cos(u))
+    lon = (lon + nutation(jde)[0]) % (2 * math.pi)
+    return lon, lat
+
+
+EARTH_RADIUS_AU = 6378.14 / 149597870.7
+EARTH_FLAT = 0.99664719  # 1 - f, IAU 1976 figure
+
+
+def topocentric_ecl(lon, lat, dist_au, lst, obs_lat, alt_m, eps):
+    """Diurnal parallax in ecliptic coordinates (Meeus ch. 11/40).
+    lst = local apparent sidereal time (rad). Returns (lon, lat, dist_au)."""
+    u = math.atan(EARTH_FLAT * math.tan(obs_lat))
+    rs = EARTH_FLAT * math.sin(u) + alt_m / 6378140.0 * math.sin(obs_lat)
+    rc = math.cos(u) + alt_m / 6378140.0 * math.cos(obs_lat)
+    ox = EARTH_RADIUS_AU * rc * math.cos(lst)
+    oy = EARTH_RADIUS_AU * rc * math.sin(lst)
+    oz = EARTH_RADIUS_AU * rs
+    ra, dec = equatorial(lon, lat, eps)
+    bx = dist_au * math.cos(dec) * math.cos(ra)
+    by = dist_au * math.cos(dec) * math.sin(ra)
+    bz = dist_au * math.sin(dec)
+    tx, ty, tz = bx - ox, by - oy, bz - oz
+    ra2 = math.atan2(ty, tx)
+    dec2 = math.atan2(tz, math.hypot(tx, ty))
+    lon2 = math.atan2(
+        math.sin(ra2) * math.cos(eps) + math.tan(dec2) * math.sin(eps), math.cos(ra2)
+    ) % (2 * math.pi)
+    lat2 = math.asin(
+        math.sin(dec2) * math.cos(eps) - math.cos(dec2) * math.sin(eps) * math.sin(ra2)
+    )
+    return lon2, lat2, math.sqrt(tx * tx + ty * ty + tz * tz)
 
 
 def _precess_ecliptic(lon, lat, jde_from, jde_to):
