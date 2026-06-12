@@ -1,5 +1,16 @@
 # caelus / ephemengine.com / mymagus — Architecture v0.1
 
+## Status (2026-06-12)
+- `caelus`, `caelus-mcp`, `caelus-birth`, `caelus-wheel` published to npm
+  with provenance; latest 0.2.0 (structured MCP aspects, render-ready
+  payloads for caelus-wheel).
+- ephemengine.com live on Vercel: playground, /validation, /provenance,
+  edge `/api/chart`, `/llms.txt`.
+- Conformance suite: 1,438 checks green; per-body figures in
+  `packages/caelus/accuracy.json`.
+- v0.2+ scope: see `docs/gap-analysis.md` (Swiss Ephemeris comparison,
+  three closure tiers, non-goals).
+
 ## Naming & registries (verified available 2026-06-10)
 - npm: `caelus` (engine), `caelus-mcp` (server), `caelus-birth`,
   `caelus-wheel` — all unscoped (the `@caelus` scope turned out to be
@@ -96,10 +107,18 @@ research data nobody else has.
   proves the package's generality).
 
 ## Next build steps (suggested order)
-1. Add the big-4 asteroids & Lilith (Chiron re-fit from Horizons: done);
-   cut `caelus@0.1.0` + `caelus-mcp@0.1.0` to npm.
-2. Streamable HTTP mount of buildServer() at ephemengine.com/api/mcp.
-3. Docs site on ephemengine.com (the validation table IS the landing page).
-4. KG ingestion pipeline for the scanned corpus + predicate schema.
-5. mymagus.com app: natal onboarding → daily transits → journaling loop →
+1. v0.3 = gap-analysis Tier 1: sidereal zodiac, more house systems,
+   RA/Dec + topocentric + heliocentric output, mean Lilith, vertex, pheno.
+   Land the options-object and body-registry API decisions first
+   (docs/gap-analysis.md, "Design decisions before v0.3").
+2. caelus-starter repo from `templates/starter` (needs the empty GitHub
+   repo created); release notes on GitHub for 0.1.0–0.2.0.
+3. Streamable HTTP mount of buildServer() at ephemengine.com/api/mcp.
+4. Repo citizenship: CONTRIBUTING.md (suite-is-contract rule first),
+   move the Python reference under `reference/`.
+5. v0.4 = gap-analysis Tier 2: big-4 asteroids + Pholus, fixed stars,
+   rise/set, crossings API; data packs ship as lazy versioned artifacts.
+6. v0.5 = gap-analysis Tier 3: eclipses and lunar occultations.
+7. KG ingestion pipeline for the scanned corpus + predicate schema.
+8. mymagus.com app: natal onboarding → daily transits → journaling loop →
    rectification flow.
