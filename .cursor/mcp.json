@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "caelus": { "command": "npx", "args": ["caelus-mcp"] }
+  }
+}

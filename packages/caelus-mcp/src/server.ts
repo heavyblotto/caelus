@@ -16,6 +16,7 @@ import { z } from "zod";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
+import { realpathSync } from "node:fs";
 import { Engine, BODIES, Body, julianDay, mod } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -336,7 +337,16 @@ export function buildServer(): McpServer {
 }
 
 // ---------------------------------------------------------------- main
-const isMain = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];
+// argv[1] is a symlink when invoked via a bin shim (npx, node_modules/.bin),
+// so compare realpaths or the server silently never starts.
+const isMain = (() => {
+  if (!process.argv[1]) return false;
+  try {
+    return fileURLToPath(import.meta.url) === realpathSync(process.argv[1]);
+  } catch {
+    return false;
+  }
+})();
 if (isMain) {
   const server = buildServer();
   const transport = new StdioServerTransport();
