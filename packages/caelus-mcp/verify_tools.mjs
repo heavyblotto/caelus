@@ -11,6 +11,7 @@ import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js"
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { createRequire } from "node:module";
+import { writeFileSync } from "node:fs";
 import { Engine, BODIES, julianDay, mod } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -238,4 +239,14 @@ const assertExactHits = (hits, body, targetLonAt, angle, label, tolDeg = 0.02) =
 
 await client.close();
 console.log(`\n${checks} checks, ${failures} failures`);
+
+if (process.env.CAELUS_STATS_OUT) {
+  writeFileSync(process.env.CAELUS_STATS_OUT, JSON.stringify({
+    suite: "mcp",
+    checks,
+    failures,
+    generatedAt: new Date().toISOString(),
+  }, null, 2) + "\n");
+}
+
 process.exit(failures ? 1 : 0);
