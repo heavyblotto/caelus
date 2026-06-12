@@ -89,7 +89,7 @@ export function buildServer(): McpServer {
 
   server.registerTool("natal_chart", {
     description:
-      "Natal chart: 13 bodies (sun–pluto, chiron, nodes) with sign, house, retrograde, speed; ASC/MC; cusps; major aspects with orbs. Vs Swiss Ephemeris (DE431): planets ≤3″, Moon ≤0.5″ (1920–2080), nodes ≤1″; Pluto series valid 1885–2099.",
+      "Natal chart: 13 bodies (sun–pluto, chiron, nodes) with sign, house, retrograde, speed; ASC/MC; cusps; major aspects with orbs. Vs Swiss Ephemeris (1900–2099): Sun–Saturn ≤1″, Uranus ≤1.9″, Neptune ≤4.6″, Moon ≤2.5″, Pluto ≤2.5″ (series valid 1885–2099), Chiron ≤1″, nodes ≤1″.",
     inputSchema: { ...birth, house_system: houseSys },
   }, async ({ date, lat, lon, house_system }) =>
     text(chartPayload(date, lat, lon, house_system)));

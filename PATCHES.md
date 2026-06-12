@@ -153,3 +153,27 @@ dev unified them, with disagreements resolved by measurement.
 - Doc drift: check counts 1,437 → 1,438; Python reference located in
   `python/`; Chiron re-fit marked done. Chiron Horizons cache commit
   handed off (`docs/handoff-chiron-cache.md`) pending network access.
+
+# Claim drift fixes — 2026-06-12
+
+## 1 Worst-diff figure was stale (1.6 → 0.82 nano-arcseconds)
+- The golden suite now reports worst diff `mars.speed@2478640.52 =
+  8.19e-10″` (0.82 nano-arcsec), not the 1.6 nano-arcsec the prose
+  carried. The ΔT-model merge above regenerated goldens and shifted the
+  worst case; the prose figure was never updated.
+- Corrected in `packages/caelus/README.md`, `apps/web/app/page.tsx`,
+  `apps/web/app/validation/page.tsx`, `apps/web/app/notes/page.tsx`,
+  and both `llms.txt` copies (root + `apps/web/public`).
+
+## 2 MCP per-body accuracy reconciled with the validation table
+- `server.ts` natal_chart description and `MCP_SPEC.md` claimed
+  "planets ≤3″, Moon ≤0.5″ (1920–2080)". Both conflicted with the
+  canonical `validation/page.tsx` BODY_TABLE (Neptune 4.6″, precise Moon
+  2.5″). Reconciled to the measured 1900–2099 table: Sun–Saturn ≤1″,
+  Uranus ≤1.9″, Neptune ≤4.6″, Moon ≤2.5″, Pluto ≤2.5″ (series valid
+  1885–2099), Chiron ≤1″, nodes ≤1″. The same stale per-body figures in
+  both `llms.txt` copies were corrected to match.
+
+## 3 ci.yml no longer hard-codes the check count
+- The conformance-job comment stated "1,438 golden checks"; dropped the
+  count so the comment can't rot.

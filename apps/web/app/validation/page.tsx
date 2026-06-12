@@ -66,7 +66,7 @@ export default function Validation() {
       <P>
         <strong>1,438 golden checks</strong> (bodies, timescales, nutation, four house
         systems, speeds, retrograde flags, polar Placidus fallback). Worst deviation
-        1.6 nano-arcseconds. Same algorithms in IEEE doubles; tolerance is far below
+        0.82 nano-arcseconds. Same algorithms in IEEE doubles; tolerance is far below
         astronomical relevance: a porting bug fails the build.
       </P>
       <H2>Cross-checks</H2>
