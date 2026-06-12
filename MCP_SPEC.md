@@ -1,4 +1,4 @@
-# caelus-mcp — MCP Specification v0.1
+# caelus-mcp — MCP Specification v0.2
 
 Chart computation only. The server returns positions and aspects; the model
 interprets. No interpretive text — smaller payloads, tradition-neutral,
@@ -60,7 +60,7 @@ Pairs with find_aspect_dates to check candidate times against dated events.
   ephemengine.com (Vercel). Stateless, no auth on free tier; API key +
   rate limits on paid tier. No per-user state.
 
-## Non-goals (v0.1)
+## Non-goals (v0.2)
 Progressions/returns/solar-arc (compose from primitives; dedicated tools in
-v0.2 if needed), Vedic ayanamsas (`zodiac: tropical|sidereal(<ayanamsa>)`
-in v0.2), interpretation text (KG server's job).
+a later version if needed), Vedic ayanamsas (`zodiac: tropical|sidereal(<ayanamsa>)`
+later), interpretation text (KG server's job).
