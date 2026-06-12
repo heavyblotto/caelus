@@ -1,6 +1,6 @@
 import SkyNow from "../components/SkyNow";
-import TryIt from "../components/TryIt";
-import { A, H2, P, Code, Nav } from "../components/Prose";
+import Cta from "../components/Cta";
+import { A, H2, P, Code, Pre, Nav } from "../components/Prose";
 
 export const metadata = {
   title: "Caelus — the ephemeris is now just code",
@@ -8,25 +8,112 @@ export const metadata = {
     "MIT astrological ephemeris in ~85 KB of TypeScript: planets, Moon, Chiron, nodes, houses, aspects. No AGPL, no license fees, no ephemeris files. Browser, edge, Node, MCP.",
 };
 
+const PACKAGES: Array<[string, string, string]> = [
+  ["caelus", "https://www.npmjs.com/package/caelus",
+    "The engine: positions, houses, aspects. Zero dependencies, ~85 KB gzipped"],
+  ["caelus-mcp", "https://www.npmjs.com/package/caelus-mcp",
+    "Six chart tools for AI agents over MCP. Runs with npx, no install"],
+  ["caelus-birth", "https://www.npmjs.com/package/caelus-birth",
+    "Local birth time + place to UT: DST, historical timezones, edge cases flagged"],
+  ["caelus-wheel", "https://www.npmjs.com/package/caelus-wheel",
+    "React SVG chart wheel. SSR-safe, ~3.4 KB gzipped"],
+];
+
 export default function Home() {
   const a = { color: "#8a7fd4" };
+  const td = { padding: "0.25rem 0.9rem 0.25rem 0", verticalAlign: "top" as const };
   return (
     <main>
       <Nav current="/" />
       <h1 style={{ letterSpacing: "0.05em" }}>Caelus</h1>
       <p style={{ fontSize: "1.1rem", opacity: 0.92, lineHeight: 1.55 }}>
         The ephemeris is now just code.
-        <br />
-        No AGPL. No license fees. No ephemeris files.
       </p>
-      <p style={{ opacity: 0.7 }}>
-        The core engine is ~85 KB gzipped, has zero dependencies, and runs
-        anywhere JavaScript runs, under MIT. Per-body accuracy against Swiss
+      <ul style={{ listStyle: "none", padding: 0, margin: "0.8rem 0", lineHeight: 2, opacity: 0.85 }}>
+        <li>🪐 Full natal charts: 13 bodies, four house systems, aspects, in ~85 KB</li>
+        <li>🆓 Free and MIT, commercial use included</li>
+        <li>⚖️ No AGPL, no 700 CHF license</li>
+        <li>📦 No ephemeris files: the data ships inside the bundle</li>
+      </ul>
+      <Cta />
+      <SkyNow />
+
+      <H2>The Packages</H2>
+      <P>
+        Four packages, all MIT, all on npm. Per-body accuracy against Swiss
         Ephemeris: <A href="/validation">Validation</A> ·{" "}
         <A href="/provenance">Sources</A>.
-      </p>
-      <TryIt />
-      <SkyNow />
+      </P>
+      <table style={{ fontSize: "0.85em", lineHeight: 1.6, borderSpacing: 0 }}>
+        <tbody>
+          {PACKAGES.map(([name, href, desc]) => (
+            <tr key={name}>
+              <td style={td}><A href={href}><code>{name}</code></A></td>
+              <td style={{ ...td, opacity: 0.7 }}>{desc}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <H2 id="get-started">Get Started: Compute a Chart</H2>
+      <Pre>{`npm install caelus
+
+import { Engine, fmtLon } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);
+const chart = engine.chart(1990, 6, 10, 14, 30, 0, 27.95, -82.46, "placidus");
+fmtLon(chart.bodies.sun.lon);        // "19°27' Gemini"
+chart.bodies.saturn.retrograde;      // true
+chart.angles, chart.cusps, chart.aspects;`}</Pre>
+      <P>
+        The same code runs in the browser, on edge runtimes, and in Node.
+        Times are UT; for local birth times use <Code>caelus-birth</Code> below.
+        Full API: the{" "}
+        <A href="https://www.npmjs.com/package/caelus">package README</A>.
+      </P>
+
+      <H2 id="mcp">Get Started: Ask Your AI About the Sky</H2>
+      <P>
+        No code required. <Code>caelus-mcp</Code> gives Claude, Cursor, or any
+        MCP client six chart tools. Add this to{" "}
+        <Code>claude_desktop_config.json</Code> or <Code>.cursor/mcp.json</Code>:
+      </P>
+      <Pre>{`{
+  "mcpServers": {
+    "caelus": { "command": "npx", "args": ["caelus-mcp"] }
+  }
+}`}</Pre>
+      <P>Then ask in plain language:</P>
+      <ul style={{ lineHeight: 1.9, paddingLeft: "1.2rem", opacity: 0.78 }}>
+        <li>&ldquo;What&apos;s my natal chart? Born June 10 1990, 2:30pm, Tampa FL.&rdquo;</li>
+        <li>&ldquo;When is Saturn square my natal Moon in the next two years?&rdquo;</li>
+        <li>&ldquo;Compare my chart with my partner&apos;s.&rdquo;</li>
+      </ul>
+      <P>
+        Tools: <Code>natal_chart</Code>, <Code>current_sky</Code>,{" "}
+        <Code>transits</Code>, <Code>synastry</Code>,{" "}
+        <Code>find_aspect_dates</Code>, <Code>rectification_grid</Code>.
+        Positions are computed by the engine, never recalled from training
+        data, and every answer is deterministic.
+      </P>
+
+      <H2>Get Started: Real Birth Times and a Wheel</H2>
+      <P>
+        <Code>caelus-birth</Code> converts a local birth time and place to UT
+        with historical timezone rules. A four-hour timezone mistake moves the
+        Ascendant about 60°; this package exists so that never happens
+        silently. <Code>caelus-wheel</Code> renders the chart as an SVG wheel
+        (<A href="/wheel-demo">live demo</A>).
+      </P>
+      <Pre>{`import { toUT } from "caelus-birth";
+import { ChartWheel } from "caelus-wheel";
+
+const t = toUT({ year: 1990, month: 6, day: 10, hour: 14, minute: 30,
+                 lat: 27.95, lon: -82.46 });   // resolves America/New_York, EDT
+const chart = engine.chart(/* t.utc fields */);
+
+<ChartWheel chart={chart} size={520} showAspects />`}</Pre>
 
       <H2>What This Is</H2>
       <P>
@@ -76,17 +163,6 @@ export default function Home() {
         fixtures; worst recorded deviation 0.82 nano-arcseconds. Per-body
         deltas: <A href="/validation">Validation</A>. Bugs the suite caught:{" "}
         <A href="/notes">Build Notes</A>.
-      </P>
-
-      <H2>What Ships</H2>
-      <P>
-        <Code>caelus</Code>: the engine, ~85 KB gzipped embedded tier; a 729 KB
-        precise-Moon tier (1920–2080) lazy-loads on demand.{" "}
-        <Code>caelus-mcp</Code>: natal_chart, current_sky, transits, synastry,
-        find_aspect_dates, rectification_grid over stdio. LLMs interpolate
-        planetary positions from training data; the MCP tools let them compute
-        instead. <Code>GET /api/chart</Code>: the same engine on the edge
-        runtime, as a demo, not hosted infrastructure.
       </P>
 
       <p style={{ marginTop: "2rem", display: "flex", gap: "1.2rem", flexWrap: "wrap" }}>

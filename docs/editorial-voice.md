@@ -40,6 +40,7 @@ Never dress conviction as measurement. Never dress marketing as engineering.
 ## Web pages
 
 - Headings and nav: normal title case (`Build Notes`, `What This Is`). **Caelus** capitalized as a proper noun in prose; **`caelus`** lowercase only for npm package names, CLI commands, and code.
+- Emoji: allowed in home-page hero bullets and CTA labels only. Never in body prose, docs, or the other pages.
 - **Playground (`/`)**: one sentence on what it does; links to proof, not adjectives.
 - **Provenance (`/provenance`)**: table of sources; AGPL facts without sermonizing.
 - **Validation (`/validation`)**: tables and commands; CI is a fact, not a slogan.
