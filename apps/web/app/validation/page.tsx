@@ -1,28 +1,14 @@
 import { A, H2, P, Code, Nav } from "../../components/Prose";
+import accuracy from "caelus/accuracy.json";
 
 export const metadata = {
   title: "Caelus — Validation",
   description: "Reference engine vs Swiss Ephemeris; TypeScript port vs 1,438 golden checks. CI on every commit.",
 };
 
-const BODY_TABLE: Array<[string, string, string, string]> = [
-  ["Sun", "0.4″", "0.2″", ""],
-  ["Moon (precise tier)", "2.5″", "0.9″", "JPL DE423 fit (2010); DE423 vs DE440 is <0.1″ over this span"],
-  ["Moon (embedded series)", "9.6″", "2.8″", "60-term ELP abridged"],
-  ["Mercury", "0.5″", "0.2″", ""],
-  ["Venus", "0.8″", "0.2″", ""],
-  ["Mars", "0.7″", "0.2″", ""],
-  ["Jupiter", "0.9″", "0.3″", ""],
-  ["Saturn", "0.8″", "0.4″", ""],
-  ["Uranus", "1.9″", "0.7″", "series truncation; complete VSOP87 holds ≤1″"],
-  ["Neptune", "4.6″", "2.2″", "series truncation; complete VSOP87 holds ≤1″"],
-  ["Pluto", "2.5″", "1.0″", "series valid 1885–2099"],
-  ["Chiron", "1.0″", "0.3″", "JPL Horizons fit, 1850–2150"],
-  ["Mean node", "0.1″", "0.1″", ""],
-  ["True node", "0.8″", "0.4″", "vs full DE431 files; Swiss&rsquo;s built-in Moshier mode itself differs from DE431 by up to ~15″ here"],
-  ["Ascendant / MC", "3.2″", "—", ""],
-  ["Placidus cusps (all 12)", "3.2″", "—", ""],
-];
+// Canonical per-body accuracy lives in packages/caelus/accuracy.json so prose,
+// SkyNow, and the MCP description derive from one source (lint:claims gate).
+const fmt = (v: string) => (v === "—" ? "—" : `${v}″`);
 
 export default function Validation() {
   const td = { padding: "0.15rem 0.8rem 0.15rem 0", verticalAlign: "top" as const };
@@ -48,10 +34,10 @@ export default function Validation() {
           </tr>
         </thead>
         <tbody>
-          {BODY_TABLE.map(([b, mx, rms, note]) => (
-            <tr key={b}>
-              <td style={td}>{b}</td><td style={td}>{mx}</td><td style={td}>{rms}</td>
-              <td style={{ ...td, opacity: 0.55 }}>{note}</td>
+          {accuracy.bodies.map((row) => (
+            <tr key={row.name}>
+              <td style={td}>{row.name}</td><td style={td}>{fmt(row.max)}</td><td style={td}>{fmt(row.rms)}</td>
+              <td style={{ ...td, opacity: 0.55 }}>{row.note}</td>
             </tr>
           ))}
         </tbody>

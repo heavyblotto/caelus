@@ -3,14 +3,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Engine, BODIES, fmtLon, mod, type Chart, type HouseSystem } from "caelus";
 import { embeddedData } from "caelus/data-embedded";
 import { ChartWheel } from "@caelus/wheel";
+import accuracy from "caelus/accuracy.json";
 
 const SYSTEMS: HouseSystem[] = ["placidus", "whole_sign", "equal", "porphyry"];
-const ACCURACY: Array<[string, string]> = [
-  ["Sun–Saturn", "≤ 1″"], ["Uranus / Neptune", "≤ 2″ / ≤ 5″"],
-  ["Moon (1920–2080 tier)", "≤ 2.5″"], ["Moon (series, embedded)", "≤ 10″"],
-  ["Pluto / Chiron", "≤ 2.5″ / ≤ 1″"], ["Angles & Placidus cusps", "≤ 3.2″"],
-  ["True node", "≤ 1″"],
-];
+const ACCURACY: Array<[string, string]> = accuracy.summary.map((s) => [s.label, s.bound]);
 
 function houseOf(cusps: number[], lon: number) {
   for (let i = 0; i < 12; i++) {

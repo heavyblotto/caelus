@@ -1,0 +1,32 @@
+{
+  "basis": "Swiss Ephemeris 2.10, 1900-2099, apparent geocentric ecliptic longitude (true equinox of date)",
+  "range": "1900-2099",
+  "unit": "arcsec",
+  "bodies": [
+    { "name": "Sun", "max": "0.4", "rms": "0.2", "note": "" },
+    { "name": "Moon (precise tier)", "max": "2.5", "rms": "0.9", "note": "JPL DE423 fit (2010); DE423 vs DE440 is <0.1″ over this span" },
+    { "name": "Moon (embedded series)", "max": "9.6", "rms": "2.8", "note": "60-term ELP abridged" },
+    { "name": "Mercury", "max": "0.5", "rms": "0.2", "note": "" },
+    { "name": "Venus", "max": "0.8", "rms": "0.2", "note": "" },
+    { "name": "Mars", "max": "0.7", "rms": "0.2", "note": "" },
+    { "name": "Jupiter", "max": "0.9", "rms": "0.3", "note": "" },
+    { "name": "Saturn", "max": "0.8", "rms": "0.4", "note": "" },
+    { "name": "Uranus", "max": "1.9", "rms": "0.7", "note": "series truncation; complete VSOP87 holds ≤1″" },
+    { "name": "Neptune", "max": "4.6", "rms": "2.2", "note": "series truncation; complete VSOP87 holds ≤1″" },
+    { "name": "Pluto", "max": "2.5", "rms": "1.0", "note": "series valid 1885-2099" },
+    { "name": "Chiron", "max": "1.0", "rms": "0.3", "note": "JPL Horizons fit, 1850-2150" },
+    { "name": "Mean node", "max": "0.1", "rms": "0.1", "note": "" },
+    { "name": "True node", "max": "0.8", "rms": "0.4", "note": "vs full DE431 files; Swiss’s built-in Moshier mode itself differs from DE431 by up to ~15″ here" },
+    { "name": "Ascendant / MC", "max": "3.2", "rms": "—", "note": "" },
+    { "name": "Placidus cusps (all 12)", "max": "3.2", "rms": "—", "note": "" }
+  ],
+  "summary": [
+    { "label": "Sun–Saturn", "bound": "≤ 1″" },
+    { "label": "Uranus / Neptune", "bound": "≤ 1.9″ / ≤ 4.6″" },
+    { "label": "Moon (1920–2080 tier)", "bound": "≤ 2.5″" },
+    { "label": "Moon (series, embedded)", "bound": "≤ 10″" },
+    { "label": "Pluto / Chiron", "bound": "≤ 2.5″ / ≤ 1″" },
+    { "label": "Angles & Placidus cusps", "bound": "≤ 3.2″" },
+    { "label": "True node", "bound": "≤ 1″" }
+  ]
+}

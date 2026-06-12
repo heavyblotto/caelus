@@ -177,3 +177,37 @@ dev unified them, with disagreements resolved by measurement.
 ## 3 ci.yml no longer hard-codes the check count
 - The conformance-job comment stated "1,438 golden checks"; dropped the
   count so the comment can't rot.
+
+# Workstream 1: claims-as-data regression gate — 2026-06-12
+
+Closes the "numbers live only in transient console output" gap (the root
+cause of the 1.6-nano drift above). Zero new dependencies.
+
+## 1 Suites emit a machine-readable stats artifact
+- `packages/caelus/test/golden.test.ts`: when `CAELUS_STATS_OUT` is set,
+  writes `{suite, checks, failures, worst:{what,deg,arcsec,nano_arcsec},
+  bodies, fixtures, generatedAt}`. Human stdout unchanged.
+- `packages/caelus-mcp/verify_tools.mjs`: same flag, emits
+  `{suite:"mcp", checks, failures, generatedAt}`.
+
+## 2 One canonical per-body accuracy table
+- `packages/caelus/accuracy.json` (new, exported via the package's
+  `exports` map) is now the single source for per-body bounds. The three
+  formerly-divergent tables collapse onto it: `validation/page.tsx`
+  renders `accuracy.bodies`, `SkyNow.tsx` renders `accuracy.summary`.
+  The SkyNow Uranus/Neptune bucket (was "≤2″/≤5″") now matches the
+  measured "≤1.9″/≤4.6″".
+
+## 3 Claims registry + linter, wired into CI
+- `scripts/claims-registry.json`: maps each prose token (golden check
+  count, worst-diff nano figure in both render forms) to a stats field,
+  its render strings, the files it must appear in, and a competing-value
+  regex. PATCHES.md is intentionally excluded — it records superseded
+  values on purpose.
+- `scripts/check-claims.mjs`: regenerates/loads `conformance-stats.json`,
+  asserts each claim's value is present in every listed file and that no
+  competing value of the same shape appears. Exits non-zero with a
+  file:line report. Mutation-tested: flipping any registered number fails.
+- `package.json`: `lint:claims` script. `ci.yml` conformance job now
+  emits stats from the golden run and runs `lint:claims` after the build.
+- `conformance-stats.json` is gitignored (regenerated, never committed).
