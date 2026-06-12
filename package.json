@@ -10,6 +10,7 @@
     "test": "npm run test -w caelus",
     "lint:prose": "bash scripts/lint-prose.sh",
     "lint:claims": "node scripts/check-claims.mjs",
+    "eval:selfcheck": "node packages/caelus-mcp/eval/run.mjs",
     "dev:web": "npm run dev -w web",
     "dev:web:clean": "npm run dev:clean -w web"
   }
