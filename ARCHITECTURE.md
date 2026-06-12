@@ -61,7 +61,7 @@ Pipeline mirrors tarotbook/mysteryschools: scan corpus (Hand, Forrest,
 Hellenistic translations, esoteric traditions) → chunk + embed → KG.
 The astrology-specific upgrade: **every KG node links to a machine-checkable
 chart predicate** (e.g. `transit(saturn, square, natal.moon)`,
-`natal(mars, house=8)`, `dignity(venus, domicile)`). caelus evaluates
+`natal(mars, house=8)`, `dignity(venus, domicile)`). Caelus evaluates
 predicates; retrieval = "passages whose predicates are TRUE for this
 chart/now". Interpretations become *verified retrieval + synthesis with
 citations to named authors* rather than vibes — a defensible quality moat
@@ -77,17 +77,17 @@ research data nobody else has.
 ## Product strategy (free/paid split)
 - **Free / open:** `caelus` npm package (MIT), stdio MCP server, docs,
   the conformance suite. This is the wedge: every developer and every
-  AI model that touches astrology should hit caelus first.
+  AI model that touches astrology should hit Caelus first.
 - **Hosted (ephemengine.com):** managed MCP + REST, keys, rate limits,
   SLAs, precise-moon + extended-bodies data tiers, batch endpoints
   (10k charts/call for app developers). Pricing: generous free tier,
   usage-based above.
 - **Consumer (mymagus.com):** the flagship demo that happens to be a
-  product — readings powered by KG + caelus, journaling/verification
+  product — readings powered by KG + Caelus, journaling/verification
   loops, rectification sessions, pattern timelines. Feature-parity scan
   against incumbents (astro.com, Co-Star, TimePassages) is realistic:
   the engine already covers their computational core.
-- tarotbook.ai swaps to caelus after mymagus ships (second integration
+- tarotbook.ai swaps to Caelus after mymagus ships (second integration
   proves the package's generality).
 
 ## Next build steps (suggested order)
