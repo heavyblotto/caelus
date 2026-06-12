@@ -12,7 +12,71 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from astroengine import BODIES, Engine
 from astroengine import houses as H
-from astroengine.core import DEG, delta_t, julian_day, mean_obliquity, nutation, jd_tt
+from astroengine import pheno as PH
+from astroengine.core import (DEG, ayanamsa, delta_t, julian_day,
+                              mean_obliquity, nutation, jd_tt)
+
+# v0.3 house systems exported per fixture row (koch is nullable: it is
+# undefined where the MC degree is circumpolar)
+NEW_SYSTEMS = {
+    "koch": H.houses_koch,
+    "regiomontanus": H.houses_regiomontanus,
+    "campanus": H.houses_campanus,
+    "alcabitius": H.houses_alcabitius,
+    "morinus": H.houses_morinus,
+    "meridian": H.houses_meridian,
+    "polich_page": H.houses_polich_page,
+    "vehlow": H.houses_vehlow,
+}
+
+
+def house_row(jd, lat, lon):
+    asc, mc, armc, eps = H.angles(jd, lat, lon)
+    vtx, east = H.vertex_east_point(armc, lat * DEG, eps)
+    entry = {
+        "jd_ut": jd, "lat": lat, "lon": lon,
+        "asc": asc / DEG, "mc": mc / DEG, "armc": armc / DEG, "eps": eps / DEG,
+        "vertex": vtx / DEG, "east_point": east / DEG,
+        "placidus": [c / DEG for c in H.houses_placidus(armc, lat * DEG, eps)]
+        if abs(lat) < 66.0 else None,
+        "porphyry": [c / DEG for c in H.houses_porphyry(asc, mc)],
+        "equal": [c / DEG for c in H.houses_equal(asc)],
+        "whole_sign": [c / DEG for c in H.houses_whole_sign(asc)],
+    }
+    for name, fn in NEW_SYSTEMS.items():
+        try:
+            entry[name] = [c / DEG for c in fn(armc, lat * DEG, eps)]
+        except ValueError:
+            entry[name] = None
+    return entry
+
+
+def v03_sections(eng, jds):
+    """Sidereal, lilith, topocentric, heliocentric, ra/dec, pheno, eot."""
+    sid = []
+    for jd in jds[:6]:
+        row = {"jd_ut": jd, "modes": {}}
+        for mode in ("lahiri", "fagan_bradley"):
+            row["modes"][mode] = {
+                "ayanamsa": ayanamsa(jd_tt(jd), mode),
+                "sun": eng.longitude("sun", jd, zodiac=f"sidereal:{mode}"),
+                "moon": eng.longitude("moon", jd, zodiac=f"sidereal:{mode}"),
+            }
+        sid.append(row)
+    extras = []
+    for jd in jds[:5]:
+        p = eng.position("moon", jd, topocentric=True, observer=(27.95, -82.46, 10.0))
+        extras.append({
+            "jd_ut": jd,
+            "lilith": eng.position("mean_lilith", jd),
+            "moon_topo_lon": p["lon"],
+            "mars_helio": eng.heliocentric("mars", jd),
+            "venus": eng.position("venus", jd),
+            "pheno_mars": PH.pheno(eng, "mars", jd),
+            "pheno_moon": PH.pheno(eng, "moon", jd),
+            "eot_min": PH.equation_of_time(eng, jd),
+        })
+    return sid, extras
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 GOLDEN_IN = os.path.join(ROOT, "packages", "caelus", "test", "golden.json")
@@ -60,26 +124,14 @@ def regen_from_template(old):
         })
 
     for row in old["houses"]:
-        jd, lat, lon = row["jd_ut"], row["lat"], row["lon"]
-        asc, mc, armc, eps = H.angles(jd, lat, lon)
-        entry = {
-            "jd_ut": jd,
-            "lat": lat,
-            "lon": lon,
-            "asc": asc / DEG,
-            "mc": mc / DEG,
-            "armc": armc / DEG,
-            "eps": eps / DEG,
-            "placidus": [c / DEG for c in H.houses_placidus(armc, lat * DEG, eps)]
-            if abs(lat) < 66.0
-            else None,
-            "porphyry": [c / DEG for c in H.houses_porphyry(asc, mc)],
-            "equal": [c / DEG for c in H.houses_equal(asc)],
-            "whole_sign": [c / DEG for c in H.houses_whole_sign(asc)],
-        }
-        out["houses"].append(entry)
+        out["houses"].append(house_row(row["jd_ut"], row["lat"], row["lon"]))
+
+    jds = [row["jd_ut"] for row in old["longitudes"]]
+    out["sidereal"], out["extras"] = v03_sections(eng, jds)
 
     out["chart"] = eng.chart(1990, 6, 10, 14, 30, 0, 27.95, -82.46, "placidus")
+    out["chart_sidereal"] = eng.chart(1990, 6, 10, 14, 30, 0, 27.95, -82.46,
+                                      "koch", zodiac="sidereal:lahiri")
 
     # polar Placidus fallback contract (golden.test.ts checks both fields)
     cp = eng.chart(1985, 12, 1, 9, 0, 0, 78.2, 15.6, "placidus")
