@@ -25,6 +25,14 @@ export type MoonSeries = { ta: number[][]; tb: number[][] };
 export type ChebData = {
   jd0: number; seg_days: number; scale?: number; segments: number[][][];
 };
+export type KeplerElements = {
+  a: number; e: number; i: number; node: number; peri: number;
+  M0: number; n: number;
+};
+export type KeplerPack = { epoch: number; bodies: Record<string, KeplerElements> };
+/** Anything that yields heliocentric ecliptic-J2000 xyz (AU) at a TT jd:
+ *  ChebSeries (fitted small bodies) or KeplerOrbit (Uranian bodies). */
+export interface XyzSource { xyz(jd: number): [number, number, number] }
 
 export interface EngineData {
   vsop: Record<string, VsopSeries>; // mercury..neptune + earth
@@ -36,6 +44,8 @@ export interface EngineData {
   /** Heliocentric ecliptic-J2000 Chebyshev packs by body id (ceres,
    *  pallas, juno, vesta, pholus, ...). Same pipeline as Chiron. */
   chebPacks?: Record<string, ChebData>;
+  /** Hamburg-school (Uranian) constant-element orbits; see fit_uranian.py. */
+  keplerPack?: KeplerPack;
 }
 
 // ---------------------------------------------------------------- timescale
@@ -557,6 +567,29 @@ export function oscApogeeSeries(
   );
 }
 
+/** Constant-element two-body orbit with the same xyz(jde) interface as
+ *  ChebSeries, so chironApparent takes either. */
+export class KeplerOrbit implements XyzSource {
+  constructor(private els: KeplerElements, private epoch: number) {}
+
+  xyz(jde: number): [number, number, number] {
+    const { a, e, i, node, peri: w, M0, n } = this.els;
+    const M = M0 + n * (jde - this.epoch);
+    let E = M;
+    for (let k = 0; k < 30; k++) {
+      E = E - (E - e * Math.sin(E) - M) / (1 - e * Math.cos(E));
+    }
+    const xv = a * (Math.cos(E) - e);
+    const yv = a * Math.sqrt(1 - e * e) * Math.sin(E);
+    const cw = Math.cos(w); const sw = Math.sin(w);
+    const cn = Math.cos(node); const sn = Math.sin(node);
+    const ci = Math.cos(i); const si = Math.sin(i);
+    const xp = xv * cw - yv * sw;
+    const yp = xv * sw + yv * cw;
+    return [xp * cn - yp * sn * ci, xp * sn + yp * cn * ci, yp * si];
+  }
+}
+
 export const EARTH_RADIUS_AU = 6378.14 / 149597870.7;
 const EARTH_FLAT = 0.99664719; // 1 - f, IAU 1976 figure
 
@@ -653,7 +686,7 @@ export function plutoApparent(
 
 // ---------------------------------------------------------------- chiron
 export function chironApparent(
-  data: EngineData, cheb: ChebSeries, jde: number,
+  data: EngineData, cheb: XyzSource, jde: number,
 ): [number, number, number] {
   const [L0, B0, R0] = vsopHeliocentric(data.vsop.earth, jde);
   const [Lj, Bj] = precessEcliptic(L0, B0, jde, J2000);

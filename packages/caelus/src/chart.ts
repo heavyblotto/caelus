@@ -4,7 +4,7 @@ import {
   planetApparent, sunApparent, moonApparentSeries, moonApparentPrecise,
   plutoApparent, chironApparent, meanNode, trueNodeSeries, trueNodePrecise,
   equatorial, ayanamsa, AYANAMSA_J2000, meanLilith, topocentricEcl,
-  oscApogeePrecise, oscApogeeSeries,
+  oscApogeePrecise, oscApogeeSeries, KeplerOrbit, XyzSource,
   trueObliquity, nutation, plutoHeliocentric, vsopHeliocentric, precessEcliptic,
   J2000,
 } from "./core.js";
@@ -108,7 +108,7 @@ export class Engine {
   private moonCheb: ChebSeries | null;
   private chironCheb: ChebSeries | null;
 
-  private packs = new Map<string, ChebSeries>();
+  private packs = new Map<string, XyzSource>();
 
   constructor(data: EngineData) {
     this.data = data;
@@ -116,12 +116,14 @@ export class Engine {
     this.chironCheb = data.chiron ? new ChebSeries(data.chiron) : null;
   }
 
-  private pack(body: string): ChebSeries {
+  private pack(body: string): XyzSource {
     let s = this.packs.get(body);
     if (!s) {
       const raw = this.data.chebPacks?.[body];
-      if (!raw) throw new Error(`no data loaded for body '${body}'`);
-      s = new ChebSeries(raw);
+      const kp = this.data.keplerPack;
+      if (raw) s = new ChebSeries(raw);
+      else if (kp?.bodies[body]) s = new KeplerOrbit(kp.bodies[body], kp.epoch);
+      else throw new Error(`no data loaded for body '${body}'`);
       this.packs.set(body, s);
     }
     return s;
@@ -137,6 +139,7 @@ export class Engine {
     return [
       ...[...BODIES, ...EXTRA_BODIES].filter((b) => b !== "chiron" || this.chironCheb),
       ...Object.keys(this.data.chebPacks ?? {}),
+      ...Object.keys(this.data.keplerPack?.bodies ?? {}),
     ];
   }
 
@@ -175,8 +178,8 @@ export class Engine {
         : oscApogeeSeries(this.data, jde);
       return [lon, lat, km / KM_PER_AU];
     }
-    if (this.data.chebPacks?.[body]) {
-      // same heliocentric-Chebyshev pipeline as Chiron
+    if (this.data.chebPacks?.[body] || this.data.keplerPack?.bodies[body]) {
+      // same heliocentric pipeline as Chiron (Chebyshev or Kepler source)
       return chironApparent(this.data, this.pack(body), jde);
     }
     if (this.data.vsop[body]) return planetApparent(this.data, body, jde);
@@ -226,7 +229,7 @@ export class Engine {
       l = mod(Math.atan2(y, x), TWO_PI);
       b = Math.atan2(z, Math.hypot(x, y));
       [l, b] = precessEcliptic(l, b, J2000, jde);
-    } else if (this.data.chebPacks?.[body]) {
+    } else if (this.data.chebPacks?.[body] || this.data.keplerPack?.bodies[body]) {
       const [x, y, z] = this.pack(body).xyz(jde);
       r = Math.sqrt(x * x + y * y + z * z);
       l = mod(Math.atan2(y, x), TWO_PI);

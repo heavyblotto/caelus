@@ -240,6 +240,9 @@ def events_section(eng):
         "true_lilith": eng.position("true_lilith", jd0),
         "asteroids": {b: eng.position(b, jd0)
                       for b in ("ceres", "pallas", "juno", "vesta", "pholus")},
+        "uranians": {b: eng.position(b, jd0)
+                     for b in ("cupido", "hades", "zeus", "kronos",
+                               "apollon", "admetos", "vulkanus", "poseidon")},
     }
 
 

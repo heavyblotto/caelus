@@ -13,7 +13,9 @@ BODIES = ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn",
 # Computable on request (not in the default chart set). Asteroids load
 # lazily from their Chebyshev packs (Horizons fits, 1850-2150).
 ASTEROIDS = ["ceres", "pallas", "juno", "vesta", "pholus"]
-EXTRA_BODIES = ["mean_lilith", "true_lilith"] + ASTEROIDS
+URANIANS = ["cupido", "hades", "zeus", "kronos", "apollon", "admetos",
+            "vulkanus", "poseidon"]
+EXTRA_BODIES = ["mean_lilith", "true_lilith"] + ASTEROIDS + URANIANS
 
 # Points: excluded from aspect search by default.
 NOT_ASPECTABLE = {"mean_node", "true_node", "mean_lilith", "true_lilith"}
@@ -58,12 +60,19 @@ class Engine:
 
     def _pack(self, body):
         if body not in self._packs:
-            from .chebyshev import ChebSeries
+            import json
             import os
-            path = os.path.join(core.DATA, f"{body}_cheb.json")
-            if not os.path.exists(path):
-                raise ValueError(f"no data pack for {body!r}")
-            self._packs[body] = ChebSeries.load(path)
+            if body in URANIANS:
+                with open(os.path.join(core.DATA, "uranian_kepler.json")) as f:
+                    pack = json.load(f)
+                for name, els in pack["bodies"].items():
+                    self._packs[name] = core.KeplerOrbit(els, pack["epoch"])
+            else:
+                from .chebyshev import ChebSeries
+                path = os.path.join(core.DATA, f"{body}_cheb.json")
+                if not os.path.exists(path):
+                    raise ValueError(f"no data pack for {body!r}")
+                self._packs[body] = ChebSeries.load(path)
         return self._packs[body]
 
     def _ecliptic(self, body, jde):
@@ -95,7 +104,7 @@ class Engine:
             else:
                 lon, lat, km = core.osc_apogee_series(jde)
             return lon, lat, km / KM_PER_AU
-        if body in ASTEROIDS:
+        if body in ASTEROIDS or body in URANIANS:
             return core.smallbody_apparent(self.vsop, self._pack(body), jde)
         return planet_apparent(self.vsop, body, jde)
 
@@ -133,7 +142,7 @@ class Engine:
             l = math.atan2(y, x) % (2 * math.pi)
             b = math.atan2(z, math.hypot(x, y))
             l, b = core._precess_ecliptic(l, b, core.J2000, jde)
-        elif body in ASTEROIDS:
+        elif body in ASTEROIDS or body in URANIANS:
             x, y, z = self._pack(body).xyz(jde)
             r = math.sqrt(x * x + y * y + z * z)
             l = math.atan2(y, x) % (2 * math.pi)
