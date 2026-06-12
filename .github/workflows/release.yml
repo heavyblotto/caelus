@@ -32,11 +32,11 @@ jobs:
       - run: node packages/wheel/dist/test/render.test.js
       - run: node scripts/check-llms.mjs
       # engine first: the others depend on it
-      - run: npm publish --provenance -w caelus
+      - run: npm publish --provenance --access public -w caelus
         env: { NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}" }
-      - run: npm publish --provenance -w caelus-mcp
+      - run: npm publish --provenance --access public -w caelus-mcp
         env: { NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}" }
-      - run: npm publish --provenance -w caelus-birth
+      - run: npm publish --provenance --access public -w caelus-birth
         env: { NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}" }
-      - run: npm publish --provenance -w caelus-wheel
+      - run: npm publish --provenance --access public -w caelus-wheel
         env: { NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}" }
