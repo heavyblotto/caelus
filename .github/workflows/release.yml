@@ -33,12 +33,14 @@ jobs:
       - run: npm run build -w caelus-wheel
       - run: node packages/wheel/dist/test/render.test.js
       - run: node scripts/check-llms.mjs
-      # engine first: the others depend on it
-      - run: npm publish --provenance --access public -w caelus
+      # engine first: the others depend on it. Each publish skips when the
+      # version is already on the registry, so tag-push and dispatch triggers
+      # are idempotent and a re-run never fails on an existing version.
+      - run: bash scripts/publish-if-missing.sh caelus packages/caelus
         env: { NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}" }
-      - run: npm publish --provenance --access public -w caelus-mcp
+      - run: bash scripts/publish-if-missing.sh caelus-mcp packages/caelus-mcp
         env: { NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}" }
-      - run: npm publish --provenance --access public -w caelus-birth
+      - run: bash scripts/publish-if-missing.sh caelus-birth packages/birth
         env: { NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}" }
-      - run: npm publish --provenance --access public -w caelus-wheel
+      - run: bash scripts/publish-if-missing.sh caelus-wheel packages/wheel
         env: { NODE_AUTH_TOKEN: "${{ secrets.NPM_TOKEN }}" }
