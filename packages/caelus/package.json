@@ -7,6 +7,7 @@
   "types": "dist/src/index.d.ts",
   "files": [
     "dist/src",
+    "dist/data",
     "data/vsop87d_*.embedded.json",
     "data/nutation_iau1980.json",
     "data/moon_meeus47.json",
