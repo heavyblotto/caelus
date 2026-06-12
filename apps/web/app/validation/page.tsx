@@ -1,7 +1,7 @@
 import { A, H2, P, Code, Nav } from "../../components/Prose";
 
 export const metadata = {
-  title: "caelus — Validation",
+  title: "Caelus — Validation",
   description: "Reference engine vs Swiss Ephemeris; TypeScript port vs 1,438 golden checks. CI on every commit.",
 };
 

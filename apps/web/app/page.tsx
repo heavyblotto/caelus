@@ -3,7 +3,7 @@ import TryIt from "../components/TryIt";
 import { A, H2, P, Code, Nav } from "../components/Prose";
 
 export const metadata = {
-  title: "caelus — the ephemeris is now just code",
+  title: "Caelus — the ephemeris is now just code",
   description:
     "MIT astrological ephemeris in ~85 KB of TypeScript: planets, Moon, Chiron, nodes, houses, aspects. No AGPL, no license fees, no ephemeris files. Browser, edge, Node, MCP.",
 };
@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main>
       <Nav current="/" />
-      <h1 style={{ letterSpacing: "0.05em" }}>caelus</h1>
+      <h1 style={{ letterSpacing: "0.05em" }}>Caelus</h1>
       <p style={{ fontSize: "1.1rem", opacity: 0.92, lineHeight: 1.55 }}>
         The ephemeris is now just code.
         <br />
@@ -30,7 +30,7 @@ export default function Home() {
 
       <H2>What This Is</H2>
       <P>
-        caelus computes apparent geocentric positions for the Sun, Moon, eight
+        Caelus computes apparent geocentric positions for the Sun, Moon, eight
         planets, Pluto, Chiron, and both lunar nodes, with speeds, retrograde
         flags, ASC/MC, four house systems, and major aspects. Valid 1800–2149.
         The coefficient data ships inside the bundle: VSOP87D planets, an
@@ -62,7 +62,7 @@ export default function Home() {
         <A href="https://github.com/cosinekitty/astronomy">astronomy-engine</A>{" "}
         stops at ±1 arcminute and computes no houses, nodes, or Chiron;{" "}
         <A href="https://www.npmjs.com/package/astronomia">astronomia</A> has
-        sub-arcsecond planets and no astrology layer. caelus is written from
+        sub-arcsecond planets and no astrology layer. Caelus is written from
         the published record and covers the chart core at chart precision.
         Engine-by-engine comparison: <A href="/provenance">Sources</A>.
       </P>

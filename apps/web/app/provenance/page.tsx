@@ -1,7 +1,7 @@
 import { A, H2, P, Nav } from "../../components/Prose";
 
 export const metadata = {
-  title: "caelus — Provenance",
+  title: "Caelus — Provenance",
   description:
     "Coefficients from published sources. Swiss Ephemeris is a test oracle only. Engine-by-engine comparison.",
 };
@@ -50,7 +50,7 @@ export default function Provenance() {
         terms. Most commercial astrology APIs do not say what engine they run.
       </P>
       <P>
-        caelus is written from the published record. Coefficients trace to
+        Caelus is written from the published record. Coefficients trace to
         public literature or public-domain ephemerides:
       </P>
       <table style={{ fontSize: "0.85em", lineHeight: 1.6, borderSpacing: 0 }}>
@@ -69,7 +69,7 @@ export default function Provenance() {
 
       <H2>Other Engines</H2>
       <P>
-        Where caelus sits, checked February–June 2026. Sizes are gzipped where
+        Where Caelus sits, checked February–June 2026. Sizes are gzipped where
         published:
       </P>
       <table style={{ fontSize: "0.85em", lineHeight: 1.6, borderSpacing: 0 }}>
@@ -91,15 +91,15 @@ export default function Provenance() {
       </table>
       <P dim>
         celestine (MIT, January 2026) is the closest project: houses, Chiron,
-        and nodes with no data files. Differences as of its v0.2.1: caelus
+        and nodes with no data files. Differences as of its v0.2.1: Caelus
         publishes per-body oracle deltas (<A href="/validation">Validation</A>)
         and ships an MCP server and edge API; celestine ships Koch,
-        Regiomontanus, and Campanus houses, which caelus does not.
+        Regiomontanus, and Campanus houses, which Caelus does not.
       </P>
 
       <H2>Swiss Ephemeris as Oracle</H2>
       <P>
-        During development, caelus positions were compared to Swiss Ephemeris
+        During development, Caelus positions were compared to Swiss Ephemeris
         2.10 at random instants across 1900–2099. No Swiss Ephemeris code or
         coefficient ships here. An early Chiron fit sampled its asteroid file
         offline; release uses JPL Horizons instead. The two Chiron integrations
