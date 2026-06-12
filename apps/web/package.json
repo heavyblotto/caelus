@@ -6,7 +6,8 @@
     "dev": "next dev",
     "dev:clean": "rm -rf .next && next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "vercel-build": "cd ../.. && npm run build -w caelus && npm run build -w caelus-wheel && npm run build -w web"
   },
   "dependencies": {
     "caelus-wheel": "*",
