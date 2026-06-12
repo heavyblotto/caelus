@@ -1,9 +1,8 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Engine, BODIES, fmtLon, mod, type Chart, type HouseSystem } from "caelus";
 import { embeddedData } from "caelus/data-embedded";
 
-const engine = new Engine(embeddedData);
 const SYSTEMS: HouseSystem[] = ["placidus", "whole_sign", "equal", "porphyry"];
 const ACCURACY: Array<[string, string]> = [
   ["Sun–Saturn", "≤ 1″"], ["Uranus / Neptune", "≤ 2″ / ≤ 5″"],
@@ -20,6 +19,7 @@ function houseOf(cusps: number[], lon: number) {
 }
 
 export default function SkyNow() {
+  const engineRef = useRef<Engine | null>(null);
   const [mounted, setMounted] = useState(false);
   const [iso, setIso] = useState("2000-01-01T12:00");
   const [lat, setLat] = useState("27.94");
@@ -39,8 +39,9 @@ export default function SkyNow() {
     if (!Number.isFinite(la) || la < -90 || la > 90) return { chart: null, ms: 0, error: "latitude must be in [-90, 90]" };
     if (!Number.isFinite(lo) || lo < -180 || lo > 180) return { chart: null, ms: 0, error: "longitude must be in [-180, 180], east positive" };
     if (Number.isNaN(d.getTime())) return { chart: null, ms: 0, error: "invalid date" };
+    if (!engineRef.current) engineRef.current = new Engine(embeddedData);
     const t0 = performance.now();
-    const c = engine.chart(
+    const c = engineRef.current.chart(
       d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate(),
       d.getUTCHours(), d.getUTCMinutes(), 0, la, lo, sys,
     );
