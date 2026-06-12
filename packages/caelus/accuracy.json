@@ -170,6 +170,12 @@
       "max": "1.0",
       "rms": "0.3",
       "note": "JPL Horizons fits 1850-2150 (residual <5e-6 AU); same geocentric pipeline as Chiron. No independent SE oracle here: SE's asteroid files are unavailable in Moshier mode"
+    },
+    {
+      "name": "Uranian bodies (Cupido…Poseidon)",
+      "max": "2.3",
+      "rms": "—",
+      "note": "Hamburg-school constant-element Kepler orbits, elements fitted to SE 2.10's built-in definitions (fit_uranian.py prints per-body figures; Zeus is fit-noise-limited at ~3″ heliocentric). Uranian practice works in arcminutes"
     }
   ],
   "summary": [
@@ -224,6 +230,10 @@
     {
       "label": "Asteroids (big 4 + Pholus)",
       "bound": "≤ 1″"
+    },
+    {
+      "label": "Uranian bodies",
+      "bound": "≤ 2.3″"
     }
   ],
   "v03_harness": "python/validate_swiss.py regenerates every figure above the line against pyswisseph 2.10 (Moshier mode)",

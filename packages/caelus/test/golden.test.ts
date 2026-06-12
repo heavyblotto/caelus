@@ -239,7 +239,7 @@ for (const g of G.houses) {
   expectAngleDeg("ev.true_lilith.lon", lil.lon, g.true_lilith.lon, TOL);
   expect("ev.true_lilith.lat", lil.lat, g.true_lilith.lat, TOL);
   expect("ev.true_lilith.dist", lil.dist!, g.true_lilith.dist, 1e-9);
-  for (const [b, want] of Object.entries(g.asteroids) as Array<[string, any]>) {
+  for (const [b, want] of Object.entries({ ...g.asteroids, ...g.uranians }) as Array<[string, any]>) {
     const p = eng.position(b, jd0);
     expectAngleDeg(`ast.${b}.lon`, p.lon, want.lon, TOL);
     expect(`ast.${b}.lat`, p.lat, want.lat, TOL);

@@ -602,6 +602,35 @@ def osc_apogee_series(jde):
     )
 
 
+class KeplerOrbit:
+    """Constant-element two-body orbit with the same xyz(jde) interface as
+    ChebSeries, so smallbody_apparent takes either. Used for the
+    Hamburg-school (Uranian) fictitious bodies: heliocentric ecliptic
+    J2000, elements fitted to the published constant-element orbits (see
+    fit_uranian.py)."""
+
+    def __init__(self, els, epoch=J2000):
+        self.els = els
+        self.epoch = epoch
+
+    def xyz(self, jde):
+        d = self.els
+        a, e, i = d["a"], d["e"], d["i"]
+        node, w = d["node"], d["peri"]
+        M = d["M0"] + d["n"] * (jde - self.epoch)
+        E = M
+        for _ in range(30):
+            E = E - (E - e * math.sin(E) - M) / (1 - e * math.cos(E))
+        xv = a * (math.cos(E) - e)
+        yv = a * math.sqrt(1 - e * e) * math.sin(E)
+        cw, sw = math.cos(w), math.sin(w)
+        cn, sn = math.cos(node), math.sin(node)
+        ci, si = math.cos(i), math.sin(i)
+        xp = xv * cw - yv * sw
+        yp = xv * sw + yv * cw
+        return (xp * cn - yp * sn * ci, xp * sn + yp * cn * ci, yp * si)
+
+
 EARTH_RADIUS_AU = 6378.14 / 149597870.7
 EARTH_FLAT = 0.99664719  # 1 - f, IAU 1976 figure
 
