@@ -17,8 +17,9 @@ caelus/
   ARCHITECTURE.md        this file
 ```
 Python reference (validation oracle + Chebyshev fitting pipeline) lives in
-its own repo/package (`caelus-engine` on PyPI): it mints data and golden
-fixtures; it is not a runtime dependency of anything.
+`python/` in this repo: it mints data and golden fixtures; it is not a
+runtime dependency of anything. (`caelus-engine` on PyPI reserved for a
+future standalone release.)
 
 ## The three-runtime story (one codebase)
 The engine takes injected `EngineData` and never touches I/O, so identical
@@ -33,12 +34,12 @@ code serves:
 
 ## Durability decisions
 - **Conformance suite as the spine.** Swiss Ephemeris validates Python;
-  Python golden fixtures (1,437 checks) validate TS; CI keeps both green.
+  Python golden fixtures (1,438 checks) validate TS; CI keeps both green.
   Accuracy regressions are structurally impossible to ship silently.
 - **Data as versioned artifacts.** The JSON coefficient files are build
   outputs of the Python pipeline with documented provenance (VSOP87,
-  DE423, IAU 1980; Chiron to be re-fit from JPL Horizons before public
-  data release). Ship them versioned (`caelus-data@2026.06`), so engine
+  DE423, IAU 1980; Chiron fit from geometric JPL Horizons vectors).
+  Ship them versioned (`caelus-data@2026.06`), so engine
   code and data evolve independently.
 - **No framework coupling.** Engine is plain ESM + JSON. Next.js, Vercel,
   even MCP are replaceable shells around it.
@@ -90,8 +91,8 @@ research data nobody else has.
   proves the package's generality).
 
 ## Next build steps (suggested order)
-1. Re-fit Chiron from JPL Horizons (clean provenance) + add the big-4
-   asteroids & Lilith; cut `caelus@0.1.0` + `caelus-mcp@0.1.0` to npm.
+1. Add the big-4 asteroids & Lilith (Chiron re-fit from Horizons: done);
+   cut `caelus@0.1.0` + `caelus-mcp@0.1.0` to npm.
 2. Streamable HTTP mount of buildServer() at ephemengine.com/api/mcp.
 3. Docs site on ephemengine.com (the validation table IS the landing page).
 4. KG ingestion pipeline for the scanned corpus + predicate schema.
