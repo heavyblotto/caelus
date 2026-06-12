@@ -34,9 +34,13 @@ Moon to ~10″ via the analytic series. The 729 KB tier (1920–2080 JPL-fit Moo
 
 ## Usage
 
+```bash
+npm install caelus
+```
+
 ```ts
 import { Engine, fmtLon } from "caelus";
-import { loadNodeData } from "caelus"; // Node only
+import { loadNodeData } from "caelus/node"; // Node only
 
 // Node: filesystem loader
 const engine = new Engine(loadNodeData("./data", "embedded", "full"));
@@ -82,3 +86,10 @@ test/golden.test.ts  conformance suite vs Python fixtures
   sums in reverse); keep orders identical to the Python reference.
 - All data is injected via `EngineData` — the core has zero I/O, zero deps,
   and runs identically in browser, edge runtime, or Node.
+
+## The caelus packages
+
+- caelus — this package
+- [caelus-birth](https://www.npmjs.com/package/caelus-birth) — local birth time + place → UT (charts take UT; use this)
+- [caelus-wheel](https://www.npmjs.com/package/caelus-wheel) — React SVG chart wheel
+- [caelus-mcp](https://www.npmjs.com/package/caelus-mcp) — MCP server, six chart tools over stdio
