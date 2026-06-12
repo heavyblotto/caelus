@@ -112,6 +112,30 @@ assert(render(fixture).includes("℞"), "fixture: retrograde mark rendered");
     "bodies: mean_node opt-in");
 }
 
+// MCP payload shape: rx instead of retrograde, no signDeg — renders identically
+// to the engine chart it mirrors (caelus-mcp natal_chart pipes in as-is)
+{
+  const mcpShaped = {
+    bodies: Object.fromEntries(Object.entries(fixture.bodies).map(([id, p]) => [
+      id,
+      {
+        lon: Math.round(p.lon * 100) / 100,
+        ...(p.retrograde ? { rx: true } : {}),
+      },
+    ])),
+    angles: { asc: fixture.angles.asc, mc: fixture.angles.mc },
+    cusps: fixture.cusps,
+    aspects: fixture.aspects,
+  };
+  const svg = render(mcpShaped);
+  assert(svg.startsWith("<svg") && !svg.includes("NaN"), "mcp shape: renders without NaN");
+  assert(svg.includes("℞"), "mcp shape: rx flag renders the retrograde mark");
+  // note: react escapes the trailing apostrophe in text content, so match without it
+  const sd = mod(mcpShaped.bodies.sun.lon, 30);
+  const label = `${Math.floor(sd)}°${String(Math.floor(mod(sd, 1) * 60)).padStart(2, "0")}`;
+  assert(svg.includes(label), `mcp shape: sun degree label ${label} derived from lon`);
+}
+
 // theme override propagates
 assert(render(fixture, { theme: { axis: "#ff0000" } }).includes("#ff0000"),
   "theme: override applied");

@@ -11,12 +11,15 @@
  */
 import type { ReactElement } from "react";
 
-// minimal structural types: accept the caelus Chart object as-is without
-// a runtime dependency on the engine
+// minimal structural types: accept the caelus Chart object — or a caelus-mcp
+// natal_chart / current_sky payload — as-is, without a runtime dependency on
+// the engine. The MCP payload flags retrograde as `rx` and omits `signDeg`
+// (derived from lon when absent).
 export interface WheelPosition {
   lon: number;
-  retrograde: boolean;
-  signDeg: number;
+  retrograde?: boolean;
+  rx?: boolean;
+  signDeg?: number;
 }
 export interface WheelAspect { a: string; b: string; aspect: string; orb: number }
 export interface WheelChart {
@@ -73,7 +76,8 @@ const MAX_ORB: Record<string, number> = {
 const mod = (a: number, n: number) => ((a % n) + n) % n;
 
 export interface ChartWheelProps {
-  /** The Chart object from caelus, as-is. */
+  /** The Chart object from caelus, or a caelus-mcp natal_chart /
+   *  current_sky tool response, as-is. */
   chart: WheelChart;
   /** Square size in px. */
   size?: number;
@@ -262,9 +266,11 @@ export function ChartWheel({
     }
     el.push(text(disp, 0.655, G[b] ?? b.slice(0, 2).toUpperCase(),
       size * 0.05, T.planetText, `pg-${b}`));
-    const deg = Math.floor(p.signDeg);
-    const min = String(Math.floor(mod(p.signDeg, 1) * 60)).padStart(2, "0");
-    el.push(text(disp, 0.585, `${deg}°${min}'${p.retrograde ? "℞" : ""}`,
+    const signDeg = p.signDeg ?? mod(p.lon, 30);
+    const retro = p.retrograde ?? p.rx ?? false;
+    const deg = Math.floor(signDeg);
+    const min = String(Math.floor(mod(signDeg, 1) * 60)).padStart(2, "0");
+    el.push(text(disp, 0.585, `${deg}°${min}'${retro ? "℞" : ""}`,
       size * 0.024, T.labelText, `pl-${b}`));
   });
 

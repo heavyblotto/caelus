@@ -10,9 +10,13 @@ composable with a separate KG/corpus server (see ARCHITECTURE.md).
    transiting aspects in one call.
 2. **Six tools.** More tools cost context and hurt tool selection. If six
    tools can compose it, it stays out.
-3. **Token frugality.** Full natal chart ~1.9 KB: terse keys, 0.01°
-   positions, compact aspect strings (`t.saturn sq n.moon (0.4° applying)`).
-4. **Determinism + provenance.** Same input → same output. Tool descriptions
+3. **Token frugality.** Full natal chart ~2.5 KB: terse keys, 0.01° positions,
+   compact aspect objects (`{"a":"moon","b":"venus","aspect":"trine","orb":2.09}`;
+   transits add `t`/`n` and an `applying` flag).
+4. **Render-ready output.** Chart aspects pass the engine's `Aspect` objects
+   through unchanged, so a `natal_chart` / `current_sky` response feeds
+   caelus-wheel's `<ChartWheel chart={payload} />` with no adapter.
+5. **Determinism + provenance.** Same input → same output. Tool descriptions
    state per-body accuracy vs Swiss Ephemeris — never a blanket figure
    (1900–2099: Sun–Saturn ≤1″, Uranus ≤1.9″, Neptune ≤4.6″, Moon ≤2.5″,
    Pluto ≤2.5″ with series valid 1885–2099, Chiron ≤1″, nodes ≤1″).

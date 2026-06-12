@@ -81,7 +81,9 @@ function chartPayload(iso: string, lat: number, lon: number, hs: "placidus" | "w
     bodies,
     angles: { asc: r2(c.angles.asc), ascPos: fmt(c.angles.asc), mc: r2(c.angles.mc), mcPos: fmt(c.angles.mc) },
     cusps: cusps.map(r2),
-    aspects: c.aspects.map((a) => `${a.a} ${a.aspect} ${a.b} (${a.orb}°)`),
+    // Engine Aspect objects pass through unchanged ({a, b, aspect, orb}) so
+    // the whole payload feeds caelus-wheel's <ChartWheel> without adaptation.
+    aspects: c.aspects,
   };
 }
 
@@ -94,6 +96,10 @@ const bodyOut = z.object({
   lon: z.number(), pos: z.string(), house: z.number().int().min(1).max(12),
   speed: z.number(), rx: z.boolean().optional(),
 });
+const aspectName = z.enum(["conjunction", "sextile", "square", "trine", "opposition"]);
+const aspectOut = z.object({
+  a: z.string(), b: z.string(), aspect: aspectName, orb: z.number(),
+});
 export const chartOut = z.object({
   utc: z.string(),
   houses: z.enum(["placidus", "whole_sign", "equal", "porphyry"]),
@@ -102,18 +108,20 @@ export const chartOut = z.object({
   bodies: z.record(z.string(), bodyOut),
   angles: z.object({ asc: z.number(), ascPos: z.string(), mc: z.number(), mcPos: z.string() }),
   cusps: z.array(z.number()).length(12),
-  aspects: z.array(z.string()),
+  aspects: z.array(aspectOut),
 });
 export const transitsOut = z.object({
   transit_utc: z.string(),
   transiting: z.record(z.string(), z.object({
     pos: z.string(), natal_house: z.number().int().min(1).max(12), rx: z.boolean().optional(),
   })),
-  aspects_to_natal: z.array(z.string()),
+  aspects_to_natal: z.array(z.object({
+    t: z.string(), n: z.string(), aspect: aspectName, orb: z.number(), applying: z.boolean(),
+  })),
 });
 export const synastryOut = z.object({
   a: chartOut, b: chartOut,
-  inter_aspects: z.array(z.string()),
+  inter_aspects: z.array(aspectOut),
   a_planets_in_b_houses: z.record(z.string(), z.number().int().min(1).max(12)),
   b_planets_in_a_houses: z.record(z.string(), z.number().int().min(1).max(12)),
 });
@@ -172,8 +180,10 @@ export function buildServer(): McpServer {
     const natal = chartPayload(date, lat, lon, house_system);
     const tIso = transit_date ?? new Date().toISOString();
     const jdT = jdFromIso(tIso);
-    const ASP: Array<[string, number]> = [["conj", 0], ["sext", 60], ["sq", 90], ["tri", 120], ["opp", 180]];
-    const hits: string[] = [];
+    const ASP: Array<[string, number]> = [
+      ["conjunction", 0], ["sextile", 60], ["square", 90], ["trine", 120], ["opposition", 180],
+    ];
+    const hits: Array<{ t: string; n: string; aspect: string; orb: number; applying: boolean }> = [];
     const cusps = natal.cusps as number[];
     const houseOf = (bl: number) => {
       for (let i = 0; i < 12; i++) {
@@ -193,7 +203,7 @@ export function buildServer(): McpServer {
           if (o <= orb) {
             const future = Math.abs(mod(tp.lon + tp.speed * 0.5 - nLon + 180, 360) - 180);
             const applying = Math.abs(future - angle) < o;
-            hits.push(`t.${tb} ${name} n.${nb} (${r2(o)}°${applying ? " applying" : " separating"})`);
+            hits.push({ t: tb, n: nb, aspect: name, orb: r2(o), applying });
           }
         }
       }
@@ -212,8 +222,10 @@ export function buildServer(): McpServer {
   }, async ({ a, b, orb }) => {
     const ca = chartPayload(a.date, a.lat, a.lon, "placidus");
     const cb = chartPayload(b.date, b.lat, b.lon, "placidus");
-    const ASP: Array<[string, number]> = [["conj", 0], ["sext", 60], ["sq", 90], ["tri", 120], ["opp", 180]];
-    const inter: string[] = [];
+    const ASP: Array<[string, number]> = [
+      ["conjunction", 0], ["sextile", 60], ["square", 90], ["trine", 120], ["opposition", 180],
+    ];
+    const inter: Array<{ a: string; b: string; aspect: string; orb: number }> = [];
     const houseIn = (cusps: number[], bl: number) => {
       for (let i = 0; i < 12; i++) {
         if (mod(bl - cusps[i], 360) < mod(cusps[(i + 1) % 12] - cusps[i], 360)) return i + 1;
@@ -235,7 +247,7 @@ export function buildServer(): McpServer {
         const sep = Math.abs(mod(la - lb + 180, 360) - 180);
         for (const [name, angle] of ASP) {
           const o = Math.abs(sep - angle);
-          if (o <= orb) inter.push(`A.${ba} ${name} B.${bb} (${r2(o)}°)`);
+          if (o <= orb) inter.push({ a: ba, b: bb, aspect: name, orb: r2(o) });
         }
       }
     }
@@ -247,7 +259,7 @@ export function buildServer(): McpServer {
 
   server.registerTool("find_aspect_dates", {
     description:
-      "Exact dates a transiting body makes an aspect, within a range: to a fixed longitude OR to another transiting body. Provide exactly one of target_lon / target_body. Includes retrograde re-hits. Body names are snake_case (mean_node, true_node); note the output uses abbreviated aspect tokens (conj/sext/sq/tri/opp).",
+      "Exact dates a transiting body makes an aspect, within a range: to a fixed longitude OR to another transiting body. Provide exactly one of target_lon / target_body. Includes retrograde re-hits. Body names are snake_case (mean_node, true_node).",
     inputSchema: {
       body: z.enum(BODIES as unknown as [string, ...string[]]).describe("Transiting body (snake_case, e.g. saturn, true_node)"),
       aspect: z.enum(["conjunction", "sextile", "square", "trine", "opposition"]),

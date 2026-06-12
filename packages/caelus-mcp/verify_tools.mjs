@@ -73,10 +73,8 @@ const call = async (name, args) => {
     assert((c.bodies[b].rx === true) === p.retrograde, `natal_chart: ${b} retrograde flag`);
     assert(c.bodies[b].house === houseFromCusps(g.cusps, p.lon), `natal_chart: ${b} house`);
   }
-  const expectAspects = g.aspects.map((a) => `${a.a} ${a.aspect} ${a.b} (${a.orb}°)`);
-  assert(c.aspects.length === expectAspects.length
-    && c.aspects.every((s, i) => s === expectAspects[i]),
-    "natal_chart: aspects match engine chart");
+  assert(JSON.stringify(c.aspects) === JSON.stringify(g.aspects),
+    "natal_chart: aspects pass the engine Aspect objects through unchanged");
 }
 
 // polar Placidus fallback must be reported, never silent
@@ -104,7 +102,7 @@ const call = async (name, args) => {
   const t = await call("transits", { ...natalArgs, transit_date: tIso, orb });
   const natal = await call("natal_chart", natalArgs);
   const jdT = jdFromIso(tIso);
-  const ASP = [["conj", 0], ["sext", 60], ["sq", 90], ["tri", 120], ["opp", 180]];
+  const ASP = [["conjunction", 0], ["sextile", 60], ["square", 90], ["trine", 120], ["opposition", 180]];
 
   // oracle: rebuild the expected hit set from engine positions + the natal payload
   const expected = new Set();
@@ -120,11 +118,13 @@ const call = async (name, args) => {
       }
     }
   }
-  const got = new Set(t.aspects_to_natal.map((s) => s.replace(/ \(.*$/, "")));
+  const got = new Set(t.aspects_to_natal.map((h) => `t.${h.t} ${h.aspect} n.${h.n}`));
   assert(got.size === expected.size && [...expected].every((e) => got.has(e)),
     `transits: aspect set ${got.size} vs oracle ${expected.size}`);
-  for (const s of t.aspects_to_natal) {
-    assert(/ \(\d+(\.\d+)?° (applying|separating)\)$/.test(s), `transits: hit format "${s}"`);
+  for (const h of t.aspects_to_natal) {
+    assert(typeof h.orb === "number" && h.orb >= 0 && h.orb <= orb
+      && typeof h.applying === "boolean",
+      `transits: hit shape ${JSON.stringify(h)}`);
   }
 }
 
@@ -134,7 +134,7 @@ const call = async (name, args) => {
   const b = { date: "1987-11-02T06:15:00Z", lat: 40.71, lon: -74.0 };
   const orb = 4;
   const s = await call("synastry", { a, b, orb });
-  const ASP = [["conj", 0], ["sext", 60], ["sq", 90], ["tri", 120], ["opp", 180]];
+  const ASP = [["conjunction", 0], ["sextile", 60], ["square", 90], ["trine", 120], ["opposition", 180]];
 
   const expected = [];
   for (const ba of BODIES) {
@@ -149,7 +149,7 @@ const call = async (name, args) => {
       }
     }
   }
-  const got = s.inter_aspects.map((x) => x.replace(/ \(.*$/, ""));
+  const got = s.inter_aspects.map((x) => `A.${x.a} ${x.aspect} B.${x.b}`);
   assert(got.length === expected.length && expected.every((e) => got.includes(e)),
     `synastry: inter-aspect set ${got.length} vs oracle ${expected.length}`);
 }
