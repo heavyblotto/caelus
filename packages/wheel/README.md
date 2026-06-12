@@ -7,13 +7,18 @@ SSR-safe, zero runtime dependencies (react is a peer), ~3.4 KB gzipped.
 import { ChartWheel } from "caelus-wheel";
 
 <ChartWheel
-  chart={chart}            // the Chart object from caelus, as-is
+  chart={chart}            // caelus Chart object or caelus-mcp chart payload, as-is
   size={520}               // px, square
   showAspects={true}
   aspectTypes={["conjunction", "sextile", "square", "trine", "opposition"]}
   theme={{ axis: "#8a7fd4" }}  // Partial<WheelTheme>; dark default
 />
 ```
+
+`chart` accepts either the `Chart` object from the caelus engine or a
+`natal_chart` / `current_sky` response from caelus-mcp — the MCP payload's
+`rx` retrograde flag is understood and `signDeg` is derived from `lon`
+when absent. An MCP client can pipe a tool response straight in.
 
 ## What it draws
 

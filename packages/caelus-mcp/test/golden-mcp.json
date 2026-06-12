@@ -116,30 +116,150 @@
         101.39
       ],
       "aspects": [
-        "moon trine venus (0.25°)",
-        "moon square mars (5.78°)",
-        "moon opposition jupiter (1.55°)",
-        "moon conjunction uranus (4.93°)",
-        "moon conjunction neptune (0.55°)",
-        "moon sextile pluto (2.22°)",
-        "moon opposition chiron (2.29°)",
-        "mercury trine saturn (3.54°)",
-        "venus sextile jupiter (1.8°)",
-        "venus trine uranus (4.68°)",
-        "venus trine neptune (0.81°)",
-        "venus opposition pluto (2.47°)",
-        "venus sextile chiron (2.54°)",
-        "mars square uranus (0.84°)",
-        "mars square neptune (6.33°)",
-        "jupiter opposition uranus (6.48°)",
-        "jupiter opposition neptune (1°)",
-        "jupiter trine pluto (0.67°)",
-        "jupiter conjunction chiron (0.73°)",
-        "uranus conjunction neptune (5.48°)",
-        "uranus opposition chiron (7.22°)",
-        "neptune sextile pluto (1.67°)",
-        "neptune opposition chiron (1.73°)",
-        "pluto trine chiron (0.07°)"
+        {
+          "a": "moon",
+          "b": "venus",
+          "aspect": "trine",
+          "orb": 0.25
+        },
+        {
+          "a": "moon",
+          "b": "mars",
+          "aspect": "square",
+          "orb": 5.78
+        },
+        {
+          "a": "moon",
+          "b": "jupiter",
+          "aspect": "opposition",
+          "orb": 1.55
+        },
+        {
+          "a": "moon",
+          "b": "uranus",
+          "aspect": "conjunction",
+          "orb": 4.93
+        },
+        {
+          "a": "moon",
+          "b": "neptune",
+          "aspect": "conjunction",
+          "orb": 0.55
+        },
+        {
+          "a": "moon",
+          "b": "pluto",
+          "aspect": "sextile",
+          "orb": 2.22
+        },
+        {
+          "a": "moon",
+          "b": "chiron",
+          "aspect": "opposition",
+          "orb": 2.29
+        },
+        {
+          "a": "mercury",
+          "b": "saturn",
+          "aspect": "trine",
+          "orb": 3.54
+        },
+        {
+          "a": "venus",
+          "b": "jupiter",
+          "aspect": "sextile",
+          "orb": 1.8
+        },
+        {
+          "a": "venus",
+          "b": "uranus",
+          "aspect": "trine",
+          "orb": 4.68
+        },
+        {
+          "a": "venus",
+          "b": "neptune",
+          "aspect": "trine",
+          "orb": 0.81
+        },
+        {
+          "a": "venus",
+          "b": "pluto",
+          "aspect": "opposition",
+          "orb": 2.47
+        },
+        {
+          "a": "venus",
+          "b": "chiron",
+          "aspect": "sextile",
+          "orb": 2.54
+        },
+        {
+          "a": "mars",
+          "b": "uranus",
+          "aspect": "square",
+          "orb": 0.84
+        },
+        {
+          "a": "mars",
+          "b": "neptune",
+          "aspect": "square",
+          "orb": 6.33
+        },
+        {
+          "a": "jupiter",
+          "b": "uranus",
+          "aspect": "opposition",
+          "orb": 6.48
+        },
+        {
+          "a": "jupiter",
+          "b": "neptune",
+          "aspect": "opposition",
+          "orb": 1
+        },
+        {
+          "a": "jupiter",
+          "b": "pluto",
+          "aspect": "trine",
+          "orb": 0.67
+        },
+        {
+          "a": "jupiter",
+          "b": "chiron",
+          "aspect": "conjunction",
+          "orb": 0.73
+        },
+        {
+          "a": "uranus",
+          "b": "neptune",
+          "aspect": "conjunction",
+          "orb": 5.48
+        },
+        {
+          "a": "uranus",
+          "b": "chiron",
+          "aspect": "opposition",
+          "orb": 7.22
+        },
+        {
+          "a": "neptune",
+          "b": "pluto",
+          "aspect": "sextile",
+          "orb": 1.67
+        },
+        {
+          "a": "neptune",
+          "b": "chiron",
+          "aspect": "opposition",
+          "orb": 1.73
+        },
+        {
+          "a": "pluto",
+          "b": "chiron",
+          "aspect": "trine",
+          "orb": 0.07
+        }
       ]
     }
   },
@@ -257,19 +377,84 @@
         327.7
       ],
       "aspects": [
-        "sun sextile moon (2.95°)",
-        "sun trine saturn (0.03°)",
-        "moon opposition saturn (2.93°)",
-        "moon square uranus (1.49°)",
-        "mercury sextile mars (3.93°)",
-        "mercury trine jupiter (6.64°)",
-        "venus square mars (3.6°)",
-        "venus sextile neptune (1.63°)",
-        "mars sextile jupiter (2.71°)",
-        "saturn square uranus (4.41°)",
-        "uranus sextile pluto (3.35°)",
-        "uranus sextile chiron (3.19°)",
-        "pluto conjunction chiron (0.16°)"
+        {
+          "a": "sun",
+          "b": "moon",
+          "aspect": "sextile",
+          "orb": 2.95
+        },
+        {
+          "a": "sun",
+          "b": "saturn",
+          "aspect": "trine",
+          "orb": 0.03
+        },
+        {
+          "a": "moon",
+          "b": "saturn",
+          "aspect": "opposition",
+          "orb": 2.93
+        },
+        {
+          "a": "moon",
+          "b": "uranus",
+          "aspect": "square",
+          "orb": 1.49
+        },
+        {
+          "a": "mercury",
+          "b": "mars",
+          "aspect": "sextile",
+          "orb": 3.93
+        },
+        {
+          "a": "mercury",
+          "b": "jupiter",
+          "aspect": "trine",
+          "orb": 6.64
+        },
+        {
+          "a": "venus",
+          "b": "mars",
+          "aspect": "square",
+          "orb": 3.6
+        },
+        {
+          "a": "venus",
+          "b": "neptune",
+          "aspect": "sextile",
+          "orb": 1.63
+        },
+        {
+          "a": "mars",
+          "b": "jupiter",
+          "aspect": "sextile",
+          "orb": 2.71
+        },
+        {
+          "a": "saturn",
+          "b": "uranus",
+          "aspect": "square",
+          "orb": 4.41
+        },
+        {
+          "a": "uranus",
+          "b": "pluto",
+          "aspect": "sextile",
+          "orb": 3.35
+        },
+        {
+          "a": "uranus",
+          "b": "chiron",
+          "aspect": "sextile",
+          "orb": 3.19
+        },
+        {
+          "a": "pluto",
+          "b": "chiron",
+          "aspect": "conjunction",
+          "orb": 0.16
+        }
       ]
     }
   },
@@ -341,27 +526,153 @@
         }
       },
       "aspects_to_natal": [
-        "t.sun conj n.sun (1.62° separating)",
-        "t.moon tri n.uranus (1.38° separating)",
-        "t.moon sq n.mean_node (2.99° separating)",
-        "t.moon sq n.true_node (1.17° separating)",
-        "t.mercury opp n.moon (1.85° separating)",
-        "t.mercury sext n.venus (2.1° separating)",
-        "t.mercury conj n.jupiter (0.29° separating)",
-        "t.mercury opp n.neptune (1.29° separating)",
-        "t.mercury tri n.pluto (0.37° applying)",
-        "t.mercury conj n.chiron (0.44° applying)",
-        "t.venus sext n.mercury (0.46° separating)",
-        "t.mars opp n.pluto (2.36° separating)",
-        "t.mars sext n.chiron (2.29° separating)",
-        "t.jupiter sext n.mercury (1.64° applying)",
-        "t.jupiter opp n.saturn (1.9° separating)",
-        "t.saturn sq n.moon (0.18° applying)",
-        "t.saturn sq n.jupiter (1.74° applying)",
-        "t.saturn sq n.neptune (0.74° applying)",
-        "t.saturn sq n.chiron (2.47° applying)",
-        "t.pluto sext n.mars (2.29° separating)",
-        "t.pluto conj n.true_node (2.92° separating)"
+        {
+          "t": "sun",
+          "n": "sun",
+          "aspect": "conjunction",
+          "orb": 1.62,
+          "applying": false
+        },
+        {
+          "t": "moon",
+          "n": "uranus",
+          "aspect": "trine",
+          "orb": 1.38,
+          "applying": false
+        },
+        {
+          "t": "moon",
+          "n": "mean_node",
+          "aspect": "square",
+          "orb": 2.99,
+          "applying": false
+        },
+        {
+          "t": "moon",
+          "n": "true_node",
+          "aspect": "square",
+          "orb": 1.17,
+          "applying": false
+        },
+        {
+          "t": "mercury",
+          "n": "moon",
+          "aspect": "opposition",
+          "orb": 1.85,
+          "applying": false
+        },
+        {
+          "t": "mercury",
+          "n": "venus",
+          "aspect": "sextile",
+          "orb": 2.1,
+          "applying": false
+        },
+        {
+          "t": "mercury",
+          "n": "jupiter",
+          "aspect": "conjunction",
+          "orb": 0.29,
+          "applying": false
+        },
+        {
+          "t": "mercury",
+          "n": "neptune",
+          "aspect": "opposition",
+          "orb": 1.29,
+          "applying": false
+        },
+        {
+          "t": "mercury",
+          "n": "pluto",
+          "aspect": "trine",
+          "orb": 0.37,
+          "applying": true
+        },
+        {
+          "t": "mercury",
+          "n": "chiron",
+          "aspect": "conjunction",
+          "orb": 0.44,
+          "applying": true
+        },
+        {
+          "t": "venus",
+          "n": "mercury",
+          "aspect": "sextile",
+          "orb": 0.46,
+          "applying": false
+        },
+        {
+          "t": "mars",
+          "n": "pluto",
+          "aspect": "opposition",
+          "orb": 2.36,
+          "applying": false
+        },
+        {
+          "t": "mars",
+          "n": "chiron",
+          "aspect": "sextile",
+          "orb": 2.29,
+          "applying": false
+        },
+        {
+          "t": "jupiter",
+          "n": "mercury",
+          "aspect": "sextile",
+          "orb": 1.64,
+          "applying": true
+        },
+        {
+          "t": "jupiter",
+          "n": "saturn",
+          "aspect": "opposition",
+          "orb": 1.9,
+          "applying": false
+        },
+        {
+          "t": "saturn",
+          "n": "moon",
+          "aspect": "square",
+          "orb": 0.18,
+          "applying": true
+        },
+        {
+          "t": "saturn",
+          "n": "jupiter",
+          "aspect": "square",
+          "orb": 1.74,
+          "applying": true
+        },
+        {
+          "t": "saturn",
+          "n": "neptune",
+          "aspect": "square",
+          "orb": 0.74,
+          "applying": true
+        },
+        {
+          "t": "saturn",
+          "n": "chiron",
+          "aspect": "square",
+          "orb": 2.47,
+          "applying": true
+        },
+        {
+          "t": "pluto",
+          "n": "mars",
+          "aspect": "sextile",
+          "orb": 2.29,
+          "applying": false
+        },
+        {
+          "t": "pluto",
+          "n": "true_node",
+          "aspect": "conjunction",
+          "orb": 2.92,
+          "applying": false
+        }
       ]
     }
   },
@@ -490,30 +801,150 @@
           101.39
         ],
         "aspects": [
-          "moon trine venus (0.25°)",
-          "moon square mars (5.78°)",
-          "moon opposition jupiter (1.55°)",
-          "moon conjunction uranus (4.93°)",
-          "moon conjunction neptune (0.55°)",
-          "moon sextile pluto (2.22°)",
-          "moon opposition chiron (2.29°)",
-          "mercury trine saturn (3.54°)",
-          "venus sextile jupiter (1.8°)",
-          "venus trine uranus (4.68°)",
-          "venus trine neptune (0.81°)",
-          "venus opposition pluto (2.47°)",
-          "venus sextile chiron (2.54°)",
-          "mars square uranus (0.84°)",
-          "mars square neptune (6.33°)",
-          "jupiter opposition uranus (6.48°)",
-          "jupiter opposition neptune (1°)",
-          "jupiter trine pluto (0.67°)",
-          "jupiter conjunction chiron (0.73°)",
-          "uranus conjunction neptune (5.48°)",
-          "uranus opposition chiron (7.22°)",
-          "neptune sextile pluto (1.67°)",
-          "neptune opposition chiron (1.73°)",
-          "pluto trine chiron (0.07°)"
+          {
+            "a": "moon",
+            "b": "venus",
+            "aspect": "trine",
+            "orb": 0.25
+          },
+          {
+            "a": "moon",
+            "b": "mars",
+            "aspect": "square",
+            "orb": 5.78
+          },
+          {
+            "a": "moon",
+            "b": "jupiter",
+            "aspect": "opposition",
+            "orb": 1.55
+          },
+          {
+            "a": "moon",
+            "b": "uranus",
+            "aspect": "conjunction",
+            "orb": 4.93
+          },
+          {
+            "a": "moon",
+            "b": "neptune",
+            "aspect": "conjunction",
+            "orb": 0.55
+          },
+          {
+            "a": "moon",
+            "b": "pluto",
+            "aspect": "sextile",
+            "orb": 2.22
+          },
+          {
+            "a": "moon",
+            "b": "chiron",
+            "aspect": "opposition",
+            "orb": 2.29
+          },
+          {
+            "a": "mercury",
+            "b": "saturn",
+            "aspect": "trine",
+            "orb": 3.54
+          },
+          {
+            "a": "venus",
+            "b": "jupiter",
+            "aspect": "sextile",
+            "orb": 1.8
+          },
+          {
+            "a": "venus",
+            "b": "uranus",
+            "aspect": "trine",
+            "orb": 4.68
+          },
+          {
+            "a": "venus",
+            "b": "neptune",
+            "aspect": "trine",
+            "orb": 0.81
+          },
+          {
+            "a": "venus",
+            "b": "pluto",
+            "aspect": "opposition",
+            "orb": 2.47
+          },
+          {
+            "a": "venus",
+            "b": "chiron",
+            "aspect": "sextile",
+            "orb": 2.54
+          },
+          {
+            "a": "mars",
+            "b": "uranus",
+            "aspect": "square",
+            "orb": 0.84
+          },
+          {
+            "a": "mars",
+            "b": "neptune",
+            "aspect": "square",
+            "orb": 6.33
+          },
+          {
+            "a": "jupiter",
+            "b": "uranus",
+            "aspect": "opposition",
+            "orb": 6.48
+          },
+          {
+            "a": "jupiter",
+            "b": "neptune",
+            "aspect": "opposition",
+            "orb": 1
+          },
+          {
+            "a": "jupiter",
+            "b": "pluto",
+            "aspect": "trine",
+            "orb": 0.67
+          },
+          {
+            "a": "jupiter",
+            "b": "chiron",
+            "aspect": "conjunction",
+            "orb": 0.73
+          },
+          {
+            "a": "uranus",
+            "b": "neptune",
+            "aspect": "conjunction",
+            "orb": 5.48
+          },
+          {
+            "a": "uranus",
+            "b": "chiron",
+            "aspect": "opposition",
+            "orb": 7.22
+          },
+          {
+            "a": "neptune",
+            "b": "pluto",
+            "aspect": "sextile",
+            "orb": 1.67
+          },
+          {
+            "a": "neptune",
+            "b": "chiron",
+            "aspect": "opposition",
+            "orb": 1.73
+          },
+          {
+            "a": "pluto",
+            "b": "chiron",
+            "aspect": "trine",
+            "orb": 0.07
+          }
         ]
       },
       "b": {
@@ -623,63 +1054,333 @@
           244.12
         ],
         "aspects": [
-          "sun square saturn (1.35°)",
-          "sun square uranus (0.11°)",
-          "moon conjunction venus (2.81°)",
-          "moon trine mars (5.37°)",
-          "moon trine neptune (3.34°)",
-          "moon opposition pluto (1.18°)",
-          "mercury sextile jupiter (3.85°)",
-          "mercury sextile neptune (3.5°)",
-          "mercury trine pluto (5.66°)",
-          "venus trine mars (2.55°)",
-          "venus trine neptune (6.15°)",
-          "venus opposition pluto (3.99°)",
-          "jupiter trine saturn (0.51°)",
-          "jupiter trine uranus (1.76°)",
-          "saturn conjunction uranus (1.24°)",
-          "saturn conjunction neptune (7.87°)",
-          "uranus opposition chiron (7.52°)",
-          "neptune sextile pluto (2.16°)"
+          {
+            "a": "sun",
+            "b": "saturn",
+            "aspect": "square",
+            "orb": 1.35
+          },
+          {
+            "a": "sun",
+            "b": "uranus",
+            "aspect": "square",
+            "orb": 0.11
+          },
+          {
+            "a": "moon",
+            "b": "venus",
+            "aspect": "conjunction",
+            "orb": 2.81
+          },
+          {
+            "a": "moon",
+            "b": "mars",
+            "aspect": "trine",
+            "orb": 5.37
+          },
+          {
+            "a": "moon",
+            "b": "neptune",
+            "aspect": "trine",
+            "orb": 3.34
+          },
+          {
+            "a": "moon",
+            "b": "pluto",
+            "aspect": "opposition",
+            "orb": 1.18
+          },
+          {
+            "a": "mercury",
+            "b": "jupiter",
+            "aspect": "sextile",
+            "orb": 3.85
+          },
+          {
+            "a": "mercury",
+            "b": "neptune",
+            "aspect": "sextile",
+            "orb": 3.5
+          },
+          {
+            "a": "mercury",
+            "b": "pluto",
+            "aspect": "trine",
+            "orb": 5.66
+          },
+          {
+            "a": "venus",
+            "b": "mars",
+            "aspect": "trine",
+            "orb": 2.55
+          },
+          {
+            "a": "venus",
+            "b": "neptune",
+            "aspect": "trine",
+            "orb": 6.15
+          },
+          {
+            "a": "venus",
+            "b": "pluto",
+            "aspect": "opposition",
+            "orb": 3.99
+          },
+          {
+            "a": "jupiter",
+            "b": "saturn",
+            "aspect": "trine",
+            "orb": 0.51
+          },
+          {
+            "a": "jupiter",
+            "b": "uranus",
+            "aspect": "trine",
+            "orb": 1.76
+          },
+          {
+            "a": "saturn",
+            "b": "uranus",
+            "aspect": "conjunction",
+            "orb": 1.24
+          },
+          {
+            "a": "saturn",
+            "b": "neptune",
+            "aspect": "conjunction",
+            "orb": 7.87
+          },
+          {
+            "a": "uranus",
+            "b": "chiron",
+            "aspect": "opposition",
+            "orb": 7.52
+          },
+          {
+            "a": "neptune",
+            "b": "pluto",
+            "aspect": "sextile",
+            "orb": 2.16
+          }
         ]
       },
       "inter_aspects": [
-        "A.sun conj B.chiron (3.99°)",
-        "A.sun sq B.mean_node (3.47°)",
-        "A.sun sq B.true_node (3.62°)",
-        "A.moon tri B.moon (0.13°)",
-        "A.moon tri B.venus (2.94°)",
-        "A.moon conj B.neptune (3.21°)",
-        "A.moon sext B.pluto (1.05°)",
-        "A.mercury sext B.sun (2.99°)",
-        "A.venus conj B.moon (0.38°)",
-        "A.venus conj B.venus (3.19°)",
-        "A.venus tri B.neptune (2.96°)",
-        "A.venus opp B.pluto (0.8°)",
-        "A.mars sq B.neptune (2.56°)",
-        "A.jupiter sext B.moon (1.43°)",
-        "A.jupiter sext B.venus (1.38°)",
-        "A.jupiter opp B.mars (3.93°)",
-        "A.jupiter tri B.pluto (2.61°)",
-        "A.saturn sext B.mean_node (1.39°)",
-        "A.saturn sext B.true_node (1.24°)",
-        "A.uranus sext B.mercury (1.78°)",
-        "A.uranus conj B.neptune (1.72°)",
-        "A.uranus sext B.pluto (3.88°)",
-        "A.neptune tri B.moon (0.43°)",
-        "A.neptune tri B.venus (2.38°)",
-        "A.neptune conj B.neptune (3.77°)",
-        "A.neptune sext B.pluto (1.61°)",
-        "A.pluto opp B.moon (2.09°)",
-        "A.pluto opp B.venus (0.72°)",
-        "A.pluto sext B.mars (3.27°)",
-        "A.pluto conj B.pluto (3.27°)",
-        "A.chiron sext B.moon (2.16°)",
-        "A.chiron sext B.venus (0.65°)",
-        "A.chiron opp B.mars (3.2°)",
-        "A.chiron tri B.pluto (3.34°)",
-        "A.mean_node sq B.moon (3.45°)",
-        "A.mean_node sq B.pluto (2.27°)"
+        {
+          "a": "sun",
+          "b": "chiron",
+          "aspect": "conjunction",
+          "orb": 3.99
+        },
+        {
+          "a": "sun",
+          "b": "mean_node",
+          "aspect": "square",
+          "orb": 3.47
+        },
+        {
+          "a": "sun",
+          "b": "true_node",
+          "aspect": "square",
+          "orb": 3.62
+        },
+        {
+          "a": "moon",
+          "b": "moon",
+          "aspect": "trine",
+          "orb": 0.13
+        },
+        {
+          "a": "moon",
+          "b": "venus",
+          "aspect": "trine",
+          "orb": 2.94
+        },
+        {
+          "a": "moon",
+          "b": "neptune",
+          "aspect": "conjunction",
+          "orb": 3.21
+        },
+        {
+          "a": "moon",
+          "b": "pluto",
+          "aspect": "sextile",
+          "orb": 1.05
+        },
+        {
+          "a": "mercury",
+          "b": "sun",
+          "aspect": "sextile",
+          "orb": 2.99
+        },
+        {
+          "a": "venus",
+          "b": "moon",
+          "aspect": "conjunction",
+          "orb": 0.38
+        },
+        {
+          "a": "venus",
+          "b": "venus",
+          "aspect": "conjunction",
+          "orb": 3.19
+        },
+        {
+          "a": "venus",
+          "b": "neptune",
+          "aspect": "trine",
+          "orb": 2.96
+        },
+        {
+          "a": "venus",
+          "b": "pluto",
+          "aspect": "opposition",
+          "orb": 0.8
+        },
+        {
+          "a": "mars",
+          "b": "neptune",
+          "aspect": "square",
+          "orb": 2.56
+        },
+        {
+          "a": "jupiter",
+          "b": "moon",
+          "aspect": "sextile",
+          "orb": 1.43
+        },
+        {
+          "a": "jupiter",
+          "b": "venus",
+          "aspect": "sextile",
+          "orb": 1.38
+        },
+        {
+          "a": "jupiter",
+          "b": "mars",
+          "aspect": "opposition",
+          "orb": 3.93
+        },
+        {
+          "a": "jupiter",
+          "b": "pluto",
+          "aspect": "trine",
+          "orb": 2.61
+        },
+        {
+          "a": "saturn",
+          "b": "mean_node",
+          "aspect": "sextile",
+          "orb": 1.39
+        },
+        {
+          "a": "saturn",
+          "b": "true_node",
+          "aspect": "sextile",
+          "orb": 1.24
+        },
+        {
+          "a": "uranus",
+          "b": "mercury",
+          "aspect": "sextile",
+          "orb": 1.78
+        },
+        {
+          "a": "uranus",
+          "b": "neptune",
+          "aspect": "conjunction",
+          "orb": 1.72
+        },
+        {
+          "a": "uranus",
+          "b": "pluto",
+          "aspect": "sextile",
+          "orb": 3.88
+        },
+        {
+          "a": "neptune",
+          "b": "moon",
+          "aspect": "trine",
+          "orb": 0.43
+        },
+        {
+          "a": "neptune",
+          "b": "venus",
+          "aspect": "trine",
+          "orb": 2.38
+        },
+        {
+          "a": "neptune",
+          "b": "neptune",
+          "aspect": "conjunction",
+          "orb": 3.77
+        },
+        {
+          "a": "neptune",
+          "b": "pluto",
+          "aspect": "sextile",
+          "orb": 1.61
+        },
+        {
+          "a": "pluto",
+          "b": "moon",
+          "aspect": "opposition",
+          "orb": 2.09
+        },
+        {
+          "a": "pluto",
+          "b": "venus",
+          "aspect": "opposition",
+          "orb": 0.72
+        },
+        {
+          "a": "pluto",
+          "b": "mars",
+          "aspect": "sextile",
+          "orb": 3.27
+        },
+        {
+          "a": "pluto",
+          "b": "pluto",
+          "aspect": "conjunction",
+          "orb": 3.27
+        },
+        {
+          "a": "chiron",
+          "b": "moon",
+          "aspect": "sextile",
+          "orb": 2.16
+        },
+        {
+          "a": "chiron",
+          "b": "venus",
+          "aspect": "sextile",
+          "orb": 0.65
+        },
+        {
+          "a": "chiron",
+          "b": "mars",
+          "aspect": "opposition",
+          "orb": 3.2
+        },
+        {
+          "a": "chiron",
+          "b": "pluto",
+          "aspect": "trine",
+          "orb": 3.34
+        },
+        {
+          "a": "mean_node",
+          "b": "moon",
+          "aspect": "square",
+          "orb": 3.45
+        },
+        {
+          "a": "mean_node",
+          "b": "pluto",
+          "aspect": "square",
+          "orb": 2.27
+        }
       ],
       "a_planets_in_b_houses": {
         "sun": 6,
@@ -1242,19 +1943,84 @@
         180
       ],
       "aspects": [
-        "sun conjunction mercury (5.76°)",
-        "sun sextile jupiter (3.28°)",
-        "sun conjunction saturn (7.41°)",
-        "sun opposition chiron (3.01°)",
-        "moon trine venus (5.57°)",
-        "moon square mars (0.02°)",
-        "mercury conjunction venus (6.08°)",
-        "mercury conjunction saturn (1.66°)",
-        "venus conjunction saturn (4.42°)",
-        "jupiter square pluto (6.39°)",
-        "jupiter trine chiron (0.27°)",
-        "uranus opposition chiron (5.53°)",
-        "neptune sextile pluto (3.56°)"
+        {
+          "a": "sun",
+          "b": "mercury",
+          "aspect": "conjunction",
+          "orb": 5.76
+        },
+        {
+          "a": "sun",
+          "b": "jupiter",
+          "aspect": "sextile",
+          "orb": 3.28
+        },
+        {
+          "a": "sun",
+          "b": "saturn",
+          "aspect": "conjunction",
+          "orb": 7.41
+        },
+        {
+          "a": "sun",
+          "b": "chiron",
+          "aspect": "opposition",
+          "orb": 3.01
+        },
+        {
+          "a": "moon",
+          "b": "venus",
+          "aspect": "trine",
+          "orb": 5.57
+        },
+        {
+          "a": "moon",
+          "b": "mars",
+          "aspect": "square",
+          "orb": 0.02
+        },
+        {
+          "a": "mercury",
+          "b": "venus",
+          "aspect": "conjunction",
+          "orb": 6.08
+        },
+        {
+          "a": "mercury",
+          "b": "saturn",
+          "aspect": "conjunction",
+          "orb": 1.66
+        },
+        {
+          "a": "venus",
+          "b": "saturn",
+          "aspect": "conjunction",
+          "orb": 4.42
+        },
+        {
+          "a": "jupiter",
+          "b": "pluto",
+          "aspect": "square",
+          "orb": 6.39
+        },
+        {
+          "a": "jupiter",
+          "b": "chiron",
+          "aspect": "trine",
+          "orb": 0.27
+        },
+        {
+          "a": "uranus",
+          "b": "chiron",
+          "aspect": "opposition",
+          "orb": 5.53
+        },
+        {
+          "a": "neptune",
+          "b": "pluto",
+          "aspect": "sextile",
+          "orb": 3.56
+        }
       ]
     }
   },
@@ -1375,20 +2141,90 @@
         167.15
       ],
       "aspects": [
-        "sun trine moon (2.88°)",
-        "sun trine neptune (6.27°)",
-        "moon square mars (6.56°)",
-        "moon conjunction neptune (3.4°)",
-        "mercury sextile uranus (4°)",
-        "mercury trine neptune (5.53°)",
-        "mercury opposition chiron (3.32°)",
-        "venus opposition jupiter (5.92°)",
-        "venus square uranus (6.75°)",
-        "mars conjunction saturn (1.11°)",
-        "mars square neptune (3.16°)",
-        "jupiter sextile pluto (2.49°)",
-        "saturn square neptune (4.27°)",
-        "uranus sextile neptune (1.53°)"
+        {
+          "a": "sun",
+          "b": "moon",
+          "aspect": "trine",
+          "orb": 2.88
+        },
+        {
+          "a": "sun",
+          "b": "neptune",
+          "aspect": "trine",
+          "orb": 6.27
+        },
+        {
+          "a": "moon",
+          "b": "mars",
+          "aspect": "square",
+          "orb": 6.56
+        },
+        {
+          "a": "moon",
+          "b": "neptune",
+          "aspect": "conjunction",
+          "orb": 3.4
+        },
+        {
+          "a": "mercury",
+          "b": "uranus",
+          "aspect": "sextile",
+          "orb": 4
+        },
+        {
+          "a": "mercury",
+          "b": "neptune",
+          "aspect": "trine",
+          "orb": 5.53
+        },
+        {
+          "a": "mercury",
+          "b": "chiron",
+          "aspect": "opposition",
+          "orb": 3.32
+        },
+        {
+          "a": "venus",
+          "b": "jupiter",
+          "aspect": "opposition",
+          "orb": 5.92
+        },
+        {
+          "a": "venus",
+          "b": "uranus",
+          "aspect": "square",
+          "orb": 6.75
+        },
+        {
+          "a": "mars",
+          "b": "saturn",
+          "aspect": "conjunction",
+          "orb": 1.11
+        },
+        {
+          "a": "mars",
+          "b": "neptune",
+          "aspect": "square",
+          "orb": 3.16
+        },
+        {
+          "a": "jupiter",
+          "b": "pluto",
+          "aspect": "sextile",
+          "orb": 2.49
+        },
+        {
+          "a": "saturn",
+          "b": "neptune",
+          "aspect": "square",
+          "orb": 4.27
+        },
+        {
+          "a": "uranus",
+          "b": "neptune",
+          "aspect": "sextile",
+          "orb": 1.53
+        }
       ]
     }
   },
@@ -1507,27 +2343,132 @@
         266.41
       ],
       "aspects": [
-        "sun conjunction venus (6.84°)",
-        "sun opposition saturn (0.53°)",
-        "sun trine uranus (4.89°)",
-        "sun trine neptune (1.06°)",
-        "moon trine venus (4.1°)",
-        "moon opposition jupiter (5.5°)",
-        "moon trine uranus (6.06°)",
-        "moon opposition pluto (4.56°)",
-        "moon trine chiron (1.98°)",
-        "mercury square neptune (5.18°)",
-        "venus opposition saturn (7.37°)",
-        "venus trine uranus (1.96°)",
-        "venus trine neptune (5.79°)",
-        "venus sextile pluto (0.46°)",
-        "venus conjunction chiron (2.13°)",
-        "saturn sextile neptune (1.58°)",
-        "saturn trine pluto (6.91°)",
-        "uranus conjunction neptune (3.83°)",
-        "uranus sextile pluto (1.49°)",
-        "uranus trine chiron (4.08°)",
-        "pluto sextile chiron (2.59°)"
+        {
+          "a": "sun",
+          "b": "venus",
+          "aspect": "conjunction",
+          "orb": 6.84
+        },
+        {
+          "a": "sun",
+          "b": "saturn",
+          "aspect": "opposition",
+          "orb": 0.53
+        },
+        {
+          "a": "sun",
+          "b": "uranus",
+          "aspect": "trine",
+          "orb": 4.89
+        },
+        {
+          "a": "sun",
+          "b": "neptune",
+          "aspect": "trine",
+          "orb": 1.06
+        },
+        {
+          "a": "moon",
+          "b": "venus",
+          "aspect": "trine",
+          "orb": 4.1
+        },
+        {
+          "a": "moon",
+          "b": "jupiter",
+          "aspect": "opposition",
+          "orb": 5.5
+        },
+        {
+          "a": "moon",
+          "b": "uranus",
+          "aspect": "trine",
+          "orb": 6.06
+        },
+        {
+          "a": "moon",
+          "b": "pluto",
+          "aspect": "opposition",
+          "orb": 4.56
+        },
+        {
+          "a": "moon",
+          "b": "chiron",
+          "aspect": "trine",
+          "orb": 1.98
+        },
+        {
+          "a": "mercury",
+          "b": "neptune",
+          "aspect": "square",
+          "orb": 5.18
+        },
+        {
+          "a": "venus",
+          "b": "saturn",
+          "aspect": "opposition",
+          "orb": 7.37
+        },
+        {
+          "a": "venus",
+          "b": "uranus",
+          "aspect": "trine",
+          "orb": 1.96
+        },
+        {
+          "a": "venus",
+          "b": "neptune",
+          "aspect": "trine",
+          "orb": 5.79
+        },
+        {
+          "a": "venus",
+          "b": "pluto",
+          "aspect": "sextile",
+          "orb": 0.46
+        },
+        {
+          "a": "venus",
+          "b": "chiron",
+          "aspect": "conjunction",
+          "orb": 2.13
+        },
+        {
+          "a": "saturn",
+          "b": "neptune",
+          "aspect": "sextile",
+          "orb": 1.58
+        },
+        {
+          "a": "saturn",
+          "b": "pluto",
+          "aspect": "trine",
+          "orb": 6.91
+        },
+        {
+          "a": "uranus",
+          "b": "neptune",
+          "aspect": "conjunction",
+          "orb": 3.83
+        },
+        {
+          "a": "uranus",
+          "b": "pluto",
+          "aspect": "sextile",
+          "orb": 1.49
+        },
+        {
+          "a": "uranus",
+          "b": "chiron",
+          "aspect": "trine",
+          "orb": 4.08
+        },
+        {
+          "a": "pluto",
+          "b": "chiron",
+          "aspect": "sextile",
+          "orb": 2.59
+        }
       ]
     }
   },
@@ -1646,24 +2587,114 @@
         60
       ],
       "aspects": [
-        "sun sextile moon (3.78°)",
-        "sun conjunction mercury (6.11°)",
-        "sun trine mars (0.89°)",
-        "sun opposition saturn (1.39°)",
-        "sun conjunction uranus (3.23°)",
-        "sun square pluto (5.34°)",
-        "moon trine saturn (5.17°)",
-        "moon sextile uranus (0.55°)",
-        "moon square neptune (1.17°)",
-        "moon square chiron (2.15°)",
-        "mercury trine mars (5.23°)",
-        "mercury opposition saturn (4.72°)",
-        "mercury square pluto (0.77°)",
-        "mars sextile saturn (0.5°)",
-        "mars trine uranus (4.12°)",
-        "saturn opposition uranus (4.62°)",
-        "saturn square pluto (3.95°)",
-        "neptune conjunction chiron (0.99°)"
+        {
+          "a": "sun",
+          "b": "moon",
+          "aspect": "sextile",
+          "orb": 3.78
+        },
+        {
+          "a": "sun",
+          "b": "mercury",
+          "aspect": "conjunction",
+          "orb": 6.11
+        },
+        {
+          "a": "sun",
+          "b": "mars",
+          "aspect": "trine",
+          "orb": 0.89
+        },
+        {
+          "a": "sun",
+          "b": "saturn",
+          "aspect": "opposition",
+          "orb": 1.39
+        },
+        {
+          "a": "sun",
+          "b": "uranus",
+          "aspect": "conjunction",
+          "orb": 3.23
+        },
+        {
+          "a": "sun",
+          "b": "pluto",
+          "aspect": "square",
+          "orb": 5.34
+        },
+        {
+          "a": "moon",
+          "b": "saturn",
+          "aspect": "trine",
+          "orb": 5.17
+        },
+        {
+          "a": "moon",
+          "b": "uranus",
+          "aspect": "sextile",
+          "orb": 0.55
+        },
+        {
+          "a": "moon",
+          "b": "neptune",
+          "aspect": "square",
+          "orb": 1.17
+        },
+        {
+          "a": "moon",
+          "b": "chiron",
+          "aspect": "square",
+          "orb": 2.15
+        },
+        {
+          "a": "mercury",
+          "b": "mars",
+          "aspect": "trine",
+          "orb": 5.23
+        },
+        {
+          "a": "mercury",
+          "b": "saturn",
+          "aspect": "opposition",
+          "orb": 4.72
+        },
+        {
+          "a": "mercury",
+          "b": "pluto",
+          "aspect": "square",
+          "orb": 0.77
+        },
+        {
+          "a": "mars",
+          "b": "saturn",
+          "aspect": "sextile",
+          "orb": 0.5
+        },
+        {
+          "a": "mars",
+          "b": "uranus",
+          "aspect": "trine",
+          "orb": 4.12
+        },
+        {
+          "a": "saturn",
+          "b": "uranus",
+          "aspect": "opposition",
+          "orb": 4.62
+        },
+        {
+          "a": "saturn",
+          "b": "pluto",
+          "aspect": "square",
+          "orb": 3.95
+        },
+        {
+          "a": "neptune",
+          "b": "chiron",
+          "aspect": "conjunction",
+          "orb": 0.99
+        }
       ]
     }
   },
