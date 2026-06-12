@@ -69,3 +69,5 @@ Lilith
 Uranian
 semver
 Citra
+Mallama
+Saemundsson
