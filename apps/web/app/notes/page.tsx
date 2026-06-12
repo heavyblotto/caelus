@@ -1,7 +1,7 @@
 import { A, H2, P, Code, Nav } from "../../components/Prose";
 
 export const metadata = {
-  title: "caelus — Build Notes",
+  title: "Caelus — Build Notes",
   description: "Postmortems: ΔT extrapolation, node frame error, Chiron light-time double-count, aspect-search geometry.",
 };
 
@@ -30,7 +30,7 @@ export default function Notes() {
         textbook curve is already ~6 s high today and runs ~90 s high by 2080.
         The Moon moves 0.55″ per second of ΔT error, so a faithful
         implementation of the old formula misses the Moon by tens of arcseconds
-        within a lifetime. caelus interpolates IERS observations through 2025,
+        within a lifetime. Caelus interpolates IERS observations through 2025,
         continues the observed near-flat trend, and rejoins the slow tidal
         rise decades out: an 80-year ΔT forecast carries roughly{" "}
         <A href="https://www.ucolick.org/~sla/leapsecs/year2100.html">
