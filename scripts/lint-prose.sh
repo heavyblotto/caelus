@@ -20,7 +20,7 @@ node scripts/extract-web-prose.mjs
 vale .web-prose-extract.md || FAIL=1
 
 echo ""
-echo "→ Vale on packages/caelus/README.md"
-vale packages/caelus/README.md || FAIL=1
+echo "→ Vale on package READMEs"
+vale packages/caelus/README.md packages/birth/README.md || FAIL=1
 
 exit "$FAIL"
