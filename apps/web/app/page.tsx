@@ -22,13 +22,13 @@ export default function Home() {
       <p style={{ opacity: 0.7 }}>
         The core engine is ~85 KB gzipped, has zero dependencies, and runs
         anywhere JavaScript runs, under MIT. Per-body accuracy against Swiss
-        Ephemeris: <A href="/validation">validation</A> ·{" "}
-        <A href="/provenance">sources</A>.
+        Ephemeris: <A href="/validation">Validation</A> ·{" "}
+        <A href="/provenance">Sources</A>.
       </p>
       <TryIt />
       <SkyNow />
 
-      <H2>what this is</H2>
+      <H2>What This Is</H2>
       <P>
         caelus computes apparent geocentric positions for the Sun, Moon, eight
         planets, Pluto, Chiron, and both lunar nodes, with speeds, retrograde
@@ -44,7 +44,7 @@ export default function Home() {
         <Code>caelus-mcp</Code> exposes six chart tools to AI agents over MCP.
       </P>
 
-      <H2>why it exists</H2>
+      <H2>Why It Exists</H2>
       <P>
         Most astrology software computes positions with{" "}
         <A href="https://www.astro.com/swisseph/swephinfo_e.htm">Swiss Ephemeris</A>,
@@ -64,21 +64,21 @@ export default function Home() {
         <A href="https://www.npmjs.com/package/astronomia">astronomia</A> has
         sub-arcsecond planets and no astrology layer. caelus is written from
         the published record and covers the chart core at chart precision.
-        Engine-by-engine comparison: <A href="/provenance">sources</A>.
+        Engine-by-engine comparison: <A href="/provenance">Sources</A>.
       </P>
 
-      <H2>how it is checked</H2>
+      <H2>How It Is Checked</H2>
       <P>
         Two stages, both in CI. The Python reference is compared to Swiss
         Ephemeris 2.10 at hundreds of random instants across 1900–2099:
         planets ≤1″, precise-tier Moon ≤2.5″, angles and Placidus cusps ≤3.2″.
         The TypeScript engine must match the reference across 1,438 golden
         fixtures; worst recorded deviation 1.6 nano-arcseconds. Per-body
-        deltas: <A href="/validation">validation</A>. Bugs the suite caught:{" "}
-        <A href="/notes">build notes</A>.
+        deltas: <A href="/validation">Validation</A>. Bugs the suite caught:{" "}
+        <A href="/notes">Build Notes</A>.
       </P>
 
-      <H2>what ships</H2>
+      <H2>What Ships</H2>
       <P>
         <Code>caelus</Code>: the engine, ~85 KB gzipped embedded tier; a 729 KB
         precise-Moon tier (1920–2080) lazy-loads on demand.{" "}
@@ -93,7 +93,7 @@ export default function Home() {
         <a style={a} href="https://www.npmjs.com/package/caelus">npm install caelus</a>
         <a style={a} href="https://github.com/heavyblotto/caelus">GitHub</a>
         <a style={a} href="/api/chart?lat=27.94&lon=-82.46">REST API</a>
-        <a style={a} href="https://www.npmjs.com/package/caelus-mcp">MCP server</a>
+        <a style={a} href="https://www.npmjs.com/package/caelus-mcp">MCP Server</a>
       </p>
     </main>
   );
