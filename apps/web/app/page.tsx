@@ -8,8 +8,8 @@ export default function Home() {
       <Nav current="/" />
       <h1 style={{ letterSpacing: "0.05em" }}>caelus</h1>
       <p style={{ opacity: 0.7 }}>
-        ~85 KB ephemeris in the browser. Positions from published theories, checked to
-        ~1″ vs Swiss Ephemeris (<A href="/validation">tables</A>,{" "}
+        ~85 KB ephemeris in the browser. Positions from published theories, checked
+        body-by-body against Swiss Ephemeris (<A href="/validation">tables</A>,{" "}
         <A href="/provenance">sources</A>). MIT.
       </p>
       <SkyNow />
