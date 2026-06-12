@@ -3,6 +3,10 @@
 React SVG chart wheel for [caelus](https://github.com/heavyblotto/caelus).
 SSR-safe, zero runtime dependencies (react is a peer), ~3.4 KB gzipped.
 
+```bash
+npm install caelus-wheel
+```
+
 ```tsx
 import { ChartWheel } from "caelus-wheel";
 
@@ -45,3 +49,10 @@ counterclockwise.
 - Pure render: no hooks, no client-only APIs — works in server components,
   static export, and `renderToStaticMarkup` (the test suite renders real
   engine charts exactly that way).
+
+## The caelus packages
+
+- [caelus](https://www.npmjs.com/package/caelus) — the engine
+- [caelus-birth](https://www.npmjs.com/package/caelus-birth) — local birth time + place → UT
+- caelus-wheel — this package
+- [caelus-mcp](https://www.npmjs.com/package/caelus-mcp) — MCP server, six chart tools over stdio

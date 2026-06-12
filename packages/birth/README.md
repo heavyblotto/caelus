@@ -27,6 +27,10 @@ and (here) the Moon by 2°.
 
 ## Usage
 
+```bash
+npm install caelus-birth
+```
+
 ```ts
 import { toUT, localToChart } from "caelus-birth";
 
@@ -84,3 +88,10 @@ service.
 Coordinates → zone is offline (`tz-lookup`, ~70 KB embedded map, CC0).
 Zone → offset uses the runtime's Intl tzdb (Luxon, MIT). This package has
 runtime dependencies by design; caelus core stays at zero.
+
+## The caelus packages
+
+- [caelus](https://www.npmjs.com/package/caelus) — the engine
+- caelus-birth — this package
+- [caelus-wheel](https://www.npmjs.com/package/caelus-wheel) — React SVG chart wheel
+- [caelus-mcp](https://www.npmjs.com/package/caelus-mcp) — MCP server, six chart tools over stdio
