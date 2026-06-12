@@ -1,0 +1,26 @@
+{
+  "name": "@caelus/birth",
+  "version": "0.1.0",
+  "description": "Local birth time + place -> UT, correctly. IANA timezone resolution for caelus charts: DST, half-hour zones, ambiguous and nonexistent times.",
+  "type": "module",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "files": ["dist"],
+  "scripts": { "build": "tsc", "test": "node dist/test/golden.test.js" },
+  "license": "MIT",
+  "dependencies": {
+    "caelus": "*",
+    "luxon": "^3.7.2",
+    "tz-lookup": "^6.1.25"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.7.1",
+    "@types/node": "^25.9.2",
+    "typescript": "^6.0.3"
+  },
+  "exports": {
+    ".": { "types": "./dist/src/index.d.ts", "default": "./dist/src/index.js" },
+    "./geocode": { "types": "./dist/src/geocode.d.ts", "default": "./dist/src/geocode.js" },
+    "./package.json": "./package.json"
+  }
+}
