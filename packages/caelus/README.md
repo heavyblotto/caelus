@@ -10,7 +10,7 @@ ephemeris files. 1:1 port of the Python reference, checked by golden fixtures.
    (vs full DE431 files, 1850–2149), angles and Placidus cusps ≤ 3.2″ — all
    invisible at the arcminute display precision chart software uses.
 2. TypeScript port verified against Python golden fixtures: **1,438 checks,
-   0 failures, worst deviation 1.6 nano-arcseconds.** The two implementations
+   0 failures, worst deviation 0.82 nano-arcseconds.** The two implementations
    are numerically identical.
 
 Regenerate fixtures any time from the Python side; any future TS change must

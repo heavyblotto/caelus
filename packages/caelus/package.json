@@ -8,6 +8,7 @@
   "files": [
     "dist/src",
     "dist/data",
+    "accuracy.json",
     "data/vsop87d_*.embedded.json",
     "data/nutation_iau1980.json",
     "data/moon_meeus47.json",
@@ -37,6 +38,7 @@
       "types": "./dist/src/node-loader.d.ts",
       "default": "./dist/src/node-loader.js"
     },
+    "./accuracy.json": "./accuracy.json",
     "./package.json": "./package.json"
   },
   "repository": {

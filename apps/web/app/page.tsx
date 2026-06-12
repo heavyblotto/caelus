@@ -73,7 +73,7 @@ export default function Home() {
         Ephemeris 2.10 at hundreds of random instants across 1900–2099:
         planets ≤1″, precise-tier Moon ≤2.5″, angles and Placidus cusps ≤3.2″.
         The TypeScript engine must match the reference across 1,438 golden
-        fixtures; worst recorded deviation 1.6 nano-arcseconds. Per-body
+        fixtures; worst recorded deviation 0.82 nano-arcseconds. Per-body
         deltas: <A href="/validation">Validation</A>. Bugs the suite caught:{" "}
         <A href="/notes">Build Notes</A>.
       </P>

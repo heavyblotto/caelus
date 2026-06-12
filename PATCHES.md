@@ -153,3 +153,92 @@ dev unified them, with disagreements resolved by measurement.
 - Doc drift: check counts 1,437 → 1,438; Python reference located in
   `python/`; Chiron re-fit marked done. Chiron Horizons cache commit
   handed off (`docs/handoff-chiron-cache.md`) pending network access.
+
+# Claim drift fixes — 2026-06-12
+
+## 1 Worst-diff figure was stale (1.6 → 0.82 nano-arcseconds)
+- The golden suite now reports worst diff `mars.speed@2478640.52 =
+  8.19e-10″` (0.82 nano-arcsec), not the 1.6 nano-arcsec the prose
+  carried. The ΔT-model merge above regenerated goldens and shifted the
+  worst case; the prose figure was never updated.
+- Corrected in `packages/caelus/README.md`, `apps/web/app/page.tsx`,
+  `apps/web/app/validation/page.tsx`, `apps/web/app/notes/page.tsx`,
+  and both `llms.txt` copies (root + `apps/web/public`).
+
+## 2 MCP per-body accuracy reconciled with the validation table
+- `server.ts` natal_chart description and `MCP_SPEC.md` claimed
+  "planets ≤3″, Moon ≤0.5″ (1920–2080)". Both conflicted with the
+  canonical `validation/page.tsx` BODY_TABLE (Neptune 4.6″, precise Moon
+  2.5″). Reconciled to the measured 1900–2099 table: Sun–Saturn ≤1″,
+  Uranus ≤1.9″, Neptune ≤4.6″, Moon ≤2.5″, Pluto ≤2.5″ (series valid
+  1885–2099), Chiron ≤1″, nodes ≤1″. The same stale per-body figures in
+  both `llms.txt` copies were corrected to match.
+
+## 3 ci.yml no longer hard-codes the check count
+- The conformance-job comment stated "1,438 golden checks"; dropped the
+  count so the comment can't rot.
+
+# Workstream 1: claims-as-data regression gate — 2026-06-12
+
+Closes the "numbers live only in transient console output" gap (the root
+cause of the 1.6-nano drift above). Zero new dependencies.
+
+## 1 Suites emit a machine-readable stats artifact
+- `packages/caelus/test/golden.test.ts`: when `CAELUS_STATS_OUT` is set,
+  writes `{suite, checks, failures, worst:{what,deg,arcsec,nano_arcsec},
+  bodies, fixtures, generatedAt}`. Human stdout unchanged.
+- `packages/caelus-mcp/verify_tools.mjs`: same flag, emits
+  `{suite:"mcp", checks, failures, generatedAt}`.
+
+## 2 One canonical per-body accuracy table
+- `packages/caelus/accuracy.json` (new, exported via the package's
+  `exports` map) is now the single source for per-body bounds. The three
+  formerly-divergent tables collapse onto it: `validation/page.tsx`
+  renders `accuracy.bodies`, `SkyNow.tsx` renders `accuracy.summary`.
+  The SkyNow Uranus/Neptune bucket (was "≤2″/≤5″") now matches the
+  measured "≤1.9″/≤4.6″".
+
+## 3 Claims registry + linter, wired into CI
+- `scripts/claims-registry.json`: maps each prose token (golden check
+  count, worst-diff nano figure in both render forms) to a stats field,
+  its render strings, the files it must appear in, and a competing-value
+  regex. PATCHES.md is intentionally excluded — it records superseded
+  values on purpose.
+- `scripts/check-claims.mjs`: regenerates/loads `conformance-stats.json`,
+  asserts each claim's value is present in every listed file and that no
+  competing value of the same shape appears. Exits non-zero with a
+  file:line report. Mutation-tested: flipping any registered number fails.
+- `package.json`: `lint:claims` script. `ci.yml` conformance job now
+  emits stats from the golden run and runs `lint:claims` after the build.
+- `conformance-stats.json` is gitignored (regenerated, never committed).
+
+# Workstream 3: MCP integration suite + lat/lon guard — 2026-06-12
+
+## 1 Server now range-checks lat/lon (real bug)
+- `current_sky` and `rectification_grid` took `z.number()` for lat/lon
+  with no bounds, so `current_sky lat:999` silently *computed* a chart at
+  an impossible latitude (the web API route already rejected this). Both
+  now reuse the shared `latSchema`/`lonSchema` ([-90,90]/[-180,180] with
+  the east-positive describe text). Out-of-range input returns isError at
+  the MCP boundary. Verified: lat:999, lon:400, grid lat:200 all rejected;
+  valid coords still compute.
+
+## 2 Exported output schemas
+- `server.ts` now exports zod output schemas (`chartOut`, `transitsOut`,
+  `synastryOut`, `findAspectDatesOut`, `rectificationGridOut`) and an
+  `OUTPUT_SCHEMAS` map, so server and test share one definition of each
+  tool's response shape.
+
+## 3 Committed MCP golden payloads + integration suite
+- `scripts/export-mcp-golden.mjs` mints `packages/caelus-mcp/test/
+  golden-mcp.json` (11 canonical cases: one per tool plus polar, historical
+  1855, southern, equator, body-to-body). Regenerate deliberately, review
+  the diff.
+- `packages/caelus-mcp/integration.test.mjs` (41 checks): validates every
+  response against the exported output schema, deep-equals canonical inputs
+  against the frozen goldens (catches payload-FORMAT drift verify_tools
+  can't see), and exercises an edge-case matrix (polar fallback, historical,
+  southern/equator, default-time paths) plus an invalid-input matrix
+  (out-of-range lat/lon, bad ISO, >50yr range, missing target → isError).
+  Emits stats to CAELUS_STATS_OUT. Wired into the conformance job after
+  verify_tools. Mutation-tested: corrupting a golden fails exactly its case.

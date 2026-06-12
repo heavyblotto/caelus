@@ -4,7 +4,7 @@
  * tolerances are tiny -- any real porting bug violates them by orders of
  * magnitude.
  */
-import { readFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
@@ -143,4 +143,29 @@ for (const g of G.houses) {
 
 console.log(`\n${checks} checks, ${failures} failures`);
 console.log(`worst diff: ${worst.what} = ${(worst.diff * 3600).toExponential(2)}" (${worst.diff.toExponential(2)} deg)`);
+
+if (process.env.CAELUS_STATS_OUT) {
+  const arcsec = worst.diff * 3600;
+  writeFileSync(process.env.CAELUS_STATS_OUT, JSON.stringify({
+    suite: "golden",
+    checks,
+    failures,
+    worst: {
+      what: worst.what,
+      deg: worst.diff,
+      arcsec,
+      nano_arcsec: arcsec * 1e9,
+    },
+    bodies: BODIES.length,
+    fixtures: {
+      delta_t: G.delta_t.length,
+      nutation: G.nutation.length,
+      longitudes: G.longitudes.length,
+      positions: G.positions.length,
+      houses: G.houses.length,
+    },
+    generatedAt: new Date().toISOString(),
+  }, null, 2) + "\n");
+}
+
 process.exit(failures ? 1 : 0);

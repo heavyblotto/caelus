@@ -1,0 +1,44 @@
+{
+  "_doc": "Each claim ties a number/string that appears in prose to a generated source of truth. check-claims.mjs verifies the rendered value is present in every listed file and that no competing value of the same shape appears. Sources: 'stats' = conformance-stats.json (golden suite), 'accuracy' = packages/caelus/accuracy.json. PATCHES.md is intentionally excluded everywhere: it is a historical changelog that records superseded values on purpose.",
+  "claims": [
+    {
+      "id": "golden-check-count",
+      "source": "stats.checks",
+      "render": ["1,438", "1438"],
+      "competing": "\\b1,4\\d\\d\\b(?=[^\\n]{0,40}(golden|check|fixture))",
+      "appearsIn": [
+        "ARCHITECTURE.md",
+        "apps/web/app/notes/page.tsx",
+        "apps/web/app/page.tsx",
+        "apps/web/app/validation/page.tsx",
+        "apps/web/public/llms.txt",
+        "llms.txt",
+        "packages/caelus/README.md"
+      ]
+    },
+    {
+      "id": "worst-diff-nano-prose",
+      "source": "stats.worst.nano_arcsec",
+      "round": 2,
+      "render": ["{value} nano-arcsecond"],
+      "competing": "(\\d+\\.\\d+)\\s*nano-arcsecond",
+      "appearsIn": [
+        "packages/caelus/README.md",
+        "apps/web/app/page.tsx",
+        "apps/web/app/validation/page.tsx",
+        "apps/web/app/notes/page.tsx"
+      ]
+    },
+    {
+      "id": "worst-diff-nano-llms",
+      "source": "stats.worst.nano_arcsec",
+      "round": 2,
+      "render": ["{value}e-9 arcsec"],
+      "competing": "(\\d+\\.\\d+)e-9 arcsec",
+      "appearsIn": [
+        "apps/web/public/llms.txt",
+        "llms.txt"
+      ]
+    }
+  ]
+}
