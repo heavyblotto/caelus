@@ -67,3 +67,4 @@ deps
 synastry
 Lilith
 Uranian
+semver
