@@ -1,10 +1,11 @@
 import SkyNow from "../components/SkyNow";
+import TryIt from "../components/TryIt";
 import { A, H2, P, Code, Nav } from "../components/Prose";
 
 export const metadata = {
-  title: "caelus — sub-arcsecond ephemeris in ~85 KB of TypeScript",
+  title: "caelus — the ephemeris is now just code",
   description:
-    "MIT astrological ephemeris: planets, Moon, Chiron, nodes, houses, aspects. No ephemeris files. Browser, edge, Node, MCP.",
+    "MIT astrological ephemeris in ~85 KB of TypeScript: planets, Moon, Chiron, nodes, houses, aspects. No AGPL, no license fees, no ephemeris files. Browser, edge, Node, MCP.",
 };
 
 export default function Home() {
@@ -13,11 +14,18 @@ export default function Home() {
     <main>
       <Nav current="/" />
       <h1 style={{ letterSpacing: "0.05em" }}>caelus</h1>
-      <p style={{ opacity: 0.7 }}>
-        Sub-arcsecond astrological ephemeris in ~85 KB of TypeScript. MIT, zero
-        dependencies, no ephemeris files (<A href="/validation">tables</A>,{" "}
-        <A href="/provenance">sources</A>).
+      <p style={{ fontSize: "1.1rem", opacity: 0.92, lineHeight: 1.55 }}>
+        The ephemeris is now just code.
+        <br />
+        No AGPL. No license fees. No ephemeris files.
       </p>
+      <p style={{ opacity: 0.7 }}>
+        The core engine is ~85 KB gzipped, has zero dependencies, and runs
+        anywhere JavaScript runs, under MIT. Per-body accuracy against Swiss
+        Ephemeris: <A href="/validation">validation</A> ·{" "}
+        <A href="/provenance">sources</A>.
+      </p>
+      <TryIt />
       <SkyNow />
 
       <H2>what this is</H2>
@@ -32,7 +40,7 @@ export default function Home() {
       <P>
         The engine takes injected data and does no I/O, so one codebase serves
         three runtimes: this page (charts compute client-side in ~2 ms), the
-        edge API behind <Code>GET /api/chart</Code>, and Node, where{" "}
+        demo endpoint <Code>GET /api/chart</Code>, and Node, where{" "}
         <Code>caelus-mcp</Code> exposes six chart tools to AI agents over MCP.
       </P>
 
@@ -75,8 +83,10 @@ export default function Home() {
         <Code>caelus</Code>: the engine, ~85 KB gzipped embedded tier; a 729 KB
         precise-Moon tier (1920–2080) lazy-loads on demand.{" "}
         <Code>caelus-mcp</Code>: natal_chart, current_sky, transits, synastry,
-        find_aspect_dates, rectification_grid over stdio.{" "}
-        <Code>GET /api/chart</Code>: the same engine on the edge runtime.
+        find_aspect_dates, rectification_grid over stdio. LLMs interpolate
+        planetary positions from training data; the MCP tools let them compute
+        instead. <Code>GET /api/chart</Code>: the same engine on the edge
+        runtime, as a demo, not hosted infrastructure.
       </P>
 
       <p style={{ marginTop: "2rem", display: "flex", gap: "1.2rem", flexWrap: "wrap" }}>
