@@ -17,3 +17,13 @@ jobs:
       - run: npm run build -w caelus-mcp
       - run: node packages/caelus-mcp/smoke.mjs
       - run: npm run build -w web
+
+  prose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: errata-ai/vale-action@v2
+        with:
+          files: docs/
+          version: "3.13.0"
+        continue-on-error: true

@@ -24,6 +24,7 @@ extracted/
 # python fitting caches (raw Horizons samples; fitted JSON is committed)
 python/chiron_horizons_cache.json
 python/__pycache__/
+.web-prose-extract.md
 python/astroengine/__pycache__/
 
 # logs

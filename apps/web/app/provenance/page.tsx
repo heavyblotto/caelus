@@ -2,7 +2,7 @@ import { A, H2, P, Nav } from "../../components/Prose";
 
 export const metadata = {
   title: "caelus — provenance",
-  description: "Coefficients from public sources. Swiss Ephemeris is a test oracle, not a source.",
+        description: "Coefficients from published sources. Swiss Ephemeris is a test oracle only.",
 };
 
 export default function Provenance() {
@@ -11,19 +11,15 @@ export default function Provenance() {
   return (
     <main>
       <Nav current="/provenance" />
-      <h1 style={{ letterSpacing: "0.05em" }}>clean room</h1>
+      <h1 style={{ letterSpacing: "0.05em" }}>sources</h1>
       <P>
-        For twenty-five years, almost every piece of astrology software has sat
-        on one foundation: the Swiss Ephemeris. It is excellent, and it is
-        AGPL — use it in anything network-accessible and your codebase must be
-        open-sourced under AGPL too, unless you license commercially. Most
-        &ldquo;independent&rdquo; astrology APIs are wrappers around it,
-        inheriting that obligation.
+        Most astrology stacks call Swiss Ephemeris. It is accurate and AGPL: network
+        use generally requires open-sourcing your code unless you buy a commercial
+        license. Many &ldquo;independent&rdquo; APIs are thin wrappers.
       </P>
       <P>
-        caelus is not a wrapper, a port, or a translation. It was written from
-        the published scientific record, and every coefficient it ships traces
-        to a public source:
+        caelus is written from the published record. Coefficients trace to public
+        literature or public-domain ephemerides:
       </P>
       <table style={{ fontSize: "0.85em", lineHeight: 1.6, borderSpacing: 0 }}>
         <tbody>
@@ -38,29 +34,23 @@ export default function Provenance() {
           <tr><td style={td}>Houses</td><td style={td}>Spherical trigonometry from first principles</td><td style={dim}>semi-arc definitions, closed-form angles</td></tr>
         </tbody>
       </table>
-      <H2>the role Swiss Ephemeris does play</H2>
+      <H2>Swiss Ephemeris as oracle</H2>
       <P>
-        Test oracle. During development, every caelus position was compared
-        against Swiss Ephemeris across two centuries of random instants — as a
-        referee, never as a source. No Swiss Ephemeris code, data file, or
-        derived coefficient ships in this package. The one temporary exception
-        (an early Chiron fit sampled from its asteroid file while offline) was
-        replaced by a direct JPL Horizons fit before release. The two
-        integrations agree to 0.85″ worst-case across 1900–2099.
+        During development, caelus positions were compared to Swiss Ephemeris 2.10
+        at random instants across 1900–2099. No Swiss Ephemeris code or coefficient
+        ships here. An early Chiron fit sampled its asteroid file offline; release
+        uses JPL Horizons instead. The two Chiron integrations agree to 0.85″
+        worst-case across 1900–2099.
       </P>
-      <H2>MIT license</H2>
+      <H2>License</H2>
       <P>
-        MIT license, full stop. Ship caelus in closed-source products, SaaS,
-        mobile apps, browser bundles, edge functions. No AGPL contagion, no
-        commercial license to mail to Zurich, no ephemeris files to deploy.
-        The engine plus its planetary data is ~85 KB gzipped and runs
-        anywhere JavaScript runs — the same code in the browser, at the edge,
-        and behind the <A href="https://www.npmjs.com/package/caelus-mcp">MCP server</A>.
+        MIT. Ship in closed source, SaaS, mobile, or edge bundles without AGPL
+        obligations or ephemeris file deployment. Engine plus embedded data is ~85 KB
+        gzipped; same code in browser, edge API, and the{" "}
+        <A href="https://www.npmjs.com/package/caelus-mcp">MCP server</A>.
       </P>
       <P dim>
-        The coefficients are published scientific facts. The MIT license
-        covers caelus&rsquo;s implementation, tests, and packaging.{" "}
-        <A href="/validation">How we know it&rsquo;s right →</A>
+        <A href="/validation">Validation tables →</A>
       </P>
     </main>
   );

@@ -1,5 +1,5 @@
 import SkyNow from "../components/SkyNow";
-import { Nav } from "../components/Prose";
+import { A, Nav } from "../components/Prose";
 
 export default function Home() {
   const a = { color: "#8a7fd4" };
@@ -8,10 +8,9 @@ export default function Home() {
       <Nav current="/" />
       <h1 style={{ letterSpacing: "0.05em" }}>caelus</h1>
       <p style={{ opacity: 0.7 }}>
-        ~85 KB ephemeris, computed <em>in your browser</em>. No API call, no
-        ephemeris files, no AGPL — <a href="/provenance" style={{ color: "#8a7fd4" }}>clean-room</a> from
-        the published record, <a href="/validation" style={{ color: "#8a7fd4" }}>checked</a> to ~1″ vs
-        Swiss Ephemeris. MIT.
+        ~85 KB ephemeris in the browser. Positions from published theories, checked to
+        ~1″ vs Swiss Ephemeris (<A href="/validation">tables</A>,{" "}
+        <A href="/provenance">sources</A>). MIT.
       </p>
       <SkyNow />
       <p style={{ marginTop: "2rem", display: "flex", gap: "1.2rem", flexWrap: "wrap" }}>
