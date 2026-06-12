@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Engine, BODIES, fmtLon, mod, type Chart, type HouseSystem } from "caelus";
 import { embeddedData } from "caelus/data-embedded";
+import { ChartWheel } from "@caelus/wheel";
 
 const SYSTEMS: HouseSystem[] = ["placidus", "whole_sign", "equal", "porphyry"];
 const ACCURACY: Array<[string, string]> = [
@@ -77,6 +78,9 @@ export default function SkyNow() {
             {(["positions", "aspects", "json"] as const).map((t) => (
               <button key={t} type="button" style={tabBtn(t)} onClick={() => setTab(t)}>{t}</button>
             ))}
+          </div>
+          <div style={{ maxWidth: 460, margin: "0.8rem 0" }}>
+            <ChartWheel chart={chart} size={460} />
           </div>
           {tab === "positions" && (
             <table style={{ borderSpacing: "0.8rem 0.15rem" }}>

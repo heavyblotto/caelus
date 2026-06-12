@@ -21,6 +21,6 @@ vale .web-prose-extract.md || FAIL=1
 
 echo ""
 echo "→ Vale on package READMEs"
-vale packages/caelus/README.md packages/birth/README.md || FAIL=1
+vale packages/caelus/README.md packages/birth/README.md packages/wheel/README.md || FAIL=1
 
 exit "$FAIL"
