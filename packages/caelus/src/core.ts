@@ -33,6 +33,9 @@ export interface EngineData {
   pluto: number[][];
   chiron?: ChebData;
   moonCheb?: ChebData;
+  /** Heliocentric ecliptic-J2000 Chebyshev packs by body id (ceres,
+   *  pallas, juno, vesta, pholus, ...). Same pipeline as Chiron. */
+  chebPacks?: Record<string, ChebData>;
 }
 
 // ---------------------------------------------------------------- timescale

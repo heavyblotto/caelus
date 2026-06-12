@@ -37,6 +37,12 @@ export function loadNodeData(
   };
   const chironPath = join(dir, "chiron_cheb.json");
   if (existsSync(chironPath)) data.chiron = j("chiron_cheb.json");
+  // asteroid packs (Horizons fits): loaded when present, ~380 KB total
+  for (const b of ["ceres", "pallas", "juno", "vesta", "pholus"]) {
+    if (existsSync(join(dir, `${b}_cheb.json`))) {
+      (data.chebPacks ??= {})[b] = j(`${b}_cheb.json`);
+    }
+  }
   if (moonTier !== "none") {
     // The npm package ships only the embedded tier (1920-2080); the full
     // tier (1850-2150, 3.1 MB, same precision) lives in the repo. Fall back

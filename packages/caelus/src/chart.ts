@@ -108,10 +108,23 @@ export class Engine {
   private moonCheb: ChebSeries | null;
   private chironCheb: ChebSeries | null;
 
+  private packs = new Map<string, ChebSeries>();
+
   constructor(data: EngineData) {
     this.data = data;
     this.moonCheb = data.moonCheb ? new ChebSeries(data.moonCheb) : null;
     this.chironCheb = data.chiron ? new ChebSeries(data.chiron) : null;
+  }
+
+  private pack(body: string): ChebSeries {
+    let s = this.packs.get(body);
+    if (!s) {
+      const raw = this.data.chebPacks?.[body];
+      if (!raw) throw new Error(`no data loaded for body '${body}'`);
+      s = new ChebSeries(raw);
+      this.packs.set(body, s);
+    }
+    return s;
   }
 
   private moonInRange(jde: number): boolean {
@@ -121,9 +134,10 @@ export class Engine {
 
   /** Body ids this engine can compute, given the data it was handed. */
   bodies(): BodyId[] {
-    return [...BODIES, ...EXTRA_BODIES].filter(
-      (b) => b !== "chiron" || this.chironCheb,
-    );
+    return [
+      ...[...BODIES, ...EXTRA_BODIES].filter((b) => b !== "chiron" || this.chironCheb),
+      ...Object.keys(this.data.chebPacks ?? {}),
+    ];
   }
 
   /** Apparent geocentric [lon rad, lat rad, dist AU | null] at TT jde.
@@ -160,6 +174,10 @@ export class Engine {
         ? oscApogeePrecise(this.data, this.moonCheb!, jde)
         : oscApogeeSeries(this.data, jde);
       return [lon, lat, km / KM_PER_AU];
+    }
+    if (this.data.chebPacks?.[body]) {
+      // same heliocentric-Chebyshev pipeline as Chiron
+      return chironApparent(this.data, this.pack(body), jde);
     }
     if (this.data.vsop[body]) return planetApparent(this.data, body, jde);
     throw new Error(`no data loaded for body '${body}'`);
@@ -204,6 +222,12 @@ export class Engine {
     } else if (body === "chiron") {
       if (!this.chironCheb) throw new Error("chiron data not loaded");
       const [x, y, z] = this.chironCheb.xyz(jde);
+      r = Math.sqrt(x * x + y * y + z * z);
+      l = mod(Math.atan2(y, x), TWO_PI);
+      b = Math.atan2(z, Math.hypot(x, y));
+      [l, b] = precessEcliptic(l, b, J2000, jde);
+    } else if (this.data.chebPacks?.[body]) {
+      const [x, y, z] = this.pack(body).xyz(jde);
       r = Math.sqrt(x * x + y * y + z * z);
       l = mod(Math.atan2(y, x), TWO_PI);
       b = Math.atan2(z, Math.hypot(x, y));

@@ -50,6 +50,9 @@ function renderValue(claim, raw) {
   if (typeof claim.round === "number" && typeof v === "number") {
     v = Number(v.toFixed(claim.round));
   }
+  if (claim.format === "thousands" && typeof v === "number") {
+    return v.toLocaleString("en-US");
+  }
   return v;
 }
 
