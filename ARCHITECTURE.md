@@ -1,7 +1,9 @@
 # caelus / ephemengine.com / mymagus — Architecture v0.1
 
 ## Naming & registries (verified available 2026-06-10)
-- npm: `caelus` (engine), `caelus-mcp` (server), scope `@caelus` — all free.
+- npm: `caelus` (engine), `caelus-mcp` (server), `caelus-birth`,
+  `caelus-wheel` — all unscoped (the `@caelus` scope turned out to be
+  claimed/reserved on npm, discovered at org creation 2026-06-12).
 - PyPI: `caelus` is taken (a CFD toolkit); use `caelus-engine` for the
   Python reference implementation & data-fitting toolchain.
 - Domains: ephemengine.com (developer/engine property), mymagus.com
