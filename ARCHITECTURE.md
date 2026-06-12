@@ -12,7 +12,10 @@
 caelus/
   packages/caelus        TS engine (MIT). Zero deps, zero I/O in core.
   packages/caelus-mcp    MCP server: stdio bin + exportable buildServer()
+  packages/birth         local birth time + place -> UT (tz-lookup + Luxon)
+  packages/wheel         React SVG chart wheel, zero runtime deps
   apps/web               Next.js 15 — seed for both properties
+  templates/starter      source for the caelus-starter repo (post-publish)
   MCP_SPEC.md            tool contract + rationale
   ARCHITECTURE.md        this file
 ```
