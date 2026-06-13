@@ -53,11 +53,6 @@ port, suite-pinned.
 - **Turbo tier** — Chebyshev packs fit to the engine's own output for fast
   bulk evaluation (century-scale scans).
 
-### Engine depth
-- **Moon DE441 refit** — parked: the current pack already meets the ~0.2″
-  apparent-place floor vs JPL; a refit needs the `fit_moon.py` time-tagging
-  bug resolved before it's worth shipping (see that file's header).
-
 ### Distribution & packaging
 - **`caelus-starter`** — create the standalone public repo from
   `templates/starter/`.
