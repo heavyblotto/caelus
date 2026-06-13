@@ -14,7 +14,7 @@ same code runs in the browser, on edge runtimes, and in Node/MCP.
 
 The deliverables are the engine and the tools around it: `caelus` (engine),
 `caelus-mcp` (MCP server), `caelus-birth`, `caelus-wheel`, and the
-`ephemengine.com` site (playground, validation, provenance).
+`ephemengine.com` site (landing, playground, docs, validation, provenance).
 
 ## Principles (what holds across releases)
 
@@ -31,21 +31,22 @@ The deliverables are the engine and the tools around it: `caelus` (engine),
 
 ## Status
 
-Shipped through **0.5.0** (npm: all four packages; GitHub releases
-v0.1.0–v0.5.0): full body set, 12 house systems, tropical + 8 sidereal
+Shipped through **0.6.0** (npm: all four packages; GitHub releases
+v0.1.0–v0.6.0): full body set, 12 house systems, tropical + 8 sidereal
 ayanamsas, aspects, event search (rise/set, crossings, phases, stations,
 Gauquelin), solar/lunar eclipses, fixed stars, topocentric, Vondrák 2011
-precession; 3,218-check conformance suite; MCP server (stdio) with golden
-payloads; JPL-direct validation tier.
+precession; the `when()` query engine (declarative time queries over celestial
+predicates, Python reference + TS port, suite-pinned); 3,218-check conformance
+suite; MCP server (stdio) with golden payloads; JPL-direct validation tier.
 
-**In progress (on `dev`, unreleased):** the `when()` query engine:
-declarative time queries over celestial predicates (Python reference + TS
-port, suite-pinned).
+The `ephemengine.com` site ships its full shape: landing page, browser
+playground, validation and provenance tables, build notes, a docs hub with
+guides, a generated TypeScript API reference, a changelog page, persistent
+header and footer, and SEO (sitemap, OpenGraph).
 
 ## Planned
 
 ### Engine breadth
-- **Query engine `when()`**: finish shipping (promote, cut release).
 - **Derived charts**: returns, secondary progressions, solar arc, composite
   and Davison charts, harmonics, antiscia, declination aspects (parallels),
   out-of-bounds, dignities/sect. Thin layers on existing primitives;
@@ -58,20 +59,12 @@ port, suite-pinned).
 - **MCP Streamable HTTP**: mount the server at `ephemengine.com/api/mcp`
   (stdio already ships).
 - **MCP resources/prompts**: `caelus://glossary`, `caelus://accuracy`.
+- **Site links**: surface `caelus-starter` in the footer now that it is a
+  standalone repo; add PyPI and MCP Streamable HTTP to the nav and footer as
+  they ship.
 
 ### Validation & docs
 - **Methods write-up**: the empirical-recovery notes (what the engine
   reproduces and how it was checked).
 - **Community health**: `CONTRIBUTING.md` (suite-is-the-contract),
   `CODE_OF_CONDUCT.md`, `SECURITY.md`.
-- **Site (`ephemengine.com`)**: a docs hub with guides and a generated
-  TypeScript API reference, a changelog page, persistent header/footer, and
-  SEO (sitemap, OpenGraph). `caelus-starter`, PyPI, and MCP Streamable HTTP
-  surface in the nav and footer as they ship.
-
-## Out of scope for this repo
-
-This repository is the open engine and its tooling only. Product/business
-planning, monetization, and any consumer-application or knowledge-base work
-are tracked privately, elsewhere; they do not belong in a public engine
-repo.
