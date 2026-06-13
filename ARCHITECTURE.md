@@ -1,16 +1,17 @@
 # caelus / ephemengine.com / mymagus — Architecture v0.1
 
-## Status (2026-06-12)
+## Status (2026-06-13)
 - `caelus`, `caelus-mcp`, `caelus-birth`, `caelus-wheel` published to npm
-  with provenance; latest **0.4.0** (Tier 2: event search, asteroids,
-  Uranian bodies, true Lilith; seven MCP tools).
+  with provenance; latest **0.5.0** (gap-analysis Tiers 1–3 complete:
+  fixed stars, star-anchored ayanamsas, Gauquelin sectors, eclipse search;
+  seven MCP tools).
 - ephemengine.com live on Vercel: playground (twelve house systems),
   /validation, /provenance, edge `/api/chart`, `/llms.txt`.
 - Conformance suite: **3,218 checks** green; per-body figures in
   `packages/caelus/accuracy.json`.
-- v0.3 shipped Tier 1 (sidereal, twelve house systems, pheno, frames).
-  v0.4 ships Tier 2 partial — see `docs/gap-analysis.md`. Tier 3
-  (eclipses) and fixed stars remain on the roadmap.
+- Swiss Ephemeris gap analysis (`docs/gap-analysis.md`) is **closed** at
+  0.5.0. Remaining documented gaps: eclipse ground paths / local
+  circumstances, interpolated Lilith, JPL-grade precision.
 
 ## Naming & registries (verified available 2026-06-10)
 - npm: `caelus` (engine), `caelus-mcp` (server), `caelus-birth`,
@@ -65,7 +66,7 @@ code serves:
 - Golden fixtures are the agent guardrail: delegate ports/refactors/new
   features to coding agents with "suite must stay green" as the acceptance
   test. This already worked once (the TS port).
-- New bodies (Ceres, Pallas, Juno, Vesta, Lilith) are agent-sized tasks:
+- New bodies (Ceres, Pallas, Juno, Vesta, fixed stars) are agent-sized tasks:
   run fit pipeline → add body enum → regenerate fixtures → green.
 - Keep PORTING-NOTES (mod() semantics, summation order) in-repo; they are
   written for agents as much as humans.
@@ -110,14 +111,15 @@ research data nobody else has.
 ## Next build steps (suggested order)
 1. ~~v0.3 = gap-analysis Tier 1~~ (shipped 0.3.0).
 2. caelus-starter repo from `templates/starter` (needs the empty GitHub
-   repo created); GitHub release notes for 0.1.0–0.4.0.
+   repo created); GitHub release notes for 0.1.0–0.5.0.
 3. Streamable HTTP mount of buildServer() at ephemengine.com/api/mcp.
 4. Repo citizenship: CONTRIBUTING.md (suite-is-contract rule first),
    move the Python reference under `reference/`.
-5. ~~v0.4 = gap-analysis Tier 2 partial~~ (shipped 0.4.0: asteroids,
-   Uranians, true Lilith, rise/set/crossings/phases/stations via
-   `sky_events`). Remaining Tier 2: fixed stars, Gauquelin sectors.
-6. v0.5 = gap-analysis Tier 3: eclipses and lunar occultations.
+5. ~~v0.4 = gap-analysis Tier 2~~ (shipped 0.4.0–0.5.0: asteroids,
+   Uranians, true Lilith, rise/set/crossings/phases/stations, fixed stars,
+   star-anchored ayanamsas, Gauquelin sectors via `sky_events`).
+6. ~~v0.5 = gap-analysis Tier 3~~ (shipped 0.5.0: global solar/lunar
+   eclipse search; ground paths remain open).
 7. KG ingestion pipeline for the scanned corpus + predicate schema.
 8. mymagus.com app: natal onboarding → daily transits → journaling loop →
    rectification flow.
