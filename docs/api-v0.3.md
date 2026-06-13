@@ -5,12 +5,12 @@ the options object and the open body registry. This doc proposes exact
 signatures. Everything here is additive; 0.3.0 ships with zero breaking
 changes to the 0.2.0 surface.
 
-**Status: implemented.** The suite holds 3,177 conformance checks; the new
+**Status: implemented.** The suite holds 3,201 conformance checks; the new
 features measure against Swiss Ephemeris in `python/validate_swiss.py`.
 One scope change from the proposal: v0.3 ships five fixed-epoch ayanamsas
 (`lahiri`, `fagan_bradley`, `krishnamurti`, `raman`, `yukteshwar`). The two
-star-anchored modes (galactic center 0° Sag, true Citra) need real fixed-star
-positions and move to Tier 2 with the star catalog.
+star-anchored modes (`galcent_0sag`, `true_citra`) shipped with the
+fixed-star catalog in Tier 2.
 
 ## 1. Options object
 

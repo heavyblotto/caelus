@@ -12,7 +12,7 @@ import {
 } from "../src/core.js";
 import { Engine, BODIES, Body } from "../src/chart.js";
 import { pheno, equationOfTime } from "../src/pheno.js";
-import { riseSet, crossings, lunarPhases, stations } from "../src/events.js";
+import { riseSet, crossings, lunarPhases, stations, gauquelinSector } from "../src/events.js";
 import * as H from "../src/houses.js";
 import { loadNodeData } from "../src/node-loader.js";
 
@@ -239,6 +239,23 @@ for (const g of G.houses) {
   expectAngleDeg("ev.true_lilith.lon", lil.lon, g.true_lilith.lon, TOL);
   expect("ev.true_lilith.lat", lil.lat, g.true_lilith.lat, TOL);
   expect("ev.true_lilith.dist", lil.dist!, g.true_lilith.dist, 1e-9);
+  for (const [n, want] of Object.entries(g.stars) as Array<[string, any]>) {
+    const st = eng.fixedStar(n, jd0);
+    expectAngleDeg(`star.${n}.lon`, st.lon, want.lon, TOL);
+    expect(`star.${n}.lat`, st.lat, want.lat, TOL);
+    expectAngleDeg(`star.${n}.ra`, st.ra, want.ra, TOL);
+    expect(`star.${n}.dec`, st.dec, want.dec, TOL);
+  }
+  expectAngleDeg("star.sid.galcent.sun",
+    eng.longitude("sun", jd0, { zodiac: "sidereal:galcent_0sag" }),
+    g.star_sidereal.galcent_0sag_sun, TOL);
+  expectAngleDeg("star.sid.citra.spica",
+    eng.fixedStar("Spica", jd0, { zodiac: "sidereal:true_citra" }).lon,
+    g.star_sidereal.true_citra_spica, TOL);
+  expect("gauquelin.sun", gauquelinSector(eng, "sun", jd0 + 0.3, 27.95, -82.46)!,
+    g.gauquelin.sun_tampa, 1e-6);
+  expect("gauquelin.moon", gauquelinSector(eng, "moon", jd0 + 0.6, -33.87, 151.21)!,
+    g.gauquelin.moon_sydney, 1e-6);
   for (const [b, want] of Object.entries({ ...g.asteroids, ...g.uranians }) as Array<[string, any]>) {
     const p = eng.position(b, jd0);
     expectAngleDeg(`ast.${b}.lon`, p.lon, want.lon, TOL);

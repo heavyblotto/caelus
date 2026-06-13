@@ -40,6 +40,9 @@ export function loadNodeData(
   if (existsSync(join(dir, "uranian_kepler.json"))) {
     data.keplerPack = j("uranian_kepler.json");
   }
+  if (existsSync(join(dir, "fixed_stars.json"))) {
+    data.fixedStars = j("fixed_stars.json");
+  }
   // asteroid packs (Horizons fits): loaded when present, ~380 KB total
   for (const b of ["ceres", "pallas", "juno", "vesta", "pholus"]) {
     if (existsSync(join(dir, `${b}_cheb.json`))) {

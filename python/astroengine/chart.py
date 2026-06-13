@@ -42,13 +42,20 @@ HOUSE_FNS = {
 HOUSE_SYSTEMS = list(HOUSE_FNS.keys())
 
 
+# Star-anchored ayanamsas: the named star sits at the fixed sidereal
+# longitude by definition (Galactic Center at 0 Sagittarius; Spica at
+# 0 Libra "citra").
+STAR_AYANAMSAS = {"galcent_0sag": ("Galactic Center", 240.0),
+                  "true_citra": ("Spica", 180.0)}
+
+
 def _parse_zodiac(zodiac):
     """'tropical' or 'sidereal:<ayanamsa>' -> ayanamsa mode or None."""
     if zodiac == "tropical":
         return None
     if zodiac.startswith("sidereal:"):
         mode = zodiac[len("sidereal:"):]
-        if mode in core.AYANAMSA_J2000:
+        if mode in core.AYANAMSA_J2000 or mode in STAR_AYANAMSAS:
             return mode
     raise ValueError(f"unknown zodiac {zodiac!r}")
 
@@ -108,6 +115,33 @@ class Engine:
             return core.smallbody_apparent(self.vsop, self._pack(body), jde)
         return planet_apparent(self.vsop, body, jde)
 
+    def _ayan_shift(self, jde, mode):
+        """Degrees to subtract from a true-equinox tropical longitude."""
+        if mode in STAR_AYANAMSAS:
+            name, anchor = STAR_AYANAMSAS[mode]
+            from . import stars as ST
+            lon, _ = ST.star_apparent(self.vsop, ST.catalog()["stars"][name], jde)
+            return (lon / DEG - anchor) % 360
+        return (nutation(jde)[0] / DEG + ayanamsa(jde, mode)) % 360
+
+    def fixed_star(self, name, jd_ut, zodiac="tropical"):
+        """Apparent place of a catalog star: lon/lat/ra/dec (deg), sign, mag."""
+        from . import stars as ST
+        s = ST.catalog()["stars"][name]
+        mode = _parse_zodiac(zodiac)
+        jde = jd_tt(jd_ut)
+        lon_r, lat_r = ST.star_apparent(self.vsop, s, jde)
+        ra, dec = equatorial(lon_r, lat_r, true_obliquity(jde))
+        lon = lon_r / DEG
+        if mode is not None:
+            lon = (lon - self._ayan_shift(jde, mode)) % 360
+        return {"lon": lon, "lat": lat_r / DEG, "ra": ra / DEG, "dec": dec / DEG,
+                "mag": s["mag"], "sign": SIGNS[int(lon // 30)], "sign_deg": lon % 30}
+
+    def stars(self):
+        from . import stars as ST
+        return sorted(ST.catalog()["stars"])
+
     def _lon_only(self, body, jd_ut, mode, topo):
         jde = jd_tt(jd_ut)
         lon, lat, dist = self._ecliptic(body, jde)
@@ -118,7 +152,7 @@ class Engine:
                                              true_obliquity(jde))
         lon_deg = lon / DEG
         if mode is not None:
-            lon_deg = (lon_deg - nutation(jde)[0] / DEG - ayanamsa(jde, mode)) % 360
+            lon_deg = (lon_deg - self._ayan_shift(jde, mode)) % 360
         return lon_deg
 
     def longitude(self, body, jd_ut, zodiac="tropical", topocentric=False, observer=None):
@@ -168,7 +202,7 @@ class Engine:
         ra, dec = equatorial(lon_r, lat_r, true_obliquity(jde))
         lon = lon_r / DEG
         if mode is not None:
-            lon = (lon - nutation(jde)[0] / DEG - ayanamsa(jde, mode)) % 360
+            lon = (lon - self._ayan_shift(jde, mode)) % 360
         h = 0.25  # days; central difference
         l0 = self._lon_only(body, jd_ut - h, mode, topo)
         l1 = self._lon_only(body, jd_ut + h, mode, topo)
@@ -214,7 +248,7 @@ class Engine:
         jde = jd_tt(jd_ut)
         shift = 0.0
         if mode is not None:
-            shift = nutation(jde)[0] / DEG + ayanamsa(jde, mode)
+            shift = self._ayan_shift(jde, mode)
 
         def out_deg(rad):
             return (rad / DEG - shift) % 360

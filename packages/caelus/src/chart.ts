@@ -8,6 +8,7 @@ import {
   trueObliquity, nutation, plutoHeliocentric, vsopHeliocentric, precessEcliptic,
   J2000,
 } from "./core.js";
+import { starApparent } from "./stars.js";
 import * as H from "./houses.js";
 
 const TWO_PI = 2 * Math.PI;
@@ -94,10 +95,18 @@ function parseZodiac(zodiac: Zodiac): string | null {
   if (zodiac === "tropical") return null;
   if (zodiac.startsWith("sidereal:")) {
     const mode = zodiac.slice("sidereal:".length);
-    if (AYANAMSA_J2000[mode] !== undefined) return mode;
+    if (AYANAMSA_J2000[mode] !== undefined || STAR_AYANAMSAS[mode]) return mode;
   }
   throw new Error(`unknown zodiac ${JSON.stringify(zodiac)}`);
 }
+
+/** Star-anchored ayanamsas: the named star sits at the fixed sidereal
+ *  longitude by definition (Galactic Center at 0 Sagittarius; Spica at
+ *  0 Libra "citra"). Need the fixed-star catalog loaded. */
+const STAR_AYANAMSAS: Record<string, [string, number]> = {
+  galcent_0sag: ["Galactic Center", 240.0],
+  true_citra: ["Spica", 180.0],
+};
 
 const VSOP_BODIES = new Set([
   "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune",
@@ -186,6 +195,42 @@ export class Engine {
     throw new Error(`no data loaded for body '${body}'`);
   }
 
+  /** Degrees to subtract from a true-equinox tropical longitude. */
+  private ayanShift(jde: number, mode: string): number {
+    const star = STAR_AYANAMSAS[mode];
+    if (star) {
+      const s = this.data.fixedStars?.stars[star[0]];
+      if (!s) throw new Error(`zodiac 'sidereal:${mode}' needs the fixed-star catalog loaded`);
+      const [lon] = starApparent(this.data, s, jde);
+      return mod(lon / DEG - star[1], 360);
+    }
+    return mod(nutation(this.data, jde)[0] / DEG + ayanamsa(jde, mode), 360);
+  }
+
+  /** Apparent place of a catalog star: lon/lat/ra/dec (deg), sign, mag. */
+  fixedStar(name: string, jdUt: number, opts: CalcOptions = {}): {
+    lon: number; lat: number; ra: number; dec: number; mag: number;
+    sign: string; signDeg: number;
+  } {
+    const s = this.data.fixedStars?.stars[name];
+    if (!s) throw new Error(`no fixed-star catalog entry for '${name}'`);
+    const mode = parseZodiac(opts.zodiac ?? "tropical");
+    const jde = jdTT(jdUt);
+    const [lonR, latR] = starApparent(this.data, s, jde);
+    const [ra, dec] = equatorial(lonR, latR, trueObliquity(this.data, jde));
+    let lon = lonR / DEG;
+    if (mode !== null) lon = mod(lon - this.ayanShift(jde, mode), 360);
+    return {
+      lon, lat: latR / DEG, ra: ra / DEG, dec: dec / DEG, mag: s.mag,
+      sign: SIGNS[Math.floor(lon / 30)], signDeg: mod(lon, 30),
+    };
+  }
+
+  /** Names in the loaded fixed-star catalog (sorted). */
+  starNames(): string[] {
+    return Object.keys(this.data.fixedStars?.stars ?? {}).sort();
+  }
+
   private lonOnly(
     body: BodyId, jdUt: number, mode: string | null, topo: Observer | null,
   ): number {
@@ -199,11 +244,7 @@ export class Engine {
       );
     }
     let lonDeg = lon / DEG;
-    if (mode !== null) {
-      lonDeg = mod(
-        lonDeg - nutation(this.data, jde)[0] / DEG - ayanamsa(jde, mode), 360,
-      );
-    }
+    if (mode !== null) lonDeg = mod(lonDeg - this.ayanShift(jde, mode), 360);
     return lonDeg;
   }
 
@@ -258,9 +299,7 @@ export class Engine {
     }
     const [ra, dec] = equatorial(lonR, latR, trueObliquity(this.data, jde));
     let lon = lonR / DEG;
-    if (mode !== null) {
-      lon = mod(lon - nutation(this.data, jde)[0] / DEG - ayanamsa(jde, mode), 360);
-    }
+    if (mode !== null) lon = mod(lon - this.ayanShift(jde, mode), 360);
     const h = 0.25; // days; central difference
     const l0 = this.lonOnly(body, jdUt - h, mode, topo);
     const l1 = this.lonOnly(body, jdUt + h, mode, topo);
@@ -337,9 +376,7 @@ export class Engine {
     }
     const jde = jdTT(jdUt);
     let shift = 0.0;
-    if (mode !== null) {
-      shift = nutation(this.data, jde)[0] / DEG + ayanamsa(jde, mode);
-    }
+    if (mode !== null) shift = this.ayanShift(jde, mode);
     const outDeg = (rad: number): number => mod(rad / DEG - shift, 360);
     let cuspsDeg: number[];
     if (mode !== null && used === "whole_sign") {

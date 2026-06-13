@@ -49,7 +49,8 @@ def _bisect(f, a, b, iters=45):
 
 
 def rise_set(engine, body, jd_start, lat_deg, lon_deg, kind="rise",
-             alt_m=0.0, pressure=1013.25, temp_c=15.0, search_days=2.0):
+             alt_m=0.0, pressure=1013.25, temp_c=15.0, search_days=2.0,
+             disc_center=False):
     """Next rise/set/meridian transit (UT JD) after jd_start, or None when
     the event does not occur in the window (polar day/night). kind:
     rise | set | mtransit (upper culmination) | itransit (lower)."""
@@ -77,7 +78,7 @@ def rise_set(engine, body, jd_start, lat_deg, lon_deg, kind="rise",
         alt, _, dist = _topo_alt_ha(engine, body, t, lat_deg, lon_deg, alt_m)
         sd = 0.0
         diam = DIAMETER_KM.get(body)
-        if diam is not None and dist is not None:
+        if not disc_center and diam is not None and dist is not None:
             sd = math.asin(diam / (2 * dist * KM_PER_AU))
         h0 = -(R0_ARCMIN / 60.0 * scale * DEG + sd)
         return alt - h0
@@ -163,3 +164,30 @@ def stations(engine, body, jd_start, jd_end, max_hits=30):
         prev = cur
         t += step
     return out
+
+
+def gauquelin_sector(engine, body, jd_ut, lat_deg, lon_deg):
+    """Gauquelin sector (1..36, float) from rise/set times of the disc
+    center with refraction (Swiss Ephemeris method 3). Sectors run from
+    rise: 1-18 above the horizon, 19-36 below. None in polar
+    no-rise/no-set conditions."""
+    def surrounding(kind):
+        t = rise_set(engine, body, jd_ut - 1.3, lat_deg, lon_deg, kind=kind,
+                     disc_center=True)
+        prev = None
+        while t is not None and t <= jd_ut:
+            prev = t
+            t = rise_set(engine, body, t + 1e-4, lat_deg, lon_deg, kind=kind,
+                         disc_center=True)
+        return prev, t
+    prev_rise, next_rise = surrounding("rise")
+    prev_set, next_set = surrounding("set")
+    if prev_rise is None or prev_set is None:
+        return None
+    if prev_rise > prev_set:
+        if next_set is None:
+            return None
+        return 1 + 18 * (jd_ut - prev_rise) / (next_set - prev_rise)
+    if next_rise is None:
+        return None
+    return 19 + 18 * (jd_ut - prev_set) / (next_rise - prev_set)

@@ -28,6 +28,8 @@ export interface RiseSetOptions {
   pressure?: number;
   tempC?: number;
   searchDays?: number;
+  /** Rise/set of the disc center instead of the upper limb. */
+  discCenter?: boolean;
 }
 
 function topoAltHa(
@@ -99,7 +101,7 @@ export function riseSet(
     const [alt, , dist] = topoAltHa(engine, body, t, latDeg, lonDeg, altM);
     let sd = 0.0;
     const diam = DIAMETER_KM[body];
-    if (diam !== undefined && dist !== null) {
+    if (!opts.discCenter && diam !== undefined && dist !== null) {
       sd = Math.asin(diam / (2 * dist * KM_PER_AU));
     }
     const h0 = -((R0_ARCMIN / 60.0) * scale * DEG + sd);
@@ -193,4 +195,34 @@ export function stations(
     prev = cur;
   }
   return out;
+}
+
+/** Gauquelin sector (1..36, float) from rise/set times of the disc center
+ *  with refraction (Swiss Ephemeris method 3). Sectors run from rise: 1-18
+ *  above the horizon, 19-36 below. Null in polar no-rise/no-set
+ *  conditions. */
+export function gauquelinSector(
+  engine: Engine, body: BodyId, jdUt: number, latDeg: number, lonDeg: number,
+): number | null {
+  const surrounding = (kind: RiseKind): [number | null, number | null] => {
+    let t = riseSet(engine, body, jdUt - 1.3, latDeg, lonDeg, kind,
+      { discCenter: true });
+    let prev: number | null = null;
+    while (t !== null && t <= jdUt) {
+      prev = t;
+      t = riseSet(engine, body, t + 1e-4, latDeg, lonDeg, kind,
+        { discCenter: true });
+    }
+    return [prev, t];
+  };
+  const [prevRise] = surrounding("rise");
+  const [prevSet, nextSetA] = surrounding("set");
+  if (prevRise === null || prevSet === null) return null;
+  if (prevRise > prevSet) {
+    if (nextSetA === null) return null;
+    return 1 + (18 * (jdUt - prevRise)) / (nextSetA - prevRise);
+  }
+  const [, nextRise] = surrounding("rise");
+  if (nextRise === null) return null;
+  return 19 + (18 * (jdUt - prevSet)) / (nextRise - prevSet);
 }

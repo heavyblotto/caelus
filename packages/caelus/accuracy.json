@@ -176,6 +176,24 @@
       "max": "2.3",
       "rms": "—",
       "note": "Hamburg-school constant-element Kepler orbits, elements fitted to SE 2.10's built-in definitions (fit_uranian.py prints per-body figures; Zeus is fit-noise-limited at ~3″ heliocentric). Uranian practice works in arcminutes"
+    },
+    {
+      "name": "Fixed stars (318-star catalog)",
+      "max": "0.6",
+      "rms": "—",
+      "note": "HYG-derived catalog (ICRS J2000 + proper motions, full 3D space motion); vs swe_fixstar fed the same rows. Floor is the IAU 1976 vs Vondrák precession difference"
+    },
+    {
+      "name": "Star-anchored ayanamsas",
+      "max": "0.2",
+      "rms": "—",
+      "note": "galcent_0sag and true_citra computed from the apparent star (Galactic Center / Spica); sidereal Sun vs SE ≤0.19″"
+    },
+    {
+      "name": "Gauquelin sectors",
+      "max": "0.0001 sectors",
+      "rms": "—",
+      "note": "rise/set of disc center with refraction (SE method 3): exact to the rise/set bound"
     }
   ],
   "summary": [
@@ -212,10 +230,6 @@
       "bound": "≤ 1.3″"
     },
     {
-      "label": "Sidereal (5 ayanamsas)",
-      "bound": "≤ 0.3″ added"
-    },
-    {
       "label": "8 new house systems",
       "bound": "exact (0.0″)"
     },
@@ -234,6 +248,14 @@
     {
       "label": "Uranian bodies",
       "bound": "≤ 2.3″"
+    },
+    {
+      "label": "Fixed stars",
+      "bound": "≤ 0.6″"
+    },
+    {
+      "label": "Sidereal (7 ayanamsas)",
+      "bound": "≤ 0.3″ added"
     }
   ],
   "v03_harness": "python/validate_swiss.py regenerates every figure above the line against pyswisseph 2.10 (Moshier mode)",
