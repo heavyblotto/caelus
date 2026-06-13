@@ -35,7 +35,13 @@ jobs:
       # chart wheel: SSR render of real charts + collision-fan unit checks
       - run: npm run build -w caelus-wheel
       - run: node packages/wheel/dist/test/render.test.js
+      # generate the API reference markdown before building so the
+      # /docs/api pages have content to prerender (mirrors vercel-build).
+      - run: npm run docs:api
       - run: npm run build -w web
+      # crawl every built route + internal link on an ephemeral server: catches
+      # 500s, soft 404s, and dead in-site links that `next build` reports green.
+      - run: npm run smoke:web
       # llms.txt must track package versions and stay in sync with the site
       - run: node scripts/check-llms.mjs
       # prose numeric claims must match the generated stats + accuracy table
