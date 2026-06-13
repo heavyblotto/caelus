@@ -23,7 +23,7 @@ retrograde flags. ΔT from IERS 1955–2025 plus Espenak–Meeus polynomials.
 Placidus, Porphyry, Equal, and Whole Sign houses with an explicit polar
 fallback. Major aspects and transit search. Validated at ≤1″ vs Swiss
 Ephemeris 2.10 for Sun–Saturn and ≤2.5″ for the precise Moon tier;
-`accuracy.json` carries the per-body figures, and the suite holds 3,177
+`accuracy.json` carries the per-body figures, and the suite holds 3,201
 conformance checks.
 
 Swiss Ephemeris agrees with JPL to about 0.001″. Caelus does not chase
@@ -52,7 +52,7 @@ fixtures for each item.
 
 ## Tier 2: new data through the existing fit pipeline
 
-**Status (2026-06-12): partially shipped.** Done: true/osculating Lilith
+**Status (2026-06-13): complete.** Done: true/osculating Lilith
 (`true_lilith`; ≤3′ vs SE-Moshier — the quantity amplifies lunar-theory
 differences ~1/e, and SE's own Moshier-vs-DE spread dominates),
 rise/set/meridian transits (≤0.5 s), crossings as engine API (≤4 s),
@@ -63,8 +63,11 @@ we could verify against; revisit with a better source. Asteroids shipped 2026-06
 `pallas`, `juno`, `vesta`, `pholus` from locally-run Horizons fits
 (`python/fit_smallbody.py`), wired through the Chiron pipeline.
 Uranian bodies shipped 2026-06-12
-(`fit_uranian.py`: Kepler element pack, ≤2.3″ geocentric). Remaining:
-fixed stars, Gauquelin sectors.
+(`fit_uranian.py`: Kepler element pack, ≤2.3″ geocentric). Fixed stars
+shipped 2026-06-13 (318-star HYG catalog, ≤0.6″; unlocks the
+star-anchored ayanamsas `galcent_0sag` and `true_citra`) along with
+Gauquelin sectors (SE method 3, exact). Tier 2 is closed; Tier 3
+(eclipses) is next.
 
 The Chiron pattern (`python/fit_chiron.py`: JPL Horizons vectors →
 Chebyshev fit → ~10 KB JSON) generalizes to each of these.
@@ -128,8 +131,9 @@ recorded as non-goals:
 ## Sequencing
 
 1. ~~v0.3: Tier 1~~ (shipped 0.3.0).
-2. ~~v0.4: Tier 2 partial~~ (shipped 0.4.0: asteroids, Uranians, true
-   Lilith, event search). Fixed stars and Gauquelin sectors remain.
+2. ~~v0.4: Tier 2~~ (0.4.0 shipped asteroids, Uranians, true Lilith,
+   event search; fixed stars, star-anchored ayanamsas, and Gauquelin
+   sectors landed 2026-06-13 and close the tier).
 3. v0.5: Tier 3 (eclipses).
 
 Every item inherits the validation chain: Python reference first, golden

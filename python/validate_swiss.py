@@ -278,16 +278,73 @@ for jd in JDS[:60]:
     worst = max(worst, arc(p["lon"], ref[0]))
 report("true lilith (osc apogee)", worst, n=60)
 
+# ---- fixed stars (oracle fed our own catalog rows via a minted sefstars) --
+import tempfile
+from astroengine import stars as ST
+
+cat = ST.catalog()["stars"]
+STAR_TEST = ["Aldebaran", "Sirius", "Regulus", "Spica", "Algol", "Polaris",
+             "Antares", "Fomalhaut", "Betelgeuse", "Vega"]
+tmp = tempfile.mkdtemp()
+import os as _os
+with open(_os.path.join(tmp, "sefstars.txt"), "w") as f:
+    for n in STAR_TEST:
+        s = cat[n]
+        rah = s["ra"] / 15.0
+        hh = int(rah); mm = int((rah - hh) * 60); ss = ((rah - hh) * 60 - mm) * 60
+        dd = s["dec"]; sg = "+" if dd >= 0 else "-"
+        ad = abs(dd); D = int(ad); M = int((ad - D) * 60); S = ((ad - D) * 60 - M) * 60
+        f.write(f"{n:<20s},xx ,ICRS,{hh:02d},{mm:02d},{ss:09.6f},{sg}{D:02d},{M:02d},{S:08.5f},"
+                f"{s['pmra']},{s['pmdec']},{s['rv']},{s['plx']},{s['mag']},0.0\n")
+swe.set_ephe_path(tmp)
+worst = 0.0
+for n in STAR_TEST:
+    for y in (1900, 1950, 2000, 2050, 2099):
+        jde = jd_tt(julian_day(y, 6, 1))
+        lon, lat = ST.star_apparent(eng.vsop, cat[n], jde)
+        ref = swe.fixstar(n, jde, FLG)[0]
+        worst = max(worst, arc(lon / DEG, ref[0]), arc(lat / DEG, ref[1]))
+report("fixed stars (10 stars)", worst, n=50)
+
+for mode, sid in [("galcent_0sag", swe.SIDM_GALCENT_0SAG),
+                  ("true_citra", swe.SIDM_TRUE_CITRA)]:
+    swe.set_sid_mode(sid, 0, 0)
+    worst = 0.0
+    for jd in JDS[:40]:
+        jde = jd_tt(jd)
+        ours = eng.longitude("sun", jd, zodiac=f"sidereal:{mode}")
+        ref, _ = swe.calc(jde, swe.SUN, FLG | swe.FLG_SIDEREAL)
+        worst = max(worst, arc(ours, ref[0]))
+    report(f"sun sidereal ({mode})", worst, n=40)
+
+worst = 0.0
+ng = 0
+for body, sb in [("sun", swe.SUN), ("moon", swe.MOON), ("mars", swe.MARS)]:
+    for glon, glat in ((-82.46, 27.95), (151.21, -33.87)):
+        for k in range(3):
+            jd = julian_day(1980, 1, 1) + 1234.5 * (k + 1) + 17.3 * ng
+            g = EV.gauquelin_sector(eng, body, jd, glat, glon)
+            ref = swe.gauquelin_sector(jd, sb, 3, (glon, glat, 0.0), 1013.25, 15.0, FLG)
+            rv = ref[1] if isinstance(ref, tuple) else ref
+            if g is None:
+                continue
+            ng += 1
+            d = abs(g - rv)
+            worst = max(worst, min(d, 36 - d))
+report("gauquelin sectors", worst, unit=" sec.", n=ng)
+
 print()
 # az/alt and pheno phase angle carry ΔT-model and sun-moon-distance noise;
 # they get wider tolerances than positions.
 TOL = {"az/alt (mars)": 30.0, "pheno phase angle": 300.0,
        "pheno elongation": 10.0, "true lilith (osc apogee)": 200.0}
+TOL_SEC = {"gauquelin sectors": 0.001}
 TOL_S = {"sun rise/set/transit": 1.0, "moon rise/set/transit": 2.0,
          "mars rise/set/transit": 1.0, "crossings (sun+moon)": 10.0,
          "lunar phases": 10.0, "stations": 180.0}
 fails = [r for r in rows if (r[2] == '"' and r[1] > TOL.get(r[0], 5.0))
          or (r[2] == " s" and r[1] > TOL_S.get(r[0], 10.0))
+         or (r[2] == " sec." and r[1] > TOL_SEC.get(r[0], 0.001))
          or (r[2] == " mag" and r[1] > 0.1)
          or (r[2] == " min" and r[1] > 0.05)
          or (r[2] == " " and r[1] > 0.001)]

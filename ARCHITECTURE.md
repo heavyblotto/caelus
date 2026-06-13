@@ -6,7 +6,7 @@
   Uranian bodies, true Lilith; seven MCP tools).
 - ephemengine.com live on Vercel: playground (twelve house systems),
   /validation, /provenance, edge `/api/chart`, `/llms.txt`.
-- Conformance suite: **3,177 checks** green; per-body figures in
+- Conformance suite: **3,201 checks** green; per-body figures in
   `packages/caelus/accuracy.json`.
 - v0.3 shipped Tier 1 (sidereal, twelve house systems, pheno, frames).
   v0.4 ships Tier 2 partial — see `docs/gap-analysis.md`. Tier 3
@@ -51,7 +51,7 @@ code serves:
 
 ## Durability decisions
 - **Conformance suite as the spine.** Swiss Ephemeris validates Python;
-  Python golden fixtures (3,177 checks) validate TS; CI keeps both green.
+  Python golden fixtures (3,201 checks) validate TS; CI keeps both green.
   Accuracy regressions are structurally impossible to ship silently.
 - **Data as versioned artifacts.** The JSON coefficient files are build
   outputs of the Python pipeline with documented provenance (VSOP87,

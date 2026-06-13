@@ -243,6 +243,16 @@ def events_section(eng):
         "uranians": {b: eng.position(b, jd0)
                      for b in ("cupido", "hades", "zeus", "kronos",
                                "apollon", "admetos", "vulkanus", "poseidon")},
+        "stars": {n: eng.fixed_star(n, jd0)
+                  for n in ("Aldebaran", "Regulus", "Spica", "Sirius", "Algol")},
+        "star_sidereal": {
+            "galcent_0sag_sun": eng.longitude("sun", jd0, zodiac="sidereal:galcent_0sag"),
+            "true_citra_spica": eng.fixed_star("Spica", jd0, zodiac="sidereal:true_citra")["lon"],
+        },
+        "gauquelin": {
+            "sun_tampa": EV.gauquelin_sector(eng, "sun", jd0 + 0.3, 27.95, -82.46),
+            "moon_sydney": EV.gauquelin_sector(eng, "moon", jd0 + 0.6, -33.87, 151.21),
+        },
     }
 
 

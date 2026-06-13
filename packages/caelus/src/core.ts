@@ -46,6 +46,8 @@ export interface EngineData {
   chebPacks?: Record<string, ChebData>;
   /** Hamburg-school (Uranian) constant-element orbits; see fit_uranian.py. */
   keplerPack?: KeplerPack;
+  /** Fixed-star catalog (HYG-derived; ICRS J2000 + proper motions). */
+  fixedStars?: import("./stars.js").StarPack;
 }
 
 // ---------------------------------------------------------------- timescale

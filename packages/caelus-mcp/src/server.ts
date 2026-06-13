@@ -52,6 +52,7 @@ const houseSys = z.enum(HOUSE_SYSTEMS).default("placidus");
 const ZODIACS = [
   "tropical", "sidereal:lahiri", "sidereal:fagan_bradley",
   "sidereal:krishnamurti", "sidereal:raman", "sidereal:yukteshwar",
+  "sidereal:galcent_0sag", "sidereal:true_citra",
 ] as const;
 const zodiacSchema = z.enum(ZODIACS).default("tropical")
   .describe("tropical (default) or sidereal:<ayanamsa>");

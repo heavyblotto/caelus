@@ -77,7 +77,8 @@ later), interpretation text (KG server's job).
 New engine features do not become new tools. `natal_chart`, `current_sky`,
 `transits`, and `synastry` take `zodiac` (`tropical` default, or
 `sidereal:<ayanamsa>`: lahiri, fagan_bradley, krishnamurti, raman,
-yukteshwar); `find_aspect_dates` searches in either zodiac. `house_system`
+yukteshwar; star-anchored galcent_0sag and true_citra since the
+fixed-star catalog); `find_aspect_dates` searches in either zodiac. `house_system`
 widened to 12: placidus, whole_sign, equal, porphyry, koch, regiomontanus,
 campanus, alcabitius, morinus, meridian, polich_page, vehlow (Placidus and
 Koch fall back to whole_sign above the polar circles, reported as before).
