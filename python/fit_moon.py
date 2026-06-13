@@ -47,12 +47,12 @@ def main():
     for tier, (jd0, jd1) in TIERS.items():
         print(f"--- moon tier '{tier}': scan seg_days, degree")
         best = None
-        for seg in (8, 16, 32):
-            for deg in (10, 12, 14, 16, 18):
+        for seg in (0.125, 0.25, 0.5):
+            for deg in (8, 10, 12, 14, 16, 18, 20):
                 data, resid = fit(sample_km, jd0, jd1, seg, deg, scale=1.0, sig=10)
                 size = len(json.dumps(data, separators=(",", ":")))
                 ok = "OK" if resid < RESID_KM else "  "
-                print(f"  seg={seg:3d} deg={deg:2d}  resid={resid:.2e} km  "
+                print(f"  seg={seg:5.3f} deg={deg:2d}  resid={resid:.2e} km  "
                       f"{size / 1024:7.0f} KB {ok}")
                 if resid < RESID_KM and (best is None or size < best[2]):
                     best = (seg, deg, size, data, resid)

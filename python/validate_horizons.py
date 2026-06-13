@@ -14,7 +14,6 @@ Usage: python3 validate_horizons.py
 import json
 import math
 import os
-import re
 import sys
 import time
 import urllib.parse
@@ -53,9 +52,9 @@ def fetch(command, jds):
         raise RuntimeError(text[:1500])
     rows = []
     for line in text.split("$$SOE")[1].split("$$EOE")[0].splitlines():
-        m = re.match(r"\s*(\d+\.\d+)\s+\S*\s*(\d+\.\d+)\s+(-?\d+\.\d+)", line)
-        if m:
-            rows.append((float(m.group(1)), float(m.group(2)), float(m.group(3))))
+        parts = line.split()
+        if len(parts) >= 3:
+            rows.append((float(parts[0]), float(parts[1]), float(parts[2])))
     return rows
 
 
