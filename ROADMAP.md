@@ -65,5 +65,3 @@ header and footer, and SEO (sitemap, OpenGraph).
 ### Validation & docs
 - **Methods write-up**: the empirical-recovery notes (what the engine
   reproduces and how it was checked).
-- **Community health**: `CONTRIBUTING.md` (suite-is-the-contract),
-  `CODE_OF_CONDUCT.md`, `SECURITY.md`.
