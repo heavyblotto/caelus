@@ -1,64 +1,60 @@
 # caelus-starter
 
-Birth form → natal chart wheel, in an afternoon. Next.js 15 +
-[caelus](https://github.com/heavyblotto/caelus) (MIT ephemeris engine,
-charts compute client-side) + `caelus-birth` (timezone resolution) +
-`caelus-wheel` (SVG chart wheel).
+A Next.js 15 starter that takes a birth form to a natal chart wheel. It uses
+[caelus](https://github.com/heavyblotto/caelus) (MIT ephemeris engine, charts
+compute client-side), `caelus-birth` (timezone resolution), and `caelus-wheel`
+(SVG chart wheel).
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fheavyblotto%2Fcaelus-starter)
 
-## Quickstart (90 seconds)
+## Quickstart
 
 ```sh
 git clone https://github.com/heavyblotto/caelus-starter
 cd caelus-starter
 npm install
-npm run dev      # → http://localhost:3000
+npm run dev      # http://localhost:3000
 ```
 
-Zero config. Charts compute in the browser — no ephemeris files, no
-backend, no API keys needed for the core flow.
+Charts compute in the browser: no ephemeris files, no backend, and no API key
+for the core flow.
 
-## The timezone trap (already defused here)
+## Timezone handling
 
-The #1 wrong-chart bug in astrology software: converting the user's local
-birth time with `new Date(localString)`, which silently uses the *server's*
-timezone. A Tampa 2:30 PM birth computed on a UTC server gets an Ascendant
-of 10° Leo instead of the correct 3° Libra — two signs off, every house
-wrong. This template converts through `caelus-birth`, which resolves the
-IANA zone from the birthplace and applies historical tzdb rules (DST,
-half-hour zones, wartime offsets). DST edge cases surface to the user in
-plain language ("clocks changed that night — we used the earlier 1:30;
-switch?"). `npm run test:birth` pins nine cursed cases in CI.
+A common cause of wrong charts is converting a local birth time with
+`new Date(localString)`, which uses the server's timezone. A 2:30 PM birth in
+Tampa computed on a UTC server yields an Ascendant of 10° Leo instead of the
+correct 3° Libra: two signs off, and every house wrong.
+
+This template converts through `caelus-birth`, which resolves the IANA zone
+from the birthplace and applies historical tzdb rules (DST, half-hour zones,
+wartime offsets). When a local time is ambiguous (the clocks changed that
+night), the app surfaces it to the user rather than guessing. `npm run
+test:birth` checks nine timezone edge cases in CI.
 
 ## What's inside
 
 | Route | What it does |
 |---|---|
-| `/` | Birth form (place search via free Open-Meteo geocoding, manual lat/lon fallback, "time unknown" path) + today's sky strip |
-| `/chart` | Wheel, positions, houses, aspects — all client-side via `caelus/data-embedded` |
-| `/rectify` | What to do about unknown birth times (the `rectification_grid` MCP flow) |
+| `/` | Birth form (place search via Open-Meteo geocoding, manual lat/lon fallback, "time unknown" path) and a today's-sky strip |
+| `/chart` | Wheel, positions, houses, aspects, all client-side via `caelus/data-embedded` |
+| `/rectify` | Handling unknown birth times (the `rectification_grid` flow) |
 | `POST /api/reading` | Optional LLM reading — set `ANTHROPIC_API_KEY` (or `OPENAI_API_KEY`); without a key the app runs charts-only |
 
-The reading prompt lives in `lib/prompt.ts` — one editable file. Read the
-comment there before shipping readings: uncited LLM astrology is the floor,
-not the ceiling.
-
-No interpretation text ships in this template; positions are math
-(caelus is verified per-body against Swiss Ephemeris — see
-[ephemengine.com/validation](https://ephemengine.com/validation)), meaning
-is your product.
+The reading prompt is in `lib/prompt.ts`. This template ships no interpretation
+text: positions are computed (caelus is verified per body against Swiss
+Ephemeris — see [ephemengine.com/validation](https://ephemengine.com/validation)),
+and the interpretation is left to you.
 
 ## What to build next
 
-- **Transits & timing** — `caelus-mcp` exposes `transits`,
-  `find_aspect_dates` (retrograde re-hits included), and
-  `rectification_grid` to any MCP client: `npx caelus-mcp`.
+- **Transits and timing** — `caelus-mcp` exposes `transits`,
+  `find_aspect_dates` (including retrograde re-hits), and `rectification_grid`
+  to any MCP client: `npx caelus-mcp`.
 - **Engine docs** — [ephemengine.com](https://ephemengine.com): playground,
   per-body validation tables, data provenance.
-- **For AI assistants** — point them at
-  [ephemengine.com/llms.txt](https://ephemengine.com/llms.txt) and
-  `docs/agents.md` in the caelus repo.
+- **For AI assistants** — [ephemengine.com/llms.txt](https://ephemengine.com/llms.txt)
+  and `docs/agents.md` in the caelus repo.
 
 Place search data: [GeoNames](https://www.geonames.org/) via the
 [Open-Meteo Geocoding API](https://open-meteo.com/en/docs/geocoding-api)
