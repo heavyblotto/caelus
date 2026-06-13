@@ -92,3 +92,8 @@ eval
 ephemengine
 magus
 Danjon
+Davison
+antiscia
+antiscion
+[Cc]ontraparallels?
+[Dd]iurnal
