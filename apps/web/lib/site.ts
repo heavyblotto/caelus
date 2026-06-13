@@ -5,7 +5,7 @@
  */
 export const SITE = {
   name: "Caelus",
-  version: "0.6.0",
+  version: "0.7.0",
   url: "https://www.ephemengine.com",
   tagline: "MIT astrological ephemeris engine in TypeScript.",
   repo: "https://github.com/heavyblotto/caelus",
@@ -50,6 +50,7 @@ export const DOCS_NAV: DocsGroup[] = [
     title: "Guides",
     items: [
       { href: "/docs/houses-and-zodiacs", label: "Houses & Zodiacs" },
+      { href: "/docs/derived", label: "Derived Charts" },
       { href: "/docs/data-tiers", label: "Data Tiers" },
       { href: "/docs/recipes", label: "Recipes" },
     ],

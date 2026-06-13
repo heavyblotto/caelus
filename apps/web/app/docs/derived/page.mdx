@@ -1,0 +1,148 @@
+export const metadata = {
+  title: "Derived Charts",
+  description: "Returns, secondary progressions, solar arc, composite and Davison charts, harmonics, antiscia, declination aspects, out-of-bounds, dignities, and sect — built on the validated positions.",
+};
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Derived Charts
+
+The derived layer is the standard astrological derivations computed on top of
+the validated primitives. These are time mappings and arithmetic on apparent
+positions that are already checked against Swiss Ephemeris, so they add no new
+ephemeris. The TypeScript port is pinned to the Python reference by a
+cross-language golden, and everything here is exported from the package root.
+
+<Note>
+  All of these take an <code>Engine</code> and Julian Days. Build the engine
+  once and reuse it; <code>julianDay()</code> converts a UT calendar date to a
+  JD. A natal JD plus a target JD is enough for most derivations.
+</Note>
+
+<CodeBlock
+  lang="typescript"
+  label="setup.ts"
+  code={`import { Engine, julianDay } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);
+
+const natalJd = julianDay(1990, 6, 10, 14, 30, 0);   // UT
+const targetJd = julianDay(2026, 6, 13, 0, 0, 0);`}
+/>
+
+## Returns
+
+A return is when a body comes back to its natal longitude. Outer-planet
+returns can show three crossings around a retrograde loop, so the search
+returns every hit in the window.
+
+<CodeBlock
+  lang="typescript"
+  label="returns.ts"
+  code={`import { solarReturn, lunarReturn, returns } from "caelus";
+
+// Next solar return after the 2026 birthday window:
+solarReturn(engine, natalJd, targetJd, targetJd + 366);   // [jd, ...]
+lunarReturn(engine, natalJd, targetJd, targetJd + 30);
+
+// Any body, e.g. the Saturn return:
+returns(engine, "saturn", natalJd, natalJd, natalJd + 365 * 30);`}
+/>
+
+## Secondary progressions and solar arc
+
+Secondary progressions map one day of real motion to one year of life.
+<code>progressedJd</code> gives the JD whose real positions are the progressed
+positions; <code>solarArc</code> is the angle the progressed Sun has travelled,
+applied forward to any natal point.
+
+<CodeBlock
+  lang="typescript"
+  label="progressions.ts"
+  code={`import { progressedLongitude, solarArc, directedLongitude } from "caelus";
+
+progressedLongitude(engine, "moon", natalJd, targetJd);   // progressed Moon
+solarArc(engine, natalJd, targetJd);                      // arc in degrees
+directedLongitude(engine, "mars", natalJd, targetJd);     // solar-arc directed Mars`}
+/>
+
+## Composite and Davison
+
+A composite chart takes the shorter-arc midpoint of each body's two longitudes.
+A Davison chart is a real chart at the midpoint in time and place:
+<code>davisonParams</code> returns the midpoint instant and coordinates, and you
+read real positions at them. The returned latitude and longitude are where the
+houses are cast.
+
+<CodeBlock
+  lang="typescript"
+  label="relationship.ts"
+  code={`import { compositeLongitudes, davisonParams } from "caelus";
+
+const bodies = ["sun", "moon", "mercury", "venus", "mars"];
+const jdB = julianDay(1988, 2, 2, 9, 15, 0);
+
+compositeLongitudes(engine, natalJd, jdB, bodies);   // { sun: 123.4, ... }
+
+// Davison: the midpoint in time and place, then real positions there.
+const [midJd, midLat, midLon] = davisonParams(
+  natalJd, jdB, 27.95, -82.46, 40.71, -74.01,
+);
+engine.longitude("sun", midJd);    // Davison Sun longitude (degrees)
+engine.position("venus", midJd);   // full position at midLat/midLon`}
+/>
+
+## Harmonics and antiscia
+
+The nth-harmonic chart multiplies each longitude by n (wrapped to 360).
+Antiscia reflect a point across the solstice or equinox axis.
+
+<CodeBlock
+  lang="typescript"
+  label="harmonics.ts"
+  code={`import { harmonicChart, antiscion, contraAntiscion } from "caelus";
+
+harmonicChart(engine, natalJd, ["sun", "moon", "venus"], 5);   // 5th harmonic
+
+antiscion(15);        // reflection across 0° Cancer / 0° Capricorn
+contraAntiscion(15);  // reflection across 0° Aries / 0° Libra`}
+/>
+
+## Declination: aspects and out of bounds
+
+Parallels and contraparallels are declination aspects (same or opposite
+declination within orb). A body is out of bounds when its declination exceeds
+the obliquity of the ecliptic.
+
+<CodeBlock
+  lang="typescript"
+  label="declination.ts"
+  code={`import { declinationAspects, outOfBounds, outOfBoundsMargin } from "caelus";
+
+declinationAspects(engine, ["sun", "moon", "mars"], natalJd);
+// [{ a: "sun", b: "mars", kind: "parallel" }, ...]
+
+outOfBounds(engine, "moon", natalJd);        // true | false
+outOfBoundsMargin(engine, "moon", natalJd);  // degrees past the obliquity`}
+/>
+
+## Dignities and sect
+
+Essential dignities classify a body in a sign as domicile, exaltation,
+detriment, or fall. Sect is the day/night division: whether the Sun is above
+the horizon, and whether a planet is in its preferred sect.
+
+<CodeBlock
+  lang="typescript"
+  label="dignities.ts"
+  code={`import { dignityOf, isDayChart, inSect } from "caelus";
+
+dignityOf(engine, "mars", natalJd);   // ["domicile"] in Aries/Scorpio, etc.
+
+const day = isDayChart(engine, natalJd, 27.95, -82.46);
+inSect("jupiter", day);   // true when Jupiter is in sect (diurnal by day)`}
+/>
+
+See the <a href="/docs/api">API Reference</a> for every signature and the
+<a href="/changelog"> Changelog</a> for what shipped in 0.7.0.
