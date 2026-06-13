@@ -31,6 +31,11 @@ python/__pycache__/
 .web-prose-extract.md
 python/astroengine/__pycache__/
 
+# python packaging artifacts (caelus-engine on PyPI; dists built on demand)
+python/build/
+python/dist/
+python/*.egg-info/
+
 # private strategy / roadmap docs — never commit to this public repo
 STRATEGY.md
 STRATEGY*.md

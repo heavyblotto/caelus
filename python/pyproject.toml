@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "caelus-engine"
+version = "0.8.0"
+description = "Clean-room astrological ephemeris engine: planetary and lunar positions, houses, aspects, and events from published sources. The Python reference for the Caelus engine."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "EphemEngine", email = "info@ephemengine.com" }]
+keywords = [
+  "astronomy",
+  "astrology",
+  "ephemeris",
+  "vsop87",
+  "horoscope",
+  "chart",
+  "houses",
+  "aspects",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Scientific/Engineering :: Astronomy",
+]
+dependencies = []
+
+[project.optional-dependencies]
+# Only the data-fitting toolchain needs numpy; the engine itself reads the
+# pre-built JSON packs and runs on the standard library alone.
+fit = ["numpy>=1.24"]
+
+[project.urls]
+Homepage = "https://ephemengine.com"
+Repository = "https://github.com/heavyblotto/caelus"
+Issues = "https://github.com/heavyblotto/caelus/issues"
+Changelog = "https://github.com/heavyblotto/caelus/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+include = ["astroengine*"]
+
+[tool.setuptools.package-data]
+astroengine = ["data/*.json"]
