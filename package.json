@@ -14,9 +14,5 @@
     "eval:selfcheck": "node packages/caelus-mcp/eval/run.mjs",
     "dev:web": "npm run dev -w web",
     "dev:web:clean": "npm run dev:clean -w web"
-  },
-  "devDependencies": {
-    "typedoc": "^0.28.19",
-    "typedoc-plugin-markdown": "^4.12.0"
   }
 }
