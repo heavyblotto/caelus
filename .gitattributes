@@ -1,4 +1,0 @@
-packages/caelus/data/moon_cheb.embedded.json filter=lfs diff=lfs merge=lfs -text
-python/astroengine/data/moon_cheb.full.json filter=lfs diff=lfs merge=lfs -text
-python/astroengine/data/moon_cheb.embedded.json filter=lfs diff=lfs merge=lfs -text
-packages/caelus/data/moon_cheb.full.json filter=lfs diff=lfs merge=lfs -text
