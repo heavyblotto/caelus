@@ -1,13 +1,12 @@
-import { A, H2, P, Nav } from "../../components/Prose";
+import { A, Eyebrow, H2, P } from "../../components/Prose";
 
 export const metadata = {
-  title: "Caelus — Provenance",
+  title: "Provenance",
   description:
     "Coefficients from published sources. Swiss Ephemeris is a test oracle only. Engine-by-engine comparison.",
 };
 
 const FIELD: Array<[string, string, string, string, string]> = [
-  // name, link, license, accuracy, astrology coverage + runtime
   ["Swiss Ephemeris (sweph, WASM ports)", "https://www.astro.com/swisseph/swephinfo_e.htm",
     "AGPL-3.0 / 700 CHF", "0.001″",
     "houses, Chiron, nodes; native Node or 250 KB–1.7 MB WASM, plus data files"],
@@ -28,13 +27,23 @@ const FIELD: Array<[string, string, string, string, string]> = [
     "no astrology layer; Python only, 32 MB–3.1 GB BSP files"],
 ];
 
+const SOURCES: Array<[string, string, React.ReactNode]> = [
+  ["Planets", "VSOP87D analytical theory", "Bretagnon & Francou, 1988, Bureau des Longitudes"],
+  ["Moon", "Chebyshev fit of JPL DE423 (2010)", "NASA JPL (public domain); differs from DE440 by <0.1″ here; re-fit planned"],
+  ["Moon (embedded)", "ELP2000-82 abridged series", "Chapront-Touzé & Chapront, as published in Meeus ch. 47"],
+  ["Pluto", "Published periodic series", "Meeus, Astronomical Algorithms, ch. 37"],
+  ["Chiron", "Chebyshev fit of JPL Horizons", "NASA JPL small-body system (public domain); raw Horizons samples committed in-repo"],
+  ["Nutation", "IAU 1980 theory, 63-term abridged table", "Meeus ch. 22; terms ≥ 0.0003″ of the 106-term series"],
+  ["Precession", "IAU 1976 / Meeus formulations", "Lieske et al."],
+  ["ΔT", "IERS observed values; near-flat then slow tidal rise afterward", <>International Earth Rotation Service; see <A href="/notes">Build Notes</A></>],
+  ["Houses", "Spherical trigonometry from first principles", "semi-arc definitions, closed-form angles"],
+];
+
 export default function Provenance() {
-  const td = { padding: "0.2rem 0.9rem 0.2rem 0", verticalAlign: "top" as const };
-  const dim = { ...td, opacity: 0.55 };
   return (
-    <main>
-      <Nav current="/provenance" />
-      <h1 style={{ letterSpacing: "0.05em" }}>Sources</h1>
+    <main className="container page">
+      <Eyebrow>Provenance</Eyebrow>
+      <h1>Sources</h1>
       <P>
         Most astrology software computes positions with{" "}
         <A href="https://www.astro.com/swisseph/swephinfo_e.htm">Swiss Ephemeris</A>.
@@ -53,38 +62,34 @@ export default function Provenance() {
         Caelus is written from the published record. Coefficients trace to
         public literature or public-domain ephemerides:
       </P>
-      <table style={{ fontSize: "0.85em", lineHeight: 1.6, borderSpacing: 0 }}>
+      <table className="data-table table-auto" style={{ fontSize: "0.85rem" }}>
         <tbody>
-          <tr><td style={td}>Planets</td><td style={td}>VSOP87D analytical theory</td><td style={dim}>Bretagnon &amp; Francou, 1988, Bureau des Longitudes</td></tr>
-          <tr><td style={td}>Moon</td><td style={td}>Chebyshev fit of JPL DE423 (2010)</td><td style={dim}>NASA JPL (public domain); differs from DE440 by &lt;0.1″ here; re-fit planned</td></tr>
-          <tr><td style={td}>Moon (embedded)</td><td style={td}>ELP2000-82 abridged series</td><td style={dim}>Chapront-Touzé &amp; Chapront, as published in Meeus ch. 47</td></tr>
-          <tr><td style={td}>Pluto</td><td style={td}>Published periodic series</td><td style={dim}>Meeus, Astronomical Algorithms, ch. 37</td></tr>
-          <tr><td style={td}>Chiron</td><td style={td}>Chebyshev fit of JPL Horizons</td><td style={dim}>NASA JPL small-body system (public domain); raw Horizons samples committed in-repo</td></tr>
-          <tr><td style={td}>Nutation</td><td style={td}>IAU 1980 theory, 63-term abridged table</td><td style={dim}>Meeus ch. 22; terms ≥ 0.0003″ of the 106-term series</td></tr>
-          <tr><td style={td}>Precession</td><td style={td}>IAU 1976 / Meeus formulations</td><td style={dim}>Lieske et al.</td></tr>
-          <tr><td style={td}>ΔT</td><td style={td}>IERS observed values; near-flat then slow tidal rise afterward</td><td style={dim}>International Earth Rotation Service; see <A href="/notes">Build Notes</A></td></tr>
-          <tr><td style={td}>Houses</td><td style={td}>Spherical trigonometry from first principles</td><td style={dim}>semi-arc definitions, closed-form angles</td></tr>
+          {SOURCES.map(([what, src, cite], i) => (
+            <tr key={i}>
+              <td>{what}</td>
+              <td>{src}</td>
+              <td className="dim">{cite}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
 
-      <H2>Other Engines</H2>
+      <H2>Other engines</H2>
       <P>
         Where Caelus sits, checked February–June 2026. Sizes are gzipped where
         published:
       </P>
-      <table style={{ fontSize: "0.85em", lineHeight: 1.6, borderSpacing: 0 }}>
+      <table className="data-table table-auto" style={{ fontSize: "0.85rem" }}>
         <thead>
-          <tr style={{ opacity: 0.5, textAlign: "left" }}>
-            <th style={td}>Engine</th><th style={td}>License</th><th style={td}>Accuracy</th><th style={td}>Coverage and Runtime</th>
-          </tr>
+          <tr><th>Engine</th><th>License</th><th>Accuracy</th><th>Coverage and runtime</th></tr>
         </thead>
         <tbody>
           {FIELD.map(([name, href, lic, acc, cov]) => (
             <tr key={name}>
-              <td style={td}><A href={href}>{name}</A></td>
-              <td style={td}>{lic}</td>
-              <td style={td}>{acc}</td>
-              <td style={dim}>{cov}</td>
+              <td><A href={href}>{name}</A></td>
+              <td>{lic}</td>
+              <td>{acc}</td>
+              <td className="dim">{cov}</td>
             </tr>
           ))}
         </tbody>
@@ -97,7 +102,7 @@ export default function Provenance() {
         Regiomontanus, and Campanus houses, which Caelus does not.
       </P>
 
-      <H2>Swiss Ephemeris as Oracle</H2>
+      <H2>Swiss Ephemeris as oracle</H2>
       <P>
         During development, Caelus positions were compared to Swiss Ephemeris
         2.10 at random instants across 1900–2099. No Swiss Ephemeris code or

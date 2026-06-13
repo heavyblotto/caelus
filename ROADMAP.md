@@ -66,6 +66,10 @@ port, suite-pinned).
   reproduces and how it was checked).
 - **Community health**: `CONTRIBUTING.md` (suite-is-the-contract),
   `CODE_OF_CONDUCT.md`, `SECURITY.md`.
+- **Site (`ephemengine.com`)**: a docs hub with guides and a generated
+  TypeScript API reference, a changelog page, persistent header/footer, and
+  SEO (sitemap, OpenGraph). `caelus-starter`, PyPI, and MCP Streamable HTTP
+  surface in the nav and footer as they ship.
 
 ## Out of scope for this repo
 

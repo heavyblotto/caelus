@@ -1,0 +1,44 @@
+export const metadata = {
+  title: "Houses & Zodiacs",
+  description: "Twelve house systems, tropical and sidereal zodiac modes, and polar fallbacks.",
+};
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Houses & Zodiacs
+
+## House systems
+
+Twelve systems are built in: `placidus`, `whole_sign`, `equal`, `porphyry`,
+`koch`, `regiomontanus`, `campanus`, `alcabitius`, `morinus`, `meridian`,
+`polich_page`, and `vehlow`. Pass the name as the last argument, or as
+`houseSystem` in the options object.
+
+<Note>
+  Placidus and Koch are undefined above the polar circles. The engine falls back
+  to whole-sign and reports it: <code>chart.houseSystem</code> will differ from
+  <code> chart.houseSystemRequested</code>.
+</Note>
+
+## Tropical and sidereal
+
+The default zodiac is tropical. Sidereal modes subtract an ayanamsa:
+
+<CodeBlock
+  lang="typescript"
+  label="zodiac.ts"
+  code={`engine.chart(1990, 6, 10, 14, 30, 0, 27.95, -82.46, {
+  zodiac: "sidereal:lahiri",
+});`}
+/>
+
+Embedded ayanamsas: `lahiri`, `fagan_bradley`, `krishnamurti`, `raman`, and
+`yukteshwar`. Two star-anchored modes (`galcent_0sag`, `true_citra`) need the
+fixed-star catalog from the Node data tier; see
+<a href="/docs/data-tiers">Data Tiers</a>.
+
+## Angles
+
+Every chart includes the ascendant and midheaven (`chart.angles.asc`,
+`chart.angles.mc`); the vertex and east point are also computed. House cusps are
+derived by closed-form angles, not iteration.

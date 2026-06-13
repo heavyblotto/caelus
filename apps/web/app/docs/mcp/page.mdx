@@ -1,0 +1,44 @@
+export const metadata = {
+  title: "MCP Setup",
+  description: "Add the caelus chart tools to Claude, Cursor, and other MCP clients.",
+};
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Integrations</div>
+
+# MCP Setup
+
+`caelus-mcp` exposes the engine over the Model Context Protocol. Positions are
+computed by the engine on each call, never recalled from training data, so every
+answer is deterministic.
+
+## Configure
+
+Add the server to `claude_desktop_config.json` or `.cursor/mcp.json`:
+
+<CodeBlock
+  lang="json"
+  label=".cursor/mcp.json"
+  code={`{
+  "mcpServers": {
+    "caelus": {
+      "command": "npx",
+      "args": ["caelus-mcp"]
+    }
+  }
+}`}
+/>
+
+## The seven tools
+
+`natal_chart`, `current_sky`, `transits`, `synastry`, `find_aspect_dates`,
+`rectification_grid`, and `sky_events` (rise/set, phases, stations, zodiac
+crossings, solar and lunar eclipses).
+
+## Example prompts
+
+- "Natal chart: born June 10 1990, 2:30pm, Tampa FL."
+- "When is Saturn square my natal Moon in the next two years?"
+- "Compare my chart with my partner's."
+- "Next solar eclipse? Lunar eclipses in 2026?"
+
+Agent-oriented docs live at <a href="/llms.txt">llms.txt</a>.

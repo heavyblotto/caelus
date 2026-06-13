@@ -1,0 +1,63 @@
+export const metadata = {
+  title: "Recipes",
+  description: "The when() query language, event search, and rendering a chart wheel.",
+};
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Recipes
+
+## Query the sky with when()
+
+The engine answers "where is the body?"; `when()` answers "when is the
+configuration true?" over a time range. Predicates combine with `allOf`,
+`anyOf`, and `notOf`.
+
+<CodeBlock
+  lang="typescript"
+  label="when.ts"
+  code={`import { when, allOf, aspect, inSign, notRetrograde, julianDay } from "caelus";
+
+const start = julianDay(2026, 1, 1);
+const end = julianDay(2028, 1, 1);
+
+const intervals = when(
+  engine,
+  allOf(
+    aspect("saturn", "square", 95.4), // within orb of an exact square to a longitude
+    notRetrograde("mercury"),
+    inSign("venus", "Taurus"),
+  ),
+  start, end,
+);`}
+/>
+
+## Event search
+
+With the Node data tier, search rise/set, lunar phases, stations, and zodiac
+crossings:
+
+<CodeBlock
+  lang="typescript"
+  label="events.ts"
+  code={`import { lunarPhases, stations, julianDay } from "caelus";
+
+const jd = julianDay(2026, 1, 1);
+lunarPhases(engine, jd, jd + 90);   // [[jd, "full"], ...]
+stations(engine, "mercury", jd, jd + 365);`}
+/>
+
+## Render a chart wheel
+
+`caelus-wheel` takes the chart object (or an MCP payload) and renders SSR-safe SVG.
+
+<CodeBlock
+  lang="tsx"
+  label="Wheel.tsx"
+  code={`import { ChartWheel } from "caelus-wheel";
+
+<ChartWheel chart={chart} size={520} showAspects />;`}
+/>
+
+See the <a href="/playground">Playground</a> for live wheels and the
+<a href="/docs/api"> API Reference</a> for the full surface.

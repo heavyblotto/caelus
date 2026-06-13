@@ -3,14 +3,14 @@ import type { ReactNode } from "react";
 export type HighlightLang = "typescript" | "tsx" | "json" | "bash";
 
 const C = {
-  text: "#d8d4e8",
-  muted: "#8b849e",
-  keyword: "#c4b5fd",
-  string: "#9fdc9f",
-  number: "#f0a878",
-  fn: "#7dcfff",
-  punct: "#89ddff",
-  prop: "#e2d9ff",
+  text: "var(--syntax-text)",
+  muted: "var(--syntax-muted)",
+  keyword: "var(--syntax-keyword)",
+  string: "var(--syntax-string)",
+  number: "var(--syntax-number)",
+  fn: "var(--syntax-fn)",
+  punct: "var(--syntax-punct)",
+  prop: "var(--syntax-prop)",
 } as const;
 
 const TS_KEYWORDS = new Set([

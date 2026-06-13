@@ -1,0 +1,49 @@
+export const metadata = {
+  title: "Data Tiers",
+  description: "Embedded data for the browser versus the Node loader for extended bodies and fixed stars.",
+};
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Data Tiers
+
+The engine is given its ephemeris data explicitly. Two suppliers ship with the
+package.
+
+## Embedded (browser, edge)
+
+`caelus/data-embedded` bundles a compact dataset: the eight planets, the Moon,
+Pluto, Chiron, and the nodes, with the core house systems and aspects. This is
+what runs client-side and on edge runtimes, with no files on disk.
+
+<CodeBlock
+  lang="typescript"
+  label="embedded.ts"
+  code={`import { Engine } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);`}
+/>
+
+## Node loader (extended)
+
+`loadNodeData` reads the larger JSON packs from disk: higher-precision VSOP
+tiers, the precise Moon pack, the asteroids and Uranian points, and the
+318-star catalog. Use it when you need extended bodies, fixed stars, or event
+search.
+
+<CodeBlock
+  lang="typescript"
+  label="node.ts"
+  code={`import { Engine } from "caelus";
+import { loadNodeData } from "caelus/node";
+
+const engine = new Engine(loadNodeData());
+const star = engine.fixedStar("Aldebaran", jd);`}
+/>
+
+<Note>
+  If a pack is missing, <code>loadNodeData</code> falls back per body to the
+  embedded tier rather than throwing. Packs are versioned JSON build outputs
+  with documented <a href="/provenance">provenance</a>.
+</Note>

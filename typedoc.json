@@ -1,0 +1,19 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["packages/caelus/src/index.ts"],
+  "tsconfig": "packages/caelus/tsconfig.json",
+  "plugin": ["typedoc-plugin-markdown"],
+  "out": "apps/web/content/api",
+  "readme": "none",
+  "githubPages": false,
+  "excludeInternal": true,
+  "excludePrivate": true,
+  "hideGenerator": true,
+  "hidePageHeader": true,
+  "hideBreadcrumbs": true,
+  "flattenOutputFiles": true,
+  "entryFileName": "index",
+  "fileExtension": ".md",
+  "useCodeBlocks": true,
+  "expandObjects": true
+}

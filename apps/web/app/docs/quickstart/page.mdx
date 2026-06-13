@@ -1,0 +1,55 @@
+export const metadata = {
+  title: "Quickstart",
+  description: "Install caelus and compute a natal chart in the browser, on edge, or in Node.",
+};
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Getting Started</div>
+
+# Quickstart
+
+Caelus computes a chart from a UT instant and a location. The core does no I/O,
+so the same code runs in the browser, on edge runtimes, and in Node.
+
+## Install
+
+<CodeBlock lang="bash" code="npm install caelus" />
+
+## Compute a chart
+
+Pass the engine its dataset explicitly. The embedded dataset is bundled with the
+package and needs no files on disk.
+
+<CodeBlock
+  lang="typescript"
+  label="chart.ts"
+  code={`import { Engine, fmtLon } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);
+
+// year, month, day, hour, minute, second (UT), lat, lon (east+), house system
+const chart = engine.chart(1990, 6, 10, 14, 30, 0, 27.95, -82.46, "placidus");
+
+fmtLon(chart.bodies.sun.lon);   // "19°27' Gemini"
+chart.bodies.saturn.retrograde; // true
+chart.angles.asc;               // ascendant longitude, degrees`}
+/>
+
+<Note>
+  Times are UT, not local time. A four-hour timezone error moves the ascendant
+  about 60 degrees. To convert a local birth time, use <code>caelus-birth</code>;
+  see <a href="/docs/charts">Computing Charts</a>.
+</Note>
+
+## What you get back
+
+The chart object carries every body with its longitude, speed, retrograde flag,
+sign, and equatorial coordinates, plus the angles, house cusps, and aspect list.
+See <a href="/docs/charts">Computing Charts</a> for the full shape.
+
+## Next steps
+
+- <a href="/docs/charts">Computing Charts</a>: the chart object and the local-time hazard.
+- <a href="/docs/houses-and-zodiacs">Houses & Zodiacs</a>: twelve systems and sidereal modes.
+- <a href="/docs/mcp">MCP Setup</a>: the same engine as chart tools for AI clients.
+- <a href="/playground">Playground</a>: try it live in the browser.

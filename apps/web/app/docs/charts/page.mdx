@@ -1,0 +1,79 @@
+export const metadata = {
+  title: "Computing Charts",
+  description: "The chart object, options, and converting a local birth time to UT.",
+};
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Getting Started</div>
+
+# Computing Charts
+
+`engine.chart()` accepts the calendar fields in UT, a latitude, a longitude
+(east positive), and either a house-system name or an options object.
+
+## Options
+
+<CodeBlock
+  lang="typescript"
+  label="options.ts"
+  code={`const chart = engine.chart(
+  1990, 6, 10, 14, 30, 0,
+  27.95, -82.46,
+  {
+    houseSystem: "koch",
+    zodiac: "sidereal:lahiri",
+    bodies: ["mean_lilith"], // extra bodies beyond the core set
+  },
+);`}
+/>
+
+## The chart object
+
+<CodeBlock
+  lang="typescript"
+  label="shape.ts"
+  code={`chart.bodies.sun.lon;        // ecliptic longitude, degrees
+chart.bodies.sun.speed;      // degrees per day
+chart.bodies.sun.retrograde; // boolean
+chart.bodies.sun.sign;       // "Gemini"
+chart.bodies.sun.ra;         // right ascension (true equinox of date)
+
+chart.angles.asc;            // ascendant
+chart.angles.mc;             // midheaven
+chart.cusps;                 // twelve house cusps, degrees
+chart.aspects;               // [{ a, b, aspect, orb }, ...]
+chart.houseSystem;           // the system actually used
+chart.houseSystemRequested;  // what you asked for (differs on polar fallback)`}
+/>
+
+## Local birth time to UT
+
+The engine works in UT. Convert a local civil time with `caelus-birth`, which
+resolves the IANA zone from the location and applies historical tzdb rules.
+
+<CodeBlock
+  lang="typescript"
+  label="birth.ts"
+  code={`import { toUT } from "caelus-birth";
+
+const t = toUT({
+  year: 1990, month: 6, day: 10,
+  hour: 14, minute: 30,
+  lat: 27.95, lon: -82.46,
+});
+
+const chart = engine.chart(
+  t.year, t.month, t.day, t.hour, t.minute, 0,
+  27.95, -82.46, "placidus",
+);`}
+/>
+
+<Note>
+  When a local time is ambiguous (the clocks changed that night), surface it to
+  the user rather than guessing. <code>caelus-birth</code> flags these cases.
+</Note>
+
+## Edge and REST
+
+The same engine runs on edge runtimes. The site exposes a demo endpoint:
+<a href="/api/chart?lat=27.94&lon=-82.46">GET /api/chart</a> returns a full chart
+as JSON.
