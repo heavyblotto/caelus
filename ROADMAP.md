@@ -45,7 +45,8 @@ scans); conformance suite; MCP server (stdio) with golden payloads, resources
 prompt; JPL-direct validation tier.
 
 The `ephemengine.com` site ships its full shape: landing page, browser
-playground, validation and provenance tables, build notes, a docs hub with
+playground, validation and provenance tables, build notes, a methods page
+(how the engine is built and how each result is checked), a docs hub with
 guides, a generated TypeScript API reference, a changelog page, persistent
 header and footer, and SEO (sitemap, OpenGraph).
 
@@ -57,7 +58,3 @@ header and footer, and SEO (sitemap, OpenGraph).
   (stdio already ships).
 - **Site links**: add PyPI and MCP Streamable HTTP to the nav and footer as
   they ship (`caelus-starter` is already linked in the footer).
-
-### Validation & docs
-- **Methods write-up**: the empirical-recovery notes (what the engine
-  reproduces and how it was checked).

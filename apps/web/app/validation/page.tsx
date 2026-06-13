@@ -75,7 +75,7 @@ export default function Validation() {
       <P dim>
         Range 1800–2149 (1850–2150 for precise Moon/Chiron). Placidus undefined above
         polar circles: falls back to whole-sign and reports the fallback in the
-        response. <A href="/notes">Build notes →</A>
+        response. <A href="/methods">Methods →</A> <A href="/notes">Build notes →</A>
       </P>
     </main>
   );

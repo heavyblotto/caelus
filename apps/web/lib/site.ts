@@ -97,6 +97,7 @@ export const FOOTER: FooterColumn[] = [
       { href: SITE.starter, label: "Starter template", external: true },
       { href: `${SITE.repo}/blob/main/ROADMAP.md`, label: "Roadmap", external: true },
       { href: "/changelog", label: "Changelog" },
+      { href: "/methods", label: "Methods" },
       { href: "/validation", label: "Validation" },
       { href: "/provenance", label: "Provenance" },
       { href: "/api/chart?lat=27.94&lon=-82.46", label: "REST API", external: true },
