@@ -36,7 +36,7 @@ the 0.4.x surface; the conformance suite grew from 3,177 to 3,218 checks.
 ### MCP server (`caelus-mcp`)
 
 - `sky_events` gains `solar_eclipse` and `lunar_eclipse` kinds — the
-  reserved Tier 3 extension; still seven tools.
+  reserved Tier 3 extension.
 - The zodiac parameter grows to eight modes (star-anchored ayanamsas).
 
 ## 0.4.0 — 2026-06-13
