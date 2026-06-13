@@ -1,0 +1,185 @@
+{
+ "basis": "Python reference astroengine.derived (embedded VSOP, full moon)",
+ "cases": [
+  {
+   "id": "solar-return",
+   "spec": {
+    "id": "solar-return",
+    "type": "returns",
+    "body": "sun",
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "start": 300,
+    "end": 430
+   },
+   "result": [
+    2448418.3461237997
+   ]
+  },
+  {
+   "id": "lunar-return",
+   "spec": {
+    "id": "lunar-return",
+    "type": "returns",
+    "body": "moon",
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "start": 20,
+    "end": 35
+   },
+   "result": [
+    2448080.365645244
+   ]
+  },
+  {
+   "id": "progressed-jd",
+   "spec": {
+    "id": "progressed-jd",
+    "type": "progressed_jd",
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "target": [
+     2025,
+     6,
+     10
+    ]
+   },
+   "result": 2448088.103945398
+  },
+  {
+   "id": "solar-arc",
+   "spec": {
+    "id": "solar-arc",
+    "type": "solar_arc",
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "target": [
+     2025,
+     6,
+     10
+    ]
+   },
+   "result": 33.393295578601126
+  },
+  {
+   "id": "directed",
+   "spec": {
+    "id": "directed",
+    "type": "directed",
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "target": [
+     2025,
+     6,
+     10
+    ],
+    "bodies": [
+     "moon",
+     "venus",
+     "mars",
+     "saturn"
+    ]
+   },
+   "result": {
+    "moon": 316.67690263338113,
+    "venus": 76.42463263441829,
+    "mars": 40.90183489530393,
+    "saturn": 327.6995722742533
+   }
+  },
+  {
+   "id": "composite",
+   "spec": {
+    "id": "composite",
+    "type": "composite",
+    "a": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "b": [
+     1988,
+     2,
+     3,
+     9,
+     0
+    ],
+    "bodies": [
+     "sun",
+     "moon",
+     "mercury",
+     "venus",
+     "mars",
+     "jupiter",
+     "saturn"
+    ]
+   },
+   "result": {
+    "sun": 16.598309839281868,
+    "moon": 211.2500450076978,
+    "mercury": 12.898750235202343,
+    "venus": 17.83668638411656,
+    "mars": 312.3491999789439,
+    "jupiter": 64.3006221473467,
+    "saturn": 281.6761818537267
+   }
+  },
+  {
+   "id": "davison",
+   "spec": {
+    "id": "davison",
+    "type": "davison",
+    "a": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "b": [
+     1988,
+     2,
+     3,
+     9,
+     0
+    ],
+    "lat_a": 27.95,
+    "lon_a": -82.46,
+    "lat_b": 51.5,
+    "lon_b": -0.12
+   },
+   "result": [
+    2447623.989583333,
+    39.725,
+    -41.289999999999964
+   ]
+  }
+ ]
+}

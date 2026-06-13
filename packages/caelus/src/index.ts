@@ -6,3 +6,4 @@ export * from "./events.js";
 export * from "./stars.js";
 export * from "./eclipses.js";
 export * from "./query.js";
+export * from "./derived.js";
