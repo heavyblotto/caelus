@@ -1,0 +1,22 @@
+{
+  "basis": "JPL Horizons apparent geocentric RA/Dec (airless), TT epochs",
+  "epochs": 25,
+  "bodies": {
+    "sun": 0.108,
+    "moon": 0.215,
+    "mercury": 0.142,
+    "venus": 0.11,
+    "mars": 0.236,
+    "jupiter": 0.521,
+    "saturn": 0.387,
+    "uranus": 1.494,
+    "neptune": 2.437,
+    "pluto": 6.508,
+    "chiron": 2.184,
+    "ceres": 4.434,
+    "pallas": 13.052,
+    "juno": 3.631,
+    "vesta": 2.913,
+    "pholus": 8.026
+  }
+}

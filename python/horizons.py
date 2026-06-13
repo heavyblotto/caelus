@@ -43,6 +43,16 @@ def _parse_vector_block(text):
     return jds, xs, ys, zs
 
 
+def _step_size_str(step_days):
+    """Horizons STEP_SIZE: integer days as 'Nd'; sub-day as whole hours ('6 h')."""
+    if step_days == int(step_days):
+        return f"'{int(step_days)}d'"
+    hours = round(step_days * 24)
+    if hours >= 1 and abs(hours / 24 - step_days) < 1e-9:
+        return f"'{hours} h'"
+    raise ValueError(f"unsupported Horizons step {step_days} days (use whole days or whole hours)")
+
+
 def _fetch_range(jd0, jd1, step_days=1.0, command=CHIRON, center="@sun"):
     """Download a JD range via START_TIME/STOP_TIME (one API call)."""
     params = {
@@ -55,7 +65,7 @@ def _fetch_range(jd0, jd1, step_days=1.0, command=CHIRON, center="@sun"):
         "REF_PLANE": "'ECLIPTIC'",
         "START_TIME": f"'JD{jd0:.9f}'",
         "STOP_TIME": f"'JD{jd1:.9f}'",
-        "STEP_SIZE": f"'{int(step_days)}d'" if step_days == int(step_days) else f"'{step_days}d'",
+        "STEP_SIZE": _step_size_str(step_days),
         "VEC_TABLE": "2",
         "VEC_CORR": "'NONE'",
         "OUT_UNITS": "'AU-D'",
