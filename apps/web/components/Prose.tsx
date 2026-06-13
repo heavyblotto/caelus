@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { JetBrains_Mono } from "next/font/google";
+
+const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["400"] });
 
 export const A = ({ href, children }: { href: string; children: React.ReactNode }) =>
   href.startsWith("/")
@@ -14,11 +17,36 @@ export const P = ({ children, dim }: { children: React.ReactNode; dim?: boolean 
 );
 
 export const Code = ({ children }: { children: React.ReactNode }) => (
-  <code style={{ background: "#1a1626", padding: "0.1rem 0.35rem", borderRadius: 4 }}>{children}</code>
+  <code
+    className={mono.className}
+    style={{
+      background: "#161322",
+      padding: "0.12rem 0.4rem",
+      borderRadius: 4,
+      border: "1px solid #2a2438",
+      fontSize: "0.88em",
+    }}
+  >
+    {children}
+  </code>
 );
 
 export const Pre = ({ children }: { children: React.ReactNode }) => (
-  <pre style={{ background: "#13101e", padding: "0.9rem 1rem", borderRadius: 6, overflow: "auto", fontSize: "0.8em", lineHeight: 1.55 }}>{children}</pre>
+  <pre
+    className={mono.className}
+    style={{
+      background: "#13101e",
+      padding: "1rem 1.1rem",
+      borderRadius: 8,
+      border: "1px solid #2a2438",
+      overflow: "auto",
+      fontSize: "0.8125rem",
+      lineHeight: 1.65,
+      tabSize: 2,
+    }}
+  >
+    {children}
+  </pre>
 );
 
 export function Nav({ current }: { current: string }) {

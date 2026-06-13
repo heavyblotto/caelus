@@ -109,7 +109,20 @@ export default function SkyNow() {
                 </ul>
               )}
               {tab === "json" && (
-                <pre style={{ background: "#13101e", padding: "1rem", borderRadius: 6, overflow: "auto", fontSize: "0.75em", maxHeight: "24rem" }}>
+                <pre
+                  style={{
+                    background: "#13101e",
+                    padding: "1rem 1.1rem",
+                    borderRadius: 8,
+                    border: "1px solid #2a2438",
+                    overflow: "auto",
+                    fontSize: "0.75rem",
+                    lineHeight: 1.65,
+                    tabSize: 2,
+                    maxHeight: "24rem",
+                    margin: 0,
+                  }}
+                >
                   {JSON.stringify(chart, null, 2)}
                 </pre>
               )}
@@ -117,7 +130,7 @@ export default function SkyNow() {
           )}
         </>
       )}
-      <h3 style={{ marginTop: "2.5rem", opacity: 0.8 }}>Accuracy <span style={{ opacity: 0.5, fontWeight: "normal" }}>(vs Swiss Ephemeris, 1900–2099)</span></h3>
+      <h3 style={{ marginTop: "2.5rem", opacity: 0.8 }}>Accuracy <span style={{ opacity: 0.5, fontWeight: "normal" }}>(1900–2099)</span></h3>
       <table style={{ borderSpacing: "0.8rem 0.1rem", fontSize: "0.9em" }}>
         <tbody>{ACCURACY.map(([k, v]) => <tr key={k}><td style={{ opacity: 0.6 }}>{k}</td><td>{v}</td></tr>)}</tbody>
       </table>
