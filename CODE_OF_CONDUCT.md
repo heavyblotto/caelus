@@ -12,5 +12,5 @@ work. Conduct that makes others feel unwelcome is not acceptable.
 ## Reporting
 
 If you experience or witness a problem, report it privately to the maintainers
-at **[ADD A CONTACT EMAIL]**. Reports are handled confidentially. Maintainers
+at **info@ephemengine.com**. Reports are handled confidentially. Maintainers
 follow the Contributor Covenant's enforcement guidelines when responding.
