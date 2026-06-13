@@ -72,6 +72,10 @@ export default function Notes() {
         port (worst delta 0.41 nano-arcseconds). CI runs both on every commit. The
         TS port was mostly agent-written with one gate: keep the suite green.
       </P>
+      <P>
+        The fuller account of an engine written mostly by agents, and what kept
+        it honest, is on <A href="/how-it-was-built">How this was built</A>.
+      </P>
       <P dim>
         Playground: <A href="/playground">/playground</A>.{" "}
         <A href="/provenance">Provenance</A> · <A href="/validation">Validation</A> ·{" "}
