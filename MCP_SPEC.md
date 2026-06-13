@@ -53,13 +53,18 @@ magnitude, gamma; types match Swiss Ephemeris exactly). Times agree with
 Swiss Ephemeris to the second; stations to ~1 minute (ill-conditioned by
 nature).
 
-## Resources (phase 2)
-- `caelus://glossary` — machine-readable definitions (aspects, houses, dignities).
-- `caelus://accuracy` — validation table.
+## Resources (shipped)
+- `caelus://glossary`: machine-readable definitions; aspect angles and default
+  orbs, signs, bodies, the twelve house systems, and essential dignities
+  (domicile/exaltation/detriment/fall).
+- `caelus://accuracy`: the validation table, vs Swiss Ephemeris (`swiss`) and
+  JPL Horizons apparent positions (`jpl`).
 
-## Prompts (phase 2)
-- `natal_reading` — template wiring natal_chart + corpus citations (once KG server exists).
-- `rectification_session` — multi-turn script around rectification_grid.
+## Prompts
+- `rectification_session` (shipped): a multi-turn script around
+  `rectification_grid` and `find_aspect_dates`.
+- `natal_reading` (future): template wiring `natal_chart` + corpus citations,
+  once a KG/corpus server exists.
 
 ## Transports & deployment
 - **stdio** (shipped): `npx caelus-mcp` for Claude Desktop / local agents.

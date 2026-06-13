@@ -26,4 +26,18 @@ const rect = await client.callTool({ name: "rectification_grid", arguments: {
 const rg = JSON.parse(rect.content[0].text);
 console.log("asc sign changes:", rg.asc_sign_changes.slice(0, 4).join(" | "), "...");
 
+const resources = await client.listResources();
+console.log("resources:", resources.resources.map(r => r.uri).join(", "));
+const acc = JSON.parse((await client.readResource({ uri: "caelus://accuracy" })).contents[0].text);
+console.log("accuracy: swiss", acc.swiss.bodies.length, "bodies | jpl", acc.jpl ? "present" : "null");
+const glo = JSON.parse((await client.readResource({ uri: "caelus://glossary" })).contents[0].text);
+console.log("glossary: aspects", Object.keys(glo.aspects).length, "| houses", glo.house_systems.length,
+  "| Mars dignities:", JSON.stringify(glo.dignities.mars));
+
+const prompts = await client.listPrompts();
+console.log("prompts:", prompts.prompts.map(p => p.name).join(", "));
+const rectP = await client.getPrompt({ name: "rectification_session", arguments: {
+  date: "1985-03-20T00:00:00Z", lat: "40.7", lon: "-74.0", events: "2010-06-01: moved abroad" } });
+console.log("rectification prompt:", rectP.messages[0].content.text.slice(0, 64).replace(/\n/g, " "), "...");
+
 await client.close();

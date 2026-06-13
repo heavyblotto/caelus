@@ -21,6 +21,7 @@ import {
   Engine, BODIES, Body, julianDay, mod,
   riseSet, crossings, lunarPhases, stations, RiseKind,
   lunarEclipses, solarEclipses,
+  ASPECTS, DEFAULT_ORBS, SIGNS as SIGN_NAMES, dignities,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -59,6 +60,29 @@ const zodiacSchema = z.enum(ZODIACS).default("tropical")
   .describe("tropical (default) or sidereal:<ayanamsa>");
 type HouseSysT = (typeof HOUSE_SYSTEMS)[number];
 type ZodiacT = (typeof ZODIACS)[number];
+
+// ----------------------------------------------------- resource payloads
+const ACCURACY = (() => {
+  const swiss = require("caelus/accuracy.json");
+  let jpl: unknown = null;
+  try {
+    jpl = require(join(dirname(require.resolve("caelus/package.json")),
+                       "horizons-accuracy.json"));
+  } catch { /* optional, ships with the repo but maybe not the tarball */ }
+  return { swiss, jpl };
+})();
+
+const TRADITIONAL = ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn"];
+const GLOSSARY = {
+  aspects: Object.fromEntries(Object.entries(ASPECTS).map(
+    ([k, deg]) => [k, { degrees: deg, default_orb: DEFAULT_ORBS[k] ?? null }])),
+  signs: SIGN_NAMES,
+  bodies: BODIES,
+  house_systems: HOUSE_SYSTEMS,
+  dignities: Object.fromEntries(TRADITIONAL.map((b) => [b, Object.fromEntries(
+    SIGN_NAMES.map((s, i) => [s, dignities(b, i)])
+      .filter(([, d]) => (d as string[]).length))])),
+};
 
 function jdFromIso(iso: string): number {
   const d = new Date(iso);
@@ -458,6 +482,63 @@ export function buildServer(): McpServer {
     events.sort((a, b) => a.t.localeCompare(b.t));
     return text({ start, end, events });
   });
+
+  // --------------------------------------------------------- resources
+  server.registerResource(
+    "accuracy", "caelus://accuracy",
+    {
+      title: "Validation table",
+      description: "Per-body accuracy: vs Swiss Ephemeris (swiss) and JPL Horizons apparent positions (jpl).",
+      mimeType: "application/json",
+    },
+    async (uri) => ({
+      contents: [{ uri: uri.href, mimeType: "application/json", text: JSON.stringify(ACCURACY) }],
+    }),
+  );
+
+  server.registerResource(
+    "glossary", "caelus://glossary",
+    {
+      title: "Glossary",
+      description: "Machine-readable definitions: aspect angles and default orbs, signs, bodies, the twelve house systems, and essential dignities (domicile/exaltation/detriment/fall).",
+      mimeType: "application/json",
+    },
+    async (uri) => ({
+      contents: [{ uri: uri.href, mimeType: "application/json", text: JSON.stringify(GLOSSARY) }],
+    }),
+  );
+
+  // --------------------------------------------------------- prompts
+  server.registerPrompt(
+    "rectification_session",
+    {
+      title: "Birth-time rectification",
+      description: "Guide a birth-time rectification: sweep candidate ascendants across the day, then test them against dated life events.",
+      argsSchema: {
+        date: z.string().describe("Approximate birth DATE, UTC ISO (the time is what we are solving for)"),
+        lat: z.string().describe("Birth latitude, north positive"),
+        lon: z.string().describe("Birth longitude, EAST positive"),
+        events: z.string().optional().describe("Known life events, one per line: 'YYYY-MM-DD: description'"),
+      },
+    },
+    ({ date, lat, lon, events }) => ({
+      messages: [{
+        role: "user",
+        content: {
+          type: "text",
+          text:
+            `Help rectify an uncertain birth time.\n\n`
+            + `Approximate birth: ${date} at lat ${lat}, lon ${lon}. The clock time is unknown.\n`
+            + (events ? `Dated life events:\n${events}\n\n` : "\n")
+            + `Procedure:\n`
+            + `1. Call rectification_grid(date, lat, lon, step_minutes: 15) to get the Ascendant and MC through the day and the times the Ascendant changes sign. Each segment is a candidate window.\n`
+            + `2. For each dated event, call find_aspect_dates and/or sky_events to find the exact transits active on that date.\n`
+            + `3. Prefer the candidate windows whose angles (Ascendant, MC) are triggered by those transits. Narrow to the best window, propose a birth time, and state the supporting evidence and the remaining uncertainty.\n`
+            + `Use the chart tools for all computation; do not invent positions.`,
+        },
+      }],
+    }),
+  );
 
   return server;
 }
