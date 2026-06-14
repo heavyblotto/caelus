@@ -99,6 +99,9 @@ jobs:
       - run: node scripts/check-llms.mjs
       # prose numeric claims must match the generated stats + accuracy table
       - run: npm run lint:claims
+      # em-dash gate: no `—` or &mdash; in rendered site prose (pure node, so it
+      # gates every PR here, not only in the Vale-dependent prose job below).
+      - run: npm run lint:emdash
 
   prose:
     runs-on: ubuntu-latest

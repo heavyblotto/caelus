@@ -3,6 +3,12 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
+# Em-dash gate: pure-node, runs even without Vale. Catches the `&mdash;` entity
+# dodge and em-dashes in the MDX docs the Vale extract never sees.
+echo "→ Em-dash check on apps/web"
+node scripts/check-em-dashes.mjs
+echo ""
+
 if ! command -v vale >/dev/null 2>&1; then
   echo "vale not found — install: brew install vale (https://vale.sh)"
   exit 1
