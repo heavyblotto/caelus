@@ -6,7 +6,15 @@ package. Numbers quoted here are as measured at release time;
 current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
-## Unreleased
+## 0.13.0 — 2026-06-14
+
+A feature release across all four packages. The engine completes Phase 1 — the
+Hellenistic time-lords (lots, profections, firdaria, zodiacal releasing) and
+primary directions to the angles — and opens the Phase 2 Vedic layer (nakshatras,
+Vimshottari dasha, and the Parashari vargas), each pinned by a cross-language
+golden. The MCP server grows from nine to eighteen tools, surfacing returns,
+progressions, composite, dignities, and the five Phase 1 time-lord and
+direction tools.
 
 ### Engine (`caelus`)
 
