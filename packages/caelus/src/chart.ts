@@ -312,8 +312,12 @@ export class Engine {
     };
   }
 
-  /** Full natal chart. Time is UT. East longitude positive. The ninth
-   *  argument takes a house system name (0.2.x form) or a ChartOptions bag. */
+  /** Full natal chart. The first six arguments are calendar fields in UT
+   *  (year, month, day, hour, minute, second), NOT a Julian Day; passing a JD
+   *  in `y` builds an instant outside the fitted range and throws. East
+   *  longitude positive. The ninth argument takes a house system name (0.2.x
+   *  form) or a ChartOptions bag. For a chart from a JD, convert it to calendar
+   *  fields first; `position`/`longitude` take a JD directly. */
   chart(
     y: number, mo: number, d: number, h: number, mi: number, s: number,
     lat: number, lonEast: number, opts: HouseSystem | ChartOptions = "placidus",

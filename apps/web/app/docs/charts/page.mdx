@@ -10,6 +10,44 @@ export const metadata = {
 `engine.chart()` accepts the calendar fields in UT, a latitude, a longitude
 (east positive), and either a house-system name or an options object.
 
+## Calendar fields, not a Julian Day
+
+The first six arguments are calendar fields in UT, in order: year, month, day,
+hour, minute, second. They are followed by latitude and east-positive longitude.
+
+<CodeBlock
+  lang="typescript"
+  label="signature.ts"
+  code={`//                         y     mo  d   h   mi  s   lat     lonEast
+const chart = engine.chart(1990, 6, 10, 14, 30, 0, 27.95, -82.46, "placidus");`}
+/>
+
+Passing a Julian Day in the year slot is a common mistake: the engine reads it
+as a calendar year, builds an instant far outside the fitted range, and the
+first body to check its range throws `RangeError: jd ... outside fitted range`.
+If you hold a Julian Day in UT, convert it to calendar fields first:
+
+<CodeBlock
+  lang="typescript"
+  label="from-jd.ts"
+  code={`const d = new Date((jdUt - 2440587.5) * 86400000); // JD(UT) -> Date
+const chart = engine.chart(
+  d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate(),
+  d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(),
+  lat, lon,
+);`}
+/>
+
+For a single body at a Julian Day, `engine.position()` and `engine.longitude()`
+take a JD directly, so no conversion is needed:
+
+<CodeBlock
+  lang="typescript"
+  label="at-jd.ts"
+  code={`engine.longitude("sun", jdUt);                        // degrees
+engine.position("mars", jdUt, { zodiac: "tropical" }); // full Position`}
+/>
+
 ## Options
 
 <CodeBlock
