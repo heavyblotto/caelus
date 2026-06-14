@@ -187,3 +187,17 @@ firdaria, the +6 loosing-of-the-bond and L2-tiling invariants for releasing, and
 the IC = MC + 180 and time-key invariants for directions — and a frozen
 `golden-mcp` payload. The `directions` tool completes the Phase 1 surface.
 Eighteen tools total.
+
+## Vedic harvest (Roadmap Phase 2, shipped in caelus-mcp 0.14.0)
+Vedic/Jyotish layer: `nakshatras` (the 27 lunar mansions, padas, and lords of
+each planet and the Ascendant), `dasha` (Vimshottari, Yogini, or Ashtottari
+periods from the Moon's nakshatra), `vargas` (the Parashari divisional charts
+D1/D2/D3/D9/D10/D12/D30), and `yogas` (Pancha Mahapurusha, Gajakesari,
+Budha-Aditya, Chandra-Mangala, Kemadruma, plus raja/dhana yogas and yogakarakas)
+surface the engine's sidereal layer over MCP; `directions` gains an optional
+inter-planetary (mundane, promissor → significator) block. These tools default
+to the sidereal Lahiri zodiac. No engine change; each gains `verify_tools`
+engine-oracle checks — nakshatra/pada/lord exactness, dasha timeline contiguity
+and active-lord agreement with the engine, the D1 = rasi reduction and navamsa
+match for vargas, and the conjunction/aspect/exchange association invariant for
+raja/dhana yogas — and a frozen `golden-mcp` payload. Twenty-two tools total.

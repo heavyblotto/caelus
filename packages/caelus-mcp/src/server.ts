@@ -3,7 +3,7 @@
  * caelus-mcp -- MCP server for the caelus ephemeris engine.
  *
  * Design (per 2026 MCP practice): one bounded context (chart computation),
- * a small curated tool surface (eighteen outcome-level tools, not API wrappers),
+ * a small curated tool surface (twenty-two outcome-level tools, not API wrappers),
  * and token-frugal outputs (positions to 0.01 deg, terse keys, no prose --
  * the model does the interpreting, the server does the math).
  *
@@ -30,7 +30,11 @@ import {
   lots, HERMETIC_LOTS,
   profectionAt, firdaria, firdariaActive,
   zrRelease, zrActive, lotSpirit, lotFortune,
-  primaryDirections,
+  primaryDirections, mundaneDirections,
+  nakshatra, vimshottariDashas, vimshottariAt,
+  yoginiDashas, yoginiAt, ashtottariDashas, ashtottariAt,
+  varga, VARGA_DIVISIONS,
+  yogasAt, kemadrumaAt, rajaYogasAt, dhanaYogasAt,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -97,6 +101,10 @@ const ZODIACS = [
 ] as const;
 const zodiacSchema = z.enum(ZODIACS).default("tropical")
   .describe("tropical (default) or sidereal:<ayanamsa>");
+// Jyotish techniques (nakshatras, vargas, dashas, yogas) are sidereal by
+// definition; default these tools to Lahiri rather than tropical.
+const siderealZodiac = z.enum(ZODIACS).default("sidereal:lahiri")
+  .describe("sidereal ayanamsa (default sidereal:lahiri); these are sidereal techniques");
 type HouseSysT = (typeof HOUSE_SYSTEMS)[number];
 type ZodiacT = (typeof ZODIACS)[number];
 
@@ -397,10 +405,74 @@ const directionOut = z.object({
   years: z.number(),
   date: z.string(),
 });
+const mundaneDirectionOut = z.object({
+  promissor: z.string(),
+  significator: z.string(),
+  arc: z.number(),
+  years: z.number(),
+  date: z.string(),
+});
 export const directionsOut = z.object({
   natal_utc: z.string(),
   key: z.enum(["ptolemy", "naibod"]),
   directions: z.array(directionOut),
+  mundane: z.array(mundaneDirectionOut).optional(),
+});
+export const nakshatrasOut = z.object({
+  natal_utc: z.string(),
+  zodiac: z.enum(ZODIACS),
+  points: z.record(z.string(), z.object({
+    nakshatra: z.string(),
+    pada: z.number().int().min(1).max(4),
+    lord: z.string(),
+    deg: z.number(),
+  })),
+});
+const dashaSubOut = z.object({
+  lord: z.string().optional(),
+  yogini: z.string().optional(),
+  start: z.string(),
+  end: z.string(),
+});
+export const dashaOut = z.object({
+  natal_utc: z.string(),
+  system: z.enum(["vimshottari", "yogini", "ashtottari"]),
+  moon_nakshatra: z.string(),
+  start_lord: z.string().optional(),
+  start_yogini: z.string().optional(),
+  balance_years: z.number(),
+  periods: z.array(z.object({
+    lord: z.string().optional(),
+    yogini: z.string().optional(),
+    start: z.string(),
+    end: z.string(),
+    sub: z.array(dashaSubOut).optional(),
+  })),
+  active: z.object({
+    target_utc: z.string(),
+    maha: z.string().nullable(),
+    antar: z.string().nullable(),
+    pratyantar: z.string().nullable().optional(),
+  }).optional(),
+});
+export const vargasOut = z.object({
+  natal_utc: z.string(),
+  zodiac: z.enum(ZODIACS),
+  charts: z.record(z.string(), z.record(z.string(), z.object({
+    sign: z.string(),
+    sign_index: z.number().int().min(0).max(11),
+    division: z.number().int(),
+  }))),
+});
+const lordPairOut = z.object({ lords: z.array(z.string()), via: z.string() });
+export const yogasOut = z.object({
+  natal_utc: z.string(),
+  zodiac: z.enum(ZODIACS),
+  yogas: z.array(z.object({ yoga: z.string(), planets: z.array(z.string()) })),
+  kemadruma: z.boolean(),
+  raja_yogas: z.array(lordPairOut),
+  dhana_yogas: z.array(lordPairOut),
+  yogakarakas: z.array(z.string()),
 });
 export const OUTPUT_SCHEMAS = {
   natal_chart: chartOut,
@@ -421,6 +493,10 @@ export const OUTPUT_SCHEMAS = {
   firdaria: firdariaOut,
   releasing: releasingOut,
   directions: directionsOut,
+  nakshatras: nakshatrasOut,
+  dasha: dashaOut,
+  vargas: vargasOut,
+  yogas: yogasOut,
 } as const;
 
 // ---------------------------------------------------------------- server
@@ -986,16 +1062,22 @@ export function buildServer(
 
   server.registerTool("directions", {
     description:
-      "Primary (mundane) directions of the seven traditional planets to the four angles (MC, IC, Ascendant, Descendant). The diurnal rotation carries each body to an angle; the arc of rotation, converted by a time key (Naibod 0.9856473°/yr by default, or Ptolemy 1°/yr), gives the age of the direction. Returns the directions within max_years, sorted by age, each with its arc, age in years, and UTC date. Circumpolar bodies have no Ascendant/Descendant directions. Needs the birth time and place; equatorial, so zodiac is irrelevant.",
+      "Primary (mundane) directions of the seven traditional planets to the four angles (MC, IC, Ascendant, Descendant), and optionally between the planets themselves. The diurnal rotation carries a body to the angle (or a promissor to a significator); the arc of rotation, converted by a time key (Naibod 0.9856473°/yr by default, or Ptolemy 1°/yr), gives the age of the direction. Returns the directions within max_years, sorted by age, each with its arc, age in years, and UTC date. With include_mundane, also returns the planet-to-planet (promissor → significator) directions. Circumpolar bodies have no Ascendant/Descendant directions. Needs the birth time and place; equatorial, so zodiac is irrelevant.",
     inputSchema: {
       ...birth,
       key: z.enum(["naibod", "ptolemy"]).optional().describe("time key: naibod (0.9856473°/yr, default) or ptolemy (1°/yr)"),
       max_years: z.number().positive().optional().describe("only directions reached within this many years of life (default 90)"),
+      include_mundane: z.boolean().optional().describe("also return inter-planetary (promissor → significator) directions (default false)"),
     },
-  }, async ({ date, lat, lon, key = "naibod", max_years = 90 }) => {
+  }, async ({ date, lat, lon, key = "naibod", max_years = 90, include_mundane = false }) => {
     const natalJd = jdFromIso(date);
     const dirs = primaryDirections(engine, natalJd, lat, lon, undefined, key, max_years);
-    return text({
+    const payload: {
+      natal_utc: string;
+      key: string;
+      directions: Array<{ body: string; angle: string; arc: number; years: number; date: string }>;
+      mundane?: Array<{ promissor: string; significator: string; arc: number; years: number; date: string }>;
+    } = {
       natal_utc: date,
       key,
       directions: dirs.map((d) => ({
@@ -1005,6 +1087,155 @@ export function buildServer(
         years: r2(d.years),
         date: isoFromJd(d.jd),
       })),
+    };
+    if (include_mundane) {
+      const mundane = mundaneDirections(engine, natalJd, lat, lon, undefined, key, max_years);
+      payload.mundane = mundane.map((d) => ({
+        promissor: d.promissor,
+        significator: d.significator,
+        arc: r2(d.arc),
+        years: r2(d.years),
+        date: isoFromJd(d.jd),
+      }));
+    }
+    return text(payload);
+  });
+
+  server.registerTool("nakshatras", {
+    description:
+      "The nakshatra (one of the 27 lunar mansions of 13°20′) of each classical point on the sidereal zodiac: the seven traditional planets and the Ascendant (lagna). Per point: the nakshatra name, its pada (quarter, 1–4), the ruling planet (the Vimshottari lord), and degrees into the nakshatra. The Moon's nakshatra (janma nakshatra) anchors the Vimshottari dasha. Sidereal by definition; Lahiri ayanamsa by default. Needs the birth time and place for the Ascendant.",
+    inputSchema: { ...birth, zodiac: siderealZodiac },
+  }, async ({ date, lat, lon, zodiac }) => {
+    const natalJd = jdFromIso(date);
+    const chart = engine.chartAt(natalJd, lat, lon, { zodiac });
+    const desc = (lonDeg: number) => {
+      const n = nakshatra(lonDeg);
+      return { nakshatra: n.name, pada: n.pada, lord: n.lord, deg: r2(n.pos) };
+    };
+    const points: Record<string, ReturnType<typeof desc>> = {};
+    for (const b of TRADITIONAL) points[b] = desc(chart.bodies[b as Body].lon);
+    points.asc = desc(chart.angles.asc);
+    return text({ natal_utc: date, zodiac, points });
+  });
+
+  server.registerTool("dasha", {
+    description:
+      "Vedic dasha periods — planetary time-lord cycles started from the Moon's birth nakshatra. system selects Vimshottari (120-year, the standard), Yogini (36-year, eight yoginis), or Ashtottari (108-year). Returns the period timeline (mahadasha → antardasha) with UTC start/end, the balance of the first period at birth, and — when target_date is given — the lords active then (Vimshottari also gives the pratyantardasha). Sidereal; Lahiri by default. Needs the birth time and place.",
+    inputSchema: {
+      ...birth,
+      system: z.enum(["vimshottari", "yogini", "ashtottari"]).default("vimshottari")
+        .describe("dasha system: vimshottari (120y), yogini (36y), or ashtottari (108y)"),
+      target_date: z.string().optional().describe("UTC ISO date to read the active lords for; omit for the timeline only"),
+      levels: z.number().int().min(1).max(2).optional().describe("deepest timeline level: 1 (maha) or 2 (maha+antar, default)"),
+      zodiac: siderealZodiac,
+    },
+  }, async ({ date, lat, lon, system, target_date, levels = 2, zodiac }) => {
+    const natalJd = jdFromIso(date);
+    const moonLon = engine.longitude("moon", natalJd, { zodiac });
+    const moonNak = nakshatra(moonLon).name;
+    const targetJd = target_date !== undefined ? jdFromIso(target_date) : undefined;
+    const isoSub = (s: { lord: string; start: number; end: number }) =>
+      ({ lord: s.lord, start: isoFromJd(s.start), end: isoFromJd(s.end) });
+    switch (system) {
+      case "vimshottari": {
+        const tl = vimshottariDashas(moonLon, natalJd, levels);
+        const periods = tl.dashas.map((d) => ({
+          lord: d.lord, start: isoFromJd(d.start), end: isoFromJd(d.end),
+          ...(levels >= 2 ? { sub: d.sub.map(isoSub) } : {}),
+        }));
+        const payload: Record<string, unknown> = {
+          natal_utc: date, system, moon_nakshatra: moonNak,
+          start_lord: tl.start_lord, balance_years: r2(tl.balance_years), periods,
+        };
+        if (targetJd !== undefined) {
+          const a = vimshottariAt(engine, natalJd, targetJd, zodiac);
+          payload.active = { target_utc: target_date, maha: a.maha ?? null, antar: a.antar ?? null, pratyantar: a.pratyantar ?? null };
+        }
+        return text(payload);
+      }
+      case "yogini": {
+        const tl = yoginiDashas(moonLon, natalJd, levels);
+        const periods = tl.dashas.map((d) => ({
+          yogini: d.yogini, lord: d.lord, start: isoFromJd(d.start), end: isoFromJd(d.end),
+          ...(levels >= 2 ? { sub: d.sub.map((s) => ({ yogini: s.yogini, lord: s.lord, start: isoFromJd(s.start), end: isoFromJd(s.end) })) } : {}),
+        }));
+        const payload: Record<string, unknown> = {
+          natal_utc: date, system, moon_nakshatra: moonNak,
+          start_yogini: tl.start_yogini, balance_years: r2(tl.balance_years), periods,
+        };
+        if (targetJd !== undefined) {
+          const a = yoginiAt(engine, natalJd, targetJd, zodiac);
+          payload.active = { target_utc: target_date, maha: a.maha ?? null, antar: a.antar ?? null };
+        }
+        return text(payload);
+      }
+      case "ashtottari": {
+        const tl = ashtottariDashas(moonLon, natalJd, levels);
+        const periods = tl.dashas.map((d) => ({
+          lord: d.lord, start: isoFromJd(d.start), end: isoFromJd(d.end),
+          ...(levels >= 2 ? { sub: d.sub.map(isoSub) } : {}),
+        }));
+        const payload: Record<string, unknown> = {
+          natal_utc: date, system, moon_nakshatra: moonNak,
+          start_lord: tl.start_lord, balance_years: r2(tl.balance_years), periods,
+        };
+        if (targetJd !== undefined) {
+          const a = ashtottariAt(engine, natalJd, targetJd, zodiac);
+          payload.active = { target_utc: target_date, maha: a.maha ?? null, antar: a.antar ?? null };
+        }
+        return text(payload);
+      }
+      default: {
+        const _exhaustive: never = system;
+        throw new Error(`unknown dasha system: ${String(_exhaustive)}`);
+      }
+    }
+  });
+
+  server.registerTool("vargas", {
+    description:
+      "Parashari divisional charts (vargas): the sign of each of the seven planets and the Ascendant in the requested D-charts — D1 rasi, D2 hora, D3 drekkana, D9 navamsa, D10 dasamsa, D12 dwadasamsa, D30 trimsamsa. Per point in each chart: the divisional sign and the division number within the rasi. The navamsa (D9) is the most consulted after the rasi. Sidereal; Lahiri by default. Needs the birth time and place for the Ascendant.",
+    inputSchema: {
+      ...birth,
+      divisions: z.array(z.number().int().refine((n) => (VARGA_DIVISIONS as readonly number[]).includes(n), "unsupported division"))
+        .optional().describe(`subset of ${VARGA_DIVISIONS.join("/")} (default all)`),
+      zodiac: siderealZodiac,
+    },
+  }, async ({ date, lat, lon, divisions, zodiac }) => {
+    const natalJd = jdFromIso(date);
+    const chart = engine.chartAt(natalJd, lat, lon, { zodiac });
+    const ns = divisions && divisions.length ? divisions : (VARGA_DIVISIONS as readonly number[]);
+    const lons: Record<string, number> = { asc: chart.angles.asc };
+    for (const b of TRADITIONAL) lons[b] = chart.bodies[b as Body].lon;
+    const charts: Record<string, Record<string, { sign: string; sign_index: number; division: number }>> = {};
+    for (const n of ns) {
+      const c: Record<string, { sign: string; sign_index: number; division: number }> = {};
+      for (const [name, lonDeg] of Object.entries(lons)) {
+        const v = varga(lonDeg, n);
+        c[name] = { sign: v.sign, sign_index: v.sign_index, division: v.division };
+      }
+      charts[`D${n}`] = c;
+    }
+    return text({ natal_utc: date, zodiac, charts });
+  });
+
+  server.registerTool("yogas", {
+    description:
+      "Vedic yogas (planetary combinations) on the sidereal rasi chart: the five Pancha Mahapurusha yogas (Ruchaka, Bhadra, Hamsa, Malavya, Shasha), Gajakesari, Budha-Aditya, and Chandra-Mangala; whether Kemadruma (the isolated-Moon yoga) is present; the raja yogas (a kendra lord associating with a trikona lord) and dhana (wealth) yogas, each as the lord pair and how they associate (conjunction, aspect, or exchange); and the chart's yogakarakas (a planet ruling both a kendra and a trikona). Sidereal; Lahiri by default. Needs the birth time and place.",
+    inputSchema: { ...birth, zodiac: siderealZodiac },
+  }, async ({ date, lat, lon, zodiac }) => {
+    const natalJd = jdFromIso(date);
+    const placement = yogasAt(engine, natalJd, lat, lon, zodiac);
+    const kema = kemadrumaAt(engine, natalJd, lat, lon, false, false, zodiac);
+    const { raja, yogakarakas } = rajaYogasAt(engine, natalJd, lat, lon, zodiac);
+    const dhana = dhanaYogasAt(engine, natalJd, lat, lon, zodiac);
+    return text({
+      natal_utc: date, zodiac,
+      yogas: placement,
+      kemadruma: kema.present,
+      raja_yogas: raja,
+      dhana_yogas: dhana,
+      yogakarakas,
     });
   });
 

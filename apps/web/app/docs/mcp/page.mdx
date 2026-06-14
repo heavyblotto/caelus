@@ -12,7 +12,7 @@ export const metadata = {
 computed by the engine on each call, never recalled from training data, so every
 answer is deterministic.
 
-There are two ways to connect, with the same eighteen tools either way:
+There are two ways to connect, with the same twenty-two tools either way:
 
 - **Hosted (Streamable HTTP)** — point your client at
   `https://www.ephemengine.com/api/mcp`. Nothing to install.
@@ -194,7 +194,7 @@ Any stdio MCP client takes the same command and arguments:
 
 ## Verify the tools appeared
 
-After the client reloads, it should list **eighteen** tools. Ask it to enumerate
+After the client reloads, it should list **twenty-two** tools. Ask it to enumerate
 them, or check the client's MCP panel:
 
 `natal_chart`, `current_sky`, `transits`, `synastry`, `find_aspect_dates`,
@@ -206,13 +206,16 @@ crossings, solar and lunar eclipses), `planetary_hours`, `void_of_course`,
 and sect for the seven traditional planets), `lots` (the seven Hermetic
 lots, sect-aware), `profections` (annual and monthly profections, lord of the
 year), `firdaria` (the planetary time-lord periods), `releasing` (zodiacal
-releasing / aphesis from the Lot of Spirit or Fortune), and `directions`
-(primary directions of the planets to the angles).
+releasing / aphesis from the Lot of Spirit or Fortune), `directions`
+(primary directions of the planets to the angles, and optionally between the
+planets), `nakshatras` (lunar mansions, padas, and lords), `dasha` (Vimshottari,
+Yogini, or Ashtottari periods), `vargas` (Parashari divisional charts), and
+`yogas` (Pancha Mahapurusha, raja/dhana yogas, and yogakarakas).
 
 `natal_chart` and `current_sky` also tag each body with its solar phase
 (cazimi, combust, under the beams) and each aspect as applying or separating.
 
-If you see all eighteen, the server is wired correctly. The server also exposes two
+If you see all twenty-two, the server is wired correctly. The server also exposes two
 **resources** — `caelus://glossary` (aspect angles and orbs, signs, bodies,
 house systems, essential dignities) and `caelus://accuracy` (the validation
 table) — and a **prompt**, `rectification_session`, a guided flow around
@@ -275,7 +278,7 @@ behaviour is reproducible and the four packages stay in lockstep:
   "mcpServers": {
     "caelus": {
       "command": "npx",
-      "args": ["-y", "caelus-mcp@0.13.0"]
+      "args": ["-y", "caelus-mcp@0.14.0"]
     }
   }
 }`}

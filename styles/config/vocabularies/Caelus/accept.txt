@@ -166,3 +166,8 @@ Kemadruma
 [Dd]hana
 detectYogas
 yogasAt
+[Yy]ogakarakas?
+[Ll]agna
+[Mm]aha
+[Aa]ntar
+pratyantar

@@ -84,6 +84,22 @@ export const GOLDEN_CASES = [
     args: { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46, target_date: "2026-06-10T00:00:00Z", max_level: 2, horizon_years: 40 } },
   { id: "directions-naibod", tool: "directions",
     args: { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46, key: "naibod", max_years: 90 } },
+  { id: "directions-mundane", tool: "directions",
+    args: { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46, key: "naibod", max_years: 60, include_mundane: true } },
+
+  // --- Vedic / Jyotish harvest (Phase 2) ---
+  { id: "nakshatras-tampa", tool: "nakshatras",
+    args: { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 } },
+  { id: "dasha-vimshottari-2026", tool: "dasha",
+    args: { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46, system: "vimshottari", target_date: "2026-06-10T00:00:00Z" } },
+  { id: "dasha-yogini-2026", tool: "dasha",
+    args: { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46, system: "yogini", target_date: "2026-06-10T00:00:00Z" } },
+  { id: "dasha-ashtottari-2026", tool: "dasha",
+    args: { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46, system: "ashtottari", target_date: "2026-06-10T00:00:00Z" } },
+  { id: "vargas-tampa", tool: "vargas",
+    args: { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 } },
+  { id: "yogas-tampa", tool: "yogas",
+    args: { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 } },
 ];
 
 async function run() {

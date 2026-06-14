@@ -19,7 +19,11 @@ import {
   lots, HERMETIC_LOTS,
   profectionAt, firdaria, firdariaActive,
   zrRelease, zrAt, SIGNS,
-  primaryDirections, KEYS,
+  primaryDirections, mundaneDirections, KEYS,
+  nakshatra, vimshottariDashas, vimshottariAt,
+  yoginiDashas, yoginiAt, ashtottariDashas, ashtottariAt,
+  varga, VARGA_DIVISIONS,
+  yogasAt, kemadrumaAt, rajaYogasAt, dhanaYogasAt,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -458,6 +462,122 @@ const assertExactHits = (hits, body, targetLonAt, angle, label, tolDeg = 0.02) =
     if (byBody[b].MC !== undefined && byBody[b].IC !== undefined) {
       assert(Math.abs(mod(byBody[b].IC - byBody[b].MC - 180, 360)) < 0.02, `directions: ${b} IC = MC + 180`);
     }
+  }
+  // include_mundane: inter-planetary directions match the engine and are gated off by default
+  assert(res.mundane === undefined, "directions: no mundane block unless requested");
+  const resM = await call("directions", { ...args, key: "naibod", max_years: 90, include_mundane: true });
+  const expM = mundaneDirections(eng, natalJd, args.lat, args.lon, undefined, "naibod", 90);
+  assert(resM.mundane.length === expM.length, `directions: mundane count ${resM.mundane.length} vs ${expM.length}`);
+  for (let i = 0; i < expM.length; i++) {
+    assert(resM.mundane[i].promissor === expM[i].promissor, `directions: mundane ${i} promissor`);
+    assert(resM.mundane[i].significator === expM[i].significator, `directions: mundane ${i} significator`);
+    assert(Math.abs(resM.mundane[i].years - expM[i].years) < 0.02, `directions: mundane ${i} years`);
+  }
+  for (const d of resM.mundane) {
+    assert(d.promissor !== d.significator, "directions: mundane never self-direction");
+    assert(Math.abs(d.years - d.arc / KEYS.naibod) < 0.02, "directions: mundane years = arc / naibod key");
+  }
+}
+
+// ---------------------------------------------------------------- nakshatras
+{
+  const args = { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 };
+  const res = await call("nakshatras", args);
+  const natalJd = jdFromIso(args.date);
+  const Z = "sidereal:lahiri";
+  assert(res.zodiac === Z, "nakshatras: defaults to sidereal:lahiri");
+  for (const b of ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn"]) {
+    const g = nakshatra(eng.longitude(b, natalJd, { zodiac: Z }));
+    assert(res.points[b].nakshatra === g.name, `nakshatras: ${b} name`);
+    assert(res.points[b].pada === g.pada, `nakshatras: ${b} pada`);
+    assert(res.points[b].lord === g.lord, `nakshatras: ${b} lord`);
+    assert(res.points[b].pada >= 1 && res.points[b].pada <= 4, `nakshatras: ${b} pada in 1..4`);
+  }
+  const ascNak = nakshatra(eng.chartAt(natalJd, args.lat, args.lon, { zodiac: Z }).angles.asc);
+  assert(res.points.asc.nakshatra === ascNak.name, "nakshatras: ascendant (lagna) nakshatra");
+}
+
+// ---------------------------------------------------------------- dasha
+{
+  const args = { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 };
+  const natalJd = jdFromIso(args.date);
+  const Z = "sidereal:lahiri";
+  const moonLon = eng.longitude("moon", natalJd, { zodiac: Z });
+  const target = "2026-06-14T00:00:00Z";
+  const targetJd = jdFromIso(target);
+
+  // vimshottari
+  {
+    const res = await call("dasha", { ...args, system: "vimshottari", target_date: target });
+    const tl = vimshottariDashas(moonLon, natalJd, 2);
+    assert(res.system === "vimshottari", "dasha/vim: system echoed");
+    assert(res.start_lord === tl.start_lord, "dasha/vim: start lord");
+    assert(res.periods.length === tl.dashas.length, "dasha/vim: timeline length");
+    assert(Math.abs(res.balance_years - r2(tl.balance_years)) < 0.01, "dasha/vim: balance years");
+    // maha periods tile contiguously
+    for (let i = 1; i < res.periods.length; i++) {
+      assert(res.periods[i].start === res.periods[i - 1].end, `dasha/vim: maha ${i} contiguous`);
+    }
+    const a = vimshottariAt(eng, natalJd, targetJd, Z);
+    assert(res.active.maha === (a.maha ?? null), "dasha/vim: active maha matches engine");
+    assert(res.active.antar === (a.antar ?? null), "dasha/vim: active antar matches engine");
+    assert(res.active.pratyantar === (a.pratyantar ?? null), "dasha/vim: active pratyantar matches engine");
+  }
+  // yogini
+  {
+    const res = await call("dasha", { ...args, system: "yogini", target_date: target });
+    const tl = yoginiDashas(moonLon, natalJd, 2);
+    assert(res.start_yogini === tl.start_yogini, "dasha/yogini: start yogini");
+    assert(res.periods.length === tl.dashas.length, "dasha/yogini: timeline length");
+    const a = yoginiAt(eng, natalJd, targetJd, Z);
+    assert(res.active.maha === (a.maha ?? null), "dasha/yogini: active maha matches engine");
+  }
+  // ashtottari
+  {
+    const res = await call("dasha", { ...args, system: "ashtottari", target_date: target });
+    const tl = ashtottariDashas(moonLon, natalJd, 2);
+    assert(res.start_lord === tl.start_lord, "dasha/ashtottari: start lord");
+    assert(res.periods.length === tl.dashas.length, "dasha/ashtottari: timeline length");
+    const a = ashtottariAt(eng, natalJd, targetJd, Z);
+    assert(res.active.maha === (a.maha ?? null), "dasha/ashtottari: active maha matches engine");
+  }
+}
+
+// ---------------------------------------------------------------- vargas
+{
+  const args = { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 };
+  const res = await call("vargas", args);
+  const natalJd = jdFromIso(args.date);
+  const Z = "sidereal:lahiri";
+  for (const n of VARGA_DIVISIONS) {
+    assert(res.charts[`D${n}`] !== undefined, `vargas: chart D${n} present`);
+  }
+  // D1 reduces to the rasi: the divisional sign equals the body's rasi
+  for (const b of ["sun", "moon", "mars", "jupiter", "saturn"]) {
+    const lon = eng.longitude(b, natalJd, { zodiac: Z });
+    assert(res.charts.D1[b].sign_index === Math.floor(((lon % 360) + 360) % 360 / 30) % 12, `vargas: D1 ${b} = rasi`);
+    assert(res.charts.D9[b].sign === varga(lon, 9).sign, `vargas: D9 ${b} navamsa matches engine`);
+  }
+}
+
+// ---------------------------------------------------------------- yogas
+{
+  const args = { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 };
+  const res = await call("yogas", args);
+  const natalJd = jdFromIso(args.date);
+  const Z = "sidereal:lahiri";
+  const placement = yogasAt(eng, natalJd, args.lat, args.lon, Z);
+  assert(res.yogas.length === placement.length, "yogas: placement count matches engine");
+  const names = new Set(res.yogas.map((y) => y.yoga));
+  for (const y of placement) assert(names.has(y.yoga), `yogas: ${y.yoga} present`);
+  assert(res.kemadruma === kemadrumaAt(eng, natalJd, args.lat, args.lon, false, false, Z).present, "yogas: kemadruma matches engine");
+  const { raja, yogakarakas } = rajaYogasAt(eng, natalJd, args.lat, args.lon, Z);
+  assert(res.raja_yogas.length === raja.length, "yogas: raja count matches engine");
+  assert(JSON.stringify(res.yogakarakas) === JSON.stringify(yogakarakas), "yogas: yogakarakas match engine");
+  assert(res.dhana_yogas.length === dhanaYogasAt(eng, natalJd, args.lat, args.lon, Z).length, "yogas: dhana count matches engine");
+  // every raja/dhana association is one of the three defined types
+  for (const y of [...res.raja_yogas, ...res.dhana_yogas]) {
+    assert(["conjunction", "aspect", "exchange"].includes(y.via), `yogas: association type ${y.via} is defined`);
   }
 }
 

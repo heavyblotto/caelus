@@ -1,10 +1,11 @@
 # caelus-mcp
 
 MCP server for the [caelus](https://github.com/heavyblotto/caelus) ephemeris
-engine: eighteen chart tools over stdio. Computation only — positions, houses,
+engine: twenty-two chart tools over stdio. Computation only — positions, houses,
 aspects with orbs, event search, electional, returns, progressions, composite,
 dignities, Hermetic lots, the Hellenistic time-lords (profections, firdaria,
-zodiacal releasing), and primary directions — the model does the interpreting.
+zodiacal releasing), primary directions, and the Vedic layer (nakshatras,
+dashas, vargas, yogas) — the model does the interpreting.
 It needs
 no API keys, ephemeris files, or network calls; the engine data ships inside
 the package.
@@ -55,7 +56,11 @@ A hosted Streamable HTTP endpoint is also live at
 | `profections` | Annual and monthly profections to a target date: age, the profected signs and their whole-sign houses, and the lord of the year |
 | `firdaria` | The firdaria planetary time-lord periods: the full 75-year timeline (nine periods, seven sub-periods each) and the lords active at a target date |
 | `releasing` | Zodiacal releasing (aphesis) from the Lot of Spirit or Fortune: the L1–L4 period timeline and the lords active at a target date, with loosing of the bond |
-| `directions` | Primary directions of the seven traditional planets to the four angles (MC/IC/Asc/Desc) by the Naibod or Ptolemy time key, sorted by age |
+| `directions` | Primary directions of the seven traditional planets to the four angles (MC/IC/Asc/Desc), and optionally between the planets (mundane), by the Naibod or Ptolemy time key, sorted by age |
+| `nakshatras` | The nakshatra (lunar mansion), pada, and ruling planet of each classical planet and the Ascendant on the sidereal zodiac (Lahiri by default) |
+| `dasha` | Vedic dasha periods from the Moon's nakshatra — Vimshottari (120y), Yogini (36y), or Ashtottari (108y): the maha → antar timeline and the lords active at a target date |
+| `vargas` | Parashari divisional charts (D1 rasi, D2, D3, D9 navamsa, D10, D12, D30): the divisional sign of each planet and the Ascendant |
+| `yogas` | Vedic yogas on the rasi chart: Pancha Mahapurusha, Gajakesari, Budha-Aditya, Chandra-Mangala, Kemadruma, plus raja/dhana yogas and yogakarakas |
 
 `natal_chart` and `current_sky` also tag each body with its solar phase
 (cazimi/combust/under-the-beams) and each aspect with applying/separating.

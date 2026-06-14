@@ -6,9 +6,17 @@ package. Numbers quoted here are as measured at release time;
 current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
-## Unreleased
+## 0.14.0 — 2026-06-14
 
-Working through the deferred-technique resolution plan (ROADMAP).
+A feature release across all four packages. The engine resolves the deferred
+Phase 2 techniques — the full Parashari varga set (adding hora D2 and the
+unequal trimsamsa D30), the Ashtottari dasha, the Kemadruma yoga, a lordship and
+graha-drishti layer with raja/dhana yogas and yogakarakas, and inter-planetary
+(mundane) primary directions — each pinned by the new `validate_jyotish`
+reference tier. The MCP server grows from eighteen to twenty-two tools,
+surfacing the whole Vedic layer over MCP: `nakshatras`, `dasha`
+(Vimshottari/Yogini/Ashtottari), `vargas`, and `yogas`; the `directions` tool
+gains an optional inter-planetary (mundane) block.
 
 ### Web / chat MCP App (Roadmap Phase 3)
 
@@ -70,6 +78,27 @@ Working through the deferred-technique resolution plan (ROADMAP).
   reference set, the way positions are pinned to Swiss Ephemeris and JPL
   Horizons. Runs no external tool (stays swisseph-free); grows as deferred
   techniques land. Documented in ARCHITECTURE.md.
+
+### MCP server (`caelus-mcp`)
+
+- Phase 2 Vedic harvest — four new tools take the surface from eighteen to
+  twenty-two, all defaulting to the sidereal Lahiri zodiac:
+  - `nakshatras` — the nakshatra (lunar mansion), pada, and ruling planet of
+    each classical planet and the Ascendant (lagna).
+  - `dasha` — Vedic dasha periods from the Moon's nakshatra, with a `system`
+    selector for Vimshottari (120-year), Yogini (36-year), or Ashtottari
+    (108-year): the maha → antar timeline and the lords active at a target date
+    (Vimshottari also gives the pratyantardasha).
+  - `vargas` — the Parashari divisional charts (D1/D2/D3/D9/D10/D12/D30): the
+    divisional sign of each planet and the Ascendant.
+  - `yogas` — Vedic yogas on the rasi chart: the five Pancha Mahapurusha yogas,
+    Gajakesari, Budha-Aditya, Chandra-Mangala, Kemadruma, plus the raja/dhana
+    yogas and the chart's yogakarakas.
+- `directions` gains an `include_mundane` option that adds the inter-planetary
+  (promissor → significator) directions alongside the directions to the angles.
+- Each new tool gains `verify_tools` engine-oracle checks and a frozen
+  `golden-mcp` payload; self-check eval fixtures cover tool selection and
+  argument shape for all of them.
 
 ## 0.13.0 — 2026-06-14
 

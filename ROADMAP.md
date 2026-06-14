@@ -52,7 +52,7 @@ impossible ones (`compileForm`) (0.11.0); a JD-first chart entry point that
 builds a full chart directly from a Julian Day, no calendar round-trip
 (`chartAt`) (0.12.0); conformance suite;
 MCP server over stdio and hosted Streamable HTTP (`ephemengine.com/api/mcp`,
-stateless) exposing eighteen chart tools, with golden payloads, resources
+stateless) exposing twenty-two chart tools, with golden payloads, resources
 (`caelus://glossary`, `caelus://accuracy`), and the `rectification_session`
 prompt, listed on the official MCP Registry as `io.github.heavyblotto/caelus-mcp`
 (0.12.1); JPL-direct validation tier.
@@ -81,9 +81,9 @@ yet exposed over MCP, as four tools: `returns` (solar/lunar), `progressions`
 (secondary + solar arc), `composite` (midpoint + Davison), and `dignities`
 (essential dignity + sect). No engine change; each gained `verify_tools`
 engine-oracle checks and frozen `golden-mcp` payloads (the MCP layer is
-invisible to the conformance suite). Pending a `caelus-mcp` minor release.
+invisible to the conformance suite). Shipped in the `caelus-mcp` 0.13.0 release.
 
-### Phase 1 — Hellenistic time-lords (in progress)
+### Phase 1 — Hellenistic time-lords (done)
 
 Deterministic time-math on top of the validated positions, in dependency order:
 **lots/Arabic parts (sect-aware) — done** (the seven Hermetic lots, Python
@@ -103,7 +103,7 @@ a possible later extension). All of Phase 1 is surfaced over MCP — the `lots`,
 `profections`, `firdaria`, `releasing`, and `directions` tools. Each lands as an
 engine export first, then an MCP tool and a site docs page.
 
-### Phase 2 — Vedic / Jyotish layer (in progress)
+### Phase 2 — Vedic / Jyotish layer (done)
 
 The sidereal foundation (seven ayanamsas) already exists; this adds the
 technique superstructure, in dependency order: **nakshatras (+padas) — done**
@@ -115,20 +115,20 @@ boundary-robustly from rasi+division; `vargas-golden` pin + textbook-placement
 oracle — the contested hora D2 and unequal trimsamsa D30 await their conventions
 being pinned); **Yogini dasha — done** (the 36-year eight-yogini cycle;
 `yoginiDashas`/`yoginiActive`/`yoginiAt`, `yogini-golden` pin + total/tiling/
-starting-yogini invariants). **Ashtottari dasha — deferred**: its period table
-and lord order are clear, but the nakshatra-to-lord mapping has genuine textual
-variants (start from Ardra vs Punarvasu, differing group sizes across texts and
-implementations), so it awaits one canonical convention being pinned rather than
-guessed. **Core yogas — done** (the well-defined placement set: five Pancha
-Mahapurusha, Gajakesari, Budha-Aditya, Chandra-Mangala; `detectYogas`/`yogasAt`,
-`yogas-golden` pin + defining-rule oracle — the variant Kemadruma and the
-lordship-based raja/dhana yogas are deferred). Phase 2's core is in the engine.
-All
-deterministic arithmetic
-over the
-SE-pinned sidereal longitudes; validated against established Jyotish references
-and published charts as golden fixtures, with ayanamsa/convention variants
-stated explicitly. Multi-release.
+starting-yogini invariants). **Ashtottari dasha — done** (the irregular
+nakshatra→lord groups and across-span balance from the JHora/PVR convention;
+`ashtottariDashas`/`ashtottariActive`/`ashtottariAt`, `ashtottari-golden` pin —
+see the deferred-work bucket below). **Yogas — done** (the placement set: five
+Pancha Mahapurusha, Gajakesari, Budha-Aditya, Chandra-Mangala; `detectYogas`/
+`yogasAt`, `yogas-golden` pin + defining-rule oracle — plus the variant Kemadruma
+and the lordship-based raja/dhana yogas and yogakarakas, all resolved in the
+deferred-work bucket below). All of Phase 2 is now surfaced over MCP as the
+0.14.0 harvest — the `nakshatras`, `dasha` (Vimshottari/Yogini/Ashtottari),
+`vargas`, and `yogas` tools, with `directions` gaining the inter-planetary
+(mundane) block — each with `verify_tools` engine-oracle checks and a frozen
+`golden-mcp` payload. All deterministic arithmetic over the SE-pinned sidereal
+longitudes; validated against established Jyotish references and published charts
+as golden fixtures, with ayanamsa/convention variants stated explicitly.
 
 ### Deferred work — resolution plan
 
