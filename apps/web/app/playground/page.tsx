@@ -30,11 +30,13 @@ export default function Playground() {
         with its embedded dataset. No server, no ephemeris files.
       </Lead>
       <P dim>
-        Times are UT. For a local birth time, convert with <code>caelus-birth</code>{" "}
-        first (a four-hour timezone error moves the ascendant about 60°). Set any
-        date and place, then <strong>Copy share link</strong> to mint a chart you
-        can send to anyone: the link carries only the values you typed, and the
-        recipient&rsquo;s browser recomputes the chart with no server in the loop.
+        Search a birthplace and enter the local time: the city comes from an
+        offline gazetteer bundled with the page, and <code>caelus-birth</code>{" "}
+        resolves the time zone and historical daylight-saving rules to UT, all
+        without a network request. Then <strong>Copy share link</strong> to mint a
+        chart you can send to anyone: the link carries only the values you typed,
+        and the recipient&rsquo;s browser recomputes the chart with no server in
+        the loop. (Switch the time mode to UTC for the current sky.)
       </P>
 
       <SkyNow />

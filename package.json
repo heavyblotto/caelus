@@ -14,6 +14,7 @@
     "check:versions": "node scripts/check-versions.mjs",
     "docs:api": "typedoc",
     "search:index": "node scripts/build-search-index.mjs",
+    "build:gazetteer": "node scripts/build-gazetteer.mjs",
     "bundle-sizes": "node scripts/bundle-sizes.mjs",
     "eval:selfcheck": "node packages/caelus-mcp/eval/run.mjs",
     "smoke:web": "node scripts/smoke-web.mjs",
@@ -24,6 +25,7 @@
     "dev:web:clean": "npm run dev:clean -w web"
   },
   "devDependencies": {
+    "all-the-cities": "^3.1.0",
     "esbuild": "^0.25.0"
   }
 }

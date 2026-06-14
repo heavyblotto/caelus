@@ -5,8 +5,14 @@ import {
   type BodyId, type Chart, type HouseSystem, type Zodiac,
 } from "caelus";
 import { embeddedData } from "caelus/data-embedded";
+import { toUT, type UTResult } from "caelus-birth";
 import { ChartWheel, ChartSphere, AstroMap } from "caelus-wheel";
 import accuracy from "caelus/accuracy.json";
+import CityPicker, { type City } from "./CityPicker";
+
+const pad = (n: number, w = 2) => String(Math.abs(n)).padStart(w, "0");
+const fmtIso = (y: number, mo: number, d: number, h: number, mi: number) =>
+  `${pad(y, 4)}-${pad(mo)}-${pad(d)}T${pad(h)}:${pad(mi)}`;
 
 const MAP_BODIES: BodyId[] = ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn"];
 
@@ -84,6 +90,8 @@ export default function SkyNow() {
   const [lon, setLon] = useState("-82.46");
   const [sys, setSys] = useState<HouseSystem>("placidus");
   const [zodiac, setZodiac] = useState<Zodiac>("tropical");
+  const [tzMode, setTzMode] = useState<"utc" | "local">("utc");
+  const [place, setPlace] = useState("");
   const [label, setLabel] = useState("");
   const [tab, setTab] = useState<"positions" | "aspects" | "events" | "json">("positions");
   const [view, setView] = useState<"wheel" | "sphere" | "map">("wheel");
@@ -108,8 +116,61 @@ export default function SkyNow() {
     setMounted(true);
   }, []);
 
+  const engine = () => (engineRef.current ??= new Engine(embeddedData));
+
+  const { chart, ms, error, utIso, zone, tzStatus } = useMemo(() => {
+    const none = { chart: null, ms: 0, error: null, utIso: iso, zone: "", tzStatus: "" as UTResult["status"] | "" };
+    if (!mounted || !iso) return none;
+    const la = Number(lat);
+    const lo = Number(lon);
+    const d = new Date(iso + ":00Z");
+    if (!Number.isFinite(la) || la < -90 || la > 90) return { ...none, error: "latitude must be in [-90, 90]" };
+    if (!Number.isFinite(lo) || lo < -180 || lo > 180) return { ...none, error: "longitude must be in [-180, 180], east positive" };
+    if (Number.isNaN(d.getTime())) return { ...none, error: "invalid date" };
+
+    // The typed wall-clock fields (Z-appended above so getUTC* echoes them).
+    let y = d.getUTCFullYear(), mo = d.getUTCMonth() + 1, day = d.getUTCDate();
+    let hh = d.getUTCHours(), mm = d.getUTCMinutes();
+    let resolvedZone = "";
+    let status: UTResult["status"] | "" = "";
+
+    // In "local" mode the typed time is local to the place; convert to UT via
+    // caelus-birth (offline tz-lookup + historical DST), then feed the engine.
+    if (tzMode === "local") {
+      try {
+        const t = toUT({ year: y, month: mo, day, hour: hh, minute: mm, lat: la, lon: lo });
+        ({ year: y, month: mo, day, hour: hh, minute: mm } = t.utc);
+        resolvedZone = t.zone;
+        status = t.status;
+      } catch {
+        return { ...none, error: "could not resolve a time zone for this place" };
+      }
+    }
+
+    // The engine throws (RangeError) for dates outside its fitted range — Chiron
+    // is Chebyshev-only over ~1850–2150. A datetime-local input emits transient
+    // years (e.g. 0001) mid-edit, so catch the throw and surface it inline rather
+    // than letting it crash the render tree.
+    const t0 = performance.now();
+    try {
+      const c = engine().chart(y, mo, day, hh, mm, 0, la, lo, { houseSystem: sys, zodiac });
+      return {
+        chart: c as Chart,
+        ms: performance.now() - t0,
+        error: null,
+        utIso: fmtIso(y, mo, day, hh, mm),
+        zone: resolvedZone,
+        tzStatus: status,
+      };
+    } catch {
+      return { ...none, error: "date is outside the supported range (1850–2150)" };
+    }
+  }, [mounted, iso, lat, lon, sys, zodiac, tzMode]);
+
   function share() {
-    const payload: Share = { v: 1, t: iso, la: lat, lo: lon, h: sys, z: zodiac };
+    // Share the resolved UT instant, so a link is tz-unambiguous: the recipient
+    // recomputes the exact chart regardless of their own zone.
+    const payload: Share = { v: 1, t: utIso, la: lat, lo: lon, h: sys, z: zodiac };
     if (label.trim()) payload.n = label.trim();
     // Put the chart in the fragment, not the query: the fragment is never sent
     // to the server, so the inputs never leave the visitor's browser at all.
@@ -127,48 +188,21 @@ export default function SkyNow() {
       });
   }
 
-  const engine = () => (engineRef.current ??= new Engine(embeddedData));
-
-  const { chart, ms, error } = useMemo(() => {
-    if (!mounted || !iso) return { chart: null, ms: 0, error: null };
-    const la = Number(lat);
-    const lo = Number(lon);
-    const d = new Date(iso + ":00Z");
-    if (!Number.isFinite(la) || la < -90 || la > 90) return { chart: null, ms: 0, error: "latitude must be in [-90, 90]" };
-    if (!Number.isFinite(lo) || lo < -180 || lo > 180) return { chart: null, ms: 0, error: "longitude must be in [-180, 180], east positive" };
-    if (Number.isNaN(d.getTime())) return { chart: null, ms: 0, error: "invalid date" };
-    // The engine throws (RangeError) for dates outside its fitted range — Chiron
-    // is Chebyshev-only over ~1850–2150. A datetime-local input emits transient
-    // years (e.g. 0001) mid-edit, so catch the throw and surface it inline rather
-    // than letting it crash the render tree.
-    const t0 = performance.now();
-    try {
-      const c = engine().chart(
-        d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate(),
-        d.getUTCHours(), d.getUTCMinutes(), 0, la, lo,
-        { houseSystem: sys, zodiac },
-      );
-      return { chart: c as Chart, ms: performance.now() - t0, error: null };
-    } catch {
-      return { chart: null, ms: 0, error: "date is outside the supported range (1850–2150)" };
-    }
-  }, [mounted, iso, lat, lon, sys, zodiac]);
-
   const phases = useMemo(() => {
-    if (!chart || !iso) return [];
+    if (!chart) return [];
     try {
-      const d = new Date(iso + ":00Z");
+      const d = new Date(utIso + ":00Z");
       const jd0 = julianDay(d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate());
       return lunarPhases(engine(), jd0, jd0 + 120).slice(0, 6);
     } catch {
       return [];
     }
-  }, [chart, iso]);
+  }, [chart, utIso]);
 
   const mapLines = useMemo(() => {
-    if (view !== "map" || !chart || !iso) return null;
+    if (view !== "map" || !chart) return null;
     try {
-      const d = new Date(iso + ":00Z");
+      const d = new Date(utIso + ":00Z");
       const jd = julianDay(
         d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate(),
         d.getUTCHours(), d.getUTCMinutes(),
@@ -177,7 +211,7 @@ export default function SkyNow() {
     } catch {
       return null;
     }
-  }, [view, chart, iso]);
+  }, [view, chart, utIso]);
 
   const inp: React.CSSProperties = {
     background: "var(--surface-3)", color: "var(--text)", border: "1px solid var(--border-strong)",
@@ -202,14 +236,37 @@ export default function SkyNow() {
       ) : (
         <>
           <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", alignItems: "center" }}>
+            <CityPicker
+              onSelect={(c: City) => {
+                setLat(String(c.lat));
+                setLon(String(c.lon));
+                setPlace(`${c.name}, ${c.country}`);
+                setTzMode("local"); // picking a place means the typed time is local there
+              }}
+            />
             <label className="small mute" style={{ display: "flex", gap: "0.35rem", alignItems: "center" }}>
-              UTC <input style={inp} type="datetime-local" value={iso} onChange={(e) => setIso(e.target.value)} />
+              <select
+                style={inp}
+                value={tzMode}
+                onChange={(e) => setTzMode(e.target.value as "utc" | "local")}
+                aria-label="how to read the time"
+              >
+                <option value="utc">UTC</option>
+                <option value="local">local</option>
+              </select>
+              <input
+                style={inp}
+                type="datetime-local"
+                value={iso}
+                onChange={(e) => setIso(e.target.value)}
+                aria-label={tzMode === "local" ? "local birth time" : "time in UTC"}
+              />
             </label>
             <label className="small mute" style={{ display: "flex", gap: "0.35rem", alignItems: "center" }}>
-              lat <input style={{ ...inp, width: "5.5rem" }} value={lat} onChange={(e) => setLat(e.target.value)} />
+              lat <input style={{ ...inp, width: "5.5rem" }} value={lat} onChange={(e) => { setLat(e.target.value); setPlace(""); }} />
             </label>
             <label className="small mute" style={{ display: "flex", gap: "0.35rem", alignItems: "center" }}>
-              lon <input style={{ ...inp, width: "5.5rem" }} value={lon} onChange={(e) => setLon(e.target.value)} />
+              lon <input style={{ ...inp, width: "5.5rem" }} value={lon} onChange={(e) => { setLon(e.target.value); setPlace(""); }} />
             </label>
             <select style={inp} value={sys} onChange={(e) => setSys(e.target.value as HouseSystem)} aria-label="house system">
               {SYSTEMS.map((s) => <option key={s}>{s}</option>)}
@@ -252,10 +309,24 @@ export default function SkyNow() {
               <p className="dim small" style={{ marginTop: "0.8rem" }}>
                 {label.trim() && <><strong style={{ color: "var(--text)" }}>{label.trim()}</strong> · </>}
                 {fromLink && <span className="mute">shared chart · </span>}
-                {iso}Z · {lat}°, {lon}° (east+) · {chart.houseSystem} · {zodiac}
+                {place && <>{place} · </>}
+                {tzMode === "local" && zone
+                  ? <>{iso} local ({zone}) → {utIso}Z</>
+                  : <>{iso}Z</>}
+                {" · "}{lat}°, {lon}° (east+) · {chart.houseSystem} · {zodiac}
                 {chart.houseSystem !== chart.houseSystemRequested && " · placidus undefined at this latitude, fell back"}
                 {" · "}computed client-side in {ms.toFixed(1)} ms
               </p>
+              {tzStatus === "ambiguous" && (
+                <p className="dim small" style={{ margin: "0.25rem 0 0", color: "var(--warm)" }}>
+                  This local time falls in a daylight-saving fall-back hour that occurred twice; the earlier instant was used.
+                </p>
+              )}
+              {tzStatus === "nonexistent" && (
+                <p className="dim small" style={{ margin: "0.25rem 0 0", color: "var(--warm)" }}>
+                  This local time falls in a spring-forward gap that never occurred; it was shifted forward per the time-zone rules.
+                </p>
+              )}
 
               <div className="skynow-layout">
                 <div className="skynow-chart">
