@@ -58,6 +58,17 @@ def build_cases():
          "signs": signs(sun=1, moon=4, mars=8, mercury=11, jupiter=10, venus=7, saturn=2)},
         # engine path: the natal chart's yogas
         {"id": "yogas-tampa", "type": "at", "natal": NATAL, "lat": TAMPA[0], "lon": TAMPA[1]},
+        # Kemadruma: Moon isolated vs not, and the planet-set options
+        {"id": "kema-present", "type": "kemadruma",
+         "signs": {"sun": 8, "moon": 0, "mars": 3, "mercury": 4, "jupiter": 5, "venus": 6, "saturn": 7}},
+        {"id": "kema-absent", "type": "kemadruma",
+         "signs": {"sun": 8, "moon": 0, "mars": 3, "mercury": 4, "jupiter": 1, "venus": 6, "saturn": 7}},
+        {"id": "kema-sun-default", "type": "kemadruma",
+         "signs": {"sun": 1, "moon": 0, "mars": 3, "mercury": 4, "jupiter": 5, "venus": 6, "saturn": 7}},
+        {"id": "kema-sun-include", "type": "kemadruma", "include_sun": True,
+         "signs": {"sun": 1, "moon": 0, "mars": 3, "mercury": 4, "jupiter": 5, "venus": 6, "saturn": 7}},
+        {"id": "kema-nodes-include", "type": "kemadruma", "include_nodes": True,
+         "signs": {"sun": 8, "moon": 0, "mars": 3, "mercury": 4, "jupiter": 5, "venus": 6, "saturn": 7, "rahu": 1, "ketu": 7}},
     ]
 
 
@@ -67,6 +78,9 @@ def compute(spec, eng):
         return Y.detect_yogas(spec["signs"], spec["asc"])
     if t == "at":
         return Y.yogas_at(eng, jd(spec["natal"]), spec["lat"], spec["lon"])
+    if t == "kemadruma":
+        return Y.kemadruma(spec["signs"], include_sun=spec.get("include_sun", False),
+                           include_nodes=spec.get("include_nodes", False))
     raise ValueError(spec["type"])
 
 

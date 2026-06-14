@@ -1,8 +1,10 @@
 {
  "basis": "Vedic conventions vs named authorities (BPHS, PyJHora/PVR Rao)",
- "checks": 17,
- "agree": 17,
+ "checks": 19,
+ "agree": 19,
  "sources": [
+  "BPHS Kemadruma: a graha in the 2nd from the Moon cancels it",
+  "BPHS Kemadruma: no graha in the 2nd/12th from, or with, the Moon",
   "BPHS Pancha Mahapurusha: Mars in own sign in a kendra",
   "BPHS Parashari hora: even sign first half -> Moon's hora (Cancer)",
   "BPHS Parashari hora: odd sign first half -> Sun's hora (Leo)",

@@ -27,6 +27,7 @@ function compute(spec: any): any {
   switch (spec.type) {
     case "detect": return Y.detectYogas(spec.signs, spec.asc);
     case "at": return Y.yogasAt(eng, jd(spec.natal), spec.lat, spec.lon);
+    case "kemadruma": return Y.kemadruma(spec.signs, spec.include_sun ?? false, spec.include_nodes ?? false);
     default: throw new Error(`unknown yogas type ${spec.type}`);
   }
 }
@@ -72,6 +73,15 @@ const names = (signs: Record<string, number>, asc: number) => Y.detectYogas(sign
   // Budha-Aditya needs Sun and Mercury in one sign
   names(base({ sun: 3, mercury: 3 }), 0).includes("Budha-Aditya") ? ok() : fail("Budha-Aditya not detected");
   names(base({ sun: 3, mercury: 4 }), 0).includes("Budha-Aditya") ? fail("Budha-Aditya across signs") : ok();
+
+  // Kemadruma: an isolated Moon (no graha in 2nd/12th/conjunct) -> present;
+  // a graha in the 2nd from the Moon -> absent
+  const iso = { sun: 8, moon: 0, mars: 3, mercury: 4, jupiter: 5, venus: 6, saturn: 7 };
+  Y.kemadruma(iso).present ? ok() : fail("Kemadruma not detected for an isolated Moon");
+  Y.kemadruma({ ...iso, jupiter: 1 }).present ? fail("Kemadruma with a graha in the 2nd") : ok();
+  // the Sun is excluded by default; including it changes the result
+  const sunCase = { sun: 1, moon: 0, mars: 3, mercury: 4, jupiter: 5, venus: 6, saturn: 7 };
+  Y.kemadruma(sunCase).present && !Y.kemadruma(sunCase, true).present ? ok() : fail("Kemadruma include_sun toggle");
 }
 
 console.log(`\n${checks} checks, ${failures} failures`);

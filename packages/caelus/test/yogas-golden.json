@@ -299,6 +299,143 @@
      ]
     }
    ]
+  },
+  {
+   "id": "kema-present",
+   "spec": {
+    "id": "kema-present",
+    "type": "kemadruma",
+    "signs": {
+     "sun": 8,
+     "moon": 0,
+     "mars": 3,
+     "mercury": 4,
+     "jupiter": 5,
+     "venus": 6,
+     "saturn": 7
+    }
+   },
+   "result": {
+    "present": true,
+    "planets_checked": [
+     "mars",
+     "mercury",
+     "jupiter",
+     "venus",
+     "saturn"
+    ]
+   }
+  },
+  {
+   "id": "kema-absent",
+   "spec": {
+    "id": "kema-absent",
+    "type": "kemadruma",
+    "signs": {
+     "sun": 8,
+     "moon": 0,
+     "mars": 3,
+     "mercury": 4,
+     "jupiter": 1,
+     "venus": 6,
+     "saturn": 7
+    }
+   },
+   "result": {
+    "present": false,
+    "planets_checked": [
+     "mars",
+     "mercury",
+     "jupiter",
+     "venus",
+     "saturn"
+    ]
+   }
+  },
+  {
+   "id": "kema-sun-default",
+   "spec": {
+    "id": "kema-sun-default",
+    "type": "kemadruma",
+    "signs": {
+     "sun": 1,
+     "moon": 0,
+     "mars": 3,
+     "mercury": 4,
+     "jupiter": 5,
+     "venus": 6,
+     "saturn": 7
+    }
+   },
+   "result": {
+    "present": true,
+    "planets_checked": [
+     "mars",
+     "mercury",
+     "jupiter",
+     "venus",
+     "saturn"
+    ]
+   }
+  },
+  {
+   "id": "kema-sun-include",
+   "spec": {
+    "id": "kema-sun-include",
+    "type": "kemadruma",
+    "include_sun": true,
+    "signs": {
+     "sun": 1,
+     "moon": 0,
+     "mars": 3,
+     "mercury": 4,
+     "jupiter": 5,
+     "venus": 6,
+     "saturn": 7
+    }
+   },
+   "result": {
+    "present": false,
+    "planets_checked": [
+     "sun",
+     "mars",
+     "mercury",
+     "jupiter",
+     "venus",
+     "saturn"
+    ]
+   }
+  },
+  {
+   "id": "kema-nodes-include",
+   "spec": {
+    "id": "kema-nodes-include",
+    "type": "kemadruma",
+    "include_nodes": true,
+    "signs": {
+     "sun": 8,
+     "moon": 0,
+     "mars": 3,
+     "mercury": 4,
+     "jupiter": 5,
+     "venus": 6,
+     "saturn": 7,
+     "rahu": 1,
+     "ketu": 7
+    }
+   },
+   "result": {
+    "present": false,
+    "planets_checked": [
+     "mars",
+     "mercury",
+     "jupiter",
+     "venus",
+     "saturn",
+     "rahu",
+     "ketu"
+    ]
+   }
   }
  ]
 }

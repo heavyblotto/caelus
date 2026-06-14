@@ -53,6 +53,37 @@ def detect_yogas(signs, asc_sign):
     return out
 
 
+def kemadruma(signs, include_sun=False, include_nodes=False):
+    """Kemadruma yoga: the Moon is isolated -- no planet in the 2nd or 12th sign
+    from it, nor conjunct it. The planet set is parameterized because the texts
+    vary: the default is the five tara grahas (Mars, Mercury, Jupiter, Venus,
+    Saturn), excluding the luminaries and the nodes; ``include_sun`` adds the
+    Sun and ``include_nodes`` adds Rahu/Ketu (when present in ``signs``). Returns
+    ``{present, planets_checked}``."""
+    planets = ["mars", "mercury", "jupiter", "venus", "saturn"]
+    if include_sun:
+        planets = ["sun"] + planets
+    if include_nodes:
+        planets = planets + ["rahu", "ketu"]
+    planets = [p for p in planets if p in signs]
+    moon = signs["moon"]
+    occupied = {(moon - 1) % 12, moon, (moon + 1) % 12}   # 12th, conjunct, 2nd
+    present = not any(signs[p] in occupied for p in planets)
+    return {"present": present, "planets_checked": planets}
+
+
+def kemadruma_at(engine, natal_jd, lat, lon_east, include_sun=False,
+                 include_nodes=False, zodiac="sidereal:lahiri"):
+    """Kemadruma yoga of a natal chart, from the sidereal rasi positions."""
+    chart = engine.chart_at(natal_jd, lat, lon_east, zodiac=zodiac)
+    bodies = list(YOGA_PLANETS) + (["mean_node"] if include_nodes else [])
+    signs = {b: math.floor(chart["bodies"][b]["lon"] / 30.0) % 12 for b in bodies}
+    if include_nodes:
+        signs["rahu"] = signs["mean_node"]
+        signs["ketu"] = (signs["mean_node"] + 6) % 12     # Ketu opposite Rahu
+    return kemadruma(signs, include_sun=include_sun, include_nodes=include_nodes)
+
+
 def yogas_at(engine, natal_jd, lat, lon_east, zodiac="sidereal:lahiri"):
     """The placement yogas of a natal chart, from the sidereal rasi positions."""
     chart = engine.chart_at(natal_jd, lat, lon_east, zodiac=zodiac)

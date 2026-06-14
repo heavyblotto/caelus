@@ -46,6 +46,38 @@ export function detectYogas(signs: Record<string, number>, ascSign: number): Yog
   return out;
 }
 
+export interface Kemadruma { present: boolean; planets_checked: string[]; }
+
+/** Kemadruma yoga: the Moon is isolated -- no planet in the 2nd or 12th sign
+ *  from it, nor conjunct it. The planet set is parameterized (texts vary): the
+ *  default is the five tara grahas, `includeSun` adds the Sun, `includeNodes`
+ *  adds Rahu/Ketu when present in `signs`. */
+export function kemadruma(
+  signs: Record<string, number>, includeSun = false, includeNodes = false,
+): Kemadruma {
+  let planets = ["mars", "mercury", "jupiter", "venus", "saturn"];
+  if (includeSun) planets = ["sun", ...planets];
+  if (includeNodes) planets = [...planets, "rahu", "ketu"];
+  planets = planets.filter((p) => p in signs);
+  const moon = signs.moon;
+  const occupied = new Set([((moon - 1) % 12 + 12) % 12, moon, (moon + 1) % 12]);
+  const present = !planets.some((p) => occupied.has(signs[p]));
+  return { present, planets_checked: planets };
+}
+
+/** Kemadruma yoga of a natal chart, from the sidereal rasi positions. */
+export function kemadrumaAt(
+  engine: Engine, natalJd: number, lat: number, lonEast: number,
+  includeSun = false, includeNodes = false, zodiac: Zodiac = "sidereal:lahiri",
+): Kemadruma {
+  const chart = engine.chartAt(natalJd, lat, lonEast, { zodiac });
+  const bodies: BodyId[] = includeNodes ? [...YOGA_PLANETS, "mean_node"] : YOGA_PLANETS;
+  const signs: Record<string, number> = {};
+  for (const b of bodies) signs[b] = Math.floor(chart.bodies[b].lon / 30) % 12;
+  if (includeNodes) { signs.rahu = signs.mean_node; signs.ketu = (signs.mean_node + 6) % 12; }
+  return kemadruma(signs, includeSun, includeNodes);
+}
+
 /** The placement yogas of a natal chart, from the sidereal rasi positions. */
 export function yogasAt(
   engine: Engine, natalJd: number, lat: number, lonEast: number,

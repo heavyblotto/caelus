@@ -165,10 +165,10 @@ default):
 - **Ashtottari dasha**: reproduce PyJHora's full nakshatra→lord mapping *and*
   the multi-nakshatra balance formula; ship labelled "JHora/PVR convention" with
   a `variant` hook for the BPHS Ardra-start.
-- **Kemadruma yoga**: stable core rule (no planet in the 2nd/12th from, or with,
-  the Moon); default to the five non-luminary, non-nodal grahas with
-  `include_sun`/`include_nodes` options, and kemadruma-bhanga (cancellation) as
-  an explicit flag.
+- **Kemadruma yoga — done**: the core rule (no graha in the 2nd/12th from, or
+  with, the Moon) as `kemadruma`/`kemadrumaAt`, with the planet set parameterized
+  (`includeSun`/`includeNodes`, default the five tara grahas) and cited checks;
+  kemadruma-bhanga (cancellation) remains a possible later flag.
 - **Lordship-based raja/dhana yogas** (the large, high-leverage build): a
   foundation layer first — house lordship, **graha drishti** (all planets the
   7th; Mars 4/8, Jupiter 5/9, Saturn 3/10), and association primitives

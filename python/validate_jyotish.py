@@ -44,6 +44,9 @@ def check(c):
     if t == "yoga_present":
         present = [y["yoga"] for y in yogas.detect_yogas(c["signs"], c["asc"])]
         return c["expect"] in present
+    if t == "kemadruma":
+        return yogas.kemadruma(c["signs"], include_sun=c.get("include_sun", False),
+                               include_nodes=c.get("include_nodes", False))["present"] == c["expect"]
     raise ValueError(f"unknown technique {t}")
 
 

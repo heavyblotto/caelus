@@ -21,6 +21,11 @@ Working through the deferred-technique resolution plan (ROADMAP).
   -> Leo / Sun's hora, second half -> Cancer / Moon's hora; even sign reversed).
   `varga(lon, 2)`; `vargas-golden` oracle + cited entries. Completes the deferred
   varga set; alternate hora schemes remain a possible later `variant`.
+- Kemadruma yoga: the Moon isolated -- no graha in the 2nd or 12th from, or with,
+  the Moon. `kemadruma` (pure) and `kemadrumaAt` (from a chart), with the planet
+  set parameterized (`includeSun`/`includeNodes`; default the five tara grahas)
+  since the texts vary. `yogas-golden` pin + a present/absent and toggle oracle,
+  cited in `validate_jyotish`. Completes the deferred-plan Bucket A.
 
 ### Validation
 
