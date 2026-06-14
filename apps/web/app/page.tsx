@@ -7,7 +7,7 @@ import { NPM, SITE } from "../lib/site";
 export const metadata = {
   title: "Caelus · MIT astrological ephemeris engine",
   description:
-    "Free TypeScript library for natal charts: planetary positions, houses, aspects. Runs in the browser, on edge, and in Node. MCP tools for AI clients.",
+    "Free MIT TypeScript engine for natal charts, the Hellenistic time-lords, and the Vedic system of dashas, vargas, and yogas. Runs in the browser, on edge, and in Node, with MCP tools for AI clients.",
   alternates: { canonical: "/" },
 };
 
@@ -36,11 +36,14 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <Eyebrow>MIT · zero dependencies · ~85 KB</Eyebrow>
-      <h1>Astrological charts, computed from published math</h1>
+      <h1>A complete astrology engine &mdash; Western and Vedic &mdash; from published math</h1>
       <Lead>
-        Caelus computes planetary positions, houses, and aspects in TypeScript.
-        The same code runs in the browser, on edge runtimes, and in Node, with
-        MCP tools for AI clients. No AGPL, no ephemeris files on disk.
+        Caelus computes natal charts and the techniques built on them &mdash; houses
+        and aspects, the Hellenistic time-lords, and the Vedic dashas, vargas,
+        and yogas &mdash; each convention validated against a named authority. The same
+        TypeScript runs in the browser, on edge runtimes, and in Node, with MCP
+        tools for AI clients. No Swiss Ephemeris, no AGPL, no ephemeris files on
+        disk.
       </Lead>
       <Cta />
 
@@ -51,8 +54,10 @@ export default function Home() {
       <ul style={{ listStyle: "none", padding: 0, margin: "1.5rem 0", display: "grid", gap: "0.6rem", lineHeight: 1.5 }}>
         <li>🪐 Sun through Pluto, Chiron, and nodes; twelve house systems; tropical and seven sidereal zodiacs</li>
         <li>🧩 <A href="/docs/derived">Derived charts</A>: returns, progressions, solar arc, composite, Davison, harmonics, dignities, and sect</li>
+        <li>⏳ <A href="/docs/hellenistic">Hellenistic time-lords</A>: lots, profections, firdaria, zodiacal releasing, and primary directions</li>
+        <li>🕉️ <A href="/docs/vedic">Vedic &amp; Jyotish</A>: nakshatras, the Vimshottari, Yogini, and Ashtottari dashas, divisional charts, and yogas</li>
         <li>🤖 <code>caelus-mcp</code> gives Claude, Cursor, and other MCP clients twenty-two chart tools</li>
-        <li>🆓 MIT licensed; coefficients are embedded, with no ephemeris files to deploy</li>
+        <li>🆓 MIT licensed, with no Swiss Ephemeris and no ephemeris files to deploy</li>
         <li>🔒 Charts can compute entirely in the browser, so an app never has to send birth data to a server</li>
       </ul>
 

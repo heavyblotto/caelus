@@ -1,0 +1,113 @@
+export const metadata = {
+  title: "Hellenistic Time-Lords",
+  description: "The traditional time-lord techniques in caelus: lots (Arabic parts), profections, firdaria, zodiacal releasing, and primary directions. Deterministic arithmetic on the validated positions, each convention documented.",
+  alternates: { canonical: "/docs/hellenistic" },
+};
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Hellenistic time-lords
+
+Time-lord techniques divide a life into periods, each ruled by a planet or a
+sign, and ask which lord is active at a given moment. Caelus computes the
+classical Hellenistic and Persian methods as deterministic arithmetic on the
+positions it already validates against Swiss Ephemeris &mdash; no new ephemeris, and
+every convention is stated, not assumed. None of this is interpretation: the
+engine returns the lords and their dates; the meaning is yours.
+
+All of these take a natal Julian Day (UT). Convert a local birth time with
+`caelus-birth` first (see [Computing Charts](/docs/charts)).
+
+```text
+import { julianDay } from "caelus";
+const natal = julianDay(1990, 6, 10, 14, 30);   // UT
+```
+
+## Lots (Arabic parts)
+
+The seven Hermetic lots &mdash; Fortune, Spirit, Eros, Necessity, Courage, Victory,
+and Nemesis &mdash; are arcs cast from the Ascendant, each reversing direction between
+a day and a night chart. Fortune and Spirit are symmetric about the Ascendant.
+
+<CodeBlock
+  lang="typescript"
+  label="lots.ts"
+  code={`import { Engine, lots } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+const engine = new Engine(embeddedData);
+
+const l = lots(engine, natal, 27.95, -82.46);
+l.fortune;   // longitude of the Lot of Fortune
+l.spirit;    // Spirit is Fortune reflected across the Ascendant`}
+/>
+
+## Profections
+
+The Ascendant advances one whole sign per year of life; the profected sign's
+traditional ruler is the lord of the year. The monthly profection advances one
+further sign per twelfth of the year.
+
+<CodeBlock
+  lang="typescript"
+  label="profections.ts"
+  code={`import { profectionAt } from "caelus";
+const target = julianDay(2025, 6, 10);
+const p = profectionAt(engine, natal, target, 27.95, -82.46);
+p.age_years;        // completed years
+p.annual.lord;      // lord of the year`}
+/>
+
+## Firdaria
+
+The Persian firdaria divides life into nine periods totalling seventy-five
+years &mdash; the seven planets in the firdaria order, then the two nodes &mdash; each
+planetary period split into seven sub-periods. A day chart begins with the Sun,
+a night chart with the Moon.
+
+<CodeBlock
+  lang="typescript"
+  label="firdaria.ts"
+  code={`import { firdariaAt } from "caelus";
+const f = firdariaAt(engine, natal, julianDay(2025, 6, 10), 27.95, -82.46);
+f.major;   // the major-period lord active now
+f.sub;     // the sub-period lord`}
+/>
+
+## Zodiacal releasing
+
+Released from a lot &mdash; usually Spirit (career and action) or Fortune (body and
+circumstance) &mdash; periods unfold sign by sign across four nested levels. Caelus
+uses the standard Valens/Schmidt convention: years of exactly 360 days, each
+level a twelfth of the one above, and the *loosing of the bond*, where a level
+that loops back to its starting sign jumps to the opposite sign instead.
+
+<CodeBlock
+  lang="typescript"
+  label="releasing.ts"
+  code={`import { zrAt } from "caelus";
+const z = zrAt(engine, natal, julianDay(2025, 6, 10), 27.95, -82.46, "spirit");
+z.l1;   // the major (L1) sign active now
+z.l2;   // the L2 sub-period sign`}
+/>
+
+## Primary directions
+
+The diurnal rotation of the sphere carries a planet to an angle or to another
+planet; the arc of rotation, converted by a time key, gives the age of the
+direction. Caelus computes directions to the four angles and, with the Placidus
+semi-arc method, between planets. The key is Naibod (0.9856° per year) or
+Ptolemy (1° per year).
+
+<CodeBlock
+  lang="typescript"
+  label="directions.ts"
+  code={`import { primaryDirections, mundaneDirections } from "caelus";
+// to the angles, within 90 years
+primaryDirections(engine, natal, 27.95, -82.46);
+// planet-to-planet (mundane) directions
+mundaneDirections(engine, natal, 27.95, -82.46);`}
+/>
+
+The full signatures are in the [API Reference](/docs/api). For the Vedic
+time-lord systems &mdash; the Vimshottari, Yogini, and Ashtottari dashas &mdash; see
+[Vedic &amp; Jyotish](/docs/vedic).

@@ -5,13 +5,13 @@
  */
 export const SITE = {
   name: "Caelus",
-  version: "0.12.0",
+  version: "0.14.0",
   url: "https://www.ephemengine.com",
   tagline: "MIT astrological ephemeris engine in TypeScript.",
   repo: "https://github.com/heavyblotto/caelus",
   starter: "https://github.com/heavyblotto/caelus-starter",
   description:
-    "MIT astrological ephemeris engine in TypeScript. Natal charts, houses, aspects, and event search. Runs in the browser, on edge, and in Node, with MCP tools for AI clients. No AGPL, no ephemeris files.",
+    "MIT astrological ephemeris engine in TypeScript. Natal charts, houses, and aspects through the Hellenistic time-lords and the Vedic system of dashas, vargas, and yogas, each validated against a named authority. Runs in the browser, on edge, and in Node, with MCP tools for AI clients. No Swiss Ephemeris, no AGPL, no ephemeris files.",
 } as const;
 
 export const NPM = {
@@ -54,6 +54,8 @@ export const DOCS_NAV: DocsGroup[] = [
       { href: "/docs/architecture", label: "Architecture" },
       { href: "/docs/houses-and-zodiacs", label: "Houses & Zodiacs" },
       { href: "/docs/derived", label: "Derived Charts" },
+      { href: "/docs/hellenistic", label: "Hellenistic Time-Lords" },
+      { href: "/docs/vedic", label: "Vedic & Jyotish" },
       { href: "/docs/data-tiers", label: "Data Tiers" },
       { href: "/docs/recipes", label: "Recipes" },
       { href: "/docs/electional", label: "Electional Search" },

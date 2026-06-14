@@ -64,6 +64,31 @@ export default function Features() {
         and sect. See <A href="/docs/derived">Derived Charts</A>.
       </P>
 
+      <H2>Hellenistic time-lords</H2>
+      <P>
+        The traditional time-lord techniques, all deterministic arithmetic on the
+        validated positions: the seven Hermetic lots (Fortune, Spirit, and the
+        rest), sect-aware; annual and monthly profections with the lord of the
+        year; the firdaria, the Persian seventy-five-year planetary periods;
+        zodiacal releasing from a lot, with the four levels and the loosing of the
+        bond; and primary directions to the four angles and between planets, by
+        the Ptolemy or Naibod key. See{" "}
+        <A href="/docs/hellenistic">Hellenistic Time-Lords</A>.
+      </P>
+
+      <H2>Vedic and Jyotish</H2>
+      <P>
+        A full Jyotish layer on the sidereal chart: nakshatras with padas and
+        their ruling planets; three dasha systems &mdash; Vimshottari (120-year),
+        Yogini (36-year), and Ashtottari (108-year), each with sub-periods read
+        from the Moon&apos;s nakshatra; the Parashari divisional charts (vargas)
+        D1, D2, D3, D9, D10, D12, and D30; and the yogas &mdash; the five Pancha
+        Mahapurusha, Gajakesari, Budha-Aditya, Chandra-Mangala, Kemadruma, plus a
+        lordship and graha-drishti layer with raja and dhana yogas and
+        yogakarakas. Each convention is validated against a named authority, not
+        asserted. See <A href="/docs/vedic">Vedic &amp; Jyotish</A>.
+      </P>
+
       <H2>Electional</H2>
       <P>
         Applying and separating aspects, solar phase (cazimi, combust, under the

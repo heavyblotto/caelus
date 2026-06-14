@@ -13,6 +13,8 @@ const CARDS: Array<[string, string, string]> = [
   ["/docs/architecture", "Architecture", "How the four packages compose end to end: birth time, engine, wheel, and MCP."],
   ["/docs/houses-and-zodiacs", "Houses & Zodiacs", "Twelve house systems, tropical and sidereal modes, and polar fallbacks."],
   ["/docs/derived", "Derived Charts", "Returns, progressions, solar arc, composite, Davison, harmonics, dignities, and sect."],
+  ["/docs/hellenistic", "Hellenistic Time-Lords", "Lots, profections, firdaria, zodiacal releasing, and primary directions."],
+  ["/docs/vedic", "Vedic & Jyotish", "Nakshatras, the Vimshottari/Yogini/Ashtottari dashas, the vargas, and the yogas."],
   ["/docs/data-tiers", "Data Tiers", "Embedded vs Node loader: what ships in the bundle and what loads lazily."],
   ["/docs/mcp", "MCP Setup", "Add twenty-two chart tools to Claude, Cursor, and other MCP clients."],
   ["/docs/recipes", "Recipes", "Transits, the when() query language, event search, and chart wheels."],

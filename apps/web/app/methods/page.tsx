@@ -57,6 +57,22 @@ export default function Methods() {
         Sun and inner planets sit near a tenth of an arcsecond against Horizons,
         the Moon near two tenths, and the giant planets within a few arcseconds.
       </P>
+
+      <H2>Validating the conventions</H2>
+      <P>
+        The traditional techniques &mdash; the Hellenistic time-lords and the
+        Vedic dashas, vargas, and yogas &mdash; are deterministic arithmetic, but
+        many carry named convention variants where the texts disagree. Caelus
+        applies the same discipline to the conventions as to the positions:
+        rather than assert one reading, each technique is pinned to a named
+        authority &mdash; the Brihat Parashara Hora Shastra, or the JHora/PVR
+        Narasimha Rao implementation where the texts differ &mdash; and a
+        reference tier (<code>validate_jyotish</code>) replays a committed,
+        per-check-cited set so every convention choice is validated against a
+        named source, not memory. It runs no external tool, keeping the engine
+        free of any Swiss Ephemeris dependency.
+      </P>
+
       <Note>
         Swiss Ephemeris in Moshier mode carries its own model error. Where a
         quantity is measured against that built-in theory rather than the full

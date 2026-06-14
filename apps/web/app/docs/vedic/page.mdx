@@ -1,0 +1,100 @@
+export const metadata = {
+  title: "Vedic & Jyotish",
+  description: "The Vedic layer in caelus: nakshatras, the Vimshottari, Yogini, and Ashtottari dashas, the Parashari vargas, and the yogas, on the validated sidereal chart, each convention pinned to a named authority.",
+  alternates: { canonical: "/docs/vedic" },
+};
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Vedic and Jyotish
+
+Caelus computes a full Jyotish layer on the sidereal chart &mdash; nakshatras, the
+nakshatra-based dashas, the divisional charts, and the yogas. It builds on the
+sidereal longitudes already validated against Swiss Ephemeris; the techniques
+themselves are deterministic arithmetic.
+
+Several Vedic techniques carry named convention variants. Rather than assert
+one, Caelus pins each to a named authority &mdash; BPHS, or the JHora/PVR Narasimha
+Rao implementation where the texts differ &mdash; and records the citation in a
+`validate_jyotish` reference tier, the same discipline the engine uses for
+positions (see [Methods](/methods)). The default ayanamsa is Lahiri; pass any
+sidereal mode where a function takes a `zodiac`.
+
+```text
+import { julianDay } from "caelus";
+const natal = julianDay(1990, 6, 10, 14, 30);   // UT
+```
+
+## Nakshatras
+
+The 27 lunar mansions of 13°20′, each with four padas and a ruling planet.
+
+<CodeBlock
+  lang="typescript"
+  label="nakshatra.ts"
+  code={`import { Engine, nakshatraAt } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+const engine = new Engine(embeddedData);
+
+const n = nakshatraAt(engine, natal);   // the Moon, sidereal Lahiri
+n.name;   // e.g. "Rohini"
+n.pada;   // 1..4
+n.lord;   // the dasha lord of the nakshatra`}
+/>
+
+## Dashas
+
+Three nakshatra-based dasha systems, each started from the Moon's birth
+nakshatra with the elapsed portion set by how far the Moon has moved through it,
+and each subdividing into proportional sub-periods.
+
+- **Vimshottari** &mdash; the 120-year cycle, the most widely used; gives the
+  mahadasha, antardasha, and pratyantardasha.
+- **Yogini** &mdash; the 36-year cycle of eight yoginis.
+- **Ashtottari** &mdash; the 108-year conditional dasha (JHora/PVR mapping).
+
+<CodeBlock
+  lang="typescript"
+  label="dasha.ts"
+  code={`import { vimshottariAt, yoginiAt, ashtottariAt } from "caelus";
+const target = julianDay(2025, 6, 10);
+vimshottariAt(engine, natal, target);   // { maha, antar, pratyantar, ... }
+yoginiAt(engine, natal, target);        // { maha, antar, ... }
+ashtottariAt(engine, natal, target);    // { maha, antar, ... }`}
+/>
+
+## Vargas (divisional charts)
+
+The Parashari divisional charts D1 (rasi), D2 (hora), D3 (drekkana), D9
+(navamsa), D10 (dasamsa), D12 (dwadasamsa), and D30 (trimsamsa). The navamsa is
+the most consulted after the rasi.
+
+<CodeBlock
+  lang="typescript"
+  label="vargas.ts"
+  code={`import { varga, vargaChart } from "caelus";
+// the navamsa sign of a sidereal longitude
+varga(45.0, 9).sign;            // e.g. "Capricorn"
+// the full D9 chart of every body
+vargaChart(engine, natal, 9);`}
+/>
+
+## Yogas
+
+Classical combinations on the rasi chart: the five Pancha Mahapurusha yogas,
+Gajakesari, Budha-Aditya, and Chandra-Mangala by placement; Kemadruma (an
+isolated Moon, with a parameterized planet set); and a lordship-and-drishti
+layer &mdash; house lordship, graha drishti, and the association of lords &mdash; giving
+raja and dhana yogas and the chart's yogakarakas.
+
+<CodeBlock
+  lang="typescript"
+  label="yogas.ts"
+  code={`import { yogasAt, rajaYogasAt, kemadrumaAt } from "caelus";
+yogasAt(engine, natal, 27.95, -82.46);       // the placement yogas present
+rajaYogasAt(engine, natal, 27.95, -82.46);   // { raja: [...], yogakarakas: [...] }
+kemadrumaAt(engine, natal, 27.95, -82.46);   // { present, planets_checked }`}
+/>
+
+Full signatures are in the [API Reference](/docs/api). For the Western time-lord
+techniques, see [Hellenistic Time-Lords](/docs/hellenistic).
