@@ -44,7 +44,7 @@ export default function SkyRibbon() {
 
   return (
     <figure className="sky-ribbon reveal" aria-label="The current sky, computed by the engine">
-      <svg viewBox={`0 0 ${W} ${H}`} role="img">
+      <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
         <defs>
           <linearGradient id="ecliptic" x1="0" x2="1" y1="0" y2="0">
             <stop offset="0" stopColor="var(--accent)" stopOpacity="0" />

@@ -31,6 +31,7 @@ export default function Search() {
   const [active, setActive] = useState(0);
   const [index, setIndex] = useState<Entry[] | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const restoreFocusRef = useRef<HTMLElement | null>(null);
   const isMac = typeof navigator !== "undefined" && /mac/i.test(navigator.platform);
 
   const load = useCallback(() => {
@@ -56,12 +57,16 @@ export default function Search() {
 
   useEffect(() => {
     if (open) {
+      // Remember where focus was so we can restore it when the dialog closes.
+      restoreFocusRef.current = document.activeElement as HTMLElement | null;
       load();
       setActive(0);
       const t = setTimeout(() => inputRef.current?.focus(), 0);
       return () => clearTimeout(t);
     }
     setQuery("");
+    // Return focus to the trigger (or wherever it was) on close.
+    restoreFocusRef.current?.focus?.();
   }, [open, load]);
 
   const results = useMemo(() => {
@@ -94,8 +99,14 @@ export default function Search() {
     } else if (e.key === "Enter" && results[active]) {
       e.preventDefault();
       go(results[active]);
+    } else if (e.key === "Tab") {
+      // The input is the only focusable control in the dialog; keep focus
+      // trapped here so Tab never escapes to the page behind the overlay.
+      e.preventDefault();
     }
   };
+
+  const activeId = results[active] ? `search-opt-${active}` : undefined;
 
   return (
     <>
@@ -132,17 +143,26 @@ export default function Search() {
               }}
               onKeyDown={onInputKey}
               aria-label="Search query"
+              role="combobox"
+              aria-expanded={results.length > 0}
+              aria-controls="search-listbox"
+              aria-activedescendant={activeId}
+              aria-autocomplete="list"
+              autoComplete="off"
+              spellCheck={false}
             />
             {query.trim() && results.length === 0 ? (
-              <p className="search-empty">
+              <p className="search-empty" role="status">
                 {index === null ? "Loading index…" : "No matches."}
               </p>
             ) : (
-              <ul className="search-results">
+              <ul className="search-results" id="search-listbox" role="listbox" aria-label="Search results">
                 {results.map((entry, i) => (
                   <li
                     key={entry.url}
+                    id={`search-opt-${i}`}
                     className="search-result"
+                    role="option"
                     aria-selected={i === active}
                     onMouseEnter={() => setActive(i)}
                     onMouseDown={(e) => {
