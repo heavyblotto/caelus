@@ -27,6 +27,8 @@ jobs:
       - run: node packages/caelus/dist/test/scan.test.js
       # spherical geometry (3D aspects): TS port must match the Python reference
       - run: node packages/caelus/dist/test/spherical-golden.test.js
+      # astrocartography angle lines: TS port must match the Python reference
+      - run: node packages/caelus/dist/test/astrocartography-golden.test.js
       - run: npm run build -w caelus-mcp
       - run: node packages/caelus-mcp/smoke.mjs
       # MCP-layer oracle suite: golden checks can't see server.ts (PATCHES #2)
@@ -45,6 +47,8 @@ jobs:
       - run: node packages/wheel/dist/test/render.test.js
       # 3D chart sphere: SSR render + latitude-matters check
       - run: node packages/wheel/dist/test/sphere.test.js
+      # astrocartography map: SSR render of the relocation lines
+      - run: node packages/wheel/dist/test/astromap.test.js
       # cross-package journey: local time -> chart -> SVG wheel, end to end
       - run: node packages/wheel/dist/test/integration.test.js
       # per-entrypoint bundle sizes (esbuild): informational, prints the table
