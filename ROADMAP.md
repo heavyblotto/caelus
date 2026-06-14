@@ -119,7 +119,11 @@ starting-yogini invariants). **Ashtottari dasha — deferred**: its period table
 and lord order are clear, but the nakshatra-to-lord mapping has genuine textual
 variants (start from Ardra vs Punarvasu, differing group sizes across texts and
 implementations), so it awaits one canonical convention being pinned rather than
-guessed. Next: core yogas (each definition pinned to a textbook source). All
+guessed. **Core yogas — done** (the well-defined placement set: five Pancha
+Mahapurusha, Gajakesari, Budha-Aditya, Chandra-Mangala; `detectYogas`/`yogasAt`,
+`yogas-golden` pin + defining-rule oracle — the variant Kemadruma and the
+lordship-based raja/dhana yogas are deferred). Phase 2's core is in the engine.
+All
 deterministic arithmetic
 over the
 SE-pinned sidereal longitudes; validated against established Jyotish references

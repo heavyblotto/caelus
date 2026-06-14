@@ -1,0 +1,304 @@
+{
+ "basis": "Python reference astroengine.yogas (embedded VSOP, full moon); Lahiri ayanamsa, whole-sign houses",
+ "cases": [
+  {
+   "id": "ruchaka",
+   "spec": {
+    "id": "ruchaka",
+    "type": "detect",
+    "asc": 0,
+    "signs": {
+     "sun": 4,
+     "moon": 2,
+     "mars": 0,
+     "mercury": 4,
+     "jupiter": 0,
+     "venus": 0,
+     "saturn": 0
+    }
+   },
+   "result": [
+    {
+     "yoga": "Ruchaka",
+     "planets": [
+      "mars"
+     ]
+    },
+    {
+     "yoga": "Budha-Aditya",
+     "planets": [
+      "sun",
+      "mercury"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "hamsa",
+   "spec": {
+    "id": "hamsa",
+    "type": "detect",
+    "asc": 0,
+    "signs": {
+     "sun": 0,
+     "moon": 5,
+     "mars": 7,
+     "mercury": 0,
+     "jupiter": 3,
+     "venus": 0,
+     "saturn": 0
+    }
+   },
+   "result": [
+    {
+     "yoga": "Hamsa",
+     "planets": [
+      "jupiter"
+     ]
+    },
+    {
+     "yoga": "Budha-Aditya",
+     "planets": [
+      "sun",
+      "mercury"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "malavya",
+   "spec": {
+    "id": "malavya",
+    "type": "detect",
+    "asc": 0,
+    "signs": {
+     "sun": 0,
+     "moon": 0,
+     "mars": 0,
+     "mercury": 0,
+     "jupiter": 0,
+     "venus": 6,
+     "saturn": 0
+    }
+   },
+   "result": [
+    {
+     "yoga": "Ruchaka",
+     "planets": [
+      "mars"
+     ]
+    },
+    {
+     "yoga": "Malavya",
+     "planets": [
+      "venus"
+     ]
+    },
+    {
+     "yoga": "Gajakesari",
+     "planets": [
+      "jupiter",
+      "moon"
+     ]
+    },
+    {
+     "yoga": "Budha-Aditya",
+     "planets": [
+      "sun",
+      "mercury"
+     ]
+    },
+    {
+     "yoga": "Chandra-Mangala",
+     "planets": [
+      "moon",
+      "mars"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "no-mahapurusha",
+   "spec": {
+    "id": "no-mahapurusha",
+    "type": "detect",
+    "asc": 0,
+    "signs": {
+     "sun": 0,
+     "moon": 0,
+     "mars": 0,
+     "mercury": 0,
+     "jupiter": 0,
+     "venus": 0,
+     "saturn": 10
+    }
+   },
+   "result": [
+    {
+     "yoga": "Ruchaka",
+     "planets": [
+      "mars"
+     ]
+    },
+    {
+     "yoga": "Gajakesari",
+     "planets": [
+      "jupiter",
+      "moon"
+     ]
+    },
+    {
+     "yoga": "Budha-Aditya",
+     "planets": [
+      "sun",
+      "mercury"
+     ]
+    },
+    {
+     "yoga": "Chandra-Mangala",
+     "planets": [
+      "moon",
+      "mars"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gajakesari",
+   "spec": {
+    "id": "gajakesari",
+    "type": "detect",
+    "asc": 5,
+    "signs": {
+     "sun": 0,
+     "moon": 0,
+     "mars": 0,
+     "mercury": 0,
+     "jupiter": 3,
+     "venus": 0,
+     "saturn": 0
+    }
+   },
+   "result": [
+    {
+     "yoga": "Gajakesari",
+     "planets": [
+      "jupiter",
+      "moon"
+     ]
+    },
+    {
+     "yoga": "Budha-Aditya",
+     "planets": [
+      "sun",
+      "mercury"
+     ]
+    },
+    {
+     "yoga": "Chandra-Mangala",
+     "planets": [
+      "moon",
+      "mars"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "budha-chandra",
+   "spec": {
+    "id": "budha-chandra",
+    "type": "detect",
+    "asc": 0,
+    "signs": {
+     "sun": 8,
+     "moon": 10,
+     "mars": 10,
+     "mercury": 8,
+     "jupiter": 0,
+     "venus": 0,
+     "saturn": 0
+    }
+   },
+   "result": [
+    {
+     "yoga": "Budha-Aditya",
+     "planets": [
+      "sun",
+      "mercury"
+     ]
+    },
+    {
+     "yoga": "Chandra-Mangala",
+     "planets": [
+      "moon",
+      "mars"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "none",
+   "spec": {
+    "id": "none",
+    "type": "detect",
+    "asc": 0,
+    "signs": {
+     "sun": 1,
+     "moon": 4,
+     "mars": 8,
+     "mercury": 11,
+     "jupiter": 10,
+     "venus": 7,
+     "saturn": 2
+    }
+   },
+   "result": [
+    {
+     "yoga": "Gajakesari",
+     "planets": [
+      "jupiter",
+      "moon"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "yogas-tampa",
+   "spec": {
+    "id": "yogas-tampa",
+    "type": "at",
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "lat": 27.95,
+    "lon": -82.46
+   },
+   "result": [
+    {
+     "yoga": "Shasha",
+     "planets": [
+      "saturn"
+     ]
+    },
+    {
+     "yoga": "Gajakesari",
+     "planets": [
+      "jupiter",
+      "moon"
+     ]
+    },
+    {
+     "yoga": "Budha-Aditya",
+     "planets": [
+      "sun",
+      "mercury"
+     ]
+    }
+   ]
+  }
+ ]
+}

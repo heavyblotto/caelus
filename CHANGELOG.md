@@ -6,6 +6,20 @@ package. Numbers quoted here are as measured at release time;
 current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
+## Unreleased
+
+### Engine (`caelus`)
+
+- Vedic yogas (Roadmap Phase 2): the well-defined, placement-based combinations
+  on the sidereal rasi chart — the five Pancha Mahapurusha yogas (Ruchaka,
+  Bhadra, Hamsa, Malavya, Shasha: a non-luminary in its own sign or exaltation
+  and in a kendra), Gajakesari (Jupiter in a kendra from the Moon), Budha-Aditya
+  (Sun + Mercury in one sign), and Chandra-Mangala (Moon + Mars in one sign).
+  `detectYogas` (pure, from a sign map) and `yogasAt` (from a chart), reusing the
+  engine's `dignities` for own-sign/exaltation. The variant-laden yogas
+  (Kemadruma, lordship-based raja/dhana) are deferred. `yogas-golden` pin plus a
+  defining-rule oracle (in vs. off kendra, kendra-from-Moon, same-sign).
+
 ## 0.13.0 — 2026-06-14
 
 A feature release across all four packages. The engine completes Phase 1 — the
