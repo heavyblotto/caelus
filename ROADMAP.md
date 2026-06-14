@@ -130,6 +130,55 @@ SE-pinned sidereal longitudes; validated against established Jyotish references
 and published charts as golden fixtures, with ayanamsa/convention variants
 stated explicitly. Multi-release.
 
+### Deferred work — resolution plan
+
+Several techniques were deliberately deferred during Phases 1–2 because the
+blocker was never the math (all are deterministic) but the *convention*: more
+than one named tradition exists and none could be certified canonical from
+memory or contradictory web sources. The resolution is the same move the engine
+already makes for positions — validate against a named oracle instead of
+asserting.
+
+**Keystone: a `validate_jyotish` tier.** Mirror `validate_swiss.py` /
+`validate_horizons.py` with a tier that pins the Vedic output (vargas, dashas,
+yogas) against a named reference that itself follows a published authority —
+PyJHora (open source, follows PVR Narasimha Rao's *Integrated Approach*) for the
+algorithm, Jagannatha Hora for worked examples. Build this first; it de-risks
+every Vedic item below by turning "which convention" into "validated against a
+named, reproducible, cited standard."
+
+Bucket A — standard convention, just complex (clear wins, do early):
+
+- **Trimsamsa (D30)**: implement the BPHS unequal-division table (odd
+  5/5/8/7/5 by Mars/Saturn/Jupiter/Mercury/Venus, even reversed) mapping to the
+  ruler's sign; validate vs the oracle + known placements.
+- **Hora (D2)**: pin the Parashari convention as the default; expose the
+  alternate scheme as a `variant`.
+- **Inter-planetary primary directions under the pole**: Placidus semi-arc
+  between planets (not just to angles); validate against a primary-directions
+  oracle / published worked example.
+
+Bucket B — genuinely variant (adopt a documented, parameterized, oracle-pinned
+default):
+
+- **Ashtottari dasha**: reproduce PyJHora's full nakshatra→lord mapping *and*
+  the multi-nakshatra balance formula; ship labelled "JHora/PVR convention" with
+  a `variant` hook for the BPHS Ardra-start.
+- **Kemadruma yoga**: stable core rule (no planet in the 2nd/12th from, or with,
+  the Moon); default to the five non-luminary, non-nodal grahas with
+  `include_sun`/`include_nodes` options, and kemadruma-bhanga (cancellation) as
+  an explicit flag.
+- **Lordship-based raja/dhana yogas** (the large, high-leverage build): a
+  foundation layer first — house lordship, **graha drishti** (all planets the
+  7th; Mars 4/8, Jupiter 5/9, Saturn 3/10), and association primitives
+  (conjunction / mutual aspect / parivartana) — then the named yogas pinned to
+  BPHS + the oracle. The foundation unlocks a whole class of future yogas.
+
+Order: (1) `validate_jyotish` tier; (2) trimsamsa + hora + kemadruma; (3)
+Ashtottari; (4) lordship + drishti layer → raja/dhana yogas; (5) inter-planetary
+directions. Each lands reference-first with a golden, and each convention choice
+is stated and cited.
+
 ### Phase 3 — Chat MCP App
 
 An Apps SDK MCP App on the existing hosted server: a correct chart with a
