@@ -47,6 +47,8 @@ export default function SiteFooter() {
             MIT License
           </a>
           <span aria-hidden>·</span>
+          <Link href="/privacy">Privacy</Link>
+          <span aria-hidden>·</span>
           <span>v{SITE.version}</span>
           <span aria-hidden>·</span>
           <span>Positions computed from published math, not recalled.</span>

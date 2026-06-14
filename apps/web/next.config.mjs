@@ -19,7 +19,12 @@ const nextConfig = {
   // `/about` is a common guessed URL; send it to the project's build story
   // rather than a 404. Temporary (307) so a dedicated page can claim it later.
   async redirects() {
-    return [{ source: "/about", destination: "/how-it-was-built", permanent: false }];
+    return [
+      { source: "/about", destination: "/how-it-was-built", permanent: false },
+      // Legacy/direct /favicon.ico requests 404 otherwise (the icon is the SVG
+      // in app/icon.svg, which modern browsers load via the emitted <link>).
+      { source: "/favicon.ico", destination: "/icon.svg", permanent: false },
+    ];
   },
 };
 

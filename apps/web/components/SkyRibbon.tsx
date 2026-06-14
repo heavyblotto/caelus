@@ -15,6 +15,10 @@ const ECLIPTIC_Y = 96;
 // nodes share a glyph; drawing both doubles it, so skip mean_node like the wheel
 const SHOWN = BODIES.filter((b) => b !== "mean_node");
 
+/** "true_node" -> "True node" for the hover tooltips. */
+const label = (body: string) =>
+  body.replace(/_/g, " ").replace(/^./, (c) => c.toUpperCase());
+
 type Placed = { body: Body; lon: number; x: number; y: number };
 
 function place(lons: Array<{ body: Body; lon: number }>): Placed[] {
@@ -60,6 +64,7 @@ export default function SkyRibbon() {
           const x = (i / 12) * W;
           return (
             <g key={sign}>
+              <title>{sign}</title>
               <line x1={x} y1={ECLIPTIC_Y - 6} x2={x} y2={ECLIPTIC_Y + 6} stroke="var(--border-strong)" strokeWidth="1" />
               <text
                 x={x + W / 24}
@@ -78,6 +83,7 @@ export default function SkyRibbon() {
 
         {placed.map(({ body, lon, x, y }) => (
           <g key={body}>
+            <title>{`${label(body)} · ${fmtLon(lon)}`}</title>
             <line x1={x} y1={ECLIPTIC_Y} x2={x} y2={y + 10} stroke="var(--border-strong)" strokeWidth="0.75" opacity="0.7" />
             <circle cx={x} cy={ECLIPTIC_Y} r="2" fill="var(--warm)" />
             <text x={x} y={y} textAnchor="middle" fontSize="17" fill="var(--text)">

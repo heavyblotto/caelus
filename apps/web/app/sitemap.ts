@@ -73,6 +73,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/how-it-was-built",
     "/notes",
     "/changelog",
+    "/privacy",
     "/docs",
     "/docs/quickstart",
     "/docs/charts",
