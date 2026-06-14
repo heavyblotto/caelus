@@ -8,14 +8,14 @@ export const metadata = {
 
 # Vedic and Jyotish
 
-Caelus computes a full Jyotish layer on the sidereal chart &mdash; nakshatras, the
+Caelus computes a full Jyotish layer on the sidereal chart: nakshatras, the
 nakshatra-based dashas, the divisional charts, and the yogas. It builds on the
 sidereal longitudes already validated against Swiss Ephemeris; the techniques
 themselves are deterministic arithmetic.
 
 Several Vedic techniques carry named convention variants. Rather than assert
-one, Caelus pins each to a named authority &mdash; BPHS, or the JHora/PVR Narasimha
-Rao implementation where the texts differ &mdash; and records the citation in a
+one, Caelus pins each to a named authority (BPHS, or the JHora/PVR Narasimha
+Rao implementation where the texts differ) and records the citation in a
 `validate_jyotish` reference tier, the same discipline the engine uses for
 positions (see [Methods](/methods)). The default ayanamsa is Lahiri; pass any
 sidereal mode where a function takes a `zodiac`.
@@ -48,10 +48,10 @@ Three nakshatra-based dasha systems, each started from the Moon's birth
 nakshatra with the elapsed portion set by how far the Moon has moved through it,
 and each subdividing into proportional sub-periods.
 
-- **Vimshottari** &mdash; the 120-year cycle, the most widely used; gives the
+- **Vimshottari**: the 120-year cycle, the most widely used; gives the
   mahadasha, antardasha, and pratyantardasha.
-- **Yogini** &mdash; the 36-year cycle of eight yoginis.
-- **Ashtottari** &mdash; the 108-year conditional dasha (JHora/PVR mapping).
+- **Yogini**: the 36-year cycle of eight yoginis.
+- **Ashtottari**: the 108-year conditional dasha (JHora/PVR mapping).
 
 <CodeBlock
   lang="typescript"
@@ -84,7 +84,7 @@ vargaChart(engine, natal, 9);`}
 Classical combinations on the rasi chart: the five Pancha Mahapurusha yogas,
 Gajakesari, Budha-Aditya, and Chandra-Mangala by placement; Kemadruma (an
 isolated Moon, with a parameterized planet set); and a lordship-and-drishti
-layer &mdash; house lordship, graha drishti, and the association of lords &mdash; giving
+layer (house lordship, graha drishti, and the association of lords) giving
 raja and dhana yogas and the chart's yogakarakas.
 
 <CodeBlock

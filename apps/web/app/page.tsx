@@ -36,11 +36,11 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <Eyebrow>MIT · zero dependencies · ~85 KB</Eyebrow>
-      <h1>A complete astrology engine &mdash; Western and Vedic &mdash; from published math</h1>
+      <h1>A complete astrology engine, Western and Vedic, from published math</h1>
       <Lead>
-        Caelus computes natal charts and the techniques built on them &mdash; houses
+        Caelus computes natal charts and the techniques built on them: houses
         and aspects, the Hellenistic time-lords, and the Vedic dashas, vargas,
-        and yogas &mdash; each convention validated against a named authority. The same
+        and yogas, each convention validated against a named authority. The same
         TypeScript runs in the browser, on edge runtimes, and in Node, with MCP
         tools for AI clients. No Swiss Ephemeris, no AGPL, no ephemeris files on
         disk.

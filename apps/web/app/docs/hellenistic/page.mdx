@@ -11,7 +11,7 @@ export const metadata = {
 Time-lord techniques divide a life into periods, each ruled by a planet or a
 sign, and ask which lord is active at a given moment. Caelus computes the
 classical Hellenistic and Persian methods as deterministic arithmetic on the
-positions it already validates against Swiss Ephemeris &mdash; no new ephemeris, and
+positions it already validates against Swiss Ephemeris. No new ephemeris, and
 every convention is stated, not assumed. None of this is interpretation: the
 engine returns the lords and their dates; the meaning is yours.
 
@@ -25,8 +25,8 @@ const natal = julianDay(1990, 6, 10, 14, 30);   // UT
 
 ## Lots (Arabic parts)
 
-The seven Hermetic lots &mdash; Fortune, Spirit, Eros, Necessity, Courage, Victory,
-and Nemesis &mdash; are arcs cast from the Ascendant, each reversing direction between
+The seven Hermetic lots (Fortune, Spirit, Eros, Necessity, Courage, Victory,
+and Nemesis) are arcs cast from the Ascendant, each reversing direction between
 a day and a night chart. Fortune and Spirit are symmetric about the Ascendant.
 
 <CodeBlock
@@ -60,7 +60,7 @@ p.annual.lord;      // lord of the year`}
 ## Firdaria
 
 The Persian firdaria divides life into nine periods totalling seventy-five
-years &mdash; the seven planets in the firdaria order, then the two nodes &mdash; each
+years (the seven planets in the firdaria order, then the two nodes), each
 planetary period split into seven sub-periods. A day chart begins with the Sun,
 a night chart with the Moon.
 
@@ -75,8 +75,8 @@ f.sub;     // the sub-period lord`}
 
 ## Zodiacal releasing
 
-Released from a lot &mdash; usually Spirit (career and action) or Fortune (body and
-circumstance) &mdash; periods unfold sign by sign across four nested levels. Caelus
+Released from a lot, usually Spirit (career and action) or Fortune (body and
+circumstance), periods unfold sign by sign across four nested levels. Caelus
 uses the standard Valens/Schmidt convention: years of exactly 360 days, each
 level a twelfth of the one above, and the *loosing of the bond*, where a level
 that loops back to its starting sign jumps to the opposite sign instead.
@@ -109,5 +109,5 @@ mundaneDirections(engine, natal, 27.95, -82.46);`}
 />
 
 The full signatures are in the [API Reference](/docs/api). For the Vedic
-time-lord systems &mdash; the Vimshottari, Yogini, and Ashtottari dashas &mdash; see
+time-lord systems (the Vimshottari, Yogini, and Ashtottari dashas), see
 [Vedic &amp; Jyotish](/docs/vedic).

@@ -79,10 +79,10 @@ export default function Features() {
       <H2>Vedic and Jyotish</H2>
       <P>
         A full Jyotish layer on the sidereal chart: nakshatras with padas and
-        their ruling planets; three dasha systems &mdash; Vimshottari (120-year),
+        their ruling planets; three dasha systems: Vimshottari (120-year),
         Yogini (36-year), and Ashtottari (108-year), each with sub-periods read
         from the Moon&apos;s nakshatra; the Parashari divisional charts (vargas)
-        D1, D2, D3, D9, D10, D12, and D30; and the yogas &mdash; the five Pancha
+        D1, D2, D3, D9, D10, D12, and D30; and the yogas: the five Pancha
         Mahapurusha, Gajakesari, Budha-Aditya, Chandra-Mangala, Kemadruma, plus a
         lordship and graha-drishti layer with raja and dhana yogas and
         yogakarakas. Each convention is validated against a named authority, not

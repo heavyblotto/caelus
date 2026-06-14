@@ -60,13 +60,13 @@ export default function Methods() {
 
       <H2>Validating the conventions</H2>
       <P>
-        The traditional techniques &mdash; the Hellenistic time-lords and the
-        Vedic dashas, vargas, and yogas &mdash; are deterministic arithmetic, but
+        The traditional techniques (the Hellenistic time-lords and the
+        Vedic dashas, vargas, and yogas) are deterministic arithmetic, but
         many carry named convention variants where the texts disagree. Caelus
         applies the same discipline to the conventions as to the positions:
         rather than assert one reading, each technique is pinned to a named
-        authority &mdash; the Brihat Parashara Hora Shastra, or the JHora/PVR
-        Narasimha Rao implementation where the texts differ &mdash; and a
+        authority (the Brihat Parashara Hora Shastra, or the JHora/PVR
+        Narasimha Rao implementation where the texts differ), and a
         reference tier (<code>validate_jyotish</code>) replays a committed,
         per-check-cited set so every convention choice is validated against a
         named source, not memory. It runs no external tool, keeping the engine
