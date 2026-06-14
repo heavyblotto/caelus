@@ -36,6 +36,13 @@ def build_cases():
          "lat": TAMPA[0], "lon": TAMPA[1], "key": "naibod"},
         {"id": "dir-tampa-ptolemy", "type": "directions", "natal": NATAL,
          "lat": TAMPA[0], "lon": TAMPA[1], "key": "ptolemy"},
+        # mundane (planet-to-planet) Placidus semi-arc directional arcs: a self
+        # direction (0), a significator on the MC (= the to-MC arc), and general
+        {"id": "mund-self", "type": "mundane_arc", "ap": 100.0, "dp": 20.0, "as_": 100.0, "ds": 20.0, "ramc": 50.0, "phi": 40.0},
+        {"id": "mund-on-mc", "type": "mundane_arc", "ap": 100.0, "dp": 20.0, "as_": 50.0, "ds": 0.0, "ramc": 50.0, "phi": 40.0},
+        {"id": "mund-general", "type": "mundane_arc", "ap": 100.0, "dp": 20.0, "as_": 250.0, "ds": -15.0, "ramc": 75.0, "phi": 51.5},
+        # full mundane directions of the natal chart
+        {"id": "mund-tampa", "type": "mundane", "natal": NATAL, "lat": TAMPA[0], "lon": TAMPA[1], "key": "naibod"},
     ]
 
 
@@ -45,6 +52,12 @@ def compute(spec, eng):
         return D.direction_arcs(spec["alpha"], spec["delta"], spec["ramc"], spec["phi"])
     if t == "directions":
         return D.primary_directions(eng, jd(spec["natal"]), spec["lat"], spec["lon"],
+                                    key=spec["key"])
+    if t == "mundane_arc":
+        return {"arc": D.mundane_direction_arc(spec["ap"], spec["dp"], spec["as_"],
+                                               spec["ds"], spec["ramc"], spec["phi"])}
+    if t == "mundane":
+        return D.mundane_directions(eng, jd(spec["natal"]), spec["lat"], spec["lon"],
                                     key=spec["key"])
     raise ValueError(spec["type"])
 

@@ -204,6 +204,171 @@
      "jd": 2478171.3508612216
     }
    ]
+  },
+  {
+   "id": "mund-self",
+   "spec": {
+    "id": "mund-self",
+    "type": "mundane_arc",
+    "ap": 100.0,
+    "dp": 20.0,
+    "as_": 100.0,
+    "ds": 20.0,
+    "ramc": 50.0,
+    "phi": 40.0
+   },
+   "result": {
+    "arc": 0.0
+   }
+  },
+  {
+   "id": "mund-on-mc",
+   "spec": {
+    "id": "mund-on-mc",
+    "type": "mundane_arc",
+    "ap": 100.0,
+    "dp": 20.0,
+    "as_": 50.0,
+    "ds": 0.0,
+    "ramc": 50.0,
+    "phi": 40.0
+   },
+   "result": {
+    "arc": 50.0
+   }
+  },
+  {
+   "id": "mund-general",
+   "spec": {
+    "id": "mund-general",
+    "type": "mundane_arc",
+    "ap": 100.0,
+    "dp": 20.0,
+    "as_": 250.0,
+    "ds": -15.0,
+    "ramc": 75.0,
+    "phi": 51.5
+   },
+   "result": {
+    "arc": 19.65606020282505
+   }
+  },
+  {
+   "id": "mund-tampa",
+   "spec": {
+    "id": "mund-tampa",
+    "type": "mundane",
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "lat": 27.95,
+    "lon": -82.46,
+    "key": "naibod"
+   },
+   "result": [
+    {
+     "promissor": "moon",
+     "significator": "saturn",
+     "arc": 13.4953673305005,
+     "years": 13.691882817008173,
+     "jd": 2453053.9575688927
+    },
+    {
+     "promissor": "mercury",
+     "significator": "venus",
+     "arc": 14.805324889907425,
+     "years": 15.020915585024607,
+     "jd": 2453539.376420955
+    },
+    {
+     "promissor": "sun",
+     "significator": "mercury",
+     "arc": 21.56402680356107,
+     "years": 21.87803568635664,
+     "jd": 2456043.88605243
+    },
+    {
+     "promissor": "jupiter",
+     "significator": "sun",
+     "arc": 27.661895349456366,
+     "years": 28.064699562872406,
+     "jd": 2458303.516777349
+    },
+    {
+     "promissor": "venus",
+     "significator": "mars",
+     "arc": 35.51731915925157,
+     "years": 36.03451169526013,
+     "jd": 2461214.428494169
+    },
+    {
+     "promissor": "mars",
+     "significator": "moon",
+     "arc": 35.597208919077275,
+     "years": 36.11556478577811,
+     "jd": 2461244.032503267
+    },
+    {
+     "promissor": "sun",
+     "significator": "venus",
+     "arc": 36.89545582997799,
+     "years": 37.43271637834141,
+     "jd": 2461725.111848668
+    },
+    {
+     "promissor": "mars",
+     "significator": "saturn",
+     "arc": 47.32628123790283,
+     "years": 48.015432333556674,
+     "jd": 2465590.366306126
+    },
+    {
+     "promissor": "jupiter",
+     "significator": "mercury",
+     "arc": 49.19519268188401,
+     "years": 49.91155830476481,
+     "jd": 2466282.9115273273
+    },
+    {
+     "promissor": "mercury",
+     "significator": "mars",
+     "arc": 51.04812231033908,
+     "years": 51.79146973804837,
+     "jd": 2466969.5345150246
+    },
+    {
+     "promissor": "jupiter",
+     "significator": "venus",
+     "arc": 64.5047739008393,
+     "years": 65.44407304807642,
+     "jd": 2471956.0413837065
+    },
+    {
+     "promissor": "venus",
+     "significator": "moon",
+     "arc": 73.81512832364632,
+     "years": 74.89000205615774,
+     "jd": 2475406.093275662
+    },
+    {
+     "promissor": "sun",
+     "significator": "mars",
+     "arc": 74.4261335085837,
+     "years": 75.50990451511784,
+     "jd": 2475632.507813558
+    },
+    {
+     "promissor": "venus",
+     "significator": "saturn",
+     "arc": 86.43403264176078,
+     "years": 87.69265906958887,
+     "jd": 2480082.1638890933
+    }
+   ]
   }
  ]
 }

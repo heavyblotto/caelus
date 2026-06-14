@@ -43,6 +43,14 @@ Working through the deferred-technique resolution plan (ROADMAP).
   with `rajaYogasAt`/`dhanaYogasAt`. The foundation unlocks a class of future
   yogas. `rajayoga-golden` pin + drishti/yogakaraka/raja oracles, cited in
   `validate_jyotish` (BPHS).
+- Inter-planetary primary directions (deferred-plan, the last item): the
+  Placidus semi-arc mundane direction of one planet to another,
+  `arc = MD_p - (MD_s / SA_s) * SA_p` (meridian distance over semi-arc, with the
+  diurnal/nocturnal branch). `mundaneDirectionArc` and `mundaneDirections` (all
+  promissor->significator pairs within a span, by time key). Extends
+  `directions-golden`; validated by tying it to the already-validated angle
+  directions -- it reduces to 0 for a self-direction and to the to-MC arc for an
+  above-horizon promissor directed to a significator on the meridian.
 
 ### Validation
 

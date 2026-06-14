@@ -55,6 +55,64 @@ def direction_years(arc, key="naibod"):
     return arc / KEYS[key]
 
 
+def _semi_arc_position(alpha, delta, ramc, phi):
+    """A body's signed meridian distance from its nearest meridian and the
+    matching semi-arc, as ``(MD, SA)`` in degrees. None when circumpolar (the
+    body never rises). Above the horizon: MD from the MC, SA = 90 + AD; below:
+    MD from the IC, SA = 90 - AD."""
+    t = math.tan(math.radians(phi)) * math.tan(math.radians(delta))
+    if abs(t) > 1.0:
+        return None
+    ad = math.degrees(math.asin(t))
+    mdu = (alpha - ramc + 180.0) % 360.0 - 180.0          # upper meridian dist.
+    if abs(mdu) <= 90.0 + ad:
+        return mdu, 90.0 + ad
+    sign = 1.0 if mdu >= 0 else -1.0
+    return sign * (180.0 - abs(mdu)), 90.0 - ad
+
+
+def mundane_direction_arc(alpha_p, delta_p, alpha_s, delta_s, ramc, phi):
+    """Placidus semi-arc mundane directional arc (degrees) for promissor P to
+    significator S: the promissor reaches the significator's proportional place
+    in its semi-arc, ``arc = MD_p - (MD_s / SA_s) * SA_p``. None if either body
+    is circumpolar. Reduces to the to-MC arc when S is on the meridian, and to 0
+    when P and S coincide."""
+    pp = _semi_arc_position(alpha_p, delta_p, ramc, phi)
+    ps = _semi_arc_position(alpha_s, delta_s, ramc, phi)
+    if pp is None or ps is None:
+        return None
+    md_p, sa_p = pp
+    md_s, sa_s = ps
+    return md_p - (md_s / sa_s) * sa_p
+
+
+def mundane_directions(engine, natal_jd, lat, lon_east, bodies=None,
+                       key="naibod", max_years=90.0, year_length=YEAR_DAYS):
+    """Direct mundane (Placidus semi-arc) directions of each promissor to each
+    other significator within ``max_years``. Returns a list of
+    ``{promissor, significator, arc, years, jd}`` sorted by years."""
+    if bodies is None:
+        bodies = TRADITIONAL
+    _, _, armc, _ = H.angles(natal_jd, lat, lon_east)
+    ramc = math.degrees(armc)
+    pos = {b: engine.position(b, natal_jd) for b in bodies}
+    out = []
+    for p in bodies:
+        for s in bodies:
+            if p == s:
+                continue
+            arc = mundane_direction_arc(pos[p]["ra"], pos[p]["dec"],
+                                        pos[s]["ra"], pos[s]["dec"], ramc, lat)
+            if arc is None:
+                continue
+            years = direction_years(arc, key)
+            if 0.0 <= years <= max_years:
+                out.append({"promissor": p, "significator": s, "arc": arc,
+                            "years": years, "jd": natal_jd + years * year_length})
+    out.sort(key=lambda d: d["years"])
+    return out
+
+
 def primary_directions(engine, natal_jd, lat, lon_east, bodies=None,
                        key="naibod", max_years=90.0, year_length=YEAR_DAYS):
     """Direct primary directions of the bodies to the four angles within

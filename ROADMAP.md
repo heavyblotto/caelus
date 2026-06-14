@@ -155,9 +155,11 @@ Bucket A — standard convention, just complex (clear wins, do early):
 - **Hora (D2) — done**: the BPHS Parashari convention (odd sign first half ->
   Leo, second half -> Cancer; even reversed) as `varga(lon, 2)`, with cited
   `validate_jyotish` checks; alternate hora schemes remain a possible `variant`.
-- **Inter-planetary primary directions under the pole**: Placidus semi-arc
-  between planets (not just to angles); validate against a primary-directions
-  oracle / published worked example.
+- **Inter-planetary primary directions — done**: the Placidus semi-arc mundane
+  direction between planets (`mundaneDirectionArc`/`mundaneDirections`),
+  validated by reducing to the already-validated angle directions (self -> 0,
+  significator-on-MC -> the to-MC arc); a software-oracle (Morinus/Solar Fire)
+  cross-check remains a recommended local run.
 
 Bucket B — genuinely variant (adopt a documented, parameterized, oracle-pinned
 default):

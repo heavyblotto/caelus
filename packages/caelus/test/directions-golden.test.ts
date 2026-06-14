@@ -30,6 +30,8 @@ function compute(spec: any): any {
   switch (spec.type) {
     case "arcs": return D.directionArcs(spec.alpha, spec.delta, spec.ramc, spec.phi);
     case "directions": return D.primaryDirections(eng, jd(spec.natal), spec.lat, spec.lon, undefined, spec.key);
+    case "mundane_arc": return { arc: D.mundaneDirectionArc(spec.ap, spec.dp, spec.as_, spec.ds, spec.ramc, spec.phi) };
+    case "mundane": return D.mundaneDirections(eng, jd(spec.natal), spec.lat, spec.lon, undefined, spec.key);
     default: throw new Error(`unknown directions type ${spec.type}`);
   }
 }
@@ -99,6 +101,19 @@ const RAD = Math.PI / 180, DEG = 180 / Math.PI;
 
   // the two keys scale by the Naibod constant
   if (Math.abs(D.directionYears(30, "naibod") - D.directionYears(30, "ptolemy") / 0.9856473) > 1e-9) fail(`key ratio`); else ok();
+
+  // mundane direction invariants, tying it to the validated angle directions:
+  // a body directed to itself is 0; an above-horizon promissor directed to a
+  // significator on the MC equals its to-MC arc (a below-horizon promissor
+  // measures from the IC instead, so the cross-check uses near-meridian, hence
+  // above-horizon, promissors).
+  if (Math.abs(D.mundaneDirectionArc(100, 20, 100, 20, 50, 40) as number) > 1e-9) fail("mundane self != 0"); else ok();
+  for (const [ap, dp, phi] of [[100, 20, 40], [90, -10, 30], [10, 5, -33]] as Array<[number, number, number]>) {
+    const ramc = 50;
+    const mund = D.mundaneDirectionArc(ap, dp, ramc, 0, ramc, phi) as number; // significator on the MC (alpha = ramc)
+    const toMc = D.directionArcs(ap, dp, ramc, phi).mc;
+    if (Math.abs(mod360(mund) - toMc) > 1e-6) fail(`mundane-to-MC != to-MC arc (${ap},${dp},${phi}): ${mod360(mund)} vs ${toMc}`); else ok();
+  }
 }
 
 console.log(`\n${checks} checks, ${failures} failures`);
