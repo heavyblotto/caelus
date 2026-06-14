@@ -115,3 +115,11 @@ graticule
 [Ff]irdaria
 Valens
 [Aa]phesis
+Jyotish
+[Nn]akshatras?
+Vimshottari
+dashas?
+[Pp]adas?
+mahadasha
+antardasha
+pratyantardasha
