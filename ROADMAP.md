@@ -183,7 +183,7 @@ Ashtottari; (4) lordship + drishti layer → raja/dhana yogas; (5) inter-planeta
 directions. Each lands reference-first with a golden, and each convention choice
 is stated and cited.
 
-### Phase 3 — Chat MCP App
+### Phase 3 — Chat MCP App (in progress)
 
 An Apps SDK MCP App on the existing hosted server: a correct chart with a
 rendered `caelus-wheel` SVG in-host, interpretation-free, reusing the shipped
@@ -191,3 +191,10 @@ rendered `caelus-wheel` SVG in-host, interpretation-free, reusing the shipped
 ChatGPT, Claude, and other MCP-Apps hosts. Distribution rather than capability;
 it grows richer as Phases 0–2 add tools. Guarded by the live-smoke pattern
 extended to the app endpoint.
+
+**UI surface — done**: `apps/web/app/embed/chart`, a chrome-free route rendering
+`ChartWheel` from the `natal_chart`/`current_sky` payload (Apps-SDK
+`window.openai.toolOutput`, `?c=` fallback), self-contained so it can move in
+parallel with the MCP server. Next: the server-side UI-resource wiring (the
+tool-result `_meta`/`ui://` reference, in the MCP layer) and the Apps-SDK
+manifest / host registration. See `docs/mcp-app.md`.

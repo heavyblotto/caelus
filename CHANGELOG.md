@@ -10,6 +10,16 @@ current figures live in `packages/caelus/accuracy.json` and on
 
 Working through the deferred-technique resolution plan (ROADMAP).
 
+### Web / chat MCP App (Roadmap Phase 3)
+
+- In-host chart renderer for the chat MCP App: `apps/web/app/embed/chart`, a
+  chrome-free route that renders `caelus-wheel`'s `ChartWheel` from a
+  `natal_chart`/`current_sky` payload (read from the Apps-SDK host's
+  `window.openai.toolOutput`, with a `?c=<base64 chart JSON>` fallback for
+  standalone use). Interpretation-free; the MCP payload feeds the wheel as-is.
+  The server-side UI-resource wiring lands with the MCP layer. See
+  `docs/mcp-app.md`.
+
 ### Engine (`caelus`)
 
 - Trimsamsa (D30) divisional chart: the BPHS unequal five-band rule (odd signs
