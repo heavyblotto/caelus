@@ -15,5 +15,11 @@
   "entryFileName": "index",
   "fileExtension": ".md",
   "useCodeBlocks": true,
-  "expandObjects": true
+  "expandObjects": true,
+  "disableSources": true,
+  "parametersFormat": "table",
+  "propertiesFormat": "table",
+  "enumMembersFormat": "table",
+  "typeDeclarationFormat": "table",
+  "indexFormat": "table"
 }

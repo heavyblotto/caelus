@@ -566,36 +566,105 @@ a.card:hover,
 }
 
 .api-doc h1 {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
+  margin-bottom: 0.9rem;
 }
 
+/* Top-level sections. On function pages: Parameters / Returns / Example.
+   On class pages: Constructors / Properties / Methods. Rendered as a thin
+   monospace divider label rather than a heavy heading. */
 .api-doc h2 {
-  font-size: 1.2rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-mute);
   margin-top: 2rem;
   padding-top: 1rem;
   border-top: 1px solid var(--border);
 }
 
-.api-doc h3,
-.api-doc h4 {
+/* Member names on class pages (each method / property). The most prominent
+   thing on the page after the title — kept in monospace, like a signature. */
+.api-doc h3 {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 1.02rem;
+  font-weight: 500;
   color: var(--text);
-  margin-top: 1.4rem;
+  margin-top: 2.2rem;
+}
+
+/* Per-member sub-labels: Parameters / Returns / Example under a method. */
+.api-doc h4 {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-top: 1.25rem;
+  margin-bottom: 0.4rem;
 }
 
 .api-doc ul {
   padding-left: 1.2rem;
 }
 
-.api-doc table {
-  margin: 1rem 0;
-  font-size: 0.85rem;
+/* The first code block under a heading is the signature: give it room. */
+.api-doc h1 + pre,
+.api-doc h3 + pre {
+  margin-top: 0.4rem;
 }
 
-.api-doc td,
-.api-doc th {
-  padding: 0.35rem 0.8rem 0.35rem 0;
+.api-doc table {
+  width: 100%;
+  margin: 0.4rem 0 1.25rem;
+  font-size: 0.84rem;
+}
+
+.api-doc thead th {
+  text-align: left;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 0.68rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  padding: 0.3rem 0.9rem 0.35rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.api-doc tbody td {
+  padding: 0.42rem 0.9rem 0.42rem 0;
   vertical-align: top;
   border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+/* First column holds the parameter / property name; keep it on one line. */
+.api-doc tbody td:first-child {
+  white-space: nowrap;
+  color: var(--text);
+}
+
+/* Let long type strings and descriptions wrap instead of forcing overflow. */
+.api-doc tbody td:not(:first-child) {
+  overflow-wrap: anywhere;
+}
+
+/* Inside type tables, drop the inline-code pill: types read as plain
+   monospace, the traditional reference convention. */
+.api-doc table code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.92em;
+  color: var(--text-dim);
+}
+
+.api-doc table td:first-child code {
+  color: var(--text);
 }
 
 .api-doc hr {
