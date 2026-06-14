@@ -32,9 +32,6 @@ export const NAV: NavItem[] = [
   { href: "/docs", label: "Docs" },
   { href: "/features", label: "Features" },
   { href: "/playground", label: "Playground" },
-  { href: "/validation", label: "Validation" },
-  { href: "/provenance", label: "Provenance" },
-  { href: "/notes", label: "Build Notes" },
 ];
 
 export type FooterColumn = { title: string; links: Array<NavItem & { external?: boolean }> };
@@ -97,16 +94,22 @@ export const FOOTER: FooterColumn[] = [
     ],
   },
   {
+    title: "Evidence",
+    links: [
+      { href: "/validation", label: "Validation" },
+      { href: "/provenance", label: "Provenance" },
+      { href: "/notes", label: "Build Notes" },
+      { href: "/methods", label: "Methods" },
+      { href: "/how-it-was-built", label: "How it was built" },
+    ],
+  },
+  {
     title: "Project",
     links: [
       { href: SITE.repo, label: "GitHub", external: true },
       { href: SITE.starter, label: "Starter template", external: true },
       { href: `${SITE.repo}/blob/main/ROADMAP.md`, label: "Roadmap", external: true },
       { href: "/changelog", label: "Changelog" },
-      { href: "/methods", label: "Methods" },
-      { href: "/how-it-was-built", label: "How it was built" },
-      { href: "/validation", label: "Validation" },
-      { href: "/provenance", label: "Provenance" },
       { href: "/api/chart?lat=27.94&lon=-82.46", label: "REST API", external: true },
       { href: "/api/mcp", label: "MCP endpoint", external: true },
     ],
