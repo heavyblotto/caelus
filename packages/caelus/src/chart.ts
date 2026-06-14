@@ -191,20 +191,26 @@ export interface ChartBody extends Position {
   dignities: string[];
 }
 
+/** Default chart bodies that are Chebyshev-packed, so they can fall outside
+ *  their fitted range (and be omitted from a chart). Opt-in asteroids are
+ *  packed too, but arrive as arbitrary ids through the string index. */
+export type PackedBody = "chiron";
+
 /** Bodies guaranteed to be in every chart: the analytic Sun–Pluto and the lunar
  *  nodes, which resolve across all supported epochs. (Chiron is Chebyshev-packed
  *  and can fall outside its fitted range, so it is *not* guaranteed.) */
-export type AlwaysBody = Exclude<Body, "chiron">;
+export type AlwaysBody = Exclude<Body, PackedBody>;
 
 /**
  * A chart's bodies, keyed by id. The analytic core ({@link AlwaysBody}) is
- * always present and needs no presence check. Chiron and any opt-in extras
- * requested via {@link ChartOptions.bodies} may be absent when the instant is
- * outside their fitted range (see {@link Chart.unavailable}), so those accesses
- * are typed `ChartBody | undefined` and must be guarded.
+ * always present and needs no presence check. {@link PackedBody} bodies (Chiron)
+ * and any opt-in extras requested via {@link ChartOptions.bodies} may be absent
+ * when the instant is outside their fitted range (see {@link Chart.unavailable}),
+ * so those accesses are typed `ChartBody | undefined` and must be guarded.
  */
 export type ChartBodies =
   & Record<AlwaysBody, ChartBody>
+  & Partial<Record<PackedBody, ChartBody>>
   & { [id: string]: ChartBody | undefined };
 
 /** One aspect between two bodies in a {@link Chart}. */
