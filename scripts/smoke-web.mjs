@@ -261,16 +261,23 @@ try {
 
   const { externalLinks } = await crawl(base);
 
-  // The MCP chart widget loads /embed/chart in an iframe; it isn't linked from
-  // nav, so assert it directly (the caelus-mcp widget resource depends on it).
-  try {
-    const res = await fetch(base + "/embed/chart", { redirect: "manual", signal: AbortSignal.timeout(15000) });
-    const body = await res.text();
-    if (res.status !== 200) fail(`/embed/chart -> ${res.status}`);
-    else if (isSoftNotFound(body)) fail(`/embed/chart -> 200 but rendered the not-found page`);
-    else ok("/embed/chart -> 200 (MCP chart widget target)");
-  } catch (err) {
-    fail(`/embed/chart -> fetch error: ${err.message}`);
+  // The MCP chart widget loads /embed/chart-widget.js directly (the caelus-mcp
+  // ui://widget/chart.html resource points at it); /embed/chart is the
+  // standalone browser fallback. Neither is linked from nav, so assert both.
+  for (const [path, label, expectJs] of [
+    ["/embed/chart-widget.js", "MCP chart widget bundle", true],
+    ["/embed/chart", "standalone chart embed", false],
+  ]) {
+    try {
+      const res = await fetch(base + path, { redirect: "manual", signal: AbortSignal.timeout(15000) });
+      const body = await res.text();
+      if (res.status !== 200) { fail(`${path} -> ${res.status}`); continue; }
+      if (!expectJs && isSoftNotFound(body)) { fail(`${path} -> 200 but rendered the not-found page`); continue; }
+      if (expectJs && !/\bcaelus-chart-root\b/.test(body)) { fail(`${path} -> 200 but not the widget bundle`); continue; }
+      ok(`${path} -> 200 (${label})`);
+    } catch (err) {
+      fail(`${path} -> fetch error: ${err.message}`);
+    }
   }
 
   await checkExternal(externalLinks);

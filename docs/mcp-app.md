@@ -31,9 +31,9 @@ reference:
 ```
 host (ChatGPT/Claude) --tools/call--> caelus-mcp (hosted /api/mcp)
         |                                   |
-        |<-- result + UI-resource ref ------|   (natal_chart payload + embed ref)
+        |<-- result + UI-resource ref ------|   (natal_chart payload + widget ref)
         v
-  iframe loads /embed/chart, reads window.openai.toolOutput, renders ChartWheel
+  host sandbox loads /embed/chart-widget.js, reads structuredContent, renders ChartWheel
 ```
 
 ## Privacy posture (distinct from the web flagship)
@@ -46,14 +46,20 @@ experience. Same engine and corpus, different posture; keep them distinct.
 
 ## Status
 
-- UI surface: shipped (`/embed/chart`), builds static, renders the MCP payload.
-- Server-side UI-resource wiring: **shipped** (`caelus-mcp` 0.14.0). `natal_chart`
-  and `current_sky` bind to a `ui://widget/chart.html` resource (a shell that
-  loads `/embed/chart` and forwards `structuredContent`), using the current MCP
-  Apps keys (`text/html;profile=mcp-app`, `_meta.ui.resourceUri`, `_meta.ui.csp`
-  with `frameDomains` for the iframe) plus the legacy `openai/*` aliases for
-  ChatGPT compatibility. See `docs/mcp-app-wiring.md`. The hosted `/api/mcp`
-  mount serves the same resource (it shares `buildServer`).
-- Apps-SDK manifest / host directory registration: still tracked. Note the
-  `frameDomains` iframe approach draws extra review scrutiny for ChatGPT
-  *directory* distribution; it is fine for the self-hosted connector today.
+- UI surface: two renderers share `caelus-wheel`'s `ChartWheel`:
+  - `/embed/chart` (Next route) — standalone/browser fallback (`?c=` or
+    `window.openai.toolOutput`).
+  - `/embed/chart-widget.js` (`apps/web/widget`, bundled by esbuild) — the
+    self-contained in-host widget the MCP server points at.
+- Server-side UI-resource wiring: **shipped** (`caelus-mcp` 0.14.0).
+  `natal_chart` and `current_sky` bind to a `ui://widget/chart.html` resource —
+  a shell that loads `/embed/chart-widget.js` **directly (no iframe)** and feeds
+  it `structuredContent`. Uses the current MCP Apps keys
+  (`text/html;profile=mcp-app`, `_meta.ui.resourceUri`, `_meta.ui.csp` with only
+  `resourceDomains`) plus the legacy `openai/*` aliases for ChatGPT
+  compatibility. See `docs/mcp-app-wiring.md`. The hosted `/api/mcp` mount serves
+  the same resource (it shares `buildServer`).
+- Rendering directly in the host sandbox (rather than nesting an iframe) keeps
+  the CSP to `resourceDomains` only and avoids the `frameDomains` grant, which
+  draws extra scrutiny at ChatGPT *directory* review.
+- Apps-SDK manifest / host directory registration: still tracked.

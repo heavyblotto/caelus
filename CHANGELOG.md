@@ -101,11 +101,13 @@ gains an optional inter-planetary (mundane) block.
   argument shape for all of them.
 - Chart widget (MCP Apps / Apps SDK): `natal_chart` and `current_sky` now bind
   to a `ui://widget/chart.html` resource so hosts that support the standard
-  (ChatGPT and others) render the chart wheel in-host. The widget is a small
-  shell that loads the already-shipped `/embed/chart` route and is fed the
-  tool's `structuredContent`; the `text` content is unchanged, so non-UI
-  clients are unaffected. Uses the current MCP Apps metadata keys with the
-  legacy `openai/*` aliases for compatibility. See `docs/mcp-app-wiring.md`.
+  (ChatGPT and others) render the chart wheel in-host. The resource loads a
+  self-contained bundle (`apps/web/widget` to `/embed/chart-widget.js`) directly
+  in the host sandbox — no nested frame — and renders `caelus-wheel` from the
+  tool's `structuredContent`; the `text` content is unchanged, so non-UI clients
+  are unaffected. Uses the current MCP Apps metadata keys (loading the script
+  needs only `resourceDomains`) with the legacy `openai/*` aliases for
+  compatibility. See `docs/mcp-app-wiring.md`.
 
 ## 0.13.0 — 2026-06-14
 

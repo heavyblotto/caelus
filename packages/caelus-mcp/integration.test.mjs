@@ -137,8 +137,9 @@ for (const c of GOLDEN_CASES) {
   const read = await client.readResource({ uri: "ui://widget/chart.html" });
   const html = read.contents[0].text;
   assert(read.contents[0].mimeType === "text/html;profile=mcp-app", "widget: content mime type");
-  assert(/\/embed\/chart/.test(html), "widget: shell loads the /embed/chart route");
-  assert(/toolOutput|tool-result/.test(html), "widget: shell forwards the tool output");
+  assert(/\/embed\/chart-widget\.js/.test(html), "widget: shell loads the chart-widget bundle");
+  assert(/id="caelus-chart-root"/.test(html), "widget: shell has the wheel mount point");
+  assert(!/<iframe/i.test(html), "widget: shell renders directly (no iframe)");
 
   // The two chart tools carry structuredContent equal to their text payload, so
   // UI hosts can render the wheel; non-UI clients still read content[0].text.

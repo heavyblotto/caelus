@@ -224,10 +224,10 @@ const text = (obj: unknown) => ({ content: [{ type: "text" as const, text: JSON.
 
 // ---------------------------------------------------------------- chart widget (MCP Apps / Apps SDK)
 // natal_chart and current_sky can render the chart wheel in-host (ChatGPT and
-// other MCP-UI / Apps-SDK hosts). The widget is a tiny shell that loads the
-// already-shipped /embed/chart route in an iframe and forwards the tool output
-// to it as the ?c= param the embed already decodes. Server-side half only; the
-// embed (apps/web/app/embed/chart) is unchanged. See docs/mcp-app-wiring.md.
+// other MCP-UI / Apps-SDK hosts). The widget loads a self-contained bundle
+// (apps/web/widget -> /embed/chart-widget.js) directly in the host's own
+// sandbox — no nested iframe — and mounts caelus-wheel from the tool's
+// structuredContent. Server-side half only; see docs/mcp-app-wiring.md.
 const EMBED_ORIGIN = process.env.CAELUS_EMBED_ORIGIN ?? "https://www.ephemengine.com";
 const CHART_WIDGET_URI = "ui://widget/chart.html";
 // The MCP Apps UI MIME type (current). Hosts only enable the UI bridge for it;
@@ -242,33 +242,19 @@ const CHART_TOOL_META = {
   "openai/outputTemplate": CHART_WIDGET_URI,
 };
 
-// The widget shell. Loads /embed/chart in an iframe and feeds it the chart
-// payload two ways: the MCP Apps standard (tool-result postMessage) and the
-// ChatGPT window.openai compatibility layer. The embed decodes ?c=<base64 JSON>.
-const CHART_WIDGET_HTML = `<!doctype html><meta charset="utf-8">
-<style>html,body{margin:0;height:100%;background:#0e0e14}iframe{display:block;border:0;width:100%;height:100%}</style>
-<iframe id="c"></iframe>
-<script>
-  var f = document.getElementById("c");
-  function render(o) {
-    f.src = ${JSON.stringify(`${EMBED_ORIGIN}/embed/chart`)} + (o ? "?c=" + encodeURIComponent(btoa(JSON.stringify(o))) : "");
-  }
-  // MCP Apps standard: the host posts the tool result to the iframe.
-  window.addEventListener("message", function (e) {
-    var m = e && e.data;
-    if (m && m.jsonrpc === "2.0" && m.method === "ui/notifications/tool-result") {
-      render(m.params && m.params.structuredContent);
-    }
-  });
-  // ChatGPT compatibility: window.openai.toolOutput, refreshed on set_globals.
-  function fromHost() { return (window.openai && window.openai.toolOutput) || null; }
-  render(fromHost());
-  window.addEventListener("openai:set_globals", function () { render(fromHost()); });
-</script>`;
+// The widget shell: a root element plus the bundle loaded directly from the
+// embed origin (a script, not an iframe — so the CSP needs only resourceDomains,
+// never the heavily-scrutinised frameDomains). The bundle reads the chart from
+// the MCP Apps tool-result message / window.openai.toolOutput. `version` is a
+// cache-buster so a release always loads fresh JS.
+const chartWidgetHtml = (version: string) => `<!doctype html><meta charset="utf-8">
+<style>html,body{margin:0;height:100%;background:#0e0e14}#caelus-chart-root{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden}</style>
+<div id="caelus-chart-root"></div>
+<script src="${EMBED_ORIGIN}/embed/chart-widget.js?v=${encodeURIComponent(version)}"></script>`;
 
 // Tool result for the two chart tools: the existing text payload (unchanged for
-// non-UI clients) plus structuredContent, which UI hosts inject as the widget's
-// tool output. The two carry the same object.
+// non-UI clients) plus structuredContent, which UI hosts hand to the widget as
+// its tool output. The two carry the same object.
 const chartResult = (payload: unknown) => ({
   content: [{ type: "text" as const, text: JSON.stringify(payload) }],
   structuredContent: payload as Record<string, unknown>,
@@ -564,7 +550,8 @@ export function buildServer(
   engine: Engine = defaultEngine(),
   opts: BuildServerOptions = {},
 ): McpServer {
-  const server = new McpServer({ name: "caelus", version: opts.version ?? VERSION });
+  const version = opts.version ?? VERSION;
+  const server = new McpServer({ name: "caelus", version });
 
   server.registerTool("natal_chart", {
     description:
@@ -1295,9 +1282,10 @@ export function buildServer(
 
   // --------------------------------------------------------- resources
   // Chart wheel widget (MCP Apps / Apps SDK). The CSP allowlists the embed
-  // origin for both scripts/assets (resourceDomains) and the iframe the shell
-  // loads (frameDomains, required for subframes); the legacy openai/widgetCSP
-  // mirror keeps older ChatGPT happy.
+  // origin only for loading the widget script (resourceDomains) — no
+  // frameDomains, since the bundle renders directly in the host sandbox rather
+  // than nesting an iframe. The legacy openai/widgetCSP mirror keeps older
+  // ChatGPT happy.
   server.registerResource(
     "chart-widget", CHART_WIDGET_URI,
     {
@@ -1305,12 +1293,12 @@ export function buildServer(
       description: "Renders the natal_chart / current_sky payload as a caelus-wheel chart.",
       mimeType: CHART_WIDGET_MIME,
       _meta: {
-        ui: { csp: { connectDomains: [], resourceDomains: [EMBED_ORIGIN], frameDomains: [EMBED_ORIGIN] } },
+        ui: { csp: { connectDomains: [], resourceDomains: [EMBED_ORIGIN] } },
         "openai/widgetCSP": { connect_domains: [], resource_domains: [EMBED_ORIGIN] },
       },
     },
     async (uri) => ({
-      contents: [{ uri: uri.href, mimeType: CHART_WIDGET_MIME, text: CHART_WIDGET_HTML }],
+      contents: [{ uri: uri.href, mimeType: CHART_WIDGET_MIME, text: chartWidgetHtml(version) }],
     }),
   );
 

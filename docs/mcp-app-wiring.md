@@ -1,33 +1,49 @@
 # MCP-server wiring for the chat app
 
 > **Status: implemented in `caelus-mcp` 0.14.0.** The architecture below is
-> as-built; the metadata key names were reconciled against the current OpenAI
-> Apps SDK / MCP Apps docs before merging (the draft used the now-legacy
-> `text/html+skybridge` MIME and `openai/widgetCSP` keys). As shipped, the
-> resource uses the current `text/html;profile=mcp-app` MIME and `_meta.ui.*`
-> keys, and sets the legacy `openai/*` aliases alongside them for ChatGPT
-> compatibility. The code snippets in this doc have been updated to match.
+> as-built. Two reconciliations were made against the current OpenAI Apps SDK /
+> MCP Apps docs before merging:
+> 1. **Keys.** The original draft used the now-legacy `text/html+skybridge` MIME
+>    and `openai/widgetCSP`/`openai/outputTemplate` keys. As shipped, the
+>    resource uses the current `text/html;profile=mcp-app` MIME and `_meta.ui.*`
+>    keys, with the legacy `openai/*` aliases set alongside for ChatGPT
+>    compatibility.
+> 2. **No iframe.** The first cut loaded `/embed/chart` in an iframe, which
+>    requires the `frameDomains` CSP grant — discouraged and heavily scrutinised
+>    for ChatGPT directory distribution. As shipped, the widget loads a
+>    self-contained **bundle** (`apps/web/widget` → `/embed/chart-widget.js`)
+>    directly in the host sandbox, so the CSP needs only `resourceDomains`.
 
 Goal: make the `natal_chart` and `current_sky` tools **render the chart wheel
-in-host** (ChatGPT and other Apps-SDK / MCP-UI hosts), using the already-shipped
-UI surface at `apps/web/app/embed/chart` (`/embed/chart`). This is the
-server-side half; the UI surface is independent of it (see `docs/mcp-app.md`).
+in-host** (ChatGPT and other Apps-SDK / MCP-UI hosts). This is the server-side
+half plus a small UI bundle; the standalone `/embed/chart` route stays as a
+browser fallback (see `docs/mcp-app.md`).
 
-This lives in the MCP layer (`packages/caelus-mcp/src/server.ts`, served by both
-the stdio server and the hosted `apps/web/app/api/mcp` mount). It does not change
-the engine, the tool inputs/outputs, or any existing payload — it only **adds** a
-UI resource and a UI-resource reference on two tools.
+It does not change the engine, the tool inputs/outputs, or any existing payload —
+it only **adds** a UI resource, a UI-resource reference on two tools, and the
+`structuredContent` the widget renders from.
+
+## Pieces
+
+- **Widget bundle** (`apps/web/widget/chart-widget.ts`, bundled by
+  `scripts/build-chart-widget.mjs` to `apps/web/public/embed/chart-widget.js`).
+  A self-contained IIFE (React + `caelus-wheel`) that mounts `ChartWheel` from
+  the chart payload, read from the MCP Apps `ui/notifications/tool-result`
+  message, ChatGPT's `window.openai.toolOutput`, or a `?c=` fallback. Built as
+  part of `npm run build -w web`. Lives in the web/UI layer (where `caelus-wheel`
+  already builds), keeping the MCP server independent of the UI build.
+- **Widget resource + tool binding** (`packages/caelus-mcp/src/server.ts`,
+  served by both the stdio server and the hosted `/api/mcp` mount).
 
 ## Approach
 
-1. Register a tiny **widget resource** (`ui://widget/chart.html`) whose HTML
-   loads the hosted `/embed/chart` route in an iframe, forwarding the tool
-   output to it as the `?c=<base64 chart JSON>` parameter that the embed already
-   decodes. No change to the embed.
+1. Register a tiny **widget resource** (`ui://widget/chart.html`) whose HTML is a
+   root element plus a `<script src>` pointing at `/embed/chart-widget.js`. The
+   bundle renders directly in the host sandbox — no nested iframe.
 2. On `natal_chart` and `current_sky`, set `_meta.ui.resourceUri` (plus the
    `openai/outputTemplate` compatibility alias) to that resource and return the
-   chart payload as `structuredContent` (so the host hands it to the widget via
-   the MCP Apps `ui/notifications/tool-result` message, or ChatGPT's
+   chart payload as `structuredContent` (handed to the widget via the MCP Apps
+   `ui/notifications/tool-result` message, or ChatGPT's
    `window.openai.toolOutput`). The existing `text` content stays, so non-UI
    clients are unaffected.
 
@@ -41,31 +57,17 @@ const EMBED_ORIGIN = process.env.CAELUS_EMBED_ORIGIN ?? "https://www.ephemengine
 const CHART_WIDGET_URI = "ui://widget/chart.html";
 const CHART_WIDGET_MIME = "text/html;profile=mcp-app"; // current MCP Apps UI MIME
 
-// A minimal shell that loads the hosted /embed/chart route in an iframe and
-// feeds it the tool output via the ?c= param the embed already decodes — both
-// the MCP Apps standard (tool-result postMessage) and the ChatGPT window.openai
-// compatibility layer.
-const CHART_WIDGET_HTML = `<!doctype html><meta charset="utf-8">
-<style>html,body{margin:0;height:100%;background:#0e0e14}iframe{display:block;border:0;width:100%;height:100%}</style>
-<iframe id="c"></iframe>
-<script>
-  var f = document.getElementById("c");
-  function render(o) {
-    f.src = "${EMBED_ORIGIN}/embed/chart" + (o ? "?c=" + encodeURIComponent(btoa(JSON.stringify(o))) : "");
-  }
-  window.addEventListener("message", function (e) {
-    var m = e && e.data;
-    if (m && m.jsonrpc === "2.0" && m.method === "ui/notifications/tool-result") render(m.params && m.params.structuredContent);
-  });
-  function fromHost() { return (window.openai && window.openai.toolOutput) || null; }
-  render(fromHost());
-  window.addEventListener("openai:set_globals", function () { render(fromHost()); });
-</script>`;
+// Root element + the bundle loaded directly from the embed origin (a script,
+// not an iframe). `version` is a cache-buster so a release loads fresh JS.
+const chartWidgetHtml = (version: string) => `<!doctype html><meta charset="utf-8">
+<style>html,body{margin:0;height:100%;background:#0e0e14}#caelus-chart-root{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden}</style>
+<div id="caelus-chart-root"></div>
+<script src="${EMBED_ORIGIN}/embed/chart-widget.js?v=${encodeURIComponent(version)}"></script>`;
 ```
 
-Register it inside `buildServer()` alongside the other resources. `frameDomains`
-is required for the iframe to load; the legacy `openai/widgetCSP` mirror keeps
-older ChatGPT happy:
+Register it inside `buildServer()` alongside the other resources. The CSP needs
+only `resourceDomains` (to load the script); the legacy `openai/widgetCSP`
+mirror keeps older ChatGPT happy:
 
 ```ts
 server.registerResource(
@@ -76,12 +78,12 @@ server.registerResource(
     description: "Renders the natal_chart / current_sky payload as a caelus-wheel chart.",
     mimeType: CHART_WIDGET_MIME,
     _meta: {
-      ui: { csp: { connectDomains: [], resourceDomains: [EMBED_ORIGIN], frameDomains: [EMBED_ORIGIN] } },
+      ui: { csp: { connectDomains: [], resourceDomains: [EMBED_ORIGIN] } },
       "openai/widgetCSP": { connect_domains: [], resource_domains: [EMBED_ORIGIN] },
     },
   },
   async (uri) => ({
-    contents: [{ uri: uri.href, mimeType: CHART_WIDGET_MIME, text: CHART_WIDGET_HTML }],
+    contents: [{ uri: uri.href, mimeType: CHART_WIDGET_MIME, text: chartWidgetHtml(version) }],
   }),
 );
 ```
@@ -121,15 +123,21 @@ object already serialized into `content`, and `_meta` is additive).
 
 ## Notes
 
-- **Cross-host (MCP-UI):** for hosts on the MCP-UI standard rather than the
-  OpenAI Apps SDK, expose the same UI as an `externalUrl` resource pointing at
-  `${EMBED_ORIGIN}/embed/chart` (via `@mcp-ui/server`'s `createUIResource`).
-  The embed reads `window.openai.toolOutput` when present and the `?c=` param
-  otherwise, so it works either way; only the data-injection differs per host.
-- **No embed change needed.** `/embed/chart` already supports both the
-  `window.openai.toolOutput` path (if a host loads it directly as the widget)
-  and the `?c=` param (used by the shell above).
-- **Hosted mount:** set `CAELUS_EMBED_ORIGIN` on the `apps/web/api/mcp` mount if
-  the embed should be loaded from a non-default origin (e.g. a preview deploy).
-- **Smoke:** extend the live-smoke to assert `resources/list` includes
-  `ui://widget/chart.html` and that `/embed/chart` returns 200.
+- **CSP / no iframe.** The bundle runs as a script in the host's own sandbox, so
+  the resource declares only `resourceDomains: [EMBED_ORIGIN]` — never
+  `frameDomains`. The script is a classic (non-module) IIFE, so the cross-origin
+  load needs no CORS.
+- **Cross-host (MCP-UI).** `window.openai` is the Apps-SDK compatibility layer
+  that standard hosts also expose, and the bundle additionally listens for the
+  MCP Apps `ui/notifications/tool-result` message, so the same bundle works
+  across hosts; only the data-injection path differs.
+- **Cache-busting.** The shell appends `?v=<version>` to the bundle URL; the
+  lockstep package version changes the URL on every release. The resource URI
+  itself stays `ui://widget/chart.html`.
+- **Hosted mount.** Set `CAELUS_EMBED_ORIGIN` on the `apps/web/api/mcp` mount (or
+  the stdio env) to load the bundle from a non-default origin (e.g. a preview
+  deploy).
+- **Smoke / tests.** `integration.test.mjs` asserts `resources/list` includes
+  `ui://widget/chart.html`, its MIME, that the shell loads the bundle with no
+  iframe, and that both chart tools return `structuredContent`. `smoke-web.mjs`
+  asserts `/embed/chart-widget.js` and `/embed/chart` both return 200.
