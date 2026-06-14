@@ -67,6 +67,36 @@ const TIERS: ReadonlyArray<{
   },
 ];
 
+const ENGINE_METHODS: ReadonlyArray<{
+  group: string;
+  methods: ReadonlyArray<readonly [name: string, anchor: string, blurb: string]>;
+}> = [
+  {
+    group: "Charts",
+    methods: [
+      ["chart()", "chart", "Full chart from calendar fields in UT (year, month, day, hour, minute, second)."],
+      ["chartAt()", "chartat", "The same chart straight from a Julian Day (UT) — no calendar round-trip."],
+    ],
+  },
+  {
+    group: "Positions",
+    methods: [
+      ["position()", "position", "Full Position at a JD: lon, speed, retrograde, sign, lat, distance, ra/dec."],
+      ["longitude()", "longitude", "Apparent geocentric ecliptic longitude (deg) at a JD."],
+      ["heliocentric()", "heliocentric", "Geometric heliocentric ecliptic (lon, lat, distance in AU)."],
+      ["ecliptic()", "ecliptic", "Raw apparent [lon, lat, dist] building block; most callers want position()."],
+    ],
+  },
+  {
+    group: "Fixed stars & introspection",
+    methods: [
+      ["fixedStar()", "fixedstar", "Apparent place of a catalog star: lon/lat/ra/dec, sign, magnitude."],
+      ["starNames()", "starnames", "Names in the loaded fixed-star catalog."],
+      ["bodies()", "bodies", "Body ids this engine can compute, given its data."],
+    ],
+  },
+];
+
 export default function ApiIndex() {
   const content = readApiDoc("index");
   return (
@@ -103,6 +133,37 @@ export default function ApiIndex() {
                 </Link>
               ))}
             </div>
+          </div>
+        ))}
+      </div>
+
+      <h2>The Engine</h2>
+      <P dim>
+        Construct one <Link href="/docs/api/Class.Engine">Engine</Link> from a
+        data pack, then call these methods — the surface most code uses. Every
+        method links straight to its signature and parameters.
+      </P>
+      <div className="card" style={{ marginTop: "1rem", marginBottom: "2rem" }}>
+        {ENGINE_METHODS.map((g) => (
+          <div key={g.group} style={{ marginBottom: "0.9rem" }}>
+            <div className="dim small" style={{ textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "0.4rem" }}>
+              {g.group}
+            </div>
+            {g.methods.map(([name, anchor, blurb]) => (
+              <div
+                key={anchor}
+                style={{ display: "flex", gap: "0.75rem", alignItems: "baseline", padding: "0.2rem 0" }}
+              >
+                <Link
+                  href={`/docs/api/Class.Engine#${anchor}`}
+                  className="mono small"
+                  style={{ flex: "0 0 8.5rem", whiteSpace: "nowrap" }}
+                >
+                  {name}
+                </Link>
+                <span className="dim small">{blurb}</span>
+              </div>
+            ))}
           </div>
         ))}
       </div>

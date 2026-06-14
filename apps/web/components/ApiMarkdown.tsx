@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeSlug from "rehype-slug";
 
 /** Rewrite typedoc's relative `.md` links to /docs/api routes. */
 function toHref(href?: string): string {
@@ -19,6 +20,7 @@ export default function ApiMarkdown({ content }: { content: string }) {
     <div className="api-doc">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeSlug]}
         components={{
           a: ({ href, children }) => {
             const url = toHref(href);

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 type Entry = { title: string; kind: string; url: string; text: string };
 
-const DIRECT_KINDS = new Set(["function", "class", "heading", "interface"]);
+const DIRECT_KINDS = new Set(["function", "class", "method", "heading", "interface"]);
 
 function score(entry: Entry, q: string, terms: string[]): number {
   const title = entry.title.toLowerCase();

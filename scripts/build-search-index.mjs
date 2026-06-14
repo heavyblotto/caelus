@@ -111,13 +111,36 @@ if (existsSync(API_DIR)) {
     const slugName = name.slice(0, -3);
     const [kindRaw, ...rest] = slugName.split(".");
     const symbol = rest.join(".") || kindRaw;
-    const text = stripToText(readFileSync(join(API_DIR, name), "utf8"));
+    const raw = readFileSync(join(API_DIR, name), "utf8");
     entries.push({
       title: symbol,
       kind: KIND_LABEL[kindRaw] ?? "api",
       url: `/docs/api/${slugName}`,
-      text,
+      text: stripToText(raw),
     });
+
+    // Index each class method as its own entry so `chartAt`, `position`,
+    // `longitude`, etc. are searchable and deep-link straight to the member
+    // (rehype-slug anchor) instead of the long, scannable class page.
+    if (kindRaw === "Class") {
+      for (const m of raw.matchAll(/^### (.+?)\(\)\s*$/gm)) {
+        const method = m[1].trim();
+        if (method === "Constructor") continue;
+        const start = m.index + m[0].length;
+        const next = raw.indexOf("\n### ", start);
+        const block = raw.slice(start, next === -1 ? undefined : next);
+        const desc = block
+          .replace(/```[\s\S]*?```/g, " ") // signature block
+          .replace(/^Defined in:.*$/gm, " ") // source link
+          .split(/\n#### /)[0]; // stop before Parameters/Returns
+        entries.push({
+          title: `${symbol}.${method}`,
+          kind: "method",
+          url: `/docs/api/${slugName}#${slug(`${method}()`)}`,
+          text: stripToText(`${symbol}.${method}() — ${desc}`),
+        });
+      }
+    }
   }
 }
 
