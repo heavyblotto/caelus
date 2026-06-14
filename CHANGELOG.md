@@ -15,9 +15,9 @@ current figures live in `packages/caelus/accuracy.json` and on
   via `lots(engine, jdUt, lat, lonEast, zodiac)` plus the pure formula helpers
   `hermeticLots`, `lotFortune`, `lotSpirit`. Arithmetic on the validated
   longitudes; landed in the Python reference first and pinned by a new
-  cross-language golden (`lots-golden`), which also checks the
-  implementation-independent invariant that Fortune and Spirit are symmetric
-  about the Ascendant.
+  cross-language golden (`lots-golden`), which also checks that Fortune and
+  Spirit are symmetric about the Ascendant — an invariant any correct port must
+  satisfy, so a shared formula bug cannot pass through both.
 - Annual and monthly profections (Roadmap Phase 1): `profection(ascSign,
   natalJd, targetJd)` and `profectionAt(engine, natalJd, targetJd, lat,
   lonEast, zodiac)`, plus `profectedSign`/`signRuler`. The Ascendant advances
@@ -80,8 +80,13 @@ current figures live in `packages/caelus/accuracy.json` and on
   - `composite` — midpoint composite (bodies and angles) and the Davison chart.
   - `dignities` — essential dignity (domicile/exaltation/detriment/fall) and
     sect for the seven traditional planets at a moment and place.
-- No engine change. Each tool gains engine-oracle checks in `verify_tools.mjs`
-  and frozen payloads in `golden-mcp.json`; the tool surface is now thirteen.
+- `lots` (Roadmap Phase 1): the seven Hermetic lots (Arabic parts) — Fortune,
+  Spirit, Eros, Necessity, Courage, Victory, Nemesis — cast from the Ascendant
+  and sect-aware, surfacing the engine's `lots()`.
+- No engine change in this layer. Each tool gains engine-oracle checks in
+  `verify_tools.mjs` (the `lots` checks include the Fortune/Spirit symmetry
+  invariant) and frozen payloads in `golden-mcp.json`; the tool surface is now
+  fourteen.
 
 ## 0.12.1 — 2026-06-14
 

@@ -3,7 +3,7 @@
  * caelus-mcp -- MCP server for the caelus ephemeris engine.
  *
  * Design (per 2026 MCP practice): one bounded context (chart computation),
- * a small curated tool surface (9 outcome-level tools, not API wrappers),
+ * a small curated tool surface (fourteen outcome-level tools, not API wrappers),
  * and token-frugal outputs (positions to 0.01 deg, terse keys, no prose --
  * the model does the interpreting, the server does the math).
  *
@@ -27,6 +27,7 @@ import {
   solarReturn, lunarReturn, progressedLongitude, directedLongitude,
   solarArc, progressedJd, compositeLongitudes, davisonParams, midpointLon,
   dignityOf, isDayChart, planetarySect, inSect,
+  lots, HERMETIC_LOTS,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -327,6 +328,11 @@ export const dignitiesOut = z.object({
   sect: z.enum(["day", "night"]),
   bodies: z.record(z.string(), dignityBody),
 });
+export const lotsOut = z.object({
+  utc: z.string(),
+  sect: z.enum(["day", "night"]),
+  lots: z.record(z.string(), z.object({ lon: z.number(), pos: z.string() })),
+});
 export const OUTPUT_SCHEMAS = {
   natal_chart: chartOut,
   current_sky: chartOut,
@@ -341,6 +347,7 @@ export const OUTPUT_SCHEMAS = {
   progressions: progressionsOut,
   composite: compositeOut,
   dignities: dignitiesOut,
+  lots: lotsOut,
 } as const;
 
 // ---------------------------------------------------------------- server
@@ -788,6 +795,20 @@ export function buildServer(
       };
     }
     return text({ utc: date, sect: dayChart ? "day" : "night", bodies });
+  });
+
+  server.registerTool("lots", {
+    description:
+      "The seven Hermetic lots (Arabic parts) — Fortune, Spirit, Eros, Necessity, Courage, Victory, Nemesis — cast from the Ascendant and reversing direction by sect (a chart is day when the Sun is above the horizon). Per lot: its longitude and zodiacal position. Lots are anchored to the Ascendant, so an exact time and lat+lon are required. Fortune and Spirit are mirror images about the Ascendant. Tropical by default.",
+    inputSchema: { ...birth, zodiac: zodiacSchema },
+  }, async ({ date, lat, lon, zodiac }) => {
+    const jd = jdFromIso(date);
+    const l = lots(engine, jd, lat, lon, zodiac);
+    const out: Record<string, { lon: number; pos: string }> = {};
+    for (const name of HERMETIC_LOTS) {
+      out[name] = { lon: r2(l[name]), pos: fmt(l[name]) };
+    }
+    return text({ utc: date, sect: l.day ? "day" : "night", lots: out });
   });
 
   // --------------------------------------------------------- resources

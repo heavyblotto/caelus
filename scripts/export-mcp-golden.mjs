@@ -72,6 +72,10 @@ export const GOLDEN_CASES = [
             b: { date: "1988-03-21T06:00:00Z", lat: 40.71, lon: -74.01 } } },
   { id: "dignities-tampa", tool: "dignities",
     args: { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 } },
+
+  // --- Hellenistic lots harvest (Phase 1) ---
+  { id: "lots-tampa", tool: "lots",
+    args: { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 } },
 ];
 
 async function run() {

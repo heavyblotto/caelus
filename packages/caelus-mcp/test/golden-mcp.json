@@ -4105,5 +4105,47 @@
         }
       }
     }
+  },
+  "lots-tampa": {
+    "tool": "lots",
+    "args": {
+      "date": "1990-06-10T14:30:00Z",
+      "lat": 27.95,
+      "lon": -82.46
+    },
+    "payload": {
+      "utc": "1990-06-10T14:30:00Z",
+      "sect": "day",
+      "lots": {
+        "fortune": {
+          "lon": 334.73,
+          "pos": "4°43'Psc"
+        },
+        "spirit": {
+          "lon": 287.07,
+          "pos": "17°04'Cap"
+        },
+        "eros": {
+          "lon": 246.86,
+          "pos": "6°51'Sgr"
+        },
+        "necessity": {
+          "lon": 47.79,
+          "pos": "17°47'Tau"
+        },
+        "courage": {
+          "lon": 98.13,
+          "pos": "8°07'Cnc"
+        },
+        "victory": {
+          "lon": 308.67,
+          "pos": "8°40'Aqr"
+        },
+        "nemesis": {
+          "lon": 171.33,
+          "pos": "21°19'Vir"
+        }
+      }
+    }
   }
 }

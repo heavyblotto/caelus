@@ -86,6 +86,12 @@ sign, any dignity (domicile/exaltation/detriment/fall), planetary sect
 (diurnal/nocturnal, null for Mercury), and whether it is in sect given the
 chart's day/night status (Sun above the horizon).
 
+### lots(date, lat, lon, zodiac?)
+The seven Hermetic lots (Arabic parts) — Fortune, Spirit, Eros, Necessity,
+Courage, Victory, Nemesis — cast from the Ascendant and reversing by sect (day
+chart = Sun above the horizon). Per lot: its longitude and zodiacal position.
+Anchored to the Ascendant, so an exact time and lat+lon are required.
+
 ## Resources (shipped)
 - `caelus://glossary`: machine-readable definitions; aspect angles and default
   orbs, signs, bodies, the twelve house systems, and essential dignities
@@ -137,3 +143,10 @@ solar arc, midpoint composite and Davison, essential dignity and sect) that
 were already suite-pinned in `caelus` but not yet exposed over MCP. No engine
 change; the new tools gain `verify_tools` engine-oracle checks and frozen
 `golden-mcp` payloads. Thirteen tools total.
+
+## v0.14 surface (shipped)
+Hellenistic time-lords harvest (Roadmap Phase 1): `lots` surfaces the engine's
+sect-aware Hermetic lots (Fortune, Spirit, Eros, Necessity, Courage, Victory,
+Nemesis) over MCP. No engine change; the tool gains `verify_tools` engine-oracle
+checks — including the Fortune/Spirit symmetry invariant — and a frozen
+`golden-mcp` payload. Fourteen tools total.

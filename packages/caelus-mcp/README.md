@@ -1,9 +1,9 @@
 # caelus-mcp
 
 MCP server for the [caelus](https://github.com/heavyblotto/caelus) ephemeris
-engine: thirteen chart tools over stdio. Computation only — positions, houses,
+engine: fourteen chart tools over stdio. Computation only — positions, houses,
 aspects with orbs, event search, electional, returns, progressions, composite,
-and dignities — the model does the interpreting. It needs
+dignities, and Hermetic lots — the model does the interpreting. It needs
 no API keys, ephemeris files, or network calls; the engine data ships inside
 the package.
 
@@ -49,6 +49,7 @@ A hosted Streamable HTTP endpoint is also live at
 | `progressions` | Secondary progressions (day-for-a-year) and solar-arc directions to a target date: per body the secondary and directed longitude, plus the solar arc |
 | `composite` | Two relationship charts for a pair: the midpoint composite (bodies and angles) and the Davison chart |
 | `dignities` | Essential dignity (domicile/exaltation/detriment/fall) and sect for the seven traditional planets at a moment and place |
+| `lots` | The seven Hermetic lots (Arabic parts) — Fortune, Spirit, Eros, Necessity, Courage, Victory, Nemesis — cast from the Ascendant, sect-aware |
 
 `natal_chart` and `current_sky` also tag each body with its solar phase
 (cazimi/combust/under-the-beams) and each aspect with applying/separating.

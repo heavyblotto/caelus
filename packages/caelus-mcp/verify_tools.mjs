@@ -16,6 +16,7 @@ import {
   Engine, BODIES, julianDay, mod, aspectPhase, solarPhase, ASPECTS,
   solarReturn, progressedLongitude, directedLongitude, solarArc,
   compositeLongitudes, davisonParams, dignityOf, isDayChart, planetarySect, inSect,
+  lots, HERMETIC_LOTS,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -321,6 +322,24 @@ const assertExactHits = (hits, body, targetLonAt, angle, label, tolDeg = 0.02) =
     assert(res.bodies[b].planetary_sect === planetarySect(b), `dignities: ${b} planetary sect`);
     assert(res.bodies[b].in_sect === inSect(b, day), `dignities: ${b} in sect`);
   }
+}
+
+// ---------------------------------------------------------------- lots
+{
+  const args = { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 };
+  const res = await call("lots", args);
+  const jd = jdFromIso(args.date);
+  const expected = lots(eng, jd, args.lat, args.lon);
+  const day = isDayChart(eng, jd, args.lat, args.lon);
+  assert(res.sect === (day ? "day" : "night"), "lots: chart sect");
+  for (const name of HERMETIC_LOTS) {
+    assert(Math.abs(res.lots[name].lon - r2(expected[name])) < 1e-9, `lots: ${name} longitude`);
+  }
+  // implementation-independent invariant: Fortune and Spirit mirror about the Asc
+  const asc = eng.chartAt(jd, args.lat, args.lon).angles.asc;
+  const sum = res.lots.fortune.lon + res.lots.spirit.lon;
+  assert(Math.abs(mod(sum - 2 * asc + 180, 360) - 180) < 0.02,
+    "lots: fortune + spirit symmetric about the ascendant");
 }
 
 await client.close();

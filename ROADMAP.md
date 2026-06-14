@@ -52,7 +52,7 @@ impossible ones (`compileForm`) (0.11.0); a JD-first chart entry point that
 builds a full chart directly from a Julian Day, no calendar round-trip
 (`chartAt`) (0.12.0); conformance suite;
 MCP server over stdio and hosted Streamable HTTP (`ephemengine.com/api/mcp`,
-stateless) exposing thirteen chart tools, with golden payloads, resources
+stateless) exposing fourteen chart tools, with golden payloads, resources
 (`caelus://glossary`, `caelus://accuracy`), and the `rectification_session`
 prompt, listed on the official MCP Registry as `io.github.heavyblotto/caelus-mcp`
 (0.12.1); JPL-direct validation tier.
@@ -87,14 +87,15 @@ invisible to the conformance suite). Pending a `caelus-mcp` minor release.
 
 Deterministic time-math on top of the validated positions, in dependency order:
 **lots/Arabic parts (sect-aware) — done** (the seven Hermetic lots, Python
-reference + `lots-golden` pin + a Fortune/Spirit symmetry invariant);
-**annual + monthly profections — done** (`profection`/`profectionAt`, lord of
-the year, `profections-golden` pin + a textbook-fact oracle); **firdaria — done**
-(the 75-year planetary period system, day/night, sub-periods; `firdaria-golden`
-pin + total/tiling invariants); **zodiacal releasing — done** (`zrRelease`/
-`zrActive`/`zrAt`, L1–L4 with loosing of the bond, 360-day-year Valens/Schmidt
-convention pinned to a reference implementation; `releasing-golden` pin + tiling,
-+6-jump, and loosing-of-the-bond-threshold invariants); **primary directions to
+reference + `lots-golden` pin + a Fortune/Spirit symmetry invariant, and
+surfaced as the `lots` MCP tool); **annual + monthly profections — done**
+(`profection`/`profectionAt`, lord of the year, `profections-golden` pin + a
+textbook-fact oracle); **firdaria — done** (the 75-year planetary period system,
+day/night, sub-periods; `firdaria-golden` pin + total/tiling invariants);
+**zodiacal releasing — done** (`zrRelease`/`zrActive`/`zrAt`, L1–L4 with loosing
+of the bond, 360-day-year Valens/Schmidt convention pinned to a reference
+implementation; `releasing-golden` pin + tiling, +6-jump, and
+loosing-of-the-bond-threshold invariants); **primary directions to
 the angles — done** (`directionArcs`/`primaryDirections`, Placidus semi-arc,
 Ptolemy/Naibod keys; `directions-golden` pin + geometric invariants). Phase 1 is
 complete in the engine (inter-planetary mundane directions, under the pole, are
