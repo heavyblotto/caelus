@@ -22,7 +22,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 from astroengine.chart import Engine
-from astroengine import vedic, yogini, vargas, yogas
+from astroengine import vedic, yogini, vargas, yogas, ashtottari
 
 HERE = os.path.dirname(__file__)
 REF = os.path.join(HERE, "jyotish-reference.json")
@@ -47,6 +47,8 @@ def check(c):
     if t == "kemadruma":
         return yogas.kemadruma(c["signs"], include_sun=c.get("include_sun", False),
                                include_nodes=c.get("include_nodes", False))["present"] == c["expect"]
+    if t == "ashtottari_lord":
+        return ashtottari.ashtottari_lord(c["nak"]) == c["expect"]
     raise ValueError(f"unknown technique {t}")
 
 

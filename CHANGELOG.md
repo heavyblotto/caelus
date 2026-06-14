@@ -26,6 +26,13 @@ Working through the deferred-technique resolution plan (ROADMAP).
   set parameterized (`includeSun`/`includeNodes`; default the five tara grahas)
   since the texts vary. `yogas-golden` pin + a present/absent and toggle oracle,
   cited in `validate_jyotish`. Completes the deferred-plan Bucket A.
+- Ashtottari dasha (deferred-plan Bucket B): the 108-year eight-lord conditional
+  dasha (Sun 6 .. Venus 21), with the irregular nakshatra-to-lord groups and the
+  across-span balance reproduced from the JHora/PVR Narasimha Rao convention --
+  the one the texts vary around, now pinned to that named source rather than
+  guessed. `ashtottariDashas`/`ashtottariActive`/`ashtottariAt`/`ashtottariLord`.
+  Python reference + `ashtottari-golden` pin (108-year-total, tiling, and mapping
+  invariants) + cited `validate_jyotish` checks.
 
 ### Validation
 

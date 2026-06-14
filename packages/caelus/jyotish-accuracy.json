@@ -1,7 +1,7 @@
 {
  "basis": "Vedic conventions vs named authorities (BPHS, PyJHora/PVR Rao)",
- "checks": 19,
- "agree": 19,
+ "checks": 21,
+ "agree": 21,
  "sources": [
   "BPHS Kemadruma: a graha in the 2nd from the Moon cancels it",
   "BPHS Kemadruma: no graha in the 2nd/12th from, or with, the Moon",
@@ -20,6 +20,8 @@
   "BPHS trimsamsa: odd sign 10-18deg ruled by Jupiter",
   "BPHS: 27 nakshatras of 13deg20', Ashwini ruled by Ketu",
   "BPHS: Jupiter in a kendra from the Moon",
+  "PyJHora/PVR Rao Ashtottari: Punarvasu group -> Sun",
+  "PyJHora/PVR Rao Ashtottari: Rahu group wraps to Ashwini",
   "Yogini dasha add-3 rule: (1 + 3) mod 8 = 4 -> Bhramari"
  ]
 }

@@ -19,6 +19,8 @@
     {"technique": "yoga_present", "signs": {"sun": 1, "moon": 1, "mars": 0, "mercury": 1, "jupiter": 1, "venus": 1, "saturn": 1}, "asc": 0, "expect": "Ruchaka", "source": "BPHS Pancha Mahapurusha: Mars in own sign in a kendra", "note": "Mars in Aries in the 1st"},
     {"technique": "yoga_present", "signs": {"sun": 1, "moon": 0, "mars": 1, "mercury": 1, "jupiter": 3, "venus": 1, "saturn": 1}, "asc": 0, "expect": "Gajakesari", "source": "BPHS: Jupiter in a kendra from the Moon", "note": "Jupiter 4th from the Moon"},
     {"technique": "kemadruma", "signs": {"sun": 8, "moon": 0, "mars": 3, "mercury": 4, "jupiter": 5, "venus": 6, "saturn": 7}, "expect": true, "source": "BPHS Kemadruma: no graha in the 2nd/12th from, or with, the Moon", "note": "isolated Moon -> Kemadruma"},
-    {"technique": "kemadruma", "signs": {"sun": 8, "moon": 0, "mars": 1, "mercury": 4, "jupiter": 5, "venus": 6, "saturn": 7}, "expect": false, "source": "BPHS Kemadruma: a graha in the 2nd from the Moon cancels it", "note": "Mars in the 2nd -> no Kemadruma"}
+    {"technique": "kemadruma", "signs": {"sun": 8, "moon": 0, "mars": 1, "mercury": 4, "jupiter": 5, "venus": 6, "saturn": 7}, "expect": false, "source": "BPHS Kemadruma: a graha in the 2nd from the Moon cancels it", "note": "Mars in the 2nd -> no Kemadruma"},
+    {"technique": "ashtottari_lord", "nak": 6, "expect": "sun", "source": "PyJHora/PVR Rao Ashtottari: Punarvasu group -> Sun", "note": "JHora convention"},
+    {"technique": "ashtottari_lord", "nak": 0, "expect": "rahu", "source": "PyJHora/PVR Rao Ashtottari: Rahu group wraps to Ashwini", "note": "JHora convention"}
   ]
 }

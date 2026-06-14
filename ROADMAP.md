@@ -162,9 +162,10 @@ Bucket A — standard convention, just complex (clear wins, do early):
 Bucket B — genuinely variant (adopt a documented, parameterized, oracle-pinned
 default):
 
-- **Ashtottari dasha**: reproduce PyJHora's full nakshatra→lord mapping *and*
-  the multi-nakshatra balance formula; ship labelled "JHora/PVR convention" with
-  a `variant` hook for the BPHS Ardra-start.
+- **Ashtottari dasha — done**: the irregular nakshatra→lord groups and the
+  across-span balance reproduced from the JHora/PVR convention (`ashtottariDashas`/
+  `ashtottariActive`/`ashtottariAt`), `ashtottari-golden` pin + cited checks; the
+  BPHS Ardra-start remains a possible `variant`.
 - **Kemadruma yoga — done**: the core rule (no graha in the 2nd/12th from, or
   with, the Moon) as `kemadruma`/`kemadrumaAt`, with the planet set parameterized
   (`includeSun`/`includeNodes`, default the five tara grahas) and cited checks;
