@@ -53,7 +53,7 @@ current figures live in `packages/caelus/accuracy.json` and on
   contested hora (D2) and unequal trimsamsa (D30) are deferred until their
   conventions are pinned. `varga` (placement of a longitude), `vargaAt` (of a
   body), and `vargaChart` (the full divisional chart). Computed from
-  rasi + division (boundary-robust) over the validated sidereal longitudes;
+  rasi + division (exact at the sign boundaries) over the validated sidereal longitudes;
   `vargas-golden` pin plus a textbook-placement oracle (navamsa
   Aries->Aries / Taurus->Capricorn, drekkana +4/+8, dasamsa odd/even).
 - Yogini dasha (Roadmap Phase 2): the 36-year nakshatra-based cycle of eight

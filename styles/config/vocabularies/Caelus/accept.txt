@@ -115,6 +115,8 @@ graticule
 [Ff]irdaria
 Valens
 [Aa]phesis
+[Aa]scensional
+Naibod
 Jyotish
 [Nn]akshatras?
 Vimshottari
@@ -123,3 +125,12 @@ dashas?
 mahadasha
 antardasha
 pratyantardasha
+Parashari
+[Vv]argas?
+rasi
+drekkana
+navamsa
+dasamsa
+dwadasamsa
+hora
+trimsamsa
