@@ -62,16 +62,22 @@ const siteJsonLd = {
   ],
 };
 
+// Set the theme on <html> before first paint, from the stored choice or the OS
+// preference, so there is no flash of the wrong theme. Kept tiny and inline.
+const NO_FLASH = `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+    <html lang="en" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <body>
+        <script dangerouslySetInnerHTML={{ __html: NO_FLASH }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
         />
+        <a href="#content" className="skip-link">Skip to content</a>
         <SiteHeader />
-        {children}
+        <div id="content" tabIndex={-1}>{children}</div>
         <SiteFooter />
       </body>
     </html>

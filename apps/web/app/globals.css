@@ -909,3 +909,117 @@ a.card:hover,
   color: var(--text);
   border-bottom-color: var(--accent);
 }
+
+/* ---- light theme ---- */
+/* The no-flash script in the root layout sets data-theme on <html> before
+   paint, from the stored preference or the OS setting; the toggle flips it.
+   :root[data-theme="light"] (specificity 0,2,0) overrides the dark defaults. */
+:root[data-theme="light"] {
+  --bg: #faf9fd;
+  --bg-elev: #ffffff;
+  --surface: #f3f1f9;
+  --surface-2: #edeaf5;
+  --surface-3: #e6e2f0;
+  --border: #e0dbec;
+  --border-strong: #ccc4dd;
+
+  --text: #181527;
+  --text-prose: #2f2942;
+  --text-dim: #494360;
+  --text-mute: #5a5470;
+  --text-faint: #6c6786;
+
+  --accent: #5f51bb;
+  --accent-hover: #4f41ab;
+  --accent-soft: #ece9f8;
+  --accent-contrast: #ffffff;
+  --warm: #b5651d;
+  --good: #1f8a4c;
+  --bad: #c0392b;
+
+  --syntax-text: #2f2942;
+  --syntax-muted: #6b6580;
+  --syntax-keyword: #6d28d9;
+  --syntax-string: #197a43;
+  --syntax-number: #a85a16;
+  --syntax-fn: #0b6aa6;
+  --syntax-punct: #0e7490;
+  --syntax-prop: #5b21b6;
+
+  color-scheme: light;
+}
+
+/* the night-sky star wash is wrong on a light surface: a faint top glow instead */
+:root[data-theme="light"] body::before {
+  background: radial-gradient(900px 500px at 50% -8%, rgba(95, 81, 187, 0.08), transparent);
+  opacity: 1;
+}
+
+/* softer panel shadows on light */
+:root[data-theme="light"] .search-panel {
+  box-shadow: 0 16px 48px rgba(24, 21, 39, 0.18);
+}
+
+/* ---- accessibility: focus + skip link ---- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* suppress the ring for pointer/touch focus, keep it for keyboard */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 200;
+  transform: translateY(-180%);
+  background: var(--accent);
+  color: var(--accent-contrast);
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  transition: transform 0.15s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  color: var(--accent-contrast);
+}
+
+/* the layout wraps the page in #content so the skip link has a target and the
+   sticky footer still works (main keeps flex:1 inside it) */
+#content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
+/* ---- theme toggle ---- */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-mute);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.theme-toggle svg {
+  display: block;
+}

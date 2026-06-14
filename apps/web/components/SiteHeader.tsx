@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import GlyphMark from "./GlyphMark";
+import ThemeToggle from "./ThemeToggle";
 import { NAV, SITE } from "../lib/site";
 
 export default function SiteHeader() {
@@ -39,6 +40,7 @@ export default function SiteHeader() {
           <span className="tag site-nav__hide-sm" aria-label="current version">
             v{SITE.version}
           </span>
+          <ThemeToggle />
         </nav>
       </div>
     </header>
