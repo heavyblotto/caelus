@@ -3,7 +3,7 @@
  * caelus-mcp -- MCP server for the caelus ephemeris engine.
  *
  * Design (per 2026 MCP practice): one bounded context (chart computation),
- * a small curated tool surface (seventeen outcome-level tools, not API wrappers),
+ * a small curated tool surface (eighteen outcome-level tools, not API wrappers),
  * and token-frugal outputs (positions to 0.01 deg, terse keys, no prose --
  * the model does the interpreting, the server does the math).
  *
@@ -30,6 +30,7 @@ import {
   lots, HERMETIC_LOTS,
   profectionAt, firdaria, firdariaActive,
   zrRelease, zrActive, lotSpirit, lotFortune,
+  primaryDirections,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -389,6 +390,18 @@ export const releasingOut = z.object({
     l4: z.string().nullable(),
   }).optional(),
 });
+const directionOut = z.object({
+  body: z.string(),
+  angle: z.enum(["MC", "IC", "ASC", "DSC"]),
+  arc: z.number(),
+  years: z.number(),
+  date: z.string(),
+});
+export const directionsOut = z.object({
+  natal_utc: z.string(),
+  key: z.enum(["ptolemy", "naibod"]),
+  directions: z.array(directionOut),
+});
 export const OUTPUT_SCHEMAS = {
   natal_chart: chartOut,
   current_sky: chartOut,
@@ -407,6 +420,7 @@ export const OUTPUT_SCHEMAS = {
   profections: profectionsOut,
   firdaria: firdariaOut,
   releasing: releasingOut,
+  directions: directionsOut,
 } as const;
 
 // ---------------------------------------------------------------- server
@@ -968,6 +982,30 @@ export function buildServer(
       };
     }
     return text(payload);
+  });
+
+  server.registerTool("directions", {
+    description:
+      "Primary (mundane) directions of the seven traditional planets to the four angles (MC, IC, Ascendant, Descendant). The diurnal rotation carries each body to an angle; the arc of rotation, converted by a time key (Naibod 0.9856473°/yr by default, or Ptolemy 1°/yr), gives the age of the direction. Returns the directions within max_years, sorted by age, each with its arc, age in years, and UTC date. Circumpolar bodies have no Ascendant/Descendant directions. Needs the birth time and place; equatorial, so zodiac is irrelevant.",
+    inputSchema: {
+      ...birth,
+      key: z.enum(["naibod", "ptolemy"]).optional().describe("time key: naibod (0.9856473°/yr, default) or ptolemy (1°/yr)"),
+      max_years: z.number().positive().optional().describe("only directions reached within this many years of life (default 90)"),
+    },
+  }, async ({ date, lat, lon, key = "naibod", max_years = 90 }) => {
+    const natalJd = jdFromIso(date);
+    const dirs = primaryDirections(engine, natalJd, lat, lon, undefined, key, max_years);
+    return text({
+      natal_utc: date,
+      key,
+      directions: dirs.map((d) => ({
+        body: d.body,
+        angle: d.angle,
+        arc: r2(d.arc),
+        years: r2(d.years),
+        date: isoFromJd(d.jd),
+      })),
+    });
   });
 
   // --------------------------------------------------------- resources

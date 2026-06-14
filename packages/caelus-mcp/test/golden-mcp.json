@@ -4775,5 +4775,70 @@
         "l4": "Capricorn"
       }
     }
+  },
+  "directions-naibod": {
+    "tool": "directions",
+    "args": {
+      "date": "1990-06-10T14:30:00Z",
+      "lat": 27.95,
+      "lon": -82.46,
+      "key": "naibod",
+      "max_years": 90
+    },
+    "payload": {
+      "natal_utc": "1990-06-10T14:30:00Z",
+      "key": "naibod",
+      "directions": [
+        {
+          "body": "venus",
+          "angle": "MC",
+          "arc": 7.48,
+          "years": 7.59,
+          "date": "1998-01-12T01:17:57Z"
+        },
+        {
+          "body": "mercury",
+          "angle": "MC",
+          "arc": 22.44,
+          "years": 22.77,
+          "date": "2013-03-16T22:57:28Z"
+        },
+        {
+          "body": "sun",
+          "angle": "MC",
+          "arc": 44.8,
+          "years": 45.45,
+          "date": "2035-11-23T05:20:48Z"
+        },
+        {
+          "body": "mars",
+          "angle": "DSC",
+          "arc": 64.57,
+          "years": 65.51,
+          "date": "2055-12-13T11:13:26Z"
+        },
+        {
+          "body": "moon",
+          "angle": "IC",
+          "arc": 70.94,
+          "years": 71.97,
+          "date": "2062-05-31T10:01:36Z"
+        },
+        {
+          "body": "jupiter",
+          "angle": "MC",
+          "arc": 72.4,
+          "years": 73.45,
+          "date": "2063-11-22T23:27:37Z"
+        },
+        {
+          "body": "saturn",
+          "angle": "IC",
+          "arc": 82.46,
+          "years": 83.66,
+          "date": "2074-02-06T10:10:09Z"
+        }
+      ]
+    }
   }
 }

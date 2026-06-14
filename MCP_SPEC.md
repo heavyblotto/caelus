@@ -115,6 +115,15 @@ looses the bond, jumping once to the opposite sign. Returns the timeline down to
 loosing-of-the-bond flag) and, when `target_date` is given, the L1..L4 lords
 active then. Anchored to the natal Lot, so an exact time and lat+lon are required.
 
+### directions(date, lat, lon, key?, max_years?)
+Primary (mundane) directions of the seven traditional planets to the four angles
+(MC, IC, Ascendant, Descendant). The diurnal rotation carries each body to an
+angle; the arc, converted by a time key (`naibod` 0.9856473°/yr default, or
+`ptolemy` 1°/yr), gives the age. Returns the directions reached within
+`max_years`, sorted by age, each with arc, age in years, and UTC date.
+Circumpolar bodies have no Ascendant/Descendant directions. Equatorial, so
+zodiac is irrelevant; needs the birth time and place.
+
 ## Resources (shipped)
 - `caelus://glossary`: machine-readable definitions; aspect angles and default
   orbs, signs, bodies, the twelve house systems, and essential dignities
@@ -174,5 +183,7 @@ annual/monthly profections (lord of the year), the firdaria planetary time-lord
 periods, and zodiacal releasing (aphesis) over MCP. No engine change; each tool
 gains `verify_tools` engine-oracle checks — including the Fortune/Spirit symmetry
 invariant for lots, the 75-year-total and sub-period-tiling invariants for
-firdaria, and the +6 loosing-of-the-bond and L2-tiling invariants for releasing —
-and a frozen `golden-mcp` payload. Seventeen tools total.
+firdaria, the +6 loosing-of-the-bond and L2-tiling invariants for releasing, and
+the IC = MC + 180 and time-key invariants for directions — and a frozen
+`golden-mcp` payload. The `directions` tool completes the Phase 1 surface.
+Eighteen tools total.

@@ -19,6 +19,7 @@ import {
   lots, HERMETIC_LOTS,
   profectionAt, firdaria, firdariaActive,
   zrRelease, zrAt, SIGNS,
+  primaryDirections, KEYS,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -424,6 +425,38 @@ const assertExactHits = (hits, body, targetLonAt, angle, label, tolDeg = 0.02) =
     if (subs.length) {
       assert(subs[0].start === p.start, "releasing: first L2 starts at its L1 parent");
       assert(subs[subs.length - 1].end === p.end, "releasing: last L2 ends at its L1 parent");
+    }
+  }
+}
+
+// ---------------------------------------------------------------- directions
+{
+  const args = { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 };
+  const res = await call("directions", { ...args, key: "naibod", max_years: 90 });
+  const natalJd = jdFromIso(args.date);
+  const exp = primaryDirections(eng, natalJd, args.lat, args.lon, undefined, "naibod", 90);
+  assert(res.key === "naibod", "directions: key echoed");
+  assert(res.directions.length === exp.length, `directions: count ${res.directions.length} vs ${exp.length}`);
+  for (let i = 0; i < exp.length; i++) {
+    assert(res.directions[i].body === exp[i].body, `directions: entry ${i} body`);
+    assert(res.directions[i].angle === exp[i].angle, `directions: entry ${i} angle`);
+    assert(Math.abs(res.directions[i].arc - exp[i].arc) < 0.02, `directions: entry ${i} arc`);
+    assert(Math.abs(res.directions[i].years - exp[i].years) < 0.02, `directions: entry ${i} years`);
+  }
+  // sorted ascending by age
+  for (let i = 1; i < res.directions.length; i++) {
+    assert(res.directions[i].years >= res.directions[i - 1].years - 1e-9, "directions: sorted by years");
+  }
+  // time-key invariant: years = arc / key (naibod)
+  for (const d of res.directions) {
+    assert(Math.abs(d.years - d.arc / KEYS.naibod) < 0.02, "directions: years = arc / naibod key");
+  }
+  // geometric invariant: for a body with both MC and IC directions, IC arc = MC arc + 180
+  const byBody = {};
+  for (const d of res.directions) (byBody[d.body] ??= {})[d.angle] = d.arc;
+  for (const b of Object.keys(byBody)) {
+    if (byBody[b].MC !== undefined && byBody[b].IC !== undefined) {
+      assert(Math.abs(mod(byBody[b].IC - byBody[b].MC - 180, 360)) < 0.02, `directions: ${b} IC = MC + 180`);
     }
   }
 }
