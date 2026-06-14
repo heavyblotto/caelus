@@ -5,6 +5,37 @@ version in lockstep. Numbers quoted here are as measured at release time;
 current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
+## 0.10.0 — 2026-06-14
+
+A visualization tranche: 3D chart spheres, astrocartography, and a graphic
+ephemeris, each landing engine math plus an SSR-safe render. No breaking changes
+to the 0.9.x surface; the position conformance suite is unchanged at 3,218
+checks, and three new cross-language goldens pin the additions.
+
+### Engine (`caelus`)
+
+- Spherical geometry: `angularSeparation3d` and `unitVector`, the true
+  great-circle angle between two bodies from their ecliptic longitude and
+  latitude. This is the 3D aspect, wider or narrower than the 2D longitude
+  difference by the bodies' latitude. Reference-first, pinned by
+  `test/spherical-golden.json`.
+- Astrocartography: `astrocartography` and `planetLines` give where each body
+  sits on the four angles across the globe, the MC/IC meridians and the curved
+  ASC/DSC rising and setting tracks, from RA/Dec and sidereal time.
+  Reference-first, pinned by `test/astrocartography-golden.json`.
+- `ephemeris`: a time series of one value per body (longitude, latitude,
+  declination, right ascension, or speed) over a range, the data behind a
+  graphic ephemeris. A collector over the already-pinned positions.
+
+### Chart wheel (`caelus-wheel`)
+
+- `ChartSphere`: the chart as a tilted celestial sphere, planets at their true
+  ecliptic latitude with the ecliptic and equator drawn as great-circle rings.
+- `AstroMap`: the astrocartography angle lines on an equirectangular world map,
+  with a graticule basemap and room for your own coastlines as children.
+- `EphemerisGraph`: the ephemeris series as line graphs, with longitude wraps
+  split. All SSR-safe SVG with no runtime dependencies.
+
 ## 0.9.0 — 2026-06-14
 
 Electional building blocks and long-scan ergonomics on the engine, the hosted

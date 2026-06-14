@@ -82,6 +82,16 @@ export default function Features() {
         variant for the browser. See <A href="/docs/recipes">Recipes</A>.
       </P>
 
+      <H2>Visualization</H2>
+      <P>
+        The chart as a flat wheel, as a tilted celestial sphere with planets at
+        their true ecliptic latitude, or as an astrocartography world map of the
+        planetary angle lines, plus a graphic ephemeris of any value over time.
+        The 3D aspect angle accounts for latitude rather than longitude alone.
+        Every view renders to SSR-safe SVG with no runtime dependencies. See{" "}
+        <A href="/docs/architecture">Architecture</A>.
+      </P>
+
       <H2>Packages</H2>
       <P>
         Four npm packages: <code>caelus</code> (the engine, zero runtime

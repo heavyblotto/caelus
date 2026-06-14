@@ -47,6 +47,10 @@ for body in BODIES:
 - A declarative `when()` query engine over celestial predicates.
 - A turbo tier (`Turbo`): segmented Chebyshev longitude packs fit to the
   engine for bulk scans.
+- 3D aspects (`angular_separation_3d`): the great-circle angle between two
+  bodies, accounting for ecliptic latitude.
+- Astrocartography (`astrocartography`): the planetary angle lines (MC/IC
+  meridians, ASC/DSC rising and setting tracks) across the globe.
 
 ## Accuracy
 
