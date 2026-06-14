@@ -124,30 +124,46 @@ export default function SkyNow() {
     if (!Number.isFinite(la) || la < -90 || la > 90) return { chart: null, ms: 0, error: "latitude must be in [-90, 90]" };
     if (!Number.isFinite(lo) || lo < -180 || lo > 180) return { chart: null, ms: 0, error: "longitude must be in [-180, 180], east positive" };
     if (Number.isNaN(d.getTime())) return { chart: null, ms: 0, error: "invalid date" };
+    // The engine throws (RangeError) for dates outside its fitted range — Chiron
+    // is Chebyshev-only over ~1850–2150. A datetime-local input emits transient
+    // years (e.g. 0001) mid-edit, so catch the throw and surface it inline rather
+    // than letting it crash the render tree.
     const t0 = performance.now();
-    const c = engine().chart(
-      d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate(),
-      d.getUTCHours(), d.getUTCMinutes(), 0, la, lo,
-      { houseSystem: sys, zodiac },
-    );
-    return { chart: c as Chart, ms: performance.now() - t0, error: null };
+    try {
+      const c = engine().chart(
+        d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate(),
+        d.getUTCHours(), d.getUTCMinutes(), 0, la, lo,
+        { houseSystem: sys, zodiac },
+      );
+      return { chart: c as Chart, ms: performance.now() - t0, error: null };
+    } catch {
+      return { chart: null, ms: 0, error: "date is outside the supported range (1850–2150)" };
+    }
   }, [mounted, iso, lat, lon, sys, zodiac]);
 
   const phases = useMemo(() => {
     if (!chart || !iso) return [];
-    const d = new Date(iso + ":00Z");
-    const jd0 = julianDay(d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate());
-    return lunarPhases(engine(), jd0, jd0 + 120).slice(0, 6);
+    try {
+      const d = new Date(iso + ":00Z");
+      const jd0 = julianDay(d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate());
+      return lunarPhases(engine(), jd0, jd0 + 120).slice(0, 6);
+    } catch {
+      return [];
+    }
   }, [chart, iso]);
 
   const mapLines = useMemo(() => {
     if (view !== "map" || !chart || !iso) return null;
-    const d = new Date(iso + ":00Z");
-    const jd = julianDay(
-      d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate(),
-      d.getUTCHours(), d.getUTCMinutes(),
-    );
-    return astrocartography(engine(), jd, MAP_BODIES);
+    try {
+      const d = new Date(iso + ":00Z");
+      const jd = julianDay(
+        d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate(),
+        d.getUTCHours(), d.getUTCMinutes(),
+      );
+      return astrocartography(engine(), jd, MAP_BODIES);
+    } catch {
+      return null;
+    }
   }, [view, chart, iso]);
 
   const inp: React.CSSProperties = {
