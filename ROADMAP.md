@@ -94,9 +94,12 @@ the year, `profections-golden` pin + a textbook-fact oracle); **firdaria — don
 pin + total/tiling invariants); **zodiacal releasing — done** (`zrRelease`/
 `zrActive`/`zrAt`, L1–L4 with loosing of the bond, 360-day-year Valens/Schmidt
 convention pinned to a reference implementation; `releasing-golden` pin + tiling,
-+6-jump, and loosing-of-the-bond-threshold invariants). Phase 1's core techniques
-are in the engine; primary directions remain a later addition. Each lands as an
-engine export first, then an MCP tool and a site docs page.
++6-jump, and loosing-of-the-bond-threshold invariants); **primary directions to
+the angles — done** (`directionArcs`/`primaryDirections`, Placidus semi-arc,
+Ptolemy/Naibod keys; `directions-golden` pin + geometric invariants). Phase 1 is
+complete in the engine (inter-planetary mundane directions, under the pole, are
+a possible later extension). Each lands as an engine export first, then an MCP
+tool and a site docs page.
 
 ### Phase 2 — Vedic / Jyotish layer (in progress)
 

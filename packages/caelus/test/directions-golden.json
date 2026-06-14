@@ -1,0 +1,209 @@
+{
+ "basis": "Python reference astroengine.directions (embedded VSOP, full moon); Placidus semi-arc to the angles, direct, Naibod/Ptolemy keys",
+ "cases": [
+  {
+   "id": "arcs-normal",
+   "spec": {
+    "id": "arcs-normal",
+    "type": "arcs",
+    "alpha": 100.0,
+    "delta": 20.0,
+    "ramc": 50.0,
+    "phi": 40.0
+   },
+   "result": {
+    "mc": 50.0,
+    "ic": 230.0,
+    "asc": 302.21733092076204,
+    "dsc": 157.78266907923793
+   }
+  },
+  {
+   "id": "arcs-south",
+   "spec": {
+    "id": "arcs-south",
+    "type": "arcs",
+    "alpha": 10.0,
+    "delta": -15.0,
+    "ramc": 200.0,
+    "phi": 51.5
+   },
+   "result": {
+    "mc": 170.0,
+    "ic": 350.0,
+    "asc": 99.68558002942211,
+    "dsc": 240.3144199705779
+   }
+  },
+  {
+   "id": "arcs-on-mc",
+   "spec": {
+    "id": "arcs-on-mc",
+    "type": "arcs",
+    "alpha": 50.0,
+    "delta": 0.0,
+    "ramc": 50.0,
+    "phi": 40.0
+   },
+   "result": {
+    "mc": 0.0,
+    "ic": 180.0,
+    "asc": 270.0,
+    "dsc": 90.0
+   }
+  },
+  {
+   "id": "arcs-circumpolar",
+   "spec": {
+    "id": "arcs-circumpolar",
+    "type": "arcs",
+    "alpha": 80.0,
+    "delta": 60.0,
+    "ramc": 30.0,
+    "phi": 60.0
+   },
+   "result": {
+    "mc": 50.0,
+    "ic": 230.0,
+    "asc": null,
+    "dsc": null
+   }
+  },
+  {
+   "id": "dir-tampa-naibod",
+   "spec": {
+    "id": "dir-tampa-naibod",
+    "type": "directions",
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "lat": 27.95,
+    "lon": -82.46,
+    "key": "naibod"
+   },
+   "result": [
+    {
+     "body": "venus",
+     "angle": "MC",
+     "arc": 7.481769175055213,
+     "years": 7.5907164510623755,
+     "jd": 2450825.5541428286
+    },
+    {
+     "body": "mercury",
+     "angle": "MC",
+     "arc": 22.43991699811626,
+     "years": 22.76668033090159,
+     "jd": 2456368.4565774216
+    },
+    {
+     "body": "sun",
+     "angle": "MC",
+     "arc": 44.80134157872215,
+     "years": 45.45372526127972,
+     "jd": 2464654.7227792917
+    },
+    {
+     "body": "mars",
+     "angle": "DSC",
+     "arc": 64.56934167029135,
+     "years": 65.50958103399802,
+     "jd": 2471979.967664602
+    },
+    {
+     "body": "moon",
+     "angle": "IC",
+     "arc": 70.94063203975657,
+     "years": 71.97364822057197,
+     "jd": 2474340.917784774
+    },
+    {
+     "body": "jupiter",
+     "angle": "MC",
+     "arc": 72.39939349367884,
+     "years": 73.45365172073097,
+     "jd": 2474881.47751918
+    },
+    {
+     "body": "saturn",
+     "angle": "IC",
+     "arc": 82.46102639441722,
+     "years": 83.6617990983359,
+     "jd": 2478609.923725301
+    }
+   ]
+  },
+  {
+   "id": "dir-tampa-ptolemy",
+   "spec": {
+    "id": "dir-tampa-ptolemy",
+    "type": "directions",
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "lat": 27.95,
+    "lon": -82.46,
+    "key": "ptolemy"
+   },
+   "result": [
+    {
+     "body": "venus",
+     "angle": "MC",
+     "arc": 7.481769175055213,
+     "years": 7.481769175055213,
+     "jd": 2450785.762000056
+    },
+    {
+     "body": "mercury",
+     "angle": "MC",
+     "arc": 22.43991699811626,
+     "years": 22.43991699811626,
+     "jd": 2456249.108818876
+    },
+    {
+     "body": "sun",
+     "angle": "MC",
+     "arc": 44.80134157872215,
+     "years": 44.80134157872215,
+     "jd": 2464416.4447278306
+    },
+    {
+     "body": "mars",
+     "angle": "DSC",
+     "arc": 64.56934167029135,
+     "years": 64.56934167029135,
+     "jd": 2471636.5525708753
+    },
+    {
+     "body": "moon",
+     "angle": "IC",
+     "arc": 70.94063203975657,
+     "years": 70.94063203975657,
+     "jd": 2473963.6166822575
+    },
+    {
+     "body": "jupiter",
+     "angle": "MC",
+     "arc": 72.39939349367884,
+     "years": 72.39939349367884,
+     "jd": 2474496.4179249634
+    },
+    {
+     "body": "saturn",
+     "angle": "IC",
+     "arc": 82.46102639441722,
+     "years": 82.46102639441722,
+     "jd": 2478171.3508612216
+    }
+   ]
+  }
+ ]
+}

@@ -48,6 +48,13 @@ current figures live in `packages/caelus/accuracy.json` and on
   120-year-total and antardasha-tiling invariants. Floor division uses
   `math.floor` in the reference so sign/nakshatra boundaries match JavaScript
   bit for bit (Python `//` buckets exact boundaries differently).
+- Primary directions to the angles (Roadmap Phase 1, completing it):
+  `directionArcs` (direct arcs of a body to MC/IC/Asc/Desc by the Placidus
+  semi-arc, via the ascensional difference) and `primaryDirections` (the bodies'
+  directions to the angles within a span, by the Ptolemy or Naibod time key).
+  Computed on the validated equatorial coordinates and RAMC. `directions-golden`
+  pin plus geometric invariants (IC = MC + 180, the ascensional-difference
+  relationships, circumpolar Asc/Desc, the Naibod key ratio).
 
 ### MCP server (`caelus-mcp`)
 
