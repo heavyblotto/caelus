@@ -105,7 +105,7 @@ While the suite is pre-1.0 it follows **semver-zero**: a minor bump (`0.x.0`)
 may carry a breaking change, a patch (`0.x.y`) will not. We aim to keep these
 stable through 1.0:
 
-- The core read paths: `new Engine(data)`, `chart()`, `position()`,
+- The core read paths: `new Engine(data)`, `chart()`, `chartAt()`, `position()`,
   `longitude()`, `when()`, the event-search entry points, and `julianDay()`.
 - The two data suppliers, `embeddedData` and `loadNodeData()`.
 - Result shapes (the chart object, `Position`) — changes are additive.

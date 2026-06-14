@@ -22,11 +22,21 @@ suite is unchanged at 3,218 checks.
   Mirrored in the Python reference (`chart_at`) and guarded by a
   `chartAt == chart` equivalence assertion in the golden suite.
 
-### Docs
+### Docs & reference
 
 - `/docs/charts` presents `chartAt` as the first-class path for charting from a
-  Julian Day; the electional mini-app builds the winner's chart with
-  `chartAt(best.jd, …)` instead of a manual JD→calendar conversion.
+  Julian Day and clarifies that `chart()` takes calendar fields, not a JD; the
+  electional mini-app builds the winner's chart with `chartAt(best.jd, …)`
+  instead of a manual JD-to-calendar conversion.
+- API reference filled out: every recommended- and advanced-tier symbol now
+  carries full doc comments — parameter descriptions, return shapes, thrown
+  errors, runnable examples, and cross-references — and the `Chart`,
+  `ChartOptions`, `Position`, and related interfaces document every field
+  (units, ranges, null cases). The same text surfaces on editor hover.
+- Easier to navigate: Engine methods (`chart`, `chartAt`, `position`,
+  `longitude`, and the rest) are now individually searchable and deep-linkable
+  (`/docs/api/Class.Engine#chartat`), the `/docs/api` index surfaces the Engine
+  method set directly, and every generated heading is anchored.
 
 ## 0.11.0 — 2026-06-14
 
