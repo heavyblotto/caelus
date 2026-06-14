@@ -99,6 +99,13 @@ gains an optional inter-planetary (mundane) block.
 - Each new tool gains `verify_tools` engine-oracle checks and a frozen
   `golden-mcp` payload; self-check eval fixtures cover tool selection and
   argument shape for all of them.
+- Chart widget (MCP Apps / Apps SDK): `natal_chart` and `current_sky` now bind
+  to a `ui://widget/chart.html` resource so hosts that support the standard
+  (ChatGPT and others) render the chart wheel in-host. The widget is a small
+  shell that loads the already-shipped `/embed/chart` route and is fed the
+  tool's `structuredContent`; the `text` content is unchanged, so non-UI
+  clients are unaffected. Uses the current MCP Apps metadata keys with the
+  legacy `openai/*` aliases for compatibility. See `docs/mcp-app-wiring.md`.
 
 ## 0.13.0 — 2026-06-14
 

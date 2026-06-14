@@ -127,6 +127,28 @@ for (const c of GOLDEN_CASES) {
   assert(noTarget.isError === true, "guard: find_aspect_dates missing target rejected");
 }
 
+// --------------------------------------------------------- chart widget (MCP Apps)
+{
+  const list = await client.listResources();
+  const widget = list.resources.find((r) => r.uri === "ui://widget/chart.html");
+  assert(widget !== undefined, "widget: ui://widget/chart.html is listed");
+  assert(widget?.mimeType === "text/html;profile=mcp-app", "widget: MCP Apps UI mime type");
+
+  const read = await client.readResource({ uri: "ui://widget/chart.html" });
+  const html = read.contents[0].text;
+  assert(read.contents[0].mimeType === "text/html;profile=mcp-app", "widget: content mime type");
+  assert(/\/embed\/chart/.test(html), "widget: shell loads the /embed/chart route");
+  assert(/toolOutput|tool-result/.test(html), "widget: shell forwards the tool output");
+
+  // The two chart tools carry structuredContent equal to their text payload, so
+  // UI hosts can render the wheel; non-UI clients still read content[0].text.
+  for (const name of ["natal_chart", "current_sky"]) {
+    const res = await raw(name, { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 });
+    assert(res.structuredContent !== undefined, `widget: ${name} returns structuredContent`);
+    assert(deepEq(res.structuredContent, JSON.parse(res.content[0].text)), `widget: ${name} structuredContent == text payload`);
+  }
+}
+
 await client.close();
 console.log(`\n${checks} checks, ${failures} failures`);
 

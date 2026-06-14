@@ -47,5 +47,13 @@ experience. Same engine and corpus, different posture; keep them distinct.
 ## Status
 
 - UI surface: shipped (`/embed/chart`), builds static, renders the MCP payload.
-- Server-side UI-resource wiring + Apps-SDK manifest / host registration:
-  tracked, to land with the MCP layer.
+- Server-side UI-resource wiring: **shipped** (`caelus-mcp` 0.14.0). `natal_chart`
+  and `current_sky` bind to a `ui://widget/chart.html` resource (a shell that
+  loads `/embed/chart` and forwards `structuredContent`), using the current MCP
+  Apps keys (`text/html;profile=mcp-app`, `_meta.ui.resourceUri`, `_meta.ui.csp`
+  with `frameDomains` for the iframe) plus the legacy `openai/*` aliases for
+  ChatGPT compatibility. See `docs/mcp-app-wiring.md`. The hosted `/api/mcp`
+  mount serves the same resource (it shares `buildServer`).
+- Apps-SDK manifest / host directory registration: still tracked. Note the
+  `frameDomains` iframe approach draws extra review scrutiny for ChatGPT
+  *directory* distribution; it is fine for the self-hosted connector today.

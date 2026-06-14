@@ -222,6 +222,58 @@ function chartPayload(
 
 const text = (obj: unknown) => ({ content: [{ type: "text" as const, text: JSON.stringify(obj) }] });
 
+// ---------------------------------------------------------------- chart widget (MCP Apps / Apps SDK)
+// natal_chart and current_sky can render the chart wheel in-host (ChatGPT and
+// other MCP-UI / Apps-SDK hosts). The widget is a tiny shell that loads the
+// already-shipped /embed/chart route in an iframe and forwards the tool output
+// to it as the ?c= param the embed already decodes. Server-side half only; the
+// embed (apps/web/app/embed/chart) is unchanged. See docs/mcp-app-wiring.md.
+const EMBED_ORIGIN = process.env.CAELUS_EMBED_ORIGIN ?? "https://www.ephemengine.com";
+const CHART_WIDGET_URI = "ui://widget/chart.html";
+// The MCP Apps UI MIME type (current). Hosts only enable the UI bridge for it;
+// ChatGPT additionally honours the legacy openai/* _meta aliases set below.
+const CHART_WIDGET_MIME = "text/html;profile=mcp-app";
+
+// Bind the two chart tools to the widget. Both the standard (_meta.ui.resourceUri)
+// and the ChatGPT compatibility alias (openai/outputTemplate) point at the same
+// resource, so the binding survives across hosts.
+const CHART_TOOL_META = {
+  ui: { resourceUri: CHART_WIDGET_URI },
+  "openai/outputTemplate": CHART_WIDGET_URI,
+};
+
+// The widget shell. Loads /embed/chart in an iframe and feeds it the chart
+// payload two ways: the MCP Apps standard (tool-result postMessage) and the
+// ChatGPT window.openai compatibility layer. The embed decodes ?c=<base64 JSON>.
+const CHART_WIDGET_HTML = `<!doctype html><meta charset="utf-8">
+<style>html,body{margin:0;height:100%;background:#0e0e14}iframe{display:block;border:0;width:100%;height:100%}</style>
+<iframe id="c"></iframe>
+<script>
+  var f = document.getElementById("c");
+  function render(o) {
+    f.src = ${JSON.stringify(`${EMBED_ORIGIN}/embed/chart`)} + (o ? "?c=" + encodeURIComponent(btoa(JSON.stringify(o))) : "");
+  }
+  // MCP Apps standard: the host posts the tool result to the iframe.
+  window.addEventListener("message", function (e) {
+    var m = e && e.data;
+    if (m && m.jsonrpc === "2.0" && m.method === "ui/notifications/tool-result") {
+      render(m.params && m.params.structuredContent);
+    }
+  });
+  // ChatGPT compatibility: window.openai.toolOutput, refreshed on set_globals.
+  function fromHost() { return (window.openai && window.openai.toolOutput) || null; }
+  render(fromHost());
+  window.addEventListener("openai:set_globals", function () { render(fromHost()); });
+</script>`;
+
+// Tool result for the two chart tools: the existing text payload (unchanged for
+// non-UI clients) plus structuredContent, which UI hosts inject as the widget's
+// tool output. The two carry the same object.
+const chartResult = (payload: unknown) => ({
+  content: [{ type: "text" as const, text: JSON.stringify(payload) }],
+  structuredContent: payload as Record<string, unknown>,
+});
+
 // ---------------------------------------------------------------- output schemas
 // Exported so the integration test validates responses against the same shape
 // the server promises. Kept permissive on optional keys (rx, fallback fields).
@@ -518,8 +570,9 @@ export function buildServer(
     description:
       "A person's birth chart. Requires their exact birth date+time and birthplace (all three: date, lat, lon). Use this — not current_sky — whenever the question is about someone's natal/birth chart. Returns 13 bodies (sun–pluto, chiron, nodes) with sign, house, retrograde, speed; ASC/MC; cusps; major aspects with orbs. Vs Swiss Ephemeris (1900–2099): Sun–Saturn ≤1″, Uranus ≤1.9″, Neptune ≤4.6″, Moon ≤2.5″, Pluto ≤2.5″ (series valid 1885–2099), Chiron ≤1″, mean node ≤1″, true node ≤ 1′ vs SE's built-in ephemeris.",
     inputSchema: { ...birth, house_system: houseSys, zodiac: zodiacSchema },
+    _meta: CHART_TOOL_META,
   }, async ({ date, lat, lon, house_system, zodiac }) =>
-    text(chartPayload(engine, date, lat, lon, house_system, zodiac)));
+    chartResult(chartPayload(engine, date, lat, lon, house_system, zodiac)));
 
   server.registerTool("current_sky", {
     description:
@@ -531,8 +584,9 @@ export function buildServer(
       house_system: houseSys,
       zodiac: zodiacSchema,
     },
+    _meta: CHART_TOOL_META,
   }, async ({ date, lat, lon, house_system, zodiac }) =>
-    text(chartPayload(engine, date ?? new Date().toISOString(), lat, lon, house_system, zodiac)));
+    chartResult(chartPayload(engine, date ?? new Date().toISOString(), lat, lon, house_system, zodiac)));
 
   server.registerTool("transits", {
     description:
@@ -1240,6 +1294,26 @@ export function buildServer(
   });
 
   // --------------------------------------------------------- resources
+  // Chart wheel widget (MCP Apps / Apps SDK). The CSP allowlists the embed
+  // origin for both scripts/assets (resourceDomains) and the iframe the shell
+  // loads (frameDomains, required for subframes); the legacy openai/widgetCSP
+  // mirror keeps older ChatGPT happy.
+  server.registerResource(
+    "chart-widget", CHART_WIDGET_URI,
+    {
+      title: "Chart wheel",
+      description: "Renders the natal_chart / current_sky payload as a caelus-wheel chart.",
+      mimeType: CHART_WIDGET_MIME,
+      _meta: {
+        ui: { csp: { connectDomains: [], resourceDomains: [EMBED_ORIGIN], frameDomains: [EMBED_ORIGIN] } },
+        "openai/widgetCSP": { connect_domains: [], resource_domains: [EMBED_ORIGIN] },
+      },
+    },
+    async (uri) => ({
+      contents: [{ uri: uri.href, mimeType: CHART_WIDGET_MIME, text: CHART_WIDGET_HTML }],
+    }),
+  );
+
   server.registerResource(
     "accuracy", "caelus://accuracy",
     {

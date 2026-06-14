@@ -260,6 +260,19 @@ try {
   }
 
   const { externalLinks } = await crawl(base);
+
+  // The MCP chart widget loads /embed/chart in an iframe; it isn't linked from
+  // nav, so assert it directly (the caelus-mcp widget resource depends on it).
+  try {
+    const res = await fetch(base + "/embed/chart", { redirect: "manual", signal: AbortSignal.timeout(15000) });
+    const body = await res.text();
+    if (res.status !== 200) fail(`/embed/chart -> ${res.status}`);
+    else if (isSoftNotFound(body)) fail(`/embed/chart -> 200 but rendered the not-found page`);
+    else ok("/embed/chart -> 200 (MCP chart widget target)");
+  } catch (err) {
+    fail(`/embed/chart -> fetch error: ${err.message}`);
+  }
+
   await checkExternal(externalLinks);
 } catch (err) {
   fail(err.message);

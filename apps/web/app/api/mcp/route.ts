@@ -43,6 +43,7 @@ const TOOLS = [
   "planetary_hours", "void_of_course",
   "returns", "progressions", "composite", "dignities", "lots",
   "profections", "firdaria", "releasing", "directions",
+  "nakshatras", "dasha", "vargas", "yogas",
 ] as const;
 
 const CORS: Record<string, string> = {
@@ -73,7 +74,7 @@ export function GET(): Response {
       endpoint: "https://www.ephemengine.com/api/mcp",
       stateless: true,
       tools: TOOLS,
-      resources: ["caelus://glossary", "caelus://accuracy"],
+      resources: ["caelus://glossary", "caelus://accuracy", "ui://widget/chart.html"],
       prompts: ["rectification_session"],
       hint: "POST MCP JSON-RPC 2.0 requests (initialize, tools/list, tools/call) to this URL.",
       docs: "https://www.ephemengine.com/docs/mcp",
