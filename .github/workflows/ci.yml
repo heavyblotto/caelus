@@ -43,6 +43,8 @@ jobs:
       # chart wheel: SSR render of real charts + collision-fan unit checks
       - run: npm run build -w caelus-wheel
       - run: node packages/wheel/dist/test/render.test.js
+      # 3D chart sphere: SSR render + latitude-matters check
+      - run: node packages/wheel/dist/test/sphere.test.js
       # cross-package journey: local time -> chart -> SVG wheel, end to end
       - run: node packages/wheel/dist/test/integration.test.js
       # per-entrypoint bundle sizes (esbuild): informational, prints the table

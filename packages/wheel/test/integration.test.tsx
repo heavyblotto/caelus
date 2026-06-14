@@ -10,7 +10,7 @@ import { dirname, join } from "node:path";
 import { createRequire } from "node:module";
 import { Engine } from "caelus";
 import { loadNodeData } from "caelus/node";
-import { localToChart } from "caelus-birth";
+import { toUT } from "caelus-birth";
 import { ChartWheel } from "../src/index.js";
 
 let checks = 0;
@@ -26,13 +26,12 @@ const eng = new Engine(loadNodeData(DATA, "embedded", "full"));
 
 // A known birth: 1990-06-10 14:30 local in Tampa, with an explicit IANA zone so
 // the journey is offline and deterministic (EDT = UTC-4 on that date).
-const res = localToChart(
-  {
-    year: 1990, month: 6, day: 10, hour: 14, minute: 30,
-    lat: 27.95, lon: -82.46, zone: "America/New_York",
-  },
-  eng,
-);
+// caelus-birth resolves local -> UT; caelus computes the chart from that
+// instant. (Going through toUT + engine.chart keeps one Engine type in play.)
+const res = toUT({
+  year: 1990, month: 6, day: 10, hour: 14, minute: 30,
+  lat: 27.95, lon: -82.46, zone: "America/New_York",
+});
 
 // 1) caelus-birth resolved local -> UT.
 assert(res.status === "ok", `birth status ok (got ${res.status})`);
@@ -41,7 +40,9 @@ assert(res.utc.hour === 18 && res.utc.minute === 30,
   `14:30 EDT -> 18:30 UT (got ${res.utc.hour}:${res.utc.minute})`);
 
 // 2) caelus produced a usable chart from the resolved instant.
-const chart = res.chart;
+const u = res.utc;
+const chart = eng.chart(u.year, u.month, u.day, u.hour, u.minute, u.second,
+  27.95, -82.46, "placidus");
 assert(chart.bodies.sun !== undefined && chart.bodies.moon !== undefined,
   "chart carries Sun and Moon");
 assert(chart.cusps.length === 12, "chart has twelve house cusps");
