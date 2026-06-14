@@ -290,3 +290,5 @@ export function ChartWheel({
 export * from "./sphere.js";
 
 export * from "./astromap.js";
+
+export * from "./ephemerisgraph.js";
