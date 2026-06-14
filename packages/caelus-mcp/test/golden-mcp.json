@@ -20,6 +20,9 @@
           "lon": 283.28,
           "pos": "13°17'Cap",
           "house": 6,
+          "dignity": [
+            "detriment"
+          ],
           "speed": 12.19
         },
         "mercury": {
@@ -32,18 +35,27 @@
           "lon": 43.03,
           "pos": "13°01'Tau",
           "house": 10,
+          "dignity": [
+            "domicile"
+          ],
           "speed": 1.17
         },
         "mars": {
           "lon": 7.51,
           "pos": "7°30'Ari",
           "house": 9,
+          "dignity": [
+            "domicile"
+          ],
           "speed": 0.72
         },
         "jupiter": {
           "lon": 104.84,
           "pos": "14°50'Cnc",
           "house": 12,
+          "dignity": [
+            "exaltation"
+          ],
           "speed": 0.21
         },
         "saturn": {
@@ -51,6 +63,9 @@
           "pos": "24°18'Cap",
           "house": 6,
           "rx": true,
+          "dignity": [
+            "domicile"
+          ],
           "speed": -0.05
         },
         "uranus": {
@@ -476,6 +491,9 @@
           "lon": 19.3,
           "pos": "19°18'Ari",
           "house": 10,
+          "dignity": [
+            "detriment"
+          ],
           "speed": 1.17
         },
         "mars": {
@@ -488,6 +506,9 @@
           "lon": 81.11,
           "pos": "21°06'Gem",
           "house": 12,
+          "dignity": [
+            "detriment"
+          ],
           "speed": 0.21
         },
         "saturn": {
@@ -495,6 +516,9 @@
           "pos": "0°34'Cap",
           "house": 6,
           "rx": true,
+          "dignity": [
+            "domicile"
+          ],
           "speed": -0.05
         },
         "uranus": {
@@ -752,6 +776,9 @@
           "lon": 223.32,
           "pos": "13°19'Sco",
           "house": 7,
+          "dignity": [
+            "fall"
+          ],
           "speed": 12.02
         },
         "mercury": {
@@ -1187,6 +1214,9 @@
             "lon": 283.28,
             "pos": "13°17'Cap",
             "house": 6,
+            "dignity": [
+              "detriment"
+            ],
             "speed": 12.19
           },
           "mercury": {
@@ -1199,18 +1229,27 @@
             "lon": 43.03,
             "pos": "13°01'Tau",
             "house": 10,
+            "dignity": [
+              "domicile"
+            ],
             "speed": 1.17
           },
           "mars": {
             "lon": 7.51,
             "pos": "7°30'Ari",
             "house": 9,
+            "dignity": [
+              "domicile"
+            ],
             "speed": 0.72
           },
           "jupiter": {
             "lon": 104.84,
             "pos": "14°50'Cnc",
             "house": 12,
+            "dignity": [
+              "exaltation"
+            ],
             "speed": 0.21
           },
           "saturn": {
@@ -1218,6 +1257,9 @@
             "pos": "24°18'Cap",
             "house": 6,
             "rx": true,
+            "dignity": [
+              "domicile"
+            ],
             "speed": -0.05
           },
           "uranus": {
@@ -1461,30 +1503,46 @@
             "lon": 0.84,
             "pos": "0°50'Ari",
             "house": 3,
+            "dignity": [
+              "exaltation"
+            ],
             "speed": 0.99
           },
           "moon": {
             "lon": 43.41,
             "pos": "13°24'Tau",
             "house": 5,
+            "dignity": [
+              "exaltation"
+            ],
             "speed": 13.84
           },
           "mercury": {
             "lon": 336.57,
             "pos": "6°33'Psc",
             "house": 2,
+            "dignity": [
+              "detriment",
+              "fall"
+            ],
             "speed": 1.42
           },
           "venus": {
             "lon": 46.22,
             "pos": "16°13'Tau",
             "house": 5,
+            "dignity": [
+              "domicile"
+            ],
             "speed": 1.06
           },
           "mars": {
             "lon": 288.77,
             "pos": "18°46'Cap",
             "house": 1,
+            "dignity": [
+              "exaltation"
+            ],
             "speed": 0.67
           },
           "jupiter": {
@@ -1497,6 +1555,9 @@
             "lon": 272.2,
             "pos": "2°11'Cap",
             "house": 1,
+            "dignity": [
+              "domicile"
+            ],
             "speed": 0.03
           },
           "uranus": {
@@ -2375,6 +2436,9 @@
           "lon": 111.71,
           "pos": "21°42'Cnc",
           "house": 3,
+          "dignity": [
+            "domicile"
+          ],
           "speed": 12.38
         },
         "mercury": {
@@ -2382,6 +2446,9 @@
           "pos": "3°21'Sgr",
           "house": 8,
           "rx": true,
+          "dignity": [
+            "detriment"
+          ],
           "speed": -1.23,
           "solar": "combust"
         },
@@ -2389,6 +2456,9 @@
           "lon": 237.28,
           "pos": "27°16'Sco",
           "house": 7,
+          "dignity": [
+            "detriment"
+          ],
           "speed": 1.26,
           "solar": "under_beams"
         },
@@ -2396,6 +2466,9 @@
           "lon": 201.69,
           "pos": "21°41'Lib",
           "house": 6,
+          "dignity": [
+            "detriment"
+          ],
           "speed": 0.62
         },
         "jupiter": {
@@ -2615,6 +2688,9 @@
           "pos": "2°21'Psc",
           "house": 5,
           "rx": true,
+          "dignity": [
+            "domicile"
+          ],
           "speed": -0.04
         },
         "saturn": {
@@ -2819,6 +2895,9 @@
           "lon": 178.67,
           "pos": "28°40'Vir",
           "house": 9,
+          "dignity": [
+            "fall"
+          ],
           "speed": 1.24,
           "solar": "combust"
         },
@@ -2826,12 +2905,18 @@
           "lon": 215.22,
           "pos": "5°13'Sco",
           "house": 10,
+          "dignity": [
+            "domicile"
+          ],
           "speed": 0.67
         },
         "jupiter": {
           "lon": 248.27,
           "pos": "8°16'Sgr",
           "house": 11,
+          "dignity": [
+            "domicile"
+          ],
           "speed": 0.12
         },
         "saturn": {
@@ -3075,6 +3160,9 @@
           "lon": 56.22,
           "pos": "26°13'Tau",
           "house": 11,
+          "dignity": [
+            "exaltation"
+          ],
           "speed": 13.04
         },
         "mercury": {
@@ -3088,6 +3176,9 @@
           "lon": 16.4,
           "pos": "16°24'Ari",
           "house": 10,
+          "dignity": [
+            "detriment"
+          ],
           "speed": 1.24
         },
         "mars": {
@@ -3100,6 +3191,9 @@
           "lon": 344.61,
           "pos": "14°36'Psc",
           "house": 9,
+          "dignity": [
+            "domicile"
+          ],
           "speed": 0.24
         },
         "saturn": {
@@ -3107,6 +3201,9 @@
           "pos": "1°23'Lib",
           "house": 4,
           "rx": true,
+          "dignity": [
+            "exaltation"
+          ],
           "speed": -0.08
         },
         "uranus": {
@@ -3361,6 +3458,9 @@
             "lon": 33.88,
             "pos": "3°52'Tau",
             "house": 4,
+            "dignity": [
+              "domicile"
+            ],
             "speed": 1.01
           },
           "mars": {
@@ -3373,6 +3473,9 @@
             "lon": 90.04,
             "pos": "0°02'Cnc",
             "house": 6,
+            "dignity": [
+              "exaltation"
+            ],
             "speed": 0.23,
             "solar": "under_beams"
           },
@@ -3380,6 +3483,9 @@
             "lon": 1.03,
             "pos": "1°01'Ari",
             "house": 3,
+            "dignity": [
+              "fall"
+            ],
             "speed": 0.05
           },
           "uranus": {
@@ -3791,12 +3897,18 @@
             "lon": 61.13,
             "pos": "1°07'Gem",
             "house": 8,
+            "dignity": [
+              "domicile"
+            ],
             "speed": 0.99
           },
           "venus": {
             "lon": 47.26,
             "pos": "17°15'Tau",
             "house": 7,
+            "dignity": [
+              "domicile"
+            ],
             "speed": 1.23,
             "solar": "combust"
           },
@@ -3804,12 +3916,18 @@
             "lon": 91.07,
             "pos": "1°04'Cnc",
             "house": 9,
+            "dignity": [
+              "fall"
+            ],
             "speed": 0.62
           },
           "jupiter": {
             "lon": 69.53,
             "pos": "9°32'Gem",
             "house": 8,
+            "dignity": [
+              "detriment"
+            ],
             "speed": 0.22
           },
           "saturn": {
@@ -3817,6 +3935,9 @@
             "pos": "13°52'Cap",
             "house": 3,
             "rx": true,
+            "dignity": [
+              "domicile"
+            ],
             "speed": -0.01
           },
           "uranus": {

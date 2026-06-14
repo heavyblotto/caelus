@@ -21,7 +21,7 @@ import {
   Engine, BODIES, Body, julianDay, mod,
   riseSet, crossings, lunarPhases, stations, RiseKind,
   lunarEclipses, solarEclipses,
-  ASPECTS, DEFAULT_ORBS, SIGNS as SIGN_NAMES, dignities,
+  ASPECTS, DEFAULT_ORBS, SIGNS as SIGN_NAMES, dignities, normalizeHouseSystem,
   solarPhase, aspectPhase, planetaryHour, voidOfCourse,
   CAZIMI_DEG, COMBUST_DEG, UNDER_BEAMS_DEG,
   solarReturn, lunarReturn, progressedLongitude, directedLongitude,
@@ -78,8 +78,9 @@ const SIGNS = ["Ari", "Tau", "Gem", "Cnc", "Leo", "Vir", "Lib", "Sco", "Sgr", "C
 // engine returns. Not a computed quantity, so no golden pins it.
 const CHALDEAN_ORDER = ["saturn", "jupiter", "mars", "sun", "venus", "mercury", "moon"];
 const fmt = (lon: number) => {
-  const d = mod(lon, 30);
-  return `${Math.floor(d)}°${String(Math.floor(mod(d, 1) * 60)).padStart(2, "0")}'${SIGNS[Math.floor(lon / 30)]}`;
+  const norm = mod(lon, 360);
+  const d = mod(norm, 30);
+  return `${Math.floor(d)}°${String(Math.floor(mod(d, 1) * 60)).padStart(2, "0")}'${SIGNS[Math.floor(norm / 30)]}`;
 };
 
 const latSchema = z.number().min(-90).max(90).describe("Latitude, north positive");
@@ -93,7 +94,12 @@ const HOUSE_SYSTEMS = [
   "placidus", "whole_sign", "equal", "porphyry", "koch", "regiomontanus",
   "campanus", "alcabitius", "morinus", "meridian", "polich_page", "vehlow",
 ] as const;
-const houseSys = z.enum(HOUSE_SYSTEMS).default("placidus");
+// Lenient on input: the engine's normalizeHouseSystem() accepts any case,
+// spaces/hyphens, and aliases ("whole sign", "Placidus", "whole" -> whole_sign),
+// so agents don't trip the strict enum. The output `houses` stays canonical.
+const houseSys = z.string().default("placidus").describe(
+  `House system (default placidus). Case- and spacing-insensitive; valid: ${HOUSE_SYSTEMS.join(", ")} (aliases like "whole sign" also work).`,
+);
 const ZODIACS = [
   "tropical", "sidereal:lahiri", "sidereal:fagan_bradley",
   "sidereal:krishnamurti", "sidereal:raman", "sidereal:yukteshwar",
@@ -105,7 +111,6 @@ const zodiacSchema = z.enum(ZODIACS).default("tropical")
 // definition; default these tools to Lahiri rather than tropical.
 const siderealZodiac = z.enum(ZODIACS).default("sidereal:lahiri")
   .describe("sidereal ayanamsa (default sidereal:lahiri); these are sidereal techniques");
-type HouseSysT = (typeof HOUSE_SYSTEMS)[number];
 type ZodiacT = (typeof ZODIACS)[number];
 
 // ----------------------------------------------------- resource payloads
@@ -167,25 +172,18 @@ function isoFromJd(jd: number): string {
 
 function chartPayload(
   engine: Engine,
-  iso: string, lat: number, lon: number, hs: HouseSysT,
+  iso: string, lat: number, lon: number, hs: string,
   zodiac: ZodiacT = "tropical",
 ) {
+  const reqHs = normalizeHouseSystem(hs);
   const d = new Date(iso);
   const jd = jdFromIso(iso);
   const c = engine.chart(
     d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate(),
     d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(), lat, lon,
-    { houseSystem: hs, zodiac },
+    { houseSystem: reqHs, zodiac },
   );
   const cusps = c.cusps;
-  const houseOf = (bl: number) => {
-    for (let i = 0; i < 12; i++) {
-      const a = cusps[i];
-      const b = cusps[(i + 1) % 12];
-      if (mod(bl - a, 360) < mod(b - a, 360)) return i + 1;
-    }
-    return 12;
-  };
   const bodies: Record<string, unknown> = {};
   for (const b of BODIES) {
     const p = c.bodies[b];
@@ -193,16 +191,21 @@ function chartPayload(
     // 17', combust within 8.5deg, under the beams within 15deg). Omitted when
     // the body is far from the Sun (and always for the Sun itself).
     const sp = solarPhase(engine, b as Body, jd, zodiac);
+    // house + essential dignities come straight from the engine's ChartBody;
+    // dignity is omitted when peregrine (and for bodies without rulerships) to
+    // stay token-frugal, like rx/solar.
     bodies[b] = {
-      lon: r2(p.lon), pos: fmt(p.lon), house: houseOf(p.lon),
-      ...(p.retrograde ? { rx: true } : {}), speed: r2(p.speed),
+      lon: r2(p.lon), pos: fmt(p.lon), house: p.house,
+      ...(p.retrograde ? { rx: true } : {}),
+      ...(p.dignities.length ? { dignity: p.dignities } : {}),
+      speed: r2(p.speed),
       ...(sp ? { solar: sp } : {}),
     };
   }
   return {
     utc: iso, houses: c.houseSystem,
     ...(zodiac !== "tropical" ? { zodiac } : {}),
-    ...(c.houseSystem !== hs ? { houses_requested: hs, houses_fallback_reason: `${hs} undefined above polar circles` } : {}),
+    ...(c.houseSystem !== reqHs ? { houses_requested: reqHs, houses_fallback_reason: `${reqHs} undefined above polar circles` } : {}),
     bodies,
     angles: { asc: r2(c.angles.asc), ascPos: fmt(c.angles.asc), mc: r2(c.angles.mc), mcPos: fmt(c.angles.mc) },
     cusps: cusps.map(r2),
@@ -266,6 +269,7 @@ const chartResult = (payload: unknown) => ({
 const bodyOut = z.object({
   lon: z.number(), pos: z.string(), house: z.number().int().min(1).max(12),
   speed: z.number(), rx: z.boolean().optional(),
+  dignity: z.array(z.enum(["domicile", "exaltation", "detriment", "fall"])).optional(),
   solar: z.enum(["cazimi", "combust", "under_beams"]).optional(),
 });
 const aspectName = z.enum(["conjunction", "sextile", "square", "trine", "opposition"]);

@@ -13,7 +13,7 @@
  * step. Mirrors the Python reference (astroengine/yogas.py).
  */
 import { Engine, BodyId, Zodiac } from "./chart.js";
-import { dignities } from "./derived.js";
+import { dignities } from "./chart.js";
 
 /** Pancha Mahapurusha: [yoga name, planet]. */
 const MAHAPURUSHA: Array<[string, string]> = [

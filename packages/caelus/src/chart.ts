@@ -73,6 +73,65 @@ export function normalizeHouseSystem(raw: string): HouseSystem {
   throw new Error(`unknown house system '${raw}' (valid: ${HOUSE_SYSTEMS.join(", ")})`);
 }
 
+// ----------------------------------------------------------- sign helpers
+export type Element = "fire" | "earth" | "air" | "water";
+export type Modality = "cardinal" | "fixed" | "mutable";
+const ELEMENTS: readonly Element[] = ["fire", "earth", "air", "water"];
+const MODALITIES: readonly Modality[] = ["cardinal", "fixed", "mutable"];
+
+/** Sign index `0`–`11` (Aries = 0) from an index or a sign name (`"Aries"`). */
+function signIndex(sign: number | string): number {
+  return typeof sign === "number" ? mod(Math.floor(sign), 12) : SIGNS.indexOf(sign);
+}
+
+/** Triplicity (element) of a sign: `"fire"`, `"earth"`, `"air"`, or `"water"`. */
+export function element(sign: number | string): Element {
+  return ELEMENTS[mod(signIndex(sign), 4)];
+}
+/** Quadruplicity (modality) of a sign: `"cardinal"`, `"fixed"`, or `"mutable"`. */
+export function modality(sign: number | string): Modality {
+  return MODALITIES[mod(signIndex(sign), 3)];
+}
+/** 1-based quadrant (I–IV) of a 1-based house number: houses 1–3 -> 1, etc. */
+export function quadrant(house: number): number {
+  return Math.floor(mod(house - 1, 12) / 3) + 1;
+}
+
+// ----------------------------------------------------------- essential dignities
+const DOMICILE: Record<string, number[]> = {
+  sun: [4], moon: [3], mercury: [2, 5], venus: [1, 6],
+  mars: [0, 7], jupiter: [8, 11], saturn: [9, 10],
+};
+const EXALTATION: Record<string, number> = {
+  sun: 0, moon: 1, mercury: 5, venus: 11, mars: 9, jupiter: 3, saturn: 6,
+};
+
+/**
+ * Essential dignities a body holds in a sign: any of `"domicile"`,
+ * `"exaltation"`, `"detriment"`, `"fall"` (the last two are the signs opposite
+ * domicile and exaltation). Empty when the body is peregrine there or has no
+ * classical rulership (the outer planets, Chiron, the nodes).
+ *
+ * @param body Body id, e.g. `"mars"`.
+ * @param sign A sign index `0`–`11` (Aries = 0) or its name, e.g. `"Aries"`.
+ * @returns The dignities held, in the order above; empty if none.
+ * @example
+ * ```ts
+ * dignities("mars", "Aries"); // ["domicile"]
+ * dignities("sun", "Libra");  // ["fall"]
+ * ```
+ */
+export function dignities(body: string, sign: number | string): string[] {
+  const idx = signIndex(sign);
+  const dom = DOMICILE[body] ?? [];
+  const out: string[] = [];
+  if (dom.includes(idx)) out.push("domicile");
+  if (EXALTATION[body] === idx) out.push("exaltation");
+  if (dom.map((d) => mod(d + 6, 12)).includes(idx)) out.push("detriment");
+  if (body in EXALTATION && mod(EXALTATION[body] + 6, 12) === idx) out.push("fall");
+  return out;
+}
+
 export type Ayanamsa = keyof typeof AYANAMSA_J2000 & string;
 export type Zodiac = "tropical" | `sidereal:${string}`;
 
@@ -122,6 +181,21 @@ export interface Position {
   dec: number;
 }
 
+/** A {@link Position} enriched with chart-relative placement, as returned per
+ *  body by {@link Engine.chart} and {@link Engine.chartAt}. */
+export interface ChartBody extends Position {
+  /** 1-based house the body falls in, by the chart's cusps (1–12). */
+  house: number;
+  /** Essential dignities held in the body's sign (see {@link dignities});
+   *  empty when peregrine or for bodies without classical rulerships. */
+  dignities: string[];
+}
+
+/** A chart's bodies, keyed by id. The core {@link BODIES} are always present
+ *  (and autocompleted); any extra ids requested via {@link ChartOptions.bodies}
+ *  are present too. */
+export type ChartBodies = Record<Body, ChartBody> & Record<string, ChartBody>;
+
 /** One aspect between two bodies in a {@link Chart}. */
 export interface Aspect {
   /** First body id. */
@@ -146,8 +220,9 @@ export interface Chart {
   houseSystem: HouseSystem;
   /** The house system originally requested, before any polar fallback. */
   houseSystemRequested: HouseSystem;
-  /** Apparent {@link Position} per body, keyed by body id. */
-  bodies: Record<string, Position>;
+  /** Apparent position per body, enriched with house and dignities, keyed by
+   *  body id. See {@link ChartBody}. */
+  bodies: ChartBodies;
   /** Chart angles in degrees: Ascendant, Midheaven, Vertex, East Point. */
   angles: { asc: number; mc: number; vertex: number; eastPoint: number };
   /** The twelve house cusp longitudes in degrees, house 1 first. */
@@ -607,20 +682,40 @@ export class Engine {
     } else {
       cuspsDeg = cusps.map(outDeg);
     }
+    // Enrich each position with chart-relative placement (house) and the
+    // essential dignities of its sign, so callers don't recompute from cusps.
+    const chartBodies: Record<string, ChartBody> = {};
+    for (const b of names) {
+      const p = bodies[b];
+      chartBodies[b] = {
+        ...p,
+        house: houseIndex(p.lon, cuspsDeg),
+        dignities: dignities(b, Math.floor(mod(p.lon, 360) / 30)),
+      };
+    }
     return {
       jdUt,
       zodiac,
       houseSystem: used,
       houseSystemRequested: houseSystem,
-      bodies,
+      bodies: chartBodies as ChartBodies,
       angles: {
         asc: outDeg(asc), mc: outDeg(mc),
         vertex: outDeg(vtx), eastPoint: outDeg(east),
       },
       cusps: cuspsDeg,
-      aspects: findAspects(bodies, o.orbs ?? DEFAULT_ORBS),
+      aspects: findAspects(chartBodies, o.orbs ?? DEFAULT_ORBS),
     };
   }
+}
+
+/** 1-based house for an ecliptic longitude (degrees) given the twelve cusp
+ *  longitudes (degrees), wrapping across 0. */
+function houseIndex(lon: number, cusps: number[]): number {
+  for (let i = 0; i < 12; i++) {
+    if (mod(lon - cusps[i], 360) < mod(cusps[(i + 1) % 12] - cusps[i], 360)) return i + 1;
+  }
+  return 12;
 }
 
 export function findAspects(

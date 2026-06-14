@@ -6,6 +6,27 @@ package. Numbers quoted here are as measured at release time;
 current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
+## Unreleased
+
+API-feedback polish (no release cut yet):
+
+- `chart()`/`chartAt()` now return enriched bodies (`ChartBody`): each carries
+  its 1-based `house` (by the chart's cusps) and the `dignities` it holds in its
+  sign, so library callers no longer recompute placement from `cusps`. The core
+  thirteen bodies are always present (and autocompleted) via the new
+  `ChartBodies` type.
+- New pure sign helpers: `element(sign)`, `modality(sign)`, `quadrant(house)`.
+  The `dignities(body, sign)` primitive moved to the chart module (same export
+  from the package root).
+- Forgiving house-system input: `normalizeHouseSystem()` accepts any case,
+  spaces or hyphens, and common aliases (`"whole sign"`, `"Placidus"`, `"whole"`
+  all resolve), and the unknown-system error lists the valid ids. `caelus-mcp`'s
+  `house_system` accepts the same lenient strings.
+- `caelus-mcp` chart payloads surface per-body `dignity` (omitted when peregrine,
+  to stay token-frugal).
+- `fmtLon()` (and the MCP formatter) normalize their argument, so an exact 360
+  or a small negative no longer renders an out-of-range sign.
+
 ## 0.14.0 — 2026-06-14
 
 A feature release across all four packages. The engine resolves the deferred

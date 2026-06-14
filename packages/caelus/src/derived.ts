@@ -9,7 +9,7 @@
  * golden fixtures pin the two together.
  */
 import { mod, meanObliquity, jdTT, DEG } from "./core.js";
-import { Engine, BodyId, Zodiac, SIGNS } from "./chart.js";
+import { Engine, BodyId, Zodiac, dignities } from "./chart.js";
 import { crossings } from "./events.js";
 import { azAlt } from "./pheno.js";
 
@@ -248,43 +248,9 @@ export function outOfBounds(engine: Engine, body: BodyId, jd: number): boolean {
 }
 
 // ----------------------------------------------------------- dignities
-const DOMICILE: Record<string, number[]> = {
-  sun: [4], moon: [3], mercury: [2, 5], venus: [1, 6],
-  mars: [0, 7], jupiter: [8, 11], saturn: [9, 10],
-};
-const EXALTATION: Record<string, number> = {
-  sun: 0, moon: 1, mercury: 5, venus: 11, mars: 9, jupiter: 3, saturn: 6,
-};
-
-function signIndex(sign: number | string): number {
-  return typeof sign === "number" ? sign : SIGNS.indexOf(sign);
-}
-
-/**
- * Essential dignities a body holds in a sign: any of `"domicile"`,
- * `"exaltation"`, `"detriment"`, `"fall"` (the last two are the signs opposite
- * domicile and exaltation). Empty when the body is peregrine there.
- *
- * @param body Body id, e.g. `"mars"`.
- * @param sign A sign index `0`–`11` (Aries = 0) or its name, e.g. `"Aries"`.
- * @returns The dignities held, in the order above; empty if none.
- * @example
- * ```ts
- * dignities("mars", "Aries"); // ["domicile"]
- * dignities("sun", "Libra");  // ["fall"]
- * ```
- */
-export function dignities(body: string, sign: number | string): string[] {
-  const idx = signIndex(sign);
-  const dom = DOMICILE[body] ?? [];
-  const out: string[] = [];
-  if (dom.includes(idx)) out.push("domicile");
-  if (EXALTATION[body] === idx) out.push("exaltation");
-  if (dom.map((d) => mod(d + 6, 12)).includes(idx)) out.push("detriment");
-  if (body in EXALTATION && mod(EXALTATION[body] + 6, 12) === idx) out.push("fall");
-  return out;
-}
-
+// The pure `dignities(body, sign)` table now lives in chart.ts (with the other
+// sign primitives); re-exported through the package index from there. This
+// engine-aware wrapper resolves a body's sign at an instant first.
 export function dignityOf(
   engine: Engine, body: BodyId, jd: number, zodiac: Zodiac = "tropical",
 ): string[] {
