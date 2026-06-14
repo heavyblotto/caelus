@@ -4,6 +4,7 @@ export const metadata = {
   title: "How this was built",
   description:
     "Caelus was written almost entirely by AI coding agents, under human direction, with a validation harness as the backstop. How the process kept an AI-built engine trustworthy.",
+  alternates: { canonical: "/how-it-was-built" },
 };
 
 export default function HowItWasBuilt() {

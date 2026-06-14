@@ -8,6 +8,7 @@ export const metadata = {
   title: "Playground",
   description:
     "Compute a chart in the browser: positions, houses, aspects, lunar phases, raw JSON. Twelve house systems, tropical and sidereal zodiacs, all client-side.",
+  alternates: { canonical: "/playground" },
 };
 
 const engine = new Engine(embeddedData);

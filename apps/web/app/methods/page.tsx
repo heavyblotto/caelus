@@ -4,6 +4,7 @@ export const metadata = {
   title: "Methods",
   description:
     "How the engine is built from published math and how each result is checked: reference-first ports, Swiss Ephemeris and JPL Horizons as independent yardsticks, and effects recovered by fitting.",
+  alternates: { canonical: "/methods" },
 };
 
 export default function Methods() {

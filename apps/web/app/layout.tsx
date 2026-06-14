@@ -26,7 +26,6 @@ export const metadata: Metadata = {
     "Swiss Ephemeris alternative", "houses", "aspects", "MIT",
   ],
   authors: [{ name: "Caelus" }],
-  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: SITE.name,

@@ -3,6 +3,7 @@ import { A, Eyebrow, H2, P, Code } from "../../components/Prose";
 export const metadata = {
   title: "Build Notes",
   description: "Postmortems: ΔT extrapolation, node frame error, Chiron light-time double-count, aspect-search geometry.",
+  alternates: { canonical: "/notes" },
 };
 
 export default function Notes() {

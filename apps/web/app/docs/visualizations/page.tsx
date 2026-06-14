@@ -8,6 +8,7 @@ export const metadata = {
   title: "Visualizations",
   description:
     "The chart beyond the flat wheel: a 3D celestial sphere, an astrocartography world map, and a graphic ephemeris. Each is SSR-safe SVG fed by the caelus engine, rendered live on this page.",
+  alternates: { canonical: "/docs/visualizations" },
 };
 
 const engine = new Engine(embeddedData);

@@ -6,6 +6,7 @@ import { Eyebrow, Lead, P } from "../../components/Prose";
 export const metadata = {
   title: "Changelog",
   description: "Release notes for caelus, caelus-mcp, caelus-birth, and caelus-wheel, versioned in lockstep.",
+  alternates: { canonical: "/changelog" },
 };
 
 function loadChangelog(): string | null {

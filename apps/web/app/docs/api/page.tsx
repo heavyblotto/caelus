@@ -7,6 +7,7 @@ import { SITE } from "../../../lib/site";
 export const metadata = {
   title: "API Reference",
   description: "Generated TypeScript API reference for the caelus package surface, grouped into recommended, advanced, and internal tiers.",
+  alternates: { canonical: "/docs/api" },
 };
 
 type Ref = readonly [label: string, slug: string];

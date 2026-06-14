@@ -5,6 +5,7 @@ export const metadata = {
   title: "Provenance",
   description:
     "Coefficients from published sources. Swiss Ephemeris is a test oracle only. Engine-by-engine comparison.",
+  alternates: { canonical: "/provenance" },
 };
 
 const FIELD: Array<[string, string, string, string, string]> = [

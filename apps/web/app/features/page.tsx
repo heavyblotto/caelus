@@ -4,6 +4,7 @@ export const metadata = {
   title: "Features",
   description:
     "What the caelus engine computes: bodies, house systems, zodiacs, aspects, events, derived charts, the query engine, the turbo tier, packages, and integration surfaces. Counts link to the validation row or guide behind them.",
+  alternates: { canonical: "/features" },
 };
 
 export default function Features() {

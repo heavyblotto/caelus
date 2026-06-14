@@ -4,6 +4,7 @@ import { Eyebrow, Lead, P } from "../../components/Prose";
 export const metadata = {
   title: "Documentation",
   description: "Guides and API reference for the caelus ephemeris engine: quickstart, charts, houses and zodiacs, data tiers, MCP setup, and recipes.",
+  alternates: { canonical: "/docs" },
 };
 
 const CARDS: Array<[string, string, string]> = [

@@ -4,6 +4,7 @@ import accuracy from "caelus/accuracy.json";
 export const metadata = {
   title: "Validation",
   description: "Reference engine vs Swiss Ephemeris; TypeScript port vs 3,218 golden checks. CI on every commit.",
+  alternates: { canonical: "/validation" },
 };
 
 // Canonical per-body accuracy lives in packages/caelus/accuracy.json so prose,
