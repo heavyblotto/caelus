@@ -26,7 +26,7 @@ and behind MCP.
 
 ## One component, end to end
 
-This is the whole pipeline in a single server component — birth input to
+This is the whole pipeline in a single server component, birth input to
 rendered wheel, with the timezone resolved for you:
 
 <CodeBlock
@@ -60,7 +60,7 @@ export function NatalWheel() {
 />
 
 `localToChart` resolves the IANA zone from the coordinates, converts the local
-time to UT, and runs `engine.chart` — returning the chart plus a `status`
+time to UT, and runs `engine.chart`, returning the chart plus a `status`
 (`ok`, `ambiguous`, or `nonexistent`) so DST edge cases surface instead of
 silently producing a wrong chart. See
 <a href="/docs/edge-cases">Edge Cases &amp; Stability</a> for those cases.

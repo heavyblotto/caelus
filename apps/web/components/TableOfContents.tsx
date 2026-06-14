@@ -7,7 +7,7 @@ type Item = { id: string; text: string; level: 2 | 3 };
 
 // Mirror github-slugger (what rehype-slug uses) closely enough for the headings
 // we generate on TSX pages. MDX and API markdown already carry rehype-slug ids,
-// which we reuse verbatim — we only mint ids for headings that lack one.
+// which we reuse verbatim; we only mint ids for headings that lack one.
 function slugify(text: string): string {
   return text
     .trim()

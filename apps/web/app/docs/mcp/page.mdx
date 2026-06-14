@@ -1,6 +1,6 @@
 export const metadata = {
   title: "MCP Setup",
-  description: "Add the caelus chart tools to Claude Desktop, Claude Code, Cursor, VS Code, and any MCP client — with verification, troubleshooting, and version pinning.",
+  description: "Add the caelus chart tools to Claude Desktop, Claude Code, Cursor, VS Code, and any MCP client, with verification, troubleshooting, and version pinning.",
   alternates: { canonical: "/docs/mcp" },
 };
 
@@ -14,9 +14,9 @@ answer is deterministic.
 
 There are two ways to connect, with the same twenty-two tools either way:
 
-- **Hosted (Streamable HTTP)** — point your client at
+- **Hosted (Streamable HTTP)**: point your client at
   `https://www.ephemengine.com/api/mcp`. Nothing to install.
-- **Local (stdio)** — run `npx -y caelus-mcp`. Best for offline use, version
+- **Local (stdio)**: run `npx -y caelus-mcp`. Best for offline use, version
   pinning, or air-gapped setups.
 
 ## Hosted endpoint (no install)
@@ -58,7 +58,7 @@ Add the remote server from the CLI:
   </Tab>
   <Tab label="VS Code">
 
-Create `.vscode/mcp.json` — VS Code uses `servers` and an explicit `type`:
+Create `.vscode/mcp.json`. VS Code uses `servers` and an explicit `type`:
 
 <CodeBlock
   lang="json"
@@ -98,7 +98,7 @@ prompts) so you can confirm it is live.
 
 ## Run it locally
 
-The published binary runs straight from npm — no global install:
+The published binary runs straight from npm, no global install:
 
 <CodeBlock lang="bash" label="Terminal" code={`npx -y caelus-mcp`} />
 
@@ -133,7 +133,7 @@ quit and reopen Claude.
   </Tab>
   <Tab label="Claude Code">
 
-Add it from the CLI — it writes the config for you:
+Add it from the CLI; it writes the config for you:
 
 <CodeBlock lang="bash" label="Terminal" code={`claude mcp add caelus -- npx -y caelus-mcp`} />
 
@@ -159,7 +159,7 @@ projects), then reload Cursor.
   </Tab>
   <Tab label="VS Code">
 
-Create `.vscode/mcp.json` in the workspace — note VS Code uses the `servers`
+Create `.vscode/mcp.json` in the workspace; note VS Code uses the `servers`
 key, not `mcpServers`:
 
 <CodeBlock
@@ -216,9 +216,9 @@ Yogini, or Ashtottari periods), `vargas` (Parashari divisional charts), and
 (cazimi, combust, under the beams) and each aspect as applying or separating.
 
 If you see all twenty-two, the server is wired correctly. The server also exposes two
-**resources** — `caelus://glossary` (aspect angles and orbs, signs, bodies,
+**resources**: `caelus://glossary` (aspect angles and orbs, signs, bodies,
 house systems, essential dignities) and `caelus://accuracy` (the validation
-table) — and a **prompt**, `rectification_session`, a guided flow around
+table), plus a **prompt**, `rectification_session`, a guided flow around
 `rectification_grid` and `find_aspect_dates`.
 
 A natal-chart call returns structured positions, not prose:
@@ -244,7 +244,7 @@ A natal-chart call returns structured positions, not prose:
 - "Compare my chart with my partner's."
 - "Next solar eclipse? Lunar eclipses in 2026?"
 - "My solar return chart for this year."
-- "Progress my chart to today — secondary positions and the solar arc."
+- "Progress my chart to today: secondary positions and the solar arc."
 - "Composite and Davison charts for me and my partner."
 - "Which of my planets have essential dignity, and are they in sect?"
 - "Where are my Lots of Fortune and Spirit?"
@@ -260,8 +260,8 @@ A natal-chart call returns structured positions, not prose:
   or Homebrew may be invisible. Use the absolute path as `command` (find it with
   `which npx`), or install Node where the client can see it. Node 18+ is
   required.
-- **Tools don't show up.** Most clients only read MCP config on a full restart —
-  quit completely (not just close the window) and reopen. Confirm the JSON
+- **Tools don't show up.** Most clients only read MCP config on a full restart.
+  Quit completely (not just close the window) and reopen. Confirm the JSON
   parses (a trailing comma is the usual culprit).
 - **First call is slow.** `npx` downloads the package on first run; it is cached
   afterward. Pinning a version (below) avoids surprise re-downloads.

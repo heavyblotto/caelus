@@ -56,7 +56,7 @@ const TIERS: ReadonlyArray<{
   {
     title: "Internal / unstable",
     blurb:
-      "The engine's own astronomy machinery — series evaluators, apparent-position builders, and raw constants. Exported for inspection and tests; not a stable contract. Prefer the Engine over calling these directly.",
+      "The engine's own astronomy machinery: series evaluators, apparent-position builders, and raw constants. Exported for inspection and tests; not a stable contract. Prefer the Engine over calling these directly.",
     refs: [
       ["vsopHeliocentric", "Function.vsopHeliocentric"],
       ["moonGeometric", "Function.moonGeometric"],
@@ -76,7 +76,7 @@ const ENGINE_METHODS: ReadonlyArray<{
     group: "Charts",
     methods: [
       ["chart()", "chart", "Full chart from calendar fields in UT (year, month, day, hour, minute, second)."],
-      ["chartAt()", "chartat", "The same chart straight from a Julian Day (UT) — no calendar round-trip."],
+      ["chartAt()", "chartat", "The same chart straight from a Julian Day (UT), no calendar round-trip."],
     ],
   },
   {
@@ -141,7 +141,7 @@ export default function ApiIndex() {
       <h2>The Engine</h2>
       <P dim>
         Construct one <Link href="/docs/api/Class.Engine">Engine</Link> from a
-        data pack, then call these methods — the surface most code uses. Every
+        data pack, then call these methods, the surface most code uses. Every
         method links straight to its signature and parameters.
       </P>
       <div className="card" style={{ marginTop: "1rem", marginBottom: "2rem" }}>

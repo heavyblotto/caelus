@@ -33,8 +33,8 @@ and [MCP server](/docs/mcp) build on these two.
   ¹ 1850–2150 for the precise Moon and Chiron tiers. The embedded dataset
   computes everything from the bodies it bundles; the Node tier adds the data
   the extended features were validated against. Anything pure-arithmetic on
-  positions — derived charts, sidereal shifts — runs in any tier, including the
-  browser. See <a href="/docs/edge-cases">Edge Cases &amp; Stability</a> for the
+  positions, such as derived charts and sidereal shifts, runs in any tier,
+  including the browser. See <a href="/docs/edge-cases">Edge Cases &amp; Stability</a> for the
   out-of-range and missing-pack behaviour.
 </Note>
 
@@ -78,8 +78,8 @@ const star = engine.fixedStar("Aldebaran", jd);`}
 
 ## Turbo (bulk longitude scans)
 
-For century-scale work that evaluates a longitude tens of thousands of times — a
-long transit scan, a returns sweep — the `Turbo` tier trades generality for
+For century-scale work that evaluates a longitude tens of thousands of times (a
+long transit scan, a returns sweep), the `Turbo` tier trades generality for
 speed. A turbo pack is a segmented Chebyshev representation of the engine's own
 apparent longitude, fit to the engine itself, so one evaluation is a couple of
 dozen multiply-adds. The pack is data you mint for your range and bodies; the
@@ -97,7 +97,7 @@ turbo.longitude("mars", jd);  // apparent longitude (degrees), within [jd0, jd1]
 />
 
 <Note>
-  Turbo returns longitude only — no latitude, distance, houses, or aspects. Use
+  Turbo returns longitude only: no latitude, distance, houses, or aspects. Use
   it to find candidate instants fast, then read the full position from the
   engine at those instants. It throws outside the pack's fitted range.
 </Note>
