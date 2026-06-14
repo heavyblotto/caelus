@@ -110,3 +110,6 @@ injectable
 equirectangular
 basemap
 graticule
+[Pp]rofections?
+[Pp]rofected
+[Ff]irdaria
