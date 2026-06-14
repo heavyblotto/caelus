@@ -11,7 +11,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   return {
-    title: `${apiTitle(slug)} — API`,
+    title: `${apiTitle(slug)} · API`,
     alternates: { canonical: `/docs/api/${slug}` },
   };
 }

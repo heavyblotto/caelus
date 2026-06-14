@@ -5,7 +5,7 @@ import { A, Eyebrow, Lead, P, H2 } from "../components/Prose";
 import { NPM, SITE } from "../lib/site";
 
 export const metadata = {
-  title: "Caelus — MIT astrological ephemeris engine",
+  title: "Caelus · MIT astrological ephemeris engine",
   description:
     "Free TypeScript library for natal charts: planetary positions, houses, aspects. Runs in the browser, on edge, and in Node. MCP tools for AI clients.",
   alternates: { canonical: "/" },
