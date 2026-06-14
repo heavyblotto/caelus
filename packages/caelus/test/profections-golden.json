@@ -1,0 +1,275 @@
+{
+ "basis": "Python reference astroengine.profections (embedded VSOP, full moon)",
+ "cases": [
+  {
+   "id": "prof-age0",
+   "spec": {
+    "id": "prof-age0",
+    "type": "profection",
+    "asc_sign": 6,
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "target": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ]
+   },
+   "result": {
+    "age_years": 0,
+    "month": 1,
+    "annual": {
+     "sign": "Libra",
+     "sign_index": 6,
+     "house": 1,
+     "lord": "venus"
+    },
+    "monthly": {
+     "sign": "Libra",
+     "sign_index": 6,
+     "house": 1,
+     "lord": "venus"
+    }
+   }
+  },
+  {
+   "id": "prof-age1",
+   "spec": {
+    "id": "prof-age1",
+    "type": "profection",
+    "asc_sign": 6,
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "target": [
+     1991,
+     6,
+     11,
+     0,
+     0
+    ]
+   },
+   "result": {
+    "age_years": 1,
+    "month": 1,
+    "annual": {
+     "sign": "Scorpio",
+     "sign_index": 7,
+     "house": 2,
+     "lord": "mars"
+    },
+    "monthly": {
+     "sign": "Scorpio",
+     "sign_index": 7,
+     "house": 2,
+     "lord": "mars"
+    }
+   }
+  },
+  {
+   "id": "prof-age1-month",
+   "spec": {
+    "id": "prof-age1-month",
+    "type": "profection",
+    "asc_sign": 6,
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "target": [
+     1992,
+     1,
+     1,
+     0,
+     0
+    ]
+   },
+   "result": {
+    "age_years": 1,
+    "month": 7,
+    "annual": {
+     "sign": "Scorpio",
+     "sign_index": 7,
+     "house": 2,
+     "lord": "mars"
+    },
+    "monthly": {
+     "sign": "Taurus",
+     "sign_index": 1,
+     "house": 8,
+     "lord": "venus"
+    }
+   }
+  },
+  {
+   "id": "prof-age12-wrap",
+   "spec": {
+    "id": "prof-age12-wrap",
+    "type": "profection",
+    "asc_sign": 6,
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "target": [
+     2002,
+     9,
+     1,
+     0,
+     0
+    ]
+   },
+   "result": {
+    "age_years": 12,
+    "month": 3,
+    "annual": {
+     "sign": "Libra",
+     "sign_index": 6,
+     "house": 1,
+     "lord": "venus"
+    },
+    "monthly": {
+     "sign": "Sagittarius",
+     "sign_index": 8,
+     "house": 3,
+     "lord": "jupiter"
+    }
+   }
+  },
+  {
+   "id": "prof-age29-saturn",
+   "spec": {
+    "id": "prof-age29-saturn",
+    "type": "profection",
+    "asc_sign": 0,
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "target": [
+     2019,
+     12,
+     1,
+     0,
+     0
+    ]
+   },
+   "result": {
+    "age_years": 29,
+    "month": 6,
+    "annual": {
+     "sign": "Virgo",
+     "sign_index": 5,
+     "house": 6,
+     "lord": "mercury"
+    },
+    "monthly": {
+     "sign": "Aquarius",
+     "sign_index": 10,
+     "house": 11,
+     "lord": "saturn"
+    }
+   }
+  },
+  {
+   "id": "prof-chart-tampa",
+   "spec": {
+    "id": "prof-chart-tampa",
+    "type": "profection_at",
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "target": [
+     2025,
+     6,
+     10,
+     0,
+     0
+    ],
+    "lat": 27.95,
+    "lon": -82.46,
+    "zodiac": "tropical"
+   },
+   "result": {
+    "age_years": 34,
+    "month": 12,
+    "annual": {
+     "sign": "Gemini",
+     "sign_index": 2,
+     "house": 11,
+     "lord": "mercury"
+    },
+    "monthly": {
+     "sign": "Taurus",
+     "sign_index": 1,
+     "house": 10,
+     "lord": "venus"
+    }
+   }
+  },
+  {
+   "id": "prof-chart-sidereal",
+   "spec": {
+    "id": "prof-chart-sidereal",
+    "type": "profection_at",
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "target": [
+     2025,
+     6,
+     10,
+     0,
+     0
+    ],
+    "lat": 27.95,
+    "lon": -82.46,
+    "zodiac": "sidereal:lahiri"
+   },
+   "result": {
+    "age_years": 34,
+    "month": 12,
+    "annual": {
+     "sign": "Taurus",
+     "sign_index": 1,
+     "house": 11,
+     "lord": "venus"
+    },
+    "monthly": {
+     "sign": "Aries",
+     "sign_index": 0,
+     "house": 10,
+     "lord": "mars"
+    }
+   }
+  }
+ ]
+}

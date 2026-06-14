@@ -86,12 +86,14 @@ invisible to the conformance suite). Pending a `caelus-mcp` minor release.
 ### Phase 1 — Hellenistic time-lords (in progress)
 
 Deterministic time-math on top of the validated positions, in dependency order:
-**lots/Arabic parts (sect-aware) — done** (the seven Hermetic lots in the engine,
-Python reference + `lots-golden` cross-language pin + a Fortune/Spirit symmetry
-invariant); next annual profections, then zodiacal releasing (L1–L4,
-loosing-of-the-bond), then firdaria; primary directions later. Pinned by golden
-fixtures (and, where available, published canonical examples). Each lands as an
-engine export first, then an MCP tool and a site docs page.
+**lots/Arabic parts (sect-aware) — done** (the seven Hermetic lots, Python
+reference + `lots-golden` pin + a Fortune/Spirit symmetry invariant);
+**annual + monthly profections — done** (`profection`/`profectionAt`, lord of
+the year, `profections-golden` pin + a textbook-fact oracle); next zodiacal
+releasing (L1–L4, loosing-of-the-bond), then firdaria; primary directions
+later. Pinned by golden fixtures (and, where available, published canonical
+examples). Each lands as an engine export first, then an MCP tool and a site
+docs page.
 
 ### Phase 2 — Vedic / Jyotish layer
 

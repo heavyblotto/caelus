@@ -18,6 +18,12 @@ current figures live in `packages/caelus/accuracy.json` and on
   cross-language golden (`lots-golden`), which also checks the
   implementation-independent invariant that Fortune and Spirit are symmetric
   about the Ascendant.
+- Annual and monthly profections (Roadmap Phase 1): `profection(ascSign,
+  natalJd, targetJd)` and `profectionAt(engine, natalJd, targetJd, lat,
+  lonEast, zodiac)`, plus `profectedSign`/`signRuler`. The Ascendant advances
+  one whole sign per year; the profected sign's traditional ruler is the lord
+  of the year. Python reference + `profections-golden` cross-language pin, with
+  a textbook-fact oracle in the test.
 
 ### MCP server (`caelus-mcp`)
 
