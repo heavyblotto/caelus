@@ -44,7 +44,9 @@ export default function Playground() {
       <div className="grid grid-2" style={{ marginTop: "1rem" }}>
         {EXAMPLES.map(([label, args]) => (
           <figure key={label} className="card" style={{ margin: 0 }}>
-            <ChartWheel chart={engine.chart(...args)} size={420} />
+            <div className="chart-fluid">
+              <ChartWheel chart={engine.chart(...args)} size={420} />
+            </div>
             <figcaption className="dim small" style={{ marginTop: "0.6rem" }}>{label}</figcaption>
           </figure>
         ))}

@@ -140,8 +140,8 @@ export default function SkyNow() {
                 {" · "}computed client-side in {ms.toFixed(1)} ms
               </p>
 
-              <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 460px) 1fr", gap: "1.5rem", alignItems: "start", marginTop: "0.8rem" }}>
-                <div style={{ maxWidth: 460 }}>
+              <div className="skynow-layout">
+                <div className="skynow-chart">
                   <div style={{ display: "flex", gap: "0.4rem", marginBottom: "0.6rem" }}>
                     {(["wheel", "sphere", "map"] as const).map((v) => (
                       <button key={v} type="button" className="mono" style={viewBtn(v)} onClick={() => setView(v)}>

@@ -79,21 +79,23 @@ export default function Provenance() {
         Where Caelus sits, checked February–June 2026. Sizes are gzipped where
         published:
       </P>
-      <table className="data-table table-auto" style={{ fontSize: "0.85rem" }}>
-        <thead>
-          <tr><th>Engine</th><th>License</th><th>Accuracy</th><th>Coverage and runtime</th></tr>
-        </thead>
-        <tbody>
-          {FIELD.map(([name, href, lic, acc, cov]) => (
-            <tr key={name}>
-              <td><A href={href}>{name}</A></td>
-              <td>{lic}</td>
-              <td>{acc}</td>
-              <td className="dim">{cov}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="table-scroll">
+        <table className="data-table table-auto" style={{ fontSize: "0.85rem" }}>
+          <thead>
+            <tr><th>Engine</th><th>License</th><th>Accuracy</th><th>Coverage and runtime</th></tr>
+          </thead>
+          <tbody>
+            {FIELD.map(([name, href, lic, acc, cov]) => (
+              <tr key={name}>
+                <td><A href={href}>{name}</A></td>
+                <td>{lic}</td>
+                <td>{acc}</td>
+                <td className="dim">{cov}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <P dim>
         celestine (MIT, January 2026) is the closest project: houses, Chiron,
         and nodes with no data files. Differences as of its v0.2.1: Caelus

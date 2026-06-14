@@ -27,21 +27,23 @@ export default function Validation() {
         all bodies, angles and cusps at six latitudes including polar Iceland.
         Max and RMS disagreement in arcseconds:
       </P>
-      <table className="data-table table-auto mono" style={{ fontSize: "0.85rem" }}>
-        <thead>
-          <tr><th>Body</th><th>Max</th><th>RMS</th><th>Note</th></tr>
-        </thead>
-        <tbody>
-          {accuracy.bodies.map((row) => (
-            <tr key={row.name}>
-              <td>{row.name}</td>
-              <td>{fmt(row.max)}</td>
-              <td>{fmt(row.rms)}</td>
-              <td className="dim">{row.note}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="table-scroll">
+        <table className="data-table table-auto mono" style={{ fontSize: "0.85rem" }}>
+          <thead>
+            <tr><th>Body</th><th>Max</th><th>RMS</th><th>Note</th></tr>
+          </thead>
+          <tbody>
+            {accuracy.bodies.map((row) => (
+              <tr key={row.name}>
+                <td>{row.name}</td>
+                <td>{fmt(row.max)}</td>
+                <td>{fmt(row.rms)}</td>
+                <td className="dim">{row.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <P dim>
         Chart software usually displays to the arcminute (60″). Birth-time uncertainty
         dominates these deltas. Post-2025 instants also depend on each engine&apos;s
