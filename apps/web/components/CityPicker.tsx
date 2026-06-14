@@ -117,27 +117,44 @@ export default function CityPicker({
         }}
         onKeyDown={onKey}
       />
-      {open && results.length > 0 && (
-        <ul id={listId} role="listbox" aria-label="City matches" className="city-results">
-          {results.map((row, i) => (
-            <li
-              key={`${row[0]}-${row[2]}-${row[3]}`}
-              id={`${listId}-${i}`}
-              role="option"
-              aria-selected={i === active}
-              className="city-option"
-              data-active={i === active || undefined}
-              onMouseEnter={() => setActive(i)}
-              onMouseDown={(e) => {
-                e.preventDefault();
-                choose(row);
-              }}
-            >
-              <span>{row[0]}</span>
-              <span className="mute" style={{ marginLeft: "0.5rem", fontSize: "0.85em" }}>{row[1]}</span>
-            </li>
-          ))}
-        </ul>
+      {open && query.trim() && (
+        <div className="city-results">
+          {results.length > 0 && (
+            <ul id={listId} role="listbox" aria-label="City matches" className="city-listbox">
+              {results.map((row, i) => (
+                <li
+                  key={`${row[0]}-${row[2]}-${row[3]}`}
+                  id={`${listId}-${i}`}
+                  role="option"
+                  aria-selected={i === active}
+                  className="city-option"
+                  data-active={i === active || undefined}
+                  onMouseEnter={() => setActive(i)}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    choose(row);
+                  }}
+                >
+                  <span>{row[0]}</span>
+                  <span className="mute" style={{ marginLeft: "0.5rem", fontSize: "0.85em" }}>{row[1]}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {/* Escape hatch for towns below the gazetteer's population cutoff:
+              look the place up on OpenStreetMap and paste the coordinates into
+              the lat/lon fields. A user-initiated link-out — we send nothing. */}
+          <a
+            className="city-osm"
+            href={`https://www.openstreetmap.org/search?query=${encodeURIComponent(query.trim())}`}
+            target="_blank"
+            rel="noreferrer"
+            onMouseDown={(e) => e.preventDefault()}
+          >
+            {rows && results.length === 0 ? "Not in the list. " : "Somewhere smaller? "}
+            Find “{query.trim()}” on OpenStreetMap, then paste lat/lon →
+          </a>
+        </div>
       )}
     </div>
   );

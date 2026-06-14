@@ -621,15 +621,34 @@ a.card:hover,
   top: calc(100% + 2px);
   left: 0;
   min-width: 100%;
-  max-height: 15rem;
+  max-height: 16rem;
   overflow-y: auto;
-  margin: 0;
   padding: 0.25rem;
-  list-style: none;
   background: var(--bg-elev);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+.city-listbox {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.city-osm {
+  display: block;
+  padding: 0.4rem 0.5rem;
+  margin-top: 0.15rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  white-space: normal;
+}
+
+.city-osm:hover {
+  color: var(--accent);
 }
 
 .city-option {
