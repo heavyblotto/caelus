@@ -12,6 +12,7 @@
     "lint:claims": "node scripts/check-claims.mjs",
     "docs:api": "typedoc",
     "search:index": "node scripts/build-search-index.mjs",
+    "bundle-sizes": "node scripts/bundle-sizes.mjs",
     "eval:selfcheck": "node packages/caelus-mcp/eval/run.mjs",
     "smoke:web": "node scripts/smoke-web.mjs",
     "smoke:live": "node scripts/smoke-live.mjs",
@@ -19,5 +20,8 @@
     "preflight": "npm run test && npm run lint:prose && npm run lint:claims && npm run test:web",
     "dev:web": "npm run dev -w web",
     "dev:web:clean": "npm run dev:clean -w web"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
   }
 }

@@ -100,3 +100,32 @@ turbo.longitude("mars", jd);  // apparent longitude (degrees), within [jd0, jd1]
   it to find candidate instants fast, then read the full position from the
   engine at those instants. It throws outside the pack's fitted range.
 </Note>
+
+## Bundle sizes
+
+The choice between client-side and server-side computation comes down to one
+number: the embedded dataset. The engine code tree-shakes small (a chart-only
+import drops event search, eclipses, the query and turbo tiers, and the derived
+and electional layers); the weight a browser pays is the coefficient data it
+bundles.
+
+| What you ship | Approx. gzipped | Notes |
+| --- | :---: | --- |
+| Embedded dataset (`caelus/data-embedded`) | ~74 KB | the eight planets, Moon series, Pluto, Chiron, nutation; full client-side charts |
+| Precise Moon tier (`caelus/node`) | ~700 KB | ~3.1 MB on disk; **lazy**, never in the initial bundle |
+| `caelus-wheel` | a few KB | React is a peer dependency, not bundled |
+| `caelus-birth` | small code, plus IANA timezone data | the timezone data is the weight, not the resolver |
+| `caelus-mcp` | server-side | not a browser bundle |
+
+So: ship `caelus` + `caelus/data-embedded` for full charts in the browser (the
+data dominates, the code is a small addition on top of your app), or compute
+server-side through the [REST endpoint](/api/chart?lat=27.94&lon=-82.46) or the
+[MCP server](/docs/mcp) and ship only `caelus-wheel` to render the result.
+
+<Note>
+  Exact per-import figures (minified, gzipped, and brotli) come from
+  <code>npm run bundle-sizes</code>, which bundles each entrypoint with esbuild
+  the way an app bundler would. Regenerate it after anything that moves the
+  package surface; the numbers above are the data tiers, which dominate and do
+  not tree-shake.
+</Note>
