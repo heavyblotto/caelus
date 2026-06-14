@@ -63,13 +63,23 @@ export default function Features() {
         and sect. See <A href="/docs/derived">Derived Charts</A>.
       </P>
 
-      <H2>Query engine and turbo tier</H2>
+      <H2>Electional</H2>
+      <P>
+        Applying and separating aspects, solar phase (cazimi, combust, under the
+        beams), planetary hours, the void-of-course Moon, and house placement
+        with angularity. These read off the validated positions, pinned to the
+        Python reference.
+      </P>
+
+      <H2>Query, turbo, and search</H2>
       <P>
         A declarative <code>when()</code> query language finds the intervals
         where celestial predicates hold. Predicates combine with allOf, anyOf,
         and notOf, and the solver locates the boundaries by bisection. For bulk
         scans, the turbo tier evaluates segmented Chebyshev longitude packs fit to
-        the engine. See <A href="/docs/recipes">Recipes</A>.
+        the engine. For ranked time searches, <code>rankMoments</code> scores
+        every instant in a range and returns the best, with a non-blocking
+        variant for the browser. See <A href="/docs/recipes">Recipes</A>.
       </P>
 
       <H2>Packages</H2>

@@ -41,6 +41,9 @@ for body in BODIES:
 - Derived charts: returns, secondary progressions, solar arc, composite and
   Davison, harmonics, antiscia, declination aspects and parallels,
   out-of-bounds, dignities, sect.
+- Electional primitives: applying/separating aspects, solar phase
+  (cazimi/combust/under-the-beams), planetary hours, void-of-course Moon,
+  house placement.
 - A declarative `when()` query engine over celestial predicates.
 - A turbo tier (`Turbo`): segmented Chebyshev longitude packs fit to the
   engine for bulk scans.

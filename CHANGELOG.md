@@ -5,6 +5,41 @@ version in lockstep. Numbers quoted here are as measured at release time;
 current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
+## 0.9.0 — 2026-06-14
+
+Electional building blocks and long-scan ergonomics on the engine, the hosted
+MCP transport, and a self-contained build. No breaking changes to the 0.8.x
+surface; the position conformance suite is unchanged at 3,218 checks, and two
+new cross-language goldens pin the additions to the Python reference.
+
+### Engine (`caelus`)
+
+- Electional primitives: applying and separating aspects, solar phase (cazimi,
+  combust, under the beams), planetary hours, void-of-course Moon, and house
+  placement with angularity. Reference-first, pinned bit-for-bit by
+  `test/electional-golden.json` (21 specs, 53 checks).
+- `scan`, `rankMoments`, and `rankMomentsAsync`: a batched scan with progress
+  and a top-N moment ranker over a user-supplied score, synchronous or
+  non-blocking. A TS-side layer over the validated primitives, with a
+  deterministic unit suite (14 checks).
+
+### MCP server (`caelus-mcp`)
+
+- Hosted over MCP Streamable HTTP at `ephemengine.com/api/mcp`, stateless,
+  alongside the stdio transport. `buildServer(engine?)` takes an injectable
+  engine so the same tool surface backs both.
+
+### Tooling and docs
+
+- `npm run build` now generates the API reference and the search index, so a
+  clean build produces a fully crawlable site.
+- A cross-package integration test covers the local time to chart to wheel
+  journey end to end.
+- `npm run bundle-sizes` reports per-entrypoint sizes with esbuild; the
+  data-tiers page gains a bundle-tradeoffs section.
+- New site pages: methods, features, and how this was built.
+- Corrected the sidereal ayanamsa count in stray docs (seven, not eight).
+
 ## 0.8.0 — 2026-06-13
 
 A turbo evaluation tier and the phase-2 MCP surface. No breaking changes to the
