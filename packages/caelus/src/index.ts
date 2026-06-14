@@ -13,3 +13,4 @@ export * from "./scan.js";
 export * from "./spherical.js";
 export * from "./astrocartography.js";
 export * from "./ephemeris.js";
+export * from "./features.js";
