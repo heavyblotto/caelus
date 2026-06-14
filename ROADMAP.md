@@ -91,12 +91,12 @@ reference + `lots-golden` pin + a Fortune/Spirit symmetry invariant);
 **annual + monthly profections — done** (`profection`/`profectionAt`, lord of
 the year, `profections-golden` pin + a textbook-fact oracle); **firdaria — done**
 (the 75-year planetary period system, day/night, sub-periods; `firdaria-golden`
-pin + total/tiling invariants). Remaining: **zodiacal releasing** (L1–L4,
-loosing-of-the-bond) — deferred until its year-length and loosing-of-the-bond
-conventions are pinned to a published worked example, so it meets the
-validated-not-asserted bar rather than being implemented from memory. Primary
-directions later. Each lands as an engine export first, then an MCP tool and a
-site docs page.
+pin + total/tiling invariants); **zodiacal releasing — done** (`zrRelease`/
+`zrActive`/`zrAt`, L1–L4 with loosing of the bond, 360-day-year Valens/Schmidt
+convention pinned to a reference implementation; `releasing-golden` pin + tiling,
++6-jump, and loosing-of-the-bond-threshold invariants). Phase 1's core techniques
+are in the engine; primary directions remain a later addition. Each lands as an
+engine export first, then an MCP tool and a site docs page.
 
 ### Phase 2 — Vedic / Jyotish layer
 

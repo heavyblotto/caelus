@@ -18,3 +18,4 @@ export * from "./compiler.js";
 export * from "./lots.js";
 export * from "./profections.js";
 export * from "./firdaria.js";
+export * from "./releasing.js";

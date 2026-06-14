@@ -30,6 +30,15 @@ current figures live in `packages/caelus/accuracy.json` and on
   night start. `firdaria`, `firdariaSequence`, `firdariaActive`, `firdariaAt`.
   Python reference + `firdaria-golden` cross-language pin, with 75-year-total
   and sub-period-tiling invariants in the test.
+- Zodiacal releasing / aphesis (Roadmap Phase 1, completing it): the Hellenistic
+  time-lord technique from Valens, released from a Lot. `zrRelease` (the L1..Ln
+  timeline), `zrActive` (the L1..L4 lords at a moment), and `zrAt` (releasing
+  from the chart's Lot of Spirit or Fortune). Standard Valens/Schmidt
+  convention: 360-day years, each level a twelfth of the one above, loosing of
+  the bond jumping to the opposite sign. Algorithm pinned to a reference
+  implementation and the literature, not memory; `releasing-golden`
+  cross-language pin plus invariants in the test (L1/L2 tiling, the +6 jump, and
+  the ~17.58-year loosing-of-the-bond threshold across all twelve Lot signs).
 
 ### MCP server (`caelus-mcp`)
 

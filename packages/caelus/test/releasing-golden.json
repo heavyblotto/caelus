@@ -1,0 +1,521 @@
+{
+ "basis": "Python reference astroengine.releasing (embedded VSOP, full moon); Valens/Schmidt 360-day-year convention",
+ "cases": [
+  {
+   "id": "release-cancer",
+   "spec": {
+    "id": "release-cancer",
+    "type": "release",
+    "lot_sign": 3,
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "max_level": 2,
+    "horizon_years": 26
+   },
+   "result": [
+    {
+     "level": 1,
+     "sign": "Cancer",
+     "lord": "moon",
+     "start": 2448053.1041666665,
+     "end": 2457053.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Cancer",
+     "lord": "moon",
+     "start": 2448053.1041666665,
+     "end": 2448803.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Leo",
+     "lord": "sun",
+     "start": 2448803.1041666665,
+     "end": 2449373.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Virgo",
+     "lord": "mercury",
+     "start": 2449373.1041666665,
+     "end": 2449973.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Libra",
+     "lord": "venus",
+     "start": 2449973.1041666665,
+     "end": 2450213.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Scorpio",
+     "lord": "mars",
+     "start": 2450213.1041666665,
+     "end": 2450663.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Sagittarius",
+     "lord": "jupiter",
+     "start": 2450663.1041666665,
+     "end": 2451023.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Capricorn",
+     "lord": "saturn",
+     "start": 2451023.1041666665,
+     "end": 2451833.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Aquarius",
+     "lord": "saturn",
+     "start": 2451833.1041666665,
+     "end": 2452733.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Pisces",
+     "lord": "jupiter",
+     "start": 2452733.1041666665,
+     "end": 2453093.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Aries",
+     "lord": "mars",
+     "start": 2453093.1041666665,
+     "end": 2453543.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Taurus",
+     "lord": "venus",
+     "start": 2453543.1041666665,
+     "end": 2453783.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Gemini",
+     "lord": "mercury",
+     "start": 2453783.1041666665,
+     "end": 2454383.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Capricorn",
+     "lord": "saturn",
+     "start": 2454383.1041666665,
+     "end": 2455193.1041666665,
+     "lb": true
+    },
+    {
+     "level": 2,
+     "sign": "Aquarius",
+     "lord": "saturn",
+     "start": 2455193.1041666665,
+     "end": 2456093.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Pisces",
+     "lord": "jupiter",
+     "start": 2456093.1041666665,
+     "end": 2456453.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Aries",
+     "lord": "mars",
+     "start": 2456453.1041666665,
+     "end": 2456903.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Taurus",
+     "lord": "venus",
+     "start": 2456903.1041666665,
+     "end": 2457053.1041666665,
+     "lb": false
+    },
+    {
+     "level": 1,
+     "sign": "Leo",
+     "lord": "sun",
+     "start": 2457053.1041666665,
+     "end": 2457413.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Leo",
+     "lord": "sun",
+     "start": 2457053.1041666665,
+     "end": 2457413.1041666665,
+     "lb": false
+    }
+   ]
+  },
+  {
+   "id": "release-aries",
+   "spec": {
+    "id": "release-aries",
+    "type": "release",
+    "lot_sign": 0,
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "max_level": 2,
+    "horizon_years": 24
+   },
+   "result": [
+    {
+     "level": 1,
+     "sign": "Aries",
+     "lord": "mars",
+     "start": 2448053.1041666665,
+     "end": 2453453.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Aries",
+     "lord": "mars",
+     "start": 2448053.1041666665,
+     "end": 2448503.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Taurus",
+     "lord": "venus",
+     "start": 2448503.1041666665,
+     "end": 2448743.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Gemini",
+     "lord": "mercury",
+     "start": 2448743.1041666665,
+     "end": 2449343.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Cancer",
+     "lord": "moon",
+     "start": 2449343.1041666665,
+     "end": 2450093.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Leo",
+     "lord": "sun",
+     "start": 2450093.1041666665,
+     "end": 2450663.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Virgo",
+     "lord": "mercury",
+     "start": 2450663.1041666665,
+     "end": 2451263.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Libra",
+     "lord": "venus",
+     "start": 2451263.1041666665,
+     "end": 2451503.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Scorpio",
+     "lord": "mars",
+     "start": 2451503.1041666665,
+     "end": 2451953.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Sagittarius",
+     "lord": "jupiter",
+     "start": 2451953.1041666665,
+     "end": 2452313.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Capricorn",
+     "lord": "saturn",
+     "start": 2452313.1041666665,
+     "end": 2453123.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Aquarius",
+     "lord": "saturn",
+     "start": 2453123.1041666665,
+     "end": 2453453.1041666665,
+     "lb": false
+    },
+    {
+     "level": 1,
+     "sign": "Taurus",
+     "lord": "venus",
+     "start": 2453453.1041666665,
+     "end": 2456333.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Taurus",
+     "lord": "venus",
+     "start": 2453453.1041666665,
+     "end": 2453693.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Gemini",
+     "lord": "mercury",
+     "start": 2453693.1041666665,
+     "end": 2454293.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Cancer",
+     "lord": "moon",
+     "start": 2454293.1041666665,
+     "end": 2455043.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Leo",
+     "lord": "sun",
+     "start": 2455043.1041666665,
+     "end": 2455613.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Virgo",
+     "lord": "mercury",
+     "start": 2455613.1041666665,
+     "end": 2456213.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Libra",
+     "lord": "venus",
+     "start": 2456213.1041666665,
+     "end": 2456333.1041666665,
+     "lb": false
+    },
+    {
+     "level": 1,
+     "sign": "Gemini",
+     "lord": "mercury",
+     "start": 2456333.1041666665,
+     "end": 2456693.1041666665,
+     "lb": false
+    },
+    {
+     "level": 2,
+     "sign": "Gemini",
+     "lord": "mercury",
+     "start": 2456333.1041666665,
+     "end": 2456693.1041666665,
+     "lb": false
+    }
+   ]
+  },
+  {
+   "id": "active-5y",
+   "spec": {
+    "id": "active-5y",
+    "type": "active",
+    "lot_sign": 3,
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "target": [
+     1995,
+     6,
+     10,
+     0,
+     0
+    ]
+   },
+   "result": {
+    "l1": "Cancer",
+    "l2": "Virgo",
+    "l3": "Leo",
+    "l4": "Aquarius"
+   }
+  },
+  {
+   "id": "active-30y",
+   "spec": {
+    "id": "active-30y",
+    "type": "active",
+    "lot_sign": 3,
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "target": [
+     2020,
+     6,
+     10,
+     0,
+     0
+    ]
+   },
+   "result": {
+    "l1": "Leo",
+    "l2": "Sagittarius",
+    "l3": "Capricorn",
+    "l4": "Capricorn"
+   }
+  },
+  {
+   "id": "active-aries-40y",
+   "spec": {
+    "id": "active-aries-40y",
+    "type": "active",
+    "lot_sign": 0,
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "target": [
+     2030,
+     1,
+     1,
+     0,
+     0
+    ]
+   },
+   "result": {
+    "l1": "Gemini",
+    "l2": "Taurus",
+    "l3": "Cancer",
+    "l4": "Virgo"
+   }
+  },
+  {
+   "id": "at-spirit",
+   "spec": {
+    "id": "at-spirit",
+    "type": "at",
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "target": [
+     2025,
+     6,
+     10,
+     0,
+     0
+    ],
+    "lat": 27.95,
+    "lon": -82.46,
+    "lot": "spirit"
+   },
+   "result": {
+    "lot": "spirit",
+    "lot_sign": "Capricorn",
+    "day": true,
+    "l1": "Aquarius",
+    "l2": "Cancer",
+    "l3": "Gemini",
+    "l4": "Aquarius"
+   }
+  },
+  {
+   "id": "at-fortune",
+   "spec": {
+    "id": "at-fortune",
+    "type": "at",
+    "natal": [
+     1990,
+     6,
+     10,
+     14,
+     30
+    ],
+    "target": [
+     2025,
+     6,
+     10,
+     0,
+     0
+    ],
+    "lat": 27.95,
+    "lon": -82.46,
+    "lot": "fortune"
+   },
+   "result": {
+    "lot": "fortune",
+    "lot_sign": "Pisces",
+    "day": true,
+    "l1": "Gemini",
+    "l2": "Gemini",
+    "l3": "Virgo",
+    "l4": "Pisces"
+   }
+  }
+ ]
+}
