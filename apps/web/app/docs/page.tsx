@@ -13,7 +13,7 @@ const CARDS: Array<[string, string, string]> = [
   ["/docs/houses-and-zodiacs", "Houses & Zodiacs", "Twelve house systems, tropical and sidereal modes, and polar fallbacks."],
   ["/docs/derived", "Derived Charts", "Returns, progressions, solar arc, composite, Davison, harmonics, dignities, and sect."],
   ["/docs/data-tiers", "Data Tiers", "Embedded vs Node loader: what ships in the bundle and what loads lazily."],
-  ["/docs/mcp", "MCP Setup", "Add seven chart tools to Claude, Cursor, and other MCP clients."],
+  ["/docs/mcp", "MCP Setup", "Add nine chart tools to Claude, Cursor, and other MCP clients."],
   ["/docs/recipes", "Recipes", "Transits, the when() query language, event search, and chart wheels."],
   ["/docs/api", "API Reference", "Generated reference for the caelus package surface."],
   ["/docs/edge-cases", "Edge Cases & Stability", "Date range, polar fallback, civil-time hazards, longitude convention, and the versioning contract."],

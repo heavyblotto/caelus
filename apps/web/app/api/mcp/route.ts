@@ -11,8 +11,8 @@
  * as independent POSTs.
  *
  * Data: the embedded tier (a bundled JS object, like /api/chart), injected into
- * buildServer(). It carries every body the seven tools touch and needs no
- * filesystem, so nothing has to be traced into the function bundle.
+ * buildServer(). It carries every body the tools touch and needs no filesystem,
+ * so nothing has to be traced into the function bundle.
  */
 import { Engine } from "caelus";
 import { embeddedData } from "caelus/data-embedded";
@@ -40,6 +40,7 @@ const ACCURACY = { swiss: accuracySwiss, jpl: null };
 const TOOLS = [
   "natal_chart", "current_sky", "transits", "synastry",
   "find_aspect_dates", "rectification_grid", "sky_events",
+  "planetary_hours", "void_of_course",
 ] as const;
 
 const CORS: Record<string, string> = {

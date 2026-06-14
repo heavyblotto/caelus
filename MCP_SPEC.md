@@ -1,4 +1,4 @@
-# caelus-mcp — MCP Specification v0.4
+# caelus-mcp — MCP Specification v0.9
 
 Chart computation only. The server returns positions and aspects; the model
 interprets. No interpretive text — smaller payloads, tradition-neutral,
@@ -8,8 +8,8 @@ composable with a separate KG/corpus server (see ARCHITECTURE.md).
 
 1. **Outcome-level tools, not API wrappers.** `transits` returns natal +
    transiting aspects in one call.
-2. **Token frugality.** Full natal chart ~2.5 KB: terse keys, 0.01° positions,
-   compact aspect objects (`{"a":"moon","b":"venus","aspect":"trine","orb":2.09}`;
+2. **Token frugality.** Full natal chart ~3 KB: terse keys, 0.01° positions,
+   compact aspect objects (`{"a":"moon","b":"venus","aspect":"trine","orb":2.09,"phase":"separating"}`;
    transits add `t`/`n` and an `applying` flag).
 3. **Render-ready output.** Chart aspects pass the engine's `Aspect` objects
    through unchanged, so a `natal_chart` / `current_sky` response feeds
@@ -53,6 +53,17 @@ magnitude, gamma; types match Swiss Ephemeris exactly). Times agree with
 Swiss Ephemeris to the second; stations to ~1 minute (ill-conditioned by
 nature).
 
+### planetary_hours(date?, lat, lon)
+The planetary hour in effect at the moment: ruler, day/night, hour number
+(1–24), start/end (UTC), the planetary-day ruler, and the full 24-hour ruler
+sequence (Chaldean order from the day ruler). Returns `available:false` above
+the polar circles when the Sun neither rises nor sets that day.
+
+### void_of_course(date?, zodiac?)
+Whether the Moon makes no further Ptolemaic aspect to a traditional planet
+(Sun..Saturn) before leaving its current sign: the sign, the sign-exit time
+(UTC), and the next perfecting aspect (null when void).
+
 ## Resources (shipped)
 - `caelus://glossary`: machine-readable definitions; aspect angles and default
   orbs, signs, bodies, the twelve house systems, and essential dignities
@@ -68,9 +79,9 @@ nature).
 
 ## Transports & deployment
 - **stdio** (shipped): `npx caelus-mcp` for Claude Desktop / local agents.
-- **Streamable HTTP** (next): mount `buildServer()` at `/api/mcp` on
-  ephemengine.com (Vercel). Stateless, no auth on free tier; API key +
-  rate limits on paid tier. No per-user state.
+- **Streamable HTTP** (shipped): `buildServer()` is mounted at `/api/mcp` on
+  ephemengine.com (Vercel), stateless and with no per-user state. The hosted
+  server injects an embedded-tier engine; positions are identical to stdio.
 
 ## v0.3 surface (shipped)
 `natal_chart`, `current_sky`, `transits`, and `synastry` take `zodiac`
@@ -88,3 +99,11 @@ reported as before). Payloads gain a `zodiac` key only when sidereal.
 ## v0.5 surface (shipped)
 `sky_events` gains `solar_eclipse` and `lunar_eclipse` kinds — the
 Tier 3 extension.
+
+## v0.9 surface (shipped)
+Electional layer: `planetary_hours` and `void_of_course` tools; `natal_chart`
+and `current_sky` tag each body with solar phase (cazimi/combust/under-the-beams)
+and each aspect with an applying/separating phase. `caelus://glossary` gains an
+`electional` block (solar-phase thresholds, Chaldean order and day rulers, the
+void-of-course and aspect-phase definitions). Built on the validated electional
+primitives in `caelus`, golden-pinned to the Python reference.

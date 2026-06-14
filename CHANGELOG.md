@@ -28,6 +28,15 @@ new cross-language goldens pin the additions to the Python reference.
 - Hosted over MCP Streamable HTTP at `ephemengine.com/api/mcp`, stateless,
   alongside the stdio transport. `buildServer(engine?)` takes an injectable
   engine so the same tool surface backs both.
+- Two electional tools (seven to nine): `planetary_hours` (the hour in effect,
+  its ruler and day/night span, the day ruler, and the 24-hour Chaldean
+  sequence) and `void_of_course` (the Moon's sign, sign-exit time, and next
+  perfecting aspect to Sun..Saturn).
+- `natal_chart` and `current_sky` now tag each body with its solar phase
+  (cazimi, combust, under the beams) and each aspect as applying or separating.
+  Additive and optional, so a payload still feeds `<ChartWheel>` unchanged.
+- `caelus://glossary` gains an `electional` block (solar-phase thresholds,
+  Chaldean and day rulers, the void-of-course and aspect-phase definitions).
 
 ### Tooling and docs
 

@@ -1,8 +1,8 @@
 # caelus-mcp
 
 MCP server for the [caelus](https://github.com/heavyblotto/caelus) ephemeris
-engine: seven chart tools over stdio. Computation only — positions, houses,
-aspects with orbs, event search — the model does the interpreting. It needs
+engine: nine chart tools over stdio. Computation only — positions, houses,
+aspects with orbs, event search, electional — the model does the interpreting. It needs
 no API keys, ephemeris files, or network calls; the engine data ships inside
 the package.
 
@@ -33,6 +33,11 @@ Any MCP client that speaks stdio:
 | `find_aspect_dates` | Exact dates a transiting body aspects a longitude or another body, retrograde re-hits included |
 | `rectification_grid` | ASC/MC sweep across a window of hours for birth-time rectification |
 | `sky_events` | Rise/set/meridian transits, lunar phases, stations, zodiac crossings in a date range (≤370 days) |
+| `planetary_hours` | The planetary hour in effect at a moment and place: ruler, day/night, hour number, start/end, day ruler, and the 24-hour ruler sequence |
+| `void_of_course` | Whether the Moon is void-of-course at a moment: its sign, sign-exit time, and next perfecting aspect to Sun–Saturn |
+
+`natal_chart` and `current_sky` also tag each body with its solar phase
+(cazimi/combust/under-the-beams) and each aspect with applying/separating.
 
 Bodies (core chart): sun through pluto, chiron, mean and true node. Optional
 bodies (mean/true Lilith, asteroids, Uranians) follow engine data on the Node
@@ -40,15 +45,15 @@ loader path. House systems: twelve total — placidus (default), whole_sign,
 equal, porphyry, koch, regiomontanus, campanus, alcabitius, morinus,
 meridian, polich_page, vehlow. Placidus and Koch fall back to whole_sign
 above the polar circles and say so in the payload. `zodiac` supports tropical
-(default) and five sidereal ayanamsas on chart tools.
+(default) and seven sidereal ayanamsas on chart tools.
 
 ## Output
 
 Token-frugal JSON: terse keys, positions to 0.01°, a full natal chart is
-~2.5 KB. Each aspect is a structured object the client can use directly:
+~3 KB. Each aspect is a structured object the client can use directly:
 
 ```json
-{ "a": "moon", "b": "venus", "aspect": "trine", "orb": 2.09 }
+{ "a": "moon", "b": "venus", "aspect": "trine", "orb": 2.09, "phase": "separating" }
 ```
 
 A `natal_chart` or `current_sky` response feeds

@@ -12,7 +12,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { createRequire } from "node:module";
 import { writeFileSync } from "node:fs";
-import { Engine, BODIES, julianDay, mod } from "caelus";
+import { Engine, BODIES, julianDay, mod, aspectPhase, solarPhase, ASPECTS } from "caelus";
 import { loadNodeData } from "caelus/node";
 
 const require = createRequire(import.meta.url);
@@ -73,8 +73,23 @@ const call = async (name, args) => {
     assert((c.bodies[b].rx === true) === p.retrograde, `natal_chart: ${b} retrograde flag`);
     assert(c.bodies[b].house === houseFromCusps(g.cusps, p.lon), `natal_chart: ${b} house`);
   }
-  assert(JSON.stringify(c.aspects) === JSON.stringify(g.aspects),
-    "natal_chart: aspects pass the engine Aspect objects through unchanged");
+  // Aspect core fields ({a,b,aspect,orb}) still pass the engine objects through
+  // unchanged; the MCP layer adds an applying/separating phase on top.
+  const coreOnly = c.aspects.map(({ phase, ...rest }) => rest);
+  assert(JSON.stringify(coreOnly) === JSON.stringify(g.aspects),
+    "natal_chart: aspect core fields pass the engine Aspect objects through unchanged");
+  const jd = jdFromIso(iso);
+  for (const a of c.aspects) {
+    const expected = aspectPhase(
+      g.bodies[a.a].lon, g.bodies[a.a].speed,
+      g.bodies[a.b].lon, g.bodies[a.b].speed, ASPECTS[a.aspect]);
+    assert(a.phase === expected, `natal_chart: aspect ${a.a} ${a.aspect} ${a.b} phase ${a.phase} vs ${expected}`);
+  }
+  // Solar phase per body matches the engine primitive (omitted when far from Sun).
+  for (const b of BODIES) {
+    const expected = solarPhase(eng, b, jd);
+    assert((c.bodies[b].solar ?? null) === expected, `natal_chart: ${b} solar phase ${c.bodies[b].solar ?? null} vs ${expected}`);
+  }
 }
 
 // polar Placidus fallback must be reported, never silent

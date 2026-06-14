@@ -3,7 +3,7 @@
  * caelus-mcp -- MCP server for the caelus ephemeris engine.
  *
  * Design (per 2026 MCP practice): one bounded context (chart computation),
- * a small curated tool surface (7 outcome-level tools, not API wrappers),
+ * a small curated tool surface (9 outcome-level tools, not API wrappers),
  * and token-frugal outputs (positions to 0.01 deg, terse keys, no prose --
  * the model does the interpreting, the server does the math).
  *
@@ -22,6 +22,8 @@ import {
   riseSet, crossings, lunarPhases, stations, RiseKind,
   lunarEclipses, solarEclipses,
   ASPECTS, DEFAULT_ORBS, SIGNS as SIGN_NAMES, dignities,
+  solarPhase, aspectPhase, planetaryHour, voidOfCourse,
+  CAZIMI_DEG, COMBUST_DEG, UNDER_BEAMS_DEG,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -44,7 +46,7 @@ const VERSION: string = (() => {
 // The stdio server builds its engine from the Node data packs (precise Moon,
 // fixed stars). Hosted transports -- e.g. the Streamable HTTP mount in
 // apps/web -- inject their own engine, typically the embedded tier, which
-// carries every body these seven tools use and touches no filesystem. So the
+// carries every body these tools use and touches no filesystem. So the
 // default stays lazy and loadNodeData never runs unless a caller wants it.
 let _defaultEngine: Engine | null = null;
 function defaultEngine(): Engine {
@@ -60,6 +62,10 @@ function defaultEngine(): Engine {
 // ---------------------------------------------------------------- helpers
 const r2 = (x: number) => Math.round(x * 100) / 100;
 const SIGNS = ["Ari", "Tau", "Gem", "Cnc", "Leo", "Vir", "Lib", "Sco", "Sgr", "Cap", "Aqr", "Psc"];
+// The traditional Chaldean ruler order (slowest to fastest), fixed by tradition
+// -- used only to label the 24-hour sequence from the day ruler the validated
+// engine returns. Not a computed quantity, so no golden pins it.
+const CHALDEAN_ORDER = ["saturn", "jupiter", "mars", "sun", "venus", "mercury", "moon"];
 const fmt = (lon: number) => {
   const d = mod(lon, 30);
   return `${Math.floor(d)}°${String(Math.floor(mod(d, 1) * 60)).padStart(2, "0")}'${SIGNS[Math.floor(lon / 30)]}`;
@@ -115,6 +121,19 @@ const GLOSSARY = {
   dignities: Object.fromEntries(TRADITIONAL.map((b) => [b, Object.fromEntries(
     SIGN_NAMES.map((s, i) => [s, dignities(b, i)])
       .filter(([, d]) => (d as string[]).length))])),
+  electional: {
+    solar_phase: {
+      cazimi_deg: CAZIMI_DEG, combust_deg: COMBUST_DEG, under_beams_deg: UNDER_BEAMS_DEG,
+      note: "Ecliptic-longitude separation from the Sun; cazimi <= combust <= under_beams.",
+    },
+    planetary_hours: {
+      chaldean_order: CHALDEAN_ORDER,
+      day_rulers: ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn"],
+      note: "day_rulers index 0 = Sunday; hours run sunrise..sunset and sunset..sunrise, twelve each.",
+    },
+    void_of_course: "Moon makes no further Ptolemaic aspect to Sun..Saturn before leaving its current sign.",
+    aspect_phase: "applying = orb to exact is closing; separating = opening; from longitude speeds.",
+  },
 };
 
 function jdFromIso(iso: string): number {
@@ -126,12 +145,18 @@ function jdFromIso(iso: string): number {
   );
 }
 
+/** Julian Day (UT) -> ISO-8601 UTC string to the second. */
+function isoFromJd(jd: number): string {
+  return new Date((jd - 2440587.5) * 86400000).toISOString().slice(0, 19) + "Z";
+}
+
 function chartPayload(
   engine: Engine,
   iso: string, lat: number, lon: number, hs: HouseSysT,
   zodiac: ZodiacT = "tropical",
 ) {
   const d = new Date(iso);
+  const jd = jdFromIso(iso);
   const c = engine.chart(
     d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate(),
     d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(), lat, lon,
@@ -149,9 +174,14 @@ function chartPayload(
   const bodies: Record<string, unknown> = {};
   for (const b of BODIES) {
     const p = c.bodies[b];
+    // solar phase: nearness to the Sun by ecliptic longitude (cazimi within
+    // 17', combust within 8.5deg, under the beams within 15deg). Omitted when
+    // the body is far from the Sun (and always for the Sun itself).
+    const sp = solarPhase(engine, b as Body, jd, zodiac);
     bodies[b] = {
       lon: r2(p.lon), pos: fmt(p.lon), house: houseOf(p.lon),
       ...(p.retrograde ? { rx: true } : {}), speed: r2(p.speed),
+      ...(sp ? { solar: sp } : {}),
     };
   }
   return {
@@ -161,9 +191,17 @@ function chartPayload(
     bodies,
     angles: { asc: r2(c.angles.asc), ascPos: fmt(c.angles.asc), mc: r2(c.angles.mc), mcPos: fmt(c.angles.mc) },
     cusps: cusps.map(r2),
-    // Engine Aspect objects pass through unchanged ({a, b, aspect, orb}) so
-    // the whole payload feeds caelus-wheel's <ChartWheel> without adaptation.
-    aspects: c.aspects,
+    // Engine Aspect objects ({a, b, aspect, orb}) plus an applying/separating
+    // phase from the two bodies' longitude speeds. The extra key is additive, so
+    // the payload still feeds caelus-wheel's <ChartWheel> without adaptation.
+    aspects: c.aspects.map((a) => ({
+      ...a,
+      phase: aspectPhase(
+        c.bodies[a.a as Body].lon, c.bodies[a.a as Body].speed,
+        c.bodies[a.b as Body].lon, c.bodies[a.b as Body].speed,
+        ASPECTS[a.aspect],
+      ),
+    })),
   };
 }
 
@@ -175,10 +213,13 @@ const text = (obj: unknown) => ({ content: [{ type: "text" as const, text: JSON.
 const bodyOut = z.object({
   lon: z.number(), pos: z.string(), house: z.number().int().min(1).max(12),
   speed: z.number(), rx: z.boolean().optional(),
+  solar: z.enum(["cazimi", "combust", "under_beams"]).optional(),
 });
 const aspectName = z.enum(["conjunction", "sextile", "square", "trine", "opposition"]);
+const aspectPhaseName = z.enum(["applying", "separating", "exact"]);
 const aspectOut = z.object({
   a: z.string(), b: z.string(), aspect: aspectName, orb: z.number(),
+  phase: aspectPhaseName.optional(),
 });
 export const chartOut = z.object({
   utc: z.string(),
@@ -226,6 +267,26 @@ export const skyEventsOut = z.object({
     detail: z.string().optional(),
   })),
 });
+export const planetaryHoursOut = z.object({
+  utc: z.string(),
+  available: z.boolean().optional(),
+  reason: z.string().optional(),
+  day_ruler: z.string().optional(),
+  hour: z.object({
+    n: z.number().int().min(1).max(24),
+    kind: z.enum(["day", "night"]),
+    ruler: z.string(),
+    start: z.string(), end: z.string(),
+  }).optional(),
+  ruler_sequence: z.array(z.string()).length(24).optional(),
+});
+export const voidOfCourseOut = z.object({
+  utc: z.string(),
+  moon_sign: z.string(),
+  is_void: z.boolean(),
+  sign_exit: z.string(),
+  next_aspect: z.string().nullable(),
+});
 export const OUTPUT_SCHEMAS = {
   natal_chart: chartOut,
   current_sky: chartOut,
@@ -234,6 +295,8 @@ export const OUTPUT_SCHEMAS = {
   find_aspect_dates: findAspectDatesOut,
   rectification_grid: rectificationGridOut,
   sky_events: skyEventsOut,
+  planetary_hours: planetaryHoursOut,
+  void_of_course: voidOfCourseOut,
 } as const;
 
 // ---------------------------------------------------------------- server
@@ -526,6 +589,56 @@ export function buildServer(
     }
     events.sort((a, b) => a.t.localeCompare(b.t));
     return text({ start, end, events });
+  });
+
+  server.registerTool("planetary_hours", {
+    description:
+      "Planetary hours for a moment and place: the unequal hour in effect (its ruler, day/night, hour number 1-24, start/end UTC), the ruler of the planetary day, and the full 24-hour ruler sequence. Hours split the day (sunrise to sunset) and night (sunset to next sunrise) into twelve each; the day ruler is the weekday ruler and the hours follow the Chaldean order. Needs lat+lon. Returns available:false above the polar circles when the Sun does not rise or set that day.",
+    inputSchema: {
+      date: z.string().optional().describe("UTC ISO date-time (convert from local first); omit for now"),
+      lat: latSchema,
+      lon: lonSchema,
+    },
+  }, async ({ date, lat, lon }) => {
+    const isoStr = date ?? new Date().toISOString();
+    const ph = planetaryHour(engine, jdFromIso(isoStr), lat, lon);
+    if (ph === null) {
+      return text({
+        utc: isoStr, available: false,
+        reason: "Sun does not rise and set on this date at this latitude (polar day/night)",
+      });
+    }
+    const base = CHALDEAN_ORDER.indexOf(ph.dayRuler);
+    const rulerSequence = Array.from({ length: 24 },
+      (_, i) => CHALDEAN_ORDER[(base + i) % 7]);
+    return text({
+      utc: isoStr,
+      day_ruler: ph.dayRuler,
+      hour: {
+        n: ph.hour, kind: ph.kind, ruler: ph.ruler,
+        start: isoFromJd(ph.start), end: isoFromJd(ph.end),
+      },
+      ruler_sequence: rulerSequence,
+    });
+  });
+
+  server.registerTool("void_of_course", {
+    description:
+      "Void-of-course Moon at a moment: whether the Moon makes no further Ptolemaic aspect to a traditional planet (Sun..Saturn) before it leaves its current sign. Returns the Moon's sign, the UTC time it exits that sign, and the UTC time of its next perfecting aspect (null when none remains -- i.e. void). Tropical by default.",
+    inputSchema: {
+      date: z.string().optional().describe("UTC ISO date-time (convert from local first); omit for now"),
+      zodiac: zodiacSchema,
+    },
+  }, async ({ date, zodiac }) => {
+    const isoStr = date ?? new Date().toISOString();
+    const voc = voidOfCourse(engine, jdFromIso(isoStr), zodiac);
+    return text({
+      utc: isoStr,
+      moon_sign: voc.sign,
+      is_void: voc.isVoid,
+      sign_exit: isoFromJd(voc.signExit),
+      next_aspect: voc.nextAspect === null ? null : isoFromJd(voc.nextAspect),
+    });
   });
 
   // --------------------------------------------------------- resources

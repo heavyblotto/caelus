@@ -102,15 +102,21 @@
       "source": "accuracy.counts.mcp_tools",
       "render": [
         "{value} chart tools",
-        "seven chart tools",
-        "Seven chart tools",
-        "seven tools"
+        "nine chart tools",
+        "Nine chart tools",
+        "nine tools"
       ],
       "appearsIn": [
         "apps/web/app/features/page.tsx",
         "apps/web/app/page.tsx",
+        "apps/web/app/docs/mcp/page.mdx",
+        "apps/web/app/docs/page.tsx",
         "llms.txt",
-        "apps/web/public/llms.txt"
+        "apps/web/public/llms.txt",
+        "packages/caelus-mcp/README.md",
+        "packages/caelus/README.md",
+        "packages/wheel/README.md",
+        "packages/birth/README.md"
       ]
     },
     {
