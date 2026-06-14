@@ -106,3 +106,7 @@ esbuild
 goldens
 crawlable
 injectable
+[Aa]strocartography
+equirectangular
+basemap
+graticule
