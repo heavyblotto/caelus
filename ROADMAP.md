@@ -115,8 +115,12 @@ boundary-robustly from rasi+division; `vargas-golden` pin + textbook-placement
 oracle — the contested hora D2 and unequal trimsamsa D30 await their conventions
 being pinned); **Yogini dasha — done** (the 36-year eight-yogini cycle;
 `yoginiDashas`/`yoginiActive`/`yoginiAt`, `yogini-golden` pin + total/tiling/
-starting-yogini invariants); next further dashas (Ashtottari) and core yogas.
-All deterministic arithmetic
+starting-yogini invariants). **Ashtottari dasha — deferred**: its period table
+and lord order are clear, but the nakshatra-to-lord mapping has genuine textual
+variants (start from Ardra vs Punarvasu, differing group sizes across texts and
+implementations), so it awaits one canonical convention being pinned rather than
+guessed. Next: core yogas (each definition pinned to a textbook source). All
+deterministic arithmetic
 over the
 SE-pinned sidereal longitudes; validated against established Jyotish references
 and published charts as golden fixtures, with ayanamsa/convention variants
