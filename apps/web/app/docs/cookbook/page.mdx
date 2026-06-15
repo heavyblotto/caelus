@@ -133,6 +133,57 @@ lunarPhases(engine, jd, jd + 90);
 // [[jd, "new"], [jd, "first_quarter"], [jd, "full"], ...]`}
 />
 
+## Transits to a natal chart
+
+`when()` answers "when is this configuration true?" over a range. To find when a
+transiting planet aspects a natal point, take that point's longitude from the
+natal chart and search for the aspect. Each result is an `[jdStart, jdEnd]`
+interval, the window the aspect holds within orb.
+
+<CodeBlock
+  lang="typescript"
+  label="transits.ts"
+  code={`import { when, aspect, julianDay } from "caelus";
+
+const natal = engine.chart(1990, 6, 10, 14, 30, 0, 27.95, -82.46, "placidus");
+const start = julianDay(2026, 1, 1);
+const end = julianDay(2027, 1, 1);
+
+// transiting Mars conjunct the natal Sun, within 1 degree of exact
+const windows = when(engine, aspect("mars", "conjunction", natal.bodies.sun.lon), start, end);
+windows[0]; // [jdStart, jdEnd] of the first pass`}
+/>
+
+## Sunrise and sunset at a place
+
+`riseSet()` returns the JD of the next event after `jdStart`, or `null` if it
+doesn't occur (e.g. polar day or night).
+
+<CodeBlock
+  lang="typescript"
+  label="riseset.ts"
+  code={`import { riseSet } from "caelus";
+
+// next sunrise and sunset over Tampa (27.95 N, 82.46 W) after jd
+const sunrise = riseSet(engine, "sun", jd, 27.95, -82.46, "rise");
+const sunset = riseSet(engine, "sun", jd, 27.95, -82.46, "set");`}
+/>
+
+## The next solar return
+
+`solarReturn()` returns the JDs in a window where the Sun returns to its natal
+longitude; pass the first into `chartAt()` for the return chart.
+
+<CodeBlock
+  lang="typescript"
+  label="return.ts"
+  code={`import { solarReturn, julianDay } from "caelus";
+
+const natalJd = julianDay(1990, 6, 10, 14, 30, 0);
+const [returnJd] = solarReturn(engine, natalJd, jd, jd + 366);
+const returnChart = engine.chartAt(returnJd, 27.95, -82.46, "placidus");`}
+/>
+
 ## A local birth time, done right
 
 The core takes UT. Real birth times are local wall-clock, and a naive conversion
@@ -151,6 +202,25 @@ const { chart, utc, zone } = localToChart(
   "placidus",
 );
 chart.angles.asc; // computed from the correct UT instant`}
+/>
+
+## A Vedic snapshot: nakshatra and current dasha
+
+Caelus is sidereal-aware. Take the Moon's longitude in a sidereal zodiac, read
+its nakshatra, and find the active Vimshottari period for a date. See{" "}
+<a href="/docs/vedic">Vedic &amp; Jyotish</a> for vargas, the other dashas, and
+the yogas.
+
+<CodeBlock
+  lang="typescript"
+  label="vedic.ts"
+  code={`import { nakshatra, vimshottariActive, julianDay } from "caelus";
+
+const birthJd = julianDay(1990, 6, 10, 14, 30, 0);
+const moonLon = engine.longitude("moon", birthJd, { zodiac: "sidereal:lahiri" });
+
+nakshatra(moonLon);                       // { name, pada, lord, ... }
+vimshottariActive(moonLon, birthJd, jd);  // { maha, antar, pratyantar } for "now"`}
 />
 
 ## For agents over MCP
