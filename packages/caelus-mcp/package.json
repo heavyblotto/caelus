@@ -26,7 +26,8 @@
     "provenance": true
   },
   "files": [
-    "dist/src"
+    "dist/src",
+    "data/gazetteer.json"
   ],
   "repository": {
     "type": "git",

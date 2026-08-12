@@ -16,7 +16,7 @@ import { z } from "zod";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
-import { realpathSync } from "node:fs";
+import { realpathSync, readFileSync } from "node:fs";
 import {
   Engine, BODIES, Body, AlwaysBody, julianDay, mod,
   riseSet, crossings, lunarPhases, stations, RiseKind,
@@ -251,6 +251,41 @@ function chartPayload(
 }
 
 const text = (obj: unknown) => ({ content: [{ type: "text" as const, text: JSON.stringify(obj) }] });
+
+// ---------------------------------------------------------------- gazetteer
+// The bundled city gazetteer (GeoNames via all-the-cities; see
+// scripts/build-gazetteer.mjs) resolves `named` place anchors in chart_facts:
+// "Paris" or "Paris, FR" -> a centroid GeoPlace. Lazily loaded and
+// existsSync-guarded like the engine data, so hosted bundles that don't ship
+// the file simply resolve named places to null (reported, never silent).
+type GazetteerRow = [string, string, number, number]; // name, country, lat, lon
+let _gazetteer: GazetteerRow[] | null | undefined;
+function gazetteerRows(): GazetteerRow[] | null {
+  if (_gazetteer !== undefined) return _gazetteer;
+  try {
+    const path = join(dirname(fileURLToPath(import.meta.url)), "../../data/gazetteer.json");
+    _gazetteer = (JSON.parse(readFileSync(path, "utf8")) as { cities: GazetteerRow[] }).cities;
+  } catch {
+    _gazetteer = null;
+  }
+  return _gazetteer;
+}
+
+/** Resolve "Name" or "Name, CC" to a place; rows are population-ordered, so
+ *  the first case-insensitive match is the most important city of that name. */
+function gazetteerLookup(placeId: string): { lat: number; lonEast: number } | null {
+  const rows = gazetteerRows();
+  if (!rows) return null;
+  const m = placeId.match(/^(.*?)(?:,\s*([A-Za-z]{2}))?$/);
+  const name = (m?.[1] ?? placeId).trim().toLowerCase();
+  const country = m?.[2]?.toUpperCase();
+  for (const [n, c, lat, lon] of rows) {
+    if (n.toLowerCase() === name && (!country || c === country)) {
+      return { lat, lonEast: lon };
+    }
+  }
+  return null;
+}
 
 // ---------------------------------------------------------------- chart widget (MCP Apps / Apps SDK)
 // natal_chart and current_sky can render the chart wheel in-host (ChatGPT and
@@ -1778,8 +1813,27 @@ export function buildServer(
       ]).optional().describe("Full structured temporal anchor; overrides date/earliest/latest. Use for relative or narrative time."),
       anchors: z.record(z.string()).optional()
         .describe("Reference instants for a `relative` when: { anchorId: UTC ISO }"),
+      calendars: z.record(z.record(z.string())).optional()
+        .describe("Calendar lookups for a `narrative` when: { calendarName: { value: UTC ISO } }. "
+          + "The caller owns the mapping (a regnal year, a story epoch, a game calendar) — "
+          + "the engine resolves through it, never invents it"),
       lat: latSchema.optional(),
       lon: lonSchema.optional(),
+      place: z.string().optional()
+        .describe("Named place, e.g. \"Paris\" or \"Springfield, US\" — resolved to a city "
+          + "centroid via the bundled gazetteer (GeoNames) when lat/lon are not given. "
+          + "Resolution is approximate by construction and reported as such"),
+      where: z.discriminatedUnion("kind", [
+        z.object({ kind: z.literal("geo"), lat: latSchema, lonEast: lonSchema, altM: z.number().optional() }),
+        z.object({ kind: z.literal("named"), placeId: z.string() }),
+        z.object({ kind: z.literal("region"), lat: latSchema, lonEast: lonSchema, radiusKm: z.number().positive() }),
+        z.object({ kind: z.literal("fictional"), value: z.string() }),
+        z.object({ kind: z.literal("relative"), relation: z.enum(["near", "at"]), anchorId: z.string() }),
+        z.object({ kind: z.literal("none"), reason: z.enum(["heliocentric", "atemporal", "intentionally_unset"]) }),
+      ]).optional()
+        .describe("Full structured spatial anchor; overrides lat/lon and place. `fictional` "
+          + "carries the narrative value only — a fictional place never resolves to "
+          + "coordinates (the chart reads on the planetary layer, houseless), by design"),
       realm: z.enum(["observed", "reported", "planned", "forecast", "fictional",
         "mythic", "counterfactual", "archetypal", "conceptual"]).default("observed")
         .describe("What the chart is; frames the interpretation (default observed)"),
@@ -1796,7 +1850,7 @@ export function buildServer(
       limit: z.number().int().min(1).max(60).default(24)
         .describe("max facts to return, highest salience first (default 24)"),
     },
-  }, async ({ date, earliest, latest, when: whenInput, anchors, lat, lon, realm, constraints, house_system, zodiac, target_date, include_vedic, limit }) => {
+  }, async ({ date, earliest, latest, when: whenInput, anchors, calendars, lat, lon, place, where: whereInput, realm, constraints, house_system, zodiac, target_date, include_vedic, limit }) => {
     const when = whenInput
       ?? (date ? { kind: "instant" as const, utc: date }
         : earliest && latest ? { kind: "range" as const, earliest, latest }
@@ -1808,10 +1862,24 @@ export function buildServer(
       const jd = isoToJd(utc);
       if (jd !== null) instants[id] = jd;
     }
-    const where = lat !== undefined && lon !== undefined
-      ? { kind: "geo" as const, lat, lonEast: lon }
-      : { kind: "none" as const, reason: "intentionally_unset" as const };
-    const r = realize(engine, { realm, when, where, constraints }, { instants },
+    // Calendar maps arrive as data ({ value: iso }); the registry wants
+    // resolver functions. An unmapped value resolves to null (reported by the
+    // provenance layer, never invented).
+    const calendarFns: Record<string, (value: string) => number | null> = {};
+    for (const [name, map] of Object.entries(calendars ?? {})) {
+      calendarFns[name] = (value: string) => {
+        const iso = map[value];
+        return iso === undefined ? null : isoToJd(iso);
+      };
+    }
+    const where = whereInput
+      ?? (lat !== undefined && lon !== undefined
+        ? { kind: "geo" as const, lat, lonEast: lon }
+        : place !== undefined
+          ? { kind: "named" as const, placeId: place }
+          : { kind: "none" as const, reason: "intentionally_unset" as const });
+    const r = realize(engine, { realm, when, where, constraints },
+      { instants, calendars: calendarFns, gazetteer: gazetteerLookup },
       { houseSystem: normalizeHouseSystem(house_system), zodiac });
     if (r.via === "ephemeris" && r.chart) {
       // Enrich the projection with the Part of Fortune and its companion lots,
@@ -1841,6 +1909,17 @@ export function buildServer(
       return text({
         realm, via: r.via, certainty: r.time.certainty,
         utc: isoFromJd(r.time.jd!), houses: r.chart.houseSystem,
+        // How the place resolved (a gazetteer centroid is approximate; a
+        // fictional or absent place resolves to none and nominal houses).
+        ...(r.place.place
+          ? {
+            place: {
+              lat: r.place.place.lat, lonEast: r.place.place.lonEast,
+              certainty: r.place.certainty,
+              ...(r.place.note ? { note: r.place.note } : {}),
+            },
+          }
+          : {}),
         ...(r.time.earliest !== undefined ? { range: { earliest: isoFromJd(r.time.earliest), latest: isoFromJd(r.time.latest!) } } : {}),
         ...(zodiac !== "tropical" ? { zodiac } : {}),
         ...(framing ? { framing } : {}),

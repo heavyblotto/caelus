@@ -7,14 +7,21 @@
 // ships to the browser, and it is fetched on demand (not in the main bundle).
 //
 // Regenerate with:  node scripts/build-gazetteer.mjs
-import { writeFileSync } from "node:fs";
+//
+// Two copies ship: the web playground asset (fetched on demand) and the
+// caelus-mcp data file (lazily loaded so chart_facts can resolve `named`
+// place anchors server-side). Same bytes, one build.
+import { writeFileSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import cities from "all-the-cities";
 
 const THRESHOLD = 15000; // ~24k cities; smaller birthplaces use manual lat/lon
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const out = join(root, "apps/web/public/gazetteer.json");
+const outs = [
+  join(root, "apps/web/public/gazetteer.json"),
+  join(root, "packages/caelus-mcp/data/gazetteer.json"),
+];
 
 const round = (n) => Math.round(n * 1e3) / 1e3; // ~110 m, ample for tz + chart
 
@@ -39,7 +46,10 @@ const payload = {
 };
 
 const json = JSON.stringify(payload);
-writeFileSync(out, json);
-console.log(
-  `gazetteer: ${rows.length} cities (pop >= ${THRESHOLD}) -> ${out} (${(json.length / 1024).toFixed(0)} KB)`,
-);
+for (const out of outs) {
+  mkdirSync(dirname(out), { recursive: true });
+  writeFileSync(out, json);
+  console.log(
+    `gazetteer: ${rows.length} cities (pop >= ${THRESHOLD}) -> ${out} (${(json.length / 1024).toFixed(0)} KB)`,
+  );
+}

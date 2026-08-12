@@ -673,6 +673,46 @@ const assertExactHits = (hits, body, targetLonAt, angle, label, tolDeg = 0.02) =
   assert(res.moon_void_of_course === voidOfCourse(eng, jdFromIso(date)).isVoid, "cosmic_weather: void Moon flag matches engine");
 }
 
+// ------------------------------------------------- chart_facts exotic anchors
+// Every anchor kind the tool description names must actually resolve through
+// the handler -- these once shipped as documented dead ends (no calendars map,
+// no gazetteer), so `narrative` whens and `named` places always fell to
+// via:"none".
+{
+  // Named place through the bundled gazetteer: houses computed at the city.
+  const named = await call("chart_facts", {
+    date: "1990-06-10T14:30:00Z", place: "Paris, FR",
+  });
+  assert(named.via === "ephemeris", "chart_facts: named place resolves to a computed chart");
+  assert(named.place && Math.abs(named.place.lat - 48.85) < 0.2,
+    `chart_facts: gazetteer Paris latitude (${named.place?.lat})`);
+
+  // Narrative when through a caller-supplied calendar map.
+  const narrative = await call("chart_facts", {
+    when: { kind: "narrative", calendar: "regnal", value: "year 2 of the reign" },
+    calendars: { regnal: { "year 2 of the reign": "1990-06-10T14:30:00Z" } },
+    lat: 27.95, lon: -82.46,
+  });
+  assert(narrative.via === "ephemeris", "chart_facts: narrative when resolves through the calendar map");
+
+  // An unmapped narrative value resolves to no instant -- reported, not invented.
+  const unmapped = await call("chart_facts", {
+    when: { kind: "narrative", calendar: "regnal", value: "year 99" },
+    calendars: { regnal: { "year 2": "1990-06-10T14:30:00Z" } },
+    lat: 27.95, lon: -82.46,
+  });
+  assert(unmapped.via !== "ephemeris", "chart_facts: unmapped narrative value does not invent an instant");
+
+  // A fictional place never resolves to coordinates: planetary layer only.
+  const fictional = await call("chart_facts", {
+    date: "1990-06-10T14:30:00Z",
+    where: { kind: "fictional", value: "Minas Tirith" },
+    realm: "fictional",
+  });
+  assert(fictional.via === "ephemeris", "chart_facts: fictional place still computes the planetary layer");
+  assert(!fictional.place, "chart_facts: fictional place resolves to no coordinates");
+}
+
 await client.close();
 console.log(`\n${checks} checks, ${failures} failures`);
 

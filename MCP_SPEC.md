@@ -270,6 +270,17 @@ receptions, a body's tight conjunction with a bright fixed star
 engine ships the facts and the contract, never the interpretation content.
 Twenty-nine tools total.
 
+Every provenance anchor kind the tool names is resolvable, not decorative:
+`named` places resolve through the bundled gazetteer (`place: "Paris, FR"` →
+a city centroid, reported `approximate` with a `gazetteer:` note); `narrative`
+whens resolve through a caller-supplied `calendars` map (`{ regnal: { "year 2":
+"<UTC ISO>" } }` — the caller owns the mapping, an unmapped value resolves to
+nothing rather than being invented); the full structured `where` union (geo /
+named / region / relative / fictional / none) is accepted alongside the lat/lon
+convenience. A `fictional` place never resolves to coordinates by design — the
+chart computes the planetary layer, houseless, exactly the provenance layer's
+`none`-place case. `verify_tools` pins each of these paths.
+
 ## Parans harvest
 `parans` surfaces the co-angular engine math that shipped in 0.17.0 (Roadmap
 Phase 4b named it; the tool surface lagged the engine): every pair of bodies
