@@ -25,8 +25,10 @@ from .pheno import DIAMETER_KM, az_alt, pheno, refract_true_to_apparent
 __all__ = [
     "dir_from_az_alt", "compass_of", "parse_azimuth", "resolve_lens",
     "place", "twilight_stage", "limiting_mag", "moon_phase_name",
-    "clock_of", "airmass", "extinction_mag", "sky_bodies",
+    "clock_of", "airmass", "extinction_mag", "sky_brightness",
+    "horizon_alt_at", "sky_bodies",
     "LENS_PRESETS", "COMPASS16", "BORTLE_LIMIT", "STAGE_CEILING",
+    "BORTLE_ZENITH_MAG",
 ]
 
 
@@ -305,6 +307,115 @@ def extinction_mag(alt_app_deg, k=0.2):
     return k * airmass(alt_app_deg)
 
 
+# ------------------------------------------------------------ sky brightness
+
+# Zenith V-band brightness of the moonless night sky by Bortle class,
+# mag/arcsec^2 (Bortle 2001, Sky & Telescope; cf. Crumey 2014 MNRAS 442,
+# 2600). Class 6 is the default when no class is given. Mirrors
+# BORTLE_ZENITH_MAG in skyview.ts.
+BORTLE_ZENITH_MAG = {
+    1: 21.9, 2: 21.7, 3: 21.5, 4: 21.0, 5: 20.5, 6: 19.5, 7: 18.5, 8: 18.0,
+    9: 17.5,
+}
+
+# The pristine night zenith the twilight ramp brightens relative to.
+DARK_REF_MAG = 21.9
+
+# Twilight zenith brightening vs Sun altitude (Patat, Ugolnikov &
+# Postylyakov 2006, A&A 455, 385 for the shape), saturating at the clear
+# daytime zenith of ~4 mag/arcsec^2. Mirrors TWILIGHT_RAMP in skyview.ts.
+TWILIGHT_RAMP = [
+    (-18.0, 0.0), (-12.0, 4.0), (-6.0, 9.0), (0.0, 14.0),
+    (8.0, DARK_REF_MAG - 4.0),
+]
+
+# Airglow horizon brightening at a dark site, mag (Garstang 1989 PASP 101,
+# 306; Roach & Gordon 1973).
+AIRGLOW_HORIZON_MAG = 0.4
+
+
+def _mag_to_flux(m):
+    return math.pow(10, -0.4 * m)
+
+
+def _flux_to_mag(f):
+    return -2.5 * math.log10(f)
+
+
+def _twilight_ramp_at(sun_alt_deg):
+    pts = TWILIGHT_RAMP
+    if sun_alt_deg <= pts[0][0]:
+        return pts[0][1]
+    last = pts[-1]
+    if sun_alt_deg >= last[0]:
+        return last[1]
+    for i in range(1, len(pts)):
+        if sun_alt_deg <= pts[i][0]:
+            a0, m0 = pts[i - 1]
+            a1, m1 = pts[i]
+            return m0 + ((sun_alt_deg - a0) / (a1 - a0)) * (m1 - m0)
+    return last[1]
+
+
+def sky_brightness(alt_deg, az_deg, ctx):
+    """Mirror of skyBrightness: approximate V-band sky surface brightness
+    (mag/arcsec^2) at a direction -- a render cue, not precision photometry.
+    Composes site sky (with airglow horizon brightening), twilight, and a
+    Krisciunas & Schaefer-inspired moonlight term in linear flux space; see
+    skyview.ts for the sourced constants. `ctx` carries the TS-shaped keys
+    {"sunAltDeg", "sunAzDeg", "moonAltDeg", "moonAzDeg", "moonIllum",
+    "bortle"?} (bortle absent or None means class 6)."""
+    bortle = ctx.get("bortle")
+    if bortle is not None:
+        zenith_mag = BORTLE_ZENITH_MAG.get(_js_round(bortle),
+                                           BORTLE_ZENITH_MAG[6])
+    else:
+        zenith_mag = BORTLE_ZENITH_MAG[6]
+    # (a) site sky, brightened toward the horizon by airglow (the Kasten &
+    # Young fit dips a hair under 1 at the zenith itself, hence the 0 floor)
+    horiz_frac = min(1.0, max(0.0, (airmass(alt_deg) - 1) / (airmass(0) - 1)))
+    flux = _mag_to_flux(zenith_mag - AIRGLOW_HORIZON_MAG * horiz_frac)
+    # (b) twilight from the Sun's altitude
+    ramp = _twilight_ramp_at(ctx["sunAltDeg"])
+    if ramp > 0:
+        flux += _mag_to_flux(DARK_REF_MAG - ramp)
+    # (c) moonlight, falling off with angular distance from the Moon
+    if ctx["moonAltDeg"] > 0 and ctx["moonIllum"] > 0:
+        sep = math.acos(_clamp1(_dot(
+            dir_from_az_alt(az_deg, alt_deg),
+            dir_from_az_alt(ctx["moonAzDeg"], ctx["moonAltDeg"])))) / DEG
+        s = max(sep, 10.0)  # inside ~10 deg is the Moon's own glare
+        moon_mag = (17.5 + 0.04 * (s - 10) - 2.5 * math.log10(ctx["moonIllum"])
+                    + 0.2 * (airmass(ctx["moonAltDeg"]) - 1))
+        flux += _mag_to_flux(moon_mag)
+    return _flux_to_mag(flux)
+
+
+# ------------------------------------------------------- obstruction profile
+
+def horizon_alt_at(profile, az_deg):
+    """Mirror of horizonAltAt: skyline altitude at an azimuth from an
+    obstruction profile (list of TS-shaped {"azDeg", "altDeg"} dicts),
+    piecewise-linear on the circle. Unsorted input tolerated; wraps across
+    360/0. An empty profile is the astronomical horizon (0 deg)."""
+    if len(profile) == 0:
+        return 0.0
+    pts = sorted(((p["azDeg"] % 360.0, p["altDeg"]) for p in profile),
+                 key=lambda p: p[0])
+    if len(pts) == 1:
+        return pts[0][1]
+    az = az_deg % 360.0
+    i = 0
+    while i < len(pts) and pts[i][0] <= az:
+        i += 1
+    a = pts[(i - 1 + len(pts)) % len(pts)]
+    b = pts[i % len(pts)]
+    span = (b[0] - a[0]) % 360.0
+    if span == 0:
+        return a[1]  # coincident azimuths: take the first
+    return a[1] + (((az - a[0]) % 360.0) / span) * (b[1] - a[1])
+
+
 # ------------------------------------------------------------------- bodies
 
 _DEFAULT_BODIES = ["sun", "moon", "mercury", "venus", "mars", "jupiter",
@@ -312,13 +423,20 @@ _DEFAULT_BODIES = ["sun", "moon", "mercury", "venus", "mars", "jupiter",
 
 
 def sky_bodies(engine, jd_ut, view, bodies=None, refraction=True,
-               pressure=1013.25, temp_c=15.0, bortle=None):
+               pressure=1013.25, temp_c=15.0, bortle=None,
+               horizon_profile=None):
     """The numeric core of the TS skyView body loop: project each body,
     apply the visibility rule, and emit the per-body numbers with the exact
     TS rounding, plus the sky-state summary and the near-off-frame list.
 
     `view` is {"observer": {"lat", "lon_east", "alt_m"?}, "aim": {"azimuth",
     "altitude"}, "lens": LensSpec, "image": {"width", "height"}}.
+
+    `horizon_profile` mirrors opts.horizonProfile (a list of TS-shaped
+    {"azDeg", "altDeg"} skyline samples): a body above the astronomical
+    horizon but below the skyline at its azimuth moves to the result's
+    "occluded" list (present only when a profile is given, so profile-less
+    results keep their original shape).
     """
     obs = view["observer"]
     lat = obs["lat"]
@@ -348,6 +466,7 @@ def sky_bodies(engine, jd_ut, view, bodies=None, refraction=True,
     body_ids = _DEFAULT_BODIES if bodies is None else bodies
     rows = []
     off_frame = []
+    occluded = []
     for bid in body_ids:
         if bid == "sun":
             az, alt_true = sun_az, sun_alt_true
@@ -364,6 +483,19 @@ def sky_bodies(engine, jd_ut, view, bodies=None, refraction=True,
         visible = p["alt_app"] > -1.0 if bid == "sun" else p["alt_app"] > 0
         if not visible:
             continue
+
+        # The obstruction profile hides what clears the astronomical horizon
+        # but not the skyline (the Sun's grace band is subject to it too).
+        if horizon_profile is not None:
+            skyline = horizon_alt_at(horizon_profile, az)
+            if p["alt_app"] < skyline:
+                occluded.append({
+                    "id": bid,
+                    "azimuth_deg": _js_round(az * 10) / 10,
+                    "altitude_deg": _js_round(p["alt_app"] * 10) / 10,
+                    "skyline_alt_deg": _js_round(skyline * 10) / 10,
+                })
+                continue
 
         magnitude = None
         extinction = None
@@ -420,7 +552,7 @@ def sky_bodies(engine, jd_ut, view, bodies=None, refraction=True,
          if o["side"] != "behind" and o["delta_deg"] <= off_max),
         key=lambda o: o["delta_deg"])
 
-    return {
+    out = {
         "summary": {
             "twilight": stage,
             "limiting_mag": limit,
@@ -432,3 +564,6 @@ def sky_bodies(engine, jd_ut, view, bodies=None, refraction=True,
         "bodies": rows,
         "off_frame": off_near,
     }
+    if horizon_profile is not None:
+        out["occluded"] = occluded
+    return out

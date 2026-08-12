@@ -32,6 +32,38 @@ ZGRID = [
     [45.0, 30.0], [270.0, 88.0],
 ]
 
+# Directions for the sky-brightness grid: zenith down to the horizon, spread
+# in azimuth so the Moon-distance falloff is exercised.
+BGRID = [
+    [90.0, 0.0], [45.0, 180.0], [20.0, 180.0], [10.0, 90.0],
+    [5.0, 315.0], [0.0, 270.0],
+]
+
+# Sun/Moon/Bortle states for the brightness grid (TS-shaped ctx dicts):
+# deep night pristine, full Moon up, astronomical twilight with a half Moon,
+# nautical city sky with a thin Moon, civil twilight, and full day.
+BCTXS = [
+    {"sunAltDeg": -30.0, "sunAzDeg": 0.0, "moonAltDeg": -10.0,
+     "moonAzDeg": 0.0, "moonIllum": 0.0, "bortle": 1},
+    {"sunAltDeg": -25.0, "sunAzDeg": 10.0, "moonAltDeg": 40.0,
+     "moonAzDeg": 180.0, "moonIllum": 1.0, "bortle": 1},
+    {"sunAltDeg": -15.0, "sunAzDeg": 290.0, "moonAltDeg": 20.0,
+     "moonAzDeg": 120.0, "moonIllum": 0.5, "bortle": 4},
+    {"sunAltDeg": -9.0, "sunAzDeg": 300.0, "moonAltDeg": 60.0,
+     "moonAzDeg": 90.0, "moonIllum": 0.25, "bortle": 9},
+    {"sunAltDeg": -4.0, "sunAzDeg": 270.0, "moonAltDeg": -5.0,
+     "moonAzDeg": 80.0, "moonIllum": 0.9},
+    {"sunAltDeg": 30.0, "sunAzDeg": 180.0, "moonAltDeg": 25.0,
+     "moonAzDeg": 300.0, "moonIllum": 0.1, "bortle": 6},
+]
+
+# An unsorted skyline with a wrap-around segment (350 -> 20 across north).
+SKYLINE = [
+    {"azDeg": 270.0, "altDeg": 25.0}, {"azDeg": 20.0, "altDeg": 2.0},
+    {"azDeg": 350.0, "altDeg": 12.0}, {"azDeg": 90.0, "altDeg": 0.0},
+    {"azDeg": 200.5, "altDeg": 6.0},
+]
+
 CASES = (
     # every lens preset, plus custom hfov and custom focal/sensor specs
     [{"id": f"lens-{name}", "type": "lens", "lens": name,
@@ -95,6 +127,26 @@ CASES = (
          "aim": {"azimuth": 202.5, "altitude": 55},
          "lens": "normal", "image": {"width": 1024, "height": 683},
          "bortle": 4},
+        # sky-brightness gradient: every ctx x every direction
+        {"id": "brightness-grid", "type": "brightness",
+         "points": BGRID, "ctxs": BCTXS},
+        # skyline interpolation: unsorted profile, wrap-around across 360/0,
+        # on-node queries, and out-of-range azimuths
+        {"id": "horizon-interp", "type": "horizon", "profile": SKYLINE,
+         "queries": [0.0, 5.0, 10.0, 20.0, 55.0, 90.0, 145.25, 200.5, 235.0,
+                     270.0, 310.0, 350.0, 355.0, 359.9, 720.5, -30.0]},
+        # the Tampa aimed-at-Sun case with a skyline that occludes the Sun
+        # (alt 10.5 at az 290.7, below the 14-deg wall) but not Jupiter
+        # (alt 33.6 at az 280.0)
+        {"id": "bodies-tampa-skyline", "type": "bodies",
+         "jd": [1990, 6, 10, 23, 30, 0],
+         "observer": {"lat": 27.95, "lon_east": -82.46, "alt_m": 3},
+         "aim": {"azimuth": "WNW", "altitude": 15},
+         "lens": "wide", "image": {"width": 1024, "height": 683},
+         "horizon_profile": [
+             {"azDeg": 0.0, "altDeg": 2.0}, {"azDeg": 250.0, "altDeg": 3.0},
+             {"azDeg": 280.5, "altDeg": 14.0}, {"azDeg": 300.0, "altDeg": 14.0},
+             {"azDeg": 320.0, "altDeg": 3.0}]},
     ]
 )
 
@@ -125,6 +177,12 @@ def compute(spec, eng):
         return rows
     if t == "extinction":
         return [SV.extinction_mag(alt) for alt in spec["alts"]]
+    if t == "brightness":
+        return [[SV.sky_brightness(alt, az, ctx) for alt, az in spec["points"]]
+                for ctx in spec["ctxs"]]
+    if t == "horizon":
+        return [SV.horizon_alt_at(spec["profile"], az)
+                for az in spec["queries"]]
     if t == "bodies":
         j = julian_day(*spec["jd"])
         view = {
@@ -133,7 +191,8 @@ def compute(spec, eng):
             "lens": spec["lens"],
             "image": spec["image"],
         }
-        return SV.sky_bodies(eng, j, view, bortle=spec.get("bortle"))
+        return SV.sky_bodies(eng, j, view, bortle=spec.get("bortle"),
+                             horizon_profile=spec.get("horizon_profile"))
     raise ValueError(t)
 
 

@@ -710,12 +710,18 @@ export const skyViewOut = z.object({
     twilight: z.enum(["day", "civil", "nautical", "astronomical", "night"]),
     sunAltitudeDeg: z.number(), sunAzimuthDeg: z.number(), limitingMag: z.number(),
     moonAltitudeDeg: z.number().nullable(), moonIllum: z.number().nullable(),
-    brightestAzimuthDeg: z.number().nullable(), horizonY: z.number().nullable(),
+    brightestAzimuthDeg: z.number().nullable(),
+    zenithBrightness: z.number(), horizonBrightness: z.number(),
+    horizonY: z.number().nullable(),
   }),
   bodies: z.array(skyViewBodyOut),
   offFrame: z.array(z.object({
     id: z.string(), name: z.string(), side: z.string(), deltaDeg: z.number(),
     azimuthDeg: z.number(), altitudeDeg: z.number(), magnitude: z.number().nullable(),
+  })),
+  occluded: z.array(z.object({
+    id: z.string(), name: z.string(), azimuthDeg: z.number(),
+    altitudeDeg: z.number(), skylineAltDeg: z.number(),
   })),
   milkyWay: z.object({
     visible: z.boolean(),

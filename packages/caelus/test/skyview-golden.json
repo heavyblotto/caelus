@@ -1282,6 +1282,288 @@
     ],
     "off_frame": []
    }
+  },
+  {
+   "id": "brightness-grid",
+   "spec": {
+    "id": "brightness-grid",
+    "type": "brightness",
+    "points": [
+     [
+      90.0,
+      0.0
+     ],
+     [
+      45.0,
+      180.0
+     ],
+     [
+      20.0,
+      180.0
+     ],
+     [
+      10.0,
+      90.0
+     ],
+     [
+      5.0,
+      315.0
+     ],
+     [
+      0.0,
+      270.0
+     ]
+    ],
+    "ctxs": [
+     {
+      "sunAltDeg": -30.0,
+      "sunAzDeg": 0.0,
+      "moonAltDeg": -10.0,
+      "moonAzDeg": 0.0,
+      "moonIllum": 0.0,
+      "bortle": 1
+     },
+     {
+      "sunAltDeg": -25.0,
+      "sunAzDeg": 10.0,
+      "moonAltDeg": 40.0,
+      "moonAzDeg": 180.0,
+      "moonIllum": 1.0,
+      "bortle": 1
+     },
+     {
+      "sunAltDeg": -15.0,
+      "sunAzDeg": 290.0,
+      "moonAltDeg": 20.0,
+      "moonAzDeg": 120.0,
+      "moonIllum": 0.5,
+      "bortle": 4
+     },
+     {
+      "sunAltDeg": -9.0,
+      "sunAzDeg": 300.0,
+      "moonAltDeg": 60.0,
+      "moonAzDeg": 90.0,
+      "moonIllum": 0.25,
+      "bortle": 9
+     },
+     {
+      "sunAltDeg": -4.0,
+      "sunAzDeg": 270.0,
+      "moonAltDeg": -5.0,
+      "moonAzDeg": 80.0,
+      "moonIllum": 0.9
+     },
+     {
+      "sunAltDeg": 30.0,
+      "sunAzDeg": 180.0,
+      "moonAltDeg": 25.0,
+      "moonAzDeg": 300.0,
+      "moonIllum": 0.1,
+      "bortle": 6
+     }
+    ]
+   },
+   "result": [
+    [
+     21.9,
+     21.895529798173328,
+     21.87938064099352,
+     21.850313277075774,
+     21.799177789399124,
+     21.5
+    ],
+    [
+     19.123109435312905,
+     17.589902433866946,
+     17.98033121118689,
+     20.266877775558036,
+     21.127500780901606,
+     20.34895564504406
+    ],
+    [
+     19.31420015631857,
+     19.159808602466455,
+     19.170023912090365,
+     18.749954894510303,
+     19.522159983267716,
+     19.425947652896316
+    ],
+    [
+     15.237586556232207,
+     15.245850543581458,
+     15.247507015320478,
+     15.23945495775748,
+     15.239202014900696,
+     15.193449392457017
+    ],
+    [
+     11.232797597739152,
+     11.232795388004757,
+     11.232787328871805,
+     11.232772517618702,
+     11.232745480031891,
+     11.232559044873643
+    ],
+    [
+     3.999999270561343,
+     3.99999929523777,
+     3.99999929213318,
+     3.9999992794252366,
+     3.999999051964873,
+     3.9999988910553923
+    ]
+   ]
+  },
+  {
+   "id": "horizon-interp",
+   "spec": {
+    "id": "horizon-interp",
+    "type": "horizon",
+    "profile": [
+     {
+      "azDeg": 270.0,
+      "altDeg": 25.0
+     },
+     {
+      "azDeg": 20.0,
+      "altDeg": 2.0
+     },
+     {
+      "azDeg": 350.0,
+      "altDeg": 12.0
+     },
+     {
+      "azDeg": 90.0,
+      "altDeg": 0.0
+     },
+     {
+      "azDeg": 200.5,
+      "altDeg": 6.0
+     }
+    ],
+    "queries": [
+     0.0,
+     5.0,
+     10.0,
+     20.0,
+     55.0,
+     90.0,
+     145.25,
+     200.5,
+     235.0,
+     270.0,
+     310.0,
+     350.0,
+     355.0,
+     359.9,
+     720.5,
+     -30.0
+    ]
+   },
+   "result": [
+    8.666666666666668,
+    7.0,
+    5.333333333333334,
+    2.0,
+    1.0,
+    0.0,
+    3.0,
+    6.0,
+    15.431654676258994,
+    25.0,
+    18.5,
+    12.0,
+    10.333333333333334,
+    8.700000000000008,
+    8.5,
+    15.25
+   ]
+  },
+  {
+   "id": "bodies-tampa-skyline",
+   "spec": {
+    "id": "bodies-tampa-skyline",
+    "type": "bodies",
+    "jd": [
+     1990,
+     6,
+     10,
+     23,
+     30,
+     0
+    ],
+    "observer": {
+     "lat": 27.95,
+     "lon_east": -82.46,
+     "alt_m": 3
+    },
+    "aim": {
+     "azimuth": "WNW",
+     "altitude": 15
+    },
+    "lens": "wide",
+    "image": {
+     "width": 1024,
+     "height": 683
+    },
+    "horizon_profile": [
+     {
+      "azDeg": 0.0,
+      "altDeg": 2.0
+     },
+     {
+      "azDeg": 250.0,
+      "altDeg": 3.0
+     },
+     {
+      "azDeg": 280.5,
+      "altDeg": 14.0
+     },
+     {
+      "azDeg": 300.0,
+      "altDeg": 14.0
+     },
+     {
+      "azDeg": 320.0,
+      "altDeg": 3.0
+     }
+    ]
+   },
+   "result": {
+    "summary": {
+     "twilight": "day",
+     "limiting_mag": -4.0,
+     "sun_alt_true": 10.4,
+     "moon_alt_true": -36.9,
+     "moon_illum": 0.941,
+     "moon_waxing": false
+    },
+    "bodies": [
+     {
+      "id": "jupiter",
+      "azimuth_deg": 280.0,
+      "altitude_deg": 33.6,
+      "x": 380,
+      "y": 104,
+      "in_frame": true,
+      "size_px": 1,
+      "angular_diameter_deg": 0.0088,
+      "magnitude": -1.87,
+      "extinction_mag": 0.36,
+      "naked_eye": false
+     }
+    ],
+    "off_frame": [],
+    "occluded": [
+     {
+      "id": "sun",
+      "azimuth_deg": 290.7,
+      "altitude_deg": 10.5,
+      "skyline_alt_deg": 14.0
+     }
+    ]
+   }
   }
  ]
 }

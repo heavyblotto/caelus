@@ -43,7 +43,9 @@ skyView(engine, jdUt, view, opts?)
     field of view derives from it.
 - `opts`: `pressure`, `tempC` (refraction), `refraction` (default true),
   `bortle` (dark-sky class 1-9), `deepField`, `overlays` (ecliptic, signs,
-  houses, constellations), `maxStarMag`, `maxStars`, `includeStars`, `bodies`.
+  houses, constellations), `maxStarMag`, `maxStars`, `includeStars`, `bodies`,
+  `horizonProfile` (skyline altitude per azimuth), `promptStyle` (prompt
+  template).
 
 ### Lens presets
 
@@ -117,6 +119,53 @@ value at the center azimuth and is approximate.
   if it is up, else null.
 - Per low body, refraction lifts the apparent altitude (Saemundsson), and the
   result notes near-horizon reddening so the model dims and warms it.
+- `zenithBrightness` and `horizonBrightness`: the approximate V-band sky
+  surface brightness (mag/arcsec², smaller is brighter) at the zenith and at
+  the horizon under the aim azimuth, from `skyBrightness` (below).
+
+### Sky brightness
+
+`skyBrightness(altDeg, azDeg, ctx)` gives an approximate V-band sky surface
+brightness in mag/arcsec² for any direction: a render cue for the sky
+gradient, not precision photometry. Three sourced terms compose in linear
+flux space (mag → flux, add, back to mag), so they combine physically:
+
+- The site's moonless zenith sky by Bortle class, 21.9 mag/arcsec² at class 1
+  down to 17.5 at class 9 (Bortle 2001, Sky & Telescope; cf. Crumey 2014,
+  MNRAS 442, 2600), brightened toward the horizon by up to 0.4 mag of airglow
+  (van Rhijn layer geometry; Garstang 1989, PASP 101, 306; Roach & Gordon
+  1973), scaled by the Kasten & Young airmass excess. Omitting `bortle` means
+  class 6, consistent with the suburban `limitingMag` default.
+- Twilight from the Sun's altitude: a piecewise-linear ramp over the measured
+  twilight decay (Patat, Ugolnikov & Postylyakov 2006, A&A 455, 385) — dark
+  at -18°, ~+4 mag at -12°, ~+9 at -6°, ~+14 at sunrise, saturating at the
+  clear daytime zenith of about 4 mag/arcsec². The ramp is treated as
+  direction-independent; the azimuthal afterglow gradient stays a prose cue
+  via `brightestAzimuth`.
+- Moonlight, when the Moon is up: a Krisciunas & Schaefer-inspired term
+  (PASP 103, 1033, 1991) falling off 0.04 mag per degree of angular distance
+  from the Moon (their scattering wing, softened toward the measured
+  large-angle brightening), scaling linearly with illuminated fraction and
+  dimmed by the extra airmass along the Moon's own path. The anchors
+  reproduce the model's full-Moon predictions at a dark site: sky ~17.5
+  near the Moon, ~1.5 mag of brightening 90° away.
+
+The Python reference (`astroengine.skyview.sky_brightness`) mirrors the math
+exactly, and the skyview-golden suite pins the two.
+
+## Observer obstruction profile
+
+Real observers rarely see the astronomical horizon: buildings, trees, and
+ridgelines raise the effective skyline. The `horizonProfile` option takes
+skyline samples `[{ azDeg, altDeg }, ...]` (unsorted input is fine) and
+`horizonAltAt(profile, azDeg)` interpolates them piecewise-linearly on the
+circle, wrapping across 360/0. A body whose apparent altitude clears the
+astronomical horizon but not the skyline at its azimuth is excluded from
+`bodies` and recorded in the result's `occluded` array (`{ id, name,
+azimuthDeg, altitudeDeg, skylineAltDeg }`), so nothing disappears silently;
+the Sun's on-the-horizon grace band is subject to the skyline like everything
+else. Stars below the skyline are dropped without an entry. Without a profile
+`occluded` is empty and the output is unchanged.
 
 ## Dark sky, star fields, and the Milky Way
 
@@ -166,7 +215,8 @@ hint. This holds even when the Sun is below the horizon or behind the camera.
   "image": { "width": 1024, "height": 683 },
   "sky": { "twilight": "civil", "sunAltitudeDeg": -3.2, "sunAzimuthDeg": 290,
            "limitingMag": 3.0, "moonAltitudeDeg": 22, "moonIllum": 0.47,
-           "brightestAzimuthDeg": 290, "horizonY": 540 },
+           "brightestAzimuthDeg": 290, "zenithBrightness": 11.6,
+           "horizonBrightness": 11.5, "horizonY": 540 },
   "bodies": [
     { "id": "sun", "name": "Sun", "x": 512, "y": 545, "sizePx": 12,
       "magnitude": -26.7, "altitudeDeg": -0.3, "nakedEye": true,
@@ -183,10 +233,22 @@ hint. This holds even when the Sun is below the horizon or behind the camera.
 
 `bodies` holds what is above the horizon and inside the frame. `offFrame` lists
 bright bodies above the horizon but outside the frame, so the model knows what
-not to invent inside it. `directives` and `prompt` serialize the facts into
-imperative instructions, including the constraint that the model may set colors
-and atmosphere but may not move, resize, or recolor placed bodies for
-composition.
+not to invent inside it. `occluded` lists bodies hidden by the observer's
+skyline (see the obstruction profile above); it is empty without one.
+`directives` and `prompt` serialize the facts into imperative instructions,
+including the constraint that the model may set colors and atmosphere but may
+not move, resize, or recolor placed bodies for composition.
+
+### Prompt styles
+
+The `promptStyle` option picks a prompt template from the exported
+`PROMPT_STYLES` registry: `default` (the original wording), `photoreal`
+(camera and exposure vocabulary — natural exposure, highlight roll-off, soft
+bloom, sensor grain), or `illustration` (a flat-colour scene — clean
+gradients, crisp edges, no photographic artefacts). A style changes only the
+prompt and render-plan prose; every computed number (pixels, sizes,
+magnitudes, brightness) is identical across styles, and the pixel placements
+stay binding in every template. An unknown style throws.
 
 ## Reference-frame overlays
 
@@ -248,12 +310,15 @@ play/scrub control that steps time live.
 ## Scope
 
 Built (this module): viewport and projection, culling, pixel placement and
-size, magnitude with a brightness-prominence cue, Moon phase orientation,
-horizon line, twilight and limiting magnitude, Bortle dark-sky class, background
-star-field directives, the Milky Way band, the deep complete star field,
-reference-frame overlays (ecliptic, signs, houses, constellations), the
-celestial pole, time sequences for animation, the hybrid render plan (body-free
-plate plus composited layers), JSON result and prompt serializer.
+size, magnitude with a brightness-prominence cue, atmospheric extinction, Moon
+phase orientation, horizon line, twilight and limiting magnitude, Bortle
+dark-sky class, the sky-brightness gradient (`skyBrightness`), the observer
+obstruction profile (`horizonProfile`, `occluded`), background star-field
+directives, the Milky Way band, the deep complete star field, reference-frame
+overlays (ecliptic, signs, houses, constellations), the celestial pole, time
+sequences for animation, the hybrid render plan (body-free plate plus
+composited layers), JSON result and prompt serializer with per-image-model
+templates (`promptStyle`).
 The single frame is exposed through the `sky_view` MCP tool (with `deep_field`)
 and the web playground's Sky View tab (with a play/scrub time control);
 sequences through the `sky_view_sequence` MCP tool and the `skyViewSequence`
@@ -268,10 +333,10 @@ default photometry for SkyView and land on each `SkyBody` and in the serialized
 prompt, so `skyViewSequence` keeps fictional bodies visually consistent across
 frames. See [Synthetic ephemeris](/docs/synthetic).
 
-Later: a sky-brightness gradient color model, atmospheric extinction near the
-horizon, an observer obstruction profile (skyline altitude per azimuth), and
-per-image-model prompt templates. (Constellation line data shipped as
-`data/constellations.json`.)
+Later: nothing queued. The earlier backlog — the sky-brightness gradient,
+extinction near the horizon, the observer obstruction profile, and
+per-image-model prompt templates — is built and documented above. (Constellation
+line data shipped as `data/constellations.json`.)
 
 Division of labor: Caelus owns geometry and photometry. The image model owns
 color, light, and mood, guided by the directives.

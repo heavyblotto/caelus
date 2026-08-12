@@ -13,7 +13,7 @@ import { DEG, mod, J2000, jdTT, precessEcliptic } from "./core.js";
 import { Engine, BodyId, Observer, SIGNS, HouseSystem } from "./chart.js";
 import { starApparent } from "./stars.js";
 import {
-  azAlt, pheno, refractTrueToApparent, extinctionMag, DIAMETER_KM,
+  azAlt, pheno, refractTrueToApparent, extinctionMag, airmass, DIAMETER_KM,
 } from "./pheno.js";
 import type { SyntheticRender } from "./synthetic.js";
 
@@ -359,6 +359,143 @@ const BORTLE_LIMIT: Record<number, number> = {
   1: 7.6, 2: 7.4, 3: 7.0, 4: 6.5, 5: 6.0, 6: 5.5, 7: 5.0, 8: 4.5, 9: 4.0,
 };
 
+// ------------------------------------------------------------ sky brightness
+
+/** Sun and Moon state feeding {@link skyBrightness}. */
+export interface SkyBrightnessCtx {
+  sunAltDeg: number;
+  sunAzDeg: number;
+  moonAltDeg: number;
+  moonAzDeg: number;
+  /** Illuminated fraction, 0..1. */
+  moonIllum: number;
+  /** Bortle dark-sky class 1-9; omitted means class 6 (bright suburban). */
+  bortle?: number;
+}
+
+/** Zenith V-band brightness of the moonless night sky by Bortle class,
+ *  mag/arcsec^2 (Bortle 2001, Sky & Telescope Feb 2001, "Introducing the
+ *  Bortle Dark-Sky Scale", via the standard NELM-to-surface-brightness
+ *  mapping, cf. Crumey 2014 MNRAS 442, 2600: class 1 ~21.9 down to class 9
+ *  ~17.5). Class 6 is the default when no class is given, consistent with
+ *  the suburban default in {@link limitingMag}. */
+const BORTLE_ZENITH_MAG: Record<number, number> = {
+  1: 21.9, 2: 21.7, 3: 21.5, 4: 21.0, 5: 20.5, 6: 19.5, 7: 18.5, 8: 18.0, 9: 17.5,
+};
+
+/** The pristine night zenith the twilight ramp brightens relative to,
+ *  mag/arcsec^2 (the Bortle 1 zenith: the natural moonless sky). */
+const DARK_REF_MAG = 21.9;
+
+/** Twilight zenith brightening vs Sun altitude, as [sunAltDeg, mag brighter
+ *  than {@link DARK_REF_MAG}] anchor points, linearly interpolated and
+ *  clamped. The shape follows the measured twilight decay (Patat, Ugolnikov
+ *  & Postylyakov 2006, A&A 455, 385: zenith V brightness falls roughly
+ *  linearly in magnitudes with solar depression through twilight, ~1 mag
+ *  per degree between -6 and -12): dark at -18, ~+4 mag at -12, ~+9 at -6,
+ *  ~+14 at sunrise, saturating at the clear daytime zenith of about
+ *  4 mag/arcsec^2 once the Sun is well up. */
+const TWILIGHT_RAMP: Array<[number, number]> = [
+  [-18, 0], [-12, 4], [-6, 9], [0, 14], [8, DARK_REF_MAG - 4.0],
+];
+
+/** Airglow horizon brightening at a dark site: the moonless sky is ~0.4
+ *  mag/arcsec^2 brighter at the horizon than the zenith (van Rhijn layer
+ *  geometry; Garstang 1989 PASP 101, 306; Roach & Gordon 1973, The Light of
+ *  the Night Sky). Scaled by the airmass excess and capped at the horizon
+ *  value. */
+const AIRGLOW_HORIZON_MAG = 0.4;
+
+const magToFlux = (m: number): number => Math.pow(10, -0.4 * m);
+const fluxToMag = (f: number): number => -2.5 * Math.log10(f);
+
+function twilightRampAt(sunAltDeg: number): number {
+  const pts = TWILIGHT_RAMP;
+  if (sunAltDeg <= pts[0][0]) return pts[0][1];
+  const last = pts[pts.length - 1];
+  if (sunAltDeg >= last[0]) return last[1];
+  for (let i = 1; i < pts.length; i++) {
+    if (sunAltDeg <= pts[i][0]) {
+      const [a0, m0] = pts[i - 1];
+      const [a1, m1] = pts[i];
+      return m0 + ((sunAltDeg - a0) / (a1 - a0)) * (m1 - m0);
+    }
+  }
+  return last[1];
+}
+
+/**
+ * Approximate V-band sky surface brightness (mag/arcsec^2) of the sky at a
+ * direction: a render cue for the sky gradient, not precision photometry.
+ * Composes, in linear flux space, (a) the site's moonless zenith sky by
+ * Bortle class ({@link BORTLE_ZENITH_MAG}), brightened toward the horizon by
+ * the airglow term ({@link AIRGLOW_HORIZON_MAG}, scaled by the Kasten &
+ * Young airmass excess); (b) twilight from the Sun's altitude
+ * ({@link TWILIGHT_RAMP}, treated as direction-independent -- the azimuthal
+ * afterglow gradient stays a prose cue via `brightestAzimuth`); and (c) a
+ * Krisciunas & Schaefer-inspired moonlight term (PASP 103, 1033, 1991):
+ * scattered moonlight falling off ~0.04 mag per degree of angular distance
+ * from the Moon (their 10^(-rho/40) scattering wing, softened toward the
+ * measured large-angle brightening), scaling linearly with illuminated
+ * fraction and dimmed by the extra airmass along the Moon's own path. The
+ * anchors reproduce the model's full-Moon predictions at a dark site: sky
+ * ~17.5 near the Moon, ~1.5 mag of brightening 90 deg away. Typical checks:
+ * Bortle 1 night zenith 21.9, its horizon 21.5, clear daytime ~4.0.
+ */
+export function skyBrightness(altDeg: number, azDeg: number, ctx: SkyBrightnessCtx): number {
+  const zenithMag = ctx.bortle !== undefined
+    ? (BORTLE_ZENITH_MAG[Math.round(ctx.bortle)] ?? BORTLE_ZENITH_MAG[6])
+    : BORTLE_ZENITH_MAG[6];
+  // (a) site sky, brightened toward the horizon by airglow (the Kasten &
+  // Young fit dips a hair under 1 at the zenith itself, hence the 0 floor)
+  const horizFrac = Math.min(1, Math.max(0, (airmass(altDeg) - 1) / (airmass(0) - 1)));
+  let flux = magToFlux(zenithMag - AIRGLOW_HORIZON_MAG * horizFrac);
+  // (b) twilight from the Sun's altitude
+  const ramp = twilightRampAt(ctx.sunAltDeg);
+  if (ramp > 0) flux += magToFlux(DARK_REF_MAG - ramp);
+  // (c) moonlight, falling off with angular distance from the Moon
+  if (ctx.moonAltDeg > 0 && ctx.moonIllum > 0) {
+    const sep = Math.acos(clamp1(dot(
+      dirFromAzAlt(azDeg, altDeg), dirFromAzAlt(ctx.moonAzDeg, ctx.moonAltDeg),
+    ))) / DEG;
+    const s = Math.max(sep, 10); // inside ~10 deg is the Moon's own glare
+    const moonMag = 17.5 + 0.04 * (s - 10) - 2.5 * Math.log10(ctx.moonIllum)
+      + 0.2 * (airmass(ctx.moonAltDeg) - 1);
+    flux += magToFlux(moonMag);
+  }
+  return fluxToMag(flux);
+}
+
+// ------------------------------------------------------- obstruction profile
+
+/** One skyline sample: the obstruction altitude at an azimuth. */
+export interface HorizonPoint {
+  azDeg: number;
+  altDeg: number;
+}
+
+/**
+ * Skyline altitude at an azimuth from an observer obstruction profile:
+ * piecewise-linear interpolation on the circle. The profile need not be
+ * sorted; azimuths are normalized to [0, 360) and the interpolation wraps
+ * across 360/0. An empty profile is the astronomical horizon (0 deg).
+ */
+export function horizonAltAt(profile: readonly HorizonPoint[], azDeg: number): number {
+  if (profile.length === 0) return 0;
+  const pts = profile
+    .map((p) => ({ az: mod(p.azDeg, 360), alt: p.altDeg }))
+    .sort((a, b) => a.az - b.az);
+  if (pts.length === 1) return pts[0].alt;
+  const az = mod(azDeg, 360);
+  let i = 0;
+  while (i < pts.length && pts[i].az <= az) i++;
+  const a = pts[(i - 1 + pts.length) % pts.length];
+  const b = pts[i % pts.length];
+  const span = mod(b.az - a.az, 360);
+  if (span === 0) return a.alt; // coincident azimuths: take the first
+  return a.alt + (mod(az - a.az, 360) / span) * (b.alt - a.alt);
+}
+
 /** The background star-field instruction, adapting to sky darkness. In a dark
  *  sky it tells the model to fill a dense field; in twilight or city sky it
  *  keeps the field sparse. The listed stars are always pinned regardless. */
@@ -429,6 +566,17 @@ export interface SkyViewOptions {
   /** Reference-frame overlays to project onto the sky (annotations, not part of
    *  a photoreal render). */
   overlays?: SkyViewOverlaysRequest;
+  /** Observer obstruction profile: the skyline altitude per azimuth
+   *  (buildings, trees, ridgelines). Piecewise-linear on the circle via
+   *  {@link horizonAltAt}; input may be unsorted. A body above the
+   *  astronomical horizon but below the skyline at its azimuth is excluded
+   *  from `bodies` and recorded in `occluded`; stars below the skyline are
+   *  dropped silently. */
+  horizonProfile?: Array<{ azDeg: number; altDeg: number }>;
+  /** Prompt template: a {@link PROMPT_STYLES} key. Only the prompt and
+   *  render-plan prose change with the style; every computed number is
+   *  identical. Defaults to "default" (the original wording). */
+  promptStyle?: keyof typeof PROMPT_STYLES;
   /** Bodies to place. Defaults to Sun, Moon, and the naked-eye planets. Any
    *  string id works for runtime bodies registered via {@link Engine.registerSource}. */
   bodies?: readonly string[];
@@ -488,8 +636,24 @@ export interface SkySummary {
   moonIllum: number | null;
   /** Azimuth of the brightest part of the sky (afterglow, then Moon), or null. */
   brightestAzimuthDeg: number | null;
+  /** Approximate V-band sky surface brightness at the zenith and at the
+   *  horizon under the aim azimuth, mag/arcsec^2 (smaller is brighter; from
+   *  {@link skyBrightness}, a render cue rather than precision photometry). */
+  zenithBrightness: number;
+  horizonBrightness: number;
   /** Pixel row of the true horizon, or null when it is behind the camera. */
   horizonY: number | null;
+}
+
+/** A body hidden by the observer's obstruction profile: above the
+ *  astronomical horizon, below the skyline at its azimuth. */
+export interface SkyOccludedBody {
+  id: string;
+  name: string;
+  azimuthDeg: number;
+  altitudeDeg: number;
+  /** The skyline altitude at the body's azimuth. */
+  skylineAltDeg: number;
 }
 
 /** The Milky Way band's appearance in the frame. Visible only in a dark sky
@@ -628,6 +792,8 @@ export interface SkyViewResult {
   sky: SkySummary;
   bodies: SkyBody[];
   offFrame: SkyOffFrameBody[];
+  /** Bodies hidden by the `horizonProfile` skyline (empty without one). */
+  occluded: SkyOccludedBody[];
   milkyWay: MilkyWay;
   pole: CelestialPole;
   starfield: StarfieldSummary;
@@ -636,6 +802,48 @@ export interface SkyViewResult {
   directives: string[];
   prompt: string;
 }
+
+// ---------------------------------------------------------------- prompt styles
+
+/** One prompt template: the prose framing around the computed facts. */
+export interface PromptStyle {
+  /** First line of the serialized prompt. */
+  header: string;
+  /** Extra style directive appended to the SCENE block ("" for none). */
+  sceneClause: string;
+  /** First line of the render plan's body-free background-plate prompt. */
+  plateHeader: string;
+}
+
+/** Per-image-model prompt templates. A style changes only the prompt and
+ *  render-plan prose; every computed number (pixels, sizes, magnitudes,
+ *  brightness) is identical across styles. `default` is the original
+ *  wording, byte-identical to the pre-template output; `photoreal` speaks
+ *  camera and exposure vocabulary for photographic models; `illustration`
+ *  asks for a flat-colour scene while keeping the placements binding. */
+export const PROMPT_STYLES = {
+  default: {
+    header: "PHOTOREALISTIC SKY, exact placement (pixel origin top-left):",
+    sceneClause: "",
+    plateHeader: "PHOTOREALISTIC SKY PLATE (atmosphere and horizon only, no celestial bodies):",
+  },
+  photoreal: {
+    header: "PHOTOREALISTIC SKY PHOTOGRAPH, exact placement (pixel origin top-left):",
+    sceneClause: "Render as a real photograph from a tripod-mounted full-frame camera: natural "
+      + "exposure for the stated sky, gentle highlight roll-off, soft bloom on the brightest "
+      + "bodies, faint sensor grain in the shadows; no painterly or stylized effects.",
+    plateHeader: "PHOTOREALISTIC SKY PLATE, shot on a full-frame camera (atmosphere and horizon "
+      + "only, no celestial bodies):",
+  },
+  illustration: {
+    header: "ILLUSTRATED SKY, exact placement (pixel origin top-left):",
+    sceneClause: "Render as a flat-colour illustration: clean gradient sky, simple shapes, crisp "
+      + "edges, no photographic grain, glare, or lens artefacts. The listed pixel positions and "
+      + "sizes still bind exactly.",
+    plateHeader: "ILLUSTRATED SKY PLATE, flat colour (atmosphere and horizon only, no celestial "
+      + "bodies):",
+  },
+} satisfies Record<string, PromptStyle>;
 
 // ------------------------------------------------------------------- main entry
 
@@ -680,6 +888,12 @@ export function skyView(
   const pressure = opts.pressure ?? 1013.25;
   const tempC = opts.tempC ?? 15.0;
   const refract = opts.refraction ?? true;
+  const styleName = opts.promptStyle ?? "default";
+  const style: PromptStyle | undefined = (PROMPT_STYLES as Record<string, PromptStyle>)[styleName];
+  if (!style) {
+    throw new Error(`unknown promptStyle '${styleName}' (styles: ${Object.keys(PROMPT_STYLES).join(", ")})`);
+  }
+  const profile = opts.horizonProfile;
 
   // Camera basis from the aim. `right` is horizontal (no roll); near the zenith
   // the up reference falls back to north.
@@ -723,6 +937,7 @@ export function skyView(
 
   const bodies: SkyBody[] = [];
   const offFrame: SkyOffFrameBody[] = [];
+  const occluded: SkyOccludedBody[] = [];
 
   const bodyIds: readonly string[] = opts.bodies ?? [
     "sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn",
@@ -741,6 +956,21 @@ export function skyView(
     // every other body must be above the horizon to appear.
     const visible = id === "sun" ? p.altApp > -1.0 : p.altApp > 0;
     if (!visible) continue;
+
+    // The obstruction profile hides what clears the astronomical horizon but
+    // not the skyline (the Sun's grace band above is subject to it too).
+    if (profile) {
+      const skyline = horizonAltAt(profile, az);
+      if (p.altApp < skyline) {
+        occluded.push({
+          id, name: displayName(id),
+          azimuthDeg: Math.round(az * 10) / 10,
+          altitudeDeg: Math.round(p.altApp * 10) / 10,
+          skylineAltDeg: Math.round(skyline * 10) / 10,
+        });
+        continue;
+      }
+    }
 
     let magnitude: number | null = null;
     let extinction: number | null = null;
@@ -834,6 +1064,7 @@ export function skyView(
       const [az, altTrue] = azAlt(engine.data, lonR / DEG, latR / DEG, jdUt, lat, lonEast);
       const p = place(az, altTrue);
       if (p.altApp <= 0 || !p.inFrame) continue;
+      if (profile && p.altApp < horizonAltAt(profile, az)) continue;
       found.push(toStarBody(name, s.mag, az, p));
     }
     found.sort((a, b) => (a.magnitude ?? 99) - (b.magnitude ?? 99));
@@ -848,6 +1079,7 @@ export function skyView(
       const [az, altTrue] = azAlt(engine.data, s.lon, s.lat, jdUt, lat, lonEast);
       const p = place(az, altTrue);
       if (p.altApp <= 0 || !p.inFrame) continue;
+      if (profile && p.altApp < horizonAltAt(profile, az)) continue;
       found.push(toStarBody(name, s.mag, az, p));
     }
     found.sort((a, b) => (a.magnitude ?? 99) - (b.magnitude ?? 99));
@@ -1016,6 +1248,10 @@ export function skyView(
     }
   }
 
+  const bctx: SkyBrightnessCtx = {
+    sunAltDeg: sunAltTrue, sunAzDeg: sunAz,
+    moonAltDeg: moonAltTrue, moonAzDeg: moonAz, moonIllum, bortle,
+  };
   const sky: SkySummary = {
     twilight: stage,
     sunAltitudeDeg: Math.round(sunAltTrue * 10) / 10,
@@ -1024,12 +1260,14 @@ export function skyView(
     moonAltitudeDeg: Math.round(moonAltTrue * 10) / 10,
     moonIllum: Math.round(moonIllum * 1000) / 1000,
     brightestAzimuthDeg: brightestAz === null ? null : Math.round(brightestAz * 10) / 10,
+    zenithBrightness: Math.round(skyBrightness(90, aimAz, bctx) * 10) / 10,
+    horizonBrightness: Math.round(skyBrightness(0, aimAz, bctx) * 10) / 10,
     horizonY,
   };
 
   const directives = buildDirectives(lens, sky, milkyWay, fieldClause, overlays, width, height, aimAz, aimAlt);
-  const prompt = buildPrompt(bodies, offFrame, directives, starfield);
-  const renderPlan = buildRenderPlan(sky, bodies, starfield, milkyWay, overlays, pole, directives, width, height);
+  const prompt = buildPrompt(bodies, offFrame, directives, starfield, style);
+  const renderPlan = buildRenderPlan(sky, bodies, starfield, milkyWay, overlays, pole, directives, width, height, style);
 
   return {
     instant: { jdUt, utc: jdToUtcIso(jdUt) },
@@ -1040,6 +1278,7 @@ export function skyView(
     sky,
     bodies,
     offFrame,
+    occluded,
     milkyWay,
     pole,
     starfield,
@@ -1230,13 +1469,14 @@ const ANCHOR_MAG = 2.5; // stars brighter than this are listed individually
 
 function buildPrompt(
   bodies: SkyBody[], offFrame: SkyOffFrameBody[], directives: string[],
-  starfield: StarfieldSummary,
+  starfield: StarfieldSummary, style: PromptStyle,
 ): string {
   const lines: string[] = [];
-  lines.push("PHOTOREALISTIC SKY, exact placement (pixel origin top-left):");
+  lines.push(style.header);
   lines.push("");
   lines.push("SCENE:");
   for (const d of directives) lines.push(`- ${d}`);
+  if (style.sceneClause) lines.push(`- ${style.sceneClause}`);
   lines.push("");
   lines.push("BODIES (render EVERY one at its given pixel; do not relocate, rescale, or omit any):");
   if (bodies.length === 0) lines.push("- none in frame");
@@ -1293,10 +1533,10 @@ function buildPrompt(
 /** The body-free background plate prompt: the scene directives (camera, horizon,
  *  sky color) with every body, star, Milky Way, and overlay directive removed,
  *  and a hard no-bodies instruction added. The plate is pure atmosphere. */
-function buildBackgroundPrompt(directives: string[]): string {
+function buildBackgroundPrompt(directives: string[], style: PromptStyle): string {
   const drop = ["Naked-eye limit", "The Milky Way", "OVERLAY", "You set color"];
   const scene = directives.filter((d) => !drop.some((p) => d.startsWith(p)));
-  const lines = ["PHOTOREALISTIC SKY PLATE (atmosphere and horizon only, no celestial bodies):", ""];
+  const lines = [style.plateHeader, ""];
   for (const d of scene) lines.push(`- ${d}`);
   lines.push(
     "- Render ONLY the sky gradient, clouds, atmosphere, and any horizon or foreground. "
@@ -1312,7 +1552,7 @@ function buildBackgroundPrompt(directives: string[]): string {
 function buildRenderPlan(
   sky: SkySummary, bodies: SkyBody[], starfield: StarfieldSummary, milkyWay: MilkyWay,
   overlays: SkyViewOverlays | null, pole: CelestialPole, directives: string[],
-  width: number, height: number,
+  width: number, height: number, style: PromptStyle,
 ): RenderPlan {
   const planetCount = bodies.filter((b) => !b.id.startsWith("star:")).length;
   const starCount = bodies.length - planetCount;
@@ -1349,7 +1589,7 @@ function buildRenderPlan(
 
   return {
     background: {
-      prompt: buildBackgroundPrompt(directives),
+      prompt: buildBackgroundPrompt(directives, style),
       width,
       height,
       constraints: [

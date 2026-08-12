@@ -16,7 +16,8 @@ import { loadNodeData } from "../src/node-loader.js";
 import { extinctionMag } from "../src/pheno.js";
 import {
   resolveLens, skyPlacer, twilightStage, limitingMag, skyView,
-  SkyLens, SkyPlacement, SkyBody, SkyOffFrameBody,
+  skyBrightness, horizonAltAt,
+  SkyLens, SkyPlacement, SkyBody, SkyOffFrameBody, SkyOccludedBody,
 } from "../src/skyview.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -60,6 +61,13 @@ function mapOff(o: SkyOffFrameBody): unknown {
   };
 }
 
+function mapOccluded(o: SkyOccludedBody): unknown {
+  return {
+    id: o.id, azimuth_deg: o.azimuthDeg, altitude_deg: o.altitudeDeg,
+    skyline_alt_deg: o.skylineAltDeg,
+  };
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function compute(spec: any): any {
   switch (spec.type) {
@@ -89,6 +97,12 @@ function compute(spec: any): any {
     }
     case "extinction":
       return spec.alts.map((alt: number) => extinctionMag(alt));
+    case "brightness":
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return spec.ctxs.map((ctx: any) =>
+        spec.points.map(([alt, az]: number[]) => skyBrightness(alt, az, ctx)));
+    case "horizon":
+      return spec.queries.map((az: number) => horizonAltAt(spec.profile, az));
     case "bodies": {
       const j = julianDay(spec.jd[0], spec.jd[1], spec.jd[2],
         spec.jd[3] ?? 0, spec.jd[4] ?? 0, spec.jd[5] ?? 0);
@@ -100,7 +114,10 @@ function compute(spec: any): any {
         aim: spec.aim,
         lens: spec.lens,
         image: spec.image,
-      }, { bortle: spec.bortle ?? undefined, includeStars: false });
+      }, {
+        bortle: spec.bortle ?? undefined, includeStars: false,
+        horizonProfile: spec.horizon_profile ?? undefined,
+      });
       // The Python reference mirrors the body loop only (no star field), so
       // stars are excluded above; the numeric core is identical either way.
       const sun = eng.position("sun", j);
@@ -116,6 +133,9 @@ function compute(spec: any): any {
         },
         bodies: r.bodies.map(mapBody),
         off_frame: r.offFrame.map(mapOff),
+        // Compared only for cases whose fixture carries the key (profile
+        // cases); deepCmp walks the fixture's keys.
+        occluded: r.occluded.map(mapOccluded),
       };
     }
     default: throw new Error(`unknown skyview type ${spec.type}`);

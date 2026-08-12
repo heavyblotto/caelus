@@ -4,13 +4,16 @@
  * the frame center; the horizon must sit where the aim altitude puts it.
  * Self-contained (no golden fixture): a new feature with no Python reference.
  */
+import { createHash } from "node:crypto";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { julianDay } from "../src/core.js";
 import { Engine } from "../src/chart.js";
 import { loadNodeData } from "../src/node-loader.js";
 import { azAlt } from "../src/pheno.js";
-import { skyView, skyViewSequence } from "../src/skyview.js";
+import {
+  skyView, skyViewSequence, skyBrightness, horizonAltAt, PROMPT_STYLES,
+} from "../src/skyview.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const eng = new Engine(loadNodeData(join(here, "../../data"), "embedded", "full"));
@@ -293,6 +296,112 @@ ok(centered.directives.length >= 3, "directives are populated");
   }
 }
 ok(/^\d{4}-\d{2}-\d{2}T/.test(centered.instant.utc), "instant carries an ISO UTC string");
+
+// Sky-brightness gradient: grounded anchor values and the summary fields.
+{
+  const dark = { sunAltDeg: -30, sunAzDeg: 0, moonAltDeg: -10, moonAzDeg: 0, moonIllum: 0, bortle: 1 };
+  near(skyBrightness(90, 0, dark), 21.9, 1e-9, "Bortle 1 moonless zenith is 21.9 mag/arcsec^2");
+  near(skyBrightness(0, 0, dark), 21.5, 1e-9, "airglow brightens the dark horizon by 0.4 mag");
+  const day = { sunAltDeg: 30, sunAzDeg: 180, moonAltDeg: -10, moonAzDeg: 0, moonIllum: 0 };
+  near(skyBrightness(90, 0, day), 4.0, 0.01, "daytime zenith saturates near 4 mag/arcsec^2");
+  const fullMoon = { sunAltDeg: -30, sunAzDeg: 0, moonAltDeg: 60, moonAzDeg: 180, moonIllum: 1, bortle: 1 };
+  const nearMoon = skyBrightness(55, 180, fullMoon);
+  const farMoon = skyBrightness(60, 0, fullMoon);
+  ok(nearMoon < farMoon, "the sky is brighter (smaller mag) near the full Moon than far from it");
+  ok(farMoon < 21.9, "a full Moon brightens even the far sky over the dark baseline");
+
+  // The summary carries the rounded pair; on a moonless night the horizon is
+  // the brighter of the two (airglow), by less than a magnitude.
+  const nightJd = julianDay(2026, 6, 22, 7, 30, 0);
+  const nightR = skyView(eng, nightJd, {
+    observer: { lat: 29.3, lonEast: -103.3 }, aim: { azimuth: "S", altitude: 25 },
+    lens: "wide", image: { width: 1024, height: 683 },
+  }, { bortle: 1 });
+  ok(Number.isFinite(nightR.sky.zenithBrightness) && Number.isFinite(nightR.sky.horizonBrightness),
+    "sky summary reports zenith and horizon brightness");
+  if (nightR.sky.moonAltitudeDeg !== null && nightR.sky.moonAltitudeDeg <= 0) {
+    ok(nightR.sky.horizonBrightness < nightR.sky.zenithBrightness
+      && nightR.sky.zenithBrightness - nightR.sky.horizonBrightness < 1,
+    "moonless night horizon is slightly brighter than the zenith");
+  }
+}
+
+// Observer obstruction profile: interpolation on the circle, and occlusion.
+{
+  const prof = [
+    { azDeg: 350, altDeg: 12 }, { azDeg: 20, altDeg: 2 }, { azDeg: 270, altDeg: 25 },
+  ];
+  near(horizonAltAt(prof, 0), 12 + (10 / 30) * (2 - 12), 1e-9, "skyline wraps across 360/0");
+  near(horizonAltAt(prof, 20), 2, 1e-9, "skyline is exact on a profile node");
+  near(horizonAltAt([], 123), 0, 1e-9, "an empty profile is the astronomical horizon");
+  near(horizonAltAt(prof, 360 + 20), 2, 1e-9, "query azimuths normalize mod 360");
+
+  // A wall over the whole sky occludes every framed body; nothing goes silent.
+  const walled = skyView(eng, jd, {
+    observer: { lat, lonEast, altM: 9 },
+    aim: { azimuth: sunAz, altitude: sunAlt },
+    lens: "normal", image: { width: W, height: Hh },
+  }, { horizonProfile: [{ azDeg: 0, altDeg: 89 }, { azDeg: 180, altDeg: 89 }] });
+  ok(walled.bodies.length === 0, "an 89-deg skyline empties the frame");
+  ok(walled.occluded.some((o) => o.id === "sun"), "the occluded list records the hidden Sun");
+  const occSun = walled.occluded.find((o) => o.id === "sun");
+  if (occSun) {
+    near(occSun.skylineAltDeg, 89, 1e-9, "occluded entry carries the skyline altitude");
+    ok(occSun.altitudeDeg < occSun.skylineAltDeg, "occluded body sits below its skyline");
+  }
+  // A low wall changes nothing, and without a profile `occluded` is empty.
+  const lowWall = skyView(eng, jd, {
+    observer: { lat, lonEast, altM: 9 },
+    aim: { azimuth: sunAz, altitude: sunAlt },
+    lens: "normal", image: { width: W, height: Hh },
+  }, { horizonProfile: [{ azDeg: 0, altDeg: 0.5 }] });
+  ok(JSON.stringify(lowWall.bodies) === JSON.stringify(centered.bodies),
+    "a skyline below every body leaves the frame unchanged");
+  ok(centered.occluded.length === 0, "occluded is empty without a profile");
+}
+
+// Prompt styles: prose-only templates. The default is byte-identical to the
+// pre-template output (hashes captured from the implementation before
+// PROMPT_STYLES existed; update them only on a deliberate prose change).
+{
+  const styleView = {
+    observer: { lat: 40.0, lonEast: -75.0, altM: 9 },
+    aim: { azimuth: 270, altitude: 10 }, lens: "normal" as const,
+    image: { width: 1024, height: 683 },
+  };
+  const plain = skyView(eng, jd, styleView);
+  const explicit = skyView(eng, jd, styleView, { promptStyle: "default" });
+  ok(createHash("sha256").update(plain.prompt).digest("hex")
+    === "fa7b0139e26fc88588d3af6a52637f85b09aeab046b5a80519ad376f638a6fbf",
+  "default prompt is byte-identical to the pre-template output");
+  ok(createHash("sha256").update(plain.renderPlan.background.prompt).digest("hex")
+    === "eff939478d91ad9507db9c0dbe3fb73b9a27b980db119f61a237a4307c6a2abd",
+  "default plate prompt is byte-identical to the pre-template output");
+  ok(plain.prompt === explicit.prompt
+    && plain.renderPlan.background.prompt === explicit.renderPlan.background.prompt,
+  "promptStyle 'default' routes to the default template");
+
+  for (const name of Object.keys(PROMPT_STYLES) as Array<keyof typeof PROMPT_STYLES>) {
+    const styled = skyView(eng, jd, styleView, { promptStyle: name });
+    ok(styled.prompt.length > 0, `style '${name}' yields a non-empty prompt`);
+    for (const b of styled.bodies) {
+      ok(styled.prompt.includes(`(${b.x},${b.y})`),
+        `style '${name}' prompt pins ${b.id} at its exact pixel`);
+    }
+    ok(JSON.stringify(styled.bodies) === JSON.stringify(plain.bodies)
+      && JSON.stringify(styled.sky) === JSON.stringify(plain.sky),
+    `style '${name}' changes prose only; the numbers are identical`);
+  }
+  const styledUp = skyView(eng, jd, styleView, { promptStyle: "photoreal" });
+  ok(styledUp.prompt !== plain.prompt, "a non-default style changes the prompt prose");
+
+  let threw = false;
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    skyView(eng, jd, styleView, { promptStyle: "oil-painting" as any });
+  } catch { threw = true; }
+  ok(threw, "an unknown promptStyle throws");
+}
 
 console.log(`\nskyview: ${failures} failures`);
 process.exit(failures ? 1 : 0);
