@@ -1841,7 +1841,13 @@ export function buildServer(
         z.object({ kind: z.literal("aspect"), a: z.string(), b: z.string(), angle: z.number(), weight: z.number().optional() }),
         z.object({ kind: z.literal("sign"), body: z.string(), sign: z.number().int().min(0).max(11), weight: z.number().optional() }),
         z.object({ kind: z.literal("degree"), body: z.string(), degree: z.number(), weight: z.number().optional() }),
-      ])).optional().describe("Geometric constraints for an archetypal/conceptual chart with no time (compiler synthesis)"),
+        z.object({ kind: z.literal("declination"), body: z.string(), degree: z.number().min(-90).max(90), weight: z.number().optional() }),
+        z.object({ kind: z.literal("parallel"), a: z.string(), b: z.string(), contra: z.boolean().optional(), weight: z.number().optional() }),
+        z.object({ kind: z.literal("separation3d"), a: z.string(), b: z.string(), angle: z.number().min(0).max(180), weight: z.number().optional() }),
+      ])).optional().describe("Geometric constraints for an archetypal/conceptual chart with no time (compiler synthesis). "
+        + "Longitude kinds (aspect/sign/degree) plus the latitude-aware kinds: declination "
+        + "(via the fixed J2000 obliquity), parallel/contraparallel of declination, and "
+        + "separation3d (true great-circle separation)"),
       house_system: houseSys, zodiac: zodiacSchema,
       target_date: z.string().optional()
         .describe("UTC ISO instant for transits and time-lords vs this natal chart; omit for natal-only facts"),
@@ -1928,9 +1934,16 @@ export function buildServer(
       });
     }
     if (r.via === "compiler" && r.form) {
+      // latitudes ships only when some body left the ecliptic (a latitude-
+      // aware constraint was present), so longitude-only payloads -- and
+      // their frozen goldens -- are unchanged.
+      const lats = r.form.latitudes ?? {};
+      const offEcliptic = Object.values(lats).some((v) => v !== 0);
       return text({
         realm, via: r.via, note: r.note,
-        longitudes: r.form.longitudes, residual: r.form.residual, impossible: r.form.impossible,
+        longitudes: r.form.longitudes,
+        ...(offEcliptic ? { latitudes: lats } : {}),
+        residual: r.form.residual, impossible: r.form.impossible,
       });
     }
     return text({ realm, via: r.via, note: r.note });

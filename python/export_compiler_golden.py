@@ -34,6 +34,33 @@ CASES = [
          {"kind": "aspect", "a": "venus", "b": "mars", "angle": 0.0, "weight": 0.8},
          {"kind": "sign", "body": "venus", "sign": 1, "weight": 0.95},
      ]},
+    # latitude-aware kinds: positions carry {lon, lat}; the legacy numeric
+    # shape stays valid (lat 0) and both are pinned here.
+    {"id": "declination-on-ecliptic", "lons": {"v": 90.0},
+     "constraints": [{"kind": "declination", "body": "v", "degree": 23.4392911}]},
+    {"id": "declination-with-lat",
+     "lons": {"v": {"lon": 90.0, "lat": 5.0}},
+     "constraints": [{"kind": "declination", "body": "v", "degree": 20.0}]},
+    {"id": "parallel-held",
+     "lons": {"a": {"lon": 45.0, "lat": 2.0}, "b": {"lon": 135.0, "lat": 2.0}},
+     "constraints": [{"kind": "parallel", "a": "a", "b": "b"}]},
+    {"id": "contraparallel",
+     "lons": {"a": {"lon": 45.0, "lat": 2.0}, "b": {"lon": 225.0, "lat": -2.0}},
+     "constraints": [{"kind": "parallel", "a": "a", "b": "b", "contra": True}]},
+    {"id": "separation3d-vs-aspect",
+     "lons": {"a": {"lon": 0.0, "lat": 8.0}, "b": {"lon": 60.0, "lat": -8.0}},
+     "constraints": [
+         {"kind": "separation3d", "a": "a", "b": "b", "angle": 60.0},
+         {"kind": "aspect", "a": "a", "b": "b", "angle": 60.0},
+     ]},
+    {"id": "mixed-weighted-lat",
+     "lons": {"venus": {"lon": 44.0, "lat": 1.0},
+              "jupiter": {"lon": 132.0, "lat": 1.1}, "moon": 200.0},
+     "constraints": [
+         {"kind": "parallel", "a": "venus", "b": "jupiter", "weight": 0.9},
+         {"kind": "declination", "body": "moon", "degree": -15.0, "weight": 0.5},
+         {"kind": "aspect", "a": "venus", "b": "jupiter", "angle": 90.0, "weight": 0.7},
+     ]},
 ]
 
 

@@ -7,7 +7,9 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { formLoss, compileForm, constraintLoss, Constraint } from "../src/compiler.js";
+import {
+  formLoss, compileForm, constraintLoss, declinationOf, Constraint,
+} from "../src/compiler.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const G = JSON.parse(readFileSync(join(here, "../../test/compiler-golden.json"), "utf8"));
@@ -55,6 +57,43 @@ ok(ri.maxConstraintLoss > 30, `impossible form has a large residual (${ri.maxCon
 const a = compileForm(sat).longitudes;
 const b = compileForm(sat).longitudes;
 ok(Object.keys(a).every((k) => a[k] === b[k]), "compileForm is deterministic");
+
+// --- behaviour: a longitude-only form keeps every latitude at exactly 0 ---
+const rLegacy = compileForm(sat);
+ok(Object.values(rLegacy.latitudes).every((v) => v === 0),
+  "longitude-only form solves with all latitudes 0 (legacy parity)");
+
+// --- behaviour: a latitude form solves in both coordinates ---
+const latForm: Constraint[] = [
+  { kind: "parallel", a: "venus", b: "jupiter" },
+  { kind: "declination", body: "moon", degree: -5 },
+  { kind: "aspect", a: "venus", b: "jupiter", angle: 120 },
+];
+const rl = compileForm(latForm);
+ok(!rl.impossible, "latitude form is not flagged impossible");
+ok(rl.maxConstraintLoss < 0.5, `latitude form solves tightly (max loss ${rl.maxConstraintLoss.toFixed(4)})`);
+const dv = declinationOf(rl.longitudes.venus, rl.latitudes.venus);
+const dj = declinationOf(rl.longitudes.jupiter, rl.latitudes.jupiter);
+ok(Math.abs(dv - dj) < 0.5, `the parallel holds (dec ${dv.toFixed(2)} vs ${dj.toFixed(2)})`);
+const dm = declinationOf(rl.longitudes.moon, rl.latitudes.moon);
+ok(Math.abs(dm - -5) < 0.5, `the Moon lands at declination -5 (${dm.toFixed(2)})`);
+ok(constraintLoss(rl.longitudes, { kind: "aspect", a: "venus", b: "jupiter", angle: 120 }) < 0.5,
+  "the longitude aspect still holds alongside the declination constraints");
+
+// --- behaviour: latitude bounds are respected, and widen on request ---
+const starForm: Constraint[] = [{ kind: "declination", body: "algol", degree: 40 }];
+const rBounded = compileForm(starForm); // default bound 9 deg: dec 40 unreachable
+ok(rBounded.impossible, "declination 40 is impossible inside the default latitude bound");
+const rWide = compileForm(starForm, { latBounds: { algol: 90 } });
+ok(!rWide.impossible && rWide.maxConstraintLoss < 0.5,
+  `widened bounds reach declination 40 (loss ${rWide.maxConstraintLoss.toFixed(4)})`);
+ok(Math.abs(rWide.latitudes.algol) <= 90, "solved latitude stays inside its bound");
+
+// --- behaviour: latitude solving is deterministic too ---
+const rl2 = compileForm(latForm);
+ok(Object.keys(rl.latitudes).every((k) => rl.latitudes[k] === rl2.latitudes[k])
+  && Object.keys(rl.longitudes).every((k) => rl.longitudes[k] === rl2.longitudes[k]),
+"latitude-aware compileForm is deterministic");
 
 console.log(`\n${checks} checks, ${failures} failures`);
 console.log(`worst golden diff: ${worst.toExponential(2)}`);

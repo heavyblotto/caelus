@@ -713,6 +713,24 @@ const assertExactHits = (hits, body, targetLonAt, angle, label, tolDeg = 0.02) =
   assert(!fictional.place, "chart_facts: fictional place resolves to no coordinates");
 }
 
+// ------------------------------------------- chart_facts latitude constraints
+// The compiler path accepts the latitude-aware constraint kinds and reports
+// solved latitudes when a body leaves the ecliptic.
+{
+  const res = await call("chart_facts", {
+    realm: "archetypal",
+    constraints: [
+      { kind: "parallel", a: "venus", b: "jupiter" },
+      { kind: "declination", body: "moon", degree: -5 },
+      { kind: "aspect", a: "venus", b: "jupiter", angle: 120 },
+    ],
+  });
+  assert(res.via === "compiler", "chart_facts: latitude constraints go through the compiler");
+  assert(!res.impossible, "chart_facts: the latitude form is satisfiable");
+  assert(res.latitudes && Object.values(res.latitudes).some((v) => v !== 0),
+    "chart_facts: solved latitudes are reported when a body leaves the ecliptic");
+}
+
 await client.close();
 console.log(`\n${checks} checks, ${failures} failures`);
 
