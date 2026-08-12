@@ -480,6 +480,22 @@ for (const g of G.houses) {
     );
   }
 
+  // Pluto on the pack path: sparse like Chiron. Inside the pack's fitted
+  // range (1700-2212 for the shipped pack) it is present; outside, it lands
+  // in `unavailable` -- which is why PackedBody covers pluto and
+  // chart.bodies.pluto types as possibly absent.
+  const pre1700 = eng.chart(1650, 6, 1, 12, 0, 0, 48.85, 2.35, "whole_sign");
+  if (
+    !pre1700.unavailable.includes("pluto") ||
+    "pluto" in pre1700.bodies ||
+    !("pluto" in pre1850.bodies) // 1700-03-21 is inside the pack range
+  ) {
+    failures++;
+    console.error(
+      `FAIL pluto pack degradation: 1650 unavailable=${JSON.stringify(pre1700.unavailable)}`,
+    );
+  }
+
   let threw = false;
   try {
     eng.chart(2451545, 6, 10, 0, 0, 0, 0, 0);

@@ -207,14 +207,19 @@ export interface ChartBody extends Position {
   dignities: string[];
 }
 
-/** Default chart bodies that are Chebyshev-packed, so they can fall outside
- *  their fitted range (and be omitted from a chart). Opt-in asteroids are
- *  packed too, but arrive as arbitrary ids through the string index. */
-export type PackedBody = "chiron";
+/** Default chart bodies that can be Chebyshev-packed, so they can fall
+ *  outside a pack's fitted range (and be omitted from a chart). Chiron is
+ *  always packed; Pluto is packed when the wide-range pack is loaded (the
+ *  Meeus fallback otherwise always resolves, but the type must cover the
+ *  packed engine, where an out-of-range Pluto lands in
+ *  {@link Chart.unavailable}). Opt-in asteroids are packed too, but arrive
+ *  as arbitrary ids through the string index. */
+export type PackedBody = "chiron" | "pluto";
 
-/** Bodies guaranteed to be in every chart: the analytic Sun–Pluto and the lunar
- *  nodes, which resolve across all supported epochs. (Chiron is Chebyshev-packed
- *  and can fall outside its fitted range, so it is *not* guaranteed.) */
+/** Bodies guaranteed to be in every chart: the analytic Sun–Neptune and the
+ *  lunar nodes, which resolve across all supported epochs. (Chiron and pack
+ *  Pluto are Chebyshev-packed and can fall outside their fitted range, so
+ *  they are *not* guaranteed.) */
 export type AlwaysBody = Exclude<Body, PackedBody>;
 
 /**
