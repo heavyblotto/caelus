@@ -115,6 +115,7 @@ for (const row of G.positions) {
     expectAngleDeg(`${b}.lon@${row.jd_ut}`, p.lon, g.lon, TOL);
     expect(`${b}.speed@${row.jd_ut}`, p.speed, g.speed, 1e-6);
     expect(`${b}.lat@${row.jd_ut}`, p.lat, g.lat, TOL);
+    expect(`${b}.latSpeed@${row.jd_ut}`, p.latSpeed ?? NaN, g.lat_speed, 1e-6);
     expectAngleDeg(`${b}.ra@${row.jd_ut}`, p.ra, g.ra, TOL);
     expect(`${b}.dec@${row.jd_ut}`, p.dec, g.dec, TOL);
     checks++;
@@ -401,16 +402,26 @@ for (const g of G.houses) {
     failures++;
     console.error(`FAIL aspect count: ${c.aspects.length} vs ${g.aspects.length}`);
   }
-  // aspects carry phase + strength; phase must match the canonical aspectPhase
-  // and strength sits in [0,1]. (Golden pins count only, so this guards the
-  // enrichment via `failures` without a regenerated fixture.)
-  for (const ap of c.aspects) {
+  // Aspects are pinned field-by-field against the Python reference,
+  // phase and strength included (the fixture used to omit both, leaving the
+  // enrichment cross-language unchecked).
+  for (let i = 0; i < Math.min(c.aspects.length, g.aspects.length); i++) {
+    const ap = c.aspects[i];
+    const ga = g.aspects[i];
+    checks++;
+    if (ap.a !== ga.a || ap.b !== ga.b || ap.aspect !== ga.aspect || ap.phase !== ga.phase) {
+      failures++;
+      console.error(`FAIL aspect[${i}]: ${ap.a}~${ap.b} ${ap.aspect} ${ap.phase} vs ${ga.a}~${ga.b} ${ga.aspect} ${ga.phase}`);
+    }
+    expect(`aspect[${i}].orb`, ap.orb, ga.orb, 1e-9);
+    expect(`aspect[${i}].strength`, ap.strength, ga.strength, 1e-9);
+    // and the phase must equal the canonical aspectPhase (internal coherence)
     const pa = c.bodies[ap.a]!; const pb = c.bodies[ap.b]!;
     const want = aspectPhase(pa.lon, pa.speed, pb.lon, pb.speed, ASPECTS[ap.aspect]);
+    checks++;
     if (ap.phase !== want || ap.strength < 0 || ap.strength > 1) {
       failures++;
       console.error(`FAIL aspect enrich ${ap.a}~${ap.b} ${ap.aspect}: phase=${ap.phase} vs ${want} strength=${ap.strength}`);
-      break;
     }
   }
   // chartAt(jd) must be byte-for-byte identical to chart(calendar fields).

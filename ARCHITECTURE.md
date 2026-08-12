@@ -122,7 +122,7 @@ Correctness is enforced by a chain of checks rather than asserted:
   authority, not asserted — the same discipline as the position oracles, run
   with no external tool to keep the engine swisseph-free.
 - **Golden fixtures pin the TypeScript port to the Python reference.**
-  `test/golden.json` (the 3,218-check conformance suite) and
+  `test/golden.json` (the 3,397-check conformance suite) and
   `test/query-golden.json` are generated from Python and replayed by the TS
   tests; both engines run
   the same algorithms in IEEE doubles, so any porting error shows up as a

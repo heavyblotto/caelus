@@ -264,9 +264,10 @@ public-domain interpretation corpus and validation set: passages decomposed into
 
 ## Follow-ons
 
-Remaining corpus gaps (not engine gaps): dignity and lot passages from PD texts,
-Vedic verse-level extraction (Brihat Jataka vendored), and broader fixed-star
-coverage beyond the curated Robson set. Regenerate `golden.json` when aspect
-phase/strength fields should be stored in the golden fixtures (the TS engine
-fills them now; the golden run pins aspect count, so nothing is red in the
-meantime).
+Remaining corpus gaps (not engine gaps): dignity and lot passages from PD
+texts, Vedic verse-level extraction beyond Brihat Jataka ch. XVI (the
+Moon-in-nakshatra chapter is extracted in full), and broader fixed-star
+coverage beyond the curated Robson set. Aspect `phase` and `strength` are
+stored in `golden.json` and pinned field-by-field against the Python
+reference — the last unpinned fields in the chart fixtures closed with the
+0.24 cycle.
