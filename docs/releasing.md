@@ -128,9 +128,17 @@ Registry: the marketplace issues live at `chatmcp/mcpso` (mcp.so) and
 
 ## What ships
 
-`caelus` ships slim (~2.0 MB unpacked): embedded VSOP tiers, the
-1920–2080 precise-Moon Chebyshev tier, Chiron, nutation, Pluto. The
-full-range Moon tier (1850–2150, 3.1 MB, same precision) stays in the
-repo; `loadNodeData(dir, level, "full")` falls back to the embedded tier
-when the full file is absent. Outside 1920–2080 the engine uses the
-analytic series (~10″) — documented on /validation.
+`caelus` ships at ~4.6 MB unpacked: embedded VSOP tiers, the 1920–2080
+precise-Moon Chebyshev tier, nutation, fixed stars, constellation lines,
+and every fitted pack the docs advertise — Chiron, Ceres, Pallas, Juno,
+Vesta, Pholus, the wide-range Pluto pack (1700–2212, superseding the
+embedded Meeus ch.37 series), the Uranian Kepler elements, and a sample
+turbo pack. `scripts/check-tarball.mjs` gates CI on that list staying in
+the tarball: the asteroid and Uranian packs once sat repo-only for two
+releases while node-loader's existsSync guards silently skipped them, so
+installed consumers (including the hosted MCP server) could not compute
+advertised bodies. The full-range Moon tier (1850–2150, 3.1 MB, same
+precision) stays in the repo; `loadNodeData(dir, level, "full")` falls
+back to the embedded tier when the full file is absent. Outside
+1920–2080 the engine uses the analytic series (~10″) — documented on
+/validation.

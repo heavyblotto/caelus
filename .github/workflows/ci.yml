@@ -106,6 +106,10 @@ jobs:
       # per-entrypoint bundle sizes (esbuild): informational, prints the table
       # the data-tiers doc quotes. Per-target try/catch keeps it non-blocking.
       - run: npm run bundle-sizes
+      # the npm tarball must carry every advertised data pack (asteroids,
+      # Uranians, wide Pluto, turbo): existsSync-guarded loaders make a
+      # missing pack silent, so the gate is on the tarball itself.
+      - run: node scripts/check-tarball.mjs
       # generate the API reference markdown before building so the
       # /docs/api pages have content to prerender (mirrors vercel-build).
       - run: npm run docs:api
