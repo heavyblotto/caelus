@@ -19,6 +19,8 @@ jobs:
       - run: node packages/caelus/dist/test/query-golden.test.js
       # derived charts: TS derivations must match the Python reference
       - run: node packages/caelus/dist/test/derived-golden.test.js
+      # interpolated lunar apogee: TS pack evaluation must match the Python reference
+      - run: node packages/caelus/dist/test/intp-apog-golden.test.js
       # turbo tier: the TS evaluator must reproduce the Python evaluator on the pack
       - run: node packages/caelus/dist/test/turbo-golden.test.js
       # electional primitives: TS port must match the Python reference

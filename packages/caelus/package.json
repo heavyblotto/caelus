@@ -14,6 +14,7 @@
     "data/moon_meeus47.json",
     "data/pluto_meeus37.json",
     "data/chiron_cheb.json",
+    "data/intp_apog_cheb.json",
     "data/ceres_cheb.json",
     "data/pallas_cheb.json",
     "data/juno_cheb.json",

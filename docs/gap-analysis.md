@@ -57,9 +57,19 @@ fixtures for each item.
 differences ~1/e, and SE's own Moshier-vs-DE spread dominates),
 rise/set/meridian transits (≤0.5 s), crossings as engine API (≤4 s),
 plus lunar phases and stations; all surfaced through the new `sky_events`
-MCP tool. Deferred: the interpolated apogee (`SE_INTP_APOG`) — SE's
-interpolation method is not reproducible from the documentation excerpt
-we could verify against; revisit with a better source. Asteroids shipped 2026-06-12: `ceres`,
+MCP tool. The interpolated ("natural") apogee (`intp_apog`,
+`SE_INTP_APOG`) shipped 2026-08-12: per Koch's concept (the osculating
+apogee's ~30° monthly swing is a two-body artifact; the sensible object
+interpolates between the Moon's *real* passages through apogee), built by
+the passage-spline construction — apogee passages found as maxima of the
+Moon's geocentric distance on the engine's own DE-grounded precise-Moon
+tier, the Moon's apparent (lon, lat) taken at each passage (the apsis *is*
+the Moon there), a natural cubic spline between passages, refit as a
+Chebyshev pack (`python/fit_intp_apog.py`, ≈1″ fit residual over
+1850–2150). Degree-scale agreement with SE's variant is expected by
+construction — SE derives it from analytic lunar theory, and LibEphemeris
+reports ~1.5° RMS for the same passage-spline recipe — and is measured by
+`validate_swiss.py` where pyswisseph is installed. Asteroids shipped 2026-06-12: `ceres`,
 `pallas`, `juno`, `vesta`, `pholus` from locally-run Horizons fits
 (`python/fit_smallbody.py`), wired through the Chiron pipeline.
 Uranian bodies shipped 2026-06-12

@@ -18,6 +18,7 @@ const REQUIRED = [
   "data/uranian_kepler.json",
   "data/turbo.json",        // sample turbo pack so the turbo tier works out of the box
   "data/chiron_cheb.json",
+  "data/intp_apog_cheb.json", // interpolated lunar apogee (fit_intp_apog.py)
   "data/moon_cheb.embedded.json",
   "data/fixed_stars.json",
   "data/fixed_stars_deep.json",

@@ -90,6 +90,16 @@ export function engineCapabilities(engine: Engine): EngineCapabilities {
         body, source: "chebyshev_pack", validated: HEADLINE,
         fitted: packSpan(data.chiron),
       });
+    } else if (body === "intp_apog" && data.intpApog) {
+      // Its own EngineData field, not a chebPacks entry (geocentric ecliptic-
+      // of-date, no light-time pipeline), so the `body in packs` branch below
+      // never sees it. A derived point: validated stays null pending the
+      // SE_INTP_APOG measurement in validate_swiss.py (degree-scale agreement
+      // expected -- SE's variant comes from analytic lunar theory).
+      caps.push({
+        body, source: "chebyshev_pack", validated: null,
+        fitted: packSpan(data.intpApog),
+      });
     } else if (body in packs) {
       caps.push({
         body, source: "chebyshev_pack", validated: HEADLINE,

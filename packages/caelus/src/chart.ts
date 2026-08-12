@@ -32,7 +32,7 @@ export type BodyId = Body | (typeof EXTRA_BODIES)[number] | (string & {});
 
 /** Points: excluded from aspect search by default. */
 export const NOT_ASPECTABLE = new Set([
-  "mean_node", "true_node", "mean_lilith", "true_lilith",
+  "mean_node", "true_node", "mean_lilith", "true_lilith", "intp_apog",
 ]);
 
 export const SIGNS = [
@@ -342,6 +342,7 @@ export class Engine {
   readonly data: EngineData;
   private moonCheb: ChebSeries | null;
   private chironCheb: ChebSeries | null;
+  private intpApog: ChebSeries | null;
 
   private packs = new Map<string, XyzSource>();
   private runtimeSources = new Map<string, XyzSource>();
@@ -351,6 +352,7 @@ export class Engine {
     this.data = data;
     this.moonCheb = data.moonCheb ? new ChebSeries(data.moonCheb) : null;
     this.chironCheb = data.chiron ? new ChebSeries(data.chiron) : null;
+    this.intpApog = data.intpApog ? new ChebSeries(data.intpApog) : null;
   }
 
   /**
@@ -428,6 +430,7 @@ export class Engine {
   bodies(): BodyId[] {
     return [
       ...[...BODIES, ...EXTRA_BODIES].filter((b) => b !== "chiron" || this.chironCheb),
+      ...(this.intpApog ? ["intp_apog"] : []),
       ...Object.keys(this.data.chebPacks ?? {}),
       ...Object.keys(this.data.keplerPack?.bodies ?? {}),
       ...this.runtimeSources.keys(),
@@ -482,6 +485,20 @@ export class Engine {
         ? oscApogeePrecise(this.data, this.moonCheb!, jde)
         : oscApogeeSeries(this.data, jde);
       return [lon, lat, km / KM_PER_AU];
+    }
+    if (body === "intp_apog") {
+      // Interpolated ("natural") lunar apogee: a spline through the Moon's
+      // real apogee passages, refit as a Chebyshev pack (concept: Swiss
+      // Ephemeris General Documentation, Dieter Koch; construction:
+      // python/fit_intp_apog.py from the engine's own DE-derived precise
+      // Moon). The pack stores true-ecliptic-of-date unit vectors, so no
+      // precession/light-time/aberration applies -- like the Lilith points.
+      // ChebSeries throws RangeError outside the fitted span, which chartAt
+      // turns into an `unavailable` entry like any packed body.
+      if (!this.intpApog) throw new Error("intp_apog data not loaded");
+      const [x, y, z] = this.intpApog.xyz(jde);
+      const r = Math.sqrt(x * x + y * y + z * z);
+      return [mod(Math.atan2(y, x), TWO_PI), Math.asin(z / r), null];
     }
     if (this.hasPack(body)) {
       // same heliocentric pipeline as Chiron (Chebyshev, Kepler, or a runtime

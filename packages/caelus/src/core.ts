@@ -41,6 +41,12 @@ export interface EngineData {
   pluto: number[][];
   chiron?: ChebData;
   moonCheb?: ChebData;
+  /** Interpolated ("natural") lunar apogee pack: geocentric true-ecliptic-
+   *  of-date unit vectors, a spline through the Moon's real apogee passages
+   *  refit as Chebyshev (concept: Swiss Ephemeris General Documentation,
+   *  Dieter Koch; see python/fit_intp_apog.py). Not a chebPacks entry: those
+   *  are heliocentric-J2000 and go through the light-time pipeline. */
+  intpApog?: ChebData;
   /** Heliocentric ecliptic-J2000 Chebyshev packs by body id (ceres,
    *  pallas, juno, vesta, pholus, ...). Same pipeline as Chiron. */
   chebPacks?: Record<string, ChebData>;

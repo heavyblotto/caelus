@@ -65,6 +65,10 @@ export function packSpan(pack: ChebData): BodySpan {
  * validated question only arises inside it.
  */
 export function validatedSpanFor(body: string, data: EngineData): BodySpan | null {
+  // intp_apog falls through to null deliberately: a derived point (its own
+  // EngineData field, not a chebPacks entry) with no measured span yet --
+  // validate_swiss.py measures it against SE_INTP_APOG where pyswisseph
+  // exists, and degree-scale differences are expected by construction.
   if (VSOP_BODIES.has(body) || body === "moon") return HEADLINE;
   if (body === "pluto") {
     return data.chebPacks?.pluto ? MEASURED.pluto_pack : MEASURED.pluto_meeus;

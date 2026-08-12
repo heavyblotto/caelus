@@ -37,6 +37,11 @@ export function loadNodeData(
   };
   const chironPath = join(dir, "chiron_cheb.json");
   if (existsSync(chironPath)) data.chiron = j("chiron_cheb.json");
+  // interpolated ("natural") lunar apogee: geocentric ecliptic-of-date pack
+  // minted from the engine's own precise Moon (fit_intp_apog.py).
+  if (existsSync(join(dir, "intp_apog_cheb.json"))) {
+    data.intpApog = j("intp_apog_cheb.json");
+  }
   if (existsSync(join(dir, "uranian_kepler.json"))) {
     data.keplerPack = j("uranian_kepler.json");
   }

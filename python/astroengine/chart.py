@@ -15,10 +15,12 @@ BODIES = ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn",
 ASTEROIDS = ["ceres", "pallas", "juno", "vesta", "pholus"]
 URANIANS = ["cupido", "hades", "zeus", "kronos", "apollon", "admetos",
             "vulkanus", "poseidon"]
-EXTRA_BODIES = ["mean_lilith", "true_lilith"] + ASTEROIDS + URANIANS
+EXTRA_BODIES = (["mean_lilith", "true_lilith", "intp_apog"]
+                + ASTEROIDS + URANIANS)
 
 # Points: excluded from aspect search by default.
-NOT_ASPECTABLE = {"mean_node", "true_node", "mean_lilith", "true_lilith"}
+NOT_ASPECTABLE = {"mean_node", "true_node", "mean_lilith", "true_lilith",
+                  "intp_apog"}
 
 SIGNS = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra",
          "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
@@ -121,6 +123,18 @@ class Engine:
             else:
                 lon, lat, km = core.osc_apogee_series(jde)
             return lon, lat, km / KM_PER_AU
+        if body == "intp_apog":
+            # Interpolated ("natural") lunar apogee: a spline through the
+            # Moon's real apogee passages, refit as a Chebyshev pack (concept:
+            # Swiss Ephemeris General Documentation, Dieter Koch; construction:
+            # fit_intp_apog.py, from the engine's own DE-derived precise Moon).
+            # The pack stores true-ecliptic-of-date unit vectors, so no
+            # precession/light-time/aberration applies -- like the Lilith
+            # points. Raises ValueError outside the fitted range.
+            x, y, z = self._pack("intp_apog").xyz(jde)
+            r = math.sqrt(x * x + y * y + z * z)
+            lon = math.atan2(y, x) % (2 * math.pi)
+            return lon, math.asin(z / r), None
         if body in ASTEROIDS or body in URANIANS:
             return core.smallbody_apparent(self.vsop, self._pack(body), jde)
         return planet_apparent(self.vsop, body, jde)

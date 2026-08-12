@@ -299,6 +299,21 @@ for jd in JDS[:60]:
     worst = max(worst, arc(p["lon"], ref[0]))
 report("true lilith (osc apogee)", worst, n=60)
 
+# interpolated (natural) apogee: same concept, different constructions. SE
+# derives its variant from analytic lunar theory (Koch's interpolated
+# apogee); ours splines the Moon's real apogee passages on the DE-derived
+# precise-Moon tier (fit_intp_apog.py). Degree-scale differences are
+# expected -- LibEphemeris reports ~1.5 deg RMS for the same passage-spline
+# recipe -- so the tolerance guards the concept (a smoothed apsis with no
+# ~30 deg monthly swing), not arcsecond identity.
+worst = 0.0
+for jd in JDS[:60]:
+    jde = jd_tt(jd)
+    p = eng.position("intp_apog", jd)
+    ref, _ = swe.calc(jde, swe.INTP_APOG, FLG)
+    worst = max(worst, arc(p["lon"], ref[0]))
+report("intp apogee (vs SE_INTP_APOG)", worst, n=60)
+
 # ---- fixed stars (oracle fed our own catalog rows via a minted sefstars) --
 import tempfile
 from astroengine import stars as ST
@@ -425,7 +440,10 @@ print()
 # az/alt and pheno phase angle carry ΔT-model and sun-moon-distance noise;
 # they get wider tolerances than positions.
 TOL = {"az/alt (mars)": 30.0, "pheno phase angle": 300.0,
-       "pheno elongation": 10.0, "true lilith (osc apogee)": 230.0}
+       "pheno elongation": 10.0, "true lilith (osc apogee)": 230.0,
+       # different constructions of the same concept: degree-scale spread
+       # expected (see the intp_apog section above); 5 deg guards the shape
+       "intp apogee (vs SE_INTP_APOG)": 18000.0}
 TOL_SEC = {"gauquelin sectors": 0.001}
 TOL_S = {"sun rise/set/transit": 1.0, "moon rise/set/transit": 2.0,
          "mars rise/set/transit": 1.0, "crossings (sun+moon)": 10.0,
