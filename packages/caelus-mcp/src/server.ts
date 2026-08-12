@@ -2137,6 +2137,38 @@ export function buildServer(
     }),
   );
 
+  server.registerPrompt(
+    "natal_reading",
+    {
+      title: "Natal reading, cited",
+      description: "Guide a grounded natal reading: compute the chart's ranked fact atoms, then write an interpretation in which every claim cites the atom ids it rests on.",
+      argsSchema: {
+        date: z.string().describe("Birth date-time, UTC ISO (convert local birth time to UTC first)"),
+        lat: z.string().describe("Birth latitude, north positive"),
+        lon: z.string().describe("Birth longitude, EAST positive"),
+        focus: z.string().optional().describe("Optional focus for the reading (e.g. 'career', 'relationships')"),
+      },
+    },
+    ({ date, lat, lon, focus }) => ({
+      messages: [{
+        role: "user",
+        content: {
+          type: "text",
+          text:
+            `Write a natal reading grounded in computed facts, never invented positions.\n\n`
+            + `Birth: ${date} at lat ${lat}, lon ${lon}.`
+            + (focus ? ` Focus: ${focus}.` : "") + `\n\n`
+            + `Procedure:\n`
+            + `1. Call chart_facts(date, lat, lon) to get the chart's ranked, citable fact atoms and the ready-to-interpret brief. Follow the brief's instructions.\n`
+            + `2. Lead with the highest-salience atoms (the projection is already ranked); cover placements, tight aspects, whole configurations, and the angles.\n`
+            + `3. Every interpretive statement must cite the atom id(s) it rests on, e.g. [placement:sun] or [aspect:mars~saturn:square]. A statement you cannot tie to an atom does not go in the reading.\n`
+            + `4. If a fact seems missing (a lot, a fixed star, a transit), call the matching tool (lots, natal_chart, transits) rather than guessing.\n`
+            + `State the zodiac and house system used, and keep computation and meaning separate: the tools own the numbers, you own the prose.`,
+        },
+      }],
+    }),
+  );
+
   return server;
 }
 

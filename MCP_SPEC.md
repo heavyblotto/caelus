@@ -180,8 +180,10 @@ by default for fictional skies.
 ## Prompts
 - `rectification_session` (shipped): a multi-turn script around
   `rectification_grid` and `find_aspect_dates`.
-- `natal_reading` (future): template wiring `natal_chart` + corpus citations,
-  once a KG/corpus server exists.
+- `natal_reading` (shipped): guides a grounded reading over `chart_facts` —
+  ranked fact atoms in, prose out, every claim citing the atom ids it rests
+  on. The interpretation seam it needed (`chart_facts` + the brief contract)
+  shipped in 0.18.0; the prompt closes the loop.
 
 ## Transports & deployment
 - **stdio** (shipped): `npx caelus-mcp` for Claude Desktop / local agents.

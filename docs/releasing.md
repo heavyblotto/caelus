@@ -122,17 +122,19 @@ must hold:
    cut (a metadata-only `caelus-mcp` patch, the other three stayed at 0.12.0).
 
 To push a new version to the Registry, **after** `caelus-mcp@X.Y.Z` is live on
-npm: bump `server.json` to `X.Y.Z`, then from `packages/caelus-mcp/`:
+npm: bump `server.json` to `X.Y.Z`, then run the scripted push from the repo
+root:
 
 ```
-# one-time per machine — grab the CLI
-curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
-
-./mcp-publisher validate        # server.json vs the registry schema
-./mcp-publisher login github     # device-code auth as the heavyblotto account (the io.github.heavyblotto namespace owner); token persists
-./mcp-publisher publish
-curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=io.github.heavyblotto/caelus-mcp"  # verify (status: active)
+bash scripts/mcp-registry-push.sh
 ```
+
+It guards the precondition (the npm artifact must exist), fetches the pinned
+CLI once per machine, validates `server.json`, publishes, and verifies the
+listing is active. The GitHub device-code login inside it is the single
+interactive moment (auth as the heavyblotto account, the
+`io.github.heavyblotto` namespace owner; the token persists per machine) —
+that is why this step stays outside the tag workflow.
 
 The hand-curated lists are separate one-time submissions, not synced from the
 Registry: the marketplace issues live at `chatmcp/mcpso` (mcp.so) and
