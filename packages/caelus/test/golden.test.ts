@@ -13,6 +13,7 @@ import {
 import { Engine, BODIES, Body, DEFAULT_ORBS, ASPECTS, SIGNS, NOT_ASPECTABLE } from "../src/chart.js";
 import { aspectPhase } from "../src/electional.js";
 import { declinationAspects, outOfBounds } from "../src/derived.js";
+import { engineCapabilities } from "../src/capabilities.js";
 import { interpretationContext } from "../src/interpretation.js";
 import {
   transitAspects, synastryAspects, synastryOverlays, compositePlacements,
@@ -558,6 +559,42 @@ for (const g of G.houses) {
         failures++;
         console.error(`FAIL hasParallel does not match projected ${p0.a}~${p0.b}`);
       }
+    }
+  }
+
+  // Capabilities: every body the engine reports is classified, and the Node
+  // tier (this test's data dir) reports the pack-backed sources and spans.
+  {
+    const caps = engineCapabilities(eng);
+    const byBody = new Map(caps.bodies.map((x) => [x.body, x]));
+    const missing = eng.bodies().filter((b) => !byBody.has(b));
+    if (missing.length) {
+      failures++;
+      console.error(`FAIL capabilities: unclassified bodies [${missing}]`);
+    }
+    const pluto = byBody.get("pluto");
+    const moon = byBody.get("moon");
+    const ceres = byBody.get("ceres");
+    if (caps.plutoTier !== "chebyshev" || pluto?.source !== "chebyshev_pack"
+      || pluto.validated?.from !== 1700 || pluto.validated?.to !== 2212
+      || !pluto.fitted || Math.abs(pluto.fitted.from - 1700) > 1) {
+      failures++;
+      console.error(`FAIL capabilities pluto: ${JSON.stringify(pluto)} tier=${caps.plutoTier}`);
+    }
+    if (caps.moonTier !== "chebyshev" || moon?.source !== "moon_chebyshev"
+      || !moon.fitted || Math.abs(moon.fitted.from - 1850) > 1) {
+      failures++;
+      console.error(`FAIL capabilities moon: ${JSON.stringify(moon)} tier=${caps.moonTier}`);
+    }
+    if (ceres?.source !== "chebyshev_pack" || !ceres.fitted) {
+      failures++;
+      console.error(`FAIL capabilities ceres: ${JSON.stringify(ceres)}`);
+    }
+    if (caps.headlineLabel !== "1850-2150"
+      || byBody.get("mean_node")?.validated !== null
+      || byBody.get("sun")?.source !== "vsop87d") {
+      failures++;
+      console.error("FAIL capabilities headline/analytic/vsop classification");
     }
   }
 

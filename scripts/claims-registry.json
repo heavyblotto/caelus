@@ -92,6 +92,16 @@
       ]
     },
     {
+      "id": "headline-range",
+      "source": "accuracy.range",
+      "render": [
+        "{value}"
+      ],
+      "appearsIn": [
+        "packages/caelus/src/capabilities.ts"
+      ]
+    },
+    {
       "id": "mcp-tool-count",
       "source": "accuracy.counts.mcp_tools",
       "render": [

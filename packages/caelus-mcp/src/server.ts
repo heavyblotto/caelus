@@ -43,7 +43,7 @@ import {
   enrichContextOptions, enrichSynastryOptions,
   skyView, skyViewSequence, LENS_NAMES,
   validateSyntheticSystem, syntheticPositions, syntheticEphemeris,
-  registerSyntheticSystem,
+  registerSyntheticSystem, engineCapabilities,
   type SyntheticSystem,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
@@ -1955,7 +1955,18 @@ export function buildServer(
       mimeType: "application/json",
     },
     async (uri) => ({
-      contents: [{ uri: uri.href, mimeType: "application/json", text: JSON.stringify(opts.accuracy ?? accuracyPayload()) }],
+      contents: [{
+        uri: uri.href, mimeType: "application/json",
+        // engine_info: what THIS server's engine instance can compute, over
+        // what span, from which source -- the runtime answer to "which data
+        // tier did I get?" (browser Meeus Pluto 1885-2099 vs Node pack
+        // 1700-2212), so a host never has to assume the headline range
+        // applies to every body.
+        text: JSON.stringify({
+          ...(opts.accuracy ?? accuracyPayload()),
+          engine_info: engineCapabilities(engine),
+        }),
+      }],
     }),
   );
 
