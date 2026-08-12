@@ -60,6 +60,18 @@ Re-check before tagging: `npm view caelus` should still 404.
    agree and the `caelus` dep ranges match, so a half-bumped release fails
    locally instead of shipping. `node scripts/check-llms.mjs` verifies the
    `llms.txt` sync. Both run in CI (`check:versions` also gates `release`).
+5. Score the tool-selection eval against a current model and commit the
+   dated baseline (CI only ever runs the keyless self-check, which calls no
+   model, so without this step the eval's actual question — do hosts pick
+   the right tool? — goes unmeasured for the release):
+   ```
+   EVAL_MODEL=anthropic:claude-sonnet-5 ANTHROPIC_API_KEY=... \
+     node packages/caelus-mcp/eval/baseline.mjs
+   git add packages/caelus-mcp/eval/baselines && git commit
+   ```
+   The wrapper snapshots the scored run into
+   `eval/baselines/<date>-<model>.{json,md}`; any tool the report shows
+   being systematically mis-picked gets a description-tuning follow-up.
 4. Commit, then tag and push:
    ```
    git tag v0.1.0 && git push origin v0.1.0
