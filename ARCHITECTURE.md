@@ -47,6 +47,29 @@ Modules (`packages/caelus/src/`):
 - `eclipses`: solar and lunar eclipse search.
 - `stars`: fixed-star catalog and apparent places.
 - `pheno`: phase, elongation, equation of time, and related phenomena.
+- `spherical`: 3D great-circle geometry (`angularSeparation3d`), the basis
+  for spatial aspects.
+- `derived` / `electional` / `scan` / `turbo`: derived charts (returns,
+  progressions, composites, harmonics, declination aspects), electional
+  primitives, ranked time search, and the fast segmented-Chebyshev
+  longitude tier for bulk scans.
+- `lots` / `profections` / `firdaria` / `releasing` / `directions` /
+  `ashtottari` / `vedic` / `vargas` / `yogas` / `yogini` / `rajayoga`:
+  the Hellenistic time-lord and Vedic technique layers.
+- `patterns` / `signature` / `dignity-score` / `parans` / `features` /
+  `astrocartography` / `ephemeris` / `counterfactual`: named aspect
+  patterns, the computed chart signature, weighted essential dignities,
+  co-angular parans, the chart feature space and similarity search,
+  angle lines, the graphic-ephemeris collector, and counterfactual charts.
+- `interpretation` / `interpret` / `interpretation-enrich` / `relational` /
+  `brief`: the fact projection (seventeen atom kinds), rule selectors, and
+  the citable-facts surface behind `chart_facts`.
+- `provenance` / `anchored`: the provenance layer — anchors for when/where
+  (including partial, relative, and fictional anchors) and the realize()
+  path that maps or compiles a form.
+- `compiler`: the geometric compiler inverting constraints to a chart form.
+- `skyview` / `synthetic`: the observed-sky projection (alt-az, photometry,
+  render plans) and the synthetic ephemeris for imaginary moving bodies.
 - `node-loader` / `data-embedded`: two ways to supply `EngineData`: read
   JSON from disk (Node) or import a bundled subset (browser/edge).
 

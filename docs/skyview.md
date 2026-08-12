@@ -269,8 +269,9 @@ prompt, so `skyViewSequence` keeps fictional bodies visually consistent across
 frames. See [Synthetic ephemeris](/docs/synthetic).
 
 Later: a sky-brightness gradient color model, atmospheric extinction near the
-horizon, an observer obstruction profile (skyline altitude per azimuth),
-constellation line data, and per-image-model prompt templates.
+horizon, an observer obstruction profile (skyline altitude per azimuth), and
+per-image-model prompt templates. (Constellation line data shipped as
+`data/constellations.json`.)
 
 Division of labor: Caelus owns geometry and photometry. The image model owns
 color, light, and mood, guided by the directives.

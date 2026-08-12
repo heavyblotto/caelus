@@ -110,7 +110,8 @@
         "packages/caelus-mcp/README.md",
         "packages/caelus/README.md",
         "packages/wheel/README.md",
-        "packages/birth/README.md"
+        "packages/birth/README.md",
+        "ROADMAP.md"
       ]
     },
     {

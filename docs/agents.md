@@ -66,7 +66,8 @@ mirrored, this is the first thing to check.
 
 ## 5. Calling `chart()` per body
 
-`engine.chart()` computes all 13 bodies, angles, cusps, and aspects in
+`engine.chart()` computes all 13 default bodies (asteroids and Uranians
+join on request), angles, cusps, and aspects in
 one call (~2 ms). Calling it in a loop to read one body each time is
 13× the work; use `engine.position(body, jdUt)` for single bodies.
 
@@ -92,5 +93,9 @@ const p = engine.position("mars", jdUt);
 - Non-axial aspects (sextile/square/trine) are exact at BOTH +angle and
   −angle separation. Any aspect-date search must root-find both offsets
   (caelus-mcp's `find_aspect_dates` already does).
-- Supported range is 1800–2149; out-of-range dates throw. Don't catch and
-  substitute silently.
+- The measured headline range is 1850–2150 (per-body detail in
+  `docs/range-expansion.md`). Out of range, packed bodies (Chiron, the
+  asteroids, pack Pluto) land in `Chart.unavailable` rather than throwing,
+  and the analytic series keep returning numbers that are simply not
+  validated out there. Check `unavailable`, and don't present out-of-range
+  positions as validated.

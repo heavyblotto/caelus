@@ -39,11 +39,12 @@ Moon's full precise tier:
   full 27-suite golden run stays at 0 failures.
 - **`node-loader.ts` pre-wired.** `pluto_cheb.json` is loaded into
   `chebPacks.pluto` when the file exists (`existsSync`-guarded), so dropping
-  the pack into the data dir is all the Node tier needs. The browser tier
-  imports JSON statically and cannot pre-wire a missing file, so the wide
-  Pluto pack is a Node-tier artifact (like the full Moon tier and the
-  asteroids); the playground keeps Meeus until/unless an embedded tier is
-  added.
+  the pack into the data dir is all the Node tier needs. The pack (with the
+  asteroid and Uranian packs) now ships in the npm tarball — see
+  `scripts/check-tarball.mjs` — so installed Node consumers get the wide
+  range, not just repo checkouts. The browser tier imports JSON statically
+  and cannot pre-wire a missing file, so the playground keeps Meeus
+  until/unless an embedded tier is added.
 - **`fit_pluto.py`** mints the pack from Horizons vectors (Pluto body 999,
   heliocentric ecliptic J2000, geometric), scanning segment length and degree
   for the smallest pack under a 5e-6 AU residual. Default window 1700-2200.
@@ -58,7 +59,8 @@ All five remaining steps ran locally against `ssd.jpl.nasa.gov` and shipped:
    smooth and has no 1800/2199 Horizons cliff. Window 1700-2212, fit residual
    4.1e-6 AU (~0.03″). Pack written to both data dirs.
 2. The pack is a Node-tier artifact, loaded via `node-loader.ts`
-   (`existsSync`-guarded); the browser playground keeps Meeus.
+   (`existsSync`-guarded) and shipped in the npm tarball; the browser
+   playground keeps Meeus.
 3. Golden suite regenerated (`export_golden.py`) and the TS replay re-pinned;
    full 27-suite + birth/wheel green. A `1 - 1e-9` edge guard was added to both
    astrocartography implementations to skip degenerate near-tangent points

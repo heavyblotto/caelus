@@ -15,8 +15,10 @@ core that does no I/O so the same code runs in the browser, on edge runtimes,
 and in Node/MCP.
 
 The deliverables are the engine and the tools around it: `caelus` (engine),
-`caelus-mcp` (MCP server), `caelus-birth`, `caelus-wheel`, and the
-`ephemengine.com` site (landing, playground, docs, validation, provenance).
+`caelus-mcp` (MCP server), `caelus-birth`, `caelus-wheel`,
+`caelus-delineations-pd` (the public-domain interpretation corpus, on its
+own 0.1.x semver), and the `ephemengine.com` site (landing, playground,
+docs, validation, provenance).
 
 ## Principles (what holds across releases)
 
@@ -33,8 +35,9 @@ The deliverables are the engine and the tools around it: `caelus` (engine),
 
 ## Status
 
-Shipped through **0.12.0** (npm: all four packages; PyPI: `caelus-engine`,
-the Python reference; GitHub releases v0.1.0–v0.12.1): full body set, 12 house
+Shipped through **0.23.0** (npm: all five packages; PyPI: `caelus-engine`,
+the Python reference; GitHub releases v0.1.0–v0.23.0). The 0.1–0.12 arc
+built the validated core: full body set, 12 house
 systems, tropical + 7 sidereal
 ayanamsas, aspects, event search (rise/set, crossings, phases, stations,
 Gauquelin), solar/lunar eclipses, fixed stars, topocentric, Vondrák 2011
@@ -54,10 +57,21 @@ impossible ones (`compileForm`) (0.11.0); a JD-first chart entry point that
 builds a full chart directly from a Julian Day, no calendar round-trip
 (`chartAt`) (0.12.0); conformance suite;
 MCP server over stdio and hosted Streamable HTTP (`ephemengine.com/api/mcp`,
-stateless) exposing twenty-nine chart tools, with golden payloads, resources
-(`caelus://glossary`, `caelus://accuracy`), and the `rectification_session`
-prompt, listed on the official MCP Registry as `io.github.heavyblotto/caelus-mcp`
-(0.12.1); JPL-direct validation tier.
+stateless) with golden payloads, resources (`caelus://glossary`,
+`caelus://accuracy`), and the `rectification_session` prompt, listed on the
+official MCP Registry as `io.github.heavyblotto/caelus-mcp` (0.12.1);
+JPL-direct validation tier.
+
+The 0.13–0.23 arc built the technique and interpretation superstructure on
+that core (each release's full story is in `CHANGELOG.md`): Hellenistic
+time-lords and the Vedic layer with their MCP harvest (0.13–0.14), the chat
+MCP App widget wiring (0.14), enriched chart bodies (0.15), chart synthesis
+— patterns, weighted dignities, similarity search (0.16), fixed-star parans
+(0.17), the interpretation + provenance layers and the wider sky (0.18), the
+cited interpretation corpus with star/lot atoms (0.19), diachronic and
+relational atoms (0.20), embedded fixed stars (0.20.1), per-body wheel
+colors (0.21), Sky View (0.22), and the synthetic ephemeris (0.23). The MCP
+server now exposes thirty-four chart tools.
 
 The `ephemengine.com` site ships its full shape: landing page, browser
 playground, validation and provenance tables, build notes, a methods page
@@ -185,21 +199,24 @@ Ashtottari; (4) lordship + drishti layer → raja/dhana yogas; (5) inter-planeta
 directions. Each lands reference-first with a golden, and each convention choice
 is stated and cited.
 
-### Phase 3 — Chat MCP App (in progress)
+### Phase 3 — Chat MCP App (done, except directory registration)
 
 An Apps SDK MCP App on the existing hosted server: a correct chart with a
 rendered `caelus-wheel` SVG in-host, interpretation-free, reusing the shipped
 `server.json`/Registry work. Built once on the MCP App standard, it runs across
 ChatGPT, Claude, and other MCP-Apps hosts. Distribution rather than capability;
-it grows richer as Phases 0–2 add tools. Guarded by the live-smoke pattern
-extended to the app endpoint.
+it grows richer as new tools land. Guarded by the live-smoke pattern extended
+to the app endpoint.
 
 **UI surface — done**: `apps/web/app/embed/chart`, a chrome-free route rendering
 `ChartWheel` from the `natal_chart`/`current_sky` payload (Apps-SDK
-`window.openai.toolOutput`, `?c=` fallback), self-contained so it can move in
-parallel with the MCP server. Next: the server-side UI-resource wiring (the
-tool-result `_meta`/`ui://` reference, in the MCP layer) and the Apps-SDK
-manifest / host registration. See `docs/mcp-app.md`.
+`window.openai.toolOutput`, `?c=` fallback). **Server-side UI-resource wiring —
+done, shipped in `caelus-mcp` 0.14.0**: `natal_chart` and `current_sky` bind a
+`ui://widget/chart.html` resource that loads the self-contained
+`/embed/chart-widget.js` bundle directly in the host sandbox (no iframe, CSP
+`resourceDomains` only), with legacy `openai/*` aliases for ChatGPT
+compatibility — see `docs/mcp-app.md` and `docs/mcp-app-wiring.md`. Still
+tracked: the Apps-SDK manifest / host directory registration.
 
 ### Phase 4 — Symbolic computation layer, agent-native (done)
 
@@ -286,9 +303,9 @@ All shipped: **`similar_skies`** ("when did the sky look like this?", over the
 existing feature space), **`electional_search`** (rank a window by wanted
 body-to-body aspects, optional void-Moon penalty), **`cosmic_weather`** (the
 mundane sky: active configurations, stationing planets, void Moon), and
-**parans** (`parans`, co-angular bodies, reference-first + `parans-golden` + a
-cookbook recipe). The MCP server is now at twenty-nine tools (the interpretation
-`chart_facts` projection lands the latest); transit density remains a possible
+**parans** (co-angular bodies) as engine math — reference-first with the
+`parans-golden` pin; its MCP tool surface is queued as the next tool harvest.
+The MCP server is at thirty-four tools; transit density remains a possible
 later count.
 
 Direction refined after a second external pass (Grok, 2026-06-14). Its strongest

@@ -15,9 +15,10 @@ switch between them:
 
 - `observed` / `reported` / `planned` / `forecast` / `counterfactual` are
   **time-anchored**: resolve the `TemporalAnchor` to an instant, then `chartAt`.
-- `archetypal` / `conceptual` / `mythic` have **no instant** ("the chart of
-  Aries" is a constraint set, not a moment), so they are generated from the
-  compiler. `isTimeAnchored(realm)` reports the split.
+- `archetypal` / `conceptual` / `mythic` / `fictional` have **no instant**
+  ("the chart of Aries" is a constraint set, not a moment; a fictional
+  scene's sky is whatever its narrative anchors say), so they are generated
+  from the compiler. `isTimeAnchored(realm)` reports the split.
 
 `counterfactual` is the bridge: a real instant, then perturbed.
 

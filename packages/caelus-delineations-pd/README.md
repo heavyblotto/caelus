@@ -112,10 +112,14 @@ cleanly from the OCR, and the harness reports the rest. Known gaps and why:
 - **Vedic** (Brihat Jataka): the translation is verse/sloka-structured with no
   "planet in rashi" headings, so it needs a verse-level parser, not heading
   extraction. Text is vendored.
-- **Fixed-star, lot, varga, yoga, dasha**: these have **no atom kind yet** —
-  binding them needs a Caelus-core extension to `FactKind` *and* a cleanly
-  enumerable corpus (Robson's star catalog, the one PD candidate in the set, is
-  a garbled OCR table). Both are required, so they remain follow-ons.
+- **Varga, yoga, dasha, dignity-facet, reception, time-lord cells**: the
+  engine side is done — `FactKind` covers all seventeen atom kinds (`star`,
+  `lot`, `varga`, `yoga`, `timelord`, `dignity`, `reception`, and the rest),
+  and each has a live selector in `caelus`. What remains is corpus-side: a
+  cleanly enumerable public-domain text per cell (the Vedic sources need the
+  verse-level parser above; Robson's star catalog was rescued by hand-curation;
+  dignity and reception doctrine in Lilly is enumerable but not yet extracted).
+  Rules for these cells can land as soon as their extractors do.
 
 ## Corpus and licensing
 
