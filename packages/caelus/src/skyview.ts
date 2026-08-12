@@ -13,7 +13,7 @@ import { DEG, mod, J2000, jdTT, precessEcliptic } from "./core.js";
 import { Engine, BodyId, Observer, SIGNS, HouseSystem } from "./chart.js";
 import { starApparent } from "./stars.js";
 import {
-  azAlt, pheno, refractTrueToApparent, DIAMETER_KM,
+  azAlt, pheno, refractTrueToApparent, extinctionMag, DIAMETER_KM,
 } from "./pheno.js";
 import type { SyntheticRender } from "./synthetic.js";
 
@@ -96,7 +96,7 @@ const hfovFromFocal = (focal: number, sensor: number): number =>
 const focalFromHfov = (hfovDeg: number, sensor: number): number =>
   sensor / (2 * Math.tan((hfovDeg * DEG) / 2));
 
-function resolveLens(spec: LensSpec, width: number, height: number): SkyLens {
+export function resolveLens(spec: LensSpec, width: number, height: number): SkyLens {
   let name = "custom";
   let projection: SkyProjection = "rectilinear";
   let focal: number;
@@ -135,9 +135,88 @@ function resolveLens(spec: LensSpec, width: number, height: number): SkyLens {
   };
 }
 
+/** Where a direction lands on the image plane (see {@link skyPlacer}). */
+export interface SkyPlacement {
+  /** Apparent altitude after refraction (or the true altitude when off). */
+  altApp: number;
+  /** Pixel position; NaN when the direction is behind a rectilinear camera. */
+  x: number;
+  y: number;
+  inFrame: boolean;
+  /** Great-circle distance from the aim, degrees. */
+  deltaDeg: number;
+  /** Which frame edge the direction is beyond (or behind the camera). */
+  side: "left" | "right" | "above" | "below" | "behind";
+}
+
+/**
+ * The projection at SkyView's heart as a standalone, pinnable function: build
+ * the camera basis for an aim, and return the placer mapping an (azimuth,
+ * true-altitude) direction to the image plane under the lens's projection
+ * (rectilinear or fisheye), with optional atmospheric refraction. `skyView`
+ * composes this internally; the golden suite pins it directly against the
+ * Python reference (astroengine.skyview.place).
+ */
+export function skyPlacer(
+  aimAzDeg: number, aimAltDeg: number, lens: SkyLens, width: number, height: number,
+  opts: { refraction?: boolean; pressure?: number; tempC?: number } = {},
+): (azDeg: number, altTrueDeg: number, refractThis?: boolean) => SkyPlacement {
+  const refract = opts.refraction ?? true;
+  const pressure = opts.pressure ?? 1013.25;
+  const tempC = opts.tempC ?? 15.0;
+  // Camera basis from the aim. `right` is horizontal (no roll); near the zenith
+  // the up reference falls back to north.
+  const F = dirFromAzAlt(aimAzDeg, aimAltDeg);
+  let rightRaw = cross(F, [0, 0, 1]);
+  if (norm(rightRaw) < 1e-6) rightRaw = cross(F, [0, 1, 0]);
+  const right = unit(rightRaw);
+  const up = cross(right, F); // unit: right and F are orthonormal
+  const hfovR = lens.hfovDeg * DEG;
+  const vfovR = lens.vfovDeg * DEG;
+  const tanH = Math.tan(hfovR / 2);
+  const tanV = Math.tan(vfovR / 2);
+  return (azDeg: number, altTrueDeg: number, refractThis = refract): SkyPlacement => {
+    const altApp = refractThis ? refractTrueToApparent(altTrueDeg, pressure, tempC) : altTrueDeg;
+    const V = dirFromAzAlt(azDeg, altApp);
+    const f = dot(V, F);
+    const rr = dot(V, right);
+    const uu = dot(V, up);
+    let xn: number;
+    let yn: number;
+    let inFrame: boolean;
+    if (lens.projection === "rectilinear") {
+      if (f > 1e-9) {
+        xn = (rr / f) / tanH;
+        yn = (uu / f) / tanV;
+        inFrame = Math.abs(xn) <= 1 && Math.abs(yn) <= 1;
+      } else {
+        xn = rr >= 0 ? Infinity : -Infinity;
+        yn = uu >= 0 ? Infinity : -Infinity;
+        inFrame = false;
+      }
+    } else {
+      const theta = Math.acos(clamp1(f));
+      const psi = Math.atan2(uu, rr);
+      xn = (theta * Math.cos(psi)) / (hfovR / 2);
+      yn = (theta * Math.sin(psi)) / (vfovR / 2);
+      inFrame = Math.abs(xn) <= 1 && Math.abs(yn) <= 1;
+    }
+    const deltaDeg = Math.acos(clamp1(f)) / DEG;
+    let side: SkyPlacement["side"] = "behind";
+    if (f > 0) {
+      side = Math.abs(xn) >= Math.abs(yn)
+        ? (xn > 0 ? "right" : "left")
+        : (yn > 0 ? "above" : "below");
+    }
+    const x = Number.isFinite(xn) ? Math.round(((xn + 1) / 2) * width) : NaN;
+    const y = Number.isFinite(yn) ? Math.round(((1 - yn) / 2) * height) : NaN;
+    return { altApp, x, y, inFrame, deltaDeg, side };
+  };
+}
+
 export type TwilightStage = "day" | "civil" | "nautical" | "astronomical" | "night";
 
-function twilightStage(sunAltDeg: number): TwilightStage {
+export function twilightStage(sunAltDeg: number): TwilightStage {
   if (sunAltDeg > 0) return "day";
   if (sunAltDeg > -6) return "civil";
   if (sunAltDeg > -12) return "nautical";
@@ -156,7 +235,7 @@ const STAGE_CEILING: Record<TwilightStage, number> = {
  *  twilight-brightness ceiling and the site's dark-sky limit, then reduced when
  *  a bright Moon is up. With no Bortle class, the dark-site limit defaults to
  *  6.0 (suburban), matching the original behavior. */
-function limitingMag(
+export function limitingMag(
   stage: TwilightStage, moonAltDeg: number | null, moonIllum: number | null,
   bortle: number | undefined,
 ): number {
@@ -369,6 +448,11 @@ export interface SkyBody {
   sizePx: number;
   angularDiameterDeg: number;
   magnitude: number | null;
+  /** Atmospheric extinction at this altitude, magnitudes (Kasten & Young
+   *  air mass x 0.2 mag/airmass) -- the computed dimming a render pipeline
+   *  should apply near the horizon, instead of inventing its own. Null for
+   *  bodies without photometry. */
+  extinctionMag: number | null;
   /** Bright enough to see at this sky brightness. */
   nakedEye: boolean;
   /** How prominent to render the body, derived from its magnitude (a prompt
@@ -605,52 +689,9 @@ export function skyView(
   const right = unit(rightRaw);
   const up = cross(right, F); // unit: right and F are orthonormal
 
-  const hfovR = lens.hfovDeg * DEG;
-  const vfovR = lens.vfovDeg * DEG;
-  const tanH = Math.tan(hfovR / 2);
-  const tanV = Math.tan(vfovR / 2);
-
-  type Placed = {
-    altApp: number; x: number; y: number; inFrame: boolean;
-    deltaDeg: number; side: SkyOffFrameBody["side"];
-  };
-  const place = (azDeg: number, altTrueDeg: number, refractThis = refract): Placed => {
-    const altApp = refractThis ? refractTrueToApparent(altTrueDeg, pressure, tempC) : altTrueDeg;
-    const V = dirFromAzAlt(azDeg, altApp);
-    const f = dot(V, F);
-    const rr = dot(V, right);
-    const uu = dot(V, up);
-    let xn: number;
-    let yn: number;
-    let inFrame: boolean;
-    if (lens.projection === "rectilinear") {
-      if (f > 1e-9) {
-        xn = (rr / f) / tanH;
-        yn = (uu / f) / tanV;
-        inFrame = Math.abs(xn) <= 1 && Math.abs(yn) <= 1;
-      } else {
-        xn = rr >= 0 ? Infinity : -Infinity;
-        yn = uu >= 0 ? Infinity : -Infinity;
-        inFrame = false;
-      }
-    } else {
-      const theta = Math.acos(clamp1(f));
-      const psi = Math.atan2(uu, rr);
-      xn = (theta * Math.cos(psi)) / (hfovR / 2);
-      yn = (theta * Math.sin(psi)) / (vfovR / 2);
-      inFrame = Math.abs(xn) <= 1 && Math.abs(yn) <= 1;
-    }
-    const deltaDeg = Math.acos(clamp1(f)) / DEG;
-    let side: SkyOffFrameBody["side"] = "behind";
-    if (f > 0) {
-      side = Math.abs(xn) >= Math.abs(yn)
-        ? (xn > 0 ? "right" : "left")
-        : (yn > 0 ? "above" : "below");
-    }
-    const x = Number.isFinite(xn) ? Math.round(((xn + 1) / 2) * width) : NaN;
-    const y = Number.isFinite(yn) ? Math.round(((1 - yn) / 2) * height) : NaN;
-    return { altApp, x, y, inFrame, deltaDeg, side };
-  };
+  const place = skyPlacer(aimAz, aimAlt, lens, width, height, {
+    refraction: refract, pressure, tempC,
+  });
 
   // Sun and Moon up front: they drive twilight, limiting magnitude, the sky
   // gradient, and the Moon's bright-limb orientation.
@@ -702,10 +743,12 @@ export function skyView(
     if (!visible) continue;
 
     let magnitude: number | null = null;
+    let extinction: number | null = null;
     let diamDeg = 0;
     if (DIAMETER_KM[id] !== undefined) {
       const ph = pheno(engine, id, jdUt);
       magnitude = Math.round(ph.magnitude * 100) / 100;
+      extinction = Math.round(extinctionMag(p.altApp) * 100) / 100;
       diamDeg = ph.diameter;
     }
     const sizePx = Math.max(diamDeg > 0 ? 1 : 0, Math.round((diamDeg * width) / lens.hfovDeg));
@@ -731,7 +774,7 @@ export function skyView(
       altitudeDeg: Math.round(p.altApp * 10) / 10,
       x: p.x, y: p.y, inFrame: true,
       sizePx, angularDiameterDeg: Math.round(diamDeg * 1e4) / 1e4,
-      magnitude, nakedEye,
+      magnitude, extinctionMag: extinction, nakedEye,
       brightnessHint: brightnessDescriptor(magnitude, nakedEye),
       note: lowNote(id, p.altApp),
     };
@@ -770,13 +813,14 @@ export function skyView(
   const starCap = Math.min(starMagLimit, limit);
   let starfield: StarfieldSummary = { source: "none", count: 0, complete: false, limitingMag: limit };
 
-  const toStarBody = (name: string, mag: number, az: number, p: Placed): SkyBody => ({
+  const toStarBody = (name: string, mag: number, az: number, p: SkyPlacement): SkyBody => ({
     id: `star:${name}`, name,
     azimuthDeg: Math.round(az * 10) / 10,
     altitudeDeg: Math.round(p.altApp * 10) / 10,
     x: p.x, y: p.y, inFrame: true,
     sizePx: 0, angularDiameterDeg: 0,
-    magnitude: Math.round(mag * 100) / 100, nakedEye: true,
+    magnitude: Math.round(mag * 100) / 100,
+    extinctionMag: Math.round(extinctionMag(p.altApp) * 100) / 100, nakedEye: true,
     brightnessHint: brightnessDescriptor(Math.round(mag * 100) / 100, true),
   });
 
@@ -899,7 +943,7 @@ export function skyView(
     const req = opts.overlays;
     overlays = { ecliptic: null, signs: null, houses: null, constellations: null };
     // Project an ecliptic-of-date point (deg) to a frame placement.
-    const projEcl = (lonDeg: number, latDeg: number): Placed => {
+    const projEcl = (lonDeg: number, latDeg: number): SkyPlacement => {
       const [az, altTrue] = azAlt(engine.data, lonDeg, latDeg, jdUt, lat, lonEast);
       return place(az, altTrue, false);
     };
@@ -1325,7 +1369,10 @@ function buildRenderPlan(
         + "for cloud and atmosphere motion, never for the bodies.",
     },
     postprocess: [
-      "Apply atmospheric extinction and reddening to bodies below about 10 deg altitude.",
+      // Caelus owns the photometry: each body carries its computed
+      // extinctionMag, so the render pipeline dims by that number and only
+      // the color shift is left to the image model.
+      "Dim each body by its computed extinctionMag (already on the body); redden bodies below about 10 deg altitude.",
       "Add subtle bloom to bodies brighter than magnitude -1; keep faint stars crisp points.",
       "Match every composited layer to the plate's color temperature and exposure.",
     ],

@@ -1,0 +1,1287 @@
+{
+ "basis": "Python reference astroengine.skyview (embedded VSOP, full moon)",
+ "cases": [
+  {
+   "id": "lens-ultrawide",
+   "spec": {
+    "id": "lens-ultrawide",
+    "type": "lens",
+    "lens": "ultrawide",
+    "width": 1024,
+    "height": 683
+   },
+   "result": {
+    "name": "ultrawide",
+    "focal_length_mm": 14.0,
+    "sensor_width_mm": 36.0,
+    "projection": "fisheye",
+    "hfov_deg": 104.25,
+    "vfov_deg": 69.53
+   }
+  },
+  {
+   "id": "lens-wide",
+   "spec": {
+    "id": "lens-wide",
+    "type": "lens",
+    "lens": "wide",
+    "width": 1024,
+    "height": 683
+   },
+   "result": {
+    "name": "wide",
+    "focal_length_mm": 24.0,
+    "sensor_width_mm": 36.0,
+    "projection": "rectilinear",
+    "hfov_deg": 73.74,
+    "vfov_deg": 53.15
+   }
+  },
+  {
+   "id": "lens-standard",
+   "spec": {
+    "id": "lens-standard",
+    "type": "lens",
+    "lens": "standard",
+    "width": 1024,
+    "height": 683
+   },
+   "result": {
+    "name": "standard",
+    "focal_length_mm": 35.0,
+    "sensor_width_mm": 36.0,
+    "projection": "rectilinear",
+    "hfov_deg": 54.43,
+    "vfov_deg": 37.87
+   }
+  },
+  {
+   "id": "lens-normal",
+   "spec": {
+    "id": "lens-normal",
+    "type": "lens",
+    "lens": "normal",
+    "width": 1024,
+    "height": 683
+   },
+   "result": {
+    "name": "normal",
+    "focal_length_mm": 50.0,
+    "sensor_width_mm": 36.0,
+    "projection": "rectilinear",
+    "hfov_deg": 39.6,
+    "vfov_deg": 27.0
+   }
+  },
+  {
+   "id": "lens-portrait",
+   "spec": {
+    "id": "lens-portrait",
+    "type": "lens",
+    "lens": "portrait",
+    "width": 1024,
+    "height": 683
+   },
+   "result": {
+    "name": "portrait",
+    "focal_length_mm": 85.0,
+    "sensor_width_mm": 36.0,
+    "projection": "rectilinear",
+    "hfov_deg": 23.91,
+    "vfov_deg": 16.08
+   }
+  },
+  {
+   "id": "lens-telephoto",
+   "spec": {
+    "id": "lens-telephoto",
+    "type": "lens",
+    "lens": "telephoto",
+    "width": 1024,
+    "height": 683
+   },
+   "result": {
+    "name": "telephoto",
+    "focal_length_mm": 135.0,
+    "sensor_width_mm": 36.0,
+    "projection": "rectilinear",
+    "hfov_deg": 15.19,
+    "vfov_deg": 10.16
+   }
+  },
+  {
+   "id": "lens-supertele",
+   "spec": {
+    "id": "lens-supertele",
+    "type": "lens",
+    "lens": "supertele",
+    "width": 1024,
+    "height": 683
+   },
+   "result": {
+    "name": "supertele",
+    "focal_length_mm": 200.0,
+    "sensor_width_mm": 36.0,
+    "projection": "rectilinear",
+    "hfov_deg": 10.29,
+    "vfov_deg": 6.87
+   }
+  },
+  {
+   "id": "lens-custom-hfov",
+   "spec": {
+    "id": "lens-custom-hfov",
+    "type": "lens",
+    "lens": {
+     "hfovDeg": 100.0,
+     "projection": "fisheye"
+    },
+    "width": 1024,
+    "height": 683
+   },
+   "result": {
+    "name": "custom",
+    "focal_length_mm": 15.1,
+    "sensor_width_mm": 36.0,
+    "projection": "fisheye",
+    "hfov_deg": 100.0,
+    "vfov_deg": 66.7
+   }
+  },
+  {
+   "id": "lens-custom-focal",
+   "spec": {
+    "id": "lens-custom-focal",
+    "type": "lens",
+    "lens": {
+     "focalLengthMm": 32.0,
+     "sensorWidthMm": 23.5
+    },
+    "width": 1024,
+    "height": 683
+   },
+   "result": {
+    "name": "custom",
+    "focal_length_mm": 32.0,
+    "sensor_width_mm": 23.5,
+    "projection": "rectilinear",
+    "hfov_deg": 40.33,
+    "vfov_deg": 27.52
+   }
+  },
+  {
+   "id": "place-grid-rect",
+   "spec": {
+    "id": "place-grid-rect",
+    "type": "place",
+    "aim": [
+     270.0,
+     5.0
+    ],
+    "lens": "normal",
+    "width": 1024,
+    "height": 683,
+    "refraction": true,
+    "points": [
+     [
+      270.0,
+      5.0
+     ],
+     [
+      270.0,
+      45.0
+     ],
+     [
+      270.0,
+      -1.0
+     ],
+     [
+      275.0,
+      10.0
+     ],
+     [
+      250.0,
+      2.0
+     ],
+     [
+      300.0,
+      30.0
+     ],
+     [
+      315.0,
+      60.0
+     ],
+     [
+      90.0,
+      10.0
+     ],
+     [
+      90.0,
+      -5.0
+     ],
+     [
+      180.0,
+      5.0
+     ],
+     [
+      0.0,
+      40.0
+     ],
+     [
+      269.0,
+      0.4
+     ]
+    ]
+   },
+   "result": [
+    {
+     "alt_app": 5.158946036463957,
+     "x": 512,
+     "y": 338,
+     "in_frame": true,
+     "delta_deg": 0.15894603646162267,
+     "side": "above"
+    },
+    {
+     "alt_app": 45.016638801109565,
+     "x": 512,
+     "y": -853,
+     "in_frame": false,
+     "delta_deg": 40.01663880110957,
+     "side": "above"
+    },
+    {
+     "alt_app": -1.0,
+     "x": 512,
+     "y": 491,
+     "in_frame": true,
+     "delta_deg": 5.999999999999965,
+     "side": "below"
+    },
+    {
+     "alt_app": 10.088848271817637,
+     "x": 635,
+     "y": 214,
+     "in_frame": true,
+     "delta_deg": 7.102685633437132,
+     "side": "above"
+    },
+    {
+     "alt_app": 2.278089737802888,
+     "x": -6,
+     "y": 405,
+     "in_frame": false,
+     "delta_deg": 20.142117463643903,
+     "side": "left"
+    },
+    {
+     "alt_app": 30.028686558402768,
+     "x": 1291,
+     "y": -438,
+     "in_frame": false,
+     "delta_deg": 37.76347088233484,
+     "side": "above"
+    },
+    {
+     "alt_app": 60.00961399443816,
+     "x": 1688,
+     "y": -2426,
+     "in_frame": false,
+     "delta_deg": 64.68515800411409,
+     "side": "above"
+    },
+    {
+     "alt_app": 10.088848271817637,
+     "x": null,
+     "y": null,
+     "in_frame": false,
+     "delta_deg": 164.91115172818238,
+     "side": "behind"
+    },
+    {
+     "alt_app": -5.0,
+     "x": null,
+     "y": null,
+     "in_frame": false,
+     "delta_deg": 180.0,
+     "side": "behind"
+    },
+    {
+     "alt_app": 5.158946036463957,
+     "x": -180218,
+     "y": -15917,
+     "in_frame": false,
+     "delta_deg": 89.550970934275,
+     "side": "left"
+    },
+    {
+     "alt_app": 40.01981126355667,
+     "x": 19944,
+     "y": -15917,
+     "in_frame": false,
+     "delta_deg": 86.78713364412424,
+     "side": "above"
+    },
+    {
+     "alt_app": 0.8228985472694759,
+     "x": 487,
+     "y": 445,
+     "in_frame": true,
+     "delta_deg": 4.294781875185971,
+     "side": "below"
+    }
+   ]
+  },
+  {
+   "id": "place-grid-fisheye",
+   "spec": {
+    "id": "place-grid-fisheye",
+    "type": "place",
+    "aim": [
+     270.0,
+     5.0
+    ],
+    "lens": "ultrawide",
+    "width": 1024,
+    "height": 683,
+    "refraction": true,
+    "points": [
+     [
+      270.0,
+      5.0
+     ],
+     [
+      270.0,
+      45.0
+     ],
+     [
+      270.0,
+      -1.0
+     ],
+     [
+      275.0,
+      10.0
+     ],
+     [
+      250.0,
+      2.0
+     ],
+     [
+      300.0,
+      30.0
+     ],
+     [
+      315.0,
+      60.0
+     ],
+     [
+      90.0,
+      10.0
+     ],
+     [
+      90.0,
+      -5.0
+     ],
+     [
+      180.0,
+      5.0
+     ],
+     [
+      0.0,
+      40.0
+     ],
+     [
+      269.0,
+      0.4
+     ]
+    ]
+   },
+   "result": [
+    {
+     "alt_app": 5.158946036463957,
+     "x": 512,
+     "y": 340,
+     "in_frame": true,
+     "delta_deg": 0.15894603646162267,
+     "side": "above"
+    },
+    {
+     "alt_app": 45.016638801109565,
+     "x": 512,
+     "y": -52,
+     "in_frame": false,
+     "delta_deg": 40.01663880110957,
+     "side": "above"
+    },
+    {
+     "alt_app": -1.0,
+     "x": 512,
+     "y": 400,
+     "in_frame": true,
+     "delta_deg": 5.999999999999965,
+     "side": "below"
+    },
+    {
+     "alt_app": 10.088848271817637,
+     "x": 560,
+     "y": 291,
+     "in_frame": true,
+     "delta_deg": 7.102685633437132,
+     "side": "above"
+    },
+    {
+     "alt_app": 2.278089737802888,
+     "x": 316,
+     "y": 366,
+     "in_frame": true,
+     "delta_deg": 20.142117463643903,
+     "side": "left"
+    },
+    {
+     "alt_app": 30.028686558402768,
+     "x": 774,
+     "y": 79,
+     "in_frame": true,
+     "delta_deg": 37.76347088233484,
+     "side": "above"
+    },
+    {
+     "alt_app": 60.00961399443816,
+     "x": 760,
+     "y": -243,
+     "in_frame": false,
+     "delta_deg": 64.68515800411409,
+     "side": "above"
+    },
+    {
+     "alt_app": 10.088848271817637,
+     "x": 512,
+     "y": -1278,
+     "in_frame": false,
+     "delta_deg": 164.91115172818238,
+     "side": "behind"
+    },
+    {
+     "alt_app": -5.0,
+     "x": -1256,
+     "y": 341,
+     "in_frame": false,
+     "delta_deg": 180.0,
+     "side": "behind"
+    },
+    {
+     "alt_app": 5.158946036463957,
+     "x": -364,
+     "y": 263,
+     "in_frame": false,
+     "delta_deg": 89.550970934275,
+     "side": "left"
+    },
+    {
+     "alt_app": 40.01981126355667,
+     "x": 1166,
+     "y": -205,
+     "in_frame": false,
+     "delta_deg": 86.78713364412424,
+     "side": "above"
+    },
+    {
+     "alt_app": 0.8228985472694759,
+     "x": 502,
+     "y": 383,
+     "in_frame": true,
+     "delta_deg": 4.294781875185971,
+     "side": "below"
+    }
+   ]
+  },
+  {
+   "id": "place-zenith-near",
+   "spec": {
+    "id": "place-zenith-near",
+    "type": "place",
+    "aim": [
+     0.0,
+     89.9
+    ],
+    "lens": "wide",
+    "width": 1024,
+    "height": 683,
+    "refraction": true,
+    "points": [
+     [
+      0.0,
+      85.0
+     ],
+     [
+      180.0,
+      85.0
+     ],
+     [
+      90.0,
+      80.0
+     ],
+     [
+      0.0,
+      89.9
+     ],
+     [
+      45.0,
+      30.0
+     ],
+     [
+      270.0,
+      88.0
+     ]
+    ]
+   },
+   "result": [
+    {
+     "alt_app": 85.00143250536533,
+     "x": 512,
+     "y": 400,
+     "in_frame": true,
+     "delta_deg": 4.898567494634613,
+     "side": "below"
+    },
+    {
+     "alt_app": 85.00143250536533,
+     "x": 512,
+     "y": 281,
+     "in_frame": true,
+     "delta_deg": 5.098567494634651,
+     "side": "above"
+    },
+    {
+     "alt_app": 80.0029185113974,
+     "x": 632,
+     "y": 340,
+     "in_frame": true,
+     "delta_deg": 9.99757653650614,
+     "side": "right"
+    },
+    {
+     "alt_app": 89.89999754023884,
+     "x": 512,
+     "y": 342,
+     "in_frame": true,
+     "delta_deg": 2.4148365394514667e-06,
+     "side": "below"
+    },
+    {
+     "alt_app": 30.028686558402768,
+     "x": 1345,
+     "y": 1174,
+     "in_frame": false,
+     "delta_deg": 59.90062802024604,
+     "side": "below"
+    },
+    {
+     "alt_app": 88.00055283028122,
+     "x": 488,
+     "y": 340,
+     "in_frame": true,
+     "delta_deg": 2.001945285177785,
+     "side": "left"
+    }
+   ]
+  },
+  {
+   "id": "place-zenith-exact",
+   "spec": {
+    "id": "place-zenith-exact",
+    "type": "place",
+    "aim": [
+     0.0,
+     90.0
+    ],
+    "lens": "wide",
+    "width": 1024,
+    "height": 683,
+    "refraction": true,
+    "points": [
+     [
+      0.0,
+      85.0
+     ],
+     [
+      180.0,
+      85.0
+     ],
+     [
+      90.0,
+      80.0
+     ],
+     [
+      0.0,
+      89.9
+     ],
+     [
+      45.0,
+      30.0
+     ],
+     [
+      270.0,
+      88.0
+     ]
+    ]
+   },
+   "result": [
+    {
+     "alt_app": 85.00143250536533,
+     "x": 512,
+     "y": 282,
+     "in_frame": true,
+     "delta_deg": 4.99856749463465,
+     "side": "above"
+    },
+    {
+     "alt_app": 85.00143250536533,
+     "x": 512,
+     "y": 401,
+     "in_frame": true,
+     "delta_deg": 4.99856749463465,
+     "side": "below"
+    },
+    {
+     "alt_app": 80.0029185113974,
+     "x": 392,
+     "y": 342,
+     "in_frame": true,
+     "delta_deg": 9.997081488602598,
+     "side": "left"
+    },
+    {
+     "alt_app": 89.89999754023884,
+     "x": 512,
+     "y": 340,
+     "in_frame": true,
+     "delta_deg": 0.10000245976181152,
+     "side": "above"
+    },
+    {
+     "alt_app": 30.028686558402768,
+     "x": -323,
+     "y": -494,
+     "in_frame": false,
+     "delta_deg": 59.97131344159723,
+     "side": "above"
+    },
+    {
+     "alt_app": 88.00055283028122,
+     "x": 536,
+     "y": 342,
+     "in_frame": true,
+     "delta_deg": 1.999447169718768,
+     "side": "right"
+    }
+   ]
+  },
+  {
+   "id": "place-norefract",
+   "spec": {
+    "id": "place-norefract",
+    "type": "place",
+    "aim": [
+     270.0,
+     5.0
+    ],
+    "lens": "normal",
+    "width": 1024,
+    "height": 683,
+    "refraction": false,
+    "points": [
+     [
+      270.0,
+      5.0
+     ],
+     [
+      270.0,
+      45.0
+     ],
+     [
+      270.0,
+      -1.0
+     ],
+     [
+      275.0,
+      10.0
+     ],
+     [
+      250.0,
+      2.0
+     ],
+     [
+      300.0,
+      30.0
+     ],
+     [
+      315.0,
+      60.0
+     ],
+     [
+      90.0,
+      10.0
+     ],
+     [
+      90.0,
+      -5.0
+     ],
+     [
+      180.0,
+      5.0
+     ],
+     [
+      0.0,
+      40.0
+     ],
+     [
+      269.0,
+      0.4
+     ]
+    ]
+   },
+   "result": [
+    {
+     "alt_app": 5.0,
+     "x": 512,
+     "y": 342,
+     "in_frame": true,
+     "delta_deg": 0.0,
+     "side": "left"
+    },
+    {
+     "alt_app": 45.0,
+     "x": 512,
+     "y": -852,
+     "in_frame": false,
+     "delta_deg": 40.00000000000001,
+     "side": "above"
+    },
+    {
+     "alt_app": -1.0,
+     "x": 512,
+     "y": 491,
+     "in_frame": true,
+     "delta_deg": 5.999999999999965,
+     "side": "below"
+    },
+    {
+     "alt_app": 10.0,
+     "x": 635,
+     "y": 216,
+     "in_frame": true,
+     "delta_deg": 7.0397014191753895,
+     "side": "above"
+    },
+    {
+     "alt_app": 2.0,
+     "x": -6,
+     "y": 413,
+     "in_frame": false,
+     "delta_deg": 20.184194362444455,
+     "side": "left"
+    },
+    {
+     "alt_app": 30.0,
+     "x": 1291,
+     "y": -437,
+     "in_frame": false,
+     "delta_deg": 37.746787854413775,
+     "side": "above"
+    },
+    {
+     "alt_app": 60.0,
+     "x": 1688,
+     "y": -2425,
+     "in_frame": false,
+     "delta_deg": 64.67913296553816,
+     "side": "above"
+    },
+    {
+     "alt_app": 10.0,
+     "x": null,
+     "y": null,
+     "in_frame": false,
+     "delta_deg": 165.0,
+     "side": "behind"
+    },
+    {
+     "alt_app": -5.0,
+     "x": null,
+     "y": null,
+     "in_frame": false,
+     "delta_deg": 180.0,
+     "side": "behind"
+    },
+    {
+     "alt_app": 5.0,
+     "x": -185994,
+     "y": -15917,
+     "in_frame": false,
+     "delta_deg": 89.56476999753008,
+     "side": "left"
+    },
+    {
+     "alt_app": 40.0,
+     "x": 19958,
+     "y": -15917,
+     "in_frame": false,
+     "delta_deg": 86.78845823577284,
+     "side": "above"
+    },
+    {
+     "alt_app": 0.4,
+     "x": 487,
+     "y": 456,
+     "in_frame": true,
+     "delta_deg": 4.707147898452756,
+     "side": "below"
+    }
+   ]
+  },
+  {
+   "id": "twilight-limiting",
+   "spec": {
+    "id": "twilight-limiting",
+    "type": "twilight",
+    "sun_alts": [
+     -20.0,
+     -15.0,
+     -10.0,
+     -4.0,
+     3.0
+    ],
+    "moons": [
+     null,
+     [
+      30.0,
+      0.9
+     ]
+    ],
+    "bortles": [
+     null,
+     1,
+     6,
+     9
+    ]
+   },
+   "result": [
+    {
+     "stage": "night",
+     "limit": 6.0
+    },
+    {
+     "stage": "night",
+     "limit": 7.6
+    },
+    {
+     "stage": "night",
+     "limit": 5.5
+    },
+    {
+     "stage": "night",
+     "limit": 4.0
+    },
+    {
+     "stage": "night",
+     "limit": 4.7
+    },
+    {
+     "stage": "night",
+     "limit": 6.3
+    },
+    {
+     "stage": "night",
+     "limit": 4.2
+    },
+    {
+     "stage": "night",
+     "limit": 2.7
+    },
+    {
+     "stage": "astronomical",
+     "limit": 5.5
+    },
+    {
+     "stage": "astronomical",
+     "limit": 5.5
+    },
+    {
+     "stage": "astronomical",
+     "limit": 5.5
+    },
+    {
+     "stage": "astronomical",
+     "limit": 4.0
+    },
+    {
+     "stage": "astronomical",
+     "limit": 4.2
+    },
+    {
+     "stage": "astronomical",
+     "limit": 4.2
+    },
+    {
+     "stage": "astronomical",
+     "limit": 4.2
+    },
+    {
+     "stage": "astronomical",
+     "limit": 2.7
+    },
+    {
+     "stage": "nautical",
+     "limit": 4.0
+    },
+    {
+     "stage": "nautical",
+     "limit": 4.0
+    },
+    {
+     "stage": "nautical",
+     "limit": 4.0
+    },
+    {
+     "stage": "nautical",
+     "limit": 4.0
+    },
+    {
+     "stage": "nautical",
+     "limit": 2.7
+    },
+    {
+     "stage": "nautical",
+     "limit": 2.7
+    },
+    {
+     "stage": "nautical",
+     "limit": 2.7
+    },
+    {
+     "stage": "nautical",
+     "limit": 2.7
+    },
+    {
+     "stage": "civil",
+     "limit": 1.5
+    },
+    {
+     "stage": "civil",
+     "limit": 1.5
+    },
+    {
+     "stage": "civil",
+     "limit": 1.5
+    },
+    {
+     "stage": "civil",
+     "limit": 1.5
+    },
+    {
+     "stage": "civil",
+     "limit": 0.1
+    },
+    {
+     "stage": "civil",
+     "limit": 0.1
+    },
+    {
+     "stage": "civil",
+     "limit": 0.1
+    },
+    {
+     "stage": "civil",
+     "limit": 0.1
+    },
+    {
+     "stage": "day",
+     "limit": -4.0
+    },
+    {
+     "stage": "day",
+     "limit": -4.0
+    },
+    {
+     "stage": "day",
+     "limit": -4.0
+    },
+    {
+     "stage": "day",
+     "limit": -4.0
+    },
+    {
+     "stage": "day",
+     "limit": -4.0
+    },
+    {
+     "stage": "day",
+     "limit": -4.0
+    },
+    {
+     "stage": "day",
+     "limit": -4.0
+    },
+    {
+     "stage": "day",
+     "limit": -4.0
+    }
+   ]
+  },
+  {
+   "id": "extinction-curve",
+   "spec": {
+    "id": "extinction-curve",
+    "type": "extinction",
+    "alts": [
+     0.0,
+     1.0,
+     2.0,
+     5.0,
+     10.0,
+     20.0,
+     45.0,
+     90.0
+    ]
+   },
+   "result": [
+    7.58392167556725,
+    5.262111013677053,
+    3.886649021514401,
+    2.061158265586061,
+    1.11720717597024,
+    0.58062932976062,
+    0.2825190504052549,
+    0.19994239837116765
+   ]
+  },
+  {
+   "id": "bodies-tampa-sunset",
+   "spec": {
+    "id": "bodies-tampa-sunset",
+    "type": "bodies",
+    "jd": [
+     1990,
+     6,
+     10,
+     23,
+     30,
+     0
+    ],
+    "observer": {
+     "lat": 27.95,
+     "lon_east": -82.46,
+     "alt_m": 3
+    },
+    "aim": {
+     "azimuth": "W",
+     "altitude": 5
+    },
+    "lens": "normal",
+    "image": {
+     "width": 1024,
+     "height": 683
+    }
+   },
+   "result": {
+    "summary": {
+     "twilight": "day",
+     "limiting_mag": -4.0,
+     "sun_alt_true": 10.4,
+     "moon_alt_true": -36.9,
+     "moon_illum": 0.941,
+     "moon_waxing": false
+    },
+    "bodies": [],
+    "off_frame": [
+     {
+      "id": "sun",
+      "side": "right",
+      "delta_deg": 21.2,
+      "azimuth_deg": 290.7,
+      "altitude_deg": 10.5,
+      "magnitude": -26.83
+     }
+    ]
+   }
+  },
+  {
+   "id": "bodies-london-night",
+   "spec": {
+    "id": "bodies-london-night",
+    "type": "bodies",
+    "jd": [
+     2024,
+     3,
+     20,
+     22,
+     0,
+     0
+    ],
+    "observer": {
+     "lat": 51.5,
+     "lon_east": -0.12,
+     "alt_m": 11
+    },
+    "aim": {
+     "azimuth": "SE",
+     "altitude": 20
+    },
+    "lens": "wide",
+    "image": {
+     "width": 800,
+     "height": 600
+    },
+    "bortle": 4
+   },
+   "result": {
+    "summary": {
+     "twilight": "night",
+     "limiting_mag": 5.2,
+     "sun_alt_true": -31.6,
+     "moon_alt_true": 58.5,
+     "moon_illum": 0.837,
+     "moon_waxing": true
+    },
+    "bodies": [],
+    "off_frame": [
+     {
+      "id": "moon",
+      "side": "above",
+      "delta_deg": 60.6,
+      "azimuth_deg": 201.0,
+      "altitude_deg": 58.5,
+      "magnitude": -11.36
+     }
+    ]
+   }
+  },
+  {
+   "id": "bodies-tampa-sun-wnw",
+   "spec": {
+    "id": "bodies-tampa-sun-wnw",
+    "type": "bodies",
+    "jd": [
+     1990,
+     6,
+     10,
+     23,
+     30,
+     0
+    ],
+    "observer": {
+     "lat": 27.95,
+     "lon_east": -82.46,
+     "alt_m": 3
+    },
+    "aim": {
+     "azimuth": "WNW",
+     "altitude": 15
+    },
+    "lens": "wide",
+    "image": {
+     "width": 1024,
+     "height": 683
+    }
+   },
+   "result": {
+    "summary": {
+     "twilight": "day",
+     "limiting_mag": -4.0,
+     "sun_alt_true": 10.4,
+     "moon_alt_true": -36.9,
+     "moon_illum": 0.941,
+     "moon_waxing": false
+    },
+    "bodies": [
+     {
+      "id": "sun",
+      "azimuth_deg": 290.7,
+      "altitude_deg": 10.5,
+      "x": 491,
+      "y": 395,
+      "in_frame": true,
+      "size_px": 7,
+      "angular_diameter_deg": 0.5251,
+      "magnitude": -26.83,
+      "extinction_mag": 1.07,
+      "naked_eye": true
+     },
+     {
+      "id": "jupiter",
+      "azimuth_deg": 280.0,
+      "altitude_deg": 33.6,
+      "x": 380,
+      "y": 104,
+      "in_frame": true,
+      "size_px": 1,
+      "angular_diameter_deg": 0.0088,
+      "magnitude": -1.87,
+      "extinction_mag": 0.36,
+      "naked_eye": false
+     }
+    ],
+    "off_frame": []
+   }
+  },
+  {
+   "id": "bodies-london-moon-aim",
+   "spec": {
+    "id": "bodies-london-moon-aim",
+    "type": "bodies",
+    "jd": [
+     2024,
+     3,
+     20,
+     22,
+     0,
+     0
+    ],
+    "observer": {
+     "lat": 51.5,
+     "lon_east": -0.12,
+     "alt_m": 11
+    },
+    "aim": {
+     "azimuth": 202.5,
+     "altitude": 55
+    },
+    "lens": "normal",
+    "image": {
+     "width": 1024,
+     "height": 683
+    },
+    "bortle": 4
+   },
+   "result": {
+    "summary": {
+     "twilight": "night",
+     "limiting_mag": 5.2,
+     "sun_alt_true": -31.6,
+     "moon_alt_true": 58.5,
+     "moon_illum": 0.837,
+     "moon_waxing": true
+    },
+    "bodies": [
+     {
+      "id": "moon",
+      "azimuth_deg": 201.0,
+      "altitude_deg": 58.5,
+      "x": 493,
+      "y": 255,
+      "in_frame": true,
+      "size_px": 13,
+      "angular_diameter_deg": 0.4937,
+      "magnitude": -11.36,
+      "extinction_mag": 0.23,
+      "naked_eye": true,
+      "illum": 0.837,
+      "bright_limb_angle_deg": 6.2
+     }
+    ],
+    "off_frame": []
+   }
+  }
+ ]
+}

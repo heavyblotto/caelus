@@ -186,6 +186,27 @@ export function refractTrueToApparent(
   return out < 0.0 ? altDeg : out;
 }
 
+/**
+ * Relative optical air mass at an apparent altitude (Kasten & Young 1989).
+ * 1.0 at the zenith, ~38 at the horizon; below the horizon the horizon
+ * value is returned (the path length stops growing once the ray grazes).
+ */
+export function airmass(altAppDeg: number): number {
+  const alt = Math.max(0, altAppDeg);
+  const z = 90 - alt;
+  return 1 / (Math.cos(z * DEG) + 0.50572 * Math.pow(6.07995 + alt, -1.6364));
+}
+
+/**
+ * Atmospheric extinction in magnitudes at an apparent altitude: `k` mag per
+ * air mass (default 0.2, a clear-sky visual coefficient; hazy sites run
+ * 0.3+). This is the dimming the horizon note describes -- computed, so a
+ * render pipeline consumes a number instead of re-inventing the physics.
+ */
+export function extinctionMag(altAppDeg: number, k = 0.2): number {
+  return k * airmass(altAppDeg);
+}
+
 /** Bennett refraction, degrees. */
 export function refractApparentToTrue(
   altDeg: number, pressure = 1013.25, tempC = 15.0,
