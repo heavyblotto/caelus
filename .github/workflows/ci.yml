@@ -59,6 +59,22 @@ jobs:
       - run: node packages/caelus/dist/test/features-experiment.test.js
       # geometric compiler (constraints -> wheel): loss golden + solver behaviour
       - run: node packages/caelus/dist/test/compiler-golden.test.js
+      # aspect patterns (stellium, t-square, ...): TS port must match the reference
+      - run: node packages/caelus/dist/test/patterns-golden.test.js
+      # chart signature (element/mode/hemisphere balance): must match the reference
+      - run: node packages/caelus/dist/test/signature-golden.test.js
+      # essential dignities + almuten: TS port must match the Python reference
+      - run: node packages/caelus/dist/test/dignity-golden.test.js
+      # parans (co-angular bodies): TS port must match the Python reference
+      - run: node packages/caelus/dist/test/parans-golden.test.js
+      # sky view (alt-az projection + photometry): deterministic checks (TS-only)
+      - run: node packages/caelus/dist/test/skyview.test.js
+      # synthetic ephemeris (imaginary moving bodies): deterministic checks (TS-only)
+      - run: node packages/caelus/dist/test/synthetic.test.js
+      # every test/*.test.* file in the repo must be wired into this workflow;
+      # four golden suites once sat dormant for ~11 releases because this list
+      # is maintained by hand. The gate makes silent omission impossible.
+      - run: node scripts/check-test-wiring.mjs
       # interpretation corpus: compiled rules must bind to legal atoms only
       - run: npm run build -w caelus-delineations-pd
       - run: npm run test -w caelus-delineations-pd
