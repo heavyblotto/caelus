@@ -1,0 +1,2762 @@
+{
+ "basis": "Python reference astroengine.canonical; equality, not tolerance",
+ "cases": [
+  {
+   "id": "round-half-up",
+   "type": "round",
+   "spec": {
+    "values": [
+     0.5,
+     -0.5,
+     1.5,
+     2.5,
+     -1.5,
+     0.49999999999999994,
+     1.0000000000000002,
+     -2.5,
+     12.499999999999998
+    ]
+   },
+   "result": [
+    1,
+    0,
+    2,
+    3,
+    -1,
+    1,
+    1,
+    -2,
+    12
+   ]
+  },
+  {
+   "id": "sha256-vectors",
+   "type": "sha256",
+   "spec": {
+    "inputs": [
+     "",
+     "abc",
+     "The quick brown fox jumps over the lazy dog",
+     "caelus-canonical \u2609\u263d"
+    ]
+   },
+   "result": [
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+    "d7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592",
+    "e549c261e5b6b324c8358ab3966965c2c515d4b8f6c9aae99aa1b61fd79a63b6"
+   ]
+  },
+  {
+   "id": "encode-shape",
+   "type": "encode",
+   "spec": {
+    "value": {
+     "b": 2,
+     "a": [
+      1,
+      "two",
+      null,
+      true,
+      {
+       "z": 0,
+       "y": -3
+      }
+     ]
+    }
+   },
+   "result": "{\"a\":[1,\"two\",null,true,{\"y\":-3,\"z\":0}],\"b\":2}"
+  },
+  {
+   "id": "times-ms",
+   "type": "times",
+   "spec": {
+    "jds": [
+     2451545.0,
+     2451545.5,
+     2447892.10428,
+     null,
+     2466154.0
+    ]
+   },
+   "result": [
+    0,
+    43200000,
+    -315610190208,
+    null,
+    1262217600000
+   ]
+  },
+  {
+   "id": "chart-structure-arcsec",
+   "type": "chart",
+   "spec": {
+    "id": "tampa-1990",
+    "jd": [
+     1990,
+     6,
+     10,
+     14,
+     30,
+     0
+    ],
+    "lat": 27.95,
+    "lon": -82.46,
+    "hs": "placidus",
+    "zodiac": "tropical",
+    "grid": "arcsec"
+   },
+   "result": {
+    "format": "caelus-canonical",
+    "version": 1,
+    "grid": "arcsec",
+    "units": {
+     "angle": "arcsec",
+     "speed": "arcsec/day",
+     "time": "ms since J2000.0 (JD 2451545.0 UT)",
+     "dist": "micro-AU",
+     "strength": "per-mille"
+    },
+    "timeMs": -301699800000,
+    "zodiac": "tropical",
+    "houseSystem": "placidus",
+    "houseSystemRequested": "placidus",
+    "bodies": {
+     "sun": {
+      "lon": 286027,
+      "lat": 0,
+      "speed": 3441,
+      "latSpeed": 0,
+      "distMicroAu": 1015237,
+      "ra": 282698,
+      "dec": 82882,
+      "sign": "Gemini",
+      "signDeg": 70027,
+      "house": 11,
+      "retrograde": false,
+      "dignities": []
+     },
+     "moon": {
+      "lon": 1019821,
+      "lat": -7769,
+      "speed": 43870,
+      "latSpeed": 3563,
+      "distMicroAu": 2671,
+      "ra": 1024800,
+      "dec": -89735,
+      "sign": "Capricorn",
+      "signDeg": 47821,
+      "house": 6,
+      "retrograde": false,
+      "dignities": [
+       "detriment"
+      ]
+     },
+     "mercury": {
+      "lon": 208249,
+      "lat": -8907,
+      "speed": 5353,
+      "latSpeed": 540,
+      "distMicroAu": 1015417,
+      "ra": 202197,
+      "dec": 62175,
+      "sign": "Taurus",
+      "signDeg": 100249,
+      "house": 10,
+      "retrograde": false,
+      "dignities": []
+     },
+     "venus": {
+      "lon": 154913,
+      "lat": -7268,
+      "speed": 4217,
+      "latSpeed": 42,
+      "distMicroAu": 1222437,
+      "ra": 148348,
+      "dec": 49776,
+      "sign": "Taurus",
+      "signDeg": 46913,
+      "house": 10,
+      "retrograde": false,
+      "dignities": [
+       "domicile"
+      ]
+     },
+     "mars": {
+      "lon": 27031,
+      "lat": -7039,
+      "speed": 2607,
+      "latSpeed": -24,
+      "distMicroAu": 1306551,
+      "ra": 27602,
+      "dec": 4260,
+      "sign": "Aries",
+      "signDeg": 27031,
+      "house": 9,
+      "retrograde": false,
+      "dignities": [
+       "domicile"
+      ]
+     },
+     "jupiter": {
+      "lon": 377409,
+      "lat": 644,
+      "speed": 769,
+      "latSpeed": 5,
+      "distMicroAu": 6107796,
+      "ra": 382051,
+      "dec": 82058,
+      "sign": "Cancer",
+      "signDeg": 53409,
+      "house": 12,
+      "retrograde": false,
+      "dignities": [
+       "exaltation"
+      ]
+     },
+     "saturn": {
+      "lon": 1059503,
+      "lat": 443,
+      "speed": -192,
+      "latSpeed": -5,
+      "distMicroAu": 9164152,
+      "ra": 1066273,
+      "dec": -76090,
+      "sign": "Capricorn",
+      "signDeg": 87503,
+      "house": 6,
+      "retrograde": true,
+      "dignities": [
+       "domicile"
+      ]
+     },
+     "uranus": {
+      "lon": 1002069,
+      "lat": -1161,
+      "speed": -135,
+      "latSpeed": -1,
+      "distMicroAu": 18445973,
+      "ra": 1004811,
+      "dec": -84602,
+      "sign": "Capricorn",
+      "signDeg": 30069,
+      "house": 5,
+      "retrograde": true,
+      "dignities": []
+     },
+     "neptune": {
+      "lon": 1021813,
+      "lat": 3154,
+      "speed": -86,
+      "latSpeed": 0,
+      "distMicroAu": 29280369,
+      "ra": 1025749,
+      "dec": -78666,
+      "sign": "Capricorn",
+      "signDeg": 49813,
+      "house": 6,
+      "retrograde": true,
+      "dignities": []
+     },
+     "pluto": {
+      "lon": 811816,
+      "lat": 57181,
+      "speed": -79,
+      "latSpeed": -22,
+      "distMicroAu": 28842787,
+      "ra": 819373,
+      "dec": -4505,
+      "sign": "Scorpio",
+      "signDeg": 55816,
+      "house": 4,
+      "retrograde": true,
+      "dignities": []
+     },
+     "chiron": {
+      "lon": 380054,
+      "lat": -22613,
+      "speed": 356,
+      "latSpeed": 12,
+      "distMicroAu": 11904762,
+      "ra": 382102,
+      "dec": 58653,
+      "sign": "Cancer",
+      "signDeg": 56054,
+      "house": 12,
+      "retrograde": false,
+      "dignities": []
+     },
+     "mean_node": {
+      "lon": 1115845,
+      "lat": 0,
+      "speed": -191,
+      "latSpeed": 0,
+      "distMicroAu": null,
+      "ra": 1124648,
+      "dec": -63916,
+      "sign": "Aquarius",
+      "signDeg": 35845,
+      "house": 6,
+      "retrograde": true,
+      "dignities": []
+     },
+     "true_node": {
+      "lon": 1109288,
+      "lat": 0,
+      "speed": -236,
+      "latSpeed": 0,
+      "distMicroAu": null,
+      "ra": 1117997,
+      "dec": -65644,
+      "sign": "Aquarius",
+      "signDeg": 29288,
+      "house": 6,
+      "retrograde": true,
+      "dignities": []
+     }
+    },
+    "unavailable": [],
+    "angles": {
+     "asc": 471244,
+     "mc": 129746,
+     "vertex": 913968,
+     "eastPoint": 437351
+    },
+    "cusps": [
+     471244,
+     559168,
+     661576,
+     777746,
+     898194,
+     1013001,
+     1119244,
+     1207168,
+     13576,
+     129746,
+     250194,
+     365001
+    ],
+    "aspects": [
+     {
+      "a": "moon",
+      "b": "venus",
+      "aspect": "trine",
+      "orb": 908,
+      "phase": "separating",
+      "strengthPerMille": 964
+     },
+     {
+      "a": "moon",
+      "b": "mars",
+      "aspect": "square",
+      "orb": 20790,
+      "phase": "separating",
+      "strengthPerMille": 175
+     },
+     {
+      "a": "moon",
+      "b": "jupiter",
+      "aspect": "opposition",
+      "orb": 5588,
+      "phase": "applying",
+      "strengthPerMille": 806
+     },
+     {
+      "a": "moon",
+      "b": "uranus",
+      "aspect": "conjunction",
+      "orb": 17752,
+      "phase": "separating",
+      "strengthPerMille": 384
+     },
+     {
+      "a": "moon",
+      "b": "neptune",
+      "aspect": "conjunction",
+      "orb": 1992,
+      "phase": "applying",
+      "strengthPerMille": 931
+     },
+     {
+      "a": "moon",
+      "b": "pluto",
+      "aspect": "sextile",
+      "orb": 7995,
+      "phase": "applying",
+      "strengthPerMille": 445
+     },
+     {
+      "a": "moon",
+      "b": "chiron",
+      "aspect": "opposition",
+      "orb": 8233,
+      "phase": "applying",
+      "strengthPerMille": 714
+     },
+     {
+      "a": "mercury",
+      "b": "saturn",
+      "aspect": "trine",
+      "orb": 12746,
+      "phase": "separating",
+      "strengthPerMille": 494
+     },
+     {
+      "a": "venus",
+      "b": "jupiter",
+      "aspect": "sextile",
+      "orb": 6496,
+      "phase": "applying",
+      "strengthPerMille": 549
+     },
+     {
+      "a": "venus",
+      "b": "uranus",
+      "aspect": "trine",
+      "orb": 16844,
+      "phase": "separating",
+      "strengthPerMille": 332
+     },
+     {
+      "a": "venus",
+      "b": "neptune",
+      "aspect": "trine",
+      "orb": 2900,
+      "phase": "applying",
+      "strengthPerMille": 885
+     },
+     {
+      "a": "venus",
+      "b": "pluto",
+      "aspect": "opposition",
+      "orb": 8903,
+      "phase": "applying",
+      "strengthPerMille": 691
+     },
+     {
+      "a": "venus",
+      "b": "chiron",
+      "aspect": "sextile",
+      "orb": 9141,
+      "phase": "applying",
+      "strengthPerMille": 365
+     },
+     {
+      "a": "mars",
+      "b": "uranus",
+      "aspect": "square",
+      "orb": 3038,
+      "phase": "applying",
+      "strengthPerMille": 879
+     },
+     {
+      "a": "mars",
+      "b": "neptune",
+      "aspect": "square",
+      "orb": 22782,
+      "phase": "applying",
+      "strengthPerMille": 96
+     },
+     {
+      "a": "jupiter",
+      "b": "uranus",
+      "aspect": "opposition",
+      "orb": 23340,
+      "phase": "separating",
+      "strengthPerMille": 190
+     },
+     {
+      "a": "jupiter",
+      "b": "neptune",
+      "aspect": "opposition",
+      "orb": 3596,
+      "phase": "separating",
+      "strengthPerMille": 875
+     },
+     {
+      "a": "jupiter",
+      "b": "pluto",
+      "aspect": "trine",
+      "orb": 2407,
+      "phase": "applying",
+      "strengthPerMille": 904
+     },
+     {
+      "a": "jupiter",
+      "b": "chiron",
+      "aspect": "conjunction",
+      "orb": 2645,
+      "phase": "applying",
+      "strengthPerMille": 908
+     },
+     {
+      "a": "uranus",
+      "b": "neptune",
+      "aspect": "conjunction",
+      "orb": 19744,
+      "phase": "separating",
+      "strengthPerMille": 314
+     },
+     {
+      "a": "uranus",
+      "b": "chiron",
+      "aspect": "opposition",
+      "orb": 25985,
+      "phase": "separating",
+      "strengthPerMille": 98
+     },
+     {
+      "a": "neptune",
+      "b": "pluto",
+      "aspect": "sextile",
+      "orb": 6003,
+      "phase": "separating",
+      "strengthPerMille": 583
+     },
+     {
+      "a": "neptune",
+      "b": "chiron",
+      "aspect": "opposition",
+      "orb": 6241,
+      "phase": "separating",
+      "strengthPerMille": 783
+     },
+     {
+      "a": "pluto",
+      "b": "chiron",
+      "aspect": "trine",
+      "orb": 238,
+      "phase": "separating",
+      "strengthPerMille": 991
+     }
+    ],
+    "warnings": []
+   }
+  },
+  {
+   "id": "chart-structure-milliarcsec",
+   "type": "chart",
+   "spec": {
+    "id": "tampa-1990",
+    "jd": [
+     1990,
+     6,
+     10,
+     14,
+     30,
+     0
+    ],
+    "lat": 27.95,
+    "lon": -82.46,
+    "hs": "placidus",
+    "zodiac": "tropical",
+    "grid": "milliarcsec"
+   },
+   "result": {
+    "format": "caelus-canonical",
+    "version": 1,
+    "grid": "milliarcsec",
+    "units": {
+     "angle": "milliarcsec",
+     "speed": "milliarcsec/day",
+     "time": "ms since J2000.0 (JD 2451545.0 UT)",
+     "dist": "micro-AU",
+     "strength": "per-mille"
+    },
+    "timeMs": -301699800000,
+    "zodiac": "tropical",
+    "houseSystem": "placidus",
+    "houseSystemRequested": "placidus",
+    "bodies": {
+     "sun": {
+      "lon": 286027223,
+      "lat": -122,
+      "speed": 3440918,
+      "latSpeed": 124,
+      "distMicroAu": 1015237,
+      "ra": 282698116,
+      "dec": 82882167,
+      "sign": "Gemini",
+      "signDeg": 70027223,
+      "house": 11,
+      "retrograde": false,
+      "dignities": []
+     },
+     "moon": {
+      "lon": 1019820985,
+      "lat": -7769425,
+      "speed": 43870393,
+      "latSpeed": 3562841,
+      "distMicroAu": 2671,
+      "ra": 1024799562,
+      "dec": -89734743,
+      "sign": "Capricorn",
+      "signDeg": 47820985,
+      "house": 6,
+      "retrograde": false,
+      "dignities": [
+       "detriment"
+      ]
+     },
+     "mercury": {
+      "lon": 208248946,
+      "lat": -8907020,
+      "speed": 5352952,
+      "latSpeed": 539535,
+      "distMicroAu": 1015417,
+      "ra": 202196988,
+      "dec": 62174553,
+      "sign": "Taurus",
+      "signDeg": 100248946,
+      "house": 10,
+      "retrograde": false,
+      "dignities": []
+     },
+     "venus": {
+      "lon": 154912813,
+      "lat": -7267731,
+      "speed": 4216982,
+      "latSpeed": 41792,
+      "distMicroAu": 1222437,
+      "ra": 148347656,
+      "dec": 49775613,
+      "sign": "Taurus",
+      "signDeg": 46912813,
+      "house": 10,
+      "retrograde": false,
+      "dignities": [
+       "domicile"
+      ]
+     },
+     "mars": {
+      "lon": 27030742,
+      "lat": -7039102,
+      "speed": 2606646,
+      "latSpeed": -23563,
+      "distMicroAu": 1306551,
+      "ra": 27602323,
+      "dec": 4259833,
+      "sign": "Aries",
+      "signDeg": 27030742,
+      "house": 9,
+      "retrograde": false,
+      "dignities": [
+       "domicile"
+      ]
+     },
+     "jupiter": {
+      "lon": 377408883,
+      "lat": 643521,
+      "speed": 769399,
+      "latSpeed": 5032,
+      "distMicroAu": 6107796,
+      "ra": 382051103,
+      "dec": 82058461,
+      "sign": "Cancer",
+      "signDeg": 53408883,
+      "house": 12,
+      "retrograde": false,
+      "dignities": [
+       "exaltation"
+      ]
+     },
+     "saturn": {
+      "lon": 1059502596,
+      "lat": 443052,
+      "speed": -191944,
+      "latSpeed": -4695,
+      "distMicroAu": 9164152,
+      "ra": 1066272982,
+      "dec": -76090205,
+      "sign": "Capricorn",
+      "signDeg": 87502596,
+      "house": 6,
+      "retrograde": true,
+      "dignities": [
+       "domicile"
+      ]
+     },
+     "uranus": {
+      "lon": 1002069417,
+      "lat": -1161275,
+      "speed": -135088,
+      "latSpeed": -880,
+      "distMicroAu": 18445973,
+      "ra": 1004810763,
+      "dec": -84602470,
+      "sign": "Capricorn",
+      "signDeg": 30069417,
+      "house": 5,
+      "retrograde": true,
+      "dignities": []
+     },
+     "neptune": {
+      "lon": 1021813085,
+      "lat": 3153849,
+      "speed": -85967,
+      "latSpeed": 171,
+      "distMicroAu": 29280369,
+      "ra": 1025748989,
+      "dec": -78665603,
+      "sign": "Capricorn",
+      "signDeg": 49813085,
+      "house": 6,
+      "retrograde": true,
+      "dignities": []
+     },
+     "pluto": {
+      "lon": 811816460,
+      "lat": 57180829,
+      "speed": -78834,
+      "latSpeed": -21513,
+      "distMicroAu": 28842787,
+      "ra": 819373370,
+      "dec": -4505059,
+      "sign": "Scorpio",
+      "signDeg": 55816460,
+      "house": 4,
+      "retrograde": true,
+      "dignities": []
+     },
+     "chiron": {
+      "lon": 380053566,
+      "lat": -22612639,
+      "speed": 356072,
+      "latSpeed": 12030,
+      "distMicroAu": 11904762,
+      "ra": 382101625,
+      "dec": 58653038,
+      "sign": "Cancer",
+      "signDeg": 56053566,
+      "house": 12,
+      "retrograde": false,
+      "dignities": []
+     },
+     "mean_node": {
+      "lon": 1115845480,
+      "lat": 0,
+      "speed": -190511,
+      "latSpeed": 0,
+      "distMicroAu": null,
+      "ra": 1124647950,
+      "dec": -63916361,
+      "sign": "Aquarius",
+      "signDeg": 35845480,
+      "house": 6,
+      "retrograde": true,
+      "dignities": []
+     },
+     "true_node": {
+      "lon": 1109287821,
+      "lat": 0,
+      "speed": -236328,
+      "latSpeed": 0,
+      "distMicroAu": null,
+      "ra": 1117996622,
+      "dec": -65644204,
+      "sign": "Aquarius",
+      "signDeg": 29287821,
+      "house": 6,
+      "retrograde": true,
+      "dignities": []
+     }
+    },
+    "unavailable": [],
+    "angles": {
+     "asc": 471244334,
+     "mc": 129746293,
+     "vertex": 913967559,
+     "eastPoint": 437350621
+    },
+    "cusps": [
+     471244334,
+     559167560,
+     661576087,
+     777746293,
+     898194127,
+     1013000962,
+     1119244334,
+     1207167560,
+     13576087,
+     129746293,
+     250194127,
+     365000962
+    ],
+    "aspects": [
+     {
+      "a": "moon",
+      "b": "venus",
+      "aspect": "trine",
+      "orb": 908172,
+      "phase": "separating",
+      "strengthPerMille": 964
+     },
+     {
+      "a": "moon",
+      "b": "mars",
+      "aspect": "square",
+      "orb": 20790243,
+      "phase": "separating",
+      "strengthPerMille": 175
+     },
+     {
+      "a": "moon",
+      "b": "jupiter",
+      "aspect": "opposition",
+      "orb": 5587898,
+      "phase": "applying",
+      "strengthPerMille": 806
+     },
+     {
+      "a": "moon",
+      "b": "uranus",
+      "aspect": "conjunction",
+      "orb": 17751568,
+      "phase": "separating",
+      "strengthPerMille": 384
+     },
+     {
+      "a": "moon",
+      "b": "neptune",
+      "aspect": "conjunction",
+      "orb": 1992100,
+      "phase": "applying",
+      "strengthPerMille": 931
+     },
+     {
+      "a": "moon",
+      "b": "pluto",
+      "aspect": "sextile",
+      "orb": 7995475,
+      "phase": "applying",
+      "strengthPerMille": 445
+     },
+     {
+      "a": "moon",
+      "b": "chiron",
+      "aspect": "opposition",
+      "orb": 8232581,
+      "phase": "applying",
+      "strengthPerMille": 714
+     },
+     {
+      "a": "mercury",
+      "b": "saturn",
+      "aspect": "trine",
+      "orb": 12746350,
+      "phase": "separating",
+      "strengthPerMille": 494
+     },
+     {
+      "a": "venus",
+      "b": "jupiter",
+      "aspect": "sextile",
+      "orb": 6496070,
+      "phase": "applying",
+      "strengthPerMille": 549
+     },
+     {
+      "a": "venus",
+      "b": "uranus",
+      "aspect": "trine",
+      "orb": 16843396,
+      "phase": "separating",
+      "strengthPerMille": 332
+     },
+     {
+      "a": "venus",
+      "b": "neptune",
+      "aspect": "trine",
+      "orb": 2900272,
+      "phase": "applying",
+      "strengthPerMille": 885
+     },
+     {
+      "a": "venus",
+      "b": "pluto",
+      "aspect": "opposition",
+      "orb": 8903647,
+      "phase": "applying",
+      "strengthPerMille": 691
+     },
+     {
+      "a": "venus",
+      "b": "chiron",
+      "aspect": "sextile",
+      "orb": 9140753,
+      "phase": "applying",
+      "strengthPerMille": 365
+     },
+     {
+      "a": "mars",
+      "b": "uranus",
+      "aspect": "square",
+      "orb": 3038675,
+      "phase": "applying",
+      "strengthPerMille": 879
+     },
+     {
+      "a": "mars",
+      "b": "neptune",
+      "aspect": "square",
+      "orb": 22782343,
+      "phase": "applying",
+      "strengthPerMille": 96
+     },
+     {
+      "a": "jupiter",
+      "b": "uranus",
+      "aspect": "opposition",
+      "orb": 23339466,
+      "phase": "separating",
+      "strengthPerMille": 190
+     },
+     {
+      "a": "jupiter",
+      "b": "neptune",
+      "aspect": "opposition",
+      "orb": 3595798,
+      "phase": "separating",
+      "strengthPerMille": 875
+     },
+     {
+      "a": "jupiter",
+      "b": "pluto",
+      "aspect": "trine",
+      "orb": 2407577,
+      "phase": "applying",
+      "strengthPerMille": 904
+     },
+     {
+      "a": "jupiter",
+      "b": "chiron",
+      "aspect": "conjunction",
+      "orb": 2644683,
+      "phase": "applying",
+      "strengthPerMille": 908
+     },
+     {
+      "a": "uranus",
+      "b": "neptune",
+      "aspect": "conjunction",
+      "orb": 19743668,
+      "phase": "separating",
+      "strengthPerMille": 314
+     },
+     {
+      "a": "uranus",
+      "b": "chiron",
+      "aspect": "opposition",
+      "orb": 25984149,
+      "phase": "separating",
+      "strengthPerMille": 98
+     },
+     {
+      "a": "neptune",
+      "b": "pluto",
+      "aspect": "sextile",
+      "orb": 6003375,
+      "phase": "separating",
+      "strengthPerMille": 583
+     },
+     {
+      "a": "neptune",
+      "b": "chiron",
+      "aspect": "opposition",
+      "orb": 6240481,
+      "phase": "separating",
+      "strengthPerMille": 783
+     },
+     {
+      "a": "pluto",
+      "b": "chiron",
+      "aspect": "trine",
+      "orb": 237106,
+      "phase": "separating",
+      "strengthPerMille": 991
+     }
+    ],
+    "warnings": []
+   }
+  },
+  {
+   "id": "chart-structure-centideg",
+   "type": "chart",
+   "spec": {
+    "id": "tampa-1990",
+    "jd": [
+     1990,
+     6,
+     10,
+     14,
+     30,
+     0
+    ],
+    "lat": 27.95,
+    "lon": -82.46,
+    "hs": "placidus",
+    "zodiac": "tropical",
+    "grid": "centideg"
+   },
+   "result": {
+    "format": "caelus-canonical",
+    "version": 1,
+    "grid": "centideg",
+    "units": {
+     "angle": "centidegree",
+     "speed": "centidegree/day",
+     "time": "ms since J2000.0 (JD 2451545.0 UT)",
+     "dist": "micro-AU",
+     "strength": "per-mille"
+    },
+    "timeMs": -301699800000,
+    "zodiac": "tropical",
+    "houseSystem": "placidus",
+    "houseSystemRequested": "placidus",
+    "bodies": {
+     "sun": {
+      "lon": 7945,
+      "lat": 0,
+      "speed": 96,
+      "latSpeed": 0,
+      "distMicroAu": 1015237,
+      "ra": 7853,
+      "dec": 2302,
+      "sign": "Gemini",
+      "signDeg": 1945,
+      "house": 11,
+      "retrograde": false,
+      "dignities": []
+     },
+     "moon": {
+      "lon": 28328,
+      "lat": -216,
+      "speed": 1219,
+      "latSpeed": 99,
+      "distMicroAu": 2671,
+      "ra": 28467,
+      "dec": -2493,
+      "sign": "Capricorn",
+      "signDeg": 1328,
+      "house": 6,
+      "retrograde": false,
+      "dignities": [
+       "detriment"
+      ]
+     },
+     "mercury": {
+      "lon": 5785,
+      "lat": -247,
+      "speed": 149,
+      "latSpeed": 15,
+      "distMicroAu": 1015417,
+      "ra": 5617,
+      "dec": 1727,
+      "sign": "Taurus",
+      "signDeg": 2785,
+      "house": 10,
+      "retrograde": false,
+      "dignities": []
+     },
+     "venus": {
+      "lon": 4303,
+      "lat": -202,
+      "speed": 117,
+      "latSpeed": 1,
+      "distMicroAu": 1222437,
+      "ra": 4121,
+      "dec": 1383,
+      "sign": "Taurus",
+      "signDeg": 1303,
+      "house": 10,
+      "retrograde": false,
+      "dignities": [
+       "domicile"
+      ]
+     },
+     "mars": {
+      "lon": 751,
+      "lat": -196,
+      "speed": 72,
+      "latSpeed": -1,
+      "distMicroAu": 1306551,
+      "ra": 767,
+      "dec": 118,
+      "sign": "Aries",
+      "signDeg": 751,
+      "house": 9,
+      "retrograde": false,
+      "dignities": [
+       "domicile"
+      ]
+     },
+     "jupiter": {
+      "lon": 10484,
+      "lat": 18,
+      "speed": 21,
+      "latSpeed": 0,
+      "distMicroAu": 6107796,
+      "ra": 10613,
+      "dec": 2279,
+      "sign": "Cancer",
+      "signDeg": 1484,
+      "house": 12,
+      "retrograde": false,
+      "dignities": [
+       "exaltation"
+      ]
+     },
+     "saturn": {
+      "lon": 29431,
+      "lat": 12,
+      "speed": -5,
+      "latSpeed": 0,
+      "distMicroAu": 9164152,
+      "ra": 29619,
+      "dec": -2114,
+      "sign": "Capricorn",
+      "signDeg": 2431,
+      "house": 6,
+      "retrograde": true,
+      "dignities": [
+       "domicile"
+      ]
+     },
+     "uranus": {
+      "lon": 27835,
+      "lat": -32,
+      "speed": -4,
+      "latSpeed": 0,
+      "distMicroAu": 18445973,
+      "ra": 27911,
+      "dec": -2350,
+      "sign": "Capricorn",
+      "signDeg": 835,
+      "house": 5,
+      "retrograde": true,
+      "dignities": []
+     },
+     "neptune": {
+      "lon": 28384,
+      "lat": 88,
+      "speed": -2,
+      "latSpeed": 0,
+      "distMicroAu": 29280369,
+      "ra": 28493,
+      "dec": -2185,
+      "sign": "Capricorn",
+      "signDeg": 1384,
+      "house": 6,
+      "retrograde": true,
+      "dignities": []
+     },
+     "pluto": {
+      "lon": 22550,
+      "lat": 1588,
+      "speed": -2,
+      "latSpeed": -1,
+      "distMicroAu": 28842787,
+      "ra": 22760,
+      "dec": -125,
+      "sign": "Scorpio",
+      "signDeg": 1550,
+      "house": 4,
+      "retrograde": true,
+      "dignities": []
+     },
+     "chiron": {
+      "lon": 10557,
+      "lat": -628,
+      "speed": 10,
+      "latSpeed": 0,
+      "distMicroAu": 11904762,
+      "ra": 10614,
+      "dec": 1629,
+      "sign": "Cancer",
+      "signDeg": 1557,
+      "house": 12,
+      "retrograde": false,
+      "dignities": []
+     },
+     "mean_node": {
+      "lon": 30996,
+      "lat": 0,
+      "speed": -5,
+      "latSpeed": 0,
+      "distMicroAu": null,
+      "ra": 31240,
+      "dec": -1775,
+      "sign": "Aquarius",
+      "signDeg": 996,
+      "house": 6,
+      "retrograde": true,
+      "dignities": []
+     },
+     "true_node": {
+      "lon": 30814,
+      "lat": 0,
+      "speed": -7,
+      "latSpeed": 0,
+      "distMicroAu": null,
+      "ra": 31055,
+      "dec": -1823,
+      "sign": "Aquarius",
+      "signDeg": 814,
+      "house": 6,
+      "retrograde": true,
+      "dignities": []
+     }
+    },
+    "unavailable": [],
+    "angles": {
+     "asc": 13090,
+     "mc": 3604,
+     "vertex": 25388,
+     "eastPoint": 12149
+    },
+    "cusps": [
+     13090,
+     15532,
+     18377,
+     21604,
+     24950,
+     28139,
+     31090,
+     33532,
+     377,
+     3604,
+     6950,
+     10139
+    ],
+    "aspects": [
+     {
+      "a": "moon",
+      "b": "venus",
+      "aspect": "trine",
+      "orb": 25,
+      "phase": "separating",
+      "strengthPerMille": 964
+     },
+     {
+      "a": "moon",
+      "b": "mars",
+      "aspect": "square",
+      "orb": 577,
+      "phase": "separating",
+      "strengthPerMille": 176
+     },
+     {
+      "a": "moon",
+      "b": "jupiter",
+      "aspect": "opposition",
+      "orb": 156,
+      "phase": "applying",
+      "strengthPerMille": 805
+     },
+     {
+      "a": "moon",
+      "b": "uranus",
+      "aspect": "conjunction",
+      "orb": 493,
+      "phase": "separating",
+      "strengthPerMille": 384
+     },
+     {
+      "a": "moon",
+      "b": "neptune",
+      "aspect": "conjunction",
+      "orb": 56,
+      "phase": "applying",
+      "strengthPerMille": 930
+     },
+     {
+      "a": "moon",
+      "b": "pluto",
+      "aspect": "sextile",
+      "orb": 222,
+      "phase": "applying",
+      "strengthPerMille": 445
+     },
+     {
+      "a": "moon",
+      "b": "chiron",
+      "aspect": "opposition",
+      "orb": 229,
+      "phase": "applying",
+      "strengthPerMille": 714
+     },
+     {
+      "a": "mercury",
+      "b": "saturn",
+      "aspect": "trine",
+      "orb": 354,
+      "phase": "separating",
+      "strengthPerMille": 494
+     },
+     {
+      "a": "venus",
+      "b": "jupiter",
+      "aspect": "sextile",
+      "orb": 181,
+      "phase": "applying",
+      "strengthPerMille": 548
+     },
+     {
+      "a": "venus",
+      "b": "uranus",
+      "aspect": "trine",
+      "orb": 468,
+      "phase": "separating",
+      "strengthPerMille": 331
+     },
+     {
+      "a": "venus",
+      "b": "neptune",
+      "aspect": "trine",
+      "orb": 81,
+      "phase": "applying",
+      "strengthPerMille": 884
+     },
+     {
+      "a": "venus",
+      "b": "pluto",
+      "aspect": "opposition",
+      "orb": 247,
+      "phase": "applying",
+      "strengthPerMille": 691
+     },
+     {
+      "a": "venus",
+      "b": "chiron",
+      "aspect": "sextile",
+      "orb": 254,
+      "phase": "applying",
+      "strengthPerMille": 365
+     },
+     {
+      "a": "mars",
+      "b": "uranus",
+      "aspect": "square",
+      "orb": 84,
+      "phase": "applying",
+      "strengthPerMille": 880
+     },
+     {
+      "a": "mars",
+      "b": "neptune",
+      "aspect": "square",
+      "orb": 633,
+      "phase": "applying",
+      "strengthPerMille": 96
+     },
+     {
+      "a": "jupiter",
+      "b": "uranus",
+      "aspect": "opposition",
+      "orb": 649,
+      "phase": "separating",
+      "strengthPerMille": 189
+     },
+     {
+      "a": "jupiter",
+      "b": "neptune",
+      "aspect": "opposition",
+      "orb": 100,
+      "phase": "separating",
+      "strengthPerMille": 875
+     },
+     {
+      "a": "jupiter",
+      "b": "pluto",
+      "aspect": "trine",
+      "orb": 66,
+      "phase": "applying",
+      "strengthPerMille": 906
+     },
+     {
+      "a": "jupiter",
+      "b": "chiron",
+      "aspect": "conjunction",
+      "orb": 73,
+      "phase": "applying",
+      "strengthPerMille": 909
+     },
+     {
+      "a": "uranus",
+      "b": "neptune",
+      "aspect": "conjunction",
+      "orb": 549,
+      "phase": "separating",
+      "strengthPerMille": 314
+     },
+     {
+      "a": "uranus",
+      "b": "chiron",
+      "aspect": "opposition",
+      "orb": 722,
+      "phase": "separating",
+      "strengthPerMille": 98
+     },
+     {
+      "a": "neptune",
+      "b": "pluto",
+      "aspect": "sextile",
+      "orb": 166,
+      "phase": "separating",
+      "strengthPerMille": 585
+     },
+     {
+      "a": "neptune",
+      "b": "chiron",
+      "aspect": "opposition",
+      "orb": 173,
+      "phase": "separating",
+      "strengthPerMille": 784
+     },
+     {
+      "a": "pluto",
+      "b": "chiron",
+      "aspect": "trine",
+      "orb": 7,
+      "phase": "separating",
+      "strengthPerMille": 990
+     }
+    ],
+    "warnings": []
+   }
+  },
+  {
+   "id": "chart-structure-dms",
+   "type": "chart",
+   "spec": {
+    "id": "tampa-1990",
+    "jd": [
+     1990,
+     6,
+     10,
+     14,
+     30,
+     0
+    ],
+    "lat": 27.95,
+    "lon": -82.46,
+    "hs": "placidus",
+    "zodiac": "tropical",
+    "grid": "dms"
+   },
+   "result": {
+    "format": "caelus-canonical",
+    "version": 1,
+    "grid": "dms",
+    "units": {
+     "angle": "arcsec (rendered [deg,min,sec])",
+     "speed": "arcsec (rendered [deg,min,sec])/day",
+     "time": "ms since J2000.0 (JD 2451545.0 UT)",
+     "dist": "micro-AU",
+     "strength": "per-mille"
+    },
+    "timeMs": -301699800000,
+    "zodiac": "tropical",
+    "houseSystem": "placidus",
+    "houseSystemRequested": "placidus",
+    "bodies": {
+     "sun": {
+      "lon": [
+       79,
+       27,
+       7
+      ],
+      "lat": [
+       0,
+       0,
+       0
+      ],
+      "speed": 3441,
+      "latSpeed": 0,
+      "distMicroAu": 1015237,
+      "ra": [
+       78,
+       31,
+       38
+      ],
+      "dec": [
+       23,
+       1,
+       22
+      ],
+      "sign": "Gemini",
+      "signDeg": [
+       19,
+       27,
+       7
+      ],
+      "house": 11,
+      "retrograde": false,
+      "dignities": []
+     },
+     "moon": {
+      "lon": [
+       283,
+       17,
+       1
+      ],
+      "lat": [
+       -2,
+       -9,
+       -29
+      ],
+      "speed": 43870,
+      "latSpeed": 3563,
+      "distMicroAu": 2671,
+      "ra": [
+       284,
+       40,
+       0
+      ],
+      "dec": [
+       -24,
+       -55,
+       -35
+      ],
+      "sign": "Capricorn",
+      "signDeg": [
+       13,
+       17,
+       1
+      ],
+      "house": 6,
+      "retrograde": false,
+      "dignities": [
+       "detriment"
+      ]
+     },
+     "mercury": {
+      "lon": [
+       57,
+       50,
+       49
+      ],
+      "lat": [
+       -2,
+       -28,
+       -27
+      ],
+      "speed": 5353,
+      "latSpeed": 540,
+      "distMicroAu": 1015417,
+      "ra": [
+       56,
+       9,
+       57
+      ],
+      "dec": [
+       17,
+       16,
+       15
+      ],
+      "sign": "Taurus",
+      "signDeg": [
+       27,
+       50,
+       49
+      ],
+      "house": 10,
+      "retrograde": false,
+      "dignities": []
+     },
+     "venus": {
+      "lon": [
+       43,
+       1,
+       53
+      ],
+      "lat": [
+       -2,
+       -1,
+       -8
+      ],
+      "speed": 4217,
+      "latSpeed": 42,
+      "distMicroAu": 1222437,
+      "ra": [
+       41,
+       12,
+       28
+      ],
+      "dec": [
+       13,
+       49,
+       36
+      ],
+      "sign": "Taurus",
+      "signDeg": [
+       13,
+       1,
+       53
+      ],
+      "house": 10,
+      "retrograde": false,
+      "dignities": [
+       "domicile"
+      ]
+     },
+     "mars": {
+      "lon": [
+       7,
+       30,
+       31
+      ],
+      "lat": [
+       -1,
+       -57,
+       -19
+      ],
+      "speed": 2607,
+      "latSpeed": -24,
+      "distMicroAu": 1306551,
+      "ra": [
+       7,
+       40,
+       2
+      ],
+      "dec": [
+       1,
+       11,
+       0
+      ],
+      "sign": "Aries",
+      "signDeg": [
+       7,
+       30,
+       31
+      ],
+      "house": 9,
+      "retrograde": false,
+      "dignities": [
+       "domicile"
+      ]
+     },
+     "jupiter": {
+      "lon": [
+       104,
+       50,
+       9
+      ],
+      "lat": [
+       0,
+       10,
+       44
+      ],
+      "speed": 769,
+      "latSpeed": 5,
+      "distMicroAu": 6107796,
+      "ra": [
+       106,
+       7,
+       31
+      ],
+      "dec": [
+       22,
+       47,
+       38
+      ],
+      "sign": "Cancer",
+      "signDeg": [
+       14,
+       50,
+       9
+      ],
+      "house": 12,
+      "retrograde": false,
+      "dignities": [
+       "exaltation"
+      ]
+     },
+     "saturn": {
+      "lon": [
+       294,
+       18,
+       23
+      ],
+      "lat": [
+       0,
+       7,
+       23
+      ],
+      "speed": -192,
+      "latSpeed": -5,
+      "distMicroAu": 9164152,
+      "ra": [
+       296,
+       11,
+       13
+      ],
+      "dec": [
+       -21,
+       -8,
+       -10
+      ],
+      "sign": "Capricorn",
+      "signDeg": [
+       24,
+       18,
+       23
+      ],
+      "house": 6,
+      "retrograde": true,
+      "dignities": [
+       "domicile"
+      ]
+     },
+     "uranus": {
+      "lon": [
+       278,
+       21,
+       9
+      ],
+      "lat": [
+       0,
+       -19,
+       -21
+      ],
+      "speed": -135,
+      "latSpeed": -1,
+      "distMicroAu": 18445973,
+      "ra": [
+       279,
+       6,
+       51
+      ],
+      "dec": [
+       -23,
+       -30,
+       -2
+      ],
+      "sign": "Capricorn",
+      "signDeg": [
+       8,
+       21,
+       9
+      ],
+      "house": 5,
+      "retrograde": true,
+      "dignities": []
+     },
+     "neptune": {
+      "lon": [
+       283,
+       50,
+       13
+      ],
+      "lat": [
+       0,
+       52,
+       34
+      ],
+      "speed": -86,
+      "latSpeed": 0,
+      "distMicroAu": 29280369,
+      "ra": [
+       284,
+       55,
+       49
+      ],
+      "dec": [
+       -21,
+       -51,
+       -6
+      ],
+      "sign": "Capricorn",
+      "signDeg": [
+       13,
+       50,
+       13
+      ],
+      "house": 6,
+      "retrograde": true,
+      "dignities": []
+     },
+     "pluto": {
+      "lon": [
+       225,
+       30,
+       16
+      ],
+      "lat": [
+       15,
+       53,
+       1
+      ],
+      "speed": -79,
+      "latSpeed": -22,
+      "distMicroAu": 28842787,
+      "ra": [
+       227,
+       36,
+       13
+      ],
+      "dec": [
+       -1,
+       -15,
+       -5
+      ],
+      "sign": "Scorpio",
+      "signDeg": [
+       15,
+       30,
+       16
+      ],
+      "house": 4,
+      "retrograde": true,
+      "dignities": []
+     },
+     "chiron": {
+      "lon": [
+       105,
+       34,
+       14
+      ],
+      "lat": [
+       -6,
+       -16,
+       -53
+      ],
+      "speed": 356,
+      "latSpeed": 12,
+      "distMicroAu": 11904762,
+      "ra": [
+       106,
+       8,
+       22
+      ],
+      "dec": [
+       16,
+       17,
+       33
+      ],
+      "sign": "Cancer",
+      "signDeg": [
+       15,
+       34,
+       14
+      ],
+      "house": 12,
+      "retrograde": false,
+      "dignities": []
+     },
+     "mean_node": {
+      "lon": [
+       309,
+       57,
+       25
+      ],
+      "lat": [
+       0,
+       0,
+       0
+      ],
+      "speed": -191,
+      "latSpeed": 0,
+      "distMicroAu": null,
+      "ra": [
+       312,
+       24,
+       8
+      ],
+      "dec": [
+       -17,
+       -45,
+       -16
+      ],
+      "sign": "Aquarius",
+      "signDeg": [
+       9,
+       57,
+       25
+      ],
+      "house": 6,
+      "retrograde": true,
+      "dignities": []
+     },
+     "true_node": {
+      "lon": [
+       308,
+       8,
+       8
+      ],
+      "lat": [
+       0,
+       0,
+       0
+      ],
+      "speed": -236,
+      "latSpeed": 0,
+      "distMicroAu": null,
+      "ra": [
+       310,
+       33,
+       17
+      ],
+      "dec": [
+       -18,
+       -14,
+       -4
+      ],
+      "sign": "Aquarius",
+      "signDeg": [
+       8,
+       8,
+       8
+      ],
+      "house": 6,
+      "retrograde": true,
+      "dignities": []
+     }
+    },
+    "unavailable": [],
+    "angles": {
+     "asc": [
+      130,
+      54,
+      4
+     ],
+     "mc": [
+      36,
+      2,
+      26
+     ],
+     "vertex": [
+      253,
+      52,
+      48
+     ],
+     "eastPoint": [
+      121,
+      29,
+      11
+     ]
+    },
+    "cusps": [
+     [
+      130,
+      54,
+      4
+     ],
+     [
+      155,
+      19,
+      28
+     ],
+     [
+      183,
+      46,
+      16
+     ],
+     [
+      216,
+      2,
+      26
+     ],
+     [
+      249,
+      29,
+      54
+     ],
+     [
+      281,
+      23,
+      21
+     ],
+     [
+      310,
+      54,
+      4
+     ],
+     [
+      335,
+      19,
+      28
+     ],
+     [
+      3,
+      46,
+      16
+     ],
+     [
+      36,
+      2,
+      26
+     ],
+     [
+      69,
+      29,
+      54
+     ],
+     [
+      101,
+      23,
+      21
+     ]
+    ],
+    "aspects": [
+     {
+      "a": "moon",
+      "b": "venus",
+      "aspect": "trine",
+      "orb": 908,
+      "phase": "separating",
+      "strengthPerMille": 964
+     },
+     {
+      "a": "moon",
+      "b": "mars",
+      "aspect": "square",
+      "orb": 20790,
+      "phase": "separating",
+      "strengthPerMille": 175
+     },
+     {
+      "a": "moon",
+      "b": "jupiter",
+      "aspect": "opposition",
+      "orb": 5588,
+      "phase": "applying",
+      "strengthPerMille": 806
+     },
+     {
+      "a": "moon",
+      "b": "uranus",
+      "aspect": "conjunction",
+      "orb": 17752,
+      "phase": "separating",
+      "strengthPerMille": 384
+     },
+     {
+      "a": "moon",
+      "b": "neptune",
+      "aspect": "conjunction",
+      "orb": 1992,
+      "phase": "applying",
+      "strengthPerMille": 931
+     },
+     {
+      "a": "moon",
+      "b": "pluto",
+      "aspect": "sextile",
+      "orb": 7995,
+      "phase": "applying",
+      "strengthPerMille": 445
+     },
+     {
+      "a": "moon",
+      "b": "chiron",
+      "aspect": "opposition",
+      "orb": 8233,
+      "phase": "applying",
+      "strengthPerMille": 714
+     },
+     {
+      "a": "mercury",
+      "b": "saturn",
+      "aspect": "trine",
+      "orb": 12746,
+      "phase": "separating",
+      "strengthPerMille": 494
+     },
+     {
+      "a": "venus",
+      "b": "jupiter",
+      "aspect": "sextile",
+      "orb": 6496,
+      "phase": "applying",
+      "strengthPerMille": 549
+     },
+     {
+      "a": "venus",
+      "b": "uranus",
+      "aspect": "trine",
+      "orb": 16844,
+      "phase": "separating",
+      "strengthPerMille": 332
+     },
+     {
+      "a": "venus",
+      "b": "neptune",
+      "aspect": "trine",
+      "orb": 2900,
+      "phase": "applying",
+      "strengthPerMille": 885
+     },
+     {
+      "a": "venus",
+      "b": "pluto",
+      "aspect": "opposition",
+      "orb": 8903,
+      "phase": "applying",
+      "strengthPerMille": 691
+     },
+     {
+      "a": "venus",
+      "b": "chiron",
+      "aspect": "sextile",
+      "orb": 9141,
+      "phase": "applying",
+      "strengthPerMille": 365
+     },
+     {
+      "a": "mars",
+      "b": "uranus",
+      "aspect": "square",
+      "orb": 3038,
+      "phase": "applying",
+      "strengthPerMille": 879
+     },
+     {
+      "a": "mars",
+      "b": "neptune",
+      "aspect": "square",
+      "orb": 22782,
+      "phase": "applying",
+      "strengthPerMille": 96
+     },
+     {
+      "a": "jupiter",
+      "b": "uranus",
+      "aspect": "opposition",
+      "orb": 23340,
+      "phase": "separating",
+      "strengthPerMille": 190
+     },
+     {
+      "a": "jupiter",
+      "b": "neptune",
+      "aspect": "opposition",
+      "orb": 3596,
+      "phase": "separating",
+      "strengthPerMille": 875
+     },
+     {
+      "a": "jupiter",
+      "b": "pluto",
+      "aspect": "trine",
+      "orb": 2407,
+      "phase": "applying",
+      "strengthPerMille": 904
+     },
+     {
+      "a": "jupiter",
+      "b": "chiron",
+      "aspect": "conjunction",
+      "orb": 2645,
+      "phase": "applying",
+      "strengthPerMille": 908
+     },
+     {
+      "a": "uranus",
+      "b": "neptune",
+      "aspect": "conjunction",
+      "orb": 19744,
+      "phase": "separating",
+      "strengthPerMille": 314
+     },
+     {
+      "a": "uranus",
+      "b": "chiron",
+      "aspect": "opposition",
+      "orb": 25985,
+      "phase": "separating",
+      "strengthPerMille": 98
+     },
+     {
+      "a": "neptune",
+      "b": "pluto",
+      "aspect": "sextile",
+      "orb": 6003,
+      "phase": "separating",
+      "strengthPerMille": 583
+     },
+     {
+      "a": "neptune",
+      "b": "chiron",
+      "aspect": "opposition",
+      "orb": 6241,
+      "phase": "separating",
+      "strengthPerMille": 783
+     },
+     {
+      "a": "pluto",
+      "b": "chiron",
+      "aspect": "trine",
+      "orb": 238,
+      "phase": "separating",
+      "strengthPerMille": 991
+     }
+    ],
+    "warnings": []
+   }
+  },
+  {
+   "id": "chart-structure-accuracy",
+   "type": "chart",
+   "spec": {
+    "id": "tampa-1990",
+    "jd": [
+     1990,
+     6,
+     10,
+     14,
+     30,
+     0
+    ],
+    "lat": 27.95,
+    "lon": -82.46,
+    "hs": "placidus",
+    "zodiac": "tropical",
+    "grid": "accuracy"
+   },
+   "result": {
+    "format": "caelus-canonical",
+    "version": 1,
+    "grid": "accuracy",
+    "units": {
+     "angle": "arcsec (per-body accuracy quantum)",
+     "speed": "arcsec (per-body accuracy quantum)/day",
+     "time": "ms since J2000.0 (JD 2451545.0 UT)",
+     "dist": "micro-AU",
+     "strength": "per-mille"
+    },
+    "timeMs": -301699800000,
+    "zodiac": "tropical",
+    "houseSystem": "placidus",
+    "houseSystemRequested": "placidus",
+    "bodies": {
+     "sun": {
+      "lon": 286027,
+      "lat": 0,
+      "speed": 3441,
+      "latSpeed": 0,
+      "distMicroAu": 1015237,
+      "ra": 282698,
+      "dec": 82882,
+      "sign": "Gemini",
+      "signDeg": 70027,
+      "house": 11,
+      "retrograde": false,
+      "dignities": []
+     },
+     "moon": {
+      "lon": 1019820,
+      "lat": -7770,
+      "speed": 43869,
+      "latSpeed": 3564,
+      "distMicroAu": 2671,
+      "ra": 1024800,
+      "dec": -89736,
+      "sign": "Capricorn",
+      "signDeg": 47820,
+      "house": 6,
+      "retrograde": false,
+      "dignities": [
+       "detriment"
+      ]
+     },
+     "mercury": {
+      "lon": 208249,
+      "lat": -8907,
+      "speed": 5353,
+      "latSpeed": 540,
+      "distMicroAu": 1015417,
+      "ra": 202197,
+      "dec": 62175,
+      "sign": "Taurus",
+      "signDeg": 100249,
+      "house": 10,
+      "retrograde": false,
+      "dignities": []
+     },
+     "venus": {
+      "lon": 154913,
+      "lat": -7268,
+      "speed": 4217,
+      "latSpeed": 42,
+      "distMicroAu": 1222437,
+      "ra": 148348,
+      "dec": 49776,
+      "sign": "Taurus",
+      "signDeg": 46913,
+      "house": 10,
+      "retrograde": false,
+      "dignities": [
+       "domicile"
+      ]
+     },
+     "mars": {
+      "lon": 27031,
+      "lat": -7039,
+      "speed": 2607,
+      "latSpeed": -24,
+      "distMicroAu": 1306551,
+      "ra": 27602,
+      "dec": 4260,
+      "sign": "Aries",
+      "signDeg": 27031,
+      "house": 9,
+      "retrograde": false,
+      "dignities": [
+       "domicile"
+      ]
+     },
+     "jupiter": {
+      "lon": 377409,
+      "lat": 644,
+      "speed": 769,
+      "latSpeed": 5,
+      "distMicroAu": 6107796,
+      "ra": 382051,
+      "dec": 82058,
+      "sign": "Cancer",
+      "signDeg": 53409,
+      "house": 12,
+      "retrograde": false,
+      "dignities": [
+       "exaltation"
+      ]
+     },
+     "saturn": {
+      "lon": 1059503,
+      "lat": 443,
+      "speed": -192,
+      "latSpeed": -5,
+      "distMicroAu": 9164152,
+      "ra": 1066273,
+      "dec": -76090,
+      "sign": "Capricorn",
+      "signDeg": 87503,
+      "house": 6,
+      "retrograde": true,
+      "dignities": [
+       "domicile"
+      ]
+     },
+     "uranus": {
+      "lon": 1002070,
+      "lat": -1162,
+      "speed": -136,
+      "latSpeed": 0,
+      "distMicroAu": 18445973,
+      "ra": 1004810,
+      "dec": -84602,
+      "sign": "Capricorn",
+      "signDeg": 30070,
+      "house": 5,
+      "retrograde": true,
+      "dignities": []
+     },
+     "neptune": {
+      "lon": 1021815,
+      "lat": 3155,
+      "speed": -85,
+      "latSpeed": 0,
+      "distMicroAu": 29280369,
+      "ra": 1025750,
+      "dec": -78665,
+      "sign": "Capricorn",
+      "signDeg": 49815,
+      "house": 6,
+      "retrograde": true,
+      "dignities": []
+     },
+     "pluto": {
+      "lon": 811816,
+      "lat": 57180,
+      "speed": -80,
+      "latSpeed": -20,
+      "distMicroAu": 28842787,
+      "ra": 819372,
+      "dec": -4504,
+      "sign": "Scorpio",
+      "signDeg": 55816,
+      "house": 4,
+      "retrograde": true,
+      "dignities": []
+     },
+     "chiron": {
+      "lon": 380054,
+      "lat": -22613,
+      "speed": 356,
+      "latSpeed": 12,
+      "distMicroAu": 11904762,
+      "ra": 382102,
+      "dec": 58653,
+      "sign": "Cancer",
+      "signDeg": 56054,
+      "house": 12,
+      "retrograde": false,
+      "dignities": []
+     },
+     "mean_node": {
+      "lon": 1115845,
+      "lat": 0,
+      "speed": -191,
+      "latSpeed": 0,
+      "distMicroAu": null,
+      "ra": 1124648,
+      "dec": -63916,
+      "sign": "Aquarius",
+      "signDeg": 35845,
+      "house": 6,
+      "retrograde": true,
+      "dignities": []
+     },
+     "true_node": {
+      "lon": 1109280,
+      "lat": 0,
+      "speed": -240,
+      "latSpeed": 0,
+      "distMicroAu": null,
+      "ra": 1117980,
+      "dec": -65640,
+      "sign": "Aquarius",
+      "signDeg": 29280,
+      "house": 6,
+      "retrograde": true,
+      "dignities": []
+     }
+    },
+    "unavailable": [],
+    "angles": {
+     "asc": 471244,
+     "mc": 129746,
+     "vertex": 913968,
+     "eastPoint": 437351
+    },
+    "cusps": [
+     471244,
+     559168,
+     661576,
+     777746,
+     898194,
+     1013001,
+     1119244,
+     1207168,
+     13576,
+     129746,
+     250194,
+     365001
+    ],
+    "aspects": [
+     {
+      "a": "moon",
+      "b": "venus",
+      "aspect": "trine",
+      "orb": 907,
+      "phase": "separating",
+      "strengthPerMille": 964
+     },
+     {
+      "a": "moon",
+      "b": "mars",
+      "aspect": "square",
+      "orb": 20789,
+      "phase": "separating",
+      "strengthPerMille": 175
+     },
+     {
+      "a": "moon",
+      "b": "jupiter",
+      "aspect": "opposition",
+      "orb": 5589,
+      "phase": "applying",
+      "strengthPerMille": 806
+     },
+     {
+      "a": "moon",
+      "b": "uranus",
+      "aspect": "conjunction",
+      "orb": 17750,
+      "phase": "separating",
+      "strengthPerMille": 384
+     },
+     {
+      "a": "moon",
+      "b": "neptune",
+      "aspect": "conjunction",
+      "orb": 1995,
+      "phase": "applying",
+      "strengthPerMille": 931
+     },
+     {
+      "a": "moon",
+      "b": "pluto",
+      "aspect": "sextile",
+      "orb": 7996,
+      "phase": "applying",
+      "strengthPerMille": 445
+     },
+     {
+      "a": "moon",
+      "b": "chiron",
+      "aspect": "opposition",
+      "orb": 8234,
+      "phase": "applying",
+      "strengthPerMille": 714
+     },
+     {
+      "a": "mercury",
+      "b": "saturn",
+      "aspect": "trine",
+      "orb": 12746,
+      "phase": "separating",
+      "strengthPerMille": 494
+     },
+     {
+      "a": "venus",
+      "b": "jupiter",
+      "aspect": "sextile",
+      "orb": 6496,
+      "phase": "applying",
+      "strengthPerMille": 549
+     },
+     {
+      "a": "venus",
+      "b": "uranus",
+      "aspect": "trine",
+      "orb": 16843,
+      "phase": "separating",
+      "strengthPerMille": 332
+     },
+     {
+      "a": "venus",
+      "b": "neptune",
+      "aspect": "trine",
+      "orb": 2902,
+      "phase": "applying",
+      "strengthPerMille": 885
+     },
+     {
+      "a": "venus",
+      "b": "pluto",
+      "aspect": "opposition",
+      "orb": 8903,
+      "phase": "applying",
+      "strengthPerMille": 691
+     },
+     {
+      "a": "venus",
+      "b": "chiron",
+      "aspect": "sextile",
+      "orb": 9141,
+      "phase": "applying",
+      "strengthPerMille": 365
+     },
+     {
+      "a": "mars",
+      "b": "uranus",
+      "aspect": "square",
+      "orb": 3039,
+      "phase": "applying",
+      "strengthPerMille": 879
+     },
+     {
+      "a": "mars",
+      "b": "neptune",
+      "aspect": "square",
+      "orb": 22784,
+      "phase": "applying",
+      "strengthPerMille": 96
+     },
+     {
+      "a": "jupiter",
+      "b": "uranus",
+      "aspect": "opposition",
+      "orb": 23339,
+      "phase": "separating",
+      "strengthPerMille": 190
+     },
+     {
+      "a": "jupiter",
+      "b": "neptune",
+      "aspect": "opposition",
+      "orb": 3594,
+      "phase": "separating",
+      "strengthPerMille": 875
+     },
+     {
+      "a": "jupiter",
+      "b": "pluto",
+      "aspect": "trine",
+      "orb": 2407,
+      "phase": "applying",
+      "strengthPerMille": 904
+     },
+     {
+      "a": "jupiter",
+      "b": "chiron",
+      "aspect": "conjunction",
+      "orb": 2645,
+      "phase": "applying",
+      "strengthPerMille": 908
+     },
+     {
+      "a": "uranus",
+      "b": "neptune",
+      "aspect": "conjunction",
+      "orb": 19745,
+      "phase": "separating",
+      "strengthPerMille": 314
+     },
+     {
+      "a": "uranus",
+      "b": "chiron",
+      "aspect": "opposition",
+      "orb": 25984,
+      "phase": "separating",
+      "strengthPerMille": 98
+     },
+     {
+      "a": "neptune",
+      "b": "pluto",
+      "aspect": "sextile",
+      "orb": 6001,
+      "phase": "separating",
+      "strengthPerMille": 583
+     },
+     {
+      "a": "neptune",
+      "b": "chiron",
+      "aspect": "opposition",
+      "orb": 6239,
+      "phase": "separating",
+      "strengthPerMille": 783
+     },
+     {
+      "a": "pluto",
+      "b": "chiron",
+      "aspect": "trine",
+      "orb": 238,
+      "phase": "separating",
+      "strengthPerMille": 991
+     }
+    ],
+    "warnings": []
+   }
+  },
+  {
+   "id": "chart-digests",
+   "type": "digests",
+   "spec": {
+    "charts": [
+     {
+      "id": "tampa-1990",
+      "jd": [
+       1990,
+       6,
+       10,
+       14,
+       30,
+       0
+      ],
+      "lat": 27.95,
+      "lon": -82.46,
+      "hs": "placidus",
+      "zodiac": "tropical"
+     },
+     {
+      "id": "london-2024",
+      "jd": [
+       2024,
+       3,
+       20,
+       3,
+       6,
+       0
+      ],
+      "lat": 51.5,
+      "lon": -0.12,
+      "hs": "whole_sign",
+      "zodiac": "tropical"
+     },
+     {
+      "id": "sydney-sidereal",
+      "jd": [
+       1995,
+       9,
+       15,
+       3,
+       20,
+       0
+      ],
+      "lat": -33.87,
+      "lon": 151.21,
+      "hs": "equal",
+      "zodiac": "sidereal:lahiri"
+     },
+     {
+      "id": "svalbard-polar",
+      "jd": [
+       1985,
+       12,
+       1,
+       9,
+       0,
+       0
+      ],
+      "lat": 78.2,
+      "lon": 15.6,
+      "hs": "placidus",
+      "zodiac": "tropical"
+     },
+     {
+      "id": "edge-1852",
+      "jd": [
+       1852,
+       2,
+       2,
+       2,
+       2,
+       2
+      ],
+      "lat": 48.85,
+      "lon": 2.35,
+      "hs": "porphyry",
+      "zodiac": "tropical"
+     }
+    ],
+    "grids": [
+     "arcsec",
+     "milliarcsec",
+     "centideg",
+     "dms",
+     "accuracy"
+    ]
+   },
+   "result": {
+    "tampa-1990/arcsec": "ba08b293e60a062616db346f62c184c34b1d77c5b4cbed4ba7cd51fc7c393313",
+    "tampa-1990/milliarcsec": "c9d2fc6bd423262b4f4700d53895b5b07d6cd24df389a70c506dda49ebd371ec",
+    "tampa-1990/centideg": "70db106297660431a36357605fd68aaf254455ab8156401f50abe6c995496595",
+    "tampa-1990/dms": "5a54882190971f7b5b7b43e6141af8b4cf87065cfda47ad0518c014e315a9e79",
+    "tampa-1990/accuracy": "7a7607400e3636ae4864d1c01377ae60dc136525159f8c0b321612bb857fd53d",
+    "london-2024/arcsec": "bf17ca55430ab81362362f870f0c132495f5563f0c08bcaf843a0f5eb66b18b8",
+    "london-2024/milliarcsec": "dbed7f4b1a79aa63c81f70c7f06308cc580983cb05b5ab75fcbdec82da961237",
+    "london-2024/centideg": "c5c61124a63d497289df490d35b55b625001667e2d3a0659a3dd439795fbc201",
+    "london-2024/dms": "c151165994b67dc2db12f178fef2662bfdb357f5b3e7a6bf85b027ce4c91253a",
+    "london-2024/accuracy": "115892b1b825a37435e6b2693ce8de9eae5608d14c90147ece4f2d3a074ce29c",
+    "sydney-sidereal/arcsec": "cdcbbbe6e3704eaef411e2ae0fdfdbfbad9e5f281f8afd5d09939b68d271b0a0",
+    "sydney-sidereal/milliarcsec": "dc1156cab2c540c5f8b874833a133b82d6a137d817c983166e98c7b2846eecea",
+    "sydney-sidereal/centideg": "6d1227682f95cc722e92ec576979ef73e21fa15ddc517129138d50243b2ab1eb",
+    "sydney-sidereal/dms": "a69fb1d5fe297b23c4fc3f0062e1bb573c58a92945aba1c3a68b1aa732e973ae",
+    "sydney-sidereal/accuracy": "174f2eb23942b678a58332cd18fc0b2b5076b4c65c224d4452f89963c4b2efef",
+    "svalbard-polar/arcsec": "1f36daf82f3fcd51f99ee75c35bff7830cd3acc2dc29ce27cf35f870e9e8a7c1",
+    "svalbard-polar/milliarcsec": "0df3bcf64af82a3fa1fd720547cd205df9532806fbefff345e762dcee5897423",
+    "svalbard-polar/centideg": "7d905bb0c9e4a033622f2e18678076a05fe5a8bd18814dfdfe45054b0aca9eb7",
+    "svalbard-polar/dms": "cc9a822da995ca6de6d61f274680a906357bd78b00fe50a9933d686ee51ceab1",
+    "svalbard-polar/accuracy": "5ac82c06dd13d6959898637d54981647942eb429cf78a825da65529403c8429c",
+    "edge-1852/arcsec": "8231109225c7a818e5cbdfa53a185d00f80c22cc4271717fd094c906b088be6b",
+    "edge-1852/milliarcsec": "4028f95720868c621aa1405952b6acd6f4a544826322312c91e3e4ce2b4a00cb",
+    "edge-1852/centideg": "b760b0118c1ee54f0ab4aaad3adad7b7e899c06c73d387955b34c948c616322b",
+    "edge-1852/dms": "6f3cb3d121363adddf8239781045ef905eec38e2c38dd237c028b7bde715d34e",
+    "edge-1852/accuracy": "97a059c1543ea635347d564ae7d5a29fd0d55ca9ca15ace8318ce0c65dfe16d9"
+   }
+  }
+ ]
+}

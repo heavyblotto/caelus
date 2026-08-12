@@ -77,6 +77,9 @@ jobs:
       - run: node packages/caelus/dist/test/synthetic.test.js
       # synthetic ephemeris math (Kepler tiers, observer frames): TS must match the Python reference
       - run: node packages/caelus/dist/test/synthetic-golden.test.js
+      # canonical mode (integer output + digests): TS must EQUAL the Python
+      # reference -- the one tolerance-free golden; every comparison is ===
+      - run: node packages/caelus/dist/test/canonical-golden.test.js
       # every test/*.test.* file in the repo must be wired into this workflow;
       # four golden suites once sat dormant for ~11 releases because this list
       # is maintained by hand. The gate makes silent omission impossible.

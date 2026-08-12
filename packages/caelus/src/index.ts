@@ -13,6 +13,7 @@ export * from "./scan.js";
 export * from "./spherical.js";
 export * from "./ranges.js";
 export * from "./capabilities.js";
+export * from "./canonical.js";
 export * from "./skyview.js";
 export * from "./astrocartography.js";
 export * from "./ephemeris.js";

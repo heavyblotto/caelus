@@ -44,7 +44,8 @@ import {
   skyView, skyViewSequence, LENS_NAMES,
   validateSyntheticSystem, syntheticPositions, syntheticEphemeris,
   registerSyntheticSystem, engineCapabilities,
-  type SyntheticSystem,
+  canonicalChart, canonicalDigest, canonicalTimeMs, quantizeUnit,
+  type SyntheticSystem, type CanonicalGrid,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -130,6 +131,18 @@ const separationSchema = z.enum(["longitude", "spatial"]).default("longitude")
   .describe("Aspect separation: 'longitude' (default, the zodiacal aspect) or "
     + "'spatial' (true great-circle separation accounting for ecliptic "
     + "latitude — differs for the Moon, Pluto, and bodies far off the ecliptic)");
+const outputSchema = z.enum(["float", "canonical"]).default("float")
+  .describe("'float' (default) returns the usual floating-point payload. "
+    + "'canonical' returns integers on a declared grid plus a sha256 digest: "
+    + "stable across machines/browsers/languages, hashable for caching and "
+    + "dedupe, precision-honest, with sign/house/aspects re-derived from the "
+    + "quantized values so displayed numbers and facts always agree");
+const gridSchema = z.enum(["arcsec", "milliarcsec", "centideg", "dms", "accuracy"])
+  .default("arcsec")
+  .describe("Canonical grid (with output:'canonical'): arcsec (default), "
+    + "milliarcsec, centideg, dms ([deg,min,sec] triples), or accuracy "
+    + "(each body snapped to its measured validated accuracy — the most "
+    + "portable choice for cross-platform content addressing)");
 // Jyotish techniques (nakshatras, vargas, dashas, yogas) are sidereal by
 // definition; default these tools to Lahiri rather than tropical.
 const siderealZodiac = z.enum(ZODIACS).default("sidereal:lahiri")
@@ -251,6 +264,28 @@ function chartPayload(
 }
 
 const text = (obj: unknown) => ({ content: [{ type: "text" as const, text: JSON.stringify(obj) }] });
+
+// ---------------------------------------------------------- canonical output
+// output: "canonical" returns integers on a declared grid plus a sha256
+// digest over the canonical body -- stable across machines and languages
+// (the canonical-golden pins TS == Python by equality), hashable, and
+// precision-honest. The digest covers everything EXCEPT itself.
+function canonicalChartPayload(
+  engine: Engine,
+  iso: string, lat: number, lon: number, hs: string,
+  zodiac: ZodiacT, separation: "longitude" | "spatial" | undefined,
+  grid: CanonicalGrid,
+) {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) throw new Error(`Invalid date: ${iso}`);
+  const c = engine.chart(
+    d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate(),
+    d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(), lat, lon,
+    { houseSystem: normalizeHouseSystem(hs), zodiac, separation },
+  );
+  const cc = canonicalChart(c, { grid, separation });
+  return { ...cc, digest: canonicalDigest(cc) };
+}
 
 // ---------------------------------------------------------------- gazetteer
 // The bundled city gazetteer (GeoNames via all-the-cities; see
@@ -847,10 +882,13 @@ export function buildServer(
     inputSchema: {
       ...birth, house_system: houseSys, zodiac: zodiacSchema,
       separation: separationSchema,
+      output: outputSchema, grid: gridSchema,
     },
     _meta: CHART_TOOL_META,
-  }, async ({ date, lat, lon, house_system, zodiac, separation }) =>
-    chartResult(chartPayload(engine, date, lat, lon, house_system, zodiac, separation)));
+  }, async ({ date, lat, lon, house_system, zodiac, separation, output, grid }) =>
+    output === "canonical"
+      ? text(canonicalChartPayload(engine, date, lat, lon, house_system, zodiac, separation, grid))
+      : chartResult(chartPayload(engine, date, lat, lon, house_system, zodiac, separation)));
 
   server.registerTool("current_sky", {
     description:
@@ -862,10 +900,13 @@ export function buildServer(
       house_system: houseSys,
       zodiac: zodiacSchema,
       separation: separationSchema,
+      output: outputSchema, grid: gridSchema,
     },
     _meta: CHART_TOOL_META,
-  }, async ({ date, lat, lon, house_system, zodiac, separation }) =>
-    chartResult(chartPayload(engine, date ?? new Date().toISOString(), lat, lon, house_system, zodiac, separation)));
+  }, async ({ date, lat, lon, house_system, zodiac, separation, output, grid }) =>
+    output === "canonical"
+      ? text(canonicalChartPayload(engine, date ?? new Date().toISOString(), lat, lon, house_system, zodiac, separation, grid))
+      : chartResult(chartPayload(engine, date ?? new Date().toISOString(), lat, lon, house_system, zodiac, separation)));
 
   server.registerTool("sky_view", {
     description:
@@ -1352,8 +1393,9 @@ export function buildServer(
       return_lon: lonSchema.optional().describe("Longitude (EAST positive) for the return chart; defaults to the birth longitude"),
       house_system: houseSys,
       zodiac: zodiacSchema,
+      output: outputSchema, grid: gridSchema,
     },
-  }, async ({ date, lat, lon, body, search_start, search_end, return_lat, return_lon, house_system, zodiac }) => {
+  }, async ({ date, lat, lon, body, search_start, search_end, return_lat, return_lon, house_system, zodiac, output, grid }) => {
     const natalJd = jdFromIso(date);
     const jd0 = jdFromIso(search_start);
     const jd1 = jdFromIso(search_end);
@@ -1362,6 +1404,23 @@ export function buildServer(
     const instants = fn(engine, natalJd, jd0, jd1, zodiac);
     const rLat = return_lat ?? lat;
     const rLon = return_lon ?? lon;
+    if (output === "canonical") {
+      // Return instants as integer ms; the return chart in full canonical
+      // form; digest over the whole body.
+      const payload = {
+        format: "caelus-canonical", version: 1,
+        units: { time: "ms since J2000.0 (JD 2451545.0 UT)", place: "centidegree" },
+        body,
+        natalTimeMs: canonicalTimeMs(natalJd),
+        returnLatCentideg: quantizeUnit(rLat, 100),
+        returnLonCentideg: quantizeUnit(rLon, 100),
+        returnsMs: instants.map(canonicalTimeMs),
+        chart: instants.length
+          ? canonicalChartPayload(engine, isoFromJd(instants[0]), rLat, rLon, house_system, zodiac, undefined, grid)
+          : null,
+      };
+      return text({ ...payload, digest: canonicalDigest(payload) });
+    }
     const returnsIso = instants.map(isoFromJd);
     const chart = instants.length
       ? chartPayload(engine, isoFromJd(instants[0]), rLat, rLon, house_system, zodiac)
@@ -1769,11 +1828,32 @@ export function buildServer(
       lat: latSchema,
       bodies: z.array(z.string()).optional().describe("Bodies to consider; default the seven classical planets"),
       tolerance_min: z.number().positive().max(120).default(30).describe("Paran window in minutes: the two angle crossings must fall within this gap"),
+      output: outputSchema,
     },
-  }, async ({ date, lat, bodies, tolerance_min }) => {
+  }, async ({ date, lat, bodies, tolerance_min, output }) => {
     const iso = date ?? new Date().toISOString();
     const jd = jdFromIso(iso);
     const hits = parans(engine, jd, lat, bodies, tolerance_min);
+    if (output === "canonical") {
+      // Derived-surface canonical form: instants as integer ms since J2000,
+      // gaps as integer centi-minutes, inputs quantized; digest over the body.
+      const body = {
+        format: "caelus-canonical", version: 1,
+        units: {
+          time: "ms since J2000.0 (JD 2451545.0 UT)", gap: "centi-minute",
+          lat: "centidegree",
+        },
+        timeMs: canonicalTimeMs(jd),
+        latCentideg: quantizeUnit(lat, 100),
+        toleranceCentiMin: quantizeUnit(tolerance_min, 100),
+        parans: hits.map((p) => ({
+          a: p.a, a_angle: p.a_angle, b: p.b, b_angle: p.b_angle,
+          timeMs: canonicalTimeMs(p.jd),
+          gapCentiMin: quantizeUnit(p.gap_min, 100),
+        })),
+      };
+      return text({ ...body, digest: canonicalDigest(body) });
+    }
     return text({
       utc: iso, lat, tolerance_min,
       parans: hits.map((p) => ({

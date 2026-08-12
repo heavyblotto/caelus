@@ -283,6 +283,21 @@ convenience. A `fictional` place never resolves to coordinates by design — the
 chart computes the planetary layer, houseless, exactly the provenance layer's
 `none`-place case. `verify_tools` pins each of these paths.
 
+## Canonical output mode
+`natal_chart`, `current_sky`, `returns`, and `parans` accept
+`output: "canonical"` (plus `grid`: `arcsec` default, `milliarcsec`,
+`centideg`, `dms` triples, or `accuracy` — each body snapped to its measured
+validated accuracy). The payload is all-integer on the declared grid with a
+sha256 `digest` over the canonical body: stable across machines, browsers,
+and languages (the `canonical-golden` suite pins TS and Python digests
+EQUAL, the engine's one tolerance-free golden), hashable for caching /
+dedupe / provenance receipts, and boundary-coherent — sign, house, and the
+aspect list are re-derived from the quantized values under a stated
+tie-break (a boundary value belongs to the later sign/house), so displayed
+numbers and discrete facts cannot disagree. `verify_tools` pins the MCP
+digest equal to the engine's own `chartDigest`, no float anywhere in the
+payload, and cross-call stability. See `docs/canonical-mode.md`.
+
 ## Parans harvest
 `parans` surfaces the co-angular engine math that shipped in 0.17.0 (Roadmap
 Phase 4b named it; the tool surface lagged the engine): every pair of bodies

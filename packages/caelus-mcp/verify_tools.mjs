@@ -18,7 +18,7 @@ import {
   compositeLongitudes, davisonParams, dignityOf, isDayChart, planetarySect, inSect,
   lots, HERMETIC_LOTS,
   profectionAt, firdaria, firdariaActive,
-  zrRelease, zrAt, SIGNS,
+  zrRelease, zrAt, SIGNS, canonicalDigest, chartDigest,
   primaryDirections, mundaneDirections, KEYS,
   nakshatra, vimshottariDashas, vimshottariAt,
   yoginiDashas, yoginiAt, ashtottariDashas, ashtottariAt,
@@ -729,6 +729,57 @@ const assertExactHits = (hits, body, targetLonAt, angle, label, tolDeg = 0.02) =
   assert(!res.impossible, "chart_facts: the latitude form is satisfiable");
   assert(res.latitudes && Object.values(res.latitudes).some((v) => v !== 0),
     "chart_facts: solved latitudes are reported when a body leaves the ecliptic");
+}
+
+// ----------------------------------------------------- canonical output mode
+// output:"canonical" must be integer-only, digest-stable, and equal to the
+// engine's own chartDigest for the same inputs (the MCP layer adds nothing).
+{
+  const args = { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46, output: "canonical" };
+  const res = await call("natal_chart", args);
+  assert(res.format === "caelus-canonical" && res.grid === "arcsec",
+    "canonical: format + default grid");
+  const floats = [];
+  (function walk(v, path) {
+    if (typeof v === "number" && !Number.isInteger(v)) floats.push(path);
+    else if (Array.isArray(v)) v.forEach((x, i) => walk(x, `${path}[${i}]`));
+    else if (v && typeof v === "object") {
+      for (const [k, x] of Object.entries(v)) walk(x, `${path}.${k}`);
+    }
+  })(res, "$");
+  assert(floats.length === 0, `canonical: no floats anywhere (found ${floats.slice(0, 3)})`);
+  const { digest, ...body } = res;
+  assert(digest === canonicalDigest(body), "canonical: digest covers the body");
+  const c = eng.chart(1990, 6, 10, 14, 30, 0, args.lat, args.lon, "placidus");
+  assert(digest === chartDigest(c), "canonical: MCP digest equals engine chartDigest");
+  const again = await call("natal_chart", args);
+  assert(again.digest === digest, "canonical: digest stable across calls");
+  const dms = await call("natal_chart", { ...args, grid: "dms" });
+  assert(Array.isArray(dms.bodies.sun.lon) && dms.bodies.sun.lon.length === 3,
+    "canonical: dms grid renders [deg,min,sec] triples");
+  assert(dms.digest !== digest, "canonical: the grid is bound into the digest");
+
+  // Sign/house/aspects derive from the quantized values: internal coherence.
+  const sun = res.bodies.sun;
+  const scale = 3600;
+  assert(sun.sign === SIGNS[Math.floor(sun.lon / (30 * scale)) % 12],
+    "canonical: sign derives from the quantized longitude");
+
+  // Derived surfaces: parans + returns in canonical form.
+  const p = await call("parans", { date: "1990-06-10T00:00:00Z", lat: 27.95, output: "canonical" });
+  assert(p.format === "caelus-canonical" && Number.isInteger(p.timeMs)
+    && p.parans.every((x) => Number.isInteger(x.timeMs) && Number.isInteger(x.gapCentiMin)),
+    "canonical parans: integer instants and gaps");
+  const { digest: pd, ...pbody } = p;
+  assert(pd === canonicalDigest(pbody), "canonical parans: digest covers the body");
+  const r = await call("returns", {
+    date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46, body: "sun",
+    search_start: "2024-01-01T00:00:00Z", search_end: "2024-12-31T00:00:00Z",
+    output: "canonical",
+  });
+  assert(r.format === "caelus-canonical" && r.returnsMs.every(Number.isInteger)
+    && r.chart && r.chart.format === "caelus-canonical",
+    "canonical returns: integer instants + canonical return chart");
 }
 
 await client.close();

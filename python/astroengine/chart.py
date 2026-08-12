@@ -6,6 +6,7 @@ from .core import (Vsop, jd_tt, julian_day, planet_apparent, sun_apparent,
                    equatorial, ayanamsa, mean_lilith, topocentric_ecl,
                    true_obliquity, nutation, DEG)
 from . import houses as H
+from .ranges import chart_warnings as _chart_warnings
 
 BODIES = ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn",
           "uranus", "neptune", "pluto", "chiron", "mean_node", "true_node"]
@@ -312,6 +313,9 @@ class Engine:
             "cusps": cusps_deg,
             "aspects": find_aspects(bodies, orbs, separation=separation,
                                     aspects=aspects),
+            # Validity statements, mirrored from chart.ts chartWarnings text
+            # for text -- the canonical digest pins the two engines equal.
+            "warnings": _chart_warnings(jd_ut, list(bodies.keys()), self),
         }
 
 
