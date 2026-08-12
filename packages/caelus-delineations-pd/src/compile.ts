@@ -10,6 +10,8 @@
  */
 import {
   hasPlacement, hasAspect, hasPattern, hasSignature, hasAngle, hasStar, hasLot,
+  hasDispositor, hasReception, hasDignityFine, hasTransit, hasSynastry,
+  hasComposite, hasTimelord, hasNakshatra, hasVarga, hasYoga,
 } from "caelus";
 import type {
   Selector, Rule, InterpretationSource, AngleAtom,
@@ -31,10 +33,41 @@ export function selectorFromSpec(spec: SelectorSpec): Selector {
       return hasSignature(spec.facet, spec.value);
     case "angle":
       return hasAngle(spec.angle as AngleAtom["angle"], spec.sign);
+    case "dispositor":
+      return hasDispositor({
+        body: spec.body, dispositor: spec.dispositor, final: spec.final,
+      });
+    case "reception":
+      return hasReception({ body: spec.body, by: spec.by });
+    case "dignity":
+      return hasDignityFine({ facet: spec.facet, body: spec.body, ruler: spec.ruler });
     case "star":
       return hasStar({ body: spec.body, star: spec.star });
     case "lot":
       return hasLot({ lot: spec.lot, sign: spec.sign, house: spec.house });
+    case "transit":
+      return hasTransit({
+        transit: spec.transit, natal: spec.natal, aspect: spec.aspect, phase: spec.phase,
+      });
+    case "synastry":
+      return hasSynastry({
+        mode: spec.mode, a: spec.a, b: spec.b, aspect: spec.aspect,
+        body: spec.body, partner: spec.partner, house: spec.house,
+      });
+    case "composite":
+      return hasComposite({ body: spec.body, sign: spec.sign });
+    case "timelord":
+      return hasTimelord({
+        system: spec.system, level: spec.level, lord: spec.lord, sign: spec.sign,
+      });
+    case "nakshatra":
+      return hasNakshatra({
+        body: spec.body, name: spec.name, lord: spec.lord, pada: spec.pada,
+      });
+    case "varga":
+      return hasVarga({ division: spec.division, body: spec.body, sign: spec.sign });
+    case "yoga":
+      return hasYoga({ yoga: spec.yoga, body: spec.body });
   }
 }
 

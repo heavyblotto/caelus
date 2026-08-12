@@ -99,11 +99,14 @@ export function hasDispositor(filter: {
     && (filter.final === undefined || a.final === filter.final)));
 }
 
-/** Matches a mutual reception, optionally involving a given body. */
-export function hasReception(filter: { body?: string } = {}): Selector {
+/** Matches a mutual reception, optionally involving a given body and/or the
+ *  dignity it runs through (`by`: `"domicile"`, `"exaltation"`,
+ *  `"triplicity"`, or a sorted mixed pair like `"domicile-exaltation"`). */
+export function hasReception(filter: { body?: string; by?: string } = {}): Selector {
   return (ctx) => hit(ctx.atoms.filter((a) =>
     a.kind === "reception"
-    && (filter.body === undefined || a.bodies.includes(filter.body))));
+    && (filter.body === undefined || a.bodies.includes(filter.body))
+    && (filter.by === undefined || a.by === filter.by)));
 }
 
 /** Matches a fixed-star conjunction by the catalog star and/or the body on it. */
@@ -164,15 +167,18 @@ export function hasComposite(filter: { body?: string; sign?: string } = {}): Sel
     && (filter.sign === undefined || a.sign === filter.sign)));
 }
 
-/** Matches an active time-lord period. */
+/** Matches an active time-lord period, optionally by the period's sign
+ *  (profection sign, ZR sign) where the system carries one. */
 export function hasTimelord(filter: {
   system?: "profection" | "zr" | "firdaria" | "dasha"; level?: string; lord?: string;
+  sign?: string;
 } = {}): Selector {
   return (ctx) => hit(ctx.atoms.filter((a) =>
     a.kind === "timelord"
     && (filter.system === undefined || a.system === filter.system)
     && (filter.level === undefined || a.level === filter.level)
-    && (filter.lord === undefined || a.lord === filter.lord)));
+    && (filter.lord === undefined || a.lord === filter.lord)
+    && (filter.sign === undefined || a.sign === filter.sign)));
 }
 
 /** Matches finer essential-dignity facts (term, face, triplicity, almuten). */
@@ -186,13 +192,16 @@ export function hasDignityFine(filter: {
     && (filter.ruler === undefined || a.ruler === filter.ruler)));
 }
 
-/** Matches a nakshatra placement. */
-export function hasNakshatra(filter: { body?: string; name?: string; lord?: string } = {}): Selector {
+/** Matches a nakshatra placement, optionally down to the pada (quarter). */
+export function hasNakshatra(filter: {
+  body?: string; name?: string; lord?: string; pada?: number;
+} = {}): Selector {
   return (ctx) => hit(ctx.atoms.filter((a) =>
     a.kind === "nakshatra"
     && (filter.body === undefined || a.body === filter.body)
     && (filter.name === undefined || a.name === filter.name)
-    && (filter.lord === undefined || a.lord === filter.lord)));
+    && (filter.lord === undefined || a.lord === filter.lord)
+    && (filter.pada === undefined || a.pada === filter.pada)));
 }
 
 /** Matches a varga (divisional chart) placement. */

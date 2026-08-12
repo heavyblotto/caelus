@@ -69,8 +69,9 @@ for (const p of passages) {
   }
 }
 
-// 3. The compiler handles every SelectorSpec kind (forward-compat: aspect /
-//    pattern / signature / angle aren't in the seed yet but must compile).
+// 3. The compiler handles every SelectorSpec kind — all seventeen FactKinds.
+//    A kind missing here (or from the union) is exactly the gap that once
+//    left ten atom kinds unreachable from serialized rules.
 console.log("selector kinds");
 const specs: SelectorSpec[] = [
   { kind: "placement", body: "mars", sign: "aries", house: 1, dignity: "domicile" },
@@ -78,13 +79,68 @@ const specs: SelectorSpec[] = [
   { kind: "pattern", pattern: "t_square", body: "mars" },
   { kind: "signature", facet: "element", value: "fire" },
   { kind: "angle", angle: "asc", sign: "leo" },
+  { kind: "dispositor", body: "mars", dispositor: "venus", final: false },
+  { kind: "reception", body: "mars", by: "domicile" },
+  { kind: "dignity", facet: "term", body: "mars", ruler: "venus" },
   { kind: "star", body: "mars", star: "Aldebaran" },
   { kind: "lot", lot: "fortune", sign: "Leo", house: 5 },
+  { kind: "transit", transit: "saturn", natal: "sun", aspect: "square", phase: "applying" },
+  { kind: "synastry", mode: "aspect", a: "venus", b: "mars", aspect: "trine" },
+  { kind: "composite", body: "sun", sign: "Leo" },
+  { kind: "timelord", system: "profection", level: "year", lord: "mars", sign: "Aries" },
+  { kind: "nakshatra", body: "moon", name: "Rohini", lord: "moon", pada: 2 },
+  { kind: "varga", division: 9, body: "venus", sign: "Pisces" },
+  { kind: "yoga", yoga: "gajakesari", body: "jupiter" },
 ];
 for (const s of specs) {
   try { check(typeof selectorFromSpec(s) === "function", `${s.kind} spec compiles`); }
   catch (e) { check(false, `${s.kind} spec threw (${(e as Error).message})`); }
 }
+const SPEC_KINDS = new Set(specs.map((s) => s.kind));
+check(SPEC_KINDS.size === 17, `spec enumeration covers all 17 kinds (${SPEC_KINDS.size})`);
+
+// 3b. The new chart-pure kinds round-trip: a compiled spec matches exactly the
+//     synthetic atom it describes, and not a near-miss.
+console.log("chart-pure kinds round-trip");
+function oneAtomCtx(atom: FactAtom): InterpretationContext {
+  return { jdUt: 0, zodiac: "tropical", atoms: [atom] };
+}
+const receptionAtom: FactAtom = {
+  id: "reception:mars~venus", kind: "reception", bodies: ["mars", "venus"],
+  salience: 2, text: "mars and venus in mutual reception by domicile", by: "domicile",
+};
+const dispositorAtom: FactAtom = {
+  id: "dispositor:mars", kind: "dispositor", bodies: ["mars"], salience: 1,
+  text: "mars disposed by venus", body: "mars", dispositor: "venus", final: false,
+};
+const dignityAtom: FactAtom = {
+  id: "dignity:term:mars", kind: "dignity", bodies: ["mars"], salience: 1,
+  text: "mars in its own term", facet: "term", body: "mars", ruler: "mars",
+};
+check(
+  selectorFromSpec({ kind: "reception", body: "mars", by: "domicile" })(oneAtomCtx(receptionAtom)).matched,
+  "reception spec matches its atom",
+);
+check(
+  !selectorFromSpec({ kind: "reception", by: "exaltation" })(oneAtomCtx(receptionAtom)).matched,
+  "reception spec filters on `by`",
+);
+check(
+  selectorFromSpec({ kind: "dispositor", body: "mars", dispositor: "venus" })(oneAtomCtx(dispositorAtom)).matched,
+  "dispositor spec matches its atom",
+);
+check(
+  !selectorFromSpec({ kind: "dispositor", final: true })(oneAtomCtx(dispositorAtom)).matched,
+  "dispositor spec filters on `final`",
+);
+check(
+  selectorFromSpec({ kind: "dignity", facet: "term", body: "mars" })(oneAtomCtx(dignityAtom)).matched,
+  "dignity spec matches its atom",
+);
+check(
+  !selectorFromSpec({ kind: "dignity", facet: "face" })(oneAtomCtx(dignityAtom)).matched,
+  "dignity spec filters on `facet`",
+);
 
 // 4. Each planet-in-sign rule (any body) fires for its sign, cites the real
 //    atom, and stays isolated to that sign — the core "valid, testable"
