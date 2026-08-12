@@ -206,7 +206,9 @@ export function syntheticSources(sys: SyntheticSystem): Record<string, XyzSource
 }
 
 function vecToPos(v: [number, number, number]): SyntheticPosition {
-  const r = Math.hypot(v[0], v[1], v[2]);
+  // sqrt of the dot product, not Math.hypot: JS's hypot is not correctly
+  // rounded (V8), Python's is, and the golden pins the two bit-for-bit.
+  const r = Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
   return {
     lonDeg: mod(Math.atan2(v[1], v[0]) / DEG, 360),
     latDeg: r === 0 ? 0 : Math.asin(v[2] / r) / DEG,

@@ -1,0 +1,501 @@
+{
+ "basis": "Python reference astroengine.synthetic (pure math)",
+ "cases": [
+  {
+   "id": "validate-sound",
+   "spec": {
+    "id": "validate-sound",
+    "type": "validate",
+    "sys": {
+     "id": "twin-moons",
+     "bodies": [
+      {
+       "id": "fast",
+       "mode": "periodic",
+       "periodDays": 20,
+       "phaseDeg": 0
+      },
+      {
+       "id": "slow",
+       "mode": "periodic",
+       "periodDays": 80,
+       "phaseDeg": 90
+      },
+      {
+       "id": "pole-star",
+       "mode": "placement",
+       "lonDeg": 123.4
+      }
+     ]
+    }
+   },
+   "result": {
+    "impossible": false,
+    "problems": []
+   }
+  },
+  {
+   "id": "validate-broken",
+   "spec": {
+    "id": "validate-broken",
+    "type": "validate",
+    "sys": {
+     "id": "broken",
+     "observer": "ghost",
+     "bodies": [
+      {
+       "id": "a",
+       "mode": "periodic",
+       "periodDays": 0,
+       "phaseDeg": 0
+      },
+      {
+       "id": "a",
+       "mode": "kepler",
+       "a": -1,
+       "e": 1.5,
+       "i": 0,
+       "node": 0,
+       "peri": 0,
+       "M0": 0,
+       "periodDays": 10
+      }
+     ]
+    }
+   },
+   "result": {
+    "impossible": true,
+    "problems": [
+     "body 'a': periodDays must be > 0 (got 0)",
+     "duplicate body id 'a'",
+     "body 'a': a must be > 0 (got -1)",
+     "body 'a': e must be in [0, 1) (got 1.5)",
+     "observer 'ghost' is not a body in the system"
+    ]
+   }
+  },
+  {
+   "id": "positions-helio-t0",
+   "spec": {
+    "id": "positions-helio-t0",
+    "type": "positions",
+    "sys": {
+     "id": "twin-moons",
+     "bodies": [
+      {
+       "id": "fast",
+       "mode": "periodic",
+       "periodDays": 20,
+       "phaseDeg": 0
+      },
+      {
+       "id": "slow",
+       "mode": "periodic",
+       "periodDays": 80,
+       "phaseDeg": 90
+      },
+      {
+       "id": "pole-star",
+       "mode": "placement",
+       "lonDeg": 123.4
+      }
+     ]
+    },
+    "t": 0
+   },
+   "result": {
+    "fast": {
+     "lonDeg": 0.0,
+     "latDeg": 0.0,
+     "r": 7.368062997280773
+    },
+    "slow": {
+     "lonDeg": 90.0,
+     "latDeg": 0.0,
+     "r": 18.566355334451114
+    },
+    "pole-star": {
+     "lonDeg": 123.4,
+     "latDeg": 0.0,
+     "r": 1000000000.0
+    }
+   }
+  },
+  {
+   "id": "positions-helio-t5",
+   "spec": {
+    "id": "positions-helio-t5",
+    "type": "positions",
+    "sys": {
+     "id": "twin-moons",
+     "bodies": [
+      {
+       "id": "fast",
+       "mode": "periodic",
+       "periodDays": 20,
+       "phaseDeg": 0
+      },
+      {
+       "id": "slow",
+       "mode": "periodic",
+       "periodDays": 80,
+       "phaseDeg": 90
+      },
+      {
+       "id": "pole-star",
+       "mode": "placement",
+       "lonDeg": 123.4
+      }
+     ]
+    },
+    "t": 5
+   },
+   "result": {
+    "fast": {
+     "lonDeg": 90.0,
+     "latDeg": 0.0,
+     "r": 7.368062997280773
+    },
+    "slow": {
+     "lonDeg": 112.5,
+     "latDeg": 0.0,
+     "r": 18.566355334451114
+    },
+    "pole-star": {
+     "lonDeg": 123.4,
+     "latDeg": 0.0,
+     "r": 1000000000.0
+    }
+   }
+  },
+  {
+   "id": "positions-helio-t123",
+   "spec": {
+    "id": "positions-helio-t123",
+    "type": "positions",
+    "sys": {
+     "id": "twin-moons",
+     "bodies": [
+      {
+       "id": "fast",
+       "mode": "periodic",
+       "periodDays": 20,
+       "phaseDeg": 0
+      },
+      {
+       "id": "slow",
+       "mode": "periodic",
+       "periodDays": 80,
+       "phaseDeg": 90
+      },
+      {
+       "id": "pole-star",
+       "mode": "placement",
+       "lonDeg": 123.4
+      }
+     ]
+    },
+    "t": 123.456
+   },
+   "result": {
+    "fast": {
+     "lonDeg": 62.207999999999785,
+     "latDeg": 0.0,
+     "r": 7.368062997280773
+    },
+    "slow": {
+     "lonDeg": 285.55199999999996,
+     "latDeg": -0.0,
+     "r": 18.566355334451114
+    },
+    "pole-star": {
+     "lonDeg": 123.4,
+     "latDeg": 0.0,
+     "r": 1000000000.0
+    }
+   }
+  },
+  {
+   "id": "positions-observed-t0",
+   "spec": {
+    "id": "positions-observed-t0",
+    "type": "positions",
+    "sys": {
+     "id": "observed-world",
+     "observer": "home",
+     "bodies": [
+      {
+       "id": "home",
+       "mode": "periodic",
+       "periodDays": 365,
+       "phaseDeg": 0
+      },
+      {
+       "id": "outer",
+       "mode": "periodic",
+       "periodDays": 1200,
+       "phaseDeg": 40
+      },
+      {
+       "id": "comet",
+       "mode": "kepler",
+       "a": 8.0,
+       "e": 0.6,
+       "i": 12.0,
+       "node": 30.0,
+       "peri": 100.0,
+       "M0": 0.0,
+       "periodDays": 3000,
+       "epoch": 100
+      }
+     ]
+    },
+    "t": 0
+   },
+   "result": {
+    "home": {
+     "lonDeg": 0.0,
+     "latDeg": 0.0,
+     "r": 51.0734556013932
+    },
+    "outer": {
+     "lonDeg": 63.981597771471826,
+     "latDeg": 0.0,
+     "r": 80.77237762309962
+    },
+    "comet": {
+     "lonDeg": 175.87536483301585,
+     "latDeg": 0.6482268057135201,
+     "r": 50.29553699561637
+    }
+   }
+  },
+  {
+   "id": "positions-observed-t500",
+   "spec": {
+    "id": "positions-observed-t500",
+    "type": "positions",
+    "sys": {
+     "id": "observed-world",
+     "observer": "home",
+     "bodies": [
+      {
+       "id": "home",
+       "mode": "periodic",
+       "periodDays": 365,
+       "phaseDeg": 0
+      },
+      {
+       "id": "outer",
+       "mode": "periodic",
+       "periodDays": 1200,
+       "phaseDeg": 40
+      },
+      {
+       "id": "comet",
+       "mode": "kepler",
+       "a": 8.0,
+       "e": 0.6,
+       "i": 12.0,
+       "node": 30.0,
+       "peri": 100.0,
+       "M0": 0.0,
+       "periodDays": 3000,
+       "epoch": 100
+      }
+     ]
+    },
+    "t": 500
+   },
+   "result": {
+    "home": {
+     "lonDeg": 133.15068493150676,
+     "latDeg": 0.0,
+     "r": 51.07345560139319
+    },
+    "outer": {
+     "lonDeg": 216.70666125129705,
+     "latDeg": -0.0,
+     "r": 95.14535996989247
+    },
+    "comet": {
+     "lonDeg": 306.31740320139943,
+     "latDeg": -1.0316364256655526,
+     "r": 54.70920105628431
+    }
+   }
+  },
+  {
+   "id": "ephemeris-observed-sweep",
+   "spec": {
+    "id": "ephemeris-observed-sweep",
+    "type": "ephemeris",
+    "sys": {
+     "id": "observed-world",
+     "observer": "home",
+     "bodies": [
+      {
+       "id": "home",
+       "mode": "periodic",
+       "periodDays": 365,
+       "phaseDeg": 0
+      },
+      {
+       "id": "outer",
+       "mode": "periodic",
+       "periodDays": 1200,
+       "phaseDeg": 40
+      },
+      {
+       "id": "comet",
+       "mode": "kepler",
+       "a": 8.0,
+       "e": 0.6,
+       "i": 12.0,
+       "node": 30.0,
+       "peri": 100.0,
+       "M0": 0.0,
+       "periodDays": 3000,
+       "epoch": 100
+      }
+     ]
+    },
+    "body": "outer",
+    "ts": [
+     0,
+     100,
+     200,
+     300,
+     400,
+     500,
+     600
+    ]
+   },
+   "result": [
+    {
+     "lonDeg": 63.981597771471826,
+     "latDeg": 0.0,
+     "r": 80.77237762309962,
+     "speed": 0.10964023245492172,
+     "retrograde": false
+    },
+    {
+     "lonDeg": 50.23269227135245,
+     "latDeg": 0.0,
+     "r": 72.35942374937223,
+     "speed": -0.021630077194458863,
+     "retrograde": true
+    },
+    {
+     "lonDeg": 77.00379884297179,
+     "latDeg": 0.0,
+     "r": 129.68477673869964,
+     "speed": 0.4361886606773169,
+     "retrograde": false
+    },
+    {
+     "lonDeg": 125.6174715135214,
+     "latDeg": 0.0,
+     "r": 162.93335654794382,
+     "speed": 0.5120368146367582,
+     "retrograde": false
+    },
+    {
+     "lonDeg": 176.26317417116573,
+     "latDeg": 0.0,
+     "r": 148.5104914533457,
+     "speed": 0.4853334676624854,
+     "retrograde": false
+    },
+    {
+     "lonDeg": 216.70666125129705,
+     "latDeg": -0.0,
+     "r": 95.14535996989247,
+     "speed": 0.25865324856226835,
+     "retrograde": false
+    },
+    {
+     "lonDeg": 210.5910144530682,
+     "latDeg": 0.0,
+     "r": 63.78481698844298,
+     "speed": -0.21237677239469122,
+     "retrograde": true
+    }
+   ]
+  },
+  {
+   "id": "ephemeris-comet-sweep",
+   "spec": {
+    "id": "ephemeris-comet-sweep",
+    "type": "ephemeris",
+    "sys": {
+     "id": "observed-world",
+     "observer": "home",
+     "bodies": [
+      {
+       "id": "home",
+       "mode": "periodic",
+       "periodDays": 365,
+       "phaseDeg": 0
+      },
+      {
+       "id": "outer",
+       "mode": "periodic",
+       "periodDays": 1200,
+       "phaseDeg": 40
+      },
+      {
+       "id": "comet",
+       "mode": "kepler",
+       "a": 8.0,
+       "e": 0.6,
+       "i": 12.0,
+       "node": 30.0,
+       "peri": 100.0,
+       "M0": 0.0,
+       "periodDays": 3000,
+       "epoch": 100
+      }
+     ]
+    },
+    "body": "comet",
+    "ts": [
+     0,
+     750,
+     1500,
+     2250
+    ]
+   },
+   "result": [
+    {
+     "lonDeg": 175.87536483301585,
+     "latDeg": 0.6482268057135201,
+     "r": 50.29553699561637,
+     "speed": 1.0053551707426323,
+     "retrograde": false
+    },
+    {
+     "lonDeg": 209.16650075800027,
+     "latDeg": -1.8444289747461335,
+     "r": 54.887532441913805,
+     "speed": 0.918124306106165,
+     "retrograde": false
+    },
+    {
+     "lonDeg": 232.99725368868494,
+     "latDeg": -2.8364698153422228,
+     "r": 53.288059953213775,
+     "speed": 0.9236049307958183,
+     "retrograde": false
+    },
+    {
+     "lonDeg": 251.420025500996,
+     "latDeg": -2.0683354964243956,
+     "r": 50.67633245486633,
+     "speed": 0.9666897939143837,
+     "retrograde": false
+    }
+   ]
+  }
+ ]
+}
