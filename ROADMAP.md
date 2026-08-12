@@ -71,7 +71,7 @@ MCP App widget wiring (0.14), enriched chart bodies (0.15), chart synthesis
 cited interpretation corpus with star/lot atoms (0.19), diachronic and
 relational atoms (0.20), embedded fixed stars (0.20.1), per-body wheel
 colors (0.21), Sky View (0.22), and the synthetic ephemeris (0.23). The MCP
-server now exposes thirty-four chart tools.
+server now exposes thirty-five chart tools.
 
 The `ephemengine.com` site ships its full shape: landing page, browser
 playground, validation and provenance tables, build notes, a methods page
@@ -303,10 +303,10 @@ All shipped: **`similar_skies`** ("when did the sky look like this?", over the
 existing feature space), **`electional_search`** (rank a window by wanted
 body-to-body aspects, optional void-Moon penalty), **`cosmic_weather`** (the
 mundane sky: active configurations, stationing planets, void Moon), and
-**parans** (co-angular bodies) as engine math — reference-first with the
-`parans-golden` pin; its MCP tool surface is queued as the next tool harvest.
-The MCP server is at thirty-four tools; transit density remains a possible
-later count.
+**parans** (co-angular bodies) — reference-first engine math with the
+`parans-golden` pin, and the `parans` MCP tool (engine-oracle checks + a
+frozen golden payload). The MCP server is at thirty-five tools; transit
+density remains a possible later count.
 
 Direction refined after a second external pass (Grok, 2026-06-14). Its strongest
 insight: two powerful, already-built, suite-pinned engine capabilities have no

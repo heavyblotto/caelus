@@ -47,10 +47,10 @@
       "id": "true-node-bound",
       "source": "accuracy.true_node_vs_builtin",
       "render": [
-        "true node ≤ {value}",
+        "true node \u2264 {value}",
         "true node <= 1'"
       ],
-      "competing": "true node [≤<=]+ ?1[″\\\"]",
+      "competing": "true node [\u2264<=]+ ?1[\u2033\\\"]",
       "appearsIn": [
         "packages/caelus/README.md",
         "MCP_SPEC.md",
@@ -108,9 +108,9 @@
         "{value} chart tools",
         "{value} MCP tools",
         "MCP tools ({value})",
-        "thirty-four chart tools",
-        "Thirty-four chart tools",
-        "thirty-four tools"
+        "thirty-five chart tools",
+        "Thirty-five chart tools",
+        "thirty-five tools"
       ],
       "appearsIn": [
         "apps/web/lib/facts-anchors.generated.ts",

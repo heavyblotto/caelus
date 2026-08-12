@@ -1,7 +1,7 @@
 # caelus-mcp
 
 MCP server for [Caelus](https://github.com/heavyblotto/caelus) astrology
-computation: thirty-four chart tools over stdio. Computation only — positions, houses,
+computation: thirty-five chart tools over stdio. Computation only — positions, houses,
 aspects with orbs, event search, electional, returns, progressions, composite,
 dignities, Hermetic lots, the Hellenistic time-lords (profections, firdaria,
 zodiacal releasing), primary directions, the Vedic layer (nakshatras,

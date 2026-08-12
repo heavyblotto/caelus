@@ -24,7 +24,7 @@ import {
   yoginiDashas, yoginiAt, ashtottariDashas, ashtottariAt,
   varga, VARGA_DIVISIONS,
   yogasAt, kemadrumaAt, rajaYogasAt, dhanaYogasAt,
-  detectPatterns, detectPatternsIn, chartSignature,
+  detectPatterns, detectPatternsIn, chartSignature, parans,
   chartFeatures, configurationFit,
   dignityScore, voidOfCourse,
   synastryAspects,
@@ -591,6 +591,28 @@ const assertExactHits = (hits, body, targetLonAt, angle, label, tolDeg = 0.02) =
   assert(JSON.stringify(res.patterns) === JSON.stringify(expected),
     "aspect_patterns: matches engine detectPatterns");
   assert(res.houses === "placidus", "aspect_patterns: house system echoed");
+}
+
+// ---------------------------------------------------------------- parans
+{
+  const args = { date: "1990-06-10T00:00:00Z", lat: 27.95, tolerance_min: 30 };
+  const res = await call("parans", args);
+  const jd = julianDay(1990, 6, 10, 0, 0, 0);
+  const expected = parans(eng, jd, args.lat, undefined, args.tolerance_min);
+  assert(res.parans.length === expected.length,
+    `parans: hit count matches engine (${res.parans.length} vs ${expected.length})`);
+  for (let i = 0; i < expected.length; i++) {
+    const got = res.parans[i];
+    const want = expected[i];
+    assert(got.a === want.a && got.b === want.b
+      && got.a_angle === want.a_angle && got.b_angle === want.b_angle,
+      `parans[${i}]: pair and angles match engine`);
+    assert(Math.abs(got.gap_min - want.gap_min) < 0.01,
+      `parans[${i}]: gap matches engine`);
+  }
+  assert(res.parans.every((p) => p.gap_min <= args.tolerance_min),
+    "parans: every gap within the stated tolerance");
+  assert(res.lat === args.lat, "parans: latitude echoed");
 }
 
 // ---------------------------------------------------------------- chart_signature

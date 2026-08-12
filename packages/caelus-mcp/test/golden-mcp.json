@@ -2703,6 +2703,109 @@
       ]
     }
   },
+  "parans-tampa": {
+    "tool": "parans",
+    "args": {
+      "date": "1990-06-10T00:00:00Z",
+      "lat": 27.95,
+      "tolerance_min": 30
+    },
+    "payload": {
+      "utc": "1990-06-10T00:00:00Z",
+      "lat": 27.95,
+      "tolerance_min": 30,
+      "parans": [
+        {
+          "a": "jupiter",
+          "a_angle": "rise",
+          "b": "mars",
+          "b_angle": "mtransit",
+          "utc": "1990-06-10T07:06:18Z",
+          "gap_min": 20
+        },
+        {
+          "a": "jupiter",
+          "a_angle": "mtransit",
+          "b": "mars",
+          "b_angle": "set",
+          "utc": "1990-06-10T13:35:25Z",
+          "gap_min": 28.84
+        },
+        {
+          "a": "jupiter",
+          "a_angle": "rise",
+          "b": "moon",
+          "b_angle": "set",
+          "utc": "1990-06-10T06:42:09Z",
+          "gap_min": 28.32
+        },
+        {
+          "a": "jupiter",
+          "a_angle": "mtransit",
+          "b": "moon",
+          "b_angle": "itransit",
+          "utc": "1990-06-10T13:46:04Z",
+          "gap_min": 7.55
+        },
+        {
+          "a": "jupiter",
+          "a_angle": "set",
+          "b": "moon",
+          "b_angle": "rise",
+          "utc": "1990-06-10T20:48:07Z",
+          "gap_min": 9.56
+        },
+        {
+          "a": "mars",
+          "a_angle": "rise",
+          "b": "moon",
+          "b_angle": "mtransit",
+          "utc": "1990-06-10T01:14:19Z",
+          "gap_min": 4.81
+        },
+        {
+          "a": "mars",
+          "a_angle": "set",
+          "b": "moon",
+          "b_angle": "itransit",
+          "utc": "1990-06-10T13:31:38Z",
+          "gap_min": 21.29
+        },
+        {
+          "a": "mars",
+          "a_angle": "itransit",
+          "b": "sun",
+          "b_angle": "set",
+          "utc": "1990-06-10T19:05:41Z",
+          "gap_min": 19.96
+        },
+        {
+          "a": "moon",
+          "a_angle": "rise",
+          "b": "saturn",
+          "b_angle": "rise",
+          "utc": "1990-06-10T21:03:09Z",
+          "gap_min": 20.51
+        },
+        {
+          "a": "saturn",
+          "a_angle": "mtransit",
+          "b": "venus",
+          "b_angle": "rise",
+          "utc": "1990-06-10T02:44:48Z",
+          "gap_min": 25.45
+        },
+        {
+          "a": "saturn",
+          "a_angle": "rise",
+          "b": "venus",
+          "b_angle": "itransit",
+          "utc": "1990-06-10T21:21:50Z",
+          "gap_min": 16.87
+        }
+      ]
+    }
+  },
   "signature-tampa": {
     "tool": "chart_signature",
     "args": {

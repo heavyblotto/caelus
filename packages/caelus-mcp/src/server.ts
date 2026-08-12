@@ -36,7 +36,7 @@ import {
   yoginiDashas, yoginiAt, ashtottariDashas, ashtottariAt,
   varga, VARGA_DIVISIONS,
   yogasAt, kemadrumaAt, rajaYogasAt, dhanaYogasAt,
-  detectPatterns, detectPatternsIn, chartSignature,
+  detectPatterns, detectPatternsIn, chartSignature, parans,
   chartFeatures, searchConfigurations,
   dignityScore, aspectBetween,
   interpretationContext, chartBrief, realize, realmFraming, isoToJd, counterfactual,
@@ -551,6 +551,19 @@ export const yogasOut = z.object({
   dhana_yogas: z.array(lordPairOut),
   yogakarakas: z.array(z.string()),
 });
+export const paransOut = z.object({
+  utc: z.string(),
+  lat: z.number(),
+  tolerance_min: z.number(),
+  parans: z.array(z.object({
+    a: z.string(),
+    a_angle: z.enum(["rise", "mtransit", "set", "itransit"]),
+    b: z.string(),
+    b_angle: z.enum(["rise", "mtransit", "set", "itransit"]),
+    utc: z.string(),
+    gap_min: z.number(),
+  })),
+});
 export const patternsOut = z.object({
   utc: z.string(),
   houses: z.enum(HOUSE_SYSTEMS),
@@ -764,6 +777,7 @@ export const OUTPUT_SCHEMAS = {
   vargas: vargasOut,
   yogas: yogasOut,
   aspect_patterns: patternsOut,
+  parans: paransOut,
   chart_signature: signatureOut,
   similar_skies: similarSkiesOut,
   electional_search: electionalOut,
@@ -1703,6 +1717,28 @@ export function buildServer(
       utc: date, houses: c.houseSystem,
       ...(zodiac !== "tropical" ? { zodiac } : {}),
       patterns: detectPatterns(c),
+    });
+  });
+
+  server.registerTool("parans", {
+    description:
+      "Parans (paranatellonta): co-angular bodies over the 24 hours from a date at a latitude — every pair of bodies simultaneously on one of the four angles (rising, culminating, setting, anti-culminating) within a stated tolerance. The relationship behind Brady's fixed-star parans, computed for the moving bodies; pure positional astronomy over the validated rise/set/transit times. Longitude-independent: latitude alone fixes the geometry, so only lat is needed. Date defaults to now.",
+    inputSchema: {
+      date: z.string().optional().describe("UTC ISO date-time; the 24-hour window starts here. Omit for now"),
+      lat: latSchema,
+      bodies: z.array(z.string()).optional().describe("Bodies to consider; default the seven classical planets"),
+      tolerance_min: z.number().positive().max(120).default(30).describe("Paran window in minutes: the two angle crossings must fall within this gap"),
+    },
+  }, async ({ date, lat, bodies, tolerance_min }) => {
+    const iso = date ?? new Date().toISOString();
+    const jd = jdFromIso(iso);
+    const hits = parans(engine, jd, lat, bodies, tolerance_min);
+    return text({
+      utc: iso, lat, tolerance_min,
+      parans: hits.map((p) => ({
+        a: p.a, a_angle: p.a_angle, b: p.b, b_angle: p.b_angle,
+        utc: isoFromJd(p.jd), gap_min: Math.round(p.gap_min * 100) / 100,
+      })),
     });
   });
 

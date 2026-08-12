@@ -49,6 +49,8 @@ export const GOLDEN_CASES = [
     args: { date: "1990-06-10T00:00:00Z", lat: 27.95, lon: -82.46, step_minutes: 20 } },
   { id: "patterns-tampa", tool: "aspect_patterns",
     args: { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 } },
+  { id: "parans-tampa", tool: "parans",
+    args: { date: "1990-06-10T00:00:00Z", lat: 27.95, tolerance_min: 30 } },
   { id: "signature-tampa", tool: "chart_signature",
     args: { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 } },
   { id: "similar-skies-1990", tool: "similar_skies",

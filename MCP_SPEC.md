@@ -269,3 +269,18 @@ receptions, a body's tight conjunction with a bright fixed star
 (`star:jupiter:Sirius`), and the Part of Fortune and Spirit (`lot:fortune`). The
 engine ships the facts and the contract, never the interpretation content.
 Twenty-nine tools total.
+
+## Parans harvest
+`parans` surfaces the co-angular engine math that shipped in 0.17.0 (Roadmap
+Phase 4b named it; the tool surface lagged the engine): every pair of bodies
+simultaneously on one of the four angles (rising, culminating, setting,
+anti-culminating) over the 24 hours from a date at a latitude, within a
+stated tolerance in minutes. Longitude-independent — latitude alone fixes
+the geometry. No engine change; `verify_tools` pins the tool to the
+engine's `parans()` (pair, angles, and gap agreement plus the tolerance
+bound) and a frozen `golden-mcp` payload holds the format.
+
+### parans(date?, lat, bodies?, tolerance_min?)
+Co-angular pairs as `{a, a_angle, b, b_angle, utc, gap_min}`, ordered by
+(a, b, time); `a_angle`/`b_angle` are `rise | mtransit | set | itransit`.
+Date defaults to now; bodies default to the seven classical planets.
