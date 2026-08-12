@@ -57,8 +57,43 @@ for (const dir of ["packages/caelus-mcp", "packages/birth"]) {
   }
 }
 
+// caelus-delineations-pd versions independently (0.1.x) but its peer range on
+// caelus must admit the canonical engine version. The old shape — a regular
+// dependency whose caret range went stale — nested a duplicate engine inside
+// every consumer install and drifted three times without a version bump,
+// because this script never looked at the package. Range form is ">=A <B".
+const pdPkg = JSON.parse(read("packages/caelus-delineations-pd/package.json"));
+const pdRange = pdPkg.peerDependencies?.caelus;
+const parseVer = (v) => v.split(".").map(Number);
+const cmp = (a, b) => a[0] - b[0] || a[1] - b[1] || a[2] - b[2];
+if (pdPkg.dependencies?.caelus) {
+  depErrors.push(
+    "caelus-delineations-pd lists caelus in dependencies — it must be a peerDependency " +
+      "(a regular dependency nests a second engine copy in consumer installs)",
+  );
+}
+const rangeMatch = pdRange?.match(/^>=(\d+\.\d+\.\d+) <(\d+\.\d+(?:\.\d+)?)$/);
+if (!rangeMatch) {
+  depErrors.push(
+    `caelus-delineations-pd peerDependencies.caelus is "${pdRange}", expected ">=A.B.C <X.Y" form`,
+  );
+} else {
+  const lo = parseVer(rangeMatch[1]);
+  const hi = parseVer(rangeMatch[2].split(".").length === 2 ? `${rangeMatch[2]}.0` : rangeMatch[2]);
+  const can = parseVer(canonical);
+  if (cmp(can, lo) < 0 || cmp(can, hi) >= 0) {
+    depErrors.push(
+      `caelus-delineations-pd peer range "${pdRange}" does not admit caelus ${canonical} — ` +
+        "widen the range AND bump the package version so the fix can actually publish",
+    );
+  }
+}
+
 if (mismatches.length === 0 && depErrors.length === 0) {
-  console.log(`versions check passed — all artifacts at ${canonical}`);
+  console.log(
+    `versions check passed — all artifacts at ${canonical}; ` +
+      `caelus-delineations-pd at ${pdPkg.version} (peer ${pdRange})`,
+  );
   process.exit(0);
 }
 

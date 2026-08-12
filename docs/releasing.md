@@ -32,10 +32,10 @@ alongside the npm packages. (The legacy manual path — `python -m build` then
 `twine upload` with a `pypi-…` token — is no longer needed; it's what let the
 PyPI version silently lag the npm versions.)
 
-All four names are unscoped (`caelus`, `caelus-mcp`, `caelus-birth`,
-`caelus-wheel` — the `@caelus` scope is claimed/reserved on npm) and are
-registered by the first publish itself. Re-check before tagging:
-`npm view caelus` should still 404.
+All five names are unscoped (`caelus`, `caelus-mcp`, `caelus-birth`,
+`caelus-wheel`, `caelus-delineations-pd` — the `@caelus` scope is
+claimed/reserved on npm) and are registered by the first publish itself.
+Re-check before tagging: `npm view caelus` should still 404.
 
 ## Each release
 
@@ -48,7 +48,15 @@ registered by the first publish itself. Re-check before tagging:
    image). `check:versions` now asserts `SITE.version` too.
 2. Update `caelus-mcp`'s and `caelus-birth`'s dependency range on `caelus`
    (`^X.Y.Z`) to match.
-3. Run `npm run check:versions` — it asserts npm × PyPI × `server.json` all
+3. `caelus-delineations-pd` versions independently (0.1.x) but is part of
+   every release check: its `peerDependencies.caelus` range must admit the
+   new engine version, and **any change to that range must come with a
+   version bump** — npm versions are immutable, so widening the range
+   without bumping leaves the fix unreleasable (this happened three times
+   across 0.21–0.23 before the check existed). `check:versions` asserts
+   both the peer-range fit and that the range is a peer, not a regular,
+   dependency.
+4. Run `npm run check:versions` — it asserts npm × PyPI × `server.json` all
    agree and the `caelus` dep ranges match, so a half-bumped release fails
    locally instead of shipping. `node scripts/check-llms.mjs` verifies the
    `llms.txt` sync. Both run in CI (`check:versions` also gates `release`).
