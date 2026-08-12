@@ -123,8 +123,11 @@ These conflict with embedded-JSON data and the edge runtime story, and are
 recorded as non-goals:
 
 - The ±13,000-year range. Swiss Ephemeris gets it from hundreds of MB of
-  compressed DE431 files. Embedded tiers cap near 1700–2200; a lazy
-  extended pack could reach roughly 1000–3000 CE if demand appears.
+  compressed DE431 files. Embedded tiers cap near 1700–2200; the lazy
+  1000–3000 CE wide tier is built end to end (parameterized fits, the
+  wide validation band, capability/warning plumbing — see
+  `range-expansion.md`, "Tier B") and awaits only a Horizons-connected
+  mint run.
 - The numbered-asteroid corpus (hundreds of thousands of bodies). The fit
   pipeline can mint a Chebyshev pack for any requested asteroid instead.
 - Planetary moons and planetocentric positions.

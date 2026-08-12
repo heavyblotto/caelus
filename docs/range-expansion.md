@@ -74,15 +74,49 @@ All five remaining steps ran locally against `ssd.jpl.nasa.gov` and shipped:
    `validate_swiss.py` re-run over 1851-2149), the validation/provenance pages,
    the MCP spec + server prose, both `llms.txt` copies, and the package READMEs.
 
+## Tier B: the 1000-3000 CE wide tier (pipeline ready, mint pending)
+
+The engine side is complete and inert until data arrives -- the same pattern
+that landed the wide Pluto pack. Everything below the mint is shipped:
+`node-loader.ts` loads whatever pack span it finds, `engineCapabilities`
+reports each pack's true fitted span from the pack itself, `PackedBody`
+typing covers absence, `Chart.warnings` states out-of-validated-range
+computation and the delta-T uncertainty per epoch (`deltaTSigma`, Morrison &
+Stephenson 2004), and the fit + validation scripts take the wide window as
+arguments.
+
+The mint itself needs outbound access to `ssd.jpl.nasa.gov` (Horizons),
+which sandboxed/CI environments do not have. From a machine with egress:
+
+1. `python3 fit_pluto.py --wide` and `python3 fit_smallbody.py --wide`
+   (chiron + the five asteroids; per-body windows via `--year0/--year1`).
+   Horizons serves DE441 across the whole span. Packs land in both data
+   dirs; expect roughly linear growth with the window (~4x the current
+   packs). They ship as lazy chunks through the existing tarball list
+   (`scripts/check-tarball.mjs` gates it).
+2. `python3 validate_horizons.py --wide` -- measures the "1000-3000 wide"
+   band (~40 epochs per wing, every body its packs cover) into
+   `horizons-accuracy.json`.
+3. Only on those measured numbers ("validated, not asserted"): update
+   `accuracy.json` (`range`), the `MEASURED` table in
+   `packages/caelus/src/ranges.ts`, `docs/range-expansion.md`'s table, and
+   let the claims registry propagate the headline. Regenerate the golden
+   suite if any in-range behaviour changed (it should not: wider packs only
+   extend coverage).
+
+For the Hellenistic / Hermetic era (first-fifth centuries): the same
+machinery runs over any window DE441 covers -- nothing gates a 0-3000 fit
+run except the same egress. What bounds that era is not the position theory
+but delta T: sigma is minutes there, which smears the angles and the Moon
+while the slow bodies read fine. `Chart.warnings` states exactly that split
+per chart, so ancient charts are honestly usable rather than refused.
+
 ## Notes and non-goals
 
-- When a Pluto pack is loaded, Pluto behaves like the other Chebyshev bodies:
-  outside the pack's fitted range it is reported in `Chart.unavailable` rather
-  than computed. Whether to also move Pluto from `AlwaysBody` to `PackedBody`
-  in the type model is deferred; today it stays `AlwaysBody` (without a pack it
-  always resolves via Meeus).
-- Tier B (a lazy DE-direct pack reaching roughly 1000-3000 CE) stays demand-
-  gated, as recorded in `gap-analysis.md`.
+- With the wide Pluto pack loaded, Pluto behaves like the other Chebyshev
+  bodies: outside the pack's fitted range it is reported in
+  `Chart.unavailable` rather than computed, and `PackedBody` covers it in
+  the type model (`chart.bodies.pluto` is `ChartBody | undefined`).
 - Full Swiss Ephemeris parity (the +-13,000-year range and 0.001 arcsec
   accuracy) remains a non-goal: arcsecond is already below astrological
   resolution, and for ancient dates the uncertainty in delta T dominates any

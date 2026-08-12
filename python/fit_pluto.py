@@ -14,6 +14,7 @@ period), so long segments resolve it cheaply.
 Run in an environment with outbound access to ssd.jpl.nasa.gov and numpy
 installed; the data mint and validation cannot run in a sandbox without egress.
 """
+import argparse
 import json
 import os
 import sys
@@ -24,8 +25,6 @@ sys.path.insert(0, os.path.dirname(__file__))
 from astroengine.chebyshev import fit
 from astroengine.core import julian_day
 from horizons import HorizonsCache
-
-CACHE = os.path.join(os.path.dirname(__file__), "pluto_horizons_cache.json")
 OUT_MONOREPO = os.path.join(
     os.path.dirname(__file__), "..", "packages", "caelus", "data", "pluto_cheb.json"
 )
@@ -33,20 +32,37 @@ OUT_ENGINE = os.path.join(
     os.path.dirname(__file__), "astroengine", "data", "pluto_cheb.json"
 )
 
-# Fit window. The Pluto *body* center (999) wobbles around the Pluto-Charon
-# barycenter every 6.39 d at ~1.4e-5 AU (~2130 km) -- a high-frequency signal no
-# multi-year Chebyshev can absorb, so 999 floors the fit at ~1.4e-5 AU. We fit
-# the *barycenter* (command "9"): it is smooth (Charon averaged out), matches the
-# Meeus ch.37 series this pack supersedes (also barycenter, no Charon term), and
-# Horizons serves it across the full DE441 span. The 999-vs-barycenter offset is
-# <= ~0.1" geocentric, below the engine's other Pluto error terms.
+# Default fit window. The Pluto *body* center (999) wobbles around the
+# Pluto-Charon barycenter every 6.39 d at ~1.4e-5 AU (~2130 km) -- a
+# high-frequency signal no multi-year Chebyshev can absorb, so 999 floors the
+# fit at ~1.4e-5 AU. We fit the *barycenter* (command "9"): it is smooth
+# (Charon averaged out), matches the Meeus ch.37 series this pack supersedes
+# (also barycenter, no Charon term), and Horizons serves it across the full
+# DE441 span. The 999-vs-barycenter offset is <= ~0.1" geocentric, below the
+# engine's other Pluto error terms.
+#
+# The wide tier (--wide, 1000-3000 CE) runs the identical pipeline over the
+# span the tradition's own era needs; DE441 covers it. Pluto is slow, so the
+# pack grows roughly linearly with the window (~4x the 1700-2200 pack).
 YEAR0, YEAR1 = 1700, 2200
 
 
 def main():
-    jd0, jd1 = julian_day(YEAR0, 1, 1), julian_day(YEAR1, 1, 1)
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--year0", type=int, default=YEAR0)
+    ap.add_argument("--year1", type=int, default=YEAR1)
+    ap.add_argument("--wide", action="store_true",
+                    help="shorthand for --year0 1000 --year1 3000 (the lazy wide tier)")
+    args = ap.parse_args()
+    year0 = 1000 if args.wide else args.year0
+    year1 = 3000 if args.wide else args.year1
+    cache_path = os.path.join(
+        os.path.dirname(__file__),
+        "pluto_horizons_cache.json" if (year0, year1) == (1700, 2200)
+        else f"pluto_horizons_cache_{year0}_{year1}.json")
+    jd0, jd1 = julian_day(year0, 1, 1), julian_day(year1, 1, 1)
     # Pluto barycenter (9): smooth (Charon wobble averaged out), full DE441 range.
-    cache = HorizonsCache(CACHE, command="9", label="9 Pluto barycenter")
+    cache = HorizonsCache(cache_path, command="9", label="9 Pluto barycenter")
     # pad past jd1: Chebyshev segments sample up to jd0 + nseg*seg_days > jd1.
     cache.ensure(jd0, jd1, step=1.0, pad_days=23376)
     pluto_helio = cache.sample
@@ -76,7 +92,7 @@ def main():
         "center": "@sun",
         "frame": "heliocentric ecliptic J2000",
         "correction": "geometric (VEC_CORR=NONE)",
-        "range": f"{YEAR0}-{YEAR1}",
+        "range": f"{year0}-{year1}",
         "seg_days": seg,
         "degree": deg,
         "fit_residual_au": resid,

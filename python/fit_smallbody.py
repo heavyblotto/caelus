@@ -7,9 +7,12 @@ geocentric pipeline applies it once. Needs ssd.jpl.nasa.gov reachable;
 run locally if the sandbox egress policy blocks it, then commit the JSON.
 
 Usage:
-  python3 fit_smallbody.py             # all five Tier 2 bodies
+  python3 fit_smallbody.py                       # all five Tier 2 bodies, 1850-2150
   python3 fit_smallbody.py ceres pholus
+  python3 fit_smallbody.py --wide                # the 1000-3000 CE lazy tier
+  python3 fit_smallbody.py --year0 1000 --year1 3000 chiron
 """
+import argparse
 import json
 import os
 import sys
@@ -26,6 +29,9 @@ BODIES = {
     "juno": ("3;", "3 Juno"),
     "vesta": ("4;", "4 Vesta"),
     "pholus": ("5145;", "5145 Pholus"),
+    # Chiron joins here for wide-window refits; its default 1850-2150 pack
+    # came from fit_chiron.py and stays byte-identical unless refit.
+    "chiron": ("2060;", "2060 Chiron"),
 }
 
 HERE = os.path.dirname(__file__)
@@ -33,12 +39,12 @@ RANGE = (1850, 2150)
 RESID_TARGET = 5e-6  # AU, same bar as the Chiron fit (~1 km at 1 AU)
 
 
-def fit_body(name):
+def fit_body(name, year0=RANGE[0], year1=RANGE[1]):
     command, label = BODIES[name]
-    jd0, jd1 = julian_day(RANGE[0], 1, 1), julian_day(RANGE[1], 1, 1)
-    cache = HorizonsCache(
-        os.path.join(HERE, f"{name}_horizons_cache.json"), command, label,
-    )
+    jd0, jd1 = julian_day(year0, 1, 1), julian_day(year1, 1, 1)
+    cache_name = (f"{name}_horizons_cache.json" if (year0, year1) == RANGE
+                  else f"{name}_horizons_cache_{year0}_{year1}.json")
+    cache = HorizonsCache(os.path.join(HERE, cache_name), command, label)
     cache.ensure(jd0, jd1, step=1.0, pad_days=5844)
 
     print(f"--- {label}: scan seg_days, degree -> residual AU, size")
@@ -63,7 +69,7 @@ def fit_body(name):
         "center": "@sun",
         "frame": "heliocentric ecliptic J2000",
         "correction": "geometric (VEC_CORR=NONE)",
-        "range": f"{RANGE[0]}-{RANGE[1]}",
+        "range": f"{year0}-{year1}",
         "seg_days": seg,
         "degree": deg,
         "fit_residual_au": resid,
@@ -80,12 +86,25 @@ def fit_body(name):
 
 
 def main():
-    names = sys.argv[1:] or list(BODIES)
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("bodies", nargs="*", help=f"subset of {list(BODIES)}")
+    ap.add_argument("--year0", type=int, default=RANGE[0])
+    ap.add_argument("--year1", type=int, default=RANGE[1])
+    ap.add_argument("--wide", action="store_true",
+                    help="shorthand for --year0 1000 --year1 3000 (the lazy wide tier)")
+    args = ap.parse_args()
+    year0 = 1000 if args.wide else args.year0
+    year1 = 3000 if args.wide else args.year1
+    # chiron only refits on an explicit request or a widened window: the
+    # default five keep the Tier 2 default behaviour byte-identical.
+    default = [b for b in BODIES if b != "chiron"] if (year0, year1) == RANGE \
+        else list(BODIES)
+    names = args.bodies or default
     bad = [n for n in names if n not in BODIES]
     if bad:
         print(f"unknown bodies: {bad}; known: {list(BODIES)}")
         sys.exit(2)
-    results = {n: fit_body(n) for n in names}
+    results = {n: fit_body(n, year0, year1) for n in names}
     if not all(results.values()):
         sys.exit(1)
 

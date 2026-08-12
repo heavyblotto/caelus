@@ -55,6 +55,13 @@ EPOCHS_TT = [jd_tt(julian_day(1900 + k * 8, (k * 5) % 12 + 1, 11)
 EXT_EPOCHS = _band_epochs(list(range(1855, 1900, 5)) + list(range(2105, 2150, 5)))
 # Edge band: just outside that envelope. Majors + Pluto + Moon only.
 EDGE_EPOCHS = _band_epochs(list(range(1800, 1850, 5)) + list(range(2155, 2200, 5)))
+# Wide band (--wide): the 1000-3000 CE lazy tier's measurement, sampled every
+# ~40 years across both wings. The headline moves only on these numbers, never
+# on a theory's published envelope ("validated, not asserted") -- run AFTER
+# minting the wide packs (fit_pluto.py --wide, fit_smallbody.py --wide), so
+# every packed body is exercised across the span; bodies whose loaded pack
+# does not cover an epoch are skipped per-sample and simply not measured there.
+WIDE_EPOCHS = _band_epochs(list(range(1005, 1795, 40)) + list(range(2205, 2995, 40)))
 
 
 def _band_of(year):
@@ -62,7 +69,9 @@ def _band_of(year):
         return "1900-2099"
     if 1850 <= year < 1900 or 2099 < year <= 2150:
         return "1850-2150"
-    return "1800-2200 edges"
+    if 1800 <= year < 1850 or 2150 < year <= 2200:
+        return "1800-2200 edges"
+    return "1000-3000 wide"
 
 
 def fetch(command, jds):
@@ -88,15 +97,20 @@ def fetch(command, jds):
 
 
 J1900 = julian_day(1900, 1, 1)
-BAND_ORDER = ["1850-2150", "1900-2099", "1800-2200 edges"]
+BAND_ORDER = ["1850-2150", "1900-2099", "1800-2200 edges", "1000-3000 wide"]
+WIDE = "--wide" in sys.argv
 
 
 def _needed(name):
     """TT epochs a body is sampled at: core+extended for all, plus the 1800/2200
-    edges for the majors/Pluto/Moon (the asteroid/Chiron packs end at 2150)."""
+    edges for the majors/Pluto/Moon (the asteroid/Chiron packs end at 2150),
+    plus the 1000-3000 wide band when --wide is set (every body: the engine
+    skips per-sample where a pack does not cover an epoch)."""
     jds = list(EPOCHS_TT) + list(EXT_EPOCHS)
     if name in EDGE_BODIES:
         jds += list(EDGE_EPOCHS)
+    if WIDE:
+        jds += list(WIDE_EPOCHS)
     return jds
 
 
@@ -142,7 +156,8 @@ def main():
                     "Pluto vs barycenter (9)",
            "bands": {}}
     counts = {"1900-2099": len(EPOCHS_TT), "1850-2150": len(EXT_EPOCHS),
-              "1800-2200 edges": len(EDGE_EPOCHS)}
+              "1800-2200 edges": len(EDGE_EPOCHS),
+              "1000-3000 wide": len(WIDE_EPOCHS)}
     for band in BAND_ORDER:
         bodies = {n: round(w, 3) for (b, n), w in worst.items() if b == band}
         if not bodies:
