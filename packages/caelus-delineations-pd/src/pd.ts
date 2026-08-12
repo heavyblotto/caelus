@@ -13,6 +13,7 @@ import alanLeoJudge from "../data/passages/alan-leo-judge.json" with { type: "js
 import heindelAspects from "../data/passages/heindel-aspects.json" with { type: "json" };
 import heindelRising from "../data/passages/heindel-rising.json" with { type: "json" };
 import robsonStars from "../data/passages/robson-stars.json" with { type: "json" };
+import brihatNakshatras from "../data/passages/brihat-nakshatras.json" with { type: "json" };
 import type { InterpretationSource } from "caelus";
 import type { PassageRecord } from "./types.js";
 import { compileSource } from "./compile.js";
@@ -28,6 +29,7 @@ const pdSets: { id: string; version: string; passages: PassageRecord[] }[] = [
     passages: [...heindelAspects, ...heindelRising] as PassageRecord[],
   },
   { id: "robson-fixed-stars", version: "0.1.0", passages: robsonStars as PassageRecord[] },
+  { id: "varahamihira-brihat-jataka", version: "0.1.0", passages: brihatNakshatras as PassageRecord[] },
 ];
 
 /** Public-domain delineation sources, ready for `interpret(ctx, sources)`. */

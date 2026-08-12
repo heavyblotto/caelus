@@ -66,20 +66,23 @@ and audits the manifest for rights and text integrity.
 
 ## Coverage
 
-The fact model is finite and enumerable, so the target is *cell coverage*. 334
-passages across seven sources today:
+The fact model is finite and enumerable, so the target is *cell coverage*. 374
+passages across eight sources today:
 
-| Cell | Selector | Status |
-|---|---|---|
-| Planet in sign | `placement{ body, sign }` | Sun 12, Moon 9, Mercury 8, Venus 7, Mars 9, Jupiter 9, Saturn 11, Uranus 10, Neptune 10 |
-| Planet in house | `placement{ body, house }` | Alan Leo Key 21 + How to Judge 63 |
-| Planet aspect planet | `aspect{ between, aspect }` | Heindel 118 (5 Ptolemaic aspects) |
-| Rising sign | `angle{ asc, sign }` | Heindel 12/12 |
-| Fixed-star conjunction | `star{ body, star }` | Robson 20 (curated) |
-| Planet parallel planet | `parallel{ a, b }` | Heindel 13 (headings pairing "parallel or conjunction") |
-| Out of bounds | `outOfBounds{ body }` | selector ready; no corpus — the out-of-bounds reading postdates these public-domain sources |
-| Dignities | `placement{ dignity }` | pending |
-| Hermetic lots | `lot{ lot, sign, house }` | selector ready; corpus pending |
+| Cell | Selector | Context required | Status |
+|---|---|---|---|
+| Planet in sign | `placement{ body, sign }` | bare chart | Sun 12, Moon 9, Mercury 8, Venus 7, Mars 9, Jupiter 9, Saturn 11, Uranus 10, Neptune 10 |
+| Planet in house | `placement{ body, house }` | bare chart | Alan Leo Key 21 + How to Judge 63 |
+| Planet aspect planet | `aspect{ between, aspect }` | bare chart | Heindel 116 (5 Ptolemaic aspects) |
+| Rising sign | `angle{ asc, sign }` | bare chart | Heindel 12/12 |
+| Fixed-star conjunction | `star{ body, star }` | `opts.stars` (from `Engine.starConjunctions`) | Robson 20 (curated) |
+| Planet parallel planet | `parallel{ a, b }` | bare chart | Heindel 13 (headings pairing "parallel or conjunction") |
+| Out of bounds | `outOfBounds{ body }` | bare chart | selector ready; no corpus — the out-of-bounds reading postdates these public-domain sources |
+| Moon in nakshatra | `nakshatra{ body, name }` | `opts.vedic.nakshatraBodies` on a sidereal chart | Brihat Jataka 27/27 (ch. XVI) |
+| Dignities | `placement{ dignity }` / `dignity{ facet }` | bare chart | pending |
+| Hermetic lots | `lot{ lot, sign, house }` | `opts.lots` (from `Engine.lots`) | selector ready; corpus pending |
+| Reception / dispositor | `reception{ body, by }` / `dispositor{ body }` | bare chart | selector ready; Lilly extraction pending |
+| Transit / synastry / composite / time-lord / varga / yoga | `transit{}` `synastry{}` `composite{}` `timelord{}` `varga{}` `yoga{}` | caller-supplied via `ContextOptions` | selectors ready; no PD source in the set delineates these cells |
 
 Sun/Moon-in-sign and the houses/aspects/rising cells are public domain. The
 Mercury–Saturn (and outer-planet) sign cells come from Llewellyn George's *A to
@@ -111,9 +114,12 @@ records are transcribed, not auto-extracted (`data/passages/robson-stars.json`).
 Coverage is partial by design: an extractor emits only the cells it can lift
 cleanly from the OCR, and the harness reports the rest. Known gaps and why:
 
-- **Vedic** (Brihat Jataka): the translation is verse/sloka-structured with no
-  "planet in rashi" headings, so it needs a verse-level parser, not heading
-  extraction. Text is vendored.
+- **Vedic** (Brihat Jataka): most of the translation is verse/sloka-structured
+  with no "planet in rashi" headings, so it needs a verse-level parser, not
+  heading extraction. The exception is Chapter XVI (Moon in the asterisms),
+  which is regular prose and is extracted in full
+  (`scripts/extract/brihat-nakshatras.ts`, 27/27 with an OCR alias table for
+  the garbled names). Text is vendored.
 - **Varga, yoga, dasha, dignity-facet, reception, time-lord cells**: the
   engine side is done — `FactKind` covers all seventeen atom kinds (`star`,
   `lot`, `varga`, `yoga`, `timelord`, `dignity`, `reception`, and the rest),

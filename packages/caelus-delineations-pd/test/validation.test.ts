@@ -302,6 +302,34 @@ for (const p of parallelPassages) {
   check(!wrong, `${p.id}: does not fire for a contraparallel`);
 }
 
+// 4g. Each Moon-in-nakshatra rule fires for its asterism, cites the real
+//     atom, and stays isolated to that asterism.
+console.log("nakshatra rules fire");
+function nakshatraCtx(body: string, name: string): InterpretationContext {
+  const atom: FactAtom = {
+    id: `nakshatra:${body}:${name.replace(/\s+/g, "_")}`, kind: "nakshatra",
+    bodies: [body], salience: 2.5, text: `${body} in ${name}`,
+    body, name, pada: 1, lord: "moon",
+  };
+  return { jdUt: 0, zodiac: "sidereal_lahiri" as InterpretationContext["zodiac"], atoms: [atom] };
+}
+const nakshatraPassages = passages.filter((p) => p.when.kind === "nakshatra");
+check(nakshatraPassages.length === 27, `corpus has all 27 Moon-in-nakshatra passages (${nakshatraPassages.length})`);
+for (const p of nakshatraPassages) {
+  const w = p.when as { body: string; name: string };
+  const entry = interpret(nakshatraCtx(w.body, w.name), sources).entries.find((e) => e.rule === p.id);
+  check(!!entry, `${p.id}: fires for ${w.body} in ${w.name}`);
+  if (entry) {
+    check(
+      entry.atomIds.includes(`nakshatra:${w.body}:${w.name.replace(/\s+/g, "_")}`),
+      `${p.id}: cites the nakshatra atom`,
+    );
+  }
+  const other = w.name === "Rohini" ? "Ashwini" : "Rohini";
+  const wrong = interpret(nakshatraCtx(w.body, other), sources).entries.find((e) => e.rule === p.id);
+  check(!wrong, `${p.id}: does not fire for ${other}`);
+}
+
 // 5. No reading ever cites an atom the projection did not contain.
 console.log("no dangling citations");
 for (const sign of ["aries", "scorpio", "pisces"]) {

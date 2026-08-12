@@ -12,6 +12,7 @@ import alanLeoSigns from "../data/passages/alan-leo-signs.json" with { type: "js
 import heindelAspects from "../data/passages/heindel-aspects.json" with { type: "json" };
 import heindelRising from "../data/passages/heindel-rising.json" with { type: "json" };
 import robsonStars from "../data/passages/robson-stars.json" with { type: "json" };
+import brihatNakshatras from "../data/passages/brihat-nakshatras.json" with { type: "json" };
 import georgeSigns from "../data/passages/george-signs.json" with { type: "json" };
 import type { PassageRecord } from "./types.js";
 
@@ -52,6 +53,11 @@ export const passageSets: PassageSet[] = [
     id: "robson-fixed-stars",
     version: "0.1.0",
     passages: robsonStars as PassageRecord[],
+  },
+  {
+    id: "varahamihira-brihat-jataka",
+    version: "0.1.0",
+    passages: brihatNakshatras as PassageRecord[],
   },
   // Segregated: rights "gratis-not-pd". Filter this source out (by id, or by the
   // passages' rights) for a strict public-domain-only reading.
