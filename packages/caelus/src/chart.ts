@@ -9,6 +9,7 @@ import {
   J2000,
 } from "./core.js";
 import { starApparent } from "./stars.js";
+import { angularSeparation3d } from "./spherical.js";
 import type { SyntheticRender } from "./synthetic.js";
 import { hermeticLots, HERMETIC_LOTS } from "./lots.js";
 import * as H from "./houses.js";
@@ -158,8 +159,15 @@ export interface ChartOptions extends CalcOptions {
   houseSystem?: HouseSystem;
   /** Extra bodies to compute beyond the core chart set. */
   bodies?: BodyId[];
-  /** Per-aspect orb overrides in degrees, keyed by aspect name. */
+  /** Per-aspect orb overrides in degrees, keyed by aspect name. A partial
+   *  record merges over {@link DEFAULT_ORBS} (see {@link findAspects}). */
   orbs?: Record<string, number>;
+  /** Aspect separation mode: zodiacal longitude (default) or true spatial
+   *  great-circle separation. See {@link FindAspectsOptions.separation}. */
+  separation?: "longitude" | "spatial";
+  /** Custom aspect angle table for the chart's aspect list.
+   *  See {@link FindAspectsOptions.aspects}. */
+  aspects?: Record<string, number>;
 }
 
 /** A body's full apparent position, as returned by {@link Engine.position}. */
@@ -176,6 +184,11 @@ export interface Position {
   signDeg: number;
   /** Ecliptic latitude, deg (0 for nodes). */
   lat: number;
+  /** Daily motion in ecliptic latitude, degrees/day. Engine-produced
+   *  positions always carry it (same central difference as `speed`); it is
+   *  optional only so injected or legacy Position values stay assignable.
+   *  Used by spatial-mode aspect phase; treated as 0 when absent. */
+  latSpeed?: number;
   /** Geocentric distance in AU (Moon included); null for nodes and Lilith. */
   dist: number | null;
   /** Equatorial right ascension, true equinox of date, degrees. */
@@ -570,9 +583,9 @@ export class Engine {
     });
   }
 
-  private lonOnly(
+  private lonLatOnly(
     body: BodyId, jdUt: number, mode: string | null, topo: Observer | null,
-  ): number {
+  ): [number, number] {
     const jde = jdTT(jdUt);
     let [lon, lat, dist] = this.ecliptic(body, jde);
     if (topo !== null && dist !== null) {
@@ -584,7 +597,13 @@ export class Engine {
     }
     let lonDeg = lon / DEG;
     if (mode !== null) lonDeg = mod(lonDeg - this.ayanShift(jde, mode), 360);
-    return lonDeg;
+    return [lonDeg, lat / DEG];
+  }
+
+  private lonOnly(
+    body: BodyId, jdUt: number, mode: string | null, topo: Observer | null,
+  ): number {
+    return this.lonLatOnly(body, jdUt, mode, topo)[0];
   }
 
   /**
@@ -689,13 +708,14 @@ export class Engine {
     let lon = lonR / DEG;
     if (mode !== null) lon = mod(lon - this.ayanShift(jde, mode), 360);
     const h = 0.25; // days; central difference
-    const l0 = this.lonOnly(body, jdUt - h, mode, topo);
-    const l1 = this.lonOnly(body, jdUt + h, mode, topo);
+    const [l0, b0] = this.lonLatOnly(body, jdUt - h, mode, topo);
+    const [l1, b1] = this.lonLatOnly(body, jdUt + h, mode, topo);
     const speed = (mod(l1 - l0 + 540, 360) - 180) / (2 * h);
+    const latSpeed = (b1 - b0) / (2 * h);
     return {
       lon, speed, retrograde: speed < 0,
       sign: SIGNS[Math.floor(lon / 30)], signDeg: mod(lon, 30),
-      lat: latR / DEG, dist,
+      lat: latR / DEG, latSpeed, dist,
       ra: ra / DEG, dec: dec / DEG,
     };
   }
@@ -878,7 +898,9 @@ export class Engine {
         vertex: outDeg(vtx), eastPoint: outDeg(east),
       },
       cusps: cuspsDeg,
-      aspects: findAspects(chartBodies, o.orbs ?? DEFAULT_ORBS),
+      aspects: findAspects(chartBodies, o.orbs ?? DEFAULT_ORBS, {
+        separation: o.separation, aspects: o.aspects,
+      }),
     };
   }
 }
@@ -892,32 +914,87 @@ function houseIndex(lon: number, cusps: number[]): number {
   return 12;
 }
 
+/** Options for {@link findAspects}. */
+export interface FindAspectsOptions {
+  /**
+   * How to measure the separation between two bodies.
+   *
+   * `"longitude"` (the default) is the zodiacal aspect: difference in
+   * ecliptic longitude, the tradition's primary object. `"spatial"` is the
+   * true great-circle separation on the celestial sphere
+   * ({@link angularSeparation3d}), accounting for ecliptic latitude — the
+   * correction Robson describes for bodies with latitude, where "the aspects
+   * to the body of a star with latitude do not fall in the zodiacal degrees
+   * one would expect". The two answers coincide on the ecliptic and diverge
+   * for the Moon, Pluto, the asteroids, and every fixed star; the default
+   * stays `"longitude"` because the zodiacal aspect is the primary object
+   * and the spatial separation is an opt-in refinement.
+   */
+  separation?: "longitude" | "spatial";
+  /** Aspect angle table (name → degrees), defaulting to the five Ptolemaic
+   *  {@link ASPECTS}. A caller may inject minors (`{ quincunx: 150, ... }`);
+   *  each named aspect needs an orb in the orbs table or it is skipped. */
+  aspects?: Record<string, number>;
+}
+
 export function findAspects(
-  bodies: Record<string, Position>, orbs: Record<string, number> = DEFAULT_ORBS,
+  bodies: Record<string, Position>,
+  orbs: Record<string, number> = DEFAULT_ORBS,
+  opts: FindAspectsOptions = {},
 ): Aspect[] {
+  // A *partial* orbs override merges over the defaults: `{ square: 5 }`
+  // tightens squares without silently disabling the other four aspects
+  // (`orb <= undefined` is false). A custom aspect table replaces ASPECTS
+  // and reads orbs for its own names only.
+  const table = opts.aspects ?? ASPECTS;
+  const orbTable = opts.aspects ? orbs : { ...DEFAULT_ORBS, ...orbs };
+  const spatial = opts.separation === "spatial";
   const out: Aspect[] = [];
   const names = Object.keys(bodies).filter((b) => !NOT_ASPECTABLE.has(b));
+  const h = 0.25; // days; central difference for the spatial-phase rate
   for (let i = 0; i < names.length; i++) {
     for (let j = i + 1; j < names.length; j++) {
       const a = names[i];
       const b = names[j];
       const e = mod(bodies[a].lon - bodies[b].lon + 180, 360) - 180; // signed gap
-      const sep = Math.abs(e);
-      for (const [asp, angle] of Object.entries(ASPECTS)) {
+      const sep = spatial
+        ? angularSeparation3d(bodies[a].lon, bodies[a].lat, bodies[b].lon, bodies[b].lat)
+        : Math.abs(e);
+      for (const [asp, angle] of Object.entries(table)) {
+        const limit = orbTable[asp];
+        if (limit === undefined) continue;
         const orb = Math.abs(sep - angle);
-        if (orb <= orbs[asp]) {
+        if (orb <= limit) {
           const orbRounded = Math.round(orb * 100) / 100;
-          // Applying/separating from the closing of the signed orb (matches
-          // electional.aspectPhase); strength from the same rounded orb so a
-          // consumer can reproduce it from .orb and the orb policy.
           const signedOrb = sep - angle;
-          const dAbsOrbDt = (signedOrb >= 0 ? 1 : -1) * (e >= 0 ? 1 : -1)
-            * (bodies[a].speed - bodies[b].speed);
-          const phase: AspectPhase = Math.abs(signedOrb) < 1e-9
-            ? "exact" : dAbsOrbDt < 0 ? "applying" : "separating";
+          let phase: AspectPhase;
+          if (Math.abs(signedOrb) < 1e-9) {
+            phase = "exact";
+          } else if (spatial) {
+            // The spatial separation has no closed-form rate from longitude
+            // speeds alone: differentiate it by advancing both bodies along
+            // their lon/lat rates (latSpeed is engine-supplied; 0 when the
+            // Position was injected without it).
+            const sepAt = (dt: number) => angularSeparation3d(
+              bodies[a].lon + bodies[a].speed * dt,
+              bodies[a].lat + (bodies[a].latSpeed ?? 0) * dt,
+              bodies[b].lon + bodies[b].speed * dt,
+              bodies[b].lat + (bodies[b].latSpeed ?? 0) * dt,
+            );
+            const dSepDt = (sepAt(h) - sepAt(-h)) / (2 * h);
+            const dAbsOrbDt = (signedOrb >= 0 ? 1 : -1) * dSepDt;
+            phase = dAbsOrbDt < 0 ? "applying" : "separating";
+          } else {
+            // Applying/separating from the closing of the signed orb (matches
+            // electional.aspectPhase); strength from the same rounded orb so a
+            // consumer can reproduce it from .orb and the orb policy.
+            const dAbsOrbDt = (signedOrb >= 0 ? 1 : -1) * (e >= 0 ? 1 : -1)
+              * (bodies[a].speed - bodies[b].speed);
+            phase = dAbsOrbDt < 0 ? "applying" : "separating";
+          }
           out.push({
             a, b, aspect: asp, orb: orbRounded,
-            phase, strength: Math.max(0, 1 - orbRounded / orbs[asp]),
+            phase, strength: Math.max(0, 1 - orbRounded / limit),
           });
         }
       }

@@ -7,7 +7,7 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { julianDay } from "../src/core.js";
-import { Engine } from "../src/chart.js";
+import { Engine, BODIES, findAspects, Position } from "../src/chart.js";
 import { loadNodeData } from "../src/node-loader.js";
 import { unitVector, angularSeparation3d } from "../src/spherical.js";
 
@@ -31,6 +31,12 @@ function compute(spec: any): any {
       const pa = eng.position(spec.a, j);
       const pb = eng.position(spec.b, j);
       return angularSeparation3d(pa.lon, pa.lat, pb.lon, pb.lat);
+    }
+    case "aspects": {
+      const j = jd(spec.jd);
+      const bodies: Record<string, Position> = {};
+      for (const b of BODIES) bodies[b] = eng.position(b, j);
+      return findAspects(bodies, spec.orbs, { separation: spec.separation });
     }
     default: throw new Error(`unknown spherical type ${spec.type}`);
   }
@@ -64,6 +70,8 @@ function deepCmp(id: string, got: any, want: any): void {
       return;
     }
     for (let i = 0; i < want.length; i++) deepCmp(`${id}[${i}]`, got[i], want[i]);
+  } else if (want !== null && typeof want === "object") {
+    for (const k of Object.keys(want)) deepCmp(`${id}.${k}`, got?.[k], want[k]);
   } else {
     leaf(id, got, want);
   }

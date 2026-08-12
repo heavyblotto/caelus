@@ -152,7 +152,7 @@ class Engine:
         from . import stars as ST
         return sorted(ST.catalog()["stars"])
 
-    def _lon_only(self, body, jd_ut, mode, topo):
+    def _lon_lat_only(self, body, jd_ut, mode, topo):
         jde = jd_tt(jd_ut)
         lon, lat, dist = self._ecliptic(body, jde)
         if topo is not None and dist is not None:
@@ -163,7 +163,10 @@ class Engine:
         lon_deg = lon / DEG
         if mode is not None:
             lon_deg = (lon_deg - self._ayan_shift(jde, mode)) % 360
-        return lon_deg
+        return lon_deg, lat / DEG
+
+    def _lon_only(self, body, jd_ut, mode, topo):
+        return self._lon_lat_only(body, jd_ut, mode, topo)[0]
 
     def longitude(self, body, jd_ut, zodiac="tropical", topocentric=False, observer=None):
         """Apparent geocentric ecliptic longitude (deg). Tropical: true
@@ -214,27 +217,30 @@ class Engine:
         if mode is not None:
             lon = (lon - self._ayan_shift(jde, mode)) % 360
         h = 0.25  # days; central difference
-        l0 = self._lon_only(body, jd_ut - h, mode, topo)
-        l1 = self._lon_only(body, jd_ut + h, mode, topo)
+        l0, b0 = self._lon_lat_only(body, jd_ut - h, mode, topo)
+        l1, b1 = self._lon_lat_only(body, jd_ut + h, mode, topo)
         speed = ((l1 - l0 + 540) % 360 - 180) / (2 * h)
+        lat_speed = (b1 - b0) / (2 * h)
         return {"lon": lon, "speed": speed, "retrograde": speed < 0,
                 "sign": SIGNS[int(lon // 30)], "sign_deg": lon % 30,
-                "lat": lat_r / DEG, "dist": dist,
+                "lat": lat_r / DEG, "lat_speed": lat_speed, "dist": dist,
                 "ra": ra / DEG, "dec": dec / DEG}
 
     def chart(self, y, mo, d, h, mi, s, lat, lon_east, house_system="placidus",
-              zodiac="tropical", topocentric=False, extra_bodies=None, orbs=None):
+              zodiac="tropical", topocentric=False, extra_bodies=None, orbs=None,
+              separation="longitude", aspects=None):
         """Full natal chart from calendar fields. Time is UT. East longitude
         positive. For a chart directly from a Julian Day, use ``chart_at``."""
         return self.chart_at(
             julian_day(y, mo, d, h, mi, s), lat, lon_east,
             house_system=house_system, zodiac=zodiac, topocentric=topocentric,
             extra_bodies=extra_bodies, orbs=orbs,
+            separation=separation, aspects=aspects,
         )
 
     def chart_at(self, jd_ut, lat, lon_east, house_system="placidus",
                  zodiac="tropical", topocentric=False, extra_bodies=None,
-                 orbs=None):
+                 orbs=None, separation="longitude", aspects=None):
         """Full natal chart from a Julian Day (UT). Identical to ``chart`` but
         skips the calendar round-trip. East longitude positive."""
         mode = _parse_zodiac(zodiac)
@@ -290,31 +296,70 @@ class Engine:
             "angles": {"asc": out_deg(asc), "mc": out_deg(mc),
                        "vertex": out_deg(vtx), "east_point": out_deg(east)},
             "cusps": cusps_deg,
-            "aspects": find_aspects(bodies, orbs or DEFAULT_ORBS),
+            "aspects": find_aspects(bodies, orbs, separation=separation,
+                                    aspects=aspects),
         }
 
 
-def find_aspects(bodies, orbs=DEFAULT_ORBS):
+def find_aspects(bodies, orbs=None, separation="longitude", aspects=None):
+    """Aspects between bodies (mirrors TS findAspects).
+
+    ``separation``: "longitude" (zodiacal, the default) or "spatial" (true
+    great-circle separation via spherical.angular_separation_3d, accounting
+    for ecliptic latitude). A partial ``orbs`` dict merges over DEFAULT_ORBS;
+    a custom ``aspects`` table replaces ASPECTS and reads ``orbs`` for its
+    own names only (a name with no orb entry is skipped).
+    """
+    from .spherical import angular_separation_3d
+    table = aspects if aspects is not None else ASPECTS
+    if aspects is not None:
+        orb_table = orbs or {}
+    else:
+        orb_table = {**DEFAULT_ORBS, **(orbs or {})}
+    spatial = separation == "spatial"
+    h = 0.25  # days; central difference for the spatial-phase rate
     out = []
     names = [b for b in bodies if b not in NOT_ASPECTABLE]
     for i, a in enumerate(names):
         for b in names[i + 1:]:
             e = (bodies[a]["lon"] - bodies[b]["lon"] + 180) % 360 - 180  # signed
-            sep = abs(e)
-            for asp, angle in ASPECTS.items():
+            if spatial:
+                sep = angular_separation_3d(bodies[a]["lon"], bodies[a]["lat"],
+                                            bodies[b]["lon"], bodies[b]["lat"])
+            else:
+                sep = abs(e)
+            for asp, angle in table.items():
+                limit = orb_table.get(asp)
+                if limit is None:
+                    continue
                 orb = abs(sep - angle)
-                if orb <= orbs[asp]:
+                if orb <= limit:
                     orb_r = round(orb, 2)
                     # applying/separating from the closing of the signed orb;
                     # strength from the same rounded orb (mirrors TS findAspects).
                     signed_orb = sep - angle
-                    d = ((1 if signed_orb >= 0 else -1) * (1 if e >= 0 else -1)
-                         * (bodies[a]["speed"] - bodies[b]["speed"]))
-                    phase = ("exact" if abs(signed_orb) < 1e-9
-                             else "applying" if d < 0 else "separating")
+                    if abs(signed_orb) < 1e-9:
+                        phase = "exact"
+                    elif spatial:
+                        # No closed-form rate from longitude speeds alone:
+                        # differentiate the 3D separation along each body's
+                        # lon/lat rates (lat_speed absent -> 0).
+                        def sep_at(dt):
+                            return angular_separation_3d(
+                                bodies[a]["lon"] + bodies[a]["speed"] * dt,
+                                bodies[a]["lat"] + bodies[a].get("lat_speed", 0.0) * dt,
+                                bodies[b]["lon"] + bodies[b]["speed"] * dt,
+                                bodies[b]["lat"] + bodies[b].get("lat_speed", 0.0) * dt)
+                        d_sep = (sep_at(h) - sep_at(-h)) / (2 * h)
+                        d = (1 if signed_orb >= 0 else -1) * d_sep
+                        phase = "applying" if d < 0 else "separating"
+                    else:
+                        d = ((1 if signed_orb >= 0 else -1) * (1 if e >= 0 else -1)
+                             * (bodies[a]["speed"] - bodies[b]["speed"]))
+                        phase = "applying" if d < 0 else "separating"
                     out.append({"a": a, "b": b, "aspect": asp, "orb": orb_r,
                                 "phase": phase,
-                                "strength": max(0.0, 1 - orb_r / orbs[asp])})
+                                "strength": max(0.0, 1 - orb_r / limit)})
     return out
 
 

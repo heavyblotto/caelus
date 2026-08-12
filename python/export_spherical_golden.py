@@ -40,6 +40,21 @@ CASES = [
      "b": "venus", "jd": [2024, 3, 20, 3, 0]},
     {"id": "bodies-pluto-sun", "type": "sep_bodies", "a": "pluto", "b": "sun",
      "jd": [2010, 7, 15, 18, 30]},
+    # find_aspects in both separation modes, over the full default body set.
+    # The 2D and 3D lists must diverge where latitude matters (the Moon near
+    # a standstill, Pluto far off the ecliptic) and agree on the ecliptic.
+    {"id": "aspects-longitude-2000", "type": "aspects",
+     "jd": [2000, 1, 1, 12, 0], "separation": "longitude"},
+    {"id": "aspects-spatial-2000", "type": "aspects",
+     "jd": [2000, 1, 1, 12, 0], "separation": "spatial"},
+    {"id": "aspects-spatial-moon-2006", "type": "aspects",
+     "jd": [2006, 3, 22, 0, 0], "separation": "spatial"},
+    # partial orbs merge over the defaults (the {square: 5} case): pins the
+    # cross-language contract that a partial override cannot silently disable
+    # the aspects it does not name.
+    {"id": "aspects-partial-orbs", "type": "aspects",
+     "jd": [2000, 1, 1, 12, 0], "separation": "longitude",
+     "orbs": {"square": 5.0}},
 ]
 
 
@@ -55,6 +70,12 @@ def compute(spec, eng):
         pa = eng.position(spec["a"], j)
         pb = eng.position(spec["b"], j)
         return S.angular_separation_3d(pa["lon"], pa["lat"], pb["lon"], pb["lat"])
+    if t == "aspects":
+        from astroengine.chart import find_aspects, BODIES
+        j = jd(spec["jd"])
+        bodies = {b: eng.position(b, j) for b in BODIES}
+        return find_aspects(bodies, spec.get("orbs"),
+                            separation=spec.get("separation", "longitude"))
     raise ValueError(t)
 
 

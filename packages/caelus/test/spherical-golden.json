@@ -31,7 +31,7 @@
      -5.0
     ]
    },
-   "result": 60.75101305058631
+   "result": 60.75101305058632
   },
   {
    "id": "sep-poles",
@@ -191,7 +191,494 @@
      30
     ]
    },
-   "result": 159.8201935239012
+   "result": 159.82019352390117
+  },
+  {
+   "id": "aspects-longitude-2000",
+   "spec": {
+    "id": "aspects-longitude-2000",
+    "type": "aspects",
+    "jd": [
+     2000,
+     1,
+     1,
+     12,
+     0
+    ],
+    "separation": "longitude"
+   },
+   "result": [
+    {
+     "a": "sun",
+     "b": "moon",
+     "aspect": "sextile",
+     "orb": 2.95,
+     "phase": "separating",
+     "strength": 0.26249999999999996
+    },
+    {
+     "a": "sun",
+     "b": "saturn",
+     "aspect": "trine",
+     "orb": 0.03,
+     "phase": "applying",
+     "strength": 0.9957142857142857
+    },
+    {
+     "a": "moon",
+     "b": "saturn",
+     "aspect": "opposition",
+     "orb": 2.93,
+     "phase": "separating",
+     "strength": 0.63375
+    },
+    {
+     "a": "moon",
+     "b": "uranus",
+     "aspect": "square",
+     "orb": 1.49,
+     "phase": "applying",
+     "strength": 0.7871428571428571
+    },
+    {
+     "a": "mercury",
+     "b": "mars",
+     "aspect": "sextile",
+     "orb": 3.93,
+     "phase": "separating",
+     "strength": 0.01749999999999996
+    },
+    {
+     "a": "mercury",
+     "b": "jupiter",
+     "aspect": "trine",
+     "orb": 6.64,
+     "phase": "separating",
+     "strength": 0.05142857142857149
+    },
+    {
+     "a": "venus",
+     "b": "mars",
+     "aspect": "square",
+     "orb": 3.6,
+     "phase": "separating",
+     "strength": 0.48571428571428565
+    },
+    {
+     "a": "venus",
+     "b": "neptune",
+     "aspect": "sextile",
+     "orb": 1.63,
+     "phase": "applying",
+     "strength": 0.5925
+    },
+    {
+     "a": "mars",
+     "b": "jupiter",
+     "aspect": "sextile",
+     "orb": 2.71,
+     "phase": "separating",
+     "strength": 0.3225
+    },
+    {
+     "a": "saturn",
+     "b": "uranus",
+     "aspect": "square",
+     "orb": 4.41,
+     "phase": "separating",
+     "strength": 0.37
+    },
+    {
+     "a": "uranus",
+     "b": "pluto",
+     "aspect": "sextile",
+     "orb": 3.35,
+     "phase": "separating",
+     "strength": 0.16249999999999998
+    },
+    {
+     "a": "uranus",
+     "b": "chiron",
+     "aspect": "sextile",
+     "orb": 3.19,
+     "phase": "applying",
+     "strength": 0.2025
+    },
+    {
+     "a": "pluto",
+     "b": "chiron",
+     "aspect": "conjunction",
+     "orb": 0.16,
+     "phase": "separating",
+     "strength": 0.98
+    }
+   ]
+  },
+  {
+   "id": "aspects-spatial-2000",
+   "spec": {
+    "id": "aspects-spatial-2000",
+    "type": "aspects",
+    "jd": [
+     2000,
+     1,
+     1,
+     12,
+     0
+    ],
+    "separation": "spatial"
+   },
+   "result": [
+    {
+     "a": "sun",
+     "b": "moon",
+     "aspect": "sextile",
+     "orb": 2.8,
+     "phase": "separating",
+     "strength": 0.30000000000000004
+    },
+    {
+     "a": "sun",
+     "b": "saturn",
+     "aspect": "trine",
+     "orb": 0.0,
+     "phase": "separating",
+     "strength": 1.0
+    },
+    {
+     "a": "moon",
+     "b": "saturn",
+     "aspect": "opposition",
+     "orb": 4.0,
+     "phase": "separating",
+     "strength": 0.5
+    },
+    {
+     "a": "moon",
+     "b": "uranus",
+     "aspect": "square",
+     "orb": 1.54,
+     "phase": "applying",
+     "strength": 0.78
+    },
+    {
+     "a": "mercury",
+     "b": "mars",
+     "aspect": "sextile",
+     "orb": 3.94,
+     "phase": "separating",
+     "strength": 0.015000000000000013
+    },
+    {
+     "a": "mercury",
+     "b": "jupiter",
+     "aspect": "trine",
+     "orb": 6.67,
+     "phase": "separating",
+     "strength": 0.04714285714285715
+    },
+    {
+     "a": "venus",
+     "b": "mars",
+     "aspect": "square",
+     "orb": 3.56,
+     "phase": "separating",
+     "strength": 0.49142857142857144
+    },
+    {
+     "a": "venus",
+     "b": "neptune",
+     "aspect": "sextile",
+     "orb": 1.64,
+     "phase": "applying",
+     "strength": 0.5900000000000001
+    },
+    {
+     "a": "mars",
+     "b": "jupiter",
+     "aspect": "sextile",
+     "orb": 2.72,
+     "phase": "separating",
+     "strength": 0.31999999999999995
+    },
+    {
+     "a": "saturn",
+     "b": "uranus",
+     "aspect": "square",
+     "orb": 4.44,
+     "phase": "separating",
+     "strength": 0.36571428571428566
+    },
+    {
+     "a": "uranus",
+     "b": "chiron",
+     "aspect": "sextile",
+     "orb": 3.32,
+     "phase": "applying",
+     "strength": 0.17000000000000004
+    },
+    {
+     "a": "pluto",
+     "b": "chiron",
+     "aspect": "conjunction",
+     "orb": 6.79,
+     "phase": "applying",
+     "strength": 0.15125
+    }
+   ]
+  },
+  {
+   "id": "aspects-spatial-moon-2006",
+   "spec": {
+    "id": "aspects-spatial-moon-2006",
+    "type": "aspects",
+    "jd": [
+     2006,
+     3,
+     22,
+     0,
+     0
+    ],
+    "separation": "spatial"
+   },
+   "result": [
+    {
+     "a": "sun",
+     "b": "saturn",
+     "aspect": "trine",
+     "orb": 3.34,
+     "phase": "applying",
+     "strength": 0.5228571428571429
+    },
+    {
+     "a": "sun",
+     "b": "pluto",
+     "aspect": "square",
+     "orb": 4.45,
+     "phase": "separating",
+     "strength": 0.3642857142857142
+    },
+    {
+     "a": "moon",
+     "b": "mars",
+     "aspect": "opposition",
+     "orb": 5.53,
+     "phase": "separating",
+     "strength": 0.30874999999999997
+    },
+    {
+     "a": "moon",
+     "b": "neptune",
+     "aspect": "sextile",
+     "orb": 2.34,
+     "phase": "separating",
+     "strength": 0.41500000000000004
+    },
+    {
+     "a": "mercury",
+     "b": "mars",
+     "aspect": "square",
+     "orb": 3.08,
+     "phase": "separating",
+     "strength": 0.56
+    },
+    {
+     "a": "mercury",
+     "b": "jupiter",
+     "aspect": "trine",
+     "orb": 4.64,
+     "phase": "separating",
+     "strength": 0.3371428571428572
+    },
+    {
+     "a": "mercury",
+     "b": "uranus",
+     "aspect": "conjunction",
+     "orb": 3.05,
+     "phase": "applying",
+     "strength": 0.61875
+    },
+    {
+     "a": "venus",
+     "b": "mars",
+     "aspect": "trine",
+     "orb": 2.06,
+     "phase": "applying",
+     "strength": 0.7057142857142857
+    },
+    {
+     "a": "venus",
+     "b": "jupiter",
+     "aspect": "square",
+     "orb": 3.68,
+     "phase": "applying",
+     "strength": 0.4742857142857143
+    },
+    {
+     "a": "venus",
+     "b": "neptune",
+     "aspect": "conjunction",
+     "orb": 4.67,
+     "phase": "applying",
+     "strength": 0.41625
+    },
+    {
+     "a": "mars",
+     "b": "uranus",
+     "aspect": "square",
+     "orb": 5.08,
+     "phase": "separating",
+     "strength": 0.27428571428571424
+    },
+    {
+     "a": "mars",
+     "b": "neptune",
+     "aspect": "trine",
+     "orb": 1.89,
+     "phase": "applying",
+     "strength": 0.73
+    },
+    {
+     "a": "jupiter",
+     "b": "uranus",
+     "aspect": "trine",
+     "orb": 6.51,
+     "phase": "applying",
+     "strength": 0.07000000000000006
+    },
+    {
+     "a": "jupiter",
+     "b": "neptune",
+     "aspect": "square",
+     "orb": 0.43,
+     "phase": "separating",
+     "strength": 0.9385714285714286
+    }
+   ]
+  },
+  {
+   "id": "aspects-partial-orbs",
+   "spec": {
+    "id": "aspects-partial-orbs",
+    "type": "aspects",
+    "jd": [
+     2000,
+     1,
+     1,
+     12,
+     0
+    ],
+    "separation": "longitude",
+    "orbs": {
+     "square": 5.0
+    }
+   },
+   "result": [
+    {
+     "a": "sun",
+     "b": "moon",
+     "aspect": "sextile",
+     "orb": 2.95,
+     "phase": "separating",
+     "strength": 0.26249999999999996
+    },
+    {
+     "a": "sun",
+     "b": "saturn",
+     "aspect": "trine",
+     "orb": 0.03,
+     "phase": "applying",
+     "strength": 0.9957142857142857
+    },
+    {
+     "a": "moon",
+     "b": "saturn",
+     "aspect": "opposition",
+     "orb": 2.93,
+     "phase": "separating",
+     "strength": 0.63375
+    },
+    {
+     "a": "moon",
+     "b": "uranus",
+     "aspect": "square",
+     "orb": 1.49,
+     "phase": "applying",
+     "strength": 0.702
+    },
+    {
+     "a": "mercury",
+     "b": "mars",
+     "aspect": "sextile",
+     "orb": 3.93,
+     "phase": "separating",
+     "strength": 0.01749999999999996
+    },
+    {
+     "a": "mercury",
+     "b": "jupiter",
+     "aspect": "trine",
+     "orb": 6.64,
+     "phase": "separating",
+     "strength": 0.05142857142857149
+    },
+    {
+     "a": "venus",
+     "b": "mars",
+     "aspect": "square",
+     "orb": 3.6,
+     "phase": "separating",
+     "strength": 0.28
+    },
+    {
+     "a": "venus",
+     "b": "neptune",
+     "aspect": "sextile",
+     "orb": 1.63,
+     "phase": "applying",
+     "strength": 0.5925
+    },
+    {
+     "a": "mars",
+     "b": "jupiter",
+     "aspect": "sextile",
+     "orb": 2.71,
+     "phase": "separating",
+     "strength": 0.3225
+    },
+    {
+     "a": "saturn",
+     "b": "uranus",
+     "aspect": "square",
+     "orb": 4.41,
+     "phase": "separating",
+     "strength": 0.118
+    },
+    {
+     "a": "uranus",
+     "b": "pluto",
+     "aspect": "sextile",
+     "orb": 3.35,
+     "phase": "separating",
+     "strength": 0.16249999999999998
+    },
+    {
+     "a": "uranus",
+     "b": "chiron",
+     "aspect": "sextile",
+     "orb": 3.19,
+     "phase": "applying",
+     "strength": 0.2025
+    },
+    {
+     "a": "pluto",
+     "b": "chiron",
+     "aspect": "conjunction",
+     "orb": 0.16,
+     "phase": "separating",
+     "strength": 0.98
+    }
+   ]
   }
  ]
 }

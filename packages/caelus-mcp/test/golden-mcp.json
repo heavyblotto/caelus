@@ -2066,7 +2066,7 @@
         "mean_node": 8,
         "true_node": 8
       },
-      "total_facts": 157,
+      "total_facts": 166,
       "facts": [
         {
           "id": "pattern:mystic_rectangle:chiron-moon-pluto-venus",
@@ -2159,6 +2159,24 @@
           "salience": 4.1425
         },
         {
+          "id": "oob:moon",
+          "kind": "outOfBounds",
+          "text": "Moon out of bounds (declination -24.9°, 1.5° beyond the bound)",
+          "salience": 4
+        },
+        {
+          "id": "parallel:jupiter~sun:parallel",
+          "kind": "parallel",
+          "text": "Sun parallel Jupiter (orb 0.2° of declination)",
+          "salience": 4
+        },
+        {
+          "id": "parallel:sun~uranus:contraparallel",
+          "kind": "parallel",
+          "text": "Sun contraparallel Uranus (orb 0.5° of declination)",
+          "salience": 4
+        },
+        {
           "id": "pattern:mystic_rectangle:chiron-neptune-pluto-venus",
           "kind": "pattern",
           "text": "Mystic rectangle: Chiron, Neptune, Pluto, Venus",
@@ -2193,27 +2211,9 @@
           "kind": "synastry",
           "text": "Venus opposition partner's Pluto (orb 0.8°)",
           "salience": 3.7975
-        },
-        {
-          "id": "synastry:moon~b_venus:trine",
-          "kind": "synastry",
-          "text": "Moon trine partner's Venus (orb 2.9°)",
-          "salience": 3.765
-        },
-        {
-          "id": "synastry:mercury~b_sun:sextile",
-          "kind": "synastry",
-          "text": "Mercury sextile partner's Sun (orb 3.0°)",
-          "salience": 3.75
-        },
-        {
-          "id": "aspect:mars~moon:square",
-          "kind": "aspect",
-          "text": "Moon square Mars (separating, orb 5.8°)",
-          "salience": 3.6742857142857144
         }
       ],
-      "brief": "Natal chart facts follow, each with a stable id in [brackets]. Interpret them in your own words; after each statement, cite the id(s) it rests on as [id]. Do not introduce astrological facts that are not listed here.\n\n[pattern:mystic_rectangle:chiron-moon-pluto-venus] Mystic rectangle: Chiron, Moon, Pluto, Venus\n[pattern:mystic_rectangle:jupiter-moon-pluto-venus] Mystic rectangle: Jupiter, Moon, Pluto, Venus\n[pattern:stellium_house:moon-neptune-saturn] Stellium: Moon, Neptune, Saturn\n[pattern:stellium_sign:moon-neptune-saturn-uranus] Stellium: Moon, Neptune, Saturn, Uranus in Capricorn\n[synastry:venus~b_moon:conjunction] Venus conjunction partner's Moon (orb 0.4°)\n[synastry:pluto~b_moon:opposition] Pluto opposition partner's Moon (orb 2.1°)\n[synastry:moon~b_neptune:conjunction] Moon conjunction partner's Neptune (orb 3.2°)\n[synastry:sun~b_chiron:conjunction] Sun conjunction partner's Chiron (orb 4.0°)\n[synastry:moon~b_moon:trine] Moon trine partner's Moon (orb 0.1°)\n[aspect:moon~neptune:conjunction] Moon conjunction Neptune (applying, orb 0.6°)\n[synastry:neptune~b_moon:trine] Neptune trine partner's Moon (orb 0.4°)\n[aspect:jupiter~moon:opposition] Moon opposition Jupiter (applying, orb 1.6°)\n[synastry:moon~b_pluto:sextile] Moon sextile partner's Pluto (orb 1.1°)\n[aspect:chiron~moon:opposition] Moon opposition Chiron (applying, orb 2.3°)\n[synastry:jupiter~b_moon:sextile] Jupiter sextile partner's Moon (orb 1.4°)\n[pattern:mystic_rectangle:chiron-neptune-pluto-venus] Mystic rectangle: Chiron, Neptune, Pluto, Venus\n[pattern:mystic_rectangle:jupiter-neptune-pluto-venus] Mystic rectangle: Jupiter, Neptune, Pluto, Venus\n[synastry:chiron~b_moon:sextile] Chiron sextile partner's Moon (orb 2.2°)\n[aspect:moon~uranus:conjunction] Moon conjunction Uranus (separating, orb 4.9°)\n[synastry:pluto~b_venus:opposition] Pluto opposition partner's Venus (orb 0.7°)\n[synastry:venus~b_pluto:opposition] Venus opposition partner's Pluto (orb 0.8°)\n[synastry:moon~b_venus:trine] Moon trine partner's Venus (orb 2.9°)\n[synastry:mercury~b_sun:sextile] Mercury sextile partner's Sun (orb 3.0°)\n[aspect:mars~moon:square] Moon square Mars (separating, orb 5.8°)"
+      "brief": "Natal chart facts follow, each with a stable id in [brackets]. Interpret them in your own words; after each statement, cite the id(s) it rests on as [id]. Do not introduce astrological facts that are not listed here.\n\n[pattern:mystic_rectangle:chiron-moon-pluto-venus] Mystic rectangle: Chiron, Moon, Pluto, Venus\n[pattern:mystic_rectangle:jupiter-moon-pluto-venus] Mystic rectangle: Jupiter, Moon, Pluto, Venus\n[pattern:stellium_house:moon-neptune-saturn] Stellium: Moon, Neptune, Saturn\n[pattern:stellium_sign:moon-neptune-saturn-uranus] Stellium: Moon, Neptune, Saturn, Uranus in Capricorn\n[synastry:venus~b_moon:conjunction] Venus conjunction partner's Moon (orb 0.4°)\n[synastry:pluto~b_moon:opposition] Pluto opposition partner's Moon (orb 2.1°)\n[synastry:moon~b_neptune:conjunction] Moon conjunction partner's Neptune (orb 3.2°)\n[synastry:sun~b_chiron:conjunction] Sun conjunction partner's Chiron (orb 4.0°)\n[synastry:moon~b_moon:trine] Moon trine partner's Moon (orb 0.1°)\n[aspect:moon~neptune:conjunction] Moon conjunction Neptune (applying, orb 0.6°)\n[synastry:neptune~b_moon:trine] Neptune trine partner's Moon (orb 0.4°)\n[aspect:jupiter~moon:opposition] Moon opposition Jupiter (applying, orb 1.6°)\n[synastry:moon~b_pluto:sextile] Moon sextile partner's Pluto (orb 1.1°)\n[aspect:chiron~moon:opposition] Moon opposition Chiron (applying, orb 2.3°)\n[synastry:jupiter~b_moon:sextile] Jupiter sextile partner's Moon (orb 1.4°)\n[oob:moon] Moon out of bounds (declination -24.9°, 1.5° beyond the bound)\n[parallel:jupiter~sun:parallel] Sun parallel Jupiter (orb 0.2° of declination)\n[parallel:sun~uranus:contraparallel] Sun contraparallel Uranus (orb 0.5° of declination)\n[pattern:mystic_rectangle:chiron-neptune-pluto-venus] Mystic rectangle: Chiron, Neptune, Pluto, Venus\n[pattern:mystic_rectangle:jupiter-neptune-pluto-venus] Mystic rectangle: Jupiter, Neptune, Pluto, Venus\n[synastry:chiron~b_moon:sextile] Chiron sextile partner's Moon (orb 2.2°)\n[aspect:moon~uranus:conjunction] Moon conjunction Uranus (separating, orb 4.9°)\n[synastry:pluto~b_venus:opposition] Pluto opposition partner's Venus (orb 0.7°)\n[synastry:venus~b_pluto:opposition] Venus opposition partner's Pluto (orb 0.8°)"
     }
   },
   "find-saturn-sq-moon": {

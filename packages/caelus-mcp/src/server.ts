@@ -126,6 +126,10 @@ const ZODIACS = [
 ] as const;
 const zodiacSchema = z.enum(ZODIACS).default("tropical")
   .describe("tropical (default) or sidereal:<ayanamsa>");
+const separationSchema = z.enum(["longitude", "spatial"]).default("longitude")
+  .describe("Aspect separation: 'longitude' (default, the zodiacal aspect) or "
+    + "'spatial' (true great-circle separation accounting for ecliptic "
+    + "latitude — differs for the Moon, Pluto, and bodies far off the ecliptic)");
 // Jyotish techniques (nakshatras, vargas, dashas, yogas) are sidereal by
 // definition; default these tools to Lahiri rather than tropical.
 const siderealZodiac = z.enum(ZODIACS).default("sidereal:lahiri")
@@ -194,6 +198,7 @@ function chartPayload(
   engine: Engine,
   iso: string, lat: number, lon: number, hs: string,
   zodiac: ZodiacT = "tropical",
+  separation: "longitude" | "spatial" = "longitude",
 ) {
   const reqHs = normalizeHouseSystem(hs);
   const d = new Date(iso);
@@ -201,7 +206,7 @@ function chartPayload(
   const c = engine.chart(
     d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate(),
     d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(), lat, lon,
-    { houseSystem: reqHs, zodiac },
+    { houseSystem: reqHs, zodiac, separation },
   );
   const cusps = c.cusps;
   const bodies: Record<string, unknown> = {};
@@ -776,10 +781,13 @@ export function buildServer(
   server.registerTool("natal_chart", {
     description:
       "A person's birth chart. Requires their exact birth date+time and birthplace (all three: date, lat, lon). Use this — not current_sky — whenever the question is about someone's natal/birth chart. Returns 13 bodies (sun–pluto, chiron, nodes) with sign, house, retrograde, speed; ASC/MC; cusps; major aspects with orb, applying/separating phase, and strength (1=exact). Vs Swiss Ephemeris (1850–2150): Sun–Saturn ≤1″, Uranus ≤1.9″, Neptune ≤4.6″, Moon ≤2.5″, Pluto ≤3.4″ (Chebyshev pack), Chiron ≤1″, mean node ≤1″, true node ≤ 1′ vs SE's built-in ephemeris.",
-    inputSchema: { ...birth, house_system: houseSys, zodiac: zodiacSchema },
+    inputSchema: {
+      ...birth, house_system: houseSys, zodiac: zodiacSchema,
+      separation: separationSchema,
+    },
     _meta: CHART_TOOL_META,
-  }, async ({ date, lat, lon, house_system, zodiac }) =>
-    chartResult(chartPayload(engine, date, lat, lon, house_system, zodiac)));
+  }, async ({ date, lat, lon, house_system, zodiac, separation }) =>
+    chartResult(chartPayload(engine, date, lat, lon, house_system, zodiac, separation)));
 
   server.registerTool("current_sky", {
     description:
@@ -790,10 +798,11 @@ export function buildServer(
       lon: lonSchema.default(0).describe("Longitude, EAST positive (Americas are negative); default 0 makes houses nominal"),
       house_system: houseSys,
       zodiac: zodiacSchema,
+      separation: separationSchema,
     },
     _meta: CHART_TOOL_META,
-  }, async ({ date, lat, lon, house_system, zodiac }) =>
-    chartResult(chartPayload(engine, date ?? new Date().toISOString(), lat, lon, house_system, zodiac)));
+  }, async ({ date, lat, lon, house_system, zodiac, separation }) =>
+    chartResult(chartPayload(engine, date ?? new Date().toISOString(), lat, lon, house_system, zodiac, separation)));
 
   server.registerTool("sky_view", {
     description:
