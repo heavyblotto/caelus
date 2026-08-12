@@ -1,0 +1,2239 @@
+{
+  "model": "anthropic:claude-sonnet-5",
+  "agg": {
+    "n": 82,
+    "tool_selection_accuracy": 0.9146341463414634,
+    "schema_valid_rate": 1,
+    "args_correct_rate": 0.7733333333333333,
+    "predicates": {
+      "date_is_utc": {
+        "applicable": 56,
+        "passed": 56
+      },
+      "lon_sign_west": {
+        "applicable": 28,
+        "passed": 28
+      },
+      "lon_sign_east": {
+        "applicable": 18,
+        "passed": 18
+      },
+      "orb_in_range": {
+        "applicable": 4,
+        "passed": 4
+      },
+      "synastry_both_present": {
+        "applicable": 5,
+        "passed": 4
+      },
+      "exactly_one_target": {
+        "applicable": 9,
+        "passed": 9
+      },
+      "range_le_50yr": {
+        "applicable": 0,
+        "passed": 0
+      },
+      "snake_case_body": {
+        "applicable": 2,
+        "passed": 2
+      },
+      "exactly_one_date": {
+        "applicable": 1,
+        "passed": 1
+      },
+      "step_in_range": {
+        "applicable": 1,
+        "passed": 1
+      },
+      "window_in_range": {
+        "applicable": 1,
+        "passed": 1
+      },
+      "lat_sign_south": {
+        "applicable": 2,
+        "passed": 2
+      },
+      "return_window_le_2yr": {
+        "applicable": 2,
+        "passed": 2
+      },
+      "target_after_natal": {
+        "applicable": 9,
+        "passed": 9
+      }
+    },
+    "by_tag": {
+      "natal": {
+        "n": 19,
+        "tool_correct": 17
+      },
+      "tool-select": {
+        "n": 27,
+        "tool_correct": 25
+      },
+      "timezone": {
+        "n": 16,
+        "tool_correct": 15
+      },
+      "geocode": {
+        "n": 14,
+        "tool_correct": 13
+      },
+      "west-lon": {
+        "n": 31,
+        "tool_correct": 29
+      },
+      "house-system": {
+        "n": 4,
+        "tool_correct": 4
+      },
+      "current_sky": {
+        "n": 7,
+        "tool_correct": 5
+      },
+      "default-time": {
+        "n": 7,
+        "tool_correct": 7
+      },
+      "east-lon": {
+        "n": 19,
+        "tool_correct": 18
+      },
+      "event": {
+        "n": 1,
+        "tool_correct": 0
+      },
+      "transits": {
+        "n": 6,
+        "tool_correct": 5
+      },
+      "orb": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "synastry": {
+        "n": 3,
+        "tool_correct": 2
+      },
+      "southern": {
+        "n": 6,
+        "tool_correct": 5
+      },
+      "house-system-trap": {
+        "n": 1,
+        "tool_correct": 0
+      },
+      "find_aspect_dates": {
+        "n": 9,
+        "tool_correct": 9
+      },
+      "target-lon": {
+        "n": 5,
+        "tool_correct": 5
+      },
+      "sign-to-degree": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "return": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "target-body": {
+        "n": 3,
+        "tool_correct": 3
+      },
+      "body-to-body": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "snake-case": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "rectification_grid": {
+        "n": 3,
+        "tool_correct": 3
+      },
+      "window": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "date-rollover": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "timezone-explicit": {
+        "n": 1,
+        "tool_correct": 0
+      },
+      "polar": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "house-fallback": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "historical": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "out-of-range": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "graceful-error": {
+        "n": 4,
+        "tool_correct": 4
+      },
+      "huge-range": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "negative": {
+        "n": 4,
+        "tool_correct": 3
+      },
+      "interpretation": {
+        "n": 3,
+        "tool_correct": 3
+      },
+      "ambiguous": {
+        "n": 1,
+        "tool_correct": 0
+      },
+      "equator": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "orb-edge": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "default-house-system": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "midnight": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "missing-data": {
+        "n": 1,
+        "tool_correct": 0
+      },
+      "electional": {
+        "n": 4,
+        "tool_correct": 4
+      },
+      "planetary_hours": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "date": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "void_of_course": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "returns": {
+        "n": 3,
+        "tool_correct": 3
+      },
+      "solar-return": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "lunar-return": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "relocated": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "progressions": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "solar-arc": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "composite": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "sidereal": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "dignities": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "sect": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "lots": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "hellenistic": {
+        "n": 8,
+        "tool_correct": 8
+      },
+      "profections": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "firdaria": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "releasing": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "aphesis": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "directions": {
+        "n": 3,
+        "tool_correct": 3
+      },
+      "primary-directions": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "mundane-directions": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "nakshatras": {
+        "n": 2,
+        "tool_correct": 1
+      },
+      "vedic": {
+        "n": 9,
+        "tool_correct": 8
+      },
+      "dasha": {
+        "n": 3,
+        "tool_correct": 3
+      },
+      "vimshottari": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "yogini": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "ashtottari": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "vargas": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "navamsa": {
+        "n": 1,
+        "tool_correct": 1
+      },
+      "yogas": {
+        "n": 2,
+        "tool_correct": 2
+      },
+      "raja-yoga": {
+        "n": 1,
+        "tool_correct": 1
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "natal-clear-tampa",
+      "tags": [
+        "natal",
+        "tool-select",
+        "timezone",
+        "geocode",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "natal-clear-london",
+      "tags": [
+        "natal",
+        "tool-select",
+        "geocode"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "natal-whole-sign",
+      "tags": [
+        "natal",
+        "house-system"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "natal-coords-given",
+      "tags": [
+        "natal",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "sky-now-noplace",
+      "tags": [
+        "current_sky",
+        "tool-select",
+        "default-time"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {}
+    },
+    {
+      "id": "sky-now-place",
+      "tags": [
+        "current_sky",
+        "tool-select",
+        "default-time",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "sky-event-moment",
+      "tags": [
+        "current_sky",
+        "event",
+        "west-lon"
+      ],
+      "tool_correct": false,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "transits-now",
+      "tags": [
+        "transits",
+        "tool-select",
+        "timezone",
+        "default-time",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        },
+        "orb_in_range": {
+          "pass": true,
+          "applicable": false
+        }
+      }
+    },
+    {
+      "id": "transits-dated",
+      "tags": [
+        "transits",
+        "orb"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "orb_in_range": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "transits-this-week",
+      "tags": [
+        "transits",
+        "default-time"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "orb_in_range": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "synastry-two-births",
+      "tags": [
+        "synastry",
+        "tool-select",
+        "timezone",
+        "geocode",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "b.date: expected \"1988-03-21T10:00:00Z\", got \"1988-03-21T11:00:00Z\""
+      ],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "synastry_both_present": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "synastry-coords",
+      "tags": [
+        "synastry",
+        "orb",
+        "southern"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "orb_in_range": {
+          "pass": true,
+          "applicable": true
+        },
+        "synastry_both_present": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "synastry-wholesign-trap",
+      "tags": [
+        "synastry",
+        "house-system-trap"
+      ],
+      "tool_correct": false,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "a: expected object, got undefined",
+        "b: expected object, got undefined"
+      ],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "synastry_both_present": {
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "find-saturn-square-lon",
+      "tags": [
+        "find_aspect_dates",
+        "tool-select",
+        "target-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "end: expected \"2027-01-01T00:00:00Z\", got \"2027-12-31T00:00:00Z\""
+      ],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": false
+        },
+        "exactly_one_target": {
+          "pass": true,
+          "applicable": true
+        },
+        "range_le_50yr": {
+          "pass": true,
+          "applicable": false
+        }
+      }
+    },
+    {
+      "id": "find-saturn-square-moon",
+      "tags": [
+        "find_aspect_dates",
+        "tool-select",
+        "target-lon",
+        "sign-to-degree"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "end: expected \"2028-12-31T23:59:59Z\", got \"2028-12-31T00:00:00Z\""
+      ],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": false
+        },
+        "exactly_one_target": {
+          "pass": true,
+          "applicable": true
+        },
+        "range_le_50yr": {
+          "pass": true,
+          "applicable": false
+        }
+      }
+    },
+    {
+      "id": "find-jupiter-return",
+      "tags": [
+        "find_aspect_dates",
+        "target-lon",
+        "return"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "end: expected \"2024-01-01T00:00:00Z\", got \"2024-12-31T00:00:00Z\""
+      ],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": false
+        },
+        "exactly_one_target": {
+          "pass": true,
+          "applicable": true
+        },
+        "range_le_50yr": {
+          "pass": true,
+          "applicable": false
+        }
+      }
+    },
+    {
+      "id": "find-mars-conj-jupiter-body",
+      "tags": [
+        "find_aspect_dates",
+        "target-body",
+        "body-to-body"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "end: expected \"2024-01-01T00:00:00Z\", got \"2024-12-31T23:59:59Z\""
+      ],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": false
+        },
+        "exactly_one_target": {
+          "pass": true,
+          "applicable": true
+        },
+        "range_le_50yr": {
+          "pass": true,
+          "applicable": false
+        }
+      }
+    },
+    {
+      "id": "find-truenode-token",
+      "tags": [
+        "find_aspect_dates",
+        "snake-case",
+        "target-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "end: expected \"2030-01-01T00:00:00Z\", got \"2030-12-31T23:59:59Z\""
+      ],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": false
+        },
+        "exactly_one_target": {
+          "pass": true,
+          "applicable": true
+        },
+        "snake_case_body": {
+          "pass": true,
+          "applicable": true
+        },
+        "range_le_50yr": {
+          "pass": true,
+          "applicable": false
+        }
+      }
+    },
+    {
+      "id": "rectify-unknown-time",
+      "tags": [
+        "rectification_grid",
+        "tool-select",
+        "geocode",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "date: expected \"1990-06-10T00:00:00Z\", got \"1990-06-10\""
+      ],
+      "arg_checks": {
+        "exactly_one_date": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "rectify-rising-leo",
+      "tags": [
+        "rectification_grid",
+        "tool-select",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "date: expected \"1980-04-12T00:00:00Z\", got \"1980-04-12\""
+      ],
+      "arg_checks": {
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        },
+        "step_in_range": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "rectify-window",
+      "tags": [
+        "rectification_grid",
+        "window",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "date: expected \"2003-09-09T00:00:00Z\", got \"2003-09-09\""
+      ],
+      "arg_checks": {
+        "window_in_range": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "tz-tokyo-local",
+      "tags": [
+        "natal",
+        "timezone",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "tz-la-local",
+      "tags": [
+        "natal",
+        "timezone",
+        "west-lon",
+        "date-rollover"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "tz-sydney-local",
+      "tags": [
+        "natal",
+        "timezone",
+        "southern",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "tz-utc-explicit",
+      "tags": [
+        "natal",
+        "timezone-explicit"
+      ],
+      "tool_correct": false,
+      "schema_valid": null,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": false
+        }
+      }
+    },
+    {
+      "id": "southern-cape-town",
+      "tags": [
+        "natal",
+        "southern",
+        "east-lon"
+      ],
+      "tool_correct": false,
+      "schema_valid": null,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": false
+        },
+        "lat_sign_south": {
+          "pass": true,
+          "applicable": false
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": false
+        }
+      }
+    },
+    {
+      "id": "southern-buenos-aires",
+      "tags": [
+        "natal",
+        "southern",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lat_sign_south": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "polar-svalbard",
+      "tags": [
+        "natal",
+        "polar",
+        "house-fallback"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "historical-1855",
+      "tags": [
+        "natal",
+        "historical",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "historical-1899",
+      "tags": [
+        "natal",
+        "historical"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "outofrange-medieval",
+      "tags": [
+        "natal",
+        "out-of-range",
+        "graceful-error"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "outofrange-far-future",
+      "tags": [
+        "natal",
+        "out-of-range",
+        "graceful-error"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "hugerange-find",
+      "tags": [
+        "find_aspect_dates",
+        "huge-range",
+        "graceful-error"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "end: expected \"2000-01-01T00:00:00Z\", got \"1950-01-01T00:00:00Z\""
+      ],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": false
+        },
+        "exactly_one_target": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "refuse-interpretation",
+      "tags": [
+        "negative",
+        "interpretation"
+      ],
+      "tool_correct": true,
+      "schema_valid": null,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {}
+    },
+    {
+      "id": "refuse-vague-horoscope",
+      "tags": [
+        "negative",
+        "interpretation",
+        "current_sky"
+      ],
+      "tool_correct": true,
+      "schema_valid": null,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {}
+    },
+    {
+      "id": "refuse-meaning-of-aspect",
+      "tags": [
+        "negative",
+        "interpretation"
+      ],
+      "tool_correct": true,
+      "schema_valid": null,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {}
+    },
+    {
+      "id": "ambiguous-my-chart-now",
+      "tags": [
+        "current_sky",
+        "tool-select",
+        "ambiguous"
+      ],
+      "tool_correct": false,
+      "schema_valid": null,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {}
+    },
+    {
+      "id": "east-lon-explicit",
+      "tags": [
+        "natal",
+        "east-lon",
+        "equator"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "equator-quito",
+      "tags": [
+        "current_sky",
+        "equator",
+        "west-lon",
+        "house-system"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "orb-too-tight",
+      "tags": [
+        "transits",
+        "orb-edge"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "orb_in_range": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "find-opposition-lon",
+      "tags": [
+        "find_aspect_dates",
+        "target-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": false
+        },
+        "exactly_one_target": {
+          "pass": true,
+          "applicable": true
+        },
+        "range_le_50yr": {
+          "pass": true,
+          "applicable": false
+        }
+      }
+    },
+    {
+      "id": "find-sextile-bodies",
+      "tags": [
+        "find_aspect_dates",
+        "target-body"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "end: expected \"2027-01-01T00:00:00Z\", got \"2027-12-31T23:59:59Z\""
+      ],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": false
+        },
+        "exactly_one_target": {
+          "pass": true,
+          "applicable": true
+        },
+        "range_le_50yr": {
+          "pass": true,
+          "applicable": false
+        }
+      }
+    },
+    {
+      "id": "natal-placidus-default",
+      "tags": [
+        "natal",
+        "default-house-system",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "transits-natal-coords-east",
+      "tags": [
+        "transits",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        },
+        "orb_in_range": {
+          "pass": true,
+          "applicable": false
+        }
+      }
+    },
+    {
+      "id": "natal-southern-equal",
+      "tags": [
+        "natal",
+        "southern",
+        "east-lon",
+        "house-system"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lat_sign_south": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "sky-porphyry",
+      "tags": [
+        "current_sky",
+        "house-system",
+        "west-lon",
+        "default-time"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "find-conj-nodes",
+      "tags": [
+        "find_aspect_dates",
+        "target-body",
+        "snake-case"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": false
+        },
+        "exactly_one_target": {
+          "pass": true,
+          "applicable": true
+        },
+        "snake_case_body": {
+          "pass": true,
+          "applicable": true
+        },
+        "range_le_50yr": {
+          "pass": true,
+          "applicable": false
+        }
+      }
+    },
+    {
+      "id": "natal-midnight",
+      "tags": [
+        "natal",
+        "midnight",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "transits-default-noplace-err",
+      "tags": [
+        "transits",
+        "negative",
+        "missing-data"
+      ],
+      "tool_correct": false,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {}
+    },
+    {
+      "id": "planetary-hours-now-nyc",
+      "tags": [
+        "electional",
+        "planetary_hours",
+        "tool-select",
+        "default-time",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "planetary-hours-dated-tokyo",
+      "tags": [
+        "electional",
+        "planetary_hours",
+        "date",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "voc-now",
+      "tags": [
+        "electional",
+        "void_of_course",
+        "tool-select",
+        "default-time"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {}
+    },
+    {
+      "id": "voc-dated",
+      "tags": [
+        "electional",
+        "void_of_course",
+        "date"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "returns-solar-tampa",
+      "tags": [
+        "returns",
+        "solar-return",
+        "tool-select",
+        "timezone",
+        "geocode",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "search_start: expected \"2026-01-01T00:00:00Z\", got \"2026-06-05T00:00:00Z\"",
+        "search_end: expected \"2026-12-31T23:59:59Z\", got \"2026-06-15T00:00:00Z\""
+      ],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        },
+        "return_window_le_2yr": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "returns-lunar-relocated",
+      "tags": [
+        "returns",
+        "lunar-return",
+        "relocated",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        },
+        "return_window_le_2yr": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "returns-window-too-wide",
+      "tags": [
+        "returns",
+        "huge-range",
+        "graceful-error",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "search_start: expected \"2020-01-01T00:00:00Z\", got \"2020-06-01T00:00:00Z\"",
+        "search_end: expected \"2035-01-01T00:00:00Z\", got \"2022-06-01T00:00:00Z\""
+      ],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "progressions-to-today",
+      "tags": [
+        "progressions",
+        "tool-select",
+        "solar-arc"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "target_after_natal": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "progressions-fiftieth",
+      "tags": [
+        "progressions",
+        "solar-arc"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "target_after_natal": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "composite-two-births",
+      "tags": [
+        "composite",
+        "tool-select",
+        "timezone",
+        "geocode",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "b.date: expected \"1988-03-21T10:00:00Z\", got \"1988-03-21T11:00:00Z\""
+      ],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "synastry_both_present": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "composite-coords-sidereal",
+      "tags": [
+        "composite",
+        "sidereal",
+        "southern"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "synastry_both_present": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "dignities-dated-nyc",
+      "tags": [
+        "dignities",
+        "sect",
+        "tool-select",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "dignities-night-tokyo",
+      "tags": [
+        "dignities",
+        "sect",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "lots-fortune-tampa",
+      "tags": [
+        "lots",
+        "hellenistic",
+        "tool-select",
+        "timezone",
+        "geocode",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "lots-all-tokyo",
+      "tags": [
+        "lots",
+        "hellenistic",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "profections-lord-of-year",
+      "tags": [
+        "profections",
+        "hellenistic",
+        "tool-select",
+        "timezone",
+        "geocode",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "target_date: expected \"2026-06-10T00:00:00Z\", got \"2026-06-10T18:30:00Z\""
+      ],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        },
+        "target_after_natal": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "profections-monthly",
+      "tags": [
+        "profections",
+        "hellenistic",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        },
+        "target_after_natal": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "firdaria-active-2026",
+      "tags": [
+        "firdaria",
+        "hellenistic",
+        "tool-select",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        },
+        "target_after_natal": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "firdaria-timeline-tokyo",
+      "tags": [
+        "firdaria",
+        "hellenistic",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "releasing-spirit-current",
+      "tags": [
+        "releasing",
+        "aphesis",
+        "hellenistic",
+        "tool-select",
+        "timezone",
+        "geocode",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "target_date: expected \"2026-06-10T00:00:00Z\", got \"2026-06-10T12:00:00Z\""
+      ],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        },
+        "target_after_natal": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "releasing-fortune-tokyo",
+      "tags": [
+        "releasing",
+        "aphesis",
+        "hellenistic",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        },
+        "target_after_natal": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "directions-naibod-tampa",
+      "tags": [
+        "directions",
+        "primary-directions",
+        "tool-select",
+        "timezone",
+        "geocode",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "directions-ptolemy-london",
+      "tags": [
+        "directions",
+        "primary-directions",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "directions-mundane-tampa",
+      "tags": [
+        "directions",
+        "mundane-directions",
+        "tool-select",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "nakshatras-moon-tampa",
+      "tags": [
+        "nakshatras",
+        "vedic",
+        "tool-select",
+        "timezone",
+        "geocode",
+        "west-lon"
+      ],
+      "tool_correct": false,
+      "schema_valid": null,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": false
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": false
+        }
+      }
+    },
+    {
+      "id": "nakshatras-tokyo",
+      "tags": [
+        "nakshatras",
+        "vedic",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "dasha-vimshottari-tampa",
+      "tags": [
+        "dasha",
+        "vimshottari",
+        "vedic",
+        "tool-select",
+        "timezone",
+        "geocode",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": false,
+      "arg_mismatches": [
+        "system: expected \"vimshottari\", got undefined"
+      ],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        },
+        "target_after_natal": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "dasha-yogini-tokyo",
+      "tags": [
+        "dasha",
+        "yogini",
+        "vedic",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "dasha-ashtottari-london",
+      "tags": [
+        "dasha",
+        "ashtottari",
+        "vedic",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        },
+        "target_after_natal": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "vargas-navamsa-tampa",
+      "tags": [
+        "vargas",
+        "navamsa",
+        "vedic",
+        "tool-select",
+        "timezone",
+        "geocode",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "vargas-tokyo",
+      "tags": [
+        "vargas",
+        "vedic",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "yogas-pancha-tampa",
+      "tags": [
+        "yogas",
+        "raja-yoga",
+        "vedic",
+        "tool-select",
+        "timezone",
+        "geocode",
+        "west-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_west": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    },
+    {
+      "id": "yogas-tokyo",
+      "tags": [
+        "yogas",
+        "vedic",
+        "east-lon"
+      ],
+      "tool_correct": true,
+      "schema_valid": true,
+      "args_correct": true,
+      "arg_mismatches": [],
+      "arg_checks": {
+        "date_is_utc": {
+          "pass": true,
+          "applicable": true
+        },
+        "lon_sign_east": {
+          "pass": true,
+          "applicable": true
+        }
+      }
+    }
+  ]
+}
