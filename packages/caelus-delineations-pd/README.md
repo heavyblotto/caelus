@@ -76,6 +76,8 @@ passages across seven sources today:
 | Planet aspect planet | `aspect{ between, aspect }` | Heindel 118 (5 Ptolemaic aspects) |
 | Rising sign | `angle{ asc, sign }` | Heindel 12/12 |
 | Fixed-star conjunction | `star{ body, star }` | Robson 20 (curated) |
+| Planet parallel planet | `parallel{ a, b }` | Heindel 13 (headings pairing "parallel or conjunction") |
+| Out of bounds | `outOfBounds{ body }` | selector ready; no corpus — the out-of-bounds reading postdates these public-domain sources |
 | Dignities | `placement{ dignity }` | pending |
 | Hermetic lots | `lot{ lot, sign, house }` | selector ready; corpus pending |
 

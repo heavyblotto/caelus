@@ -10,8 +10,9 @@ import { fileURLToPath } from "node:url";
 import {
   julianDay, deltaT, jdTT, nutation, meanObliquity, DEG, mod, ayanamsa,
 } from "../src/core.js";
-import { Engine, BODIES, Body, DEFAULT_ORBS, ASPECTS, SIGNS } from "../src/chart.js";
+import { Engine, BODIES, Body, DEFAULT_ORBS, ASPECTS, SIGNS, NOT_ASPECTABLE } from "../src/chart.js";
 import { aspectPhase } from "../src/electional.js";
+import { declinationAspects, outOfBounds } from "../src/derived.js";
 import { interpretationContext } from "../src/interpretation.js";
 import {
   transitAspects, synastryAspects, synastryOverlays, compositePlacements,
@@ -22,7 +23,8 @@ import { firdariaAt } from "../src/firdaria.js";
 import { vimshottariAt } from "../src/vedic.js";
 import { yogasAt } from "../src/yogas.js";
 import {
-  interpret, hasPlacement, hasAspect, hasPattern, hasStar, hasLot, matchAll, matchNone,
+  interpret, hasPlacement, hasAspect, hasPattern, hasStar, hasLot, hasParallel,
+  matchAll, matchNone,
   hasDispositor, hasReception, hasTransit, hasTimelord, hasDignityFine, hasSynastry,
   hasComposite, hasNakshatra, hasVarga, hasYoga, reconcile,
 } from "../src/interpret.js";
@@ -526,6 +528,37 @@ for (const g of G.houses) {
   if (sun?.sign !== "Gemini") {
     failures++;
     console.error(`FAIL interp sun placement: ${sun?.sign}`);
+  }
+
+  // Declination atoms: the projection's parallels/out-of-bounds must agree
+  // with the pinned derived.ts geometry (declinationAspects / outOfBounds),
+  // computed over the same aspectable bodies at the same instant.
+  {
+    const decBodies = Object.keys(c.bodies).filter((b) => !NOT_ASPECTABLE.has(b));
+    const wantPairs = declinationAspects(eng, decBodies, c.jdUt, 1.0);
+    const gotPairs = by("parallel") as Array<{ a: string; b: string; declination: string }>;
+    const key = (a: string, b: string, k: string) => [[a, b].sort().join("~"), k].join(":");
+    const wantSet = new Set(wantPairs.map((p) => key(p.a, p.b, p.kind as string)));
+    const gotSet = new Set(gotPairs.map((p) => key(p.a, p.b, p.declination)));
+    if (wantSet.size !== gotSet.size || [...wantSet].some((k) => !gotSet.has(k))) {
+      failures++;
+      console.error(`FAIL interp parallels: want ${[...wantSet].join(",")} got ${[...gotSet].join(",")}`);
+    }
+    const wantOob = decBodies.filter((b) => outOfBounds(eng, b, c.jdUt)).sort();
+    const gotOob = (by("outOfBounds") as Array<{ body: string }>).map((a) => a.body).sort();
+    if (wantOob.join() !== gotOob.join()) {
+      failures++;
+      console.error(`FAIL interp out-of-bounds: want [${wantOob}] got [${gotOob}]`);
+    }
+    // The selectors resolve against the projected atoms.
+    if (gotPairs.length > 0) {
+      const p0 = gotPairs[0];
+      const m = hasParallel({ between: [p0.a, p0.b] })(ctx);
+      if (!m.matched) {
+        failures++;
+        console.error(`FAIL hasParallel does not match projected ${p0.a}~${p0.b}`);
+      }
+    }
   }
 
   // Fixed-star atoms: caller-supplied conjunctions project as `star` atoms and

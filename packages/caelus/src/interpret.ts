@@ -213,6 +213,32 @@ export function hasVarga(filter: { division?: number; body?: string; sign?: stri
     && (filter.sign === undefined || a.sign === filter.sign)));
 }
 
+/** Matches a parallel or contraparallel of declination. `between` is an
+ *  unordered pair; `body` matches either member; `declination` narrows to
+ *  `"parallel"` or `"contraparallel"`. */
+export function hasParallel(filter: {
+  body?: string; between?: [string, string];
+  declination?: "parallel" | "contraparallel"; maxOrb?: number;
+} = {}): Selector {
+  const pair = filter.between ? [...filter.between].sort() : null;
+  return (ctx) => hit(ctx.atoms.filter((a) => {
+    if (a.kind !== "parallel") return false;
+    if (filter.body !== undefined && !a.bodies.includes(filter.body)) return false;
+    if (pair && [a.a, a.b].sort().join() !== pair.join()) return false;
+    if (filter.declination !== undefined && a.declination !== filter.declination) return false;
+    if (filter.maxOrb !== undefined && a.orb > filter.maxOrb) return false;
+    return true;
+  }));
+}
+
+/** Matches an out-of-bounds body (declination beyond the obliquity). */
+export function hasOutOfBounds(filter: { body?: string; minMargin?: number } = {}): Selector {
+  return (ctx) => hit(ctx.atoms.filter((a) =>
+    a.kind === "outOfBounds"
+    && (filter.body === undefined || a.body === filter.body)
+    && (filter.minMargin === undefined || a.margin >= filter.minMargin)));
+}
+
 /** Matches a classical yoga. */
 export function hasYoga(filter: { yoga?: string; body?: string } = {}): Selector {
   return (ctx) => hit(ctx.atoms.filter((a) =>

@@ -2,8 +2,11 @@
  * Generic planet-aspect-planet extractor for books that head each delineation
  * "PlanetA <aspect words> to PlanetB" (Heindel groups benefic and malefic
  * aspects, e.g. "sextile or trine", so one paragraph yields a record per named
- * aspect that the engine knows). "parallel" is a declination aspect Caelus does
- * not model, so it is dropped.
+ * aspect that the engine knows). A heading naming "parallel" additionally
+ * yields a `parallel{}` record: Caelus models the parallel of declination as
+ * its own atom kind (a position, not an aspect — two bodies can hold one
+ * while unaspected in longitude), and Heindel's headings pair it with the
+ * conjunction ("parallel or conjunction"), reading it as the same in nature.
  */
 import { denoise, excerpt, stripCipher, sentenceStart } from "./denoise.js";
 import { PLANET_TO_BODY } from "./astro.js";
@@ -21,9 +24,10 @@ const HEADING = new RegExp(
 );
 const title = (s: string): string => s[0].toUpperCase() + s.slice(1);
 
-/** Canonical aspects named in a phrase, in engine vocabulary, deduped. */
+/** Canonical aspects named in a phrase, in engine vocabulary, deduped.
+ *  Includes "parallel", which compiles to a `parallel{}` spec, not `aspect{}`. */
 function aspectsIn(p: string): string[] {
-  const found = p.toLowerCase().match(/conjunction|sextile|square|trine|opposition/g) ?? [];
+  const found = p.toLowerCase().match(/conjunction|sextile|square|trine|opposition|parallel/g) ?? [];
   return [...new Set(found)];
 }
 
@@ -57,20 +61,35 @@ export function extractAspects(lines: string[], source: SourceMeta): PassageReco
       const key = `${x}~${y}:${aspect}`;
       if (seen.has(key)) continue; // first treatment wins
       seen.add(key);
-      records.push({
-        id: `${source.idPrefix}:${x}-${aspect}-${y}`,
-        when: { kind: "aspect", a: head.a, b: head.b, aspect },
-        atomIds: [`aspect:${x}~${y}:${aspect}`],
-        text,
-        tradition: "modern",
-        source: {
-          author: source.author,
-          work: source.work,
-          locus: `${title(head.a)} ${aspect} ${title(head.b)}`,
-        },
-        rights: "pd-us",
-        embed: true,
-      });
+      records.push(aspect === "parallel"
+        ? {
+          id: `${source.idPrefix}:${x}-parallel-${y}`,
+          when: { kind: "parallel", a: head.a, b: head.b, declination: "parallel" },
+          atomIds: [`parallel:${x}~${y}:parallel`],
+          text,
+          tradition: "modern",
+          source: {
+            author: source.author,
+            work: source.work,
+            locus: `${title(head.a)} parallel ${title(head.b)}`,
+          },
+          rights: "pd-us",
+          embed: true,
+        }
+        : {
+          id: `${source.idPrefix}:${x}-${aspect}-${y}`,
+          when: { kind: "aspect", a: head.a, b: head.b, aspect },
+          atomIds: [`aspect:${x}~${y}:${aspect}`],
+          text,
+          tradition: "modern",
+          source: {
+            author: source.author,
+            work: source.work,
+            locus: `${title(head.a)} ${aspect} ${title(head.b)}`,
+          },
+          rights: "pd-us",
+          embed: true,
+        });
     }
   });
   records.sort((a, b) => a.id.localeCompare(b.id));

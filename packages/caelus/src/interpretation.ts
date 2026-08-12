@@ -19,8 +19,9 @@
  * oracle for "which facts matter," so it is unit-tested for structure rather
  * than pinned by a parity golden.
  */
-import { mod } from "./core.js";
-import { SIGNS, DOMICILE, EXALTATION } from "./chart.js";
+import { mod, jdTT, meanObliquity, DEG } from "./core.js";
+import { SIGNS, DOMICILE, EXALTATION, NOT_ASPECTABLE } from "./chart.js";
+import { declinationAspect } from "./derived.js";
 import type { Chart, Zodiac } from "./chart.js";
 import type { AspectPhase } from "./electional.js";
 import { detectPatterns, ChartPattern } from "./patterns.js";
@@ -68,7 +69,8 @@ export type FactKind =
   | "placement" | "aspect" | "pattern" | "signature" | "angle"
   | "dispositor" | "reception" | "star" | "lot"
   | "transit" | "synastry" | "composite" | "timelord" | "dignity"
-  | "nakshatra" | "varga" | "yoga";
+  | "nakshatra" | "varga" | "yoga"
+  | "parallel" | "outOfBounds";
 
 interface FactAtomBase {
   /** Stable, content-addressable id, e.g. `"placement:mars"` or
@@ -231,11 +233,36 @@ export interface YogaAtom extends FactAtomBase {
   planets: string[];
 }
 
+/** A parallel or contraparallel of declination. Sepharial: parallels are
+ *  "more correctly speaking, positions, and not aspects" -- two bodies can
+ *  hold one while unaspected in longitude, which is why this is its own atom
+ *  kind rather than an aspect variant. */
+export interface ParallelAtom extends FactAtomBase {
+  kind: "parallel";
+  a: string;
+  b: string;
+  declination: "parallel" | "contraparallel";
+  /** Distance from exact (|decA - decB| or |decA + decB|), degrees. */
+  orb: number;
+}
+
+/** A body beyond the Sun's maximum declination (the obliquity of the
+ *  ecliptic, ~23.44 deg) -- "out of bounds". */
+export interface OutOfBoundsAtom extends FactAtomBase {
+  kind: "outOfBounds";
+  body: string;
+  /** The body's declination, degrees. */
+  dec: number;
+  /** Degrees beyond the obliquity bound (always positive). */
+  margin: number;
+}
+
 export type FactAtom =
   | PlacementAtom | AspectAtom | PatternAtom | SignatureAtom | AngleAtom
   | DispositorAtom | ReceptionAtom | StarAtom | LotAtom
   | TransitAtom | SynastryAtom | CompositeAtom | TimelordAtom | DignityAtom
-  | NakshatraAtom | VargaAtom | YogaAtom;
+  | NakshatraAtom | VargaAtom | YogaAtom
+  | ParallelAtom | OutOfBoundsAtom;
 
 /** A chart as a flat, ranked list of {@link FactAtom}s. */
 export interface InterpretationContext {
@@ -289,13 +316,18 @@ export interface SalienceWeights {
   dignityFine: number;
   /** Added to a nakshatra / varga / yoga fact. */
   vedic: number;
+  /** Added to a parallel or contraparallel of declination (Heindel reads
+   *  parallels as amplifiers on the order of a conjunction). */
+  parallel: number;
+  /** Added to an out-of-bounds body. */
+  outOfBounds: number;
 }
 
 export const DEFAULT_SALIENCE: SalienceWeights = {
   base: 1, luminary: 1.5, angular: 1, chartRuler: 1,
   dignity: 0.5, hardAspect: 1, pattern: 4, dispositor: 0.5, reception: 2,
   star: 2, lot: 2, transit: 1.5, synastry: 1, composite: 0.8, timelord: 2,
-  dignityFine: 0.4, vedic: 1,
+  dignityFine: 0.4, vedic: 1, parallel: 1.5, outOfBounds: 1.5,
 };
 
 export interface ContextOptions {
@@ -327,6 +359,10 @@ export interface ContextOptions {
     firdaria?: { major: string | null; sub: string | null; day?: boolean };
     dasha?: { maha: string; antar?: string | null; pratyantar?: string | null; moon_nakshatra?: string };
   };
+  /** Orb for parallels/contraparallels of declination, degrees (default 1.0,
+   *  matching {@link declinationAspects}). Declination atoms are always
+   *  computed from the chart's own `dec` values; this only tunes the orb. */
+  declinationOrb?: number;
   /** Vedic structure facts (caller-supplied or auto from sidereal chart). */
   vedic?: {
     /** Project nakshatras for these bodies from the chart longitudes. */
@@ -514,6 +550,49 @@ export function interpretationContext(
   angleAtom("mc", chart.angles.mc);
   angleAtom("vertex", chart.angles.vertex);
   angleAtom("eastPoint", chart.angles.eastPoint);
+
+  // Declination: parallels/contraparallels and out-of-bounds. Always computed
+  // -- every Position carries `dec` -- so, unlike stars or lots, no caller
+  // plumbing is needed. Nodes and Lilith sit out, as they do for aspects.
+  // A parallel is a position, not an aspect (Sepharial), and two bodies can
+  // hold one while unaspected in longitude, which is exactly the relation a
+  // longitude-only projection cannot represent.
+  const decOrb = opts.declinationOrb ?? 1.0;
+  const decBodies = Object.keys(chart.bodies)
+    .filter((b) => chart.bodies[b as keyof typeof chart.bodies] && !NOT_ASPECTABLE.has(b));
+  for (let i = 0; i < decBodies.length; i++) {
+    for (let j = i + 1; j < decBodies.length; j++) {
+      const a = decBodies[i]; const b = decBodies[j];
+      const decA = chart.bodies[a as keyof typeof chart.bodies]!.dec;
+      const decB = chart.bodies[b as keyof typeof chart.bodies]!.dec;
+      const kind = declinationAspect(decA, decB, decOrb);
+      if (!kind) continue;
+      const orb = kind === "parallel" ? Math.abs(decA - decB) : Math.abs(decA + decB);
+      let salience = w.base + w.parallel;
+      if (LUMINARIES.has(a) || LUMINARIES.has(b)) salience += w.luminary;
+      const [x, y] = [a, b].sort();
+      atoms.push({
+        id: `parallel:${x}~${y}:${kind}`, kind: "parallel", bodies: [a, b],
+        salience, a, b, declination: kind, orb,
+        text: `${title(a)} ${kind === "parallel" ? "parallel" : "contraparallel"} `
+          + `${title(b)} (orb ${orb.toFixed(1)}° of declination)`,
+      });
+    }
+  }
+  const obliquity = meanObliquity(jdTT(chart.jdUt)) / DEG;
+  for (const body of decBodies) {
+    const dec = chart.bodies[body as keyof typeof chart.bodies]!.dec;
+    const margin = Math.abs(dec) - obliquity;
+    if (margin <= 0) continue;
+    let salience = w.base + w.outOfBounds;
+    if (LUMINARIES.has(body)) salience += w.luminary;
+    atoms.push({
+      id: `oob:${body}`, kind: "outOfBounds", bodies: [body], salience,
+      body, dec, margin,
+      text: `${title(body)} out of bounds `
+        + `(declination ${dec.toFixed(1)}°, ${margin.toFixed(1)}° beyond the bound)`,
+    });
+  }
 
   // Fixed-star conjunctions (caller-supplied; the catalog is not on the Chart).
   for (const sc of opts.stars ?? []) {

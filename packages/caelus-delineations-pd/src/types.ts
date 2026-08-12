@@ -35,8 +35,9 @@ export interface SourceManifestEntry {
 }
 
 /** Serializable selector spec — resolved to Caelus selectors at extract/build
- *  time. Covers all seventeen Caelus `FactKind`s. The chart-pure kinds
- *  (placement … dignity) match atoms every projection carries; the
+ *  time. Covers every Caelus `FactKind`. The chart-pure kinds (placement,
+ *  aspect, pattern, signature, angle, dispositor, reception, dignity,
+ *  parallel, outOfBounds) match atoms every projection carries; the
  *  context-fed kinds (star, lot, transit, synastry, composite, timelord,
  *  nakshatra, varga, yoga) match atoms the caller supplies or enables via
  *  `ContextOptions` — a rule keyed on them simply never fires against a bare
@@ -58,7 +59,9 @@ export type SelectorSpec =
   | { kind: "timelord"; system?: "profection" | "zr" | "firdaria" | "dasha"; level?: string; lord?: string; sign?: string }
   | { kind: "nakshatra"; body?: string; name?: string; lord?: string; pada?: number }
   | { kind: "varga"; division?: number; body?: string; sign?: string }
-  | { kind: "yoga"; yoga?: string; body?: string };
+  | { kind: "yoga"; yoga?: string; body?: string }
+  | { kind: "parallel"; a?: string; b?: string; declination?: "parallel" | "contraparallel" }
+  | { kind: "outOfBounds"; body?: string };
 
 export interface PassageRecord {
   id: string;

@@ -12,6 +12,7 @@ import {
   hasPlacement, hasAspect, hasPattern, hasSignature, hasAngle, hasStar, hasLot,
   hasDispositor, hasReception, hasDignityFine, hasTransit, hasSynastry,
   hasComposite, hasTimelord, hasNakshatra, hasVarga, hasYoga,
+  hasParallel, hasOutOfBounds,
 } from "caelus";
 import type {
   Selector, Rule, InterpretationSource, AngleAtom,
@@ -68,6 +69,14 @@ export function selectorFromSpec(spec: SelectorSpec): Selector {
       return hasVarga({ division: spec.division, body: spec.body, sign: spec.sign });
     case "yoga":
       return hasYoga({ yoga: spec.yoga, body: spec.body });
+    case "parallel":
+      return hasParallel({
+        between: spec.a && spec.b ? [spec.a, spec.b] : undefined,
+        body: spec.a && !spec.b ? spec.a : undefined,
+        declination: spec.declination,
+      });
+    case "outOfBounds":
+      return hasOutOfBounds({ body: spec.body });
   }
 }
 

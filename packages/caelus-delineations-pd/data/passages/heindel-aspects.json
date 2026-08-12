@@ -231,6 +231,69 @@
     "embed": true
   },
   {
+    "id": "heindel-aspects:jupiter-parallel-mars",
+    "when": {
+      "kind": "parallel",
+      "a": "mars",
+      "b": "jupiter",
+      "declination": "parallel"
+    },
+    "atomIds": [
+      "parallel:jupiter~mars:parallel"
+    ],
+    "text": "It also indicates that the person is able to earn much money and uses it freely and generously, but the mental qualities are similar to those conferred by the bad aspects: sporty, swaggering, tricky, deceitful and untruthful, impulsive in judgment, not to be depended upon, and if the conjunction occurs in one of the watery signs, especially in Pisces, the person will probably be a drunkard, though this is not as certain as with the square and opposition.",
+    "tradition": "modern",
+    "source": {
+      "author": "Max Heindel and Augusta Foss Heindel",
+      "work": "The Message of the Stars",
+      "locus": "Mars parallel Jupiter"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "heindel-aspects:jupiter-parallel-saturn",
+    "when": {
+      "kind": "parallel",
+      "a": "jupiter",
+      "b": "saturn",
+      "declination": "parallel"
+    },
+    "atomIds": [
+      "parallel:jupiter~saturn:parallel"
+    ],
+    "text": "Has the same beneficent influence as the sextile or trine, though not in as great a measure and if Jupiter is weak by sign or otherwise afflicted the aspects will probably count for very little, but in that case its effect upon the arterial circulation will be obstructive, giving a tendency to schlerosis of the arteries the same as the opposition and square.",
+    "tradition": "modern",
+    "source": {
+      "author": "Max Heindel and Augusta Foss Heindel",
+      "work": "The Message of the Stars",
+      "locus": "Jupiter parallel Saturn"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "heindel-aspects:jupiter-parallel-uranus",
+    "when": {
+      "kind": "parallel",
+      "a": "uranus",
+      "b": "jupiter",
+      "declination": "parallel"
+    },
+    "atomIds": [
+      "parallel:jupiter~uranus:parallel"
+    ],
+    "text": "Gives similar indications to the good aspects but the influence is not quite so decided, particularly if either of the planets is weak by sign or otherwise afflicted. In that case it will be found that the tendencies conferred are more like those of the bad aspects.",
+    "tradition": "modern",
+    "source": {
+      "author": "Max Heindel and Augusta Foss Heindel",
+      "work": "The Message of the Stars",
+      "locus": "Uranus parallel Jupiter"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
     "id": "heindel-aspects:jupiter-sextile-mars",
     "when": {
       "kind": "aspect",
@@ -714,6 +777,69 @@
     "embed": true
   },
   {
+    "id": "heindel-aspects:mars-parallel-mercury",
+    "when": {
+      "kind": "parallel",
+      "a": "mars",
+      "b": "mercury",
+      "declination": "parallel"
+    },
+    "atomIds": [
+      "parallel:mars~mercury:parallel"
+    ],
+    "text": "Gives the same mental energy, enthusiasm and dexterity as the definitely good aspects, but whether they are used for constructive and good purposes or for destructive and evil ends depends upon the aspects, house position and sign which they occupy. If the configuration occurs in a sign where either or both are strong and well-placed, as Mars in Aries or Capricorn or Mercury in Gemini or Virgo, or if they are fortified by good aspects from the Sun, Venus and Jupiter, Mars conjunction or parallel Mercury will operate similarly to the sextile or trine, at> stated in the foregoing paragraph, which see.",
+    "tradition": "modern",
+    "source": {
+      "author": "Max Heindel and Augusta Foss Heindel",
+      "work": "The Message of the Stars",
+      "locus": "Mars parallel Mercury"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "heindel-aspects:mars-parallel-moon",
+    "when": {
+      "kind": "parallel",
+      "a": "mars",
+      "b": "moon",
+      "declination": "parallel"
+    },
+    "atomIds": [
+      "parallel:mars~moon:parallel"
+    ],
+    "text": "It strengthens the health and the vitality, particularly in the horoscope of a woman. In the horoscope of a man it would indicate a robust marriage partner of a domineering nature and. with respect to the mind it would make the person very impulsive, particularly if placed in one of the common signs or in the Third or Ninth Houses. It also gives a very bad temper but not so bad as the square or opposition. If Mars is in conjunction or parallel to the Moon in Scorpio there is an abnormal sexual desire which will not be denied particularly if Venus is there also. It makes the nature very restless and unsettled for it is like mixing fire and water. In watery signs it inclines to drink.",
+    "tradition": "modern",
+    "source": {
+      "author": "Max Heindel and Augusta Foss Heindel",
+      "work": "The Message of the Stars",
+      "locus": "Mars parallel Moon"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "heindel-aspects:mars-parallel-venus",
+    "when": {
+      "kind": "parallel",
+      "a": "mars",
+      "b": "venus",
+      "declination": "parallel"
+    },
+    "atomIds": [
+      "parallel:mars~venus:parallel"
+    ],
+    "text": "For instance, Mars conjunction Venus makes the person less blunt and domineering, more kind and polite; it is therefore good in that respect, but the conjunction also strengthens the passional nature; especially if it occurs in Scorpio and in the Twelfth House it leads to self-abuse so that in those cases it is decidedly bad. $ n 8 $ Mars square or opposition Venus. See page 329.",
+    "tradition": "modern",
+    "source": {
+      "author": "Max Heindel and Augusta Foss Heindel",
+      "work": "The Message of the Stars",
+      "locus": "Mars parallel Venus"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
     "id": "heindel-aspects:mars-sextile-mercury",
     "when": {
       "kind": "aspect",
@@ -1176,6 +1302,48 @@
     "embed": true
   },
   {
+    "id": "heindel-aspects:mercury-parallel-saturn",
+    "when": {
+      "kind": "parallel",
+      "a": "mercury",
+      "b": "saturn",
+      "declination": "parallel"
+    },
+    "atomIds": [
+      "parallel:mercury~saturn:parallel"
+    ],
+    "text": "These aspects also give depth to the mind and forethought, together with all the other good qualities enumerated as resulting from the sextile and the trine, if Mercury is otherwise wellaspected; but not in so full a measure, or at any rate the person does not seem to be able to externalize them as readily, hence does not meet the same assured success as given by the definitely good aspects; he also suffers from the tendency to melancholy denoted by the square or opposition, especially if the aspect occurs in one of the common signs or in Capricorn, and if in Gemini it interferes sadly with the dexterity; srch people drop everything they take into their hands. These aspects also give an embarrassing timidity and if Mercury is afflicted the undesirable qualities enumerated as resulting from the square or opposition may be looked for.",
+    "tradition": "modern",
+    "source": {
+      "author": "Max Heindel and Augusta Foss Heindel",
+      "work": "The Message of the Stars",
+      "locus": "Mercury parallel Saturn"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "heindel-aspects:mercury-parallel-sun",
+    "when": {
+      "kind": "parallel",
+      "a": "mercury",
+      "b": "sun",
+      "declination": "parallel"
+    },
+    "atomIds": [
+      "parallel:mercury~sun:parallel"
+    ],
+    "text": "These are the only aspects ever formed and are good for the memory and mentality provided Mercury is not closer to the Sun than three degrees, for then he is 'combust' and his good qualities are burned up in the Sun's rays. It is most fortunate to have Mercury rise before the Sun at birth for he is the Lightbearer who holds the torch of reason before the Spirit which in the horoscope is symbolized by the Sun. When he rises after the Sun the mentality is not nearly so keen (unless other good aspects favor).",
+    "tradition": "modern",
+    "source": {
+      "author": "Max Heindel and Augusta Foss Heindel",
+      "work": "The Message of the Stars",
+      "locus": "Mercury parallel Sun"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
     "id": "heindel-aspects:mercury-sextile-saturn",
     "when": {
       "kind": "aspect",
@@ -1444,6 +1612,27 @@
       "author": "Max Heindel and Augusta Foss Heindel",
       "work": "The Message of the Stars",
       "locus": "Venus opposition Moon"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "heindel-aspects:moon-parallel-sun",
+    "when": {
+      "kind": "parallel",
+      "a": "moon",
+      "b": "sun",
+      "declination": "parallel"
+    },
+    "atomIds": [
+      "parallel:moon~sun:parallel"
+    ],
+    "text": "No matter in what sign or house the conjunction of the Lights occurs the person will be so.strongly marked with the characteristics of that sign that lacking knowledge of his true Ascenaant even the most competent astrologer is likely to be misled and judge him to be born with the sign rising in which the conjunction took place, and whatever matters are ruled by the House in which the conjunction occurs will play a very important part in the life. In the First House he is an out and out egotist with very little love for others save in so 'far as they serve his ends;, in the Seventh, his world pivots on the mate; in the Tenth House or sign he will sacrifice all other considerations to rise in public life; in the Twelfth House or sign it will give a strong tendency to intemperance which will bring trouble;",
+    "tradition": "modern",
+    "source": {
+      "author": "Max Heindel and Augusta Foss Heindel",
+      "work": "The Message of the Stars",
+      "locus": "Moon parallel Sun"
     },
     "rights": "pd-us",
     "embed": true
@@ -1827,6 +2016,48 @@
     "embed": true
   },
   {
+    "id": "heindel-aspects:neptune-parallel-saturn",
+    "when": {
+      "kind": "parallel",
+      "a": "neptune",
+      "b": "saturn",
+      "declination": "parallel"
+    },
+    "atomIds": [
+      "parallel:neptune~saturn:parallel"
+    ],
+    "text": "Has the same effect as the good aspects when it occurs in a sign where either of the planets are strong as Neptune is in Cancer and Pisces and Saturn in Libra and Capricorn.",
+    "tradition": "modern",
+    "source": {
+      "author": "Max Heindel and Augusta Foss Heindel",
+      "work": "The Message of the Stars",
+      "locus": "Neptune parallel Saturn"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "heindel-aspects:neptune-parallel-uranus",
+    "when": {
+      "kind": "parallel",
+      "a": "neptune",
+      "b": "uranus",
+      "declination": "parallel"
+    },
+    "atomIds": [
+      "parallel:neptune~uranus:parallel"
+    ],
+    "text": "Are convertible aspects, if the planets are well placed by sign and otherwise well-aspected, their effect will be similar to the sextile or trine, though not so pronounced, but if they are cadent, weak by sign, and afflicted they are only a little less evil than when aspected by square or opposition.",
+    "tradition": "modern",
+    "source": {
+      "author": "Max Heindel and Augusta Foss Heindel",
+      "work": "The Message of the Stars",
+      "locus": "Neptune parallel Uranus"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
     "id": "heindel-aspects:neptune-sextile-saturn",
     "when": {
       "kind": "aspect",
@@ -2121,6 +2352,27 @@
     "embed": true
   },
   {
+    "id": "heindel-aspects:saturn-parallel-uranus",
+    "when": {
+      "kind": "parallel",
+      "a": "uranus",
+      "b": "saturn",
+      "declination": "parallel"
+    },
+    "atomIds": [
+      "parallel:saturn~uranus:parallel"
+    ],
+    "text": "Has an influence like the good aspects if the planets are elevated, in angles, essentially dignified or exalted, as Saturn in Libra and Capricorn or Uranus in Aquarius or Scorpio, but if the conjunction occurs in signs where either of the planets are weak, like Aries, Taurus, Cancer or Leo then the influence will be detrimental and should be judged the same as the square or opposition.",
+    "tradition": "modern",
+    "source": {
+      "author": "Max Heindel and Augusta Foss Heindel",
+      "work": "The Message of the Stars",
+      "locus": "Uranus parallel Saturn"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
     "id": "heindel-aspects:saturn-sextile-sun",
     "when": {
       "kind": "aspect",
@@ -2368,6 +2620,27 @@
       "author": "Max Heindel and Augusta Foss Heindel",
       "work": "The Message of the Stars",
       "locus": "Uranus opposition Venus"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "heindel-aspects:uranus-parallel-venus",
+    "when": {
+      "kind": "parallel",
+      "a": "uranus",
+      "b": "venus",
+      "declination": "parallel"
+    },
+    "atomIds": [
+      "parallel:uranus~venus:parallel"
+    ],
+    "text": "There is a doubt as to whether this aspect should be classed as good or evil, which must be settled in the individual horoscope where it occurs for it may work either way, depending upon the other planetary configurations. If Venus is otherwise afflicted in the horoscope, for instance, the conjunction or parallel will further accentuate her evil qualities, but if she is well placed or aspected Uranus will bring out the nobler side.",
+    "tradition": "modern",
+    "source": {
+      "author": "Max Heindel and Augusta Foss Heindel",
+      "work": "The Message of the Stars",
+      "locus": "Uranus parallel Venus"
     },
     "rights": "pd-us",
     "embed": true

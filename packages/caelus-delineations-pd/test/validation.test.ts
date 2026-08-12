@@ -91,13 +91,15 @@ const specs: SelectorSpec[] = [
   { kind: "nakshatra", body: "moon", name: "Rohini", lord: "moon", pada: 2 },
   { kind: "varga", division: 9, body: "venus", sign: "Pisces" },
   { kind: "yoga", yoga: "gajakesari", body: "jupiter" },
+  { kind: "parallel", a: "venus", b: "jupiter", declination: "parallel" },
+  { kind: "outOfBounds", body: "moon" },
 ];
 for (const s of specs) {
   try { check(typeof selectorFromSpec(s) === "function", `${s.kind} spec compiles`); }
   catch (e) { check(false, `${s.kind} spec threw (${(e as Error).message})`); }
 }
 const SPEC_KINDS = new Set(specs.map((s) => s.kind));
-check(SPEC_KINDS.size === 17, `spec enumeration covers all 17 kinds (${SPEC_KINDS.size})`);
+check(SPEC_KINDS.size === 19, `spec enumeration covers all 19 kinds (${SPEC_KINDS.size})`);
 
 // 3b. The new chart-pure kinds round-trip: a compiled spec matches exactly the
 //     synthetic atom it describes, and not a near-miss.
@@ -140,6 +142,32 @@ check(
 check(
   !selectorFromSpec({ kind: "dignity", facet: "face" })(oneAtomCtx(dignityAtom)).matched,
   "dignity spec filters on `facet`",
+);
+const parallelAtom: FactAtom = {
+  id: "parallel:jupiter~venus:parallel", kind: "parallel",
+  bodies: ["venus", "jupiter"], salience: 2.5,
+  text: "Venus parallel Jupiter", a: "venus", b: "jupiter",
+  declination: "parallel", orb: 0.4,
+};
+const oobAtom: FactAtom = {
+  id: "oob:moon", kind: "outOfBounds", bodies: ["moon"], salience: 4,
+  text: "Moon out of bounds", body: "moon", dec: 27.1, margin: 3.7,
+};
+check(
+  selectorFromSpec({ kind: "parallel", a: "jupiter", b: "venus", declination: "parallel" })(oneAtomCtx(parallelAtom)).matched,
+  "parallel spec matches its atom regardless of pair order",
+);
+check(
+  !selectorFromSpec({ kind: "parallel", declination: "contraparallel" })(oneAtomCtx(parallelAtom)).matched,
+  "parallel spec filters on `declination`",
+);
+check(
+  selectorFromSpec({ kind: "outOfBounds", body: "moon" })(oneAtomCtx(oobAtom)).matched,
+  "outOfBounds spec matches its atom",
+);
+check(
+  !selectorFromSpec({ kind: "outOfBounds", body: "mars" })(oneAtomCtx(oobAtom)).matched,
+  "outOfBounds spec filters on `body`",
 );
 
 // 4. Each planet-in-sign rule (any body) fires for its sign, cites the real
@@ -246,6 +274,32 @@ for (const p of starPassages) {
   const other = w.star === "Algol" ? "Spica" : "Algol";
   const wrong = interpret(starCtx("mars", other), sources).entries.find((e) => e.rule === p.id);
   check(!wrong, `${p.id}: does not fire for ${other}`);
+}
+
+// 4f. Each parallel-of-declination rule fires for its pair (order-free) and
+//     cites the real parallel atom; a contraparallel must not fire it.
+console.log("parallel rules fire");
+function parallelCtx(a: string, b: string, kind: "parallel" | "contraparallel"): InterpretationContext {
+  const [x, y] = [a, b].sort();
+  const atom: FactAtom = {
+    id: `parallel:${x}~${y}:${kind}`, kind: "parallel", bodies: [a, b], salience: 2.5,
+    text: `${a} ${kind} ${b}`, a, b, declination: kind, orb: 0.5,
+  };
+  return { jdUt: 0, zodiac: "tropical", atoms: [atom] };
+}
+const parallelPassages = passages.filter((p) => p.when.kind === "parallel");
+check(parallelPassages.length > 0, "corpus has parallel-of-declination passages");
+for (const p of parallelPassages) {
+  const w = p.when as { a: string; b: string };
+  const entry = interpret(parallelCtx(w.a, w.b, "parallel"), sources).entries.find((e) => e.rule === p.id);
+  check(!!entry, `${p.id}: fires for ${w.a} parallel ${w.b}`);
+  if (entry) {
+    const [x, y] = [w.a, w.b].sort();
+    check(entry.atomIds.includes(`parallel:${x}~${y}:parallel`), `${p.id}: cites the parallel atom`);
+  }
+  const wrong = interpret(parallelCtx(w.a, w.b, "contraparallel"), sources)
+    .entries.find((e) => e.rule === p.id);
+  check(!wrong, `${p.id}: does not fire for a contraparallel`);
 }
 
 // 5. No reading ever cites an atom the projection did not contain.
