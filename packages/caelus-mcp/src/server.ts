@@ -238,6 +238,10 @@ function chartPayload(
     angles: { asc: r2(c.angles.asc), ascPos: fmt(c.angles.asc), mc: r2(c.angles.mc), mcPos: fmt(c.angles.mc) },
     cusps: cusps.map(r2),
     ...(c.unavailable.length ? { unavailable: c.unavailable } : {}),
+    // Validity statements: bodies outside their measured validated span and
+    // the delta-T uncertainty at historical epochs. Absent for modern dates,
+    // so existing payloads (and their frozen goldens) are unchanged.
+    ...(c.warnings.length ? { warnings: c.warnings } : {}),
     // Engine Aspect objects already carry an applying/separating/exact phase
     // (from the two bodies' longitude speeds) and a normalized strength. The
     // extra keys are additive, so the payload still feeds caelus-wheel's
@@ -313,6 +317,10 @@ export const chartOut = z.object({
   cusps: z.array(z.number()).length(12),
   aspects: z.array(aspectOut),
   unavailable: z.array(z.string()).optional(),
+  warnings: z.array(z.object({
+    kind: z.enum(["outside_validated_range", "delta_t_uncertain"]),
+    text: z.string(),
+  }).passthrough()).optional(),
 });
 export const transitsOut = z.object({
   transit_utc: z.string(),

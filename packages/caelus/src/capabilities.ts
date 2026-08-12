@@ -6,21 +6,16 @@
  * bundle carries Meeus Pluto, 1885-2099; a Node install with the Chebyshev
  * pack reaches 1700-2212), and until this module a caller had no way to ask
  * which engine it got. {@link engineCapabilities} answers from the loaded
- * {@link EngineData} plus a static table of *measured* spans -- the figures
- * mirror `docs/range-expansion.md` and `accuracy.json` ("validated, not
- * asserted": these numbers move only when the Horizons measurement does).
+ * {@link EngineData} plus the measured-range table in `ranges.ts`.
  *
  * Fitted spans come from the packs themselves (`jd0 + segments * seg_days`),
  * so a wider future pack reports its true span with no code change.
  */
 import type { Engine } from "./chart.js";
-import { EXTRA_BODIES } from "./chart.js";
-
-/** A calendar-year span, inclusive. */
-export interface BodySpan {
-  from: number;
-  to: number;
-}
+import {
+  HEADLINE, HEADLINE_LABEL, MEASURED, VSOP_BODIES, ANALYTIC_BODIES,
+  packSpan, type BodySpan,
+} from "./ranges.js";
 
 /** The position source active for a body in a given engine's data. */
 export type BodySource =
@@ -47,8 +42,8 @@ export interface BodyCapability {
 export interface EngineCapabilities {
   /** The measured headline range (every default body holds across it). */
   headline: BodySpan;
-  /** The headline as prose, e.g. "1850-2150" (kept in lockstep with
-   *  `accuracy.json` by the claims registry). */
+  /** The headline as prose (kept in lockstep with `accuracy.json` by the
+   *  claims registry via ranges.ts). */
   headlineLabel: string;
   /** Whether the precise-Moon Chebyshev tier is loaded. */
   moonTier: "chebyshev" | "analytic";
@@ -56,36 +51,6 @@ export interface EngineCapabilities {
   plutoTier: "chebyshev" | "meeus";
   /** One entry per body this engine can compute (see {@link Engine.bodies}). */
   bodies: BodyCapability[];
-}
-
-/** The measured headline band. The label is registry-pinned to accuracy.json:
- *  1850-2150. */
-const HEADLINE: BodySpan = { from: 1850, to: 2150 };
-const HEADLINE_LABEL = "1850-2150";
-
-/** Measured spans that are narrower or wider than the headline
- *  (docs/range-expansion.md's table). */
-const MEASURED: Record<string, BodySpan> = {
-  pluto_pack: { from: 1700, to: 2212 },
-  pluto_meeus: { from: 1885, to: 2099 },
-  uranian: { from: 1800, to: 2149 },
-};
-
-const VSOP_BODIES = new Set([
-  "sun", "mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune",
-]);
-const ANALYTIC_BODIES = new Set(["mean_node", "true_node", ...EXTRA_BODIES]);
-
-/** Approximate calendar year for a Julian Day (for reporting spans). */
-function jdYear(jd: number): number {
-  return 2000 + (jd - 2451545.0) / 365.25;
-}
-
-function packSpan(pack: { jd0: number; seg_days: number; segments: unknown[] }): BodySpan {
-  return {
-    from: Math.ceil(jdYear(pack.jd0)),
-    to: Math.floor(jdYear(pack.jd0 + pack.segments.length * pack.seg_days)),
-  };
 }
 
 /**

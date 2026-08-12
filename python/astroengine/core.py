@@ -49,6 +49,29 @@ _DT_OBS = [
 ]
 
 
+def delta_t_sigma(year):
+    """One-sigma uncertainty of delta T in seconds at a calendar year.
+
+    Breakpoints from Morrison & Stephenson (2004, J. Hist. Astron. 35),
+    Table 1's sigma column; telescopic era tapers to the IERS span, future
+    grows quadratically from the measured end (stated extrapolation).
+    Mirrors ranges.ts deltaTSigma in the TS engine.
+    """
+    table = [(-1000, 640), (-500, 430), (0, 260), (500, 160), (1000, 55),
+             (1200, 30), (1400, 20), (1600, 20), (1700, 5), (1750, 2),
+             (1800, 1), (1850, 0.5), (1900, 0.1), (2025, 0.05)]
+    if year <= table[0][0]:
+        return table[0][1]
+    last_y, last_s = table[-1]
+    if year > last_y:
+        t = (year - last_y) / 50
+        return last_s + 2.0 * t * t
+    for (y0, s0), (y1, s1) in zip(table, table[1:]):
+        if year <= y1:
+            return s0 + (s1 - s0) * (year - y0) / (y1 - y0)
+    return last_s
+
+
 def delta_t(jd_ut):
     """TT - UT1 in seconds. Observed values 1955-2025 (linear interpolation),
     Espenak & Meeus (2006) polynomials before, gentle extrapolation after."""

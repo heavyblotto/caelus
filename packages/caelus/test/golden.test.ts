@@ -14,6 +14,7 @@ import { Engine, BODIES, Body, DEFAULT_ORBS, ASPECTS, SIGNS, NOT_ASPECTABLE } fr
 import { aspectPhase } from "../src/electional.js";
 import { declinationAspects, outOfBounds } from "../src/derived.js";
 import { engineCapabilities } from "../src/capabilities.js";
+import { deltaTSigma } from "../src/ranges.js";
 import { interpretationContext } from "../src/interpretation.js";
 import {
   transitAspects, synastryAspects, synastryOverlays, compositePlacements,
@@ -494,6 +495,31 @@ for (const g of G.houses) {
     console.error(
       `FAIL pluto pack degradation: 1650 unavailable=${JSON.stringify(pre1700.unavailable)}`,
     );
+  }
+
+  // Validity warnings: an out-of-range chart states what is unvalidated and
+  // how uncertain delta-T is; a modern chart states nothing.
+  if (inRange.warnings.length !== 0) {
+    failures++;
+    console.error(`FAIL modern chart warnings: ${JSON.stringify(inRange.warnings)}`);
+  }
+  {
+    const rangeWarn = pre1700.warnings.filter((w) => w.kind === "outside_validated_range");
+    const dtWarn = pre1700.warnings.find((w) => w.kind === "delta_t_uncertain");
+    const warnedBodies = new Set(rangeWarn.map((w) => (w as { body: string }).body));
+    // 1650 < 1850: every VSOP body and the Moon are computed-but-unvalidated;
+    // nodes are analytic with no stated bound (never warned).
+    if (!warnedBodies.has("sun") || !warnedBodies.has("moon")
+      || warnedBodies.has("mean_node") || warnedBodies.has("pluto") /* absent, not warned */
+      || !dtWarn || (dtWarn as { sigmaSeconds: number }).sigmaSeconds < 5) {
+      failures++;
+      console.error(`FAIL 1650 warnings: ${JSON.stringify(pre1700.warnings)}`);
+    }
+  }
+  // deltaTSigma pins to the published Morrison & Stephenson (2004) sigmas at
+  // the breakpoints (the table itself is the oracle) and interpolates between.
+  for (const [y, s] of [[0, 260], [1000, 55], [1600, 20], [500, 160], [800, 97]] as const) {
+    expect(`deltaTSigma(${y})`, deltaTSigma(y), s, 1e-9);
   }
 
   let threw = false;

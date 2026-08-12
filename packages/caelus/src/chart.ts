@@ -10,6 +10,7 @@ import {
 } from "./core.js";
 import { starApparent } from "./stars.js";
 import { angularSeparation3d } from "./spherical.js";
+import { validatedSpanFor, deltaTSigma, jdYear } from "./ranges.js";
 import type { SyntheticRender } from "./synthetic.js";
 import { hermeticLots, HERMETIC_LOTS } from "./lots.js";
 import * as H from "./houses.js";
@@ -268,8 +269,14 @@ export interface Chart {
   /** Body ids that were requested but omitted because the instant falls outside
    *  their fitted range (e.g. Chiron and other Chebyshev-packed bodies before
    *  ~1850 or after ~2150). Empty for the usual modern dates. The analytic
-   *  bodies (Sun through Pluto and the nodes) are always present. */
+   *  bodies (Sun through Neptune and the nodes) are always present. */
   unavailable: string[];
+  /** Validity statements about this chart: bodies computed outside their
+   *  measured validated span, and the delta-T uncertainty at historical
+   *  epochs. Empty for the usual modern dates. The chart still computes --
+   *  these are data, not errors -- but a consumer must not present a warned
+   *  position as validated. */
+  warnings: ChartWarning[];
   /** Chart angles in degrees: Ascendant, Midheaven, Vertex, East Point. */
   angles: { asc: number; mc: number; vertex: number; eastPoint: number };
   /** The twelve house cusp longitudes in degrees, house 1 first. */
@@ -277,6 +284,30 @@ export interface Chart {
   /** Aspects found among the bodies, within the active orbs. */
   aspects: Aspect[];
 }
+
+/** One validity statement on a {@link Chart} (see {@link Chart.warnings}). */
+export type ChartWarning =
+  | {
+    kind: "outside_validated_range";
+    /** The body whose position is computed but unvalidated at this instant. */
+    body: string;
+    /** The measured span it sits outside (calendar years). */
+    validated: { from: number; to: number };
+    text: string;
+  }
+  | {
+    kind: "delta_t_uncertain";
+    /** One-sigma delta-T uncertainty at this epoch, seconds (Morrison &
+     *  Stephenson 2004 for historical years; stated extrapolation beyond
+     *  the measured tables). */
+    sigmaSeconds: number;
+    /** The positional consequence for the fastest movers: the angles rotate
+     *  0.25 deg per minute of clock error, degrees. */
+    angleSmearDeg: number;
+    /** The Moon's smear over the same clock error, arcminutes. */
+    moonSmearArcmin: number;
+    text: string;
+  };
 
 const KM_PER_AU = 149597870.7;
 
@@ -898,6 +929,7 @@ export class Engine {
       houseSystemRequested: houseSystem,
       bodies: chartBodies as ChartBodies,
       unavailable,
+      warnings: chartWarnings(jdUt, Object.keys(chartBodies), this.data),
       angles: {
         asc: outDeg(asc), mc: outDeg(mc),
         vertex: outDeg(vtx), eastPoint: outDeg(east),
@@ -908,6 +940,50 @@ export class Engine {
       }),
     };
   }
+}
+
+/**
+ * Validity statements for a chart: which present bodies sit outside their
+ * measured validated span at this instant, and whether delta-T uncertainty
+ * is large enough to smear the fast movers. The analytic series keep
+ * returning numbers out of range -- that silence was the problem; a 150 CE
+ * chart used to succeed with unvalidated positions and a ~2.5 h delta-T
+ * extrapolation and no signal anywhere. Compute, don't clamp: the chart
+ * still succeeds, the warning is data.
+ */
+function chartWarnings(
+  jdUt: number, present: string[], data: EngineData,
+): ChartWarning[] {
+  const year = jdYear(jdUt);
+  const warnings: ChartWarning[] = [];
+  for (const body of present) {
+    const span = validatedSpanFor(body, data);
+    if (span && (year < span.from || year > span.to)) {
+      warnings.push({
+        kind: "outside_validated_range", body, validated: span,
+        text: `${body} is outside its validated range (${span.from}-${span.to}) `
+          + "at this instant: the position is computed but not validated here",
+      });
+    }
+  }
+  // The angles rotate 0.25 deg per minute of clock error; the Moon moves
+  // ~0.55 arcsec per second. Report sigma once it matters at chart scale
+  // (>= 10 s, i.e. roughly pre-1700 epochs).
+  const sigma = deltaTSigma(year);
+  if (sigma >= 10) {
+    const angleSmearDeg = Math.round((sigma / 60) * 0.25 * 100) / 100;
+    const moonSmearArcmin = Math.round((sigma * 0.55 / 60) * 100) / 100;
+    warnings.push({
+      kind: "delta_t_uncertain",
+      sigmaSeconds: Math.round(sigma),
+      angleSmearDeg,
+      moonSmearArcmin,
+      text: `delta-T is uncertain by ~${Math.round(sigma)} s at this epoch `
+        + `(Morrison & Stephenson 2004): the Ascendant/MC smear ~${angleSmearDeg} deg `
+        + `and the Moon ~${moonSmearArcmin} arcmin, while the slow bodies are unaffected`,
+    });
+  }
+  return warnings;
 }
 
 /** 1-based house for an ecliptic longitude (degrees) given the twelve cusp
