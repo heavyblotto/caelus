@@ -135,13 +135,18 @@ class HorizonsCache:
         try:
             with open(self.path) as f:
                 data = json.load(f)
-            # Reuse only if the cache is the same body AND covers the span; the
-            # JD range alone is not enough -- a stale wrong-body cache (e.g. a
-            # 999-vs-barycenter Pluto run) would otherwise be used silently.
+            # Reuse only if the cache is the same body AND covers the span AND
+            # was sampled at least as finely; the JD range alone is not enough
+            # -- a stale wrong-body cache (e.g. a 999-vs-barycenter Pluto run)
+            # would otherwise be used silently, and so would a coarser one. The
+            # step matters because sample() interpolates linearly between rows:
+            # a 1-day cache serving a 6-hour request would quietly reintroduce
+            # the interpolation error the finer step was requested to remove.
             if (
                 data.get("body") == self.label
                 and data["jd0"] <= jd0
                 and data["jd1"] >= need_hi
+                and data.get("step", 1.0) <= step + 1e-9
             ):
                 self._jds = np.array(data["jds"])
                 self._xs = np.array(data["x"])

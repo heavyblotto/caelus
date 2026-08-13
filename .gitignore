@@ -60,4 +60,11 @@ conformance-stats.json
 packages/caelus-mcp/eval/report.json
 packages/caelus-mcp/eval/report.md
 python/moon_horizons_cache.json
+# Wide-tier Horizons sample caches. The default-window caches (chiron, the
+# asteroids, the 1700-2200 Pluto) stay committed for reproducibility at a few
+# MB each, but the wide spans are far larger -- 21 MB per small body at 1-day
+# steps, 84 MB at 6-hour, 47 MB for Pluto over 1000-3000, ~430 MB in total --
+# and are re-derivable from Horizons by re-running the fit scripts. The packs
+# they produce ARE committed, which is what consumers and the goldens need.
+python/*_horizons_cache_[0-9]*.json
 .vercel
