@@ -9,7 +9,12 @@ epochs, compares engine.position()'s ra/dec, and writes
 horizons-accuracy.json. Needs ssd.jpl.nasa.gov — run locally; the sample
 cache (~1 MB) is committed for reproducibility.
 
-Usage: python3 validate_horizons.py
+Usage: python3 validate_horizons.py [--wide] [--astrometric]
+
+--wide adds the 1000-3000 band (run after minting the wide packs).
+--astrometric switches the whole run to the frame-free comparison (Horizons
+quantity 1, ICRF astrometric; separate cache and output file) -- see the
+ASTRO note below for why wide-band *validated* claims move on this basis.
 """
 import json
 import math
@@ -97,12 +102,13 @@ def _band_of(year):
     return "1000-3000 wide"
 
 
-def fetch(command, jds):
+def fetch(command, jds, quantities="2"):
     tlist = ",".join(f"'{jd:.9f}'" for jd in jds)
     params = {
         "format": "text", "COMMAND": f"'{command}'", "OBJ_DATA": "NO",
         "MAKE_EPHEM": "YES", "EPHEM_TYPE": "OBSERVER", "CENTER": "'500@399'",
-        "QUANTITIES": "'2'", "REF_SYSTEM": "'ICRF'", "CAL_FORMAT": "'JD'",
+        "QUANTITIES": f"'{quantities}'", "REF_SYSTEM": "'ICRF'",
+        "CAL_FORMAT": "'JD'",
         "ANG_FORMAT": "'DEG'", "EXTRA_PREC": "'YES'",
         "APPARENT": "'AIRLESS'", "TIME_TYPE": "'TT'", "TLIST": tlist,
     }
@@ -125,6 +131,80 @@ SMALLBODY_FLOOR_JD = julian_day(1600, 1, 1)
 SMALLBODY_CEILING_JD = julian_day(2500, 1, 1)
 BAND_ORDER = ["1850-2150", "1900-2099", "1800-2200 edges", "1000-3000 wide"]
 WIDE = "--wide" in sys.argv
+# --astrometric: the FRAME-FREE comparison. Horizons' *apparent* RA/Dec keeps
+# the IAU 1976/1980 precession-nutation convention, while the engine precesses
+# with Vondrak 2011 (the family Swiss Ephemeris uses); the two place the
+# equinox-of-date apart by ~2-3.7" at the 1000/3000 edges, so at wide epochs
+# the apparent comparison measures convention disagreement, not position error
+# (range-expansion.md, "What the wide-band error actually is"). Astrometric
+# RA/Dec (Horizons quantity 1: ICRF, light-time only -- no aberration, no
+# deflection, no precession/nutation) removes the of-date frame from the
+# oracle entirely; the engine side stops its pipeline at the same point. This
+# is the measurement wide-band *validated* claims should move on.
+ASTRO = "--astrometric" in sys.argv
+ASTRO_CACHE = os.path.join(HERE, "horizons_astrometric_cache.json")
+
+_EPS_J2000 = math.radians(84381.448 / 3600.0)  # ecliptic J2000 <-> equatorial
+
+
+def _earth_j2000_xyz(eng, jde):
+    """VSOP Earth rotated of-date -> ecliptic J2000, AU (the same leg the
+    packed-body pipeline uses)."""
+    from astroengine import core
+    L, B, R = eng.vsop.heliocentric("earth", jde)
+    Lj, Bj = core._precess_ecliptic(L, B, jde, core.J2000)
+    cb = math.cos(Bj)
+    return R * cb * math.cos(Lj), R * cb * math.sin(Lj), R * math.sin(Bj)
+
+
+def astrometric_radec(eng, name, jde):
+    """Engine-side astrometric quantity: geocentric direction with light-time
+    only, ecliptic J2000 -> ICRF equatorial RA/Dec in degrees. Raises
+    ValueError outside a packed body's fitted span (skipped per-sample, like
+    the apparent path). VSOP-sourced bodies reach J2000 through the engine's
+    Vondrak rotation, so this measures the engine's own J2000 realization."""
+    from astroengine import core
+    if name == "moon":
+        cheb = core._moon_cheb()
+        if not cheb:
+            raise ValueError("no precise moon pack")
+        x, y, z = cheb.xyz(jde)  # geocentric ecliptic J2000, km
+        tau = math.sqrt(x * x + y * y + z * z) / core.C_KM_PER_DAY
+        gx, gy, gz = cheb.xyz(jde - tau)
+    elif name == "sun":
+        ex, ey, ez = _earth_j2000_xyz(eng, jde)
+        gx, gy, gz = -ex, -ey, -ez
+    else:
+        if name in ("pluto", "chiron") or eng._has_pack(name) \
+                or name in ("ceres", "pallas", "juno", "vesta", "pholus"):
+            if name == "chiron":
+                if core._CHIRON is None:
+                    core.chiron_apparent(eng.vsop, jde)  # loads the fit
+                src = core._CHIRON.xyz
+            else:
+                src = eng._pack(name).xyz
+        else:
+            def src(t):
+                L, B, R = eng.vsop.heliocentric(name, t)
+                Lj, Bj = core._precess_ecliptic(L, B, t, core.J2000)
+                cb = math.cos(Bj)
+                return (R * cb * math.cos(Lj), R * cb * math.sin(Lj),
+                        R * math.sin(Bj))
+        ex, ey, ez = _earth_j2000_xyz(eng, jde)
+        px, py, pz = src(jde)
+        gx, gy, gz = px - ex, py - ey, pz - ez
+        for _ in range(2):
+            tau = math.sqrt(gx * gx + gy * gy + gz * gz) * core.LIGHT_TIME_AU
+            px, py, pz = src(jde - tau)
+            gx, gy, gz = px - ex, py - ey, pz - ez
+    # ecliptic J2000 -> equatorial J2000 (~ICRF; the constant frame bias is
+    # ~0.02", far below every bound here)
+    s, c = math.sin(_EPS_J2000), math.cos(_EPS_J2000)
+    qx, qy, qz = gx, gy * c - gz * s, gy * s + gz * c
+    r = math.sqrt(qx * qx + qy * qy + qz * qz)
+    ra = math.degrees(math.atan2(qy, qx)) % 360.0
+    dec = math.degrees(math.asin(qz / r))
+    return ra, dec
 
 
 def _needed(name):
@@ -148,7 +228,7 @@ def _needed(name):
     return jds
 
 
-def _save(cache):
+def _save(cache, path):
     """Write the sample cache atomically.
 
     The fetch loop checkpoints after every request so a long run is resumable,
@@ -157,14 +237,15 @@ def _save(cache):
     Write to a sibling temp file and rename: the cache is either the old one
     or the new one, never a partial.
     """
-    tmp = CACHE + ".tmp"
+    tmp = path + ".tmp"
     with open(tmp, "w") as f:
         json.dump(cache, f)
-    os.replace(tmp, CACHE)
+    os.replace(tmp, path)
 
 
 def main():
-    cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
+    cache_path = ASTRO_CACHE if ASTRO else CACHE
+    cache = json.load(open(cache_path)) if os.path.exists(cache_path) else {}
     # Pluto moved from body center (999) to barycenter (9) to match the engine's
     # Chebyshev pack (the 6.39-day Charon wobble of 999 is not in the pack); drop
     # any pre-switch rows so Pluto refetches against the barycenter.
@@ -186,31 +267,41 @@ def main():
         miss = [jd for jd in _needed(name) if round(jd, 3) not in have]
         if miss:
             for i in range(0, len(miss), 40):  # keep TLIST requests modest
-                rows.extend(fetch(cmd, miss[i:i + 40]))
-                _save(cache | {name: rows})
+                rows.extend(fetch(cmd, miss[i:i + 40],
+                                  quantities="1" if ASTRO else "2"))
+                _save(cache | {name: rows}, cache_path)
                 time.sleep(0.2)
             cache[name] = rows
-            _save(cache)
+            _save(cache, cache_path)
 
     eng = Engine("full")
     worst = {}   # (band, body) -> worst arcsec
     for name in BODIES:
         for (jd, ra_h, dec_h) in cache.get(name, []):
             band = _band_of(int(1900 + (jd - J1900) / 365.25))
-            jd_ut = jd - delta_t(jd) / 86400.0  # engine takes UT
             try:
-                p = eng.position(name, jd_ut)
+                if ASTRO:
+                    # frame-free: both sides in ICRF J2000, TT direct
+                    ra_e, dec_e = astrometric_radec(eng, name, jd)
+                else:
+                    jd_ut = jd - delta_t(jd) / 86400.0  # engine takes UT
+                    p = eng.position(name, jd_ut)
+                    ra_e, dec_e = p["ra"], p["dec"]
             except ValueError:
                 continue  # epoch outside a body's pack range; not measured here
-            dra = abs(((p["ra"] - ra_h + 180) % 360 - 180)) * \
+            dra = abs(((ra_e - ra_h + 180) % 360 - 180)) * \
                 math.cos(math.radians(dec_h)) * 3600
-            ddec = abs(p["dec"] - dec_h) * 3600
+            ddec = abs(dec_e - dec_h) * 3600
             worst[(band, name)] = max(worst.get((band, name), 0.0),
                                       math.hypot(dra, ddec))
 
-    out = {"basis": "JPL Horizons apparent geocentric RA/Dec (airless), TT epochs; "
-                    "Pluto vs barycenter (9)",
-           "bands": {}}
+    basis = ("JPL Horizons astrometric geocentric RA/Dec (ICRF, light-time "
+             "only), TT epochs; frame-free -- no of-date precession-nutation "
+             "convention on either side; Pluto vs barycenter (9)"
+             if ASTRO else
+             "JPL Horizons apparent geocentric RA/Dec (airless), TT epochs; "
+             "Pluto vs barycenter (9)")
+    out = {"basis": basis, "bands": {}}
     counts = {"1900-2099": len(EPOCHS_TT), "1850-2150": len(EXT_EPOCHS),
               "1800-2200 edges": len(EDGE_EPOCHS),
               "1000-3000 wide": len(WIDE_EPOCHS)}
@@ -224,10 +315,12 @@ def main():
                 print(f"  {n:9s} worst vs JPL {bodies[n]:8.3f}\"")
         out["bands"][band] = {"epochs": counts[band],
                               "bodies": {n: bodies[n] for n in BODIES if n in bodies}}
-    with open(os.path.join(HERE, "..", "packages", "caelus",
-                           "horizons-accuracy.json"), "w") as f:
+    out_name = ("horizons-astrometric-accuracy.json" if ASTRO
+                else "horizons-accuracy.json")
+    with open(os.path.join(HERE, "..", "packages", "caelus", out_name),
+              "w") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
-    print("\n-> packages/caelus/horizons-accuracy.json")
+    print(f"\n-> packages/caelus/{out_name}")
 
 
 if __name__ == "__main__":
