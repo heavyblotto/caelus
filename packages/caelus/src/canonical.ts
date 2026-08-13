@@ -322,52 +322,92 @@ function strengthPerMille(orbUnits: number, limitUnits: number): number {
 const render = (grid: CanonicalGrid, unitsVal: number): number | [number, number, number] =>
   grid === "dms" ? dmsTriple(unitsVal) : unitsVal;
 
-/**
- * Project a {@link Chart} into canonical (integer) form on a declared grid.
- * Every continuous quantity quantizes under the single rounding rule; sign,
- * sign-degree, house, dignities, retrograde, and the aspect list are then
- * re-derived from the quantized values in integer arithmetic, so displayed
- * numbers and discrete facts cannot disagree and one-ulp platform drift
- * cannot flip anything.
- *
- * @param chart A chart from {@link Engine.chart} / {@link Engine.chartAt}.
- * @param opts Grid (default `"arcsec"`) and the aspect options the chart was
- *   computed with.
- * @returns The {@link CanonicalChart}; feed it to {@link canonicalDigest}
- *   for a content address.
- */
-export function canonicalChart(chart: Chart, opts: CanonicalOptions = {}): CanonicalChart {
-  const grid = opts.grid ?? "arcsec";
+/** Quantized-but-underived chart state: every frontier leaf as an integer in
+ *  grid units, before the discrete facts are derived. This is the seam the
+ *  remainder machinery composes through -- {@link composeRemainders} rebuilds
+ *  a finer-grid state and feeds it to the SAME derivation as
+ *  {@link canonicalChart}. */
+interface QuantBody {
+  lon: number; lat: number; speed: number;
+  latSpeed: number | null; distMicroAu: number | null;
+  ra: number; dec: number;
+}
+interface QuantState {
+  timeMs: number;
+  zodiac: string; houseSystem: string; houseSystemRequested: string;
+  unavailable: string[];
+  warnings: Array<Record<string, unknown>>;
+  bodies: Record<string, QuantBody>;
+  angles: { asc: number; mc: number; vertex: number; eastPoint: number };
+  cusps: number[];
+}
+
+function quantizeChart(chart: Chart, grid: CanonicalGrid): QuantState {
+  const bodies: Record<string, QuantBody> = {};
+  for (const [id, p] of Object.entries(chart.bodies)) {
+    if (!p) continue;
+    bodies[id] = {
+      lon: qAngle(grid, p.lon, id),
+      lat: qSigned(grid, p.lat, id),
+      speed: qSigned(grid, p.speed, id),
+      latSpeed: p.latSpeed === undefined ? null : qSigned(grid, p.latSpeed, id),
+      distMicroAu: p.dist === null ? null : roundHalfUp(p.dist * 1e6),
+      ra: qAngle(grid, p.ra, id),
+      dec: qSigned(grid, p.dec, id),
+    };
+  }
+  const warnings = chart.warnings.map((w: ChartWarning) => {
+    if (w.kind === "delta_t_uncertain") {
+      return {
+        kind: w.kind, text: w.text, sigmaSeconds: w.sigmaSeconds,
+        angleSmearCentideg: roundHalfUp(w.angleSmearDeg * 100),
+        moonSmearCentiarcmin: roundHalfUp(w.moonSmearArcmin * 100),
+      };
+    }
+    return { kind: w.kind, body: w.body, validated: w.validated, text: w.text };
+  });
+  return {
+    timeMs: canonicalTimeMs(chart.jdUt),
+    zodiac: chart.zodiac,
+    houseSystem: chart.houseSystem,
+    houseSystemRequested: chart.houseSystemRequested,
+    unavailable: [...chart.unavailable].sort(),
+    warnings,
+    bodies,
+    angles: {
+      asc: qAngle(grid, chart.angles.asc),
+      mc: qAngle(grid, chart.angles.mc),
+      vertex: qAngle(grid, chart.angles.vertex),
+      eastPoint: qAngle(grid, chart.angles.eastPoint),
+    },
+    cusps: chart.cusps.map((c) => qAngle(grid, c)),
+  };
+}
+
+/** Derive the full canonical payload from quantized state -- pure integer
+ *  arithmetic from here down, shared by {@link canonicalChart} and
+ *  {@link composeRemainders}. */
+function buildCanonical(state: QuantState, grid: CanonicalGrid, opts: CanonicalOptions): CanonicalChart {
   const scale = UNITS_PER_DEG[grid];
   const full = 360 * scale;
   const signSpan = 30 * scale;
+  const cuspsQ = state.cusps;
 
-  const cuspsQ = chart.cusps.map((c) => qAngle(grid, c));
   const bodies: Record<string, CanonicalBody> = {};
-  const lonQ: Record<string, number> = {};
-  const latQ: Record<string, number> = {};
-  const speedQ: Record<string, number> = {};
-  const latSpeedQ: Record<string, number> = {};
-
-  for (const [id, p] of Object.entries(chart.bodies)) {
-    if (!p) continue;
-    lonQ[id] = qAngle(grid, p.lon, id);
-    latQ[id] = qSigned(grid, p.lat, id);
-    speedQ[id] = qSigned(grid, p.speed, id);
-    latSpeedQ[id] = qSigned(grid, p.latSpeed ?? 0, id);
-    const signIdx = Math.floor(lonQ[id] / signSpan) % 12;
+  for (const [id, q] of Object.entries(state.bodies)) {
+    const signIdx = Math.floor(q.lon / signSpan) % 12;
     bodies[id] = {
-      lon: render(grid, lonQ[id]),
-      lat: render(grid, latQ[id]),
-      speed: speedQ[id],
-      latSpeed: p.latSpeed === undefined ? null : latSpeedQ[id],
-      distMicroAu: p.dist === null ? null : roundHalfUp(p.dist * 1e6),
-      ra: render(grid, qAngle(grid, p.ra, id)),
-      dec: render(grid, qSigned(grid, p.dec, id)),
+      lon: render(grid, q.lon),
+      lat: render(grid, q.lat),
+      speed: q.speed,
+      latSpeed: q.latSpeed,
+      distMicroAu: q.distMicroAu,
+      ra: render(grid, q.ra),
+      dec: render(grid, q.dec),
       sign: SIGNS[signIdx],
-      signDeg: render(grid, lonQ[id] - signIdx * signSpan),
-      house: houseOfQ(lonQ[id], cuspsQ, full),
-      retrograde: speedQ[id] < 0,
+      signDeg: render(grid, q.lon - signIdx * signSpan),
+      house: houseOfQ(q.lon, cuspsQ, full),
+      retrograde: q.speed < 0,
       dignities: dignities(id, signIdx),
     };
   }
@@ -381,16 +421,17 @@ export function canonicalChart(chart: Chart, opts: CanonicalOptions = {}): Canon
   for (let i = 0; i < names.length; i++) {
     for (let j = i + 1; j < names.length; j++) {
       const a = names[i]; const b = names[j];
+      const qa = state.bodies[a]; const qb = state.bodies[b];
       let sepUnits: number;
       if (spatial) {
         // The 3D separation of the QUANTIZED positions, quantized once more
         // onto the grid -- deterministic because the inputs are integers.
         const sep = angularSeparation3d(
-          lonQ[a] / scale, latQ[a] / scale, lonQ[b] / scale, latQ[b] / scale,
+          qa.lon / scale, qa.lat / scale, qb.lon / scale, qb.lat / scale,
         );
         sepUnits = quantizeUnit(sep, scale);
       } else {
-        const e = (((lonQ[a] - lonQ[b] + full / 2) % full) + full) % full - full / 2;
+        const e = (((qa.lon - qb.lon + full / 2) % full) + full) % full - full / 2;
         sepUnits = Math.abs(e);
       }
       for (const [asp, angleDeg] of Object.entries(table)) {
@@ -407,8 +448,8 @@ export function canonicalChart(chart: Chart, opts: CanonicalOptions = {}): Canon
             // Longitude-derived closing rate on quantized speeds; in spatial
             // mode this is the same documented approximation findAspects makes
             // when no time derivative is available.
-            const e = (((lonQ[a] - lonQ[b] + full / 2) % full) + full) % full - full / 2;
-            const d = (signedOrb >= 0 ? 1 : -1) * (e >= 0 ? 1 : -1) * (speedQ[a] - speedQ[b]);
+            const e = (((qa.lon - qb.lon + full / 2) % full) + full) % full - full / 2;
+            const d = (signedOrb >= 0 ? 1 : -1) * (e >= 0 ? 1 : -1) * (qa.speed - qb.speed);
             phase = d < 0 ? "applying" : "separating";
           }
           aspects.push({
@@ -420,17 +461,6 @@ export function canonicalChart(chart: Chart, opts: CanonicalOptions = {}): Canon
     }
   }
 
-  const warnings = chart.warnings.map((w: ChartWarning) => {
-    if (w.kind === "delta_t_uncertain") {
-      return {
-        kind: w.kind, text: w.text, sigmaSeconds: w.sigmaSeconds,
-        angleSmearCentideg: roundHalfUp(w.angleSmearDeg * 100),
-        moonSmearCentiarcmin: roundHalfUp(w.moonSmearArcmin * 100),
-      };
-    }
-    return { kind: w.kind, body: w.body, validated: w.validated, text: w.text };
-  });
-
   return {
     format: "caelus-canonical",
     version: 1,
@@ -440,22 +470,41 @@ export function canonicalChart(chart: Chart, opts: CanonicalOptions = {}): Canon
       time: "ms since J2000.0 (JD 2451545.0 UT)", dist: "micro-AU",
       strength: "per-mille",
     },
-    timeMs: canonicalTimeMs(chart.jdUt),
-    zodiac: chart.zodiac,
-    houseSystem: chart.houseSystem,
-    houseSystemRequested: chart.houseSystemRequested,
+    timeMs: state.timeMs,
+    zodiac: state.zodiac,
+    houseSystem: state.houseSystem,
+    houseSystemRequested: state.houseSystemRequested,
     bodies,
-    unavailable: [...chart.unavailable].sort(),
+    unavailable: state.unavailable,
     angles: {
-      asc: render(grid, qAngle(grid, chart.angles.asc)),
-      mc: render(grid, qAngle(grid, chart.angles.mc)),
-      vertex: render(grid, qAngle(grid, chart.angles.vertex)),
-      eastPoint: render(grid, qAngle(grid, chart.angles.eastPoint)),
+      asc: render(grid, state.angles.asc),
+      mc: render(grid, state.angles.mc),
+      vertex: render(grid, state.angles.vertex),
+      eastPoint: render(grid, state.angles.eastPoint),
     },
     cusps: cuspsQ.map((c) => render(grid, c)),
     aspects,
-    warnings,
+    warnings: state.warnings,
   };
+}
+
+/**
+ * Project a {@link Chart} into canonical (integer) form on a declared grid.
+ * Every continuous quantity quantizes under the single rounding rule; sign,
+ * sign-degree, house, dignities, retrograde, and the aspect list are then
+ * re-derived from the quantized values in integer arithmetic, so displayed
+ * numbers and discrete facts cannot disagree and one-ulp platform drift
+ * cannot flip anything.
+ *
+ * @param chart A chart from {@link Engine.chart} / {@link Engine.chartAt}.
+ * @param opts Grid (default `"arcsec"`) and the aspect options the chart was
+ *   computed with.
+ * @returns The {@link CanonicalChart}; feed it to {@link canonicalDigest}
+ *   for a content address.
+ */
+export function canonicalChart(chart: Chart, opts: CanonicalOptions = {}): CanonicalChart {
+  const grid = opts.grid ?? "arcsec";
+  return buildCanonical(quantizeChart(chart, grid), grid, opts);
 }
 
 /** Content address of a chart: sha256 over the canonical encoding of
@@ -472,4 +521,365 @@ export function chartDigest(chart: Chart, opts: CanonicalOptions = {}): string {
  *  sets stays null). */
 export function canonicalTimesMs(jds: Array<number | null>): Array<number | null> {
   return jds.map((jd) => (jd === null ? null : canonicalTimeMs(jd)));
+}
+
+// ------------------------------------------------------------ remainder sets
+//
+// Canonical mode is residual coding: the canonical payload is the base layer,
+// and the remainder set is the optional enhancement layer holding what
+// quantization discarded. Two modes:
+//
+//  - "refine" (default): each residue is an INTEGER in sub-quanta of a finer
+//    grid, so the sidecar is itself canonical (encodable, digestable, float-
+//    free) and grids telescope: compose(base payload, residues) rebuilds the
+//    finer-grid payload EXACTLY, discrete facts re-derived and all. Time
+//    residues are always integer microseconds, distance residues always
+//    integer nano-AU (both payloads carry ms / micro-AU regardless of grid,
+//    so these two are pure precision escrow rather than telescoping).
+//  - "bits": the pre-quantization IEEE 754 double of every frontier leaf,
+//    big-endian hex. Truly lossless, but the bits are per-platform artifacts
+//    (libm drift lives exactly here), so bits mode is a local archival /
+//    forensics tool, never a cross-platform contract -- and it is exposed on
+//    the engine API only, not over MCP.
+//
+// The frontier -- which leaves have residues -- is precisely the set of
+// independently quantized scalars: body lon/lat/speed/latSpeed/dist/ra/dec,
+// the four angles, the twelve cusps, and timeMs. Derived integers (sign,
+// signDeg, house, dignities, retrograde, the whole aspect block) are exact
+// functions of the frontier and carry no residue by construction; warnings
+// quantize at fixed coarse advisory scales and are excluded.
+//
+// Requesting remainders never changes a byte of the base payload: the
+// sidecar is additive, and binds to the payload via `for` (its digest).
+
+/** Grids that can serve as refinement targets. A remainder grid must be
+ *  strictly finer than the base grid. */
+export type RemainderGrid = "arcsec" | "milliarcsec";
+
+/** Strict fineness order for refinement validation: "accuracy" is coarser
+ *  than plain "arcsec" (the per-body snap discards more), "dms" IS arcsec. */
+const FINENESS: Record<CanonicalGrid, number> = {
+  centideg: 0, accuracy: 1, dms: 2, arcsec: 2, milliarcsec: 3,
+};
+
+/** One step finer, the default refinement target per base grid. There is no
+ *  integer grid finer than milliarcsec -- refining it takes `"bits"`. */
+const DEFAULT_REMAINDER: Partial<Record<CanonicalGrid, RemainderGrid>> = {
+  centideg: "arcsec", accuracy: "arcsec", dms: "milliarcsec", arcsec: "milliarcsec",
+};
+
+export interface RefineRemainders {
+  format: "caelus-remainders";
+  version: 1;
+  mode: "refine";
+  /** Digest of the base payload this sidecar belongs to; {@link composeRemainders}
+   *  refuses a mismatch. */
+  for: string;
+  grid: CanonicalGrid;
+  remainderGrid: RemainderGrid;
+  units: { angle: string; speed: string; time: string; dist: string };
+  /** Flat path -> integer residue, one entry per frontier leaf (zeros kept,
+   *  so completeness is checkable). Angle residues are the signed shortest
+   *  modular distance, so a longitude at the 360-degree wrap stays small. */
+  values: Record<string, number>;
+}
+
+export interface BitsRemainders {
+  format: "caelus-remainders";
+  version: 1;
+  mode: "bits";
+  for: string;
+  grid: CanonicalGrid;
+  units: { encoding: string; angle: string; speed: string; time: string; dist: string };
+  /** Flat path -> big-endian hex of the pre-quantization IEEE 754 double. */
+  values: Record<string, string>;
+}
+
+export type CanonicalRemainders = RefineRemainders | BitsRemainders;
+
+export interface RemainderOptions extends CanonicalOptions {
+  /** Refinement target grid, `"bits"` for exact doubles, or omitted for one
+   *  step finer than the base grid. */
+  remainder?: RemainderGrid | "bits";
+}
+
+/** IEEE 754 binary64 bit pattern of a double, big-endian, 16 hex chars. */
+export function doubleBitsHex(x: number): string {
+  const view = new DataView(new ArrayBuffer(8));
+  view.setFloat64(0, x);
+  let s = "";
+  for (let i = 0; i < 8; i++) s += view.getUint8(i).toString(16).padStart(2, "0");
+  return s;
+}
+
+/** Inverse of {@link doubleBitsHex} -- exact round-trip, `-0` included. */
+export function doubleFromBitsHex(hex: string): number {
+  const view = new DataView(new ArrayBuffer(8));
+  for (let i = 0; i < 8; i++) view.setUint8(i, parseInt(hex.slice(2 * i, 2 * i + 2), 16));
+  return view.getFloat64(0);
+}
+
+type LeafKind = "angle" | "signed" | "time" | "dist";
+interface FrontierLeaf { path: string; kind: LeafKind; body: string | null }
+
+/** Enumerate the quantization frontier of a payload, in payload order. */
+function frontierLeaves(payload: CanonicalChart): FrontierLeaf[] {
+  const leaves: FrontierLeaf[] = [{ path: "timeMs", kind: "time", body: null }];
+  for (const [id, b] of Object.entries(payload.bodies)) {
+    leaves.push({ path: `bodies.${id}.lon`, kind: "angle", body: id });
+    leaves.push({ path: `bodies.${id}.lat`, kind: "signed", body: id });
+    leaves.push({ path: `bodies.${id}.speed`, kind: "signed", body: id });
+    if (b.latSpeed !== null) leaves.push({ path: `bodies.${id}.latSpeed`, kind: "signed", body: id });
+    if (b.distMicroAu !== null) leaves.push({ path: `bodies.${id}.distMicroAu`, kind: "dist", body: id });
+    leaves.push({ path: `bodies.${id}.ra`, kind: "angle", body: id });
+    leaves.push({ path: `bodies.${id}.dec`, kind: "signed", body: id });
+  }
+  for (const k of Object.keys(payload.angles)) leaves.push({ path: `angles.${k}`, kind: "angle", body: null });
+  for (let i = 0; i < payload.cusps.length; i++) leaves.push({ path: `cusps.${i}`, kind: "angle", body: null });
+  return leaves;
+}
+
+/** Base-grid integer for a rendered leaf ("dms" triples recompose). */
+const asUnits = (v: number | [number, number, number]): number =>
+  Array.isArray(v) ? v[0] * 3600 + v[1] * 60 + v[2] : v;
+
+function leafValue(payload: CanonicalChart, path: string): number {
+  const parts = path.split(".");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let node: any = payload;
+  for (const p of parts) node = node[p];
+  return asUnits(node);
+}
+
+/** The pre-quantization double behind a frontier leaf. */
+function leafFloat(chart: Chart, path: string): number {
+  if (path === "timeMs") return (chart.jdUt - 2451545.0) * 86_400_000;
+  const parts = path.split(".");
+  if (parts[0] === "bodies") {
+    const p = chart.bodies[parts[1]];
+    if (!p) throw new Error(`leafFloat: body ${parts[1]} missing`);
+    switch (parts[2]) {
+      case "lon": return p.lon;
+      case "lat": return p.lat;
+      case "speed": return p.speed;
+      case "latSpeed": return p.latSpeed as number;
+      case "distMicroAu": return p.dist as number; // AU
+      case "ra": return p.ra;
+      case "dec": return p.dec;
+    }
+  }
+  if (parts[0] === "angles") return chart.angles[parts[1] as keyof Chart["angles"]];
+  if (parts[0] === "cusps") return chart.cusps[Number(parts[1])];
+  throw new Error(`leafFloat: unknown path ${path}`);
+}
+
+/** Signed shortest modular distance, centered on zero: [-full/2, full/2). */
+function modSigned(d: number, full: number): number {
+  return ((((d % full) + full + full / 2) % full) - full / 2);
+}
+
+/**
+ * Canonical payload plus its remainder set. In `"refine"` mode (default:
+ * one grid finer than the base) each residue is the integer difference
+ * between the finer-grid quantization and the base leaf lifted onto the
+ * finer grid, so `finer = ratio * base + residue` exactly and
+ * {@link composeRemainders} can rebuild the finer payload. Time residues are
+ * integer microseconds, distance residues integer nano-AU, always. In
+ * `"bits"` mode each value is the pre-quantization double as big-endian hex
+ * (lossless, platform-local, engine-API-only).
+ */
+export function canonicalChartWithRemainders(
+  chart: Chart, opts: RemainderOptions = {},
+): { payload: CanonicalChart; remainders: CanonicalRemainders } {
+  const grid = opts.grid ?? "arcsec";
+  const payload = canonicalChart(chart, opts);
+  const forDigest = canonicalDigest(payload);
+  const leaves = frontierLeaves(payload);
+
+  const mode = opts.remainder ?? DEFAULT_REMAINDER[grid];
+  if (mode === undefined) {
+    throw new Error(
+      `canonicalChartWithRemainders: no integer grid is finer than "${grid}"; pass remainder: "bits" for exact doubles`,
+    );
+  }
+
+  if (mode === "bits") {
+    const values: Record<string, string> = {};
+    for (const leaf of leaves) values[leaf.path] = doubleBitsHex(leafFloat(chart, leaf.path));
+    return {
+      payload,
+      remainders: {
+        format: "caelus-remainders", version: 1, mode: "bits",
+        for: forDigest, grid,
+        units: {
+          encoding: "IEEE 754 binary64, big-endian hex",
+          angle: "deg", speed: "deg/day",
+          time: "ms since J2000.0 (JD 2451545.0 UT)", dist: "AU",
+        },
+        values,
+      },
+    };
+  }
+
+  if (FINENESS[mode] <= FINENESS[grid]) {
+    throw new Error(`canonicalChartWithRemainders: remainder grid "${mode}" is not finer than base grid "${grid}"`);
+  }
+  const fineScale = UNITS_PER_DEG[mode];
+  const ratio = fineScale / UNITS_PER_DEG[grid];
+  const fullF = 360 * fineScale;
+  const values: Record<string, number> = {};
+  for (const leaf of leaves) {
+    const base = leafValue(payload, leaf.path);
+    const x = leafFloat(chart, leaf.path);
+    if (leaf.kind === "time") {
+      values[leaf.path] = roundHalfUp(x * 1000) - 1000 * base; // microseconds
+    } else if (leaf.kind === "dist") {
+      values[leaf.path] = roundHalfUp(x * 1e9) - 1000 * base; // nano-AU
+    } else if (leaf.kind === "angle") {
+      values[leaf.path] = modSigned(qAngle(mode, x) - ratio * base, fullF);
+    } else {
+      values[leaf.path] = qSigned(mode, x) - ratio * base;
+    }
+  }
+  return {
+    payload,
+    remainders: {
+      format: "caelus-remainders", version: 1, mode: "refine",
+      for: forDigest, grid, remainderGrid: mode,
+      units: {
+        angle: UNIT_NAMES[mode], speed: `${UNIT_NAMES[mode]}/day`,
+        time: "microsecond", dist: "nano-AU",
+      },
+      values,
+    },
+  };
+}
+
+/**
+ * Rebuild the finer-grid canonical payload from a base payload and its
+ * refinement remainder set: every frontier leaf is reconstructed as
+ * `ratio * base + residue` (modular for angles), then sign, house,
+ * dignities, retrograde, and the aspect list are re-derived in integer
+ * arithmetic exactly as {@link canonicalChart} would at that grid. Pass the
+ * same `orbs`/`aspects`/`separation` options the base was built with.
+ *
+ * The result equals `canonicalChart(chart, { grid: remainders.remainderGrid })`
+ * field for field -- the telescoping property the canonical-golden pins.
+ * Time stays integer ms and distance micro-AU in the composed payload (both
+ * are grid-independent); their microsecond / nano-AU residues are precision
+ * escrow readable straight off the sidecar.
+ *
+ * Throws if the sidecar is a bits set, binds to a different payload, or its
+ * key set does not exactly match the payload's frontier.
+ */
+export function composeRemainders(
+  payload: CanonicalChart, remainders: CanonicalRemainders, opts: CanonicalOptions = {},
+): CanonicalChart {
+  if (remainders.mode !== "refine") {
+    throw new Error("composeRemainders: bits remainders reconstruct doubles, not a finer grid; decode with doubleFromBitsHex");
+  }
+  if (remainders.grid !== payload.grid) {
+    throw new Error(`composeRemainders: sidecar grid "${remainders.grid}" != payload grid "${payload.grid}"`);
+  }
+  if (remainders.for !== canonicalDigest(payload)) {
+    throw new Error("composeRemainders: sidecar binds to a different payload (digest mismatch)");
+  }
+  const rGrid = remainders.remainderGrid;
+  const fineScale = UNITS_PER_DEG[rGrid];
+  const ratio = fineScale / UNITS_PER_DEG[payload.grid];
+  const fullF = 360 * fineScale;
+
+  const leaves = frontierLeaves(payload);
+  for (const leaf of leaves) {
+    if (!(leaf.path in remainders.values)) {
+      throw new Error(`composeRemainders: sidecar missing frontier leaf ${leaf.path}`);
+    }
+  }
+  if (Object.keys(remainders.values).length !== leaves.length) {
+    throw new Error("composeRemainders: sidecar has keys outside the payload's frontier");
+  }
+
+  const angleF = (path: string): number =>
+    ((ratio * leafValue(payload, path) + remainders.values[path]) % fullF + fullF) % fullF;
+  const signedF = (path: string): number =>
+    ratio * leafValue(payload, path) + remainders.values[path];
+
+  const bodies: Record<string, QuantBody> = {};
+  for (const [id, b] of Object.entries(payload.bodies)) {
+    bodies[id] = {
+      lon: angleF(`bodies.${id}.lon`),
+      lat: signedF(`bodies.${id}.lat`),
+      speed: signedF(`bodies.${id}.speed`),
+      latSpeed: b.latSpeed === null ? null : signedF(`bodies.${id}.latSpeed`),
+      distMicroAu: b.distMicroAu,
+      ra: angleF(`bodies.${id}.ra`),
+      dec: signedF(`bodies.${id}.dec`),
+    };
+  }
+  const state: QuantState = {
+    timeMs: payload.timeMs,
+    zodiac: payload.zodiac,
+    houseSystem: payload.houseSystem,
+    houseSystemRequested: payload.houseSystemRequested,
+    unavailable: payload.unavailable,
+    warnings: payload.warnings,
+    bodies,
+    angles: {
+      asc: angleF("angles.asc"), mc: angleF("angles.mc"),
+      vertex: angleF("angles.vertex"), eastPoint: angleF("angles.eastPoint"),
+    },
+    cusps: payload.cusps.map((_, i) => angleF(`cusps.${i}`)),
+  };
+  return buildCanonical(state, rGrid, opts);
+}
+
+export interface BoundaryFlag {
+  path: string;
+  /** The residue itself, in sidecar sub-quanta. */
+  residue: number;
+  /** The base-grid quantum expressed in sidecar sub-quanta (per-body on the
+   *  "accuracy" grid; 1000 for time and distance leaves). */
+  quantum: number;
+  /** floor(1000 * (quantum - 2|residue|) / quantum): 0 = exactly on a
+   *  rounding boundary, 1000 = dead center of the quantum. */
+  marginPerMille: number;
+  /** +1: the value sits just below a boundary (a platform computing it a
+   *  hair higher rounds UP); -1: just above one; 0: dead center. */
+  side: -1 | 0 | 1;
+}
+
+/**
+ * Fragility report from a refinement remainder set: frontier leaves whose
+ * value landed close to a base-grid rounding boundary, i.e. the places where
+ * sub-quantum drift on another platform could flip the quantized leaf (and
+ * with it a sign, a house, or an aspect at its orb limit -- which is exactly
+ * a digest change). Pure integer arithmetic; needs only the sidecar.
+ *
+ * @param opts.maxMarginPerMille report leaves with margin at or under this
+ *   (default 10, i.e. within 1% of the quantum of a boundary).
+ */
+export function nearBoundary(
+  remainders: RefineRemainders, opts: { maxMarginPerMille?: number } = {},
+): BoundaryFlag[] {
+  if (remainders.mode !== "refine") {
+    throw new Error("nearBoundary: needs a refinement remainder set (bits carry no grid geometry)");
+  }
+  const maxPm = opts.maxMarginPerMille ?? 10;
+  const ratio = UNITS_PER_DEG[remainders.remainderGrid] / UNITS_PER_DEG[remainders.grid];
+  const out: BoundaryFlag[] = [];
+  for (const [path, r] of Object.entries(remainders.values)) {
+    let quantum: number;
+    if (path === "timeMs" || path.endsWith(".distMicroAu")) {
+      quantum = 1000;
+    } else {
+      const body = path.startsWith("bodies.") ? path.split(".")[1] : null;
+      quantum = quantumFor(remainders.grid, body) * ratio;
+    }
+    const marginPerMille = Math.floor((1000 * (quantum - 2 * Math.abs(r))) / quantum);
+    if (marginPerMille <= maxPm) {
+      out.push({ path, residue: r, quantum, marginPerMille, side: Math.sign(r) as -1 | 0 | 1 });
+    }
+  }
+  out.sort((a, b) => a.marginPerMille - b.marginPerMille || (a.path < b.path ? -1 : 1));
+  return out;
 }

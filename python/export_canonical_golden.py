@@ -97,6 +97,53 @@ def main():
         "result": digests,
     })
 
+    # 6. Remainder sets: sidecar digests and the telescoping property for
+    #    every (chart x base grid) pair at the default refinement target,
+    #    with the full sidecar pinned value-for-value for one chart. The
+    #    compose digest must equal the finer grid's own chart digest -- the
+    #    residues are PROVABLY the difference between two grids.
+    rem_bases = ["arcsec", "centideg", "dms", "accuracy"]
+    rem_digests = {}
+    for spec in CHARTS:
+        chart = eng.chart_at(julian_day(*spec["jd"]), spec["lat"], spec["lon"],
+                             spec["hs"], zodiac=spec["zodiac"])
+        for base in rem_bases:
+            payload, rem = C.canonical_chart_with_remainders(chart, grid=base)
+            composed = C.compose_remainders(payload, rem)
+            rem_digests[f'{spec["id"]}/{base}'] = {
+                "remainderGrid": rem["remainderGrid"],
+                "sidecar": C.canonical_digest(rem),
+                "composed": C.canonical_digest(composed),
+            }
+            if spec["id"] == "tampa-1990" and base == "arcsec":
+                out["cases"].append({
+                    "id": "remainder-sidecar-full", "type": "remainder-full",
+                    "spec": {**spec, "grid": base},
+                    "result": rem,
+                })
+                out["cases"].append({
+                    "id": "near-boundary-full", "type": "near-boundary",
+                    "spec": {**spec, "grid": base, "maxMarginPerMille": 1000},
+                    "result": C.near_boundary(rem, max_margin_per_mille=1000),
+                })
+    out["cases"].append({
+        "id": "remainder-digests", "type": "remainder-digests",
+        "spec": {"charts": CHARTS, "bases": rem_bases},
+        "result": rem_digests,
+    })
+
+    # 7. Bits encoding vectors: pins the TS DataView hex against Python
+    #    struct for fixed doubles (identical literals in both languages),
+    #    including -0.0, a subnormal, and the rationals that expose repr
+    #    differences.
+    bits_values = [0.0, -0.0, 1.0, -1.0, 0.1, 0.5, 2.0, 1e9,
+                   5e-324, 3.141592653589793, 359.99999999999997]
+    out["cases"].append({
+        "id": "bits-vectors", "type": "bits",
+        "spec": {"values": bits_values},
+        "result": [C.double_bits_hex(v) for v in bits_values],
+    })
+
     for c in out["cases"]:
         print(f'{c["id"]:28s} ok')
     path = os.path.join(os.path.dirname(__file__), "..", "packages", "caelus",

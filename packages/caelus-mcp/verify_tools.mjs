@@ -19,6 +19,7 @@ import {
   lots, HERMETIC_LOTS,
   profectionAt, firdaria, firdariaActive,
   zrRelease, zrAt, SIGNS, canonicalDigest, chartDigest,
+  composeRemainders, nearBoundary,
   primaryDirections, mundaneDirections, KEYS,
   nakshatra, vimshottariDashas, vimshottariAt,
   yoginiDashas, yoginiAt, ashtottariDashas, ashtottariAt,
@@ -780,6 +781,44 @@ const assertExactHits = (hits, body, targetLonAt, angle, label, tolDeg = 0.02) =
   assert(r.format === "caelus-canonical" && r.returnsMs.every(Number.isInteger)
     && r.chart && r.chart.format === "caelus-canonical",
     "canonical returns: integer instants + canonical return chart");
+
+  // Remainder sets: the optional residual layer. Refinement mode only over
+  // MCP (bits is engine-API-only); the sidecar is additive (base digest
+  // unchanged), integer-only, digest-bound, and telescopes: compose equals
+  // the finer grid computed directly.
+  const withRem = await call("natal_chart", { ...args, remainders: "auto" });
+  assert(withRem.digest === digest,
+    "remainders: requesting the sidecar never changes the base digest");
+  const rem = withRem.remainders;
+  assert(rem && rem.format === "caelus-remainders" && rem.mode === "refine"
+    && rem.remainderGrid === "milliarcsec",
+    "remainders: auto over arcsec refines to milliarcsec");
+  assert(rem.for === withRem.digest, "remainders: sidecar binds to the payload digest");
+  assert(Object.values(rem.values).every((v) => Number.isInteger(v) && 2 * Math.abs(v) <= 1000),
+    "remainders: every residue is an integer within half a quantum");
+  const { digest: _d2, remainders: _rem2, ...remBase } = withRem;
+  const composed = composeRemainders(remBase, rem);
+  const fine = await call("natal_chart", { ...args, grid: "milliarcsec" });
+  assert(canonicalDigest(composed) === fine.digest,
+    "remainders: compose(payload, sidecar) equals the finer-grid chart");
+  assert(Array.isArray(nearBoundary(rem)), "remainders: nearBoundary reads the sidecar");
+  const acc = await call("natal_chart", { ...args, grid: "accuracy", remainders: "arcsec" });
+  assert(acc.remainders.remainderGrid === "arcsec"
+    && Object.values(acc.remainders.values).every(Number.isInteger),
+    "remainders: explicit arcsec refinement over the accuracy grid");
+  let bitsRejected = false;
+  try { await call("natal_chart", { ...args, remainders: "bits" }); }
+  catch { bitsRejected = true; }
+  assert(bitsRejected, "remainders: bits mode is engine-API-only, rejected over MCP");
+  const rRem = await call("returns", {
+    date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46, body: "sun",
+    search_start: "2024-01-01T00:00:00Z", search_end: "2024-12-31T00:00:00Z",
+    output: "canonical", remainders: "auto",
+  });
+  assert(rRem.digest === r.digest,
+    "remainders: returns outer digest unchanged by the sidecar");
+  assert(rRem.remainders && rRem.remainders.for === rRem.chart.digest,
+    "remainders: returns sidecar binds to the inner chart digest");
 }
 
 await client.close();

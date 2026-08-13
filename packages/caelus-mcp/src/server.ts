@@ -45,7 +45,8 @@ import {
   validateSyntheticSystem, syntheticPositions, syntheticEphemeris,
   registerSyntheticSystem, engineCapabilities,
   canonicalChart, canonicalDigest, canonicalTimeMs, quantizeUnit,
-  type SyntheticSystem, type CanonicalGrid,
+  canonicalChartWithRemainders,
+  type SyntheticSystem, type CanonicalGrid, type RemainderGrid,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -143,6 +144,14 @@ const gridSchema = z.enum(["arcsec", "milliarcsec", "centideg", "dms", "accuracy
     + "milliarcsec, centideg, dms ([deg,min,sec] triples), or accuracy "
     + "(each body snapped to its measured validated accuracy — the most "
     + "portable choice for cross-platform content addressing)");
+const remaindersSchema = z.enum(["auto", "arcsec", "milliarcsec"]).optional()
+  .describe("With output:'canonical': also return the remainder set — the "
+    + "integer sub-quantum residues quantization discarded, keyed by leaf "
+    + "path and bound to the payload digest. 'auto' picks one grid finer "
+    + "than the base; or name the refinement grid (must be strictly finer). "
+    + "Residues telescope: composeRemainders(payload, remainders) rebuilds "
+    + "the finer-grid payload exactly. Time residues are integer "
+    + "microseconds, distance residues integer nano-AU");
 // Jyotish techniques (nakshatras, vargas, dashas, yogas) are sidereal by
 // definition; default these tools to Lahiri rather than tropical.
 const siderealZodiac = z.enum(ZODIACS).default("sidereal:lahiri")
@@ -275,6 +284,7 @@ function canonicalChartPayload(
   iso: string, lat: number, lon: number, hs: string,
   zodiac: ZodiacT, separation: "longitude" | "spatial" | undefined,
   grid: CanonicalGrid,
+  remainders?: "auto" | RemainderGrid,
 ) {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) throw new Error(`Invalid date: ${iso}`);
@@ -283,6 +293,17 @@ function canonicalChartPayload(
     d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(), lat, lon,
     { houseSystem: normalizeHouseSystem(hs), zodiac, separation },
   );
+  if (remainders !== undefined) {
+    // Refinement residues only over MCP -- bits mode is engine-API-only
+    // (platform-local doubles have no business on a portable surface). The
+    // sidecar sits beside the digest, OUTSIDE the digested body, and binds
+    // to it via its `for` field.
+    const { payload, remainders: rem } = canonicalChartWithRemainders(c, {
+      grid, separation,
+      remainder: remainders === "auto" ? undefined : remainders,
+    });
+    return { ...payload, digest: canonicalDigest(payload), remainders: rem };
+  }
   const cc = canonicalChart(c, { grid, separation });
   return { ...cc, digest: canonicalDigest(cc) };
 }
@@ -882,12 +903,12 @@ export function buildServer(
     inputSchema: {
       ...birth, house_system: houseSys, zodiac: zodiacSchema,
       separation: separationSchema,
-      output: outputSchema, grid: gridSchema,
+      output: outputSchema, grid: gridSchema, remainders: remaindersSchema,
     },
     _meta: CHART_TOOL_META,
-  }, async ({ date, lat, lon, house_system, zodiac, separation, output, grid }) =>
+  }, async ({ date, lat, lon, house_system, zodiac, separation, output, grid, remainders }) =>
     output === "canonical"
-      ? text(canonicalChartPayload(engine, date, lat, lon, house_system, zodiac, separation, grid))
+      ? text(canonicalChartPayload(engine, date, lat, lon, house_system, zodiac, separation, grid, remainders))
       : chartResult(chartPayload(engine, date, lat, lon, house_system, zodiac, separation)));
 
   server.registerTool("current_sky", {
@@ -900,12 +921,12 @@ export function buildServer(
       house_system: houseSys,
       zodiac: zodiacSchema,
       separation: separationSchema,
-      output: outputSchema, grid: gridSchema,
+      output: outputSchema, grid: gridSchema, remainders: remaindersSchema,
     },
     _meta: CHART_TOOL_META,
-  }, async ({ date, lat, lon, house_system, zodiac, separation, output, grid }) =>
+  }, async ({ date, lat, lon, house_system, zodiac, separation, output, grid, remainders }) =>
     output === "canonical"
-      ? text(canonicalChartPayload(engine, date ?? new Date().toISOString(), lat, lon, house_system, zodiac, separation, grid))
+      ? text(canonicalChartPayload(engine, date ?? new Date().toISOString(), lat, lon, house_system, zodiac, separation, grid, remainders))
       : chartResult(chartPayload(engine, date ?? new Date().toISOString(), lat, lon, house_system, zodiac, separation)));
 
   server.registerTool("sky_view", {
@@ -1393,9 +1414,9 @@ export function buildServer(
       return_lon: lonSchema.optional().describe("Longitude (EAST positive) for the return chart; defaults to the birth longitude"),
       house_system: houseSys,
       zodiac: zodiacSchema,
-      output: outputSchema, grid: gridSchema,
+      output: outputSchema, grid: gridSchema, remainders: remaindersSchema,
     },
-  }, async ({ date, lat, lon, body, search_start, search_end, return_lat, return_lon, house_system, zodiac, output, grid }) => {
+  }, async ({ date, lat, lon, body, search_start, search_end, return_lat, return_lon, house_system, zodiac, output, grid, remainders }) => {
     const natalJd = jdFromIso(date);
     const jd0 = jdFromIso(search_start);
     const jd1 = jdFromIso(search_end);
@@ -1406,7 +1427,19 @@ export function buildServer(
     const rLon = return_lon ?? lon;
     if (output === "canonical") {
       // Return instants as integer ms; the return chart in full canonical
-      // form; digest over the whole body.
+      // form; digest over the whole body. A requested remainder set is
+      // lifted OUTSIDE the digested body (its `for` binds to chart.digest),
+      // so asking for remainders never changes the outer digest.
+      const chartFull = instants.length
+        ? canonicalChartPayload(engine, isoFromJd(instants[0]), rLat, rLon, house_system, zodiac, undefined, grid, remainders)
+        : null;
+      let chartRem;
+      let chartBody = chartFull;
+      if (chartFull && "remainders" in chartFull) {
+        const { remainders: r, ...rest } = chartFull;
+        chartRem = r;
+        chartBody = rest;
+      }
       const payload = {
         format: "caelus-canonical", version: 1,
         units: { time: "ms since J2000.0 (JD 2451545.0 UT)", place: "centidegree" },
@@ -1415,11 +1448,12 @@ export function buildServer(
         returnLatCentideg: quantizeUnit(rLat, 100),
         returnLonCentideg: quantizeUnit(rLon, 100),
         returnsMs: instants.map(canonicalTimeMs),
-        chart: instants.length
-          ? canonicalChartPayload(engine, isoFromJd(instants[0]), rLat, rLon, house_system, zodiac, undefined, grid)
-          : null,
+        chart: chartBody,
       };
-      return text({ ...payload, digest: canonicalDigest(payload) });
+      return text({
+        ...payload, digest: canonicalDigest(payload),
+        ...(chartRem !== undefined ? { remainders: chartRem } : {}),
+      });
     }
     const returnsIso = instants.map(isoFromJd);
     const chart = instants.length

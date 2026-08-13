@@ -298,6 +298,19 @@ numbers and discrete facts cannot disagree. `verify_tools` pins the MCP
 digest equal to the engine's own `chartDigest`, no float anywhere in the
 payload, and cross-call stability. See `docs/canonical-mode.md`.
 
+The chart tools additionally take `remainders: "auto" | "arcsec" |
+"milliarcsec"`: the optional remainder set — integer sub-quantum residues
+quantization discarded, one per independently quantized leaf, keyed by path
+and bound to the payload `digest` via `for`. Residues telescope
+(`composeRemainders(payload, remainders)` rebuilds the finer-grid payload
+exactly; time residues are integer microseconds, distance residues integer
+nano-AU), the sidecar rides outside the digested body so requesting it never
+changes the digest (on `returns` it sits top-level and binds to
+`chart.digest`), and `nearBoundary` turns it into a rounding-boundary
+fragility report. Bits mode (exact IEEE 754 doubles) exists on the engine
+API only and never crosses MCP. All pinned by `verify_tools` and the
+`canonical-golden` remainder cases.
+
 ## Parans harvest
 `parans` surfaces the co-angular engine math that shipped in 0.17.0 (Roadmap
 Phase 4b named it; the tool surface lagged the engine): every pair of bodies

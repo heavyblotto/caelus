@@ -143,40 +143,79 @@ def _strength_per_mille(orb_units, limit_units):
     return (2000 * (limit_units - orb_units) + limit_units) // (2 * limit_units)
 
 
-def canonical_chart(chart, grid="arcsec", orbs=None, aspects=None,
-                    separation="longitude"):
-    """Project a chart dict (Engine.chart_at output) into canonical integer
-    form. Mirrors canonicalChart in canonical.ts field for field."""
-    scale = UNITS_PER_DEG[grid]
-    full = 360 * scale
-    sign_span = 30 * scale
-
-    cusps_q = [_q_angle(grid, c) for c in chart["cusps"]]
+def _quantize_chart(chart, grid):
+    """Quantized-but-underived state: every frontier leaf as an integer in
+    grid units. The seam the remainder machinery composes through --
+    compose_remainders rebuilds a finer-grid state and feeds it to the SAME
+    derivation as canonical_chart. Mirrors quantizeChart in canonical.ts."""
     bodies = {}
-    lon_q = {}
-    lat_q = {}
-    speed_q = {}
-
     for body_id, p in chart["bodies"].items():
         if p is None:
             continue
-        lon_q[body_id] = _q_angle(grid, p["lon"], body_id)
-        lat_q[body_id] = _q_signed(grid, p["lat"], body_id)
-        speed_q[body_id] = _q_signed(grid, p["speed"], body_id)
         lat_speed = p.get("lat_speed")
-        sign_idx = (lon_q[body_id] // sign_span) % 12
         bodies[body_id] = {
-            "lon": _render(grid, lon_q[body_id]),
-            "lat": _render(grid, lat_q[body_id]),
-            "speed": speed_q[body_id],
+            "lon": _q_angle(grid, p["lon"], body_id),
+            "lat": _q_signed(grid, p["lat"], body_id),
+            "speed": _q_signed(grid, p["speed"], body_id),
             "latSpeed": None if lat_speed is None else _q_signed(grid, lat_speed, body_id),
             "distMicroAu": None if p["dist"] is None else round_half_up(p["dist"] * 1e6),
-            "ra": _render(grid, _q_angle(grid, p["ra"], body_id)),
-            "dec": _render(grid, _q_signed(grid, p["dec"], body_id)),
+            "ra": _q_angle(grid, p["ra"], body_id),
+            "dec": _q_signed(grid, p["dec"], body_id),
+        }
+    warnings = []
+    for w in chart.get("warnings", []):
+        if w.get("kind") == "delta_t_uncertain":
+            warnings.append({
+                "kind": w["kind"], "text": w["text"],
+                "sigmaSeconds": w["sigmaSeconds"],
+                "angleSmearCentideg": round_half_up(w["angleSmearDeg"] * 100),
+                "moonSmearCentiarcmin": round_half_up(w["moonSmearArcmin"] * 100),
+            })
+        else:
+            warnings.append({"kind": w["kind"], "body": w.get("body"),
+                             "validated": w.get("validated"), "text": w["text"]})
+    return {
+        "timeMs": canonical_time_ms(chart["jd_ut"]),
+        "zodiac": chart["zodiac"],
+        "houseSystem": chart["house_system"],
+        "houseSystemRequested": chart["house_system_requested"],
+        "unavailable": sorted(chart.get("unavailable", [])),
+        "warnings": warnings,
+        "bodies": bodies,
+        "angles": {
+            "asc": _q_angle(grid, chart["angles"]["asc"]),
+            "mc": _q_angle(grid, chart["angles"]["mc"]),
+            "vertex": _q_angle(grid, chart["angles"]["vertex"]),
+            "eastPoint": _q_angle(grid, chart["angles"]["east_point"]),
+        },
+        "cusps": [_q_angle(grid, c) for c in chart["cusps"]],
+    }
+
+
+def _build_canonical(state, grid, orbs=None, aspects=None,
+                     separation="longitude"):
+    """Derive the full canonical payload from quantized state -- pure integer
+    arithmetic, shared by canonical_chart and compose_remainders."""
+    scale = UNITS_PER_DEG[grid]
+    full = 360 * scale
+    sign_span = 30 * scale
+    cusps_q = state["cusps"]
+
+    bodies = {}
+    for body_id, q in state["bodies"].items():
+        sign_idx = (q["lon"] // sign_span) % 12
+        bodies[body_id] = {
+            "lon": _render(grid, q["lon"]),
+            "lat": _render(grid, q["lat"]),
+            "speed": q["speed"],
+            "latSpeed": q["latSpeed"],
+            "distMicroAu": q["distMicroAu"],
+            "ra": _render(grid, q["ra"]),
+            "dec": _render(grid, q["dec"]),
             "sign": SIGNS[sign_idx],
-            "signDeg": _render(grid, lon_q[body_id] - sign_idx * sign_span),
-            "house": _house_of_q(lon_q[body_id], cusps_q, full),
-            "retrograde": speed_q[body_id] < 0,
+            "signDeg": _render(grid, q["lon"] - sign_idx * sign_span),
+            "house": _house_of_q(q["lon"], cusps_q, full),
+            "retrograde": q["speed"] < 0,
             "dignities": dignities(body_id, sign_idx),
         }
 
@@ -190,12 +229,14 @@ def canonical_chart(chart, grid="arcsec", orbs=None, aspects=None,
     out_aspects = []
     for i, a in enumerate(names):
         for b in names[i + 1:]:
+            qa = state["bodies"][a]
+            qb = state["bodies"][b]
             if spatial:
-                sep = angular_separation_3d(lon_q[a] / scale, lat_q[a] / scale,
-                                            lon_q[b] / scale, lat_q[b] / scale)
+                sep = angular_separation_3d(qa["lon"] / scale, qa["lat"] / scale,
+                                            qb["lon"] / scale, qb["lat"] / scale)
                 sep_units = quantize_unit(sep, scale)
             else:
-                e = (lon_q[a] - lon_q[b] + full // 2) % full - full // 2
+                e = (qa["lon"] - qb["lon"] + full // 2) % full - full // 2
                 sep_units = abs(e)
             for asp, angle_deg in table.items():
                 limit_deg = orb_source.get(asp)
@@ -209,28 +250,15 @@ def canonical_chart(chart, grid="arcsec", orbs=None, aspects=None,
                     if signed_orb == 0:
                         phase = "exact"
                     else:
-                        e = (lon_q[a] - lon_q[b] + full // 2) % full - full // 2
+                        e = (qa["lon"] - qb["lon"] + full // 2) % full - full // 2
                         d = ((1 if signed_orb >= 0 else -1) * (1 if e >= 0 else -1)
-                             * (speed_q[a] - speed_q[b]))
+                             * (qa["speed"] - qb["speed"]))
                         phase = "applying" if d < 0 else "separating"
                     out_aspects.append({
                         "a": a, "b": b, "aspect": asp, "orb": orb_units,
                         "phase": phase,
                         "strengthPerMille": _strength_per_mille(orb_units, limit_units),
                     })
-
-    warnings = []
-    for w in chart.get("warnings", []):
-        if w.get("kind") == "delta_t_uncertain":
-            warnings.append({
-                "kind": w["kind"], "text": w["text"],
-                "sigmaSeconds": w["sigmaSeconds"],
-                "angleSmearCentideg": round_half_up(w["angleSmearDeg"] * 100),
-                "moonSmearCentiarcmin": round_half_up(w["moonSmearArcmin"] * 100),
-            })
-        else:
-            warnings.append({"kind": w["kind"], "body": w.get("body"),
-                             "validated": w.get("validated"), "text": w["text"]})
 
     return {
         "format": "caelus-canonical",
@@ -241,22 +269,30 @@ def canonical_chart(chart, grid="arcsec", orbs=None, aspects=None,
             "time": "ms since J2000.0 (JD 2451545.0 UT)", "dist": "micro-AU",
             "strength": "per-mille",
         },
-        "timeMs": canonical_time_ms(chart["jd_ut"]),
-        "zodiac": chart["zodiac"],
-        "houseSystem": chart["house_system"],
-        "houseSystemRequested": chart["house_system_requested"],
+        "timeMs": state["timeMs"],
+        "zodiac": state["zodiac"],
+        "houseSystem": state["houseSystem"],
+        "houseSystemRequested": state["houseSystemRequested"],
         "bodies": bodies,
-        "unavailable": sorted(chart.get("unavailable", [])),
+        "unavailable": state["unavailable"],
         "angles": {
-            "asc": _render(grid, _q_angle(grid, chart["angles"]["asc"])),
-            "mc": _render(grid, _q_angle(grid, chart["angles"]["mc"])),
-            "vertex": _render(grid, _q_angle(grid, chart["angles"]["vertex"])),
-            "eastPoint": _render(grid, _q_angle(grid, chart["angles"]["east_point"])),
+            "asc": _render(grid, state["angles"]["asc"]),
+            "mc": _render(grid, state["angles"]["mc"]),
+            "vertex": _render(grid, state["angles"]["vertex"]),
+            "eastPoint": _render(grid, state["angles"]["eastPoint"]),
         },
         "cusps": [_render(grid, c) for c in cusps_q],
         "aspects": out_aspects,
-        "warnings": warnings,
+        "warnings": state["warnings"],
     }
+
+
+def canonical_chart(chart, grid="arcsec", orbs=None, aspects=None,
+                    separation="longitude"):
+    """Project a chart dict (Engine.chart_at output) into canonical integer
+    form. Mirrors canonicalChart in canonical.ts field for field."""
+    return _build_canonical(_quantize_chart(chart, grid), grid, orbs=orbs,
+                            aspects=aspects, separation=separation)
 
 
 def chart_digest(chart, grid="arcsec", orbs=None, aspects=None,
@@ -270,3 +306,250 @@ def chart_digest(chart, grid="arcsec", orbs=None, aspects=None,
 def canonical_times_ms(jds):
     """Quantize event instants (JD UT, None passes through) to integer ms."""
     return [None if jd is None else canonical_time_ms(jd) for jd in jds]
+
+
+# ------------------------------------------------------------ remainder sets
+#
+# Residual coding on top of canonical mode: the payload is the base layer,
+# the remainder set the optional enhancement layer holding what quantization
+# discarded. "refine" residues are INTEGERS in sub-quanta of a finer grid
+# (sidecar itself canonical; grids telescope: compose = the finer payload
+# exactly); "bits" is the pre-quantization IEEE 754 double per leaf as
+# big-endian hex (lossless, platform-local, engine-API-only). Time residues
+# are always integer microseconds, distance residues integer nano-AU. The
+# frontier is exactly the set of independently quantized scalars; derived
+# integers carry no residue by construction, warnings are excluded. See
+# canonical.ts for the full rationale.
+
+import struct
+
+# "accuracy" is coarser than plain "arcsec" (per-body snap); "dms" IS arcsec.
+_FINENESS = {"centideg": 0, "accuracy": 1, "dms": 2, "arcsec": 2,
+             "milliarcsec": 3}
+
+_DEFAULT_REMAINDER = {"centideg": "arcsec", "accuracy": "arcsec",
+                      "dms": "milliarcsec", "arcsec": "milliarcsec"}
+
+_ANGLE_KEY_TO_CHART = {"asc": "asc", "mc": "mc", "vertex": "vertex",
+                       "eastPoint": "east_point"}
+
+
+def double_bits_hex(x):
+    """IEEE 754 binary64 bit pattern, big-endian, 16 hex chars."""
+    return struct.pack(">d", x).hex()
+
+
+def double_from_bits_hex(h):
+    """Inverse of double_bits_hex -- exact round-trip, -0.0 included."""
+    return struct.unpack(">d", bytes.fromhex(h))[0]
+
+
+def _frontier_leaves(payload):
+    """(path, kind, body) triples for the quantization frontier, in payload
+    order. kind is one of angle | signed | time | dist."""
+    leaves = [("timeMs", "time", None)]
+    for body_id, b in payload["bodies"].items():
+        leaves.append((f"bodies.{body_id}.lon", "angle", body_id))
+        leaves.append((f"bodies.{body_id}.lat", "signed", body_id))
+        leaves.append((f"bodies.{body_id}.speed", "signed", body_id))
+        if b["latSpeed"] is not None:
+            leaves.append((f"bodies.{body_id}.latSpeed", "signed", body_id))
+        if b["distMicroAu"] is not None:
+            leaves.append((f"bodies.{body_id}.distMicroAu", "dist", body_id))
+        leaves.append((f"bodies.{body_id}.ra", "angle", body_id))
+        leaves.append((f"bodies.{body_id}.dec", "signed", body_id))
+    for k in payload["angles"]:
+        leaves.append((f"angles.{k}", "angle", None))
+    for i in range(len(payload["cusps"])):
+        leaves.append((f"cusps.{i}", "angle", None))
+    return leaves
+
+
+def _as_units(v):
+    """Base-grid integer for a rendered leaf ("dms" triples recompose)."""
+    if isinstance(v, list):
+        return v[0] * 3600 + v[1] * 60 + v[2]
+    return v
+
+
+def _leaf_value(payload, path):
+    node = payload
+    for p in path.split("."):
+        node = node[int(p)] if isinstance(node, list) else node[p]
+    return _as_units(node)
+
+
+def _leaf_float(chart, path):
+    """The pre-quantization double behind a frontier leaf."""
+    if path == "timeMs":
+        return (chart["jd_ut"] - 2451545.0) * 86_400_000
+    parts = path.split(".")
+    if parts[0] == "bodies":
+        p = chart["bodies"][parts[1]]
+        return {"lon": p["lon"], "lat": p["lat"], "speed": p["speed"],
+                "latSpeed": p.get("lat_speed"),
+                "distMicroAu": p["dist"],  # AU
+                "ra": p["ra"], "dec": p["dec"]}[parts[2]]
+    if parts[0] == "angles":
+        return chart["angles"][_ANGLE_KEY_TO_CHART[parts[1]]]
+    if parts[0] == "cusps":
+        return chart["cusps"][int(parts[1])]
+    raise KeyError(f"_leaf_float: unknown path {path}")
+
+
+def _mod_signed(d, full):
+    """Signed shortest modular distance, centered on zero: [-full/2, full/2)."""
+    return (d + full // 2) % full - full // 2
+
+
+def canonical_chart_with_remainders(chart, grid="arcsec", remainder=None,
+                                    orbs=None, aspects=None,
+                                    separation="longitude"):
+    """Canonical payload plus its remainder set; mirrors
+    canonicalChartWithRemainders in canonical.ts. remainder is a finer grid
+    name, "bits", or None for one step finer than the base."""
+    payload = canonical_chart(chart, grid=grid, orbs=orbs, aspects=aspects,
+                              separation=separation)
+    for_digest = canonical_digest(payload)
+    leaves = _frontier_leaves(payload)
+
+    mode = remainder if remainder is not None else _DEFAULT_REMAINDER.get(grid)
+    if mode is None:
+        raise ValueError(
+            f'canonical_chart_with_remainders: no integer grid is finer than '
+            f'"{grid}"; pass remainder="bits" for exact doubles')
+
+    if mode == "bits":
+        values = {path: double_bits_hex(_leaf_float(chart, path))
+                  for path, _kind, _body in leaves}
+        return payload, {
+            "format": "caelus-remainders", "version": 1, "mode": "bits",
+            "for": for_digest, "grid": grid,
+            "units": {
+                "encoding": "IEEE 754 binary64, big-endian hex",
+                "angle": "deg", "speed": "deg/day",
+                "time": "ms since J2000.0 (JD 2451545.0 UT)", "dist": "AU",
+            },
+            "values": values,
+        }
+
+    if _FINENESS[mode] <= _FINENESS[grid]:
+        raise ValueError(
+            f'canonical_chart_with_remainders: remainder grid "{mode}" is '
+            f'not finer than base grid "{grid}"')
+    fine_scale = UNITS_PER_DEG[mode]
+    ratio = fine_scale // UNITS_PER_DEG[grid]
+    full_f = 360 * fine_scale
+    values = {}
+    for path, kind, _body in leaves:
+        base = _leaf_value(payload, path)
+        x = _leaf_float(chart, path)
+        if kind == "time":
+            values[path] = round_half_up(x * 1000) - 1000 * base  # microseconds
+        elif kind == "dist":
+            values[path] = round_half_up(x * 1e9) - 1000 * base  # nano-AU
+        elif kind == "angle":
+            values[path] = _mod_signed(_q_angle(mode, x) - ratio * base, full_f)
+        else:
+            values[path] = _q_signed(mode, x) - ratio * base
+    return payload, {
+        "format": "caelus-remainders", "version": 1, "mode": "refine",
+        "for": for_digest, "grid": grid, "remainderGrid": mode,
+        "units": {
+            "angle": UNIT_NAMES[mode], "speed": f"{UNIT_NAMES[mode]}/day",
+            "time": "microsecond", "dist": "nano-AU",
+        },
+        "values": values,
+    }
+
+
+def compose_remainders(payload, remainders, orbs=None, aspects=None,
+                       separation="longitude"):
+    """Rebuild the finer-grid canonical payload from a base payload and its
+    refinement remainder set; mirrors composeRemainders in canonical.ts.
+    The result equals canonical_chart(chart, grid=remainderGrid) field for
+    field -- the telescoping property the canonical-golden pins."""
+    if remainders.get("mode") != "refine":
+        raise ValueError("compose_remainders: bits remainders reconstruct "
+                         "doubles, not a finer grid; decode with "
+                         "double_from_bits_hex")
+    if remainders["grid"] != payload["grid"]:
+        raise ValueError(
+            f'compose_remainders: sidecar grid "{remainders["grid"]}" != '
+            f'payload grid "{payload["grid"]}"')
+    if remainders["for"] != canonical_digest(payload):
+        raise ValueError("compose_remainders: sidecar binds to a different "
+                         "payload (digest mismatch)")
+    r_grid = remainders["remainderGrid"]
+    fine_scale = UNITS_PER_DEG[r_grid]
+    ratio = fine_scale // UNITS_PER_DEG[payload["grid"]]
+    full_f = 360 * fine_scale
+    vals = remainders["values"]
+
+    leaves = _frontier_leaves(payload)
+    for path, _kind, _body in leaves:
+        if path not in vals:
+            raise ValueError(f"compose_remainders: sidecar missing frontier leaf {path}")
+    if len(vals) != len(leaves):
+        raise ValueError("compose_remainders: sidecar has keys outside the "
+                         "payload's frontier")
+
+    def angle_f(path):
+        return (ratio * _leaf_value(payload, path) + vals[path]) % full_f
+
+    def signed_f(path):
+        return ratio * _leaf_value(payload, path) + vals[path]
+
+    bodies = {}
+    for body_id, b in payload["bodies"].items():
+        bodies[body_id] = {
+            "lon": angle_f(f"bodies.{body_id}.lon"),
+            "lat": signed_f(f"bodies.{body_id}.lat"),
+            "speed": signed_f(f"bodies.{body_id}.speed"),
+            "latSpeed": (None if b["latSpeed"] is None
+                         else signed_f(f"bodies.{body_id}.latSpeed")),
+            "distMicroAu": b["distMicroAu"],
+            "ra": angle_f(f"bodies.{body_id}.ra"),
+            "dec": signed_f(f"bodies.{body_id}.dec"),
+        }
+    state = {
+        "timeMs": payload["timeMs"],
+        "zodiac": payload["zodiac"],
+        "houseSystem": payload["houseSystem"],
+        "houseSystemRequested": payload["houseSystemRequested"],
+        "unavailable": payload["unavailable"],
+        "warnings": payload["warnings"],
+        "bodies": bodies,
+        "angles": {
+            "asc": angle_f("angles.asc"), "mc": angle_f("angles.mc"),
+            "vertex": angle_f("angles.vertex"),
+            "eastPoint": angle_f("angles.eastPoint"),
+        },
+        "cusps": [angle_f(f"cusps.{i}") for i in range(len(payload["cusps"]))],
+    }
+    return _build_canonical(state, r_grid, orbs=orbs, aspects=aspects,
+                            separation=separation)
+
+
+def near_boundary(remainders, max_margin_per_mille=10):
+    """Fragility report from a refinement remainder set: frontier leaves near
+    a base-grid rounding boundary; mirrors nearBoundary in canonical.ts."""
+    if remainders.get("mode") != "refine":
+        raise ValueError("near_boundary: needs a refinement remainder set "
+                         "(bits carry no grid geometry)")
+    ratio = (UNITS_PER_DEG[remainders["remainderGrid"]]
+             // UNITS_PER_DEG[remainders["grid"]])
+    out = []
+    for path, r in remainders["values"].items():
+        if path == "timeMs" or path.endswith(".distMicroAu"):
+            quantum = 1000
+        else:
+            body = path.split(".")[1] if path.startswith("bodies.") else None
+            quantum = _quantum(remainders["grid"], body) * ratio
+        margin_per_mille = (1000 * (quantum - 2 * abs(r))) // quantum
+        if margin_per_mille <= max_margin_per_mille:
+            side = 0 if r == 0 else (1 if r > 0 else -1)
+            out.append({"path": path, "residue": r, "quantum": quantum,
+                        "marginPerMille": margin_per_mille, "side": side})
+    out.sort(key=lambda e: (e["marginPerMille"], e["path"]))
+    return out

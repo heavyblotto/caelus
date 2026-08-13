@@ -321,9 +321,12 @@ agent supplies the meaning. Connect the server first (see{" "}
 - **`parans`**: co-angular pairs (bodies simultaneously rising, culminating,
   setting, or anti-culminating) over a day at a latitude.
 - **`output: "canonical"`** on the chart, returns, and parans tools: integer
-  payloads on a declared grid plus a sha256 digest — stable across machines
+  payloads on a declared grid plus a sha256 digest, stable across machines
   and languages, hashable for caching and dedupe, with sign/house/aspects
   re-derived from the quantized values so numbers and facts always agree.
+  Add `remainders` to also get the integer sub-quantum residues quantization
+  discarded: a digest-bound sidecar that composes back into the finer-grid
+  payload exactly, and doubles as a rounding-boundary fragility report.
 
 Each tool returns numbers and structured objects, never an interpretation, so it
 composes cleanly into whatever reasoning or prose the agent is doing. The full

@@ -13,6 +13,8 @@ import { loadNodeData } from "../src/node-loader.js";
 import {
   roundHalfUp, sha256Hex, canonicalEncode, canonicalDigest,
   canonicalChart, chartDigest, canonicalTimesMs, CanonicalGrid,
+  canonicalChartWithRemainders, composeRemainders, nearBoundary,
+  doubleBitsHex, doubleFromBitsHex, RefineRemainders,
 } from "../src/canonical.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -81,6 +83,45 @@ for (const c of G.cases as any[]) {
       }
       break;
     }
+    case "remainder-full": {
+      const { remainders } = canonicalChartWithRemainders(chartFor(c.spec), { grid: c.spec.grid });
+      deepEq(c.id, remainders, c.result);
+      break;
+    }
+    case "near-boundary": {
+      const { remainders } = canonicalChartWithRemainders(chartFor(c.spec), { grid: c.spec.grid });
+      deepEq(c.id, nearBoundary(remainders as RefineRemainders,
+        { maxMarginPerMille: c.spec.maxMarginPerMille }), c.result);
+      break;
+    }
+    case "remainder-digests": {
+      for (const spec of c.spec.charts) {
+        const chart = chartFor(spec);
+        for (const base of c.spec.bases as CanonicalGrid[]) {
+          const want = c.result[`${spec.id}/${base}`];
+          const { payload, remainders } = canonicalChartWithRemainders(chart, { grid: base });
+          const rem = remainders as RefineRemainders;
+          ok(rem.remainderGrid === want.remainderGrid,
+            `remainder ${spec.id}/${base}: default target ${rem.remainderGrid} != ${want.remainderGrid}`);
+          ok(canonicalDigest(rem) === want.sidecar,
+            `remainder ${spec.id}/${base}: sidecar digest TS != Python`);
+          const composed = composeRemainders(payload, rem);
+          ok(canonicalDigest(composed) === want.composed,
+            `remainder ${spec.id}/${base}: composed digest TS != Python`);
+          // Telescoping: compose equals the finer grid computed directly.
+          ok(canonicalDigest(composed) === chartDigest(chart, { grid: rem.remainderGrid }),
+            `remainder ${spec.id}/${base}: compose != direct finer-grid chart`);
+        }
+      }
+      break;
+    }
+    case "bits":
+      deepEq(c.id, c.spec.values.map((v: number) => doubleBitsHex(v)), c.result);
+      for (const [i, v] of (c.spec.values as number[]).entries()) {
+        ok(Object.is(doubleFromBitsHex(c.result[i]), v),
+          `bits round-trip [${i}]: ${c.result[i]} != ${v}`);
+      }
+      break;
     default:
       ok(false, `unknown case type ${c.type}`);
   }
@@ -120,6 +161,72 @@ for (const c of G.cases as any[]) {
   const [d, m, s] = ccDms.bodies.sun.lon as [number, number, number];
   ok(d * 3600 + m * 60 + s === ccArc.bodies.sun.lon,
     "dms triple recomposes to the arcsec value");
+
+  // ---- remainder sets ----
+
+  // Requesting remainders never changes a byte of the base payload.
+  const { payload, remainders } = canonicalChartWithRemainders(c0);
+  ok(canonicalDigest(payload) === canonicalDigest(canonicalChart(c0)),
+    "remainders leave the base payload untouched");
+  const rem = remainders as RefineRemainders;
+  ok(rem.for === canonicalDigest(payload), "sidecar binds to the payload digest");
+
+  // Every residue is within half a quantum (arcsec base: quantum = 1000
+  // sub-quanta everywhere, time/dist escrow included).
+  ok(Object.values(rem.values).every((r) => Number.isInteger(r) && 2 * Math.abs(r) <= 1000),
+    "all residues are integers within half a quantum");
+  // The sidecar itself is canonical: encodable, digestable, float-free.
+  ok(/^[0-9a-f]{64}$/.test(canonicalDigest(rem)), "sidecar digests cleanly");
+
+  // Wrap-around: a longitude one hair under 360 must yield a SMALL modular
+  // residue against its wrapped base of 0, not a full-circle one.
+  const wrapped = {
+    ...c0,
+    bodies: { ...c0.bodies, sun: { ...c0.bodies.sun, lon: 359.99999999 } },
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const wr = canonicalChartWithRemainders(wrapped as any);
+  ok((wr.payload.bodies.sun.lon as number) === 0, "wrap: base longitude quantizes to 0");
+  const wrapRes = (wr.remainders as RefineRemainders).values["bodies.sun.lon"];
+  ok(2 * Math.abs(wrapRes) <= 1000, `wrap: modular residue stays small (got ${wrapRes})`);
+  ok(canonicalDigest(composeRemainders(wr.payload, wr.remainders as RefineRemainders))
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    === chartDigest(wrapped as any, { grid: "milliarcsec" }),
+    "wrap: telescoping still exact");
+
+  // A value landing dead on a rounding boundary is flagged at margin 0.
+  const onEdge = {
+    ...c0,
+    bodies: { ...c0.bodies, sun: { ...c0.bodies.sun, lon: 10 + 0.5 / 3600 } },
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const er = canonicalChartWithRemainders(onEdge as any);
+  const flags = nearBoundary(er.remainders as RefineRemainders);
+  ok(flags.some((f) => f.path === "bodies.sun.lon" && f.marginPerMille === 0),
+    "nearBoundary flags a value exactly on a rounding boundary");
+
+  // A tampered binding refuses to compose.
+  let refused = false;
+  try {
+    composeRemainders(payload, { ...rem, for: "0".repeat(64) });
+  } catch { refused = true; }
+  ok(refused, "composeRemainders refuses a sidecar bound to a different payload");
+
+  // Bits mode: lossless escrow -- decode a leaf and requantize; it must
+  // reproduce the payload's integer exactly.
+  const bits = canonicalChartWithRemainders(c0, { remainder: "bits" });
+  ok(bits.remainders.mode === "bits", "bits mode selected");
+  const sunLonBack = doubleFromBitsHex(bits.remainders.values["bodies.sun.lon"] as string);
+  ok(sunLonBack === c0.bodies.sun!.lon, "bits round-trip is exact");
+  let bitsRefused = false;
+  try { composeRemainders(bits.payload, bits.remainders); } catch { bitsRefused = true; }
+  ok(bitsRefused, "bits sidecars do not compose to a grid");
+
+  // No integer grid refines milliarcsec: the default must say so.
+  let noFiner = false;
+  try { canonicalChartWithRemainders(c0, { grid: "milliarcsec" }); }
+  catch (e) { noFiner = String(e).includes("bits"); }
+  ok(noFiner, "milliarcsec base without explicit remainder points at bits");
 }
 
 console.log(`\n${checks} checks, ${failures} failures (all exact equality)`);
