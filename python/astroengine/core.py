@@ -421,11 +421,20 @@ def smallbody_apparent(vsop, cheb, jde):
         delta = math.sqrt(x * x + y * y + z * z)
     lon = math.atan2(y, x) % (2 * math.pi)
     lat = math.atan2(z, math.sqrt(x * x + y * y))
-    # annual aberration (Meeus eq. 23.3), as for Pluto -- BOTH components.
-    # The latitude term is not optional for inclined bodies: it scales with
-    # sin(beta), so Pallas (inclination 34.8 deg, |beta| up to ~32 deg) was off
-    # by ~10" in latitude against JPL while its longitude was under 1", and the
-    # error vanished at the epochs where it crossed the ecliptic.
+    # Precess the geometric direction to of-date FIRST, then apply annual
+    # aberration: Meeus eq. 23.3 is an of-date formula and sun_lon (from the
+    # of-date VSOP Earth) and pi_per are of-date arguments. Applying it to the
+    # J2000 direction mixed frames -- the sun_lon - lon argument was off by
+    # the accumulated general precession (~1.4 deg/century), rotating the
+    # 20.5" aberration ellipse to the wrong phase: ~0.5" in 1850-2150,
+    # ~5" at the 1000/3000 edges, phase-locked to the body's orbit. The star
+    # path (stars.py) always had this order right.
+    lon, lat = _precess_ecliptic(lon, lat, J2000, jde)
+    # annual aberration (Meeus eq. 23.3) -- BOTH components. The latitude term
+    # is not optional for inclined bodies: it scales with sin(beta), so Pallas
+    # (inclination 34.8 deg, |beta| up to ~32 deg) was off by ~10" in latitude
+    # against JPL while its longitude was under 1", and the error vanished at
+    # the epochs where it crossed the ecliptic.
     T = (jde - J2000) / 36525.0
     sun_lon = (L0 + math.pi) % (2 * math.pi)
     k = 20.4898 * ARCSEC
@@ -434,7 +443,6 @@ def smallbody_apparent(vsop, cheb, jde):
     lon += (-k * math.cos(sun_lon - lon) + e * k * math.cos(pi_per - lon)) / math.cos(lat)
     lat += -k * math.sin(lat) * (
         math.sin(sun_lon - lon) - e * math.sin(pi_per - lon))
-    lon, lat = _precess_ecliptic(lon, lat, J2000, jde)
     lon = (lon + nutation(jde)[0]) % (2 * math.pi)
     return lon, lat, delta
 
@@ -493,8 +501,14 @@ def pluto_apparent(vsop, jde):
         delta = math.sqrt(x * x + y * y + z * z)
     lon = math.atan2(y, x) % (2 * math.pi)
     lat = math.atan2(z, math.sqrt(x * x + y * y))
-    # annual aberration (planet case, approx): -20.4898"/R0 * cos(sun_lon - lon)... use
-    # velocity-folding instead: shift Earth too. Simpler: apply classic formula.
+    # precess J2000 -> mean of date FIRST (see smallbody_apparent: eq. 23.3 is
+    # an of-date formula; applying it to the J2000 direction rotated the
+    # aberration ellipse by the accumulated precession), then aberration, then
+    # nutation.
+    lon, lat = _precess_ecliptic(lon, lat, J2000, jde)
+    # annual aberration (Meeus eq. 23.3), both components -- Pluto's
+    # inclination (17.2 deg) makes the latitude term a real one, though
+    # smaller than Pallas's.
     L0, B0, R0 = vsop.heliocentric("earth", jde)
     sun_lon = (L0 + math.pi) % (2 * math.pi)
     k = 20.4898 * ARCSEC
@@ -502,13 +516,8 @@ def pluto_apparent(vsop, jde):
     pi_per = (102.93735 + 1.71946 * ((jde - J2000) / 36525.0)) * DEG
     dlon = (-k * math.cos(sun_lon - lon) + e * k * math.cos(pi_per - lon)) / math.cos(lat)
     lon += dlon
-    # Latitude component (Meeus eq. 23.3), omitted here for the same reason it
-    # was omitted for the small bodies. Pluto's inclination (17.2 deg) makes it
-    # a real term, though smaller than Pallas's.
     lat += -k * math.sin(lat) * (
         math.sin(sun_lon - lon) - e * math.sin(pi_per - lon))
-    # precess J2000 -> mean of date, then nutation
-    lon, lat = _precess_ecliptic(lon, lat, J2000, jde)
     lon = (lon + nutation(jde)[0]) % (2 * math.pi)
     return lon, lat, delta
 

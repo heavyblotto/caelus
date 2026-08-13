@@ -112,31 +112,90 @@ Two source limits bound this, and neither is a fit limit:
 against JPL apparent RA/Dec. The packs hold across it. **The analytic
 theories around them do not:**
 
-| body | 1850-2150 | 1000-3000 wide | claim | mechanism |
+| body | 1850-2150 | 1000-3000 wide | claim | mechanism (measured -- see below) |
 |---|---|---|---|---|
-| Mars | 0.18" | **10.75"** | 0.7" | VSOP87D truncation |
-| Uranus | 1.30" | **17.05"** | 1.9" | VSOP87D truncation |
-| Neptune | 2.35" | **15.41"** | 4.6" | VSOP87D truncation |
+| Mars | 0.18" | **10.75"** | 0.7" | VSOP87 source drift vs DE441, amplified at close oppositions |
+| Uranus | 1.30" | **17.05"** | 1.9" | VSOP87 source drift vs DE441, phase-locked to its 84-yr orbit |
+| Neptune | 2.35" | **15.41"** | 4.6" | VSOP87 source drift vs DE441, near-linear mean-longitude drift |
 | Moon | 0.39" | **10.74"** | 2.5" | outside the precise tier (Meeus ch.47) |
-| Saturn | 0.44" | 3.02" | 1.0" | VSOP87D truncation |
-| Pluto | 1.03" | 6.91" | -- | pack (contributes 0.005") |
-| small bodies | 0.66-0.97" | 2.6-3.6" | -- | pack (contributes <=0.36") |
+| Saturn | 0.44" | 3.02" | 1.0" | VSOP87 source drift vs DE441 |
+| Pluto | 0.35" | 3.39" | -- | oracle frame convention (pack contributes 0.005") |
+| small bodies | 0.38-0.71" | 1.4-1.8" | -- | oracle frame convention (packs contribute <=0.36") |
 
-(The packed-body rows improved sharply once the annual-aberration latitude
-term was added -- see below. Before that fix Pluto read 5.67" and Pallas
-13.34" in the core band.)
+(Historical numbers: before the annual-aberration LATITUDE term landed,
+Pluto read 5.67" and Pallas 13.34" in the core band; before the aberration
+FRAME fix below, Pluto read 1.03" core / 6.91" wide and the small bodies
+2.6-3.6" wide.)
 
-The packed bodies barely move (0.8-1.6x their core-band error) because a pack
-fit over the actual span holds over it. The truncated VSOP87D series and the
-Moon fallback degrade by 6-59x. So the wide packs extend *reach* -- charts
-outside 1850-2150 compute, and Pluto no longer lands in `Chart.unavailable` at
-1650 -- but engine *accuracy* does not follow, and the headline is an accuracy
-claim. `Chart.warnings` already states this per chart, and
-`engineCapabilities` reports `fitted` separately from `validated` for exactly
-this reason: a pack's span and a validated span are different facts.
+The packed bodies sit at the frame-convention floor (next section) because a
+pack fit over the actual span holds over it. The VSOP87-sourced outer bodies
+and the Moon fallback degrade by 6-59x. So the wide packs extend *reach* --
+charts outside 1850-2150 compute, and Pluto no longer lands in
+`Chart.unavailable` at 1650 -- but engine *accuracy* does not follow, and the
+headline is an accuracy claim. `Chart.warnings` already states this per
+chart, and `engineCapabilities` reports `fitted` separately from `validated`
+for exactly this reason: a pack's span and a validated span are different
+facts.
 
-Raising the headline would take a fuller VSOP87 (or a different theory) and a
-wider precise-Moon tier -- position theory work, not more fitting.
+### What the wide-band error actually is (measured, three mechanisms)
+
+An earlier revision of this file attributed the wide-band degradation to
+"VSOP87D truncation" and concluded that raising the headline would take a
+fuller VSOP87. **Both halves of that were wrong, and the refutation is
+measured, not argued:**
+
+1. **Truncation is worth ~0.1", not 15".** The shipped `full` tier is the
+   (essentially complete) VSOP87D series -- Earth's term counts match the
+   canonical distribution file exactly -- and evaluating Mars, Saturn,
+   Uranus, and Neptune across 1000-3000 on the `full` vs the `high` tier
+   moves positions by **<= 0.13"**. The series has converged; more terms
+   cannot close a 15" gap. "Fuller VSOP87" is a dead end.
+
+2. **An aberration frame-mixing bug (found here, fixed).** The small-body
+   and Pluto pipelines applied annual aberration (Meeus eq. 23.3, an
+   of-date formula fed the of-date Sun longitude) to the **J2000**
+   direction, before precession-to-date. The `sun_lon - lon` argument was
+   therefore off by the accumulated general precession (~1.4 deg/century),
+   rotating the 20.5" aberration ellipse to the wrong phase: error ~=
+   2k*sin(precession/2) -- ~0.5" inside 1850-2150, up to ~5" at the
+   1000/3000 edges, phase-locked to the body's orbit (the per-epoch error
+   showed peaks every ~160 sampled years, antisymmetric in time). The star
+   path always had the order right; the small-body and Pluto paths now
+   precess first and aberrate in the of-date frame, in both engines.
+   Measured effect: Pluto 1.03" -> 0.35" core and 6.91" -> 3.39" wide;
+   every asteroid under 1" in the 1850-2150 band (0.38-0.71").
+
+3. **The residual pack-body wide error is the oracle's frame convention,
+   not a position error.** Horizons' *apparent* RA/Dec keeps the IAU
+   1976/1980 precession-nutation models (with frame bias); the engine
+   precesses with Vondrak 2011 -- the same modern family Swiss Ephemeris
+   uses. The two conventions place the equinox-of-date apart by an amount
+   that grows to ~2-3.7" at the 1000/3000 edges. Reconstructing both
+   chains and rotating each body's direction through them predicts the
+   engine-vs-Horizons residual per epoch to within the noise (e.g. Pluto
+   at 2965: predicted 3.59", measured 3.39"). Both sides agree where the
+   body is in ICRF; they disagree where the ecliptic origin of date is,
+   because they use different generations of precession theory. A future
+   validator pass can eliminate this term by comparing frame-free
+   quantities (Horizons astrometric J2000) instead of of-date apparent
+   ones.
+
+What remains after the fix is genuine **source drift**: VSOP87 represents
+DE200 (1988, pre-Voyager outer-planet orbits) to 1" over its published
+envelopes, and being 1" from DE200 is not being 1" from DE441 a millennium
+out. The signatures match the history: Neptune's error is a near-linear
+mean-longitude drift (-15" at 1005 -> +10" at 2965), Uranus's oscillates at
+its 84-year orbital period, Mars's is sub-arcsecond except at close
+oppositions where a small heliocentric error is amplified by proximity.
+
+Raising the headline therefore takes: Chebyshev packs fit to Horizons
+(DE441) for Mars/Saturn/Uranus/Neptune over the wide span -- the exact
+pattern already proven by the Pluto and small-body packs, more fitting, not
+position theory -- plus a wider precise-Moon pack, plus the frame-free
+validator pass above. Delta-T then bounds what "validated" can honestly mean
+for the Moon and the angles before ~1500 (sigma is minutes; the smear is
+tens of arcseconds), so wide-band claims are per-body and TT-honest rather
+than one headline number.
 
 ### A note on oracles
 
@@ -188,12 +247,13 @@ For the Hellenistic / Hermetic era (first-fifth centuries): the same
 machinery runs over any window DE441 covers, which is the majors and the
 Pluto barycenter -- the small bodies stop at ~1600 and no fitting reaches
 past a source that does not exist. Two things bound that era, and delta T is
-only the second. The first is the measurement above: VSOP87D truncation and
-the Moon fallback already miss by 10-17" at the edges of 1000-3000, so
-positions there are computed, not validated. Then delta-T sigma is minutes,
-which smears the angles and the Moon further while the slow bodies read fine.
-`Chart.warnings` states both splits per chart, so ancient charts are honestly
-usable rather than refused -- but "usable" means arcminutes, not arcseconds.
+only the second. The first is the measurement above: VSOP87's drift against
+the modern ephemeris and the Moon fallback already miss by 10-17" at the
+edges of 1000-3000, so positions there are computed, not validated. Then
+delta-T sigma is minutes, which smears the angles and the Moon further while
+the slow bodies read fine. `Chart.warnings` states both splits per chart, so
+ancient charts are honestly usable rather than refused -- but "usable" means
+arcminutes, not arcseconds.
 
 ## Notes and non-goals
 

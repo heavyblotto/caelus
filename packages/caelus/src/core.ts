@@ -815,6 +815,11 @@ export function plutoApparent(
   }
   let lon = mod(Math.atan2(y, x), TWO_PI);
   let lat = Math.atan2(z, Math.sqrt(x * x + y * y));
+  // Precess to of-date FIRST, then aberrate: Meeus eq. 23.3 is an of-date
+  // formula (sunLon and piPer are of-date arguments); applying it to the
+  // J2000 direction rotated the aberration ellipse by the accumulated
+  // precession (~0.5" in 1850-2150, ~5" at the 1000/3000 edges).
+  [lon, lat] = precessEcliptic(lon, lat, J2000, jde);
   const T = (jde - J2000) / 36525.0;
   const sunLon = mod(L0d + Math.PI, TWO_PI);
   const k = 20.4898 * ARCSEC;
@@ -824,7 +829,6 @@ export function plutoApparent(
   // Latitude component (Meeus eq. 23.3). Omitted originally; it scales with
   // sin(beta), so it is a real term for an inclined body like Pluto (17.2 deg).
   lat += -k * Math.sin(lat) * (Math.sin(sunLon - lon) - e * Math.sin(piPer - lon));
-  [lon, lat] = precessEcliptic(lon, lat, J2000, jde);
   lon = mod(lon + nutation(data, jde)[0], TWO_PI);
   return [lon, lat, delta];
 }
@@ -850,6 +854,10 @@ export function chironApparent(
   }
   let lon = mod(Math.atan2(y, x), TWO_PI);
   let lat = Math.atan2(z, Math.sqrt(x * x + y * y));
+  // Precess to of-date FIRST, then aberrate -- eq. 23.3 is an of-date
+  // formula; see plutoApparent for the frame-mixing history. The star path
+  // (stars.ts) always had this order right.
+  [lon, lat] = precessEcliptic(lon, lat, J2000, jde);
   const T = (jde - J2000) / 36525.0;
   const sunLon = mod(L0 + Math.PI, TWO_PI);
   const k = 20.4898 * ARCSEC;
@@ -860,7 +868,6 @@ export function chironApparent(
   // it scales with sin(beta), so Pallas (inclination 34.8 deg) read ~10" off in
   // latitude against JPL while its longitude was under 1".
   lat += -k * Math.sin(lat) * (Math.sin(sunLon - lon) - e * Math.sin(piPer - lon));
-  [lon, lat] = precessEcliptic(lon, lat, J2000, jde);
   lon = mod(lon + nutation(data, jde)[0], TWO_PI);
   return [lon, lat, delta];
 }
