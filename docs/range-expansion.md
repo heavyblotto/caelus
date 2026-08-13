@@ -178,7 +178,26 @@ measured, not argued:**
    because they use different generations of precession theory. A future
    validator pass can eliminate this term by comparing frame-free
    quantities (Horizons astrometric J2000) instead of of-date apparent
-   ones.
+   ones -- this is what `validate_horizons.py --astrometric` now does, and
+   it confirms the diagnosis: on the frame-free basis every packed body
+   drops to well under an arcsecond across 1000-3000 (Pluto 0.129",
+   Chiron 0.144", Pholus 0.054", the asteroids 0.47-0.66"), while the
+   VSOP planets stay large (Uranus 20.3", Neptune 17.6"). The frame term
+   was most of the packed bodies' apparent-basis error and none of the
+   planets'.
+
+   One caveat before quoting that basis for the **Moon**: it reads ~20"
+   there even in the core band, and the cause is the comparison, not the
+   pack -- the pack matches Horizons' own geocentric vectors to 0.005-0.025".
+   Horizons' astrometric RA/Dec is reproduced exactly (0.000") by its own
+   `VEC_CORR=LT` vectors, and for a geocentric target that correction is
+   dominated by the *observer's* displacement during light-time: Earth moves
+   40.25 km in the Moon's 1.35 s, against a measured LT-vs-geometric shift of
+   40.62 km (20.7"). The engine-side astrometric quantity applies the target's
+   own light-time travel (0.67" for the Moon) but not that observer term, so
+   the Moon's astrometric number is not yet a position claim. Distant bodies
+   are unaffected -- the term is negligible against their own motion over a
+   far longer light-time -- which is why every other body reads sub-arcsecond.
 
 What remains after the fix is genuine **source drift**: VSOP87 represents
 DE200 (1988, pre-Voyager outer-planet orbits) to 1" over its published
