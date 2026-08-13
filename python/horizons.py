@@ -6,6 +6,7 @@ matching the Swiss Ephemeris flags used by the original fit_chiron sampler:
 """
 import json
 import math
+import os
 import re
 import time
 import urllib.parse
@@ -53,6 +54,28 @@ def _step_size_str(step_days):
     raise ValueError(f"unsupported Horizons step {step_days} days (use whole days or whole hours)")
 
 
+def _get_with_retry(url, timeout=180, attempts=5):
+    """GET with backoff. A wide mint is thousands of requests over hours, and
+    a single transient read timeout used to abort the whole run -- discarding
+    every row fetched so far, since the cache is only written at the end (a
+    Mars mint died at request 1527 of 5845 exactly this way). Transient
+    network faults are expected at that volume, not exceptional."""
+    last = None
+    for i in range(attempts):
+        try:
+            with urllib.request.urlopen(url, timeout=timeout) as resp:
+                return resp.read().decode()
+        except Exception as e:  # timeouts, resets, transient 5xx
+            last = e
+            if i == attempts - 1:
+                break
+            wait = 2.0 * (2 ** i)  # 2, 4, 8, 16 s
+            print(f"    (request failed: {type(e).__name__}; retrying in {wait:.0f}s)",
+                  flush=True)
+            time.sleep(wait)
+    raise last
+
+
 def _fetch_range(jd0, jd1, step_days=1.0, command=CHIRON, center="@sun"):
     """Download a JD range via START_TIME/STOP_TIME (one API call)."""
     params = {
@@ -72,8 +95,7 @@ def _fetch_range(jd0, jd1, step_days=1.0, command=CHIRON, center="@sun"):
         "CAL_FORMAT": "JD",
     }
     url = API + "?" + urllib.parse.urlencode(params)
-    with urllib.request.urlopen(url, timeout=180) as resp:
-        text = resp.read().decode()
+    text = _get_with_retry(url)
     return _parse_vector_block(text)
 
 
@@ -163,7 +185,27 @@ class HorizonsCache:
         chunk = RANGE_CHUNK * step
         nchunks = int(math.ceil((hi - jd0) / chunk))
         t = jd0
-        for i in range(nchunks):
+        # Resume support: a partial download is checkpointed beside the cache,
+        # so an interrupted mint restarts from where it stopped instead of
+        # re-fetching hours of rows. Only reused when the body, span and step
+        # match, on the same reasoning as the cache reuse check above.
+        part_path = self.path + ".part"
+        start_i = 0
+        try:
+            with open(part_path) as f:
+                part = json.load(f)
+            if (part.get("body") == self.label and part.get("step") == step
+                    and part.get("jd0") == jd0 and part.get("hi") == hi):
+                jds_all = part["jds"]; xs_all = part["x"]
+                ys_all = part["y"]; zs_all = part["z"]
+                start_i = part["next_i"]
+                t = part["t"]
+                print(f"  resuming from range {start_i + 1}/{nchunks} "
+                      f"({len(jds_all)} rows already fetched)")
+        except (FileNotFoundError, KeyError, json.JSONDecodeError):
+            pass
+
+        for i in range(start_i, nchunks):
             t1 = min(t + chunk, hi)
             print(f"  range {i + 1}/{nchunks}: JD {t:.1f} .. {t1:.1f}")
             jds, xs, ys, zs = _fetch_range(t, t1, step, command=self.command, center=self.center)
@@ -172,6 +214,17 @@ class HorizonsCache:
             ys_all.extend(ys)
             zs_all.extend(zs)
             t = t1
+            # Checkpoint periodically: frequent enough that a failure costs
+            # a minute or two, rare enough that the write cost stays small.
+            # (25 chunks is ~30 s of fetching at the observed ~1.2 s/request.)
+            if (i + 1) % 25 == 0 or i + 1 == nchunks:
+                tmp = part_path + ".tmp"
+                with open(tmp, "w") as f:
+                    json.dump({"body": self.label, "step": step, "jd0": jd0,
+                               "hi": hi, "next_i": i + 1, "t": t,
+                               "jds": jds_all, "x": xs_all, "y": ys_all,
+                               "z": zs_all}, f, separators=(",", ":"))
+                os.replace(tmp, part_path)
             time.sleep(0.15)
 
         data = {
@@ -205,6 +258,11 @@ class HorizonsCache:
 
         with open(self.path, "w") as f:
             json.dump(data, f, separators=(",", ":"))
+        # The complete cache supersedes the resume checkpoint.
+        try:
+            os.remove(part_path)
+        except FileNotFoundError:
+            pass
         print(f"wrote cache: {self.path} ({len(jds_all)} samples, "
               f"{len(json.dumps(data)) / 1024:.0f} KB)")
 
