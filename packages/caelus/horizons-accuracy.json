@@ -13,13 +13,13 @@
         "saturn": 0.443,
         "uranus": 1.297,
         "neptune": 2.353,
-        "pluto": 5.666,
-        "chiron": 2.603,
-        "ceres": 3.742,
-        "pallas": 13.343,
-        "juno": 4.92,
-        "vesta": 2.348,
-        "pholus": 8.022
+        "pluto": 1.03,
+        "chiron": 0.955,
+        "ceres": 0.904,
+        "pallas": 0.971,
+        "juno": 0.852,
+        "vesta": 0.663,
+        "pholus": 0.962
       }
     },
     "1900-2099": {
@@ -34,13 +34,13 @@
         "saturn": 0.396,
         "uranus": 1.368,
         "neptune": 2.435,
-        "pluto": 6.161,
-        "chiron": 2.184,
-        "ceres": 4.422,
-        "pallas": 13.079,
-        "juno": 3.658,
-        "vesta": 2.894,
-        "pholus": 8.079
+        "pluto": 0.617,
+        "chiron": 0.504,
+        "ceres": 0.53,
+        "pallas": 0.629,
+        "juno": 0.537,
+        "vesta": 0.722,
+        "pholus": 0.552
       }
     },
     "1800-2200 edges": {
@@ -55,7 +55,7 @@
         "saturn": 0.544,
         "uranus": 2.307,
         "neptune": 3.75,
-        "pluto": 6.139
+        "pluto": 1.338
       }
     },
     "1000-3000 wide": {
@@ -70,13 +70,13 @@
         "saturn": 3.016,
         "uranus": 17.045,
         "neptune": 15.406,
-        "pluto": 8.789,
-        "chiron": 3.999,
-        "ceres": 4.9,
-        "pallas": 11.131,
-        "juno": 5.916,
-        "vesta": 2.973,
-        "pholus": 8.384
+        "pluto": 6.911,
+        "chiron": 3.305,
+        "ceres": 3.247,
+        "pallas": 3.593,
+        "juno": 3.626,
+        "vesta": 2.869,
+        "pholus": 2.593
       }
     }
   }

@@ -821,6 +821,9 @@ export function plutoApparent(
   const e = 0.016708634 - 0.000042037 * T;
   const piPer = (102.93735 + 1.71946 * T) * DEG;
   lon += (-k * Math.cos(sunLon - lon) + e * k * Math.cos(piPer - lon)) / Math.cos(lat);
+  // Latitude component (Meeus eq. 23.3). Omitted originally; it scales with
+  // sin(beta), so it is a real term for an inclined body like Pluto (17.2 deg).
+  lat += -k * Math.sin(lat) * (Math.sin(sunLon - lon) - e * Math.sin(piPer - lon));
   [lon, lat] = precessEcliptic(lon, lat, J2000, jde);
   lon = mod(lon + nutation(data, jde)[0], TWO_PI);
   return [lon, lat, delta];
@@ -853,6 +856,10 @@ export function chironApparent(
   const e = 0.016708634 - 0.000042037 * T;
   const piPer = (102.93735 + 1.71946 * T) * DEG;
   lon += (-k * Math.cos(sunLon - lon) + e * k * Math.cos(piPer - lon)) / Math.cos(lat);
+  // Latitude component (Meeus eq. 23.3), the term this pipeline was missing:
+  // it scales with sin(beta), so Pallas (inclination 34.8 deg) read ~10" off in
+  // latitude against JPL while its longitude was under 1".
+  lat += -k * Math.sin(lat) * (Math.sin(sunLon - lon) - e * Math.sin(piPer - lon));
   [lon, lat] = precessEcliptic(lon, lat, J2000, jde);
   lon = mod(lon + nutation(data, jde)[0], TWO_PI);
   return [lon, lat, delta];

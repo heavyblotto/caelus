@@ -119,8 +119,12 @@ theories around them do not:**
 | Neptune | 2.35" | **15.41"** | 4.6" | VSOP87D truncation |
 | Moon | 0.39" | **10.74"** | 2.5" | outside the precise tier (Meeus ch.47) |
 | Saturn | 0.44" | 3.02" | 1.0" | VSOP87D truncation |
-| Pluto | 5.67" | 8.79" | -- | pack (contributes 0.005") |
-| small bodies | 2.3-13" | 3.1-11" | -- | pack (contributes <=0.36") |
+| Pluto | 1.03" | 6.91" | -- | pack (contributes 0.005") |
+| small bodies | 0.66-0.97" | 2.6-3.6" | -- | pack (contributes <=0.36") |
+
+(The packed-body rows improved sharply once the annual-aberration latitude
+term was added -- see below. Before that fix Pluto read 5.67" and Pallas
+13.34" in the core band.)
 
 The packed bodies barely move (0.8-1.6x their core-band error) because a pack
 fit over the actual span holds over it. The truncated VSOP87D series and the
@@ -139,11 +143,46 @@ wider precise-Moon tier -- position theory work, not more fitting.
 `accuracy.json` (Swiss Ephemeris, ecliptic longitude) and
 `horizons-accuracy.json` (JPL Horizons, RA/Dec separation) measure different
 things against different references, so their numbers do not compare directly.
-Pluto reads 3.4" in the first and ~5.7" in the second; the Pluto entry's own
-note already says the Swiss bound is "vs SE's own Moshier Pluto", which is
-itself an approximation that differs from JPL. Both are true statements about
-different comparisons. Neither is a regression: the ~5.7" is unchanged from
-before the wide pack landed (5.668" -> 5.666").
+Pluto reads 3.4" in the first (longitude, Swiss) and 1.03" in the second
+(RA/Dec separation, JPL); the Pluto entry's own note says the Swiss bound is
+"vs SE's own Moshier Pluto", which is itself an approximation that differs
+from JPL. Both are true statements about different comparisons.
+
+### The annual-aberration latitude term (found here, fixed)
+
+Chasing an unexplained Pallas reading turned up a real engine bug rather than
+a data problem. `smallbody_apparent` and the Pluto path applied annual
+aberration to longitude only -- Meeus eq. 23.3's longitude component, divided
+by cos(beta) -- and omitted the latitude component:
+
+    dbeta = -k sin(beta) [ sin(sun_lon - lambda) - e sin(pi - lambda) ]
+
+That term scales with `sin(beta)`, so it is invisible near the ecliptic and
+first-order for an inclined body. Pallas (inclination 34.8 deg) reached
+|beta| ~ 32 deg and read **13.34"** against JPL while its *longitude* was
+under 1"; the error tracked the predicted dbeta to three decimals and vanished
+at the epochs where Pallas crossed the ecliptic. The pack was never at fault:
+it reproduces Horizons' own vectors to 27 km (0.02") at the worst epoch.
+
+Adding the term to both engines (four call sites: small bodies and Pluto,
+TS and Python) fixed every packed body:
+
+| body | core band before | after |
+|---|---|---|
+| Pallas | 13.34" | 0.97" |
+| Pholus | 8.02" | 0.96" |
+| Pluto | 5.67" | 1.03" |
+| Juno | 4.92" | 0.85" |
+| Ceres | 3.74" | 0.90" |
+| Chiron | 2.60" | 0.95" |
+| Vesta | 2.35" | 0.66" |
+
+`accuracy.json` is unchanged: it publishes ecliptic *longitude* bounds against
+Swiss, and this was a latitude error. A re-run of `validate_swiss.py`
+confirms the longitude figures still hold (Pluto 3.34" vs the published 3.4",
+Neptune 4.56" vs 4.6"). The latitude axis is now measured by
+`validate_horizons.py`, and `golden.test.ts` pins the term so it cannot
+silently regress.
 
 For the Hellenistic / Hermetic era (first-fifth centuries): the same
 machinery runs over any window DE441 covers, which is the majors and the

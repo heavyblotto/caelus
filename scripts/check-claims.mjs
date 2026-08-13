@@ -21,6 +21,19 @@ const STATS_PATH = process.env.CAELUS_STATS_OUT || rel("conformance-stats.json")
 const GOLDEN_JS = rel("packages/caelus/dist/test/golden.test.js");
 
 function loadStats() {
+  // Prefer a freshly generated file over an existing one. The stats are a
+  // build artifact of the golden suite (and gitignored), so a checkout that
+  // ran the suite at an older check count keeps reporting the old number --
+  // and every prose claim then "fails" against a stale source of truth, which
+  // reads exactly like a real prose bug. Regenerating is a few seconds and is
+  // what CI does anyway; only fall back to the stored file when the suite is
+  // not built.
+  if (existsSync(GOLDEN_JS)) {
+    execFileSync("node", [GOLDEN_JS], {
+      env: { ...process.env, CAELUS_STATS_OUT: STATS_PATH }, stdio: "ignore",
+    });
+    return JSON.parse(readFileSync(STATS_PATH, "utf8"));
+  }
   if (existsSync(STATS_PATH)) return JSON.parse(readFileSync(STATS_PATH, "utf8"));
   if (!existsSync(GOLDEN_JS)) {
     console.error(

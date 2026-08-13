@@ -547,6 +547,29 @@ for (const g of G.houses) {
       console.error(`FAIL 1650 warnings: ${JSON.stringify(pre1700.warnings)}`);
     }
   }
+  // Annual aberration must be applied to LATITUDE as well as longitude
+  // (Meeus eq. 23.3). The engine originally omitted the latitude component,
+  // which is invisible near the ecliptic and first-order away from it: Pallas
+  // (inclination 34.8 deg) read 13.3" off against JPL, all of it in latitude.
+  // Pinning it needs a high-|beta| epoch, since at beta ~ 0 the term is zero
+  // and any regression would hide. 1900-03-15 puts Pallas near beta +32 deg;
+  // dropping the term shifts its latitude by ~10 arcsec, far outside this
+  // bound, while the correct value sits within an arcsecond of JPL's.
+  {
+    const jd = 2415092.71; // 1900-03-15 TT, Pallas near beta +32 deg
+    const p = eng.position("pallas", jd);
+    // JPL Horizons apparent geocentric ecliptic latitude of date at this exact
+    // JD (OBSERVER quantity 31, airless, TIME_TYPE=TT). The engine agrees to
+    // 0.07" with the term present, and is ~10" out without it.
+    const jplLat = 32.31268;
+    if (Math.abs(p.lat - jplLat) * 3600 > 2.0) {
+      failures++;
+      console.error(
+        `FAIL aberration latitude term: pallas lat ${p.lat} vs JPL ${jplLat} `
+        + `(${((p.lat - jplLat) * 3600).toFixed(3)}" -- is the dbeta term missing?)`,
+      );
+    }
+  }
   // deltaTSigma pins to the published Morrison & Stephenson (2004) sigmas at
   // the breakpoints (the table itself is the oracle) and interpolates between.
   for (const [y, s] of [[0, 260], [1000, 55], [1600, 20], [500, 160], [800, 97]] as const) {

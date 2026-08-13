@@ -421,13 +421,19 @@ def smallbody_apparent(vsop, cheb, jde):
         delta = math.sqrt(x * x + y * y + z * z)
     lon = math.atan2(y, x) % (2 * math.pi)
     lat = math.atan2(z, math.sqrt(x * x + y * y))
-    # annual aberration (classic formula), as for Pluto
+    # annual aberration (Meeus eq. 23.3), as for Pluto -- BOTH components.
+    # The latitude term is not optional for inclined bodies: it scales with
+    # sin(beta), so Pallas (inclination 34.8 deg, |beta| up to ~32 deg) was off
+    # by ~10" in latitude against JPL while its longitude was under 1", and the
+    # error vanished at the epochs where it crossed the ecliptic.
     T = (jde - J2000) / 36525.0
     sun_lon = (L0 + math.pi) % (2 * math.pi)
     k = 20.4898 * ARCSEC
     e = 0.016708634 - 0.000042037 * T
     pi_per = (102.93735 + 1.71946 * T) * DEG
     lon += (-k * math.cos(sun_lon - lon) + e * k * math.cos(pi_per - lon)) / math.cos(lat)
+    lat += -k * math.sin(lat) * (
+        math.sin(sun_lon - lon) - e * math.sin(pi_per - lon))
     lon, lat = _precess_ecliptic(lon, lat, J2000, jde)
     lon = (lon + nutation(jde)[0]) % (2 * math.pi)
     return lon, lat, delta
@@ -496,6 +502,11 @@ def pluto_apparent(vsop, jde):
     pi_per = (102.93735 + 1.71946 * ((jde - J2000) / 36525.0)) * DEG
     dlon = (-k * math.cos(sun_lon - lon) + e * k * math.cos(pi_per - lon)) / math.cos(lat)
     lon += dlon
+    # Latitude component (Meeus eq. 23.3), omitted here for the same reason it
+    # was omitted for the small bodies. Pluto's inclination (17.2 deg) makes it
+    # a real term, though smaller than Pallas's.
+    lat += -k * math.sin(lat) * (
+        math.sin(sun_lon - lon) - e * math.sin(pi_per - lon))
     # precess J2000 -> mean of date, then nutation
     lon, lat = _precess_ecliptic(lon, lat, J2000, jde)
     lon = (lon + nutation(jde)[0]) % (2 * math.pi)
