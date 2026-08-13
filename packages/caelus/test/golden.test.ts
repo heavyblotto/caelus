@@ -479,12 +479,17 @@ for (const g of G.houses) {
     console.error(`FAIL in-range unavailable: ${JSON.stringify(inRange.unavailable)}`);
   }
 
+  // 1700 is inside the wide packs (small bodies are fitted 1600-2484, Pluto
+  // 1000-3000) but outside the validated headline, so nothing is *missing* --
+  // the honest degradation signal here is the warning, not absence. Bodies
+  // stay computed; `validated` is what narrows. A body only lands in
+  // `unavailable` outside its pack's fitted span (see the 1500 case below).
   const pre1850 = eng.chart(1700, 3, 21, 12, 0, 0, 51.5, -0.12, "placidus");
   if (
-    !pre1850.unavailable.includes("chiron") ||
-    "chiron" in pre1850.bodies ||
+    !("chiron" in pre1850.bodies) ||
     !("sun" in pre1850.bodies) ||
-    !("moon" in pre1850.bodies)
+    !("moon" in pre1850.bodies) ||
+    !pre1850.warnings.some((w) => w.kind === "outside_validated_range")
   ) {
     failures++;
     console.error(
@@ -492,19 +497,31 @@ for (const g of G.houses) {
     );
   }
 
-  // Pluto on the pack path: sparse like Chiron. Inside the pack's fitted
-  // range (1700-2212 for the shipped pack) it is present; outside, it lands
-  // in `unavailable` -- which is why PackedBody covers pluto and
-  // chart.bodies.pluto types as possibly absent.
+  // Pluto on the pack path. The wide pack is fitted 1000-3000, so 1650 is
+  // inside it and Pluto is computed there -- present but unvalidated, since
+  // MEASURED.pluto_pack stays 1700-2212 until a measurement widens it. The
+  // sparse behaviour PackedBody exists for is still real, just further out:
+  // 1500 is outside the small-body packs (fitted 1600-2484), so chiron and
+  // the asteroids land in `unavailable` there.
   const pre1700 = eng.chart(1650, 6, 1, 12, 0, 0, 48.85, 2.35, "whole_sign");
   if (
-    !pre1700.unavailable.includes("pluto") ||
-    "pluto" in pre1700.bodies ||
+    !("pluto" in pre1700.bodies) ||
     !("pluto" in pre1850.bodies) // 1700-03-21 is inside the pack range
   ) {
     failures++;
     console.error(
       `FAIL pluto pack degradation: 1650 unavailable=${JSON.stringify(pre1700.unavailable)}`,
+    );
+  }
+  const pre1600 = eng.chart(1500, 6, 1, 12, 0, 0, 48.85, 2.35, "whole_sign");
+  if (
+    !pre1600.unavailable.includes("chiron") ||
+    "chiron" in pre1600.bodies ||
+    !("pluto" in pre1600.bodies) // Pluto's pack reaches back to 1000
+  ) {
+    failures++;
+    console.error(
+      `FAIL small-body pack degradation: 1500 unavailable=${JSON.stringify(pre1600.unavailable)}`,
     );
   }
 
@@ -519,9 +536,12 @@ for (const g of G.houses) {
     const dtWarn = pre1700.warnings.find((w) => w.kind === "delta_t_uncertain");
     const warnedBodies = new Set(rangeWarn.map((w) => (w as { body: string }).body));
     // 1650 < 1850: every VSOP body and the Moon are computed-but-unvalidated;
-    // nodes are analytic with no stated bound (never warned).
+    // nodes are analytic with no stated bound (never warned). Pluto IS warned
+    // here now: the wide pack computes it at 1650, but 1650 is outside
+    // MEASURED.pluto_pack (1700-2212), which is exactly what the warning is
+    // for -- a position the engine will produce but has not validated.
     if (!warnedBodies.has("sun") || !warnedBodies.has("moon")
-      || warnedBodies.has("mean_node") || warnedBodies.has("pluto") /* absent, not warned */
+      || warnedBodies.has("mean_node") || !warnedBodies.has("pluto")
       || !dtWarn || (dtWarn as { sigmaSeconds: number }).sigmaSeconds < 5) {
       failures++;
       console.error(`FAIL 1650 warnings: ${JSON.stringify(pre1700.warnings)}`);
@@ -628,9 +648,14 @@ for (const g of G.houses) {
     const pluto = byBody.get("pluto");
     const moon = byBody.get("moon");
     const ceres = byBody.get("ceres");
+    // `fitted` and `validated` are different facts and the wide pack makes the
+    // gap visible: the pack is fitted 1000-3000, while `validated` stays at the
+    // measured 1700-2212. engineCapabilities reports both, so a consumer can
+    // tell "will compute" from "has been checked".
     if (caps.plutoTier !== "chebyshev" || pluto?.source !== "chebyshev_pack"
       || pluto.validated?.from !== 1700 || pluto.validated?.to !== 2212
-      || !pluto.fitted || Math.abs(pluto.fitted.from - 1700) > 1) {
+      || !pluto.fitted || Math.abs(pluto.fitted.from - 1000) > 2
+      || Math.abs(pluto.fitted.to - 3000) > 2) {
       failures++;
       console.error(`FAIL capabilities pluto: ${JSON.stringify(pluto)} tier=${caps.plutoTier}`);
     }

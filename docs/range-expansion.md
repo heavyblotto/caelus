@@ -19,7 +19,7 @@ theory's published envelope alone.
 | Pluto | Chebyshev pack (Horizons barycenter) | 1700-2212; superseded the Meeus ch.37 series (hard 1885-2099) |
 | Moon (precise tier) | Chebyshev fit to DE | embedded 1920-2080, full 1850-2150 |
 | Moon (fallback) | Meeus ch.47 abridged | book precision over the historical span |
-| Chiron, Ceres, Pallas, Juno, Vesta, Pholus | Chebyshev fit to Horizons | 1850-2150 |
+| Chiron, Ceres, Pallas, Juno, Vesta, Pholus | Chebyshev fit to Horizons | packs fitted 1600-2484 (Horizons serves these bodies only over ~1600-2500); validated 1850-2150 |
 | Uranian bodies | Kepler element pack | validated 1800-2149 |
 | Nodes, mean Lilith | analytic | no range limit |
 
@@ -74,42 +74,87 @@ All five remaining steps ran locally against `ssd.jpl.nasa.gov` and shipped:
    `validate_swiss.py` re-run over 1851-2149), the validation/provenance pages,
    the MCP spec + server prose, both `llms.txt` copies, and the package READMEs.
 
-## Tier B: the 1000-3000 CE wide tier (pipeline ready, mint pending)
+## Tier B: the wide tier (minted and measured -- the headline does NOT move)
 
-The engine side is complete and inert until data arrives -- the same pattern
-that landed the wide Pluto pack. Everything below the mint is shipped:
-`node-loader.ts` loads whatever pack span it finds, `engineCapabilities`
-reports each pack's true fitted span from the pack itself, `PackedBody`
-typing covers absence, `Chart.warnings` states out-of-validated-range
-computation and the delta-T uncertainty per epoch (`deltaTSigma`, Morrison &
-Stephenson 2004), and the fit + validation scripts take the wide window as
-arguments.
+The mint ran. The packs are real and shipped; the headline stays at
+**1850-2150**, because the measurement said so. This section records what was
+found, since a negative result that is written down is worth more than one
+that gets rediscovered.
 
-The mint itself needs outbound access to `ssd.jpl.nasa.gov` (Horizons),
-which sandboxed/CI environments do not have. From a machine with egress:
+### What the packs cover
 
-1. `python3 fit_pluto.py --wide` and `python3 fit_smallbody.py --wide`
-   (chiron + the five asteroids; per-body windows via `--year0/--year1`).
-   Horizons serves DE441 across the whole span. Packs land in both data
-   dirs; expect roughly linear growth with the window (~4x the current
-   packs). They ship as lazy chunks through the existing tarball list
-   (`scripts/check-tarball.mjs` gates it).
-2. `python3 validate_horizons.py --wide` -- measures the "1000-3000 wide"
-   band (~40 epochs per wing, every body its packs cover) into
-   `horizons-accuracy.json`.
-3. Only on those measured numbers ("validated, not asserted"): update
-   `accuracy.json` (`range`), the `MEASURED` table in
-   `packages/caelus/src/ranges.ts`, `docs/range-expansion.md`'s table, and
-   let the claims registry propagate the headline. Regenerate the golden
-   suite if any in-range behaviour changed (it should not: wider packs only
-   extend coverage).
+| pack | window | sampling | true error |
+|---|---|---|---|
+| Pluto (barycenter) | 1000-3000 | 1 day | 8.3e-7 AU (124 km, 0.005" at 33 AU) |
+| Chiron, Pholus | 1600-2484 | 1 day | 3.6-3.8e-6 AU (0.04-0.05") |
+| Ceres | 1600-2484 | 1 day | 4.9e-6 AU (0.36" at 2.8 AU) |
+| Pallas, Juno, Vesta | 1600-2484 | **6 hours** | 2.6-4.5e-6 AU (0.20-0.33") |
+
+Two source limits bound this, and neither is a fit limit:
+
+- **Small bodies exist only over ~1600-2500 in Horizons.** Their SPK solutions
+  integrate orbits fit to 19th-century-onward observations, so JPL publishes
+  neither earlier nor later epochs ("No ephemeris for target '1 Ceres
+  (A801 AA)' prior to A.D. 1599-DEC-11" / "after A.D. 2501-JAN-01"). Bisected
+  per body; all six report the same window. Only the majors and the Pluto
+  barycenter run on DE441 across 1000-3000. The fit window stops 16 years
+  short of the ceiling because the fit samples one maximum segment past its
+  end.
+- **Sampling step, not the Chebyshev grid, floors a fast body.** The cache
+  interpolates linearly between rows, so for Pallas/Juno/Vesta a 1-day step
+  capped the achievable error near 1e-5 AU (~1400 km) no matter how fine the
+  fit -- shorter segments and higher degrees made it slightly worse, not
+  better. Sampling those three at 6 hours cut it ~4x, into the target.
+
+### Why the headline does not move
+
+`validate_horizons.py --wide` measures a "1000-3000 wide" band (40 epochs)
+against JPL apparent RA/Dec. The packs hold across it. **The analytic
+theories around them do not:**
+
+| body | 1850-2150 | 1000-3000 wide | claim | mechanism |
+|---|---|---|---|---|
+| Mars | 0.18" | **10.75"** | 0.7" | VSOP87D truncation |
+| Uranus | 1.30" | **17.05"** | 1.9" | VSOP87D truncation |
+| Neptune | 2.35" | **15.41"** | 4.6" | VSOP87D truncation |
+| Moon | 0.39" | **10.74"** | 2.5" | outside the precise tier (Meeus ch.47) |
+| Saturn | 0.44" | 3.02" | 1.0" | VSOP87D truncation |
+| Pluto | 5.67" | 8.79" | -- | pack (contributes 0.005") |
+| small bodies | 2.3-13" | 3.1-11" | -- | pack (contributes <=0.36") |
+
+The packed bodies barely move (0.8-1.6x their core-band error) because a pack
+fit over the actual span holds over it. The truncated VSOP87D series and the
+Moon fallback degrade by 6-59x. So the wide packs extend *reach* -- charts
+outside 1850-2150 compute, and Pluto no longer lands in `Chart.unavailable` at
+1650 -- but engine *accuracy* does not follow, and the headline is an accuracy
+claim. `Chart.warnings` already states this per chart, and
+`engineCapabilities` reports `fitted` separately from `validated` for exactly
+this reason: a pack's span and a validated span are different facts.
+
+Raising the headline would take a fuller VSOP87 (or a different theory) and a
+wider precise-Moon tier -- position theory work, not more fitting.
+
+### A note on oracles
+
+`accuracy.json` (Swiss Ephemeris, ecliptic longitude) and
+`horizons-accuracy.json` (JPL Horizons, RA/Dec separation) measure different
+things against different references, so their numbers do not compare directly.
+Pluto reads 3.4" in the first and ~5.7" in the second; the Pluto entry's own
+note already says the Swiss bound is "vs SE's own Moshier Pluto", which is
+itself an approximation that differs from JPL. Both are true statements about
+different comparisons. Neither is a regression: the ~5.7" is unchanged from
+before the wide pack landed (5.668" -> 5.666").
 
 For the Hellenistic / Hermetic era (first-fifth centuries): the same
-machinery runs over any window DE441 covers -- nothing gates a 0-3000 fit
-run except the same egress. What bounds that era is not the position theory
-but delta T: sigma is minutes there, which smears the angles and the Moon
-while the slow bodies read fine. `Chart.warnings` states exactly that split
-per chart, so ancient charts are honestly usable rather than refused.
+machinery runs over any window DE441 covers, which is the majors and the
+Pluto barycenter -- the small bodies stop at ~1600 and no fitting reaches
+past a source that does not exist. Two things bound that era, and delta T is
+only the second. The first is the measurement above: VSOP87D truncation and
+the Moon fallback already miss by 10-17" at the edges of 1000-3000, so
+positions there are computed, not validated. Then delta-T sigma is minutes,
+which smears the angles and the Moon further while the slow bodies read fine.
+`Chart.warnings` states both splits per chart, so ancient charts are honestly
+usable rather than refused -- but "usable" means arcminutes, not arcseconds.
 
 ## Notes and non-goals
 

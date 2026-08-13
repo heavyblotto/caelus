@@ -9,17 +9,17 @@
         "mercury": 0.099,
         "venus": 0.113,
         "mars": 0.182,
-        "jupiter": 0.663,
-        "saturn": 0.459,
-        "uranus": 1.571,
-        "neptune": 2.356,
-        "pluto": 5.668,
-        "chiron": 2.609,
-        "ceres": 3.77,
-        "pallas": 13.337,
-        "juno": 4.913,
-        "vesta": 2.341,
-        "pholus": 8.029
+        "jupiter": 0.68,
+        "saturn": 0.443,
+        "uranus": 1.297,
+        "neptune": 2.353,
+        "pluto": 5.666,
+        "chiron": 2.603,
+        "ceres": 3.742,
+        "pallas": 13.343,
+        "juno": 4.92,
+        "vesta": 2.348,
+        "pholus": 8.022
       }
     },
     "1900-2099": {
@@ -30,17 +30,17 @@
         "mercury": 0.145,
         "venus": 0.11,
         "mars": 0.236,
-        "jupiter": 0.513,
-        "saturn": 0.383,
-        "uranus": 1.493,
-        "neptune": 2.436,
+        "jupiter": 0.511,
+        "saturn": 0.396,
+        "uranus": 1.368,
+        "neptune": 2.435,
         "pluto": 6.161,
-        "chiron": 2.187,
-        "ceres": 4.437,
-        "pallas": 13.059,
-        "juno": 3.628,
-        "vesta": 2.912,
-        "pholus": 8.071
+        "chiron": 2.184,
+        "ceres": 4.422,
+        "pallas": 13.079,
+        "juno": 3.658,
+        "vesta": 2.894,
+        "pholus": 8.079
       }
     },
     "1800-2200 edges": {
@@ -50,12 +50,33 @@
         "moon": 7.408,
         "mercury": 0.143,
         "venus": 0.138,
-        "mars": 0.311,
-        "jupiter": 0.733,
-        "saturn": 0.506,
-        "uranus": 1.84,
-        "neptune": 3.757,
-        "pluto": 6.134
+        "mars": 0.315,
+        "jupiter": 0.705,
+        "saturn": 0.544,
+        "uranus": 2.307,
+        "neptune": 3.75,
+        "pluto": 6.139
+      }
+    },
+    "1000-3000 wide": {
+      "epochs": 40,
+      "bodies": {
+        "sun": 0.356,
+        "moon": 10.738,
+        "mercury": 0.453,
+        "venus": 0.931,
+        "mars": 10.753,
+        "jupiter": 1.229,
+        "saturn": 3.016,
+        "uranus": 17.045,
+        "neptune": 15.406,
+        "pluto": 8.789,
+        "chiron": 3.999,
+        "ceres": 4.9,
+        "pallas": 11.131,
+        "juno": 5.916,
+        "vesta": 2.973,
+        "pholus": 8.384
       }
     }
   }

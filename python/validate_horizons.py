@@ -120,6 +120,9 @@ def fetch(command, jds):
 
 
 J1900 = julian_day(1900, 1, 1)
+# Horizons' small-body ephemeris window (see _needed and fit_smallbody.py).
+SMALLBODY_FLOOR_JD = julian_day(1600, 1, 1)
+SMALLBODY_CEILING_JD = julian_day(2500, 1, 1)
 BAND_ORDER = ["1850-2150", "1900-2099", "1800-2200 edges", "1000-3000 wide"]
 WIDE = "--wide" in sys.argv
 
@@ -127,13 +130,21 @@ WIDE = "--wide" in sys.argv
 def _needed(name):
     """TT epochs a body is sampled at: core+extended for all, plus the 1800/2200
     edges for the majors/Pluto/Moon (the asteroid/Chiron packs end at 2150),
-    plus the 1000-3000 wide band when --wide is set (every body: the engine
-    skips per-sample where a pack does not cover an epoch)."""
+    plus the 1000-3000 wide band when --wide is set -- but only over epochs the
+    SOURCE can serve. Horizons has no small-body ephemeris outside ~1600-2500
+    (their SPK solutions integrate orbits fit to 19th-century-onward
+    observations), so asking for Chiron at 1005 CE is not an out-of-pack sample
+    to be skipped after the fact, it is an error that aborts the run. The
+    majors and the Pluto barycenter run on DE441 across the whole span."""
     jds = list(EPOCHS_TT) + list(EXT_EPOCHS)
     if name in EDGE_BODIES:
         jds += list(EDGE_EPOCHS)
     if WIDE:
-        jds += list(WIDE_EPOCHS)
+        wide = WIDE_EPOCHS
+        if name not in EDGE_BODIES:  # i.e. the small bodies
+            wide = [jd for jd in wide
+                    if SMALLBODY_FLOOR_JD <= jd <= SMALLBODY_CEILING_JD]
+        jds += list(wide)
     return jds
 
 
