@@ -63,8 +63,9 @@ apogee's ~30° monthly swing is a two-body artifact; the sensible object
 interpolates between the Moon's *real* passages through apogee), built by
 the passage-spline construction — apogee passages found as maxima of the
 Moon's geocentric distance on the engine's own DE-grounded precise-Moon
-tier, the Moon's apparent (lon, lat) taken at each passage (the apsis *is*
-the Moon there), a natural cubic spline between passages, refit as a
+tier, the Moon's apparent longitude and latitude taken at each passage
+(the apsis coincides with the Moon there), a natural cubic spline between
+passages, refit as a
 Chebyshev pack (`python/fit_intp_apog.py`, ≈1″ fit residual over
 1850–2150). Degree-scale agreement with SE's variant is expected by
 construction — SE derives it from analytic lunar theory, and LibEphemeris
