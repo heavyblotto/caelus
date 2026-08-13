@@ -70,7 +70,16 @@ export function engineCapabilities(engine: Engine): EngineCapabilities {
 
   for (const body of engine.bodies()) {
     if (VSOP_BODIES.has(body)) {
-      caps.push({ body, source: "vsop87d", validated: HEADLINE });
+      // A loaded wide pack (fit_planet.py) supersedes the VSOP87D series for
+      // this body, and the capability report must say so: the source and the
+      // fitted span both change. Validated stays at the headline until the
+      // wide band is re-measured (validated, not asserted).
+      caps.push(body in packs
+        ? {
+          body, source: "chebyshev_pack", validated: HEADLINE,
+          fitted: packSpan(packs[body]),
+        }
+        : { body, source: "vsop87d", validated: HEADLINE });
     } else if (body === "moon") {
       caps.push(data.moonCheb
         ? {

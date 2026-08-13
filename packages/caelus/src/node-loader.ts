@@ -58,7 +58,12 @@ export function loadNodeData(
   // `pluto` is optional too: when a wide-range Chebyshev pack is present it
   // supersedes the embedded Meeus ch.37 series (valid 1885-2099) above, so
   // Pluto extends past that window at full precision; see fit_pluto.py.
-  for (const b of ["ceres", "pallas", "juno", "vesta", "pholus", "pluto"]) {
+  // The planets mars..neptune follow the same pattern (fit_planet.py): a
+  // Horizons/DE441 pack on disk supersedes their VSOP87D series, which
+  // drifts to 3-17" against the modern ephemeris at the 1000/3000 edges
+  // (range-expansion.md). No pack, no behaviour change.
+  for (const b of ["ceres", "pallas", "juno", "vesta", "pholus", "pluto",
+    "mars", "jupiter", "saturn", "uranus", "neptune"]) {
     if (existsSync(join(dir, `${b}_cheb.json`))) {
       (data.chebPacks ??= {})[b] = j(`${b}_cheb.json`);
     }

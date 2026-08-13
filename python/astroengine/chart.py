@@ -16,6 +16,9 @@ BODIES = ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn",
 ASTEROIDS = ["ceres", "pallas", "juno", "vesta", "pholus"]
 URANIANS = ["cupido", "hades", "zeus", "kronos", "apollon", "admetos",
             "vulkanus", "poseidon"]
+# Planets whose VSOP87D series a Horizons-fit Chebyshev pack may supersede
+# when `{body}_cheb.json` is on disk (fit_planet.py; the Pluto pattern).
+PLANET_PACK_BODIES = {"mars", "jupiter", "saturn", "uranus", "neptune"}
 EXTRA_BODIES = (["mean_lilith", "true_lilith", "intp_apog"]
                 + ASTEROIDS + URANIANS)
 
@@ -70,8 +73,12 @@ class Engine:
 
     def _has_pluto_pack(self):
         """True when a wide-range Pluto Chebyshev pack is available on disk."""
+        return self._has_pack("pluto")
+
+    def _has_pack(self, body):
+        """True when a `{body}_cheb.json` Chebyshev pack is on disk."""
         import os
-        return os.path.exists(os.path.join(core.DATA, "pluto_cheb.json"))
+        return os.path.exists(os.path.join(core.DATA, f"{body}_cheb.json"))
 
     def _pack(self, body):
         if body not in self._packs:
@@ -137,6 +144,14 @@ class Engine:
             lon = math.atan2(y, x) % (2 * math.pi)
             return lon, math.asin(z / r), None
         if body in ASTEROIDS or body in URANIANS:
+            return core.smallbody_apparent(self.vsop, self._pack(body), jde)
+        if body in PLANET_PACK_BODIES and self._has_pack(body):
+            # A wide-range Chebyshev pack (fit to the Horizons/DE441 system
+            # barycenter -- fit_planet.py) supersedes the VSOP87D series when
+            # present, exactly the Pluto pattern: VSOP87 represents DE200 and
+            # drifts to 3-17" against the modern ephemeris at the 1000/3000
+            # edges (range-expansion.md); the pack pins the source itself.
+            # Inert until a pack is minted: no pack, no behaviour change.
             return core.smallbody_apparent(self.vsop, self._pack(body), jde)
         return planet_apparent(self.vsop, body, jde)
 
@@ -205,6 +220,12 @@ class Engine:
             b = math.atan2(z, math.hypot(x, y))
             l, b = core._precess_ecliptic(l, b, core.J2000, jde)
         elif body in ASTEROIDS or body in URANIANS or body == "pluto":
+            x, y, z = self._pack(body).xyz(jde)
+            r = math.sqrt(x * x + y * y + z * z)
+            l = math.atan2(y, x) % (2 * math.pi)
+            b = math.atan2(z, math.hypot(x, y))
+            l, b = core._precess_ecliptic(l, b, core.J2000, jde)
+        elif body in PLANET_PACK_BODIES and self._has_pack(body):
             x, y, z = self._pack(body).xyz(jde)
             r = math.sqrt(x * x + y * y + z * z)
             l = math.atan2(y, x) % (2 * math.pi)

@@ -255,6 +255,41 @@ the slow bodies read fine. `Chart.warnings` states both splits per chart, so
 ancient charts are honestly usable rather than refused -- but "usable" means
 arcminutes, not arcseconds.
 
+## Tier C: raising the headline (wired and inert -- the mint runbook)
+
+The engine half is done, network-free, in the same inert-until-data pattern
+as the Pluto pack: `fit_planet.py` mints Horizons/DE441 Chebyshev packs for
+Mars, Jupiter, Saturn, Uranus, and Neptune (their system barycenters -- the
+same targets `validate_horizons.py` measures), and both engines route a
+planet through the packed-body pipeline whenever `{body}_cheb.json` is on
+disk (`node-loader.ts` / `chart.py`; `engineCapabilities` then reports
+`chebyshev_pack` with the pack's fitted span). `fit_moon.py` mints a wider
+`moon_cheb.full.json` in the exact shipped format, so the precise-Moon
+tier, `true_node_precise`, true Lilith, and a subsequent `fit_intp_apog.py`
+refit widen with it, all with no code change. No pack, no behaviour change:
+the full suite is pinned green in both states (the routing was exercised
+against a synthetic pack and removed).
+
+Run where `ssd.jpl.nasa.gov` is reachable:
+
+    python3 fit_planet.py mars saturn uranus neptune   # the four that drift
+    python3 fit_planet.py jupiter                      # optional: 1.23" wide today
+    python3 fit_moon.py                                # the big one: ~2.9M rows
+
+Then the doctrine loop: regenerate the goldens (positions move by up to the
+drift the packs remove), re-run `validate_horizons.py --wide` and
+`validate_swiss.py`, and move claims -- headline, accuracy.json,
+claims-registry docs -- only on the measured numbers.
+
+Sizes are measured at mint time, and shipping is a decision to make then:
+the giants land in the hundreds of kilobytes (tarball-friendly, add them to
+`check-tarball.mjs`), Mars in the megabytes, the wide Moon in the 10-20 MB
+range (repo-only like today's full Moon tier, or an optional download).
+Delta-T remains the honest ceiling for the Moon and the angles before
+~1500: sigma is minutes, the smear is tens of arcseconds, so wide-band
+claims are per-body and TT-honest rather than one headline number
+(`Chart.warnings` already states both splits per chart).
+
 ## Notes and non-goals
 
 - With the wide Pluto pack loaded, Pluto behaves like the other Chebyshev

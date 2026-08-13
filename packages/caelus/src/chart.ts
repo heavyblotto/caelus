@@ -428,13 +428,15 @@ export class Engine {
    * ```
    */
   bodies(): BodyId[] {
-    return [
+    // De-duplicated: a body that is both core and pack-backed (pluto today,
+    // any planet with a wide pack loaded) appears once.
+    return [...new Set<BodyId>([
       ...[...BODIES, ...EXTRA_BODIES].filter((b) => b !== "chiron" || this.chironCheb),
       ...(this.intpApog ? ["intp_apog"] : []),
       ...Object.keys(this.data.chebPacks ?? {}),
       ...Object.keys(this.data.keplerPack?.bodies ?? {}),
       ...this.runtimeSources.keys(),
-    ];
+    ])];
   }
 
   /**
