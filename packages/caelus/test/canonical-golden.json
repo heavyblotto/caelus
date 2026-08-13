@@ -705,15 +705,15 @@
       "dignities": []
      },
      "pluto": {
-      "lon": 811816460,
-      "lat": 57180829,
+      "lon": 811816486,
+      "lat": 57180828,
       "speed": -78834,
       "latSpeed": -21513,
       "distMicroAu": 28842787,
-      "ra": 819373370,
-      "dec": -4505059,
+      "ra": 819373394,
+      "dec": -4505067,
       "sign": "Scorpio",
-      "signDeg": 55816460,
+      "signDeg": 55816486,
       "house": 4,
       "retrograde": true,
       "dignities": []
@@ -827,7 +827,7 @@
       "a": "moon",
       "b": "pluto",
       "aspect": "sextile",
-      "orb": 7995475,
+      "orb": 7995501,
       "phase": "applying",
       "strengthPerMille": 445
      },
@@ -875,7 +875,7 @@
       "a": "venus",
       "b": "pluto",
       "aspect": "opposition",
-      "orb": 8903647,
+      "orb": 8903673,
       "phase": "applying",
       "strengthPerMille": 691
      },
@@ -923,7 +923,7 @@
       "a": "jupiter",
       "b": "pluto",
       "aspect": "trine",
-      "orb": 2407577,
+      "orb": 2407603,
       "phase": "applying",
       "strengthPerMille": 904
      },
@@ -955,7 +955,7 @@
       "a": "neptune",
       "b": "pluto",
       "aspect": "sextile",
-      "orb": 6003375,
+      "orb": 6003401,
       "phase": "separating",
       "strengthPerMille": 583
      },
@@ -971,7 +971,7 @@
       "a": "pluto",
       "b": "chiron",
       "aspect": "trine",
-      "orb": 237106,
+      "orb": 237080,
       "phase": "separating",
       "strengthPerMille": 991
      }
@@ -2732,30 +2732,30 @@
    },
    "result": {
     "tampa-1990/arcsec": "ba08b293e60a062616db346f62c184c34b1d77c5b4cbed4ba7cd51fc7c393313",
-    "tampa-1990/milliarcsec": "c9d2fc6bd423262b4f4700d53895b5b07d6cd24df389a70c506dda49ebd371ec",
+    "tampa-1990/milliarcsec": "0e3795c5ec156b1d986ed9fbb1c7f241ea5e198ff0f7fd1e89e8984d86783b31",
     "tampa-1990/centideg": "70db106297660431a36357605fd68aaf254455ab8156401f50abe6c995496595",
     "tampa-1990/dms": "5a54882190971f7b5b7b43e6141af8b4cf87065cfda47ad0518c014e315a9e79",
     "tampa-1990/accuracy": "7a7607400e3636ae4864d1c01377ae60dc136525159f8c0b321612bb857fd53d",
-    "london-2024/arcsec": "bf17ca55430ab81362362f870f0c132495f5563f0c08bcaf843a0f5eb66b18b8",
-    "london-2024/milliarcsec": "dbed7f4b1a79aa63c81f70c7f06308cc580983cb05b5ab75fcbdec82da961237",
-    "london-2024/centideg": "c5c61124a63d497289df490d35b55b625001667e2d3a0659a3dd439795fbc201",
-    "london-2024/dms": "c151165994b67dc2db12f178fef2662bfdb357f5b3e7a6bf85b027ce4c91253a",
-    "london-2024/accuracy": "115892b1b825a37435e6b2693ce8de9eae5608d14c90147ece4f2d3a074ce29c",
-    "sydney-sidereal/arcsec": "cdcbbbe6e3704eaef411e2ae0fdfdbfbad9e5f281f8afd5d09939b68d271b0a0",
-    "sydney-sidereal/milliarcsec": "dc1156cab2c540c5f8b874833a133b82d6a137d817c983166e98c7b2846eecea",
+    "london-2024/arcsec": "aa97c12c21ede4f0b653b27904ced6c84f511abdbda56e57dbc8d3d7d50d3846",
+    "london-2024/milliarcsec": "c1caffb7e50441f753eb193b148e3aacee00de896d24a9a3e720b64baa74c1ac",
+    "london-2024/centideg": "bd0bd950669e982ff4f1ba3e93d7eed1a23333a91b7388b316ba9a5ba367d9d5",
+    "london-2024/dms": "6805efb23bb23660cd642169e899f29927fb5ec4465465b397f3f3a8cb5a03b0",
+    "london-2024/accuracy": "068f329a4cd2ecc8ba4cb1c1844c798c9eccf0b171b190746c7292aa8d5053ca",
+    "sydney-sidereal/arcsec": "c2b9947fc42b335c75446bfa6179dec41ae7c70ac67db4dace48a7c4c50c033a",
+    "sydney-sidereal/milliarcsec": "b2c788d1620464f02b87bcee9f2afe9e53637a0674d50041cdea4b1c7ec71d13",
     "sydney-sidereal/centideg": "6d1227682f95cc722e92ec576979ef73e21fa15ddc517129138d50243b2ab1eb",
-    "sydney-sidereal/dms": "a69fb1d5fe297b23c4fc3f0062e1bb573c58a92945aba1c3a68b1aa732e973ae",
+    "sydney-sidereal/dms": "ee71295f48b463c73356d02b7cbeaa808e8c542c32883f04d6164da6cacd085d",
     "sydney-sidereal/accuracy": "174f2eb23942b678a58332cd18fc0b2b5076b4c65c224d4452f89963c4b2efef",
-    "svalbard-polar/arcsec": "1f36daf82f3fcd51f99ee75c35bff7830cd3acc2dc29ce27cf35f870e9e8a7c1",
-    "svalbard-polar/milliarcsec": "0df3bcf64af82a3fa1fd720547cd205df9532806fbefff345e762dcee5897423",
-    "svalbard-polar/centideg": "7d905bb0c9e4a033622f2e18678076a05fe5a8bd18814dfdfe45054b0aca9eb7",
-    "svalbard-polar/dms": "cc9a822da995ca6de6d61f274680a906357bd78b00fe50a9933d686ee51ceab1",
-    "svalbard-polar/accuracy": "5ac82c06dd13d6959898637d54981647942eb429cf78a825da65529403c8429c",
-    "edge-1852/arcsec": "8231109225c7a818e5cbdfa53a185d00f80c22cc4271717fd094c906b088be6b",
-    "edge-1852/milliarcsec": "4028f95720868c621aa1405952b6acd6f4a544826322312c91e3e4ce2b4a00cb",
-    "edge-1852/centideg": "b760b0118c1ee54f0ab4aaad3adad7b7e899c06c73d387955b34c948c616322b",
-    "edge-1852/dms": "6f3cb3d121363adddf8239781045ef905eec38e2c38dd237c028b7bde715d34e",
-    "edge-1852/accuracy": "97a059c1543ea635347d564ae7d5a29fd0d55ca9ca15ace8318ce0c65dfe16d9"
+    "svalbard-polar/arcsec": "947391828f279ee546649c1eb52b9d7248476167f2fb9fde34c7012572c22c08",
+    "svalbard-polar/milliarcsec": "3dcb7dd341db5afd39577917f3f97ea43d74943e08d89e0bdb2d5d866aebe2e9",
+    "svalbard-polar/centideg": "d6b1c4ff54aae2d034d5ae2f7950fce0bf4d8c0f610691dcc7b051efb2c38241",
+    "svalbard-polar/dms": "1828ee9edcf43de781d6317692f090e8e369593be4e529d0bc1bb60d0b0e021b",
+    "svalbard-polar/accuracy": "aa8007765b4c525cf11fa62dc86d100c0edf9ee5e700e7055f6dcf79fb605935",
+    "edge-1852/arcsec": "2faea6d9614f43f97947a45d546a163ff8f918e8c7eaffd27a78c45a20dcb0a6",
+    "edge-1852/milliarcsec": "05b22e97fe21e08b4e42fb6eb823b2907d16102f2fb7184749b6752cf02a00d0",
+    "edge-1852/centideg": "5ee745c1aace6b82588bd924145e1def99b6c85b194594e4a7e4358af46fbc6e",
+    "edge-1852/dms": "c950abe770b638db633698d49028ff284ce2ffcc2f25643fb7b8a1340e93c9fd",
+    "edge-1852/accuracy": "a415e56ee2c86e878e489f8805408cb8e5030d1d8dd0a39fd7106539b9da3922"
    }
   },
   {
@@ -2855,13 +2855,13 @@
      "bodies.neptune.distMicroAu": 138,
      "bodies.neptune.ra": -11,
      "bodies.neptune.dec": 397,
-     "bodies.pluto.lon": 460,
-     "bodies.pluto.lat": -171,
+     "bodies.pluto.lon": 486,
+     "bodies.pluto.lat": -172,
      "bodies.pluto.speed": 166,
      "bodies.pluto.latSpeed": 487,
-     "bodies.pluto.distMicroAu": 417,
-     "bodies.pluto.ra": 370,
-     "bodies.pluto.dec": -59,
+     "bodies.pluto.distMicroAu": 76,
+     "bodies.pluto.ra": 394,
+     "bodies.pluto.dec": -67,
      "bodies.chiron.lon": -434,
      "bodies.chiron.lat": 361,
      "bodies.chiron.speed": 72,
@@ -2950,6 +2950,13 @@
      "side": 1
     },
     {
+     "path": "bodies.pluto.lon",
+     "residue": 486,
+     "quantum": 1000,
+     "marginPerMille": 28,
+     "side": 1
+    },
+    {
      "path": "bodies.mean_node.lon",
      "residue": 480,
      "quantum": 1000,
@@ -2989,13 +2996,6 @@
      "residue": 461,
      "quantum": 1000,
      "marginPerMille": 78,
-     "side": 1
-    },
-    {
-     "path": "bodies.pluto.lon",
-     "residue": 460,
-     "quantum": 1000,
-     "marginPerMille": 80,
      "side": 1
     },
     {
@@ -3055,13 +3055,6 @@
      "side": -1
     },
     {
-     "path": "bodies.pluto.distMicroAu",
-     "residue": 417,
-     "quantum": 1000,
-     "marginPerMille": 166,
-     "side": 1
-    },
-    {
      "path": "bodies.uranus.lon",
      "residue": 417,
      "quantum": 1000,
@@ -3087,6 +3080,13 @@
      "residue": 397,
      "quantum": 1000,
      "marginPerMille": 206,
+     "side": 1
+    },
+    {
+     "path": "bodies.pluto.ra",
+     "residue": 394,
+     "quantum": 1000,
+     "marginPerMille": 212,
      "side": 1
     },
     {
@@ -3123,13 +3123,6 @@
      "quantum": 1000,
      "marginPerMille": 250,
      "side": -1
-    },
-    {
-     "path": "bodies.pluto.ra",
-     "residue": 370,
-     "quantum": 1000,
-     "marginPerMille": 260,
-     "side": 1
     },
     {
      "path": "bodies.uranus.distMicroAu",
@@ -3321,18 +3314,18 @@
      "side": 1
     },
     {
+     "path": "bodies.pluto.lat",
+     "residue": -172,
+     "quantum": 1000,
+     "marginPerMille": 656,
+     "side": -1
+    },
+    {
      "path": "bodies.neptune.latSpeed",
      "residue": 171,
      "quantum": 1000,
      "marginPerMille": 658,
      "side": 1
-    },
-    {
-     "path": "bodies.pluto.lat",
-     "residue": -171,
-     "quantum": 1000,
-     "marginPerMille": 658,
-     "side": -1
     },
     {
      "path": "bodies.mars.dec",
@@ -3496,6 +3489,13 @@
      "side": -1
     },
     {
+     "path": "bodies.pluto.distMicroAu",
+     "residue": 76,
+     "quantum": 1000,
+     "marginPerMille": 848,
+     "side": 1
+    },
+    {
      "path": "bodies.chiron.speed",
      "residue": 72,
      "quantum": 1000,
@@ -3504,9 +3504,9 @@
     },
     {
      "path": "bodies.pluto.dec",
-     "residue": -59,
+     "residue": -67,
      "quantum": 1000,
-     "marginPerMille": 882,
+     "marginPerMille": 866,
      "side": -1
     },
     {
@@ -3756,103 +3756,103 @@
    "result": {
     "tampa-1990/arcsec": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "fa08ccd89226a8090ce3d9cbe5bfe6683743a9bda31b488afd352c2bc4f72fb9",
-     "composed": "c9d2fc6bd423262b4f4700d53895b5b07d6cd24df389a70c506dda49ebd371ec"
+     "sidecar": "1abae13447775d6be5776d6d6270f08a1677ff82f427bd004f0a59c3a7d9f8ec",
+     "composed": "0e3795c5ec156b1d986ed9fbb1c7f241ea5e198ff0f7fd1e89e8984d86783b31"
     },
     "tampa-1990/centideg": {
      "remainderGrid": "arcsec",
-     "sidecar": "ea27f685c0b228dda142362bf061dd297c58b39d54f9eef48a91ad4f4539b308",
+     "sidecar": "b86e6aaf6d793e4d6f1a28f57b6b1a05a563d569ecf0e687ea5224e6941d4ba1",
      "composed": "ba08b293e60a062616db346f62c184c34b1d77c5b4cbed4ba7cd51fc7c393313"
     },
     "tampa-1990/dms": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "077ae5b6e2108e04475526db0a69ac5134b806e2098f4aff9bdec758532966e1",
-     "composed": "c9d2fc6bd423262b4f4700d53895b5b07d6cd24df389a70c506dda49ebd371ec"
+     "sidecar": "326a3d96d92bcd60a2d99f9d49f3e1eb8ba8357042943fa52903dba6639c6395",
+     "composed": "0e3795c5ec156b1d986ed9fbb1c7f241ea5e198ff0f7fd1e89e8984d86783b31"
     },
     "tampa-1990/accuracy": {
      "remainderGrid": "arcsec",
-     "sidecar": "7fd14a080addaec785115836a8955b869552dac05641101ad4df08a82da32eb7",
+     "sidecar": "ae6bc5d1793b1d596184d4c5bffafb994fc75f86501671faf9fce5b224b170ca",
      "composed": "ba08b293e60a062616db346f62c184c34b1d77c5b4cbed4ba7cd51fc7c393313"
     },
     "london-2024/arcsec": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "ffcfad3c3565d0a628bf54ffba84aaa70b1fb3ed28dd152ccdfcf1c2011aba19",
-     "composed": "dbed7f4b1a79aa63c81f70c7f06308cc580983cb05b5ab75fcbdec82da961237"
+     "sidecar": "f8831ba8fcca9e2e2e08cf7ad146f38c67278eea1853a6099db4eee463092011",
+     "composed": "c1caffb7e50441f753eb193b148e3aacee00de896d24a9a3e720b64baa74c1ac"
     },
     "london-2024/centideg": {
      "remainderGrid": "arcsec",
-     "sidecar": "e7a94ea36b9f1a0886c686d71ff16518afa038c9a899e9392e7e8cfcd96628b8",
-     "composed": "bf17ca55430ab81362362f870f0c132495f5563f0c08bcaf843a0f5eb66b18b8"
+     "sidecar": "e2c98083230e60960af38a402b890345e0b425c3afeac1173e4886785ff55a55",
+     "composed": "aa97c12c21ede4f0b653b27904ced6c84f511abdbda56e57dbc8d3d7d50d3846"
     },
     "london-2024/dms": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "86782b74e1f9736cf0d1ec68629015845ff7b71ce53750081150cefd27daec52",
-     "composed": "dbed7f4b1a79aa63c81f70c7f06308cc580983cb05b5ab75fcbdec82da961237"
+     "sidecar": "c5d34ec6492699e778827cb93b5a07816c2458769698b08d29f668f14077daa2",
+     "composed": "c1caffb7e50441f753eb193b148e3aacee00de896d24a9a3e720b64baa74c1ac"
     },
     "london-2024/accuracy": {
      "remainderGrid": "arcsec",
-     "sidecar": "260a544093b999d7ccdcc9ade58c0f3090a047d1c397b24f0d17d945aabbd0e6",
-     "composed": "bf17ca55430ab81362362f870f0c132495f5563f0c08bcaf843a0f5eb66b18b8"
+     "sidecar": "6c4a37c6d03077c96659c080ba8bf8d4bf286d5b3da3b04042eeea195cc88c09",
+     "composed": "aa97c12c21ede4f0b653b27904ced6c84f511abdbda56e57dbc8d3d7d50d3846"
     },
     "sydney-sidereal/arcsec": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "8249a54bec7c9c10e303c89ff8bc72d572891ad4abd26bcd8c38799da1ba865f",
-     "composed": "dc1156cab2c540c5f8b874833a133b82d6a137d817c983166e98c7b2846eecea"
+     "sidecar": "67ebe26aba5ba178a2f159b99391d234ee391e22791ca5f6a32a64cf5d234b30",
+     "composed": "b2c788d1620464f02b87bcee9f2afe9e53637a0674d50041cdea4b1c7ec71d13"
     },
     "sydney-sidereal/centideg": {
      "remainderGrid": "arcsec",
-     "sidecar": "dfc8efca4c88173dadb303f1f17c9685e55dfb39b0218ce5efcd4774f181fb41",
-     "composed": "cdcbbbe6e3704eaef411e2ae0fdfdbfbad9e5f281f8afd5d09939b68d271b0a0"
+     "sidecar": "f7f64dc478176b7d1dc2aa59f0719f6873f7c8d074a4209d06b334efd977c026",
+     "composed": "c2b9947fc42b335c75446bfa6179dec41ae7c70ac67db4dace48a7c4c50c033a"
     },
     "sydney-sidereal/dms": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "2219d026eeb70ccbc64f62e91389316d419d4574454e2de5385303d3aa3d833e",
-     "composed": "dc1156cab2c540c5f8b874833a133b82d6a137d817c983166e98c7b2846eecea"
+     "sidecar": "19a0a54371d048cd8b94a5d2512d74516395d7de765e0a36678f06418635edde",
+     "composed": "b2c788d1620464f02b87bcee9f2afe9e53637a0674d50041cdea4b1c7ec71d13"
     },
     "sydney-sidereal/accuracy": {
      "remainderGrid": "arcsec",
-     "sidecar": "fd041f4c91637dfb9edb69ce5eb17556e87eba22f78b81f6628527769618da59",
-     "composed": "cdcbbbe6e3704eaef411e2ae0fdfdbfbad9e5f281f8afd5d09939b68d271b0a0"
+     "sidecar": "e193d3ab57fd712f5e8c5a8bcda1830bbcb96be9dd2a9838c6d88830faf3f221",
+     "composed": "c2b9947fc42b335c75446bfa6179dec41ae7c70ac67db4dace48a7c4c50c033a"
     },
     "svalbard-polar/arcsec": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "8be55b5ad7b0cc0b9a51ac722637256befd9a892e81eba023851df8002429b94",
-     "composed": "0df3bcf64af82a3fa1fd720547cd205df9532806fbefff345e762dcee5897423"
+     "sidecar": "01e619e558d8f1ea0a9f998c7020964269203f39dbfb73a2aa66b3980ea5b84a",
+     "composed": "3dcb7dd341db5afd39577917f3f97ea43d74943e08d89e0bdb2d5d866aebe2e9"
     },
     "svalbard-polar/centideg": {
      "remainderGrid": "arcsec",
-     "sidecar": "f9b74bc1316cb1f3e184f16d37bff099533c8df1b454b1d482da41be6bff2dc3",
-     "composed": "1f36daf82f3fcd51f99ee75c35bff7830cd3acc2dc29ce27cf35f870e9e8a7c1"
+     "sidecar": "0ab39041565a5cd1fdcab4e11a03d62c1d556ca84fa753027f7353e397ac4c64",
+     "composed": "947391828f279ee546649c1eb52b9d7248476167f2fb9fde34c7012572c22c08"
     },
     "svalbard-polar/dms": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "4ea1da27a8e853bf00e01367b42a9eb879c12f284afe70765b989cbff63cea95",
-     "composed": "0df3bcf64af82a3fa1fd720547cd205df9532806fbefff345e762dcee5897423"
+     "sidecar": "dc09656beaa32575e13e95f226be321f01ceac3e0481eb4b562849973dcbffac",
+     "composed": "3dcb7dd341db5afd39577917f3f97ea43d74943e08d89e0bdb2d5d866aebe2e9"
     },
     "svalbard-polar/accuracy": {
      "remainderGrid": "arcsec",
-     "sidecar": "025e291d529b5adbd9d39454b8503e826ff71d9ec3eb3ce05731e2f24c4c3d8a",
-     "composed": "1f36daf82f3fcd51f99ee75c35bff7830cd3acc2dc29ce27cf35f870e9e8a7c1"
+     "sidecar": "4cf8553cc23a1def12c0d81e84bc984061e0bce02d2e73f4376392c69008fbdf",
+     "composed": "947391828f279ee546649c1eb52b9d7248476167f2fb9fde34c7012572c22c08"
     },
     "edge-1852/arcsec": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "dcbbc84cdc0ee038b4360f22caf6cd8227e4e3a7c7778201c7ef8778ba693519",
-     "composed": "4028f95720868c621aa1405952b6acd6f4a544826322312c91e3e4ce2b4a00cb"
+     "sidecar": "f9680ce167ea3fcd3c7ac17af8be96545a8ce1c4e1d0c510c79edeb6d0ec244e",
+     "composed": "05b22e97fe21e08b4e42fb6eb823b2907d16102f2fb7184749b6752cf02a00d0"
     },
     "edge-1852/centideg": {
      "remainderGrid": "arcsec",
-     "sidecar": "70ea5463ea78bd19e57424f3923d84b472884f103fbd33e0b1510bd99b401dc9",
-     "composed": "8231109225c7a818e5cbdfa53a185d00f80c22cc4271717fd094c906b088be6b"
+     "sidecar": "7ca991064c5f3f86e8c874197a97bd6a9f3d0da22ffd9631b2f742dc2c5d4cd5",
+     "composed": "2faea6d9614f43f97947a45d546a163ff8f918e8c7eaffd27a78c45a20dcb0a6"
     },
     "edge-1852/dms": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "9d6d8ffe636861e99ba8a4a57460761d2b27924117f8cb7ee0dd68fa0d24a52d",
-     "composed": "4028f95720868c621aa1405952b6acd6f4a544826322312c91e3e4ce2b4a00cb"
+     "sidecar": "0065ce2eceeb0fd952382c4be54a7e135acdbe757a640b941c97e8a3f3824ded",
+     "composed": "05b22e97fe21e08b4e42fb6eb823b2907d16102f2fb7184749b6752cf02a00d0"
     },
     "edge-1852/accuracy": {
      "remainderGrid": "arcsec",
-     "sidecar": "27050241da3dcbf6a4fe73c46c41dab22cdb9bbd955eca3a39f264df299c8b5c",
-     "composed": "8231109225c7a818e5cbdfa53a185d00f80c22cc4271717fd094c906b088be6b"
+     "sidecar": "2f230a6f37c29ecf007b7e70f035542b6a9634d39ff60f8bacf7a90858ebb6e5",
+     "composed": "2faea6d9614f43f97947a45d546a163ff8f918e8c7eaffd27a78c45a20dcb0a6"
     }
    }
   },

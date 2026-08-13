@@ -65,6 +65,31 @@ class ChebSeries:
         return tuple(pos), tuple(vel)
 
 
+def max_error(data, jds, xs, ys, zs):
+    """Worst radial error of a fitted pack at *independent* epochs.
+
+    fit() reports its residual only at the Chebyshev-Gauss-Lobatto nodes the
+    fit itself used, which systematically understates the error between nodes
+    (the shipped 1700-2200 Pluto pack quotes 4.1e-6 AU but measures 9.6e-6 AU
+    here). Passing the raw source samples -- epochs the fit never saw -- gives
+    the honest figure, which is the one that belongs in a pack's provenance
+    and the one a selection rule should be written against.
+
+    Epochs outside the fitted span are skipped. Returns source units (AU).
+    """
+    series = ChebSeries(data)
+    worst = 0.0
+    for jd, x, y, z in zip(jds, xs, ys, zs):
+        jd = float(jd)
+        if not (series.jd0 <= jd <= series.jd1):
+            continue
+        px, py, pz = series.xyz(jd)
+        d = math.sqrt((px - x) ** 2 + (py - y) ** 2 + (pz - z) ** 2)
+        if d > worst:
+            worst = d
+    return worst
+
+
 def fit(sample_fn, jd0, jd1, seg_days, degree, scale=1.0, samples_per_seg=None,
         sig=9):
     """Fit segmented Chebyshev series.

@@ -38,6 +38,16 @@ HERE = os.path.dirname(__file__)
 RANGE = (1850, 2150)
 RESID_TARGET = 5e-6  # AU, same bar as the Chiron fit (~1 km at 1 AU)
 
+# Horizons will not serve small bodies before this epoch: their SPK solutions
+# are fit to observations that begin with the 19th-century discoveries, so JPL
+# does not integrate them back past ~1600 (Ceres: "No ephemeris for target
+# '1 Ceres (A801 AA)' prior to A.D. 1599-DEC-11"; verified by bisection).
+#
+# This is a source limit, not a fit limit, and it bounds the wide tier: the
+# major planets and the Pluto barycenter run on DE441 across 1000-3000, but
+# these six cannot. A wide run therefore starts here, not at 1000.
+SMALLBODY_EPOCH_FLOOR = 1600
+
 
 def fit_body(name, year0=RANGE[0], year1=RANGE[1]):
     command, label = BODIES[name]
@@ -93,8 +103,18 @@ def main():
     ap.add_argument("--wide", action="store_true",
                     help="shorthand for --year0 1000 --year1 3000 (the lazy wide tier)")
     args = ap.parse_args()
-    year0 = 1000 if args.wide else args.year0
+    # --wide means "as wide as the source allows": for small bodies that is
+    # the ~1600 SPK floor, not the 1000 the majors reach. Clamping (with a
+    # stated reason) beats a Horizons stack trace 700 requests in.
+    year0 = SMALLBODY_EPOCH_FLOOR if args.wide else args.year0
     year1 = 3000 if args.wide else args.year1
+    if year0 < SMALLBODY_EPOCH_FLOOR:
+        print(f"ERROR: Horizons has no small-body ephemeris before "
+              f"{SMALLBODY_EPOCH_FLOOR} (asked for {year0}).\n"
+              f"       Small-body SPK solutions are fit to 19th-century-onward\n"
+              f"       observations; JPL does not integrate them back further.\n"
+              f"       Use --year0 {SMALLBODY_EPOCH_FLOOR} or later.")
+        sys.exit(2)
     # chiron only refits on an explicit request or a widened window: the
     # default five keep the Tier 2 default behaviour byte-identical.
     default = [b for b in BODIES if b != "chiron"] if (year0, year1) == RANGE \

@@ -27,10 +27,33 @@ HERE = os.path.dirname(__file__)
 API = "https://ssd.jpl.nasa.gov/api/horizons.api"
 CACHE = os.path.join(HERE, "horizons_apparent_cache.json")
 
+# Horizons COMMAND per body. Mars and the giants use their SYSTEM BARYCENTER
+# (4, 5, 6, 7, 8) rather than the planet center (499, 599, 699, 799, 899):
+# the center-of-body ephemerides are bounded by their satellite solutions and
+# return "No ephemeris for target ... prior to A.D. 1600" (verified per body),
+# while the barycenters run across the full DE441 span. This is the same
+# distinction already made for Pluto (9, not 999) -- there for smoothness,
+# here for reach.
+#
+# Measured effect of the switch (engine vs Horizons, sampled 1900/2000/2100):
+# Mars is identical to 4 decimals (its moons are negligible); Uranus improves
+# markedly (0.32" -> 0.07" at 1900, 0.31" -> 0.02" at 2100) and Neptune and
+# Jupiter improve slightly, consistent with VSOP87D being a barycentric theory
+# for the giants. Saturn is the one body that reads slightly WORSE against the
+# barycenter (~0.02-0.04"), still far inside its published bound.
+#
+# So this is not a free relabelling: it shifts the measured per-body numbers at
+# the hundredth-arcsecond level. It is the correct comparison (like body to
+# like) and it is what makes the pre-1600 bands measurable at all, but any
+# accuracy figure regenerated after this change must be re-read, not assumed
+# unchanged.
+#
+# Mercury, Venus, the Moon (301), and the Sun (10) have no such bound and are
+# requested directly.
 BODIES = {
     "sun": "10", "moon": "301", "mercury": "199", "venus": "299",
-    "mars": "499", "jupiter": "599", "saturn": "699", "uranus": "799",
-    "neptune": "899", "pluto": "9", "chiron": "2060", "ceres": "1;",
+    "mars": "4", "jupiter": "5", "saturn": "6", "uranus": "7",
+    "neptune": "8", "pluto": "9", "chiron": "2060", "ceres": "1;",
     "pallas": "2;", "juno": "3;", "vesta": "4;", "pholus": "5145;",
 }
 # Bodies measured out to the 1800/2200 edges. The asteroid + Chiron Chebyshev
@@ -114,6 +137,21 @@ def _needed(name):
     return jds
 
 
+def _save(cache):
+    """Write the sample cache atomically.
+
+    The fetch loop checkpoints after every request so a long run is resumable,
+    but writing in place meant a mid-run failure (a Horizons range error, a
+    dropped connection) left the *committed* cache truncated or half-updated.
+    Write to a sibling temp file and rename: the cache is either the old one
+    or the new one, never a partial.
+    """
+    tmp = CACHE + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(cache, f)
+    os.replace(tmp, CACHE)
+
+
 def main():
     cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
     # Pluto moved from body center (999) to barycenter (9) to match the engine's
@@ -122,6 +160,13 @@ def main():
     if cache.get("_pluto_center") != "9":
         cache.pop("pluto", None)
         cache["_pluto_center"] = "9"
+    # Same reasoning for Mars and the giants (499->4, 599->5, 699->6, 799->7,
+    # 899->8): rows fetched against the planet centers are a different target
+    # and must not be mixed with barycenter rows, so drop them once.
+    if cache.get("_planet_center") != "barycenter":
+        for _n in ("mars", "jupiter", "saturn", "uranus", "neptune"):
+            cache.pop(_n, None)
+        cache["_planet_center"] = "barycenter"
 
     # incremental fetch: only pull (body, epoch) pairs not already cached
     for name, cmd in BODIES.items():
@@ -131,10 +176,10 @@ def main():
         if miss:
             for i in range(0, len(miss), 40):  # keep TLIST requests modest
                 rows.extend(fetch(cmd, miss[i:i + 40]))
-                json.dump(cache | {name: rows}, open(CACHE, "w"))
+                _save(cache | {name: rows})
                 time.sleep(0.2)
             cache[name] = rows
-            json.dump(cache, open(CACHE, "w"))
+            _save(cache)
 
     eng = Engine("full")
     worst = {}   # (band, body) -> worst arcsec
