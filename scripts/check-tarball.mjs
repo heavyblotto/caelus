@@ -14,7 +14,15 @@ const REQUIRED = [
   "data/juno_cheb.json",
   "data/vesta_cheb.json",
   "data/pholus_cheb.json",
-  "data/pluto_cheb.json",   // wide-range Pluto (1700-2212); supersedes Meeus in-range
+  "data/pluto_cheb.json",   // wide-range Pluto (1000-3000); supersedes Meeus in-range
+  // Wide planet packs (fit_planet.py, 1000-3000, DE441 barycenters). These
+  // supersede VSOP87D wherever they are present, which is the whole point:
+  // Uranus and Neptune were the engine's worst bodies at the wide edges
+  // (20.3" / 17.6") and read 0.145" / 0.118" through the packs.
+  "data/mars_cheb.json",
+  "data/saturn_cheb.json",
+  "data/uranus_cheb.json",
+  "data/neptune_cheb.json",
   "data/uranian_kepler.json",
   "data/turbo.json",        // sample turbo pack so the turbo tier works out of the box
   "data/chiron_cheb.json",

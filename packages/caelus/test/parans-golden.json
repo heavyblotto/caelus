@@ -16,8 +16,8 @@
      "a_angle": "rise",
      "b": "mars",
      "b_angle": "mtransit",
-     "jd": 2448052.796048,
-     "gap_min": 19.9977
+     "jd": 2448052.796049,
+     "gap_min": 19.9979
     },
     {
      "a": "jupiter",
@@ -25,7 +25,7 @@
      "b": "mars",
      "b_angle": "set",
      "jd": 2448053.066265,
-     "gap_min": 28.8399
+     "gap_min": 28.8396
     },
     {
      "a": "jupiter",
@@ -57,7 +57,7 @@
      "b": "moon",
      "b_angle": "mtransit",
      "jd": 2448052.551613,
-     "gap_min": 4.8138
+     "gap_min": 4.8136
     },
     {
      "a": "mars",
@@ -65,15 +65,15 @@
      "b": "moon",
      "b_angle": "itransit",
      "jd": 2448053.063645,
-     "gap_min": 21.2948
+     "gap_min": 21.2945
     },
     {
      "a": "mars",
      "a_angle": "itransit",
      "b": "sun",
      "b_angle": "set",
-     "jd": 2448053.295619,
-     "gap_min": 19.9625
+     "jd": 2448053.29562,
+     "gap_min": 19.9627
     },
     {
      "a": "moon",
@@ -81,7 +81,7 @@
      "b": "saturn",
      "b_angle": "rise",
      "jd": 2448053.377189,
-     "gap_min": 20.5097
+     "gap_min": 20.5096
     },
     {
      "a": "saturn",
@@ -89,7 +89,7 @@
      "b": "venus",
      "b_angle": "rise",
      "jd": 2448052.614448,
-     "gap_min": 25.4479
+     "gap_min": 25.4482
     },
     {
      "a": "saturn",
@@ -97,7 +97,7 @@
      "b": "venus",
      "b_angle": "itransit",
      "jd": 2448053.390167,
-     "gap_min": 16.8694
+     "gap_min": 16.8695
     }
    ]
   },
@@ -133,7 +133,7 @@
      "b": "sun",
      "b_angle": "rise",
      "jd": 2461119.745724,
-     "gap_min": 18.1747
+     "gap_min": 18.1746
     },
     {
      "a": "moon",
@@ -165,7 +165,7 @@
      "b": "sun",
      "b_angle": "mtransit",
      "jd": 2461120.011701,
-     "gap_min": 18.8283
+     "gap_min": 18.828
     },
     {
      "a": "saturn",
@@ -173,7 +173,7 @@
      "b": "sun",
      "b_angle": "set",
      "jd": 2461120.264039,
-     "gap_min": 14.5355
+     "gap_min": 14.5351
     },
     {
      "a": "saturn",
@@ -201,7 +201,7 @@
      "b": "venus",
      "b_angle": "rise",
      "jd": 2451544.637361,
-     "gap_min": 5.5779
+     "gap_min": 5.5778
     },
     {
      "a": "mars",
@@ -389,7 +389,7 @@
      "body": "mars",
      "body_angle": "rise",
      "jd": 2448052.556951,
-     "gap_min": 20.1875
+     "gap_min": 20.1872
     },
     {
      "star": "Sirius",
@@ -397,7 +397,7 @@
      "body": "mars",
      "body_angle": "set",
      "jd": 2448053.059423,
-     "gap_min": 9.1351
+     "gap_min": 9.1348
     },
     {
      "star": "Sirius",
@@ -405,7 +405,7 @@
      "body": "mars",
      "body_angle": "itransit",
      "jd": 2448053.295482,
-     "gap_min": 20.3591
+     "gap_min": 20.3594
     },
     {
      "star": "Sirius",
@@ -429,7 +429,7 @@
      "body": "saturn",
      "body_angle": "set",
      "jd": 2448052.830408,
-     "gap_min": 18.3439
+     "gap_min": 18.3442
     },
     {
      "star": "Sirius",
@@ -453,7 +453,7 @@
      "body": "saturn",
      "body_angle": "set",
      "jd": 2448052.832508,
-     "gap_min": 24.3903
+     "gap_min": 24.3906
     },
     {
      "star": "Spica",
@@ -461,7 +461,7 @@
      "body": "saturn",
      "body_angle": "itransit",
      "jd": 2448053.104609,
-     "gap_min": 1.2668
+     "gap_min": 1.267
     }
    ]
   },
@@ -489,7 +489,7 @@
      "body": "mars",
      "body_angle": "set",
      "jd": 2461120.195278,
-     "gap_min": 6.6089
+     "gap_min": 6.609
     },
     {
      "star": "Aldebaran",
@@ -497,7 +497,7 @@
      "body": "saturn",
      "body_angle": "itransit",
      "jd": 2461119.516365,
-     "gap_min": 8.8713
+     "gap_min": 8.8711
     },
     {
      "star": "Aldebaran",
@@ -521,7 +521,7 @@
      "body": "mars",
      "body_angle": "set",
      "jd": 2461120.193064,
-     "gap_min": 0.2328
+     "gap_min": 0.2329
     },
     {
      "star": "Antares",

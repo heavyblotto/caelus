@@ -274,7 +274,44 @@ the slow bodies read fine. `Chart.warnings` states both splits per chart, so
 ancient charts are honestly usable rather than refused -- but "usable" means
 arcminutes, not arcseconds.
 
-## Tier C: raising the headline (wired and inert -- the mint runbook)
+## Tier C: minted -- three of four transformed, and Earth is the floor
+
+The planet packs are real. Measured on the frame-free `--astrometric` basis
+over 1000-3000 (40 epochs), before and after:
+
+| body | pack true error | size | wide before | wide after |
+|---|---|---|---|---|
+| Uranus | 136 km | 496 KB | 20.33" | **0.145"** |
+| Neptune | 126 km | 497 KB | 17.61" | **0.118"** |
+| Saturn | 115 km | 569 KB | 5.70" | **0.349"** |
+| Mars | 49 km | 5.9 MB | 7.64" | 6.75" |
+
+Uranus and Neptune were the engine's worst bodies anywhere; they are now
+sub-0.15" across two millennia. That is the Tier C thesis confirmed: their
+error was source drift (VSOP87 represents DE200), removable by fitting.
+
+**Mars did not move, and the reason bounds the whole tier.** Its pack is the
+most accurate of the four (49 km), yet it stayed at 6.75". The tell is that
+the bodies with *no* pack -- Sun, Mercury, Venus, Jupiter -- all sit at a
+common 3.6-4.3". Every geocentric direction is `body - earth`, and Earth
+comes from VSOP87D:
+
+| epoch | Earth vs DE441 | at 1 AU | at Mars perigee (0.37 AU) |
+|---|---|---|---|
+| 2000 | 63 km | 0.087" | 0.24" |
+| 2500 | 1312 km | 1.81" | 4.89" |
+| 2965 | 2763 km | 3.81" | 10.3" |
+
+So the ~4" floor on unpacked bodies is Earth's error projected at ~1 AU, and
+Mars's residual is that same error amplified by proximity (1/distance). No
+target pack can remove it: an Earth pack is the single change that lifts
+every geocentric body at once, and it is what unlocks Mars's 5.9 MB being
+worth shipping. `fit_planet.py` does not cover Earth yet (`PLANETS` has no
+`earth` entry, and `chart.py` routes Earth through VSOP unconditionally).
+
+The runbook below still applies to any further body.
+
+## Tier C runbook (the mint commands)
 
 The engine half is done, network-free, in the same inert-until-data pattern
 as the Pluto pack: `fit_planet.py` mints Horizons/DE441 Chebyshev packs for
