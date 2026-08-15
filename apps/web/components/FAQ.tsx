@@ -153,13 +153,11 @@ export default function FAQ() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <h2 id="faq-heading">Frequently asked questions</h2>
-      <div style={{ borderBottom: "1px solid var(--border)", marginTop: "1rem" }}>
+      <div className="faq">
         {ITEMS.map(({ q, a }) => (
-          <details key={q} style={{ borderTop: "1px solid var(--border)", padding: "0.85rem 0" }}>
-            <summary style={{ cursor: "pointer", fontWeight: 600 }}>{q}</summary>
-            <div className="dim" style={{ margin: "0.6rem 0 0", lineHeight: 1.6, maxWidth: "44rem" }}>
-              {a}
-            </div>
+          <details key={q}>
+            <summary>{q}</summary>
+            <div>{a}</div>
           </details>
         ))}
       </div>

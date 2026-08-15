@@ -57,32 +57,38 @@ function personChart(p: Person): { chart: Chart; jd: number; zone: string } | nu
   }
 }
 
-const inp: React.CSSProperties = {
-  background: "var(--surface-3)", color: "var(--text)", border: "1px solid var(--border-strong)",
-  borderRadius: "var(--radius-sm)", padding: "0.35rem 0.55rem", font: "inherit", fontSize: "0.85rem",
-};
 const cell: React.CSSProperties = { padding: "0.15rem 0.7rem 0.15rem 0" };
 
-function PersonInputs({ p, onChange }: { p: Person; onChange: (p: Person) => void }) {
+function PersonInputs({ p, legend, onChange }: { p: Person; legend: string; onChange: (p: Person) => void }) {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", alignItems: "center" }}>
-      <input
-        style={{ ...inp, width: "4rem" }}
-        value={p.name}
-        onChange={(e) => onChange({ ...p, name: e.target.value })}
-        aria-label="name"
-      />
-      <CityPicker
-        width="11rem"
-        onSelect={(c: City) => onChange({ ...p, lat: String(c.lat), lon: String(c.lon), place: `${c.name}, ${c.country}` })}
-      />
-      <input
-        style={inp}
-        type="datetime-local"
-        value={p.iso}
-        onChange={(e) => onChange({ ...p, iso: e.target.value })}
-        aria-label="local birth time"
-      />
+    <div className="controls">
+      <div className="field">
+        <span className="field__label">{legend} · name</span>
+        <input
+          className="control"
+          style={{ width: "4rem" }}
+          value={p.name}
+          onChange={(e) => onChange({ ...p, name: e.target.value })}
+          aria-label={`${legend} name`}
+        />
+      </div>
+      <div className="field">
+        <span className="field__label">birthplace</span>
+        <CityPicker
+          width="11rem"
+          onSelect={(c: City) => onChange({ ...p, lat: String(c.lat), lon: String(c.lon), place: `${c.name}, ${c.country}` })}
+        />
+      </div>
+      <div className="field">
+        <span className="field__label">local birth time</span>
+        <input
+          className="control"
+          type="datetime-local"
+          value={p.iso}
+          onChange={(e) => onChange({ ...p, iso: e.target.value })}
+          aria-label={`${legend} local birth time`}
+        />
+      </div>
     </div>
   );
 }
@@ -145,25 +151,12 @@ export default function SynastryPanel() {
 
   return (
     <div className="card" style={{ padding: "1.2rem" }}>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem" }}>
-        <div>
-          <div className="dim small" style={{ marginBottom: "0.35rem" }}>Person A · local birth time</div>
-          <PersonInputs p={people[0]} onChange={set(0)} />
-        </div>
-        <div>
-          <div className="dim small" style={{ marginBottom: "0.35rem" }}>Person B · local birth time</div>
-          <PersonInputs p={people[1]} onChange={set(1)} />
-        </div>
-        <div style={{ display: "flex", alignItems: "flex-end" }}>
-          <button
-            type="button"
-            className="mono"
-            style={{ ...inp, cursor: "pointer", borderColor: "var(--accent)", color: "var(--text)" }}
-            onClick={share}
-          >
-            {copied ? "Link copied ✓" : "Copy share link"}
-          </button>
-        </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.7rem 2rem", alignItems: "flex-end" }}>
+        <PersonInputs p={people[0]} legend="Person A" onChange={set(0)} />
+        <PersonInputs p={people[1]} legend="Person B" onChange={set(1)} />
+        <button type="button" className="btn btn-secondary btn-sm" onClick={share}>
+          {copied ? "Link copied ✓" : "Copy share link"}
+        </button>
       </div>
 
       {!a || !b ? (
@@ -174,26 +167,7 @@ export default function SynastryPanel() {
             {people[0].name || "A"} ({a.zone}) and {people[1].name || "B"} ({b.zone}), computed client-side.
           </p>
 
-          {readingInputs && (
-            <>
-              <h3 style={{ marginTop: "1.2rem", marginBottom: "0.3rem" }}>Reading</h3>
-              <p className="dim small" style={{ margin: "0 0 0.6rem" }}>
-                {people[0].name || "A"}&rsquo;s chart as the base; synastry and composite facts are citable atoms.
-              </p>
-              <ReadingTab
-                chart={a.chart}
-                engine={engine}
-                lat={Number(people[0].lat)}
-                lonEast={Number(people[0].lon)}
-                zodiac="tropical"
-                stars={readingInputs.stars}
-                lots={readingInputs.lots}
-                partner={{ chart: b.chart, label: people[0].name || "A" }}
-              />
-            </>
-          )}
-
-          <figure className="chart-fluid" style={{ margin: "1rem 0 0", textAlign: "center" }}>
+          <figure className="chart-fluid" style={{ margin: "1rem auto 0", maxWidth: "24rem", textAlign: "center" }}>
             <BiWheel
               inner={a.chart}
               outer={b.chart}
@@ -213,7 +187,7 @@ export default function SynastryPanel() {
             Inter-chart aspects: a row is {people[0].name || "A"}&rsquo;s planet, a column is {people[1].name || "B"}&rsquo;s.
           </p>
           <div style={{ overflowX: "auto" }}>
-            <table className="mono" style={{ borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <table className="mono table-auto" style={{ borderCollapse: "collapse", fontSize: "0.95rem" }}>
               <thead>
                 <tr>
                   <td style={{ ...cell, color: "var(--text-mute)" }} />
@@ -269,6 +243,27 @@ export default function SynastryPanel() {
                 </tbody>
               </table>
             </>
+          )}
+
+          {readingInputs && (
+            <section aria-label="Reading" className="reading-panel">
+              <div className="reading-panel__head">
+                <span className="eyebrow" style={{ margin: 0 }}>Reading</span>
+                <span className="dim small">
+                  {people[0].name || "A"}&rsquo;s chart as the base; synastry and composite facts are citable atoms
+                </span>
+              </div>
+              <ReadingTab
+                chart={a.chart}
+                engine={engine}
+                lat={Number(people[0].lat)}
+                lonEast={Number(people[0].lon)}
+                zodiac="tropical"
+                stars={readingInputs.stars}
+                lots={readingInputs.lots}
+                partner={{ chart: b.chart, label: people[0].name || "A" }}
+              />
+            </section>
           )}
         </>
       )}

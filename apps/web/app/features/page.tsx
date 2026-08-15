@@ -405,15 +405,17 @@ export default function Features() {
         </Feature>
       </Group>
 
-      <h2>How it compares</h2>
-      <P>
-        The set is developer-facing engines and libraries, with the facts taken
-        from each project&apos;s own docs and license. Swiss Ephemeris and
-        Astronomy Engine compute positions and astronomical events; the zodiac,
-        chart, and technique layers on top are the application&apos;s job, and
-        Astronomy Engine carries no astrology layer at all. A check marks the
-        developer-friendly answer; a dash means the capability is not built in.
-      </P>
+      <section className="feature-group">
+        <h2 className="feature-group__label">How it compares</h2>
+        <P>
+          The set is developer-facing engines and libraries, with the facts taken
+          from each project&apos;s own docs and license. Swiss Ephemeris and
+          Astronomy Engine compute positions and astronomical events; the zodiac,
+          chart, and technique layers on top are the application&apos;s job, and
+          Astronomy Engine carries no astrology layer at all. A check marks the
+          developer-friendly answer; a dash means the capability is not built in.
+        </P>
+      </section>
 
       <div className="feature-compare">
         <div className="feature-compare__inner">

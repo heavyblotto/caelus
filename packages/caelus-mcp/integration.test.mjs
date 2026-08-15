@@ -17,7 +17,9 @@ import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js"
 import { fileURLToPath } from "node:url";
 import { readFileSync, writeFileSync } from "node:fs";
 import { OUTPUT_SCHEMAS } from "./dist/src/server.js";
-import { GOLDEN_CASES } from "../../scripts/export-mcp-golden.mjs";
+import { GOLDEN_CASES, ENGINE_KEY, engineFingerprint, diffPaths } from "../../scripts/export-mcp-golden.mjs";
+
+const REMINT = "node scripts/export-mcp-golden.mjs";
 
 let checks = 0;
 let failures = 0;
@@ -50,14 +52,47 @@ for (const c of GOLDEN_CASES) {
   assert(parsed.success, `schema ${c.id} (${c.tool}): ${parsed.success ? "" : JSON.stringify(parsed.error.issues)}`);
 }
 
+// ------------------------------------------------------- engine fingerprint
+// The payloads below are only comparable against the data tier that minted
+// them. Checking the tier first means a tier change reports itself by name
+// instead of surfacing as a wall of unexplained value diffs -- which is how
+// the precise-Moon switch sat red through a whole release cycle.
+const goldenEngine = golden[ENGINE_KEY];
+const liveEngine = await engineFingerprint(client);
+if (!goldenEngine) {
+  assert(false, `${ENGINE_KEY} missing from the golden file -- re-mint with: ${REMINT}`);
+} else {
+  const engineDiffs = diffPaths(liveEngine, goldenEngine, "engine");
+  assert(engineDiffs.length === 0, `engine fingerprint drift (payload diffs below follow from this)`);
+  for (const d of engineDiffs) {
+    console.error(`  ${d.path}: server ${JSON.stringify(d.actual)} | golden ${JSON.stringify(d.expected)}`);
+  }
+  if (engineDiffs.length) {
+    console.error(`  the golden payloads were minted on a different engine tier.`);
+    console.error(`  if the change is intended, re-mint and review the diff: ${REMINT}`);
+  }
+}
+
 // --------------------------------------------------------- frozen golden format
 // Same inputs must deep-equal the committed payloads (catches key renames,
 // rounding changes, fallback-string drift the engine oracle can't see).
 const deepEq = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+const MAX_SHOWN = 4;
 for (const c of GOLDEN_CASES) {
   const payload = await call(c.tool, c.args);
-  assert(deepEq(payload, golden[c.id].payload), `golden format ${c.id} (${c.tool})`);
+  const ok = deepEq(payload, golden[c.id].payload);
+  assert(ok, `golden format ${c.id} (${c.tool})`);
+  // A bare pass/fail told a reader nothing about what moved, so every red run
+  // needed a bespoke diff script before it could be judged. Print the paths.
+  if (!ok) {
+    const diffs = diffPaths(payload, golden[c.id].payload, c.id);
+    for (const d of diffs.slice(0, MAX_SHOWN)) {
+      console.error(`  ${d.path}: got ${JSON.stringify(d.actual)} | golden ${JSON.stringify(d.expected)}`);
+    }
+    if (diffs.length > MAX_SHOWN) console.error(`  ... and ${diffs.length - MAX_SHOWN} more leaf diffs`);
+  }
 }
+if (failures) console.error(`\nIf these changes are intended, re-mint and review the diff: ${REMINT}`);
 
 // --------------------------------------------------------- edge-case behavior
 {

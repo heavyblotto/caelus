@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CaelusMark from "./CaelusMark";
 import GlyphMark from "./GlyphMark";
 import { FOOTER, SITE } from "../lib/site";
 
@@ -27,6 +28,10 @@ export default function SiteFooter() {
             <p className="dim small" style={{ margin: "0.8rem 0 0", maxWidth: "26ch" }}>
               {SITE.tagline} Clean-room, MIT, no ephemeris files.
             </p>
+            {/* The sky god from the 404, small: a signature, not a mascot. */}
+            <div className="site-footer__mark" aria-hidden>
+              <CaelusMark size={56} title="Caelus, holding the veil of the sky" />
+            </div>
           </div>
           {FOOTER.map((col) => (
             <div key={col.title} className="site-footer__col">

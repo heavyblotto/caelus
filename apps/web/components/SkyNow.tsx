@@ -11,7 +11,6 @@ import {
 import { embeddedData } from "caelus/data-embedded";
 import { toUT, type UTResult } from "caelus-birth";
 import { ChartWheel, ChartSphere, AstroMap, GLYPHS } from "caelus-wheel";
-import accuracy from "caelus/accuracy.json";
 import BiWheel, { type SynContact } from "./BiWheel";
 import Aspectarian from "./Aspectarian";
 import ChartControls from "./ChartControls";
@@ -22,7 +21,7 @@ import DeclinationTab from "./DeclinationTab";
 import StarsTab from "./StarsTab";
 import SkyViewTab from "./SkyViewTab";
 import { WHEEL_THEME, WHEEL_LINE_COLORS } from "../lib/wheelTheme";
-import { crossAspect, cell, control } from "../lib/chart-display";
+import { crossAspect, cell } from "../lib/chart-display";
 import { type Share, b64urlEncode, readUrlState } from "../lib/share";
 
 // The interpretation panel pulls in the public-domain delineation corpus
@@ -47,7 +46,6 @@ const MAP_BODIES: BodyId[] = ["sun", "moon", "mercury", "venus", "mars", "jupite
 // Tab display labels that differ from the title-cased key.
 const TAB_LABEL: Record<string, string> = { facts: "Facts", insights: "Synthesis", skyview: "Sky View", json: "JSON" };
 
-const ACCURACY: Array<[string, string]> = accuracy.summary.map((s) => [s.label, s.bound]);
 const PHASE_LABEL: Record<string, string> = {
   new: "New Moon", first_quarter: "First Quarter", full: "Full Moon", last_quarter: "Last Quarter",
 };
@@ -77,7 +75,11 @@ export default function SkyNow() {
   const [tzMode, setTzMode] = useState<"utc" | "local">("utc");
   const [place, setPlace] = useState("");
   const [label, setLabel] = useState("");
-  const [tab, setTab] = useState<"facts" | "positions" | "aspects" | "insights" | "vedic" | "declination" | "stars" | "events" | "skyview" | "json">("facts");
+  const [tab, setTab] = useState<"facts" | "positions" | "aspects" | "insights" | "vedic" | "events" | "skyview" | "json">("facts");
+  // Sub-view of the Positions tab: ecliptic longitudes, declinations, or the
+  // fixed-star contacts. All three are "where things are" tables, so they
+  // share one tab instead of claiming three.
+  const [posView, setPosView] = useState<"longitudes" | "declinations" | "stars">("longitudes");
   const [view, setView] = useState<"wheel" | "sphere" | "map" | "transits">("wheel");
   const [focus, setFocus] = useState<{ key: string; bodies: string[] } | null>(null);
   const [copied, setCopied] = useState(false);
@@ -330,18 +332,18 @@ export default function SkyNow() {
   // Declinations: each body's declination, out-of-bounds flag, and the
   // parallels / contraparallels among them.
   const decl = useMemo(() => {
-    if (!chart || tab !== "declination") return null;
+    if (!chart || tab !== "positions" || posView !== "declinations") return null;
     const bodies = BODIES.flatMap((b) => {
       const p = chart.bodies[b];
       return p ? [{ body: b, dec: p.dec, oob: outOfBounds(engine(), b as BodyId, chart.jdUt) }] : [];
     });
     const present = BODIES.filter((b) => chart.bodies[b]) as BodyId[];
     return { bodies, pairs: declinationAspects(engine(), present, chart.jdUt) };
-  }, [chart, tab]);
+  }, [chart, tab, posView]);
 
   // Fixed-star conjunctions: bright catalog stars within 1° of a body.
   const stars = useMemo(() => {
-    if (!chart || tab !== "stars") return null;
+    if (!chart || tab !== "positions" || posView !== "stars") return null;
     const starLons = BRIGHT_STARS.map((name) => ({ name, lon: engine().fixedStar(name, chart.jdUt).lon }));
     const hits: Array<{ body: string; star: string; orb: number }> = [];
     for (const b of BODIES) {
@@ -356,7 +358,7 @@ export default function SkyNow() {
     const parans = starParans(engine(), chart.jdUt, Number(lat), PARAN_STARS, undefined, 12)
       .sort((x, y) => x.gap_min - y.gap_min).slice(0, 15);
     return { conjunctions: hits.sort((x, y) => x.orb - y.orb), parans };
-  }, [chart, tab, lat]);
+  }, [chart, tab, posView, lat]);
 
   // A new chart clears any isolated selection on the wheel.
   useEffect(() => { setFocus(null); }, [chart]);
@@ -374,17 +376,6 @@ export default function SkyNow() {
     setFocus((f) => (f?.key === key ? null : { key, bodies }));
     setView("wheel");
   };
-
-  const tabBtn = (t: typeof tab): React.CSSProperties => ({
-    ...control, cursor: "pointer", opacity: tab === t ? 1 : 0.55,
-    borderColor: tab === t ? "var(--accent)" : "var(--border-strong)",
-    color: tab === t ? "var(--text)" : "var(--text-dim)",
-  });
-  const viewBtn = (v: typeof view): React.CSSProperties => ({
-    ...control, cursor: "pointer", opacity: view === v ? 1 : 0.55,
-    borderColor: view === v ? "var(--accent)" : "var(--border-strong)",
-    color: view === v ? "var(--text)" : "var(--text-dim)",
-  });
 
   return (
     <div className="card" style={{ padding: "1.2rem" }} ref={cardRef}>
@@ -445,9 +436,9 @@ export default function SkyNow() {
 
               <div className="skynow-layout" style={{ marginTop: "1.2rem" }}>
                 <div className="skynow-chart">
-                  <div style={{ display: "flex", gap: "0.4rem", marginBottom: "0.6rem" }}>
+                  <div className="seg" role="group" aria-label="Chart view" style={{ marginBottom: "0.6rem" }}>
                     {(["wheel", "sphere", "map", "transits"] as const).map((v) => (
-                      <button key={v} type="button" className="mono" style={viewBtn(v)} onClick={() => setView(v)}>
+                      <button key={v} type="button" className="seg__btn" aria-pressed={view === v} onClick={() => setView(v)}>
                         {v.charAt(0).toUpperCase() + v.slice(1)}
                       </button>
                     ))}
@@ -475,9 +466,9 @@ export default function SkyNow() {
                   )}
                 </div>
                 <div className="skynow-data">
-                  <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap", marginBottom: "0.8rem" }}>
-                    {(["facts", "positions", "aspects", "insights", "vedic", "declination", "stars", "events", "skyview", "json"] as const).map((t) => (
-                      <button key={t} type="button" className="mono" style={tabBtn(t)} onClick={() => setTab(t)}>
+                  <div className="tabs__list" role="tablist" aria-label="Chart data" style={{ marginBottom: "0.8rem" }}>
+                    {(["facts", "positions", "aspects", "insights", "vedic", "events", "skyview", "json"] as const).map((t) => (
+                      <button key={t} type="button" role="tab" className="tabs__tab" aria-selected={tab === t} onClick={() => setTab(t)}>
                         {TAB_LABEL[t] ?? t.charAt(0).toUpperCase() + t.slice(1)}
                       </button>
                     ))}
@@ -497,6 +488,17 @@ export default function SkyNow() {
 
                   {tab === "positions" && (
                     <>
+                      <div className="seg" role="group" aria-label="Position view" style={{ marginBottom: "0.7rem" }}>
+                        {(["longitudes", "declinations", "stars"] as const).map((v) => (
+                          <button key={v} type="button" className="seg__btn" aria-pressed={posView === v} onClick={() => setPosView(v)}>
+                            {v.charAt(0).toUpperCase() + v.slice(1)}
+                          </button>
+                        ))}
+                      </div>
+                      {posView === "declinations" && decl && <DeclinationTab decl={decl} />}
+                      {posView === "stars" && stars && <StarsTab stars={stars} />}
+                      {posView === "longitudes" && (
+                      <>
                       <table className="mono" style={{ fontSize: "0.82rem" }}>
                         <tbody>
                           {BODIES.map((b) => {
@@ -528,6 +530,8 @@ export default function SkyNow() {
                       <p className="dim small" style={{ margin: "0.5rem 0 0" }}>
                         Click a planet to isolate it and its aspects on the wheel.
                       </p>
+                      </>
+                      )}
                     </>
                   )}
 
@@ -538,10 +542,6 @@ export default function SkyNow() {
                   )}
 
                   {tab === "vedic" && vedic && <VedicTab vedic={vedic} />}
-
-                  {tab === "declination" && decl && <DeclinationTab decl={decl} />}
-
-                  {tab === "stars" && stars && <StarsTab stars={stars} />}
 
                   {tab === "skyview" && (
                     <SkyViewTab engine={engine()} jdUt={chart.jdUt} lat={Number(lat)} lonEast={Number(lon)} />
@@ -576,26 +576,9 @@ export default function SkyNow() {
         </>
       )}
 
-      <h3 style={{ marginTop: "2rem" }}>
-        Accuracy <span className="mute" style={{ fontWeight: 400, fontSize: "0.85rem" }}>(vs reference, 1000–3000)</span>
-      </h3>
-      <table className="mono" style={{ fontSize: "0.85rem", maxWidth: 420 }}>
-        <tbody>{ACCURACY.map(([k, v]) => <tr key={k}><td className="mute" style={cell}>{k}</td><td style={cell}>{v}</td></tr>)}</tbody>
-      </table>
-      <p className="dim small">Within 1′ chart-display precision. <a href="/validation">Full table →</a></p>
-
       {chart && readingInputs && (
-        <section
-          aria-label="Reading"
-          style={{
-            marginTop: "2rem",
-            padding: "1.1rem 1.25rem 1.25rem",
-            background: "var(--surface-2)",
-            borderLeft: "3px solid var(--accent)",
-            borderRadius: "var(--radius)",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "baseline", gap: "0.6rem", flexWrap: "wrap", marginBottom: "0.7rem" }}>
+        <section aria-label="Reading" className="reading-panel">
+          <div className="reading-panel__head">
             <span className="eyebrow" style={{ margin: 0 }}>Reading</span>
             <span className="dim small">the chart&rsquo;s validated facts, turned into a cited public-domain interpretation</span>
           </div>

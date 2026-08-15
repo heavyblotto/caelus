@@ -27,7 +27,14 @@
   --accent-hover: #a99ee8;
   --accent-soft: #2a2440;
   --accent-contrast: #0c0a14;
-  --warm: #f0a878;
+  /* Peach blossom: the single warm counterpoint to the structural purple.
+     The hue is the extra-spectral one — the old name for the color on the
+     line of purples that closes the spectrum into a wheel, matched by no
+     wavelength and constructed entirely in perception. Reserved for the
+     living layer: sky markers (ribbon dots, the logo's sun) and the
+     interpretation surfaces (reading panels, "read this chart"). */
+  --peach-blossom: #dd6ba1;
+  --warm: var(--peach-blossom);
   --good: #9fdc9f;
   --bad: #e08a8a;
 
@@ -147,6 +154,11 @@ body::before {
 
 .page-hero {
   margin-bottom: 0.25rem;
+}
+
+/* Hero copy keeps a readable measure even inside a wide container. */
+.page-hero p {
+  max-width: 46rem;
 }
 
 .page-hero .cta {
@@ -431,6 +443,11 @@ th {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  /* the atom list can run to hundreds of rows; scroll it instead of letting
+     the whole page take its height */
+  max-height: 30rem;
+  overflow-y: auto;
+  padding-right: 0.4rem;
 }
 
 .facts-tab__row {
@@ -565,6 +582,169 @@ a.card:hover,
   padding: 0.38rem 0.75rem;
 }
 
+/* ---- form controls ----
+   The single control style for the playground's inputs, selects, and small
+   action buttons. Labels sit above their control (.field) so a wrapped row of
+   controls still reads as labelled columns. */
+.control {
+  background: var(--surface-3);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.55rem;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.control:focus-visible {
+  border-color: var(--accent);
+}
+
+button.control {
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+button.control:hover {
+  border-color: var(--accent);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 0.8rem;
+  align-items: flex-end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.field__label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.field__row {
+  display: flex;
+  gap: 0.4rem;
+}
+
+/* ---- segmented control (chart view switcher) ---- */
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.seg__btn {
+  font: inherit;
+  font-size: 0.78rem;
+  padding: 0.32rem 0.7rem;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.seg__btn + .seg__btn {
+  border-left: 1px solid var(--border);
+}
+
+.seg__btn:hover {
+  color: var(--text);
+}
+
+.seg__btn[aria-pressed="true"] {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+/* ---- example chart cards (playground "Charts worth reading") ----
+   A preview wheel is a thumbnail beside its caption, not a hero figure. */
+.example-card {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.example-card__wheel {
+  flex: 0 0 8.5rem;
+  max-width: 8.5rem;
+}
+
+.example-card__text {
+  min-width: 0;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+.example-card__text .example-card__cta {
+  color: var(--peach-blossom);
+  white-space: nowrap;
+}
+
+/* ---- reading panel (the cited interpretation at the foot of a chart) ----
+   Peach blossom, not purple: interpretation is the warm layer over the
+   engine's cool geometry, and the accent marks that boundary. */
+.reading-panel {
+  margin-top: 2rem;
+  padding: 1.1rem 1.25rem 1.25rem;
+  background: var(--surface-2);
+  border-left: 3px solid var(--peach-blossom);
+  border-radius: var(--radius);
+}
+
+.reading-panel__head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.7rem;
+}
+
+.reading-panel__head .eyebrow {
+  color: var(--peach-blossom);
+}
+
+/* ---- FAQ ---- */
+.faq {
+  border-bottom: 1px solid var(--border);
+  margin-top: 1rem;
+}
+
+.faq details {
+  border-top: 1px solid var(--border);
+  padding: 0.85rem 0;
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.faq summary:hover {
+  color: var(--accent-hover);
+}
+
+.faq details > div {
+  margin: 0.6rem 0 0;
+  line-height: 1.6;
+  max-width: 44rem;
+  color: var(--text-dim);
+}
+
 /* ---- CTA blocks ---- */
 .cta {
   display: flex;
@@ -609,28 +789,43 @@ a.card:hover,
   opacity: 0.75;
 }
 
-/* ---- capability bullets (home hero) ---- */
-.capability-list {
+/* ---- capability grid (home "What it computes") ----
+   Titled entries in a two-column grid: the title carries the scan, the one-line
+   description carries the detail, and the whole entry links to its doc page. */
+.capability-grid {
   list-style: none;
   padding: 0;
-  margin: 1.5rem 0;
+  margin: 1.25rem 0;
   display: grid;
-  gap: 0.55rem;
+  gap: 1.1rem 2rem;
 }
 
-.capability-list li {
-  display: flex;
-  gap: 0.65rem;
-  line-height: 1.5;
+@media (min-width: 600px) {
+  .capability-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.capability-list li::before {
-  content: "—";
-  flex-shrink: 0;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 0.85em;
+.capability-grid__title {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 0.15rem;
+}
+
+a.capability-grid__title {
+  color: var(--text);
+}
+
+a.capability-grid__title:hover {
   color: var(--accent);
-  margin-top: 0.05em;
+}
+
+.capability-grid__desc {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-dim);
 }
 
 /* ---- grid helpers ---- */
@@ -962,6 +1157,16 @@ th.cmp-me {
 
 .site-footer__col a:hover {
   color: var(--text);
+}
+
+.site-footer__mark {
+  margin-top: 1.1rem;
+  color: var(--text-faint);
+}
+
+.site-footer__mark:hover {
+  color: var(--accent);
+  transition: color 0.3s ease;
 }
 
 .site-footer__meta {
@@ -1589,7 +1794,9 @@ th.cmp-me {
   --accent-hover: #4f41ab;
   --accent-soft: #ece9f8;
   --accent-contrast: #ffffff;
-  --warm: #b5651d;
+  /* the same extra-spectral hue, deepened for text contrast on light */
+  --peach-blossom: #a32e74;
+  --warm: var(--peach-blossom);
   --good: #1f8a4c;
   --bad: #c0392b;
 

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Engine, skyView, type SkyViewResult } from "caelus";
-import { cell, control } from "../lib/chart-display";
+import { cell } from "../lib/chart-display";
 
 const LENSES = ["ultrawide", "wide", "standard", "normal", "portrait", "telephoto", "supertele"];
 
@@ -12,8 +12,6 @@ function colorOf(id: string): string {
   if (id.startsWith("star:")) return "#cfe0ff";
   return BODY_COLOR[id] ?? "var(--accent)";
 }
-
-const field: React.CSSProperties = { display: "flex", flexDirection: "column", gap: "0.15rem", fontSize: "0.75rem" };
 
 export default function SkyViewTab({ engine, jdUt, lat, lonEast }: {
   engine: Engine; jdUt: number; lat: number; lonEast: number;
@@ -66,30 +64,36 @@ export default function SkyViewTab({ engine, jdUt, lat, lonEast }: {
 
   return (
     <div>
-      <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap", marginBottom: "0.8rem" }}>
-        <label style={field}>aim
-          <input style={{ ...control, width: "4.5rem" }} value={azimuth}
+      <div className="controls" style={{ marginBottom: "0.8rem" }}>
+        <label className="field">
+          <span className="field__label">aim</span>
+          <input className="control" style={{ width: "4.5rem" }} value={azimuth}
             onChange={(e) => setAzimuth(e.target.value)} aria-label="aim azimuth (compass or degrees)" />
         </label>
-        <label style={field}>altitude°
-          <input style={{ ...control, width: "4rem" }} value={altitude} type="number"
+        <label className="field">
+          <span className="field__label">altitude°</span>
+          <input className="control" style={{ width: "4rem" }} value={altitude} type="number"
             onChange={(e) => setAltitude(e.target.value)} aria-label="aim altitude in degrees" />
         </label>
-        <label style={field}>lens
-          <select style={control} value={lens} onChange={(e) => setLens(e.target.value)} aria-label="lens preset">
+        <label className="field">
+          <span className="field__label">lens</span>
+          <select className="control" value={lens} onChange={(e) => setLens(e.target.value)} aria-label="lens preset">
             {LENSES.map((l) => <option key={l}>{l}</option>)}
           </select>
         </label>
-        <label style={field}>width
-          <input style={{ ...control, width: "4.5rem" }} value={w} type="number"
+        <label className="field">
+          <span className="field__label">width</span>
+          <input className="control" style={{ width: "4.5rem" }} value={w} type="number"
             onChange={(e) => setW(e.target.value)} aria-label="image width in pixels" />
         </label>
-        <label style={field}>height
-          <input style={{ ...control, width: "4.5rem" }} value={h} type="number"
+        <label className="field">
+          <span className="field__label">height</span>
+          <input className="control" style={{ width: "4.5rem" }} value={h} type="number"
             onChange={(e) => setH(e.target.value)} aria-label="image height in pixels" />
         </label>
-        <label style={field}>dark sky
-          <select style={control} value={bortle} onChange={(e) => setBortle(e.target.value)} aria-label="Bortle dark-sky class">
+        <label className="field">
+          <span className="field__label">dark sky</span>
+          <select className="control" value={bortle} onChange={(e) => setBortle(e.target.value)} aria-label="Bortle dark-sky class">
             <option value="">auto</option>
             <option value="1">Bortle 1 (pristine)</option>
             <option value="2">Bortle 2</option>
@@ -103,7 +107,7 @@ export default function SkyViewTab({ engine, jdUt, lat, lonEast }: {
       </div>
 
       <div style={{ display: "flex", gap: "0.6rem", alignItems: "center", marginBottom: "0.8rem" }}>
-        <button type="button" className="mono" style={{ ...control, cursor: "pointer", minWidth: "4.2rem" }}
+        <button type="button" className="control mono" style={{ minWidth: "4.2rem" }}
           onClick={() => setPlaying((p) => !p)} aria-label={playing ? "pause animation" : "play animation"}>
           {playing ? "❚❚ pause" : "▶ play"}
         </button>
@@ -114,7 +118,7 @@ export default function SkyViewTab({ engine, jdUt, lat, lonEast }: {
           {offsetMin >= 0 ? "+" : ""}{(offsetMin / 60).toFixed(1)} h
         </span>
         {offsetMin !== 0 && (
-          <button type="button" className="mono small" style={{ ...control, cursor: "pointer" }}
+          <button type="button" className="control mono small"
             onClick={() => { setPlaying(false); setOffsetMin(0); }} aria-label="reset time">reset</button>
         )}
       </div>
@@ -254,10 +258,10 @@ function SkyViewBody({ result, onCopy, copied }: {
 
       <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", flexWrap: "wrap", margin: "0.9rem 0 0.3rem" }}>
         <strong className="small">Image prompt</strong>
-        <button type="button" className="mono" style={{ ...control, cursor: "pointer", fontSize: "0.75rem" }} onClick={() => onCopy(prompt)}>
+        <button type="button" className="control mono" style={{ fontSize: "0.75rem" }} onClick={() => onCopy(prompt)}>
           {copied ? "copied" : "copy"}
         </button>
-        <button type="button" className="mono" style={{ ...control, cursor: "pointer", fontSize: "0.75rem" }}
+        <button type="button" className="control mono" style={{ fontSize: "0.75rem" }}
           onClick={() => onCopy(JSON.stringify(result.renderPlan, null, 2))}
           title="A machine-readable hybrid-render contract: a body-free background-plate prompt plus the computed layers to composite locally">
           copy render plan (JSON)
