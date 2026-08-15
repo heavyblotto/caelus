@@ -27,7 +27,11 @@
   --accent-hover: #a99ee8;
   --accent-soft: #2a2440;
   --accent-contrast: #0c0a14;
-  --warm: #f0a878;
+  /* Peach blossom: the single warm counterpoint to the structural purple.
+     Reserved for the living layer — sky markers (ribbon dots, the logo's sun)
+     and the interpretation surfaces (reading panels, "read this chart"). */
+  --peach-blossom: #f2b3a2;
+  --warm: var(--peach-blossom);
   --good: #9fdc9f;
   --bad: #e08a8a;
 
@@ -684,16 +688,18 @@ button.control:hover {
 }
 
 .example-card__text .example-card__cta {
-  color: var(--accent);
+  color: var(--peach-blossom);
   white-space: nowrap;
 }
 
-/* ---- reading panel (the cited interpretation at the foot of a chart) ---- */
+/* ---- reading panel (the cited interpretation at the foot of a chart) ----
+   Peach blossom, not purple: interpretation is the warm layer over the
+   engine's cool geometry, and the accent marks that boundary. */
 .reading-panel {
   margin-top: 2rem;
   padding: 1.1rem 1.25rem 1.25rem;
   background: var(--surface-2);
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--peach-blossom);
   border-radius: var(--radius);
 }
 
@@ -703,6 +709,10 @@ button.control:hover {
   gap: 0.6rem;
   flex-wrap: wrap;
   margin-bottom: 0.7rem;
+}
+
+.reading-panel__head .eyebrow {
+  color: var(--peach-blossom);
 }
 
 /* ---- FAQ ---- */
@@ -1781,7 +1791,9 @@ th.cmp-me {
   --accent-hover: #4f41ab;
   --accent-soft: #ece9f8;
   --accent-contrast: #ffffff;
-  --warm: #b5651d;
+  /* deeper peach on light so it still carries text contrast */
+  --peach-blossom: #b05d48;
+  --warm: var(--peach-blossom);
   --good: #1f8a4c;
   --bad: #c0392b;
 

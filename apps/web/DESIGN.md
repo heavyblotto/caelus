@@ -48,3 +48,11 @@ Everything derives from the variables at the top of `globals.css`: surfaces,
 text tiers (`--text` → `--text-faint`), one accent family, the type scale,
 and the two radii. A new color or font size should be a new token or, more
 likely, an existing one.
+
+Two accents, two meanings. The purple (`--accent`) is structural: navigation,
+links, selected states, the geometry. Peach blossom (`--peach-blossom`, with
+`--warm` as its semantic alias) is the single warm counterpoint, reserved for
+the living layer: markers of the actual sky (the ribbon's planet dots, the
+logo's sun) and the interpretation surfaces (reading panels, "read this
+chart", civil-time and out-of-bounds notices). Don't use it for chrome, and
+don't add a third accent.
