@@ -75,7 +75,11 @@ export default function SkyNow() {
   const [tzMode, setTzMode] = useState<"utc" | "local">("utc");
   const [place, setPlace] = useState("");
   const [label, setLabel] = useState("");
-  const [tab, setTab] = useState<"facts" | "positions" | "aspects" | "insights" | "vedic" | "declination" | "stars" | "events" | "skyview" | "json">("facts");
+  const [tab, setTab] = useState<"facts" | "positions" | "aspects" | "insights" | "vedic" | "events" | "skyview" | "json">("facts");
+  // Sub-view of the Positions tab: ecliptic longitudes, declinations, or the
+  // fixed-star contacts. All three are "where things are" tables, so they
+  // share one tab instead of claiming three.
+  const [posView, setPosView] = useState<"longitudes" | "declinations" | "stars">("longitudes");
   const [view, setView] = useState<"wheel" | "sphere" | "map" | "transits">("wheel");
   const [focus, setFocus] = useState<{ key: string; bodies: string[] } | null>(null);
   const [copied, setCopied] = useState(false);
@@ -328,18 +332,18 @@ export default function SkyNow() {
   // Declinations: each body's declination, out-of-bounds flag, and the
   // parallels / contraparallels among them.
   const decl = useMemo(() => {
-    if (!chart || tab !== "declination") return null;
+    if (!chart || tab !== "positions" || posView !== "declinations") return null;
     const bodies = BODIES.flatMap((b) => {
       const p = chart.bodies[b];
       return p ? [{ body: b, dec: p.dec, oob: outOfBounds(engine(), b as BodyId, chart.jdUt) }] : [];
     });
     const present = BODIES.filter((b) => chart.bodies[b]) as BodyId[];
     return { bodies, pairs: declinationAspects(engine(), present, chart.jdUt) };
-  }, [chart, tab]);
+  }, [chart, tab, posView]);
 
   // Fixed-star conjunctions: bright catalog stars within 1° of a body.
   const stars = useMemo(() => {
-    if (!chart || tab !== "stars") return null;
+    if (!chart || tab !== "positions" || posView !== "stars") return null;
     const starLons = BRIGHT_STARS.map((name) => ({ name, lon: engine().fixedStar(name, chart.jdUt).lon }));
     const hits: Array<{ body: string; star: string; orb: number }> = [];
     for (const b of BODIES) {
@@ -354,7 +358,7 @@ export default function SkyNow() {
     const parans = starParans(engine(), chart.jdUt, Number(lat), PARAN_STARS, undefined, 12)
       .sort((x, y) => x.gap_min - y.gap_min).slice(0, 15);
     return { conjunctions: hits.sort((x, y) => x.orb - y.orb), parans };
-  }, [chart, tab, lat]);
+  }, [chart, tab, posView, lat]);
 
   // A new chart clears any isolated selection on the wheel.
   useEffect(() => { setFocus(null); }, [chart]);
@@ -463,7 +467,7 @@ export default function SkyNow() {
                 </div>
                 <div className="skynow-data">
                   <div className="tabs__list" role="tablist" aria-label="Chart data" style={{ marginBottom: "0.8rem" }}>
-                    {(["facts", "positions", "aspects", "insights", "vedic", "declination", "stars", "events", "skyview", "json"] as const).map((t) => (
+                    {(["facts", "positions", "aspects", "insights", "vedic", "events", "skyview", "json"] as const).map((t) => (
                       <button key={t} type="button" role="tab" className="tabs__tab" aria-selected={tab === t} onClick={() => setTab(t)}>
                         {TAB_LABEL[t] ?? t.charAt(0).toUpperCase() + t.slice(1)}
                       </button>
@@ -484,6 +488,17 @@ export default function SkyNow() {
 
                   {tab === "positions" && (
                     <>
+                      <div className="seg" role="group" aria-label="Position view" style={{ marginBottom: "0.7rem" }}>
+                        {(["longitudes", "declinations", "stars"] as const).map((v) => (
+                          <button key={v} type="button" className="seg__btn" aria-pressed={posView === v} onClick={() => setPosView(v)}>
+                            {v.charAt(0).toUpperCase() + v.slice(1)}
+                          </button>
+                        ))}
+                      </div>
+                      {posView === "declinations" && decl && <DeclinationTab decl={decl} />}
+                      {posView === "stars" && stars && <StarsTab stars={stars} />}
+                      {posView === "longitudes" && (
+                      <>
                       <table className="mono" style={{ fontSize: "0.82rem" }}>
                         <tbody>
                           {BODIES.map((b) => {
@@ -515,6 +530,8 @@ export default function SkyNow() {
                       <p className="dim small" style={{ margin: "0.5rem 0 0" }}>
                         Click a planet to isolate it and its aspects on the wheel.
                       </p>
+                      </>
+                      )}
                     </>
                   )}
 
@@ -525,10 +542,6 @@ export default function SkyNow() {
                   )}
 
                   {tab === "vedic" && vedic && <VedicTab vedic={vedic} />}
-
-                  {tab === "declination" && decl && <DeclinationTab decl={decl} />}
-
-                  {tab === "stars" && stars && <StarsTab stars={stars} />}
 
                   {tab === "skyview" && (
                     <SkyViewTab engine={engine()} jdUt={chart.jdUt} lat={Number(lat)} lonEast={Number(lon)} />
