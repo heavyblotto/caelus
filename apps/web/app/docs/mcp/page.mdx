@@ -199,48 +199,64 @@ Any stdio MCP client takes the same command and arguments:
 After the client reloads, it should list **thirty-five** tools. Ask it to enumerate
 them, or check the client's MCP panel:
 
-`natal_chart`, `current_sky`, `sky_view` (frame the visible sky at a place and
-moment as a pixel-precise prompt for an AI image model: positions, sizes,
-magnitudes, Moon phase, twilight, deep star field, the Milky Way, and ecliptic
-/sign/house/constellation overlays), `sky_view_sequence` (an animation timeline
-of Sky View frames), `transits`, `synastry`, `find_aspect_dates`,
-`rectification_grid`, `sky_events` (rise/set, phases, stations, zodiac
-crossings, solar and lunar eclipses), `planetary_hours`, `void_of_course`,
-`returns` (solar/lunar return instants plus the first return chart),
-`progressions` (secondary progressions and solar-arc directions), `composite`
-(midpoint composite and the Davison chart), `dignities` (essential dignity
-and sect for the seven traditional planets), `lots` (the seven Hermetic
-lots, sect-aware), `profections` (annual and monthly profections, lord of the
-year), `firdaria` (the planetary time-lord periods), `releasing` (zodiacal
-releasing / aphesis from the Lot of Spirit or Fortune), `directions`
-(primary directions of the planets to the angles, and optionally between the
-planets), `nakshatras` (lunar mansions, padas, and lords), `dasha` (Vimshottari,
-Yogini, or Ashtottari periods), `vargas` (Parashari divisional charts),
-`yogas` (Pancha Mahapurusha, raja/dhana yogas, and yogakarakas),
-`aspect_patterns` (the classical configurations: T-squares, grand trines and
-crosses, yods, kites, mystic rectangles, and stelliums, as maximal structured
-objects), `chart_signature` (element, modality, quadrant, and hemisphere
-distributions, the dominant element, modality, and sign, and the classical
-chart ruler), `similar_skies` (when the sky most resembled a reference moment,
-by cosine similarity over a window), `electional_search` (rank moments in a
-window for a set of wanted aspects, optionally avoiding a void-of-course Moon),
-`cosmic_weather` (the day's active configurations, stations, and
-void-of-course Moon, with no birth chart needed), `chart_facts` (the
-chart's validated facts as ranked, citable atoms — placements through yogas,
-including transits/time-lords when `target_date` is set, fixed-star
-conjunctions and the Part of Fortune — plus a ready-to-interpret
-brief; accepts structured `when` anchors, an in-request `anchors` registry,
-`realm`, `target_date`, `include_vedic`, and `constraints` for archetypal
-charts — see the
-[Interpretation](/docs/interpretation) and
-[Provenance](/docs/provenance) guides), `synastry` (inter-chart aspects,
-house overlays, composite midpoint atoms, and the same ranked `facts` +
-`brief` as `chart_facts`), and `counterfactual_chart` (a birth
-chart perturbed: shift time, move place, or splice body longitudes, with a
-legible diff of sign/house/aspect changes vs the original).
+**Charts and readings**
 
-`sky_events` also reports eclipse geography: the sub-solar point of greatest
-eclipse, the path-of-totality width, and, given a place, local circumstances.
+- `natal_chart`: natal positions, houses, and aspects
+- `current_sky`: the sky at any moment, no birth data needed
+- `transits`: transits to a natal chart over a window
+- `synastry`: inter-chart aspects, house overlays, composite midpoint atoms, and the same ranked facts and brief as `chart_facts`
+- `composite`: midpoint composite and the Davison chart
+- `returns`: solar/lunar return instants plus the first return chart
+- `progressions`: secondary progressions and solar-arc directions
+- `counterfactual_chart`: a birth chart perturbed (shift time, move place, or splice body longitudes), with a legible diff of sign, house, and aspect changes vs the original
+
+**Sky, events, and search**
+
+- `sky_view`: frame the visible sky at a place and moment as a pixel-precise prompt for an AI image model (positions, sizes, magnitudes, Moon phase, twilight, deep star field, the Milky Way, and ecliptic/sign/house/constellation overlays)
+- `sky_view_sequence`: an animation timeline of Sky View frames
+- `sky_events`: rise/set, phases, stations, zodiac crossings, solar and lunar eclipses (also eclipse geography: the sub-solar point of greatest eclipse, path-of-totality width, and local circumstances for a place)
+- `parans`: co-angular bodies over the 24 hours from a date at a latitude; the fixed-star paran relationship, computed for the moving bodies
+- `find_aspect_dates`: when a wanted aspect forms, over a window
+- `electional_search`: rank moments in a window for a set of wanted aspects, optionally avoiding a void-of-course Moon
+- `cosmic_weather`: the day's active configurations, stations, and void-of-course Moon, with no birth chart needed
+- `similar_skies`: when the sky most resembled a reference moment, by cosine similarity over a window
+
+**Hellenistic time-lords**
+
+- `profections`: annual and monthly profections, lord of the year
+- `firdaria`: the planetary time-lord periods
+- `releasing`: zodiacal releasing (aphesis) from the Lot of Spirit or Fortune
+- `directions`: primary directions of the planets to the angles, and optionally between the planets
+- `lots`: the seven Hermetic lots, sect-aware
+
+**Vedic**
+
+- `nakshatras`: lunar mansions, padas, and lords
+- `dasha`: Vimshottari, Yogini, or Ashtottari periods
+- `vargas`: Parashari divisional charts
+- `yogas`: Pancha Mahapurusha, raja/dhana yogas, and yogakarakas
+
+**Analysis and facts**
+
+- `dignities`: essential dignity and sect for the seven traditional planets
+- `planetary_hours`: planetary hours for a moment and place
+- `void_of_course`: void-of-course Moon windows
+- `rectification_grid`: birth-time rectification candidates over a time grid
+- `aspect_patterns`: the classical configurations (T-squares, grand trines and crosses, yods, kites, mystic rectangles, and stelliums) as maximal structured objects
+- `chart_signature`: element, modality, quadrant, and hemisphere distributions, the dominant element, modality, and sign, and the classical chart ruler
+- `chart_facts`: the chart's validated facts as ranked, citable atoms (placements
+  through yogas, including transits and time-lords when `target_date` is set,
+  fixed-star conjunctions and the Part of Fortune), plus a ready-to-interpret
+  brief; accepts structured `when` anchors, an in-request `anchors` registry,
+  `realm`, `target_date`, `include_vedic`, and `constraints` for archetypal
+  charts (see the [Interpretation](/docs/interpretation) and
+  [Provenance](/docs/provenance) guides)
+
+**Synthetic bodies**
+
+- `synthetic_validate`: check an authored synthetic celestial system for ill-defined inputs (duplicate body ids, non-positive periods, out-of-range eccentricity, a dangling observer)
+- `synthetic_positions`: positions of every body in an authored synthetic system at one instant, with speed and retrograde per body
+- `synthetic_sky_view`: Sky View for a mix of real and synthetic bodies, with authored render attributes flowing into the pixel spec and prompt
 
 `natal_chart` and `current_sky` also tag each body with its solar phase
 (cazimi, combust, under the beams) and each aspect as applying or separating,
