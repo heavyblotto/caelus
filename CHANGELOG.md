@@ -7,9 +7,45 @@ semver (currently 0.1.x). Numbers quoted here are as measured at release time;
 current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
-## v0.24.0 — The 1000–3000 tier
+## v0.24.0 — Canonical output and the 1000–3000 tier
 
 *2026-08-13*
+
+Two headline changes. **Canonical mode** gives the engine integer, hashable,
+precision-honest output — content-addressable charts that are bit-identical
+across machines, browsers, and languages. And the **validated range widens
+from 1850–2150 to 1000–3000**, with every solar-system body now carrying a
+Chebyshev pack fit to JPL Horizons (DE441) across the span.
+
+### Canonical mode (`caelus`)
+
+Floating point is deterministic run-to-run but not across platforms (IEEE 754
+pins arithmetic, not the transcendentals), not in serialized form, and not at
+rounding boundaries. Canonical mode closes all three:
+
+- **`canonicalChart(chart, { grid })`** quantizes every continuous quantity to
+  integers on a declared grid — `arcsec` (default), `milliarcsec`, `centideg`,
+  `dms` triples, or `accuracy` (each body snapped to its measured validated
+  accuracy). One rounding rule (round half toward +infinity), identical in
+  TypeScript and Python. Sign, house, dignities, retrograde and the aspect
+  list are then *re-derived from the quantized integers*, so displayed numbers
+  and derived facts cannot disagree.
+- **`chartDigest(chart)`** — a dependency-free SHA-256 over the canonical
+  encoding gives content-addressable charts for caching, dedupe, and
+  provenance receipts. The encoding throws on any non-integer, so a digest
+  proves full quantization. TS and Python digests match byte for byte
+  (pinned by the tolerance-free canonical-golden suite).
+- **Remainder sets** (`canonicalChartWithRemainders`, `composeRemainders`,
+  `nearBoundary`): the canonical payload is the base layer, an optional
+  sidecar keeps the discarded sub-quantum residue as integers — composable
+  back to the finer grid exactly, and `nearBoundary` reports the leaves that
+  sit within a stated margin of a rounding boundary (the places cross-platform
+  drift could flip a sign, house, or aspect).
+- **MCP**: `natal_chart`, `current_sky`, `returns`, and `parans` accept
+  `output: "canonical"` (+ `grid`, + `remainders`), returning the all-integer
+  payload and its digest.
+
+### The 1000–3000 tier (`caelus`)
 
 The validated range widens from **1850–2150** to **1000–3000**. Every
 solar-system body — the eight planets, Earth, Pluto, the Moon, Chiron, and the
@@ -40,6 +76,23 @@ basis (sun 0.03″, the majors 0.02–0.12″, Pluto 0.015″, the small bodies
   chart: at 1000 CE sigma is ~76 s, smearing the angles ~0.32° and the Moon
   ~0.7′ while the slow bodies hold. "Validated to 1000–3000" is a TT position
   claim; the input clock is fuzzier than the engine for ancient dates.
+
+### Also in this release
+
+- **`engineCapabilities`** (`caelus`): runtime introspection — each body's
+  source, fitted span and validated span, the headline band, and the delta-T
+  uncertainty per epoch. `Chart.warnings` reports per-chart validity and
+  delta-T uncertainty.
+- **`intp_apog`**: the interpolated ("natural") lunar apogee as a first-class
+  point.
+- **SkyView photometry**: brightness, obstruction and prompt-style controls.
+- **Latitude-aware constraints** and **spatial (3D) aspect separation**: the
+  constraint compiler leaves the circle; aspects can separate in 3D.
+- **Parallels of declination and out-of-bounds** as first-class fact kinds;
+  the selector layer now covers every fact kind, with context-fed selector
+  kinds and a Brihat Jataka nakshatra corpus.
+- **MCP**: a `natal_reading` prompt, the `parans` tool, exotic-provenance
+  anchors, and the scripted MCP Registry push.
 
 ### Notes for consumers
 

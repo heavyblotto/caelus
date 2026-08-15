@@ -194,3 +194,15 @@ velificatio
 Bortle
 [Ss]ky[Vv]iew
 [Vv]iewports?
+hashable
+[Tt]ranscendentals?
+[Qq]uantiz[a-z]*
+dedupe
+Brihat
+milliarcsec
+centideg
+[Dd]igests?
+sidecar
+bit-stability
+bit-identical
+[Cc]anonicaliz[a-z]*
