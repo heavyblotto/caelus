@@ -37,11 +37,6 @@ function search(rows: Row[], query: string, limit = 8): Row[] {
   return [...starts, ...contains].slice(0, limit);
 }
 
-const inp: React.CSSProperties = {
-  background: "var(--surface-3)", color: "var(--text)", border: "1px solid var(--border-strong)",
-  borderRadius: "var(--radius-sm)", padding: "0.35rem 0.55rem", font: "inherit", fontSize: "0.85rem",
-};
-
 export default function CityPicker({
   onSelect,
   placeholder = "search a city…",
@@ -94,7 +89,8 @@ export default function CityPicker({
   return (
     <div ref={boxRef} style={{ position: "relative", display: "inline-block" }}>
       <input
-        style={{ ...inp, width }}
+        className="control"
+        style={{ width }}
         type="text"
         value={query}
         placeholder={placeholder}

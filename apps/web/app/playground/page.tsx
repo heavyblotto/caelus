@@ -50,28 +50,23 @@ export default function Playground() {
     <main className="container-wide page page--sticky-cta">
       <PageHero eyebrow="Playground" title="Compute and interpret a chart in your browser">
         <Lead>
-          Every chart below is computed on this page by the <code>caelus</code>{" "}
-          engine using its embedded dataset, and then <strong>read</strong>: its
-          validated facts are turned into a cited reading drawn from a
-          public-domain corpus. Nothing is sent to a server, no ephemeris files
-          are involved, and every statement in the reading traces back to a
-          fact the engine computed.
+          Everything on this page is computed here, in your browser, by the{" "}
+          <code>caelus</code> engine and its embedded dataset. Nothing is sent
+          to a server.
         </Lead>
         <P dim>
-          Search a birthplace and enter the local time (<code>caelus-birth</code> resolves
-          the zone and historical DST to UT offline), then explore the chart across tabs:
-          positions, aspects, fixed stars, and <strong>Sky View</strong>, which frames the
-          visible sky at the chart&rsquo;s moment and place as a pixel-precise prompt for an
-          AI image model. The <strong>Facts</strong> tab lists the chart&rsquo;s ranked,
-          enriched fact atoms; <strong>Synastry</strong> compares two charts. The full cited
-          <strong> reading</strong> sits at the foot of the panel, every statement grounded
-          in a validated fact. <strong>Copy share link</strong> mints a chart whose URL
-          carries only the values you typed, recomputed in the recipient&rsquo;s browser.
-          (Switch the time mode to UTC for the current sky.)
+          Search a birthplace and enter the local time; the chart&rsquo;s
+          positions, aspects, facts, and a cited public-domain reading follow,
+          with every statement traceable to a fact the engine computed.
         </P>
       </PageHero>
 
       <SkyNow />
+      <P dim>
+        The playground runs the same build that ships to npm. Its worst
+        recorded deviation from the reference ephemeris is tabulated per body
+        on <A href="/validation">Validation</A>.
+      </P>
 
       <H2>Compare two charts</H2>
       <P>
@@ -83,24 +78,22 @@ export default function Playground() {
 
       <H2>Charts worth reading</H2>
       <P>
-        Four charts chosen for a striking reading. Click any one to load it into the builder
-        above and read it in full: the wheel is the{" "}
-        <A href="https://www.npmjs.com/package/caelus-wheel">caelus-wheel</A> renderer, and the
-        interpretation is the public-domain corpus run over the engine&rsquo;s facts.
+        Four charts chosen for a striking reading. Click one to load it into
+        the builder above and read it in full.
       </P>
       <div className="grid grid-2" style={{ marginTop: "1rem" }}>
         {EXAMPLES.map((ex) => (
           <a
             key={ex.caption}
             href={`/playground#c=${b64urlEncode(ex.share)}`}
-            className="card"
-            style={{ margin: 0, display: "block", textDecoration: "none", color: "inherit" }}
+            className="card card-interactive example-card"
           >
-            <div className="chart-fluid">
-              <ChartWheel chart={engine.chart(...ex.args)} size={420} theme={WHEEL_THEME} />
+            <div className="example-card__wheel chart-fluid">
+              <ChartWheel chart={engine.chart(...ex.args)} size={240} theme={WHEEL_THEME} />
             </div>
-            <div className="dim small" style={{ marginTop: "0.6rem" }}>
-              {ex.caption} <span style={{ color: "var(--accent)" }}>Read this chart &rarr;</span>
+            <div className="example-card__text">
+              {ex.caption}{" "}
+              <span className="example-card__cta">Read this chart &rarr;</span>
             </div>
           </a>
         ))}
