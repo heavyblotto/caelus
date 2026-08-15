@@ -1,4 +1,40 @@
 {
+  "__engine": {
+    "headlineLabel": "1000-3000",
+    "moonTier": "chebyshev",
+    "plutoTier": "chebyshev",
+    "sources": {
+      "admetos": "kepler_pack",
+      "apollon": "kepler_pack",
+      "ceres": "chebyshev_pack",
+      "chiron": "chebyshev_pack",
+      "cupido": "kepler_pack",
+      "hades": "kepler_pack",
+      "intp_apog": "chebyshev_pack",
+      "juno": "chebyshev_pack",
+      "jupiter": "chebyshev_pack",
+      "kronos": "kepler_pack",
+      "mars": "chebyshev_pack",
+      "mean_lilith": "analytic",
+      "mean_node": "analytic",
+      "mercury": "chebyshev_pack",
+      "moon": "moon_chebyshev",
+      "neptune": "chebyshev_pack",
+      "pallas": "chebyshev_pack",
+      "pholus": "chebyshev_pack",
+      "pluto": "chebyshev_pack",
+      "poseidon": "kepler_pack",
+      "saturn": "chebyshev_pack",
+      "sun": "vsop87d",
+      "true_lilith": "analytic",
+      "true_node": "analytic",
+      "uranus": "chebyshev_pack",
+      "venus": "chebyshev_pack",
+      "vesta": "chebyshev_pack",
+      "vulkanus": "kepler_pack",
+      "zeus": "kepler_pack"
+    }
+  },
   "natal-tampa": {
     "tool": "natal_chart",
     "args": {

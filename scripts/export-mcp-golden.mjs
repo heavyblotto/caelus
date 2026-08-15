@@ -6,10 +6,18 @@
  * rounding changes, the houses_fallback_reason string) that the engine-oracle
  * checks in verify_tools.mjs cannot see.
  *
+ * Alongside the payloads it records an engine fingerprint (`__engine`): the
+ * data tier the server was serving when they were minted. A payload is only
+ * comparable against its own tier, so the integration test checks the
+ * fingerprint first and reports a tier change by name. Without that, a tier
+ * switch appears only as unexplained value drift across a dozen unrelated
+ * tools, which is how the precise-Moon switch stayed red for a release cycle.
+ *
  * Regenerate deliberately, like the engine goldens:
  *   npm run build -w caelus && npm run build -w caelus-mcp
  *   node scripts/export-mcp-golden.mjs
- * Review the diff before committing.
+ * Review the diff before committing. A re-mint that also moves the fingerprint
+ * is claiming the tier changed on purpose; confirm that before committing it.
  *
  * Time-dependent tools (current_sky/transits defaulting to now) are always
  * called with an explicit date so the golden is reproducible.
@@ -18,6 +26,49 @@ import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 import { fileURLToPath } from "node:url";
 import { writeFileSync } from "node:fs";
+
+/** Reserved top-level key: the engine fingerprint, not a golden case. */
+export const ENGINE_KEY = "__engine";
+
+/**
+ * The engine facts that decide what the payloads contain. A golden payload is
+ * only meaningful next to the data tier that produced it: the precise-Moon
+ * Chebyshev tier and the analytic ELP series disagree by ~10", which is enough
+ * to move a displayed arcminute and, through the Moon's position inside its
+ * nakshatra, to move every dasha boundary by hours.
+ *
+ * Recording this turns "14 payloads differ" into "the server changed Moon
+ * tier", which is the sentence someone actually needs to decide whether to
+ * re-mint or to fix a regression. Read over MCP rather than computed in
+ * process, so it describes the engine the server really loaded.
+ */
+export async function engineFingerprint(client) {
+  const res = await client.readResource({ uri: "caelus://accuracy" });
+  const info = JSON.parse(res.contents[0].text).engine_info;
+  const sources = {};
+  for (const b of info.bodies) sources[b.body] = b.source;
+  return {
+    headlineLabel: info.headlineLabel,
+    moonTier: info.moonTier,
+    plutoTier: info.plutoTier,
+    // Sorted so the fingerprint is stable across body-registration order.
+    sources: Object.fromEntries(Object.keys(sources).sort().map((k) => [k, sources[k]])),
+  };
+}
+
+/** Leaf-level JSON path differences, so a failure can name what moved. */
+export function diffPaths(actual, expected, path = "", out = []) {
+  if (JSON.stringify(actual) === JSON.stringify(expected)) return out;
+  const bothObjects = actual && expected && typeof actual === "object" && typeof expected === "object";
+  if (bothObjects && Array.isArray(actual) === Array.isArray(expected)) {
+    for (const k of new Set([...Object.keys(actual), ...Object.keys(expected)])) {
+      diffPaths(actual[k], expected[k], `${path}.${k}`, out);
+    }
+    return out;
+  }
+  out.push({ path, actual, expected });
+  return out;
+}
 
 export const GOLDEN_CASES = [
   // --- happy path, one per tool ---
@@ -122,8 +173,9 @@ async function run() {
   const client = new Client({ name: "mint", version: "0.0.1" });
   await client.connect(transport);
 
-  const out = {};
+  const out = { [ENGINE_KEY]: await engineFingerprint(client) };
   for (const c of GOLDEN_CASES) {
+    if (c.id === ENGINE_KEY) throw new Error(`case id "${ENGINE_KEY}" is reserved for the engine fingerprint`);
     const res = await client.callTool({ name: c.tool, arguments: c.args });
     if (res.isError) throw new Error(`${c.id}: server returned error: ${res.content[0].text}`);
     out[c.id] = { tool: c.tool, args: c.args, payload: JSON.parse(res.content[0].text) };
@@ -137,5 +189,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const out = await run();
   const path = fileURLToPath(new URL("../packages/caelus-mcp/test/golden-mcp.json", import.meta.url));
   writeFileSync(path, JSON.stringify(out, null, 2) + "\n");
-  console.log(`wrote ${Object.keys(out).length} golden payloads to ${path}`);
+  const fp = out[ENGINE_KEY];
+  console.log(`wrote ${Object.keys(out).length - 1} golden payloads to ${path}`);
+  console.log(`engine: moon=${fp.moonTier} pluto=${fp.plutoTier} headline=${fp.headlineLabel}`);
 }
