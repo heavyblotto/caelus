@@ -7,7 +7,8 @@ image-prompt frames, and synthetic ephemeris for imaginary bodies. MIT, no Swiss
 
 ## Verification chain
 
-1. Python engine checked against Swiss Ephemeris 2.10 across 1850–2150:
+1. Python engine checked against Swiss Ephemeris 2.10 across 1850–2150, and
+   against JPL Horizons (DE441) across 1000–3000:
    every planet ≤ 1″ (Sun–Saturn), Moon ≤ 2.5″, Chiron ≤ 1″, mean node ≤ 1″,
    true node ≤ 1′ vs SE's built-in ephemeris (≤ 1″ vs JPL DE431)
    (vs full DE431 files, 1850–2149), angles and Placidus cusps ≤ 3.2″ — all
@@ -26,7 +27,7 @@ keep this suite green.
 | engine code                        | 8 KB    |
 | VSOP87 planets, embedded tier      | 65 KB   |
 | Moon series + nutation + Pluto     | 2 KB    |
-| Chiron (1850–2150)                 | 10 KB   |
+| Chiron (1600–2484)                 | 10 KB   |
 | Fixed-star catalog (HYG)           | 13 KB   |
 | **core total**                     | **~97 KB** |
 | VSOP micro tier (alt.)             | 25 KB   |
