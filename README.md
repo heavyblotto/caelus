@@ -10,7 +10,7 @@ image-prompt frames, and the MCP tools around them. Live at
 
 | Path | npm | Description |
 |------|-----|-------------|
-| `packages/caelus` | [`caelus`](https://www.npmjs.com/package/caelus) | TypeScript engine (~97 KB gzipped, zero deps) |
+| `packages/caelus` | [`caelus`](https://www.npmjs.com/package/caelus) | TypeScript engine (~151 KB gzipped total, zero deps) |
 | `packages/caelus-mcp` | [`caelus-mcp`](https://www.npmjs.com/package/caelus-mcp) | MCP server: charts, transits, synastry, events, eclipses |
 | `packages/caelus-delineations-pd` | — | Public-domain interpretation corpus + default validation set for `interpret()` |
 | `packages/birth` | [`caelus-birth`](https://www.npmjs.com/package/caelus-birth) | Birth time + place → UT (timezone and DST resolution) |

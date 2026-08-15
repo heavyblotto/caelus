@@ -1,5 +1,5 @@
 {
-  "_doc": "Each claim ties a number/string that appears in prose to a generated source of truth. check-claims.mjs verifies the rendered value is present in every listed file and that no competing value of the same shape appears. Sources: 'stats' = conformance-stats.json (golden suite), 'accuracy' = packages/caelus/accuracy.json, 'bundles' = bundle-sizes.json (esbuild measurements), 'data' = raw data files (terminal #keys counts object keys). Dynamic TSX pages import apps/web/lib/facts.ts formatters; literal anchors live in facts-anchors.generated.ts (scripts/sync-facts.mjs). PATCHES.md is intentionally excluded everywhere: it is a historical changelog that records superseded values on purpose. ROADMAP.md is likewise excluded from competing-value checks: its decision log records the state at past milestones (e.g. older tool counts).",
+  "_doc": "Each claim ties a number/string that appears in prose to a generated source of truth. check-claims.mjs verifies the rendered value is present in every listed file and that no competing value of the same shape appears. Sources: 'stats' = conformance-stats.json (golden suite), 'accuracy' = packages/caelus/accuracy.json, 'bundles' = bundle-sizes.json (esbuild measurements), 'data' = raw data files (terminal #keys counts object keys). Dynamic TSX pages import apps/web/lib/facts.ts formatters; literal anchors live in facts-anchors.generated.ts (scripts/sync-facts.mjs). 'appearsIn' files must contain the value and carry no competing one; 'competingIn' files are swept for competing values only, which is how pages that render through a formatter (no literal to find) or that quote a rival project's figure still get guarded. A claim with 'eachOf' takes a list source (accuracy.lists.*) and requires every id in it to be named in each listed file, so a page enumerating a set cannot go stale or deny a capability that ships. PATCHES.md is intentionally excluded everywhere: it is a historical changelog that records superseded values on purpose. ROADMAP.md is likewise excluded from competing-value checks: its decision log records the state at past milestones (e.g. older tool counts).",
   "claims": [
     {
       "id": "golden-check-count",
@@ -68,10 +68,28 @@
         "twelve house systems",
         "Twelve house systems"
       ],
+      "competing": "(\\b\\d+|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen) house systems",
       "appearsIn": [
         "apps/web/lib/facts-anchors.generated.ts",
         "apps/web/app/docs/data-tiers/page.mdx",
         "python/README.md"
+      ],
+      "competingIn": [
+        "apps/web/app/provenance/page.tsx",
+        "apps/web/app/features/page.tsx",
+        "apps/web/app/validation/page.tsx",
+        "packages/caelus/README.md",
+        "llms.txt",
+        "apps/web/public/llms.txt"
+      ]
+    },
+    {
+      "id": "house-system-names",
+      "eachOf": true,
+      "source": "accuracy.lists.house_systems",
+      "appearsIn": [
+        "apps/web/app/features/page.tsx",
+        "apps/web/app/docs/houses-and-zodiacs/page.mdx"
       ]
     },
     {
@@ -137,8 +155,10 @@
       "appearsIn": [
         "apps/web/app/page.tsx",
         "apps/web/app/docs/data-tiers/page.mdx",
+        "apps/web/app/provenance/page.tsx",
         "llms.txt",
         "apps/web/public/llms.txt",
+        "README.md",
         "packages/caelus/README.md"
       ]
     },

@@ -27,8 +27,8 @@ export default function Methods() {
         golden fixtures: position and event values at fixed instants, written to
         JSON. The TypeScript engine is a port of the same math, and a conformance
         suite replays the fixtures against it on every commit. The port has to
-        reproduce the reference to the last digit the fixture records. A red run
-        blocks merge.
+        reproduce the reference to the last digit the fixture records, and a red
+        run blocks the merge.
       </P>
       <P>
         The core reads no files and makes no network calls. Coefficient tables
@@ -45,8 +45,9 @@ export default function Methods() {
         2.10 is the calibration oracle. It shares the apparent-place definition
         used here, geocentric ecliptic longitude at the true equinox of date, so
         a comparison at random instants across 1000&ndash;3000 shows whether the
-        model matches the field standard. No Swiss Ephemeris code or coefficient
-        ships in Caelus. It is a test target only.
+        model matches the field standard. No Swiss Ephemeris code or
+        coefficient ships in Caelus, and it is used only as a target to test
+        against.
       </P>
       <P>
         <A href="https://ssd.jpl.nasa.gov/horizons/">JPL Horizons</A> is the
@@ -68,10 +69,11 @@ export default function Methods() {
         rather than assert one reading, each technique is pinned to a named
         authority (the Brihat Parashara Hora Shastra, or the JHora/PVR
         Narasimha Rao implementation where the texts differ), and a
-        reference tier (<code>validate_jyotish</code>) replays a committed,
-        per-check-cited set so every convention choice is validated against a
-        named source, not memory. It runs no external tool, keeping the engine
-        free of any Swiss Ephemeris dependency.
+        reference tier (<code>validate_jyotish</code>) replays a committed set
+        of checks, each carrying its own citation, so every convention choice
+        can be traced back to the source it came from. That tier runs no
+        external tool, which keeps the engine free of any Swiss Ephemeris
+        dependency.
       </P>
 
       <Note>
@@ -154,14 +156,15 @@ export default function Methods() {
 
       <H2>Where the method reaches its limit</H2>
       <P>
-        A few quantities are ill-conditioned, and the accuracy table says so
-        rather than smoothing it over. A planetary station is a speed-zero root
-        with a slope near 0.01&deg; per day squared, so a sub-arcsecond position
-        difference turns into a timing difference of seconds to about a minute.
-        The osculating lunar apogee, sold as &quot;true Lilith&quot;, amplifies
-        the lunar theory&apos;s own error by roughly a factor of 1/e, which is
-        why its values disagree across every software package at that scale.
-        Numbers like these are quoted with the reason they are large.
+        A few quantities are ill-conditioned, and the accuracy table reports
+        them as they are rather than smoothing them over. A planetary station
+        is a speed-zero root with a slope near 0.01&deg; per day squared, so a
+        sub-arcsecond difference in position becomes a timing difference of
+        seconds to about a minute. The osculating lunar apogee, usually sold as
+        &quot;true Lilith&quot;, amplifies the lunar theory&apos;s own error by
+        roughly a factor of 1/e, so its values disagree across every software
+        package at that scale. Where a number in the tables is large,
+        the reason it is large is given with it.
       </P>
 
       <P dim>

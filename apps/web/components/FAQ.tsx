@@ -104,16 +104,17 @@ const ITEMS: QA[] = [
     q: "Does it interpret a chart, or just compute it?",
     a: (
       <>
-        It computes; you interpret. The engine stops at validated geometry and
-        ships no flavour text. For generated readings it provides an{" "}
-        <A href="/docs/interpretation">interpretation layer</A>: a chart projects
-        into ranked, citable fact atoms that a rule corpus or an LLM plugs into,
-        with citation auditing to keep an AI grounded in the real chart. The
-        meaning is always yours and always traceable to a fact.
+        The engine computes, and the interpretation is left to you. It stops at
+        validated geometry and ships no delineation text of its own. For
+        generated readings there is an{" "}
+        <A href="/docs/interpretation">interpretation layer</A>, which projects
+        a chart into ranked, citable fact atoms that a rule corpus or an LLM can
+        consume, and audits the citations afterwards so a generated reading
+        stays tied to the chart it came from.
       </>
     ),
     text:
-      "It computes; you interpret. The engine stops at validated geometry and ships no flavour text. For generated readings it provides an interpretation layer: a chart projects into ranked, citable fact atoms that a rule corpus or an LLM plugs into, with citation auditing to keep an AI grounded in the real chart.",
+      "The engine computes, and the interpretation is left to you. It stops at validated geometry and ships no delineation text of its own. For generated readings there is an interpretation layer, which projects a chart into ranked, citable fact atoms that a rule corpus or an LLM can consume, and audits the citations afterwards so a generated reading stays tied to the chart it came from.",
   },
   {
     q: "Can it chart a forecast, a fictional character, or an archetype?",

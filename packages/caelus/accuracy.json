@@ -275,5 +275,21 @@
     "sidereal_ayanamsas": 7,
     "mcp_tools": 35,
     "default_bodies": 13
+  },
+  "lists": {
+    "house_systems": [
+      "placidus",
+      "porphyry",
+      "equal",
+      "whole_sign",
+      "koch",
+      "regiomontanus",
+      "campanus",
+      "alcabitius",
+      "morinus",
+      "meridian",
+      "polich_page",
+      "vehlow"
+    ]
   }
 }

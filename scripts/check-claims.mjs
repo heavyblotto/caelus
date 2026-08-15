@@ -111,7 +111,48 @@ function lineOf(text, idx) {
   return text.slice(0, idx).split("\n").length;
 }
 
+/**
+ * The forms prose may use for an id. Reference docs quote the literal
+ * ("polich_page"), running prose hyphenates or spaces it ("Polich-Page",
+ * "whole sign"); any one of them counts as naming the system.
+ */
+function nameVariants(id) {
+  const base = String(id).toLowerCase();
+  return [base, base.replaceAll("_", "-"), base.replaceAll("_", " ")];
+}
+
+/**
+ * eachOf claims: the source is a list of ids, and every one must be named in
+ * each file that enumerates the set. A count check alone passes a page that
+ * names the wrong twelve systems, or denies shipping one that exists.
+ */
+function checkEachOf(claim) {
+  const list = resolveSource(claim.source, stats);
+  if (!Array.isArray(list) || !list.length) {
+    problems.push(`[${claim.id}] source "${claim.source}" is not a non-empty list`);
+    return;
+  }
+  for (const file of claim.appearsIn) {
+    const fpath = rel(file);
+    if (!existsSync(fpath)) {
+      problems.push(`[${claim.id}] missing file: ${file}`);
+      continue;
+    }
+    const hay = readFileSync(fpath, "utf8").replaceAll("**", "").toLowerCase();
+    const missing = list.filter((id) => !nameVariants(id).some((n) => hay.includes(n)));
+    if (missing.length) {
+      problems.push(
+        `[${claim.id}] ${file}: enumerates the set but never names [${missing.join(", ")}] (from ${claim.source})`,
+      );
+    }
+  }
+}
+
 for (const claim of registry.claims) {
+  if (claim.eachOf) {
+    checkEachOf(claim);
+    continue;
+  }
   const raw = resolveSource(claim.source, stats);
   if (raw === undefined || raw === null) {
     problems.push(`[${claim.id}] source "${claim.source}" resolved to ${raw}`);
@@ -120,7 +161,17 @@ for (const claim of registry.claims) {
   const value = renderValue(claim, raw);
   const expected = claim.render.map((r) => r.replaceAll("{value}", String(value)));
 
-  for (const file of claim.appearsIn) {
+  // appearsIn files must contain the value AND carry no competing one.
+  // competingIn files are only swept for competing values: pages that render
+  // the number through a facts.ts formatter never hold the literal, and pages
+  // that quote a rival project's figure would fail a presence check, but both
+  // still go stale the same way when the underlying number moves.
+  const scanned = [
+    ...claim.appearsIn.map((file) => ({ file, requirePresent: true })),
+    ...(claim.competingIn ?? []).map((file) => ({ file, requirePresent: false })),
+  ];
+
+  for (const { file, requirePresent } of scanned) {
     const fpath = rel(file);
     if (!existsSync(fpath)) {
       problems.push(`[${claim.id}] missing file: ${file}`);
@@ -133,7 +184,7 @@ for (const claim of registry.claims) {
 
     // 1. The expected rendered value must be present (any one render form).
     const present = expected.some((e) => text.includes(e));
-    if (!present) {
+    if (requirePresent && !present) {
       problems.push(
         `[${claim.id}] ${file}: expected one of [${expected.join(" | ")}] (from ${claim.source}=${value}) — not found`,
       );

@@ -6,7 +6,7 @@ import { pageMetadata } from "../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Build Notes",
-  description: "Postmortems: ΔT extrapolation, node frame error, Chiron light-time double-count, aspect-search geometry.",
+  description: "Postmortems on four bugs the validation suite caught: ΔT extrapolation, a node frame error, a double-counted Chiron light-time, and the geometry of the aspect search.",
   path: "/notes",
   type: "article",
 });
@@ -16,16 +16,19 @@ export default function Notes() {
     <main className="container page">
       <PageHero eyebrow="Build Notes" title="Build Notes">
         <P>
-          VSOP87 evaluation is a few hundred lines and matched professional ephemerides
-          on the first pass. The bugs were in timescales, frames, and geometry: invisible
-          in a spot check, obvious in the golden suite.
+          Evaluating VSOP87 takes a few hundred lines, and it matched
+          professional ephemerides on the first pass. The bugs worth writing up
+          were all elsewhere, in the handling of timescales, reference frames,
+          and geometry. None of them showed up in a spot check of a single
+          chart, and all of them showed up once the golden suite compared
+          thousands of values against a reference.
         </P>
       </PageHero>
 
       <H2>ΔT: textbook extrapolation vs Earth since 2016</H2>
       <P>
-        Ephemerides use TT; civil time follows Earth rotation. ΔT bridges the two.
-        The{" "}
+        Ephemerides are computed in TT, while civil time follows the rotation
+        of the Earth, and ΔT is the quantity that bridges the two. The{" "}
         <A href="https://eclipse.gsfc.nasa.gov/SEcat5/deltatpoly.html">
           Espenak–Meeus (2006) polynomials
         </A>, copied into decades of software, assume Earth&apos;s spin keeps
@@ -47,36 +50,44 @@ export default function Notes() {
 
       <H2>Node longitude: 11× frame sensitivity</H2>
       <P>
-        Lunar nodes mark where the Moon&apos;s plane crosses the ecliptic. The ecliptic
-        of date drifts ~47″/century. With the Moon inclined only 5.1°, a frame error
-        in the reference plane scales by 1/sin(5.1°) ≈ 11× in node longitude. Using
-        J2000 instead of ecliptic-of-date produced ~500″ node error while planetary
-        longitudes barely moved.
+        The lunar nodes mark where the Moon&apos;s plane crosses the ecliptic,
+        and the ecliptic of date drifts by about 47″ per century. Because the
+        Moon is inclined by only 5.1°, an error in the reference plane is
+        amplified in node longitude by a factor of 1/sin(5.1°), or roughly 11.
+        Using J2000 in place of the ecliptic of date produced about 500″ of
+        node error at a point where the planetary longitudes had barely moved
+        at all.
       </P>
 
       <H2>Chiron fit: double light-time</H2>
       <P>
-        The first Chebyshev fit sampled Horizons &ldquo;heliocentric&rdquo; positions
-        that already included Sun→body light-time (~6,900 s of motion, ~55,000 km).
-        The pipeline then applied Earth→body light-time again: ~9″ steady bias.
-        Fix: fit geometric states; validate the fit, then the Earth vector, then
-        assemble geocentric positions from the oracle&apos;s parts.
+        The first Chebyshev fit sampled the Horizons
+        &ldquo;heliocentric&rdquo; positions, which already include the
+        Sun-to-body light-time, worth about 6,900 seconds of motion or 55,000
+        km. The pipeline then applied the Earth-to-body light-time on top of
+        that, and the double count showed up as a steady bias of about 9″. The
+        fix was to fit geometric states instead, and to validate the fit and
+        the Earth vector separately before assembling geocentric positions from
+        the oracle&apos;s own parts.
       </P>
 
       <H2>Aspect dates: ±90° geometry</H2>
       <P>
-        Code review found <Code>find_aspect_dates</Code> root-finding only +90°
-        separations, dropping half of sextile/square/trine hits. The engine was fine;
-        the MCP search was wrong. Fixed with a seven-year Mars sextile oracle. Nine
-        hits matched an independent scan to the minute, including a retrograde triple
-        pass.
+        A code review found that <Code>find_aspect_dates</Code> was root-finding
+        only the +90° separations, which dropped half of the sextile, square,
+        and trine hits. The engine was computing correctly here; the bug lived
+        in the MCP search layer above it. The fix was checked against a
+        seven-year Mars sextile oracle, where all nine hits matched an
+        independent scan to the minute, including a retrograde triple pass.
       </P>
 
       <H2>Golden suite</H2>
       <P>
-        Swiss Ephemeris checks the Python reference; {formatGoldenChecks()} fixtures pin the TypeScript
-        port (worst delta {formatWorstNanoProse()}). CI runs both on every commit. The
-        TS port was mostly agent-written with one gate: keep the suite green.
+        Swiss Ephemeris checks the Python reference, and {formatGoldenChecks()}{" "}
+        fixtures pin the TypeScript port to it, with a worst recorded delta of{" "}
+        {formatWorstNanoProse()}. CI runs both suites on every commit. The
+        TypeScript port was written mostly by agents, and the condition it had
+        to meet was that the suite stayed green.
       </P>
       <P>
         The fuller account of an engine written mostly by agents, and what kept
