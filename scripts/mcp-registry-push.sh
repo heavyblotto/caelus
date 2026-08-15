@@ -42,7 +42,11 @@ fi
 echo "verifying listing..."
 curl -sf "https://registry.modelcontextprotocol.io/v0/servers?search=$NAME" \
   | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{
-      const s=JSON.parse(d).servers?.find(x=>x.name===process.argv[1]);
-      if(!s){console.error('listing not found');process.exit(1);}
-      console.log('registry listing:', s.name, s.version ?? '', s.status ?? '');
-    })" "$NAME"
+      const entries=JSON.parse(d).servers??[];
+      // entries wrap the descriptor: {server: {...}, _meta: {...}}
+      const s=entries.find(x=>(x.server??x).name===process.argv[1] && (x.server??x).version===process.argv[2]);
+      if(!s){console.error('listing not found for', process.argv[1], process.argv[2]);process.exit(1);}
+      const srv=s.server??s;
+      const meta=s._meta?.['io.modelcontextprotocol.registry/official']??{};
+      console.log('registry listing:', srv.name, srv.version ?? '', meta.status ?? '', meta.isLatest ? '(latest)' : '');
+    })" "$NAME" "$VERSION"
