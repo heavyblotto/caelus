@@ -53,14 +53,15 @@ const ITEMS: QA[] = [
     q: "What date range does it cover?",
     a: (
       <>
-        Several centuries around the present. A body outside its fitted range,
-        such as Chiron before about 1850 or after 2150, is omitted from the chart
-        and listed under its <code>unavailable</code> field rather than guessed.
-        See <A href="/docs/edge-cases">Edge Cases</A>.
+        The planets, Pluto, and the Moon are validated for the years
+        1000&ndash;3000, and the small bodies (asteroids and Chiron) for
+        1600&ndash;2484. A body outside its fitted range is omitted from the
+        chart and listed under its <code>unavailable</code> field rather than
+        guessed. See <A href="/docs/edge-cases">Edge Cases</A>.
       </>
     ),
     text:
-      "Several centuries around the present. A body outside its fitted range, such as Chiron before about 1850 or after 2150, is omitted from the chart and listed under its unavailable field rather than guessed.",
+      "The planets, Pluto, and the Moon are validated for the years 1000-3000, and the small bodies (asteroids and Chiron) for 1600-2484. A body outside its fitted range is omitted from the chart and listed under its unavailable field rather than guessed.",
   },
   {
     q: "Does it support Vedic astrology, or only Western?",

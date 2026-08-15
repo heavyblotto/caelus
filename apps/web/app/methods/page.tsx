@@ -92,7 +92,7 @@ export default function Methods() {
       <ul>
         <li>
           <strong>Minor bodies.</strong> Chiron and the asteroids are Chebyshev
-          fits of JPL Horizons samples across 1850&ndash;2150, with residuals
+          fits of JPL Horizons samples across 1600&ndash;2484, with residuals
           under 5&times;10&#8315;&#8310; AU. They use the same geocentric pipeline
           as the planets.
         </li>
@@ -123,7 +123,7 @@ export default function Methods() {
         <tbody>
           <tr>
             <td>Planet and Moon longitudes</td>
-            <td>Swiss across 1850&ndash;2150, plus JPL Horizons at independent epochs</td>
+            <td>JPL Horizons (DE441) across 1000&ndash;3000; the 1850&ndash;2150 figures remain vs Swiss Ephemeris</td>
           </tr>
           <tr>
             <td>House cusps, 8 added systems</td>

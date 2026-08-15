@@ -161,7 +161,7 @@ export default function SkyNow() {
     }
 
     // The engine throws (RangeError) for dates outside its fitted range — Chiron
-    // is Chebyshev-only over ~1850–2150. A datetime-local input emits transient
+    // is Chebyshev-only over ~1600–2484. A datetime-local input emits transient
     // years (e.g. 0001) mid-edit, so catch the throw and surface it inline rather
     // than letting it crash the render tree.
     const t0 = performance.now();
@@ -577,7 +577,7 @@ export default function SkyNow() {
       )}
 
       <h3 style={{ marginTop: "2rem" }}>
-        Accuracy <span className="mute" style={{ fontWeight: 400, fontSize: "0.85rem" }}>(vs reference, 1850–2150)</span>
+        Accuracy <span className="mute" style={{ fontWeight: 400, fontSize: "0.85rem" }}>(vs reference, 1000–3000)</span>
       </h3>
       <table className="mono" style={{ fontSize: "0.85rem", maxWidth: 420 }}>
         <tbody>{ACCURACY.map(([k, v]) => <tr key={k}><td className="mute" style={cell}>{k}</td><td style={cell}>{v}</td></tr>)}</tbody>
