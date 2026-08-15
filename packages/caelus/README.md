@@ -50,7 +50,7 @@ import { loadNodeData } from "caelus/node"; // Node only
 // Node: filesystem loader
 const engine = new Engine(loadNodeData("./data", "embedded", "full"));
 
-// Browser/edge: bundled embedded dataset (~97 KB gz)
+// Browser/edge: bundled embedded dataset (~153 KB gz)
 // import { embeddedData } from "caelus/data-embedded";
 // const engine = new Engine(embeddedData);
 

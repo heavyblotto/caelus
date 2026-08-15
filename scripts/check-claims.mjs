@@ -49,12 +49,45 @@ function loadStats() {
 
 const accuracy = JSON.parse(readFileSync(rel("packages/caelus/accuracy.json"), "utf8"));
 
+const BUNDLES_PATH = rel("bundle-sizes.json");
+let bundlesCache;
+function loadBundles() {
+  // bundle-sizes.json is a generated artifact (gitignored, like the golden
+  // stats). Regenerate when absent; needs the workspaces built + esbuild.
+  if (existsSync(BUNDLES_PATH)) return JSON.parse(readFileSync(BUNDLES_PATH, "utf8"));
+  execFileSync("node", [rel("scripts/bundle-sizes.mjs")], { stdio: "ignore" });
+  return JSON.parse(readFileSync(BUNDLES_PATH, "utf8"));
+}
+
+// Raw data files usable as claim sources (counts that prose quotes).
+const DATA_FILES = {
+  fixed_stars: "packages/caelus/data/fixed_stars.json",
+  fixed_stars_deep: "packages/caelus/data/fixed_stars_deep.json",
+};
+
 function resolveSource(spec, stats) {
-  // spec like "stats.worst.nano_arcsec", "stats.checks", or "accuracy.<key>"
+  // spec like "stats.worst.nano_arcsec", "accuracy.<key>",
+  // "bundles.embedded.gzipKb", or "data.fixed_stars.stars#keys"
+  // (a terminal "#keys" counts the keys of the object at that path).
   const [root, ...path] = spec.split(".");
-  let cur = root === "stats" ? stats : root === "accuracy" ? accuracy : null;
-  if (cur === null) throw new Error(`unknown source root: ${root}`);
+  let countKeys = false;
+  if (path.length && path[path.length - 1].endsWith("#keys")) {
+    countKeys = true;
+    path[path.length - 1] = path[path.length - 1].slice(0, -"#keys".length);
+  }
+  let cur;
+  if (root === "stats") cur = stats;
+  else if (root === "accuracy") cur = accuracy;
+  else if (root === "bundles") cur = (bundlesCache ??= loadBundles());
+  else if (root === "data") {
+    const file = DATA_FILES[path.shift()];
+    if (!file) throw new Error(`unknown data source in spec: ${spec}`);
+    cur = JSON.parse(readFileSync(rel(file), "utf8"));
+  } else {
+    throw new Error(`unknown source root: ${root}`);
+  }
   for (const k of path) cur = cur?.[k];
+  if (countKeys && cur && typeof cur === "object") cur = Object.keys(cur).length;
   return cur;
 }
 
@@ -93,7 +126,10 @@ for (const claim of registry.claims) {
       problems.push(`[${claim.id}] missing file: ${file}`);
       continue;
     }
-    const text = readFileSync(fpath, "utf8");
+    // Bold/italic markers (**) break both presence and competing matching
+    // ("**thirty-five** tools" vs the "thirty-five tools" render), so scan a
+    // normalized copy; line numbers stay identical.
+    const text = readFileSync(fpath, "utf8").replaceAll("**", "");
 
     // 1. The expected rendered value must be present (any one render form).
     const present = expected.some((e) => text.includes(e));

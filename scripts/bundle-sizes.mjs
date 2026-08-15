@@ -14,6 +14,7 @@ import { build } from "esbuild";
 import { gzipSync, brotliCompressSync } from "node:zlib";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { writeFileSync } from "node:fs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -96,3 +97,21 @@ console.log("\nMarkdown:\n");
 console.log(`| ${head.join(" | ")} |`);
 console.log(`| ${head.map(() => "---").join(" | ")} |`);
 for (const r of rows) console.log(`| ${r[0]} | ${r[1]} KB | ${r[2]} KB | ${r[3]} KB |`);
+
+// Machine-readable form: check-claims.mjs sources bundle-size claims in prose
+// from this file (gitignored, regenerated on demand, like conformance-stats.json).
+const IDS = {
+  "caelus — engine, chart only": "engine",
+  "caelus — engine + embedded data": "embedded",
+  "caelus — full surface": "full",
+  "caelus-wheel": "wheel",
+  "caelus-birth": "birth",
+  "caelus-mcp (server)": "mcp",
+};
+const out = {};
+for (const [name, min, gz, br] of rows) {
+  if (min === "ERR" || !IDS[name]) continue;
+  out[IDS[name]] = { minKb: Number(min), gzipKb: Number(gz), brotliKb: Number(br) };
+}
+writeFileSync(join(ROOT, "bundle-sizes.json"), JSON.stringify(out, null, 2) + "\n");
+console.log("\nwrote bundle-sizes.json");

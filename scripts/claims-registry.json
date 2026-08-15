@@ -1,5 +1,5 @@
 {
-  "_doc": "Each claim ties a number/string that appears in prose to a generated source of truth. check-claims.mjs verifies the rendered value is present in every listed file and that no competing value of the same shape appears. Sources: 'stats' = conformance-stats.json (golden suite), 'accuracy' = packages/caelus/accuracy.json. Dynamic TSX pages import apps/web/lib/facts.ts formatters; literal anchors live in facts-anchors.generated.ts (scripts/sync-facts.mjs). PATCHES.md is intentionally excluded everywhere: it is a historical changelog that records superseded values on purpose.",
+  "_doc": "Each claim ties a number/string that appears in prose to a generated source of truth. check-claims.mjs verifies the rendered value is present in every listed file and that no competing value of the same shape appears. Sources: 'stats' = conformance-stats.json (golden suite), 'accuracy' = packages/caelus/accuracy.json, 'bundles' = bundle-sizes.json (esbuild measurements), 'data' = raw data files (terminal #keys counts object keys). Dynamic TSX pages import apps/web/lib/facts.ts formatters; literal anchors live in facts-anchors.generated.ts (scripts/sync-facts.mjs). PATCHES.md is intentionally excluded everywhere: it is a historical changelog that records superseded values on purpose. ROADMAP.md is likewise excluded from competing-value checks: its decision log records the state at past milestones (e.g. older tool counts).",
   "claims": [
     {
       "id": "golden-check-count",
@@ -95,10 +95,63 @@
       "id": "headline-range",
       "source": "accuracy.range",
       "render": [
-        "{value}"
+        "{value}",
+        "1000–3000",
+        "1000&ndash;3000"
       ],
       "appearsIn": [
-        "packages/caelus/src/ranges.ts"
+        "packages/caelus/src/ranges.ts",
+        "llms.txt",
+        "apps/web/public/llms.txt",
+        "apps/web/app/docs/data-tiers/page.mdx",
+        "apps/web/app/docs/edge-cases/page.mdx",
+        "apps/web/components/FAQ.tsx",
+        "apps/web/app/features/page.tsx",
+        "apps/web/app/validation/page.tsx",
+        "packages/caelus/README.md"
+      ]
+    },
+    {
+      "id": "fixed-star-count",
+      "source": "data.fixed_stars.stars#keys",
+      "render": [
+        "{value} fixed stars",
+        "{value}-star"
+      ],
+      "competing": "\\b3\\d\\d fixed stars\\b|\\b3\\d\\d-star",
+      "appearsIn": [
+        "apps/web/app/features/page.tsx",
+        "apps/web/app/docs/data-tiers/page.mdx",
+        "llms.txt",
+        "apps/web/public/llms.txt"
+      ]
+    },
+    {
+      "id": "embedded-bundle-gzip",
+      "source": "bundles.embedded.gzipKb",
+      "round": 0,
+      "render": [
+        "~{value} KB"
+      ],
+      "competing": "~([5-9]\\d|1[0-4]\\d) KB(?=[^\\n]{0,30}(total|gz))",
+      "appearsIn": [
+        "apps/web/app/page.tsx",
+        "apps/web/app/docs/data-tiers/page.mdx",
+        "llms.txt",
+        "apps/web/public/llms.txt",
+        "packages/caelus/README.md"
+      ]
+    },
+    {
+      "id": "wheel-bundle-gzip",
+      "source": "bundles.wheel.gzipKb",
+      "round": 1,
+      "render": [
+        "~{value} KB"
+      ],
+      "competing": "~[3-9](\\.\\d)? KB\\b",
+      "appearsIn": [
+        "apps/web/app/page.tsx"
       ]
     },
     {
@@ -108,10 +161,13 @@
         "{value} chart tools",
         "{value} MCP tools",
         "MCP tools ({value})",
+        "{value}-tool",
+        "{value} tools",
         "thirty-five chart tools",
         "Thirty-five chart tools",
         "thirty-five tools"
       ],
+      "competing": "(twenty|thirty|forty|fifty)-[a-z]+[^a-z\\n]{0,12}tools\\b|\\b\\d{2}[^0-9\\n]{0,12}(chart |MCP )?tools\\b|\\b\\d{2}-tool\\b",
       "appearsIn": [
         "apps/web/lib/facts-anchors.generated.ts",
         "apps/web/app/docs/mcp/page.mdx",
@@ -121,7 +177,7 @@
         "packages/caelus/README.md",
         "packages/wheel/README.md",
         "packages/birth/README.md",
-        "ROADMAP.md"
+        "packages/caelus-mcp/server.json"
       ]
     },
     {
