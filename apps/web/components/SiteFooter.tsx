@@ -54,10 +54,8 @@ export default function SiteFooter() {
           <Link href="/privacy">Privacy</Link>
           <span aria-hidden>·</span>
           <span>v{SITE.version}</span>
-          <span aria-hidden>·</span>
-          <span>Positions computed from published math, not recalled.</span>
           <span style={{ marginLeft: "auto" }} suppressHydrationWarning>
-            © {year} Caelus
+            © {year} ephemengine
           </span>
         </div>
       </div>
