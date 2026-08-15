@@ -36,6 +36,11 @@ jobs:
       - run: npm run build -w caelus-wheel
       - run: node packages/wheel/dist/test/render.test.js
       - run: node scripts/check-llms.mjs
+      # Gate the publish path on the tarball itself: v0.24.0 went out missing
+      # the four newest wide planet packs because files[] drifted and the
+      # existsSync loaders made the gap silent. ci.yml runs this check too,
+      # but the publish path is where it must never be skipped.
+      - run: node scripts/check-tarball.mjs
       # engine first: the others depend on it. Each publish skips when the
       # version is already on the registry, so tag-push and dispatch triggers
       # are idempotent and a re-run never fails on an existing version.

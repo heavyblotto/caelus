@@ -23,6 +23,10 @@ const REQUIRED = [
   "data/saturn_cheb.json",
   "data/uranus_cheb.json",
   "data/neptune_cheb.json",
+  "data/mercury_cheb.json",
+  "data/venus_cheb.json",
+  "data/jupiter_cheb.json",
+  "data/earth_cheb.json",
   "data/uranian_kepler.json",
   "data/turbo.json",        // sample turbo pack so the turbo tier works out of the box
   "data/chiron_cheb.json",
