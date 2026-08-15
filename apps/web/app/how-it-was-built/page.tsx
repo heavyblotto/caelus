@@ -37,8 +37,9 @@ export default function HowItWasBuilt() {
 
       <H2>Two oracles, not the author&apos;s word</H2>
       <P>
-        Swiss Ephemeris 2.10 is the same-frame oracle across 1850&ndash;2150; JPL
-        Horizons is the independent reference at a separate set of epochs. The
+        Swiss Ephemeris 2.10 is the same-frame oracle over the modern era; JPL
+        Horizons (DE441) is the independent reference, and the sole oracle over
+        the 1000&ndash;3000 span where the built-in Swiss theories drift. The
         per-body bounds are published on <A href="/validation">Validation</A>, and the methodology behind them
         on <A href="/methods">Methods</A>. For an engine written by a machine,
         the trust comes from the oracle rather than the author, which is the same

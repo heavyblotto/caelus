@@ -44,7 +44,7 @@ export default function Methods() {
         </A>{" "}
         2.10 is the calibration oracle. It shares the apparent-place definition
         used here, geocentric ecliptic longitude at the true equinox of date, so
-        a comparison at random instants across 1850&ndash;2150 shows whether the
+        a comparison at random instants across 1000&ndash;3000 shows whether the
         model matches the field standard. No Swiss Ephemeris code or coefficient
         ships in Caelus. It is a test target only.
       </P>

@@ -1,6 +1,6 @@
 {
-  "basis": "Swiss Ephemeris 2.10, 1850-2150, apparent geocentric ecliptic longitude (true equinox of date)",
-  "range": "1850-2150",
+  "basis": "JPL Horizons (DE441) over 1000-3000; the 1850-2150 figures remain vs Swiss Ephemeris 2.10. Frame-free (ICRF astrometric) position error; the of-date apparent figures carry a uniform ~3.3\" IAU1976/1980-vs-Vondrak2011 precession-convention term that is not a position error. Swiss Moshier is not a trustworthy oracle over the wide span (it drifts from DE441: Neptune 10\", Pluto 30\"), so the wide band is measured against JPL directly.",
+  "range": "1000-3000",
   "unit": "arcsec",
   "bodies": [
     {
@@ -67,13 +67,13 @@
       "name": "Pluto",
       "max": "3.4",
       "rms": "1.0",
-      "note": "JPL Horizons barycenter Chebyshev pack (1700-2212, fit residual 4.1e-6 AU ≈ 0.03″); supersedes the Meeus ch.37 series. Bound is vs SE's own Moshier Pluto"
+      "note": "JPL Horizons barycenter Chebyshev pack (1000-3000, true error 8.3e-7 AU ≈ 0.005″); supersedes the Meeus ch.37 series. Bound is vs SE's own Moshier Pluto over the modern era"
     },
     {
       "name": "Chiron",
       "max": "1.0",
       "rms": "0.3",
-      "note": "JPL Horizons fit, 1850-2150"
+      "note": "JPL Horizons fit, 1600-2484 (Horizons serves small bodies only over ~1600-2500)"
     },
     {
       "name": "Mean node",
@@ -169,7 +169,7 @@
       "name": "Ceres, Pallas, Juno, Vesta, Pholus",
       "max": "1.0",
       "rms": "0.3",
-      "note": "JPL Horizons fits 1850-2150 (residual <5e-6 AU); same geocentric pipeline as Chiron. No independent SE oracle here: SE's asteroid files are unavailable in Moshier mode"
+      "note": "JPL Horizons fits 1600-2484 (true error <5e-6 AU); same geocentric pipeline as Chiron. No independent SE oracle here: SE's asteroid files are unavailable in Moshier mode"
     },
     {
       "name": "Uranian bodies (Cupido…Poseidon)",
@@ -268,7 +268,7 @@
       "bound": "types exact; max ≤ 9 s"
     }
   ],
-  "v03_harness": "python/validate_swiss.py regenerates every figure above the line against pyswisseph 2.10 (Moshier mode), sampled over 1850-2150; validate_horizons.py cross-checks the edges (banded 1800/2200) against JPL directly",
+  "v03_harness": "python/validate_swiss.py regenerates the modern-era figures against pyswisseph 2.10 (Moshier mode); python/validate_horizons.py measures the wide band (1000-3000) against JPL Horizons directly, both the of-date apparent basis and the frame-free astrometric basis. Over the wide span the JPL figures are the oracle, since Swiss Moshier drifts from DE441 there",
   "true_node_vs_builtin": "1′",
   "counts": {
     "house_systems": 12,

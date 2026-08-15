@@ -393,8 +393,8 @@ export default function Features() {
           <A href="/docs/data-tiers">Data Tiers</A>.
         </Feature>
         <Feature title="Range and license">
-          Supported range 1800&ndash;2149, with the precise Moon and Chiron fits
-          spanning 1850&ndash;2150. MIT licensed, with no AGPL and no ephemeris
+          Supported range 1000&ndash;3000 for the planets, Pluto and the Moon,
+          validated against JPL Horizons; the small bodies span 1600&ndash;2484. MIT licensed, with no AGPL and no ephemeris
           files on disk. Provenance for every coefficient is on{" "}
           <A href="/provenance">Provenance</A>.
         </Feature>

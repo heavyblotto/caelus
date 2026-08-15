@@ -20,10 +20,11 @@ TWO_PI = 2 * math.pi
 FLG = swe.FLG_MOSEPH
 random.seed(42)
 N = 200
-# 1851-2149: the validated range, inset one year to stay inside the Moon/asteroid
-# Chebyshev pack bounds (1850-2150). The exact edges are covered separately by
-# validate_horizons.py's banded 1800/2200 check.
-JDS = [julian_day(1851, 1, 1) + random.random() * 108800 for _ in range(N)]
+# Wide-span validation: 1001-2999. The majors, Pluto and the Moon are packed
+# 1000-3000 and the asteroids 1600-2484, so the whole measured span is now
+# covered (bodies outside a pack's fitted span land in `unavailable`, which the
+# body rows skip). The headline moves only on the figures this measures.
+JDS = [julian_day(1001, 1, 1) + random.random() * 730000 for _ in range(N)]
 LATS = (0.01, 27.95, 40.7, 51.5, -33.9, 64.1, -55.0, 10.2, -8.05, 78.2)
 eng = Engine("full")
 rows = []

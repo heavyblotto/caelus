@@ -8,12 +8,15 @@ statements (the canonical digest pins them equal cross-language).
 """
 from .core import delta_t_sigma  # re-export site for symmetry with ranges.ts
 
-HEADLINE = {"from": 1850, "to": 2150}
+HEADLINE = {"from": 1000, "to": 3000}  # mirror of ranges.ts; see its comment
 
 MEASURED = {
-    "pluto_pack": {"from": 1700, "to": 2212},
+    "pluto_pack": {"from": 1000, "to": 3000},
     "pluto_meeus": {"from": 1885, "to": 2099},
     "uranian": {"from": 1800, "to": 2149},
+    # Small bodies are fitted/validated only where Horizons serves them
+    # (~1600-2500); narrower than the headline (see ranges.ts).
+    "small_bodies": {"from": 1600, "to": 2484},
 }
 
 VSOP_BODIES = {"sun", "mercury", "venus", "mars", "jupiter", "saturn",
@@ -39,7 +42,7 @@ def validated_span_for(body, engine):
         return MEASURED["pluto_pack"] if engine._has_pluto_pack() \
             else MEASURED["pluto_meeus"]
     if body == "chiron" or body in ASTEROIDS:
-        return HEADLINE
+        return MEASURED["small_bodies"]
     if body in URANIANS:
         return MEASURED["uranian"]
     return None

@@ -32,7 +32,7 @@ export default function Validation() {
       <H2>Reference vs Swiss Ephemeris 2.10</H2>
       <P>
         Python reference vs Swiss Ephemeris at hundreds of random instants in
-        1850–2150: apparent geocentric ecliptic longitude (true equinox of date),
+        1000–3000: apparent geocentric ecliptic longitude (true equinox of date),
         all bodies, angles and cusps at six latitudes including polar Iceland.
         Max and RMS disagreement in arcseconds:
       </P>
@@ -84,7 +84,10 @@ export default function Validation() {
         coordinates.
       </P>
       <P dim>
-        Range 1800–2149 (1850–2150 for precise Moon/Chiron). Placidus undefined above
+        Range 1000–3000 for the planets, Pluto, and the Moon (validated vs JPL
+        Horizons); the small bodies span 1600–2484, the widest window Horizons
+        serves for them. The hosted edge API serves a narrower window (its
+        embedded Moon tier). Placidus undefined above
         polar circles: falls back to whole-sign and reports the fallback in the
         response. <A href="/methods">Methods →</A> <A href="/notes">Build notes →</A>
       </P>

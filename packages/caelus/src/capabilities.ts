@@ -96,7 +96,7 @@ export function engineCapabilities(engine: Engine): EngineCapabilities {
         : { body, source: "meeus_ch37", validated: MEASURED.pluto_meeus });
     } else if (body === "chiron" && data.chiron) {
       caps.push({
-        body, source: "chebyshev_pack", validated: HEADLINE,
+        body, source: "chebyshev_pack", validated: MEASURED.small_bodies,
         fitted: packSpan(data.chiron),
       });
     } else if (body === "intp_apog" && data.intpApog) {
@@ -110,8 +110,13 @@ export function engineCapabilities(engine: Engine): EngineCapabilities {
         fitted: packSpan(data.intpApog),
       });
     } else if (body in packs) {
+      // The small bodies (asteroids + chiron) are fitted/validated over
+      // 1600-2484, not the headline; the major-planet packs cover 1000-3000.
+      const narrow = MEASURED.small_bodies;
+      const isSmall = ["ceres", "pallas", "juno", "vesta", "pholus"].includes(body);
       caps.push({
-        body, source: "chebyshev_pack", validated: HEADLINE,
+        body, source: "chebyshev_pack",
+        validated: isSmall ? narrow : HEADLINE,
         fitted: packSpan(packs[body]),
       });
     } else if (body in kepler) {

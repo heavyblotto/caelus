@@ -23,7 +23,7 @@ and the hosted REST endpoint returns `400`:
 <CodeBlock
   lang="json"
   label="GET /api/chart?date=1500-01-01"
-  code={`{ "error": "date out of supported range 1800-2149" }`}
+  code={`{ "error": "date out of this endpoint's embedded tier (1920-2080); the engine validates 1000-3000" }`}
 />
 
 Validate the date before you call the engine; do not catch and swallow the

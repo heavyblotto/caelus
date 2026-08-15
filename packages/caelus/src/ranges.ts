@@ -22,17 +22,26 @@ export interface BodySpan {
   to: number;
 }
 
-/** The measured headline band. The label is registry-pinned to accuracy.json:
- *  1850-2150. */
-export const HEADLINE: BodySpan = { from: 1850, to: 2150 };
-export const HEADLINE_LABEL = "1850-2150";
+/** The measured headline band. The label is registry-pinned to accuracy.json.
+ *  1000-3000: every body is packed across the span and measures sub-arcsecond
+ *  on the frame-free basis (range-expansion.md Tier C); the ~3.3" uniform
+ *  apparent floor is the IAU76/80-vs-Vondrak2011 frame term, not position
+ *  error. The small bodies are fitted 1600-2484 (Horizons serves them only
+ *  ~1600-2500) and report that narrower span via engineCapabilities. */
+export const HEADLINE: BodySpan = { from: 1000, to: 3000 };
+export const HEADLINE_LABEL = "1000-3000";
 
 /** Measured spans that are narrower or wider than the headline
  *  (docs/range-expansion.md's table). */
 export const MEASURED: Record<string, BodySpan> = {
-  pluto_pack: { from: 1700, to: 2212 },
+  pluto_pack: { from: 1000, to: 3000 },
   pluto_meeus: { from: 1885, to: 2099 },
   uranian: { from: 1800, to: 2149 },
+  // Small bodies are fitted and validated only where Horizons serves them
+  // (~1600-2500); the fitted packs run 1600-2484. This is NARROWER than the
+  // headline: an asteroid at 1200 is outside its pack and lands in
+  // Chart.unavailable, so it must not claim the 1000-3000 headline.
+  small_bodies: { from: 1600, to: 2484 },
 };
 
 export const VSOP_BODIES = new Set([
