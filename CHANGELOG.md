@@ -7,6 +7,56 @@ semver (currently 0.1.x). Numbers quoted here are as measured at release time;
 current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
+## v0.24.0 — The 1000–3000 tier
+
+*2026-08-13*
+
+The validated range widens from **1850–2150** to **1000–3000**. Every
+solar-system body — the eight planets, Earth, Pluto, the Moon, Chiron, and the
+five asteroids — now carries a Chebyshev pack fit to JPL Horizons (DE441)
+across the span, and measures sub-arcsecond against JPL on the frame-free
+basis (sun 0.03″, the majors 0.02–0.12″, Pluto 0.015″, the small bodies
+0.04–0.16″). See `docs/range-expansion.md` for the measured tables.
+
+### Engine (`caelus`)
+
+- **Wide packs for everything.** `fit_planet.py` mints Mercury, Venus, Earth,
+  Mars, Jupiter, Saturn, Uranus and Neptune; `fit_smallbody.py` the asteroids
+  and Chiron; `fit_pluto.py` Pluto; `fit_moon.py` the Moon. Packs supersede
+  the VSOP87D / analytic series wherever they load. Earth is packed too — it
+  is the observer, and its own VSOP error was the floor under every geocentric
+  body (Mars read 6.75″ until Earth was packed; 0.088″ after).
+- **Fitted vs validated.** `engineCapabilities` reports each pack's real
+  fitted span separately from the validated span. The majors, Pluto and the
+  Moon validate 1000–3000; the small bodies 1600–2484 (the widest window
+  Horizons serves them). A body outside its pack lands in `Chart.unavailable`
+  rather than silently serving a fallback the engine has not validated.
+- **Aberration latitude term.** Annual aberration now corrects ecliptic
+  latitude as well as longitude (Meeus eq. 23.3), fixing a large error for
+  high-inclination bodies: Pallas read 13.3″ off against JPL in latitude
+  alone, Pluto ~4.6″. Every packed body now measures under 1″ in the core
+  band.
+- **Honest ancient dates.** `Chart.warnings` states the delta-T split per
+  chart: at 1000 CE sigma is ~76 s, smearing the angles ~0.32° and the Moon
+  ~0.7′ while the slow bodies hold. "Validated to 1000–3000" is a TT position
+  claim; the input clock is fuzzier than the engine for ancient dates.
+
+### Notes for consumers
+
+- **Canonical digests change.** Latitude/declination for Pluto and the small
+  bodies moved with the aberration fix, and every geocentric body moved with
+  the packs, so previously issued `accuracy`-grid and canonical digests for
+  those bodies will differ; the new figures are the corrected ones.
+- The hosted edge API keeps a narrower window (its embedded Moon tier,
+  1920–2080); its out-of-range error now names that tier and points at the
+  engine's full 1000–3000 validation.
+- The full Moon pack (1000–3000) is repo-only, like the existing full tier;
+  the npm tarball still ships the embedded 1920–2080 Moon plus every wide
+  planet/Pluto/asteroid pack.
+
+All four npm packages (`caelus`, `caelus-mcp`, `caelus-birth`, `caelus-wheel`) and the `caelus-engine` PyPI package ship at **0.24.0**. **`caelus-delineations-pd`** ships at **0.1.3** (peer range `>=0.20.1 <0.24`).
+
+
 ## v0.23.0 — Synthetic ephemeris
 
 *2026-06-21*
@@ -684,7 +734,7 @@ suite is unchanged at 3,218 checks.
   errors, runnable examples, and cross-references — and the `Chart`,
   `ChartOptions`, `Position`, and related interfaces document every field
   (units, ranges, null cases). The same text surfaces on editor hover.
-- Easier to navigate: Engine methods (`chart`, `chartAt`, `position`,
+- Easier to find: Engine methods (`chart`, `chartAt`, `position`,
   `longitude`, and the rest) are now individually searchable and deep-linkable
   (`/docs/api/Class.Engine#chartat`), the `/docs/api` index surfaces the Engine
   method set directly, and every generated heading is anchored.
