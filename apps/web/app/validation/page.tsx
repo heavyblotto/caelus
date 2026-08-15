@@ -11,7 +11,7 @@ import { pageMetadata } from "../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Validation",
-  description: `Reference engine vs Swiss Ephemeris; TypeScript port vs ${formatGoldenChecks()} golden checks. CI on every commit.`,
+  description: `The Python reference engine is checked against Swiss Ephemeris, and the TypeScript port against ${formatGoldenChecks()} golden checks. Both suites run in CI on every commit.`,
   path: "/validation",
 });
 
@@ -24,17 +24,22 @@ export default function Validation() {
     <main className="container page">
       <PageHero eyebrow="Validation" title="Validation">
         <P>
-          Reference engine checked against Swiss Ephemeris; TypeScript port checked
-          against golden fixtures. CI runs both on every commit.
+          Accuracy here is measured in two stages. The Python reference engine
+          is compared against Swiss Ephemeris, and the TypeScript port is
+          compared against golden fixtures written by that reference. Both
+          suites run in CI on every commit, and the tables below report what
+          they measure.
         </P>
       </PageHero>
 
       <H2>Reference vs Swiss Ephemeris 2.10</H2>
       <P>
-        Python reference vs Swiss Ephemeris at hundreds of random instants in
-        1000–3000: apparent geocentric ecliptic longitude (true equinox of date),
-        all bodies, angles and cusps at six latitudes including polar Iceland.
-        Max and RMS disagreement in arcseconds:
+        The Python reference was compared against Swiss Ephemeris at hundreds
+        of random instants across 1000–3000. The quantity compared is
+        apparent geocentric ecliptic longitude at the true equinox of date, for
+        every body, together with the angles and cusps at six latitudes that
+        include polar Iceland. The table gives the maximum and root-mean-square
+        disagreement in arcseconds.
       </P>
       <div className="table-scroll">
         <table className="data-table table-auto mono" style={{ fontSize: "0.85rem" }}>
@@ -54,41 +59,50 @@ export default function Validation() {
         </table>
       </div>
       <P dim>
-        Chart software usually displays to the arcminute (60″). Birth-time uncertainty
-        dominates these deltas. Post-2025 instants also depend on each engine&apos;s
-        ΔT extrapolation, which no model can pin down: <A href="/notes">Build Notes</A>.
+        For scale, chart software usually displays positions to the arcminute
+        (60″), and uncertainty in a recorded birth time moves a chart by more
+        than any of the deltas above. Instants after 2025 also depend on how
+        each engine extrapolates ΔT, which no model can pin down; the reasoning
+        is in the <A href="/notes">Build Notes</A>.
       </P>
 
       <H2>TypeScript port vs reference</H2>
       <P>
-        <strong>{formatGoldenChecks()} golden checks</strong> (bodies, timescales, nutation,{" "}
-        {formatHouseSystemsProse()} house systems, fixed stars, Gauquelin sectors, eclipses, speeds,
-        retrograde flags, polar Placidus fallback). Worst deviation {formatWorstNanoProse()}. Same
-        algorithms in IEEE doubles; tolerance is far below astronomical relevance: a porting bug
-        fails the build.
+        The port is replayed against{" "}
+        <strong>{formatGoldenChecks()} golden checks</strong>, covering bodies,
+        timescales, nutation, the {formatHouseSystemsProse()} house systems,
+        fixed stars, Gauquelin sectors, eclipses, speeds, retrograde flags, and
+        the polar Placidus fallback. The worst deviation recorded across that
+        suite is {formatWorstNanoProse()}. Because both implementations run the
+        same algorithms in IEEE doubles, a tolerance this far below
+        astronomical relevance is achievable, and a porting bug fails the build
+        rather than reaching a release.
       </P>
 
       <H2>Cross-checks</H2>
       <P>
-        Moon fit to JPL DE423: 0.19 km residual (≈0.1″). Chiron fit from Horizons
-        vs Swiss Ephemeris asteroid file: 0.85″ worst-case. MCP aspect-date search
-        verified hit-for-hit against an independent scan (nine Mars sextiles, minute
-        agreement, retrograde triple pass included).
+        The Moon fit to JPL DE423 leaves a residual of 0.19 km, or about 0.1″.
+        The Chiron fit from Horizons agrees with the Swiss Ephemeris asteroid
+        file to 0.85″ in the worst case. The MCP aspect-date search was checked
+        hit for hit against an independent scan, which found the same nine Mars
+        sextiles to the minute, including a retrograde triple pass.
       </P>
 
       <H2>Reproduce</H2>
       <P>
-        <Code>git clone</Code> the <A href="https://github.com/heavyblotto/caelus">repo</A>,{" "}
-        <Code>npm install &amp;&amp; npm run build &amp;&amp; npm test</Code>.
-        Discrepancy vs any professional ephemeris: open an issue with UTC instant and
-        coordinates.
+        Clone the <A href="https://github.com/heavyblotto/caelus">repo</A> and run{" "}
+        <Code>npm install &amp;&amp; npm run build &amp;&amp; npm test</Code> to
+        reproduce every figure on this page. If you find a discrepancy against
+        any professional ephemeris, please open an issue with the UTC instant
+        and the coordinates you used.
       </P>
       <P dim>
-        Range 1000–3000 for the planets, Pluto, and the Moon (validated vs JPL
-        Horizons); the small bodies span 1600–2484, the widest window Horizons
-        serves for them. The hosted edge API serves a narrower window (its
-        embedded Moon tier). Placidus undefined above
-        polar circles: falls back to whole-sign and reports the fallback in the
+        The validated range runs from 1000 to 3000 for the planets, Pluto, and
+        the Moon, all checked against JPL Horizons. The small bodies span 1600
+        to 2484, which is the widest window Horizons serves for them, and the
+        hosted edge API covers a narrower window still because of its embedded
+        Moon tier. Placidus is undefined above the polar circles, so the engine
+        falls back to whole-sign there and reports that fallback in the
         response. <A href="/methods">Methods →</A> <A href="/notes">Build notes →</A>
       </P>
 

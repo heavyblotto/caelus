@@ -1,0 +1,8 @@
+# Vale concatenates every entry under `raw` into ONE expression, so this rule
+# keeps a single alternation. Go's RE2 engine has no lookahead or lookbehind.
+extends: existence
+message: "'%s' defines the claim against a fault nobody proposed. State what is true and stop (docs/editorial-voice.md, 'Don't posture')."
+level: error
+nonword: true
+raw:
+  - ',\s+not\s+(?:asserted|assumed|guessed|claimed|memory|marketing|vibes|estimated|promised)\b|\bIt is (?:a |an )?[a-z][a-z -]{2,30} only\.'

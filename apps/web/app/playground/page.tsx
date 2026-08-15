@@ -50,10 +50,12 @@ export default function Playground() {
     <main className="container-wide page page--sticky-cta">
       <PageHero eyebrow="Playground" title="Compute and interpret a chart in your browser">
         <Lead>
-          Every chart below is computed on this page by the <code>caelus</code> engine
-          with its embedded dataset, then <strong>read</strong>: its validated facts are
-          turned into a cited reading from a public-domain corpus. No server, no
-          ephemeris files, nothing invented.
+          Every chart below is computed on this page by the <code>caelus</code>{" "}
+          engine using its embedded dataset, and then <strong>read</strong>: its
+          validated facts are turned into a cited reading drawn from a
+          public-domain corpus. Nothing is sent to a server, no ephemeris files
+          are involved, and every statement in the reading traces back to a
+          fact the engine computed.
         </Lead>
         <P dim>
           Search a birthplace and enter the local time (<code>caelus-birth</code> resolves

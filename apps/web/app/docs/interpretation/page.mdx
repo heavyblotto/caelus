@@ -10,19 +10,22 @@ export const metadata = pageMetadata({
 
 # Interpretation layer
 
-Caelus is a fact engine. Every module stops at validated geometry and says so:
-a chart gives you bodies, aspects, angles, cusps, dignities, and patterns, with
-no flavour text and no "what it means." That is deliberate: the numbers are
-correct and auditable, and astrology's meaning is a matter of tradition and
-taste, not arithmetic.
+Caelus is a fact engine, and every module in it stops at validated geometry. A
+chart gives you bodies, aspects, angles, cusps, dignities, and patterns, with no
+delineation text and no account of what any of it means. That boundary is
+deliberate, because the numbers can be made correct and auditable while the
+meaning of a chart remains a matter of tradition and taste rather than
+arithmetic.
 
-But it leaves a gap. If you want to *generate* an interpretation (a rule-based
-reading, or an LLM that writes natal prose), you have nowhere clean to plug in.
-The interpretation layer is that seam. It does **not** interpret. It defines the
-contract between the facts the engine owns and the meaning you bring:
+That boundary does leave a gap. If you want to *generate* an interpretation,
+whether from a rule base or from an LLM writing natal prose, there is no clean
+place to attach it. The interpretation layer exists to be that attachment
+point, and it performs no interpretation of its own. What it defines is the
+contract between the facts the engine owns and the meaning you bring to them:
 
-> The engine owns the **facts**. A layer you plug in owns the **meaning**. The
-> framework owns the **contract** between them. Never the content.
+> The engine owns the **facts**, a layer you plug in owns the **meaning**, and
+> the framework owns the **contract** between the two rather than any of the
+> content itself.
 
 ```text
 Engine (validated)     chart(): bodies, aspects, angles, cusps
@@ -94,7 +97,7 @@ Use `hasReception({ body: "venus" })` to match any involving Venus.
 catalog lives in the data pack, and lots derive from the points and sect), so a
 caller supplies them through `ContextOptions`: a body's tight conjunction with a
 fixed star (`star:jupiter:Sirius`, from `Engine.starConjunctions`), and the
-Hermetic lots — the Part of Fortune and its companions (`lot:fortune`, from
+Hermetic lots, the Part of Fortune and its companions (`lot:fortune`, from
 `Engine.lots`). Match them with `hasStar({ star: "Algol" })` and
 `hasLot({ lot: "fortune" })`.
 
@@ -102,11 +105,11 @@ Hermetic lots — the Part of Fortune and its companions (`lot:fortune`, from
 
 The natal projection extends via `ContextOptions` and two helpers:
 
-- **`enrichContextOptions(engine, chart, target)`** — transits to natal (with
+- **`enrichContextOptions(engine, chart, target)`**: transits to natal (with
   phase and strength), active profection / zodiacal releasing / firdaria /
   Vimshottari dasha, Egyptian term/face/triplicity/almuten facts (always), and
   nakshatra / D9 / yogas when the chart is sidereal.
-- **`enrichSynastryOptions(engine, chartA, chartB)`** — inter-chart aspects,
+- **`enrichSynastryOptions(engine, chartA, chartB)`**: inter-chart aspects,
   house overlays, and composite midpoint placements (chart A is the base).
 
 Id examples: `transit:saturn~natal_moon:square`, `profection:year:scorpio:mars`,

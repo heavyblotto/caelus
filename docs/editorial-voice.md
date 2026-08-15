@@ -13,9 +13,24 @@ Dry engineer explaining a hard problem to a peer who builds software. State what
 ## Sentence mechanics
 
 - Prefer 12–22 words. One idea per sentence.
+- **Write sentences.** Every sentence needs a subject and a finite verb. "Two-stage CI." and "Fix: fit geometric states." are notes to self, not prose. This rule outranks brevity: a 22-word sentence that reads like English beats three four-word fragments that read like a changelog.
+- Terse is not the same as clipped. Aim for the register of a well-written paper or design doc, where short sentences sit inside connected paragraphs, not a stack of standalone assertions.
 - Active voice. Name the subject: **Caelus** in prose, `caelus` for the npm package and import paths, `the suite`, `Swiss Ephemeris` — not `the project` or `this approach`.
 - Concrete before abstract. Lead with the bug, the measurement, or the source.
 - Technical terms: define once, then reuse (`ΔT`, `VSOP87D`, `golden fixture`).
+
+## Don't posture
+
+The engine's credibility comes from the tables, so the prose does not need to
+carry any swagger. Three habits to avoid:
+
+- **The antithesis flex.** "published on Validation, not asserted", "validated against a named authority, not memory", "The engine was fine; the MCP search was wrong." State what is true and stop; the reader does not need the rejected alternative.
+- **The bragging fragment.** "The counts are exact." "A red run blocks merge." "AI writes like AI." These read as a performance of confidence rather than a statement of fact. Say the same thing in a sentence that explains the mechanism.
+- **Slogan closers.** "The meaning is always yours and always traceable to a fact." "It computes; you interpret." If a line would look at home on a landing-page banner, cut it.
+
+Fragments are legitimate in table cells, card blurbs, bullet labels, figure
+captions, and one-word FAQ openers ("Yes."). They are not legitimate in body
+paragraphs.
 
 ## Cut on sight
 

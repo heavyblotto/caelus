@@ -29,10 +29,10 @@ export const metadata = pageMetadata({
 });
 
 const PACKAGES: Array<[keyof typeof NPM, string, string]> = [
-  ["caelus", "caelus", "Chart math: positions, houses, aspects. Zero dependencies, ~153 KB gzipped with embedded data."],
+  ["caelus", "caelus", "The chart math: positions, houses, and aspects. It has no runtime dependencies and is ~151 KB gzipped with the embedded data."],
   ["mcp", "caelus-mcp", `${formatMcpToolsTitle()} chart tools for AI agents: natal charts, transits, synastry, event search, electional, lots, time-lords, directions, and the Vedic layer (nakshatras, dashas, vargas, yogas).`],
-  ["birth", "caelus-birth", "Local birth time and place to UT, with DST and historical timezone rules."],
-  ["wheel", "caelus-wheel", "React SVG chart wheel. SSR-safe, ~2.2 KB gzipped."],
+  ["birth", "caelus-birth", "Resolves a local birth time and place to UT, applying DST and historical timezone rules."],
+  ["wheel", "caelus-wheel", "A React SVG chart wheel that is SSR-safe and ~2.3 KB gzipped."],
 ];
 
 // Credibility numbers surfaced above the fold. Each links to its proof.
@@ -40,7 +40,7 @@ const PROOF: Array<{ num: string; label: string; href: string }> = [
   { num: formatWorstNano(), label: "Nano-arcsec worst deviation", href: "/validation" },
   { num: formatGoldenChecks(), label: "Golden checks in CI", href: "/validation" },
   { num: String(FACTS.mcpTools), label: "MCP tools for AI clients", href: "/docs/mcp" },
-  { num: "~153 KB", label: "Engine + data, gzipped", href: "/docs/data-tiers" },
+  { num: "~151 KB", label: "Engine + data, gzipped", href: "/docs/data-tiers" },
   { num: "0", label: "Runtime dependencies", href: NPM.caelus },
   { num: "MIT", label: "Licensed, no AGPL", href: `${SITE.repo}/blob/main/LICENSE` },
 ];
@@ -111,10 +111,10 @@ export default function Home() {
       </ul>
 
       <P>
-        You pass a date, UT time, latitude, and longitude; the engine returns a
-        chart object for your app, API, or AI tool. The full capability list,
-        with a comparison against the other engines, is on{" "}
-        <A href="/features">Features</A>.
+        You pass a date, a UT time, a latitude, and a longitude, and the engine
+        returns a chart object your app, API, or AI tool can read. The full
+        capability list, along with a comparison against the other engines, is
+        on <A href="/features">Features</A>.
       </P>
 
       <H2>Compute a chart</H2>
@@ -165,12 +165,15 @@ chart.bodies.saturn.retrograde; // true`}
 
       <H2>How it is checked</H2>
       <P>
-        Two-stage CI. A Python reference engine is calibrated against Swiss
-        Ephemeris, then the TypeScript port is replayed against {formatGoldenChecks()} golden
-        checks. Worst recorded deviation: {formatWorstNanoProse()}, far below any
-        astronomical relevance, so a porting bug fails the build. Tables and
-        methodology: <A href="/validation">Validation</A>. Bugs the suite caught:{" "}
-        <A href="/notes">Build Notes</A>.
+        CI checks the engine in two stages. A Python reference engine is first
+        calibrated against Swiss Ephemeris, and the TypeScript port is then
+        replayed against {formatGoldenChecks()} golden checks derived from it.
+        The worst deviation recorded across that suite is{" "}
+        {formatWorstNanoProse()}, which sits far below any astronomically
+        relevant scale, so a porting bug fails the build instead of reaching a
+        release. The tables and the methodology behind them are on{" "}
+        <A href="/validation">Validation</A>, and the bugs this suite has
+        caught are written up in the <A href="/notes">Build Notes</A>.
       </P>
 
       <FAQ />

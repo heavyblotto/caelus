@@ -38,10 +38,16 @@ function stripNonProse(text) {
     .replace(/\{\/\*[\s\S]*?\*\/\}/g, blank)        // JSX comments
     .replace(/\/\*[\s\S]*?\*\//g, blank)            // block comments
     .replace(/(?<![:/])\/\/[^\n]*/g, blank)         // line comments (not URLs)
-    // Template + inline code spans. The alternation honours escaped backticks
-    // (\`) so a `code={`…\`…\`…`}` block with a nested template is consumed
-    // whole rather than mismatched at the escaped backtick.
-    .replace(/`(?:\\.|[^`\\])*`/gs, blank)
+    // Template literals passed as JSX props (`code={`…`}`) legitimately span
+    // lines, so they are consumed first, as a whole. The alternation honours
+    // escaped backticks (\`) so a nested template is consumed whole rather
+    // than mismatched at the escaped backtick.
+    .replace(/=\{`(?:\\.|[^`\\])*`\}/gs, blank)
+    // Remaining inline code spans may not cross a line. Letting them span
+    // newlines made backtick parity decide whether a paragraph counted as
+    // prose: in the MDX guides a run of inline spans could pair across an
+    // intervening sentence and blank a real em-dash out of the scan.
+    .replace(/`(?:\\.|[^`\\\n])*`/g, blank)
     .replace(/(["'])\u2014\1/g, blank);             // lone "—" / '—' sentinel
 }
 

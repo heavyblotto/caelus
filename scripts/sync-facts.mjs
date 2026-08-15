@@ -48,12 +48,16 @@ function countRegisterTools(src) {
   return names.length;
 }
 
-function countQuotedIds(src, exportName) {
+function parseQuotedIds(src, exportName) {
   const block = src.match(new RegExp(`export const ${exportName}[^=]*=\\s*\\[([^\\]]+)\\]`, "s"));
   if (!block) throw new Error(`could not parse ${exportName} in ${CHART_TS}`);
   const ids = [...block[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]);
   if (!ids.length) throw new Error(`${exportName} parsed empty`);
-  return ids.length;
+  return ids;
+}
+
+function countQuotedIds(src, exportName) {
+  return parseQuotedIds(src, exportName).length;
 }
 
 function countRecordKeys(src, constName) {
@@ -78,6 +82,16 @@ function deriveCounts() {
     default_bodies: countQuotedIds(chartSrc, "BODIES"),
     sidereal_ayanamsas: meanAyanamsas + starAyanamsas,
   };
+}
+
+/**
+ * Identifier lists that prose enumerates by name. Counts alone do not catch a
+ * page that names the wrong set (or claims Caelus lacks a system it ships),
+ * so the ids are published for the claims linter to check name by name.
+ */
+function deriveLists() {
+  const chartSrc = readFileSync(CHART_TS, "utf8");
+  return { house_systems: parseQuotedIds(chartSrc, "HOUSE_SYSTEMS") };
 }
 
 function ensureConformanceStats() {
@@ -141,19 +155,26 @@ const derived = deriveCounts();
 const stored = accuracy.counts ?? {};
 const countMismatches = Object.entries(derived).filter(([k, v]) => stored[k] !== v);
 const counts = { ...stored, ...derived };
+const derivedLists = deriveLists();
+const listsStale =
+  JSON.stringify(accuracy.lists ?? {}) !== JSON.stringify(derivedLists);
 const stats = loadConformanceStats();
 const anchors = buildAnchors(counts, stats);
 const anchorsRendered = renderAnchorsFile(anchors);
 let failed = false;
 
-if (countMismatches.length) {
-  const detail = countMismatches.map(([k, v]) => `  ${k}: stored ${stored[k]} → derived ${v}`).join("\n");
+if (countMismatches.length || listsStale) {
+  const detail = [
+    ...countMismatches.map(([k, v]) => `  ${k}: stored ${stored[k]} → derived ${v}`),
+    ...(listsStale ? [`  lists: ${JSON.stringify(derivedLists)}`] : []),
+  ].join("\n");
   if (WRITE) {
     accuracy.counts = counts;
+    accuracy.lists = derivedLists;
     writeFileSync(ACCURACY_PATH, JSON.stringify(accuracy, null, 2) + "\n");
     console.log(`sync-facts: updated accuracy.json counts:\n${detail}`);
   } else {
-    console.error(`sync-facts: accuracy.json counts drift:\n${detail}\nRun: node scripts/sync-facts.mjs --write`);
+    console.error(`sync-facts: accuracy.json drift:\n${detail}\nRun: node scripts/sync-facts.mjs --write`);
     failed = true;
   }
 }

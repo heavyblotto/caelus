@@ -163,10 +163,12 @@ export default function Features() {
     <main className="container page">
       <PageHero eyebrow="Validated · MIT · zero dependencies" title="Features" cta="compact">
         <P>
-          What the engine computes, in one place. The counts are exact. Positions
-          are checked against Swiss Ephemeris and JPL Horizons (see{" "}
-          <A href="/methods">Methods</A>), and per-body accuracy is published on{" "}
-          <A href="/validation">Validation</A>, not asserted.
+          This page lists what the engine computes. The counts below are read
+          from the engine at build time rather than written by hand, so they
+          move when the code does. Positions are checked against Swiss
+          Ephemeris and JPL Horizons, and the method behind those checks is
+          described on <A href="/methods">Methods</A>. The resulting deviation
+          for each body is tabulated on <A href="/validation">Validation</A>.
         </P>
       </PageHero>
 
@@ -256,14 +258,16 @@ export default function Features() {
           (vargas) D1, D2, D3, D9, D10, D12, and D30; and the yogas (the five
           Pancha Mahapurusha, Gajakesari, Budha-Aditya, Chandra-Mangala,
           Kemadruma, plus a lordship and graha-drishti layer with raja and dhana
-          yogas and yogakarakas). Each convention is validated against a named
-          authority, not asserted. See <A href="/docs/vedic">Vedic &amp; Jyotish</A>.
+          yogas and yogakarakas). Where the classical texts disagree on a
+          convention, the reading Caelus follows is pinned to a named authority
+          and checked against it in the reference tier. See{" "}
+          <A href="/docs/vedic">Vedic &amp; Jyotish</A>.
         </Feature>
         <Feature title="Electional">
           Applying and separating aspects, solar phase (cazimi, combust, under
           the beams), planetary hours, the void-of-course Moon, and house
-          placement with angularity. These read off the validated positions,
-          pinned to the Python reference.
+          placement with angularity. Each of these is computed from the
+          validated positions and checked against the Python reference.
         </Feature>
       </Group>
 
@@ -320,7 +324,8 @@ export default function Features() {
           and exposed over MCP. See <A href="/docs/cookbook">Common Tasks</A>.
         </Feature>
         <Feature title="Interpretation layer">
-          The engine stops at facts; this is the seam where meaning plugs in.
+          The engine itself stops at geometry, and this layer is where an
+          interpretation attaches to it.{" "}
           <code>interpretationContext</code> projects a chart into ranked,
           citable fact atoms: natal geometry, dispositors and receptions,
           fixed-star conjunctions and lots, transits and time-lords at a target

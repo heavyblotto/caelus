@@ -16,12 +16,13 @@ export default function HowItWasBuilt() {
       <h1>How this was built</h1>
       <P>
         Caelus was written almost entirely by AI coding agents. The Python
-        reference, the TypeScript port, the tests, the website, and most of this
-        prose came from agents working under human direction. That is only worth
-        saying because of the second half: every number the engine produces is
-        checked against two independent references, and a golden suite fails the
-        build the moment the code drifts. The checking is the reason an engine
-        written by machines can be trusted.
+        reference, the TypeScript port, the tests, the website, and most of
+        this prose came from agents working under human direction. That is
+        worth stating openly, because the claim it invites is one this project
+        has to answer: every number the engine produces is checked against two
+        independent references, and a golden suite fails the build as soon as
+        the code drifts away from them. An engine written by machines earns
+        trust the same way any other does, through the checks it has to pass.
       </P>
 
       <H2>Reference-first, checked to the last digit</H2>
@@ -31,8 +32,9 @@ export default function HowItWasBuilt() {
         The TypeScript engine is a port of the same math, and a conformance suite
         replays the fixtures against it on every commit, to the last digit the
         fixture records. A model is not shipped until the reference, its
-        fixtures, and the port agree. An agent can move quickly when a red suite
-        catches the exact moment a port stops matching its reference.
+        fixtures, and the port all agree. This is also what lets an agent work
+        quickly, because a red suite identifies the exact moment a port stopped
+        matching its reference.
       </P>
 
       <H2>Two oracles, not the author&apos;s word</H2>
@@ -40,31 +42,35 @@ export default function HowItWasBuilt() {
         Swiss Ephemeris 2.10 is the same-frame oracle over the modern era; JPL
         Horizons (DE441) is the independent reference, and the sole oracle over
         the 1000&ndash;3000 span where the built-in Swiss theories drift. The
-        per-body bounds are published on <A href="/validation">Validation</A>, and the methodology behind them
-        on <A href="/methods">Methods</A>. For an engine written by a machine,
-        the trust comes from the oracle rather than the author, which is the same
-        standard a human-written engine should meet.
+        per-body bounds are published on <A href="/validation">Validation</A>,
+        and the methodology behind them on <A href="/methods">Methods</A>. For
+        an engine written by a machine, the evidence has to come from the
+        oracles rather than from the author, which is the standard a
+        human-written engine should be held to as well.
       </P>
 
       <H2>Direction stayed human</H2>
       <P>
-        The agents wrote the code; a person chose what shipped. Work lands on a
-        development branch, and a person promotes it to the main branch, so
-        someone signs off before anything reaches users. Dead-ends were reverted
-        rather than shipped: when a heavier lunar data pack broke the browser
-        bundle and lost accuracy against the reference, it went back to the
-        existing fit, which already sat at the reference floor. The agents
-        supplied speed; the judgment about what was correct and what belonged
-        stayed with a person.
+        The agents wrote the code, and a person chose what shipped. Work lands
+        on a development branch and is promoted to the main branch by hand, so
+        someone signs off before anything reaches users. Dead ends were
+        reverted rather than shipped. When a heavier lunar data pack broke the
+        browser bundle and lost accuracy against the reference, the work went
+        back to the existing fit, which was already sitting at the reference
+        floor. What the agents supplied was speed, and the judgment about what
+        was correct and what belonged in the project stayed with a person.
       </P>
 
       <H2>The prose has the same gate</H2>
       <P>
-        AI writes like AI. The repository runs a prose linter with a rule set for
-        the usual machine tells: the em-dash used as a connective, the three-verb
-        drumroll, the manufactured conclusion, the closing pleasantry. It fails
-        continuous integration the way a failing test does. This page was held to
-        the same gate.
+        Prose written by an agent has its own tells, so the repository runs a
+        prose linter against the site copy and the docs. Its rule set covers
+        the em-dash used as a connective, the three-verb drumroll, the
+        manufactured conclusion, the closing pleasantry, and the clipped
+        verbless fragment that agents reach for when they are trying to sound
+        authoritative. A violation fails continuous integration the way a
+        failing test does, and this page is checked by the same gate as the
+        rest of the site.
       </P>
 
       <Note>
