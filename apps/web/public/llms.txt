@@ -16,7 +16,7 @@ yukteshwar, galcent_0sag, true_citra); topocentric option; ASC/MC/vertex/east po
 systems (placidus, porphyry, equal, whole_sign, koch, regiomontanus,
 campanus, alcabitius, morinus, meridian, polich_page, vehlow); major
 aspects; pheno (phase, elongation, diameter, magnitude), equation of
-time, az/alt, refraction; 318 fixed stars (HYG catalog); Gauquelin
+time, az/alt, refraction; 319 fixed stars (HYG catalog); Gauquelin
 sectors; SkyView (project the visible sky to image-canvas pixels for AI image
 prompts: per-body placement, apparent size, magnitude-to-brightness cues, Moon
 phase orientation, twilight and limiting magnitude, Bortle dark-sky class, a
@@ -31,7 +31,7 @@ Moon tier is 1920-2080, analytic series outside). Verified per-body vs Swiss Eph
 <=1", Uranus <=1.9", Neptune <=4.6", Moon <=2.5", Pluto <=3.4"
 (Chebyshev pack), Chiron <=1", mean node <=1", true node <= 1' vs SE's
 built-in ephemeris, mean lilith <=1.6", the 8 new
-house systems exact; sidereal adds <=0.3". TS engine pinned to a Python
+house systems exact; sidereal adds <=0.005". TS engine pinned to a Python
 reference by 3,397 golden checks (worst diff 0.61e-9 arcsec).
 Repo: https://github.com/heavyblotto/caelus
 ## Install
@@ -39,7 +39,7 @@ Repo: https://github.com/heavyblotto/caelus
 - caelus@0.24.1 — the engine
 - caelus-birth@0.24.1 — local birth time + place -> UT (use this; see below)
 - caelus-wheel@0.24.1 — React SVG chart wheel, plus ChartSphere (3D), AstroMap (astrocartography), EphemerisGraph
-- caelus-mcp@0.24.1 — MCP server, 35 chart tools over stdio (charts, transits, synastry, parans, find_aspect_dates, sky_events, sky_view, sky_view_sequence, synthetic_validate, synthetic_positions, synthetic_sky_view, rectification_grid, planetary_hours, void_of_course, returns, progressions, composite, dignities, lots, profections, firdaria, releasing, directions, nakshatras, dasha, vargas, yogas, aspect_patterns, chart_signature, similar_skies, electional_search, cosmic_weather, chart_facts, counterfactual_chart); also hosted over MCP Streamable HTTP (stateless) at https://www.ephemengine.com/api/mcp; listed on the official MCP Registry as io.github.heavyblotto/caelus-mcp
+- caelus-mcp@0.24.1 — MCP server, 35 chart tools over stdio (charts, current_sky, transits, synastry, parans, find_aspect_dates, sky_events, sky_view, sky_view_sequence, synthetic_validate, synthetic_positions, synthetic_sky_view, rectification_grid, planetary_hours, void_of_course, returns, progressions, composite, dignities, lots, profections, firdaria, releasing, directions, nakshatras, dasha, vargas, yogas, aspect_patterns, chart_signature, similar_skies, electional_search, cosmic_weather, chart_facts, counterfactual_chart); also hosted over MCP Streamable HTTP (stateless) at https://www.ephemengine.com/api/mcp; listed on the official MCP Registry as io.github.heavyblotto/caelus-mcp
 - caelus-delineations-pd@0.1.5 — public-domain interpretation corpus (374 cited passages) for interpret(); sources and publicDomainSources
 - caelus-engine (PyPI) — the Python reference engine (no numpy), https://pypi.org/project/caelus-engine/
 
@@ -51,7 +51,7 @@ auditCitations() for LLM grounding. Docs: https://www.ephemengine.com/docs/inter
 ## Entry points
 
 - `caelus` — Engine, BODIES, julianDay, mod, fmtLon, types
-- `caelus/data-embedded` — bundled coefficient data (~97 KB gz), browser/edge
+- `caelus/data-embedded` — bundled coefficient data (~153 KB gz), browser/edge
 - `caelus/node` — loadNodeData(dir, vsopTier, moonTier) fs loader, Node only
 
 ```ts

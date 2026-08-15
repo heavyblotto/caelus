@@ -199,7 +199,7 @@ export default function Features() {
           Jupiter, Saturn, Uranus, Neptune, Pluto, Chiron, and the mean and true
           lunar node. On request: mean and true Lilith (lunar apogee), five
           asteroids (Ceres, Pallas, Juno, Vesta, Pholus), the Uranian/Hamburg
-          points, and a 318-star fixed catalog.
+          points, and a 319-star fixed catalog.
         </Feature>
         <Feature title="Houses, angles, and zodiacs">
           {formatHouseSystemsProse().charAt(0).toUpperCase()}

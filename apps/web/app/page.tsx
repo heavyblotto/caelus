@@ -29,10 +29,10 @@ export const metadata = pageMetadata({
 });
 
 const PACKAGES: Array<[keyof typeof NPM, string, string]> = [
-  ["caelus", "caelus", "Chart math: positions, houses, aspects. Zero dependencies, ~97 KB gzipped."],
+  ["caelus", "caelus", "Chart math: positions, houses, aspects. Zero dependencies, ~153 KB gzipped with embedded data."],
   ["mcp", "caelus-mcp", `${formatMcpToolsTitle()} chart tools for AI agents: natal charts, transits, synastry, event search, electional, lots, time-lords, directions, and the Vedic layer (nakshatras, dashas, vargas, yogas).`],
   ["birth", "caelus-birth", "Local birth time and place to UT, with DST and historical timezone rules."],
-  ["wheel", "caelus-wheel", "React SVG chart wheel. SSR-safe, ~3.4 KB gzipped."],
+  ["wheel", "caelus-wheel", "React SVG chart wheel. SSR-safe, ~2.2 KB gzipped."],
 ];
 
 // Credibility numbers surfaced above the fold. Each links to its proof.
@@ -40,7 +40,7 @@ const PROOF: Array<{ num: string; label: string; href: string }> = [
   { num: formatWorstNano(), label: "Nano-arcsec worst deviation", href: "/validation" },
   { num: formatGoldenChecks(), label: "Golden checks in CI", href: "/validation" },
   { num: String(FACTS.mcpTools), label: "MCP tools for AI clients", href: "/docs/mcp" },
-  { num: "~97 KB", label: "Engine, gzipped", href: "/docs/data-tiers" },
+  { num: "~153 KB", label: "Engine + data, gzipped", href: "/docs/data-tiers" },
   { num: "0", label: "Runtime dependencies", href: NPM.caelus },
   { num: "MIT", label: "Licensed, no AGPL", href: `${SITE.repo}/blob/main/LICENSE` },
 ];

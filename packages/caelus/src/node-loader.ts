@@ -78,7 +78,7 @@ export function loadNodeData(
   }
   if (moonTier !== "none") {
     // The npm package ships only the embedded tier (1920-2080); the full
-    // tier (1850-2150, 3.1 MB, same precision) lives in the repo. Fall back
+    // tier (1000-3000, ~16 MB, same precision) lives in the repo. Fall back
     // so "full" requests still get the precise Moon where it exists.
     const tiers = moonTier === "full" ? ["full", "embedded"] : [moonTier];
     for (const t of tiers) {
