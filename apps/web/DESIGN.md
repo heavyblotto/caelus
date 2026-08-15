@@ -51,7 +51,13 @@ likely, an existing one.
 
 Two accents, two meanings. The purple (`--accent`) is structural: navigation,
 links, selected states, the geometry. Peach blossom (`--peach-blossom`, with
-`--warm` as its semantic alias) is the single warm counterpoint, reserved for
+`--warm` as its semantic alias) is the single warm counterpoint. The hue is
+the extra-spectral one: the old name for the color on the line of purples
+that closes the spectrum into a wheel, matched by no wavelength and existing
+only in perception — a fitting companion to charts that are themselves
+constructed readings of the sky. It sits between red and the site's violet,
+so the two accents are neighbors on the wheel rather than rivals. Reserved
+for
 the living layer: markers of the actual sky (the ribbon's planet dots, the
 logo's sun) and the interpretation surfaces (reading panels, "read this
 chart", civil-time and out-of-bounds notices). Don't use it for chrome, and

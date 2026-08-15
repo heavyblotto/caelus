@@ -28,9 +28,12 @@
   --accent-soft: #2a2440;
   --accent-contrast: #0c0a14;
   /* Peach blossom: the single warm counterpoint to the structural purple.
-     Reserved for the living layer — sky markers (ribbon dots, the logo's sun)
-     and the interpretation surfaces (reading panels, "read this chart"). */
-  --peach-blossom: #f2b3a2;
+     The hue is the extra-spectral one — the old name for the color on the
+     line of purples that closes the spectrum into a wheel, matched by no
+     wavelength and constructed entirely in perception. Reserved for the
+     living layer: sky markers (ribbon dots, the logo's sun) and the
+     interpretation surfaces (reading panels, "read this chart"). */
+  --peach-blossom: #dd6ba1;
   --warm: var(--peach-blossom);
   --good: #9fdc9f;
   --bad: #e08a8a;
@@ -1791,8 +1794,8 @@ th.cmp-me {
   --accent-hover: #4f41ab;
   --accent-soft: #ece9f8;
   --accent-contrast: #ffffff;
-  /* deeper peach on light so it still carries text contrast */
-  --peach-blossom: #b05d48;
+  /* the same extra-spectral hue, deepened for text contrast on light */
+  --peach-blossom: #a32e74;
   --warm: var(--peach-blossom);
   --good: #1f8a4c;
   --bad: #c0392b;
