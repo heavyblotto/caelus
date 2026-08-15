@@ -11,14 +11,10 @@ current figures live in `packages/caelus/accuracy.json` and on
 
 *2026-08-15*
 
-The 0.24.0 npm tarball was missing four advertised data packs
-(`mercury_cheb`, `venus_cheb`, `jupiter_cheb`, `earth_cheb`): the mint commit
-never added them to the package `files[]` list or to the tarball check's
-required list, and the `existsSync` loaders made the gap silent. Installed
-consumers fell back to VSOP87D and the 1000–3000 accuracy did not work from
-the package. This release ships the complete tarball — all 25 advertised
-packs, verified by `scripts/check-tarball.mjs`, which is now also a gate in
-`release.yml` and in `npm run preflight`. No API changes; 0.24.0 is
+The 0.24.0 npm tarball omitted four advertised data packs (`mercury_cheb`,
+`venus_cheb`, `jupiter_cheb`, `earth_cheb`); installs silently fell back to
+VSOP87D and the 1000–3000 accuracy did not apply from the package. This
+release ships all 25 advertised packs. No API changes. Use 0.24.1; 0.24.0 is
 deprecated on npm.
 
 ## v0.24.0 — Canonical output and the 1000–3000 tier
