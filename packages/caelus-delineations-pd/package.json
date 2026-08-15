@@ -26,11 +26,11 @@
     "provenance": true
   },
   "peerDependencies": {
-    "caelus": ">=0.20.1 <0.25"
+    "caelus": ">=0.24.0 <0.25"
   },
   "devDependencies": {
     "@types/node": "^25.9.2",
-    "caelus": "^0.23.0",
+    "caelus": "^0.24.0",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3"
   },
