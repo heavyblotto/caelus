@@ -1,0 +1,114 @@
+import { pageMetadata } from "../../../lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Canonical Mode",
+  description: "Integer, hashable, precision-honest chart output: quantized grids, content-addressable digests, and remainder sets.",
+  path: "/docs/canonical",
+});
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Canonical Mode
+
+Integer, hashable, precision-honest output: for users who want the same bytes
+every time, everywhere.
+
+The engine is already deterministic run-to-run: identical inputs give
+bit-identical doubles on one machine. Canonical mode closes the three gaps
+floating point still has.
+
+1. **Cross-platform bit-stability.** IEEE 754 pins arithmetic but not the
+   transcendentals, so `sin` in V8, JSC, and Python's libm can differ in the
+   last ulp. Invisible astrologically; fatal for hashing.
+2. **Serialization stability.** Float JSON repr differs across languages;
+   seventeen-digit tails make brittle cache keys and signatures.
+3. **Boundary coherence.** A longitude one ulp from a sign cusp can flip a
+   sign, a house, or an aspect at its orb limit between platforms.
+
+## The three commitments
+
+- **One rounding rule.** Round half toward +infinity, identical in TypeScript
+  and Python. Ties round up everywhere, which is also the discrete tie-break:
+  a longitude exactly on a boundary belongs to the later sign or house; a
+  quantized speed of exactly 0 is direct, not retrograde.
+- **Quantize, then derive.** Sign, sign-degree, house, dignities, retrograde,
+  and the aspect list are recomputed from the quantized values in integer
+  arithmetic: displayed numbers and derived facts cannot disagree, by
+  construction.
+- **Floats cannot leak.** The canonical encoding (sorted keys, no whitespace)
+  throws on any non-integer number, so a digest over a canonical value proves
+  the whole payload was quantized.
+
+## Grids
+
+| Grid | Angle unit | Note |
+|---|---|---|
+| `arcsec` (default) | arcseconds | 360° = 1,296,000 — safe integer range, no BigInt |
+| `milliarcsec` | milliarcseconds | finer than any validated accuracy; for diffing |
+| `centideg` | 0.01° | compact, human-scannable |
+| `dms` | `[deg, min, sec]` triples | the tradition's own base-60 integer form |
+| `accuracy` | arcsec, snapped per body | each body quantized no finer than its measured accuracy — the most portable choice for content addressing |
+
+Speeds share the grid per day; distances are micro-AU; instants are integer
+milliseconds since J2000.0; aspect strength is per-mille. The `units` block
+inside every canonical payload states all of this, and is bound into the
+digest.
+
+## Digests
+
+`chartDigest(chart, opts)` is a SHA-256 over the canonical encoding. Equal
+digests mean equal charts at the grid's resolution, across machines,
+browsers, and languages. Uses: cache keys, dedupe, provenance receipts ("this
+reading was computed from chart `a3f9…`"). The engine's own cross-language
+check is a tolerance-free golden: every comparison is `===`, and TypeScript
+digests equal Python digests byte for byte.
+
+<Note>
+  Digest equality holds wherever the two engines' float outputs agree to well
+  under half a quantum, which the conformance suite enforces. The `accuracy`
+  grid's quanta exceed that drift by orders of magnitude, which is why it is
+  the recommended grid for cross-platform content addressing.
+</Note>
+
+## Remainder sets
+
+Quantization discards a sub-quantum residue at every leaf. A remainder set
+optionally keeps it, as integers, keyed to the outputs: the canonical payload
+is the base layer, the sidecar the enhancement layer. `composeRemainders`
+rebuilds the finer-grid payload exactly, and `nearBoundary(remainders)` turns
+the sidecar into a fragility report: the leaves that landed within a stated
+margin of a rounding boundary, where cross-platform drift could flip a value
+and the digest.
+
+<Note>
+  The sidecar is definitionally where cross-platform drift lives. The base
+  payload is the portable contract; the remainder set is precision escrow,
+  portable only down to where the engines demonstrably agree.
+</Note>
+
+## Engine API
+
+<CodeBlock
+  lang="typescript"
+  label="canonical.ts"
+  code={`import { canonicalChart, chartDigest, canonicalChartWithRemainders,
+         composeRemainders, nearBoundary } from "caelus";
+
+const cc = canonicalChart(chart);                  // integers, arcsec grid
+const id = chartDigest(chart, { grid: "accuracy" });
+
+const { payload, remainders } = canonicalChartWithRemainders(chart);
+composeRemainders(payload, remainders);            // === the finer-grid payload
+nearBoundary(remainders);                          // fragility report`}
+/>
+
+Pass the same `orbs`/`aspects`/`separation` options the chart was computed
+with, so the re-derived aspect list matches intent.
+
+## Over MCP
+
+`natal_chart`, `current_sky`, `returns`, and `parans` accept
+`output: "canonical"` (plus `grid` where a chart is involved). The payload is
+the canonical body plus its `digest`; the tools also take
+`remainders: "auto" | "arcsec" | "milliarcsec"` for the refinement sidecar. See
+[MCP Setup](/docs/mcp).

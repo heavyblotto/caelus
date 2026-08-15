@@ -91,6 +91,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/docs/provenance",
     "/docs/corpus",
     "/docs/mcp",
+    "/docs/canonical",
     "/docs/edge-cases",
     "/docs/api",
     ...listApiDocs().map((s) => `/docs/api/${s}`),

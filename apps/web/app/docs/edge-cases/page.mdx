@@ -16,9 +16,12 @@ serves real users.
 
 ## Supported date range
 
-Positions are fitted for **1800–2149** (and **1850–2150** for the precise Moon
-and Chiron tiers). Outside that, the fitted-range bodies throw a `RangeError`
-and the hosted REST endpoint returns `400`:
+Positions are validated for **1000–3000** for the planets, Pluto, and the Moon
+(every body carries a Chebyshev pack fit to JPL Horizons across the span). The
+small bodies (asteroids + Chiron) are fitted for **1600–2484**, the widest
+window Horizons serves for them. The hosted edge endpoint ships only the
+embedded Moon tier, so it serves a narrower window and returns `400` outside
+it:
 
 <CodeBlock
   lang="json"
@@ -26,9 +29,13 @@ and the hosted REST endpoint returns `400`:
   code={`{ "error": "date out of this endpoint's embedded tier (1920-2080); the engine validates 1000-3000" }`}
 />
 
-Validate the date before you call the engine; do not catch and swallow the
-`RangeError`, since a year outside the range usually means a parsing or
-timezone bug upstream.
+`chart()` does **not** throw for an out-of-range date: a body outside its
+pack's fitted span is omitted from `chart.bodies` and listed in
+`chart.unavailable`, with a per-chart warning. (`position()` on a single body
+out of range does throw a `RangeError`.) Do not read a body without checking
+`unavailable`, but also do not treat a far date as an error on its own,
+since a year outside the range usually means a parsing or timezone bug
+upstream.
 
 ## Longitude is east-positive
 
@@ -84,9 +91,10 @@ if (t === null) {
 
 ## Event-search windows
 
-Event search is bounded by an explicit `[start, end]` and by the 1800–2149
-fitted range. An empty result means "nothing in this window," not "never";
-widen the window and retry. Outer-planet returns and crossings can yield
+Event search is bounded by an explicit `[start, end]` and by each body's
+fitted range (1000–3000 for the planets, Pluto, and the Moon; 1600–2484 for
+the small bodies). An empty result means "nothing in this window," not
+"never"; widen the window and retry. Outer-planet returns and crossings can yield
 multiple hits around a retrograde loop, so the search returns an array, not a
 single date.
 

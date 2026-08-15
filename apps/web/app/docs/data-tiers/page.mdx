@@ -28,15 +28,16 @@ and [MCP server](/docs/mcp) build on these two.
 | Event search (rise/set, crossings, phases, stations) | — | ✓ | — | ✓ |
 | Eclipses (solar, lunar) | — | ✓ | — | ✓ |
 | Data on disk | none (bundled) | JSON packs (precise Moon ~3.1 MB + catalogs) | none (edge) | JSON packs (Node) |
-| Date range | 1800–2149¹ | 1800–2149¹ | 1800–2149 | 1800–2149¹ |
+| Date range | 1000–3000¹ | 1000–3000¹ | 1000–3000 | 1000–3000¹ |
 | Accuracy | per body, see [Validation](/validation) | per body, see [Validation](/validation) | per body | per body |
 
 <Note>
-  ¹ 1850–2150 for the precise Moon and Chiron tiers. The embedded dataset
-  computes everything from the bodies it bundles; the Node tier adds the data
-  the extended features were validated against. Anything pure-arithmetic on
-  positions, such as derived charts and sidereal shifts, runs in any tier,
-  including the browser. See <a href="/docs/edge-cases">Edge Cases &amp; Stability</a> for the
+  ¹ The planets, Pluto, and the Moon validate 1000–3000; the small bodies
+  (asteroids + Chiron) span 1600–2484, the widest window Horizons serves for
+  them. The embedded dataset computes everything from the bodies it bundles;
+  the Node tier adds the data the extended features were validated against.
+  Anything pure-arithmetic on positions, such as derived charts and sidereal
+  shifts, runs in any tier, including the browser. See <a href="/docs/edge-cases">Edge Cases &amp; Stability</a> for the
   out-of-range and missing-pack behaviour.
 </Note>
 
@@ -58,12 +59,13 @@ const engine = new Engine(embeddedData);`}
 
 ## Node loader (extended)
 
-`loadNodeData` reads the larger JSON packs from disk: higher-precision VSOP
-tiers, the precise Moon pack, a wide-range Pluto pack (a Chebyshev fit to the
-JPL Horizons barycenter that supersedes the embedded Meeus series and holds
-across 1850&ndash;2150), the asteroids and Uranian points. Fixed stars ship in
-embedded too; the Node loader reads the same catalog from disk when you load
-extended packs. Use the Node tier when you need extended bodies or event search.
+`loadNodeData` reads the larger JSON packs from disk: Horizons/DE441 Chebyshev
+packs for every planet plus Earth, Pluto, the Moon, Chiron, and the asteroids,
+which supersede the embedded VSOP87D / analytic series wherever they load.
+These are the packs that carry the validated 1000–3000 range (small bodies
+1600–2484). The Uranian points and fixed stars ship too; the Node loader reads
+the same fixed-star catalog from disk when you load extended packs. Use the
+Node tier when you need extended bodies, event search, or the wide range.
 
 <CodeBlock
   lang="typescript"
