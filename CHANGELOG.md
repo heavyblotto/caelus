@@ -23,7 +23,7 @@ deprecated on npm.
 
 ## v0.24.0 — Canonical output and the 1000–3000 tier
 
-*2026-08-13*
+*2026-08-15*
 
 Two headline changes. **Canonical mode** gives the engine integer, hashable,
 precision-honest output — content-addressable charts that are bit-identical
