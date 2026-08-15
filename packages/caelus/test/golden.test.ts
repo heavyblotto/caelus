@@ -682,8 +682,12 @@ for (const g of G.houses) {
       failures++;
       console.error(`FAIL capabilities pluto: ${JSON.stringify(pluto)} tier=${caps.plutoTier}`);
     }
+    // The wide Moon pack is fitted 1000-3000 (fit_moon.py); `validated` stays
+    // at the measured 1850-2150 until a wider measurement says otherwise --
+    // the same fitted/validated split the Pluto pack makes visible above.
     if (caps.moonTier !== "chebyshev" || moon?.source !== "moon_chebyshev"
-      || !moon.fitted || Math.abs(moon.fitted.from - 1850) > 1) {
+      || !moon.fitted || Math.abs(moon.fitted.from - 1000) > 2
+      || Math.abs(moon.fitted.to - 3000) > 2) {
       failures++;
       console.error(`FAIL capabilities moon: ${JSON.stringify(moon)} tier=${caps.moonTier}`);
     }

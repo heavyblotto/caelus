@@ -274,7 +274,50 @@ the slow bodies read fine. `Chart.warnings` states both splits per chart, so
 ancient charts are honestly usable rather than refused -- but "usable" means
 arcminutes, not arcseconds.
 
-## Tier C: minted -- three of four transformed, and Earth is the floor
+## Tier C: minted -- the wide band is uniform, and the Moon is the last blocker
+
+Every planet plus Earth is now packed (fit_planet.py), and the wide band is
+uniform. On the frame-free `--astrometric` basis, all are sub-0.17" across
+1000-3000 CE:
+
+    sun 0.027"  mercury 0.045"  venus 0.116"  mars 0.088"  jupiter 0.027"
+    saturn 0.018"  uranus 0.017"  neptune 0.015"  pluto 0.015"
+    chiron 0.051"  asteroids 0.04-0.16"
+
+On the apparent of-date basis (what accuracy.json publishes) the same bodies
+read a uniform ~3.3" -- that is the frame-convention term, IAU 1976/1980 vs
+the engine's Vondrak 2011 precession, not position error (the astrometric
+basis removes it and shows the sub-0.17" figures).
+
+**The order of operations mattered, and Mars proved it.** Packing Mars alone
+bought almost nothing (7.64" -> 6.75"), because Earth is the observer and its
+own VSOP error (2763 km at 2965) is the floor under every geocentric body.
+Packing Earth first is what moved Mars to 0.088". Earth is fit via command
+399 (the center, matching VSOP's earth series), routed through
+Vsop.heliocentric in Python and an earthHeliocentric helper over the six TS
+call sites. Packing Earth then *worsened* Venus and Jupiter by removing an
+accidental error-cancellation (their own VSOP drift, confirmed via their
+heliocentric errors) -- so they got packs too, and Mercury with them.
+
+Two more chord-floor fixes landed here: the inner planets needed 90-minute
+sampling (the interpolation chord scales with h^2 and is amplified by their
+small geocentric distances), and when Mercury and Jupiter STILL floored at
+~180 km flat across every degree, the actual root cause surfaced -- the cache
+interpolated linearly (np.interp), flooring every fit at ~(1/8)|a|h^2.
+HorizonsCache.sample() now uses Catmull-Rom cubic interpolation (O(h^4)),
+which dropped both floors to single-digit kilometres on the caches already on
+disk, no refetch. Fitting-side only; the runtime pack evaluation (ChebSeries)
+is untouched, so engine parity holds.
+
+The Moon is now packed over 1000-3000 (fit_moon.py, seg=64 deg=36, ~90 km,
+~48" at mean distance) -- the last body off the 1850-2150 tier. The headline
+decision is gated on this: the planets measure sub-arcsecond, and the Moon's
+wide figure is the remaining number to stand up before "1850-2150" can
+honestly widen. (Its ~21" on the astrometric basis is the observer-light-time
+comparison artifact documented above, not a position error; on the apparent
+basis the wide Moon reads 3.68".)
+
+## Tier C runbook (the mint commands)
 
 The planet packs are real. Measured on the frame-free `--astrometric` basis
 over 1000-3000 (40 epochs), before and after:

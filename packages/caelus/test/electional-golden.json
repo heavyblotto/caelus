@@ -83,8 +83,8 @@
    },
    "result": {
     "aspect": "sextile",
-    "orb": -2.9548507041191954,
-    "separation": 57.045149295880805,
+    "orb": -2.9548403783657022,
+    "separation": 57.0451596216343,
     "phase": "separating"
    }
   },
@@ -286,8 +286,8 @@
    "result": {
     "is_void": false,
     "sign": "Scorpio",
-    "sign_exit": 2451546.397037614,
-    "next_aspect": 2451546.3111627717
+    "sign_exit": 2451546.397039029,
+    "next_aspect": 2451546.311164394
    }
   },
   {
@@ -306,8 +306,8 @@
    "result": {
     "is_void": false,
     "sign": "Leo",
-    "sign_exit": 2460391.8206477873,
-    "next_aspect": 2460390.5658426313
+    "sign_exit": 2460391.8206293136,
+    "next_aspect": 2460390.5658361083
    }
   },
   {

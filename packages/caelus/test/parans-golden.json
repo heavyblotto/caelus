@@ -32,8 +32,8 @@
      "a_angle": "rise",
      "b": "moon",
      "b_angle": "set",
-     "jd": 2448052.779273,
-     "gap_min": 28.3164
+     "jd": 2448052.779272,
+     "gap_min": 28.3178
     },
     {
      "a": "jupiter",
@@ -41,15 +41,15 @@
      "b": "moon",
      "b_angle": "itransit",
      "jd": 2448053.073659,
-     "gap_min": 7.5451
+     "gap_min": 7.5465
     },
     {
      "a": "jupiter",
      "a_angle": "set",
      "b": "moon",
      "b_angle": "rise",
-     "jd": 2448053.366749,
-     "gap_min": 9.5567
+     "jd": 2448053.366748,
+     "gap_min": 9.5554
     },
     {
      "a": "mars",
@@ -57,7 +57,7 @@
      "b": "moon",
      "b_angle": "mtransit",
      "jd": 2448052.551613,
-     "gap_min": 4.8135
+     "gap_min": 4.8125
     },
     {
      "a": "mars",
@@ -65,7 +65,7 @@
      "b": "moon",
      "b_angle": "itransit",
      "jd": 2448053.063645,
-     "gap_min": 21.2946
+     "gap_min": 21.2932
     },
     {
      "a": "mars",
@@ -80,8 +80,8 @@
      "a_angle": "rise",
      "b": "saturn",
      "b_angle": "rise",
-     "jd": 2448053.377189,
-     "gap_min": 20.5096
+     "jd": 2448053.377188,
+     "gap_min": 20.5108
     },
     {
      "a": "saturn",
@@ -141,7 +141,7 @@
      "b": "saturn",
      "b_angle": "rise",
      "jd": 2461119.764341,
-     "gap_min": 9.0317
+     "gap_min": 9.0316
     },
     {
      "a": "moon",
@@ -149,7 +149,7 @@
      "b": "sun",
      "b_angle": "rise",
      "jd": 2461119.756619,
-     "gap_min": 13.2058
+     "gap_min": 13.2059
     },
     {
      "a": "moon",
@@ -157,7 +157,7 @@
      "b": "venus",
      "b_angle": "mtransit",
      "jd": 2461120.051507,
-     "gap_min": 1.2316
+     "gap_min": 1.2319
     },
     {
      "a": "saturn",
@@ -257,7 +257,7 @@
      "b": "saturn",
      "b_angle": "set",
      "jd": 2451544.579063,
-     "gap_min": 6.7461
+     "gap_min": 6.7463
     },
     {
      "a": "moon",
@@ -413,7 +413,7 @@
      "body": "moon",
      "body_angle": "mtransit",
      "jd": 2448052.558622,
-     "gap_min": 15.3737
+     "gap_min": 15.3747
     },
     {
      "star": "Sirius",
@@ -421,7 +421,7 @@
      "body": "moon",
      "body_angle": "itransit",
      "jd": 2448053.066817,
-     "gap_min": 12.1597
+     "gap_min": 12.1583
     },
     {
      "star": "Sirius",
@@ -577,7 +577,7 @@
      "body": "moon",
      "body_angle": "mtransit",
      "jd": 2461120.058676,
-     "gap_min": 19.4148
+     "gap_min": 19.4146
     },
     {
      "star": "Spica",
@@ -585,7 +585,7 @@
      "body": "moon",
      "body_angle": "set",
      "jd": 2461120.354928,
-     "gap_min": 7.3089
+     "gap_min": 7.309
     },
     {
      "star": "Spica",

@@ -137,15 +137,15 @@
       "dignities": []
      },
      "moon": {
-      "lon": 1019821,
-      "lat": -7769,
+      "lon": 1019820,
+      "lat": -7770,
       "speed": 43870,
       "latSpeed": 3563,
       "distMicroAu": 2671,
-      "ra": 1024800,
+      "ra": 1024798,
       "dec": -89735,
       "sign": "Capricorn",
-      "signDeg": 47821,
+      "signDeg": 47820,
       "house": 6,
       "retrograde": false,
       "dignities": [
@@ -341,7 +341,7 @@
       "a": "moon",
       "b": "venus",
       "aspect": "trine",
-      "orb": 908,
+      "orb": 907,
       "phase": "separating",
       "strengthPerMille": 964
      },
@@ -349,7 +349,7 @@
       "a": "moon",
       "b": "mars",
       "aspect": "square",
-      "orb": 20790,
+      "orb": 20789,
       "phase": "separating",
       "strengthPerMille": 175
      },
@@ -357,7 +357,7 @@
       "a": "moon",
       "b": "jupiter",
       "aspect": "opposition",
-      "orb": 5588,
+      "orb": 5589,
       "phase": "applying",
       "strengthPerMille": 806
      },
@@ -365,7 +365,7 @@
       "a": "moon",
       "b": "uranus",
       "aspect": "conjunction",
-      "orb": 17752,
+      "orb": 17751,
       "phase": "separating",
       "strengthPerMille": 384
      },
@@ -373,7 +373,7 @@
       "a": "moon",
       "b": "neptune",
       "aspect": "conjunction",
-      "orb": 1992,
+      "orb": 1993,
       "phase": "applying",
       "strengthPerMille": 931
      },
@@ -381,7 +381,7 @@
       "a": "moon",
       "b": "pluto",
       "aspect": "sextile",
-      "orb": 7995,
+      "orb": 7996,
       "phase": "applying",
       "strengthPerMille": 445
      },
@@ -389,7 +389,7 @@
       "a": "moon",
       "b": "chiron",
       "aspect": "opposition",
-      "orb": 8233,
+      "orb": 8234,
       "phase": "applying",
       "strengthPerMille": 714
      },
@@ -583,15 +583,15 @@
       "dignities": []
      },
      "moon": {
-      "lon": 1019820985,
-      "lat": -7769425,
-      "speed": 43870393,
-      "latSpeed": 3562841,
+      "lon": 1019819842,
+      "lat": -7769519,
+      "speed": 43870097,
+      "latSpeed": 3562807,
       "distMicroAu": 2671,
-      "ra": 1024799562,
-      "dec": -89734743,
+      "ra": 1024798319,
+      "dec": -89734952,
       "sign": "Capricorn",
-      "signDeg": 47820985,
+      "signDeg": 47819842,
       "house": 6,
       "retrograde": false,
       "dignities": [
@@ -747,15 +747,15 @@
       "dignities": []
      },
      "true_node": {
-      "lon": 1109287821,
+      "lon": 1109287855,
       "lat": 0,
-      "speed": -236328,
+      "speed": -236368,
       "latSpeed": 0,
       "distMicroAu": null,
-      "ra": 1117996622,
-      "dec": -65644204,
+      "ra": 1117996656,
+      "dec": -65644195,
       "sign": "Aquarius",
-      "signDeg": 29287821,
+      "signDeg": 29287855,
       "house": 6,
       "retrograde": true,
       "dignities": []
@@ -787,7 +787,7 @@
       "a": "moon",
       "b": "venus",
       "aspect": "trine",
-      "orb": 908246,
+      "orb": 907103,
       "phase": "separating",
       "strengthPerMille": 964
      },
@@ -795,7 +795,7 @@
       "a": "moon",
       "b": "mars",
       "aspect": "square",
-      "orb": 20790043,
+      "orb": 20788900,
       "phase": "separating",
       "strengthPerMille": 175
      },
@@ -803,7 +803,7 @@
       "a": "moon",
       "b": "jupiter",
       "aspect": "opposition",
-      "orb": 5587939,
+      "orb": 5589082,
       "phase": "applying",
       "strengthPerMille": 806
      },
@@ -811,7 +811,7 @@
       "a": "moon",
       "b": "uranus",
       "aspect": "conjunction",
-      "orb": 17751995,
+      "orb": 17750852,
       "phase": "separating",
       "strengthPerMille": 384
      },
@@ -819,7 +819,7 @@
       "a": "moon",
       "b": "neptune",
       "aspect": "conjunction",
-      "orb": 1991758,
+      "orb": 1992901,
       "phase": "applying",
       "strengthPerMille": 931
      },
@@ -827,7 +827,7 @@
       "a": "moon",
       "b": "pluto",
       "aspect": "sextile",
-      "orb": 7995479,
+      "orb": 7996622,
       "phase": "applying",
       "strengthPerMille": 445
      },
@@ -835,7 +835,7 @@
       "a": "moon",
       "b": "chiron",
       "aspect": "opposition",
-      "orb": 8232560,
+      "orb": 8233703,
       "phase": "applying",
       "strengthPerMille": 714
      },
@@ -1498,20 +1498,20 @@
       "lon": [
        283,
        17,
-       1
+       0
       ],
       "lat": [
        -2,
        -9,
-       -29
+       -30
       ],
       "speed": 43870,
       "latSpeed": 3563,
       "distMicroAu": 2671,
       "ra": [
        284,
-       40,
-       0
+       39,
+       58
       ],
       "dec": [
        -24,
@@ -1522,7 +1522,7 @@
       "signDeg": [
        13,
        17,
-       1
+       0
       ],
       "house": 6,
       "retrograde": false,
@@ -2003,7 +2003,7 @@
       "a": "moon",
       "b": "venus",
       "aspect": "trine",
-      "orb": 908,
+      "orb": 907,
       "phase": "separating",
       "strengthPerMille": 964
      },
@@ -2011,7 +2011,7 @@
       "a": "moon",
       "b": "mars",
       "aspect": "square",
-      "orb": 20790,
+      "orb": 20789,
       "phase": "separating",
       "strengthPerMille": 175
      },
@@ -2019,7 +2019,7 @@
       "a": "moon",
       "b": "jupiter",
       "aspect": "opposition",
-      "orb": 5588,
+      "orb": 5589,
       "phase": "applying",
       "strengthPerMille": 806
      },
@@ -2027,7 +2027,7 @@
       "a": "moon",
       "b": "uranus",
       "aspect": "conjunction",
-      "orb": 17752,
+      "orb": 17751,
       "phase": "separating",
       "strengthPerMille": 384
      },
@@ -2035,7 +2035,7 @@
       "a": "moon",
       "b": "neptune",
       "aspect": "conjunction",
-      "orb": 1992,
+      "orb": 1993,
       "phase": "applying",
       "strengthPerMille": 931
      },
@@ -2043,7 +2043,7 @@
       "a": "moon",
       "b": "pluto",
       "aspect": "sextile",
-      "orb": 7995,
+      "orb": 7996,
       "phase": "applying",
       "strengthPerMille": 445
      },
@@ -2051,7 +2051,7 @@
       "a": "moon",
       "b": "chiron",
       "aspect": "opposition",
-      "orb": 8233,
+      "orb": 8234,
       "phase": "applying",
       "strengthPerMille": 714
      },
@@ -2250,7 +2250,7 @@
       "speed": 43869,
       "latSpeed": 3564,
       "distMicroAu": 2671,
-      "ra": 1024800,
+      "ra": 1024797,
       "dec": -89736,
       "sign": "Capricorn",
       "signDeg": 47820,
@@ -2731,28 +2731,28 @@
     ]
    },
    "result": {
-    "tampa-1990/arcsec": "191c35949ed4468f7dfb96b3f212985978fc8abe9fa7acc4d4c56574434b074d",
-    "tampa-1990/milliarcsec": "91fb5972bf7c967c24e03ba7a1a8d501de34b23b53bea0101b5fd5cc2319e455",
+    "tampa-1990/arcsec": "7a8185129ae623dc957bc9dcb3a6b27ad5b29f93dcc7d5162464381a3cb4be99",
+    "tampa-1990/milliarcsec": "8b800f4dc7b569dd8d4ec6be9245ba20955b4e46b1a84acbad0b646aff2d7e31",
     "tampa-1990/centideg": "a4a3c1dfdf7b15aa367d93f5ee7af20227f0d4443a48d77eb5a42b77f4ec2ca1",
-    "tampa-1990/dms": "d0297c9f67b963478ca88468c628050dfaea31ac479248da035a962fa03b82cc",
-    "tampa-1990/accuracy": "7cd5164ed104a3591876536826ffc2b936b47007a912141b783d4339665a2395",
-    "london-2024/arcsec": "13849b7ef0bc4f74d17f7d749a97d1742202d135fe788149e75eebdc1227690d",
-    "london-2024/milliarcsec": "629a9a356574e8c3b7c937708bd31249882fbfae0b1a05de6ba735d201649177",
+    "tampa-1990/dms": "1d04c3a7519d0cc3809e4780c13199ba12306f9603d5f3f13c0891f314022e70",
+    "tampa-1990/accuracy": "e7c5e7d51904b123d62adf212c994bd3f6176585efd6722cb6c9961fd774f5f9",
+    "london-2024/arcsec": "660d257553d1b37bc6a0273f5f64a326652b38e63d833d8c66080d0cb9eebf45",
+    "london-2024/milliarcsec": "f371985be72cdd44e410397be6c3a7db6d1277cd71dd99e90e0c1cb00ca81d74",
     "london-2024/centideg": "aacca671a28e45f4ec9c9ba115f4c5fe809f7c8c767cff9d031c2219fc55598a",
-    "london-2024/dms": "e6b64d92e24bb133939c1a60eaa73af544fee8a3018a6664496a2ce29602d309",
+    "london-2024/dms": "6ee8cbe8fdf208fbd267cc92350c0be10f6d4675758f17bdd6a80276b11f4611",
     "london-2024/accuracy": "932ee4bf47ea5e51c4f83e0db0ad5cb7d5f0ecda48730050c8586cff714d1f18",
-    "sydney-sidereal/arcsec": "87217a64b0fd0173213aece302720264217a89665c1caa485b255da159600d05",
-    "sydney-sidereal/milliarcsec": "a4be34b3a835c1e2fe8d602267191c41b3cef7c8a963397d24c92077255bf753",
+    "sydney-sidereal/arcsec": "36094bd40cca937909badf83d193bfe503e0dbe7524ee5628861d73a8423e533",
+    "sydney-sidereal/milliarcsec": "b9fbd514ad19d9c0cb9d4754d218b64e96f2ea273afb6d3939176039e18bbc43",
     "sydney-sidereal/centideg": "913bfed5df8cb82bc07ed16a71e07435fde37c8ecd504740a7c7da16883f931c",
-    "sydney-sidereal/dms": "fc18139ab76cec7f6d1332a7c748a8a56ec1595a2965faa8770070820bf15d66",
+    "sydney-sidereal/dms": "10adcce2ba86ab3a50d1d463b96748d78c8bdbd6a47137b056f351399febf8fe",
     "sydney-sidereal/accuracy": "95290cf9d8be4406d66b6fb2cba19756986da3bcc2cba94017acb8e7b7d14fd9",
-    "svalbard-polar/arcsec": "0893d3657a93e1dbd93fbce66cf9acbc284bc8bf0a23ae111c29b35e587d75e4",
-    "svalbard-polar/milliarcsec": "83bbbf7fb87c44df1b1252001c4d6900dc71bc3545ea2e7812fe0935cfa66a8c",
+    "svalbard-polar/arcsec": "ed3fa622e2045fdbe78005810ff8bffcc67d2ca6baa482da4dce85fc1bba708c",
+    "svalbard-polar/milliarcsec": "9e538a87c62456c408134fc35651961dbc4a87fe6b3eed53325090bcec5af556",
     "svalbard-polar/centideg": "2ae2d976d344d693e77f53e74eddba48a9039a18a6fc1d92e47d0e951c3bd5e8",
-    "svalbard-polar/dms": "62107f2a2786c5e6e2e8b21d462cca6038312d377ca365997b3f98fbb7f5469c",
+    "svalbard-polar/dms": "de499027047f16d28776efa7281f74f0c645bdd7744022e38bf2c2698f37e7d1",
     "svalbard-polar/accuracy": "0b9d5daaed2c66059fac9d1774fe7f8ba6c9e1a06c35bb70c0e744b73772c171",
     "edge-1852/arcsec": "9efa54cfe3b480755eefac3a11c87fe088dc7c6d952d4c1288f9bc60da202cfe",
-    "edge-1852/milliarcsec": "7ae465a97d03dd6bfc420174d4a6c70c238159d226b01f95c5ee123447ab419a",
+    "edge-1852/milliarcsec": "146d207baa2f0067de80365fefdcf957bb37bf804e8949fcfc389abe8c4c3ea5",
     "edge-1852/centideg": "347e046b77163203519c8576c834b4d19a64f4a9af020f6f1724228a888edfe9",
     "edge-1852/dms": "69519e64ca9851ed44872f9b510539a3b72674d07fe5d800035b8418cff9d814",
     "edge-1852/accuracy": "15baafd4b216c6bbc6388a3a6d9571b3e4c119d13236fcffac139fa42a0df7b1"
@@ -2781,7 +2781,7 @@
     "format": "caelus-remainders",
     "version": 1,
     "mode": "refine",
-    "for": "191c35949ed4468f7dfb96b3f212985978fc8abe9fa7acc4d4c56574434b074d",
+    "for": "7a8185129ae623dc957bc9dcb3a6b27ad5b29f93dcc7d5162464381a3cb4be99",
     "grid": "arcsec",
     "remainderGrid": "milliarcsec",
     "units": {
@@ -2799,13 +2799,13 @@
      "bodies.sun.distMicroAu": -473,
      "bodies.sun.ra": -67,
      "bodies.sun.dec": 49,
-     "bodies.moon.lon": -15,
-     "bodies.moon.lat": -425,
-     "bodies.moon.speed": 393,
-     "bodies.moon.latSpeed": -159,
-     "bodies.moon.distMicroAu": 489,
-     "bodies.moon.ra": -438,
-     "bodies.moon.dec": 257,
+     "bodies.moon.lon": -158,
+     "bodies.moon.lat": 481,
+     "bodies.moon.speed": 97,
+     "bodies.moon.latSpeed": -193,
+     "bodies.moon.distMicroAu": 488,
+     "bodies.moon.ra": 319,
+     "bodies.moon.dec": 48,
      "bodies.mercury.lon": -172,
      "bodies.mercury.lat": -97,
      "bodies.mercury.speed": -40,
@@ -2875,12 +2875,12 @@
      "bodies.mean_node.latSpeed": 0,
      "bodies.mean_node.ra": -50,
      "bodies.mean_node.dec": -361,
-     "bodies.true_node.lon": -179,
+     "bodies.true_node.lon": -145,
      "bodies.true_node.lat": 0,
-     "bodies.true_node.speed": -328,
+     "bodies.true_node.speed": -368,
      "bodies.true_node.latSpeed": 0,
-     "bodies.true_node.ra": -378,
-     "bodies.true_node.dec": -204,
+     "bodies.true_node.ra": -344,
+     "bodies.true_node.dec": -195,
      "angles.asc": 334,
      "angles.mc": 293,
      "angles.vertex": -441,
@@ -2930,9 +2930,9 @@
     },
     {
      "path": "bodies.moon.distMicroAu",
-     "residue": 489,
+     "residue": 488,
      "quantum": 1000,
-     "marginPerMille": 22,
+     "marginPerMille": 24,
      "side": 1
     },
     {
@@ -2940,6 +2940,13 @@
      "residue": 487,
      "quantum": 1000,
      "marginPerMille": 26,
+     "side": 1
+    },
+    {
+     "path": "bodies.moon.lat",
+     "residue": 481,
+     "quantum": 1000,
+     "marginPerMille": 38,
      "side": 1
     },
     {
@@ -3055,13 +3062,6 @@
      "side": -1
     },
     {
-     "path": "bodies.moon.ra",
-     "residue": -438,
-     "quantum": 1000,
-     "marginPerMille": 124,
-     "side": -1
-    },
-    {
      "path": "bodies.pluto.latSpeed",
      "residue": -435,
      "quantum": 1000,
@@ -3074,13 +3074,6 @@
      "quantum": 1000,
      "marginPerMille": 142,
      "side": 1
-    },
-    {
-     "path": "bodies.moon.lat",
-     "residue": -425,
-     "quantum": 1000,
-     "marginPerMille": 150,
-     "side": -1
     },
     {
      "path": "bodies.saturn.lon",
@@ -3104,13 +3097,6 @@
      "side": -1
     },
     {
-     "path": "bodies.moon.speed",
-     "residue": 393,
-     "quantum": 1000,
-     "marginPerMille": 214,
-     "side": 1
-    },
-    {
      "path": "bodies.neptune.ra",
      "residue": -389,
      "quantum": 1000,
@@ -3125,10 +3111,10 @@
      "side": -1
     },
     {
-     "path": "bodies.true_node.ra",
-     "residue": -378,
+     "path": "bodies.true_node.speed",
+     "residue": -368,
      "quantum": 1000,
-     "marginPerMille": 244,
+     "marginPerMille": 264,
      "side": -1
     },
     {
@@ -3153,6 +3139,13 @@
      "side": -1
     },
     {
+     "path": "bodies.true_node.ra",
+     "residue": -344,
+     "quantum": 1000,
+     "marginPerMille": 312,
+     "side": -1
+    },
+    {
      "path": "angles.asc",
      "residue": 334,
      "quantum": 1000,
@@ -3174,11 +3167,11 @@
      "side": 1
     },
     {
-     "path": "bodies.true_node.speed",
-     "residue": -328,
+     "path": "bodies.moon.ra",
+     "residue": 319,
      "quantum": 1000,
-     "marginPerMille": 344,
-     "side": -1
+     "marginPerMille": 362,
+     "side": 1
     },
     {
      "path": "bodies.neptune.distMicroAu",
@@ -3265,13 +3258,6 @@
      "side": -1
     },
     {
-     "path": "bodies.moon.dec",
-     "residue": 257,
-     "quantum": 1000,
-     "marginPerMille": 486,
-     "side": 1
-    },
-    {
      "path": "bodies.neptune.lon",
      "residue": -257,
      "quantum": 1000,
@@ -3329,9 +3315,9 @@
     },
     {
      "path": "bodies.true_node.dec",
-     "residue": -204,
+     "residue": -195,
      "quantum": 1000,
-     "marginPerMille": 592,
+     "marginPerMille": 610,
      "side": -1
     },
     {
@@ -3342,18 +3328,18 @@
      "side": -1
     },
     {
+     "path": "bodies.moon.latSpeed",
+     "residue": -193,
+     "quantum": 1000,
+     "marginPerMille": 614,
+     "side": -1
+    },
+    {
      "path": "bodies.uranus.distMicroAu",
      "residue": 189,
      "quantum": 1000,
      "marginPerMille": 622,
      "side": 1
-    },
-    {
-     "path": "bodies.true_node.lon",
-     "residue": -179,
-     "quantum": 1000,
-     "marginPerMille": 642,
-     "side": -1
     },
     {
      "path": "bodies.mercury.lon",
@@ -3377,10 +3363,10 @@
      "side": 1
     },
     {
-     "path": "bodies.moon.latSpeed",
-     "residue": -159,
+     "path": "bodies.moon.lon",
+     "residue": -158,
      "quantum": 1000,
-     "marginPerMille": 682,
+     "marginPerMille": 684,
      "side": -1
     },
     {
@@ -3389,6 +3375,13 @@
      "quantum": 1000,
      "marginPerMille": 706,
      "side": 1
+    },
+    {
+     "path": "bodies.true_node.lon",
+     "residue": -145,
+     "quantum": 1000,
+     "marginPerMille": 710,
+     "side": -1
     },
     {
      "path": "bodies.pluto.dec",
@@ -3445,6 +3438,13 @@
      "quantum": 1000,
      "marginPerMille": 806,
      "side": -1
+    },
+    {
+     "path": "bodies.moon.speed",
+     "residue": 97,
+     "quantum": 1000,
+     "marginPerMille": 806,
+     "side": 1
     },
     {
      "path": "bodies.venus.distMicroAu",
@@ -3545,6 +3545,13 @@
      "side": 1
     },
     {
+     "path": "bodies.moon.dec",
+     "residue": 48,
+     "quantum": 1000,
+     "marginPerMille": 904,
+     "side": 1
+    },
+    {
      "path": "bodies.chiron.dec",
      "residue": 46,
      "quantum": 1000,
@@ -3599,13 +3606,6 @@
      "quantum": 1000,
      "marginPerMille": 938,
      "side": 1
-    },
-    {
-     "path": "bodies.moon.lon",
-     "residue": -15,
-     "quantum": 1000,
-     "marginPerMille": 970,
-     "side": -1
     },
     {
      "path": "bodies.venus.speed",
@@ -3756,102 +3756,102 @@
    "result": {
     "tampa-1990/arcsec": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "556375cfac7df822ebe69c72807d74e10645f06cfb2d7245c5f15ab9d746f13a",
-     "composed": "91fb5972bf7c967c24e03ba7a1a8d501de34b23b53bea0101b5fd5cc2319e455"
+     "sidecar": "b1b3202e78952e51fa5daeb10d87e48ccb662d95c08c1123277892af9f9b5eaa",
+     "composed": "8b800f4dc7b569dd8d4ec6be9245ba20955b4e46b1a84acbad0b646aff2d7e31"
     },
     "tampa-1990/centideg": {
      "remainderGrid": "arcsec",
-     "sidecar": "d0ef2b3df500758898a3e4da8286f822db3eda08cc5b5c286f4ba9d0640ccc3f",
-     "composed": "191c35949ed4468f7dfb96b3f212985978fc8abe9fa7acc4d4c56574434b074d"
+     "sidecar": "70ecf0529a7097ef1fd3ce1a627390e34d9f57db2cf475fddc6045e0299c3525",
+     "composed": "7a8185129ae623dc957bc9dcb3a6b27ad5b29f93dcc7d5162464381a3cb4be99"
     },
     "tampa-1990/dms": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "450073b35ae37a45ff8dfa392cfd2b37a2b0dedd42b3d08c4cc75a107a8e6093",
-     "composed": "91fb5972bf7c967c24e03ba7a1a8d501de34b23b53bea0101b5fd5cc2319e455"
+     "sidecar": "8909d6dc0331ae588491176d828721cad2a3696361834d49ccf327a64600d2ef",
+     "composed": "8b800f4dc7b569dd8d4ec6be9245ba20955b4e46b1a84acbad0b646aff2d7e31"
     },
     "tampa-1990/accuracy": {
      "remainderGrid": "arcsec",
-     "sidecar": "83cab0ca7ac6cf4d0e1e407cd174c088ee94a5e98eaa29dbed1d731b28553ed2",
-     "composed": "191c35949ed4468f7dfb96b3f212985978fc8abe9fa7acc4d4c56574434b074d"
+     "sidecar": "c190534966e5eb2ce83e4399fb9666064a5d6cfaf0e1bfa7fcc137f47233da3d",
+     "composed": "7a8185129ae623dc957bc9dcb3a6b27ad5b29f93dcc7d5162464381a3cb4be99"
     },
     "london-2024/arcsec": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "66a9a89e5027eb590cb7f90c86f8a0a0973f24cc01b051beec2ba56dfa48d769",
-     "composed": "629a9a356574e8c3b7c937708bd31249882fbfae0b1a05de6ba735d201649177"
+     "sidecar": "003a9c4d6a6691ac279622801560bb854f45efc0b36ebea9b7aa886a95891d41",
+     "composed": "f371985be72cdd44e410397be6c3a7db6d1277cd71dd99e90e0c1cb00ca81d74"
     },
     "london-2024/centideg": {
      "remainderGrid": "arcsec",
-     "sidecar": "c95a42dd173f894fb5565f418bffc72872a0fbfb620d3174a0fd2de691a08056",
-     "composed": "13849b7ef0bc4f74d17f7d749a97d1742202d135fe788149e75eebdc1227690d"
+     "sidecar": "b78e47087904ab5e459084a7bae0efea345144eb7cb78ad42daa571f6982f002",
+     "composed": "660d257553d1b37bc6a0273f5f64a326652b38e63d833d8c66080d0cb9eebf45"
     },
     "london-2024/dms": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "b243bd92dce0d7e4384faad5f43c526aea5a878de51a5b10f44c8cb364b82849",
-     "composed": "629a9a356574e8c3b7c937708bd31249882fbfae0b1a05de6ba735d201649177"
+     "sidecar": "cefbb1eaddc0580bf935a99ba6b9cb4c324ccdb1a967ecda23e0e5912908fe9f",
+     "composed": "f371985be72cdd44e410397be6c3a7db6d1277cd71dd99e90e0c1cb00ca81d74"
     },
     "london-2024/accuracy": {
      "remainderGrid": "arcsec",
-     "sidecar": "20f8943f31fa4783c4765f5341579314463720c60370332dbb2cdc2b0e923e0d",
-     "composed": "13849b7ef0bc4f74d17f7d749a97d1742202d135fe788149e75eebdc1227690d"
+     "sidecar": "5306918000e6ec5d6e16e0cd4bdf4bcac0a6f6c8811e1fef87f23c5fb999aada",
+     "composed": "660d257553d1b37bc6a0273f5f64a326652b38e63d833d8c66080d0cb9eebf45"
     },
     "sydney-sidereal/arcsec": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "755bca6792f2a4dafdeca95268bdbf2e03bf510eceba7f18ffcec52849865d24",
-     "composed": "a4be34b3a835c1e2fe8d602267191c41b3cef7c8a963397d24c92077255bf753"
+     "sidecar": "6a9c77d9052b2f4cb5c0497316fda1e1efbe5abdd1399144019c8494fa9baa85",
+     "composed": "b9fbd514ad19d9c0cb9d4754d218b64e96f2ea273afb6d3939176039e18bbc43"
     },
     "sydney-sidereal/centideg": {
      "remainderGrid": "arcsec",
-     "sidecar": "4fda982c3768e1aede8d5e77a3a69532aeb71405c6b2b59fa164dcef23d8246e",
-     "composed": "87217a64b0fd0173213aece302720264217a89665c1caa485b255da159600d05"
+     "sidecar": "c08559e511948eb0508b7051f0af23031d8f02fa0982946ada570a7ddb662611",
+     "composed": "36094bd40cca937909badf83d193bfe503e0dbe7524ee5628861d73a8423e533"
     },
     "sydney-sidereal/dms": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "90bdbf8f2ba75da75de429b4e923a6cc6242e87e4073b32e32b5b3be9f41c18e",
-     "composed": "a4be34b3a835c1e2fe8d602267191c41b3cef7c8a963397d24c92077255bf753"
+     "sidecar": "85a01839cd48f614ef6c416a973fc631435c7290768f0f1a9f8107ba92dabce0",
+     "composed": "b9fbd514ad19d9c0cb9d4754d218b64e96f2ea273afb6d3939176039e18bbc43"
     },
     "sydney-sidereal/accuracy": {
      "remainderGrid": "arcsec",
-     "sidecar": "7e0c81ee233cc3b37d427b41a99d44f39e7424414556ca0cf4a802092aafbe85",
-     "composed": "87217a64b0fd0173213aece302720264217a89665c1caa485b255da159600d05"
+     "sidecar": "6fa9c09d687f8c63e4fa947d5f1e6835205f698500f9e328bde26f662f6b0332",
+     "composed": "36094bd40cca937909badf83d193bfe503e0dbe7524ee5628861d73a8423e533"
     },
     "svalbard-polar/arcsec": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "793d58193569e52000b16156f1aa82f81d7c9e5cd06d03d1ee03a25de91a0a3e",
-     "composed": "83bbbf7fb87c44df1b1252001c4d6900dc71bc3545ea2e7812fe0935cfa66a8c"
+     "sidecar": "1a55449e8844f5baa896a181cf4c12bfb923eb00e6e796e45bcb8b99732d63f2",
+     "composed": "9e538a87c62456c408134fc35651961dbc4a87fe6b3eed53325090bcec5af556"
     },
     "svalbard-polar/centideg": {
      "remainderGrid": "arcsec",
-     "sidecar": "7d07a84b6c2eaf0b5d5d85c929cb4aa51c03838263045ba54a11e15e0142ebb0",
-     "composed": "0893d3657a93e1dbd93fbce66cf9acbc284bc8bf0a23ae111c29b35e587d75e4"
+     "sidecar": "b1af3b10a265789acbc86830e221b7fa1020a2b9eb2acabb6cf6012871ccdeca",
+     "composed": "ed3fa622e2045fdbe78005810ff8bffcc67d2ca6baa482da4dce85fc1bba708c"
     },
     "svalbard-polar/dms": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "d9059247bad3e85262420b31a65b0913eda6c8048625f1fad072c23507d870e8",
-     "composed": "83bbbf7fb87c44df1b1252001c4d6900dc71bc3545ea2e7812fe0935cfa66a8c"
+     "sidecar": "05518d88d332e58d6e6ec3f8163980af55f2a1d4ec8b124c332c85913593d846",
+     "composed": "9e538a87c62456c408134fc35651961dbc4a87fe6b3eed53325090bcec5af556"
     },
     "svalbard-polar/accuracy": {
      "remainderGrid": "arcsec",
-     "sidecar": "d78e148eff021213126ccc56dd203cf84ffda68fcc861c225a634eb066bc4908",
-     "composed": "0893d3657a93e1dbd93fbce66cf9acbc284bc8bf0a23ae111c29b35e587d75e4"
+     "sidecar": "145f88f8c6bdd73ce5feec06bfc9e658cd40deb680921855163e1ef34ed4384c",
+     "composed": "ed3fa622e2045fdbe78005810ff8bffcc67d2ca6baa482da4dce85fc1bba708c"
     },
     "edge-1852/arcsec": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "c66ed41a737a2f4b7aae13388eccfa09436a1b6a89f6df7617ade3dcf703fd2e",
-     "composed": "7ae465a97d03dd6bfc420174d4a6c70c238159d226b01f95c5ee123447ab419a"
+     "sidecar": "b78383f9505f4d9814bc1496f705f60015d90fb1772e993172fed3e37dec7439",
+     "composed": "146d207baa2f0067de80365fefdcf957bb37bf804e8949fcfc389abe8c4c3ea5"
     },
     "edge-1852/centideg": {
      "remainderGrid": "arcsec",
-     "sidecar": "cc3c22c57bbc2ebf36443dcdf6f47bdc1dcc5a1b4400dfacc945712cfc325dfe",
+     "sidecar": "aa880baa0724fd27180a702f8166984ee4c2d3e05da928af039505a05b1d48b1",
      "composed": "9efa54cfe3b480755eefac3a11c87fe088dc7c6d952d4c1288f9bc60da202cfe"
     },
     "edge-1852/dms": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "4759989ea5e74048d29489f89f53fa26c09fc25dbf416a1215eae97ad8fb407b",
-     "composed": "7ae465a97d03dd6bfc420174d4a6c70c238159d226b01f95c5ee123447ab419a"
+     "sidecar": "509c68250a7f60004250a9091d80e2e931847261a0b59561b1e75ddb863d43b7",
+     "composed": "146d207baa2f0067de80365fefdcf957bb37bf804e8949fcfc389abe8c4c3ea5"
     },
     "edge-1852/accuracy": {
      "remainderGrid": "arcsec",
-     "sidecar": "acfe83eee6150ad2b0d93b6b33875721595b133df744cf7d301c7d1065568b8a",
+     "sidecar": "dff48ae52bc85c618c8cf4145bce33cc79c5e4d474201cce72a6bc701a6baa0b",
      "composed": "9efa54cfe3b480755eefac3a11c87fe088dc7c6d952d4c1288f9bc60da202cfe"
     }
    }

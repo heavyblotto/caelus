@@ -5,7 +5,7 @@
       "epochs": 18,
       "bodies": {
         "sun": 0.022,
-        "moon": 19.846,
+        "moon": 19.372,
         "mercury": 0.046,
         "venus": 0.129,
         "mars": 0.061,
@@ -26,7 +26,7 @@
       "epochs": 25,
       "bodies": {
         "sun": 0.023,
-        "moon": 20.676,
+        "moon": 20.511,
         "mercury": 0.067,
         "venus": 0.101,
         "mars": 0.085,
@@ -47,6 +47,7 @@
       "epochs": 19,
       "bodies": {
         "sun": 0.023,
+        "moon": 19.926,
         "mercury": 0.058,
         "venus": 0.043,
         "mars": 0.107,
@@ -61,6 +62,7 @@
       "epochs": 40,
       "bodies": {
         "sun": 0.027,
+        "moon": 21.091,
         "mercury": 0.045,
         "venus": 0.116,
         "mars": 0.088,
