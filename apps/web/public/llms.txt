@@ -32,7 +32,7 @@ tiers). Verified per-body vs Swiss Ephemeris (1850-2150): Sun-Saturn
 (Chebyshev pack), Chiron <=1", mean node <=1", true node <= 1' vs SE's
 built-in ephemeris, mean lilith <=1.6", the 8 new
 house systems exact; sidereal adds <=0.3". TS engine pinned to a Python
-reference by 3,397 golden checks (worst diff 0.41e-9 arcsec).
+reference by 3,397 golden checks (worst diff 0.61e-9 arcsec).
 Repo: https://github.com/heavyblotto/caelus
 ## Install
 

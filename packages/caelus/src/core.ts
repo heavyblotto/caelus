@@ -50,6 +50,12 @@ export interface EngineData {
   /** Heliocentric ecliptic-J2000 Chebyshev packs by body id (ceres,
    *  pallas, juno, vesta, pholus, ...). Same pipeline as Chiron. */
   chebPacks?: Record<string, ChebData>;
+  /** Heliocentric Earth pack (fit_planet.py earth). Not a chebPacks entry:
+   *  Earth is never a chart body, it is the observer. Every geocentric
+   *  direction is `body - earth`, so Earth's own VSOP error is a floor under
+   *  every other body, amplified by 1/distance -- which is why packing it
+   *  lifts the whole chart at once (range-expansion.md Tier C). */
+  earthPack?: ChebData;
   /** Hamburg-school (Uranian) constant-element orbits; see fit_uranian.py. */
   keplerPack?: KeplerPack;
   /** Fixed-star catalog (HYG-derived; ICRS J2000 + proper motions). */
@@ -167,6 +173,28 @@ export function jdTT(jdUt: number): number {
 }
 
 // ---------------------------------------------------------------- VSOP87D
+/**
+ * Heliocentric Earth of date, preferring `data.earthPack` over VSOP87D.
+ *
+ * The Python side can intercept inside Vsop.heliocentric because it dispatches
+ * on a body name; here vsopHeliocentric takes a series, so Earth's six call
+ * sites go through this helper instead. Same contract as vsopHeliocentric:
+ * ecliptic coordinates OF DATE. Inert until a pack is loaded.
+ */
+export function earthHeliocentric(
+  data: EngineData, jde: number,
+): [number, number, number] {
+  const pack = data.earthPack;
+  if (!pack) return vsopHeliocentric(data.vsop.earth, jde);
+  const [x, y, z] = new ChebSeries(pack).xyz(jde);
+  let L = mod(Math.atan2(y, x), TWO_PI);
+  let B = Math.atan2(z, Math.hypot(x, y));
+  const R = Math.sqrt(x * x + y * y + z * z);
+  // The pack is ecliptic J2000; this returns coordinates of date.
+  [L, B] = precessEcliptic(L, B, J2000, jde);
+  return [mod(L, TWO_PI), B, R];
+}
+
 export function vsopHeliocentric(
   series: VsopSeries, jde: number,
 ): [number, number, number] {
@@ -373,7 +401,7 @@ function eclJ2000ToEclDate(
 function geoVector(
   data: EngineData, name: string, jde: number,
 ): [number, number, number] {
-  const [L0, B0, R0] = vsopHeliocentric(data.vsop.earth, jde);
+  const [L0, B0, R0] = earthHeliocentric(data, jde);
   const [L, B, R] = vsopHeliocentric(data.vsop[name], jde);
   return [
     R * Math.cos(B) * Math.cos(L) - R0 * Math.cos(B0) * Math.cos(L0),
@@ -403,7 +431,7 @@ export function planetApparent(
 export function sunApparent(
   data: EngineData, jde: number,
 ): [number, number, number] {
-  const [L0, B0, R0] = vsopHeliocentric(data.vsop.earth, jde);
+  const [L0, B0, R0] = earthHeliocentric(data, jde);
   let lon = mod(L0 + Math.PI, TWO_PI);
   let lat = -B0;
   [lon, lat] = fk5Correction(lon, lat, jde);
@@ -794,7 +822,7 @@ export function plutoApparent(
 ): [number, number, number] {
   const helioJ2000 = (tJde: number): [number, number, number] =>
     plutoHeliocentric(data, tJde);
-  const [L0d, B0d, R0d] = vsopHeliocentric(data.vsop.earth, jde);
+  const [L0d, B0d, R0d] = earthHeliocentric(data, jde);
   const [Lj, Bj] = precessEcliptic(L0d, B0d, jde, J2000);
   const ex = R0d * Math.cos(Bj) * Math.cos(Lj);
   const ey = R0d * Math.cos(Bj) * Math.sin(Lj);
@@ -837,7 +865,7 @@ export function plutoApparent(
 export function chironApparent(
   data: EngineData, cheb: XyzSource, jde: number,
 ): [number, number, number] {
-  const [L0, B0, R0] = vsopHeliocentric(data.vsop.earth, jde);
+  const [L0, B0, R0] = earthHeliocentric(data, jde);
   const [Lj, Bj] = precessEcliptic(L0, B0, jde, J2000);
   const ex = R0 * Math.cos(Bj) * Math.cos(Lj);
   const ey = R0 * Math.cos(Bj) * Math.sin(Lj);

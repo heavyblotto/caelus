@@ -45,13 +45,26 @@ def _parse_vector_block(text):
 
 
 def _step_size_str(step_days):
-    """Horizons STEP_SIZE: integer days as 'Nd'; sub-day as whole hours ('6 h')."""
+    """Horizons STEP_SIZE: integer days as 'Nd'; sub-day as whole hours
+    ('6 h') or, below an hour, whole minutes ('90 m').
+
+    The minute form exists because the fastest, closest bodies need it: the
+    interpolation chord scales with the square of the step, and at 3 hours it
+    still floors Venus at 168 km (0.83" at closest approach). Whole hours
+    cannot express the 90-minute step that brings the inner planets into line
+    with the rest of the wide band.
+    """
     if step_days == int(step_days):
         return f"'{int(step_days)}d'"
     hours = round(step_days * 24)
     if hours >= 1 and abs(hours / 24 - step_days) < 1e-9:
         return f"'{hours} h'"
-    raise ValueError(f"unsupported Horizons step {step_days} days (use whole days or whole hours)")
+    minutes = round(step_days * 1440)
+    if minutes >= 1 and abs(minutes / 1440 - step_days) < 1e-9:
+        return f"'{minutes} m'"
+    raise ValueError(
+        f"unsupported Horizons step {step_days} days "
+        f"(use whole days, hours, or minutes)")
 
 
 def _get_with_retry(url, timeout=180, attempts=5):
@@ -272,6 +285,21 @@ class HorizonsCache:
         self._zs = np.array(zs_all)
 
     def sample(self, jds):
+        """Interpolate the cached vectors at arbitrary epochs.
+
+        This is the accuracy ceiling of every pack fit through it: fit()
+        evaluates the body here, so a pack can never be more faithful than this
+        interpolation. np.interp is LINEAR -- the chord across a step of a body
+        that curves within it floors the fit at ~(1/8)|a|h^2, which is why
+        Mercury and Jupiter could not clear their bars at any (seg, degree)
+        even at 90-minute / 1-day sampling. Catmull-Rom is a local cubic on the
+        uniform grid, O(h^4): at these step sizes that drops the floor by two
+        to three orders of magnitude on the SAME cached rows, no refetch.
+
+        Fitting-side only. A finished pack is evaluated by ChebSeries (Clenshaw)
+        in both engines, which never see this function, so runtime parity is
+        untouched.
+        """
         import numpy as np
 
         jds = np.atleast_1d(jds).astype(float)
@@ -281,10 +309,43 @@ class HorizonsCache:
                 f"(requested {jds.min()}..{jds.max()})"
             )
         return (
-            np.interp(jds, self._jds, self._xs),
-            np.interp(jds, self._jds, self._ys),
-            np.interp(jds, self._jds, self._zs),
+            _catmull_rom(jds, self._jds, self._xs),
+            _catmull_rom(jds, self._jds, self._ys),
+            _catmull_rom(jds, self._jds, self._zs),
         )
+
+
+def _catmull_rom(x, xp, fp):
+    """Vectorized Catmull-Rom cubic interpolation on a uniform grid.
+
+    xp must be strictly increasing and evenly spaced (the Horizons caches are,
+    after chunk dedup). For x in [xp[i], xp[i+1]] with neighbours i-1..i+2 and
+    t=(x-xp[i])/h, the Catmull-Rom basis is:
+
+        0.5*( 2*p1
+            + (-p0 + p2) * t
+            + (2*p0 - 5*p1 + 4*p2 - p3) * t^2
+            + (-p0 + 3*p1 - 3*p2 + p3) * t^3 )
+
+    Indices are clamped so the two end intervals reuse the nearest interior
+    stencil; the cached span is padded well past any fit window, so those
+    edges are never the epochs a fit actually samples.
+    """
+    import numpy as np
+
+    h = xp[1] - xp[0]
+    i = np.clip(((x - xp[0]) / h).astype(int), 1, len(xp) - 3)
+    t = (x - xp[i]) / h
+    p0 = fp[i - 1]
+    p1 = fp[i]
+    p2 = fp[i + 1]
+    p3 = fp[i + 2]
+    return 0.5 * (
+        2.0 * p1
+        + (-p0 + p2) * t
+        + (2.0 * p0 - 5.0 * p1 + 4.0 * p2 - p3) * t * t
+        + (-p0 + 3.0 * p1 - 3.0 * p2 + p3) * t * t * t
+    )
 
 
 class ChironHorizonsCache(HorizonsCache):

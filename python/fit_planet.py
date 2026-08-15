@@ -59,6 +59,43 @@ DATA_ENGINE = os.path.join(HERE, "astroengine", "data")
 # opposition it sits 0.37 AU away and angular error is 1/distance).
 PLANETS = {
     #         command  step   segs (days)          true_target (AU)
+    # Earth is the highest-leverage pack in this table even though Earth is
+    # never a chart body: every geocentric direction is `body - earth`, so
+    # Earth's own error is a floor under every other body, amplified by
+    # 1/distance. Measured against DE441, VSOP87D Earth is off by 2763 km at
+    # 2965 (3.81" at 1 AU, 10.3" at Mars's perigee), which is exactly the
+    # ~4" floor the unpacked bodies show and the reason the Mars pack alone
+    # bought almost nothing. Command 399 is the Earth CENTER, matching what
+    # VSOP87D's "earth" series represents (not the Earth-Moon barycenter, 3).
+    # Its bar is the tightest here because the error is divided by the
+    # distance to whatever body is being observed, not by 1 AU.
+    #
+    # The step is set by the interpolation chord, not the polynomial: Earth
+    # moves fast enough that a 0.5-day cache floors any fit at ~1440 km
+    # (measured, and the first mint failed on exactly that plateau -- flat
+    # across every degree). The chord scales with h^2, so 3 hours gives ~90 km
+    # = 0.124" at 1 AU, which sits at the same level as the Mars pack's own
+    # 0.135" contribution. 90-minute sampling would reach 22 km, but that is
+    # finer than the targets Earth is differenced against, so it buys nothing
+    # for twice the fetch.
+    "earth":   ("399", 0.125, (16, 32, 64),        7e-7),
+    # Mercury and Venus join once Earth is packed. They looked fine before
+    # (0.5" and 4.3" wide) because Earth's own VSOP error was partly
+    # CANCELLING theirs -- same theory generation, correlated drift. Packing
+    # Earth removed that accidental cancellation and exposed the real figures:
+    # Venus's own heliocentric error is 1877 km at 2965 (9.24" at 0.28 AU,
+    # matching the 8.79" it then measured), Mercury's 1105 km (2.50").
+    #
+    # 90-minute sampling, the finest step in this table, because these two are
+    # the fastest bodies AND the closest: their error is divided by a small
+    # geocentric distance, so the same kilometres buy fewer arcseconds. A
+    # 3-hour cache floors Venus at 168 km (0.83" at 0.28 AU -- measured, the
+    # first attempt failed on exactly that plateau) and Mercury near 307 km.
+    # Halving the step quarters the chord: 42 km for Venus (0.21"), which
+    # keeps them in line with the rest of the wide band rather than leaving
+    # the inner planets as the outliers everything else no longer is.
+    "mercury": ("199", 0.0625, (8, 16, 32),        3e-7),
+    "venus":   ("299", 0.0625, (16, 32, 64),       3e-7),
     "mars":    ("4",   0.125, (16, 32, 64),        5e-7),
     "jupiter": ("5",   1.0,   (128, 256, 512),     1e-6),
     "saturn":  ("6",   1.0,   (256, 512, 1024),    1e-6),
@@ -87,7 +124,15 @@ def mint(name, year0, year1, step_override=None):
               "bar assumes the default sampling and may be unreachable at a "
               "coarser step (chord error scales with step^2).")
     jd0, jd1 = julian_day(year0, 1, 1), julian_day(year1, 1, 1)
-    suffix = "" if step == 1.0 else f"_{round(step * 24)}h"
+    # The suffix must identify the step exactly. Rounding to whole hours
+    # collides: 0.0625 d (90 min) and 0.0833 d (2 h) both round to "_2h", so
+    # two different caches would share a filename. Minutes below an hour.
+    if step == 1.0:
+        suffix = ""
+    elif step * 24 == int(step * 24):
+        suffix = f"_{int(step * 24)}h"
+    else:
+        suffix = f"_{round(step * 1440)}m"
     cache_path = os.path.join(
         HERE, f"{name}_horizons_cache_{year0}_{year1}{suffix}.json")
     cache = HorizonsCache(cache_path, command=command,

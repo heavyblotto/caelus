@@ -133,7 +133,28 @@ class Vsop:
         return Vsop._cache[key]
 
     def heliocentric(self, name, jde):
-        """Heliocentric ecliptic spherical coords of date: (L rad, B rad, R au)."""
+        """Heliocentric ecliptic spherical coords of date: (L rad, B rad, R au).
+
+        Earth prefers an `earth_cheb.json` pack when one is on disk. This is
+        the highest-leverage interception in the engine: Earth is never a chart
+        body, but every geocentric direction is `body - earth`, so Earth's own
+        error is a floor under every other body (amplified by 1/distance -- see
+        range-expansion.md Tier C). Routing it here rather than at each call
+        site means all five Earth consumers -- apparent planets, the Sun, the
+        packed-body pipeline, light-time iteration, and the astrometric
+        validator leg -- pick the pack up at once. Inert until a pack exists.
+        """
+        if name == "earth":
+            pack = _earth_cheb()
+            if pack is not None:
+                x, y, z = pack.xyz(jde)
+                L = math.atan2(y, x) % (2 * math.pi)
+                B = math.atan2(z, math.hypot(x, y))
+                R = math.sqrt(x * x + y * y + z * z)
+                # The pack is ecliptic J2000; this method contracts to return
+                # coordinates of date, as the VSOP series does.
+                L, B = _precess_ecliptic(L, B, J2000, jde)
+                return L % (2 * math.pi), B, R
         t = (jde - J2000) / 365250.0  # Julian millennia
         s = self._planet(name)
         out = []
@@ -289,6 +310,23 @@ def moon_apparent(jde):
 # ---------------------------------------------------------------- precise moon
 _MOON_CHEB = None
 C_KM_PER_DAY = 299792.458 * 86400.0
+
+
+_EARTH_CHEB = None
+
+
+def _earth_cheb():
+    """Lazy-load the heliocentric Earth pack (fit_planet.py earth), or None.
+
+    Kept separate from the chart-body pack loader because Earth is not a chart
+    body -- it is the observer, consumed by Vsop.heliocentric.
+    """
+    global _EARTH_CHEB
+    if _EARTH_CHEB is None:
+        from .chebyshev import ChebSeries
+        p = os.path.join(DATA, "earth_cheb.json")
+        _EARTH_CHEB = ChebSeries.load(p) if os.path.exists(p) else False
+    return _EARTH_CHEB or None
 
 
 def _moon_cheb():

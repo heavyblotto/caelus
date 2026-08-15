@@ -63,10 +63,18 @@ export function loadNodeData(
   // drifts to 3-17" against the modern ephemeris at the 1000/3000 edges
   // (range-expansion.md). No pack, no behaviour change.
   for (const b of ["ceres", "pallas", "juno", "vesta", "pholus", "pluto",
-    "mars", "jupiter", "saturn", "uranus", "neptune"]) {
+    "mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune"]) {
     if (existsSync(join(dir, `${b}_cheb.json`))) {
       (data.chebPacks ??= {})[b] = j(`${b}_cheb.json`);
     }
+  }
+  // Earth is not a chart body but it is the observer: every geocentric
+  // direction is `body - earth`, so its own VSOP error is a floor under every
+  // other body, amplified by 1/distance (2763 km at 2965 = 3.8" at 1 AU,
+  // 10.3" at Mars's perigee). Kept out of chebPacks because it is consumed by
+  // the VSOP layer rather than as a body.
+  if (existsSync(join(dir, "earth_cheb.json"))) {
+    data.earthPack = j("earth_cheb.json");
   }
   if (moonTier !== "none") {
     // The npm package ships only the embedded tier (1920-2080); the full

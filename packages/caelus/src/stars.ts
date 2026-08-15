@@ -9,7 +9,7 @@
  * catalog rows: <=0.3 arcsec over 1900-2099.
  */
 import {
-  DEG, ARCSEC, J2000, mod, nutation, precessEcliptic, vsopHeliocentric,
+  DEG, ARCSEC, J2000, mod, nutation, precessEcliptic, earthHeliocentric,
   EngineData,
 } from "./core.js";
 
@@ -72,7 +72,7 @@ export function starApparent(
     Math.sin(ra2) * Math.cos(e0) + Math.tan(dec2) * Math.sin(e0), Math.cos(ra2),
   ), TWO_PI);
   [lon, lat] = precessEcliptic(lon, lat, J2000, jde);
-  const [L0] = vsopHeliocentric(data.vsop.earth, jde);
+  const [L0] = earthHeliocentric(data, jde);
   const sunLon = mod(L0 + Math.PI, TWO_PI);
   const T = (jde - J2000) / 36525.0;
   const k = 20.4898 * ARCSEC;

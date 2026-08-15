@@ -18,7 +18,8 @@ URANIANS = ["cupido", "hades", "zeus", "kronos", "apollon", "admetos",
             "vulkanus", "poseidon"]
 # Planets whose VSOP87D series a Horizons-fit Chebyshev pack may supersede
 # when `{body}_cheb.json` is on disk (fit_planet.py; the Pluto pattern).
-PLANET_PACK_BODIES = {"mars", "jupiter", "saturn", "uranus", "neptune"}
+PLANET_PACK_BODIES = {"mercury", "venus", "mars", "jupiter", "saturn",
+                      "uranus", "neptune"}
 EXTRA_BODIES = (["mean_lilith", "true_lilith", "intp_apog"]
                 + ASTEROIDS + URANIANS)
 

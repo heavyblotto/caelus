@@ -67,4 +67,6 @@ python/moon_horizons_cache.json
 # and are re-derivable from Horizons by re-running the fit scripts. The packs
 # they produce ARE committed, which is what consumers and the goldens need.
 python/*_horizons_cache_[0-9]*.json
+# In-progress download checkpoints (HorizonsCache resume support). Pure scratch.
+python/*.part
 .vercel
