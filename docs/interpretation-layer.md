@@ -105,7 +105,9 @@ geometric, time-only `query` predicates cannot.
   `hasAspect({ a, b, between, aspect, phase, minStrength })`,
   `hasPattern({ kind, body })`, `hasSignature(facet, value)`,
   `hasAngle(angle, sign)`, `hasDispositor({ body })`, `hasReception({ body })`,
-  `hasStar({ body, star })`, `hasLot({ lot, sign, house })`.
+  `hasStar({ body, star })`, `hasLot({ lot, sign, house })`,
+  `hasParallel({ body, between, declination, maxOrb })`,
+  `hasOutOfBounds({ body, minMargin })`.
 - combinators: `matchAll(...)` (every selector; unions atoms), `matchAny(...)`
   (any; unions the matched), `matchNone(sel)` (an absence test; no atoms).
 

@@ -103,6 +103,12 @@ Hermetic lots, the Part of Fortune and its companions (`lot:fortune`, from
 `Engine.lots`). Match them with `hasStar({ star: "Algol" })` and
 `hasLot({ lot: "fortune" })`.
 
+**Parallel** and **out-of-bounds** atoms are declination facts, which longitude
+cannot express: two bodies can hold a parallel while unaspected
+(`parallel:mars~venus:parallel`), and a body can run beyond the obliquity band
+(`oob:moon`). Match them with `hasParallel({ between: ["mars", "venus"] })` and
+`hasOutOfBounds({ body: "moon" })`.
+
 ### Diachronic and relational atoms
 
 The natal projection extends via `ContextOptions` and two helpers:

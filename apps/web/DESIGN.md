@@ -20,7 +20,7 @@ design's job is hierarchy and legibility, not persuasion.
    section labels. New UI reuses these classes; inline style objects are not
    the mechanism for anything a second component might want.
 4. **Scan first, read second.** Capability lists are titled grid entries
-   (`.capability-grid`) — the title carries the scan, one line carries the
+   (`.capability-grid`): the title carries the scan, one line carries the
    detail, the link carries the depth. Prose paragraphs are for reasoning,
    not for enumerations.
 5. **Figures are sized to their information.** A preview wheel is a thumbnail
@@ -54,7 +54,7 @@ links, selected states, the geometry. Peach blossom (`--peach-blossom`, with
 `--warm` as its semantic alias) is the single warm counterpoint. The hue is
 the extra-spectral one: the old name for the color on the line of purples
 that closes the spectrum into a wheel, matched by no wavelength and existing
-only in perception — a fitting companion to charts that are themselves
+only in perception, a fitting companion to charts that are themselves
 constructed readings of the sky. It sits between red and the site's violet,
 so the two accents are neighbors on the wheel rather than rivals. Reserved
 for
