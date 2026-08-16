@@ -148,6 +148,7 @@
       "id": "embedded-bundle-gzip",
       "source": "bundles.embedded.gzipKb",
       "round": 0,
+      "tolerance": 4,
       "render": [
         "~{value} KB"
       ],
@@ -166,6 +167,7 @@
       "id": "wheel-bundle-gzip",
       "source": "bundles.wheel.gzipKb",
       "round": 1,
+      "tolerance": 0.5,
       "render": [
         "~{value} KB"
       ],
