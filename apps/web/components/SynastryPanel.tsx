@@ -8,10 +8,10 @@ import {
 } from "caelus";
 import { embeddedData } from "caelus/data-embedded";
 import { toUT } from "caelus-birth";
-import { GLYPHS } from "caelus-wheel";
+import { GLYPHS, MultiWheel } from "caelus-wheel";
 import CityPicker, { type City } from "./CityPicker";
-import BiWheel, { type SynContact } from "./BiWheel";
-import { ASPECT_GLYPH, aspectColor, crossAspect, ASPECTABLE_ORDER as GRID } from "../lib/chart-display";
+import { ASPECT_GLYPH, aspectColor, crossAspect, ringContacts, type SynContact, ASPECTABLE_ORDER as GRID } from "../lib/chart-display";
+import { WHEEL_THEME } from "../lib/wheelTheme";
 
 const ReadingTab = dynamic(() => import("./ReadingTab"), {
   ssr: false,
@@ -168,13 +168,14 @@ export default function SynastryPanel() {
           </p>
 
           <figure className="chart-fluid" style={{ margin: "1rem auto 0", maxWidth: "24rem", textAlign: "center" }}>
-            <BiWheel
-              inner={a.chart}
-              outer={b.chart}
-              contacts={contacts}
+            <MultiWheel
+              rings={[
+                { chart: a.chart, label: people[0].name || "A" },
+                { chart: b.chart, label: people[1].name || "B", color: "var(--accent)" },
+              ]}
+              contacts={ringContacts(contacts)}
               size={420}
-              innerLabel={people[0].name || "A"}
-              outerLabel={people[1].name || "B"}
+              theme={WHEEL_THEME}
             />
             <figcaption className="dim small" style={{ marginTop: "0.3rem" }}>
               {people[0].name || "A"} inner · {people[1].name || "B"} outer · the inter-chart aspect web

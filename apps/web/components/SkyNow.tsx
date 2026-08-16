@@ -10,8 +10,7 @@ import {
 } from "caelus";
 import { embeddedData } from "caelus/data-embedded";
 import { toUT, type UTResult } from "caelus-birth";
-import { ChartWheel, ChartSphere, AstroMap, GLYPHS } from "caelus-wheel";
-import BiWheel, { type SynContact } from "./BiWheel";
+import { ChartWheel, ChartSphere, AstroMap, MultiWheel, GLYPHS } from "caelus-wheel";
 import Aspectarian from "./Aspectarian";
 import ChartControls from "./ChartControls";
 import InsightsTab from "./InsightsTab";
@@ -21,7 +20,7 @@ import DeclinationTab from "./DeclinationTab";
 import StarsTab from "./StarsTab";
 import SkyViewTab from "./SkyViewTab";
 import { WHEEL_THEME, WHEEL_LINE_COLORS } from "../lib/wheelTheme";
-import { crossAspect, cell } from "../lib/chart-display";
+import { crossAspect, ringContacts, type SynContact, cell } from "../lib/chart-display";
 import { type Share, b64urlEncode, readUrlState } from "../lib/share";
 
 // The interpretation panel pulls in the public-domain delineation corpus
@@ -447,7 +446,15 @@ export default function SkyNow() {
                   {view === "sphere" && <ChartSphere chart={chart} size={460} theme={WHEEL_THEME} />}
                   {view === "map" && mapLines && <AstroMap lines={mapLines} width={460} height={230} theme={WHEEL_THEME} colors={WHEEL_LINE_COLORS} />}
                   {view === "transits" && transit && (
-                    <BiWheel inner={chart} outer={transit.chart} contacts={transit.contacts} size={460} innerLabel="natal" outerLabel="transit" />
+                    <MultiWheel
+                      rings={[
+                        { chart, label: "natal" },
+                        { chart: transit.chart, label: "transit", color: "var(--accent)" },
+                      ]}
+                      contacts={ringContacts(transit.contacts)}
+                      size={460}
+                      theme={WHEEL_THEME}
+                    />
                   )}
                   {view === "transits" && (
                     <p className="dim small" style={{ margin: "0.5rem 0 0" }}>

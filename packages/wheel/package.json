@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "node dist/test/render.test.js"
+    "test": "node dist/test/render.test.js && node dist/test/multiwheel.test.js"
   },
   "license": "MIT",
   "publishConfig": {

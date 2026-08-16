@@ -294,6 +294,8 @@ export function ChartWheel({
   );
 }
 
+export * from "./multiwheel.js";
+
 export * from "./sphere.js";
 
 export * from "./astromap.js";

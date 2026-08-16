@@ -40,6 +40,21 @@ export function crossAspect(lonA: number, lonB: number): { aspect: string; orb: 
   return best;
 }
 
+/** An inter-chart contact: one body in each chart plus the aspect between
+ *  them. The shape the cross-aspect scans produce; ringContacts() adapts it
+ *  for a two-ring MultiWheel. */
+export interface SynContact { aBody: string; bBody: string; aspect: string; orb: number }
+
+/** MultiWheel `contacts` for a two-ring wheel (ring 0 = inner chart). */
+export function ringContacts(contacts: SynContact[]) {
+  return contacts.map((k) => ({
+    a: { ring: 0, body: k.aBody },
+    b: { ring: 1, body: k.bBody },
+    aspect: k.aspect,
+    orb: k.orb,
+  }));
+}
+
 /** Human labels for the configuration kinds from detectPatterns(). */
 export const PATTERN_LABEL: Record<string, string> = {
   grand_cross: "Grand cross", mystic_rectangle: "Mystic rectangle", kite: "Kite",
