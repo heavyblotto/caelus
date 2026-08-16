@@ -91,7 +91,7 @@ const CAPABILITIES: Array<{ title: string; href: string; desc: ReactNode }> = [
   {
     title: "Chart provenance",
     href: "/docs/provenance",
-    desc: <>Declare what a chart is — forecast, mythic, archetypal — and route to the ephemeris or the compiler.</>,
+    desc: <>Declare what a chart is (forecast, mythic, archetypal) and route to the ephemeris or the compiler.</>,
   },
   {
     title: "MCP server",

@@ -160,6 +160,22 @@ for (const claim of registry.claims) {
   }
   const value = renderValue(claim, raw);
   const expected = claim.render.map((r) => r.replaceAll("{value}", String(value)));
+  // A claim with a numeric "tolerance" (in source units) accepts any rendered
+  // number within that distance of the raw measurement. Bundle gzip sizes need
+  // it: CI pins Node 22 while laptops run newer majors, and zlib's gzip output
+  // differs between Node versions (the minified bytes are identical, the
+  // compressed size is not). Exact equality would make the gate depend on
+  // which Node measured; counts and accuracy figures stay exact.
+  const withinTolerance = (n) => Math.abs(n - raw) <= claim.tolerance;
+  const shapeMatches = (template, text) => {
+    const parts = template.split("{value}").map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    const re = new RegExp(parts.join("(\\d+(?:\\.\\d+)?)"), "g");
+    let m;
+    while ((m = re.exec(text)) !== null) {
+      if (withinTolerance(Number(m[1]))) return true;
+    }
+    return false;
+  };
 
   // appearsIn files must contain the value AND carry no competing one.
   // competingIn files are only swept for competing values: pages that render
@@ -183,10 +199,17 @@ for (const claim of registry.claims) {
     const text = readFileSync(fpath, "utf8").replaceAll("**", "");
 
     // 1. The expected rendered value must be present (any one render form).
-    const present = expected.some((e) => text.includes(e));
+    //    Tolerance claims accept any number within range instead of the exact
+    //    rendered value.
+    const present = claim.tolerance !== undefined
+      ? claim.render.some((r) => shapeMatches(r, text))
+      : expected.some((e) => text.includes(e));
     if (requirePresent && !present) {
+      const want = claim.tolerance !== undefined
+        ? `${expected.join(" | ")} ± ${claim.tolerance}`
+        : `one of [${expected.join(" | ")}]`;
       problems.push(
-        `[${claim.id}] ${file}: expected one of [${expected.join(" | ")}] (from ${claim.source}=${value}) — not found`,
+        `[${claim.id}] ${file}: expected ${want} (from ${claim.source}=${value}) — not found`,
       );
     }
 
@@ -196,8 +219,13 @@ for (const claim of registry.claims) {
       let m;
       while ((m = re.exec(text)) !== null) {
         const matched = m[0];
-        // The match is OK only if it is (or contains) one of the expected renders.
-        const ok = expected.some((e) => matched.includes(e) || e.includes(matched));
+        // The match is OK only if it is (or contains) one of the expected
+        // renders, or -- for tolerance claims -- carries a number within
+        // range of the measurement.
+        const num = claim.tolerance !== undefined ? matched.match(/\d+(?:\.\d+)?/) : null;
+        const ok = num
+          ? withinTolerance(Number(num[0]))
+          : expected.some((e) => matched.includes(e) || e.includes(matched));
         if (!ok) {
           problems.push(
             `[${claim.id}] ${file}:${lineOf(text, m.index)}: competing value "${matched.trim()}" — expected ${value}`,
