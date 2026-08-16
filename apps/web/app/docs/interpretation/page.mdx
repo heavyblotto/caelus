@@ -83,7 +83,7 @@ Every atom carries five common fields:
   so it can always be traced back to the fact it rests on.
 - **`kind`**: `placement | aspect | pattern | signature | angle | dispositor |
   reception | star | lot | transit | synastry | composite | timelord | dignity |
-  nakshatra | varga | yoga`.
+  nakshatra | varga | yoga | parallel | outOfBounds`.
 - **`bodies`**: the body ids involved, for filtering and cross-reference.
 - **`salience`**: a transparent, overridable prominence score (below).
 - **`text`**: a plain-language statement of the fact, with no interpretation
@@ -100,6 +100,12 @@ fixed star (`star:jupiter:Sirius`, from `Engine.starConjunctions`), and the
 Hermetic lots, the Part of Fortune and its companions (`lot:fortune`, from
 `Engine.lots`). Match them with `hasStar({ star: "Algol" })` and
 `hasLot({ lot: "fortune" })`.
+
+**Parallel** and **out-of-bounds** atoms are declination facts, which longitude
+cannot express: two bodies can hold a parallel while unaspected
+(`parallel:mars~venus:parallel`), and a body can run beyond the obliquity band
+(`oob:moon`). Match them with `hasParallel({ between: ["mars", "venus"] })` and
+`hasOutOfBounds({ body: "moon" })`.
 
 ### Diachronic and relational atoms
 

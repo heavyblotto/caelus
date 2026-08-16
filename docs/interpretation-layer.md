@@ -38,7 +38,7 @@ Every atom carries:
   generated claim can point at the fact it rests on.
 - `kind` -- `placement | aspect | pattern | signature | angle | dispositor |
   reception | star | lot | transit | synastry | composite | timelord | dignity |
-  nakshatra | varga | yoga`.
+  nakshatra | varga | yoga | parallel | outOfBounds`.
 - `bodies` -- the body ids involved, for filtering and cross-reference.
 - `salience` -- a transparent, overridable score (see below).
 - `text` -- a plain-language statement of the fact, no interpretation
@@ -94,7 +94,9 @@ geometric, time-only `query` predicates cannot.
   `hasAspect({ a, b, between, aspect, phase, minStrength })`,
   `hasPattern({ kind, body })`, `hasSignature(facet, value)`,
   `hasAngle(angle, sign)`, `hasDispositor({ body })`, `hasReception({ body })`,
-  `hasStar({ body, star })`, `hasLot({ lot, sign, house })`.
+  `hasStar({ body, star })`, `hasLot({ lot, sign, house })`,
+  `hasParallel({ body, between, declination, maxOrb })`,
+  `hasOutOfBounds({ body, minMargin })`.
 - combinators: `matchAll(...)` (every selector; unions atoms), `matchAny(...)`
   (any; unions the matched), `matchNone(sel)` (an absence test; no atoms).
 

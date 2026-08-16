@@ -122,7 +122,7 @@ export default function Provenance() {
       <P>
         Caelus is MIT licensed, so it can ship in closed source, SaaS, mobile,
         or edge bundles without AGPL obligations and without deploying
-        ephemeris files. The engine and its embedded data come to ~151 KB
+        ephemeris files. The engine and its embedded data come to ~153 KB
         gzipped, which is small enough to compute a full chart in the browser,
         and the same code runs on the edge API and in the{" "}
         <A href="https://www.npmjs.com/package/caelus-mcp">MCP Server</A>.
