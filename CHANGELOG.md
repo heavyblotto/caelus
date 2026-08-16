@@ -7,6 +7,124 @@ semver (currently 0.1.x). Numbers quoted here are as measured at release time;
 current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
+## Unreleased
+
+### The interpretation projection learns the facts a chart does not state
+
+Eight fact kinds joined `interpretationContext`, taking the `FactKind` union
+from 17 to 25. Each closes a gap a reader takes for granted but a `Chart`
+cannot express, and each lands with a golden that recomputes the atom set from
+the chart's own numbers rather than pinning a snapshot.
+
+- **`angleContact`** — a body conjunct the ASC/DSC/MC/IC *point*, which is not
+  an aspect (the angles carry no speed, so there is no phase) and not the
+  angular *house*. `angleOrb` option, default 8°. Selector `hasAngleContact`.
+- **`transitHouse`** — a transiting body's natal house, true whether or not
+  anything is in orb: the "Saturn is crossing your 7th" fact. New
+  `transitHouses()` in `relational.ts`; selector `hasTransitHouse`.
+- **`station`** — a body turning retrograde or direct near the instant, inside
+  an editorial window (`stationWindowDays`, default ±5). Selector `hasStation`.
+- **`return`** — a body within orb of its own natal longitude, *numbered*, so a
+  first Saturn return is addressable apart from a second. New `activeReturns()`
+  (`ReturnHit`); Neptune and Pluto sit out, since no one lives to see them
+  return. Selector `hasReturn`, filtering `nth` or `minNth`.
+- **`lunation`** — New and Full Moons near the instant, located in the natal
+  houses, eclipse-flagged through the pinned eclipse search, listing the natal
+  bodies the syzygy falls on. New `activeLunations()` (`LunationHit`). Selector
+  `hasLunation`.
+- **`solarPhase`** — cazimi, combust, or under the beams for the classical
+  five, computed from the chart's own longitudes at the pinned electional
+  thresholds. Fires on a birth chart and on the moving sky alike. Selector
+  `hasSolarPhase`.
+- **`compositeAspect`** — an aspect between two composite placements. The
+  composite chart is a set of midpoints, so its internal geometry is a fact
+  about the relationship rather than about either person; `composite` atoms
+  already gave the placements, this gives the relations among them. New
+  `compositeAspects()` in `relational.ts`; selector `hasCompositeAspect`.
+- **`parallel`** and **`outOfBounds`** shipped in 0.24 but were never written
+  into the docs; they are listed here because the doc surfaces now describe
+  them for the first time.
+
+Three engine-semantic gaps closed, each changing *output*, not just API:
+
+- **Node aspects.** `findAspects` excludes both nodes (`NOT_ASPECTABLE`), so no
+  node aspect ever reached an interpreter. The projection now computes them
+  itself over the chart's own longitudes, with the same aspect table, default
+  orbs, and phase/strength arithmetic. The engine boundary is unchanged: one
+  node projects (true, or mean when it is the only one present), and
+  `chart.aspects` still carries none.
+- **The node as a transit target.** `transitAspects` admits one natal node as a
+  target while the transiting set stays as it was, so
+  `transit:<body>~natal_true_node:<aspect>` atoms now exist.
+- **Peregrine.** A classical planet holding none of the five essential
+  dignities at its degree is marked `"peregrine"` in its placement atom's
+  `dignities` (Lilly, via the pinned `dignityScore`, sect-aware). Chart-level
+  `Position.dignities` is untouched — this is a projection-level enrichment, so
+  dignity selectors can match the state without the chart asserting it.
+
+`TimelordAtom` gained `house` (the profected house) and `under` (the enclosing
+period's lord: a firdaria major over its sub, a mahadasha over its antardasha),
+which makes period *pairs* addressable; `hasTimelord` filters both.
+`enrichContextOptions` projects transit houses, stations, returns, and
+lunations by default, with flags and windows for each.
+
+**Minor-version notes.** `SalienceWeights` gained three required fields
+(`planetReturn`, `lunation`, `solarPhase`), so a consumer writing a complete
+object literal must add them; `Partial<>` overrides through
+`ContextOptions.salience` are unaffected. The `FactKind` union grew, which
+breaks exhaustive `switch` statements over it.
+
+### Docs stop drifting from the engine
+
+`scripts/check-docs.mjs` (in `preflight` and CI) asserts that the fact-kind
+union written by hand in `docs/interpretation-layer.md` and the public
+`/docs/interpretation` page matches `FactKind` in the source, and that every
+exported selector is mentioned somewhere in the docs. This is the same shape of
+guard as `check-versions` and `check-tarball`, and it exists for the same
+reason: both doc surfaces had been missing `parallel` and `outOfBounds` since
+they shipped, and nobody noticed, because nothing looked.
+
+### Other
+
+- `caelus-wheel` gains **`MultiWheel`**: a rings API taking any chart in any
+  ring, up to four. Ring 0 orients the wheel and provides the houses, and
+  inter-ring contacts are computed in the core, so a bi-wheel, a tri-wheel
+  (natal + progressed + transits), and a synastry wheel are one component
+  rather than three. The playground's single-purpose `BiWheel` is removed;
+  `SynastryPanel` and `SkyNow` render `MultiWheel` instead. 24-check render
+  test in the package suite and in CI.
+- New package `caelus-delineations-house` (0.1.0, unpublished so far): the
+  original interpretation corpus written for Caelus Free, and the counterpart
+  to the public-domain `caelus-delineations-pd`. The content grid is an
+  enumerable coverage contract rather than a claim — `fullGrid()` names every
+  cell the corpus owes, so coverage is a computation. **1,858 cells written and
+  validated** (natal placements, aspects, angles, dignities, patterns 812;
+  transits by aspect, by house, and stations 738; time-lords, lunations,
+  eclipses, returns, and solar conditions 268; the birth-time finder bank 40),
+  against a grid of 2,622 with the relationship batch enumerated and unwritten.
+  Every entry compiles through the pd package's selector compiler, so binding
+  is checked the same way, and the harness proves each one fires for its
+  condition and not for a shifted one.
+  Corpus lints: length bands per family, banned phrases, a Flesch-Kincaid gate,
+  near-duplicate detection, and two added after an adversarial review found
+  what the ratio-based check structurally could not — `lintSharedSentences` (a
+  whole sentence repeated across a family, which never moves an overlap ratio
+  in a 300-word essay) and `lintSkeletons` (a third of a family sharing an
+  opening or closing formula). Turning those two on found 19 real defects in
+  content that had already passed the old lints.
+- `caelus-delineations-pd` 0.1.6: the serializable placement selector
+  spec gains an optional `retrograde` flag, matching `hasPlacement`. No
+  behavior change for existing data.
+- Draconic chart transform (engine backlog stream F): the zodiac re-zeroed at
+  the Moon's ascending node — each point's draconic longitude is
+  mod(tropical − node, 360); angles transform identically, declinations are
+  untouched. `draconicLongitude`/`draconicLongitudes` (pure transform),
+  `nodeLongitude`, and `draconicChart` (bodies + optional angles), with the
+  TRUE node by default and a `"mean"` option; no zodiac option because the
+  ayanamsa cancels in the difference. Python reference
+  (`astroengine/draconic.py`) + `draconic-golden` pin across 1950/1987/2004/
+  2026 charts, plus rotation/round-trip invariants in the test.
+
 ## v0.24.1 — Ship the complete tarball (wide planet packs restored)
 
 *2026-08-15*

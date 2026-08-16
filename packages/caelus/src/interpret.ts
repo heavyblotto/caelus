@@ -87,6 +87,18 @@ export function hasAngle(angle: string, sign?: string): Selector {
     && (sign === undefined || a.sign === sign)));
 }
 
+/** Matches planet-on-angle contact atoms by body, angle, and/or a maximum
+ *  orb (degrees from exact conjunction with the angle point). */
+export function hasAngleContact(filter: {
+  body?: string; angle?: string; maxOrb?: number;
+} = {}): Selector {
+  return (ctx) => hit(ctx.atoms.filter((a) =>
+    a.kind === "angleContact"
+    && (filter.body === undefined || a.body === filter.body)
+    && (filter.angle === undefined || a.angle === filter.angle)
+    && (filter.maxOrb === undefined || a.orb <= filter.maxOrb)));
+}
+
 /** Matches dispositor atoms by body, its dispositor, and/or the final flag
  *  (a body in its own domicile that terminates a dispositor chain). */
 export function hasDispositor(filter: {
@@ -141,6 +153,26 @@ export function hasTransit(filter: {
   }));
 }
 
+/** Matches transiting-body-in-natal-house atoms. */
+export function hasTransitHouse(filter: {
+  body?: string; house?: number;
+} = {}): Selector {
+  return (ctx) => hit(ctx.atoms.filter((a) =>
+    a.kind === "transitHouse"
+    && (filter.body === undefined || a.body === filter.body)
+    && (filter.house === undefined || a.house === filter.house)));
+}
+
+/** Matches station atoms near the context instant. */
+export function hasStation(filter: {
+  body?: string; direction?: "retrograde" | "direct";
+} = {}): Selector {
+  return (ctx) => hit(ctx.atoms.filter((a) =>
+    a.kind === "station"
+    && (filter.body === undefined || a.body === filter.body)
+    && (filter.direction === undefined || a.direction === filter.direction)));
+}
+
 /** Matches synastry aspect or house-overlay atoms. */
 export function hasSynastry(filter: {
   mode?: "aspect" | "overlay"; a?: string; b?: string; aspect?: string;
@@ -159,26 +191,94 @@ export function hasSynastry(filter: {
   }));
 }
 
-/** Matches a composite midpoint placement. */
-export function hasComposite(filter: { body?: string; sign?: string } = {}): Selector {
+/** Matches a composite midpoint placement, by sign and/or by house in the
+ *  composite frame. A house filter never matches when the composite has no
+ *  frame, which is the honest outcome: without both birth times there is no
+ *  composite house to be in. */
+export function hasComposite(filter: {
+  body?: string; sign?: string; house?: number;
+} = {}): Selector {
   return (ctx) => hit(ctx.atoms.filter((a) =>
     a.kind === "composite"
     && (filter.body === undefined || a.body === filter.body)
-    && (filter.sign === undefined || a.sign === filter.sign)));
+    && (filter.sign === undefined || a.sign === filter.sign)
+    && (filter.house === undefined || a.house === filter.house)));
+}
+
+/** Matches an aspect between two bodies of the composite chart. Mirrors
+ *  {@link hasAspect}: `a`/`b` are positional (the atom orders its pair by the
+ *  engine's body order), `between` matches either way round. */
+export function hasCompositeAspect(filter: {
+  a?: string; b?: string; between?: [string, string];
+  aspect?: string; minStrength?: number;
+} = {}): Selector {
+  const pair = filter.between ? [...filter.between].sort() : null;
+  return (ctx) => hit(ctx.atoms.filter((at) => {
+    if (at.kind !== "compositeAspect") return false;
+    if (filter.a !== undefined && at.a !== filter.a) return false;
+    if (filter.b !== undefined && at.b !== filter.b) return false;
+    if (pair && [at.a, at.b].sort().join() !== pair.join()) return false;
+    if (filter.aspect !== undefined && at.aspect !== filter.aspect) return false;
+    if (filter.minStrength !== undefined && at.strength < filter.minStrength) return false;
+    return true;
+  }));
 }
 
 /** Matches an active time-lord period, optionally by the period's sign
- *  (profection sign, ZR sign) where the system carries one. */
+ *  (profection sign, ZR sign), the profected house, or the enclosing
+ *  period's lord (`under`), where the system carries them. */
 export function hasTimelord(filter: {
   system?: "profection" | "zr" | "firdaria" | "dasha"; level?: string; lord?: string;
-  sign?: string;
+  sign?: string; house?: number; under?: string;
 } = {}): Selector {
   return (ctx) => hit(ctx.atoms.filter((a) =>
     a.kind === "timelord"
     && (filter.system === undefined || a.system === filter.system)
     && (filter.level === undefined || a.level === filter.level)
     && (filter.lord === undefined || a.lord === filter.lord)
-    && (filter.sign === undefined || a.sign === filter.sign)));
+    && (filter.sign === undefined || a.sign === filter.sign)
+    && (filter.house === undefined || a.house === filter.house)
+    && (filter.under === undefined || a.under === filter.under)));
+}
+
+/** Matches a planetary return in progress, optionally by which return it is
+ *  (`nth` exactly, or `minNth` at least -- "third Saturn return or later"). */
+export function hasReturn(filter: {
+  body?: string; nth?: number; minNth?: number;
+} = {}): Selector {
+  return (ctx) => hit(ctx.atoms.filter((a) =>
+    a.kind === "return"
+    && (filter.body === undefined || a.body === filter.body)
+    && (filter.nth === undefined || a.nth === filter.nth)
+    && (filter.minNth === undefined || a.nth >= filter.minNth)));
+}
+
+/** Matches a lunation near the context instant. `eclipse: true` requires any
+ *  eclipse, `false` a plain lunation; `eclipseKind` narrows to solar/lunar;
+ *  `onNatal` requires a named natal body under the lunation, `anyOnNatal`
+ *  any at all. */
+export function hasLunation(filter: {
+  phase?: "new" | "full"; eclipse?: boolean; eclipseKind?: "solar" | "lunar";
+  house?: number; onNatal?: string; anyOnNatal?: boolean;
+} = {}): Selector {
+  return (ctx) => hit(ctx.atoms.filter((a) =>
+    a.kind === "lunation"
+    && (filter.phase === undefined || a.phase === filter.phase)
+    && (filter.eclipse === undefined || (a.eclipse !== null) === filter.eclipse)
+    && (filter.eclipseKind === undefined || a.eclipse === filter.eclipseKind)
+    && (filter.house === undefined || a.house === filter.house)
+    && (filter.onNatal === undefined || a.onNatal.includes(filter.onNatal))
+    && (filter.anyOnNatal === undefined || (a.onNatal.length > 0) === filter.anyOnNatal)));
+}
+
+/** Matches a solar-condition fact (cazimi / combust / under the beams). */
+export function hasSolarPhase(filter: {
+  body?: string; phase?: "cazimi" | "combust" | "under_beams";
+} = {}): Selector {
+  return (ctx) => hit(ctx.atoms.filter((a) =>
+    a.kind === "solarPhase"
+    && (filter.body === undefined || a.body === filter.body)
+    && (filter.phase === undefined || a.phase === filter.phase)));
 }
 
 /** Matches finer essential-dignity facts (term, face, triplicity, almuten). */

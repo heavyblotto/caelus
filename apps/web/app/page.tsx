@@ -30,10 +30,10 @@ export const metadata = pageMetadata({
 });
 
 const PACKAGES: Array<[keyof typeof NPM, string, string]> = [
-  ["caelus", "caelus", "The chart math: positions, houses, and aspects. It has no runtime dependencies and is ~151 KB gzipped with the embedded data."],
+  ["caelus", "caelus", "The chart math: positions, houses, and aspects. It has no runtime dependencies and is ~153 KB gzipped with the embedded data."],
   ["mcp", "caelus-mcp", `${formatMcpToolsTitle()} chart tools for AI agents: natal charts, transits, synastry, event search, electional, lots, time-lords, directions, and the Vedic layer (nakshatras, dashas, vargas, yogas).`],
   ["birth", "caelus-birth", "Resolves a local birth time and place to UT, applying DST and historical timezone rules."],
-  ["wheel", "caelus-wheel", "A React SVG chart wheel that is SSR-safe and ~2.3 KB gzipped."],
+  ["wheel", "caelus-wheel", "A React SVG chart wheel that is SSR-safe and ~2.2 KB gzipped."],
 ];
 
 // Credibility numbers surfaced above the fold. Each links to its proof.
@@ -41,7 +41,7 @@ const PROOF: Array<{ num: string; label: string; href: string }> = [
   { num: formatWorstNano(), label: "Nano-arcsec worst deviation", href: "/validation" },
   { num: formatGoldenChecks(), label: "Golden checks in CI", href: "/validation" },
   { num: String(FACTS.mcpTools), label: "MCP tools for AI clients", href: "/docs/mcp" },
-  { num: "~151 KB", label: "Engine + data, gzipped", href: "/docs/data-tiers" },
+  { num: "~153 KB", label: "Engine + data, gzipped", href: "/docs/data-tiers" },
   { num: "0", label: "Runtime dependencies", href: NPM.caelus },
   { num: "MIT", label: "Licensed, no AGPL", href: `${SITE.repo}/blob/main/LICENSE` },
 ];
@@ -91,7 +91,7 @@ const CAPABILITIES: Array<{ title: string; href: string; desc: ReactNode }> = [
   {
     title: "Chart provenance",
     href: "/docs/provenance",
-    desc: <>Declare what a chart is — forecast, mythic, archetypal — and route to the ephemeris or the compiler.</>,
+    desc: <>Declare what a chart is (forecast, mythic, archetypal) and route to the ephemeris or the compiler.</>,
   },
   {
     title: "MCP server",

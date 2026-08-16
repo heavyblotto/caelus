@@ -13,7 +13,7 @@ image-prompt frames, and synthetic ephemeris for imaginary bodies. MIT, no Swiss
    true node ≤ 1′ vs SE's built-in ephemeris (≤ 1″ vs JPL DE431)
    (vs full DE431 files, 1850–2149), angles and Placidus cusps ≤ 3.2″ — all
    invisible at the arcminute display precision chart software uses.
-2. TypeScript port verified against Python golden fixtures: **3,397 checks,
+2. TypeScript port verified against Python golden fixtures: **3,440 checks,
    0 failures, worst deviation 0.61 nano-arcseconds.** The two implementations
    are numerically identical.
 
@@ -29,11 +29,11 @@ keep this suite green.
 | Moon series + nutation + Pluto     | 2 KB    |
 | Chiron (1600–2484)                 | ~58 KB  |
 | Fixed-star catalog (HYG)           | 13 KB   |
-| **core total**                     | **~151 KB** |
+| **core total**                     | **~153 KB** |
 | VSOP micro tier (alt.)             | 26 KB   |
 | precise Moon 1920–2080 (lazy-load) | 746 KB  |
 
-The ~151 KB core computes natal charts client-side — planets to sub-arcsecond,
+The ~153 KB core computes natal charts client-side — planets to sub-arcsecond,
 Moon to ~10″ via the analytic series, fixed stars from the bundled HYG catalog. The 729 KB tier (1920–2080 JPL-fit Moon,
 0.1″-class) lazy-loads when present; the engine switches automatically.
 
@@ -85,6 +85,7 @@ aspects) single-threaded in Node 22 — ~420 charts/sec, faster in hot loops.
 src/core.ts       timescales, VSOP87, Moon, Pluto, Chiron, nutation, frames
 src/houses.ts     sidereal time, angles, four house systems
 src/chart.ts      Engine class, aspects, formatting
+src/draconic.ts   draconic (nodal) chart transform, true/mean node
 src/node-loader.ts  fs convenience loader (core never touches fs)
 data/             shared JSON coefficients (same files as Python package)
 test/golden.test.ts  conformance suite vs Python fixtures

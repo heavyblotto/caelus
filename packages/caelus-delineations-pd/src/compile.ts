@@ -9,10 +9,13 @@
  * stay auditable.
  */
 import {
-  hasPlacement, hasAspect, hasPattern, hasSignature, hasAngle, hasStar, hasLot,
-  hasDispositor, hasReception, hasDignityFine, hasTransit, hasSynastry,
-  hasComposite, hasTimelord, hasNakshatra, hasVarga, hasYoga,
+  hasPlacement, hasAspect, hasPattern, hasSignature, hasAngle, hasAngleContact,
+  hasStar, hasLot,
+  hasDispositor, hasReception, hasDignityFine, hasTransit, hasTransitHouse,
+  hasStation, hasSynastry,
+  hasComposite, hasCompositeAspect, hasTimelord, hasNakshatra, hasVarga, hasYoga,
   hasParallel, hasOutOfBounds,
+  hasReturn, hasLunation, hasSolarPhase,
 } from "caelus";
 import type {
   Selector, Rule, InterpretationSource, AngleAtom,
@@ -24,7 +27,8 @@ export function selectorFromSpec(spec: SelectorSpec): Selector {
   switch (spec.kind) {
     case "placement":
       return hasPlacement({
-        body: spec.body, sign: spec.sign, house: spec.house, dignity: spec.dignity,
+        body: spec.body, sign: spec.sign, house: spec.house,
+        retrograde: spec.retrograde, dignity: spec.dignity,
       });
     case "aspect":
       return hasAspect({ between: [spec.a, spec.b], aspect: spec.aspect, phase: spec.phase });
@@ -34,6 +38,8 @@ export function selectorFromSpec(spec: SelectorSpec): Selector {
       return hasSignature(spec.facet, spec.value);
     case "angle":
       return hasAngle(spec.angle as AngleAtom["angle"], spec.sign);
+    case "angleContact":
+      return hasAngleContact({ body: spec.body, angle: spec.angle, maxOrb: spec.maxOrb });
     case "dispositor":
       return hasDispositor({
         body: spec.body, dispositor: spec.dispositor, final: spec.final,
@@ -50,16 +56,25 @@ export function selectorFromSpec(spec: SelectorSpec): Selector {
       return hasTransit({
         transit: spec.transit, natal: spec.natal, aspect: spec.aspect, phase: spec.phase,
       });
+    case "transitHouse":
+      return hasTransitHouse({ body: spec.body, house: spec.house });
+    case "station":
+      return hasStation({ body: spec.body, direction: spec.direction });
     case "synastry":
       return hasSynastry({
         mode: spec.mode, a: spec.a, b: spec.b, aspect: spec.aspect,
         body: spec.body, partner: spec.partner, house: spec.house,
       });
     case "composite":
-      return hasComposite({ body: spec.body, sign: spec.sign });
+      return hasComposite({ body: spec.body, sign: spec.sign, house: spec.house });
+    case "compositeAspect":
+      return hasCompositeAspect({
+        a: spec.a, b: spec.b, aspect: spec.aspect, minStrength: spec.minStrength,
+      });
     case "timelord":
       return hasTimelord({
         system: spec.system, level: spec.level, lord: spec.lord, sign: spec.sign,
+        house: spec.house, under: spec.under,
       });
     case "nakshatra":
       return hasNakshatra({
@@ -77,6 +92,15 @@ export function selectorFromSpec(spec: SelectorSpec): Selector {
       });
     case "outOfBounds":
       return hasOutOfBounds({ body: spec.body });
+    case "return":
+      return hasReturn({ body: spec.body, nth: spec.nth, minNth: spec.minNth });
+    case "lunation":
+      return hasLunation({
+        phase: spec.phase, eclipse: spec.eclipse, eclipseKind: spec.eclipseKind,
+        house: spec.house, onNatal: spec.onNatal, anyOnNatal: spec.anyOnNatal,
+      });
+    case "solarPhase":
+      return hasSolarPhase({ body: spec.body, phase: spec.phase });
   }
 }
 

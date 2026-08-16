@@ -19,6 +19,8 @@ jobs:
       - run: node packages/caelus/dist/test/query-golden.test.js
       # derived charts: TS derivations must match the Python reference
       - run: node packages/caelus/dist/test/derived-golden.test.js
+      # draconic (nodal) chart transform: TS port must match the Python reference
+      - run: node packages/caelus/dist/test/draconic-golden.test.js
       # interpolated lunar apogee: TS pack evaluation must match the Python reference
       - run: node packages/caelus/dist/test/intp-apog-golden.test.js
       # turbo tier: the TS evaluator must reproduce the Python evaluator on the pack
@@ -104,6 +106,8 @@ jobs:
       # chart wheel: SSR render of real charts + collision-fan unit checks
       - run: npm run build -w caelus-wheel
       - run: node packages/wheel/dist/test/render.test.js
+      # multi-ring wheel: rings API, contacts, houses, theming
+      - run: node packages/wheel/dist/test/multiwheel.test.js
       # 3D chart sphere: SSR render + latitude-matters check
       - run: node packages/wheel/dist/test/sphere.test.js
       # astrocartography map: SSR render of the relocation lines
@@ -112,6 +116,8 @@ jobs:
       - run: node packages/wheel/dist/test/ephemerisgraph.test.js
       # cross-package journey: local time -> chart -> SVG wheel, end to end
       - run: node packages/wheel/dist/test/integration.test.js
+      # apps/web library units (timeline lanes, root-found transit spans)
+      - run: node scripts/test-web-libs.mjs
       # per-entrypoint bundle sizes (esbuild): informational, prints the table
       # the data-tiers doc quotes. Per-target try/catch keeps it non-blocking.
       - run: npm run bundle-sizes
@@ -130,6 +136,9 @@ jobs:
       - run: npm run smoke:web
       # llms.txt must track package versions and stay in sync with the site
       - run: node scripts/check-llms.mjs
+      # the docs must describe the fact kinds and selectors the engine ships:
+      # the hand-written `kind` unions drifted for two releases unnoticed
+      - run: node scripts/check-docs.mjs
       # prose numeric claims must match the generated stats + accuracy table
       - run: npm run lint:claims
       # em-dash gate: no `—` or &mdash; in rendered site prose (pure node, so it

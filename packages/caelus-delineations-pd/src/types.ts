@@ -43,25 +43,32 @@ export interface SourceManifestEntry {
  *  `ContextOptions` — a rule keyed on them simply never fires against a bare
  *  chart projection. */
 export type SelectorSpec =
-  | { kind: "placement"; body: string; sign?: string; house?: number; dignity?: string }
+  | { kind: "placement"; body: string; sign?: string; house?: number; retrograde?: boolean; dignity?: string }
   | { kind: "aspect"; a: string; b: string; aspect: string; phase?: string }
   | { kind: "pattern"; pattern: string; body?: string }
   | { kind: "signature"; facet: string; value: string }
   | { kind: "angle"; angle: string; sign?: string }
+  | { kind: "angleContact"; body?: string; angle?: string; maxOrb?: number }
   | { kind: "dispositor"; body?: string; dispositor?: string; final?: boolean }
   | { kind: "reception"; body?: string; by?: string }
   | { kind: "dignity"; facet?: "term" | "face" | "triplicity" | "almuten"; body?: string; ruler?: string }
   | { kind: "star"; body?: string; star?: string }
   | { kind: "lot"; lot?: string; sign?: string; house?: number }
   | { kind: "transit"; transit?: string; natal?: string; aspect?: string; phase?: string }
+  | { kind: "transitHouse"; body?: string; house?: number }
+  | { kind: "station"; body?: string; direction?: "retrograde" | "direct" }
   | { kind: "synastry"; mode?: "aspect" | "overlay"; a?: string; b?: string; aspect?: string; body?: string; partner?: "a" | "b"; house?: number }
-  | { kind: "composite"; body?: string; sign?: string }
-  | { kind: "timelord"; system?: "profection" | "zr" | "firdaria" | "dasha"; level?: string; lord?: string; sign?: string }
+  | { kind: "composite"; body?: string; sign?: string; house?: number }
+  | { kind: "compositeAspect"; a?: string; b?: string; aspect?: string; minStrength?: number }
+  | { kind: "timelord"; system?: "profection" | "zr" | "firdaria" | "dasha"; level?: string; lord?: string; sign?: string; house?: number; under?: string }
   | { kind: "nakshatra"; body?: string; name?: string; lord?: string; pada?: number }
   | { kind: "varga"; division?: number; body?: string; sign?: string }
   | { kind: "yoga"; yoga?: string; body?: string }
   | { kind: "parallel"; a?: string; b?: string; declination?: "parallel" | "contraparallel" }
-  | { kind: "outOfBounds"; body?: string };
+  | { kind: "outOfBounds"; body?: string }
+  | { kind: "return"; body?: string; nth?: number; minNth?: number }
+  | { kind: "lunation"; phase?: "new" | "full"; eclipse?: boolean; eclipseKind?: "solar" | "lunar"; house?: number; onNatal?: string; anyOnNatal?: boolean }
+  | { kind: "solarPhase"; body?: string; phase?: "cazimi" | "combust" | "under_beams" };
 
 export interface PassageRecord {
   id: string;
