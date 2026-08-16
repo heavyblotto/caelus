@@ -45,7 +45,7 @@ and [MCP server](/docs/mcp) build on these two.
 
 `caelus/data-embedded` bundles a compact dataset: the eight planets, the Moon,
 Pluto, Chiron, the nodes, and the HYG fixed-star catalog (~13 KB gzipped of the
-~151 KB total), with the core house systems and aspects. This is what runs
+~153 KB total), with the core house systems and aspects. This is what runs
 client-side and on edge runtimes, with no files on disk.
 
 <CodeBlock
@@ -119,7 +119,7 @@ bundles.
 
 | What you ship | Approx. gzipped | Notes |
 | --- | :---: | --- |
-| Embedded dataset (`caelus/data-embedded`) | ~151 KB | planets, Moon series, Pluto, Chiron, nutation, fixed-star catalog; full client-side charts |
+| Embedded dataset (`caelus/data-embedded`) | ~153 KB | planets, Moon series, Pluto, Chiron, nutation, fixed-star catalog; full client-side charts |
 | Precise Moon tier (`caelus/node`) | ~750 KB | ~1.7 MB on disk; **lazy**, never in the initial bundle |
 | `caelus-wheel` | a few KB | React is a peer dependency, not bundled |
 | `caelus-birth` | small code, plus IANA timezone data | the timezone data is the weight, not the resolver |

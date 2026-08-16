@@ -29,11 +29,11 @@ keep this suite green.
 | Moon series + nutation + Pluto     | 2 KB    |
 | Chiron (1600–2484)                 | ~58 KB  |
 | Fixed-star catalog (HYG)           | 13 KB   |
-| **core total**                     | **~151 KB** |
+| **core total**                     | **~153 KB** |
 | VSOP micro tier (alt.)             | 26 KB   |
 | precise Moon 1920–2080 (lazy-load) | 746 KB  |
 
-The ~151 KB core computes natal charts client-side — planets to sub-arcsecond,
+The ~153 KB core computes natal charts client-side — planets to sub-arcsecond,
 Moon to ~10″ via the analytic series, fixed stars from the bundled HYG catalog. The 729 KB tier (1920–2080 JPL-fit Moon,
 0.1″-class) lazy-loads when present; the engine switches automatically.
 
