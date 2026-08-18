@@ -230,9 +230,17 @@ all overridable through `ContextOptions.salience`:
 | `pattern` | a whole configuration |
 | `dispositor` / `reception` | a dispositor link / a mutual reception |
 | `star` / `lot` | a fixed-star conjunction / a Hermetic lot |
-| `transit` / `synastry` / `composite` | a transit aspect / inter-chart link / midpoint placement |
+| `transit` / `transitHouse` / `station` | a transit-to-natal aspect / a transiting body's natal house / a station near the instant |
+| `synastry` / `composite` | an inter-chart aspect or overlay / a composite midpoint placement or composite aspect |
 | `timelord` | an active profection, ZR, firdaria, or dasha period |
-| `dignity` / `vedic` | finer essential dignity / nakshatra, varga, or yoga |
+| `dignityFine` | a term, face, triplicity, or almuten fact |
+| `vedic` | a nakshatra, varga, or yoga fact |
+| `parallel` / `outOfBounds` | a declination parallel / a body beyond the obliquity |
+| `planetReturn` / `lunation` / `solarPhase` | a return in progress / a New or Full Moon near the instant (an eclipse adds it again) / a solar-condition fact |
+
+Writing a **complete** `SalienceWeights` object literal requires `planetReturn`,
+`lunation`, and `solarPhase` as of 0.25.0; `Partial<>` overrides through
+`ContextOptions.salience` are unchanged.
 
 No weight is magic. A caller who dislikes the defaults overrides any subset:
 

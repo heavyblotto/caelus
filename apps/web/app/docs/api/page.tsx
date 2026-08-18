@@ -49,6 +49,7 @@ const TIERS: ReadonlyArray<{
       ["dignities", "Function.dignities"],
       ["planetarySect", "Function.planetarySect"],
       ["harmonicChart", "Function.harmonicChart"],
+      ["draconicChart", "Function.draconicChart"],
       ["declinationAspects", "Function.declinationAspects"],
       ["aspect", "Function.aspect"],
       ["solarEclipseWhere", "Function.solarEclipseWhere"],

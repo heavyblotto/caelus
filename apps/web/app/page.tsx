@@ -33,7 +33,7 @@ const PACKAGES: Array<[keyof typeof NPM, string, string]> = [
   ["caelus", "caelus", "The chart math: positions, houses, and aspects. It has no runtime dependencies and is ~153 KB gzipped with the embedded data."],
   ["mcp", "caelus-mcp", `${formatMcpToolsTitle()} chart tools for AI agents: natal charts, transits, synastry, event search, electional, lots, time-lords, directions, and the Vedic layer (nakshatras, dashas, vargas, yogas).`],
   ["birth", "caelus-birth", "Resolves a local birth time and place to UT, applying DST and historical timezone rules."],
-  ["wheel", "caelus-wheel", "A React SVG chart wheel that is SSR-safe and ~2.2 KB gzipped."],
+  ["wheel", "caelus-wheel", "React SVG chart wheel (SSR-safe), ChartSphere (3D), AstroMap (astrocartography), and EphemerisGraph (~2.2 KB gzipped for the flat wheel)."],
 ];
 
 // Credibility numbers surfaced above the fold. Each links to its proof.
@@ -66,7 +66,7 @@ const CAPABILITIES: Array<{ title: string; href: string; desc: ReactNode }> = [
   {
     title: "Derived charts",
     href: "/docs/derived",
-    desc: <>Returns, progressions, solar arc, composite, Davison, harmonics, dignities, and sect.</>,
+    desc: <>Returns, progressions, solar arc, composite, Davison, harmonics, draconic, dignities, and sect.</>,
   },
   {
     title: "Hellenistic time-lords",

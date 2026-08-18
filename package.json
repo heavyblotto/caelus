@@ -22,7 +22,7 @@
     "smoke:web": "node scripts/smoke-web.mjs",
     "smoke:live": "node scripts/smoke-live.mjs",
     "test:web": "export NEXT_DIST_DIR=.next-ci; npm run build -w caelus-mcp && npm run docs:api && npm run search:index && npm run build -w web && npm run smoke:web",
-    "preflight": "npm run check:versions && node scripts/check-tarball.mjs && npm run test && npm run lint:prose && npm run lint:emdash && npm run facts:sync && npm run lint:claims && npm run test:web",
+    "preflight": "npm run check:versions && node scripts/check-tarball.mjs && node scripts/check-docs.mjs && npm run test && npm run lint:prose && npm run lint:emdash && npm run facts:sync && npm run lint:claims && npm run test:web",
     "dev:web": "npm run dev -w web",
     "dev:web:clean": "npm run dev:clean -w web"
   },
