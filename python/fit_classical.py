@@ -84,7 +84,12 @@ def cache_for(name, command, center, step, jd0, jd1):
         HERE, f"{name}_horizons_cache_classical{suffix}.json")
     cache = HorizonsCache(path, command=command, label=f"{command} {name}",
                           center=center)
-    cache.ensure(jd0, jd1, step=step, pad_days=0)
+    # Pad one day past jd1: the fit samples the last segment's endpoint (the
+    # shared boundary instant) exactly, and a sample grid whose step does not
+    # divide the span (jupiter/saturn at 2d) would otherwise end a day short
+    # of it. Every seg length here is a multiple of its body's step, so the
+    # +1 day keeps the grid aligned and guarantees a row at-or-past jd1.
+    cache.ensure(jd0, jd1, step=step, pad_days=1.0)
     return cache
 
 
