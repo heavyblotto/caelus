@@ -71,6 +71,7 @@ class Engine:
     def __init__(self, level="full"):
         self.vsop = Vsop(level)
         self._packs = {}
+        self._era_packs = {}
 
     def _has_pluto_pack(self):
         """True when a wide-range Pluto Chebyshev pack is available on disk."""
@@ -80,6 +81,44 @@ class Engine:
         """True when a `{body}_cheb.json` Chebyshev pack is on disk."""
         import os
         return os.path.exists(os.path.join(core.DATA, f"{body}_cheb.json"))
+
+    def _era_slabs(self, body):
+        """Lazy-load a body's era slabs (deep-time R1): `{body}_cheb.{era}.json`
+        beside the default pack."""
+        if body not in self._era_packs:
+            import os
+            from .chebyshev import ChebSeries
+            out = []
+            for era in core.ERA_SLABS:
+                path = os.path.join(core.DATA, f"{body}_cheb.{era}.json")
+                if os.path.exists(path):
+                    out.append(ChebSeries.load(path))
+            self._era_packs[body] = out
+        return self._era_packs[body]
+
+    def _pack_at(self, body, jde):
+        """The slab covering jde: the default pack first, then the era slabs
+        (deep-time R1 -- the boundary instant belongs to the default slab, and
+        the slabs agree there by the pack build's boundary guarantee). Kepler
+        bodies have no span and serve every epoch as before. Raises ValueError
+        when no slab covers the instant, as the single-pack path always did."""
+        has_default = self._has_pack(body)
+        slabs = self._era_slabs(body)
+        if has_default or slabs:
+            if has_default:
+                pack = self._pack(body)
+                if pack.jd0 <= jde <= pack.jd1:
+                    return pack
+                for slab in slabs:
+                    if slab.jd0 <= jde <= slab.jd1:
+                        return slab
+                pack.xyz(jde)  # the canonical ValueError naming the fitted range
+            for slab in slabs:
+                if slab.jd0 <= jde <= slab.jd1:
+                    return slab
+            raise ValueError(
+                f"jd {jde} outside fitted range (no era slab covers it)")
+        return self._pack(body)
 
     def _pack(self, body):
         if body not in self._packs:
@@ -112,8 +151,8 @@ class Engine:
             # A wide-range Chebyshev pack when one is present (same heliocentric
             # pipeline as the small bodies), else the Meeus ch.37 series (valid
             # 1885-2099, accuracy degrades outside).
-            if self._has_pluto_pack():
-                return core.smallbody_apparent(self.vsop, self._pack("pluto"), jde)
+            if self._has_pluto_pack() or self._era_slabs("pluto"):
+                return core.smallbody_apparent(self.vsop, self._pack_at("pluto", jde), jde)
             return pluto_apparent(self.vsop, jde)
         if body == "chiron":
             return core.chiron_apparent(self.vsop, jde)
@@ -146,14 +185,15 @@ class Engine:
             return lon, math.asin(z / r), None
         if body in ASTEROIDS or body in URANIANS:
             return core.smallbody_apparent(self.vsop, self._pack(body), jde)
-        if body in PLANET_PACK_BODIES and self._has_pack(body):
+        if body in PLANET_PACK_BODIES and (self._has_pack(body) or self._era_slabs(body)):
             # A wide-range Chebyshev pack (fit to the Horizons/DE441 system
             # barycenter -- fit_planet.py) supersedes the VSOP87D series when
             # present, exactly the Pluto pattern: VSOP87 represents DE200 and
             # drifts to 3-17" against the modern ephemeris at the 1000/3000
             # edges (range-expansion.md); the pack pins the source itself.
-            # Inert until a pack is minted: no pack, no behaviour change.
-            return core.smallbody_apparent(self.vsop, self._pack(body), jde)
+            # Inert until a pack is minted: no pack, no behaviour change. The
+            # covering era slab is chosen per instant (deep-time R1).
+            return core.smallbody_apparent(self.vsop, self._pack_at(body, jde), jde)
         return planet_apparent(self.vsop, body, jde)
 
     def _ayan_shift(self, jde, mode):
@@ -283,9 +323,18 @@ class Engine:
         mode = _parse_zodiac(zodiac)
         observer = (lat, lon_east, 0.0) if topocentric else None
         names = BODIES + [b for b in (extra_bodies or []) if b not in BODIES]
-        bodies = {b: self.position(b, jd_ut, zodiac=zodiac,
-                                   topocentric=topocentric, observer=observer)
-                  for b in names}
+        # A body outside its fitted span is reported, not crashed on (the TS
+        # engine's RangeError -> Chart.unavailable, mirrored): the chart
+        # computes with what covers the instant.
+        bodies = {}
+        unavailable = []
+        for b in names:
+            try:
+                bodies[b] = self.position(b, jd_ut, zodiac=zodiac,
+                                          topocentric=topocentric,
+                                          observer=observer)
+            except ValueError:
+                unavailable.append(b)
         asc, mc, armc, eps = H.angles(jd_ut, lat, lon_east)
         vtx, east = H.vertex_east_point(armc, lat * DEG, eps)
         phi = lat * DEG
@@ -330,6 +379,7 @@ class Engine:
             "house_system": used,
             "house_system_requested": house_system,
             "bodies": bodies,
+            "unavailable": unavailable,
             "angles": {"asc": out_deg(asc), "mc": out_deg(mc),
                        "vertex": out_deg(vtx), "east_point": out_deg(east)},
             "cusps": cusps_deg,

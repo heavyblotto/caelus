@@ -94,13 +94,28 @@ export function validatedSpanFor(body: string, data: EngineData): BodySpan | nul
   // EngineData field, not a chebPacks entry) with no measured span yet --
   // validate_swiss.py measures it against SE_INTP_APOG where pyswisseph
   // exists, and degree-scale differences are expected by construction.
-  if (VSOP_BODIES.has(body) || body === "moon") return HEADLINE;
-  if (body === "pluto") {
-    return data.chebPacks?.pluto ? MEASURED.pluto_pack : MEASURED.pluto_meeus;
+  let span: BodySpan | null;
+  if (VSOP_BODIES.has(body) || body === "moon") span = HEADLINE;
+  else if (body === "pluto") {
+    span = data.chebPacks?.pluto ? MEASURED.pluto_pack : MEASURED.pluto_meeus;
+  } else if (body === "chiron" || body in (data.chebPacks ?? {})) {
+    span = HEADLINE;
+  } else if (body in (data.keplerPack?.bodies ?? {})) span = MEASURED.uranian;
+  else span = null;
+
+  // Era slabs extend the validated span (deep-time R1): a slab's span is
+  // measured against its source at pack build, and the classical slab
+  // adjoins the headline's earlier edge. The Moon's slabs live in their own
+  // field beside its tiered packs.
+  const eras = body === "moon" ? data.moonEraPacks : data.eraPacks?.[body];
+  if (eras?.length) {
+    const from = Math.min(...eras.map((s) => packSpan(s).from));
+    const to = Math.max(...eras.map((s) => packSpan(s).to));
+    span = span
+      ? { from: Math.min(span.from, from), to: Math.max(span.to, to) }
+      : { from, to };
   }
-  if (body === "chiron" || body in (data.chebPacks ?? {})) return HEADLINE;
-  if (body in (data.keplerPack?.bodies ?? {})) return MEASURED.uranian;
-  return null;
+  return span;
 }
 
 /**

@@ -393,7 +393,8 @@ export class Engine {
   /** Whether `body` resolves through the generic packed-source path: a baked-in
    *  Chebyshev/Kepler pack or a runtime source from {@link registerSource}. */
   private hasPack(body: string): boolean {
-    return !!(this.data.chebPacks?.[body] || this.data.keplerPack?.bodies[body])
+    return !!(this.data.chebPacks?.[body] || this.data.eraPacks?.[body]?.length
+      || this.data.keplerPack?.bodies[body])
       || this.runtimeSources.has(body);
   }
 
@@ -410,9 +411,65 @@ export class Engine {
     return s;
   }
 
+  /** Era-slab ChebSeries for a body, built lazily (deep-time R1). */
+  private eraPacksCache = new Map<string, ChebSeries[]>();
+
+  private eraSeries(body: string): ChebSeries[] {
+    let list = this.eraPacksCache.get(body);
+    if (!list) {
+      list = (this.data.eraPacks?.[body] ?? []).map((d) => new ChebSeries(d));
+      this.eraPacksCache.set(body, list);
+    }
+    return list;
+  }
+
+  /** The pack serving `jde` for `body`: the default slab when it covers the
+   *  instant, else the era slab that does (deep-time R1 — the boundary
+   *  instant belongs to the default slab, and the slabs agree there by the
+   *  pack build's boundary guarantee). A Kepler or runtime source has no
+   *  span and serves every epoch as before. Throws RangeError when no slab
+   *  covers the instant, as the single-pack path always did. */
+  private packAt(body: string, jde: number): XyzSource {
+    const raw = this.data.chebPacks?.[body];
+    const eras = this.data.eraPacks?.[body];
+    if (raw || (eras && eras.length)) {
+      if (raw) {
+        const s = this.pack(body) as ChebSeries;
+        if (s.jd0 <= jde && jde <= s.jd1) return s;
+        for (const slab of this.eraSeries(body)) {
+          if (slab.jd0 <= jde && jde <= slab.jd1) return slab;
+        }
+        s.xyz(jde); // the canonical RangeError naming the fitted range
+      }
+      for (const slab of this.eraSeries(body)) {
+        if (slab.jd0 <= jde && jde <= slab.jd1) return slab;
+      }
+      throw new RangeError(`jd ${jde} outside fitted range (no era slab covers it)`);
+    }
+    return this.pack(body);
+  }
+
+  private moonEraCache: ChebSeries[] | null = null;
+
+  /** The Moon slab covering `jde`, if any: the modern tier first, then the
+   *  era slabs. The precise-Moon path needs light-time headroom, hence the
+   *  0.1-day margin both here and in the slab check. */
+  private moonPackAt(jde: number): ChebSeries | null {
+    if (this.moonCheb
+      && this.moonCheb.jd0 <= jde - 0.1 && jde + 0.1 <= this.moonCheb.jd1) {
+      return this.moonCheb;
+    }
+    if (!this.moonEraCache) {
+      this.moonEraCache = (this.data.moonEraPacks ?? []).map((d) => new ChebSeries(d));
+    }
+    for (const slab of this.moonEraCache) {
+      if (slab.jd0 <= jde - 0.1 && jde + 0.1 <= slab.jd1) return slab;
+    }
+    return null;
+  }
+
   private moonInRange(jde: number): boolean {
-    return !!this.moonCheb
-      && this.moonCheb.jd0 <= jde - 0.1 && jde + 0.1 <= this.moonCheb.jd1;
+    return this.moonPackAt(jde) !== null;
   }
 
   /**
@@ -434,6 +491,7 @@ export class Engine {
       ...[...BODIES, ...EXTRA_BODIES].filter((b) => b !== "chiron" || this.chironCheb),
       ...(this.intpApog ? ["intp_apog"] : []),
       ...Object.keys(this.data.chebPacks ?? {}),
+      ...Object.keys(this.data.eraPacks ?? {}),
       ...Object.keys(this.data.keplerPack?.bodies ?? {}),
       ...this.runtimeSources.keys(),
     ])];
@@ -456,8 +514,9 @@ export class Engine {
   ecliptic(body: BodyId, jde: number): [number, number, number | null] {
     if (body === "sun") return sunApparent(this.data, jde);
     if (body === "moon") {
-      const [lon, lat, km] = this.moonInRange(jde)
-        ? moonApparentPrecise(this.data, this.moonCheb!, jde)
+      const mp = this.moonPackAt(jde);
+      const [lon, lat, km] = mp
+        ? moonApparentPrecise(this.data, mp, jde)
         : moonApparentSeries(this.data, jde);
       return [lon, lat, km / KM_PER_AU];
     }
@@ -471,9 +530,10 @@ export class Engine {
     }
     if (body === "mean_node") return [meanNode(this.data, jde), 0.0, null];
     if (body === "true_node") {
+      const mp = this.moonPackAt(jde);
       return [
-        this.moonInRange(jde)
-          ? trueNodePrecise(this.data, this.moonCheb!, jde)
+        mp
+          ? trueNodePrecise(this.data, mp, jde)
           : trueNodeSeries(this.data, jde),
         0.0, null,
       ];
@@ -483,8 +543,9 @@ export class Engine {
       return [lon, lat, null];
     }
     if (body === "true_lilith") {
-      const [lon, lat, km] = this.moonInRange(jde)
-        ? oscApogeePrecise(this.data, this.moonCheb!, jde)
+      const mp = this.moonPackAt(jde);
+      const [lon, lat, km] = mp
+        ? oscApogeePrecise(this.data, mp, jde)
         : oscApogeeSeries(this.data, jde);
       return [lon, lat, km / KM_PER_AU];
     }
@@ -504,8 +565,9 @@ export class Engine {
     }
     if (this.hasPack(body)) {
       // same heliocentric pipeline as Chiron (Chebyshev, Kepler, or a runtime
-      // source registered via registerSource — e.g. a synthetic body)
-      return chironApparent(this.data, this.pack(body), jde);
+      // source registered via registerSource — e.g. a synthetic body); the
+      // covering era slab is chosen per instant (deep-time R1)
+      return chironApparent(this.data, this.packAt(body, jde), jde);
     }
     if (this.data.vsop[body]) return planetApparent(this.data, body, jde);
     throw new Error(`no data loaded for body '${body}'`);
