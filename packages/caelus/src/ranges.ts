@@ -58,6 +58,22 @@ export function jdYear(jd: number): number {
   return 2000 + (jd - 2451545.0) / 365.25;
 }
 
+/** The sky's rotation rate: rotation-anchored quantities (angles, houses,
+ *  rise and set) move 0.25 deg per minute of clock error. The chart warnings
+ *  and the canonical epoch-sigma block both derive from this. */
+export const ANGLE_SIGMA_DEG_PER_SECOND = 0.25 / 60;
+
+/** The Moon's mean rate: ~0.55 arcsec per second of clock error, so a
+ *  UT-tagged instant's Moon carries sigma(deltaT) at this rate. The slow
+ *  bodies carry none -- planet-to-planet geometry lives in uniform time. */
+export const MOON_SIGMA_DEG_PER_SECOND = 0.55 / 3600;
+
+/** The threshold at which the epoch's clock-error uncertainty becomes
+ *  visible at the app's display scale: 10 s of sigma is ~2.5 arcmin of
+ *  angle smear, the point a reading would show. Below it, canonical output
+ *  carries no epoch-sigma block, so modern charts' digests are unchanged. */
+export const EPOCH_SIGMA_DISPLAY_SECONDS = 10;
+
 /** A pack's fitted span in calendar years (`jd0 + segments * seg_days`). */
 export function packSpan(pack: ChebData): BodySpan {
   return {

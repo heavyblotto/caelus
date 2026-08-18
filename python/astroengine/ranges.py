@@ -30,6 +30,13 @@ def jd_year(jd):
     return 2000 + (jd - 2451545.0) / 365.25
 
 
+# Mirror of ranges.ts: the two clock-error rates and the display threshold
+# behind the canonical epoch-sigma block.
+ANGLE_SIGMA_DEG_PER_SECOND = 0.25 / 60   # sky rotation: 0.25 deg per minute
+MOON_SIGMA_DEG_PER_SECOND = 0.55 / 3600  # Moon longitude: ~0.55 arcsec per second
+EPOCH_SIGMA_DISPLAY_SECONDS = 10         # below this, canonical output carries no block
+
+
 def validated_span_for(body, engine):
     """Measured validated span for a body under this engine's data, or None
     for analytic points with no stated bound (mirrors validatedSpanFor;
