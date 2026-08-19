@@ -1,7 +1,7 @@
 # B7 writer slice — instructions (birth-time finder bank)
 
 You are writing one slice of the Caelus Free birth-time finder bank
-(`caelus-delineations-house`, batch B7). These entries are not
+(`caelus-corpus`, batch B7). These entries are not
 delineations: they are the questions and prompts the finder shows a
 reader who does not know their birth time. The finder sweeps the birth
 day, finds the possible rising signs, and needs (a) fit descriptions a

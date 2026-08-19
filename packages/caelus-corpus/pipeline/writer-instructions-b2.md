@@ -1,7 +1,7 @@
 # B2 writer slice — instructions (transits)
 
 You are writing one slice of the Caelus Free interpretation corpus
-(`caelus-delineations-house`), batch B2: transit delineations at the
+(`caelus-corpus`), batch B2: transit delineations at the
 standard of Robert Hand's Planets in Transit. Everything in
 `pipeline/writer-instructions.md` applies (read it first, along with
 `pipeline/voice-sheet.md` and `editorial/editorial-voice.md`); this sheet

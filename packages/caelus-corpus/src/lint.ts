@@ -1,12 +1,12 @@
 /**
- * Corpus lints for the house voice (build-plan stream D): length bands per
+ * Corpus lints for the corpus voice (build-plan stream D): length bands per
  * cell family, banned phrases, reading level, and near-duplicate detection.
  * The binding harness proves a passage attaches to legal geometry; these
  * prove the prose holds the register the voice sheet demands. Both run in
  * the package test, so a failing entry cannot ship.
  */
 import { LENGTH_BANDS } from "./types.js";
-import type { HousePassage } from "./types.js";
+import type { Passage } from "./types.js";
 
 export interface LintFinding {
   id: string;
@@ -57,7 +57,7 @@ export function fkGrade(text: string): number {
   return 0.39 * (words.length / sentences.length) + 11.8 * (syl / words.length) - 15.59;
 }
 
-export function lintPassage(p: HousePassage): LintFinding[] {
+export function lintPassage(p: Passage): LintFinding[] {
   const findings: LintFinding[] = [];
   const text = p.text;
   const lower = text.toLowerCase();
@@ -117,7 +117,7 @@ function jaccard(a: Set<string>, b: Set<string>): number {
 /** Flag pairs within a family whose 4-gram similarity exceeds the cap.
  *  Formulaic sameness is exactly what the Hand standard rules out. */
 export function lintDuplication(
-  passages: HousePassage[], cap = 0.2,
+  passages: Passage[], cap = 0.2,
 ): LintFinding[] {
   const findings: LintFinding[] = [];
   const sets = passages.map((p) => ({ id: p.id, sh: shingles(p.text) }));
@@ -151,7 +151,7 @@ function sentences(text: string): string[] {
  * the ratio cannot.
  */
 export function lintSharedSentences(
-  passages: HousePassage[],
+  passages: Passage[],
 ): LintFinding[] {
   const seen = new Map<string, string>();
   const findings: LintFinding[] = [];
@@ -209,7 +209,7 @@ function lcs(a: string[], b: string[]): number {
  * keeps a large family from going quadratic over every sentence pair.
  */
 export function lintNearDuplicateSentences(
-  passages: HousePassage[], threshold = 0.8,
+  passages: Passage[], threshold = 0.8,
 ): LintFinding[] {
   const all: { id: string; words: string[] }[] = [];
   for (const p of passages) {
@@ -279,7 +279,7 @@ const head = (s: string, n: number): string =>
  * and last six words, which is where the formula lives.
  */
 export function lintSkeletons(
-  passages: HousePassage[], cap = 0.34,
+  passages: Passage[], cap = 0.34,
 ): LintFinding[] {
   if (passages.length < 4) return [];
   const findings: LintFinding[] = [];
@@ -331,7 +331,7 @@ export function lintSkeletons(
  * reword one member of it.
  */
 export function lintFormulaClusters(
-  passages: HousePassage[], link = 0.6, minEntries = 4,
+  passages: Passage[], link = 0.6, minEntries = 4,
 ): LintFinding[] {
   const all: { id: string; words: string[]; text: string }[] = [];
   for (const p of passages) {
@@ -452,7 +452,7 @@ const bodiesIn = (id: string): string[] =>
  * the family lints so a finding is never reported twice.
  */
 export function lintCrossFamilyEchoes(
-  passages: HousePassage[], threshold = 0.8,
+  passages: Passage[], threshold = 0.8,
 ): LintFinding[] {
   const scopeOf = new Map<string, string>();
   for (const [scope, families] of Object.entries(READING_SCOPES)) {
@@ -460,7 +460,7 @@ export function lintCrossFamilyEchoes(
   }
   // One group per (scope, body). A passage naming two bodies joins both, so
   // the groups overlap; findings are deduped by entry pair below.
-  const groups = new Map<string, HousePassage[]>();
+  const groups = new Map<string, Passage[]>();
   for (const p of passages) {
     const scope = scopeOf.get(p.family);
     if (scope === undefined) continue;
@@ -495,9 +495,9 @@ export function lintCrossFamilyEchoes(
   return findings;
 }
 
-export function lintCorpus(passages: HousePassage[]): LintFinding[] {
+export function lintCorpus(passages: Passage[]): LintFinding[] {
   const findings = passages.flatMap(lintPassage);
-  const byFamily = new Map<string, HousePassage[]>();
+  const byFamily = new Map<string, Passage[]>();
   for (const p of passages) {
     const list = byFamily.get(p.family) ?? [];
     list.push(p);

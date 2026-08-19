@@ -1,7 +1,7 @@
 # B1 adversarial review — instructions
 
 You are the adversarial reviewer (proposal §6, pass 5) for a scope of the
-Caelus Free corpus (`caelus-delineations-house`). Your job is to try to
+Caelus Free corpus (`caelus-corpus`). Your job is to try to
 fail entries against four tests, fix what you can fix without changing an
 entry's meaning, and report what needs a judgment call.
 

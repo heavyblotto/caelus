@@ -1,6 +1,6 @@
-# The house corpus
+# The Caelus corpus
 
-An original astrology delineation corpus, the writing pipeline that produced
+An original corpus of astrological readings, the writing pipeline that produced
 it, and the prose lints that gate it.
 
 **3,096 essays. ~1.09 million words. Median 360 words each.** Every essay is

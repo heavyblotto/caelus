@@ -1,5 +1,5 @@
 /**
- * The house corpus record: an original delineation, bound to the
+ * A corpus record: an original reading, bound to the
  * interpretation layer through a serializable selector vocabulary
  * (`./selectors.ts`, vendored from `caelus-delineations-pd`). Every entry
  * inherits the validation floor that vocabulary buys: the geometry a passage
@@ -92,7 +92,7 @@ export const LENGTH_BANDS: Record<CellFamily, { min: number; max: number }> = {
   "finder-event-angle": { min: 40, max: 140 },
 };
 
-export interface HousePassage {
+export interface Passage {
   /** Stable cell id, e.g. `natal:sun:sign:aries`. */
   id: string;
   family: CellFamily;
@@ -108,10 +108,10 @@ export interface HousePassage {
   conflicts?: string[];
 }
 
-export interface HousePassageSet {
+export interface PassageSet {
   /** One set per family slice, e.g. `house-natal-sun-signs`. */
   id: string;
   version: string;
   family: CellFamily;
-  passages: HousePassage[];
+  passages: Passage[];
 }

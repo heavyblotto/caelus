@@ -1,5 +1,5 @@
 // Regenerate src/passages.ts from data/passages/*.json. Each file is one
-// set; the set id is `house-<basename>`, the family is read from the
+// set; the set id is `corpus-<basename>`, the family is read from the
 // file's first record (every record in a file shares its family, which
 // the validation harness enforces). Run after new slices land:
 //   node pipeline/register-sets.mjs && npm run build && npm test
@@ -23,16 +23,16 @@ for (const f of files) {
   const base = f.replace(/\.json$/, "");
   lines.push(`import ${varName(base)} from "../data/passages/${f}" with { type: "json" };`);
 }
-lines.push('import type { HousePassage, HousePassageSet } from "./types.js";');
+lines.push('import type { Passage, PassageSet } from "./types.js";');
 lines.push("");
-lines.push("const set = (id: string, family: HousePassageSet[\"family\"], data: unknown): HousePassageSet => ({");
-lines.push('  id: `house-${id}`,');
+lines.push("const set = (id: string, family: PassageSet[\"family\"], data: unknown): PassageSet => ({");
+lines.push('  id: `corpus-${id}`,');
 lines.push('  version: "0.1.0",');
 lines.push("  family,");
-lines.push("  passages: data as HousePassage[],");
+lines.push("  passages: data as Passage[],");
 lines.push("});");
 lines.push("");
-lines.push("export const passageSets: HousePassageSet[] = [");
+lines.push("export const passageSets: PassageSet[] = [");
 for (const f of files) {
   const base = f.replace(/\.json$/, "");
   const records = JSON.parse(readFileSync(DIR + f, "utf8"));
@@ -46,7 +46,7 @@ for (const f of files) {
 lines.push("];");
 lines.push("");
 lines.push("/** Every written passage across the sets. */");
-lines.push("export const passages: HousePassage[] = passageSets.flatMap((s) => s.passages);");
+lines.push("export const passages: Passage[] = passageSets.flatMap((s) => s.passages);");
 lines.push("");
 
 writeFileSync(OUT, lines.join("\n"));

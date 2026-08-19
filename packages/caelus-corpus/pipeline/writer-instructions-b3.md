@@ -1,7 +1,7 @@
 # B3 writer slice — instructions (synastry, overlays, composite)
 
 You are writing one slice of the Caelus Free interpretation corpus
-(`caelus-delineations-house`), batch B3: two charts against each other.
+(`caelus-corpus`), batch B3: two charts against each other.
 Everything in `pipeline/writer-instructions.md` applies (read it first,
 along with `pipeline/voice-sheet.md` and `editorial/editorial-voice.md`);
 this sheet adds the rules specific to relationship prose.

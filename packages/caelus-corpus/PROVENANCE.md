@@ -47,8 +47,8 @@ no selector.
 monorepo paths. All now resolve inside this bundle:
 
 - `docs/editorial-voice.md` → `editorial/editorial-voice.md`
-- `packages/caelus-delineations-house/pipeline/*` → `pipeline/*`
-- "from `packages/caelus-delineations-house`" → "from the package root"
+- `packages/caelus-corpus/pipeline/*` → `pipeline/*`
+- "from `packages/caelus-corpus`" → "from the package root"
 
 ### 3. Two scripts were genericized
 

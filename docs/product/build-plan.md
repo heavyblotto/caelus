@@ -58,7 +58,7 @@ from `caelus-delineations-pd` validates binding, the new lints validate
 length bands, banned phrases, reading level, and duplication.
 
 **E — New packages and stores.**
-- `caelus-delineations-house`: compiled
+- `caelus-corpus`: compiled
   `InterpretationSource`s from agent-written `PassageRecord`s, its own
   semver.
 - `caelus-composer`: versioned norm packs (concreteness,
@@ -222,7 +222,7 @@ each cycle, as the proposal specifies.
    allow redistribution, the packs ship in the package; if not, the app
    fetches the tables from their source on first use and caches them on
    the device, with attribution. No further decision needed.
-4. **Package names.** `caelus-delineations-house` for the synthetic
+4. **Package names.** `caelus-corpus` for the synthetic
    corpus and `caelus-composer` for the mapping package.
 5. **Branch and deploy.** A long-lived feature branch off `dev` with
    preview deploys per milestone, merging to `dev` at stable points.

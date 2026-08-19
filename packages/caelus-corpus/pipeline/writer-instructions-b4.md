@@ -1,7 +1,7 @@
 # B4 writer slice — instructions (time-lords, lunations, returns, solar condition)
 
 You are writing one slice of the Caelus Free interpretation corpus
-(`caelus-delineations-house`), batch B4: the timing layer. Everything in
+(`caelus-corpus`), batch B4: the timing layer. Everything in
 `pipeline/writer-instructions.md` applies (read it first, along with
 `pipeline/voice-sheet.md` and `editorial/editorial-voice.md`); this sheet
 adds the rules specific to period prose.

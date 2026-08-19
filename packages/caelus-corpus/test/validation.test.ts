@@ -1,5 +1,5 @@
 /**
- * Validation harness for the house corpus. Proves, without an ephemeris,
+ * Validation harness for the Caelus corpus. Proves, without an ephemeris,
  * that every entry sits on a real grid cell, compiles to a live selector,
  * fires for its condition and not for a neighboring one, cites only atom
  * ids the projection would emit, and passes the corpus lints. Mirrors the
@@ -9,10 +9,10 @@ import { interpret } from "caelus";
 import type { FactAtom, InterpretationContext, InterpretationSource } from "caelus";
 import {
   passages, passageSets, sources, finderSets, fullGrid, gridCoverage,
-  lintCorpus, compileHouseSource, lintNearDuplicateSentences,
+  lintCorpus, compileCorpusSource, lintNearDuplicateSentences,
 } from "../src/index.js";
 import { selectorFromSpec } from "../src/selectors.js";
-import type { HousePassage } from "../src/index.js";
+import type { Passage } from "../src/index.js";
 
 let failures = 0;
 function check(cond: boolean, msg: string): void {
@@ -61,7 +61,7 @@ for (const p of passages) {
 
 // 4. Fires for its condition, and not for a shifted one.
 console.log("firing");
-function atomFor(p: HousePassage): FactAtom | null {
+function atomFor(p: Passage): FactAtom | null {
   const w = p.when;
   switch (w.kind) {
     case "placement":
@@ -183,7 +183,7 @@ function atomFor(p: HousePassage): FactAtom | null {
 }
 
 /** A context that should NOT fire the rule: shift the discriminating field. */
-function shiftedAtom(p: HousePassage): FactAtom | null {
+function shiftedAtom(p: Passage): FactAtom | null {
   const a = atomFor(p);
   if (!a) return null;
   const w = p.when;
@@ -264,8 +264,8 @@ function shiftedAtom(p: HousePassage): FactAtom | null {
 
 // Finder sets stay out of the shipped Reading sources but must still prove
 // they fire; compile them here for the harness only.
-const allSources = [...sources, ...finderSets.map(compileHouseSource)];
-const srcFor = (p: HousePassage): InterpretationSource | undefined =>
+const allSources = [...sources, ...finderSets.map(compileCorpusSource)];
+const srcFor = (p: Passage): InterpretationSource | undefined =>
   allSources.find((s) => s.rules.some((r) => r.id === p.id));
 
 for (const p of passages) {
@@ -304,8 +304,8 @@ check(findings.length === 0, `lints clean (${findings.length} findings)`);
 // count. These fixtures pin the behaviour meanwhile.
 console.log("near-duplicate sentence lint");
 {
-  const p = (id: string, text: string): HousePassage =>
-    ({ id, family: "fixture", when: {}, atomIds: [], text }) as unknown as HousePassage;
+  const p = (id: string, text: string): Passage =>
+    ({ id, family: "fixture", when: {}, atomIds: [], text }) as unknown as Passage;
 
   // The real B3 case: one sentence, one word swapped, across two entries.
   const swapped = lintNearDuplicateSentences([
@@ -374,4 +374,4 @@ if (failures > 0) {
   console.error(`\n${failures} failures`);
   process.exit(1);
 }
-console.log("\nhouse corpus validation passed");
+console.log("\ncaelus corpus validation passed");

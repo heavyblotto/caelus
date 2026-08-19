@@ -252,16 +252,16 @@ import b4ZrL2 from "../data/passages/b4-zr-l2.json" with { type: "json" };
 import b7FinderEvents1 from "../data/passages/b7-finder-events-1.json" with { type: "json" };
 import b7FinderEvents2 from "../data/passages/b7-finder-events-2.json" with { type: "json" };
 import b7FinderRisingFit from "../data/passages/b7-finder-rising-fit.json" with { type: "json" };
-import type { HousePassage, HousePassageSet } from "./types.js";
+import type { Passage, PassageSet } from "./types.js";
 
-const set = (id: string, family: HousePassageSet["family"], data: unknown): HousePassageSet => ({
-  id: `house-${id}`,
+const set = (id: string, family: PassageSet["family"], data: unknown): PassageSet => ({
+  id: `corpus-${id}`,
   version: "0.1.0",
   family,
-  passages: data as HousePassage[],
+  passages: data as Passage[],
 });
 
-export const passageSets: HousePassageSet[] = [
+export const passageSets: PassageSet[] = [
   set("b1-aspects-01", "aspect", b1Aspects01),
   set("b1-aspects-02", "aspect", b1Aspects02),
   set("b1-aspects-03", "aspect", b1Aspects03),
@@ -514,4 +514,4 @@ export const passageSets: HousePassageSet[] = [
 ];
 
 /** Every written passage across the sets. */
-export const passages: HousePassage[] = passageSets.flatMap((s) => s.passages);
+export const passages: Passage[] = passageSets.flatMap((s) => s.passages);

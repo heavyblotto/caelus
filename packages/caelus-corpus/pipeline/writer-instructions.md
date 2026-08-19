@@ -1,7 +1,7 @@
 # B1 writer slice — instructions
 
 You are writing one slice of the Caelus Free interpretation corpus
-(`caelus-delineations-house`), batch B1. Original natal-astrology
+(`caelus-corpus`), batch B1. Original natal-astrology
 delineations at the Robert Hand / Para Research standard.
 
 ## Read first (all of these, in this order)

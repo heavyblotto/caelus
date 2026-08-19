@@ -1,13 +1,13 @@
 /**
- * Compile house passages into Caelus {@link InterpretationSource}s, reusing
+ * Compile corpus passages into Caelus {@link InterpretationSource}s, reusing
  * the pd package's selector compiler verbatim (the validation floor the
  * proposal's content strategy leans on).
  */
 import { selectorFromSpec } from "./selectors.js";
 import type { InterpretationSource, Rule } from "caelus";
-import type { HousePassage, HousePassageSet } from "./types.js";
+import type { Passage, PassageSet } from "./types.js";
 
-export function ruleFromHousePassage(p: HousePassage): Rule {
+export function ruleFromPassage(p: Passage): Rule {
   return {
     id: p.id,
     when: selectorFromSpec(p.when),
@@ -20,12 +20,12 @@ export function ruleFromHousePassage(p: HousePassage): Rule {
 /** Node cells are written once against `true_node`; mirror each such rule
  *  (placement, natal aspect, or transit target) to `mean_node` so either
  *  node setting fires the same text. */
-function mirrorNodeRules(passages: HousePassage[]): HousePassage[] {
-  const out: HousePassage[] = [];
+function mirrorNodeRules(passages: Passage[]): Passage[] {
+  const out: Passage[] = [];
   for (const p of passages) {
     out.push(p);
     const w = p.when;
-    let mirrored: HousePassage["when"] | null = null;
+    let mirrored: Passage["when"] | null = null;
     if (w.kind === "composite" && w.body === "true_node") {
       mirrored = { ...w, body: "mean_node" };
     } else if (w.kind === "placement" && w.body === "true_node") {
@@ -59,10 +59,10 @@ function mirrorNodeRules(passages: HousePassage[]): HousePassage[] {
   return out;
 }
 
-export function compileHouseSource(set: HousePassageSet): InterpretationSource {
+export function compileCorpusSource(set: PassageSet): InterpretationSource {
   return {
     id: set.id,
     version: set.version,
-    rules: mirrorNodeRules(set.passages).map(ruleFromHousePassage),
+    rules: mirrorNodeRules(set.passages).map(ruleFromPassage),
   };
 }

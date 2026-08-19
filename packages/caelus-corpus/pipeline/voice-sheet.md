@@ -1,6 +1,6 @@
-# The house voice — writer's sheet
+# The corpus voice — writer's sheet
 
-The contract for every entry in `caelus-delineations-house`. It extends
+The contract for every entry in `caelus-corpus`. It extends
 [editorial/editorial-voice.md](../editorial/editorial-voice.md) (whose rules
 all apply, including the Caelus Free product-copy section) with the rules
 specific to delineation prose. The lints in `src/lint.ts` enforce the
@@ -57,7 +57,7 @@ not a paragraph of keywords.
 
 ## Shape of a record
 
-Every entry is a `HousePassage` (see `src/types.ts`): the cell id and
+Every entry is a `Passage` (see `src/types.ts`): the cell id and
 selector come from the grid (`src/grid.ts`), never invented, so binding is
 correct by construction. Text is the essay. `weight` stays unset unless
 the review pass decides a cell should outrank its salience.

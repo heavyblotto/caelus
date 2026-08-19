@@ -1,19 +1,19 @@
 /**
- * The house corpus: 3,096 original delineations, shipped as compiled
+ * The Caelus corpus: 3,096 original readings, shipped as compiled
  * InterpretationSources with their own semver. Every entry is bound to a
  * fact the engine can produce, fired against a chart that carries that fact,
  * and linted as prose before it ships.
  */
 import type { InterpretationSource } from "caelus";
-import { compileHouseSource } from "./compile.js";
+import { compileCorpusSource } from "./compile.js";
 import { passageSets, passages } from "./passages.js";
 import { FINDER_FAMILIES } from "./types.js";
 
 export type {
-  HousePassage, HousePassageSet, CellFamily, SelectorSpec,
+  Passage, PassageSet, CellFamily, SelectorSpec,
 } from "./types.js";
 export { LENGTH_BANDS, FINDER_FAMILIES } from "./types.js";
-export { ruleFromHousePassage, compileHouseSource } from "./compile.js";
+export { ruleFromPassage, compileCorpusSource } from "./compile.js";
 export { selectorFromSpec } from "./selectors.js";
 export { b1Grid, b2Grid, b3Grid, b4Grid, b7Grid, fullGrid, gridCoverage } from "./grid.js";
 export type { GridCell } from "./grid.js";
@@ -62,7 +62,7 @@ export const CORPUS_VERSION = "0.1.0";
  *  {@link finderSets} for that surface to consume directly. */
 export const sources: InterpretationSource[] = passageSets
   .filter((s) => !FINDER_FAMILIES.has(s.family))
-  .map(compileHouseSource);
+  .map(compileCorpusSource);
 
 /** The B7 finder bank, raw: rising-fit descriptions and event templates. */
 export const finderSets = passageSets.filter((s) => FINDER_FAMILIES.has(s.family));
