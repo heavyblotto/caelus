@@ -1,6 +1,6 @@
 ---
 description: User-facing copy — dry technical voice, no AI slop
-globs: apps/web/**/*.{tsx,ts},docs/**/*.md,*.md
+globs: apps/web/**/*.{tsx,ts},docs/**/*.md
 alwaysApply: false
 ---
 
@@ -12,7 +12,7 @@ Before editing user-facing text, read `docs/editorial-voice.md` and `docs/ai-slo
 
 - Dry engineer, not pitch deck. Facts and measurements over adjectives.
 - Short sentences. Name sources and numbers.
-- No manifesto lines, mic-drops, or performed wit ("full stop", "mail to Zurich", "every layer needs its own referee").
+- No aphoristic writing, manifesto lines, mic-drops, or performed wit ("full stop", "mail to Zurich", "every layer needs its own referee").
 
 ## Banned patterns
 

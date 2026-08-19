@@ -1,0 +1,30 @@
+---
+description: Corpus essays — second-person delineation voice, not app/docs copy
+globs: packages/caelus-corpus/**
+alwaysApply: false
+---
+
+# Corpus prose
+
+This package is readings, not engine docs. Do not apply `.cursor/rules/copy.mdc`
+or `docs/editorial-voice.md` to essay text, writer sheets, or review sheets.
+
+Before writing or editing corpus entries, read
+`packages/caelus-corpus/pipeline/voice-sheet.md`. Length bands, banned phrases,
+and duplication are enforced by `src/lint.ts`; the review pass judges the rest.
+
+## Voice
+
+- Second person, present tense. "You" early and often.
+- Theme first, then the life areas the configuration actually touches.
+- Non-fatalistic, full weight. No doom, no promises, no flattery.
+- No medical, financial, or legal directives.
+- Plain speech. Flesch-Kincaid grade 12 or lower per entry.
+- Astrology from the tradition, written fresh. No invented doctrine.
+- The text must never claim a fact the selector does not guarantee.
+
+## Do not
+
+- Rewrite essays into the dry-engineer docs register.
+- Open or close a family with the same move.
+- Invent cell ids, selectors, or atom ids; copy them from the grid.

@@ -78,3 +78,6 @@ python/*.part
 # npm pack dry-run tarballs from release prep; `npm publish` packs fresh.
 packages/*/caelus-*.tgz
 .vercel
+
+# OpenMemory - IDE/Assistant specific rules
+.cursor/rules/openmemory.mdc
