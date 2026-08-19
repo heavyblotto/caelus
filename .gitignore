@@ -69,6 +69,12 @@ python/moon_horizons_cache.json
 # and are re-derivable from Horizons by re-running the fit scripts. The packs
 # they produce ARE committed, which is what consumers and the goldens need.
 python/*_horizons_cache_[0-9]*.json
+# The classical-era caches are wider still (~1.4 GB for all seven bodies, the
+# Moon alone ~800 MB at 3-hour steps over 3000 BCE-1000 CE). Same rationale:
+# re-derivable by re-running fit_classical.py; the minted slabs are committed.
+python/*_horizons_cache_classical*.json
 # In-progress download checkpoints (HorizonsCache resume support). Pure scratch.
 python/*.part
+# npm pack dry-run tarballs from release prep; `npm publish` packs fresh.
+packages/*/caelus-*.tgz
 .vercel
