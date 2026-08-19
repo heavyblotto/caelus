@@ -58,8 +58,8 @@ compatibility verdicts, conduct claims, essays that would serve as their own
 mirror.
 
 **Not written:** B5 (lots, fixed stars, receptions, parallels, nakshatras,
-vargas, yogas, ~600), B6 (decans and degree symbols, ~400 — do the rights
-check on degree symbols first), B8 (the education library, ~375 pieces), and
+vargas, yogas, ~600), B6 (decans and degree symbols, ~400 — the degree
+symbols are original, written for this corpus), B8 (the education library, ~375 pieces), and
 the journal prompt bank that was scoped alongside B7 (~120).
 
 ## The pipeline

@@ -180,7 +180,7 @@ standard. Counts are from the proposal's grid.
 | B3 | Synastry aspects, house overlays, composite | ~870 | People (M4) |
 | B4 | Time-lords, planetary returns, eclipses and lunations, solar phase | ~270 | Times (M3–M4) |
 | B5 | Lots, fixed stars, receptions, parallels, nakshatras, vargas, yogas | ~600 | Traditional and Vedic surfaces (M5) |
-| B6 | Decans, degree symbols (rights check first) | ~400 | Chart hub advanced, programmatic pages (M6) |
+| B6 | Decans, degree symbols (original symbols, written for the corpus) | ~400 | Chart hub advanced, programmatic pages (M6) |
 | B7 | Birth-time finder question bank, journal prompt bank | ~160 | Onboarding (M2) and Journal (M5) |
 | B8 | Education library: reading series, casting guides, per-chart-type guides, timing techniques, Vedic path, tool walkthroughs, glossary, FAQ | ~375 pieces | Learn, continuously; complete by M7 |
 
