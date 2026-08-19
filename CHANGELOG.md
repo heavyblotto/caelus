@@ -8,11 +8,37 @@ current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
 ## Unreleased
+### The classical era: validated charts back to 3000 BCE
+
+Seven era slabs, minted from JPL Horizons (DE441), extend the validated span
+from 1000 CE back to 3000 BCE: the Sun (carried by Earth's slab), the Moon,
+Mercury, Venus, Mars, Jupiter, and Saturn. Each slab ends exactly at its
+modern pack's first instant (JD 2086302.5) and chained era resolution hands
+over at that single point: a body resolves from whichever slab covers the
+instant, and the two independent fits agree at the handoff by 0.01–0.48
+arcseconds (the Moon by 48 arcseconds, inside its 1-arcmin bar). Accuracy is measured
+at epochs the fits never sampled: 2.9e-08 AU (Mars) to 5.7e-06 AU (Saturn)
+against distance-scaled bars, the Moon 7.85 km against a 112 km bar.
+
+A 900 CE chart now computes the tradition's seven *validated*; Uranus,
+Neptune, Pluto, and the small bodies are not computed at all: no
+classical pack exists for them, and the engine will not serve a body past its
+validated span, while the delta-T warning carries what actually bounds an ancient
+chart (Morrison & Stephenson 2004). `engineCapabilities` and the
+`outside_validated_range` warnings report the chained span (−2998–3000); the
+Sun inherits Earth's slabs because geocentric Sun is heliocentric Earth. The
+golden suite's pre-1000 expectations are rewritten to this truth, and the
+Python reference resolves the same era path (parity pinned at 900 CE). The
+mint is reproducible: `python/fit_classical.py` re-derives every slab from
+Horizons; the multi-GB sample caches are excluded from git, the 76 MB of
+slabs are committed.
+
+
 
 ### The interpretation projection learns the facts a chart does not state
 
-Eight fact kinds joined `interpretationContext`, taking the `FactKind` union
-from 17 to 25. Each closes a gap a reader takes for granted but a `Chart`
+Seven fact kinds joined `interpretationContext`, taking the `FactKind` union
+from 19 to 26. Each closes a gap a reader takes for granted but a `Chart`
 cannot express, and each lands with a golden that recomputes the atom set from
 the chart's own numbers rather than pinning a snapshot.
 
@@ -93,28 +119,12 @@ they shipped, and nobody noticed, because nothing looked.
   rather than three. The playground's single-purpose `BiWheel` is removed;
   `SynastryPanel` and `SkyNow` render `MultiWheel` instead. 24-check render
   test in the package suite and in CI.
-- New package `caelus-delineations-house` (0.1.0, unpublished so far): the
-  original interpretation corpus written for Caelus Free, and the counterpart
-  to the public-domain `caelus-delineations-pd`. The content grid is an
-  enumerable coverage contract rather than a claim — `fullGrid()` names every
-  cell the corpus owes, so coverage is a computation. **1,858 cells written and
-  validated** (natal placements, aspects, angles, dignities, patterns 812;
-  transits by aspect, by house, and stations 738; time-lords, lunations,
-  eclipses, returns, and solar conditions 268; the birth-time finder bank 40),
-  against a grid of 2,622 with the relationship batch enumerated and unwritten.
-  Every entry compiles through the pd package's selector compiler, so binding
-  is checked the same way, and the harness proves each one fires for its
-  condition and not for a shifted one.
-  Corpus lints: length bands per family, banned phrases, a Flesch-Kincaid gate,
-  near-duplicate detection, and two added after an adversarial review found
-  what the ratio-based check structurally could not — `lintSharedSentences` (a
-  whole sentence repeated across a family, which never moves an overlap ratio
-  in a 300-word essay) and `lintSkeletons` (a third of a family sharing an
-  opening or closing formula). Turning those two on found 19 real defects in
-  content that had already passed the old lints.
 - `caelus-delineations-pd` 0.1.6: the serializable placement selector
   spec gains an optional `retrograde` flag, matching `hasPlacement`. No
   behavior change for existing data.
+- The turbo tier (`Turbo` longitude packs) was refit against the current
+  engine, with the fitter measuring itself against independent epochs rather
+  than its own nodes, the same honest-error discipline the pack mints use.
 - Draconic chart transform (engine backlog stream F): the zodiac re-zeroed at
   the Moon's ascending node — each point's draconic longitude is
   mod(tropical − node, 360); angles transform identically, declinations are

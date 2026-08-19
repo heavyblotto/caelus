@@ -9,6 +9,19 @@ it is set by two analytic shortcuts and by what we have measured.
 
 This is "validated, not asserted": the headline range only moves once the
 edge accuracy is measured against JPL Horizons, never on the strength of a
+
+> **Status, 2026-08.** The 1000–3000 wide tier (Tier B) shipped in 0.24.0. The
+> classical era tier (the deep-time R1 work) landed on the 0.25.0 branch:
+> seven era slabs (Sun via Earth, Moon, Mercury, Venus, Mars, Jupiter, Saturn)
+> minted from Horizons/DE441 by `python/fit_classical.py`, each adjoining its
+> modern pack at the shared boundary instant JD 2086302.5, extending validated
+> charts to 3000 BCE. True errors at unsampled epochs: 2.9e-08 AU (Mars) to
+> 5.7e-06 AU (Saturn); Moon 7.85 km against the 112 km bar; boundary handoffs
+> 0.01–0.48″ (Moon 48″, under its 1′ bar). Uranus, Neptune, Pluto, and the
+> small bodies deliberately have no classical pack: at ancient dates they are
+> omitted and reported, and delta-T (Morrison & Stephenson 2004) is the
+> documented bound on what remains.
+
 theory's published envelope alone.
 
 ## What bounds the range today

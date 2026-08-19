@@ -17,9 +17,16 @@ serves real users.
 ## Supported date range
 
 Positions are validated for **1000–3000** for the planets, Pluto, and the Moon
-(every body carries a Chebyshev pack fit to JPL Horizons across the span). The
-small bodies (asteroids + Chiron) are fitted for **1600–2484**, the widest
-window Horizons serves for them. The hosted edge endpoint ships only the
+(every body carries a Chebyshev pack fit to JPL Horizons across the span). With
+the Node loader, the classical era pack extends the Sun, Moon, Mercury, Venus,
+Mars, Jupiter, and Saturn to **3000 BCE–3000 CE**: era slabs chained at the
+modern packs' shared 1000 CE boundary, each validated against Horizons at
+epochs its fit never sampled. The small bodies (asteroids + Chiron) are fitted
+for **1600–2484**, the widest window Horizons serves for them, and Uranus and
+Neptune have no classical pack: at ancient dates they are omitted, not
+estimated. What actually bounds an ancient chart is the clock: `chart.warnings`
+states the delta-T uncertainty (Morrison &amp; Stephenson 2004) once it matters
+at chart scale. The hosted edge endpoint ships only the
 embedded Moon tier, so it serves a narrower window and returns `400` outside
 it:
 
@@ -92,7 +99,8 @@ if (t === null) {
 ## Event-search windows
 
 Event search is bounded by an explicit `[start, end]` and by each body's
-fitted range (1000–3000 for the planets, Pluto, and the Moon; 1600–2484 for
+fitted range (−2998–3000 for the classical seven on the Node tier, 1000–3000
+for Uranus, Neptune, and Pluto; 1600–2484 for
 the small bodies). An empty result means "nothing in this window," not
 "never"; widen the window and retry. Outer-planet returns and crossings can yield
 multiple hits around a retrograde loop, so the search returns an array, not a

@@ -138,7 +138,9 @@ recorded as non-goals:
   1000–3000 CE wide tier is built end to end (parameterized fits, the
   wide validation band, capability/warning plumbing — see
   `range-expansion.md`, "Tier B") and awaits only a Horizons-connected
-  mint run.
+  mint run. **Status, 2026-08: done.** The wide tier shipped in 0.24.0, and
+  the classical era slabs (3000 BCE–1000 CE, seven classical bodies) landed
+  on the 0.25.0 branch; the ±13,000-year ambition stays a non-goal.
 - The numbered-asteroid corpus (hundreds of thousands of bodies). The fit
   pipeline can mint a Chebyshev pack for any requested asteroid instead.
 - Planetary moons and planetocentric positions.

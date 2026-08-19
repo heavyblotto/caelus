@@ -35,8 +35,11 @@ docs, validation, provenance).
 
 ## Status
 
-Shipped through **0.23.0** (npm: all five packages; PyPI: `caelus-engine`,
-the Python reference; GitHub releases v0.1.0–v0.23.0). The 0.1–0.12 arc
+Shipped through **0.24.1** (npm: all five packages; PyPI: `caelus-engine`,
+the Python reference; GitHub releases v0.1.0–v0.24.1). On the 0.25.0 release
+branch: the classical era pack (era slabs adjoin the modern tier at 1000 CE,
+extending validated charts of the classical seven back to 3000 BCE) and
+`caelus-wheel`'s `MultiWheel` rings API. The 0.1–0.12 arc
 built the validated core: full body set, 12 house
 systems, tropical + 7 sidereal
 ayanamsas, aspects, event search (rise/set, crossings, phases, stations,
@@ -70,7 +73,8 @@ MCP App widget wiring (0.14), enriched chart bodies (0.15), chart synthesis
 (0.17), the interpretation + provenance layers and the wider sky (0.18), the
 cited interpretation corpus with star/lot atoms (0.19), diachronic and
 relational atoms (0.20), embedded fixed stars (0.20.1), per-body wheel
-colors (0.21), Sky View (0.22), and the synthetic ephemeris (0.23). The MCP
+colors (0.21), Sky View (0.22), and the synthetic ephemeris (0.23); canonical
+output mode and the validated 1000–3000 Chebyshev tier landed in 0.24. The MCP
 server now exposes thirty-five chart tools.
 
 The `ephemengine.com` site ships its full shape: landing page, browser

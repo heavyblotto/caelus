@@ -23,6 +23,7 @@ MCP
 arcsecond
 arcseconds
 nano-arcsecond
+serializable
 [Gg]eocentric
 [Hh]eliocentric
 [Ee]cliptic
