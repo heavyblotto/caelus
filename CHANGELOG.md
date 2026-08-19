@@ -8,89 +8,80 @@ current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
 ## Unreleased
-### The classical era: validated charts back to 3000 BCE
 
-Seven era slabs, minted from JPL Horizons (DE441), extend the validated span
-from 1000 CE back to 3000 BCE: the Sun (carried by Earth's slab), the Moon,
-Mercury, Venus, Mars, Jupiter, and Saturn. Each slab ends exactly at its
-modern pack's first instant (JD 2086302.5) and chained era resolution hands
-over at that single point: a body resolves from whichever slab covers the
-instant, and the two independent fits agree at the handoff by 0.01–0.48
-arcseconds (the Moon by 48 arcseconds, inside its 1-arcmin bar). Accuracy is measured
-at epochs the fits never sampled: 2.9e-08 AU (Mars) to 5.7e-06 AU (Saturn)
-against distance-scaled bars, the Moon 7.85 km against a 112 km bar.
+### Era packs extend the validated range to 3000 BCE
 
-A 900 CE chart now computes the tradition's seven *validated*; Uranus,
-Neptune, Pluto, and the small bodies are not computed at all: no
-classical pack exists for them, and the engine will not serve a body past its
-validated span, while the delta-T warning carries what actually bounds an ancient
-chart (Morrison & Stephenson 2004). `engineCapabilities` and the
-`outside_validated_range` warnings report the chained span (−2998–3000); the
-Sun inherits Earth's slabs because geocentric Sun is heliocentric Earth. The
-golden suite's pre-1000 expectations are rewritten to this truth, and the
-Python reference resolves the same era path (parity pinned at 900 CE). The
-mint is reproducible: `python/fit_classical.py` re-derives every slab from
-Horizons; the multi-GB sample caches are excluded from git, the 76 MB of
-slabs are committed.
+`loadNodeData` now loads era slabs: Chebyshev packs named
+`{body}_cheb.classical.json`, minted from JPL Horizons (DE441), covering 3000
+BCE to 1000 CE for the Sun (via Earth's slab), the Moon, Mercury, Venus, Mars,
+Jupiter, and Saturn. Each slab ends at its modern pack's first instant (JD
+2086302.5), and a body resolves from whichever slab covers the requested
+instant. At the shared boundary the two independent fits agree by 0.01–0.48
+arcseconds for the planets and by 48 arcseconds for the Moon (bar: 1
+arcminute). Fit error, measured at Horizons epochs the fits did not sample,
+runs from 2.9e-08 AU (Mars) to 5.7e-06 AU (Saturn); the Moon's is 7.85 km
+against a 112 km bar.
 
+At 900 CE a chart computes the seven classical bodies inside their validated
+span. Uranus, Neptune, Pluto, and the small bodies have no classical pack, so
+they are omitted and listed in `chart.unavailable`. The delta-T warning
+(Morrison & Stephenson 2004) reports the remaining clock uncertainty at those
+epochs. `engineCapabilities` and the `outside_validated_range` warnings report
+the chained span, −2998 to 3000; the Sun takes Earth's span because geocentric
+Sun position derives from heliocentric Earth. The Python reference resolves
+era slabs the same way and returns the same 900 CE chart. The mint script,
+`python/fit_classical.py`, reproduces the slabs from Horizons. The sample
+caches (about 1.4 GB) are excluded from git; the 76 MB of slabs are committed.
 
+### `interpretationContext` gains seven fact kinds
 
-### The interpretation projection learns the facts a chart does not state
+The `FactKind` union grows from 19 to 26. Each new kind has a golden test that
+recomputes the atom set from the chart's numbers rather than pinning a
+snapshot.
 
-Seven fact kinds joined `interpretationContext`, taking the `FactKind` union
-from 19 to 26. Each closes a gap a reader takes for granted but a `Chart`
-cannot express, and each lands with a golden that recomputes the atom set from
-the chart's own numbers rather than pinning a snapshot.
-
-- **`angleContact`** — a body conjunct the ASC/DSC/MC/IC *point*, which is not
-  an aspect (the angles carry no speed, so there is no phase) and not the
-  angular *house*. `angleOrb` option, default 8°. Selector `hasAngleContact`.
-- **`transitHouse`** — a transiting body's natal house, true whether or not
-  anything is in orb: the "Saturn is crossing your 7th" fact. New
-  `transitHouses()` in `relational.ts`; selector `hasTransitHouse`.
-- **`station`** — a body turning retrograde or direct near the instant, inside
-  an editorial window (`stationWindowDays`, default ±5). Selector `hasStation`.
-- **`return`** — a body within orb of its own natal longitude, *numbered*, so a
+- **`angleContact`**: a body conjunct the ASC/DSC/MC/IC point. This is not an
+  aspect (the angles carry no speed, so there is no phase) and not the angular
+  house. New `angleOrb` option, default 8°. Selector `hasAngleContact`.
+- **`transitHouse`**: a transiting body's natal house, reported whether or not
+  an aspect is in orb. New `transitHouses()` in `relational.ts`. Selector
+  `hasTransitHouse`.
+- **`station`**: a body turning retrograde or direct within
+  `stationWindowDays` of the instant (default ±5 days). Selector `hasStation`.
+- **`return`**: a body within orb of its own natal longitude, numbered, so a
   first Saturn return is addressable apart from a second. New `activeReturns()`
-  (`ReturnHit`); Neptune and Pluto sit out, since no one lives to see them
-  return. Selector `hasReturn`, filtering `nth` or `minNth`.
-- **`lunation`** — New and Full Moons near the instant, located in the natal
-  houses, eclipse-flagged through the pinned eclipse search, listing the natal
-  bodies the syzygy falls on. New `activeLunations()` (`LunationHit`). Selector
+  (`ReturnHit`). Neptune and Pluto are excluded, since their orbital periods
+  exceed a human lifespan. Selector `hasReturn`, filtering `nth` or `minNth`.
+- **`lunation`**: New and Full Moons near the instant, with natal house
+  placement, an eclipse flag from the engine's eclipse search, and the natal
+  bodies the syzygy conjoins. New `activeLunations()` (`LunationHit`). Selector
   `hasLunation`.
-- **`solarPhase`** — cazimi, combust, or under the beams for the classical
-  five, computed from the chart's own longitudes at the pinned electional
-  thresholds. Fires on a birth chart and on the moving sky alike. Selector
-  `hasSolarPhase`.
-- **`compositeAspect`** — an aspect between two composite placements. The
-  composite chart is a set of midpoints, so its internal geometry is a fact
-  about the relationship rather than about either person; `composite` atoms
-  already gave the placements, this gives the relations among them. New
-  `compositeAspects()` in `relational.ts`; selector `hasCompositeAspect`.
-- **`parallel`** and **`outOfBounds`** shipped in 0.24 but were never written
-  into the docs; they are listed here because the doc surfaces now describe
-  them for the first time.
+- **`solarPhase`**: cazimi, combust, or under the beams for the classical
+  five, computed from the chart's longitudes at the electional thresholds.
+  Applies to natal charts and to transits. Selector `hasSolarPhase`.
+- **`compositeAspect`**: an aspect between two composite placements.
+  `composite` atoms carry the placements; this kind carries the relations
+  among them. New `compositeAspects()` in `relational.ts`. Selector
+  `hasCompositeAspect`.
 
-Three engine-semantic gaps closed, each changing *output*, not just API:
+`parallel` and `outOfBounds` shipped in 0.24 and are now documented.
 
-- **Node aspects.** `findAspects` excludes both nodes (`NOT_ASPECTABLE`), so no
-  node aspect ever reached an interpreter. The projection now computes them
-  itself over the chart's own longitudes, with the same aspect table, default
-  orbs, and phase/strength arithmetic. The engine boundary is unchanged: one
-  node projects (true, or mean when it is the only one present), and
-  `chart.aspects` still carries none.
-- **The node as a transit target.** `transitAspects` admits one natal node as a
-  target while the transiting set stays as it was, so
-  `transit:<body>~natal_true_node:<aspect>` atoms now exist.
+Three behavior changes affect projected output:
+
+- **Node aspects.** `findAspects` excludes both nodes (`NOT_ASPECTABLE`), so
+  node aspects never reached the projection. The projection now computes them
+  over the chart's longitudes, with the same aspect table, default orbs, and
+  phase/strength arithmetic. `chart.aspects` is unchanged and still carries
+  none.
+- **The node as a transit target.** `transitAspects` now admits one natal node
+  as a target, so `transit:<body>~natal_true_node:<aspect>` atoms exist.
 - **Peregrine.** A classical planet holding none of the five essential
   dignities at its degree is marked `"peregrine"` in its placement atom's
-  `dignities` (Lilly, via the pinned `dignityScore`, sect-aware). Chart-level
-  `Position.dignities` is untouched — this is a projection-level enrichment, so
-  dignity selectors can match the state without the chart asserting it.
+  `dignities` (Lilly, via `dignityScore`, sect-aware). `Position.dignities` is
+  unchanged; the mark exists only in the projection.
 
 `TimelordAtom` gained `house` (the profected house) and `under` (the enclosing
 period's lord: a firdaria major over its sub, a mahadasha over its antardasha),
-which makes period *pairs* addressable; `hasTimelord` filters both.
+so period pairs are addressable; `hasTimelord` filters both.
 `enrichContextOptions` projects transit houses, stations, returns, and
 lunations by default, with flags and windows for each.
 
@@ -100,15 +91,14 @@ object literal must add them; `Partial<>` overrides through
 `ContextOptions.salience` are unaffected. The `FactKind` union grew, which
 breaks exhaustive `switch` statements over it.
 
-### Docs stop drifting from the engine
+### Docs consistency check in preflight and CI
 
-`scripts/check-docs.mjs` (in `preflight` and CI) asserts that the fact-kind
-union written by hand in `docs/interpretation-layer.md` and the public
-`/docs/interpretation` page matches `FactKind` in the source, and that every
-exported selector is mentioned somewhere in the docs. This is the same shape of
-guard as `check-versions` and `check-tarball`, and it exists for the same
-reason: both doc surfaces had been missing `parallel` and `outOfBounds` since
-they shipped, and nobody noticed, because nothing looked.
+`scripts/check-docs.mjs` now runs in `preflight` and CI. It fails the build if
+the fact-kind list in `docs/interpretation-layer.md` or the public
+`/docs/interpretation` page does not match the `FactKind` union in the source,
+or if an exported selector is not mentioned in the docs. The check was added
+because both doc surfaces had been missing `parallel` and `outOfBounds` since
+those kinds shipped in 0.24.
 
 ### Other
 
@@ -123,9 +113,8 @@ they shipped, and nobody noticed, because nothing looked.
   spec gains an optional `retrograde` flag, matching `hasPlacement`. No
   behavior change for existing data.
 - The turbo tier (`Turbo` longitude packs) was refit against the current
-  engine, with the fitter measuring itself against independent epochs rather
-  than its own nodes, the same honest-error discipline the pack mints use.
-- Draconic chart transform (engine backlog stream F): the zodiac re-zeroed at
+  engine; fit error is now measured at epochs the fit did not sample.
+- Draconic chart transform: the zodiac re-zeroed at
   the Moon's ascending node — each point's draconic longitude is
   mod(tropical − node, 360); angles transform identically, declinations are
   untouched. `draconicLongitude`/`draconicLongitudes` (pure transform),
