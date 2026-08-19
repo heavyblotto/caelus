@@ -1,0 +1,416 @@
+<title>Caelus Free Design Direction</title>
+<style>
+  :root {
+    /* twilight lane */
+    --zenith: #0e0b22; --night: #171233; --dusk: #2c1e52; --violet: #4a3272;
+    --horizon: #c86e79; --peach: #dd6ba1; --peach-soft: rgba(221,107,161,.16);
+    --ivory: #f2ecdf; --ivory-dim: #c8c1b2; --ivory-faint: #8e8a9e;
+    --line: rgba(242,236,223,.14);
+    /* almanac lane */
+    --paper: #f6f1e4; --paper-2: #efe8d6; --ink: #23201a; --ink-soft: #55503f;
+    --rule: #d8d0bc; --rule-strong: #b9ae90; --peach-print: #c2447f;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--zenith); color: var(--ivory-dim); font-family: var(--sans);
+         font-size: 16px; line-height: 1.6; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 1.4rem; }
+  .eyebrow { font-family: var(--mono); font-size: .7rem; letter-spacing: .22em;
+             text-transform: uppercase; color: var(--peach); }
+  h2 { font-family: var(--serif); font-weight: 500; font-size: 1.7rem; color: var(--ivory);
+       margin: .4rem 0 1rem; letter-spacing: .01em; text-wrap: balance; }
+  p { max-width: 44rem; }
+  .note { font-size: .85rem; color: var(--ivory-faint); }
+  section { padding: 4.5rem 0; }
+
+  /* ---------- hero: the twilight gradient ---------- */
+  .hero { position: relative; overflow: hidden; padding: 7rem 0 8rem;
+          background: linear-gradient(to bottom,
+            var(--zenith) 0%, var(--night) 34%, var(--dusk) 58%,
+            var(--violet) 74%, #7c4a77 86%, var(--horizon) 96%, #e0906f 100%); }
+  .hero .wrap { position: relative; }
+  .stars span { position: absolute; width: 2px; height: 2px; border-radius: 50%;
+                background: var(--ivory); opacity: .7; }
+  .hero .eyebrow { color: #f0c9b4; }
+  .wordmark { font-family: var(--serif); font-size: clamp(2.6rem, 7vw, 4.4rem);
+              color: var(--ivory); letter-spacing: .01em; margin: .8rem 0 .4rem; }
+  .wordmark .free { color: var(--peach); font-style: italic; }
+  .tagline { font-family: var(--serif); font-size: 1.25rem; color: var(--ivory-dim); }
+  .hero .planet { position: absolute; border-radius: 50%; background: var(--peach);
+                  box-shadow: 0 0 14px 3px var(--peach-soft), 0 0 4px 1px rgba(221,107,161,.6); }
+
+  /* ---------- the law ---------- */
+  .law { border-top: 1px solid var(--line); }
+  .lawline { font-family: var(--serif); font-size: 1.5rem; color: var(--ivory);
+             margin-bottom: 1.6rem; }
+  .lawline em { color: var(--peach); font-style: normal; }
+  .chips { display: flex; flex-wrap: wrap; gap: .6rem; }
+  .chip { font-family: var(--mono); font-size: .74rem; padding: .34rem .8rem;
+          border-radius: 99px; border: 1px solid var(--line); color: var(--ivory-faint); }
+  .chip.alive { border-color: var(--peach); color: var(--peach);
+                background: var(--peach-soft); }
+
+  /* ---------- twilight tokens + samples ---------- */
+  .swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+              gap: .7rem; margin: 1.4rem 0 2rem; }
+  .swatch { border-radius: 8px; border: 1px solid var(--line); padding: .7rem .8rem;
+            min-height: 86px; display: flex; flex-direction: column; justify-content: flex-end; }
+  .swatch .n { font-family: var(--mono); font-size: .68rem; letter-spacing: .06em; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+           gap: 1rem; }
+  .tcard { background: var(--night); border: 1px solid var(--line); border-radius: 12px;
+           padding: 1.1rem 1.2rem; }
+  .tcard h4 { font-family: var(--serif); font-weight: 500; font-size: 1.08rem;
+              color: var(--ivory); margin-bottom: .3rem; }
+  .tcard p { font-size: .9rem; }
+  .bar { position: relative; height: 6px; border-radius: 3px; margin: .9rem 0 .35rem;
+         background: rgba(242,236,223,.10); }
+  .bar .fill { position: absolute; left: 12%; right: 30%; top: 0; bottom: 0;
+               border-radius: 3px; background: linear-gradient(90deg, rgba(221,107,161,.25), rgba(221,107,161,.75)); }
+  .bar .exact { position: absolute; left: 58%; top: -4px; width: 3px; height: 14px;
+                border-radius: 2px; background: var(--peach);
+                box-shadow: 0 0 8px 1px var(--peach-soft); }
+  .bardates { display: flex; justify-content: space-between; font-family: var(--mono);
+              font-size: .68rem; color: var(--ivory-faint); }
+  .moonstrip { display: flex; align-items: center; gap: .9rem; }
+  .moon { width: 42px; height: 42px; border-radius: 50%; flex: none;
+          background: radial-gradient(circle at 62% 50%, var(--ivory) 49%, #2a2344 51%); }
+  .moonstrip .k { color: var(--peach); font-family: var(--mono); font-size: .72rem; }
+
+  /* ---------- almanac lane ---------- */
+  .almanac { background: var(--paper); color: var(--ink-soft); }
+  .almanac .eyebrow { color: var(--peach-print); }
+  .almanac h2 { color: var(--ink); }
+  .almanac .note { color: #8a8267; }
+  .plate { background: #fbf7ec; border: 1px solid var(--rule); border-radius: 6px;
+           padding: 1.3rem 1.4rem; margin-top: 1.4rem; }
+  .plate h3 { font-family: var(--serif); font-weight: 600; font-size: 1.2rem;
+              color: var(--ink); margin-bottom: .2rem; }
+  .plate .sub { font-family: var(--mono); font-size: .68rem; letter-spacing: .12em;
+                text-transform: uppercase; color: #8a8267; margin-bottom: 1rem; }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+  th { font-family: var(--mono); font-size: .66rem; letter-spacing: .1em;
+       text-transform: uppercase; color: #8a8267; font-weight: 500;
+       border-bottom: 1px solid var(--rule-strong); text-align: left; padding: .45rem .6rem; }
+  td { padding: .45rem .6rem; border-bottom: 1px solid var(--rule);
+       font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+  tr:last-child td { border-bottom: none; }
+  td.g { font-size: 1.05rem; color: var(--ink); width: 2.2rem; }
+  .live { color: var(--peach-print); font-weight: 600; }
+  .tablewrap { overflow-x: auto; }
+  .readcard { margin-top: 1.4rem; border-left: 3px solid var(--peach-print);
+              background: #fbf7ec; padding: 1rem 1.2rem; border-radius: 0 6px 6px 0; }
+  .readcard p { font-family: var(--serif); font-size: 1.05rem; color: var(--ink);
+                line-height: 1.7; }
+  .cite { font-family: var(--mono); font-size: .7rem; color: var(--peach-print);
+          text-decoration: underline dotted; margin-top: .5rem; display: inline-block; }
+
+  /* ---------- glyphs + wheels ---------- */
+  .glyphrow { display: flex; flex-wrap: wrap; gap: 1.6rem; align-items: center;
+              margin-top: 1.4rem; }
+  .glyph { text-align: center; background: var(--night); border: 1px solid var(--line);
+           border-radius: 10px; padding: .9rem .9rem .6rem; }
+  .glyph.alivetile { border-color: var(--peach); background: rgba(221,107,161,.08); }
+  .glyph svg { display: block; }
+  .glyph .n { font-family: var(--mono); font-size: .66rem; color: var(--ivory-faint);
+              margin-top: .4rem; letter-spacing: .08em; }
+  .wheels { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem; margin-top: 1.5rem; }
+  .wheelbox { border-radius: 12px; padding: 1.2rem; text-align: center; }
+  .wheelbox.tw { background: var(--night); border: 1px solid var(--line); }
+  .wheelbox.al { background: var(--paper); border: 1px solid var(--rule); }
+  .wheelbox .n { font-family: var(--mono); font-size: .7rem; letter-spacing: .12em;
+                 text-transform: uppercase; margin-top: .8rem; }
+  .wheelbox.tw .n { color: var(--ivory-faint); }
+  .wheelbox.al .n { color: #8a8267; }
+  .wheelbox svg { max-width: 100%; height: auto; }
+
+  /* ---------- onboarding frames ---------- */
+  .frames { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem; margin-top: 1.5rem; }
+  .frame { border-radius: 12px; border: 1px solid var(--line); padding: 1.3rem;
+           min-height: 300px; display: flex; flex-direction: column; gap: .8rem; }
+  .f1 { background: linear-gradient(to bottom, var(--dusk), #7c4a77 82%, var(--horizon)); }
+  .f2 { background: linear-gradient(to bottom, var(--night), var(--dusk) 90%); }
+  .f3 { background: #080614; }
+  .frame .fe { font-family: var(--mono); font-size: .6rem; letter-spacing: .18em;
+               text-transform: uppercase; color: #f0c9b4; }
+  .frame h4 { font-family: var(--serif); font-weight: 500; font-size: 1.3rem;
+              line-height: 1.3; color: var(--ivory); }
+  .frame h4 .sign { color: var(--peach); }
+  .inputs { display: flex; gap: .5rem; font-family: var(--mono); font-size: .8rem; }
+  .inputs span { border: 1px solid rgba(242,236,223,.28); border-radius: 6px;
+                 padding: .35rem .6rem; color: var(--ivory); background: rgba(8,6,20,.35); }
+  .inputs .ph { color: var(--ivory-faint); }
+  .btn { align-self: flex-start; font-family: var(--sans); font-size: .85rem;
+         color: var(--ivory); border: 1px solid var(--peach); border-radius: 8px;
+         padding: .5rem .95rem; background: rgba(221,107,161,.12); }
+  .privacy { font-family: var(--serif); font-style: italic; font-size: .85rem;
+             color: var(--ivory-dim); }
+  .f3 .stars2 { position: relative; height: 56px; }
+  .f3 .stars2 span { position: absolute; background: var(--ivory); width: 2px; height: 2px;
+                     border-radius: 50%; }
+  .born { font-family: var(--serif); font-size: .95rem; color: var(--ivory-dim); }
+
+  /* ---------- type ---------- */
+  .typerow { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+             gap: 1.2rem; margin-top: 1.4rem; }
+  .type { border: 1px solid var(--line); border-radius: 10px; padding: 1.1rem 1.2rem; }
+  .type .n { font-family: var(--mono); font-size: .66rem; letter-spacing: .1em;
+             text-transform: uppercase; color: var(--peach); margin-bottom: .5rem; }
+  .type .sample { color: var(--ivory); }
+  footer { border-top: 1px solid var(--line); padding: 2rem 0 4rem;
+           font-family: var(--mono); font-size: .72rem; color: var(--ivory-faint); }
+</style>
+
+<div class="hero">
+  <div class="stars">
+    <span style="top:12%;left:18%"></span><span style="top:20%;left:64%"></span>
+    <span style="top:8%;left:82%;opacity:.4"></span><span style="top:30%;left:38%;opacity:.5"></span>
+    <span style="top:16%;left:47%;opacity:.35"></span><span style="top:36%;left:76%;opacity:.45"></span>
+    <span style="top:26%;left:9%;opacity:.5"></span><span style="top:41%;left:55%;opacity:.3"></span>
+  </div>
+  <div class="planet" style="top:24%; left:71%; width:6px; height:6px;"></div>
+  <div class="planet" style="top:38%; left:30%; width:4px; height:4px;"></div>
+  <div class="wrap">
+    <div class="eyebrow">Design direction · v0.1 · for your direction</div>
+    <div class="wordmark">Caelus <span class="free">Free</span></div>
+    <p class="tagline">The whole of astrology in your browser for free.</p>
+  </div>
+</div>
+
+<section class="law">
+  <div class="wrap">
+    <div class="eyebrow">The one law</div>
+    <p class="lawline">Peach blossom marks what is <em>alive</em>. Everything else stays quiet.</p>
+    <p>The current sky, the now-line, an exact hit, your own placements: peach.
+       Chrome, structure, history: never. Peach blossom is the extra-spectral
+       hue — the color that closes the spectrum into a wheel and exists only in
+       perception — and here it is the horizon light carried into the interface.</p>
+    <div class="chips" style="margin-top:1.2rem">
+      <span class="chip alive">Sun now · 23°14′ Leo</span>
+      <span class="chip alive">exact today</span>
+      <span class="chip alive">your Moon</span>
+      <span class="chip">house system · Placidus</span>
+      <span class="chip">settings</span>
+      <span class="chip">2019 archive</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Lane one · civil twilight</div>
+    <h2>The sky surfaces track the real sky</h2>
+    <p>Onboarding, Today, Places, Sky view. The chrome is a computed twilight —
+       the engine's own sky-brightness math drives the gradient, so the app is
+       an instrument before a single chart is cast.</p>
+    <div class="swatches">
+      <div class="swatch" style="background:var(--zenith)"><span class="n" style="color:var(--ivory-faint)">zenith · #0e0b22</span></div>
+      <div class="swatch" style="background:var(--night)"><span class="n" style="color:var(--ivory-faint)">night · #171233</span></div>
+      <div class="swatch" style="background:var(--dusk)"><span class="n" style="color:var(--ivory-dim)">dusk · #2c1e52</span></div>
+      <div class="swatch" style="background:var(--horizon)"><span class="n" style="color:#3d1420">horizon · #c86e79</span></div>
+      <div class="swatch" style="background:var(--peach)"><span class="n" style="color:#3d0f28">peach blossom · #dd6ba1</span></div>
+      <div class="swatch" style="background:var(--ivory)"><span class="n" style="color:#55503f">ivory · #f2ecdf</span></div>
+    </div>
+    <div class="cards">
+      <div class="tcard">
+        <h4>Saturn opposite your Moon</h4>
+        <p>Something feels heavier than usual, and it is asking to be taken
+           seriously rather than escaped.</p>
+        <div class="bar"><div class="fill"></div><div class="exact"></div></div>
+        <div class="bardates"><span>Aug 2</span><span style="color:var(--peach)">exact Aug 19</span><span>Sep 6</span></div>
+      </div>
+      <div class="tcard">
+        <div class="moonstrip">
+          <div class="moon"></div>
+          <div>
+            <h4>Waxing gibbous in Capricorn</h4>
+            <p class="note">Void of course <span class="k">4:12–7:48 pm</span> · hour of <span class="k">Venus</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="almanac">
+  <div class="wrap">
+    <div class="eyebrow">Lane two · the almanac</div>
+    <h2>The written-down surfaces print in two inks</h2>
+    <p>Charts, tables, calendars, the ephemeris, the Journal's pages. Ivory
+       stock, hairline rules, tabular figures — and one discipline from the old
+       printed ephemerides: black ink for structure, a second ink for what is
+       live. The second ink is peach.</p>
+    <div class="plate">
+      <h3>Positions</h3>
+      <div class="sub">August 15, 2026 · 6:53 pm · St. Petersburg, Florida</div>
+      <div class="tablewrap"><table>
+        <thead><tr><th></th><th>Body</th><th>Position</th><th>House</th><th>Motion</th></tr></thead>
+        <tbody>
+          <tr><td class="g">☉</td><td>Sun</td><td class="live">23°14′ Leo</td><td>7</td><td>direct</td></tr>
+          <tr><td class="g">☽</td><td>Moon</td><td class="live">08°51′ Capricorn</td><td>12</td><td>direct</td></tr>
+          <tr><td class="g">☿</td><td>Mercury</td><td>11°02′ Virgo</td><td>8</td><td class="live">stations Aug 21</td></tr>
+          <tr><td class="g">♀</td><td>Venus</td><td>29°47′ Cancer</td><td>6</td><td>direct</td></tr>
+          <tr><td class="g">♄</td><td>Saturn</td><td>02°36′ Pisces</td><td>2</td><td>retrograde</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="readcard">
+      <p>With the Moon in Capricorn in your twelfth house, feeling arrives on a
+         delay: you tend to understand what a day meant only once it is over,
+         in private, with the door closed.</p>
+      <a class="cite" href="#">see where this comes from</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Glyphs · one stroke</div>
+    <h2>A drawn set with a single stroke DNA</h2>
+    <p>Thin line, round caps, one weight across planets, signs, UI icons, the
+       favicon, and the loading states. Samples of the stroke voice:</p>
+    <div class="glyphrow">
+      <div class="glyph">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="#f2ecdf" stroke-width="2" stroke-linecap="round">
+          <circle cx="28" cy="28" r="15"/><circle cx="28" cy="28" r="2.4" fill="#dd6ba1" stroke="none"/>
+        </svg><div class="n">SUN</div>
+      </div>
+      <div class="glyph">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="#f2ecdf" stroke-width="2" stroke-linecap="round">
+          <path d="M34 12 a17 17 0 1 0 0 32 a13.6 13.6 0 1 1 0 -32"/>
+        </svg><div class="n">MOON</div>
+      </div>
+      <div class="glyph">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="#f2ecdf" stroke-width="2" stroke-linecap="round">
+          <circle cx="28" cy="22" r="9"/><path d="M28 31 v14 M21.5 38.5 h13"/>
+        </svg><div class="n">VENUS</div>
+      </div>
+      <div class="glyph">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="#f2ecdf" stroke-width="2" stroke-linecap="round">
+          <circle cx="24" cy="32" r="9.5"/><path d="M31 25 L41 15 M41 15 h-8 M41 15 v8"/>
+        </svg><div class="n">MARS</div>
+      </div>
+      <div class="glyph alivetile">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="#dd6ba1" stroke-width="2.4" stroke-linecap="round" style="filter: drop-shadow(0 0 6px rgba(221,107,161,.85))">
+          <path d="M24 12 v26 M17 19 h14 M24 38 q13 -2 13 9"/>
+        </svg><div class="n" style="color:#dd6ba1">SATURN · ALIVE STATE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The wheel · two named themes</div>
+    <h2>Twilight and Almanac, switchable, inherited by every share image</h2>
+    <div class="wheels">
+      <div class="wheelbox tw">
+        <svg width="220" height="220" viewBox="0 0 220 220" fill="none">
+          <circle cx="110" cy="110" r="100" stroke="#f2ecdf" stroke-opacity=".55" stroke-width="1.5"/>
+          <circle cx="110" cy="110" r="78" stroke="#f2ecdf" stroke-opacity=".25" stroke-width="1"/>
+          <g stroke="#f2ecdf" stroke-opacity=".35">
+            <path d="M110 10 v12 M110 198 v12 M10 110 h12 M198 110 h12 M39 39 l8.5 8.5 M172.5 172.5 l8.5 8.5 M181 39 l-8.5 8.5 M47.5 172.5 l-8.5 8.5"/>
+          </g>
+          <g stroke="#8a7fd4" stroke-opacity=".5" stroke-width="1.2">
+            <path d="M110 32 L178 156"/><path d="M42 156 L178 156"/>
+          </g>
+          <path d="M110 32 L42 156" stroke="#dd6ba1" stroke-width="1.6"/>
+          <circle cx="110" cy="32" r="5" fill="#dd6ba1"/>
+          <circle cx="178" cy="156" r="4" fill="#f2ecdf"/>
+          <circle cx="42" cy="156" r="4" fill="#f2ecdf"/>
+        </svg>
+        <div class="n">Twilight</div>
+      </div>
+      <div class="wheelbox al">
+        <svg width="220" height="220" viewBox="0 0 220 220" fill="none">
+          <circle cx="110" cy="110" r="100" stroke="#23201a" stroke-width="1.5"/>
+          <circle cx="110" cy="110" r="78" stroke="#23201a" stroke-opacity=".35" stroke-width="1"/>
+          <g stroke="#23201a" stroke-opacity=".45">
+            <path d="M110 10 v12 M110 198 v12 M10 110 h12 M198 110 h12 M39 39 l8.5 8.5 M172.5 172.5 l8.5 8.5 M181 39 l-8.5 8.5 M47.5 172.5 l-8.5 8.5"/>
+          </g>
+          <g stroke="#23201a" stroke-opacity=".5" stroke-width="1.2">
+            <path d="M110 32 L178 156"/><path d="M42 156 L178 156"/>
+          </g>
+          <path d="M110 32 L42 156" stroke="#c2447f" stroke-width="1.6"/>
+          <circle cx="110" cy="32" r="5" fill="#c2447f"/>
+          <circle cx="178" cy="156" r="4" fill="#23201a"/>
+          <circle cx="42" cy="156" r="4" fill="#23201a"/>
+        </svg>
+        <div class="n">Almanac</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:1rem">Hard aspects solid, soft aspects
+       violet; the aspect that is exact today draws in peach. The classical
+       color semantics stay readable to practiced eyes in both themes.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Onboarding · the sky answers as you type</div>
+    <h2>Three moments from the state machine</h2>
+    <div class="frames">
+      <div class="frame f1">
+        <div class="fe">Caelus Free</div>
+        <h4>There is more going on than your sign.</h4>
+        <div class="inputs"><span class="ph">MM</span><span class="ph">DD</span><span class="ph">YYYY</span></div>
+        <div style="flex:1"></div>
+        <div class="btn">Show me my sky</div>
+        <div class="privacy">Computed here on your screen.</div>
+      </div>
+      <div class="frame f2">
+        <div class="fe">month + day entered</div>
+        <h4>There is more going on than your sign. <span class="sign">♊</span></h4>
+        <div class="inputs"><span>06</span><span>06</span><span class="ph">YYYY</span></div>
+        <div style="flex:1"></div>
+        <p class="note">The glyph lands in peach, then settles to ivory.</p>
+      </div>
+      <div class="frame f3">
+        <div class="fe">year entered</div>
+        <div class="stars2">
+          <span style="top:8px;left:12%"></span><span style="top:30px;left:34%;opacity:.6"></span>
+          <span style="top:14px;left:58%;opacity:.8"></span><span style="top:40px;left:74%;opacity:.5"></span>
+          <span style="top:4px;left:86%;opacity:.4"></span><span style="top:44px;left:8%;opacity:.45"></span>
+        </div>
+        <p class="born">This is the sky you were born under.</p>
+        <div style="flex:1"></div>
+        <div class="btn">Write it down</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Type</div>
+    <h2>An editorial serif over a quiet sans, figures always tabular</h2>
+    <div class="typerow">
+      <div class="type">
+        <div class="n">Display &amp; readings · Newsreader (intended)</div>
+        <p class="sample" style="font-family:var(--serif); font-size:1.35rem; line-height:1.4">
+          The sky, written down.</p>
+        <p class="note" style="margin-top:.5rem">Rendered here in the nearest
+           system serif. Warm, bookish, sized generously for delineation prose.</p>
+      </div>
+      <div class="type">
+        <div class="n">Interface · Public Sans (intended)</div>
+        <p class="sample">Buttons, labels, settings, and navigation stay in a
+           plain sans that never competes with the readings.</p>
+      </div>
+      <div class="type">
+        <div class="n">Figures · tabular mono</div>
+        <p class="sample" style="font-family:var(--mono); font-size:.9rem">
+          23°14′08″ Leo&nbsp;&nbsp;·&nbsp;&nbsp;08°51′42″ Cap<br>
+          rise 07:02&nbsp;&nbsp;set 20:11&nbsp;&nbsp;VoC 16:12–19:48</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">caelus free · design direction v0.1 · tokens draft — everything on this page is for your direction</div>
+</footer>
