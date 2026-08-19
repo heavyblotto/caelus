@@ -91,7 +91,13 @@ const engControl = new Engine({
   eraPacks: { jupiter: [constantSlab(bodyConst, boundary - 2 * seg, seg, 3)] },
   earthEraPacks: [earthSlab],
 } as EngineData);
-const engPlain = new Engine(data);
+// The plain control must be genuinely plain: the shipped data dir now carries
+// the real classical slabs (minted by fit_classical.py), which would resolve
+// deepJd and void the "uncovered instant refuses" checks. Strip every era
+// field so the control sees only the default packs, as intended above.
+const engPlain = new Engine({
+  ...data, eraPacks: {}, earthEraPacks: [], moonEraPacks: [],
+});
 
 expectShift(engEra, engControl, "jupiter", deepJd, "planet chain at depth", 7, 13);
 

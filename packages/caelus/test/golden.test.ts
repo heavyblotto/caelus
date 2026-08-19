@@ -485,19 +485,23 @@ for (const g of G.houses) {
     console.error(`FAIL in-range unavailable: ${JSON.stringify(inRange.unavailable)}`);
   }
 
-  // The wide packs make 1700 fully in-range now (validated 1000-3000), so the
-  // "past the packs" probe moved to 900 CE. There every packed body -- the
-  // majors, Pluto and the small bodies -- is outside its fitted span and lands
-  // in `unavailable` (the engine will not compute a body past its validated
-  // span rather than silently serve the unvalidated fallback). What still
-  // computes is the analytic-and-fallback remainder: the Moon and the nodes.
+  // The classical era packs make 900 CE computable for the tradition's seven:
+  // the Sun (via the earth slab), Moon, Mercury, Venus, Mars, Jupiter and
+  // Saturn resolve through chained era-slab resolution (their slabs adjoin the
+  // modern packs at the shared 1000-CE boundary). What still lands in
+  // `unavailable` is the modern remainder -- Uranus, Neptune, Pluto and the
+  // small bodies have no classical pack, and the engine will not compute a
+  // body past its validated span rather than silently serve the unvalidated
+  // fallback.
   const pre1850 = eng.chart(900, 3, 21, 12, 0, 0, 51.5, -0.12, "placidus");
   if (
-    !("moon" in pre1850.bodies) ||                 // the Meeus fallback still runs
-    !pre1850.unavailable.includes("sun") ||        // sun IS outside its span
-    !(pre1850.unavailable.includes("mars")) ||
+    !("sun" in pre1850.bodies) ||                  // the earth slab carries it
+    !("moon" in pre1850.bodies) ||                 // the classical moon slab
+    !("mars" in pre1850.bodies) ||                 // the classical mars slab
+    !("saturn" in pre1850.bodies) ||               // the classical saturn slab
+    !pre1850.unavailable.includes("uranus") ||     // no classical pack
     !(pre1850.unavailable.includes("pluto")) ||
-    !pre1850.warnings.some((w) => w.kind === "outside_validated_range")
+    !(pre1850.unavailable.includes("chiron"))
   ) {
     failures++;
     console.error(
@@ -531,14 +535,15 @@ for (const g of G.houses) {
     const rangeWarn = pre1700.warnings.filter((w) => w.kind === "outside_validated_range");
     const dtWarn = pre1700.warnings.find((w) => w.kind === "delta_t_uncertain");
     const warnedBodies = new Set(rangeWarn.map((w) => (w as { body: string }).body));
-    // 900 < 1000 (the validated floor): the packed majors are absent (see
-    // above), so the one computed body past its span is the Moon on its Meeus
-    // fallback -- and it is warned. The analytic nodes carry no stated bound
-    // (never warned). Delta-T sigma is well past 5 s.
-    if (!warnedBodies.has("moon") || warnedBodies.has("mean_node")
+    // At 900 CE the classical seven compute INSIDE their validated span now --
+    // the era slabs adjoin the headline's earlier edge (the Sun inherits the
+    // earth slab's span), so no computed body warns. The analytic nodes carry
+    // no stated bound (never warned). What still states itself is delta-T:
+    // sigma is well past 5 s this deep.
+    if (warnedBodies.size !== 0 || warnedBodies.has("mean_node")
       || !dtWarn || (dtWarn as { sigmaSeconds: number }).sigmaSeconds < 5) {
       failures++;
-      console.error(`FAIL 1650 warnings: ${JSON.stringify(pre1700.warnings)}`);
+      console.error(`FAIL 900 warnings: ${JSON.stringify(pre1700.warnings)}`);
     }
   }
   // Annual aberration must be applied to LATITUDE as well as longitude
@@ -793,14 +798,23 @@ for (const g of G.houses) {
       failures++;
       console.error(`FAIL capabilities pluto: ${JSON.stringify(pluto)} tier=${caps.plutoTier}`);
     }
-    // The wide Moon pack is fitted 1000-3000 (fit_moon.py); `validated` stays
-    // at the measured 1850-2150 until a wider measurement says otherwise --
-    // the same fitted/validated split the Pluto pack makes visible above.
+    // The Moon's spans chain its classical era slab onto the wide modern pack:
+    // fitted and validated both run from the classical era start (~2999 BCE,
+    // reported as -2998 by the year conversion) through 3000.
     if (caps.moonTier !== "chebyshev" || moon?.source !== "moon_chebyshev"
-      || !moon.fitted || Math.abs(moon.fitted.from - 1000) > 2
-      || Math.abs(moon.fitted.to - 3000) > 2) {
+      || !moon.fitted || Math.abs(moon.fitted.from - -2998) > 2
+      || Math.abs(moon.fitted.to - 3000) > 2
+      || !moon.validated || Math.abs(moon.validated.from - -2998) > 2
+      || Math.abs(moon.validated.to - 3000) > 2) {
       failures++;
       console.error(`FAIL capabilities moon: ${JSON.stringify(moon)} tier=${caps.moonTier}`);
+    }
+    // The Sun inherits the earth slab's era extension the same way.
+    const sunCap = byBody.get("sun");
+    if (!sunCap?.validated || Math.abs(sunCap.validated.from - -2998) > 2
+      || Math.abs(sunCap.validated.to - 3000) > 2) {
+      failures++;
+      console.error(`FAIL capabilities sun era span: ${JSON.stringify(sunCap)}`);
     }
     if (ceres?.source !== "chebyshev_pack" || !ceres.fitted) {
       failures++;

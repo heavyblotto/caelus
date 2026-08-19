@@ -210,9 +210,9 @@ def boundary_check(name, data):
         modern = ChebSeries(json.load(f))
     ca = classical.xyz(classical.jd1)
     mo = modern.xyz(modern.jd0)
-    diff = math.dist(ca, mo)  # AU (planets) or km*scale (moon: thousands of km)
+    diff = math.dist(ca, mo)  # AU (planets) or km (moon; xyz() unscales)
     if name == "moon":
-        arcsec = diff * 1000 / MOON_KM * 206265
+        arcsec = diff / MOON_KM * 206265
     else:
         arcsec = diff * 206265  # heliocentric, ~at 1 AU — conservative
     print(f"  boundary {name}: {arcsec:.2f}\" disagreement at the shared instant")

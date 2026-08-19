@@ -106,8 +106,11 @@ export function validatedSpanFor(body: string, data: EngineData): BodySpan | nul
   // Era slabs extend the validated span (deep-time R1): a slab's span is
   // measured against its source at pack build, and the classical slab
   // adjoins the headline's earlier edge. The Moon's slabs live in their own
-  // field beside its tiered packs.
-  const eras = body === "moon" ? data.moonEraPacks : data.eraPacks?.[body];
+  // field beside its tiered packs; the Sun's geocentric position derives
+  // from Earth's heliocentric one, so Earth's era slabs are the Sun's.
+  const eras = body === "moon" ? data.moonEraPacks
+    : body === "sun" ? data.earthEraPacks
+    : data.eraPacks?.[body];
   if (eras?.length) {
     const from = Math.min(...eras.map((s) => packSpan(s).from));
     const to = Math.max(...eras.map((s) => packSpan(s).to));

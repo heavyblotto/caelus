@@ -135,7 +135,11 @@ export function engineCapabilities(engine: Engine): EngineCapabilities {
   // not just the default pack's.
   const eraPacks = data.eraPacks ?? {};
   for (const cap of caps) {
-    const slabs = cap.body === "moon" ? data.moonEraPacks : eraPacks[cap.body];
+    // The Moon's slabs live in their own field; the Sun's geocentric span is
+    // Earth's heliocentric one, so Earth's era slabs extend the Sun.
+    const slabs = cap.body === "moon" ? data.moonEraPacks
+      : cap.body === "sun" ? data.earthEraPacks
+      : eraPacks[cap.body];
     if (!slabs?.length) continue;
     const spans = slabs.map(packSpan);
     const from = Math.min(...spans.map((s) => s.from));
