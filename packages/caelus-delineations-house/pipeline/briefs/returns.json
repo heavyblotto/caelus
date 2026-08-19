@@ -1,0 +1,167 @@
+{
+ "name": "returns",
+ "outFile": "b4-returns.json",
+ "setId": "house-b4-returns",
+ "family": "planetary-return",
+ "cells": [
+  {
+   "id": "return:sun",
+   "family": "planetary-return",
+   "when": {
+    "kind": "return",
+    "body": "sun"
+   },
+   "atomIds": [
+    "return:sun:"
+   ],
+   "title": "Your solar return (the birthday chart)",
+   "bindable": true
+  },
+  {
+   "id": "return:moon",
+   "family": "planetary-return",
+   "when": {
+    "kind": "return",
+    "body": "moon"
+   },
+   "atomIds": [
+    "return:moon:"
+   ],
+   "title": "Your lunar return (the month's chart)",
+   "bindable": true
+  },
+  {
+   "id": "return:mercury",
+   "family": "planetary-return",
+   "when": {
+    "kind": "return",
+    "body": "mercury"
+   },
+   "atomIds": [
+    "return:mercury:"
+   ],
+   "title": "Your Mercury return",
+   "bindable": true
+  },
+  {
+   "id": "return:venus",
+   "family": "planetary-return",
+   "when": {
+    "kind": "return",
+    "body": "venus"
+   },
+   "atomIds": [
+    "return:venus:"
+   ],
+   "title": "Your Venus return",
+   "bindable": true
+  },
+  {
+   "id": "return:mars",
+   "family": "planetary-return",
+   "when": {
+    "kind": "return",
+    "body": "mars"
+   },
+   "atomIds": [
+    "return:mars:"
+   ],
+   "title": "Your Mars return",
+   "bindable": true
+  },
+  {
+   "id": "return:jupiter",
+   "family": "planetary-return",
+   "when": {
+    "kind": "return",
+    "body": "jupiter"
+   },
+   "atomIds": [
+    "return:jupiter:"
+   ],
+   "title": "Your Jupiter return",
+   "bindable": true
+  },
+  {
+   "id": "return:saturn:1",
+   "family": "planetary-return",
+   "when": {
+    "kind": "return",
+    "body": "saturn",
+    "nth": 1
+   },
+   "atomIds": [
+    "return:saturn:"
+   ],
+   "title": "Your first Saturn return",
+   "bindable": true
+  },
+  {
+   "id": "return:saturn:2",
+   "family": "planetary-return",
+   "when": {
+    "kind": "return",
+    "body": "saturn",
+    "nth": 2
+   },
+   "atomIds": [
+    "return:saturn:"
+   ],
+   "title": "Your second Saturn return",
+   "bindable": true
+  },
+  {
+   "id": "return:saturn:3",
+   "family": "planetary-return",
+   "when": {
+    "kind": "return",
+    "body": "saturn",
+    "minNth": 3
+   },
+   "atomIds": [
+    "return:saturn:"
+   ],
+   "title": "Your third Saturn return",
+   "bindable": true
+  },
+  {
+   "id": "return:uranus",
+   "family": "planetary-return",
+   "when": {
+    "kind": "return",
+    "body": "uranus"
+   },
+   "atomIds": [
+    "return:uranus:"
+   ],
+   "title": "Your Uranus return",
+   "bindable": true
+  },
+  {
+   "id": "return:chiron",
+   "family": "planetary-return",
+   "when": {
+    "kind": "return",
+    "body": "chiron"
+   },
+   "atomIds": [
+    "return:chiron:"
+   ],
+   "title": "Your Chiron return",
+   "bindable": true
+  },
+  {
+   "id": "return:true_node",
+   "family": "planetary-return",
+   "when": {
+    "kind": "return",
+    "body": "true_node"
+   },
+   "atomIds": [
+    "return:true_node:"
+   ],
+   "title": "Your nodal return",
+   "bindable": true
+  }
+ ]
+}

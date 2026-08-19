@@ -1,0 +1,88 @@
+{
+ "name": "synastry-saturn-4",
+ "outFile": "b3-synastry-saturn-4.json",
+ "setId": "house-b3-synastry-saturn-4",
+ "family": "synastry-aspect",
+ "cells": [
+  {
+   "id": "synastry:saturn:conjunction:pluto",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "pluto",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:saturn~b_pluto:conjunction"
+   ],
+   "title": "Your Saturn conjunct their Pluto",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:sextile:pluto",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "pluto",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:saturn~b_pluto:sextile"
+   ],
+   "title": "Your Saturn sextile their Pluto",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:square:pluto",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "pluto",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:saturn~b_pluto:square"
+   ],
+   "title": "Your Saturn square their Pluto",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:trine:pluto",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "pluto",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:saturn~b_pluto:trine"
+   ],
+   "title": "Your Saturn trine their Pluto",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:opposition:pluto",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "pluto",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:saturn~b_pluto:opposition"
+   ],
+   "title": "Your Saturn opposite their Pluto",
+   "bindable": true
+  }
+ ]
+}

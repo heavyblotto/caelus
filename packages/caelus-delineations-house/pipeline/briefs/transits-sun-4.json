@@ -1,0 +1,158 @@
+{
+ "name": "transits-sun-4",
+ "outFile": "b2-transits-sun-4.json",
+ "setId": "house-b2-transits-sun-4",
+ "family": "transit-aspect",
+ "cells": [
+  {
+   "id": "transit:sun:conjunction:pluto",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "pluto",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:sun~natal_pluto:conjunction"
+   ],
+   "title": "Transiting Sun conjunct your natal Pluto",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:sextile:pluto",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "pluto",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:sun~natal_pluto:sextile"
+   ],
+   "title": "Transiting Sun sextile your natal Pluto",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:square:pluto",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "pluto",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:sun~natal_pluto:square"
+   ],
+   "title": "Transiting Sun square your natal Pluto",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:trine:pluto",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "pluto",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:sun~natal_pluto:trine"
+   ],
+   "title": "Transiting Sun trine your natal Pluto",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:opposition:pluto",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "pluto",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:sun~natal_pluto:opposition"
+   ],
+   "title": "Transiting Sun opposite your natal Pluto",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:conjunction:chiron",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "chiron",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:sun~natal_chiron:conjunction"
+   ],
+   "title": "Transiting Sun conjunct your natal Chiron",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:sextile:chiron",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "chiron",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:sun~natal_chiron:sextile"
+   ],
+   "title": "Transiting Sun sextile your natal Chiron",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:square:chiron",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "chiron",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:sun~natal_chiron:square"
+   ],
+   "title": "Transiting Sun square your natal Chiron",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:trine:chiron",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "chiron",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:sun~natal_chiron:trine"
+   ],
+   "title": "Transiting Sun trine your natal Chiron",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:opposition:chiron",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "chiron",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:sun~natal_chiron:opposition"
+   ],
+   "title": "Transiting Sun opposite your natal Chiron",
+   "bindable": true
+  }
+ ]
+}

@@ -1,0 +1,212 @@
+[
+ {
+  "id": "transit:sun:conjunction:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "sun",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:sun~natal_sun:conjunction"
+  ],
+  "text": "Once a year the Sun returns to the degree it occupied when you were born, and for a day or two your personal year turns over. Astrologers call this the solar return; most people call it their birthday. Underneath the cake, the event is a quiet reset of vitality. The energy that carries you through work, love, health, and ambition gets renewed at its source, and the themes of the coming year often announce themselves now in small, easily missed ways. In the day or so before the conjunction is exact, a summing-up mood tends to arrive: an urge to look back over the year behind you, to finish something, or to take stock of what you have actually become since the last pass. At the exact conjunction the tone shifts from review to beginning. You tend to feel more like yourself than at any other point of the year, clearer about what you want and less willing to apologize for wanting it. Impressions land harder now, so the mood you are in and the company you keep carry more weight than they would on an ordinary day. As the Sun separates, that concentrated self-awareness loosens into momentum, and whatever intention formed at the peak starts moving out into ordinary life. This is a fast transit. The Sun never slows or doubles back, so there are no repeat passes to wait for: it touches this point once, briefly, every year, and that regularity is what makes it useful. It is a recurring appointment with yourself. The people around you may make the day about attention, and there is nothing wrong with enjoying that, but the astrological event is more private. It rewards a little solitude, an honest look at where your will has been pointed, and a plain answer to the question of whether that is still the direction you choose. Not every solar return feels good. If the past year wore you down, this pass can surface tiredness or a flat feeling before it renews anything, the way a tide goes fully out before it turns. Let that be information rather than a verdict on the year ahead. Over time you grow with this transit by treating it as a hinge: one day when the door between one year of your life and the next stands open, and you decide, consciously, what walks through with you."
+ },
+ {
+  "id": "transit:sun:sextile:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "sun",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:sun~natal_sun:sextile"
+  ],
+  "text": "Twice a year, some weeks to either side of your birthday, the transiting Sun makes a sextile to the place it held at your birth. This is among the mildest weather the sky produces, a day or two of cooperative conditions, and its keynote is confidence without strain. Your sense of who you are and what you are doing tends to line up with what the day actually brings. People are easier to deal with, small requests go through, and plans that have been sitting still can be moved a step with almost no friction. A sextile does not hand you anything, though; it offers. An opening appears through a friend, a colleague, a chance remark, and it stays an opening only if you step through it. On a passive day nothing happens at all, which is why this transit has a reputation for being pleasant and forgettable in equal measure. While the aspect builds, you may simply notice your mood lifting and your patience lengthening, with no obvious cause. Around the exact pass there is often one concrete chance worth acting on: a conversation worth starting, an ask worth making, a piece of work that will land better today than tomorrow. Once the Sun moves on, the window closes gently, without penalty for having been missed, and ordinary conditions resume. Because the Sun never stations or retrogrades, there is no second pass to catch later. Each sextile is a single brief visit, but the same offer comes back around every year like a standing invitation, so nothing rides on any one of them. What can ride on them, taken together, is a habit. One noticed opening does little; years of noticed openings build a feel for the moments when effort is cheap, and that feel quietly changes what your ordinary weeks add up to. Small favors asked on the right afternoon, introductions accepted rather than deferred, the ten minutes of initiative that a good mood makes painless: this is the scale the transit works at. If it teaches you anything over the years, it is the actual shape of your luck, which tends to look less like lightning and more like a door left ajar on a day you happened to be walking past."
+ },
+ {
+  "id": "transit:sun:square:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "sun",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:sun~natal_sun:square"
+  ],
+  "text": "About three months from your birthday, on either side of it, the transiting Sun reaches a square to your natal Sun, and for a couple of days the year pushes back. Squares do not make offers; they apply pressure. Plans that ran smoothly last week meet resistance now, often through people with some authority in your life: a boss, an official, a parent, anyone positioned to say no. Your first response is usually to push harder, and the day can turn into a contest of wills that settles nothing. The real function of this pass is a course check. Your personal year has quarter points the way a month has phases, and this is one of them, a built-in moment when circumstances test whether the direction you set is still the direction you mean. Friction concentrates exactly where your aims and your actual situation have drifted apart. While the square is applying, irritation tends to build ahead of any visible cause; you feel crowded, contradicted, slightly off. At the exact aspect the friction usually takes a specific shape: a refusal, a delay, an argument, a demand on your time that collides with something you had planned. As the aspect separates, the heat drains off quickly, and what remains is unusually clear information about where you are overextended or under-committed. It helps to keep the scale in view. This is a fast transit, gone within days and back at the same points of every year, so nothing that happens under it amounts to a verdict on your life. What it provides is a small, regular dose of resistance, and resistance is how you find out what you actually intend. The pass rewards steering over fighting. Hold your temper through one inconvenient afternoon, then ask honestly what the obstacle was pointing at, and the square becomes less like an ambush each year and more like a scheduled inspection you know how to use. In time you may even come to trust it. The year checks your alignment before small drifts grow into large ones, and this is one of the moments when it does."
+ },
+ {
+  "id": "transit:sun:trine:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "sun",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:sun~natal_sun:trine"
+  ],
+  "text": "For a day or two, twice in the course of each year, the transiting Sun trines your natal Sun and everything runs more smoothly than you have any right to expect. The trine eases. Vitality is up, confidence is quiet rather than forced, and the world seems briefly staffed by people willing to cooperate. Work advances without drama, conversations that could have gone sideways stay friendly, and your body often feels better too, since this pass tends to coincide with a small crest in physical energy. The classic use of a day like this is forward motion on things that matter: presenting your work, asking for support, settling a decision you have been circling, doing whatever needed a good day to succeed. The classic waste of it is coasting. Ease creates no urgency, so the trine will happily pass while you do nothing in particular, and it leaves no mark either way. On the approach you may notice your mood warming and obstacles thinning out before you can say why. Near the exact pass, will and circumstance line up, and effort buys more than usual; whatever you push then tends to keep moving after the push ends. As the Sun travels on, the flow tapers gently. What you set in motion keeps its momentum, and what you postponed simply waits for ordinary conditions to return. There is no second chance built into this transit, because the Sun never doubles back, but there is no scarcity either: the same easy window reopens every year, twice, reliably. What you learn from it accumulates slowly. People who work with this pass develop a feel for favorable timing, a sense of when to push because the pushing is cheap, and that is a different skill from working hard, though it matters nearly as much. A trine will never force you to grow. It pays out in proportion to what you bring, and its lesson, absorbed across many pleasant and easily forgotten days, is that ease is not a rest stop only. It is also a resource, and you can choose to spend it on purpose."
+ },
+ {
+  "id": "transit:sun:opposition:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "sun",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:sun~natal_sun:opposition"
+  ],
+  "text": "Once a year, about six months out from your birthday, the transiting Sun stands directly opposite your natal Sun. This is the far point of your personal year, and it tends to feel like one: energy runs a little lower, and life is more inclined to confront you than to carry you. Oppositions work through other people. Around this pass, partners, rivals, bosses, or plain strangers seem to position themselves across from you, questioning your plans or simply declining to move. The temptation is to read all this as obstruction. It is closer to a mirror. At the halfway mark, the intentions you set at your last birthday have grown as far as they will grow on their own, and now they meet the world's answer. What others push back on is usually the precise place where your aims and reality have not yet been reconciled. In the day or so leading in, you may feel checked, watched, or subtly opposed without an obvious source. At the exact opposition the encounter tends to become concrete: a disagreement, a negotiation, a piece of frank feedback, or just a clear, unflattering view of how far the year's projects have actually come. As the aspect separates, the standoff loosens and you get to decide what to adjust. Because your vitality sits at its yearly low tide, this is a poor moment for forcing outcomes and a good one for observing them; rest genuinely counts as productive work here. The whole event lasts only days and comes once each year, with no repeat passes, so nothing has to be settled under it. It only has to be seen. What grows in you through years of these mid-year encounters is a kind of binocular vision, the ability to hold your own intention and someone else's objection in view at once and find the fuller picture between them. The people who stand opposite you this week are rarely enemies. Most of them are holding up the half of the truth you cannot see from where you stand, and once the Sun moves on, you get the rest of the year to use it."
+ },
+ {
+  "id": "transit:sun:conjunction:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "moon",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:sun~natal_moon:conjunction"
+  ],
+  "text": "For a day or two each year the transiting Sun crosses your natal Moon, and your inner life steps into the light. The conjunction fuses the two sides of you that most often argue: what you consciously want and what you actually need. While it lasts they speak with one voice, and the effect is both clarifying and exposing. Feelings that have been running underground surface where you can see them, and often where others can see them too. You are more transparent than usual, moods show on your face, and the people close to you tend to answer that openness in kind. Attention swings naturally toward the private side of life. Home, family, food, rest, the state of your own body: all of it asks to be tended, and tending it feels satisfying rather than like a chore. On the approach, emotion gathers quietly; you may find yourself sentimental, hungry for comfort, or drawn back toward familiar people and places without quite knowing why. The exact pass often brings a small moment of unity, when a choice feels right all the way down instead of right in your head and wrong in your gut. Decisions made in that window tend to hold, because both halves of you signed them. As the Sun separates, the fusion loosens, but a residue of self-knowledge stays: you have seen, briefly, what you are actually hungry for this year. Since the Sun makes only one quick pass and never retraces it, this transit works less like a project and more like a reading taken at a regular interval, the annual state of the account between your wants and your needs. Its value compounds. Each crossing gives you one honest look at how far apart those two have drifted, and people who pay attention slowly close the gap between the life they are building and the life that feeds them. No dramatic reform is required, just dozens of small corrections made over the years, each on a day when, for once, all of you agreed about what mattered."
+ },
+ {
+  "id": "transit:sun:sextile:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "moon",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:sun~natal_moon:sextile"
+  ],
+  "text": "Twice a year the transiting Sun forms a sextile to your natal Moon, and for a day or two your intentions and your instincts stop negotiating and simply get along. This is gentle weather. Nothing about it forces an outcome; a sextile only opens doors, and these particular doors lead toward comfort, connection, and the easy repair of small things. Conversations that need warmth go better now: the apology, the catch-up call, the talk with a family member that keeps getting postponed. Household matters move without their usual inertia. Your moods are steady enough to make you good company, so this is a natural moment for hosting, visiting, or any plan whose success depends on people feeling at ease around you. Emotional honesty also comes cheaper than usual; you can say how you feel without the saying turning into an event. While the aspect is building, expect a mild pull toward the familiar, an appetite for known faces and comfortable rooms. Around the exact pass there is often one specific opening: a person unusually receptive to you, a domestic knot ready to be untied, a need you can finally name pleasantly instead of under pressure. Once the Sun moves past, the opening closes without complaint and life resumes its ordinary mixed conditions. The Sun never retraces its path, so there is no later pass to catch. The offer is brief, and it renews each year, always quietly, always easy to miss, and that is really the practice this transit teaches: noticing. Dramatic transits announce themselves. A Sun-Moon sextile is the sky at its most understated, a good day for the heart that will go unused unless you choose to spend it. Spent well, over many years, these small days do real work, because relationships are mostly maintained in low-stakes moments rather than grand ones. This pass hands you a couple of those moments annually, clearly labeled, and the growth it offers is simply learning to read the label in time."
+ },
+ {
+  "id": "transit:sun:square:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "moon",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:sun~natal_moon:square"
+  ],
+  "text": "For a couple of days, at two points in every year, the transiting Sun squares your natal Moon, and what you want cuts across what you need. The square drags that conflict into the open. Your plans for the day and your feelings about the day stop cooperating: obligations pull one way, moods pull another, and the strain leaks out as irritability, touchiness, or a flatness you cannot quite explain. Friction gathers along the border between your public and private lives. A demand from work lands on family time, or a domestic matter interrupts something you were determined to finish, and small clashes flare with exactly the people who know your habits best. The instinct under pressure is to override the feeling and push on with the plan, and sometimes the day requires that. But the mood is not noise. A square from the Sun to the Moon usually marks the spot where a real need has been running on empty, and the crankiness is the gauge, not the problem. As the aspect applies, you may sense a vague undertow, a resistance to your own schedule that has no name yet. At the exact pass the mood tends to break the surface, occasionally as a scene, more often as a moment of feeling suddenly and unreasonably fed up. As it separates, the charge drains fast, and what is left, if you bother to look, is specific information about what you have been postponing in yourself. Keep the scale in mind. This is a quick pass, gone in days, returning at the same seasons every year; it breaks nothing and deserves no dread. Handled badly, it costs you an argument or a sour afternoon. Handled honestly, it works like scheduled maintenance for the part of your life that willpower cannot reach. You grow with it by taking the feeling seriously without obeying it blindly: ask what the mood knows that the plan forgot, adjust something small, and the same complaint will have less to shout about when the Sun comes round again."
+ },
+ {
+  "id": "transit:sun:trine:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "moon",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:sun~natal_moon:trine"
+  ],
+  "text": "Twice in the Sun's yearly round it trines your natal Moon, and for a day or so you get to feel what it is like when nothing inside you is arguing. The trine eases the oldest tension in the chart, the one between conscious aim and emotional current. Under it, your feelings back your intentions instead of second-guessing them, and the difference shows everywhere: you are more patient, better company, quicker to laugh, harder to rattle. The body usually cooperates as well; sleep, appetite, and energy tend to run closer to their best. Rapport is the day's particular talent. Anything that depends on people trusting you, a delicate conversation, a family gathering, a first meeting, an audience of any size, goes more smoothly now, because your warmth reads as genuine for the simple reason that it is. On the approach you may just notice the static dropping, small annoyances failing to annoy. Around the exact pass there is a quiet accord at the center of you, and choices made from that place tend to be both humane and sound. As the Sun separates, the ease tapers so gradually that you rarely notice it ending, which points to this transit's one weakness: it demands nothing, so it is entirely possible to spend it on nothing and receive nothing. The Sun makes a single pass and moves on, with the same soft window opening again each year, so no single visit is precious. The long gift is calibration. A day when want and need agree gives you a felt baseline for what alignment is actually like, and that baseline quietly raises your standards for all the other days. People who know this transit use it in two directions at once: outwardly, for whatever needs their best self in the room, and inwardly, as a recurring reminder that peace between head and heart is real. It is just a visitor rather than a resident, and the point of a visitor is to pay attention while they are here."
+ },
+ {
+  "id": "transit:sun:opposition:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "moon",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:sun~natal_moon:opposition"
+  ],
+  "text": "Once a year the transiting Sun arrives opposite your natal Moon, and something in your emotional life comes to fullness. The pass works the way a full moon works: whatever has been quietly growing in your private world reaches a point where it can no longer stay private, and your conscious will finds itself facing your own needs across the table. Often the confrontation wears another person's face. A partner, a family member, or someone at home names the thing you have been too busy to feel, or your own reaction to them surprises you with its strength. The underlying tension is usually between the outer life and the inner one: commitments versus rest, ambition versus belonging, the person you are in public versus the one who needs dinner and sleep. While the aspect applies, that strain rises; you may feel pulled in two directions, oddly sentimental, or resentful of demands that seemed fine last week. At the exact opposition things culminate. Sometimes that means an emotional scene, but more often it just means clear sight: you finally see what you feel, at full brightness, with no way to pretend otherwise. As the Sun separates, the intensity ebbs and a workable balance becomes possible, now with better information. It matters that this is a brief, once-a-year event with no second pass, because fullness is not a state you are meant to live in. It is a reading. Feelings illuminated this week are real, but decisions forced at peak brightness are often regretted at ordinary light, so seeing tends to serve you better than acting. The growth this transit offers is the slow habit of letting your needs into the room before they have to break the door. Each year it shows you what your inner life has been carrying, and each year you get a little quicker at answering it, until the annual confrontation softens into something closer to an annual conversation."
+ },
+ {
+  "id": "transit:sun:conjunction:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "mercury",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:sun~natal_mercury:conjunction"
+  ],
+  "text": "For a day or two each year the transiting Sun crosses your natal Mercury, and your mind moves to the center of things. Thought quickens under this conjunction. Ideas, messages, errands, plans, and conversations pile into the same short window, and you have both the mental energy and the appetite to meet them. It is a strong pass for anything that requires your voice: stating a case, pitching a plan, writing the thing that has to sound like you, making a decision that has waited on clarity. The fusion at work here joins your identity to your thinking, and that has two faces. On the bright side, you say what you mean with unusual force, and your words carry conviction people can feel. On the shadow side, opinions can start to feel like limbs, so that someone disagreeing with your idea seems to be attacking you, and your talking can crowd out your listening. Objectivity is the one mental skill that runs low while the Sun sits on Mercury. As the conjunction approaches, restlessness builds in the head: threads of thought multiply, and you may sleep on a busy brain. At the exact pass there is often one conversation, message, or realization that outweighs the rest of the week, and it deserves your full attention when it shows up. As the Sun moves off, the current settles into follow-through, and writing down what became clear pays off, since the clarity fades faster than the commitments made under it. The whole event is quick and annual, one pass with no return visits, which suits its nature; minds are not meant to run at this voltage for long. What you learn from years of these crossings is the double truth about your own intellect: it is at its most powerful and its least neutral at the same moment. Speak on the day the sky hands you the microphone, and hold the arguments loosely enough that being answered does not feel like being erased."
+ },
+ {
+  "id": "transit:sun:sextile:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "mercury",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:sun~natal_mercury:sextile"
+  ],
+  "text": "A couple of times each year the transiting Sun sextiles your natal Mercury, and for a day or two the small machinery of your life runs without squeaking. This is a modest, useful transit. Words come easily, people reply, and the ordinary business of living, calls, paperwork, scheduling, errands, short trips, questions you have been meaning to ask, goes through with less friction than usual. The sextile's signature is the offer, and here the offers arrive as information: a tip from a colleague, a fact that solves a small problem, an introduction made in passing, a piece of news that is useful only if you follow it up. None of it announces itself. A sextile never insists, so a distracted version of this day looks exactly like any other day, and an attentive version quietly clears a backlog and picks up two or three leads. While the aspect builds, your curiosity tends to wake up first; you find yourself reading further, asking one more question, wanting to know how things work. Near the exact pass, an exchange worth having usually presents itself, and agreements reached now tend to be clear, since your intentions and your words are pulling in the same direction. As the Sun separates, the channel narrows back to normal without any particular moment of ending. There is no second pass to wait for, because the Sun never turns back; there is only the same brief offer, renewed every year, made in the same quiet voice. The way you grow with a transit this small is by respecting its scale. It will not change your life in an afternoon, and it does not need to. Lives change through accumulated small competence, the message sent on the right day, the question asked while someone was in the mood to answer, and this pass marks the days when that kind of effort is discounted. Learn its feel, and twice a year you get a tailwind exactly where most people never think to look for one."
+ },
+ {
+  "id": "transit:sun:square:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "mercury",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:sun~natal_mercury:square"
+  ],
+  "text": "Twice a year the transiting Sun squares your natal Mercury, and for a day or two your words and your will get in each other's way. The square forces friction into communication. Messages come out sharper than you meant, or land differently than you intended; instructions get garbled somewhere between your mouth and their ears; a routine exchange escalates because being right suddenly feels like a matter of honor. That last part is the heart of the transit. Under this pass, your ego leans on your opinions, so a small factual disagreement can carry a strange amount of heat, and you may find yourself defending a position mostly because it is yours. Haste makes everything worse. The mind runs fast but not carefully now, which is exactly the mix that produces the wrong attachment sent, the date misread, the reply fired off before the whole message was understood. While the square is applying, you can often feel the static building: impatience with slow talkers, a sense that everyone is being obtuse on purpose. At the exact aspect, the crossed wire usually reveals itself, an argument, a misunderstanding, a plan that turns out to have been two different plans all along. As it separates, tempers cool quickly, and this is the valuable stretch, because most of what went wrong can still be corrected cheaply: the clarifying follow-up, the apology that costs a sentence, the detail rechecked. Nothing about this pass is large. It is gone within days, returns at the same seasons each year, and its damage, when there is any, is almost always conversational rather than structural. Its gift is precision under pressure. Every pass gives you a live demonstration of the difference between your idea and your self, and a chance to practice separating them, asking what the other person actually said, and rereading before sending. People who learn that separation argue better for the rest of the year, because they can lose a point without feeling they have lost anything that matters."
+ },
+ {
+  "id": "transit:sun:trine:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "mercury",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:sun~natal_mercury:trine"
+  ],
+  "text": "When the transiting Sun trines your natal Mercury, which happens twice in its yearly circuit, you get a day or two of genuinely clear thinking. The trine eases the passage between purpose and thought, and the result is a head that works the way you always wish it would: ideas organize themselves, words arrive in the right order, and your judgment feels steady rather than merely quick. This is one of the tradition's favorite passes for mental work of consequence. Negotiations tend to go well because you understand both what you want and what the other side is saying. Writing flows, and what you write holds up when you reread it later, which is not true of every fluent day. Decisions made now tend to be sound, since your reasoning and your intentions are not fighting each other for the wheel. Learning also comes easier; material that resisted you last week may simply open. On the way in, you may notice your mental fog thinning and your interest sharpening, a readiness to think that has no particular object yet. Around the exact aspect, comprehension peaks; hard conversations become merely conversations, and complicated things consent to be explained. As the Sun separates, the clarity drains slowly enough that you can finish what you started under it. The one caution is the trine's usual one: nothing about this pass will make you use it. It rewards the person who saved a demanding task for a good day and does nothing at all for the person who spent the day on autopilot. The Sun offers no second visit, only the same clean window twice a year, every year, for the rest of your life. Growth here is a scheduling skill. Once you can feel this weather coming, you begin to line up your thinking work with the days that favor it: the contract read, the difficult letter drafted, the decision made while the light is good. That is a small art, and it compounds."
+ },
+ {
+  "id": "transit:sun:opposition:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "mercury",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:sun~natal_mercury:opposition"
+  ],
+  "text": "Once a year the transiting Sun stands opposite your natal Mercury, and your ideas meet their audience, along with their opposition. This is a transit of dialogue under tension. The thoughts you have been developing in private step into the open, and the world answers back, usually through a specific person who holds the other side of the argument: a debate partner, a skeptical colleague, a reviewer, someone whose questions expose exactly the assumptions you had not examined. The opposition confronts, and what it confronts you with here is the gap between what you said and what was heard, between what you believe and what you can actually defend out loud. The temptation of the day is to treat every exchange as a contest and try to win it. The value of the day lies the other way. The person across from you is annoying precisely because they can see the part of the picture you cannot, and this brief pass is one of the year's better chances to collect that missing half. In the approach, you may sense your views are about to be tested; conversations pick up an edge, and you find yourself rehearsing arguments in the shower. At the exact aspect the exchange arrives in earnest, a negotiation, a dispute, a hard question asked in a meeting, a verdict on work you submitted. As the Sun separates, positions soften, and a synthesis often becomes available that neither side could have produced alone. Keep perspective on the size of the thing: this is a matter of days, it comes round annually, and the Sun grants no rematch until next year, so an argument left unwon is simply left. What builds over many of these passes is the rarest communication skill there is, listening while disagreeing. Your mind is not diminished by the existence of a counterargument. It is completed by it, and this yearly confrontation is where you practice letting that be true."
+ }
+]

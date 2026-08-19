@@ -1,0 +1,176 @@
+{
+ "name": "composite-pluto",
+ "outFile": "b3-composite-pluto.json",
+ "setId": "house-b3-composite-pluto",
+ "family": "composite-placement",
+ "cells": [
+  {
+   "id": "composite:pluto:sign:aries",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "pluto",
+    "sign": "Aries"
+   },
+   "atomIds": [
+    "composite:pluto"
+   ],
+   "title": "Composite Pluto in Aries",
+   "bindable": true
+  },
+  {
+   "id": "composite:pluto:sign:taurus",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "pluto",
+    "sign": "Taurus"
+   },
+   "atomIds": [
+    "composite:pluto"
+   ],
+   "title": "Composite Pluto in Taurus",
+   "bindable": true
+  },
+  {
+   "id": "composite:pluto:sign:gemini",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "pluto",
+    "sign": "Gemini"
+   },
+   "atomIds": [
+    "composite:pluto"
+   ],
+   "title": "Composite Pluto in Gemini",
+   "bindable": true
+  },
+  {
+   "id": "composite:pluto:sign:cancer",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "pluto",
+    "sign": "Cancer"
+   },
+   "atomIds": [
+    "composite:pluto"
+   ],
+   "title": "Composite Pluto in Cancer",
+   "bindable": true
+  },
+  {
+   "id": "composite:pluto:sign:leo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "pluto",
+    "sign": "Leo"
+   },
+   "atomIds": [
+    "composite:pluto"
+   ],
+   "title": "Composite Pluto in Leo",
+   "bindable": true
+  },
+  {
+   "id": "composite:pluto:sign:virgo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "pluto",
+    "sign": "Virgo"
+   },
+   "atomIds": [
+    "composite:pluto"
+   ],
+   "title": "Composite Pluto in Virgo",
+   "bindable": true
+  },
+  {
+   "id": "composite:pluto:sign:libra",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "pluto",
+    "sign": "Libra"
+   },
+   "atomIds": [
+    "composite:pluto"
+   ],
+   "title": "Composite Pluto in Libra",
+   "bindable": true
+  },
+  {
+   "id": "composite:pluto:sign:scorpio",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "pluto",
+    "sign": "Scorpio"
+   },
+   "atomIds": [
+    "composite:pluto"
+   ],
+   "title": "Composite Pluto in Scorpio",
+   "bindable": true
+  },
+  {
+   "id": "composite:pluto:sign:sagittarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "pluto",
+    "sign": "Sagittarius"
+   },
+   "atomIds": [
+    "composite:pluto"
+   ],
+   "title": "Composite Pluto in Sagittarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:pluto:sign:capricorn",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "pluto",
+    "sign": "Capricorn"
+   },
+   "atomIds": [
+    "composite:pluto"
+   ],
+   "title": "Composite Pluto in Capricorn",
+   "bindable": true
+  },
+  {
+   "id": "composite:pluto:sign:aquarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "pluto",
+    "sign": "Aquarius"
+   },
+   "atomIds": [
+    "composite:pluto"
+   ],
+   "title": "Composite Pluto in Aquarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:pluto:sign:pisces",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "pluto",
+    "sign": "Pisces"
+   },
+   "atomIds": [
+    "composite:pluto"
+   ],
+   "title": "Composite Pluto in Pisces",
+   "bindable": true
+  }
+ ]
+}

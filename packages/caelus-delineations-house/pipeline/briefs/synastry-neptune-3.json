@@ -1,0 +1,248 @@
+{
+ "name": "synastry-neptune-3",
+ "outFile": "b3-synastry-neptune-3.json",
+ "setId": "house-b3-synastry-neptune-3",
+ "family": "synastry-aspect",
+ "cells": [
+  {
+   "id": "synastry:neptune:conjunction:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "saturn",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:neptune~b_saturn:conjunction"
+   ],
+   "title": "Your Neptune conjunct their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:sextile:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "saturn",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:neptune~b_saturn:sextile"
+   ],
+   "title": "Your Neptune sextile their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:square:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "saturn",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:neptune~b_saturn:square"
+   ],
+   "title": "Your Neptune square their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:trine:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "saturn",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:neptune~b_saturn:trine"
+   ],
+   "title": "Your Neptune trine their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:opposition:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "saturn",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:neptune~b_saturn:opposition"
+   ],
+   "title": "Your Neptune opposite their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:conjunction:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "uranus",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:neptune~b_uranus:conjunction"
+   ],
+   "title": "Your Neptune conjunct their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:sextile:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "uranus",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:neptune~b_uranus:sextile"
+   ],
+   "title": "Your Neptune sextile their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:square:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "uranus",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:neptune~b_uranus:square"
+   ],
+   "title": "Your Neptune square their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:trine:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "uranus",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:neptune~b_uranus:trine"
+   ],
+   "title": "Your Neptune trine their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:opposition:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "uranus",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:neptune~b_uranus:opposition"
+   ],
+   "title": "Your Neptune opposite their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:conjunction:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "neptune",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:neptune~b_neptune:conjunction"
+   ],
+   "title": "Your Neptune conjunct their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:sextile:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "neptune",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:neptune~b_neptune:sextile"
+   ],
+   "title": "Your Neptune sextile their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:square:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "neptune",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:neptune~b_neptune:square"
+   ],
+   "title": "Your Neptune square their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:trine:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "neptune",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:neptune~b_neptune:trine"
+   ],
+   "title": "Your Neptune trine their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:opposition:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "neptune",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:neptune~b_neptune:opposition"
+   ],
+   "title": "Your Neptune opposite their Neptune",
+   "bindable": true
+  }
+ ]
+}

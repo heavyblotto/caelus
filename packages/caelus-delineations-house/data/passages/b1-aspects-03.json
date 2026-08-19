@@ -1,0 +1,227 @@
+[
+ {
+  "id": "natal:aspect:sun:conjunction:uranus",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "sun",
+   "b": "uranus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "aspect:sun~uranus:conjunction",
+   "aspect:uranus~sun:conjunction"
+  ],
+  "text": "You carry a live wire where most people carry a self-image. With the Sun conjunct Uranus, the drive to be somebody and the drive to be free of every mold arrive as one instinct, so being yourself and breaking pattern feel like the same act. From early on you have probably known you were not standard issue, and the knowledge cuts both ways: it is your pride on good days and your loneliness on hard ones. Routine drains you faster than effort does. You can work with enormous focus on what interests you, then find yourself unable to fake attention for what does not, and the difference shows. Authority is a lifelong negotiation. Bosses, institutions, and anyone who says the rule is the rule tend to wake the exact part of you that must test it, and your working life often zigzags for that reason: abrupt exits, sharp turns, reinventions that look reckless from outside and feel overdue from inside. Even your body runs on a quick current; sleep, appetite, and energy can arrive in bursts rather than rhythms, and stillness takes practice. The gift underneath is genuine originality. You see the fresh angle before the room does, and you are unusually willing to act on it. Fields that reward invention, whether technical, artistic, or reforming, are where your light gets steady, because there the strangeness is the job. In love you need room to remain a person, not half of a unit. Partners who try to schedule your soul will meet a stranger, while the ones who give you air discover you are more loyal than your reputation suggests. Friendship may actually be your best doorway to closeness, since it asks for less surrender. The trap of this conjunction is rebellion as reflex. When contrariness runs the show, you can tear down perfectly good structures just to feel your own outline, then wonder why life keeps restarting from zero. Excitement gets mistaken for meaning, shock for truth, and the future for an escape hatch. Your growth lies in making freedom a decision instead of a twitch: keeping what genuinely works, changing what genuinely needs changing, and letting independence build something that outlives the gesture. Do that, and the wire stops shorting out your plans and starts powering them. The oddness you once apologized for becomes the precise thing people come looking for, and you get to be what this aspect always promised: not just different, but different on purpose."
+ },
+ {
+  "id": "natal:aspect:sun:sextile:uranus",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "sun",
+   "b": "uranus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "aspect:sun~uranus:sextile",
+   "aspect:uranus~sun:sextile"
+  ],
+  "text": "An original streak runs through you, and unlike many gifts of this kind, it cooperates. The Sun sextile Uranus gives you access to the inventive, independent side of your nature without the electrical storms that often come with it. You can question how things are done without needing to burn the building down. You can be your own person inside a group without leaving the group. That balance is rarer than it sounds, and it makes you useful in exactly the places where pure rebels and pure conformists both fail. Your mind likes the oblique approach. Given a stuck problem, you tend to walk around it and enter through a side door nobody noticed, and you enjoy the moment when an odd idea turns out to be the practical one. New methods, new tools, and new people energize rather than threaten you, so you often end up as the translator between the old way and the next way: the one who can explain the strange thing to the cautious room. Friendship is a strong current here. Your circle probably includes people from mismatched worlds who would never have met without you, and some of your best chances in life arrive through these unlikely connections, through the acquaintance with the unusual job, the stranger with the idea, the group you almost did not join. In love you keep a certain openness of mind that partners find refreshing; you would rather understand someone than manage them, and you give the freedom you like to receive. The one caution with a sextile is that it waits to be used. This aptitude does not force itself on your life the way a harder aspect would. You can settle into comfortable patterns for years while the inventive part of you idles, and nothing dramatic will go wrong; you will simply be duller than you were built to be, and feel a restlessness you cannot name. The remedy is deliberate novelty: the course you take for no career reason, the experiment you run on your own routines, the yes to the invitation that does not fit your usual pattern. Each time you exercise the gift, it grows more available, and the openings multiply. Over a lifetime this becomes a quiet art of staying current without chasing trends, of renewing yourself in increments instead of ruptures. You change the way a healthy thing grows, and people around you notice that the future seems less alarming when you are the one describing it."
+ },
+ {
+  "id": "natal:aspect:sun:square:uranus",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "sun",
+   "b": "uranus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "aspect:sun~uranus:square",
+   "aspect:uranus~sun:square"
+  ],
+  "text": "There is a recurring quarrel inside you between the life you build and the self that refuses to be contained by it. With the Sun square Uranus, you work hard to establish something, a position, a relationship, an identity people can count on, and then, just as it settles, a voice in you starts rattling the bars. The restlessness is not ingratitude and it is not immaturity, though you may have been accused of both. It is a genuine part of your makeup that insists on freedom and gets louder the longer it is ignored. The pattern often shows first with authority. Teachers, bosses, and rule-makers seem to find your exact nerve, and you find theirs; you can comply for long stretches and then snap over something small, because the small thing stood for every accumulated constraint. Careers under this square rarely run in a straight line. You may quit at strange times, change direction when things were finally working, or stay too long and grow so tense that others feel it. Timing is the real difficulty: the urge for change arrives in spikes, and a spike is a poor moment to make a permanent decision. In relationships the same seesaw operates. You want someone steady, then feel caged by the steadiness; you prize your independence, then miss the closeness it cost. Partners can feel they are living with two people, one warm and one suddenly remote, and the switch between them is the thing to watch, not the wanting itself. What this friction builds, if you keep working it, is a rare capacity: deliberate reinvention. People with easier charts often cannot change when life demands it. You can, because you have been practicing your whole life, first clumsily, with slammed doors and burned bridges, then with increasing skill. The skill looks like this: noticing the pressure early, naming what actually needs to be different, and changing that one thing on purpose instead of detonating everything on impulse. Every time you manage it, the quarrel inside you loses some venom, because the free self finally trusts that it will be heard without having to seize the controls. In time you become the person who has been through many versions of a life and kept the thread, unusually honest about your own needs and unusually unafraid of upheaval. What began as your instability matures into your specific courage."
+ },
+ {
+  "id": "natal:aspect:sun:trine:uranus",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "sun",
+   "b": "uranus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "aspect:sun~uranus:trine",
+   "aspect:uranus~sun:trine"
+  ],
+  "text": "Change has never frightened you the way it frightens most people. With the Sun trine Uranus, your identity and your appetite for the new are on friendly terms, so you can absorb disruption, adopt fresh ideas, and step outside convention without any inner alarm going off. Where others need a crisis to loosen their grip on habit, you seem to shed outgrown skins almost casually, and you may be surprised to learn how much this costs everyone else. Independence comes to you without a war. You did not have to fight for the right to be yourself, or if you did, the fight ended early and left no scars, and the result is a natural, unforced individuality: original opinions held without hostility, an unusual path walked without any need to shock. People sense that you are not performing your differences, and it puts them at ease. You often become the person friends consult at their crossroads, because you treat their wild option as a real option and their fear of change as solvable, and because your own history proves that reinvention does not have to end in ruin. Your mind is quick with alternatives. In work you gravitate toward whatever is next, new tools, new fields, new arrangements, and you adapt to them with so little friction that colleagues assume you had advance notice. In love you offer a rare combination: warmth without possession. You genuinely want a partner to remain a full, separate person, and you flourish with someone who extends you the same courtesy. The shadow of all this ease is that ease examines nothing. A talent that never meets resistance can idle at a fraction of its size, and a person for whom change is cheap can drift through options without committing to any, mistaking motion for growth. You may also underrate your gift, assuming everyone finds novelty this easy, and so never push it toward anything difficult. The growth available here is to give your freedom a worthy assignment. Pick something genuinely hard, a craft, a cause, a body of work that needs years, and bring your originality to it daily instead of occasionally. Ease plus commitment is a formidable combination, and it is fully available to you. When you claim it, the trine stops being a pleasant background hum and becomes what it was always capable of being: a life that renews itself on schedule, and helps other lives do the same."
+ },
+ {
+  "id": "natal:aspect:sun:opposition:uranus",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "sun",
+   "b": "uranus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "aspect:sun~uranus:opposition",
+   "aspect:uranus~sun:opposition"
+  ],
+  "text": "The tug-of-war between closeness and freedom tends to play out in your life through other people. With the Sun opposite Uranus, you hold two ends of a real polarity: the wish to be a steady somebody, and the wish to be answerable to no one. Like most oppositions, this one loves to split itself between you and whoever stands across from you. Sometimes you play the reliable one and attract the unpredictable: partners who blow hot and cold, friends who vanish and reappear, collaborators who upend plans at the last minute. You wonder why your life keeps filling with such people. Their disruptions are often doing your rebelling for you, expressing a wildness you have not admitted is your own. Then the poles can swap. In another season, or another relationship, you become the erratic one. You go distant the moment someone leans in, change terms just as things settle, guard an exit you may never use but cannot close. Either way, the pattern has a signature: sudden reversals, attractions that arrive like weather, and a sense that intimacy and independence are rationed against each other. More of one always seems to mean less of the other. The work of this aspect is to call the whole polarity yours. When you own your need for space, you can state it plainly instead of engineering distance through provocation or disappearance. You stop needing partners to be the villains who justify your leaving. When you own your need for closeness, the free spirits you love stop looking like jailers the moment they want something from you. Practically, this means building relationships with air in the design: separate interests, unscheduled time, room for each person to change without it counting as betrayal. Under those terms you are an exciting companion, alive to who the other person is actually becoming rather than who they were at the start. The slow deadness that ends many settled bonds cannot get a foothold near you. Your friendships and partnerships tend to be with originals, and your loyalty to them is real precisely because it is chosen daily rather than assumed. Over time, the seesaw slows. You discover that a self with room to move can stay. Staying with room to move is not a compromise between your two ends; it is the point of having them. The people who once destabilized you become simply interesting, and you become someone who can be counted on without being pinned down."
+ },
+ {
+  "id": "natal:aspect:sun:conjunction:neptune",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "sun",
+   "b": "neptune",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "aspect:sun~neptune:conjunction",
+   "aspect:neptune~sun:conjunction"
+  ],
+  "text": "Your sense of who you are has soft borders. With the Sun conjunct Neptune, identity and imagination run as a single current, so the question most people answer without thinking, where do I end and the rest of the world begin, is for you a live and daily matter. You absorb atmospheres. A tense room tires you, a hopeful one lifts you, and other people's expectations can settle over you so quietly that you mistake them for your own intentions. This is the source of both your finest qualities and your recurring confusions. On the fine side: compassion that is real rather than performed, an imagination that thinks in images and music instead of bullet points, and a certain shimmer that others notice and cannot name. People project onto you easily, seeing in you the confidant, the artist, the healer, the one who understands, and often you can actually become some version of what they see, because your self is less fixed than most. Creative and helping work suit you deeply; so does any field where sensing the intangible is the skill, from art to ministry to care for the suffering. On the confusing side: direction. Choosing a definite path means becoming one thing and not the others, and something in you resists that narrowing the way a mist resists a fence. You may drift through seasons of life on other people's momentum, or hold three half-formed callings at once, or feel like an impostor in every role because no role contains all of you. Escape is the standing temptation, taking whatever form is nearest, sleep, fantasy, screens, romance, substances, and it works briefly and costs steadily. In love you are tender and idealizing, inclined to see the best possible person inside the actual one, which is beautiful until the gap between them falls on you to carry. Your growth with this conjunction is not to harden. It is to give the water a vessel: one craft practiced regularly, a few plain commitments kept, honest friends who will tell you what is actually happening when the mist thickens. Held by that structure, your permeability becomes exactly what it was meant to be, a way of knowing things others cannot know and making things others cannot make. You stop asking your boundaries to be walls and let them be banks, and the life that felt formless starts to move like a river, going somewhere, carrying more than your own weight."
+ },
+ {
+  "id": "natal:aspect:sun:sextile:neptune",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "sun",
+   "b": "neptune",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "aspect:sun~neptune:sextile",
+   "aspect:neptune~sun:sextile"
+  ],
+  "text": "You have an imagination that answers when called. The Sun sextile Neptune links your everyday self to the dreaming, feeling, image-making side of life through a door that opens easily but does not open itself. Much of what this aspect gives depends on how often you turn the handle. The gifts are gentle and practical at once. You read moods accurately: the meeting that is going wrong under its polite surface, the friend who says fine and is not fine, the timing that is right for a hard conversation. You have taste, a feel for what fits in rooms, words, and gestures. People often ask for your eye without quite knowing what they are asking for. Sympathy comes naturally, and it comes with proportion. You can sit with someone's trouble without drowning in it, which makes you a better helper than many softer-hearted people. You are still standing when the crisis needs hands. You may or may not call yourself an artist. Either way, some form of making or enjoying beauty is necessary to your well-being, and your days go better when it is present. In love you bring a quiet romanticism, an instinct for small kindnesses and remembered details. You idealize your partner just enough to keep tenderness alive, without losing sight of the actual person. Spiritual questions tend to interest rather than torment you; you can hold faith and doubt in the same hand and feel no emergency. The caution here is neglect. Because this gift never forces a crisis, it can sit unused for years while you attend to the practical and the urgent. The only symptom will be a flatness: a life that works on paper and tastes of cardboard. The remedy is regular, modest use: time near music or water, an hour defended weekly for nothing useful, attention paid to your dreams. A craft where your hands and imagination meet feeds it best of all. Fed this way, the aptitude compounds. Your intuition sharpens into something you can act on, and your compassion finds forms that actually help. The making, whatever it is, adds up to a body of work or a way of living with your watermark on it. You grow by honoring the quiet gift as if it were a loud one. It repays you the way quiet things do: steadily, and more than anyone would guess from outside."
+ },
+ {
+  "id": "natal:aspect:sun:square:neptune",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "sun",
+   "b": "neptune",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "aspect:sun~neptune:square",
+   "aspect:neptune~sun:square"
+  ],
+  "text": "Somewhere between your intention and its execution, a fog rolls in. With the Sun square Neptune, the clear line most people draw from I want this to I did it keeps dissolving on you: plans blur, energy leaks into daydreams, confidence evaporates at odd moments, and you can lose whole seasons to a vagueness you cannot point to afterward. The difficulty is real, so name it accurately. This is not laziness, and calling it that has probably done you harm. It is a genuine crosscurrent between your will and your imagination, in which the part of you that dreams keeps undermining the part that decides, offering an ideal so luminous that every actual step toward it looks disappointing by comparison. The pattern has several favorite costumes. There is the glorious plan endlessly refined and never started. There is the person or cause you idealize, serve, and are eventually disillusioned by, sometimes because they deceived you, sometimes because no one could have been what you needed them to be. There is the quiet escape, the habit or fantasy or screen that takes the edge off and takes the hours with it. And there is the strange fog around how others see you: people misread you often, crediting you with motives you never had, good and bad, because something in your presentation scatters light. What this square builds, worked honestly, is discernment, and discernment of a high grade, because yours is earned against resistance. Every disillusionment teaches you the difference between what you saw and what was there. Every project you actually finish, however small, teaches you that the humiliating gap between dream and result is not a verdict on you; it is simply the price of making anything real, paid by everyone who makes things. Practical handles help more than insight here: write commitments down, keep them few, let trusted friends reality-check the shining new plan before you reorganize your life around it, and treat the urge to escape as information about a need, not a command. In love, practice seeing your partner at actual size on purpose; it will feel like a loss at first and become the deeper romance later. Slowly, the fog thins. You keep the vision, because the vision was never the problem, and you gain the ability to walk toward it on solid ground. People who develop this aspect end up with something rare: imagination that has been made trustworthy. It is worth every foggy year it costs."
+ },
+ {
+  "id": "natal:aspect:sun:trine:neptune",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "sun",
+   "b": "neptune",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "aspect:sun~neptune:trine",
+   "aspect:neptune~sun:trine"
+  ],
+  "text": "A certain grace moves through your life that you probably fail to notice, because ease is invisible from the inside. With the Sun trine Neptune, your identity and your imagination are on speaking terms without any effort on your part, and the result is a kind of unforced charm: you put people at ease, you sense what a moment needs, and you carry an atmosphere with you that others describe as calming, or kind, or somehow more spacious than the room deserved. Compassion is your default setting rather than an achievement. You extend the benefit of the doubt as automatically as breathing, and people confide in you, sometimes within minutes of meeting you, because they can feel that your listening has no blade hidden in it. Your imagination is fluent and friendly. Ideas, images, and intuitions arrive without being summoned, useful in any work you turn your hand to and essential if your work is creative or caring; the arts, the healing trades, teaching, and any role that needs a feel for the unspoken all sit comfortably in your range. Inner life comes easily too. Whether or not you practice a faith, you have a working sense that life means something, and it steadies you in weathers that capsize other people. In love you are gentle, forgiving, and easy to be with, gifted at the small daily poetry that keeps affection alive. The risks of this trine are the risks of any current that never meets a rock. Ease can become drift: gifts sampled rather than developed, kindness offered so widely it never deepens anywhere, a pleasant life assembled from the path of least resistance while the real work waits. Forgiveness can quietly become the acceptance of what should not be accepted, since it costs you so little to let things go. And because your grace was never tested, you may trust it too far, extending your rosy reading of people past the point where evidence has spoken. Your growth is a matter of adding spine to the water. Choose one gift and train it seriously, the way people with harder charts are forced to. Let yourself be inconvenienced by a commitment. Say the unkind-sounding true thing when it matters, and discover that your gentleness survives it. Compassion with a backbone is one of the most valuable things a person can carry, and you are closer to it at your starting line than most people get in a lifetime. The distance that remains is yours to walk deliberately, and walking it turns a pleasant nature into a deep one."
+ },
+ {
+  "id": "natal:aspect:sun:opposition:neptune",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "sun",
+   "b": "neptune",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "aspect:sun~neptune:opposition",
+   "aspect:neptune~sun:opposition"
+  ],
+  "text": "Idealizing people comes to you as naturally as breathing, and it is both your tenderness and your blind spot. With the Sun opposite Neptune, the dreaming side of your nature tends to appear in your life as other people. There is the luminous stranger, the wounded soul who needs you, the mentor with the answers, the partner who must surely be, underneath it all, the one. You meet someone and a light comes on. For a while you are not quite seeing them; you are seeing through them to something perfect that your own imagination supplied. Then time does what time does. The actual person emerges from the glow, ordinary and flawed, and you feel deceived. Sometimes you are right, since this aspect can draw genuine deceivers. Sometimes you are wrong, because no one consented to be your dream. The same polarity runs the other direction. People project onto you too, casting you as savior or muse or disappointment, and you can feel oddly responsible for images of you that you never authorized. Rescue is a recurring temptation in both costumes: you save someone and slowly resent it. Or you present yourself as the one needing saving, and slowly disappear into the role. None of this means your perception is broken. It means your perception is double: one eye sees essence and possibility, the other sees fact and behavior. The work of a lifetime is teaching them to focus together. The essence-eye is a real gift. You often do see the best in people accurately: the musician inside the accountant, the kindness inside the difficult parent. Your faith can call it into existence, and many people become more around you because you saw more. The fact-eye just has to be given equal authority: what has this person actually done, kept, said, paid, repaired, over time. Love built with both eyes open is this aspect's prize, and it is considerable: romance that survives the reveal, devotion to a real and therefore imperfect human being. That is the only kind of devotion that means anything. As the projections come home, you recover what you were lending out. The creativity, the depth, the shimmer you kept finding in others turns out to be portable, and yours. You end up disillusioned in the good sense: free of illusions but not of wonder, harder to fool and easier to love. You still see the light in people, and finally you see the people too."
+ },
+ {
+  "id": "natal:aspect:sun:conjunction:pluto",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "sun",
+   "b": "pluto",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "aspect:sun~pluto:conjunction",
+   "aspect:pluto~sun:conjunction"
+  ],
+  "text": "Nothing about you is casual. With the Sun conjunct Pluto, intensity is not a mood you visit; it is the material you are made of, and you have probably known since childhood that you experience things at a depth other people seem to be spared. When you commit, you commit totally. When you want something, the wanting has gravity. When you enter a room, people feel a pressure they cannot name, and they respond to it by deferring to you, confiding in you, or bracing against you, often before you have said a word. Half-measures feel like lies to you, and small talk like a tax. You are drawn instead to whatever is real and preferably hidden: the actual motive, the buried history, the crisis everyone else is managing by not looking at it. This makes you formidable in any work that requires going beneath surfaces, research, psychology, medicine, investigation, finance, crisis of any kind, and it makes you the person others call when their lives stop being polite. The recurring danger is control. Depth taught you early that the world contains real threats, so some part of you decided to hold the reins of everything: your image, your feelings, your people, the outcome. Held too tightly, this curdles into the famous shadows of the aspect, secrecy, suspicion, tests of loyalty, the slow conversion of love into management. Power struggles find you, especially with authorities, because you cannot pretend to respect strength you do not actually see. The other signature is periodic destruction and rebirth. Your life tends to move in chapters that end completely, a self, a career, a circle of people burned down to the ground and something new grown from it, and while these passages are harrowing, you may notice that you are strangely good at them, more alive mid-transformation than in any settled stretch. Your growth is a change of grip. The strength is real; the question is whether it guards or builds. Every time you choose transparency over management, every time you let someone see you before you are invulnerable, every time you release a resentment because carrying it costs more than it protects, the same force that went into control becomes available for creation. Then the intensity stops being something people survive in you and becomes something they draw on, and you take your real place: not the one who holds power over, but the one through whom deep things are brought up into the light and made useful."
+ },
+ {
+  "id": "natal:aspect:sun:sextile:pluto",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "sun",
+   "b": "pluto",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "aspect:sun~pluto:sextile",
+   "aspect:pluto~sun:sextile"
+  ],
+  "text": "Depth is available to you the way a second language is available to someone raised with it: not always in use, but never far away, and fluent the moment it is needed. The Sun sextile Pluto gives you a working relationship with the buried side of life, your own and other people's, without the compulsions that usually come as the price of admission. You can look at hard things steadily. Where many people flinch away from the unsaid motive, the failing project, the hard truth about a family or an institution, you can walk toward it, name it, and stay functional. This quiet capacity shapes your life more than any dramatic talent would. People sense it. Friends bring you their real problems, not their presentable ones. Colleagues discover you are the one to send into the tangled situation, the talks with history behind them, the mess nobody will describe honestly. You have a reformer's instinct at a human scale. You like to take something degraded, a process, a team, a room, a habit, and restore it to working order. You grasp by instinct that real repair goes to the root rather than the paint. Your will is strong but patient. You can hold an intention for years, adjusting method without losing aim, which gives you a kind of compound-interest advantage over flashier people. In love you are loyal and more private than you appear, offering an intimacy that deepens by layers. You handle a partner's dark seasons without fear, and they may not realize how rare that is until they have known you for years. The nature of a sextile is that it responds to use and sleeps through neglect. If your life never asks you for depth, you may coast on the surface for years with this whole apparatus idle, and feel a vague hunger for something more serious than your days contain. You grow by volunteering for weight: the responsibility with real stakes, the honest look at your own patterns, the project that requires transformation rather than adjustment. Every deliberate use strengthens the fluency. Over the years, this compounds into personal authority of the unadvertised kind. It is a strength that does not need to display itself, comes back quietly after losses that flatten others, and lends its steadiness to whoever stands near it. It is not a loud gift. It is one of the most durable ones a chart can carry."
+ },
+ {
+  "id": "natal:aspect:sun:square:pluto",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "sun",
+   "b": "pluto",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "aspect:sun~pluto:square",
+   "aspect:pluto~sun:square"
+  ],
+  "text": "You live with more force than fits comfortably inside one person. The Sun square Pluto sets your conscious will at a hard angle to something deeper and less domesticated in you. The result is an inner pressure you have carried so long you may assume everyone has it. It shows as a compulsion to prove yourself, a refusal to be controlled that can tip into controlling, an all-or-nothing throttle where others seem to have a dial. The friction announces itself early and often through authority. Figures with power over you, parents, bosses, gatekeepers, seem to trigger something absolute. Your battles with them are rarely about the stated issue. They are about whether anyone gets to bend you, and something in you would rather break than bend. The same charge runs through your ambitions. You do not merely pursue goals; you grip them, and the grip can carry you past every obstacle or past every warning, sometimes both in the same year. Setbacks feel personal, like tests of your right to exist, which is why you sometimes keep pushing after winning would have been cheaper than continuing. In close relationships the pressure shows as intensity that others find magnetic at first and then overwhelming. There is jealousy you despise in yourself, tests you administer without meaning to, a habit of turning vulnerability into strategy because being seen feels like handing someone a weapon. Under all of it, usually, is an early experience of powerlessness that the whole system is organized to prevent from ever recurring. Take the difficulty at full weight, and then take this at full weight too: this square, worked over a lifetime, builds people of unusual substance. The work is learning the difference between power over and power to. Power over needs others small, keeps score, and wins battles while emptying the winner. Power to builds things, transforms situations, carries loads, and grows by being shared. Catching the compulsion mid-motion, in the moment of choosing to dominate, conceal, or retaliate, and taking the other door instead is the practice. Each time you manage it, a piece of the old pressure becomes usable strength. Therapy, honest friendship, and hard physical or creative labor are the traditional refineries, and they work. What comes out the far side is a person who has met their own worst possibilities and is afraid of almost nothing. Your will gets tempered rather than merely indulged, and your presence makes others feel safer, not smaller. That is this aspect kept faith with, and it is worth the fight it takes."
+ },
+ {
+  "id": "natal:aspect:sun:trine:pluto",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "sun",
+   "b": "pluto",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "aspect:sun~pluto:trine",
+   "aspect:pluto~sun:trine"
+  ],
+  "text": "People hand you power without your asking, and they always have. With the Sun trine Pluto, depth and will run in the same direction in you, so quietly that you may not recognize the trait others notice first. It is a natural authority, a sense that you can be trusted with serious things. Responsibility comes toward you the way height draws questions about basketball. You read below surfaces without effort. Motives, undercurrents, the real power map of a workplace as opposed to the official one: all of this comes to you as ordinary perception. You are seldom shocked by what people turn out to be, because some part of you had already priced it in. Crisis does not scramble you. When lives or projects fall apart around you, you get calmer and more capable, and you may have learned that you are at your best in exactly the situations most people dread. This makes you a natural in any field that handles what is buried or breaking: the healing professions, psychology, research, management of real stakes, work with beginnings and endings of every kind. Your own life tends to include clean metamorphoses, changes of direction or self that happen with surprising smoothness. You do not cling to dead forms the way most people do; when something in you is finished, you let it compost and move on. In love you offer depth without drama, an intimacy that keeps opening for years, and a steadiness in your partner's hard seasons that becomes the thing they thank you for decades later. The hazard of the trine is unexamined power. Influence you did not have to earn is influence you may not notice yourself using. Your reading of people can shade into managing them, benevolently, invisibly, in ways you would resent if reversed. Ease can also mean the gift stays at its factory settings, spent on ordinary advantage instead of trained toward anything worthy of it. Your growth is to make the implicit deliberate. Notice the weight your words carry and choose them accordingly. Ask where your strength is most needed rather than where it is most comfortable, and volunteer it there. Put your regenerative talent in service of things larger than your own chapters, a community, a field, people in their worst hours. Handled consciously, this aspect matures into something rare: strength that needs no audience and keeps its hands clean. That kind of power leaves every room more honest, and every person larger than it found them."
+ },
+ {
+  "id": "natal:aspect:sun:opposition:pluto",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "sun",
+   "b": "pluto",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "aspect:sun~pluto:opposition",
+   "aspect:pluto~sun:opposition"
+  ],
+  "text": "Intensity finds you through other people. With the Sun opposite Pluto, the deep, transforming, power-charged side of life tends to arrive in your story wearing faces. There is the magnetic person you cannot be casual about, and the rival who seems to know your weak points. There is the boss, parent, or partner with whom everything becomes a contest of wills, whether or not anyone declares it. Your relationships run hotter than most. Where others form attachments, you form entanglements: bonds with gravity, where the question of who holds the power is always present somewhere. It hides in money, in desire, in who needs whom more, in who can walk away. You may notice a pattern of attracting strong-willed, controlling, or secretive people, and it is worth asking what the pattern is for. An opposition often assigns one of its ends to other people. The intensity you keep meeting is usually a disowned piece of your own: ambition, possessiveness, a capacity for depth. You export it, then encounter it as somebody else's behavior. When you carry it unconsciously, the relationship becomes the battlefield. Jealousy appears, or provokes itself in the other person. Trust becomes conditional, tested rather than given. Endings turn total, scorched earth where a door might have been left open. You can find yourself repeating the same drama with new casting, which is the surest sign the script is internal. Taken up consciously, the same charge becomes the makings of the deepest kind of partnership. You are not built for shallow bonds, and auditioning for them wastes you. You are built for the kind where two people see each other completely, survive being seen, and are changed by it. Getting there means practicing shared power on purpose: saying what you want instead of maneuvering for it, letting the other person win real decisions. It also means bringing jealousy and fear into speech while they are small, and granting others privacy without reading it as betrayal. It also means keeping your own center inside a strong bond, wanting deeply without needing to own. Every relationship that survives this honesty hands back a piece of the strength you had been meeting only in others. Gradually you become what this aspect intends: a person of real force who no longer needs an opponent to feel it. You grow intimate without warfare, and hard to manipulate, because nothing in you is hidden from yourself."
+ }
+]

@@ -1,0 +1,248 @@
+{
+ "name": "synastry-venus-3",
+ "outFile": "b3-synastry-venus-3.json",
+ "setId": "house-b3-synastry-venus-3",
+ "family": "synastry-aspect",
+ "cells": [
+  {
+   "id": "synastry:venus:conjunction:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "venus",
+    "b": "saturn",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:venus~b_saturn:conjunction"
+   ],
+   "title": "Your Venus conjunct their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:venus:sextile:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "venus",
+    "b": "saturn",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:venus~b_saturn:sextile"
+   ],
+   "title": "Your Venus sextile their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:venus:square:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "venus",
+    "b": "saturn",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:venus~b_saturn:square"
+   ],
+   "title": "Your Venus square their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:venus:trine:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "venus",
+    "b": "saturn",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:venus~b_saturn:trine"
+   ],
+   "title": "Your Venus trine their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:venus:opposition:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "venus",
+    "b": "saturn",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:venus~b_saturn:opposition"
+   ],
+   "title": "Your Venus opposite their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:venus:conjunction:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "venus",
+    "b": "uranus",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:venus~b_uranus:conjunction"
+   ],
+   "title": "Your Venus conjunct their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:venus:sextile:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "venus",
+    "b": "uranus",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:venus~b_uranus:sextile"
+   ],
+   "title": "Your Venus sextile their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:venus:square:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "venus",
+    "b": "uranus",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:venus~b_uranus:square"
+   ],
+   "title": "Your Venus square their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:venus:trine:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "venus",
+    "b": "uranus",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:venus~b_uranus:trine"
+   ],
+   "title": "Your Venus trine their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:venus:opposition:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "venus",
+    "b": "uranus",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:venus~b_uranus:opposition"
+   ],
+   "title": "Your Venus opposite their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:venus:conjunction:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "venus",
+    "b": "neptune",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:venus~b_neptune:conjunction"
+   ],
+   "title": "Your Venus conjunct their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:venus:sextile:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "venus",
+    "b": "neptune",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:venus~b_neptune:sextile"
+   ],
+   "title": "Your Venus sextile their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:venus:square:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "venus",
+    "b": "neptune",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:venus~b_neptune:square"
+   ],
+   "title": "Your Venus square their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:venus:trine:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "venus",
+    "b": "neptune",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:venus~b_neptune:trine"
+   ],
+   "title": "Your Venus trine their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:venus:opposition:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "venus",
+    "b": "neptune",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:venus~b_neptune:opposition"
+   ],
+   "title": "Your Venus opposite their Neptune",
+   "bindable": true
+  }
+ ]
+}

@@ -1,0 +1,83 @@
+{
+ "name": "composite-aspects-mars-3",
+ "outFile": "b3-composite-aspects-mars-3.json",
+ "setId": "house-b3-composite-aspects-mars-3",
+ "family": "composite-aspect",
+ "cells": [
+  {
+   "id": "composite:aspect:mars:conjunction:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "true_node",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:mars~true_node:conjunction"
+   ],
+   "title": "Composite Mars conjunct composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:sextile:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "true_node",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:mars~true_node:sextile"
+   ],
+   "title": "Composite Mars sextile composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:square:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "true_node",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:mars~true_node:square"
+   ],
+   "title": "Composite Mars square composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:trine:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "true_node",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:mars~true_node:trine"
+   ],
+   "title": "Composite Mars trine composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:opposition:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "true_node",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:mars~true_node:opposition"
+   ],
+   "title": "Composite Mars opposite composite North Node",
+   "bindable": true
+  }
+ ]
+}

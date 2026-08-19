@@ -1,0 +1,176 @@
+{
+ "name": "transit-houses-moon",
+ "outFile": "b2-transit-houses-moon.json",
+ "setId": "house-b2-transit-houses-moon",
+ "family": "transit-house",
+ "cells": [
+  {
+   "id": "transit:moon:house:1",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "moon",
+    "house": 1
+   },
+   "atomIds": [
+    "transitHouse:moon:1"
+   ],
+   "title": "Moon moving through your 1st house",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:house:2",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "moon",
+    "house": 2
+   },
+   "atomIds": [
+    "transitHouse:moon:2"
+   ],
+   "title": "Moon moving through your 2nd house",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:house:3",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "moon",
+    "house": 3
+   },
+   "atomIds": [
+    "transitHouse:moon:3"
+   ],
+   "title": "Moon moving through your 3rd house",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:house:4",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "moon",
+    "house": 4
+   },
+   "atomIds": [
+    "transitHouse:moon:4"
+   ],
+   "title": "Moon moving through your 4th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:house:5",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "moon",
+    "house": 5
+   },
+   "atomIds": [
+    "transitHouse:moon:5"
+   ],
+   "title": "Moon moving through your 5th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:house:6",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "moon",
+    "house": 6
+   },
+   "atomIds": [
+    "transitHouse:moon:6"
+   ],
+   "title": "Moon moving through your 6th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:house:7",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "moon",
+    "house": 7
+   },
+   "atomIds": [
+    "transitHouse:moon:7"
+   ],
+   "title": "Moon moving through your 7th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:house:8",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "moon",
+    "house": 8
+   },
+   "atomIds": [
+    "transitHouse:moon:8"
+   ],
+   "title": "Moon moving through your 8th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:house:9",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "moon",
+    "house": 9
+   },
+   "atomIds": [
+    "transitHouse:moon:9"
+   ],
+   "title": "Moon moving through your 9th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:house:10",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "moon",
+    "house": 10
+   },
+   "atomIds": [
+    "transitHouse:moon:10"
+   ],
+   "title": "Moon moving through your 10th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:house:11",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "moon",
+    "house": 11
+   },
+   "atomIds": [
+    "transitHouse:moon:11"
+   ],
+   "title": "Moon moving through your 11th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:house:12",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "moon",
+    "house": 12
+   },
+   "atomIds": [
+    "transitHouse:moon:12"
+   ],
+   "title": "Moon moving through your 12th house",
+   "bindable": true
+  }
+ ]
+}

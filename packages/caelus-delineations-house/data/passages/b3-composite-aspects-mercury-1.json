@@ -1,0 +1,212 @@
+[
+ {
+  "id": "composite:aspect:mercury:conjunction:venus",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mercury",
+   "b": "venus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "composite:mercury~venus:conjunction"
+  ],
+  "text": "Saying something and giving something are the same act in this bond. Talk and regard sit on top of each other, so a remark is never only information. It arrives as warmth offered or warmth held back, and both people hear it that way without choosing to. Compliments come easily. So does the habit of reaching for the nicer version of a fact, because the nicer version is what affection sounds like in this pair's shared language. Subjects that move freely are the ones where liking a thing and describing it are the same job. Taste, food, music, how a room looks, what other people are like: these two can go on for hours and neither gets restless. Small talk is not filler in this relationship. It is the maintenance. A short exchange about nothing keeps the bond in better repair than any grand gesture would. The fusion costs them a plain disagreement. A correction is hard to deliver flat, because the channel that carries it also carries fondness, and a flat sentence lands with the fondness taken out. So accuracy gets softened, or put off, or wrapped so carefully that the point does not survive the wrapping. Both of you may notice a small factual dispute taking on a weight that made no sense for its size. Outsiders tend to notice the manner first. This pair speaks with a courtesy that reads as a house style, and the two often end up smoothing an argument that started somewhere else. The skill is real. It works better on other people's conflicts than on their own. What the conjunction gives is a relationship that repairs itself in ordinary sentences. Nothing has to be staged, and no apology has to be formal. Talking is already the affectionate act, which is why these two can be perfectly at ease with each other in the middle of a boring conversation about groceries."
+ },
+ {
+  "id": "composite:aspect:mercury:sextile:venus",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mercury",
+   "b": "venus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "composite:mercury~venus:sextile"
+  ],
+  "text": "A kinder register is available to this pair, and using it is optional. Warmth sits within reach of the conversation without running it. When the two of them want the talk to be pleasant, it turns pleasant quickly, and plenty of exchanges go by without the turn ever being taken. The opening shows up most clearly in the middle of friction. A subject gets sharp, and there is a move on hand: a joke, a concession, a change of subject that nobody resents. The move is offered rather than required, which is why some arguments in this relationship end in ten seconds and others run their full course. Neither of you is compelled by this contact, and the difference between the bonds that use it and the bonds that leave it alone is mostly a matter of habit. Where it does get used, the talk picks up a certain hospitality. Plans for something enjoyable get made in detail and get made well, since the pair can think and appreciate at the same time. Praise is easy to phrase here. So is the small piece of tact that keeps a third person from being hurt by an accurate remark. The limit is honest. A sextile gives an option, not a temperament, so this pair does not become gentle by default. Under strain the conversation can go blunt and stay blunt for a long stretch, and nothing in the chart intervenes. The value of an opening is that it stays open. However badly a week has gone, the route back into a friendly register has not closed, and it is usually a short route: one remark, made in the right tone, and these two are talking normally again."
+ },
+ {
+  "id": "composite:aspect:mercury:square:venus",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mercury",
+   "b": "venus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "composite:mercury~venus:square"
+  ],
+  "text": "Accuracy and pleasantness get in each other's way here every time the subject matters. A clear statement of the situation comes out cold. The warmer version of the same statement loses the part that needed saying. The pair keeps landing in an argument that is not about the subject at all, but about the way the subject was put. Tone becomes a standing topic. One remark gets called harsh, the reply is that it was merely true, and both readings are defensible, which is why the collision recurs instead of settling. Praise can come out awkwardly for the same reason. A compliment that has been thought about too long arrives sounding like an assessment. Taste disputes carry more charge in this bond than their content deserves. Disagreement about a film, a purchase, or how something ought to look turns into a disagreement about judgment itself. What the two of you make together is a conversation in which liking and knowing are not in step, so a difference in liking gets read as a difference in competence. A pair with this square has to learn something a smoother relationship never has to: how to say a hard thing without pulling regard back at the same moment, and how to hear a hard thing without checking whether the affection went with it. The skill is not decorative. It makes the bond able to hold information that a more comfortable conversation would keep outside. The friction does not turn into ease. It does give these two a great deal of practice in wanting to be liked and wanting to be told the truth at once, and in noticing that the two wishes are not the same wish."
+ },
+ {
+  "id": "composite:aspect:mercury:trine:venus",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mercury",
+   "b": "venus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "composite:mercury~venus:trine"
+  ],
+  "text": "Ease is the given here, so the useful question is what the ease keeps out. The talk in this bond runs pleasant by default. Agreement on what is nice, what is worth having, and who is worth spending an evening with comes without effort, and the two rarely have to work at sounding kind to each other. That default is genuinely good company. Plans get made without friction. Praise is unforced. The pair has a shared sense of what counts as good taste, and that shared sense does a lot of quiet work, because a great many small decisions never have to be discussed at all. Disagreement gets rounded off on its way out of the mouth here, arriving as a mild preference that is easy to grant and easier to forget. A smooth register has no gear for an ugly subject. Nothing is being suppressed dramatically. It is simply that a grievance never finds an opening, since every conversation is already comfortable and interrupting the comfort looks like a bigger act than the grievance seems to be worth. Money can go undiscussed this way for years. So can a slow disappointment that neither person considers serious enough to spoil an evening with. Both of you can be surprised by what has been sitting outside the conversation all along. The surprise is not evidence that the bond was false. It is what happens when a channel this pleasant carries only the material that suits it. The pair that gets the most out of this one is the pair that occasionally says the unattractive thing on purpose, and finds out that the pleasant register survives it."
+ },
+ {
+  "id": "composite:aspect:mercury:opposition:venus",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mercury",
+   "b": "venus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "composite:mercury~venus:opposition"
+  ],
+  "text": "Naming a pleasure and having a pleasure are two different occupations, and this bond is stretched between them. Both wishes are strong here, and they will not share a moment. Explaining a pleasure tends to interfere with having it, and having it tends to leave nobody able to say why. In practice the pair often assigns the poles by habit, with one of them doing the naming and the other doing the liking. The chart hands out no such roles. Change the topic and the assignment can reverse, which is worth knowing, because the argument sounds like a fixed difference in personality when it is closer to a division of labor these two fell into. The tension shows up in ordinary places. A meal, a piece of music, or a plan for a trip gets talked about until the talking is doing something other than enjoying. Or a decision gets made on taste alone and then gets justified afterward, badly, because the other one wanted a reason. Compliments can miss in both directions. The considered one sounds clinical and the spontaneous one sounds thin. Memory divides along the same axis: one end keeps what was said and the other keeps how the evening felt, and two accounts of one night can differ enough to start a second argument about the first. Taste without language leaves the relationship unable to say what it loves, which is a real loss when a decision has to be made or defended to somebody else. Language without taste leaves it able to describe everything and drawn to nothing. The bond does best when neither of you treats this as a dispute to be won. The pull is the working arrangement rather than a fault in it, and a pair that holds both ends at once ends up with an unusual thing: a relationship that knows what it enjoys and can say so out loud."
+ },
+ {
+  "id": "composite:aspect:mercury:conjunction:mars",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mercury",
+   "b": "mars",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "composite:mercury~mars:conjunction"
+  ],
+  "text": "Nothing gets said here at half strength. Thinking and wanting run through one channel in this bond, so a thought does not sit quietly and become an opinion. It arrives already pointed at something. The pair talks the way it acts and acts the way it talks, with very little gap in between for second thoughts. That makes the relationship fast and unusually honest. Positions are known. Neither person has to guess what the other is after, because it was said within a minute of being thought. Decisions that other bonds circle for a week get settled in one exchange, and a plan the two agree on is often underway before the conversation has properly ended. The same wiring makes a mild remark hard to produce. A question comes out as a challenge. A piece of information comes out as an instruction. Neither of you can quite manage the neutral tone, and the sharp edge is usually not aimed at the other person, though it lands as if it were. Small disputes flare over wording, over who said what, over an interruption. Interruption is common, since the reply is ready before the sentence is finished. Arguments are this pair's native form and not a breakdown of it. They tend to be loud, short, and about something specific. What the bond cannot do is hold a quiet unspoken difference, since anything felt gets converted into speech almost at once. The fusion gives the relationship a kind of nerve. Difficult subjects get raised instead of avoided, complaints get made while they are still small, and these two rarely have to wonder where they stand, because the standing has already been announced."
+ },
+ {
+  "id": "composite:aspect:mercury:sextile:mars",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mercury",
+   "b": "mars",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "composite:mercury~mars:sextile"
+  ],
+  "text": "Talk can turn into a move in this relationship, whenever the pair decides to let it. The line between deciding and doing is short and easy to use. A conversation that has reached a conclusion has a quick route to the first step, and these two can take it without a fuss. The offer works the other way round as well. It is just as easy to raise the difficult subject directly, since directness is on hand for whoever reaches for it. This is the contact behind the pair that can say what it wants from a weekend, a shared project, or an argument, and then get on with it. Nothing insists on any of that. An opening left alone is still an opening, so plenty of good conversations in this bond stop at the conclusion and never reach the step. That is not laziness. A short route from the conclusion to the first step is still a route, and somebody has to decide to walk it. Where the pair does use it, argument tends to be more sport than injury. The two can disagree hard, enjoy the disagreement, and come out with something usable, because the wanting behind the words stays visible instead of going underground. Sharpness is available without being the only setting. Both of you get something from that flexibility: a bond in which speed is a choice. This pair can move quickly on what is worth moving on and let the rest be discussed at length, and which is which gets decided by the two of them rather than by temperament."
+ },
+ {
+  "id": "composite:aspect:mercury:square:mars",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mercury",
+   "b": "mars",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "composite:mercury~mars:square"
+  ],
+  "text": "Arguments in this bond rarely stay on the subject that started them. A question about a date on the calendar turns into a dispute about tone, then into a remark from last month, and the thing that actually wanted saying never gets said in plain words. What the pair wants and what the pair says sit at an angle to each other, and the gap between them fills with heat. Speed is part of it. The reply is formed before the sentence is done, so information gets missed and then argued about later. Precision suffers under pressure, and pressure is ordinary here, since a small correction is easily heard as an attack when both functions are pushing on each other. Talking about wanting is the specific difficulty. A plain sentence about a desire is oddly hard to produce in this relationship, so the desire shows up sideways as impatience, or as a fight about something adjacent and safer. Neither of you is being dishonest. The route from the want to the words has a bend in it. This pair does some of its best thinking under argument. Positions get clarified by being attacked, and a subject that has survived a fight here is usually understood better than one that was agreed to politely. The bond does not go quiet and it does not go vague, because the friction keeps forcing things into speech. What the square asks of these two is patience with the second attempt: the sentence said again, more slowly, after the first one went wrong. That second sentence is where this contact does its real work."
+ },
+ {
+  "id": "composite:aspect:mercury:trine:mars",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mercury",
+   "b": "mars",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "composite:mercury~mars:trine"
+  ],
+  "text": "Say it and it happens, more or less. This bond has an easy line from a sentence to an action, and it uses that line constantly. A plan mentioned in the morning is in motion by the afternoon. An idea gets tried rather than examined, which suits the pair, because trying it is how these two prefer to find out. Debate runs smoothly for the same reason. The two can disagree without the disagreement costing anything, argue a point for the pleasure of arguing it, and land somewhere both accept. Directness is comfortable here. Neither has to brace before raising something, so hard subjects get raised early and in an ordinary tone. The smoothness has a blind spot in it. An argument this pair conducts well can be entirely wrong, and nothing in the smooth run of it will say so. Agreement reached in five minutes carries the same confidence as agreement reached in five hours. The two can talk themselves into a decision at speed, act on it just as fast, and meet the missing piece much later, when the consequence turns up. Boredom is the other quiet cost. A conversation with no resistance in it can start to feel like nothing is at stake, and this pair sometimes manufactures a small conflict rather than sit in a calm one. Both of you have an instrument here that plenty of relationships would want: thinking and moving as one operation. It does its best work when the pair remembers that easy agreement is not evidence of anything, and slows down for the decisions that deserve it."
+ },
+ {
+  "id": "composite:aspect:mercury:opposition:mars",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mercury",
+   "b": "mars",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "composite:mercury~mars:opposition"
+  ],
+  "text": "Words at one end, action at the other, and this relationship has to hold both. The talk wants to work a subject out properly. The drive wants to get on with it. Neither pole gives way, so the pair meets the same pull in nearly every decision it makes together. It surfaces as two complaints that circle each other. One is that everything gets discussed and nothing gets done, since a plan can be talked through so thoroughly that the talking starts to feel like completion. The other is that something got done before it was talked about at all, and the explanation arrived afterward as a defense rather than a discussion. Both complaints are true at different times. Arguments here are often about the process instead of the topic. The real question in the fight is whether this is a moment for deliberation or a moment for movement, which no chart answers, and which this pair has to settle again case by case. The completion each pole offers is straightforward once it is seen. Action gives the conversation a test, since a plan that has met the world stops being a theory. Conversation gives the action a direction, and keeps a fast decision from being merely fast. A bond running on one pole alone gets either a great deal of talk with nothing behind it or a run of moves nobody thought about. What the two of you tend to reach, where the pull is worked with rather than argued over, is a rhythm: talk until the talk stops adding anything, then move, then talk about what happened. It is not elegant and it never settles permanently, and it gets a surprising amount done."
+ },
+ {
+  "id": "composite:aspect:mercury:conjunction:jupiter",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mercury",
+   "b": "jupiter",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "composite:mercury~jupiter:conjunction"
+  ],
+  "text": "Nothing gets discussed at its actual size in this bond. Talk and scope are one function here, so a question about the weekend becomes a plan for the summer, and a passing idea gets the treatment of a proposal. The two think bigger together than either does alone, and they do it in the ordinary course of conversation, without noticing the enlargement. That is a real resource. The relationship gives both people permission to say the ambitious thing out loud without embarrassment. Ideas are taken seriously in the room where they are said. The pair's account of its own life is generous, so setbacks get told as stories with a point in them rather than as failures. Promises are the natural currency of a conversation like this. They are made freely and meant when made. A fair number are not carried out, which is worth stating plainly instead of as a fault: the enthusiasm was real, the intention was real, and the conversation was doing a different job from planning at the time. This pair can commit to a trip, a move, or an arrangement in one evening and find a month later that nobody wrote anything down. Detail is what falls off. Numbers, dates, and the specific boring middle of any scheme hold the pair's attention less well than the shape of the thing does. Overstatement gets into the retelling of ordinary events too, usually in the direction of a better story. What the two of you have in a conjunction like this is a conversation with no ceiling on it. Bonds under it often end up keeping a list somewhere, not to restrain the talk, but because a promise written down is one that can be kept."
+ },
+ {
+  "id": "composite:aspect:mercury:sextile:jupiter",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mercury",
+   "b": "jupiter",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "composite:mercury~jupiter:sextile"
+  ],
+  "text": "An invitation to think larger sits inside this relationship's conversation, waiting to be accepted. A topic will open out if the pair lets it. Any practical question has a wider version available, and reaching that version costs nothing more than a willingness to follow the thought past the immediate point. Bonds with this contact tend to teach each other things. One brings back a subject from work or reading, the other takes it up, and an hour goes by. Travel talk, plans that involve learning something, and speculation about how the world works all move easily. So does the sort of exchange that ends with both people holding a bigger view of a situation than either walked in with. The opening can also be declined, and often is. Nothing here demands the wide view, so this pair can spend months in purely practical talk and lose nothing that was guaranteed to it. The wider version of a subject stays in the room whether or not anyone reaches for it. Optimism is on hand in the same way. When one of them is discouraged, the other can usually offer the larger frame, and it tends to be believed, because it is offered lightly rather than pressed. Neither of you has to be the designated hopeful one, since the role moves around depending on who is tired. The quiet gift is proportion. A pair that can reach for scope when it wants argues less about small things, since the small thing can be set next to something larger and seen for the size it actually is."
+ },
+ {
+  "id": "composite:aspect:mercury:square:jupiter",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mercury",
+   "b": "jupiter",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "composite:mercury~jupiter:square"
+  ],
+  "text": "Claims and checks collide in this bond, and they collide often. Something gets said with confidence, at a size the facts will not support, and the correction that follows lands badly, because a correction always sounds smaller than the claim it is trimming. The pair keeps arriving at the same shape of argument: one register wants to state the big version, the other wants to know whether the big version is true. Overstatement here is a habit of the conversation rather than the fault of one person. Numbers get rounded generously. A likely thing gets described as a settled one. A plan mentioned twice becomes a plan everyone assumed was agreed, and then it turns out nobody checked the date, the cost, or whether the third party involved had ever said yes. Commitments are where the friction bites hardest. Something offered warmly in conversation runs into a demand for specifics later, and the demand feels like distrust while the offer feels like carelessness. Neither reading is fair, both are understandable, and that is exactly why the collision keeps returning instead of resolving. The traction is that this pair, unlike a smoother one, finds out the size of its own claims. Being asked for the specifics is how a promise turns into a plan. A relationship that never gets that question can talk beautifully for years about things that never happen, and this one does not have that luxury. Both of you end up working the same problem from opposite sides: enthusiasm without accounting stays a mood, and accounting with nothing to account for has been given nothing to do."
+ },
+ {
+  "id": "composite:aspect:mercury:trine:jupiter",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mercury",
+   "b": "jupiter",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "composite:mercury~jupiter:trine"
+  ],
+  "text": "Conversation opens out easily here, and the ease is the whole story, including the part that costs something. A subject widens without anyone pushing it. Possibility is the natural register of this pair's talk, and both people leave most exchanges better informed and more hopeful than when they started. Plans sound excellent aloud. The pair is good at the version of a project that exists in speech, where the parts fit, the timing works, and the money is roughly fine. Belief comes cheaply between these two, since each one's account of a situation is accepted by the other without much examination. That mutual credit is pleasant, and it is also unearned in the narrow sense that nothing has tested it. So the inertia settles in the gap between the excellent conversation and the unremarkable follow-up. Nothing gets checked, because checking would interrupt a good exchange and no friction forces the interruption. The pair enjoys the future more than it arranges the future, and can be honestly puzzled about where a year went, having talked happily about the same project for all of it. None of that makes the ease false. The generosity is real, the perspective is real, and a bond that can put a bad week in proportion has something many do not. What the two of you can do with a trine, when the pair wants more from it than the pleasure, is treat the good conversation as the start of the work instead of a decent substitute for it."
+ },
+ {
+  "id": "composite:aspect:mercury:opposition:jupiter",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mercury",
+   "b": "jupiter",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "composite:mercury~jupiter:opposition"
+  ],
+  "text": "The small accurate statement and the large sweeping one face each other across this relationship, and the bond needs both. One end wants the detail right. The other wants the meaning of the thing and finds the detail beside the point. Most disagreements here are really about which of those two registers a subject belongs in. The argument sounds like an argument about facts and rarely is. A claim gets made in the broad style, a query comes back in the narrow one, and each end hears the other as missing what matters. Being asked for a date or a figure feels like being doubted. Being handed the general shape of the thing feels like being handed nothing to hold. The poles belong to neither person, though the pair usually assigns them by habit and can be surprised to find them swapped on a different topic. This bond can be the one that exaggerates in company and then worries privately about accuracy, or the reverse, depending on the day and the audience. Each end rescues the other from a failure it cannot see in itself. Detail on its own gets a great many things right and cannot say why any of them was worth getting right. The broad end has the opposite trouble: a wonderful account of a plan that no calendar will confirm. Both of you hold those ends at once, which is uncomfortable and is meant to be. A relationship that can state a large idea and then check it has an unusual instrument, and the checking is what makes the large idea worth stating."
+ }
+]

@@ -1,0 +1,176 @@
+{
+  "name": "composite-houses-pluto",
+  "outFile": "b3-composite-houses-pluto.json",
+  "setId": "house-b3-composite-houses-pluto",
+  "family": "composite-house",
+  "cells": [
+    {
+      "id": "composite:pluto:house:1",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "pluto",
+        "house": 1
+      },
+      "atomIds": [
+        "composite:pluto"
+      ],
+      "title": "Composite Pluto in the 1st house",
+      "bindable": true
+    },
+    {
+      "id": "composite:pluto:house:2",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "pluto",
+        "house": 2
+      },
+      "atomIds": [
+        "composite:pluto"
+      ],
+      "title": "Composite Pluto in the 2nd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:pluto:house:3",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "pluto",
+        "house": 3
+      },
+      "atomIds": [
+        "composite:pluto"
+      ],
+      "title": "Composite Pluto in the 3rd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:pluto:house:4",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "pluto",
+        "house": 4
+      },
+      "atomIds": [
+        "composite:pluto"
+      ],
+      "title": "Composite Pluto in the 4th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:pluto:house:5",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "pluto",
+        "house": 5
+      },
+      "atomIds": [
+        "composite:pluto"
+      ],
+      "title": "Composite Pluto in the 5th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:pluto:house:6",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "pluto",
+        "house": 6
+      },
+      "atomIds": [
+        "composite:pluto"
+      ],
+      "title": "Composite Pluto in the 6th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:pluto:house:7",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "pluto",
+        "house": 7
+      },
+      "atomIds": [
+        "composite:pluto"
+      ],
+      "title": "Composite Pluto in the 7th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:pluto:house:8",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "pluto",
+        "house": 8
+      },
+      "atomIds": [
+        "composite:pluto"
+      ],
+      "title": "Composite Pluto in the 8th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:pluto:house:9",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "pluto",
+        "house": 9
+      },
+      "atomIds": [
+        "composite:pluto"
+      ],
+      "title": "Composite Pluto in the 9th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:pluto:house:10",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "pluto",
+        "house": 10
+      },
+      "atomIds": [
+        "composite:pluto"
+      ],
+      "title": "Composite Pluto in the 10th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:pluto:house:11",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "pluto",
+        "house": 11
+      },
+      "atomIds": [
+        "composite:pluto"
+      ],
+      "title": "Composite Pluto in the 11th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:pluto:house:12",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "pluto",
+        "house": 12
+      },
+      "atomIds": [
+        "composite:pluto"
+      ],
+      "title": "Composite Pluto in the 12th house",
+      "bindable": true
+    }
+  ]
+}

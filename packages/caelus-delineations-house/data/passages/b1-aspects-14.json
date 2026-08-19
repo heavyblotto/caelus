@@ -1,0 +1,227 @@
+[
+ {
+  "id": "natal:aspect:mars:conjunction:saturn",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "mars",
+   "b": "saturn",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "aspect:mars~saturn:conjunction",
+   "aspect:saturn~mars:conjunction"
+  ],
+  "text": "You drive with one foot on the gas and one on the brake, and over time you have fused the two into a single skill. Mars conjunct Saturn joins the part of you that wants to act with the part that doubts, delays, and demands proof, so your energy comes out controlled, deliberate, and hard to exhaust. Nothing about you is casual when effort is involved. You size up the cost of a task before you start it, and once you start, you tend to finish, long after quicker people have wandered off. The tradition calls this the aspect of the disciplined will, and the discipline is real, but so is the friction that produced it. Somewhere early you likely learned that wanting something was not enough, that force gets met with resistance, and a part of you still braces for the wall before you have even pushed. Anger is the clearest place to see it. Yours rarely flashes; it compresses. You hold frustration down until it hardens into grim persistence, cold silence, or, once in a long while, an eruption that surprises everyone because you seemed so contained. Work is where this pairing pays best. You are built for long projects, physical craft, and any field where endurance beats brilliance: the person who trains through the winter, keeps the standard when nobody is checking, and treats difficulty as ordinary. Colleagues learn that your slow yes is worth ten fast ones. In love and friendship, the same restraint can read as distance. You show devotion through effort and reliability rather than declarations, and you may withhold desire itself when you are not sure it will be welcomed, which people close to you can mistake for indifference. The private cost is harshness toward yourself. You judge your own performance the way a hard foreman would, and rest can feel like a form of failure. The growth in this aspect comes from learning that the brake is a tool and not a sentence. Your caution was built to protect the drive, not to starve it, and each time you let yourself want something openly and go after it without first rehearsing defeat, the machinery runs freer. What you end up with, when the two planets cooperate, is rare: force that keeps its promises. People trust what you build because you never built it carelessly, and the ambition that once felt blocked turns out to have been loading, all those years, for work that actually lasts."
+ },
+ {
+  "id": "natal:aspect:mars:sextile:saturn",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "mars",
+   "b": "saturn",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "aspect:mars~saturn:sextile",
+   "aspect:saturn~mars:sextile"
+  ],
+  "text": "There is a workman's patience in the way you act, available whenever you choose to use it. Mars sextile Saturn gives your drive and your discipline an easy working relationship: when you decide to do something, a quieter faculty in you starts planning the pace, the tools, and the order of operations, without being asked. This is an aptitude rather than an automatic trait, and that distinction matters. The aspect does not push you the way harder contacts push people; it answers when called. On the days you engage it, you are the steadiest person in the room, able to work carefully under pressure and to keep your temper when things go wrong, because effort and control were never enemies in you. On the days you drift, the gift simply waits. In practical life this shows up as good hands and good judgment about force. You know how hard to push, how long a job will really take, and when to stop for the day, which makes you valuable in any trade or profession where sloppiness is expensive: building, engineering, medicine, managing money, running anything with moving parts. People senior to you tend to notice you early, because you take direction without resentment and deliver without drama, and the classic pattern with this aspect is advancement earned step by honest step rather than by leaps. In relationships you bring the same quality in a warmer form. You are dependable without being rigid, and you can hear a hard conversation through to the end without either attacking or shutting down. Partners come to rest on that. The risk here is modest but real: an aptitude that never gets stretched can settle into mere caution, and you can spend years being reliably competent at things that never asked much of you. The tradition reads the sextile as opportunity, and opportunity has to be taken. You grow by volunteering for the project slightly beyond your current strength, the one that requires both the nerve and the patience you carry, because that is where the two planets actually get to work together instead of idling. Each time you do, the capacity compounds. What starts as a knack for careful effort becomes, over a working lifetime, a reputation: the person who can be given the difficult thing, the long thing, the thing that has to be right, and who hands it back done."
+ },
+ {
+  "id": "natal:aspect:mars:square:saturn",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "mars",
+   "b": "saturn",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "aspect:mars~saturn:square",
+   "aspect:saturn~mars:square"
+  ],
+  "text": "Your will and your caution were built at cross purposes, and you feel the grinding where they meet. Mars square Saturn sets the part of you that wants to charge against the part that expects punishment for charging, so action often comes out in a stop-and-go rhythm: a surge of effort, then a wall, then the low mutter of frustration while you gather yourself to push again. The wall is usually internal, though it rarely feels that way. It feels like bad luck, obstructive people, rules that bind you and nobody else. The older astrologers were blunt about this aspect, and the difficulty deserves plain words: you can spend years feeling that your engine is bigger than your permission to use it. Fear of failing, or of being seen failing, arrives at exactly the moment desire does, and the two cancel into hesitation that you then despise yourself for. Anger follows the same choked route. It banks up quietly, comes out as irritability at small things, and sometimes lands on the wrong target. Authority is a sore spot; bosses, parents, and anyone holding a clipboard can draw a resentment out of you that is older than they are. Here is what the hard telling leaves out. A square is friction, and friction, worked, becomes strength that easy aspects never develop. Every time you act anyway, at moderate throttle, without waiting for the fear to leave first, you are tempering something. People with this aspect who keep going tend to end up with a will like forged metal: not fast, not showy, but nearly impossible to stop, because it has already met every objection on the way here. Athletes, surgeons, founders, and craftspeople with this square are common in the case files for a reason. The practical work is learning your own timing. You do not lack force; you lack trust in the release of force, so you either hold everything back or let it out all at once. Middle pressure, sustained, is the skill this aspect teaches, along with the harder lesson of aiming your standards at the task instead of at your own worth. In close relationships, watch the tendency to test people's commitment by withholding your own. The ones who stay are not the wall. Growth here is slow and cumulative, which is fitting, and it has a signature you will recognize when it arrives: the day an obstacle appears and you feel, instead of the old clench, something close to appetite."
+ },
+ {
+  "id": "natal:aspect:mars:trine:saturn",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "mars",
+   "b": "saturn",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "aspect:mars~saturn:trine",
+   "aspect:saturn~mars:trine"
+  ],
+  "text": "Effort arrives in you already organized. With Mars trine Saturn, drive and discipline run in the same direction by default, so what other people assemble painfully, the plan, the pacing, the follow-through, comes to you as a single motion. You take on a task and something in you quietly sets the sustainable speed, and then you simply hold it, for weeks or years if the work requires it. Because this is a trine, the whole arrangement feels unremarkable from the inside. You may honestly not understand why others burn out, miss deadlines, or lose their nerve halfway, since your own energy has never behaved that way, and that puzzlement is the tell that you are sitting on a talent rather than a universal human setting. The gifts are easy to list. Physical stamina that outlasts flashier people. Patience with tedious stages that make ambitious projects actually possible. A temper that stays usable under pressure, so you get firmer in a crisis instead of louder. Employers and teammates learn to hand you the long, structural work, and your word about what you will do carries the particular weight of someone who has never needed excuses. In the material world you tend to build steadily: skills, savings, a body kept in working order, a career that compounds. The shadow of all this ease is not disaster but undershooting. A capacity that never strains also never announces itself, and you can spend a whole working life being excellent at tasks chosen by other people, the dependable engine in someone else's vehicle. You may also default to endurance when a situation actually calls for change, staying with jobs or arrangements past their point simply because staying is what you are good at. The tradition's advice for a trine is to spend it deliberately. Your growth comes from choosing at least one aim large enough to be uncertain, something that could fail, and putting this machinery behind it, because sustained force aimed at a worthy target is exactly what most great work dies for lack of. It also comes from teaching what you know. The pacing and self-command that feel like nothing to you are learnable, and the people around you flail for want of them. When you both aim the gift and pass it on, the quiet competence stops being background and becomes what it always was underneath: a form of strength that others can build on, and do."
+ },
+ {
+  "id": "natal:aspect:mars:opposition:saturn",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "mars",
+   "b": "saturn",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "aspect:mars~saturn:opposition",
+   "aspect:saturn~mars:opposition"
+  ],
+  "text": "Somewhere in your life there is almost always a wall with a face on it. Mars opposite Saturn stretches your drive and your restraint to opposite ends of a rope, and the tug-of-war between them tends to get staged through other people. You push; someone blocks. You want; someone says not yet, not you, not like that. The blocker wears many costumes over a lifetime: the withholding parent, the boss who never promotes you, the partner whose caution reads as a cage, the inspector, the gatekeeper, the critic. The pattern repeats often enough that it is worth asking what an opposition actually is: one whole capacity split in half, with one half handed to others to carry. The restraint that keeps confronting you from outside is yours. You tend to live at one pole at a time, either driving hard and colliding with limits, or shut down and dutiful while resentment collects, and then the poles swap, sometimes in the same week. Timing is the practical symptom. Your bursts of initiative can land when circumstances will not yield, and your caution can clamp down at exactly the moment boldness would have carried the day. In work, this often makes authority the great teacher and the great irritant. You may cycle between fighting the structure and over-submitting to it before you find the third position, which is negotiating with it as an equal. In love, watch the arrangement where one of you is always the engine and the other always the brake; it feels like balance and works like war. What this aspect builds, in people who stay with it, is the strongest kind of will: one that has internalized its own opposition. Every standoff is a rehearsal for the moment you hold both sides yourself, wanting and weighing in the same breath, pressing on where pressing serves and stopping because you chose to. The signs of progress are concrete. Confrontations get shorter. Authority stops being a species of enemy. You discover you can hear a no without hearing a verdict on your worth, and can give one without cruelty. Late in this aspect's curriculum, something almost funny happens: you become the wall for others, the steady figure younger and hastier people push against, and you find you know exactly how to be pushed against well. The rope was never meant to be dropped. It was meant to be held from both ends by one person, and that person, eventually, is you."
+ },
+ {
+  "id": "natal:aspect:mars:conjunction:uranus",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "mars",
+   "b": "uranus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "aspect:mars~uranus:conjunction",
+   "aspect:uranus~mars:conjunction"
+  ],
+  "text": "Your actions arrive like weather from a clear sky. Mars conjunct Uranus wires your drive directly to the most electric circuit in the chart, so when you move, you move suddenly, totally, and often at an angle nobody predicted, including you. Between the impulse and the act there is almost no gap. This makes you genuinely brave in ways that cannot be faked: you will do the thing others spend an hour talking themselves into, and you will do it before the hour starts. It also makes you jagged to live alongside, because the same switch that produces courage produces the abrupt exit, the sudden reversal, the project abandoned at ninety percent because the interesting part was over. Freedom is not a preference for you; it is closer to oxygen. Being managed, scheduled, or told to slow down produces an almost physical rebellion, and your working life tends to sort itself accordingly, toward independence, emergencies, frontier work, or self-employment, and away from anything with a time clock. The tradition associates this conjunction with pioneers, test pilots, surgeons, and inventors, people paid to act decisively where there is no precedent, and that reading holds: your best work happens where the manual has not been written. Physically you run hot and quick, with reflexes that surprise people, and you need real outlets for the voltage; without them it discharges as restlessness, insomnia of the will, or fights you did not plan to pick. Haste is the honest hazard here. Not fate, just arithmetic: speed times frequency. The skill this aspect asks you to build is a half-second of ownership between spark and action, not to dull the response but to aim it. In love, you need partners who read your independence as vitality rather than threat, and who understand that your suddenness is structural, not a comment on them; you can learn, in turn, that warning people before you swerve is not a leash. The growth here is the conductor's art. Lightning that grounds through a chosen channel does work; lightning that grounds anywhere just burns things. As you get older and learn where to point yourself, the disruption mellows into originality with force behind it, and the people who once braced when you entered a room start bringing you their stuck problems, because they have learned what you are actually for: the moment when everything reasonable has been tried."
+ },
+ {
+  "id": "natal:aspect:mars:sextile:uranus",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "mars",
+   "b": "uranus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "aspect:mars~uranus:sextile",
+   "aspect:uranus~mars:sextile"
+  ],
+  "text": "You carry a quick trigger in the best sense of the phrase: an ability to act fast and act differently that waits politely until you reach for it. Mars sextile Uranus links your drive to your originality without forcing the connection. You are not compulsively rebellious or restless. You can run on ordinary rails all day and then, when the situation jams, produce the sideways move nobody else saw. Reflexes are the plainest form of the gift. In sudden moments, an accident forming, a plan collapsing, a conversation turning, something in you has already responded while others are still registering the change. The subtler form is method. Give you a standard task and you will quietly find a faster route through it, not from laziness but because your energy is roused by improvement the way other people's is roused by competition. Fields that reward this are easy to name: anything technical, anything mechanical, emergency work, sports, trades where the tools keep changing, any job whose manual is out of date. You learn new physical and procedural skills fast because novelty itself puts energy in your hands. Because this is a sextile, the whole arrangement is opt-in, and that is both its grace and its catch. Nothing here forces development. If your life stays too routine, the aptitude idles, showing up only as a background itch, a sense that your days use less of you than exists. You will not explode the way harder Mars-Uranus contacts can; you will just quietly bore, and boredom in you is a slow leak of vitality. So the growth pattern is deliberate exposure. Say yes to the unfamiliar assignment, the new tool, the problem outside your lane, because your particular engine starts on novelty and improves with use. In relationships this aspect is friendly. You bring spontaneity without chaos, the knack for surprising a partner on a Tuesday without upending the household. You also give others room to be odd in their own ways, which is a rarer gift than it sounds. Colleagues come to know you as the person to call when the usual approach has failed, and that reputation compounds. What begins as quickness becomes, with enough live repetitions, a practical inventiveness that shows only in results. People eventually stop being surprised by it and start counting on it."
+ },
+ {
+  "id": "natal:aspect:mars:square:uranus",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "mars",
+   "b": "uranus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "aspect:mars~uranus:square",
+   "aspect:uranus~mars:square"
+  ],
+  "text": "Restlessness is the constant weather of this aspect, and you have lived in it long enough to mistake it for your personality. Mars square Uranus puts your drive and your need for freedom at an angle where each keeps tripping the other: you commit to a course and something in you immediately begins plotting escape, or you crave independence and then torch it with an impulsive act that puts you back under someone's supervision. The energy comes in surges you did not schedule. A week of flat idle, then a jolt that has to go somewhere right now, and where it goes is not always where your actual interests live. Temper is the most visible symptom. Yours flashes rather than smolders, triggered less by injury than by constraint: the pointless rule, the slow line, the person explaining what you already know. The flash passes quickly and you rarely hold a grudge, but others remember the voltage longer than you do, and a trail of startled bystanders can cost you allies you never meant to lose. Authority draws your fire almost automatically, and it is worth noticing that the reflex does not check whether the authority is wrong; it fires either way, which means some of your rebellions have been against things that were actually fine. That is the friction. The same friction is also charging something. A square generates power precisely because nothing about it is smooth, and people who learn to work this one become genuinely formidable: original under pressure, unintimidated by convention, able to act while everyone else is still asking permission. The work is channel-building. Your voltage needs regular, chosen discharge, physical intensity, technical problems, real risks taken on purpose, or it will discharge itself through whatever is nearby, including your commitments and your relationships. It also needs the discipline of one question, asked in the half-second before you act: is this freedom, or is it just reaction? Freedom is moving toward something you chose. Reaction is any movement, in any direction, so long as it breaks the current frame, and the two feel identical from inside until you practice telling them apart. In love, let partners in on the pattern; the ones worth keeping can ride out your surges if they know the surges are not about them. Over years, the same current that made you erratic becomes your edge. The trick was never to ground the lightning out. It was to stop letting it pick the target."
+ },
+ {
+  "id": "natal:aspect:mars:trine:uranus",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "mars",
+   "b": "uranus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "aspect:mars~uranus:trine",
+   "aspect:uranus~mars:trine"
+  ],
+  "text": "Speed and nerve are native to you, so native that you may never have noticed them as traits. Mars trine Uranus gives your drive and your originality a frictionless connection: when a situation changes, you change with it, instantly and without inner debate, and when a bold move is available you take it with a calm that others find slightly uncanny. You do not experience this as courage. You experience it as the obvious response, and you can be genuinely confused by people who freeze, dither, or need the new thing explained three times, because your own body has never handed you that delay. That confusion is the signature of a trine: a gift so smooth it hides from its owner. In practice you are the one who stays functional when the plan dies. Emergencies organize you instead of scattering you. New tools, new methods, and new territory raise your energy rather than your anxiety, so you often end up, without campaigning for it, as the early adopter and the unofficial fixer in any group, the person sent ahead to see whether the ice holds. Your independence has the same easy quality. You take your freedom rather than fighting for it, so quietly that authority rarely thinks to object, and you extend the same latitude to others without effort. There is real luck in all this, and the tradition is honest about the tax on such luck: ease breeds neglect. Because acting fast has always worked, you may never build the slower muscles, patience with maintenance, tolerance for the boring middle of long projects, the willingness to stay after the novelty is gone. You can become a brilliant starter served by no finishing apparatus at all, a career of dazzling first chapters. And because risk has usually paid off, you can carry an untested faith that it always will. Your growth runs through duration. Pick something, one craft, one venture, one relationship to your own future, that cannot be won quickly, and put your quickness in its service, using the reflexes for the daily adaptations while something steadier holds the heading. Teaching helps too: walking a slower person through what you do automatically will show you, for the first time, what you actually know. When the speed acquires a keel, the result is rare, a person who is both fast and going somewhere, and the freedom you were born moving in becomes a place you have actually built."
+ },
+ {
+  "id": "natal:aspect:mars:opposition:uranus",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "mars",
+   "b": "uranus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "aspect:mars~uranus:opposition",
+   "aspect:uranus~mars:opposition"
+  ],
+  "text": "The fights in your life have a theme, and the theme is freedom. Mars opposite Uranus stretches your will and your independence across a divide that tends to get acted out with other people: you assert yourself and someone erupts, defects, or swerves, or you are the steady one, moving on your own straight line, and the people you draw close keep turning out to be volatile, sudden, and allergic to being counted on. Either way the collision arrives, and it arrives on the axis of control. Who decides. Who is boxing in whom. Who changed the plan without asking. An opposition is one capacity split between two poles, and it is worth sitting with the harder reading: the disruption that keeps happening to you carries something of yours in it. If you are honest about your history, the pattern is rarely one-sided. There are seasons when you were the lightning in someone else's sky, ending things abruptly, kicking over arrangements that felt too settled, mistaking provocation for honesty. And there are seasons when you outsourced all your wildness, chose combustible people, and then stood in the wreckage feeling blameless. The relationship cost is real and deserves plain words: partnerships under this aspect can run hot and off-and-on, cycling between fusion and rupture, because closeness itself starts to feel like capture and distance like abandonment, with no rest position between. Working life shows a milder version, a knack for landing in teams and institutions mid-upheaval, and for being either the insurgent or the one the insurgents target. What the aspect is trying to build is a self that can be free while attached. The practical work has two fronts. First, own your voltage: name your need for autonomy out loud, early, before it has to explode its way out, and choose your disruptions instead of leaking them. Second, stop hiring others to carry it: when you feel the familiar pull toward someone electric and unreliable, notice that the electricity you are drawn to is yours, unclaimed. Progress feels unglamorous, agreements about space written into your closest bonds, exits taken cleanly instead of detonated, anger expressed at the moment it occurs rather than saved for the break. Done long enough, this yields something the easy aspects cannot: freedom that has been tested against real intimacy and held. The people who stay with you stay by choice, and so, at last, do you."
+ },
+ {
+  "id": "natal:aspect:mars:conjunction:neptune",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "mars",
+   "b": "neptune",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "aspect:mars~neptune:conjunction",
+   "aspect:neptune~mars:conjunction"
+  ],
+  "text": "Your will runs on inspiration the way other people's runs on ambition. Mars conjunct Neptune dissolves the ordinary boundaries of drive and remakes it as something subtler: you act for images, ideals, moods, and causes, and you find it strangely difficult to act for plain self-interest. When something has caught your imagination, a project with meaning, a person in need, a piece of work that does not exist yet, you can produce effort that looks like devotion, tireless and almost selfless. When nothing has caught it, the engine simply will not turn over, and no amount of scolding yourself about discipline changes that, because your energy was never wired to respond to duty alone. This gives your vitality a tidal pattern. It ebbs and floods with meaning, and learning your own tides matters more for you than any productivity method built for steadier engines. There is a glamour on this conjunction that others feel before you do. You act with a certain atmosphere, and people project onto you easily, seeing a rescuer, an artist, a mystery, sometimes a mark. The projection cuts both ways: you are also prone to seeing halos, following leaders, lovers, and causes that shimmer, and discovering too late that the shimmer was partly your own light reflected back. Anger is the strangest country here. Direct aggression can feel almost physically unavailable to you, so frustration tends to go sideways, into withdrawal, fog, passive resistance, or an exhaustion that is really unexpressed refusal. Learning to say a plain no, early, in daylight, saves you from saying it later through disappearance. The classic vocations fit for a reason: the arts, music, film, healing work, spiritual service, work with water, work with the suffering, anywhere effort and imagination are the same act. What this aspect asks of you over a lifetime is honesty about motive. The inspired will and the escapist will feel identical from inside at the start; only their aftermath differs, and you learn to tell them apart by tracking what your efforts leave behind. Grown into, this conjunction becomes a quiet power: the capacity to be moved by something larger than appetite and to move others the same way, without force, the way a current moves a boat. The task was never to make your will harder. It was to make sure the dream it serves deserves it."
+ },
+ {
+  "id": "natal:aspect:mars:sextile:neptune",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "mars",
+   "b": "neptune",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "aspect:mars~neptune:sextile",
+   "aspect:neptune~mars:sextile"
+  ],
+  "text": "Imagination and action are on speaking terms in you, and when you put them to work together, each makes the other better. Mars sextile Neptune gives your drive a subtle intelligence: an instinct for timing, for atmosphere, for the indirect route that gets there faster than the frontal one. You can sense when a room is ready and when it is not, when to press and when to let a situation ripen. This sensing does not weaken your effort the way it might in a dreamier person. It steers it. The aspect is an aptitude, and like all sextiles it works on request rather than by compulsion. That shapes how it shows up in a life. Engaged, it makes you effective wherever feel matters as much as force. That covers the arts and every craft near them. It also covers teaching, healing work, coaching, honest selling, and any job where you move people rather than objects. You can put energy behind an intangible, rehearsing, refining, serving a vision, without the constant scoreboard that keeps others going. Colleagues often notice that your work has an extra finish, some care that was never in the brief. There is usually a helping instinct here too. Lending your strength to people who are struggling comes naturally and costs you less than it costs most. Done with judgment, it becomes one of the quiet satisfactions of your life. Unengaged, the gift does not turn against you. It just sleeps, and its sleep has a symptom: a mild chronic sense that your daily efforts are flatter than you are. The remedy is not more effort but more meaning per effort. Give even routine work a private standard of grace. Keep one pursuit alive purely because it moves you. Let your body do something rhythmic, swimming, music, walking, so energy and imagination can mix. In love you bring a considerate, slightly romantic attention, good at sensing what a partner needs before it is asked for. The growth there is saying your own wants out loud rather than assuming they should be sensed in return. Over time, using this aspect builds a distinctive strength: force with finesse in it. You get things done, and the things you get done have your fingerprints, some warmth or rightness that plainer effort never leaves."
+ },
+ {
+  "id": "natal:aspect:mars:square:neptune",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "mars",
+   "b": "neptune",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "aspect:mars~neptune:square",
+   "aspect:neptune~mars:square"
+  ],
+  "text": "Wanting is complicated for you in a way it does not seem to be for other people. Mars square Neptune runs your drive through a fog bank: desires blur when you reach for them, efforts leak energy on the way to the target, and you can arrive at the middle of an undertaking having forgotten why it mattered, or whether it was even yours. The friction here is between doing and dreaming, and it cuts both ways. Sometimes the dream undermines the deed: you begin with inspiration, hit the unglamorous middle, and feel the will drain out of you like water through sand, replaced by tiredness, distraction, or a sudden fascination with a different beginning. Sometimes the deed shames the dream: you suspect your own motives, wonder if wanting things is selfish, and sand down your ambitions until they are too vague to fail or to happen. Discouragement is the characteristic ache, a heaviness that follows effort and whispers that trying is somehow beside the point. Escapes of every kind glow with unusual appeal when you are frustrated, and it is worth knowing that about yourself in advance, gently, the way you would know about an old injury before lifting. There is also a porousness with other people: you absorb their needs and stories easily, take on rescues that quietly become drains, and can be slow to spot when someone's account of things does not match their behavior. Verify more than feels polite. None of this is a verdict; a square is a muscle-building machine, and what this one builds is discernment of desire. The work is small and concrete. Finish little things on purpose, because each completed act teaches your will that the fog can be walked through. Say what you want in plain words to at least one person, because vagueness is where this aspect hides from itself. And separate the wish from the plan: the wish can stay vast and luminous, but the plan needs edges, dates, and a next physical step. People who do this work often end up in the fog-adjacent professions, art, film, medicine, ministry, work with addiction or grief, because they have earned a map of territory that defeats the merely forceful. That is the far side of this square: a will that has learned to want clearly and to keep faith with its own efforts, and that can act on behalf of a dream without being dissolved by it."
+ },
+ {
+  "id": "natal:aspect:mars:trine:neptune",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "mars",
+   "b": "neptune",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "aspect:mars~neptune:trine",
+   "aspect:neptune~mars:trine"
+  ],
+  "text": "You get things done the way water does, by finding the opening rather than forcing one. Mars trine Neptune blends your drive with imagination so smoothly that your effort rarely looks like effort: you persuade instead of pushing, arrive at goals sideways, and disarm opposition by simply not offering it a hard surface to strike. People do things for you that they refuse to do for more insistent characters, and often walk away believing it was their idea. This is a genuine talent for graceful action, and because it is a trine, it has probably never announced itself to you as a talent at all; it is just how doing works, as far as you know. The gifts cluster around the intangible. You can act on a hunch and have the hunch be right at a rate that unsettles methodical people. Creative work, performance, healing, spiritual practice, and any craft where technique must dissolve into feel all come easier to you than to most. Your presence tends to lower the temperature of a room, and in conflict you have a rare ability to step past the fight to the thing both sides actually want. The tax on the ease is real, and it is the tax on all trines: nothing forces you to use it. Because your imagination can make almost any present state pleasant, you can drift for long stretches, comfortable, mildly inspired, and quietly underbuilt, with gifts that stay potential because no friction ever demanded they become structure. Urgency is not your native gear, and deadlines set by nobody are the ones this aspect finds easiest to let dissolve. There can also be a habit of avoiding the direct encounter even when directness is the loving move, letting charm carry conversations that needed plain words. Your growth, then, is a matter of choosing on purpose what has always happened by accident. Pick the dream that deserves you and give it schedules, not just moods. Practice the blunt sentence with people you trust, so that grace remains a choice rather than a hiding place. And lend the calm deliberately: in crises, in tense rooms, with frightened people, your settling effect is not a pleasant side effect but a service, and using it as one turns temperament into vocation. When the flow acquires banks, it stops being weather and becomes a river, and rivers, unlike moods, reliably arrive somewhere."
+ },
+ {
+  "id": "natal:aspect:mars:opposition:neptune",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "mars",
+   "b": "neptune",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "aspect:mars~neptune:opposition",
+   "aspect:neptune~mars:opposition"
+  ],
+  "text": "Your directness keeps meeting fog, and the fog usually has a name and a face. Mars opposite Neptune stages the tension between will and dissolution out in the open, most often through other people. You push forward and meet evasiveness, promises that soften on contact, allies who agree to everything and deliver mist. Or the polarity runs the other way, and you are the elusive one. You are drawn to forceful, certain characters, then quietly slip their grasp, resisting through delay and vagueness rather than open refusal. Most people with this aspect play both ends at different times. An opposition is a single capacity split and mirrored. The meaning underneath the repetitions is that clear desire and surrendered desire have not yet learned to live in one person, so they keep showing up as a pair. The relational pattern deserves plain description because it is the aspect's main theater. You may be drawn to people who need saving, or who glow with an idealism you want to serve, and find the reality behind the glow does not match. You may pour effort into bonds and causes that absorb it without return. Then you swing to a bruised cynicism that trusts no one, which is only the same idealism turned inside out. Feeling drained after certain encounters, or learning that a situation was never what it seemed, are experiences this aspect knows well. In work, watch the gap between what is promised around you and what is written down. You tend to either over-trust or over-suspect, and checking is cheaper than both. The growth here is a discipline of reality-testing that does not kill the dream. Ask the concrete question early, the one about money, time, and who exactly does what. True inspiration survives concrete questions, and illusions do not, so the test is a kindness to both. State your own wants without decoration, since half the fog in your relationships is generated by what you left unsaid to stay agreeable or mysterious. And keep serving something larger than yourself, but choose it awake, eyes open to its flaws, because devotion with open eyes is this aspect's mature form. What you get for the work is a rare combination: the capacity to fight for an ideal without lying to yourself about it, and to love actual, foggy, disappointing human beings the same way. The mirage was never the enemy. Unexamined thirst was, and yours, examined, becomes vision."
+ }
+]

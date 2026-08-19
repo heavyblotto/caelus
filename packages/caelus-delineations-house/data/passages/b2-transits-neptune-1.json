@@ -1,0 +1,212 @@
+[
+ {
+  "id": "transit:neptune:conjunction:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "sun",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:neptune~natal_sun:conjunction"
+  ],
+  "text": "Somewhere in this period the firm outline of who you are goes soft. Neptune dissolves whatever it touches, and here it touches your Sun: your vitality, your direction, the self you present when someone asks what you do. Because Neptune moves so slowly, the whole process can shade a year or more, and most people meet this conjunction once in a lifetime or not at all. While the aspect applies, the change is easy to misread as ordinary tiredness. Ambitions that used to drive you feel strangely weightless. Praise lands with less force. You catch yourself daydreaming through commitments you chose on purpose. Physical energy often runs lower than usual, and the pull toward checking out, through fantasy, screens, sleep, or anything numbing, grows in proportion. Around the exact passes the fog is thickest. You may genuinely not know what you want, and confident answers, your own included, deserve gentle suspicion, because this is also the climate in which flattering stories and vague promises find you most persuadable. Yet dissolving is only half of what Neptune does. The other half is opening. Imagination, compassion, and a hunger for something larger than your resume tend to rise exactly as worldly appetite falls, and many people trace a lasting creative or spiritual turn to this transit. Neptune's retrograde loop usually brings two or three exact crossings across the stretch. The first tends to blur the picture. The middle pass asks you to sit inside the uncertainty rather than force a decision. The last quietly shows you which longings survived the fog, and those are the ones to trust. In practical life the season favors keeping big irreversible moves modest where you can, not because error is certain, but because judgment about your own direction is the specific faculty under renovation. Relationships shift too. You are more permeable now, more affected by the people around you, kinder for it, and also easier to lean on past your limits, so notice when giving turns into disappearing. As the conjunction separates, color returns gradually. The self that reassembles is rarely the one that went in. It is usually softer at the edges, less defended, more honest about what actually feeds it, and attached to at least one dream that did not exist before. The growth of this transit is subtractive. It takes away the performance and leaves what was true underneath, and part of the work of the following years is discovering that this quieter self is enough to live from."
+ },
+ {
+  "id": "transit:neptune:sextile:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "sun",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:neptune~natal_sun:sextile"
+  ],
+  "text": "A soft current runs beneath this period, and it favors you without demanding anything. Neptune in sextile to your Sun opens a quiet channel between who you are in daily life and the part of you that dreams. The transit stretches across a year or so, usually completing several exact contacts thanks to Neptune's retrograde loop, yet it rarely announces itself. Nothing breaks and nothing forces. Instead your imagination becomes a shade more available. Ideas for creative work arrive with less strain, sympathy for other people costs less effort, and questions about meaning that once seemed abstract begin to feel personal in a pleasant way. While the aspect is applying, you may notice the shift mostly as taste: a new pull toward music, water, solitude, or spiritual reading that was not there before. Around each exact contact the channel widens, and this is when inspiration tends to condense into something usable, a project begun, a practice adopted, a kindness that becomes a commitment. Because the sextile only offers, the whole season can also pass unused, and that is its one real risk. You stay exactly who you were, no harm done, and the invitation quietly expires. The return passes give you more than one chance. The first contact introduces the mood, the retrograde visit deepens whatever you actually engaged, and the final pass folds it into ordinary life. At work, this climate favors the imaginative edge of what you already do rather than a leap into a new field: presentation, design, the human side of the job, the part that runs on feel rather than procedure. In love and friendship it softens you, making it easier to give without keeping score and easier to be moved. Your self-image absorbs some of this too. You care a little less about polish and a little more about whether your days mean something, and the adjustment happens without crisis, which is rare for Neptune. Even your body may register the ease as a wish for gentler rhythms, more rest, more time near water or green. The growth on offer is a quiet enlargement: a version of you with the same name and address but more room inside, gathered not through upheaval but through a season of noticing what moved you and letting a little of it in."
+ },
+ {
+  "id": "transit:neptune:square:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "sun",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:neptune~natal_sun:square"
+  ],
+  "text": "Doubt seeps into your sense of direction during this transit, and it does not knock first. Neptune square your Sun sets the sky's great dissolver against the center of your chart, and the friction plays out as fog rather than fire. Over a year or more, with the exact degree usually crossed two or three times, the aims you have been steering by begin to look strangely thin. Work you were proud of can feel like a role. A title, a plan, a public self that took years to build may suddenly seem to belong to someone else. While the square is applying, the effect is mostly a leak: motivation drains, stamina dips, and you may compensate by pushing harder, which deepens the exhaustion instead of curing it. Around the exact passes the confusion peaks, and it often arrives through events. A promise falls through, an idealized situation shows its ordinary face, a plan built on someone's word turns out to be built on mist. The reliable hazard of this period is not malice but glamour: your own wish to believe makes appealing stories, and appealing people, harder to check. Underneath the fog, the square's demand is honest and specific. It asks whether your goals are truly yours or an image you have been maintaining, and it dissolves whatever cannot answer. That is painful in the middle and useful afterward. The re-hits give the process its shape. The first pass punctures something. The return asks you to look at the puncture instead of patching it with a fresh fantasy. The final pass tends to leave you with a smaller, truer set of wants. In the thick of it, modest habits carry more weight than grand resolutions. Rest matters more than usual because vitality genuinely runs low. Letting important claims sit overnight costs little and saves a lot, since your filters are soft. Discouragement is common in this weather and worth treating as weather: conclusions about your whole life drawn on a foggy day rarely hold. As the square separates, the drained feeling lifts slowly and something better takes its place, a will with the varnish burned off. People often come out of this transit with less shine and more substance, pursuing fewer aims with more sincerity, and much harder to fool, chiefly because they have watched their own wish to be fooled at close range. The growth here is discernment learned the slow way, and a sense of purpose that no longer needs the costume to feel real."
+ },
+ {
+  "id": "transit:neptune:trine:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "sun",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:neptune~natal_sun:trine"
+  ],
+  "text": "For a long stretch, your ideals and your everyday self stop arguing. Neptune trine your Sun blends the dreaming part of you into the doing part with almost no friction, and the blend colors a year or more, often through several exact passes as Neptune loops back over the degree. Many people get this trine only once, and its gift is easy to underestimate precisely because nothing hurts. While the aspect builds, life takes on a gentle glow. You feel more compassionate without trying, more drawn to beauty, more willing to believe that what you do could serve something beyond yourself. Creative work flows in this climate, and so does faith of any kind, formal or private. Around the exact contacts the inspiration is strongest, and it tends to come as atmosphere rather than lightning: an afternoon when the work suddenly has depth, a conversation that leaves you unaccountably moved, a sense of being accompanied that you may not have words for. Other people feel the softening too. You are easier to confide in now, and easier to forgive, and relationships often deepen simply because your guard is down in a good way. The one caution the tradition attaches to this transit is drift. Because the trine asks nothing, it is possible to spend the whole season pleasantly vague, enjoying the glow without giving it a form, and afterward have little to show. The re-hits help with that. The mood arrives with the first pass, the retrograde return favors anything you have started shaping, and by the final contact the added depth has settled into habit. Shaping matters: a body of work, a practice, a cause, a garden, anything that lets the inspiration condense. In practical affairs this is a kind period. Efforts that involve imagination, healing, generosity, or presentation tend to be received warmly, and your instinct for the right gesture runs unusually true. Your energy is not fierce under a trine, but it is steady enough, and rest feels restorative rather than escapist. As the aspect separates, the glow fades gently and ordinary weather resumes, yet something stays: a self a little more porous to wonder, a settled knowledge that meaning and daily life can share a room. The growth here is not dramatic. It is the slow discovery that you do not have to choose between being effective and being kind, and a store of quiet inspiration you will draw on for years."
+ },
+ {
+  "id": "transit:neptune:opposition:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "sun",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:neptune~natal_sun:opposition"
+  ],
+  "text": "During this transit the fog stands across from you and wears a face. Neptune opposing your Sun tends to work through other people and outside situations rather than through your own moods: someone or something out there carries the dream, the confusion, or the disappointment, and your identity is defined by how you meet it. The opposition shades a year or more, usually with two or three exact passes, and most people see it once in a lifetime at most. While it applies, watch what you are idealizing. A partner, a mentor, an employer, a cause, or a rescue project can begin to look luminous, the answer to a question you did not know you were asking. Sometimes the shine is real and the connection becomes genuinely inspiring. Just as often the glow belongs to your own unlived longing, projected onto a convenient screen, and the person underneath is ordinary, or absent, or not what they claimed. Around the exact contacts the picture tends to break one way or the other. Either the idealized figure shows a human face and you must decide whether you can love what is actually there, or a situation reveals that its terms were never what you understood them to be. Feeling drained is common in this weather: unclear relationships consume vitality, and so does holding up your end of an arrangement the other side has quietly stopped honoring. The re-hits structure the lesson. The first pass sets up the enchantment or the confusion, the retrograde return lets you see it with one eye open, and the final pass usually brings the sober reckoning, which is gentler than it sounds because by then you are ready. Through all of it, the discipline that pays is simple: keep asking what you actually know about the other party, as opposed to what you hope. Say what you mean plainly, since misunderstanding is the local currency. Notice when compassion has become self-erasure. The gift hidden in the difficulty is real. Oppositions teach through encounter, and Neptune's version teaches you the difference between connection and fusion, between serving someone and vanishing into them. As the aspect separates, the people who belong in your life remain, seen more truly and loved with fewer illusions, while the mirages thin out on their own. You come away with a firmer center, not because you hardened, but because you finally located the boundary where you end and the dream begins."
+ },
+ {
+  "id": "transit:neptune:conjunction:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "moon",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:neptune~natal_moon:conjunction"
+  ],
+  "text": "Your emotional skin thins during this transit, and the world starts to come through. Neptune conjunct your Moon merges the sky's dissolver with your feeling nature, your needs, your memory, your sense of home, and because Neptune crawls, the merging colors a year or more with up to three exact passes. Most people experience this conjunction once in a lifetime if at all. In the applying months the first sign is usually atmosphere. Moods arrive that do not seem entirely yours. You walk into a room and absorb it. Tears sit closer to the surface, dreams turn vivid and strange, and old memories float up with a tenderness or an ache you thought was finished. Around the exact passes the tide is highest, and the central confusion of the period shows itself: it becomes genuinely hard to tell which feelings are yours and which you have soaked up from the people around you. Longing runs strong now, often for a home or a comfort that may never have existed in the form you remember it. The pull to rescue someone, or to be rescued, gets persuasive, and caretaking can quietly slide past your limits before you notice the cost. None of this means the season is simply hard. Compassion deepens in this weather until it feels like a sense organ, imagination floods any creative outlet you give it, and many people find a spiritual comfort here that stays with them for good. What the conjunction asks of you is filtering, not armoring. Retreat becomes a real need rather than a weakness: time alone, sleep, water, quiet, whatever lets the absorbed material drain back out. It also helps to name feelings before acting on them, since acting from fog is the period's main practical hazard, especially in family matters where nostalgia and guilt argue loudly. The return passes teach in stages. The first opening floods you, the retrograde revisit shows you which sensitivities carry signal and which are static, and the final pass settles a workable tenderness into place. As the conjunction separates, your skin thickens slightly but never back to what it was. What remains is a richer inner tide, a gentler read on other people's pain, and often a creative or devotional practice born in the fog. The growth is learning, from the inside, that boundaries and compassion are not opposites, and that you protect your softness precisely so you can keep offering it."
+ },
+ {
+  "id": "transit:neptune:sextile:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "moon",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:neptune~natal_moon:sextile"
+  ],
+  "text": "Feeling gets easier during this long, mild season. Neptune in sextile to your Moon softens the emotional weather without flooding it, and the softening lasts a year or so, typically with several exact contacts as Neptune retraces its steps. This is one of the gentlest transits Neptune makes. Your intuition grows more trustworthy while the aspect builds: hunches about people land closer to the mark, you sense what someone needs before they say it, and the small kindnesses you offer tend to be exactly the right ones. Home life takes on a warmer tone. You may feel moved to make your rooms more beautiful, to cook for people, to reconnect with relatives at an easier depth, or simply to let domestic time be slow in a way you usually cannot justify. Around each exact contact the receptivity peaks. These are good windows for anything fed by imagination and feeling together: art, music, journaling, time near water, care for someone who needs it, the kind of conversation that only happens when nobody is defending anything. Sympathy comes cheap now, in the best sense, and people notice. Expect to be confided in more than usual. Because the sextile offers rather than insists, its gifts have to be picked up, and that is the only way this transit fails: a busy year can roll straight over it, leaving the invitation unopened with no penalty except the loss. The repeat passes are forgiving. Miss the mood on the first contact and the return will offer it again; by the final pass, whatever practice or bond you invested in has made the new tenderness ordinary, which is the point. There is little downside weather to manage here. At most you may find yourself slightly dreamier than deadlines prefer, and a little more permeable to sad stories, neither of which costs much if you notice. Emotionally, the season does quiet repair work. Old hurts lose some charge, forgiveness gets easier because it stops feeling like surrender, and your baseline sense of safety can rise for reasons you cannot fully explain. As the aspect separates, the glow recedes but the repairs hold. What you keep is a better-tuned inner ear, some relationships carried to a truer depth, and the memory of a stretch when being soft felt safe, which makes it easier to choose softness again later on purpose."
+ },
+ {
+  "id": "transit:neptune:square:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "moon",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:neptune~natal_moon:square"
+  ],
+  "text": "Moods without names move through this period, and their vagueness is the difficulty. Neptune square your Moon puts pressure on your feeling nature through fog: over a year or more, usually across two or three exact passes, emotions arrive unlabeled, needs blur, and the inner ground you rest on feels less solid than usual. While the square is applying, you may notice a low-grade melancholy or unease with no obvious cause, a homesick feeling that no address cures. Sleep and dreams often turn strange. Sensitivity climbs, which means other people's pain, the news, and the general sorrow of the world get in more easily and sit heavier. Around the exact contacts the tide peaks, and confusion tends to concentrate in your closest emotional territory. Family matters can turn murky: old grievances resurface wearing new clothes, guilt argues persuasively for obligations that were never really yours, and someone's neediness, or your own, is easy to misread. The signature trap of this transit is seeking comfort in things that do not comfort. Food, spending, scrolling, drinking, fantasy, anyone's arms: the reach is understandable, and the relief tends to run briefer each time. What actually helps is unglamorous. Name the feeling out loud or on paper, even approximately, because a named mood shrinks. Ask directly for what you need instead of hoping to be intuited. Check whether a given sadness is even yours, since in this weather you absorb freely, and half of what you carry may belong to the room. Keep the routines that anchor you, however dull they look. The re-hits move the lesson along in stages. The first pass swamps the old emotional habits, the retrograde return lets you watch the pattern with some distance, and the final pass usually finds you filtering by instinct, keeping what is yours and letting the rest pass through. It matters to hold off on permanent readings of your life while the fog is in: this transit is famous for discouragement that evaporates once it separates. And it does separate. As the square fades, the unnamed weight lifts, often faster than it arrived, and what remains is real: an emotional vocabulary you did not have before, a cleaner sense of where your needs end and other people's begin, and a compassion that survived being overloaded. The growth is learning to mother yourself through weather you cannot see, which turns out to be a skill you keep."
+ },
+ {
+  "id": "transit:neptune:trine:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "moon",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:neptune~natal_moon:trine"
+  ],
+  "text": "A deep calm spreads through your emotional life under this transit, the way still water spreads to fill a basin. Neptune trine your Moon opens the connection between imagination and feeling and lets it run without turbulence, shading a year or more with several exact passes along the way, and for most people it comes once in a lifetime at most. As the trine builds, the first change is usually in tone. You feel less defended for no particular reason. Music lands harder, memories return with their sweetness intact rather than their sting, and sympathy for the people in your life comes as easily as breathing. Intuition runs high and, unusually for Neptune, runs clear: your reads on people and situations during this period tend to hold up. Around the exact contacts the depth is greatest. These are the months when reconciliation becomes possible in relationships that have been waiting for a soft hour, when forgiveness stops feeling like a concession and starts feeling like setting down a weight, and when time with family, chosen or given, carries a tenderness that everyone present can feel even if nobody names it. Creative and spiritual life drink from the same spring. Whatever your form, images and feelings arrive already joined, and a private practice begun now, prayer, meditation, dreamwork, an instrument, often outlasts the transit by decades. The trine asks nothing, and that is its single caution. It is possible to doze through the whole season, pleasantly mellow, and keep none of it. The return passes are the remedy. The first offers the mood; give it a shape, and the retrograde revisit will deepen it until the final contact makes it permanent. Domestic life generally goes gently in this weather. Moves, homemaking, caretaking, and hosting all tend to flow, and your home can become the place other people come to feel better, which costs you less than usual because the well is full. There is little to guard against beyond a mild dreaminess about practical detail. As the aspect separates, the water recedes slowly, and you find it has left the ground softer. What you keep is an easier intimacy with your own feelings, some bonds mended below the waterline, and the settled knowledge that your inner life can be a refuge rather than a weather system. Growth here is simply depth, gained without paying for it in pain."
+ },
+ {
+  "id": "transit:neptune:opposition:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "moon",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:neptune~natal_moon:opposition"
+  ],
+  "text": "The fog in this period gathers in the space between you and the people you are closest to. Neptune opposing your Moon works through relationship: your needs and someone else's blur together, and for a year or more, usually across two or three exact passes, the hardest question in your emotional life is deceptively simple, namely whose feeling is this. While the opposition applies, the confusion is often pleasant at first. Someone may seem to understand you perfectly, to need you in a way that makes you feel essential, or to promise a closeness you have wanted for a long time. Alternatively you may find yourself cast as the strong one, absorbing a partner's or relative's sadness, smoothing their moods, quietly rearranging your life around their weather. Around the exact contacts the arrangement shows its cost. Idealized closeness meets an ordinary human being. The person you were holding up turns out to be heavier than advertised, or you discover that what you called being needed was actually being used, sometimes with no villain anywhere, just two people reading each other through mist. Disappointment in this climate is real but instructive, because what collapses was always partly a picture. The practical work of the transit is repatriation: bringing your feelings back home. Say what you need in plain words, even when it feels unpoetic, because hinting is how this fog feeds. Check your reads with the other person instead of trusting the telepathy that the period fakes so well. Notice when empathy has crossed into carrying, and set the load down kindly. The re-hits pace the lesson. The first pass spins the enchantment or the entanglement, the retrograde return lets you see the pattern while still inside it, and the final pass generally brings a quiet sorting: some bonds emerge truer and closer for having been de-idealized, while others thin out once the projection stops paying their rent. Loneliness can pass through here, and it deserves gentleness rather than a verdict, since it is often just the sound of a fantasy leaving. As the opposition separates, your emotional boundaries reset at a wiser porosity, open enough to love, closed enough to remain a separate person. What you keep is considerable: relationships based on who people actually are, a nose for the difference between intimacy and merging, and a tenderness toward your own needs that no longer requires someone else to guess them."
+ },
+ {
+  "id": "transit:neptune:conjunction:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "mercury",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:neptune~natal_mercury:conjunction"
+  ],
+  "text": "Your mind changes languages during this transit. Neptune conjunct your Mercury pours image, feeling, and suggestion into the part of you that thinks, speaks, and keeps track, and since Neptune barely moves, the immersion lasts a year or more with up to three exact passes. Most people get this conjunction once in a lifetime at most. The applying months usually announce themselves through small slips. Names, dates, keys, and the thread of what you were saying wander off more than usual. Reading dense material takes more effort while poetry, music, and images suddenly speak fluently. Your attention drifts toward the window. This is not your mind failing; it is your mind being retuned from the literal channel to the associative one, and the retuning has real gifts. Intuition rises into thought, so you begin to know things before you can show your work. Metaphor comes easily, and if your work involves writing, imagery, storytelling, healing, or listening, this period can be a spring you draw on for years. The cost is precision, and it is a real cost. Around the exact passes, misunderstanding becomes the local dialect: you hear what was meant rather than what was said, others do the same to you, and agreements made purely by feel have a way of dissolving when someone finally writes them down. Your usual skepticism also runs soft now, which makes this a poor season for evaluating claims that flatter your hopes, and a good season for letting important decisions ripen slowly. Writing things down helps more than it ever has, not as pessimism but as kindness to your future self. The return passes organize the retuning. The first blurs the channel and brings the flood of images, the retrograde revisit teaches you to move between the two languages on purpose, and the final pass integrates them, leaving a mind that can do both. Conversations during the later stretch often turn gentler and stranger in a good way: you listen beneath words now, and people tell you things they did not plan to say. As the conjunction separates, the fog burns off and the details come back under command, but the second language stays installed. What you keep is a thinking style with more registers than it had, an ear for the unsaid, and usually a body of notes, pages, or songs that could only have been made while the water was high."
+ },
+ {
+  "id": "transit:neptune:sextile:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "mercury",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:neptune~natal_mercury:sextile"
+  ],
+  "text": "Imagination sits within easy reach of your thinking during this long, light transit. Neptune in sextile to your Mercury connects the dreaming mind and the working mind by a footpath rather than a flood, and the connection stays open for a year or so, usually through several exact contacts as Neptune loops back over the degree. Nothing about this period is dramatic, which is exactly its value. While the aspect builds, you may notice that the right word arrives more often, that explanations come out warmer and land better, and that subjects you always filed under impractical, poetry, symbolism, music theory, the inner life, start to seem worth an evening. Your listening improves in a particular way: you begin to hear the feeling under what people say, and to answer that instead of only the words, which quietly upgrades most of your relationships. Around each exact contact, the footpath widens. These are the windows when a creative project moves, when journaling turns from record-keeping into discovery, when studying anything with depth to it, a language, an art, a tradition, feels less like effort and more like remembering. Ideas in this season tend to arrive as images first and sentences second, and the sentences are better for it. Because the sextile is an offer, not a push, the entire transit can pass unnoticed under a busy enough schedule, and its gifts simply lapse. The repeat passes soften that risk. Each return finds whatever you practiced after the last one and rewards it, until the final pass makes the new fluency a habit rather than a visit. Practical thinking does not suffer much here; at worst you are a touch dreamier in meetings and a touch kinder in emails, trades most lives can afford. Persuasion is the everyday gift. You can present ideas now with an ease that does not feel like selling, because you intuit what the listener needs to hear first, and this alone can move stalled projects and stuck conversations. As the aspect separates, the footpath narrows again but never closes completely. You keep the improved ear, a stack of pages or sketches you would not otherwise have, and the working knowledge that your mind has a second gear, quieter than logic and just as useful, that you now know how to find on purpose."
+ },
+ {
+  "id": "transit:neptune:square:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "mercury",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:neptune~natal_mercury:square"
+  ],
+  "text": "Crossed wires are the signature of this period. Neptune square your Mercury runs interference on the part of you that thinks, speaks, and sorts fact from wish, and the static lasts a year or more, usually with two or three exact passes before it clears. In the applying months the trouble is mostly texture. Concentration slips, details need a second look, and a vague, unlocatable worry can hum under your days, the mental equivalent of a radio between stations. Around the exact contacts the interference peaks and starts costing something. Messages go astray or arrive meaning the opposite of what was intended. Information you relied on turns out to be partial, outdated, or shaped by someone's convenience. Understandings that seemed settled reveal that each side heard a different agreement, and the discovery usually comes at the least convenient time. The subtler hazard is inside your own head. Under this square your reasoning bends toward your wishes without telling you, so the option you hope is true begins to look better documented than it is. Deception by others happens in this weather, but self-persuasion happens more. The response that works is not suspicion of everyone; it is method. Confirm the important things in writing. Ask the question you think you already know the answer to. Let big conclusions age a few days before you act on them, because in this climate a delay is cheap insurance. Say what you mean in plain words and then check what the other person heard, since the gap between the two is where this transit lives. The re-hits turn the annoyance into training. The first pass exposes how much of your certainty was habit, the retrograde return catches you rebuilding sloppy shortcuts and asks again, and the final pass typically finds you verifying by reflex, holding beliefs a little more loosely, and noticeably harder to mislead. There are gifts under the static, easy to miss while you are annoyed: imagination presses on your thinking all year, and if you give it a channel, pages, images, music, prayer, odd research, it stops leaking into your ledgers. As the square separates, the fog thins quickly and your mind feels like a cleaned window. What stays is a fact-checking instinct you no longer resent, a humility about certainty that makes you a better colleague and friend, and a mind that learned the difference between what it knows and what it wants."
+ },
+ {
+  "id": "transit:neptune:trine:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "mercury",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:neptune~natal_mercury:trine"
+  ],
+  "text": "Reason and intuition work the same shift during this transit. Neptune trine your Mercury lets the analytical mind and the imaginative one cooperate instead of taking turns, and the cooperation colors a year or more, with several exact passes as Neptune doubles back across the degree. Most people meet this trine once if they meet it at all, and it is among the kindest things Neptune does to a mind. As the aspect builds, thinking simply gets richer. Problems you approach now come apart along seams you would not normally see, because you are reading them for pattern and feeling as well as logic. Words for emotions arrive on time for once: you can say the tender thing accurately, which changes conversations that have been stuck for years. Your listening deepens the same way, and people sense it, so expect more confidences and better ones. Around the exact contacts the blend is strongest. These are the months for the work that needs both halves of you, writing anything meant to move a reader, teaching, counseling, design, interpretation, planning that has to account for how people will actually feel. Study flows too, especially subjects with symbolic depth. Insights in this weather often arrive whole, an answer appearing before the steps, and the steps checking out afterward; you can trust that process more than usual while the trine holds. The familiar Neptune cautions barely apply here, though one soft risk remains: ease invites coasting, and a beautiful idea left unwritten evaporates like any other dream. The return passes answer that. The first pass hands you the fluency, the retrograde revisit rewards whatever you captured and pushed further, and the final contact folds the new range into your ordinary voice. Daily communication benefits all year in small ways that add up: fewer bristling exchanges, more messages that land as intended, an easier time saying difficult things without damage. As the trine separates, the two shifts go back to trading off, but they now know each other. What you keep is a durable widening of how you think, notebooks or drafts that will feed projects for years, and the learned trust that your first quiet impression of a person or a problem is evidence too, worth weighing alongside the facts it usually turns out to match."
+ },
+ {
+  "id": "transit:neptune:opposition:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "mercury",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:neptune~natal_mercury:opposition"
+  ],
+  "text": "Conversations run at cross purposes through this period, and the crossing is the point. Neptune opposing your Mercury stages the fog on the far side of the table: it reaches you through other people's words, claims, and versions of events, and over a year or more, usually across two or three exact passes, it teaches you how much of communication was always interpretation. While the opposition applies, the pattern starts small. You are misquoted, or you realize you misheard. Someone's account of a shared event diverges from yours in ways neither of you can reconcile. Information arriving from others, advice, gossip, official word, promises, seems to warp in transit, and the more you want it to be true, the more warped it tends to arrive. Around the exact contacts the confusion concentrates in your important exchanges. Negotiations blur, someone may genuinely mislead you, and just as often nobody lies at all: two sincere people simply walk away holding two different agreements, and the difference surfaces later with interest. Your own signal degrades too. What you say lands sideways in this weather, so people you never intended to confuse read hidden meanings into plain remarks. The workable response is patient and a little humbling. Restate what you heard and ask if you got it right. Put what matters in writing, and read the whole of what others put in writing. Treat your certainty about anyone's motives as a rough draft. When a claim arrives glowing, let it cool before you build on it, since glow is exactly what this transit fakes best. The re-hits carry the curriculum. The first pass supplies the tangle, the retrograde return replays it slowly enough for you to see your own contribution, and the final pass usually finds you speaking more carefully and listening with a new instrument, tuned to what people mean underneath what they manage to say. That instrument is the hidden gift. Oppositions grant perspective through the other, and this one leaves you genuinely better at dialogue: less attached to winning the version war, quicker to notice when a conversation has left the ground, kinder about the fact that every mind translates. As the aspect separates, your exchanges clear up almost mysteriously, since half the static was never in the wires but in the reading. What remains is a communicator with fewer illusions about words and more skill with them, which people around you will notice before you do."
+ }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "id": "natal:uranus:dignity:peregrine",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "uranus", "dignity": "peregrine" },
+    "atomIds": ["placement:uranus"],
+    "text": "Uranus in your chart is peregrine: it carries no essential dignity where it sits, no home advantage and no handicap either. For Uranus this deserves an honest frame. The dignity system was complete long before 1781, when Uranus was found, so its modern assignments are conventions rather than doctrine, and its seven years per sign make it a generational marker more than a personal one. Take this as a minor note with one useful image in it. A peregrine planet is a foreigner, resourceful because nothing is provided for it. Read through Uranus, that describes an independent streak with no ready-made script. Your way of being original is not issued at birth; you piece it together by experiment, by borrowing and discarding, by noticing which rules actually deserve breaking. When you are young, this can feel like restlessness in search of a cause, an urge to disrupt before you know what for. With time it turns into a strength most rebels never get. Because none of your freedom came automatically, all of it is examined: you know why you keep the conventions you keep and why you dropped the rest. That makes your independence hard to argue with, and it makes you unusually patient with other people still assembling theirs."
+  },
+  {
+    "id": "natal:neptune:dignity:domicile",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "neptune", "dignity": "domicile" },
+    "atomIds": ["placement:neptune"],
+    "text": "Neptune occupies Pisces in your chart, the one sign where modern astrology says it is at home. A caution first: this rulership is a convention adopted after Neptune's discovery in 1846, and Pisces belonged to Jupiter for the previous two thousand years. Neptune also spends about fourteen years in a sign, so it marks a generation as much as it marks you. Within those limits, the placement still says something real. Imagination, empathy, and the longing for something beyond the visible all run through you on a clear channel. You pick up moods the way other people pick up facts, and art, music, prayer, or simple daydreaming can feel less like pastimes than like breathing. The gift and the cost are the same thing: your boundaries are thin. Compassion can shade into carrying what is not yours, inspiration can shade into escape, and a hard week can send you looking for any exit from the ordinary, healthy or not. What you learn over time is containment without closing. A practice, a craft, a schedule, anything with edges lets the sensitivity work for you instead of washing through you. Held that way, this Neptune makes you one of the people who keep tenderness alive in rooms that had given up on it."
+  },
+  {
+    "id": "natal:neptune:dignity:exaltation",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "neptune", "dignity": "exaltation" },
+    "atomIds": ["placement:neptune"],
+    "text": "Your chart marks Neptune as exalted, which in the old language means a planet received with honors, its qualities amplified and given the best seat. For Neptune the label needs an asterisk. The dignity scheme predates the planet by many centuries, and modern astrologers never agreed on where it should be exalted; different authors name different signs, and none of it is classical doctrine. Take the state, then, as a light emphasis rather than a verdict. It suggests that your imagination is not just present but flattered by its surroundings. Ideals come to you dressed in their best clothes, and you find it natural to see the finer version of a person, a plan, or a piece of work. People often experience you as someone who lends shine, who makes a modest thing feel meaningful. The risk is glamour. An honored guest can be indulged, and a flattered Neptune can prefer the beautiful story to the true one, in love especially. You grow by keeping one hand on the actual while the other holds the ideal. When you manage that, your talent for seeing what things could be stops being a source of disappointment and becomes the reason things around you improve."
+  },
+  {
+    "id": "natal:neptune:dignity:detriment",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "neptune", "dignity": "detriment" },
+    "atomIds": ["placement:neptune"],
+    "text": "Detriment places your Neptune in Virgo, the sign opposite its modern home in Pisces, where it works in a style foreign to it. The assignment is a modern convention, not old doctrine, and Neptune's slow pace makes it a generational marker besides, so hold this lightly. What the placement sketches is a dreamer under audit. Your imagination and your longing for meaning run through a mind that wants specifics, evidence, and something to fix. Vague inspiration makes you uneasy; you trust an ideal only after it survives a checklist. That can pinch. Wonder gets dismissed as woolly, intuition arrives and is sent back for documentation, and you may quietly envy people who believe things easily. But the foreign style is also a genuine strength. When you do serve a vision, you serve it in working hours: through craft, care, repair, and the unglamorous kindnesses that actually change someone's Tuesday. You are hard to fool, which protects you in exactly the places idealists get hurt. The growth here is letting a little unverified beauty in. Not every meaningful thing will pass inspection, and as you learn to leave room for what you cannot itemize, your practical devotion deepens into something close to faith."
+  },
+  {
+    "id": "natal:neptune:dignity:fall",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "neptune", "dignity": "fall" },
+    "atomIds": ["placement:neptune"],
+    "text": "Your Neptune is in fall, the state the old astrologers read as underpowered, a planet in a sign that gives it little support. For Neptune this comes with two honest caveats: the outer planets never had classical dignities, and modern authors disagree about which sign Neptune falls in, so the label is convention layered on convention. Read it as a tendency, not a sentence. The tendency is that your imaginative and mystical side does not trust itself. Inspiration shows up quietly, in a plain coat, and part of you asks whether it counts. You may compare your inner life to people who speak fluently about dreams and intuition and decide, wrongly, that you have less of it. What you have instead is compensation, and compensation builds muscle. Because the visionary faculty does not carry you, you build structures for it: you write things down, test hunches, learn a craft from the ground up. Ideals that survive that process are sturdy, and yours tend to be. Over the years this becomes a quiet authority. People who inflated their visions watch them pop; you arrive later, carrying something smaller that works. Your growth is mostly a matter of respect, learning to treat your subtle, hard-won imagination as the real thing it is."
+  },
+  {
+    "id": "natal:neptune:dignity:peregrine",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "neptune", "dignity": "peregrine" },
+    "atomIds": ["placement:neptune"],
+    "text": "Your Neptune is peregrine, holding no essential dignity where it stands: nothing boosting it, nothing dragging on it. This is common and mild, doubly so for Neptune, which the old dignity tables never covered in the first place and which colors a whole generation with each sign it crosses. So this note is a footnote, not a headline. The peregrine image is a traveler far from home, adaptable because it has to be, taking on the accent of wherever it lodges. Your imagination works that way. It has no fixed idiom of its own, so it borrows: from the people you love, the art you take in, the rooms you spend time in. That makes your inner life unusually responsive to environment. In nourishing company your sensitivity turns creative and kind almost by itself; in cynical or chaotic company it can drift, absorb the gloom, or go numb. The practical reading is that you have more say than most over what your dream life is made of, exercised indirectly, through what you surround yourself with. Choosing your inputs, the friends, the media, the spaces, is for you a creative act. Choose with some care and the traveler settles well, and the borrowed accents blend into a voice that is recognizably yours."
+  },
+  {
+    "id": "natal:pluto:dignity:domicile",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "pluto", "dignity": "domicile" },
+    "atomIds": ["placement:pluto"],
+    "text": "Pluto stands in Scorpio in your chart, the sign modern astrology assigned it after its discovery in 1930. Two honest notes come first. Classical astrology gave Scorpio to Mars and knew nothing of Pluto, so this rulership is a recent convention. And Pluto lingers in a sign for more than a decade, so the placement belongs to your whole birth cohort, not to you alone. Still, at home means something: the planet of depth, endings, and regeneration works here without friction. In you and your generation it shows as an instinct for the buried layer. You want the real conversation, the actual motive, the thing underneath the presentation, and you can sit with material that sends others out of the room: grief, obsession, betrayal, desire. People tend to confide in you the things they have told no one. The strength has an undertow. Intensity can become control, privacy can become secrecy, and it is possible to keep testing bonds that have already proven themselves. What matures over a lifetime is the direction of the force. Turned outward as suspicion it corrodes. Turned toward renewal, letting the dead thing end so the living thing can start, it makes you a quietly transformative presence wherever you commit."
+  },
+  {
+    "id": "natal:pluto:dignity:exaltation",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "pluto", "dignity": "exaltation" },
+    "atomIds": ["placement:pluto"],
+    "text": "Your Pluto counts as exalted, and an exalted planet is a guest of honor, its qualities welcomed and raised. Applied to Pluto, the phrase needs immediate qualification. The exaltation scheme is ancient, Pluto was discovered in 1930, and astrologers have proposed several signs for its exaltation without agreeing on any, so what your chart reflects is one modern convention among several. Treat the emphasis as gentle. What it points to is intensity that finds a welcome. Your depth, your will, and your appetite for real change do not have to force their way in; circumstances and people tend to hand you the serious jobs, the crises, the conversations that matter, as if recognizing that you can carry them. That recognition feels good, and mostly it serves you. The one distortion to watch is the honored guest who starts to expect the head of the table: drama sought for its own sake, or gravity performed because it earns respect. You grow by keeping the strength in service of something, a person, a craft, a repair, rather than in service of being formidable. Held that way, the welcome your intensity receives becomes a real asset, and the people around you get the rare benefit of power that does not need to prove itself."
+  },
+  {
+    "id": "natal:pluto:dignity:detriment",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "pluto", "dignity": "detriment" },
+    "atomIds": ["placement:pluto"],
+    "text": "In detriment, your Pluto occupies Taurus, opposite the Scorpio home modern astrologers gave it, and it operates in a style that is not its own. The assignment is convention laid over a planet the old texts never knew, and Pluto marks whole runs of birth years at a time, so this is a quiet note rather than a defining one. The picture it draws is upheaval lodged in the sign of keeping. Part of you is built for deep change, and part of you wants nothing to move: possessions kept, routines kept, people kept. So transformation in your life rarely arrives as a lightning strike. It composts. Pressure builds for a long time under a calm surface while you resist, adjust, and resist again, and the change, when it finally comes, is total and strangely well built. The friction has real costs. You can grip a job, a habit, or a comfort long past its life, and power struggles in your world often wear the costume of money and property. But the same slowness is a gift the pure transformers lack. When you rebuild, you rebuild to last; your endings produce foundations, not craters. Growing with this placement mostly means loosening your grip a season earlier than instinct says, trusting that what is really yours survives the letting go."
+  },
+  {
+    "id": "natal:pluto:dignity:fall",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "pluto", "dignity": "fall" },
+    "atomIds": ["placement:pluto"],
+    "text": "Your Pluto sits in fall, the least supported of the traditional states, and for Pluto specifically the label is soft twice over: the dignity system predates its 1930 discovery, and modern authors never settled which sign its fall belongs to. It also moves so slowly that whole birth years share it. With those grains of salt, the state describes depth that works uphill. Transformative force is in you, but it does not surge on command, and next to obviously intense people you can wonder if you lack some engine they have. Watch what compensation builds, though. Because raw force is not handed to you, you develop the subtler instruments: patience, timing, reading a room, knowing when a push will move things and when it will only cost you. Your changes tend to be negotiated rather than detonated, and they leave fewer casualties. People often hand you responsibility precisely because you seem unlikely to enjoy it too much. The risk is disowning the depths entirely, playing the mild one so long that your own anger and desire go underground and leak out sideways. You grow by claiming the intensity in small, honest doses: a hard truth said plainly, a limit held. Strength practiced that way accumulates, and it shows up when you genuinely need it."
+  },
+  {
+    "id": "natal:pluto:dignity:peregrine",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "pluto", "dignity": "peregrine" },
+    "atomIds": ["placement:pluto"],
+    "text": "A peregrine Pluto, which is what your chart shows, has no essential dignity in its sign. For this planet that is close to the natural condition: the dignity tables were finished centuries before anyone knew Pluto existed, and any home it claims is modern convention. Add its generational pace and this state says little about you personally. What it can name, lightly, is intensity without a preset channel. Your capacity for depth, endurance, and reinvention does not come with an obvious arena attached. Nothing in you announces where the transformations of your life should happen, so they tend to happen wherever life applies pressure: a workplace, a family knot, a health scare, a cause you stumble into. Early on that can feel like being ambushed by your own seriousness, surprised at how fiercely you respond once something finally cuts deep. Later it becomes flexibility. Because your power is not married to one territory, you can bring it anywhere it is needed, and you are less tempted than most to keep replaying a single battlefield. The useful work is choosing an arena or two on purpose, some commitment worthy of your full weight, so that the depth in you gets a home by adoption instead of waiting for emergencies to call it out."
+  }
+]

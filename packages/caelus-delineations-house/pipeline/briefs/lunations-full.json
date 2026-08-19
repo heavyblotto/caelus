@@ -1,0 +1,176 @@
+{
+ "name": "lunations-full",
+ "outFile": "b4-lunations-full.json",
+ "setId": "house-b4-lunations-full",
+ "family": "lunation-house",
+ "cells": [
+  {
+   "id": "sky:lunation:full:house:1",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "full",
+    "house": 1
+   },
+   "atomIds": [
+    "lunation:full"
+   ],
+   "title": "A Full Moon in your 1st house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:full:house:2",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "full",
+    "house": 2
+   },
+   "atomIds": [
+    "lunation:full"
+   ],
+   "title": "A Full Moon in your 2nd house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:full:house:3",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "full",
+    "house": 3
+   },
+   "atomIds": [
+    "lunation:full"
+   ],
+   "title": "A Full Moon in your 3rd house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:full:house:4",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "full",
+    "house": 4
+   },
+   "atomIds": [
+    "lunation:full"
+   ],
+   "title": "A Full Moon in your 4th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:full:house:5",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "full",
+    "house": 5
+   },
+   "atomIds": [
+    "lunation:full"
+   ],
+   "title": "A Full Moon in your 5th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:full:house:6",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "full",
+    "house": 6
+   },
+   "atomIds": [
+    "lunation:full"
+   ],
+   "title": "A Full Moon in your 6th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:full:house:7",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "full",
+    "house": 7
+   },
+   "atomIds": [
+    "lunation:full"
+   ],
+   "title": "A Full Moon in your 7th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:full:house:8",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "full",
+    "house": 8
+   },
+   "atomIds": [
+    "lunation:full"
+   ],
+   "title": "A Full Moon in your 8th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:full:house:9",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "full",
+    "house": 9
+   },
+   "atomIds": [
+    "lunation:full"
+   ],
+   "title": "A Full Moon in your 9th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:full:house:10",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "full",
+    "house": 10
+   },
+   "atomIds": [
+    "lunation:full"
+   ],
+   "title": "A Full Moon in your 10th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:full:house:11",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "full",
+    "house": 11
+   },
+   "atomIds": [
+    "lunation:full"
+   ],
+   "title": "A Full Moon in your 11th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:full:house:12",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "full",
+    "house": 12
+   },
+   "atomIds": [
+    "lunation:full"
+   ],
+   "title": "A Full Moon in your 12th house",
+   "bindable": true
+  }
+ ]
+}

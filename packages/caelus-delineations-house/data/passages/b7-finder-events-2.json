@@ -1,0 +1,100 @@
+[
+  {
+    "id": "finder:event:health-turn",
+    "family": "finder-event-angle",
+    "when": { "kind": "angleContact", "angle": "asc" },
+    "atomIds": ["angleContact:"],
+    "text": "Serious illness has a way of marking time. If you have lived through a major health crisis, an accident, or the start of a long recovery, it helps to know when it began, as close to the day as you can manage. Events that touch the body this directly tend to cluster around one particular corner of the chart, the one that stands for you and your physical self, and where that corner sits depends on the minute you were born. Your date lets us check it."
+  },
+  {
+    "id": "finder:event:reinvention",
+    "family": "finder-event-angle",
+    "when": { "kind": "angleContact", "angle": "asc" },
+    "atomIds": ["angleContact:"],
+    "text": "Think of a time you visibly became someone new: a fresh start, a changed style, a different way of walking into a room that other people noticed and commented on. When did that shift begin? Reinventions of the self tend to arrive as the moving sky passes the point in a chart that describes how you meet the world, so a solid date, even just a month and year, sharpens the search considerably."
+  },
+  {
+    "id": "finder:event:name-change",
+    "family": "finder-event-angle",
+    "when": { "kind": "angleContact", "angle": "asc" },
+    "atomIds": ["angleContact:"],
+    "text": "Have you ever changed your name? Marriage, divorce, a chosen name, even a nickname that took over and became the one everyone uses. If so, tell us roughly when it happened. A name is the front door of a life, and changes to it often line up with the sky crossing the part of your chart concerned with identity. The date gives us something firm to test."
+  },
+  {
+    "id": "finder:event:independence",
+    "family": "finder-event-angle",
+    "when": { "kind": "angleContact", "angle": "asc" },
+    "atomIds": ["angleContact:"],
+    "text": "There is usually a first real step out on your own: moving out of your parents' home, a first job in a new city, the day you started answering to no one. If you can put even an approximate date on yours, it is worth entering. Steps into independence tend to fall when the traveling planets reach the spot in a chart that belongs to the self, and that spot shifts with every minute of birth time."
+  },
+  {
+    "id": "finder:event:body-change",
+    "family": "finder-event-angle",
+    "when": { "kind": "angleContact", "angle": "asc" },
+    "atomIds": ["angleContact:"],
+    "text": "Bodies change, and sometimes they change all at once: a surgery, a transformation you worked for, a shift in appearance that made old friends look twice. If something like that happened to you, when was it? A change this visible often coincides with activity at the part of your chart tied to the physical self, so a date, even a rough one, helps pin your birth time down."
+  },
+  {
+    "id": "finder:event:spotlight",
+    "family": "finder-event-angle",
+    "when": { "kind": "angleContact", "angle": "asc" },
+    "atomIds": ["angleContact:"],
+    "text": "Was there a moment when far more people suddenly knew who you were? A public role, a stage, a story that spread, attention you did not have the week before. Note when it happened if you can. Visibility of that kind tends to switch on while the sky is at the place in your chart that governs how you appear to others, and testing your date against it tells us where that place is."
+  },
+  {
+    "id": "finder:event:withdrawal",
+    "family": "finder-event-angle",
+    "when": { "kind": "angleContact", "angle": "asc" },
+    "atomIds": ["angleContact:"],
+    "text": "The opposite move counts too. Perhaps you deliberately stepped back at some point: left social life for a while, went quiet, took a long stretch alone to put yourself back together. When did that retreat begin? Choosing to withdraw is still an act of the self, the same corner of a chart that lights up when you step forward, and your date gives that corner a position we can check."
+  },
+  {
+    "id": "finder:event:met-partner",
+    "family": "finder-event-angle",
+    "when": { "kind": "angleContact", "angle": "dsc" },
+    "atomIds": ["angleContact:"],
+    "text": "When did you meet the most important partner of your life so far? Not the wedding, the meeting: the first date, the introduction, the conversation that started everything. First meetings that turn into lasting relationships have a habit of landing when the moving sky touches the side of a chart devoted to partners, and since that side depends on birth time, your date becomes real evidence."
+  },
+  {
+    "id": "finder:event:married",
+    "family": "finder-event-angle",
+    "when": { "kind": "angleContact", "angle": "dsc" },
+    "atomIds": ["angleContact:"],
+    "text": "A wedding date is one of the best clocks a life has. If you married, or made a commitment you both treated as permanent, enter the date; most people remember this one exactly. Lasting unions tend to be sealed while the sky sits on the point of your chart that describes committed partnership, which makes a precise date unusually useful for finding your birth time."
+  },
+  {
+    "id": "finder:event:separation",
+    "family": "finder-event-angle",
+    "when": { "kind": "angleContact", "angle": "dsc" },
+    "atomIds": ["angleContact:"],
+    "text": "Endings matter here as much as beginnings. If a marriage or a serious relationship came apart, and you are willing to share when, the date is genuinely helpful; the month it became final or the month you parted both work. Separations tend to arrive under the same region of the chart that rules partnership, so knowing when yours happened helps locate it."
+  },
+  {
+    "id": "finder:event:business-partner",
+    "family": "finder-event-angle",
+    "when": { "kind": "angleContact", "angle": "dsc" },
+    "atomIds": ["angleContact:"],
+    "text": "Partnership is not only romantic. Did you ever sign on with a business partner, or dissolve a partnership that had run its course? Either direction counts. Formal alliances of this kind, made or ended, tend to coincide with the sky activating the relationship side of a chart, and a founding date or a dissolution date gives us a clean point to test."
+  },
+  {
+    "id": "finder:event:close-loss",
+    "family": "finder-event-angle",
+    "when": { "kind": "angleContact", "angle": "dsc" },
+    "atomIds": ["angleContact:"],
+    "text": "Some dates stay with you whether you want them to or not. If you have lost a spouse, a partner, or a companion who shared your daily life, and it feels all right to include it, the date can help. Losing someone that close often falls when the moving sky crosses the partnership point of a chart, and yours would tell us where that point stands."
+  },
+  {
+    "id": "finder:event:rival",
+    "family": "finder-event-angle",
+    "when": { "kind": "angleContact", "angle": "dsc" },
+    "atomIds": ["angleContact:"],
+    "text": "Open conflict leaves a timeline too. A lawsuit, a public dispute, a rival who declared themselves and forced you to respond: if you have faced something like this, when did it break into the open? Adversaries, in the chart's way of seeing things, occupy the same territory as partners, the space directly across from you, so the date of a real confrontation is worth checking."
+  },
+  {
+    "id": "finder:event:reconciliation",
+    "family": "finder-event-angle",
+    "when": { "kind": "angleContact", "angle": "dsc" },
+    "atomIds": ["angleContact:"],
+    "text": "Sometimes a bond breaks and then, years later, mends. If you reconciled with a partner, a close friend, or a family member after a long estrangement, try to remember when you found each other again. Reunions like that tend to happen while the sky is warming the part of your chart given over to close relationships, and your date lets us see whether it fits."
+  }
+]

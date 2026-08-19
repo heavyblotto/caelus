@@ -1,0 +1,200 @@
+{
+ "name": "synastry-overlays-venus",
+ "outFile": "b3-synastry-overlays-venus.json",
+ "setId": "house-b3-synastry-overlays-venus",
+ "family": "synastry-overlay",
+ "cells": [
+  {
+   "id": "synastry:overlay:venus:house:1",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "venus",
+    "partner": "a",
+    "house": 1
+   },
+   "atomIds": [
+    "synastry:overlay:a:venus:house:1"
+   ],
+   "title": "Your Venus in their 1st house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:venus:house:2",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "venus",
+    "partner": "a",
+    "house": 2
+   },
+   "atomIds": [
+    "synastry:overlay:a:venus:house:2"
+   ],
+   "title": "Your Venus in their 2nd house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:venus:house:3",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "venus",
+    "partner": "a",
+    "house": 3
+   },
+   "atomIds": [
+    "synastry:overlay:a:venus:house:3"
+   ],
+   "title": "Your Venus in their 3rd house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:venus:house:4",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "venus",
+    "partner": "a",
+    "house": 4
+   },
+   "atomIds": [
+    "synastry:overlay:a:venus:house:4"
+   ],
+   "title": "Your Venus in their 4th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:venus:house:5",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "venus",
+    "partner": "a",
+    "house": 5
+   },
+   "atomIds": [
+    "synastry:overlay:a:venus:house:5"
+   ],
+   "title": "Your Venus in their 5th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:venus:house:6",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "venus",
+    "partner": "a",
+    "house": 6
+   },
+   "atomIds": [
+    "synastry:overlay:a:venus:house:6"
+   ],
+   "title": "Your Venus in their 6th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:venus:house:7",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "venus",
+    "partner": "a",
+    "house": 7
+   },
+   "atomIds": [
+    "synastry:overlay:a:venus:house:7"
+   ],
+   "title": "Your Venus in their 7th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:venus:house:8",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "venus",
+    "partner": "a",
+    "house": 8
+   },
+   "atomIds": [
+    "synastry:overlay:a:venus:house:8"
+   ],
+   "title": "Your Venus in their 8th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:venus:house:9",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "venus",
+    "partner": "a",
+    "house": 9
+   },
+   "atomIds": [
+    "synastry:overlay:a:venus:house:9"
+   ],
+   "title": "Your Venus in their 9th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:venus:house:10",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "venus",
+    "partner": "a",
+    "house": 10
+   },
+   "atomIds": [
+    "synastry:overlay:a:venus:house:10"
+   ],
+   "title": "Your Venus in their 10th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:venus:house:11",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "venus",
+    "partner": "a",
+    "house": 11
+   },
+   "atomIds": [
+    "synastry:overlay:a:venus:house:11"
+   ],
+   "title": "Your Venus in their 11th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:venus:house:12",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "venus",
+    "partner": "a",
+    "house": 12
+   },
+   "atomIds": [
+    "synastry:overlay:a:venus:house:12"
+   ],
+   "title": "Your Venus in their 12th house",
+   "bindable": true
+  }
+ ]
+}

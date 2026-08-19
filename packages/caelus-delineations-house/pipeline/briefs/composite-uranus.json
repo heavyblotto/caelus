@@ -1,0 +1,176 @@
+{
+ "name": "composite-uranus",
+ "outFile": "b3-composite-uranus.json",
+ "setId": "house-b3-composite-uranus",
+ "family": "composite-placement",
+ "cells": [
+  {
+   "id": "composite:uranus:sign:aries",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "uranus",
+    "sign": "Aries"
+   },
+   "atomIds": [
+    "composite:uranus"
+   ],
+   "title": "Composite Uranus in Aries",
+   "bindable": true
+  },
+  {
+   "id": "composite:uranus:sign:taurus",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "uranus",
+    "sign": "Taurus"
+   },
+   "atomIds": [
+    "composite:uranus"
+   ],
+   "title": "Composite Uranus in Taurus",
+   "bindable": true
+  },
+  {
+   "id": "composite:uranus:sign:gemini",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "uranus",
+    "sign": "Gemini"
+   },
+   "atomIds": [
+    "composite:uranus"
+   ],
+   "title": "Composite Uranus in Gemini",
+   "bindable": true
+  },
+  {
+   "id": "composite:uranus:sign:cancer",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "uranus",
+    "sign": "Cancer"
+   },
+   "atomIds": [
+    "composite:uranus"
+   ],
+   "title": "Composite Uranus in Cancer",
+   "bindable": true
+  },
+  {
+   "id": "composite:uranus:sign:leo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "uranus",
+    "sign": "Leo"
+   },
+   "atomIds": [
+    "composite:uranus"
+   ],
+   "title": "Composite Uranus in Leo",
+   "bindable": true
+  },
+  {
+   "id": "composite:uranus:sign:virgo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "uranus",
+    "sign": "Virgo"
+   },
+   "atomIds": [
+    "composite:uranus"
+   ],
+   "title": "Composite Uranus in Virgo",
+   "bindable": true
+  },
+  {
+   "id": "composite:uranus:sign:libra",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "uranus",
+    "sign": "Libra"
+   },
+   "atomIds": [
+    "composite:uranus"
+   ],
+   "title": "Composite Uranus in Libra",
+   "bindable": true
+  },
+  {
+   "id": "composite:uranus:sign:scorpio",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "uranus",
+    "sign": "Scorpio"
+   },
+   "atomIds": [
+    "composite:uranus"
+   ],
+   "title": "Composite Uranus in Scorpio",
+   "bindable": true
+  },
+  {
+   "id": "composite:uranus:sign:sagittarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "uranus",
+    "sign": "Sagittarius"
+   },
+   "atomIds": [
+    "composite:uranus"
+   ],
+   "title": "Composite Uranus in Sagittarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:uranus:sign:capricorn",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "uranus",
+    "sign": "Capricorn"
+   },
+   "atomIds": [
+    "composite:uranus"
+   ],
+   "title": "Composite Uranus in Capricorn",
+   "bindable": true
+  },
+  {
+   "id": "composite:uranus:sign:aquarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "uranus",
+    "sign": "Aquarius"
+   },
+   "atomIds": [
+    "composite:uranus"
+   ],
+   "title": "Composite Uranus in Aquarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:uranus:sign:pisces",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "uranus",
+    "sign": "Pisces"
+   },
+   "atomIds": [
+    "composite:uranus"
+   ],
+   "title": "Composite Uranus in Pisces",
+   "bindable": true
+  }
+ ]
+}

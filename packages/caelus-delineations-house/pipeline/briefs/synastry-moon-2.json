@@ -1,0 +1,248 @@
+{
+ "name": "synastry-moon-2",
+ "outFile": "b3-synastry-moon-2.json",
+ "setId": "house-b3-synastry-moon-2",
+ "family": "synastry-aspect",
+ "cells": [
+  {
+   "id": "synastry:moon:conjunction:venus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "moon",
+    "b": "venus",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:moon~b_venus:conjunction"
+   ],
+   "title": "Your Moon conjunct their Venus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:moon:sextile:venus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "moon",
+    "b": "venus",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:moon~b_venus:sextile"
+   ],
+   "title": "Your Moon sextile their Venus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:moon:square:venus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "moon",
+    "b": "venus",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:moon~b_venus:square"
+   ],
+   "title": "Your Moon square their Venus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:moon:trine:venus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "moon",
+    "b": "venus",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:moon~b_venus:trine"
+   ],
+   "title": "Your Moon trine their Venus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:moon:opposition:venus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "moon",
+    "b": "venus",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:moon~b_venus:opposition"
+   ],
+   "title": "Your Moon opposite their Venus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:moon:conjunction:mars",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "moon",
+    "b": "mars",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:moon~b_mars:conjunction"
+   ],
+   "title": "Your Moon conjunct their Mars",
+   "bindable": true
+  },
+  {
+   "id": "synastry:moon:sextile:mars",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "moon",
+    "b": "mars",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:moon~b_mars:sextile"
+   ],
+   "title": "Your Moon sextile their Mars",
+   "bindable": true
+  },
+  {
+   "id": "synastry:moon:square:mars",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "moon",
+    "b": "mars",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:moon~b_mars:square"
+   ],
+   "title": "Your Moon square their Mars",
+   "bindable": true
+  },
+  {
+   "id": "synastry:moon:trine:mars",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "moon",
+    "b": "mars",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:moon~b_mars:trine"
+   ],
+   "title": "Your Moon trine their Mars",
+   "bindable": true
+  },
+  {
+   "id": "synastry:moon:opposition:mars",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "moon",
+    "b": "mars",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:moon~b_mars:opposition"
+   ],
+   "title": "Your Moon opposite their Mars",
+   "bindable": true
+  },
+  {
+   "id": "synastry:moon:conjunction:jupiter",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "moon",
+    "b": "jupiter",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:moon~b_jupiter:conjunction"
+   ],
+   "title": "Your Moon conjunct their Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "synastry:moon:sextile:jupiter",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "moon",
+    "b": "jupiter",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:moon~b_jupiter:sextile"
+   ],
+   "title": "Your Moon sextile their Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "synastry:moon:square:jupiter",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "moon",
+    "b": "jupiter",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:moon~b_jupiter:square"
+   ],
+   "title": "Your Moon square their Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "synastry:moon:trine:jupiter",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "moon",
+    "b": "jupiter",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:moon~b_jupiter:trine"
+   ],
+   "title": "Your Moon trine their Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "synastry:moon:opposition:jupiter",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "moon",
+    "b": "jupiter",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:moon~b_jupiter:opposition"
+   ],
+   "title": "Your Moon opposite their Jupiter",
+   "bindable": true
+  }
+ ]
+}

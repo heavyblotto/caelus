@@ -1,0 +1,176 @@
+{
+ "name": "composite-neptune",
+ "outFile": "b3-composite-neptune.json",
+ "setId": "house-b3-composite-neptune",
+ "family": "composite-placement",
+ "cells": [
+  {
+   "id": "composite:neptune:sign:aries",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "neptune",
+    "sign": "Aries"
+   },
+   "atomIds": [
+    "composite:neptune"
+   ],
+   "title": "Composite Neptune in Aries",
+   "bindable": true
+  },
+  {
+   "id": "composite:neptune:sign:taurus",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "neptune",
+    "sign": "Taurus"
+   },
+   "atomIds": [
+    "composite:neptune"
+   ],
+   "title": "Composite Neptune in Taurus",
+   "bindable": true
+  },
+  {
+   "id": "composite:neptune:sign:gemini",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "neptune",
+    "sign": "Gemini"
+   },
+   "atomIds": [
+    "composite:neptune"
+   ],
+   "title": "Composite Neptune in Gemini",
+   "bindable": true
+  },
+  {
+   "id": "composite:neptune:sign:cancer",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "neptune",
+    "sign": "Cancer"
+   },
+   "atomIds": [
+    "composite:neptune"
+   ],
+   "title": "Composite Neptune in Cancer",
+   "bindable": true
+  },
+  {
+   "id": "composite:neptune:sign:leo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "neptune",
+    "sign": "Leo"
+   },
+   "atomIds": [
+    "composite:neptune"
+   ],
+   "title": "Composite Neptune in Leo",
+   "bindable": true
+  },
+  {
+   "id": "composite:neptune:sign:virgo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "neptune",
+    "sign": "Virgo"
+   },
+   "atomIds": [
+    "composite:neptune"
+   ],
+   "title": "Composite Neptune in Virgo",
+   "bindable": true
+  },
+  {
+   "id": "composite:neptune:sign:libra",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "neptune",
+    "sign": "Libra"
+   },
+   "atomIds": [
+    "composite:neptune"
+   ],
+   "title": "Composite Neptune in Libra",
+   "bindable": true
+  },
+  {
+   "id": "composite:neptune:sign:scorpio",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "neptune",
+    "sign": "Scorpio"
+   },
+   "atomIds": [
+    "composite:neptune"
+   ],
+   "title": "Composite Neptune in Scorpio",
+   "bindable": true
+  },
+  {
+   "id": "composite:neptune:sign:sagittarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "neptune",
+    "sign": "Sagittarius"
+   },
+   "atomIds": [
+    "composite:neptune"
+   ],
+   "title": "Composite Neptune in Sagittarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:neptune:sign:capricorn",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "neptune",
+    "sign": "Capricorn"
+   },
+   "atomIds": [
+    "composite:neptune"
+   ],
+   "title": "Composite Neptune in Capricorn",
+   "bindable": true
+  },
+  {
+   "id": "composite:neptune:sign:aquarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "neptune",
+    "sign": "Aquarius"
+   },
+   "atomIds": [
+    "composite:neptune"
+   ],
+   "title": "Composite Neptune in Aquarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:neptune:sign:pisces",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "neptune",
+    "sign": "Pisces"
+   },
+   "atomIds": [
+    "composite:neptune"
+   ],
+   "title": "Composite Neptune in Pisces",
+   "bindable": true
+  }
+ ]
+}

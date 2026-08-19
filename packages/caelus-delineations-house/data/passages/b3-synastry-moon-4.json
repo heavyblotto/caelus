@@ -1,0 +1,77 @@
+[
+ {
+  "id": "synastry:moon:conjunction:pluto",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "moon",
+   "b": "pluto",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "synastry:moon~b_pluto:conjunction"
+  ],
+  "text": "Meeting them, your guard did not get much of a chance to go up. Your Moon holds your reflexes: what settles you, what you reach for when a day has gone badly, the mood you keep as a baseline. Their Pluto sits on top of all of it. From your side the effect is that ordinary contact goes deep quickly, without either of you deciding it should. Small talk collapses. You find yourself saying things you had not planned to say, or saying nothing and feeling that the nothing was already read. What their Pluto does to your Moon is refuse the surface. Whatever you keep smoothed over, they tend to look straight at, sometimes on purpose and often just by being present. Feelings you had filed away as settled come back up in their company with the original weight still attached. That can be a relief, because you are not being asked to perform an easier mood than the one you actually have. It can also be exposure you did not schedule. Your habits of comfort work partly by keeping some things quiet, and around them the quiet does not hold as well. Your Moon gives them something back, and it is plainer than it sounds. Pluto in anyone's chart runs on intensity that has nowhere ordinary to go. Your Moon offers ordinary ground: meals, weather, moods, the small currency of daily care. They may find that their heaviest material becomes livable when it is attached to your routine, and they may come to lean on that ground more than either of you expected. The pressure in this contact gathers around control of feeling, and it can run in both directions. You may catch yourself watching them closely, tracking their mood the way you check the sky before a long drive. You may hold back a reaction because you sense the reaction would matter too much. They may find your needs pulling at something in them they usually keep shut. None of that predicts how either of you behaves; the geometry describes a charge, not a character. What tends to change in you over time is what counts as safe. This contact makes the thin version of comfort hard to keep, and the version that replaces it is sturdier, built from what has already been seen rather than what has been kept out of view. You learn what your moods are made of, because someone stood close enough to notice. Whatever this bond turns out to be, the part of you that feels does not come out of it unrevised."
+ },
+ {
+  "id": "synastry:moon:sextile:pluto",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "moon",
+   "b": "pluto",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "synastry:moon~b_pluto:sextile"
+  ],
+  "text": "Sextiles work by invitation, so this one waits on you. Your Moon and their Pluto are within reach of each other, close enough to trade, far enough apart that neither is forced. In practice that means depth is available in this bond whenever you go and get it, and the days you do not go and get it pass pleasantly enough. When you do reach, what you find is that your feelings get taken seriously without being made heavy. You can bring them a real trouble rather than a summarized one, and they neither flinch nor turn it into a crisis. Their tolerance for the underside of things gives your moods somewhere to go besides around and around in your own head. Many people with this contact describe conversations that changed something quietly, with no scene attached. From their side, your Moon offers a way in that costs them little. Pluto tends to show up in people's lives as pressure; here it shows up as attention. Your instinct for comfort makes it easier for them to say the buried thing, because you are not going to make a project out of it afterward. That can matter to them more than it looks from where you stand. The limitation is the same as the gift. Nothing in a sextile insists. If the two of you keep the exchange to what is easy, this contact will spend years as a pleasant sense that you could talk about anything, without either of you doing it, and the depth stays theoretical. The intensity also shows up in a low register that is easy to miss. Around them you may notice that your reactions have more reach than usual, that a mood you would have shrugged off alone becomes something you want to understand. That is the contact working. It does not have to be dramatic to be real. What grows here grows slowly. Each time you bring them something you would normally handle by yourself, your own emotional range widens a little, because you find out that heavy material can be spoken about without the room catching fire. Over a long acquaintance that adds up to a particular kind of trust: not the trust that nothing hard will happen, but the trust that hard things can be said out loud."
+ },
+ {
+  "id": "synastry:moon:square:pluto",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "moon",
+   "b": "pluto",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "synastry:moon~b_pluto:square"
+  ],
+  "text": "Nothing you have just calmed down about stays that way for long. Your Moon wants a settled mood, reached by familiar means and kept for a while. Their Pluto has little patience for a settled surface and tends to arrive exactly when you have finally got one. A square does not blend two functions; it makes each interrupt the other, and the interruption is where the work happens. Concretely, you may feel pressed. Something in the way they hold a subject, or refuse to let a subject drop, reaches the part of you that manages feeling by keeping it manageable. Your reflex is to soothe, redirect, wait for the weather to pass. Theirs is to look for what sits underneath. When those meet at right angles, your calm can read to them as evasion, and their persistence can read to you as force, and both readings can be sincere. You are not only on the receiving end of this. Your Moon puts a demand on their Pluto that few things do: it asks for daily, ordinary responsiveness, and depth is not always able to supply that. Your needs surface the places where their intensity fails to turn into care that shows up on a Tuesday. That is a genuine strain for them, and it is one of the few pressures that makes Pluto in a chart negotiate rather than dig in. What this square guarantees is force between two functions, and nothing at all about how either of you handles force. Two people with this aspect between them can build a bond where feeling gets dug up and rebuilt, or a standoff where one guards and the other pushes, and the geometry does not choose between those. What it does supply is traction. Anything between you that would normally be left alone gets picked up and turned over. Moods you would carry alone become visible because they meet resistance. Attachments you would keep quiet get tested by contact with something that does not treat them as small. Over time you tend to lose the ability to fake a feeling in front of them, which is uncomfortable and also useful. The growth is in finding out what your comfort was protecting. Each time you meet their intensity without either matching it or smoothing it away, you learn that your emotional footing is steadier than the reflex assumed. The square keeps asking. That is the whole of its function."
+ },
+ {
+  "id": "synastry:moon:trine:pluto",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "moon",
+   "b": "pluto",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "synastry:moon~b_pluto:trine"
+  ],
+  "text": "Depth moves easily between you here, which is worth looking at precisely because it costs so little. Your Moon reaches their Pluto without friction. The serious end of your feeling life connects to the serious end of theirs, and neither of you has to build the bridge. In practice you tend to trust them with material you do not hand around. Not because they earned it in any visible way, but because the intensity in them does not alarm the instinctive part of you. Other people find that same quality heavy; you find it steady. Your moods can go all the way down in their company and come back up, and the ease of that is the aspect. The part of themselves that most people back away from finds you easy to sit with. Pluto in a chart carries what a person has survived and what they will not say lightly. Your feeling nature meets that without needing it softened, and without treating it as a spectacle. Most people cannot manage that, and it can make you one of the few around whom they let go of some effort. Inertia is the thing to watch in a trine. Because the exchange runs easily, it can run on habit. You may find the two of you going deep as a routine, mistaking familiarity with each other's underside for progress in it. Intensity that never has to justify itself settles into a comfortable groove, and nothing in this contact will interrupt the groove for you. A soft aspect supplies capacity, not motion. There is a quieter risk in how much you come to rely on the ease. If they become the only person you take real weight to, your other attachments can thin at the edges without anyone deciding they should. What this contact tends to build, when it gets used rather than coasted on, is durability. The two of you develop a working knowledge of each other at depth, so a bad stretch does not require re-establishing who you are to one another. You already know. That knowledge is the aspect's actual product, and it accumulates whether the bond stays close or moves to the background of your life."
+ },
+ {
+  "id": "synastry:moon:opposition:pluto",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "moon",
+   "b": "pluto",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "synastry:moon~b_pluto:opposition"
+  ],
+  "text": "Oppositions put two functions across a table from each other, and this one seats your need for safety opposite their instinct for what is real. Nothing is blended. You are facing, and each of you sees in the other something you do not carry yourself. From where you sit, they can look like weather that shows up without notice. Your Moon works by pattern: the same reassurances, the same routines, the same handful of people. Their Pluto works by pressure, finding where the pattern is thin and staying there. Being across from that is uncomfortable, and it is also clarifying, because you learn quickly which of your comforts are load-bearing and which are only familiar. What you send back is just as hard for them to wave off. Your ordinary need to be cared for, plainly and repeatedly, lands on the part of them that does not do plain and repeated. A person can hold enormous weight and still be caught out by someone asking for warmth on a normal evening. Across an opposition, that request does not go away, and it is one of the few things that reaches them. The familiar experience of this contact is the pull. Attachment here tends to run ahead of your own assessment of the person, and staying neutral about them is harder than it is with almost anyone else. Emotional distance is difficult to hold. That pull is a feature of the angle rather than an assessment of either person. Oppositions also complete. Each of you holds half of something: you can make a situation feel survivable, they can see what is actually happening in it. Alone, your half goes soft and theirs goes bleak. In contact, the two correct each other, and the correction is available every time you let their reading of a thing change yours, and let your need for solid ground stand as a legitimate claim rather than a weakness. What you tend to take from this over years is a wider tolerance. Feelings you once handled by keeping them small get room, because sitting opposite someone who does not shrink from depth makes shrinking harder to justify. You do not become them. You become a version of yourself that can stand in front of intensity without absorbing it and without leaving the room, and that steadiness stays with you well past this particular bond."
+ }
+]

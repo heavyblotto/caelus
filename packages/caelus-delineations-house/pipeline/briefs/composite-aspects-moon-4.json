@@ -1,0 +1,83 @@
+{
+ "name": "composite-aspects-moon-4",
+ "outFile": "b3-composite-aspects-moon-4.json",
+ "setId": "house-b3-composite-aspects-moon-4",
+ "family": "composite-aspect",
+ "cells": [
+  {
+   "id": "composite:aspect:moon:conjunction:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "true_node",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:moon~true_node:conjunction"
+   ],
+   "title": "Composite Moon conjunct composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:sextile:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "true_node",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:moon~true_node:sextile"
+   ],
+   "title": "Composite Moon sextile composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:square:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "true_node",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:moon~true_node:square"
+   ],
+   "title": "Composite Moon square composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:trine:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "true_node",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:moon~true_node:trine"
+   ],
+   "title": "Composite Moon trine composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:opposition:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "true_node",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:moon~true_node:opposition"
+   ],
+   "title": "Composite Moon opposite composite North Node",
+   "bindable": true
+  }
+ ]
+}

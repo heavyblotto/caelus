@@ -1,0 +1,233 @@
+{
+ "name": "composite-aspects-mars-2",
+ "outFile": "b3-composite-aspects-mars-2.json",
+ "setId": "house-b3-composite-aspects-mars-2",
+ "family": "composite-aspect",
+ "cells": [
+  {
+   "id": "composite:aspect:mars:conjunction:neptune",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "neptune",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:mars~neptune:conjunction"
+   ],
+   "title": "Composite Mars conjunct composite Neptune",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:sextile:neptune",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "neptune",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:mars~neptune:sextile"
+   ],
+   "title": "Composite Mars sextile composite Neptune",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:square:neptune",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "neptune",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:mars~neptune:square"
+   ],
+   "title": "Composite Mars square composite Neptune",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:trine:neptune",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "neptune",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:mars~neptune:trine"
+   ],
+   "title": "Composite Mars trine composite Neptune",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:opposition:neptune",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "neptune",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:mars~neptune:opposition"
+   ],
+   "title": "Composite Mars opposite composite Neptune",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:conjunction:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "pluto",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:mars~pluto:conjunction"
+   ],
+   "title": "Composite Mars conjunct composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:sextile:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "pluto",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:mars~pluto:sextile"
+   ],
+   "title": "Composite Mars sextile composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:square:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "pluto",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:mars~pluto:square"
+   ],
+   "title": "Composite Mars square composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:trine:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "pluto",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:mars~pluto:trine"
+   ],
+   "title": "Composite Mars trine composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:opposition:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "pluto",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:mars~pluto:opposition"
+   ],
+   "title": "Composite Mars opposite composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:conjunction:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "chiron",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:mars~chiron:conjunction"
+   ],
+   "title": "Composite Mars conjunct composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:sextile:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "chiron",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:mars~chiron:sextile"
+   ],
+   "title": "Composite Mars sextile composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:square:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "chiron",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:mars~chiron:square"
+   ],
+   "title": "Composite Mars square composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:trine:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "chiron",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:mars~chiron:trine"
+   ],
+   "title": "Composite Mars trine composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mars:opposition:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mars",
+    "b": "chiron",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:mars~chiron:opposition"
+   ],
+   "title": "Composite Mars opposite composite Chiron",
+   "bindable": true
+  }
+ ]
+}

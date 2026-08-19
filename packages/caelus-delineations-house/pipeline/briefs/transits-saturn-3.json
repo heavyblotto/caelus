@@ -1,0 +1,233 @@
+{
+ "name": "transits-saturn-3",
+ "outFile": "b2-transits-saturn-3.json",
+ "setId": "house-b2-transits-saturn-3",
+ "family": "transit-aspect",
+ "cells": [
+  {
+   "id": "transit:saturn:conjunction:saturn",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "saturn",
+    "natal": "saturn",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:saturn~natal_saturn:conjunction"
+   ],
+   "title": "Transiting Saturn conjunct your natal Saturn",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:sextile:saturn",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "saturn",
+    "natal": "saturn",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:saturn~natal_saturn:sextile"
+   ],
+   "title": "Transiting Saturn sextile your natal Saturn",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:square:saturn",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "saturn",
+    "natal": "saturn",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:saturn~natal_saturn:square"
+   ],
+   "title": "Transiting Saturn square your natal Saturn",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:trine:saturn",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "saturn",
+    "natal": "saturn",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:saturn~natal_saturn:trine"
+   ],
+   "title": "Transiting Saturn trine your natal Saturn",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:opposition:saturn",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "saturn",
+    "natal": "saturn",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:saturn~natal_saturn:opposition"
+   ],
+   "title": "Transiting Saturn opposite your natal Saturn",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:conjunction:uranus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "saturn",
+    "natal": "uranus",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:saturn~natal_uranus:conjunction"
+   ],
+   "title": "Transiting Saturn conjunct your natal Uranus",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:sextile:uranus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "saturn",
+    "natal": "uranus",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:saturn~natal_uranus:sextile"
+   ],
+   "title": "Transiting Saturn sextile your natal Uranus",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:square:uranus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "saturn",
+    "natal": "uranus",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:saturn~natal_uranus:square"
+   ],
+   "title": "Transiting Saturn square your natal Uranus",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:trine:uranus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "saturn",
+    "natal": "uranus",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:saturn~natal_uranus:trine"
+   ],
+   "title": "Transiting Saturn trine your natal Uranus",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:opposition:uranus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "saturn",
+    "natal": "uranus",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:saturn~natal_uranus:opposition"
+   ],
+   "title": "Transiting Saturn opposite your natal Uranus",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:conjunction:neptune",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "saturn",
+    "natal": "neptune",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:saturn~natal_neptune:conjunction"
+   ],
+   "title": "Transiting Saturn conjunct your natal Neptune",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:sextile:neptune",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "saturn",
+    "natal": "neptune",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:saturn~natal_neptune:sextile"
+   ],
+   "title": "Transiting Saturn sextile your natal Neptune",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:square:neptune",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "saturn",
+    "natal": "neptune",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:saturn~natal_neptune:square"
+   ],
+   "title": "Transiting Saturn square your natal Neptune",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:trine:neptune",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "saturn",
+    "natal": "neptune",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:saturn~natal_neptune:trine"
+   ],
+   "title": "Transiting Saturn trine your natal Neptune",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:opposition:neptune",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "saturn",
+    "natal": "neptune",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:saturn~natal_neptune:opposition"
+   ],
+   "title": "Transiting Saturn opposite your natal Neptune",
+   "bindable": true
+  }
+ ]
+}

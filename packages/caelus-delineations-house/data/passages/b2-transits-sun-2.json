@@ -1,0 +1,212 @@
+[
+ {
+  "id": "transit:sun:conjunction:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "venus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:sun~natal_venus:conjunction"
+  ],
+  "text": "Once a year the Sun crosses your natal Venus, and for a few days the loving, pleasure-seeking side of you stands in full light. This is a warm, sociable pass. Affection comes easier, both giving it and receiving it, and you care more than usual about beauty, comfort, and good company. While the aspect is applying you may notice the mood before you can name it: a wish to call someone, to tidy the room, to make the evening nicer than it needs to be. At the exact pass the warmth peaks. People tend to respond well to you now, and you tend to respond well to them, so this is a natural moment for a date, a gathering, a small reconciliation, or simply telling someone what they mean to you. Creative work benefits too. Your eye is better than usual, and anything that involves taste, color, arrangement, or tone goes more smoothly. As the Sun separates, the glow settles into something quieter, and ordinary preferences return. The shadow of the transit is mild but real. Wanting to be liked can shade into flattery, and wanting comfort can drift toward indulgence, so you may spend a little freely or say yes a little easily. Nothing here forces anything; the conjunction simply merges your sense of self with your sense of what is lovely, and for a short while you show the world the version of you that enjoys things openly. Since the Sun never slows or doubles back, there is no second pass to wait for. The transit arrives, brightens, and moves on within days, then returns at the same point of the year, every year, like a small private holiday. That rhythm is worth something. Each pass gives you a fresh reading of what you currently find beautiful and who you currently want close, and those readings change more than most people expect. A pleasure that lit you up a few years ago may leave you flat today, and something you never noticed may suddenly charm you. Let it be a check-in rather than an event. If your relationships are in good repair, the day tends to confirm it with warmth. If something has gone cold, the contrast is easier to feel now, gently, without a crisis attached. You grow with this transit by taking your own affections seriously as information: what you love is part of who you are, and once a year the sky puts the two in the same place so you can see them together."
+ },
+ {
+  "id": "transit:sun:sextile:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "venus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:sun~natal_venus:sextile"
+  ],
+  "text": "An easy, friendly current runs through these few days, and it rewards a small effort. The Sun's sextile to your natal Venus does not hand you anything outright; it opens doors that stay closed unless you walk through them. Social life is where the offer usually shows first. An invitation appears, a colleague is warmer than usual, a conversation could turn into a real connection if you extend it one more sentence. The same goes for taste and craft: this is a good moment to show someone your work, to fix the corner of your home that bothers you, or to buy the one nice thing you have been putting off deciding about. While the aspect applies, you may feel mildly more agreeable and more interested in people, a low hum rather than a wave. The exact pass is the sweet spot, when charm and timing line up and asking for something pleasant tends to get a pleasant answer. Afterward the current fades fast, and whatever you did not pick up stays on the table. That is the character of a sextile: an offer, not a gift. Nothing goes wrong if you let it pass. The day simply stays ordinary, and few people can tell the difference between an ordinary day and a missed one. Because the transiting Sun moves briskly and never retraces its steps, this window is short, a matter of days, and it comes back around every year. Over time you can learn its use. It suits maintenance more than drama: the birthday message you almost skip, the thank-you that is slightly overdue, the light social risk like joining the table where you know only one person. It also suits negotiation of the mild kind, since goodwill is easier to find on both sides and small favors are granted more readily. In love, existing bonds enjoy the ease more than new sparks demand it; a relaxed evening now can repay a tense week. In work, cooperation costs less than usual, so shared tasks move. What you practice under this sky is a modest skill with a long reach: noticing when conditions are friendly and acting while they are. Pleasant openings rarely announce themselves loudly, here or anywhere else, and a person who learns to take the quiet ones a few times a year ends up with a warmer life than luck alone would explain."
+ },
+ {
+  "id": "transit:sun:square:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "venus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:sun~natal_venus:square"
+  ],
+  "text": "For a day or two, what you want and what the moment demands rub against each other. The Sun's square to your natal Venus is a brief, low-grade friction between will and affection: your agenda pushes one way, your wish for ease and approval pulls another. It can surface as small relationship static. You may feel underappreciated, or someone may find you a bit self-absorbed, and both readings can be true at once. It can also surface as appetite. Comfort calls louder than usual, and the pull toward the purchase, the dessert, the extra hour of doing nothing gains an edge of now-or-never that it does not deserve. While the square is applying, irritation gathers in the background: plans feel slightly off, tastes clash, the compliment you wanted does not come. At the exact pass the tension is most visible, and this is where the transit earns its keep, because what annoys you now is precise information. A flash of envy points at something you want and have not admitted. A sulk points at a need you have not spoken. A conflict over money or plans points at a value difference that was always there and is briefly easier to see. As the aspect separates, the static drains away quickly, usually leaving no damage unless you spent the peak forcing a point. Squares from the Sun are short. This one lasts days, returns as the Sun circles your chart each year, and never lingers or doubles back for a second pass within the visit. That brevity is your ally: you can afford to feel the friction fully without acting on all of it. Let the wanting be loud inside and modest outside. Postpone the purchase a day and see if it survives the wait. Say the need plainly instead of testing whether someone will guess it. In love, the useful move is honesty about small dissatisfactions before they compound; in work, it is separating the wish to be liked from the need to decide. You grow with this transit by learning that desire and duty are not enemies, just two claims that sometimes arrive at the same hour. Handled plainly, the square leaves you knowing your own values one notch better than last week, which is a fair trade for a couple of scratchy days."
+ },
+ {
+  "id": "transit:sun:trine:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "venus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:sun~natal_venus:trine"
+  ],
+  "text": "Some transits arrive like weather you can point to; this one is more like a good mood the day seems to have on your behalf. When the transiting Sun trines your natal Venus, affection, taste, and social ease all run downhill. People are easier to please and easier to enjoy. Your manner lands well without calculation, small kindnesses come naturally in both directions, and surroundings you normally tune out, light, music, the look of a room, register again as pleasure. The applying phase feels like softening: the schedule seems less like a cage, and company sounds better than solitude. Around the exact pass, harmony peaks quietly. This is a fine window for anything that goes better in a warm atmosphere: a difficult conversation you want to keep kind, a first meeting, a presentation of creative work, hosting, mending. Agreements reached now tend to be reached gracefully, though they still need the ordinary follow-through once the mood has passed. As the trine separates, nothing snaps shut; the ease just thins out until regular friction resumes. The one weakness of this transit is that it asks nothing. Trines do not push, so their days can slip past as merely pleasant, a nice afternoon you cannot remember by the weekend. If you want more than a mood from it, give the ease a task. Reach out to the person you have been meaning to reach. Put the finishing touch on the thing you made. Enjoy something deliberately instead of in passing, since attention is what turns pleasure into memory. The Sun keeps its steady pace, so the window is only a few days wide and there is no second pass to catch later; it comes around twice in every year, reliably, like a season in miniature. Over many returns this transit can teach you something unshowy about your own happiness: it rarely arrives as an event, and mostly it is a matter of noticing the days when liking things is easy and letting yourself like them. Life under this sky is not better than usual; it is the usual life with the resistance briefly turned down. What you carry out of it, if you carry anything, is the reminder of how you and the people around you behave when nothing is being defended, which is a useful thing to remember when the harder skies return."
+ },
+ {
+  "id": "transit:sun:opposition:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "venus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:sun~natal_venus:opposition"
+  ],
+  "text": "Right now the Sun stands directly across the sky from your natal Venus, and the space between you and other people becomes the interesting part of the week. Oppositions work through encounter. For these few days, your affections meet you from the outside: a partner, a friend, a colleague, even a stranger plays back what you value, sometimes by matching it and sometimes by wanting exactly the opposite. The classic shape is a tug between your own agenda and someone else's comfort. You want to press ahead; they want the evening pleasant. You want appreciation; they want cooperation. Neither claim is wrong, and the transit will not settle the question for you, it only sets the two ends of the rope in plain view. While the opposition builds, you may notice relationships taking up more of your attention than usual, with a slight anticipatory charge, as if something between you and another person wants to be said. At the exact pass, it often is said, or shown. A bond can feel unusually sweet now, or its imbalance can become impossible to unsee: who gives, who decides, who adjusts. Either way you are looking at something real. As the Sun moves on, the charge fades within days and the relationship returns to its normal footing, with whatever you noticed still noticed. This confrontation is gentle by opposition standards. Venus is involved, so the ground is affection, beauty, shared money, and taste, not raw conflict, and most passes amount to a conversation or a mood rather than a scene. The pass is quick, since the Sun never pauses or backtracks, and it returns once each year like an annual appointment with your closest mirror. The skill it rewards is symmetry. Ask what the other person is experiencing on their side of the rope before you pull again. Offer the appreciation you are hoping to receive. If a compromise is available, this is a good window for it, because both parties can usually feel what the relationship itself needs, as a third thing distinct from either of them. You grow through this transit by letting other people show you your own values from the far side. What you love sits so close to you that you often cannot see it; once a year, briefly, someone else holds it up at arm's length where you can."
+ },
+ {
+  "id": "transit:sun:conjunction:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "mars",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:sun~natal_mars:conjunction"
+  ],
+  "text": "The Sun has reached your natal Mars, and the effect is a fusion of identity and drive: for a few days, being yourself and asserting yourself feel like the same act. Energy runs high. Tasks that dragged all month suddenly look finishable, your patience for obstacles drops, and your temper sits closer to the surface than usual, along with your courage. In the applying days you may feel restless before you feel strong, an itch to move without a clear object. Give it one. This transit is at its best with a target: the workout, the backlog, the difficult phone call, the project that needs a push only you can give. At the exact pass, initiative peaks. Starting things now feels natural, and beginnings made under this sky carry real momentum, though they will need steadier fuel later, since the boost is brief. The cost side is equally plain. Haste rises with confidence, so this is a window for stubbed toes, snapped answers, and arguments that begin over nothing because your threshold for friction is low. If someone challenges you near the peak, the urge to meet force with force arrives before thought does. The heat drains quickly once the Sun separates, often leaving you tired in a satisfied way if the energy found work to do, and irritable if it did not, because unused drive tends to sour into friction with whoever is nearby. The whole pass lasts days, not weeks, and since the Sun never doubles back there is no second wave to brace for; the same charge returns at the same time each year, a reliable annual peak in your fighting spirit. Knowing the rhythm changes how you use it. Some people learn to stack their boldest moves in this window, asking for the raise, entering the race, opening the negotiation, because self-assertion costs them least here. Others mainly learn where their anger lives, since whatever you have been suppressing tends to speak up when Mars is lit. Both lessons repay attention. You grow with this transit by treating aggression as fuel with a choice of engines: the same heat that makes the quarrel makes the finished work, and a few days a year the sky hands you more of it than usual and watches what you build."
+ },
+ {
+  "id": "transit:sun:sextile:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "mars",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:sun~natal_mars:sextile"
+  ],
+  "text": "Think of these few days as a standing offer of clean energy. The Sun's sextile to your natal Mars puts drive within easy reach without forcing anything: you are a little braver, a little more decisive, a little more physical, but only if you pick the energy up and use it. Left alone, the transit passes as a faintly restless stretch that produces nothing in particular. Claimed, it moves real weight. The stalled task is the natural first target. Something you have circled for weeks, the awkward email, the repair, the decision with no perfect option, yields now with surprisingly little pain, because the gap between deciding and doing is temporarily narrow. Your body wants employment too. Exercise lands better than usual, and effort of any kind tends to leave you energized rather than spent. In dealings with people, the sextile favors plain, friendly assertion. You can say what you want without the edge that sometimes comes with it, ask directly, decline directly, and be respected for both. Competitive situations go well when you engage them by choice rather than being dragged in. As the aspect applies, you may notice initiative gathering as a mild impatience with your own delays; the exact pass is the best footing for the first move; once it separates, momentum you started keeps rolling but new starts get harder again. There is no drama here to manage and no return pass to wait for. The Sun moves quickly and does not turn back, so the window closes in days and reopens on schedule every year. The only real way to waste it is to spend it proving that nothing was wrong with waiting. A sextile never insists, and that is its quiet test: it measures not your strength but your readiness to act when acting is cheap. Practicing on small things counts. Each time you convert one of these easy windows into a finished errand, a long run, or a plain request, you wear a groove between wanting and doing that stays useful in harder weather. Over the years that is what this little annual transit builds, less any single achievement than a working trust that when you decide to move, you actually move."
+ },
+ {
+  "id": "transit:sun:square:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "mars",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:sun~natal_mars:square"
+  ],
+  "text": "Friction is the theme of this short transit, and it rarely arrives politely. When the transiting Sun squares your natal Mars, your will and your circumstances grind against each other for a few days: delays infuriate, instructions chafe, other people's slowness feels personal, and your fuse runs shorter than you remember it being. The square forces energy out of you one way or another. If you give it honest work, hard exercise, a deadline sprint, a genuinely difficult problem, it burns clean and you end the days tired and oddly cheerful. If you give it nothing, it finds its own exits: snapped remarks, rushed mistakes, the argument about the dishes that is not about the dishes. In the applying phase the pressure is mostly internal, a tightness or impatience you can feel before there is anything to blame. Around the exact pass, sparks jump more easily to the outside world. Conflicts that ignite now tend to be fast and hot rather than deep, and the honest question to ask mid-flare is what you are actually angry about, because this square has a talent for pulling old, unrelated anger into present-tense quarrels. Physical haste deserves respect too: this is a classic window for the burned hand and the fender tap, not through any fate, simply because speed rises and care does not rise with it. The redeeming feature is brevity. The whole pass is a matter of days, the Sun never stalls or comes back for a rematch, and the same rough patch returns on a yearly rhythm you can learn to see coming. Separation brings a quick cooling, and whatever was said at the peak looks different by the weekend, which argues for keeping the sharpest sentences unsaid. Worked with rather than against, this square is genuinely useful. It shows you, on a schedule, where your assertion is blocked and where it leaks: the boundary you have not enforced, the resentment you have been paying in installments, the ambition you keep calling unrealistic so you will not have to attempt it. Anger under this sky is information arriving loudly. You grow with the transit by learning to read the message and choose the response as two separate steps, a skill that costs a few scratchy days a year to practice and pays off in every conflict you ever have."
+ },
+ {
+  "id": "transit:sun:trine:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "mars",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:sun~natal_mars:trine"
+  ],
+  "text": "Work goes downhill in the good sense for a few days: effort in, results out, less lost to friction than usual. The Sun's trine to your natal Mars aligns your sense of purpose with your supply of energy, and two normally quarrelsome partners cooperate. You feel capable, and the feeling is accurate. Physical vitality runs a notch higher. Confidence sits at the useful level, assertive but not spoiling for a fight. Tasks that need sustained push, long sessions, heavy lifting, the tedious middles of projects, move at a rate that surprises you. People read your directness as leadership rather than aggression now. That makes this one of the better windows all year for taking charge of something visible: running the meeting, making the pitch, organizing the move, saying plainly what should happen next. Competition suits the mood, and so does adventure of the moderate kind, the long hike, the hard game, the physical skill you have wanted to test. In the applying days you feel the engine warming, an appetite for effort more than any pressure; the exact pass is peak output; the separating days keep a pleasant momentum as the extra energy tapers back to your normal levels. What the trine will not do is make you use it. Ease without demand slides by, and a pass spent entirely on the couch is not a loss exactly, but it is a missed rehearsal, because these days show you your own effective self, the one who acts without the usual internal negotiation. That version of you is worth studying while it is here. Notice how little force clean assertion actually needs, how conflict fails to materialize when you are not braced for it, how much of your ordinary tiredness turns out to be resistance rather than a lack of fuel. The window is brief, days only, with no second pass to wait on, and it comes around every year like a scheduled tailwind. Trust built in easy conditions carries into hard ones. Each annual pass you spend doing something slightly beyond your usual nerve leaves a small deposit of evidence that you can, and that account is the real yield of a transit that otherwise just feels like a string of good days."
+ },
+ {
+  "id": "transit:sun:opposition:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "mars",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:sun~natal_mars:opposition"
+  ],
+  "text": "Expect the push to come from outside. With the transiting Sun opposite your natal Mars, other people carry the energy for a few days, and some of them carry it straight at you: the driver who cuts in, the colleague who challenges your plan in front of everyone, the family member spoiling for the argument you have both postponed. Oppositions stage encounters, and this one stages contests of will. The uncomfortable truth of the transit is that the provocation usually finds a matching charge in you. Your own combativeness is running high, projected outward, so opponents seem to appear everywhere just as you happen to be primed for them. In the applying days the air tightens; you may feel braced without knowing for what, quicker to read neutral acts as challenges. Near the exact pass, the confrontation tends to arrive, and how you meet it is the whole game. Meeting force with immediate force turns a two-day transit into a month of repair. Absorbing everything and saying nothing converts the heat into resentment, which keeps its own books. The strong middle path is standing ground without escalation: naming the disagreement, holding your position at conversational volume, letting the other person be as heated as they choose while you decline the invitation to match them. Competitive settings handle this energy best, since sport, debate, and honest rivalry give both sides a sanctioned place to push. As the Sun separates, the pressure drops fast, and many of these standoffs deflate so completely that you wonder what filled them. The pass is short, gone in days, never repeated within the visit since the Sun does not backtrack, and due again at the same season every year. Used well, it is an annual reading on how you handle opposition itself. Some years it catches you solid, and conflict leaves you clearer and even friendlier with the person who pushed. Other years it catches you tired, and you learn where your temper goes when your guard is down. Both are worth knowing. You grow with this transit by discovering that a challenge is not an emergency, that your position can survive being disagreed with, and that the will coming at you from across the table is made of the same material as your own."
+ },
+ {
+  "id": "transit:sun:conjunction:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "jupiter",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:sun~natal_jupiter:conjunction"
+  ],
+  "text": "Somewhere in every year there is a stretch of days when the horizon simply looks wider, and this is yours. The Sun conjunct your natal Jupiter merges your identity with your sense of possibility: confidence rises, generosity comes easily, and plans that seemed grandiose last month seem merely reasonable now. The mood is expansive in the plainest sense. You think in bigger units, forgive more readily, laugh more easily, and feel, sometimes for no visible reason, that things are on your side. Often something modest confirms it, a bit of good news, a door opening, a person saying yes. In the applying days optimism builds ahead of any evidence, a leaning-forward feeling; the exact pass is the peak, the best footing of the season for launching, asking, publishing, proposing, or celebrating; the separating days let the brightness settle into ordinary competence. Two cautions belong in the picture, both mild. Expansion inflates promises along with hopes, so commitments made at the peak should be reread once the mood cools, since you may have signed your future self up for the enthusiasm of your present one. And abundance invites excess, in food, spending, and talk; the same largeness that makes you generous can make you a bit much. Neither risk outweighs the gift. Days like these are when people ask for the raise, book the trip, start the venture, or finally believe a good thing about themselves that others have said for years. The window is brief, since the Sun holds a brisk pace and never circles back for a second touch, and it returns annually, which makes it a natural yearly review of your relationship with hope: what you dared to want at the last pass, what came of it, what you would dare now. Growth here stacks over years, and the aim is calibration rather than restraint. Optimism is a tool with a maintenance schedule, and this transit is when the sky services yours. Let it stretch your sense of what you may reasonably attempt, write down the plans that visit you at the peak, and keep the ones that still look sound in ordinary light. A few will. Those few are usually the truest large things in you, asking to be scheduled."
+ },
+ {
+  "id": "transit:sun:sextile:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "jupiter",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:sun~natal_jupiter:sextile"
+  ],
+  "text": "A door stands ajar for a few days, and that is the whole transit: the Sun's sextile to your natal Jupiter offers growth at a discount to anyone willing to push lightly. The atmosphere warms without drama. People are better disposed toward you, institutions are marginally more flexible, and your own outlook tilts a few degrees toward yes. None of it announces itself, which is why this pleasant little pass so often goes unused. The offers arrive dressed as ordinary moments: a mentor with a free half hour, an application you nearly do not send, a stranger at the edge of a gathering who turns out to know the world you are trying to enter, a good idea that shows up while you are doing something else. In the applying days you may register the mood as mild appetite, a wish for more room; at the exact pass, timing and goodwill line up best, and requests made now tend to receive their friendliest possible hearing; after separation the ordinary rates resume. What suits the window is the medium-sized move. Not the leap that needs a braver sky, and not the errand you would do anyway, but the step with a real upside and a small cost: the inquiry, the enrollment, the introduction, the first chapter, the ask. Learning benefits especially, since curiosity is up and comprehension seems to run cheaper than usual, and so does anything involving publishing, travel plans, teaching, or people at a distance. There is no rebound or second chance within the pass. The Sun keeps moving, the window closes in days, and the offer returns on its yearly schedule whether or not you took it last time, which removes any drama from missing one. Still, the passes you take compound quietly. Growth by sextile is unglamorous, a string of small yeses that, examined years later, explains a surprising amount of where you ended up. The habit this transit trains is receptivity with follow-through: noticing that a door is open, and actually walking, since luck of this mild kind attends the person already in motion and merely nods at everyone else."
+ },
+ {
+  "id": "transit:sun:square:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "jupiter",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:sun~natal_jupiter:square"
+  ],
+  "text": "Everything looks a size larger than it is for a couple of days, including your own capacity. The Sun square your natal Jupiter inflates confidence faster than it inflates resources: plans swell, appetites swell, promises swell, and the voice that usually asks how, exactly, gets shouted down by the voice that says why not. The friction in this square is between enthusiasm and proportion. You are not wrong to want more, and the wanting itself is genuine; the distortion is in scale. The project is worth doing at half the announced size. The purchase is sound at a lower price. The offer to help three people is generous, and you have time for one. In the applying days restlessness builds, a sense that your current life is too small, which is a real signal handled badly at full volume; near the exact pass the urge to overcommit peaks, and this is when the grand gesture, the sweeping promise, and the impulse buy are most tempting, not because the impulse is bad but because your estimate of the cost is at its yearly worst. Watch too for moral inflation, the special flavor of this square in arguments: certainty that you are right expands with everything else, and preaching tends to follow. Once the Sun separates, proportion returns fast, and you get the slightly embarrassing clarity of reading yesterday's plans at today's scale. The useful discipline is delay, not denial. Write the big idea down with all its glorious numbers, then price it after the weekend. Enthusiasm that survives the cooling is usually worth funding; enthusiasm that evaporates has cost you nothing but a page. The pass itself is brief and clean, days at most, with no second visit, since the Sun neither slows nor reverses, and the same test comes back around every year like a pop quiz in self-measurement. Over many years it can make you genuinely better at ambition. People who scale nothing stay small, and people who scale everything crash; this transit trains the third option, which is wanting largely while counting honestly. Each pass that ends with one kept promise instead of five broken ones is a pass that worked, whatever it felt like at the peak."
+ },
+ {
+  "id": "transit:sun:trine:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "jupiter",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:sun~natal_jupiter:trine"
+  ],
+  "text": "There are a few days each year when life seems to cooperate, and the Sun's trine to your natal Jupiter is usually one of them. Well-being rises for no dramatic reason. Your outlook widens, minor problems accept minor solutions, people meet you halfway, and the future reads as promising rather than pending. Nothing about the trine forces an event; it adjusts conditions, the way good weather adjusts a trip. Under it, growth-shaped activities go unusually smoothly: study, teaching, publishing, planning travel, dealing with people far away or institutions that normally move slowly, asking for support, and any conversation that needs both parties feeling roomy. Generosity flows in both directions, and gratitude is easy to locate, which by itself distinguishes these days from most. As the trine applies, optimism arrives quietly ahead of cause; at the exact pass, ease and confidence peak together, an excellent footing for the big-picture conversation or the graceful ask; in the separating days the mood glides back toward baseline without a bump. The trine's one liability is its comfort. Because nothing demands effort, the days can pass as merely nice, and the opportunity inside them, of doing an ambitious thing while conditions favor it, expires unnoticed. A trine used deliberately behaves like a tailwind, and a tailwind only matters if you are flying somewhere. So point yourself at something. Draft the proposal while belief is cheap. Have the conversation about the future while both of you feel expansive. Take the long view of your own life on purpose, since perspective, the true gift here, is briefly available at a fraction of its usual price, and decisions about direction made in this frame tend to age well. The window closes in days, without a return pass, and reopens each year with the reliability of a season, which lets you plan for it loosely once you know your own calendar. What accumulates over the years is perspective as a habit rather than a visitation: the trained ability to lift your head from the current difficulty and see the larger shape you are building. The sky lends you that view a few days a year, and every pass is a chance to memorize a little more of it."
+ },
+ {
+  "id": "transit:sun:opposition:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "jupiter",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:sun~natal_jupiter:opposition"
+  ],
+  "text": "The Sun now faces your natal Jupiter from across the chart, and the theme of the next few days is scale negotiated with other people. Oppositions arrive through encounter, so expect your sense of what is possible to be tested from outside: someone promises you more than they can deliver, or asks more of you than is reasonable, or matches your big plan with a bigger one, or plays the skeptic to your enthusiasm just when you wanted agreement. The transit is genial as confrontations go. Jupiter keeps the mood buoyant, and most of what it stirs up is negotiation rather than conflict, but the tug is real: your growth and someone else's expectations are briefly pulling on the same rope. Overcommitment is the classic trap. Goodwill runs high on both sides, and in the glow of the applying days it is remarkably easy to shake hands on a plan that neither party has costed. Near the exact pass, the gap between promise and capacity is at its widest and hardest to see, so the peak is the moment to double-check the arithmetic behind any agreement, especially one that flatters you. Watch also for contests of certainty. Opinions inflate opposite Jupiter, yours included, and a friendly debate can escalate into two people generously explaining the world to each other. The listening you do now is worth more than the winning. As the Sun moves on, proportions return within days, agreements reveal their true weight, and you can see which enthusiasms were shared and which were merely simultaneous. There is no second pass to renegotiate under; the Sun crosses once, briskly, and this particular mirror returns just once a year. Its annual visit makes a decent audit of your dealings: where you are overpromised, where you are underasking, which partnerships stretch you in ways you actually value and which only borrow your optimism. You grow with this transit by learning that other people are the natural test of your plans. A hope that survives a skeptic, a promise that survives an honest costing, a plan that survives being shared, these come out of the opposition sturdier than they went in, and that is the favor hiding inside the confrontation."
+ }
+]

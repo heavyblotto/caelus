@@ -1,0 +1,143 @@
+{
+ "name": "dasha-mahas",
+ "outFile": "b4-dasha-mahas.json",
+ "setId": "house-b4-dasha-mahas",
+ "family": "timelord-dasha",
+ "cells": [
+  {
+   "id": "timelord:dasha:maha:ketu",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "maha",
+    "lord": "ketu"
+   },
+   "atomIds": [
+    "dasha:maha:"
+   ],
+   "title": "The Ketu mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:maha:venus",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "maha",
+    "lord": "venus"
+   },
+   "atomIds": [
+    "dasha:maha:"
+   ],
+   "title": "The Venus mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:maha:sun",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "maha",
+    "lord": "sun"
+   },
+   "atomIds": [
+    "dasha:maha:"
+   ],
+   "title": "The Sun mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:maha:moon",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "maha",
+    "lord": "moon"
+   },
+   "atomIds": [
+    "dasha:maha:"
+   ],
+   "title": "The Moon mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:maha:mars",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "maha",
+    "lord": "mars"
+   },
+   "atomIds": [
+    "dasha:maha:"
+   ],
+   "title": "The Mars mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:maha:rahu",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "maha",
+    "lord": "rahu"
+   },
+   "atomIds": [
+    "dasha:maha:"
+   ],
+   "title": "The Rahu mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:maha:jupiter",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "maha",
+    "lord": "jupiter"
+   },
+   "atomIds": [
+    "dasha:maha:"
+   ],
+   "title": "The Jupiter mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:maha:saturn",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "maha",
+    "lord": "saturn"
+   },
+   "atomIds": [
+    "dasha:maha:"
+   ],
+   "title": "The Saturn mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:maha:mercury",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "maha",
+    "lord": "mercury"
+   },
+   "atomIds": [
+    "dasha:maha:"
+   ],
+   "title": "The Mercury mahadasha",
+   "bindable": true
+  }
+ ]
+}

@@ -1,0 +1,233 @@
+{
+ "name": "composite-aspects-uranus-1",
+ "outFile": "b3-composite-aspects-uranus-1.json",
+ "setId": "house-b3-composite-aspects-uranus-1",
+ "family": "composite-aspect",
+ "cells": [
+  {
+   "id": "composite:aspect:uranus:conjunction:neptune",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "neptune",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:uranus~neptune:conjunction"
+   ],
+   "title": "Composite Uranus conjunct composite Neptune",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:sextile:neptune",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "neptune",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:uranus~neptune:sextile"
+   ],
+   "title": "Composite Uranus sextile composite Neptune",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:square:neptune",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "neptune",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:uranus~neptune:square"
+   ],
+   "title": "Composite Uranus square composite Neptune",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:trine:neptune",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "neptune",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:uranus~neptune:trine"
+   ],
+   "title": "Composite Uranus trine composite Neptune",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:opposition:neptune",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "neptune",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:uranus~neptune:opposition"
+   ],
+   "title": "Composite Uranus opposite composite Neptune",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:conjunction:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "pluto",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:uranus~pluto:conjunction"
+   ],
+   "title": "Composite Uranus conjunct composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:sextile:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "pluto",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:uranus~pluto:sextile"
+   ],
+   "title": "Composite Uranus sextile composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:square:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "pluto",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:uranus~pluto:square"
+   ],
+   "title": "Composite Uranus square composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:trine:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "pluto",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:uranus~pluto:trine"
+   ],
+   "title": "Composite Uranus trine composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:opposition:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "pluto",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:uranus~pluto:opposition"
+   ],
+   "title": "Composite Uranus opposite composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:conjunction:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "chiron",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:uranus~chiron:conjunction"
+   ],
+   "title": "Composite Uranus conjunct composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:sextile:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "chiron",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:uranus~chiron:sextile"
+   ],
+   "title": "Composite Uranus sextile composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:square:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "chiron",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:uranus~chiron:square"
+   ],
+   "title": "Composite Uranus square composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:trine:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "chiron",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:uranus~chiron:trine"
+   ],
+   "title": "Composite Uranus trine composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:opposition:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "chiron",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:uranus~chiron:opposition"
+   ],
+   "title": "Composite Uranus opposite composite Chiron",
+   "bindable": true
+  }
+ ]
+}

@@ -1,0 +1,248 @@
+{
+ "name": "synastry-mars-3",
+ "outFile": "b3-synastry-mars-3.json",
+ "setId": "house-b3-synastry-mars-3",
+ "family": "synastry-aspect",
+ "cells": [
+  {
+   "id": "synastry:mars:conjunction:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mars",
+    "b": "saturn",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:mars~b_saturn:conjunction"
+   ],
+   "title": "Your Mars conjunct their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mars:sextile:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mars",
+    "b": "saturn",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:mars~b_saturn:sextile"
+   ],
+   "title": "Your Mars sextile their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mars:square:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mars",
+    "b": "saturn",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:mars~b_saturn:square"
+   ],
+   "title": "Your Mars square their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mars:trine:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mars",
+    "b": "saturn",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:mars~b_saturn:trine"
+   ],
+   "title": "Your Mars trine their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mars:opposition:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mars",
+    "b": "saturn",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:mars~b_saturn:opposition"
+   ],
+   "title": "Your Mars opposite their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mars:conjunction:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mars",
+    "b": "uranus",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:mars~b_uranus:conjunction"
+   ],
+   "title": "Your Mars conjunct their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mars:sextile:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mars",
+    "b": "uranus",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:mars~b_uranus:sextile"
+   ],
+   "title": "Your Mars sextile their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mars:square:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mars",
+    "b": "uranus",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:mars~b_uranus:square"
+   ],
+   "title": "Your Mars square their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mars:trine:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mars",
+    "b": "uranus",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:mars~b_uranus:trine"
+   ],
+   "title": "Your Mars trine their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mars:opposition:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mars",
+    "b": "uranus",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:mars~b_uranus:opposition"
+   ],
+   "title": "Your Mars opposite their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mars:conjunction:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mars",
+    "b": "neptune",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:mars~b_neptune:conjunction"
+   ],
+   "title": "Your Mars conjunct their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mars:sextile:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mars",
+    "b": "neptune",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:mars~b_neptune:sextile"
+   ],
+   "title": "Your Mars sextile their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mars:square:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mars",
+    "b": "neptune",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:mars~b_neptune:square"
+   ],
+   "title": "Your Mars square their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mars:trine:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mars",
+    "b": "neptune",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:mars~b_neptune:trine"
+   ],
+   "title": "Your Mars trine their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mars:opposition:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mars",
+    "b": "neptune",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:mars~b_neptune:opposition"
+   ],
+   "title": "Your Mars opposite their Neptune",
+   "bindable": true
+  }
+ ]
+}

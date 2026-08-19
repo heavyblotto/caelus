@@ -1,0 +1,142 @@
+[
+ {
+  "id": "transit:sun:conjunction:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "true_node",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:sun~natal_true_node:conjunction"
+  ],
+  "text": "The North Node in your chart is not a planet but a direction: the point where the Moon's path crosses the ecliptic heading north, read in modern practice as the territory your life keeps asking you to grow into. Once a year the Sun arrives at that point and holds it for a few days, and those days put the unfamiliar in full light. As the conjunction applies, you may notice a build of small signals: a name that keeps coming up, an invitation that lands close to something you have privately wanted, a restlessness with routines that usually satisfy you. At the exact pass the theme peaks. The demands of the day and the direction of your growth briefly point the same way, and people who cross your path now often carry a piece of it, a contact, a suggestion, an example of a life shaped the way yours is trying to be shaped. Meetings under this transit have a way of mattering later, out of proportion to their size. As the Sun separates, the light moves on and ordinary priorities return, but whatever stepped forward during the peak tends to stay on the table. Because the Sun never retrogrades, there is no second pass to wait for; the conjunction is quick, annual, and single, which is worth taking seriously. This is not a season for finishing anything, only for noticing what asks to be started. In work, that can look like a project slightly beyond your proven skills that you want anyway. In love and friendship, it can look like company that stretches you rather than mirrors you. Inwardly it often feels like being seen in the part of yourself still under construction, which is flattering and uncomfortable in about equal measure. Nothing obliges you to act on what these days show. The node is a leaning, not a command, and the growth it points to accumulates through many small consents over years rather than one dramatic turn. Still, if you keep a loose record of what surfaces each time the Sun crosses this point, the entries will likely rhyme, and read together they sketch the direction your life is slowly agreeing to. The value of the pass is orientation. For a few days you can feel which way forward faces, and that feeling becomes easier to trust each year you meet it again."
+ },
+ {
+  "id": "transit:sun:sextile:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "true_node",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:sun~natal_true_node:sextile"
+  ],
+  "text": "A sextile is an offer rather than an event, and when the transiting Sun reaches sextile to your North Node the offer concerns your growing edge. For a few days the ordinary business of life lines up loosely with the direction your chart wants to develop, and small doors stand ajar. Nothing announces them. As the aspect applies you might feel a mild pull of curiosity, a sense that something slightly off your usual track deserves a look. At the peak the openings are most concrete: a person worth writing to, a class worth sitting in on, an errand that could be bent a few degrees toward the unfamiliar thing you have been circling. As the Sun separates, the doors do not slam; they simply stop being propped, and the days go back to neutral. By the geometry of the axis, this same Sun stands trine your South Node, so the step forward can be taken with tools you already own. Old competence pays for new experience, which is why moves made now rarely feel like leaps. The character of the transit is low cost and low pressure, and that is exactly why it is easy to waste. A square would force the issue; a sextile waits to be taken up. What it rewards is one small deliberate act: accepting the invitation you would normally defer, asking the question you have been saving, giving an hour to the skill that belongs to your future rather than your past. Steps that size are enough, because the node's territory is not taken in campaigns. It is entered gradually, and transits like this one are the gradual part. In practice these days often pass as merely pleasant, a stretch when cooperation comes easily and strangers seem well disposed. Under the pleasantness sits a quiet alignment: your visible purposes and your longer direction are not fighting, so effort travels further than usual. The Sun does not retrograde, so there is no return pass, just a brief window that comes around again in the yearly round. Over the years you can learn its feel, a faint traction toward the new, and learn to spend it on purpose. The growth here is undramatic, compound interest on small consents, and this is one of the regular days when a deposit costs almost nothing."
+ },
+ {
+  "id": "transit:sun:square:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "true_node",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:sun~natal_true_node:square"
+  ],
+  "text": "Twice a year the Sun spends a few days square your North Node, and those days carry a question about direction. A square sets two motions at cross purposes, and here the crossing falls between what the present moment demands of you and the longer line of growth your chart leans along. Older astrologers called the degrees square the nodes the bendings and read them as places where a road turns; in practice the transit feels like friction with a point. As the aspect applies, obligations tend to stack up in a way that seems designed to crowd out whatever you are trying to become. Deadlines multiply, people want the version of you they already know, and the new thing gets pushed to the margin of the week. At the exact square the tension is sharpest. You may catch yourself asking, in the middle of some perfectly legitimate task, why your time is shaped like this. That flash of impatience is the transit's real content. It is not telling you the task is wrong; it is measuring the distance between how you spend your days and where you mean to be going. As the Sun moves on, the pressure eases within a day or two and the schedule loosens on its own. What remains is information. Squares force an issue into view, and the issue here is allocation: whether the life you are running leaves any room for the life you are growing. At work this can surface as resentment of duties you normally carry without complaint. In relationships it can show up as irritation with people who prefer you unchanged, which deserves gentleness, since their preference is usually loyalty wearing the wrong coat. Inwardly it can feel like being pulled at from two corners, competent here, called there. Because the Sun makes this square quickly, in its plain annual round with no retrograde return, the moment passes whether or not you use it. Using it does not require a decision that week. It only asks that you take the friction seriously as a reading rather than an annoyance, and perhaps move one recurring hour from the maintained life toward the growing one. Done yearly, that small reallocation is how the bend in the road actually gets taken: not in a swerve, but a few degrees at a time, each time this fast bright transit shows you the angle."
+ },
+ {
+  "id": "transit:sun:trine:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "true_node",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:sun~natal_true_node:trine"
+  ],
+  "text": "Certain days move with the grain of your longer story, and the handful each year when the transiting Sun trines your North Node are reliably among them. A trine eases. It removes friction rather than adding force, and here the friction removed lies between your present purposes and the growth the node marks, so steps into unfamiliar territory cost less than they normally do. The same geometry sets the Sun sextile your South Node, which means what you already know is not sidelined but quietly available: established skill funds the new attempt. As the aspect applies you may simply notice the week running smoothly in one particular direction, requests granted, drafts accepted, the right person suddenly free. At the peak, anything aligned with your growing edge moves almost without resistance, and the peak is worth spending on exactly that, because ease has a short shelf life. As the Sun separates, conditions return to normal without any sense of loss. The risk of a trine is never damage; it is waste. Since nothing pushes, you can pass these days doing what you always do, comfortably, and notice nothing at all. The transit will not object. It returns in the Sun's annual circuit, brief and single, never doubling back, and it offers the same smooth pavement whether or not you walk on it. People who profit from soft transits are simply the ones who move while the moving is easy. In work, this is a good moment to show the skill you are still half-learning, since audiences are kinder than usual to your unfinished side. In relationships, conversations about where you are headed tend to go well now, and support arrives without being begged for. Inwardly, the future feels less like a cliff and more like a slope. None of this settles anything permanent, and it should not be asked to. What a few easy days can do is let you experience your own development as natural rather than forced, and that memory outlasts the transit. The next time growth is hard, and it will sometimes be hard, you will know from direct evidence that the direction itself is not the problem. That quiet confidence, renewed a little every year, is the trine's real product."
+ },
+ {
+  "id": "transit:sun:opposition:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "true_node",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:sun~natal_true_node:opposition"
+  ],
+  "text": "By the geometry of the nodal axis, the Sun opposing your North Node is the Sun standing exactly on your South Node, and the transit reads best from that end. For a few days each year the light falls on the most familiar ground in your chart: skills you no longer think about, roles you can play from memory, company that asks nothing new of you. The pull of these days is backward, and the pull is not a fault. An opposition confronts, and what this one confronts you with is the difference between comfort and growth, seen clearly from the comfortable side. As the aspect applies, the old life gets persuasive. The known job, the known place, the known self all look sensibly sufficient, and whatever you have been building toward can seem suddenly optional. At the peak you may find yourself back in an old setting or an old dynamic almost by accident, a visit, a call, a habit resumed, and how it feels is worth attending to. Sometimes the answer is nourishing: rest is real, and the ground you have already won is allowed to hold you. Sometimes the fit has quietly expired, and you notice you have outgrown a thing you still reach for. Both findings are useful. Some traditions read the South Node as inheritance from a distant past; you do not need the metaphysics to feel the plain psychology of it, the deep ease of doing what you have always done. As the Sun separates, the year tilts forward again, and the transit asks nothing further. There is no return pass and no crisis in it, just a brief annual audit of the familiar. Handled consciously, these days serve the forward direction rather than opposing it. You gather what still works from the old store, you let yourself be fed by people and places that knew you before the current effort began, and you take honest note of any comfort that has started to cost more than it gives. The node's arithmetic is not that the past is bad and the future good. It is that one side of the axis is already built and the other is still building, and attention spent entirely on the built side stalls the work. A few days of looking backward, once a year, with your eyes open, tends to make the looking forward steadier."
+ },
+ {
+  "id": "transit:moon:conjunction:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "true_node",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:moon~natal_true_node:conjunction"
+  ],
+  "text": "Roughly once a month the Moon spends a few hours on your North Node, and in those hours your mood leans toward the future. This is among the briefest transits the sky produces, less an event than a recurring weather, and it is worth knowing by feel precisely because it returns so often. The texture is appetite. The unfamiliar stops looking like effort and starts looking interesting: the course listing you actually read, the neighborhood you detour through, the stranger's project that holds your attention a beat longer than it should. Feelings arrive slightly ahead of plans, which is the Moon's way; nothing needs to be decided, and mostly nothing is. Encounters during these hours can carry a small charge of significance, a sense that this person or this idea belongs to where you are headed. Hold the claim lightly, since hours are only hours, but do not dismiss it either, because the conjunction fuses feeling with direction, and what moves you now is a fair sample of what your growth actually wants. The pass builds quickly, peaks, and fades inside a day. There is no arc worth mapping and no return to wait for, only the next month's visit, and the next. That monthly rhythm is the real gift. About thirteen times a year you get a short, honest reading of your emotional relationship with your own forward edge. In months when the reading is eager, the new territory and your heart are on speaking terms. In months when the same hours feel anxious or flat, something about the next step needs tending, more safety, more support, a smaller stride. Either way you learn something no single dramatic transit can teach, because the sample keeps refreshing. Over a year of these small passes you develop a kind of inner compass reading: not where you should go, which the Moon never says, but how you currently feel about going. Growth that consults that feeling regularly tends to be kinder and more durable than growth that overrides it, and this little recurring conjunction is the consultation, arriving on schedule whether you book it or not."
+ },
+ {
+  "id": "transit:moon:sextile:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "true_node",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:moon~natal_true_node:sextile"
+  ],
+  "text": "Twice in each of its monthly rounds the Moon slips into sextile with your North Node, and for a few hours the day turns faintly cooperative toward whatever you are becoming. The effect is small and genuinely easy to miss, which is in the nature of both the Moon and the sextile: one is fast, the other only offers. What the hours tend to hold is a mood in which the unfamiliar feels approachable. The message you have been meaning to send gets sent. The awkward first attempt at a new skill feels like play instead of exposure. A conversation drifts, without strain, toward the thing you are quietly building, and the listener turns out to be interested. None of this reorganizes a life. What it does, month after month, is lower the cost of starting in the forward direction for a little while, and lives are steered by starting costs more than most of us admit. Because the window is short, the useful response is small and immediate: one message, one page, one ask. Anything that fits inside an afternoon fits inside this transit. The mood fades within hours and the day closes over it, no re-hits worth naming, no drama, just the next pass a couple of weeks along. If you track your own weather at all, these hours repay recognition, because they are when your feelings are mildly on the side of your growth rather than neutral about it. That mild support is a resource. Used, it compounds: the new thing advances by monthly inches, and each inch makes the next one easier, since the territory is a little less foreign every time you touch it. Unused, nothing bad happens, which is the sextile's whole character; the offer simply lapses until it is made again. Over time, people around you may notice that your new direction seems to advance without visible strain, and wonder how. The answer is ordinary. The strain was paid in tiny amounts, during small friendly hours like these, when the cost barely registered and the paying almost felt like rest."
+ },
+ {
+  "id": "transit:moon:square:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "true_node",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:moon~natal_true_node:square"
+  ],
+  "text": "A couple of times a month the Moon squares your nodal axis, and for a few hours something in you gets restless. The square is the aspect of friction, and even at lunar speed and lunar scale the friction is real: your feelings and your direction briefly want different things. It can surface as a scratchy, unfocused dissatisfaction. The comfortable routine suddenly bores you, but the new project intimidates you, and you stand in the kitchen wanting neither. It can surface as impatience with people, especially those who represent either your settled life or your ambitions, since the squeeze comes from both sides at once. Because the Moon at this angle stands off square to your North and South Nodes together, the tension is not between you and one thing; it is between your past-facing and future-facing selves, felt in miniature. The honest news about this transit is that it is too short to resolve anything, and it does not need to. The mood builds fast, peaks for an hour or two, and drains away, usually before you have finished deciding what it was about. Its value is diagnostic. Restlessness of this particular flavor is information about where the pinch currently sits: what feels stale, what feels frightening, which part of your growing edge your feelings have not caught up with yet. A note made in the irritable hour often reads clearly in a calm one. What these hours do not reward is major action. Choices made mid-square tend to overweight whatever discomfort is loudest, so the old advice holds: let the mood move through you, do something physical or small, and come back to the question after the sky has moved on, which it will by tomorrow. Met this way, the monthly pinch becomes quietly useful. A dozen or so times a year you are shown, briefly and harmlessly, exactly where the tension between who you have been and who you are becoming currently lives. That is rare information to get on a schedule, in doses small enough to hold, and it costs you nothing but a restless afternoon."
+ },
+ {
+  "id": "transit:moon:trine:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "true_node",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:moon~natal_true_node:trine"
+  ],
+  "text": "Every month brings a few hours when the Moon trines your North Node, and they tend to be hours when your heart and your direction stop needing to be reconciled, because they already agree. Nothing dramatic marks the window. The signature is smoothness in a particular register: thinking about the future feels good rather than heavy, the next step looks like a step and not a wall, and the people connected to where you are going seem easier to reach and easier to like. Feeling flows toward the unfamiliar without being pushed, which is the trine's whole art. These are good hours for the soft parts of growth: imagining concretely, writing the plan down, telling someone what you intend, letting yourself want what you want without immediately auditing it. The Moon governs mood rather than action, so what this transit supplies is not momentum but consent, the felt sense that the forward direction is yours and not merely assigned to you. That sense matters more than it sounds. Most stalls in a long change are not logistical; they are emotional, a quiet withdrawal of consent that no schedule can fix. A monthly hour in which consent renews itself is modest maintenance, but so is most maintenance that works. The window opens and closes within a day, comes back in about a month, and never asks for anything. If it finds you mid-effort, the effort lightens. If it finds you resting, the rest takes on a pleasant sense that you are, on the whole, pointed the right way. Either is a fine use. What repays attention over the years is the pattern: months when this easy hour arrives and the future genuinely feels like yours, and months when even the easy hour cannot make it feel that way. The second kind is not failure; it is a flag that the current version of the plan has drifted from the person it was for. The trine will not fix that, and it will not scold you about it either. It will, reliably and gently, let you know."
+ },
+ {
+  "id": "transit:moon:opposition:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "true_node",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:moon~natal_true_node:opposition"
+  ],
+  "text": "When the Moon opposes your North Node it is sitting on your South Node, and for a few hours each month you get homesick. Not always for a place. The South Node marks the familiar in its deepest sense, the habits, people, and versions of yourself that require no effort to inhabit, and when the Moon crosses it the pull of all that becomes briefly, sweetly strong. You reach for the old music, the old friend, the food you grew up on, the pastime you have technically outgrown and secretly kept. Whatever your equivalents are, these hours find them. There is nothing wrong with the reaching. The Moon on the South Node is one of the sky's small permissions to be comforted, and people in the middle of growing need comfort more than they usually budget for. The unfamiliar territory your chart leans toward is tiring in a way that only the familiar can repair, and this recurring pass is a natural rest stop, monthly, brief, and free. The one real question the hours raise is what, exactly, you reach for, and it repays an occasional honest look. Some of what pulls you back is genuine replenishment, the well that still gives water. Some of it is anesthesia, the habit that soothes without restoring, and the difference is usually obvious within an hour of choosing. An opposition confronts, and this one confronts gently, at mood scale: here is your past, it still fits, does it still feed? Because the window lasts only hours and returns in about a month, no single pass matters much, and none needs resisting. What accumulates is the pattern of many passes. If, month after month, the backward pull grows stronger and the rest stops turn into stays, that is worth noticing while it is still small. If the visits leave you restored and mildly bored by bedtime, the axis is working exactly as drawn: the old life feeds the new one, and you head back out with your pockets full. Most months, that is precisely how it goes."
+ }
+]

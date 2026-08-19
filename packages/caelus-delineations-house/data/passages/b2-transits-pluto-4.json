@@ -1,0 +1,142 @@
+[
+ {
+  "id": "transit:pluto:conjunction:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "pluto",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:pluto~natal_pluto:conjunction"
+  ],
+  "text": "Pluto takes about two and a half centuries to circle the zodiac, so it stands conjunct its own natal place at exactly one point in any life: the very start. Because Pluto crawls, it lingers near the degree it held at your birth for the first year or two, sliding back across it in retrograde loops before it pulls away for good and never comes back. If this transit is live in a chart you are reading, that chart belongs to a life in its opening chapter, quite possibly a child in your care rather than you. What it describes is foundation work. Pluto marks the deepest layer of a person: the instincts around survival, trust, attachment, and power that operate long before words. While transiting Pluto sits on that point, this layer is still wet cement. The tone of the earliest environment, its safety or its turbulence, sinks in at a depth that ordinary memory never reaches. That sounds heavier than it needs to. Nothing laid down in these years is a verdict; people rework their foundations all their lives, and much of adult growth is exactly that. But this period is when the ground is first poured, which is why steadiness, honest repair after ruptures, and the plain reliability of care matter so much now. The transit has an arc even here. Through the approach and the exact contacts the sensitivity runs highest, and the retrograde returns keep the window open across a long stretch. As Pluto separates, the foundation cures, and the slow work of building on it begins. If you are the adult in this picture, your part is less about perfection than presence, because a foundation absorbs the general climate rather than any single day. And there is something in this transit for you as well. You once lived your own version of it, in years you cannot remember, and whatever you find yourself repairing in your own depths began there. Watching a new life pass through this contact tends to soften how you judge your own beginnings. Your oldest patterns start to look less like flaws and more like the reasonable moves of someone very small doing their best with what was there. That is the quiet gift of this once-only conjunction: tenderness toward beginnings, your own included, and the knowledge that what gets planted deep can still be tended at any age."
+ },
+ {
+  "id": "transit:pluto:sextile:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "pluto",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:pluto~natal_pluto:sextile"
+  ],
+  "text": "Of all the contacts Pluto makes to its own natal place, the sextile is the easiest company. For a stretch of two or three years, the slowest planet in the sky sits at a friendly angle to the part of your chart that governs depth, endings, and personal power, and it offers rather than demands. This is a period when you can go down into your own basement voluntarily, with the light on. Motives become easier to read. Old grudges loosen when you look at them directly. Endings you have been postponing, a role outgrown, an attachment kept out of habit, can be closed cleanly and without drama. Power comes toward you in modest, workable forms: more say at work, more weight in the family, more room to direct shared money or resources. The catch is that a sextile only pays the person who participates. Left alone, this transit passes as a vaguely reflective few years and nothing more. The arc rewards attention. While the aspect applies, deep questions start to feel interesting instead of threatening, which is your cue that the window is opening. Pluto's retrograde loops then carry it back and forth across the exact point, sometimes touching it as many as five times over the whole stretch. Each touch tends to revisit the same theme with better tools. The first contact shows you the work, the middle ones let you go over the ground again with less fear, and the last one settles what you have rebuilt. When the aspect separates, the basement door closes gently, and whatever you cleared stays cleared. This is also one of the best climates there is for any honest look inward, whether that is counseling, a disciplined practice, or a friendship truthful enough to function as one. Insight that would take years of effort in another season arrives here at half price, because your defenses are not under attack and so they do not need to hold. Remember that this angle from Pluto to its own place comes once at most in a life. That is not a threat, only a note about supply. You grow through this period by treating its quiet invitations as real: ending what you know is finished, saying the true thing you have been managing around, and learning that your own depths are not a place you fall into but a place you can walk into, and back out of, on purpose."
+ },
+ {
+  "id": "transit:pluto:square:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "pluto",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:pluto~natal_pluto:square"
+  ],
+  "text": "A square from transiting Pluto to your natal Pluto comes once in a life at most, and it does not negotiate so much as audit. Over two or three years, the arrangements running your life from below get stress-tested one by one: the control habits, the compulsions, the survival strategies you built so long ago you mistake them for personality. Whatever holds only because you grip it starts to cost more than it returns. The period often speaks through events. A structure you counted on ends without your vote. A power struggle surfaces at work or in the family and refuses to stay polite. Something you managed for years by sheer will simply stops responding to will. It is worth being clear about what this is not. It is not punishment, and it is not the collapse of everything; it is pressure applied precisely to what was already hollow. What is sound in your life generally passes the audit untouched, and part of the surprise of this transit is discovering which parts those are. The arc matters here more than in most periods. While the square applies, pressure builds as frustration, obsessive loops, a sense of something moving under the floor. The exact contacts are the peaks, and Pluto's retrogrades can bring as many as five of them across the stretch, each turning the same screw. The early hits tend to expose the problem, the middle ones ask how much of it you are willing to keep, and the final one usually finds the matter strangely settled. The separating years are for rebuilding, and people are often startled by how much energy returns once the gripping stops. Your leverage in all of this is posture. Fighting the change head-on turns the period into a long contest between your will and events, and events have more stamina. Working with it means choosing your own endings before they are chosen for you: retiring the strategy that no longer protects anything, loosening control where control was really fear, telling the truth that the old arrangement was built to avoid. None of that is small, and this period does not pretend it is. But there is a reliable other side. People come out of this square holding power more lightly and more honestly, wanting less and carrying more, with the particular confidence of someone whose life has been tested at the foundation and found, in its essentials, real. Let the audit finish, and keep only what you would choose again."
+ },
+ {
+  "id": "transit:pluto:trine:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "pluto",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:pluto~natal_pluto:trine"
+  ],
+  "text": "There are seasons that change you through crisis, and there are seasons that change you the way a river moves a bank, gradually and without argument. Pluto trine your natal Pluto is the second kind. For roughly two or three years, the deepest layer of your chart is supported instead of challenged, and things that normally require an emergency to shift begin shifting on their own. Endings you postponed for years turn out to be simple when you finally reach for them. Influence arrives without your chasing it, because you are no longer trying to prove anything, and people can feel the difference. Old family patterns and long-held resentments lose their charge quietly, less renounced than outgrown. In practical life this often shows up around power and shared resources: inheritance, debts, joint money, or institutional weight that once knotted your stomach gets handled with unusual cleanness. The transit's arc is gentle but real. As the trine applies, deep matters start to feel workable, which is easy to miss because nothing hurts. Then come the exact contacts, and Pluto's retrograde loops can produce several of them, sometimes five across the whole stretch. Each tends to close one old account: a letting-go here, a reconciliation there, a piece of authority accepted without ceremony. When the aspect separates, you are lighter, though you may only notice in hindsight. The one hazard of this period is comfort. A trine never forces, so it is entirely possible to spend it pleasantly and claim nothing, letting the easiest deep-cleaning window of your life pass as a mildly good mood. The people who profit from this transit treat its ease as capacity rather than permission to coast. They end what needs ending while endings are cheap, mend what can be mended while pride is quiet, and take on the larger role while it is being offered freely. Like every angle Pluto makes to its own place, this one comes once at most. What it leaves behind, if you use it, is proof carried in the body rather than the head: that depth does not require catastrophe, that you can let something die without dying with it, and that power fits you best when you no longer clutch it. All it takes is moving with the current while it runs your way, and noticing how much of what you feared was only heavy because you were carrying it alone."
+ },
+ {
+  "id": "transit:pluto:opposition:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "pluto",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:pluto~natal_pluto:opposition"
+  ],
+  "text": "Pluto needs the better part of a century to cross half the zodiac, so its opposition to its own natal place belongs only to long lives, and many charts never hold it at all. If this transit is yours, you have already outlasted every other season Pluto can bring, and this one arrives as the far end of that long arc: the whole of your relationship with power, control, and survival standing across from you, asking to be looked at. An opposition confronts through others, and that is usually how this period speaks. The power you once held may now sit in younger hands, in institutions, in family members who make decisions you used to make. Situations arise that test whether you can be strong without being in charge. What you directed for decades, money, property, the family story, the shape of your own days, comes up for renegotiation, and the temptation is to grip. The invitation is different: to hand things over on your own terms, deliberately, while the choosing is still yours. That is not defeat. Done consciously, it is the last and largest exercise of exactly the strength this point in your chart has always carried. The arc of the period is long and slow. As the opposition applies, a sense of reckoning gathers, often as impatience with pretense and a sharpened eye for what actually matters. The exact contacts, which Pluto's retrograde motion can repeat several times across two or three years, each bring a concrete version of the question: a transfer, a confrontation, a truth told late but told. As it separates, something settles that is best described as authority without control, the weight of a person who no longer needs to run things in order to matter. There is grief in this period, and it deserves its real name, because letting go of command is a loss even when it is right. But you come to it with an advantage no younger person has. You have already survived everything that once felt unsurvivable, and you know from experience that endings turn into beginnings, even when the beginnings belong to someone else. What the transit asks is witness rather than opposition: tell the truth about your life, release what was only borrowed, and let what you built keep working in other hands, with your fingerprints on it always."
+ },
+ {
+  "id": "transit:pluto:conjunction:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "chiron",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:pluto~natal_chiron:conjunction"
+  ],
+  "text": "This period digs where it hurts, and it digs on purpose. Chiron in your chart marks the old wound: the tender place that formed early, never quite closed, and quietly taught you most of what you know about pain. Transiting Pluto is excavation, and when it reaches this point, once at most in a life, it goes down to the root. For two or three years, the hurt you have managed, worked around, or genuinely believed you were done with stops staying where you put it. Memories surface with unusual force. An old grief returns wearing a current face: a loss, a conflict, a person who touches the original bruise exactly. Patterns you thought were simply personality trace themselves back to their source while you watch. This is heavy, and it deserves honest labeling, because at the peak it can feel like too much. But the purpose is not the pain; the pain was already there. What Pluto does is get underneath it, where tending can finally reach. On the approach, the wound often aches before you can say why, a restlessness around subjects you usually keep sealed. The first exact contact frequently brings the trigger, the event or memory that opens the case. Then Pluto's retrograde loops carry it back over the point, up to five touches across the stretch, and the repetition is mercy rather than cruelty. Each return finds you with more capacity than the last, until material that once flattened you becomes something you can hold, examine, and describe in an ordinary voice. As the transit separates, what remains is more scar than open wound: marked, but closed. The work tends to concentrate wherever the wound has always hidden. In intimacy, where being fully seen felt dangerous. In family history, where the original story lives. In the help you ask for and the help you give. A steady witness makes a real difference in a passage like this, and seeking one out changes what becomes possible. What comes out the other side is one of the most quietly valuable things a transit can leave. People who have crossed this ground often find that their oldest hurt has become ground they can stand on, and that they are strangely equipped to sit with others in exactly the kind of pain they once could not face in themselves. If you let the digging finish, you find that the bottom of the wound was not endless after all."
+ },
+ {
+  "id": "transit:pluto:sextile:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "chiron",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:pluto~natal_chiron:sextile"
+  ],
+  "text": "Not every healing season announces itself with pain. This one tends to arrive as a series of doors. With Pluto in sextile to your natal Chiron, the deepest transformer in the sky sits at a friendly angle to your chart's old wound, and for two or three years the resources for repairing it keep quietly appearing. The right conversation happens. A book, a teacher, or a practice lands at the moment you can actually use it. Someone crosses your path carrying their own version of your hurt, and in helping them you find, unexpectedly, that something in you has loosened. That last route is characteristic of this transit: the wound heals sideways, through usefulness, as often as it heals head-on. Because a sextile offers rather than insists, the period asks for your participation. Nothing will push you toward the tender place. The doors open; whether you walk through them is yours. The arc gives you plenty of chances. While the aspect applies, old material starts to feel approachable, less like a sealed room and more like a room you have simply not entered in a while. Pluto's slow motion and retrograde loops then bring repeated exact contacts across the stretch, sometimes as many as five, and each renews the offer. The first shows you the work, the returns let you go deeper at your own pace, and the final one consolidates what you have rebuilt. Once it separates, the doors stop appearing, but what you claimed stays claimed. In daily life this can look modest: a hard subject finally discussed with a parent, a pattern in love named and gently retired, a decision to accept real support and the discovery that it works. Modest is not small. Work done in this climate goes to the root, because Pluto is involved, without the crisis Pluto usually charges, because the angle is kind. Since Pluto makes each aspect to a natal point once at most, this particular offer will not repeat. Taking it up is the whole art: choosing to face the old hurt while facing it is cheap, and learning that your wound, tended, turns into a skill, the precise and patient kind of understanding that only someone who has been hurt can offer."
+ },
+ {
+  "id": "transit:pluto:square:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "chiron",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:pluto~natal_chiron:square"
+  ],
+  "text": "There is a place in you that learned early what hurt feels like, and for a stretch of two or three years this transit presses on it. Pluto square natal Chiron puts the sky's most relentless planet at a hard angle to your chart's old wound, and the arrangement forces what a softer contact would only suggest. The strategies you built for never touching that place begin to fail: the busyness, the control, the tending of everyone else's pain, the changing of the subject. Current situations arrive that rhyme with the original hurt. An authority dismisses you in the old way. A rejection lands with a familiar sting. A loss finds the exact bruise. It can feel like the past repeating. Look closer and something more useful is happening: the past is presenting itself in current form, so that you can finally answer it differently. While the square applies, irritability around certain subjects tends to build, and you may notice yourself defending doors no one is pushing on. The exact contacts are the peaks, and Pluto's retrograde loops can bring up to five of them across the period, which is the design's one mercy. The same trigger returns, but you do not have to be the same person each time it does. The early hits often catch you in the old reflex. The later ones find you pausing, naming what is actually happening, responding from the present instead of the past. That shift, repeated, is the whole cure this transit is after. The separating stretch consolidates it, and people often describe the aftermath as a strange new roominess, the energy that guarding the wound used to consume coming back into their hands. Be plain about the difficulty: this is one of the harder passages involving Chiron, and the middle of it can hurt in ways that feel unfair, since the original injury was never your doing. But the transit is not asking you to be hurt again. It is asking you to stop organizing your life around never being hurt again, which is a quieter and larger confinement than it looks. Support belongs in this picture, and reaching for it is strength working, not strength failing. What remains afterward, once at most in a life, is a wound that has been faced at the root: still part of your story, no longer in charge of it. You grow here by letting the pressure teach your hands to open."
+ },
+ {
+  "id": "transit:pluto:trine:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "chiron",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:pluto~natal_chiron:trine"
+  ],
+  "text": "Quiet transits are easy to waste, and this is one of the quietest gifts Pluto gives. With the trine to your natal Chiron, deep repair becomes available without crisis. For two or three years, the old wound in your chart receives exactly the kind of slow, regenerative pressure that mends rather than tears. Often the first sign is small. You tell a story you have always flinched around and notice, mid-sentence, that the flinch is gone. A subject that used to require managing can suddenly just be discussed. Compassion for the person you were arrives without being summoned. None of this announces itself, which is why the period can slip past unused, filed under feeling a bit better lately. Under the surface, real structure is changing. Pluto works at the root even when it works gently, and material that other seasons only rearranged is being genuinely digested now. The arc runs long and soft. As the trine applies, old pain starts to lose its charge, and your tolerance for your own history grows. The exact contacts, which Pluto's retrograde loops can repeat several times across the stretch, each settle one layer: a memory revisited and found survivable, an apology given or received, a version of the old story retired for good. By the time the aspect separates, the wound has often changed category, from a danger to be managed into an experience you own. Two things are worth doing with a period like this. The first is to go looking, gently, for the work that harder years made impossible: the honest conversation, the deliberate look backward, the tending you always deferred because the material was too hot. It is not too hot now. The second is to notice the role that keeps finding you. People in pain have a way of locating someone whose wound has healed this far, and under this transit you may be sought out as a steadying presence, sometimes to your surprise. Taking that role in small ways completes the circuit, because Chiron's oldest pattern is that the tended wound becomes the ability to tend. Like every Pluto aspect to a natal point, this one comes once at most. Spend the ease on depth, and what once only hurt becomes, at last, useful."
+ },
+ {
+  "id": "transit:pluto:opposition:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "chiron",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:pluto~natal_chiron:opposition"
+  ],
+  "text": "For a stretch of two or three years, the oldest sore spot in your chart tends to meet you through other people. Pluto opposite natal Chiron sets the planet of buried force directly across from your chart's old wound, and an opposition works by mirror: what you cannot see in yourself arrives embodied in someone else. So the period fills with encounters that touch the original hurt with uncanny accuracy. A partner's behavior lands on the exact bruise. Someone in pain attaches to you and will not be fixed. A standoff develops in which you and another person seem locked into the roles of wounder and wounded, and the roles keep threatening to trade places. It is tempting to read all this as bad luck in other people. The more useful reading is that the relationships are the theater, not the cause: your own unfinished hurt is being staged where you can finally watch it. Two traps shape the period. One is casting yourself as the healer, pouring into someone else's wound so you never have to feel your own, an arrangement whose drain grows until it forces the question. The other is handing someone the ability to reopen your wound at will and calling it closeness. Both are old strategies, and both come up for retirement now. The arc gives the work its rhythm. As the opposition applies, a particular relationship or dynamic usually tightens into focus. The exact contacts, repeated up to five times by Pluto's slow retrograde loops, each stage the confrontation again, and the returns are where the change happens: the same standoff, met by a person who has begun to claim their half of it. As the aspect separates, the drama drains away, and what remains is often a startling clarity about which connections were feeding the wound and which were tending it. Some bonds deepen through this period precisely because the pain finally got spoken. Others end, and the ending is itself the healing. Since Pluto makes this aspect to your Chiron once at most in a life, the confrontation does not need to be won, only used. The way through is to take back the half of the mirror that is yours: feeling your own hurt instead of managing everyone else's, and discovering that the person across from you was never the wound, only the light that showed you where it was."
+ }
+]

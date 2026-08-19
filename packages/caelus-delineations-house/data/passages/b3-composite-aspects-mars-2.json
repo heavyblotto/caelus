@@ -1,0 +1,212 @@
+[
+ {
+  "id": "composite:aspect:mars:conjunction:neptune",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mars",
+   "b": "neptune",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "composite:mars~neptune:conjunction"
+  ],
+  "text": "Effort and imagination are the same motion in this bond. Composite Mars conjunct composite Neptune puts what the relationship goes after in the same place as what it pictures, so the pair cannot do a plain thing plainly. Whatever gets attempted arrives with an image attached, and the image is part of the fuel. That gives the connection real devotion. These two can put sustained effort into something that offers them nothing measurable: a piece of work, a person who needs help, a cause with poor odds. Ordinary incentives are not what moves this pair. Where a bond that runs on results would stop, this one keeps going, because the picture is still intact. The energy is uneven, though, and it answers to inspiration rather than to the calendar. On a day when the vision is clear, the relationship can work past everyone around it. On a day when it is not, effort has nowhere to attach and the same task feels impossible. Neither of you is being idle in those stretches. The drive is real; it simply does not report for duty on request. Conflict is the strangest part. Anger here rarely arrives with an address on it. Something is wrong, both people can feel it, and the subject keeps sliding: it comes out as tiredness, as vagueness, as a mood that fills the room and belongs to nobody. Directness takes practice in this pairing, because the fusion softens the edge of a want before it can be said. Wanting itself blurs. The relationship can spend a year in service of something neither person actually chose, since naming a preference out loud is harder here than going along with the shared picture. The bond does its best work when the picture is aimed at something outside itself and somebody keeps track of the plain facts: what got done, what it cost, what is next. The imagination stays. It stops being the only instrument."
+ },
+ {
+  "id": "composite:aspect:mars:sextile:neptune",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mars",
+   "b": "neptune",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "composite:mars~neptune:sextile"
+  ],
+  "text": "This pairing can work on something it believes in without having to be swept up in it first. The sextile between composite Mars and composite Neptune keeps inspiration within reach of ordinary effort, and it never presses the point. Taken up, the contact looks like fluency. The two can act on a feeling before the reasoning has caught up, and be right often enough that the habit is worth keeping. Timing is decent as well. This bond has a sense of when to push and when to let a thing arrive on its own, and it is rarely the pair that forces a situation. Kindness costs the relationship very little in the way of effort. Practical help gets given without ceremony. Where there is shared work with any element of care in it, or of making something out of very little, the aspect supplies energy the two would not find elsewhere. None of this is required. The route can go unused for a decade, and plenty of relationships carrying this contact run entirely on the practical and never notice the gentler option. Nothing is lost, exactly. It only means the pair works harder than it has to, using force where something lighter was on hand. The gentler approach has a failure of its own. In conflict it makes defusing easier than settling. Heat gets absorbed: a complaint is met with sympathy and dissolves before its content has been dealt with, and it returns some months later wearing a different subject. Both of you can mistake that absorption for agreement, and the mistake is an easy one, because the evening genuinely did go well. What gets made of the opening is not written in the geometry. A sextile holds its position, unhurried, offering the same route to a pair that has used it every year and to a pair that has never once looked at it."
+ },
+ {
+  "id": "composite:aspect:mars:square:neptune",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mars",
+   "b": "neptune",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "composite:mars~neptune:square"
+  ],
+  "text": "Something in this relationship keeps taking the edge off what it is trying to do. Composite Mars square composite Neptune sets the pair's push against its own haze, and the collision returns with new subjects instead of resolving into a rule. The shape is familiar to most pairs who carry it. A plan gets made, and by the time it has to be carried out the terms have moved. Who was doing what turns out to have been assumed rather than agreed. Energy goes into the wrong half of the problem, or into a version of the problem that no longer exists. Both people can be working hard while neither is sure the work is on the same thing. Frustration is difficult to hold here. It rises and then loses its object, because whatever there is to be annoyed at will not stay still. What comes out instead is often flatness, or an irritation that fastens onto something small and unrelated. Worth saying plainly: in this bond the argument about the dishes is seldom about the dishes. Neither of you is at fault for that, and the friction is not evidence about anybody's honesty. A square describes two functions of the relationship working at cross purposes. Drive wants a fixed target. Imagination keeps the target open, and an open target cannot be hit. The same collision pays for itself over time. A pair that keeps running into its own vagueness learns to be specific on purpose, which pairs without the friction never bother to learn. This one gets good at unglamorous questions: what exactly, by when, and who is doing it. None of that is a verdict on the connection. A composite square reports how a bond generates friction and nothing at all about where the friction ends up, and this variety has produced a great deal of finished work in relationships that stopped waiting for the fog to clear by itself."
+ },
+ {
+  "id": "composite:aspect:mars:trine:neptune",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mars",
+   "b": "neptune",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "composite:mars~neptune:trine"
+  ],
+  "text": "Very little gets in the way here, and that is the part worth examining. A trine between composite Mars and composite Neptune lets the bond's effort and its imagination run in one direction with almost no resistance. The pair acts on what it pictures, and the acting feels natural rather than decided. It shows in how seldom this relationship has to argue itself into anything. A mood arrives, a plan follows, and the plan is usually pleasant to carry out. Shared creative work, care given to other people, anything whose point is not strictly measurable: all of it comes cheaply here, and nobody has to be talked into a share of it. There is grace in how this pair handles other people's difficulty too. Help gets offered before it is asked for and rarely lands wrong. Nothing about the helping is performed. Nothing here tests the direction. When effort and dream are this well matched, the relationship stops asking whether the dream was any good. Years can pass on a shared assumption neither person has looked at, since looking would take friction the angle does not supply. The bond drifts, and drifts competently. Conflict has the same softness. Heat dissolves quickly, which is comfortable and means a fair number of real disagreements never finish. They get absorbed instead, and absorbed material does not vanish. It only stops being discussed. What the two of you have is a relationship able to act on something imagined without making a project of the acting, which is less common than it sounds. It gets more interesting when the pair supplies its own resistance: a deadline, an outside standard, somebody who will ask what actually got done this month."
+ },
+ {
+  "id": "composite:aspect:mars:opposition:neptune",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mars",
+   "b": "neptune",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "composite:mars~neptune:opposition"
+  ],
+  "text": "This relationship is strung between doing and letting be. Composite Mars opposite composite Neptune puts direct effort at one end and surrender at the other, and the bond does not get to retire either one. Most pairs notice the alternation first. Stretches of hard, unambiguous work get followed by stretches where the pair loses interest in doing anything at all, and the change of gear can arrive without warning to whichever person was still going. From outside it reads as inconsistency. From inside, each phase makes complete sense while it lasts. The split usually falls between the people rather than inside them. One makes the case for action and the other for patience, for waiting, for not forcing something that is not ready. Those are not character traits. They are two ends of a single requirement the bond carries, and the ends change hands more often than either person notices. Conflict runs into the same axis. Anger comes up on one side and meets something that will not take a firm shape on the other: not refusal exactly, more a sense that the subject has gone soft in the hand. Arguments finish without being finished, and what was left unsettled tends to come back attached to a different topic. Run together, the two ends give the pair something specific. Directness keeps the dreaming honest, because a picture that has to be acted on gets corrected by what happens. Imagination keeps the doing worth doing, because effort with no vision behind it turns into a list. A bond that can hold both inside the same week gets more out of either than it would alone. Nothing in the geometry reports how well a given pair handles that trade. What it marks is a relationship wide enough to need a push and a pause both, and the two of you are the ones working out, week by week, which one the situation is actually asking for."
+ },
+ {
+  "id": "composite:aspect:mars:conjunction:pluto",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mars",
+   "b": "pluto",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "composite:mars~pluto:conjunction"
+  ],
+  "text": "There is no low setting in this bond. Composite Mars conjunct composite Pluto fuses what the relationship goes after with the part of it that will not keep anything small, so effort arrives at full strength or not at all. The pair cannot do a thing casually, even when casual is what the occasion called for. That produces unusual stamina. Whatever these two take on, they take on completely, and they are still at it long after the point where most people set a thing down. A shared project, a hard stretch of life, a commitment that stopped being enjoyable a year ago: the bond has the force to stay with it and needs no encouragement from outside. Nothing feels casual to the people inside it either. Ordinary decisions carry weight. What gets started tends to matter, and both of you know it, which is part of why nobody who knows this relationship well describes it as light. The cost is proportion. When drive and depth are one function, a small matter can pull the whole engine. A disagreement about a schedule gets the same force as a decision about where to live. Effort is expensive here, and the pair can be tired without being able to point at what used it up. Conflict goes down rather than across. An argument does not stay on its subject. It goes to what sits underneath, and it usually arrives there, which is honest and a great deal of work for a Tuesday evening. What this geometry describes is a bond whose wanting has no shallow version, and that is a different matter from anybody in it being difficult. Where the contact settles is in scale. The full weight is a genuine capacity, worth spending on what deserves it, and the relationship gets easier to live in once it stops arriving in every room."
+ },
+ {
+  "id": "composite:aspect:mars:sextile:pluto",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mars",
+   "b": "pluto",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "composite:mars~pluto:sextile"
+  ],
+  "text": "The equipment for a much harder push sits in this chart, and the pair is never obliged to pick it up. Composite Mars sextile composite Pluto keeps serious force within reach of ordinary effort, offering a route and insisting on nothing. Where the relationship does reach for it, the difference is plain. A task that needs more than the usual amount gets more, and the extra is available without a crisis to justify it. This bond can concentrate. It can also start again after something failed, which is the rarer skill and the one most worth naming: a setback interrupts a project here rather than ending it. Conflict has a similar option on offer. The two can go to the actual subject when they decide to, and the going does not wreck anything. A complaint that has been avoided for months can be raised properly, heard properly, and put down, all inside one evening. Not every relationship owns that route. This one has it standing open. Nothing pushes the pair through the door. A bond carrying this contact can run for years on surface arrangements and never once reach for the depth, and the depth waits without going anywhere. Nothing breaks. It only means the connection stays lighter than it needed to be, and that the harder conversation keeps getting scheduled for later. That is the quiet failure of the aspect: capacity never spent looks identical, from the inside, to capacity that was never there. Neither of you can tell the difference without testing it. What usually brings it out is something with real requirements, work that will not accept a half-finished version, or a stretch where the ordinary approach is visibly not enough. The pair tends to surprise itself the first time."
+ },
+ {
+  "id": "composite:aspect:mars:square:pluto",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mars",
+   "b": "pluto",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "composite:mars~pluto:square"
+  ],
+  "text": "A push in this relationship rarely stays the size it started. Composite Mars square composite Pluto sets the bond's drive against its own weight, so an ordinary effort keeps turning into something larger than the situation asked for, and then the pair has to deal with the size of it. The pattern recurs rather than resolving. Something gets pursued hard. It goes further than intended, or it meets resistance and the answer is more force instead of a different approach. Then comes a cooler stretch when nobody wants to touch the subject, and some months later the same collision on new ground. Disagreements carry the same amplification. A difference about arrangements becomes a question about the whole basis of the connection inside ten minutes, because this bond has no talent for keeping a subject its original size. Both people can hear that happening and be unable to stop it, which is maddening and easier to work with once it is understood as geometry rather than as a fault in whoever is talking. The friction belongs to the pair and not to a person. Drive is doing its job, the refusal to leave things small is doing its job, and the two do not fit comfortably in one relationship. A square is made of exactly that. Traction arrives with it. A bond that keeps overshooting finds out what its own force costs, which relationships with easier angles never learn. This one does not get to be careless about consequences, and over the years it develops an accurate sense of what is worth going at and what can be left. Intensity of this kind gets read as a sign of trouble more often than it deserves. The chart supports neither that reading nor its opposite. A square marks where a bond makes its friction, and it stops there. What eases the pattern is pace. Most of what the pair wanted never needed everything it had, and neither of you loses the capacity by spending less of it."
+ },
+ {
+  "id": "composite:aspect:mars:trine:pluto",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mars",
+   "b": "pluto",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "composite:mars~pluto:trine"
+  ],
+  "text": "Serious effort costs this pair less than it costs most people. Composite Mars trine composite Pluto lets the relationship's drive and its depth run together without argument, so weight gets applied as a matter of course and neither function is ever experienced as difficult. The competence shows under hard conditions. When something demanding turns up, this bond does not wobble. It organizes, goes at the thing, and stays with it well past the point where the first energy has gone. Endurance is the house quality. Other people notice it and lean on it, often before the two of them have noticed it themselves. Conflict gets the same directness. A grievance is raised and goes somewhere. There is little of the circling other relationships do, and heavy subjects hold no particular terror here. Ease has its own failure, and this one is habit. A pair that can apply full force without strain stops asking whether full force was called for. Everything gets done thoroughly, including the things that did not merit it, and because the effort is never uncomfortable, no signal arrives to stop. The relationship can spend years being highly effective in a direction nobody deliberately chose. A second version is quieter. Intensity becomes the register the bond is at home in, so a calm season starts to feel like something has gone missing, and the pair goes looking for a project large enough to justify the machinery. That is not a flaw. It is what tends to happen when a capacity is always available and never tested. What the two of you have is a connection that can go the distance on things other bonds abandon. Nothing in an easy angle answers what the distance is for. That question has to be imported from somewhere else, and it usually makes for a good year when somebody asks it."
+ },
+ {
+  "id": "composite:aspect:mars:opposition:pluto",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mars",
+   "b": "pluto",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "composite:mars~pluto:opposition"
+  ],
+  "text": "One end of this bond wants to move and the other wants to reach the bottom of the matter first. Composite Mars opposite composite Pluto stretches the relationship between them, and both ends are strong enough that neither gets permanently overruled. The tension surfaces around timing more than anything else. One position says do it and find out. The other says not until the real subject has been reached, and it is usually right that there is a real subject. Both are honest readings of the same situation, which is what makes the pull genuine rather than a case of somebody being unreasonable. Conflict here tends to stall rather than blow over. A push meets something immovable, and instead of a resolution there is a standoff both people recognize and neither can shift by trying harder. Trying harder is exactly what the axis makes tempting. It is generally the least useful move on the table. The division lands between the two as often as inside them. One carries the case for going ahead, the other the case for going down first, and after a while those look like personalities instead of what they are, which is the bond parcelling out its own tension into two halves somebody can hold. Run at the same time, the ends make something neither manages alone: action with real weight behind it, and depth that produces a move rather than another examination. Relationships that get the combination working are hard to divert, not because they are forceful but because whatever they start has something underneath it. An opposition predicts nothing about how a particular pair handles the pull, and it is not a sign of trouble in the bond. Holding both ends is tiring, and the tiredness is the aspect working as built. Both of you are likely to feel the stretch most on the days when only one end looks reasonable."
+ },
+ {
+  "id": "composite:aspect:mars:conjunction:chiron",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mars",
+   "b": "chiron",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "composite:mars~chiron:conjunction"
+  ],
+  "text": "Whatever this bond goes after, it goes after through the tender place. Composite Mars conjunct composite Chiron puts the relationship's drive and its sore spot in one location, so the two cannot be run apart. Asserting anything here, even something minor, touches the raw material on the way out. What that produces in practice is care around action. Requests get made carefully in this pairing, or they do not get made. A want is tested privately before it is said aloud, and by the time it arrives it has usually been made smaller. Both of you can be doing that at once, each assuming the other finds it easy. The same fusion gives the pair a real competence with other people. These two are unusually good at helping somebody else start something. They notice what makes an effort hard, they do not push at the wrong moment, and they are patient with the stage where nothing works yet. Teaching, training, coaching, any work where a person has to be brought through a difficulty: the bond is suited to it, and often finds itself doing it without having planned to. Anger and hurt turn up together, which is the awkward part. Something stings, and what comes out is either more careful than the feeling or a good deal sharper, because it was held first. Neither version matches what actually happened, and the pair can spend a long evening reconstructing a small event. The lesson in the contact is not a delicate one. This relationship gets better at wanting things out loud by doing it at ordinary size, when very little is at stake. What is sore does not have to be settled before the pair is allowed to act, and the two of them usually find that out in practice long before either could put it into words."
+ },
+ {
+  "id": "composite:aspect:mars:sextile:chiron",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mars",
+   "b": "chiron",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "composite:mars~chiron:sextile"
+  ],
+  "text": "Something is on hand in this pairing that it never has to use. Composite Mars sextile composite Chiron puts the sore place within working distance of ordinary drive, so what hurts can be approached as a practical matter rather than a subject that requires an occasion. Where the offer is taken up, the shape of it is unglamorous. A tender thing gets handled by doing something about it: a habit changed, a small arrangement made, one plain sentence said at a reasonable moment. Repair here looks more like maintenance than like a reckoning, and it works better than it has any right to. The competence travels outward as well. This bond is practically useful to people who are struggling, because it neither flinches nor turns solemn. Help arrives as an action rather than a speech, which is often what was actually wanted. A sextile insists on nothing, and the pair can go years without reaching for this one. The tender spot keeps its old arrangement: acknowledged, tolerated, worked around. Nothing dramatic follows. It only means the relationship goes on paying a small tax it had the equipment to stop paying. There is a mild trap in how easy the practical route is. Because a difficulty can be handled here, it can also be handled rather too quickly, and a sore subject solved on Tuesday afternoon is sometimes solved before anybody found out what it was. Doing something is a good instinct and not always the first one a situation needs. The whole of the aspect comes down to use. It asks very little of the two of you: not courage exactly, more a willingness to treat an awkward thing as ordinary work and see what happens after."
+ },
+ {
+  "id": "composite:aspect:mars:square:chiron",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mars",
+   "b": "chiron",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "composite:mars~chiron:square"
+  ],
+  "text": "Every push in this pairing arrives with a sting attached. Composite Mars square composite Chiron sets what the relationship goes after against the place where it is raw, so effort and soreness keep turning up together, and the pattern comes round again instead of being settled once. It runs in both directions. Sometimes the effort causes the sting: the bond takes on something demanding, and the demand presses exactly where it is least able to take pressure. Sometimes the sting causes the effort: something old smarts, and the answer is to go at a task much harder than it needed, which is a serviceable way of not feeling the first part. Conflict shows it most clearly. Anger and hurt occupy the same sentence here, so a disagreement can be sharp and wounded at once, and both of you end up defending against the wrong half of what was said. Afterwards it is genuinely hard to reconstruct what the argument was about. Nothing in a square reports on either person's character. Two capacities of the relationship are working across each other, and the collision is what that arrangement produces. Treating it as a defect in whoever is nearest is the reliable way to make it worse. The collision does leave something behind. This pair cannot avoid learning where it is tender, because it walks into the spot regularly, and after enough repetitions the map is accurate. Most relationships never get one. The bond also gets practice at a specific skill: acting while sore, which is not the same as waiting to feel better first and is a good deal more useful. Nothing has to be repaired before this relationship is allowed to do anything. What changes the pattern is usually small. Naming the sore spot in advance. Sizing an effort to what the pair can carry this season. Letting the sting be information about pace rather than proof that the attempt was a mistake."
+ },
+ {
+  "id": "composite:aspect:mars:trine:chiron",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mars",
+   "b": "chiron",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "composite:mars~chiron:trine"
+  ],
+  "text": "This pair works around its own sore place without being asked to. Composite Mars trine composite Chiron lets the bond's drive and its tender spot run together with no resistance between them, so effort shapes itself to what hurts automatically, and nobody had to be told how. The accommodation is mostly invisible. Plans get made at a size the sore spot can handle. Tone gets adjusted before a difficult subject arrives. The relationship rarely pushes at the wrong moment, and both people are spared the kind of pressure that turns a bad week into a worse one. Others get the benefit too. There is real skill here in getting a person moving again after something knocked them over, and it is given without ceremony. This is often the bond that people in trouble end up leaning on, and the two of them are regularly surprised to be told so. The price of that is stillness. A relationship that instinctively works around its tender place never puts weight on it, and a spot that is never tested stays exactly as it is. The accommodation becomes the architecture. Plans stay a particular size for years, and nobody can say when that was decided, because it never was. The lesson gets exported rather than applied. This pair can be excellent at helping somebody else do the hard thing while the same hard thing sits inside the bond, gently avoided by both, on good terms with everyone. The angle itself will not raise the question. It has to come from the pair: an attempt slightly larger than the sore spot approves of, made on purpose, with the discomfort expected instead of read as a signal to stop. The gentleness is already here in quantity. What neither of you gets from it is the push, and that has to be found somewhere else."
+ },
+ {
+  "id": "composite:aspect:mars:opposition:chiron",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "mars",
+   "b": "chiron",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "composite:mars~chiron:opposition"
+  ],
+  "text": "Directness and protection sit at opposite ends of this bond. On one side is the impulse to go at a thing and get it done. On the other is the part of the relationship that is raw, that has been pressed before, and that wants any approach slower than that. Composite Mars opposite composite Chiron holds the pair between the two. The swing is the recognizable feature. Stretches of decisive action, where nothing is being protected and the relationship is at its most capable, give way to stretches of care, where nothing can be pushed and any pressure feels like too much. Each stretch looks, from where the other one stands, like an overcorrection. Roles get handed out, and they are not real. One person becomes the one who wants to move and the other the one who says wait, and once that hardens, the argument stops being about the situation and becomes about temperament. Both of you have probably carried each end at different times, which is the clue that neither end belongs to a person. In conflict the axis is plain to see. Force meets tenderness, and whichever speaks first makes the other look unreasonable: too harsh, or too easily hurt. Neither description is accurate, and arguing about which one applies is the least productive conversation available to this pair. Held at once, the ends are worth a lot. Drive that knows where the tender ground is does not trample it. Tenderness with some force behind it does more than sympathize. A relationship able to keep both in view can go at hard things without pretending they are painless, and that is not a common ability in any kind of bond. The chart says nothing about how any particular pair manages the arrangement, and the tension is not a sign of trouble. It marks a relationship that has to keep a push and a guard both in sight. Pairs who can say which end they are standing on argue considerably better than pairs who cannot."
+ }
+]

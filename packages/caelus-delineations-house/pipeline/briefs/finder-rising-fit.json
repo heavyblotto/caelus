@@ -1,0 +1,176 @@
+{
+ "name": "finder-rising-fit",
+ "outFile": "b7-finder-rising-fit.json",
+ "setId": "house-b7-finder-rising-fit",
+ "family": "finder-rising-fit",
+ "cells": [
+  {
+   "id": "finder:asc-fit:aries",
+   "family": "finder-rising-fit",
+   "when": {
+    "kind": "angle",
+    "angle": "asc",
+    "sign": "Aries"
+   },
+   "atomIds": [
+    "angle:asc"
+   ],
+   "title": "Does Aries rising fit? (finder question)",
+   "bindable": true
+  },
+  {
+   "id": "finder:asc-fit:taurus",
+   "family": "finder-rising-fit",
+   "when": {
+    "kind": "angle",
+    "angle": "asc",
+    "sign": "Taurus"
+   },
+   "atomIds": [
+    "angle:asc"
+   ],
+   "title": "Does Taurus rising fit? (finder question)",
+   "bindable": true
+  },
+  {
+   "id": "finder:asc-fit:gemini",
+   "family": "finder-rising-fit",
+   "when": {
+    "kind": "angle",
+    "angle": "asc",
+    "sign": "Gemini"
+   },
+   "atomIds": [
+    "angle:asc"
+   ],
+   "title": "Does Gemini rising fit? (finder question)",
+   "bindable": true
+  },
+  {
+   "id": "finder:asc-fit:cancer",
+   "family": "finder-rising-fit",
+   "when": {
+    "kind": "angle",
+    "angle": "asc",
+    "sign": "Cancer"
+   },
+   "atomIds": [
+    "angle:asc"
+   ],
+   "title": "Does Cancer rising fit? (finder question)",
+   "bindable": true
+  },
+  {
+   "id": "finder:asc-fit:leo",
+   "family": "finder-rising-fit",
+   "when": {
+    "kind": "angle",
+    "angle": "asc",
+    "sign": "Leo"
+   },
+   "atomIds": [
+    "angle:asc"
+   ],
+   "title": "Does Leo rising fit? (finder question)",
+   "bindable": true
+  },
+  {
+   "id": "finder:asc-fit:virgo",
+   "family": "finder-rising-fit",
+   "when": {
+    "kind": "angle",
+    "angle": "asc",
+    "sign": "Virgo"
+   },
+   "atomIds": [
+    "angle:asc"
+   ],
+   "title": "Does Virgo rising fit? (finder question)",
+   "bindable": true
+  },
+  {
+   "id": "finder:asc-fit:libra",
+   "family": "finder-rising-fit",
+   "when": {
+    "kind": "angle",
+    "angle": "asc",
+    "sign": "Libra"
+   },
+   "atomIds": [
+    "angle:asc"
+   ],
+   "title": "Does Libra rising fit? (finder question)",
+   "bindable": true
+  },
+  {
+   "id": "finder:asc-fit:scorpio",
+   "family": "finder-rising-fit",
+   "when": {
+    "kind": "angle",
+    "angle": "asc",
+    "sign": "Scorpio"
+   },
+   "atomIds": [
+    "angle:asc"
+   ],
+   "title": "Does Scorpio rising fit? (finder question)",
+   "bindable": true
+  },
+  {
+   "id": "finder:asc-fit:sagittarius",
+   "family": "finder-rising-fit",
+   "when": {
+    "kind": "angle",
+    "angle": "asc",
+    "sign": "Sagittarius"
+   },
+   "atomIds": [
+    "angle:asc"
+   ],
+   "title": "Does Sagittarius rising fit? (finder question)",
+   "bindable": true
+  },
+  {
+   "id": "finder:asc-fit:capricorn",
+   "family": "finder-rising-fit",
+   "when": {
+    "kind": "angle",
+    "angle": "asc",
+    "sign": "Capricorn"
+   },
+   "atomIds": [
+    "angle:asc"
+   ],
+   "title": "Does Capricorn rising fit? (finder question)",
+   "bindable": true
+  },
+  {
+   "id": "finder:asc-fit:aquarius",
+   "family": "finder-rising-fit",
+   "when": {
+    "kind": "angle",
+    "angle": "asc",
+    "sign": "Aquarius"
+   },
+   "atomIds": [
+    "angle:asc"
+   ],
+   "title": "Does Aquarius rising fit? (finder question)",
+   "bindable": true
+  },
+  {
+   "id": "finder:asc-fit:pisces",
+   "family": "finder-rising-fit",
+   "when": {
+    "kind": "angle",
+    "angle": "asc",
+    "sign": "Pisces"
+   },
+   "atomIds": [
+    "angle:asc"
+   ],
+   "title": "Does Pisces rising fit? (finder question)",
+   "bindable": true
+  }
+ ]
+}

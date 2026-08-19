@@ -1,0 +1,212 @@
+[
+ {
+  "id": "transit:neptune:conjunction:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "venus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:neptune~natal_venus:conjunction"
+  ],
+  "text": "Neptune crosses your natal Venus at most once in a lifetime, and while it is there, roughly a year and sometimes longer, love and beauty stop behaving like ordinary facts. Venus is your taste, your affection, and your sense of what things are worth. Neptune blurs edges, and when it fuses with Venus the blur lands on the heart. In the applying months you may notice a new tenderness in yourself, a hunger for something finer than what daily life serves. Music hits harder, old romances glow in memory, and a stranger's small kindness can move you out of proportion. Around the exact passes the longing peaks. If you fall in love now, you tend to fall in love with a shimmer, part person and part projection, and the person may be lovely and still not be the shimmer. Existing bonds feel the same tide from inside. Some couples rediscover a devotion that feels close to reverence, while others notice a vague dissatisfaction, a sense that something essential is missing that neither partner can name. Money and possessions catch the fog too. Generosity swells, financial details slide out of focus, and anything sold to you on a dream deserves a second, sober look while the transit lasts. Because Neptune retrogrades, it usually touches this degree up to three times over an extended stretch. The first pass tends to open the longing, the return pass shows you where the image and the reality diverge, and the final pass lets a gentler, truer form of the feeling settle in. Creatively this is one of the richest periods you will ever get. If you make anything, images, songs, gardens, rooms, the work carries an atmosphere you cannot fake later. The real task underneath the romance is a revision of value. What you thought you wanted is being dissolved so you can find out what you actually love, and that process can pass through disappointment on its way to clarity. Disappointment here is information, not verdict. It marks the gap between the dream and the person or thing carrying it, and the dream itself, your capacity for devotion, survives the carrier. As the conjunction separates, the mist thins. Some infatuations evaporate with it, and what remains standing afterward, a partner, a friendship, a body of work, a quieter faith in beauty, has been washed rather than damaged. You come out of this period with a heart enlarged and slightly humbled: more compassion, fewer illusions about where compassion should be spent, and a taste that has learned the difference between what glitters at a distance and what still glows up close. That refinement is the lasting gift, and it shapes what you build and whom you choose for years after the sky has moved on."
+ },
+ {
+  "id": "transit:neptune:sextile:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "venus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:neptune~natal_venus:sextile"
+  ],
+  "text": "A softer light falls across your affections during this period. Neptune in sextile to your natal Venus does not overturn anything. For about a year, often with several exact touches as the planet loops, it simply makes tenderness easier. Sympathy comes more readily, grudges feel heavier than they are worth, and beauty seems worth more of your time than usual. This is a gentle opening, and gentle openings are easy to sleep through, so the period rewards attention more than effort. While the aspect applies, you may find yourself drawn to art you had stopped making, to music you had stopped hearing closely, to people whose company is quiet and kind. Near each exact pass the pull strengthens. A friendship can deepen into something devoted, a creative habit can catch, an act of generosity can open a door you did not know was there. In love, this transit refines rather than ignites. Existing relationships benefit from imagination: seeing the person you know well as if for the first time, forgiving the small frictions, letting romance be atmosphere instead of negotiation. New attractions under this sky tend to be sweet and idealized in a manageable way. You can enjoy the glow while still seeing the person, which is exactly what harder Neptune periods cannot promise. With money and possessions, your taste turns finer and less acquisitive. You may care less about owning and more about experiencing, and a little of that shift usually stays. Because Neptune retrogrades, the sextile can complete up to three exact contacts across the stretch. Treat the repeats as the same quiet invitation returning: the first pass hints at where softness wants in, the second lets you practice it, the third folds whatever you practiced into character. Nothing forces you to accept any of this. Decline it and the season passes without cost, which is exactly why so many people miss it. Accept it, even in small ways, and the yield is out of proportion to the effort: a kinder ear, work with more feeling in it, a relationship refreshed without a crisis to prompt the refreshing. As the final pass separates, the light returns to normal, but the habits you formed under it do not fade with the sky. Growth here is almost invisible while it happens. You only see it later, when you notice you have become somewhat easier to love and considerably easier to be, and you cannot point to any single event that did it."
+ },
+ {
+  "id": "transit:neptune:square:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "venus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:neptune~natal_venus:square"
+  ],
+  "text": "This period tests the difference between love and the picture of love. Transiting Neptune square your natal Venus works like a mist across the heart. For a year or more, with up to three exact passes as Neptune loops back and forth, what you desire and what is actually there refuse to line up. While the square is applying, dissatisfaction seeps in quietly. A solid relationship can start to feel flat next to some imagined finer feeling, and a new attraction can feel like destiny precisely because you cannot see it clearly. Neptune's classic trick under pressure is the mirage, and Venus names what the mirage will be about: a person, a romance, a purchase, a shine on something that turns out to be mostly light. The mist sits heaviest around each exact pass. This is when people fall for the unavailable, idealize the unsuitable, or feel an ache of longing with no object at all. It is also when financial judgment runs softest, so vagueness about money, yours or anyone else's, costs the most now. If a disappointment arrives, and with this transit one often does, it tends to reveal less about the other person than about the size of the dream you had draped over them. That discovery stings, but it is the useful center of the whole period. The retrograde re-hits mark the stages. The first pass usually stirs the longing or the doubt, the second strips some paint off the fantasy, and the third leaves you with whatever was real underneath. Relationships built on actual affection generally survive this weather, humbler and more honest. Relationships held together by image tend not to, and their ending, however sad, rarely looks like a mistake a few years later. The same sorting happens inside your tastes and values. Some things you were sure you wanted stop mattering, and the deflation can feel like loss before it feels like relief. What helps most is delaying verdicts. Feelings under this square are genuine as feelings and unreliable as evidence, so the kindest thing you can do for your future self is let the big conclusions about love wait for clearer air. As the final pass separates, color returns. You see the people in your life at their true scale again, which is usually smaller than the dream and better than the disillusion. What the period leaves behind is a quieter, more durable way of loving: less hungry for enchantment, more able to be enchanted by what is actually present. You lose some illusions you were fond of, and in exchange you get a heart that can tell glitter from gold at close range, which changes what you reach for from then on."
+ },
+ {
+  "id": "transit:neptune:trine:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "venus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:neptune~natal_venus:trine"
+  ],
+  "text": "Tenderness comes easily under this sky, and so does inspiration. Neptune trine your natal Venus shades a year or more, usually with several exact passes, and its whole character is ease: the ideal and the real cooperate for once instead of competing. Love softens without dissolving. In an existing relationship you find it simpler to give, to overlook the unimportant, and to feel the other person's inner life from the inside. Many couples quietly renew under a trine like this without a single dramatic scene. If you meet someone new while the aspect is close, the attraction tends to carry a dreamlike, almost familiar quality, and unlike the harsher Neptune contacts, the dream and the person usually have a fair amount to do with each other. Your senses refine across the whole period. Art, music, color, and atmosphere reach you more deeply, and if you make anything at all this is a high-water season for it. The applying months gather impressions, the exact passes are when the work flows almost by itself, and the separating months are for finishing what the flow left behind. Compassion widens too, often past your usual circle, and giving your time, attention, or money feels less like subtraction than usual. The risks here are mild but worth naming. A trine asks nothing, so its gifts can slide by as pleasant weather, and Neptune's softness can shade into passivity: enjoying the glow of possibilities instead of choosing one, or letting practical matters drift because everything feels fine. Money in particular deserves ordinary attention now, not because trouble is coming but because vagueness is comfortable under any Neptune sky. The retrograde returns are friendly repetitions rather than tests. An inspiration or a bond introduced on the first pass deepens on the second and settles into your life on the third. Very little about this period is loud. Its work happens in the background of taste and affection, and you may only notice at the end that your standards changed, away from show and toward soul, and that some gentleness you tried on as a mood stayed on as a trait. When the last pass separates, keep something the season made, a piece of work, a practice, a relationship habit, because the sky will not hold this door open again for a long time. The growth is simple and real. You learn how much love your ordinary life can hold when nothing is forcing the question, and knowing that changes how you furnish the years that follow."
+ },
+ {
+  "id": "transit:neptune:opposition:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "venus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:neptune~natal_venus:opposition"
+  ],
+  "text": "Under this opposition the fog stands across from you, usually wearing a face. Transiting Neptune opposite your natal Venus colors a year or more of your relationship life, and it tends to work through other people: someone you love, someone you want, someone who wants something from you. Venus is your affection and your values. An opposition confronts, and Neptune confronts by blurring, so the classic events of this period involve a gap between who someone seemed to be and who they are. A partner turns out to have a hidden struggle or a hidden life, a charming newcomer proves more mirage than person, or you find yourself cast as rescuer or rescued in a bond that quietly stops being equal. In the applying months the signs are small: a vagueness, a story that does not quite add up, an idealization you can feel yourself performing. Around the exact passes the picture usually breaks open, and how much it hurts depends mostly on how much fantasy had accumulated. It matters to say plainly that not every version of this transit is betrayal. Just as often it is compassion stretched to its limit, loving someone through an illness or a hard season and learning where care ends and self-erasure begins. Money shared with others sits under the same haze, and agreements that live on trust alone tend to be the ones this period examines. Neptune's retrograde loop gives you up to three exact passes, and they behave like acts of a play. The first raises the confusion or the enchantment, the second lets you see it with some distance, and the third asks for a settlement: forgiveness with clear eyes, a rebalanced bond, or a graceful release. The temptation throughout is to resolve the discomfort by force, either by declaring the other person a fraud or by doubling down on the dream. Neither is usually true. Most people you meet under this sky are neither saints nor deceivers, just humans onto whom you can momentarily project with unusual power, and the projection is the thing the period wants you to catch. As the opposition separates, relationships regain their edges. Some bonds come out cleaner for having been seen truly. Some end, and their ending tends to feel less like rupture than like waking. What stays with you is a better instrument. You have watched your own longing dress a real person in borrowed light, and once you have seen yourself do that, you never again fully mistake the wardrobe for the wearer. That is a quieter kind of relational wisdom than the period's drama suggests, and it outlasts every illusion the year dissolved."
+ },
+ {
+  "id": "transit:neptune:conjunction:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "mars",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:neptune~natal_mars:conjunction"
+  ],
+  "text": "For about a year, sometimes longer, your will runs through water. Neptune conjunct your natal Mars fuses the planet of drive with the planet of dissolving, and most people meet it once at most. Mars is how you push: anger, desire, initiative, the simple ability to want something and go get it. With Neptune sitting on that function, pushing stops working the way it used to. Efforts that would normally land seem to sink without a ripple, motivation comes and goes like weather, and your physical energy may honestly be lower, asking for more rest than pride wants to grant. In the applying months this often reads as vague discouragement. You cannot name what is wrong, only that your usual force is not there when you reach for it. Around the exact passes the dissolving peaks, and this is when fighting the transit costs the most. Direct confrontation tends to go strange now. Opponents are hard to pin, goals blur when you charge at them, and anger itself can feel oddly hard to locate or aim. What works instead is the different mode of action this conjunction is actually offering. Neptune does not destroy Mars; it refines it. Effort spent on something beyond your own advantage, a cause, a craft, someone who needs help, seems to draw on a second tank the transit never empties. Imagination becomes an engine, and work that needs subtlety, timing, artistry, or empathy goes better than work that needs a battering ram. Because Neptune retrogrades, the conjunction usually makes up to three exact passes over an extended stretch. The first tends to take the wind out of the old way of striving, the return pass teaches the softer method, and the final pass hands your strength back in its new form. Two cautions belong to this period. Escapes of every kind pull harder when willpower is thin, and it helps to notice which ones you reach for. And because your own aims are misty, other people's aims can slip in unexamined, so commitments made in this fog deserve a second look before they harden. None of this means a lost year. Many people do quietly remarkable things under this transit; they just do not do them by force. When the conjunction separates and your ordinary drive returns, it returns educated. You know now that will is not only pressure, that timing beats effort more often than effort admits, and that you can act from inspiration rather than friction. People who take that lesson keep a kind of unforced effectiveness afterward, a way of moving toward what they want that no longer needs an enemy or an emergency to get started."
+ },
+ {
+  "id": "transit:neptune:sextile:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "mars",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:neptune~natal_mars:sextile"
+  ],
+  "text": "An easier alliance between dreaming and doing is on offer here. Neptune sextile your natal Mars runs for a year or so, with several exact touches as the planet loops, and it opens a channel between imagination and action that is normally half closed. Mars is your drive. Neptune is your capacity for vision and empathy. The sextile lets them trade gifts without either taking over. Practically, this shows up as knowing how to move without shoving. Your timing improves, you sense when to press and when to wait, and you can advance a goal sideways, through inspiration, persuasion, and atmosphere, in situations where straight force would have jammed. While the aspect applies, notice which efforts start to feel guided: a project that needs both craft and feeling, a physical practice with a meditative side, work in service of people or causes you actually care about. Near each exact pass those threads strengthen, and starting something along them tends to succeed out of proportion to the push you give it. This is also one of the better periods for acting on compassion. Helping costs you less than usual and gives back more, and anger, when it comes, is easier to convert into repair instead of damage. Creatively, hands and vision cooperate. Making things, building things, rehearsing things all go smoothly, and the discipline half of art, the part Mars owns, stops feeling like a fight. The retrograde re-hits keep re-extending the offer, up to three exact contacts across the stretch. An initiative begun on the first can be refined on the second and made routine by the third. The one real hazard is drift. A sextile never insists, and Neptune is content to stay a pleasant mood, so the period can pass as nothing but nice daydreams if you never put an act to any of them. One small concrete move per inspiration is enough to keep the channel real. As the final pass separates, the special ease fades, but a skill remains if you used the season. You have practiced letting desire and imagination steer together, and that coordination, wanting what you envision and moving on it gently, stays available long after the aspect is gone. It is a modest transit with a durable residue, and people who work with it tend to look back on the stretch as the time their effort learned grace."
+ },
+ {
+  "id": "transit:neptune:square:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "mars",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:neptune~natal_mars:square"
+  ],
+  "text": "This square puts your drive through fog, and the fog does not fight fair. Transiting Neptune square your natal Mars stretches across a year or more, with up to three exact passes as Neptune loops, and its signature experience is effort that cannot find traction. Plans stall for reasons nobody can point to. Opposition, when it appears, is indirect: mixed signals, quiet resistance, promises that evaporate, situations where there is nothing solid to push against and pushing harder only tires you. Your energy itself may run lower and less reliable than usual, and anger gets slippery, arriving late, aimed wrong, or leaking out as irritability at people who did not cause it. In the applying months this reads as mounting frustration with a blurred target. Around the exact passes discouragement can get loud, and a sense of weakness or futility may whisper that you have lost your edge. You have not. The edge is intact; the conditions reward a different tool. Two temptations define the danger of this period. The first is force: doubling the pressure on a situation that answers pressure with mist, which mostly produces exhaustion. The second is crookedness. When open effort keeps failing, the shortcut, the shaded truth, the quiet maneuver starts to look reasonable, and under this square hidden moves have a way of surfacing at the worst time and costing more than they bought. Escapist relief also pulls harder while willpower is thin, and it is worth watching what you lean on. What actually works is humbling and simple. Scale efforts down to what the fog allows, check facts before you act because information now is often wrong, and give some of your strength to something beyond your own advantage, since effort spent in service seems strangely exempt from the transit's tax. The re-hits give the lesson its rhythm. The first pass usually defeats the old method, the second catches you trying it again, and the third finds you either worn out by insistence or converted to subtlety. Conversion is the better outcome, and it is genuinely available. As the square separates, traction returns, and the frustrations of the period tend to shrink in memory faster than expected, because most of what was blocked turns out not to have mattered as much as the blocking suggested. What matters is what you keep: a will that has learned when not to push, a temper that has learned where its anger actually belongs, and a working knowledge of your own escape hatches. You come out of this transit less forceful and more effective, a trade almost no one would choose in advance and almost everyone is glad of afterward."
+ },
+ {
+  "id": "transit:neptune:trine:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "mars",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:neptune~natal_mars:trine"
+  ],
+  "text": "Acting on inspiration gets rare official support during this period. Neptune trine your natal Mars lasts a year or more, usually completing several exact passes, and it blends drive with imagination so smoothly that you may not notice the blend, only the results. Things you do now tend to carry an extra quality: the practical move that also happens to be graceful, the assertive word that lands gently, the project that serves your interest and someone else's at the same time. Mars supplies the push and Neptune supplies the feel, and under a trine the two cooperate without being asked. Physically, your energy runs subtle rather than fierce. Endurance and rhythm come easier than raw bursts, which favors dance, swimming, walking, craft, any activity where flow beats force. In work, you are more persuasive than usual and less abrasive, able to move people toward a goal without anyone feeling shoved. This is a natural season for leading quiet efforts, mentoring, or doing the kind of good that never makes a report. Desire itself softens and refines. What you want tends to line up better with what you admire, so pursuing it leaves less residue than in rougher seasons. While the trine applies, half-formed intentions start finding their moments. Near the exact passes, beginning matters most, because whatever you set moving then tends to keep moving on its own. The retrograde returns behave kindly, revisiting rather than testing, and an effort begun on one pass matures across the others. The season's only trap is its comfort. A trine demands nothing, and inspired feelings can substitute for inspired acts, so it is possible to spend the whole stretch pleasantly intending. The remedy is small and boring: give each genuine inspiration one concrete step while the sky still helps. Money and ambition are not this transit's fields; meaning is. The efforts that flourish now are the ones with some soul in them, while efforts that are purely for gain proceed as usual, no better. As the final pass separates, the special smoothness fades, but you keep a calibration: the memory of how it feels when will and imagination pull together, and the ability to reproduce a working copy of that state on purpose. That is worth more than the year's pleasantness suggests, because it changes how you begin things ever after, less grinding, more listening first, then the push."
+ },
+ {
+  "id": "transit:neptune:opposition:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "mars",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:neptune~natal_mars:opposition"
+  ],
+  "text": "Conflict loses its shape during this period, and that is the whole test. Transiting Neptune opposite your natal Mars colors a year or more, with up to three exact passes, and it tends to stage its lessons through people and circumstances that will not meet you squarely. You push; the world yields and then reforms. You ask direct questions; the answers arrive soft and incomplete. Rivals, obstacles, and even ordinary logistics take on a slippery quality, and the harder you drive at them the more your force seems to vanish into the mist, leaving you tired without a fight to show for it. In the applying months this is mostly atmosphere: a sense that your efforts are being quietly undercut, that someone is not being straight, that the game has rules nobody stated. Around the exact passes it can sharpen into real events, a dispute with a person who fights indirectly, a commitment that turns out to rest on misrepresentation, a struggle where the other side's motives never do come clear. Suspicion runs hot under this sky and accuracy runs cold, so it is worth holding both facts at once: deception is genuinely more likely now, and so is imagining it where it is not. Checking beats intuiting for the duration. The retrograde re-hits usually unfold as escalation, review, and resolution. The first pass surfaces the murky situation, the second gives you distance enough to see your own part in it, and the third settles it, often with less drama than the middle promised. Strategy matters more than strength throughout. Battles won now are won by patience, good records, and the refusal to be provoked; battles lost are usually lost by charging fog. Your own energy needs stewardship too, since this opposition can quietly drain vitality, and rest is not a defeat but a tactic. There is also a subtler current worth naming. What you meet in others under this transit is sometimes your own disowned force wearing their face, anger you did not express arriving as their evasiveness, desire you did not admit arriving as their pressure. Catching even one such reflection repays the whole period. As the opposition separates, the air clears and directness works again, almost startlingly well. What you keep is a matured relationship with your own power. You have learned to act without a clean target, to tell real treachery from projected fear, and to hold strength in reserve without feeling weak. Those capacities turn out to be useful in every season that follows, most of which, mercifully, fight fair."
+ },
+ {
+  "id": "transit:neptune:conjunction:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "jupiter",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:neptune~natal_jupiter:conjunction"
+  ],
+  "text": "Faith expands past its banks while this transit lasts. Neptune conjunct your natal Jupiter joins the two planets most concerned with something more, Jupiter through growth and belief, Neptune through dream and dissolution, and it comes around at most once in a lifetime, shading a year or more with up to three exact passes. Under it, your sense of possibility inflates. Ideas feel bigger, causes feel truer, generosity feels natural, and some form of the question of what it all means moves from the edge of your life toward the center. For many people this is a genuinely elevating period. A spiritual practice takes root, a philosophy reorganizes itself around compassion, and art or study opens into territory that ordinary seasons keep locked. The applying months bring restlessness with the merely practical, a hunger for meaning that your existing answers do not satisfy. Around the exact passes the visions peak, and so does the period's one real hazard: judgment about scale. Neptune removes the limits from Jupiter's optimism, so plans conceived now tend to be drawn too large, promises come easily to the lips, and anything or anyone offering transcendence at a price finds you unusually receptive. Financial hope is especially prone to fog, and schemes that flatter your dreams deserve twice their usual scrutiny for the duration. The re-hits give the inflation its arc. The first pass pours the vision in, the retrograde return tests it against daylight and shrinks what was only vapor, and the final pass leaves a residue of belief that has actually earned its size. That residue is the point. Not every dream from this period survives, but the ones that do tend to be the truest things you carry forward, and even the ones that dissolve leave your imagination permanently wider than it was. Generosity given now, whether time, money, or faith in someone, is remembered longer than you expect, though it helps to give from the overflow rather than the foundation. As the conjunction separates, proportion returns, and there is often a mild deflation to weather, the morning-after feeling of a mind coming back from somewhere vast. Let it come without cynicism. The mature outcome of this transit is neither disillusion nor permanent rapture but a larger working faith: beliefs that have been stretched, rinsed, and resized to fit reality, plus the memory of how big the sky actually looked. You can steer by that memory for decades. It quietly raises what you think life is for, and that, more than any single opportunity the year offered, is what the period was doing all along."
+ },
+ {
+  "id": "transit:neptune:sextile:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "jupiter",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:neptune~natal_jupiter:sextile"
+  ],
+  "text": "Hope grows in workable doses through this period. Neptune sextile your natal Jupiter runs about a year, usually with several exact contacts as the planet loops, and it gently raises your ceiling: more faith, more imagination, more willingness to believe that life can be generous, all offered at a scale you can actually use. Jupiter is your sense of possibility and meaning. Neptune refines it toward the compassionate and the ideal, and the sextile keeps the exchange civilized, so vision expands without floating away. In daily terms, the period favors learning with soul in it. Philosophy, spiritual study, travel taken for wonder rather than escape, teachers and books that enlarge you, all of these find you more easily now, and what you absorb tends to stick. Charitable impulses come naturally and cost less than usual. Helping, giving, and mentoring under this sky have a way of returning through side doors months later. Your optimism is trustworthy in this window to an unusual degree, and modest ventures built on it, a course, a cause, a creative project with some idealism in its bones, tend to grow steadily rather than spectacularly. While the aspect applies, notice which hopes keep resurfacing. Near each exact pass, act on one of them in a small way, because openings under a sextile respond to acceptance and simply close when ignored. The retrograde re-hits renew the offer up to three times. An interest sparked on the first contact deepens across the return and, by the third, has become part of the furniture. Little about this transit is dramatic, and that is its virtue. It carries none of the inflation risk of the harder meetings between these two planets. Dreams stay roughly life-sized, promises stay keepable, and generosity stays inside your means unless you push it. The only failure mode is passivity, letting the season remain a pleasant mood with nothing to show for it. As the final pass separates, you keep whatever you practiced: a faith slightly larger and better founded, a habit of giving that no longer feels like loss, and a sense of meaning that got fed regularly instead of starving between crises. It is quiet growth, the kind you notice a year later when you realize your default answer to life has softened from maybe to probably yes."
+ },
+ {
+  "id": "transit:neptune:square:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "jupiter",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:neptune~natal_jupiter:square"
+  ],
+  "text": "During this period your hopes outgrow your evidence, and the gap is where the lessons live. Transiting Neptune square your natal Jupiter shades a year or more, with up to three exact passes, and it presses on the machinery of belief. Jupiter's confidence that things will work out meets Neptune's talent for making anything look luminous, and the square jams them together until judgment slips. The classic symptom is inflation without a ceiling. Plans grow in the telling. Promises, yours and other people's, come out larger than anyone can keep. Opportunities appear trailing glory, and the finer they look the less they usually weigh; vague ventures and causes that ask for faith up front do their best recruiting under exactly this sky. Meanwhile a restlessness runs underneath, a feeling that ordinary life is too small and that something grander is owed to you, which makes the oversized offers harder to refuse. In the applying months this is mostly mood. Around the exact passes it starts writing checks, and commitments made at the peak of the fog are the ones most often regretted in the clearing. Your beliefs get tested too. A philosophy or faith you have leaned on may spring leaks, promising more than it delivers or fitting your actual life less well than it once did, and the discomfort of that can push people toward either cynicism or doubled-down credulity. Neither is the assignment. The assignment is discernment, learning to tell hope from wish, and the retrograde re-hits run the course in three sittings: the first pass sells you something too big, the second shows the seams, and the third asks what, having seen the seams, you still believe. Whatever survives that question is yours in a way it was not before. Ordinary guardrails carry real weight for the duration: numbers looked at twice, enthusiasms slept on, generosity kept inside your means, and thrilling claims checked before you repeat them. None of this requires becoming small. Dreaming is not the error here; treating the dream as collateral is. As the square separates, proportion returns. Some of the period's grand visions will look faintly embarrassing, while one or two, resized, turn out to be genuinely worth building, and that sorting is the profit. You come away with a faith that has been through customs, optimism that can survive an audit, and a lasting feel for the difference between the glow of something true and the glare of something merely bright. Learned once under this square, that rarely has to be learned a more expensive way later."
+ },
+ {
+  "id": "transit:neptune:trine:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "jupiter",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:neptune~natal_jupiter:trine"
+  ],
+  "text": "A season of easy faith settles over you here. Neptune trine your natal Jupiter lasts a year or more, with several exact passes along the way, and its gift is harmony between your beliefs and your dreams. What you hope for and what you sense to be true stop arguing, and a kind of quiet confidence in life fills the space where the argument used to be. Under this sky, generosity is nearly frictionless. You give more easily, judge more gently, and find it natural to assume good faith, and because a trine tends to be met in kind, the world often answers with the same courtesy. Spiritually this can be a high plateau. Practices deepen without strain, questions of meaning feel nourishing instead of anxious, and many people mark a stretch like this, years later, as the time their private philosophy actually became livable. Imagination and wisdom feed each other. Study turns inspired, travel turns inward as much as outward, and creative or scholarly work done now carries a breadth that is hard to fake in drier seasons. The applying months lift the mood by degrees. The exact passes are the summit, a favorable time to begin anything whose engine is meaning: a course of study, a body of work, an act of sustained kindness. The separating months are for consolidating, so the altitude does not simply evaporate. The retrograde returns revisit gently, deepening on the second pass what the first opened and settling it on the third. The transit's weaknesses are the trine's usual ones, only softer. Ease invites drift, contentment can stand in for growth, and the sense that all is well can postpone efforts that still need making. Nothing about this period punishes laziness; it just quietly refunds less. And your optimism, while trustworthy in feel, still benefits from ordinary arithmetic at the edges, since Neptune blurs sums even when it means well. When the final pass separates, the plateau lowers, but what you built on it remains at valley level: a faith exercised until it turned practical, friendships and works begun in generosity, and an unforced conviction that life is on balance for you rather than against you. Carried out of the season, that conviction behaves less like a mood than like equipment, and it steadies every harder transit that comes after."
+ },
+ {
+  "id": "transit:neptune:opposition:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "jupiter",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:neptune~natal_jupiter:opposition"
+  ],
+  "text": "The oversized promise tends to arrive from outside during this period. Transiting Neptune opposite your natal Jupiter runs a year or more, with up to three exact passes, and it stages a confrontation between your sense of meaning and the visions other people are selling. Jupiter is your faith and your appetite for more. An opposition puts its pressure across the table, and Neptune makes whatever sits across the table shimmer. So the recurring scene of this transit is an encounter with something that promises abundantly, a person, a doctrine, an opportunity, a movement, and the recurring question is how much of the promise is real. In the applying months the shimmer builds. Offers and philosophies that once would have struck you as too good, too vast, or too vague begin to look plausible, partly because your hunger for meaning is genuinely up, and partly because Neptune is dimming the instruments you would normally check them with. Around the exact passes the encounter usually crystallizes. A commitment is requested, a belief is challenged by someone else's grander one, or a venture you joined on faith shows its actual dimensions. Some of what arrives under this sky is true and valuable, which is what makes the sorting hard. The period is not a warning against believing, only against believing on schedule. The retrograde re-hits are the sorting mechanism. The first pass brings the enchantment, the second brings the daylight audit, and the third brings the settlement, in which the genuine article stays at a corrected size and the inflated one goes the way inflated things go. Along the road, your own convictions get examined too, since oppositions mirror. The extravagance you spot so easily in others is often a version of a wish you have been carrying quietly yourself, and noticing that is worth more than any single decision the year demands. What helps most is the pairing of open heart and slow hand: staying receptive to meaning while letting claims age before you fund them with money, time, or identity. As the opposition separates, scale returns to the world, and you find you can measure again. What remains is a faith with better manners at the border, welcoming toward wonder, unhurried with strangers bearing miracles, and clearer than before about the difference between what enlarges you and what merely flatters your hope. That discrimination, learned once here, quietly protects every enthusiasm you will ever have."
+ }
+]

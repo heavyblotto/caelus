@@ -1,0 +1,142 @@
+[
+ {
+  "id": "transit:neptune:conjunction:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "pluto",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:neptune~natal_pluto:conjunction"
+  ],
+  "text": "Some transits arrive as events. This one arrives as a change of weather at a depth you rarely check. Natal Pluto is the engine room of your chart: the survival drive, the buried compulsions, the will that grips what it cannot afford to lose, the capacity to end things and begin again. Transiting Neptune dissolves whatever it touches, and when it fuses with this point, what softens is the grip itself. Most people meet this conjunction once at most, and many never do; when it comes, it shades a year or more, often with two or three exact passes as Neptune loops back over the degree. In the applying months the change is almost subliminal. Intensities you have carried for decades, an old grievance, a private ambition, a fear you organized your life around, begin to feel strangely lighter, as if the water level rose beneath them. You may not notice the loosening so much as its side effects: vivid dreams, a pull toward the hidden and the spiritual, less appetite for the fights you used to relish. Around the exact passes the dissolving peaks, and it can be disorienting. Wanting itself goes hazy. You may wonder what all that intensity was for, and the honest answer may take the whole transit to form. There is a real hazard here, which is mistaking the fog for transformation. Drifting, numbing, or surrendering to whatever current is nearest can wear the costume of letting go. The difference is what remains afterward. If Neptune retrogrades back across the point, the first pass usually loosens the grip, the return pass shows you what the grip was protecting, and the final pass lets a quieter kind of strength settle where the clenching used to be. As the conjunction separates, the water recedes and you can see what stood on rock. Some obsessions simply do not come back, and their absence feels less like loss than like a hand unclenching after years. What this period asks of you is trust at a level deeper than plans: trust that your power does not depend on pressure, that you can release control of the underworld of your own psyche without being swallowed by it. People who move through this transit attentively tend to come out with the same force they always had, held differently, open-handed instead of white-knuckled. That change is invisible from outside and unmistakable from within, and it colors everything you build after the sky moves on."
+ },
+ {
+  "id": "transit:neptune:sextile:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "pluto",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:neptune~natal_pluto:sextile"
+  ],
+  "text": "A quiet door opens between your imagination and your depths during this period. Neptune moving in sextile to your natal Pluto is one of the subtlest transits you can have, and one of the longest: it can color a year or more, with several exact touches as the planet loops, and for most points in a chart a given Neptune aspect comes once at most. Pluto in your natal chart marks where you hold on hardest and where you are capable of real renewal. Neptune, arriving gently, offers to irrigate that ground rather than flood it. Nothing about a sextile forces. While the aspect applies, you may simply notice a new curiosity about what lies under your own surface: an itch to understand your family's history, a pull toward psychology or meditation, a willingness to look at motives you used to leave in the dark. Near each exact pass the invitation gets a little louder. A conversation goes deeper than planned. A book or a practice finds you at the right moment. An old resentment, examined in this softer light, turns out to be ready to drain, and letting it go costs less than you had budgeted. Because the opening is gentle, it is easy to sleep through, and most people do. The transit will not interrupt your schedule or force a crisis. It rewards small deliberate acts: an hour of honest reflection, a difficult letter written and maybe never sent, a habit of noticing what you are gripping and asking why. If Neptune backtracks over the degree, treat the repeat contacts as installments of one process. The first pass tends to surface the material, the second lets you work it, and the third folds the work into who you are. In outer life this period often coincides with a mild but steady shift in what feels worth wanting. Ambitions lose a little of their compulsive edge and gain a little soul. You may find yourself drawn to causes larger than your own advancement, or to creative work that says something true instead of something impressive. Nothing here will look dramatic in a year-end review. The growth is the kind you only see in retrospect, when you realize that something that used to run you now merely lives with you, and that you released it so gradually there was never a single day you could point to."
+ },
+ {
+  "id": "transit:neptune:square:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "pluto",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:neptune~natal_pluto:square"
+  ],
+  "text": "Fog rolls into the engine room during this transit. Your natal Pluto is the place where you exert deep control: the survival strategies, the compulsions, the private will that keeps certain things from ever falling apart. A square from transiting Neptune undermines that control in the way water undermines a foundation, slowly and from below, and the whole process can span a year or more with up to three exact passes. Most people meet this square once in a lifetime if at all. In the applying stretch the first sign is usually a vague unease you cannot source. Strategies that always worked start returning strange results. You push where pushing used to move things and feel the push disappear into mist. Suspicion can bloom in this atmosphere, of others, of institutions, of your own motives, and part of the work is telling real signals from vapor. Around the exact passes the friction peaks, and it often peaks as exposure: some compulsion you did not fully know you had, a need to dominate an outcome, a secret bargain with fear, becomes visible precisely because it stops working. This is uncomfortable and it is also the point. Neptune is not attacking your strength; it is dissolving the counterfeit parts of it, the control that was really anxiety wearing armor. The characteristic temptations of the period are doubling down and checking out. Tightening your grip on everything feels safer and quietly makes things worse. Escaping into fantasy, or into whatever reliably numbs you, feels easier and costs more than it seems to. The livable path runs between them: keep doing the concrete things that are actually yours to do, and let the outcomes stay blurry for a while without treating the blur as an emergency. If the planet retrogrades back over the degree, the passes tend to divide the labor. Confusion dominates the first, confrontation the second, and the third, often the calmest, integrates what the other two turned up. As the square separates, the fog thins and you discover what it took: mostly illusions about how much of life you were ever steering. What it leaves is more valuable than it sounds. You come out knowing the difference between surrender and defeat, and between control and strength, not as slogans but as felt knowledge. Power that survives this period is real power, sized to reality, and people tend to trust you more afterward because you no longer need them to."
+ },
+ {
+  "id": "transit:neptune:trine:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "pluto",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:neptune~natal_pluto:trine"
+  ],
+  "text": "Deep change without crisis: that is the signature of this period. Transiting Neptune in trine to your natal Pluto puts your imagination and your instincts on the same side for a long stretch, often a year or more with several exact contacts as the planet loops, and for most people this particular meeting happens once at most. Pluto in your chart is where endings and regenerations live, the ground floor of your will. Neptune reaches it here by an easy angle, so instead of flooding the foundation it seeps in like spring water. Things that needed to end start ending on their own, gently. An old identity you outgrew years ago finally stops asking for maintenance. A grudge you were still paying storage on quietly leaves. In the applying months you may notice your inner life getting louder in a pleasant way: dreams with weight to them, intuitions that check out, a sense that the surface of things is not the whole story. Around the exact passes the current runs strongest, and this is when the period gives its best gifts to anyone doing inner work of any kind. Therapy goes deeper with less resistance. Meditation or prayer, if you practice either, stops feeling like technique and starts feeling like contact. Creative work made now tends to carry an undertow, a charge readers and listeners feel before they can explain it. Because the trine does not force anything, its main risk is passivity. You can float through the whole transit and come out mildly refreshed, which is fine, but the same current will carry real cargo if you load it. The re-hits give the process a shape: an early pass that opens the depth, a middle one that lets you move around in it, a final one that seals what changed. In relationships this period favors honesty of a particular kind, the kind that admits what you actually feel underneath what you are supposed to feel. Conversations like that go surprisingly well now. As the trine separates, the water table drops back to normal, but the channels it carved remain. You keep the access: to your own depths, to compassion for what other people are carrying, to a kind of quiet power that does not need to announce itself. Growth under this transit is less like climbing and more like settling, the way a house settles onto its true foundation."
+ },
+ {
+  "id": "transit:neptune:opposition:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "pluto",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:neptune~natal_pluto:opposition"
+  ],
+  "text": "This transit tends to meet you through the outside world. An opposition works across the chart like a mirror, and when transiting Neptune opposes your natal Pluto, the deep material Pluto governs, power, compulsion, survival, the will to control, shows up wearing other people's faces. Many people never receive this transit at all, and no one receives it twice; when it comes, it can shade a year or more, with up to three exact passes as Neptune stations and returns. In the applying months the mirror usually appears as fascination. Someone or something acquires a strange magnetism: a charismatic figure, a cause, a group, a mystery you cannot stop turning over. The pull is real, but under this aspect what pulls you is partly projection. Qualities that belong to your own depths, intensity you have not owned, power you have not claimed, or ruthlessness you have not admitted, look like they live out there, glamorous or menacing depending on the day. Around the exact passes the projection reaches full strength, and so does the fog around it. This is the classic season of the seductive expert, the situation that is never quite what it claims, the power struggle where you cannot locate the lever. Discernment is the whole curriculum. Not cynicism, which is just fog with a scowl, but the slower skill of watching what people do across time and letting the record outvote the aura. If Neptune retrogrades back across the point, the passes tend to run in sequence: the first enchants, the second complicates, and the third clarifies, often by letting you see the human being where the shimmer was. Money, shared resources, and anything involving other people's control over your circumstances deserve unglamorous attention during this period, read twice, promised slowly. The deeper work is reclamation. Every quality you were projecting is yours, and the transit keeps arranging encounters until you notice. The intensity you admired or feared in the other person is your own, waiting to be used honestly. As the opposition separates, the figures across the mirror lose their supernatural lighting and become ordinary sized, and so, mercifully, do you. What remains is a subtler relationship with power itself: you have watched it dissolve and reform in someone else's hands, and you come away less impressed by its costume and more careful with your own."
+ },
+ {
+  "id": "transit:neptune:conjunction:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "chiron",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:neptune~natal_chiron:conjunction"
+  ],
+  "text": "Natal Chiron marks the old wound, the hurt that never fully closed and the unusual skill that grew up around it. When transiting Neptune reaches this point, the scar tissue soaks soft. This is a slow event, a year or more, usually with two or three exact passes as Neptune loops, and most people meet it once in a lifetime at most. In the applying months you may feel unaccountably tender. Feelings connected to the original hurt drift back without their stories attached: a sadness with no headline, a flinch at something small, tears at a song that never used to touch you. This can be confusing, because nothing in your present life seems to justify it. Nothing has to. Neptune is dissolving the casing you built around the sore place, and what leaks out is old. Around the exact passes both the ache and the grace peak together. On the difficult side, the period can pull toward anesthesia. Whatever you use to not feel, and everyone uses something, gets more attractive now, and the martyr script, the story where your suffering is your identity, can start to sound like wisdom. On the generous side, this is one of the genuinely healing transits. Compassion arrives in quantities you did not order: for yourself, for the people who hurt you, who shrink to human size in this light, and for strangers carrying what you have carried. Forgiveness that effort could never produce sometimes simply happens, the way ice leaves a river. If Neptune retrogrades back over the degree, the work arrives in installments: first a reopening, then a reframing, and at the last pass a release. Many people find that helping others becomes the channel through which their own repair runs during this period. The wound turns out to be a credential; you understand a kind of pain from the inside, and someone near you needs exactly that understanding. As the conjunction separates, you do not get amnesia and you do not get the past rewritten. You get something better fitted to an adult life: the hurt keeps its history but loses its command over you, and the tenderness the transit brought does not entirely evaporate. People who have been through this often say afterward that they stopped waiting to be fully healed and discovered that the waiting was the last bandage. What grows here is the quiet authority of someone who has made peace with a limp, and that authority tends to be exactly what others trust."
+ },
+ {
+  "id": "transit:neptune:sextile:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "chiron",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:neptune~natal_chiron:sextile"
+  ],
+  "text": "During this period an old sore spot becomes approachable. Transiting Neptune in sextile to your natal Chiron is a mild, patient aspect, active for a year or so with several exact touches as the planet loops, and like every Neptune contact to a given point it is unlikely to come again. Chiron holds the hurt that taught you the most, and the odd competence that grew beside it. Neptune, arriving at a friendly angle, offers solvent in small doses: enough to soften, never enough to flood. While the aspect applies, the offers tend to be quiet. A conversation drifts near the old subject and, for once, the drift feels safe. A film, a piece of music, or a stranger's story reaches the sore place kindly instead of sharply. Sleep may bring the material too, dreams that handle old scenes with a gentleness the original scenes lacked. Near each exact pass the openings widen a little. This is a good season for any deliberate form of repair you already believe in, whether that is counseling, a spiritual practice, honest conversation, or making something with your hands, because the inner resistance that usually guards the wound is at low tide. It is an equally good season for a different kind of medicine: being useful to someone who is hurting in a way you recognize. Under this transit, help flows both directions through the same wound, and many people find that the hour they spent easing someone else's ache did more for their own than a month of introspection. Because a sextile only invites, the whole period can pass unused, and there is no penalty if it does. But small acts compound here. If Neptune backtracks across the degree, let the repeat contacts be drafts of the same letter: the first pass finds the words, the second says them, the third means them. As the aspect separates, you will probably not point to a single event and call it healing. You will just notice, some months later, that a topic you used to route around can now be walked through, that your history explains you without excusing you, and that the tenderness you extended to others somehow got forwarded back. Growth under this sky is cumulative and unspectacular, like a scar fading: never gone, steadily quieter."
+ },
+ {
+  "id": "transit:neptune:square:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "chiron",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:neptune~natal_chiron:square"
+  ],
+  "text": "The old ache comes back sideways during this transit. Neptune square your natal Chiron rarely announces its subject. Instead, over a stretch that can run a year or more with up to three exact passes, a fog of disappointment drifts through and keeps settling, with strange precision, on your oldest bruise. Most people meet this square once at most. In the applying months the pattern is usually indirect. Something you had quiet faith in, a person, a group, an ideal, a version of your own story, goes vague or lets you down in a way that is hard to name, and the letdown stings far out of proportion to its size. That disproportion is the signature. The present event is a messenger; the charge it carries is old. Chiron material hurts most when it is touched through disillusionment, because the original wound usually involved someone or something that was supposed to be safe and was not. Around the exact passes the pressure peaks, often as a mood more than an event: a grief without coordinates, a sense of being uniquely defective that no evidence supports. Two temptations wait here. One is numbing, since whatever softens feeling works overtime under a hard Neptune aspect and tends to collect its fee later. The other is blame with a blurry target, casting the present messenger as the original offender. The workable path is humbler: let the feeling be felt without forcing a tidy story onto it, and keep sorting the present people, who are merely human, from the past ones, who are not in the room. If Neptune retrogrades back over the degree, the re-hits usually soften in sequence. The first pass stirs the sediment, the second lets you see what actually settled there, and the third lets a surprising amount of it drain. Support helps in this period more than solitude does, and saying the unnameable thing out loud to one trustworthy person tends to shrink it by half. As the square separates, the fog lifts off the bruise and something has changed underneath it. Illusions about being finally, permanently past your history are gone, and so is some of the history's sting. You come out with a more honest map of where you are tender, fewer defenses that only worked on paper, and a compassion for other limping people that no painless life could have taught you."
+ },
+ {
+  "id": "transit:neptune:trine:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "chiron",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:neptune~natal_chiron:trine"
+  ],
+  "text": "A long grace period settles over your oldest pain. Transiting Neptune in trine to your natal Chiron works like humidity on something dried and cracked: slow, ambient, and kinder than any direct treatment. The influence can last a year or more, usually with a few exact contacts as Neptune loops, and a given Neptune aspect to this point tends to come once in a life if it comes at all. Chiron is where you were hurt early or deeply enough that the hurt became part of your architecture, and where you quietly became an expert in exactly what wounded you. Under this trine, that whole region of you relaxes. In the applying months, forgiveness starts costing less. Memories that used to arrive with a spike arrive with a dull edge, then with something close to neutrality. You may find yourself rereading your own history in a warmer light, not rewriting the facts but noticing what else was true: who was kind, what you managed, how young you actually were. Around the exact passes the softening is strongest, and it often does its best work through indirect channels. Dreams take up repair duty. Art, music, water, and unstructured time do more than analysis. Sitting with an animal or walking somewhere green counts as progress now, which is not something every season can say. This is also a period when the healer side of Chiron comes forward gracefully. People bring you their broken things, sensing correctly that you will handle them well, and helping costs you less than it used to because the help no longer reopens you. The trine asks for almost nothing, which is its only flaw; with no friction there is no alarm, and the whole gift can pass unnoticed. Meet it with mild intention. If the planet backtracks over the degree, use the repeats as coats of varnish, each pass sealing a little more of what the previous one smoothed. As the aspect separates, the humidity lifts, but wood that has been oiled stays supple. What remains is a changed relationship to your own damage: it becomes material instead of identity, something you draw on rather than something that draws on you. Growth here has no before-and-after photo. It shows up as ease, in the topics you can hold, the people you can sit with, and the gentleness you no longer have to fake."
+ },
+ {
+  "id": "transit:neptune:opposition:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "chiron",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:neptune~natal_chiron:opposition"
+  ],
+  "text": "For a long stretch, your oldest wound looks back at you from across the table. An opposition works through other people, and when transiting Neptune opposes your natal Chiron, the sore place in you gets mirrored by someone or something outside: a partner's suffering, a friend dissolving into a problem you cannot fix, a helper or teacher who turns out to be more wounded than wise. The period can shade a year or more, with up to three exact passes as Neptune stations and returns, and most people meet it once at most, if ever. In the applying months the mirror usually shows up as a pull. You are drawn to someone who needs rescuing, or you find yourself leaning on someone you hope can rescue you, and the roles feel oddly familiar because they are: the casting comes from your earliest hurt. Around the exact passes the arrangement peaks and starts to blur. Compassion and self-erasure become hard to tell apart. You give past your limits and call it love, or you accept vagueness and call it faith. Sometimes the mirror inverts, and a person you trusted with your tender history handles it carelessly, which hurts twice, once now and once in the old place. None of this means the people involved are villains. Under this aspect everyone is somewhat underwater, doing their approximate best. The curriculum is boundaries of a particular kind, the permeable sort: walls thin enough to let care through and firm enough that you remain on your own side of them. Saying what you can actually give, and what you actually need, in plain words, does more repair here than any amount of silent endurance. If Neptune retrogrades back across the point, the passes tend to sequence the lesson. The first sets the scene, the second exposes the pattern, and the third offers the choice to play it differently. As the opposition separates, the fog pulls back from the other person's face and you see them at true scale, neither savior nor saboteur. What you keep is the piece you were exporting: the knowledge that your tenderness needs a keeper and that the keeper is you. Compassion that includes yourself is the mature form of everything this transit stirs up, and people who learn it here find that helping others stops costing them their own skin."
+ }
+]

@@ -1,0 +1,212 @@
+[
+ {
+  "id": "composite:aspect:venus:conjunction:mars",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "venus",
+   "b": "mars",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "composite:venus~mars:conjunction"
+  ],
+  "text": "Nothing in this bond gets admired from a distance for long. What the pair likes and what the pair goes after are not two separate motions here. They are one. The relationship wants what it admires and admires what it wants, and it rarely stops to sort out which came first. That gives the bond a lot of forward push, and the push is warm. Enthusiasm is the house register. When something appeals to these two, it gets pursued at once and pursued with pleasure, whether that is a plan, a place, a piece of work, or a person the pair has decided is worth knowing. Charm functions as a form of pressure. The connection can be persuasive without meaning to be, because liking a thing and pushing for it look identical from outside. Effort feels good here, which is less common than it sounds. Most relationships have a category of work they do grudgingly. This one tends to find the doing itself enjoyable, so it takes on more than a cooler pairing would and does not resent the load until much later. The same fusion makes conflict warm. Disagreements between these two are not cold. They run hot and they run close, and both people can find an argument oddly satisfying, since it draws on the same fuel as everything else the bond enjoys. That is a real strength in a crisis and a real problem on an ordinary Tuesday, because friction becomes a way of feeling connected, and neither of you may notice it happening. Where this needs watching is proportion. A relationship that wants what it likes has no natural brake. It follows the attractive option, and the attractive option is not always the right one. Indulgence and drive reinforce each other rather than checking each other, so the pair can end up somewhere it enjoyed every step of reaching and would not have chosen on purpose. What the connection does exceptionally well is refuse to be lukewarm. It puts weight behind what it values instead of merely approving of it, and that turns preference into action faster than most bonds manage."
+ },
+ {
+  "id": "composite:aspect:venus:sextile:mars",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "venus",
+   "b": "mars",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "composite:venus~mars:sextile"
+  ],
+  "text": "Here liking gives effort somewhere to go, and the offer stands whether or not the pair takes it up. Sextiles do not insist. What this one makes available is a way of getting things done that both people actually enjoy, which sounds minor next to how much of any relationship turns out to be logistics. The bond has a knack for making work pleasant. Tasks get shared without much negotiation over who does what. Appetite and regard cooperate, so when this pair decides something matters it can move on it, and the moving does not cost the atmosphere. Disagreements get handled at a low temperature, since the connection has an easy route back to good humor and generally remembers where that route is. Likability works quietly in its favor too. Other people find the pair easy to say yes to. Requests land well. Where a harder contact would have to argue, this one asks, and the asking is usually enough. The catch is that nothing here compels. An opening that is not taken is just an unused opening. Plenty of relationships carrying this contact never do much with it, because the ease is pleasant on its own and there is no pressure anywhere in the arrangement pushing either of you to act. The pair stays agreeable and slightly unmobilized. It likes things without going after them, and then wonders where the year went. The contact also does not supply nerve. It smooths a pursuit already under way. It does not start one. When something in this connection needs real force behind it, that force has to come from elsewhere in the chart or from a decision somebody makes deliberately. Used, this is a relationship that gets its way without a fight and enjoys the process. That combination is rarer than it sounds, and it does the most for the pair when there is something worth wanting and somebody bothers to want it out loud."
+ },
+ {
+  "id": "composite:aspect:venus:square:mars",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "venus",
+   "b": "mars",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "composite:venus~mars:square"
+  ],
+  "text": "Something the pair wants keeps running into something the pair values, and the collision repeats. This is the relationship where going after a thing costs the very harmony that makes the connection pleasant, so the pursuit stops, and then the wanting comes back, and the sequence runs again. In practice it shows up as a mismatch of manner. One move in this bond is direct and a little too blunt for the occasion. The next is accommodating past the point of honesty. Neither register is wrong on its own. The trouble is that the relationship keeps switching between them instead of finding the middle. A request gets made too hard, gets softened into nothing, and the actual want never gets stated at a volume anyone can act on. Tact and timing become a standing subject. Things get raised at the wrong moment, or the right thing gets said in the wrong tone, and a stretch of careful politeness follows while the pair recovers. The recovery is genuine. So is the next collision. Underneath sits a real question about whether wanting is allowed at all. Bonds with this contact often develop a quiet rule that desire of any kind is rude, that asking plainly is a demand, and the rule costs more than the occasional awkward conversation would have. What gets suppressed does not go anywhere. It comes out sideways, as irritation over something small that was never the issue. The traction is that this pair cannot coast. The friction keeps the relationship honest about what it actually wants, since the alternative is a resentment neither of you can ignore for long. Pairs carrying this contact tend to get unusually good at repair, mostly because they get so much practice. Heat is not the enemy in this configuration. The pair does better once it stops treating every collision as evidence of a fault and starts treating it as the way this particular connection finds out what it means."
+ },
+ {
+  "id": "composite:aspect:venus:trine:mars",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "venus",
+   "b": "mars",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "composite:venus~mars:trine"
+  ],
+  "text": "Getting along and getting things done are the same motion in this pairing, and the ease is so complete that it goes unremarked. Effort does not chafe. What the pair goes after and what it enjoys point the same direction, so the relationship gets its way pleasantly and without much strategy. Cooperation is close to automatic. Work divides itself. Nobody has to be talked into anything, and shared plans move at a pace that suits both temperaments without either of them bending much. This connection is comfortable to be in, and the comfort does not depend on anyone performing. Conflict gets handled rather than avoided, which is a different thing from the square's version of the same contact. Disagreements happen and then resolve, often the same day, because the bond has a reliable route back to warmth and both of you use it without thinking about it. The cost is that nothing here demands attention. A relationship this frictionless can run for years on charm and momentum and never develop the skills it does not need. When something finally arrives that cannot be smoothed over, the pair has no practice at the harder conversation, and the ease it relied on turns out to be a poor tool for a real collision. Complacency is the other risk. Because pursuing what the pair likes is so easy, it tends to pursue only what is already easy. Appetite stays inside a comfortable range. Ambition gets talked about warmly and then not acted on, since acting on it would take effort of a kind this contact never requires. What the relationship offers is a working supply of goodwill and drive that do not fight each other, which many pairs never get at all. It becomes more than pleasant when the two of them aim it at something that resists."
+ },
+ {
+  "id": "composite:aspect:venus:opposition:mars",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "venus",
+   "b": "mars",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "composite:venus~mars:opposition"
+  ],
+  "text": "Two poles face each other across this connection: what the pair enjoys, and what the pair chases, set as far apart as a chart can put them. The relationship holds both at once, and it feels the distance. The usual shape is a split of roles. On any given question, one side of the bond becomes the one pushing and the other becomes the one making room. The pushing half wants a decision. The accommodating half wants the atmosphere kept intact. What matters is that the roles do not belong to either person permanently. They trade, sometimes inside a single conversation, and a pair that decides one of them is always the demanding one has misread the arrangement. Desire and regard end up in negotiation rather than agreement. The relationship has to keep asking what it is willing to spend to get what it wants, and whether the getting is worth what it costs in comfort. That is a live question here in a way it is not in the easier contacts, and the pair returns to it often. Oppositions also mean that each side supplies what the other lacks. The drive in this bond would be crude on its own, and the taste gives it something worth aiming at. The regard would be passive on its own, and the drive gives it teeth. Neither is complete alone, and the tension between them is what keeps both honest. Outside pressure reveals the polarity fast. Under a deadline or a shortage, this connection separates into one person acting and one person tending. The separation can be efficient, or it can turn into a standoff where each of you thinks the other has taken the wrong job. Balance in this configuration is never a settled state. It is something the relationship keeps arriving at, losing, and finding again, which is less restful than a trine and considerably more alive."
+ },
+ {
+  "id": "composite:aspect:venus:conjunction:jupiter",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "venus",
+   "b": "jupiter",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "composite:venus~jupiter:conjunction"
+  ],
+  "text": "Warmth arrives at full size in this chart. What the pair values does not stay small: liking becomes enthusiasm, approval becomes praise, and a pleasant afternoon becomes a story the relationship tells for years. The two functions are fused, so the bond has no way of admiring something a little. Generosity is the signature. This connection gives, and it gives past what the occasion asked for. Hospitality comes easily. Other people leave time with the pair feeling well treated and slightly overfed, in the literal sense and in every other one. The relationship tends to be liked, because it likes, and it does not ration the liking. There is real quality of life in that. A bond that enlarges its own pleasures is not a trivial thing to have. It makes ordinary time feel like more than it is, and it defends both people against the grimness that settles into most long arrangements. The absent element is proportion. Nothing in this contact says when to stop. Indulgence has no natural limit, spending of every kind drifts upward, and the standard for what counts as a good time rises until the modest version no longer registers. A quiet evening starts to feel like a disappointment rather than an evening. Praise inflates on the same principle. The pair speaks generously about each other and about what it is doing together, and the generous account can wander some distance from the accurate one. Promises get made in a warm hour and honored in a colder one. Nobody was lying. The bond simply says yes at a scale it has to live with afterward, and the correction lands later on both of you. At its best this relationship makes two people more open-handed than they were, and the openness spills past the pair to everyone standing nearby."
+ },
+ {
+  "id": "composite:aspect:venus:sextile:jupiter",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "venus",
+   "b": "jupiter",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "composite:venus~jupiter:sextile"
+  ],
+  "text": "An opening sits between what this pair enjoys and what it lets itself believe is possible. The contact offers scope. It does not apply any of it, and a relationship can carry this aspect for years without picking it up. What is on offer is a widening of taste. The bond can find new things to like if it goes looking, and looking is easy here. A suggestion gets taken. An invitation gets accepted. A subject neither person knew anything about turns into a shared interest. Nothing in the contact forces the reach, but the door is unlocked, and the pair notices it more often than not. Socially it works in the relationship's favor. This connection is good company, and other people extend themselves toward it. Introductions happen. The pair gets included. Where a hard aspect has to earn its openings, this one is handed a reasonable number and only has to say yes. The same unlocked door opens on excess. A wider taste costs more to satisfy, and this pair is seldom the one to say an evening was too much. The bond can take a generous view of a difficulty when it chooses to, which is a genuine resource during a bad stretch, though it does have to be chosen. A sextile supplies an option and no momentum. The waste, when there is waste, is quiet. The pair stays comfortable inside what it already enjoys, declines the third invitation, and never finds out what the wider version of the relationship would have been. That costs nothing anyone can point to. It just leaves the bond smaller than it needed to be, and there is no moment where it happened. Taken up, the contact does something specific. It keeps generosity and enjoyment in contact with each other, so what the pair likes gets shared outward instead of hoarded. Both of you get a larger life out of that, and so does everyone the relationship touches."
+ },
+ {
+  "id": "composite:aspect:venus:square:jupiter",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "venus",
+   "b": "jupiter",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "composite:venus~jupiter:square"
+  ],
+  "text": "The gesture is always a little too large. That is the recurring collision in this chart: what the pair values and what the pair permits itself keep overrunning each other, and the overshoot is affectionate every time, which is exactly why nobody corrects it. Generosity is the preferred solution to every problem here. Something is wrong between these two, so a gift appears, or a trip gets proposed, or an extravagant reassurance gets offered in place of the specific answer to the specific question. The warmth is genuine. It also does the work of avoiding a harder conversation, and the pair can run that substitution a long while before either person names it. Promising outruns delivering. Plans get made at a size that felt right in the moment and looks unreasonable by Thursday. The bond agrees to more than it can carry, and the shortfall rarely registers as a broken promise. It registers as a vague sense of things not quite adding up. Appetite is the other half of the friction. Squares between these two functions push toward more of whatever the relationship enjoys, and past a certain point more stops improving anything. Comfort becomes excess without any clear line being crossed. Taste inflates. What was a treat turns into the baseline, and the baseline has to keep moving. The traction lives in proportion, learned by consequence rather than by principle. This pairing finds its limits by exceeding them and then dealing with the result, and it does eventually find them. Both of you end up with a working sense of what is actually enough, which is knowledge most relationships acquire far more slowly or not at all. The bond stays likable throughout, and that is not a small thing to be. It just has to stop mistaking the size of a gesture for the weight of one."
+ },
+ {
+  "id": "composite:aspect:venus:trine:jupiter",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "venus",
+   "b": "jupiter",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "composite:venus~jupiter:trine"
+  ],
+  "text": "Nothing in this connection has to be argued for. Approval moves without resistance between what the pair likes and what the pair allows, so the relationship says yes to itself easily and often, and the yes rarely gets examined. The atmosphere is the first thing anyone notices. This bond is pleasant, unhurried, and hard to offend. Grievances do not accumulate much. A slight that would fester elsewhere gets absorbed here, partly out of genuine goodwill and partly because the relationship finds unpleasantness distasteful and would rather move along. Good fortune of a mild kind tends to attach itself. Things work out. People are helpful. The pair develops a settled expectation that difficulties resolve, which is often accurate and is also a habit rather than a law. The trine's problem is that ease removes the reason to look. A relationship this comfortable does not audit itself. Standards slide by degrees, agreements get made without much thought because agreeing is the reflex, and nobody notices that the bond has drifted somewhere neither of you would have chosen deliberately. Nothing went wrong. Nothing got checked either. Softness follows the same grain. Difficulty gets postponed rather than met, since this contact supplies no appetite for discomfort and considerable talent for finding a pleasant alternative. Effort is not the strong suit. The relationship would rather enjoy what it has than reach for what it does not, and enjoyment is a respectable use of time right up until something needs doing. Complacency also dulls the pleasure it was protecting. The same warmth that makes ordinary days good makes them interchangeable, and a pair can spend several years inside a very comfortable version of the same week. The generosity here is real and worth keeping. It sharpens whenever the pair picks something specific to be generous about, rather than leaving the warmth diffuse and aimed nowhere."
+ },
+ {
+  "id": "composite:aspect:venus:opposition:jupiter",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "venus",
+   "b": "jupiter",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "composite:venus~jupiter:opposition"
+  ],
+  "text": "One pole of this bond holds the particular thing it loves. The other holds everything else it might love instead. The relationship stretches between the near pleasure it already has and the larger one it keeps imagining, and it does not get to set either down. Practically, that reads as a tension between enough and more. The pair arranges something good, enjoys it, and then finds itself restless in the middle of the enjoying. A quiet arrangement starts to feel confining. An expansive one starts to feel unmoored. Neither pole is wrong, and the relationship keeps swinging between them looking for a resting position it will not find. The split shows up in roles as well. One side of the connection ends up arguing for restraint and the other for scale, and the assignment moves around. Whoever holds the modest position this month may be the one proposing the extravagance next month, so a pair that decides it has a spender and a saver has flattened something that belongs to them jointly. Values also get tested against beliefs. What the relationship enjoys and what it thinks it ought to enjoy are not always the same, and this contact keeps putting the two in one room. Taste has to answer to principle. Principle has to answer to what actually gives the pair pleasure, which is a harder question than it sounds. The completion is real. Left alone, the appetite for scope would spend itself on nothing in particular, and the taste would narrow into a very well-kept small room. Each pole makes the other useful. Generosity gets an object. Enjoyment gets a horizon. What holds it together is honesty about the pull. When both of you can say out loud that the same week feels too small and too much, the opposition stops working as a fault line and starts working as the width of the thing."
+ },
+ {
+  "id": "composite:aspect:venus:conjunction:saturn",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "venus",
+   "b": "saturn",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "composite:venus~saturn:conjunction"
+  ],
+  "text": "Affection and obligation are one motion in this chart. The pair cannot value something without also taking responsibility for it, and it cannot take something seriously without a kind of fondness getting attached. Warmth and duty are not separable here. That produces a particular way of showing regard. This bond expresses care through reliability rather than declaration: the thing done on time, the promise kept without discussion, the presence at the difficult appointment. It is a language outsiders sometimes read as cool, and the people inside it usually know better. Restraint is real, though. Pleasure gets rationed. The relationship carries an instinct that enjoyment has to be earned, so the good things wait until the work is done, and the work is never quite done. Praise comes out qualified. Both people can end up feeling slightly unfed by a connection that is, by any external measure, taking excellent care of them. There is often a cost sitting somewhere in the arrangement. Bonds with this contact tend to have an expense attached: distance, timing, circumstance, an obligation nobody asked for. The relationship organizes itself around the constraint rather than around what it would prefer, and it does that competently. A word about the question this configuration attracts. Readers bring one thing to a composite Venus and Saturn, which is whether the relationship will hold, and the chart does not answer it. A midpoint figure reports no duration at all. What Saturn describes here is how seriously the bond treats what it values, not for how long it will do so, and reading permanence into the contact is an error the tradition has been making for a century. What this pairing is good at is holding weight without complaint. It does the unglamorous parts, and it does not need an audience for them. The warmth in it gets easier to feel once both of you stop treating small pleasures as things that have to be justified first."
+ },
+ {
+  "id": "composite:aspect:venus:sextile:saturn",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "venus",
+   "b": "saturn",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "composite:venus~saturn:sextile"
+  ],
+  "text": "Seriousness offers this pair a shape for what it values, and the offer is easy to accept and equally easy to leave sitting. A sextile arranges nothing on its own. What is available is form. The relationship can turn its regard into something with edges: a standing arrangement, a routine both people count on, a way of doing things that survives a bad month because it does not depend on anyone feeling enthusiastic. Care given this way is unspectacular and unusually dependable. Realism comes with it, in a workable dose. This bond can look at a limitation without being crushed by it. Time, distance, money, other commitments: the pair can name a constraint plainly, adjust, and go on liking each other, which is a specific competence and not a common one. The contact also supplies restraint that is not punitive. Excess gets trimmed rather than forbidden. The relationship finds a moderate version of most things and finds it without an argument, so the moderation feels like taste rather than deprivation. None of that happens by itself. A pair can carry this aspect and never put the structure in place, in which case the warmth stays informal and somewhat at the mercy of circumstance. It works fine, until a stretch of pressure arrives and there is nothing underneath the goodwill except more goodwill. The other thing to say plainly is that a supportive contact between these two is not a guarantee of anything. It describes a resource the relationship has, not a verdict on how the relationship goes. Whether either of you takes the resource up is a separate matter from whether the chart contains it, and no aspect in a composite has anything to say about that. Where it is taken up, the effect is quiet. Fewer things fall through, and what the pair values gets some scaffolding to sit on."
+ },
+ {
+  "id": "composite:aspect:venus:square:saturn",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "venus",
+   "b": "saturn",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "composite:venus~saturn:square"
+  ],
+  "text": "Kindness meets a rule here, and the rule usually gets there first. The collision in this chart is between what the pair wants to give each other and what it believes it is allowed to give, and the two do not line up. The everyday version is the withheld response. Something warm gets felt and a measured version of it gets said. A compliment arrives with a qualification attached. An offer comes with conditions nobody asked for. None of this is coldness. It is a reflex that treats plain affection as slightly indulgent, and both people can spend a long time on the wrong side of it. Deferral is the other pattern. Enjoyment gets postponed until conditions are right, and the conditions keep receding. The good trip waits for a better year. The relationship becomes very good at waiting and correspondingly out of practice at receiving. Underneath sits a question about worth. Squares between these two functions raise a quiet suspicion that the regard is not deserved, or that it has to be paid for with performance, and the suspicion belongs to the relationship rather than to either person in it. It shows up as effort where ease would have done, and as gratitude that sounds a little too formal for the occasion. The difficulty deserves saying without decoration. This contact can make a bond feel like a duty during its harder stretches, and those stretches are not brief. The traction is that nothing gets taken for granted. This pairing tests what it values, and what survives the testing gets held with a seriousness the easier contacts never develop. The warm thing said out loud without hedging costs the two of you almost nothing and changes the temperature of the whole arrangement, which is the practical work this aspect keeps setting."
+ },
+ {
+  "id": "composite:aspect:venus:trine:saturn",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "venus",
+   "b": "saturn",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "composite:venus~saturn:trine"
+  ],
+  "text": "Order and warmth agree in this pairing, and the agreement is so quiet that it can be mistaken for nothing happening. Responsibility does not feel like a burden. The pair keeps its arrangements, honors what it said it would, and does not experience the keeping as a sacrifice. The texture is understated. Regard shows up as dependability, and the dependability is not grudging. Plans hold. What was agreed in April is still true in October, and nobody has to check. Where other contacts negotiate a split between what is enjoyable and what is required, this one finds the two mostly overlap. That produces a relationship other people rely on. It is the pair others go to for the kind of favor that involves actual inconvenience, because the favor gets done. Readers of this configuration usually want it to mean the relationship will hold. It does not mean that. A composite chart has no way of reporting duration. It reports material, and the material described here is a bond in which regard and responsibility are compatible, which says how the connection works rather than how long it works. The trine's own liability is that ease invites neglect. An arrangement this smooth stops getting attention. Roles settle early and then harden, courtesy takes the place of contact, and the pair can run on a well-maintained routine for a long stretch without either of you checking whether it still fits. Nothing breaks. It just goes quiet. Conservatism follows on from that. This contact prefers the arrangement it already has, so change meets a mild and continuous resistance, and the resistance is easy to miss because it never takes the form of an argument. The steadiness is a genuine asset and few pairs have it. It gets more interesting when the relationship spends some of it on something it has not done before."
+ },
+ {
+  "id": "composite:aspect:venus:opposition:saturn",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "venus",
+   "b": "saturn",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "composite:venus~saturn:opposition"
+  ],
+  "text": "Give and withhold sit at opposite ends of this bond, and the relationship spends its life somewhere on the line between them. One pole wants closeness offered freely. The other wants terms, evidence, and a reason. Both are present, and the pair does not get to keep only one. The visible form is a swing. A stretch of warmth and openness gives way to a stretch of correctness and distance, then back again, and the pattern can run across hours or across years. Neither mode feels like the real relationship while the other one is happening, and both of you can be convinced, more than once, that the other version was the illusion. Roles polarize here as well. One side of the connection takes up the position of asking and the other the position of qualifying, and it is worth noticing how regularly the positions swap. A pair that decides one person is the warm one and the other is the withholding one has assigned a shared dynamic to a single owner, which is convenient and wrong. Distance is often literal. Oppositions between these two frequently show up as some separation in the shape of the relationship: geography, schedules, other obligations, different stages of life. The bond has to work out how much closeness the actual circumstances allow, and that arithmetic is rarely comfortable. What each pole gives the other is the point of the configuration. Affection with no account behind it stays sentimental and light. Seriousness with nothing warm in it turns into administration. Held together, they make a regard that is both felt and honored, and that combination is what the tension is producing. The pull does not resolve. It gets carried better, which in practice means the pair stops reading a cold week as evidence against the bond and a warm one as proof of it, and lets both readings belong to the same relationship."
+ }
+]

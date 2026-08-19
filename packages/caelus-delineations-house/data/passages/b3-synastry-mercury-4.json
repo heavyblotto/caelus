@@ -1,0 +1,77 @@
+[
+  {
+    "id": "synastry:mercury:conjunction:pluto",
+    "family": "synastry-aspect",
+    "when": {
+      "kind": "synastry",
+      "mode": "aspect",
+      "a": "mercury",
+      "b": "pluto",
+      "aspect": "conjunction"
+    },
+    "atomIds": [
+      "synastry:mercury~b_pluto:conjunction"
+    ],
+    "text": "Nothing you say to them stays light. The conjunction lands your mind on the part of them that treats nothing as small, so what you meant as chat gets weighed rather than heard. Something you said in passing turns up months later, quoted back word for word. A question you asked to fill a pause comes back answered three days later, in full, because it reached somewhere you had no idea it could reach. What this gives you is a listener with no shallow end. You can bring them the subject you cannot raise anywhere else, and they will not change the register or make a joke of it. Most people flinch around the second layer. They keep going, and you follow, saying things out loud that you had only half admitted to yourself. Talks with them run long and leave marks. You will remember particular sentences from years ago. Your side of the exchange works on them as well. You are the one who finds language for material they keep underground, and naming it changes it: a pressure they have carried without describing becomes a thing with edges. That is a serious service whether or not either of you ever calls it one. It is also why your wording carries so much weight here. A phrase you picked carelessly can settle onto something they have never put into words, and it tends to stay. The closeness costs you your lightness. You may notice that you cannot ask a plain question of them without bracing for the answer, and that small talk between you has quietly stopped being available. A few would count that a straight gain. Others miss having a conversation with no floor under it. Then there is everything unsaid. This contact makes silence carry content. When you skip a subject, they register the skip. When they go quiet, you start reading the quiet, and the pair of you can spend a week interpreting each other instead of asking. Both of you tend to believe you are being subtle about it. Neither of you is. Curiosity can also turn into something closer to research. You want to know how they came to be the way they are, and the wanting is not idle; it will occupy weeks if you let it. Where that leads is not something the contact decides. What builds over time is a nerve for the real subject. You come out of this able to say the thing in the room that everyone else is talking around, plainly, without dressing it up first. You learned it on someone who would not let you keep anything at the surface."
+  },
+  {
+    "id": "synastry:mercury:sextile:pluto",
+    "family": "synastry-aspect",
+    "when": {
+      "kind": "synastry",
+      "mode": "aspect",
+      "a": "mercury",
+      "b": "pluto",
+      "aspect": "sextile"
+    },
+    "atomIds": [
+      "synastry:mercury~b_pluto:sextile"
+    ],
+    "text": "Depth is available with them, and nothing about it is automatic. This sextile sets your way of asking questions within reach of the part of them that has no interest in surfaces, and either of you can open that door or leave it alone. Most weeks it stays shut and nothing is lost. The week one of you opens it, the talk goes somewhere neither of you gets to go with other people. The clearest use is the question nobody else will ask. You can put a direct one to them, about money, about the thing with their family, about why they actually left that job, and it does not offend. Something in your phrasing makes the subject approachable instead of intrusive. They answer more than they meant to and are usually glad afterward. Their effect on your thinking is a quiet pressure toward what is actually the matter. Bring them a problem and they will not take the version you handed over at face value. They ask what is really going on, once, without theater, and the question tends to land. You come away with the trouble correctly identified, which is not the same as solved and is often worth more. Investigation is the practical ground between you. If the two of you go after something together, a document, a family history, a situation with an answer buried somewhere in it, you will find out. You supply method and patience for detail. They supply the refusal to accept the first explanation offered. That pairing finds things. What the contact will not do is insist. A pair can hold it for a decade and reach for it twice, and the talk stays perfectly good the whole time, sitting on the near side of anything that matters. You will not feel the absence, because an unused offer never announces itself. Under strain it is a modest resource rather than a decisive one. You can generally find a way to raise the loaded subject, and they can generally take it in without closing up, but you have to choose to do it, and in a bad week you will not bother. Spent on purpose, it stops being an event and becomes a habit. You ask the hard question early rather than after the situation has curdled. They tell you the part they normally keep back. Each time that goes well the threshold drops a little, and a few years in you can raise almost anything with them, with no dramatic story attached to how you got there."
+  },
+  {
+    "id": "synastry:mercury:square:pluto",
+    "family": "synastry-aspect",
+    "when": {
+      "kind": "synastry",
+      "mode": "aspect",
+      "a": "mercury",
+      "b": "pluto",
+      "aspect": "square"
+    },
+    "atomIds": [
+      "synastry:mercury~b_pluto:square"
+    ],
+    "text": "You ask what happened. They want to know why you are asking. That gap is the working part of this square: your habit of sorting information runs at an angle to the part of them that treats information as consequential, and the two of you keep misreading each other's reasons. From your chair the frustration is specific. You are trying to get the facts of a matter straight. They answer as though the facts were a position you had taken, and reply to the position rather than the question. You clarify. The clarification gets read the same way. Within a few exchanges you are defending your reason for wanting to know, which was, as far as you can tell, that you wanted to know. From theirs, your ordinary directness lands somewhere it was never aimed. Your mind names things because naming is what it does. Their Pluto holds the material that is not meant to be said out loud yet, and a plain sentence from you can pull it into the room before either of you was ready for it. You meant a description. It arrived as exposure. So the subjects between you sort themselves into the ones you can raise and the ones you cannot, and the second list grows without discussion. Some topic produces a silence, and by the third time you have learned to steer around it. The real weight of this aspect sits in that steering, not in the arguments. Arguments, when they come, do not stay proportionate. You are quick and can build a case. They can go still and give you nothing, or produce one sentence that reorganizes the whole discussion around a thing you were not even defending. Neither instrument answers the other. What ends it is usually a change of subject that both of you know is not a resolution. The traction is real, and there is more of it here than in most squares. Nobody else in your life presses you on what a question of yours is for. Around them, curiosity that you consider idle gets treated as though it were not, and some of the time that reading is correct, which is uncomfortable and worth having. In return, you are the one who can put a plain sentence on something they have kept wordless. Offered carefully, it is the most useful thing anyone does for them. Thrown in a fight, it is a different object altogether, and you will feel the difference in your mouth as you say it. What comes of staying in it is honesty about your own motives. You lose the ability to pretend a question was neutral, since with this person the pretence never once worked."
+  },
+  {
+    "id": "synastry:mercury:trine:pluto",
+    "family": "synastry-aspect",
+    "when": {
+      "kind": "synastry",
+      "mode": "aspect",
+      "a": "mercury",
+      "b": "pluto",
+      "aspect": "trine"
+    },
+    "atomIds": [
+      "synastry:mercury~b_pluto:trine"
+    ],
+    "text": "The two of you get to the bottom of things without the usual struggle. Your way of thinking and their instinct for what sits under a situation move together, so a conversation that would cost other people six months of trust costs you an afternoon. You ask, they give you the real version, and neither of you finds this remarkable until you try the same approach on somebody else. In practice you are unusually hard to shock. Whatever they bring, you take it as material rather than as a confession, and that reception is exactly what makes it sayable. Anyone carrying a lot they do not say tends to have one person they can hand it to. Where this contact runs, there is a fair chance you are that person for them, or they are that for you. You also read them accurately without working at it. You can tell when the stated reason is not the reason, and you say so lightly enough that it does not land as an accusation. They rarely bother denying it. That spares the pair of you an entire class of argument other people spend years having. What comes back the other way is seriousness. Your thinking, left to itself, can stay busy without going anywhere, sorting matters that did not need sorting. Their attention keeps settling on the part that actually decides things, and over time you start going there first. Your curiosity gets choosier about what deserves a week of it. Ease of this kind fails in a particular way. Because depth costs nothing, everything gets taken to depth, including matters that were fine on the surface. A pair with this contact can turn a dull fortnight into an investigation and mistake that for closeness. Not every situation has something buried in it, and the two of you are disposed to assume one does. The other soft spot is agreement about hidden things. You can build a shared account of somebody else's motives, or of what a situation is really about, and nothing in the exchange ever tests it. Your version is plausible, their instinct confirms it, and a year later you are both certain of something neither of you checked. Nobody inside the pair is positioned to object. This stays worth something when you spend it on material that has an answer. Pick the thing you have both been avoiding a straight answer about, then go and get one. The talk between you carries weight easily, so it may as well carry some, instead of settling into a comfortable habit of significance."
+  },
+  {
+    "id": "synastry:mercury:opposition:pluto",
+    "family": "synastry-aspect",
+    "when": {
+      "kind": "synastry",
+      "mode": "aspect",
+      "a": "mercury",
+      "b": "pluto",
+      "aspect": "opposition"
+    },
+    "atomIds": [
+      "synastry:mercury~b_pluto:opposition"
+    ],
+    "text": "You say what the situation is. They ask what it is really about, and their sense of the word points somewhere your account does not go. That is the standing disagreement across this opposition: you want a matter stated plainly so it can be handled, while they hold that the stated matter is seldom the one doing the work. Plain statement is your whole method, and it is the one method their attention is built to get underneath. Conversations take on a shape you will come to recognize. You give an account. They test it, sometimes out loud and sometimes only by declining to accept it, and you feel the account being weighed rather than taken in. So you add detail, which reads as effort, which reads as a reason to look harder. Past midnight one of these can run for hours, and neither of you gives anything up. What they meet in you is a person who keeps talking. You do not accept a silence as an answer, and you will say the thing that was supposed to stay implied. Around you, the material they keep back has a way of getting into words, sometimes because you asked and sometimes because you named it in passing without noticing. That is not always welcome. It is also the only route by which any of it gets out at all. What you meet in them is the limit of explanation. You can be entirely accurate and still be told, correctly, that you have described the outside of the thing. It is maddening. It is also the closest thing you have to a check on a mind that can talk its way past almost anything, and nobody gentler is ever going to supply it. The bad loop is easy to fall into. The more they doubt the account, the more reasonable you become, and reasonableness at that pitch starts to sound like a cover, which produces more doubt. Each of you turns into an exaggerated version of yourself, one all daylight and one all suspicion, and neither of those is the person actually in the room. It goes somewhere better when you stop trying to be believed and start asking what they are seeing. They, meanwhile, put the reading into a sentence instead of holding it. Then a subject gets covered from both ends at once, the visible account and the thing under it, which is more than either of you manages alone or with most other people. An opposition completes without resolving. Long exposure to this one leaves you with a stubborn habit: whatever you have been told, including by yourself, you now ask what the telling is for. You did not have that before, and you did not come by it comfortably."
+  }
+]

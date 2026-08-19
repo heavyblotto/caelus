@@ -1,0 +1,114 @@
+[
+ {
+  "id": "timelord:firdaria:sub:saturn:sun",
+  "family": "timelord-firdaria",
+  "when": {
+   "kind": "timelord",
+   "system": "firdaria",
+   "level": "sub",
+   "lord": "sun",
+   "under": "saturn"
+  },
+  "atomIds": [
+   "firdaria:sub:",
+   "firdaria:major:"
+  ],
+  "text": "Saturn's eleven-year chapter divides among the seven planets in turn, and this is the Sun's share of it: the run in which the light comes up on work that has mostly been done in private. The building does not stop. What shifts is that your part in it becomes visible, and often official. Titles, promotions, formal responsibility, your name attached to something that already exists because you kept showing up, these are the events this pairing tends to produce. Recognition under Saturn is rarely lavish. It arrives late, in measured amounts, and usually as a job rather than a prize. That suits the period well enough. What you gain is standing, which is the kind of regard that survives. Authority is the other thread here. Your dealings with the people above you sharpen during this stretch, and so does the question of whether you want their chair. Some people are handed it during this run. Others find out, clearly, that they would rather not have it, and that counts as progress too. There is a cost to being seen while carrying weight. Pride and duty pull against each other, and the temptation is to take on more visible load than your body has agreed to. Energy is a real constraint in this combination, not a character flaw. At best you come out of the stretch with your own name on your own work, a small change that alters how the rest of the chapter feels from the inside."
+ },
+ {
+  "id": "timelord:firdaria:sub:saturn:venus",
+  "family": "timelord-firdaria",
+  "when": {
+   "kind": "timelord",
+   "system": "firdaria",
+   "level": "sub",
+   "lord": "venus",
+   "under": "saturn"
+  },
+  "atomIds": [
+   "firdaria:sub:",
+   "firdaria:major:"
+  ],
+  "text": "Warmth turns up in a cold season. Venus governs one of the runs inside the long Saturn chapter, and under it the demanding work carries on with better company. This pairing has an old reputation for commitments that are affectionate and binding at the same time. Bonds get formalized in these stretches, or tested for whether they can hold weight. A relationship that survives the whole chapter often does its surviving right here, when the question of what the two of you are actually building comes up and gets an answer. Pleasure comes back, though on terms. Time and money are unlikely to be unlimited, so what you enjoy gets chosen with care: fewer things, better ones. Craft belongs to this combination as well, meaning art made under discipline, skill practiced until it is beautiful rather than merely correct. The shadow is austerity in love. Venus under this lord can turn dutiful, keeping a bond going out of loyalty long after the warmth has drained out of it, or settling for less affection than you need because asking feels like a luxury. The difference between patience and going without is worth watching closely. Old ruptures often mend in this stretch too, quietly, without a scene. You come out with a steadier sense of what you love and what it costs you, and the rest of the chapter leans on that more than you would expect."
+ },
+ {
+  "id": "timelord:firdaria:sub:saturn:mercury",
+  "family": "timelord-firdaria",
+  "when": {
+   "kind": "timelord",
+   "system": "firdaria",
+   "level": "sub",
+   "lord": "mercury",
+   "under": "saturn"
+  },
+  "atomIds": [
+   "firdaria:sub:",
+   "firdaria:major:"
+  ],
+  "text": "Some sub-periods move the hands; this one moves the mind. Mercury's turn beneath Saturn puts the chapter's building work through the head: planning, study, paperwork, the terms of things written down. Detail work multiplies. Contracts, applications, records, licenses, the tedious documentation that makes a structure legal and durable, much of it tends to land in this stretch. So does formal learning of the demanding kind. If a qualification or a technical skill stands between you and what you are trying to build, this is often when you sit down and earn it. Mercury under this lord learns slowly and keeps what it learns. Your thinking turns sober, which is useful and has a price. Plans get realistic. Estimates get honest. The same seriousness, left running at night, becomes worry, and this combination is known for a mind that grinds at a problem long past the point of use. Getting the thought out of your head, onto paper or into a conversation with someone who knows the material, tends to break that loop better than more thinking does. Speech gets plainer as well. You say less, and what you do say carries further, partly because the people around you have learned that you mean it. That reputation outlasts the sub-period by years."
+ },
+ {
+  "id": "timelord:firdaria:sub:saturn:moon",
+  "family": "timelord-firdaria",
+  "when": {
+   "kind": "timelord",
+   "system": "firdaria",
+   "level": "sub",
+   "lord": "moon",
+   "under": "saturn"
+  },
+  "atomIds": [
+   "firdaria:sub:",
+   "firdaria:major:"
+  ],
+  "text": "Home and feeling come forward inside the long build. Under the Moon's sub-period, the private half of your life asks for the attention the work has been taking. Domestic questions get practical. Households reorganize, someone moves in or moves out, a place is kept up or let go, and decisions about where you live start getting made around obligations rather than preference. Care runs through this pairing strongly. You may be looking after an older relative, a child, or a person in a hard season, and the tiredness that comes with steady caretaking is a feature of the stretch, not a sign that you are doing it badly. Mood tends to run low and even rather than bright. The tradition reads this combination as serious emotional weather, sometimes lonely, and it helps to name that plainly: you may feel older than usual, more inward, less interested in company that costs energy. That is the season, not your permanent temperature. Your body keeps score here too. Sleep, food, and rest stop being negotiable in the way they once were, and this sub-period goes best for people who count maintenance as part of the work instead of time stolen from it. You are left with a home life built to hold, and a clearer read on what you actually need in order to keep going."
+ },
+ {
+  "id": "timelord:firdaria:sub:saturn:saturn",
+  "family": "timelord-firdaria",
+  "when": {
+   "kind": "timelord",
+   "system": "firdaria",
+   "level": "sub",
+   "lord": "saturn",
+   "under": "saturn"
+  },
+  "atomIds": [
+   "firdaria:sub:",
+   "firdaria:major:"
+  ],
+  "text": "Saturn opens its own chapter. The first run of any firdaria period belongs to the lord of the period itself, which puts the eleven years' theme at full strength right at the start, with nothing else mixed into it. The old texts describe this opening as a demanding one, and it seems fairer to say so plainly than to dress it up. The terms of the chapter tend to be set now. Responsibilities tend to arrive early, often more of them than you asked for, and something you have been putting off usually becomes hard to defer any longer. Work wants a seriousness you have not had to supply before, and the results of that work can stay out of sight longer than feels reasonable. Limits show themselves in the same stretch. Time, money, energy, other people's patience, you tend to find the edges of all of them, and finding them is rarely pleasant. What the tradition says next matters just as much. The pressure here is structural rather than personal, and it tends to be productive: foundations laid under this kind of weight hold up, and commitments you make clear-eyed now are the ones the rest of the decade gets built on. Solitude usually increases. Some of that is circumstance and some of it is you choosing depth over company, and both are workable. Nothing in this reading is settled against you. This is the opening stretch of a long chapter, the part where the plan turns serious, and the discipline you find in it is the equipment you carry through everything that follows."
+ },
+ {
+  "id": "timelord:firdaria:sub:saturn:jupiter",
+  "family": "timelord-firdaria",
+  "when": {
+   "kind": "timelord",
+   "system": "firdaria",
+   "level": "sub",
+   "lord": "jupiter",
+   "under": "saturn"
+  },
+  "atomIds": [
+   "firdaria:sub:",
+   "firdaria:major:"
+  ],
+  "text": "Something gives. Jupiter's stretch as sub-lord is the closest Saturn's chapter comes to an open door, and the tradition has always paired these two with interest: one planet widens, the other holds the shape, and between them they make things that last and still grow. Practical help tends to appear. Backing, funding, a mentor with real standing, an institution that decides you are worth investing in, permission from someone whose permission matters. Where the chapter has been slow, this is often when a piece of it finally moves. Long projects can reach a milestone. Applications that have sat unanswered often get answers. Study finished under Saturn's discipline can turn into a credential you are able to use. Meaning comes back into the work, which may be the larger gift. A Saturn chapter has a way of reducing a life to its obligations, and this sub-period tends to restore the sense of what those obligations are for. Some people travel in this stretch, or teach, or take on a wider role, and the widening feels earned rather than borrowed. The failure mode is the obvious one. Optimism inside a restrictive chapter can talk you into commitments the structure cannot carry: too much promised, too much accepted, a yes given in a good week and paid for in a hard one. Growth works here when it stays inside what you can maintain. Handled that way, the stretch leaves the long build both larger and still standing, which is a rarer combination than it sounds."
+ },
+ {
+  "id": "timelord:firdaria:sub:saturn:mars",
+  "family": "timelord-firdaria",
+  "when": {
+   "kind": "timelord",
+   "system": "firdaria",
+   "level": "sub",
+   "lord": "mars",
+   "under": "saturn"
+  },
+  "atomIds": [
+   "firdaria:sub:",
+   "firdaria:major:"
+  ],
+  "text": "Heat meets a hard surface. When Mars takes its turn beneath Saturn, the chapter's slow resistance gets a sub-lord that wants to push, and the tradition treats the meeting as one of the more abrasive in the sequence. It tends to be loud inside a chapter that has otherwise been quiet. Frustration is the honest headline. Effort goes in and the thing does not move, or moves late, and the gap between how hard you are working and what you have to show can get maddening. Irritability rises with it. Arguments with the people in charge become likelier, and one of those costs more here than it would in a lighter chapter, because you are inside a structure you still need. The same heat is genuinely useful once it is aimed. This is a good stretch for the heavy jobs: the demolition before a rebuild, the obligation you finally cut loose, the conversation you have been dodging for a year. Force applied to the right obstacle works. Force sprayed at everything mostly costs you. Your body carries the strain, so pace is part of the skill. Pushing through fatigue is the standard temptation of this pairing and it is usually a poor trade. What the stretch can leave behind is plain evidence of your own persistence under pressure, along with a shorter list of obligations, since some of what you cut here was never going to survive the chapter anyway."
+ }
+]

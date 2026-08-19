@@ -1,0 +1,88 @@
+{
+ "name": "synastry-neptune-4",
+ "outFile": "b3-synastry-neptune-4.json",
+ "setId": "house-b3-synastry-neptune-4",
+ "family": "synastry-aspect",
+ "cells": [
+  {
+   "id": "synastry:neptune:conjunction:pluto",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "pluto",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:neptune~b_pluto:conjunction"
+   ],
+   "title": "Your Neptune conjunct their Pluto",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:sextile:pluto",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "pluto",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:neptune~b_pluto:sextile"
+   ],
+   "title": "Your Neptune sextile their Pluto",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:square:pluto",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "pluto",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:neptune~b_pluto:square"
+   ],
+   "title": "Your Neptune square their Pluto",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:trine:pluto",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "pluto",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:neptune~b_pluto:trine"
+   ],
+   "title": "Your Neptune trine their Pluto",
+   "bindable": true
+  },
+  {
+   "id": "synastry:neptune:opposition:pluto",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "neptune",
+    "b": "pluto",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:neptune~b_pluto:opposition"
+   ],
+   "title": "Your Neptune opposite their Pluto",
+   "bindable": true
+  }
+ ]
+}

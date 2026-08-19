@@ -1,0 +1,170 @@
+[
+  {
+    "id": "finder:event:job-change",
+    "family": "finder-event-angle",
+    "when": {
+      "kind": "angleContact",
+      "angle": "mc"
+    },
+    "atomIds": [
+      "angleContact:"
+    ],
+    "text": "Have you ever changed jobs, or switched into a different line of work entirely? If so, try to recall when. The month and year are enough, and a season will do if that is all you have. Changes of work tend to arrive when the moving sky reaches the career point of a chart, and that point shifts with birth time, so a date lets us test which of your possible charts was actually being touched then."
+  },
+  {
+    "id": "finder:event:promotion",
+    "family": "finder-event-angle",
+    "when": {
+      "kind": "angleContact",
+      "angle": "mc"
+    },
+    "atomIds": [
+      "angleContact:"
+    ],
+    "text": "A promotion, an award, a moment when your work was suddenly seen: has anything like that happened to you? Recognition often lands in the years when the sky crosses the part of a chart that governs reputation, so the date of yours, even a rough one, narrows which birth time fits. Think of the strongest example rather than every small step up, and note when it came."
+  },
+  {
+    "id": "finder:event:career-collapse",
+    "family": "finder-event-angle",
+    "when": {
+      "kind": "angleContact",
+      "angle": "mc"
+    },
+    "atomIds": [
+      "angleContact:"
+    ],
+    "text": "Losing a job is hard to revisit, and you can skip this card if you would rather not. But if a job ended on you, or a career you had built came apart, the timing is real evidence: public setbacks tend to fall in the same kinds of years as public rises, when the slow sky sits on the working side of your chart. When did it happen, as near as you can recall?"
+  },
+  {
+    "id": "finder:event:started-business",
+    "family": "finder-event-angle",
+    "when": {
+      "kind": "angleContact",
+      "angle": "mc"
+    },
+    "atomIds": [
+      "angleContact:"
+    ],
+    "text": "When did you strike out on your own? Starting a business, going freelance, putting your own name on the door: the date matters here because bold career moves cluster when the heavens pass over the top of a chart, and where that top sits depends on the hour you were born. Give the month and year if you can manage it."
+  },
+  {
+    "id": "finder:event:public-work",
+    "family": "finder-event-angle",
+    "when": {
+      "kind": "angleContact",
+      "angle": "mc"
+    },
+    "atomIds": [
+      "angleContact:"
+    ],
+    "text": "Publishing a book, performing on a stage, launching something with your name attached: if you have ever gone public with your work, that first date is worth digging up. Debuts like these tend to come as the sky moves across the reputation corner of a chart, and different birth times put that corner in different places. Even remembering the right season helps."
+  },
+  {
+    "id": "finder:event:life-direction",
+    "family": "finder-event-angle",
+    "when": {
+      "kind": "angleContact",
+      "angle": "mc"
+    },
+    "atomIds": [
+      "angleContact:"
+    ],
+    "text": "Some changes are chosen. Maybe you left one path and set out on another: back to school in your thirties, a calling that replaced a career, a decision that redrew your working life. If a turn like that stands out, when did you make it? Deliberate shifts of direction keep the same slow rhythm as outward career events, so the date helps sort your possible birth times."
+  },
+  {
+    "id": "finder:event:finished-studies",
+    "family": "finder-event-angle",
+    "when": {
+      "kind": "angleContact",
+      "angle": "mc"
+    },
+    "atomIds": [
+      "angleContact:"
+    ],
+    "text": "Think back to finishing school, a degree, or a long training. Graduations can feel routine, but they often land in years when the sky is crossing the achievement side of a chart, which makes them handy markers for your working life and public standing. When did you finish? The year alone is useful, and the month is better."
+  },
+  {
+    "id": "finder:event:moved-home",
+    "family": "finder-event-angle",
+    "when": {
+      "kind": "angleContact",
+      "angle": "ic"
+    },
+    "atomIds": [
+      "angleContact:"
+    ],
+    "text": "Moves are among the most useful dates you can offer. A change of address tends to come when the moving sky touches the home corner of a chart, and that corner depends on the minute of your birth. Have you moved house as an adult? Pick the move that felt biggest, not necessarily the most recent, and note when it happened."
+  },
+  {
+    "id": "finder:event:left-family-home",
+    "family": "finder-event-angle",
+    "when": {
+      "kind": "angleContact",
+      "angle": "ic"
+    },
+    "atomIds": [
+      "angleContact:"
+    ],
+    "text": "When did you first leave the family home for good? Not a semester away, but the real departure, the one after which you never quite lived there again. That threshold is often sharply timed, showing up as the sky reaches the point in a chart tied to home and roots, so even an approximate date sharpens the search for your birth time."
+  },
+  {
+    "id": "finder:event:relocated-far",
+    "family": "finder-event-angle",
+    "when": {
+      "kind": "angleContact",
+      "angle": "ic"
+    },
+    "atomIds": [
+      "angleContact:"
+    ],
+    "text": "A move across the country, or to another country altogether, counts for more than a move across town. Big relocations pull up home and roots at once, which is exactly the region of life we can time against your chart. If you have made one, when was it? Month and year if you have them, the year alone if not."
+  },
+  {
+    "id": "finder:event:parent-died",
+    "family": "finder-event-angle",
+    "when": {
+      "kind": "angleContact",
+      "angle": "ic"
+    },
+    "atomIds": [
+      "angleContact:"
+    ],
+    "text": "If you have lost a parent, we are sorry to ask about it, and you can pass over this card entirely. Should you choose to answer, the date helps more than almost any other: a parent's death touches home, family, and foundations, and events of that depth tend to coincide with the sky crossing the family corner of a chart. Give whatever precision feels right."
+  },
+  {
+    "id": "finder:event:family-grew",
+    "family": "finder-event-angle",
+    "when": {
+      "kind": "angleContact",
+      "angle": "ic"
+    },
+    "atomIds": [
+      "angleContact:"
+    ],
+    "text": "Did a child arrive, or did your household grow in some other lasting way? A birth, an adoption, a parent moving in: additions to the family circle often come when the moving heavens reach the part of a chart that holds home life, so each one is a small clock we can read. Note the date as closely as you remember it."
+  },
+  {
+    "id": "finder:event:bought-home",
+    "family": "finder-event-angle",
+    "when": {
+      "kind": "angleContact",
+      "angle": "ic"
+    },
+    "atomIds": [
+      "angleContact:"
+    ],
+    "text": "Buying or building a home is a datable event with a paper trail, which makes it a gift here. Closings and deeds tend to fall in years when the sky stands on the household side of a chart, so the date narrows which birth time is really yours. When did you sign, move in, or finish the build?"
+  },
+  {
+    "id": "finder:event:home-upheaval",
+    "family": "finder-event-angle",
+    "when": {
+      "kind": "angleContact",
+      "angle": "ic"
+    },
+    "atomIds": [
+      "angleContact:"
+    ],
+    "text": "Households sometimes break apart: a home lost to money trouble or disaster, a family that scattered, a place that had to be given up. If that has happened to you, take this question gently and answer only if you want to. The date is strong evidence all the same, because upheaval at the foundations arrives on the same clock as the settled events, when the sky presses on the base of a chart."
+  }
+]

@@ -1,0 +1,227 @@
+[
+ {
+  "id": "synastry:mars:conjunction:sun",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "mars",
+   "b": "sun",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "synastry:mars~b_sun:conjunction"
+  ],
+  "text": "You are the heat in this one. Your Mars sits on their Sun, so the part of you that wants, acts, and fights lands right on the place where they keep their sense of self. There is no cushion between the two. Whatever you do at full strength, they take personally, and they are not wrong to. Most of the time this reads as energy. You get them moving. Plans they had been carrying around for a year start the week you take an interest, because your push arrives pointed at them rather than at the world in general. They tend to feel more alive around you, faster, more willing to try. Some people wait a long time for anyone to treat them as worth the effort. You do that without meaning to, and it is the strongest thing you hand them. Ordinary friction lands hard for the same reason. When you are impatient with a situation they are standing in, they hear impatience with them. A remark you consider routine can arrive as a judgment on who they are. Arguments get hot quickly here, and they usually start from something small: a tone, a decision you made without asking, the speed you set for an afternoon. Neither of you is acting in bad faith. Your assertion is simply aimed, by geometry, at the part of them that cannot be argued with. What you get back is a purpose. Drive with no reason attached burns off in half-chosen fights and unfinished projects. Their presence gives your effort a shape and a witness, and you probably do some of your best work near them, or for them, or against them. Notice that last one. Competition here can stay a game for years and then turn serious in an afternoon, usually the moment something scarce is on the table: credit, a role, an audience you both want. There is often a physical quality to your company. The pace of a day picks up. You are more likely to act on a decision the same hour you make it, and less likely to sleep on it first. When anger turns up it is loud rather than cold, and it goes out about as fast as it came. That suits some people and tires others, and it says nothing about what the two of you are to each other. Aim is the whole skill here. Force of this kind does not sit still. Given a task you both care about, the two of you clear it faster than either would alone. Pointed at each other with nothing else to lean on, it becomes a contest neither of you remembers starting. Which one you get depends mostly on whether there is something in front of you both that is big enough to push."
+ },
+ {
+  "id": "synastry:mars:sextile:sun",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "mars",
+   "b": "sun",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "synastry:mars~b_sun:sextile"
+  ],
+  "text": "Your effort is welcome around them, which sounds smaller than it is. Your Mars sextiles their Sun, so the way you go after things sits at an easy angle to who they are. You are not pushing them and they are not bracing. When the two of you decide to do something, it starts without a negotiation about who is in charge. In practice you are usually the one who moves first. You set a date, take the first step, break the stall a conversation had settled into. They tend to take that well. Where other people read your directness as bossy, they read it as useful, because nothing in their sense of themselves has to be defended against it. That single fact changes how you behave near them. You ask for things plainly, and you stop softening every request in advance. In exchange they hand you a sense of what is worth the trouble, which your own drive does not supply. Left alone you can spend a month working hard on the wrong thing. Around them that happens less, because you can hear yourself explain the plan to a person who takes you seriously, and it either survives the telling or it does not. They are not managing you. They are a fixed point you can steer by. Nothing the two of you compete over gets heavy. You can push them in a game, an argument, or a long afternoon of work without anything being at stake underneath. If you win they do not shrink, and if they win you do not sulk for a week. That tolerance is easy to overlook until you compare it with the connections where every strong statement has to be said twice, once to say it and once to prove you were not attacking anybody. A sextile is an offer, and an offer can go unopened for years while both of you stay on excellent terms. You can go on hauling your own hard tasks alone, they can go on with theirs, and nothing will ever feel wrong. You will simply notice, a long way in, that you liked each other a great deal and never built anything together. What opens it is something concrete: a deadline, a trip, a repair, a job with a real edge on it. Shared physical effort tends to do it faster than talking, since your half of this contact is not verbal. Every time it gets used the route is easier to find again. Every year it does not, it gets a little more theoretical."
+ },
+ {
+  "id": "synastry:mars:square:sun",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "mars",
+   "b": "sun",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "synastry:mars~b_sun:square"
+  ],
+  "text": "The fights start over tone and end over standing. Your Mars squares their Sun, which sets the way you go after what you want across the grain of the way they need to be seen. Neither of you has to do anything unusual for this to bite. You move at your normal speed, they occupy the center in their normal way, and the two normals collide. From where you sit, they can seem to expect a deference you never agreed to give. Their assumption that their read on things is the working read strikes you as something to test rather than accept. So you test it, often without deciding to, by moving before they have blessed the plan or by saying the blunt version of what everyone else was hinting at. They experience that as being undercut in public, even when the room holds two people. From their side, the timing is the injury. You tend to push exactly when they are most invested in how they look, and your speed strips the ceremony off something they wanted to happen properly. What feels like efficiency to you feels like disrespect to them. You will be told you were rude when you thought you were being clear, and you will not be able to see it, because the offense sits in a part of the exchange you do not track. The loop is easy to describe and hard to leave. They slow down to reassert their authority. You speed up, because slowness reads to you as posturing. They dig in further. Within a few rounds the argument has left the subject entirely and become a question of who sets the terms. Both of you can usually reconstruct the words afterward, and neither of you can find the moment it turned. The honest half deserves saying too. A hard contact is not a verdict, and plenty of working pairs run on exactly this angle. Being met by somebody who will not simply move for you teaches the difference between force and aim. You learn to make a case instead of assuming the case is obvious. Under real pressure the pairing often performs above its weight, because the same charge that goes into friction goes into effort when there is something urgent in front of you. The skill it asks for is separating what is aimed from what is only in the way. Some of their resistance is about you. Most of it is what they would do with anyone moving that fast at that hour. Telling those apart in the moment, rather than a day later, is the work this angle sets you."
+ },
+ {
+  "id": "synastry:mars:trine:sun",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "mars",
+   "b": "sun",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "synastry:mars~b_sun:trine"
+  ],
+  "text": "Effort you spend near them rarely comes back as resentment. Your Mars trines their Sun, so what you do runs with the grain of who they are, and neither of you has to translate. You act, and they take it as support rather than pressure. They take up room, and you feel no need to cut them down to size. Nothing in this contact grinds. You see it in the work before anywhere else. Jobs get divided fast and roughly correctly, and you end up with the parts that need starting rather than the parts that need presiding. When you take something on for them it does not feel like a favor with a bill attached, and they do not receive it as interference. Even arguments about method stay technical. You can tell them the plan is wrong without either of you treating it as a challenge to their standing. You are also the nerve in this pairing. Their sense of what is worth doing tends to be larger than their appetite for the risk of doing it, and your willingness to move makes the risky version look ordinary. Many people leave a plan alone for years because nobody nearby ever treated it as a normal thing to attempt. Around you they attempt it. The effect is quiet and it accumulates. What you take is direction. Your energy was never in short supply; the shortage is usually in reasons. Their clarity about what deserves the effort gives your force a spine, and you can feel the difference between the weeks you work near them and the weeks you do not. Every easy angle has the same soft spot, and this one is no exception. Nothing here gives either of you a reason to examine the arrangement. You can spend your drive on their purposes for a long stretch without asking what you were going to do with it, and they can let you be the engine until neither of you remembers whose idea anything was. It works, and things that work do not get looked at. Bad weather is the other thing you do not get to see. Everything the two of you take on goes well enough that you have no evidence about how they behave when it does not, and you will not get that evidence until it happens. A trine keeps everything running sweetly, and running sweetly is no measure of what the two of you could carry. Where it earns its keep is in long stretches: the dull middle of a project, an endurance job, a bad month that has to be got through. That is the stretch where most pairs begin costing each other something, and this one does not."
+ },
+ {
+  "id": "synastry:mars:opposition:sun",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "mars",
+   "b": "sun",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "synastry:mars~b_sun:opposition"
+  ],
+  "text": "You push and they plant. Your Mars opposes their Sun, so your drive comes at them from the far side of the chart and meets the part of them least willing to be moved. Subtlety is not available here. A disagreement goes to a test of will in about two sentences, skipping the stage where most people trade reasons. The shape of it arrives early. You want a decision, so you press. They answer by becoming more themselves, slower and more certain, because that is what a Sun does when something arrives head on. Their steadiness looks to you like obstruction wearing dignity as a coat. Your pressure looks to them like a claim on a choice that was theirs. Neither reading is unreasonable, and both keep the loop alive, sometimes for years, over subjects that turn out on inspection to be nearly arbitrary. What makes this more than a nuisance is that an opposition completes as often as it collides. Motion is what you hand them, and they did not ask for it. Being is not the same as doing, and their identity can sit unspent for a long time until something arrives that will not let the matter rest. You are that something. Around you they act sooner than they would have, usually while complaining about it. What they supply you is a wall. Force with nothing to work against dissipates and leaves you tired and vague. Their refusal to shift on demand gives your energy an outline, and you find out what you actually wanted by noticing what you were still pushing at after the easy motives fell away. Pointed at a shared problem instead of at each other, the rivalry lifts both of you, and the two of you cover ground quicker in company than alone. Working life is full of pairs like this, held together by a tension neither person can quite put down. None of that comes with an off switch. A question about dinner can carry the same voltage as a question about money, because the voltage sits in the angle rather than in the topic. What this contact spends is stamina more than anything else. Two people cannot stay braced against each other around the clock, and there have to be hours in the week when nothing is being decided. None of that tells you what the connection is worth, which is not a thing one aspect can report. What it does report is volume, and volume is hard to mistake for anything else. Stay curious while it happens and you come away with an exact map of your own force, drawn for you by the one person who keeps declining to move for it."
+ },
+ {
+  "id": "synastry:mars:conjunction:moon",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "mars",
+   "b": "moon",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "synastry:mars~b_moon:conjunction"
+  ],
+  "text": "Nothing you do around them lands neutrally. Your Mars sits on their Moon, which puts your wanting, your speed, and your temper directly on the part of them that reacts before it thinks. They do not get to consider you first and feel about you afterward. The feeling arrives on contact. The upside is that you can move them when nobody else can. A word from you at the right moment gets them out of a bad afternoon and into the day. Your appetite is contagious to them: they eat better, sleep lighter, laugh harder, and generally run at a higher setting in your company. If they are the sort of person who waits to be certain before doing anything, you are the reason they sometimes skip that step. The cost is that your ordinary volume is not ordinary to them. You raise your voice a little to be heard over traffic and they take it as a verdict. You are brisk because you are late, and they read a message in it about where they stand. Then you push harder to clear up the misunderstanding, because pushing is your instinct when something is wrong, and pushing is the one move that makes it worse. That sequence can run three times in an evening. Their moods do something to you as well. Weather cannot be fought, and their state is weather. When they are settled your energy runs clean and you get more done beside them than anywhere else. When they are hurt you feel an obstruction with no enemy in it, and drive with nothing to aim at curdles into irritation with whoever is nearest. Often that is them. They also recruit you. Their unhappiness reaches your Mars directly, so you take up their causes fast, sometimes before being asked and sometimes past the point where they wanted anyone involved. You are defending the version of the story they told at their worst hour, which they may have revised by morning. Being fought for like that is a relief and an embarrassment for them in roughly equal measure. Fights here start fast and burn out fast, and they leave less residue than the slow kind. Nothing between you goes numb, and it is very hard for the two of you to be politely disconnected. That is worth something. Most people never get a witness whose reflexes are wired straight into their own. What makes this livable is delay. Not silence, not patience as a performance, just the small gap between what you feel and what you do about it. You do not have much of one at this angle by default, and every bit you build gets used."
+ },
+ {
+  "id": "synastry:mars:sextile:moon",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "mars",
+   "b": "moon",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "synastry:mars~b_moon:sextile"
+  ],
+  "text": "Doing something for them is the easiest form of care you have. Your Mars sextiles their Moon, so your capacity to act sits within reach of their needs without being wired into them. You are not required to feel what they feel. You are simply able to do something about it, and the doing is received as care rather than as interference. It is most visible in ordinary logistics. You move the furniture, drive the distance, make the call they have been putting off for three weeks. They are not made to feel small for having needed it, mostly because you do not treat needing as a weakness and they can tell. Over time that changes what they bring you. Problems arrive earlier, while they are still small enough to solve in an hour. What you get is an outlet that costs nothing. Force with no target has to go somewhere, and left to itself it usually goes into competition or a fight picked with a stranger. Here it has a use with a visible result and a specific person attached. You tend to like yourself in their company for that reason, and you are probably steadier around them than around people you have known much longer. Their side of the exchange gives you information you would not otherwise collect. They read a room quickly, and if you are willing to hear it, you find out things about a situation you would have walked straight through. You may still disagree. You will at least know something was there. They can keep managing alone, you can spend your energy elsewhere, and the two of you will stay on friendly terms while the useful part sits idle. Nothing announces that. There is a smaller trap inside the ease. A need has to be said out loud before you can act on it, and one that is never said can sit for years before it turns up as a complaint about how little you noticed. The charge is usually fair and usually beside the point. You are built for responding rather than for noticing, and the repair is a habit of asking, not a change in your nature. Used on purpose, this quietly carries a lot of weight. They get a person who answers a need with an action instead of a conversation. You get somewhere for your force to go that has nothing to do with winning. It is a plain trade, and neither half of it requires anybody to be at their best."
+ },
+ {
+  "id": "synastry:mars:square:moon",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "mars",
+   "b": "moon",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "synastry:mars~b_moon:square"
+  ],
+  "text": "Your speed keeps arriving at the wrong hour for them. You run on a clock and they run on a settling time, and a square keeps putting the two out of step. You are ready now. They needed twenty more minutes, or a different tone, or to be asked rather than told. Neither version is invented, and each of you has a stack of examples. It shows up first in small irritations. You open with the request instead of the greeting, because the request is why you came. They hear the missing greeting and answer the tone rather than the question. You did not know there was a tone. Their reaction looks to you like weather out of a clear sky, and weather cannot be argued with, which is exactly the part you find hardest. Then comes the retreat. When you press, they go quiet or go still, and stillness is the one response your Mars has no method for. Your instinct in front of a closed door is to push it. Theirs, in front of pressure, is to close it further. That is the loop, and it is structural rather than personal, which is the only genuinely useful thing anybody can tell you about it. Be honest about your own part. Around them you are less patient than you usually are, and you may not care for the version of yourself that turns up in these exchanges. Something about a mood you cannot fix pulls the sharpest edge out of you. You will also learn fairly quickly which sentences end a conversation. Knowing where that switch sits is not the same as wanting to have found it. Their side deserves stating plainly. They often cannot say what is wrong at the moment you want it said, because the reaction came up faster than the words did. What reads to you as withholding is usually a lag. A square brings voltage along with the trouble. Whatever else the two of you are, you are not indifferent to each other and you are not bored. What the grinding can build, given years, is a pair of skills neither of you would have picked up alone. You find out that silence from them is not a refusal, which is hard for anyone who reads a shut door as a challenge. They find out that saying a thing early costs less than letting it become a mood, since a mood is the one message you cannot receive. There is no smooth version of this contact. What there is, once you stop being surprised by it, is a pattern you can both see coming, and that takes most of the sting out of the same argument the fourth time it arrives."
+ },
+ {
+  "id": "synastry:mars:trine:moon",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "mars",
+   "b": "moon",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "synastry:mars~b_moon:trine"
+  ],
+  "text": "You get to be blunt with them and nothing breaks. Your Mars trines their Moon, so your force runs in a current their instincts do not resist. What you do reads to them as movement rather than threat, and what they feel reads to you as information rather than obstruction. Neither of you negotiated that. It was in place the first week. The practical shape of it is that you can be honest at speed. You say the direct version and they take the direct version, with no preliminary round of reassurance. You can be annoyed in front of them and it does not become an event. That saves a great deal of time, and it saves you the particular tiredness of managing somebody's reaction to your ordinary self. Their reactions are useful to you in a way that softness usually is not. You can float something, watch their face, and learn what a plan will actually cost before you have spent anything on it. Most people either argue with you or agree with you. They register, which is different and more accurate. Over a long association you end up with better timing than you had, and you did not get it by being lectured. Nerve is your half of it. Around you their fear behaves differently: still present, no longer the deciding vote. They attempt things in your company that they would have talked themselves out of alone, and the effect is quiet enough that they may credit their own mood for it. Over years this changes what they believe they can do, which is a large result for an angle that never announces itself. The problem with a contact that never grinds is that nothing prompts either of you to look at it. You can coast comfortably and never find out what you have. You may also settle into being the one who acts while they stay the one who feels, a split that suits both of you and slowly narrows both of you. The ease can make you careless about asking, too. Because they rarely push back, you take agreement for granted, and only discover much later that they had a view. Given something to do, this contact does a great deal of work for a pair, since it converts what they feel into something that actually happens. Given nothing, it stays a pleasant fact about your company and no more than that."
+ },
+ {
+  "id": "synastry:mars:opposition:moon",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "mars",
+   "b": "moon",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "synastry:mars~b_moon:opposition"
+  ],
+  "text": "Across this distance you are always the one in motion. Your Mars opposes their Moon, so your wanting sits at one end of a line and their needing sits at the other, and each of you watches the other do the thing you do not do. You see somebody who waits. They see somebody who charges. Neither view is wrong and neither is complete. Arguments take a recognizable shape here. Something is wrong, so you go looking for the action that ends it. They are not looking for the end of it yet. They want the wrongness acknowledged first, in words, with time taken over it. To you that is a request with no finish line, which is the one kind of request your Mars cannot process. To them your solving looks like a way of getting out of the room. So you offer a fix, they say you are not listening, you offer a faster fix, and the volume climbs on both sides while the subject quietly disappears. Confrontation is only half of an opposition. The other half is completion, and here that half is the more interesting one. They know when a thing has gone far enough, and they remember what a person needs on the far side of a bad night. You do not have that instinct and you cannot fake it. What you can do is end things: say the sentence, make the call, refuse the arrangement everyone else has been putting up with. They can seldom do that alone. Facing each other, each of you is looking straight at equipment you were not issued. The way this goes wrong is by hardening into a division of roles. You get louder because they get quieter, they get quieter because you get louder, and after a while neither of you remembers how to do the other one's part. You become the one who handles everything and they become the one who feels everything, and each of you can point at the other as the cause. After that it is one move, run over and over, standing in for everything else. What loosens it is each of you doing a small amount of the other's work on purpose. You leave something unresolved overnight instead of settling it by dinner. They put a plain request into words with nothing else riding on it. Neither move comes naturally here, and that is the reason to make it on purpose. Whatever else this contact does, it makes the two of you legible to each other. You cannot hide your impatience from them and they cannot hide their state from you. What gets made of that visibility is written nowhere in the geometry."
+ },
+ {
+  "id": "synastry:mars:conjunction:mercury",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "mars",
+   "b": "mercury",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "synastry:mars~b_mercury:conjunction"
+  ],
+  "text": "You act while they are still talking, and both of you notice. Your Mars sits on their Mercury, so your drive is parked on the part of them that thinks, sorts, and puts things into sentences. Nothing stands between your impulse and their commentary on it. The most obvious result is speed. Around them your decisions come with a running narration: the reason you are doing it, the flaw in the plan, the better order to do it in. Some days that is the most useful thing anybody gives you, because your force picks up a route it would not have found alone. Other days it is a person describing your work while you are doing it, which is the exact thing that makes you shortest. You do something to their thinking as well, and it is worth knowing what. Your presence puts urgency into their mind. Ideas that would have stayed theoretical acquire a deadline simply because you are standing there ready to start. They think faster in your company, take more risks with a sentence, and say the sharp version of the thing they would have softened for anyone else. Some of them enjoy that and some find it exhausting, often the same person on different weeks. Fights are made of words on one side and momentum on the other, and they arrive quickly. You interrupt because you already have the point. They stop and audit the interruption. You take the audit as a delaying tactic and act, which proves whatever they were about to say. Almost none of this is planned. The conjunction gives your temper direct access to their vocabulary, and a person with quick vocabulary and a raised pulse says things with more precision than either of you wanted. There is a subtler version worth watching. Because your action and their thinking are fused, you can start to hear their ordinary working out loud as instruction, and answer a question as though it were an order. They were turning the problem over. You were already halfway to the car. What builds between you over years is a shortcut for getting things done. They say the plan, you make the first move, and the middle stretch that most pairs argue about gets skipped. To anyone watching, the two of you can sound like a quarrel when what is actually happening is a decision being reached in a quarter of the usual time."
+ },
+ {
+  "id": "synastry:mars:sextile:mercury",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "mars",
+   "b": "mercury",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "synastry:mars~b_mercury:sextile"
+  ],
+  "text": "Ask them how, and you usually get an answer you can use. Your Mars sextiles their Mercury, which puts your appetite for action within easy reach of the way they sort information. Nothing is fused and nothing is fighting. Their thinking is available to your effort whenever one of you reaches for it. The trade is clean. You supply the start, they supply the order, and at this angle neither charges the other for it. Bring them the problem and they will lay out the sequence. Bring them nothing and you will start anyway, in whatever direction was nearest, then spend the afternoon undoing the first hour. Talking with them is easy on you, which is not true of everyone. They do not make you sit through the whole reasoning before they hand over the point. When they disagree, the disagreement stays about the method rather than about your character, so you can be told the plan is wrong without a fight opening up. Ten years of that adds up to a great many arguments the two of you never had to have. What travels the other way is easy to overlook. Thinking with no consequence attached can circle for months. Your willingness to act makes their ideas real, and an idea that is going to become real gets considered differently. They tend to be more decisive around you, and more concrete, because vagueness has a price when somebody nearby is going to do the thing. Sextiles never force themselves on anyone, so this one can sit unused. The two of you can talk pleasantly for years while you handle your hard tasks alone and never think to ask, and none of that will feel like a mistake at the time. You will only notice, much later, how many things you discussed and how few you built. Complaints travel well in this direction. You can say what is wrong without dressing it up, and they hear a description of a task rather than an accusation. That does not mean nothing ever goes badly between you. It means the repair is cheap, which is the part most people underestimate. Use the contact and you develop a tempo that is hard to arrange on purpose: you in motion, them keeping the sequence straight, and a surprising number of finished things behind the pair of you."
+ },
+ {
+  "id": "synastry:mars:square:mercury",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "mars",
+   "b": "mercury",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "synastry:mars~b_mercury:square"
+  ],
+  "text": "Their sentences are quicker than your patience. Your Mars squares their Mercury, so the way you move cuts across the way they think, and the collision is nearly always about timing rather than content. You are ready. They have three questions. Both positions are reasonable and neither leaves room for the other. Here is the sequence, and it repeats. You start. They ask something, and the question is usually fair. To you it does not arrive as a question, it arrives as a hand on your arm. You answer short, because short is what you have when you are already moving. They hear the shortness, decide the plan is worse than they thought, and ask two more. A minute later the two of you are arguing about how you said it, and the thing you were doing sits there unfinished. Words are their equipment, so under pressure they get exact, and exact is a weapon. They can name the flaw in what you are doing while you are still doing it, in a sentence you remember for a week. Your equipment is speed, so you answer by finishing the job anyway, which proves nothing and settles nothing and feels excellent for about an hour. Both of you can be sorry that night and reach the same place next month, because the pattern lives in the wiring rather than in either character. The grinding pays, provided you stay in it long enough to collect. Their questions are a live test of whether your urgency is a reason or a mood. Sometimes you are moving because the thing genuinely has to be done now. Sometimes you are moving because sitting still is unbearable, and they can hear the difference in your voice before you can. It is maddening to be read that accurately, and you would not give it up. Your half is a test too. You can see when their asking has stopped being diligence and turned into a way of not beginning. Delivered as an accusation it goes nowhere. Delivered as a plain remark about the clock, it lands harder than you expect. The places this happens are small and constant: leaving the house, choosing a route, how long a decision should be allowed to take, whether a message gets answered tonight or thought about first. Nothing important rides on any single round, which is the only reason the two of you have a chance of learning the shape of it. Some pairs work out a treaty. Before you start, they get one pass to say the thing that actually worries them, and once it is said you are free to go. Nothing in that makes either of you slower or more patient. It only stops the first minute of every job from being the argument."
+ },
+ {
+  "id": "synastry:mars:trine:mercury",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "mars",
+   "b": "mercury",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "synastry:mars~b_mercury:trine"
+  ],
+  "text": "Explaining yourself to them takes almost no effort. Your Mars trines their Mercury, so your drive and their thinking run in compatible currents, and neither has to be translated for the other. You say what you are going to do and they catch the shape of it at once. They say how, and you can act on it without the usual argument about who decided. The practical version is that you rarely have to defend a plan before anything can move. Most people want the case made first. They want a case too, but they can assemble it themselves out of very little, so half a sentence from you is enough. That spares you the specific fatigue of justifying an impulse you have not finished having. What they do to your force is give it an order. Left alone your energy goes at the nearest available thing, which is fine on the days when the nearest thing is the right thing. Their mind lays out the steps, so the same effort ends up somewhere. You feel the difference most on complicated jobs, the kind with a wrong order that costs a day. What your force does to their thinking is give it a consequence. Ideas that would have been enjoyed and shelved get done instead, and getting done teaches them something about their own ideas that no further thinking would have produced. Their planning grows more grounded over the years, because they have watched a lot of their own suggestions meet the world. Trines never test anything, and that is the flaw. Nothing in this arrangement asks either of you whether the plan was any good. If their reasoning is off, you act on it with exactly the smoothness you would give a sound one, and the exchange feels identical either way. Two people at this angle can travel a long distance in the wrong direction very efficiently. The check has to come from elsewhere, or from one of you agreeing to play skeptic on purpose, which is not a role this contact hands out. The split sets fast, too. You move, they work it out, and neither of you keeps much practice at the other half. Nothing is damaged by that until a week arrives when the halves have to trade. Given any attention at all, this contact does a lot of ordinary good. Things that get mentioned get finished, and the two of you pick up a reputation for that without either of you meaning to."
+ },
+ {
+  "id": "synastry:mars:opposition:mercury",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "mars",
+   "b": "mercury",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "synastry:mars~b_mercury:opposition"
+  ],
+  "text": "Every move you make gets described back to you. Your Mars opposes their Mercury, so your way of acting and their way of thinking sit at opposite ends of one line, looking straight at each other. What you do, they analyze. What they say, you answer with a decision. The exchange is unavoidable and it is rarely quiet. The first thing to understand is that their commentary is not an attack, even when it lands as one. Thinking is what they do with something that is happening, the way pushing is what you do. When you start, their mind produces the shape of it, the risks in it, and the two better versions you did not consider. They regard that as taking part. You experience it as being marked while you work. Your answer is usually motion. You go faster, or you finish the job to make the argument stop, and there the loop closes: the finished thing gives them fresh material, and the more material they hold, the more precisely they can describe what went wrong. Two people at this angle usually have one argument they can reach within a minute of sitting down. Underneath the noise is a real disagreement about when a question is closed. You close it by doing the thing. They close it by understanding the thing, and an action taken before the understanding arrives looks to them like panic with a schedule on it. From where you stand, a case argued to perfection that moves nothing is a long way of not starting. An opposition completes as well as confronts. They see your motives from outside, which is the one view you can never take of yourself. Their reading will sometimes be off. It will also sometimes be better than the one you were working from, and in the middle of an argument you have no way to sort the two. Holding a wrong description of yourself long enough to check it is most of what this angle asks. You give them something in return that they will not always admit. Their thinking gets tested against consequences instead of against more thinking. A plan of theirs that you act on turns into evidence, and evidence is the one thing a mind that argues well can never generate on its own. You will accuse them of narrating instead of moving. They will accuse you of moving before you have understood anything. Neither charge is false, which is why neither one ever ends the conversation. What does end it is one of you stating the other's case better than they just did."
+ }
+]

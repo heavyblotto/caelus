@@ -1,0 +1,7 @@
+extends: existence
+message: "'%s' is insider vocabulary; keep it off consumer surfaces (docs/editorial-voice.md, 'Product copy')."
+level: error
+ignorecase: true
+nonword: true
+raw:
+  - '\bfact atoms?\b|\bdark patterns?\b'

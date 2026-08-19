@@ -1,0 +1,158 @@
+{
+ "name": "transits-node-neptune-pluto",
+ "outFile": "b2-transits-node-neptune-pluto.json",
+ "setId": "house-b2-transits-node-neptune-pluto",
+ "family": "transit-aspect",
+ "cells": [
+  {
+   "id": "transit:neptune:conjunction:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "true_node",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:neptune~natal_true_node:conjunction"
+   ],
+   "title": "Transiting Neptune conjunct your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:sextile:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "true_node",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:neptune~natal_true_node:sextile"
+   ],
+   "title": "Transiting Neptune sextile your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:square:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "true_node",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:neptune~natal_true_node:square"
+   ],
+   "title": "Transiting Neptune square your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:trine:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "true_node",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:neptune~natal_true_node:trine"
+   ],
+   "title": "Transiting Neptune trine your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:opposition:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "true_node",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:neptune~natal_true_node:opposition"
+   ],
+   "title": "Transiting Neptune opposite your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:conjunction:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "true_node",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:pluto~natal_true_node:conjunction"
+   ],
+   "title": "Transiting Pluto conjunct your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:sextile:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "true_node",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:pluto~natal_true_node:sextile"
+   ],
+   "title": "Transiting Pluto sextile your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:square:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "true_node",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:pluto~natal_true_node:square"
+   ],
+   "title": "Transiting Pluto square your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:trine:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "true_node",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:pluto~natal_true_node:trine"
+   ],
+   "title": "Transiting Pluto trine your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:opposition:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "true_node",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:pluto~natal_true_node:opposition"
+   ],
+   "title": "Transiting Pluto opposite your natal North Node",
+   "bindable": true
+  }
+ ]
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "id": "transit:mars:conjunction:true_node",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mars",
+      "natal": "true_node",
+      "aspect": "conjunction"
+    },
+    "atomIds": [
+      "transit:mars~natal_true_node:conjunction"
+    ],
+    "text": "Mars has arrived at your North Node, and for a week or two your energy and your direction of growth are the same thing. The node is not a planet; it is a point your chart leans toward, territory that tends to feel unfamiliar and slightly too big for you. A conjunction fuses Mars with that point, so the pull toward new ground stops being an idea and becomes an itch. While the transit is applying, you may feel restless without a clear reason, picking quarrels with your own routines, aware that something wants doing. At the exact pass the itch usually finds its object: a first move, a hard conversation, a visible step toward the thing you have been circling. Courage is cheaper this week than it normally is. At work this can look like putting your hand up for the assignment that scares you a little; in your personal life it can be the invitation you finally send, or accept. The risk is the usual Mars risk, haste. The push to act can grab the nearest open door rather than the right one, and it can arrive with a short temper attached. If the people around you seem to be in your way, it is worth checking whether they are actual obstacles or simply moving slower than you this week. As Mars separates, the urgency drops but the momentum tends to stay. Whatever you started keeps rolling on its own weight, which is why the starting matters more here than the finishing. Mars comes back to this point roughly every two years, so treat the visit as a recurring appointment with your own nerve rather than a single test you can fail. Once in a while a retrograde stretches the stay into months and three separate crossings; then the first pass opens the question, the second sends you back over ground you rushed, and the third settles what you actually meant to do. Either way, what this transit teaches is plain and physical. You learn what the unfamiliar path feels like under your feet instead of only in your head, and even a small act taken in that direction counts. The memory of having moved lasts longer than the transit does."
+  },
+  {
+    "id": "transit:mars:sextile:true_node",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mars",
+      "natal": "true_node",
+      "aspect": "sextile"
+    },
+    "atomIds": [
+      "transit:mars~natal_true_node:sextile"
+    ],
+    "text": "A sextile is an offer, not a shove, and this one comes from Mars to the point in your chart that stands for growth into unfamiliar territory. For about a week or two, effort spent in your forward direction gets a better exchange rate than usual. Doors that would normally need forcing sit slightly ajar: a chance to try the new skill in low stakes, an errand that happens to put you next to the right person, a burst of physical energy that could just as easily be spent on something that matters. The catch built into every sextile is that nothing happens if you do not reach. The offer does not announce itself with pressure, so it is easy to spend the whole window on ordinary business and never notice what was available. While Mars applies, you may register it as mild eagerness, a sense that a particular task would go well right now. The exact pass is the easiest moment to move; friction is low, tempers are workable, and small initiatives tend to land without drama. As the aspect separates, the door swings shut slowly rather than slamming, so a start made late still counts. In practical terms this favors the modest brave act over the grand one: the email, the sign-up, the first workout, the question asked in the meeting. None of these will change your life by themselves, but each one shifts your footing a little toward the side of your chart you are supposed to be growing into, and footing compounds. Because Mars circles back to this angle roughly every two years, missed windows are not tragedies; another offer will come. Occasionally a retrograde turns the single visit into three passes spread across several months. When that happens the rhythm is worth using: the first pass shows you the opening, the second lets you test it with more information, and the third is the natural moment to commit or let it go cleanly. What you keep from this transit is less any single result than a small piece of evidence about yourself, the knowledge that when the effort is cheap and the direction is right, you are someone who takes the step. That evidence is exactly what makes the harder transits, the ones that force rather than offer, easier to meet when they arrive."
+  },
+  {
+    "id": "transit:mars:square:true_node",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mars",
+      "natal": "true_node",
+      "aspect": "square"
+    },
+    "atomIds": [
+      "transit:mars~natal_true_node:square"
+    ],
+    "text": "For a week or two, your drive runs crosswise to your direction. Mars square your North Node is also, by geometry, Mars square your South Node: the whole axis of where you have been and where you are headed is under sideways pressure at once. A square forces; it does not invite. So this period tends to produce friction you did not order: an urgent demand that pulls against the commitment you just made, a conflict that flares exactly where you were trying to build something new, an itch to act that, followed blindly, would take you off your own road. None of this means the road is wrong. Squares from Mars are stress tests, and what they test here is whether your forward direction can hold its shape when your energy wants to go somewhere else. While the transit applies, irritation builds and the temptation is to blame the nearest person. At the exact pass, something usually demands a decision made under pressure: this obligation or that one, the old reflex or the new practice, the fight or the aim. The useful question in that moment is not which option feels strongest but which one belongs to the life you are building. As Mars separates, the heat drops quickly, and you can see what the pressure revealed: usually one commitment that mattered less than you claimed, and one that mattered more. Work is a common arena, since deadlines and turf disputes are how this energy often arrives, but the same shape shows up at home when your plans and someone else's collide. Because Mars returns about every two years, you have met versions of this test before and will again; each round is shorter than it feels while you are in it. On the rare occasions a retrograde brings three passes over several months, the conflict tends to come in acts: first the clash, then the rematch with better information, then the settlement. You grow through this transit the way muscle grows, by working against resistance. The direction your chart points toward becomes more genuinely yours each time you choose it while something loud is pulling the other way, and that choice, not the absence of friction, is what the square was asking about."
+  },
+  {
+    "id": "transit:mars:trine:true_node",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mars",
+      "natal": "true_node",
+      "aspect": "trine"
+    },
+    "atomIds": [
+      "transit:mars~natal_true_node:trine"
+    ],
+    "text": "Some transits shove and some carry. Mars trine your North Node carries: for a week or two, your energy flows toward the unfamiliar country your chart leans into, and it does so without asking much of you. Things you attempt in that direction tend to work on the first try. The right words come in the difficult conversation, the new routine holds without willpower theatrics, people cooperate who might on another week have pushed back. The trine's character is ease, and its well-known weakness is the same thing: what costs nothing is easily spent on nothing. It is entirely possible to pass this whole window doing chores efficiently and feeling vaguely capable, and to look back later and find no trace of it. So the difference between a pleasant week and a useful one is mostly a matter of noticing. While Mars applies, you may feel your confidence rising a notch, an appetite for action without the edge of anger that often rides along with it. The exact pass is prime time for anything that has been waiting on courage or stamina: launching the thing, asking for the thing, doing the physically demanding part of the plan. As the aspect separates, results start arriving from whatever you set in motion, usually with less drama than you budgeted for. In love and friendship this transit often shows up as straightforwardness that lands well; you can say what you want and be heard, because the want itself is aligned with where you are genuinely going. In work it favors initiative that would normally read as pushy but this week reads as leadership. Mars makes this angle roughly every two years, so the window recurs, and once in a while a retrograde spreads it into three passes over some months: momentum, then review, then consolidation, a slower and more thorough version of the same gift. What stays with you afterward is calibration. Effort in your growth direction felt lighter than effort spent maintaining the familiar, and having felt that contrast once in your body, you recognize it again later, on ordinary weeks, when nothing in the sky is making it easy. That recognition is the real yield; the smooth week itself is just how it arrived."
+  },
+  {
+    "id": "transit:mars:opposition:true_node",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mars",
+      "natal": "true_node",
+      "aspect": "opposition"
+    },
+    "atomIds": [
+      "transit:mars~natal_true_node:opposition"
+    ],
+    "text": "Mars opposite your North Node is Mars conjunct your South Node, and it helps to say it that way, because that is how the week or two of this transit usually feels. The South Node stands for your well-worn ground: the skills that run without thinking, the roles you can play in your sleep, the habits that feel like home. Mars lands there and pours fuel on all of it. Energy comes easily, but it comes easiest for the old moves. You may find yourself busy, effective, even praised, and quietly aware that everything you are pouring effort into belongs to the person you have already been rather than the one you are trying to become. An opposition confronts, and what it confronts you with here is the gravitational pull of your own competence. Sometimes the pull is warmer than that: an old pursuit, an old crowd, an old fight that suddenly wants your attention again. While Mars applies, the backward tug builds and can carry real frustration with it, a sense of running hard on a treadmill. Around the exact pass, something often makes the choice explicit; the familiar demand and the forward commitment want the same evening, the same money, the same version of you. There is no rule that the familiar must lose. Old ground is also a resource, and a deliberate return to it, to rest, to gather a skill you need, to close something honestly, is different from a slide. The question this transit sharpens is only whether you are visiting or moving back in. As Mars separates, the pull loosens and you can usually see which of the week's efforts fed you and which merely occupied you. Mars makes this pass roughly every two years, and on occasion a retrograde turns it into three encounters across several months, which gives the old territory time to make its full case before you answer. Working with this transit does not mean winning against your past. It means letting the flare-up of the familiar show you exactly what it still offers and exactly what it costs, so that when your energy comes back under your own direction, you spend it with your eyes open."
+  },
+  {
+    "id": "transit:jupiter:conjunction:true_node",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "jupiter",
+      "natal": "true_node",
+      "aspect": "conjunction"
+    },
+    "atomIds": [
+      "transit:jupiter~natal_true_node:conjunction"
+    ],
+    "text": "About once every twelve years, Jupiter arrives at the degree of your chart that marks the direction of your growth, and for a few weeks the road you are supposed to be walking gets wider. A conjunction fuses the two symbols: the planet of opportunity sits directly on your North Node, so expansion and direction stop being separate questions. The classic signature of this transit is the well-timed meeting. People show up who happen to be going where you are going: a teacher, a collaborator, someone whose invitation moves you further in a month than your own planning did in a year. Doors open toward the unfamiliar rather than the comfortable, which matters, because Jupiter opens doors everywhere and not all of them lead anywhere you need to be. Under this one, the openings tend to point forward. While the transit applies, life often gets busier in a hopeful way; possibilities multiply and your own appetite for the future grows with them. Around the exact pass, one or two of those possibilities usually become concrete enough to say yes to. The Jupiter caution applies even here: more is on offer than you can take, and overcommitting to everything is a way of committing to nothing. As the transit separates, the extra traffic thins out and what remains is whatever you actually accepted, now needing ordinary work. Jupiter retrogrades regularly, so fairly often this is not one visit but three spread across the better part of a year. The rhythm rewards patience: the first pass introduces the opportunity, the second gives you a slower second look at what it really involves, and the third is when the piece that fits gets built in for good. If an offer from the first pass falls through, the later passes frequently return it in a better form. Because the cycle is about twelve years long, it is worth taking this period seriously without inflating it; this is not fate arriving, just an unusually good season for saying yes in your own direction. What you grow here is trust in your forward path, earned the pleasant way. For once the new territory is not asking for courage so much as for attendance, and showing up turns out to be enough."
+  },
+  {
+    "id": "transit:jupiter:sextile:true_node",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "jupiter",
+      "natal": "true_node",
+      "aspect": "sextile"
+    },
+    "atomIds": [
+      "transit:jupiter~natal_true_node:sextile"
+    ],
+    "text": "This is one of the gentler transits you will meet, and its gentleness is the whole point of working with it. For a few weeks, Jupiter forms a sextile to your North Node: the planet of growth makes a friendly angle to the point your chart treats as forward. Nothing about this period forces anything. Instead, small favorable things become available in the direction you are trying to move: a course that starts at the right time, a person one introduction away, a piece of luck that only pays off if you follow it up. Sextiles run on participation. Left alone, this transit passes as a mildly pleasant month you will not remember; met halfway, it becomes one of those quiet junctions you trace big changes back to years later. The scale of the openings is deliberately modest, and that is an advantage. Because the stakes feel low, you can experiment in your growth direction without the self-consciousness that bigger moments bring. Try the unfamiliar role for one evening. Ask the question you would normally save for a better occasion. While the aspect applies, curiosity tends to rise before opportunity appears, so a new interest arriving out of nowhere is worth taking as a signal rather than a distraction. The exact pass is when the outside world is most likely to cooperate, and the separating weeks are for following up on whatever you touched, since Jupiter's offers usually need a second contact to become real. Jupiter's regular retrogrades mean the angle fairly often repeats, up to three times over the better part of a year. A door you noticed but did not try may simply reappear; the second pass is the natural time to test it, and the third to fold whatever worked into your ordinary life. The full cycle brings this particular sextile around roughly every six years as Jupiter moves through its twelve-year round, so it is neither rare nor trivial. What it builds, taken over a lifetime, is a habit of alert receptivity: you learn that growth does not always announce itself loudly, and that some of the most durable turns in your path began as a small yes that cost you almost nothing at the time."
+  },
+  {
+    "id": "transit:jupiter:square:true_node",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "jupiter",
+      "natal": "true_node",
+      "aspect": "square"
+    },
+    "atomIds": [
+      "transit:jupiter~natal_true_node:square"
+    ],
+    "text": "More arrives, but at an angle. For a few weeks, Jupiter squares your nodal axis, which means the planet of expansion is pressing sideways on both your direction of growth and your ground of habit at once. A square forces a question, and the question this one forces is unusual because it wears a friendly face: which opportunities actually serve where you are going? Under this transit the offers are real. A promotion, a project, an invitation, a chance to be generous or to be indulged, any of these can land now, and the difficulty is that they tend to land crosswise to your path rather than on it. Saying yes would not be a disaster; it would be a detour, and detours taken under Jupiter always look reasonable at the time because they come dressed as growth. The other classic shape of this period is plain overextension. Confidence runs a little ahead of capacity, promises multiply, the calendar fills, and the specific thing your future needed from you this season gets crowded out by ten pretty good things. While the aspect applies, watch the feeling of expansiveness itself; it is genuine, but it is not yet attached to anything, and whatever you attach it to will grow. Around the exact pass, a concrete choice usually presents itself, often between a bigger version of what you already do and a smaller step into what you have not done yet. As the transit separates, whatever you declined shrinks back to its true size with surprising speed, which is itself information. Jupiter's retrogrades fairly often bring this square back two more times across most of a year, and the repetition is kind: the first pass shows you your appetite, the second lets you audit the commitments it produced, and the third is a chance to trim honestly and keep what fits. The cycle as a whole returns in Jupiter's twelve-year round, so the pattern of your answers becomes visible over decades. Growth here is discernment, nothing fancier. You are learning to tell expansion from drift while both are wearing the same coat, and every time you choose the smaller thing that points forward over the larger thing that points sideways, that skill sets a little deeper."
+  },
+  {
+    "id": "transit:jupiter:trine:true_node",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "jupiter",
+      "natal": "true_node",
+      "aspect": "trine"
+    },
+    "atomIds": [
+      "transit:jupiter~natal_true_node:trine"
+    ],
+    "text": "For a few weeks the road tilts gently downhill in the right direction. Jupiter trine your North Node is a period when circumstances cooperate with your growth: the planet of opportunity flows easily toward the point your chart marks as forward territory, and the world seems willing to fund the version of you that is still under construction. Support arrives without being chased. Someone vouches for you unasked. The schedule opens exactly where you needed room. Plans in your newer direction, the ones that usually meet friction, advance as if a lane had been cleared. Because trines work by removing resistance rather than adding pressure, this transit has no built-in event; it is weather, and what happens in it depends on what you were already doing when the weather turned. That is its one real hazard. Ease can pass entirely unused, spent on comfort, and Jupiter's ease in particular has a talent for turning into pleasant idleness that reviews well in the moment and leaves nothing behind. The applying weeks often feel like optimism rising before you can point to a cause; that lift is the useful signal to bring your forward projects to the front of the desk. Near the exact pass, asking tends to work: for help, for entry, for a bigger scope than you would normally claim. In the separating weeks the tailwind fades gradually, and things begun under it usually keep their footing, since what grew did so in easy conditions with real roots. Jupiter's habit of retrograding means the trine fairly often repeats, three passes across the better part of a year: momentum first, then a quieter interval to deepen what started, then a final pass that tends to confirm it. Within Jupiter's roughly twelve-year circuit this angle comes around more than once, so it is a recurring season rather than a lifetime event. The growth on offer is partly whatever you build, but it is also something subtler: a corrected picture of your own path. Progress in the direction your chart points does not have to feel like war. Having lived a few weeks where it felt like being carried, you carry the memory forward, and it makes the ordinary uphill stretches read as terrain, not verdicts."
+  },
+  {
+    "id": "transit:jupiter:opposition:true_node",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "jupiter",
+      "natal": "true_node",
+      "aspect": "opposition"
+    },
+    "atomIds": [
+      "transit:jupiter~natal_true_node:opposition"
+    ],
+    "text": "Jupiter opposite your North Node is really Jupiter sitting on your South Node, which means a few weeks when the past pays dividends. The South Node holds your accumulated ground: the trades you know, the roles you have mastered, the places and people who ask nothing new of you. Jupiter's arrival there expands all of it. Old skills find eager buyers. An earlier chapter of your life may reopen generously, with an offer, a return, a harvest of something planted long ago. There is nothing false about this abundance, and one honest use of the period is simply to collect it: to be paid, thanked, and confirmed in what you have already built. The opposition's confrontation is quieter and comes second. Comfort at this scale has gravity, and the better the old territory treats you, the harder it becomes to justify the unfinished, unprofitable, awkward territory your chart actually points toward. The temptation of this transit is not vice; it is a fully reasonable settling. Success in the familiar can quietly buy out your future, one pleasant yes at a time. While Jupiter applies, the familiar grows more attractive by the week, and you may catch yourself reframing the old life as the wise choice rather than the easy one. Around the exact pass, the two directions often come into open view together: what you already are, at its most rewarding, across the table from what you are not yet. Astrologers have long argued over how much history the South Node carries; whatever you make of that, the practical shape is the same, a gift arriving from behind you. As the transit separates, the useful sorting begins. Some of what the season handed you is provision, resources and confidence you can spend on the road ahead; some of it is upholstery for a room you were leaving. Jupiter's retrogrades fairly often make this a three-pass visit across most of a year, giving you the harvest, then the reckoning with its price, then the choice of what travels with you. The pass itself returns in Jupiter's twelve-year round. Growth here looks like gratitude without residence: you learn to accept everything the old ground owes you, and to keep walking."
+  }
+]

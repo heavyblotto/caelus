@@ -1,0 +1,176 @@
+{
+ "name": "lunations-new",
+ "outFile": "b4-lunations-new.json",
+ "setId": "house-b4-lunations-new",
+ "family": "lunation-house",
+ "cells": [
+  {
+   "id": "sky:lunation:new:house:1",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "new",
+    "house": 1
+   },
+   "atomIds": [
+    "lunation:new"
+   ],
+   "title": "A New Moon in your 1st house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:new:house:2",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "new",
+    "house": 2
+   },
+   "atomIds": [
+    "lunation:new"
+   ],
+   "title": "A New Moon in your 2nd house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:new:house:3",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "new",
+    "house": 3
+   },
+   "atomIds": [
+    "lunation:new"
+   ],
+   "title": "A New Moon in your 3rd house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:new:house:4",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "new",
+    "house": 4
+   },
+   "atomIds": [
+    "lunation:new"
+   ],
+   "title": "A New Moon in your 4th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:new:house:5",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "new",
+    "house": 5
+   },
+   "atomIds": [
+    "lunation:new"
+   ],
+   "title": "A New Moon in your 5th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:new:house:6",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "new",
+    "house": 6
+   },
+   "atomIds": [
+    "lunation:new"
+   ],
+   "title": "A New Moon in your 6th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:new:house:7",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "new",
+    "house": 7
+   },
+   "atomIds": [
+    "lunation:new"
+   ],
+   "title": "A New Moon in your 7th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:new:house:8",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "new",
+    "house": 8
+   },
+   "atomIds": [
+    "lunation:new"
+   ],
+   "title": "A New Moon in your 8th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:new:house:9",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "new",
+    "house": 9
+   },
+   "atomIds": [
+    "lunation:new"
+   ],
+   "title": "A New Moon in your 9th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:new:house:10",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "new",
+    "house": 10
+   },
+   "atomIds": [
+    "lunation:new"
+   ],
+   "title": "A New Moon in your 10th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:new:house:11",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "new",
+    "house": 11
+   },
+   "atomIds": [
+    "lunation:new"
+   ],
+   "title": "A New Moon in your 11th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:new:house:12",
+   "family": "lunation-house",
+   "when": {
+    "kind": "lunation",
+    "phase": "new",
+    "house": 12
+   },
+   "atomIds": [
+    "lunation:new"
+   ],
+   "title": "A New Moon in your 12th house",
+   "bindable": true
+  }
+ ]
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "id": "transit:mars:conjunction:pluto",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mars",
+      "natal": "pluto",
+      "aspect": "conjunction"
+    },
+    "atomIds": [
+      "transit:mars~natal_pluto:conjunction"
+    ],
+    "text": "Every couple of years, transiting Mars crosses your natal Pluto, and for a week or two your will and your depths run on the same current. Mars is the drive to act; Pluto in your chart marks the place where your most concentrated power sits, along with whatever you keep buried there. When they fuse, ordinary effort turns into force. You can work with unusual stamina, cut through a problem you have circled for months, and want things with an intensity that surprises you. The same current has a shadow. Desire can shade into compulsion, persistence into steamrolling, and a small dispute can pull up anger that is older and bigger than the moment. While the aspect is applying, the pressure builds: you may feel restless, driven, spoiling for something to push against before you can name what. At the exact pass the intensity peaks, and this is when the fusion shows its character, either as deep focused effort or as a collision you did not plan. As Mars separates, the charge drains off and you can see what the surge was actually about. The cleanest use of this transit is a task that deserves total effort: clearing out what is dead weight, confronting something you have avoided, finishing work that needs one sustained push. Power struggles are the expensive use; if you find yourself needing to win rather than to solve, that is the signal to step back. In most rounds this is a brief, hot visit. Some years Mars turns retrograde near this point and crosses it three times over a stretch of months. Then the theme becomes a campaign rather than a raid: the first pass opens the question of what you truly want and what you will do to get it, the retrograde pass makes you look hard at your own methods, and the final pass lets you act again with cleaner hands. Each return of this conjunction, in whatever rhythm, offers the same trade: intensity in exchange for honesty about what your will is for. Taken on those terms, it tends to leave you stronger and lighter than it found you."
+  },
+  {
+    "id": "transit:mars:sextile:pluto",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mars",
+      "natal": "pluto",
+      "aspect": "sextile"
+    },
+    "atomIds": [
+      "transit:mars~natal_pluto:sextile"
+    ],
+    "text": "Somewhere in the background of an ordinary week or two, transiting Mars forms a sextile to your natal Pluto and quietly raises the ceiling on your effort. Nothing forces this transit on you. A sextile opens a door and waits, and this one opens onto reserves of drive you do not usually draw on. Work that asks for concentration, research that means digging, a hard conversation that needs steadiness rather than heat: tasks like these go better now, because Mars's push and Pluto's depth cooperate instead of colliding. You may notice it as a taste for the difficult version of a task, or a willingness to look at something you normally skirt. As Mars applies, the invitation is easy to miss; the days feel a little more purposeful, nothing more. Around the exact aspect the alignment is at full strength, and a deliberate act, starting the overdue project, naming the real issue, cutting one thing that drains you, gets more traction than the same act would a month earlier. Once Mars separates, the extra depth ebbs, and whatever you started keeps the momentum you gave it. Because the offer is quiet, the difference between a used and an unused pass is large. Used, it can mark the week you finally moved on something entrenched. Unused, it slips by without a trace, which is the honest risk of every sextile. Mars comes back to this angle roughly every two years, so the offer is a recurring one, and occasionally a retrograde stretches a visit into months, with the aspect forming three times. In that longer shape the first contact shows you the opening, the second lets you reconsider how you are using it, and the third seals the new habit in place. Over the years these windows teach a specific skill: how to bring your full strength to bear on purpose, rather than waiting for a crisis to summon it. Each time you choose the harder, truer task while this support is running, that skill gets easier to find when nothing in the sky is helping."
+  },
+  {
+    "id": "transit:mars:square:pluto",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mars",
+      "natal": "pluto",
+      "aspect": "square"
+    },
+    "atomIds": [
+      "transit:mars~natal_pluto:square"
+    ],
+    "text": "This is one of the abrasive Mars transits, and it earns the reputation honestly. For a week or two, transiting Mars sits at a hard angle to your natal Pluto, and your drive to act grinds against your deepest layer of will. The square forces an issue. Often it arrives as resistance: a person blocks you, a plan stalls, an authority says no, and the obstruction lands with far more charge than its size explains. Just as often the pressure is internal, a compulsion to push, control, or win that feels stronger than the situation deserves. Buried anger tends to surface under this contact, and it surfaces sideways if it has nowhere direct to go. While Mars applies, you may feel the crackle before any event: impatience, a shorter fuse, a sense that something is about to give. The exact pass is the peak, and it is the most likely moment for the confrontation, the ultimatum, the impulsive move you cannot take back. As the aspect separates, the heat fades quickly, but what you did in the hot days remains, which is why the useful discipline here is simple: act with full effort, decide with a cool head, and give the surplus force somewhere to go. Heavy physical effort, a hard deadline, a cleanup you have dreaded, all of these can burn the charge cleanly. What the square is forcing into view is usually a real imbalance of power, in a relationship, a workplace, or your own habits, and the discomfort is the cost of seeing it. Most rounds, this pass is over in a couple of weeks and returns about two years later. Now and then a Mars retrograde turns one visit into three passes across several months, and the power question stops being a flare and becomes a term of study: the first pass exposes it, the middle pass makes you examine your own part in it, and the last pass gives you a chance to act on what you learned instead of what you felt. Handled that way, this recurring square slowly converts raw force into deliberate strength, which is the only form of it that lasts."
+  },
+  {
+    "id": "transit:mars:trine:pluto",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mars",
+      "natal": "pluto",
+      "aspect": "trine"
+    },
+    "atomIds": [
+      "transit:mars~natal_pluto:trine"
+    ],
+    "text": "Strength comes easily under this transit. For a week or two, transiting Mars trines your natal Pluto, and the channel between your everyday drive and your deepest reserves runs open. Effort that would normally cost you something flows instead: long hours feel sustainable, hard problems feel workable, and your persistence has weight behind it rather than strain. People tend to sense the steadiness and step aside, so you can reach the goals of a confrontation without the confrontation. The trine eases, which means it will not push you toward anything; it simply makes ambitious effort cheap while it lasts. That is worth planning around. The approach days bring a gradual rise in stamina and appetite for real work. Around the exact aspect you are at full depth, and this is the window for the task that intimidates you in ordinary weather: the demanding project, the honest reckoning, the physical challenge, the decision that needs nerve. As Mars pulls away, the reserves close back up slowly, and momentum carries whatever you set moving. The quiet risk of the trine is waste. Because nothing goes wrong, a lazy pass looks the same as a strong one from the outside, and the ease disappears unused. A subtler risk is overreach that feels effortless in the moment; commitments made at full power still have to be kept at normal strength later. Mars returns to this angle in a round of roughly two years, and in the occasional retrograde cycle a single visit stretches into months with three exact passes. That longer version rewards a sustained campaign: begin the deep work on the first crossing, refine it when the aspect returns, and consolidate on the final one. Over many rounds, these windows show you what your will can do when nothing is fighting it, and that knowledge changes how you meet the harder transits. You push less, aim better, and trust your own stamina, because you have felt its full extent here."
+  },
+  {
+    "id": "transit:mars:opposition:pluto",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mars",
+      "natal": "pluto",
+      "aspect": "opposition"
+    },
+    "atomIds": [
+      "transit:mars~natal_pluto:opposition"
+    ],
+    "text": "An opposition works through other people, and this one is blunt about it. For a week or two, transiting Mars stands opposite your natal Pluto, and the intensity you carry at depth gets mirrored back to you as force from outside. Typically someone pushes: a rival makes a move, an authority tightens its grip, a partner turns a disagreement into a contest of wills. The pressure feels personal because it lands on Pluto, the place in your chart where control and survival are wired together. Your first instinct may be to push back with everything, and the transit's whole art is choosing where that is worth doing. As Mars applies, tension gathers in a specific relationship or arena, and you can often feel who the pass will involve before anything happens. The exact opposition is the standoff, the open clash or the silent contest, and it tends to reveal what each side actually wants, which is more useful than it is comfortable. In the separating days the field clears, positions soften or harden into fact, and you can take stock of what the confrontation showed you. Two things repay attention here. First, an opponent under this transit is often carrying something of yours: the will to power you do not admit to can arrive wearing someone else's face, and the fights that enrage you most are the ones that mirror you. Second, disengagement is a legitimate move; not every thrown gauntlet deserves an answer, and walking away from a contest you cannot win cleanly is strength, not defeat. The pass returns on a roughly two-year rhythm, usually brief. When a Mars retrograde falls near this point, the opposition can repeat three times across a stretch of months, and the same standoff returns in stages: first the collision, then a quieter second round where motives are clearer, then a final meeting where the balance of power actually settles. What these confrontations build, over years, is a precise sense of your own force: what it is for, when to spend it, and when holding it in reserve is the more commanding act."
+  },
+  {
+    "id": "transit:mars:conjunction:chiron",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mars",
+      "natal": "chiron",
+      "aspect": "conjunction"
+    },
+    "atomIds": [
+      "transit:mars~natal_chiron:conjunction"
+    ],
+    "text": "When transiting Mars reaches your natal Chiron, action and old pain briefly share an address. Chiron in your chart marks a wound that never quite closed, often around a basic question: whether you are allowed to want, to fight, to take up room. For a week or two, Mars brings its heat straight to that spot, and small events can hit surprisingly hard. A criticism, a rejection, a moment of being overlooked can reopen a hurt that seemed long settled, and your anger and your ache arrive tangled together. That is the uncomfortable half. The other half is that the same fusion gives you unusual access to the wound: what is touched can be tended. While Mars applies, you may feel a vague soreness or defensiveness rising, a sense of bracing without knowing for what. The exact pass tends to bring the sting into the open, sometimes through a person, sometimes just through your own reaction to an ordinary demand. As Mars moves on, the rawness recedes, and what remains is information: this is where it still hurts, and this is what touched it. Acting from the wound looks like lashing out or collapsing; acting for it looks like defending yourself plainly, asking for what the hurt place needs, or finally doing the thing the old pain told you that you could not do. Many people find this a strong window for effort on behalf of healing, their own or someone else's, because the empathy is fresh. Mars comes back to this point about every two years, so the visit is a recurring checkup rather than a verdict, and in some rounds a retrograde stretches it into three passes over several months. Then the wound gets a full course of attention: opened on the first pass, examined on the second, and, with any care at all, closer to closed on the third. Each cycle, the test is a little smaller and your response a little steadier, which is how this conjunction does its slow work: it turns a place you protect into a place you can act from."
+  },
+  {
+    "id": "transit:mars:sextile:chiron",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mars",
+      "natal": "chiron",
+      "aspect": "sextile"
+    },
+    "atomIds": [
+      "transit:mars~natal_chiron:sextile"
+    ],
+    "text": "There are weeks when standing up for yourself comes easier, and a Mars sextile to your natal Chiron is often behind one of them. Chiron marks an old hurt, frequently one that taught you to shrink: not to ask, not to fight, not to try again where you failed. The sextile does not press on that place. It offers a low-stakes chance to act there anyway. For a week or two, Mars lends its nerve at a friendly angle, and the step that usually feels dangerous, speaking up, asking for more, returning to the abandoned attempt, feels merely difficult. The offer is easy to overlook because nothing dramatizes it. In the applying days you may only notice a mild readiness, a sense that the old flinch has loosened. Around the exact aspect the support peaks, and a deliberate act of courage in the sore area tends to go better than you expect and to leave a mark that outlasts the transit. Once the aspect separates, the window closes gently; nothing is lost if you did not use it, but nothing is gained either, and that is the sextile's honest bargain. This is also a good pass for helping someone else fight a battle you know from the inside. The place where you were hurt is the place where your advice has weight, and Mars gives the helping impulse hands and feet. Efforts like that count as using the transit fully. The angle returns in a round of roughly two years, a recurring appointment with your own nerve, and occasionally a retrograde turns one visit into a months-long series of three passes. In that longer form, the first contact invites the attempt, the second lets you adjust after the first result, and the third makes the new behavior stick. Over the years, these small chosen acts add up quietly. The wound stops being a wall around a part of your life and becomes more like a scar: still there, still tender in bad weather, but no longer deciding what you do."
+  },
+  {
+    "id": "transit:mars:square:chiron",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mars",
+      "natal": "chiron",
+      "aspect": "square"
+    },
+    "atomIds": [
+      "transit:mars~natal_chiron:square"
+    ],
+    "text": "For a stretch of a week or two, transiting Mars squares your natal Chiron, and the world seems to aim at your sore spot with unfair accuracy. The square forces contact between your drive and your old wound. Situations demand assertion in exactly the area where asserting yourself has hurt before: you must push back against someone, claim credit, set a limit, or compete, and the required move is the one the wound tells you not to make. The result is friction with a distinctive flavor, anger mixed with hurt, and reactions that overshoot or undershoot. You may snap at a small slight because it grazed the old injury, or swallow a large one because fighting felt impossible, and both responses leave a residue. While the square is applying, irritability and touchiness build, often before any clear cause. The exact pass usually supplies the cause: the provoking comment, the unfair call, the demand that lands right on the bruise. In the separating days the pressure lifts, and the pass leaves behind an unusually clear map of where you are still defended and why. That map is the point. The square is rough company, but it shows you precisely which situations still control you through pain, and each round gives you a chance to respond a notch differently, to defend yourself without cruelty, or to stay in a conflict you would once have fled. Physical outlets help while it lasts; the charge is real and burns cleaner in effort than in argument. Expect the contact to return on a roughly two-year rhythm, and in an occasional retrograde round, to repeat three times over some months. The longer version is more demanding and more generous: the first pass provokes the wound, the second replays the situation with your eyes open, and the third lets you meet it as the person you have become rather than the person who was hurt. Few transits are less pleasant in the moment, and few do more, over years, to turn a raw place into earned strength."
+  },
+  {
+    "id": "transit:mars:trine:chiron",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mars",
+      "natal": "chiron",
+      "aspect": "trine"
+    },
+    "atomIds": [
+      "transit:mars~natal_chiron:trine"
+    ],
+    "text": "Under a Mars trine to your natal Chiron, effort and healing pull in the same direction for a change. Chiron marks the wound that made you careful; Mars supplies drive; and the trine lets the two cooperate without friction. For a week or two, doing something about the old hurt feels natural instead of heroic. The conversation you have postponed gets easier to open. The skill you abandoned after an early humiliation can be picked up without the old cringe. Work that draws on your hardest experiences, mentoring, caretaking, advocacy, repair of any kind, flows with particular grace, because the trine turns what hurt you into something that steadies your hand. The arc of the pass is gentle. As Mars applies, energy and a kind of quiet confidence rise together. Around the exact aspect, action in the wounded area meets the least resistance it ever will, and this is the moment to make the move that matters, whether it is for your own mending or for someone in trouble you understand from experience. As the trine separates, the ease tapers, but anything begun keeps its footing; starts made under this sky tend to hold. The only real way to lose this transit is to let it pass in comfort. Because nothing aches and nothing forces, it is easy to spend the window on routine and never touch the deeper opportunity. A small deliberate act aimed at the old wound, one honest sentence, one attempt, one offer of help, converts the ease into something permanent. Mars returns to this angle about every two years, and once in a while a retrograde extends the visit to three passes spread over months, a long season in which the same repair can be started, revised, and finished. Across many rounds, the trine's teaching accumulates: your history of being hurt becomes less a liability than a competence, and the proof shows up in how instinctively you now act where you once could only brace."
+  },
+  {
+    "id": "transit:mars:opposition:chiron",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mars",
+      "natal": "chiron",
+      "aspect": "opposition"
+    },
+    "atomIds": [
+      "transit:mars~natal_chiron:opposition"
+    ],
+    "text": "An opposition arrives through others, and when transiting Mars opposes your natal Chiron, someone else's force finds your oldest bruise. For a week or two, conflicts have a way of landing exactly where you are tender. A blunt colleague, an impatient partner, a stranger's careless aggression: whoever carries the Mars role, their push connects with the hurt Chiron marks, and your reaction is bigger than the event. The confrontation is the message here. What faces you from outside is showing you, with a stranger's tactlessness, where your defenses still stand and what they still guard. In the applying days you may notice a wary, braced feeling around particular people or arenas, as if expecting a blow. The exact pass tends to deliver the encounter, and how you meet it matters more than winning it. Meeting force with all your force usually escalates a fight that was never really about the present. Collapsing confirms the wound's old story. The middle path, holding your ground while naming what is actually happening, is hard and is exactly what the transit is for practicing. As Mars separates, the encounters lose their charge, and you are left with a clearer view of the difference between an attack and a touch on an old injury, which are easy to confuse and ask for different answers. There is a quieter version of this pass, in which you play the Mars part for someone else and only notice through their flinch that you have pressed on a wound; that reversal teaches the same lesson from the other side. The opposition returns in a round of about two years. In some rounds a retrograde brings three passes over a matter of months, and the same antagonist or the same kind of clash returns in acts: first the collision, then the rematch with better understanding, then a resolution in which the wound finally has less say. Year over year, these confrontations do slow, real work. They separate your pain from other people's behavior, and what other people do gradually stops deciding how much you hurt."
+  }
+]

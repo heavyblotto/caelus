@@ -1,0 +1,176 @@
+{
+  "name": "composite-houses-uranus",
+  "outFile": "b3-composite-houses-uranus.json",
+  "setId": "house-b3-composite-houses-uranus",
+  "family": "composite-house",
+  "cells": [
+    {
+      "id": "composite:uranus:house:1",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "uranus",
+        "house": 1
+      },
+      "atomIds": [
+        "composite:uranus"
+      ],
+      "title": "Composite Uranus in the 1st house",
+      "bindable": true
+    },
+    {
+      "id": "composite:uranus:house:2",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "uranus",
+        "house": 2
+      },
+      "atomIds": [
+        "composite:uranus"
+      ],
+      "title": "Composite Uranus in the 2nd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:uranus:house:3",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "uranus",
+        "house": 3
+      },
+      "atomIds": [
+        "composite:uranus"
+      ],
+      "title": "Composite Uranus in the 3rd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:uranus:house:4",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "uranus",
+        "house": 4
+      },
+      "atomIds": [
+        "composite:uranus"
+      ],
+      "title": "Composite Uranus in the 4th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:uranus:house:5",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "uranus",
+        "house": 5
+      },
+      "atomIds": [
+        "composite:uranus"
+      ],
+      "title": "Composite Uranus in the 5th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:uranus:house:6",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "uranus",
+        "house": 6
+      },
+      "atomIds": [
+        "composite:uranus"
+      ],
+      "title": "Composite Uranus in the 6th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:uranus:house:7",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "uranus",
+        "house": 7
+      },
+      "atomIds": [
+        "composite:uranus"
+      ],
+      "title": "Composite Uranus in the 7th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:uranus:house:8",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "uranus",
+        "house": 8
+      },
+      "atomIds": [
+        "composite:uranus"
+      ],
+      "title": "Composite Uranus in the 8th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:uranus:house:9",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "uranus",
+        "house": 9
+      },
+      "atomIds": [
+        "composite:uranus"
+      ],
+      "title": "Composite Uranus in the 9th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:uranus:house:10",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "uranus",
+        "house": 10
+      },
+      "atomIds": [
+        "composite:uranus"
+      ],
+      "title": "Composite Uranus in the 10th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:uranus:house:11",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "uranus",
+        "house": 11
+      },
+      "atomIds": [
+        "composite:uranus"
+      ],
+      "title": "Composite Uranus in the 11th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:uranus:house:12",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "uranus",
+        "house": 12
+      },
+      "atomIds": [
+        "composite:uranus"
+      ],
+      "title": "Composite Uranus in the 12th house",
+      "bindable": true
+    }
+  ]
+}

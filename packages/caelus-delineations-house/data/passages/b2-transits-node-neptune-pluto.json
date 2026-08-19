@@ -1,0 +1,142 @@
+[
+ {
+  "id": "transit:neptune:conjunction:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "true_node",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:neptune~natal_true_node:conjunction"
+  ],
+  "text": "A fine mist settles over the road ahead, and oddly the road matters more than it ever has. Your North Node is no planet at all but a marker: the place where the Moon climbs north across the Sun's apparent path. Modern astrology reads it as the direction of growth your life leans toward, with the South Node opposite it holding your familiar habits. Transiting Neptune has arrived on that forward point, and Neptune blurs the outline of whatever it touches. For the year or more this conjunction lasts, your sense of where you are going turns soft and luminous at the same time. Callings appear, and some are real. You may feel drawn toward service, art, healing work, or a spiritual practice, with a pull that feels less like a decision than a tide. The hard part is telling a genuine call from a glamorous one, because Neptune makes both shimmer alike. While the aspect applies, longing builds and the picture stays hazy. Possible paths, teachers, and causes drift by, each wearing a halo. Around the exact pass the pull peaks. This is the season when people leave steady work for a dream or hand their compass to someone who claims to read it better. Neither move is automatically wrong, but neither should be made in a trance. Because Neptune retrogrades, it usually crosses the point three times or so across the stretch. The first pass raises the longing, the middle pass tests it against rent and Tuesday mornings, and the final pass settles what remains. Whatever still calls to you after every pass has earned some trust. Relationships shift under this weather too. You attract people who mirror your ideals, some who live them and some who only perform them, and learning to tell the difference is part of the transit's work. Meanwhile the old life, the well-worn territory behind you, tends to lose its flavor. That can feel like grief even when nothing has gone wrong. Sadness and inspiration share the season, and both are appropriate. Practical matters deserve gentle protection now. Keep your commitments modest, read the fine print twice, and let the biggest renunciations wait until the fog thins. Neptune needs 165 years to circle the zodiac, so this exact conjunction tends to come once in a life, and that makes it an invitation rather than a sentence. Nothing is decided over your head. The season's growth lies in letting the longing show you what you actually want, checking each shining option against ordinary daylight, and walking slowly toward the ones that still shine when the mist lifts."
+ },
+ {
+  "id": "transit:neptune:sextile:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "true_node",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:neptune~natal_true_node:sextile"
+  ],
+  "text": "Some transits shove; this one offers. Transiting Neptune has formed a sextile to your natal North Node, the northward crossing of the Moon's orbit with the ecliptic, which modern astrologers read as the territory your chart is still growing into. A sextile is an open door rather than a push, and Neptune's version of an open door is quiet. Imagination loosens, compassion rises, and your ear for what your life is trying to become gets a little sharper. Over the year or so this contact stays in range, stretched by Neptune's retrograde loop into several exact touches, chances appear that connect your daydreams to your actual path. A creative project hints it could be more than a hobby. A volunteer shift, a class, or a conversation with someone gentler than your usual company opens a direction you had not considered. None of it insists, and that is the one real risk here: left alone, the whole transit can pass as a pleasant mood. Sextiles reward small deliberate moves, so the period favors writing the idea down, showing up a second time, saying yes to the odd invitation. During the approach the hints are faint, more atmosphere than event, and easy to dismiss. Near an exact pass the imagery clears. Dreams sharpen, sympathies deepen, and the right strangers seem to wander in at the right moment. Each return pass gives you another look at the same offer, so missing the first look does not mean missing the whole thing. The later touches often land when you are readier to use them. Compassion is the practical face of this weather. Helping someone with nothing in it for you tends, oddly, to move you along your own road. It is not a bargain; for a while your growth and your generosity simply run on the same current. Your inner life benefits as well. Meditation, prayer, music, long walks, time near water, anything that loosens your grip a little, feeds the transit and is fed by it. Work and money feel this contact only lightly, though an image or intuition caught now can turn out to be the seed of something you build years later. It is worth keeping notes on what visits you. Neptune takes 165 years to go around, which means this particular sextile will not come again soon, yet nothing about it calls for urgency or worry. The door simply stands open longer than most. You grow with it by treating imagination as information, following one or two soft leads far enough to learn where they go, and letting kindness count as progress."
+ },
+ {
+  "id": "transit:neptune:square:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "true_node",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:neptune~natal_true_node:square"
+  ],
+  "text": "Doubt moves in on your sense of direction during this period, and the doubt has a job to do. Your chart's North Node is a point rather than a body, marking where the Moon's track swings up across the ecliptic, taken in modern work as your direction of growth, with the South Node behind you as the familiar habit. Transiting Neptune now squares that whole axis, and a square from Neptune does not block the road so much as flood it. Plans that felt clear a year ago look questionable. The story you tell about where you are headed springs leaks. You may be tempted to solve the discomfort by drifting: more screens, more sleep, more of whatever softens the edges, or a sudden enthusiasm for some vague rescue that asks nothing and promises everything. That drift almost always slides you back toward old comfortable patterns, which is exactly the tendency this transit asks you to examine. The confusion peaks around the exact passes, and Neptune's retrograde motion usually brings three of them or more across a year and change. The first contact raises the fog. The return contact often includes a disillusionment, some plan or person or self-image revealed as less solid than advertised. The final contact clears more than it takes. Disillusion stings, but notice what the word means: an illusion is leaving. What this square removes was not load-bearing, however much it seemed to be. In daily life the season rewards conservative promises and generous margins. Commitments made in fog get renegotiated later at a cost, so where you can, keep choices reversible and let the major crossroads wait for the settling phase. Watch also for guides who arrive with the mist. A confused stretch attracts people who sell certainty, and the useful companions now are the ones who can sit with your not knowing. Beneath the discomfort, something is being refined. By dissolving the counterfeit versions of your path, Neptune leaves you a plainer, humbler sense of what growth actually looks like for you, usually smaller than the fantasy and more real. Feelings need room during all of this. Confusion of this sort often carries quiet grief for the future you had storyboarded, and letting yourself mourn it openly shortens the fog considerably. Neptune's circuit takes 165 years, so a square like this comes around at most twice in a life, and it is survivable both times. You come out of it grown when you can say what you no longer believe about your own future, without bitterness, and take the next step on ground you have personally tested."
+ },
+ {
+  "id": "transit:neptune:trine:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "true_node",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:neptune~natal_true_node:trine"
+  ],
+  "text": "For a while, the way forward and your imagination agree. Transiting Neptune is trine your natal North Node, the crossing point of the Moon's orbit and the ecliptic that modern astrology treats as the direction your life is learning to move in. A trine eases. Nothing is forced and nothing has to be fought for; the ground simply tilts gently in your favor. Under this weather the next step into unfamiliar territory feels less frightening than usual. Intuition and planning stop arguing. Hunches about people, timing, and work tend to check out, and doors that would normally need shoulder pressure swing at a touch. Helpers appear with odd reliability: a mentor who happens to know the terrain, a friend of a friend with exactly the missing piece, a community that receives you as if a place had been kept. Creative and spiritual pursuits are favored most directly. Whatever your growth asks of you, this period lets you approach it through imagery, practice, and sympathy rather than through struggle, and progress made that way tends to hold. The transit runs a year or more, and Neptune's retrograde loop usually grants several exact contacts. The applying stretch feels like rising water, quiet and supportive. The exact passes are windows when inspiration and opportunity line up. The separating phase is for consolidating, turning what flowed in into habits and structures that remain after the water recedes. The classic trouble with trines is that ease breeds passivity, and with Neptune that risk doubles, since its comfort can feel like a warm bath you never leave. A season this kind can pass entirely unused, remembered only as a pleasant blur. The difference between a nice year and a turning point here is a modest amount of deliberate effort: start the project, take the training, make the move you have been imagining, while the current is with you. There is also room now to be generous with your old strengths. The familiar skills described by the South Node do not need abandoning. Under a trine they fund the new direction instead of competing with it, and giving them away as teaching or help converts them into forward motion. Rest counts too. Neptune's ease restores as well as inspires, and some of what this period builds is simply a softer relationship with your own becoming, less strain, more trust. Since Neptune's full round takes 165 years, this exact trine is likely a once-only visit, best treated as a tide worth using rather than a reward to admire. Its best use is moving while movement is cheap, and making what you build in the easy season sturdy enough for the ordinary seasons that follow."
+ },
+ {
+  "id": "transit:neptune:opposition:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "neptune",
+   "natal": "true_node",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:neptune~natal_true_node:opposition"
+  ],
+  "text": "Every opposition to the North Node is also a conjunction to the South Node, and that is the more honest way to read this one. Neptune has come to stand on the place in your chart where your oldest habits live, your default settings, the territory you could cross blindfolded. The nodes are a pair of points, not bodies, where the Moon's orbit crosses the ecliptic; modern practice treats the north end as the direction of growth and the south end as the familiar past. With Neptune dissolving on the south end, the past turns vaporous and strangely beautiful. Nostalgia is the first sign of this transit. Old places, old loves, old versions of yourself return in dreams and idle thoughts wearing better lighting than they ever earned. At the same time some of the familiar supports may genuinely soften. A role you have played for years feels suddenly unconvincing, a routine stops holding you up, a long-standing tie loses its outline. The transit confronts you with a question rather than an event: what from your past is nourishment, and what is sedation? While Neptune applies, the pull backward is mostly atmosphere, a homesickness with no address. Around the exact contacts, and the retrograde loop usually brings a few of them across a year or more, the pull is strongest. It is common then to reach for comfort in ways that quietly cost forward motion: reviving a connection that ended for good reasons, retreating into fantasy about how things used to be, letting an old identity make your decisions. None of this makes you weak. Neptune on the South Node leaves everyone a little homesick. The later passes tend to bring perspective, and the separating phase often delivers a gentle, surprising gratitude: you can finally see your history with compassion instead of either longing or blame. That is the gift hiding in the fog. Older lore counts the South Node's store as reaching back beyond this life; taken literally or not, the period softens whatever you carry from long ago. Practically, the season rewards honoring the past without moving back in. Visit, remember, mourn what needs mourning, forgive where forgiveness has ripened, and keep your feet pointed forward while you do it. Because Neptune's round is 165 years, this contact comes once for most people, a single long goodbye rather than a recurring test. You grow through it when the old country becomes a place you are from, loved and released, instead of a place you are secretly trying to move back to."
+ },
+ {
+  "id": "transit:pluto:conjunction:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "true_node",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:pluto~natal_true_node:conjunction"
+  ],
+  "text": "Certain meetings and turnings in this period feel weighted, as if more were riding on them than the surface suggests, and for once the feeling is roughly accurate. Transiting Pluto has reached your natal North Node. The node is a point, not a planet: the place where the Moon's orbit crosses the ecliptic going north, which modern astrology reads as the growth your chart is aimed at, the unfamiliar capacity you are building in this life. Pluto fuses with what it touches and intensifies it, so for the year or more of this conjunction, your sense of direction stops being a topic and becomes a pressure. Encounters carry unusual gravity now. People arrive who change your trajectory: a mentor, a rival, an employer, a partner, someone whose effect on you is out of proportion to the hours you spend with them. Groups and institutions may pull you in and put real stakes in your hands. With that gravity comes Pluto's signature theme of power. You may be handed more of it than you are used to, or run into someone else's, and either way you are learning what you do under pressure, which is precisely the education this transit runs. There is usually also a demand for payment, not in money but in baggage. Moving decisively toward your own growth tends to require dropping something: a comfortable self-image, a role that flatters you, an attachment that keeps you small. The letting go can feel like loss and is better understood as freight reduction. Pluto's retrograde loops mean the exact conjunction usually repeats, often three passes and sometimes five, across an extended stretch. The first pass tends to open the theme dramatically. The middle passes work it over in depth, and the last one seals a change that by then feels almost natural. Along the way, watch the difference between intensity and compulsion. This transit can produce fixation on a goal or a person, and the useful test is whether the pull enlarges you or narrows you. What enlarges you is the path; what narrows you is the detour wearing its clothes. Pluto needs about 248 years for a full circuit, so this conjunction comes once if it comes at all, which is reason to take the period seriously, not reason to fear it. Nothing here happens without your participation; the transit amplifies choices, it does not make them for you. The season does its work when you say yes to the engagements that stretch you and pay the baggage fee without endless renegotiation; what you carry off the far side is a direction that is no longer an idea about your life but a fact of it."
+ },
+ {
+  "id": "transit:pluto:sextile:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "true_node",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:pluto~natal_true_node:sextile"
+  ],
+  "text": "Quietly, over a long stretch, you are being offered depth. Transiting Pluto is sextile your natal North Node, the ecliptic crossing point that modern astrology reads as your direction of growth, the edge of the familiar where your chart wants something new built. A sextile makes resources available without forcing anything, and Pluto's resources are concentration, endurance, and access to people who get things done. During the year or more this aspect stays active, useful strength tends to gather within reach. Someone senior takes an interest in your development. A group you belong to turns out to have more leverage than you knew. Research, therapy, training, or plain honest self-examination goes deeper than usual and yields more. The theme underneath is reconstruction. The habits and structures that carry your daily life are unusually willing to be rebuilt right now, and rebuilt in a way that serves where you are going rather than where you have been. Because nothing about a sextile insists, the entire offer can be declined by inattention, and often is. Pluto works down where routines and motives live, so the invitation rarely looks dramatic; it looks like a chance to fix the foundation while the weather is dry. The applying phase brings the first small signs: an itch to reorganize, a curiosity about your own patterns, an introduction that seems minor at the time. The exact contacts, repeated through Pluto's retrograde loops in three or more touches, are when commitments in this direction take root fastest. Each return pass deepens whatever you actually started, so beginning matters more than beginning perfectly, and the separating phase consolidates until what you rebuilt becomes simply how things are. In relationships the period favors alliances of substance over wide circles of acquaintance. One genuine ally cultivated now can matter for decades, and you become that kind of ally for someone else by the same mechanism: showing up repeatedly, keeping confidences, doing the unglamorous part. Money and work feel the transit indirectly, through the compounding effect of steadier habits and better-placed trust. Your inner life feels it directly, as a growing tolerance for looking at yourself without flinching, which may be the most transferable skill this period teaches. Since Pluto's circuit runs about 248 years, this exact sextile is a one-time window in nearly every life, though it is a wide window and it does not slam shut. Its yield comes from picking one or two structures worth rebuilding, using the strange stamina this period lends, and letting slow deliberate work accomplish what shortcuts never quite manage."
+ },
+ {
+  "id": "transit:pluto:square:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "true_node",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:pluto~natal_true_node:square"
+  ],
+  "text": "A crossroads is being forced, and it will not be talked out of it. Transiting Pluto has squared your natal North Node, which squares the South Node in the same stroke, since the nodes are opposite ends of one axis: the points where the Moon's orbit crosses the ecliptic, read in modern astrology as the line between your ingrained habits and your direction of growth. Pluto at right angles to that line acts like a crowbar under both ends. Circumstances during this long period, often a year or more with several exact passes, tend to make your usual path unusable and your intended path costly, so that standing still stops being an option. The pressure commonly arrives through power: a struggle with an authority, an institution, a partner, or a faction, in which something you counted on is threatened and something you want demands more force than you like using. It is tempting to read such events as pure obstruction. They are closer to interrogation. The square strips your direction down to what you are actually willing to pay for, and whatever survives that stripping is the real path, as opposed to the decorative one. Expect the first exact pass to raise the conflict openly. The retrograde return tends to deepen it past the point of easy retreat, and the final pass resolves it, frequently through an ending: a role, an alliance, or an ambition is released so the rest can move. That release is the hinge of the whole transit. What you are asked to drop is usually a habit of control, an old loyalty that has become a leash, or a version of success you inherited rather than chose. Grief over it is appropriate. Clinging past the deadline is where this period gets genuinely rough, because Pluto escalates against resistance, and what could have been a firm goodbye becomes a siege. Along the way, keep your methods clean. A forcing transit tempts everyone toward manipulation, ultimatums, and scorched earth, and every shortcut of that kind returns later with interest. Plain dealing under pressure is both the discipline this square teaches and the fastest way through it. There is a bodily side too: pressure of this depth is tiring, and rest, movement, and people you do not have to perform for are part of doing it well. Since Pluto takes about 248 years to circle the chart, you will meet this exact square once at most, and meeting it consciously is the difference between feeling ambushed and feeling forged. You grow through it by choosing, under pressure, the future you would have chosen freely, and by paying for it on time and only once."
+ },
+ {
+  "id": "transit:pluto:trine:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "true_node",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:pluto~natal_true_node:trine"
+  ],
+  "text": "Slow power is running in your favor. Transiting Pluto has formed a trine to your natal North Node, the point where the Moon's orbit crosses the ecliptic northward, which modern astrologers take as the direction of growth marked out in your chart. A trine lets a planet's force flow without friction, and Pluto's force is transformation: the deep rebuilding of motives, habits, and circumstances. For the year or more this aspect is in range, that rebuilding runs the same way your life is trying to go, which is rarer and more useful than it sounds. Changes that would normally require a crisis happen here by consent. You find yourself outgrowing things on schedule. An old defensiveness thins out, a stale ambition drops away without drama, and capacities you did not know you had report for duty when the new territory asks for them. Influence tends to accrue quietly too. People with weight begin to treat you as someone with weight, doors open through channels you did not engineer, and commitments you make now tend to compound for years. The arc is gradual by design. While the trine applies, you mostly notice increased stamina for the right things and decreased appetite for the wrong ones. The exact contacts, and Pluto's retrograde loops usually produce three or more of them, are the anchor points where decisions land deepest. A return pass is a chance to take the same step with more conviction, and the final pass tends to set the change so firmly it becomes hard to remember choosing it. The separating phase is for building on the new ground. The risk in all this, as with any trine, is drift. Help this steady can be mistaken for entitlement, or simply go unnoticed, and a once-only current can be spent on nothing in particular. Direction is still yours to supply. The transit multiplies whatever you feed it, so the season repays choosing one or two aims that genuinely stretch you and letting the depth gather there rather than everywhere. It also repays honesty about power. You will likely hold more of it by the end of this period than at the start, and practicing clean uses of it now, while nothing forces you, is what makes it safe to carry later. Pluto's round is roughly two and a half centuries, so this exact trine will not repeat for you. Treat it as a long tailwind rather than a lottery win. The growth sticks when you do deliberately what the period makes easy, until the easy version becomes your standard one."
+ },
+ {
+  "id": "transit:pluto:opposition:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "true_node",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:pluto~natal_true_node:opposition"
+  ],
+  "text": "The past has come up for review, and the review is thorough. An opposition to the North Node is a conjunction to the South Node, so the plainer statement of this transit is that Pluto now sits on the point of your chart that holds the familiar. The nodes are the two crossings of the Moon's orbit and the ecliptic, and modern practice reads the south end as your ingrained patterns, the skills and reflexes you built long ago and reach for without thinking. Pluto on that end excavates. Over a year or more, with the exact contact usually repeating three times or so through retrograde loops, material you consider finished proves otherwise. Old dynamics reassert themselves with strange force. A family pattern you swore off shows up in a new costume, a long-dormant relationship or obligation returns asking for resolution, a habit you manage quietly stops being manageable quietly. The intensity is not punishment. Pluto composts: it breaks down what is dead in the psyche so the nutrients can move, and it starts with the oldest layers because that is where the dead weight settles. The period has a settling-of-accounts quality, whatever framework you hold. What was buried gets weighed, kept, or released, and pretending has a short shelf life. Expect the first pass to surface the theme, sometimes abruptly. The retrograde pass is the deep look, where the pattern's roots and costs become visible, and honest help, whether a counselor, a clergy member, or a friend who does not flinch, earns its keep. The final pass closes the file, and things closed under this transit tend to stay closed. The confrontation in this opposition is between your history and your direction. The familiar pulls hard precisely because you are due to travel light, and the very intensity of the pull is information about which cargo weighs the most. What deserves to survive the excavation, real skills, real loves, real loyalty, survives it easily and comes out cleaner. What does not survive was costing more than it gave, though the accounting may take the whole transit to believe. Since Pluto circles the zodiac in about 248 years, this contact comes once in a lifetime when it comes at all, and its rarity is the encouraging part: clearing at this depth is not asked of you on any schedule. Growth here means letting the past be fully seen, keeping what is load-bearing, burying the rest with some ceremony, and walking on noticeably lighter."
+ }
+]

@@ -1,0 +1,176 @@
+{
+ "name": "transit-houses-saturn",
+ "outFile": "b2-transit-houses-saturn.json",
+ "setId": "house-b2-transit-houses-saturn",
+ "family": "transit-house",
+ "cells": [
+  {
+   "id": "transit:saturn:house:1",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "saturn",
+    "house": 1
+   },
+   "atomIds": [
+    "transitHouse:saturn:1"
+   ],
+   "title": "Saturn moving through your 1st house",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:house:2",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "saturn",
+    "house": 2
+   },
+   "atomIds": [
+    "transitHouse:saturn:2"
+   ],
+   "title": "Saturn moving through your 2nd house",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:house:3",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "saturn",
+    "house": 3
+   },
+   "atomIds": [
+    "transitHouse:saturn:3"
+   ],
+   "title": "Saturn moving through your 3rd house",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:house:4",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "saturn",
+    "house": 4
+   },
+   "atomIds": [
+    "transitHouse:saturn:4"
+   ],
+   "title": "Saturn moving through your 4th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:house:5",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "saturn",
+    "house": 5
+   },
+   "atomIds": [
+    "transitHouse:saturn:5"
+   ],
+   "title": "Saturn moving through your 5th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:house:6",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "saturn",
+    "house": 6
+   },
+   "atomIds": [
+    "transitHouse:saturn:6"
+   ],
+   "title": "Saturn moving through your 6th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:house:7",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "saturn",
+    "house": 7
+   },
+   "atomIds": [
+    "transitHouse:saturn:7"
+   ],
+   "title": "Saturn moving through your 7th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:house:8",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "saturn",
+    "house": 8
+   },
+   "atomIds": [
+    "transitHouse:saturn:8"
+   ],
+   "title": "Saturn moving through your 8th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:house:9",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "saturn",
+    "house": 9
+   },
+   "atomIds": [
+    "transitHouse:saturn:9"
+   ],
+   "title": "Saturn moving through your 9th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:house:10",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "saturn",
+    "house": 10
+   },
+   "atomIds": [
+    "transitHouse:saturn:10"
+   ],
+   "title": "Saturn moving through your 10th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:house:11",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "saturn",
+    "house": 11
+   },
+   "atomIds": [
+    "transitHouse:saturn:11"
+   ],
+   "title": "Saturn moving through your 11th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:house:12",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "saturn",
+    "house": 12
+   },
+   "atomIds": [
+    "transitHouse:saturn:12"
+   ],
+   "title": "Saturn moving through your 12th house",
+   "bindable": true
+  }
+ ]
+}

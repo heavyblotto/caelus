@@ -1,0 +1,212 @@
+[
+ {
+  "id": "transit:pluto:conjunction:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "venus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:pluto~natal_venus:conjunction"
+  ],
+  "text": "Pluto reaches your natal Venus at most once in a lifetime, and when it does, it stays in range for two or three years. Venus is what you love, what you find beautiful, and what you quietly believe you are worth. Pluto does not brush past these things; it digs under them. In the applying months you may feel your attachments intensify for no visible reason. A pleasant relationship becomes consuming. A hobby turns into a passion. Money and possessions start to feel less like comforts and more like questions. Around the exact passes, and Pluto's retrogrades can produce as many as five of them, the buried material surfaces. You meet what you actually desire, which is not always what you thought you desired. New attractions in these years carry unusual charge, and existing bonds either deepen into something more honest or show how much of them was held together by habit. Jealousy, possessiveness, and quiet power games can appear on either side of a relationship. They are not proof that love has failed; they are signs that love has reached its foundations, where the old fears live. The return passes are not repetition. The first tends to expose, the middle passes ask you to decide what stays, and the last one settles the decision. The same excavation runs through your finances: what you spend on, save for, and refuse to sell can all change, sometimes through events that force the review. Creative work from this period often has a darker, richer register than what came before, because you are drawing from further down. The risk of the transit is compulsion: holding on so hard you damage the thing you hold, or wanting so intensely that no real person can carry the projection. The gift is depth. As Pluto separates, the fever cools, and what remains is a plainer, sturdier way of loving. You know more about your own heart than you did, including its less flattering corners, and the affection that comes through intact tends to be affection you can trust. Many people look back on these years as the time their emotional life stopped running on defaults."
+ },
+ {
+  "id": "transit:pluto:sextile:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "venus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:pluto~natal_venus:sextile"
+  ],
+  "text": "A sextile from transiting Pluto to your natal Venus opens a long, quiet offer rather than a crisis. For roughly two years, sometimes closer to three, the deeper layers of your affections become unusually easy to reach, but nothing forces you to reach for them. That is the nature of a sextile: it presents the door and leaves the handle to you. While the aspect applies, you may notice a growing curiosity about what sits underneath your relationships. Why you choose the people you choose, why certain compliments land and others slide off, why money feels safe in one form and dangerous in another. Around the exact passes, of which the retrogrades can bring several, the openings turn concrete. A conversation with a partner goes further than usual and holds. A friendship shifts into franker territory. A counselor, a book, or an honest friend appears at the right moment. Attraction during this period runs deeper than surface charm; you find yourself drawn to substance, to people with some weather in them, and they to you. Existing bonds can be renovated here without breaking: resentments named while they are still small, desires spoken that had gone unsaid for years. Your relationship to beauty and to money is available for the same quiet rework. Taste often matures in these years, away from decoration and toward things with weight, and financial habits can be rebuilt deliberately rather than under pressure. Because this transit comes at most once in a life, and because it never insists, the main way it fails is by going unused; the period passes pleasantly and nothing changes. The re-hits help with that. Each return pass brings the same themes back around, so an opening missed on the first exact contact tends to be offered again on the second or third. As the aspect separates, whatever you actually practiced consolidates. If you did the naming and the renovating, you come out with attachments that sit on firmer ground and a clearer sense of what you value, in both the felt and the financial sense of the word. If you let it drift, the door closes gently, without penalty, which is its own kind of loss."
+ },
+ {
+  "id": "transit:pluto:square:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "venus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:pluto~natal_venus:square"
+  ],
+  "text": "Pluto square your natal Venus is one of the demanding passages, and it does not hurry. For two or three years, with up to five exact contacts as Pluto stations and returns, something deep in you applies pressure to your loves, your pleasures, and your sense of your own worth. The square does not ask; it forces. While the aspect is applying, the pressure often reads as restlessness. Comfortable relationships start to feel thin. A new attraction may appear that pulls against your own rules, intense, inconvenient, hard to reason with. Or the pressure lands inside an existing bond as control: one of you gripping tighter, the other pulling away, both wondering where the ease went. Around the exact passes the underlying issue shows itself plainly. It is usually about power and worth: who holds it, who concedes it, and what you believe you deserve. Old bargains surface, the ones where you traded honesty for harmony or accepted less because asking felt dangerous. Money can carry the same struggle, through disputes over what is shared, what is owed, or what your work is worth. None of this means a relationship must end. Squares break arrangements, not necessarily people, and what gives way under this transit is usually the arrangement that could only survive by staying unexamined. The retrograde re-hits are the revision process: the first pass exposes the fault line, the middle passes replay it until you respond differently, and the final pass tests whether the new terms hold. The real work is internal. Compulsion, jealousy, and the fear of being unwanted all trace back to your own sense of value, and this period pushes you to rebuild that sense from the inside instead of renting it from someone else's approval. That is hard, and it is also the point. As the square separates, the intensity drains away and you can see what remains standing. Bonds that came through carry a franker, more durable intimacy. What you want from love is clearer and less negotiable in the good sense. You are harder to buy and easier to actually reach, and both of those changes tend to be permanent."
+ },
+ {
+  "id": "transit:pluto:trine:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "venus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:pluto~natal_venus:trine"
+  ],
+  "text": "When transiting Pluto trines your natal Venus, depth arrives without a fight. Over a stretch of two years or more, with several exact passes as Pluto retrogrades and returns, your capacity for intimacy, beauty, and worth quietly enlarges, and the changes tend to feel natural rather than imposed. In the applying phase you may simply notice more appetite for the real thing. Small talk satisfies less. You want conversations that go somewhere, art that cost its maker something, company that does not require a performance. Around the exact contacts, relationships tend to deepen on their own momentum. Couples find it easier to say difficult things without the roof coming off. Single people often attract, and are attracted to, partners of more substance than before, because the magnetism of this period runs on authenticity rather than polish. There is a warmth to you now that others feel, an ease with emotional weight that makes people trust you with theirs. Creative work flourishes under the same influence; whatever you make in these years tends to carry more feeling per square inch. Values and finances transform gently too. Attachments to objects, habits, and expenditures that no longer fit tend to fall away without much grief, and resources can regenerate, often through shared arrangements or the recovery of something you thought was gone. The trine's weakness is that ease breeds passivity. Because nothing hurts, it is possible to coast through the whole period and let a deepening that comes once, if ever, pass as a pleasant mood. The re-hits are your second and third chances: each return of the exact aspect reopens the same channel, so an intention you let slide in the first pass can be picked up in the next. Working the transit deliberately looks like ordinary things done with more honesty: telling the people you love why you love them, finishing the creative project, restructuring the finances while conditions are kind. As Pluto separates, the channel closes slowly and what you built through it stays. Love that deepened here tends to hold its new depth, and so does your own settled sense of what you are worth."
+ },
+ {
+  "id": "transit:pluto:opposition:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "venus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:pluto~natal_venus:opposition"
+  ],
+  "text": "Pluto opposite your natal Venus usually arrives wearing a face. The opposition works through other people, so for two or three years, across as many as five exact passes, the transformation of your love life and your values comes at you from outside. Often it is a magnetic stranger whose pull feels out of scale with the facts. Often it is a partner who changes, grows intense, or begins asking for a different bargain than the one you struck. Sometimes it is a negotiation over shared money that turns out to be about much more than money. While the aspect applies, the charge builds slowly; you may feel relationships becoming heavier, more loaded, without being able to say why. Around the exact contacts the confrontation is out in the open. The classic themes are power and possession: who decides, who yields, who is allowed to want what. It is worth remembering that an opposition is a mirror. The intensity, jealousy, or control you meet in another person during this period often carries some quality of your own that you have not owned, which is why the encounters feel so charged and so specific. The retrograde re-hits give the drama its structure. The first pass introduces the person or the issue, the middle passes replay the standoff with variations, and the final pass tends to settle the new terms, together or apart. Not every bond survives this, and the ones that end are usually the ones that ran on an old imbalance neither of you could keep funding. The ones that continue come out changed: franker about desire, more even about power, less decorated and more real. Through it all your sense of worth is being renegotiated at the root, because the deepest question under the surface is what you believe you deserve from another person. As Pluto separates, the outer intensity fades and the inner change shows. You read people more accurately. You want with more honesty and cling with less. And you have learned, from close range, the difference between being wanted and being valued, which changes what you accept from everyone who comes after."
+ },
+ {
+  "id": "transit:pluto:conjunction:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "mars",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:pluto~natal_mars:conjunction"
+  ],
+  "text": "Pluto conjunct your natal Mars fuses the deepest engine you have with the part of you that acts. For two or three years, with up to five exact passes as Pluto stations and returns, your will runs at a voltage most periods never approach, and everything turns on how you choose to spend it. In the applying phase the intensity gathers. Ambitions that were comfortable start to feel small. You may find yourself working with a focus that surprises you, or feeling a low, unspecific pressure, like an engine idling too high. Around the exact contacts the drive peaks. Enormous efforts become possible now: the project that needed years of stamina, the physical rebuilding, the campaign everyone else abandoned. People accomplish disproportionate things under this transit because desire and endurance briefly point the same way. The shadow is equally real. Pluto amplifies whatever Mars carries, and Mars carries anger. Old, buried aggression can surface here, along with a temptation to win by pressure, to steamroll, to make outcomes happen regardless of cost. Fights during this period escalate fast because you are stronger than usual and less inclined to yield, and the people around you feel the force even when you say nothing. The re-hits are the training schedule. The first pass typically shows you the raw power and its risks, the middle passes teach control through repetition, and the final pass tends to leave you with a will that is both stronger and cleaner than before. The body is part of the story too; energy runs deep but not infinite, and the transit rewards deliberate outlets, hard physical work, demanding goals, anything that gives the force a job. What it punishes is leakage: force with no aim turns into friction with everyone in range. Since Pluto meets your Mars this way at most once in a life, the years under this conjunction tend to become a reference point. As the aspect separates, the voltage drops, but the capacity remains. You know now what you can push through when everything you have points at one target, and you know the difference between power used and power merely displayed."
+ },
+ {
+  "id": "transit:pluto:sextile:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "mars",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:pluto~natal_mars:sextile"
+  ],
+  "text": "The sextile from transiting Pluto to your natal Mars is an offer of strength, open for roughly two years and renewed at each exact pass. Nothing about it is dramatic. It works more like a standing invitation: deeper reserves of drive and endurance are available now, if you pick something worth spending them on. In the applying stretch you may notice your energy consolidating. Distractions annoy you a little more, sustained effort costs a little less, and problems you had filed as too big start to look merely hard. Around the exact contacts, openings tend to appear in practical form. A demanding role is offered. A physical discipline finally sticks. A conflict you have been avoiding turns out to be winnable if you approach it steadily instead of hotly. This is one of the best periods there is for work that requires patience and force together: rebuilding a body after a setback, gutting and redoing a skill, taking apart a system at work and reassembling it properly. Your assertiveness deepens as well, in the specific sense that saying no gets easier and quieter. You need less volume to hold a line, and people notice the difference. Because a sextile invites rather than compels, the transit can also pass without a trace; two years go by, you felt vaguely capable, and nothing was built. The retrograde re-hits are the guard against that. Each return of the exact aspect brings the same invitation back, so a start you failed to make on the first pass can still be made on the second or third, usually with better aim. The transit asks one thing of you, which is a target. Diffuse effort under this influence produces nothing special; concentrated effort compounds. As the aspect separates, whatever you trained stays trained. The discipline built here tends to persist because it was chosen under favorable conditions rather than forced by emergency, and you carry forward a working knowledge of your own strength: how much you actually have, and how far it goes when you stop scattering it."
+ },
+ {
+  "id": "transit:pluto:square:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "mars",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:pluto~natal_mars:square"
+  ],
+  "text": "Pluto square your natal Mars turns up the pressure on your will and keeps it up for two or three years, through as many as five exact passes. The square forces; it does not negotiate. During this period your drive and the world's resistance grind against each other, and the friction is the curriculum. While the aspect applies, frustration accumulates. Efforts that used to work meet walls. Authority leans on you, or you find yourself leaning on others harder than you intend. Anger you thought you had outgrown starts surfacing at strange moments, disproportionate, with roots clearly older than the trigger. Around the exact contacts the confrontations arrive in earnest: a power struggle at work, a contest over territory or credit, a battle of wills with someone who will not blink. The temptation on one side is to escalate until something breaks, and on the other to swallow everything and let the pressure turn inward, where it curdles into resentment or exhaustion. The transit is asking for a third option, force that is conscious, aimed, and proportionate. The retrograde re-hits structure the lesson. The first pass tends to expose how you handle being blocked, and the replays give you chances to answer differently: to fight the fight that matters and walk past the ones that only feed the heat. Physical outlets earn their keep in these years; strain needs somewhere to go, and bodies under this transit do better with hard, regular use than with stillness. It helps to watch for provocation from your own side too, since this square can make you the immovable object in someone else's story without your noticing. What this period builds, if you work it, is command of your own aggression. Not suppression, command: the ability to bring strength to bear without being run by it. As the square separates, the ambient combat fades, and what remains is a kind of tested confidence. You have been leaned on hard and you did not fold, and you have learned which battles deserve you. People who come through this transit well are noticeably harder to intimidate and noticeably slower to burn."
+ },
+ {
+  "id": "transit:pluto:trine:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "mars",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:pluto~natal_mars:trine"
+  ],
+  "text": "With transiting Pluto trine your natal Mars, power moves through you with the current instead of against it. For upward of two years, across several exact passes, you have access to a depth of drive that does not need a crisis to activate, and effort that would normally deplete you seems to regenerate instead. In the applying phase the shift is subtle: stamina lengthens, resolve firms up, and ambitions quietly upgrade themselves. Projects you shelved as too heavy start migrating back onto the list. Around the exact contacts, the capacity peaks. This is a season for the long campaign, work that needs years rather than weekends, transformation of a body, a craft, a business, anything where steady force applied for a long time beats brilliance applied in bursts. Obstacles still exist, but you tend to go through them methodically rather than dramatically, and other people often move aside without a fight because your intent reads as settled. Leadership can come looking for you now. Authority sits more naturally on you than usual, and you can direct strong people without either dominating or deferring. The classic weakness of the trine applies here at full scale: nothing hurts, so nothing insists. A reservoir of usable will that fills like this at most once can drain away on errands and maintenance if you never point it at anything. The retrograde re-hits are the built-in reminders. Each return of the exact aspect reopens the surge, and a purpose adopted late in the transit still gets the benefit of the remaining passes. It is worth choosing deliberately, because whatever receives this energy grows. Fed into a grudge, the grudge becomes formidable; fed into meaningful work, the work becomes a body of it. As the trine separates, the extra current tapers off, but the structures you built while it flowed remain, and so does the calibration. You come out knowing what your full strength feels like when it is not fighting anything, and that memory changes how much you are willing to waste on friction afterward."
+ },
+ {
+  "id": "transit:pluto:opposition:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "mars",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:pluto~natal_mars:opposition"
+  ],
+  "text": "Pluto opposite your natal Mars brings the contest to your doorstep. Oppositions work through others, so for two or three years, across up to five exact passes, the deep questions about power and will tend to arrive in the form of people: a rival who matches you move for move, a boss or institution that demands submission, a partner whose anger or ambition suddenly fills the room. While the aspect applies, you may feel the atmosphere charging. Encounters carry an edge they did not use to have. You sense being tested, sized up, pushed, sometimes subtly, sometimes not. Around the exact contacts the standoffs become explicit, and the pattern is worth noticing: the force confronting you usually has something to teach you about your own. People who have disowned their aggression meet it outside themselves during this transit, in others who overreach exactly where they underclaim. People who run hot meet the immovable object. Either way the mirror is the point. Reacting from reflex tends to go badly here; the opposition escalates whatever is thrown into it, and battles of pure will under this influence can consume years and leave both sides poorer. What works is engagement without possession, standing your ground on the substance while declining the invitation to make it total war. The retrograde re-hits pace the drama. The first pass tends to open the conflict or introduce the opponent, the middle passes replay the collision until your responses change, and the final pass usually fixes the new balance of power, whether that means terms, distance, or a genuinely reset relationship. Not every adversary from this period stays one; some of the most durable respect of your life can come out of these confrontations, because both parties saw each other at full strength. As Pluto separates, the pressure lifts and takes the ambient combat with it. What you keep is a steadier hand in conflict. You know your force, you have watched it reflected back at scale, and you no longer need an enemy to feel it."
+ },
+ {
+  "id": "transit:pluto:conjunction:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "jupiter",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:pluto~natal_jupiter:conjunction"
+  ],
+  "text": "Pluto conjunct your natal Jupiter takes your beliefs and ambitions and puts real force behind them. Jupiter is your sense of meaning, growth, and the future; Pluto is the drive that does not stop. Fused, over a period of two or three years with up to five exact passes, they produce a hunger for significance that can reorganize a life. In the applying phase, the enlargement begins inside. Goals that satisfied you start to feel undersized. A conviction, a faith, a philosophy, or a cause begins to occupy more of your inner room, and you may feel an unfamiliar certainty gathering. Around the exact contacts the drive peaks, and things tend to grow: your responsibilities, your reach, your resources, your influence. People rebuild careers under this transit, found things, take the big swing they had deferred for a decade. The expansion is real, and so is its shadow. Certainty at this intensity slides easily into zeal. A belief that becomes total stops being examined, and the same force that lets you move institutions can make you deaf to correction. Overreach is the other classic failure: growth pursued past the point where the foundation can carry it. The retrograde re-hits are the audit. Each return pass tests what the previous one inflated. Commitments made in the fever of the first contact get stress-checked in the second and third, and what survives all the passes is generally worth keeping. The deepest work of the transit is on belief itself. Convictions inherited from family, era, or convenience tend to break down in these years and recompose around what you have actually lived, which leaves you with a philosophy smaller than the borrowed one and far stronger. As the conjunction separates, the hunger quiets. What remains, at best, is enlarged capacity with intact judgment: more scope, more resources, more weight in the world, carried by beliefs you have personally tested. Since Pluto meets your Jupiter this way at most once, the growth of this period tends to set the scale you operate at for a long time after."
+ },
+ {
+  "id": "transit:pluto:sextile:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "jupiter",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:pluto~natal_jupiter:sextile"
+  ],
+  "text": "A sextile from transiting Pluto to your natal Jupiter offers depth to your growth, quietly, for about two years and across each of its exact passes. This is not a loud transit. It works like a favorable current under the surface of ordinary life: chances to enlarge your world keep drifting within reach, and each one rewards a deliberate grab. In the applying phase, your curiosity tends to turn serious. Subjects you once skimmed start asking for real study. Questions of meaning, what you believe, what your effort is for, become interesting rather than abstract. Around the exact contacts, the openings take practical shape. A mentor or an institution takes an interest in you. A course of study, a credential, or a body of knowledge becomes available at the right moment. Resources for a plan you had shelved turn out to be findable, sometimes through other people's backing. The theme underneath is growth with roots. Jupiter alone expands; Pluto's offer here is to make the expansion structural, so that what you learn becomes expertise rather than trivia and what you build becomes an asset rather than an episode. Beliefs benefit from the same treatment. This is a good period for examining your operating philosophy voluntarily, keeping what holds under pressure, retiring what you have outgrown, with none of the crisis that usually forces such reviews. Because the sextile never insists, the entire period can pass as mild good luck with nothing banked; that is its one real risk. The retrograde re-hits keep the window open. An opening declined or missed at the first exact pass usually returns in another costume on a later one, so attention matters more than timing. As the aspect separates, whatever you invested in consolidates and keeps paying. The knowledge stays, the alliances stay, the deepened convictions stay. People rarely point to this transit as the time everything changed. They point to it later, as the time the foundation went in under the thing that changed everything."
+ },
+ {
+  "id": "transit:pluto:square:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "jupiter",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:pluto~natal_jupiter:square"
+  ],
+  "text": "Pluto square your natal Jupiter puts pressure on everything you believe and everything you are trying to become. For two or three years, through as many as five exact passes, the square forces a confrontation between your urge to grow and forces that demand the growth be justified. While the aspect applies, the friction is mostly internal. Plans feel simultaneously urgent and obstructed. You want more, more scope, more meaning, more future, and something keeps auditing the wanting: circumstances, gatekeepers, or your own doubt. Around the exact contacts the test becomes concrete. An expansion meets resistance from people with power over it. A conviction you have leaned on collides with evidence, or with someone who holds the opposite conviction just as hard. Promises, your own or others', come due. The crude reading of this transit is blocked luck, but the mechanism is more useful than that: Pluto is stress-testing your Jupiter, and only the growth with real structure under it gets through. Plans built on optimism alone tend to buckle in these years, and beliefs held for comfort rather than truth get harder to keep saying out loud. That process is uncomfortable and genuinely valuable. The re-hits give it rhythm. The first pass typically exposes the overextension or the untested assumption, the middle passes push on it from new angles, and by the final pass you have usually either reinforced the thing or released it. Watch two temptations along the way. One is doubling down, forcing the expansion through on will alone, which wins battles and quietly mortgages the future. The other is total retreat, deciding that wanting more was the mistake. The transit is not against your growth; it is against your unexamined growth. As the square separates, the auditing pressure lifts, and what you kept is yours in a new way. The plans that survived are load-bearing. The beliefs that survived, you can defend from experience rather than habit. Most people come out of this period with less than they reached for and more than they started with, and the difference is the part that lasts."
+ },
+ {
+  "id": "transit:pluto:trine:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "jupiter",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:pluto~natal_jupiter:trine"
+  ],
+  "text": "When transiting Pluto trines your natal Jupiter, growth and depth cooperate. For a couple of years or more, across several exact passes, the part of you that wants a bigger life and the part of you that can do sustained, transforming work run in the same direction, and doors have a way of opening before you reach them. In the applying phase, confidence builds from the ground rather than the air. It is not giddy optimism; it is the steadier sense that your plans could actually carry weight. Around the exact contacts, the compounding shows. Efforts begun quietly gather backers. Influence expands without your campaigning for it, because people sense both the ambition and the substance underneath it. Institutions, mentors, and money tend to be friendlier to you now than at almost any other time. This is a period for the strategic version of your ambitions: consolidating scattered gains into a position, turning a competence into an authority, taking the project that works at small scale and rebuilding it to hold at large scale. Beliefs deepen alongside the practical growth. What you trust about life gets tested gently and confirmed or refined, and many people trace a durable personal philosophy to the reading, study, or mentorship of these years. The trine's familiar weakness applies: nothing forces you to use any of this. Ease invites coasting, and a rare alignment can be spent entirely on comfort. There is also a subtler risk, quiet overconfidence, since growth that meets no resistance skips the audits that resistance provides; the wise move is to keep auditing anyway. The retrograde re-hits extend the season. Each return pass reopens the favorable current, so initiatives launched even late in the transit tend to get carried. As the aspect separates, the assistance tapers, and the positions you built become ordinary facts of your life. What this period leaves behind, at best, is scale you can maintain without the tailwind, and a confidence with foundations, the kind that comes from watching your deeper effort and your larger hopes agree with each other for a while."
+ },
+ {
+  "id": "transit:pluto:opposition:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "pluto",
+   "natal": "jupiter",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:pluto~natal_jupiter:opposition"
+  ],
+  "text": "Pluto opposite your natal Jupiter stages a long argument about what growth is for, and it holds the argument in public. Oppositions arrive through other people, so across two or three years and as many as five exact passes, your beliefs, plans, and appetite for more keep meeting external counterweights. While the aspect applies, the pattern assembles quietly. You notice more pushback on your opinions than usual. Opportunities appear with strings you can feel but not yet see. Around the exact contacts, the confrontations sharpen into recognizable forms. Someone with power questions the assumptions under your plan. A big offer turns out to want more of you than it advertised. A person of intense conviction enters your orbit, promising much, and forces you to decide how much of your own judgment you will hand over. The through-line is a negotiation between your worldview and someone else's, and the mirror principle of oppositions applies: the dogmatism, the overpromising, or the grandiosity you meet outside often marks the spot where your own version lives unexamined. Handled reflexively, this period turns into a contest of certainties, each side inflating to match the other. Handled consciously, it becomes the best belief-testing of your life, because the other side keeps supplying exactly the objections you would never raise yourself. Discernment is the skill under construction: which visions deserve your effort, which partners deserve your trust, which convictions survive contact with a serious opponent. The retrograde re-hits run the negotiation in rounds. The first pass tends to put the parties at the table, the middle passes revise the terms as each side's claims get tested, and the final pass usually settles what you owe to other people's visions and what you insist on keeping of your own. As Pluto separates, the pressure of other people's certainty fades. Your beliefs come out fewer and sturdier, sized by real opposition rather than private enthusiasm. And you keep a lasting eye for the difference between a promise and a plan, which quietly changes every alliance you make afterward."
+ }
+]

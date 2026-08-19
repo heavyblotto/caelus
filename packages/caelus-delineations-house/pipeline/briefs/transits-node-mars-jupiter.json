@@ -1,0 +1,158 @@
+{
+ "name": "transits-node-mars-jupiter",
+ "outFile": "b2-transits-node-mars-jupiter.json",
+ "setId": "house-b2-transits-node-mars-jupiter",
+ "family": "transit-aspect",
+ "cells": [
+  {
+   "id": "transit:mars:conjunction:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "true_node",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:mars~natal_true_node:conjunction"
+   ],
+   "title": "Transiting Mars conjunct your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:sextile:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "true_node",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:mars~natal_true_node:sextile"
+   ],
+   "title": "Transiting Mars sextile your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:square:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "true_node",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:mars~natal_true_node:square"
+   ],
+   "title": "Transiting Mars square your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:trine:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "true_node",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:mars~natal_true_node:trine"
+   ],
+   "title": "Transiting Mars trine your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:opposition:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "true_node",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:mars~natal_true_node:opposition"
+   ],
+   "title": "Transiting Mars opposite your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:conjunction:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "true_node",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_true_node:conjunction"
+   ],
+   "title": "Transiting Jupiter conjunct your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:sextile:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "true_node",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_true_node:sextile"
+   ],
+   "title": "Transiting Jupiter sextile your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:square:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "true_node",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_true_node:square"
+   ],
+   "title": "Transiting Jupiter square your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:trine:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "true_node",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_true_node:trine"
+   ],
+   "title": "Transiting Jupiter trine your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:opposition:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "true_node",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_true_node:opposition"
+   ],
+   "title": "Transiting Jupiter opposite your natal North Node",
+   "bindable": true
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+---
+# "Of course" is matched as a bare token, which fires on "void of course",
+# the standard astrological term for the Moon between its last aspect in a
+# sign and its ingress to the next. That term is domain vocabulary on a
+# consumer astrology surface, not sycophancy, so the token moves to a raw
+# alternation that leaves it alone. Everything else is unchanged.
+extends: existence
+message: "AI sycophancy: '%s'. Delete this—it sounds robotic and insincere."
+level: error
+ignorecase: true
+tokens:
+  - Great question
+  - Excellent question
+  - That's a great question
+  - That's an excellent question
+  - What a great question
+  - Fantastic question
+  - Wonderful question
+  - I'm glad you asked
+  - I'm happy to help
+  - I'd be happy to help
+  - I'd be glad to help
+  - Absolutely
+  - Certainly
+  - Without a doubt
+  - You're absolutely right
+  - You make an excellent point
+  - That's a wonderful idea
+  - That's a fantastic point
+  - I couldn't agree more
+raw:
+  - '(?i)(?:^|[^d]\s|[^o]\s)of course\b'
+

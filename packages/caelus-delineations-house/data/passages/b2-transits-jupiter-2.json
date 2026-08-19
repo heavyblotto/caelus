@@ -1,0 +1,212 @@
+[
+ {
+  "id": "transit:jupiter:conjunction:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "venus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_venus:conjunction"
+  ],
+  "text": "Transiting Jupiter has caught up with your natal Venus, something it does roughly once every twelve years. Venus is where you love, what you find beautiful, how you attract and are attracted, and Jupiter enlarges whatever it touches, so for a few weeks, sometimes a few months, the affectionate side of life gets more room. As the conjunction applies you may notice the thaw before you can name it: people seem friendlier, invitations gather, you want company more than usual and enjoy it more when it comes. Around the exact pass the warmth peaks. This is one of the pleasantest transits the sky offers. You are easier to like and easier to be, generosity comes naturally, and encounters that begin now tend to carry a bigger-than-usual sense of promise. Money often loosens too, in both directions: gifts, windfalls, and good deals, but also spending that keeps pace with the mood. As the aspect separates the shine settles, and what remains is whatever you actually said yes to. The classic caution is indulgence. Jupiter does not distinguish between opening your heart and overfilling your plate, so a season like this can leave you overcommitted socially, overextended financially, or fondly attached to something chosen mostly for how the month felt. None of that is a verdict, just the tax on abundance. Because Jupiter can retrograde, this transit sometimes touches your Venus three times across an extended stretch. The first pass tends to bring the person, the pleasure, or the offer. The retrograde pass invites a second look: the romance quiets enough to be examined, the purchase reveals its real cost, the friendship shows its ordinary weekday face. The final pass settles the question, usually more gently than you feared. If you get the single quick pass instead, take the few good weeks at face value. Either way, the growth available here is in your capacity to receive. Many people find it easier to give than to be given to, and this transit works on exactly that muscle: letting a compliment land, letting help arrive, letting pleasure be enough without justifying it. What you choose to love while the conjunction is in effect has a way of staying enlarged after Jupiter moves on. So notice what you reach for when everything feels open. That reaching is information about what you value at twelve-year depth, and the relationships, tastes, and commitments that survive the settling are usually the ones worth feeding for the next round."
+ },
+ {
+  "id": "transit:jupiter:sextile:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "venus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_venus:sextile"
+  ],
+  "text": "A sextile is an offer, not an event, and for the few weeks this one is in effect Jupiter is quietly offering your Venus more than usual: more company, more ease, more chances to enjoy yourself and be enjoyed. Nothing about this transit forces anything. That is its character and its catch. While the aspect applies, you may feel your social weather improving in small ways, a friendlier tone in messages, an invitation you almost decline, a stranger who turns out to share your taste. The exact pass is the window where the specific opening usually shows itself: an introduction, a collaboration with someone whose style complements yours, a modest piece of financial good luck, a conversation that warms a relationship you had let cool. As it separates, the door closes softly rather than slamming, and if you never walked through it the period simply reads, in hindsight, as a pleasant stretch. The tradition is consistent on this point: sextiles pay out in proportion to your participation. So the useful posture now is mild initiative. Answer the message. Go to the thing. Say the appreciative sentence out loud instead of thinking it. Jupiter's rhythm gives this transit weeks rather than days, and if the planet is near a retrograde station it can return to the same degree again over a longer stretch, which means an offer you missed or shelved may circulate back for another look. A second appearance of the same person, plan, or possibility is worth taking seriously, since it will not necessarily come a third time. The pleasures of this period tend to be reasonable ones. Where the harder Jupiter-to-Venus contacts inflate appetite, the sextile mostly just makes enjoyment easy and affection uncomplicated, so the risk is not excess but drift: nice weeks that leave nothing behind. You can convert the season into something durable by aiming it at a relationship or a piece of beauty you already care about. Reconciliations begun under this sky tend to go unusually well. So do first dates, small purchases that improve daily life, and any project where charm and goodwill are part of the work. The growth here is learning how much of your luck is social, how often the good thing arrives through a person who liked how you treated them. A transit like this shows you that machinery working smoothly. Watch what happens when you meet warmth with warmth, and remember the mechanics after Jupiter moves on, because they work in ordinary weather too."
+ },
+ {
+  "id": "transit:jupiter:square:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "venus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_venus:square"
+  ],
+  "text": "This transit turns up the volume on wanting. For a few weeks, longer if Jupiter's retrograde loop gets involved, the square from transiting Jupiter to your natal Venus inflates appetite: for pleasure, for affection, for comfort, for the nicer version of whatever is in front of you. The feeling is genuinely enjoyable, which is exactly what makes the period tricky. As the square applies, restlessness builds around the pleasant parts of life. The dinner wants to become a weekend, the browsing wants to become a purchase, the flirtation wants to become a situation. Near the exact pass the wanting peaks, and self-restraint tends to be at its weakest just as the options look their best. In the separating weeks the bills, in every sense, arrive, and you can see clearly which yeses were worth it. Nothing here is disastrous. A square between the sky's two traditional benefics is friction between good things: love versus freedom, comfort versus ambition, this pleasure versus that budget. But Jupiter squares have a talent for making more feel like the obvious answer, and Venus takes the inflation personally. You may spend past the point of enjoyment, agree to social plans a saner month would have declined, or promise a degree of affection that was true at the moment and heavy by morning. In relationships the square often shows up as mismatched scale: one of you wants to enlarge things faster than the other, or an old comfortable arrangement suddenly feels too small. Because Jupiter can station and back over this degree, the whole sequence may run three times across several months. The temptation that returns on the retrograde pass is the same one wearing plainer clothes, and that second look is a gift: you get to see what the shiny thing costs when the mood is not paying for it. The final pass usually finds you settling the account, keeping what proved real and letting the rest go without much grief. The growth in this period is in learning the difference between appetite and value. Appetite says more. Value says this one. If you let the square teach you which pleasures actually feed you, the indulgences of these weeks become tuition rather than waste. Enjoy the season honestly, keep half an eye on the running total, and treat any desire that survives all three passes with respect. Whatever still looks worth wanting after the glamour drains off probably is."
+ },
+ {
+  "id": "transit:jupiter:trine:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "venus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_venus:trine"
+  ],
+  "text": "For a stretch of weeks, sometimes lengthening toward months, transiting Jupiter is in trine to your natal Venus, and life's agreeable side runs with unusual smoothness. Trines do not push. They open. Affection flows more easily, people extend you the benefit of the doubt, and the ordinary friction of getting along with others drops low enough that you may only notice it by its absence. In the applying phase the ease arrives quietly, a general sense that the social gears are oiled. Around the exact pass the period reaches full warmth: relationships feel generous, your taste is confident, and pleasure does not carry its usual freight of guilt or negotiation. As the trine separates, the ease tapers so gently that most people cannot say when it ended. That gentleness is the whole question of this transit. Astrologers have always noted that trines give freely and ask nothing, which means they are easy to spend entirely on comfort. There is nothing wrong with a few golden weeks of good meals and easy company. But the same current that makes lounging pleasant makes effort unusually productive in Venus matters, and effort is what turns the season into something you keep. Repairs tend to go well now. A strained relationship approached during this period meets more goodwill than you expect. Asking for what you want, in love or money, lands softly, because you ask without the edge of anxiety that usually sharpens such requests. Anything involving beauty, from redecorating a room to finishing a creative piece to simply dressing like you mean it, comes together with less struggle than usual. If Jupiter's retrograde brings it back over the trine again, the pleasant weather returns for another act, and the extended version of this transit can cover a whole season of your year. Use the later passes to deepen what the first pass opened: the reconciliation gets its follow-through, the creative project gets its second draft, the new friendship gets its roots. The risk, to be plain about it, is passivity and mild excess, drifting through the good weeks and gaining little that lasts. The gift is a working demonstration of what your life feels like when you are not braced. Notice how you treat people when you feel liked, how you spend when you feel secure, how you create when nothing is at stake. That relaxed version of you is not a visitor Jupiter brought. It is a capacity of yours the trine is lighting up, and you are allowed to keep practicing it after the sky moves on."
+ },
+ {
+  "id": "transit:jupiter:opposition:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "venus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_venus:opposition"
+  ],
+  "text": "An opposition puts the enlargement across the table from you. With transiting Jupiter opposite your natal Venus, the abundance of this period arrives through other people, and so does the excess. For a few weeks at a time, across what may total months if the retrograde loop is involved, relationships swell to full size: more attention, more social demand, more affection offered and expected, more of other people's wants in your calendar. While the aspect applies, the pull builds. Someone wants more of you, or offers you more than you asked for, and the offers are usually genuinely attractive. At the exact pass the dynamic stands at full extension, and you can see your relationships the way you see a full moon: completely lit, including the parts you usually ignore. The separating weeks are for rebalancing, and most people find they have some rebalancing to do. The classic shape of this transit is generosity out of proportion. You may over-accommodate, saying yes to gatherings, favors, and plans until your own preferences go quiet under the pile. Or the excess runs the other way, and you expect a partner or friend to supply more delight than any one person carries. Either way the opposition is asking a fair question: where does pleasing others end and pleasing yourself begin? Indulgence shared is doubled during this period, which is lovely at the dinner table and expensive everywhere else. Agreements made now, romantic or financial, tend to be warm-hearted and slightly oversized, and they often read differently after a night's sleep than they did in the moment. If Jupiter backs over the degree, the whole negotiation repeats. The person or arrangement returns in a quieter key on the second pass, and what looked like destiny reveals itself as either substance or sparkle. The third pass tends to close the account with surprising ease, integrating what was real. The reward of this transit is perspective on how you love. Oppositions confront, but with the sky's most good-natured planet involved, the confrontation is usually a friendly one: a full-length mirror rather than a fight. You get to watch what you give away too readily, what you demand without noticing, and what a fair exchange actually feels like in the body. Couples often do their best growing under exactly this sky, because both the affection and the imbalances are too large to miss. Meet the season openly, keep a little of yourself in reserve, and let the people who match your generosity show you who they are."
+ },
+ {
+  "id": "transit:jupiter:conjunction:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "mars",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_mars:conjunction"
+  ],
+  "text": "Roughly once every twelve years, transiting Jupiter reaches your natal Mars and pours fuel on it. Mars is your drive: how you assert, compete, desire, and begin. Jupiter makes whatever it touches bigger, so for a few weeks, or a few months if the retrograde stretch is in play, your will to act runs enlarged. You feel it physically before you understand it. As the conjunction applies, restlessness builds, patience for waiting thins, and plans you have been incubating start demanding a launch date. Around the exact pass, confidence and energy peak together. This is one of the best skies there is for starting something that needs courage: the venture, the confrontation you have been rehearsing, the physical challenge, the bold ask. Actions taken now tend to be larger and luckier than your usual, and other people respond to the conviction in you. The separating weeks carry momentum, and what you set moving keeps rolling for a long while after. The famous hazard is overreach. Jupiter enlarges judgment errors as cheerfully as it enlarges victories, and Mars under this influence can mistake enthusiasm for capacity. You may take on three commitments where one would have been brave, push a body past what it was trained for, or escalate a disagreement because backing down feels beneath you. Anger, when it comes in this period, arrives with a bigger amplifier than you remember owning. None of this means sit still, which is nearly impossible anyway. It means aim. A twelve-year surge deserves a target worth twelve years. If Jupiter retrogrades back over your Mars, the campaign gets three chapters. The first pass starts the push, often hot and slightly overshot. The middle pass slows everything down and asks you to revise: the plan gets realistic, the strategy replaces the charge. The final pass relaunches with the corrections built in, and efforts that survive all three chapters tend to be soundly built. The single-pass version is quicker and cleaner: a window of weeks where boldness is cheap and initiative pays. Either way, the growth on offer is a recalibration of your own force. Most of the time you run your engine at a habitual setting. This transit shows you the higher setting, what you can start, endure, and win when conviction is fully funded. Some of what you learn will be about limits, discovered the honest way. Keep the discoveries. The next time this conjunction comes around you will be glad to know exactly how much horsepower you carry, and what it is for."
+ },
+ {
+  "id": "transit:jupiter:sextile:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "mars",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_mars:sextile"
+  ],
+  "text": "Right now there is an easy angle between the sky's engine of growth and your natal Mars, and it behaves like a standing invitation to act. The sextile from transiting Jupiter lasts a few weeks in its direct form, and its signature is opportunity that responds to effort: doors that are not locked, but are also not going to open themselves. In the applying phase you may notice your energy improving and your timing sharpening. Tasks that dragged last month move. People in a position to help seem approachable. Near the exact pass, the specific opening tends to appear, and it usually involves action: a project that needs a volunteer, a competition worth entering, a physical undertaking you have been postponing, a chance to take initiative where you would normally wait your turn. In the separating days the current eases off, and whatever you set in motion continues on the strength you gave it. The whole character of this transit is cooperative. Your assertiveness sits well with people during this period. You can push without bruising, ask without apologizing, and disagree without the exchange souring, which makes these good weeks for anything that mixes boldness with diplomacy: negotiations, pitches, hard conversations you intend to keep friendly. Bodies respond well too. Energy put into training, repair, or plain hard work returns more than it costs, and the enjoyment of effort, which Mars knows and Jupiter enlarges, is easy to reach. The catch, as with every sextile, is that nothing compels you. A passive few weeks here simply pass, pleasant and unremarkable, and the tradition would say you were offered a tool and left it in the box. If Jupiter's retrograde carries it back over this degree later, the offer is reissued. An opening you did not take, a plan you shelved, an ally you did not call: the second appearance is the sky repeating itself on purpose, and the eventual final pass is typically the last edition of the offer for this round. The growth available is modest and real. You learn what your initiative is worth when conditions are fair, which is information you cannot get in a crisis or a windfall. Take one deliberate swing at something that matters while the angle holds. Even a small one. The results tend to run better than reason predicts, and the memory of having moved when the moving was good will outlast the transit by years."
+ },
+ {
+  "id": "transit:jupiter:square:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "mars",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_mars:square"
+  ],
+  "text": "The square from transiting Jupiter to your natal Mars runs your motor hot. For a few weeks, and up to several months if the retrograde loop drags it out, your drive is inflated past its usual setting, and the inflation carries an edge the softer Jupiter contacts lack. More feels necessary. Faster feels obvious. Waiting feels like losing. As the square applies, impatience accumulates. You want progress on every front at once, and obstacles that are simply ordinary start to read as insults. Around the exact pass the pressure peaks. This is when the period's characteristic mistakes get made: the overcommitment taken on in a surge of confidence, the shortcut that saves a day and costs a month, the argument escalated on principle when the principle was mostly adrenaline. It is also when the period's characteristic breakthroughs happen, because a square is force, and force aimed well moves things nothing else will. The separating weeks reveal which one you got, and usually you got some of each. The underlying friction is between conviction and capacity. Jupiter hands you a bigger vision of what you can do. Mars wants to do it today. Between them they will happily write checks your schedule, budget, and hamstrings must honor. Physical overdoing is a common expression of this transit, so effort that respects warm-ups and recovery keeps the season's surplus an asset. So is the quarrel of righteousness, where you fight harder because you are sure you are right, and being right somehow fails to end the fight. The gift inside the same energy is nerve. Risks you have been too comfortable to take become emotionally possible now, and some of them deserve taking. If Jupiter backs over the square, expect the campaign to come in waves. The first pass is the charge, and it usually overshoots. The retrograde pass is the forced review, where the plan meets its own numbers and the temper meets its consequences. The final pass executes the corrected version, and projects that survive the full sequence come out tougher than anything begun in easier weather. The growth here is aim. A square never asks whether you have power. It asks whether you can point it. If you spend these weeks choosing one worthy difficulty and driving at it, the surplus burns clean and leaves you with something built. If you spend them fighting everything that moves, the surplus burns anyway. The fuel is not optional in this period. The target is."
+ },
+ {
+  "id": "transit:jupiter:trine:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "mars",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_mars:trine"
+  ],
+  "text": "Under the trine from transiting Jupiter to your natal Mars, effort and reward stop arguing. For a stretch of weeks, longer when the retrograde extension applies, your drive runs strong and smooth: energy is plentiful, confidence sits at a workable level, and the things you push actually move. There is no crisis in this transit and no drama. Its whole nature is traction. As the aspect applies, you may simply notice that work feels lighter, that your body is willing, and that initiative keeps paying off in small, encouraging ways. The weeks around the exact pass are the prime of the season: stamina, courage, and timing line up, and undertakings that would normally take grinding persistence advance on a fraction of the usual friction. In the separating phase the current eases, and momentum you built carries forward on its own. The tradition ranks this among the best working transits there is, and the ranking is earned, with one caveat. Trines make things easy, and easy does not insist. It is entirely possible to spend this period comfortably busy, coasting on the pleasant sense that you could do great things, without doing any particular one of them. The difference between a forgettable version of this transit and a memorable one is almost always a single decision: picking the effort that deserves the tailwind. Physical undertakings prosper now, whether training, building, or the long-postponed demanding thing. So do ventures that need sustained push rather than one dramatic shove: campaigns, moves, builds, negotiations that run in rounds. Assertion comes out clean during this period, firm without heat, so hard conversations tend to land as strength rather than aggression. If Jupiter turns retrograde and recrosses the degree, the tailwind returns in later installments. Use the repeat passes for the unglamorous middle of whatever you started: the second phase, the maintenance, the follow-through that usually bores Mars into quitting. An effort that gets all three passes of a Jupiter trine behind it is unusually well launched. What this period teaches is what your effort is worth at fair exchange. Much of life pays your work back at strange rates, sometimes stingy, sometimes inflated. These weeks pay honestly and a little generously, and that experience calibrates you. Notice how much you can accomplish when nothing is fighting you, and notice that the capacity was yours all along. The sky is only removing friction. The engine, and the direction you point it, remain your own."
+ },
+ {
+  "id": "transit:jupiter:opposition:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "mars",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_mars:opposition"
+  ],
+  "text": "With transiting Jupiter opposite your natal Mars, your push meets the world's push, and both arrive at full size. This is a period, a few weeks in its simple form and spread across months when the retrograde loop stretches it, in which ambition, competition, and will become two-sided affairs. Whatever you drive toward, someone or something drives back, and they seem as confident as you are. While the opposition applies, the tension builds as a kind of gathering contest. Plans attract counter-plans. Your assertiveness draws out other people's, and situations that were quietly cooperative develop sides. Around the exact pass the standoff reaches full extension. This can look like open conflict, a negotiation at its hard middle, a rivalry peaking, or simply a stretch where every initiative of yours has to argue for its life. The separating weeks bring settlement, and settlements reached now tend to be instructive, because you can finally see what your force looks like from the other end. The signature risk is escalation funded by optimism. Jupiter convinces; Mars commits. Together, at opposition, they can talk you into fighting on too many fronts, doubling a bet to save face, or treating a difference of interest as a war of principle. The counterparty in this period often holds more than you estimate, not because you are weak but because the aspect inflates your reading of your own position. Overreach is the tax. Its opposite error, going limp to avoid the whole contest, costs more, because this sky rewards engagement that keeps its head. The productive version is the worthy opponent. Handled honestly, the resistance you meet now is a measuring instrument: it shows you the actual weight of your plans, the actual price of your wants, and the difference between force and effectiveness. Some of the best partnerships form out of exactly this kind of well-fought disagreement. If Jupiter recrosses the degree, the contest returns in rounds. The first pass opens the dispute or the campaign. The retrograde pass reopens it with new information, and positions soften into something workable. The final pass concludes it, often with both sides holding more than they expected. The growth here is calibration under pressure. Anyone can be bold alone. This period trains the rarer skill of being bold against an answering boldness: pressing where pressing works, yielding where yielding wins, and telling the two apart while your blood is up. What you learn about your own force in these weeks, you keep."
+ },
+ {
+  "id": "transit:jupiter:conjunction:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "jupiter",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_jupiter:conjunction"
+  ],
+  "text": "Roughly every twelve years, Jupiter completes its circuit of the sky and returns to the place it held when you were born. This conjunction is called the Jupiter return, and it opens a new chapter in your relationship with growth itself: what you hope for, what you reach for, where you believe your life can get bigger. The transit colors a few weeks around the exact pass, or several months when the retrograde loop turns it into three passes, but its subject is the next twelve years. As the return applies, appetite for the future builds. Old containers start to pinch. You may find yourself restless in roles that fit fine last year, drawn to study, travel, or ventures that enlarge your sense of what is possible, impatient with your own smaller habits of hoping. Around the exact conjunction the mood peaks in a kind of openness: the future feels wide, luck feels near, and beginnings feel blessed. The tradition treats seeds planted in this window with special respect, since they tend to set the theme of the cycle that follows. The separating weeks are for choosing among them, because you will have planted more than you can water. That is the caution worth naming plainly. A return does not discriminate. It enlarges wise hopes and foolish ones with the same warm hand, and the classic mistakes of the period are promises made at the scale of the mood: too many commitments, too much certainty, plans that assume the tailwind is permanent. The tailwind is seasonal. What it leaves behind is whatever you rooted while it blew. If your return includes the retrograde re-hits, the sequence has a wisdom of its own. The first pass raises the sails and shows you the big version. The middle pass pulls you inward to test it: is this hope actually yours, or borrowed, or just shiny? The final pass commits, and the commitments that survive the questioning are the ones worth a decade. Whether your return is one pass or three, look backward briefly before you look ahead. Unless this is your first round, recall what you were reaching for twelve years ago, what came of it, which hopes matured and which evaporated. That review is the most reliable instrument you have for reading the present one. Then choose a direction of growth on purpose. The cycle beginning now will expand something in your life whether or not you steer. Steering is the difference between ending up larger and ending up merely swollen, and this season, generous as it is, leaves the steering entirely to you."
+ },
+ {
+  "id": "transit:jupiter:sextile:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "jupiter",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_jupiter:sextile"
+  ],
+  "text": "Twice in each of its twelve-year circuits, once on the way out and once on the way home, transiting Jupiter forms a sextile to its own natal place. It is one of the gentlest transits you receive, a few weeks of mild tailwind, and its meaning is best read against the cycle it belongs to: this is a checkpoint in the long arc of your growth, a scheduled opening rather than a dramatic event. In the applying days you may notice optimism running slightly above baseline, plans feeling friendlier, and a general sense that circumstances are willing to cooperate if you are. Around the exact pass, the opening tends to show itself concretely, and it is usually continuous with what you are already growing: a chance to extend a project, a helpful contact in a field you have been leaning toward, a bit of encouraging news about a long effort, an easy step forward that costs little and positions you well. As the sextile separates, the window closes without ceremony. The point of this transit is participation. Sextiles hand nothing to spectators, and this one is subtle enough that plenty of people live through it noticing only a pleasant fortnight. Treat it instead as maintenance weather for your ambitions: a good stretch to advance the plan a harder transit will later test, to bank goodwill, to make the small expansion that keeps a long effort alive. Growth in this period is available at a fair price and in modest sizes, and modest sizes compound. Because Jupiter stations once a year, this sextile sometimes comes in more than one pass, the theme stepping back for revision and returning for completion over some months. If the same opportunity circles back to you, read the repetition as emphasis. The second appearance of a door is a better argument than the first. There is little shadow side here worth warning about beyond complacency, a slight surplus of confidence that can make you postpone what the friendly weather makes easy. The remedy is the same as the opportunity: act, mildly and promptly. What this transit quietly teaches is that expansion is not always an event. Most of a life's growth happens in exactly these unremarkable windows, a yes here, an inch there, taken by someone paying attention. Learn to feel this weather when it comes and you will catch openings for the rest of the cycle that others walk past, not because you are luckier, but because you have practiced noticing when the ground is soft."
+ },
+ {
+  "id": "transit:jupiter:square:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "jupiter",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_jupiter:square"
+  ],
+  "text": "At roughly the three-year and nine-year marks of its twelve-year cycle, transiting Jupiter squares its own place in your chart, and your growth gets audited. The square is friction between where your expansion was headed and where it actually stands, and for a few weeks, or across some months with retrograde re-hits, that friction is the weather. The applying phase usually feels like strain around plans. Commitments made in more optimistic seasons start presenting their invoices. Either you have grown faster than your foundations, and things feel overextended, or you have grown less than you hoped, and things feel cramped, and plenty of people get both feelings about different corners of the same life. Around the exact pass the pressure peaks as a demand for adjustment. Something built on the last wave of enthusiasm needs restructuring: the schedule that assumed endless energy, the venture that assumed the market's goodwill, the belief that assumed you would always feel as sure as you did the day you adopted it. The separating weeks reward whoever actually made the adjustment and quietly penalize whoever doubled down instead. It matters to say what this transit is not. It is not misfortune, and the tradition does not read it as a bad sky. It is a course correction inside a growth cycle, closer to a fiscal review than a storm. The friction exists because something real was built and reality has feedback about it. Overconfidence is the classic failure mode, promising bigger to outrun the strain, spending enthusiasm where accounting was needed. Its mirror twin, abandoning sound growth at the first pushback, wastes just as much. If the square runs three passes, the sequence works like drafts of the correction. The first pass surfaces the problem, often through an external snag. The retrograde pass gives you the interior version, where you rework the plan and, more privately, the expectations underneath it. The final pass implements, and structures revised through the whole sequence tend to hold for years. What this period builds, handled honestly, is judgment. Expansion is easy to want and hard to size, and nearly everything painful about this transit comes from mis-sizing hope somewhere upstream. The square hands you the data to size it better: which promises fit you, which were costume, where more is genuine and where it is decoration. Growth that passes this audit continues with better odds. Growth that fails it was going to fail anyway, and finding out now, with adjustment still cheap, is the favor this sky does you."
+ },
+ {
+  "id": "transit:jupiter:trine:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "jupiter",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_jupiter:trine"
+  ],
+  "text": "Around the fourth and eighth years of its twelve-year round, transiting Jupiter trines its own natal position, and your growth cycle enters harvest weather. This is a period of ease and quiet increase, a few weeks in a single pass, sometimes a season when the retrograde stretch brings repeats, in which what you have been building cooperates with you and the future feels reasonably, believably good. The applying phase lifts your baseline. Optimism returns without an obvious cause, plans feel workable rather than heroic, and problems that loomed shrink to their actual size. Near the exact pass, the period often bears identifiable fruit: recognition for sustained work, an expansion that goes smoothly, a stroke of good timing, help arriving through people who think well of you. The separating weeks let the ease taper, leaving whatever you consolidated. That word, consolidate, is the working advice of the whole transit. A trine between Jupiter and its own place means your outer growth and your inner sense of direction are briefly in agreement, and agreement is the best possible condition for strengthening things: finishing what the cycle's earlier pushes began, formalizing arrangements that have been running on goodwill, extending a success one deliberate size larger. The tradition's one warning about this sky is soft-spoken but consistent: trines can lull. Confidence at this comfortable level tempts you to assume the trend is a law, to relax just as effort is at peak value, or to celebrate the harvest without storing any of it. Nothing punishes you for coasting through these weeks. You simply arrive at the cycle's next test with less banked than you might have had. If the trine returns on further passes, use them as second and third harvests. Later passes favor the quieter work: reviewing what proved fruitful, deepening rather than adding, thanking the people who turned out to be load-bearing. There is real information in noticing exactly which efforts flourish under this weather, because the cycle is showing you where its living growth actually is, as opposed to where you have been dutifully watering. What you learn here compounds. A person who meets this transit deliberately comes out with more than gains: a cleaner map of their own growth, of the ventures and beliefs that thrive when given room. Trust the ease enough to use it and not so much that you stop steering, and this generous stretch will fund the harder, more interesting stretches that a full cycle inevitably includes."
+ },
+ {
+  "id": "transit:jupiter:opposition:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "jupiter",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_jupiter:opposition"
+  ],
+  "text": "Near the halfway point of its twelve-year cycle, about six years after your last Jupiter return, transiting Jupiter stands opposite its own place in your chart. This is the full-moon phase of your growth cycle: everything you set expanding at the return now stands at maximum extension, fully lit and fully visible, including the parts you have been declining to look at. The period runs a few weeks in one pass or stretches across months when the retrograde loop brings re-hits. In the applying phase, a sense of culmination builds. Ventures, beliefs, and ambitions from the past several years arrive at a natural moment of reckoning, often through other people: a partner, rival, employer, or audience whose response shows you the true current size of what you have grown. Around the exact opposition, the view is at its clearest and the tension at its fullest. Some things stand revealed as larger and sounder than you dared claim. Others stand revealed as inflated, kept aloft mostly by your own repeated enthusiasm. Both revelations are the point. The characteristic temptation now is one more push, expanding again to avoid the assessment, promising bigger to drown out the feedback. Oppositions are poor weather for that move. What they favor is the balancing act: harvesting what matured, trimming what bloated, and renegotiating arrangements where your growth and someone else's have started crowding each other. Disputes that surface in this period are usually about exactly that, two enlargements competing for the same room, and they settle best when both sides get named honestly. If the opposition repeats across three passes, the assessment comes in stages. First the confrontation with the facts, frequently delivered from outside. Then the retrograde interval, where you weigh things privately and your claims quietly resize themselves toward the truth. Then the final pass, which tends to close the question and free the energy that was tied up in maintaining appearances. What the period offers, beneath its noise, is the most accurate mid-cycle picture you will get. Half a cycle of growing is behind you; half remains. Standing at this distance, you can see which hopes from the return years deserve the second half and which have finished their work. That editing is not loss. Pruned growth is what makes the remaining branches strong, and people who do this reckoning willingly tend to spend the next six years growing things that are actually theirs. Look at the full picture while the light is this good. It will not be this complete again until the cycle comes back around."
+ }
+]

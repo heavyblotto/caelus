@@ -1,0 +1,176 @@
+{
+  "name": "composite-houses-sun",
+  "outFile": "b3-composite-houses-sun.json",
+  "setId": "house-b3-composite-houses-sun",
+  "family": "composite-house",
+  "cells": [
+    {
+      "id": "composite:sun:house:1",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "sun",
+        "house": 1
+      },
+      "atomIds": [
+        "composite:sun"
+      ],
+      "title": "Composite Sun in the 1st house",
+      "bindable": true
+    },
+    {
+      "id": "composite:sun:house:2",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "sun",
+        "house": 2
+      },
+      "atomIds": [
+        "composite:sun"
+      ],
+      "title": "Composite Sun in the 2nd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:sun:house:3",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "sun",
+        "house": 3
+      },
+      "atomIds": [
+        "composite:sun"
+      ],
+      "title": "Composite Sun in the 3rd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:sun:house:4",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "sun",
+        "house": 4
+      },
+      "atomIds": [
+        "composite:sun"
+      ],
+      "title": "Composite Sun in the 4th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:sun:house:5",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "sun",
+        "house": 5
+      },
+      "atomIds": [
+        "composite:sun"
+      ],
+      "title": "Composite Sun in the 5th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:sun:house:6",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "sun",
+        "house": 6
+      },
+      "atomIds": [
+        "composite:sun"
+      ],
+      "title": "Composite Sun in the 6th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:sun:house:7",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "sun",
+        "house": 7
+      },
+      "atomIds": [
+        "composite:sun"
+      ],
+      "title": "Composite Sun in the 7th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:sun:house:8",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "sun",
+        "house": 8
+      },
+      "atomIds": [
+        "composite:sun"
+      ],
+      "title": "Composite Sun in the 8th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:sun:house:9",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "sun",
+        "house": 9
+      },
+      "atomIds": [
+        "composite:sun"
+      ],
+      "title": "Composite Sun in the 9th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:sun:house:10",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "sun",
+        "house": 10
+      },
+      "atomIds": [
+        "composite:sun"
+      ],
+      "title": "Composite Sun in the 10th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:sun:house:11",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "sun",
+        "house": 11
+      },
+      "atomIds": [
+        "composite:sun"
+      ],
+      "title": "Composite Sun in the 11th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:sun:house:12",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "sun",
+        "house": 12
+      },
+      "atomIds": [
+        "composite:sun"
+      ],
+      "title": "Composite Sun in the 12th house",
+      "bindable": true
+    }
+  ]
+}
