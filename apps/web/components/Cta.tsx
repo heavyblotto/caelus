@@ -18,6 +18,10 @@ function CtaLinks() {
       <span className="cta__sep" aria-hidden>
         ·
       </span>
+      <Link href="/changelog">Changelog</Link>
+      <span className="cta__sep" aria-hidden>
+        ·
+      </span>
       <a href={SITE.starter} target="_blank" rel="noreferrer">
         Starter template<span className="cta__external" aria-hidden> ↗</span>
       </a>
