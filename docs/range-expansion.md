@@ -7,7 +7,7 @@ the published ceiling is not a theory limit (VSOP87 holds to about 1 arcsec
 across +-4000 years for the inner planets, +-2000 years for Jupiter/Saturn),
 it is set by two analytic shortcuts and by what we have measured.
 
-This is "validated, not asserted": the headline range only moves once the
+The headline range only moves once the
 edge accuracy is measured against JPL Horizons, never on the strength of a
 
 > **Status, 2026-08.** The 1000–3000 wide tier (Tier B) shipped in 0.24.0. The
@@ -158,7 +158,7 @@ fuller VSOP87. **Both halves of that were wrong, and the refutation is
 measured, not argued:**
 
 1. **Truncation is worth ~0.1", not 15".** The shipped `full` tier is the
-   (essentially complete) VSOP87D series -- Earth's term counts match the
+   complete VSOP87D series -- Earth's term counts match the
    canonical distribution file exactly -- and evaluating Mars, Saturn,
    Uranus, and Neptune across 1000-3000 on the `full` vs the `high` tier
    moves positions by **<= 0.13"**. The series has converged; more terms
@@ -168,7 +168,7 @@ measured, not argued:**
    and Pluto pipelines applied annual aberration (Meeus eq. 23.3, an
    of-date formula fed the of-date Sun longitude) to the **J2000**
    direction, before precession-to-date. The `sun_lon - lon` argument was
-   therefore off by the accumulated general precession (~1.4 deg/century),
+   off by the accumulated general precession (~1.4 deg/century),
    rotating the 20.5" aberration ellipse to the wrong phase: error ~=
    2k*sin(precession/2) -- ~0.5" inside 1850-2150, up to ~5" at the
    1000/3000 edges, phase-locked to the body's orbit (the per-epoch error
@@ -210,7 +210,7 @@ measured, not argued:**
    own light-time travel (0.67" for the Moon) but not that observer term, so
    the Moon's astrometric number is not yet a position claim. Distant bodies
    are unaffected -- the term is negligible against their own motion over a
-   far longer light-time -- which is why every other body reads sub-arcsecond.
+   far longer light-time -- so every other body reads sub-arcsecond.
 
 What remains after the fix is genuine **source drift**: VSOP87 represents
 DE200 (1988, pre-Voyager outer-planet orbits) to 1" over its published
@@ -220,11 +220,11 @@ mean-longitude drift (-15" at 1005 -> +10" at 2965), Uranus's oscillates at
 its 84-year orbital period, Mars's is sub-arcsecond except at close
 oppositions where a small heliocentric error is amplified by proximity.
 
-Raising the headline therefore takes: Chebyshev packs fit to Horizons
+Raising the headline takes: Chebyshev packs fit to Horizons
 (DE441) for Mars/Saturn/Uranus/Neptune over the wide span -- the exact
 pattern already proven by the Pluto and small-body packs, more fitting, not
 position theory -- plus a wider precise-Moon pack, plus the frame-free
-validator pass above. Delta-T then bounds what "validated" can honestly mean
+validator pass above. Delta-T then bounds what "validated" can mean
 for the Moon and the angles before ~1500 (sigma is minutes; the smear is
 tens of arcseconds), so wide-band claims are per-body and TT-honest rather
 than one headline number.
@@ -275,7 +275,7 @@ Neptune 4.56" vs 4.6"). The latitude axis is now measured by
 `validate_horizons.py`, and `golden.test.ts` pins the term so it cannot
 silently regress.
 
-For the Hellenistic / Hermetic era (first-fifth centuries): the same
+For the hellenistic / Hermetic era (first-fifth centuries): the same
 machinery runs over any window DE441 covers, which is the majors and the
 Pluto barycenter -- the small bodies stop at ~1600 and no fitting reaches
 past a source that does not exist. Two things bound that era, and delta T is
@@ -284,7 +284,7 @@ the modern ephemeris and the Moon fallback already miss by 10-17" at the
 edges of 1000-3000, so positions there are computed, not validated. Then
 delta-T sigma is minutes, which smears the angles and the Moon further while
 the slow bodies read fine. `Chart.warnings` states both splits per chart, so
-ancient charts are honestly usable rather than refused -- but "usable" means
+ancient charts remain usable rather than refused, with "usable" meaning
 arcminutes, not arcseconds.
 
 ## Tier C: minted -- the wide band is uniform, and the Moon is the last blocker
@@ -326,14 +326,14 @@ The Moon is now packed over 1000-3000 (fit_moon.py, seg=64 deg=36, ~90 km,
 ~48" at mean distance) -- the last body off the 1850-2150 tier. The headline
 decision is gated on this: the planets measure sub-arcsecond, and the Moon's
 wide figure is the remaining number to stand up before "1850-2150" can
-honestly widen. (Its ~21" on the astrometric basis is the observer-light-time
+widen. (Its ~21" on the astrometric basis is the observer-light-time
 comparison artifact documented above, not a position error; on the apparent
 basis the wide Moon reads 3.68".)
 
 ## Tier C runbook (the mint commands)
 
-The planet packs are real. Measured on the frame-free `--astrometric` basis
-over 1000-3000 (40 epochs), before and after:
+The table shows the planet packs measured on the frame-free `--astrometric`
+basis over 1000-3000 (40 epochs), before and after:
 
 | body | pack true error | size | wide before | wide after |
 |---|---|---|---|---|
@@ -378,8 +378,8 @@ disk (`node-loader.ts` / `chart.py`; `engineCapabilities` then reports
 `chebyshev_pack` with the pack's fitted span). `fit_moon.py` mints a wider
 `moon_cheb.full.json` in the exact shipped format, so the precise-Moon
 tier, `true_node_precise`, true Lilith, and a subsequent `fit_intp_apog.py`
-refit widen with it, all with no code change. No pack, no behaviour change:
-the full suite is pinned green in both states (the routing was exercised
+refit widen with it, all with no code change. Without the pack, behaviour is
+unchanged: the full suite is pinned green in both states (the routing was exercised
 against a synthetic pack and removed).
 
 Run where `ssd.jpl.nasa.gov` is reachable:

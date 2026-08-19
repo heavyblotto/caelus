@@ -192,14 +192,14 @@ basis (sun 0.03″, the majors 0.02–0.12″, Pluto 0.015″, the small bodies
 - **Fitted vs validated.** `engineCapabilities` reports each pack's real
   fitted span separately from the validated span. The majors, Pluto and the
   Moon validate 1000–3000; the small bodies 1600–2484 (the widest window
-  Horizons serves them). A body outside its pack lands in `Chart.unavailable`
-  rather than silently serving a fallback the engine has not validated.
+  Horizons serves them). A body outside its pack lands in `Chart.unavailable`;
+  the unvalidated fallback is not served.
 - **Aberration latitude term.** Annual aberration now corrects ecliptic
   latitude as well as longitude (Meeus eq. 23.3), fixing a large error for
   high-inclination bodies: Pallas read 13.3″ off against JPL in latitude
   alone, Pluto ~4.6″. Every packed body now measures under 1″ in the core
   band.
-- **Honest ancient dates.** `Chart.warnings` states the delta-T split per
+- **Delta-T warnings for ancient dates.** `Chart.warnings` states the delta-T split per
   chart: at 1000 CE sigma is ~76 s, smearing the angles ~0.32° and the Moon
   ~0.7′ while the slow bodies hold. "Validated to 1000–3000" is a TT position
   claim; the input clock is fuzzier than the engine for ancient dates.

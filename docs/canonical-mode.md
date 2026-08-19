@@ -40,7 +40,7 @@ subtler, and canonical mode closes all three:
 | `milliarcsec` | milliarcseconds | finer than any validated accuracy; for diffing |
 | `centideg` | 0.01° | compact, human-scannable |
 | `dms` | `[deg, min, sec]` triples | the tradition's own base-60 integer form |
-| `accuracy` | arcsec, snapped per body | each body quantized no finer than its **measured** accuracy (accuracy.json) — "validated, not asserted" applied to the output format, and the most portable choice for content addressing |
+| `accuracy` | arcsec, snapped per body | each body quantized no finer than its **measured** accuracy (accuracy.json); the most portable choice for content addressing |
 
 Speeds share the grid per day; distances are micro-AU; instants are integer
 milliseconds since J2000.0; aspect strength is per-mille. The `units` block
@@ -62,7 +62,7 @@ agree to well under half a quantum, which the conformance suite enforces
 (≤3.6 milliarcseconds body error vs a 1″ default quantum). A value can in
 principle land within libm drift of a grid boundary on some third platform;
 the `accuracy` grid makes that probability negligible (its quanta exceed
-the drift by orders of magnitude), which is why it is the recommended grid
+the drift by orders of magnitude), so it is the recommended grid
 for cross-platform content addressing.
 
 ## Remainder sets

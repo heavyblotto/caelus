@@ -2,9 +2,9 @@
 
 A chart silently asserts "a real instant at a real place." That is wrong for
 most interesting cases -- forecasts, fictional or mythic subjects, archetypes,
-counterfactuals, charts with only an approximate or relative time. The
+counterfactual subjects, and charts with only an approximate or relative time. The
 provenance layer (`src/provenance.ts`) makes the chart's grounding first-class:
-what it *is* (`Realm`), and how its time and place are known (`TemporalAnchor`,
+what it is (`Realm`), and how its time and place are known (`TemporalAnchor`,
 `SpatialAnchor`). It does three jobs.
 
 ## 1. Routing: which generator runs

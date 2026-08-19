@@ -24,6 +24,7 @@ arcsecond
 arcseconds
 nano-arcsecond
 serializable
+unvalidated
 [Gg]eocentric
 [Hh]eliocentric
 [Ee]cliptic
