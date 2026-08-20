@@ -16,8 +16,7 @@ import {
   azAlt, pheno, refractTrueToApparent, extinctionMag, airmass, DIAMETER_KM,
 } from "./pheno.js";
 import type { SyntheticRender } from "./synthetic.js";
-
-type Vec3 = [number, number, number];
+import type { Vec3 } from "./spherical.js";
 
 const dot = (a: Vec3, b: Vec3): number => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const cross = (a: Vec3, b: Vec3): Vec3 => [
@@ -34,7 +33,7 @@ const clamp1 = (x: number): number => Math.max(-1, Math.min(1, x));
 
 /** Direction (local horizontal frame: x east, y north, z up) for an azimuth
  *  (deg from true north, east positive) and altitude (deg). */
-function dirFromAzAlt(azDeg: number, altDeg: number): Vec3 {
+export function dirFromAzAlt(azDeg: number, altDeg: number): Vec3 {
   const a = azDeg * DEG;
   const h = altDeg * DEG;
   return [Math.cos(h) * Math.sin(a), Math.cos(h) * Math.cos(a), Math.sin(h)];
@@ -164,13 +163,7 @@ export function skyPlacer(
   const refract = opts.refraction ?? true;
   const pressure = opts.pressure ?? 1013.25;
   const tempC = opts.tempC ?? 15.0;
-  // Camera basis from the aim. `right` is horizontal (no roll); near the zenith
-  // the up reference falls back to north.
-  const F = dirFromAzAlt(aimAzDeg, aimAltDeg);
-  let rightRaw = cross(F, [0, 0, 1]);
-  if (norm(rightRaw) < 1e-6) rightRaw = cross(F, [0, 1, 0]);
-  const right = unit(rightRaw);
-  const up = cross(right, F); // unit: right and F are orthonormal
+  const { forward: F, right, up } = skyCamera(aimAzDeg, aimAltDeg);
   const hfovR = lens.hfovDeg * DEG;
   const vfovR = lens.vfovDeg * DEG;
   const tanH = Math.tan(hfovR / 2);
@@ -211,6 +204,138 @@ export function skyPlacer(
     const x = Number.isFinite(xn) ? Math.round(((xn + 1) / 2) * width) : NaN;
     const y = Number.isFinite(yn) ? Math.round(((1 - yn) / 2) * height) : NaN;
     return { altApp, x, y, inFrame, deltaDeg, side };
+  };
+}
+
+/** An orthonormal camera basis in the local horizontal frame (x east,
+ *  y north, z up). `right` is horizontal, so the camera has no roll. */
+export interface SkyCamera {
+  forward: Vec3;
+  right: Vec3;
+  up: Vec3;
+}
+
+/** Camera basis for an aim direction. `right` is horizontal (no roll); near
+ *  the zenith the up reference falls back to north. `skyPlacer` and
+ *  `skyProjector` both build on this. */
+export function skyCamera(aimAzDeg: number, aimAltDeg: number): SkyCamera {
+  const forward = dirFromAzAlt(aimAzDeg, aimAltDeg);
+  let rightRaw = cross(forward, [0, 0, 1]);
+  if (norm(rightRaw) < 1e-6) rightRaw = cross(forward, [0, 1, 0]);
+  const right = unit(rightRaw);
+  const up = cross(right, forward); // unit: right and forward are orthonormal
+  return { forward, right, up };
+}
+
+/**
+ * One-parameter family of azimuthal radial scales r(theta), theta the angle
+ * from the aim in radians. Landmarks: `shape` -1 is gnomonic (tan theta, the
+ * rectilinear lens), -0.5 stereographic, 0 equidistant (the fisheye lens),
+ * +0.5 equal-area, +1 orthographic (sin theta, the exterior view of a glass
+ * sphere). The family is r = k tan(theta / k) with k = -1/shape on the
+ * negative side and r = k sin(theta / k) with k = 1/shape on the positive
+ * side; both limits at shape 0 are r = theta, so the family is continuous in
+ * `shape`. A continuous camera pull-back (a lens view widening into the
+ * exterior sphere view) is one pass of `shape` from -1 or 0 up to +1.
+ *
+ * On the negative side the scale diverges at theta = k pi/2 (the gnomonic
+ * horizon); past it the function returns Infinity. On the positive side the
+ * scale folds past theta = k pi/2: for orthographic the far hemisphere maps
+ * back into the same disc, which is the fold a see-through sphere shows.
+ */
+export function radialScale(shape: number): (thetaRad: number) => number {
+  if (!(shape >= -1 && shape <= 1)) {
+    throw new Error(`radialScale shape ${shape} out of range [-1, 1]`);
+  }
+  if (shape === 0) return (t) => t;
+  if (shape < 0) {
+    const k = -1 / shape;
+    const limit = (k * Math.PI) / 2;
+    return (t) => (t >= limit ? Infinity : k * Math.tan(t / k));
+  }
+  const k = 1 / shape;
+  return (t) => k * Math.sin(t / k);
+}
+
+/** Where a direction lands in normalized image coordinates
+ *  (see {@link skyProjector}). */
+export interface SkyVectorPlacement {
+  /** Normalized position: +x right, +y up, magnitude 1 at hfov/2 from the
+   *  aim. Signed Infinity when the direction is past a gnomonic-side
+   *  horizon (`behind`). No aspect ratio is applied. */
+  xn: number;
+  yn: number;
+  /** Angle from the aim, degrees. */
+  thetaDeg: number;
+  /** Near hemisphere (theta <= 90) or far. Under positive `shape` the far
+   *  hemisphere folds into the same disc; consumers depth-sort with this. */
+  hemisphere: "near" | "far";
+  /** True when the direction cannot project (gnomonic-side horizon). */
+  behind: boolean;
+}
+
+/** Vector-mode projector (see {@link skyProjector}). */
+export interface SkyProjector {
+  camera: SkyCamera;
+  shape: number;
+  hfovDeg: number;
+  place(azDeg: number, altDeg: number): SkyVectorPlacement;
+  placeDir(dir: Vec3): SkyVectorPlacement;
+}
+
+/**
+ * The projection math in vector mode: resolution-independent, refraction-free
+ * pure geometry, for consumers that draw (SVG chart figures, the derivation
+ * widget) rather than place pixels in an image prompt. Where `skyPlacer`
+ * fixes a lens and an image size, `skyProjector` takes a `radialScale` shape
+ * and a field of view, and returns normalized coordinates: magnitude 1 at
+ * hfov/2 from the aim, aspect left to the consumer. Directions can be given
+ * as (azimuth, true altitude) or as unit vectors in the local horizontal
+ * frame (x east, y north, z up), so interpolated positions project the same
+ * way as real ones. Observers modeling the apparent sky apply
+ * `refractTrueToApparent` to altitudes first.
+ */
+export function skyProjector(
+  aimAzDeg: number, aimAltDeg: number,
+  opts: { shape?: number; hfovDeg?: number } = {},
+): SkyProjector {
+  const shape = opts.shape ?? 0;
+  const hfovDeg = opts.hfovDeg ?? 180;
+  const radial = radialScale(shape);
+  const camera = skyCamera(aimAzDeg, aimAltDeg);
+  const rEdge = radial((hfovDeg * DEG) / 2);
+  if (!Number.isFinite(rEdge) || rEdge <= 0) {
+    throw new Error(
+      `skyProjector: hfovDeg ${hfovDeg} is outside the projectable range for shape ${shape}`,
+    );
+  }
+  const placeDir = (dir: Vec3): SkyVectorPlacement => {
+    const V = unit(dir);
+    const f = dot(V, camera.forward);
+    const rr = dot(V, camera.right);
+    const uu = dot(V, camera.up);
+    const theta = Math.acos(clamp1(f));
+    const thetaDeg = theta / DEG;
+    const hemisphere = thetaDeg <= 90 ? "near" : "far";
+    const r = radial(theta);
+    if (!Number.isFinite(r)) {
+      return {
+        xn: rr >= 0 ? Infinity : -Infinity,
+        yn: uu >= 0 ? Infinity : -Infinity,
+        thetaDeg, hemisphere, behind: true,
+      };
+    }
+    const psi = Math.atan2(uu, rr);
+    return {
+      xn: (r * Math.cos(psi)) / rEdge,
+      yn: (r * Math.sin(psi)) / rEdge,
+      thetaDeg, hemisphere, behind: false,
+    };
+  };
+  return {
+    camera, shape, hfovDeg,
+    place: (azDeg, altDeg) => placeDir(dirFromAzAlt(azDeg, altDeg)),
+    placeDir,
   };
 }
 

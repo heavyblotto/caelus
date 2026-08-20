@@ -107,6 +107,37 @@ The horizon (altitude 0) is a straight horizontal line for a no-roll camera. We
 report its pixel row `horizonY`. For fisheye it is a curve; `horizonY` is the
 value at the center azimuth and is approximate.
 
+### Vector mode
+
+The same math is exported for consumers that draw rather than place pixels
+(SVG chart figures, the derivation widget):
+
+- `skyCamera(aimAzDeg, aimAltDeg)`: the orthonormal no-roll camera basis
+  (`forward`, `right`, `up`) in the local horizontal frame. `dirFromAzAlt`
+  is exported beside it.
+- `radialScale(shape)`: a one-parameter family of azimuthal radial scales
+  r(theta). Landmarks: -1 gnomonic (`tan theta`, the rectilinear lens),
+  -0.5 stereographic, 0 equidistant (the fisheye lens), +0.5 equal-area,
+  +1 orthographic (`sin theta`, the exterior view of a glass sphere). The
+  family is `k tan(theta/k)` on the negative side and `k sin(theta/k)` on
+  the positive side; both limits at 0 are `theta`, so it is continuous in
+  `shape`. A camera pull-back from a lens view to the exterior sphere view
+  is one sweep of `shape`. The negative side diverges at its horizon
+  (`Infinity` past `theta = k pi/2`); the positive side folds the far
+  hemisphere back into the disc, the way a see-through sphere looks.
+- `skyProjector(aimAzDeg, aimAltDeg, { shape, hfovDeg })`: composes the two
+  into a refraction-free projector. `place(azDeg, altDeg)` and
+  `placeDir(vec3)` return normalized coordinates (+x right, +y up,
+  magnitude 1 at hfov/2 from the aim; aspect is the consumer's), the angle
+  from the aim, and the hemisphere, so interpolated positions (a body
+  sliding to the ecliptic) project exactly like real ones. Observers
+  modeling the apparent sky apply `refractTrueToApparent` first.
+
+The Python reference mirrors the three (`sky_camera`, `radial_scale`,
+`sky_project`); the skyview golden pins the family on a shape-by-theta grid
+and the projector on six cases, including the gnomonic horizon, the
+orthographic fold, and the zenith basis fallback.
+
 ## Sky state
 
 - `twilight` from the Sun's true altitude: day (> 0), civil (0 to -6),
