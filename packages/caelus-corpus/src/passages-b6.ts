@@ -3,7 +3,11 @@
  * after new slices land; do not edit the imports or the set list by hand.
  */
 import b6DegreeSymbolsAries from "../data/passages/b6-degree-symbols-aries.json" with { type: "json" };
+import b6DegreeSymbolsCancer from "../data/passages/b6-degree-symbols-cancer.json" with { type: "json" };
+import b6DegreeSymbolsGemini from "../data/passages/b6-degree-symbols-gemini.json" with { type: "json" };
+import b6DegreeSymbolsTaurus from "../data/passages/b6-degree-symbols-taurus.json" with { type: "json" };
 import b6Faces01 from "../data/passages/b6-faces-01.json" with { type: "json" };
+import b6Faces02 from "../data/passages/b6-faces-02.json" with { type: "json" };
 import type { Passage, PassageSet } from "./types.js";
 
 const set = (id: string, family: PassageSet["family"], data: unknown): PassageSet => ({
@@ -15,5 +19,9 @@ const set = (id: string, family: PassageSet["family"], data: unknown): PassageSe
 
 export const passageSets: PassageSet[] = [
   set("b6-degree-symbols-aries", "degree-symbol", b6DegreeSymbolsAries),
+  set("b6-degree-symbols-cancer", "degree-symbol", b6DegreeSymbolsCancer),
+  set("b6-degree-symbols-gemini", "degree-symbol", b6DegreeSymbolsGemini),
+  set("b6-degree-symbols-taurus", "degree-symbol", b6DegreeSymbolsTaurus),
   set("b6-faces-01", "ten-degree-face", b6Faces01),
+  set("b6-faces-02", "ten-degree-face", b6Faces02),
 ];

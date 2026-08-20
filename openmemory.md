@@ -44,8 +44,20 @@ carries the unreleased engine 0.25.0 source.
   `pipeline/wave-b6-01.md` bind the remaining 354 cells (scaffold/pivot/
   closing budgets, per-sign image quotas, shadow-shape quota, two-stage
   originality protocol, anaretic handling for degrees 28-30). Wave 2
-  (faces-02 + Taurus/Gemini/Cancer symbols) writing under
-  `pipeline/wave-b6-02.md`; waves 3-4 pending.
+  landed 2026-08-20: faces-02 + Taurus/Gemini/Cancer symbols (102
+  entries, 144/396 B6 cells written), all four slices adversarially
+  reviewed; Cancer and Taurus needed writer rework after review
+  (scenario cluster + shadow-genus concentration; a Taurus-28 skeleton
+  clone of Aries 28 rewritten). `pipeline/wave-b6-02.md` adds rulings
+  13-19: ruling 10 recalibrated (excess-shadow genus at most a third
+  of a slice, genus-counted, remainder across 3+ genera — the 2-3 cap
+  was set from a surface-label count and never held), scenario typed
+  by function+situation, explicit 28/29/30 cross-sign comparison,
+  faces image-detail pivot budget, ruling 5 extended to harsh images
+  regardless of ruler, sanctioned softening inventory, opener texture,
+  flag records cite verified sources and budget self-reports carry
+  entry IDs. Waves 3-4 pending (faces-03 + Leo-Scorpio symbols;
+  Sagittarius-Pisces symbols).
 - **Web** (`apps/web`): Playground `ReadingTab` dynamically imports corpus
   batches per context. Prose gated by root `scripts/lint-prose.sh` (Vale +
   em-dash check); the extractor `scripts/extract-web-prose.mjs` names the
