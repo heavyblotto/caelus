@@ -7,6 +7,12 @@
  * are pure string decomposition: they do not consult the graph, so a
  * returned id is a claim about the id's shape, not a guarantee the node
  * exists. Unknown formats return [].
+ *
+ * Cell-id shapes are a compatibility surface: the Encyclopedia widget
+ * system's plate registry and its "In the delineation corpus" link block
+ * both resolve through parseCellId (docs/product/encyclopedia-widgets-plan.md,
+ * "Existing data contracts"). Changing a cell-id shape in grid.ts means
+ * updating this parser and those consumers together.
  */
 import { slug } from "./ids.js";
 

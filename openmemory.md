@@ -53,6 +53,11 @@ carries the unreleased engine 0.25.0 source.
   committed `kb.json`, drift test, `parseAtomId`/`parseCellId` mapping
   atom and grid-cell ids to concept ids. Forward-pins engine 0.25 like the
   corpus.
+- Engine runtime `VERSION` export (`packages/caelus/src/version.ts`,
+  unreleased 0.25.0): string constant equal to `package.json` version,
+  asserted by `scripts/check-versions.mjs`. Exists so Encyclopedia figure
+  stamps never import package metadata into browser bundles. Version bumps
+  must touch both files or the check fails.
 - Embeddings pipeline (`packages/caelus-corpus/pipeline/embeddings/`): uv
   project, BGE-M3 1024-d on MPS, ~200 s for the full corpus. Outputs:
   gitignored `artifacts/embeddings/essays.parquet`, tracked
@@ -61,6 +66,29 @@ carries the unreleased engine 0.25.0 source.
   first body) and same-family mirror pairs (same unordered body pair +
   aspect): mirrors describe one sky event from swapped roles and repair
   on both sides does not move their similarity.
+
+- Encyclopedia widgets plan (`docs/product/encyclopedia-widgets-plan.md`,
+  2026-08-19): engine-driven interactive widgets and computed plates for
+  the Encyclopedia and Learning guides. Core commitments: a plate is a
+  widget's resting SSR render; every widget is a pure function of a
+  serializable `{ kind, params }` spec; instants always explicit; engine
+  version stamped on every figure and verified by a figure harness
+  (canonical-mode SVG hashes, CI-gated); plate registry built from an MDX
+  AST scan; site-wide reader's-chart context; `packages/widgets`
+  (caelus-widgets) layering hooks over hook-free `caelus-wheel`; plate
+  theme (ink on warm paper, oxblood single accent, per design direction
+  1a). Primary widget: `ChartDerivation`, a scrubbed sky-to-wheel morph
+  (stations `SKY · SPHERE · ECLIPTIC · HORIZON · WHEEL`) built on
+  `skyView` camera math. Engine-side additions ride the open 0.25.0
+  cycle (vector-mode projection exports, fisheye-to-orthographic radial
+  family, star-field quantities).
+- Widget-system compatibility surface (hold stable from the kb/corpus
+  side): `caelus-kb` node ids, `jsonld.ts` page export,
+  `artifacts/embeddings/neighbors.json`, the engine `VERSION` export, and
+  cell-id shapes as parsed by `parseCellId` (the plate registry and the
+  corpus-link block both resolve through it). Changing grid cell-id shapes
+  means updating `packages/kb/src/parse.ts` and the widget consumers
+  together.
 
 ## Patterns
 
@@ -80,7 +108,9 @@ carries the unreleased engine 0.25.0 source.
   reports, `register-sets.mjs`, build, root test, re-run embeddings (they
   go stale the moment texts change), then commit to dev. The B1/B2 wave
   (2026-08-19, eleven agents, 119 files) cleared its scope to zero
-  lexical findings.
+  lexical findings. The B3 review wave (2026-08-19, eleven body-sliced
+  reviewers over 60 files / 738 cells) plus mop-ups took all three
+  lexical backlogs to zero corpus-wide.
 - Semantic-echo repair (whole-essay paraphrase pairs from
   `backlog/semantic-echoes.md`): edit ONE side per pair, chosen so a shared
   member clears multiple pairs; re-anchor the edited essay in what is
@@ -90,3 +120,19 @@ carries the unreleased engine 0.25.0 source.
   Sentence-level lints (formula-cluster, cross-family-echo) still apply to
   the new prose: avoid joining existing opener clusters ("Twice a year the
   transiting Sun ...") and reusing sentence shapes from other families.
+- B3 review wave rulings (binding, `pipeline/wave-b3-review.md`): outer-planet
+  generational scope caveat in at most one cell per file, cut as a whole move
+  elsewhere; never state birth-year gaps or planet-cycle year figures; the
+  abstract soft-aspect beat ("a trine asks nothing") once per file, otherwise
+  recast in the entry's own material terms; composite-house
+  equal-from-midpoint-asc caveat lives in one prompt-named house per body
+  (Uranus: house 11). `check-slice.mjs` takes `<brief.json> <slice.json>`
+  with briefs in `pipeline/briefs/`.
+- B3 composite-house convention caveat (equal-from-midpoint-asc): per the
+  wave-b3 ruling each body's file carries the caveat in exactly one house
+  cell named by the wave prompt (e.g. Chiron house 5, true node house 1,
+  Venus house 7, Saturn house 2),
+  written in that entry's own terms; the move is cut wholesale from the
+  body's other house cells. Duration-disclaimer and soft-aspect hedges:
+  abstract version at most once per file, otherwise concrete in the
+  entry's own terms.
