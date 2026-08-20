@@ -8,7 +8,7 @@
   "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "node dist/test/plate.test.js && node dist/test/derivation.test.js && node dist/test/wheel-anatomy.test.js && node dist/test/house-comparator.test.js && node dist/test/zodiac-drift.test.js && node dist/test/aspect-dial.test.js && node dist/test/harness.test.js"
+    "test": "node dist/test/plate.test.js && node dist/test/derivation.test.js && node dist/test/wheel-anatomy.test.js && node dist/test/house-comparator.test.js && node dist/test/zodiac-drift.test.js && node dist/test/aspect-dial.test.js && node dist/test/retrograde-scrub.test.js && node dist/test/sect-flip.test.js && node dist/test/harness.test.js"
   },
   "license": "MIT",
   "peerDependencies": {
@@ -82,6 +82,22 @@
     "./aspect-dial-widget": {
       "types": "./dist/src/aspect-dial-widget.d.ts",
       "default": "./dist/src/aspect-dial-widget.js"
+    },
+    "./retrograde-scrub": {
+      "types": "./dist/src/retrograde-scrub.d.ts",
+      "default": "./dist/src/retrograde-scrub.js"
+    },
+    "./retrograde-scrub-widget": {
+      "types": "./dist/src/retrograde-scrub-widget.d.ts",
+      "default": "./dist/src/retrograde-scrub-widget.js"
+    },
+    "./sect-flip": {
+      "types": "./dist/src/sect-flip.d.ts",
+      "default": "./dist/src/sect-flip.js"
+    },
+    "./sect-flip-widget": {
+      "types": "./dist/src/sect-flip-widget.d.ts",
+      "default": "./dist/src/sect-flip-widget.js"
     },
     "./package.json": "./package.json"
   }

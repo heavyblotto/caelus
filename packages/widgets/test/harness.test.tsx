@@ -27,6 +27,8 @@ import { deriveAnatomy, WheelAnatomyFigure } from "../src/wheel-anatomy.js";
 import { deriveComparator, HouseComparatorFigure } from "../src/house-comparator.js";
 import { deriveDrift, DRIFT_MODES, ZodiacDriftFigure } from "../src/zodiac-drift.js";
 import { AspectDialFigure, deriveDial } from "../src/aspect-dial.js";
+import { deriveRetro, RetrogradeFigure } from "../src/retrograde-scrub.js";
+import { deriveSect, SectFlipFigure } from "../src/sect-flip.js";
 import { ANATOMY_LAYERS } from "../src/spec.js";
 import type { PlateRegistry, PlateRecord } from "../src/registry.js";
 
@@ -139,6 +141,33 @@ function renderPlate(rec: PlateRecord): Record<string, string> {
       return {
         [rec.id]: at(),
         [`${rec.id}@exact-opposition`]: at(aLon + 180),
+      };
+    }
+    case "retrograde-scrub": {
+      // The scrub hashes at rest and at the loop's two stations —
+      // the moments the widget exists to show.
+      const scene = deriveRetro(eng, spec.params);
+      const at = (cursor?: number): string =>
+        sha(renderToStaticMarkup(
+          <RetrogradeFigure scene={scene} cursor={cursor} />,
+        ));
+      return {
+        [rec.id]: at(),
+        [`${rec.id}@station-retrograde`]: at(scene.loop.sr),
+        [`${rec.id}@station-direct`]: at(scene.loop.sd),
+      };
+    }
+    case "sect-flip": {
+      // The flip hashes at rest and in the counterfactual mode.
+      const scene = deriveSect(eng, spec.params);
+      const at = (mode?: "day" | "night"): string =>
+        sha(renderToStaticMarkup(
+          <SectFlipFigure scene={scene} mode={mode} />,
+        ));
+      return {
+        [rec.id]: at(),
+        [`${rec.id}@day`]: at("day"),
+        [`${rec.id}@night`]: at("night"),
       };
     }
     default:

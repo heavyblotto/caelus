@@ -148,6 +148,10 @@ jobs:
       - run: node packages/widgets/dist/test/zodiac-drift.test.js
       # aspect dial: aspectarian within ceiling, readout vs engine, next-exact scan
       - run: node packages/widgets/dist/test/aspect-dial.test.js
+      # retrograde scrub: loop bracketing, unwrapped series, helio inset, rail snaps
+      - run: node packages/widgets/dist/test/retrograde-scrub.test.js
+      # sect flip: both lot sets, formula mirror, sect table, picker accent
+      - run: node packages/widgets/dist/test/sect-flip.test.js
       # figure harness: canonical SVG hashes per plate/station + version stamp
       - run: node packages/widgets/dist/test/harness.test.js
       # apps/web library units (timeline lanes, root-found transit spans)

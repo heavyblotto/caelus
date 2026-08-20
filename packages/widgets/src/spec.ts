@@ -121,12 +121,44 @@ export interface AspectDialSpec {
   params: AspectDialParams;
 }
 
+/** Params for the retrograde-scrub widget: the graphic ephemeris
+ *  through a station, the heliocentric overtake in an inset. The
+ *  instant anchors which loop is shown (the one containing it, else
+ *  the nearest); the place rides along for the uniform chart
+ *  contract (a retrograde is global). */
+export interface RetrogradeScrubParams extends ChartParams {
+  /** The body whose loop is shown; defaults to mercury. One of the
+   *  seven VSOP planets (mercury…neptune) — the inset draws the
+   *  heliocentric geometry, so the body needs its VSOP series. */
+  body?: string;
+}
+
+export interface RetrogradeScrubSpec {
+  kind: "retrograde-scrub";
+  params: RetrogradeScrubParams;
+}
+
+/** Params for the sect-flip widget: the day/night toggle flips the
+ *  Fortune and Spirit formulas and moves the lots on the wheel. The
+ *  plate rests at the chart's actual sect. */
+export interface SectFlipParams extends ChartParams {
+  /** Resting mode override; defaults to the chart's own day/night. */
+  mode?: "day" | "night";
+}
+
+export interface SectFlipSpec {
+  kind: "sect-flip";
+  params: SectFlipParams;
+}
+
 /** The discriminated union over every widget kind. */
 export type WidgetSpec =
   | DerivationSpec
   | WheelAnatomySpec
   | HouseComparatorSpec
   | ZodiacDriftSpec
-  | AspectDialSpec;
+  | AspectDialSpec
+  | RetrogradeScrubSpec
+  | SectFlipSpec;
 
 export type WidgetKind = WidgetSpec["kind"];

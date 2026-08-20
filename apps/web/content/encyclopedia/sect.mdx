@@ -1,0 +1,25 @@
+{/* Encyclopedia entry source (seed). See chart.mdx for the authoring
+    contract; the plate registry is built from these sources by
+    scripts/scan-plates.mjs. */}
+
+# Sect
+
+## Day charts and night charts
+
+Sect divides charts into day and night: the Sun above the horizon or
+below it. The Lots of Fortune and Spirit follow sect. By day,
+Fortune is the Ascendant plus the Moon minus the Sun, and Spirit
+reverses the formula; by night, the two formulas swap. The figure
+draws both lots on the wheel; the toggle flips the chart's sect and
+the lots move.
+
+<W
+  kind="sect-flip"
+  figure={1}
+  params={{
+    instant: { y: 1990, mo: 6, d: 10, h: 18, mi: 30, s: 0 },
+    place: { latDeg: 27.95, lonEastDeg: -82.46, label: "Tampa" },
+  }}
+  kb="technique:lots"
+  caption="The Lots of Fortune and Spirit at 10 June 1990, 18:30 UT, Tampa (27.95° N, 82.46° W), a day chart: the toggle flips the formulas and the lots move."
+/>
