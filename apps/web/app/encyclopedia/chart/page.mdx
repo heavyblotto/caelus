@@ -1,0 +1,54 @@
+{/* Encyclopedia entry source. The plate registry is built from these
+    sources by scripts/scan-plates.mjs; widget specs are authored inline
+    where the figure belongs. The EntryShell frame sets the kind mark,
+    title, and marginal contents; the RevisionStamp ends every entry. */}
+
+export const metadata = {
+  title: "Chart",
+  description:
+    "A chart is a diagram of the sky at one instant, from one place, flattened onto the ecliptic and turned so the eastern horizon sits at the left edge.",
+};
+
+<EntryShell kind="article" title="Chart">
+
+## The finished wheel
+
+A chart is a diagram of the sky at one instant, from one place, flattened
+onto the ecliptic and turned so the eastern horizon sits at the left edge.
+The figure below rests at the finished wheel; scrubbing it left unfolds the
+wheel back into the sky it came from.
+
+<W
+  kind="derivation"
+  figure={1}
+  params={{
+    instant: { y: 1990, mo: 6, d: 10, h: 18, mi: 30, s: 0 },
+    place: { latDeg: 27.95, lonEastDeg: -82.46, label: "Tampa" },
+    houseSystem: "placidus",
+    t: 1,
+  }}
+  caption="Chart for 10 June 1990, 18:30 UT, Tampa (27.95° N, 82.46° W), Placidus houses."
+  kb="chart-type:natal"
+/>
+
+## The anatomy of the wheel
+
+The same figure, taken apart. Five layers assemble the diagram: the
+horizon cross, the zodiac ring, the twelve house cusps, the bodies, and
+the aspect web between them. Each toggle adds or removes one layer, so
+the parts can be learned before any of them is interpreted.
+
+<W
+  kind="wheel-anatomy"
+  figure={2}
+  params={{
+    instant: { y: 1990, mo: 6, d: 10, h: 18, mi: 30, s: 0 },
+    place: { latDeg: 27.95, lonEastDeg: -82.46, label: "Tampa" },
+    houseSystem: "placidus",
+  }}
+  caption="The same chart in five layers: horizon cross, zodiac ring, house cusps, bodies, aspects. All layers shown."
+  kb="chart-type:natal"
+/>
+
+<RevisionStamp />
+</EntryShell>

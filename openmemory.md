@@ -92,6 +92,31 @@ decision (open decision 7). The design agent works on
 `feature/visual-design` and merges through the verified ritual: build,
 root test, `plates:scan --check`, widgets harness, push.
 
+Design stream, Encyclopedia page shell (2026-08-20, `feature/visual-design`):
+the app is split into two root layouts — site routes moved to
+`apps/web/app/(site)/` (URLs unchanged; `app/layout.tsx` is gone), and
+`apps/web/app/encyclopedia/` carries its own root layout, fonts (EB
+Garamond + IBM Plex Mono via next/font, variables `--font-ency-serif` /
+`--font-ency-mono`), and `encyclopedia.css` (the Plate tokens, the
+eight-step type scale, the parts styles). The five seed entries migrated
+from `content/encyclopedia/` to `app/encyclopedia/<slug>/page.mdx`
+wrapped in `EntryShell` (kind mark, title, aka, marginal contents rail);
+the registry scan read them unchanged at the new path (6 plates, `--check`
+green). Parts live in `apps/web/components/encyclopedia/` (Masthead,
+Colophon, EntryShell, EntryContents, EntryLink, KindMark, Infobox,
+Notes/NoteRef/NoteItem, RevisionStamp) and are registered for MDX in
+`mdx-components.tsx`. `apps/web/lib/encyclopedia.ts` reads the entry list
+and plate counts at build time. Two findings worth knowing: the design
+documents (`*.dc.html`, `support.js`) are excluded by `.git/info/exclude`
+and exist only in the maintainer's working tree — the plan's "maintainer
+commits them first" act is still pending; and `IntersectionObserver`
+`rootMargin` accepts only px/percent, never rem (a rem value there
+crashes production hydration while dev stays silent). Open decision 1
+(font loading) now has a concrete edge: plate components hardcode the
+literal family name `'IBM Plex Mono'`, which next/font's hashed families
+never satisfy, so plate chrome renders in the fallback mono stack until
+the decision lands.
+
 Local pipeline work (embeddings, library ingestion, text mining over
 the private store, Memorativa private fixtures) belongs to a fourth
 agent track, Cursor, on the maintainer's machine as of 2026-08-20:

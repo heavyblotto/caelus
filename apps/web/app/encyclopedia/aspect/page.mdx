@@ -1,0 +1,37 @@
+{/* Encyclopedia entry source. The plate registry is built from these
+    sources by scripts/scan-plates.mjs; widget specs are authored inline
+    where the figure belongs. The EntryShell frame sets the kind mark,
+    title, and marginal contents; the RevisionStamp ends every entry. */}
+
+export const metadata = {
+  title: "Aspect",
+  description:
+    "An aspect is an angle between two bodies measured along the ecliptic: conjunction, sextile, square, trine, opposition.",
+};
+
+<EntryShell kind="article" title="Aspect">
+
+## The angle between two bodies
+
+An aspect is an angle between two bodies measured along the ecliptic:
+conjunction, sextile, square, trine, opposition. The dial draws the
+aspect points from the first body's place and shades each orb zone;
+the arc from the nearest point to the second body is the orb. Drag
+the second body to re-read the angle, and move the orb rail to add
+and remove rows in the aspectarian.
+
+<W
+  kind="aspect-dial"
+  figure={1}
+  params={{
+    instant: { y: 1990, mo: 6, d: 10, h: 18, mi: 30, s: 0 },
+    place: { latDeg: 27.95, lonEastDeg: -82.46, label: "Tampa" },
+    a: "venus",
+    b: "neptune",
+    orb: 6,
+  }}
+  caption="Venus and Neptune on the dial at 10 June 1990, 18:30 UT, Tampa (27.95° N, 82.46° W): an applying trine, the orb arc from the trine point."
+/>
+
+<RevisionStamp />
+</EntryShell>

@@ -4,6 +4,7 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { SITE } from "../lib/site";
 import { listApiDocs } from "../lib/api-docs";
+import { listEntries } from "../lib/encyclopedia";
 
 // Next runs the build from apps/web, so source paths are resolved from here.
 const ROOT = process.cwd();
@@ -49,12 +50,21 @@ function gitDate(relPath: string): Date {
 
 /** Map a route to the source file whose history drives its freshness. */
 function sourceFor(route: string): string {
-  if (route === "") return "app/page.tsx";
+  if (route === "") return join("app", "(site)", "page.tsx");
   if (route === "/changelog") return join("..", "..", "CHANGELOG.md");
   if (route.startsWith("/docs/api/")) {
     return join("content", "api", `${route.slice("/docs/api/".length)}.md`);
   }
-  const base = join("app", route.slice(1));
+  // The Encyclopedia keeps its own root layout outside the (site) group.
+  if (route.startsWith("/encyclopedia")) {
+    const base = join("app", route.slice(1));
+    for (const ext of ["page.mdx", "page.tsx"]) {
+      const candidate = join(base, ext);
+      if (existsSync(join(ROOT, candidate))) return candidate;
+    }
+    return join(base, "page.tsx");
+  }
+  const base = join("app", "(site)", route.slice(1));
   for (const ext of ["page.mdx", "page.tsx"]) {
     const candidate = join(base, ext);
     if (existsSync(join(ROOT, candidate))) return candidate;
@@ -96,6 +106,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/docs/edge-cases",
     "/docs/api",
     ...listApiDocs().map((s) => `/docs/api/${s}`),
+    "/encyclopedia",
+    "/encyclopedia/index",
+    ...listEntries().map((e) => `/encyclopedia/${e.slug}`),
   ];
   return routes.map((path) => ({
     url: `${SITE.url}${path}`,

@@ -1,0 +1,553 @@
+/*
+ * Encyclopedia of Hermes — Plate direction (DS-02, direction 1a).
+ * Design source: docs/design/Encyclopedia Design System - Plate.dc.html.
+ *
+ * This sheet is the whole visual boundary: the Encyclopedia loads none of
+ * the developer site's CSS and shares no tokens with it. Two papers, one
+ * ink, one accent. Oxblood does one job: it marks the reader's current
+ * place and the apparatus that binds a claim to a source. Parts are frames
+ * and rules: no shadows, no rounded corners, no fills behind text.
+ *
+ * Fonts arrive as variables from next/font in ./layout.tsx:
+ * --font-ency-serif (EB Garamond) carries what a reader reads;
+ * --font-ency-mono (IBM Plex Mono) carries what a reader looks up.
+ */
+
+.ency {
+  --paper: #f7f3e9;
+  --plate: #fdfbf5;
+  --ink: #22201c;
+  --ink-2: #5a5548;
+  --ink-3: #8a8271;
+  --oxblood: #8c2f2a;
+  /* The plate frame's hairline is PLATE_TOKENS.rule (#c9c1af); section
+     rules sit one step lighter, derived rather than re-picked. */
+  --rule-mid: #c9c1af;
+  --rule-light: color-mix(in srgb, var(--rule-mid) 55%, var(--paper));
+
+  /* Type scale (the design's eight steps; px values at a 16px root). */
+  --ency-t-entry: 2.75rem;    /* entry title 44/1.05 */
+  --ency-t-page: 1.875rem;    /* page title 30/1.1 */
+  --ency-t-section: 0.9375rem;/* section 15, small caps on a rule */
+  --ency-t-lede: 1.15625rem;  /* lede 18.5/1.52 */
+  --ency-t-body: 1.15625rem;  /* body 18.5/1.52, measure 64–70ch */
+  --ency-t-apparatus: 0.875rem; /* captions, notes, infobox values 14/1.45 */
+  --ency-t-label: 0.625rem;   /* label 10, mono, .16em */
+  --ency-t-datum: 0.8125rem;  /* datum 13, mono */
+
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ency-serif), Georgia, "Times New Roman", serif;
+  font-size: var(--ency-t-body);
+  line-height: 1.52;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.ency ::selection {
+  background: color-mix(in srgb, var(--oxblood) 18%, var(--paper));
+}
+
+/* Focus is a rule, within the frames-and-rules vocabulary. */
+.ency :focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.ency a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-mid);
+  text-underline-offset: 0.15em;
+}
+.ency a:hover {
+  text-decoration-color: var(--ink);
+}
+
+/* ---- shared label and datum recipes ---- */
+.ency-label {
+  font-family: var(--font-ency-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--ency-t-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.ency-datum {
+  font-family: var(--font-ency-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--ency-t-datum);
+}
+
+/* ---- masthead ---- */
+.ency-masthead {
+  border-bottom: 2px solid var(--ink);
+  padding: 0.9rem 0 0.8rem;
+}
+.ency-masthead__inner {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+}
+.ency-masthead__site {
+  text-decoration: none;
+}
+.ency-masthead__title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.ency-masthead__nav {
+  margin-left: auto;
+  display: flex;
+  gap: 1.25rem;
+}
+.ency-masthead__nav a {
+  font-family: var(--font-ency-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--ency-t-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+.ency-masthead__nav a:hover {
+  color: var(--ink);
+}
+.ency-masthead__nav a[aria-current="page"] {
+  color: var(--oxblood);
+}
+
+/* ---- page grid: the apparatus lives in the margin ---- */
+.ency-main {
+  flex: 1 0 auto;
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0 3rem;
+}
+.ency-main--entry {
+  display: grid;
+  gap: 0 3rem;
+  grid-template-columns: 11rem minmax(0, 68ch);
+}
+@media (max-width: 60rem) {
+  .ency-main--entry {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* The marginal rail: contents of the entry in view. */
+.ency-rail {
+  display: none;
+}
+@media (min-width: 60rem) {
+  .ency-rail {
+    display: block;
+    padding-top: 0.35rem;
+  }
+}
+.ency-rail__nav {
+  position: sticky;
+  top: 2rem;
+}
+.ency-rail__nav ol {
+  list-style: none;
+  margin: 0.6rem 0 0;
+  padding: 0;
+}
+.ency-rail__nav li {
+  margin: 0.3rem 0;
+}
+.ency-rail__nav a {
+  color: var(--ink-2);
+  text-decoration: none;
+  font-size: var(--ency-t-apparatus);
+  line-height: 1.45;
+  display: block;
+}
+.ency-rail__nav a:hover {
+  color: var(--ink);
+}
+.ency-rail__nav a[aria-current="true"] {
+  color: var(--oxblood);
+}
+.ency-rail__sub {
+  padding-left: 1.1rem;
+}
+
+/* ---- article typography ---- */
+.ency-measure {
+  max-width: 68ch;
+}
+.ency-entry__header {
+  margin-bottom: 1.75rem;
+}
+.ency-entry__header h1 {
+  font-size: var(--ency-t-entry);
+  line-height: 1.05;
+  font-weight: 500;
+  margin: 0.5rem 0 0;
+  letter-spacing: 0.005em;
+}
+.ency-entry__aka {
+  font-size: var(--ency-t-apparatus);
+  color: var(--ink-2);
+  margin: 0.6rem 0 0;
+}
+.ency-lede {
+  font-size: var(--ency-t-lede);
+  line-height: 1.52;
+}
+/* The opening paragraph of an entry is its definition; it sets as the lede. */
+.ency-entry__header + p {
+  font-size: var(--ency-t-lede);
+  line-height: 1.52;
+}
+.ency-entry p {
+  margin: 0 0 1.1rem;
+}
+
+/* Section heads are small caps on a rule, numbered by the sheet so the
+   number cannot drift from the contents rail. */
+.ency-entry {
+  counter-reset: ency-sec;
+}
+.ency-entry h2 {
+  counter-increment: ency-sec;
+  counter-reset: ency-sub;
+  font-size: var(--ency-t-section);
+  font-variant-caps: small-caps;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  border-top: 1px solid var(--rule-light);
+  padding-top: 0.9rem;
+  margin: 2.4rem 0 1rem;
+}
+.ency-entry h2::before {
+  content: counter(ency-sec) ".\2002";
+  color: var(--ink-3);
+}
+.ency-entry h2.ency-plain {
+  counter-increment: none;
+}
+.ency-entry h2.ency-plain::before {
+  content: none;
+}
+.ency-entry h3 {
+  counter-increment: ency-sub;
+  font-size: var(--ency-t-section);
+  font-variant-caps: small-caps;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  margin: 1.8rem 0 0.7rem;
+}
+.ency-entry h3::before {
+  content: counter(ency-sec) "." counter(ency-sub) "\2002";
+  color: var(--ink-3);
+}
+
+.ency-entry ul, .ency-entry ol {
+  margin: 0 0 1.1rem;
+  padding-left: 1.4rem;
+}
+.ency-entry li {
+  margin: 0.3rem 0;
+}
+
+.ency-page-title {
+  font-size: var(--ency-t-page);
+  line-height: 1.1;
+  font-weight: 500;
+  margin: 0 0 1rem;
+}
+
+/* ---- parts ---- */
+
+/* Kind mark: the entry's kind, set in mono caps. */
+.ency-kind {
+  font-family: var(--font-ency-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--ency-t-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* Entry link: the title carries the link; the gloss follows in ink-2.
+   A gloss beginning "see" is a redirect and sets in italic. */
+.ency-entry-link {
+  text-decoration: none;
+}
+.ency-entry-link__title {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-mid);
+  text-underline-offset: 0.15em;
+}
+.ency-entry-link:hover .ency-entry-link__title {
+  text-decoration-color: var(--ink);
+}
+.ency-entry-link__gloss {
+  color: var(--ink-2);
+}
+.ency-entry-link__gloss--see {
+  font-style: italic;
+}
+
+/* Note marker: a bracketed number that resolves below the 2px rule. */
+.ency-noteref {
+  font-family: var(--font-ency-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.72em;
+  color: var(--oxblood);
+  text-decoration: none;
+  vertical-align: super;
+  line-height: 0;
+}
+.ency-noteref:hover {
+  text-decoration: underline;
+}
+.ency-notes {
+  border-top: 2px solid var(--ink);
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  font-size: var(--ency-t-apparatus);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.ency-notes ol {
+  margin: 0;
+  padding-left: 1.6rem;
+}
+.ency-notes li {
+  margin: 0.35rem 0;
+}
+.ency-notes li:target {
+  color: var(--ink);
+}
+
+/* Infobox: a framed panel on the plate ground; labels mono, values
+   apparatus. The knowledge-base node row sets in oxblood. */
+.ency-infobox {
+  border: 1px solid var(--rule-mid);
+  background: var(--plate);
+  margin: 0 0 1.5rem;
+  font-size: var(--ency-t-apparatus);
+  line-height: 1.45;
+}
+.ency-infobox__title {
+  border-bottom: 1px solid var(--rule-mid);
+  padding: 0.55rem 0.9rem;
+  font-weight: 500;
+}
+.ency-infobox__rows {
+  margin: 0;
+  padding: 0.35rem 0;
+}
+.ency-infobox__row {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 0.9rem;
+  padding: 0.3rem 0.9rem;
+}
+.ency-infobox__row dt {
+  font-family: var(--font-ency-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--ency-t-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding-top: 0.22em;
+}
+.ency-infobox__row dd {
+  margin: 0;
+  color: var(--ink);
+}
+.ency-infobox__row--node dd {
+  color: var(--oxblood);
+  font-family: var(--font-ency-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--ency-t-datum);
+}
+
+/* Revision stamp: every page ends with it. */
+.ency-stamp {
+  border-top: 2px solid var(--ink);
+  margin-top: 3rem;
+  padding-top: 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+  font-family: var(--font-ency-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--ency-t-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* ---- home ---- */
+.ency-hero {
+  padding: 3rem 0 2rem;
+}
+.ency-hero h1 {
+  font-size: var(--ency-t-entry);
+  line-height: 1.05;
+  font-weight: 500;
+  margin: 0.4rem 0 0.8rem;
+}
+.ency-hero__sub {
+  font-size: var(--ency-t-lede);
+  color: var(--ink-2);
+  max-width: 56ch;
+  margin: 0;
+}
+.ency-lookup {
+  display: flex;
+  gap: 0;
+  margin: 1.8rem 0 0;
+  max-width: 34rem;
+  border: 1px solid var(--rule-mid);
+  background: var(--plate);
+}
+.ency-lookup input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0.6rem 0.8rem;
+  font: inherit;
+  color: var(--ink);
+}
+.ency-lookup input:focus-visible {
+  outline: none;
+}
+.ency-lookup:focus-within {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+.ency-lookup button {
+  border: none;
+  border-left: 1px solid var(--rule-mid);
+  background: transparent;
+  padding: 0 1rem;
+  cursor: pointer;
+  font-family: var(--font-ency-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--ency-t-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.ency-lookup button:hover {
+  color: var(--ink);
+}
+
+/* Stats: hairline-divided cells; the number is mono because it is a
+   measurement. */
+.ency-stats {
+  display: flex;
+  border-top: 1px solid var(--rule-light);
+  border-bottom: 1px solid var(--rule-light);
+  margin: 2.5rem 0;
+}
+.ency-stats__cell {
+  padding: 0.9rem 2rem 0.9rem 0;
+  margin-right: 2rem;
+  border-right: 1px solid var(--rule-light);
+}
+.ency-stats__cell:last-child {
+  border-right: none;
+}
+.ency-stats__n {
+  font-family: var(--font-ency-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 1.625rem;
+  line-height: 1.1;
+  color: var(--ink);
+  display: block;
+}
+.ency-stats__l {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+/* ---- index ---- */
+.ency-letters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.7rem;
+  margin: 1.4rem 0 2rem;
+  font-family: var(--font-ency-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--ency-t-datum);
+}
+.ency-letters a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.ency-letters a:hover {
+  text-decoration: underline;
+}
+.ency-letters .ency-letters__dead {
+  color: var(--ink-3);
+}
+.ency-indexlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ency-indexlist li {
+  margin: 0.45rem 0;
+}
+.ency-indexlist__letter {
+  border-top: 1px solid var(--rule-light);
+  padding-top: 0.9rem;
+  margin-top: 2rem;
+}
+
+/* ---- colophon ---- */
+.ency-colophon {
+  border-top: 2px solid var(--ink);
+  padding: 1.6rem 0 2.2rem;
+  font-size: var(--ency-t-apparatus);
+  color: var(--ink-2);
+  line-height: 1.45;
+}
+.ency-colophon__inner {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.ency-colophon p {
+  max-width: 68ch;
+  margin: 0 0 0.8rem;
+}
+.ency-colophon__stamp {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+  margin-top: 1.2rem;
+  font-family: var(--font-ency-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--ency-t-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* Skip link, in the page's own ink. */
+.ency-skip {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 200;
+  transform: translateY(-180%);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.5rem 0.9rem;
+  font-family: var(--font-ency-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--ency-t-datum);
+  text-decoration: none;
+}
+.ency-skip:focus {
+  transform: translateY(0);
+}

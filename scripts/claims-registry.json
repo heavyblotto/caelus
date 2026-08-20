@@ -71,13 +71,13 @@
       "competing": "(\\b\\d+|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen) house systems",
       "appearsIn": [
         "apps/web/lib/facts-anchors.generated.ts",
-        "apps/web/app/docs/data-tiers/page.mdx",
+        "apps/web/app/(site)/docs/data-tiers/page.mdx",
         "python/README.md"
       ],
       "competingIn": [
-        "apps/web/app/provenance/page.tsx",
-        "apps/web/app/features/page.tsx",
-        "apps/web/app/validation/page.tsx",
+        "apps/web/app/(site)/provenance/page.tsx",
+        "apps/web/app/(site)/features/page.tsx",
+        "apps/web/app/(site)/validation/page.tsx",
         "packages/caelus/README.md",
         "llms.txt",
         "apps/web/public/llms.txt"
@@ -88,8 +88,8 @@
       "eachOf": true,
       "source": "accuracy.lists.house_systems",
       "appearsIn": [
-        "apps/web/app/features/page.tsx",
-        "apps/web/app/docs/houses-and-zodiacs/page.mdx"
+        "apps/web/app/(site)/features/page.tsx",
+        "apps/web/app/(site)/docs/houses-and-zodiacs/page.mdx"
       ]
     },
     {
@@ -104,7 +104,7 @@
       "competing": "(\\b\\d+|six|seven|eight|nine|ten|eleven|twelve) (sidereal|ayanamsa)",
       "appearsIn": [
         "apps/web/lib/facts-anchors.generated.ts",
-        "apps/web/app/docs/data-tiers/page.mdx",
+        "apps/web/app/(site)/docs/data-tiers/page.mdx",
         "ROADMAP.md",
         "python/README.md"
       ]
@@ -121,11 +121,11 @@
         "packages/caelus/src/ranges.ts",
         "llms.txt",
         "apps/web/public/llms.txt",
-        "apps/web/app/docs/data-tiers/page.mdx",
-        "apps/web/app/docs/edge-cases/page.mdx",
+        "apps/web/app/(site)/docs/data-tiers/page.mdx",
+        "apps/web/app/(site)/docs/edge-cases/page.mdx",
         "apps/web/components/FAQ.tsx",
-        "apps/web/app/features/page.tsx",
-        "apps/web/app/validation/page.tsx",
+        "apps/web/app/(site)/features/page.tsx",
+        "apps/web/app/(site)/validation/page.tsx",
         "packages/caelus/README.md"
       ]
     },
@@ -138,8 +138,8 @@
       ],
       "competing": "\\b3\\d\\d fixed stars\\b|\\b3\\d\\d-star",
       "appearsIn": [
-        "apps/web/app/features/page.tsx",
-        "apps/web/app/docs/data-tiers/page.mdx",
+        "apps/web/app/(site)/features/page.tsx",
+        "apps/web/app/(site)/docs/data-tiers/page.mdx",
         "llms.txt",
         "apps/web/public/llms.txt"
       ]
@@ -154,9 +154,9 @@
       ],
       "competing": "~([5-9]\\d|1[0-4]\\d) KB(?=[^\\n]{0,30}(total|gz))",
       "appearsIn": [
-        "apps/web/app/page.tsx",
-        "apps/web/app/docs/data-tiers/page.mdx",
-        "apps/web/app/provenance/page.tsx",
+        "apps/web/app/(site)/page.tsx",
+        "apps/web/app/(site)/docs/data-tiers/page.mdx",
+        "apps/web/app/(site)/provenance/page.tsx",
         "llms.txt",
         "apps/web/public/llms.txt",
         "README.md",
@@ -173,7 +173,7 @@
       ],
       "competing": "~[3-9](\\.\\d)? KB\\b",
       "appearsIn": [
-        "apps/web/app/page.tsx"
+        "apps/web/app/(site)/page.tsx"
       ]
     },
     {
@@ -192,7 +192,7 @@
       "competing": "(twenty|thirty|forty|fifty)-[a-z]+[^a-z\\n]{0,12}tools\\b|\\b\\d{2}[^0-9\\n]{0,12}(chart |MCP )?tools\\b|\\b\\d{2}-tool\\b",
       "appearsIn": [
         "apps/web/lib/facts-anchors.generated.ts",
-        "apps/web/app/docs/mcp/page.mdx",
+        "apps/web/app/(site)/docs/mcp/page.mdx",
         "llms.txt",
         "apps/web/public/llms.txt",
         "packages/caelus-mcp/README.md",

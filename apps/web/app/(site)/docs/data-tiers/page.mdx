@@ -1,0 +1,153 @@
+import { pageMetadata } from "../../../../lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Data Tiers",
+  description: "Embedded data for the browser versus the Node loader for extended bodies and fixed stars.",
+  path: "/docs/data-tiers",
+});
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Data Tiers
+
+The engine is given its ephemeris data explicitly. Two suppliers ship with the
+package: the **embedded** dataset for the browser and edge, and the **Node
+loader** for the extended packs. The hosted [REST demo](/api/chart?lat=27.94&lon=-82.46)
+and [MCP server](/docs/mcp) build on these two.
+
+## What runs where
+
+| Capability | Embedded (browser, edge) | Node loader | REST `/api/chart` | MCP (`caelus-mcp`) |
+| --- | :---: | :---: | :---: | :---: |
+| Core bodies (Sun–Pluto, Chiron, nodes) | ✓ | ✓ | ✓ | ✓ |
+| Houses (12 systems), angles, aspects | ✓ | ✓ | Placidus | ✓ |
+| Tropical + 7 sidereal ayanamsas | ✓ | ✓ | tropical | ✓ |
+| Derived charts (returns, progressions, …) | ✓ | ✓ | — | transits, synastry |
+| Extended bodies (asteroids, Uranian points) | — | ✓ | — | ✓ |
+| Fixed stars (319-star catalog) | ✓ | ✓ | ✓ | ✓ |
+| Deep star field (8,920 stars to mag 6.5, opt-in) | — | ✓ | — | ✓ (`sky_view` `deep_field`) |
+| Event search (rise/set, crossings, phases, stations) | — | ✓ | — | ✓ |
+| Eclipses (solar, lunar) | — | ✓ | — | ✓ |
+| Data on disk | none (bundled) | JSON packs (precise Moon ~3.1 MB + catalogs) | none (edge) | JSON packs (Node) |
+| Date range | 1000–3000¹ | −2998–3000² | 1000–3000 | −2998–3000² |
+| Accuracy | per body, see [Validation](/validation) | per body, see [Validation](/validation) | per body | per body |
+
+<Note>
+  ¹ The planets, Pluto, and the Moon validate 1000–3000; the small bodies
+  (asteroids + Chiron) span 1600–2484, the widest window Horizons serves for
+  them. The embedded dataset computes everything from the bodies it bundles;
+  the Node tier adds the data the extended features were validated against.
+  Anything pure-arithmetic on positions, such as derived charts and sidereal
+  shifts, runs in any tier, including the browser. See <a href="/docs/edge-cases">Edge Cases &amp; Stability</a> for the
+  out-of-range and missing-pack behaviour.
+</Note>
+
+<Note>
+  ² The classical era slabs extend the Sun, Moon, Mercury, Venus, Mars,
+  Jupiter, and Saturn from 3000 BCE to 1000 CE, each adjoining its modern
+  pack at one shared instant and validated against JPL Horizons at epochs the
+  fit never sampled. Uranus, Neptune, Pluto, and the small bodies have no
+  classical pack and keep their modern spans; at ancient dates they are listed
+  in `chart.unavailable`.
+</Note>
+
+## Embedded (browser, edge)
+
+`caelus/data-embedded` bundles a compact dataset: the eight planets, the Moon,
+Pluto, Chiron, the nodes, and the HYG fixed-star catalog (~13 KB gzipped of the
+~153 KB total), with the core house systems and aspects. This is what runs
+client-side and on edge runtimes, with no files on disk.
+
+<CodeBlock
+  lang="typescript"
+  label="embedded.ts"
+  code={`import { Engine } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);`}
+/>
+
+## Node loader (extended)
+
+`loadNodeData` reads the larger JSON packs from disk: Horizons/DE441 Chebyshev
+packs for every planet plus Earth, Pluto, the Moon, Chiron, and the asteroids,
+which supersede the embedded VSOP87D / analytic series wherever they load.
+These are the packs that carry the validated 1000–3000 range (small bodies
+1600–2484). The loader also picks up **era slabs** (`{body}_cheb.classical.json`
+beside each modern pack), which extend the classical seven (Sun via Earth's
+slab, Moon, Mercury, Venus, Mars, Jupiter, Saturn) from 3000 BCE to the modern
+packs' shared 1000 CE boundary, resolving each instant from whichever slab
+covers it. The Uranian points and fixed stars ship too; the Node loader reads
+the same fixed-star catalog from disk when you load extended packs. Use the
+Node tier when you need extended bodies, event search, or the wide range.
+
+<CodeBlock
+  lang="typescript"
+  label="node.ts"
+  code={`import { Engine } from "caelus";
+import { loadNodeData } from "caelus/node";
+
+const engine = new Engine(loadNodeData());
+const star = engine.fixedStar("Aldebaran", jd);`}
+/>
+
+<Note>
+  If a pack is missing, <code>loadNodeData</code> falls back per body to the
+  embedded tier rather than throwing. Packs are versioned JSON build outputs
+  with documented <a href="/provenance">provenance</a>.
+</Note>
+
+## Turbo (bulk longitude scans)
+
+For century-scale work that evaluates a longitude tens of thousands of times (a
+long transit scan, a returns sweep), the `Turbo` tier trades generality for
+speed. A turbo pack is a segmented Chebyshev representation of the engine's own
+apparent longitude, fit to the engine itself, so one evaluation is a couple of
+dozen multiply-adds. The pack is data you mint for your range and bodies; the
+runtime evaluator does no I/O and needs no engine.
+
+<CodeBlock
+  lang="typescript"
+  label="turbo.ts"
+  code={`import { Turbo } from "caelus";
+
+// pack: a TurboPack you minted for your range/bodies (python/fit_turbo.py).
+const turbo = new Turbo(pack);
+turbo.has("mars");            // is this body in the pack?
+turbo.longitude("mars", jd);  // apparent longitude (degrees), within [jd0, jd1]`}
+/>
+
+<Note>
+  Turbo returns longitude only: no latitude, distance, houses, or aspects. Use
+  it to find candidate instants fast, then read the full position from the
+  engine at those instants. It throws outside the pack's fitted range.
+</Note>
+
+## Bundle sizes
+
+The choice between client-side and server-side computation comes down to one
+number: the embedded dataset. The engine code tree-shakes small (a chart-only
+import drops event search, eclipses, the query and turbo tiers, and the derived
+and electional layers); the weight a browser pays is the coefficient data it
+bundles.
+
+| What you ship | Approx. gzipped | Notes |
+| --- | :---: | --- |
+| Embedded dataset (`caelus/data-embedded`) | ~153 KB | planets, Moon series, Pluto, Chiron, nutation, fixed-star catalog; full client-side charts |
+| Precise Moon tier (`caelus/node`) | ~750 KB | ~1.7 MB on disk; **lazy**, never in the initial bundle |
+| `caelus-wheel` | a few KB | React is a peer dependency, not bundled |
+| `caelus-birth` | small code, plus IANA timezone data | the timezone data is the weight, not the resolver |
+| `caelus-mcp` | server-side | not a browser bundle |
+
+So: ship `caelus` + `caelus/data-embedded` for full charts in the browser (the
+data dominates, the code is a small addition on top of your app), or compute
+server-side through the [REST endpoint](/api/chart?lat=27.94&lon=-82.46) or the
+[MCP server](/docs/mcp) and ship only `caelus-wheel` to render the result.
+
+<Note>
+  Exact per-import figures (minified, gzipped, and brotli) come from
+  <code>npm run bundle-sizes</code>, which bundles each entrypoint with esbuild
+  the way an app bundler would. Regenerate it after anything that moves the
+  package surface; the numbers above are the data tiers, which dominate and do
+  not tree-shake.
+</Note>

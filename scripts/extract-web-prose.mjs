@@ -9,15 +9,17 @@ import { join, relative } from "node:path";
 
 const root = join(import.meta.dirname, "..");
 const files = [
-  "apps/web/app/page.tsx",
-  "apps/web/app/notes/page.tsx",
-  "apps/web/app/provenance/page.tsx",
-  "apps/web/app/validation/page.tsx",
-  "apps/web/app/methods/page.tsx",
-  "apps/web/app/how-it-was-built/page.tsx",
-  "apps/web/app/features/page.tsx",
-  "apps/web/app/playground/page.tsx",
-  "apps/web/app/privacy/page.tsx",
+  "apps/web/app/(site)/page.tsx",
+  "apps/web/app/(site)/notes/page.tsx",
+  "apps/web/app/(site)/provenance/page.tsx",
+  "apps/web/app/(site)/validation/page.tsx",
+  "apps/web/app/(site)/methods/page.tsx",
+  "apps/web/app/(site)/how-it-was-built/page.tsx",
+  "apps/web/app/(site)/features/page.tsx",
+  "apps/web/app/(site)/playground/page.tsx",
+  "apps/web/app/(site)/privacy/page.tsx",
+  "apps/web/app/encyclopedia/page.tsx",
+  "apps/web/app/encyclopedia/index/page.tsx",
   // Component copy: the playground's Reading panel and compare surfaces
   // carry full user-facing sentences, not just labels.
   "apps/web/components/SkyNow.tsx",
@@ -57,11 +59,11 @@ for (const file of files) {
 // and as sentence fragments. What survives is the paragraph text, which is what
 // the voice rules are meant to see.
 const mdxFiles = [
-  ...globSync("apps/web/app/docs/**/page.mdx", { cwd: root }),
+  ...globSync("apps/web/app/(site)/docs/**/page.mdx", { cwd: root }),
   // Encyclopedia entry sources: captions and entry prose pass the same
   // voice gate as the rest of the site (the widgets plan's verification
   // contract).
-  ...globSync("apps/web/content/encyclopedia/**/*.mdx", { cwd: root }),
+  ...globSync("apps/web/app/encyclopedia/**/page.mdx", { cwd: root }),
 ].sort();
 
 for (const file of mdxFiles) {

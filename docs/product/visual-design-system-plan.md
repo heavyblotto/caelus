@@ -118,6 +118,13 @@ unrouted at `apps/web/content/encyclopedia/`.
    already walks `app/encyclopedia/*/page.mdx` the moment it exists;
    the seed entries migrate from `content/encyclopedia/` without
    touching the registry pipeline.
+   *Landed 2026-08-20 (scaffold): the route-group split (site routes
+   under `app/(site)/`, the Encyclopedia on its own root layout), the
+   theme sheet, masthead/colophon, home and index surfaces, the parts
+   components, and the five seeds migrated. Still open inside the item:
+   the KB-fed infobox wiring (corpus stream's kb-consumers), the search
+   surface, the Contents/Glossary/Sources pages, and the 1b/1c
+   apparatus blocks.*
 2. **Fonts.** Loading EB Garamond and IBM Plex Mono (strategy is an
    open decision below). The Encyclopedia shares nothing visually with
    the developer site.

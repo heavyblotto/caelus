@@ -32,7 +32,7 @@ const kinds = [...union[1].matchAll(/"([a-zA-Z]+)"/g)].map((m) => m[1]);
 // --- every doc that writes the union out by hand
 const DOCS = [
   "docs/interpretation-layer.md",
-  "apps/web/app/docs/interpretation/page.mdx",
+  "apps/web/app/(site)/docs/interpretation/page.mdx",
 ];
 
 for (const path of DOCS) {
