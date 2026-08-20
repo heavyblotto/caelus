@@ -1,6 +1,6 @@
 # Design system documents
 
-Unpacked from the maintainer's `design-system.zip` (2026-08-19). The
+Unpacked from `design-system.zip` (2026-08-19). The
 `.dc.html` files are self-contained design documents; `support.js` is
 their shared viewer script. Open them in a browser.
 
