@@ -9,9 +9,8 @@
  */
 import { useEffect, useState } from "react";
 import type { Engine } from "caelus";
-import {
-  WheelAnatomy, type AnatomyScene,
-} from "caelus-widgets/wheel-anatomy";
+import { WheelAnatomy } from "caelus-widgets/wheel-anatomy-widget";
+import type { AnatomyScene } from "caelus-widgets/wheel-anatomy";
 import { useReaderChart } from "../ReaderChartContext";
 
 let enginePromise: Promise<Engine> | null = null;

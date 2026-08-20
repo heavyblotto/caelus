@@ -11,9 +11,8 @@
  */
 import { useEffect, useState } from "react";
 import type { Engine } from "caelus";
-import {
-  ChartDerivation, type DerivationScene,
-} from "caelus-widgets/derivation";
+import { ChartDerivation } from "caelus-widgets/derivation-widget";
+import type { DerivationScene } from "caelus-widgets/derivation";
 import { useReaderChart } from "../ReaderChartContext";
 
 // One browser engine for every plate on the page.

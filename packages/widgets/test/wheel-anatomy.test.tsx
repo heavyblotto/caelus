@@ -11,8 +11,9 @@ import { Engine, VERSION } from "caelus";
 import { loadNodeData } from "caelus/node";
 import { ChartWheel, PLATE_THEME } from "caelus-wheel";
 import {
-  deriveAnatomy, WheelAnatomy, WheelAnatomyFigure,
+  deriveAnatomy, WheelAnatomyFigure,
 } from "../src/wheel-anatomy.js";
+import { WheelAnatomy } from "../src/wheel-anatomy-widget.js";
 import { ANATOMY_LAYERS, type WheelAnatomySpec } from "../src/spec.js";
 
 let checks = 0;

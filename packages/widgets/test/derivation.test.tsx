@@ -11,8 +11,9 @@ import { dirname, join } from "node:path";
 import { createRequire } from "node:module";
 import { Engine, dirFromAzAlt, unitVector, VERSION, type Vec3 } from "caelus";
 import { loadNodeData } from "caelus/node";
+import { ChartDerivation } from "../src/derivation-widget.js";
 import {
-  deriveScene, DerivationFigure, ChartDerivation, DERIVATION_STATIONS,
+  deriveScene, DerivationFigure, DERIVATION_STATIONS,
 } from "../src/derivation.js";
 import type { DerivationParams } from "../src/spec.js";
 

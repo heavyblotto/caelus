@@ -15,19 +15,15 @@
  * harness (the hash). The layer set is the whole widget state.
  */
 import type { ReactElement } from "react";
-import { useState } from "react";
 import { VERSION, type Engine } from "caelus";
 import {
-  ChartWheel, PLATE_THEME, PLATE_TOKENS,
+  ChartWheel, PLATE_THEME,
   type WheelChart, type WheelLayers,
 } from "caelus-wheel";
 import { wheelPayload } from "./payload.js";
 import {
   ANATOMY_LAYERS, type AnatomyLayer, type WheelAnatomyParams,
 } from "./spec.js";
-
-const MONO =
-  "'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace";
 
 // ------------------------------------------------------------------ scene
 
@@ -94,66 +90,7 @@ export function WheelAnatomyFigure({
   );
 }
 
-// ----------------------------------------------------------------- widget
-
-export interface WheelAnatomyProps {
-  scene: AnatomyScene;
-  size?: number;
-}
-
-/**
- * The interactive widget: the figure plus a toggle rail beneath the
- * frame, in apparatus style (a 1px rule, mono small-caps labels, no
- * fills). A layer that is on prints in ink, off in faint ink with a
- * strike — state shown as a rule, not a fill. The server render at the
- * resting layers is the plate; hydration attaches the toggles and
- * changes nothing above.
- */
-export function WheelAnatomy({
-  scene, size,
-}: WheelAnatomyProps): ReactElement {
-  const [on, setOn] = useState<AnatomyLayer[]>(
-    () => [...(scene.params.layers ?? ANATOMY_LAYERS)],
-  );
-  const has = new Set(on);
-  const toggle = (l: AnatomyLayer) =>
-    setOn(has.has(l) ? on.filter((x) => x !== l) : [...on, l]);
-  return (
-    <div>
-      <WheelAnatomyFigure scene={scene} layers={on} size={size} />
-      <div
-        style={{
-          marginTop: "8px",
-          borderTop: `1px solid ${PLATE_TOKENS.rule}`,
-          paddingTop: "6px",
-          fontFamily: MONO,
-          userSelect: "none",
-        }}
-      >
-        {ANATOMY_LAYERS.map((l) => (
-          <button
-            key={l}
-            type="button"
-            aria-pressed={has.has(l)}
-            onClick={() => toggle(l)}
-            style={{
-              background: "none",
-              border: "none",
-              padding: 0,
-              marginRight: "16px",
-              fontFamily: MONO,
-              fontSize: "10px",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: has.has(l) ? PLATE_TOKENS.ink : PLATE_TOKENS.faintInk,
-              textDecoration: has.has(l) ? "none" : "line-through",
-              cursor: "pointer",
-            }}
-          >
-            {l}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
+// The interactive widget (WheelAnatomy) lives in
+// wheel-anatomy-widget.tsx: it calls hooks, and this module must stay
+// importable from React Server Components (the plate render and the
+// registry harness), so the client-only surface is its own subpath.
