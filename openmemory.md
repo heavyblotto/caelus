@@ -36,10 +36,12 @@ carries the unreleased engine 0.25.0 source.
 
 ## Session plan
 
-The governing task plan for the corpus/Encyclopedia build lives at
-`~/.cursor/plans/corpus_scope_and_wiring_72c4cd8e.plan.md`. Read it at
-session start and after any context compaction; keep its todo statuses
-current. Engine releases are maintainer-only and are never plan items.
+The maintainer's working plan for the corpus/Encyclopedia build lives
+at `~/.cursor/plans/corpus_scope_and_wiring_72c4cd8e.plan.md`. Read it
+at session start and after any context compaction; keep its todo
+statuses current. Maintainer decisions on record there: releases
+belong to the maintainer; agents do not write rules, scope, phases, or
+normative language into project docs.
 
 ## User Defined Namespaces
 - [Leave blank - user populates]
@@ -63,8 +65,9 @@ current. Engine releases are maintainer-only and are never plan items.
 - Engine runtime `VERSION` export (`packages/caelus/src/version.ts`,
   unreleased 0.25.0): string constant equal to `package.json` version,
   asserted by `scripts/check-versions.mjs`. Exists so Encyclopedia figure
-  stamps never import package metadata into browser bundles. Version bumps
-  must touch both files or the check fails.
+  stamps can name the engine without importing package metadata into
+  browser bundles. The check fails unless a version bump lands in both
+  files.
 - Embeddings pipeline (`packages/caelus-corpus/pipeline/embeddings/`): uv
   project, BGE-M3 1024-d on MPS, ~200 s for the full corpus. Outputs:
   gitignored `artifacts/embeddings/essays.parquet`, tracked
@@ -140,12 +143,12 @@ current. Engine releases are maintainer-only and are never plan items.
   `SalienceWeights` field + default, emission block, selector, both doc
   pages' `kind` list (check-docs), CHANGELOG Unreleased, and a recompute
   golden in `test/golden.test.ts`.
-- New astrology/technical vocabulary must be added to
-  `styles/config/vocabularies/Caelus/accept.txt` or Vale fails the prose
-  gate.
-- Repair waves: disjoint file scopes per agent, text-only edits (never id,
-  family, when, atomIds), per-file self-check via `check-texts.mjs` and
-  `check-family.mjs`, agents never commit. Landing = regenerate backlog
+- Vale fails the prose gate on new astrology/technical vocabulary until
+  it is added to `styles/config/vocabularies/Caelus/accept.txt`.
+- Repair waves: disjoint file scopes per agent; edits touch text only
+  (id, family, when, atomIds stay as they are); per-file self-check via
+  `check-texts.mjs` and `check-family.mjs`; commits stay with the
+  orchestrator. Landing = regenerate backlog
   reports, `register-sets.mjs`, build, root test, re-run embeddings (they
   go stale the moment texts change), then commit to dev. The B1/B2 wave
   (2026-08-19, eleven agents, 119 files) cleared its scope to zero
@@ -170,7 +173,7 @@ current. Engine releases are maintainer-only and are never plan items.
   transiting Sun ...") and reusing sentence shapes from other families.
 - B3 review wave rulings (binding, `pipeline/wave-b3-review.md`): outer-planet
   generational scope caveat in at most one cell per file, cut as a whole move
-  elsewhere; never state birth-year gaps or planet-cycle year figures; the
+  elsewhere; the ruling bars birth-year gaps and planet-cycle year figures; the
   abstract soft-aspect beat ("a trine asks nothing") once per file, otherwise
   recast in the entry's own material terms; composite-house
   equal-from-midpoint-asc caveat lives in one prompt-named house per body

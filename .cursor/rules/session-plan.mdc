@@ -2,15 +2,22 @@
 alwaysApply: true
 ---
 
-# Session plan anchor
+# Session plan pointer
 
-The governing task plan for the corpus/Encyclopedia build lives at
-`~/.cursor/plans/corpus_scope_and_wiring_72c4cd8e.plan.md`.
+The maintainer's working plan for the corpus/Encyclopedia build lives
+at `~/.cursor/plans/corpus_scope_and_wiring_72c4cd8e.plan.md`. Re-read
+it after any context summarization, and keep its statuses current as
+work lands.
 
-- Read it before claiming anything about plan contents or status, and
-  re-read it after any context summarization/compaction.
-- Keep its todo statuses current as work lands.
-- Engine releases (version bumps, tags, publishes) are maintainer-only
-  and are never plan items or agent tasks.
-- If asked whether a context handoff is needed, do not give assurances
-  beyond what these anchors actually guarantee.
+Maintainer instructions on record (the maintainer's decisions, quoted
+here so they survive context loss — not the agent's rules):
+
+- Releases belong to the maintainer alone. Agents do not bump, tag,
+  or publish.
+- Agents do not decide scope and do not write rules, gates, phases,
+  project management, level-of-effort, principles, or edicts into the
+  project docs. Docs describe; the maintainer decides.
+- Normative language (must / never / always) is not the agent's to
+  use in project artifacts or in reporting.
+- Assurances about context handoffs are not to be given beyond what
+  recorded anchors actually guarantee.
