@@ -166,10 +166,74 @@ eq(
   ["chart-type:composite", "body:venus", "house:7"], "composite house cell",
 );
 
+console.log("cell ids: B5 grid");
+eq(
+  parseCellId("natal:lot:fortune:sign:taurus"),
+  ["chart-type:natal", "lot:fortune", "sign:taurus"], "lot in sign",
+);
+eq(
+  parseCellId("natal:lot:spirit:house:10"),
+  ["chart-type:natal", "lot:spirit", "house:10"], "lot in house",
+);
+eq(
+  parseCellId("natal:dispositor:final:mercury"),
+  ["chart-type:natal", "body:mercury"], "final dispositor",
+);
+eq(
+  parseCellId("natal:reception:domicile"),
+  ["chart-type:natal", "dignity:domicile"], "reception by domicile",
+);
+eq(
+  parseCellId("natal:reception:exaltation"),
+  ["chart-type:natal", "dignity:exaltation"], "reception by exaltation",
+);
+eq(
+  parseCellId("natal:reception:domicile-exaltation"),
+  ["chart-type:natal", "dignity:domicile", "dignity:exaltation"], "mixed reception",
+);
+eq(
+  parseCellId("natal:reception:body:venus"),
+  ["chart-type:natal", "body:venus"], "reception body",
+);
+eq(parseCellId("natal:star:regulus"), ["chart-type:natal", "star:regulus"], "star");
+eq(
+  parseCellId("natal:star:deneb-algedi"),
+  ["chart-type:natal", "star:deneb-algedi"], "star (multi-word catalog name)",
+);
+eq(
+  parseCellId("natal:star:algol:mars"),
+  ["chart-type:natal", "star:algol", "body:mars"], "star contact",
+);
+eq(
+  parseCellId("natal:parallel:moon:chiron"),
+  ["chart-type:natal", "body:moon", "body:chiron"], "parallel",
+);
+eq(
+  parseCellId("vedic:moon:nakshatra:purva-phalguni"),
+  ["body:moon", "nakshatra:purva-phalguni"], "moon nakshatra",
+);
+eq(
+  parseCellId("vedic:moon:nakshatra:rohini:pada:2"),
+  ["body:moon", "nakshatra:rohini"], "nakshatra pada",
+);
+eq(
+  parseCellId("vedic:varga:d9:venus:pisces"),
+  ["varga:d9", "body:venus", "sign:pisces"], "navamsa placement",
+);
+eq(parseCellId("vedic:varga:frame:d30"), ["varga:d30"], "varga frame");
+eq(parseCellId("vedic:yoga:gajakesari"), ["yoga:gajakesari"], "yoga");
+eq(parseCellId("vedic:yoga:budha-aditya"), ["yoga:budha-aditya"], "yoga (hyphenated name)");
+
 console.log("cell ids: unknown formats");
 eq(parseCellId(""), [], "empty");
 eq(parseCellId("horary:mars:sign:aries"), [], "unknown namespace");
 eq(parseCellId("natal:mars:flavor:spicy"), [], "unknown natal shape");
+eq(parseCellId("vedic:yoga:kemadruma"), [], "yoga without a KB node");
+eq(parseCellId("vedic:yoga:raja"), [], "yoga framing cell (no KB node)");
+eq(parseCellId("vedic:yoga:dhana"), [], "yoga framing cell (no KB node)");
+eq(parseCellId("natal:reception:mutual"), [], "unknown reception route");
+eq(parseCellId("vedic:moon:nakshatra:rohini:pada"), [], "truncated pada cell");
+eq(parseCellId("natal:star"), [], "bare star prefix");
 
 console.log("graph resolution of parsed ids");
 for (const id of resolvable) {

@@ -19,6 +19,13 @@ import { slug } from "./ids.js";
 const ASPECT_NAMES = new Set(["conjunction", "sextile", "square", "trine", "opposition"]);
 const SIGNATURE_FACETS = new Set(["element", "modality", "sign", "ruler"]);
 const DIGNITY_STATES = new Set(["domicile", "exaltation", "detriment", "fall"]);
+/** The yogas with KB concept nodes: the engine's detected set minus
+ *  Kemadruma, which the KB does not carry. The grid's raja/dhana framing
+ *  cells name no detected yoga and parse to []. */
+const YOGA_CONCEPTS = new Set([
+  "ruchaka", "bhadra", "hamsa", "malavya", "shasha", "gajakesari",
+  "budha-aditya", "chandra-mangala",
+]);
 
 const body = (b: string): string => `body:${b}`;
 const sign = (s: string): string => `sign:${slug(s)}`;
@@ -185,6 +192,40 @@ export function parseCellId(cellId: string): string[] {
       if (p[1] === "signature") {
         return p.length === 4 ? [natal, ...signatureConcept(p[2], p[3])] : [];
       }
+      if (p[1] === "lot") {
+        // natal:lot:{lot}:sign:{sign} or natal:lot:{lot}:house:{n}
+        if (!p[2]) return [];
+        if (p.length === 5 && p[3] === "sign") return [natal, `lot:${p[2]}`, sign(p[4])];
+        if (p.length === 5 && p[3] === "house") return [natal, `lot:${p[2]}`, house(p[4])];
+        return [];
+      }
+      if (p[1] === "dispositor") {
+        // natal:dispositor:final:{body}; no dispositor concept node, so the
+        // body alone, as parseAtomId does for dispositor atoms.
+        return p.length === 4 && p[2] === "final" && p[3] ? [natal, body(p[3])] : [];
+      }
+      if (p[1] === "reception") {
+        // natal:reception:body:{body}, or natal:reception:{route} where the
+        // route names the dignities involved; no reception concept node.
+        if (p.length === 4 && p[2] === "body" && p[3]) return [natal, body(p[3])];
+        if (p.length === 3 && p[2] === "domicile") return [natal, "dignity:domicile"];
+        if (p.length === 3 && p[2] === "exaltation") return [natal, "dignity:exaltation"];
+        if (p.length === 3 && p[2] === "domicile-exaltation")
+          return [natal, "dignity:domicile", "dignity:exaltation"];
+        return [];
+      }
+      if (p[1] === "star") {
+        // natal:star:{star} or natal:star:{star}:{body}; the id segment is
+        // the star's slugged catalog name.
+        if (!p[2]) return [];
+        if (p.length === 3) return [natal, `star:${p[2]}`];
+        if (p.length === 4 && p[3]) return [natal, `star:${p[2]}`, body(p[3])];
+        return [];
+      }
+      if (p[1] === "parallel") {
+        // natal:parallel:{a}:{b}; declination parallels carry no aspect node.
+        return p.length === 4 && p[2] && p[3] ? [natal, body(p[2]), body(p[3])] : [];
+      }
       // natal:{body}:...
       if (p.length === 4 && p[2] === "sign") return [natal, body(p[1]), sign(p[3])];
       if (p.length === 4 && p[2] === "house") return [natal, body(p[1]), house(p[3])];
@@ -262,6 +303,28 @@ export function parseCellId(cellId: string): string[] {
       }
       if (p.length === 4 && p[2] === "sign") return [comp, body(p[1]), sign(p[3])];
       if (p.length === 4 && p[2] === "house") return [comp, body(p[1]), house(p[3])];
+      return [];
+    }
+    case "vedic": {
+      if (p[1] === "moon" && p[2] === "nakshatra") {
+        // vedic:moon:nakshatra:{name}, optionally with :pada:{n}; the pada
+        // refines the mansion but carries no concept node of its own.
+        if (p.length === 4 && p[3]) return [body("moon"), `nakshatra:${p[3]}`];
+        if (p.length === 6 && p[3] && p[4] === "pada" && /^\d+$/.test(p[5]))
+          return [body("moon"), `nakshatra:${p[3]}`];
+        return [];
+      }
+      if (p[1] === "varga") {
+        // vedic:varga:d9:{body}:{sign} or vedic:varga:frame:d{n}
+        if (p.length === 5 && /^d\d+$/.test(p[2]))
+          return [`varga:${p[2]}`, body(p[3]), sign(p[4])];
+        if (p.length === 4 && p[2] === "frame" && /^d\d+$/.test(p[3]))
+          return [`varga:${p[3]}`];
+        return [];
+      }
+      if (p[1] === "yoga") {
+        return p.length === 3 && YOGA_CONCEPTS.has(p[2]) ? [`yoga:${p[2]}`] : [];
+      }
       return [];
     }
     default:
