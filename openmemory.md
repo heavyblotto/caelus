@@ -35,7 +35,17 @@ carries the unreleased engine 0.25.0 source.
   scaffolded 2026-08-20 (bb1a3ed): `b6Grid` adds the degree layer —
   `ten-degree-face` (36 cells, ids `natal:face:<sign>:<1-3>`) and
   `degree-symbol` (360 cells, ids `natal:degree:<sign>:<1-30>`), both
-  binding `hasDegree`; writing remains.
+  binding `hasDegree`. Wave b6-01 (the pilot) landed 2026-08-20
+  (372dd71): faces-01 + degree-symbols-aries, 42 entries written and
+  adversarially reviewed — zero borrowed images, and the pilot's real
+  catch was lint-invisible templates (binding scaffold in 10/30 symbol
+  entries, nominalized caveat pivot in 10/30, ruler+image sentence in
+  7/12 face entries), repaired in place. Twelve rulings recorded in
+  `pipeline/wave-b6-01.md` bind the remaining 354 cells (scaffold/pivot/
+  closing budgets, per-sign image quotas, shadow-shape quota, two-stage
+  originality protocol, anaretic handling for degrees 28-30). Wave 2
+  (faces-02 + Taurus/Gemini/Cancer symbols) writing under
+  `pipeline/wave-b6-02.md`; waves 3-4 pending.
 - **Web** (`apps/web`): Playground `ReadingTab` dynamically imports corpus
   batches per context. Prose gated by root `scripts/lint-prose.sh` (Vale +
   em-dash check); the extractor `scripts/extract-web-prose.mjs` names the
