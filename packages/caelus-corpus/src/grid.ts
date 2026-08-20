@@ -82,8 +82,14 @@ const ANGLE_NAMES: Record<string, string> = {
   asc: "Ascendant", dsc: "Descendant", mc: "Midheaven", ic: "IC",
 };
 
-const ordinal = (n: number): string =>
-  `${n}${n === 1 ? "st" : n === 2 ? "nd" : n === 3 ? "rd" : "th"}`;
+// Handles the teens and the twenties correctly (the B6 degree titles reach
+// 30); existing callers only reach 12, so no current title changes.
+const ordinal = (n: number): string => {
+  const r = n % 10, rr = n % 100;
+  const suffix = rr >= 11 && rr <= 13 ? "th"
+    : r === 1 ? "st" : r === 2 ? "nd" : r === 3 ? "rd" : "th";
+  return `${n}${suffix}`;
+};
 
 export function b1Grid(): GridCell[] {
   const cells: GridCell[] = [];
@@ -962,9 +968,53 @@ export function b5Grid(): GridCell[] {
   return cells;
 }
 
+/**
+ * The B6 content grid (build-plan "Unwritten inventory / B6"): the degree
+ * layer. The ten-degree faces run one cell per face per sign; the degree
+ * symbols run one cell per ordinal degree per sign (the degree-symbol
+ * convention: 14°30' Aries is the 15th degree). Both bind through the
+ * projection's `degree` atoms -- one per placed body plus the ASC and MC,
+ * each carrying the ordinal degree and the face index -- via `hasDegree`.
+ * The engine's dignity `face` facet is the essential-dignity *ruler* of a
+ * face, a different fact these cells do not bind.
+ */
+export function b6Grid(): GridCell[] {
+  const cells: GridCell[] = [];
+
+  // Ten-degree faces: 12 signs x 3 faces.
+  for (const sign of SIGNS) {
+    for (let face = 1; face <= 3; face++) {
+      cells.push({
+        id: `natal:face:${sign.toLowerCase()}:${face}`,
+        family: "ten-degree-face",
+        when: { kind: "degree", sign, face },
+        atomIds: ["degree:"],
+        title: `The ${ordinal(face)} face of ${sign}`,
+        bindable: true,
+      });
+    }
+  }
+
+  // Degree symbols: 12 signs x 30 ordinal degrees.
+  for (const sign of SIGNS) {
+    for (let degree = 1; degree <= 30; degree++) {
+      cells.push({
+        id: `natal:degree:${sign.toLowerCase()}:${degree}`,
+        family: "degree-symbol",
+        when: { kind: "degree", sign, degree },
+        atomIds: ["degree:"],
+        title: `The ${ordinal(degree)} degree of ${sign}`,
+        bindable: true,
+      });
+    }
+  }
+
+  return cells;
+}
+
 /** Every enumerated cell across the batches written so far. */
 export function fullGrid(): GridCell[] {
-  return [...b1Grid(), ...b2Grid(), ...b3Grid(), ...b4Grid(), ...b5Grid()];
+  return [...b1Grid(), ...b2Grid(), ...b3Grid(), ...b4Grid(), ...b5Grid(), ...b6Grid()];
 }
 
 /** Coverage of the grid by a set of written cell ids. */

@@ -30,7 +30,7 @@ any of those does not merge.
 | Path | What it is |
 |---|---|
 | `data/passages/` | 292 JSON files, the 3,656 essays |
-| `src/grid.ts` | the grid: 3,658 cells enumerated as a coverage contract (3,656 written) |
+| `src/grid.ts` | the grid: 4,054 cells enumerated as a coverage contract (3,656 written) |
 | `src/lint.ts` | the corpus lints, in order of subtlety |
 | `src/selectors.ts` | serializable selector specs → live engine selectors |
 | `src/compile.ts` | passages → rules → `InterpretationSource` |
@@ -49,6 +49,7 @@ any of those does not merge.
 | B3 relationship | 1,238 | synastry-aspect, synastry-overlay, composite-aspect, composite-placement, composite-house | complete |
 | B4 timing | 268 | profection, ZR, firdaria, dasha, lunation, eclipse, return, solar phase | complete |
 | B5 conditions | 602 (600 bindable) | lot-sign, lot-house, dispositor, reception, star, star-contact, parallel, nakshatra-moon, nakshatra-pada, varga-d9, varga-frame, yoga | complete |
+| B6 degree layer | 396 | ten-degree-face, degree-symbol | scaffolded, not written |
 
 Two things to know about what "written" means here. A cell is written when it
 passes the harness and the lints; it is *reviewed* when an adversarial pass
@@ -57,8 +58,9 @@ because the review consistently finds what no lint can: cycle-length errors,
 compatibility verdicts, conduct claims, essays that would serve as their own
 mirror.
 
-**Not written:** B6 (decans and degree symbols, ~400 — the degree
-symbols are original, written for this corpus) and B8 (site guides, ~180
+**Not written:** B6 (ten-degree faces and degree symbols, 396 cells —
+scaffolded 2026-08-20, the degree symbols original to this corpus) and
+B8 (site guides, ~180
 pieces after the glossary moved to the Encyclopedia). B5's 600 bindable
 cells were written and adversarially reviewed in seven waves,
 2026-08-20; its two raja/dhana yoga cells stay `bindable: false` until
@@ -78,8 +80,8 @@ npm run build && npm test                           # the harness
 ```
 
 `pipeline/` also carries the sheets that make a writer prompt six lines
-instead of a page: `voice-sheet.md` (the contract for every entry), five
-`writer-instructions-*.md`, five `reviewer-instructions-*.md`, and the
+instead of a page: `voice-sheet.md` (the contract for every entry), six
+`writer-instructions-*.md`, six `reviewer-instructions-*.md`, and the
 `wave-*.md` sheets. **Write a new wave sheet per wave.** It is cheaper than
 repeating yourself to twelve agents, and it is where a mid-wave discovery gets
 recorded for the agents still to come.

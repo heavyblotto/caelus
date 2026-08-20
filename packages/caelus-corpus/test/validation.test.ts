@@ -237,6 +237,19 @@ function atomFor(p: Passage): FactAtom | null {
         bodies: w.body ? [w.body] : ["mars"], salience: 2, text: "synthetic",
         yoga: w.yoga ?? "Ruchaka",
       } as unknown as FactAtom;
+    case "degree": {
+      // Keep degree and face internally consistent, as the projection's
+      // atoms always are: face 1 holds degrees 1-10, face 2 holds 11-20.
+      const sign = w.sign ?? "Aries";
+      const degree = w.degree ?? ((w.face ?? 2) - 1) * 10 + 5;
+      const face = w.face ?? Math.floor((degree - 1) / 10) + 1;
+      const point = w.point ?? "sun";
+      return {
+        id: `degree:${point}:${sign.toLowerCase()}:${degree}`, kind: "degree",
+        bodies: point === "asc" || point === "mc" ? [] : [point],
+        salience: 1.3, text: "synthetic", point, sign, degree, face,
+      } as unknown as FactAtom;
+    }
     default:
       return null;
   }
@@ -359,6 +372,21 @@ function shiftedAtom(p: Passage): FactAtom | null {
   } else if (w.kind === "yoga") {
     clone.yoga = w.yoga === "Ruchaka" ? "Hamsa" : "Ruchaka";
     clone.id = `yoga:${(clone.yoga as string).replace(/\s+/g, "_")}`;
+  } else if (w.kind === "degree") {
+    // Shift whichever field the cell selects on, keeping degree and face
+    // consistent (a face shift moves the degree into the new face's span).
+    if (w.degree !== undefined) {
+      const d = (w.degree % 30) + 1;
+      clone.degree = d;
+      clone.face = Math.floor((d - 1) / 10) + 1;
+    } else if (w.face !== undefined) {
+      const f = (w.face % 3) + 1;
+      clone.face = f;
+      clone.degree = (f - 1) * 10 + 5;
+    } else {
+      clone.sign = w.sign === "Aries" ? "Taurus" : "Aries";
+    }
+    clone.id = `degree:${w.point ?? "sun"}:${String(clone.sign).toLowerCase()}:${clone.degree}`;
   }
   return clone as unknown as FactAtom;
 }

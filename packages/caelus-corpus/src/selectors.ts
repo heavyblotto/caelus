@@ -9,15 +9,15 @@
  * selector vocabularies in lockstep across two repositories.
  *
  * Keeping selectors as data rather than code is what lets the corpus ship as
- * JSON and stay auditable: each of the 3,096 cells names the fact it speaks
- * to in a form you can read, diff and lint.
+ * JSON and stay auditable: each cell names the fact it speaks to in a form
+ * you can read, diff and lint.
  *
  * When a `kind` here drifts from the engine's `FactKind` set, this file is
  * the one place to correct it.
  */
 import {
   hasPlacement, hasAspect, hasPattern, hasSignature, hasAngle, hasAngleContact,
-  hasStar, hasLot,
+  hasStar, hasLot, hasDegree,
   hasDispositor, hasReception, hasDignityFine, hasTransit, hasTransitHouse,
   hasStation, hasSynastry,
   hasComposite, hasCompositeAspect, hasTimelord, hasNakshatra, hasVarga, hasYoga,
@@ -47,6 +47,7 @@ export type SelectorSpec =
   | { kind: "dignity"; facet?: "term" | "face" | "triplicity" | "almuten"; body?: string; ruler?: string }
   | { kind: "star"; body?: string; star?: string }
   | { kind: "lot"; lot?: string; sign?: string; house?: number }
+  | { kind: "degree"; point?: string; sign?: string; degree?: number; face?: number }
   | { kind: "transit"; transit?: string; natal?: string; aspect?: string; phase?: string }
   | { kind: "transitHouse"; body?: string; house?: number }
   | { kind: "station"; body?: string; direction?: "retrograde" | "direct" }
@@ -94,6 +95,10 @@ export function selectorFromSpec(spec: SelectorSpec): Selector {
       return hasStar({ body: spec.body, star: spec.star });
     case "lot":
       return hasLot({ lot: spec.lot, sign: spec.sign, house: spec.house });
+    case "degree":
+      return hasDegree({
+        point: spec.point, sign: spec.sign, degree: spec.degree, face: spec.face,
+      });
     case "transit":
       return hasTransit({
         transit: spec.transit, natal: spec.natal, aspect: spec.aspect, phase: spec.phase,

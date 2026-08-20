@@ -310,6 +310,24 @@ brief("varga-frames", "b5-varga-frames.json", "corpus-b5-varga-frames",
 // B5 yogas: one slice (the unbindable raja/dhana cells filter out above).
 brief("yogas", "b5-yogas.json", "corpus-b5-yogas", byFamily.get("yoga"));
 
+// B6 ten-degree faces: chunks of 12 (four signs per slice, zodiac order).
+const faces = byFamily.get("ten-degree-face") ?? [];
+for (let i = 0; i < faces.length; i += 12) {
+  const n = String(i / 12 + 1).padStart(2, "0");
+  brief(`faces-${n}`, `b6-faces-${n}.json`, `corpus-b6-faces-${n}`,
+    faces.slice(i, i + 12));
+}
+
+// B6 degree symbols: one slice per sign (30 cells) -- one writer holds a
+// sign's whole walk of degrees, keeping the through-line in one hand.
+const degSym = byFamily.get("degree-symbol") ?? [];
+for (const signName of [...new Set(degSym.map((c) => c.when.sign))]) {
+  brief(`degree-symbols-${signName.toLowerCase()}`,
+    `b6-degree-symbols-${signName.toLowerCase()}.json`,
+    `corpus-b6-degree-symbols-${signName.toLowerCase()}`,
+    degSym.filter((c) => c.when.sign === signName));
+}
+
 for (const b of briefs) {
   writeFileSync(`${OUT}${b.name}.json`, JSON.stringify(b, null, 1));
 }

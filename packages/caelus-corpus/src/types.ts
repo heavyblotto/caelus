@@ -56,7 +56,10 @@ export type CellFamily =
   | "nakshatra-pada"
   | "varga-frame"
   | "varga-d9"
-  | "yoga";
+  | "yoga"
+  // B6: the degree layer -- ten-degree faces and degree symbols.
+  | "ten-degree-face"
+  | "degree-symbol";
 
 /** Length bands per family, in words. Major cells are essays (the Hand
  *  standard); condition chips run proportionally shorter. */
@@ -107,6 +110,9 @@ export const LENGTH_BANDS: Record<CellFamily, { min: number; max: number }> = {
   "varga-frame": { min: 150, max: 400 },
   "varga-d9": { min: 200, max: 500 },
   yoga: { min: 200, max: 500 },
+  // B6. Faces run as chips; degree symbols are the corpus's shortest form.
+  "ten-degree-face": { min: 120, max: 300 },
+  "degree-symbol": { min: 80, max: 200 },
 };
 
 export interface Passage {

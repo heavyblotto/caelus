@@ -55,7 +55,7 @@ families, and the `finderSets` export are gone.
 | B3 relationship                                                  | 1,238       | yes         | 500 of 1,238 (synastry-aspect only) |
 | B4 timing                                                        | 268         | yes         | yes                                 |
 | B5 lots, stars, receptions, parallels, nakshatras, vargas, yogas | 602 (600 bindable) | yes         | yes (seven waves, 2026-08-20)       |
-| B6 ten-degree faces and degree symbols                           | ~400        | not started |                                     |
+| B6 ten-degree faces and degree symbols                           | 396         | not started; scaffolded 2026-08-20 |                    |
 | B8 site guides                                                   | ~180 pieces | not started |                                     |
 
 
@@ -97,9 +97,12 @@ program is complete.
 for the repair and B3 review waves already exist
 (`pipeline/wave-b1b2-repair.md`, `pipeline/wave-b3-review.md`).
 
-B6 and B8 have no `CellFamily` members, no grid functions, and no
-writer-instruction sheets. Those batches start with scaffolding, then
-writing. B5 is fully written and reviewed (600/600 bindable cells,
+B6's scaffold landed 2026-08-20: the `ten-degree-face` and
+`degree-symbol` families, `b6Grid()` (396 bindable cells), length
+bands, the instruction sheets, and the harness's `degree` atoms.
+Writing follows the loop. B8 has no grid function or instruction
+sheets yet; it starts with scaffolding, then writing. B5 is fully
+written and reviewed (600/600 bindable cells,
 seven waves, 2026-08-20; the two raja/dhana yoga cells stay
 `bindable: false` until the engine detects them).
 
@@ -137,7 +140,7 @@ below records the enumerated inventory as planned.
 | Yogas                            | ~20       | Named set plus raja/dhana framing. Engine already detects Ruchaka, Bhadra, Hamsa, Malavya, Shasha, Gajakesari, Budha-Aditya, Chandra-Mangala, and Kemadruma. `hasYoga` |
 
 
-### B6 (~400)
+### B6 (396)
 
 
 | Cell             | Count (≈)         |
@@ -154,8 +157,9 @@ carrying the ten-degree face index (1–3), with a `hasDegree` selector.
 Both B6 rows bind through it: degree-symbol essays select
 `{ sign, degree }`, face essays select `{ sign, face }`. Dignity `face`
 in the engine remains the essential-dignity *ruler* of a face — a
-different fact, not these 36 essays. What B6 still needs is corpus-side
-scaffolding: the `CellFamily` entries, `b6Grid()`, and length bands.
+different fact, not these 36 essays. The corpus-side scaffold landed
+2026-08-20 (`CellFamily` entries, `b6Grid()`, length bands, instruction
+sheets, harness atoms); writing remains.
 
 ### B8 (~180)
 
@@ -301,7 +305,8 @@ above in `src/grid.ts`, add families and length bands, write the
 instruction sheets, then run the write loop. B5 completed that loop
 (seven waves, 2026-08-20). B6's fact kind exists: the
 engine's `degree` atoms (unreleased 0.25.0) bind both degree symbols
-and faces via `hasDegree`; only the grid scaffolding remains.
+and faces via `hasDegree`; the corpus scaffold landed 2026-08-20 and
+writing remains.
 
 **B8** is the site guides table. MDX guides, coverage rule
 (artifact × how-to-read, surface × how-to-use). Not `CellFamily`. Not
