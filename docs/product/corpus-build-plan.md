@@ -28,7 +28,7 @@ cut from `engine/0.25.0`.
 
 ## Current state
 
-**3,056 essays in.** About 1.09 million words. Median 361 words.
+**3,656 essays in.** About 1.26 million words. Median 351 words.
 Harness and current lints are green for that set. `tsc` builds against
 this workspace.
 
@@ -47,7 +47,7 @@ families, and the `finderSets` export are gone.
 | B2 transits                                                      | 738         | yes         | yes                                 |
 | B3 relationship                                                  | 1,238       | yes         | 500 of 1,238 (synastry-aspect only) |
 | B4 timing                                                        | 268         | yes         | yes                                 |
-| B5 lots, stars, receptions, parallels, nakshatras, vargas, yogas | ~600        | not started |                                     |
+| B5 lots, stars, receptions, parallels, nakshatras, vargas, yogas | 602 (600 bindable) | yes         | yes (seven waves, 2026-08-20)       |
 | B6 ten-degree faces and degree symbols                           | ~400        | not started |                                     |
 | B8 site guides                                                   | ~180 pieces | not started |                                     |
 
@@ -90,9 +90,11 @@ program is complete.
 for the repair and B3 review waves already exist
 (`pipeline/wave-b1b2-repair.md`, `pipeline/wave-b3-review.md`).
 
-B5, B6, and B8 have no `CellFamily` members, no grid functions, and no
+B6 and B8 have no `CellFamily` members, no grid functions, and no
 writer-instruction sheets. Those batches start with scaffolding, then
-writing.
+writing. B5 is fully written and reviewed (600/600 bindable cells,
+seven waves, 2026-08-20; the two raja/dhana yoga cells stay
+`bindable: false` until the engine detects them).
 
 The quality bar is Robert Hand's Para Research series: essay-length
 entries that state a theme and then follow it through the life areas it
@@ -111,11 +113,10 @@ are in `packages/caelus-corpus/src/types.ts`. Voice is
 Counts assume the 13-body default set. Written batches already have
 live counts above; these rows are the remaining cells.
 
-### B5 (~600)
+### B5 (written)
 
-Selectors for these kinds already exist in
-`packages/caelus-corpus/src/selectors.ts`. The engine already computes
-the facts. What is missing is the grid, the families, and the essays.
+Written and reviewed 2026-08-20 (602 cells, 600 bindable). The table
+below records the enumerated inventory as planned.
 
 
 | Cell                             | Count (≈) | Engine / selector                                                                                                                                                      |
@@ -264,8 +265,8 @@ cells) is finished, and `lintNearDuplicateSentences`,
 
 **B5 and B6** are delineation essays. Enumerate the inventory tables
 above in `src/grid.ts`, add families and length bands, write the
-instruction sheets, then run the write loop. B5 selectors already
-compile; the grid is the missing piece. B6's fact kind exists: the
+instruction sheets, then run the write loop. B5 completed that loop
+(seven waves, 2026-08-20). B6's fact kind exists: the
 engine's `degree` atoms (unreleased 0.25.0) bind both degree symbols
 and faces via `hasDegree`; only the grid scaffolding remains.
 

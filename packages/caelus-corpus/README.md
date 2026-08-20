@@ -3,7 +3,7 @@
 An original corpus of astrological readings, the writing pipeline that produced
 it, and the prose lints that gate it.
 
-**3,056 essays. ~1.09 million words. Median 361 words each.** Every essay is
+**3,656 essays. ~1.26 million words. Median 351 words each.** Every essay is
 bound to a fact the engine can compute, fired against a chart that carries
 that fact, and linted as prose before it ships. Coverage is a count against an
 enumerated grid, not a claim.
@@ -16,7 +16,7 @@ to npm; the corpus is published as a versioned download on the Caelus site.
 ```bash
 npm install          # pulls caelus >=0.25.0
 npm run build        # tsc
-npm test             # binding + firing + lints over all 3,056 entries
+npm test             # binding + firing + lints over all 3,656 entries
 ```
 
 `npm test` is the harness. For each entry it proves four things: the entry
@@ -29,8 +29,8 @@ any of those does not merge.
 
 | Path | What it is |
 |---|---|
-| `data/passages/` | 246 JSON files, the 3,056 essays |
-| `src/grid.ts` | the grid: 3,658 cells enumerated as a coverage contract (3,056 written) |
+| `data/passages/` | 292 JSON files, the 3,656 essays |
+| `src/grid.ts` | the grid: 3,658 cells enumerated as a coverage contract (3,656 written) |
 | `src/lint.ts` | the corpus lints, in order of subtlety |
 | `src/selectors.ts` | serializable selector specs → live engine selectors |
 | `src/compile.ts` | passages → rules → `InterpretationSource` |
@@ -48,7 +48,7 @@ any of those does not merge.
 | B2 transits | 738 | transit-aspect, transit-house, station | complete |
 | B3 relationship | 1,238 | synastry-aspect, synastry-overlay, composite-aspect, composite-placement, composite-house | complete |
 | B4 timing | 268 | profection, ZR, firdaria, dasha, lunation, eclipse, return, solar phase | complete |
-| B5 conditions | 602 (600 bindable) | lot-sign, lot-house, dispositor, reception, star, star-contact, parallel, nakshatra-moon, nakshatra-pada, varga-d9, varga-frame, yoga | grid scaffolded, unwritten |
+| B5 conditions | 602 (600 bindable) | lot-sign, lot-house, dispositor, reception, star, star-contact, parallel, nakshatra-moon, nakshatra-pada, varga-d9, varga-frame, yoga | complete |
 
 Two things to know about what "written" means here. A cell is written when it
 passes the harness and the lints; it is *reviewed* when an adversarial pass
@@ -57,15 +57,16 @@ because the review consistently finds what no lint can: cycle-length errors,
 compatibility verdicts, conduct claims, essays that would serve as their own
 mirror.
 
-**Not written:** B5 (lots, fixed stars, receptions, parallels, nakshatras,
-vargas, yogas — 600 bindable cells, grid and instruction sheets landed,
-essays not started), B6 (decans and degree symbols, ~400 — the degree
-symbols are original, written for this corpus), and B8 (site guides, ~180
-pieces after the glossary moved to the Encyclopedia).
+**Not written:** B6 (decans and degree symbols, ~400 — the degree
+symbols are original, written for this corpus) and B8 (site guides, ~180
+pieces after the glossary moved to the Encyclopedia). B5's 600 bindable
+cells were written and adversarially reviewed in seven waves, 2026-08-20
+(sheets `pipeline/wave-b5-1.md` through `wave-b5-7.md`); its two raja/
+dhana yoga cells stay `bindable: false` until the engine detects them.
 
 ## The pipeline
 
-The loop that produced 3,056 essays, in the order you run it:
+The loop that produced 3,656 essays, in the order you run it:
 
 ```bash
 node pipeline/gen-briefs.mjs                        # grid → per-slice work orders
