@@ -29,7 +29,7 @@ export default function Privacy() {
       </P>
       <P>
         The one thing kept locally is your light or dark theme preference, stored
-        in <code>localStorage</code> so the site remembers it on your next visit.
+        in <code>localStorage</code> and read again on your next visit.
         Nothing else is stored, and clearing site data removes it.
       </P>
 

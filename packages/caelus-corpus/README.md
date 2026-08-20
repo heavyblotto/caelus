@@ -3,7 +3,7 @@
 An original corpus of astrological readings, the writing pipeline that produced
 it, and the prose lints that gate it.
 
-**3,096 essays. ~1.09 million words. Median 360 words each.** Every essay is
+**3,056 essays. ~1.09 million words. Median 361 words each.** Every essay is
 bound to a fact the engine can compute, fired against a chart that carries
 that fact, and linted as prose before it ships. Coverage is a count against an
 enumerated grid, not a claim.
@@ -16,7 +16,7 @@ to npm; the corpus is published as a versioned download on the Caelus site.
 ```bash
 npm install          # pulls caelus >=0.25.0
 npm run build        # tsc
-npm test             # binding + firing + lints over all 3,096 entries
+npm test             # binding + firing + lints over all 3,056 entries
 ```
 
 `npm test` is the harness. For each entry it proves four things: the entry
@@ -29,8 +29,8 @@ any of those does not merge.
 
 | Path | What it is |
 |---|---|
-| `data/passages/` | 249 JSON files, the 3,096 essays |
-| `src/grid.ts` | the grid: all 3,096 cells enumerated as a coverage contract |
+| `data/passages/` | 246 JSON files, the 3,056 essays |
+| `src/grid.ts` | the grid: all 3,056 cells enumerated as a coverage contract |
 | `src/lint.ts` | the corpus lints, in order of subtlety |
 | `src/selectors.ts` | serializable selector specs → live engine selectors |
 | `src/compile.ts` | passages → rules → `InterpretationSource` |
@@ -48,7 +48,6 @@ any of those does not merge.
 | B2 transits | 738 | transit-aspect, transit-house, station | complete |
 | B3 relationship | 1,238 | synastry-aspect, synastry-overlay, composite-aspect, composite-placement, composite-house | **500 of 1,238** |
 | B4 timing | 268 | profection, ZR, firdaria, dasha, lunation, eclipse, return, solar phase | complete |
-| B7 birth-time finder | 40 | rising-fit, event-angle | written |
 
 Two things to know about what "written" means here. A cell is written when it
 passes the harness and the lints; it is *reviewed* when an adversarial pass
@@ -59,12 +58,12 @@ mirror.
 
 **Not written:** B5 (lots, fixed stars, receptions, parallels, nakshatras,
 vargas, yogas, ~600), B6 (decans and degree symbols, ~400 — the degree
-symbols are original, written for this corpus), B8 (the education library, ~375 pieces), and
-the journal prompt bank that was scoped alongside B7 (~120).
+symbols are original, written for this corpus), and B8 (site guides, ~180
+pieces after the glossary moved to the Encyclopedia).
 
 ## The pipeline
 
-The loop that produced 3,096 essays, in the order you run it:
+The loop that produced 3,056 essays, in the order you run it:
 
 ```bash
 node pipeline/gen-briefs.mjs                        # grid → per-slice work orders
@@ -145,11 +144,11 @@ fact kinds added in that cycle: `angleContact`, `transitHouse`, `station`,
 aspects, and peregrine dignity. Against 0.24.x those families compile and
 never fire, which the harness catches.
 
-## Known defect
+## Product copy
 
-`editorial/scripts/extract-web-prose.mjs` scrapes source files into the file
-Vale grades, and it is scraping TypeScript along with the prose: about 18% of
-the graded lines are `import(...)` statements and type declarations. It also
-only walks `.tsx`, so copy that lives in `.ts` modules is never linted at all.
-Until that is fixed the product-copy gate is theatre. The corpus lints are
-unaffected — different tool, different job.
+Product-copy linting is the host repo's job, not this package's: the live
+extractor is `scripts/extract-web-prose.mjs` at the monorepo root, run by the
+root `lint:prose`. The defective reference extractor this package once
+carried (it scraped TypeScript as prose and skipped `.ts` modules) was
+removed on 2026-08-19. The corpus lints are unaffected — different tool,
+different job.

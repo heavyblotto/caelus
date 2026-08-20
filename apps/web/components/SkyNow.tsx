@@ -23,8 +23,9 @@ import { WHEEL_THEME, WHEEL_LINE_COLORS } from "../lib/wheelTheme";
 import { crossAspect, ringContacts, type SynContact, cell } from "../lib/chart-display";
 import { type Share, b64urlEncode, readUrlState } from "../lib/share";
 
-// The interpretation panel pulls in the public-domain delineation corpus
-// (~90 KB gzipped), so load it only when the Reading tab is first opened.
+// The interpretation panel loads the Caelus corpus in batch-sized chunks
+// (natal, transits, timing; relationship only when comparing), so load the
+// panel itself lazily too and keep the corpus out of the page bundle.
 const ReadingTab = dynamic(() => import("./ReadingTab"), {
   ssr: false,
   loading: () => <p className="dim small" style={{ marginTop: 0 }}>reading the chart…</p>,
@@ -256,8 +257,8 @@ export default function SkyNow() {
 
   // Interpretation inputs: the fixed-star conjunctions and Hermetic lots the
   // bare projection can't compute (the catalog and sect live on the engine).
-  // The Reading panel turns chart + these into a cited, public-domain reading;
-  // it leads the page, so compute these for any chart.
+  // The Reading panel turns chart + these into a cited reading from the
+  // Caelus corpus; it leads the page, so compute these for any chart.
   const readingInputs = useMemo(() => {
     if (!chart) return null;
     try {
@@ -587,12 +588,12 @@ export default function SkyNow() {
         <section aria-label="Reading" className="reading-panel">
           <div className="reading-panel__head">
             <span className="eyebrow" style={{ margin: 0 }}>Reading</span>
-            <span className="dim small">the chart&rsquo;s validated facts, turned into a cited public-domain interpretation</span>
+            <span className="dim small">the chart&rsquo;s validated facts, turned into a cited interpretation</span>
           </div>
           <p className="dim small" style={{ marginTop: 0, marginBottom: "0.9rem" }}>
             The chart projects into ranked fact atoms (placements, aspects, fixed-star
-            conjunctions, the Part of Fortune, transits and time-lords active now), and a
-            public-domain delineation corpus runs over them, so every statement cites the
+            conjunctions, the Part of Fortune, transits and time-lords active now), and the
+            Caelus corpus of original essays runs over them, so every statement cites the
             validated fact it rests on: the same grounding an LLM uses instead of
             hallucinating positions.
           </p>

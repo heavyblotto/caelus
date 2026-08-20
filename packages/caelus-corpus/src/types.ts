@@ -42,17 +42,7 @@ export type CellFamily =
   | "synastry-overlay"
   | "composite-placement"
   | "composite-aspect"
-  | "composite-house"
-  // B7: the birth-time finder bank. Validated by the same harness but
-  // compiled apart from the Reading sources (see index.ts): these entries
-  // are questions the finder asks, not delineations the Reading shows.
-  | "finder-rising-fit"
-  | "finder-event-angle";
-
-/** Families whose passages serve the birth-time finder, not the Reading. */
-export const FINDER_FAMILIES: ReadonlySet<CellFamily> = new Set([
-  "finder-rising-fit", "finder-event-angle",
-] as CellFamily[]);
+  | "composite-house";
 
 /** Length bands per family, in words. Major cells are essays (the Hand
  *  standard); condition chips run proportionally shorter. */
@@ -88,8 +78,6 @@ export const LENGTH_BANDS: Record<CellFamily, { min: number; max: number }> = {
   "composite-placement": { min: 200, max: 500 },
   "composite-aspect": { min: 200, max: 500 },
   "composite-house": { min: 200, max: 500 },
-  "finder-rising-fit": { min: 60, max: 180 },
-  "finder-event-angle": { min: 40, max: 140 },
 };
 
 export interface Passage {

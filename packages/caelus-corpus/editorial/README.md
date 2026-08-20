@@ -18,7 +18,6 @@ Two different jobs live here, and it is worth keeping them apart:
 | `styles/` | 50 vendored Vale rule files |
 | `scripts/check-em-dashes.mjs` | the em-dash gate, pure Node, no install needed |
 | `scripts/lint-prose.sh` | the runner |
-| `scripts/extract-web-prose.mjs` | scrapes app source into a file Vale can grade |
 
 `.vale.ini` sits at the repo root, where Vale looks for it.
 
@@ -65,24 +64,12 @@ The gate is deliberately not pointed at `editorial/` or `pipeline/`. Those
 are working documents addressed to writers and reviewers, and they quote the
 phrasings they ban.
 
-## Known defect — read before trusting this
+## Product copy is the host repo's job
 
-`extract-web-prose.mjs` is broken in a way that makes the product-copy gate
-report clean when it is not.
-
-1. **It scrapes TypeScript into the prose file.** About 18% of the lines Vale
-   grades are `import(...)` statements, type declarations and JSX props. Vale
-   dutifully grades them and finds nothing, which is not the same as the copy
-   being clean.
-2. **It only walks `.tsx`.** Copy that lives in `.ts` modules — button labels,
-   verdict names, chip text, anything a component imports rather than inlines
-   — is never linted at all. In the source repo that was a large fraction of
-   the product copy, including copy that had just been rewritten by hand.
-
-Fixing it properly means deciding how the new project holds its copy. The
-cleanest fix is to stop scraping: put user-facing strings in one module per
-surface, or in message catalogs, and lint those files directly. Scraping was
-always a workaround for copy scattered through components.
-
-Until then, treat a clean `lint:prose` on product copy as no evidence either
-way. The corpus lints are unaffected.
+This kit gates the editorial guides and the writing sheets. Product-copy
+extraction lives with the product: in the Caelus monorepo the extractor is
+`scripts/extract-web-prose.mjs` at the repo root, run by the root
+`lint:prose`, and it names the page and component files it walks. A
+carried-over reference extractor with a known defect (it scraped TypeScript
+as prose and skipped `.ts` modules entirely) was removed from this kit on
+2026-08-19.

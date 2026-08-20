@@ -1,0 +1,14 @@
+[project]
+name = "caelus-corpus-embeddings"
+version = "0.1.0"
+description = "Local embedding pipeline for the Caelus corpus essays"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.5.2",
+    "polars>=1.43.2",
+    "sentence-transformers>=5.7.0",
+    "torch>=2.9.0",
+]
+
+[tool.uv]
+package = false

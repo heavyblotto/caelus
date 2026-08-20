@@ -4,8 +4,8 @@
  *
  * The editorial voice (editorial/editorial-voice.md) and slop style sheet
  * (editorial/ai-slop-style-sheet.md) ban em-dash parentheticals in prose. The Vale
- * prose extract (scripts/extract-web-prose.mjs) only scans a handful of .tsx
- * pages and does not decode HTML entities, so em-dashes in the MDX docs — and
+ * prose extract only scans the files it is pointed at and does not decode
+ * HTML entities, so em-dashes in the MDX docs — and
  * the `&mdash;` entity dodge — slipped past it. This scans every source
  * file for the em-dash character and its entities, after blanking the places an
  * em-dash is legitimately data rather than prose:

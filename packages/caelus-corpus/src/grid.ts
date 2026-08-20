@@ -678,82 +678,9 @@ export function b3Grid(): GridCell[] {
   return cells;
 }
 
-/** Event classes the birth-time finder checks against angle hits.
- *  Each names a dateable life event and the angle the tradition expects
- *  it to involve (proposal §5.1: transits/directions/profections against
- *  the angles score candidate windows). */
-const FINDER_EVENTS: { slug: string; angle: string; title: string }[] = [
-  // MC: vocation, public standing
-  { slug: "job-change", angle: "mc", title: "Changed jobs or careers" },
-  { slug: "promotion", angle: "mc", title: "A promotion or public recognition" },
-  { slug: "career-collapse", angle: "mc", title: "Lost a job or a career fell apart" },
-  { slug: "started-business", angle: "mc", title: "Started a business or went out on your own" },
-  { slug: "public-work", angle: "mc", title: "Published, performed, or went public with work" },
-  { slug: "life-direction", angle: "mc", title: "A deliberate change of life direction" },
-  { slug: "finished-studies", angle: "mc", title: "Finished school or a long course of study" },
-  // IC: home, family, roots
-  { slug: "moved-home", angle: "ic", title: "Moved to a new home" },
-  { slug: "left-family-home", angle: "ic", title: "Left the family home" },
-  { slug: "relocated-far", angle: "ic", title: "Relocated to a new city or country" },
-  { slug: "parent-died", angle: "ic", title: "A parent died" },
-  { slug: "family-grew", angle: "ic", title: "A child arrived or the household grew" },
-  { slug: "bought-home", angle: "ic", title: "Bought or built a home" },
-  { slug: "home-upheaval", angle: "ic", title: "Lost a home or a household broke up" },
-  // ASC: self, body, presentation
-  { slug: "health-turn", angle: "asc", title: "A serious illness, injury, or recovery began" },
-  { slug: "reinvention", angle: "asc", title: "A visible personal reinvention" },
-  { slug: "name-change", angle: "asc", title: "Changed your name or how you present" },
-  { slug: "independence", angle: "asc", title: "A first big independent step" },
-  { slug: "body-change", angle: "asc", title: "A major change in body or appearance" },
-  { slug: "spotlight", angle: "asc", title: "Suddenly more visible to other people" },
-  { slug: "withdrawal", angle: "asc", title: "A deliberate retreat from other people" },
-  // DSC: partners, close others
-  { slug: "met-partner", angle: "dsc", title: "Met a significant partner" },
-  { slug: "married", angle: "dsc", title: "Married or made a lasting commitment" },
-  { slug: "separation", angle: "dsc", title: "A breakup, separation, or divorce" },
-  { slug: "business-partner", angle: "dsc", title: "A business partnership formed or dissolved" },
-  { slug: "close-loss", angle: "dsc", title: "Lost a partner or a close companion" },
-  { slug: "rival", angle: "dsc", title: "A conflict with an open rival or adversary" },
-  { slug: "reconciliation", angle: "dsc", title: "A reconciliation after a long break" },
-];
-
-/**
- * The B7 finder bank (proposal §6: rising-sign fit descriptions +
- * life-event-to-angle templates). Validated like every other family;
- * compiled apart from the Reading sources (index.ts) because these are
- * the finder's questions, not chart delineations.
- */
-export function b7Grid(): GridCell[] {
-  const cells: GridCell[] = [];
-
-  for (const sign of SIGNS) {
-    cells.push({
-      id: `finder:asc-fit:${sign.toLowerCase()}`,
-      family: "finder-rising-fit",
-      when: { kind: "angle", angle: "asc", sign },
-      atomIds: ["angle:asc"],
-      title: `Does ${sign} rising fit? (finder question)`,
-      bindable: true,
-    });
-  }
-
-  for (const ev of FINDER_EVENTS) {
-    cells.push({
-      id: `finder:event:${ev.slug}`,
-      family: "finder-event-angle",
-      when: { kind: "angleContact", angle: ev.angle },
-      atomIds: [`angleContact:`],
-      title: `${ev.title} (${ANGLE_NAMES[ev.angle]} events)`,
-      bindable: true,
-    });
-  }
-
-  return cells;
-}
-
 /** Every enumerated cell across the batches written so far. */
 export function fullGrid(): GridCell[] {
-  return [...b1Grid(), ...b2Grid(), ...b3Grid(), ...b4Grid(), ...b7Grid()];
+  return [...b1Grid(), ...b2Grid(), ...b3Grid(), ...b4Grid()];
 }
 
 /** Coverage of the grid by a set of written cell ids. */

@@ -1,17 +1,23 @@
 /**
- * Ensure caelus-delineations-pd is built before web dev/build (the /pd subpath
- * resolves to dist/src/pd.js via package exports).
+ * Ensure the delineation packages are built before web dev/build: the pd
+ * `/pd` subpath and the corpus batch subpaths (`caelus-corpus/natal`, ...)
+ * resolve to dist via package exports.
  */
 import { existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 
 const ROOT = new URL("..", import.meta.url).pathname;
-const PD = ROOT + "packages/caelus-delineations-pd/dist/src/pd.js";
 
-if (existsSync(PD)) process.exit(0);
+const targets = [
+  ["caelus-delineations-pd", "packages/caelus-delineations-pd/dist/src/pd.js"],
+  ["caelus-corpus", "packages/caelus-corpus/dist/src/natal.js"],
+];
 
-console.log("ensure-delineations-pd: building caelus-delineations-pd…");
-execFileSync("npm", ["run", "build", "-w", "caelus-delineations-pd"], {
-  cwd: ROOT,
-  stdio: "inherit",
-});
+for (const [pkg, marker] of targets) {
+  if (existsSync(ROOT + marker)) continue;
+  console.log(`ensure-delineations-pd: building ${pkg}…`);
+  execFileSync("npm", ["run", "build", "-w", pkg], {
+    cwd: ROOT,
+    stdio: "inherit",
+  });
+}

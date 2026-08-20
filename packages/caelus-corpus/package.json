@@ -1,7 +1,7 @@
 {
   "name": "caelus-corpus",
   "version": "0.1.0",
-  "description": "An original corpus of astrological readings: 3,096 essays bound to the Caelus interpretation layer, with the writing pipeline and prose lints that produced them.",
+  "description": "An original corpus of astrological readings: 3,056 essays bound to the Caelus interpretation layer, with the writing pipeline and prose lints that produced them.",
   "type": "module",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -37,6 +37,26 @@
     ".": {
       "types": "./dist/src/index.d.ts",
       "default": "./dist/src/index.js"
+    },
+    "./natal": {
+      "types": "./dist/src/natal.d.ts",
+      "default": "./dist/src/natal.js"
+    },
+    "./transits": {
+      "types": "./dist/src/transits.d.ts",
+      "default": "./dist/src/transits.js"
+    },
+    "./relationship": {
+      "types": "./dist/src/relationship.d.ts",
+      "default": "./dist/src/relationship.js"
+    },
+    "./timing": {
+      "types": "./dist/src/timing.d.ts",
+      "default": "./dist/src/timing.js"
+    },
+    "./notes": {
+      "types": "./dist/src/notes.d.ts",
+      "default": "./dist/src/notes.js"
     },
     "./package.json": "./package.json"
   },

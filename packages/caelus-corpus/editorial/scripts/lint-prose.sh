@@ -49,15 +49,9 @@ echo "→ Vale on the writing and review sheets"
 vale pipeline/*.md || FAIL=1
 echo ""
 
-# The extractor is app-coupled: it needs a target to scrape, and it carries a
-# known defect (see editorial/README.md). It runs only once you have pointed
-# it at real source and fixed that defect.
-if [ -n "$PROSE_DIRS" ]; then
-  echo "→ Extract + Vale on product copy"
-  node editorial/scripts/extract-web-prose.mjs
-  [ -f .web-prose-extract.md ]  && { vale .web-prose-extract.md  || FAIL=1; }
-  [ -f .free-prose-extract.md ] && { vale .free-prose-extract.md || FAIL=1; }
-  echo ""
-fi
+# Product-copy extraction is the host repo's job, not this kit's. In the
+# Caelus monorepo the live extractor is scripts/extract-web-prose.mjs at the
+# root, run by the root lint:prose. This kit gates the editorial guides and
+# the writing sheets only.
 
 exit "$FAIL"

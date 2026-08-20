@@ -243,16 +243,6 @@ brief("returns", "b4-returns.json", "corpus-b4-returns", byFamily.get("planetary
 brief("solar-phases", "b4-solar-phases.json", "corpus-b4-solar-phases",
   byFamily.get("solar-phase"));
 
-// B7 finder bank: rising fits in one slice, event templates in two
-brief("finder-rising-fit", "b7-finder-rising-fit.json", "corpus-b7-finder-rising-fit",
-  byFamily.get("finder-rising-fit"));
-const fev = byFamily.get("finder-event-angle") ?? [];
-for (let i = 0; i < fev.length; i += 14) {
-  const n = String(i / 14 + 1);
-  brief(`finder-events-${n}`, `b7-finder-events-${n}.json`,
-    `corpus-b7-finder-events-${n}`, fev.slice(i, i + 14));
-}
-
 for (const b of briefs) {
   writeFileSync(`${OUT}${b.name}.json`, JSON.stringify(b, null, 1));
 }

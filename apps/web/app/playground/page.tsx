@@ -13,7 +13,7 @@ import { pageMetadata } from "../../lib/seo";
 export const metadata = pageMetadata({
   title: "Playground",
   description:
-    "Compute and interpret a chart in the browser: ranked citable fact atoms (natal, transits, time-lords), a cited public-domain reading, synastry/composite compare, plus positions, aspects, fixed stars, and lots. All client-side.",
+    "Compute and interpret a chart in the browser: ranked citable fact atoms (natal, transits, time-lords), a cited reading from the Caelus corpus, synastry/composite compare, plus positions, aspects, fixed stars, and lots. All client-side.",
   path: "/playground",
 });
 
@@ -56,8 +56,9 @@ export default function Playground() {
         </Lead>
         <P dim>
           Search a birthplace and enter the local time; the chart&rsquo;s
-          positions, aspects, facts, and a cited public-domain reading follow,
-          with every statement traceable to a fact the engine computed.
+          positions, aspects, facts, and a cited reading from the Caelus
+          corpus follow, with every statement traceable to a fact the engine
+          computed.
         </P>
       </PageHero>
 

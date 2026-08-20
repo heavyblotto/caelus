@@ -16,6 +16,13 @@ const files = [
   "apps/web/app/methods/page.tsx",
   "apps/web/app/how-it-was-built/page.tsx",
   "apps/web/app/features/page.tsx",
+  "apps/web/app/playground/page.tsx",
+  "apps/web/app/privacy/page.tsx",
+  // Component copy: the playground's Reading panel and compare surfaces
+  // carry full user-facing sentences, not just labels.
+  "apps/web/components/SkyNow.tsx",
+  "apps/web/components/ReadingTab.tsx",
+  "apps/web/components/SynastryPanel.tsx",
 ];
 
 const chunks = ["# Web prose extract (auto-generated for Vale)\n"];

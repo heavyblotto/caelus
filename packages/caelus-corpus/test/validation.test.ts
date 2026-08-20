@@ -8,8 +8,8 @@
 import { interpret } from "caelus";
 import type { FactAtom, InterpretationContext, InterpretationSource } from "caelus";
 import {
-  passages, passageSets, sources, finderSets, fullGrid, gridCoverage,
-  lintCorpus, compileCorpusSource, lintNearDuplicateSentences,
+  passages, passageSets, sources, fullGrid, gridCoverage,
+  lintCorpus, lintNearDuplicateSentences,
 } from "../src/index.js";
 import { selectorFromSpec } from "../src/selectors.js";
 import type { Passage } from "../src/index.js";
@@ -262,11 +262,8 @@ function shiftedAtom(p: Passage): FactAtom | null {
   return clone as unknown as FactAtom;
 }
 
-// Finder sets stay out of the shipped Reading sources but must still prove
-// they fire; compile them here for the harness only.
-const allSources = [...sources, ...finderSets.map(compileCorpusSource)];
 const srcFor = (p: Passage): InterpretationSource | undefined =>
-  allSources.find((s) => s.rules.some((r) => r.id === p.id));
+  sources.find((s) => s.rules.some((r) => r.id === p.id));
 
 for (const p of passages) {
   const atom = atomFor(p);
