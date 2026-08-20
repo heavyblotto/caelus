@@ -124,6 +124,13 @@ jobs:
       - run: node packages/wheel/dist/test/ephemerisgraph.test.js
       # cross-package journey: local time -> chart -> SVG wheel, end to end
       - run: node packages/wheel/dist/test/integration.test.js
+      # encyclopedia widgets: plate frame/console SSR render + spec round-trip
+      - run: npm run build -w caelus-widgets
+      - run: node packages/widgets/dist/test/plate.test.js
+      # derivation widget: scene handoff identity, station renders, handedness
+      - run: node packages/widgets/dist/test/derivation.test.js
+      # figure harness: canonical SVG hashes per plate/station + version stamp
+      - run: node packages/widgets/dist/test/harness.test.js
       # apps/web library units (timeline lanes, root-found transit spans)
       - run: node scripts/test-web-libs.mjs
       # per-entrypoint bundle sizes (esbuild): informational, prints the table

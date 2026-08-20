@@ -29,6 +29,27 @@ the pair on a radial-family grid and six projector cases, including the
 gnomonic-side horizon, the orthographic far-hemisphere fold, and the
 zenith basis fallback.
 
+### `caelus-widgets`: the Encyclopedia widget system (new, private)
+
+New workspace package `packages/widgets` carrying the Encyclopedia's
+figure system: `WidgetSpec` (every widget is a pure function of a
+serializable `{ kind, params }` spec; the instant is always explicit),
+the plate frame (numbered, captioned, stamped with the engine version,
+`reproduce` permalink), the plate console (the scrub rail: 1px rule,
+oxblood index, mono small-caps station labels, snap-on-release), and
+the plate registry types the MDX AST scan will emit. The first widget
+is the derivation widget: `deriveScene` runs the engine once into a
+serializable scene, and `DerivationFigure(scene, t)` morphs the sky at
+the birthplace into the finished wheel through the five stations,
+riding the engine's `skyProjector` and `radialScale` sweep. Positions
+always come from the ecliptic frame (`eclToHor · unitVector`), which
+equals the true sky direction before the flatten, so the coordinate
+handoff is exact by construction; `t = 1` renders the standard
+`ChartWheel` itself. The figure harness walks the registry, hashes
+every plate at rest and at each station, and asserts the stamped
+version equals the computing engine; it gates in CI beside the wheel
+tests.
+
 ### `caelus-wheel`: ink-on-paper plate theme
 
 The wheel package now ships the Encyclopedia's plate palette as tokens:

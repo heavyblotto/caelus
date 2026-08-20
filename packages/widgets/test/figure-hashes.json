@@ -1,0 +1,17 @@
+{
+ "engineVersion": "0.24.1",
+ "hashes": {
+  "chart-fig-1": "54ab7d76cde237a292fa3283f3a027749bc8768c077a198885fa46f5a900907f",
+  "chart-fig-1@sky": "93640c7a456e39f8ed3d0c27bed2fe037d2b62f353d4960dad79822411611eca",
+  "chart-fig-1@sphere": "292fb03000ea80c4861243844d809182e09617642e1f89eaf9a230312d63913a",
+  "chart-fig-1@ecliptic": "980469d4808cde9a3dbb07ad2ec6d5f1c5e5db5191e22baa3d75d693804bd401",
+  "chart-fig-1@horizon": "a7b00e9a0179c5e124f164d8f998d416d2e6654a12bdadf1a456102793edf43d",
+  "chart-fig-1@wheel": "54ab7d76cde237a292fa3283f3a027749bc8768c077a198885fa46f5a900907f",
+  "ascendant-fig-1": "eb25c24253ddf850f8e3b00a712005532dd38c474bd76c196aa6a322ee446859",
+  "ascendant-fig-1@sky": "5b5bf236309895f34203f2b4bcad2f43494cec91ccadb9e7ad41e9ba717b8f6a",
+  "ascendant-fig-1@sphere": "bd2dfac0b4165c477c9efe474aa3a6e070e4233dae88c856f453b972e0b272aa",
+  "ascendant-fig-1@ecliptic": "ee8959e8d12a0d6619263b2176edaa885720341237ddab133ee3993692dec2f9",
+  "ascendant-fig-1@horizon": "eb25c24253ddf850f8e3b00a712005532dd38c474bd76c196aa6a322ee446859",
+  "ascendant-fig-1@wheel": "54ab7d76cde237a292fa3283f3a027749bc8768c077a198885fa46f5a900907f"
+ }
+}

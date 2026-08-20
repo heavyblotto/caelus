@@ -1,0 +1,52 @@
+{
+  "name": "caelus-widgets",
+  "version": "0.24.1",
+  "description": "Encyclopedia widgets for caelus: interactive figures whose resting render is the plate. Every widget is a pure function of a serializable { kind, params } spec.",
+  "type": "module",
+  "private": true,
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "node dist/test/plate.test.js && node dist/test/derivation.test.js && node dist/test/harness.test.js"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "caelus": "*",
+    "caelus-wheel": "*",
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "caelus": "*",
+    "caelus-wheel": "*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^6.0.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/src/index.js"
+    },
+    "./frame": {
+      "types": "./dist/src/frame.d.ts",
+      "default": "./dist/src/frame.js"
+    },
+    "./console": {
+      "types": "./dist/src/console.d.ts",
+      "default": "./dist/src/console.js"
+    },
+    "./registry": {
+      "types": "./dist/src/registry.d.ts",
+      "default": "./dist/src/registry.js"
+    },
+    "./derivation": {
+      "types": "./dist/src/derivation.d.ts",
+      "default": "./dist/src/derivation.js"
+    },
+    "./package.json": "./package.json"
+  }
+}
