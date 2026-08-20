@@ -1,0 +1,16 @@
+---
+alwaysApply: true
+---
+
+# Session plan anchor
+
+The governing task plan for the corpus/Encyclopedia build lives at
+`~/.cursor/plans/corpus_scope_and_wiring_72c4cd8e.plan.md`.
+
+- Read it before claiming anything about plan contents or status, and
+  re-read it after any context summarization/compaction.
+- Keep its todo statuses current as work lands.
+- Engine releases (version bumps, tags, publishes) are maintainer-only
+  and are never plan items or agent tasks.
+- If asked whether a context handoff is needed, do not give assurances
+  beyond what these anchors actually guarantee.

@@ -34,6 +34,13 @@ carries the unreleased engine 0.25.0 source.
   (`>=0.25.0 <0.26`); `scripts/check-docs.mjs` asserts the `FactKind` union
   and selector names against both doc pages.
 
+## Session plan
+
+The governing task plan for the corpus/Encyclopedia build lives at
+`~/.cursor/plans/corpus_scope_and_wiring_72c4cd8e.plan.md`. Read it at
+session start and after any context compaction; keep its todo statuses
+current. Engine releases are maintainer-only and are never plan items.
+
 ## User Defined Namespaces
 - [Leave blank - user populates]
 
