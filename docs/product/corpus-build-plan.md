@@ -248,9 +248,10 @@ is empty at the 0.88 cutoff; the corpus-wide max sits just under it
 
 ## Remaining work
 
-Order is load-bearing. A writing fleet pointed at B3 "remainder" would
-rewrite 738 cells that need review, not new prose. B5 cannot start until
-the grid names the cells.
+Task sequencing and status live in the working plan, not here. Two
+facts bear on any ordering: the B3 "remainder" was review debt, not
+unwritten prose (that review is now done), and B5 essays cannot be
+written before the grid names the cells.
 
 ### 1. Repair and review of what is already written
 
@@ -314,34 +315,26 @@ charts keep figures consistent from article to article.
 | The sky                           | Sky View at a stated place and time. Constellation overlays. A named star.                                             |
 | Election, VOC, hours              | Intervals for a day. A ranked window. Planetary hour at a clock time.                                                  |
 
-**The full article program.** "First articles" is the scaffolding
-milestone (routes, template, figure pipeline, glossary), not the
-extent. The extent is derived from the knowledge base, the same way
-corpus coverage is derived from the grid: every KB node (604 today —
-bodies, signs, houses, aspects, dignities, lots, nakshatras, vargas,
-yogas, the star catalog, traditions, people, source texts) resolves to
-exactly one of three fates — a full article, a glossary entry, or an
-explicit not-written marker. A coverage report over the KB plays the
-role the backlog reports play for the corpus; the Encyclopedia is done
-when that report is clean, not when the article list feels long
-enough. On top of the node articles sits a hand-listed set of
-synthesis articles that are not single nodes: house division as a
-problem, the tropical–sidereal question, sect, calculation and
-ephemerides, and the historical entries. Articles are written in
-waves like the corpus, but each one is researched and cited
-individually (sources through the KB's provenance edges to the PD
-manifest, figures as plate specs, embeddings evidence packs), so the
-waves run slower and the review bar is per-article, not per-cell.
+**Extent.** The Encyclopedia's extent is the knowledge base, the way
+corpus coverage is the grid: the 604 KB nodes (bodies, signs, houses,
+aspects, dignities, lots, nakshatras, vargas, yogas, the star catalog,
+traditions, people, source texts) each resolve to a full article, a
+glossary entry, or an explicit not-written marker, and a coverage
+report over the KB shows where that stands. Synthesis subjects that
+are not single nodes — house division as a problem, the
+tropical–sidereal question, sect, calculation and ephemerides, the
+historical entries — are their own hand-listed articles. Each article
+is researched and cited individually: sources through the KB's
+provenance edges to the PD manifest, figures as plate specs,
+embeddings evidence packs.
 
-### 5. Engine 0.25.0 release (maintainer-gated; not agent work)
+### 5. Engine 0.25.0 release
 
-The maintainer cuts releases. 0.25.0 is being held open deliberately
-so engine changes surfacing from this work (fact kinds, `VERSION`,
-skyview exports) can ride it; no agent bumps, tags, or publishes
-anything, ever. When the maintainer decides to release:
-`docs/releasing.md`. The corpus peer range already names the 0.25
-line, and the `VERSION` constant moves with the bump under
-`check-versions.mjs`.
+Cut from `engine/0.25.0` by the maintainer, who is holding it open so
+engine changes surfacing from this work (fact kinds, `VERSION`, skyview
+exports) can ride it. Release mechanics are `docs/releasing.md`. The
+corpus peer range already names the 0.25 line, and the `VERSION`
+constant moves with the bump under `check-versions.mjs`.
 
 ### 6. Distribution (closed)
 
@@ -349,11 +342,6 @@ Give the corpus away. Stay off npm (`private: true`); convenience, not
 lock-down. Essays live in the public Caelus repo. Consumers get a
 versioned download on the ephemengine site, not `npm install caelus-corpus`. MIT stays. Revisit npm later if the install path is
 worth it.
-
-### Later
-
-Composer mapping package and norm packs: not started. After the corpus
-is a shippable package.
 
 ---
 
