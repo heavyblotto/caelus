@@ -7,6 +7,8 @@
   "ascendant-fig-1@ecliptic": "5bf261660a1c7a8d78da27e4c4bcd5c128b2097e137484f007e96497d8795acb",
   "ascendant-fig-1@horizon": "eb25c24253ddf850f8e3b00a712005532dd38c474bd76c196aa6a322ee446859",
   "ascendant-fig-1@wheel": "54ab7d76cde237a292fa3283f3a027749bc8768c077a198885fa46f5a900907f",
+  "aspect-fig-1": "b0b5517325b58fb5be2e05fb8628a1a894be523f688eb9f2c32ccd9a9eb49738",
+  "aspect-fig-1@exact-opposition": "8a362eacbcf872a74935fb6de5bcd9a60b8bf275300f0ecdf9325896efdbecc1",
   "chart-fig-1": "54ab7d76cde237a292fa3283f3a027749bc8768c077a198885fa46f5a900907f",
   "chart-fig-1@sky": "93640c7a456e39f8ed3d0c27bed2fe037d2b62f353d4960dad79822411611eca",
   "chart-fig-1@sphere": "292fb03000ea80c4861243844d809182e09617642e1f89eaf9a230312d63913a",
@@ -31,6 +33,14 @@
   "house-fig-1@morinus": "a627d5724ce25ddb52614aa06a645690215fdbc801fecbe8a33535bbb443050b",
   "house-fig-1@meridian": "d774064b801cbcae13a958409e0e489c67e22c8e3afeffb80493262c9744219a",
   "house-fig-1@polich_page": "62e02f2fe647145f8b36b68a63f16ce4fdca1cf6c6c73f7a923afc819c883918",
-  "house-fig-1@vehlow": "64d95f156e7b07c870d9a8a413700673ac2580e75f0d9d4d85fbc2c3c42d1373"
+  "house-fig-1@vehlow": "64d95f156e7b07c870d9a8a413700673ac2580e75f0d9d4d85fbc2c3c42d1373",
+  "zodiac-fig-1": "75f4eb110d6fc7bf30fba965a9f6257a7d0fea1f6f7a5c9d4bd54864aa316ec3",
+  "zodiac-fig-1@lahiri": "75f4eb110d6fc7bf30fba965a9f6257a7d0fea1f6f7a5c9d4bd54864aa316ec3",
+  "zodiac-fig-1@fagan_bradley": "a8de4c3a984d8c4b9fc1d3ab43d8ad1bd7e817d2e91e6e9c47b4af13e4b6ba39",
+  "zodiac-fig-1@krishnamurti": "a53c3685611cb21f56194c286e6e9b4743c25f97e653852f35fcb2aacbdc0008",
+  "zodiac-fig-1@raman": "a23b0dde44b6ac10b75ecb53ec2bfda1da3bd11d914f9645086fdb716d2d741d",
+  "zodiac-fig-1@yukteshwar": "81dfd647587c307b980e6bc4345dc945a681c254079fc2bc599ee2006d160eb1",
+  "zodiac-fig-1@min-year": "095225a58592a2156c4c58d68ea8635141f2805aff450b574da235c20c1611cc",
+  "zodiac-fig-1@max-year": "9f52754b85da99a07677b8b663ad7c2aa77b3b02bbafc3ef3a6e0449c56580b5"
  }
 }

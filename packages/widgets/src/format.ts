@@ -11,6 +11,17 @@ export const SIGN_GLYPHS = [
   "♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏", "♐", "♑", "♒", "♓",
 ];
 
+/** The five major aspects, name → glyph, keyed like the engine's
+ *  ASPECTS table. */
+export const ASPECT_GLYPHS: Record<string, string> = {
+  conjunction: "☌", sextile: "⚹", square: "□", trine: "△", opposition: "☍",
+};
+
+/** UT calendar date (YYYY-MM-DD) of a Julian Day. */
+export function fmtDate(jdUt: number): string {
+  return new Date((jdUt - 2440587.5) * 86400000).toISOString().slice(0, 10);
+}
+
 /** Degrees to (whole degrees, zero-padded minutes). */
 export function dm(deg: number): [number, string] {
   const a = Math.abs(deg);

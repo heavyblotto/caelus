@@ -91,7 +91,42 @@ export interface HouseComparatorSpec {
   params: HouseComparatorParams;
 }
 
+/** Params for the zodiac-drift widget: the tropical and sidereal
+ *  rings overlaid, the ayanamsa gap under a century scrubber. The
+ *  instant anchors the resting year; the place rides along for the
+ *  uniform chart contract (the gap itself is global). */
+export interface ZodiacDriftParams extends ChartParams {
+  /** Sidereal mode at rest ("lahiri"); the picker offers all five. */
+  ayanamsa?: string;
+}
+
+export interface ZodiacDriftSpec {
+  kind: "zodiac-drift";
+  params: ZodiacDriftParams;
+}
+
+/** Params for the aspect-dial widget: two bodies on a circle, the orb
+ *  to the nearest aspect, and a live aspectarian under an orb slider. */
+export interface AspectDialParams extends ChartParams {
+  /** First body of the pair; defaults to the Sun. */
+  a?: string;
+  /** Second body of the pair (the one that drags); defaults to the Moon. */
+  b?: string;
+  /** Resting orb ceiling for the aspectarian, degrees; defaults to 6. */
+  orb?: number;
+}
+
+export interface AspectDialSpec {
+  kind: "aspect-dial";
+  params: AspectDialParams;
+}
+
 /** The discriminated union over every widget kind. */
-export type WidgetSpec = DerivationSpec | WheelAnatomySpec | HouseComparatorSpec;
+export type WidgetSpec =
+  | DerivationSpec
+  | WheelAnatomySpec
+  | HouseComparatorSpec
+  | ZodiacDriftSpec
+  | AspectDialSpec;
 
 export type WidgetKind = WidgetSpec["kind"];

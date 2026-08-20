@@ -183,6 +183,23 @@ const KINDS = {
       fail("compare must be a house-system name");
     }
   },
+  "zodiac-drift"(p, fail) {
+    checkChartParams(p, fail);
+    const modes = new Set([
+      "lahiri", "fagan_bradley", "krishnamurti", "raman", "yukteshwar",
+    ]);
+    if (p.ayanamsa !== undefined && !(isStr(p.ayanamsa) && modes.has(p.ayanamsa))) {
+      fail("ayanamsa must be one of lahiri, fagan_bradley, krishnamurti, raman, yukteshwar");
+    }
+  },
+  "aspect-dial"(p, fail) {
+    checkChartParams(p, fail);
+    if (p.a !== undefined && !isStr(p.a)) fail("a must be a body id");
+    if (p.b !== undefined && !isStr(p.b)) fail("b must be a body id");
+    if (p.orb !== undefined && !(isNum(p.orb) && p.orb >= 0 && p.orb <= 10)) {
+      fail("orb must be a number in [0, 10]");
+    }
+  },
 };
 
 // ---------------------------------------------------------------- scan

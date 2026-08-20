@@ -25,6 +25,8 @@ import { HOUSE_SYSTEMS } from "caelus";
 import { deriveScene, DerivationFigure, DERIVATION_STATIONS } from "../src/derivation.js";
 import { deriveAnatomy, WheelAnatomyFigure } from "../src/wheel-anatomy.js";
 import { deriveComparator, HouseComparatorFigure } from "../src/house-comparator.js";
+import { deriveDrift, DRIFT_MODES, ZodiacDriftFigure } from "../src/zodiac-drift.js";
+import { AspectDialFigure, deriveDial } from "../src/aspect-dial.js";
 import { ANATOMY_LAYERS } from "../src/spec.js";
 import type { PlateRegistry, PlateRecord } from "../src/registry.js";
 
@@ -107,6 +109,37 @@ function renderPlate(rec: PlateRecord): Record<string, string> {
         ));
       }
       return out;
+    }
+    case "zodiac-drift": {
+      // The drift hashes at rest, then once per ayanamsa mode (the
+      // picker's states), then at the scrub window's two ends.
+      const scene = deriveDrift(spec.params);
+      const at = (mode?: string, year?: number): string =>
+        sha(renderToStaticMarkup(
+          <ZodiacDriftFigure scene={scene} mode={mode} year={year} />,
+        ));
+      const out: Record<string, string> = { [rec.id]: at() };
+      for (const m of DRIFT_MODES) {
+        out[`${rec.id}@${m}`] = at(m);
+      }
+      out[`${rec.id}@min-year`] = at(undefined, scene.years[0]);
+      out[`${rec.id}@max-year`] = at(undefined, scene.years[scene.years.length - 1]);
+      return out;
+    }
+    case "aspect-dial": {
+      // The dial hashes at rest and at one dragged state: body b
+      // carried exactly opposite a (an exact opposition, so the orb
+      // arc closes).
+      const scene = deriveDial(eng, spec.params);
+      const at = (dragLonB?: number): string =>
+        sha(renderToStaticMarkup(
+          <AspectDialFigure scene={scene} dragLonB={dragLonB} />,
+        ));
+      const aLon = scene.bodies.find((x) => x.id === scene.pair.a)?.lon ?? 0;
+      return {
+        [rec.id]: at(),
+        [`${rec.id}@exact-opposition`]: at(aLon + 180),
+      };
     }
     default:
       throw new Error(`figure harness: unknown widget kind`);

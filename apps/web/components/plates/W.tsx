@@ -20,17 +20,22 @@
 import type { ReactElement } from "react";
 import {
   PlateFrame,
-  type ChartParams, type DerivationParams, type HouseComparatorParams,
-  type WheelAnatomyParams, type WidgetSpec,
+  type AspectDialParams, type ChartParams, type DerivationParams,
+  type HouseComparatorParams, type WheelAnatomyParams, type WidgetSpec,
+  type ZodiacDriftParams,
 } from "caelus-widgets";
 import { deriveScene } from "caelus-widgets/derivation";
 import { deriveAnatomy } from "caelus-widgets/wheel-anatomy";
 import { deriveComparator } from "caelus-widgets/house-comparator";
+import { deriveDrift } from "caelus-widgets/zodiac-drift";
+import { deriveDial } from "caelus-widgets/aspect-dial";
 import { sampleEngine } from "../../lib/sample-chart";
 import { b64urlEncode, type Share } from "../../lib/share";
 import DerivationPlate from "./DerivationPlate";
 import WheelAnatomyPlate from "./WheelAnatomyPlate";
 import HouseComparatorPlate from "./HouseComparatorPlate";
+import ZodiacDriftPlate from "./ZodiacDriftPlate";
+import AspectDialPlate from "./AspectDialPlate";
 
 export interface WProps {
   kind: WidgetSpec["kind"];
@@ -108,6 +113,34 @@ export default function W({
           reproduceHref={reproduceHref(params)}
         >
           <HouseComparatorPlate scene={scene} />
+        </PlateFrame>
+      );
+    }
+    case "zodiac-drift": {
+      // The drift needs no engine instance: the ayanamsa is a pure
+      // precession function, so the scene is a build-time constant.
+      const scene = deriveDrift(params as ZodiacDriftParams);
+      return (
+        <PlateFrame
+          figure={figure}
+          caption={caption}
+          engineVersion={scene.engineVersion}
+          reproduceHref={reproduceHref(params)}
+        >
+          <ZodiacDriftPlate scene={scene} />
+        </PlateFrame>
+      );
+    }
+    case "aspect-dial": {
+      const scene = deriveDial(sampleEngine, params as AspectDialParams);
+      return (
+        <PlateFrame
+          figure={figure}
+          caption={caption}
+          engineVersion={scene.engineVersion}
+          reproduceHref={reproduceHref(params)}
+        >
+          <AspectDialPlate scene={scene} />
         </PlateFrame>
       );
     }

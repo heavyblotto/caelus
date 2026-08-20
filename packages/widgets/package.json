@@ -8,7 +8,7 @@
   "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "node dist/test/plate.test.js && node dist/test/derivation.test.js && node dist/test/wheel-anatomy.test.js && node dist/test/house-comparator.test.js && node dist/test/harness.test.js"
+    "test": "node dist/test/plate.test.js && node dist/test/derivation.test.js && node dist/test/wheel-anatomy.test.js && node dist/test/house-comparator.test.js && node dist/test/zodiac-drift.test.js && node dist/test/aspect-dial.test.js && node dist/test/harness.test.js"
   },
   "license": "MIT",
   "peerDependencies": {
@@ -66,6 +66,22 @@
     "./house-comparator-widget": {
       "types": "./dist/src/house-comparator-widget.d.ts",
       "default": "./dist/src/house-comparator-widget.js"
+    },
+    "./zodiac-drift": {
+      "types": "./dist/src/zodiac-drift.d.ts",
+      "default": "./dist/src/zodiac-drift.js"
+    },
+    "./zodiac-drift-widget": {
+      "types": "./dist/src/zodiac-drift-widget.d.ts",
+      "default": "./dist/src/zodiac-drift-widget.js"
+    },
+    "./aspect-dial": {
+      "types": "./dist/src/aspect-dial.d.ts",
+      "default": "./dist/src/aspect-dial.js"
+    },
+    "./aspect-dial-widget": {
+      "types": "./dist/src/aspect-dial-widget.d.ts",
+      "default": "./dist/src/aspect-dial-widget.js"
     },
     "./package.json": "./package.json"
   }
