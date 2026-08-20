@@ -333,10 +333,15 @@ individually (sources through the KB's provenance edges to the PD
 manifest, figures as plate specs, embeddings evidence packs), so the
 waves run slower and the review bar is per-article, not per-cell.
 
-### 5. Cut engine 0.25.0
+### 5. Engine 0.25.0 release (maintainer-gated; not agent work)
 
-Version bump, changelog, `check:versions`, tag. Corpus peer already
-names that line. See `docs/releasing.md`.
+The maintainer cuts releases. 0.25.0 is being held open deliberately
+so engine changes surfacing from this work (fact kinds, `VERSION`,
+skyview exports) can ride it; no agent bumps, tags, or publishes
+anything, ever. When the maintainer decides to release:
+`docs/releasing.md`. The corpus peer range already names the 0.25
+line, and the `VERSION` constant moves with the bump under
+`check-versions.mjs`.
 
 ### 6. Distribution (closed)
 

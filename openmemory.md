@@ -82,6 +82,40 @@ carries the unreleased engine 0.25.0 source.
   `skyView` camera math. Engine-side additions ride the open 0.25.0
   cycle (vector-mode projection exports, fisheye-to-orthographic radial
   family, star-field quantities).
+- SkyView vector mode (`packages/caelus/src/skyview.ts`, unreleased
+  0.25.0): `skyCamera` (no-roll basis, zenith fallback), exported
+  `dirFromAzAlt`, `radialScale(shape)` (one-parameter azimuthal family:
+  -1 gnomonic, -0.5 stereographic, 0 equidistant, +0.5 equal-area,
+  +1 orthographic; `k·tan(θ/k)` / `k·sin(θ/k)` branches, continuous at
+  0), and `skyProjector` (refraction-free normalized coordinates,
+  az/alt or Vec3 in). Python mirrors `sky_camera` / `radial_scale` /
+  `sky_project`; the skyview golden pins a shape×theta grid and six
+  projector cases. `skyPlacer` now builds on `skyCamera` (behavior
+  unchanged, goldens prove it).
+- `caelus-wheel` plate theme (`packages/wheel/src/index.tsx`):
+  `PLATE_TOKENS` (paper `#f7f3e9`, panel `#fdfbf5`, ink `#22201c`,
+  oxblood accent `#8c2f2a`), `PLATE_THEME` (complete `WheelTheme`, all
+  13 bodies named; hard aspects full ink, soft muted), and
+  `PLATE_BODY_INKS` (muted earth tints for AstroMap/EphemerisGraph
+  `colors` prop; Mars deliberately not oxblood). `render.test.tsx`
+  asserts completeness over `GLYPHS` and that oxblood appears in no
+  base token.
+- `caelus-widgets` (`packages/widgets`, private): the Encyclopedia
+  widget system. Root subpath = shared system (`WidgetSpec` union in
+  `spec.ts`, registry types in `registry.ts`, `PlateFrame`,
+  `PlateConsole`); one subpath per widget kind
+  (`caelus-widgets/derivation`). Derivation widget splits engine from
+  render: `deriveScene(engine, params)` → serializable scene (bodies
+  in both frames, `eclToHor` rotation from `azAlt` on the ecliptic
+  basis, wheel payload), `DerivationFigure(scene, t)` pure; positions
+  always `eclToHor · unitVector(λ, β·(1−s))` so the coordinate handoff
+  is exact; settle aims at the ecliptic south pole for wheel
+  handedness; `t = 1` renders the real `ChartWheel`. Figure harness
+  (`test/harness.test.tsx`) hashes every registry plate at rest + all
+  five stations against `test/figure-hashes.json` and asserts stamp =
+  computing `VERSION`; regenerate with `CAELUS_FIGURES_WRITE=1`. All
+  three test files run individually in ci.yml (the repo pattern; root
+  `npm test` does not include wheel/widgets).
 - Widget-system compatibility surface (hold stable from the kb/corpus
   side): `caelus-kb` node ids, `jsonld.ts` page export,
   `artifacts/embeddings/neighbors.json`, the engine `VERSION` export, and
@@ -110,7 +144,14 @@ carries the unreleased engine 0.25.0 source.
   (2026-08-19, eleven agents, 119 files) cleared its scope to zero
   lexical findings. The B3 review wave (2026-08-19, eleven body-sliced
   reviewers over 60 files / 738 cells) plus mop-ups took all three
-  lexical backlogs to zero corpus-wide.
+  lexical backlogs to zero corpus-wide; a final eight-essay rewrite
+  emptied the semantic-echo report at its 0.88 cutoff. Repair program
+  complete.
+- Encyclopedia article extent is KB-derived: every KB node resolves to
+  a full article, a glossary entry, or an explicit not-written marker,
+  gated by a coverage report (the Encyclopedia analog of the corpus
+  backlog reports); synthesis articles (house division, tropical vs
+  sidereal, sect, history) are hand-listed on top.
 - Semantic-echo repair (whole-essay paraphrase pairs from
   `backlog/semantic-echoes.md`): edit ONE side per pair, chosen so a shared
   member clears multiple pairs; re-anchor the edited essay in what is
