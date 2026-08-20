@@ -28,7 +28,7 @@ import { firdariaAt } from "../src/firdaria.js";
 import { vimshottariAt } from "../src/vedic.js";
 import { yogasAt } from "../src/yogas.js";
 import {
-  interpret, hasPlacement, hasAspect, hasPattern, hasStar, hasLot, hasParallel,
+  interpret, hasPlacement, hasAspect, hasPattern, hasStar, hasLot, hasDegree, hasParallel,
   hasAngleContact,
   matchAll, matchNone,
   hasDispositor, hasReception, hasTransit, hasTransitHouse, hasStation,
@@ -699,6 +699,43 @@ for (const g of G.houses) {
     if (tight.some((a) => a.orb > 1) || tight.length > got.length) {
       failures++;
       console.error(`FAIL interp angleContact orb option: ${tight.length}/${got.length}`);
+    }
+  }
+
+  // Degree atoms: one per placed body (mean node sits out when the true node
+  // is present) plus the ASC and MC, with the ordinal degree and face index
+  // recomputed from the chart's own longitudes -- degree n spans [n-1°, n°)
+  // of the sign, so 14.5° Aries is the 15th degree; face = 1-3 by ten-degree
+  // band. The selector resolves against the projected atoms.
+  {
+    const wantPoints = new Map<string, number>();
+    for (const [body, p] of Object.entries(c.bodies)) {
+      if (!p || (body === "mean_node" && c.bodies.true_node)) continue;
+      wantPoints.set(body, p.lon);
+    }
+    wantPoints.set("asc", c.angles.asc);
+    wantPoints.set("mc", c.angles.mc);
+    const got = by("degree") as Array<{ point: string; sign: string; degree: number; face: number; id: string }>;
+    let bad = got.length !== wantPoints.size;
+    for (const a of got) {
+      const lon = wantPoints.get(a.point);
+      if (lon === undefined) { bad = true; break; }
+      const signDeg = mod(lon, 30);
+      const degree = Math.min(Math.floor(signDeg) + 1, 30);
+      const face = Math.min(Math.floor(signDeg / 10) + 1, 3);
+      if (a.degree !== degree || a.face !== face
+        || a.id !== `degree:${a.point}:${a.sign.toLowerCase()}:${degree}`) { bad = true; break; }
+    }
+    if (bad) {
+      failures++;
+      console.error(`FAIL interp degree: want ${wantPoints.size} points, got ${got.map((a) => a.id).join(",")}`);
+    }
+    const d0 = got.find((a) => a.point === "sun")!;
+    if (!hasDegree({ point: "sun", sign: d0.sign, degree: d0.degree })(ctx).matched
+      || !hasDegree({ sign: d0.sign, face: d0.face })(ctx).matched
+      || hasDegree({ point: "sun", degree: d0.degree === 1 ? 2 : d0.degree - 1 })(ctx).matched) {
+      failures++;
+      console.error(`FAIL hasDegree does not resolve ${d0.id}`);
     }
   }
 

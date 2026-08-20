@@ -33,9 +33,9 @@ era slabs the same way and returns the same 900 CE chart. The mint script,
 `python/fit_classical.py`, reproduces the slabs from Horizons. The sample
 caches (about 1.4 GB) are excluded from git; the 76 MB of slabs are committed.
 
-### `interpretationContext` gains seven fact kinds
+### `interpretationContext` gains eight fact kinds
 
-The `FactKind` union grows from 19 to 26. Each new kind has a golden test that
+The `FactKind` union grows from 19 to 27. Each new kind has a golden test that
 recomputes the atom set from the chart's numbers rather than pinning a
 snapshot.
 
@@ -62,6 +62,14 @@ snapshot.
   `composite` atoms carry the placements; this kind carries the relations
   among them. New `compositeAspects()` in `relational.ts`. Selector
   `hasCompositeAspect`.
+- **`degree`**: a point's zodiacal degree, stated ordinally the way degree
+  symbols count (a body at 14°30′ Aries occupies the 15th degree of Aries;
+  degree n spans [n-1°, n°)). One atom per placed body (the mean node sits
+  out when the true node is present, as in aspects) plus the Ascendant and
+  Midheaven, each also carrying the ten-degree face index (1-3), so degree
+  symbols and decanates bind through the same atom. Ids are
+  `degree:<point>:<sign>:<n>`, e.g. `degree:sun:aries:15`. Selector
+  `hasDegree`, filtering `point`/`sign`/`degree`/`face`.
 
 `parallel` and `outOfBounds` shipped in 0.24 and are now documented.
 
@@ -85,9 +93,9 @@ so period pairs are addressable; `hasTimelord` filters both.
 `enrichContextOptions` projects transit houses, stations, returns, and
 lunations by default, with flags and windows for each.
 
-**Minor-version notes.** `SalienceWeights` gained three required fields
-(`planetReturn`, `lunation`, `solarPhase`), so a consumer writing a complete
-object literal must add them; `Partial<>` overrides through
+**Minor-version notes.** `SalienceWeights` gained four required fields
+(`planetReturn`, `lunation`, `solarPhase`, `degreeSymbol`), so a consumer
+writing a complete object literal must add them; `Partial<>` overrides through
 `ContextOptions.salience` are unaffected. The `FactKind` union grew, which
 breaks exhaustive `switch` statements over it.
 

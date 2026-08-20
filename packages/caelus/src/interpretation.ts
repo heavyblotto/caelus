@@ -67,7 +67,7 @@ const DIGNITY_RANK: Record<string, number> = { domicile: 3, exaltation: 2, tripl
 /** Atom kinds in an {@link InterpretationContext}. */
 export type FactKind =
   | "placement" | "aspect" | "pattern" | "signature" | "angle" | "angleContact"
-  | "dispositor" | "reception" | "star" | "lot"
+  | "dispositor" | "reception" | "star" | "lot" | "degree"
   | "transit" | "transitHouse" | "station"
   | "synastry" | "composite" | "compositeAspect" | "timelord" | "dignity"
   | "nakshatra" | "varga" | "yoga"
@@ -108,6 +108,25 @@ export interface AspectAtom extends FactAtomBase {
   phase: AspectPhase;
   /** Closeness in `[0, 1]`: `1` exact, `0` at the orb limit. */
   strength: number;
+}
+
+/** A point's zodiacal degree, stated ordinally: a body at 14°30' Aries
+ *  occupies the *15th degree* of Aries -- degree symbols (Sabian and the
+ *  older sets) count from 1, so degree n spans [n-1°, n°) of the sign.
+ *  Emitted for every placed body (the mean node sits out when the true
+ *  node is present, as in aspects) and for the Ascendant and Midheaven.
+ *  `face` is the index of the sign's ten-degree face this degree falls in
+ *  (1-3) -- the face itself, not its dignity ruler, which is the `dignity`
+ *  atom's `face` facet. */
+export interface DegreeAtom extends FactAtomBase {
+  kind: "degree";
+  /** A body id, or `"asc"` / `"mc"` for the chart angles. */
+  point: string;
+  sign: string;
+  /** Ordinal degree within the sign, 1-30. */
+  degree: number;
+  /** Ten-degree face (decanate) index within the sign, 1-3. */
+  face: number;
 }
 
 export interface PatternAtom extends FactAtomBase {
@@ -352,7 +371,7 @@ export interface SolarPhaseAtom extends FactAtomBase {
 
 export type FactAtom =
   | PlacementAtom | AspectAtom | PatternAtom | SignatureAtom | AngleAtom
-  | AngleContactAtom | DispositorAtom | ReceptionAtom | StarAtom | LotAtom
+  | AngleContactAtom | DispositorAtom | ReceptionAtom | StarAtom | LotAtom | DegreeAtom
   | TransitAtom | TransitHouseAtom | StationAtom
   | SynastryAtom | CompositeAtom | CompositeAspectAtom | TimelordAtom | DignityAtom
   | NakshatraAtom | VargaAtom | YogaAtom
@@ -426,6 +445,9 @@ export interface SalienceWeights {
   lunation: number;
   /** Added to a solar-condition fact (cazimi/combust/under the beams). */
   solarPhase: number;
+  /** Added to a point's zodiacal-degree fact (degree symbols are
+   *  subsidiary color, so the default sits below every other kind). */
+  degreeSymbol: number;
 }
 
 export const DEFAULT_SALIENCE: SalienceWeights = {
@@ -434,7 +456,7 @@ export const DEFAULT_SALIENCE: SalienceWeights = {
   star: 2, lot: 2, transit: 1.5, transitHouse: 1, station: 2,
   synastry: 1, composite: 0.8, timelord: 2,
   dignityFine: 0.4, vedic: 1, parallel: 1.5, outOfBounds: 1.5,
-  planetReturn: 2.5, lunation: 1.5, solarPhase: 0.8,
+  planetReturn: 2.5, lunation: 1.5, solarPhase: 0.8, degreeSymbol: 0.3,
 };
 
 export interface ContextOptions {
@@ -513,7 +535,8 @@ const TIME_SENSITIVE_KEEP: Record<Certainty, number> = {
  *  (~13°/day), the fastest-shifting facts under a time error. */
 function timeSensitive(atom: FactAtom): boolean {
   return atom.kind === "angle" || atom.kind === "angleContact"
-    || atom.kind === "lot" || atom.bodies.includes("moon");
+    || atom.kind === "lot" || atom.bodies.includes("moon")
+    || (atom.kind === "degree" && (atom.point === "asc" || atom.point === "mc"));
 }
 
 function title(body: string): string {
@@ -734,6 +757,38 @@ export function interpretationContext(
   angleAtom("mc", chart.angles.mc);
   angleAtom("vertex", chart.angles.vertex);
   angleAtom("eastPoint", chart.angles.eastPoint);
+
+  // Zodiacal degrees, stated ordinally (a body at 14°30' Aries occupies the
+  // 15th degree of Aries -- the degree-symbol convention). One atom per
+  // placed body plus the ASC and MC; the mean node sits out when the true
+  // node is present, as in aspects. The face index (1-3) rides along so a
+  // decanate selector shares the same atom.
+  {
+    const ord = (n: number): string => {
+      const r = n % 10, rr = n % 100;
+      const suffix = rr >= 11 && rr <= 13 ? "th"
+        : r === 1 ? "st" : r === 2 ? "nd" : r === 3 ? "rd" : "th";
+      return `${n}${suffix}`;
+    };
+    const degreeAtom = (point: string, label: string, lon: number, bodies: string[]): void => {
+      const sign = SIGNS[Math.floor(mod(lon, 360) / 30)];
+      const signDeg = mod(lon, 30);
+      const degree = Math.min(Math.floor(signDeg) + 1, 30);
+      const face = Math.min(Math.floor(signDeg / 10) + 1, 3);
+      atoms.push({
+        id: `degree:${point}:${sign.toLowerCase()}:${degree}`, kind: "degree",
+        bodies, salience: w.base + w.degreeSymbol,
+        point, sign, degree, face,
+        text: `${label} in the ${ord(degree)} degree of ${sign} (face ${face})`,
+      });
+    };
+    for (const [body, p] of Object.entries(chart.bodies)) {
+      if (!p || (body === "mean_node" && chart.bodies.true_node)) continue;
+      degreeAtom(body, title(body), p.lon, [body]);
+    }
+    degreeAtom("asc", "Ascendant", chart.angles.asc, []);
+    degreeAtom("mc", "Midheaven", chart.angles.mc, []);
+  }
 
   // Planet-on-angle contacts: a body conjunct the ASC/DSC/MC/IC point within
   // `angleOrb`. mean_node sits out (it would double the true node's contact,

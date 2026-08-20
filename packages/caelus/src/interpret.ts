@@ -46,6 +46,21 @@ export function hasPlacement(filter: {
     && (filter.dignity === undefined || a.dignities.includes(filter.dignity))));
 }
 
+/** Matches a point's zodiacal-degree atom by point (a body id, `"asc"`, or
+ *  `"mc"`), sign, ordinal degree within the sign (1-30: a body at 14°30'
+ *  Aries is in the 15th degree, the degree-symbol convention), and/or the
+ *  ten-degree face index (1-3). */
+export function hasDegree(filter: {
+  point?: string; sign?: string; degree?: number; face?: number;
+} = {}): Selector {
+  return (ctx) => hit(ctx.atoms.filter((a) =>
+    a.kind === "degree"
+    && (filter.point === undefined || a.point === filter.point)
+    && (filter.sign === undefined || a.sign === filter.sign)
+    && (filter.degree === undefined || a.degree === filter.degree)
+    && (filter.face === undefined || a.face === filter.face)));
+}
+
 /** Matches aspect atoms. `between` is an unordered pair; `minStrength` filters
  *  loose aspects; `phase` filters applying/separating. */
 export function hasAspect(filter: {

@@ -204,6 +204,9 @@ Brihat
 milliarcsec
 centideg
 [Dd]igests?
+[Mm]idheaven
+ordinally
+[Dd]ecanates?
 sidecar
 bit-stability
 bit-identical

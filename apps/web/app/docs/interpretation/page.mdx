@@ -82,7 +82,7 @@ Every atom carries five common fields:
   `signature:element:fire`, `angle:asc`). A generated claim points at this id,
   so it can always be traced back to the fact it rests on.
 - **`kind`**: `placement | aspect | pattern | signature | angle | angleContact |
-  dispositor | reception | star | lot | transit | transitHouse | station |
+  dispositor | reception | star | lot | degree | transit | transitHouse | station |
   synastry | composite | compositeAspect | timelord | dignity | nakshatra |
   varga | yoga |
   parallel | outOfBounds | return | lunation | solarPhase`.
@@ -94,6 +94,12 @@ Every atom carries five common fields:
 **Reception** atoms record mutual reception by **domicile**, **exaltation**, or
 the sect's **triplicity** ruler (or a mixed pair, e.g. `domicile-exaltation`).
 Use `hasReception({ body: "venus" })` to match any involving Venus.
+
+**Degree** atoms state each point's zodiacal degree ordinally, the way degree
+symbols count: a body at 14°30′ Aries occupies the *15th* degree of Aries.
+One atom per placed body plus the Ascendant and Midheaven, each also carrying
+the ten-degree face index (1-3). Match with
+`hasDegree({ sign: "Aries", degree: 15 })`.
 
 **Star** and **lot** atoms are not computed from a bare `Chart` (the star
 catalog lives in the data pack, and lots derive from the points and sect), so a
@@ -271,7 +277,7 @@ cannot.
   label="selectors.ts"
   code={`import {
   hasPlacement, hasAspect, hasPattern, hasSignature, hasAngle,
-  hasDispositor, hasReception, hasStar, hasLot,
+  hasDispositor, hasReception, hasStar, hasLot, hasDegree,
   hasTransit, hasTimelord, hasSynastry, hasComposite,
   hasDignityFine, hasNakshatra, hasVarga, hasYoga,
   matchAll, matchAny, matchNone,
@@ -286,6 +292,7 @@ hasSignature("element", "fire");
 hasReception({ body: "venus" });
 hasStar({ star: "Algol" });                       // any body conjunct Algol
 hasLot({ lot: "fortune", house: 1 });             // Part of Fortune rising
+hasDegree({ sign: "Aries", degree: 15 });         // any point in the 15th degree of Aries
 hasTransit({ transit: "saturn", natal: "moon", aspect: "square" });
 hasTimelord({ system: "profection", level: "year" });
 

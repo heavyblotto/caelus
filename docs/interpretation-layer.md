@@ -37,7 +37,7 @@ Every atom carries:
   `signature:element:fire`, `angle:asc`). Interpretations reference this id, so a
   generated claim can point at the fact it rests on.
 - `kind` -- `placement | aspect | pattern | signature | angle | angleContact |
-  dispositor | reception | star | lot | transit | transitHouse | station |
+  dispositor | reception | star | lot | degree | transit | transitHouse | station |
   synastry | composite | compositeAspect | timelord | dignity | nakshatra |
   varga | yoga |
   parallel | outOfBounds | return | lunation | solarPhase`.
@@ -106,6 +106,9 @@ geometric, time-only `query` predicates cannot.
   `hasPattern({ kind, body })`, `hasSignature(facet, value)`,
   `hasAngle(angle, sign)`, `hasDispositor({ body })`, `hasReception({ body })`,
   `hasStar({ body, star })`, `hasLot({ lot, sign, house })`,
+  `hasDegree({ point, sign, degree, face })` (ordinal degree 1-30 -- a body
+  at 14°30' Aries is in the 15th degree, the degree-symbol convention --
+  and/or the ten-degree face index 1-3),
   `hasParallel({ body, between, declination, maxOrb })`,
   `hasOutOfBounds({ body, minMargin })`.
 - combinators: `matchAll(...)` (every selector; unions atoms), `matchAny(...)`
