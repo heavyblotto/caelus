@@ -92,8 +92,17 @@ agent track, Cursor, on the maintainer's machine as of 2026-08-20:
 `docs/product/local-pipelines-plan.md`. The committed artifacts
 (neighbors.json, echo report, library.csv columns, aggregate mining
 reports, fixture manifests) are the interface; remote tracks consume
-them and request refreshes. Four writers now share this file; keep
+them and request refreshes. Five writers now share this file; keep
 edits additive.
+
+The Memorativa engine is a dedicated fifth agent track (maintainer
+decision, 2026-08-20): the track owns `packages/memorativa`, the
+public peer of `caelus`, and scaffolds against the committed
+public-domain goldens (Agrippa kameas, Hebrew letter values). The
+in-copyright oracle fixtures stay with the local pipeline track as
+hash-pinned manifests; the widget track's kamea/number widgets and
+the Encyclopedia's numerical figures are its consumers. Its doc of
+record is `docs/product/memorativa-build-plan.md`.
 
 Maintainer decisions of 2026-08-20: the Encyclopedia is the
 Encyclopedia of Hermes (Western esoteric traditions; astrology is the
