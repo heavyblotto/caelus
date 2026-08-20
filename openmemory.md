@@ -273,6 +273,31 @@ Recorded in the build plan intro and streams G, H, J.
   trine at the seed instant) bring the registry to six plates; harness
   hashes drift at rest/per-mode/window-ends and the dial at rest and
   at exact opposition (41 hashes total).
+- `retrograde-scrub` and `sect-flip` widgets (`packages/widgets/src/`,
+  landed 0816e47 on `feature/house-corpus`, 2026-08-20): the fifth and
+  sixth widget kinds. Retrograde-scrub is the graphic ephemeris
+  through a station: `deriveRetro(engine, params)` brackets the loop
+  nearest the instant (`stations()` scan ±450 d, pair SR→SD, containing
+  loop else nearest midpoint), samples unwrapped geocentric longitude
+  (continuous through 0° ♈) and speed (361 samples), and carries a
+  121-point heliocentric track via `earthHeliocentric(engine.data, …)`
+  + `vsopHeliocentric(engine.data.vsop[body], …)` over `jdTT` — the
+  inset draws the Sun, both orbits, and the Earth→body sight line to
+  the zodiac ring (the overtake that causes the loop). Bodies limited
+  to the seven VSOP planets (`RETRO_BODIES`; Pluto's helio path is a
+  separate export, not yet wired). `EphemerisGraph` gained declarative
+  furniture props (`band`, `marks`, `cursor`, `accent`) — pure,
+  SSR-safe, reused from caelus-wheel rather than overlayed widget-side.
+  Sect-flip: `deriveSect` computes both hermetic lot sets
+  (`hermeticLots(asc, day|night, …)`), the chart's actual sect
+  (`isDayChart`), and the seven-classical-body sect table
+  (`planetarySect`/`inSect`); the figure injects Fortune ⊕ and Spirit
+  ⊗ onto the `ChartWheel` as extra bodies with the `glyphs` prop and
+  oxblood `planetColors` (no wheel changes needed — `WheelChart.bodies`
+  is an open record). The day/night picker flips formulas; the datum
+  marks the counterfactual. Seed entries `retrograde.mdx` (mercury) and
+  `sect.mdx` (`kb="technique:lots"`; no retrograde node exists in the
+  KB) bring the registry to eight plates, 47 figure hashes.
 - Plate registry scan (`scripts/scan-plates.mjs`, `npm run
   plates:scan`): the MDX AST scan over the Encyclopedia sources
   (`apps/web/content/encyclopedia/*.mdx` now;
