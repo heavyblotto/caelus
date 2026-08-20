@@ -1,0 +1,14 @@
+[
+  { "house": 1, "topics": ["life", "body", "appearance", "temperament"], "attestedIn": "lilly-christian-astrology" },
+  { "house": 2, "topics": ["money", "movable goods", "possessions"], "attestedIn": "lilly-christian-astrology" },
+  { "house": 3, "topics": ["siblings", "neighbors", "short journeys", "letters"], "attestedIn": "lilly-christian-astrology" },
+  { "house": 4, "topics": ["father", "home", "land", "endings"], "attestedIn": "lilly-christian-astrology" },
+  { "house": 5, "topics": ["children", "pleasure", "play", "speculation"], "attestedIn": "lilly-christian-astrology" },
+  { "house": 6, "topics": ["illness", "service", "servants", "small animals"], "attestedIn": "lilly-christian-astrology" },
+  { "house": 7, "topics": ["partnership", "marriage", "open enemies"], "attestedIn": "lilly-christian-astrology" },
+  { "house": 8, "topics": ["death", "inheritance", "the partner's money"], "attestedIn": "lilly-christian-astrology" },
+  { "house": 9, "topics": ["long journeys", "religion", "higher learning", "dreams"], "attestedIn": "lilly-christian-astrology" },
+  { "house": 10, "topics": ["honor", "office", "profession", "the mother"], "attestedIn": "lilly-christian-astrology" },
+  { "house": 11, "topics": ["friends", "hopes", "allies"], "attestedIn": "lilly-christian-astrology" },
+  { "house": 12, "topics": ["hidden enemies", "confinement", "self-undoing", "large animals"], "attestedIn": "lilly-christian-astrology" }
+]

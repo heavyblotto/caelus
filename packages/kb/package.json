@@ -1,0 +1,41 @@
+{
+  "name": "caelus-kb",
+  "version": "0.1.0",
+  "description": "A knowledge base of astrological structure for the Caelus engine: typed concept nodes, typed edges, and provenance, derived from the engine's own tables.",
+  "type": "module",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "dist/src",
+    "data"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "generate": "tsc && node dist/src/generate-cli.js",
+    "test": "node dist/test/drift.test.js && node dist/test/parse.test.js"
+  },
+  "license": "MIT",
+  "private": true,
+  "peerDependencies": {
+    "caelus": ">=0.25.0 <0.26"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "caelus": "^0.24.1",
+    "caelus-delineations-pd": "^0.1.5",
+    "typescript": "^6.0.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/src/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "keywords": [
+    "astrology",
+    "knowledge-base",
+    "concept-graph"
+  ],
+  "sideEffects": false
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "hellenistic",
+    "label": "Hellenistic",
+    "period": "c. 100 BCE - 600 CE",
+    "note": "Greco-Egyptian foundation: houses, sect, lots, and the first time-lord systems."
+  },
+  {
+    "id": "perso-arabic",
+    "label": "Perso-Arabic (medieval)",
+    "period": "c. 750 - 1200 CE",
+    "note": "Transmission and extension of Hellenistic method: firdaria, expanded lots, receptions."
+  },
+  {
+    "id": "renaissance",
+    "label": "Renaissance",
+    "period": "c. 1400 - 1700 CE",
+    "note": "Latin and vernacular consolidation; Lilly's horary and natal practice."
+  },
+  {
+    "id": "modern",
+    "label": "Modern",
+    "period": "c. 1850 CE - present",
+    "note": "Revival from the Theosophical era onward: outer planets, psychological reading."
+  },
+  {
+    "id": "jyotisa",
+    "label": "Jyotisa",
+    "period": "c. 100 CE - present",
+    "note": "Indian sidereal tradition: nakshatras, vargas, dashas, yogas."
+  }
+]

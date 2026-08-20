@@ -89,10 +89,51 @@ if (!rangeMatch) {
   }
 }
 
+// caelus-corpus and caelus-kb also version independently and must use the
+// same peer shape. Each is allowed to name a FUTURE engine line (they bind to
+// fact kinds the next release ships): if the peer's lower bound is above
+// canonical the pin is forward and legal. Once the engine reaches the lower
+// bound, the range must admit canonical or the check fails — real drift.
+const forwardPinned = [
+  ["caelus-corpus", "packages/caelus-corpus/package.json"],
+  ["caelus-kb", "packages/kb/package.json"],
+];
+const forwardSummaries = [];
+for (const [name, path] of forwardPinned) {
+  const pkg = JSON.parse(read(path));
+  const range = pkg.peerDependencies?.caelus;
+  let note = "";
+  if (pkg.dependencies?.caelus) {
+    depErrors.push(
+      `${name} lists caelus in dependencies — it must be a peerDependency`,
+    );
+  }
+  const match = range?.match(/^>=(\d+\.\d+\.\d+) <(\d+\.\d+(?:\.\d+)?)$/);
+  if (!match) {
+    depErrors.push(
+      `${name} peerDependencies.caelus is "${range}", expected ">=A.B.C <X.Y" form`,
+    );
+    continue;
+  }
+  const lo = parseVer(match[1]);
+  const hi = parseVer(match[2].split(".").length === 2 ? `${match[2]}.0` : match[2]);
+  const can = parseVer(canonical);
+  if (cmp(can, lo) < 0) {
+    note = ` (forward pin; engine not yet at ${match[1]})`;
+  } else if (cmp(can, hi) >= 0) {
+    depErrors.push(
+      `${name} peer range "${range}" does not admit caelus ${canonical} — ` +
+        "widen the range and bump the package version",
+    );
+  }
+  forwardSummaries.push(`${name} at ${pkg.version} (peer ${range}${note})`);
+}
+
 if (mismatches.length === 0 && depErrors.length === 0) {
   console.log(
     `versions check passed — all artifacts at ${canonical}; ` +
-      `caelus-delineations-pd at ${pdPkg.version} (peer ${pdRange})`,
+      `caelus-delineations-pd at ${pdPkg.version} (peer ${pdRange}); ` +
+      forwardSummaries.join("; "),
   );
   process.exit(0);
 }

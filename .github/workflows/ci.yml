@@ -82,6 +82,8 @@ jobs:
       # canonical mode (integer output + digests): TS must EQUAL the Python
       # reference -- the one tolerance-free golden; every comparison is ===
       - run: node packages/caelus/dist/test/canonical-golden.test.js
+      # era-pack plumbing (deep-time): slab selection, defaults, refusal, spans
+      - run: node packages/caelus/dist/test/era-packs.test.js
       # every test/*.test.* file in the repo must be wired into this workflow;
       # four golden suites once sat dormant for ~11 releases because this list
       # is maintained by hand. The gate makes silent omission impossible.
@@ -89,6 +91,12 @@ jobs:
       # interpretation corpus: compiled rules must bind to legal atoms only
       - run: npm run build -w caelus-delineations-pd
       - run: npm run test -w caelus-delineations-pd
+      # the Caelus corpus: every essay sits on a grid cell, compiles to a rule,
+      # fires for its fact and not for a shifted one, and passes the corpus lints
+      - run: npm run build -w caelus-corpus
+      - run: npm run test -w caelus-corpus
+      - run: npm run build -w caelus-kb
+      - run: npm run test -w caelus-kb
       - run: npm run build -w caelus-mcp
       - run: npm run facts:sync
       - run: node packages/caelus-mcp/smoke.mjs

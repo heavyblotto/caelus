@@ -15,6 +15,8 @@ const PACKAGES = [
   "packages/wheel",
   "packages/birth",
   "packages/caelus-delineations-pd",
+  "packages/caelus-corpus",
+  "packages/kb",
 ];
 
 const missing = [];

@@ -1,0 +1,8872 @@
+{
+  "version": "0.1.0",
+  "nodes": [
+    {
+      "id": "body:sun",
+      "type": "Body",
+      "label": "Sun"
+    },
+    {
+      "id": "body:moon",
+      "type": "Body",
+      "label": "Moon"
+    },
+    {
+      "id": "body:mercury",
+      "type": "Body",
+      "label": "Mercury"
+    },
+    {
+      "id": "body:venus",
+      "type": "Body",
+      "label": "Venus"
+    },
+    {
+      "id": "body:mars",
+      "type": "Body",
+      "label": "Mars"
+    },
+    {
+      "id": "body:jupiter",
+      "type": "Body",
+      "label": "Jupiter"
+    },
+    {
+      "id": "body:saturn",
+      "type": "Body",
+      "label": "Saturn"
+    },
+    {
+      "id": "body:uranus",
+      "type": "Body",
+      "label": "Uranus"
+    },
+    {
+      "id": "body:neptune",
+      "type": "Body",
+      "label": "Neptune"
+    },
+    {
+      "id": "body:pluto",
+      "type": "Body",
+      "label": "Pluto"
+    },
+    {
+      "id": "body:chiron",
+      "type": "Body",
+      "label": "Chiron"
+    },
+    {
+      "id": "body:mean_node",
+      "type": "Body",
+      "label": "Mean Node"
+    },
+    {
+      "id": "body:true_node",
+      "type": "Body",
+      "label": "True Node"
+    },
+    {
+      "id": "body:mean_lilith",
+      "type": "Body",
+      "label": "Mean Lilith"
+    },
+    {
+      "id": "body:true_lilith",
+      "type": "Body",
+      "label": "True Lilith"
+    },
+    {
+      "id": "body:rahu",
+      "type": "Body",
+      "label": "Rahu"
+    },
+    {
+      "id": "body:ketu",
+      "type": "Body",
+      "label": "Ketu"
+    },
+    {
+      "id": "body:north_node",
+      "type": "Body",
+      "label": "North Node"
+    },
+    {
+      "id": "body:south_node",
+      "type": "Body",
+      "label": "South Node"
+    },
+    {
+      "id": "sign:aries",
+      "type": "Sign",
+      "label": "Aries",
+      "data": {
+        "index": 0
+      }
+    },
+    {
+      "id": "sign:taurus",
+      "type": "Sign",
+      "label": "Taurus",
+      "data": {
+        "index": 1
+      }
+    },
+    {
+      "id": "sign:gemini",
+      "type": "Sign",
+      "label": "Gemini",
+      "data": {
+        "index": 2
+      }
+    },
+    {
+      "id": "sign:cancer",
+      "type": "Sign",
+      "label": "Cancer",
+      "data": {
+        "index": 3
+      }
+    },
+    {
+      "id": "sign:leo",
+      "type": "Sign",
+      "label": "Leo",
+      "data": {
+        "index": 4
+      }
+    },
+    {
+      "id": "sign:virgo",
+      "type": "Sign",
+      "label": "Virgo",
+      "data": {
+        "index": 5
+      }
+    },
+    {
+      "id": "sign:libra",
+      "type": "Sign",
+      "label": "Libra",
+      "data": {
+        "index": 6
+      }
+    },
+    {
+      "id": "sign:scorpio",
+      "type": "Sign",
+      "label": "Scorpio",
+      "data": {
+        "index": 7
+      }
+    },
+    {
+      "id": "sign:sagittarius",
+      "type": "Sign",
+      "label": "Sagittarius",
+      "data": {
+        "index": 8
+      }
+    },
+    {
+      "id": "sign:capricorn",
+      "type": "Sign",
+      "label": "Capricorn",
+      "data": {
+        "index": 9
+      }
+    },
+    {
+      "id": "sign:aquarius",
+      "type": "Sign",
+      "label": "Aquarius",
+      "data": {
+        "index": 10
+      }
+    },
+    {
+      "id": "sign:pisces",
+      "type": "Sign",
+      "label": "Pisces",
+      "data": {
+        "index": 11
+      }
+    },
+    {
+      "id": "house:1",
+      "type": "House",
+      "label": "1st house",
+      "data": {
+        "topics": [
+          "life",
+          "body",
+          "appearance",
+          "temperament"
+        ]
+      }
+    },
+    {
+      "id": "house:2",
+      "type": "House",
+      "label": "2nd house",
+      "data": {
+        "topics": [
+          "money",
+          "movable goods",
+          "possessions"
+        ]
+      }
+    },
+    {
+      "id": "house:3",
+      "type": "House",
+      "label": "3rd house",
+      "data": {
+        "topics": [
+          "siblings",
+          "neighbors",
+          "short journeys",
+          "letters"
+        ]
+      }
+    },
+    {
+      "id": "house:4",
+      "type": "House",
+      "label": "4th house",
+      "data": {
+        "topics": [
+          "father",
+          "home",
+          "land",
+          "endings"
+        ]
+      }
+    },
+    {
+      "id": "house:5",
+      "type": "House",
+      "label": "5th house",
+      "data": {
+        "topics": [
+          "children",
+          "pleasure",
+          "play",
+          "speculation"
+        ]
+      }
+    },
+    {
+      "id": "house:6",
+      "type": "House",
+      "label": "6th house",
+      "data": {
+        "topics": [
+          "illness",
+          "service",
+          "servants",
+          "small animals"
+        ]
+      }
+    },
+    {
+      "id": "house:7",
+      "type": "House",
+      "label": "7th house",
+      "data": {
+        "topics": [
+          "partnership",
+          "marriage",
+          "open enemies"
+        ]
+      }
+    },
+    {
+      "id": "house:8",
+      "type": "House",
+      "label": "8th house",
+      "data": {
+        "topics": [
+          "death",
+          "inheritance",
+          "the partner's money"
+        ]
+      }
+    },
+    {
+      "id": "house:9",
+      "type": "House",
+      "label": "9th house",
+      "data": {
+        "topics": [
+          "long journeys",
+          "religion",
+          "higher learning",
+          "dreams"
+        ]
+      }
+    },
+    {
+      "id": "house:10",
+      "type": "House",
+      "label": "10th house",
+      "data": {
+        "topics": [
+          "honor",
+          "office",
+          "profession",
+          "the mother"
+        ]
+      }
+    },
+    {
+      "id": "house:11",
+      "type": "House",
+      "label": "11th house",
+      "data": {
+        "topics": [
+          "friends",
+          "hopes",
+          "allies"
+        ]
+      }
+    },
+    {
+      "id": "house:12",
+      "type": "House",
+      "label": "12th house",
+      "data": {
+        "topics": [
+          "hidden enemies",
+          "confinement",
+          "self-undoing",
+          "large animals"
+        ]
+      }
+    },
+    {
+      "id": "house-system:placidus",
+      "type": "HouseSystem",
+      "label": "Placidus"
+    },
+    {
+      "id": "house-system:porphyry",
+      "type": "HouseSystem",
+      "label": "Porphyry"
+    },
+    {
+      "id": "house-system:equal",
+      "type": "HouseSystem",
+      "label": "Equal"
+    },
+    {
+      "id": "house-system:whole-sign",
+      "type": "HouseSystem",
+      "label": "Whole Sign"
+    },
+    {
+      "id": "house-system:koch",
+      "type": "HouseSystem",
+      "label": "Koch"
+    },
+    {
+      "id": "house-system:regiomontanus",
+      "type": "HouseSystem",
+      "label": "Regiomontanus"
+    },
+    {
+      "id": "house-system:campanus",
+      "type": "HouseSystem",
+      "label": "Campanus"
+    },
+    {
+      "id": "house-system:alcabitius",
+      "type": "HouseSystem",
+      "label": "Alcabitius"
+    },
+    {
+      "id": "house-system:morinus",
+      "type": "HouseSystem",
+      "label": "Morinus"
+    },
+    {
+      "id": "house-system:meridian",
+      "type": "HouseSystem",
+      "label": "Meridian"
+    },
+    {
+      "id": "house-system:polich-page",
+      "type": "HouseSystem",
+      "label": "Polich Page"
+    },
+    {
+      "id": "house-system:vehlow",
+      "type": "HouseSystem",
+      "label": "Vehlow"
+    },
+    {
+      "id": "aspect:conjunction",
+      "type": "AspectType",
+      "label": "Conjunction",
+      "data": {
+        "angle": 0,
+        "defaultOrb": 8
+      }
+    },
+    {
+      "id": "aspect:sextile",
+      "type": "AspectType",
+      "label": "Sextile",
+      "data": {
+        "angle": 60,
+        "defaultOrb": 4
+      }
+    },
+    {
+      "id": "aspect:square",
+      "type": "AspectType",
+      "label": "Square",
+      "data": {
+        "angle": 90,
+        "defaultOrb": 7
+      }
+    },
+    {
+      "id": "aspect:trine",
+      "type": "AspectType",
+      "label": "Trine",
+      "data": {
+        "angle": 120,
+        "defaultOrb": 7
+      }
+    },
+    {
+      "id": "aspect:opposition",
+      "type": "AspectType",
+      "label": "Opposition",
+      "data": {
+        "angle": 180,
+        "defaultOrb": 8
+      }
+    },
+    {
+      "id": "element:fire",
+      "type": "Element",
+      "label": "Fire"
+    },
+    {
+      "id": "element:earth",
+      "type": "Element",
+      "label": "Earth"
+    },
+    {
+      "id": "element:air",
+      "type": "Element",
+      "label": "Air"
+    },
+    {
+      "id": "element:water",
+      "type": "Element",
+      "label": "Water"
+    },
+    {
+      "id": "modality:cardinal",
+      "type": "Modality",
+      "label": "Cardinal"
+    },
+    {
+      "id": "modality:fixed",
+      "type": "Modality",
+      "label": "Fixed"
+    },
+    {
+      "id": "modality:mutable",
+      "type": "Modality",
+      "label": "Mutable"
+    },
+    {
+      "id": "polarity:positive",
+      "type": "Polarity",
+      "label": "Positive",
+      "data": {
+        "alsoCalled": [
+          "masculine",
+          "diurnal"
+        ]
+      }
+    },
+    {
+      "id": "polarity:negative",
+      "type": "Polarity",
+      "label": "Negative",
+      "data": {
+        "alsoCalled": [
+          "feminine",
+          "nocturnal"
+        ]
+      }
+    },
+    {
+      "id": "sect:day",
+      "type": "Sect",
+      "label": "Day"
+    },
+    {
+      "id": "sect:night",
+      "type": "Sect",
+      "label": "Night"
+    },
+    {
+      "id": "dignity:domicile",
+      "type": "DignityType",
+      "label": "Domicile",
+      "data": {
+        "weight": 5
+      }
+    },
+    {
+      "id": "dignity:exaltation",
+      "type": "DignityType",
+      "label": "Exaltation",
+      "data": {
+        "weight": 4
+      }
+    },
+    {
+      "id": "dignity:triplicity",
+      "type": "DignityType",
+      "label": "Triplicity",
+      "data": {
+        "weight": 3
+      }
+    },
+    {
+      "id": "dignity:term",
+      "type": "DignityType",
+      "label": "Term",
+      "data": {
+        "weight": 2
+      }
+    },
+    {
+      "id": "dignity:face",
+      "type": "DignityType",
+      "label": "Face",
+      "data": {
+        "weight": 1
+      }
+    },
+    {
+      "id": "dignity:detriment",
+      "type": "DignityType",
+      "label": "Detriment",
+      "data": {
+        "weight": -5
+      }
+    },
+    {
+      "id": "dignity:fall",
+      "type": "DignityType",
+      "label": "Fall",
+      "data": {
+        "weight": -4
+      }
+    },
+    {
+      "id": "lot:fortune",
+      "type": "Lot",
+      "label": "Lot of Fortune"
+    },
+    {
+      "id": "lot:spirit",
+      "type": "Lot",
+      "label": "Lot of Spirit"
+    },
+    {
+      "id": "lot:eros",
+      "type": "Lot",
+      "label": "Lot of Eros"
+    },
+    {
+      "id": "lot:necessity",
+      "type": "Lot",
+      "label": "Lot of Necessity"
+    },
+    {
+      "id": "lot:courage",
+      "type": "Lot",
+      "label": "Lot of Courage"
+    },
+    {
+      "id": "lot:victory",
+      "type": "Lot",
+      "label": "Lot of Victory"
+    },
+    {
+      "id": "lot:nemesis",
+      "type": "Lot",
+      "label": "Lot of Nemesis"
+    },
+    {
+      "id": "star:alpheratz",
+      "type": "FixedStar",
+      "label": "Alpheratz",
+      "data": {
+        "ra": 2.096865,
+        "dec": 29.090432,
+        "mag": 2.07,
+        "bayer": "21Alp And"
+      }
+    },
+    {
+      "id": "star:caph",
+      "type": "FixedStar",
+      "label": "Caph",
+      "data": {
+        "ra": 2.293305,
+        "dec": 59.14978,
+        "mag": 2.28,
+        "bayer": "11Bet Cas"
+      }
+    },
+    {
+      "id": "star:algenib",
+      "type": "FixedStar",
+      "label": "Algenib",
+      "data": {
+        "ra": 3.30897,
+        "dec": 15.183596,
+        "mag": 2.83,
+        "bayer": "88Gam Peg"
+      }
+    },
+    {
+      "id": "star:ankaa",
+      "type": "FixedStar",
+      "label": "Ankaa",
+      "data": {
+        "ra": 6.57084,
+        "dec": -42.305981,
+        "mag": 2.4,
+        "bayer": "Alp Phe"
+      }
+    },
+    {
+      "id": "star:fulu",
+      "type": "FixedStar",
+      "label": "Fulu",
+      "data": {
+        "ra": 9.24282,
+        "dec": 53.896909,
+        "mag": 3.69,
+        "bayer": "17Zet Cas"
+      }
+    },
+    {
+      "id": "star:schedar",
+      "type": "FixedStar",
+      "label": "Schedar",
+      "data": {
+        "ra": 10.12674,
+        "dec": 56.537331,
+        "mag": 2.24,
+        "bayer": "18Alp Cas"
+      }
+    },
+    {
+      "id": "star:diphda",
+      "type": "FixedStar",
+      "label": "Diphda",
+      "data": {
+        "ra": 10.89735,
+        "dec": -17.986605,
+        "mag": 2.04,
+        "bayer": "16Bet Cet"
+      }
+    },
+    {
+      "id": "star:achird",
+      "type": "FixedStar",
+      "label": "Achird",
+      "data": {
+        "ra": 12.2739,
+        "dec": 57.815187,
+        "mag": 3.46,
+        "bayer": "24Eta Cas"
+      }
+    },
+    {
+      "id": "star:castula",
+      "type": "FixedStar",
+      "label": "Castula",
+      "data": {
+        "ra": 14.16648,
+        "dec": 59.181056,
+        "mag": 4.62,
+        "bayer": "28Ups2Cas"
+      }
+    },
+    {
+      "id": "star:cih",
+      "type": "FixedStar",
+      "label": "Cih",
+      "data": {
+        "ra": 14.177145,
+        "dec": 60.71674,
+        "mag": 2.15,
+        "bayer": "27Gam Cas"
+      }
+    },
+    {
+      "id": "star:wurren",
+      "type": "FixedStar",
+      "label": "Wurren",
+      "data": {
+        "ra": 17.09613,
+        "dec": -55.24576,
+        "mag": 3.94,
+        "bayer": "Zet Phe"
+      }
+    },
+    {
+      "id": "star:mirach",
+      "type": "FixedStar",
+      "label": "Mirach",
+      "data": {
+        "ra": 17.43291,
+        "dec": 35.620558,
+        "mag": 2.07,
+        "bayer": "43Bet And"
+      }
+    },
+    {
+      "id": "star:adhil",
+      "type": "FixedStar",
+      "label": "Adhil",
+      "data": {
+        "ra": 20.585055,
+        "dec": 45.528778,
+        "mag": 4.87,
+        "bayer": "46Xi  And"
+      }
+    },
+    {
+      "id": "star:ruchbah",
+      "type": "FixedStar",
+      "label": "Ruchbah",
+      "data": {
+        "ra": 21.45324,
+        "dec": 60.235283,
+        "mag": 2.66,
+        "bayer": "37Del Cas"
+      }
+    },
+    {
+      "id": "star:alpherg",
+      "type": "FixedStar",
+      "label": "Alpherg",
+      "data": {
+        "ra": 22.870875,
+        "dec": 15.345823,
+        "mag": 3.62,
+        "bayer": "99Eta Psc"
+      }
+    },
+    {
+      "id": "star:titawin",
+      "type": "FixedStar",
+      "label": "Titawin",
+      "data": {
+        "ra": 24.199485,
+        "dec": 41.405459,
+        "mag": 4.1,
+        "bayer": "50Ups And"
+      }
+    },
+    {
+      "id": "star:achernar",
+      "type": "FixedStar",
+      "label": "Achernar",
+      "data": {
+        "ra": 24.42834,
+        "dec": -57.236757,
+        "mag": 0.45,
+        "bayer": "Alp Eri"
+      }
+    },
+    {
+      "id": "star:nembus",
+      "type": "FixedStar",
+      "label": "Nembus",
+      "data": {
+        "ra": 24.498075,
+        "dec": 48.628213,
+        "mag": 3.59,
+        "bayer": "51    And"
+      }
+    },
+    {
+      "id": "star:torcular",
+      "type": "FixedStar",
+      "label": "Torcular",
+      "data": {
+        "ra": 26.34846,
+        "dec": 9.157736,
+        "mag": 4.26,
+        "bayer": "110Omi Psc"
+      }
+    },
+    {
+      "id": "star:baten-kaitos",
+      "type": "FixedStar",
+      "label": "Baten Kaitos",
+      "data": {
+        "ra": 27.86514,
+        "dec": -10.335038,
+        "mag": 3.74,
+        "bayer": "55Zet Cet"
+      }
+    },
+    {
+      "id": "star:mothallah",
+      "type": "FixedStar",
+      "label": "Mothallah",
+      "data": {
+        "ra": 28.27044,
+        "dec": 29.578829,
+        "mag": 3.42,
+        "bayer": "2Alp Tri"
+      }
+    },
+    {
+      "id": "star:mesarthim",
+      "type": "FixedStar",
+      "label": "Mesarthim",
+      "data": {
+        "ra": 28.38255,
+        "dec": 19.293852,
+        "mag": 3.88,
+        "bayer": "5Gam2Ari"
+      }
+    },
+    {
+      "id": "star:segin",
+      "type": "FixedStar",
+      "label": "Segin",
+      "data": {
+        "ra": 28.59876,
+        "dec": 63.670101,
+        "mag": 3.35,
+        "bayer": "45Eps Cas"
+      }
+    },
+    {
+      "id": "star:sheratan",
+      "type": "FixedStar",
+      "label": "Sheratan",
+      "data": {
+        "ra": 28.66002,
+        "dec": 20.808035,
+        "mag": 2.64,
+        "bayer": "6Bet Ari"
+      }
+    },
+    {
+      "id": "star:alrescha",
+      "type": "FixedStar",
+      "label": "Alrescha",
+      "data": {
+        "ra": 30.511755,
+        "dec": 2.763759,
+        "mag": 3.82,
+        "bayer": "113Alp Psc"
+      }
+    },
+    {
+      "id": "star:almach",
+      "type": "FixedStar",
+      "label": "Almach",
+      "data": {
+        "ra": 30.97476,
+        "dec": 42.329725,
+        "mag": 2.1,
+        "bayer": "57Gam1And"
+      }
+    },
+    {
+      "id": "star:hamal",
+      "type": "FixedStar",
+      "label": "Hamal",
+      "data": {
+        "ra": 31.793325,
+        "dec": 23.462423,
+        "mag": 2.01,
+        "bayer": "13Alp Ari"
+      }
+    },
+    {
+      "id": "star:polaris",
+      "type": "FixedStar",
+      "label": "Polaris",
+      "data": {
+        "ra": 37.94625,
+        "dec": 89.264109,
+        "mag": 1.97,
+        "bayer": "1Alp UMi"
+      }
+    },
+    {
+      "id": "star:kaffaljidhma",
+      "type": "FixedStar",
+      "label": "Kaffaljidhma",
+      "data": {
+        "ra": 40.82517,
+        "dec": 3.235818,
+        "mag": 3.47,
+        "bayer": "86Gam Cet"
+      }
+    },
+    {
+      "id": "star:lilii-borea",
+      "type": "FixedStar",
+      "label": "Lilii Borea",
+      "data": {
+        "ra": 41.9772,
+        "dec": 29.247118,
+        "mag": 4.52,
+        "bayer": "39    Ari"
+      }
+    },
+    {
+      "id": "star:bharani",
+      "type": "FixedStar",
+      "label": "Bharani",
+      "data": {
+        "ra": 42.495945,
+        "dec": 27.260507,
+        "mag": 3.61,
+        "bayer": "41    Ari"
+      }
+    },
+    {
+      "id": "star:miram",
+      "type": "FixedStar",
+      "label": "Miram",
+      "data": {
+        "ra": 42.674175,
+        "dec": 55.895496,
+        "mag": 3.77,
+        "bayer": "15Eta Per"
+      }
+    },
+    {
+      "id": "star:angetenar",
+      "type": "FixedStar",
+      "label": "Angetenar",
+      "data": {
+        "ra": 42.759675,
+        "dec": -21.004019,
+        "mag": 4.76,
+        "bayer": "2Tau2Eri"
+      }
+    },
+    {
+      "id": "star:azha",
+      "type": "FixedStar",
+      "label": "Azha",
+      "data": {
+        "ra": 44.10687,
+        "dec": -8.898144,
+        "mag": 3.89,
+        "bayer": "3Eta Eri"
+      }
+    },
+    {
+      "id": "star:acamar",
+      "type": "FixedStar",
+      "label": "Acamar",
+      "data": {
+        "ra": 44.565345,
+        "dec": -40.304672,
+        "mag": 2.88,
+        "bayer": "The1Eri"
+      }
+    },
+    {
+      "id": "star:menkar",
+      "type": "FixedStar",
+      "label": "Menkar",
+      "data": {
+        "ra": 45.56988,
+        "dec": 4.089734,
+        "mag": 2.54,
+        "bayer": "92Alp Cet"
+      }
+    },
+    {
+      "id": "star:algol",
+      "type": "FixedStar",
+      "label": "Algol",
+      "data": {
+        "ra": 47.04222,
+        "dec": 40.955648,
+        "mag": 2.09,
+        "bayer": "26Bet Per"
+      }
+    },
+    {
+      "id": "star:misam",
+      "type": "FixedStar",
+      "label": "Misam",
+      "data": {
+        "ra": 47.37387,
+        "dec": 44.857544,
+        "mag": 3.79,
+        "bayer": "27Kap Per"
+      }
+    },
+    {
+      "id": "star:botein",
+      "type": "FixedStar",
+      "label": "Botein",
+      "data": {
+        "ra": 47.90733,
+        "dec": 19.726677,
+        "mag": 4.35,
+        "bayer": "57Del Ari"
+      }
+    },
+    {
+      "id": "star:dalim",
+      "type": "FixedStar",
+      "label": "Dalim",
+      "data": {
+        "ra": 48.018735,
+        "dec": -28.987618,
+        "mag": 3.8,
+        "bayer": "Alp For"
+      }
+    },
+    {
+      "id": "star:zibal",
+      "type": "FixedStar",
+      "label": "Zibal",
+      "data": {
+        "ra": 48.95844,
+        "dec": -8.81973,
+        "mag": 4.8,
+        "bayer": "13Zet Eri"
+      }
+    },
+    {
+      "id": "star:82-g.-eri",
+      "type": "FixedStar",
+      "label": "82 G. Eri",
+      "data": {
+        "ra": 49.97916,
+        "dec": -43.069784,
+        "mag": 4.26,
+        "bayer": ""
+      }
+    },
+    {
+      "id": "star:mirfak",
+      "type": "FixedStar",
+      "label": "Mirfak",
+      "data": {
+        "ra": 51.08067,
+        "dec": 49.86118,
+        "mag": 1.79,
+        "bayer": "33Alp Per"
+      }
+    },
+    {
+      "id": "star:ran",
+      "type": "FixedStar",
+      "label": "Ran",
+      "data": {
+        "ra": 53.23272,
+        "dec": -9.458262,
+        "mag": 3.72,
+        "bayer": "18Eps Eri"
+      }
+    },
+    {
+      "id": "star:rana",
+      "type": "FixedStar",
+      "label": "Rana",
+      "data": {
+        "ra": 55.81209,
+        "dec": -9.763395,
+        "mag": 3.52,
+        "bayer": "23Del Eri"
+      }
+    },
+    {
+      "id": "star:atik",
+      "type": "FixedStar",
+      "label": "Atik",
+      "data": {
+        "ra": 56.07972,
+        "dec": 32.288248,
+        "mag": 3.84,
+        "bayer": "38Omi Per"
+      }
+    },
+    {
+      "id": "star:electra",
+      "type": "FixedStar",
+      "label": "Electra",
+      "data": {
+        "ra": 56.218905,
+        "dec": 24.113339,
+        "mag": 3.72,
+        "bayer": "17    Tau"
+      }
+    },
+    {
+      "id": "star:taygeta",
+      "type": "FixedStar",
+      "label": "Taygeta",
+      "data": {
+        "ra": 56.30205,
+        "dec": 24.467278,
+        "mag": 4.3,
+        "bayer": "19    Tau"
+      }
+    },
+    {
+      "id": "star:maia",
+      "type": "FixedStar",
+      "label": "Maia",
+      "data": {
+        "ra": 56.456685,
+        "dec": 24.367748,
+        "mag": 3.87,
+        "bayer": "20    Tau"
+      }
+    },
+    {
+      "id": "star:merope",
+      "type": "FixedStar",
+      "label": "Merope",
+      "data": {
+        "ra": 56.58156,
+        "dec": 23.948358,
+        "mag": 4.14,
+        "bayer": "23    Tau"
+      }
+    },
+    {
+      "id": "star:alcyone",
+      "type": "FixedStar",
+      "label": "Alcyone",
+      "data": {
+        "ra": 56.87115,
+        "dec": 24.105137,
+        "mag": 2.85,
+        "bayer": "25Eta Tau"
+      }
+    },
+    {
+      "id": "star:atlas",
+      "type": "FixedStar",
+      "label": "Atlas",
+      "data": {
+        "ra": 57.290595,
+        "dec": 24.053415,
+        "mag": 3.62,
+        "bayer": "27    Tau"
+      }
+    },
+    {
+      "id": "star:zaurak",
+      "type": "FixedStar",
+      "label": "Zaurak",
+      "data": {
+        "ra": 59.507355,
+        "dec": -13.508515,
+        "mag": 2.97,
+        "bayer": "34Gam Eri"
+      }
+    },
+    {
+      "id": "star:menkib",
+      "type": "FixedStar",
+      "label": "Menkib",
+      "data": {
+        "ra": 59.74125,
+        "dec": 35.791033,
+        "mag": 3.98,
+        "bayer": "46Xi  Per"
+      }
+    },
+    {
+      "id": "star:beid",
+      "type": "FixedStar",
+      "label": "Beid",
+      "data": {
+        "ra": 62.966415,
+        "dec": -6.837581,
+        "mag": 4.04,
+        "bayer": "38Omi1Eri"
+      }
+    },
+    {
+      "id": "star:keid",
+      "type": "FixedStar",
+      "label": "Keid",
+      "data": {
+        "ra": 63.818055,
+        "dec": -7.652871,
+        "mag": 4.43,
+        "bayer": "40Omi2Eri"
+      }
+    },
+    {
+      "id": "star:prima-hyadum",
+      "type": "FixedStar",
+      "label": "Prima Hyadum",
+      "data": {
+        "ra": 64.948335,
+        "dec": 15.627642,
+        "mag": 3.65,
+        "bayer": "54Gam Tau"
+      }
+    },
+    {
+      "id": "star:secunda-hyadum",
+      "type": "FixedStar",
+      "label": "Secunda Hyadum",
+      "data": {
+        "ra": 65.733705,
+        "dec": 17.542514,
+        "mag": 3.77,
+        "bayer": "61Del1Tau"
+      }
+    },
+    {
+      "id": "star:beemim",
+      "type": "FixedStar",
+      "label": "Beemim",
+      "data": {
+        "ra": 66.009195,
+        "dec": -34.016846,
+        "mag": 3.97,
+        "bayer": "43    Eri"
+      }
+    },
+    {
+      "id": "star:ain",
+      "type": "FixedStar",
+      "label": "Ain",
+      "data": {
+        "ra": 67.154145,
+        "dec": 19.180431,
+        "mag": 3.53,
+        "bayer": "74Eps Tau"
+      }
+    },
+    {
+      "id": "star:chamukuy",
+      "type": "FixedStar",
+      "label": "Chamukuy",
+      "data": {
+        "ra": 67.165575,
+        "dec": 15.870883,
+        "mag": 3.4,
+        "bayer": "78The2Tau"
+      }
+    },
+    {
+      "id": "star:theemin",
+      "type": "FixedStar",
+      "label": "Theemin",
+      "data": {
+        "ra": 68.88768,
+        "dec": -30.562341,
+        "mag": 3.81,
+        "bayer": "52Ups2Eri"
+      }
+    },
+    {
+      "id": "star:aldebaran",
+      "type": "FixedStar",
+      "label": "Aldebaran",
+      "data": {
+        "ra": 68.980155,
+        "dec": 16.509301,
+        "mag": 0.87,
+        "bayer": "87Alp Tau"
+      }
+    },
+    {
+      "id": "star:sceptrum",
+      "type": "FixedStar",
+      "label": "Sceptrum",
+      "data": {
+        "ra": 69.5451,
+        "dec": -14.30402,
+        "mag": 3.86,
+        "bayer": "53    Eri"
+      }
+    },
+    {
+      "id": "star:tabit",
+      "type": "FixedStar",
+      "label": "Tabit",
+      "data": {
+        "ra": 72.460035,
+        "dec": 6.961276,
+        "mag": 3.19,
+        "bayer": "1Pi 3Ori"
+      }
+    },
+    {
+      "id": "star:hassaleh",
+      "type": "FixedStar",
+      "label": "Hassaleh",
+      "data": {
+        "ra": 74.24841,
+        "dec": 33.16609,
+        "mag": 2.69,
+        "bayer": "3Iot Aur"
+      }
+    },
+    {
+      "id": "star:almaaz",
+      "type": "FixedStar",
+      "label": "Almaaz",
+      "data": {
+        "ra": 75.492225,
+        "dec": 43.823308,
+        "mag": 3.03,
+        "bayer": "7Eps Aur"
+      }
+    },
+    {
+      "id": "star:saclateni",
+      "type": "FixedStar",
+      "label": "Saclateni",
+      "data": {
+        "ra": 75.619515,
+        "dec": 41.075837,
+        "mag": 3.69,
+        "bayer": "8Zet Aur"
+      }
+    },
+    {
+      "id": "star:haedus",
+      "type": "FixedStar",
+      "label": "Haedus",
+      "data": {
+        "ra": 76.6287,
+        "dec": 41.234474,
+        "mag": 3.18,
+        "bayer": "10Eta Aur"
+      }
+    },
+    {
+      "id": "star:cursa",
+      "type": "FixedStar",
+      "label": "Cursa",
+      "data": {
+        "ra": 76.962435,
+        "dec": -5.086446,
+        "mag": 2.78,
+        "bayer": "67Bet Eri"
+      }
+    },
+    {
+      "id": "star:rigel",
+      "type": "FixedStar",
+      "label": "Rigel",
+      "data": {
+        "ra": 78.63447,
+        "dec": -8.20164,
+        "mag": 0.18,
+        "bayer": "19Bet Ori"
+      }
+    },
+    {
+      "id": "star:capella",
+      "type": "FixedStar",
+      "label": "Capella",
+      "data": {
+        "ra": 79.17225,
+        "dec": 45.997991,
+        "mag": 0.08,
+        "bayer": "13Alp Aur"
+      }
+    },
+    {
+      "id": "star:bellatrix",
+      "type": "FixedStar",
+      "label": "Bellatrix",
+      "data": {
+        "ra": 81.282765,
+        "dec": 6.349702,
+        "mag": 1.64,
+        "bayer": "24Gam Ori"
+      }
+    },
+    {
+      "id": "star:elnath",
+      "type": "FixedStar",
+      "label": "Elnath",
+      "data": {
+        "ra": 81.57297,
+        "dec": 28.60745,
+        "mag": 1.65,
+        "bayer": "112Bet Tau"
+      }
+    },
+    {
+      "id": "star:nihal",
+      "type": "FixedStar",
+      "label": "Nihal",
+      "data": {
+        "ra": 82.06134,
+        "dec": -20.759441,
+        "mag": 2.81,
+        "bayer": "9Bet Lep"
+      }
+    },
+    {
+      "id": "star:mintaka",
+      "type": "FixedStar",
+      "label": "Mintaka",
+      "data": {
+        "ra": 83.001675,
+        "dec": -0.299092,
+        "mag": 2.25,
+        "bayer": "34Del Ori"
+      }
+    },
+    {
+      "id": "star:arneb",
+      "type": "FixedStar",
+      "label": "Arneb",
+      "data": {
+        "ra": 83.18256,
+        "dec": -17.822289,
+        "mag": 2.58,
+        "bayer": "11Alp Lep"
+      }
+    },
+    {
+      "id": "star:meissa",
+      "type": "FixedStar",
+      "label": "Meissa",
+      "data": {
+        "ra": 83.784495,
+        "dec": 9.934158,
+        "mag": 3.39,
+        "bayer": "39Lam Ori"
+      }
+    },
+    {
+      "id": "star:hatysa",
+      "type": "FixedStar",
+      "label": "Hatysa",
+      "data": {
+        "ra": 83.858265,
+        "dec": -5.909901,
+        "mag": 2.75,
+        "bayer": "44Iot Ori"
+      }
+    },
+    {
+      "id": "star:alnilam",
+      "type": "FixedStar",
+      "label": "Alnilam",
+      "data": {
+        "ra": 84.053385,
+        "dec": -1.20192,
+        "mag": 1.69,
+        "bayer": "46Eps Ori"
+      }
+    },
+    {
+      "id": "star:tianguan",
+      "type": "FixedStar",
+      "label": "Tianguan",
+      "data": {
+        "ra": 84.411195,
+        "dec": 21.142549,
+        "mag": 2.97,
+        "bayer": "123Zet Tau"
+      }
+    },
+    {
+      "id": "star:phact",
+      "type": "FixedStar",
+      "label": "Phact",
+      "data": {
+        "ra": 84.912255,
+        "dec": -34.074108,
+        "mag": 2.65,
+        "bayer": "Alp Col"
+      }
+    },
+    {
+      "id": "star:alnitak",
+      "type": "FixedStar",
+      "label": "Alnitak",
+      "data": {
+        "ra": 85.189695,
+        "dec": -1.942572,
+        "mag": 1.74,
+        "bayer": "50Zet Ori"
+      }
+    },
+    {
+      "id": "star:saiph",
+      "type": "FixedStar",
+      "label": "Saiph",
+      "data": {
+        "ra": 86.939115,
+        "dec": -9.669605,
+        "mag": 2.07,
+        "bayer": "53Kap Ori"
+      }
+    },
+    {
+      "id": "star:wazn",
+      "type": "FixedStar",
+      "label": "Wazn",
+      "data": {
+        "ra": 87.739935,
+        "dec": -35.768309,
+        "mag": 3.12,
+        "bayer": "Bet Col"
+      }
+    },
+    {
+      "id": "star:betelgeuse",
+      "type": "FixedStar",
+      "label": "Betelgeuse",
+      "data": {
+        "ra": 88.792935,
+        "dec": 7.407063,
+        "mag": 0.45,
+        "bayer": "58Alp Ori"
+      }
+    },
+    {
+      "id": "star:menkalinan",
+      "type": "FixedStar",
+      "label": "Menkalinan",
+      "data": {
+        "ra": 89.882235,
+        "dec": 44.947433,
+        "mag": 1.9,
+        "bayer": "34Bet Aur"
+      }
+    },
+    {
+      "id": "star:mahasim",
+      "type": "FixedStar",
+      "label": "Mahasim",
+      "data": {
+        "ra": 89.930265,
+        "dec": 37.212585,
+        "mag": 2.65,
+        "bayer": "37The Aur"
+      }
+    },
+    {
+      "id": "star:elkurud",
+      "type": "FixedStar",
+      "label": "Elkurud",
+      "data": {
+        "ra": 91.881795,
+        "dec": -37.25292,
+        "mag": 5,
+        "bayer": "The Col"
+      }
+    },
+    {
+      "id": "star:propus",
+      "type": "FixedStar",
+      "label": "Propus",
+      "data": {
+        "ra": 93.719415,
+        "dec": 22.506799,
+        "mag": 3.31,
+        "bayer": "7Eta Gem"
+      }
+    },
+    {
+      "id": "star:furud",
+      "type": "FixedStar",
+      "label": "Furud",
+      "data": {
+        "ra": 95.078295,
+        "dec": -30.063367,
+        "mag": 3.02,
+        "bayer": "1Zet CMa"
+      }
+    },
+    {
+      "id": "star:mirzam",
+      "type": "FixedStar",
+      "label": "Mirzam",
+      "data": {
+        "ra": 95.674935,
+        "dec": -17.955918,
+        "mag": 1.98,
+        "bayer": "2Bet CMa"
+      }
+    },
+    {
+      "id": "star:tejat",
+      "type": "FixedStar",
+      "label": "Tejat",
+      "data": {
+        "ra": 95.740095,
+        "dec": 22.513586,
+        "mag": 2.87,
+        "bayer": "13Mu  Gem"
+      }
+    },
+    {
+      "id": "star:canopus",
+      "type": "FixedStar",
+      "label": "Canopus",
+      "data": {
+        "ra": 95.987925,
+        "dec": -52.69566,
+        "mag": -0.62,
+        "bayer": "Alp Car"
+      }
+    },
+    {
+      "id": "star:alhena",
+      "type": "FixedStar",
+      "label": "Alhena",
+      "data": {
+        "ra": 99.42792,
+        "dec": 16.399252,
+        "mag": 1.93,
+        "bayer": "24Gam Gem"
+      }
+    },
+    {
+      "id": "star:mebsuta",
+      "type": "FixedStar",
+      "label": "Mebsuta",
+      "data": {
+        "ra": 100.98303,
+        "dec": 25.131124,
+        "mag": 3.06,
+        "bayer": "27Eps Gem"
+      }
+    },
+    {
+      "id": "star:sirius",
+      "type": "FixedStar",
+      "label": "Sirius",
+      "data": {
+        "ra": 101.287215,
+        "dec": -16.716116,
+        "mag": -1.44,
+        "bayer": "9Alp CMa"
+      }
+    },
+    {
+      "id": "star:alzirr",
+      "type": "FixedStar",
+      "label": "Alzirr",
+      "data": {
+        "ra": 101.32236,
+        "dec": 12.895591,
+        "mag": 3.35,
+        "bayer": "31Xi  Gem"
+      }
+    },
+    {
+      "id": "star:adhara",
+      "type": "FixedStar",
+      "label": "Adhara",
+      "data": {
+        "ra": 104.656455,
+        "dec": -28.972084,
+        "mag": 1.5,
+        "bayer": "21Eps CMa"
+      }
+    },
+    {
+      "id": "star:nganurganity",
+      "type": "FixedStar",
+      "label": "Nganurganity",
+      "data": {
+        "ra": 105.42978,
+        "dec": -27.93483,
+        "mag": 3.49,
+        "bayer": "22Sig CMa"
+      }
+    },
+    {
+      "id": "star:muliphein",
+      "type": "FixedStar",
+      "label": "Muliphein",
+      "data": {
+        "ra": 105.939555,
+        "dec": -15.633286,
+        "mag": 4.11,
+        "bayer": "23Gam CMa"
+      }
+    },
+    {
+      "id": "star:mekbuda",
+      "type": "FixedStar",
+      "label": "Mekbuda",
+      "data": {
+        "ra": 106.027215,
+        "dec": 20.570297,
+        "mag": 4.01,
+        "bayer": "43Zet Gem"
+      }
+    },
+    {
+      "id": "star:wezen",
+      "type": "FixedStar",
+      "label": "Wezen",
+      "data": {
+        "ra": 107.097855,
+        "dec": -26.3932,
+        "mag": 1.83,
+        "bayer": "25Del CMa"
+      }
+    },
+    {
+      "id": "star:wasat",
+      "type": "FixedStar",
+      "label": "Wasat",
+      "data": {
+        "ra": 110.030745,
+        "dec": 21.98232,
+        "mag": 3.5,
+        "bayer": "55Del Gem"
+      }
+    },
+    {
+      "id": "star:aludra",
+      "type": "FixedStar",
+      "label": "Aludra",
+      "data": {
+        "ra": 111.02376,
+        "dec": -29.303104,
+        "mag": 2.45,
+        "bayer": "31Eta CMa"
+      }
+    },
+    {
+      "id": "star:gomeisa",
+      "type": "FixedStar",
+      "label": "Gomeisa",
+      "data": {
+        "ra": 111.78768,
+        "dec": 8.289315,
+        "mag": 2.89,
+        "bayer": "3Bet CMi"
+      }
+    },
+    {
+      "id": "star:castor",
+      "type": "FixedStar",
+      "label": "Castor",
+      "data": {
+        "ra": 113.64951,
+        "dec": 31.888276,
+        "mag": 1.58,
+        "bayer": "66Alp Gem"
+      }
+    },
+    {
+      "id": "star:jishui",
+      "type": "FixedStar",
+      "label": "Jishui",
+      "data": {
+        "ra": 114.7914,
+        "dec": 34.584346,
+        "mag": 4.89,
+        "bayer": "71Omi Gem"
+      }
+    },
+    {
+      "id": "star:procyon",
+      "type": "FixedStar",
+      "label": "Procyon",
+      "data": {
+        "ra": 114.825495,
+        "dec": 5.224993,
+        "mag": 0.4,
+        "bayer": "10Alp CMi"
+      }
+    },
+    {
+      "id": "star:pollux",
+      "type": "FixedStar",
+      "label": "Pollux",
+      "data": {
+        "ra": 116.329155,
+        "dec": 28.026199,
+        "mag": 1.16,
+        "bayer": "78Bet Gem"
+      }
+    },
+    {
+      "id": "star:azmidi",
+      "type": "FixedStar",
+      "label": "Azmidi",
+      "data": {
+        "ra": 117.323565,
+        "dec": -24.859786,
+        "mag": 3.34,
+        "bayer": "7Xi  Pup"
+      }
+    },
+    {
+      "id": "star:naos",
+      "type": "FixedStar",
+      "label": "Naos",
+      "data": {
+        "ra": 120.896055,
+        "dec": -40.003148,
+        "mag": 2.21,
+        "bayer": "Zet Pup"
+      }
+    },
+    {
+      "id": "star:tureis",
+      "type": "FixedStar",
+      "label": "Tureis",
+      "data": {
+        "ra": 121.886055,
+        "dec": -24.304324,
+        "mag": 2.83,
+        "bayer": "15Rho Pup"
+      }
+    },
+    {
+      "id": "star:tegmine",
+      "type": "FixedStar",
+      "label": "Tegmine",
+      "data": {
+        "ra": 123.053025,
+        "dec": 17.647771,
+        "mag": 4.67,
+        "bayer": "16Zet2Cnc"
+      }
+    },
+    {
+      "id": "star:tarf",
+      "type": "FixedStar",
+      "label": "Tarf",
+      "data": {
+        "ra": 124.12884,
+        "dec": 9.185545,
+        "mag": 3.53,
+        "bayer": "17Bet Cnc"
+      }
+    },
+    {
+      "id": "star:avior",
+      "type": "FixedStar",
+      "label": "Avior",
+      "data": {
+        "ra": 125.62854,
+        "dec": -59.509483,
+        "mag": 1.86,
+        "bayer": "Eps Car"
+      }
+    },
+    {
+      "id": "star:alsciaukat",
+      "type": "FixedStar",
+      "label": "Alsciaukat",
+      "data": {
+        "ra": 125.70882,
+        "dec": 43.188131,
+        "mag": 4.25,
+        "bayer": "31    Lyn"
+      }
+    },
+    {
+      "id": "star:muscida",
+      "type": "FixedStar",
+      "label": "Muscida",
+      "data": {
+        "ra": 127.566465,
+        "dec": 60.718169,
+        "mag": 3.35,
+        "bayer": "1Omi UMa"
+      }
+    },
+    {
+      "id": "star:minchir",
+      "type": "FixedStar",
+      "label": "Minchir",
+      "data": {
+        "ra": 129.689325,
+        "dec": 3.341435,
+        "mag": 4.45,
+        "bayer": "5Sig Hya"
+      }
+    },
+    {
+      "id": "star:asellus-borealis",
+      "type": "FixedStar",
+      "label": "Asellus Borealis",
+      "data": {
+        "ra": 130.821465,
+        "dec": 21.468501,
+        "mag": 4.66,
+        "bayer": "43Gam Cnc"
+      }
+    },
+    {
+      "id": "star:asellus-australis",
+      "type": "FixedStar",
+      "label": "Asellus Australis",
+      "data": {
+        "ra": 131.17125,
+        "dec": 18.154309,
+        "mag": 3.94,
+        "bayer": "47Del Cnc"
+      }
+    },
+    {
+      "id": "star:alsephina",
+      "type": "FixedStar",
+      "label": "Alsephina",
+      "data": {
+        "ra": 131.175885,
+        "dec": -54.708821,
+        "mag": 1.93,
+        "bayer": "Del Vel"
+      }
+    },
+    {
+      "id": "star:ashlesha",
+      "type": "FixedStar",
+      "label": "Ashlesha",
+      "data": {
+        "ra": 131.693805,
+        "dec": 6.418809,
+        "mag": 3.38,
+        "bayer": "11Eps Hya"
+      }
+    },
+    {
+      "id": "star:acubens",
+      "type": "FixedStar",
+      "label": "Acubens",
+      "data": {
+        "ra": 134.62176,
+        "dec": 11.857701,
+        "mag": 4.26,
+        "bayer": "65Alp Cnc"
+      }
+    },
+    {
+      "id": "star:talitha",
+      "type": "FixedStar",
+      "label": "Talitha",
+      "data": {
+        "ra": 134.80242,
+        "dec": 48.041826,
+        "mag": 3.12,
+        "bayer": "9Iot UMa"
+      }
+    },
+    {
+      "id": "star:alkaphrah",
+      "type": "FixedStar",
+      "label": "Alkaphrah",
+      "data": {
+        "ra": 135.906405,
+        "dec": 47.156525,
+        "mag": 3.57,
+        "bayer": "12Kap UMa"
+      }
+    },
+    {
+      "id": "star:suhail",
+      "type": "FixedStar",
+      "label": "Suhail",
+      "data": {
+        "ra": 136.99902,
+        "dec": -43.432589,
+        "mag": 2.23,
+        "bayer": "Lam Vel"
+      }
+    },
+    {
+      "id": "star:miaplacidus",
+      "type": "FixedStar",
+      "label": "Miaplacidus",
+      "data": {
+        "ra": 138.300615,
+        "dec": -69.717208,
+        "mag": 1.67,
+        "bayer": "Bet Car"
+      }
+    },
+    {
+      "id": "star:aspidiske",
+      "type": "FixedStar",
+      "label": "Aspidiske",
+      "data": {
+        "ra": 139.27257,
+        "dec": -59.275229,
+        "mag": 2.21,
+        "bayer": "Iot Car"
+      }
+    },
+    {
+      "id": "star:markeb",
+      "type": "FixedStar",
+      "label": "Markeb",
+      "data": {
+        "ra": 140.52843,
+        "dec": -55.010668,
+        "mag": 2.47,
+        "bayer": "Kap Vel"
+      }
+    },
+    {
+      "id": "star:alphard",
+      "type": "FixedStar",
+      "label": "Alphard",
+      "data": {
+        "ra": 141.89685,
+        "dec": -8.658603,
+        "mag": 1.99,
+        "bayer": "30Alp Hya"
+      }
+    },
+    {
+      "id": "star:alterf",
+      "type": "FixedStar",
+      "label": "Alterf",
+      "data": {
+        "ra": 142.930125,
+        "dec": 22.967971,
+        "mag": 4.32,
+        "bayer": "4Lam Leo"
+      }
+    },
+    {
+      "id": "star:ukdah",
+      "type": "FixedStar",
+      "label": "Ukdah",
+      "data": {
+        "ra": 144.964005,
+        "dec": -1.14281,
+        "mag": 3.9,
+        "bayer": "35Iot Hya"
+      }
+    },
+    {
+      "id": "star:subra",
+      "type": "FixedStar",
+      "label": "Subra",
+      "data": {
+        "ra": 145.287645,
+        "dec": 9.892308,
+        "mag": 3.52,
+        "bayer": "14Omi Leo"
+      }
+    },
+    {
+      "id": "star:ras-elased-australis",
+      "type": "FixedStar",
+      "label": "Ras Elased Australis",
+      "data": {
+        "ra": 146.46282,
+        "dec": 23.774255,
+        "mag": 2.97,
+        "bayer": "17Eps Leo"
+      }
+    },
+    {
+      "id": "star:zhang",
+      "type": "FixedStar",
+      "label": "Zhang",
+      "data": {
+        "ra": 147.86955,
+        "dec": -14.846603,
+        "mag": 4.11,
+        "bayer": "39Ups1Hya"
+      }
+    },
+    {
+      "id": "star:rasalas",
+      "type": "FixedStar",
+      "label": "Rasalas",
+      "data": {
+        "ra": 148.19097,
+        "dec": 26.006951,
+        "mag": 3.88,
+        "bayer": "24Mu  Leo"
+      }
+    },
+    {
+      "id": "star:felis",
+      "type": "FixedStar",
+      "label": "Felis",
+      "data": {
+        "ra": 148.717545,
+        "dec": -19.00936,
+        "mag": 4.94,
+        "bayer": ""
+      }
+    },
+    {
+      "id": "star:regulus",
+      "type": "FixedStar",
+      "label": "Regulus",
+      "data": {
+        "ra": 152.09298,
+        "dec": 11.967207,
+        "mag": 1.36,
+        "bayer": "32Alp Leo"
+      }
+    },
+    {
+      "id": "star:adhafera",
+      "type": "FixedStar",
+      "label": "Adhafera",
+      "data": {
+        "ra": 154.172565,
+        "dec": 23.417311,
+        "mag": 3.43,
+        "bayer": "36Zet Leo"
+      }
+    },
+    {
+      "id": "star:tania-borealis",
+      "type": "FixedStar",
+      "label": "Tania Borealis",
+      "data": {
+        "ra": 154.27428,
+        "dec": 42.914365,
+        "mag": 3.45,
+        "bayer": "33Lam UMa"
+      }
+    },
+    {
+      "id": "star:algieba",
+      "type": "FixedStar",
+      "label": "Algieba",
+      "data": {
+        "ra": 154.993095,
+        "dec": 19.841489,
+        "mag": 2.01,
+        "bayer": "41Gam1Leo"
+      }
+    },
+    {
+      "id": "star:tania-australis",
+      "type": "FixedStar",
+      "label": "Tania Australis",
+      "data": {
+        "ra": 155.582325,
+        "dec": 41.499516,
+        "mag": 3.06,
+        "bayer": "34Mu  UMa"
+      }
+    },
+    {
+      "id": "star:praecipua",
+      "type": "FixedStar",
+      "label": "Praecipua",
+      "data": {
+        "ra": 163.32789,
+        "dec": 34.214871,
+        "mag": 3.79,
+        "bayer": "46    LMi"
+      }
+    },
+    {
+      "id": "star:alkes",
+      "type": "FixedStar",
+      "label": "Alkes",
+      "data": {
+        "ra": 164.94366,
+        "dec": -18.298783,
+        "mag": 4.08,
+        "bayer": "7Alp Crt"
+      }
+    },
+    {
+      "id": "star:merak",
+      "type": "FixedStar",
+      "label": "Merak",
+      "data": {
+        "ra": 165.460155,
+        "dec": 56.382427,
+        "mag": 2.34,
+        "bayer": "48Bet UMa"
+      }
+    },
+    {
+      "id": "star:dubhe",
+      "type": "FixedStar",
+      "label": "Dubhe",
+      "data": {
+        "ra": 165.932325,
+        "dec": 61.751033,
+        "mag": 1.81,
+        "bayer": "50Alp UMa"
+      }
+    },
+    {
+      "id": "star:zosma",
+      "type": "FixedStar",
+      "label": "Zosma",
+      "data": {
+        "ra": 168.52707,
+        "dec": 20.523717,
+        "mag": 2.56,
+        "bayer": "68Del Leo"
+      }
+    },
+    {
+      "id": "star:chertan",
+      "type": "FixedStar",
+      "label": "Chertan",
+      "data": {
+        "ra": 168.560025,
+        "dec": 15.42957,
+        "mag": 3.33,
+        "bayer": "70The Leo"
+      }
+    },
+    {
+      "id": "star:alula-borealis",
+      "type": "FixedStar",
+      "label": "Alula Borealis",
+      "data": {
+        "ra": 169.619745,
+        "dec": 33.094306,
+        "mag": 3.49,
+        "bayer": "54Nu  UMa"
+      }
+    },
+    {
+      "id": "star:giausar",
+      "type": "FixedStar",
+      "label": "Giausar",
+      "data": {
+        "ra": 172.851105,
+        "dec": 69.331076,
+        "mag": 3.82,
+        "bayer": "1Lam Dra"
+      }
+    },
+    {
+      "id": "star:taiyangshou",
+      "type": "FixedStar",
+      "label": "Taiyangshou",
+      "data": {
+        "ra": 176.512725,
+        "dec": 47.779406,
+        "mag": 3.69,
+        "bayer": "63Chi UMa"
+      }
+    },
+    {
+      "id": "star:denebola",
+      "type": "FixedStar",
+      "label": "Denebola",
+      "data": {
+        "ra": 177.264945,
+        "dec": 14.57206,
+        "mag": 2.14,
+        "bayer": "94Bet Leo"
+      }
+    },
+    {
+      "id": "star:zavijava",
+      "type": "FixedStar",
+      "label": "Zavijava",
+      "data": {
+        "ra": 177.67383,
+        "dec": 1.764718,
+        "mag": 3.59,
+        "bayer": "5Bet Vir"
+      }
+    },
+    {
+      "id": "star:phecda",
+      "type": "FixedStar",
+      "label": "Phecda",
+      "data": {
+        "ra": 178.45752,
+        "dec": 53.69476,
+        "mag": 2.41,
+        "bayer": "64Gam UMa"
+      }
+    },
+    {
+      "id": "star:alchiba",
+      "type": "FixedStar",
+      "label": "Alchiba",
+      "data": {
+        "ra": 182.103375,
+        "dec": -24.728875,
+        "mag": 4.02,
+        "bayer": "1Alp Crv"
+      }
+    },
+    {
+      "id": "star:imai",
+      "type": "FixedStar",
+      "label": "Imai",
+      "data": {
+        "ra": 183.786405,
+        "dec": -58.748928,
+        "mag": 2.79,
+        "bayer": "Del Cru"
+      }
+    },
+    {
+      "id": "star:megrez",
+      "type": "FixedStar",
+      "label": "Megrez",
+      "data": {
+        "ra": 183.85629,
+        "dec": 57.032617,
+        "mag": 3.32,
+        "bayer": "69Del UMa"
+      }
+    },
+    {
+      "id": "star:gienah",
+      "type": "FixedStar",
+      "label": "Gienah",
+      "data": {
+        "ra": 183.951555,
+        "dec": -17.541929,
+        "mag": 2.58,
+        "bayer": "4Gam Crv"
+      }
+    },
+    {
+      "id": "star:zaniah",
+      "type": "FixedStar",
+      "label": "Zaniah",
+      "data": {
+        "ra": 184.97649,
+        "dec": -0.666803,
+        "mag": 3.89,
+        "bayer": "15Eta Vir"
+      }
+    },
+    {
+      "id": "star:ginan",
+      "type": "FixedStar",
+      "label": "Ginan",
+      "data": {
+        "ra": 185.340465,
+        "dec": -60.401147,
+        "mag": 3.59,
+        "bayer": "Eps Cru"
+      }
+    },
+    {
+      "id": "star:acrux",
+      "type": "FixedStar",
+      "label": "Acrux",
+      "data": {
+        "ra": 186.649665,
+        "dec": -63.099092,
+        "mag": 0.77,
+        "bayer": "Alp1Cru"
+      }
+    },
+    {
+      "id": "star:algorab",
+      "type": "FixedStar",
+      "label": "Algorab",
+      "data": {
+        "ra": 187.466085,
+        "dec": -16.515432,
+        "mag": 2.94,
+        "bayer": "7Del Crv"
+      }
+    },
+    {
+      "id": "star:gacrux",
+      "type": "FixedStar",
+      "label": "Gacrux",
+      "data": {
+        "ra": 187.791435,
+        "dec": -57.113212,
+        "mag": 1.59,
+        "bayer": "Gam Cru"
+      }
+    },
+    {
+      "id": "star:chara",
+      "type": "FixedStar",
+      "label": "Chara",
+      "data": {
+        "ra": 188.436165,
+        "dec": 41.35748,
+        "mag": 4.24,
+        "bayer": "8Bet CVn"
+      }
+    },
+    {
+      "id": "star:kraz",
+      "type": "FixedStar",
+      "label": "Kraz",
+      "data": {
+        "ra": 188.596815,
+        "dec": -23.396759,
+        "mag": 2.65,
+        "bayer": "9Bet Crv"
+      }
+    },
+    {
+      "id": "star:porrima",
+      "type": "FixedStar",
+      "label": "Porrima",
+      "data": {
+        "ra": 190.415175,
+        "dec": -1.449375,
+        "mag": 2.74,
+        "bayer": "29Gam Vir"
+      }
+    },
+    {
+      "id": "star:mimosa",
+      "type": "FixedStar",
+      "label": "Mimosa",
+      "data": {
+        "ra": 191.930385,
+        "dec": -59.688764,
+        "mag": 1.25,
+        "bayer": "Bet Cru"
+      }
+    },
+    {
+      "id": "star:alioth",
+      "type": "FixedStar",
+      "label": "Alioth",
+      "data": {
+        "ra": 193.50708,
+        "dec": 55.959821,
+        "mag": 1.76,
+        "bayer": "77Eps UMa"
+      }
+    },
+    {
+      "id": "star:minelauva",
+      "type": "FixedStar",
+      "label": "Minelauva",
+      "data": {
+        "ra": 193.900875,
+        "dec": 3.39747,
+        "mag": 3.39,
+        "bayer": "43Del Vir"
+      }
+    },
+    {
+      "id": "star:cor-caroli",
+      "type": "FixedStar",
+      "label": "Cor Caroli",
+      "data": {
+        "ra": 194.007105,
+        "dec": 38.31838,
+        "mag": 2.89,
+        "bayer": "12Alp2CVn"
+      }
+    },
+    {
+      "id": "star:vindemiatrix",
+      "type": "FixedStar",
+      "label": "Vindemiatrix",
+      "data": {
+        "ra": 195.54417,
+        "dec": 10.95915,
+        "mag": 2.85,
+        "bayer": "47Eps Vir"
+      }
+    },
+    {
+      "id": "star:diadem",
+      "type": "FixedStar",
+      "label": "Diadem",
+      "data": {
+        "ra": 197.497035,
+        "dec": 17.529431,
+        "mag": 4.32,
+        "bayer": "42Alp Com"
+      }
+    },
+    {
+      "id": "star:mizar",
+      "type": "FixedStar",
+      "label": "Mizar",
+      "data": {
+        "ra": 200.981205,
+        "dec": 54.925362,
+        "mag": 2.23,
+        "bayer": "79Zet UMa"
+      }
+    },
+    {
+      "id": "star:spica",
+      "type": "FixedStar",
+      "label": "Spica",
+      "data": {
+        "ra": 201.298245,
+        "dec": -11.161322,
+        "mag": 0.98,
+        "bayer": "67Alp Vir"
+      }
+    },
+    {
+      "id": "star:alcor",
+      "type": "FixedStar",
+      "label": "Alcor",
+      "data": {
+        "ra": 201.306195,
+        "dec": 54.987958,
+        "mag": 3.99,
+        "bayer": "80    UMa"
+      }
+    },
+    {
+      "id": "star:heze",
+      "type": "FixedStar",
+      "label": "Heze",
+      "data": {
+        "ra": 203.6733,
+        "dec": -0.59582,
+        "mag": 3.38,
+        "bayer": "79Zet Vir"
+      }
+    },
+    {
+      "id": "star:alkaid",
+      "type": "FixedStar",
+      "label": "Alkaid",
+      "data": {
+        "ra": 206.88531,
+        "dec": 49.313265,
+        "mag": 1.85,
+        "bayer": "85Eta UMa"
+      }
+    },
+    {
+      "id": "star:muphrid",
+      "type": "FixedStar",
+      "label": "Muphrid",
+      "data": {
+        "ra": 208.671165,
+        "dec": 18.397717,
+        "mag": 2.68,
+        "bayer": "8Eta Boo"
+      }
+    },
+    {
+      "id": "star:hadar",
+      "type": "FixedStar",
+      "label": "Hadar",
+      "data": {
+        "ra": 210.955935,
+        "dec": -60.373039,
+        "mag": 0.61,
+        "bayer": "Bet Cen"
+      }
+    },
+    {
+      "id": "star:thuban",
+      "type": "FixedStar",
+      "label": "Thuban",
+      "data": {
+        "ra": 211.097475,
+        "dec": 64.37585,
+        "mag": 3.67,
+        "bayer": "11Alp Dra"
+      }
+    },
+    {
+      "id": "star:menkent",
+      "type": "FixedStar",
+      "label": "Menkent",
+      "data": {
+        "ra": 211.670925,
+        "dec": -36.369954,
+        "mag": 2.06,
+        "bayer": "5The Cen"
+      }
+    },
+    {
+      "id": "star:kang",
+      "type": "FixedStar",
+      "label": "Kang",
+      "data": {
+        "ra": 213.223935,
+        "dec": -10.273702,
+        "mag": 4.18,
+        "bayer": "98Kap Vir"
+      }
+    },
+    {
+      "id": "star:arcturus",
+      "type": "FixedStar",
+      "label": "Arcturus",
+      "data": {
+        "ra": 213.91545,
+        "dec": 19.18241,
+        "mag": -0.05,
+        "bayer": "16Alp Boo"
+      }
+    },
+    {
+      "id": "star:syrma",
+      "type": "FixedStar",
+      "label": "Syrma",
+      "data": {
+        "ra": 214.00362,
+        "dec": -6.000547,
+        "mag": 4.07,
+        "bayer": "99Iot Vir"
+      }
+    },
+    {
+      "id": "star:xuange",
+      "type": "FixedStar",
+      "label": "Xuange",
+      "data": {
+        "ra": 214.09611,
+        "dec": 46.088305,
+        "mag": 4.18,
+        "bayer": "19Lam Boo"
+      }
+    },
+    {
+      "id": "star:khambalia",
+      "type": "FixedStar",
+      "label": "Khambalia",
+      "data": {
+        "ra": 214.77747,
+        "dec": -13.371095,
+        "mag": 4.52,
+        "bayer": "100Lam Vir"
+      }
+    },
+    {
+      "id": "star:elgafar",
+      "type": "FixedStar",
+      "label": "Elgafar",
+      "data": {
+        "ra": 217.05057,
+        "dec": -2.227957,
+        "mag": 4.81,
+        "bayer": "105Phi Vir"
+      }
+    },
+    {
+      "id": "star:seginus",
+      "type": "FixedStar",
+      "label": "Seginus",
+      "data": {
+        "ra": 218.01954,
+        "dec": 38.308253,
+        "mag": 3.04,
+        "bayer": "27Gam Boo"
+      }
+    },
+    {
+      "id": "star:toliman",
+      "type": "FixedStar",
+      "label": "Toliman",
+      "data": {
+        "ra": 219.90519,
+        "dec": -60.8383,
+        "mag": 1.35,
+        "bayer": "Alp2Cen"
+      }
+    },
+    {
+      "id": "star:rigil-kentaurus",
+      "type": "FixedStar",
+      "label": "Rigil Kentaurus",
+      "data": {
+        "ra": 219.911475,
+        "dec": -60.833976,
+        "mag": -0.01,
+        "bayer": "Alp1Cen"
+      }
+    },
+    {
+      "id": "star:izar",
+      "type": "FixedStar",
+      "label": "Izar",
+      "data": {
+        "ra": 221.24676,
+        "dec": 27.074222,
+        "mag": 2.35,
+        "bayer": "36Eps Boo"
+      }
+    },
+    {
+      "id": "star:kochab",
+      "type": "FixedStar",
+      "label": "Kochab",
+      "data": {
+        "ra": 222.676575,
+        "dec": 74.155505,
+        "mag": 2.07,
+        "bayer": "7Bet UMi"
+      }
+    },
+    {
+      "id": "star:zubenelgenubi",
+      "type": "FixedStar",
+      "label": "Zubenelgenubi",
+      "data": {
+        "ra": 222.719655,
+        "dec": -16.041778,
+        "mag": 2.75,
+        "bayer": "9Alp2Lib"
+      }
+    },
+    {
+      "id": "star:nekkar",
+      "type": "FixedStar",
+      "label": "Nekkar",
+      "data": {
+        "ra": 225.48654,
+        "dec": 40.390566,
+        "mag": 3.49,
+        "bayer": "42Bet Boo"
+      }
+    },
+    {
+      "id": "star:brachium",
+      "type": "FixedStar",
+      "label": "Brachium",
+      "data": {
+        "ra": 226.017585,
+        "dec": -25.281965,
+        "mag": 3.25,
+        "bayer": "20Sig Lib"
+      }
+    },
+    {
+      "id": "star:zubeneschamali",
+      "type": "FixedStar",
+      "label": "Zubeneschamali",
+      "data": {
+        "ra": 229.251735,
+        "dec": -9.382917,
+        "mag": 2.61,
+        "bayer": "27Bet Lib"
+      }
+    },
+    {
+      "id": "star:pherkad",
+      "type": "FixedStar",
+      "label": "Pherkad",
+      "data": {
+        "ra": 230.182245,
+        "dec": 71.834016,
+        "mag": 3,
+        "bayer": "13Gam UMi"
+      }
+    },
+    {
+      "id": "star:alkalurops",
+      "type": "FixedStar",
+      "label": "Alkalurops",
+      "data": {
+        "ra": 231.122715,
+        "dec": 37.377167,
+        "mag": 4.31,
+        "bayer": "51Mu 1Boo"
+      }
+    },
+    {
+      "id": "star:edasich",
+      "type": "FixedStar",
+      "label": "Edasich",
+      "data": {
+        "ra": 231.23241,
+        "dec": 58.966065,
+        "mag": 3.29,
+        "bayer": "12Iot Dra"
+      }
+    },
+    {
+      "id": "star:nusakan",
+      "type": "FixedStar",
+      "label": "Nusakan",
+      "data": {
+        "ra": 231.95727,
+        "dec": 29.105703,
+        "mag": 3.66,
+        "bayer": "3Bet CrB"
+      }
+    },
+    {
+      "id": "star:alphecca",
+      "type": "FixedStar",
+      "label": "Alphecca",
+      "data": {
+        "ra": 233.67192,
+        "dec": 26.714693,
+        "mag": 2.22,
+        "bayer": "5Alp CrB"
+      }
+    },
+    {
+      "id": "star:zubenelhakrabi",
+      "type": "FixedStar",
+      "label": "Zubenelhakrabi",
+      "data": {
+        "ra": 233.881575,
+        "dec": -14.789537,
+        "mag": 3.91,
+        "bayer": "38Gam Lib"
+      }
+    },
+    {
+      "id": "star:unukalhai",
+      "type": "FixedStar",
+      "label": "Unukalhai",
+      "data": {
+        "ra": 236.06697,
+        "dec": 6.425627,
+        "mag": 2.63,
+        "bayer": "24Alp Ser"
+      }
+    },
+    {
+      "id": "star:gudja",
+      "type": "FixedStar",
+      "label": "Gudja",
+      "data": {
+        "ra": 237.184905,
+        "dec": 18.141564,
+        "mag": 4.09,
+        "bayer": "35Kap Ser"
+      }
+    },
+    {
+      "id": "star:iklil",
+      "type": "FixedStar",
+      "label": "Iklil",
+      "data": {
+        "ra": 239.221155,
+        "dec": -29.214073,
+        "mag": 3.87,
+        "bayer": "5Rho Sco"
+      }
+    },
+    {
+      "id": "star:fang",
+      "type": "FixedStar",
+      "label": "Fang",
+      "data": {
+        "ra": 239.712975,
+        "dec": -26.114105,
+        "mag": 2.89,
+        "bayer": "6Pi  Sco"
+      }
+    },
+    {
+      "id": "star:dschubba",
+      "type": "FixedStar",
+      "label": "Dschubba",
+      "data": {
+        "ra": 240.083355,
+        "dec": -22.62171,
+        "mag": 2.29,
+        "bayer": "7Del Sco"
+      }
+    },
+    {
+      "id": "star:acrab",
+      "type": "FixedStar",
+      "label": "Acrab",
+      "data": {
+        "ra": 241.3593,
+        "dec": -19.805453,
+        "mag": 2.56,
+        "bayer": "8Bet1Sco"
+      }
+    },
+    {
+      "id": "star:acrab-b",
+      "type": "FixedStar",
+      "label": "Acrab B",
+      "data": {
+        "ra": 241.36065,
+        "dec": -19.80186,
+        "mag": 4.9,
+        "bayer": "8Bet2Sco"
+      }
+    },
+    {
+      "id": "star:marsic",
+      "type": "FixedStar",
+      "label": "Marsic",
+      "data": {
+        "ra": 242.018865,
+        "dec": 17.04698,
+        "mag": 5,
+        "bayer": "7Kap Her"
+      }
+    },
+    {
+      "id": "star:jabbah",
+      "type": "FixedStar",
+      "label": "Jabbah",
+      "data": {
+        "ra": 242.99889,
+        "dec": -19.460708,
+        "mag": 4,
+        "bayer": "14Nu  Sco"
+      }
+    },
+    {
+      "id": "star:yed-prior",
+      "type": "FixedStar",
+      "label": "Yed Prior",
+      "data": {
+        "ra": 243.58641,
+        "dec": -3.694323,
+        "mag": 2.73,
+        "bayer": "1Del Oph"
+      }
+    },
+    {
+      "id": "star:yed-posterior",
+      "type": "FixedStar",
+      "label": "Yed Posterior",
+      "data": {
+        "ra": 244.58037,
+        "dec": -4.692511,
+        "mag": 3.23,
+        "bayer": "2Eps Oph"
+      }
+    },
+    {
+      "id": "star:alniyat",
+      "type": "FixedStar",
+      "label": "Alniyat",
+      "data": {
+        "ra": 245.297145,
+        "dec": -25.592796,
+        "mag": 2.9,
+        "bayer": "20Sig Sco"
+      }
+    },
+    {
+      "id": "star:athebyne",
+      "type": "FixedStar",
+      "label": "Athebyne",
+      "data": {
+        "ra": 245.9979,
+        "dec": 61.514213,
+        "mag": 2.73,
+        "bayer": "14Eta Dra"
+      }
+    },
+    {
+      "id": "star:cujam",
+      "type": "FixedStar",
+      "label": "Cujam",
+      "data": {
+        "ra": 246.35397,
+        "dec": 14.03327,
+        "mag": 4.57,
+        "bayer": "24Ome Her"
+      }
+    },
+    {
+      "id": "star:antares",
+      "type": "FixedStar",
+      "label": "Antares",
+      "data": {
+        "ra": 247.35192,
+        "dec": -26.432002,
+        "mag": 1.06,
+        "bayer": "21Alp Sco"
+      }
+    },
+    {
+      "id": "star:kornephoros",
+      "type": "FixedStar",
+      "label": "Kornephoros",
+      "data": {
+        "ra": 247.55502,
+        "dec": 21.489613,
+        "mag": 2.78,
+        "bayer": "27Bet Her"
+      }
+    },
+    {
+      "id": "star:marfik",
+      "type": "FixedStar",
+      "label": "Marfik",
+      "data": {
+        "ra": 247.728435,
+        "dec": 1.983923,
+        "mag": 3.82,
+        "bayer": "10Lam Oph"
+      }
+    },
+    {
+      "id": "star:paikauhale",
+      "type": "FixedStar",
+      "label": "Paikauhale",
+      "data": {
+        "ra": 248.970645,
+        "dec": -28.216016,
+        "mag": 2.82,
+        "bayer": "23Tau Sco"
+      }
+    },
+    {
+      "id": "star:atria",
+      "type": "FixedStar",
+      "label": "Atria",
+      "data": {
+        "ra": 252.166155,
+        "dec": -69.027715,
+        "mag": 1.91,
+        "bayer": "Alp TrA"
+      }
+    },
+    {
+      "id": "star:larawag",
+      "type": "FixedStar",
+      "label": "Larawag",
+      "data": {
+        "ra": 252.5412,
+        "dec": -34.293232,
+        "mag": 2.29,
+        "bayer": "26Eps Sco"
+      }
+    },
+    {
+      "id": "star:xamidimura",
+      "type": "FixedStar",
+      "label": "Xamidimura",
+      "data": {
+        "ra": 252.967635,
+        "dec": -38.04738,
+        "mag": 3,
+        "bayer": "Mu 1Sco"
+      }
+    },
+    {
+      "id": "star:pipirima",
+      "type": "FixedStar",
+      "label": "Pipirima",
+      "data": {
+        "ra": 253.083945,
+        "dec": -38.017536,
+        "mag": 3.56,
+        "bayer": "Mu 2Sco"
+      }
+    },
+    {
+      "id": "star:aldhibah",
+      "type": "FixedStar",
+      "label": "Aldhibah",
+      "data": {
+        "ra": 257.19672,
+        "dec": 65.714683,
+        "mag": 3.17,
+        "bayer": "22Zet Dra"
+      }
+    },
+    {
+      "id": "star:sabik",
+      "type": "FixedStar",
+      "label": "Sabik",
+      "data": {
+        "ra": 257.59452,
+        "dec": -15.72491,
+        "mag": 2.43,
+        "bayer": "35Eta Oph"
+      }
+    },
+    {
+      "id": "star:rasalgethi",
+      "type": "FixedStar",
+      "label": "Rasalgethi",
+      "data": {
+        "ra": 258.661905,
+        "dec": 14.390333,
+        "mag": 2.78,
+        "bayer": "64Alp1Her"
+      }
+    },
+    {
+      "id": "star:sarin",
+      "type": "FixedStar",
+      "label": "Sarin",
+      "data": {
+        "ra": 258.757965,
+        "dec": 24.839204,
+        "mag": 3.12,
+        "bayer": "65Del Her"
+      }
+    },
+    {
+      "id": "star:guniibuu",
+      "type": "FixedStar",
+      "label": "Guniibuu",
+      "data": {
+        "ra": 258.83754,
+        "dec": -26.602829,
+        "mag": 4.33,
+        "bayer": "36    Oph"
+      }
+    },
+    {
+      "id": "star:rastaban",
+      "type": "FixedStar",
+      "label": "Rastaban",
+      "data": {
+        "ra": 262.608195,
+        "dec": 52.301387,
+        "mag": 2.79,
+        "bayer": "23Bet Dra"
+      }
+    },
+    {
+      "id": "star:maasym",
+      "type": "FixedStar",
+      "label": "Maasym",
+      "data": {
+        "ra": 262.68462,
+        "dec": 26.110645,
+        "mag": 4.41,
+        "bayer": "76Lam Her"
+      }
+    },
+    {
+      "id": "star:lesath",
+      "type": "FixedStar",
+      "label": "Lesath",
+      "data": {
+        "ra": 262.69098,
+        "dec": -37.295811,
+        "mag": 2.7,
+        "bayer": "34Ups Sco"
+      }
+    },
+    {
+      "id": "star:yildun",
+      "type": "FixedStar",
+      "label": "Yildun",
+      "data": {
+        "ra": 263.05377,
+        "dec": 86.58646,
+        "mag": 4.35,
+        "bayer": "23Del UMi"
+      }
+    },
+    {
+      "id": "star:shaula",
+      "type": "FixedStar",
+      "label": "Shaula",
+      "data": {
+        "ra": 263.402175,
+        "dec": -37.103821,
+        "mag": 1.62,
+        "bayer": "35Lam Sco"
+      }
+    },
+    {
+      "id": "star:rasalhague",
+      "type": "FixedStar",
+      "label": "Rasalhague",
+      "data": {
+        "ra": 263.733615,
+        "dec": 12.560035,
+        "mag": 2.08,
+        "bayer": "55Alp Oph"
+      }
+    },
+    {
+      "id": "star:sargas",
+      "type": "FixedStar",
+      "label": "Sargas",
+      "data": {
+        "ra": 264.3297,
+        "dec": -42.997824,
+        "mag": 1.86,
+        "bayer": "The Sco"
+      }
+    },
+    {
+      "id": "star:dziban",
+      "type": "FixedStar",
+      "label": "Dziban",
+      "data": {
+        "ra": 265.48467,
+        "dec": 72.148843,
+        "mag": 4.57,
+        "bayer": "31Psi1Dra"
+      }
+    },
+    {
+      "id": "star:cebalrai",
+      "type": "FixedStar",
+      "label": "Cebalrai",
+      "data": {
+        "ra": 265.868145,
+        "dec": 4.567303,
+        "mag": 2.76,
+        "bayer": "60Bet Oph"
+      }
+    },
+    {
+      "id": "star:fuyue",
+      "type": "FixedStar",
+      "label": "Fuyue",
+      "data": {
+        "ra": 267.464475,
+        "dec": -37.043304,
+        "mag": 3.19,
+        "bayer": ""
+      }
+    },
+    {
+      "id": "star:grumium",
+      "type": "FixedStar",
+      "label": "Grumium",
+      "data": {
+        "ra": 268.38201,
+        "dec": 56.872643,
+        "mag": 3.73,
+        "bayer": "32Xi  Dra"
+      }
+    },
+    {
+      "id": "star:eltanin",
+      "type": "FixedStar",
+      "label": "Eltanin",
+      "data": {
+        "ra": 269.151555,
+        "dec": 51.488895,
+        "mag": 2.24,
+        "bayer": "33Gam Dra"
+      }
+    },
+    {
+      "id": "star:alnasl",
+      "type": "FixedStar",
+      "label": "Alnasl",
+      "data": {
+        "ra": 271.452045,
+        "dec": -30.424091,
+        "mag": 2.98,
+        "bayer": "10Gam2Sgr"
+      }
+    },
+    {
+      "id": "star:polis",
+      "type": "FixedStar",
+      "label": "Polis",
+      "data": {
+        "ra": 273.44088,
+        "dec": -21.058834,
+        "mag": 3.84,
+        "bayer": "13Mu  Sgr"
+      }
+    },
+    {
+      "id": "star:kaus-media",
+      "type": "FixedStar",
+      "label": "Kaus Media",
+      "data": {
+        "ra": 275.2485,
+        "dec": -29.828103,
+        "mag": 2.72,
+        "bayer": "19Del Sgr"
+      }
+    },
+    {
+      "id": "star:kaus-australis",
+      "type": "FixedStar",
+      "label": "Kaus Australis",
+      "data": {
+        "ra": 276.04302,
+        "dec": -34.384616,
+        "mag": 1.79,
+        "bayer": "20Eps Sgr"
+      }
+    },
+    {
+      "id": "star:fafnir",
+      "type": "FixedStar",
+      "label": "Fafnir",
+      "data": {
+        "ra": 276.496035,
+        "dec": 65.56348,
+        "mag": 4.82,
+        "bayer": "42    Dra"
+      }
+    },
+    {
+      "id": "star:kaus-borealis",
+      "type": "FixedStar",
+      "label": "Kaus Borealis",
+      "data": {
+        "ra": 276.992685,
+        "dec": -25.4217,
+        "mag": 2.82,
+        "bayer": "22Lam Sgr"
+      }
+    },
+    {
+      "id": "star:vega",
+      "type": "FixedStar",
+      "label": "Vega",
+      "data": {
+        "ra": 279.2346,
+        "dec": 38.783692,
+        "mag": 0.03,
+        "bayer": "3Alp Lyr"
+      }
+    },
+    {
+      "id": "star:sheliak",
+      "type": "FixedStar",
+      "label": "Sheliak",
+      "data": {
+        "ra": 282.519975,
+        "dec": 33.362667,
+        "mag": 3.52,
+        "bayer": "10Bet Lyr"
+      }
+    },
+    {
+      "id": "star:ainalrami",
+      "type": "FixedStar",
+      "label": "Ainalrami",
+      "data": {
+        "ra": 283.542405,
+        "dec": -22.744834,
+        "mag": 4.86,
+        "bayer": "32Nu 1Sgr"
+      }
+    },
+    {
+      "id": "star:nunki",
+      "type": "FixedStar",
+      "label": "Nunki",
+      "data": {
+        "ra": 283.81635,
+        "dec": -26.296722,
+        "mag": 2.05,
+        "bayer": "34Sig Sgr"
+      }
+    },
+    {
+      "id": "star:alya",
+      "type": "FixedStar",
+      "label": "Alya",
+      "data": {
+        "ra": 284.054925,
+        "dec": 4.203595,
+        "mag": 4.62,
+        "bayer": "63The1Ser"
+      }
+    },
+    {
+      "id": "star:alya-b",
+      "type": "FixedStar",
+      "label": "Alya B",
+      "data": {
+        "ra": 284.061015,
+        "dec": 4.202132,
+        "mag": 4.98,
+        "bayer": "63The2Ser"
+      }
+    },
+    {
+      "id": "star:sulafat",
+      "type": "FixedStar",
+      "label": "Sulafat",
+      "data": {
+        "ra": 284.735925,
+        "dec": 32.689557,
+        "mag": 3.25,
+        "bayer": "14Gam Lyr"
+      }
+    },
+    {
+      "id": "star:ascella",
+      "type": "FixedStar",
+      "label": "Ascella",
+      "data": {
+        "ra": 285.65298,
+        "dec": -29.880105,
+        "mag": 2.6,
+        "bayer": "38Zet Sgr"
+      }
+    },
+    {
+      "id": "star:okab",
+      "type": "FixedStar",
+      "label": "Okab",
+      "data": {
+        "ra": 286.352535,
+        "dec": 13.863478,
+        "mag": 2.99,
+        "bayer": "17Zet Aql"
+      }
+    },
+    {
+      "id": "star:meridiana",
+      "type": "FixedStar",
+      "label": "Meridiana",
+      "data": {
+        "ra": 287.368035,
+        "dec": -37.904474,
+        "mag": 4.11,
+        "bayer": "Alp CrA"
+      }
+    },
+    {
+      "id": "star:albaldah",
+      "type": "FixedStar",
+      "label": "Albaldah",
+      "data": {
+        "ra": 287.440965,
+        "dec": -21.023615,
+        "mag": 2.88,
+        "bayer": "41Pi  Sgr"
+      }
+    },
+    {
+      "id": "star:altais",
+      "type": "FixedStar",
+      "label": "Altais",
+      "data": {
+        "ra": 288.138375,
+        "dec": 67.661541,
+        "mag": 3.07,
+        "bayer": "57Del Dra"
+      }
+    },
+    {
+      "id": "star:aladfar",
+      "type": "FixedStar",
+      "label": "Aladfar",
+      "data": {
+        "ra": 288.43953,
+        "dec": 39.145968,
+        "mag": 4.43,
+        "bayer": "20Eta Lyr"
+      }
+    },
+    {
+      "id": "star:arkab-prior",
+      "type": "FixedStar",
+      "label": "Arkab Prior",
+      "data": {
+        "ra": 290.659545,
+        "dec": -44.458965,
+        "mag": 3.96,
+        "bayer": "Bet1Sgr"
+      }
+    },
+    {
+      "id": "star:arkab-posterior",
+      "type": "FixedStar",
+      "label": "Arkab Posterior",
+      "data": {
+        "ra": 290.80464,
+        "dec": -44.799778,
+        "mag": 4.27,
+        "bayer": "Bet2Sgr"
+      }
+    },
+    {
+      "id": "star:rukbat",
+      "type": "FixedStar",
+      "label": "Rukbat",
+      "data": {
+        "ra": 290.971545,
+        "dec": -40.61594,
+        "mag": 3.96,
+        "bayer": "Alp Sgr"
+      }
+    },
+    {
+      "id": "star:anser",
+      "type": "FixedStar",
+      "label": "Anser",
+      "data": {
+        "ra": 292.176405,
+        "dec": 24.664905,
+        "mag": 4.44,
+        "bayer": "6Alp Vul"
+      }
+    },
+    {
+      "id": "star:albireo",
+      "type": "FixedStar",
+      "label": "Albireo",
+      "data": {
+        "ra": 292.680345,
+        "dec": 27.959681,
+        "mag": 3.05,
+        "bayer": "6Bet1Cyg"
+      }
+    },
+    {
+      "id": "star:alsafi",
+      "type": "FixedStar",
+      "label": "Alsafi",
+      "data": {
+        "ra": 293.087235,
+        "dec": 69.661175,
+        "mag": 4.67,
+        "bayer": "61Sig Dra"
+      }
+    },
+    {
+      "id": "star:sham",
+      "type": "FixedStar",
+      "label": "Sham",
+      "data": {
+        "ra": 295.024125,
+        "dec": 18.01389,
+        "mag": 4.39,
+        "bayer": "5Alp Sge"
+      }
+    },
+    {
+      "id": "star:fawaris",
+      "type": "FixedStar",
+      "label": "Fawaris",
+      "data": {
+        "ra": 296.24361,
+        "dec": 45.13081,
+        "mag": 2.86,
+        "bayer": "18Del Cyg"
+      }
+    },
+    {
+      "id": "star:tarazed",
+      "type": "FixedStar",
+      "label": "Tarazed",
+      "data": {
+        "ra": 296.56491,
+        "dec": 10.613261,
+        "mag": 2.72,
+        "bayer": "50Gam Aql"
+      }
+    },
+    {
+      "id": "star:altair",
+      "type": "FixedStar",
+      "label": "Altair",
+      "data": {
+        "ra": 297.69582,
+        "dec": 8.868322,
+        "mag": 0.76,
+        "bayer": "53Alp Aql"
+      }
+    },
+    {
+      "id": "star:libertas",
+      "type": "FixedStar",
+      "label": "Libertas",
+      "data": {
+        "ra": 298.56201,
+        "dec": 8.461453,
+        "mag": 4.71,
+        "bayer": "59Xi  Aql"
+      }
+    },
+    {
+      "id": "star:alshain",
+      "type": "FixedStar",
+      "label": "Alshain",
+      "data": {
+        "ra": 298.828305,
+        "dec": 6.406763,
+        "mag": 3.71,
+        "bayer": "60Bet Aql"
+      }
+    },
+    {
+      "id": "star:terebellum",
+      "type": "FixedStar",
+      "label": "Terebellum",
+      "data": {
+        "ra": 298.959765,
+        "dec": -26.299506,
+        "mag": 4.7,
+        "bayer": "58Ome Sgr"
+      }
+    },
+    {
+      "id": "star:algedi",
+      "type": "FixedStar",
+      "label": "Algedi",
+      "data": {
+        "ra": 304.51356,
+        "dec": -12.544852,
+        "mag": 3.58,
+        "bayer": "6Alp2Cap"
+      }
+    },
+    {
+      "id": "star:alshat",
+      "type": "FixedStar",
+      "label": "Alshat",
+      "data": {
+        "ra": 305.165895,
+        "dec": -12.75908,
+        "mag": 4.77,
+        "bayer": "8Nu  Cap"
+      }
+    },
+    {
+      "id": "star:dabih",
+      "type": "FixedStar",
+      "label": "Dabih",
+      "data": {
+        "ra": 305.252805,
+        "dec": -14.781367,
+        "mag": 3.05,
+        "bayer": "9Bet Cap"
+      }
+    },
+    {
+      "id": "star:sadr",
+      "type": "FixedStar",
+      "label": "Sadr",
+      "data": {
+        "ra": 305.557095,
+        "dec": 40.256679,
+        "mag": 2.23,
+        "bayer": "37Gam Cyg"
+      }
+    },
+    {
+      "id": "star:peacock",
+      "type": "FixedStar",
+      "label": "Peacock",
+      "data": {
+        "ra": 306.411885,
+        "dec": -56.73509,
+        "mag": 1.94,
+        "bayer": "Alp Pav"
+      }
+    },
+    {
+      "id": "star:aldulfin",
+      "type": "FixedStar",
+      "label": "Aldulfin",
+      "data": {
+        "ra": 308.303205,
+        "dec": 11.303263,
+        "mag": 4.03,
+        "bayer": "2Eps Del"
+      }
+    },
+    {
+      "id": "star:rotanev",
+      "type": "FixedStar",
+      "label": "Rotanev",
+      "data": {
+        "ra": 309.38724,
+        "dec": 14.595087,
+        "mag": 3.64,
+        "bayer": "6Bet Del"
+      }
+    },
+    {
+      "id": "star:sualocin",
+      "type": "FixedStar",
+      "label": "Sualocin",
+      "data": {
+        "ra": 309.909525,
+        "dec": 15.912072,
+        "mag": 3.77,
+        "bayer": "9Alp Del"
+      }
+    },
+    {
+      "id": "star:deneb",
+      "type": "FixedStar",
+      "label": "Deneb",
+      "data": {
+        "ra": 310.35798,
+        "dec": 45.280338,
+        "mag": 1.25,
+        "bayer": "50Alp Cyg"
+      }
+    },
+    {
+      "id": "star:aljanah",
+      "type": "FixedStar",
+      "label": "Aljanah",
+      "data": {
+        "ra": 311.55267,
+        "dec": 33.970256,
+        "mag": 2.48,
+        "bayer": "53Eps Cyg"
+      }
+    },
+    {
+      "id": "star:albali",
+      "type": "FixedStar",
+      "label": "Albali",
+      "data": {
+        "ra": 311.91897,
+        "dec": -9.495776,
+        "mag": 3.78,
+        "bayer": "2Eps Aqr"
+      }
+    },
+    {
+      "id": "star:kitalpha",
+      "type": "FixedStar",
+      "label": "Kitalpha",
+      "data": {
+        "ra": 318.955965,
+        "dec": 5.247845,
+        "mag": 3.92,
+        "bayer": "8Alp Equ"
+      }
+    },
+    {
+      "id": "star:alderamin",
+      "type": "FixedStar",
+      "label": "Alderamin",
+      "data": {
+        "ra": 319.64445,
+        "dec": 62.585573,
+        "mag": 2.45,
+        "bayer": "5Alp Cep"
+      }
+    },
+    {
+      "id": "star:alfirk",
+      "type": "FixedStar",
+      "label": "Alfirk",
+      "data": {
+        "ra": 322.16493,
+        "dec": 70.560716,
+        "mag": 3.23,
+        "bayer": "8Bet Cep"
+      }
+    },
+    {
+      "id": "star:sadalsuud",
+      "type": "FixedStar",
+      "label": "Sadalsuud",
+      "data": {
+        "ra": 322.88973,
+        "dec": -5.571172,
+        "mag": 2.9,
+        "bayer": "22Bet Aqr"
+      }
+    },
+    {
+      "id": "star:bunda",
+      "type": "FixedStar",
+      "label": "Bunda",
+      "data": {
+        "ra": 324.437955,
+        "dec": -7.854201,
+        "mag": 4.68,
+        "bayer": "23Xi  Aqr"
+      }
+    },
+    {
+      "id": "star:nashira",
+      "type": "FixedStar",
+      "label": "Nashira",
+      "data": {
+        "ra": 325.022715,
+        "dec": -16.662308,
+        "mag": 3.69,
+        "bayer": "40Gam Cap"
+      }
+    },
+    {
+      "id": "star:azelfafage",
+      "type": "FixedStar",
+      "label": "Azelfafage",
+      "data": {
+        "ra": 325.523595,
+        "dec": 51.189622,
+        "mag": 4.69,
+        "bayer": "80Pi 1Cyg"
+      }
+    },
+    {
+      "id": "star:enif",
+      "type": "FixedStar",
+      "label": "Enif",
+      "data": {
+        "ra": 326.046495,
+        "dec": 9.875011,
+        "mag": 2.38,
+        "bayer": "8Eps Peg"
+      }
+    },
+    {
+      "id": "star:deneb-algedi",
+      "type": "FixedStar",
+      "label": "Deneb Algedi",
+      "data": {
+        "ra": 326.760165,
+        "dec": -16.127286,
+        "mag": 2.85,
+        "bayer": "49Del Cap"
+      }
+    },
+    {
+      "id": "star:aldhanab",
+      "type": "FixedStar",
+      "label": "Aldhanab",
+      "data": {
+        "ra": 328.48212,
+        "dec": -37.364852,
+        "mag": 3,
+        "bayer": "Gam Gru"
+      }
+    },
+    {
+      "id": "star:kurhah",
+      "type": "FixedStar",
+      "label": "Kurhah",
+      "data": {
+        "ra": 330.947025,
+        "dec": 64.627971,
+        "mag": 4.26,
+        "bayer": "17Xi  Cep"
+      }
+    },
+    {
+      "id": "star:sadalmelik",
+      "type": "FixedStar",
+      "label": "Sadalmelik",
+      "data": {
+        "ra": 331.445985,
+        "dec": -0.319851,
+        "mag": 2.95,
+        "bayer": "34Alp Aqr"
+      }
+    },
+    {
+      "id": "star:alnair",
+      "type": "FixedStar",
+      "label": "Alnair",
+      "data": {
+        "ra": 332.058135,
+        "dec": -46.960975,
+        "mag": 1.73,
+        "bayer": "Alp Gru"
+      }
+    },
+    {
+      "id": "star:biham",
+      "type": "FixedStar",
+      "label": "Biham",
+      "data": {
+        "ra": 332.54994,
+        "dec": 6.197865,
+        "mag": 3.52,
+        "bayer": "26The Peg"
+      }
+    },
+    {
+      "id": "star:ancha",
+      "type": "FixedStar",
+      "label": "Ancha",
+      "data": {
+        "ra": 334.208475,
+        "dec": -7.78329,
+        "mag": 4.17,
+        "bayer": "43The Aqr"
+      }
+    },
+    {
+      "id": "star:sadachbia",
+      "type": "FixedStar",
+      "label": "Sadachbia",
+      "data": {
+        "ra": 335.41407,
+        "dec": -1.387331,
+        "mag": 3.86,
+        "bayer": "48Gam Aqr"
+      }
+    },
+    {
+      "id": "star:homam",
+      "type": "FixedStar",
+      "label": "Homam",
+      "data": {
+        "ra": 340.365495,
+        "dec": 10.831364,
+        "mag": 3.41,
+        "bayer": "42Zet Peg"
+      }
+    },
+    {
+      "id": "star:tiaki",
+      "type": "FixedStar",
+      "label": "Tiaki",
+      "data": {
+        "ra": 340.666725,
+        "dec": -46.884577,
+        "mag": 2.07,
+        "bayer": "Bet Gru"
+      }
+    },
+    {
+      "id": "star:matar",
+      "type": "FixedStar",
+      "label": "Matar",
+      "data": {
+        "ra": 340.75056,
+        "dec": 30.221245,
+        "mag": 2.93,
+        "bayer": "44Eta Peg"
+      }
+    },
+    {
+      "id": "star:sadalbari",
+      "type": "FixedStar",
+      "label": "Sadalbari",
+      "data": {
+        "ra": 342.500775,
+        "dec": 24.601579,
+        "mag": 3.51,
+        "bayer": "48Mu  Peg"
+      }
+    },
+    {
+      "id": "star:skat",
+      "type": "FixedStar",
+      "label": "Skat",
+      "data": {
+        "ra": 343.662555,
+        "dec": -15.82082,
+        "mag": 3.27,
+        "bayer": "76Del Aqr"
+      }
+    },
+    {
+      "id": "star:fomalhaut",
+      "type": "FixedStar",
+      "label": "Fomalhaut",
+      "data": {
+        "ra": 344.41257,
+        "dec": -29.622236,
+        "mag": 1.17,
+        "bayer": "24Alp PsA"
+      }
+    },
+    {
+      "id": "star:scheat",
+      "type": "FixedStar",
+      "label": "Scheat",
+      "data": {
+        "ra": 345.943515,
+        "dec": 28.082789,
+        "mag": 2.44,
+        "bayer": "53Bet Peg"
+      }
+    },
+    {
+      "id": "star:fumalsamakah",
+      "type": "FixedStar",
+      "label": "Fumalsamakah",
+      "data": {
+        "ra": 345.969225,
+        "dec": 3.820045,
+        "mag": 4.48,
+        "bayer": "4Bet Psc"
+      }
+    },
+    {
+      "id": "star:markab",
+      "type": "FixedStar",
+      "label": "Markab",
+      "data": {
+        "ra": 346.19022,
+        "dec": 15.205264,
+        "mag": 2.49,
+        "bayer": "54Alp Peg"
+      }
+    },
+    {
+      "id": "star:salm",
+      "type": "FixedStar",
+      "label": "Salm",
+      "data": {
+        "ra": 350.15934,
+        "dec": 23.740337,
+        "mag": 4.58,
+        "bayer": "62Tau Peg"
+      }
+    },
+    {
+      "id": "star:alkarab",
+      "type": "FixedStar",
+      "label": "Alkarab",
+      "data": {
+        "ra": 351.344895,
+        "dec": 23.404101,
+        "mag": 4.42,
+        "bayer": "68Ups Peg"
+      }
+    },
+    {
+      "id": "star:errai",
+      "type": "FixedStar",
+      "label": "Errai",
+      "data": {
+        "ra": 354.8373,
+        "dec": 77.632276,
+        "mag": 3.21,
+        "bayer": "35Gam Cep"
+      }
+    },
+    {
+      "id": "star:castor-b",
+      "type": "FixedStar",
+      "label": "Castor B",
+      "data": {
+        "ra": 113.652405,
+        "dec": 31.89052,
+        "mag": 2.85,
+        "bayer": "66Alp Gem"
+      }
+    },
+    {
+      "id": "star:alula-australis",
+      "type": "FixedStar",
+      "label": "Alula Australis",
+      "data": {
+        "ra": 169.54677,
+        "dec": 31.528783,
+        "mag": 4.33,
+        "bayer": "53Xi  UMa"
+      }
+    },
+    {
+      "id": "star:alula-australis-b",
+      "type": "FixedStar",
+      "label": "Alula Australis B",
+      "data": {
+        "ra": 169.54677,
+        "dec": 31.528783,
+        "mag": 4.8,
+        "bayer": "53Xi  UMa"
+      }
+    },
+    {
+      "id": "star:graffias",
+      "type": "FixedStar",
+      "label": "Graffias",
+      "data": {
+        "ra": 241.09161,
+        "dec": -11.374611,
+        "mag": 4.84,
+        "bayer": "Xi  Sco"
+      }
+    },
+    {
+      "id": "star:galactic-center",
+      "type": "FixedStar",
+      "label": "Galactic Center",
+      "data": {
+        "ra": 266.4168371,
+        "dec": -29.0078106,
+        "mag": 99,
+        "bayer": "Sgr A*"
+      }
+    },
+    {
+      "id": "constellation:andromeda",
+      "type": "Constellation",
+      "label": "Andromeda",
+      "data": {
+        "abbr": "And"
+      }
+    },
+    {
+      "id": "constellation:antlia",
+      "type": "Constellation",
+      "label": "Antlia",
+      "data": {
+        "abbr": "Ant"
+      }
+    },
+    {
+      "id": "constellation:apus",
+      "type": "Constellation",
+      "label": "Apus",
+      "data": {
+        "abbr": "Aps"
+      }
+    },
+    {
+      "id": "constellation:aquarius",
+      "type": "Constellation",
+      "label": "Aquarius",
+      "data": {
+        "abbr": "Aqr"
+      }
+    },
+    {
+      "id": "constellation:aquila",
+      "type": "Constellation",
+      "label": "Aquila",
+      "data": {
+        "abbr": "Aql"
+      }
+    },
+    {
+      "id": "constellation:ara",
+      "type": "Constellation",
+      "label": "Ara",
+      "data": {
+        "abbr": "Ara"
+      }
+    },
+    {
+      "id": "constellation:aries",
+      "type": "Constellation",
+      "label": "Aries",
+      "data": {
+        "abbr": "Ari"
+      }
+    },
+    {
+      "id": "constellation:auriga",
+      "type": "Constellation",
+      "label": "Auriga",
+      "data": {
+        "abbr": "Aur"
+      }
+    },
+    {
+      "id": "constellation:bootes",
+      "type": "Constellation",
+      "label": "Bootes",
+      "data": {
+        "abbr": "Boo"
+      }
+    },
+    {
+      "id": "constellation:caelum",
+      "type": "Constellation",
+      "label": "Caelum",
+      "data": {
+        "abbr": "Cae"
+      }
+    },
+    {
+      "id": "constellation:camelopardalis",
+      "type": "Constellation",
+      "label": "Camelopardalis",
+      "data": {
+        "abbr": "Cam"
+      }
+    },
+    {
+      "id": "constellation:cancer",
+      "type": "Constellation",
+      "label": "Cancer",
+      "data": {
+        "abbr": "Cnc"
+      }
+    },
+    {
+      "id": "constellation:canes-venatici",
+      "type": "Constellation",
+      "label": "Canes Venatici",
+      "data": {
+        "abbr": "CVn"
+      }
+    },
+    {
+      "id": "constellation:canis-maior",
+      "type": "Constellation",
+      "label": "Canis Maior",
+      "data": {
+        "abbr": "CMa"
+      }
+    },
+    {
+      "id": "constellation:canis-minor",
+      "type": "Constellation",
+      "label": "Canis Minor",
+      "data": {
+        "abbr": "CMi"
+      }
+    },
+    {
+      "id": "constellation:capricornus",
+      "type": "Constellation",
+      "label": "Capricornus",
+      "data": {
+        "abbr": "Cap"
+      }
+    },
+    {
+      "id": "constellation:carina",
+      "type": "Constellation",
+      "label": "Carina",
+      "data": {
+        "abbr": "Car"
+      }
+    },
+    {
+      "id": "constellation:cassiopeia",
+      "type": "Constellation",
+      "label": "Cassiopeia",
+      "data": {
+        "abbr": "Cas"
+      }
+    },
+    {
+      "id": "constellation:centaurus",
+      "type": "Constellation",
+      "label": "Centaurus",
+      "data": {
+        "abbr": "Cen"
+      }
+    },
+    {
+      "id": "constellation:cepheus",
+      "type": "Constellation",
+      "label": "Cepheus",
+      "data": {
+        "abbr": "Cep"
+      }
+    },
+    {
+      "id": "constellation:cetus",
+      "type": "Constellation",
+      "label": "Cetus",
+      "data": {
+        "abbr": "Cet"
+      }
+    },
+    {
+      "id": "constellation:chamaeleon",
+      "type": "Constellation",
+      "label": "Chamaeleon",
+      "data": {
+        "abbr": "Cha"
+      }
+    },
+    {
+      "id": "constellation:circinus",
+      "type": "Constellation",
+      "label": "Circinus",
+      "data": {
+        "abbr": "Cir"
+      }
+    },
+    {
+      "id": "constellation:columba",
+      "type": "Constellation",
+      "label": "Columba",
+      "data": {
+        "abbr": "Col"
+      }
+    },
+    {
+      "id": "constellation:coma-berenices",
+      "type": "Constellation",
+      "label": "Coma Berenices",
+      "data": {
+        "abbr": "Com"
+      }
+    },
+    {
+      "id": "constellation:corona-australis",
+      "type": "Constellation",
+      "label": "Corona Australis",
+      "data": {
+        "abbr": "CrA"
+      }
+    },
+    {
+      "id": "constellation:corona-borealis",
+      "type": "Constellation",
+      "label": "Corona Borealis",
+      "data": {
+        "abbr": "CrB"
+      }
+    },
+    {
+      "id": "constellation:corvus",
+      "type": "Constellation",
+      "label": "Corvus",
+      "data": {
+        "abbr": "Crv"
+      }
+    },
+    {
+      "id": "constellation:crater",
+      "type": "Constellation",
+      "label": "Crater",
+      "data": {
+        "abbr": "Crt"
+      }
+    },
+    {
+      "id": "constellation:crux",
+      "type": "Constellation",
+      "label": "Crux",
+      "data": {
+        "abbr": "Cru"
+      }
+    },
+    {
+      "id": "constellation:cygnus",
+      "type": "Constellation",
+      "label": "Cygnus",
+      "data": {
+        "abbr": "Cyg"
+      }
+    },
+    {
+      "id": "constellation:delphinus",
+      "type": "Constellation",
+      "label": "Delphinus",
+      "data": {
+        "abbr": "Del"
+      }
+    },
+    {
+      "id": "constellation:dorado",
+      "type": "Constellation",
+      "label": "Dorado",
+      "data": {
+        "abbr": "Dor"
+      }
+    },
+    {
+      "id": "constellation:draco",
+      "type": "Constellation",
+      "label": "Draco",
+      "data": {
+        "abbr": "Dra"
+      }
+    },
+    {
+      "id": "constellation:equuleus",
+      "type": "Constellation",
+      "label": "Equuleus",
+      "data": {
+        "abbr": "Equ"
+      }
+    },
+    {
+      "id": "constellation:eridanus",
+      "type": "Constellation",
+      "label": "Eridanus",
+      "data": {
+        "abbr": "Eri"
+      }
+    },
+    {
+      "id": "constellation:fornax",
+      "type": "Constellation",
+      "label": "Fornax",
+      "data": {
+        "abbr": "For"
+      }
+    },
+    {
+      "id": "constellation:gemini",
+      "type": "Constellation",
+      "label": "Gemini",
+      "data": {
+        "abbr": "Gem"
+      }
+    },
+    {
+      "id": "constellation:grus",
+      "type": "Constellation",
+      "label": "Grus",
+      "data": {
+        "abbr": "Gru"
+      }
+    },
+    {
+      "id": "constellation:hercules",
+      "type": "Constellation",
+      "label": "Hercules",
+      "data": {
+        "abbr": "Her"
+      }
+    },
+    {
+      "id": "constellation:horologium",
+      "type": "Constellation",
+      "label": "Horologium",
+      "data": {
+        "abbr": "Hor"
+      }
+    },
+    {
+      "id": "constellation:hydra",
+      "type": "Constellation",
+      "label": "Hydra",
+      "data": {
+        "abbr": "Hya"
+      }
+    },
+    {
+      "id": "constellation:hydrus",
+      "type": "Constellation",
+      "label": "Hydrus",
+      "data": {
+        "abbr": "Hyi"
+      }
+    },
+    {
+      "id": "constellation:indus",
+      "type": "Constellation",
+      "label": "Indus",
+      "data": {
+        "abbr": "Ind"
+      }
+    },
+    {
+      "id": "constellation:lacerta",
+      "type": "Constellation",
+      "label": "Lacerta",
+      "data": {
+        "abbr": "Lac"
+      }
+    },
+    {
+      "id": "constellation:leo",
+      "type": "Constellation",
+      "label": "Leo",
+      "data": {
+        "abbr": "Leo"
+      }
+    },
+    {
+      "id": "constellation:leo-minor",
+      "type": "Constellation",
+      "label": "Leo Minor",
+      "data": {
+        "abbr": "LMi"
+      }
+    },
+    {
+      "id": "constellation:lepus",
+      "type": "Constellation",
+      "label": "Lepus",
+      "data": {
+        "abbr": "Lep"
+      }
+    },
+    {
+      "id": "constellation:libra",
+      "type": "Constellation",
+      "label": "Libra",
+      "data": {
+        "abbr": "Lib"
+      }
+    },
+    {
+      "id": "constellation:lupus",
+      "type": "Constellation",
+      "label": "Lupus",
+      "data": {
+        "abbr": "Lup"
+      }
+    },
+    {
+      "id": "constellation:lynx",
+      "type": "Constellation",
+      "label": "Lynx",
+      "data": {
+        "abbr": "Lyn"
+      }
+    },
+    {
+      "id": "constellation:lyra",
+      "type": "Constellation",
+      "label": "Lyra",
+      "data": {
+        "abbr": "Lyr"
+      }
+    },
+    {
+      "id": "constellation:mensa",
+      "type": "Constellation",
+      "label": "Mensa",
+      "data": {
+        "abbr": "Men"
+      }
+    },
+    {
+      "id": "constellation:microscopium",
+      "type": "Constellation",
+      "label": "Microscopium",
+      "data": {
+        "abbr": "Mic"
+      }
+    },
+    {
+      "id": "constellation:monoceros",
+      "type": "Constellation",
+      "label": "Monoceros",
+      "data": {
+        "abbr": "Mon"
+      }
+    },
+    {
+      "id": "constellation:musca",
+      "type": "Constellation",
+      "label": "Musca",
+      "data": {
+        "abbr": "Mus"
+      }
+    },
+    {
+      "id": "constellation:norma",
+      "type": "Constellation",
+      "label": "Norma",
+      "data": {
+        "abbr": "Nor"
+      }
+    },
+    {
+      "id": "constellation:octans",
+      "type": "Constellation",
+      "label": "Octans",
+      "data": {
+        "abbr": "Oct"
+      }
+    },
+    {
+      "id": "constellation:ophiuchus",
+      "type": "Constellation",
+      "label": "Ophiuchus",
+      "data": {
+        "abbr": "Oph"
+      }
+    },
+    {
+      "id": "constellation:orion",
+      "type": "Constellation",
+      "label": "Orion",
+      "data": {
+        "abbr": "Ori"
+      }
+    },
+    {
+      "id": "constellation:pavo",
+      "type": "Constellation",
+      "label": "Pavo",
+      "data": {
+        "abbr": "Pav"
+      }
+    },
+    {
+      "id": "constellation:pegasus",
+      "type": "Constellation",
+      "label": "Pegasus",
+      "data": {
+        "abbr": "Peg"
+      }
+    },
+    {
+      "id": "constellation:perseus",
+      "type": "Constellation",
+      "label": "Perseus",
+      "data": {
+        "abbr": "Per"
+      }
+    },
+    {
+      "id": "constellation:phoenix",
+      "type": "Constellation",
+      "label": "Phoenix",
+      "data": {
+        "abbr": "Phe"
+      }
+    },
+    {
+      "id": "constellation:pictor",
+      "type": "Constellation",
+      "label": "Pictor",
+      "data": {
+        "abbr": "Pic"
+      }
+    },
+    {
+      "id": "constellation:pisces",
+      "type": "Constellation",
+      "label": "Pisces",
+      "data": {
+        "abbr": "Psc"
+      }
+    },
+    {
+      "id": "constellation:piscis-austrinus",
+      "type": "Constellation",
+      "label": "Piscis Austrinus",
+      "data": {
+        "abbr": "PsA"
+      }
+    },
+    {
+      "id": "constellation:puppis",
+      "type": "Constellation",
+      "label": "Puppis",
+      "data": {
+        "abbr": "Pup"
+      }
+    },
+    {
+      "id": "constellation:pyxis",
+      "type": "Constellation",
+      "label": "Pyxis",
+      "data": {
+        "abbr": "Pyx"
+      }
+    },
+    {
+      "id": "constellation:reticulum",
+      "type": "Constellation",
+      "label": "Reticulum",
+      "data": {
+        "abbr": "Ret"
+      }
+    },
+    {
+      "id": "constellation:sagitta",
+      "type": "Constellation",
+      "label": "Sagitta",
+      "data": {
+        "abbr": "Sge"
+      }
+    },
+    {
+      "id": "constellation:sagittarius",
+      "type": "Constellation",
+      "label": "Sagittarius",
+      "data": {
+        "abbr": "Sgr"
+      }
+    },
+    {
+      "id": "constellation:scorpius",
+      "type": "Constellation",
+      "label": "Scorpius",
+      "data": {
+        "abbr": "Sco"
+      }
+    },
+    {
+      "id": "constellation:sculptor",
+      "type": "Constellation",
+      "label": "Sculptor",
+      "data": {
+        "abbr": "Scl"
+      }
+    },
+    {
+      "id": "constellation:scutum",
+      "type": "Constellation",
+      "label": "Scutum",
+      "data": {
+        "abbr": "Sct"
+      }
+    },
+    {
+      "id": "constellation:serpens",
+      "type": "Constellation",
+      "label": "Serpens",
+      "data": {
+        "abbr": "Ser"
+      }
+    },
+    {
+      "id": "constellation:sextans",
+      "type": "Constellation",
+      "label": "Sextans",
+      "data": {
+        "abbr": "Sex"
+      }
+    },
+    {
+      "id": "constellation:taurus",
+      "type": "Constellation",
+      "label": "Taurus",
+      "data": {
+        "abbr": "Tau"
+      }
+    },
+    {
+      "id": "constellation:telescopium",
+      "type": "Constellation",
+      "label": "Telescopium",
+      "data": {
+        "abbr": "Tel"
+      }
+    },
+    {
+      "id": "constellation:triangulum",
+      "type": "Constellation",
+      "label": "Triangulum",
+      "data": {
+        "abbr": "Tri"
+      }
+    },
+    {
+      "id": "constellation:triangulum-australe",
+      "type": "Constellation",
+      "label": "Triangulum Australe",
+      "data": {
+        "abbr": "TrA"
+      }
+    },
+    {
+      "id": "constellation:tucana",
+      "type": "Constellation",
+      "label": "Tucana",
+      "data": {
+        "abbr": "Tuc"
+      }
+    },
+    {
+      "id": "constellation:ursa-maior",
+      "type": "Constellation",
+      "label": "Ursa Maior",
+      "data": {
+        "abbr": "UMa"
+      }
+    },
+    {
+      "id": "constellation:ursa-minor",
+      "type": "Constellation",
+      "label": "Ursa Minor",
+      "data": {
+        "abbr": "UMi"
+      }
+    },
+    {
+      "id": "constellation:vela",
+      "type": "Constellation",
+      "label": "Vela",
+      "data": {
+        "abbr": "Vel"
+      }
+    },
+    {
+      "id": "constellation:virgo",
+      "type": "Constellation",
+      "label": "Virgo",
+      "data": {
+        "abbr": "Vir"
+      }
+    },
+    {
+      "id": "constellation:volans",
+      "type": "Constellation",
+      "label": "Volans",
+      "data": {
+        "abbr": "Vol"
+      }
+    },
+    {
+      "id": "constellation:vulpecula",
+      "type": "Constellation",
+      "label": "Vulpecula",
+      "data": {
+        "abbr": "Vul"
+      }
+    },
+    {
+      "id": "nakshatra:ashwini",
+      "type": "Nakshatra",
+      "label": "Ashwini",
+      "data": {
+        "index": 0
+      }
+    },
+    {
+      "id": "nakshatra:bharani",
+      "type": "Nakshatra",
+      "label": "Bharani",
+      "data": {
+        "index": 1
+      }
+    },
+    {
+      "id": "nakshatra:krittika",
+      "type": "Nakshatra",
+      "label": "Krittika",
+      "data": {
+        "index": 2
+      }
+    },
+    {
+      "id": "nakshatra:rohini",
+      "type": "Nakshatra",
+      "label": "Rohini",
+      "data": {
+        "index": 3
+      }
+    },
+    {
+      "id": "nakshatra:mrigashira",
+      "type": "Nakshatra",
+      "label": "Mrigashira",
+      "data": {
+        "index": 4
+      }
+    },
+    {
+      "id": "nakshatra:ardra",
+      "type": "Nakshatra",
+      "label": "Ardra",
+      "data": {
+        "index": 5
+      }
+    },
+    {
+      "id": "nakshatra:punarvasu",
+      "type": "Nakshatra",
+      "label": "Punarvasu",
+      "data": {
+        "index": 6
+      }
+    },
+    {
+      "id": "nakshatra:pushya",
+      "type": "Nakshatra",
+      "label": "Pushya",
+      "data": {
+        "index": 7
+      }
+    },
+    {
+      "id": "nakshatra:ashlesha",
+      "type": "Nakshatra",
+      "label": "Ashlesha",
+      "data": {
+        "index": 8
+      }
+    },
+    {
+      "id": "nakshatra:magha",
+      "type": "Nakshatra",
+      "label": "Magha",
+      "data": {
+        "index": 9
+      }
+    },
+    {
+      "id": "nakshatra:purva-phalguni",
+      "type": "Nakshatra",
+      "label": "Purva Phalguni",
+      "data": {
+        "index": 10
+      }
+    },
+    {
+      "id": "nakshatra:uttara-phalguni",
+      "type": "Nakshatra",
+      "label": "Uttara Phalguni",
+      "data": {
+        "index": 11
+      }
+    },
+    {
+      "id": "nakshatra:hasta",
+      "type": "Nakshatra",
+      "label": "Hasta",
+      "data": {
+        "index": 12
+      }
+    },
+    {
+      "id": "nakshatra:chitra",
+      "type": "Nakshatra",
+      "label": "Chitra",
+      "data": {
+        "index": 13
+      }
+    },
+    {
+      "id": "nakshatra:swati",
+      "type": "Nakshatra",
+      "label": "Swati",
+      "data": {
+        "index": 14
+      }
+    },
+    {
+      "id": "nakshatra:vishakha",
+      "type": "Nakshatra",
+      "label": "Vishakha",
+      "data": {
+        "index": 15
+      }
+    },
+    {
+      "id": "nakshatra:anuradha",
+      "type": "Nakshatra",
+      "label": "Anuradha",
+      "data": {
+        "index": 16
+      }
+    },
+    {
+      "id": "nakshatra:jyeshtha",
+      "type": "Nakshatra",
+      "label": "Jyeshtha",
+      "data": {
+        "index": 17
+      }
+    },
+    {
+      "id": "nakshatra:mula",
+      "type": "Nakshatra",
+      "label": "Mula",
+      "data": {
+        "index": 18
+      }
+    },
+    {
+      "id": "nakshatra:purva-ashadha",
+      "type": "Nakshatra",
+      "label": "Purva Ashadha",
+      "data": {
+        "index": 19
+      }
+    },
+    {
+      "id": "nakshatra:uttara-ashadha",
+      "type": "Nakshatra",
+      "label": "Uttara Ashadha",
+      "data": {
+        "index": 20
+      }
+    },
+    {
+      "id": "nakshatra:shravana",
+      "type": "Nakshatra",
+      "label": "Shravana",
+      "data": {
+        "index": 21
+      }
+    },
+    {
+      "id": "nakshatra:dhanishta",
+      "type": "Nakshatra",
+      "label": "Dhanishta",
+      "data": {
+        "index": 22
+      }
+    },
+    {
+      "id": "nakshatra:shatabhisha",
+      "type": "Nakshatra",
+      "label": "Shatabhisha",
+      "data": {
+        "index": 23
+      }
+    },
+    {
+      "id": "nakshatra:purva-bhadrapada",
+      "type": "Nakshatra",
+      "label": "Purva Bhadrapada",
+      "data": {
+        "index": 24
+      }
+    },
+    {
+      "id": "nakshatra:uttara-bhadrapada",
+      "type": "Nakshatra",
+      "label": "Uttara Bhadrapada",
+      "data": {
+        "index": 25
+      }
+    },
+    {
+      "id": "nakshatra:revati",
+      "type": "Nakshatra",
+      "label": "Revati",
+      "data": {
+        "index": 26
+      }
+    },
+    {
+      "id": "varga:d1",
+      "type": "Varga",
+      "label": "D1 (rasi)",
+      "data": {
+        "division": 1
+      }
+    },
+    {
+      "id": "varga:d2",
+      "type": "Varga",
+      "label": "D2 (hora)",
+      "data": {
+        "division": 2
+      }
+    },
+    {
+      "id": "varga:d3",
+      "type": "Varga",
+      "label": "D3 (drekkana)",
+      "data": {
+        "division": 3
+      }
+    },
+    {
+      "id": "varga:d9",
+      "type": "Varga",
+      "label": "D9 (navamsa)",
+      "data": {
+        "division": 9
+      }
+    },
+    {
+      "id": "varga:d10",
+      "type": "Varga",
+      "label": "D10 (dasamsa)",
+      "data": {
+        "division": 10
+      }
+    },
+    {
+      "id": "varga:d12",
+      "type": "Varga",
+      "label": "D12 (dwadasamsa)",
+      "data": {
+        "division": 12
+      }
+    },
+    {
+      "id": "varga:d30",
+      "type": "Varga",
+      "label": "D30 (trimsamsa)",
+      "data": {
+        "division": 30
+      }
+    },
+    {
+      "id": "yoga:ruchaka",
+      "type": "Yoga",
+      "label": "Ruchaka",
+      "data": {
+        "planets": [
+          "mars"
+        ]
+      }
+    },
+    {
+      "id": "yoga:bhadra",
+      "type": "Yoga",
+      "label": "Bhadra",
+      "data": {
+        "planets": [
+          "mercury"
+        ]
+      }
+    },
+    {
+      "id": "yoga:hamsa",
+      "type": "Yoga",
+      "label": "Hamsa",
+      "data": {
+        "planets": [
+          "jupiter"
+        ]
+      }
+    },
+    {
+      "id": "yoga:malavya",
+      "type": "Yoga",
+      "label": "Malavya",
+      "data": {
+        "planets": [
+          "venus"
+        ]
+      }
+    },
+    {
+      "id": "yoga:shasha",
+      "type": "Yoga",
+      "label": "Shasha",
+      "data": {
+        "planets": [
+          "saturn"
+        ]
+      }
+    },
+    {
+      "id": "yoga:gajakesari",
+      "type": "Yoga",
+      "label": "Gajakesari",
+      "data": {
+        "planets": [
+          "jupiter",
+          "moon"
+        ]
+      }
+    },
+    {
+      "id": "yoga:budha-aditya",
+      "type": "Yoga",
+      "label": "Budha-Aditya",
+      "data": {
+        "planets": [
+          "sun",
+          "mercury"
+        ]
+      }
+    },
+    {
+      "id": "yoga:chandra-mangala",
+      "type": "Yoga",
+      "label": "Chandra-Mangala",
+      "data": {
+        "planets": [
+          "moon",
+          "mars"
+        ]
+      }
+    },
+    {
+      "id": "technique:profection",
+      "type": "TimeLordSystem",
+      "label": "Annual profections"
+    },
+    {
+      "id": "technique:zr",
+      "type": "TimeLordSystem",
+      "label": "Zodiacal releasing"
+    },
+    {
+      "id": "technique:firdaria",
+      "type": "TimeLordSystem",
+      "label": "Firdaria"
+    },
+    {
+      "id": "technique:dasha",
+      "type": "TimeLordSystem",
+      "label": "Vimshottari dasha"
+    },
+    {
+      "id": "chart-type:natal",
+      "type": "ChartType",
+      "label": "Natal"
+    },
+    {
+      "id": "chart-type:transit",
+      "type": "ChartType",
+      "label": "Transit"
+    },
+    {
+      "id": "chart-type:synastry",
+      "type": "ChartType",
+      "label": "Synastry"
+    },
+    {
+      "id": "chart-type:composite",
+      "type": "ChartType",
+      "label": "Composite"
+    },
+    {
+      "id": "chart-type:return",
+      "type": "ChartType",
+      "label": "Planetary return"
+    },
+    {
+      "id": "chart-type:progressed",
+      "type": "ChartType",
+      "label": "Progressed"
+    },
+    {
+      "id": "chart-type:directed",
+      "type": "ChartType",
+      "label": "Directed"
+    },
+    {
+      "id": "chart-type:electional",
+      "type": "ChartType",
+      "label": "Electional"
+    },
+    {
+      "id": "chart-type:draconic",
+      "type": "ChartType",
+      "label": "Draconic"
+    },
+    {
+      "id": "technique:lots",
+      "type": "Technique",
+      "label": "Hermetic lots"
+    },
+    {
+      "id": "technique:dignities",
+      "type": "Technique",
+      "label": "Essential dignities"
+    },
+    {
+      "id": "technique:parans",
+      "type": "Technique",
+      "label": "Parans"
+    },
+    {
+      "id": "technique:planetary-hours",
+      "type": "Technique",
+      "label": "Planetary hours"
+    },
+    {
+      "id": "technique:void-of-course",
+      "type": "Technique",
+      "label": "Void of course"
+    },
+    {
+      "id": "technique:rectification",
+      "type": "Technique",
+      "label": "Rectification grid"
+    },
+    {
+      "id": "technique:aspect-patterns",
+      "type": "Technique",
+      "label": "Aspect patterns"
+    },
+    {
+      "id": "technique:chart-signature",
+      "type": "Technique",
+      "label": "Chart signature"
+    },
+    {
+      "id": "technique:nakshatras",
+      "type": "Technique",
+      "label": "Nakshatras"
+    },
+    {
+      "id": "technique:vargas",
+      "type": "Technique",
+      "label": "Vargas"
+    },
+    {
+      "id": "technique:yogas",
+      "type": "Technique",
+      "label": "Yogas"
+    },
+    {
+      "id": "tradition:hellenistic",
+      "type": "Tradition",
+      "label": "Hellenistic",
+      "data": {
+        "period": "c. 100 BCE - 600 CE",
+        "note": "Greco-Egyptian foundation: houses, sect, lots, and the first time-lord systems."
+      }
+    },
+    {
+      "id": "tradition:perso-arabic",
+      "type": "Tradition",
+      "label": "Perso-Arabic (medieval)",
+      "data": {
+        "period": "c. 750 - 1200 CE",
+        "note": "Transmission and extension of Hellenistic method: firdaria, expanded lots, receptions."
+      }
+    },
+    {
+      "id": "tradition:renaissance",
+      "type": "Tradition",
+      "label": "Renaissance",
+      "data": {
+        "period": "c. 1400 - 1700 CE",
+        "note": "Latin and vernacular consolidation; Lilly's horary and natal practice."
+      }
+    },
+    {
+      "id": "tradition:modern",
+      "type": "Tradition",
+      "label": "Modern",
+      "data": {
+        "period": "c. 1850 CE - present",
+        "note": "Revival from the Theosophical era onward: outer planets, psychological reading."
+      }
+    },
+    {
+      "id": "tradition:jyotisa",
+      "type": "Tradition",
+      "label": "Jyotisa",
+      "data": {
+        "period": "c. 100 CE - present",
+        "note": "Indian sidereal tradition: nakshatras, vargas, dashas, yogas."
+      }
+    },
+    {
+      "id": "person:claudius-ptolemy",
+      "type": "Person",
+      "label": "Claudius Ptolemy"
+    },
+    {
+      "id": "person:william-lilly",
+      "type": "Person",
+      "label": "William Lilly"
+    },
+    {
+      "id": "person:william-ramesey",
+      "type": "Person",
+      "label": "William Ramesey"
+    },
+    {
+      "id": "person:sepharial",
+      "type": "Person",
+      "label": "Sepharial"
+    },
+    {
+      "id": "person:alan-leo",
+      "type": "Person",
+      "label": "Alan Leo"
+    },
+    {
+      "id": "person:vivian-e.-robson",
+      "type": "Person",
+      "label": "Vivian E. Robson"
+    },
+    {
+      "id": "person:max-heindel",
+      "type": "Person",
+      "label": "Max Heindel"
+    },
+    {
+      "id": "person:augusta-foss-heindel",
+      "type": "Person",
+      "label": "Augusta Foss Heindel"
+    },
+    {
+      "id": "person:varahamihira",
+      "type": "Person",
+      "label": "Varahamihira"
+    },
+    {
+      "id": "person:llewellyn-george",
+      "type": "Person",
+      "label": "Llewellyn George"
+    },
+    {
+      "id": "person:alfred-john-pearce",
+      "type": "Person",
+      "label": "Alfred John Pearce"
+    },
+    {
+      "id": "person:james-wilson",
+      "type": "Person",
+      "label": "James Wilson"
+    },
+    {
+      "id": "person:raphael",
+      "type": "Person",
+      "label": "Raphael"
+    },
+    {
+      "id": "person:comte-de-saint-germain",
+      "type": "Person",
+      "label": "Comte de Saint-Germain"
+    },
+    {
+      "id": "person:heinrich-cornelius-agrippa",
+      "type": "Person",
+      "label": "Heinrich Cornelius Agrippa"
+    },
+    {
+      "id": "person:a.e.-thierens",
+      "type": "Person",
+      "label": "A.E. Thierens"
+    },
+    {
+      "id": "person:w.w.-westcott",
+      "type": "Person",
+      "label": "W.W. Westcott"
+    },
+    {
+      "id": "person:aleister-crowley",
+      "type": "Person",
+      "label": "Aleister Crowley"
+    },
+    {
+      "id": "source:ptolemy-tetrabiblos",
+      "type": "SourceText",
+      "label": "Tetrabiblos (Quadripartite)",
+      "data": {
+        "author": "Claudius Ptolemy (trans. J.M. Ashmand)",
+        "year": 1822,
+        "rights": "pd-us",
+        "persons": [
+          "person:claudius-ptolemy"
+        ]
+      }
+    },
+    {
+      "id": "source:lilly-christian-astrology",
+      "type": "SourceText",
+      "label": "Christian Astrology",
+      "data": {
+        "author": "William Lilly",
+        "year": 1647,
+        "rights": "pd-us",
+        "persons": [
+          "person:william-lilly"
+        ]
+      }
+    },
+    {
+      "id": "source:ramesey-astrologia-restaurata",
+      "type": "SourceText",
+      "label": "Astrologia Restaurata",
+      "data": {
+        "author": "William Ramesey",
+        "year": 1653,
+        "rights": "cc0",
+        "persons": [
+          "person:william-ramesey"
+        ]
+      }
+    },
+    {
+      "id": "source:sepharial-horoscope",
+      "type": "SourceText",
+      "label": "Astrology: How to Make and Read Your Own Horoscope",
+      "data": {
+        "author": "Sepharial",
+        "year": 1914,
+        "rights": "pd-us",
+        "persons": [
+          "person:sepharial"
+        ]
+      }
+    },
+    {
+      "id": "source:alan-leo-astrology-for-all",
+      "type": "SourceText",
+      "label": "Astrology for All",
+      "data": {
+        "author": "Alan Leo",
+        "year": 1910,
+        "rights": "pd-us",
+        "persons": [
+          "person:alan-leo"
+        ]
+      }
+    },
+    {
+      "id": "source:alan-leo-key-to-own-nativity",
+      "type": "SourceText",
+      "label": "The Key to Your Own Nativity",
+      "data": {
+        "author": "Alan Leo",
+        "year": 1910,
+        "rights": "pd-us",
+        "persons": [
+          "person:alan-leo"
+        ]
+      }
+    },
+    {
+      "id": "source:alan-leo-how-to-judge-nativity",
+      "type": "SourceText",
+      "label": "How to Judge a Nativity",
+      "data": {
+        "author": "Alan Leo",
+        "year": 1908,
+        "rights": "pd-us",
+        "persons": [
+          "person:alan-leo"
+        ]
+      }
+    },
+    {
+      "id": "source:robson-students-textbook",
+      "type": "SourceText",
+      "label": "A Student's Text-Book of Astrology",
+      "data": {
+        "author": "Vivian E. Robson",
+        "year": 1922,
+        "rights": "pd-us",
+        "persons": [
+          "person:vivian-e.-robson"
+        ]
+      }
+    },
+    {
+      "id": "source:heindel-message-of-the-stars",
+      "type": "SourceText",
+      "label": "The Message of the Stars",
+      "data": {
+        "author": "Max Heindel and Augusta Foss Heindel",
+        "year": 1919,
+        "rights": "pd-us",
+        "persons": [
+          "person:max-heindel",
+          "person:augusta-foss-heindel"
+        ]
+      }
+    },
+    {
+      "id": "source:sepharial-manual-of-astrology",
+      "type": "SourceText",
+      "label": "A Manual of Astrology",
+      "data": {
+        "author": "Sepharial",
+        "year": 1898,
+        "rights": "pd-us",
+        "persons": [
+          "person:sepharial"
+        ]
+      }
+    },
+    {
+      "id": "source:varahamihira-brihat-jataka",
+      "type": "SourceText",
+      "label": "Brihat Jataka (trans. N. Chidambaram Iyer)",
+      "data": {
+        "author": "Varahamihira",
+        "year": 1885,
+        "rights": "pd-us",
+        "persons": [
+          "person:varahamihira"
+        ]
+      }
+    },
+    {
+      "id": "source:george-az-horoscope-delineator",
+      "type": "SourceText",
+      "label": "A to Z Horoscope Maker and Delineator",
+      "data": {
+        "author": "Llewellyn George",
+        "year": 1910,
+        "rights": "gratis-not-pd",
+        "persons": [
+          "person:llewellyn-george"
+        ]
+      }
+    },
+    {
+      "id": "source:pearce-textbook",
+      "type": "SourceText",
+      "label": "The Text-Book of Astrology",
+      "data": {
+        "author": "Alfred John Pearce",
+        "year": 1911,
+        "rights": "pd-us",
+        "persons": [
+          "person:alfred-john-pearce"
+        ]
+      }
+    },
+    {
+      "id": "source:wilson-dictionary",
+      "type": "SourceText",
+      "label": "A Complete Dictionary of Astrology",
+      "data": {
+        "author": "James Wilson",
+        "year": 1819,
+        "rights": "pd-us",
+        "persons": [
+          "person:james-wilson"
+        ]
+      }
+    },
+    {
+      "id": "source:leo-art-of-synthesis",
+      "type": "SourceText",
+      "label": "The Art of Synthesis",
+      "data": {
+        "author": "Alan Leo",
+        "year": 1912,
+        "rights": "pd-us",
+        "persons": [
+          "person:alan-leo"
+        ]
+      }
+    },
+    {
+      "id": "source:sepharial-new-manual",
+      "type": "SourceText",
+      "label": "The New Manual of Astrology",
+      "data": {
+        "author": "Sepharial",
+        "year": 1898,
+        "rights": "pd-us",
+        "persons": [
+          "person:sepharial"
+        ]
+      }
+    },
+    {
+      "id": "source:raphael-key-to-astrology",
+      "type": "SourceText",
+      "label": "The Guide to Astrology",
+      "data": {
+        "author": "Raphael (Robert Cross Smith)",
+        "year": 1828,
+        "rights": "pd-us",
+        "persons": [
+          "person:raphael"
+        ]
+      }
+    },
+    {
+      "id": "source:saint-germain-practical-astrology",
+      "type": "SourceText",
+      "label": "Practical Astrology",
+      "data": {
+        "author": "Comte de Saint-Germain",
+        "year": 1901,
+        "rights": "pd-us",
+        "persons": [
+          "person:comte-de-saint-germain"
+        ]
+      }
+    },
+    {
+      "id": "source:robson-fixed-stars",
+      "type": "SourceText",
+      "label": "The Fixed Stars and Constellations in Astrology",
+      "data": {
+        "author": "Vivian E. Robson",
+        "year": 1923,
+        "rights": "pd-us",
+        "persons": [
+          "person:vivian-e.-robson"
+        ]
+      }
+    },
+    {
+      "id": "source:sepharial-cosmic-symbolism",
+      "type": "SourceText",
+      "label": "Cosmic Symbolism",
+      "data": {
+        "author": "Sepharial",
+        "year": 1912,
+        "rights": "pd-us",
+        "persons": [
+          "person:sepharial"
+        ]
+      }
+    },
+    {
+      "id": "source:agrippa-occult-philosophy",
+      "type": "SourceText",
+      "label": "Three Books of Occult Philosophy (Book I-III)",
+      "data": {
+        "author": "Heinrich Cornelius Agrippa (trans. J.F.)",
+        "year": 1898,
+        "rights": "pd-us",
+        "persons": [
+          "person:heinrich-cornelius-agrippa"
+        ]
+      }
+    },
+    {
+      "id": "source:thierens-general-book-tarot",
+      "type": "SourceText",
+      "label": "General Book of the Tarot",
+      "data": {
+        "author": "A.E. Thierens",
+        "year": 1930,
+        "rights": "pd-us",
+        "persons": [
+          "person:a.e.-thierens"
+        ]
+      }
+    },
+    {
+      "id": "source:sepher-yetzirah",
+      "type": "SourceText",
+      "label": "Sepher Yetzirah",
+      "data": {
+        "author": "W.W. Westcott (trans.)",
+        "year": 1887,
+        "rights": "pd-us",
+        "persons": [
+          "person:w.w.-westcott"
+        ]
+      }
+    },
+    {
+      "id": "source:liber-777",
+      "type": "SourceText",
+      "label": "Liber 777",
+      "data": {
+        "author": "Aleister Crowley",
+        "year": 1909,
+        "rights": "pd-us",
+        "persons": [
+          "person:aleister-crowley"
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "type": "rules",
+      "from": "body:sun",
+      "to": "sign:leo"
+    },
+    {
+      "type": "rules",
+      "from": "body:moon",
+      "to": "sign:cancer"
+    },
+    {
+      "type": "rules",
+      "from": "body:mercury",
+      "to": "sign:gemini"
+    },
+    {
+      "type": "rules",
+      "from": "body:mercury",
+      "to": "sign:virgo"
+    },
+    {
+      "type": "rules",
+      "from": "body:venus",
+      "to": "sign:taurus"
+    },
+    {
+      "type": "rules",
+      "from": "body:venus",
+      "to": "sign:libra"
+    },
+    {
+      "type": "rules",
+      "from": "body:mars",
+      "to": "sign:aries"
+    },
+    {
+      "type": "rules",
+      "from": "body:mars",
+      "to": "sign:scorpio"
+    },
+    {
+      "type": "rules",
+      "from": "body:jupiter",
+      "to": "sign:sagittarius"
+    },
+    {
+      "type": "rules",
+      "from": "body:jupiter",
+      "to": "sign:pisces"
+    },
+    {
+      "type": "rules",
+      "from": "body:saturn",
+      "to": "sign:capricorn"
+    },
+    {
+      "type": "rules",
+      "from": "body:saturn",
+      "to": "sign:aquarius"
+    },
+    {
+      "type": "exaltedIn",
+      "from": "body:sun",
+      "to": "sign:aries"
+    },
+    {
+      "type": "exaltedIn",
+      "from": "body:moon",
+      "to": "sign:taurus"
+    },
+    {
+      "type": "exaltedIn",
+      "from": "body:mercury",
+      "to": "sign:virgo"
+    },
+    {
+      "type": "exaltedIn",
+      "from": "body:venus",
+      "to": "sign:pisces"
+    },
+    {
+      "type": "exaltedIn",
+      "from": "body:mars",
+      "to": "sign:capricorn"
+    },
+    {
+      "type": "exaltedIn",
+      "from": "body:jupiter",
+      "to": "sign:cancer"
+    },
+    {
+      "type": "exaltedIn",
+      "from": "body:saturn",
+      "to": "sign:libra"
+    },
+    {
+      "type": "detrimentIn",
+      "from": "body:sun",
+      "to": "sign:aquarius"
+    },
+    {
+      "type": "detrimentIn",
+      "from": "body:moon",
+      "to": "sign:capricorn"
+    },
+    {
+      "type": "detrimentIn",
+      "from": "body:mercury",
+      "to": "sign:sagittarius"
+    },
+    {
+      "type": "detrimentIn",
+      "from": "body:mercury",
+      "to": "sign:pisces"
+    },
+    {
+      "type": "detrimentIn",
+      "from": "body:venus",
+      "to": "sign:scorpio"
+    },
+    {
+      "type": "detrimentIn",
+      "from": "body:venus",
+      "to": "sign:aries"
+    },
+    {
+      "type": "detrimentIn",
+      "from": "body:mars",
+      "to": "sign:libra"
+    },
+    {
+      "type": "detrimentIn",
+      "from": "body:mars",
+      "to": "sign:taurus"
+    },
+    {
+      "type": "detrimentIn",
+      "from": "body:jupiter",
+      "to": "sign:gemini"
+    },
+    {
+      "type": "detrimentIn",
+      "from": "body:jupiter",
+      "to": "sign:virgo"
+    },
+    {
+      "type": "detrimentIn",
+      "from": "body:saturn",
+      "to": "sign:cancer"
+    },
+    {
+      "type": "detrimentIn",
+      "from": "body:saturn",
+      "to": "sign:leo"
+    },
+    {
+      "type": "fallIn",
+      "from": "body:sun",
+      "to": "sign:libra"
+    },
+    {
+      "type": "fallIn",
+      "from": "body:moon",
+      "to": "sign:scorpio"
+    },
+    {
+      "type": "fallIn",
+      "from": "body:mercury",
+      "to": "sign:pisces"
+    },
+    {
+      "type": "fallIn",
+      "from": "body:venus",
+      "to": "sign:virgo"
+    },
+    {
+      "type": "fallIn",
+      "from": "body:mars",
+      "to": "sign:cancer"
+    },
+    {
+      "type": "fallIn",
+      "from": "body:jupiter",
+      "to": "sign:capricorn"
+    },
+    {
+      "type": "fallIn",
+      "from": "body:saturn",
+      "to": "sign:aries"
+    },
+    {
+      "type": "triplicityRuler",
+      "from": "body:sun",
+      "to": "element:fire",
+      "sect": "day"
+    },
+    {
+      "type": "triplicityRuler",
+      "from": "body:jupiter",
+      "to": "element:fire",
+      "sect": "night"
+    },
+    {
+      "type": "triplicityRuler",
+      "from": "body:saturn",
+      "to": "element:fire",
+      "sect": "participating"
+    },
+    {
+      "type": "triplicityRuler",
+      "from": "body:venus",
+      "to": "element:earth",
+      "sect": "day"
+    },
+    {
+      "type": "triplicityRuler",
+      "from": "body:moon",
+      "to": "element:earth",
+      "sect": "night"
+    },
+    {
+      "type": "triplicityRuler",
+      "from": "body:mars",
+      "to": "element:earth",
+      "sect": "participating"
+    },
+    {
+      "type": "triplicityRuler",
+      "from": "body:saturn",
+      "to": "element:air",
+      "sect": "day"
+    },
+    {
+      "type": "triplicityRuler",
+      "from": "body:mercury",
+      "to": "element:air",
+      "sect": "night"
+    },
+    {
+      "type": "triplicityRuler",
+      "from": "body:jupiter",
+      "to": "element:air",
+      "sect": "participating"
+    },
+    {
+      "type": "triplicityRuler",
+      "from": "body:venus",
+      "to": "element:water",
+      "sect": "day"
+    },
+    {
+      "type": "triplicityRuler",
+      "from": "body:mars",
+      "to": "element:water",
+      "sect": "night"
+    },
+    {
+      "type": "triplicityRuler",
+      "from": "body:moon",
+      "to": "element:water",
+      "sect": "participating"
+    },
+    {
+      "type": "termRuler",
+      "from": "body:jupiter",
+      "to": "sign:aries",
+      "fromDeg": 0,
+      "toDeg": 6
+    },
+    {
+      "type": "termRuler",
+      "from": "body:venus",
+      "to": "sign:aries",
+      "fromDeg": 6,
+      "toDeg": 12
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mercury",
+      "to": "sign:aries",
+      "fromDeg": 12,
+      "toDeg": 20
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mars",
+      "to": "sign:aries",
+      "fromDeg": 20,
+      "toDeg": 25
+    },
+    {
+      "type": "termRuler",
+      "from": "body:saturn",
+      "to": "sign:aries",
+      "fromDeg": 25,
+      "toDeg": 30
+    },
+    {
+      "type": "termRuler",
+      "from": "body:venus",
+      "to": "sign:taurus",
+      "fromDeg": 0,
+      "toDeg": 8
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mercury",
+      "to": "sign:taurus",
+      "fromDeg": 8,
+      "toDeg": 14
+    },
+    {
+      "type": "termRuler",
+      "from": "body:jupiter",
+      "to": "sign:taurus",
+      "fromDeg": 14,
+      "toDeg": 22
+    },
+    {
+      "type": "termRuler",
+      "from": "body:saturn",
+      "to": "sign:taurus",
+      "fromDeg": 22,
+      "toDeg": 27
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mars",
+      "to": "sign:taurus",
+      "fromDeg": 27,
+      "toDeg": 30
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mercury",
+      "to": "sign:gemini",
+      "fromDeg": 0,
+      "toDeg": 6
+    },
+    {
+      "type": "termRuler",
+      "from": "body:jupiter",
+      "to": "sign:gemini",
+      "fromDeg": 6,
+      "toDeg": 12
+    },
+    {
+      "type": "termRuler",
+      "from": "body:venus",
+      "to": "sign:gemini",
+      "fromDeg": 12,
+      "toDeg": 17
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mars",
+      "to": "sign:gemini",
+      "fromDeg": 17,
+      "toDeg": 24
+    },
+    {
+      "type": "termRuler",
+      "from": "body:saturn",
+      "to": "sign:gemini",
+      "fromDeg": 24,
+      "toDeg": 30
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mars",
+      "to": "sign:cancer",
+      "fromDeg": 0,
+      "toDeg": 7
+    },
+    {
+      "type": "termRuler",
+      "from": "body:venus",
+      "to": "sign:cancer",
+      "fromDeg": 7,
+      "toDeg": 13
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mercury",
+      "to": "sign:cancer",
+      "fromDeg": 13,
+      "toDeg": 19
+    },
+    {
+      "type": "termRuler",
+      "from": "body:jupiter",
+      "to": "sign:cancer",
+      "fromDeg": 19,
+      "toDeg": 26
+    },
+    {
+      "type": "termRuler",
+      "from": "body:saturn",
+      "to": "sign:cancer",
+      "fromDeg": 26,
+      "toDeg": 30
+    },
+    {
+      "type": "termRuler",
+      "from": "body:jupiter",
+      "to": "sign:leo",
+      "fromDeg": 0,
+      "toDeg": 6
+    },
+    {
+      "type": "termRuler",
+      "from": "body:venus",
+      "to": "sign:leo",
+      "fromDeg": 6,
+      "toDeg": 11
+    },
+    {
+      "type": "termRuler",
+      "from": "body:saturn",
+      "to": "sign:leo",
+      "fromDeg": 11,
+      "toDeg": 18
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mercury",
+      "to": "sign:leo",
+      "fromDeg": 18,
+      "toDeg": 24
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mars",
+      "to": "sign:leo",
+      "fromDeg": 24,
+      "toDeg": 30
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mercury",
+      "to": "sign:virgo",
+      "fromDeg": 0,
+      "toDeg": 7
+    },
+    {
+      "type": "termRuler",
+      "from": "body:venus",
+      "to": "sign:virgo",
+      "fromDeg": 7,
+      "toDeg": 17
+    },
+    {
+      "type": "termRuler",
+      "from": "body:jupiter",
+      "to": "sign:virgo",
+      "fromDeg": 17,
+      "toDeg": 21
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mars",
+      "to": "sign:virgo",
+      "fromDeg": 21,
+      "toDeg": 28
+    },
+    {
+      "type": "termRuler",
+      "from": "body:saturn",
+      "to": "sign:virgo",
+      "fromDeg": 28,
+      "toDeg": 30
+    },
+    {
+      "type": "termRuler",
+      "from": "body:saturn",
+      "to": "sign:libra",
+      "fromDeg": 0,
+      "toDeg": 6
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mercury",
+      "to": "sign:libra",
+      "fromDeg": 6,
+      "toDeg": 14
+    },
+    {
+      "type": "termRuler",
+      "from": "body:jupiter",
+      "to": "sign:libra",
+      "fromDeg": 14,
+      "toDeg": 21
+    },
+    {
+      "type": "termRuler",
+      "from": "body:venus",
+      "to": "sign:libra",
+      "fromDeg": 21,
+      "toDeg": 28
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mars",
+      "to": "sign:libra",
+      "fromDeg": 28,
+      "toDeg": 30
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mars",
+      "to": "sign:scorpio",
+      "fromDeg": 0,
+      "toDeg": 7
+    },
+    {
+      "type": "termRuler",
+      "from": "body:venus",
+      "to": "sign:scorpio",
+      "fromDeg": 7,
+      "toDeg": 11
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mercury",
+      "to": "sign:scorpio",
+      "fromDeg": 11,
+      "toDeg": 19
+    },
+    {
+      "type": "termRuler",
+      "from": "body:jupiter",
+      "to": "sign:scorpio",
+      "fromDeg": 19,
+      "toDeg": 24
+    },
+    {
+      "type": "termRuler",
+      "from": "body:saturn",
+      "to": "sign:scorpio",
+      "fromDeg": 24,
+      "toDeg": 30
+    },
+    {
+      "type": "termRuler",
+      "from": "body:jupiter",
+      "to": "sign:sagittarius",
+      "fromDeg": 0,
+      "toDeg": 12
+    },
+    {
+      "type": "termRuler",
+      "from": "body:venus",
+      "to": "sign:sagittarius",
+      "fromDeg": 12,
+      "toDeg": 17
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mercury",
+      "to": "sign:sagittarius",
+      "fromDeg": 17,
+      "toDeg": 21
+    },
+    {
+      "type": "termRuler",
+      "from": "body:saturn",
+      "to": "sign:sagittarius",
+      "fromDeg": 21,
+      "toDeg": 26
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mars",
+      "to": "sign:sagittarius",
+      "fromDeg": 26,
+      "toDeg": 30
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mercury",
+      "to": "sign:capricorn",
+      "fromDeg": 0,
+      "toDeg": 7
+    },
+    {
+      "type": "termRuler",
+      "from": "body:jupiter",
+      "to": "sign:capricorn",
+      "fromDeg": 7,
+      "toDeg": 14
+    },
+    {
+      "type": "termRuler",
+      "from": "body:venus",
+      "to": "sign:capricorn",
+      "fromDeg": 14,
+      "toDeg": 22
+    },
+    {
+      "type": "termRuler",
+      "from": "body:saturn",
+      "to": "sign:capricorn",
+      "fromDeg": 22,
+      "toDeg": 26
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mars",
+      "to": "sign:capricorn",
+      "fromDeg": 26,
+      "toDeg": 30
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mercury",
+      "to": "sign:aquarius",
+      "fromDeg": 0,
+      "toDeg": 7
+    },
+    {
+      "type": "termRuler",
+      "from": "body:venus",
+      "to": "sign:aquarius",
+      "fromDeg": 7,
+      "toDeg": 13
+    },
+    {
+      "type": "termRuler",
+      "from": "body:jupiter",
+      "to": "sign:aquarius",
+      "fromDeg": 13,
+      "toDeg": 20
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mars",
+      "to": "sign:aquarius",
+      "fromDeg": 20,
+      "toDeg": 25
+    },
+    {
+      "type": "termRuler",
+      "from": "body:saturn",
+      "to": "sign:aquarius",
+      "fromDeg": 25,
+      "toDeg": 30
+    },
+    {
+      "type": "termRuler",
+      "from": "body:venus",
+      "to": "sign:pisces",
+      "fromDeg": 0,
+      "toDeg": 12
+    },
+    {
+      "type": "termRuler",
+      "from": "body:jupiter",
+      "to": "sign:pisces",
+      "fromDeg": 12,
+      "toDeg": 16
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mercury",
+      "to": "sign:pisces",
+      "fromDeg": 16,
+      "toDeg": 19
+    },
+    {
+      "type": "termRuler",
+      "from": "body:mars",
+      "to": "sign:pisces",
+      "fromDeg": 19,
+      "toDeg": 28
+    },
+    {
+      "type": "termRuler",
+      "from": "body:saturn",
+      "to": "sign:pisces",
+      "fromDeg": 28,
+      "toDeg": 30
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:mars",
+      "to": "sign:aries",
+      "decan": 1
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:sun",
+      "to": "sign:aries",
+      "decan": 2
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:venus",
+      "to": "sign:aries",
+      "decan": 3
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:mercury",
+      "to": "sign:taurus",
+      "decan": 1
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:moon",
+      "to": "sign:taurus",
+      "decan": 2
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:saturn",
+      "to": "sign:taurus",
+      "decan": 3
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:jupiter",
+      "to": "sign:gemini",
+      "decan": 1
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:mars",
+      "to": "sign:gemini",
+      "decan": 2
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:sun",
+      "to": "sign:gemini",
+      "decan": 3
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:venus",
+      "to": "sign:cancer",
+      "decan": 1
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:mercury",
+      "to": "sign:cancer",
+      "decan": 2
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:moon",
+      "to": "sign:cancer",
+      "decan": 3
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:saturn",
+      "to": "sign:leo",
+      "decan": 1
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:jupiter",
+      "to": "sign:leo",
+      "decan": 2
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:mars",
+      "to": "sign:leo",
+      "decan": 3
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:sun",
+      "to": "sign:virgo",
+      "decan": 1
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:venus",
+      "to": "sign:virgo",
+      "decan": 2
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:mercury",
+      "to": "sign:virgo",
+      "decan": 3
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:moon",
+      "to": "sign:libra",
+      "decan": 1
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:saturn",
+      "to": "sign:libra",
+      "decan": 2
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:jupiter",
+      "to": "sign:libra",
+      "decan": 3
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:mars",
+      "to": "sign:scorpio",
+      "decan": 1
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:sun",
+      "to": "sign:scorpio",
+      "decan": 2
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:venus",
+      "to": "sign:scorpio",
+      "decan": 3
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:mercury",
+      "to": "sign:sagittarius",
+      "decan": 1
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:moon",
+      "to": "sign:sagittarius",
+      "decan": 2
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:saturn",
+      "to": "sign:sagittarius",
+      "decan": 3
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:jupiter",
+      "to": "sign:capricorn",
+      "decan": 1
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:mars",
+      "to": "sign:capricorn",
+      "decan": 2
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:sun",
+      "to": "sign:capricorn",
+      "decan": 3
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:venus",
+      "to": "sign:aquarius",
+      "decan": 1
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:mercury",
+      "to": "sign:aquarius",
+      "decan": 2
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:moon",
+      "to": "sign:aquarius",
+      "decan": 3
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:saturn",
+      "to": "sign:pisces",
+      "decan": 1
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:jupiter",
+      "to": "sign:pisces",
+      "decan": 2
+    },
+    {
+      "type": "faceRuler",
+      "from": "body:mars",
+      "to": "sign:pisces",
+      "decan": 3
+    },
+    {
+      "type": "hasElement",
+      "from": "sign:aries",
+      "to": "element:fire"
+    },
+    {
+      "type": "hasModality",
+      "from": "sign:aries",
+      "to": "modality:cardinal"
+    },
+    {
+      "type": "hasPolarity",
+      "from": "sign:aries",
+      "to": "polarity:positive"
+    },
+    {
+      "type": "opposite",
+      "from": "sign:aries",
+      "to": "sign:libra"
+    },
+    {
+      "type": "hasElement",
+      "from": "sign:taurus",
+      "to": "element:earth"
+    },
+    {
+      "type": "hasModality",
+      "from": "sign:taurus",
+      "to": "modality:fixed"
+    },
+    {
+      "type": "hasPolarity",
+      "from": "sign:taurus",
+      "to": "polarity:negative"
+    },
+    {
+      "type": "opposite",
+      "from": "sign:taurus",
+      "to": "sign:scorpio"
+    },
+    {
+      "type": "hasElement",
+      "from": "sign:gemini",
+      "to": "element:air"
+    },
+    {
+      "type": "hasModality",
+      "from": "sign:gemini",
+      "to": "modality:mutable"
+    },
+    {
+      "type": "hasPolarity",
+      "from": "sign:gemini",
+      "to": "polarity:positive"
+    },
+    {
+      "type": "opposite",
+      "from": "sign:gemini",
+      "to": "sign:sagittarius"
+    },
+    {
+      "type": "hasElement",
+      "from": "sign:cancer",
+      "to": "element:water"
+    },
+    {
+      "type": "hasModality",
+      "from": "sign:cancer",
+      "to": "modality:cardinal"
+    },
+    {
+      "type": "hasPolarity",
+      "from": "sign:cancer",
+      "to": "polarity:negative"
+    },
+    {
+      "type": "opposite",
+      "from": "sign:cancer",
+      "to": "sign:capricorn"
+    },
+    {
+      "type": "hasElement",
+      "from": "sign:leo",
+      "to": "element:fire"
+    },
+    {
+      "type": "hasModality",
+      "from": "sign:leo",
+      "to": "modality:fixed"
+    },
+    {
+      "type": "hasPolarity",
+      "from": "sign:leo",
+      "to": "polarity:positive"
+    },
+    {
+      "type": "opposite",
+      "from": "sign:leo",
+      "to": "sign:aquarius"
+    },
+    {
+      "type": "hasElement",
+      "from": "sign:virgo",
+      "to": "element:earth"
+    },
+    {
+      "type": "hasModality",
+      "from": "sign:virgo",
+      "to": "modality:mutable"
+    },
+    {
+      "type": "hasPolarity",
+      "from": "sign:virgo",
+      "to": "polarity:negative"
+    },
+    {
+      "type": "opposite",
+      "from": "sign:virgo",
+      "to": "sign:pisces"
+    },
+    {
+      "type": "hasElement",
+      "from": "sign:libra",
+      "to": "element:air"
+    },
+    {
+      "type": "hasModality",
+      "from": "sign:libra",
+      "to": "modality:cardinal"
+    },
+    {
+      "type": "hasPolarity",
+      "from": "sign:libra",
+      "to": "polarity:positive"
+    },
+    {
+      "type": "opposite",
+      "from": "sign:libra",
+      "to": "sign:aries"
+    },
+    {
+      "type": "hasElement",
+      "from": "sign:scorpio",
+      "to": "element:water"
+    },
+    {
+      "type": "hasModality",
+      "from": "sign:scorpio",
+      "to": "modality:fixed"
+    },
+    {
+      "type": "hasPolarity",
+      "from": "sign:scorpio",
+      "to": "polarity:negative"
+    },
+    {
+      "type": "opposite",
+      "from": "sign:scorpio",
+      "to": "sign:taurus"
+    },
+    {
+      "type": "hasElement",
+      "from": "sign:sagittarius",
+      "to": "element:fire"
+    },
+    {
+      "type": "hasModality",
+      "from": "sign:sagittarius",
+      "to": "modality:mutable"
+    },
+    {
+      "type": "hasPolarity",
+      "from": "sign:sagittarius",
+      "to": "polarity:positive"
+    },
+    {
+      "type": "opposite",
+      "from": "sign:sagittarius",
+      "to": "sign:gemini"
+    },
+    {
+      "type": "hasElement",
+      "from": "sign:capricorn",
+      "to": "element:earth"
+    },
+    {
+      "type": "hasModality",
+      "from": "sign:capricorn",
+      "to": "modality:cardinal"
+    },
+    {
+      "type": "hasPolarity",
+      "from": "sign:capricorn",
+      "to": "polarity:negative"
+    },
+    {
+      "type": "opposite",
+      "from": "sign:capricorn",
+      "to": "sign:cancer"
+    },
+    {
+      "type": "hasElement",
+      "from": "sign:aquarius",
+      "to": "element:air"
+    },
+    {
+      "type": "hasModality",
+      "from": "sign:aquarius",
+      "to": "modality:fixed"
+    },
+    {
+      "type": "hasPolarity",
+      "from": "sign:aquarius",
+      "to": "polarity:positive"
+    },
+    {
+      "type": "opposite",
+      "from": "sign:aquarius",
+      "to": "sign:leo"
+    },
+    {
+      "type": "hasElement",
+      "from": "sign:pisces",
+      "to": "element:water"
+    },
+    {
+      "type": "hasModality",
+      "from": "sign:pisces",
+      "to": "modality:mutable"
+    },
+    {
+      "type": "hasPolarity",
+      "from": "sign:pisces",
+      "to": "polarity:negative"
+    },
+    {
+      "type": "opposite",
+      "from": "sign:pisces",
+      "to": "sign:virgo"
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:ashwini",
+      "to": "body:ketu",
+      "years": 7
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:bharani",
+      "to": "body:venus",
+      "years": 20
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:krittika",
+      "to": "body:sun",
+      "years": 6
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:rohini",
+      "to": "body:moon",
+      "years": 10
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:mrigashira",
+      "to": "body:mars",
+      "years": 7
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:ardra",
+      "to": "body:rahu",
+      "years": 18
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:punarvasu",
+      "to": "body:jupiter",
+      "years": 16
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:pushya",
+      "to": "body:saturn",
+      "years": 19
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:ashlesha",
+      "to": "body:mercury",
+      "years": 17
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:magha",
+      "to": "body:ketu",
+      "years": 7
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:purva-phalguni",
+      "to": "body:venus",
+      "years": 20
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:uttara-phalguni",
+      "to": "body:sun",
+      "years": 6
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:hasta",
+      "to": "body:moon",
+      "years": 10
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:chitra",
+      "to": "body:mars",
+      "years": 7
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:swati",
+      "to": "body:rahu",
+      "years": 18
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:vishakha",
+      "to": "body:jupiter",
+      "years": 16
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:anuradha",
+      "to": "body:saturn",
+      "years": 19
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:jyeshtha",
+      "to": "body:mercury",
+      "years": 17
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:mula",
+      "to": "body:ketu",
+      "years": 7
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:purva-ashadha",
+      "to": "body:venus",
+      "years": 20
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:uttara-ashadha",
+      "to": "body:sun",
+      "years": 6
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:shravana",
+      "to": "body:moon",
+      "years": 10
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:dhanishta",
+      "to": "body:mars",
+      "years": 7
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:shatabhisha",
+      "to": "body:rahu",
+      "years": 18
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:purva-bhadrapada",
+      "to": "body:jupiter",
+      "years": 16
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:uttara-bhadrapada",
+      "to": "body:saturn",
+      "years": 19
+    },
+    {
+      "type": "nakshatraLord",
+      "from": "nakshatra:revati",
+      "to": "body:mercury",
+      "years": 17
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alpheratz",
+      "to": "constellation:andromeda"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:caph",
+      "to": "constellation:cassiopeia"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:algenib",
+      "to": "constellation:pegasus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:ankaa",
+      "to": "constellation:phoenix"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:fulu",
+      "to": "constellation:cassiopeia"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:schedar",
+      "to": "constellation:cassiopeia"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:diphda",
+      "to": "constellation:cetus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:achird",
+      "to": "constellation:cassiopeia"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:cih",
+      "to": "constellation:cassiopeia"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:wurren",
+      "to": "constellation:phoenix"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:mirach",
+      "to": "constellation:andromeda"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:adhil",
+      "to": "constellation:andromeda"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:ruchbah",
+      "to": "constellation:cassiopeia"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alpherg",
+      "to": "constellation:pisces"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:titawin",
+      "to": "constellation:andromeda"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:achernar",
+      "to": "constellation:eridanus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:nembus",
+      "to": "constellation:andromeda"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:torcular",
+      "to": "constellation:pisces"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:baten-kaitos",
+      "to": "constellation:cetus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:mothallah",
+      "to": "constellation:triangulum"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:segin",
+      "to": "constellation:cassiopeia"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:sheratan",
+      "to": "constellation:aries"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alrescha",
+      "to": "constellation:pisces"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:hamal",
+      "to": "constellation:aries"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:polaris",
+      "to": "constellation:ursa-minor"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:kaffaljidhma",
+      "to": "constellation:cetus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:lilii-borea",
+      "to": "constellation:aries"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:bharani",
+      "to": "constellation:aries"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:miram",
+      "to": "constellation:perseus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:azha",
+      "to": "constellation:eridanus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:menkar",
+      "to": "constellation:cetus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:algol",
+      "to": "constellation:perseus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:misam",
+      "to": "constellation:perseus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:botein",
+      "to": "constellation:aries"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:dalim",
+      "to": "constellation:fornax"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:zibal",
+      "to": "constellation:eridanus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:mirfak",
+      "to": "constellation:perseus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:ran",
+      "to": "constellation:eridanus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:rana",
+      "to": "constellation:eridanus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:atik",
+      "to": "constellation:perseus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:electra",
+      "to": "constellation:taurus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:taygeta",
+      "to": "constellation:taurus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:maia",
+      "to": "constellation:taurus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:merope",
+      "to": "constellation:taurus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alcyone",
+      "to": "constellation:taurus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:atlas",
+      "to": "constellation:taurus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:zaurak",
+      "to": "constellation:eridanus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:menkib",
+      "to": "constellation:perseus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:prima-hyadum",
+      "to": "constellation:taurus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:beemim",
+      "to": "constellation:eridanus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:ain",
+      "to": "constellation:taurus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:aldebaran",
+      "to": "constellation:taurus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:sceptrum",
+      "to": "constellation:eridanus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:hassaleh",
+      "to": "constellation:auriga"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:almaaz",
+      "to": "constellation:auriga"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:saclateni",
+      "to": "constellation:auriga"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:haedus",
+      "to": "constellation:auriga"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:cursa",
+      "to": "constellation:eridanus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:rigel",
+      "to": "constellation:orion"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:capella",
+      "to": "constellation:auriga"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:bellatrix",
+      "to": "constellation:orion"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:elnath",
+      "to": "constellation:taurus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:nihal",
+      "to": "constellation:lepus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:mintaka",
+      "to": "constellation:orion"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:arneb",
+      "to": "constellation:lepus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:meissa",
+      "to": "constellation:orion"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:hatysa",
+      "to": "constellation:orion"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alnilam",
+      "to": "constellation:orion"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:tianguan",
+      "to": "constellation:taurus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:phact",
+      "to": "constellation:columba"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alnitak",
+      "to": "constellation:orion"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:saiph",
+      "to": "constellation:orion"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:wazn",
+      "to": "constellation:columba"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:betelgeuse",
+      "to": "constellation:orion"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:menkalinan",
+      "to": "constellation:auriga"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:mahasim",
+      "to": "constellation:auriga"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:elkurud",
+      "to": "constellation:columba"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:propus",
+      "to": "constellation:gemini"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:furud",
+      "to": "constellation:canis-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:mirzam",
+      "to": "constellation:canis-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:tejat",
+      "to": "constellation:gemini"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:canopus",
+      "to": "constellation:carina"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alhena",
+      "to": "constellation:gemini"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:mebsuta",
+      "to": "constellation:gemini"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:sirius",
+      "to": "constellation:canis-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alzirr",
+      "to": "constellation:gemini"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:adhara",
+      "to": "constellation:canis-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:nganurganity",
+      "to": "constellation:canis-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:muliphein",
+      "to": "constellation:canis-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:mekbuda",
+      "to": "constellation:gemini"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:wezen",
+      "to": "constellation:canis-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:wasat",
+      "to": "constellation:gemini"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:aludra",
+      "to": "constellation:canis-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:gomeisa",
+      "to": "constellation:canis-minor"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:castor",
+      "to": "constellation:gemini"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:jishui",
+      "to": "constellation:gemini"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:procyon",
+      "to": "constellation:canis-minor"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:pollux",
+      "to": "constellation:gemini"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:azmidi",
+      "to": "constellation:puppis"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:naos",
+      "to": "constellation:puppis"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:tureis",
+      "to": "constellation:puppis"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:tarf",
+      "to": "constellation:cancer"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:avior",
+      "to": "constellation:carina"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alsciaukat",
+      "to": "constellation:lynx"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:muscida",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:minchir",
+      "to": "constellation:hydra"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:asellus-borealis",
+      "to": "constellation:cancer"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:asellus-australis",
+      "to": "constellation:cancer"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alsephina",
+      "to": "constellation:vela"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:ashlesha",
+      "to": "constellation:hydra"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:acubens",
+      "to": "constellation:cancer"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:talitha",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alkaphrah",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:suhail",
+      "to": "constellation:vela"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:miaplacidus",
+      "to": "constellation:carina"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:aspidiske",
+      "to": "constellation:carina"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:markeb",
+      "to": "constellation:vela"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alphard",
+      "to": "constellation:hydra"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alterf",
+      "to": "constellation:leo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:ukdah",
+      "to": "constellation:hydra"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:subra",
+      "to": "constellation:leo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:ras-elased-australis",
+      "to": "constellation:leo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:rasalas",
+      "to": "constellation:leo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:regulus",
+      "to": "constellation:leo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:adhafera",
+      "to": "constellation:leo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:tania-borealis",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:tania-australis",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:praecipua",
+      "to": "constellation:leo-minor"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alkes",
+      "to": "constellation:crater"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:merak",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:dubhe",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:zosma",
+      "to": "constellation:leo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:chertan",
+      "to": "constellation:leo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alula-borealis",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:giausar",
+      "to": "constellation:draco"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:taiyangshou",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:denebola",
+      "to": "constellation:leo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:zavijava",
+      "to": "constellation:virgo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:phecda",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alchiba",
+      "to": "constellation:corvus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:imai",
+      "to": "constellation:crux"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:megrez",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:gienah",
+      "to": "constellation:corvus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:zaniah",
+      "to": "constellation:virgo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:ginan",
+      "to": "constellation:crux"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:algorab",
+      "to": "constellation:corvus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:gacrux",
+      "to": "constellation:crux"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:chara",
+      "to": "constellation:canes-venatici"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:kraz",
+      "to": "constellation:corvus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:porrima",
+      "to": "constellation:virgo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:mimosa",
+      "to": "constellation:crux"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alioth",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:minelauva",
+      "to": "constellation:virgo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:vindemiatrix",
+      "to": "constellation:virgo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:diadem",
+      "to": "constellation:coma-berenices"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:mizar",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:spica",
+      "to": "constellation:virgo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alcor",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:heze",
+      "to": "constellation:virgo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alkaid",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:muphrid",
+      "to": "constellation:bootes"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:hadar",
+      "to": "constellation:centaurus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:thuban",
+      "to": "constellation:draco"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:menkent",
+      "to": "constellation:centaurus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:kang",
+      "to": "constellation:virgo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:arcturus",
+      "to": "constellation:bootes"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:syrma",
+      "to": "constellation:virgo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:xuange",
+      "to": "constellation:bootes"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:khambalia",
+      "to": "constellation:virgo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:elgafar",
+      "to": "constellation:virgo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:seginus",
+      "to": "constellation:bootes"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:izar",
+      "to": "constellation:bootes"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:kochab",
+      "to": "constellation:ursa-minor"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:nekkar",
+      "to": "constellation:bootes"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:brachium",
+      "to": "constellation:libra"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:zubeneschamali",
+      "to": "constellation:libra"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:pherkad",
+      "to": "constellation:ursa-minor"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:edasich",
+      "to": "constellation:draco"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:nusakan",
+      "to": "constellation:corona-borealis"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alphecca",
+      "to": "constellation:corona-borealis"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:zubenelhakrabi",
+      "to": "constellation:libra"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:unukalhai",
+      "to": "constellation:serpens"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:gudja",
+      "to": "constellation:serpens"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:iklil",
+      "to": "constellation:scorpius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:fang",
+      "to": "constellation:scorpius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:dschubba",
+      "to": "constellation:scorpius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:marsic",
+      "to": "constellation:hercules"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:jabbah",
+      "to": "constellation:scorpius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:yed-prior",
+      "to": "constellation:ophiuchus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:yed-posterior",
+      "to": "constellation:ophiuchus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alniyat",
+      "to": "constellation:scorpius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:athebyne",
+      "to": "constellation:draco"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:cujam",
+      "to": "constellation:hercules"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:antares",
+      "to": "constellation:scorpius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:kornephoros",
+      "to": "constellation:hercules"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:marfik",
+      "to": "constellation:ophiuchus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:paikauhale",
+      "to": "constellation:scorpius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:atria",
+      "to": "constellation:triangulum-australe"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:larawag",
+      "to": "constellation:scorpius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:aldhibah",
+      "to": "constellation:draco"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:sabik",
+      "to": "constellation:ophiuchus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:sarin",
+      "to": "constellation:hercules"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:guniibuu",
+      "to": "constellation:ophiuchus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:rastaban",
+      "to": "constellation:draco"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:maasym",
+      "to": "constellation:hercules"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:lesath",
+      "to": "constellation:scorpius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:yildun",
+      "to": "constellation:ursa-minor"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:shaula",
+      "to": "constellation:scorpius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:rasalhague",
+      "to": "constellation:ophiuchus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:sargas",
+      "to": "constellation:scorpius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:cebalrai",
+      "to": "constellation:ophiuchus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:grumium",
+      "to": "constellation:draco"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:eltanin",
+      "to": "constellation:draco"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:polis",
+      "to": "constellation:sagittarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:kaus-media",
+      "to": "constellation:sagittarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:kaus-australis",
+      "to": "constellation:sagittarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:fafnir",
+      "to": "constellation:draco"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:kaus-borealis",
+      "to": "constellation:sagittarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:vega",
+      "to": "constellation:lyra"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:sheliak",
+      "to": "constellation:lyra"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:nunki",
+      "to": "constellation:sagittarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:sulafat",
+      "to": "constellation:lyra"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:ascella",
+      "to": "constellation:sagittarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:okab",
+      "to": "constellation:aquila"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:meridiana",
+      "to": "constellation:corona-australis"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:albaldah",
+      "to": "constellation:sagittarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:altais",
+      "to": "constellation:draco"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:aladfar",
+      "to": "constellation:lyra"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:rukbat",
+      "to": "constellation:sagittarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:anser",
+      "to": "constellation:vulpecula"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alsafi",
+      "to": "constellation:draco"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:sham",
+      "to": "constellation:sagitta"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:fawaris",
+      "to": "constellation:cygnus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:tarazed",
+      "to": "constellation:aquila"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:altair",
+      "to": "constellation:aquila"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:libertas",
+      "to": "constellation:aquila"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alshain",
+      "to": "constellation:aquila"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:terebellum",
+      "to": "constellation:sagittarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alshat",
+      "to": "constellation:capricornus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:dabih",
+      "to": "constellation:capricornus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:sadr",
+      "to": "constellation:cygnus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:peacock",
+      "to": "constellation:pavo"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:aldulfin",
+      "to": "constellation:delphinus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:rotanev",
+      "to": "constellation:delphinus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:sualocin",
+      "to": "constellation:delphinus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:deneb",
+      "to": "constellation:cygnus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:aljanah",
+      "to": "constellation:cygnus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:albali",
+      "to": "constellation:aquarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:kitalpha",
+      "to": "constellation:equuleus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alderamin",
+      "to": "constellation:cepheus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alfirk",
+      "to": "constellation:cepheus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:sadalsuud",
+      "to": "constellation:aquarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:bunda",
+      "to": "constellation:aquarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:nashira",
+      "to": "constellation:capricornus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:enif",
+      "to": "constellation:pegasus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:deneb-algedi",
+      "to": "constellation:capricornus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:aldhanab",
+      "to": "constellation:grus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:kurhah",
+      "to": "constellation:cepheus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:sadalmelik",
+      "to": "constellation:aquarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alnair",
+      "to": "constellation:grus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:biham",
+      "to": "constellation:pegasus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:ancha",
+      "to": "constellation:aquarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:sadachbia",
+      "to": "constellation:aquarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:homam",
+      "to": "constellation:pegasus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:tiaki",
+      "to": "constellation:grus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:matar",
+      "to": "constellation:pegasus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:sadalbari",
+      "to": "constellation:pegasus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:skat",
+      "to": "constellation:aquarius"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:fomalhaut",
+      "to": "constellation:piscis-austrinus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:scheat",
+      "to": "constellation:pegasus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:fumalsamakah",
+      "to": "constellation:pisces"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:markab",
+      "to": "constellation:pegasus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:salm",
+      "to": "constellation:pegasus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alkarab",
+      "to": "constellation:pegasus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:errai",
+      "to": "constellation:cepheus"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:castor-b",
+      "to": "constellation:gemini"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alula-australis",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:alula-australis-b",
+      "to": "constellation:ursa-maior"
+    },
+    {
+      "type": "inConstellation",
+      "from": "star:graffias",
+      "to": "constellation:scorpius"
+    },
+    {
+      "type": "lotFormula",
+      "from": "lot:fortune",
+      "to": "body:moon",
+      "role": "added"
+    },
+    {
+      "type": "lotFormula",
+      "from": "lot:fortune",
+      "to": "body:sun",
+      "role": "subtracted"
+    },
+    {
+      "type": "lotFormula",
+      "from": "lot:spirit",
+      "to": "body:sun",
+      "role": "added"
+    },
+    {
+      "type": "lotFormula",
+      "from": "lot:spirit",
+      "to": "body:moon",
+      "role": "subtracted"
+    },
+    {
+      "type": "lotFormula",
+      "from": "lot:eros",
+      "to": "body:venus",
+      "role": "added"
+    },
+    {
+      "type": "lotFormula",
+      "from": "lot:eros",
+      "to": "lot:spirit",
+      "role": "subtracted"
+    },
+    {
+      "type": "lotFormula",
+      "from": "lot:necessity",
+      "to": "lot:fortune",
+      "role": "added"
+    },
+    {
+      "type": "lotFormula",
+      "from": "lot:necessity",
+      "to": "body:mercury",
+      "role": "subtracted"
+    },
+    {
+      "type": "lotFormula",
+      "from": "lot:courage",
+      "to": "lot:fortune",
+      "role": "added"
+    },
+    {
+      "type": "lotFormula",
+      "from": "lot:courage",
+      "to": "body:mars",
+      "role": "subtracted"
+    },
+    {
+      "type": "lotFormula",
+      "from": "lot:victory",
+      "to": "body:jupiter",
+      "role": "added"
+    },
+    {
+      "type": "lotFormula",
+      "from": "lot:victory",
+      "to": "lot:spirit",
+      "role": "subtracted"
+    },
+    {
+      "type": "lotFormula",
+      "from": "lot:nemesis",
+      "to": "lot:fortune",
+      "role": "added"
+    },
+    {
+      "type": "lotFormula",
+      "from": "lot:nemesis",
+      "to": "body:saturn",
+      "role": "subtracted"
+    },
+    {
+      "type": "correspondsTo",
+      "from": "body:mercury",
+      "to": "source:liber-777",
+      "locus": "path 12",
+      "tarot": "The Juggler",
+      "color": "Yellow",
+      "greekGod": "Hermes",
+      "romanGod": "Mercury"
+    },
+    {
+      "type": "correspondsTo",
+      "from": "body:moon",
+      "to": "source:liber-777",
+      "locus": "path 13",
+      "tarot": "The High Priestess",
+      "color": "Blue",
+      "greekGod": "Artemis, Hekate",
+      "romanGod": "Diana (as Water)"
+    },
+    {
+      "type": "correspondsTo",
+      "from": "body:venus",
+      "to": "source:liber-777",
+      "locus": "path 14",
+      "tarot": "The Empress",
+      "color": "Emerald green",
+      "greekGod": "Aphrodite",
+      "romanGod": "Venus"
+    },
+    {
+      "type": "correspondsTo",
+      "from": "body:jupiter",
+      "to": "source:liber-777",
+      "locus": "path 21",
+      "tarot": "Wheel of Fortune",
+      "color": "Violet",
+      "greekGod": "Zeus",
+      "romanGod": "Jupiter, [Pluto]"
+    },
+    {
+      "type": "correspondsTo",
+      "from": "body:mars",
+      "to": "source:liber-777",
+      "locus": "path 27",
+      "tarot": "The House of God",
+      "color": "Scarlet",
+      "greekGod": "Ares",
+      "romanGod": "Mars"
+    },
+    {
+      "type": "correspondsTo",
+      "from": "body:sun",
+      "to": "source:liber-777",
+      "locus": "path 30",
+      "tarot": "The Sun",
+      "color": "Orange",
+      "greekGod": "Helios, Apollo",
+      "romanGod": "Apollo"
+    },
+    {
+      "type": "correspondsTo",
+      "from": "body:saturn",
+      "to": "source:liber-777",
+      "locus": "path 32",
+      "tarot": "Empresses - Coins",
+      "color": "Citrine, Russet, Olive, Black",
+      "greekGod": "[Demeter]",
+      "romanGod": "Ceres"
+    },
+    {
+      "type": "attestedIn",
+      "from": "house:1",
+      "to": "source:lilly-christian-astrology"
+    },
+    {
+      "type": "attestedIn",
+      "from": "house:2",
+      "to": "source:lilly-christian-astrology"
+    },
+    {
+      "type": "attestedIn",
+      "from": "house:3",
+      "to": "source:lilly-christian-astrology"
+    },
+    {
+      "type": "attestedIn",
+      "from": "house:4",
+      "to": "source:lilly-christian-astrology"
+    },
+    {
+      "type": "attestedIn",
+      "from": "house:5",
+      "to": "source:lilly-christian-astrology"
+    },
+    {
+      "type": "attestedIn",
+      "from": "house:6",
+      "to": "source:lilly-christian-astrology"
+    },
+    {
+      "type": "attestedIn",
+      "from": "house:7",
+      "to": "source:lilly-christian-astrology"
+    },
+    {
+      "type": "attestedIn",
+      "from": "house:8",
+      "to": "source:lilly-christian-astrology"
+    },
+    {
+      "type": "attestedIn",
+      "from": "house:9",
+      "to": "source:lilly-christian-astrology"
+    },
+    {
+      "type": "attestedIn",
+      "from": "house:10",
+      "to": "source:lilly-christian-astrology"
+    },
+    {
+      "type": "attestedIn",
+      "from": "house:11",
+      "to": "source:lilly-christian-astrology"
+    },
+    {
+      "type": "attestedIn",
+      "from": "house:12",
+      "to": "source:lilly-christian-astrology"
+    },
+    {
+      "type": "computedBy",
+      "from": "chart-type:natal",
+      "to": "natal_chart"
+    },
+    {
+      "type": "computedBy",
+      "from": "chart-type:transit",
+      "to": "transits"
+    },
+    {
+      "type": "computedBy",
+      "from": "chart-type:synastry",
+      "to": "synastry"
+    },
+    {
+      "type": "computedBy",
+      "from": "chart-type:composite",
+      "to": "composite"
+    },
+    {
+      "type": "computedBy",
+      "from": "chart-type:return",
+      "to": "returns"
+    },
+    {
+      "type": "computedBy",
+      "from": "chart-type:progressed",
+      "to": "progressions"
+    },
+    {
+      "type": "computedBy",
+      "from": "chart-type:directed",
+      "to": "directions"
+    },
+    {
+      "type": "computedBy",
+      "from": "chart-type:electional",
+      "to": "electional_search"
+    },
+    {
+      "type": "computedBy",
+      "from": "technique:profection",
+      "to": "profections"
+    },
+    {
+      "type": "computedBy",
+      "from": "technique:zr",
+      "to": "releasing"
+    },
+    {
+      "type": "computedBy",
+      "from": "technique:firdaria",
+      "to": "firdaria"
+    },
+    {
+      "type": "computedBy",
+      "from": "technique:dasha",
+      "to": "dasha"
+    },
+    {
+      "type": "computedBy",
+      "from": "technique:lots",
+      "to": "lots"
+    },
+    {
+      "type": "computedBy",
+      "from": "technique:dignities",
+      "to": "dignities"
+    },
+    {
+      "type": "computedBy",
+      "from": "technique:parans",
+      "to": "parans"
+    },
+    {
+      "type": "computedBy",
+      "from": "technique:planetary-hours",
+      "to": "planetary_hours"
+    },
+    {
+      "type": "computedBy",
+      "from": "technique:void-of-course",
+      "to": "void_of_course"
+    },
+    {
+      "type": "computedBy",
+      "from": "technique:rectification",
+      "to": "rectification_grid"
+    },
+    {
+      "type": "computedBy",
+      "from": "technique:aspect-patterns",
+      "to": "aspect_patterns"
+    },
+    {
+      "type": "computedBy",
+      "from": "technique:chart-signature",
+      "to": "chart_signature"
+    },
+    {
+      "type": "computedBy",
+      "from": "technique:nakshatras",
+      "to": "nakshatras"
+    },
+    {
+      "type": "computedBy",
+      "from": "technique:vargas",
+      "to": "vargas"
+    },
+    {
+      "type": "computedBy",
+      "from": "technique:yogas",
+      "to": "yogas"
+    },
+    {
+      "type": "sameAs",
+      "from": "body:sun",
+      "to": "wikidata:Q525"
+    },
+    {
+      "type": "sameAs",
+      "from": "body:moon",
+      "to": "wikidata:Q405"
+    },
+    {
+      "type": "sameAs",
+      "from": "body:mercury",
+      "to": "wikidata:Q308"
+    },
+    {
+      "type": "sameAs",
+      "from": "body:venus",
+      "to": "wikidata:Q313"
+    },
+    {
+      "type": "sameAs",
+      "from": "body:mars",
+      "to": "wikidata:Q111"
+    },
+    {
+      "type": "sameAs",
+      "from": "body:jupiter",
+      "to": "wikidata:Q319"
+    },
+    {
+      "type": "sameAs",
+      "from": "body:saturn",
+      "to": "wikidata:Q193"
+    },
+    {
+      "type": "sameAs",
+      "from": "body:uranus",
+      "to": "wikidata:Q324"
+    },
+    {
+      "type": "sameAs",
+      "from": "body:neptune",
+      "to": "wikidata:Q332"
+    },
+    {
+      "type": "sameAs",
+      "from": "body:pluto",
+      "to": "wikidata:Q339"
+    },
+    {
+      "type": "sameAs",
+      "from": "sign:aries",
+      "to": "wikidata:Q32067"
+    },
+    {
+      "type": "sameAs",
+      "from": "sign:taurus",
+      "to": "wikidata:Q164016"
+    },
+    {
+      "type": "sameAs",
+      "from": "sign:gemini",
+      "to": "wikidata:Q129214"
+    },
+    {
+      "type": "sameAs",
+      "from": "sign:cancer",
+      "to": "wikidata:Q161701"
+    },
+    {
+      "type": "sameAs",
+      "from": "sign:leo",
+      "to": "wikidata:Q159816"
+    },
+    {
+      "type": "sameAs",
+      "from": "sign:virgo",
+      "to": "wikidata:Q134061"
+    },
+    {
+      "type": "sameAs",
+      "from": "sign:libra",
+      "to": "wikidata:Q134394"
+    },
+    {
+      "type": "sameAs",
+      "from": "sign:scorpio",
+      "to": "wikidata:Q134398"
+    },
+    {
+      "type": "sameAs",
+      "from": "sign:sagittarius",
+      "to": "wikidata:Q2194186"
+    },
+    {
+      "type": "sameAs",
+      "from": "sign:capricorn",
+      "to": "wikidata:Q164272"
+    },
+    {
+      "type": "sameAs",
+      "from": "sign:aquarius",
+      "to": "wikidata:Q162119"
+    },
+    {
+      "type": "sameAs",
+      "from": "sign:pisces",
+      "to": "wikidata:Q1254190"
+    }
+  ]
+}
