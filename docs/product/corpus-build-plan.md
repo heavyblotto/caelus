@@ -253,12 +253,12 @@ facts bear on any ordering: the B3 "remainder" was review debt, not
 unwritten prose (that review is now done), and B5 essays cannot be
 written before the grid names the cells.
 
-### 1. Repair and review of what is already written
+### 1. Repair and review of what is already written (done)
 
-Clear the three backlogs, then turn `lintNearDuplicateSentences`,
-`lintCrossFamilyEchoes`, and `lintFormulaClusters` on in `lintCorpus`.
-Finish the B3 review (738 cells). This is the finish line for work that
-is otherwise done.
+Done 2026-08-19. The three backlogs are clear, the B3 review (738
+cells) is finished, and `lintNearDuplicateSentences`,
+`lintCrossFamilyEchoes`, and `lintFormulaClusters` gate in
+`lintCorpus`. New writing gates on them from the first slice.
 
 ### 2. Scaffold, then write the unwritten batches
 
@@ -273,14 +273,15 @@ and faces via `hasDegree`; only the grid scaffolding remains.
 (artifact × how-to-read, surface × how-to-use). Not `CellFamily`. Not
 the delineation harness.
 
-### 3. Land the package
+### 3. Land the package (done, one follow-up)
 
-The package is not in root `build` / `test`, CI,
-`check-test-wiring.mjs`, or `check-versions.mjs`. Site docs and the
-playground Reading tab still only load `caelus-delineations-pd`. Wire
-the harness into CI so a broken corpus fails the build. Align
-`devDependencies.caelus` (`^0.24.1`) with the peer (`>=0.25.0 <0.26`)
-once 0.25.0 is tagged.
+Landed 2026-08-19. The package is in root `build` / `test`, CI,
+`check-test-wiring.mjs`, and `check-versions.mjs`, so a broken corpus
+fails the build. The playground Reading tab loads corpus sources
+lazily per family; `caelus-delineations-pd` stays as the npm demo
+package. One follow-up waits on the maintainer's tag: align
+`devDependencies.caelus` (`^0.24.1`) with the peer
+(`>=0.25.0 <0.26`) once 0.25.0 exists.
 
 ### 4. Encyclopedia of Astrology
 
