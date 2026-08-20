@@ -3,13 +3,21 @@
  * after new slices land; do not edit the imports or the set list by hand.
  */
 import b5Dispositors from "../data/passages/b5-dispositors.json" with { type: "json" };
+import b5LotErosSigns from "../data/passages/b5-lot-eros-signs.json" with { type: "json" };
 import b5LotFortuneSigns from "../data/passages/b5-lot-fortune-signs.json" with { type: "json" };
+import b5LotNecessityHouses from "../data/passages/b5-lot-necessity-houses.json" with { type: "json" };
 import b5LotSpiritHouses from "../data/passages/b5-lot-spirit-houses.json" with { type: "json" };
+import b5NakshatraPadas01 from "../data/passages/b5-nakshatra-padas-01.json" with { type: "json" };
 import b5NakshatrasMoon01 from "../data/passages/b5-nakshatras-moon-01.json" with { type: "json" };
+import b5NakshatrasMoon02 from "../data/passages/b5-nakshatras-moon-02.json" with { type: "json" };
 import b5Parallels01 from "../data/passages/b5-parallels-01.json" with { type: "json" };
+import b5Parallels02 from "../data/passages/b5-parallels-02.json" with { type: "json" };
 import b5Receptions from "../data/passages/b5-receptions.json" with { type: "json" };
 import b5Stars01 from "../data/passages/b5-stars-01.json" with { type: "json" };
 import b5Stars02 from "../data/passages/b5-stars-02.json" with { type: "json" };
+import b5Stars03 from "../data/passages/b5-stars-03.json" with { type: "json" };
+import b5Stars04 from "../data/passages/b5-stars-04.json" with { type: "json" };
+import b5VargaD9Mars from "../data/passages/b5-varga-d9-mars.json" with { type: "json" };
 import b5VargaD9Sun from "../data/passages/b5-varga-d9-sun.json" with { type: "json" };
 import b5VargaFrames from "../data/passages/b5-varga-frames.json" with { type: "json" };
 import b5Yogas from "../data/passages/b5-yogas.json" with { type: "json" };
@@ -24,13 +32,21 @@ const set = (id: string, family: PassageSet["family"], data: unknown): PassageSe
 
 export const passageSets: PassageSet[] = [
   set("b5-dispositors", "dispositor", b5Dispositors),
+  set("b5-lot-eros-signs", "lot-sign", b5LotErosSigns),
   set("b5-lot-fortune-signs", "lot-sign", b5LotFortuneSigns),
+  set("b5-lot-necessity-houses", "lot-house", b5LotNecessityHouses),
   set("b5-lot-spirit-houses", "lot-house", b5LotSpiritHouses),
+  set("b5-nakshatra-padas-01", "nakshatra-pada", b5NakshatraPadas01),
   set("b5-nakshatras-moon-01", "nakshatra-moon", b5NakshatrasMoon01),
+  set("b5-nakshatras-moon-02", "nakshatra-moon", b5NakshatrasMoon02),
   set("b5-parallels-01", "parallel", b5Parallels01),
+  set("b5-parallels-02", "parallel", b5Parallels02),
   set("b5-receptions", "reception", b5Receptions),
   set("b5-stars-01", "star", b5Stars01),
   set("b5-stars-02", "star", b5Stars02),
+  set("b5-stars-03", "star", b5Stars03),
+  set("b5-stars-04", "star", b5Stars04),
+  set("b5-varga-d9-mars", "varga-d9", b5VargaD9Mars),
   set("b5-varga-d9-sun", "varga-d9", b5VargaD9Sun),
   set("b5-varga-frames", "varga-frame", b5VargaFrames),
   set("b5-yogas", "yoga", b5Yogas),
