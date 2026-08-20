@@ -3,13 +3,14 @@
 2026-08-19
 
 This plan covers interactive widgets and computed plates for the
-Encyclopedia of Astrology and the Learning guides (B8): engine-driven
+Encyclopedia of Hermes and the Learning guides (B8): engine-driven
 figures that demonstrate, animate, illustrate, and compute in service
 of the text. It extends Stream G of
 `docs/product/corpus-build-plan.md` and binds to the Encyclopedia
 design system (direction 1a, "Plate", from `design-system.zip`,
 unpacked to `docs/design/` during the design phase). The derivation
-widget, the primary widget, has its own section.
+widget, the primary widget, has its own section. Two engines supply
+the figures: `caelus` for the sky, `memorativa` for the numbers.
 
 Decisions recorded here are owner decisions of 2026-08-19.
 
@@ -34,7 +35,8 @@ Decisions recorded here are owner decisions of 2026-08-19.
   states it: a figure that cannot name the engine version that drew it
   does not ship. The revision stamp carries `Figures · caelus 0.25.0`,
   and the harness verifies the stamped version equals the version that
-  computed the hash.
+  computed the hash. A numerical figure stamps the `memorativa`
+  version the same way.
 - **The reader's chart context is site-wide.** One birth entry,
   stored in the URL hash or localStorage, never sent to a server (the
   Playground pattern). Every widget accepts the override. Anonymous
@@ -135,10 +137,11 @@ precedes nothing and serves everything.
 ## Architecture
 
 - **Package.** `packages/widgets` (`caelus-widgets`, private), peer
-  on `caelus`, `caelus-wheel`, and `react`. `caelus-wheel` stays pure
-  and hook-free; widgets are the layer that adds state. One subpath
-  export per widget kind, the corpus batch pattern, so an article
-  loads only the widgets it uses.
+  on `caelus`, `caelus-wheel`, `memorativa`, and `react`.
+  `caelus-wheel` stays pure and hook-free; widgets are the layer that
+  adds state. One subpath export per widget kind, the corpus batch
+  pattern, so an article loads only the widgets it uses. The engines
+  are public packages; the widget layer stays private.
 - **MDX.** Widgets register globally in `apps/web/mdx-components.tsx`
   (doc pages currently import demos one by one; the Encyclopedia does
   not repeat that). Authors write
@@ -151,7 +154,10 @@ precedes nothing and serves everything.
   (`apps/web/widget/chart-widget.ts`) generalizes: the loader
   dispatches on `{ kind, params }` instead of assuming the wheel. MCP
   hosts and the iframe fallback get every widget through the channel
-  that already ships the wheel.
+  that already ships the wheel. The embed channel is also the reader
+  take-away path: a reader who wants a widget for their own concerns
+  embeds it by spec, and the public engines (`caelus`, `memorativa`)
+  serve the developer case.
 - **Precision tier.** Browser widgets compute from the embedded data
   tier (~98 KB gzipped); the precise Moon Chebyshev pack stays
   server-side. One shared footnote component states the tier once per
@@ -213,6 +219,8 @@ widget is separate below.
 | `quiz` | "Click the ruler of the 7th house" on a live wheel; the engine computed the answer, so checking is fact lookup | Learning series checks |
 | `shape-sandbox` | Drag bodies freely; the engine classifies bundle, bowl, seesaw live; positions are params, so even the sandbox is deterministic and shareable | Chart shape tutorial |
 | `guided-tour` | A wheel that spotlights the element the surrounding prose discusses, by scroll or next button | "Putting a whole reading together" |
+| `kamea` | The seven planetary magic squares from Memorativa; construction, the magic constant, and a name traced letter by letter across the grid to its sigil | Magic square, Sigil, the planetary seal articles, Agrippa Book II |
+| `number` | Theosophical reduction and addition, the neutralization of a binary, ternary, or quaternary, letter values across the gematria systems | Number, Tetraktys, Gematria, the tarot-structure articles |
 
 Learning-series notes: `wheel-anatomy` opens tutorial one before any
 astrology is taught, so the reader learns the diagram before the
@@ -446,6 +454,12 @@ reference mirrored and pinned by the skyview-golden suite.
   widget that wants a quantity is a request for an engine export. The
   widget layer contains projection state, interaction, and SVG, and no
   astronomy.
+- **Numerical quantities come from `memorativa`.** Kameas, sigil
+  traces, theosophical arithmetic, and letter values are Memorativa
+  output, not `caelus` output and not widget math. The same rule
+  holds: a widget that wants a number is a request for a Memorativa
+  export, and the scanned correspondence tables pin the golden
+  fixtures.
 
 ---
 

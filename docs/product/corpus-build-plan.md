@@ -11,14 +11,21 @@ backlog lints gating in `lintCorpus`, the harness green, and a
 versioned package a consumer can load. The live count is the coverage
 table in `packages/caelus-corpus/README.md`.
 
-The Encyclopedia of Astrology (the Encyclopedia) is articles on
-subjects, on ephemengine.com. A reader looks a topic up and reads.
-The standard is the Stanford Encyclopedia of Philosophy and the 1911
-Encyclopaedia Britannica. The wiki at astro.com is the low bar. The
-Encyclopedia uses Caelus for charts, tables, searches, and plates.
-History, schools, people, language, photographs, and other sources
-stay in the articles. The corpus package and the Encyclopedia are
-different work: different pipeline, grid, and voice.
+The Encyclopedia of Hermes (the Encyclopedia) is articles on the
+Western esoteric traditions: astrology, alchemy, natural and
+ceremonial magic, kabbalah, number symbolism, and the natural
+philosophy around them. It lives on ephemengine.com. Astrology is the
+first and largest division and the one with an engine behind it. A
+reader looks a topic up and reads. The standard is the Stanford
+Encyclopedia of Philosophy and the 1911 Encyclopaedia Britannica. The
+wiki at astro.com is the low bar; the scholarly peer for the wider
+frame is Brill's Dictionary of Gnosis and Western Esotericism. The
+Encyclopedia uses Caelus for charts, tables, searches, and plates,
+and the Memorativa engine for the numerical figures. History,
+schools, people, language, photographs, and other sources stay in
+the articles. The corpus package and the Encyclopedia are different
+work: different pipeline, grid, and voice. The corpus stays
+astrological.
 
 This branch (`feature/house-corpus`) carries the package. The engine on
 the branch is the 0.25 code, still labeled 0.24.1. Official 0.25.0 is
@@ -207,18 +214,24 @@ the later corpus families bind to (`angleContact`, `transitHouse`,
 package metadata into browser bundles. Until the tag, this branch
 already has those selectors under the 0.24.1 label.
 
-**G. Encyclopedia of Astrology.** Pages on ephemengine.com. Articles at
-the SEP / 1911 standard. Caelus supplies figures and tables in the
-articles.
+**G. Encyclopedia of Hermes.** Pages on ephemengine.com. Articles at
+the SEP / 1911 standard across the Western esoteric traditions, with
+astrology as the engine-backed core division. Caelus supplies figures
+and tables in the articles; Memorativa supplies the numerical figures.
 
 **H. Knowledge base.** `packages/kb` (`caelus-kb`, private): a typed
-concept graph of astrological structure. Engine-derived edges (rulership,
+concept graph of astrological structure plus the hermetic
+correspondence web around it. Engine-derived edges (rulership,
 exaltation, triplicity, terms, faces, aspect angles, nakshatra lords,
 lot formulas, star catalog) are generated from `caelus` at build time
 and gated by a drift test; curated files add what the engine does not
-compute (traditions, people, source texts from the PD manifest, variant
-dignity tables with attribution, house topics with attestation, the
-Liber 777 correspondences, Wikidata ids). Ships `kb.json` with a JSON-LD
+compute (traditions, people, source texts from the PD manifest and the
+scanned library, variant dignity tables with attribution, house topics
+with attestation, the Liber 777 correspondences and the correspondence
+systems beyond it, number-symbolism attributions per author, Wikidata
+ids). Under the Hermes frame the KB also grows curated subtrees the
+engines do not reach: alchemy, kabbalah, tarot, the magical practices,
+works, and persons. Ships `kb.json` with a JSON-LD
 context plus a parser from atom ids and cell ids to concept ids. Feeds
 Encyclopedia infoboxes, the glossary, Reading-tab links, page JSON-LD,
 and an MCP define tool. Structure and provenance live in the KB; meaning
@@ -243,6 +256,23 @@ transit:pluto:trine:saturn describe one sky event from swapped roles).
 After the B1/B2 wave, the B3 review wave, and their mop-ups the report
 is empty at the 0.88 cutoff; the corpus-wide max sits just under it
 (0.880 at display precision).
+
+**J. Memorativa.** `packages/memorativa`: the arithmology engine,
+named for the ars memorativa. A public peer of `caelus`, released the
+same way: MIT, npm with provenance, versioned in the open 0.25.0
+draft. Pure functions with golden tests: theosophical reduction and
+addition, the neutralization operators for binaries, ternaries, and
+quaternaries, the seven planetary kameas (construction, magic
+constants, sigil tracing across the squares), gematria and notarikon
+and temurah, lambdoma ratios. Caelus computes the sky, Memorativa
+computes the numbers. The KB attributes meanings to numbers per author
+with provenance; the Encyclopedia narrates. The scanned correspondence
+tables (Agrippa, Skinner, Godwin, the tarot shelf) are the golden-test
+oracle; committed goldens pin public-domain sources (Agrippa's kameas,
+the Hebrew letter values), and oracles derived from in-copyright scans
+stay in the private store as hash-pinned fixtures. Numerical figures in
+the articles are Memorativa output and ride the figure harness the same
+way engine figures do, stamped with the `memorativa` version.
 
 ---
 
@@ -283,12 +313,14 @@ package. One follow-up waits on the maintainer's tag: align
 `devDependencies.caelus` (`^0.24.1`) with the peer
 (`>=0.25.0 <0.26`) once 0.25.0 exists.
 
-### 4. Encyclopedia of Astrology
+### 4. Encyclopedia of Hermes
 
-Articles on ephemengine.com. Named the Encyclopedia of Astrology, or
+Articles on ephemengine.com. Named the Encyclopedia of Hermes, or
 the Encyclopedia. One article per subject, with structure, sources, and
 finished prose. The wiki at astro.com does this job at a lower
-standard.
+standard for astrology; for the wider frame the peer is Brill's
+Dictionary of Gnosis and Western Esotericism, and nothing open exists
+at that standard.
 
 1911 and SEP put maps, tables, and worked examples in the article. The
 Features page already asks the engine for a figure at build time. The
@@ -301,9 +333,11 @@ the page, next to prose or next to other pictures. Shared example
 charts keep figures consistent from article to article.
 
 
-| Article                           | Engine can supply                                                                                                      |
+| Article                           | The engines can supply                                                                                                 |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | Houses                            | One birth through many systems. Cusps in a table. Polar cases. A wheel per system. A birth the reader typed.           |
+| Magic square, sigil               | The kamea for a planet, its constant, a name traced letter by letter to its seal (Memorativa).                          |
+| Number, tetraktys, gematria       | Theosophical reduction and addition, neutralization decompositions, letter values across the systems (Memorativa).      |
 | Zodiac                            | Tropical and sidereal for one instant. Several ayanamsas. A body tracked across a year in both.                        |
 | Aspect                            | Angle, orb, applying or separating. A pair in a wheel. A stack of aspects for one chart. A scan of the next exact hit. |
 | Retrograde / station              | An ephemeris graph through the turn. Station times. A current or historical station. Speed in a table.                 |
@@ -317,17 +351,21 @@ charts keep figures consistent from article to article.
 | Election, VOC, hours              | Intervals for a day. A ranked window. Planetary hour at a clock time.                                                  |
 
 **Extent.** The Encyclopedia's extent is the knowledge base, the way
-corpus coverage is the grid: the 604 KB nodes (bodies, signs, houses,
+corpus coverage is the grid: the KB nodes (bodies, signs, houses,
 aspects, dignities, lots, nakshatras, vargas, yogas, the star catalog,
-traditions, people, source texts) each resolve to a full article, a
-glossary entry, or an explicit not-written marker, and a coverage
-report over the KB shows where that stands. Synthesis subjects that
-are not single nodes — house division as a problem, the
-tropical–sidereal question, sect, calculation and ephemerides, the
-historical entries — are their own hand-listed articles. Each article
+traditions, people, source texts, and the curated hermetic subtrees as
+they land) each resolve to a full article, a glossary entry, or an
+explicit not-written marker, and a coverage report over the KB shows
+where that stands. Synthesis subjects that are not single nodes (house
+division as a problem, the tropical–sidereal question, sect,
+calculation and ephemerides, correspondences as a system, the
+historical entries) are their own hand-listed articles. The
+maintainer's library is the horizon of the historical and doctrinal
+coverage: the Encyclopedia covers what the shelf covers, per
+`docs/product/library-ingestion-plan.md`. Each article
 is researched and cited individually: sources through the KB's
-provenance edges to the PD manifest, figures as plate specs,
-embeddings evidence packs.
+provenance edges to the PD manifest and the scanned library, figures
+as plate specs, embeddings evidence packs.
 
 ### 5. Engine 0.25.0 release
 

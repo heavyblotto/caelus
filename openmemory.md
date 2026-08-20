@@ -48,6 +48,21 @@ statuses current. Maintainer decisions on record there: releases
 belong to the maintainer; agents do not write rules, scope, phases, or
 normative language into project docs.
 
+The private-library ingestion design (maintainer-scanned books → local
+OCR → QA harness → KB/corpus/Encyclopedia consumers) lives at
+`docs/product/library-ingestion-plan.md` (2026-08-20).
+
+Maintainer decisions of 2026-08-20: the Encyclopedia is the
+Encyclopedia of Hermes (Western esoteric traditions; astrology is the
+engine-backed core division, the corpus stays astrological), and the
+arithmology module is the Memorativa engine (`packages/memorativa`,
+planned: theosophical arithmetic, neutralization operators, kameas with
+sigil tracing, gematria systems, lambdoma ratios; golden tests pinned
+against the scanned tables). Memorativa ships public, peer to `caelus`
+(MIT, npm provenance, 0.25.0 in the open draft); committed goldens pin
+public-domain sources, in-copyright oracles stay in the private store.
+Recorded in the build plan intro and streams G, H, J.
+
 ## User Defined Namespaces
 - [Leave blank - user populates]
 
