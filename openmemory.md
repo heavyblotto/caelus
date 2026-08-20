@@ -29,7 +29,9 @@ carries the unreleased engine 0.25.0 source.
   curated `B5_STARS` 60, parallels, Moon nakshatras and padas, D9 vargas
   and framings, yogas — written and adversarially reviewed in seven
   waves; the `natal:lot|star|parallel|reception|dispositor:*` and
-  `vedic:*` cell-id shapes still await a `parseCellId` extension). B6
+  `vedic:*` cell-id shapes parse through `parseCellId` since 2026-08-20
+  (7ae3a3e; 599/602 — the Kemadruma and raja/dhana yoga cells return []
+  for want of KB nodes). B6
   scaffolded 2026-08-20 (bb1a3ed): `b6Grid` adds the degree layer —
   `ten-degree-face` (36 cells, ids `natal:face:<sign>:<1-3>`) and
   `degree-symbol` (360 cells, ids `natal:degree:<sign>:<1-30>`), both
