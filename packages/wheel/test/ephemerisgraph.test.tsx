@@ -42,5 +42,37 @@ const svgDec = renderToStaticMarkup(<EphemerisGraph series={dec} width={600} hei
 assert(svgDec.startsWith("<svg"), "declination view renders");
 assert(svg !== svgDec, "longitude and declination produce different graphs");
 
+// Furniture: a shaded band under the lines, moment ticks over them, and
+// the scrub cursor. The retrograde-scrub widget composes these.
+const furnished = renderToStaticMarkup(
+  <EphemerisGraph
+    series={series}
+    width={720}
+    height={360}
+    wrap={360}
+    band={{ from: start + 40, to: start + 62 }}
+    marks={[
+      { jd: start + 40, label: "SR" },
+      { jd: start + 62, label: "SD" },
+      { jd: start - 50, label: "OFF" },
+    ]}
+    cursor={start + 51}
+    accent="#8c2f2a"
+  />,
+);
+assert(furnished.includes(">SR<") && furnished.includes(">SD<"),
+  "mark labels are drawn");
+assert(!furnished.includes(">OFF<"), "marks outside the window are skipped");
+assert(furnished.includes('stroke="#8c2f2a"'), "the cursor takes the accent");
+assert((furnished.match(/stroke-dasharray/g) ?? []).length === 2,
+  "plain marks draw dashed");
+const noCursor = renderToStaticMarkup(
+  <EphemerisGraph series={series} width={720} height={360} wrap={360}
+    cursor={start + 4000} accent="#8c2f2a" />,
+);
+assert(!noCursor.includes('stroke="#8c2f2a"'),
+  "a cursor outside the window is not drawn");
+assert(furnished.length > svg.length, "furniture adds marks to the figure");
+
 console.log(`\n${checks} checks, ${failures} failures`);
 process.exit(failures ? 1 : 0);

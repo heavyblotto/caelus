@@ -21,7 +21,8 @@ import type { ReactElement } from "react";
 import {
   PlateFrame,
   type AspectDialParams, type ChartParams, type DerivationParams,
-  type HouseComparatorParams, type WheelAnatomyParams, type WidgetSpec,
+  type HouseComparatorParams, type RetrogradeScrubParams,
+  type SectFlipParams, type WheelAnatomyParams, type WidgetSpec,
   type ZodiacDriftParams,
 } from "caelus-widgets";
 import { deriveScene } from "caelus-widgets/derivation";
@@ -29,6 +30,8 @@ import { deriveAnatomy } from "caelus-widgets/wheel-anatomy";
 import { deriveComparator } from "caelus-widgets/house-comparator";
 import { deriveDrift } from "caelus-widgets/zodiac-drift";
 import { deriveDial } from "caelus-widgets/aspect-dial";
+import { deriveRetro } from "caelus-widgets/retrograde-scrub";
+import { deriveSect } from "caelus-widgets/sect-flip";
 import { sampleEngine } from "../../lib/sample-chart";
 import { b64urlEncode, type Share } from "../../lib/share";
 import DerivationPlate from "./DerivationPlate";
@@ -36,6 +39,8 @@ import WheelAnatomyPlate from "./WheelAnatomyPlate";
 import HouseComparatorPlate from "./HouseComparatorPlate";
 import ZodiacDriftPlate from "./ZodiacDriftPlate";
 import AspectDialPlate from "./AspectDialPlate";
+import RetrogradeScrubPlate from "./RetrogradeScrubPlate";
+import SectFlipPlate from "./SectFlipPlate";
 
 export interface WProps {
   kind: WidgetSpec["kind"];
@@ -141,6 +146,32 @@ export default function W({
           reproduceHref={reproduceHref(params)}
         >
           <AspectDialPlate scene={scene} />
+        </PlateFrame>
+      );
+    }
+    case "retrograde-scrub": {
+      const scene = deriveRetro(sampleEngine, params as RetrogradeScrubParams);
+      return (
+        <PlateFrame
+          figure={figure}
+          caption={caption}
+          engineVersion={scene.engineVersion}
+          reproduceHref={reproduceHref(params)}
+        >
+          <RetrogradeScrubPlate scene={scene} />
+        </PlateFrame>
+      );
+    }
+    case "sect-flip": {
+      const scene = deriveSect(sampleEngine, params as SectFlipParams);
+      return (
+        <PlateFrame
+          figure={figure}
+          caption={caption}
+          engineVersion={scene.engineVersion}
+          reproduceHref={reproduceHref(params)}
+        >
+          <SectFlipPlate scene={scene} />
         </PlateFrame>
       );
     }

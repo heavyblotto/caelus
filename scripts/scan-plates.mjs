@@ -200,6 +200,24 @@ const KINDS = {
       fail("orb must be a number in [0, 10]");
     }
   },
+  "retrograde-scrub"(p, fail) {
+    checkChartParams(p, fail);
+    // The inset draws the heliocentric overtake, so the body needs its
+    // VSOP series in the engine data pack (mirrors RETRO_BODIES in
+    // packages/widgets/src/retrograde-scrub.tsx).
+    const bodies = new Set([
+      "mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune",
+    ]);
+    if (p.body !== undefined && !(isStr(p.body) && bodies.has(p.body))) {
+      fail("body must be one of mercury, venus, mars, jupiter, saturn, uranus, neptune");
+    }
+  },
+  "sect-flip"(p, fail) {
+    checkChartParams(p, fail);
+    if (p.mode !== undefined && p.mode !== "day" && p.mode !== "night") {
+      fail('mode must be "day" or "night"');
+    }
+  },
 };
 
 // ---------------------------------------------------------------- scan
