@@ -16,10 +16,10 @@ here is cross-cutting.
 ## Method
 
 - Model: BAAI/bge-m3, 1024-dim, normalized; full pairwise cosine over
-  3,056 essays (4,618,712 eligible pairs after the sibling
+  3,656 essays (6,616,040 eligible pairs after the sibling
   and mirror exclusions).
-- Similarity distribution of eligible pairs: p50 0.633, p90 0.708,
-  p99 0.777, max 0.880.
+- Similarity distribution of eligible pairs: p50 0.620, p90 0.698,
+  p99 0.768, max 0.880.
 - Threshold: **0.88**, chosen from that distribution to yield a
   reviewable list. At this cutoff: **0 pairs**.
 - Regenerate: `uv run python report_semantic_echoes.py` in
