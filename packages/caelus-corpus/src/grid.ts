@@ -678,9 +678,293 @@ export function b3Grid(): GridCell[] {
   return cells;
 }
 
+/** The seven Hermetic lots, keyed as the engine's lot atoms key them. */
+const LOTS = [
+  "fortune", "spirit", "eros", "necessity", "courage", "victory", "nemesis",
+] as const;
+const LOT_NAMES: Record<string, string> = {
+  fortune: "Fortune", spirit: "Spirit", eros: "Eros", necessity: "Necessity",
+  courage: "Courage", victory: "Victory", nemesis: "Nemesis",
+};
+
+/** The bodies of the declination grid: the ten planets plus Chiron (the
+ *  engine computes parallels for every aspectable body; nodes and Lilith
+ *  sit out, as they do for aspects). 55 unordered pairs. */
+const PARALLEL_BODIES = [...PLANETS, "chiron"] as const;
+
+/**
+ * The curated fixed-star list (build-plan B5 row): 60 stars named from
+ * `packages/caelus/data/fixed_stars.json`, chosen for weight in the
+ * delineation tradition (Ptolemy, Robson, Brady) -- the four royal stars,
+ * the named malefics and benefics, and the ecliptic-adjacent stars the
+ * literature actually delineates. Strings are catalog keys, verbatim,
+ * because the engine's star atoms carry them as such.
+ */
+export const B5_STARS = [
+  // The four royal stars.
+  "Aldebaran", "Regulus", "Antares", "Fomalhaut",
+  // The heavyweights of the tradition.
+  "Algol", "Alcyone", "Sirius", "Spica", "Arcturus", "Vega", "Capella",
+  "Rigel", "Betelgeuse", "Bellatrix", "Procyon", "Pollux", "Castor",
+  "Canopus", "Altair", "Scheat",
+  // The zodiacal walk, Aries to Pisces.
+  "Hamal", "Sheratan", "Menkar", "Alnilam", "Alhena", "Wasat",
+  "Acubens", "Asellus Borealis", "Asellus Australis", "Alphard",
+  "Zosma", "Denebola", "Vindemiatrix", "Algorab", "Zubenelgenubi",
+  "Zubeneschamali", "Unukalhai", "Alphecca", "Dschubba", "Shaula",
+  "Rasalhague", "Sabik", "Kaus Australis", "Nunki", "Deneb Algedi",
+  "Sadalsuud", "Sadalmelik", "Skat", "Markab", "Algenib",
+  // Off the ecliptic but delineated by name in the sources.
+  "Alpheratz", "Mirach", "Almach", "Achernar", "Acrux", "Polaris",
+  "Deneb", "Diphda", "Enif", "Mizar",
+] as const;
+
+/** Stars whose body conjunctions carry enough doctrine of their own for
+ *  body-specific essays, paired with the luminaries and the two personal
+ *  planets the sources delineate against them. */
+const STAR_CONTACT_STARS = [
+  "Aldebaran", "Regulus", "Antares", "Fomalhaut", "Algol", "Alcyone",
+  "Sirius", "Spica", "Arcturus", "Vega", "Capella", "Rigel",
+  "Betelgeuse", "Procyon", "Scheat",
+] as const;
+const STAR_CONTACT_BODIES = ["sun", "moon", "venus", "mars"] as const;
+
+/** The 27 nakshatras, as the engine's `NAKSHATRAS` names them
+ *  (`packages/caelus/src/vedic.ts`; not exported from the package root,
+ *  so restated here -- the mansion list is stable doctrine). */
+const NAKSHATRA_NAMES = [
+  "Ashwini", "Bharani", "Krittika", "Rohini", "Mrigashira", "Ardra",
+  "Punarvasu", "Pushya", "Ashlesha", "Magha", "Purva Phalguni",
+  "Uttara Phalguni", "Hasta", "Chitra", "Swati", "Vishakha", "Anuradha",
+  "Jyeshtha", "Mula", "Purva Ashadha", "Uttara Ashadha", "Shravana",
+  "Dhanishta", "Shatabhisha", "Purva Bhadrapada", "Uttara Bhadrapada",
+  "Revati",
+] as const;
+
+/** The bodies the projection emits nakshatra and varga atoms for (the
+ *  seven classical grahas; `interpretation.ts` nakBodies default). */
+const VARGA_BODIES = [
+  "sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn",
+] as const;
+
+/** The divisional charts the engine computes beyond the rasi itself
+ *  (`VARGA_DIVISIONS` minus D1), each with its conventional name. */
+const VARGA_FRAMES: Array<[number, string]> = [
+  [2, "hora"], [3, "drekkana"], [9, "navamsa"], [10, "dashamsha"],
+  [12, "dwadashamsha"], [30, "trimshamsha"],
+];
+
+/** The yogas the engine detects (`yogas.ts` plus Kemadruma), as its yoga
+ *  atoms name them. */
+const YOGA_NAMES = [
+  "Ruchaka", "Bhadra", "Hamsa", "Malavya", "Shasha", "Gajakesari",
+  "Budha-Aditya", "Chandra-Mangala", "Kemadruma",
+] as const;
+
+const slug = (s: string): string => s.toLowerCase().replace(/\s+/g, "-");
+
+/**
+ * The B5 content grid (build-plan "Unwritten inventory / B5"): lots in sign
+ * and house, final dispositors and mutual receptions, the curated fixed
+ * stars, declination parallels, and the Vedic layer -- the Moon's mansions
+ * and padas, the navamsa placements with per-varga framings, and the named
+ * yogas. Every bindable cell binds through selectors and atoms the engine
+ * already carries; the raja/dhana framing cells stay unbindable until the
+ * engine detects those yogas.
+ */
+export function b5Grid(): GridCell[] {
+  const cells: GridCell[] = [];
+
+  // Lots in sign and in house: 7 lots x (12 + 12).
+  for (const lot of LOTS) {
+    for (const sign of SIGNS) {
+      cells.push({
+        id: `natal:lot:${lot}:sign:${sign.toLowerCase()}`,
+        family: "lot-sign",
+        when: { kind: "lot", lot, sign },
+        atomIds: [`lot:${lot}`],
+        title: `Lot of ${LOT_NAMES[lot]} in ${sign}`,
+        bindable: true,
+      });
+    }
+    for (let house = 1; house <= 12; house++) {
+      cells.push({
+        id: `natal:lot:${lot}:house:${house}`,
+        family: "lot-house",
+        when: { kind: "lot", lot, house },
+        atomIds: [`lot:${lot}`],
+        title: `Lot of ${LOT_NAMES[lot]} in the ${ordinal(house)} house`,
+        bindable: true,
+      });
+    }
+  }
+
+  // Final dispositors: the ten planets, each in its own domicile anchoring
+  // the dispositor chain.
+  for (const body of PLANETS) {
+    cells.push({
+      id: `natal:dispositor:final:${body}`,
+      family: "dispositor",
+      when: { kind: "dispositor", body, final: true },
+      atomIds: [`dispositor:${body}`],
+      title: `${NAMES[body]} as final dispositor`,
+      bindable: true,
+    });
+  }
+
+  // Mutual receptions: one essay per dignity route, one per participating
+  // planet. The engine's reception atoms carry `by` as the sorted join of
+  // the two dignities.
+  const RECEPTION_ROUTES: Array<[string, string]> = [
+    ["domicile", "Mutual reception by domicile"],
+    ["exaltation", "Mutual reception by exaltation"],
+    ["domicile-exaltation", "Mixed reception, domicile with exaltation"],
+  ];
+  for (const [by, title] of RECEPTION_ROUTES) {
+    cells.push({
+      id: `natal:reception:${by}`,
+      family: "reception",
+      when: { kind: "reception", by },
+      atomIds: ["reception:"],
+      title,
+      bindable: true,
+    });
+  }
+  for (const body of PLANETS) {
+    cells.push({
+      id: `natal:reception:body:${body}`,
+      family: "reception",
+      when: { kind: "reception", body },
+      atomIds: ["reception:"],
+      title: `${NAMES[body]} in mutual reception`,
+      bindable: true,
+    });
+  }
+
+  // Fixed stars: the star essay (any natal body on it), then the
+  // body-specific contacts for the stars with doctrine of their own.
+  for (const star of B5_STARS) {
+    cells.push({
+      id: `natal:star:${slug(star)}`,
+      family: "star",
+      when: { kind: "star", star },
+      atomIds: ["star:"],
+      title: `A natal body on ${star}`,
+      bindable: true,
+    });
+  }
+  for (const star of STAR_CONTACT_STARS) {
+    for (const body of STAR_CONTACT_BODIES) {
+      cells.push({
+        id: `natal:star:${slug(star)}:${body}`,
+        family: "star-contact",
+        when: { kind: "star", star, body },
+        atomIds: [`star:${body}:${star}`],
+        title: `${NAMES[body]} on ${star}`,
+        bindable: true,
+      });
+    }
+  }
+
+  // Declination parallels: unordered pairs over planets + Chiron. The
+  // parallel side only; contraparallels are a later extension of the
+  // family, not a claim these essays may make.
+  for (let i = 0; i < PARALLEL_BODIES.length; i++) {
+    for (let j = i + 1; j < PARALLEL_BODIES.length; j++) {
+      const a = PARALLEL_BODIES[i];
+      const b = PARALLEL_BODIES[j];
+      const [x, y] = [a, b].sort();
+      cells.push({
+        id: `natal:parallel:${a}:${b}`,
+        family: "parallel",
+        when: { kind: "parallel", a, b, declination: "parallel" },
+        atomIds: [`parallel:${x}~${y}:parallel`],
+        title: `${NAMES[a]} parallel ${NAMES[b]}`,
+        bindable: true,
+      });
+    }
+  }
+
+  // Nakshatras: the Moon through the 27 mansions, then every pada. Other
+  // bodies' mansions are a later extension (build plan: Moon first).
+  for (const name of NAKSHATRA_NAMES) {
+    const atom = `nakshatra:moon:${name.replace(/\s+/g, "_")}`;
+    cells.push({
+      id: `vedic:moon:nakshatra:${slug(name)}`,
+      family: "nakshatra-moon",
+      when: { kind: "nakshatra", body: "moon", name },
+      atomIds: [atom],
+      title: `Moon in ${name}`,
+      bindable: true,
+    });
+    for (let pada = 1; pada <= 4; pada++) {
+      cells.push({
+        id: `vedic:moon:nakshatra:${slug(name)}:pada:${pada}`,
+        family: "nakshatra-pada",
+        when: { kind: "nakshatra", body: "moon", name, pada },
+        atomIds: [atom],
+        title: `Moon in ${name}, pada ${pada}`,
+        bindable: true,
+      });
+    }
+  }
+
+  // Vargas: the navamsa (D9) placements for the seven grahas the
+  // projection carries, plus one framing essay per computed division.
+  for (const body of VARGA_BODIES) {
+    for (const sign of SIGNS) {
+      cells.push({
+        id: `vedic:varga:d9:${body}:${sign.toLowerCase()}`,
+        family: "varga-d9",
+        when: { kind: "varga", division: 9, body, sign },
+        atomIds: [`varga:d9:${body}:${sign.toLowerCase()}`],
+        title: `${NAMES[body]} in ${sign} in the navamsa (D9)`,
+        bindable: true,
+      });
+    }
+  }
+  for (const [n, name] of VARGA_FRAMES) {
+    cells.push({
+      id: `vedic:varga:frame:d${n}`,
+      family: "varga-frame",
+      when: { kind: "varga", division: n },
+      atomIds: [`varga:d${n}:`],
+      title: `Reading the ${name} (D${n})`,
+      bindable: true,
+    });
+  }
+
+  // Yogas: the nine the engine detects, plus raja and dhana framings that
+  // stay visible-but-unbindable until the engine detects them.
+  for (const name of YOGA_NAMES) {
+    cells.push({
+      id: `vedic:yoga:${slug(name)}`,
+      family: "yoga",
+      when: { kind: "yoga", yoga: name },
+      atomIds: [`yoga:${name}`],
+      title: `${name} yoga`,
+      bindable: true,
+    });
+  }
+  for (const [name, title] of [
+    ["raja", "Raja yoga framings"], ["dhana", "Dhana yoga framings"],
+  ] as const) {
+    cells.push({
+      id: `vedic:yoga:${name}`,
+      family: "yoga",
+      when: { kind: "yoga", yoga: name },
+      atomIds: ["yoga:"],
+      title,
+      bindable: false,
+    });
+  }
+
+  return cells;
+}
+
 /** Every enumerated cell across the batches written so far. */
 export function fullGrid(): GridCell[] {
-  return [...b1Grid(), ...b2Grid(), ...b3Grid(), ...b4Grid()];
+  return [...b1Grid(), ...b2Grid(), ...b3Grid(), ...b4Grid(), ...b5Grid()];
 }
 
 /** Coverage of the grid by a set of written cell ids. */

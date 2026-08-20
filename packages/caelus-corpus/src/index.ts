@@ -14,7 +14,9 @@ export type {
 export { LENGTH_BANDS } from "./types.js";
 export { ruleFromPassage, compileCorpusSource } from "./compile.js";
 export { selectorFromSpec } from "./selectors.js";
-export { b1Grid, b2Grid, b3Grid, b4Grid, fullGrid, gridCoverage } from "./grid.js";
+export {
+  b1Grid, b2Grid, b3Grid, b4Grid, b5Grid, B5_STARS, fullGrid, gridCoverage,
+} from "./grid.js";
 export type { GridCell } from "./grid.js";
 // The last three are the lints the B3 waves added. They gated as
 // writer-facing reports until the repair waves took the backlogs to zero

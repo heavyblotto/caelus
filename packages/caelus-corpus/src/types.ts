@@ -42,7 +42,21 @@ export type CellFamily =
   | "synastry-overlay"
   | "composite-placement"
   | "composite-aspect"
-  | "composite-house";
+  | "composite-house"
+  // B5: lots, receptions and dispositors, fixed stars, parallels, and the
+  // Vedic layer -- nakshatras, vargas, yogas.
+  | "lot-sign"
+  | "lot-house"
+  | "dispositor"
+  | "reception"
+  | "star"
+  | "star-contact"
+  | "parallel"
+  | "nakshatra-moon"
+  | "nakshatra-pada"
+  | "varga-frame"
+  | "varga-d9"
+  | "yoga";
 
 /** Length bands per family, in words. Major cells are essays (the Hand
  *  standard); condition chips run proportionally shorter. */
@@ -78,6 +92,21 @@ export const LENGTH_BANDS: Record<CellFamily, { min: number; max: number }> = {
   "composite-placement": { min: 200, max: 500 },
   "composite-aspect": { min: 200, max: 500 },
   "composite-house": { min: 200, max: 500 },
+  // B5. Lot placements and star essays run a band below the majors;
+  // condition chips (receptions, dispositors, parallels, star contacts)
+  // shorter; the Moon's mansions essay-length, their padas as chips.
+  "lot-sign": { min: 200, max: 500 },
+  "lot-house": { min: 200, max: 500 },
+  dispositor: { min: 150, max: 400 },
+  reception: { min: 150, max: 400 },
+  star: { min: 200, max: 500 },
+  "star-contact": { min: 150, max: 400 },
+  parallel: { min: 150, max: 400 },
+  "nakshatra-moon": { min: 250, max: 600 },
+  "nakshatra-pada": { min: 120, max: 300 },
+  "varga-frame": { min: 150, max: 400 },
+  "varga-d9": { min: 200, max: 500 },
+  yoga: { min: 200, max: 500 },
 };
 
 export interface Passage {

@@ -177,6 +177,66 @@ function atomFor(p: Passage): FactAtom | null {
         body: w.body ?? "sun", sign: w.sign ?? "Aries", signDeg: 12,
         ...(w.house === undefined ? {} : { house: w.house }),
       } as unknown as FactAtom;
+    case "lot":
+      return {
+        id: `lot:${w.lot ?? "fortune"}`, kind: "lot", bodies: [], salience: 2,
+        text: "synthetic", lot: w.lot ?? "fortune",
+        sign: w.sign ?? "Aries", signDeg: 10, house: w.house ?? 5,
+      } as unknown as FactAtom;
+    case "dispositor":
+      return {
+        id: `dispositor:${w.body ?? "mars"}`, kind: "dispositor",
+        bodies: [w.body ?? "mars"], salience: 2, text: "synthetic",
+        body: w.body ?? "mars",
+        dispositor: w.final ? (w.body ?? "mars") : "venus",
+        final: w.final ?? false,
+      } as unknown as FactAtom;
+    case "reception": {
+      const a = w.body ?? "mars";
+      const b = a === "venus" ? "mars" : "venus";
+      return {
+        id: `reception:${a}~${b}`, kind: "reception", bodies: [a, b],
+        salience: 2, text: "synthetic", by: w.by ?? "domicile",
+      } as unknown as FactAtom;
+    }
+    case "star":
+      return {
+        id: `star:${w.body ?? "sun"}:${w.star ?? "Regulus"}`, kind: "star",
+        bodies: [w.body ?? "sun"], salience: 2, text: "synthetic",
+        body: w.body ?? "sun", star: w.star ?? "Regulus", orb: 0.5,
+      } as unknown as FactAtom;
+    case "parallel": {
+      const [x, y] = [w.a ?? "sun", w.b ?? "moon"].sort();
+      return {
+        id: `parallel:${x}~${y}:${w.declination ?? "parallel"}`,
+        kind: "parallel", bodies: [w.a ?? "sun", w.b ?? "moon"], salience: 2,
+        text: "synthetic", a: w.a ?? "sun", b: w.b ?? "moon",
+        declination: w.declination ?? "parallel", orb: 0.4,
+      } as unknown as FactAtom;
+    }
+    case "nakshatra": {
+      const name = w.name ?? "Ashwini";
+      return {
+        id: `nakshatra:${w.body ?? "moon"}:${name.replace(/\s+/g, "_")}`,
+        kind: "nakshatra", bodies: [w.body ?? "moon"], salience: 2,
+        text: "synthetic", body: w.body ?? "moon", name,
+        pada: w.pada ?? 1, lord: w.lord ?? "ketu",
+      } as unknown as FactAtom;
+    }
+    case "varga":
+      return {
+        id: `varga:d${w.division ?? 9}:${w.body ?? "moon"}:`
+          + (w.sign ?? "Aries").toLowerCase(),
+        kind: "varga", bodies: [w.body ?? "moon"], salience: 2,
+        text: "synthetic", division: w.division ?? 9,
+        body: w.body ?? "moon", sign: w.sign ?? "Aries",
+      } as unknown as FactAtom;
+    case "yoga":
+      return {
+        id: `yoga:${(w.yoga ?? "Ruchaka").replace(/\s+/g, "_")}`, kind: "yoga",
+        bodies: w.body ? [w.body] : ["mars"], salience: 2, text: "synthetic",
+        yoga: w.yoga ?? "Ruchaka",
+      } as unknown as FactAtom;
     default:
       return null;
   }
@@ -258,6 +318,47 @@ function shiftedAtom(p: Passage): FactAtom | null {
     } else {
       clone.house = (w.house % 12) + 1;
     }
+  } else if (w.kind === "lot") {
+    if (w.sign !== undefined) clone.sign = w.sign === "Aries" ? "Taurus" : "Aries";
+    else if (w.house !== undefined) clone.house = (w.house % 12) + 1;
+    else return null;
+  } else if (w.kind === "dispositor") {
+    if (w.final !== undefined) {
+      clone.final = !w.final;
+      clone.dispositor = w.final ? "venus" : (w.body ?? "mars");
+    } else return null;
+  } else if (w.kind === "reception") {
+    if (w.by !== undefined) {
+      clone.by = w.by === "domicile" ? "exaltation" : "domicile";
+    } else if (w.body !== undefined) {
+      const others = ["saturn", "jupiter"].filter((b) => b !== w.body);
+      clone.bodies = others.length === 2 ? others : ["mercury", others[0]];
+      clone.id = `reception:${(clone.bodies as string[]).join("~")}`;
+    } else return null;
+  } else if (w.kind === "star") {
+    clone.star = w.star === "Regulus" ? "Spica" : "Regulus";
+    clone.id = `star:${w.body ?? "sun"}:${clone.star}`;
+  } else if (w.kind === "parallel") {
+    const [x, y] = [w.a ?? "sun", w.b ?? "moon"].sort();
+    clone.declination = w.declination === "parallel" ? "contraparallel" : "parallel";
+    clone.id = `parallel:${x}~${y}:${clone.declination}`;
+  } else if (w.kind === "nakshatra") {
+    if (w.pada !== undefined) {
+      clone.pada = (w.pada % 4) + 1;
+    } else if (w.name !== undefined) {
+      clone.name = w.name === "Ashwini" ? "Bharani" : "Ashwini";
+      clone.id = `nakshatra:${w.body ?? "moon"}:${(clone.name as string).replace(/\s+/g, "_")}`;
+    } else return null;
+  } else if (w.kind === "varga") {
+    if (w.sign !== undefined) {
+      clone.sign = w.sign === "Aries" ? "Taurus" : "Aries";
+    } else if (w.division !== undefined) {
+      clone.division = w.division === 10 ? 12 : 10;
+      clone.id = `varga:d${clone.division}:${w.body ?? "moon"}:aries`;
+    } else return null;
+  } else if (w.kind === "yoga") {
+    clone.yoga = w.yoga === "Ruchaka" ? "Hamsa" : "Ruchaka";
+    clone.id = `yoga:${(clone.yoga as string).replace(/\s+/g, "_")}`;
   }
   return clone as unknown as FactAtom;
 }

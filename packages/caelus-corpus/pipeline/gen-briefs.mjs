@@ -243,6 +243,73 @@ brief("returns", "b4-returns.json", "corpus-b4-returns", byFamily.get("planetary
 brief("solar-phases", "b4-solar-phases.json", "corpus-b4-solar-phases",
   byFamily.get("solar-phase"));
 
+// B5 lots: one slice per lot per placement mode (12 cells each).
+for (const fam of ["lot-sign", "lot-house"]) {
+  const mode = fam === "lot-sign" ? "signs" : "houses";
+  const cells = byFamily.get(fam) ?? [];
+  for (const lot of [...new Set(cells.map((c) => c.when.lot))]) {
+    brief(`lot-${lot}-${mode}`, `b5-lot-${lot}-${mode}.json`,
+      `corpus-b5-lot-${lot}-${mode}`,
+      cells.filter((c) => c.when.lot === lot));
+  }
+}
+
+// B5 dispositors and receptions: one slice each.
+brief("dispositors", "b5-dispositors.json", "corpus-b5-dispositors",
+  byFamily.get("dispositor"));
+brief("receptions", "b5-receptions.json", "corpus-b5-receptions",
+  byFamily.get("reception"));
+
+// B5 stars: the star essays in chunks of 15; the body contacts per body.
+const starCells = byFamily.get("star") ?? [];
+for (let i = 0; i < starCells.length; i += 15) {
+  const n = String(i / 15 + 1).padStart(2, "0");
+  brief(`stars-${n}`, `b5-stars-${n}.json`, `corpus-b5-stars-${n}`,
+    starCells.slice(i, i + 15));
+}
+const starContacts = byFamily.get("star-contact") ?? [];
+for (const body of [...new Set(starContacts.map((c) => c.when.body))]) {
+  brief(`star-contacts-${body}`, `b5-star-contacts-${body}.json`,
+    `corpus-b5-star-contacts-${body}`,
+    starContacts.filter((c) => c.when.body === body));
+}
+
+// B5 parallels: chunks of 14.
+const par = byFamily.get("parallel") ?? [];
+for (let i = 0; i < par.length; i += 14) {
+  const n = String(i / 14 + 1).padStart(2, "0");
+  brief(`parallels-${n}`, `b5-parallels-${n}.json`, `corpus-b5-parallels-${n}`,
+    par.slice(i, i + 14));
+}
+
+// B5 nakshatras: the Moon's mansions in two slices; the padas in chunks
+// of 16 (four mansions per slice).
+const nakMoon = byFamily.get("nakshatra-moon") ?? [];
+for (let i = 0; i < nakMoon.length; i += 14) {
+  const n = String(i / 14 + 1).padStart(2, "0");
+  brief(`nakshatras-moon-${n}`, `b5-nakshatras-moon-${n}.json`,
+    `corpus-b5-nakshatras-moon-${n}`, nakMoon.slice(i, i + 14));
+}
+const nakPada = byFamily.get("nakshatra-pada") ?? [];
+for (let i = 0; i < nakPada.length; i += 16) {
+  const n = String(i / 16 + 1).padStart(2, "0");
+  brief(`nakshatra-padas-${n}`, `b5-nakshatra-padas-${n}.json`,
+    `corpus-b5-nakshatra-padas-${n}`, nakPada.slice(i, i + 16));
+}
+
+// B5 vargas: D9 placements per body; the framings in one slice.
+const d9 = byFamily.get("varga-d9") ?? [];
+for (const body of [...new Set(d9.map((c) => c.when.body))]) {
+  brief(`varga-d9-${body}`, `b5-varga-d9-${body}.json`,
+    `corpus-b5-varga-d9-${body}`,
+    d9.filter((c) => c.when.body === body));
+}
+brief("varga-frames", "b5-varga-frames.json", "corpus-b5-varga-frames",
+  byFamily.get("varga-frame"));
+
+// B5 yogas: one slice (the unbindable raja/dhana cells filter out above).
+brief("yogas", "b5-yogas.json", "corpus-b5-yogas", byFamily.get("yoga"));
+
 for (const b of briefs) {
   writeFileSync(`${OUT}${b.name}.json`, JSON.stringify(b, null, 1));
 }
