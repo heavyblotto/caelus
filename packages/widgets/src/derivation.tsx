@@ -45,6 +45,7 @@ import {
   ChartWheel, PLATE_THEME, PLATE_TOKENS, type WheelChart,
 } from "caelus-wheel";
 import type { ConsoleStation } from "./console.js";
+import { dm, fmtZodiac } from "./format.js";
 import { wheelPayload } from "./payload.js";
 import type { DerivationParams } from "./spec.js";
 
@@ -147,27 +148,15 @@ export const STATION_CAPTIONS: Record<string, string> = {
 
 // ----------------------------------------------------------------- datum
 
-const SIGNS = ["♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏", "♐", "♑", "♒", "♓"];
-
-const dm = (deg: number): [number, string] => {
-  const a = Math.abs(deg);
-  let d = Math.floor(a);
-  let m = Math.round((a - d) * 60);
-  if (m === 60) { d += 1; m = 0; }
-  return [d, String(m).padStart(2, "0")];
-};
-
 /** The follow datum line, exactly the console's register:
  *  `alt +34° 12′ · az 158° · λ 19°27′ ♊ · β +1°02′`. */
 export function derivationDatum(b: SceneBody): string {
   const [ad, am] = dm(b.altDeg);
   const altSign = b.altDeg < 0 ? "−" : "+";
-  const lon = ((b.lon % 360) + 360) % 360;
-  const [ld, lm] = dm(lon % 30);
   const [bd, bm] = dm(b.lat);
   const betaSign = b.lat < 0 ? "−" : "+";
   return `alt ${altSign}${ad}° ${am}′ · az ${Math.round(b.azDeg)}° · `
-    + `λ ${ld}°${lm}′ ${SIGNS[Math.floor(lon / 30)]} · β ${betaSign}${bd}°${bm}′`;
+    + `λ ${fmtZodiac(b.lon)} · β ${betaSign}${bd}°${bm}′`;
 }
 
 /** A civil instant shifted by whole minutes, in UT calendar arithmetic.

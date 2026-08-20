@@ -8,7 +8,7 @@
   "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "node dist/test/plate.test.js && node dist/test/derivation.test.js && node dist/test/wheel-anatomy.test.js && node dist/test/harness.test.js"
+    "test": "node dist/test/plate.test.js && node dist/test/derivation.test.js && node dist/test/wheel-anatomy.test.js && node dist/test/house-comparator.test.js && node dist/test/harness.test.js"
   },
   "license": "MIT",
   "peerDependencies": {
@@ -58,6 +58,14 @@
     "./wheel-anatomy-widget": {
       "types": "./dist/src/wheel-anatomy-widget.d.ts",
       "default": "./dist/src/wheel-anatomy-widget.js"
+    },
+    "./house-comparator": {
+      "types": "./dist/src/house-comparator.d.ts",
+      "default": "./dist/src/house-comparator.js"
+    },
+    "./house-comparator-widget": {
+      "types": "./dist/src/house-comparator-widget.d.ts",
+      "default": "./dist/src/house-comparator-widget.js"
     },
     "./package.json": "./package.json"
   }
