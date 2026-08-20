@@ -154,9 +154,7 @@ traditions and times.
 Three grades of "deterministic," kept distinct. Rule-deterministic:
 counting, matching, pattern extraction. Pinned-model reproducible:
 lemmas, part-of-speech, embeddings (same inputs and versions give the
-same outputs). Seeded-stochastic: topic models and projection plots,
-which stay out of the core layer and are labeled exploratory when
-they appear at all.
+same outputs). Seeded-stochastic: topic models and projection plots.
 
 **Annotation substrate.** Tokens, lemmas, part-of-speech, and
 sentence boundaries (spaCy, versions pinned) stored as standoff
@@ -188,11 +186,10 @@ profiles.
 
 **Relation and table mining.** The domain's claims are formulaic
 enough for pattern-based extraction ("X rules Y", "exalted in", "the
-lord of"): candidate KB edges with page-cited attestations go to a
-review queue, never straight into curated files. Author disagreement
-surfaces as data, which is the variant-table shape the KB already
-wants. Extracted correspondence tables align to the Liber 777 import
-schema and diff across authors.
+lord of"): candidate KB edges with page-cited attestations, queued
+for curation. Author disagreement surfaces as data, which is the
+variant-table shape the KB already wants. Extracted correspondence
+tables align to the Liber 777 import schema and diff across authors.
 
 **Storage and rights.** Annotations and occurrence tables over
 in-copyright text are derivatives and live in the private store
@@ -208,17 +205,13 @@ annotator version, the same pattern as the KB's engine-drift test.
 Occurrence rows carry the source book's QA grade so downstream work
 can filter by OCR quality.
 
-**Sequencing.** The layer gates on OCR output for the library, but
-the substrate and concept-occurrence tiers can be built and proven
-now against the collections already in the repo (3,656 corpus essays
-and the Encyclopedia as it lands): same code, no rights questions,
-and concept coverage of the corpus against the KB is a useful audit
-on its own. First researcher surfaces are the occurrence dataset
-itself (documented schema plus provenance), a query CLI, and an MCP
-concordance tool (concept id to attestations with page cites), which
-also upgrades Encyclopedia evidence packs from pure cosine top-k to
-hybrid concept-filtered retrieval. Dashboards belong to the visual
-design stream, later.
+**Researcher surfaces.** The occurrence dataset itself (documented
+schema plus provenance), a query CLI, and an MCP concordance tool
+(concept id to attestations with page cites). Concept-filtered
+retrieval combines with the cosine top-k for hybrid Encyclopedia
+evidence packs. The same code runs unchanged over the corpus essays
+and the Encyclopedia articles, where concept coverage against the KB
+doubles as an audit.
 
 ## Consumers
 
