@@ -6,6 +6,7 @@ import { passageSets as b1Sets } from "./passages-b1.js";
 import { passageSets as b2Sets } from "./passages-b2.js";
 import { passageSets as b3Sets } from "./passages-b3.js";
 import { passageSets as b4Sets } from "./passages-b4.js";
+import { passageSets as b5Sets } from "./passages-b5.js";
 import type { Passage, PassageSet } from "./types.js";
 
 export const passageSets: PassageSet[] = [
@@ -13,6 +14,7 @@ export const passageSets: PassageSet[] = [
   ...b2Sets,
   ...b3Sets,
   ...b4Sets,
+  ...b5Sets,
 ];
 
 /** Every written passage across the sets. */
