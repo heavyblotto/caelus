@@ -20,23 +20,25 @@
 import type { ReactElement } from "react";
 import {
   PlateFrame,
-  type ChartParams, type DerivationParams, type WheelAnatomyParams,
-  type WidgetSpec,
+  type ChartParams, type DerivationParams, type HouseComparatorParams,
+  type WheelAnatomyParams, type WidgetSpec,
 } from "caelus-widgets";
 import { deriveScene } from "caelus-widgets/derivation";
 import { deriveAnatomy } from "caelus-widgets/wheel-anatomy";
+import { deriveComparator } from "caelus-widgets/house-comparator";
 import { sampleEngine } from "../../lib/sample-chart";
 import { b64urlEncode, type Share } from "../../lib/share";
 import DerivationPlate from "./DerivationPlate";
 import WheelAnatomyPlate from "./WheelAnatomyPlate";
+import HouseComparatorPlate from "./HouseComparatorPlate";
 
 export interface WProps {
   kind: WidgetSpec["kind"];
   params: WidgetSpec["params"];
   figure: number;
   caption: string;
-  /** KB node the plate illustrates ("kb:angle/ascendant"). Read by the
-   *  registry scan; not rendered. */
+  /** caelus-kb node the plate illustrates ("chart-type:natal"). Read
+   *  (and asserted to exist) by the registry scan; not rendered. */
   kb?: string;
   /** Explicit plate id for the registry scan; defaults there to
    *  `<entry>-fig-<n>`. Not rendered. */
@@ -91,6 +93,21 @@ export default function W({
           reproduceHref={reproduceHref(params)}
         >
           <WheelAnatomyPlate scene={scene} />
+        </PlateFrame>
+      );
+    }
+    case "house-comparator": {
+      const scene = deriveComparator(
+        sampleEngine, params as HouseComparatorParams,
+      );
+      return (
+        <PlateFrame
+          figure={figure}
+          caption={caption}
+          engineVersion={scene.engineVersion}
+          reproduceHref={reproduceHref(params)}
+        >
+          <HouseComparatorPlate scene={scene} />
         </PlateFrame>
       );
     }

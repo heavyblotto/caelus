@@ -28,8 +28,9 @@ export interface PlateRecord {
   /** Apparatus caption text. */
   caption: string;
   location: PlateLocation;
-  /** KB node the plate illustrates ("kb:angle/ascendant"), when one
-   *  exists, so search and the infobox link in both directions. */
+  /** caelus-kb node the plate illustrates ("chart-type:natal"), when
+   *  one exists, so search and the infobox link in both directions.
+   *  The registry scan asserts the id names a real node. */
   kb?: string;
   /** Engine version stamped at build. The figure harness asserts this
    *  equals the version that computed the render hash. */

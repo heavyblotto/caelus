@@ -21,8 +21,10 @@ import { createRequire } from "node:module";
 import { renderToStaticMarkup } from "react-dom/server";
 import { Engine, VERSION } from "caelus";
 import { loadNodeData } from "caelus/node";
+import { HOUSE_SYSTEMS } from "caelus";
 import { deriveScene, DerivationFigure, DERIVATION_STATIONS } from "../src/derivation.js";
 import { deriveAnatomy, WheelAnatomyFigure } from "../src/wheel-anatomy.js";
+import { deriveComparator, HouseComparatorFigure } from "../src/house-comparator.js";
 import { ANATOMY_LAYERS } from "../src/spec.js";
 import type { PlateRegistry, PlateRecord } from "../src/registry.js";
 
@@ -86,6 +88,22 @@ function renderPlate(rec: PlateRecord): Record<string, string> {
         out[`${rec.id}@${ANATOMY_LAYERS[k - 1]}`] = sha(renderToStaticMarkup(
           <WheelAnatomyFigure scene={scene}
             layers={ANATOMY_LAYERS.slice(0, k)} />,
+        ));
+      }
+      return out;
+    }
+    case "house-comparator": {
+      // Comparators hash at rest and then once per house system —
+      // the twelve are this widget's stations.
+      const scene = deriveComparator(eng, spec.params);
+      const out: Record<string, string> = {
+        [rec.id]: sha(renderToStaticMarkup(
+          <HouseComparatorFigure scene={scene} />,
+        )),
+      };
+      for (const sys of HOUSE_SYSTEMS) {
+        out[`${rec.id}@${sys}`] = sha(renderToStaticMarkup(
+          <HouseComparatorFigure scene={scene} system={sys} />,
         ));
       }
       return out;

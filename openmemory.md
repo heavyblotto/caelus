@@ -139,6 +139,19 @@ normative language into project docs.
   `horizon · zodiac · houses · bodies · aspects` map onto the
   `ChartWheel` `layers` prop (caelus-wheel, all default on; `axes` =
   the four angles), all-on renders `ChartWheel` byte-identically.
+  House-comparator widget (`/house-comparator`, `/-widget`): one birth
+  through the twelve `HOUSE_SYSTEMS`; scene carries cusps + per-body
+  house per system with the engine's polar fallback surfaced
+  (`fellBack`, from `houseSystem !== houseSystemRequested`); figure =
+  wheel with swapped cusps (bodies/angles fixed); `CuspTable` marks
+  placements that change house; picker is the design's mono list with
+  the current item in oxblood; latitude walk via `getEngine`. Harness
+  hashes rest + one key per system. Shared console formatting in
+  `src/format.ts` (`fmtZodiac`, `dm`). Registry `kb` values are real
+  caelus-kb node ids (e.g. `chart-type:natal`, `house-system:whole-sign`
+  — KB uses hyphens) and the scan asserts existence against
+  `packages/kb/data/kb.json`; asc/mc have no KB node, so the ascendant
+  plate carries none.
   Figure harness (`test/harness.test.tsx`) hashes every registry plate
   at rest + all five stations (derivation) or the cumulative layer
   build (wheel-anatomy) against `test/figure-hashes.json` and asserts
