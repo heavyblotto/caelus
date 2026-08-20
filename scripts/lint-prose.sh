@@ -27,7 +27,7 @@ vale .web-prose-extract.md || FAIL=1
 
 echo ""
 echo "→ Vale on package READMEs + agent docs"
-vale packages/caelus/README.md packages/birth/README.md packages/wheel/README.md packages/caelus-mcp/README.md docs/agents.md || FAIL=1
+vale packages/caelus/README.md packages/birth/README.md packages/wheel/README.md packages/caelus-mcp/README.md packages/memorativa/README.md docs/agents.md || FAIL=1
 
 echo ""
 echo "→ Vale on repo design docs"

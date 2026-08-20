@@ -140,11 +140,27 @@ for (const [name, path] of forwardPinned) {
   forwardSummaries.push(`${name} at ${pkg.version} (peer ${range}${note})`);
 }
 
+// memorativa versions independently in the open 0.25.0 draft and joins the
+// canonical group when the maintainer cuts 0.25.0. Until then the check is
+// internal: package.json must equal src/version.ts, so figure stamps never
+// drift from the published version. It has no caelus dependency to pin.
+const memPkg = JSON.parse(read("packages/memorativa/package.json"));
+const memVersionTs = read("packages/memorativa/src/version.ts");
+const memMatch = memVersionTs.match(/export const VERSION = "([^"]+)"/);
+if (!memMatch) {
+  depErrors.push("could not find VERSION in packages/memorativa/src/version.ts");
+} else if (memMatch[1] !== memPkg.version) {
+  depErrors.push(
+    `memorativa src/version.ts is "${memMatch[1]}", package.json is "${memPkg.version}"`,
+  );
+}
+const memorativaSummary = `memorativa at ${memPkg.version} (independent, open draft)`;
+
 if (mismatches.length === 0 && depErrors.length === 0) {
   console.log(
     `versions check passed — all artifacts at ${canonical}; ` +
       `caelus-delineations-pd at ${pdPkg.version} (peer ${pdRange}); ` +
-      forwardSummaries.join("; "),
+      `${forwardSummaries.join("; ")}; ${memorativaSummary}`,
   );
   process.exit(0);
 }

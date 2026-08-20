@@ -18,6 +18,7 @@ const PACKAGES = [
   "packages/caelus-corpus",
   "packages/kb",
   "packages/widgets",
+  "packages/memorativa",
 ];
 
 const missing = [];

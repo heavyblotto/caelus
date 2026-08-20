@@ -120,6 +120,26 @@ Recorded in the build plan intro and streams G, H, J.
 
 ## Components
 
+- `memorativa` (`packages/memorativa`, public peer of `caelus`, 0.25.0 in
+  the open draft): the arithmology engine, pure functions. Theosophical
+  arithmetic (`theosophicalReduce`, `theosophicalReduceSteps`,
+  `theosophicalAdd`, `neutralize` for binaries/ternaries/quaternaries);
+  the seven kameas (`KAMEAS`, `kamea`, `magicConstant`, `kameaTotal`,
+  `cellOf`, `sigilTrace` with theosophic reduction into the square's
+  range); gematria (`LETTER_SYSTEMS`: `hebrew` with finals at base value,
+  the convention of Agrippa's ch. XXII name tables, `hebrew-finals` at
+  500–900, `greek-isopsephy`, `greek-ordinal`, `latin-agrippa`;
+  `gematria`, `letterValue`, `notarikon`, `atbash`, `albam`); the
+  lambdoma (`ratio`, `lambdoma`). Committed goldens pin Agrippa Book II
+  (J.F. 1651): the seven grids, the printed constants and totals, and the
+  ch. XXII divine-name table as gematria anchors; the discrepant printed
+  rows (Barzabel 325/326, Kedemel 157/175, Hasmodai 369/366, Asboga 8/24)
+  are asserted at computed values with the printed figures in commentary.
+  `src/version.ts` sits under `check-versions.mjs` as an independent row
+  ("independent, open draft") until the maintainer cuts 0.25.0. Note: the
+  repo's Agrippa text (`caelus-delineations-pd` sources) contains Book I
+  only despite the manifest's "Book I–III" title; the kamea grids were
+  verified against the 1651 J.F. printing at esotericarchives.com.
 - `degree` fact kind (engine, unreleased 0.25.0): one atom per placed body
   (mean node sits out when true node present) plus ASC and MC. Ordinal
   degree 1–30 (14°30′ Aries = 15th degree), face index 1–3 on the same

@@ -97,6 +97,13 @@ jobs:
       - run: npm run test -w caelus-corpus
       - run: npm run build -w caelus-kb
       - run: npm run test -w caelus-kb
+      # memorativa: theosophical arithmetic, kameas, gematria, lambdoma; the
+      # goldens pin the public-domain printed tables (Agrippa 1651, Book II)
+      - run: npm run build -w memorativa
+      - run: node packages/memorativa/dist/test/theosophy.test.js
+      - run: node packages/memorativa/dist/test/kamea-golden.test.js
+      - run: node packages/memorativa/dist/test/gematria-golden.test.js
+      - run: node packages/memorativa/dist/test/lambdoma.test.js
       - run: npm run build -w caelus-mcp
       - run: npm run facts:sync
       - run: node packages/caelus-mcp/smoke.mjs

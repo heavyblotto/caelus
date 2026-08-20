@@ -1,0 +1,50 @@
+{
+  "name": "memorativa",
+  "version": "0.25.0",
+  "description": "Arithmology computation in TypeScript: theosophical arithmetic, neutralization operators, the seven planetary kameas with sigil tracing, gematria with notarikon and temurah, and lambdoma ratio tables. Pure functions, golden-tested against the printed tables. MIT.",
+  "type": "module",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "dist/src"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "node scripts/run-tests.mjs"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "typescript": "^6.0.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/src/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heavyblotto/caelus.git",
+    "directory": "packages/memorativa"
+  },
+  "homepage": "https://ephemengine.com",
+  "keywords": [
+    "arithmology",
+    "gematria",
+    "kamea",
+    "magic-square",
+    "theosophical-arithmetic",
+    "notarikon",
+    "temurah",
+    "lambdoma",
+    "pythagorean",
+    "agrippa"
+  ],
+  "sideEffects": false
+}
