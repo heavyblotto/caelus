@@ -50,7 +50,15 @@ normative language into project docs.
 
 The private-library ingestion design (maintainer-scanned books → local
 OCR → QA harness → KB/corpus/Encyclopedia consumers) lives at
-`docs/product/library-ingestion-plan.md` (2026-08-20).
+`docs/product/library-ingestion-plan.md` (2026-08-20). Its "Text
+mining" section (added 2026-08-20 at the maintainer's request) adds a
+deterministic decomposition layer over the library, Encyclopedia, and
+corpus: standoff annotations, a KB-gazetteer concept-occurrence table
+(concept × document × page × count), corpus-linguistics statistics
+with era/tradition columns in `library.csv`, and pattern-mined
+relation/table attestations into review queues. Derivatives of
+in-copyright text stay in the private store; committed artifacts are
+aggregate features and reports.
 
 The visual system has its own stream and dedicated agent as of
 2026-08-20: `docs/product/visual-design-system-plan.md` extracts the

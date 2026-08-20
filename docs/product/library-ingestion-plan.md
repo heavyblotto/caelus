@@ -141,6 +141,85 @@ sentence-transformers on MPS) and store as Parquet in the private
 store. Search is exact cosine over the library, the same pattern as the
 essay vectors; there is no vector database.
 
+## Text mining
+
+A deterministic decomposition layer over the three text collections:
+the library, the Encyclopedia articles, and the corpus essays. One
+annotation pipeline; the library is the diachronic corpus under
+study, and the other two ride through it. Output is data for
+researchers, with no use cases fixed in advance; the KB's concept ids
+are the coordinate system that makes results comparable across
+traditions and times.
+
+Three grades of "deterministic," kept distinct. Rule-deterministic:
+counting, matching, pattern extraction. Pinned-model reproducible:
+lemmas, part-of-speech, embeddings (same inputs and versions give the
+same outputs). Seeded-stochastic: topic models and projection plots,
+which stay out of the core layer and are labeled exploratory when
+they appear at all.
+
+**Annotation substrate.** Tokens, lemmas, part-of-speech, and
+sentence boundaries (spaCy, versions pinned) stored as standoff
+Parquet beside the OCR, never mutating source text. Every file
+carries annotator and version, the same provenance discipline as the
+figure harness. Regions the QA harness flagged as Greek, Hebrew, or
+Latin are skipped by the English pipeline; CLTK is the escalation
+path if a book proves classical-dense.
+
+**Concept occurrence.** A gazetteer built from the KB: per-node alias
+tables covering English, Latin, Greek, and Sanskrit variants,
+historical spellings, and the glyph codepoints the escalation pass
+emits. Deterministic matching plus disambiguation rules (Mercury the
+planet, the metal, the god; the ambiguity is itself a research
+object) produce the layer's keystone artifact: concept id x document
+x page x count. Unresolvable senses land in a review queue. The table
+feeds KB attestations with page numbers, Encyclopedia infobox facts,
+and two coverage reports: KB nodes with no library support (thin
+articles) and library passages matching no node (missing-node
+detector, which is how the hermetic subtrees find their vocabulary).
+
+**Statistics.** Frequencies, keyness by log-likelihood against a
+reference shelf or era, collocations, co-occurrence matrices, and
+KWIC concordances, all rule-deterministic. `library.csv` gains era
+and tradition columns so the surveys come out diachronic: concept
+frequency over time, collocate drift between centuries,
+correspondence-analysis maps placing traditions by their concept
+profiles.
+
+**Relation and table mining.** The domain's claims are formulaic
+enough for pattern-based extraction ("X rules Y", "exalted in", "the
+lord of"): candidate KB edges with page-cited attestations go to a
+review queue, never straight into curated files. Author disagreement
+surfaces as data, which is the variant-table shape the KB already
+wants. Extracted correspondence tables align to the Liber 777 import
+schema and diff across authors.
+
+**Storage and rights.** Annotations and occurrence tables over
+in-copyright text are derivatives and live in the private store
+(`library/annotations/`, `library/concepts/`). Committed artifacts
+are aggregate features and small reports, the HathiTrust
+extracted-features pattern: counts are facts, concordance lines are
+expression. KWIC from public-domain twins can ship; KWIC from scans
+stays private.
+
+**Verification.** The Heindel twin doubles as the annotation golden:
+hand-checked concept occurrences on sampled pages, drift-tested per
+annotator version, the same pattern as the KB's engine-drift test.
+Occurrence rows carry the source book's QA grade so downstream work
+can filter by OCR quality.
+
+**Sequencing.** The layer gates on OCR output for the library, but
+the substrate and concept-occurrence tiers can be built and proven
+now against the collections already in the repo (3,656 corpus essays
+and the Encyclopedia as it lands): same code, no rights questions,
+and concept coverage of the corpus against the KB is a useful audit
+on its own. First researcher surfaces are the occurrence dataset
+itself (documented schema plus provenance), a query CLI, and an MCP
+concordance tool (concept id to attestations with page cites), which
+also upgrades Encyclopedia evidence packs from pure cosine top-k to
+hybrid concept-filtered retrieval. Dashboards belong to the visual
+design stream, later.
+
 ## Consumers
 
 **KB.** Each title becomes a `source:` node. Curated files gain
