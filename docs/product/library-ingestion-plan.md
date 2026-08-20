@@ -199,12 +199,6 @@ extracted-features pattern: counts are facts, concordance lines are
 expression. KWIC from public-domain twins can ship; KWIC from scans
 stays private.
 
-**Verification.** The Heindel twin doubles as the annotation golden:
-hand-checked concept occurrences on sampled pages, drift-tested per
-annotator version, the same pattern as the KB's engine-drift test.
-Occurrence rows carry the source book's QA grade so downstream work
-can filter by OCR quality.
-
 **Researcher surfaces.** The occurrence dataset itself (documented
 schema plus provenance), a query CLI, and an MCP concordance tool
 (concept id to attestations with page cites). Concept-filtered
