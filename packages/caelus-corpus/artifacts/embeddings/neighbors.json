@@ -403,8 +403,8 @@
    0.81
   ],
   [
-   "composite:aspect:moon:opposition:jupiter",
-   0.809
+   "composite:aspect:moon:opposition:chiron",
+   0.808
   ]
  ],
  "composite:aspect:jupiter:opposition:neptune": [
@@ -569,12 +569,12 @@
    0.847
   ],
   [
-   "composite:aspect:moon:opposition:jupiter",
-   0.846
-  ],
-  [
    "composite:aspect:jupiter:opposition:saturn",
    0.841
+  ],
+  [
+   "composite:aspect:mars:opposition:neptune",
+   0.839
   ]
  ],
  "composite:aspect:jupiter:sextile:chiron": [
@@ -637,12 +637,12 @@
    0.802
   ],
   [
-   "synastry:venus:sextile:neptune",
-   0.8
-  ],
-  [
    "composite:aspect:jupiter:opposition:pluto",
    0.799
+  ],
+  [
+   "composite:aspect:moon:sextile:neptune",
+   0.798
   ]
  ],
  "composite:aspect:jupiter:sextile:pluto": [
@@ -1463,10 +1463,6 @@
  ],
  "composite:aspect:mars:opposition:jupiter": [
   [
-   "composite:aspect:moon:opposition:jupiter",
-   0.872
-  ],
-  [
    "composite:aspect:sun:opposition:mars",
    0.871
   ],
@@ -1493,6 +1489,10 @@
   [
    "composite:aspect:moon:opposition:venus",
    0.838
+  ],
+  [
+   "composite:aspect:sun:opposition:saturn",
+   0.836
   ]
  ],
  "composite:aspect:mars:opposition:neptune": [
@@ -3663,12 +3663,12 @@
    0.809
   ],
   [
-   "composite:aspect:sun:trine:neptune",
+   "synastry:jupiter:trine:saturn",
    0.806
   ],
   [
-   "synastry:jupiter:trine:saturn",
-   0.806
+   "composite:aspect:mars:trine:jupiter",
+   0.805
   ]
  ],
  "composite:aspect:mercury:trine:mars": [
@@ -3731,11 +3731,11 @@
    0.816
   ],
   [
-   "composite:aspect:sun:trine:neptune",
-   0.814
+   "synastry:mercury:trine:mercury",
+   0.813
   ],
   [
-   "synastry:mercury:trine:mercury",
+   "composite:aspect:mercury:conjunction:mars",
    0.813
   ]
  ],
@@ -3765,11 +3765,11 @@
    0.804
   ],
   [
-   "composite:aspect:sun:trine:neptune",
-   0.803
+   "synastry:mercury:trine:pluto",
+   0.801
   ],
   [
-   "synastry:mercury:trine:pluto",
+   "composite:aspect:mercury:trine:true_node",
    0.801
   ]
  ],
@@ -4267,10 +4267,6 @@
    0.848
   ],
   [
-   "composite:aspect:moon:opposition:jupiter",
-   0.846
-  ],
-  [
    "composite:aspect:moon:square:uranus",
    0.846
   ],
@@ -4281,40 +4277,44 @@
   [
    "composite:aspect:moon:conjunction:saturn",
    0.843
+  ],
+  [
+   "composite:chiron:sign:pisces",
+   0.843
   ]
  ],
  "composite:aspect:moon:opposition:jupiter": [
   [
-   "composite:aspect:neptune:opposition:pluto",
-   0.882
+   "composite:aspect:moon:square:jupiter",
+   0.795
   ],
   [
-   "composite:aspect:mars:opposition:jupiter",
-   0.872
+   "composite:jupiter:house:5",
+   0.794
   ],
   [
-   "composite:aspect:moon:opposition:venus",
-   0.863
-  ],
-  [
-   "composite:aspect:moon:opposition:chiron",
-   0.846
-  ],
-  [
-   "composite:aspect:jupiter:opposition:uranus",
-   0.846
+   "composite:jupiter:house:6",
+   0.793
   ],
   [
    "composite:aspect:sun:opposition:moon",
-   0.842
+   0.792
   ],
   [
-   "composite:aspect:moon:opposition:uranus",
-   0.841
+   "composite:aspect:sun:square:moon",
+   0.792
   ],
   [
-   "composite:aspect:sun:opposition:jupiter",
-   0.838
+   "composite:jupiter:house:1",
+   0.789
+  ],
+  [
+   "composite:aspect:moon:opposition:saturn",
+   0.789
+  ],
+  [
+   "composite:aspect:moon:square:uranus",
+   0.789
   ]
  ],
  "composite:aspect:moon:opposition:mars": [
@@ -4483,8 +4483,8 @@
    0.834
   ],
   [
-   "composite:aspect:moon:opposition:jupiter",
-   0.832
+   "composite:aspect:neptune:opposition:pluto",
+   0.829
   ]
  ],
  "composite:aspect:moon:opposition:true_node": [
@@ -4535,10 +4535,6 @@
    0.848
   ],
   [
-   "composite:aspect:moon:opposition:jupiter",
-   0.841
-  ],
-  [
    "composite:aspect:moon:opposition:neptune",
    0.84
   ],
@@ -4553,16 +4549,16 @@
   [
    "composite:aspect:moon:opposition:chiron",
    0.833
+  ],
+  [
+   "composite:aspect:mars:opposition:uranus",
+   0.829
   ]
  ],
  "composite:aspect:moon:opposition:venus": [
   [
    "composite:aspect:sun:opposition:moon",
    0.868
-  ],
-  [
-   "composite:aspect:moon:opposition:jupiter",
-   0.863
   ],
   [
    "composite:aspect:moon:opposition:saturn",
@@ -4587,6 +4583,10 @@
   [
    "composite:aspect:sun:square:venus",
    0.842
+  ],
+  [
+   "composite:aspect:moon:opposition:mars",
+   0.841
   ]
  ],
  "composite:aspect:moon:sextile:chiron": [
@@ -5747,10 +5747,6 @@
  ],
  "composite:aspect:neptune:opposition:pluto": [
   [
-   "composite:aspect:moon:opposition:jupiter",
-   0.882
-  ],
-  [
    "composite:aspect:neptune:opposition:chiron",
    0.869
   ],
@@ -5777,6 +5773,10 @@
   [
    "composite:aspect:moon:opposition:venus",
    0.848
+  ],
+  [
+   "composite:aspect:sun:opposition:moon",
+   0.845
   ]
  ],
  "composite:aspect:neptune:opposition:true_node": [
@@ -7175,10 +7175,6 @@
  ],
  "composite:aspect:saturn:trine:neptune": [
   [
-   "composite:aspect:sun:trine:neptune",
-   0.852
-  ],
-  [
    "composite:moon:house:12",
    0.835
   ],
@@ -7205,6 +7201,10 @@
   [
    "composite:aspect:venus:trine:mars",
    0.822
+  ],
+  [
+   "synastry:moon:trine:moon",
+   0.821
   ]
  ],
  "composite:aspect:saturn:trine:pluto": [
@@ -7289,10 +7289,6 @@
    0.811
   ],
   [
-   "composite:aspect:sun:trine:neptune",
-   0.81
-  ],
-  [
    "composite:aspect:mercury:trine:jupiter",
    0.81
   ],
@@ -7307,6 +7303,10 @@
   [
    "composite:aspect:saturn:trine:pluto",
    0.799
+  ],
+  [
+   "composite:aspect:moon:trine:uranus",
+   0.798
   ]
  ],
  "composite:aspect:sun:conjunction:chiron": [
@@ -7735,10 +7735,6 @@
    0.84
   ],
   [
-   "composite:aspect:moon:opposition:jupiter",
-   0.838
-  ],
-  [
    "composite:aspect:sun:opposition:venus",
    0.834
   ],
@@ -7748,6 +7744,10 @@
   ],
   [
    "composite:aspect:jupiter:opposition:pluto",
+   0.827
+  ],
+  [
+   "composite:aspect:jupiter:square:pluto",
    0.827
   ]
  ],
@@ -7773,16 +7773,16 @@
    0.85
   ],
   [
-   "composite:aspect:moon:opposition:jupiter",
-   0.835
-  ],
-  [
    "composite:aspect:sun:opposition:venus",
    0.825
   ],
   [
    "composite:aspect:mars:opposition:chiron",
    0.818
+  ],
+  [
+   "composite:aspect:mercury:opposition:mars",
+   0.816
   ]
  ],
  "composite:aspect:sun:opposition:mercury": [
@@ -8403,10 +8403,6 @@
    0.881
   ],
   [
-   "synastry:venus:sextile:pluto",
-   0.853
-  ],
-  [
    "composite:aspect:sun:sextile:jupiter",
    0.847
   ],
@@ -8429,6 +8425,10 @@
   [
    "composite:aspect:sun:sextile:mars",
    0.833
+  ],
+  [
+   "composite:aspect:moon:sextile:venus",
+   0.831
   ]
  ],
  "composite:aspect:sun:square:chiron": [
@@ -8977,36 +8977,36 @@
  ],
  "composite:aspect:sun:trine:neptune": [
   [
-   "composite:aspect:venus:trine:neptune",
-   0.89
-  ],
-  [
-   "composite:aspect:saturn:trine:neptune",
-   0.852
-  ],
-  [
-   "composite:aspect:venus:trine:uranus",
-   0.841
-  ],
-  [
-   "composite:aspect:sun:trine:uranus",
-   0.827
-  ],
-  [
-   "synastry:moon:trine:moon",
-   0.825
-  ],
-  [
-   "synastry:moon:trine:sun",
+   "composite:aspect:sun:trine:mercury",
    0.819
   ],
   [
-   "composite:aspect:sun:trine:pluto",
-   0.817
+   "composite:aspect:sun:opposition:mercury",
+   0.806
   ],
   [
-   "composite:aspect:mercury:trine:neptune",
-   0.814
+   "composite:aspect:moon:conjunction:neptune",
+   0.805
+  ],
+  [
+   "composite:aspect:neptune:trine:pluto",
+   0.805
+  ],
+  [
+   "composite:aspect:sun:trine:saturn",
+   0.804
+  ],
+  [
+   "composite:neptune:house:9",
+   0.798
+  ],
+  [
+   "composite:aspect:sun:trine:uranus",
+   0.793
+  ],
+  [
+   "composite:aspect:sun:sextile:mercury",
+   0.792
   ]
  ],
  "composite:aspect:sun:trine:pluto": [
@@ -9141,8 +9141,8 @@
    0.828
   ],
   [
-   "composite:aspect:sun:trine:neptune",
-   0.827
+   "composite:aspect:uranus:trine:true_node",
+   0.823
   ]
  ],
  "composite:aspect:sun:trine:venus": [
@@ -11003,16 +11003,16 @@
    0.815
   ],
   [
-   "composite:aspect:sun:trine:neptune",
-   0.813
-  ],
-  [
    "composite:aspect:moon:conjunction:venus",
    0.812
   ],
   [
    "composite:aspect:venus:trine:neptune",
    0.808
+  ],
+  [
+   "composite:aspect:moon:trine:venus",
+   0.806
   ]
  ],
  "composite:aspect:venus:trine:mars": [
@@ -11033,10 +11033,6 @@
    0.813
   ],
   [
-   "composite:aspect:sun:trine:neptune",
-   0.811
-  ],
-  [
    "composite:mars:sign:libra",
    0.803
   ],
@@ -11047,13 +11043,13 @@
   [
    "composite:aspect:venus:trine:uranus",
    0.798
+  ],
+  [
+   "composite:mars:sign:cancer",
+   0.791
   ]
  ],
  "composite:aspect:venus:trine:neptune": [
-  [
-   "composite:aspect:sun:trine:neptune",
-   0.89
-  ],
   [
    "synastry:moon:trine:moon",
    0.816
@@ -11081,6 +11077,10 @@
   [
    "synastry:moon:trine:sun",
    0.791
+  ],
+  [
+   "composite:aspect:sun:trine:venus",
+   0.788
   ]
  ],
  "composite:aspect:venus:trine:pluto": [
@@ -11165,10 +11165,6 @@
    0.809
   ],
   [
-   "composite:aspect:sun:trine:neptune",
-   0.805
-  ],
-  [
    "composite:aspect:venus:sextile:uranus",
    0.804
   ],
@@ -11183,16 +11179,16 @@
   [
    "composite:aspect:saturn:trine:uranus",
    0.801
+  ],
+  [
+   "synastry:moon:trine:moon",
+   0.8
   ]
  ],
  "composite:aspect:venus:trine:uranus": [
   [
    "synastry:venus:trine:uranus",
    0.846
-  ],
-  [
-   "composite:aspect:sun:trine:neptune",
-   0.841
   ],
   [
    "composite:aspect:sun:trine:uranus",
@@ -11217,6 +11213,10 @@
   [
    "composite:aspect:saturn:trine:neptune",
    0.819
+  ],
+  [
+   "composite:aspect:venus:trine:jupiter",
+   0.815
   ]
  ],
  "composite:chiron:house:1": [
@@ -15695,15 +15695,15 @@
    0.799
   ],
   [
+   "composite:aspect:sun:trine:neptune",
+   0.798
+  ],
+  [
    "composite:true_node:house:9",
    0.797
   ],
   [
    "composite:mars:house:9",
-   0.796
-  ],
-  [
-   "composite:neptune:house:5",
    0.796
   ]
  ],
@@ -25015,12 +25015,12 @@
    0.84
   ],
   [
-   "synastry:mars:sextile:mercury",
-   0.839
-  ],
-  [
    "natal:aspect:sun:sextile:mercury",
    0.838
+  ],
+  [
+   "natal:aspect:mercury:sextile:venus",
+   0.833
   ]
  ],
  "natal:aspect:mercury:sextile:neptune": [
@@ -25117,12 +25117,12 @@
    0.824
   ],
   [
-   "synastry:mars:sextile:mercury",
-   0.821
-  ],
-  [
    "natal:aspect:saturn:sextile:neptune",
    0.819
+  ],
+  [
+   "natal:aspect:jupiter:sextile:saturn",
+   0.817
   ]
  ],
  "natal:aspect:mercury:sextile:true_node": [
@@ -26847,16 +26847,16 @@
    0.843
   ],
   [
-   "synastry:moon:sextile:venus",
-   0.839
-  ],
-  [
    "natal:aspect:venus:sextile:uranus",
    0.836
   ],
   [
    "natal:aspect:moon:sextile:mars",
    0.835
+  ],
+  [
+   "natal:aspect:moon:sextile:jupiter",
+   0.831
   ]
  ],
  "natal:aspect:moon:square:chiron": [
@@ -30337,16 +30337,8 @@
    0.849
   ],
   [
-   "synastry:moon:sextile:venus",
-   0.849
-  ],
-  [
    "transit:sun:sextile:venus",
    0.848
-  ],
-  [
-   "synastry:venus:sextile:pluto",
-   0.844
   ],
   [
    "natal:aspect:venus:sextile:mars",
@@ -30359,6 +30351,14 @@
   [
    "natal:aspect:venus:sextile:true_node",
    0.838
+  ],
+  [
+   "natal:aspect:venus:sextile:neptune",
+   0.837
+  ],
+  [
+   "synastry:venus:sextile:moon",
+   0.837
   ]
  ],
  "natal:aspect:sun:square:chiron": [
@@ -32427,12 +32427,12 @@
    0.829
   ],
   [
-   "synastry:venus:sextile:pluto",
-   0.828
-  ],
-  [
    "natal:aspect:venus:conjunction:mars",
    0.825
+  ],
+  [
+   "transit:venus:sextile:mars",
+   0.822
   ]
  ],
  "natal:aspect:venus:sextile:neptune": [
@@ -32443,10 +32443,6 @@
   [
    "natal:aspect:sun:sextile:neptune",
    0.841
-  ],
-  [
-   "synastry:venus:sextile:neptune",
-   0.84
   ],
   [
    "natal:aspect:sun:sextile:venus",
@@ -32467,6 +32463,10 @@
   [
    "transit:mercury:sextile:neptune",
    0.82
+  ],
+  [
+   "transit:venus:sextile:neptune",
+   0.819
   ]
  ],
  "natal:aspect:venus:sextile:pluto": [
@@ -32491,15 +32491,15 @@
    0.837
   ],
   [
-   "synastry:venus:sextile:pluto",
-   0.829
-  ],
-  [
    "natal:aspect:venus:trine:pluto",
    0.824
   ],
   [
    "natal:aspect:venus:sextile:chiron",
+   0.818
+  ],
+  [
+   "natal:aspect:mercury:sextile:pluto",
    0.818
   ]
  ],
@@ -32547,10 +32547,6 @@
    0.853
   ],
   [
-   "synastry:moon:sextile:venus",
-   0.843
-  ],
-  [
    "natal:aspect:neptune:sextile:true_node",
    0.842
   ],
@@ -32569,6 +32565,10 @@
   [
    "natal:aspect:moon:sextile:true_node",
    0.833
+  ],
+  [
+   "synastry:mars:sextile:venus",
+   0.83
   ]
  ],
  "natal:aspect:venus:sextile:uranus": [
@@ -38713,16 +38713,16 @@
    0.808
   ],
   [
+   "synastry:moon:sextile:venus",
+   0.806
+  ],
+  [
    "transit:moon:house:1",
    0.805
   ],
   [
    "synastry:sun:conjunction:moon",
    0.802
-  ],
-  [
-   "natal:aspect:moon:conjunction:mercury",
-   0.801
   ]
  ],
  "natal:moon:on:dsc": [
@@ -48697,10 +48697,6 @@
    0.807
   ],
   [
-   "return:venus",
-   0.79
-  ],
-  [
    "natal:venus:sign:capricorn",
    0.784
   ],
@@ -48719,6 +48715,10 @@
   [
    "transit:venus:station:direct",
    0.772
+  ],
+  [
+   "condition:venus:combust",
+   0.771
   ]
  ],
  "natal:venus:sign:aquarius": [
@@ -49505,36 +49505,36 @@
  ],
  "return:venus": [
   [
-   "transit:venus:conjunction:venus",
-   0.888
+   "transit:venus:conjunction:true_node",
+   0.772
   ],
   [
    "transit:venus:station:retrograde",
-   0.813
+   0.77
+  ],
+  [
+   "transit:venus:conjunction:venus",
+   0.765
+  ],
+  [
+   "transit:venus:station:direct",
+   0.749
   ],
   [
    "transit:venus:conjunction:sun",
-   0.81
+   0.74
   ],
   [
-   "timelord:profection:year:lord:venus",
-   0.795
+   "transit:venus:opposition:true_node",
+   0.737
   ],
   [
-   "transit:jupiter:conjunction:venus",
-   0.794
+   "timelord:firdaria:sub:venus:sun",
+   0.735
   ],
   [
-   "transit:venus:conjunction:true_node",
-   0.793
-  ],
-  [
-   "natal:venus:retrograde",
-   0.79
-  ],
-  [
-   "transit:venus:house:1",
-   0.789
+   "transit:venus:square:venus",
+   0.734
   ]
  ],
  "sky:eclipse:house:1": [
@@ -51845,8 +51845,8 @@
    0.829
   ],
   [
-   "synastry:venus:sextile:pluto",
-   0.829
+   "synastry:venus:sextile:mars",
+   0.828
   ]
  ],
  "synastry:jupiter:square:jupiter": [
@@ -52607,6 +52607,10 @@
    0.823
   ],
   [
+   "synastry:mars:sextile:mercury",
+   0.819
+  ],
+  [
    "synastry:mars:opposition:mercury",
    0.818
   ],
@@ -52625,10 +52629,6 @@
   [
    "synastry:overlay:mars:house:3",
    0.804
-  ],
-  [
-   "synastry:sun:conjunction:mars",
-   0.802
   ]
  ],
  "synastry:mars:conjunction:moon": [
@@ -53219,10 +53219,6 @@
    0.856
   ],
   [
-   "synastry:mars:sextile:mercury",
-   0.844
-  ],
-  [
    "synastry:jupiter:trine:mars",
    0.83
   ],
@@ -53241,6 +53237,10 @@
   [
    "natal:aspect:mars:sextile:jupiter",
    0.822
+  ],
+  [
+   "synastry:overlay:jupiter:house:10",
+   0.822
   ]
  ],
  "synastry:mars:sextile:mars": [
@@ -53251,10 +53251,6 @@
   [
    "synastry:sun:sextile:mars",
    0.865
-  ],
-  [
-   "synastry:mars:sextile:mercury",
-   0.864
   ],
   [
    "synastry:mars:trine:mars",
@@ -53275,40 +53271,44 @@
   [
    "synastry:mars:sextile:venus",
    0.841
+  ],
+  [
+   "synastry:uranus:sextile:mars",
+   0.841
   ]
  ],
  "synastry:mars:sextile:mercury": [
   [
-   "synastry:sun:sextile:mars",
-   0.881
+   "synastry:mercury:conjunction:mars",
+   0.834
   ],
   [
-   "synastry:mars:sextile:sun",
-   0.875
+   "synastry:overlay:mars:house:3",
+   0.823
   ],
   [
-   "synastry:moon:sextile:mars",
-   0.871
+   "synastry:mars:conjunction:mercury",
+   0.819
   ],
   [
-   "synastry:neptune:sextile:mars",
-   0.869
+   "natal:aspect:mercury:opposition:mars",
+   0.795
   ],
   [
-   "synastry:mars:sextile:mars",
-   0.864
+   "synastry:jupiter:opposition:mercury",
+   0.793
   ],
   [
-   "synastry:mars:sextile:venus",
-   0.852
+   "synastry:mercury:opposition:mars",
+   0.79
   ],
   [
-   "synastry:pluto:sextile:mercury",
-   0.851
+   "synastry:mars:conjunction:mars",
+   0.789
   ],
   [
-   "synastry:mars:sextile:neptune",
-   0.846
+   "natal:mars:house:3",
+   0.782
   ]
  ],
  "synastry:mars:sextile:moon": [
@@ -53355,10 +53355,6 @@
    0.846
   ],
   [
-   "synastry:mars:sextile:mercury",
-   0.846
-  ],
-  [
    "synastry:mars:sextile:mars",
    0.845
   ],
@@ -53377,6 +53373,10 @@
   [
    "synastry:sun:sextile:mars",
    0.821
+  ],
+  [
+   "synastry:mars:opposition:pluto",
+   0.82
   ]
  ],
  "synastry:mars:sextile:pluto": [
@@ -53439,22 +53439,18 @@
    0.808
   ],
   [
-   "synastry:mars:sextile:mercury",
+   "synastry:mars:sextile:sun",
    0.806
   ],
   [
-   "synastry:mars:sextile:sun",
-   0.806
+   "synastry:saturn:sextile:mercury",
+   0.805
   ]
  ],
  "synastry:mars:sextile:sun": [
   [
    "synastry:sun:sextile:mars",
    0.908
-  ],
-  [
-   "synastry:mars:sextile:mercury",
-   0.875
   ],
   [
    "synastry:moon:sextile:mars",
@@ -53479,6 +53475,10 @@
   [
    "synastry:saturn:sextile:mars",
    0.854
+  ],
+  [
+   "synastry:jupiter:sextile:mars",
+   0.853
   ]
  ],
  "synastry:mars:sextile:uranus": [
@@ -53517,14 +53517,6 @@
  ],
  "synastry:mars:sextile:venus": [
   [
-   "synastry:venus:sextile:pluto",
-   0.89
-  ],
-  [
-   "synastry:moon:sextile:venus",
-   0.887
-  ],
-  [
    "synastry:venus:sextile:mars",
    0.875
   ],
@@ -53545,8 +53537,16 @@
    0.852
   ],
   [
-   "synastry:mars:sextile:mercury",
-   0.852
+   "synastry:venus:sextile:jupiter",
+   0.849
+  ],
+  [
+   "synastry:saturn:sextile:mars",
+   0.845
+  ],
+  [
+   "synastry:sun:sextile:venus",
+   0.844
   ]
  ],
  "synastry:mars:square:jupiter": [
@@ -53979,16 +53979,16 @@
    0.829
   ],
   [
-   "synastry:mars:sextile:mercury",
-   0.828
-  ],
-  [
    "synastry:jupiter:trine:mars",
    0.823
   ],
   [
    "synastry:mars:trine:jupiter",
    0.81
+  ],
+  [
+   "synastry:mercury:trine:sun",
+   0.809
   ]
  ],
  "synastry:mars:trine:moon": [
@@ -54265,6 +54265,10 @@
  ],
  "synastry:mercury:conjunction:mars": [
   [
+   "synastry:mars:sextile:mercury",
+   0.834
+  ],
+  [
    "synastry:mercury:trine:mars",
    0.819
   ],
@@ -54291,10 +54295,6 @@
   [
    "synastry:mercury:square:mars",
    0.781
-  ],
-  [
-   "synastry:mercury:opposition:mars",
-   0.78
   ]
  ],
  "synastry:mercury:conjunction:mercury": [
@@ -54961,10 +54961,6 @@
    0.812
   ],
   [
-   "synastry:mars:sextile:mercury",
-   0.808
-  ],
-  [
    "synastry:moon:sextile:sun",
    0.806
   ],
@@ -54975,6 +54971,10 @@
   [
    "synastry:mercury:sextile:sun",
    0.805
+  ],
+  [
+   "synastry:mars:sextile:mars",
+   0.804
   ]
  ],
  "synastry:mercury:sextile:mercury": [
@@ -55037,12 +55037,12 @@
    0.843
   ],
   [
-   "synastry:moon:sextile:venus",
-   0.841
-  ],
-  [
    "synastry:moon:sextile:saturn",
    0.831
+  ],
+  [
+   "synastry:venus:sextile:mercury",
+   0.825
   ]
  ],
  "synastry:mercury:sextile:neptune": [
@@ -56249,6 +56249,10 @@
    0.846
   ],
   [
+   "synastry:moon:sextile:venus",
+   0.846
+  ],
+  [
    "natal:aspect:moon:sextile:venus",
    0.846
   ],
@@ -56263,10 +56267,6 @@
   [
    "synastry:jupiter:conjunction:moon",
    0.833
-  ],
-  [
-   "synastry:overlay:moon:house:2",
-   0.83
   ]
  ],
  "synastry:moon:opposition:jupiter": [
@@ -56653,10 +56653,6 @@
    0.873
   ],
   [
-   "synastry:mars:sextile:mercury",
-   0.871
-  ],
-  [
    "natal:aspect:moon:sextile:mars",
    0.861
   ],
@@ -56675,6 +56671,10 @@
   [
    "synastry:mars:sextile:mars",
    0.85
+  ],
+  [
+   "synastry:moon:sextile:pluto",
+   0.844
   ]
  ],
  "synastry:moon:sextile:mercury": [
@@ -56751,10 +56751,6 @@
    0.914
   ],
   [
-   "synastry:venus:sextile:neptune",
-   0.882
-  ],
-  [
    "synastry:moon:conjunction:neptune",
    0.875
   ],
@@ -56777,6 +56773,10 @@
   [
    "synastry:saturn:trine:neptune",
    0.817
+  ],
+  [
+   "synastry:neptune:sextile:venus",
+   0.816
   ]
  ],
  "synastry:moon:sextile:pluto": [
@@ -56797,20 +56797,20 @@
    0.857
   ],
   [
-   "synastry:moon:sextile:venus",
-   0.851
-  ],
-  [
    "synastry:sun:sextile:pluto",
-   0.849
-  ],
-  [
-   "synastry:venus:sextile:pluto",
    0.849
   ],
   [
    "transit:pluto:sextile:moon",
    0.848
+  ],
+  [
+   "synastry:saturn:sextile:moon",
+   0.848
+  ],
+  [
+   "natal:aspect:venus:sextile:pluto",
+   0.847
   ]
  ],
  "synastry:moon:sextile:saturn": [
@@ -56917,36 +56917,36 @@
  ],
  "synastry:moon:sextile:venus": [
   [
-   "synastry:mars:sextile:venus",
-   0.887
+   "synastry:moon:conjunction:venus",
+   0.846
   ],
   [
-   "transit:venus:sextile:moon",
-   0.883
+   "synastry:overlay:moon:house:1",
+   0.823
   ],
   [
-   "synastry:venus:sextile:moon",
-   0.88
+   "natal:moon:on:asc",
+   0.806
   ],
   [
-   "synastry:sun:sextile:venus",
-   0.877
+   "synastry:venus:conjunction:moon",
+   0.805
   ],
   [
-   "synastry:venus:sextile:pluto",
-   0.869
+   "synastry:moon:conjunction:pluto",
+   0.8
   ],
   [
-   "synastry:venus:sextile:venus",
-   0.863
+   "synastry:venus:square:moon",
+   0.798
   ],
   [
-   "synastry:venus:sextile:mars",
-   0.855
+   "synastry:moon:trine:venus",
+   0.797
   ],
   [
-   "transit:venus:sextile:mercury",
-   0.855
+   "transit:moon:house:1",
+   0.795
   ]
  ],
  "synastry:moon:square:jupiter": [
@@ -57409,10 +57409,6 @@
    0.828
   ],
   [
-   "composite:aspect:sun:trine:neptune",
-   0.825
-  ],
-  [
    "synastry:venus:trine:moon",
    0.822
   ],
@@ -57423,6 +57419,10 @@
   [
    "composite:aspect:saturn:trine:uranus",
    0.82
+  ],
+  [
+   "synastry:mercury:trine:venus",
+   0.818
   ]
  ],
  "synastry:moon:trine:neptune": [
@@ -57549,16 +57549,16 @@
    0.821
   ],
   [
-   "composite:aspect:sun:trine:neptune",
-   0.819
-  ],
-  [
    "synastry:sun:trine:saturn",
    0.809
   ],
   [
    "synastry:moon:trine:saturn",
    0.809
+  ],
+  [
+   "synastry:uranus:trine:sun",
+   0.805
   ]
  ],
  "synastry:moon:trine:uranus": [
@@ -58349,10 +58349,6 @@
    0.876
   ],
   [
-   "synastry:mars:sextile:mercury",
-   0.869
-  ],
-  [
    "synastry:sun:sextile:mars",
    0.859
   ],
@@ -58375,6 +58371,10 @@
   [
    "natal:aspect:mars:sextile:neptune",
    0.835
+  ],
+  [
+   "synastry:moon:sextile:mars",
+   0.833
   ]
  ],
  "synastry:neptune:sextile:mercury": [
@@ -58417,10 +58417,6 @@
    0.914
   ],
   [
-   "synastry:venus:sextile:neptune",
-   0.889
-  ],
-  [
    "synastry:moon:conjunction:neptune",
    0.853
   ],
@@ -58443,6 +58439,10 @@
   [
    "synastry:moon:trine:venus",
    0.827
+  ],
+  [
+   "synastry:saturn:sextile:neptune",
+   0.826
   ]
  ],
  "synastry:neptune:sextile:neptune": [
@@ -58617,10 +58617,6 @@
  ],
  "synastry:neptune:sextile:venus": [
   [
-   "synastry:venus:sextile:neptune",
-   0.865
-  ],
-  [
    "synastry:saturn:sextile:neptune",
    0.863
   ],
@@ -58629,16 +58625,8 @@
    0.855
   ],
   [
-   "synastry:moon:sextile:venus",
-   0.852
-  ],
-  [
    "synastry:sun:sextile:neptune",
    0.848
-  ],
-  [
-   "synastry:venus:sextile:pluto",
-   0.847
   ],
   [
    "synastry:neptune:sextile:moon",
@@ -58647,6 +58635,18 @@
   [
    "synastry:saturn:sextile:venus",
    0.837
+  ],
+  [
+   "synastry:neptune:sextile:mars",
+   0.836
+  ],
+  [
+   "synastry:neptune:trine:venus",
+   0.836
+  ],
+  [
+   "synastry:mars:sextile:venus",
+   0.829
   ]
  ],
  "synastry:neptune:square:jupiter": [
@@ -59917,6 +59917,10 @@
    0.84
   ],
   [
+   "synastry:mars:sextile:mercury",
+   0.823
+  ],
+  [
    "synastry:overlay:saturn:house:3",
    0.818
   ],
@@ -59935,10 +59939,6 @@
   [
    "natal:uranus:house:3",
    0.798
-  ],
-  [
-   "synastry:overlay:pluto:house:3",
-   0.795
   ]
  ],
  "synastry:overlay:mars:house:4": [
@@ -60571,6 +60571,10 @@
    0.826
   ],
   [
+   "synastry:moon:sextile:venus",
+   0.823
+  ],
+  [
    "synastry:overlay:moon:house:3",
    0.82
   ],
@@ -60581,10 +60585,6 @@
   [
    "transit:moon:house:1",
    0.818
-  ],
-  [
-   "synastry:overlay:moon:house:10",
-   0.809
   ]
  ],
  "synastry:overlay:moon:house:10": [
@@ -61531,12 +61531,12 @@
    0.785
   ],
   [
-   "synastry:pluto:conjunction:sun",
-   0.783
+   "synastry:venus:sextile:pluto",
+   0.784
   ],
   [
-   "synastry:pluto:trine:moon",
-   0.779
+   "synastry:pluto:conjunction:sun",
+   0.783
   ]
  ],
  "synastry:overlay:pluto:house:3": [
@@ -63729,6 +63729,10 @@
    0.833
   ],
   [
+   "synastry:venus:sextile:pluto",
+   0.828
+  ],
+  [
    "synastry:pluto:trine:venus",
    0.827
   ],
@@ -63742,10 +63746,6 @@
   ],
   [
    "synastry:venus:trine:pluto",
-   0.817
-  ],
-  [
-   "synastry:moon:conjunction:pluto",
    0.817
   ]
  ],
@@ -64167,10 +64167,6 @@
    0.851
   ],
   [
-   "synastry:mars:sextile:mercury",
-   0.851
-  ],
-  [
    "synastry:moon:sextile:pluto",
    0.844
   ],
@@ -64189,6 +64185,10 @@
   [
    "natal:aspect:mercury:sextile:pluto",
    0.829
+  ],
+  [
+   "synastry:pluto:sextile:neptune",
+   0.828
   ]
  ],
  "synastry:pluto:sextile:moon": [
@@ -64353,12 +64353,12 @@
    0.824
   ],
   [
-   "composite:aspect:pluto:sextile:chiron",
+   "synastry:venus:sextile:pluto",
    0.823
   ],
   [
-   "synastry:saturn:trine:pluto",
-   0.822
+   "composite:aspect:pluto:sextile:chiron",
+   0.823
   ]
  ],
  "synastry:pluto:sextile:uranus": [
@@ -64397,10 +64397,6 @@
  ],
  "synastry:pluto:sextile:venus": [
   [
-   "synastry:venus:sextile:pluto",
-   0.863
-  ],
-  [
    "synastry:neptune:sextile:venus",
    0.814
   ],
@@ -64427,6 +64423,10 @@
   [
    "synastry:venus:sextile:saturn",
    0.802
+  ],
+  [
+   "synastry:moon:trine:venus",
+   0.801
   ]
  ],
  "synastry:pluto:square:jupiter": [
@@ -65101,11 +65101,11 @@
    0.836
   ],
   [
-   "synastry:sun:trine:pluto",
-   0.829
+   "synastry:venus:sextile:pluto",
+   0.836
   ],
   [
-   "synastry:saturn:sextile:venus",
+   "synastry:sun:trine:pluto",
    0.829
   ]
  ],
@@ -66105,10 +66105,6 @@
    0.851
   ],
   [
-   "synastry:venus:sextile:pluto",
-   0.849
-  ],
-  [
    "synastry:saturn:sextile:neptune",
    0.841
   ],
@@ -66125,8 +66121,12 @@
    0.837
   ],
   [
-   "synastry:moon:sextile:venus",
-   0.836
+   "synastry:saturn:sextile:mars",
+   0.834
+  ],
+  [
+   "synastry:saturn:trine:venus",
+   0.833
   ]
  ],
  "synastry:saturn:square:jupiter": [
@@ -67145,8 +67145,8 @@
    0.805
   ],
   [
-   "synastry:venus:conjunction:mars",
-   0.802
+   "synastry:venus:sextile:pluto",
+   0.803
   ]
  ],
  "synastry:sun:opposition:jupiter": [
@@ -67529,10 +67529,6 @@
    0.908
   ],
   [
-   "synastry:mars:sextile:mercury",
-   0.881
-  ],
-  [
    "synastry:mars:sextile:mars",
    0.865
   ],
@@ -67555,13 +67551,13 @@
   [
    "synastry:jupiter:sextile:mars",
    0.84
+  ],
+  [
+   "synastry:mercury:sextile:mars",
+   0.835
   ]
  ],
  "synastry:sun:sextile:mercury": [
-  [
-   "synastry:mars:sextile:mercury",
-   0.839
-  ],
   [
    "synastry:moon:sextile:pluto",
    0.832
@@ -67589,6 +67585,10 @@
   [
    "synastry:mars:sextile:sun",
    0.817
+  ],
+  [
+   "synastry:sun:sextile:jupiter",
+   0.813
   ]
  ],
  "synastry:sun:sextile:moon": [
@@ -67655,8 +67655,8 @@
    0.837
   ],
   [
-   "synastry:venus:sextile:neptune",
-   0.836
+   "synastry:neptune:sextile:jupiter",
+   0.835
   ]
  ],
  "synastry:sun:sextile:pluto": [
@@ -67797,16 +67797,8 @@
  ],
  "synastry:sun:sextile:venus": [
   [
-   "synastry:moon:sextile:venus",
-   0.877
-  ],
-  [
    "synastry:venus:sextile:venus",
    0.87
-  ],
-  [
-   "synastry:venus:sextile:pluto",
-   0.869
   ],
   [
    "synastry:venus:sextile:saturn",
@@ -67827,6 +67819,14 @@
   [
    "composite:aspect:sun:sextile:venus",
    0.836
+  ],
+  [
+   "transit:venus:sextile:moon",
+   0.835
+  ],
+  [
+   "synastry:venus:sextile:moon",
+   0.834
   ]
  ],
  "synastry:sun:square:jupiter": [
@@ -69355,8 +69355,8 @@
    0.808
   ],
   [
-   "synastry:venus:sextile:pluto",
-   0.806
+   "synastry:mars:sextile:uranus",
+   0.803
   ]
  ],
  "synastry:uranus:sextile:pluto": [
@@ -70333,16 +70333,16 @@
    0.81
   ],
   [
+   "synastry:moon:sextile:venus",
+   0.805
+  ],
+  [
    "composite:aspect:moon:conjunction:venus",
    0.8
   ],
   [
    "synastry:neptune:trine:venus",
    0.797
-  ],
-  [
-   "synastry:sun:conjunction:moon",
-   0.796
   ]
  ],
  "synastry:venus:conjunction:neptune": [
@@ -70375,8 +70375,8 @@
    0.81
   ],
   [
-   "synastry:venus:sextile:neptune",
-   0.81
+   "synastry:neptune:conjunction:saturn",
+   0.804
   ]
  ],
  "synastry:venus:conjunction:pluto": [
@@ -70397,6 +70397,10 @@
    0.838
   ],
   [
+   "synastry:venus:sextile:pluto",
+   0.832
+  ],
+  [
    "synastry:pluto:square:venus",
    0.823
   ],
@@ -70407,10 +70411,6 @@
   [
    "synastry:moon:conjunction:pluto",
    0.819
-  ],
-  [
-   "synastry:venus:sextile:pluto",
-   0.818
   ]
  ],
  "synastry:venus:conjunction:saturn": [
@@ -70895,10 +70895,6 @@
    0.849
   ],
   [
-   "synastry:venus:sextile:pluto",
-   0.844
-  ],
-  [
    "synastry:venus:sextile:venus",
    0.841
   ],
@@ -70921,20 +70917,16 @@
   [
    "synastry:mars:sextile:jupiter",
    0.824
+  ],
+  [
+   "synastry:sun:sextile:venus",
+   0.824
   ]
  ],
  "synastry:venus:sextile:mars": [
   [
    "synastry:mars:sextile:venus",
    0.875
-  ],
-  [
-   "synastry:venus:sextile:pluto",
-   0.858
-  ],
-  [
-   "synastry:moon:sextile:venus",
-   0.855
   ],
   [
    "synastry:venus:sextile:venus",
@@ -70949,12 +70941,20 @@
    0.836
   ],
   [
-   "synastry:mars:sextile:mercury",
+   "synastry:mars:sextile:sun",
    0.836
   ],
   [
-   "synastry:mars:sextile:sun",
+   "synastry:moon:sextile:mars",
    0.836
+  ],
+  [
+   "transit:venus:sextile:mercury",
+   0.834
+  ],
+  [
+   "transit:mars:sextile:venus",
+   0.832
   ]
  ],
  "synastry:venus:sextile:mercury": [
@@ -70983,19 +70983,15 @@
    0.81
   ],
   [
-   "synastry:venus:sextile:pluto",
-   0.81
-  ],
-  [
    "synastry:moon:sextile:sun",
    0.804
+  ],
+  [
+   "synastry:moon:sextile:moon",
+   0.803
   ]
  ],
  "synastry:venus:sextile:moon": [
-  [
-   "synastry:moon:sextile:venus",
-   0.88
-  ],
   [
    "transit:venus:sextile:moon",
    0.849
@@ -71023,74 +71019,78 @@
   [
    "synastry:venus:sextile:saturn",
    0.835
+  ],
+  [
+   "synastry:sun:sextile:venus",
+   0.834
   ]
  ],
  "synastry:venus:sextile:neptune": [
   [
-   "synastry:neptune:sextile:moon",
-   0.889
+   "synastry:venus:conjunction:venus",
+   0.785
   ],
   [
-   "synastry:moon:sextile:neptune",
-   0.882
+   "composite:neptune:sign:leo",
+   0.774
   ],
   [
-   "synastry:venus:trine:neptune",
-   0.866
+   "synastry:neptune:opposition:venus",
+   0.769
   ],
   [
-   "synastry:neptune:sextile:venus",
-   0.865
+   "synastry:neptune:conjunction:venus",
+   0.769
   ],
   [
-   "transit:venus:sextile:neptune",
-   0.846
+   "composite:aspect:venus:conjunction:neptune",
+   0.768
   ],
   [
-   "synastry:neptune:trine:venus",
-   0.843
+   "composite:aspect:sun:conjunction:venus",
+   0.766
   ],
   [
-   "natal:aspect:venus:sextile:neptune",
-   0.84
+   "synastry:venus:conjunction:sun",
+   0.766
   ],
   [
-   "synastry:sun:sextile:neptune",
-   0.836
+   "synastry:venus:conjunction:neptune",
+   0.764
   ]
  ],
  "synastry:venus:sextile:pluto": [
   [
-   "synastry:mars:sextile:venus",
-   0.89
+   "synastry:pluto:trine:venus",
+   0.836
   ],
   [
-   "synastry:venus:sextile:venus",
-   0.874
+   "synastry:venus:conjunction:pluto",
+   0.832
   ],
   [
-   "synastry:sun:sextile:venus",
-   0.869
+   "synastry:pluto:conjunction:venus",
+   0.828
   ],
   [
-   "synastry:moon:sextile:venus",
-   0.869
+   "synastry:pluto:sextile:sun",
+   0.823
   ],
   [
-   "synastry:pluto:sextile:venus",
-   0.863
+   "synastry:pluto:square:venus",
+   0.823
   ],
   [
-   "synastry:venus:sextile:mars",
-   0.858
+   "synastry:venus:trine:pluto",
+   0.821
   ],
   [
-   "composite:aspect:sun:sextile:venus",
-   0.853
+   "synastry:saturn:trine:pluto",
+   0.813
   ],
   [
-   "synastry:saturn:sextile:venus",
-   0.849
+   "synastry:venus:square:pluto",
+   0.809
   ]
  ],
  "synastry:venus:sextile:saturn": [
@@ -71101,10 +71101,6 @@
   [
    "synastry:saturn:sextile:venus",
    0.86
-  ],
-  [
-   "synastry:moon:sextile:venus",
-   0.845
   ],
   [
    "synastry:venus:trine:saturn",
@@ -71125,6 +71121,10 @@
   [
    "synastry:moon:sextile:saturn",
    0.838
+  ],
+  [
+   "synastry:saturn:sextile:sun",
+   0.837
   ]
  ],
  "synastry:venus:sextile:sun": [
@@ -71145,10 +71145,6 @@
    0.826
   ],
   [
-   "synastry:venus:sextile:pluto",
-   0.823
-  ],
-  [
    "synastry:saturn:sextile:sun",
    0.822
   ],
@@ -71159,6 +71155,10 @@
   [
    "synastry:venus:sextile:mars",
    0.82
+  ],
+  [
+   "synastry:venus:trine:pluto",
+   0.817
   ]
  ],
  "synastry:venus:sextile:uranus": [
@@ -71197,20 +71197,12 @@
  ],
  "synastry:venus:sextile:venus": [
   [
-   "synastry:venus:sextile:pluto",
-   0.874
-  ],
-  [
    "synastry:sun:sextile:venus",
    0.87
   ],
   [
    "synastry:mars:sextile:venus",
    0.865
-  ],
-  [
-   "synastry:moon:sextile:venus",
-   0.863
   ],
   [
    "synastry:venus:conjunction:venus",
@@ -71227,6 +71219,14 @@
   [
    "synastry:venus:sextile:mars",
    0.837
+  ],
+  [
+   "composite:aspect:sun:sextile:venus",
+   0.836
+  ],
+  [
+   "synastry:venus:sextile:moon",
+   0.831
   ]
  ],
  "synastry:venus:square:jupiter": [
@@ -71711,10 +71711,6 @@
    0.893
   ],
   [
-   "synastry:venus:sextile:neptune",
-   0.866
-  ],
-  [
    "synastry:moon:sextile:neptune",
    0.86
   ],
@@ -71737,6 +71733,10 @@
   [
    "transit:neptune:trine:venus",
    0.836
+  ],
+  [
+   "synastry:sun:trine:neptune",
+   0.835
   ]
  ],
  "synastry:venus:trine:pluto": [
@@ -71757,6 +71757,10 @@
    0.827
   ],
   [
+   "synastry:venus:sextile:pluto",
+   0.821
+  ],
+  [
    "synastry:moon:trine:pluto",
    0.819
   ],
@@ -71766,10 +71770,6 @@
   ],
   [
    "synastry:venus:sextile:sun",
-   0.817
-  ],
-  [
-   "synastry:pluto:conjunction:venus",
    0.817
   ]
  ],
@@ -72361,10 +72361,6 @@
    0.859
   ],
   [
-   "timelord:dasha:antar:rahu:moon",
-   0.809
-  ],
-  [
    "timelord:dasha:antar:ketu:mars",
    0.808
   ],
@@ -72383,6 +72379,10 @@
   [
    "timelord:dasha:antar:jupiter:moon",
    0.791
+  ],
+  [
+   "timelord:dasha:antar:ketu:saturn",
+   0.789
   ]
  ],
  "timelord:dasha:antar:ketu:rahu": [
@@ -72411,12 +72411,12 @@
    0.824
   ],
   [
-   "timelord:dasha:antar:rahu:moon",
+   "timelord:dasha:antar:moon:rahu",
    0.821
   ],
   [
-   "timelord:dasha:antar:moon:rahu",
-   0.821
+   "timelord:dasha:antar:moon:ketu",
+   0.819
   ]
  ],
  "timelord:dasha:antar:ketu:saturn": [
@@ -73305,12 +73305,12 @@
  ],
  "timelord:dasha:antar:moon:rahu": [
   [
-   "timelord:dasha:antar:rahu:moon",
-   0.844
-  ],
-  [
    "timelord:dasha:antar:rahu:ketu",
    0.84
+  ],
+  [
+   "timelord:dasha:antar:rahu:moon",
+   0.837
   ],
   [
    "timelord:dasha:antar:venus:rahu",
@@ -73461,16 +73461,16 @@
    0.813
   ],
   [
-   "timelord:dasha:antar:rahu:moon",
-   0.813
-  ],
-  [
    "timelord:dasha:antar:saturn:rahu",
    0.811
   ],
   [
    "timelord:dasha:antar:venus:rahu",
    0.807
+  ],
+  [
+   "timelord:dasha:antar:rahu:saturn",
+   0.794
   ]
  ],
  "timelord:dasha:antar:rahu:ketu": [
@@ -73503,15 +73503,11 @@
    0.84
   ],
   [
-   "timelord:dasha:antar:rahu:moon",
-   0.837
+   "timelord:dasha:antar:rahu:venus",
+   0.834
   ]
  ],
  "timelord:dasha:antar:rahu:mars": [
-  [
-   "timelord:dasha:antar:rahu:moon",
-   0.88
-  ],
   [
    "timelord:dasha:antar:rahu:saturn",
    0.849
@@ -73539,6 +73535,10 @@
   [
    "timelord:dasha:antar:ketu:mars",
    0.836
+  ],
+  [
+   "timelord:dasha:antar:jupiter:mars",
+   0.833
   ]
  ],
  "timelord:dasha:antar:rahu:mercury": [
@@ -73555,10 +73555,6 @@
    0.808
   ],
   [
-   "timelord:dasha:antar:rahu:moon",
-   0.802
-  ],
-  [
    "timelord:dasha:antar:jupiter:mercury",
    0.801
   ],
@@ -73573,47 +73569,47 @@
   [
    "timelord:dasha:antar:mercury:venus",
    0.793
+  ],
+  [
+   "timelord:dasha:antar:saturn:rahu",
+   0.792
   ]
  ],
  "timelord:dasha:antar:rahu:moon": [
   [
-   "timelord:dasha:antar:rahu:mars",
-   0.88
-  ],
-  [
-   "timelord:dasha:antar:rahu:rahu",
-   0.86
+   "timelord:dasha:antar:moon:rahu",
+   0.837
   ],
   [
    "timelord:dasha:antar:venus:rahu",
-   0.847
-  ],
-  [
-   "timelord:dasha:antar:rahu:sun",
-   0.847
+   0.818
   ],
   [
    "timelord:dasha:antar:rahu:venus",
-   0.846
+   0.815
   ],
   [
-   "timelord:dasha:antar:moon:rahu",
-   0.844
+   "timelord:dasha:antar:rahu:rahu",
+   0.814
   ],
   [
-   "timelord:dasha:antar:saturn:rahu",
-   0.837
+   "timelord:dasha:antar:rahu:mars",
+   0.809
   ],
   [
    "timelord:dasha:antar:rahu:ketu",
-   0.837
+   0.798
+  ],
+  [
+   "timelord:dasha:antar:ketu:rahu",
+   0.792
+  ],
+  [
+   "timelord:dasha:antar:rahu:saturn",
+   0.79
   ]
  ],
  "timelord:dasha:antar:rahu:rahu": [
-  [
-   "timelord:dasha:antar:rahu:moon",
-   0.86
-  ],
   [
    "timelord:dasha:antar:saturn:rahu",
    0.836
@@ -73641,6 +73637,10 @@
   [
    "timelord:dasha:antar:rahu:ketu",
    0.821
+  ],
+  [
+   "timelord:dasha:antar:jupiter:rahu",
+   0.815
   ]
  ],
  "timelord:dasha:antar:rahu:saturn": [
@@ -73657,10 +73657,6 @@
    0.834
   ],
   [
-   "timelord:dasha:antar:rahu:moon",
-   0.83
-  ],
-  [
    "timelord:dasha:antar:sun:saturn",
    0.823
   ],
@@ -73675,13 +73671,13 @@
   [
    "timelord:dasha:antar:rahu:venus",
    0.817
+  ],
+  [
+   "timelord:dasha:antar:mercury:rahu",
+   0.809
   ]
  ],
  "timelord:dasha:antar:rahu:sun": [
-  [
-   "timelord:dasha:antar:rahu:moon",
-   0.847
-  ],
   [
    "timelord:dasha:antar:rahu:mars",
    0.836
@@ -73709,16 +73705,16 @@
   [
    "timelord:dasha:antar:jupiter:rahu",
    0.807
+  ],
+  [
+   "timelord:dasha:antar:saturn:sun",
+   0.807
   ]
  ],
  "timelord:dasha:antar:rahu:venus": [
   [
    "timelord:dasha:antar:venus:rahu",
    0.897
-  ],
-  [
-   "timelord:dasha:antar:rahu:moon",
-   0.846
   ],
   [
    "timelord:dasha:antar:saturn:rahu",
@@ -73742,6 +73738,10 @@
   ],
   [
    "timelord:dasha:antar:mercury:rahu",
+   0.823
+  ],
+  [
+   "timelord:dasha:antar:mars:rahu",
    0.823
   ]
  ],
@@ -74247,12 +74247,12 @@
    0.836
   ],
   [
-   "timelord:dasha:antar:rahu:moon",
-   0.823
-  ],
-  [
    "timelord:dasha:antar:rahu:venus",
    0.814
+  ],
+  [
+   "timelord:dasha:antar:rahu:sun",
+   0.807
   ]
  ],
  "timelord:dasha:antar:sun:saturn": [
@@ -74557,8 +74557,8 @@
    0.848
   ],
   [
-   "timelord:dasha:antar:rahu:moon",
-   0.847
+   "timelord:dasha:antar:ketu:rahu",
+   0.845
   ]
  ],
  "timelord:dasha:antar:venus:saturn": [
@@ -77967,10 +77967,6 @@
    0.804
   ],
   [
-   "return:venus",
-   0.795
-  ],
-  [
    "timelord:profection:year:lord:mercury",
    0.784
   ],
@@ -77993,6 +77989,10 @@
   [
    "timelord:firdaria:sub:venus:mercury",
    0.77
+  ],
+  [
+   "timelord:firdaria:sub:jupiter:venus",
+   0.764
   ]
  ],
  "timelord:zr:l1:aquarius": [
@@ -101763,10 +101763,6 @@
  ],
  "transit:venus:conjunction:venus": [
   [
-   "return:venus",
-   0.888
-  ],
-  [
    "transit:venus:conjunction:sun",
    0.848
   ],
@@ -101793,6 +101789,10 @@
   [
    "transit:venus:conjunction:moon",
    0.82
+  ],
+  [
+   "transit:venus:sextile:venus",
+   0.819
   ]
  ],
  "transit:venus:house:1": [
@@ -102709,8 +102709,8 @@
    0.85
   ],
   [
-   "synastry:moon:sextile:venus",
-   0.844
+   "synastry:mars:sextile:venus",
+   0.842
   ]
  ],
  "transit:venus:sextile:mercury": [
@@ -102731,10 +102731,6 @@
    0.866
   ],
   [
-   "synastry:moon:sextile:venus",
-   0.855
-  ],
-  [
    "transit:mercury:sextile:moon",
    0.848
   ],
@@ -102745,6 +102741,10 @@
   [
    "transit:venus:sextile:pluto",
    0.847
+  ],
+  [
+   "transit:venus:sextile:uranus",
+   0.846
   ]
  ],
  "transit:venus:sextile:moon": [
@@ -102755,10 +102755,6 @@
   [
    "transit:venus:sextile:mercury",
    0.887
-  ],
-  [
-   "synastry:moon:sextile:venus",
-   0.883
   ],
   [
    "transit:moon:sextile:venus",
@@ -102779,6 +102775,10 @@
   [
    "transit:mars:sextile:venus",
    0.871
+  ],
+  [
+   "transit:pluto:sextile:venus",
+   0.869
   ]
  ],
  "transit:venus:sextile:neptune": [
@@ -102799,10 +102799,6 @@
    0.846
   ],
   [
-   "synastry:venus:sextile:neptune",
-   0.846
-  ],
-  [
    "transit:venus:trine:neptune",
    0.845
   ],
@@ -102813,6 +102809,10 @@
   [
    "transit:neptune:sextile:moon",
    0.836
+  ],
+  [
+   "transit:venus:sextile:moon",
+   0.834
   ]
  ],
  "transit:venus:sextile:pluto": [
@@ -103453,22 +103453,18 @@
    0.772
   ],
   [
-   "return:venus",
-   0.771
-  ],
-  [
    "transit:venus:house:1",
    0.766
+  ],
+  [
+   "transit:venus:opposition:chiron",
+   0.765
   ]
  ],
  "transit:venus:station:retrograde": [
   [
    "transit:venus:station:direct",
    0.882
-  ],
-  [
-   "return:venus",
-   0.813
   ],
   [
    "transit:mercury:station:retrograde",
@@ -103485,6 +103481,10 @@
   [
    "transit:mercury:station:direct",
    0.772
+  ],
+  [
+   "return:venus",
+   0.77
   ],
   [
    "transit:venus:conjunction:saturn",
