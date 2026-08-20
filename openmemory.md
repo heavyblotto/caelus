@@ -74,6 +74,15 @@ keepers; peach blossom stays). Three agents now write this file —
 widget/engine, corpus/Encyclopedia, visual design; keep edits
 additive.
 
+Local pipeline work (embeddings, library ingestion, text mining over
+the private store, Memorativa private fixtures) belongs to a fourth
+agent track, Cursor, on the maintainer's machine as of 2026-08-20:
+`docs/product/local-pipelines-plan.md`. The committed artifacts
+(neighbors.json, echo report, library.csv columns, aggregate mining
+reports, fixture manifests) are the interface; remote tracks consume
+them and request refreshes. Four writers now share this file; keep
+edits additive.
+
 Maintainer decisions of 2026-08-20: the Encyclopedia is the
 Encyclopedia of Hermes (Western esoteric traditions; astrology is the
 engine-backed core division, the corpus stays astrological), and the
