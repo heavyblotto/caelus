@@ -126,7 +126,14 @@ normative language into project docs.
   `src/payload.ts`), `DerivationFigure(scene, t)` pure; positions
   always `eclToHor · unitVector(λ, β·(1−s))` so the coordinate handoff
   is exact; settle aims at the ecliptic south pole for wheel
-  handedness; `t = 1` renders the real `ChartWheel`. Wheel-anatomy
+  handedness; `t = 1` renders the real `ChartWheel`. Console
+  interactions (derivation-widget.tsx): follow-a-body (tap; datum line
+  via `derivationDatum`, tick held at every t), clock nudge ±4m
+  (`shiftInstant`; params in, scene out — needs the host's `getEngine`
+  loader), latitude ±5° at SPHERE, free orbit (drag, release returns
+  to the scrub camera), autoplay ▸ (host gates first-encounter play +
+  reduced motion via the `autoplay` prop), optional station captions
+  (`STATION_CAPTIONS`, `params.captions`). Wheel-anatomy
   widget: same scene/figure split (`deriveAnatomy`,
   `WheelAnatomyFigure(scene, layers)`); layer names
   `horizon · zodiac · houses · bodies · aspects` map onto the

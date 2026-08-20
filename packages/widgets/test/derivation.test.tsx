@@ -13,6 +13,7 @@ import { Engine, dirFromAzAlt, unitVector, VERSION, type Vec3 } from "caelus";
 import { loadNodeData } from "caelus/node";
 import { ChartDerivation } from "../src/derivation-widget.js";
 import {
+  derivationDatum, shiftInstant, STATION_CAPTIONS, type SceneBody,
   deriveScene, DerivationFigure, DERIVATION_STATIONS,
 } from "../src/derivation.js";
 import type { DerivationParams } from "../src/spec.js";
@@ -137,6 +138,96 @@ const render = (t: number, follow?: string) =>
   assert(html.includes("<svg"), "widget: figure present");
   assert(html.includes("ECLIPTIC"), "widget: station labels present");
   assert(html.includes("ecliptic · t 0.50"), "widget: datum line");
+}
+
+// ----------------------------------------------------- console datum
+{
+  const body: SceneBody = {
+    id: "sun", lon: 79.45, lat: 1.0333, azDeg: 158.3, altDeg: 34.2,
+    retrograde: false,
+  };
+  assert(derivationDatum(body)
+    === "alt +34° 12′ · az 158° · λ 19°27′ ♊ · β +1°02′",
+  `datum: the plan's register exactly, got "${derivationDatum(body)}"`);
+  const below: SceneBody = {
+    id: "moon", lon: 359.999, lat: -0.5, azDeg: 12.6, altDeg: -8.05,
+    retrograde: false,
+  };
+  const d = derivationDatum(below);
+  assert(d.startsWith("alt −8° 03′"), `datum: negative altitude signed (${d})`);
+  assert(d.includes("♓") || d.includes("♈"),
+    "datum: longitude wrap stays on the zodiac");
+}
+
+// ------------------------------------------------------------- the clock
+{
+  const i = { y: 1990, mo: 6, d: 10, h: 23, mi: 58, s: 0 };
+  const on = shiftInstant(i, 4);
+  assert(on.d === 11 && on.h === 0 && on.mi === 2,
+    "clock: nudge carries across midnight");
+  const back = shiftInstant(on, -4);
+  assert(JSON.stringify(back) === JSON.stringify(i),
+    "clock: nudges invert exactly");
+}
+
+// ------------------------------------------------- follow through the morph
+{
+  // the followed body's projection tick stays drawn at every t
+  const lines = (html: string) => (html.match(/<line /g) ?? []).length;
+  assert(lines(render(0, "sun")) === lines(render(0)) + 1,
+    "follow: tick drawn at SKY");
+  assert(lines(render(0.25, "sun")) === lines(render(0.25)) + 1,
+    "follow: tick drawn at SPHERE");
+}
+
+// --------------------------------------------------------------- free orbit
+{
+  const plain = render(0.25);
+  const orbited = renderToStaticMarkup(
+    <DerivationFigure scene={scene} t={0.25} orbit={{ az: 20, alt: 10 }} />,
+  );
+  assert(plain !== orbited, "orbit: offset moves the camera");
+  assert(renderToStaticMarkup(
+    <DerivationFigure scene={scene} t={0.25} />,
+  ) === plain, "orbit: omitted offset is the canonical view");
+}
+
+// -------------------------------------------------------- console controls
+{
+  for (const s of DERIVATION_STATIONS) {
+    assert(typeof STATION_CAPTIONS[s.id] === "string",
+      `captions: station ${s.id} captioned`);
+  }
+  const bare = renderToStaticMarkup(<ChartDerivation scene={scene} />);
+  assert(bare.includes("▸"), "controls: autoplay affordance present");
+  assert(!bare.includes("clock"), "controls: no clock without an engine");
+
+  const withEngine = renderToStaticMarkup(
+    <ChartDerivation scene={scene} initialT={0.25}
+      getEngine={() => Promise.reject(new Error("ssr"))} />,
+  );
+  assert(withEngine.includes("−4m") && withEngine.includes("+4m"),
+    "controls: clock nudge with an engine");
+  assert(withEngine.includes("lat "),
+    "controls: latitude control at SPHERE");
+  const atSky = renderToStaticMarkup(
+    <ChartDerivation scene={scene} initialT={0}
+      getEngine={() => Promise.reject(new Error("ssr"))} />,
+  );
+  assert(!atSky.includes("lat "),
+    "controls: latitude control only at SPHERE");
+
+  const captioned = renderToStaticMarkup(
+    <ChartDerivation
+      scene={{ ...scene, params: { ...scene.params, captions: true } }}
+      initialT={0.75}
+    />,
+  );
+  assert(captioned.includes(STATION_CAPTIONS.horizon),
+    "captions: drawn when the instance asks");
+  assert(!renderToStaticMarkup(<ChartDerivation scene={scene} initialT={0.75} />)
+    .includes(STATION_CAPTIONS.horizon),
+  "captions: absent by default");
 }
 
 console.log(`\n${checks} checks, ${failures} failures`);

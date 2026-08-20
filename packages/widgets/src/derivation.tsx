@@ -135,6 +135,54 @@ export const DERIVATION_STATIONS: ConsoleStation[] = [
   { id: "wheel", label: "WHEEL", t: 1 },
 ];
 
+/** Optional per-station captions (params.captions draws them), in
+ *  apparatus register: one sentence naming what the station shows. */
+export const STATION_CAPTIONS: Record<string, string> = {
+  sky: "The sky from the birthplace at the birth instant; bodies below the horizon are faint. The chart is not what you could see.",
+  sphere: "The whole celestial sphere. The horizon is a great circle, and the hidden hemisphere swings into view.",
+  ecliptic: "The ecliptic lights up and each body drops a perpendicular tick onto it: ecliptic longitude, the number the chart is made of.",
+  horizon: "Horizon and ecliptic cross at exactly two points. The eastern crossing is the Ascendant.",
+  wheel: "Latitude collapses, the disc pivots to the page, the Ascendant lands at the left edge, and the furniture arrives.",
+};
+
+// ----------------------------------------------------------------- datum
+
+const SIGNS = ["♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏", "♐", "♑", "♒", "♓"];
+
+const dm = (deg: number): [number, string] => {
+  const a = Math.abs(deg);
+  let d = Math.floor(a);
+  let m = Math.round((a - d) * 60);
+  if (m === 60) { d += 1; m = 0; }
+  return [d, String(m).padStart(2, "0")];
+};
+
+/** The follow datum line, exactly the console's register:
+ *  `alt +34° 12′ · az 158° · λ 19°27′ ♊ · β +1°02′`. */
+export function derivationDatum(b: SceneBody): string {
+  const [ad, am] = dm(b.altDeg);
+  const altSign = b.altDeg < 0 ? "−" : "+";
+  const lon = ((b.lon % 360) + 360) % 360;
+  const [ld, lm] = dm(lon % 30);
+  const [bd, bm] = dm(b.lat);
+  const betaSign = b.lat < 0 ? "−" : "+";
+  return `alt ${altSign}${ad}° ${am}′ · az ${Math.round(b.azDeg)}° · `
+    + `λ ${ld}°${lm}′ ${SIGNS[Math.floor(lon / 30)]} · β ${betaSign}${bd}°${bm}′`;
+}
+
+/** A civil instant shifted by whole minutes, in UT calendar arithmetic.
+ *  Pure: the clock interaction is a params change, never a clock read. */
+export function shiftInstant(
+  i: { y: number; mo: number; d: number; h: number; mi: number; s: number },
+  minutes: number,
+): { y: number; mo: number; d: number; h: number; mi: number; s: number } {
+  const t = new Date(Date.UTC(i.y, i.mo - 1, i.d, i.h, i.mi + minutes, i.s));
+  return {
+    y: t.getUTCFullYear(), mo: t.getUTCMonth() + 1, d: t.getUTCDate(),
+    h: t.getUTCHours(), mi: t.getUTCMinutes(), s: t.getUTCSeconds(),
+  };
+}
+
 // --------------------------------------------------------------- geometry
 
 const DEG = Math.PI / 180;
@@ -184,8 +232,16 @@ export interface DerivationFigureProps {
   t: number;
   /** Square size in px. */
   size?: number;
-  /** Body id held highlighted through the morph. */
+  /** Body id held highlighted through the morph. Its projection tick
+   *  stays drawn at every t, not only past the ECLIPTIC ramp. */
   follow?: string;
+  /** Free-orbit offset (degrees) applied to the camera aim; the scrub
+   *  owns the canonical view, so the widget clears this on release. */
+  orbit?: { az: number; alt: number };
+  /** Tap-a-body callback; handlers attach only when provided, so the
+   *  server render (and the figure harness) is byte-identical without
+   *  it. */
+  onPick?: (id: string) => void;
 }
 
 /**
@@ -194,7 +250,7 @@ export interface DerivationFigureProps {
  * the ordinary figure, not an imitation of it.
  */
 export function DerivationFigure({
-  scene, t: tRaw, size = 520, follow,
+  scene, t: tRaw, size = 520, follow, orbit, onPick,
 }: DerivationFigureProps): ReactElement {
   const t = clamp01(tRaw);
   if (t >= 1) {
@@ -204,10 +260,16 @@ export function DerivationFigure({
   // --- the camera path -----------------------------------------------
   // Opening aim: toward the rising ecliptic, a little above the
   // horizon. Settle aim: the ecliptic south pole (see module notes).
+  // A free-orbit offset rides on top; release clears it, so the scrub
+  // keeps the canonical view.
   const aim0 = dirFromAzAlt(scene.ascAz, 15);
   const aim1 = neg(scene.eclToHor[2]);
   const aim = slerp(aim0, aim1, ramp(t, 0.875, 1));
-  const [aimAz, aimAlt] = azAltOfDir(aim);
+  let [aimAz, aimAlt] = azAltOfDir(aim);
+  if (orbit) {
+    aimAz += orbit.az;
+    aimAlt = Math.max(-85, Math.min(85, aimAlt + orbit.alt));
+  }
   const pull = ramp(t, 0, 0.25);
   const proj = skyProjector(aimAz, aimAlt, {
     shape: pull,
@@ -293,15 +355,16 @@ export function DerivationFigure({
 
   // Longitude ticks: the perpendicular each body drops onto the
   // ecliptic — the number the chart is made of, shown as what it is.
-  if (oTicks > 0) {
-    for (const b of scene.bodies) {
-      const [x1, y1] = XY(bodyDir(b));
-      const [x2, y2] = XY(eclDir(b.lon, 0));
-      const held = follow !== undefined && b.id === follow;
-      els.push(<line key={`tick-${b.id}`} x1={x1} y1={y1} x2={x2} y2={y2}
-        stroke={held ? PLATE_TOKENS.accent : PLATE_TOKENS.faintInk}
-        strokeWidth={held ? 1 : 0.5} opacity={fix(oTicks)} />);
-    }
+  // A followed body's tick stays drawn at every t.
+  for (const b of scene.bodies) {
+    const held = follow !== undefined && b.id === follow;
+    const o = held ? 1 : oTicks;
+    if (o <= 0) continue;
+    const [x1, y1] = XY(bodyDir(b));
+    const [x2, y2] = XY(eclDir(b.lon, 0));
+    els.push(<line key={`tick-${b.id}`} x1={x1} y1={y1} x2={x2} y2={y2}
+      stroke={held ? PLATE_TOKENS.accent : PLATE_TOKENS.faintInk}
+      strokeWidth={held ? 1 : 0.5} opacity={fix(o)} />);
   }
 
   // The four angles are intersections, not objects: rings at the
@@ -348,7 +411,8 @@ export function DerivationFigure({
     const hidden = b.altDeg < 0 ? 0.25 + 0.75 * whole : 1;
     els.push(<circle key={`body-${b.id}`} cx={x} cy={y} r={held ? 4.5 : 3.5}
       fill={held ? PLATE_TOKENS.accent : PLATE_TOKENS.mutedInk}
-      opacity={fix(hidden)} />);
+      opacity={fix(hidden)}
+      {...(onPick ? { onClick: () => onPick(b.id) } : {})} />);
   }
 
   return (

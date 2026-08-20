@@ -56,5 +56,10 @@ export default function DerivationPlate({
     };
   }, [params, scene]);
 
-  return <ChartDerivation scene={override ?? scene} size={size} />;
+  // getEngine powers the clock and latitude controls; it is the same
+  // lazy loader, so the tier still only downloads on first use.
+  return (
+    <ChartDerivation scene={override ?? scene} size={size}
+      getEngine={browserEngine} />
+  );
 }
