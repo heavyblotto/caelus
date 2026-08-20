@@ -23,13 +23,17 @@ carries the unreleased engine 0.25.0 source.
   `data/passages/`, registered into per-batch TS modules by
   `pipeline/register-sets.mjs`, compiled to `InterpretationSource`s. Subpath
   exports (`caelus-corpus/natal`, `/transits`, `/relationship`, `/timing`,
-  `/notes`) enable lazy loading in the web app. The grid enumerates 3,658
+  `/notes`) enable lazy loading in the web app. The grid enumerates 4,054
   cells: B1–B5 written (3,656 as of 2026-08-20; B5's 600 bindable cells
   across twelve families — lots, dispositors, receptions, stars via the
   curated `B5_STARS` 60, parallels, Moon nakshatras and padas, D9 vargas
   and framings, yogas — written and adversarially reviewed in seven
   waves; the `natal:lot|star|parallel|reception|dispositor:*` and
-  `vedic:*` cell-id shapes still await a `parseCellId` extension).
+  `vedic:*` cell-id shapes still await a `parseCellId` extension). B6
+  scaffolded 2026-08-20 (bb1a3ed): `b6Grid` adds the degree layer —
+  `ten-degree-face` (36 cells, ids `natal:face:<sign>:<1-3>`) and
+  `degree-symbol` (360 cells, ids `natal:degree:<sign>:<1-30>`), both
+  binding `hasDegree`; writing remains.
 - **Web** (`apps/web`): Playground `ReadingTab` dynamically imports corpus
   batches per context. Prose gated by root `scripts/lint-prose.sh` (Vale +
   em-dash check); the extractor `scripts/extract-web-prose.mjs` names the
