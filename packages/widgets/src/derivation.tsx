@@ -46,6 +46,7 @@ import {
   ChartWheel, PLATE_THEME, PLATE_TOKENS, type WheelChart,
 } from "caelus-wheel";
 import { PlateConsole, type ConsoleStation } from "./console.js";
+import { wheelPayload } from "./payload.js";
 import type { DerivationParams } from "./spec.js";
 
 // ------------------------------------------------------------------ scene
@@ -103,7 +104,6 @@ export function deriveScene(
   };
 
   const bodies: SceneBody[] = [];
-  const wheelBodies: WheelChart["bodies"] = {};
   for (const [id, b] of Object.entries(chart.bodies)) {
     if (!b) continue;
     const [azDeg, altDeg] = hor(b.lon, b.lat);
@@ -111,11 +111,6 @@ export function deriveScene(
       id, lon: b.lon, lat: b.lat, azDeg, altDeg,
       retrograde: !!b.retrograde,
     });
-    wheelBodies[id] = {
-      lon: b.lon,
-      ...(b.retrograde ? { retrograde: true } : {}),
-      ...(b.signDeg !== undefined ? { signDeg: b.signDeg } : {}),
-    };
   }
 
   return {
@@ -123,13 +118,7 @@ export function deriveScene(
     asc: chart.angles.asc,
     mc: chart.angles.mc,
     cusps: chart.cusps,
-    wheel: {
-      bodies: wheelBodies,
-      angles: { asc: chart.angles.asc, mc: chart.angles.mc },
-      cusps: chart.cusps,
-      aspects: chart.aspects.map(({ a, b, aspect, orb }) =>
-        ({ a, b, aspect, orb })),
-    },
+    wheel: wheelPayload(chart),
     eclToHor: [horDir(0, 0), horDir(90, 0), horDir(0, 90)],
     ascAz: hor(chart.angles.asc, 0)[0],
     engineVersion: VERSION,

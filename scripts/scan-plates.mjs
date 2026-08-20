@@ -159,6 +159,15 @@ const KINDS = {
       fail("captions must be a boolean");
     }
   },
+  "wheel-anatomy"(p, fail) {
+    checkChartParams(p, fail);
+    if (p.layers !== undefined) {
+      const known = new Set(["horizon", "zodiac", "houses", "bodies", "aspects"]);
+      if (!Array.isArray(p.layers) || !p.layers.every((l) => known.has(l))) {
+        fail("layers must be an array of anatomy layer names");
+      }
+    }
+  },
 };
 
 // ---------------------------------------------------------------- scan

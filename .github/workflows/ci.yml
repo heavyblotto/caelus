@@ -133,6 +133,8 @@ jobs:
       - run: node packages/widgets/dist/test/plate.test.js
       # derivation widget: scene handoff identity, station renders, handedness
       - run: node packages/widgets/dist/test/derivation.test.js
+      # wheel-anatomy widget: layers add/remove marks; all-on = ChartWheel exactly
+      - run: node packages/widgets/dist/test/wheel-anatomy.test.js
       # figure harness: canonical SVG hashes per plate/station + version stamp
       - run: node packages/widgets/dist/test/harness.test.js
       # apps/web library units (timeline lanes, root-found transit spans)

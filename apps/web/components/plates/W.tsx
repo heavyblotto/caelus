@@ -20,16 +20,19 @@
 import type { ReactElement } from "react";
 import {
   PlateFrame,
-  type ChartParams, type DerivationParams, type WidgetKind,
+  type ChartParams, type DerivationParams, type WheelAnatomyParams,
+  type WidgetSpec,
 } from "caelus-widgets";
 import { deriveScene } from "caelus-widgets/derivation";
+import { deriveAnatomy } from "caelus-widgets/wheel-anatomy";
 import { sampleEngine } from "../../lib/sample-chart";
 import { b64urlEncode, type Share } from "../../lib/share";
 import DerivationPlate from "./DerivationPlate";
+import WheelAnatomyPlate from "./WheelAnatomyPlate";
 
 export interface WProps {
-  kind: WidgetKind;
-  params: DerivationParams;
+  kind: WidgetSpec["kind"];
+  params: WidgetSpec["params"];
   figure: number;
   caption: string;
   /** KB node the plate illustrates ("kb:angle/ascendant"). Read by the
@@ -61,9 +64,12 @@ function reproduceHref(p: ChartParams): string {
 export default function W({
   kind, params, figure, caption,
 }: WProps): ReactElement {
+  // `kind` and `params` arrive as separate MDX attributes, so the cast
+  // per case re-joins the union; the registry scan validated the
+  // pairing at build time.
   switch (kind) {
     case "derivation": {
-      const scene = deriveScene(sampleEngine, params);
+      const scene = deriveScene(sampleEngine, params as DerivationParams);
       return (
         <PlateFrame
           figure={figure}
@@ -72,6 +78,19 @@ export default function W({
           reproduceHref={reproduceHref(params)}
         >
           <DerivationPlate scene={scene} />
+        </PlateFrame>
+      );
+    }
+    case "wheel-anatomy": {
+      const scene = deriveAnatomy(sampleEngine, params as WheelAnatomyParams);
+      return (
+        <PlateFrame
+          figure={figure}
+          caption={caption}
+          engineVersion={scene.engineVersion}
+          reproduceHref={reproduceHref(params)}
+        >
+          <WheelAnatomyPlate scene={scene} />
         </PlateFrame>
       );
     }
