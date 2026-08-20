@@ -60,9 +60,9 @@ mirror.
 **Not written:** B6 (decans and degree symbols, ~400 — the degree
 symbols are original, written for this corpus) and B8 (site guides, ~180
 pieces after the glossary moved to the Encyclopedia). B5's 600 bindable
-cells were written and adversarially reviewed in seven waves, 2026-08-20
-(sheets `pipeline/wave-b5-1.md` through `wave-b5-7.md`); its two raja/
-dhana yoga cells stay `bindable: false` until the engine detects them.
+cells were written and adversarially reviewed in seven waves,
+2026-08-20; its two raja/dhana yoga cells stay `bindable: false` until
+the engine detects them.
 
 ## The pipeline
 
