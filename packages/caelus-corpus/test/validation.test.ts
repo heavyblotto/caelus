@@ -295,10 +295,9 @@ check(findings.length === 0, `lints clean (${findings.length} findings)`);
 
 // 5b. The near-duplicate sentence lint, on fixtures.
 //
-// It is not in lintCorpus yet: turning it on found 348 findings in shipped
-// B1/B2/B3/B4 content, which the batch review passes are repairing. It runs
-// writer-facing in check-slice and check-family so no new slice adds to that
-// count. These fixtures pin the behaviour meanwhile.
+// It gates in lintCorpus (above) since the repair waves took the backlog to
+// zero; when first written it found 348 findings in shipped content and ran
+// writer-facing only. These fixtures pin the behaviour either way.
 console.log("near-duplicate sentence lint");
 {
   const p = (id: string, text: string): Passage =>

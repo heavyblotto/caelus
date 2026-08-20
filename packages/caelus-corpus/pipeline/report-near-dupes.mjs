@@ -1,8 +1,8 @@
 // Report the near-duplicate-sentence backlog across the whole corpus.
 //
-// `lintNearDuplicateSentences` is writer-facing (check-slice, check-family) but
-// not yet in `lintCorpus`, because it finds real defects in already-shipped
-// content. This script is how a review pass gets its worklist: it runs the lint
+// `lintNearDuplicateSentences` runs writer-facing (check-slice, check-family)
+// and gates in `lintCorpus` since the backlogs reached zero (2026-08-19).
+// This script is how a review pass gets its worklist: it runs the lint
 // per family over every passage file and reports findings grouped by the file
 // that owns the entry, so a reviewer agent can be handed exactly its own.
 //

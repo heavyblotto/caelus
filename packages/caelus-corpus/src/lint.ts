@@ -507,6 +507,11 @@ export function lintCorpus(passages: Passage[]): LintFinding[] {
     findings.push(...lintDuplication(group));
     findings.push(...lintSharedSentences(group));
     findings.push(...lintSkeletons(group));
+    findings.push(...lintNearDuplicateSentences(group));
+    findings.push(...lintFormulaClusters(group));
   }
+  // Cross-family echoes group by reading scope internally, so they take the
+  // whole corpus rather than a family slice (mirrors report-backlog.mjs).
+  findings.push(...lintCrossFamilyEchoes(passages));
   return findings;
 }

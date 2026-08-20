@@ -1,9 +1,9 @@
 // Snapshot the three open lint backlogs into `backlog/` as markdown worklists.
 //
-// The three lints below are writer-facing (check-slice, check-family) but not
-// in `lintCorpus`, because they find real defects in already-shipped content.
-// Committing their output means a reviewer can be handed a worklist without
-// building anything, and means the backlog shrinking is visible in the diff.
+// The three lints below also gate in `lintCorpus` (since the 2026-08-19
+// repair waves took the backlogs to zero). This script stays as the record:
+// committing the output means a reviewer can be handed a worklist without
+// building anything, and means any regression is visible in the diff.
 //
 // Run it after every repair wave:
 //   node pipeline/report-backlog.mjs

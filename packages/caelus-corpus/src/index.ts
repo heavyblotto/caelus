@@ -16,10 +16,10 @@ export { ruleFromPassage, compileCorpusSource } from "./compile.js";
 export { selectorFromSpec } from "./selectors.js";
 export { b1Grid, b2Grid, b3Grid, b4Grid, fullGrid, gridCoverage } from "./grid.js";
 export type { GridCell } from "./grid.js";
-// The last three are the lints the B3 waves added. They are writer-facing
-// only: `lintCorpus` does not run them yet, because they still report against
-// shipped content (see backlog/). Exported so the reports and any future gate
-// use the package API rather than reaching into `dist/`.
+// The last three are the lints the B3 waves added. They gated as
+// writer-facing reports until the repair waves took the backlogs to zero
+// (2026-08-19); `lintCorpus` runs them since then. Exported individually so
+// the reports use the package API rather than reaching into `dist/`.
 export {
   lintPassage, lintCorpus, lintDuplication, lintSharedSentences, lintSkeletons,
   lintNearDuplicateSentences, lintFormulaClusters, lintCrossFamilyEchoes,
