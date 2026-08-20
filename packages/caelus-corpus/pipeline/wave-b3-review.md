@@ -169,20 +169,58 @@ It finds 495 findings in shipped content, so like the near-duplicate lint it
 is writer-facing first and a corpus gate once the backlog clears. Findings
 naming your files are yours.
 
+## Rulings from wave 2 (composite + overlay pass, 2026-08-19)
+
+Four more, from eleven reviewers over the 738-cell remainder.
+
+### The overlay exchange pivot: at most four per file
+
+Overlay entries must cover both sides — what the overlay person brings,
+what the house person experiences. Half of each file carried that duty
+through one labeled ledger sentence ("What you get from this position
+is X", "What they tend to experience is Y"). Under every lint, visible
+to any reader of two essays. The ruling: the labeled pivot shape may
+carry the exchange in at most four of a file's twelve entries;
+elsewhere the two sides arrive inside the essay's own material, without
+the ledger frame.
+
+### Opposition canon and accuracy hedges: concrete instances are not capped
+
+The opposition roles-polarize-and-trade beat, and the hard-aspect
+"this is not a forecast of breakage" hedge, are canon and required.
+When each instance is written in its own entry's material terms with
+distinct structure, they stay — however many there are. The caps above
+(cohort caveat, soft-aspect beat, convention caveat) exist for
+abstract moves reworded to dodge lints, not for concrete accuracy
+work. The test stays "would another competent writer have produced
+this sentence?", applied sentence by sentence.
+
+### The cohort caveat on mixed cells
+
+A personal-to-outer cell (Mars trine Uranus) may carry the cohort
+caveat for its outer end, inside the one-per-file cap. The claim only
+covers the outer body's slow motion, and written that way it is
+accurate.
+
+### The composite-house convention caveat is distributed
+
+Each body carries the equal-from-midpoint-asc caveat in exactly one
+house, all twelve houses covered exactly once across the twelve bodies:
+Sun 10, Moon 4, Mercury 3, Venus 7, Mars 6, Jupiter 9, Saturn 2,
+Uranus 11, Neptune 12, Pluto 8, Chiron 5, Node 1. Written in each
+entry's own terms; the stock 1/4/10/12 blocks are gone.
+
 ## The composite-house convention caveat
 
 The composite chart's houses come from `compositeFrame()`, which builds
 equal houses from the midpoint Ascendant and names itself
 `equal-from-midpoint-asc`. That convention has to be visible to the
-reader, and today it is carried by three of the twelve body files
-(jupiter, neptune, pluto), all of them in houses 1, 4, 10 and 12 — the
-same cells, in recognizably the same words. A reader who opens two
-bodies' first-house essays sees the same move twice, and a reader of the
-other nine bodies never sees it at all.
-
-If composite-house is in your scope, your prompt names **which houses
-your body carries the caveat in**. Carry it there, in that entry's own
-terms, and remove it from your body's other cells. The page states the
+reader. Before wave 2 it was carried by three of the twelve body files
+(jupiter, neptune, pluto), all in houses 1, 4, 10 and 12 in recognizably
+the same words; wave 2 distributed it per the ruling above. If
+composite-house is in your scope, your prompt names which houses your
+body carries the caveat in. Carry it there, in that entry's own terms,
+and remove it from your body's other cells. The page states the
 convention too, so no single essay is load-bearing.
 
 ## What a repair may not do
@@ -200,9 +238,12 @@ Do **not** run the package build or test; thirty reviewers share one
 
 ```
 node pipeline/check-texts.mjs data/passages/<your-file.json> [...]
-node pipeline/check-slice.mjs data/passages/<your-file.json> [...]
+node pipeline/check-slice.mjs pipeline/briefs/<slice.json> data/passages/<your-file.json>
 node pipeline/check-family.mjs data/passages/<your-file.json> [...]
 ```
+
+(`check-slice` takes the brief path first; two wave-2 reviewers tripped
+on the earlier bare-path usage line here.)
 
 `check-texts` must print `texts ok`. `check-family` prints `FAIL` for
 findings naming your own entries and `note` for other files'; only the
