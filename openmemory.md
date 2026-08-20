@@ -74,6 +74,18 @@ keepers; peach blossom stays). Three agents now write this file —
 widget/engine, corpus/Encyclopedia, visual design; keep edits
 additive.
 
+Design stream, first landed artifact (2026-08-20, `feature/visual-design`
+merged at 1fc36d1): `docs/design/ds-01-disposition.md` reads the nine
+DS-01 audit findings against the five `design(site)` commits and the
+current `globals.css` — one resolved (blossom brief, by redefinition),
+two partial (labels, interactive families), six standing (sub-body type
+sizes, spacing scale, four surfaces, header magic numbers, light-theme
+chart ink, page widths). It names seven keepers from the DS-01 proposal
+and recommends absorb-then-retire; the disposition is the maintainer's
+decision (open decision 7). The design agent works on
+`feature/visual-design` and merges through the verified ritual: build,
+root test, `plates:scan --check`, widgets harness, push.
+
 Local pipeline work (embeddings, library ingestion, text mining over
 the private store, Memorativa private fixtures) belongs to a fourth
 agent track, Cursor, on the maintainer's machine as of 2026-08-20:
