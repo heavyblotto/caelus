@@ -79,7 +79,19 @@ export interface WheelAnatomySpec {
   params: WheelAnatomyParams;
 }
 
+/** Params for the house-comparator widget: one birth through the
+ *  twelve systems. `houseSystem` is the reference; `compare` is the
+ *  system the plate draws and tables against it at rest. */
+export interface HouseComparatorParams extends ChartParams {
+  compare?: HouseSystem;
+}
+
+export interface HouseComparatorSpec {
+  kind: "house-comparator";
+  params: HouseComparatorParams;
+}
+
 /** The discriminated union over every widget kind. */
-export type WidgetSpec = DerivationSpec | WheelAnatomySpec;
+export type WidgetSpec = DerivationSpec | WheelAnatomySpec | HouseComparatorSpec;
 
 export type WidgetKind = WidgetSpec["kind"];

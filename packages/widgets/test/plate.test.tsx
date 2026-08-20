@@ -94,7 +94,7 @@ const STATIONS: ConsoleStation[] = [
     spec,
     caption: "The horizon axis.",
     location: { entry: "ascendant", section: "1" },
-    kb: "kb:angle/ascendant",
+    kb: "chart-type:natal",
     engineVersion: VERSION,
   };
   const roundTrip = JSON.parse(JSON.stringify(record)) as PlateRecord;

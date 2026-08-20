@@ -43,6 +43,15 @@ const ENGINE_VERSION = JSON.parse(
   readFileSync(join(ROOT, "packages", "caelus", "package.json"), "utf8"),
 ).version;
 
+// The kb attribute must name a real node: the infobox and search link
+// through it in both directions, so a phantom id is a build failure,
+// not a dead link discovered later.
+const KB_IDS = new Set(
+  JSON.parse(
+    readFileSync(join(ROOT, "packages", "kb", "data", "kb.json"), "utf8"),
+  ).nodes.map((n) => n.id),
+);
+
 // ------------------------------------------------------------- sources
 // Entry sources: the content dir carries entries as flat MDX
 // (`<slug>.mdx`) until the Encyclopedia routes land; app-dir pages
@@ -168,6 +177,12 @@ const KINDS = {
       }
     }
   },
+  "house-comparator"(p, fail) {
+    checkChartParams(p, fail);
+    if (p.compare !== undefined && !isStr(p.compare)) {
+      fail("compare must be a house-system name");
+    }
+  },
 };
 
 // ---------------------------------------------------------------- scan
@@ -214,8 +229,10 @@ for (const { file, entry } of entrySources()) {
         if (!isStr(caption) || !caption.trim()) {
           throw new Error(`${where}: every plate carries an apparatus caption`);
         }
-        if (kb !== undefined && !/^kb:/.test(kb)) {
-          throw new Error(`${where}: kb must be a kb: node id, got ${JSON.stringify(kb)}`);
+        if (kb !== undefined && !KB_IDS.has(kb)) {
+          throw new Error(
+            `${where}: kb must name an existing caelus-kb node, got ${JSON.stringify(kb)}`,
+          );
         }
         plates.push({
           id: isStr(id) ? id : `${entry}-fig-${figure}`,

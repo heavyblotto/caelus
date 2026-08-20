@@ -18,6 +18,19 @@
   "chart-fig-2@zodiac": "e9065a4f85bdfdb69f46886e6408c51243a57ab2204f55b40f1861a4c569830e",
   "chart-fig-2@houses": "a43346fc57bd6467713a716f9e23b07ecf9ec8cbd8cff8069a2d634970e3483f",
   "chart-fig-2@bodies": "91d15a7b4b198fb7eb046087f50d59af4bedc1388e0ee253a999b50647733f3c",
-  "chart-fig-2@aspects": "54ab7d76cde237a292fa3283f3a027749bc8768c077a198885fa46f5a900907f"
+  "chart-fig-2@aspects": "54ab7d76cde237a292fa3283f3a027749bc8768c077a198885fa46f5a900907f",
+  "house-fig-1": "7e1372d25506a74095532e08fff95f62fd31834676e0be16fbea58dcefccfb6b",
+  "house-fig-1@placidus": "54ab7d76cde237a292fa3283f3a027749bc8768c077a198885fa46f5a900907f",
+  "house-fig-1@porphyry": "b69e4f0587942b874a7ee98c285a5f58800092f519e1475bd8b8fa5ee3db2191",
+  "house-fig-1@equal": "e6ed92ababce52906c2656222a0b220d9c79e2582005b8abea2b4aebe929288a",
+  "house-fig-1@whole_sign": "7e1372d25506a74095532e08fff95f62fd31834676e0be16fbea58dcefccfb6b",
+  "house-fig-1@koch": "ee939df22b2e89070d4153df0491fe7997e87bfed926c7f51b02b4c6b5e467f1",
+  "house-fig-1@regiomontanus": "c020f0f920e7b0f98efbf86fca3de6d721d81296cde7c7a1130a89ddf3e3864b",
+  "house-fig-1@campanus": "b60d69925bd93c7b690d5eec44973518cc2f1a3e254591f60662ff753c150b64",
+  "house-fig-1@alcabitius": "b87b21b36262e7f2517d1e2369414c8376fc4a517d70ad2f46e788701caa8646",
+  "house-fig-1@morinus": "a627d5724ce25ddb52614aa06a645690215fdbc801fecbe8a33535bbb443050b",
+  "house-fig-1@meridian": "d774064b801cbcae13a958409e0e489c67e22c8e3afeffb80493262c9744219a",
+  "house-fig-1@polich_page": "62e02f2fe647145f8b36b68a63f16ce4fdca1cf6c6c73f7a923afc819c883918",
+  "house-fig-1@vehlow": "64d95f156e7b07c870d9a8a413700673ac2580e75f0d9d4d85fbc2c3c42d1373"
  }
 }
