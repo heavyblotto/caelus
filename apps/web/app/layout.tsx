@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
+import { ReaderChartProvider } from "../components/ReaderChartContext";
 import { SITE } from "../lib/site";
 import "./globals.css";
 
@@ -70,7 +71,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <a href="#content" className="skip-link">Skip to content</a>
         <SiteHeader />
-        <div id="content" tabIndex={-1}>{children}</div>
+        {/* Reader's chart is site-wide: any page may carry a widget that
+            accepts the override, so the provider wraps the content, not
+            one section. It renders no DOM and touches only the fragment
+            and localStorage — nothing reaches the server. */}
+        <ReaderChartProvider>
+          <div id="content" tabIndex={-1}>{children}</div>
+        </ReaderChartProvider>
         <SiteFooter />
       </body>
     </html>

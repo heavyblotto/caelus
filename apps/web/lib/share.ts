@@ -28,10 +28,11 @@ function b64urlDecode(raw: string): unknown {
   return JSON.parse(new TextDecoder().decode(bytes));
 }
 
-const isShare = (v: unknown): v is Share =>
+export const isShare = (v: unknown): v is Share =>
   !!v && typeof v === "object" && typeof (v as Share).t === "string";
 
-function decShare(raw: string): Share | null {
+/** Decode one b64url-encoded Share, or null if it isn't one. */
+export function decodeShare(raw: string): Share | null {
   try {
     const s = b64urlDecode(raw);
     return isShare(s) ? s : null;
@@ -62,6 +63,6 @@ export function readUrlState(): { set: Share[] | null; single: Share | null } {
   const singleRaw = hash.get("c") ?? new URLSearchParams(window.location.search).get("c");
   return {
     set: setRaw ? decSet(setRaw) : null,
-    single: singleRaw ? decShare(singleRaw) : null,
+    single: singleRaw ? decodeShare(singleRaw) : null,
   };
 }

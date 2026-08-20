@@ -5,11 +5,15 @@ import Cta from "./components/Cta";
 import PageClose from "./components/PageClose";
 import { Note, Eyebrow } from "./components/Prose";
 import { Tabs, Tab } from "./components/Tabs";
+import W from "./components/plates/W";
 
 /**
  * Required by @next/mdx in the App Router. Most elements are styled globally
  * (globals.css); internal links route through next/link, and the rich
  * CodeBlock / Note / Eyebrow components are exposed for use inside .mdx.
+ * `W` is the Encyclopedia widget entry point, registered globally so entry
+ * authors write the figure where it belongs (no per-page imports); the
+ * plate-registry scan enumerates those usages mechanically.
  */
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -30,6 +34,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Eyebrow,
     Tabs,
     Tab,
+    W,
     ...components,
   };
 }
