@@ -64,6 +64,80 @@ export const DARK_THEME: WheelTheme = {
   fontFamily: "ui-monospace, 'SF Mono', Menlo, Consolas, monospace",
 };
 
+/**
+ * The Encyclopedia's plate palette: warm paper, ink, and the oxblood
+ * accent. Oxblood is the single interaction channel (the reader's
+ * current place, the highlighted element); nothing in the base theme
+ * uses it, so it keeps one meaning. Widget layers read it from here.
+ */
+export const PLATE_TOKENS = {
+  /** Page paper. */
+  paper: "#f7f3e9",
+  /** Plate panel paper (figures sit on this). */
+  panel: "#fdfbf5",
+  /** Full ink. */
+  ink: "#22201c",
+  /** Secondary ink: labels, soft aspects. */
+  mutedInk: "#6f695c",
+  /** Tertiary ink: house numbers, de-emphasized furniture. */
+  faintInk: "#9a927f",
+  /** Hairline structural rules. */
+  rule: "#c9c1af",
+  /** Oxblood: the one interaction accent. */
+  accent: "#8c2f2a",
+} as const;
+
+/**
+ * Ink-on-paper theme for the Encyclopedia's figure plates. Glyphs and
+ * axes take full ink; sign and house furniture recede into muted inks;
+ * hard aspects carry full ink and soft aspects the secondary ink (the
+ * engraving convention: weight, not hue). `planetColors` names all
+ * thirteen default bodies explicitly so the theme is complete on its
+ * own — merging it can never strand a body on another palette.
+ */
+export const PLATE_THEME: WheelTheme = {
+  background: "transparent",
+  ring: PLATE_TOKENS.rule,
+  axis: PLATE_TOKENS.ink,
+  signText: "#8a8272",
+  planetText: PLATE_TOKENS.ink,
+  planetColors: {
+    sun: PLATE_TOKENS.ink, moon: PLATE_TOKENS.ink,
+    mercury: PLATE_TOKENS.ink, venus: PLATE_TOKENS.ink,
+    mars: PLATE_TOKENS.ink, jupiter: PLATE_TOKENS.ink,
+    saturn: PLATE_TOKENS.ink, uranus: PLATE_TOKENS.ink,
+    neptune: PLATE_TOKENS.ink, pluto: PLATE_TOKENS.ink,
+    chiron: PLATE_TOKENS.ink,
+    true_node: PLATE_TOKENS.mutedInk, mean_node: PLATE_TOKENS.mutedInk,
+  },
+  labelText: PLATE_TOKENS.mutedInk,
+  houseText: PLATE_TOKENS.faintInk,
+  aspectColors: {
+    conjunction: PLATE_TOKENS.ink,
+    opposition: PLATE_TOKENS.ink,
+    square: PLATE_TOKENS.ink,
+    trine: PLATE_TOKENS.mutedInk,
+    sextile: PLATE_TOKENS.mutedInk,
+  },
+  fontFamily: "'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace",
+};
+
+/**
+ * Per-body line inks for the drawing components (AstroMap,
+ * EphemerisGraph), where many bodies draw at once and identical inks
+ * would be unreadable. Muted earth tints — an engraver's tinted inks —
+ * low-chroma so a plate still reads as ink at a glance, each dark
+ * enough for the panel paper. Mars is deliberately not oxblood
+ * (`PLATE_TOKENS.accent` keeps its one meaning). Pass as the `colors`
+ * prop; complete over the thirteen default bodies plus the nodes.
+ */
+export const PLATE_BODY_INKS: Record<string, string> = {
+  sun: "#8a6a1c", moon: "#6e6a5e", mercury: "#5b5370", venus: "#3f6d5a",
+  mars: "#6d3524", jupiter: "#6b4f23", saturn: "#4a453c",
+  uranus: "#3d5f70", neptune: "#3f4d75", pluto: "#5d4056",
+  chiron: "#566044", true_node: "#6f695c", mean_node: "#6f695c",
+};
+
 export const GLYPHS: Record<string, string> = {
   sun: "☉", moon: "☽", mercury: "☿", venus: "♀",
   mars: "♂", jupiter: "♃", saturn: "♄", uranus: "♅",
