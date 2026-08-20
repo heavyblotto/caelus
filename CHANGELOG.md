@@ -9,6 +9,48 @@ current figures live in `packages/caelus/accuracy.json` and on
 
 ## Unreleased
 
+### Vector-mode sky projection: `skyCamera`, `radialScale`, `skyProjector`
+
+SkyView's projection math is now available in vector mode for consumers
+that draw rather than place pixels (SVG chart figures, the Encyclopedia's
+derivation widget). `skyCamera` returns the orthonormal no-roll camera
+basis for an aim; `dirFromAzAlt` is exported alongside it. `radialScale`
+is a one-parameter family of azimuthal radial scales spanning gnomonic
+(-1, the rectilinear lens), stereographic (-0.5), equidistant (0, the
+fisheye lens), equal-area (+0.5), and orthographic (+1, the exterior view
+of a glass sphere), continuous in the parameter, so a camera pull-back
+from a lens view to the exterior sphere view is one scalar sweep.
+`skyProjector` composes the two into a refraction-free projector
+returning normalized coordinates, accepting directions as
+(azimuth, altitude) or as unit vectors so interpolated positions project
+the same way as real ones. The Python reference mirrors all three
+(`sky_camera`, `radial_scale`, `sky_project`) and the skyview golden pins
+the pair on a radial-family grid and six projector cases, including the
+gnomonic-side horizon, the orthographic far-hemisphere fold, and the
+zenith basis fallback.
+
+### `caelus-wheel`: ink-on-paper plate theme
+
+The wheel package now ships the Encyclopedia's plate palette as tokens:
+`PLATE_TOKENS` (paper, panel, ink scale, hairline rule, and the oxblood
+accent), `PLATE_THEME` (a complete `WheelTheme` — glyphs and axes in
+full ink, furniture in muted inks, hard aspects in full ink and soft in
+secondary, all thirteen default bodies named explicitly so merging can
+never strand a body on another palette), and `PLATE_BODY_INKS` (muted
+earth tints for AstroMap and EphemerisGraph lines, where identical inks
+would be unreadable). Oxblood appears in no base token but the accent
+itself, keeping it the single interaction channel; a render test
+asserts both the completeness and the reservation.
+
+### Runtime `VERSION` export
+
+The package now exports `VERSION`, the engine version as a string
+constant. Consumers that stamp computed artifacts (a figure caption
+naming the engine that drew it) previously had no runtime source for
+the version short of importing `package.json` metadata into browser
+bundles. The constant is asserted equal to `package.json` by the
+repo's version check, so it cannot drift.
+
 ### Era packs extend the validated range to 3000 BCE
 
 `loadNodeData` now loads era slabs: Chebyshev packs named

@@ -35,6 +35,17 @@ for (const p of serverJson.packages ?? []) {
   sources.push({ label: `server.json packages[${p.identifier}]`, version: p.version });
 }
 
+// Engine runtime export: VERSION in packages/caelus/src/version.ts. Exists so
+// consumers can stamp computed artifacts (Encyclopedia figure plates) without
+// importing package.json metadata into browser bundles; must equal package.json.
+const versionTs = read("packages/caelus/src/version.ts");
+const versionTsMatch = versionTs.match(/export const VERSION = "([^"]+)"/);
+if (!versionTsMatch) {
+  console.error("check-versions: could not find VERSION in packages/caelus/src/version.ts");
+  process.exit(1);
+}
+sources.push({ label: "caelus src/version.ts (VERSION)", version: versionTsMatch[1] });
+
 // Web display version: SITE.version (header tag, footer, OG image, docs eyebrow)
 const siteTs = read("apps/web/lib/site.ts");
 const siteMatch = siteTs.match(/version:\s*"([^"]+)"/);
