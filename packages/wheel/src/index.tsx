@@ -154,6 +154,18 @@ const MAX_ORB: Record<string, number> = {
 /** Python-semantics modulo (result sign follows the divisor). */
 const mod = (a: number, n: number) => ((a % n) + n) % n;
 
+/** The wheel's anatomical layers, each independently drawable. All
+ *  default on; a partial record turns parts of the figure off so a
+ *  tutorial (the wheel-anatomy widget) can build the diagram up layer
+ *  by layer. `axes` is the horizon–meridian cross (AC/MC/DC/IC). */
+export interface WheelLayers {
+  zodiac?: boolean;
+  houses?: boolean;
+  axes?: boolean;
+  bodies?: boolean;
+  aspects?: boolean;
+}
+
 export interface ChartWheelProps {
   /** The Chart object from caelus, or a caelus-mcp natal_chart /
    *  current_sky tool response, as-is. */
@@ -165,6 +177,8 @@ export interface ChartWheelProps {
   /** Bodies to draw; defaults to every body in the chart except mean_node
    *  (true node is drawn; the two sit ~1° apart and double the glyph). */
   bodies?: string[];
+  /** Layers to draw; omitted layers default on. */
+  layers?: WheelLayers;
   theme?: Partial<WheelTheme>;
   glyphs?: Record<string, string>;
 }
@@ -239,9 +253,14 @@ export function ChartWheel({
   showAspects = true,
   aspectTypes = ["conjunction", "sextile", "square", "trine", "opposition"],
   bodies,
+  layers,
   theme,
   glyphs,
 }: ChartWheelProps): ReactElement {
+  const L: Required<WheelLayers> = {
+    zodiac: true, houses: true, axes: true, bodies: true, aspects: true,
+    ...layers,
+  };
   const T: WheelTheme = { ...DARK_THEME, ...theme,
     aspectColors: { ...DARK_THEME.aspectColors, ...(theme?.aspectColors ?? {}) },
     planetColors: { ...(DARK_THEME.planetColors ?? {}), ...(theme?.planetColors ?? {}) } };
@@ -283,22 +302,31 @@ export function ChartWheel({
 
   const el: ReactElement[] = [];
 
-  // ring circles
-  for (const [r, key] of [[1.0, "outer"], [0.84, "zodiac-in"], [0.70, "house-in"],
-    [0.50, "aspect"]] as Array<[number, string]>) {
+  // ring circles: the outer circle is the plate's frame and always
+  // draws; the inner circles belong to the layer whose band they bound
+  const rings: Array<[number, string, boolean]> = [
+    [1.0, "outer", true],
+    [0.84, "zodiac-in", L.zodiac],
+    [0.70, "house-in", L.houses],
+    [0.50, "aspect", L.aspects],
+  ];
+  for (const [r, key, on] of rings) {
+    if (!on) continue;
     el.push(<circle key={`ring-${key}`} cx={c} cy={c} r={fix(r * R)}
       fill="none" stroke={T.ring} strokeWidth={r === 1.0 ? 1.5 : 1} />);
   }
 
   // zodiac: sign boundaries, glyphs, ticks
-  for (let s = 0; s < 12; s++) {
-    el.push(line(s * 30, 0.84, 1.0, { stroke: T.ring, strokeWidth: 1 }, `sb-${s}`));
-    el.push(text(s * 30 + 15, 0.92, SIGN_GLYPHS[s], size * 0.045, T.signText, `sg-${s}`));
-  }
-  for (let d = 0; d < 360; d++) {
-    const len = d % 10 === 0 ? 0.035 : d % 5 === 0 ? 0.028 : 0.016;
-    el.push(line(d, 0.84, 0.84 + len,
-      { stroke: T.ring, strokeWidth: d % 5 === 0 ? 1 : 0.5 }, `tick-${d}`));
+  if (L.zodiac) {
+    for (let s = 0; s < 12; s++) {
+      el.push(line(s * 30, 0.84, 1.0, { stroke: T.ring, strokeWidth: 1 }, `sb-${s}`));
+      el.push(text(s * 30 + 15, 0.92, SIGN_GLYPHS[s], size * 0.045, T.signText, `sg-${s}`));
+    }
+    for (let d = 0; d < 360; d++) {
+      const len = d % 10 === 0 ? 0.035 : d % 5 === 0 ? 0.028 : 0.016;
+      el.push(line(d, 0.84, 0.84 + len,
+        { stroke: T.ring, strokeWidth: d % 5 === 0 ? 1 : 0.5 }, `tick-${d}`));
+    }
   }
 
   // house cusps + numbers; axes emphasized
@@ -307,18 +335,22 @@ export function ChartWheel({
     [asc, "AC"], [chart.angles.mc, "MC"],
     [mod(asc + 180, 360), "DC"], [mod(chart.angles.mc + 180, 360), "IC"],
   ];
-  for (let i = 0; i < 12; i++) {
-    el.push(line(cusps[i], 0.50, 0.84, { stroke: T.ring, strokeWidth: 1 }, `cusp-${i}`));
-    const arc = mod(cusps[(i + 1) % 12] - cusps[i], 360);
-    el.push(text(cusps[i] + arc / 2, 0.77, String(i + 1), size * 0.026, T.houseText, `hn-${i}`));
+  if (L.houses) {
+    for (let i = 0; i < 12; i++) {
+      el.push(line(cusps[i], 0.50, 0.84, { stroke: T.ring, strokeWidth: 1 }, `cusp-${i}`));
+      const arc = mod(cusps[(i + 1) % 12] - cusps[i], 360);
+      el.push(text(cusps[i] + arc / 2, 0.77, String(i + 1), size * 0.026, T.houseText, `hn-${i}`));
+    }
   }
-  for (const [lon, label] of axes) {
-    el.push(line(lon, 0.50, 1.0, { stroke: T.axis, strokeWidth: 2 }, `axis-${label}`));
-    el.push(text(lon, 1.045, label, size * 0.026, T.axis, `axl-${label}`));
+  if (L.axes) {
+    for (const [lon, label] of axes) {
+      el.push(line(lon, 0.50, 1.0, { stroke: T.axis, strokeWidth: 2 }, `axis-${label}`));
+      el.push(text(lon, 1.045, label, size * 0.026, T.axis, `axl-${label}`));
+    }
   }
 
   // aspect lines (under the planet layer)
-  if (showAspects) {
+  if (showAspects && L.aspects) {
     const want = new Set(aspectTypes);
     const drawn = new Set(names);
     for (const a of chart.aspects) {
@@ -336,7 +368,7 @@ export function ChartWheel({
   }
 
   // planets: pointer tick at true longitude, glyph + label at fanned angle
-  names.forEach((b, i) => {
+  if (L.bodies) names.forEach((b, i) => {
     const p = chart.bodies[b]!;
     const disp = dispLons[i];
     const pColor = T.planetColors?.[b] ?? T.planetText;

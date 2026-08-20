@@ -57,7 +57,29 @@ export interface DerivationSpec {
   params: DerivationParams;
 }
 
+/** The wheel's anatomical layers, in tutorial build order: the figure
+ *  is learned before the doctrine, so the horizon cross comes first
+ *  and the aspect web last. `horizon` is the horizon–meridian cross
+ *  (the four angles); `houses` the cusp spokes and numbers. */
+export const ANATOMY_LAYERS = [
+  "horizon", "zodiac", "houses", "bodies", "aspects",
+] as const;
+
+export type AnatomyLayer = (typeof ANATOMY_LAYERS)[number];
+
+/** Params for the wheel-anatomy widget: layer toggles build the figure. */
+export interface WheelAnatomyParams extends ChartParams {
+  /** Layers visible at rest; the plate renders these. Defaults to all
+   *  (the finished figure). */
+  layers?: AnatomyLayer[];
+}
+
+export interface WheelAnatomySpec {
+  kind: "wheel-anatomy";
+  params: WheelAnatomyParams;
+}
+
 /** The discriminated union over every widget kind. */
-export type WidgetSpec = DerivationSpec;
+export type WidgetSpec = DerivationSpec | WheelAnatomySpec;
 
 export type WidgetKind = WidgetSpec["kind"];

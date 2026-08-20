@@ -36,7 +36,6 @@
  *   characters). Bodies stay grey dots until the wheel dresses them.
  */
 import type { ReactElement } from "react";
-import { useState } from "react";
 import {
   azAlt, dirFromAzAlt, julianDay, skyProjector, unitVector,
   VERSION,
@@ -45,7 +44,8 @@ import {
 import {
   ChartWheel, PLATE_THEME, PLATE_TOKENS, type WheelChart,
 } from "caelus-wheel";
-import { PlateConsole, type ConsoleStation } from "./console.js";
+import type { ConsoleStation } from "./console.js";
+import { wheelPayload } from "./payload.js";
 import type { DerivationParams } from "./spec.js";
 
 // ------------------------------------------------------------------ scene
@@ -103,7 +103,6 @@ export function deriveScene(
   };
 
   const bodies: SceneBody[] = [];
-  const wheelBodies: WheelChart["bodies"] = {};
   for (const [id, b] of Object.entries(chart.bodies)) {
     if (!b) continue;
     const [azDeg, altDeg] = hor(b.lon, b.lat);
@@ -111,11 +110,6 @@ export function deriveScene(
       id, lon: b.lon, lat: b.lat, azDeg, altDeg,
       retrograde: !!b.retrograde,
     });
-    wheelBodies[id] = {
-      lon: b.lon,
-      ...(b.retrograde ? { retrograde: true } : {}),
-      ...(b.signDeg !== undefined ? { signDeg: b.signDeg } : {}),
-    };
   }
 
   return {
@@ -123,13 +117,7 @@ export function deriveScene(
     asc: chart.angles.asc,
     mc: chart.angles.mc,
     cusps: chart.cusps,
-    wheel: {
-      bodies: wheelBodies,
-      angles: { asc: chart.angles.asc, mc: chart.angles.mc },
-      cusps: chart.cusps,
-      aspects: chart.aspects.map(({ a, b, aspect, orb }) =>
-        ({ a, b, aspect, orb })),
-    },
+    wheel: wheelPayload(chart),
     eclToHor: [horDir(0, 0), horDir(90, 0), horDir(0, 90)],
     ascAz: hor(chart.angles.asc, 0)[0],
     engineVersion: VERSION,
@@ -379,37 +367,7 @@ export function DerivationFigure({
   );
 }
 
-// --------------------------------------------------------------- widget
-
-export interface ChartDerivationProps {
-  scene: DerivationScene;
-  size?: number;
-  /** Resting scrub position; the plate renders here. Defaults to the
-   *  scene's params, then to 1 (the finished wheel). */
-  initialT?: number;
-}
-
-/**
- * The interactive widget: the figure plus the plate console. State is
- * one number. The server render at `initialT` is the plate; hydration
- * attaches the scrub and changes nothing above it.
- */
-export function ChartDerivation({
-  scene, size, initialT,
-}: ChartDerivationProps): ReactElement {
-  const [t, setT] = useState(initialT ?? scene.params.t ?? 1);
-  const station = DERIVATION_STATIONS.reduce((best, s) =>
-    Math.abs(s.t - t) < Math.abs(best.t - t) ? s : best);
-  return (
-    <div>
-      <DerivationFigure scene={scene} t={t} size={size}
-        follow={scene.params.follow} />
-      <PlateConsole
-        t={t}
-        stations={DERIVATION_STATIONS}
-        datum={`${station.label.toLowerCase()} · t ${t.toFixed(2)}`}
-        onScrub={setT}
-      />
-    </div>
-  );
-}
+// The interactive widget (ChartDerivation) lives in
+// derivation-widget.tsx: it calls hooks, and this module must stay
+// importable from React Server Components (the plate render and the
+// registry harness), so the client-only surface is its own subpath.

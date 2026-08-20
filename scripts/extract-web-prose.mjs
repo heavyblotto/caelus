@@ -56,7 +56,13 @@ for (const file of files) {
 // and import/export lines all carry identifiers that read as spelling errors
 // and as sentence fragments. What survives is the paragraph text, which is what
 // the voice rules are meant to see.
-const mdxFiles = globSync("apps/web/app/docs/**/page.mdx", { cwd: root }).sort();
+const mdxFiles = [
+  ...globSync("apps/web/app/docs/**/page.mdx", { cwd: root }),
+  // Encyclopedia entry sources: captions and entry prose pass the same
+  // voice gate as the rest of the site (the widgets plan's verification
+  // contract).
+  ...globSync("apps/web/content/encyclopedia/**/*.mdx", { cwd: root }),
+].sort();
 
 for (const file of mdxFiles) {
   const text = readFileSync(join(root, file), "utf8");
@@ -64,7 +70,12 @@ for (const file of mdxFiles) {
 
   for (const m of text.matchAll(/description:\s*"([^"]+)"/g)) add(m[1]);
 
+  // Plate captions are apparatus prose. The JSX strip below removes the
+  // whole <W ... /> element, so pull the caption attribute out first.
+  for (const m of text.matchAll(/caption="([^"]+)"/g)) add(m[1]);
+
   const body = text
+    .replace(/\{\/\*[\s\S]*?\*\/\}/g, " ")    // MDX comments (not prose)
     .replace(/```[\s\S]*?```/g, " ")          // fenced code
     .replace(/^(?:import|export)\s[\s\S]*?$/gm, " ") // module lines
     .replace(/<[^>]+>/g, " ")                  // JSX tags

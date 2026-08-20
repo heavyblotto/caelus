@@ -1,0 +1,26 @@
+{/* Encyclopedia entry source (seed). See chart.mdx for the authoring
+    contract; the plate registry is built from these sources by
+    scripts/scan-plates.mjs. */}
+
+# Ascendant
+
+## An intersection, not an object
+
+The horizon and the ecliptic are two great circles on the same sphere, so
+they cross at exactly two points. The eastern crossing is the Ascendant.
+The figure holds the derivation at its HORIZON station, where the two
+circles meet; the Sun is followed through the morph.
+
+<W
+  kind="derivation"
+  figure={1}
+  params={{
+    instant: { y: 1990, mo: 6, d: 10, h: 18, mi: 30, s: 0 },
+    place: { latDeg: 27.95, lonEastDeg: -82.46, label: "Tampa" },
+    houseSystem: "placidus",
+    t: 0.75,
+    follow: "sun",
+  }}
+  caption="The Ascendant is an intersection: horizon and ecliptic cross at the eastern point. Same chart, held at the HORIZON station."
+  kb="kb:angle/ascendant"
+/>

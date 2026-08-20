@@ -22,6 +22,8 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { Engine, VERSION } from "caelus";
 import { loadNodeData } from "caelus/node";
 import { deriveScene, DerivationFigure, DERIVATION_STATIONS } from "../src/derivation.js";
+import { deriveAnatomy, WheelAnatomyFigure } from "../src/wheel-anatomy.js";
+import { ANATOMY_LAYERS } from "../src/spec.js";
 import type { PlateRegistry, PlateRecord } from "../src/registry.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -53,19 +55,38 @@ const sha = (svg: string): string =>
 /** Canonical renders for one plate: at rest, then at every station a
  *  scrub widget names. Keyed `id` and `id@station`. */
 function renderPlate(rec: PlateRecord): Record<string, string> {
-  switch (rec.spec.kind) {
+  const spec = rec.spec;
+  switch (spec.kind) {
     case "derivation": {
-      const scene = deriveScene(eng, rec.spec.params);
+      const scene = deriveScene(eng, spec.params);
       const at = (t: number): string =>
         renderToStaticMarkup(
           <DerivationFigure scene={scene} t={t}
-            follow={rec.spec.params.follow} />,
+            follow={spec.params.follow} />,
         );
       const out: Record<string, string> = {
-        [rec.id]: sha(at(rec.spec.params.t ?? 1)),
+        [rec.id]: sha(at(spec.params.t ?? 1)),
       };
       for (const s of DERIVATION_STATIONS) {
         out[`${rec.id}@${s.id}`] = sha(at(s.t));
+      }
+      return out;
+    }
+    case "wheel-anatomy": {
+      // Toggle widgets hash the cumulative build: rest first, then the
+      // figure as each layer joins in tutorial order, keyed by the
+      // layer that just arrived.
+      const scene = deriveAnatomy(eng, spec.params);
+      const out: Record<string, string> = {
+        [rec.id]: sha(renderToStaticMarkup(
+          <WheelAnatomyFigure scene={scene} />,
+        )),
+      };
+      for (let k = 1; k <= ANATOMY_LAYERS.length; k++) {
+        out[`${rec.id}@${ANATOMY_LAYERS[k - 1]}`] = sha(renderToStaticMarkup(
+          <WheelAnatomyFigure scene={scene}
+            layers={ANATOMY_LAYERS.slice(0, k)} />,
+        ));
       }
       return out;
     }

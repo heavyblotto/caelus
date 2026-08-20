@@ -8,7 +8,7 @@
   "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "node dist/test/plate.test.js && node dist/test/derivation.test.js && node dist/test/harness.test.js"
+    "test": "node dist/test/plate.test.js && node dist/test/derivation.test.js && node dist/test/wheel-anatomy.test.js && node dist/test/harness.test.js"
   },
   "license": "MIT",
   "peerDependencies": {
@@ -46,6 +46,18 @@
     "./derivation": {
       "types": "./dist/src/derivation.d.ts",
       "default": "./dist/src/derivation.js"
+    },
+    "./derivation-widget": {
+      "types": "./dist/src/derivation-widget.d.ts",
+      "default": "./dist/src/derivation-widget.js"
+    },
+    "./wheel-anatomy": {
+      "types": "./dist/src/wheel-anatomy.d.ts",
+      "default": "./dist/src/wheel-anatomy.js"
+    },
+    "./wheel-anatomy-widget": {
+      "types": "./dist/src/wheel-anatomy-widget.d.ts",
+      "default": "./dist/src/wheel-anatomy-widget.js"
     },
     "./package.json": "./package.json"
   }

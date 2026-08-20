@@ -124,11 +124,17 @@ jobs:
       - run: node packages/wheel/dist/test/ephemerisgraph.test.js
       # cross-package journey: local time -> chart -> SVG wheel, end to end
       - run: node packages/wheel/dist/test/integration.test.js
+      # plate registry: the MDX AST scan over the Encyclopedia sources must
+      # match the committed artifact the figure harness gates (drift = stale
+      # registry = a plate that fell out silently)
+      - run: node scripts/scan-plates.mjs --check
       # encyclopedia widgets: plate frame/console SSR render + spec round-trip
       - run: npm run build -w caelus-widgets
       - run: node packages/widgets/dist/test/plate.test.js
       # derivation widget: scene handoff identity, station renders, handedness
       - run: node packages/widgets/dist/test/derivation.test.js
+      # wheel-anatomy widget: layers add/remove marks; all-on = ChartWheel exactly
+      - run: node packages/widgets/dist/test/wheel-anatomy.test.js
       # figure harness: canonical SVG hashes per plate/station + version stamp
       - run: node packages/widgets/dist/test/harness.test.js
       # apps/web library units (timeline lanes, root-found transit spans)

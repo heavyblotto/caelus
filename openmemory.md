@@ -119,18 +119,49 @@ normative language into project docs.
   widget system. Root subpath = shared system (`WidgetSpec` union in
   `spec.ts`, registry types in `registry.ts`, `PlateFrame`,
   `PlateConsole`); one subpath per widget kind
-  (`caelus-widgets/derivation`). Derivation widget splits engine from
-  render: `deriveScene(engine, params)` → serializable scene (bodies
-  in both frames, `eclToHor` rotation from `azAlt` on the ecliptic
-  basis, wheel payload), `DerivationFigure(scene, t)` pure; positions
+  (`caelus-widgets/derivation`, `/wheel-anatomy`). Derivation widget
+  splits engine from render: `deriveScene(engine, params)` →
+  serializable scene (bodies in both frames, `eclToHor` rotation from
+  `azAlt` on the ecliptic basis, wheel payload via shared
+  `src/payload.ts`), `DerivationFigure(scene, t)` pure; positions
   always `eclToHor · unitVector(λ, β·(1−s))` so the coordinate handoff
   is exact; settle aims at the ecliptic south pole for wheel
-  handedness; `t = 1` renders the real `ChartWheel`. Figure harness
-  (`test/harness.test.tsx`) hashes every registry plate at rest + all
-  five stations against `test/figure-hashes.json` and asserts stamp =
-  computing `VERSION`; regenerate with `CAELUS_FIGURES_WRITE=1`. All
-  three test files run individually in ci.yml (the repo pattern; root
+  handedness; `t = 1` renders the real `ChartWheel`. Wheel-anatomy
+  widget: same scene/figure split (`deriveAnatomy`,
+  `WheelAnatomyFigure(scene, layers)`); layer names
+  `horizon · zodiac · houses · bodies · aspects` map onto the
+  `ChartWheel` `layers` prop (caelus-wheel, all default on; `axes` =
+  the four angles), all-on renders `ChartWheel` byte-identically.
+  Figure harness (`test/harness.test.tsx`) hashes every registry plate
+  at rest + all five stations (derivation) or the cumulative layer
+  build (wheel-anatomy) against `test/figure-hashes.json` and asserts
+  stamp = computing `VERSION`; regenerate with
+  `CAELUS_FIGURES_WRITE=1`. Widgets test files run individually in
+  ci.yml and `check-test-wiring.mjs` now gates the package (root
   `npm test` does not include wheel/widgets).
+- Plate registry scan (`scripts/scan-plates.mjs`, `npm run
+  plates:scan`): the MDX AST scan over the Encyclopedia sources
+  (`apps/web/content/encyclopedia/*.mdx` now;
+  `app/encyclopedia/*/page.mdx` when routes land). Reads `<W kind
+  params figure caption kb id />` elements, requires params to be JSON
+  literals, validates per-kind contracts, asserts figure = document
+  order and unique ids, emits `packages/widgets/test/plate-registry.json`
+  (the artifact the figure harness gates). CI runs `--check` as a
+  drift gate. Growing the `WidgetSpec` union means growing the scan's
+  `KINDS` table, the harness `renderPlate` switch, and the `W`
+  dispatcher in `apps/web/components/plates/W.tsx`.
+- Reader's-chart context (`apps/web/components/ReaderChartContext.tsx`
+  + `lib/reader-chart.ts`): site-wide provider mounted in the root
+  layout; record is the Playground `Share` shape, read from `#rc=`
+  fragment or `caelus:reader-chart` localStorage, never sent to a
+  server. `shareToChartParams` converts to widget `ChartParams`.
+  `<W>` (registered globally in `mdx-components.tsx`) SSR-renders the
+  plate in its frame; the client plate halves
+  (`DerivationPlate`/`WheelAnatomyPlate`) lazy-load the embedded tier
+  and swap in a browser-computed scene only when a reader chart
+  exists. Plate captions now pass the prose gate (extractor pulls
+  `caption="..."` before the JSX strip and walks the encyclopedia
+  sources).
 - Widget-system compatibility surface (hold stable from the kb/corpus
   side): `caelus-kb` node ids, `jsonld.ts` page export,
   `artifacts/embeddings/neighbors.json`, the engine `VERSION` export, and
