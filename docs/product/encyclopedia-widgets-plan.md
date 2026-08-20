@@ -101,7 +101,11 @@ harness, and the `reproduce` permalinks.
 
 ## Design system integration
 
-Direction 1a governs. The parts of it that bind widgets:
+Direction 1a governs. Since 2026-08-20 the visual system has its own
+stream and owner: page-level implementation, token value stewardship,
+and the DS-01 disposition live in
+`docs/product/visual-design-system-plan.md`; this plan keeps the
+widget-side bindings below. The parts of it that bind widgets:
 
 - **Oxblood is the only interaction channel.** The brief assigns it
   the reader's current place and the highlighted element in a plate.

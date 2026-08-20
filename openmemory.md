@@ -52,6 +52,19 @@ The private-library ingestion design (maintainer-scanned books → local
 OCR → QA harness → KB/corpus/Encyclopedia consumers) lives at
 `docs/product/library-ingestion-plan.md` (2026-08-20).
 
+The visual system has its own stream and dedicated agent as of
+2026-08-20: `docs/product/visual-design-system-plan.md` extracts the
+design work from the widgets and corpus build plans (Encyclopedia
+page shell, parts inventory, fonts, non-computed figure apparatus),
+records the token-boundary change protocol (plate token values are
+the design agent's; a token change ships with `plates:scan` +
+regenerated figure hashes in one commit), and assigns the DS-01
+disposition research to the design agent (maintainer inclination:
+supersede, after mining DS-01 and the live design(site) stream for
+keepers; peach blossom stays). Three agents now write this file —
+widget/engine, corpus/Encyclopedia, visual design; keep edits
+additive.
+
 Maintainer decisions of 2026-08-20: the Encyclopedia is the
 Encyclopedia of Hermes (Western esoteric traditions; astrology is the
 engine-backed core division, the corpus stays astrological), and the

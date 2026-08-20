@@ -219,6 +219,9 @@ already has those selectors under the 0.24.1 label.
 the SEP / 1911 standard across the Western esoteric traditions, with
 astrology as the engine-backed core division. Caelus supplies figures
 and tables in the articles; Memorativa supplies the numerical figures.
+The pages' visual system (the Plate direction's page-level
+implementation) is its own stream:
+`docs/product/visual-design-system-plan.md`.
 
 **H. Knowledge base.** `packages/kb` (`caelus-kb`, private): a typed
 concept graph of astrological structure plus the hermetic
