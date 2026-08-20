@@ -226,6 +226,27 @@ Recorded in the build plan intro and streams G, H, J.
   `CAELUS_FIGURES_WRITE=1`. Widgets test files run individually in
   ci.yml and `check-test-wiring.mjs` now gates the package (root
   `npm test` does not include wheel/widgets).
+- `zodiac-drift` and `aspect-dial` widgets (`packages/widgets/src/`,
+  landed d778ba1 on `feature/house-corpus`, 2026-08-20): the third and
+  fourth widget kinds. Zodiac-drift draws tropical + sidereal rings
+  with the oxblood ayanamsa gap wedge; `deriveDrift(params)` is pure
+  math over `ayanamsa()`/`julianDay()` (no `Engine` instance), so its
+  client plate half (`ZodiacDriftPlate`) applies reader-chart overrides
+  without loading a data tier. Console: ayanamsa picker
+  (`DRIFT_MODES` = lahiri/fagan_bradley/raman/krishnamurti) and a
+  century `PlateConsole` scrubber over a precomputed per-mode curve
+  table (±100 y window, `DRIFT_WINDOW`). Aspect-dial draws aspect
+  points from body a's place with shaded orb zones and the oxblood orb
+  arc to body b; `deriveDial(engine, params)` computes the aspectarian
+  via `aspectBetween` and the next exact hit via `scanExact` (coarse
+  scan then bisection over engine longitudes — widget-side numerical
+  plumbing the widgets plan flags as a candidate engine export).
+  Console: drag body b to re-read, orb rail, aspectarian table.
+  `src/format.ts` adds `ASPECT_GLYPHS` and `fmtDate`. Seed entries
+  `zodiac.mdx` (lahiri) and `aspect.mdx` (venus–neptune, an applying
+  trine at the seed instant) bring the registry to six plates; harness
+  hashes drift at rest/per-mode/window-ends and the dial at rest and
+  at exact opposition (41 hashes total).
 - Plate registry scan (`scripts/scan-plates.mjs`, `npm run
   plates:scan`): the MDX AST scan over the Encyclopedia sources
   (`apps/web/content/encyclopedia/*.mdx` now;
