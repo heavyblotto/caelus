@@ -56,8 +56,22 @@ carries the unreleased engine 0.25.0 source.
   faces image-detail pivot budget, ruling 5 extended to harsh images
   regardless of ruler, sanctioned softening inventory, opener texture,
   flag records cite verified sources and budget self-reports carry
-  entry IDs. Waves 3-4 pending (faces-03 + Leo-Scorpio symbols;
-  Sagittarius-Pisces symbols).
+  entry IDs. Wave 3 landed 2026-08-21: faces-03 + Leo/Virgo/Libra/
+  Scorpio symbols (132 entries, 276/396 B6 cells written), all five
+  slices adversarially reviewed; Virgo and Leo needed writer rework
+  (shadow-genus overstay undercounts, re-argued down to 9/30 each).
+  `pipeline/wave-b6-03.md` adds rulings 20-29: censuses re-derived by
+  second pass over finished text under ruling 13's two-clause genus
+  definition (three slices undercounted the overstay clause the same
+  way), dual-failure entries counted by lead failure, two new pivot/
+  closer shapes folded into rulings 7 and 8, the "faculty here"
+  binding capped, originality protocol amendments (name the text swept
+  per set — the circulating compilation truncates at Weber; same-degree
+  noun adjacency is a flag class; Henson keyword matches never fatal;
+  near-misses reported with sources), scene-bound life stages
+  sanctioned, sun-as-light gloss, degree-28 steering for the remaining
+  signs, faces texture notes. Wave 4 pending (Sagittarius-Pisces
+  symbols, the final 120 cells).
 - **Web** (`apps/web`): Playground `ReadingTab` dynamically imports corpus
   batches per context. Prose gated by root `scripts/lint-prose.sh` (Vale +
   em-dash check); the extractor `scripts/extract-web-prose.mjs` names the
