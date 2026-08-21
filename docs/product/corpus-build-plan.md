@@ -55,7 +55,7 @@ families, and the `finderSets` export are gone.
 | B3 relationship                                                  | 1,238       | yes         | 500 of 1,238 (synastry-aspect only) |
 | B4 timing                                                        | 268         | yes         | yes                                 |
 | B5 lots, stars, receptions, parallels, nakshatras, vargas, yogas | 602 (600 bindable) | yes         | yes (seven waves, 2026-08-20)       |
-| B6 ten-degree faces and degree symbols                           | 396         | not started; scaffolded 2026-08-20 |                    |
+| B6 ten-degree faces and degree symbols                           | 396         | yes (four waves, 2026-08-20 to 2026-08-21) | yes (four waves)    |
 | B8 site guides                                                   | ~180 pieces | not started |                                     |
 
 
@@ -97,10 +97,12 @@ program is complete.
 for the repair and B3 review waves already exist
 (`pipeline/wave-b1b2-repair.md`, `pipeline/wave-b3-review.md`).
 
-B6's scaffold landed 2026-08-20: the `ten-degree-face` and
+B6 completed the loop 2026-08-21: the `ten-degree-face` and
 `degree-symbol` families, `b6Grid()` (396 bindable cells), length
-bands, the instruction sheets, and the harness's `degree` atoms.
-Writing follows the loop. B8 has no grid function or instruction
+bands, the instruction sheets, and the harness's `degree` atoms
+scaffolded 2026-08-20, and all 396 cells written and adversarially
+reviewed in four waves (2026-08-20 to 2026-08-21; the degree symbols
+are original to this corpus). B8 has no grid function or instruction
 sheets yet; it starts with scaffolding, then writing. B5 is fully
 written and reviewed (600/600 bindable cells,
 seven waves, 2026-08-20; the two raja/dhana yoga cells stay
@@ -303,10 +305,10 @@ cells) is finished, and `lintNearDuplicateSentences`,
 **B5 and B6** are delineation essays. Enumerate the inventory tables
 above in `src/grid.ts`, add families and length bands, write the
 instruction sheets, then run the write loop. B5 completed that loop
-(seven waves, 2026-08-20). B6's fact kind exists: the
-engine's `degree` atoms (unreleased 0.25.0) bind both degree symbols
-and faces via `hasDegree`; the corpus scaffold landed 2026-08-20 and
-writing remains.
+(seven waves, 2026-08-20). B6 completed it 2026-08-21 (four waves):
+the engine's `degree` atoms (unreleased 0.25.0) bind both degree
+symbols and faces via `hasDegree`, and all 396 cells are written and
+reviewed.
 
 **B8** is the site guides table. MDX guides, coverage rule
 (artifact × how-to-read, surface × how-to-use). Not `CellFamily`. Not

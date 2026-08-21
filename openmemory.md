@@ -70,8 +70,23 @@ carries the unreleased engine 0.25.0 source.
   noun adjacency is a flag class; Henson keyword matches never fatal;
   near-misses reported with sources), scene-bound life stages
   sanctioned, sun-as-light gloss, degree-28 steering for the remaining
-  signs, faces texture notes. Wave 4 pending (Sagittarius-Pisces
-  symbols, the final 120 cells).
+  signs, faces texture notes. Wave 4 landed 2026-08-21:
+  Sagittarius/Capricorn/Aquarius/Pisces symbols (120 entries) —
+  B6 complete at 396/396, the degree-symbol family at 360/360. All
+  four slices reviewed; the wave's structural catch was the
+  parallel-wave gap (ruling 30): writers working concurrently never
+  saw each other's drafts, and three slices collided on concrete
+  images (summit register twice, cairn, cornerstone box) with every
+  gate green — Capricorn re-imaged three entries. `pipeline/
+  wave-b6-04.md` adds rulings 30-38: same-wave collision surface,
+  the caveat-pivot cap binds the shape not the noun list,
+  carrier-frame class cap, corrective textures capped, grep-verified
+  censuses, element-quota counting precedent (acted-on subject, not
+  medium or setting), remainder-genus diversity notes, ordinal-
+  locative policy, same-sign cross-degree scene adjacency. Source
+  findings: the archive.org compilation PDF is complete through
+  Cochrane (the circulating text truncates at Weber); Janduz labels
+  in the extraction sit one behind the ordinal.
 - **Web** (`apps/web`): Playground `ReadingTab` dynamically imports corpus
   batches per context. Prose gated by root `scripts/lint-prose.sh` (Vale +
   em-dash check); the extractor `scripts/extract-web-prose.mjs` names the

@@ -96,3 +96,101 @@ self-report derived by second pass over the finished text, with entry
 IDs (rulings 19 and 20), then flags: originality near-misses with the
 verified source (set, sign, degree, and the actual text swept),
 degrees that fought you, judgment calls.
+
+## Wave 4 outcome (landed 2026-08-21)
+
+All four slices written, reviewed, and verified: the degree-symbol
+family is complete at 360/360 and B6 at 396/396. Harness green; root
+suite green. Originality clean across all eight public sets for every
+slice. Two source findings held up by four independent sweeps: the
+circulating plain-text conversion of the "360 symbolic degrees"
+compilation truncates at Weber, while the archive.org compilation PDF
+(and its complete djvu text layer) runs through Cochrane; and
+Janduz's labels in that extraction sit one behind the ordinal ("N
+Sign" = ordinal N+1), verified against his La Volasfera lineage.
+
+Reviews: every slice cleared with fixes. Reviewer repairs — Pisces 9
+(a binding scaffold, "this way at the Nth degree," at 8/30 against a
+family norm of 0; a counted-failure-pair texture at 8/30 against a
+family max of 4), Sagittarius 16 (frame-monoculture clusters:
+"colors," "everywhere," "you learn," What-clefts), Aquarius 2 (both
+same-wave echoes of Sagittarius entries, one a verbatim 5-gram at the
+same degree), Capricorn 14 (a synonym-spread caveat-pivot skeleton,
+17 nominalized pivots against a cap of 3). Writer reworks — Capricorn
+re-imaged three entries that cloned same-wave siblings (cap:29's
+summit register against sagittarius:30, cap:23's cairn against
+sagittarius:11, cap:21's cornerstone box against aquarius:8 — the
+four wave-4 writers worked in parallel and never saw each other's
+drafts) and de-skied cap:20's corrective; Pisces re-imaged pisces:25
+on an orchestrator-adjudicated element-quota call (the tide pool
+counts as water; the peach ships). Orchestrator adjudications
+recorded: pisces:1 holds as not-water (ink is the acted-on subject);
+aq:8 stays, cap:21 moved (the later-written slice moves, and aq:8's
+argument survives its vessel); Pisces's ordinal-locatives accepted
+(13/30, all distinct) with the policy recorded as ruling 37. Flag
+records completed for two writer omissions (scorpio:9-pattern):
+aquarius:4's lightning rod vs La Volasfera Aquarius 4, and Charubel
+Capricorn 25's grain field vs cap:25's winter wheat — both images
+clearly survive; the flags are the remedy.
+
+## Rulings from wave 4 (binding on every corpus wave after it)
+
+Wave 4's reviews found the wave-3 census methodology working (three
+of four writers' second-pass counts verified exact) and surfaced the
+parallel-wave gap: every collision gate compared against shipped
+slices only. These amend and extend rulings 1-29.
+
+30. **The collision surface includes same-wave siblings (amends
+    ruling 15).** Cross-sign checks, spent-image lists, and family
+    lints run against same-wave drafts as they land, not only shipped
+    slices. Three of wave 4's four slices collided on concrete images
+    (summit register twice, cairn, cornerstone box) with every gate
+    green. Reviewers check same-wave siblings before clearing; a
+    writer whose slice lands late re-sweeps against any sibling that
+    landed while it wrote.
+31. **The caveat-pivot cap binds the shape, not the noun list
+    (amends rulings 7 and 22).** The nominalized caveat pivot —
+    "The [caveat-noun] is X" and its wh-cleft cousins ("What sours
+    it is X") — is capped at 3 per slice whatever noun carries it:
+    failure, shadow, trouble, risk, cost, snare, temptation, hazard,
+    and synonyms. Synonym substitution is not compliance; Capricorn
+    ran 17 pre-repair behind eight different nouns.
+32. **The carrier-frame class cap (amends ruling 6).** Any single
+    repeated binding-frame phrase is capped at 2 per slice — the
+    family regenerates variants ("colors," "everywhere," "relation
+    to," "lives here," "you toward") faster than named scaffolds.
+    And the same-degree check extends to binding phrases at every
+    degree, not only 28-30: aquarius:15's "you are in your element"
+    collided verbatim with sagittarius:15 at degree 15.
+33. **Corrective textures capped.** "The [image-noun] serves /
+    exists to [purpose]" at most 3 per slice; counted-failure-pair
+    announcements ("Watch the two failures," "It fails in two
+    shapes") at most 4, the prior family max.
+34. **Censuses are grep-verified (amends ruling 20).** Second-pass
+    counts are verified mechanically, not manually — a reviewer's own
+    manual census missed a "you learn" instance until grep-verified.
+    Self-reports list same-degree adjacencies found and cleared, not
+    only swaps acted on (one wave-4 report omitted Charubel Capricorn
+    25's grain field; the reviewer found it independently).
+35. **Element-quota counting precedent (amends rulings 14 and 27).**
+    Count the image's acted-on subject, not its medium or setting:
+    the antenna is a device, not air; the tide pool's departing sea
+    is the subject, so water; the ink bloom's subject is the ink, so
+    not water. A sign is never barred from its own landscape —
+    Capricorn's mountains are setting, not earth objects.
+36. **Remainder-genus diversity note (amends ruling 13).** A
+    remainder genus past a third of the slice carries a sub-mechanism
+    note in the census. Aquarius shipped misapplication at 12-13/30
+    on genuinely diverse mechanisms (display, purpose-substitution,
+    misread-of-evidence, displacement); the genus count alone did not
+    capture that, and the note is what makes the call auditable.
+37. **Ordinal-locative policy.** The family norm is deictic position
+    reference ("this degree," "late in the sign"); spelled-out
+    ordinal locatives ("at the twenty-second degree") are capped as
+    texture under ruling 18's principle. Pisces ships 13/30, all
+    distinct ordinals, grandfathered as the family's final slice.
+38. **Same-sign cross-degree scene adjacency named (amends ruling
+    25).** A shared defining scene with a public set at a different
+    degree of the same sign (Kozminsky Pisces 1's river-into-sea
+    against pisces:30) is a recordable flag class alongside
+    same-degree noun adjacency.
