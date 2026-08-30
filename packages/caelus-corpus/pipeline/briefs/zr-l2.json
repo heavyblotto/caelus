@@ -1,0 +1,188 @@
+{
+ "name": "zr-l2",
+ "outFile": "b4-zr-l2.json",
+ "setId": "house-b4-zr-l2",
+ "family": "timelord-zr",
+ "cells": [
+  {
+   "id": "timelord:zr:l2:aries",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l2",
+    "sign": "Aries"
+   },
+   "atomIds": [
+    "zr:l2:"
+   ],
+   "title": "A Aries sub-chapter (zodiacal releasing L2)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l2:taurus",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l2",
+    "sign": "Taurus"
+   },
+   "atomIds": [
+    "zr:l2:"
+   ],
+   "title": "A Taurus sub-chapter (zodiacal releasing L2)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l2:gemini",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l2",
+    "sign": "Gemini"
+   },
+   "atomIds": [
+    "zr:l2:"
+   ],
+   "title": "A Gemini sub-chapter (zodiacal releasing L2)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l2:cancer",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l2",
+    "sign": "Cancer"
+   },
+   "atomIds": [
+    "zr:l2:"
+   ],
+   "title": "A Cancer sub-chapter (zodiacal releasing L2)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l2:leo",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l2",
+    "sign": "Leo"
+   },
+   "atomIds": [
+    "zr:l2:"
+   ],
+   "title": "A Leo sub-chapter (zodiacal releasing L2)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l2:virgo",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l2",
+    "sign": "Virgo"
+   },
+   "atomIds": [
+    "zr:l2:"
+   ],
+   "title": "A Virgo sub-chapter (zodiacal releasing L2)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l2:libra",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l2",
+    "sign": "Libra"
+   },
+   "atomIds": [
+    "zr:l2:"
+   ],
+   "title": "A Libra sub-chapter (zodiacal releasing L2)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l2:scorpio",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l2",
+    "sign": "Scorpio"
+   },
+   "atomIds": [
+    "zr:l2:"
+   ],
+   "title": "A Scorpio sub-chapter (zodiacal releasing L2)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l2:sagittarius",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l2",
+    "sign": "Sagittarius"
+   },
+   "atomIds": [
+    "zr:l2:"
+   ],
+   "title": "A Sagittarius sub-chapter (zodiacal releasing L2)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l2:capricorn",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l2",
+    "sign": "Capricorn"
+   },
+   "atomIds": [
+    "zr:l2:"
+   ],
+   "title": "A Capricorn sub-chapter (zodiacal releasing L2)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l2:aquarius",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l2",
+    "sign": "Aquarius"
+   },
+   "atomIds": [
+    "zr:l2:"
+   ],
+   "title": "A Aquarius sub-chapter (zodiacal releasing L2)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l2:pisces",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l2",
+    "sign": "Pisces"
+   },
+   "atomIds": [
+    "zr:l2:"
+   ],
+   "title": "A Pisces sub-chapter (zodiacal releasing L2)",
+   "bindable": true
+  }
+ ]
+}

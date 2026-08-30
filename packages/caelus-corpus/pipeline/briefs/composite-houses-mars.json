@@ -1,0 +1,176 @@
+{
+  "name": "composite-houses-mars",
+  "outFile": "b3-composite-houses-mars.json",
+  "setId": "house-b3-composite-houses-mars",
+  "family": "composite-house",
+  "cells": [
+    {
+      "id": "composite:mars:house:1",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mars",
+        "house": 1
+      },
+      "atomIds": [
+        "composite:mars"
+      ],
+      "title": "Composite Mars in the 1st house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mars:house:2",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mars",
+        "house": 2
+      },
+      "atomIds": [
+        "composite:mars"
+      ],
+      "title": "Composite Mars in the 2nd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mars:house:3",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mars",
+        "house": 3
+      },
+      "atomIds": [
+        "composite:mars"
+      ],
+      "title": "Composite Mars in the 3rd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mars:house:4",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mars",
+        "house": 4
+      },
+      "atomIds": [
+        "composite:mars"
+      ],
+      "title": "Composite Mars in the 4th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mars:house:5",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mars",
+        "house": 5
+      },
+      "atomIds": [
+        "composite:mars"
+      ],
+      "title": "Composite Mars in the 5th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mars:house:6",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mars",
+        "house": 6
+      },
+      "atomIds": [
+        "composite:mars"
+      ],
+      "title": "Composite Mars in the 6th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mars:house:7",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mars",
+        "house": 7
+      },
+      "atomIds": [
+        "composite:mars"
+      ],
+      "title": "Composite Mars in the 7th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mars:house:8",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mars",
+        "house": 8
+      },
+      "atomIds": [
+        "composite:mars"
+      ],
+      "title": "Composite Mars in the 8th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mars:house:9",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mars",
+        "house": 9
+      },
+      "atomIds": [
+        "composite:mars"
+      ],
+      "title": "Composite Mars in the 9th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mars:house:10",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mars",
+        "house": 10
+      },
+      "atomIds": [
+        "composite:mars"
+      ],
+      "title": "Composite Mars in the 10th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mars:house:11",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mars",
+        "house": 11
+      },
+      "atomIds": [
+        "composite:mars"
+      ],
+      "title": "Composite Mars in the 11th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mars:house:12",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mars",
+        "house": 12
+      },
+      "atomIds": [
+        "composite:mars"
+      ],
+      "title": "Composite Mars in the 12th house",
+      "bindable": true
+    }
+  ]
+}

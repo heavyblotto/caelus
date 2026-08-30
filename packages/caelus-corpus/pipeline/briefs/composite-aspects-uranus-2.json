@@ -1,0 +1,83 @@
+{
+ "name": "composite-aspects-uranus-2",
+ "outFile": "b3-composite-aspects-uranus-2.json",
+ "setId": "house-b3-composite-aspects-uranus-2",
+ "family": "composite-aspect",
+ "cells": [
+  {
+   "id": "composite:aspect:uranus:conjunction:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "true_node",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:uranus~true_node:conjunction"
+   ],
+   "title": "Composite Uranus conjunct composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:sextile:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "true_node",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:uranus~true_node:sextile"
+   ],
+   "title": "Composite Uranus sextile composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:square:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "true_node",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:uranus~true_node:square"
+   ],
+   "title": "Composite Uranus square composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:trine:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "true_node",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:uranus~true_node:trine"
+   ],
+   "title": "Composite Uranus trine composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:uranus:opposition:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "uranus",
+    "b": "true_node",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:uranus~true_node:opposition"
+   ],
+   "title": "Composite Uranus opposite composite North Node",
+   "bindable": true
+  }
+ ]
+}

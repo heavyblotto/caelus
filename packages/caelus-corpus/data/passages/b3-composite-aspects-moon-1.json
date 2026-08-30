@@ -1,0 +1,212 @@
+[
+ {
+  "id": "composite:aspect:moon:conjunction:mercury",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "moon",
+   "b": "mercury",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "composite:moon~mercury:conjunction"
+  ],
+  "text": "Feeling and saying arrive together in this relationship. The Moon and Mercury sit on the same degree of the composite chart, so the bond's reflex and its running commentary are one function: a mood does not settle here until it has been described, and no description stays neutral for long. The pair thinks in the temperature of the room. Comfort comes through language. When something is off between these two, the way back is talk, and talk usually works. Closeness gets made out of shared references, half-finished sentences, and a shorthand that would be unreadable from outside. This is the bond where a minor piece of news gets reported because the reporting is the point. The cost is that nothing goes unnarrated. A passing irritation gets said out loud while it is still passing, and saying it makes it more solid than it was. Plain information picks up weight it did not have on its own. A scheduling question, a factual disagreement, an ordinary correction: each carries some of the bond's mood along with it, so a small matter can get settled twice, once for the facts and once for how it felt. Memory works the same way. This relationship stores conversations with their weather attached, which helps when the weather was the important part and hinders when the two of you are trying to reconstruct what was actually agreed. There is also a habit of thinking aloud that can pass for a decision. Ideas get spoken in the mood of the hour, and that mood is a poor adviser about next week. Bonds under this contact do better once a line gets drawn between what was said and what was meant, and the line has to be drawn on purpose, because the fusion will not draw it. What the contact gives is fluency about the inner life. Few relationships can report what is going on inside them while it is happening. This one can, roughly and often, so less accumulates unsaid. The lesson it keeps offering is that some feelings are more accurate after they have been sat with than while they are being announced."
+ },
+ {
+  "id": "composite:aspect:moon:sextile:mercury",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "moon",
+   "b": "mercury",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "composite:moon~mercury:sextile"
+  ],
+  "text": "An opening sits between the bond's mood and its words, and nothing insists that the pair walk through it. This contact is available rather than automatic. The relationship can put how it feels into ordinary language whenever either person reaches for it, and it can also go years without bothering. Where the opening gets used, the result is unglamorous and worth a great deal. These two can say how things are going without making an occasion of it. A question lands at the right moment. Something small gets named while it is still small, before it has to be excavated later. The talk is not especially deep, and depth is not what it is for. The ease is in the timing. Where the opening goes unused, nothing dramatic happens, which is precisely why it goes unused. The bond stays pleasant. Conversation stays on subjects, and the subjects are good ones. A quiet stock of unmentioned things collects off to one side, and neither person ever decided to put it there. The contact also lends the relationship a decent instinct for tone. The pair tends to know when a subject is landing and when it is not, and can change register without being asked to. That makes these two easy company, and it makes a difficult conversation simpler to open than to finish. What this contact pays out on is the check-in that happens when nothing is wrong. On a bad day the mood is loud and the words are hard to find. On an ordinary day the words are right there, and the habit of using them is what the two of you are actually deciding about. The relationship does not get worse for leaving the door shut. It just stays smaller than it could be, in the particular way of a bond that knows a great deal about each other's opinions and much less about each other's state."
+ },
+ {
+  "id": "composite:aspect:moon:square:mercury",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "moon",
+   "b": "mercury",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "composite:moon~mercury:square"
+  ],
+  "text": "Two registers collide in this bond, and the collision comes back. What the relationship feels and what it can accurately say force each other, at an angle where neither gives way. A mood arrives and the talking either explains it or argues with it. An explanation lands that is entirely correct and does no good at all. The friction runs both directions and belongs to the pair rather than to one person in it. A plain question gets heard as a complaint. A real complaint gets phrased so carefully that it reads as a mild preference and gets treated as one. Facts get used to settle something that was never about facts, and feelings get used to settle something that was. Under this contact the relationship also worries in a loop. The same subject returns, gets talked over again, and does not close. Rehashing feels like progress because words are moving, while the mood underneath is what would actually have to shift. That is the difficulty, and it is also where the traction is. This pair cannot coast on being understood, so it keeps having to make itself understood, which is a skill most bonds never practice. Given time these two get unusually good at saying a hard thing in a form the other can hear. They learn which subjects need a soft opening, which ones need to be raised at the plainest possible hour, and which ones are not conversations at all but requests for company. Squares do not resolve, and this one does not either. What changes is how quickly both of you recognize the shape of it: the argument about a word choice that is really about the mood, the correction that landed as a verdict. Named early, it stays an ordinary disagreement. Left unnamed, it turns into a long dispute about who said what, which is never the thing at issue."
+ },
+ {
+  "id": "composite:aspect:moon:trine:mercury",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "moon",
+   "b": "mercury",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "composite:moon~mercury:trine"
+  ],
+  "text": "Talk settles this relationship, and no one has to work at making it do so. The composite Moon and Mercury run in easy agreement, so the bond's way of feeling and its way of putting things into words fit each other without translation. Explaining something is how the pair digests it. A mood gets talked into shape, and by the end of the talking the mood is genuinely better. Many relationships find that words make feelings worse. Here they help. The register comes out warm and plain: news reported, worries aired at reasonable length, ordinary days described in a detail neither person would inflict on anyone else. Other people notice the pair as unusually in tune. The problem with talk this comfortable is that it never insists on anything. Because the conversation is soothing, it can quietly replace the change it was supposed to lead to. A long discussion happens, both people feel closer, and the situation that prompted it is exactly where it was. The pair can process the same difficulty a dozen times, comfortably, and mistake the comfort for a resolution. This bond also settles into stories about itself. How the two met, what each is like, which one handles what: these accounts get repeated until they are simply true, and the ease of the contact means nobody pushes on them. The story can go on describing a relationship that has since become something else. Talking is pleasant here, so the register stays pleasant, and a real objection can be phrased so smoothly that it never registers as an objection. What this contact hands the two of you is a reliable way to feel understood. What it does not hand over is any pressure to check whether the understanding is current, and that check gets made deliberately or not at all."
+ },
+ {
+  "id": "composite:aspect:moon:opposition:mercury",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "moon",
+   "b": "mercury",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "composite:moon~mercury:opposition"
+  ],
+  "text": "The feeling in this relationship and the report on the feeling come from two different departments. Composite Moon opposes composite Mercury, so the bond's comfort sits at one end of an axis and its running commentary at the other, and the two are more often pulled apart than blended. There are stretches where everything is discussed and very little is felt. There are stretches of mood that words cannot get near. Oppositions tend to split into roles, and this one splits along the line between the person carrying the feeling and the person carrying the analysis. Those roles are not fixed to either person. They trade, sometimes inside a single conversation, and part of what makes this contact hard to see clearly is that whoever is being reasonable at the moment is convinced the position is theirs by nature. The tension is genuinely useful. Feeling without words leaves this pair stuck in weather it cannot name. Words without feeling leave it with an accurate account of a relationship nobody is living in. Each pole supplies exactly what the other is short of. The mood gives the talking something worth talking about; the talking gives the mood an outline, so it can be handled instead of endured. What the opposition asks is that both poles stay in the room at once, which is harder than alternating between them. Alternating is the default. A cool, articulate week gets followed by a wordless one, and neither of you is quite sure what happened in the switch. The bond does better when a feeling is allowed to be described badly rather than left unmentioned until it can be described well, and when an argument that has been won on the facts is treated as unfinished. That is not a technique so much as a standing recognition that in this relationship the two halves are never going to be the same half, and that the distance between them is what keeps either one honest."
+ },
+ {
+  "id": "composite:aspect:moon:conjunction:venus",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "moon",
+   "b": "venus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "composite:moon~venus:conjunction"
+  ],
+  "text": "Comfort and regard are made of the same material here. Where the composite Moon and Venus fuse, being at ease with someone and being fond of them stop being separable acts, and the bond runs at one steady warm temperature most of the time. Kindness is not a decision in this relationship. It is the default setting, and it shows up in small physical ways: the food, the standing arrangements, the small gifts that are not occasions. The pair is easy to be around, and knows it. Other people relax near this bond. Whatever the two are to each other, colleagues or siblings or old friends, the connection reads as affectionate from outside, and the affection is real rather than performed. The difficulty is what pleasantness costs. When warmth is the climate, anything that would disturb it feels like a violation of the bond's basic terms. Complaints get softened until they carry no information. An unwelcome fact gets postponed for a better moment that does not arrive. This pairing can go a long time without a single honest disagreement, and the two of you may read that quiet as agreement when it is only quiet. There is also a habit of comfort-seeking that the contact makes very easy to indulge. The relationship reaches for the pleasant version of any choice, which is often the right version and sometimes just the softer one. Effort that would be good for the bond gets deferred in favor of an evening that is nicer. What this contact reliably provides is a place where neither person has to earn their welcome. That is rarer than it sounds and it does real work over years. It becomes sturdy, rather than merely nice, when the relationship finds out that it can survive being told something it did not want to hear, and finding that out means having done it."
+ },
+ {
+  "id": "composite:aspect:moon:sextile:venus",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "moon",
+   "b": "venus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "composite:moon~venus:sextile"
+  ],
+  "text": "There is a supply of easy kindness in this bond that has to be drawn on in order to exist. The sextile between composite Moon and composite Venus offers the pair a straightforward route to pleasing each other, and offering is the whole of it. Nothing in the chart obliges the relationship to use what it has. Used, the contact looks like small accurate gestures. These two tend to know what would land: the thing remembered, the visit timed well, the favor that took ten minutes and was worth a great deal more. Generosity here is cheap to produce and arrives as though it cost something, which is the specific luck of this aspect. Left alone, it produces nothing bad. The bond simply runs on its other qualities and the kindness stays potential. Long stretches can pass in which both people are fond of each other and neither does anything about it, and no one is aware of a decision having been made. Sextiles are quiet when ignored, which is why they are the aspects most often wasted. The contact also gives the relationship a reasonable instinct about comfort. The pair can usually tell when the other is out of sorts, and can usually tell what would help, without asking and without getting it grandly wrong. That instinct is available in the middle of a disagreement too, though it takes more willingness to reach for it there. None of this makes a relationship durable, and a pleasant contact is not a forecast about how things go. What it does is lower the cost of repair. When something between these two goes wrong, the route back is short and well marked, and neither of you has to invent it under pressure. Whether the route gets walked is a separate matter, decided by the pair and not by the chart."
+ },
+ {
+  "id": "composite:aspect:moon:square:venus",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "moon",
+   "b": "venus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "composite:moon~venus:square"
+  ],
+  "text": "What steadies this relationship and what delights it do not want the same things. Composite Moon square composite Venus sets the bond's habits crosswise to its tastes, and the collision recurs in ordinary places: how shared time gets spent, what counts as a treat and what counts as waste, whether the familiar option is the safe one or the dull one. Affection gets offered in the wrong currency here, in both directions. Care arrives as something lovely when what was needed was something plain, or as something plain when what was needed was a gesture. Neither offering is wrong. They are answers to different questions, and the square keeps the questions from lining up. The result is a pair that can be generous with each other and still leave each other unsatisfied, which is more confusing than plain neglect would be. Money and time draw the friction the way a hillside draws water. Not because either subject matters especially to these two, but because both are places where comfort and value have to be converted into a single decision, and the rate of exchange is disputed. The same argument surfaces around the same small recurring choices, and it is never really about the choice. Underneath sits a question about worth that the contact will not let the relationship drop. What is this bond owed. What is reasonable to want from it. Whether needing something makes a person less appealing to need it from. Squares are useful for exactly this reason: they refuse to let a question be settled by going unspoken. Given a few years, the two of you get an education most bonds skip. The difference between being pleased and being soothed becomes obvious, and once it is obvious it can be asked for by name. The friction does not stop. What stops is the confusion about what the friction is over."
+ },
+ {
+  "id": "composite:aspect:moon:trine:venus",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "moon",
+   "b": "venus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "composite:moon~venus:trine"
+  ],
+  "text": "Fondness is the resting state of this bond. The composite Moon and Venus run together without effort, so the relationship's default feeling toward itself is warm, easy, and largely unexamined. Ordinary contact between these two is pleasant. That sounds small until it is measured against how many relationships cannot say it. The pair has a settled taste of its own, a set of shared preferences that arrived without negotiation: what makes a good afternoon, what is worth the money, what the two of them find funny. Agreement of that kind saves an enormous amount of friction, since a great many decisions never rise to the level of decisions at all. The characteristic failure is that nothing here ever gets renegotiated. Comfort breeds inertia, and this bond is comfortable enough that raising an objection can feel ungrateful. A grievance gets weighed against how nice everything is, and quietly loses. Ten years of small unmentioned grievances make a relationship that is genuinely warm and slightly hollow, and no one can point to the moment it went that way. Complacency is the other cost. This pair rarely has to work for its closeness, so it does not develop the equipment that harder bonds develop under pressure. When something does have to be worked through, the two of you may find that equipment unfamiliar. Not missing, just never used. Other people see the ease and often envy it, which makes it harder still to admit that anything is unsatisfying. The contact is a genuine asset. It becomes more than a pleasant surface when the relationship spends some of its goodwill on a conversation it does not strictly need to have, which is the one use of goodwill that comfortable bonds almost never think of."
+ },
+ {
+  "id": "composite:aspect:moon:opposition:venus",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "moon",
+   "b": "venus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "composite:moon~venus:opposition"
+  ],
+  "text": "This bond is pulled between what keeps it settled and what draws it out. The composite Moon and Venus stand opposite each other, so the relationship's need for the familiar and its appetite for what is lovely sit at either end of one axis, each visible from the other and neither able to absorb it. In practice the pair alternates. There are stretches where the connection turns inward and lives on routine, and the routine is genuinely satisfying. Then something outside catches the bond's attention, and the same routine looks like a rut. The swing is not a sign of instability. It is how an opposition holds two true things that cannot be true in the same hour. The axis also runs between private ease and public regard. What this relationship is like when no one is watching, and what it is like as a thing other people admire, are different, and the difference can be sharp. Bonds under this contact often present beautifully and feel more complicated from inside, or run deep and unglamorous while looking to outsiders like not much at all. Being looked after and being delighted in are not the same currency, and this bond can be rich in one while running short of the other with nobody able to say what is thin. Comfort with no pleasure in it goes stale and stops being chosen. Pleasure with no comfort under it is exhausting and cannot be leaned on. The relationship works best when both are granted at once instead of taken in turns, and taking them in turns is the default. There is a particular trap in blaming one person for whichever pole is currently unwelcome. The pull belongs to the bond, and whoever is arguing for the quieter version of an evening did not invent it. Once both of you see the axis as shared property the argument gets much shorter, and what is left of it is a real question about how this relationship wants to spend itself."
+ },
+ {
+  "id": "composite:aspect:moon:conjunction:mars",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "moon",
+   "b": "mars",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "composite:moon~mars:conjunction"
+  ],
+  "text": "Nothing gets felt quietly in this relationship. The composite Moon and Mars occupy the same degree, which fuses the bond's reflex with its appetite: a need does not arrive here and then get acted on, it arrives already moving. The pair knows what it wants by the fact that it is already reaching. This makes for a bond with unusual momentum. Decisions get made at speed. Neither person has to build a case before doing something, because the impulse counts as sufficient reason, and a great deal gets accomplished that a more careful pairing would still be discussing. Protectiveness runs on the same circuit. If something threatens one of them, the response is immediate and comes from the relationship rather than from a considered choice. Heat is part of the design. Irritation shows up before its reason does, and in a bond this fused it is often unclear whose irritation it was to begin with. Small provocations get a full-sized response. The temperature of an exchange rises fast, and often falls just as fast, though that is a tendency rather than a rule. What the contact describes is a bond that runs hot, not a bond that runs badly. Heat is capacity. The same rise that makes an argument sharp is what lets this relationship act when acting is inconvenient. The real work sits in the gap the conjunction refuses to leave: the space between feeling something urgently and treating it as an emergency. A mood at full volume is very persuasive from inside. It makes the case for acting tonight when tomorrow would do, and it makes that case to both of you at the same moment, so there is no cool head in the room by default. The relationship gains from learning its own tempo. Not from cooling off, which is not really on offer here, but from telling apart the heat that is about something and the heat that is just this bond running at its usual pressure."
+ },
+ {
+  "id": "composite:aspect:moon:sextile:mars",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "moon",
+   "b": "mars",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "composite:moon~mars:sextile"
+  ],
+  "text": "Irritation has a working exit in this relationship. The sextile between composite Moon and composite Mars connects what the bond feels to what it can do about the feeling, and the connection runs at low pressure: nothing forces the pair into motion, but motion is always nearby. The clearest sign is what happens to an annoyance. It gets raised while it is still an annoyance, in a tone that does not turn it into an event, and once dealt with it leaves no residue. Less of this bond's anger collects as a mood nobody can trace to a source, so disagreements between these two tend to be about something specific, which is a modest advantage that turns out to matter across years. Appetite moves through the same channel. When the pair wants something, the want can become a plan inside a week, and a suggestion made on a whim has a fair chance of actually happening. Under pressure from outside, the two of you organize quickly and without much discussion of who is doing what. All of it is an offer rather than a habit. The relationship can just as easily stay in the feeling and never get to the doing: wants get described, agreed on, and left, and the pattern is easy to miss because nothing about it is unpleasant. A mood that never becomes an act does not complain. It sits, and the sitting looks like contentment from every angle except hindsight. Which version these two live in is not written anywhere in the figure. It comes down to whether the small opening between feeling and doing gets taken on ordinary days, and ordinary days are the only place this contact does business."
+ },
+ {
+  "id": "composite:aspect:moon:square:mars",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "moon",
+   "b": "mars",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "composite:moon~mars:square"
+  ],
+  "text": "Rest and push are at odds in this bond, and the argument between them comes back on a schedule of its own. The composite Moon wants the settled thing, composite Mars wants to go, and each keeps interrupting the other. Squares do not compromise. They force. The friction nearly always sounds like a disagreement about tempo. One register says not now, the other says now, and the content of the decision matters far less than its timing. What makes it hard to sort out is that neither position is unreasonable and neither belongs permanently to one person. The roles swap. Whoever pressed last month is the one stalling this month, wearing the other side's argument with total conviction. Under this contact irritation turns up inside the bond's ordinary comfort, in exactly the places that are supposed to be restful. Small habits grate. A tone of voice that means nothing lands as a provocation. Because the flares are small in scale rather than dramatic, they can look petty to both of you, and treating them as petty is what keeps them coming back, since the actual conflict never gets stated. The traction is real. A pair that keeps colliding gets accurate about its own signals. These two learn what an early irritation means, which subjects run hot, and how to say I am at the end of my patience before the patience is gone. Bonds without this friction rarely develop that vocabulary, because they never need it. None of this predicts how the relationship goes. A square describes a recurring collision and where the energy comes from, not an outcome, and plenty of long, sturdy bonds run on exactly this kind of heat. What the aspect asks is that the collisions get named as questions of tempo rather than of character, since the same argument is much easier to have when nobody in it is being called impatient or cold."
+ },
+ {
+  "id": "composite:aspect:moon:trine:mars",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "moon",
+   "b": "mars",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "composite:moon~mars:trine"
+  ],
+  "text": "What this relationship feels, it acts on, and the distance between the two is short. Composite Moon trine composite Mars puts the bond's mood and its drive in easy agreement, so wanting something and starting it are close to the same event. Very little energy gets lost on getting ready. The pair is effective together in a way that is pleasant to be inside. Plans do not require much persuading. When one person is low the other moves, and the moving generally helps rather than intrudes, because the two impulses run along the same grain. Anger works the same way. It comes out at the moment it arises, in the shape it arose in, and does not sit around turning into something else. These two rarely nurse a grudge, since a grudge takes storage and there is none here. Ease is the whole problem. Nothing in it ever asks the pair to examine what it is doing, so a mood can become a decision before anyone has checked whether the mood was accurate. The bond acts on impressions. It is quick, confident, and occasionally wrong at speed, and because acting together feels so much like agreeing, momentum passes for consent. Stillness is the skill this pairing does not pick up by accident. Sitting with an unpleasant feeling instead of discharging it into activity is unfamiliar work here, and the relationship can stay busy for years without noticing that busy is how it avoids things. The contact is worth having. It gives the two of you a bond that can act on how it feels instead of arguing itself out of everything, and that capacity carries a relationship through periods when little else would. It gets sharper when the pair now and then asks, out loud and before moving, what exactly it is reacting to."
+ },
+ {
+  "id": "composite:aspect:moon:opposition:mars",
+  "family": "composite-aspect",
+  "when": {
+   "kind": "compositeAspect",
+   "a": "moon",
+   "b": "mars",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "composite:moon~mars:opposition"
+  ],
+  "text": "The need to be soothed stands opposite the need to press. Composite Moon and composite Mars face each other across this chart, and the relationship holds both demands at full strength with no way to average them. Comfort is not going to talk the heat down, and the heat is not going to make comfort concede. Left to itself, the bond alternates. A quiet stretch, then a stretch of push, then quiet again, and each swing looks from inside like a correction of the last one. The alternating is not the tension resolving. It is the two poles taking turns holding the room. Oppositions have a habit of getting handed to other people. This pair may find that the heat rarely appears between them and instead lands on some outside opponent: a rival, an institution, a situation the two of you can be angry at together. That works, up to a point, and it keeps the bond united. It also leaves the axis unexamined between them, so the same charge is waiting whenever no outside target is available. Recovery speed is where the axis is easiest to see: heat clears fast and comfort does not, so the pair can be finished with an argument and still be living in its weather a day later. Without heat, this relationship's comfort goes slack and stops being able to want anything. Without comfort, its heat has nowhere to land, and the bond fights well and cannot rest. Neither of these is the better half. The opposition asks that both be carried at once, which is harder than choosing between them and is the only use that actually spends the aspect. Naming which pole is in the room usually shortens the argument. What looks like one person being unreasonable is more often the axis doing what an axis does, and a bond that can see that spends far less of itself on deciding who is at fault."
+ }
+]

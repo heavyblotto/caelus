@@ -1,0 +1,127 @@
+{
+ "name": "firdaria-subs-saturn",
+ "outFile": "b4-firdaria-subs-saturn.json",
+ "setId": "house-b4-firdaria-subs-saturn",
+ "family": "timelord-firdaria",
+ "cells": [
+  {
+   "id": "timelord:firdaria:sub:saturn:sun",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "sub",
+    "lord": "sun",
+    "under": "saturn"
+   },
+   "atomIds": [
+    "firdaria:sub:",
+    "firdaria:major:"
+   ],
+   "title": "Sun sub-period of the Saturn firdaria",
+   "bindable": true
+  },
+  {
+   "id": "timelord:firdaria:sub:saturn:venus",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "sub",
+    "lord": "venus",
+    "under": "saturn"
+   },
+   "atomIds": [
+    "firdaria:sub:",
+    "firdaria:major:"
+   ],
+   "title": "Venus sub-period of the Saturn firdaria",
+   "bindable": true
+  },
+  {
+   "id": "timelord:firdaria:sub:saturn:mercury",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "sub",
+    "lord": "mercury",
+    "under": "saturn"
+   },
+   "atomIds": [
+    "firdaria:sub:",
+    "firdaria:major:"
+   ],
+   "title": "Mercury sub-period of the Saturn firdaria",
+   "bindable": true
+  },
+  {
+   "id": "timelord:firdaria:sub:saturn:moon",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "sub",
+    "lord": "moon",
+    "under": "saturn"
+   },
+   "atomIds": [
+    "firdaria:sub:",
+    "firdaria:major:"
+   ],
+   "title": "Moon sub-period of the Saturn firdaria",
+   "bindable": true
+  },
+  {
+   "id": "timelord:firdaria:sub:saturn:saturn",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "sub",
+    "lord": "saturn",
+    "under": "saturn"
+   },
+   "atomIds": [
+    "firdaria:sub:",
+    "firdaria:major:"
+   ],
+   "title": "Saturn sub-period of the Saturn firdaria",
+   "bindable": true
+  },
+  {
+   "id": "timelord:firdaria:sub:saturn:jupiter",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "sub",
+    "lord": "jupiter",
+    "under": "saturn"
+   },
+   "atomIds": [
+    "firdaria:sub:",
+    "firdaria:major:"
+   ],
+   "title": "Jupiter sub-period of the Saturn firdaria",
+   "bindable": true
+  },
+  {
+   "id": "timelord:firdaria:sub:saturn:mars",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "sub",
+    "lord": "mars",
+    "under": "saturn"
+   },
+   "atomIds": [
+    "firdaria:sub:",
+    "firdaria:major:"
+   ],
+   "title": "Mars sub-period of the Saturn firdaria",
+   "bindable": true
+  }
+ ]
+}

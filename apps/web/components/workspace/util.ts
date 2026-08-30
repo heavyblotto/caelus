@@ -8,7 +8,8 @@ import type { BirthShare, FormShare, KundliStyle, Tradition } from "../../lib/sh
 export type DocKind = "birth" | "form";
 export type ProgressMethod = "secondary" | "solar-arc";
 export type FigureView =
-  | "natal" | "sphere" | "map" | "transits" | "tri" | "harmonic" | "antiscia" | "heliocentric";
+  | "natal" | "sphere" | "map" | "transits" | "tri" | "harmonic" | "antiscia" | "heliocentric"
+  | "houses" | "derive" | "sect" | "retrograde" | "dial";
 export type RailId =
   | "reading" | "placements" | "aspects" | "timing" | "compare"
   | "compose" | "sky" | "rectify" | "vedic" | "json"
@@ -181,4 +182,30 @@ export function hoursOfDay(engine: Engine, jd: number, lat: number, lon: number)
     out.push(h);
   }
   return out;
+}
+
+/** Chart-defining params shared by Playground widget figures. */
+export interface PlaygroundChartParams {
+  instant: { y: number; mo: number; d: number; h: number; mi: number; s: number };
+  place: { latDeg: number; lonEastDeg: number; label?: string };
+  houseSystem?: HouseSystem;
+}
+
+/** UT civil fields for widget `ChartParams`, from the chart's Julian Day. */
+export function playgroundChartParams(
+  jdUt: number,
+  latDeg: number,
+  lonEastDeg: number,
+  houseSystem: HouseSystem,
+  placeLabel?: string,
+): PlaygroundChartParams {
+  const iso = isoFromJd(jdUt);
+  const [date, time] = iso.split("T");
+  const [y, mo, d] = date.split("-").map(Number);
+  const [h, mi] = time.split(":").map(Number);
+  return {
+    instant: { y, mo, d, h, mi, s: 0 },
+    place: { latDeg, lonEastDeg, ...(placeLabel ? { label: placeLabel } : {}) },
+    houseSystem,
+  };
 }

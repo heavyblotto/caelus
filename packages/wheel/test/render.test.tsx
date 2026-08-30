@@ -8,7 +8,10 @@ import { dirname, join } from "node:path";
 import { createRequire } from "node:module";
 import { Engine } from "caelus";
 import { loadNodeData } from "caelus/node";
-import { ChartWheel, spreadAngles, NorthIndianKundli, SouthIndianKundli } from "../src/index.js";
+import {
+  ChartWheel, spreadAngles, GLYPHS, PLATE_THEME, PLATE_BODY_INKS, PLATE_TOKENS,
+  NorthIndianKundli, SouthIndianKundli,
+} from "../src/index.js";
 
 let checks = 0;
 let failures = 0;
@@ -158,6 +161,30 @@ assert(render(fixture, { theme: { axis: "#ff0000" } }).includes("#ff0000"),
 
 // size prop
 assert(render(fixture, { size: 300 }).includes('width="300"'), "size: applied");
+
+// plate theme: complete over every glyphed body (a theme is complete or it
+// does not merge), and oxblood keeps its one meaning (nothing in the base
+// theme or the body inks uses the accent)
+{
+  for (const body of Object.keys(GLYPHS)) {
+    assert(PLATE_THEME.planetColors?.[body] !== undefined,
+      `plate theme: planetColors covers ${body}`);
+    assert(PLATE_BODY_INKS[body] !== undefined,
+      `plate theme: body inks cover ${body}`);
+  }
+  const values = [
+    ...Object.values(PLATE_THEME.aspectColors),
+    ...Object.values(PLATE_THEME.planetColors ?? {}),
+    ...Object.values(PLATE_BODY_INKS),
+    PLATE_THEME.ring, PLATE_THEME.axis, PLATE_THEME.signText,
+    PLATE_THEME.planetText, PLATE_THEME.labelText, PLATE_THEME.houseText,
+  ];
+  assert(values.every((v) => v.toLowerCase() !== PLATE_TOKENS.accent),
+    "plate theme: oxblood reserved for interaction");
+  const svg = render(fixture, { theme: PLATE_THEME });
+  assert(svg.startsWith("<svg") && !svg.includes("NaN"), "plate theme: renders");
+  assert(svg.includes(PLATE_TOKENS.ink), "plate theme: ink present");
+}
 
 // ---------------------------------------------------------------- kundli
 {

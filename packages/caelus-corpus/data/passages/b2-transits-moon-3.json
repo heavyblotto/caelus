@@ -1,0 +1,212 @@
+[
+ {
+  "id": "transit:moon:conjunction:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "saturn",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:moon~natal_saturn:conjunction"
+  ],
+  "text": "For a few hours each month, the Moon crosses your natal Saturn and the emotional temperature drops. This is a brief visit, not a season: it builds over an afternoon, peaks, and is gone by the next day. While it lasts, feelings turn sober. You may find yourself quieter than usual, more self-critical, more aware of duties and of time. Company can feel like effort, and old worries you thought you had filed away can surface for review. No verdict is being handed down. Your feeling nature and your sense of obligation are simply sharing a chair, as they do for a few hours every month. As the Moon approaches the conjunction, you may notice the mood coming on as a faint heaviness or a wish to be alone. At the exact pass the seriousness peaks, and this is often when a wave of loneliness or discouragement arrives, out of proportion to the actual day. As the Moon separates, the weight lifts on its own, usually within hours. Because the Moon never backtracks, there are no return passes to wait through; one clean touch a month, every month. That regularity is worth something. These hours are honest ones. Emotional fog burns off and you see your commitments plainly, which makes this a natural time for sober chores: the budget, the difficult email, the task you have been circling. What you feel under this Moon is real but shrunken, the way a cold day makes a house feel smaller than it is. Judgments about relationships or self-worth formed in the trough tend to look harsher by tomorrow than you actually meant. People with a strong natal Saturn often find these hours almost comfortable, a monthly appointment with their own seriousness. Others learn the rhythm the hard way, wondering once a month why the world went gray, until they notice the pattern. Noticing is most of the work. Once you know this mood has a schedule, it loses its power to convince you it is the truth about everything. You can let it do its one useful job, which is stripping sentiment from your view of your obligations, and let the rest pass through. Over months, this small recurring visit teaches a durable skill: telling the difference between a feeling and a fact, at the exact hour when they are hardest to tell apart."
+ },
+ {
+  "id": "transit:moon:sextile:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "saturn",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:moon~natal_saturn:sextile"
+  ],
+  "text": "The Moon slides through a sextile to your natal Saturn, and for a few hours your mood consents to be governed: feelings and discipline cooperate instead of arguing. The mood is calm, a little dry, quietly capable. Nothing about it is dramatic, which is why it is easy to miss. The sextile only offers; it puts steadiness within reach and leaves the choice of using it to you. For the handful of hours this contact lasts, patience comes at a discount. Tasks that usually feel tedious, sorting, filing, planning, the slow conversation that needs a level head, go down easier. If you have to say something difficult to a family member or a colleague, you can say it now without the wobble that other days put in your voice. Older people, and anyone who carries authority in your life, tend to be easier to deal with under this Moon. You meet them composed, and they respond to that. As the aspect applies you may feel your attention gathering, a mild inclination to tidy, to settle, to finish, and the hours around the exact contact are the most workable of the lot. On the way out, the mood fades so gently that you rarely mark its ending. Since the Moon moves without pausing or reversing, the window does not reopen this time around, but it does not need to; the same offer returns on schedule, a couple of times in a typical month, part of the regular weave of your weeks. That makes it less an event than a resource. If you keep loose track of your own rhythms, this is the recurring slot where administration, repair, and planning fit best. There is a modest emotional gift here too. This Moon lets you feel affection in Saturn's dialect: showing up, keeping a promise, doing the unglamorous thing for someone without announcing it. Care expressed in these hours tends to land as reliability, which some people in your life trust more than warmth. Nobody looks back on a Moon-Saturn sextile as the day everything changed. Used often, though, it compounds. A month contains a few of these small, sturdy pockets, and the people who quietly get their lives in order are usually the ones spending them on purpose."
+ },
+ {
+  "id": "transit:moon:square:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "saturn",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:moon~natal_saturn:square"
+  ],
+  "text": "You reach for reassurance and touch a wall instead. That is the signature of the hours when the moving Moon squares your natal Saturn: your need for comfort and your sense of duty catch each other at a bad angle, and the friction is felt as mood. It comes around on a regular beat, roughly every two weeks, and it never stays long, a matter of hours rather than days. While it is in effect you may feel blocked, underappreciated, or obscurely guilty, as if you are failing a test no one told you about. Criticism lands harder than usual, whether it comes from someone else or from the voice in your own head. Warmth seems to cost more: people can read as cold or demanding, and you may come across the same way to them without meaning to. The square forces the issue where softer contacts would let it slide. As the aspect applies, irritation or heaviness builds without an obvious cause. At the peak, something small often triggers the mood into the open, a delay, a curt reply, a bill. As the Moon pulls away, the pressure releases and the day usually rights itself before it ends. There is no second pass to brace for, and the whole thing repeats on schedule, so the real question is not how to survive it but what to make of a mood that visits this often. It has one genuine use. The discomfort points at wherever your emotional life and your responsibilities are actually rubbing, and it exaggerates that spot until you notice it. A chore resented every two weeks is telling you something. So is a relationship that only feels heavy under this Moon, or a self-reproach that always picks the same subject. The distortion is temporary; the subject matter usually is not. What does not help is treating the mood as information about your worth. Under this square, your inner critic borrows Saturn's voice and speaks with more authority than it has earned. Feelings of being unloved or behind in life that arrive in these hours are almost always overstated, and they fade with the aspect. People who know their own calendar learn to let the harsh commentary pass unanswered and keep only the practical note it was wrapped around. Handled that way, this recurring rough patch becomes a kind of maintenance alarm: brief, unpleasant, reliable, and pointing, more often than not, at something worth fixing."
+ },
+ {
+  "id": "transit:moon:trine:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "saturn",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:moon~natal_saturn:trine"
+  ],
+  "text": "Composure is the weather when the Moon moves through a trine to your natal Saturn. For a few hours your feelings settle into good order without being told to: you are patient, realistic, hard to fluster, and comfortable with your own company. Where the harder Moon-Saturn contacts make duty and mood fight, the trine lets them fall into step, so responsibility stops feeling like weight and starts feeling like ground. This is a passing state, not a phase of life. It comes, does its quiet work, and hands the day back, then returns on the month's regular wheel, twice in most months, dependable as a bus route. The hours themselves are good for almost anything that rewards a level head. Practical matters move smoothly. Conversations that need tact and honesty at the same time, with a parent, a boss, a partner, tend to go better now, because you can hear hard things without flinching and say them without edge. Your judgment about people is drier and more accurate than usual; charm impresses you less, track records more. Emotionally, the trine gives a specific pleasure that busy lives rarely schedule: contentment with what is already built. You look at your work, your home, your longest relationships, and instead of auditing them you simply rest on them. The buildup is subtle, the peak easy to miss, the fade painless, and since the Moon presses on without ever turning back, there is nothing to revisit and nothing left hanging. The risk, if it deserves the word, is passivity. Ease invites coasting, and a trine never insists. Left alone, these hours become pleasant and forgettable. Spent deliberately, they are the month's best slot for the steady kind of effort, the long report, the slow repair, the promise kept quietly. What you build in them tends to be built calmly and therefore built once. There is also a lesson in the recurrence itself. Meeting this mood month after month teaches you what your own steadiness feels like from the inside, so you can recognize it, and eventually reach for it, on days the sky is not helping. The trine does not make you a disciplined person in an afternoon. It shows you, briefly and regularly, the person the discipline is for."
+ },
+ {
+  "id": "transit:moon:opposition:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "saturn",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:moon~natal_saturn:opposition"
+  ],
+  "text": "Once a month the Moon stands directly across the sky from your natal Saturn, and for those hours the distance between you and other people seems to widen. This is the confrontational version of the pair: your need for closeness on one side, reserve and obligation on the other, facing each other across the full width of the chart. The mood tends to arrive through relationships rather than inside your own head. You want warmth and meet formality. You ask a small thing and hear a rule. Someone else's coolness, real or imagined, stings more than it should, and you may respond by going cold yourself, which completes the circle. Sometimes the roles reverse, and you are the one who feels burdened by another person's needs, guarding your time and answering affection with logistics. Either way, the opposition puts the tension out in the open between people, where a conjunction would keep it private. It builds as the Moon approaches, often as a vague sense of being unwelcome or behind. It peaks briefly, sometimes as an actual standoff, more often as an evening that just feels stiff. Then it separates and the warmth comes back, usually so naturally that you wonder what the chill was about. The Moon slips past and is done, with nothing held over for a second act; the same face-off simply returns at its monthly interval, one of the recurring textures of your emotional calendar. Because it recurs, it repays a little observation. Notice who the coolness clusters around. A relationship that only feels distant during these hours is probably fine, and the distance is the transit talking. A relationship that feels this way most of the month, with the transit merely turning the volume up, is giving you better information. The opposition exaggerates a real axis in your life, the trade between belonging and duty, and the exaggeration makes the terms of the trade easier to read. In the hours themselves, the workable move is usually neither to force closeness nor to withdraw entirely, but to let the formality be temporary. Say less, take nothing personally that arrives after the chill began, and let the separation do what it always does. Over time, this monthly rehearsal makes you harder to spook: you learn that coldness between people is often weather, that it passes on its own schedule, and that knowing the schedule is half of not being ruled by it."
+ },
+ {
+  "id": "transit:moon:conjunction:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "uranus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:moon~natal_uranus:conjunction"
+  ],
+  "text": "Once a month your mood gets a jolt. The Moon crossing your natal Uranus is a brief electric visit, a matter of hours, and while it lasts your feelings run quicker, brighter, and less predictably than usual. Restlessness is the most common note. Routine chafes, the familiar bores you, and you may catch yourself wanting to cancel plans, rearrange the furniture, message someone out of the blue, or say the surprising thing just to feel the air move. Your intuition speeds up too. Flashes of insight arrive sideways, sudden clarity about a situation you had stopped examining, an idea that seems to come from nowhere. Some of these flashes are genuinely good; the trouble is that in the moment they all feel equally brilliant. The mood has an arc even at this speed. Approaching, you feel keyed up without knowing why, a static charge under the skin. At the peak the impulses crest, and this is when the sudden purchase, the abrupt exit, or the unfiltered remark most wants to happen. Separating, the current drains quickly, and you are left looking at whatever you did with slightly different eyes. The Moon never retraces its path, so each visit is single and clean, and the next is never more than a month away. That frequency is the point to hold on to. This is not a rare storm to weather but a recurring feature of your inner month, your emotional life's scheduled reminder that it refuses to be entirely tamed. Fighting it head-on tends to backfire; suppressed, the restlessness leaks out as irritability or nervous tension, snappishness with exactly the people you rely on. Fed a little, it is useful. These hours favor novelty in low-stakes forms: a different route, an experiment in your work, an honest conversation that routine keeps postponing. Freedom taken in small denominations satisfies the itch that would otherwise demand a large one. It is also worth knowing what these hours are bad at. Commitments made at the peak often assume a version of you that only exists at the peak. The desire to overturn something big, a relationship, a job, a home, can be real intelligence about your life or can be Tuesday's static, and the only way to tell is to see whether it survives the transit. What keeps returning, month after month, under jolt after jolt, has earned your attention. What evaporates by morning was just the Moon passing over the live wire it always passes over."
+ },
+ {
+  "id": "transit:moon:sextile:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "uranus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:moon~natal_uranus:sextile"
+  ],
+  "text": "The routine loosens a stitch when the transiting Moon sextiles your natal Uranus. The loosening lasts a few hours, asks nothing, and if you do not use it, the day proceeds as scheduled. That is the nature of this contact: an offer of freshness, extended lightly and withdrawn without complaint. The mood, if you notice it at all, is a pleasant alertness. You feel a touch more curious than usual, more open to interruption, quicker to see the interesting angle on an ordinary thing. Social life carries most of the effect. Chance encounters go well under this Moon; the stranger in line turns out to be worth talking to, the colleague you barely know says the useful thing, an unexpected message lands at the right moment. Plans changed on short notice tend to change in your favor. There is no build worth calling tension. The aspect applies as a subtle lift in the day's texture, peaks as a window when the new feels easy rather than effortful, and separates without any settling to speak of, because nothing was disturbed. The Moon keeps moving and does not return for a second pass, but the offer itself is a repeating one; this contact comes around more than once in a typical month, threaded through your weeks like a recurring free hour. What makes the sextile worth knowing about is precisely its lack of force. Nothing will make you use it. The month's harder moments push their themes on you; this one waits to be picked up. Picked up, it is the natural slot for the small experiments a life needs: trying the unfamiliar tool, floating the odd idea in the meeting, asking the question you have been sitting on, varying the pattern of an evening. Novelty attempted now meets less internal resistance, yours and other people's, than the same attempt made under pressure. There is a relational use too. Under this Moon you can give the people close to you a little room to surprise you, and they often do. Curiosity about a familiar person is a rarer gift than loyalty, and easier to offer in these hours than in most. None of this changes a life in an afternoon, and it is not meant to. But a month contains several of these open doors, and the difference between a life that slowly stiffens and one that keeps some play in it is often just how many of them get walked through."
+ },
+ {
+  "id": "transit:moon:square:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "uranus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:moon~natal_uranus:square"
+  ],
+  "text": "Your nerves sit closer to the surface during the hours when the Moon squares your natal Uranus. The mood is jangled, impatient, allergic to constraint: whatever holds still, schedules, obligations, other people's expectations, the line you are standing in, suddenly feels like a cage with you inside it. It is a brief state, gone the same day it arrives, and it comes back on a quick cycle, about every two weeks, which makes it less a crisis than a recurring spike in your emotional static. The square forces where the softer contacts invite. The restlessness does not wait for a convenient outlet; it discharges through whatever is nearest. That can look like snapping at someone over nothing, abruptly quitting a task halfway, an impulsive purchase or message, or the sudden urge to blow up an arrangement that was working fine yesterday. Other people can be the conduit instead: someone cancels late, changes the terms, or behaves out of character, and the disruption arrives from outside. Either way the feeling is the same, a jolt against the grain of the day. There is a rough arc even in a few hours. The tension builds as the aspect applies, often as unexplained edginess or poor sleep the night before. It peaks around the exact square, when the impulsive act is most tempting and most likely. It drains fast on separation, sometimes leaving a small mess to sweep up, more often leaving nothing but the memory of a fraying temper. The Moon does not circle back for another pass; the episode is one touch, complete in itself, until the cycle brings the next one. Knowing the rhythm changes what the hours are worth. Unrecognized, they read as evidence: my life is intolerable, this person is impossible, everything must change now. Recognized, they read as charge looking for a conductor, and you can choose the conductor. Movement helps, and so does any task with speed or novelty in it; the energy is genuine and spends well on things that can absorb a jolt. What spends badly is anything irreversible. The changes this mood proposes usually concern real frustrations, but its sizing is off; it wants demolition where adjustment would do. The recurring nature of the square is actually its gift. Whatever it flares up about most reliably, month after month, is a genuine pressure point in your life, located for you by repetition. You did not need the fifth flare to act on it, but at least the map is accurate."
+ },
+ {
+  "id": "transit:moon:trine:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "uranus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:moon~natal_uranus:trine"
+  ],
+  "text": "Fresh air moves through your inner life while the Moon is trine your natal Uranus. For a few hours the new feels friendly instead of threatening: change, surprise, and difference all go down easily, and your mood has a light, quick, slightly playful quality that other days have to work for. This is the easy version of a Moon-Uranus contact. Nothing jolts. The same current that rattles you under harder angles arrives here as stimulation you can actually use. Spontaneity is the keynote. Under this Moon you say yes faster, and the yes tends to work out: the unplanned evening becomes the good story, the detour finds the better shop, the conversation wanders somewhere worth going. Your feelings are a little freer of habit than usual, which means you can respond to what is actually in front of you rather than to the pattern it resembles. People notice; you come across as more interesting and more interested, and interactions pick up an ease that has nothing forced in it. Insight benefits too. The trine favors the sideways solution, and problems you have been grinding at frontally sometimes fall open now, approached in an idle moment from an angle grinding would never have found. It is a good few hours for creative work, for brainstorming, for any thinking that improves when the grip loosens. The arc is gentle end to end: a rising brightness as the aspect applies, a peak you experience simply as a good stretch of the day, and a fade with no residue, since ease leaves nothing behind to settle. One touch and the Moon moves on, no return visits, and the contact reappears a couple of times in a typical month, one of the reliably pleasant threads in the weave. Its only weakness is that ease does not insist. These hours will happily pass as mere pleasantness, a nice mood forgotten by the weekend. They give more when given something to carry: the experiment you would overthink on an ordinary day, the change you have been meaning to trial, the invitation you keep almost extending. Novelty launched under a trine tends to launch clean. There is a longer arithmetic here as well. A month reliably hands you these windows where flexibility costs nothing. People who spend them stay limber, in their habits and in their affections, and limberness, renewed a few hours at a time, is much cheaper than the overhaul that rigidity eventually demands."
+ },
+ {
+  "id": "transit:moon:opposition:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "uranus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:moon~natal_uranus:opposition"
+  ],
+  "text": "The disruption comes through other people when the Moon opposes your natal Uranus. Once a month, for a few hours, the people around you seem to take turns being unpredictable: plans get overturned at the last minute, someone close behaves out of character, a cool wind of distance blows through an interaction that was warm yesterday. The opposition works across the axis of relationship, so the Uranian charge, restlessness, the hunger for freedom, the sudden swerve, tends to show up wearing someone else's face. It is worth saying plainly that the charge is usually shared. What you meet in others under this Moon is often your own restlessness, projected and returned. You may feel simultaneously clingy and crowded, wanting reassurance from exactly the person you also want space from, and they may feel the same about you. Small wonder these hours produce abrupt cancellations, prickly exchanges, and the occasional out-of-nowhere declaration. The mood approaches as a vague social static, an itch in your connections. It peaks around the exact opposition, which is when the surprising thing tends to happen or be said. It separates fast, and most of what flared turns out to be weather: by the next day the friendship is fine, the plan is remade, the declaration is half-retracted with a laugh. The Moon makes one pass, cleanly, and returns on its monthly round, so this confrontation is not an event in your life so much as a recurring hour in it. That recurrence is what makes it legible. If a particular bond erupts under this Moon month after month, the eruptions are marking a real negotiation that the rest of the month avoids: how much closeness, how much freedom, on whose terms. The transit does not create that question; it forces it briefly into view, at slightly too high a voltage, and then lets it drop. You can learn a lot by noting what was actually said in the flare, minus the voltage. In the hours themselves, the workable stance is loose. Held expectations are what the transit breaks; held lightly, plans bend instead. Give the erratic person room rather than chase them, and take your own urge to bolt as information rather than instruction. People who ride this monthly hour well end up with a particular skill, rare and quietly valuable: staying connected to someone without gripping them, which is what the opposition keeps asking to be worked out."
+ },
+ {
+  "id": "transit:moon:conjunction:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "neptune",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:moon~natal_neptune:conjunction"
+  ],
+  "text": "The edges of things soften while the Moon crosses your natal Neptune. For a handful of hours each month, your feelings and your imagination pool together: moods arrive without labels, daydreams thicken, music and images land harder than usual, and the boundary between what you feel and what the people around you feel gets thin. This is a porous, tidal state, and it neither announces its arrival nor overstays. It drifts in as the conjunction applies, often as a subtle drop in energy or focus, a wish to be elsewhere. At the peak you are at your most impressionable, open wide to beauty and to atmosphere, and equally open to gloom if gloom is what the room is serving. Then it ebbs, usually within the day, and ordinary outlines return. One pass, once a month, no revisits; the tide simply comes back on schedule. What these hours are good for, they are very good for. Imagination runs deep and unforced, which suits any creative work, and compassion comes easily, which suits comforting someone, sitting with someone, forgiving someone. Rest taken now actually restores. Prayer, meditation, a long walk with nothing in your ears, whatever your version of stillness is, it goes further under this Moon than almost any other. What they are bad at is precision. Judgment blurs at the same rate that imagination deepens. Facts feel negotiable, wishes wear the costume of intuition, and other people's stories are unusually easy to believe. Misunderstandings born in these hours have a signature shape: everyone remembers a different conversation. Practical choices made at the peak often need daylight revision, not because you were foolish but because you were tuned to a different channel. Sensitivity itself can be the challenge. Some months this transit is bliss; other months it is a passing sadness with no cause you can name, or the absorbing of a heaviness that belongs to somebody else. If you are someone who soaks up rooms, this is the hour you soak fastest, and knowing that is protection enough: not every feeling that visits you here is yours to keep. Met knowingly, the monthly visit becomes something like a standing appointment with your inner life. You learn which longings persist when the fog lifts, which are vapor, and how to give the dreaming part of you its regular hours so it does not have to steal them. A month with this tide marked on it wastes less and dreams better."
+ },
+ {
+  "id": "transit:moon:sextile:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "neptune",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:moon~natal_neptune:sextile"
+  ],
+  "text": "Gentleness is on offer during the hours when the Moon sextiles your natal Neptune. It is a quiet transaction: for a while, imagination, sympathy, and rest all come at a lower price than usual, and you can take as much or as little as you like. The contact makes nothing happen on its own. It simply leans the day slightly toward the tender and the unhurried, and waits. You might notice it as a softening of your inner commentary, an easier time letting small things go. Kindness flows both directions under this Moon: it is simpler to extend, and easier to accept without deflecting. Conversations that need delicacy, an apology, a consolation, a talk with someone fragile, tend to find better words now than your average hour would supply. Your reading of other people is warmer and, within its warmth, fairly accurate; the sextile does not carry the distortion that harder Neptune contacts bring, so trust extended in these hours is usually well placed. Creative and reflective work benefits in a low-key way. Images and ideas surface without being summoned, the associative side of your mind loosens, and anything that improves with feel rather than force, writing, cooking, music, arranging a room, goes a little better. So does doing nothing. An hour of genuine idleness taken under this Moon returns more than it costs, which is not true of every hour. The arc barely registers: a soft onset, a peak you notice mostly in retrospect, a fade with nothing to clean up. The Moon moves on without returning, and the offer recurs, a couple of times in most months, part of the standing weather of your weeks. Because nothing demands attention, the whole thing is easy to spend on scrolling and errands, and most people do. The case for spending it otherwise is modest but real. Lives accumulate small abrasions, and this is the month's built-in slot for tending them: the friend gone quiet, the frayed patch in a relationship, your own tiredness. Repairs attempted here meet less resistance. Over time, using these windows changes something in the background of a life. Not the dramatic parts, the texture: a little more mended, a little more rested, a few more people who have heard from you when it mattered. The sextile never insists on any of it. It just keeps making the offer, at its own dependable interval, for as long as you care to notice."
+ },
+ {
+  "id": "transit:moon:square:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "neptune",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:moon~natal_neptune:square"
+  ],
+  "text": "For a few hours, the fog rolls in. When the transiting Moon squares your natal Neptune, feeling and illusion cut across each other, and the result is a passing haze over your inner life: motivation dips, focus slides, moods turn vague and slightly off-key, and it becomes genuinely hard to tell what you feel or why. The square pushes this confusion into the day's traffic rather than letting it drift by. Misunderstandings are its favorite instrument. Under this Moon you hear what was almost said, promise what you almost mean, and read intentions that are almost there. Conversations held now have a way of needing to be held again later, with both parties surprised at what the other took away. Self-pity and formless guilt also find the door unlocked, and either can color an hour completely while it lasts. The arc is soft-edged like everything else here. The haze thickens as the aspect applies, sometimes as sleepiness or a strange drop in morale. Around the exact square you are at peak suggestibility, the moment most likely to produce the confused purchase, the misread signal, the promise made to a mood. Then it thins, and clarity returns so completely that the earlier hours can feel like they happened to someone else. One pass only, no reruns, and the cycle brings it back about every two weeks, a recurring soft spot in the fabric of the month. Its uses are real but narrow. The same porousness that garbles logistics is friendly to imagination, and undirected creative work, sketching, humming, drafting without stakes, can catch things in this fog that clear air never shows. Rest fits here too. What fits badly is anything requiring hard edges: negotiations, big commitments, judging character, arithmetic with consequences. Not because you are incapable, but because this hour's data is watery, and choices keep the quality of the data they were made from. The recurring pattern carries its own information. Notice what the fog reaches for in you, month after month: the same regret, the same fantasy, the same person idealized or mourned. Whatever it is, it is something your clear-weather mind holds at a distance, and the square briefly drops the fence. You do not have to act on what wanders in. But seeing what does, on schedule, gradually teaches you the difference between your longings and your plans, and that distinction, once learned, is worth every foggy hour it cost."
+ },
+ {
+  "id": "transit:moon:trine:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "neptune",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:moon~natal_neptune:trine"
+  ],
+  "text": "Some hours are made for drifting, and these are the month's best. With the Moon trine your natal Neptune, imagination and feeling run in the same easy current: the world looks slightly kinder, beauty is easier to notice, sympathy costs nothing, and your inner life hums along without friction. Nothing here confronts or demands. The trine opens a channel between your everyday mood and the deeper, dreaming layer underneath it, and for a few hours the two mix comfortably. You can tell the state by its symptoms. Music does more than usual. Old memories surface warm instead of sharp. Strangers seem more human, grudges feel heavier than they are worth, and it is easy to give people the charitable reading. Intuition is quietly reliable now, less a lightning bolt than a settled sense of how things sit, and it can be worth consulting on questions of feel: whether a situation suits you, whether a relationship is resting or fading, what a piece of work still needs. Creative and spiritual practices find their easiest traction here. So does rest, real rest, the kind that repairs. An unscheduled hour under this Moon, spent walking, listening, or staring usefully at nothing, does the work that a whole weekend of effortful relaxing sometimes fails to do. Compassion extended now flows without depleting you, which makes these good hours for visiting the sick, sitting with the sad, or simply being unhurried with someone who needs it. The transit barely has edges: a gentle onset, a peak felt only as depth, a painless fade. The Moon passes once and keeps going, and the trine returns a couple of times in a typical month, a soft recurring note in the larger rhythm. Little needs guarding against. The haze that troubles the harder Neptune contacts is mostly absent; at worst you are a touch unambitious for an afternoon, disinclined to push, and whatever needed pushing waits a few hours without harm. The subtler risk is simply never noticing these windows at all, and taking their gifts, ease, mercy, imagination, as random weather rather than a rhythm you could meet on purpose. Met on purpose, they become the month's standing appointment with your softer intelligence. The practical mind gets most of your hours; this contact regularly hands a few to the part of you that heals, dreams, and forgives, and a life that keeps that appointment tends to stay more humane than one that lets it lapse."
+ },
+ {
+  "id": "transit:moon:opposition:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "neptune",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:moon~natal_neptune:opposition"
+  ],
+  "text": "Other people are hard to bring into focus during the hours when the Moon opposes your natal Neptune. Once a month this contact stretches a light mist across the space between you and everyone else, and through it, motives blur, signals soften, and it becomes surprisingly easy to see what you hope to see, or fear to see, instead of what is there. The opposition stages Neptune's fog in your relationships specifically. You may idealize someone for an afternoon, feel obscurely let down by someone who has done nothing, or sense an unspoken current in an interaction that turns out to have been your own mood reflected back. Confusion can flow the other way too: people misread you now, hearing promises or rejections you never issued. Deception in the hard sense is rare on a transit this brief; what abounds is soft error, two sincere people each talking to a slightly imaginary version of the other. The mist thickens as the aspect applies, often felt as a wistful or unsettled note in your dealings. It is densest at the exact opposition, the hour most likely to produce the conversation that later needs untangling or the impression that later needs retracting. Then it lifts, quickly and completely. The Moon moves on without a second pass, and the whole encounter returns at its monthly interval, one of the regular illusions on your calendar. Its recurrence is what redeems it. Anyone can be fooled once; being fooled on schedule teaches. Watch what the mist does with the same people month after month and you learn the shape of your own projections: whom you dress in borrowed virtues, whom you burden with borrowed sins, where your hopes do your seeing for you. That map is worth having, and this transit redraws it monthly, free of charge. There is also a genuine sweetness available. The same blur that garbles logistics dissolves the harder edges of judgment, and under this Moon it is easier to feel tenderness for difficult people and mercy for flawed ones, yourself included. Enjoyed as atmosphere rather than trusted as information, the hours can be almost romantic. The working rule is only this: let impressions formed now wait for tomorrow before they become conclusions, and let important conversations keep a margin for repeating. What was real will still be real when the air clears, and what was mist will have politely left on its own."
+ }
+]

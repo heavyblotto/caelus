@@ -1,0 +1,88 @@
+{
+ "name": "synastry-jupiter-4",
+ "outFile": "b3-synastry-jupiter-4.json",
+ "setId": "house-b3-synastry-jupiter-4",
+ "family": "synastry-aspect",
+ "cells": [
+  {
+   "id": "synastry:jupiter:conjunction:pluto",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "pluto",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_pluto:conjunction"
+   ],
+   "title": "Your Jupiter conjunct their Pluto",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:sextile:pluto",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "pluto",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_pluto:sextile"
+   ],
+   "title": "Your Jupiter sextile their Pluto",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:square:pluto",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "pluto",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_pluto:square"
+   ],
+   "title": "Your Jupiter square their Pluto",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:trine:pluto",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "pluto",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_pluto:trine"
+   ],
+   "title": "Your Jupiter trine their Pluto",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:opposition:pluto",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "pluto",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_pluto:opposition"
+   ],
+   "title": "Your Jupiter opposite their Pluto",
+   "bindable": true
+  }
+ ]
+}

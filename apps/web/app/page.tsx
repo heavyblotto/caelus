@@ -67,7 +67,7 @@ const CAPABILITIES: Array<{ title: string; href: string; desc: ReactNode }> = [
   {
     title: "Derived charts",
     href: "/docs/derived",
-    desc: <>Returns, progressions, solar arc, composite, Davison, harmonics, dignities, and sect.</>,
+    desc: <>Returns, progressions, solar arc, composite, Davison, harmonics, draconic, dignities, and sect.</>,
   },
   {
     title: "Hellenistic time-lords",

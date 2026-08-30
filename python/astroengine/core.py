@@ -146,8 +146,25 @@ class Vsop:
         """
         if name == "earth":
             pack = _earth_cheb()
-            if pack is not None:
-                x, y, z = pack.xyz(jde)
+            slabs = _earth_era_slabs()
+            if pack is not None or slabs:
+                # The covering slab wins: the default pack first, then the
+                # era slabs (deep-time R1). None covering means the same
+                # ValueError the single-pack path always raised.
+                covering = None
+                if pack is not None and pack.jd0 <= jde <= pack.jd1:
+                    covering = pack
+                else:
+                    for slab in slabs:
+                        if slab.jd0 <= jde <= slab.jd1:
+                            covering = slab
+                            break
+                if covering is None:
+                    if pack is None:
+                        raise ValueError(
+                            f"jd {jde} outside fitted range (no era slab covers it)")
+                    covering = pack  # its xyz raises outside the span, as before
+                x, y, z = covering.xyz(jde)
                 L = math.atan2(y, x) % (2 * math.pi)
                 B = math.atan2(z, math.hypot(x, y))
                 R = math.sqrt(x * x + y * y + z * z)
@@ -329,6 +346,27 @@ def _earth_cheb():
     return _EARTH_CHEB or None
 
 
+# Era slabs (deep-time R1): `{body}_cheb.{era}.json` beside the default packs,
+# e.g. `earth_cheb.classical.json`. The slab whose span covers the instant
+# wins, the default pack first. No slab on disk, no behaviour change.
+ERA_SLABS = ("classical",)
+
+_EARTH_ERA = None
+
+
+def _earth_era_slabs():
+    global _EARTH_ERA
+    if _EARTH_ERA is None:
+        from .chebyshev import ChebSeries
+        out = []
+        for era in ERA_SLABS:
+            p = os.path.join(DATA, f"earth_cheb.{era}.json")
+            if os.path.exists(p):
+                out.append(ChebSeries.load(p))
+        _EARTH_ERA = out
+    return _EARTH_ERA
+
+
 def _moon_cheb():
     """Lazy-load JPL-fit Chebyshev moon (full tier preferred)."""
     global _MOON_CHEB
@@ -344,10 +382,41 @@ def _moon_cheb():
     return _MOON_CHEB
 
 
+_MOON_ERA = None
+
+
+def _moon_era_slabs():
+    """Lazy-load the Moon's era slabs (deep-time R1): `moon_cheb.{era}.json`
+    beside the tiered packs."""
+    global _MOON_ERA
+    if _MOON_ERA is None:
+        from .chebyshev import ChebSeries
+        out = []
+        for era in ERA_SLABS:
+            p = os.path.join(DATA, f"moon_cheb.{era}.json")
+            if os.path.exists(p):
+                out.append(ChebSeries.load(p))
+        _MOON_ERA = out
+    return _MOON_ERA
+
+
+def moon_pack_at(jde):
+    """The Moon slab covering jde: the modern tier first, then the era slabs;
+    None when none covers. The precise-Moon path needs light-time headroom,
+    hence the 0.1-day margin both here and in the slab check."""
+    cheb = _moon_cheb()
+    if cheb and cheb.jd0 <= jde - 0.1 and jde + 0.1 <= cheb.jd1:
+        return cheb
+    for slab in _moon_era_slabs():
+        if slab.jd0 <= jde - 0.1 and jde + 0.1 <= slab.jd1:
+            return slab
+    return None
+
+
 def moon_apparent_precise(jde):
     """Apparent Moon from JPL-fit Chebyshev (ecliptic J2000 km).
     Light-time, precession to date, nutation. Raises outside fitted range."""
-    cheb = _moon_cheb()
+    cheb = moon_pack_at(jde)
     if not cheb:
         raise FileNotFoundError("moon_cheb data not built")
     x, y, z = cheb.xyz(jde)
@@ -380,7 +449,7 @@ def true_node_precise(jde):
     Angular momentum is rotated into the ecliptic-of-date frame first: the
     ecliptic pole moves ~47"/century, and the Moon's shallow 5.1-degree
     inclination amplifies any frame error by ~11x in node longitude."""
-    cheb = _moon_cheb()
+    cheb = moon_pack_at(jde)
     if not cheb:
         raise FileNotFoundError("moon_cheb data not built")
     (x, y, z), (vx, vy, vz) = cheb.xyz_vel(jde)
@@ -391,8 +460,7 @@ def true_node_precise(jde):
 
 
 def moon_in_precise_range(jde):
-    cheb = _moon_cheb()
-    return bool(cheb) and cheb.jd0 <= jde - 0.1 and jde + 0.1 <= cheb.jd1
+    return moon_pack_at(jde) is not None
 
 
 # ---------------------------------------------------------------- lunar node
@@ -640,7 +708,7 @@ def _osc_apogee_from_state(x, y, z, vx, vy, vz, jde, frame_j2000):
 
 def osc_apogee_precise(jde):
     """Osculating lunar apogee (True Lilith) from the Chebyshev moon."""
-    cheb = _moon_cheb()
+    cheb = moon_pack_at(jde)
     if not cheb:
         raise FileNotFoundError("moon_cheb data not built")
     (x, y, z), (vx, vy, vz) = cheb.xyz_vel(jde)

@@ -1,0 +1,233 @@
+{
+ "name": "transits-neptune-1",
+ "outFile": "b2-transits-neptune-1.json",
+ "setId": "house-b2-transits-neptune-1",
+ "family": "transit-aspect",
+ "cells": [
+  {
+   "id": "transit:neptune:conjunction:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "sun",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:neptune~natal_sun:conjunction"
+   ],
+   "title": "Transiting Neptune conjunct your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:sextile:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "sun",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:neptune~natal_sun:sextile"
+   ],
+   "title": "Transiting Neptune sextile your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:square:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "sun",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:neptune~natal_sun:square"
+   ],
+   "title": "Transiting Neptune square your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:trine:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "sun",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:neptune~natal_sun:trine"
+   ],
+   "title": "Transiting Neptune trine your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:opposition:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "sun",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:neptune~natal_sun:opposition"
+   ],
+   "title": "Transiting Neptune opposite your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:conjunction:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "moon",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:neptune~natal_moon:conjunction"
+   ],
+   "title": "Transiting Neptune conjunct your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:sextile:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "moon",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:neptune~natal_moon:sextile"
+   ],
+   "title": "Transiting Neptune sextile your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:square:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "moon",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:neptune~natal_moon:square"
+   ],
+   "title": "Transiting Neptune square your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:trine:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "moon",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:neptune~natal_moon:trine"
+   ],
+   "title": "Transiting Neptune trine your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:opposition:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "moon",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:neptune~natal_moon:opposition"
+   ],
+   "title": "Transiting Neptune opposite your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:conjunction:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "mercury",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:neptune~natal_mercury:conjunction"
+   ],
+   "title": "Transiting Neptune conjunct your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:sextile:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "mercury",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:neptune~natal_mercury:sextile"
+   ],
+   "title": "Transiting Neptune sextile your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:square:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "mercury",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:neptune~natal_mercury:square"
+   ],
+   "title": "Transiting Neptune square your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:trine:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "mercury",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:neptune~natal_mercury:trine"
+   ],
+   "title": "Transiting Neptune trine your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:opposition:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "neptune",
+    "natal": "mercury",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:neptune~natal_mercury:opposition"
+   ],
+   "title": "Transiting Neptune opposite your natal Mercury",
+   "bindable": true
+  }
+ ]
+}

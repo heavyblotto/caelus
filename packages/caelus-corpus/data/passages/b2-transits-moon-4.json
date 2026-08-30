@@ -1,0 +1,142 @@
+[
+ {
+  "id": "transit:moon:conjunction:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "pluto",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:moon~natal_pluto:conjunction"
+  ],
+  "text": "Once a month the Moon crosses your natal Pluto, and for a few hours your feelings stop being light. Moods that would normally pass through you take hold instead, and whatever you feel, you feel completely. A stray thought about someone can turn into a loop you cannot put down, and an old memory can surface with its original charge intact, as if no time had passed. This is the Moon fusing with the planet of buried material, and the fusion is the point: for this short window, the surface of your emotional life and its floor are the same place. The mood often builds quietly for an hour or two before you can name it, peaks as a kind of pressure or hunger for something real, then drains away almost as fast as it came, usually by the end of the day. While it lasts, small talk tastes thin. You want contact that goes somewhere, honesty from the people close to you, and privacy from everyone else, sometimes in the same breath. Encounters at home can pick up an edge, and you may notice an urge to steer, test, or hold on more tightly than the moment calls for. The window is not a bad one, only an undiluted one. Depth is available now that the rest of the month rations. A conversation held in these hours can clear something that weeks of pleasant chat never touched, and a private look at your own motives tends to be unusually honest, because the flattering filter is switched off. What deserves care is scale. A feeling this total presents itself as permanent truth, and choices made inside it tend to overcommit; the intensity is real, but it is also weather, and it will have moved on by tomorrow. Because this contact returns every month, you can treat it as a recurring appointment with your own depths rather than an ambush. Notice what surfaces each time it comes around. The same theme showing up pass after pass is pointing at something that wants attention, and meeting it in small monthly doses is far kinder than waiting for it to demand everything at once. Over time you learn to spend these hours well: on the honest talk, the focused work, the feeling fully felt, and not on the message that should wait for the lighter person you will be by morning."
+ },
+ {
+  "id": "transit:moon:sextile:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "pluto",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:moon~natal_pluto:sextile"
+  ],
+  "text": "A couple of times each month the passing Moon sextiles your natal Pluto, and your everyday mood gets a few hours of access to its own basement. Like most sextiles, the contact does nothing unless you use it, but while it lasts your surface feelings and your deeper layers are on speaking terms. Feelings you usually keep filed away become available without forcing, and you can look at your own motives with a steadiness that is hard to find in an ordinary week. Nothing about the window is dramatic. It tends to arrive as a slight pull toward substance. You want one real conversation instead of three polite ones. You feel ready to finish an emotional matter rather than circle it, and to say the true version of what you have been saying carefully. Talks held now can go a level deeper than usual and stay friendly, which is the particular gift of this aspect. Where the harder Moon and Pluto contacts stir the depths whether you like it or not, the sextile lets you choose your moment. It suits quiet emotional housekeeping. The apology you have been meaning to make fits here. So does the honest question you have been putting off, and the box of old letters you can finally sort without being pulled under. People may confide in you during these hours, sensing that you can hear something heavy without flinching. Helping someone hold a hard thing tends to settle you as much as it settles them. The mood builds gently, peaks as a calm sort of focus, and fades without incident, usually within the day. Because it is easy to miss, the main risk is simply spending it on autopilot, scrolling through hours that would have taken a little depth gladly. Since the Moon makes this offer every month, missing one pass costs you nothing, but noticing the rhythm changes what the aspect is worth. One honest look inward, one real conversation, one small piece of emotional filing each month adds up. Across a year it becomes the kind of change the dramatic transits only promise, made at the pace you set, in doses you choose."
+ },
+ {
+  "id": "transit:moon:square:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "pluto",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:moon~natal_pluto:square"
+  ],
+  "text": "There are stretches of hours, roughly every two weeks, when your moods develop a grip, and they come when the passing Moon squares your natal Pluto. Feelings that should be small refuse to stay small. An offhand comment digs in, a minor frustration starts to smolder, and you may catch yourself circling a grievance the way a tongue returns to a sore tooth. The square works by friction: the Moon wants comfort and Pluto wants control, and for these hours they pull on you from different directions at once. That friction tends to surface wherever holding on is your habit. You might feel a sudden need to know what someone is thinking, to win a point that does not matter, to check, to test, to manage. People around you may seem to be doing the same, and small domestic standoffs are common under this contact, brief contests over nothing whose real subject is who yields. The pressure usually builds fast, peaks in an hour or two of genuine prickliness, and then breaks like a small storm, leaving you a little embarrassed at its size. Nothing about the window requires damage. The compulsion in it is information: whatever you cannot let go of during these hours is a fair map of where you grip too hard the rest of the time. If you can watch the urge instead of obeying it, the square becomes a monthly x-ray, and the manipulative move you almost made, the guilt trip, the cold silence, the fishing question, shows you what you were actually afraid of. It also helps to give the intensity honest work. Hard exercise, a deep clean, a task that needs force, any of these burns the charge cleanly, where a conversation started in this mood tends to turn into an interrogation. Since the Moon runs this square every month, you will meet the mood again, and familiarity is your advantage. You learn its opening notes, the tightening, the fixation, the sudden importance of unimportant things, and you learn that it passes on its own by evening. What stays with you is worth keeping: a regular, unflattering, remarkably accurate look at your own need for control, offered in a dose small enough to actually use."
+ },
+ {
+  "id": "transit:moon:trine:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "pluto",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:moon~natal_pluto:trine"
+  ],
+  "text": "Depth and ease do not usually travel together, but for a few hours, while the Moon trines your natal Pluto, they do. Your feelings gain weight without gaining trouble, the way water gains depth without turning rough. You are harder to rattle than usual, more willing to sit with a difficult subject, and better at reading what is actually going on underneath a conversation. Instincts about people sharpen during this window: you sense who is being straight with you, what a hesitation means, which worry in your own chest is real and which is noise. The trine makes this feel so natural that it barely registers as a transit at all. There is no build of pressure and no storm, just a quiet lowering of the water line, a peak of unusual emotional clarity, and a soft return to normal within the day. That smoothness is the one catch, because hours like these reward being used and are easy to waste. They suit anything that asks for concentration and honesty at the same time. A hard talk lands gently now, and you can raise a loaded subject without it going off. Work that needs digging, whether research, sorting finances, clearing out a closet, or writing something true, moves faster because you do not flinch away from what you find. Intimacy deepens without effort under this contact: people open up to you, and you find you can open in return without the usual bracing. Even solitude works differently, less like loneliness and more like maintenance, the emotional equivalent of a deep breath. Older sources link Moon and Pluto contacts to renewal, and the trine shows that side plainly: something small gets released or resolved in these hours, and you come out slightly lighter. Since the sky repeats this gift every month, the practical move is to know your own version of it. Notice what these easy, deep hours are like for you, what you get done in them, who you reach out to. A monthly window where your depths cooperate is a modest thing on any single day and a considerable resource across a year, if you learn to recognize it while it is open."
+ },
+ {
+  "id": "transit:moon:opposition:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "pluto",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:moon~natal_pluto:opposition"
+  ],
+  "text": "Intensity tends to arrive wearing someone else's face during the monthly hours when the Moon opposes your natal Pluto. A partner turns insistent, a colleague plays a quiet game of leverage, a family member's mood fills the whole room, and you find yourself in a standoff you did not plan and cannot quite leave. The opposition works across a line: what Pluto holds in you gets acted out between you and another person, so the themes of this contact are relational ones. Jealousy, possessiveness, the silent contest over who needs whom more, the sudden conviction that someone is hiding something. The feeling usually gathers as a vague mistrust or heaviness in your dealings with people, peaks in one charged exchange or one hour of brooding about it, and loosens noticeably once the Moon moves on, often by the next morning. Two things are worth knowing while you are inside it. First, the pull to force a resolution is strongest exactly when resolution is least available. Ultimatums issued in this window come out larger than you mean them, and probing questions land as accusations, so the strong move is usually to name what you want plainly and then let the moment breathe. Second, the mirror is doing real work. What confronts you in the other person is often a fair portrait of a demand you have not admitted to making, and the moments that grip you hardest are the most informative ones. You do not have to act on that insight tonight; simply catching it counts. There is also genuine closeness available here, because the same current that fuels the power struggle can fuel honesty. Some of the most clearing conversations happen under this Moon, the kind where both people finally say the real thing and something stuck between them dissolves. Because the aspect returns every month, you get to study its pattern. If the same person, or the same kind of standoff, keeps appearing when this contact comes around, that repetition is the message, and it is easier to read from the third or fourth pass than from the middle of the first. Between passes, the relationship gets to be ordinary again, which is exactly the perspective these hours lack."
+ },
+ {
+  "id": "transit:moon:conjunction:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "chiron",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:moon~natal_chiron:conjunction"
+  ],
+  "text": "The Moon finds your natal Chiron once a month, and for a stretch of hours your mood and your oldest tenderness share a room. Something in you that is usually well wrapped comes closer to the surface. A song, a photograph, a tone of voice, or nothing you can point to at all leaves you feeling suddenly younger and thinner-skinned, and an old hurt you thought was settled can ache like new. The conjunction fuses feeling with the wound, so there is no gap between them to hide in: what you feel during these hours is colored by the sore place, and the sore place is felt directly rather than remembered. That can be uncomfortable, and it helps to know the shape of the window. The tenderness tends to creep in without announcing itself, reaches its fullest for an hour or two, and then recedes on its own, usually within the day, leaving you ordinary again and sometimes a little clearer. Nothing has gone wrong when it comes. The ache is a signal from a place that is still healing, not proof that no healing has happened, and the difference matters. There is another side to these hours that the tradition around Chiron insists on: the wounded one is also the one who knows how to tend wounds. Your empathy is wide open under this contact. You notice pain in other people that you would normally walk past, you say the comforting thing without fumbling for it, and someone may seek you out precisely now because something in you signals that you understand. Caring for another person during this pass often eases your own tender spot more than direct effort does. What suits the window best is gentleness with low stakes: an early night, a call to someone safe, writing a few honest lines, letting yourself feel what is there without building a story on top of it. Because the Moon repeats this visit every month, the healing this contact offers happens by accumulation. Each pass gives you a brief, honest reading of how the old place is doing, and over many months you can watch the same touch change, from a wince, to an ache, to a tenderness you can hold, which is how this kind of mending actually proceeds."
+ },
+ {
+  "id": "transit:moon:sextile:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "chiron",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:moon~natal_chiron:sextile"
+  ],
+  "text": "Among the gentler visitors in your month is the Moon's sextile to your natal Chiron, a window of hours in which tender subjects become approachable. The old sore spot is present but not inflamed. You can think about a difficult chapter of your history, or mention it aloud, without the flare that such subjects sometimes bring, the way you can touch a healed scar and feel only a faint echo of what it once was. Sextiles offer rather than insist, so this window will not force anything on you; it simply makes certain moves easier for a while, and rewards you if you take them. Conversations are the clearest beneficiaries. Under this contact you can tell a friend the honest version of how you have been, ask for the small consideration you usually do without, or let a partner see a corner of you that stays covered on ordinary days. The admission comes out steadier than you expect, and the response tends to be kinder. Helping is the other doorway. What you have lived through has taught you things, and during these hours that knowledge is unusually available: you find the words for someone who is struggling with something you know from the inside, and offering them costs you little and settles you visibly. Teaching, mentoring, listening, sitting with someone, all of it goes well now. Physically and emotionally, the window has a mending quality. Rest actually restores. Small kindnesses toward yourself, the decent meal, the walk, the hour without obligations, land deeper than usual, as if some part of you were especially receptive to being looked after. The whole mood arrives quietly, holds through part of a day, and slips away without drama, which means it is easy to miss entirely. Missing it costs nothing; the Moon brings it back every month. But there is a compounding value in catching it. A monthly rhythm of one honest sentence spoken, one bit of help given, one act of genuine rest taken is unglamorous, and it is exactly how an old wound turns, slowly, into something closer to wisdom you can use."
+ },
+ {
+  "id": "transit:moon:square:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "chiron",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:moon~natal_chiron:square"
+  ],
+  "text": "Every month there are a few hours when ordinary life lands on your sore spot at an awkward angle, and they belong to the Moon's square to your natal Chiron. A passing remark stings out of all proportion. Being left off a thread, corrected in front of others, or teased in the usual way suddenly is not funny, and you feel a flash of hurt that seems to come from somewhere much older than the moment that triggered it. It does. The square puts the day's moods at cross purposes with the old wound, so the routine bumps of a normal afternoon catch on the tender place instead of sliding past. What follows is usually a brief inner flare of the old story, whatever yours is: that you are too much, not enough, unwelcome, unseen. The person who bumped it almost never meant anything, which is the awkward comedy of this transit and also its instruction. The feeling is real; the sizing is off. The flare tends to spike quickly, hold for an hour or two of raw-skinned irritation or withdrawal, and fade before the day is out, often leaving some embarrassment about how sharp it felt. Two responses serve you well while it is live. The first is delay: replies written and decisions made inside the sting come out harsher or more defeated than you actually are, and nearly everything can wait until the Moon moves on. The second is attention, because the square is doing accidental diagnostic work. Whatever reliably stings when this contact comes around is showing you, month after month, precisely where the healing is unfinished, with a specificity that calmer reflection rarely achieves. You are not obliged to act on the reading each time. Collecting it is enough, and over several passes a pattern emerges that tells you what actually needs tending, as opposed to what you assumed did. It is also fair to be a little careless-proof during these hours, choosing gentler company and lower-stakes tasks when you can. The window is small, the bruise is brief, and the map it draws, taken in these monthly increments, is one of the more honest documents you will ever get about yourself."
+ },
+ {
+  "id": "transit:moon:trine:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "chiron",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:moon~natal_chiron:trine"
+  ],
+  "text": "Kindness comes easily, including toward yourself, in the monthly hours when the Moon trines your natal Chiron. Few hours in your month are this unguarded. The old tender place is neither hidden nor hurting; it sits in view, and you can look at it without flinching, the way you can talk about a hard year once enough good ones have followed it. Feelings flow toward the wound and come back as understanding rather than pain, which changes what these hours are good for. Memory behaves generously now. Looking back at what hurt you, you tend to see context you could not see at the time, and some of the blame you have carried, toward others or toward yourself, quietly loses its footing. Conversations about difficult things stay warm under this trine. You can hear a friend's trouble without absorbing it, speak about your own without reopening it, and offer comfort that actually comforts, because it comes from experience rather than from a script. People often feel safer around you during this window than either of you can explain. If there is a fence to mend, an overdue apology in either direction, or a truth that needs saying gently, these hours receive it well. The whole mood is unhurried: it settles in softly, holds through part of a day at a peak that feels less like intensity than like steadiness, and thins out on its own, leaving no residue. Trines ask nothing, which is their generosity and their weakness. You can sleep through this one for years and never know it was there, and nothing bad will come of that. But noticing it earns you something real, because a monthly stretch in which your history stops arguing with you is a natural time for the quiet work that harder hours refuse: forgiving a little, resting properly, letting someone care for you without keeping score. Healing of the Chiron kind rarely announces itself with a breakthrough. It looks like this instead, a regular hour in which the wound weighs less, returning every month, until one day you notice the ease has started arriving without waiting for the sky's permission."
+ },
+ {
+  "id": "transit:moon:opposition:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "chiron",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:moon~natal_chiron:opposition"
+  ],
+  "text": "For a few hours each month, while the Moon opposes your natal Chiron, your tender history tends to show up across the table. The opposition works through other people, so the old wound is met here in relationship: someone's carelessness catches it, someone's need calls to it, or someone's pain looks so much like your own that the boundary between the two blurs. You may feel unusually easy to hurt in company during this window, reading slights into neutral moments, or you may swing the other way and pour yourself into rescuing someone while your own tank runs dry. Both are the same aspect from different ends. The mood generally gathers as a vague vulnerability around others, sharpens into one exchange or one pang of feeling unseen, and releases within the day, often with surprising completeness once the Moon has moved along. The seesaw between caretaker and patient is the pattern to watch. Under this contact it is tempting to be only one of them: all sympathy and no needs, or all need and no room for the other person. The window rewards standing nearer the middle. Letting someone see that you are a little raw, instead of managing their impression of you, tends to draw out more gentleness than you predicted. And when you are the steady one, offering help without taking over leaves both of you better than heroics would. There is information in the mirror as well. The people and situations that reliably press on this spot when the aspect comes around are pointing at what the wound still asks for, whether that is acknowledgment, safety, or simple company, and you learn more from three or four monthly passes than from one intense night of analysis. It is fine to keep these hours small: gentle plans, familiar faces, no verdicts on any relationship rendered while the ache is live. The contact returns every month, and its repetition is the kindness in it. Each pass gives you one more short practice at being both the one who hurts and the one who helps, and over time those roles stop fighting and start informing each other, which is much of what this pairing has to teach."
+ }
+]

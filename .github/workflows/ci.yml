@@ -22,6 +22,8 @@ jobs:
       - run: node packages/caelus/dist/test/derived-golden.test.js
       # interpolated lunar apogee: TS pack evaluation must match the Python reference
       - run: node packages/caelus/dist/test/intp-apog-golden.test.js
+      # draconic (nodal) chart transform: TS port must match the Python reference
+      - run: node packages/caelus/dist/test/draconic-golden.test.js
       # turbo tier: the TS evaluator must reproduce the Python evaluator on the pack
       - run: node packages/caelus/dist/test/turbo-golden.test.js
       # electional primitives: TS port must match the Python reference
@@ -81,6 +83,8 @@ jobs:
       # canonical mode (integer output + digests): TS must EQUAL the Python
       # reference -- the one tolerance-free golden; every comparison is ===
       - run: node packages/caelus/dist/test/canonical-golden.test.js
+      # era slabs (classical 3000 BCE–1000 CE): chained pack resolution
+      - run: node packages/caelus/dist/test/era-packs.test.js
       # every test/*.test.* file in the repo must be wired into this workflow;
       # four golden suites once sat dormant for ~11 releases because this list
       # is maintained by hand. The gate makes silent omission impossible.
@@ -88,6 +92,10 @@ jobs:
       # interpretation corpus: compiled rules must bind to legal atoms only
       - run: npm run build -w caelus-delineations-pd
       - run: npm run test -w caelus-delineations-pd
+      - run: npm run build -w caelus-corpus
+      - run: npm run test -w caelus-corpus
+      - run: npm run build -w caelus-widgets
+      - run: npm run test -w caelus-widgets
       - run: npm run build -w caelus-mcp
       - run: npm run facts:sync
       - run: node packages/caelus-mcp/smoke.mjs
@@ -111,6 +119,8 @@ jobs:
       - run: node packages/wheel/dist/test/astromap.test.js
       # graphic ephemeris: SSR render of the time-series line graph
       - run: node packages/wheel/dist/test/ephemerisgraph.test.js
+      # MultiWheel rings API: bi/tri/synastry wheels from one component
+      - run: node packages/wheel/dist/test/multiwheel.test.js
       # cross-package journey: local time -> chart -> SVG wheel, end to end
       - run: node packages/wheel/dist/test/integration.test.js
       # apps/web library units (timeline lanes, root-found transit spans)

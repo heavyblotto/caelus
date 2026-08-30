@@ -1,0 +1,104 @@
+{
+  "name": "caelus-widgets",
+  "version": "0.24.1",
+  "description": "Encyclopedia widgets for caelus: interactive figures whose resting render is the plate. Every widget is a pure function of a serializable { kind, params } spec.",
+  "type": "module",
+  "private": true,
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "node dist/test/plate.test.js && node dist/test/derivation.test.js && node dist/test/wheel-anatomy.test.js && node dist/test/house-comparator.test.js && node dist/test/zodiac-drift.test.js && node dist/test/aspect-dial.test.js && node dist/test/retrograde-scrub.test.js && node dist/test/sect-flip.test.js && node dist/test/harness.test.js"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "caelus": "*",
+    "caelus-wheel": "*",
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "caelus": "*",
+    "caelus-wheel": "*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^6.0.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/src/index.js"
+    },
+    "./frame": {
+      "types": "./dist/src/frame.d.ts",
+      "default": "./dist/src/frame.js"
+    },
+    "./console": {
+      "types": "./dist/src/console.d.ts",
+      "default": "./dist/src/console.js"
+    },
+    "./registry": {
+      "types": "./dist/src/registry.d.ts",
+      "default": "./dist/src/registry.js"
+    },
+    "./derivation": {
+      "types": "./dist/src/derivation.d.ts",
+      "default": "./dist/src/derivation.js"
+    },
+    "./derivation-widget": {
+      "types": "./dist/src/derivation-widget.d.ts",
+      "default": "./dist/src/derivation-widget.js"
+    },
+    "./wheel-anatomy": {
+      "types": "./dist/src/wheel-anatomy.d.ts",
+      "default": "./dist/src/wheel-anatomy.js"
+    },
+    "./wheel-anatomy-widget": {
+      "types": "./dist/src/wheel-anatomy-widget.d.ts",
+      "default": "./dist/src/wheel-anatomy-widget.js"
+    },
+    "./house-comparator": {
+      "types": "./dist/src/house-comparator.d.ts",
+      "default": "./dist/src/house-comparator.js"
+    },
+    "./house-comparator-widget": {
+      "types": "./dist/src/house-comparator-widget.d.ts",
+      "default": "./dist/src/house-comparator-widget.js"
+    },
+    "./zodiac-drift": {
+      "types": "./dist/src/zodiac-drift.d.ts",
+      "default": "./dist/src/zodiac-drift.js"
+    },
+    "./zodiac-drift-widget": {
+      "types": "./dist/src/zodiac-drift-widget.d.ts",
+      "default": "./dist/src/zodiac-drift-widget.js"
+    },
+    "./aspect-dial": {
+      "types": "./dist/src/aspect-dial.d.ts",
+      "default": "./dist/src/aspect-dial.js"
+    },
+    "./aspect-dial-widget": {
+      "types": "./dist/src/aspect-dial-widget.d.ts",
+      "default": "./dist/src/aspect-dial-widget.js"
+    },
+    "./retrograde-scrub": {
+      "types": "./dist/src/retrograde-scrub.d.ts",
+      "default": "./dist/src/retrograde-scrub.js"
+    },
+    "./retrograde-scrub-widget": {
+      "types": "./dist/src/retrograde-scrub-widget.d.ts",
+      "default": "./dist/src/retrograde-scrub-widget.js"
+    },
+    "./sect-flip": {
+      "types": "./dist/src/sect-flip.d.ts",
+      "default": "./dist/src/sect-flip.js"
+    },
+    "./sect-flip-widget": {
+      "types": "./dist/src/sect-flip-widget.d.ts",
+      "default": "./dist/src/sect-flip-widget.js"
+    },
+    "./package.json": "./package.json"
+  }
+}

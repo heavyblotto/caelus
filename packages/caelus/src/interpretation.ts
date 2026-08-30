@@ -20,10 +20,10 @@
  * than pinned by a parity golden.
  */
 import { mod, jdTT, meanObliquity, DEG } from "./core.js";
-import { SIGNS, DOMICILE, EXALTATION, NOT_ASPECTABLE } from "./chart.js";
+import { SIGNS, DOMICILE, EXALTATION, NOT_ASPECTABLE, ASPECTS, DEFAULT_ORBS } from "./chart.js";
 import { declinationAspect } from "./derived.js";
 import type { Chart, Zodiac } from "./chart.js";
-import type { AspectPhase } from "./electional.js";
+import { CAZIMI_DEG, COMBUST_DEG, UNDER_BEAMS_DEG, type AspectPhase } from "./electional.js";
 import { detectPatterns, ChartPattern } from "./patterns.js";
 import { chartSignature, ChartSignature } from "./signature.js";
 import { TRIPLICITY, dignityScore, almuten, type Sect } from "./dignity-score.js";
@@ -66,11 +66,13 @@ const DIGNITY_RANK: Record<string, number> = { domicile: 3, exaltation: 2, tripl
 
 /** Atom kinds in an {@link InterpretationContext}. */
 export type FactKind =
-  | "placement" | "aspect" | "pattern" | "signature" | "angle"
-  | "dispositor" | "reception" | "star" | "lot"
-  | "transit" | "synastry" | "composite" | "timelord" | "dignity"
+  | "placement" | "aspect" | "pattern" | "signature" | "angle" | "angleContact"
+  | "dispositor" | "reception" | "star" | "lot" | "degree"
+  | "transit" | "transitHouse" | "station"
+  | "synastry" | "composite" | "compositeAspect" | "timelord" | "dignity"
   | "nakshatra" | "varga" | "yoga"
-  | "parallel" | "outOfBounds";
+  | "parallel" | "outOfBounds"
+  | "return" | "lunation" | "solarPhase";
 
 interface FactAtomBase {
   /** Stable, content-addressable id, e.g. `"placement:mars"` or
@@ -108,6 +110,25 @@ export interface AspectAtom extends FactAtomBase {
   strength: number;
 }
 
+/** A point's zodiacal degree, stated ordinally: a body at 14°30' Aries
+ *  occupies the *15th degree* of Aries -- degree symbols (Sabian and the
+ *  older sets) count from 1, so degree n spans [n-1°, n°) of the sign.
+ *  Emitted for every placed body (the mean node sits out when the true
+ *  node is present, as in aspects) and for the Ascendant and Midheaven.
+ *  `face` is the index of the sign's ten-degree face this degree falls in
+ *  (1-3) -- the face itself, not its dignity ruler, which is the `dignity`
+ *  atom's `face` facet. */
+export interface DegreeAtom extends FactAtomBase {
+  kind: "degree";
+  /** A body id, or `"asc"` / `"mc"` for the chart angles. */
+  point: string;
+  sign: string;
+  /** Ordinal degree within the sign, 1-30. */
+  degree: number;
+  /** Ten-degree face (decanate) index within the sign, 1-3. */
+  face: number;
+}
+
 export interface PatternAtom extends FactAtomBase {
   kind: "pattern";
   /** Configuration kind, e.g. `"t_square"`, `"grand_trine"`. */
@@ -128,6 +149,18 @@ export interface AngleAtom extends FactAtomBase {
   angle: "asc" | "mc" | "vertex" | "eastPoint";
   sign: string;
   signDeg: number;
+}
+
+/** A body conjunct one of the four chart angles: the ASC/DSC/MC/IC points
+ *  themselves, not the angular houses. Like a star contact this is a point
+ *  conjunction with an orb; the angle carries no speed in the chart, so
+ *  there is no phase. */
+export interface AngleContactAtom extends FactAtomBase {
+  kind: "angleContact";
+  body: string;
+  angle: "asc" | "dsc" | "mc" | "ic";
+  /** Orb from exact conjunction, degrees. */
+  orb: number;
 }
 
 export interface DispositorAtom extends FactAtomBase {
@@ -177,6 +210,24 @@ export interface TransitAtom extends FactAtomBase {
   natalHouse: number;
 }
 
+export interface TransitHouseAtom extends FactAtomBase {
+  kind: "transitHouse";
+  /** The transiting body. */
+  body: string;
+  /** The natal house the transiting body occupies. */
+  house: number;
+}
+
+export interface StationAtom extends FactAtomBase {
+  kind: "station";
+  body: string;
+  /** The direction the body turns at the station. */
+  direction: "retrograde" | "direct";
+  /** Signed days from the context instant to the exact station
+   *  (positive = upcoming). */
+  daysFromExact: number;
+}
+
 export interface SynastryAtom extends FactAtomBase {
   kind: "synastry";
   mode: "aspect" | "overlay";
@@ -195,6 +246,20 @@ export interface CompositeAtom extends FactAtomBase {
   body: string;
   sign: string;
   signDeg: number;
+  /** House in the composite frame, when the composite has one. A composite
+   *  has no frame unless both birth times are known. */
+  house?: number;
+}
+
+/** An aspect between two bodies of the composite chart. No phase: a midpoint
+ *  composite is a static figure and nothing in it applies or separates. */
+export interface CompositeAspectAtom extends FactAtomBase {
+  kind: "compositeAspect";
+  a: string;
+  b: string;
+  aspect: string;
+  orb: number;
+  strength: number;
 }
 
 export interface TimelordAtom extends FactAtomBase {
@@ -203,6 +268,12 @@ export interface TimelordAtom extends FactAtomBase {
   level: string;
   lord: string;
   sign?: string;
+  /** The profected house (profection atoms only). */
+  house?: number;
+  /** The enclosing period's lord, for sub-levels: the firdaria major over a
+   *  sub, the mahadasha over an antardasha, the antardasha over a
+   *  pratyantardasha. A period pair is addressable as (lord, under). */
+  under?: string;
 }
 
 export interface DignityAtom extends FactAtomBase {
@@ -257,12 +328,55 @@ export interface OutOfBoundsAtom extends FactAtomBase {
   margin: number;
 }
 
+/** A planetary return in progress: the transiting body within orb of its own
+ *  natal longitude, numbered by count (Saturn's first return vs its second). */
+export interface ReturnAtom extends FactAtomBase {
+  kind: "return";
+  body: string;
+  /** Which return this is (1 = first). */
+  nth: number;
+  /** Orb from the natal longitude, degrees. */
+  orb: number;
+  phase: AspectPhase;
+}
+
+/** A New or Full Moon near the context instant, located in the natal houses
+ *  and flagged when it is an eclipse. */
+export interface LunationAtom extends FactAtomBase {
+  kind: "lunation";
+  /** Which syzygy: `"new"` or `"full"`. */
+  phase: "new" | "full";
+  /** The eclipse kind when the syzygy is eclipsed, else null. */
+  eclipse: "solar" | "lunar" | null;
+  /** Natal house the lunation's longitude falls in. */
+  house: number;
+  sign: string;
+  /** Signed days from the context instant to the exact syzygy
+   *  (positive = upcoming). */
+  daysFromExact: number;
+  /** Natal bodies conjunct the lunation. */
+  onNatal: string[];
+}
+
+/** A body's nearness to the Sun by ecliptic longitude: in the heart of the
+ *  Sun (cazimi), combust, or under the beams -- the classical solar-condition
+ *  ladder, at the pinned electional thresholds. */
+export interface SolarPhaseAtom extends FactAtomBase {
+  kind: "solarPhase";
+  body: string;
+  phase: "cazimi" | "combust" | "under_beams";
+  /** Ecliptic separation from the Sun, degrees. */
+  elongation: number;
+}
+
 export type FactAtom =
   | PlacementAtom | AspectAtom | PatternAtom | SignatureAtom | AngleAtom
-  | DispositorAtom | ReceptionAtom | StarAtom | LotAtom
-  | TransitAtom | SynastryAtom | CompositeAtom | TimelordAtom | DignityAtom
+  | AngleContactAtom | DispositorAtom | ReceptionAtom | StarAtom | LotAtom | DegreeAtom
+  | TransitAtom | TransitHouseAtom | StationAtom
+  | SynastryAtom | CompositeAtom | CompositeAspectAtom | TimelordAtom | DignityAtom
   | NakshatraAtom | VargaAtom | YogaAtom
-  | ParallelAtom | OutOfBoundsAtom;
+  | ParallelAtom | OutOfBoundsAtom
+  | ReturnAtom | LunationAtom | SolarPhaseAtom;
 
 /** A chart as a flat, ranked list of {@link FactAtom}s. */
 export interface InterpretationContext {
@@ -306,9 +420,13 @@ export interface SalienceWeights {
   lot: number;
   /** Added to a transit-to-natal aspect. */
   transit: number;
+  /** Added to a transiting body's natal-house position. */
+  transitHouse: number;
+  /** Added to a station near the context instant. */
+  station: number;
   /** Added to a synastry aspect or house overlay. */
   synastry: number;
-  /** Added to a composite midpoint placement. */
+  /** Added to a composite midpoint placement or a composite aspect. */
   composite: number;
   /** Added to an active time-lord period. */
   timelord: number;
@@ -321,13 +439,24 @@ export interface SalienceWeights {
   parallel: number;
   /** Added to an out-of-bounds body. */
   outOfBounds: number;
+  /** Added to a planetary return in progress. */
+  planetReturn: number;
+  /** Added to a lunation near the instant (an eclipse adds it again). */
+  lunation: number;
+  /** Added to a solar-condition fact (cazimi/combust/under the beams). */
+  solarPhase: number;
+  /** Added to a point's zodiacal-degree fact (degree symbols are
+   *  subsidiary color, so the default sits below every other kind). */
+  degreeSymbol: number;
 }
 
 export const DEFAULT_SALIENCE: SalienceWeights = {
   base: 1, luminary: 1.5, angular: 1, chartRuler: 1,
   dignity: 0.5, hardAspect: 1, pattern: 4, dispositor: 0.5, reception: 2,
-  star: 2, lot: 2, transit: 1.5, synastry: 1, composite: 0.8, timelord: 2,
+  star: 2, lot: 2, transit: 1.5, transitHouse: 1, station: 2,
+  synastry: 1, composite: 0.8, timelord: 2,
   dignityFine: 0.4, vedic: 1, parallel: 1.5, outOfBounds: 1.5,
+  planetReturn: 2.5, lunation: 1.5, solarPhase: 0.8, degreeSymbol: 0.3,
 };
 
 export interface ContextOptions {
@@ -348,10 +477,29 @@ export interface ContextOptions {
   lots?: { lot: string; sign: string; signDeg: number; house: number }[];
   /** Transit-to-natal hits, e.g. from {@link transitAspects}. */
   transits?: TransitHit[];
+  /** Transiting bodies' natal-house positions, e.g. from
+   *  {@link transitHouses}. Projected as `transitHouse` atoms. */
+  transitHouses?: { body: string; house: number }[];
+  /** Stations near the target instant (caller-supplied; see
+   *  {@link enrichContextOptions}'s station window). Projected as
+   *  `station` atoms. */
+  stations?: { body: string; direction: "retrograde" | "direct"; daysFromExact: number }[];
+  /** Planetary returns in progress, e.g. from {@link activeReturns}.
+   *  Projected as `return` atoms. */
+  returns?: { body: string; nth: number; orb: number; phase: AspectPhase }[];
+  /** Lunations near the target instant, e.g. from {@link activeLunations}.
+   *  Projected as `lunation` atoms. */
+  lunations?: {
+    phase: "new" | "full"; eclipse: "solar" | "lunar" | null;
+    house: number; sign: string; daysFromExact: number; onNatal: string[];
+  }[];
   /** Synastry aspects and/or house overlays between two charts. */
   synastry?: { aspects?: SynastryAspectHit[]; overlays?: SynastryOverlays };
   /** Composite midpoint placements, e.g. from {@link compositePlacements}. */
   composite?: CompositePlacement[];
+  /** Aspects among the composite chart's bodies, e.g. from
+   *  {@link compositeAspects}. Projected as `compositeAspect` atoms. */
+  compositeAspects?: { a: string; b: string; aspect: string; orb: number; strength: number }[];
   /** Active time-lord periods at a target instant (caller-supplied). */
   timelords?: {
     profection?: Profection;
@@ -363,6 +511,10 @@ export interface ContextOptions {
    *  matching {@link declinationAspects}). Declination atoms are always
    *  computed from the chart's own `dec` values; this only tunes the orb. */
   declinationOrb?: number;
+  /** Orb for planet-on-angle contacts (ASC/DSC/MC/IC), degrees (default 8,
+   *  the conjunction orb). Always computed from the chart's own angles;
+   *  this only tunes the orb. */
+  angleOrb?: number;
   /** Vedic structure facts (caller-supplied or auto from sidereal chart). */
   vedic?: {
     /** Project nakshatras for these bodies from the chart longitudes. */
@@ -382,7 +534,9 @@ const TIME_SENSITIVE_KEEP: Record<Certainty, number> = {
 /** Time-sensitive atoms: the angles (rotate ~15°/h) and anything about the Moon
  *  (~13°/day), the fastest-shifting facts under a time error. */
 function timeSensitive(atom: FactAtom): boolean {
-  return atom.kind === "angle" || atom.kind === "lot" || atom.bodies.includes("moon");
+  return atom.kind === "angle" || atom.kind === "angleContact"
+    || atom.kind === "lot" || atom.bodies.includes("moon")
+    || (atom.kind === "degree" && (atom.point === "asc" || atom.point === "mc"));
 }
 
 function title(body: string): string {
@@ -416,7 +570,18 @@ export function interpretationContext(
   const patterns = opts.patterns ?? detectPatterns(chart);
   const atoms: FactAtom[] = [];
 
-  // Placements: one atom per present body.
+  // Sect, needed by the placement atoms (peregrine) and again by the
+  // reception and fine-dignity blocks below: the Sun in houses 7-12 is
+  // above the horizon, a day chart.
+  const sunHouse = chart.bodies.sun?.house;
+  const chartSect: Sect = sunHouse !== undefined && sunHouse >= 7 ? "day" : "night";
+
+  // Placements: one atom per present body. A classical planet holding none
+  // of the five essential dignities at its degree is peregrine (Lilly;
+  // dignity-score.ts, pinned by dignity-golden). That is a projection-level
+  // enrichment: the Chart's sign-level `dignities` stays as computed, the
+  // placement atom's copy carries the flag so dignity selectors can match
+  // the state. Peregrine adds no salience; it is an absence, not a dignity.
   for (const [body, p] of Object.entries(chart.bodies)) {
     if (!p) continue;
     let salience = w.base;
@@ -424,14 +589,17 @@ export function interpretationContext(
     if (ANGULAR_HOUSES.has(p.house)) salience += w.angular;
     if (sig.ruler === body) salience += w.chartRuler;
     salience += w.dignity * p.dignities.length;
+    const dignities = CLASSICAL.includes(body)
+      && dignityScore(body, p.lon, chartSect).peregrine
+      ? [...p.dignities, "peregrine"] : p.dignities;
     const extra = [
       p.retrograde ? "retrograde" : null,
-      ...p.dignities,
+      ...dignities,
     ].filter(Boolean);
     atoms.push({
       id: `placement:${body}`, kind: "placement", bodies: [body], salience,
       body, sign: p.sign, signDeg: p.signDeg, house: p.house,
-      retrograde: p.retrograde, dignities: p.dignities,
+      retrograde: p.retrograde, dignities,
       text: `${title(body)} in ${p.sign}, house ${p.house}`
         + (extra.length ? ` (${extra.join(", ")})` : ""),
     });
@@ -450,6 +618,46 @@ export function interpretationContext(
       text: `${title(asp.a)} ${asp.aspect} ${title(asp.b)} `
         + `(${asp.phase}, orb ${Math.abs(asp.orb).toFixed(1)}°)`,
     });
+  }
+
+  // Node aspects: findAspects excludes the nodes (NOT_ASPECTABLE), so the
+  // projection computes them itself over the chart's own longitudes, with
+  // the same aspect table, the default orbs, and the same phase/strength
+  // arithmetic as the enriched chart aspects. One node projects (the true
+  // node, or the mean node when it is the only one present), so a chart
+  // carrying both does not double up; the node-to-node pair never fires
+  // because the partner set is the aspectable bodies.
+  const node = chart.bodies.true_node ? "true_node"
+    : chart.bodies.mean_node ? "mean_node" : null;
+  if (node) {
+    const np = chart.bodies[node]!;
+    for (const [body, p] of Object.entries(chart.bodies)) {
+      if (!p || NOT_ASPECTABLE.has(body)) continue;
+      const e = mod(np.lon - p.lon + 180, 360) - 180; // signed gap
+      const sep = Math.abs(e);
+      for (const [asp, angle] of Object.entries(ASPECTS)) {
+        const limit = DEFAULT_ORBS[asp];
+        const orb = Math.abs(sep - angle);
+        if (orb > limit) continue;
+        const orbRounded = Math.round(orb * 100) / 100;
+        const signedOrb = sep - angle;
+        const phase: AspectPhase = Math.abs(signedOrb) < 1e-9 ? "exact"
+          : (signedOrb >= 0 ? 1 : -1) * (e >= 0 ? 1 : -1)
+            * (np.speed - p.speed) < 0 ? "applying" : "separating";
+        const strength = Math.max(0, 1 - orbRounded / limit);
+        let salience = w.base + strength;
+        if (HARD_ASPECTS.has(asp)) salience += w.hardAspect;
+        if (LUMINARIES.has(body)) salience += w.luminary;
+        const [x, y] = [node, body].sort();
+        atoms.push({
+          id: `aspect:${x}~${y}:${asp}`, kind: "aspect", bodies: [node, body],
+          salience, a: node, b: body, aspect: asp, orb: orbRounded,
+          phase, strength,
+          text: `${title(node)} ${asp} ${title(body)} `
+            + `(${phase}, orb ${orbRounded.toFixed(1)}°)`,
+        });
+      }
+    }
   }
 
   // Configurations.
@@ -506,8 +714,7 @@ export function interpretationContext(
   // by domicile, exaltation, and the sect's triplicity ruler (sect = day when
   // the Sun is above the horizon, houses 7-12). `by` names the strongest
   // dignity each direction; salience scales with the weaker link.
-  const sunHouse = chart.bodies.sun?.house;
-  const sect = sunHouse !== undefined && sunHouse >= 7 ? 0 : 1; // 0 day, 1 night
+  const sect = chartSect === "day" ? 0 : 1;
   const signOf = (body: string): number => Math.floor(mod(chart.bodies[body]!.lon, 360) / 30);
   const receives = (a: string, otherSign: number): string[] => {
     const ds: string[] = [];
@@ -550,6 +757,64 @@ export function interpretationContext(
   angleAtom("mc", chart.angles.mc);
   angleAtom("vertex", chart.angles.vertex);
   angleAtom("eastPoint", chart.angles.eastPoint);
+
+  // Zodiacal degrees, stated ordinally (a body at 14°30' Aries occupies the
+  // 15th degree of Aries -- the degree-symbol convention). One atom per
+  // placed body plus the ASC and MC; the mean node sits out when the true
+  // node is present, as in aspects. The face index (1-3) rides along so a
+  // decanate selector shares the same atom.
+  {
+    const ord = (n: number): string => {
+      const r = n % 10, rr = n % 100;
+      const suffix = rr >= 11 && rr <= 13 ? "th"
+        : r === 1 ? "st" : r === 2 ? "nd" : r === 3 ? "rd" : "th";
+      return `${n}${suffix}`;
+    };
+    const degreeAtom = (point: string, label: string, lon: number, bodies: string[]): void => {
+      const sign = SIGNS[Math.floor(mod(lon, 360) / 30)];
+      const signDeg = mod(lon, 30);
+      const degree = Math.min(Math.floor(signDeg) + 1, 30);
+      const face = Math.min(Math.floor(signDeg / 10) + 1, 3);
+      atoms.push({
+        id: `degree:${point}:${sign.toLowerCase()}:${degree}`, kind: "degree",
+        bodies, salience: w.base + w.degreeSymbol,
+        point, sign, degree, face,
+        text: `${label} in the ${ord(degree)} degree of ${sign} (face ${face})`,
+      });
+    };
+    for (const [body, p] of Object.entries(chart.bodies)) {
+      if (!p || (body === "mean_node" && chart.bodies.true_node)) continue;
+      degreeAtom(body, title(body), p.lon, [body]);
+    }
+    degreeAtom("asc", "Ascendant", chart.angles.asc, []);
+    degreeAtom("mc", "Midheaven", chart.angles.mc, []);
+  }
+
+  // Planet-on-angle contacts: a body conjunct the ASC/DSC/MC/IC point within
+  // `angleOrb`. mean_node sits out (it would double the true node's contact,
+  // as in aspects); everything else present is checked, so a Lilith or an
+  // asteroid on the Ascendant projects like any planet.
+  const angleOrb = opts.angleOrb ?? 8;
+  const anglePoints: Array<[AngleContactAtom["angle"], number, string]> = [
+    ["asc", chart.angles.asc, "Ascendant"],
+    ["dsc", mod(chart.angles.asc + 180, 360), "Descendant"],
+    ["mc", chart.angles.mc, "Midheaven"],
+    ["ic", mod(chart.angles.mc + 180, 360), "IC"],
+  ];
+  for (const [body, p] of Object.entries(chart.bodies)) {
+    if (!p || body === "mean_node") continue;
+    for (const [angle, lon, label] of anglePoints) {
+      const orb = Math.abs(mod(p.lon - lon + 180, 360) - 180);
+      if (orb > angleOrb) continue;
+      let salience = w.base + w.angular + (1 - orb / angleOrb);
+      if (LUMINARIES.has(body)) salience += w.luminary;
+      atoms.push({
+        id: `angleContact:${body}:${angle}`, kind: "angleContact",
+        bodies: [body], salience, body, angle, orb,
+        text: `${title(body)} on the ${label} (orb ${orb.toFixed(1)}°)`,
+      });
+    }
+  }
 
   // Declination: parallels/contraparallels and out-of-bounds. Always computed
   // -- every Position carries `dec` -- so, unlike stars or lots, no caller
@@ -594,6 +859,31 @@ export function interpretationContext(
     });
   }
 
+  // Solar condition: cazimi / combust / under the beams for the five
+  // classical non-luminaries, from the chart's own longitudes at the pinned
+  // electional thresholds. Always computed, like the declination atoms; the
+  // ladder is exclusive (a cazimi body is not also combust).
+  const sunPos = chart.bodies.sun;
+  if (sunPos) {
+    for (const body of ["mercury", "venus", "mars", "jupiter", "saturn"]) {
+      const p = chart.bodies[body];
+      if (!p) continue;
+      const elong = Math.abs(mod(p.lon - sunPos.lon + 180, 360) - 180);
+      const phase: SolarPhaseAtom["phase"] | null =
+        elong <= CAZIMI_DEG ? "cazimi"
+          : elong <= COMBUST_DEG ? "combust"
+            : elong <= UNDER_BEAMS_DEG ? "under_beams" : null;
+      if (!phase) continue;
+      const label = { cazimi: "cazimi (in the heart of the Sun)", combust: "combust", under_beams: "under the Sun's beams" }[phase];
+      atoms.push({
+        id: `solarPhase:${body}:${phase}`, kind: "solarPhase", bodies: [body],
+        salience: w.base + w.solarPhase + (phase === "cazimi" ? w.solarPhase : 0),
+        body, phase, elongation: elong,
+        text: `${title(body)} ${label} (${elong.toFixed(1)}° from the Sun)`,
+      });
+    }
+  }
+
   // Fixed-star conjunctions (caller-supplied; the catalog is not on the Chart).
   for (const sc of opts.stars ?? []) {
     let salience = w.base + w.star;
@@ -615,7 +905,6 @@ export function interpretationContext(
   }
 
   // Finer essential dignities: term, face, triplicity held, almuten of each degree.
-  const chartSect: Sect = sunHouse !== undefined && sunHouse >= 7 ? "day" : "night";
   for (const body of CLASSICAL) {
     const p = chart.bodies[body];
     if (!p) continue;
@@ -665,6 +954,62 @@ export function interpretationContext(
     });
   }
 
+  // Transiting bodies through the natal houses.
+  for (const th of opts.transitHouses ?? []) {
+    let salience = w.base + w.transitHouse;
+    if (LUMINARIES.has(th.body)) salience += w.luminary;
+    if (ANGULAR_HOUSES.has(th.house)) salience += w.angular;
+    atoms.push({
+      id: `transitHouse:${th.body}:${th.house}`, kind: "transitHouse",
+      bodies: [th.body], salience,
+      body: th.body, house: th.house,
+      text: `Transiting ${title(th.body)} in natal house ${th.house}`,
+    });
+  }
+
+  // Stations near the instant.
+  for (const st of opts.stations ?? []) {
+    atoms.push({
+      id: `station:${st.body}:${st.direction}`, kind: "station",
+      bodies: [st.body], salience: w.base + w.station,
+      body: st.body, direction: st.direction, daysFromExact: st.daysFromExact,
+      text: `${title(st.body)} stations ${st.direction} `
+        + `(${st.daysFromExact >= 0 ? "in" : ""} ${Math.abs(st.daysFromExact).toFixed(1)} days`
+        + `${st.daysFromExact < 0 ? " ago" : ""})`,
+    });
+  }
+
+  // Planetary returns in progress (caller-supplied).
+  for (const r of opts.returns ?? []) {
+    let salience = w.base + w.planetReturn;
+    if (LUMINARIES.has(r.body)) salience += w.luminary;
+    const nthLabel = r.nth === 1 ? "1st" : r.nth === 2 ? "2nd" : r.nth === 3 ? "3rd" : `${r.nth}th`;
+    atoms.push({
+      id: `return:${r.body}:${r.nth}`, kind: "return", bodies: [r.body],
+      salience, body: r.body, nth: r.nth, orb: r.orb, phase: r.phase,
+      text: `${title(r.body)} return in progress -- its ${nthLabel} `
+        + `(${r.phase}, orb ${r.orb.toFixed(1)}°)`,
+    });
+  }
+
+  // Lunations near the instant (caller-supplied).
+  for (const l of opts.lunations ?? []) {
+    const salience = w.base + w.lunation + (l.eclipse ? w.lunation : 0) + w.luminary;
+    const name = l.eclipse === "solar" ? "Solar eclipse (New Moon)"
+      : l.eclipse === "lunar" ? "Lunar eclipse (Full Moon)"
+        : l.phase === "new" ? "New Moon" : "Full Moon";
+    atoms.push({
+      id: `lunation:${l.phase}${l.eclipse ? `:eclipse:${l.eclipse}` : ""}`,
+      kind: "lunation", bodies: ["moon", ...l.onNatal], salience,
+      phase: l.phase, eclipse: l.eclipse, house: l.house, sign: l.sign,
+      daysFromExact: l.daysFromExact, onNatal: l.onNatal,
+      text: `${name} in ${l.sign}, natal house ${l.house} `
+        + `(${l.daysFromExact >= 0 ? "in" : ""} ${Math.abs(l.daysFromExact).toFixed(1)} days`
+        + `${l.daysFromExact < 0 ? " ago" : ""})`
+        + (l.onNatal.length ? `, on natal ${l.onNatal.map(title).join(", ")}` : ""),
+    });
+  }
+
   // Synastry: inter-chart aspects and house overlays.
   for (const s of opts.synastry?.aspects ?? []) {
     let salience = w.base + w.synastry + s.strength;
@@ -703,7 +1048,23 @@ export function interpretationContext(
       id: `composite:${c.body}`, kind: "composite", bodies: [c.body],
       salience: w.base + w.composite + (LUMINARIES.has(c.body) ? w.luminary : 0),
       body: c.body, sign: c.sign, signDeg: c.signDeg,
-      text: `Composite ${title(c.body)} in ${c.sign}`,
+      ...(c.house === undefined ? {} : { house: c.house }),
+      text: `Composite ${title(c.body)} in ${c.sign}`
+        + (c.house === undefined ? "" : `, composite house ${c.house}`),
+    });
+  }
+
+  // Aspects inside the composite chart.
+  for (const c of opts.compositeAspects ?? []) {
+    let salience = w.base + w.composite + c.strength;
+    if (HARD_ASPECTS.has(c.aspect)) salience += w.hardAspect;
+    if (LUMINARIES.has(c.a) || LUMINARIES.has(c.b)) salience += w.luminary;
+    atoms.push({
+      id: `composite:${c.a}~${c.b}:${c.aspect}`, kind: "compositeAspect",
+      bodies: [c.a, c.b], salience,
+      a: c.a, b: c.b, aspect: c.aspect, orb: c.orb, strength: c.strength,
+      text: `Composite ${title(c.a)} ${c.aspect} composite ${title(c.b)} `
+        + `(orb ${c.orb.toFixed(1)}°)`,
     });
   }
 
@@ -714,13 +1075,13 @@ export function interpretationContext(
     atoms.push({
       id: `profection:year:${pf.annual.sign.toLowerCase()}:${pf.annual.lord}`, kind: "timelord",
       bodies: [pf.annual.lord], salience: w.base + w.timelord, system: "profection",
-      level: "year", lord: pf.annual.lord, sign: pf.annual.sign,
+      level: "year", lord: pf.annual.lord, sign: pf.annual.sign, house: pf.annual.house,
       text: `Annual profection: ${pf.annual.sign} (house ${pf.annual.house}), lord ${title(pf.annual.lord)}`,
     });
     atoms.push({
       id: `profection:month:${pf.monthly.sign.toLowerCase()}:${pf.monthly.lord}`, kind: "timelord",
       bodies: [pf.monthly.lord], salience: w.base + w.timelord * 0.7, system: "profection",
-      level: "month", lord: pf.monthly.lord, sign: pf.monthly.sign,
+      level: "month", lord: pf.monthly.lord, sign: pf.monthly.sign, house: pf.monthly.house,
       text: `Monthly profection: ${pf.monthly.sign} (house ${pf.monthly.house}), lord ${title(pf.monthly.lord)}`,
     });
   }
@@ -755,8 +1116,9 @@ export function interpretationContext(
       atoms.push({
         id: `firdaria:sub:${tl.firdaria.sub}`, kind: "timelord",
         bodies: [tl.firdaria.sub], salience: w.base + w.timelord * 0.7, system: "firdaria",
-        level: "sub", lord: tl.firdaria.sub,
-        text: `Firdaria sub-period: ${title(tl.firdaria.sub)}`,
+        level: "sub", lord: tl.firdaria.sub, under: tl.firdaria.major,
+        text: `Firdaria sub-period: ${title(tl.firdaria.sub)} `
+          + `(under the ${title(tl.firdaria.major)} major period)`,
       });
     }
   }
@@ -772,13 +1134,15 @@ export function interpretationContext(
       atoms.push({
         id: `dasha:antar:${d.antar}`, kind: "timelord", bodies: [d.antar],
         salience: w.base + w.timelord * 0.8, system: "dasha", level: "antar", lord: d.antar,
-        text: `Vimshottari antardasha: ${title(d.antar)}`,
+        under: d.maha,
+        text: `Vimshottari antardasha: ${title(d.antar)} (in the ${title(d.maha)} mahadasha)`,
       });
     }
     if (d.pratyantar) {
       atoms.push({
         id: `dasha:pratyantar:${d.pratyantar}`, kind: "timelord", bodies: [d.pratyantar],
         salience: w.base + w.timelord * 0.6, system: "dasha", level: "pratyantar", lord: d.pratyantar,
+        under: d.antar ?? undefined,
         text: `Vimshottari pratyantardasha: ${title(d.pratyantar)}`,
       });
     }

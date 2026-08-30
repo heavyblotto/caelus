@@ -1,0 +1,212 @@
+[
+  {
+    "id": "transit:mercury:conjunction:saturn",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mercury",
+      "natal": "saturn",
+      "aspect": "conjunction"
+    },
+    "atomIds": [
+      "transit:mercury~natal_saturn:conjunction"
+    ],
+    "text": "Thought puts on work clothes when transiting Mercury reaches your natal Saturn. The conjunction fuses the messenger with the taskmaster, and for a few days your mind wants one problem, a closed door, and no background noise. Small talk loses its appeal. So does anything vague. As the aspect applies, you may notice your inbox filling with obligations rather than invitations: forms, corrections, questions that need exact answers. Around the exact pass, concentration peaks. This is one of the year's better brief windows for the work most minds avoid, the budget, the outline, the fine print, the honest list of what a plan will actually cost. Say something during these days and you tend to mean it; people can hear the weight in your sentences. The shadow side is tone. Saturn pulls thinking toward the sober end of the scale, and sober can slide into gloomy without telling you. A conclusion reached now may be solid, or it may just be dressed in solid clothes while carrying an old fear. The test is simple enough: would the reasoning survive a cheerful morning? If yes, keep it. If it depends on the mood, let it wait for the mood to pass. In conversation the transit favors the deliberate. You may be quieter than usual, slower to answer, less willing to fill silence, and that restraint reads as substance to anyone paying attention. It can also read as coldness to people who need warmth from you this week, so it helps to say plainly that you are focused, not withdrawn. Once Mercury separates, the pressure lifts and your usual range of interest returns. What tends to remain is whatever you built while the door was closed. In some years Mercury's retrograde turns this into a three-part visit spread across several weeks. Then the first pass drafts the serious work, the middle pass sends you back through it and finds what the first pass missed, and the final pass lets you close the file with a steadier hand than a single quick contact ever allows. If the transit does come in one pass, treat the few days as a deadline the sky set for you. Either way, the gift is the same and it is unfashionable: the experience of your own mind doing one difficult thing completely. Most weeks scatter you. This one gathers you, briefly, and shows you how much a focused stretch can carry. You grow with this transit by letting thought be heavy without letting it be dark, and by noticing that the ideas you commit to under Saturn's hand are the ones you still stand behind a year later."
+  },
+  {
+    "id": "transit:mercury:sextile:saturn",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mercury",
+      "natal": "saturn",
+      "aspect": "sextile"
+    },
+    "atomIds": [
+      "transit:mercury~natal_saturn:sextile"
+    ],
+    "text": "Transiting Mercury spends a few days in sextile to your natal Saturn, and your thinking takes on a foreman's calm. Nothing about it is dramatic. The sextile makes an offer rather than a demand: for a stretch of days, the practical part of your mind and the disciplined part of your character are on speaking terms, and work that usually takes willpower takes only a decision. As the aspect builds, you may find yourself circling tasks you have been deferring, the unglamorous ones with steps and consequences. At the peak, follow-through comes easily. Lists get finished instead of rewritten. Conversations with people in charge, or people older and further down the road than you, tend to go well now; you sound organized because you are, and they respond to that. It is a good moment to ask the question you have been sitting on, the one that needs a considered answer rather than a fast one. Advice received under this sky tends to be worth keeping. The catch with a sextile is that it will not chase you. If the days pass in noise and scrolling, the transit ends and nothing happened, and you will not even know what you missed. The offer has to be picked up by hand: one planning hour, one overdue email, one honest look at the calendar. Modest actions, but they land on firm ground while this aspect holds, and firm ground is not always available. When Mercury moves on, the settling phase is barely noticeable, which fits so understated a transit. What stays is whatever structure you gave your thinking while it was here. Some seasons, a retrograde brings Mercury back over the same spot two more times across several weeks. Treat that as the sky extending the offer: the first contact shows you the sensible move, the return pass lets you check the plan against what has changed, and the last pass is a clean chance to finish what the first one started. Few transits are this cooperative about second chances. Your growth here is a quiet kind. Each time you take a small offered window and do the steady thing with it, you teach yourself that discipline is not a personality trait some people are born with. It is a series of afternoons like this one, used. Over years, the people who seem effortlessly reliable are mostly people who kept picking up exactly this kind of unremarkable opportunity, and this week you can be one of them."
+  },
+  {
+    "id": "transit:mercury:square:saturn",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mercury",
+      "natal": "saturn",
+      "aspect": "square"
+    },
+    "atomIds": [
+      "transit:mercury~natal_saturn:square"
+    ],
+    "text": "Every channel you talk through develops resistance when transiting Mercury squares your natal Saturn. The square forces a confrontation between what you want to say and something that stands in its way: a delay, a rule, a skeptical listener, your own censor. For a few days, messages sit unanswered, plans hit procedural snags, and simple exchanges take three rounds instead of one. While the aspect is applying, the friction tends to build as a mood before it shows up as an event; you may feel blocked before anything actually blocks you. The exact pass is usually where the concrete obstacle appears, often wearing the face of authority or paperwork. Then, as Mercury separates, the pressure eases and the delayed answers begin to arrive, frequently less terrible than the wait suggested. Two distortions are worth watching. The first is discouragement disguised as realism. Saturn under pressure makes every plan look flimsy and every risk look fatal, and thoughts formed in this weather have a persuasive gravity they have not earned. Write them down if you like, but date them, because in a week many will read like someone else's pessimism. The second distortion is silence. When speaking feels this effortful, the tempting move is to stop, and what you do not say now tends to come back later with interest. A short, plain statement beats both the polished speech you keep postponing and the silence that lets others fill in the blanks. There is real work available inside the difficulty. Squares from Mercury to Saturn are the sky's proofreading service: whatever is weak in the plan, unclear in the agreement, or unsaid in the relationship gets found. That is not pleasant, but it is cheap now and expensive later. If a retrograde intervenes, the contact can repeat twice more over several weeks, and the sequence has a logic: the first pass exposes the problem, the revisit reopens it with better information, and the final pass tends to close it for good, provided you actually engaged rather than waited it out. This is a short transit doing a serious job. Days, usually, not months, though a slow week of answers can make it feel longer from the inside. You grow with it by learning the difference between a hard truth and a heavy mood, and by discovering that your thinking, tested against real resistance, is sturdier than the frustrated version of you believed on day one."
+  },
+  {
+    "id": "transit:mercury:trine:saturn",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mercury",
+      "natal": "saturn",
+      "aspect": "trine"
+    },
+    "atomIds": [
+      "transit:mercury~natal_saturn:trine"
+    ],
+    "text": "Certain days your judgment simply works, and a Mercury trine to natal Saturn tends to deliver a few of them. The trine eases the connection between quick intelligence and long patience, so thinking proceeds in order: first things first, evidence before conclusion, the sentence finished before the next one begins. Nothing sparkles, and nothing needs to. While the aspect approaches, you may notice a growing appetite for tidiness, for clearing the desk and knowing where things stand. At the exact pass, the mind is calm and precise, which makes this brief window well suited to the work that punishes carelessness: reviewing the details, comparing the options honestly, writing the thing that has to be right rather than merely fast. Conversations run on rails now. You can deliver an unwelcome fact without drama and hear one without flinching, and exchanges with careful, experienced people are unusually productive because you are briefly speaking their language. It is also a natural time to seek counsel; the advice that reaches you under this aspect tends to be practical and aged, the kind that still applies next year. The limitation of the trine is its comfort. Ease invites coasting, and a gift for clear thought spent entirely on rearranging what you already know produces a very orderly week and nothing else. The transit rewards aim: pick the one decision or document that matters most and give it these days, because the same task attempted under a noisier sky will cost you double. As Mercury pulls away, the crispness fades gradually rather than snapping off, and you keep whatever you wrote, decided, or filed while it held. Every so often, the retrograde cycle brings this trine back two more times across a stretch of weeks. When that happens, use the returns for what they are good at: the second pass is a natural review of the first pass's decisions, and the third sets them. Plans that survive all three contacts have been tested by time in a way one afternoon of clarity cannot match. What this transit teaches accumulates quietly. Each visit shows you what your mind sounds like when it is unhurried and honest, and that sound becomes a reference point. On scattered days, months from now, you can remember the register and reach for it. Steadiness turns out to be partly a memory of having been steady, and this aspect gives you a few well-documented days to remember."
+  },
+  {
+    "id": "transit:mercury:opposition:saturn",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mercury",
+      "natal": "saturn",
+      "aspect": "opposition"
+    },
+    "atomIds": [
+      "transit:mercury~natal_saturn:opposition"
+    ],
+    "text": "Across the table sits someone unconvinced, and this transit makes you talk to them. Mercury opposing your natal Saturn stages a confrontation between your ideas and an external voice of doubt, restraint, or authority, and for a few days the world seems staffed by editors. A proposal meets a raised eyebrow. A request meets a rule. A casual remark meets a correction. While the opposition builds, you may feel the resistance gathering as a vague sense that people are not going to like what you have to say; near the exact pass, someone usually says so out loud. The instinctive readings are both wrong. One says the critic is simply an obstacle, to be argued down or waited out. The other says the critic must be right, since they sound so certain, and quietly shelves the idea. Oppositions reward a third reading: the doubt in front of you is information, delivered by an inconvenient courier. Somewhere in the objection there is usually one true sentence, and finding it is the actual work of the week. The rest of the objection can be returned to sender. Expect exchanges with gatekeepers of all kinds to carry more weight than usual now: supervisors, officials, landlords, the person who approves or denies. Prepare more than you normally would. Under this aspect, being demonstrably careful is the only currency doubters accept, and it buys more than charm does. Expect also to feel less heard than you are; Saturn's presence in a dialogue mutes warmth long before it blocks meaning, and a flat reception is not always a rejection. As the aspect separates, conversations thaw and verdicts arrive, and a surprising number of them turn out negotiable. If this contact falls near Mercury's retrograde, the confrontation may replay two more times over some weeks. Rather than dread the sequel, use the structure. The first exchange states the disagreement, the second reopens it with tempers cooled and facts checked, and the third has a way of producing the compromise the first could never have reached. Positions genuinely shift between passes, including yours. What grows over repeated rounds with this transit is a specific strength: the ability to keep your thinking intact in the presence of disapproval, revising what deserves revision and holding what deserves holding. People who can do that stop fearing skeptical rooms. In the end you learn that the skeptic across the table is not the ceiling on your ideas. They are the floor: whatever survives them will stand."
+  },
+  {
+    "id": "transit:mercury:conjunction:uranus",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mercury",
+      "natal": "uranus",
+      "aspect": "conjunction"
+    },
+    "atomIds": [
+      "transit:mercury~natal_uranus:conjunction"
+    ],
+    "text": "Your mind runs on a faster clock while Mercury crosses your natal Uranus. The conjunction fuses everyday thinking with the part of you that refuses the usual, and for a few days ideas arrive without appointments: in the shower, mid-sentence, halfway up the stairs. Connections you have never made suddenly seem obvious. News comes out of sequence. The phone lights up with the unexpected name. As the transit applies, restlessness usually comes first, a low hum of boredom with routines that were fine last week. At the exact pass the hum becomes signal, and this is the window where the genuinely new thought tends to land, the reframe, the shortcut, the answer from an angle nobody was covering. Insights under this sky are fast, bright, and perishable. They do not file themselves. Keep some means of capture within reach, because the idea of Tuesday morning can be genuinely unrecoverable by Tuesday night, and the ones you save will be worth sorting later when your judgment is ordinary again. Sorting matters, because the same speed that produces the breakthrough also produces the impulse: the message sent too soon, the plan scrapped for a shinier plan, the commitment made at the pace of excitement rather than the pace of thought. A useful division of labor is to let these days generate and let next week decide. Conversation turns lively and slightly ungovernable. You say surprising things, some of them true; others say surprising things to you, and a few will rearrange how you see a situation. Schedules wobble under this transit more than most, so a loose grip on the day's plan spares you some friction. As Mercury separates, the frequency drops back to normal and the world stops interrupting. What remains is the notebook, in whatever form you kept it. In retrograde seasons this contact can repeat, up to three passes across several weeks, and the rhythm suits invention well: the first pass strikes the spark, the return pass tests which sparks were real fire, and the last pass folds the survivors into ordinary working life. Many a good idea needs exactly that second look to become usable. Growing with this transit means making peace with your own suddenness. The flashes are not noise, and they are not commands either; they are raw material on a deadline. Learn to catch them without obeying them instantly and you turn a jittery few days into one of the more original stretches of your mental year, one that repays visits from your slower, more skeptical self for weeks afterward."
+  },
+  {
+    "id": "transit:mercury:sextile:uranus",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mercury",
+      "natal": "uranus",
+      "aspect": "sextile"
+    },
+    "atomIds": [
+      "transit:mercury~natal_uranus:sextile"
+    ],
+    "text": "For a few days, your thinking bends more easily than usual. Transiting Mercury in sextile to your natal Uranus is a small, quick transit with one specialty: the reframing. A problem you have been holding the same way for weeks consents to be held differently, and the new grip changes what it weighs. You might notice it first in language. Descriptions come out slightly off-pattern, a joke lands sideways into an insight, or explaining a stuck situation to someone else suddenly shows you the part you had been leaving out. The angle favors the mind's lighter gears: wordplay, analogy, the mental hop that connects two things filed on different shelves. As Mercury applies, the effect builds over a day or so as an itch to rephrase, to sketch, to look something up for no defensible reason. Follow that itch; it knows where it is going. At the exact contact, which holds for a day or two, the sideways solution is closest to hand. This is the day to reread the stubborn paragraph, revisit the technical snag, or ask the naive question in the meeting, because the standard answers have briefly lost their monopoly and the odd one can get through. Nothing announces any of this. Uranus sextiles from Mercury do not disrupt schedules or force events; if you spend the window on autopilot, it costs you nothing and gives you nothing, and Mercury returns to this angle within months anyway. What separates a used pass from a wasted one is usually written down. The reframe of these days is compact, a sentence, a diagram, a better name for the thing, and it keeps if you keep it. In seasons when Mercury's retrograde drags it back across the degree, the same small window opens twice more over a few weeks, and the later openings are good for checking whether the clever idea still looks clever at room temperature. Some do not, and finding that out cheaply is also a gift. The transit has no real shadow beyond speed. Thought this quick can skip steps, so the flash that arrives near the exact pass deserves one slower reading before it goes into an email, a bid, or a promise. Kept overnight, nearly all of it improves. Over years of these brief visits, what accumulates is not a stack of inventions but a habit of angle: the learned reflex of turning a problem a few degrees before deciding it is stuck. That reflex, more than any single bright idea, is what this little transit keeps teaching."
+  },
+  {
+    "id": "transit:mercury:square:uranus",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mercury",
+      "natal": "uranus",
+      "aspect": "square"
+    },
+    "atomIds": [
+      "transit:mercury~natal_uranus:square"
+    ],
+    "text": "Plans built for a calm week meet a week that is not calm. Mercury square your natal Uranus runs a current of static through your mental wiring for a few days: interruptions multiply, messages cross, the schedule reshuffles itself twice before lunch, and your own attention jumps tracks without asking. The square forces the issue where softer contacts merely quicken it. Something in your routine thinking is due for disruption, and the disruption arrives whether or not it is convenient. On the approach, the first sign is usually nerves, an edgy, over-caffeinated quality of mind that shows up before any actual event does. Near the exact pass comes the jolt itself: the surprise announcement, the reversal, the flat tire in your information flow. Afterward, as Mercury separates, the noise dies down quickly and what seemed chaotic often reveals a usable idea at its center, visible only once you stop flinching. The main hazard is speed. Under this aspect the impulsive word leaves the mouth before the wiser word wakes up, and choices made at the peak have a way of surprising even the person who made them. Anything irreversible deserves a one-day delay if it can possibly have one; the urge toward instant action is the transit talking, and the transit will be gone shortly. Machines and logistics deserve a little margin too, since this sky is famous for the missed connection and the garbled message. What the square does well, if you let it, is break a stale frame. The thought pattern that got interrupted was often one you were secretly tired of. When the dust settles, ask what the disruption made visible. There is usually something: an assumption that failed, a dependency you did not know you had, an option that only appeared once the plan fell over. In some seasons the retrograde returns Mercury to this spot twice more across several weeks, and the reprise is gentler than the premiere. The first pass springs the surprise, the second lets you respond to it with your wits actually present, and the third folds the change into a new normal. If the first round went badly, the later rounds are your appeal process. Growth, under this square, means loosening your grip on the plan without losing your grip on the point. The week teaches, roughly and briefly, that your competence was never really the plan itself. It was your ability to think while things move, and that ability improves every time this square comes through and fails to knock you over."
+  },
+  {
+    "id": "transit:mercury:trine:uranus",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mercury",
+      "natal": "uranus",
+      "aspect": "trine"
+    },
+    "atomIds": [
+      "transit:mercury~natal_uranus:trine"
+    ],
+    "text": "Insight and order rarely work the same shift, but for a few days they do. Transiting Mercury trine your natal Uranus eases the passage between your ordinary reasoning and your originality, so the clever idea arrives without breaking anything on its way in. Where the harder contacts between these two jolt, this one glides: the inventive solution simply occurs to you, in time to use it, in a form other people can actually accept. Expect the small pleasures of a quick sky. Conversations leap productively instead of wandering. Technical snags untangle at first touch. You explain a complicated thing and watch it land on the first try. While the aspect is applying, curiosity rises without the jitters that sometimes accompany it; at the exact pass, mental reflexes are at their year's best, and problems chosen now tend to open like they were waiting for you. The settling phase is mild, more a return to normal speed than any loss. Because the trine removes friction rather than adding drive, its yield depends on what you feed it. Given nothing, it produces a pleasantly interesting few days of reading and banter, which is a fine but forgettable harvest. Given a real problem, especially one that has resisted the standard approaches, it can produce the elegant answer you keep for years. The difference is only whether you point the instrument at anything. This is also a strong short window for future-facing chores: learning the new system, updating the old method, having the conversation about where things are heading. Novelty slides in easily now, without the resistance it usually meets from your habits. When Mercury's retrograde returns this trine, the sequence across several weeks makes a natural workshop: first pass to see the possibility, return pass to test it against objections you could not think of while excited, final pass to make it standard practice. Ideas that come through all three gates arrive in your life well vetted, which is rare for anything born in a flash. What you grow here is trust, of a specific and earned kind, in your own unconventional judgment. Every time the odd angle proves out under this easy sky, it gets a little more natural to consider the odd angle first on ordinary days. That tilt of mind, built a few days at a time, is worth more than any single clever solution the transit hands you, because it keeps producing after the sky has moved on."
+  },
+  {
+    "id": "transit:mercury:opposition:uranus",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mercury",
+      "natal": "uranus",
+      "aspect": "opposition"
+    },
+    "atomIds": [
+      "transit:mercury~natal_uranus:opposition"
+    ],
+    "text": "The surprise comes from outside this time. Mercury opposing your natal Uranus tends to arrive as another person, or the world itself, saying the thing you did not see coming: the contrary opinion from a reliable ally, the sudden reversal from the other party, the message that lands sideways across your plans. For a few days, dialogue behaves unpredictably, and you are cast, sometimes unfairly, as the steady one who must respond. On the way in, the aspect often announces itself as a vague crackle in your dealings, a sense that agreements are looser than they look. The exact pass is where the swerve usually happens, and the temptation at that moment runs to extremes. You can dig in, treating the disruption as an attack on order, or you can overcorrect, abandoning a sound position because the challenge sounded confident and new. The opposition asks for neither. It asks you to stay in the conversation with someone genuinely unlike you and let the difference do its work. There is real value on offer. The person who upends your framing this week is frequently right about exactly one thing, the blind spot, the possibility your assumptions had filed as impossible. You do not have to accept their whole worldview to take that one thing. Confrontation with an opposite mind is how a settled intellect gets its updates, and this transit schedules one, briefly, whether you would have chosen it or not. Practically, hold plans a little loosely. Meetings move, people change their minds, and the channel itself misbehaves; flexibility costs less than indignation. Once Mercury separates, the erratic quality drains out of your exchanges fast, and you can assess in peace what actually changed versus what merely made noise. Should the retrograde bring this opposition back across a span of weeks, the reruns are usually where the value gets banked. The first encounter startles; the second, with both sides braced and better informed, becomes an actual exchange; the third tends toward some workable synthesis, or at least a clear-eyed agreement to differ. A standoff that replays three times almost cannot stay shallow. The growth is in your relationship to being contradicted. Most minds treat challenge as weather to be endured. A few learn to treat it as reconnaissance, a free report on where their thinking is thin, delivered by someone with no reason to flatter them. This transit, a few unpredictable days at a time, moves you from the first camp toward the second, and somewhere along the way arguments stop being threats."
+  },
+  {
+    "id": "transit:mercury:conjunction:neptune",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mercury",
+      "natal": "neptune",
+      "aspect": "conjunction"
+    },
+    "atomIds": [
+      "transit:mercury~natal_neptune:conjunction"
+    ],
+    "text": "The line between what is and what might be goes soft while Mercury crosses your natal Neptune. The conjunction fuses the fact-handling mind with the imagining one, and for a few days you think in pictures, associations, and moods as much as in words. This is splendid weather for some things and fog for others, and knowing which is which is most of the work. On the creative side, the transit is generous. Images arrive charged. The right metaphor appears. If you write, compose, design, pray, or daydream in earnest, these days can produce material your ordinary mind cannot, and the approach often announces itself early as a drift toward reverie, a reluctance to stay literal. At the exact pass, the veil is thinnest: intuition speaks clearly, empathy widens, and you hear what people mean underneath what they say. Sensitivity like this has real uses in any life that contains other people. On the practical side, caution earns its keep. Details blur under this sky. Numbers transpose themselves, instructions lose a step in transit, and wishful thinking dresses up as analysis so smoothly you cannot see the seam. Conversations held now are prone to a particular failure: both parties leave feeling understood and later discover they agreed to different things. Facts you receive during these days deserve a second look once the transit passes, not because anyone is lying, though occasionally someone is, but because the medium itself is soft. Commitments have a way of looking different in drier air. As Mercury separates, precision returns, and the sorting begins: some of what the fog showed you was mirage, and some was a true thing you could only see with the edges off. Both happen; expect both. When the retrograde carries Mercury back over this point across several weeks, the structure is kind to this particular transit. The first pass brings the vision, the return pass checks it with your feet on the ground, and the final pass keeps what survived. Inspiration that passes through that filter is the kind you can build on. You grow here by becoming bilingual. The literal mind and the imagining mind are both yours, and most people let one bully the other. A few days a year, this conjunction hands you the full use of both at once, and each visit teaches a little more about when to trust the dream, when to trust the spreadsheet, and how much better your thinking gets when neither is allowed to rule alone."
+  },
+  {
+    "id": "transit:mercury:sextile:neptune",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mercury",
+      "natal": "neptune",
+      "aspect": "sextile"
+    },
+    "atomIds": [
+      "transit:mercury~natal_neptune:sextile"
+    ],
+    "text": "Gentleness comes into your thinking for a few days, and it comes as an option rather than a takeover. Transiting Mercury sextile your natal Neptune offers a light bridge between the reasoning mind and the imagination, the kind you can cross and recross at will. Words find their softer register. Listening deepens. The hunch and the argument stop competing and start collaborating. Offers from a sextile are easy to miss because nothing malfunctions if you decline them. The days will pass competently either way. But while the aspect holds, certain doors are simply unlocked: the conversation that needed compassion more than logic goes better than it had any right to; the creative sketch comes out warmer than your usual work; the problem you have been gripping too hard yields to a looser, more sideways approach. On the applying side, you may notice your attention gaining a poetic drift, snagging on colors, coincidences, the feel of things. The exact pass is the sweet spot for anything that blends craft with feeling, writing that must move someone, teaching that must reach someone, any exchange where tone will decide the outcome. Intuition runs a little ahead of evidence now and, unusually, tends to be right often enough to consult. The separation is soft, as everything about this transit is; the shimmer fades and plain daylight resumes. Unlike its harder cousins, this contact carries no real trap beyond neglect. Imagination invited in through a sextile stays a guest and does not rearrange the furniture. That makes these few days a safe practice ground for a skill many careful thinkers lack: letting the non-literal inform a decision without surrendering the decision to it. If a retrograde season returns this aspect twice more over some weeks, the repetitions deepen rather than repeat. A feeling first glimpsed becomes, on the second pass, something you can articulate, and by the final pass something you can act on. Slow understanding of that kind tends to hold. What accumulates over visits is range. Strictly logical thinking solves the problems logic can see, and the rest of life keeps arriving anyway: griefs, attractions, atmospheres, arts. Each time this sextile passes and you accept even a small part of its offer, your mind gets slightly better at the problems without clean edges. People who develop that range are the ones others bring their real questions to, and it is built exactly this quietly."
+  },
+  {
+    "id": "transit:mercury:square:neptune",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mercury",
+      "natal": "neptune",
+      "aspect": "square"
+    },
+    "atomIds": [
+      "transit:mercury~natal_neptune:square"
+    ],
+    "text": "Somewhere between what you said and what they heard, the message bends. Mercury square your natal Neptune throws a few days of fog across the channels you think and talk through, and the square makes the confusion active rather than dreamy: plans dissolve at the edges, stories do not quite add up, facts arrive with pieces missing, and your own certainty behaves like a signal fading in and out. On the approach you may only notice a subtle slippage, mental tiredness, trouble holding the thread. Near the exact pass the fog peaks, and this is typically when the classic events occur: the misunderstanding that seemed impossible given how clearly everyone spoke, the promising claim with nothing under it, the self-deception built in broad daylight out of pure preference. Nobody needs to be lying for any of this, though this is also the sky under which the occasional real deception travels best. The mechanics of the week reward humility. Assume some transmission loss in both directions: confirm what you heard, restate what you meant, and let anything that must be exactly right get checked twice. Conclusions of weight formed at the peak of a Neptune square have a well-known habit of needing revision later, not because you were foolish but because the information itself was soft. Treating your own certainties as provisional for a few days costs little and saves much. There is a quieter side worth naming. The same porousness that garbles logistics opens the imagination, and dreams, art, and longing all speak louder now. The square's discomfort often marks the exact spot where a fantasy and a fact are disputing territory, and finding that spot is genuinely useful, since the dispute was there before the transit and will outlast it if unexamined. As Mercury pulls away, edges return, and the week's confusions become legible; do the sorting then, not in the thick of it. If the retrograde runs Mercury across this square three times over several weeks, take the gift in the structure: the first pass generates the misunderstanding, the second pass is made for clearing it up, and the third pass lets the corrected understanding set. Some of the most durable clarity follows exactly this shape of confusion. You grow here by holding your beliefs with slightly open hands. A mind that can suspect its own reading of events and still keep functioning is rare, and this transit, annoying as it can be, trains precisely that muscle a few days at a time."
+  },
+  {
+    "id": "transit:mercury:trine:neptune",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mercury",
+      "natal": "neptune",
+      "aspect": "trine"
+    },
+    "atomIds": [
+      "transit:mercury~natal_neptune:trine"
+    ],
+    "text": "For a few days your reason travels in imagination's territory and is welcomed there. Mercury trine your natal Neptune eases traffic between the part of you that measures and the part that dreams, and thinking takes on a fluid, associative quality that stays coherent, which is the trine's particular trick. The harder Neptune contacts blur; this one blends. Language is the first beneficiary. The right word surfaces on time. Descriptions come out with atmosphere in them. If your days include writing, design, music, counseling, or any craft where feeling has to travel through form, this window is worth guarding from interruptions, because work made now carries a quality you cannot add later by editing. Even routine communication softens agreeably: you read moods accurately, time your words well, and give conversations room to breathe. People tend to leave exchanges with you feeling met. On the applying side the shift is gentle, a rising receptivity, more vivid dreams for some, an ear cocked toward the suggestive rather than the literal. The exact pass is the deep water, well suited to reflection, to empathy, to the imaginative rehearsal of choices ahead. Intuition earns temporary voting rights now; hunches formed under a Neptune trine have a decent record, though they still benefit from a later audit under plainer light. The settling is unhurried, and insights tend to survive the return of ordinary thinking rather than evaporating, which is not true of every Neptune weather. The trine asks so little that its main risk is passivity. Pure receptivity, unaimed, produces a lovely haze and no artifact. A single intention, one page, one conversation, one problem held gently, converts the same conditions into something you keep. When retrograde timing brings this trine back over a stretch of weeks, the passes layer like washes of color: the first supplies vision, the second refines it against reality without bruising it, the third fixes it in place. Creative and personal understandings built across all three contacts have unusual depth for their size. What grows over visits is your working trust in the non-literal half of your mind. Many people treat imagination as decoration and pay for that in flattened judgment. These few easy days, taken seriously, teach the alternative: that the measuring mind and the dreaming mind, allowed to cooperate, see further than either could alone, and that some truths only enter through the softer gate."
+  },
+  {
+    "id": "transit:mercury:opposition:neptune",
+    "family": "transit-aspect",
+    "when": {
+      "kind": "transit",
+      "transit": "mercury",
+      "natal": "neptune",
+      "aspect": "opposition"
+    },
+    "atomIds": [
+      "transit:mercury~natal_neptune:opposition"
+    ],
+    "text": "Someone across from you is hard to read this week, and the harder you squint, the softer the image gets. Mercury opposing your natal Neptune stages its confusion in the space between people: for a few days, you and an other, a partner, a colleague, a counterpart in some negotiation, keep missing each other by a margin too subtle to catch in the moment. Each side leaves sure the matter was settled; the two settlements do not match. An opposition externalizes, so expect the fog to wear a face. It may be a person who is genuinely vague, or evasive, or selling something misted over. Just as often it is an honest person onto whom you are projecting a hope or a suspicion, and the projection reads as perception from the inside. The approach phase usually brings small mismatches, answers slightly beside the question. The exact pass brings the significant one, the moment you realize the shared understanding was not shared. The repair is unglamorous: say it back in your own words, ask the naive question, put the agreement where both of you can see it. Under this sky, checking is not distrust; it is hygiene. Discernment matters more than suspicion. A blanket refusal to believe anyone costs you the week's real information along with its illusions. The workable stance is slower belief: let claims sit overnight, notice which ones firm up and which ones go vague when pressed, and watch for the difference between a person being unclear and a person being unclear on purpose. The distinction usually shows itself by the separation phase, when edges return to your exchanges and the past days' conversations sort into the solid and the soluble. There is a receptive gift in the aspect too. Other people's inner weather is unusually visible now, and someone may show you, indirectly, what they could never say plainly. Some oppositions ask you to argue; this one mostly asks you to listen through interference without either swallowing or dismissing what you hear. If retrograde timing triples the encounter across several weeks, trust the arc of it: the first pass produces the mirage, the second dissolves or confirms it with better light, and the third leaves you with whatever was real. Misunderstandings that complete that circuit tend to end cleanly rather than lingering. What you grow here is a rarer skill than lie detection: knowing where your own wishes end and another person begins. Every pass of this transit redraws that line a little more accurately, and clearer relationships follow it."
+  }
+]

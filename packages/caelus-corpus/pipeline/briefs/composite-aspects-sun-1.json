@@ -1,0 +1,233 @@
+{
+ "name": "composite-aspects-sun-1",
+ "outFile": "b3-composite-aspects-sun-1.json",
+ "setId": "house-b3-composite-aspects-sun-1",
+ "family": "composite-aspect",
+ "cells": [
+  {
+   "id": "composite:aspect:sun:conjunction:moon",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "moon",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:sun~moon:conjunction"
+   ],
+   "title": "Composite Sun conjunct composite Moon",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:sextile:moon",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "moon",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:sun~moon:sextile"
+   ],
+   "title": "Composite Sun sextile composite Moon",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:square:moon",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "moon",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:sun~moon:square"
+   ],
+   "title": "Composite Sun square composite Moon",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:trine:moon",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "moon",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:sun~moon:trine"
+   ],
+   "title": "Composite Sun trine composite Moon",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:opposition:moon",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "moon",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:sun~moon:opposition"
+   ],
+   "title": "Composite Sun opposite composite Moon",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:conjunction:mercury",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "mercury",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:sun~mercury:conjunction"
+   ],
+   "title": "Composite Sun conjunct composite Mercury",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:sextile:mercury",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "mercury",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:sun~mercury:sextile"
+   ],
+   "title": "Composite Sun sextile composite Mercury",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:square:mercury",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "mercury",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:sun~mercury:square"
+   ],
+   "title": "Composite Sun square composite Mercury",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:trine:mercury",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "mercury",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:sun~mercury:trine"
+   ],
+   "title": "Composite Sun trine composite Mercury",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:opposition:mercury",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "mercury",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:sun~mercury:opposition"
+   ],
+   "title": "Composite Sun opposite composite Mercury",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:conjunction:venus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "venus",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:sun~venus:conjunction"
+   ],
+   "title": "Composite Sun conjunct composite Venus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:sextile:venus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "venus",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:sun~venus:sextile"
+   ],
+   "title": "Composite Sun sextile composite Venus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:square:venus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "venus",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:sun~venus:square"
+   ],
+   "title": "Composite Sun square composite Venus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:trine:venus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "venus",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:sun~venus:trine"
+   ],
+   "title": "Composite Sun trine composite Venus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:opposition:venus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "venus",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:sun~venus:opposition"
+   ],
+   "title": "Composite Sun opposite composite Venus",
+   "bindable": true
+  }
+ ]
+}

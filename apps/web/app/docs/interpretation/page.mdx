@@ -24,7 +24,7 @@ point, and it performs no interpretation of its own. What it defines is the
 contract between the facts the engine owns and the meaning you bring to them:
 
 > The engine owns the **facts**, a layer you plug in owns the **meaning**, and
-> the suite owns the **contract** between the two rather than any of the
+> the framework owns the **contract** between the two rather than any of the
 > content itself.
 
 ```text
@@ -81,9 +81,11 @@ Every atom carries five common fields:
   `aspect:mars~saturn:square`, `pattern:t_square:mars-moon-saturn`,
   `signature:element:fire`, `angle:asc`). A generated claim points at this id,
   so it can always be traced back to the fact it rests on.
-- **`kind`**: `placement | aspect | pattern | signature | angle | dispositor |
-  reception | star | lot | transit | synastry | composite | timelord | dignity |
-  nakshatra | varga | yoga | parallel | outOfBounds`.
+- **`kind`**: `placement | aspect | pattern | signature | angle | angleContact |
+  dispositor | reception | star | lot | degree | transit | transitHouse | station |
+  synastry | composite | compositeAspect | timelord | dignity | nakshatra |
+  varga | yoga |
+  parallel | outOfBounds | return | lunation | solarPhase`.
 - **`bodies`**: the body ids involved, for filtering and cross-reference.
 - **`salience`**: a transparent, overridable prominence score (below).
 - **`text`**: a plain-language statement of the fact, with no interpretation
@@ -92,6 +94,12 @@ Every atom carries five common fields:
 **Reception** atoms record mutual reception by **domicile**, **exaltation**, or
 the sect's **triplicity** ruler (or a mixed pair, e.g. `domicile-exaltation`).
 Use `hasReception({ body: "venus" })` to match any involving Venus.
+
+**Degree** atoms state each point's zodiacal degree ordinally, the way degree
+symbols count: a body at 14°30′ Aries occupies the *15th* degree of Aries.
+One atom per placed body plus the Ascendant and Midheaven, each also carrying
+the ten-degree face index (1-3). Match with
+`hasDegree({ sign: "Aries", degree: 15 })`.
 
 **Star** and **lot** atoms are not computed from a bare `Chart` (the star
 catalog lives in the data pack, and lots derive from the points and sect), so a
@@ -116,7 +124,16 @@ The natal projection extends via `ContextOptions` and two helpers:
   Vimshottari dasha, Egyptian term/face/triplicity/almuten facts (always), and
   nakshatra / D9 / yogas when the chart is sidereal.
 - **`enrichSynastryOptions(engine, chartA, chartB)`**: inter-chart aspects,
-  house overlays, and composite midpoint placements (chart A is the base).
+  house overlays, composite midpoint placements, and the aspects among those
+  composite bodies (chart A is the base). Composite placements also carry a
+  **composite house** when both charts have real angles: a midpoint composite
+  has no moment and no place to cast houses from, so `compositeFrame` supplies
+  a stated convention instead (midpoint Ascendant and MC, equal houses from
+  the Ascendant, `method: "equal-from-midpoint-asc"`). Without both birth
+  times there is no frame and no house, rather than an invented one, and
+  `hasComposite({ house })` correctly matches nothing. Note the composite MC
+  does not generally land on the tenth cusp: two independently averaged angles
+  do not keep their quadrant relationship.
 
 Id examples: `transit:saturn~natal_moon:square`, `profection:year:scorpio:mars`,
 `zr:l1:scorpio:mars`, `dasha:maha:saturn`, `term:moon:saturn`,
@@ -124,6 +141,45 @@ Id examples: `transit:saturn~natal_moon:square`, `profection:year:scorpio:mars`,
 `varga:d9:moon:virgo`, `yoga:Gajakesari`. Match with `hasTransit`,
 `hasTimelord`, `hasSynastry`, `hasComposite`, `hasDignityFine`, `hasNakshatra`,
 `hasVarga`, and `hasYoga`. Every id resolves in `auditCitations`.
+
+### Facts the chart alone does not state
+
+Some facts a reader takes for granted are not on a `Chart`: a planet sitting on
+the Ascendant is not an aspect, a body's nearness to the Sun is not a dignity,
+and a return is a relation between two instants. The projection computes these
+itself, so they arrive as atoms with ids like any other fact.
+
+- **`angleContact`** (`angleContact:sun:asc`): a body conjunct the ASC, DSC,
+  MC, or IC point, not the angular *house*. Orb via `angleOrb` (default 8°).
+  Match with **`hasAngleContact`**.
+- **`transitHouse`** (`transitHouse:saturn:7`): the "Saturn is crossing your
+  7th" fact, true whether or not anything is in orb. **`hasTransitHouse`**.
+- **`station`** (`station:mercury:retrograde`): a body turning near the
+  instant, inside an editorial window (default ±5 days). **`hasStation`**.
+- **`return`** (`return:saturn:1`): a body within orb of its own natal
+  longitude, numbered, so a first Saturn return is addressable apart from a
+  second. **`hasReturn`** takes `nth` or `minNth`.
+- **`lunation`** (`lunation:full:eclipse:lunar`): a New or Full Moon near the
+  instant, located in the natal houses, eclipse-flagged, listing any natal
+  bodies it falls on. **`hasLunation`** filters phase, eclipse, house, and
+  `onNatal`.
+- **`solarPhase`** (`solarPhase:mercury:cazimi`): cazimi, combust, or under
+  the beams, at the pinned electional thresholds. Fires on a birth chart and on
+  the moving sky alike. **`hasSolarPhase`**.
+- **`parallel`** and **`outOfBounds`** (`parallel:mars~venus:parallel`,
+  `oob:moon`): declination facts, which longitude cannot express: two bodies
+  can hold a parallel while unaspected. **`hasParallel`**, **`hasOutOfBounds`**.
+- **`compositeAspect`** (`compositeAspect:mars~venus:square`): an aspect
+  between two *composite* placements. A composite chart is a set of midpoints,
+  so its internal geometry is a fact about the relationship itself rather than
+  about either person; `composite` atoms give the placements, this gives the
+  relations among them. **`hasCompositeAspect`**.
+
+Three of these close gaps where the engine's own primitives deliberately look
+away: `findAspects` excludes the nodes, so the projection computes node aspects
+itself; `transitAspects` admits one natal node as a *target*; and a classical
+planet with none of the five essential dignities is marked `"peregrine"` on its
+placement atom, while `Chart.dignities` stays exactly as computed.
 
 <CodeBlock
   lang="typescript"
@@ -180,12 +236,17 @@ all overridable through `ContextOptions.salience`:
 | `pattern` | a whole configuration |
 | `dispositor` / `reception` | a dispositor link / a mutual reception |
 | `star` / `lot` | a fixed-star conjunction / a Hermetic lot |
-| `transit` / `synastry` / `composite` | a transit aspect / inter-chart link / midpoint placement |
+| `transit` / `transitHouse` / `station` | a transit-to-natal aspect / a transiting body's natal house / a station near the instant |
+| `synastry` / `composite` | an inter-chart aspect or overlay / a composite midpoint placement or composite aspect |
 | `timelord` | an active profection, ZR, firdaria, or dasha period |
-| `dignityFine` | a finer essential-dignity fact |
-| `vedic` | a nakshatra, varga, or yoga |
-| `parallel` | a parallel or contraparallel of declination |
-| `outOfBounds` | a body beyond the obliquity band |
+| `dignityFine` | a term, face, triplicity, or almuten fact |
+| `vedic` | a nakshatra, varga, or yoga fact |
+| `parallel` / `outOfBounds` | a declination parallel / a body beyond the obliquity |
+| `planetReturn` / `lunation` / `solarPhase` | a return in progress / a New or Full Moon near the instant (an eclipse adds it again) / a solar-condition fact |
+
+Writing a **complete** `SalienceWeights` object literal requires `planetReturn`,
+`lunation`, and `solarPhase` as of 0.25.0; `Partial<>` overrides through
+`ContextOptions.salience` are unchanged.
 
 No weight is magic. A caller who dislikes the defaults overrides any subset:
 
@@ -198,7 +259,7 @@ const ctx = interpretationContext(chart, {
 });`}
 />
 
-This is library code, not ephemeris. There is no Swiss Ephemeris oracle for
+This is framework code, not ephemeris. There is no Swiss Ephemeris oracle for
 "which facts matter," so it is unit-tested for structure (atoms tie back to the
 validated chart, ids are unique, salience is sorted) rather than pinned by a
 parity golden.
@@ -216,7 +277,7 @@ cannot.
   label="selectors.ts"
   code={`import {
   hasPlacement, hasAspect, hasPattern, hasSignature, hasAngle,
-  hasDispositor, hasReception, hasStar, hasLot,
+  hasDispositor, hasReception, hasStar, hasLot, hasDegree,
   hasTransit, hasTimelord, hasSynastry, hasComposite,
   hasDignityFine, hasNakshatra, hasVarga, hasYoga,
   matchAll, matchAny, matchNone,
@@ -231,6 +292,7 @@ hasSignature("element", "fire");
 hasReception({ body: "venus" });
 hasStar({ star: "Algol" });                       // any body conjunct Algol
 hasLot({ lot: "fortune", house: 1 });             // Part of Fortune rising
+hasDegree({ sign: "Aries", degree: 15 });         // any point in the 15th degree of Aries
 hasTransit({ transit: "saturn", natal: "moon", aspect: "square" });
 hasTimelord({ system: "profection", level: "year" });
 

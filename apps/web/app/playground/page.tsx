@@ -8,7 +8,7 @@ import { pageMetadata } from "../../lib/seo";
 export const metadata = pageMetadata({
   title: "Playground",
   description:
-    "Cast a natal chart: wheel, transits, reading, Vedic kundli, timing, and maps. Enter a place and a date.",
+    "Cast a natal chart: wheel, transits, a cited corpus reading, Vedic kundli, timing, and maps. Enter a place and a date.",
   path: "/playground",
 });
 
@@ -17,8 +17,8 @@ export default function Playground() {
     <main className="container-workspace page page--sticky-cta">
       <PageHero eyebrow="Playground" title="Cast a chart">
         <Lead>
-          Search a place, enter a date, and read the wheel. Transits, a
-          reading, and the rest of the chart follow.
+          Search a place, enter a date, and read the wheel. Transits, a cited
+          corpus reading, and the rest of the chart follow.
         </Lead>
       </PageHero>
 

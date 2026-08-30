@@ -1,0 +1,212 @@
+[
+ {
+  "id": "transit:mars:conjunction:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "saturn",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:mars~natal_saturn:conjunction"
+  ],
+  "text": "Roughly every two years, Mars catches up with the spot your Saturn holds, and for a week or two your push and your brake share the same pedal. A conjunction fuses the two: the part of you that wants to act now and the part that says not yet stop arguing from separate corners and become one clenched intention. While the transit applies you may feel the squeeze building as delays multiply, small obstacles seem personal, and your patience wears thin in a quiet, tight-lipped way. Anger under this contact rarely flares; it goes cold and settles in the jaw. At the exact pass the pressure peaks, and you can spend it two ways. Spent badly, it is a stretch of grinding frustration, where every effort meets a wall and your energy sinks into resentment or plain fatigue. Spent well, it is one of the best working periods Mars offers, because the same compression that frustrates also concentrates. Tasks that need care, precision, and stamina go unusually well now: the tedious repair, the exacting draft, the long slow climb you have been avoiding. Choose work worthy of that focus and the week feels stern but productive rather than punishing. In love and family life you may come across as harder than you intend, so say plainly that you are carrying a load; the people close to you can read coldness where there is only strain. As the conjunction separates, the grip eases and your energy warms back up, and whatever you built under pressure tends to hold, because Saturn contacts set things that last. Whatever you forced tends to crack later, which is the other half of the lesson. Some rounds, a Mars retrograde stretches this visit into three passes over a few months. Then the first pass shows you the wall, the retrograde pass asks whether you are pushing at the right section of it, and the final pass lets you place your effort where the wall actually has a door. Either way the transit returns about every two years, and each return finds you a little better at the skill it teaches: telling the difference between an obstacle that wants more force and an obstacle that wants more time. You grow with this contact by letting your drive accept a governor without concluding that the governor is the enemy."
+ },
+ {
+  "id": "transit:mars:sextile:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "saturn",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:mars~natal_saturn:sextile"
+  ],
+  "text": "For about a week, your energy arrives at exactly the rate you can spend it. Transiting Mars in sextile to your natal Saturn changes the physical texture of doing things: pushing feels measured, pacing comes naturally, and the usual leak between deciding and doing seals up. The body notices first. Work that needs stamina rather than bursts, the long walk, the heavy garden, the training plan resumed, the room finally cleared, goes unusually well, because nothing in you is racing and nothing is dragging. Athletes and tradespeople know this state and train for years to find it on demand; this week it is simply the weather. The same economy shows in how you meet obligations. An ordinary week scatters your force across whatever shouts loudest. These days let you put sustained pressure on one resistant point instead, and sustained pressure is what actually moves the immovable: the backlog, the half-broken thing, the project stuck at eighty percent. Anger, if any is around, runs cool and usable, more torque than temper. As the aspect approaches, you may simply notice that starting has gotten easier. The best days are the ones nearest exactness, when patience and push cost the same. On the way out, the steadiness drains slowly, and the habits you set in motion at the peak are the part that survives. This is a better week than most for beginning a physical routine you intend to keep, since the first repetitions happen without the war that usually kills them. The transit asks nothing and punishes nothing. Skipped, it becomes an ordinarily steady week, and Mars comes back to the angle within its two-year lap. Occasionally a retrograde parks Mars near this contact for much longer, and then the quiet week becomes a quiet season, the best extended stretch of traction that slow work ever gets from this planet. Take the season seriously if it comes. What repeated use of this transit builds is a physical memory most people never acquire: the felt difference between effort you can sustain indefinitely and effort that borrows from tomorrow. Once your body knows that pace from the inside, you can steer back toward it under harder skies, and the difference shows up everywhere endurance matters, which over a working life is nearly everywhere."
+ },
+ {
+  "id": "transit:mars:square:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "saturn",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:mars~natal_saturn:square"
+  ],
+  "text": "Transiting Mars square your natal Saturn is the feeling of a green light and a stuck handbrake at the same time. For a week or two, your efforts run into resistance that seems designed for you personally: the approval stalls, the tool breaks, the person with the authority to say yes says wait. A square forces an issue rather than suggesting one, and the issue here is the gap between how fast you want to move and how fast circumstances will allow. Friction builds in increments as Mars grinds toward the angle, and irritability rises with it; you may find yourself snapping at delays you would normally shrug off. Near the exact aspect the blockage feels most solid, and this is where the transit does its sorting. Pushing harder against the immovable parts mostly produces exhaustion, strained muscles, and quarrels with supervisors, parents, officials, anyone who stands where the wall stands. Redirecting the same force into what can move converts a miserable week into a strong one: the overdue maintenance, the difficult conversation prepared carefully, the piece of work that rewards grinding. Anger deserves special handling now. Under this contact it tends to be cold, stored, and expressed sideways, and stored anger this week has a way of leaking onto people who did not cause it. Naming the real frustration out loud, even just to yourself, keeps it from souring the household. As Mars separates, the pressure lifts with surprising speed, and you can see which obstacles were real limits and which were only timing. Some rounds bring a retrograde, and then this square repeats up to three times across a few months: the first pass exposes the conflict, the second reopens it from the other side, and the last one usually finds you either genuinely stronger or genuinely wiser about which fights are yours. The square returns roughly every two years regardless, in Mars's ordinary circuit. Treat each return as a scheduled inspection of your relationship with limits. The people who get the most from this transit are not the ones who never feel the wall; they are the ones who learn, pass by pass, to stop confusing the wall with an insult. Frustration handled that way turns into timing, and timing is a form of strength that raw drive alone never teaches."
+ },
+ {
+  "id": "transit:mars:trine:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "saturn",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:mars~natal_saturn:trine"
+  ],
+  "text": "For about two weeks, while Mars moves through a trine to your natal Saturn, stamina and self-control stop costing you anything. A trine eases what the same two planets in harder contact would force: your drive picks a lane, your patience holds it, and work that usually demands willpower proceeds on something closer to gravity. The mood is not exciting. It is competent, and competence has its own quiet satisfaction. This is one of the better periods in Mars's roughly two-year round for the long-haul task: the project with many exact steps, the physical training that rewards consistency, the negotiation that needs a cool head across several sessions. Whatever you commit to now tends to be built at the right scale, neither inflated nor timid, because Saturn lends your effort an honest sense of proportion. As the trine applies, you may simply notice that you are less scattered, finishing what you start without the usual friction. At the exact aspect the steadiness peaks; decisions made at this peak about how to structure your effort are usually sound and tend to outlive the transit. While it separates, the extra traction fades, but the pace you practiced does not have to. That is the real gift here, since ease by itself changes nothing; ease used as a rehearsal changes your defaults. In dealings with others you carry a settled, credible air this week, and people in charge respond to it. Requests for responsibility, for trust, for room to run land better than usual, not because you push, but because you visibly do not need to. At home you make a calmer anchor than Mars normally allows. The one loss worth naming is that comfortable periods invite coasting, and a trine wasted leaves no mark at all. If a Mars retrograde happens to hold this trine in play, which some rounds it does, the easy traction can persist on and off for a couple of months, long enough to finish something substantial rather than merely start it; the return passes then act as second and third coats, sealing the work. When the period closes, what you keep is a memory your body trusts: proof that effort and restraint can pull together, and that you are capable of the long version of trying."
+ },
+ {
+  "id": "transit:mars:opposition:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "saturn",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:mars~natal_saturn:opposition"
+  ],
+  "text": "An opposition works through other people, and when transiting Mars opposes your natal Saturn the people involved tend to carry rules. For a week or two, somewhere in Mars's roughly two-year circuit, your initiative runs head-on into someone's no: a boss enforcing policy, a partner counting costs, an institution moving at its own pace. The confrontation is the point. What you want and what the situation will bear stand at opposite ends of a rope, and the transit pulls the rope tight so you can see both ends clearly. While the aspect is applying you may feel increasingly hemmed in, reading ordinary caution from others as obstruction, and they in turn read your urgency as pressure. At the peak the standoff is plainest, and the temptation splits two ways: to force the issue, or to swallow it and go cold. Forcing tends to summon exactly the resistance it fears, since Saturn answers escalation with more wall. Swallowing tends to curdle into resentment that outlasts the week. The workable line runs between them: state what you intend, hear the objection as information rather than insult, and let the disagreement be about the matter instead of about who yields. Handled that way, this transit is clarifying. It shows you which limits in your life are real, which are only habits wearing a uniform, and which of your own ambitions are sturdy enough to defend calmly. As Mars separates, encounters soften and delayed matters often resume on their own, which is worth remembering at the peak, when everything feels final. It is not final. In some rounds a retrograde brings Mars back over this opposition twice more across several months, and the argument returns in new clothes; the second pass usually reveals what each side actually needs, and the third tends to close the case, either with terms you can live with or with a clean recognition that the rope should be put down. Between rounds the transit leaves a residue that serves you well: a more accurate map of where your push meets the world's structure. You grow here not by winning the standoff or by avoiding it, but by discovering that you can stand at your end of the rope, under pressure, without either dropping it or turning it into a whip."
+ },
+ {
+  "id": "transit:mars:conjunction:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "uranus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:mars~natal_uranus:conjunction"
+  ],
+  "text": "When Mars reaches your natal Uranus, roughly once in its two-year lap, the effect is less like weather arriving and more like a switch flipping. A conjunction fuses the planet of action with the point in your chart that refuses to be predictable. For a week or so the fusion runs hot: sudden urges, abrupt decisions, a low tolerance for anything that smells like routine. You may startle yourself with what you say or start. In the days before the exact pass, while the aspect applies, the restlessness builds without an obvious object; you feel like drumming your fingers on your whole life. The peak often arrives as an event. Something snaps into motion, an impulse becomes an act, a constraint you have tolerated for months suddenly becomes intolerable, and the act itself can be either a genuine breakthrough or an expensive lurch. The difference usually comes down to whether the impulse is new information or just old anger in a costume. This transit rewards deliberate novelty: attempt the unfamiliar thing on purpose, change the route, prototype the idea, have the conversation nobody expected. The electricity then finds a productive circuit. Deny it any outlet and it tends to discharge on its own schedule, through quarrels, slammed doors, or the kind of hasty physical move that ends with a dropped box or a jammed thumb. Speed plus surprise is the signature risk here, so give machines, traffic, and sharp edges a little more attention than pride says you need. As the conjunction separates, the current drops fast and ordinary patience returns, sometimes with mild embarrassment at the week's intensity, sometimes with real gratitude for what it broke open. Do not judge the episode until the settling is done. Occasionally a retrograde keeps Mars circling this point for a few months, three passes instead of one. Then the pattern matures: the first jolt exposes what is too cramped, the second lets you test the escape route with more care, and the last pass installs the change so it no longer needs voltage to survive. Over many returns you learn this contact's real lesson, which is not that you are reckless. It is that some part of your will belongs to the future rather than the schedule. Giving it regular, chosen exercise beats waiting for it to seize the wheel."
+ },
+ {
+  "id": "transit:mars:sextile:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "uranus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:mars~natal_uranus:sextile"
+  ],
+  "text": "Something in your routine is looser than it looks, and for around a week, while transiting Mars sextiles your natal Uranus, you have the energy to prove it. This aspect does not disrupt anything. It extends an invitation: a door in the fence stands open, and walking through is optional. Taken up, the period feels bright and quick. Experiments come easily, your reflexes for the unconventional sharpen, and actions that would normally read as risky land instead as refreshingly direct. It is a good stretch for trying the method you have been curious about, rearranging how you work, saying yes to the plan that departs from your pattern, or making the small independent move you keep postponing because there is never a reason. There is still no reason; there is only an opening. The invitation announces itself as itch while Mars approaches, a pleasant impatience with the usual way, ideas arriving while you are in motion. The timing is best in his day or two at the exact angle: initiative and originality cooperate, and other people are unusually receptive to your odd angle on things, so proposals pitched now get a fairer hearing. Friends and allies matter under this contact, and the door often opens through one of them, an offhand suggestion, an introduction, a favor that changes your week. As Mars pulls away the window narrows without drama; the fence does not slam shut, the door simply stops being lit. What you walked through stays walked through. Because a sextile only offers, letting it pass costs you nothing visible, which is exactly why it is the aspect people waste most. Its returns inside Mars's roughly two-year cycle are chances to waste it less. And in the occasional round when a retrograde parks Mars near this angle for months, the invitation repeats in slow motion: the first pass shows the opening, the second lets you widen it, the third finds you living slightly differently, with no crisis anywhere in the story. That is this transit at full strength, change without rupture. Each time you use one of these windows, your nerve grows by a practical increment, and the gap shrinks between the person who notices the open door and the person who actually walks."
+ },
+ {
+  "id": "transit:mars:square:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "uranus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:mars~natal_uranus:square"
+  ],
+  "text": "Patience runs short and surprises run long when transiting Mars squares your natal Uranus. For a week or two the square forces a collision between your momentum and your need for freedom, and the collision rarely picks a convenient moment. Plans jump their rails. People cancel, reverse, or demand; equipment fails at the worst hour; and inside you a wire hums with the urge to do something drastic simply because it would feel like motion. The applying days carry a mounting static, irritability without a clear cause, a sense that your skin is one size too small. Near the exact square the static discharges, often through an incident: the outburst, the sudden exit, the shortcut taken at speed. Haste is the tax collector of this transit. Rushing with tools, in traffic, on ladders, through sensitive conversations, tends to cost more now than the time it saves, and most of what this period later regrets traces back to a moment when waiting ten minutes felt unbearable. Yet the same voltage that makes the week jagged also makes it honest. Whatever explodes under a Mars-Uranus square was usually under pressure already; the transit does not invent the strain, it exposes it. The freedom you suddenly crave points at a real constriction, and the anger that flashes up points at a boundary you have let others walk over. The skill being forced on you is separation: act on the signal, not in the spike. Draft the drastic message now, then send it after the aspect separates, if it still reads true. As Mars moves on, the current drops, sleep improves, and you can inspect what broke with a cooler eye; some of it will need repair, and some of it needed breaking. Certain rounds add a retrograde, holding this square in play across a few months and three passes, and those extended visits work like a controlled burn: the first pass flushes the trapped heat, the return pass lets you choose which changes were real, and the final one settles the new arrangement. The square comes back on Mars's roughly two-year rhythm either way. You fare best with it when you stop treating the jolt as an enemy and start treating it as a smoke alarm, occasionally shrill, sometimes false, but wired to something that genuinely wants your attention."
+ },
+ {
+  "id": "transit:mars:trine:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "uranus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:mars~natal_uranus:trine"
+  ],
+  "text": "Original moves come off cleanly while transiting Mars trines your natal Uranus. The trine eases the current between your drive and your independent streak, so for a week or two, in the course of Mars's roughly two-year round, boldness and good timing arrive together. You act faster than usual and, unusually, no worse for it. Decisions that normally require three drafts happen in one; the clever route through the problem is visible from where you stand; and your appetite for the untried feels less like risk and more like appetite. This is a fine period for launches of the modest, real kind: introducing the new method at work, taking the trip that breaks the pattern, automating the chore, making first contact with a person or field outside your circle. Physical energy tends to run high and slightly playful, well suited to sports and activities with an element of skill or novelty. The applying days feel like waking up earlier than the alarm, alert with no urgency. Impulses arriving while Mars holds the trine deserve more trust than your average impulse, because for once speed and judgment are on the same side. Through the separating days the quickness ebbs, and the useful move is consolidation, tying the new method into the ordinary week so it survives the return of ordinary time. The shadow here is mild but worth naming: a trine never insists. The window opens and closes silently, and a distracted week can pass through it with nothing to show. There is also a slight overconfidence to watch at the wheel and on the stairs, not because the transit invites disaster, but because fluency invites showing off. In the rounds where Mars turns retrograde near this angle, the visit stretches to a few months and the trine repeats, giving your experiment a rare luxury: a second pass to refine it and a third to make it permanent, all under favorable conditions. Used over the years, these windows compound into something that looks from the outside like luck and is actually practice. You grow with this transit by learning what your daring feels like when it is well timed, so that in harder seasons you can tell the difference between a real opening and a mere itch."
+ },
+ {
+  "id": "transit:mars:opposition:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "uranus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:mars~natal_uranus:opposition"
+  ],
+  "text": "Under a Mars opposition to your natal Uranus, the unpredictability comes at you from the other side of the table. For a week or so, other people carry the lightning: they reverse agreements, spring demands, act out of character, or push for freedoms that upend your plans. An opposition confronts, and this one confronts you with wills you cannot script. Your first reading of the week may be that everyone around you has become erratic. There is usually a fact underneath the feeling, but oppositions also mirror. The independence flaring in others often matches an independence you have been sitting on, and the person disrupting your arrangement may be doing, crudely, what part of you has wanted to do politely. While the aspect applies, tension gathers in your dealings: negotiations wobble, alliances feel provisional, and you brace without knowing for what. The exact pass tends to deliver the jolt, a break, an ultimatum, a swerve. Your reflex will be to clamp down and restore the plan by force. Force is the one move that reliably fails here, since pressure applied to a Uranian situation increases its voltage. Flexibility is not surrender this week; it is technique. Hold your purpose and loosen your grip on the route, and the disruption frequently opens a path the plan was blocking. Guard the physical basics too, since abrupt maneuvers around vehicles and machinery are this contact's classic misfire. As Mars separates, the field calms quickly, relationships mostly return to their shape. You can sort the week's ruptures into two piles: accidents to repair, and honest breaks that were overdue. Both piles teach. In the occasional round when a retrograde drags Mars back across this opposition, the confrontation runs in chapters over some months. The later passes are usually less explosive and more truthful, ending in renegotiated terms rather than scorched ground. The opposition itself returns on Mars's roughly two-year beat. Its long gift is a specific kind of nerve: the ability to stay in relation with people you cannot control, neither caging them nor fleeing, while keeping your own direction. That nerve, once built, quiets these weeks considerably, because so much of their chaos was only ever the sound of control being asked to let go."
+ },
+ {
+  "id": "transit:mars:conjunction:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "neptune",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:mars~natal_neptune:conjunction"
+  ],
+  "text": "Mars conjunct your natal Neptune is the one visit in Mars's roughly two-year round when your will goes soft at the edges. The conjunction fuses drive with fog: for a week or two, wanting things simply works differently. Goals that looked solid turn vague when you reach for them, your energy comes in tides rather than bursts, and direct effort can feel like pushing a boat through mist, motion without traction. Nothing has broken; the current is simply running toward imagination, empathy, and the indirect approach, and away from the frontal assault. Fighting that current is the classic mistake of the period; people who insist on maximum output during these days often end up drained, discouraged, or fooled, because low clarity plus full speed is exactly how one signs the bad agreement or chases the flattering mirage. The applying days announce the shift as a subtle loss of appetite for combat and a drift toward daydream. At the exact pass the fusion peaks, and it has a genuinely high use: acting on behalf of something beyond your own scorecard. Creative work, music, water, service to someone who needs it, causes you believe in, all draw on this pairing at full strength, and effort spent there does not leak, it flows. Desire itself may turn romantic and idealized now, which is lovely to feel and worth double-checking before you build on it. Keep an eye on your energy budget, on offers that shimmer, and on your own motives, which can hide from you this week behind noble wording. As the conjunction separates, the mist thins, your edges return, and plans postponed for the fog can resume with little lost. In some rounds a retrograde holds Mars in this haze for months, three passes over the same point, and the long version rearranges the lesson: the first pass dissolves the plan, the second lets you feel what you actually want underneath it, and the third returns your force with the want clarified. Across many returns this transit teaches a strange, valuable skill: how to act without armor. There are aims force cannot reach, aims that require patience, imagination, or surrender, and you learn here that reaching for them is not weakness. It is the other half of strength."
+ },
+ {
+  "id": "transit:mars:sextile:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "neptune",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:mars~natal_neptune:sextile"
+  ],
+  "text": "While transiting Mars sextiles your natal Neptune, a gentler use for your energy becomes available, and for about a week the door to it stands open. Nothing about this aspect compels. It proposes: some of your drive, this week, could serve imagination, kindness, or quiet repair. It would go further there than in the usual push. Taken up, the offer feels like a slight change of key. Work gains a graceful quality, timing over force. You read rooms and people more accurately than usual. Helping someone, with no angle in it, leaves you fuller rather than emptier. It is a favorable stretch for creative practice of any kind, and for planning that benefits from intuition. Time near water or in music suits it, as does the humane errand you keep meaning to run. Physical energy is usually adequate but soft-spoken, better suited to swimming, walking, and craft than to contests. During the applying days you may notice your ambitions loosening their grip pleasantly, an inclination to wander, an ear for undertones. Around the exact aspect the blend is at its best. Acts undertaken then, especially generous or artistic ones, tend to land with a precision that pure effort cannot buy. Cooperation flourishes now because your assertiveness stops crowding people. You can pursue an aim and leave everyone breathing room, a combination rare enough to be noticed. As the sextile separates, the key shifts back and the harder edge of your will returns, ideally carrying a trace of the week's finesse with it. Since offers unclaimed leave no record, the only cost of ignoring this period is invisible: the drawing not started, the apology not made, the pause not taken. Mars brings the angle around again within its roughly two-year lap, so the chance is renewable. In a round where retrograde motion keeps Mars lingering here, the soft weather can recur across a few months. That is long enough to finish a work of imagination begun on the first pass and deepened on the second. What accumulates over the years is a widened repertoire. Force remains available to you. This transit teaches its alternatives, and once you know both, you stop meeting every locked door with a shoulder."
+ },
+ {
+  "id": "transit:mars:square:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "neptune",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:mars~natal_neptune:square"
+  ],
+  "text": "A Mars square to your natal Neptune forces an uncomfortable question: what exactly are you fighting for, and is it real? For a week or two the square drains clarity from your efforts. Motivation dips without a visible cause, straightforward tasks sprout complications, and opposition, when it comes, refuses to stand still. It arrives as rumor, mixed signals, quiet sabotage, or your own second-guessing rather than an honest obstacle you could push against. The applying days often bring a creeping discouragement, a why-bother mood that mistakes itself for insight. Treat conclusions drawn in that mood as provisional. Near the exact square the fog is thickest, and two temptations peak with it. One is to force the issue anyway, which mostly wastes strength and can walk you into a deception, someone else's or your own. The other is to give up entirely and slide into avoidance, screens, sleep, whatever softens the edges. The workable path is narrower and simpler: lower the throttle, verify before acting, and postpone what can wait. Suspicion deserves the same discipline as effort this week. You may sense undercurrents accurately yet attach them to the wrong person, so check the story before you act on it. Physical energy tends to run low and irregular, and rest is not a defeat, it is maintenance. There is also a quieter gift buried in the murk. What dissolves under this square is often what was hollow, the goal held out of habit, the fight inherited from an old self. The discouragement is sometimes your own depths declining to fund a project your surface no longer believes in. As Mars separates, energy and definition seep back, and it is worth reviewing what the fog swallowed before rebuilding all of it. Certain rounds stretch this square across months by retrograde, three passes instead of one. The long form is heavier but fairer, because the second pass usually exposes what the first pass only obscured. By the third you can tell true aims from mirages with unusual confidence. The square returns on Mars's roughly two-year cycle, and each visit refines the same skill: acting cleanly under uncertainty. You learn to move a little slower, look a little longer, and want things on purpose, and those habits outlast every fog this transit can raise."
+ },
+ {
+  "id": "transit:mars:trine:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "neptune",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:mars~natal_neptune:trine"
+  ],
+  "text": "There are weeks when getting your way and doing some good stop being different projects. A Mars trine to your natal Neptune is reliably one of them. For a week or so, once in each of Mars's two-year laps, your assertiveness picks up subtlety. You sense when to press and when to wait, and your presence persuades without pushing. The aims that attract you tilt naturally toward the imaginative and the kind. The trine eases a famously awkward pairing. Drive and sensitivity, so often at odds, run in parallel now, and the result is not fireworks but finesse. Use it where finesse pays. Delicate negotiations and creative execution go better in this window than force could ever make them go. So does care for someone ill or struggling, and work with images, sound, or story. Even routine tasks pick up a certain flow, and your body tends to prefer graceful effort, dance, swimming, a long walk, over strain. In the applying days the shift is easy to miss, arriving only as a softened urgency and a richer imagination. The transit does not announce itself, which is why it is often spent on nothing. At the peak, instinct and action coordinate closely, and it is a good moment to act on a compassionate impulse at full size rather than the usual pocket version. Generosity extended now tends to be received in the spirit it was meant. Through the separating days the finesse fades gently, leaving whatever you made or mended intact. Nothing in this period forces growth, and that is its test: the trine rewards you only if you move. In rounds where a retrograde lets Mars linger in this angle for a few months, the ease returns in waves. A project of imagination or service can then be carried through all three passes, drafted, deepened, delivered, under continuously kind conditions. The harder contacts between these two never grant that luxury. Over many returns the transit leaves a durable trace: firsthand proof that your will does not coarsen everything it touches. You can want something, pursue it, and remain gentle the whole way through. Once you have felt that combination work, you reach for it again in the weeks that make it harder."
+ },
+ {
+  "id": "transit:mars:opposition:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "neptune",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:mars~natal_neptune:opposition"
+  ],
+  "text": "When transiting Mars opposes your natal Neptune, conflict arrives wearing a disguise, or does not quite arrive at all. For a week or two you may feel opposed without being able to point at the opponent. Cooperation goes vague, answers slide sideways, and someone's yes behaves like a no. Your energy drains into situations that never resolve into an honest disagreement. An opposition confronts you through others, and here the others are hard to bring into focus. Two cautions carry most of the week. First, resist the urge to make the fog fight fair by striking at whoever is nearest. Misdirected force is this transit's signature error, and the visible person is frequently not the source. Second, watch your own transparency, because under this aspect your motives can blur too. You may act indirectly while sincerely believing you are being plain. During the applying days, suspicion and fatigue tend to rise together. Note what you notice, and let the file thicken before you act on it. The fog is thickest while Mars stands directly opposite. Occasionally something genuinely hidden shows an edge: a misrepresentation, a quiet competitor, a promise that was never load-bearing. If it does, respond with verification rather than fire: questions, records, daylight. Fog cannot hold shape in specifics. If nothing surfaces, treat the week as weather, keep your commitments modest, and protect your rest. Vitality under this contact is easily siphoned by other people's drama and your own vigilance. As Mars separates, outlines return, and many of the week's phantoms shrink on inspection while one or two prove to have been real. Both findings are useful, and both are easier to see from the far side. Some rounds hold this opposition open for months through a retrograde, and the triple pass turns a baffling episode into a solvable one. What hides well for a week rarely hides well for a season, and the later passes tend to deliver the facts the first pass only hinted at. The rhythm underneath is Mars's usual two-year round, and each return trains the same capacities: patience with ambiguity, precision under provocation, and a steadier trust in your own perception. Learn those, and even the fog starts working for you. It slows you down exactly where slowness was the right speed."
+ }
+]

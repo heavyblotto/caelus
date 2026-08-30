@@ -1,0 +1,69 @@
+{
+  "name": "caelus-corpus",
+  "version": "0.1.0",
+  "description": "An original corpus of astrological readings: 3,056 essays bound to the Caelus interpretation layer, with the writing pipeline and prose lints that produced them.",
+  "type": "module",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "dist/src",
+    "data"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "node dist/test/validation.test.js",
+    "briefs": "node pipeline/gen-briefs.mjs",
+    "register": "node pipeline/register-sets.mjs",
+    "check:slice": "node pipeline/check-slice.mjs",
+    "check:family": "node pipeline/check-family.mjs",
+    "check:texts": "node pipeline/check-texts.mjs",
+    "backlog": "node pipeline/report-backlog.mjs",
+    "backlog:near-dupes": "node pipeline/report-near-dupes.mjs",
+    "backlog:cross-family": "node pipeline/report-cross-family.mjs",
+    "backlog:formulas": "node pipeline/report-formulas.mjs",
+    "lint:prose": "bash editorial/scripts/lint-prose.sh"
+  },
+  "license": "MIT",
+  "private": true,
+  "peerDependencies": {
+    "caelus": ">=0.25.0 <0.26"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "caelus": "^0.24.1",
+    "typescript": "^6.0.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/src/index.js"
+    },
+    "./natal": {
+      "types": "./dist/src/natal.d.ts",
+      "default": "./dist/src/natal.js"
+    },
+    "./transits": {
+      "types": "./dist/src/transits.d.ts",
+      "default": "./dist/src/transits.js"
+    },
+    "./relationship": {
+      "types": "./dist/src/relationship.d.ts",
+      "default": "./dist/src/relationship.js"
+    },
+    "./timing": {
+      "types": "./dist/src/timing.d.ts",
+      "default": "./dist/src/timing.js"
+    },
+    "./notes": {
+      "types": "./dist/src/notes.d.ts",
+      "default": "./dist/src/notes.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "keywords": [
+    "astrology",
+    "readings",
+    "interpretation"
+  ],
+  "sideEffects": false
+}

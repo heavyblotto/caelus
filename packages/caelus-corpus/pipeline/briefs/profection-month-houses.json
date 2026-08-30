@@ -1,0 +1,188 @@
+{
+ "name": "profection-month-houses",
+ "outFile": "b4-profection-month-houses.json",
+ "setId": "house-b4-profection-month-houses",
+ "family": "timelord-profection",
+ "cells": [
+  {
+   "id": "timelord:profection:month:house:1",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "month",
+    "house": 1
+   },
+   "atomIds": [
+    "profection:month:"
+   ],
+   "title": "A 1st-house profection month",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:month:house:2",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "month",
+    "house": 2
+   },
+   "atomIds": [
+    "profection:month:"
+   ],
+   "title": "A 2nd-house profection month",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:month:house:3",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "month",
+    "house": 3
+   },
+   "atomIds": [
+    "profection:month:"
+   ],
+   "title": "A 3rd-house profection month",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:month:house:4",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "month",
+    "house": 4
+   },
+   "atomIds": [
+    "profection:month:"
+   ],
+   "title": "A 4th-house profection month",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:month:house:5",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "month",
+    "house": 5
+   },
+   "atomIds": [
+    "profection:month:"
+   ],
+   "title": "A 5th-house profection month",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:month:house:6",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "month",
+    "house": 6
+   },
+   "atomIds": [
+    "profection:month:"
+   ],
+   "title": "A 6th-house profection month",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:month:house:7",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "month",
+    "house": 7
+   },
+   "atomIds": [
+    "profection:month:"
+   ],
+   "title": "A 7th-house profection month",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:month:house:8",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "month",
+    "house": 8
+   },
+   "atomIds": [
+    "profection:month:"
+   ],
+   "title": "A 8th-house profection month",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:month:house:9",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "month",
+    "house": 9
+   },
+   "atomIds": [
+    "profection:month:"
+   ],
+   "title": "A 9th-house profection month",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:month:house:10",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "month",
+    "house": 10
+   },
+   "atomIds": [
+    "profection:month:"
+   ],
+   "title": "A 10th-house profection month",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:month:house:11",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "month",
+    "house": 11
+   },
+   "atomIds": [
+    "profection:month:"
+   ],
+   "title": "A 11th-house profection month",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:month:house:12",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "month",
+    "house": 12
+   },
+   "atomIds": [
+    "profection:month:"
+   ],
+   "title": "A 12th-house profection month",
+   "bindable": true
+  }
+ ]
+}

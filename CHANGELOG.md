@@ -7,6 +7,51 @@ semver (currently 0.1.x). Numbers quoted here are as measured at release time;
 current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
+## Unreleased
+
+### Engine (`caelus`)
+
+- **Era packs.** `loadNodeData` loads Chebyshev slabs
+  `{body}_cheb.classical.json` (JPL Horizons / DE441) covering 3000 BCE to
+  1000 CE for the Sun (via Earth's slab), the Moon, Mercury, Venus, Mars,
+  Jupiter, and Saturn. Each slab ends at its modern pack's first instant.
+  `engineCapabilities` reports the chained span, −2998 to 3000. Bodies
+  without a classical pack are omitted and listed in `chart.unavailable`.
+- **`interpretationContext` grows to 27 fact kinds.** New atoms:
+  `angleContact`, `transitHouse`, `station`, `return`, `lunation`,
+  `solarPhase`, `compositeAspect`, `degree`, with matching selectors
+  (`hasDegree` included). Node aspects and the node as a transit target
+  now project; peregrine is marked on placement atoms. `enrichContextOptions`
+  projects transit houses, stations, returns, and lunations by default.
+- **Draconic.** `draconicLongitude` / `draconicChart` re-zero the zodiac at
+  the Moon's ascending node (true node by default).
+- **`VERSION`.** Runtime string constant, asserted equal to `package.json`.
+- **Vector-mode sky projection.** `skyCamera`, `radialScale`, and
+  `skyProjector` (plus `dirFromAzAlt`) for consumers that draw rather than
+  place pixels. Python mirrors (`sky_camera`, `radial_scale`, `sky_project`);
+  the skyview golden pins the pair.
+
+### Corpus (`caelus-corpus`, unpublished)
+
+Original essays written against the engine's fact atoms, lazy-loaded in the
+Playground Reading tab (`natal` / `transits` / `timing` / `relationship`
+subpaths). **`caelus-delineations-pd`** remains the published npm corpus.
+
+### Wheel (`caelus-wheel`)
+
+- **`MultiWheel`**: a rings API, up to four charts. Kundli and the
+  Playground `BiWheel` stay.
+- **EphemerisGraph** accepts `band` / `marks` / `cursor` / `accent`.
+- **`PLATE_TOKENS`**, **`PLATE_THEME`**, **`PLATE_BODY_INKS`**: an optional
+  ink palette for widget figures.
+
+### Playground widgets (`caelus-widgets`)
+
+Interactive figures mounted in the Workspace playground (no Encyclopedia
+chrome): house comparator, sky→wheel derivation, sect flip, retrograde
+scrub, and aspect dial. Figures accept an optional `theme` so the
+playground can pass `WHEEL_THEME`.
+
 ## v0.24.1 — Ship the complete tarball (wide planet packs restored)
 
 *2026-08-15*

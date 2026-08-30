@@ -1,0 +1,188 @@
+{
+ "name": "zr-l1",
+ "outFile": "b4-zr-l1.json",
+ "setId": "house-b4-zr-l1",
+ "family": "timelord-zr",
+ "cells": [
+  {
+   "id": "timelord:zr:l1:aries",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l1",
+    "sign": "Aries"
+   },
+   "atomIds": [
+    "zr:l1:"
+   ],
+   "title": "A Aries chapter (zodiacal releasing L1)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l1:taurus",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l1",
+    "sign": "Taurus"
+   },
+   "atomIds": [
+    "zr:l1:"
+   ],
+   "title": "A Taurus chapter (zodiacal releasing L1)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l1:gemini",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l1",
+    "sign": "Gemini"
+   },
+   "atomIds": [
+    "zr:l1:"
+   ],
+   "title": "A Gemini chapter (zodiacal releasing L1)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l1:cancer",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l1",
+    "sign": "Cancer"
+   },
+   "atomIds": [
+    "zr:l1:"
+   ],
+   "title": "A Cancer chapter (zodiacal releasing L1)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l1:leo",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l1",
+    "sign": "Leo"
+   },
+   "atomIds": [
+    "zr:l1:"
+   ],
+   "title": "A Leo chapter (zodiacal releasing L1)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l1:virgo",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l1",
+    "sign": "Virgo"
+   },
+   "atomIds": [
+    "zr:l1:"
+   ],
+   "title": "A Virgo chapter (zodiacal releasing L1)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l1:libra",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l1",
+    "sign": "Libra"
+   },
+   "atomIds": [
+    "zr:l1:"
+   ],
+   "title": "A Libra chapter (zodiacal releasing L1)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l1:scorpio",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l1",
+    "sign": "Scorpio"
+   },
+   "atomIds": [
+    "zr:l1:"
+   ],
+   "title": "A Scorpio chapter (zodiacal releasing L1)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l1:sagittarius",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l1",
+    "sign": "Sagittarius"
+   },
+   "atomIds": [
+    "zr:l1:"
+   ],
+   "title": "A Sagittarius chapter (zodiacal releasing L1)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l1:capricorn",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l1",
+    "sign": "Capricorn"
+   },
+   "atomIds": [
+    "zr:l1:"
+   ],
+   "title": "A Capricorn chapter (zodiacal releasing L1)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l1:aquarius",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l1",
+    "sign": "Aquarius"
+   },
+   "atomIds": [
+    "zr:l1:"
+   ],
+   "title": "A Aquarius chapter (zodiacal releasing L1)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:zr:l1:pisces",
+   "family": "timelord-zr",
+   "when": {
+    "kind": "timelord",
+    "system": "zr",
+    "level": "l1",
+    "sign": "Pisces"
+   },
+   "atomIds": [
+    "zr:l1:"
+   ],
+   "title": "A Pisces chapter (zodiacal releasing L1)",
+   "bindable": true
+  }
+ ]
+}

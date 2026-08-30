@@ -1,0 +1,233 @@
+{
+ "name": "composite-aspects-venus-2",
+ "outFile": "b3-composite-aspects-venus-2.json",
+ "setId": "house-b3-composite-aspects-venus-2",
+ "family": "composite-aspect",
+ "cells": [
+  {
+   "id": "composite:aspect:venus:conjunction:uranus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "uranus",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:venus~uranus:conjunction"
+   ],
+   "title": "Composite Venus conjunct composite Uranus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:sextile:uranus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "uranus",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:venus~uranus:sextile"
+   ],
+   "title": "Composite Venus sextile composite Uranus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:square:uranus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "uranus",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:venus~uranus:square"
+   ],
+   "title": "Composite Venus square composite Uranus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:trine:uranus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "uranus",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:venus~uranus:trine"
+   ],
+   "title": "Composite Venus trine composite Uranus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:opposition:uranus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "uranus",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:venus~uranus:opposition"
+   ],
+   "title": "Composite Venus opposite composite Uranus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:conjunction:neptune",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "neptune",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:venus~neptune:conjunction"
+   ],
+   "title": "Composite Venus conjunct composite Neptune",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:sextile:neptune",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "neptune",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:venus~neptune:sextile"
+   ],
+   "title": "Composite Venus sextile composite Neptune",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:square:neptune",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "neptune",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:venus~neptune:square"
+   ],
+   "title": "Composite Venus square composite Neptune",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:trine:neptune",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "neptune",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:venus~neptune:trine"
+   ],
+   "title": "Composite Venus trine composite Neptune",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:opposition:neptune",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "neptune",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:venus~neptune:opposition"
+   ],
+   "title": "Composite Venus opposite composite Neptune",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:conjunction:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "pluto",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:venus~pluto:conjunction"
+   ],
+   "title": "Composite Venus conjunct composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:sextile:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "pluto",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:venus~pluto:sextile"
+   ],
+   "title": "Composite Venus sextile composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:square:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "pluto",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:venus~pluto:square"
+   ],
+   "title": "Composite Venus square composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:trine:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "pluto",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:venus~pluto:trine"
+   ],
+   "title": "Composite Venus trine composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:opposition:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "pluto",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:venus~pluto:opposition"
+   ],
+   "title": "Composite Venus opposite composite Pluto",
+   "bindable": true
+  }
+ ]
+}

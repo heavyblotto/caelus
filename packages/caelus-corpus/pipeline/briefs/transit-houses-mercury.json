@@ -1,0 +1,176 @@
+{
+ "name": "transit-houses-mercury",
+ "outFile": "b2-transit-houses-mercury.json",
+ "setId": "house-b2-transit-houses-mercury",
+ "family": "transit-house",
+ "cells": [
+  {
+   "id": "transit:mercury:house:1",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "mercury",
+    "house": 1
+   },
+   "atomIds": [
+    "transitHouse:mercury:1"
+   ],
+   "title": "Mercury moving through your 1st house",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:house:2",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "mercury",
+    "house": 2
+   },
+   "atomIds": [
+    "transitHouse:mercury:2"
+   ],
+   "title": "Mercury moving through your 2nd house",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:house:3",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "mercury",
+    "house": 3
+   },
+   "atomIds": [
+    "transitHouse:mercury:3"
+   ],
+   "title": "Mercury moving through your 3rd house",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:house:4",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "mercury",
+    "house": 4
+   },
+   "atomIds": [
+    "transitHouse:mercury:4"
+   ],
+   "title": "Mercury moving through your 4th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:house:5",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "mercury",
+    "house": 5
+   },
+   "atomIds": [
+    "transitHouse:mercury:5"
+   ],
+   "title": "Mercury moving through your 5th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:house:6",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "mercury",
+    "house": 6
+   },
+   "atomIds": [
+    "transitHouse:mercury:6"
+   ],
+   "title": "Mercury moving through your 6th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:house:7",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "mercury",
+    "house": 7
+   },
+   "atomIds": [
+    "transitHouse:mercury:7"
+   ],
+   "title": "Mercury moving through your 7th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:house:8",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "mercury",
+    "house": 8
+   },
+   "atomIds": [
+    "transitHouse:mercury:8"
+   ],
+   "title": "Mercury moving through your 8th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:house:9",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "mercury",
+    "house": 9
+   },
+   "atomIds": [
+    "transitHouse:mercury:9"
+   ],
+   "title": "Mercury moving through your 9th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:house:10",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "mercury",
+    "house": 10
+   },
+   "atomIds": [
+    "transitHouse:mercury:10"
+   ],
+   "title": "Mercury moving through your 10th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:house:11",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "mercury",
+    "house": 11
+   },
+   "atomIds": [
+    "transitHouse:mercury:11"
+   ],
+   "title": "Mercury moving through your 11th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:house:12",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "mercury",
+    "house": 12
+   },
+   "atomIds": [
+    "transitHouse:mercury:12"
+   ],
+   "title": "Mercury moving through your 12th house",
+   "bindable": true
+  }
+ ]
+}

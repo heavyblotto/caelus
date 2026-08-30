@@ -26,8 +26,8 @@ ephemeris (imaginary bodies with placement, periodic, and Kepler motion —
 register on Engine for returns, transits, and SkyView with authored render
 attrs); event search
 (rise/set/meridian transits,
-zodiac crossings, lunar phases, stations, solar/lunar eclipses). Higher layers: derived charts (returns, progressions, solar arc, composite, Davison, harmonics, antiscia, declination aspects, dignities, sect), electional primitives (applying/separating, combustion/cazimi, planetary hours, void-of-course Moon, house placement), the when() declarative query engine, the turbo longitude tier, and scan/rankMoments ranked time search, the 3D great-circle aspect (angularSeparation3d), astrocartography angle lines, ephemeris time series, a chart feature space with configuration search (chart-to-vector, cosine similarity, searchConfigurations), and a geometric compiler that inverts geometric constraints to a chart form and flags impossible ones. engine.chart(year,month,day,hour,min,sec,lat,lonEast,opts) takes calendar fields in UT (not a Julian Day); engine.chartAt(jdUt,lat,lonEast,opts) builds the same chart directly from a Julian Day. Supported range 1000-3000 (validated vs JPL Horizons; the embedded npm
-Moon tier is 1920-2080, analytic series outside). Verified per-body vs Swiss Ephemeris over the modern era, vs JPL over the wide span: Sun-Saturn
+zodiac crossings, lunar phases, stations, solar/lunar eclipses). Higher layers: derived charts (returns, progressions, solar arc, composite, Davison, harmonics, antiscia, draconic, declination aspects, dignities, sect), electional primitives (applying/separating, combustion/cazimi, planetary hours, void-of-course Moon, house placement), the when() declarative query engine, the turbo longitude tier, and scan/rankMoments ranked time search, the 3D great-circle aspect (angularSeparation3d), astrocartography angle lines, ephemeris time series, a chart feature space with configuration search (chart-to-vector, cosine similarity, searchConfigurations), and a geometric compiler that inverts geometric constraints to a chart form and flags impossible ones. engine.chart(year,month,day,hour,min,sec,lat,lonEast,opts) takes calendar fields in UT (not a Julian Day); engine.chartAt(jdUt,lat,lonEast,opts) builds the same chart directly from a Julian Day. Supported range 1000-3000 on the embedded/modern packs (validated vs JPL Horizons; the embedded npm
+Moon tier is 1920-2080, analytic series outside). The Node loader's classical era slabs extend the Sun, Moon, Mercury, Venus, Mars, Jupiter, and Saturn to −2998–3000. Verified per-body vs Swiss Ephemeris over the modern era, vs JPL over the wide span: Sun-Saturn
 <=1", Uranus <=1.9", Neptune <=4.6", Moon <=2.5", Pluto <=3.4"
 (Chebyshev pack), Chiron <=1", mean node <=1", true node <= 1' vs SE's
 built-in ephemeris, mean lilith <=1.6", the 8 new
@@ -38,15 +38,21 @@ Repo: https://github.com/heavyblotto/caelus
 
 - caelus@0.24.1 — the engine
 - caelus-birth@0.24.1 — local birth time + place -> UT (use this; see below)
-- caelus-wheel@0.24.1 — React SVG chart wheel, plus ChartSphere (3D), AstroMap (astrocartography), EphemerisGraph
+- caelus-wheel@0.24.1 — React SVG chart wheel, plus MultiWheel (up to four rings), ChartSphere (3D), AstroMap (astrocartography), EphemerisGraph (band/marks/cursor)
 - caelus-mcp@0.24.1 — MCP server, 35 chart tools over stdio (natal_chart, current_sky, transits, synastry, parans, find_aspect_dates, sky_events, sky_view, sky_view_sequence, synthetic_validate, synthetic_positions, synthetic_sky_view, rectification_grid, planetary_hours, void_of_course, returns, progressions, composite, dignities, lots, profections, firdaria, releasing, directions, nakshatras, dasha, vargas, yogas, aspect_patterns, chart_signature, similar_skies, electional_search, cosmic_weather, chart_facts, counterfactual_chart); also hosted over MCP Streamable HTTP (stateless) at https://www.ephemengine.com/api/mcp; listed on the official MCP Registry as io.github.heavyblotto/caelus-mcp
 - caelus-delineations-pd@0.1.5 — public-domain interpretation corpus (374 cited passages) for interpret(); sources and publicDomainSources
 - caelus-engine (PyPI) — the Python reference engine (no numpy), https://pypi.org/project/caelus-engine/
 
-Interpretation layer: interpretationContext() -> ranked citable fact atoms;
-enrichContextOptions() / enrichSynastryOptions() add transits, time-lords,
-synastry/composite, finer dignities, nakshatra/varga/yoga; chartBrief() +
-auditCitations() for LLM grounding. Docs: https://www.ephemengine.com/docs/interpretation
+Interpretation layer: interpretationContext() -> ranked citable fact atoms
+across 27 kinds (placements, aspects, patterns, signature, angles and planets
+on them, dispositors, receptions, stars, lots, degree, transits by aspect and
+by house, stations, returns in progress, lunations and eclipses in the natal
+houses, solar phase, synastry, composite and composite aspects, time-lords,
+fine dignities, nakshatra/varga/yoga, parallels, out-of-bounds);
+enrichContextOptions() / enrichSynastryOptions() wire the diachronic and
+two-chart layers; chartBrief() + auditCitations() for LLM grounding.
+Playground readings use unpublished caelus-corpus; caelus-delineations-pd
+remains the published npm reference. Docs: https://www.ephemengine.com/docs/interpretation
 
 ## Entry points
 

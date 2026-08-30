@@ -1,0 +1,233 @@
+{
+ "name": "transits-sun-2",
+ "outFile": "b2-transits-sun-2.json",
+ "setId": "house-b2-transits-sun-2",
+ "family": "transit-aspect",
+ "cells": [
+  {
+   "id": "transit:sun:conjunction:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "venus",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:sun~natal_venus:conjunction"
+   ],
+   "title": "Transiting Sun conjunct your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:sextile:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "venus",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:sun~natal_venus:sextile"
+   ],
+   "title": "Transiting Sun sextile your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:square:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "venus",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:sun~natal_venus:square"
+   ],
+   "title": "Transiting Sun square your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:trine:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "venus",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:sun~natal_venus:trine"
+   ],
+   "title": "Transiting Sun trine your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:opposition:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "venus",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:sun~natal_venus:opposition"
+   ],
+   "title": "Transiting Sun opposite your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:conjunction:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "mars",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:sun~natal_mars:conjunction"
+   ],
+   "title": "Transiting Sun conjunct your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:sextile:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "mars",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:sun~natal_mars:sextile"
+   ],
+   "title": "Transiting Sun sextile your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:square:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "mars",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:sun~natal_mars:square"
+   ],
+   "title": "Transiting Sun square your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:trine:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "mars",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:sun~natal_mars:trine"
+   ],
+   "title": "Transiting Sun trine your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:opposition:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "mars",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:sun~natal_mars:opposition"
+   ],
+   "title": "Transiting Sun opposite your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:conjunction:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "jupiter",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:sun~natal_jupiter:conjunction"
+   ],
+   "title": "Transiting Sun conjunct your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:sextile:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "jupiter",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:sun~natal_jupiter:sextile"
+   ],
+   "title": "Transiting Sun sextile your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:square:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "jupiter",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:sun~natal_jupiter:square"
+   ],
+   "title": "Transiting Sun square your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:trine:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "jupiter",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:sun~natal_jupiter:trine"
+   ],
+   "title": "Transiting Sun trine your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:opposition:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "sun",
+    "natal": "jupiter",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:sun~natal_jupiter:opposition"
+   ],
+   "title": "Transiting Sun opposite your natal Jupiter",
+   "bindable": true
+  }
+ ]
+}

@@ -1,0 +1,227 @@
+[
+ {
+  "id": "natal:aspect:jupiter:conjunction:saturn",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "jupiter",
+   "b": "saturn",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "aspect:jupiter~saturn:conjunction",
+   "aspect:saturn~jupiter:conjunction"
+  ],
+  "text": "Jupiter conjunct Saturn fuses the urge to grow with the instinct to limit, and in you they act as one drive. You want more from life, and you want whatever you gain to hold up under weight. So hope never arrives alone. Every enthusiasm comes pre-inspected, every plan already carrying its own audit, and this makes you a builder in the oldest sense: someone who expands slowly, on foundations, and rarely has to tear anything down. Astrologers have long treated this pairing as the signature of serious accomplishment, the kind that takes a decade and then lasts three more. In work, you tend to distrust quick wins and feel almost physically uneasy around hype. You would rather grow a thing at the pace it can actually bear, and colleagues learn that your yes means yes, because you already said no to yourself twice before offering it. The inner cost is a certain heaviness around optimism itself. Joy can feel like a claim you have to justify, and there may be seasons when you cannot tell whether you are being prudent or just afraid, since the two speak in the same voice inside you. You may also notice a rhythm of expansion and consolidation running through your life in long waves: a few years of reaching, a few years of securing what you reached. Money usually matters to you as structure rather than pleasure, something to be engineered rather than enjoyed, and you can be generous in practice while still feeling poor in imagination. In love, you commit the way you build, cautiously and then completely, and you are drawn to people whose word holds. What can trip you is doubting your own good fortune, negotiating yourself down before life has even made an offer. The growth here comes from learning when each half should lead. There are moments that call for the surveyor and moments that call for the sail, and you carry both. As you get better at telling them apart, the doubt stops taxing the hope and starts protecting it, and what you build begins to have not just endurance but height."
+ },
+ {
+  "id": "natal:aspect:jupiter:sextile:saturn",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "jupiter",
+   "b": "saturn",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "aspect:jupiter~saturn:sextile",
+   "aspect:saturn~jupiter:sextile"
+  ],
+  "text": "You have a workable peace between hope and caution, and it shows up as good judgment whenever you actually use it. Jupiter sextile Saturn is an aptitude rather than a guarantee: a knack for telling a real opportunity from a shiny one, for sensing how much weight a plan can carry, for growing things at a sustainable pace. The tradition reads this aspect as the mark of the sound advisor and the honest dealer, the person whose optimism has a spine. When you engage a project, you tend to see both what it could become and what it will cost, and you can hold those two pictures without either one canceling the other. That is rarer than it sounds. In practical life it makes you good with commitments: you take on what you can finish, you pay what you owe, and people extend you trust early because something in your manner says you have done the arithmetic. Work that rewards patience and integrity suits you, and you often do well as the bridge between dreamers and skeptics, translating each side to the other without condescending to either. Since a sextile answers only when called, the risk is simple neglect. This is not a talent that forces itself on you. You can coast for years on moderate expectations, never testing how far your particular mix of nerve and discipline could take you, and from the outside it just looks like a sensible life. The invitation is to give the aptitude real material: a goal large enough to require both your daring and your patience, not one or the other. In relationships you offer steadiness without dullness, and you tend to be the person friends consult before a big decision, because you neither inflate their hopes nor puncture them. Your own decisions benefit from the same treatment; when you consciously ask yourself both questions, what would growth look like and what would it cost, the answers come with unusual clarity. Over time, using this faculty strengthens it. Each measured risk that works out teaches you the difference between confidence and luck, and you gradually become what this aspect promises: someone whose word about the future is worth taking seriously, including your own word to yourself."
+ },
+ {
+  "id": "natal:aspect:jupiter:square:saturn",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "jupiter",
+   "b": "saturn",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "aspect:jupiter~saturn:square",
+   "aspect:saturn~jupiter:square"
+  ],
+  "text": "An accelerator and a brake share one pedal in you. Jupiter square Saturn sets your appetite for growth against your fear of loss, and the two take turns interrupting each other: you reach for something bigger, then a voice asks who you think you are; you settle for the safe path, then a restlessness starts complaining that life was supposed to be more than this. The friction is real, and it recurs. Astrologers have long noted the stop-and-go rhythm of this square, seasons of push followed by seasons of doubt, opportunities that arrive at awkward times, authority figures or circumstances that seem to check you exactly when you are gaining speed. It can feel like bad luck. It is closer to strength training. Each round of the cycle is asking you the same question: is this hope realistic, and is this fear? Answering it honestly, case by case, is how the aspect matures. In work, the pattern often shows as either chronic underselling, where you take positions beneath your ability because they feel defensible, or periodic overreach, where frustration builds until you bet too much at once. Money can carry the same alternation, thrift then splurge, and timing is frequently the sore point: you may feel perpetually early or late, rarely on schedule. Inwardly, the square can breed a quiet resentment toward people for whom things seem easy, and a suspicion that joy must be paid for in advance. It helps to know that neither voice in you is the enemy. The expansive one holds your future; the restrictive one holds your ground; the pain comes only from letting them fight instead of consult. People with this square, once seasoned, often out-build everyone around them, precisely because their confidence has been argued with for decades and what survives the argument is solid. In love, you may test good things for flaws or hold back from happiness that feels unearned, and part of your growing up is letting something be simply given. What this friction builds, slowly, is a rare capacity: ambition with brakes that work, caution that can still say yes. When the two finally drive together, you stop lurching and start climbing, and the ground you take, you keep."
+ },
+ {
+  "id": "natal:aspect:jupiter:trine:saturn",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "jupiter",
+   "b": "saturn",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "aspect:jupiter~saturn:trine",
+   "aspect:saturn~jupiter:trine"
+  ],
+  "text": "Patience and optimism cooperate in you without being asked. Jupiter trine Saturn is one of the quieter gifts a chart can hold: an inborn sense of proportion, a feel for how much is enough, how fast is sustainable, and which promises are worth making. Where other people swing between inflation and contraction, you tend to sit naturally near the true size of things. The tradition associates this trine with steady advancement, sound reputation, and the kind of practical wisdom that seems older than its owner. You probably take it for granted, which is the one hazard of the aspect. Ease this deep becomes invisible. You may assume everyone can wait two years for a result without losing faith, or hold a hope without gripping it, and then feel privately puzzled by the drama around you. In work, you are the person structures relax around: budgets balance, timelines hold, and growth happens without crisis, so much so that your contribution can be underrated, since prevented disasters leave no evidence. You are often trusted with responsibility young, and you carry it without much fuss. With money, your instinct runs toward moderation, spending that matches means, saving without misering, and this alone spares you troubles that consume other lives. In relationships, you bring a settling presence. Partners and friends borrow your calm, and you make loyalty look easy because for you it mostly is. The subtle risk of all this smoothness is unexamined ambition, or rather the lack of it. A trine does not push. You can live comfortably inside what already works and never find out what your judgment could accomplish under real load, arriving late in life respected, solvent, and faintly haunted by scale you never attempted. The growth belonging to this aspect is deliberate stretch: choosing, on purpose, a project slightly too large, precisely because nothing in your circumstances forces you to. Your gift was never comfort; it is trustworthy judgment, and judgment earns its keep on hard terrain. When you carry your natural balance into ambitious country, you become something genuinely uncommon: a person who can grow things large without growing them hollow, and whose success, when it comes, surprises no one who watched how it was built."
+ },
+ {
+  "id": "natal:aspect:jupiter:opposition:saturn",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "jupiter",
+   "b": "saturn",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "aspect:jupiter~saturn:opposition",
+   "aspect:saturn~jupiter:opposition"
+  ],
+  "text": "Two weathers take turns in your life: one expansive and promising, one lean and demanding, and you can feel like a different person under each. Jupiter opposite Saturn stretches hope and caution to opposite ends of a rope, and the tug of war rarely stays inside you. Oppositions tend to get lived out through other people, so you may keep finding yourself paired with your missing half: the cautious partner who dampens your plans, the reckless friend who alarms your prudence, the boss who blocks your growth or the dependent who leans on your discipline. It is worth noticing how often the other person is playing a part you disowned. When you identify with the hopeful side, the world seems full of wet blankets; when you identify with the careful side, it seems full of gamblers, and in both cases the tension you meet outside is your own. The classic expression is a pendulum: a phase of confident overcommitment, then a corrective phase of retrenchment and doubt, each swing seeded by the excesses of the last. Careers under this aspect often zigzag between security and adventure, and the discontent is strangely symmetrical, since the safe job feels like a cage and the free one feels like a cliff. Money can follow the same arc, generous seasons and anxious ones. In close relationships, the negotiation is constant and valuable: how much risk, how much reserve, whose faith gets to set the budget. Handled poorly, this becomes a lifetime of blaming partners for either holding you back or dragging you forward. Handled well, it becomes the very thing that matures you, because the person opposite you keeps you honest about the half of the truth you prefer to forget. The aspect asks for a middle you have to construct rather than inherit. That means letting hope and doubt into the same room at the same time, making plans large enough to inspire you and specific enough to survive audit. People who season this opposition often end up with an unusual gift for counsel, able to sit with both the dreamer and the worrier because they have hosted both for years. The rope never fully goes slack, but you stop being pulled by it. You start using it, the way a climber does, as the thing that lets you go higher than balance alone ever could."
+ },
+ {
+  "id": "natal:aspect:jupiter:conjunction:uranus",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "jupiter",
+   "b": "uranus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "aspect:jupiter~uranus:conjunction",
+   "aspect:uranus~jupiter:conjunction"
+  ],
+  "text": "In you, the taste for growth and the taste for freedom are the same taste. Jupiter conjunct Uranus welds expansion to disruption, and the result is a person for whom opportunity and upheaval arrive as one package, often suddenly, often sideways, and often welcome. The tradition calls this the aspect of the lucky break: doors that open without warning, reversals of fortune that land in your favor, the sense that your life advances by jumps rather than steps. There is truth in the reputation, though the mechanism is not magic. You say yes to the unscheduled thing. Where others see interruption, you see invitation, and a life that keeps accepting invitations collects more windfalls than one that guards its calendar. Your beliefs behave the same way. You hold opinions with enthusiasm and revise them without grief, and you are drawn to the frontier of whatever field you enter: the new method, the heresy that turns out to be early rather than wrong. Convention bores you at a level you cannot argue yourself out of, and this shapes your work life more than any plan does. Jobs with fixed ceilings and fixed procedures tend to eject you, or you them, sometimes abruptly, and your best environments are the ones that reward experiment and forgive irregularity. The costs are the mirror of the gifts. Restlessness can shade into a compulsion to overturn things just as they stabilize, and your faith in the next horizon can leave a trail of half-grown ventures behind you. Gambling, literal or structural, tempts this aspect, because the memory of past lightning makes you overestimate its frequency. In relationships, you need room the way others need reassurance, and you pair best with people who find your suddenness refreshing rather than frightening; anyone who tries to schedule you completely will meet the exit you always keep oiled. What matures here is selectivity. Not every revolution deserves you, and not every stable thing is a prison. As you learn to tell your genuine breakthroughs from mere restlessness in costume, the leaps get larger and land better, and the luck that once seemed to strike you at random starts to look like what it always was: a fast eye, an open hand, and the nerve to move when the window opens."
+ },
+ {
+  "id": "natal:aspect:jupiter:sextile:uranus",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "jupiter",
+   "b": "uranus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "aspect:jupiter~uranus:sextile",
+   "aspect:uranus~jupiter:sextile"
+  ],
+  "text": "New things find you early, when you let them. Jupiter sextile Uranus gives you a live antenna for the idea, the tool, or the person that is about to matter. It also gives you enough optimism to act on the signal before the crowd confirms it. This is an aptitude, not a fate: the aspect responds when used and sleeps when ignored. Used, it looks like this. You hear about something odd, and you get curious instead of dismissive. You try it, and six months later people ask how you got so far ahead. The tradition links this sextile to progress through friends, networks, and fortunate introductions, and there is usually a social texture to your luck. Your openings tend to arrive through people: the acquaintance who mentions the job, the stranger at the edge of your circle who becomes the hinge of a whole chapter. You keep a wide and mixed acquaintance because sameness bores you mildly and difference feeds you. Your mind pairs breadth with a tolerance for the untested. You can entertain a strange idea without swallowing it whole or spitting it out. That makes you a good early judge of anything new, and colleagues learn to run their wild notions past you first. Work that involves improvement, reform, technology, or teaching the new to the hesitant suits you well. The quiet risk is dabbling. Because insight comes cheap to you, you may never pay the price of depth. You can sample every fresh thing and master none, a scattering that feels like openness from the inside. The aspect also will not rescue you from inertia. If your life calcifies into routine, this gift simply idles, and you may feel an unexplained flatness, the boredom of an unused sense. In love and friendship you offer curiosity and space. You want to know who someone is becoming rather than freezing them at who they were, and you are easy to grow next to for exactly that reason. Growth here is a practice of follow-through: picking the few novelties worth building on, and staying past the interesting part into the useful part. Each time you do, intuition compounds into judgment. Your knack for the future then becomes more than a party trick. It becomes a way of living slightly ahead of your time without ever losing your footing in it."
+ },
+ {
+  "id": "natal:aspect:jupiter:square:uranus",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "jupiter",
+   "b": "uranus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "aspect:jupiter~uranus:square",
+   "aspect:uranus~jupiter:square"
+  ],
+  "text": "Something in you is always about to outgrow the room. Jupiter square Uranus sets your hunger for more against your intolerance of constraint, and the two amplify each other into a recurring itch: the conviction that the real life, the bigger life, is one bold move away, and that whatever currently contains you is the problem. The friction is genuine and it repeats. You build something, it starts to hold you, you feel the walls, and the urge arrives to blow the doors off rather than widen them. Astrologers describe this square as impatience with genius in it, and both words earn their place. The impatience shows as overreach: promises that outrun capacity, sudden exits timed by mood rather than sense, bets sized by excitement rather than arithmetic. Windfall-and-setback cycles are classic here, and so is a certain allergy to being advised, since counsel can feel like just another fence. But the genius is real too. The same pressure that makes you restless makes you original; you see past current arrangements easily, and some of your leaps, even the badly timed ones, land somewhere no careful person would have reached. Work life under this square often zigzags. You may change directions abruptly and more than once, and the pattern only looks chaotic until you notice what it was doing: each break taught you the difference between freedom and escape, which are identical at the moment of jumping and opposite afterward. Escape returns you to the same itch in a new room; freedom actually enlarges you. Learning to tell them apart before you leap, not after, is the square's whole curriculum. In relationships, the pattern can show as a fear that commitment means shrinkage, so you keep one foot out of even good things, or provoke instability when closeness starts to feel like capture. The people who last with you neither cage you nor chase you. Inwardly, the work is with timing: the impulse itself is often right and early rather than wrong, and a delay of weeks can turn a reckless move into a brilliant one. As that discipline develops, this square becomes one of the most productive angles in astrology. The restlessness stops demolishing your progress and starts powering it, and you end up living the enlarged life you kept sensing, built rather than escaped into."
+ },
+ {
+  "id": "natal:aspect:jupiter:trine:uranus",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "jupiter",
+   "b": "uranus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "aspect:jupiter~uranus:trine",
+   "aspect:uranus~jupiter:trine"
+  ],
+  "text": "Change has always been kind to you, which is rarer than you think. Jupiter trine Uranus gives an easy alliance between optimism and the unexpected: where most people brace when life swerves, you lean in, and the swerve keeps rewarding you for it. The tradition credits this trine with sudden good fortune, timely rescues, and an almost suspicious knack for being in the right place when the surprising thing happens. From inside, it feels less like luck than like temperament. Novelty does not threaten you, so you stay relaxed in situations that rattle others, and relaxed people notice openings that clenched people miss. You take the last-minute seat that turns into the key introduction; you shrug at the canceled plan and the replacement turns out better. Your thinking has the same weather. You update beliefs without a crisis, hold your opinions with a light grip, and enjoy being shown you were wrong, which makes you unusually pleasant to disagree with. Freedom matters to you, but without the fever it carries in harder aspects; you simply arrange a life with slack in it and rarely have to fight for room. In work, you do well wherever fields are moving, since upheaval that costs colleagues their footing tends to hand you your next chapter, and you often serve as the calm one in a storm, the person who can already see how the disruption might be useful. Passivity dressed as trust is the one costume that fits you too well. Because fortune has repeatedly caught you, you may under-plan, under-commit, and drift on the assumption that something interesting will turn up. It usually does, and that is the trap: a life of pleasant surprises can quietly substitute for a life of chosen direction, leaving your originality scattered across lucky episodes instead of gathered into a body of work. There can also be a subtle detachment in relationships, a breeziness about bonds that others experience as weightlessness, since you trust so readily that things work out. The growth here is intention. Ease this reliable is not a reason to want less; it is capital, and capital wants investing. When you point your comfort with the unknown at something deliberate, a craft, a cause, a person, you keep all the lightness and gain what pure luck never gives: a direction the surprises can add up along."
+ },
+ {
+  "id": "natal:aspect:jupiter:opposition:uranus",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "jupiter",
+   "b": "uranus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "aspect:jupiter~uranus:opposition",
+   "aspect:uranus~jupiter:opposition"
+  ],
+  "text": "Disruption keeps arriving in your life wearing other people's faces. Jupiter opposite Uranus stretches the wish to grow and the wish to break free across a divide. Like most oppositions, it tends to get staged externally. There is the erratic friend who upends your plans, the brilliant partner who cannot be pinned down. There is the group or cause that sweeps you up, then asks more allegiance than you meant to give. Somebody in your story is usually playing the wild card. Whenever the disruption feels entirely inflicted, it is worth asking how much of it you invited, and which half of the tug you have outsourced. The inner shape of the aspect is a swing between joining and bolting. You are drawn to shared enthusiasms, movements, and ventures with other people at their center, and you throw yourself in with real generosity. Then the belonging starts to bind. Your independence flares, and you swing out again, often abruptly, sometimes burning a bridge that deserved better. Or you live the reverse casting: you are the steady believer repeatedly startled by defectors and rebels, never noticing that you keep choosing them. Careers under this opposition often feature sudden reversals tied to other people's decisions. A backer withdraws, or a wave you rode breaks early. The lesson is less about caution than about diversified faith: not betting your whole future on one exciting person or one thrilling premise. Beliefs themselves see-saw here, from fervent conviction to sharp disillusion and on to the next conviction. Part of your maturing is letting a belief be partly true. You keep what held up instead of trading the whole set each time. In love, the negotiation is between adventure and reliability. You may keep meeting partners who embody whichever one you have disowned this decade. The gift hidden in the pattern is perspective. You have stood at both ends, the joiner and the leaver, the enthusiast and the skeptic. That history gives you an unusual ability to see any commitment from outside and inside at once. When you finally hold your own tension instead of hiring others to carry half of it, the swings slow down. Relationships and ventures get room built in. Freedom stops requiring exits, and growth no longer needs a rupture to begin."
+ },
+ {
+  "id": "natal:aspect:jupiter:conjunction:neptune",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "jupiter",
+   "b": "neptune",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "aspect:jupiter~neptune:conjunction",
+   "aspect:neptune~jupiter:conjunction"
+  ],
+  "text": "Faith runs wide in you, wider than evidence and often wider than sense, and it is the most important thing about you. Jupiter conjunct Neptune joins the planet of belief to the planet of the boundless, and the two act as a single instinct: a pull toward the ideal, the compassionate, the more-than-material, felt not as an opinion but as a homing signal. The tradition names this the visionary's aspect, found in mystics, artists, humanitarians, and dreamers of every scale, and its keynote is longing. Some part of you is permanently homesick for a better world, and everything you build, join, or love gets measured against that unbuilt place. The gifts are real and unusual. Your imagination is generous; you can conceive of possibilities others cannot, and your sympathy extends past its natural borders, to strangers, animals, people everyone else has written off. You give without keeping books, and in your best hours you make the people near you feel that life is larger and kinder than they had assumed. The liabilities are the same currents unbanked. Discernment is the missing organ: you can pour devotion into unworthy vessels, gurus, schemes, causes, and lovers, because your faith responds to the size of a promise rather than its soundness. Practical detail can feel like sacrilege, so plans stay glorious and unbuilt, and money tends to evaporate through generosity and inattention rather than vice. Disappointment is the recurring weather, since no actual job, church, or person can be the shining thing you sensed, and there is a temptation, when the world falls short, to blur it, through fantasy, avoidance, or whatever softens edges. In love you idealize first and meet the person later, and the meeting is where the relationship actually starts, if you stay for it. Your growth is not the shrinking of your faith; it is the anchoring of it. Vision needs a body, a schedule, a budget, a Tuesday. The masters of this aspect are not the ones who dreamed less but the ones who learned carpentry, who let the ideal descend into one particular, imperfect, finished thing at a time. Do that, and the longing stops being an ache and becomes a compass, and some fraction of the world you keep homesick for gets built, by you, here."
+ },
+ {
+  "id": "natal:aspect:jupiter:sextile:neptune",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "jupiter",
+   "b": "neptune",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "aspect:jupiter~neptune:sextile",
+   "aspect:neptune~jupiter:sextile"
+  ],
+  "text": "There is a well of imagination and easy sympathy in you that produces whenever you draw from it, and stays quiet when you do not. Jupiter sextile Neptune is a cooperative angle between hope and dream. Your idealism and your practicality are on speaking terms, so you can feel the pull of the transcendent without losing the thread of the actual. The tradition reads this sextile as a gift for kindness, creative work, and quiet spiritual depth, the sort that shows in conduct rather than sermons. Compassion comes naturally to you, and crucially it comes with proportion. You can feel for someone without drowning in them, help without being consumed, believe without being swindled. That combination makes you genuinely useful where softer-hearted and harder-headed people both fail. Others confide in you easily, sensing that you will neither judge them nor dissolve into their trouble. Imagination is your working tool as much as your refuge. Ideas arrive as images and intuitions, and you have a talent for making the abstract feel real to other people. This serves you in any field that trades in meaning: the arts, teaching, healing work, causes. It also serves the unofficial role you often hold, the person who keeps a group's spirit alive. Your inner life carries a durable, unforced faith, an assumption that existence is fundamentally friendly. That assumption steadies you in bad seasons, and it quietly steadies everyone downstream of you. Because a sextile only answers when asked, the risk is a pleasant dormancy. This aptitude does not insist. You can live an entire sensible life with the well capped, feeling only an occasional unexplained thirst, a flatness that no achievement quite fixes. That thirst deserves attention. It is not a flaw in your life but an unused capacity announcing itself. In love, you bring tenderness and a touch of the romantic without losing yourself in either. Partners often find that being believed in by you makes them better. Your growth runs through regular practice: making, giving, contemplating, whatever form your particular water takes, done routinely rather than waiting for inspiration. Drawn from steadily, the well deepens. What begins as a pleasant streak of kindness and fancy matures into something rarer. It becomes a settled generosity of vision that feeds your work, your people, and the parts of you that facts alone were never going to feed."
+ },
+ {
+  "id": "natal:aspect:jupiter:square:neptune",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "jupiter",
+   "b": "neptune",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "aspect:jupiter~neptune:square",
+   "aspect:neptune~jupiter:square"
+  ],
+  "text": "Hope and illusion sit so close together in you that for a long time they are indistinguishable. Telling them apart becomes the work of your life. Jupiter square Neptune rubs the urge to believe against the fog that belief can generate. The friction shows as a repeating cycle: enchantment, overextension, disillusion, and, after a while, re-enchantment somewhere new. You fall for things the way other people fall for people. The object might be a cause, a teacher, a venture, a theory, or a move to another city that promises to make everything cohere. While the spell holds, your commitment is beautiful and total. Then details surface that were always there, and the glow drains. You are left embarrassed by your own past certainty, swearing off dreams entirely. That never lasts, because dreaming is your native function, and cynicism sits on you like a borrowed coat. The classic warnings for this square are practical ones. Promises get made in the glow that the sober self must pay for. Money leaks away through schemes and through generosity aimed at the undeserving. Fine print goes unread, because scrutiny feels like a betrayal of faith. Escapism is the other pressure. When reality disappoints, anything that blurs it can start to look like mercy. Part of your maturity is noticing your own preferred fogs, whatever they are, and how they bill you later. Your instinct is not broken. What the square builds, through every round of the cycle, is discernment. Discernment is a higher faculty than either credulity or doubt. Each disillusionment, examined instead of fled, teaches you one more marker of the counterfeit. Slowly you become what this aspect makes at its best: a person of tested faith, hard to fool and yet still soft, still generous, still willing. In love, you will likely idealize early and grieve accurately later. The turning point comes when you discover that the real person, seen clearly, can be loved more sturdily than the shimmer ever was. The same discovery scales to everything. The world seen clearly is poorer than your visions and more trustworthy. Your gift is to keep loving it anyway, building modest real versions of the splendid things you imagine. That is the square resolved: not smaller dreams, but dreams with foundations, and a believer nobody can con."
+ },
+ {
+  "id": "natal:aspect:jupiter:trine:neptune",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "jupiter",
+   "b": "neptune",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "aspect:jupiter~neptune:trine",
+   "aspect:neptune~jupiter:trine"
+  ],
+  "text": "Generosity is your resting state. Jupiter trine Neptune blends faith and compassion so smoothly that you may never have noticed them as traits; they feel to you like how everyone must be, which is your first misreading of the world. Not everyone extends the benefit of the doubt by reflex. Not everyone feels a stranger's trouble in their own chest, gives without tallying, or carries a background trust that life means well. You do, and the tradition regards this trine as one of the kindest aspects in astrology, linked to grace, protection, charitable instinct, and a soul that stays unhardened by experience. The texture of the gift is ease. Your idealism does not fight your life; it soaks through it. You lend, forgive, include, and console without effort, and people leave your company feeling slightly better about the species. There is often a fortunate quality around you too, help arriving unlooked-for, harm passing by, and astrologers have long noted that those who give the way you do seem to move inside a kind of returned goodwill. Imagination and spirit come easily as well: you may have an artistic streak, a private faith, or simply a rich inward weather that makes solitude pleasant rather than empty. The costs of the aspect are soft ones, easy to miss. Ease breeds passivity; you can be generous in response and vague in initiative, drifting through decades on good nature without ever asking what your compassion is for. Boundaries blur pleasantly until someone is exploiting you, and you may under-defend yourself because conflict feels worse to you than loss. Ambition can stay low, not from fear but from contentment, and a talent meant for real work can spend itself entirely on being lovely to be around. In relationships you are tender, tolerant, and occasionally too tolerant, mistaking absorption of a partner's flaws for love of the partner. Your growth asks for edges and aim. Kindness with a spine, charity with eyes open, imagination that finishes things: these are the mature forms of what you were born holding. Pick somewhere for the water to go. When your good will gains direction, it stops merely soothing the people around you and starts changing their circumstances, and the grace you have always lived inside becomes something you can actually hand to someone else."
+ },
+ {
+  "id": "natal:aspect:jupiter:opposition:neptune",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "jupiter",
+   "b": "neptune",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "aspect:jupiter~neptune:opposition",
+   "aspect:neptune~jupiter:opposition"
+  ],
+  "text": "Your beliefs have a cast of characters. Jupiter opposite Neptune stretches faith and fantasy across an axis, and like most oppositions it tends to be lived through other people. There is the mentor who turned out to be selling something. There is the charismatic friend whose crises kept needing you, and the lover you saw a shining future in who was mostly your projection with a body. One end of this axis believes largely; the other dissolves whatever it touches into wish. When you hold only one end, someone reliably shows up holding the other. The recurring story is inflation and puncture. You meet a person, group, or promise that seems to answer the longing you carry. You invest beyond what you can afford, emotionally or materially, and reality eventually presents the bill. Afterward you may swing to the opposite pole and play the skeptic. For a season you can even become the disillusioner that someone else's faith collides with. Both roles are half of you. The tradition's practical observations here are blunt. It notes that the people who cost you most tend to ask for your trust and your resources in the same gesture. It also observes that your judgment of people is at its worst exactly when your longing is at its loudest. Sacrifice is another theme. You may give yourself away to the undeserving, then feel a martyred resentment you never voice, since admitting the bargain would spoil its nobility. Yet the hunger driving all this is not a defect. It is a real appetite for meaning, and it will not be argued away, only fed better. The maturing of this opposition is a shift from believing in people to believing through them. Teachers get to be flawed carriers of true things. Partners get to be human beings rather than answers. You keep your ideals while retiring your idols. Every disappointment, taken this way, refines rather than embitters you. In time you develop something valuable and hard-won: compassion without gullibility, reverence without surrender, and an eye that can spot both the fraud and the genuine article, because you have paid tuition to each. People then begin to bring you their own enchantments to examine. You find you can honor the longing in them while checking the arithmetic, which is what you always needed done for you, and can now do for yourself."
+ }
+]

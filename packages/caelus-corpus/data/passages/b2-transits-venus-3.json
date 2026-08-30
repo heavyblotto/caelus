@@ -1,0 +1,212 @@
+[
+ {
+  "id": "transit:venus:conjunction:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "venus",
+   "natal": "saturn",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:venus~natal_saturn:conjunction"
+  ],
+  "text": "About once a year Venus crosses the spot where your Saturn sits, and for a few days affection and gravity share one room. This is a fusing transit: the part of you that wants pleasure and company merges with the part that keeps accounts, and the result is a sober kind of tenderness. Socially you may feel quieter than usual. Invitations appeal less, small talk costs more, and you would rather spend an evening with one person who matters than a night with twenty who do not. Some people feel a passing loneliness under this transit even when nothing is wrong; the mood belongs to Saturn, and it lifts when Venus moves on. Used well, the same sobriety is clarifying. You can see which relationships hold weight and which run on habit, and conversations about commitment, money, or the terms of a partnership tend to go better now because you are willing to be plain. Your taste turns spare as well. Well made and lasting beats new and shiny, in objects and in people, and this is a decent week for choosing something you intend to keep for years rather than something you grab for a lift. As Venus approaches, the cooling is gradual: you notice yourself withdrawing a little, editing your calendar, feeling the difference between wanting company and needing it. The exact pass, a day or two, is the sober heart of the period, and the best use of it is an honest look at what you value. As the aspect separates, warmth comes back, usually with a firmer sense of who and what earned a place. Most years this is a single brief visit. In some years Venus turns retrograde nearby and crosses the point three times over a couple of months; when that happens, the questions of worth and commitment keep returning until you answer them properly, and the last pass often lines up with a decision that holds. Try not to read the low mood as a verdict on your relationships. Saturn does not say you are unloved; it asks what your love is built on, and for a short stretch you can actually see the foundations. People with real substance in their bonds often find this transit quietly pleasant: a plain dinner, a true conversation, an anniversary of sorts. People carrying doubts feel the doubts more clearly, which is uncomfortable and useful in equal measure. You grow through this small yearly visit by letting affection and judgment inform each other instead of taking turns, and what you still care about once Venus has moved on is usually worth the care."
+ },
+ {
+  "id": "transit:venus:sextile:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "venus",
+   "natal": "saturn",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:venus~natal_saturn:sextile"
+  ],
+  "text": "Steadiness gets easy to reach while Venus moves in sextile to your natal Saturn. Nothing dramatic announces this transit; it is an offer, open for a few days to a week or so, and you can decline it without penalty. What is on offer is a comfortable working agreement between your affections and your sense of duty. Loyalty feels good rather than heavy. The people who have proven themselves over time look more attractive to you than the exciting stranger, and time spent with an old friend, a mentor, or a partner of long standing tends to satisfy in a way it does not always manage. Practical matters of love and money go smoothly if you pick them up. This is a favorable window for the unglamorous side of relationships: settling who pays for what, planning something months out, having the calm version of a talk that once felt loaded. Your judgment about value runs clear, so decisions about a purchase, a price, or a budget made now tend to age well. Craft rewards you too; work that asks for patience and a good eye, whether it is your job or a hobby, comes together with less friction than usual. Venus makes no noise on her way through this angle. As she approaches, you may notice a mild pull toward order in your attachments, a wish to tidy, confirm, and consolidate. The still day or so at exact is where agreements land best and company feels easiest. After she moves on, whatever you set in place quietly persists, which is the real gift: sextiles pay out in structures that outlive the transit. Because the contact is soft, it is easy to let the window pass while you are busy, and most years that is no great loss, since another pass comes within months. Occasionally a retrograde period brings Venus back over this point two more times in one season; if you notice the same steady mood recurring, treat it as an extended chance to finish the consolidating you started. There is no shadow here to speak of, only a small cost of omission: an offer not taken is simply gone. You grow with this transit by acting on it in small ways, a confirmation, a plan, an hour given to someone reliable, and by learning that affection expressed through steadiness counts just as much as affection expressed through flowers."
+ },
+ {
+  "id": "transit:venus:square:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "venus",
+   "natal": "saturn",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:venus~natal_saturn:square"
+  ],
+  "text": "A few days of chill can pass between you and the people you count on for warmth while Venus squares your natal Saturn. The square forces a meeting between your wish for affection and comfort and the facts of duty, limits, and cost, and for the length of the transit those two sides feel at odds. Common versions: a partner is busy, distant, or critical just when you wanted softness; a social plan collides with an obligation; a bill or a price tag stands squarely between you and something you wanted; you feel taken for granted and cannot quite say why. The feeling of being unloved under this transit is usually larger than the evidence, and it helps to know that going in. Saturn is pressing on Venus, not delivering a verdict, and the pressure lasts days, not seasons. What the pressure does reliably is expose assumptions. You find out which comforts you treat as entitlements, where a relationship runs on unspoken bookkeeping, and what you actually do when affection is not immediately supplied. Venus moves through this square in days, and the mood keeps her schedule. Irritation and a sense of scarcity gather on her approach, and small slights land harder than they should. The concrete pinch, an awkward conversation, a cost, a no, tends to come while she stands at the angle. Perspective returns almost as soon as she leaves, shrinking the incident to its real size and leaving you better informed than you were. Resist making lasting judgments about a bond from inside the transit; revisit them after it clears, and keep the ones that still look true. Money asks for the same patience. This is a poor window for spending to soothe a mood, and a reasonable one for facing a number you have been avoiding. Most visits of this square are gone within the week. In an occasional year Venus retrogrades across this angle and the pinch repeats twice more; a complaint that survives three passes is not a mood, it is a message, and it deserves a proper hearing once the sky has moved on. The gain hiding in this uncomfortable little transit is durability. Bonds that can hold a hard conversation, a lean week, or an evening of distance without cracking are the ones worth building on, and each pass shows you a little more clearly which of yours can. You grow here by letting love and limits argue without letting either one win outright."
+ },
+ {
+  "id": "transit:venus:trine:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "venus",
+   "natal": "saturn",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:venus~natal_saturn:trine"
+  ],
+  "text": "Contentment is the signature of Venus trine your natal Saturn: not excitement, not romance in the movie sense, but the settled pleasure of things that work and people who stay. For a few days to a week or so, your affections and your realism ease into agreement. You want what you can actually have, you appreciate what you already hold, and that alignment, rare enough in ordinary weeks, makes this a quietly excellent stretch. Relationships built on time and trust feel their value now. An evening with a long-standing partner, a call with an old friend, a visit with someone older whose judgment you respect: these land deeper than usual, and expressions of loyalty come out naturally instead of sounding stiff. If something between you and another person has been ready to settle into a firmer shape, this transit smooths the path; commitments made in its window tend to be sober, mutual, and honored. Money and taste run on the same track. You lean toward quality over novelty, and your eye for what will last is better than average, which favors the considered purchase, the fair deal, the sensible plan. Work that rewards patience and finish goes well, and there is genuine pleasure in doing a thing properly. The arc is so smooth you may miss it: a mild settling as Venus applies, a day or so of easy steadiness at the exact trine, and a gentle fade as she separates, leaving behind whatever arrangements you made. That softness is the one caution. Trines do not push, so the window can close with nothing done, and while the loss is small, the opportunity was real. Some years, when a retrograde loop is in play, the trine repeats twice more over several weeks, effectively extending the season of steady judgment; more often each visit is a single clean pass. Nothing here needs managing. What the transit offers instead is a reference point: this is how it feels when what you love and what you can sustain are the same thing. You grow with it by noticing that feeling clearly enough to recognize its absence later, and by giving a little deliberate care, a kept promise, an unprompted thanks, a repair made before it was urgent, to the people and things you intend to keep."
+ },
+ {
+  "id": "transit:venus:opposition:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "venus",
+   "natal": "saturn",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:venus~natal_saturn:opposition"
+  ],
+  "text": "The chill of this transit usually seems to be someone else's doing. While Venus opposes your natal Saturn, the tension between closeness and distance plays out across a relationship rather than inside your own mood: a partner seems reserved or preoccupied, a friend is formal where you expected warmth, someone in authority weighs your request and takes their time. You stand at one end of the axis wanting connection, and the other end appears to answer with conditions. Because oppositions work through other people, it is worth asking how much of the coldness is really theirs. Often the other person is simply busy or careful, and what you are meeting is your own standard for love, your own ledger of who owes whom what, reflected back at full size. Either way, the confrontation is useful. For a few days, the unspoken terms of a bond become visible: what you expect, what you tolerate, what you have been giving in hopes of a return that was never actually promised. Money can carry the same pattern, with a negotiation, a debt, or a shared expense putting you and another party on opposite sides of a number. As the opposition applies, the sense of distance grows and you may find yourself rehearsing grievances. The exact aspect frequently coincides with the standoff itself, or with the frank exchange that names it. As Venus separates, warmth generally returns fast, and the relationship is often better ventilated for having had the air cleared. Do not sign a permanent story during a temporary chill; the transit runs about a week and recurs yearly, and most of what it stirs settles on its own. In some years a retrograde brings Venus back across this axis twice more, stretching the negotiation over a couple of months; a distance that persists through all three passes is telling you something real about the terms of that bond, and it deserves an honest response rather than another round of waiting. There is a dignity available here if you take it. Meeting reserve with steadiness instead of pleading, and stating your terms instead of testing the other person, turns the standoff into a settlement. You grow through this transit by learning that affection and boundaries are not opponents, even when, for a few days each year, they sit at opposite ends of the table."
+ },
+ {
+  "id": "transit:venus:conjunction:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "venus",
+   "natal": "uranus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:venus~natal_uranus:conjunction"
+  ],
+  "text": "Your taste for the usual drops sharply when Venus reaches your natal Uranus. For a few days each year, the conjunction fuses your capacity for affection and pleasure with the part of you that craves surprise, and the blend is lively: sudden likings, out-of-character purchases, an itch to do something different with the evening, an attraction to people you would normally file under interesting but not for me. The familiar can feel flat under this transit, and the unfamiliar glows. That is worth knowing before you act on it. The conjunction does not tell you which sparks matter; it just supplies voltage, and it will be gone within the week. The happiest use of the window is voluntary novelty inside a life you like: change the plan, try the strange restaurant, say yes to the invitation you would usually dodge, make something in a style you have never tried. Couples who do something genuinely new together tend to enjoy this transit; couples who let it find them bored may feel a restless draft blow through, one person suddenly needing air and unable to say why. Socially it favors the unexpected encounter. New people who arrive now are often unusual in some way, and even if they pass through quickly, they tend to leave a changed idea behind. Money wants a light hand, since the same voltage that refreshes taste also funds impulse buys that look odd by next month. As Venus applies, restlessness builds and routine chafes a little more each day. The exact pass often delivers the jolt itself: the chance meeting, the sudden yes, the whim acted on. As she separates, the current drops, and you can see what the excitement was actually attached to, which is the moment to judge it. In some years a retrograde loop brings this conjunction back twice more over a season, and an attraction or urge that returns on each pass has earned more serious attention than a one-day spark. Be slow to demolish standing arrangements from inside a transit this brief; be equally slow to dismiss what it showed you, because Uranus contacts often tell the truth rudely. You grow with this small annual jolt by giving your affections regular fresh air on purpose, so that freedom becomes something you practice inside your commitments instead of something that occasionally crashes through them."
+ },
+ {
+  "id": "transit:venus:sextile:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "venus",
+   "natal": "uranus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:venus~natal_uranus:sextile"
+  ],
+  "text": "A small door to somewhere more interesting stands open while Venus moves in sextile to your natal Uranus. Sextiles offer rather than insist, so this transit will not grab you; it simply makes refreshment available for a few days, and rewards you in proportion to how willing you are to walk through. The offers tend to be modest and specific. An invitation from outside your usual circle. A conversation with someone whose life runs on completely different rails. A variation on a routine pleasure, the different route, the unfamiliar cuisine, the plan made on short notice, that turns out better than the default would have. In relationships, the sextile loosens things pleasantly. A standing bond gets playful, a stalled dynamic finds a new angle, and it becomes easier to enjoy the ways the people you love are unlike you, rather than quietly wishing they would match you better. Meetings that happen now can bring genuinely fresh company into your life, often through casual channels, and friendships begun under this contact tend to keep a streak of independence that wears well. Creative work benefits from the same light current; an experiment attempted now costs little and sometimes opens a direction you keep. Mildness is built into the aspect. As Venus applies, you may notice a faint appetite for difference, a wish for the day to deviate from the plan. The exact aspect is the sweet spot where spontaneity works out, and it can pass unnoticed if you spend it on autopilot. As she separates, the window closes without drama, and whatever you tried either takes root or simply becomes a good day you had. There is no meaningful downside here beyond the missed chance, and even that is soft, since the aspect returns about twice a year. Now and then a retrograde season lets it repeat twice more within a few weeks, which effectively gives you a second and third chance at the same open door. The lesson underneath the pleasantness is worth keeping: your affections stay alive on a diet of small novelties, and you do not need upheaval to feed them. You grow with this transit by saying yes a little more easily than usual, in small ways, on purpose, and noticing how little it costs to let your pleasures surprise you."
+ },
+ {
+  "id": "transit:venus:square:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "venus",
+   "natal": "uranus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:venus~natal_uranus:square"
+  ],
+  "text": "Restlessness picks a fight with your comforts while Venus squares your natal Uranus. The square forces the issue between what you are attached to and your need for freedom, and for a few days the two refuse to share you politely. The familiar signs: sudden irritation with a perfectly fine relationship, an urge to cancel plans you made gladly, an attraction that arrives with suspicious timing, a purchase made mostly for the jolt of making it. Underneath the static there is usually one honest question: where in your closest arrangements have you stopped having any room? The transit asks it rudely, by making the walls itch. It helps to separate the message from the delivery. The delivery is impulse, and impulse under this square has a short shelf life; the thing you are tempted to blow up on Tuesday often looks fine again by the weekend, minus whatever damage the blowup did. The message can still be real. If a commitment genuinely leaves you no air, this transit will find that spot every time it comes around, and pretending otherwise just schedules the next flare. As the square applies, tension builds as a vague crankiness about your obligations and your pleasures alike. The exact pass tends to produce the spark: the argument out of nowhere, the sudden want, the plan abruptly changed by you or on you. As Venus separates, the charge drains quickly, which is the right time to sort what happened into static and signal. Most years the whole episode fits inside a week. In the occasional retrograde year the square strikes three times across a couple of months, and by the third pass you can no longer call the recurring itch a mood; it is information about where a bond or a habit needs renegotiating, openly, rather than escaping. The workable response during the transit itself is cheap freedom: change what is easily changed, take the unstructured evening, do the impulsive thing that costs little, so the need for air gets fed without feeding on your commitments. You grow through this abrasive little visitor by learning to tell the difference between a cage and a container, and by giving yourself enough legitimate wildness that nothing has to break to prove you are free."
+ },
+ {
+  "id": "transit:venus:trine:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "venus",
+   "natal": "uranus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:venus~natal_uranus:trine"
+  ],
+  "text": "Excitement comes cheap, in the best sense, while Venus trines your natal Uranus. For a few days the fresh and the familiar stop competing: you can enjoy novelty without anything needing to break, and enjoy your standing attachments without feeling confined by them. It is one of the lighter, luckier windows in Venus's yearly round. Social life is where most people feel it first. Plans improvise well, chance encounters run friendly and slightly electric, and the people who cross your path now tend to be a notch more original than your usual company. You are also more open than usual, quicker to find the unlike-you person interesting rather than tiring, and that openness is exactly what the trine rewards. Established relationships get a welcome current of play. A change of scene, a spontaneous outing, a topic you have never gotten around to: small departures land well now, and a partner's odd edges, the ones that sometimes grate, read as charm again. Nobody has to push for this; the ease is the point of a trine, and the mutual slack tends to appear on both sides at once. Taste and creativity loosen too. You are drawn to what is inventive, modern, or just different, and experiments in whatever you make, wear, or arrange come off with unusual grace. Purchases made now skew original but rarely regrettable, since the trine refreshes judgment rather than overriding it. None of it makes an announcement: appetite for variety rises as Venus closes in, spontaneity works uncommonly well for the day or so she holds the aspect, and the fade afterward is easy, often leaving a new acquaintance, a new interest, or a loosened routine behind as a keepsake. Since nothing forces the issue, the only way to waste this transit is to spend it entirely on rails; even one deliberate deviation usually pays. Most visits are a single pass. In a retrograde season it can return twice more within a few weeks, a genuinely pleasant repetition that lets a new connection or direction develop in installments. What this contact teaches, a few days at a time, is that your need for freedom and your need for affection were never actually enemies. You grow with it by remembering, later and under harder skies, how naturally the two cooperated here."
+ },
+ {
+  "id": "transit:venus:opposition:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "venus",
+   "natal": "uranus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:venus~natal_uranus:opposition"
+  ],
+  "text": "Under this transit the surprises come from across the table. While Venus opposes your natal Uranus, the unpredictable element in your relationships sits with other people: a partner acts out of character, a friend cancels or appears without warning, someone new and oddly magnetic shows up in a settled corner of your life, or a plan you were counting on gets rearranged by hands other than yours. The opposition confronts you with the free agency of the people you are attached to, and for a few days it will not let you forget that they are separate weather systems, not fixtures. Your first reaction may be to grip. It rarely helps. The tighter you hold a person during this transit, the more erratic they tend to look, because what is actually being contested is room to move, theirs and, if you are honest, yours too. Oppositions have a way of assigning your own disowned side to someone else, so it is worth asking whether the restlessness you are watching in another person has a twin in you that you have been too loyal or too comfortable to admit. Attractions that begin now carry a distinctive charge: sudden, bright, and genuinely uncertain. Some are real beginnings and some are weather, and the honest answer is that you cannot tell from inside the first week. The same goes for ruptures; a break threatened at the peak of this transit deserves a second reading after it passes. You may feel the distance between you and someone widen or crackle as Venus draws opposite. The surprise itself tends to come with her at full span. Once she moves past, things steady, and what remains standing is usually sturdier for having flexed. In some years a retrograde stretch runs this opposition three times across a season, turning a single jolt into an extended negotiation about closeness and independence; by the final pass, both sides generally know what the new terms are. The plainest way through is to trade control for candor: say what you want, ask what they want, and let the answers be current rather than assumed. You grow through this yearly confrontation by learning to hold people with an open hand, and by discovering that the ones who stay when free to go were the bond you actually wanted."
+ },
+ {
+  "id": "transit:venus:conjunction:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "venus",
+   "natal": "neptune",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:venus~natal_neptune:conjunction"
+  ],
+  "text": "The lights go soft for a few days when Venus reaches your natal Neptune. This conjunction fuses affection with imagination, and while it lasts, everything you love gets a glow: people seem finer, music lands deeper, ordinary rooms and ordinary faces take on a kind of shine. It is one of the most genuinely romantic transits in Venus's yearly circuit, and also one of the least reliable as a witness. Feeling runs ahead of fact under this contact. A new attraction begun now tends to be part person, part projection, and the ratio is hard to check from inside; you fall for what someone could be, or for what your longing needed them to be, as easily as for what they are. The same soft focus reaches money and agreements, where terms feel friendlier than they read and details slide by unexamined. None of this means the period should be spent on guard. The enchantment is real experience, and it feeds parts of you that plainer weather starves: compassion widens, forgiveness comes easier, art and music open up, and time given to someone who needs help feels like a privilege rather than a chore. Creative and devotional work done now often carries a tenderness you cannot manufacture on demand. The workable rule is simple: enjoy the glow now, sign later. As Venus applies, the drift begins, attention softening, daydreams thickening, the wish to be swept growing. The exact pass is full soft focus, lovely for beauty and kindness, poor for contracts and appraisals. As she separates, the sharpness returns within days, and that is the moment to reread the message, revisit the impression, and see what the shine was resting on. Most years you get one brief immersion. In some years a retrograde loop brings the conjunction back twice more, and the season becomes a longer lesson in the difference between the dream and the person carrying it; what still moves you on the third pass, with clear eyes, is probably real. The growth in this transit is learning to keep both capacities: eyes that see what is there, and a heart still willing to be enchanted by it. People who manage that get the best of Neptune, which is not illusion at all, but the ability to love an imperfect thing generously."
+ },
+ {
+  "id": "transit:venus:sextile:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "venus",
+   "natal": "neptune",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:venus~natal_neptune:sextile"
+  ],
+  "text": "Tenderness is easy to come by while Venus moves in sextile to your natal Neptune. The aspect opens a quiet channel between what you love and what you imagine. For a few days the gentler responses sit closer to the surface: sympathy, patience, the benefit of the doubt. Nothing about this transit compels; like every sextile, it offers, and the offers here are small and humane. It gets easier to forgive a small debt of feeling, or to write the kind note you kept putting off. Sitting with someone who is struggling, without needing to fix them, comes more naturally too. Romance under this contact is soft-spoken rather than sweeping: a shared quiet, an old song, a small gesture read correctly. Bonds you already have absorb this kindness gratefully. A strained connection can ease a good deal if either side extends the small grace on offer. Your inner life brightens as well. Art, music, film, and daydream all run richer than usual. Creative work loosens up, and ideas arrive sideways, by association, while you are doing something else. Since the contact is gentle, its gifts are easy to sleep through. The arc is mild to match. There is a faint softening as Venus applies, then a peak day or two when warmth and inspiration flow with the least resistance, then a smooth fade as she separates. The mood itself leaves on schedule. What stays is whatever you acted on: the mended exchange, the page written, the help given. Unlike the harder Neptune contacts, this one carries little risk of real illusion. The soft focus is shallow, more warmth than fog, and your judgment stays close to normal. The pass recurs twice in a typical year. In an occasional retrograde season it repeats twice more within a few weeks, which mostly means the season stays kind a little longer. If you want to use it on purpose, spend it on giving with no scoreboard: give something, ease something, make something, for its own sake. You grow with this transit by noticing how good the softer register feels when you actually use it, and by letting a little of that gentleness survive into the weeks when the sky is no longer helping."
+ },
+ {
+  "id": "transit:venus:square:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "venus",
+   "natal": "neptune",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:venus~natal_neptune:square"
+  ],
+  "text": "A gap opens between what you long for and what is actually in front of you while Venus squares your natal Neptune. The square forces the two into contact, and the friction usually shows up as a soft ache: vague dissatisfaction with people who have done nothing wrong, a wish to be somewhere lovelier, a suspicion that love as you are living it is a lesser copy of love as you imagined it. Nobody needs to be at fault for this mood; it is the transit itself, and it runs its course in days. While it lasts, discernment gets slippery in specific ways. You are more inclined to see people as you wish they were, to hear promises in what were only pleasantries, and to find appeals aimed at your sympathy unusually hard to refuse. Requests that arrive now can be genuinely needy or quietly manipulative, and the fog makes the two hard to tell apart. Money runs the same risk: the beautiful thing seems worth any price, the vague arrangement seems fine, the detail left unread seems unimportant. The practical response is not cynicism but a short delay. Let decisions about money, promises, and new attractions rest until the sky clears, and most of what the fog would have cost you simply does not get spent. As the square applies, the haze thickens and the ache sharpens; you may catch yourself comparing your real life unfavorably to an imagined one. The exact pass is peak blur, often marked by a disappointment, a small letdown where the glow slips off something and you see the plainer thing beneath. That moment stings, but it is the useful part. As Venus separates, clarity returns fast, and the plainer thing frequently turns out to be worth loving on its own terms, which the glow had actually been obscuring. Most visits are brief, over within days. Occasionally a retrograde carries Venus across the square three times in a season, and the lesson repeats until the pattern is visible: where your longing habitually paints, and who ends up paying for the paint. There is real gold in that visibility. You grow through this transit by catching your own idealizing reflex in the act, and by learning that the cure for disappointment is not wanting less, but seeing first and loving second."
+ },
+ {
+  "id": "transit:venus:trine:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "venus",
+   "natal": "neptune",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:venus~natal_neptune:trine"
+  ],
+  "text": "Sweetness moves through your days with no effort on your part while Venus trines your natal Neptune. The trine lets affection and imagination feed each other smoothly. For a few days the result is a mild, kindly enchantment: people please you more easily, beauty finds you without being hunted, and your own heart feels more open than usual. Where the harder Neptune contacts blur judgment, this one mostly just warms it. In relationships the effect is a gentle re-glossing of what you already have. A partner's familiar face catches the light differently. An old bond recovers some of its first tenderness. Talk drifts into the warmer registers, memory, hope, gratitude, without anyone steering it there. Sympathy is easy to find now. That makes this a good window for patching things up, for visiting someone who is lonely or unwell, or for the kind of listening that asks nothing back. Romance that begins under a trine like this tends to start gently. It idealizes only lightly, and keeps more contact with the actual person than Neptune usually permits. Your inner life runs rich and usable. Creative work flows, taste turns lyrical, and time spent with music, water, poetry, or simple rest repays itself double. Even doing nothing has a quality to it now. Money stays mostly unbothered. Giving comes so easily, though, that it is worth noticing when you give from overflow and when from habit. The whole shape of it is gradual. The days sweeten slowly as Venus approaches, seem best disposed while she sits at the angle, and cool at an unhurried pace once she is past. A restored connection or a finished piece of work is often what remains. Because nothing pushes, the transit can slip past unused. That costs little, but an hour of it spent on someone or something you love turns a pleasant mood into a kept memory. The pass returns twice in an ordinary year. In some years a retrograde grants it twice more in one season, an unusually kind stretch. What this contact quietly shows is that enchantment does not require illusion. You grow with it by learning to let real things be beautiful, and by trusting that tenderness, offered plainly, is rarely wasted."
+ },
+ {
+  "id": "transit:venus:opposition:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "venus",
+   "natal": "neptune",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:venus~natal_neptune:opposition"
+  ],
+  "text": "Longing picks a target during this transit, and the target is usually a person standing right in front of you. While Venus opposes your natal Neptune, the dream side of love works through other people. Someone seems finer, sadder, or more in need of rescue than they turn out to be. Or you become the screen for another person's longing, adored for qualities you do not quite recognize. The opposition confronts you with your own yearning by placing it outside you, and the meeting can be lovely, confusing, or both at once. Idealizing is the main current, and it flows both ways. If you are the one enchanted, remember that what glows in the other person is partly your own light out on loan; enjoy it, and wait before building on it. If you are the one being enchanted about, the flattery is pleasant and the footing is thin. Screens get seen through in the end, and it is kinder to be known truly than admired wrongly. Alongside romance, this transit colors requests and dealings. Appeals to your sympathy arrive at full strength. Some deserve your help, and others are simply well aimed. Deals floated now tend to be long on feeling and short on detail. Giving is not the danger here; vagueness is. Give freely where you choose to, and let anything needing signatures or exact numbers wait until the fog lifts. As Venus applies, the softness gathers around one person or situation and the pull grows. The exact pass is the height of the dream, when the vision and its carrier are hardest to tell apart. As she separates, the two begin to peel away from each other. That is the valuable moment of this transit: you see the actual person standing where the vision was, and you learn what your longing looks like from the outside. Most years the whole sequence takes about a week. In some years Venus retrogrades across this axis and runs it three times, a longer study in the same lesson. By the last pass the difference between the dream and the person is usually plain. You grow through this contact by withdrawing the projection without withdrawing the affection, which is harder and better: loving what is really there, and keeping the dream as yours to carry."
+ }
+]

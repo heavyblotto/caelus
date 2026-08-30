@@ -1,0 +1,176 @@
+{
+ "name": "transit-houses-venus",
+ "outFile": "b2-transit-houses-venus.json",
+ "setId": "house-b2-transit-houses-venus",
+ "family": "transit-house",
+ "cells": [
+  {
+   "id": "transit:venus:house:1",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "venus",
+    "house": 1
+   },
+   "atomIds": [
+    "transitHouse:venus:1"
+   ],
+   "title": "Venus moving through your 1st house",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:house:2",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "venus",
+    "house": 2
+   },
+   "atomIds": [
+    "transitHouse:venus:2"
+   ],
+   "title": "Venus moving through your 2nd house",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:house:3",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "venus",
+    "house": 3
+   },
+   "atomIds": [
+    "transitHouse:venus:3"
+   ],
+   "title": "Venus moving through your 3rd house",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:house:4",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "venus",
+    "house": 4
+   },
+   "atomIds": [
+    "transitHouse:venus:4"
+   ],
+   "title": "Venus moving through your 4th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:house:5",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "venus",
+    "house": 5
+   },
+   "atomIds": [
+    "transitHouse:venus:5"
+   ],
+   "title": "Venus moving through your 5th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:house:6",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "venus",
+    "house": 6
+   },
+   "atomIds": [
+    "transitHouse:venus:6"
+   ],
+   "title": "Venus moving through your 6th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:house:7",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "venus",
+    "house": 7
+   },
+   "atomIds": [
+    "transitHouse:venus:7"
+   ],
+   "title": "Venus moving through your 7th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:house:8",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "venus",
+    "house": 8
+   },
+   "atomIds": [
+    "transitHouse:venus:8"
+   ],
+   "title": "Venus moving through your 8th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:house:9",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "venus",
+    "house": 9
+   },
+   "atomIds": [
+    "transitHouse:venus:9"
+   ],
+   "title": "Venus moving through your 9th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:house:10",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "venus",
+    "house": 10
+   },
+   "atomIds": [
+    "transitHouse:venus:10"
+   ],
+   "title": "Venus moving through your 10th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:house:11",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "venus",
+    "house": 11
+   },
+   "atomIds": [
+    "transitHouse:venus:11"
+   ],
+   "title": "Venus moving through your 11th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:house:12",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "venus",
+    "house": 12
+   },
+   "atomIds": [
+    "transitHouse:venus:12"
+   ],
+   "title": "Venus moving through your 12th house",
+   "bindable": true
+  }
+ ]
+}

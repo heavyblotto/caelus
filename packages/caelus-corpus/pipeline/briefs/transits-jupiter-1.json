@@ -1,0 +1,233 @@
+{
+ "name": "transits-jupiter-1",
+ "outFile": "b2-transits-jupiter-1.json",
+ "setId": "house-b2-transits-jupiter-1",
+ "family": "transit-aspect",
+ "cells": [
+  {
+   "id": "transit:jupiter:conjunction:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "sun",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_sun:conjunction"
+   ],
+   "title": "Transiting Jupiter conjunct your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:sextile:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "sun",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_sun:sextile"
+   ],
+   "title": "Transiting Jupiter sextile your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:square:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "sun",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_sun:square"
+   ],
+   "title": "Transiting Jupiter square your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:trine:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "sun",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_sun:trine"
+   ],
+   "title": "Transiting Jupiter trine your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:opposition:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "sun",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_sun:opposition"
+   ],
+   "title": "Transiting Jupiter opposite your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:conjunction:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "moon",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_moon:conjunction"
+   ],
+   "title": "Transiting Jupiter conjunct your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:sextile:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "moon",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_moon:sextile"
+   ],
+   "title": "Transiting Jupiter sextile your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:square:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "moon",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_moon:square"
+   ],
+   "title": "Transiting Jupiter square your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:trine:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "moon",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_moon:trine"
+   ],
+   "title": "Transiting Jupiter trine your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:opposition:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "moon",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_moon:opposition"
+   ],
+   "title": "Transiting Jupiter opposite your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:conjunction:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "mercury",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_mercury:conjunction"
+   ],
+   "title": "Transiting Jupiter conjunct your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:sextile:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "mercury",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_mercury:sextile"
+   ],
+   "title": "Transiting Jupiter sextile your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:square:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "mercury",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_mercury:square"
+   ],
+   "title": "Transiting Jupiter square your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:trine:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "mercury",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_mercury:trine"
+   ],
+   "title": "Transiting Jupiter trine your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:opposition:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "jupiter",
+    "natal": "mercury",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:jupiter~natal_mercury:opposition"
+   ],
+   "title": "Transiting Jupiter opposite your natal Mercury",
+   "bindable": true
+  }
+ ]
+}

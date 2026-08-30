@@ -30,7 +30,7 @@ the Node loader.
 | Event search (rise/set, crossings, phases, stations) | — | ✓ | — |
 | Eclipses (solar, lunar) | — | ✓ | — |
 | Data on disk | none (bundled) | JSON packs (precise Moon ~3.1 MB + catalogs) | none (edge) |
-| Date range | 1000–3000¹ | 1000–3000¹ | 1920–2080² |
+| Date range | 1000–3000¹ | −2998–3000³ | 1920–2080² |
 | Accuracy | per body, see [Validation](/validation) | per body, see [Validation](/validation) | per body |
 
 <Note>
@@ -44,6 +44,12 @@ the Node loader.
   ² Hosted REST refuses years outside the embedded Moon tier (1920–2080).
   Hosted <code>/api/mcp</code> uses the same embedded dataset; stdio
   <code>caelus-mcp</code> is the Node-loader column.
+  ³ The classical era slabs extend the Sun, Moon, Mercury, Venus, Mars,
+  Jupiter, and Saturn from 3000 BCE to 1000 CE, each adjoining its modern
+  pack at one shared instant and validated against JPL Horizons at epochs the
+  fit never sampled. Uranus, Neptune, Pluto, and the small bodies have no
+  classical pack and keep their modern spans; at ancient dates they are listed
+  in <code>chart.unavailable</code>.
 </Note>
 
 ## Embedded (browser, edge)
@@ -68,7 +74,11 @@ const engine = new Engine(embeddedData);`}
 packs for every planet plus Earth, Pluto, the Moon, Chiron, and the asteroids,
 which supersede the embedded VSOP87D / analytic series wherever they load.
 These are the packs that carry the validated 1000–3000 range (small bodies
-1600–2484). The Uranian points and fixed stars ship too; the Node loader reads
+1600–2484). The loader also picks up **era slabs** (`{body}_cheb.classical.json`
+beside each modern pack), which extend the classical seven (Sun via Earth's
+slab, Moon, Mercury, Venus, Mars, Jupiter, Saturn) from 3000 BCE to the modern
+packs' shared 1000 CE boundary, resolving each instant from whichever slab
+covers it. The Uranian points and fixed stars ship too; the Node loader reads
 the same fixed-star catalog from disk when you load extended packs. Use the
 Node tier when you need extended bodies, event search, or the wide range.
 

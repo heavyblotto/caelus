@@ -1,0 +1,227 @@
+[
+ {
+  "id": "natal:aspect:venus:conjunction:mars",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "venus",
+   "b": "mars",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "aspect:venus~mars:conjunction",
+   "aspect:mars~venus:conjunction"
+  ],
+  "text": "Venus conjunct Mars fuses wanting and pursuing into a single motion. In most people, the part that loves and the part that acts are separate departments: one feels the pull, the other decides whether to move. In you they fire together. When something or someone draws you, your whole body already knows it, and hiding the fact takes more effort than most flirtation is worth. This gives you a warmth with voltage in it. People sense the current even when you are just ordering coffee, and it is a large part of why rooms tend to organize themselves around you a little. In love, you need the romance to stay alive as romance. Affection that has gone entirely comfortable, all cozy habit and no pursuit, starts to feel like the lights going out, and you may stir up small dramas without quite knowing why, just to feel the charge return. Attraction and friendship blur easily for you, which enriches your closest bonds and occasionally complicates them. The same fusion feeds anything you make. Creative work carries your pulse in it; whatever you produce, from a meal to a business to a piece of art, tends to have appetite and liveliness rather than polish alone. The cost of the wiring is impatience. Desire arrives so fast and so whole that waiting feels unnatural, and you can mistake the thrill of the chase for the substance of love, losing interest once the uncertainty ends. You can also take rejection harder than you show, because you put your actual self into the approach rather than a safe copy of it. Anger and affection sit close together in you, and people who love you learn that a flash of heat is often intimacy in work clothes. What deepens over the years is your sense of what wanting is for. The pursuit you are so good at is an opening act, not the show. As you learn to bring the same energy to the long middle of a bond, to desire the person you already have, the charisma stops being a spark you throw off and becomes a fire people can actually warm themselves at, you included."
+ },
+ {
+  "id": "natal:aspect:venus:sextile:mars",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "venus",
+   "b": "mars",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "aspect:venus~mars:sextile",
+   "aspect:mars~venus:sextile"
+  ],
+  "text": "With Venus sextile Mars, desire and pursuit cooperate in you: not a fire that runs you, but a skill that answers when you call on it. You can make the first move without making it heavy. You can disagree with someone you want without the room going cold. You can start things, a conversation with a stranger, a collaboration, a courtship, with a light touch that most people have to fake. The trick is that the aptitude only shows itself in use. Left idle, it looks like nothing at all: a pleasant manner, a person who gets along. Exercised, it becomes real social craft. When you decide to make a friend, mend a quarrel, or bring two stubborn parties to the same table, things tend to move, because warmth and nerve cooperate in you instead of taking turns. In love, this shows up as balance rather than drama. You are capable of pursuing without pressuring and of receiving attention without going passive, and partners often say you are easy to want and easy to talk to, which is a rarer pairing than it sounds. Sexuality and tenderness sit comfortably together for you; you do not have to choose between passion and friendliness in a relationship, and you tend to be puzzled by people who do. At work, the same faculty makes you good at the human side of getting things done: recruiting help, smoothing a tense meeting, asking for what a project needs without apology. Creative and physical outlets reward you quickly when you commit to them, because pleasure and effort reinforce each other in you rather than competing. The one real risk is neglect. Because nothing here hurts, nothing insists, and you can go years using a tenth of the gift, waiting for connection to happen to you instead of extending the first hand. Spend what you have. Every time you approach instead of waiting, name the attraction instead of sitting on it, or turn a promising acquaintance into an actual plan, the faculty gets stronger, and a talent for pursuit matures into a life that is genuinely well companioned."
+ },
+ {
+  "id": "natal:aspect:venus:square:mars",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "venus",
+   "b": "mars",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "aspect:venus~mars:square",
+   "aspect:mars~venus:square"
+  ],
+  "text": "Venus square Mars sets what you love and how you go after things at cross purposes, and the friction between them is a recurring fact of your inner life. One part of you wants harmony, beauty, and to be liked. Another part wants the contest, the conquest, the honest fight. They pull on the same hours and the same relationships, and rarely at convenient times. You may charm someone and then bristle the moment they get comfortable, or crave closeness all week and pick a quarrel the night it finally arrives. Desire itself tends to run hot and a little rebellious in you: the people who attract you most are often the ones who also irritate you, and the smooth, agreeable option can leave you strangely unmoved. In relationships this becomes the familiar weather of passion and conflict. The same intensity that makes the good stretches vivid makes the arguments sharp, and you can burn through connections quickly if you treat every surge of frustration as information about the other person. Often it is information about the square: the tension lives in you and would travel with you into any bedroom in the world. Timing is another place you feel it. Your affections and your appetites do not always synchronize, wanting tenderness when the moment calls for boldness and boldness when the moment calls for patience, and learning your own rhythms takes honest attention. None of this is a flaw in your capacity to love. It is torque, and torque builds strength when it has something to work against. Physical outlets matter more for you than for most people; the restlessness has to go somewhere, and it is far better spent on effort, sport, or ambitious work than on the person across the table. What the friction is slowly welding together is its own two halves. Every time you stay in the room through a conflict instead of storming or seducing your way out, you teach desire and affection to cooperate. People who do this work end up with something the easy charmers rarely have: a love that has been argued with, tested, and chosen anyway, and a passion that no longer needs a fight to feel alive."
+ },
+ {
+  "id": "natal:aspect:venus:trine:mars",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "venus",
+   "b": "mars",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "aspect:venus~mars:trine",
+   "aspect:mars~venus:trine"
+  ],
+  "text": "With Venus trine Mars, affection and drive flow in the same direction without being told to. You want things warmly and love things actively, and the two never seem to trip over each other the way they do for many people. Socially, this reads as naturalness. You flirt without strategy, compete without venom, and express interest without the stiffness that betrays effort. Others often describe you as comfortable in your own skin, and they are picking up something real: the parts of you that attract and the parts of you that act are on speaking terms, so nothing in your manner is fighting itself. In love, passion and friendship blend easily. You can desire someone and still genuinely like them, which sounds like a low bar until you watch how many relationships founder on exactly that split. Partners tend to find you generous and unforced, affectionate in a way that does not keep score. Creative and physical pleasures come readily too; making things, moving, dressing, cooking, decorating, whatever your medium is, carries a certain effortless liveliness. The catch with this aspect is the one that shadows every gift that arrives free: you may never examine it. Because attraction has always answered when you called, you can drift through your connections rather than building them, letting relationships begin easily and end easily without asking what you actually want to keep. Ease can also make you passive at exactly the wrong moments. When a bond hits real difficulty, the kind charm cannot dissolve, you may be tempted to slide toward the next pleasant thing instead of doing the unglamorous work of repair, simply because the next pleasant thing has always been there. And what comes without struggle is easy to undervalue; you may not notice how much your warmth carries a household, a team, or a friendship until you withdraw it. Your growth lies in adding intention to the flow. When you choose a person or a craft and stay chosen, putting deliberate effort behind what has always been effortless, the grace stops being a pleasant climate and becomes a body of work: long loves, deep friendships, and things made with both skill and heat."
+ },
+ {
+  "id": "natal:aspect:venus:opposition:mars",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "venus",
+   "b": "mars",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "aspect:venus~mars:opposition",
+   "aspect:mars~venus:opposition"
+  ],
+  "text": "Venus opposite Mars strings your love nature and your fighting nature across from each other, and you tend to meet the tension face to face, in other people. The classic pattern is attraction as combat: you draw partners and close friends who carry the heat you keep off your own surface, or you find yourself playing the fiery one opposite someone maddeningly composed. Either way, the relationship becomes the field where the two ends of you negotiate. The pull here is genuinely magnetic. Few aspects make other people as interesting to you as this one does, and the interest is rarely calm; the connections that matter to you usually begin with a spark that has some friction folded into it. Then comes the seesaw. Closeness builds until it starts to feel like surrender, and something in you picks a fight to get your edges back. Or independence stretches until it starts to feel like exile, and you turn conciliatory, sweet, eager to merge again. Passion and quarrel can chase each other in a loop, and the reconciliations may be vivid enough that some part of you starts scheduling the ruptures. It is worth noticing when the same argument keeps arriving wearing different faces. What looks like a series of difficult partners is often one internal standoff, projected outward: the wish to please set against the wish to prevail, tenderness against appetite, yielding against winning. As long as another person is carrying one pole for you, they will also catch the blame for it. The gift inside the difficulty is range. You understand both the lover's position and the fighter's, which can make you a superb negotiator, a compelling artist, and, once seasoned, a partner of unusual depth, because nothing human in a relationship shocks you. Growth here means bringing both ends home. When you let yourself be openly desiring and openly kind, assertive and affectionate in the same conversation, the people you love stop being opponents in a tug of war and become what they were all along: company. The charge does not disappear with this work. It stays, and finally warms instead of burns."
+ },
+ {
+  "id": "natal:aspect:venus:conjunction:jupiter",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "venus",
+   "b": "jupiter",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "aspect:venus~jupiter:conjunction",
+   "aspect:jupiter~venus:conjunction"
+  ],
+  "text": "Venus conjunct Jupiter joins the planet of affection to the planet of more, and the result is a heart that thinks big. Your warmth does not come in careful doses. When you like someone, you like them generously; when you celebrate, the table gets longer; when you give, you tend to round up. People feel enlarged in your company, more welcome and more forgiven than usual, and this makes you genuinely loved in a way that has little to do with effort. Optimism about people is your default setting. You extend goodwill first and check credentials later, and most of the time life rewards the policy: doors open, strangers help, and social luck follows you around like weather. Beauty and comfort matter to you on a grand scale. You have expensive eyes, whatever your budget, and a real gift for pleasure, for the well-set table, the trip worth taking, the gesture that turns a Tuesday into an occasion. Proportion is the one ingredient missing from the recipe. More is your reflex, and reflexes do not ask whether more is better. You can overspend, overeat, overpromise, and overcommit socially, not from greed but from enthusiasm, and the gap between your warm intentions and your actual calendar can quietly hurt people who took your promises literally. In love, generosity can slide into indulgence: you would rather delight a partner than disappoint them, so hard truths get postponed, flaws get charmed over, and small problems are allowed to grow in comfort. You may also expect romance to stay festive and feel oddly cheated by its ordinary stretches, as if a slow month were a broken agreement. What matures in you over time is discernment inside the generosity. You learn that a smaller promise kept lands better than a grand one remembered late, that saying no to one invitation is how you show up whole for another, and that affection with judgment in it is not stinginess but respect. When that settles in, the abundance stops leaking and starts compounding, and you become that rare figure people describe with real gratitude: someone whose big heart can actually be leaned on."
+ },
+ {
+  "id": "natal:aspect:venus:sextile:jupiter",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "venus",
+   "b": "jupiter",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "aspect:venus~jupiter:sextile",
+   "aspect:jupiter~venus:sextile"
+  ],
+  "text": "Venus sextile Jupiter gives you a talent for goodwill that pays out whenever you actually use it. This is not the loud kind of charm. It is a knack: for putting people at ease, for finding the generous reading of someone's behavior, for turning a gathering of strangers into something that feels like a party. You know how to make an occasion out of modest materials, and you know how to accept kindness graciously, which is its own underrated skill and half the reason people enjoy being generous to you. Social and material luck tend to follow your initiative here. The job that comes through a friend of a friend, the favorable arrangement, the introduction that changes a year of your life: these arrive along channels you opened by being pleasant to deal with and quick to share credit. Nothing about it is magic. Goodwill is a form of capital with you, and it earns interest, but only on what you deposit. In love, the aspect keeps the pleasures social. You court well and celebrate better, forgive without keeping ledgers, and your relationships stay open to friends, occasions, and the wider world instead of sealing into a unit of two. Being easy to celebrate with matters more across the years of a shared life than most people guess. Friendships often carry a flavor of growth: you are drawn to people you can learn from, and your circle tends to widen your world rather than merely mirror it. Goodwill this mild issues no demands. Because your social weather is pleasant, you can settle into a modest orbit and let the aptitude idle, being well liked in rooms you never chose, enjoying comforts you never stretched for. The gift responds to reach. When you extend it deliberately, hosting the dinner, making the introduction, asking the warm favor, backing the venture that excites you, circumstances have a way of meeting you partway. What grows over a lifetime is the compounding: each act of practical generosity widens the network of people who wish you well, until your good nature has quietly built the thing it was always capable of, a life with genuine abundance in it, and friends in every direction."
+ },
+ {
+  "id": "natal:aspect:venus:square:jupiter",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "venus",
+   "b": "jupiter",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "aspect:venus~jupiter:square",
+   "aspect:jupiter~venus:square"
+  ],
+  "text": "Venus square Jupiter puts your sense of pleasure and your sense of possibility in a permanent argument about the word enough. Whatever you enjoy, something in you proposes a larger version: the better bottle, the bigger gesture, the second commitment stacked on the first. Appetite outruns satisfaction, so the feast can leave you oddly hungry, already reaching for the next thing while this one is still on the table. The friction shows up first in money and comfort. You are prone to spending as a mood, to treating luxury as a right during good stretches and a consolation during bad ones, and the ledger tends to record your feelings more faithfully than your plans. Socially, warmth can inflate into promise. You say yes with your whole heart in the moment, to invitations, favors, and plans, and then the moments add up into a week no honest calendar could hold. People rarely doubt your sincerity, but they learn to discount your commitments, which stings, because the generosity was real. In love, the square often shows as a taste for the glittering over the nourishing. You can be drawn to extravagant people and grand romantic weather, then feel let down when a relationship settles into its actual size. Or you play the lavish one yourself, giving past your means and quietly expecting the scale of your giving to be matched, an expectation that curdles into resentment when it is not. What drives it is not shallowness but a genuine, oversized responsiveness to what is good, wired to a throttle that sticks open. And that is exactly what the friction trains. Each time you feel the itch for more and pause long enough to ask whether more would actually improve anything, you are building the one capacity this aspect withholds at birth: proportion. It develops the way strength does, by repetition against resistance. People who do this work do not become austere. They become connoisseurs, in the true sense: their enjoyment gains depth as it loses volume, their promises regain their weight, and the big heart finally sits inside a life that can afford it."
+ },
+ {
+  "id": "natal:aspect:venus:trine:jupiter",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "venus",
+   "b": "jupiter",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "aspect:venus~jupiter:trine",
+   "aspect:jupiter~venus:trine"
+  ],
+  "text": "With Venus trine Jupiter, kindness and good fortune run through your life like a stream you did not have to dig. People warm to you early and forgive you quickly. Social situations that knot other people up tend to loosen around you, and a certain baseline of comfort, of things working out pleasantly, has probably followed you long enough that you half assume it is how life works. Your generosity is unforced and your outlook naturally sunny; you expect decency from people, and your expecting it seems to call it up. This is the tradition's favorite aspect for likability, and the reputation is earned. You are good company in a durable way: not performing, just genuinely glad to share what is on the table. Beauty, humor, and celebration come easily to you, and you often serve as the person who reminds everyone else that life is allowed to be enjoyed. The hazard is written into the ease. What has never been withheld is hard to see, and you can move through years of goodwill the way a fish moves through water, unaware of it and therefore careless with it. Charm can start doing jobs that effort should do. Difficult conversations get postponed because pleasantness has always been enough; ambitions stay vague because comfort arrives without them; relationships coast on niceness while their real questions go unasked. There can also be a soft entitlement in the shadow here, a quiet assumption that someone will handle it, that things will come through, because they always have. And often they will. The trine rarely punishes; it simply lets you settle for the pleasant version of a life that could have been a full one. Grace like this only deepens when you point it at something. Gratitude is the hinge: the day you notice how much has been given, the ease turns from a lullaby into a resource. Spent deliberately, on people who need a door opened, on work worth the stretch, on love pursued past the comfortable stage, your luck becomes largesse. Then the stream you were born beside starts irrigating something, and the charmed life deepens into a genuinely rich one."
+ },
+ {
+  "id": "natal:aspect:venus:opposition:jupiter",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "venus",
+   "b": "jupiter",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "aspect:venus~jupiter:opposition",
+   "aspect:jupiter~venus:opposition"
+  ],
+  "text": "Venus opposite Jupiter stretches you between intimacy and expansion, and the stretch usually plays out through the people closest to you. One end of you wants the near and particular: this person, this pleasure, this well-made thing. The other end wants the horizon: more experience, more freedom, more of everything the present arrangement does not contain. Because the two sit at opposite poles, you often experience one of them as yours and meet the other in a partner. So the pattern arrives in matched sets. You love someone expansive and find yourself playing the anchor, tallying their extravagance, or you love someone measured and become the restless one, feeling their sufficiency as a ceiling. The excess and the restraint are both in you; relationships just assign the roles. Money and pleasure are frequent stages for the seesaw. Splurge and correction alternate, grand shared plans swell beyond what either of you meant, and generosity between you can turn subtly competitive, each gesture raising the stakes until giving stops being free. Socially you promise from the expansive pole and deliver from the intimate one, which can leave a trail of warm intentions and mild disappointments. In love itself, the opposition can show as a wandering eye of the imagination: whatever you have, the far pole whispers about what you might have instead, and real partners are made to compete with possibilities, a contest no actual person wins. The aspect's gift is scope. You bring festivity into intimacy and heart into adventure, and at your best a relationship with you feels both close and large, which is what nearly everyone secretly wants. Getting there means calling both poles your own. When you admit that the appetite for more is yours, not just your partner's provocation, and that the wish for depth is yours, not just their demand, the tug of war goes slack. You grow into someone who can sit at a small table with one person and feel no ceiling at all, because the expansion finally happens inside the bond instead of away from it."
+ },
+ {
+  "id": "natal:aspect:venus:conjunction:saturn",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "venus",
+   "b": "saturn",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "aspect:venus~saturn:conjunction",
+   "aspect:saturn~venus:conjunction"
+  ],
+  "text": "Venus conjunct Saturn welds affection to gravity, so that for you love has always been a serious matter. You do not give your heart lightly, and you may not remember a time when you could. Where others toss warmth around like small change, you treat it as capital: weighed, committed deliberately, and honored for the long term. When you say you care, the words carry contractual weight, and the people who have your loyalty tend to keep it for decades. This makes you a rare kind of partner and friend, steady, discreet, and unswayed by fashion in your attachments. The same welding has a cold side. Somewhere early, affection and worthiness likely got tied together, and a quiet clause took root: love must be earned, and might be withdrawn if you fall short. So you audition even in your closest bonds, proving usefulness, holding back need, editing your tenderness before it reaches the air. Others often read the reserve as indifference or self-sufficiency, and the misreading stings, because inside the composure you feel things deeply and want closeness as much as anyone. You may simply have concluded, without ever quite deciding it, that wanting openly is unsafe. Pleasure itself can feel like something requiring a permit. You can defer joy indefinitely, treat beauty as an indulgence, and choose the durable over the delightful so consistently that your life grows handsome and slightly austere. In matters of taste and craft, though, the conjunction is a genuine gift: you have a feel for structure in beautiful things, for quality over novelty, and whatever you build, in art, in savings, in marriage, is built to last. The lifelong work here is unlearning the audition. Affection given to you is not an invoice awaiting payment, and the love you offer does not require a résumé attached. This tends to ease with age; the tradition has long noticed that this aspect grows kinder over time. As you let yourself be cared for without first proving anything, the seriousness stops guarding the door and starts doing its true job, giving your love the one quality no lighter heart can fake: permanence."
+ },
+ {
+  "id": "natal:aspect:venus:sextile:saturn",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "venus",
+   "b": "saturn",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "aspect:venus~saturn:sextile",
+   "aspect:saturn~venus:sextile"
+  ],
+  "text": "Venus sextile Saturn gives you an aptitude for durable affection. You build relationships the way good furniture is built, joint by joint, meant to bear weight. Loyalty is not a struggle for you, and neither is patience with the people you value. You can love someone through their unimpressive stretches. You can keep a friendship alive across distance and years, and stay warm without constant proof that the warmth is returned. There is a maturity in your affections that people come to rely on, often before you notice they are doing it. The same faculty extends to everything Venus touches. In money, you have a workable instinct for value over flash, an ability to enjoy what you have while still building for later. In taste, you lean toward the classic and well-made. You often have a craftsperson's patience for skills that reward slow practice: an instrument, a garden, a trade with beauty in it. In social life, you are the steady point, better in a small circle of old friends than a churn of acquaintances. Better still, you are the person others trust with real things. Because this is a sextile, none of it imposes itself. The capacity for lasting love does not seize you; it waits to be used. It is entirely possible to sit on it, keeping your bonds pleasant and mid-depth, admiring commitment from a respectful distance. Reserve is the mild shadow here. You express care through reliability more than declaration, and some people in your life may be running low on words you assumed they did not need. It asks to be spent, not admired. Make the commitment rather than merely being capable of it, say the loyal thing out loud rather than merely enacting it, choose one or two crafts and loves and give them years. What you build then has a quality that quicker temperaments envy and cannot rush: relationships that improve with age, work with real finish, and a reputation, among the people who know you best, as someone whose affection, once given, simply does not expire."
+ },
+ {
+  "id": "natal:aspect:venus:square:saturn",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "venus",
+   "b": "saturn",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "aspect:venus~saturn:square",
+   "aspect:saturn~venus:square"
+  ],
+  "text": "Venus square Saturn sets your longing for love against an inner gatekeeper that questions whether you are owed any, and the argument between them is one of the quiet recurring facts of your life. The wish for closeness is fully intact in you, often stronger than average. But somewhere near it stands a doubt with an old voice: that affection has conditions, that you are somehow behind on them, that warmth extended to you might be a clerical error soon corrected. So you approach love braced. You test people before trusting them, sometimes without knowing you are running tests. You hold back the needful parts of yourself, then feel lonely inside relationships because the hidden parts are the ones that wanted holding. You may read neutral moments as rejection and pull away first, politely, before anyone can leave. Some with this square choose partners who confirm the doubt, distant or critical people who feel strangely like home; others convert the whole ache into work, achievement, and immaculate self-sufficiency, becoming the person who needs no one, which is both impressive and untrue. Pleasure can carry a faint tax of guilt, and compliments may bounce off you unabsorbed. It is worth saying plainly: the gatekeeper is not perception, it is habit. And the square, like every square, is building something with all this resistance. Few people ever develop your capacity for real devotion, because few have had to choose love repeatedly against an inner voice arguing the case for retreat. Every time you stay reachable when you feel unsure, say the vulnerable thing on a night the old doubt is loud, or let a kindness land without deflecting it, you wear the gate down and lay a course of something permanent. Love that survives this vetting tends to be exceptionally solid, and people who earn your trust get a loyalty that does not blink. The growth arc of this aspect is long and genuinely kind in its later stretch: the tradition notes it softens with age. What began as a fear of being unloved matures, year by tested year, into the most grounded kind of knowledge that you are."
+ },
+ {
+  "id": "natal:aspect:venus:trine:saturn",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "venus",
+   "b": "saturn",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "aspect:venus~saturn:trine",
+   "aspect:saturn~venus:trine"
+  ],
+  "text": "With Venus trine Saturn, steadiness in love comes to you the way a sense of pitch comes to some musicians: unearned, reliable, and so built-in you may never have thought of it as a trait at all. You do not fall apart when a relationship hits an ordinary rough patch. You do not confuse excitement with substance, or mistake a person's packaging for their character. Your affections settle slowly and then hold, and the people you love get a kind of low-weather climate from you, no storms manufactured for attention, no affection withdrawn to make a point. Friends and partners describe you as grounding, often without being able to say exactly what you do. Mostly what you do is stay. The same quiet competence runs through your material and aesthetic life. You handle money with unforced good sense, keep what is worth keeping, and are drawn to things that age well: old friendships, classic clothes, work whose value compounds. Commitments that frighten other people, the mortgage, the marriage, the decade-long project, tend not to frighten you, because some part of you has always understood that time is an ingredient, not a threat. Steadiness this quiet has a way of disappearing, in two directions. Outward, your love can be so undramatic that the people receiving it stop seeing it, mistaking your constancy for mere routine; devotion expressed only as reliability eventually reads as furniture. Inward, you can undervalue the gift yourself, coasting on stability, choosing the sensible bond over the enlivening one, and letting relationships become well-run arrangements with too little said in them. Comfort with the long haul can shade into settling early. Your growth is not about acquiring depth; you have it. It is about expression and occasional risk. Saying the warm thing aloud while it is felt, courting the person you have had for years, letting yourself want something impractical now and then: these keep the steadiness alive rather than merely intact. Tended this way, your gift becomes what it was always shaped to be, not just love that lasts, but love that the people inside it can feel lasting."
+ },
+ {
+  "id": "natal:aspect:venus:opposition:saturn",
+  "family": "aspect",
+  "when": {
+   "kind": "aspect",
+   "a": "venus",
+   "b": "saturn",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "aspect:venus~saturn:opposition",
+   "aspect:saturn~venus:opposition"
+  ],
+  "text": "Venus opposite Saturn places your warmth and your guardedness at opposite ends of a line, and other people tend to become the ground where the two negotiate. The signature experience is distance inside closeness. You reach toward someone and meet a wall; or someone reaches toward you and, without meaning to, you become the wall. Often the poles get divided between partners: you play the loving one opposite someone dutiful, withholding, or heavy with obligation, or you find yourself cast as the sober one opposite a partner whose neediness makes you stiffen. The colder role and the warmer role are both yours; relationships just take turns handing you the script. Timing is a recurring theme. Bonds with this aspect often carry some built-in delay or barrier, differences in age or circumstance, duty that competes with desire, love that becomes available only after long patience. Rejection, real or perceived, leaves deep prints on you, and a few early frosts can set a lifelong policy: keep the heart behind glass, visible and untouchable. Then the loneliness of the policy aches, so you approach again, feel the fear again, and re-erect the glass, a cycle of approach and retreat that partners experience as blowing hot and cold, though from inside it feels like weather you do not control. It helps to know what the opposition is actually asking. It is not a verdict that love goes badly for you. It is a demand that love and reality learn to share a room: affection with its eyes open, commitment that has counted the cost, closeness that survives the discovery of another person's limits and your own. You are unusually equipped for exactly that. Nothing about your loyalty is casual, and a bond you have chosen in full knowledge is nearly weatherproof. Growth means keeping the glass down a little longer each time: staying warm through the moment you want to retreat, naming the fear instead of enacting it, letting someone see the wanting behind the composure. The love that answers, slower than you wished and realer than you hoped, tends to be the kind that stays."
+ }
+]

@@ -1,0 +1,142 @@
+[
+ {
+  "id": "transit:sun:conjunction:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "pluto",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:sun~natal_pluto:conjunction"
+  ],
+  "text": "Once a year, the Sun crosses your natal Pluto, and for a few days everything runs hotter under the surface. This is the annual meeting between who you are right now and the part of you that wants things completely or not at all. A conjunction fuses the two: your will and your depths pull in the same direction, which gives these days real force. You may notice an urge to get to the bottom of something, to fix what has been quietly broken, to stop pretending a situation is fine. Concentration comes easier than usual. So does obsession, and the line between them is worth watching. While the aspect approaches, the pressure builds before you can name it. You might feel restless or oddly determined, picking at a problem you have ignored for months. At the exact pass, something tends to surface: a truth in a conversation, a want you finally admit, a burst of focused effort that clears a backlog in an afternoon. When the Sun moves on, the heat leaves as fast as it came, and the surge shows you what it was actually about. Power is the live theme. You may run into it in others, a boss who leans harder than usual, a partner who tests where the control sits, or you may feel it in yourself as an itch to steer outcomes. The useful version is depth: honest talk, focused work, throwing out what is dead weight. The costly version is force, winning a point at the price of trust. Since the Sun never lingers, whatever this pass stirs is a glimpse rather than a siege. The deeper currents in your life get a yearly check-in here, a short window when you can see them clearly. Treat it like an inspection. What did you find at the bottom, and what deserves to change because of it? Nothing has to be finished in these few days. The gift of the conjunction is contact, a moment of knowing exactly what you want and how strongly you want it. If you write down what surfaces, you keep the insight after the heat fades. By week's end ordinary light returns, and you carry a little more honesty about your own motives than you had before. That small annual reckoning, taken seriously, adds up over the years into real self-knowledge."
+ },
+ {
+  "id": "transit:sun:sextile:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "pluto",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:sun~natal_pluto:sextile"
+  ],
+  "text": "A sextile is an offer, not a demand, and this one lasts only a few days in the Sun's yearly round. With the Sun in easy aspect to your natal Pluto, a small door opens to your own depths: you can look at what drives you without the drama that usually guards that room. Nothing forces the look. If you are busy, the days pass as slightly more focused than usual, and that is all. If you take the offer, though, this is a good window for the quiet kind of change: a frank conversation you have been postponing, a habit examined at the root, a cluttered corner of your life cleared out for good. As the aspect builds, curiosity gathers. You get interested in why people do what they do, your own self included. Around the peak, insight arrives with unusual ease, and motives that normally stay hidden, yours and other people's, become readable. Once the Sun moves on, what you saw settles into your working knowledge without much fuss. Influence is the other theme. During this brief spell you tend to persuade rather than push. People sense that you mean what you say, so requests land better and alliances form naturally. It is a fine moment to ask for backing on something that matters, or to have the deeper version of a talk that usually stays shallow. In love and friendship the same current runs: closeness deepens a notch when someone tells the truth first, and this transit makes you willing to go first. Because the Sun does not double back, there is no second pass to catch what you miss. The door opens, then the year moves on, and the window comes round again as the year turns. That is not a loss so much as a rhythm. Each pass offers the same small invitation to look under your own hood, and the invitation costs nothing to accept. Taken even occasionally, it keeps you honest about what you actually want, which is the raw material of every real change you will ever make. The growth here is cumulative and undramatic. A person who checks their own motives once in a while becomes hard to fool, including by themselves, and this transit is the calendar's gentle reminder to do the checking."
+ },
+ {
+  "id": "transit:sun:square:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "pluto",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:sun~natal_pluto:square"
+  ],
+  "text": "This is a short, gritty transit: the Sun square your natal Pluto tends to put your will and your deeper compulsions at cross purposes for a few days. A square forces the issue. What you consciously intend and what some buried part of you insists on do not line up, and the friction shows. You may catch yourself pushing too hard on a small point, or feel someone else doing it to you. Power is the surface subject, control of a decision, a schedule, a story about who is right. Underneath, the real question is what old pattern has its hands on the wheel. In the days while the aspect builds, irritation gathers without an obvious cause, and situations feel heavier than their actual size. At the peak, the friction usually finds a target: a standoff with someone in authority, a battle of wills at home, an urge to force an outcome that will not be forced. Then the Sun moves on, the pressure lifts almost as fast as it came, and you may be a little baffled at how charged things got. Use the charge rather than being used by it. These days suit hard, focused work, the kind that needs stubbornness: confronting a problem everyone has tiptoed around, ending a small arrangement that has quietly gone bad, finishing what takes grinding effort. They suit ultimatums badly. Whatever you demand under this sky, you will likely have to live with once the intensity fades. If a confrontation does arrive, notice whether you are fighting about the stated issue or about control itself. Naming that, even silently, drains half the venom, because most of the heat in a Pluto square is borrowed from older fights than the one in front of you. The pass is brief and returns with the Sun's regular yearly circuit, so nothing hangs on any single round. What repays attention is the pattern. The same species of standoff, the same familiar compulsion, tends to knock on this door each time, and each time you can see it a little sooner. That is how this transit teaches: not by breaking anything, but by briefly turning up the pressure until you feel exactly where your own grip is too tight. Loosen it a notch, and the week ends with more real authority than any won argument would have given you."
+ },
+ {
+  "id": "transit:sun:trine:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "pluto",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:sun~natal_pluto:trine"
+  ],
+  "text": "Depth stops being hard work for a few days when the Sun trines your natal Pluto. A trine eases the connection between your daily will and the part of you that runs on conviction, so intensity becomes available without its usual cost. You can concentrate for hours. You can say the difficult true thing without the room going cold. A change you have been circling for months can simply get made, and afterward you wonder why it ever looked so heavy. That is the signature of this brief annual pass: strength without strain. While the aspect applies, you may feel your energy consolidating, less scattered than usual, more inclined to finish than to start. Near the peak, the day often brings one clear act of will that lands cleanly, a decision made, a mess cleared, a conversation taken all the way down instead of skimmed. As the Sun separates, the steadiness fades back to normal, but what you built or said in the window stays built and said. Other people tend to trust you more readily under this sky. You come across as someone who means it, and that quiet weight is persuasive in ways argument never is. It is a good stretch for asking, for leading, for the kind of honesty that deepens a bond instead of testing it. In work, favor the tasks that need staying power. In your inner life, this is one of the easier moments of the year to look at your own motives, because the trine lets you see the darker rooms without flinching. The catch with a trine is only that ease slips past unused. Nothing will push you to spend this. The Sun makes the aspect, holds it briefly, and is gone until the same season next year, with no return pass to remind you. So the difference between a forgettable few days and a genuinely useful one is whether you point the steadiness at something that matters to you. Pick one thing that has needed your full weight and give it that weight while the giving is cheap. Over the years, these small windows teach you what your concentrated self can do, and that knowledge stays available long after the transit ends. You learn that your depth is not only a place where trouble lives. It is also where your best work comes from."
+ },
+ {
+  "id": "transit:sun:opposition:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "pluto",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:sun~natal_pluto:opposition"
+  ],
+  "text": "Oppositions arrive through other people, and this one is no exception. For a few days around the Sun's yearly opposition to your natal Pluto, questions of power tend to walk into the room wearing someone else's face. A colleague suddenly seems controlling. A partner digs in over something small. Someone wants a concession you do not want to give, or you catch yourself maneuvering when you could just ask. The opposition confronts: it sets your conscious self and your buried intensity at opposite ends of a rope, and the other person often ends up holding one end without knowing it. What makes this transit useful rather than merely tense is the mirror. Whatever you are not admitting about your own wish to control, to win, or to keep a secret tends to show up in the behavior of the people across from you. In the approach, you may feel a vague wariness, a sense that something unspoken is loading up in a relationship. At the peak, it usually speaks. A hidden resentment surfaces, a real motive comes out, a quiet tug-of-war becomes an open one. The heat can be startling for such a quick transit, but it burns off fast as the Sun separates, and what remains is information: you now know what the relationship was actually carrying. Try not to force endings in the middle of the surge. Feelings run stronger than facts for a day or two, and a bridge burned at the peak is still burned in the calm that follows. What you can do is refuse the fight about control while accepting the conversation about truth. Ask what the other person is actually protecting. Ask yourself the same. Most Pluto oppositions from the Sun are not about the argument at hand; they are the annual moment when a bond gets tested for honesty, and the test itself is quick. There are no repeat passes to revisit it, so whatever came up either gets talked about now or waits for another season. Handled with some steadiness, these few days can leave a relationship cleaner than they found it, with one less secret in the walls. Handled badly, they leave a scorch mark that fades. Either way you learn where power sits in your closest ties, and that knowledge, gathered a little each year, is what lets you share it more fairly."
+ },
+ {
+  "id": "transit:sun:conjunction:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "chiron",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:sun~natal_chiron:conjunction"
+  ],
+  "text": "Every year the Sun reaches the degree of your natal Chiron, and for a few days a light shines on the place in you that never quite healed. Chiron marks an old hurt, the kind that shaped you early and taught you more than you wanted to learn. When the Sun fuses with it, that sore spot and your sense of who you are briefly become one thing. You may feel unusually tender, more easily stung by a passing remark, more aware of the gap between the person you present and the person who still carries the bruise. This is not a setback. It is the calendar doing you a service, because you cannot tend what you cannot feel. As the conjunction approaches, small discomforts tend to gather: a memory that keeps returning, a self-doubt that seems louder than the situation warrants. At the exact pass, the feeling usually clarifies. You see plainly what still hurts and, often, how far you have already come with it. As the Sun moves on, the rawness fades within days, leaving a kind of soberness that is easy to mistake for sadness but is closer to honesty. The tradition around Chiron pairs the wound with a gift: the places where you have suffered are the places where you help others best, because you know the terrain from inside. This transit often shows that side too. Someone may come to you with a trouble that echoes your own history, and you find you have something real to give them. Or a mentor figure appears just when your confidence dips, offering exactly the steadiness you needed. Let the days be what they are. There is no need to fix the old wound this week, and no way to; the pass is quick, and it will come again at the same time next year, a brief annual visit rather than a long stay. What you can do is drop the pretense that the sore spot does not exist. Self-acceptance grows in exactly these small windows, when you look at the unhealed place in good light and do not turn away. Year over year, that adds up. The wound may never vanish, but your relationship to it keeps changing, and that change is the healing Chiron actually promises."
+ },
+ {
+  "id": "transit:sun:sextile:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "chiron",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:sun~natal_chiron:sextile"
+  ],
+  "text": "Some transits shout; this one taps you on the shoulder. The Sun sextile your natal Chiron is a brief, gentle opening, a few days when help moves more freely in both directions. Chiron marks the tender place in your chart, the old hurt that made you wiser than you asked to be. Under a sextile, that place is reachable without being raw. You can talk about a difficulty without the conversation swallowing you. You can accept a kindness without feeling diminished by needing it, which for many people is the harder half. The sextile only offers; it never insists. If you let the days pass unexamined, they pass pleasantly enough and leave no mark. But if something in you has been waiting for a safe moment, this is what a safe moment feels like. As the aspect builds, you may notice more openness than usual, in yourself and in the people around you. Near the peak the deepening has less to do with words than with presence: a friend confides, a younger colleague seeks you out, someone older gives you a piece of perspective that lands. Mentoring goes well now, in both roles, because what you carry from your own hard patches shows in how you sit with people, not in anything you have to explain. As the Sun separates, the window closes softly, and the small exchanges of the week settle in as a little more trust than you had before. There is no drama to manage here and no return pass to wait for; the Sun keeps moving, and this particular door opens again around the same time each year. The practical use of such a light touch is real, though. Healing rarely happens in grand gestures. It happens in ordinary moments when the sore subject gets aired briefly and nothing bad follows, and this transit reliably supplies a few of those moments. Take one. Mention the thing you usually skip. Offer the help you usually hold back for fear of intruding. Each small exchange teaches the oldest Chiron lesson from the friendly side: that the wounded parts of people, yours included, respond less to fixing than to company, and that giving and receiving that company is a skill you can grow."
+ },
+ {
+  "id": "transit:sun:square:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "chiron",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:sun~natal_chiron:square"
+  ],
+  "text": "For a few days each year, the Sun squares your natal Chiron and the old bruise gets bumped. A square forces contact you did not choose. Chiron is the place where an early hurt still lives, usually well managed and mostly quiet, and this transit briefly puts your ordinary business on a collision course with it. The trigger is often small: a criticism that lands harder than it should, a moment of being overlooked, a task that pokes your particular self-doubt. The reaction is what tells you the transit is here. You feel younger than your years for an afternoon, defensive or deflated out of proportion to the cause, and if you do not know the sky is involved, you may conclude something is wrong with you. Nothing new is wrong. Something old is visible. While the square applies, sensitivity climbs and small frictions accumulate. At the peak, one of them usually finds the sore spot squarely, and for a day the old story plays: not good enough, not wanted, not able, whatever your version says. Then the Sun separates, the volume drops fast, and by the end of the week the incident looks strangely minor for the feeling it carried. That gap between the size of the event and the size of the reaction is the gift hidden in this rough little transit. It shows you, precisely and briefly, where the wound sits and what still activates it. You do not have to act on what you see, and the week is a poor time for big judgments about yourself since the reading runs hot. But noticing counts. Each year this pass gives the same short test, with no repeat visits, and each year the reaction can soften a little as the story loses its surprise. Be gentler with yourself than the moment seems to demand, and be a bit careful with others too, because your own soreness can make your remarks sharper than intended. If an apology is owed in either direction, the settling days after the peak are good for it. Over time, the square becomes less an ambush and more a checkup. The hurt stops running the moment, you recover in hours instead of days, and that shrinking recovery time is the plainest evidence of healing there is."
+ },
+ {
+  "id": "transit:sun:trine:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "chiron",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:sun~natal_chiron:trine"
+  ],
+  "text": "There are a few days in the year when your flaws sit comfortably, and the Sun trine your natal Chiron is one of them. A trine eases what is usually effortful. Chiron marks the injury that never fully closed, and most of the time you spend some quiet energy managing it, working around it, keeping it out of view. Under this brief annual pass, that management relaxes. The scarred place stops feeling like a liability and starts feeling like history, something you carry rather than something that carries you. The difference is subtle and unmistakable: you can mention the hard chapter without your chest tightening, laugh about a limitation, let someone see an imperfect corner of your life without bracing for their reaction. As the aspect applies, self-criticism tends to go quiet and a mild, realistic confidence takes its place. Around the peak, the ease often turns outward. This is one of the better moments of the year for helping someone through territory you know from experience, because you can speak from the scar instead of the wound. Your advice comes out warm rather than raw, and people take it more easily. Teachers, mentors, and steady older friends may also figure in these days, either present in person or present in what you find yourself passing on. As the Sun separates, the special ease recedes, but it leaves a residue worth keeping: the memory of what it feels like to be at peace with your own damage. Since this transit neither lingers nor returns for a second look, its work is done in glimpses. Nothing dramatic needs to happen for the pass to succeed. A single honest conversation, a moment of accepting help, an hour of not fighting yourself can be the whole event. Still, the glimpses matter more than their size suggests. Self-acceptance is mostly built out of accumulated evidence that the flawed version of you is livable and even lovable, and each year this trine quietly files another piece of that evidence. What grows over time is not perfection but ease of carriage. The old hurt weighs the same; you get stronger under it, and on these few days each year you can feel exactly how much stronger you have already become."
+ },
+ {
+  "id": "transit:sun:opposition:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "chiron",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:sun~natal_chiron:opposition"
+  ],
+  "text": "Once a year the Sun stands opposite your natal Chiron, and for a few days your oldest soreness tends to look back at you from across a relationship. An opposition confronts, and it likes to use other people to do it. Someone may touch your tender spot without meaning to: a partner's offhand comment, a friend's success in exactly the area where you feel behind, a stranger's casual competence at the thing you have always struggled with. Or the mirror works the other way, and you meet someone whose visible hurt stirs your own, drawing out either unusual compassion or unusual discomfort. Both responses are information. Whatever this pass surfaces was already there; the transit only puts it at eye level. In the approach, interactions can feel slightly loaded, as if people were speaking to an older version of you. At the peak, one exchange usually crystallizes it, a moment of feeling exposed, misread, or quietly ashamed, out of scale with what was actually said. Let the moment finish before you judge it. As the Sun separates, perspective returns fast, and the same exchange often reads differently within a day or two: less an attack, more an accident that found old scar tissue. The useful work of this transit happens in that after-light. Because the wound appeared in relation to someone, you get to see how you handle it in company, whether you hide it, apologize for it, hand it to the other person to manage, or simply own it. Owning it is the growth edge. Saying some version of that touched an old sore spot, it's mine, not yours, is difficult and surprisingly freeing, and it tends to deepen the relationship rather than strain it. There is no second pass to rehearse for; the Sun moves on quickly and brings this mirror back at the same season each year. Some years the reflection will be faint, other years sharp, depending on what life has been pressing lately. Either way, the annual glance teaches something you cannot learn alone: how your hurt behaves between people, not just inside you. Slowly, that turns the wound from a private liability into a source of understanding, the thing that lets you recognize pain in others early and meet it without flinching."
+ }
+]

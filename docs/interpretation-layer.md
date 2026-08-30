@@ -36,9 +36,13 @@ Every atom carries:
   `aspect:mars~saturn:square`, `pattern:t_square:mars-moon-saturn`,
   `signature:element:fire`, `angle:asc`). Interpretations reference this id, so a
   generated claim can point at the fact it rests on.
-- `kind` -- `placement | aspect | pattern | signature | angle | dispositor |
-  reception | star | lot | transit | synastry | composite | timelord | dignity |
-  nakshatra | varga | yoga | parallel | outOfBounds`.
+- `kind` -- `placement | aspect | pattern | signature | angle | angleContact |
+  dispositor | reception | star | lot | degree | transit | transitHouse | station |
+  synastry | composite | compositeAspect | timelord | dignity | nakshatra |
+  varga | yoga |
+  parallel | outOfBounds | return | lunation | solarPhase`.
+  (`scripts/check-docs.mjs` asserts this list against the `FactKind` union
+  in the source, in CI -- it drifted for two releases before that existed.)
 - `bodies` -- the body ids involved, for filtering and cross-reference.
 - `salience` -- a transparent, overridable score (see below).
 - `text` -- a plain-language statement of the fact, no interpretation
@@ -74,6 +78,13 @@ asserting meaning. It is a sum of explicit, documented contributions
 | `pattern` | a whole configuration |
 | `dispositor` / `reception` | a dispositor link / a mutual reception |
 | `star` / `lot` | a fixed-star conjunction / a Hermetic lot |
+| `transit` / `transitHouse` / `station` | a transit-to-natal aspect / a transiting body's natal house / a station near the instant |
+| `synastry` / `composite` / `compositeAspect` | an inter-chart aspect or overlay / a composite midpoint placement / an aspect between two composite placements |
+| `timelord` | an active time-lord period |
+| `dignityFine` | a term, face, triplicity, or almuten fact |
+| `vedic` | a nakshatra, varga, or yoga fact |
+| `parallel` / `outOfBounds` | a declination parallel / a body beyond the obliquity |
+| `planetReturn` / `lunation` / `solarPhase` | a return in progress / a New or Full Moon near the instant (an eclipse adds it again) / a solar-condition fact |
 
 No weight is magic; a caller who dislikes the defaults overrides them.
 
@@ -95,6 +106,9 @@ geometric, time-only `query` predicates cannot.
   `hasPattern({ kind, body })`, `hasSignature(facet, value)`,
   `hasAngle(angle, sign)`, `hasDispositor({ body })`, `hasReception({ body })`,
   `hasStar({ body, star })`, `hasLot({ lot, sign, house })`,
+  `hasDegree({ point, sign, degree, face })` (ordinal degree 1-30 -- a body
+  at 14°30' Aries is in the 15th degree, the degree-symbol convention --
+  and/or the ten-degree face index 1-3),
   `hasParallel({ body, between, declination, maxOrb })`,
   `hasOutOfBounds({ body, minMargin })`.
 - combinators: `matchAll(...)` (every selector; unions atoms), `matchAny(...)`
@@ -256,6 +270,16 @@ Selectors: `hasTransit`, `hasSynastry`, `hasComposite`, `hasTimelord`,
 Helpers: {@link enrichContextOptions} (transits + time-lords + Vedic at a target
 instant), {@link enrichSynastryOptions} (synastry + composite for two charts).
 The Playground Reading tab and MCP `chart_facts` / `synastry` tools use these.
+
+A midpoint composite has no moment and no place, so it has nothing to cast
+houses from. {@link compositeFrame} supplies a stated convention instead --
+midpoint Ascendant and MC, equal houses from the Ascendant -- and names it in
+`method`, so a reading can say which convention it used and another can be
+added beside it. Pass the frame to {@link compositePlacements} and each
+placement carries a `house`; omit it and none of them do, which is what
+happens whenever either birth time is unknown. The composite MC does not
+generally fall on the tenth cusp, because two independently averaged angles
+do not keep their quadrant relationship.
 
 ## Reference corpus (shipped separately)
 

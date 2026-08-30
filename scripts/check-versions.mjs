@@ -42,6 +42,16 @@ if (!siteMatch) {
   console.error("check-versions: could not find SITE.version in apps/web/lib/site.ts");
   process.exit(1);
 }
+// Engine runtime export: VERSION in packages/caelus/src/version.ts. Consumers
+// stamp computed artifacts without importing package.json into browser bundles.
+const versionTs = read("packages/caelus/src/version.ts");
+const versionTsMatch = versionTs.match(/export const VERSION = "([^"]+)"/);
+if (!versionTsMatch) {
+  console.error("check-versions: could not find VERSION in packages/caelus/src/version.ts");
+  process.exit(1);
+}
+sources.push({ label: "caelus src/version.ts (VERSION)", version: versionTsMatch[1] });
+
 sources.push({ label: "apps/web/lib/site.ts (SITE.version)", version: siteMatch[1] });
 
 const canonical = sources[0].version;
@@ -89,10 +99,43 @@ if (!rangeMatch) {
   }
 }
 
+// caelus-corpus versions independently and must use the same peer shape. It
+// may name a FUTURE engine line (it binds to fact kinds the next release
+// ships): if the peer's lower bound is above canonical the pin is forward
+// and legal. Once the engine reaches the lower bound, the range must admit
+// canonical or the check fails.
+const corpusPkg = JSON.parse(read("packages/caelus-corpus/package.json"));
+const corpusRange = corpusPkg.peerDependencies?.caelus;
+let corpusNote = "";
+if (corpusPkg.dependencies?.caelus) {
+  depErrors.push(
+    "caelus-corpus lists caelus in dependencies — it must be a peerDependency",
+  );
+}
+const corpusMatch = corpusRange?.match(/^>=(\d+\.\d+\.\d+) <(\d+\.\d+(?:\.\d+)?)$/);
+if (!corpusMatch) {
+  depErrors.push(
+    `caelus-corpus peerDependencies.caelus is "${corpusRange}", expected ">=A.B.C <X.Y" form`,
+  );
+} else {
+  const lo = parseVer(corpusMatch[1]);
+  const hi = parseVer(corpusMatch[2].split(".").length === 2 ? `${corpusMatch[2]}.0` : corpusMatch[2]);
+  const can = parseVer(canonical);
+  if (cmp(can, lo) < 0) {
+    corpusNote = ` (forward pin; engine not yet at ${corpusMatch[1]})`;
+  } else if (cmp(can, hi) >= 0) {
+    depErrors.push(
+      `caelus-corpus peer range "${corpusRange}" does not admit caelus ${canonical} — ` +
+        "widen the range and bump the package version",
+    );
+  }
+}
+
 if (mismatches.length === 0 && depErrors.length === 0) {
   console.log(
     `versions check passed — all artifacts at ${canonical}; ` +
-      `caelus-delineations-pd at ${pdPkg.version} (peer ${pdRange})`,
+      `caelus-delineations-pd at ${pdPkg.version} (peer ${pdRange}); ` +
+      `caelus-corpus at ${corpusPkg.version} (peer ${corpusRange}${corpusNote})`,
   );
   process.exit(0);
 }

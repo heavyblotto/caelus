@@ -1,0 +1,9 @@
+{
+ "model": "BAAI/bge-m3",
+ "dim": 1024,
+ "normalized": true,
+ "max_seq": 512,
+ "count": 3656,
+ "generated": "2026-08-20T19:34:15+00:00",
+ "elapsed_s": 220.6
+}

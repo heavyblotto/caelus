@@ -6,9 +6,9 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "npm run build -w caelus && npm run stats:golden && npm run facts:sync && npm run build -w caelus-delineations-pd && npm run build -w caelus-mcp && npm run build -w caelus-birth && npm run build -w caelus-wheel && npm run docs:api && npm run search:index && npm run build -w web",
-    "test": "npm run test -w caelus && npm run test -w caelus-delineations-pd && npm run test -w caelus-birth && npm run test:wheel && npm run test:mcp",
-    "test:wheel": "npm run test -w caelus-wheel && node packages/wheel/dist/test/sphere.test.js && node packages/wheel/dist/test/astromap.test.js && node packages/wheel/dist/test/ephemerisgraph.test.js && node packages/wheel/dist/test/integration.test.js",
+    "build": "npm run build -w caelus && npm run stats:golden && npm run facts:sync && npm run build -w caelus-delineations-pd && npm run build -w caelus-corpus && npm run build -w caelus-mcp && npm run build -w caelus-birth && npm run build -w caelus-wheel && npm run build -w caelus-widgets && npm run docs:api && npm run search:index && npm run build -w web",
+    "test": "npm run test -w caelus && npm run test -w caelus-delineations-pd && npm run test -w caelus-corpus && npm run test -w caelus-birth && npm run test:wheel && npm run test -w caelus-widgets && npm run test:mcp",
+    "test:wheel": "npm run test -w caelus-wheel && node packages/wheel/dist/test/sphere.test.js && node packages/wheel/dist/test/astromap.test.js && node packages/wheel/dist/test/ephemerisgraph.test.js && node packages/wheel/dist/test/multiwheel.test.js && node packages/wheel/dist/test/integration.test.js",
     "test:mcp": "node packages/caelus-mcp/smoke.mjs && node packages/caelus-mcp/verify_tools.mjs && node packages/caelus-mcp/integration.test.mjs && node packages/caelus-mcp/eval/run.mjs",
     "test:python": "bash -c 'for f in python/test_*.py; do python3 \"$f\" || exit 1; done'",
     "test:web-libs": "node scripts/test-web-libs.mjs",

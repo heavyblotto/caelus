@@ -1,0 +1,233 @@
+{
+ "name": "transits-uranus-2",
+ "outFile": "b2-transits-uranus-2.json",
+ "setId": "house-b2-transits-uranus-2",
+ "family": "transit-aspect",
+ "cells": [
+  {
+   "id": "transit:uranus:conjunction:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "uranus",
+    "natal": "venus",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:uranus~natal_venus:conjunction"
+   ],
+   "title": "Transiting Uranus conjunct your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:sextile:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "uranus",
+    "natal": "venus",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:uranus~natal_venus:sextile"
+   ],
+   "title": "Transiting Uranus sextile your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:square:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "uranus",
+    "natal": "venus",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:uranus~natal_venus:square"
+   ],
+   "title": "Transiting Uranus square your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:trine:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "uranus",
+    "natal": "venus",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:uranus~natal_venus:trine"
+   ],
+   "title": "Transiting Uranus trine your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:opposition:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "uranus",
+    "natal": "venus",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:uranus~natal_venus:opposition"
+   ],
+   "title": "Transiting Uranus opposite your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:conjunction:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "uranus",
+    "natal": "mars",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:uranus~natal_mars:conjunction"
+   ],
+   "title": "Transiting Uranus conjunct your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:sextile:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "uranus",
+    "natal": "mars",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:uranus~natal_mars:sextile"
+   ],
+   "title": "Transiting Uranus sextile your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:square:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "uranus",
+    "natal": "mars",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:uranus~natal_mars:square"
+   ],
+   "title": "Transiting Uranus square your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:trine:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "uranus",
+    "natal": "mars",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:uranus~natal_mars:trine"
+   ],
+   "title": "Transiting Uranus trine your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:opposition:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "uranus",
+    "natal": "mars",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:uranus~natal_mars:opposition"
+   ],
+   "title": "Transiting Uranus opposite your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:conjunction:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "uranus",
+    "natal": "jupiter",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:uranus~natal_jupiter:conjunction"
+   ],
+   "title": "Transiting Uranus conjunct your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:sextile:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "uranus",
+    "natal": "jupiter",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:uranus~natal_jupiter:sextile"
+   ],
+   "title": "Transiting Uranus sextile your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:square:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "uranus",
+    "natal": "jupiter",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:uranus~natal_jupiter:square"
+   ],
+   "title": "Transiting Uranus square your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:trine:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "uranus",
+    "natal": "jupiter",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:uranus~natal_jupiter:trine"
+   ],
+   "title": "Transiting Uranus trine your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:opposition:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "uranus",
+    "natal": "jupiter",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:uranus~natal_jupiter:opposition"
+   ],
+   "title": "Transiting Uranus opposite your natal Jupiter",
+   "bindable": true
+  }
+ ]
+}

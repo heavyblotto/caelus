@@ -1,0 +1,176 @@
+{
+ "name": "composite-sun",
+ "outFile": "b3-composite-sun.json",
+ "setId": "house-b3-composite-sun",
+ "family": "composite-placement",
+ "cells": [
+  {
+   "id": "composite:sun:sign:aries",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "sun",
+    "sign": "Aries"
+   },
+   "atomIds": [
+    "composite:sun"
+   ],
+   "title": "Composite Sun in Aries",
+   "bindable": true
+  },
+  {
+   "id": "composite:sun:sign:taurus",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "sun",
+    "sign": "Taurus"
+   },
+   "atomIds": [
+    "composite:sun"
+   ],
+   "title": "Composite Sun in Taurus",
+   "bindable": true
+  },
+  {
+   "id": "composite:sun:sign:gemini",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "sun",
+    "sign": "Gemini"
+   },
+   "atomIds": [
+    "composite:sun"
+   ],
+   "title": "Composite Sun in Gemini",
+   "bindable": true
+  },
+  {
+   "id": "composite:sun:sign:cancer",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "sun",
+    "sign": "Cancer"
+   },
+   "atomIds": [
+    "composite:sun"
+   ],
+   "title": "Composite Sun in Cancer",
+   "bindable": true
+  },
+  {
+   "id": "composite:sun:sign:leo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "sun",
+    "sign": "Leo"
+   },
+   "atomIds": [
+    "composite:sun"
+   ],
+   "title": "Composite Sun in Leo",
+   "bindable": true
+  },
+  {
+   "id": "composite:sun:sign:virgo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "sun",
+    "sign": "Virgo"
+   },
+   "atomIds": [
+    "composite:sun"
+   ],
+   "title": "Composite Sun in Virgo",
+   "bindable": true
+  },
+  {
+   "id": "composite:sun:sign:libra",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "sun",
+    "sign": "Libra"
+   },
+   "atomIds": [
+    "composite:sun"
+   ],
+   "title": "Composite Sun in Libra",
+   "bindable": true
+  },
+  {
+   "id": "composite:sun:sign:scorpio",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "sun",
+    "sign": "Scorpio"
+   },
+   "atomIds": [
+    "composite:sun"
+   ],
+   "title": "Composite Sun in Scorpio",
+   "bindable": true
+  },
+  {
+   "id": "composite:sun:sign:sagittarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "sun",
+    "sign": "Sagittarius"
+   },
+   "atomIds": [
+    "composite:sun"
+   ],
+   "title": "Composite Sun in Sagittarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:sun:sign:capricorn",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "sun",
+    "sign": "Capricorn"
+   },
+   "atomIds": [
+    "composite:sun"
+   ],
+   "title": "Composite Sun in Capricorn",
+   "bindable": true
+  },
+  {
+   "id": "composite:sun:sign:aquarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "sun",
+    "sign": "Aquarius"
+   },
+   "atomIds": [
+    "composite:sun"
+   ],
+   "title": "Composite Sun in Aquarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:sun:sign:pisces",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "sun",
+    "sign": "Pisces"
+   },
+   "atomIds": [
+    "composite:sun"
+   ],
+   "title": "Composite Sun in Pisces",
+   "bindable": true
+  }
+ ]
+}

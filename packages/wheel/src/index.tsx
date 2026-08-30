@@ -64,6 +64,80 @@ export const DARK_THEME: WheelTheme = {
   fontFamily: "ui-monospace, 'SF Mono', Menlo, Consolas, monospace",
 };
 
+/**
+ * The Encyclopedia's plate palette: warm paper, ink, and the oxblood
+ * accent. Oxblood is the single interaction channel (the reader's
+ * current place, the highlighted element); nothing in the base theme
+ * uses it, so it keeps one meaning. Widget layers read it from here.
+ */
+export const PLATE_TOKENS = {
+  /** Page paper. */
+  paper: "#f7f3e9",
+  /** Plate panel paper (figures sit on this). */
+  panel: "#fdfbf5",
+  /** Full ink. */
+  ink: "#22201c",
+  /** Secondary ink: labels, soft aspects. */
+  mutedInk: "#6f695c",
+  /** Tertiary ink: house numbers, de-emphasized furniture. */
+  faintInk: "#9a927f",
+  /** Hairline structural rules. */
+  rule: "#c9c1af",
+  /** Oxblood: the one interaction accent. */
+  accent: "#8c2f2a",
+} as const;
+
+/**
+ * Ink-on-paper theme for the Encyclopedia's figure plates. Glyphs and
+ * axes take full ink; sign and house furniture recede into muted inks;
+ * hard aspects carry full ink and soft aspects the secondary ink (the
+ * engraving convention: weight, not hue). `planetColors` names all
+ * thirteen default bodies explicitly so the theme is complete on its
+ * own — merging it can never strand a body on another palette.
+ */
+export const PLATE_THEME: WheelTheme = {
+  background: "transparent",
+  ring: PLATE_TOKENS.rule,
+  axis: PLATE_TOKENS.ink,
+  signText: "#8a8272",
+  planetText: PLATE_TOKENS.ink,
+  planetColors: {
+    sun: PLATE_TOKENS.ink, moon: PLATE_TOKENS.ink,
+    mercury: PLATE_TOKENS.ink, venus: PLATE_TOKENS.ink,
+    mars: PLATE_TOKENS.ink, jupiter: PLATE_TOKENS.ink,
+    saturn: PLATE_TOKENS.ink, uranus: PLATE_TOKENS.ink,
+    neptune: PLATE_TOKENS.ink, pluto: PLATE_TOKENS.ink,
+    chiron: PLATE_TOKENS.ink,
+    true_node: PLATE_TOKENS.mutedInk, mean_node: PLATE_TOKENS.mutedInk,
+  },
+  labelText: PLATE_TOKENS.mutedInk,
+  houseText: PLATE_TOKENS.faintInk,
+  aspectColors: {
+    conjunction: PLATE_TOKENS.ink,
+    opposition: PLATE_TOKENS.ink,
+    square: PLATE_TOKENS.ink,
+    trine: PLATE_TOKENS.mutedInk,
+    sextile: PLATE_TOKENS.mutedInk,
+  },
+  fontFamily: "'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace",
+};
+
+/**
+ * Per-body line inks for the drawing components (AstroMap,
+ * EphemerisGraph), where many bodies draw at once and identical inks
+ * would be unreadable. Muted earth tints — an engraver's tinted inks —
+ * low-chroma so a plate still reads as ink at a glance, each dark
+ * enough for the panel paper. Mars is deliberately not oxblood
+ * (`PLATE_TOKENS.accent` keeps its one meaning). Pass as the `colors`
+ * prop; complete over the thirteen default bodies plus the nodes.
+ */
+export const PLATE_BODY_INKS: Record<string, string> = {
+  sun: "#8a6a1c", moon: "#6e6a5e", mercury: "#5b5370", venus: "#3f6d5a",
+  mars: "#6d3524", jupiter: "#6b4f23", saturn: "#4a453c",
+  uranus: "#3d5f70", neptune: "#3f4d75", pluto: "#5d4056",
+  chiron: "#566044", true_node: "#6f695c", mean_node: "#6f695c",
+};
+
 export const GLYPHS: Record<string, string> = {
   sun: "☉", moon: "☽", mercury: "☿", venus: "♀",
   mars: "♂", jupiter: "♃", saturn: "♄", uranus: "♅",
@@ -80,6 +154,18 @@ const MAX_ORB: Record<string, number> = {
 /** Python-semantics modulo (result sign follows the divisor). */
 const mod = (a: number, n: number) => ((a % n) + n) % n;
 
+/** The wheel's anatomical layers, each independently drawable. All
+ *  default on; a partial record turns parts of the figure off so a
+ *  tutorial (the wheel-anatomy widget) can build the diagram up layer
+ *  by layer. `axes` is the horizon–meridian cross (AC/MC/DC/IC). */
+export interface WheelLayers {
+  zodiac?: boolean;
+  houses?: boolean;
+  axes?: boolean;
+  bodies?: boolean;
+  aspects?: boolean;
+}
+
 export interface ChartWheelProps {
   /** The Chart object from caelus, or a caelus-mcp natal_chart /
    *  current_sky tool response, as-is. */
@@ -91,6 +177,8 @@ export interface ChartWheelProps {
   /** Bodies to draw; defaults to every body in the chart except mean_node
    *  (true node is drawn; the two sit ~1° apart and double the glyph). */
   bodies?: string[];
+  /** Layers to draw; omitted layers default on. */
+  layers?: WheelLayers;
   theme?: Partial<WheelTheme>;
   glyphs?: Record<string, string>;
 }
@@ -165,9 +253,14 @@ export function ChartWheel({
   showAspects = true,
   aspectTypes = ["conjunction", "sextile", "square", "trine", "opposition"],
   bodies,
+  layers,
   theme,
   glyphs,
 }: ChartWheelProps): ReactElement {
+  const L: Required<WheelLayers> = {
+    zodiac: true, houses: true, axes: true, bodies: true, aspects: true,
+    ...layers,
+  };
   const T: WheelTheme = { ...DARK_THEME, ...theme,
     aspectColors: { ...DARK_THEME.aspectColors, ...(theme?.aspectColors ?? {}) },
     planetColors: { ...(DARK_THEME.planetColors ?? {}), ...(theme?.planetColors ?? {}) } };
@@ -209,22 +302,31 @@ export function ChartWheel({
 
   const el: ReactElement[] = [];
 
-  // ring circles
-  for (const [r, key] of [[1.0, "outer"], [0.84, "zodiac-in"], [0.70, "house-in"],
-    [0.50, "aspect"]] as Array<[number, string]>) {
+  // ring circles: the outer circle is the plate's frame and always
+  // draws; the inner circles belong to the layer whose band they bound
+  const rings: Array<[number, string, boolean]> = [
+    [1.0, "outer", true],
+    [0.84, "zodiac-in", L.zodiac],
+    [0.70, "house-in", L.houses],
+    [0.50, "aspect", L.aspects],
+  ];
+  for (const [r, key, on] of rings) {
+    if (!on) continue;
     el.push(<circle key={`ring-${key}`} cx={c} cy={c} r={fix(r * R)}
       fill="none" stroke={T.ring} strokeWidth={r === 1.0 ? 1.5 : 1} />);
   }
 
   // zodiac: sign boundaries, glyphs, ticks
-  for (let s = 0; s < 12; s++) {
-    el.push(line(s * 30, 0.84, 1.0, { stroke: T.ring, strokeWidth: 1 }, `sb-${s}`));
-    el.push(text(s * 30 + 15, 0.92, SIGN_GLYPHS[s], size * 0.045, T.signText, `sg-${s}`));
-  }
-  for (let d = 0; d < 360; d++) {
-    const len = d % 10 === 0 ? 0.035 : d % 5 === 0 ? 0.028 : 0.016;
-    el.push(line(d, 0.84, 0.84 + len,
-      { stroke: T.ring, strokeWidth: d % 5 === 0 ? 1 : 0.5 }, `tick-${d}`));
+  if (L.zodiac) {
+    for (let s = 0; s < 12; s++) {
+      el.push(line(s * 30, 0.84, 1.0, { stroke: T.ring, strokeWidth: 1 }, `sb-${s}`));
+      el.push(text(s * 30 + 15, 0.92, SIGN_GLYPHS[s], size * 0.045, T.signText, `sg-${s}`));
+    }
+    for (let d = 0; d < 360; d++) {
+      const len = d % 10 === 0 ? 0.035 : d % 5 === 0 ? 0.028 : 0.016;
+      el.push(line(d, 0.84, 0.84 + len,
+        { stroke: T.ring, strokeWidth: d % 5 === 0 ? 1 : 0.5 }, `tick-${d}`));
+    }
   }
 
   // house cusps + numbers; axes emphasized
@@ -233,18 +335,22 @@ export function ChartWheel({
     [asc, "AC"], [chart.angles.mc, "MC"],
     [mod(asc + 180, 360), "DC"], [mod(chart.angles.mc + 180, 360), "IC"],
   ];
-  for (let i = 0; i < 12; i++) {
-    el.push(line(cusps[i], 0.50, 0.84, { stroke: T.ring, strokeWidth: 1 }, `cusp-${i}`));
-    const arc = mod(cusps[(i + 1) % 12] - cusps[i], 360);
-    el.push(text(cusps[i] + arc / 2, 0.77, String(i + 1), size * 0.026, T.houseText, `hn-${i}`));
+  if (L.houses) {
+    for (let i = 0; i < 12; i++) {
+      el.push(line(cusps[i], 0.50, 0.84, { stroke: T.ring, strokeWidth: 1 }, `cusp-${i}`));
+      const arc = mod(cusps[(i + 1) % 12] - cusps[i], 360);
+      el.push(text(cusps[i] + arc / 2, 0.77, String(i + 1), size * 0.026, T.houseText, `hn-${i}`));
+    }
   }
-  for (const [lon, label] of axes) {
-    el.push(line(lon, 0.50, 1.0, { stroke: T.axis, strokeWidth: 2 }, `axis-${label}`));
-    el.push(text(lon, 1.045, label, size * 0.026, T.axis, `axl-${label}`));
+  if (L.axes) {
+    for (const [lon, label] of axes) {
+      el.push(line(lon, 0.50, 1.0, { stroke: T.axis, strokeWidth: 2 }, `axis-${label}`));
+      el.push(text(lon, 1.045, label, size * 0.026, T.axis, `axl-${label}`));
+    }
   }
 
   // aspect lines (under the planet layer)
-  if (showAspects) {
+  if (showAspects && L.aspects) {
     const want = new Set(aspectTypes);
     const drawn = new Set(names);
     for (const a of chart.aspects) {
@@ -262,7 +368,7 @@ export function ChartWheel({
   }
 
   // planets: pointer tick at true longitude, glyph + label at fanned angle
-  names.forEach((b, i) => {
+  if (L.bodies) names.forEach((b, i) => {
     const p = chart.bodies[b]!;
     const disp = dispLons[i];
     const pColor = T.planetColors?.[b] ?? T.planetText;
@@ -294,10 +400,12 @@ export function ChartWheel({
   );
 }
 
+export * from "./multiwheel.js";
+
+export * from "./kundli.js";
+
 export * from "./sphere.js";
 
 export * from "./astromap.js";
 
 export * from "./ephemerisgraph.js";
-
-export * from "./kundli.js";

@@ -24,6 +24,7 @@ import {
 import {
   fmtIso, isoFromJd, jdFromIso, birthShareOf, formShareOf, formAsWheel,
   directedChart, risingWindows, DEFAULT_FORM, extraBodyIds,
+  playgroundChartParams,
   type DocKind, type FigureView, type ProgressMethod, type RailId,
 } from "./util";
 import {
@@ -38,6 +39,11 @@ const ReadingTab = dynamic(() => import("../ReadingTab"), {
   ssr: false,
   loading: () => <p className="dim small" style={{ marginTop: 0 }}>reading the chart…</p>,
 });
+const HouseComparatorSlot = dynamic(() => import("./widgets/HouseComparatorSlot"), { ssr: false });
+const SectFlipSlot = dynamic(() => import("./widgets/SectFlipSlot"), { ssr: false });
+const DerivationSlot = dynamic(() => import("./widgets/DerivationSlot"), { ssr: false });
+const RetrogradeSlot = dynamic(() => import("./widgets/RetrogradeSlot"), { ssr: false });
+const AspectDialSlot = dynamic(() => import("./widgets/AspectDialSlot"), { ssr: false });
 
 const PATTERN_LABEL: Record<string, string> = {
   grand_cross: "Grand cross", mystic_rectangle: "Mystic rectangle", kite: "Kite",
@@ -401,6 +407,10 @@ export default function Workspace() {
 
   const la = Number(lat), lo = Number(lon);
   const formWheel = compiled ? formAsWheel(compiled.longitudes) : null;
+  const widgetParams = useMemo(() => {
+    if (!chart) return null;
+    return playgroundChartParams(chart.jdUt, la, lo, sys, place || undefined);
+  }, [chart, la, lo, sys, place]);
 
   const figureChart = useMemo(() => {
     if (docKind === "form" && formWheel) return formWheel;
@@ -449,9 +459,22 @@ export default function Workspace() {
     electional: "Electional", synthetic: "Synthetic",
   };
 
-  const figureOpts: Array<[FigureView, string]> = tradition === "vedic"
-    ? [["natal", "Kundli"], ["transits", "Transits"], ...(advanced ? [["tri", "Tri-wheel"], ["sphere", "Sphere"], ["map", "Map"], ["harmonic", "Harmonic"], ["antiscia", "Antiscia"], ["heliocentric", "Heliocentric"]] as Array<[FigureView, string]> : [])]
-    : [["natal", "Wheel"], ["transits", "Transits"], ...(advanced ? [["tri", "Tri-wheel"], ["sphere", "Sphere"], ["map", "Map"], ["harmonic", "Harmonic"], ["antiscia", "Antiscia"], ["heliocentric", "Heliocentric"]] as Array<[FigureView, string]> : docKind === "birth" ? [] : [])];
+  const figureOpts = useMemo((): Array<[FigureView, string]> => {
+    const natal: [FigureView, string] = tradition === "vedic" ? ["natal", "Kundli"] : ["natal", "Wheel"];
+    const casual: Array<[FigureView, string]> = [natal, ["transits", "Transits"]];
+    if (docKind === "birth") {
+      casual.push(["houses", "Houses"]);
+      if (tradition === "western") casual.push(["derive", "Derive"], ["sect", "Sect"]);
+    }
+    const extra: Array<[FigureView, string]> = advanced
+      ? [["tri", "Tri-wheel"], ["sphere", "Sphere"], ["map", "Map"], ["harmonic", "Harmonic"], ["antiscia", "Antiscia"], ["heliocentric", "Heliocentric"], ["retrograde", "Retrograde"], ["dial", "Dial"]]
+      : [];
+    return [...casual, ...extra];
+  }, [tradition, advanced, docKind]);
+
+  useEffect(() => {
+    if (!figureOpts.some(([id]) => id === figure)) setFigure("natal");
+  }, [figure, figureOpts]);
 
   if (docKind === "form") {
     /* form only shows the compiled wheel */
@@ -472,6 +495,11 @@ export default function Workspace() {
     if (relocated) return `Relocated · ${lat}, ${lon}`;
     if (figure === "map") return "Astrocartography";
     if (figure === "heliocentric") return "Heliocentric";
+    if (figure === "houses") return "House systems";
+    if (figure === "derive") return "Sky to wheel";
+    if (figure === "sect") return "Sect";
+    if (figure === "retrograde") return "Retrograde";
+    if (figure === "dial") return "Aspect dial";
     if (figure === "antiscia" || figure === "harmonic") return figure === "harmonic" ? `Harmonic ${harmonicN}` : "Antiscia";
     if (place) return place;
     return [iso.replace("T", " "), lat, lon].filter(Boolean).join(" · ");
@@ -637,6 +665,21 @@ export default function Workspace() {
                       <p className="dim small" style={{ margin: "0.4rem 0 0" }}>D1. Navamsa (D9) is listed on the Vedic rail.</p>
                     )}
                   </>
+                )}
+                {docKind === "birth" && chart && widgetParams && figure === "houses" && (
+                  <HouseComparatorSlot engine={engine()} params={widgetParams} />
+                )}
+                {docKind === "birth" && chart && widgetParams && figure === "sect" && (
+                  <SectFlipSlot engine={engine()} params={widgetParams} />
+                )}
+                {docKind === "birth" && chart && widgetParams && figure === "derive" && (
+                  <DerivationSlot engine={engine()} params={widgetParams} />
+                )}
+                {docKind === "birth" && chart && widgetParams && figure === "retrograde" && (
+                  <RetrogradeSlot engine={engine()} params={widgetParams} />
+                )}
+                {docKind === "birth" && chart && widgetParams && figure === "dial" && (
+                  <AspectDialSlot engine={engine()} params={widgetParams} />
                 )}
                 {docKind === "birth" && chart && (figure === "harmonic" || figure === "antiscia" || figure === "heliocentric") && figureChart && (
                   <ChartWheel chart={figureChart} size={460} theme={WHEEL_THEME} />
