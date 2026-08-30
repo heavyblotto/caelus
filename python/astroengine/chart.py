@@ -283,9 +283,18 @@ class Engine:
         mode = _parse_zodiac(zodiac)
         observer = (lat, lon_east, 0.0) if topocentric else None
         names = BODIES + [b for b in (extra_bodies or []) if b not in BODIES]
-        bodies = {b: self.position(b, jd_ut, zodiac=zodiac,
-                                   topocentric=topocentric, observer=observer)
-                  for b in names}
+        # A body outside its fitted span is reported, not crashed on (the TS
+        # engine's RangeError -> Chart.unavailable, mirrored): the chart
+        # computes with what covers the instant.
+        bodies = {}
+        unavailable = []
+        for b in names:
+            try:
+                bodies[b] = self.position(b, jd_ut, zodiac=zodiac,
+                                          topocentric=topocentric,
+                                          observer=observer)
+            except ValueError:
+                unavailable.append(b)
         asc, mc, armc, eps = H.angles(jd_ut, lat, lon_east)
         vtx, east = H.vertex_east_point(armc, lat * DEG, eps)
         phi = lat * DEG
@@ -330,6 +339,7 @@ class Engine:
             "house_system": used,
             "house_system_requested": house_system,
             "bodies": bodies,
+            "unavailable": unavailable,
             "angles": {"asc": out_deg(asc), "mc": out_deg(mc),
                        "vertex": out_deg(vtx), "east_point": out_deg(east)},
             "cusps": cusps_deg,

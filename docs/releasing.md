@@ -59,7 +59,7 @@ Re-check before tagging: `npm view caelus` should still 404.
 4. Run `npm run check:versions` — it asserts npm × PyPI × `server.json` all
    agree and the `caelus` dep ranges match, so a half-bumped release fails
    locally instead of shipping. `node scripts/check-llms.mjs` verifies the
-   `llms.txt` sync. Both run in CI (`check:versions` also gates `release`).
+   `llms.txt` sync. Both run in `ci.yml` (conformance job) and `release.yml`.
 5. Score the tool-selection eval against a current model and commit the
    dated baseline (CI only ever runs the keyless self-check, which calls no
    model, so without this step the eval's actual question — do hosts pick
@@ -81,11 +81,14 @@ Re-check before tagging: `npm view caelus` should still 404.
    (Actions → release → Run workflow) and push the tag afterward from a
    local clone. The published versions come from package.json /
    pyproject.toml either way.
-5. The release workflow runs the version gate and the full verification chain
-   (golden suite, MCP oracle suite, birth tzdb suite, wheel render suite,
-   llms.txt sync), publishes all four npm packages with `--provenance`, and
-   publishes `caelus-engine` to PyPI via Trusted Publishing (no token). A red
-   suite blocks the publish.
+5. The release workflow runs the version gate and the critical verification
+   chain (every `caelus` golden, `check-test-wiring`, MCP smoke / verify /
+   integration / eval, birth tzdb suite, every wheel suite, `check-docs`,
+   `check-mcp-surface`, llms.txt sync, tarball, claims, docs API, search
+   index, web build, and `smoke:web`). The `pypi` job runs every
+   `python/test_*.py` before `python -m build`. A red suite blocks the
+   publish. All five npm packages publish with `--provenance`, and
+   `caelus-engine` publishes to PyPI via Trusted Publishing (no token).
 
 **Never `npm publish` by hand.** All four packages set
 `publishConfig.provenance: true`, so every publish must carry an npm provenance

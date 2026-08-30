@@ -225,7 +225,7 @@ export function twilightStage(sunAltDeg: number): TwilightStage {
 }
 
 /** Sky-brightness ceiling on the naked-eye limit by twilight stage. Night sets
- *  no ceiling of its own; there the site darkness ({@link BORTLE_LIMIT}) and the
+ *  no ceiling of its own; there the site darkness (`BORTLE_LIMIT`) and the
  *  Moon decide the limit. */
 const STAGE_CEILING: Record<TwilightStage, number> = {
   day: -4.0, civil: 1.5, nautical: 4.0, astronomical: 5.5, night: Infinity,
@@ -428,10 +428,10 @@ function twilightRampAt(sunAltDeg: number): number {
  * Approximate V-band sky surface brightness (mag/arcsec^2) of the sky at a
  * direction: a render cue for the sky gradient, not precision photometry.
  * Composes, in linear flux space, (a) the site's moonless zenith sky by
- * Bortle class ({@link BORTLE_ZENITH_MAG}), brightened toward the horizon by
- * the airglow term ({@link AIRGLOW_HORIZON_MAG}, scaled by the Kasten &
+ * Bortle class (`BORTLE_ZENITH_MAG`), brightened toward the horizon by
+ * the airglow term (`AIRGLOW_HORIZON_MAG`, scaled by the Kasten &
  * Young airmass excess); (b) twilight from the Sun's altitude
- * ({@link TWILIGHT_RAMP}, treated as direction-independent -- the azimuthal
+ * (`TWILIGHT_RAMP`, treated as direction-independent -- the azimuthal
  * afterglow gradient stays a prose cue via `brightestAzimuth`); and (c) a
  * Krisciunas & Schaefer-inspired moonlight term (PASP 103, 1033, 1991):
  * scattered moonlight falling off ~0.04 mag per degree of angular distance
@@ -604,7 +604,7 @@ export interface SkyBody {
   /** Bright enough to see at this sky brightness. */
   nakedEye: boolean;
   /** How prominent to render the body, derived from its magnitude (a prompt
-   *  cue, not a physical size). See {@link brightnessDescriptor}. */
+   *  cue, not a physical size). See `brightnessDescriptor`. */
   brightnessHint?: string;
   /** Moon only: illuminated fraction, phase name, and bright-limb orientation. */
   illum?: number;

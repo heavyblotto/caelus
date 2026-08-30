@@ -1,7 +1,9 @@
 # caelus-wheel
 
 React SVG chart wheel for [caelus](https://github.com/heavyblotto/caelus).
-SSR-safe, zero runtime dependencies (react is a peer), ~3.4 KB gzipped.
+SSR-safe, zero runtime dependencies (react is a peer). The `ChartWheel`
+entrypoint is ~2.2 KB gzipped; the package also exports ChartSphere, AstroMap,
+and EphemerisGraph.
 
 ```bash
 npm install caelus-wheel

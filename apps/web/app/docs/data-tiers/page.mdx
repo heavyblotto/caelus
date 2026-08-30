@@ -12,24 +12,26 @@ export const metadata = pageMetadata({
 
 The engine is given its ephemeris data explicitly. Two suppliers ship with the
 package: the **embedded** dataset for the browser and edge, and the **Node
-loader** for the extended packs. The hosted [REST demo](/api/chart?lat=27.94&lon=-82.46)
-and [MCP server](/docs/mcp) build on these two.
+loader** for the extended packs. Hosted [REST](/api/chart?lat=27.94&lon=-82.46)
+and [hosted MCP](/docs/mcp) use the embedded dataset. Stdio `caelus-mcp` uses
+the Node loader.
 
 ## What runs where
 
-| Capability | Embedded (browser, edge) | Node loader | REST `/api/chart` | MCP (`caelus-mcp`) |
-| --- | :---: | :---: | :---: | :---: |
-| Core bodies (Sun–Pluto, Chiron, nodes) | ✓ | ✓ | ✓ | ✓ |
-| Houses (12 systems), angles, aspects | ✓ | ✓ | Placidus | ✓ |
-| Tropical + 7 sidereal ayanamsas | ✓ | ✓ | tropical | ✓ |
-| Derived charts (returns, progressions, …) | ✓ | ✓ | — | transits, synastry |
-| Extended bodies (asteroids, Uranian points) | — | ✓ | — | ✓ |
-| Fixed stars (319-star catalog) | ✓ | ✓ | ✓ | ✓ |
-| Event search (rise/set, crossings, phases, stations) | — | ✓ | — | ✓ |
-| Eclipses (solar, lunar) | — | ✓ | — | ✓ |
-| Data on disk | none (bundled) | JSON packs (precise Moon ~3.1 MB + catalogs) | none (edge) | JSON packs (Node) |
-| Date range | 1000–3000¹ | 1000–3000¹ | 1000–3000 | 1000–3000¹ |
-| Accuracy | per body, see [Validation](/validation) | per body, see [Validation](/validation) | per body | per body |
+| Capability | Embedded (browser, edge, hosted MCP) | Node loader / stdio `caelus-mcp` | REST `/api/chart` |
+| --- | :---: | :---: | :---: |
+| Core bodies (Sun–Pluto, Chiron, nodes) | ✓ | ✓ | ✓ |
+| Houses (12 systems), angles, aspects | ✓ | ✓ | Placidus |
+| Tropical + 7 sidereal ayanamsas | ✓ | ✓ | tropical |
+| Derived charts (returns, progressions, …) | ✓ | ✓ | — |
+| Extended bodies (asteroids, Uranian points) | — | ✓ | — |
+| Fixed stars (319-star catalog) | ✓ | ✓ | ✓ |
+| Deep star field (8,920 stars to mag 6.5, opt-in) | — | ✓ | — |
+| Event search (rise/set, crossings, phases, stations) | — | ✓ | — |
+| Eclipses (solar, lunar) | — | ✓ | — |
+| Data on disk | none (bundled) | JSON packs (precise Moon ~3.1 MB + catalogs) | none (edge) |
+| Date range | 1000–3000¹ | 1000–3000¹ | 1920–2080² |
+| Accuracy | per body, see [Validation](/validation) | per body, see [Validation](/validation) | per body |
 
 <Note>
   ¹ The planets, Pluto, and the Moon validate 1000–3000; the small bodies
@@ -39,6 +41,9 @@ and [MCP server](/docs/mcp) build on these two.
   Anything pure-arithmetic on positions, such as derived charts and sidereal
   shifts, runs in any tier, including the browser. See <a href="/docs/edge-cases">Edge Cases &amp; Stability</a> for the
   out-of-range and missing-pack behaviour.
+  ² Hosted REST refuses years outside the embedded Moon tier (1920–2080).
+  Hosted <code>/api/mcp</code> uses the same embedded dataset; stdio
+  <code>caelus-mcp</code> is the Node-loader column.
 </Note>
 
 ## Embedded (browser, edge)

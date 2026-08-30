@@ -27,7 +27,8 @@ export default function Changelog() {
     <main className="container page">
       <PageHero eyebrow="Changelog" title="Changelog">
         <Lead>
-          All four packages version in lockstep. Numbers are as measured at release
+          All four packages version in lockstep. <code>caelus-delineations-pd</code> ships
+          on its own semver. Numbers are as measured at release
           time; current figures live in <code>accuracy.json</code> and on{" "}
           <a href="/validation">Validation</a>.
         </Lead>

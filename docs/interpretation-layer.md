@@ -9,7 +9,7 @@ interpretation layer (rule-based or LLM-based) plugs into, what is built, and
 what comes next.
 
 The guiding split: the engine owns **facts**, a plugged-in layer owns
-**meaning**, and the framework owns the **contract** between them -- never the
+**meaning**, and the suite owns the **contract** between them -- never the
 content.
 
 ## Layers
@@ -77,7 +77,7 @@ asserting meaning. It is a sum of explicit, documented contributions
 
 No weight is magic; a caller who dislikes the defaults overrides them.
 
-This is TS-side framework code, not ephemeris. There is no Swiss Ephemeris
+This is TS-side library code, not ephemeris. There is no Swiss Ephemeris
 oracle for "which facts matter," so it is unit-tested for structure (atoms tie
 back to the validated chart, strengths are consistent, ids unique, salience
 sorted) rather than pinned by a parity golden.
@@ -233,7 +233,7 @@ The natal projection is extended via `ContextOptions` and the helpers in
 - **Transit** (`transit:saturn~natal_moon:square`, ...): transiting body aspecting
   a natal point, with phase, strength, and natal house. Supply
   `transits` from {@link transitAspects}.
-- **Synastry** (`synastry:mars~b_venus:square`, `synastry:overlay:a:mars:house:7`):
+- **synastry** (`synastry:mars~b_venus:square`, `synastry:overlay:a:mars:house:7`):
   inter-chart aspects and house overlays from {@link synastryAspects} /
   {@link synastryOverlays}.
 - **Composite** (`composite:mars`, ...): midpoint placements from

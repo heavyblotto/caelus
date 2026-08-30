@@ -178,7 +178,7 @@
       "note": "Hamburg-school constant-element Kepler orbits, elements fitted to SE 2.10's built-in definitions (fit_uranian.py prints per-body figures; Zeus is fit-noise-limited at ~3″ heliocentric). Uranian practice works in arcminutes"
     },
     {
-      "name": "Fixed stars (318-star catalog)",
+      "name": "Fixed stars (319-star catalog)",
       "max": "0.3",
       "rms": "—",
       "note": "HYG-derived catalog (ICRS J2000 + proper motions, full 3D space motion, Vondrák 2011 precession); vs swe_fixstar fed the same rows"

@@ -18,7 +18,9 @@
     "caelus": "^0.24.1"
   },
   "devDependencies": {
-    "ajv": "^8.17.1"
+    "ajv": "^8.17.1",
+    "@types/node": "^25.9.2",
+    "typescript": "^6.0.3"
   },
   "license": "MIT",
   "publishConfig": {

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Self-check for astroengine.turbo: the turbo pack must reproduce the engine's
 longitude to the fit tolerance, and the evaluator must be well-formed.
-Run: python3 test_turbo.py   (needs packages/caelus/data/turbo.json)
+Run: python3 test_turbo.py
 """
 import math
 import os
@@ -13,7 +13,9 @@ from astroengine.chart import Engine
 from astroengine.turbo import Turbo
 
 HERE = os.path.dirname(__file__)
-PACK = os.path.join(HERE, "..", "packages", "caelus", "data", "turbo.json")
+PACKAGED = os.path.join(HERE, "astroengine", "data", "turbo.json")
+MONOREPO = os.path.join(HERE, "..", "packages", "caelus", "data", "turbo.json")
+PACK = PACKAGED if os.path.exists(PACKAGED) else MONOREPO
 
 eng = Engine("full")
 tb = Turbo.load(PACK)

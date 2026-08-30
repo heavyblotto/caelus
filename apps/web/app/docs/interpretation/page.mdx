@@ -24,7 +24,7 @@ point, and it performs no interpretation of its own. What it defines is the
 contract between the facts the engine owns and the meaning you bring to them:
 
 > The engine owns the **facts**, a layer you plug in owns the **meaning**, and
-> the framework owns the **contract** between the two rather than any of the
+> the suite owns the **contract** between the two rather than any of the
 > content itself.
 
 ```text
@@ -182,7 +182,10 @@ all overridable through `ContextOptions.salience`:
 | `star` / `lot` | a fixed-star conjunction / a Hermetic lot |
 | `transit` / `synastry` / `composite` | a transit aspect / inter-chart link / midpoint placement |
 | `timelord` | an active profection, ZR, firdaria, or dasha period |
-| `dignity` / `vedic` | finer essential dignity / nakshatra, varga, or yoga |
+| `dignityFine` | a finer essential-dignity fact |
+| `vedic` | a nakshatra, varga, or yoga |
+| `parallel` | a parallel or contraparallel of declination |
+| `outOfBounds` | a body beyond the obliquity band |
 
 No weight is magic. A caller who dislikes the defaults overrides any subset:
 
@@ -195,7 +198,7 @@ const ctx = interpretationContext(chart, {
 });`}
 />
 
-This is framework code, not ephemeris. There is no Swiss Ephemeris oracle for
+This is library code, not ephemeris. There is no Swiss Ephemeris oracle for
 "which facts matter," so it is unit-tested for structure (atoms tie back to the
 validated chart, ids are unique, salience is sorted) rather than pinned by a
 parity golden.

@@ -7,7 +7,13 @@
   ],
   "scripts": {
     "build": "npm run build -w caelus && npm run stats:golden && npm run facts:sync && npm run build -w caelus-delineations-pd && npm run build -w caelus-mcp && npm run build -w caelus-birth && npm run build -w caelus-wheel && npm run docs:api && npm run search:index && npm run build -w web",
-    "test": "npm run test -w caelus && npm run test -w caelus-delineations-pd",
+    "test": "npm run test -w caelus && npm run test -w caelus-delineations-pd && npm run test -w caelus-birth && npm run test:wheel && npm run test:mcp",
+    "test:wheel": "npm run test -w caelus-wheel && node packages/wheel/dist/test/sphere.test.js && node packages/wheel/dist/test/astromap.test.js && node packages/wheel/dist/test/ephemerisgraph.test.js && node packages/wheel/dist/test/integration.test.js",
+    "test:mcp": "node packages/caelus-mcp/smoke.mjs && node packages/caelus-mcp/verify_tools.mjs && node packages/caelus-mcp/integration.test.mjs && node packages/caelus-mcp/eval/run.mjs",
+    "test:python": "bash -c 'for f in python/test_*.py; do python3 \"$f\" || exit 1; done'",
+    "test:web-libs": "node scripts/test-web-libs.mjs",
+    "check:docs": "node scripts/check-docs.mjs",
+    "check:mcp-surface": "node scripts/check-mcp-surface.mjs",
     "lint:prose": "bash scripts/lint-prose.sh",
     "lint:emdash": "node scripts/check-em-dashes.mjs",
     "lint:claims": "node scripts/check-claims.mjs",
@@ -22,9 +28,12 @@
     "smoke:web": "node scripts/smoke-web.mjs",
     "smoke:live": "node scripts/smoke-live.mjs",
     "test:web": "export NEXT_DIST_DIR=.next-ci; npm run build -w caelus-mcp && npm run docs:api && npm run search:index && npm run build -w web && npm run smoke:web",
-    "preflight": "npm run check:versions && node scripts/check-tarball.mjs && npm run test && npm run lint:prose && npm run lint:emdash && npm run facts:sync && npm run lint:claims && npm run test:web",
+    "preflight": "npm run check:versions && node scripts/check-tarball.mjs && node scripts/check-docs.mjs && node scripts/check-mcp-surface.mjs && npm run test && npm run lint:prose && npm run lint:emdash && npm run facts:sync && npm run lint:claims && node scripts/test-web-libs.mjs && npm run test:web",
     "dev:web": "npm run dev -w web",
     "dev:web:clean": "npm run dev:clean -w web"
+  },
+  "engines": {
+    "node": ">=22 <23"
   },
   "devDependencies": {
     "all-the-cities": "^3.1.0",

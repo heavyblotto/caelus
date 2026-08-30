@@ -53,8 +53,18 @@ function field(block, key) {
 }
 
 function metadataBlock(src) {
-  const m = src.match(/export const metadata\s*=\s*\{([\s\S]*?)\}\s*;/);
-  return m ? m[1] : "";
+  const wrapped = src.match(
+    /export const metadata\s*=\s*pageMetadata\s*\(\{([\s\S]*?)\}\)\s*;/,
+  );
+  if (wrapped) return wrapped[1];
+  const bare = src.match(/export const metadata\s*=\s*\{([\s\S]*?)\}\s*;/);
+  return bare ? bare[1] : "";
+}
+
+function stripMetadataExport(src) {
+  return src
+    .replace(/export const metadata\s*=\s*pageMetadata\s*\(\{[\s\S]*?\}\)\s*;/, "")
+    .replace(/export const metadata\s*=\s*\{[\s\S]*?\}\s*;/, "");
 }
 
 function stripToText(src, max = 240) {
@@ -81,8 +91,7 @@ for (const file of walk(APP_DIR)) {
   const description = field(meta, "description");
 
   if (file.endsWith("page.mdx")) {
-    const body = src
-      .replace(/export const metadata\s*=\s*\{[\s\S]*?\}\s*;/, "")
+    const body = stripMetadataExport(src)
       .replace(/```[\s\S]*?```/g, " ")
       .replace(/<CodeBlock[\s\S]*?\/>/g, " ");
     entries.push({ title, kind: "page", url: route, text: description || stripToText(body) });

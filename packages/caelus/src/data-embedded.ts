@@ -1,7 +1,7 @@
-/** Bundler-friendly embedded dataset: ~98 KB gzipped total. Imports JSON
+/** Bundler-friendly embedded dataset: ~153 KB gzipped total. Imports JSON
  *  statically so web bundlers (Next.js, Vite) inline it -- charts fully
  *  client-side, including the HYG fixed-star catalog. The precise moon tier
- *  is intentionally NOT here (729 KB); fetch it lazily and pass via
+ *  is intentionally NOT here (~750 KB); fetch it lazily and pass via
  *  { ...embeddedData, moonCheb } if wanted. */
 import mercury from "../data/vsop87d_mercury.embedded.json" with { type: "json" };
 import venus from "../data/vsop87d_venus.embedded.json" with { type: "json" };

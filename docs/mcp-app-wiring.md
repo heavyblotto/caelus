@@ -128,7 +128,7 @@ object already serialized into `content`, and `_meta` is additive).
   `frameDomains`. The script is a classic (non-module) IIFE, so the cross-origin
   load needs no CORS.
 - **Cross-host (MCP-UI).** `window.openai` is the Apps-SDK compatibility layer
-  that standard hosts also expose, and the bundle additionally listens for the
+  that standard hosts also expose, and the bundle also listens for the
   MCP Apps `ui/notifications/tool-result` message, so the same bundle works
   across hosts; only the data-injection path differs.
 - **Cache-busting.** The shell appends `?v=<version>` to the bundle URL; the

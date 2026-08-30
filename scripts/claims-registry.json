@@ -141,7 +141,8 @@
         "apps/web/app/features/page.tsx",
         "apps/web/app/docs/data-tiers/page.mdx",
         "llms.txt",
-        "apps/web/public/llms.txt"
+        "apps/web/public/llms.txt",
+        "packages/caelus/accuracy.json"
       ]
     },
     {
@@ -160,7 +161,8 @@
         "llms.txt",
         "apps/web/public/llms.txt",
         "README.md",
-        "packages/caelus/README.md"
+        "packages/caelus/README.md",
+        "packages/caelus/src/data-embedded.ts"
       ]
     },
     {
@@ -184,10 +186,7 @@
         "{value} MCP tools",
         "MCP tools ({value})",
         "{value}-tool",
-        "{value} tools",
-        "thirty-five chart tools",
-        "Thirty-five chart tools",
-        "thirty-five tools"
+        "{value} tools"
       ],
       "competing": "(twenty|thirty|forty|fifty)-[a-z]+[^a-z\\n]{0,12}tools\\b|\\b\\d{2}[^0-9\\n]{0,12}(chart |MCP )?tools\\b|\\b\\d{2}-tool\\b",
       "appearsIn": [
@@ -199,7 +198,8 @@
         "packages/caelus/README.md",
         "packages/wheel/README.md",
         "packages/birth/README.md",
-        "packages/caelus-mcp/server.json"
+        "packages/caelus-mcp/server.json",
+        "packages/caelus-mcp/src/server.ts"
       ]
     },
     {
