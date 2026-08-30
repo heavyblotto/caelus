@@ -11,7 +11,8 @@
  * Stateless and controlled: the scrub position is the state and it
  * belongs to the widget. Rendering is SSR-safe (no hooks, no
  * effects); the pointer handlers only ever fire in a browser. Free
- * scrub while dragging, snap to the nearest station on release.
+ * scrub while dragging; by default release snaps to the nearest
+ * station. `snapOnRelease={false}` leaves the index where it dropped.
  */
 import type { PointerEvent, ReactElement } from "react";
 import { PLATE_TOKENS } from "caelus-wheel";
@@ -35,12 +36,15 @@ export interface PlateConsoleProps {
   datum?: string;
   /** Present only when hydrated; without it the rail is inert. */
   onScrub?: (t: number) => void;
+  /** Snap to the nearest station on pointer-up. Default true. Station
+   *  labels still jump when clicked. */
+  snapOnRelease?: boolean;
 }
 
 const clamp01 = (x: number): number => Math.max(0, Math.min(1, x));
 
 export function PlateConsole({
-  t, stations, datum, onScrub,
+  t, stations, datum, onScrub, snapOnRelease = true,
 }: PlateConsoleProps): ReactElement {
   const pos = clamp01(t);
   const tFrom = (e: PointerEvent<HTMLDivElement>): number => {
@@ -65,7 +69,8 @@ export function PlateConsole({
           if (e.buttons & 1) onScrub(tFrom(e));
         },
         onPointerUp: (e: PointerEvent<HTMLDivElement>) => {
-          onScrub(snap(tFrom(e)));
+          const x = tFrom(e);
+          onScrub(snapOnRelease ? snap(x) : x);
         },
         style: { cursor: "ew-resize" as const },
       }

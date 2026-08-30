@@ -14,9 +14,12 @@ import { loadNodeData } from "caelus/node";
 import { ChartDerivation } from "../src/derivation-widget.js";
 import {
   derivationDatum, shiftInstant, STATION_CAPTIONS, type SceneBody,
-  deriveScene, DerivationFigure, DERIVATION_STATIONS,
+  deriveScene, DerivationFigure, DERIVATION_STATIONS, HOME_DERIVATION_STATIONS,
 } from "../src/derivation.js";
 import type { DerivationParams } from "../src/spec.js";
+
+const SIGN_GLYPHS = ["♈", "♉", "♊", "♋", "♌", "♍",
+  "♎", "♏", "♐", "♑", "♒", "♓"];
 
 let checks = 0;
 let failures = 0;
@@ -212,6 +215,51 @@ const render = (t: number, follow?: string) =>
   assert(atHandoff === sky, "openingAim: t=0.2 matches default SKY");
 }
 
+// -------------------------------------------------------------- overlays
+{
+  assert(scene.figures.length > 0, "overlays: scene packs constellation figures");
+  assert(scene.figureLabels.filter((l) => l.name === "Serpens").length >= 2,
+    "overlays: Serpens is labeled twice in the pack");
+  const plain = render(0);
+  const west = { az: 270, alt: 10 };
+  const ov = (t: number) => renderToStaticMarkup(
+    <DerivationFigure scene={scene} t={t} openingAim={west} overlays />,
+  );
+  assert(plain === renderToStaticMarkup(<DerivationFigure scene={scene} t={0} />),
+    "overlays: omitted keeps the playground SKY path");
+  assert(!plain.includes("☉"), "overlays: playground t=0 still has no body glyphs");
+  const glyphs = ["☉", "☽", "☿", "♀", "♂", "♃", "♄", "♅", "♆", "♇", "⚷", "☊"];
+  const names = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn",
+    "Uranus", "Neptune", "Pluto", "Chiron", "Node"];
+  const ov0 = ov(0);
+  assert(glyphs.some((g) => ov0.includes(g)) || names.some((n) => ov0.includes(n)),
+    "overlays: body glyphs or names at VIEW");
+  assert(!SIGN_GLYPHS.some((g) => ov0.includes(g)),
+    "overlays: no sign glyphs at VIEW");
+  assert(!ov0.includes("ASC") && !ov0.includes("H1"),
+    "overlays: no house marks at VIEW");
+  assert(!scene.figureLabels.some((l) => ov0.includes(l.name)),
+    "overlays: no constellation names at VIEW");
+  const ovFig = ov(0.08);
+  assert(scene.figureLabels.some((l) => ovFig.includes(l.name)),
+    "overlays: constellation names by FIGURES");
+  const ovZod = ov(0.15);
+  assert(SIGN_GLYPHS.some((g) => ovZod.includes(g)),
+    "overlays: sign glyphs by ZODIAC");
+  const ovSky = ov(0.2);
+  assert(ovSky.includes("ASC") || ovSky.includes("H1"),
+    "overlays: house marks by SKY");
+  const sphere = ov(HOME_DERIVATION_STATIONS.find((s) => s.id === "sphere")!.t);
+  const ecl = ov(HOME_DERIVATION_STATIONS.find((s) => s.id === "ecliptic")!.t);
+  const hor = ov(HOME_DERIVATION_STATIONS.find((s) => s.id === "horizon")!.t);
+  assert(sphere !== ecl && ecl !== hor,
+    "overlays: SPHERE → ECLIPTIC → HORIZON are distinct frames");
+  const late = ov(0.95);
+  assert(hor !== late, "overlays: HORIZON → WHEEL keeps flattening");
+  assert(late.includes("☉"), "overlays: wheel fading in before t=1");
+  assert(ov(1).includes("☉"), "overlays: t=1 is still the real wheel");
+}
+
 // -------------------------------------------------------- console controls
 {
   for (const s of DERIVATION_STATIONS) {
@@ -219,6 +267,10 @@ const render = (t: number, follow?: string) =>
       `captions: station ${s.id} captioned`);
   }
   assert(typeof STATION_CAPTIONS.view === "string", "captions: VIEW captioned");
+  for (const s of HOME_DERIVATION_STATIONS) {
+    assert(typeof STATION_CAPTIONS[s.id] === "string",
+      `captions: home station ${s.id} captioned`);
+  }
   const bare = renderToStaticMarkup(<ChartDerivation scene={scene} />);
   assert(bare.includes("▸"), "controls: autoplay affordance present");
   assert(!bare.includes("clock"), "controls: no clock without an engine");

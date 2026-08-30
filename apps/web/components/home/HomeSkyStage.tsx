@@ -10,7 +10,7 @@ import type { DerivationScene } from "caelus-widgets/derivation";
 import type { WheelTheme } from "caelus-wheel";
 import type { SkyPlate } from "./skyPlates";
 
-const PLAY_MS = 8000;
+const PLAY_MS = 11000;
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
 const ramp = (t: number, a: number, b: number) => {
   const x = clamp01((t - a) / (b - a));
@@ -79,6 +79,7 @@ export default function HomeSkyStage({
             t={t}
             size={size}
             openingAim={openingAim}
+            overlays
             theme={theme}
           />
         </div>
@@ -86,6 +87,7 @@ export default function HomeSkyStage({
       <PlateConsole
         t={t}
         stations={HOME_DERIVATION_STATIONS}
+        snapOnRelease={false}
         datum={`${station.label.toLowerCase()} · t ${t.toFixed(2)}`}
         onScrub={(x) => {
           stop();

@@ -451,6 +451,10 @@ th {
   height: auto;
   max-width: 100%;
 }
+.home-sky__morph > div {
+  width: 100%;
+  height: 100%;
+}
 .home-sky__play {
   margin-top: 0.45rem;
   font-family: var(--mono, ui-monospace, "SF Mono", Menlo, Consolas, monospace);
