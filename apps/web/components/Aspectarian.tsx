@@ -5,7 +5,12 @@ import { GLYPHS } from "caelus-wheel";
 import { ASPECT_GLYPH, aspectColor, ASPECTABLE_ORDER } from "../lib/chart-display";
 
 /** The classic triangular aspect grid (aspectarian) plus a legend and the orb list. */
-export default function Aspectarian({ chart }: { chart: Chart }) {
+export default function Aspectarian({
+  chart, onIsolate,
+}: {
+  chart: Chart;
+  onIsolate?: (bodies: string[]) => void;
+}) {
   const present = ASPECTABLE_ORDER.filter((b) => chart.bodies[b]);
   const look: Record<string, { aspect: string; orb: number }> = {};
   for (const a of chart.aspects) look[[a.a, a.b].sort().join("|")] = { aspect: a.aspect, orb: a.orb };
@@ -23,9 +28,11 @@ export default function Aspectarian({ chart }: { chart: Chart }) {
                     <td
                       key={other}
                       title={a ? `${b} ${a.aspect} ${other} · orb ${a.orb}°` : `${b} / ${other}`}
+                      onClick={a && onIsolate ? () => onIsolate([b, other]) : undefined}
                       style={{
                         width: "1.5rem", height: "1.5rem", textAlign: "center",
                         border: "1px solid var(--border)", color: aspectColor(a?.aspect),
+                        cursor: a && onIsolate ? "pointer" : undefined,
                       }}
                     >
                       {a ? ASPECT_GLYPH[a.aspect] ?? "" : ""}

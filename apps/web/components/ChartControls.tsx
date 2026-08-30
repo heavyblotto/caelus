@@ -16,6 +16,7 @@ const ZODIACS: Array<[string, Zodiac]> = [
   ["sidereal · fagan/bradley", "sidereal:fagan_bradley"],
   ["sidereal · krishnamurti", "sidereal:krishnamurti"],
   ["sidereal · raman", "sidereal:raman"],
+  ["sidereal · yukteshwar", "sidereal:yukteshwar"],
 ];
 
 export interface ChartControlsProps {
@@ -36,6 +37,10 @@ export interface ChartControlsProps {
   onShareSet: () => void;
   onLoadShare: (s: Share) => void;
   onRemoveFromSet: (i: number) => void;
+  /** Advanced house/zodiac pickers. Hidden in Casual. Default true. */
+  showHouseZodiac?: boolean;
+  timeUnknown?: boolean;
+  setTimeUnknown?: Dispatch<SetStateAction<boolean>>;
 }
 
 /**
@@ -48,6 +53,7 @@ export default function ChartControls({
   iso, setIso, lat, setLat, lon, setLon, sys, setSys, zodiac, setZodiac,
   tzMode, setTzMode, label, setLabel, setPlace, set, hasChart,
   copied, collectionCopied, onShare, onAddToSet, onShareSet, onLoadShare, onRemoveFromSet,
+  showHouseZodiac = true, timeUnknown = false, setTimeUnknown,
 }: ChartControlsProps) {
   return (
     <>
@@ -77,12 +83,29 @@ export default function ChartControls({
             </select>
             <input
               className="control"
-              type="datetime-local"
-              value={iso}
-              onChange={(e) => setIso(e.target.value)}
-              aria-label={tzMode === "local" ? "local birth time" : "time in UTC"}
+              type={timeUnknown ? "date" : "datetime-local"}
+              value={timeUnknown ? iso.slice(0, 10) : iso}
+              onChange={(e) => {
+                const v = e.target.value;
+                if (timeUnknown) setIso(v.length === 10 ? `${v}T12:00` : v);
+                else setIso(v);
+              }}
+              aria-label={timeUnknown ? "birth date" : tzMode === "local" ? "local birth time" : "time in UTC"}
             />
           </div>
+          {setTimeUnknown && (
+            <label className="field" style={{ marginTop: "0.35rem" }}>
+              <span className="field__label">
+                <input
+                  type="checkbox"
+                  checked={timeUnknown}
+                  onChange={(e) => setTimeUnknown(e.target.checked)}
+                  style={{ accentColor: "var(--accent)", marginRight: "0.35rem" }}
+                />
+                clock unknown
+              </span>
+            </label>
+          )}
         </div>
         <div className="field">
           <span className="field__label">lat</span>
@@ -104,18 +127,22 @@ export default function ChartControls({
             aria-label="longitude, east positive"
           />
         </div>
-        <div className="field">
-          <span className="field__label">houses</span>
-          <select className="control" value={sys} onChange={(e) => setSys(e.target.value as HouseSystem)} aria-label="house system">
-            {SYSTEMS.map((s) => <option key={s}>{s}</option>)}
-          </select>
-        </div>
-        <div className="field">
-          <span className="field__label">zodiac</span>
-          <select className="control" value={zodiac} onChange={(e) => setZodiac(e.target.value as Zodiac)} aria-label="zodiac">
-            {ZODIACS.map(([zlabel, value]) => <option key={value} value={value}>{zlabel}</option>)}
-          </select>
-        </div>
+        {showHouseZodiac && (
+          <div className="field">
+            <span className="field__label">houses</span>
+            <select className="control" value={sys} onChange={(e) => setSys(e.target.value as HouseSystem)} aria-label="house system">
+              {SYSTEMS.map((s) => <option key={s}>{s}</option>)}
+            </select>
+          </div>
+        )}
+        {showHouseZodiac && (
+          <div className="field">
+            <span className="field__label">zodiac</span>
+            <select className="control" value={zodiac} onChange={(e) => setZodiac(e.target.value as Zodiac)} aria-label="zodiac">
+              {ZODIACS.map(([zlabel, value]) => <option key={value} value={value}>{zlabel}</option>)}
+            </select>
+          </div>
+        )}
         <div className="field">
           <span className="field__label">name</span>
           <input
@@ -128,7 +155,7 @@ export default function ChartControls({
           />
         </div>
         <button type="button" className="btn btn-secondary btn-sm" onClick={onShare}>
-          {copied ? "Link copied ✓" : "Copy share link"}
+          {copied ? "Link copied ✓" : "Copy link"}
         </button>
         <button
           type="button"
@@ -140,13 +167,6 @@ export default function ChartControls({
           + Add to my charts
         </button>
       </div>
-
-      <p className="dim small" style={{ margin: "0.55rem 0 0" }}>
-        A share link encodes only the values above, in the URL fragment (after
-        the <code>#</code>), which browsers never send over the network: the
-        recipient&rsquo;s browser recomputes the chart, and the inputs never
-        reach a server.
-      </p>
 
       {set.length > 0 && (
         <div className="chart-tray" aria-label="My charts">

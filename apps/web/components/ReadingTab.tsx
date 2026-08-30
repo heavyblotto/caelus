@@ -42,7 +42,7 @@ export interface ReadingTabProps {
 export default function ReadingTab({
   chart, engine, lat, lonEast, zodiac, stars, lots, partner,
 }: ReadingTabProps) {
-  const { groups, atomById, statements, sourceCount, enriched } = useMemo(() => {
+  const { groups, atomById } = useMemo(() => {
     const now = new Date();
     const targetJd = julianDay(
       now.getUTCFullYear(), now.getUTCMonth() + 1, now.getUTCDate(),
@@ -55,14 +55,9 @@ export default function ReadingTab({
     });
     const reading = interpret(ctx, publicDomainSources);
     const grouped = reconcile(reading, { dedupe: true });
-    const kinds = new Set(ctx.atoms.map((a) => a.kind));
     return {
       groups: grouped,
       atomById: new Map(ctx.atoms.map((a) => [a.id, a] as const)),
-      statements: reading.entries.length,
-      sourceCount: new Set(reading.entries.map((e) => e.source)).size,
-      enriched: kinds.has("transit") || kinds.has("timelord")
-        || kinds.has("synastry") || kinds.has("composite"),
     };
   }, [chart, engine, lat, lonEast, zodiac, stars, lots, partner]);
 
@@ -79,25 +74,13 @@ export default function ReadingTab({
   if (!groups.length) {
     return (
       <p className="dim small" style={{ marginTop: 0 }}>
-        No public-domain delineation matched this chart&rsquo;s facts.
+        No reading for this chart.
       </p>
     );
   }
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem", fontSize: "0.85rem" }}>
-      <p className="dim small" style={{ margin: 0 }}>
-        <strong style={{ color: "var(--text)" }}>{statements}</strong> statements from{" "}
-        <strong style={{ color: "var(--text)" }}>{sourceCount}</strong> public-domain sources, each citing
-        the validated facts it rests on.
-        {partner ? (
-          <> Includes synastry/composite atoms plus transits and time-lords active{" "}
-            <strong style={{ color: "var(--text)" }}>now</strong>.</>
-        ) : enriched ? (
-          <> Includes transits and time-lords active <strong style={{ color: "var(--text)" }}>now</strong>.</>
-        ) : null}
-      </p>
-
       {groups.slice(0, MAX_GROUPS).map((g, gi) => {
         const fact = factOf(g);
         const extra = g.entries.length - MAX_PER_GROUP;
@@ -105,23 +88,20 @@ export default function ReadingTab({
           <div key={gi} style={{ borderLeft: "2px solid var(--border-strong)", paddingLeft: "0.8rem" }}>
             {fact && (
               <div className="mono" style={{ color: "var(--accent)", fontSize: "0.78rem", marginBottom: "0.3rem" }}>
-                {fact.text} <span className="mute">[{fact.id}]</span>
+                {fact.text}
               </div>
             )}
             {g.entries.slice(0, MAX_PER_GROUP).map((e, ei) => (
               <div key={ei} style={{ margin: ei ? "0.55rem 0 0" : 0 }}>
                 <span style={{ color: "var(--text)" }}>{truncate(e.text)}</span>
                 <div className="mono mute" style={{ fontSize: "0.66rem", marginTop: "0.15rem" }}>
-                  <span style={{ fontStyle: "italic", marginRight: "0.6rem" }}>{workOf(e.tags, e.source)}</span>
-                  {e.atomIds.map((id) => (
-                    <span key={id} style={{ marginRight: "0.5rem", whiteSpace: "nowrap" }}>[{id}]</span>
-                  ))}
+                  <span style={{ fontStyle: "italic" }}>{workOf(e.tags, e.source)}</span>
                 </div>
               </div>
             ))}
             {extra > 0 && (
               <p className="dim small" style={{ margin: "0.35rem 0 0" }}>
-                + {extra} more said about this fact.
+                + {extra} more on this.
               </p>
             )}
           </div>
@@ -130,16 +110,9 @@ export default function ReadingTab({
 
       {groups.length > MAX_GROUPS && (
         <p className="dim small" style={{ margin: 0 }}>
-          + {groups.length - MAX_GROUPS} more facts with delineations.
+          + {groups.length - MAX_GROUPS} more.
         </p>
       )}
-
-      <p className="dim small" style={{ margin: 0 }}>
-        Public-domain corpus (Saint-Germain, Alan Leo, Heindel, Robson), decomposed into selectors over the
-        engine&rsquo;s fact atoms (natal, transit, time-lord, and dignity ids) are all{" "}
-        <code>auditCitations</code>-checkable. See the{" "}
-        <a href="/docs/interpretation">interpretation layer</a>.
-      </p>
     </div>
   );
 }

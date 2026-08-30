@@ -72,6 +72,8 @@
   /* geometry */
   --maxw: 760px;
   --maxw-wide: 1100px;
+  /* Playground chart workspace only. The rest of the site stays on --maxw-wide. */
+  --maxw-workspace: 1360px;
   --radius: 8px;
   --radius-sm: 4px;
   --gutter: 1.25rem;
@@ -144,6 +146,13 @@ body::before {
 .container-wide {
   width: 100%;
   max-width: var(--maxw-wide);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.container-workspace {
+  width: 100%;
+  max-width: var(--maxw-workspace);
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
@@ -434,6 +443,111 @@ th {
   min-width: 0;
 }
 
+/* ---- playground workspace (layout, not a second brand) ---- */
+.workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.workspace__chrome {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.75rem 1rem;
+}
+
+.workspace__body {
+  display: grid;
+  grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.workspace__figure {
+  max-width: 480px;
+}
+
+.workspace__figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.workspace__rail {
+  min-width: 0;
+}
+
+.workspace__panel {
+  max-height: 32rem;
+  overflow-y: auto;
+  padding-right: 0.35rem;
+}
+
+.provenance-stamp {
+  margin: 0;
+  font-size: var(--fs-small);
+  color: var(--warm);
+}
+
+.today-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.85rem;
+  padding: 0.55rem 0.7rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+}
+
+.today-strip__item {
+  color: var(--text-dim);
+}
+
+.today-strip__item strong {
+  color: var(--warm);
+  font-weight: 600;
+}
+
+.scrubber {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.scrubber .control[type="range"] {
+  flex: 1 1 12rem;
+  min-width: 8rem;
+}
+
+.diff-gain {
+  color: var(--good);
+}
+
+.diff-loss {
+  color: var(--bad);
+}
+
+.rising-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+@media (max-width: 860px) {
+  .workspace__body {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .workspace__figure {
+    max-width: 22rem;
+    margin: 0 auto;
+  }
+}
+
 /* Facts tab: long atom ids and descriptions wrap inside the data panel */
 .facts-tab {
   font-size: 0.82rem;
@@ -669,6 +783,10 @@ button.control:hover {
 
 /* ---- example chart cards (playground "Charts worth reading") ----
    A preview wheel is a thumbnail beside its caption, not a hero figure. */
+.example-card-grid {
+  margin-top: 1rem;
+}
+
 .example-card {
   display: flex;
   gap: 1rem;

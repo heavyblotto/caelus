@@ -8,7 +8,7 @@ import { dirname, join } from "node:path";
 import { createRequire } from "node:module";
 import { Engine } from "caelus";
 import { loadNodeData } from "caelus/node";
-import { ChartWheel, spreadAngles } from "../src/index.js";
+import { ChartWheel, spreadAngles, NorthIndianKundli, SouthIndianKundli } from "../src/index.js";
 
 let checks = 0;
 let failures = 0;
@@ -158,6 +158,21 @@ assert(render(fixture, { theme: { axis: "#ff0000" } }).includes("#ff0000"),
 
 // size prop
 assert(render(fixture, { size: 300 }).includes('width="300"'), "size: applied");
+
+// ---------------------------------------------------------------- kundli
+{
+  const DRAW = ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn",
+    "uranus", "neptune", "pluto", "chiron", "true_node"];
+  const north = renderToStaticMarkup(<NorthIndianKundli chart={fixture} />);
+  const south = renderToStaticMarkup(<SouthIndianKundli chart={fixture} />);
+  for (const [label, svg] of [["north", north], ["south", south]] as const) {
+    assert(svg.startsWith("<svg"), `kundli ${label}: renders svg`);
+    assert(!svg.includes("NaN"), `kundli ${label}: no NaN coordinates`);
+    for (const b of DRAW) {
+      assert(svg.includes(`data-body="${b}"`), `kundli ${label}: body ${b} present`);
+    }
+  }
+}
 
 console.log(`\n${checks} checks, ${failures} failures`);
 process.exit(failures ? 1 : 0);

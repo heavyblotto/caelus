@@ -13,8 +13,9 @@ function colorOf(id: string): string {
   return BODY_COLOR[id] ?? "var(--accent)";
 }
 
-export default function SkyViewTab({ engine, jdUt, lat, lonEast }: {
+export default function SkyViewTab({ engine, jdUt, lat, lonEast, extraBodies }: {
   engine: Engine; jdUt: number; lat: number; lonEast: number;
+  extraBodies?: string[];
 }) {
   const [azimuth, setAzimuth] = useState("W");
   const [altitude, setAltitude] = useState("5");
@@ -33,27 +34,35 @@ export default function SkyViewTab({ engine, jdUt, lat, lonEast }: {
   // twilight evolves -- a live preview of a sky-view sequence.
   const OFFSET_MAX = 600; // minutes
   const STEP = 8;         // minutes per tick
+  const reduceMotion = typeof window !== "undefined"
+    && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   useEffect(() => {
-    if (!playing) return undefined;
+    if (!playing || reduceMotion) return undefined;
     const id = setInterval(() => {
       setOffsetMin((m) => (m + STEP > OFFSET_MAX ? -120 : m + STEP));
     }, 200);
     return () => clearInterval(id);
-  }, [playing]);
+  }, [playing, reduceMotion]);
 
   const effJd = jdUt + offsetMin / 1440;
   const result = useMemo<SkyViewResult | { error: string }>(() => {
     try {
+      const base = ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn"];
+      const extra = (extraBodies ?? []).filter((id) => !base.includes(id));
       return skyView(engine, effJd, {
         observer: { lat, lonEast },
         aim: { azimuth, altitude: Number(altitude) },
         lens,
         image: { width: Math.round(Number(w)), height: Math.round(Number(h)) },
-      }, { bortle: bortle ? Number(bortle) : undefined, overlays: anyOverlay ? ov : undefined });
+      }, {
+        bortle: bortle ? Number(bortle) : undefined,
+        overlays: anyOverlay ? ov : undefined,
+        bodies: extra.length ? [...base, ...extra] : undefined,
+      });
     } catch (e) {
       return { error: (e as Error).message };
     }
-  }, [engine, effJd, lat, lonEast, azimuth, altitude, lens, w, h, bortle, ov, anyOverlay]);
+  }, [engine, effJd, lat, lonEast, azimuth, altitude, lens, w, h, bortle, ov, anyOverlay, extraBodies]);
 
   const copy = (text: string) => {
     void navigator.clipboard?.writeText(text).then(() => {
@@ -106,19 +115,21 @@ export default function SkyViewTab({ engine, jdUt, lat, lonEast }: {
         </label>
       </div>
 
-      <div style={{ display: "flex", gap: "0.6rem", alignItems: "center", marginBottom: "0.8rem" }}>
-        <button type="button" className="control mono" style={{ minWidth: "4.2rem" }}
-          onClick={() => setPlaying((p) => !p)} aria-label={playing ? "pause animation" : "play animation"}>
-          {playing ? "❚❚ pause" : "▶ play"}
-        </button>
-        <input type="range" min={-120} max={OFFSET_MAX} step={1} value={offsetMin}
+      <div className="scrubber" style={{ marginBottom: "0.8rem" }}>
+        {!reduceMotion && (
+          <button type="button" className="control mono" style={{ minWidth: "4.2rem" }}
+            onClick={() => setPlaying((p) => !p)} aria-label={playing ? "pause animation" : "play animation"}>
+            {playing ? "pause" : "play"}
+          </button>
+        )}
+        <input type="range" className="control" min={-120} max={OFFSET_MAX} step={1} value={offsetMin}
           onChange={(e) => { setPlaying(false); setOffsetMin(Number(e.target.value)); }}
-          style={{ flex: 1, accentColor: "var(--accent)" }} aria-label="time offset in minutes" />
+          aria-label="time offset in minutes" />
         <span className="mono small mute" style={{ minWidth: "5.5rem", textAlign: "right" }}>
           {offsetMin >= 0 ? "+" : ""}{(offsetMin / 60).toFixed(1)} h
         </span>
         {offsetMin !== 0 && (
-          <button type="button" className="control mono small"
+          <button type="button" className="btn btn-ghost btn-sm"
             onClick={() => { setPlaying(false); setOffsetMin(0); }} aria-label="reset time">reset</button>
         )}
       </div>
