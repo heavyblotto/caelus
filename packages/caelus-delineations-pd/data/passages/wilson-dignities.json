@@ -1,0 +1,77 @@
+[
+  {
+    "id": "wilson-dignities:detriment",
+    "when": {
+      "kind": "placement",
+      "dignity": "detriment"
+    },
+    "atomIds": [
+      "placement:sun"
+    ],
+    "text": "DETRIMENT. A planet has its detriment in the sign opposite its house. Planets in detriment are reckoned unfortunate and weak, and it is a symbol of poverty, distress, loss, and subjugation.",
+    "tradition": "renaissance",
+    "source": {
+      "author": "James Wilson",
+      "work": "A Complete Dictionary of Astrology",
+      "locus": "s.v. Detriment"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "wilson-dignities:exaltation",
+    "when": {
+      "kind": "placement",
+      "dignity": "exaltation"
+    },
+    "atomIds": [
+      "placement:sun"
+    ],
+    "text": "EXALTATION, an essential dignity of 4 degrees. Whence this supposed dignity had its origin is uncertain, but it seems a part of the Arabian system. Almansor in his aphorisms says, that Ip and the © have their exaltations opposite, because one loves light and the other darkness; and y are opposite, because one is a lover of justice and the other of misrule; and 5 an(l 9 have °P\" posite places, because one loves learning and science, and the other sensual pleasures, which are mutual enemies to each other; this is silly enough, and the reasons assigned by Ptolemy are equally so.",
+    "tradition": "renaissance",
+    "source": {
+      "author": "James Wilson",
+      "work": "A Complete Dictionary of Astrology",
+      "locus": "s.v. Exaltation"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "wilson-dignities:fall",
+    "when": {
+      "kind": "placement",
+      "dignity": "fall"
+    },
+    "atomIds": [
+      "placement:sun"
+    ],
+    "text": "FALL. A planet has its fall in the opposite sign to In horary questions, a planet in its fall denotes a person unfortunate, despised, and degraded; mean, insolvent, or helpless; and the thing signified by it is in a hopeless state, except some good aspect by application, or some tranlation of light, happen, which will retrieve it quite unex",
+    "tradition": "renaissance",
+    "source": {
+      "author": "James Wilson",
+      "work": "A Complete Dictionary of Astrology",
+      "locus": "s.v. Fall"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "wilson-dignities:reception",
+    "when": {
+      "kind": "reception"
+    },
+    "atomIds": [
+      "reception:sun~moon"
+    ],
+    "text": "RECEPTION, one of the unmeaning refinements of modern astrology, signifying, two planets being posited in each others houses: as ^ in $ and hi Yb which, they 9 ay, confers a dignity on them the same as if they were in",
+    "tradition": "renaissance",
+    "source": {
+      "author": "James Wilson",
+      "work": "A Complete Dictionary of Astrology",
+      "locus": "s.v. Reception"
+    },
+    "rights": "pd-us",
+    "embed": true
+  }
+]

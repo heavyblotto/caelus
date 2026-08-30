@@ -13,6 +13,8 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 import { denoise, excerpt } from "../lib/denoise.js";
+import { restore } from "../lib/restore.js";
+import { isShippable } from "../../src/quality.js";
 import type { PassageRecord } from "../../src/types.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -57,8 +59,9 @@ function main(): void {
     const { sign, line } = anchors[k];
     const end = k + 1 < anchors.length ? anchors[k + 1].line : lines.length;
     const body = denoise(lines.slice(line + 1, end));
-    const text = excerpt(body);
+    const text = restore(excerpt(body));
     if (text.length < 80) continue; // skip a section the OCR mangled past use
+    if (!isShippable(text)) continue; // quarantine unrestorable letter-spacing
     records.push({
       id: `saint-germain:sun-in-${sign}`,
       // Sign string must match the engine's casing (`chart.ts` SIGNS), or the

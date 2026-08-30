@@ -1,0 +1,242 @@
+[
+  {
+    "id": "sepharial-rising:asc-in-aquarius",
+    "when": {
+      "kind": "angle",
+      "angle": "asc",
+      "sign": "Aquarius"
+    },
+    "atomIds": [
+      "angle:asc"
+    ],
+    "text": "_Aquarius_ contributes the finest types of beauty next to Libra. The Saxon type is dominant. A tall figure, well formed and rounded, fair complexion and blue eyes, flaxen hair, straight features, well-developed chin, and fine, clear forehead.",
+    "tradition": "modern",
+    "source": {
+      "author": "Sepharial",
+      "work": "Astrology: How to Make and Read Your Own Horoscope",
+      "locus": "Aquarius rising (sign types)"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "sepharial-rising:asc-in-aries",
+    "when": {
+      "kind": "angle",
+      "angle": "asc",
+      "sign": "Aries"
+    },
+    "atomIds": [
+      "angle:asc"
+    ],
+    "text": "_Aries_ produces a person of lean body, long neck, high cheek-bones, grey eyes, sandy or sad brown hair, which is either wiry and straight or crisp and curling. The front teeth are usually large and prominent.",
+    "tradition": "modern",
+    "source": {
+      "author": "Sepharial",
+      "work": "Astrology: How to Make and Read Your Own Horoscope",
+      "locus": "Aries rising (sign types)"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "sepharial-rising:asc-in-cancer",
+    "when": {
+      "kind": "angle",
+      "angle": "asc",
+      "sign": "Cancer"
+    },
+    "atomIds": [
+      "angle:asc"
+    ],
+    "text": "_Cancer_ denotes a rather short, squat figure, full lymphatic body, pale complexion, round face, broad forehead, sad brown hair, large aqueous eyes, full chest, short, fleshy hands and feet.",
+    "tradition": "modern",
+    "source": {
+      "author": "Sepharial",
+      "work": "Astrology: How to Make and Read Your Own Horoscope",
+      "locus": "Cancer rising (sign types)"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "sepharial-rising:asc-in-capricorn",
+    "when": {
+      "kind": "angle",
+      "angle": "asc",
+      "sign": "Capricorn"
+    },
+    "atomIds": [
+      "angle:asc"
+    ],
+    "text": "_Capricornus_ produces a slight and rather ill-formed person, long and scraggy neck, prominent features, narrow chin, weak and frequently decrepit limbs, weak chest and sloping shoulders. Frequently the figure is wiry and suggestive of considerable powers of endurance. The brows are prominent, the nose long, and the face thin and hard-set.",
+    "tradition": "modern",
+    "source": {
+      "author": "Sepharial",
+      "work": "Astrology: How to Make and Read Your Own Horoscope",
+      "locus": "Capricorn rising (sign types)"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "sepharial-rising:asc-in-gemini",
+    "when": {
+      "kind": "angle",
+      "angle": "asc",
+      "sign": "Gemini"
+    },
+    "atomIds": [
+      "angle:asc"
+    ],
+    "text": "_Gemini_ produces a tall, active, and upright body, long arms and legs, wide, thin lips, straight and often _retroussé_ nose, lank, straight black hair, rather wide shoulders, and thin body.",
+    "tradition": "modern",
+    "source": {
+      "author": "Sepharial",
+      "work": "Astrology: How to Make and Read Your Own Horoscope",
+      "locus": "Gemini rising (sign types)"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "sepharial-rising:asc-in-leo",
+    "when": {
+      "kind": "angle",
+      "angle": "asc",
+      "sign": "Leo"
+    },
+    "atomIds": [
+      "angle:asc"
+    ],
+    "text": "_Leo_ renders its subjects tall, broad shouldered, fine and manly figures, small round head, fair complexion, blue or grey eyes, flaxen or fair brown hair, upright and fearless carriage.",
+    "tradition": "modern",
+    "source": {
+      "author": "Sepharial",
+      "work": "Astrology: How to Make and Read Your Own Horoscope",
+      "locus": "Leo rising (sign types)"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "sepharial-rising:asc-in-libra",
+    "when": {
+      "kind": "angle",
+      "angle": "asc",
+      "sign": "Libra"
+    },
+    "atomIds": [
+      "angle:asc"
+    ],
+    "text": "_Libra_ gives an elegant body, well-developed limbs, fine oval face, straight nose, fine blue eyes (sometimes deep brown), flaxen or chestnut hair, beautiful complexion. The highest types of beauty are to be found under this sign.",
+    "tradition": "modern",
+    "source": {
+      "author": "Sepharial",
+      "work": "Astrology: How to Make and Read Your Own Horoscope",
+      "locus": "Libra rising (sign types)"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "sepharial-rising:asc-in-pisces",
+    "when": {
+      "kind": "angle",
+      "angle": "asc",
+      "sign": "Pisces"
+    },
+    "atomIds": [
+      "angle:asc"
+    ],
+    "text": "_Pisces_ produces one of rather short stature, short limbs, lymphatic body, pale complexion, limpid blue eyes, black or brown eyes, short nose, full lips, round face, small hands and feet. The short signs are Taurus, Cancer, Capricornus, and Pisces. The tall signs are Gemini, Leo, Sagittarius, and Aquarius. The others are of medium height. The planets rising in each sign will always alter the type by impressing their own characteristics on the subject. Each sign has a Ruler, and the position of the ruler of the rising sign",
+    "tradition": "modern",
+    "source": {
+      "author": "Sepharial",
+      "work": "Astrology: How to Make and Read Your Own Horoscope",
+      "locus": "Pisces rising (sign types)"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "sepharial-rising:asc-in-sagittarius",
+    "when": {
+      "kind": "angle",
+      "angle": "asc",
+      "sign": "Sagittarius"
+    },
+    "atomIds": [
+      "angle:asc"
+    ],
+    "text": "_Sagittarius_ gives a tall person, well-made figure, elegant limbs, oval and rather long face, brown or chestnut hair growing off the forehead, fine expressive eyes, rather prominent and of a dark brown or blue colour, long nose, slightly aquiline.",
+    "tradition": "modern",
+    "source": {
+      "author": "Sepharial",
+      "work": "Astrology: How to Make and Read Your Own Horoscope",
+      "locus": "Sagittarius rising (sign types)"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "sepharial-rising:asc-in-scorpio",
+    "when": {
+      "kind": "angle",
+      "angle": "asc",
+      "sign": "Scorpio"
+    },
+    "atomIds": [
+      "angle:asc"
+    ],
+    "text": "_Scorpio_ gives a short, thick-set, and powerful figure, broad, deep chest, dusky or sallow complexion, dark curling or crisp hair, strong and rather bowed legs. This is a very virile and robust type.",
+    "tradition": "modern",
+    "source": {
+      "author": "Sepharial",
+      "work": "Astrology: How to Make and Read Your Own Horoscope",
+      "locus": "Scorpio rising (sign types)"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "sepharial-rising:asc-in-taurus",
+    "when": {
+      "kind": "angle",
+      "angle": "asc",
+      "sign": "Taurus"
+    },
+    "atomIds": [
+      "angle:asc"
+    ],
+    "text": "_Taurus_ gives a full, thick-set body, strong neck and shoulders, full brown eyes, dark curling hair, full lips, rather wide mouth, and round, bullet-shaped head. The hands and feet are short and fleshy.",
+    "tradition": "modern",
+    "source": {
+      "author": "Sepharial",
+      "work": "Astrology: How to Make and Read Your Own Horoscope",
+      "locus": "Taurus rising (sign types)"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "sepharial-rising:asc-in-virgo",
+    "when": {
+      "kind": "angle",
+      "angle": "asc",
+      "sign": "Virgo"
+    },
+    "atomIds": [
+      "angle:asc"
+    ],
+    "text": "_Virgo_ renders the body thin and active, the head well developed, the forehead broad, hair light brown and waving off the forehead, eyes blue, shoulders broad, the type being of an intellectual or artistic form.",
+    "tradition": "modern",
+    "source": {
+      "author": "Sepharial",
+      "work": "Astrology: How to Make and Read Your Own Horoscope",
+      "locus": "Virgo rising (sign types)"
+    },
+    "rights": "pd-us",
+    "embed": true
+  }
+]

@@ -14,6 +14,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 import { extractSigns } from "../lib/signs.js";
+import { isShippable } from "../../src/quality.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PKG_ROOT = path.resolve(__dirname, "../..");
@@ -32,7 +33,7 @@ const records = extractSigns(lines, {
   author: "Llewellyn George",
   work: "A to Z Horoscope Maker and Delineator",
   rights: "gratis-not-pd",
-});
+}).filter((r) => isShippable(r.text));
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
 fs.writeFileSync(OUT, JSON.stringify(records, null, 2) + "\n");
 const planets = [...new Set(records.map((r) => (r.when as { body: string }).body))];

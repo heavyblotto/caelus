@@ -1,6 +1,10 @@
 #!/usr/bin/env npx tsx
-/** Planet-in-house delineations from Alan Leo, *How to Judge a Nativity*
- *  (1908). Selector: `placement{ body, house }`. */
+/**
+ * Planet-in-house delineations from Alan Leo, *How to Judge a Nativity*
+ * (1908). Selector: `placement{ body, house }`. Restore-only: layout via
+ * denoise, OCR via restore. OCR-tolerant heads (`Tue`/`Thc`) end the previous
+ * section instead of bleeding the next planet into this cell.
+ */
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";

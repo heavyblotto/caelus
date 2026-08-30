@@ -13,6 +13,7 @@ export interface FetchSpec {
   stripGutenberg?: boolean;
   stripArchive?: boolean;
   sacredTextsIndex?: string;
+  htmlSequence?: { pattern: string; from: number; to: number };
   /** Source is a PDF needing a text-layer extraction (pdftotext), not HTTP text. */
   pdf?: boolean;
   /** Free-form acquisition note (e.g. for a source with no reachable URL). */
@@ -43,7 +44,7 @@ export interface SourceManifestEntry {
  *  `ContextOptions` — a rule keyed on them simply never fires against a bare
  *  chart projection. */
 export type SelectorSpec =
-  | { kind: "placement"; body: string; sign?: string; house?: number; dignity?: string }
+  | { kind: "placement"; body?: string; sign?: string; house?: number; dignity?: string }
   | { kind: "aspect"; a: string; b: string; aspect: string; phase?: string }
   | { kind: "pattern"; pattern: string; body?: string }
   | { kind: "signature"; facet: string; value: string }

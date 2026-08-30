@@ -129,8 +129,12 @@
     "rights": "pd-us",
     "file": "sources/text/heindel-message-of-the-stars.txt",
     "fetch": {
-      "url": "https://archive.org/download/messageofstarses00heiniala/messageofstarses00heiniala_djvu.txt",
-      "stripArchive": true
+      "htmlSequence": {
+        "pattern": "https://www.rosicrucian.com/mos/moseng%02d.htm",
+        "from": 1,
+        "to": 13
+      },
+      "note": "Rosicrucian Fellowship HTML (proofread), not the IA djvu scan."
     }
   },
   {

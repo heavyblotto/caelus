@@ -1,19 +1,23 @@
 /**
  * Generic planet-in-house extractor, shared by the Alan Leo books that head a
  * delineation "Planet in the Nth House" with the prose following inline.
+ *
+ * Restore-only: layout via denoise, OCR via restore. Heading match is
+ * OCR-tolerant (`Tue`/`Thc` for `The`) so a mangled head ends the previous
+ * section instead of bleeding into it.
  */
-import { denoise, excerpt, sentenceStart } from "./denoise.js";
+import { denoise, excerpt, sentenceStart, isSectionEnd } from "./denoise.js";
+import { restore } from "./restore.js";
 import { ordinalToNumber } from "./ordinal.js";
 import { PLANET_TO_BODY } from "./astro.js";
 import type { PassageRecord, CorpusRights } from "../../src/types.js";
 
 const planets = Object.keys(PLANET_TO_BODY).join("|");
+const THE = "(?:The|Tue|Thc|Tne|Ths|Tbe)\\s+";
 const HEADING = new RegExp(
-  `^\\s*(?:The\\s+)?(${planets})\\s+in\\s+the\\s+([A-Za-z]+)\\s+House\\b(.*)$`,
+  `^\\s*(?:${THE})?(${planets})\\s+in\\s+the\\s+([A-Za-z]+)\\s+House\\b(.*)$`,
   "i",
 );
-/** A section divider ("...IN THE TWELVE HOUSES", or a long all-caps title). */
-const DIVIDER = /IN THE [A-Z]+ HOUSES|^[A-Z][A-Z .'-]{14,}$/;
 
 const title = (s: string): string => s[0].toUpperCase() + s.slice(1);
 
@@ -23,6 +27,10 @@ export interface SourceMeta {
   work: string;
   /** Defaults to "pd-us". Use "gratis-not-pd" for a rights-encumbered scan. */
   rights?: CorpusRights;
+}
+
+function cleanBlock(block: string[]): string {
+  return restore(excerpt(sentenceStart(denoise(block))));
 }
 
 /** Extract planet-in-house PassageRecords from `lines`. */
@@ -38,10 +46,10 @@ export function extractHouses(lines: string[], source: SourceMeta): PassageRecor
 
     const block = [m[3]];
     for (let j = i + 1; j < lines.length; j++) {
-      if (HEADING.test(lines[j]) || DIVIDER.test(lines[j].trim())) break;
+      if (HEADING.test(lines[j]) || isSectionEnd(lines[j])) break;
       block.push(lines[j]);
     }
-    const text = excerpt(sentenceStart(denoise(block)));
+    const text = cleanBlock(block);
     if (text.length < 80) continue;
 
     const key = `${body}:${house}`;

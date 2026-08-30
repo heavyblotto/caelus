@@ -1,0 +1,40 @@
+[
+  {
+    "id": "ptolemy-dignities:domicile",
+    "when": {
+      "kind": "placement",
+      "dignity": "domicile"
+    },
+    "atomIds": [
+      "placement:sun"
+    ],
+    "text": "Those stars which are denominated planetary orbs have particular familiarity with certain places in the zodiac, by means of parts designated as their houses, and also by their triplicities, exaltations, terms, and so forth. The nature of their familiarity by houses is as follows: Cancer and Leo are the most northerly of all the twelve signs; they approach nearer than the other signs to the zenith of this part of the earth, and thereby cause warmth and heat: they are consequently appropriated as houses for the two principal and greater luminaries; Leo for the Sun, as being masculine; and Cancer for the Moon, as being feminine. It has hence resulted, that the semicircle from Leo to Capricorn has been ordained solar, and the semicircle from Aquarius to Cancer, lunar;",
+    "tradition": "hellenistic",
+    "source": {
+      "author": "Claudius Ptolemy (trans. J.M. Ashmand)",
+      "work": "Tetrabiblos",
+      "locus": "Book I, ch. XX, houses of the planets"
+    },
+    "rights": "pd-us",
+    "embed": true
+  },
+  {
+    "id": "ptolemy-dignities:exaltation",
+    "when": {
+      "kind": "placement",
+      "dignity": "exaltation"
+    },
+    "atomIds": [
+      "placement:sun"
+    ],
+    "text": "That which is termed the exaltation of the planets is considered by the following rules: The Sun on his entrance into Aries is then passing into the higher and more northern semicircle; but, on his entrance into Libra, into the more southern and lower one: his exaltation, therefore, is determined to be in Aries, as, when present in that sign, he begins to lengthen the days, and the influence of his heating nature increases at the same time. His fall is placed in Libra, for the converse reasons. Saturn on the contrary, in order to preserve his station opposite to the Sun, in this respect, as well as in regard to their respective houses, obtains his exaltation in Libra, and his fall in Aries: since, in all cases, the increase of heat must be attended by a diminution of cold, and the increase of cold by a diminution of heat.",
+    "tradition": "hellenistic",
+    "source": {
+      "author": "Claudius Ptolemy (trans. J.M. Ashmand)",
+      "work": "Tetrabiblos",
+      "locus": "Book I, ch. XXII, exaltations"
+    },
+    "rights": "pd-us",
+    "embed": true
+  }
+]
