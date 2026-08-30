@@ -250,6 +250,11 @@ prompt and render-plan prose; every computed number (pixels, sizes,
 magnitudes, brightness) is identical across styles, and the pixel placements
 stay binding in every template. An unknown style throws.
 
+`sceneNote` is an optional extra SCENE line (place, weather, a foreground). It
+is appended to `directives`, so it appears in both `prompt` and
+`renderPlan.background.prompt`. Placements, twilight, and photometry do not
+change.
+
 ## Reference-frame overlays
 
 The `overlays` option projects the sky's reference frames into the frame as

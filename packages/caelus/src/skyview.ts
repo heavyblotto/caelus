@@ -702,6 +702,9 @@ export interface SkyViewOptions {
    *  render-plan prose change with the style; every computed number is
    *  identical. Defaults to "default" (the original wording). */
   promptStyle?: keyof typeof PROMPT_STYLES;
+  /** Extra SCENE directive (place, weather, foreground). Appended to
+   *  `prompt` and `renderPlan.background.prompt`. Geometry is unchanged. */
+  sceneNote?: string;
   /** Bodies to place. Defaults to Sun, Moon, and the naked-eye planets. Any
    *  string id works for runtime bodies registered via {@link Engine.registerSource}. */
   bodies?: readonly string[];
@@ -1391,6 +1394,8 @@ export function skyView(
   };
 
   const directives = buildDirectives(lens, sky, milkyWay, fieldClause, overlays, width, height, aimAz, aimAlt);
+  const note = opts.sceneNote?.trim();
+  if (note) directives.push(note);
   const prompt = buildPrompt(bodies, offFrame, directives, starfield, style);
   const renderPlan = buildRenderPlan(sky, bodies, starfield, milkyWay, overlays, pole, directives, width, height, style);
 

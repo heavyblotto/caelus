@@ -136,9 +136,32 @@ export const DERIVATION_STATIONS: ConsoleStation[] = [
   { id: "wheel", label: "WHEEL", t: 1 },
 ];
 
+/** Scrub position where a scenic `openingAim` hands off to SKY. */
+export const VIEW_HANDOFF = 0.2;
+
+/** Canonical morph parameter: with an opening aim, `t` in [0, VIEW_HANDOFF]
+ *  is the scenic pre-roll and the existing SKY→WHEEL ramps occupy the rest. */
+export function morphParameter(t: number, openingAim?: { az: number; alt: number }): number {
+  const x = clamp01(t);
+  if (!openingAim) return x;
+  if (x <= VIEW_HANDOFF) return 0;
+  return (x - VIEW_HANDOFF) / (1 - VIEW_HANDOFF);
+}
+
+/** Home-page console: VIEW plus the five derivation stations, remapped. */
+export const HOME_DERIVATION_STATIONS: ConsoleStation[] = [
+  { id: "view", label: "VIEW", t: 0 },
+  { id: "sky", label: "SKY", t: VIEW_HANDOFF },
+  { id: "sphere", label: "SPHERE", t: VIEW_HANDOFF + 0.25 * (1 - VIEW_HANDOFF) },
+  { id: "ecliptic", label: "ECLIPTIC", t: VIEW_HANDOFF + 0.5 * (1 - VIEW_HANDOFF) },
+  { id: "horizon", label: "HORIZON", t: VIEW_HANDOFF + 0.75 * (1 - VIEW_HANDOFF) },
+  { id: "wheel", label: "WHEEL", t: 1 },
+];
+
 /** Optional per-station captions (params.captions draws them), in
  *  apparatus register: one sentence naming what the station shows. */
 export const STATION_CAPTIONS: Record<string, string> = {
+  view: "The sky as a photograph from this place, aimed at the Sun, the Moon, or south.",
   sky: "The sky from the birthplace at the birth instant; bodies below the horizon are faint. The chart is not what you could see.",
   sphere: "The whole celestial sphere. The horizon is a great circle, and the hidden hemisphere swings into view.",
   ecliptic: "The ecliptic lights up and each body drops a perpendicular tick onto it: ecliptic longitude, the number the chart is made of.",
@@ -224,6 +247,10 @@ export interface DerivationFigureProps {
   /** Body id held highlighted through the morph. Its projection tick
    *  stays drawn at every t, not only past the ECLIPTIC ramp. */
   follow?: string;
+  /** Scenic camera for a VIEW pre-roll. When set, `t` in [0, 0.2] slerps
+   *  from this aim onto the Ascendant opening, then the usual morph
+   *  occupies [0.2, 1]. Omit for the playground path (SKY at t = 0). */
+  openingAim?: { az: number; alt: number };
   /** Free-orbit offset (degrees) applied to the camera aim; the scrub
    *  owns the canonical view, so the widget clears this on release. */
   orbit?: { az: number; alt: number };
@@ -241,7 +268,7 @@ export interface DerivationFigureProps {
  * the ordinary figure, not an imitation of it.
  */
 export function DerivationFigure({
-  scene, t: tRaw, size = 520, follow, orbit, onPick, theme,
+  scene, t: tRaw, size = 520, follow, openingAim, orbit, onPick, theme,
 }: DerivationFigureProps): ReactElement {
   const t = clamp01(tRaw);
   if (t >= 1) {
@@ -252,20 +279,30 @@ export function DerivationFigure({
   // Opening aim: toward the rising ecliptic, a little above the
   // horizon. Settle aim: the ecliptic south pole (see module notes).
   // A free-orbit offset rides on top; release clears it, so the scrub
-  // keeps the canonical view.
-  const aim0 = dirFromAzAlt(scene.ascAz, 15);
-  const aim1 = neg(scene.eclToHor[2]);
-  const aim = slerp(aim0, aim1, ramp(t, 0.875, 1));
+  // keeps the canonical view. With `openingAim`, t in [0, VIEW_HANDOFF]
+  // is a photographic pre-roll; `u` is the usual morph parameter.
+  const u = morphParameter(t, openingAim);
+  const aimSky = dirFromAzAlt(scene.ascAz, 15);
+  const aimSettle = neg(scene.eclToHor[2]);
+  let aim0 = aimSky;
+  if (openingAim) {
+    aim0 = slerp(dirFromAzAlt(openingAim.az, openingAim.alt), aimSky, ramp(t, 0, VIEW_HANDOFF));
+  }
+  const aim = slerp(aim0, aimSettle, ramp(u, 0.875, 1));
   let [aimAz, aimAlt] = azAltOfDir(aim);
   if (orbit) {
     aimAz += orbit.az;
     aimAlt = Math.max(-85, Math.min(85, aimAlt + orbit.alt));
   }
-  const pull = ramp(t, 0, 0.25);
-  const proj = skyProjector(aimAz, aimAlt, {
-    shape: pull,
-    hfovDeg: 100 + 80 * pull,
-  });
+  const pull = ramp(u, 0, 0.25);
+  let shape = pull;
+  let hfovDeg = 100 + 80 * pull;
+  if (openingAim && t < VIEW_HANDOFF) {
+    const pre = ramp(t, 0, VIEW_HANDOFF);
+    shape = -1 + pre;
+    hfovDeg = 70 + 30 * pre;
+  }
+  const proj = skyProjector(aimAz, aimAlt, { shape, hfovDeg });
 
   const c = size / 2;
   const R = (size / 2) * 0.92;
@@ -276,14 +313,14 @@ export function DerivationFigure({
 
   // Positions come from the ecliptic frame throughout; at s = 0 this
   // is the true sky direction (the handoff is free by construction).
-  const s = ramp(t, 0.75, 0.875);
+  const s = ramp(u, 0.75, 0.875);
   const eclDir = (lon: number, lat: number): Vec3 =>
     mul(scene.eclToHor, unitVector(lon, lat));
   const bodyDir = (b: SceneBody): Vec3 => eclDir(b.lon, b.lat * (1 - s));
 
   // In-plane page rotation carrying the Ascendant to the left edge,
   // eased over the settle.
-  const settle = ramp(t, 0.875, 1);
+  const settle = ramp(u, 0.875, 1);
   let rotate = 0;
   if (settle > 0) {
     const p = proj.placeDir(eclDir(scene.asc, 0));
@@ -308,12 +345,12 @@ export function DerivationFigure({
     [0, Math.sin(u * DEG), Math.cos(u * DEG)] as Vec3);
 
   // --- opacity ramps ---------------------------------------------------
-  const oEcl = ramp(t, 0.25, 0.4);          // the band lights up
-  const oSigns = ramp(t, 0.375, 0.5);       // sign boundaries draw on
-  const oTicks = ramp(t, 0.5, 0.625);       // each body drops its tick
-  const oMeridian = ramp(t, 0.625, 0.75);   // the meridian joins
-  const oAngles = ramp(t, 0.7, 0.8);        // the crossings mark
-  const oDress = ramp(t, 0.95, 1);          // cusps and aspect chords
+  const oEcl = ramp(u, 0.25, 0.4);          // the band lights up
+  const oSigns = ramp(u, 0.375, 0.5);       // sign boundaries draw on
+  const oTicks = ramp(u, 0.5, 0.625);       // each body drops its tick
+  const oMeridian = ramp(u, 0.625, 0.75);   // the meridian joins
+  const oAngles = ramp(u, 0.7, 0.8);        // the crossings mark
+  const oDress = ramp(u, 0.95, 1);          // cusps and aspect chords
 
   const els: ReactElement[] = [];
 
@@ -395,7 +432,7 @@ export function DerivationFigure({
   // Bodies: grey dots until the wheel dresses them. Below-horizon
   // bodies are faint in the `SKY` view (the first lesson: the chart
   // is not what you could see) and solid once the sphere is whole.
-  const whole = ramp(t, 0, 0.25);
+  const whole = ramp(u, 0, 0.25);
   for (const b of scene.bodies) {
     const [x, y] = XY(bodyDir(b));
     const held = follow !== undefined && b.id === follow;

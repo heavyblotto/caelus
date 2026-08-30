@@ -192,12 +192,33 @@ const render = (t: number, follow?: string) =>
   ) === plain, "orbit: omitted offset is the canonical view");
 }
 
+// ----------------------------------------------------------- opening aim
+{
+  const west = { az: 270, alt: 10 };
+  const sky = renderToStaticMarkup(<DerivationFigure scene={scene} t={0} />);
+  const view = renderToStaticMarkup(
+    <DerivationFigure scene={scene} t={0} openingAim={west} />,
+  );
+  assert(sky !== view, "openingAim: VIEW camera differs from SKY at t=0");
+  assert(renderToStaticMarkup(<DerivationFigure scene={scene} t={0} />) === sky,
+    "openingAim: omitted keeps the playground SKY path");
+  const handed = renderToStaticMarkup(
+    <DerivationFigure scene={scene} t={1} openingAim={west} />,
+  );
+  assert(handed.includes("☉"), "openingAim: t=1 is still the real wheel");
+  const atHandoff = renderToStaticMarkup(
+    <DerivationFigure scene={scene} t={0.2} openingAim={west} />,
+  );
+  assert(atHandoff === sky, "openingAim: t=0.2 matches default SKY");
+}
+
 // -------------------------------------------------------- console controls
 {
   for (const s of DERIVATION_STATIONS) {
     assert(typeof STATION_CAPTIONS[s.id] === "string",
       `captions: station ${s.id} captioned`);
   }
+  assert(typeof STATION_CAPTIONS.view === "string", "captions: VIEW captioned");
   const bare = renderToStaticMarkup(<ChartDerivation scene={scene} />);
   assert(bare.includes("▸"), "controls: autoplay affordance present");
   assert(!bare.includes("clock"), "controls: no clock without an engine");

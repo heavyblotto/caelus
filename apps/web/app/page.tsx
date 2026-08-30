@@ -1,15 +1,10 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { Engine } from "caelus";
-import { embeddedData } from "caelus/data-embedded";
-import { ChartWheel } from "caelus-wheel";
-import SkyRibbon from "../components/SkyRibbon";
 import PageClose from "../components/PageClose";
 import PageHero from "../components/PageHero";
-import CodeBlock from "../components/CodeBlock";
 import FAQ from "../components/FAQ";
 import { A, Lead, P, H2 } from "../components/Prose";
-import { WHEEL_THEME } from "../lib/wheelTheme";
+import HomeLiveIsland from "../components/home/HomeLiveIsland";
 import {
   FACTS,
   formatGoldenChecks,
@@ -22,6 +17,9 @@ import {
 } from "../lib/facts";
 import { NPM, SITE } from "../lib/site";
 import { pageMetadata } from "../lib/seo";
+import { nycCivilNow } from "../lib/nycNow";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = pageMetadata({
   title: "Validated astrology computation",
@@ -46,10 +44,6 @@ const PROOF: Array<{ num: string; label: string; href: string }> = [
   { num: "0", label: "Runtime dependencies", href: NPM.caelus },
   { num: "MIT", label: "Licensed, no AGPL", href: `${SITE.repo}/blob/main/LICENSE` },
 ];
-
-// The home page's worked example is the canonical fixture: the exact chart the
-// code sample computes, rendered server-side as static SVG (no client JS).
-const homeChart = new Engine(embeddedData).chart(1990, 6, 10, 14, 30, 0, 27.95, -82.46, "placidus");
 
 // What the engine computes, as titled entries a reader can scan. Each links to
 // the doc page that covers it; the one-liner carries the specifics.
@@ -148,49 +142,7 @@ export default function Home() {
         <Lead>{SITE.description}</Lead>
       </PageHero>
 
-      <div style={{ margin: "1.5rem 0 0.5rem" }}>
-        <SkyRibbon />
-      </div>
-
-      <H2>Compute a chart</H2>
-      <P>
-        You pass a date, a UT time, a latitude, and a longitude, and the engine
-        returns a chart object your app, API, or AI tool can read.
-      </P>
-      <CodeBlock lang="bash" code="npm install caelus" />
-      <div className="home-compute">
-        <CodeBlock
-          lang="typescript"
-          label="chart.ts"
-          code={`import { Engine, fmtLon } from "caelus";
-import { embeddedData } from "caelus/data-embedded";
-
-const engine = new Engine(embeddedData);
-
-const chart = engine.chart(
-  1990, 6, 10, 14, 30, 0,
-  27.95, -82.46,
-  "placidus",
-);
-
-fmtLon(chart.bodies.sun.lon);   // "19°27' Gemini"
-chart.bodies.saturn.retrograde; // true`}
-        />
-        <figure className="home-compute__chart">
-          <div className="chart-fluid">
-            <ChartWheel chart={homeChart} size={360} theme={WHEEL_THEME} />
-          </div>
-          <figcaption className="dim small" style={{ marginTop: "0.5rem" }}>
-            The same chart, drawn by <code>caelus-wheel</code>: 1990-06-10 14:30 UT, Tampa.
-          </figcaption>
-        </figure>
-      </div>
-      <P dim>
-        Full walkthrough in the <A href="/docs/quickstart">Quickstart</A>, or try it live in the{" "}
-        <A href="/playground">Playground</A>. For a complete app, the{" "}
-        <A href={SITE.starter}>caelus-starter</A> template is a Next.js project with a
-        birth form, timezone handling, and a chart wheel, deployable to Vercel in one click.
-      </P>
+      <HomeLiveIsland civil={nycCivilNow()} />
 
       <H2>What it computes</H2>
       <ul className="capability-grid">

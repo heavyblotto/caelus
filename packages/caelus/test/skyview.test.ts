@@ -401,6 +401,16 @@ ok(/^\d{4}-\d{2}-\d{2}T/.test(centered.instant.utc), "instant carries an ISO UTC
     skyView(eng, jd, styleView, { promptStyle: "oil-painting" as any });
   } catch { threw = true; }
   ok(threw, "an unknown promptStyle throws");
+
+  const noted = skyView(eng, jd, styleView, {
+    sceneNote: "Foreground: Manhattan looking west across the Hudson.",
+  });
+  ok(noted.prompt.includes("Foreground: Manhattan looking west across the Hudson."),
+    "sceneNote lands in the full prompt");
+  ok(noted.renderPlan.background.prompt.includes("Foreground: Manhattan looking west across the Hudson."),
+    "sceneNote lands in the body-free plate prompt");
+  ok(JSON.stringify(noted.bodies) === JSON.stringify(plain.bodies),
+    "sceneNote does not change placements");
 }
 
 console.log(`\nskyview: ${failures} failures`);

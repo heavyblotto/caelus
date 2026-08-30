@@ -30,6 +30,9 @@ current figures live in `packages/caelus/accuracy.json` and on
   `skyProjector` (plus `dirFromAzAlt`) for consumers that draw rather than
   place pixels. Python mirrors (`sky_camera`, `radial_scale`, `sky_project`);
   the skyview golden pins the pair.
+- **`sceneNote`.** Optional extra SCENE line on `skyView` (place, weather,
+  foreground). It lands in `prompt` and `renderPlan.background.prompt`;
+  placements do not change.
 
 ### Corpus (`caelus-corpus`, unpublished)
 
@@ -50,7 +53,15 @@ subpaths). **`caelus-delineations-pd`** remains the published npm corpus.
 Interactive figures mounted in the Workspace playground (no Encyclopedia
 chrome): house comparator, sky→wheel derivation, sect flip, retrograde
 scrub, and aspect dial. Figures accept an optional `theme` so the
-playground can pass `WHEEL_THEME`.
+playground can pass `WHEEL_THEME`. `DerivationFigure` accepts `openingAim`
+for a scenic VIEW pre-roll before SKY.
+
+### Site (`apps/web`)
+
+- Home page: below the proof cards, a live New York event sky (read-only
+  stamp), a pre-generated plate composited with `skyProjector`, a derivation
+  morph that folds into a large chart, then the ecliptic strip and a
+  Compute-a-chart sample synced to the same instant.
 
 ## v0.24.1 — Ship the complete tarball (wide planet packs restored)
 

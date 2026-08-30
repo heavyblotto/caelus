@@ -410,6 +410,70 @@ th {
   margin: 0;
   text-align: center;
 }
+
+.home-sky {
+  margin: 2rem 0 0.5rem;
+}
+.home-sky__stamp {
+  margin: 0 0 0.75rem;
+}
+.home-sky__stage {
+  position: relative;
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--surface-2), var(--bg));
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+}
+.home-sky__plate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.home-sky__morph {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  transition: opacity 80ms linear, transform 80ms linear;
+}
+.home-sky__morph svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+.home-sky__play {
+  margin-top: 0.45rem;
+  font-family: var(--mono, ui-monospace, "SF Mono", Menlo, Consolas, monospace);
+  font-size: 11px;
+  color: var(--text-mute);
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+}
+.home-sky__play button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--text-mute);
+  cursor: pointer;
+}
+.home-sky__chart {
+  margin: 1.5rem auto 0;
+  max-width: 40rem;
+  text-align: center;
+}
+
 @media (max-width: 760px) {
   .home-compute {
     grid-template-columns: 1fr;
