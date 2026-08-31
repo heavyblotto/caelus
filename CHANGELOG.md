@@ -55,20 +55,28 @@ chrome): house comparator, sky→wheel derivation, sect flip, retrograde
 scrub, and aspect dial. Figures accept an optional `theme` so the
 playground can pass `WHEEL_THEME`. `DerivationFigure` accepts `openingAim`
 for a scenic VIEW pre-roll before SKY, and `overlays` to name bodies from
-t = 0 then fade in figures, the ecliptic, signs, and houses. With overlays
-the camera keeps tilting from SPHERE through HORIZON, then flattens
-slowly onto the page as the natal wheel fades in. `PlateConsole`
-accepts `snapOnRelease={false}` for a free-stop scrub.
+t = 0 then light the great cross (ecliptic × horizon), then figures,
+signs, and houses. With overlays the camera keeps tilting from SPHERE
+through the fold, then flattens slowly onto the page as each mark lerps
+onto the natal wheel. `PlateConsole`
+accepts `snapOnRelease={false}` for a free-stop scrub; a drag that
+leaves the rule keeps the pointer and does not start a text selection.
+More than six stations stack on two rows so the labels do not collide.
+Overlay glyphs take a hairline halo (and follow `theme` when one is
+passed) so counters stay open in dark mode.
 
 ### Site (`apps/web`)
 
 - Home page: below the proof cards, a live New York event sky (read-only
   stamp), a pre-generated plate composited with `skyProjector`, a derivation
-  morph that folds into a large chart: named bodies at VIEW, then
+  morph that folds into a large chart: named bodies at VIEW, then the
+  ecliptic and horizon as the great cross on the still photograph, then
   constellation, zodiac, and house overlays, a continuous tilt through
-  SPHERE–HORIZON, a slow flatten into the natal wheel, and a free-stop
-  scrub, then the ecliptic strip and a Compute-a-chart sample synced to
-  the same instant.
+  SPHERE, a slow flatten that carries each mark onto the natal wheel.
+  The plate stays under the figure through WHEEL. The natal wheel under
+  the stage stays put after the fold. Transport (previous, play, pause,
+  next) sits at the left of the scrub, on the rule. Then the ecliptic
+  strip and a Compute-a-chart sample synced to the same instant.
 
 ## v0.24.1 — Ship the complete tarball (wide planet packs restored)
 

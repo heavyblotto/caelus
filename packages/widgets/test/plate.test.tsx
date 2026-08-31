@@ -71,8 +71,29 @@ const STATIONS: ConsoleStation[] = [
   assert(html.includes("SKY") && html.includes("WHEEL"), "console: station labels");
   assert(html.includes("λ 19°27′"), "console: datum line");
   assert(html.includes("left:50%"), "console: index at t");
+  assert(html.includes("user-select:none"), "console: no text selection on the rail");
   // inert without onScrub: rendering is identical server- and client-side
   assert(!html.includes("cursor:pointer"), "console: inert without onScrub");
+  const live = renderToStaticMarkup(
+    <PlateConsole t={0.5} stations={STATIONS} onScrub={() => {}} />,
+  );
+  assert(live.includes("cursor:ew-resize"), "console: hydrated rail is a drag");
+  assert(live.includes("height:44px"), "console: rail hit area is taller than the rule");
+  assert(live.includes("role=\"slider\""), "console: hydrated rail is a slider");
+  const crowded = renderToStaticMarkup(
+    <PlateConsole t={0} stations={[
+      { id: "view", label: "VIEW", t: 0 },
+      { id: "figures", label: "FIGURES", t: 0.07 },
+      { id: "zodiac", label: "ZODIAC", t: 0.13 },
+      { id: "sky", label: "SKY", t: 0.2 },
+      { id: "sphere", label: "SPHERE", t: 0.4 },
+      { id: "ecliptic", label: "ECLIPTIC", t: 0.6 },
+      { id: "horizon", label: "HORIZON", t: 0.72 },
+      { id: "wheel", label: "WHEEL", t: 1 },
+    ]} />,
+  );
+  assert(crowded.includes("height:32px"), "console: crowded stations use two rows");
+  assert(crowded.includes("top:16px"), "console: odd stations sit on the second row");
 }
 
 // ---------------------------------------------------------------- types

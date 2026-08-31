@@ -87,11 +87,9 @@ chart.bodies.saturn.retrograde; // ${satRx}`;
       />
 
       <figure className="home-sky__chart">
-        {t < 0.995 && (
-          <div className="chart-fluid">
-            <ChartWheel chart={chart} size={FIGURE} theme={WHEEL_THEME} />
-          </div>
-        )}
+        <div className="chart-fluid">
+          <ChartWheel chart={chart} size={FIGURE} theme={WHEEL_THEME} />
+        </div>
         <figcaption className="dim small" style={{ marginTop: "0.5rem" }}>
           The event chart for this instant, Placidus houses, tropical zodiac.
         </figcaption>

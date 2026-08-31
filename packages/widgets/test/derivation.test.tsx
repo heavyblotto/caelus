@@ -234,30 +234,57 @@ const render = (t: number, follow?: string) =>
   const ov0 = ov(0);
   assert(glyphs.some((g) => ov0.includes(g)) || names.some((n) => ov0.includes(n)),
     "overlays: body glyphs or names at VIEW");
+  assert(!ov0.includes('stroke-width="3"'),
+    "overlays: halo is a hairline, not a 3px outline");
+  const ovThemed = renderToStaticMarkup(
+    <DerivationFigure scene={scene} t={0} openingAim={west} overlays
+      theme={{ planetText: "var(--text)" }} />,
+  );
+  assert(ovThemed.includes("var(--text)") && ovThemed.includes("var(--bg)"),
+    "overlays: themed glyphs follow the page, halo follows the ground");
   assert(!SIGN_GLYPHS.some((g) => ov0.includes(g)),
     "overlays: no sign glyphs at VIEW");
   assert(!ov0.includes("ASC") && !ov0.includes("H1"),
     "overlays: no house marks at VIEW");
   assert(!scene.figureLabels.some((l) => ov0.includes(l.name)),
     "overlays: no constellation names at VIEW");
-  const ovFig = ov(0.08);
+  assert(!ov0.includes('stroke-width="1.25"'),
+    "overlays: no ecliptic stroke at VIEW");
+  assert(!ov0.includes('stroke-width="1.75"'),
+    "overlays: no horizon stroke at VIEW");
+  const homeT = (id: string) =>
+    HOME_DERIVATION_STATIONS.find((s) => s.id === id)!.t;
+  const ovEcl = ov(homeT("ecliptic"));
+  assert(ovEcl.includes('stroke-width="1.25"'),
+    "overlays: ecliptic lights at ECLIPTIC");
+  const eclD = ovEcl.match(
+    /d="([^"]*)" fill="none" stroke="#8c2f2a" stroke-width="1.25"/,
+  );
+  assert(!!eclD && eclD[1].length > 20,
+    "overlays: ecliptic path has geometry at ECLIPTIC");
+  assert(!ovEcl.includes('stroke-width="1.75"'),
+    "overlays: horizon still off at ECLIPTIC");
+  const ovHor = ov(homeT("horizon"));
+  assert(ovHor.includes('stroke-width="1.25"') && ovHor.includes('stroke-width="1.75"'),
+    "overlays: the great cross is on at HORIZON");
+  const ovFig = ov(homeT("figures"));
   assert(scene.figureLabels.some((l) => ovFig.includes(l.name)),
     "overlays: constellation names by FIGURES");
-  const ovZod = ov(0.15);
+  const ovZod = ov(homeT("zodiac"));
   assert(SIGN_GLYPHS.some((g) => ovZod.includes(g)),
     "overlays: sign glyphs by ZODIAC");
-  const ovSky = ov(0.2);
+  const ovSky = ov(homeT("sky"));
   assert(ovSky.includes("ASC") || ovSky.includes("H1"),
     "overlays: house marks by SKY");
-  const sphere = ov(HOME_DERIVATION_STATIONS.find((s) => s.id === "sphere")!.t);
-  const ecl = ov(HOME_DERIVATION_STATIONS.find((s) => s.id === "ecliptic")!.t);
-  const hor = ov(HOME_DERIVATION_STATIONS.find((s) => s.id === "horizon")!.t);
-  assert(sphere !== ecl && ecl !== hor,
-    "overlays: SPHERE → ECLIPTIC → HORIZON are distinct frames");
+  const sphere = ov(homeT("sphere"));
   const late = ov(0.95);
-  assert(hor !== late, "overlays: HORIZON → WHEEL keeps flattening");
-  assert(late.includes("☉"), "overlays: wheel fading in before t=1");
-  assert(ov(1).includes("☉"), "overlays: t=1 is still the real wheel");
+  assert(ovHor !== sphere && sphere !== late,
+    "overlays: HORIZON → SPHERE → fold are distinct frames");
+  assert(late.includes("☉"), "overlays: glyphs stay on as the wheel converges");
+  assert(!late.includes("astrological chart wheel"),
+    "overlays: ChartWheel waits until t=1");
+  assert(ov(1).includes("astrological chart wheel"),
+    "overlays: t=1 is still the real wheel");
 }
 
 // -------------------------------------------------------- console controls

@@ -28,14 +28,18 @@
  *   observer at the center that is the view an external observer
  *   above the *north* pole sees, and it makes longitude run
  *   counterclockwise, the wheel's handedness, with no late flip.
- * - An in-plane page rotation carries the Ascendant to the left edge;
- *   `t = 1` renders the standard `ChartWheel` itself, so the end of
- *   the morph is the ordinary figure by construction.
+ * - An in-plane page rotation carries the Ascendant to the left edge.
+ *   With overlays, the late flatten also lerps each mark onto the natal
+ *   wheel's polar layout (the same `pt` ChartWheel uses), so the
+ *   planes affix and the bodies travel into place; `t = 1` then
+ *   renders the standard `ChartWheel` itself.
  * - The horizon carries the heaviest ink line and the ecliptic the
  *   oxblood accent, fixed across all five stations (the two
  *   characters). Without `overlays`, bodies stay grey dots until the
- *   wheel dresses them. With `overlays`, ecliptic / signs / houses /
- *   constellation figures and body glyphs draw from t = 0.
+ *   wheel dresses them. With `overlays`, the two great circles light
+ *   first so they can be followed through the morph; figures, signs,
+ *   and houses follow. Body glyphs draw from t = 0. The home plate
+ *   stays under the figure through WHEEL.
  */
 import type { ReactElement } from "react";
 import {
@@ -44,7 +48,8 @@ import {
   type Engine, type Vec3,
 } from "caelus";
 import {
-  ChartWheel, GLYPHS, PLATE_THEME, PLATE_TOKENS, type WheelChart, type WheelTheme,
+  ChartWheel, GLYPHS, PLATE_THEME, PLATE_TOKENS, spreadAngles,
+  type WheelChart, type WheelTheme,
 } from "caelus-wheel";
 import type { ConsoleStation } from "./console.js";
 import { dm, fmtZodiac } from "./format.js";
@@ -179,6 +184,10 @@ export const DERIVATION_STATIONS: ConsoleStation[] = [
 /** Scrub position where a scenic `openingAim` hands off to SKY. */
 export const VIEW_HANDOFF = 0.2;
 
+/** End of the first overlay beat: great cross on, camera still.
+ *  Morph motion starts after this. */
+export const NIGHT_HOLD = 0.08;
+
 /** Canonical morph parameter: with an opening aim, `t` in [0, VIEW_HANDOFF]
  *  is the scenic pre-roll and the existing SKY→WHEEL ramps occupy the rest. */
 export function morphParameter(t: number, openingAim?: { az: number; alt: number }): number {
@@ -188,15 +197,16 @@ export function morphParameter(t: number, openingAim?: { az: number; alt: number
   return (x - VIEW_HANDOFF) / (1 - VIEW_HANDOFF);
 }
 
-/** Home-page console: VIEW overlay beats, then the five derivation stations. */
+/** Home-page console: the great cross (ecliptic × horizon) first, then
+ *  figures, signs, and houses, then the sphere-to-wheel fold. */
 export const HOME_DERIVATION_STATIONS: ConsoleStation[] = [
   { id: "view", label: "VIEW", t: 0 },
-  { id: "figures", label: "FIGURES", t: 0.07 },
-  { id: "zodiac", label: "ZODIAC", t: 0.13 },
+  { id: "ecliptic", label: "ECLIPTIC", t: 0.04 },
+  { id: "horizon", label: "HORIZON", t: NIGHT_HOLD },
+  { id: "figures", label: "FIGURES", t: 0.12 },
+  { id: "zodiac", label: "ZODIAC", t: 0.16 },
   { id: "sky", label: "SKY", t: VIEW_HANDOFF },
   { id: "sphere", label: "SPHERE", t: VIEW_HANDOFF + 0.25 * (1 - VIEW_HANDOFF) },
-  { id: "ecliptic", label: "ECLIPTIC", t: VIEW_HANDOFF + 0.5 * (1 - VIEW_HANDOFF) },
-  { id: "horizon", label: "HORIZON", t: VIEW_HANDOFF + 0.65 * (1 - VIEW_HANDOFF) },
   { id: "wheel", label: "WHEEL", t: 1 },
 ];
 
@@ -204,12 +214,12 @@ export const HOME_DERIVATION_STATIONS: ConsoleStation[] = [
  *  apparatus register: one sentence naming what the station shows. */
 export const STATION_CAPTIONS: Record<string, string> = {
   view: "The sky as a photograph from this place, aimed at the Sun, the Moon, or south. Bodies in the frame are named.",
+  ecliptic: "The ecliptic, the oxblood great circle. Longitude is the number the chart is made of.",
+  horizon: "The horizon, the other great circle. The two make the great cross.",
   figures: "The constellation figures of this sky, drawn as they sit on the sphere.",
-  zodiac: "The ecliptic and the twelve signs. Longitude is the number the chart is made of.",
+  zodiac: "The twelve signs sit on that band.",
   sky: "The sky from the birthplace at the birth instant; bodies below the horizon are faint. The chart is not what you could see.",
-  sphere: "The whole celestial sphere. The horizon is a great circle, and the hidden hemisphere swings into view.",
-  ecliptic: "The camera turns toward the ecliptic pole and each body drops a perpendicular tick onto the band.",
-  horizon: "Horizon and ecliptic cross at exactly two points. The eastern crossing is the Ascendant. From here the sphere folds onto the page.",
+  sphere: "The whole celestial sphere. The camera turns toward the ecliptic pole, and the hidden hemisphere swings into view.",
   wheel: "Latitude collapses onto the ecliptic plane, the disc squares to the page, and the natal wheel fades into place.",
 };
 
@@ -310,11 +320,12 @@ export interface DerivationFigureProps {
    *  from this aim onto the Ascendant opening, then the usual morph
    *  occupies [0.2, 1]. Omit for the playground path (SKY at t = 0). */
   openingAim?: { az: number; alt: number };
-  /** Draw body glyphs and names from t = 0, then fade in constellation
-   *  figures, the ecliptic, signs, and houses as t advances. Omit for
+  /** Draw body glyphs and names from t = 0, then light the ecliptic
+   *  and horizon (the great cross) while the camera holds. Omit for
    *  the playground path (those layers still fade in on the existing
-   *  ramps). With overlays the camera keeps tilting from SPHERE through
-   *  HORIZON so that range is not a still frame. */
+   *  ramps). With overlays the camera starts moving after that hold,
+   *  then tilts from SPHERE through the fold so that range is not a
+   *  still frame. */
   overlays?: boolean;
   /** Free-orbit offset (degrees) applied to the camera aim; the scrub
    *  owns the canonical view, so the widget clears this on release. */
@@ -346,14 +357,16 @@ export function DerivationFigure({
   // A free-orbit offset rides on top; release clears it, so the scrub
   // keeps the canonical view. With `openingAim`, t in [0, VIEW_HANDOFF]
   // is a photographic pre-roll; `u` is the usual morph parameter.
-  // With `overlays` the pole slerp occupies SPHERE→HORIZON so that
-  // range keeps moving; without it the slerp stays in the last beat.
+  // With `overlays` the pole slerp occupies SPHERE through the fold
+  // so that range keeps moving; without it the slerp stays in the
+  // last beat.
   const u = morphParameter(t, openingAim);
   const aimSky = dirFromAzAlt(scene.ascAz, 15);
   const aimSettle = neg(scene.eclToHor[2]);
   let aim0 = aimSky;
   if (openingAim) {
-    aim0 = slerp(dirFromAzAlt(openingAim.az, openingAim.alt), aimSky, ramp(t, 0, VIEW_HANDOFF));
+    aim0 = slerp(dirFromAzAlt(openingAim.az, openingAim.alt), aimSky,
+      ramp(t, NIGHT_HOLD, VIEW_HANDOFF));
   }
   const aim = slerp(aim0, aimSettle, overlays ? ramp(u, 0.25, 0.65) : ramp(u, 0.875, 1));
   let [aimAz, aimAlt] = azAltOfDir(aim);
@@ -365,7 +378,7 @@ export function DerivationFigure({
   let shape = pull;
   let hfovDeg = 100 + 80 * pull;
   if (openingAim && t < VIEW_HANDOFF) {
-    const pre = ramp(t, 0, VIEW_HANDOFF);
+    const pre = ramp(t, NIGHT_HOLD, VIEW_HANDOFF);
     shape = -1 + pre;
     hfovDeg = 70 + 30 * pre;
   }
@@ -392,21 +405,61 @@ export function DerivationFigure({
 
   // Positions come from the ecliptic frame throughout; at s = 0 this
   // is the true sky direction (the handoff is free by construction).
-  // With overlays, flatten waits until HORIZON so the last beat is
-  // the planes descending onto the page.
-  const s = overlays ? rampOut(u, 0.65, 0.97) : ramp(u, 0.75, 0.875);
+  // With overlays, flatten waits until after SPHERE so the last beat
+  // is the planes descending onto the page, then each mark lerps onto
+  // ChartWheel's polar layout (k) instead of dissolving into it.
+  const s = overlays ? rampOut(u, 0.65, 1) : ramp(u, 0.75, 0.875);
+  const k = overlays ? rampOut(u, 0.65, 1) : 0;
   const eclDir = (lon: number, lat: number): Vec3 =>
     mul(scene.eclToHor, unitVector(lon, lat));
   const bodyDir = (b: SceneBody): Vec3 => eclDir(b.lon, b.lat * (1 - s));
 
   // In-plane page rotation carrying the Ascendant to the left edge.
-  const settle = overlays ? rampOut(u, 0.70, 0.97) : ramp(u, 0.875, 1);
+  const settle = overlays ? rampOut(u, 0.70, 1) : ramp(u, 0.875, 1);
   let rotate = 0;
   if (settle > 0) {
     const p = proj.placeDir(eclDir(scene.asc, 0));
     const angle = Math.atan2(-p.yn, p.xn) / DEG; // SVG rotate() is clockwise
     rotate = settle * (-180 - angle);
   }
+
+  // ChartWheel places ASC at 9 o'clock in a padded viewBox. Map those
+  // polar points into this figure's group space (pre-rotate) so a
+  // lerp lands on the same pixel the real wheel will occupy at t = 1.
+  const WHEEL_R = (size / 2) * 0.96;
+  const WHEEL_PAD = size * 0.07;
+  const WHEEL_SPAN = size + 2 * WHEEL_PAD;
+  const applyRotate = (xy: [number, number], deg: number): [number, number] => {
+    if (!deg) return xy;
+    const a = deg * Math.PI / 180;
+    const cos = Math.cos(a), sin = Math.sin(a);
+    const dx = xy[0] - c, dy = xy[1] - c;
+    return [c + dx * cos - dy * sin, c + dx * sin + dy * cos];
+  };
+  const wheelVisual = (lon: number, r: number): [number, number] => {
+    const a = ((lon - scene.asc + 180) * Math.PI) / 180;
+    const x = c + r * WHEEL_R * Math.cos(a);
+    const y = c - r * WHEEL_R * Math.sin(a);
+    const sx = (x + WHEEL_PAD) * size / WHEEL_SPAN;
+    const sy = (y + WHEEL_PAD) * size / WHEEL_SPAN;
+    return applyRotate([sx, sy], -rotate);
+  };
+  const converge = (
+    from: [number, number] | null, lon: number, r: number,
+  ): [number, number] | null => {
+    if (k <= 0 || !from) return from;
+    const to = wheelVisual(lon, r);
+    return [
+      from[0] + (to[0] - from[0]) * k,
+      from[1] + (to[1] - from[1]) * k,
+    ];
+  };
+  const wheelNames = Object.keys(scene.wheel.bodies)
+    .filter((id) => id !== "mean_node" && scene.wheel.bodies[id]);
+  const dispLons = spreadAngles(
+    wheelNames.map((id) => scene.wheel.bodies[id]!.lon), 6.5,
+  );
+  const dispOf = new Map(wheelNames.map((id, i) => [id, dispLons[i]]));
 
   // --- polylines ------------------------------------------------------
   const N = 96;
@@ -440,49 +493,79 @@ export function DerivationFigure({
     }
     return parts.join(" ");
   };
-  const latBand = (lon: number, lat0: number, lat1: number, n: number): string => {
+  const mixedBand = (
+    lon: number, lat0: number, lat1: number, r0: number, r1: number, n: number,
+  ): string => {
     const parts: string[] = [];
     let drawing = false;
-    for (let k = 0; k <= n; k++) {
-      const xy = placeXY(eclDir(lon, lat0 + (lat1 - lat0) * (k / n)));
+    for (let i = 0; i <= n; i++) {
+      const f = i / n;
+      const from = placeXY(eclDir(lon, lat0 + (lat1 - lat0) * f));
+      const xy = converge(from, lon, r0 + (r1 - r0) * f);
       if (!inFrame(xy)) { drawing = false; continue; }
-      parts.push(`${drawing ? "L" : "M"}${xy[0]} ${xy[1]}`);
+      parts.push(`${drawing ? "L" : "M"}${fix(xy[0])} ${fix(xy[1])}`);
+      drawing = true;
+    }
+    return parts.join(" ");
+  };
+  const mixedEcliptic = (): string => {
+    const parts: string[] = [];
+    let drawing = false;
+    for (let i = 0; i <= N; i++) {
+      const deg = (i / N) * 360;
+      const xy = converge(placeXY(eclDir(deg, 0)), deg, 1);
+      if (!inFrame(xy)) { drawing = false; continue; }
+      parts.push(`${drawing ? "L" : "M"}${fix(xy[0])} ${fix(xy[1])}`);
       drawing = true;
     }
     return parts.join(" ");
   };
   // The two characters and the meridian, as great circles.
-  const horizonPath = path((u) => dirFromAzAlt(u, 0));
-  const eclipticPath = overlays
-    ? visiblePath((deg) => eclDir(deg, 0))
-    : path((u) => eclDir(u, 0));
-  const meridianPath = path((u) =>
-    [0, Math.sin(u * DEG), Math.cos(u * DEG)] as Vec3);
+  const horizonPath = path((deg) => dirFromAzAlt(deg, 0));
+  // Same projector as the horizon, so the two great circles can be
+  // followed from the first overlay beats. After flatten starts, lerp
+  // each sample onto the wheel's outer ring.
+  const eclipticPath = overlays && k > 0
+    ? mixedEcliptic()
+    : path((deg) => eclDir(deg, 0));
+  const meridianPath = path((deg) =>
+    [0, Math.sin(deg * DEG), Math.cos(deg * DEG)] as Vec3);
 
   // --- opacity ramps ---------------------------------------------------
   // Playground: ink fades in on the original SKY→WHEEL stations.
-  // Overlays: VIEW starts as named bodies only; figures / ecliptic /
-  // signs / houses light up across the pre-roll; constellation names
-  // and extra labels recede as the wheel arrives.
-  const oEcl = overlays ? ramp(t, 0.08, 0.14) : ramp(u, 0.25, 0.4);
-  const oSigns = overlays ? ramp(t, 0.11, 0.17) : ramp(u, 0.375, 0.5);
+  // Overlays: VIEW starts as named bodies on the photograph. The first
+  // beat holds the camera and lights the great cross; morph motion
+  // starts after that. Figures, signs, and houses follow.
+  // Constellation names recede as the sphere tilts; the last beat
+  // converges onto the wheel. Body names (not on the natal wheel)
+  // still recede; the horizon and meridian are not wheel furniture.
+  const oEcl = overlays ? ramp(t, 0.01, 0.04) : ramp(u, 0.25, 0.4);
+  const oSigns = overlays ? ramp(t, 0.125, 0.16) : ramp(u, 0.375, 0.5);
   const oTicks = ramp(u, 0.5, 0.625);
-  const oMeridian = ramp(u, 0.625, 0.75);
-  const oAngles = ramp(u, 0.7, 0.8);
+  const oMeridian = ramp(u, 0.625, 0.75) * (overlays ? 1 - k : 1);
+  const oAngles = ramp(u, 0.7, 0.8) * (overlays ? 1 - k : 1);
   const oDress = ramp(u, overlays ? 0.78 : 0.95, 1);
-  const oWheel = overlays ? ramp(u, 0.92, 1) : 0;
-  const oHorizon = overlays ? ramp(t, 0.17, 0.23) * (1 - oWheel) : 1;
-  const oHouses = overlays ? ramp(t, 0.15, 0.21) : 0;
+  const oHorizon = overlays ? ramp(t, 0.04, NIGHT_HOLD) * (1 - k) : 1;
+  const oHouses = overlays ? ramp(t, 0.165, 0.20) : 0;
   const oConst = overlays
-    ? ramp(t, 0.03, 0.09) * (1 - ramp(u, 0.55, 0.82)) : 0;
-  const oGlyphs = overlays ? 1 - oWheel : 0;
+    ? ramp(t, 0.085, 0.12) * (1 - ramp(u, 0.55, 0.82)) : 0;
+  const oGlyphs = overlays ? 1 : 0;
   const oNames = overlays ? 1 - ramp(u, 0.78, 0.94) : 0;
-  const oSignGlyphs = overlays ? oSigns * (1 - ramp(u, 0.78, 0.94)) : 0;
-  const oHouseLabels = overlays ? oHouses * (1 - ramp(u, 0.78, 0.94)) : 0;
-  const oHouseMeridians = overlays ? oHouses * (1 - oWheel) : 0;
+  const oSignGlyphs = overlays ? oSigns : 0;
+  const oHouseLabels = overlays ? oHouses : 0;
+  const oHouseMeridians = overlays ? oHouses : 0;
 
   const els: ReactElement[] = [];
   const skipMean = scene.bodies.some((b) => b.id === "true_node");
+  // Overlays on the home morph follow the page theme so dark mode is
+  // light-on-dark. A 3px paper stroke fills in glyph counters; the rim
+  // is a hairline of the ground colour, fill sitting on top.
+  const overlayTheme = Boolean(overlays && theme);
+  const ink = overlayTheme && theme?.planetText ? theme.planetText : PLATE_TOKENS.ink;
+  const muted = overlayTheme && theme?.labelText ? theme.labelText : PLATE_TOKENS.mutedInk;
+  const accent = overlayTheme && theme?.axis ? theme.axis : PLATE_TOKENS.accent;
+  const faint = overlayTheme && theme?.houseText ? theme.houseText : PLATE_TOKENS.faintInk;
+  const haloStroke = overlayTheme ? "var(--bg)" : PLATE_TOKENS.paper;
   const halo = (
     key: string, x: number, y: number, text: string,
     fill: string, fontSize: number, opacity: number,
@@ -491,12 +574,15 @@ export function DerivationFigure({
     <text key={key} x={x + (extra?.dx ?? 0)} y={y + (extra?.dy ?? 0)}
       textAnchor={extra?.anchor ?? "middle"} dominantBaseline="central"
       fontSize={fontSize} fontFamily={MONO}
-      fill={fill} stroke={PLATE_TOKENS.paper} strokeWidth={3}
+      fill={fill} stroke={haloStroke}
+      strokeWidth={Math.min(1.2, Math.max(0.7, fontSize * 0.05))}
+      strokeLinejoin="round"
       paintOrder="stroke" opacity={fix(opacity)}>{text}</text>
   );
 
   // Horizon: the heaviest ink line. Present in every playground frame;
-  // with overlays it waits until the SKY handoff so VIEW is the photo.
+  // with overlays it waits until the HORIZON station so VIEW is the
+  // photo and the ecliptic can light first.
   if (oHorizon > 0) {
     els.push(<path key="horizon" d={horizonPath} fill="none"
       stroke={PLATE_TOKENS.ink} strokeWidth={1.75}
@@ -521,21 +607,22 @@ export function DerivationFigure({
       if (!inFrame(xy)) continue;
       // Names can repeat (Serpens Caput / Cauda); key by index.
       els.push(halo(`conlab-${i}`, xy[0], xy[1], lab.name,
-        PLATE_TOKENS.mutedInk, size * 0.022, oConst * 0.7));
+        muted, size * 0.022, oConst * 0.7));
     }
   }
 
   if (oHouseMeridians > 0) {
-    for (let k = 0; k < scene.cusps.length; k++) {
-      const d = latBand(scene.cusps[k], -75, 75, 48);
+    for (let hi = 0; hi < scene.cusps.length; hi++) {
+      const d = mixedBand(scene.cusps[hi], -75, 75, 0.50, 0.84, 48);
       if (!d) continue;
-      els.push(<path key={`house-m-${k}`} d={d} fill="none"
+      els.push(<path key={`house-m-${hi}`} d={d} fill="none"
         stroke={PLATE_TOKENS.rule} strokeWidth={0.6}
         opacity={fix(oHouseMeridians * 0.7)} />);
     }
   }
 
-  // Ecliptic: the oxblood accent, implicit before `SPHERE`.
+  // Ecliptic: the oxblood accent. With overlays it lights at the
+  // ECLIPTIC station and stays, so the great cross can be followed.
   if (oEcl > 0) {
     els.push(<path key="ecliptic" d={eclipticPath} fill="none"
       stroke={PLATE_TOKENS.accent} strokeWidth={1.25} opacity={fix(oEcl)} />);
@@ -549,48 +636,51 @@ export function DerivationFigure({
 
   // Sign boundaries: short ticks across the ecliptic at each 30°.
   if (oSigns > 0) {
-    for (let k = 0; k < 12; k++) {
+    for (let si = 0; si < 12; si++) {
       if (overlays) {
-        const a = placeXY(eclDir(k * 30, -4));
-        const b = placeXY(eclDir(k * 30, 4));
+        const a = converge(placeXY(eclDir(si * 30, -4)), si * 30, 0.84);
+        const b = converge(placeXY(eclDir(si * 30, 4)), si * 30, 1);
         if (!inFrame(a) || !inFrame(b)) continue;
-        els.push(<line key={`sign-${k}`} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]}
+        els.push(<line key={`sign-${si}`} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]}
           stroke={PLATE_TOKENS.accent} strokeWidth={0.75}
           opacity={fix(oSigns)} />);
       } else {
-        const [x1, y1] = XY(eclDir(k * 30, -4));
-        const [x2, y2] = XY(eclDir(k * 30, 4));
-        els.push(<line key={`sign-${k}`} x1={x1} y1={y1} x2={x2} y2={y2}
+        const [x1, y1] = XY(eclDir(si * 30, -4));
+        const [x2, y2] = XY(eclDir(si * 30, 4));
+        els.push(<line key={`sign-${si}`} x1={x1} y1={y1} x2={x2} y2={y2}
           stroke={PLATE_TOKENS.accent} strokeWidth={0.75}
           opacity={fix(oSigns)} />);
       }
     }
     if (oSignGlyphs > 0) {
-      for (let k = 0; k < 12; k++) {
-        const xy = placeXY(eclDir(k * 30 + 15, 8));
+      for (let si = 0; si < 12; si++) {
+        const lon = si * 30 + 15;
+        const xy = converge(placeXY(eclDir(lon, 8)), lon, 0.92);
         if (!inFrame(xy)) continue;
-        els.push(halo(`sglyph-${k}`, xy[0], xy[1], SIGN_GLYPHS[k],
-          PLATE_TOKENS.accent, size * 0.036, oSignGlyphs));
+        els.push(halo(`sglyph-${si}`, xy[0], xy[1], SIGN_GLYPHS[si],
+          accent, size * (0.036 + 0.009 * k), oSignGlyphs));
       }
     }
   }
 
   if (oHouseLabels > 0) {
-    for (let k = 0; k < scene.cusps.length; k++) {
-      const xy = placeXY(eclDir(scene.cusps[k], 12));
+    for (let hi = 0; hi < scene.cusps.length; hi++) {
+      const cusp = scene.cusps[hi];
+      const arc = ((scene.cusps[(hi + 1) % 12] - cusp) + 360) % 360;
+      const xy = converge(placeXY(eclDir(cusp, 12)), cusp + arc / 2, 0.77);
       if (!inFrame(xy)) continue;
-      els.push(halo(`hlab-${k}`, xy[0], xy[1], `H${k + 1}`,
-        PLATE_TOKENS.faintInk, size * 0.024, oHouseLabels));
+      els.push(halo(`hlab-${hi}`, xy[0], xy[1], `H${hi + 1}`,
+        faint, size * 0.024, oHouseLabels));
     }
     const dsc = (scene.asc + 180) % 360;
     const ic = (scene.mc + 180) % 360;
     for (const [key, lon] of [
       ["ASC", scene.asc], ["MC", scene.mc], ["DSC", dsc], ["IC", ic],
     ] as const) {
-      const xy = placeXY(eclDir(lon, -8));
+      const xy = converge(placeXY(eclDir(lon, -8)), lon, 1.045);
       if (!inFrame(xy)) continue;
       els.push(halo(`ang-${key}`, xy[0], xy[1], key,
-        PLATE_TOKENS.accent, size * 0.026, oHouseLabels));
+        accent, size * 0.026, oHouseLabels));
     }
   }
 
@@ -603,8 +693,8 @@ export function DerivationFigure({
     const o = held ? 1 : oTicks;
     if (o <= 0) continue;
     if (overlays) {
-      const a = placeXY(bodyDir(b));
-      const p = placeXY(eclDir(b.lon, 0));
+      const a = converge(placeXY(bodyDir(b)), b.lon, 0.815);
+      const p = converge(placeXY(eclDir(b.lon, 0)), b.lon, 0.84);
       if (!inFrame(a) || !inFrame(p)) continue;
       els.push(<line key={`tick-${b.id}`} x1={a[0]} y1={a[1]} x2={p[0]} y2={p[1]}
         stroke={held ? PLATE_TOKENS.accent : PLATE_TOKENS.faintInk}
@@ -623,7 +713,7 @@ export function DerivationFigure({
   if (oAngles > 0) {
     for (const [key, lon] of [["asc", scene.asc], ["mc", scene.mc]] as const) {
       if (overlays) {
-        const xy = placeXY(eclDir(lon, 0));
+        const xy = converge(placeXY(eclDir(lon, 0)), lon, 1);
         if (!inFrame(xy)) continue;
         els.push(<circle key={`angle-${key}`} cx={xy[0]} cy={xy[1]} r={6} fill="none"
           stroke={PLATE_TOKENS.accent} strokeWidth={1}
@@ -638,25 +728,37 @@ export function DerivationFigure({
   }
 
   // The dressing: cusp spokes and aspect chords fade in at the end;
-  // glyphs arrive with the real wheel at t = 1.
+  // with overlays the house meridians already become the spokes, so
+  // only the aspect chords join, landing on the wheel's inner ring.
   if (oDress > 0) {
-    const [cx0, cy0] = XY(neg(scene.eclToHor[2]));
-    for (let k = 0; k < scene.cusps.length; k++) {
-      const [x, y] = XY(eclDir(scene.cusps[k], 0));
-      els.push(<line key={`cusp-${k}`} x1={cx0} y1={cy0} x2={x} y2={y}
-        stroke={PLATE_TOKENS.rule} strokeWidth={0.75}
-        opacity={fix(oDress)} />);
+    if (!overlays) {
+      const [cx0, cy0] = XY(neg(scene.eclToHor[2]));
+      for (let ci = 0; ci < scene.cusps.length; ci++) {
+        const [x, y] = XY(eclDir(scene.cusps[ci], 0));
+        els.push(<line key={`cusp-${ci}`} x1={cx0} y1={cy0} x2={x} y2={y}
+          stroke={PLATE_TOKENS.rule} strokeWidth={0.75}
+          opacity={fix(oDress)} />);
+      }
     }
     const at = new Map(scene.bodies.map((b) => [b.id, b]));
-    scene.wheel.aspects.forEach((a, k) => {
+    scene.wheel.aspects.forEach((a, ai) => {
       const pa = at.get(a.a);
       const pb = at.get(a.b);
       if (!pa || !pb) return;
-      const [x1, y1] = XY(bodyDir(pa));
-      const [x2, y2] = XY(bodyDir(pb));
-      els.push(<line key={`aspect-${k}`} x1={x1} y1={y1} x2={x2} y2={y2}
-        stroke={PLATE_TOKENS.mutedInk} strokeWidth={0.5}
-        opacity={fix(oDress * 0.8)} />);
+      if (overlays) {
+        const p1 = converge(placeXY(bodyDir(pa)), pa.lon, 0.50);
+        const p2 = converge(placeXY(bodyDir(pb)), pb.lon, 0.50);
+        if (!inFrame(p1) || !inFrame(p2)) return;
+        els.push(<line key={`aspect-${ai}`} x1={p1[0]} y1={p1[1]} x2={p2[0]} y2={p2[1]}
+          stroke={PLATE_TOKENS.mutedInk} strokeWidth={0.5}
+          opacity={fix(oDress * 0.8)} />);
+      } else {
+        const [x1, y1] = XY(bodyDir(pa));
+        const [x2, y2] = XY(bodyDir(pb));
+        els.push(<line key={`aspect-${ai}`} x1={x1} y1={y1} x2={x2} y2={y2}
+          stroke={PLATE_TOKENS.mutedInk} strokeWidth={0.5}
+          opacity={fix(oDress * 0.8)} />);
+      }
     });
   }
 
@@ -669,20 +771,23 @@ export function DerivationFigure({
     const held = follow !== undefined && b.id === follow;
     if (overlays) {
       if (shape < 0 && b.altDeg < 0) continue;
-      const xy = placeXY(bodyDir(b));
+      const from = placeXY(bodyDir(b));
+      const xy = converge(from, dispOf.get(b.id) ?? b.lon, 0.655);
       if (!inFrame(xy)) continue;
       const glyph = GLYPHS[b.id] ?? b.id.slice(0, 2);
-      const fill = held ? PLATE_TOKENS.accent : PLATE_TOKENS.ink;
+      const fill = held ? accent : ink;
       const right = xy[0] < size * 0.72;
+      const tuck = 1 - k;
       const pick = onPick ? { onClick: () => onPick(b.id) } : {};
       els.push(
         <g key={`body-${b.id}`} {...pick}>
-          {oGlyphs > 0 && halo(`glyph-${b.id}`, xy[0], xy[1], glyph, fill, size * 0.042, oGlyphs)}
+          {oGlyphs > 0 && halo(`glyph-${b.id}`, xy[0], xy[1], glyph, fill,
+            size * (0.042 + 0.008 * k), oGlyphs)}
           {oNames > 0 && halo(`name-${b.id}`, xy[0], xy[1], bodyCaption(b.id),
             fill, size * 0.024, oNames, {
               anchor: right ? "start" : "end",
-              dx: right ? size * 0.028 : -size * 0.028,
-              dy: size * 0.004,
+              dx: (right ? size * 0.028 : -size * 0.028) * tuck,
+              dy: size * 0.004 * tuck,
             })}
         </g>,
       );
@@ -696,7 +801,7 @@ export function DerivationFigure({
     }
   }
 
-  const figure = (
+  return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}
       style={{ background: "transparent" }}>
       <defs>
@@ -709,19 +814,6 @@ export function DerivationFigure({
         {els}
       </g>
     </svg>
-  );
-  if (!overlays || oWheel <= 0) return figure;
-  return (
-    <div style={{ position: "relative", width: "100%", height: "100%" }}>
-      <div style={{ opacity: fix(1 - oWheel), height: "100%" }}>{figure}</div>
-      <div style={{
-        position: "absolute", inset: 0, opacity: fix(oWheel),
-        display: "flex", alignItems: "center", justifyContent: "center",
-        pointerEvents: "none",
-      }}>
-        <ChartWheel chart={scene.wheel} size={size} theme={theme ?? PLATE_THEME} />
-      </div>
-    </div>
   );
 }
 

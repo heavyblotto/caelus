@@ -413,6 +413,8 @@ th {
 
 .home-sky {
   margin: 2rem 0 0.5rem;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .home-sky__stamp {
   margin: 0 0 0.75rem;
@@ -450,27 +452,65 @@ th {
   width: 100%;
   height: auto;
   max-width: 100%;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .home-sky__morph > div {
   width: 100%;
   height: 100%;
 }
-.home-sky__play {
-  margin-top: 0.45rem;
-  font-family: var(--mono, ui-monospace, "SF Mono", Menlo, Consolas, monospace);
-  font-size: 11px;
-  color: var(--text-mute);
+.home-sky__controls {
   display: flex;
-  gap: 14px;
-  align-items: baseline;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin-top: 0.2rem;
 }
-.home-sky__play button {
+.home-sky__transport {
+  flex-shrink: 0;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 0.12rem;
+  font-family: var(--mono, ui-monospace, "SF Mono", Menlo, Consolas, monospace);
+  color: var(--text-mute);
+}
+.home-sky__transport button {
   background: none;
   border: none;
-  padding: 0;
+  padding: 0 0.18em;
+  min-width: 1.35em;
+  height: 1.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font: inherit;
+  font-size: 1.2rem;
+  line-height: 1;
   color: var(--text-mute);
   cursor: pointer;
+}
+.home-sky__skip {
+  letter-spacing: -0.14em;
+}
+.home-sky__transport button[aria-pressed="true"] {
+  color: var(--accent);
+}
+.home-sky__transport button:disabled {
+  opacity: 0.32;
+  cursor: default;
+}
+.home-sky__pause {
+  display: block;
+  width: 0.58em;
+  height: 0.72em;
+  margin: 0 auto;
+  border-left: 0.18em solid currentColor;
+  border-right: 0.18em solid currentColor;
+  box-sizing: border-box;
+}
+.home-sky__console {
+  flex: 1;
+  min-width: 0;
 }
 .home-sky__chart {
   margin: 1.5rem auto 0;

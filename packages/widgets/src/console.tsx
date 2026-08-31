@@ -13,6 +13,9 @@
  * effects); the pointer handlers only ever fire in a browser. Free
  * scrub while dragging; by default release snaps to the nearest
  * station. `snapOnRelease={false}` leaves the index where it dropped.
+ * Pointer-down cancels the browser's selection gesture and listens on
+ * `document`, so a path that leaves the 1px rule keeps scrubbing.
+ * More than six stations stack on two rows so labels do not collide.
  */
 import type { PointerEvent, ReactElement } from "react";
 import { PLATE_TOKENS } from "caelus-wheel";
@@ -47,10 +50,6 @@ export function PlateConsole({
   t, stations, datum, onScrub, snapOnRelease = true,
 }: PlateConsoleProps): ReactElement {
   const pos = clamp01(t);
-  const tFrom = (e: PointerEvent<HTMLDivElement>): number => {
-    const r = e.currentTarget.getBoundingClientRect();
-    return clamp01((e.clientX - r.left) / (r.width || 1));
-  };
   const snap = (x: number): number => {
     if (!stations?.length) return x;
     let best = stations[0].t;
@@ -62,30 +61,69 @@ export function PlateConsole({
   const rail = onScrub
     ? {
         onPointerDown: (e: PointerEvent<HTMLDivElement>) => {
-          e.currentTarget.setPointerCapture(e.pointerId);
-          onScrub(tFrom(e));
-        },
-        onPointerMove: (e: PointerEvent<HTMLDivElement>) => {
-          if (e.buttons & 1) onScrub(tFrom(e));
-        },
-        onPointerUp: (e: PointerEvent<HTMLDivElement>) => {
-          const x = tFrom(e);
-          onScrub(snapOnRelease ? snap(x) : x);
+          // Cancel the browser's selection gesture. Capture alone is not
+          // enough: a path that leaves the 1px rule otherwise starts
+          // selecting figure labels and the datum line.
+          e.preventDefault();
+          const el = e.currentTarget;
+          const id = e.pointerId;
+          try { el.setPointerCapture(id); } catch { /* capture is best-effort */ }
+          const read = (ev: { clientX: number }): number => {
+            const r = el.getBoundingClientRect();
+            return clamp01((ev.clientX - r.left) / (r.width || 1));
+          };
+          onScrub(read(e));
+          const blockSel = (ev: Event) => ev.preventDefault();
+          const onMove = (ev: globalThis.PointerEvent) => {
+            if (ev.pointerId !== id) return;
+            ev.preventDefault();
+            onScrub(read(ev));
+          };
+          const onUp = (ev: globalThis.PointerEvent) => {
+            if (ev.pointerId !== id) return;
+            document.removeEventListener("selectstart", blockSel);
+            document.removeEventListener("pointermove", onMove);
+            document.removeEventListener("pointerup", onUp);
+            document.removeEventListener("pointercancel", onUp);
+            try {
+              if (el.hasPointerCapture(id)) el.releasePointerCapture(id);
+            } catch { /* already released */ }
+            const x = read(ev);
+            onScrub(snapOnRelease ? snap(x) : x);
+          };
+          document.addEventListener("selectstart", blockSel);
+          document.addEventListener("pointermove", onMove, { passive: false });
+          document.addEventListener("pointerup", onUp);
+          document.addEventListener("pointercancel", onUp);
         },
         style: { cursor: "ew-resize" as const },
       }
     : { style: {} };
+  const twoRow = (stations?.length ?? 0) > 6;
 
   return (
-    <div style={{ fontFamily: MONO, userSelect: "none" }}>
+    <div style={{
+      fontFamily: MONO,
+      userSelect: "none",
+      WebkitUserSelect: "none",
+    }}>
       <div
         {...rail}
         style={{
           position: "relative",
-          height: "24px",
+          height: "44px",
           touchAction: "none",
           ...rail.style,
         }}
+        {...(onScrub
+          ? {
+              role: "slider" as const,
+              "aria-valuemin": 0,
+              "aria-valuemax": 1,
+              "aria-valuenow": Number(pos.toFixed(2)),
+              "aria-label": "derivation",
+            }
+          : {})}
       >
         {/* the rule */}
         <div
@@ -93,9 +131,10 @@ export function PlateConsole({
             position: "absolute",
             left: 0,
             right: 0,
-            top: "11px",
+            top: "21px",
             height: "1px",
             background: PLATE_TOKENS.rule,
+            pointerEvents: "none",
           }}
         />
         {/* station ticks */}
@@ -105,10 +144,11 @@ export function PlateConsole({
             style={{
               position: "absolute",
               left: `${s.t * 100}%`,
-              top: "8px",
+              top: "18px",
               width: "1px",
               height: "7px",
               background: PLATE_TOKENS.mutedInk,
+              pointerEvents: "none",
             }}
           />
         ))}
@@ -117,35 +157,45 @@ export function PlateConsole({
           style={{
             position: "absolute",
             left: `${pos * 100}%`,
-            top: "4px",
+            top: "14px",
             width: "2px",
             height: "15px",
             marginLeft: "-1px",
             background: PLATE_TOKENS.accent,
+            pointerEvents: "none",
           }}
         />
       </div>
       {stations && (
-        <div style={{ position: "relative", height: "16px" }}>
-          {stations.map((s) => (
+        <div style={{ position: "relative", height: twoRow ? "32px" : "16px" }}>
+          {stations.map((s, i) => (
             <span
               key={s.id}
               {...(onScrub
-                ? { onClick: () => onScrub(s.t), role: "button" as const }
+                ? {
+                    onPointerDown: (e: PointerEvent<HTMLSpanElement>) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      onScrub(s.t);
+                    },
+                    role: "button" as const,
+                  }
                 : {})}
               style={{
                 position: "absolute",
                 left: `${s.t * 100}%`,
+                top: twoRow && i % 2 === 1 ? "16px" : "0",
                 transform:
                   s.t <= 0 ? "none"
                     : s.t >= 1 ? "translateX(-100%)"
                       : "translateX(-50%)",
                 fontSize: "10px",
-                letterSpacing: "0.12em",
+                letterSpacing: "0.06em",
                 textTransform: "uppercase",
                 whiteSpace: "nowrap",
                 color: PLATE_TOKENS.mutedInk,
                 cursor: onScrub ? "pointer" : "default",
+                userSelect: "none",
               }}
             >
               {s.label}

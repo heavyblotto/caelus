@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   DerivationFigure,
   HOME_DERIVATION_STATIONS,
@@ -11,11 +11,22 @@ import type { WheelTheme } from "caelus-wheel";
 import type { SkyPlate } from "./skyPlates";
 
 const PLAY_MS = 11000;
-const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
-const ramp = (t: number, a: number, b: number) => {
-  const x = clamp01((t - a) / (b - a));
-  return x * x * (3 - 2 * x);
-};
+const EPS = 0.001;
+
+/** Previous / next named station on the home morph. */
+function stepStation(t: number, dir: -1 | 1): number {
+  const marks = HOME_DERIVATION_STATIONS.map((s) => s.t);
+  if (dir < 0) {
+    for (let i = marks.length - 1; i >= 0; i--) {
+      if (marks[i] < t - EPS) return marks[i];
+    }
+    return 0;
+  }
+  for (const m of marks) {
+    if (m > t + EPS) return m;
+  }
+  return 1;
+}
 
 export default function HomeSkyStage({
   scene, openingAim, plate, t, onScrub, size = 560, theme, stamp,
@@ -30,34 +41,50 @@ export default function HomeSkyStage({
   stamp: string;
 }) {
   const raf = useRef<number | null>(null);
-  const stop = () => {
+  const [playing, setPlaying] = useState(false);
+  const halt = () => {
     if (raf.current !== null) cancelAnimationFrame(raf.current);
     raf.current = null;
   };
+  const stop = () => {
+    halt();
+    setPlaying(false);
+  };
   const play = () => {
-    stop();
+    if (playing) return;
+    halt();
     if (typeof window !== "undefined"
       && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       onScrub(1);
+      setPlaying(false);
       return;
     }
-    const from = performance.now();
+    const fromT = t >= 1 - EPS ? 0 : t;
+    const start = performance.now();
     const step = (now: number) => {
-      const x = Math.min(1, (now - from) / PLAY_MS);
+      const x = Math.min(1, fromT + (now - start) / PLAY_MS);
       onScrub(x);
-      raf.current = x < 1 ? requestAnimationFrame(step) : null;
+      if (x < 1) raf.current = requestAnimationFrame(step);
+      else {
+        raf.current = null;
+        setPlaying(false);
+      }
     };
-    onScrub(0);
+    if (fromT === 0) onScrub(0);
+    setPlaying(true);
     raf.current = requestAnimationFrame(step);
+  };
+  const skip = (dir: -1 | 1) => {
+    stop();
+    onScrub(stepStation(t, dir));
   };
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       onScrub(1);
     }
-    return stop;
+    return halt;
   }, []);
 
-  const plateOpacity = 1 - ramp(t, 0, 0.2);
   const station = HOME_DERIVATION_STATIONS.reduce((best, s) =>
     Math.abs(s.t - t) < Math.abs(best.t - t) ? s : best);
 
@@ -70,7 +97,6 @@ export default function HomeSkyStage({
             className="home-sky__plate"
             src={plate.src}
             alt=""
-            style={{ opacity: plateOpacity }}
           />
         )}
         <div className="home-sky__morph">
@@ -84,20 +110,55 @@ export default function HomeSkyStage({
           />
         </div>
       </div>
-      <PlateConsole
-        t={t}
-        stations={HOME_DERIVATION_STATIONS}
-        snapOnRelease={false}
-        datum={`${station.label.toLowerCase()} · t ${t.toFixed(2)}`}
-        onScrub={(x) => {
-          stop();
-          onScrub(x);
-        }}
-      />
-      <div className="home-sky__play">
-        <button type="button" onClick={play} aria-label="play the derivation">
-          ▸
-        </button>
+      <div className="home-sky__controls">
+        <div className="home-sky__transport" role="group" aria-label="derivation playback">
+          <button
+            type="button"
+            className="home-sky__skip"
+            onClick={() => skip(-1)}
+            aria-label="previous station"
+            disabled={t <= EPS}
+          >
+            ◂◂
+          </button>
+          <button
+            type="button"
+            onClick={play}
+            aria-label="play the derivation"
+            aria-pressed={playing}
+          >
+            ▸
+          </button>
+          <button
+            type="button"
+            onClick={stop}
+            aria-label="pause the derivation"
+            disabled={!playing}
+          >
+            <span className="home-sky__pause" aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            className="home-sky__skip"
+            onClick={() => skip(1)}
+            aria-label="next station"
+            disabled={t >= 1 - EPS}
+          >
+            ▸▸
+          </button>
+        </div>
+        <div className="home-sky__console">
+          <PlateConsole
+            t={t}
+            stations={HOME_DERIVATION_STATIONS}
+            snapOnRelease={false}
+            datum={`${station.label.toLowerCase()} · t ${t.toFixed(2)}`}
+            onScrub={(x) => {
+              stop();
+              onScrub(x);
+            }}
+          />
+        </div>
       </div>
     </div>
   );
