@@ -5,7 +5,8 @@
 //
 // One registry module is emitted per batch (src/passages-b1.ts, ...), so a
 // bundler can load a batch without pulling the rest of the corpus; the
-// subpath exports (src/natal.ts and friends) compile one batch each.
+// subpath exports (src/natal.ts, conditions.ts, degrees.ts, and friends)
+// compile one batch each.
 // src/passages.ts aggregates them for the package root and the harness.
 //
 // Run after new slices land:

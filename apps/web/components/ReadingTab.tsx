@@ -41,8 +41,9 @@ export interface ReadingTabProps {
  * over them, and show the reconciled, cited reading.
  *
  * The corpus batches load on demand (one chunk per batch via the package's
- * subpath exports); the relationship batch loads only when a partner chart
- * is present. Everything stays in the browser.
+ * subpath exports); natal, conditions, and degrees are the natal report.
+ * The relationship batch loads only when a partner chart is present.
+ * Everything stays in the browser.
  */
 export default function ReadingTab({
   chart, engine, lat, lonEast, zodiac, stars, lots, partner,
@@ -53,8 +54,10 @@ export default function ReadingTab({
   useEffect(() => {
     let alive = true;
     (async () => {
-      const [natal, transits, timing, relationship] = await Promise.all([
+      const [natal, conditions, degrees, transits, timing, relationship] = await Promise.all([
         import("caelus-corpus/natal"),
+        import("caelus-corpus/conditions"),
+        import("caelus-corpus/degrees"),
         import("caelus-corpus/transits"),
         import("caelus-corpus/timing"),
         withPartner ? import("caelus-corpus/relationship") : Promise.resolve(null),
@@ -62,6 +65,8 @@ export default function ReadingTab({
       if (!alive) return;
       setSources([
         ...natal.natalSources,
+        ...conditions.conditionSources,
+        ...degrees.degreeSources,
         ...transits.transitSources,
         ...timing.timingSources,
         ...(relationship ? relationship.relationshipSources : []),
@@ -185,7 +190,7 @@ export default function ReadingTab({
 
       <p className="dim small" style={{ margin: 0 }}>
         The Caelus corpus: original essays written against the engine&rsquo;s fact atoms
-        (natal, transit, time-lord, and dignity ids), all{" "}
+        (natal, conditions, degree, transit, and time-lord ids), all{" "}
         <code>auditCitations</code>-checkable. See the{" "}
         <a href="/docs/interpretation">interpretation layer</a>.
       </p>

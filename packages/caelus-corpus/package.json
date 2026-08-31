@@ -42,6 +42,14 @@
       "types": "./dist/src/natal.d.ts",
       "default": "./dist/src/natal.js"
     },
+    "./conditions": {
+      "types": "./dist/src/conditions.d.ts",
+      "default": "./dist/src/conditions.js"
+    },
+    "./degrees": {
+      "types": "./dist/src/degrees.d.ts",
+      "default": "./dist/src/degrees.js"
+    },
     "./transits": {
       "types": "./dist/src/transits.d.ts",
       "default": "./dist/src/transits.js"

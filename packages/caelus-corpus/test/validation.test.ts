@@ -11,6 +11,10 @@ import {
   passages, passageSets, sources, fullGrid, gridCoverage,
   lintCorpus, lintNearDuplicateSentences,
 } from "../src/index.js";
+import { conditionSources } from "../src/conditions.js";
+import { degreeSources } from "../src/degrees.js";
+import { passageSets as b5Sets } from "../src/passages-b5.js";
+import { passageSets as b6Sets } from "../src/passages-b6.js";
 import { selectorFromSpec } from "../src/selectors.js";
 import type { Passage } from "../src/index.js";
 
@@ -28,6 +32,25 @@ for (const set of passageSets) {
   for (const p of set.passages) {
     check(p.family === set.family, `${p.id}: family matches its set (${set.id})`);
   }
+}
+
+const compiledIds = (srcs: InterpretationSource[]) =>
+  new Set(srcs.flatMap((s) => s.rules.map((r) => r.id)));
+const conditionIds = compiledIds(conditionSources);
+const degreeIds = compiledIds(degreeSources);
+check(
+  conditionSources.length === b5Sets.length,
+  "conditions subpath compiles every B5 set",
+);
+for (const p of b5Sets.flatMap((s) => s.passages)) {
+  check(conditionIds.has(p.id), `${p.id}: in conditions subpath`);
+}
+check(
+  degreeSources.length === b6Sets.length,
+  "degrees subpath compiles every B6 set",
+);
+for (const p of b6Sets.flatMap((s) => s.passages)) {
+  check(degreeIds.has(p.id), `${p.id}: in degrees subpath`);
 }
 
 // 2. Every passage sits on a bindable grid cell and matches its selector.

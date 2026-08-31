@@ -37,8 +37,9 @@ current figures live in `packages/caelus/accuracy.json` and on
 ### Corpus (`caelus-corpus`, unpublished)
 
 Original essays written against the engine's fact atoms, lazy-loaded in the
-Playground Reading tab (`natal` / `transits` / `timing` / `relationship`
-subpaths). **`caelus-delineations-pd`** remains the published npm corpus.
+Playground Reading tab (`natal` / `conditions` / `degrees` / `transits` /
+`timing` / `relationship` subpaths). **`caelus-delineations-pd`** remains the
+published npm corpus.
 
 ### Wheel (`caelus-wheel`)
 
@@ -67,6 +68,10 @@ passed) so counters stay open in dark mode.
 
 ### Site (`apps/web`)
 
+- Playground Reading tab (the natal report, and the compare reading when a
+  partner is present) lazy-loads the B5 conditions and B6 degree batches
+  via `caelus-corpus/conditions` and `caelus-corpus/degrees`, alongside
+  natal, transits, and timing.
 - Home page: below the proof cards, a live New York event sky (read-only
   stamp), a pre-generated plate composited with `skyProjector`, a derivation
   morph that folds into a large chart: named bodies at VIEW, then the
