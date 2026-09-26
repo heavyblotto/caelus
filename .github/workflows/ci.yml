@@ -94,7 +94,8 @@ jobs:
       - run: npm run test -w caelus-delineations-pd
       - run: npm run build -w caelus-corpus
       - run: npm run test -w caelus-corpus
-      # caelus-widgets imports caelus-wheel, so wheel must be built first
+      # build order follows the imports: birth -> wheel -> widgets
+      - run: npm run build -w caelus-birth
       - run: npm run build -w caelus-wheel
       - run: npm run build -w caelus-widgets
       - run: npm run test -w caelus-widgets
@@ -110,7 +111,6 @@ jobs:
       # No model calls, no API keys in CI; live runs are opt-in via EVAL_MODEL.
       - run: node packages/caelus-mcp/eval/run.mjs
       # timezone resolution: tzdb golden cases + 200-case round-trip property
-      - run: npm run build -w caelus-birth
       - run: node packages/birth/dist/test/golden.test.js
       # chart wheel: SSR render of real charts + collision-fan unit checks
       - run: node packages/wheel/dist/test/render.test.js
