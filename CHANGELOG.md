@@ -7,7 +7,9 @@ semver (currently 0.1.x). Numbers quoted here are as measured at release time;
 current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
-## Unreleased
+## v0.25.0 — Era packs to 3000 BCE, 27 fact kinds, MultiWheel
+
+*2026-09-26*
 
 ### Engine (`caelus`)
 
@@ -17,6 +19,8 @@ current figures live in `packages/caelus/accuracy.json` and on
   Jupiter, and Saturn. Each slab ends at its modern pack's first instant.
   `engineCapabilities` reports the chained span, −2998 to 3000. Bodies
   without a classical pack are omitted and listed in `chart.unavailable`.
+  The seven slabs ship in the npm tarball (`check-tarball` gates them), so
+  the tarball grows to about 130 MB unpacked, 55 MB packed.
 - **`interpretationContext` grows to 27 fact kinds.** New atoms:
   `angleContact`, `transitHouse`, `station`, `return`, `lunation`,
   `solarPhase`, `compositeAspect`, `degree`, with matching selectors
@@ -41,11 +45,21 @@ Playground Reading tab (`natal` / `conditions` / `degrees` / `transits` /
 `timing` / `relationship` subpaths). **`caelus-delineations-pd`** remains the
 published npm corpus.
 
+### Delineations (`caelus-delineations-pd` 0.1.6)
+
+The `caelus` peer range widens to `>=0.24.0 <0.26` so the corpus installs
+beside 0.25.0. Extractors now repair OCR damage and section bleed instead
+of quoting into the next chapter, and validation fails when an OCR token
+survives into a passage. Alan Leo's *Key* is quarantined and Heindel is re-sourced from the
+Rosicrucian Fellowship HTML. 372 passages ship.
+
 ### Wheel (`caelus-wheel`)
 
 - **`MultiWheel`**: a rings API, up to four charts. Kundli and the
   Playground `BiWheel` stay.
 - **EphemerisGraph** accepts `band` / `marks` / `cursor` / `accent`.
+  Gridline, band, mark, and cursor coordinates round to 0.1, as the
+  polylines already did, so the SVG is byte-identical on arm64 and x86-64.
 - **`PLATE_TOKENS`**, **`PLATE_THEME`**, **`PLATE_BODY_INKS`**: an optional
   ink palette for widget figures.
 

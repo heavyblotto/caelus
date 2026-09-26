@@ -145,12 +145,13 @@ Registry: the marketplace issues live at `chatmcp/mcpso` (mcp.so) and
 
 ## What ships
 
-`caelus` ships at ~4.6 MB unpacked: embedded VSOP tiers, the 1920–2080
+`caelus` ships at ~130 MB unpacked (~55 MB packed): embedded VSOP tiers, the 1920–2080
 precise-Moon Chebyshev tier, nutation, fixed stars, constellation lines,
 and every fitted pack the docs advertise — Chiron, Ceres, Pallas, Juno,
 Vesta, Pholus, the wide-range Pluto pack (1700–2212, superseding the
-embedded Meeus ch.37 series), the Uranian Kepler elements, and a sample
-turbo pack. `scripts/check-tarball.mjs` gates CI on that list staying in
+embedded Meeus ch.37 series), the wide planet packs, the classical era
+slabs (3000 BCE–1000 CE, ~79 MB of the total), the Uranian Kepler elements,
+and a sample turbo pack. `scripts/check-tarball.mjs` gates CI on that list staying in
 the tarball: the asteroid and Uranian packs once sat repo-only for two
 releases while node-loader's existsSync guards silently skipped them, so
 installed consumers (including the hosted MCP server) could not compute

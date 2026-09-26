@@ -7,4 +7,4 @@
  * the version field in package.json; scripts/check-versions.mjs at the
  * repo root asserts the two never drift.
  */
-export const VERSION = "0.24.1";
+export const VERSION = "0.25.0";

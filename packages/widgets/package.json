@@ -1,6 +1,6 @@
 {
   "name": "caelus-widgets",
-  "version": "0.24.1",
+  "version": "0.25.0",
   "description": "Encyclopedia widgets for caelus: interactive figures whose resting render is the plate. Every widget is a pure function of a serializable { kind, params } spec.",
   "type": "module",
   "private": true,

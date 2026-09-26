@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@types/node": "^25.9.2",
-    "caelus": "^0.24.1",
+    "caelus": "^0.25.0",
     "typescript": "^6.0.3"
   },
   "exports": {

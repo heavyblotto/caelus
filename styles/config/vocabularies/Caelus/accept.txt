@@ -210,3 +210,6 @@ bit-identical
 [Ss]ubpaths?
 Kundli
 [Ll]erps?
+Heindel
+[Gg]ridlines?
+[Pp]olylines?
