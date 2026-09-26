@@ -94,6 +94,8 @@ jobs:
       - run: npm run test -w caelus-delineations-pd
       - run: npm run build -w caelus-corpus
       - run: npm run test -w caelus-corpus
+      # caelus-widgets imports caelus-wheel, so wheel must be built first
+      - run: npm run build -w caelus-wheel
       - run: npm run build -w caelus-widgets
       - run: npm run test -w caelus-widgets
       - run: npm run build -w caelus-mcp
@@ -111,7 +113,6 @@ jobs:
       - run: npm run build -w caelus-birth
       - run: node packages/birth/dist/test/golden.test.js
       # chart wheel: SSR render of real charts + collision-fan unit checks
-      - run: npm run build -w caelus-wheel
       - run: node packages/wheel/dist/test/render.test.js
       # 3D chart sphere: SSR render + latitude-matters check
       - run: node packages/wheel/dist/test/sphere.test.js
