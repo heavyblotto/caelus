@@ -77,6 +77,9 @@ export function EphemerisGraph({
   const pw = width - m.l - m.r, ph = height - m.t - m.b;
   const px = (jd: number): number => m.l + ((jd - j0) / (j1 - j0 || 1)) * pw;
   const py = (v: number): number => m.t + (1 - (v - lo) / span) * ph;
+  // Emitted coordinates are rounded to 0.1 so the SVG is byte-identical
+  // across CPUs (arm64 and x86-64 differ in the last bits of the math).
+  const r1 = (n: number): number => Math.round(n * 10) / 10;
 
   const step = gridStep ?? (wrap ? wrap / 6 : span / 6);
   const gridVals: number[] = [];
@@ -108,9 +111,9 @@ export function EphemerisGraph({
       <g fontFamily={th.fontFamily} fontSize={10} fill={th.labelText}>
         {gridVals.map((v) => (
           <g key={v}>
-            <line x1={m.l} y1={py(v)} x2={m.l + pw} y2={py(v)}
+            <line x1={m.l} y1={r1(py(v))} x2={m.l + pw} y2={r1(py(v))}
               stroke={th.ring} strokeWidth={0.5} opacity={0.5} />
-            <text x={m.l - 4} y={py(v)} textAnchor="end" dominantBaseline="central">
+            <text x={m.l - 4} y={r1(py(v))} textAnchor="end" dominantBaseline="central">
               {Math.round(v)}
             </text>
           </g>
@@ -121,10 +124,10 @@ export function EphemerisGraph({
       {/* shaded interval, under the lines */}
       {band && (
         <rect
-          x={Math.max(m.l, px(Math.max(band.from, j0)))}
+          x={r1(Math.max(m.l, px(Math.max(band.from, j0))))}
           y={m.t}
-          width={Math.min(m.l + pw, px(Math.min(band.to, j1)))
-            - Math.max(m.l, px(Math.max(band.from, j0)))}
+          width={r1(Math.min(m.l + pw, px(Math.min(band.to, j1)))
+            - Math.max(m.l, px(Math.max(band.from, j0))))}
           height={ph}
           fill={th.ring}
           opacity={0.35}
@@ -145,7 +148,7 @@ export function EphemerisGraph({
       })}
       {/* moment ticks, over the lines */}
       {marks?.map((mk) => {
-        const x = px(mk.jd);
+        const x = r1(px(mk.jd));
         if (x < m.l - 0.5 || x > m.l + pw + 0.5) return null;
         const col = mk.accent ? ac : th.labelText;
         return (
@@ -163,7 +166,7 @@ export function EphemerisGraph({
       })}
       {/* the scrub cursor */}
       {cursor !== undefined && cursor >= j0 && cursor <= j1 && (
-        <line x1={px(cursor)} y1={m.t} x2={px(cursor)} y2={m.t + ph}
+        <line x1={r1(px(cursor))} y1={m.t} x2={r1(px(cursor))} y2={m.t + ph}
           stroke={ac} strokeWidth={1.5} />
       )}
     </svg>
