@@ -1,0 +1,233 @@
+{
+ "name": "composite-aspects-moon-2",
+ "outFile": "b3-composite-aspects-moon-2.json",
+ "setId": "house-b3-composite-aspects-moon-2",
+ "family": "composite-aspect",
+ "cells": [
+  {
+   "id": "composite:aspect:moon:conjunction:jupiter",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "jupiter",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:moon~jupiter:conjunction"
+   ],
+   "title": "Composite Moon conjunct composite Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:sextile:jupiter",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "jupiter",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:moon~jupiter:sextile"
+   ],
+   "title": "Composite Moon sextile composite Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:square:jupiter",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "jupiter",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:moon~jupiter:square"
+   ],
+   "title": "Composite Moon square composite Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:trine:jupiter",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "jupiter",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:moon~jupiter:trine"
+   ],
+   "title": "Composite Moon trine composite Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:opposition:jupiter",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "jupiter",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:moon~jupiter:opposition"
+   ],
+   "title": "Composite Moon opposite composite Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:conjunction:saturn",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "saturn",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:moon~saturn:conjunction"
+   ],
+   "title": "Composite Moon conjunct composite Saturn",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:sextile:saturn",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "saturn",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:moon~saturn:sextile"
+   ],
+   "title": "Composite Moon sextile composite Saturn",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:square:saturn",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "saturn",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:moon~saturn:square"
+   ],
+   "title": "Composite Moon square composite Saturn",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:trine:saturn",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "saturn",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:moon~saturn:trine"
+   ],
+   "title": "Composite Moon trine composite Saturn",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:opposition:saturn",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "saturn",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:moon~saturn:opposition"
+   ],
+   "title": "Composite Moon opposite composite Saturn",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:conjunction:uranus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "uranus",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:moon~uranus:conjunction"
+   ],
+   "title": "Composite Moon conjunct composite Uranus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:sextile:uranus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "uranus",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:moon~uranus:sextile"
+   ],
+   "title": "Composite Moon sextile composite Uranus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:square:uranus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "uranus",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:moon~uranus:square"
+   ],
+   "title": "Composite Moon square composite Uranus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:trine:uranus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "uranus",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:moon~uranus:trine"
+   ],
+   "title": "Composite Moon trine composite Uranus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:moon:opposition:uranus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "moon",
+    "b": "uranus",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:moon~uranus:opposition"
+   ],
+   "title": "Composite Moon opposite composite Uranus",
+   "bindable": true
+  }
+ ]
+}

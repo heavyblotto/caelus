@@ -1,0 +1,233 @@
+{
+ "name": "transits-mars-2",
+ "outFile": "b2-transits-mars-2.json",
+ "setId": "house-b2-transits-mars-2",
+ "family": "transit-aspect",
+ "cells": [
+  {
+   "id": "transit:mars:conjunction:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "venus",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:mars~natal_venus:conjunction"
+   ],
+   "title": "Transiting Mars conjunct your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:sextile:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "venus",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:mars~natal_venus:sextile"
+   ],
+   "title": "Transiting Mars sextile your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:square:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "venus",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:mars~natal_venus:square"
+   ],
+   "title": "Transiting Mars square your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:trine:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "venus",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:mars~natal_venus:trine"
+   ],
+   "title": "Transiting Mars trine your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:opposition:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "venus",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:mars~natal_venus:opposition"
+   ],
+   "title": "Transiting Mars opposite your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:conjunction:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "mars",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:mars~natal_mars:conjunction"
+   ],
+   "title": "Transiting Mars conjunct your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:sextile:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "mars",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:mars~natal_mars:sextile"
+   ],
+   "title": "Transiting Mars sextile your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:square:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "mars",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:mars~natal_mars:square"
+   ],
+   "title": "Transiting Mars square your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:trine:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "mars",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:mars~natal_mars:trine"
+   ],
+   "title": "Transiting Mars trine your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:opposition:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "mars",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:mars~natal_mars:opposition"
+   ],
+   "title": "Transiting Mars opposite your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:conjunction:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "jupiter",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:mars~natal_jupiter:conjunction"
+   ],
+   "title": "Transiting Mars conjunct your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:sextile:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "jupiter",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:mars~natal_jupiter:sextile"
+   ],
+   "title": "Transiting Mars sextile your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:square:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "jupiter",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:mars~natal_jupiter:square"
+   ],
+   "title": "Transiting Mars square your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:trine:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "jupiter",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:mars~natal_jupiter:trine"
+   ],
+   "title": "Transiting Mars trine your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:opposition:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mars",
+    "natal": "jupiter",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:mars~natal_jupiter:opposition"
+   ],
+   "title": "Transiting Mars opposite your natal Jupiter",
+   "bindable": true
+  }
+ ]
+}

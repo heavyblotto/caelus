@@ -3,7 +3,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Derived Charts",
-  description: "Returns, secondary progressions, solar arc, composite and Davison charts, harmonics, antiscia, declination aspects, out-of-bounds, dignities, and sect, built on the validated positions.",
+  description: "Returns, secondary progressions, solar arc, composite and Davison charts, harmonics, antiscia, draconic, declination aspects, out-of-bounds, dignities, and sect, built on the validated positions.",
   path: "/docs/derived",
 });
 
@@ -113,6 +113,25 @@ harmonicChart(engine, natalJd, ["sun", "moon", "venus"], 5);   // 5th harmonic
 
 antiscion(15);        // reflection across 0° Cancer / 0° Capricorn
 contraAntiscion(15);  // reflection across 0° Aries / 0° Libra`}
+/>
+
+## Draconic
+
+The draconic chart re-zeroes the zodiac at the Moon's ascending node: each
+point's draconic longitude is its tropical longitude minus the node's, wrapped
+to 360°. Houses and angles transform the same way; declinations are unchanged.
+The default node is the true node; pass `"mean"` for the mean node. An ayanamsa
+shifts body and node alike, so it cancels in the difference.
+
+<CodeBlock
+  lang="typescript"
+  label="draconic.ts"
+  code={`import { draconicChart, draconicLongitude } from "caelus";
+
+const d = draconicChart(engine, natalJd, undefined, "true", 27.95, -82.46);
+// d.bodies.sun, d.bodies.moon, ... in draconic degrees; d.angles when lat/lon given
+
+draconicLongitude(engine.longitude("venus", natalJd), d.node_lon);`}
 />
 
 ## Declination: aspects and out of bounds

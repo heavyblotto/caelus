@@ -1,0 +1,212 @@
+[
+ {
+  "id": "transit:moon:conjunction:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "venus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:moon~natal_venus:conjunction"
+  ],
+  "text": "Once a month the Moon crosses your natal Venus, and for a stretch of hours the day turns soft. Mood and affection fuse: what you feel and what you love stop being separate things, and you want closeness, comfort, and a little beauty within reach. Nothing about the contact presses; it persuades. You may notice it as a sudden wish to call someone, to cook something good, to fix a room until it pleases you, or simply to sit near people who are easy to sit near. Feelings run warm rather than hot. You are more openly affectionate than usual and more receptive to affection in return, which makes these hours good ones for tenderness of any kind: a repair after a small quarrel, an honest compliment, unhurried time with a friend who knows you well. Your senses turn up too, so food, music, color, and touch all register more strongly, and your eye for what looks and feels right is better than average. That helps with any task that needs taste or tact, from choosing a gift to smoothing a tense conversation at work. The only real risk is mild: comfort can shade into indulgence, and sentiment can talk you into buying things that only resemble what you actually want. The arc is short. As the Moon applies you often feel the mood before you can name it, a vague appetite for something sweet in the broadest sense. At the exact pass the warmth is plainest, and by the next day it has already loosened its hold. The Moon does not double back, so there is no second act; there is simply next month, when the same hours come around again. Because the contact returns so reliably, it works less like an event and more like a recurring texture in your life, a small standing appointment with your own tenderness. Met often enough, it teaches you something useful: what genuinely soothes you, as opposed to what you reach for out of habit. Some months the answer is company; some months it is solitude with something lovely in your hands. Noticing the difference, month after month, is the quiet gift here. You grow with this transit by letting yourself receive as easily as you give for a few hours, and by treating pleasure as ordinary maintenance rather than something that has to be earned."
+ },
+ {
+  "id": "transit:moon:sextile:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "venus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:moon~natal_venus:sextile"
+  ],
+  "text": "Kindness runs cheaper in certain hours of the month, and these are among them. When the transiting Moon sextiles your natal Venus, your mood and your affections sit at a friendly angle to each other, and warmth becomes available on easy terms. Available is the right word. A sextile offers rather than delivers: nothing sweeps you off your feet, but small openings appear, and they reward a small reach. The colleague you have been slightly stiff with is approachable today. The message you have been meaning to send would land well now. Lunch with someone, a walk with your partner, ten minutes making your desk less grim: modest moves like these return more than they cost while this contact holds. Socially you come across as easier than usual, a touch more charming without trying to be, and other people tend to meet you halfway. Your judgment about people and pleasures is mildly improved as well, so it is a decent window for choosing, arranging, or beautifying anything, provided the stakes are everyday-sized. If you spend the whole window heads-down and speak to no one, nothing bad happens; the hours pass pleasantly enough and the offer simply expires unused. That is the nature of the aspect. The build-up is subtle, a slight lift as the Moon applies, the peak is comfortable rather than dramatic, and the mood fades out cleanly with nothing to clean up afterward. Since the Moon never retrogrades, there are no return passes to wait for, only the monthly rhythm: this same easy angle comes back again and again, a recurring patch of goodwill woven into your month. Over time that recurrence is the real teaching. Life keeps handing you low-stakes chances to be warm, to accept warmth, and to make your surroundings a little more humane, and it keeps showing you that these chances have to be taken to count. You grow with this transit by getting quicker at noticing the open door. Not every hour of your month is built for connection, but this one is, and learning to spend it on an actual person or an actual pleasure, rather than letting it drain into the scroll, is a small skill with compound returns."
+ },
+ {
+  "id": "transit:moon:square:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "venus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:moon~natal_venus:square"
+  ],
+  "text": "For a few hours, a couple of times each month, your feelings and your affections pull in different directions, and this is that patch. The transiting Moon square your natal Venus sets your mood at cross purposes with what you love, and the friction, while small, is real. You may feel vaguely unappreciated, or oversensitive to a flat tone in someone's voice. You may crave reassurance and dislike yourself a little for craving it. Comfort-seeking gets pushy: the extra dessert, the cart full of things you do not need, the third episode when you meant to sleep. Taste itself can feel off, so the outfit is wrong, the room is annoying, and nothing you pick quite satisfies. In relationships the square tends to surface small mismatches: who wants closeness and who wants space, whose turn it is to do the caring, what the money set aside for pleasure should actually buy. None of this is large, but a square forces the issue where a softer contact would let it slide, so the scratchiness asks to be felt rather than ignored. Two things help. The first is knowing the clock: this mood builds briefly, peaks around the exact pass, and drains away within hours, and since the Moon never doubles back there is no lingering tail. Whatever feels shabby or unloved at the peak will usually look ordinary again by tomorrow, which is a strong argument against renegotiating a relationship, or your self-worth, on this particular afternoon. The second is substitution: a walk, a shower, a small treat you will not regret, any modest kindness to the body takes the edge off better than a purchase or a pointed remark. The deeper use of this transit comes from its monthly return. Because the same scratchy hours come around again and again, they gradually map something worth knowing: where you use comfort as a stand-in for asking directly for care. The craving that spikes under this square is rarely about the dessert. It is about wanting to be valued and hoping someone will guess. You grow with this contact by letting it teach you to ask plainly for the affection you want, and to give yourself the small good thing without the story that you had to be miserable first to deserve it."
+ },
+ {
+  "id": "transit:moon:trine:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "venus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:moon~natal_venus:trine"
+  ],
+  "text": "Certain stretches of the month, everything seems to agree with you, and the trine from the transiting Moon to your natal Venus is often behind them. For these hours the mood itself does the agreeing: your emotional weather and your capacity for pleasure run in one channel, and ease is the keynote. People find you agreeable without your working at it. Conversation flows, minor disputes decline to start, and the friction that a normal day generates just does not accumulate. Your appetite for beauty is awake and easily satisfied: the meal tastes better, the music lands, the light in the late afternoon does what late afternoon light is supposed to do. This is a natural window for company, and for the gentler kinds of repair. An apology offered now is received softly. A visit to someone you have neglected goes better than you feared. Hosting, celebrating, resting in good company, or simply enjoying your own home all fit the hours well. Work that needs harmony rather than force also benefits, whether that means a delicate conversation, a piece of design, or any task where your sense of proportion matters. The trine asks nothing of you, which is both its charm and its one small hazard. Ease can become drift, and a whole window can dissolve into pleasant nothing. For a transit that lasts hours and returns next month, that is hardly a crisis; sometimes pleasant nothing is exactly what a person needs. The shape of the pass is simple: a soft rise as the Moon applies, a mellow peak, and a clean fade; the Moon touches the degree once and moves on, so there is nothing to track afterward. What gives this little transit weight is its rhythm. It comes back every month, a reliable patch of goodwill in the cycle, and over the years it quietly argues for a different relationship with pleasure. Not pleasure as a reward you must earn, or a binge you must recover from, but pleasure as regular maintenance, the way a body needs meals and a friendship needs unhurried time. You grow with this transit by taking it when it comes: by noticing the easy hours, spending them on people and things you love, and letting that be enough."
+ },
+ {
+  "id": "transit:moon:opposition:venus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "venus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:moon~natal_venus:opposition"
+  ],
+  "text": "When the transiting Moon stands opposite your natal Venus, your relationships get slightly louder for a few hours, and so does the question underneath them: is what I need and what I am getting the same thing? An opposition confronts, and this one stages the confrontation between your mood of the moment and your settled affections. You may feel a gap open between them. You want closeness and your partner is busy; you want quiet and a friend wants your evening; you love someone and are, right now, mildly tired of them. Often the theme arrives wearing another person's face. Someone seems needier than usual, or cooler than usual, and only later do you notice the wanting was partly yours, projected across the table. Sentiment runs high under this contact. Old songs hit harder, nostalgia gets persuasive, and you can be tempted to measure the whole relationship against the ache of one evening. It helps to know how brief the measurement window is. The feeling builds as the Moon approaches the exact opposition, peaks with a kind of emotional clarity that is really only about these hours, and then lets go; by tomorrow the same relationship usually looks like its ordinary self. The Moon does not retrograde, so nothing about this pass repeats or extends. What repeats is the cycle: every month this opposition returns, and every month it takes a quick reading of the balance between giving and receiving in your closest ties. That is its actual value. One reading means little, but many readings form a record, and a pattern that shows up month after month, always feeling shortchanged, always over-accommodating, always wanting more warmth than you ask for out loud, is information worth having. The skill this transit builds is holding the tension without forcing a verdict. You can notice the pull between your needs and another person's, name it to yourself, even name it to them, without demanding that tonight settle it. You grow with this contact by letting other people be the mirror it makes them: not the cause of the ache, and not its cure, but the surface on which your own wants become visible enough to say in words."
+ },
+ {
+  "id": "transit:moon:conjunction:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "mars",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:moon~natal_mars:conjunction"
+  ],
+  "text": "There is a point in every month when the Moon crosses your natal Mars, and for a handful of hours your feelings pick up heat. The conjunction fuses mood with drive: emotion stops being something you have and becomes something you do. At its best this is vitality, plain and useful. You feel decisive, physically awake, willing to start the hard thing and see it through. Tasks that normally require a run-up, the difficult email, the confrontation you have been postponing, the workout, the heavy lifting in the garage, suddenly feel approachable, because the energy behind them is already lit. Courage comes cheap during these hours, and so does honesty; you say what you mean with less filtering than usual. The same fusion has an edge. With feeling and force wired together, irritation moves to action fast, sometimes faster than judgment can intervene. Small obstacles feel personal. Slow people, slow software, and slow traffic all seem to be doing it on purpose, and your temper sits closer to the surface than you may realize until someone pokes it. The heat needs somewhere to go. Given a real outlet, effort, exercise, an honest task, these can be some of the most productive hours of your month; denied one, the same energy curdles into restlessness or a quarrel about nothing. The arc is quick and worth feeling out. As the Moon applies you often notice a building restlessness, an itch to move before you know toward what. At the crest you are strongest and most flammable in the same hour. As it separates, the pressure drops, sometimes leaving you pleasantly spent, sometimes wondering why the thing that enraged you at noon looks trivial by night. There are no second passes to brace for; the Moon moves on and returns in a month, which makes this less a crisis than a recurring pulse in your cycle. That recurrence is the teacher. Meeting your own heat once a month, you gradually learn the length of your fuse, the situations that shorten it, and the difference between anger that carries information and anger that is just weather. You grow with this transit by giving the surge a job before it picks its own, and by trusting that what survives the cool-down is what actually needed your fire."
+ },
+ {
+  "id": "transit:moon:sextile:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "mars",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:moon~natal_mars:sextile"
+  ],
+  "text": "A few times a month the sky hands you usable energy with no strings on it, and the Moon's sextile to your natal Mars is one of those deliveries. For some hours, feeling and drive sit at an easy angle: your mood has muscle behind it, but none of the temper that harder contacts bring. The sextile offers; it does not push. What it offers here is a lift you can spend almost anywhere. The chore you have been circling gets done in half the expected time. The direct request, a raise, a favor, a boundary, comes out of your mouth cleanly, firm without heat. Exercise feels good instead of dutiful, and physical work of any kind, moving boxes, digging beds, deep-cleaning a kitchen, goes down easily because body and mood are briefly on the same side. It is also a decent window for healthy assertion in relationships: saying no without apology, naming a small resentment before it grows, taking the initiative to plan something instead of waiting to be asked. The catch, as with every sextile, is that unused offers expire. If you spend the window slumped, the energy does not punish you; it just leaks out as vague restlessness, a leg bouncing under the desk, and by evening the chance is gone. Nothing is lost except the chance. The pass itself is short and clean: a subtle rise in vigor as the Moon applies, a peak you might only notice as a very effective couple of hours, and a smooth taper with no re-runs, since the Moon never turns retrograde. What makes the aspect worth knowing is its monthly return. This little window of low-cost courage comes back again and again, which makes it a practice ground. Assertion is a skill, and most people only rehearse it under pressure, when the stakes are high and the mood is ugly. These hours let you rehearse it downhill. You grow with this transit by using it deliberately a few times: pick the small brave thing in advance, and when the lift arrives, act. Over months, the acting gets easier, and some of it starts to stick around after the Moon has moved on."
+ },
+ {
+  "id": "transit:moon:square:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "mars",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:moon~natal_mars:square"
+  ],
+  "text": "Twice a month the Moon squares your natal Mars, and for a few hours you are simply easier to provoke. The square forces mood and drive into friction, and the friction looks for a reason. Ordinary annoyances land harder than they should: the interruption, the slow reply, the dish left in the sink, the driver who hesitates. Your patience runs thin, your tone sharpens before you notice, and the people nearest you, family, housemates, close colleagues, are the most likely to catch the spark, because they are the ones within range. Inside, the signature feeling is pressure without a clear target. You are keyed up, a little combative, itching to push against something, and if nothing legitimate presents itself the energy will happily manufacture a grievance. Under this contact, the argument you start is rarely about what it claims to be about. Knowing the mechanics defuses most of it. This is a fast transit: the charge builds as the Moon applies, peaks near the exact square, and is usually gone within hours, with no return passes because the Moon never stations. The insult that felt unforgivable at three o'clock tends to look minor by nine, which is an excellent reason to sit on the sharp message, the ultimatum, and the resignation letter until the weather passes. The energy itself is not the enemy; it is fuel arriving without instructions. Given a physical outlet, a hard walk, a run, scrubbing something, hauling something, it burns clean and can even feel great. Bottled, it turns on whoever is closest or inward on yourself as agitation and self-criticism. There is also real information in what flares. Because this square returns month after month, it functions as a recurring stress test, and the same sore spots keep lighting up: the situations where you feel unheard, crowded, or disrespected. One flare is noise; the pattern across many months is signal, pointing at frustrations you have been swallowing rather than addressing in calm weather. You grow with this transit by separating the two jobs it brings: spend the heat on your muscles today, and save the grievance for a day when you can tell whether it is real."
+ },
+ {
+  "id": "transit:moon:trine:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "mars",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:moon~natal_mars:trine"
+  ],
+  "text": "Every month brings a few hours when acting feels natural, and the Moon's trine to your natal Mars is often the reason. Feeling and will run in the same direction under this contact, so the usual gap between wanting to do something and doing it narrows almost to nothing. The keynote is steady confidence rather than fire. You are decisive without being pushy, energetic without being wound up, and able to assert yourself in a way that other people read as strength rather than aggression. That combination suits nearly everything. Work moves: the task list shortens, decisions that stalled for days get made in minutes, and momentum builds on itself. Your body is willing, so exercise, sport, and physical labor sit well in these hours, and so does anything that mixes nerve with skill, from a tough phone call to merging into fast traffic. In relationships the trine shows up as clean directness. You can say what you want plainly, take initiative without ceremony, and handle a disagreement without your pulse spiking, which sometimes resolves in ten easy minutes a tension that harder days had inflamed. Because the trine works without friction, it can slip past unnoticed, filed away as nothing more than a good afternoon. Nothing forces you to use it, and if the hours go by on autopilot they leave no mark either way. The pass is brief and smooth: a gentle ramp as the Moon applies, a peak you experience mostly as competence, and a quiet fade, with no repeat passes to consider since the Moon never backs up. The value compounds through repetition. This trine returns every month, a recurring stretch of easy traction in your cycle, and it rewards a little foresight: keep one meaningful task, one honest conversation, or one bold ask in your pocket, and spend it when the traction arrives. Over time the transit also teaches by contrast. These hours show you what it feels like when emotion and action cooperate, and that feeling becomes a reference point. You grow with this contact by studying your own ease, noticing what conditions produce it, and slowly arranging more of your life to resemble the hours when moving forward felt like the obvious thing to do."
+ },
+ {
+  "id": "transit:moon:opposition:mars",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "mars",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:moon~natal_mars:opposition"
+  ],
+  "text": "Once a month the Moon swings opposite your natal Mars, and for a few hours conflict seems to come looking for you. The opposition confronts, and it likes to work through other people: a colleague pushes back harder than the point deserves, a stranger is needlessly abrupt, a family member picks tonight to relitigate an old dispute. It can genuinely feel as if the aggression is all on their side. Look closer, though, and these hours usually reveal a two-way current. Your own irritation is up, your reactions are quicker and hotter than your baseline, and some of what you meet in others is your edge reflected back at you. An opposition shows you a mirror before it offers you a battle. The temptation is to engage everything head-on, to answer every push with a shove, and under this contact escalation is cheap: a dry remark becomes a quarrel in three exchanges. The alternative is not swallowing everything; it is choosing. Some confrontations arriving now are real and overdue, and the heightened energy can help you hold your ground in them, saying the clear hard thing you have been avoiding. Others are pure weather, friction generated by the hour itself, and deserve nothing but a shrug. Telling the two apart is the whole art of this transit. The clock is on your side. Tension builds as the Moon applies, crests around the exact opposition, then drains quickly; the Moon does not retrograde, so there is no second round unless you schedule one by keeping the fight alive. What felt like a matter of principle at the peak often looks, a day later, like two tired people at cross purposes. Since this contact returns every month, it becomes a recurring seminar on how you handle opposition itself. Month after month you get to watch what provokes you, whom you allow to provoke you, and how much of the anger you attribute to others actually starts at home. You grow with this transit by using the mirror honestly: standing firm where something true is at stake, letting the rest pass, and noticing, with a little humor, how often the enemy of the evening turns out to have been your own mood in borrowed clothes."
+ },
+ {
+  "id": "transit:moon:conjunction:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "jupiter",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:moon~natal_jupiter:conjunction"
+  ],
+  "text": "For a few hours each month, when the Moon reaches your natal Jupiter, your inner weather expands. The conjunction fuses mood with appetite for more, and while it holds, everything runs a size larger: your optimism, your generosity, your hunger, your sense of what is possible. This is one of the pleasantest recurring moments in your cycle. You feel open-handed and open-hearted, quicker to laugh, slower to judge, inclined to pick up the tab and mean it. People sense the warmth and respond to it, which makes these good hours for hospitality, for reconciliations, for asking favors, and for any conversation that needs goodwill to work. Your emotional horizon widens too. Problems that looked airtight yesterday show seams; plans that felt presumptuous feel merely ambitious; the future, for an afternoon, seems roomy. The classic caution rides along with the classic gift. With feeling and expansion fused, more of everything seems like a good idea, and the hours are littered with cheerful excesses: the third helping, the round for the table, the purchase that felt generous to your future self, the promise made in warmth that your calendar will have to keep in cold blood. None of it is disastrous at this scale, but a monthly habit of overreach adds up. The arc is quick: a rising buoyancy as the Moon applies, a peak of genuine expansiveness at the pass, then a gentle subsidence that can leave a faint flatness behind, the emotional equivalent of the day after a party. There is no encore, because the Moon keeps moving; the tide simply comes back next month. Treated as a recurring texture rather than an event, this transit has a lot to give. It is a monthly dose of buoyancy you can more or less schedule hope around: a natural window for the generous gesture, the optimistic pitch, the celebration. Its recurring lesson is about the difference between feeling expansive and signing expansively. You grow with this contact by learning to enjoy the largeness fully, to give from it freely, and to let the biggest commitments wait a day, until you can tell whether they belong to your life or only to the weather."
+ },
+ {
+  "id": "transit:moon:sextile:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "jupiter",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:moon~natal_jupiter:sextile"
+  ],
+  "text": "The Moon's sextile to your natal Jupiter is a small, friendly offer that comes around a couple of times a month: for a few hours, a lighter read on your own life is available if you want it. Nothing about the aspect insists. It simply sets your mood and your sense of possibility at an easy angle, so that optimism, humor, and perspective all come within reach at a modest price. Taken up, the offer pays in several currencies. This is a good window for zooming out: reviewing plans, thinking about the longer game, letting a stuck problem breathe until you can see around it. It favors social ease, so gatherings go warmly, small talk turns into real talk, and a hopeful conversation, floating an idea to your boss, raising a someday-dream with your partner, tends to get a fair hearing. Generosity flows naturally and at sane scale: the small gift, the encouraging word, the benefit of the doubt extended to someone who has been trying. Even alone, the hours suit gratitude better than most; the same life, read in this light, has more in it than it had this morning. Left unused, the window closes without complaint. You will not notice a loss, only, perhaps, an ordinary afternoon where a pleasant one was on the table. The mechanics are light: a mild lift as the Moon applies, an easy peak, a clean fade, and no second passes, since the Moon never turns back. Next month the offer stands again. That reliability is the interesting part. Mood feels like something that happens to you, but this recurring contact quietly demonstrates that outlook is partly a matter of timing, and that your month contains regular hours when hope is cheaper than usual. Over time you can learn to bank on them a little: save the big-picture thinking, the ask, the mending word for a window when the wind is behind it. You grow with this transit by treating optimism as a resource with a schedule, spending it while it is plentiful, and letting the practice of catching these hours make you gradually better at finding light on the days that offer less of it."
+ },
+ {
+  "id": "transit:moon:square:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "jupiter",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:moon~natal_jupiter:square"
+  ],
+  "text": "Restlessness with a grin on it: that is the flavor of the hours, arriving twice a month, when the transiting Moon squares your natal Jupiter. The square forces your mood and your appetite for more into friction, and the result is a kind of cheerful excess pressure. Everything seems worth doing, and worth doing right now, and preferably at double size. You feel too big for the room. Enthusiasm inflates fast: in the space of an afternoon you can commit to two projects, invite eight people to dinner, put three things in the cart, and promise a friend a weekend you do not actually have. The feelings are genuine and even generous; the trouble is scale. A square exaggerates, and under this one your emotional yes runs well ahead of your resources, while your tolerance for boredom, routine, and other people's caution drops toward zero. Small overindulgences cluster here too, the big meal, the impulse buy, the grand gesture, each defensible alone, expensive as a habit. Then the tide goes out. This is a matter of hours: the inflation builds as the Moon applies, peaks near the exact square, and subsides quickly, often leaving a faint deflated feeling and a list of commitments that no longer look brilliant. The Moon never retrogrades, so the pass itself is done; only its promises linger. The practical move is simple and takes discipline precisely because the mood argues against it: enjoy the enthusiasm, ride the energy into work or play, and keep the calendar and the wallet still until tomorrow. Anything truly worth doing will still be worth doing after the peak, and most of what is not will quietly withdraw its application. The deeper value is in the recurrence. Because this square returns month after month, it keeps staging the same little play, and over time you learn your lines in it: where more stands in for enough in your life, which hungers inflate on schedule, which promises you make to feel large rather than to follow through. You grow with this transit by keeping your warmth and shrinking your signature, letting the mood be as big as it likes while your commitments stay the size of your actual days."
+ },
+ {
+  "id": "transit:moon:trine:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "jupiter",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:moon~natal_jupiter:trine"
+  ],
+  "text": "Contentment has a schedule, and part of it is lunar. When the transiting Moon trines your natal Jupiter, a few hours open in which your mood and your faith in life flow in the same direction, and wellbeing arrives without being chased. The trine eases rather than excites. Where the harder Jupiter contacts inflate, this one simply widens: your perspective stretches, your patience deepens, and the day's problems, still present, take up less of the frame. You read people generously in these hours and they tend to deserve it more, or at least to respond to being trusted. Warmth passes easily in both directions, which makes this a natural window for family time, for hospitality, for mending fences with someone you have been grim about, and for the kind of open conversation that needs nobody to be defensive. Thinking benefits as much as feeling. The long view comes naturally now, so plans, priorities, and the shape of the next year are good material for these hours; what you decide under this light tends to be balanced, neither fearful nor grandiose. Even rest improves, because the low-grade vigilance that runs under an ordinary day stands down for a while. The aspect asks nothing, and that is its only trap: ease this smooth can pass entirely unnoticed, spent on errands and screens like any other afternoon. No harm follows, and the pass ends as gently as it began, building softly while the Moon applies and fading without residue, with no return visits since the Moon never stations. It will be back next month regardless. The monthly return is what turns a pleasant transit into a useful one. These recurring hours give you a regular, honest taste of enough, and that taste is worth memorizing, because so much of ordinary unhappiness is a failure to recognize enough when it is present. You grow with this contact by paying attention while it holds: noticing what contentment actually feels like in your body, what you stop worrying about, whom you soften toward. Carried out of the window, that memory becomes a quiet standard, something your busier, hungrier hours can be measured against and occasionally corrected by."
+ },
+ {
+  "id": "transit:moon:opposition:jupiter",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "moon",
+   "natal": "jupiter",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:moon~natal_jupiter:opposition"
+  ],
+  "text": "Once a month, when the Moon stands opposite your natal Jupiter, you spend a few hours pulled between comfort and more. The opposition confronts, and this one stages a tug-of-war between your mood of the moment and your urge to expand, with other people frequently holding the far end of the rope. The scenes are recognizable. Someone arrives with a big plan on the evening you wanted small and quiet. A friend's enthusiasm asks for a yes your week cannot afford. Or the polarity flips: you are the one bursting with schemes, and the people around you seem maddeningly cautious, forever asking how, exactly, this will work. Either way, the hours carry a feeling of too-muchness at the border between you and others: promises inflating to match the room, plans growing a size with each retelling, appetite, for food, spending, company, stimulation, running ahead of what the moment really calls for. The characteristic risk is the agreeable overcommitment, the yes said to keep the mood aloft that your calendar must later pay for. None of this is heavy. It builds as the Moon applies, peaks in a burst of expansive feeling around the exact opposition, and deflates within hours, and the pass is one clean touch with no repeat visits; only what you signed up for at the peak survives it. That suggests the practical rule: enjoy the bigness, share in the excitement, and let any promise larger than an evening wait for tomorrow's judgment. What earns this little transit attention is the monthly reading it takes. Each pass asks the same pair of questions from opposite ends: where are you using other people's caution as an excuse to stay smaller than you want, and where are you borrowing other people's enthusiasm to avoid admitting you are tired? The answers drift over the months, and watching them drift is genuinely informative. You grow with this contact by holding the middle of the rope, letting hope and limits argue in the open without handing either one the verdict, and by noticing that the balance point between a full life and an overfull one is not found once, but adjusted monthly, in hours exactly like these."
+ }
+]

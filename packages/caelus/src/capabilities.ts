@@ -14,7 +14,7 @@
 import type { Engine } from "./chart.js";
 import {
   HEADLINE, HEADLINE_LABEL, MEASURED, VSOP_BODIES, ANALYTIC_BODIES,
-  packSpan, type BodySpan,
+  packSpan, validatedSpanFor, type BodySpan,
 } from "./ranges.js";
 
 /** The position source active for a body in a given engine's data. */
@@ -128,6 +128,26 @@ export function engineCapabilities(engine: Engine): EngineCapabilities {
       // synthetic system: imaginary, so no validated span by construction.
       caps.push({ body, source: "synthetic", validated: null });
     }
+  }
+
+  // Era slabs (deep-time R1): extend the fitted span and recompute the
+  // validated span so the capability statement covers every slab installed,
+  // not just the default pack's.
+  const eraPacks = data.eraPacks ?? {};
+  for (const cap of caps) {
+    // The Moon's slabs live in their own field; the Sun's geocentric span is
+    // Earth's heliocentric one, so Earth's era slabs extend the Sun.
+    const slabs = cap.body === "moon" ? data.moonEraPacks
+      : cap.body === "sun" ? data.earthEraPacks
+      : eraPacks[cap.body];
+    if (!slabs?.length) continue;
+    const spans = slabs.map(packSpan);
+    const from = Math.min(...spans.map((s) => s.from));
+    const to = Math.max(...spans.map((s) => s.to));
+    cap.fitted = cap.fitted
+      ? { from: Math.min(cap.fitted.from, from), to: Math.max(cap.fitted.to, to) }
+      : { from, to };
+    cap.validated = validatedSpanFor(cap.body, data);
   }
 
   return {

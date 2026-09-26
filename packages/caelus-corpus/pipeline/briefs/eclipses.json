@@ -1,0 +1,203 @@
+{
+ "name": "eclipses",
+ "outFile": "b4-eclipses.json",
+ "setId": "house-b4-eclipses",
+ "family": "eclipse",
+ "cells": [
+  {
+   "id": "sky:eclipse:house:1",
+   "family": "eclipse",
+   "when": {
+    "kind": "lunation",
+    "eclipse": true,
+    "house": 1
+   },
+   "atomIds": [
+    "lunation:"
+   ],
+   "title": "An eclipse in your 1st house",
+   "bindable": true
+  },
+  {
+   "id": "sky:eclipse:house:2",
+   "family": "eclipse",
+   "when": {
+    "kind": "lunation",
+    "eclipse": true,
+    "house": 2
+   },
+   "atomIds": [
+    "lunation:"
+   ],
+   "title": "An eclipse in your 2nd house",
+   "bindable": true
+  },
+  {
+   "id": "sky:eclipse:house:3",
+   "family": "eclipse",
+   "when": {
+    "kind": "lunation",
+    "eclipse": true,
+    "house": 3
+   },
+   "atomIds": [
+    "lunation:"
+   ],
+   "title": "An eclipse in your 3rd house",
+   "bindable": true
+  },
+  {
+   "id": "sky:eclipse:house:4",
+   "family": "eclipse",
+   "when": {
+    "kind": "lunation",
+    "eclipse": true,
+    "house": 4
+   },
+   "atomIds": [
+    "lunation:"
+   ],
+   "title": "An eclipse in your 4th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:eclipse:house:5",
+   "family": "eclipse",
+   "when": {
+    "kind": "lunation",
+    "eclipse": true,
+    "house": 5
+   },
+   "atomIds": [
+    "lunation:"
+   ],
+   "title": "An eclipse in your 5th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:eclipse:house:6",
+   "family": "eclipse",
+   "when": {
+    "kind": "lunation",
+    "eclipse": true,
+    "house": 6
+   },
+   "atomIds": [
+    "lunation:"
+   ],
+   "title": "An eclipse in your 6th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:eclipse:house:7",
+   "family": "eclipse",
+   "when": {
+    "kind": "lunation",
+    "eclipse": true,
+    "house": 7
+   },
+   "atomIds": [
+    "lunation:"
+   ],
+   "title": "An eclipse in your 7th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:eclipse:house:8",
+   "family": "eclipse",
+   "when": {
+    "kind": "lunation",
+    "eclipse": true,
+    "house": 8
+   },
+   "atomIds": [
+    "lunation:"
+   ],
+   "title": "An eclipse in your 8th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:eclipse:house:9",
+   "family": "eclipse",
+   "when": {
+    "kind": "lunation",
+    "eclipse": true,
+    "house": 9
+   },
+   "atomIds": [
+    "lunation:"
+   ],
+   "title": "An eclipse in your 9th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:eclipse:house:10",
+   "family": "eclipse",
+   "when": {
+    "kind": "lunation",
+    "eclipse": true,
+    "house": 10
+   },
+   "atomIds": [
+    "lunation:"
+   ],
+   "title": "An eclipse in your 10th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:eclipse:house:11",
+   "family": "eclipse",
+   "when": {
+    "kind": "lunation",
+    "eclipse": true,
+    "house": 11
+   },
+   "atomIds": [
+    "lunation:"
+   ],
+   "title": "An eclipse in your 11th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:eclipse:house:12",
+   "family": "eclipse",
+   "when": {
+    "kind": "lunation",
+    "eclipse": true,
+    "house": 12
+   },
+   "atomIds": [
+    "lunation:"
+   ],
+   "title": "An eclipse in your 12th house",
+   "bindable": true
+  },
+  {
+   "id": "sky:lunation:on-natal",
+   "family": "eclipse",
+   "when": {
+    "kind": "lunation",
+    "anyOnNatal": true
+   },
+   "atomIds": [
+    "lunation:"
+   ],
+   "title": "A lunation lands on one of your natal planets",
+   "bindable": true
+  },
+  {
+   "id": "sky:eclipse:on-natal",
+   "family": "eclipse",
+   "when": {
+    "kind": "lunation",
+    "eclipse": true,
+    "anyOnNatal": true
+   },
+   "atomIds": [
+    "lunation:"
+   ],
+   "title": "An eclipse lands on one of your natal planets",
+   "bindable": true
+  }
+ ]
+}

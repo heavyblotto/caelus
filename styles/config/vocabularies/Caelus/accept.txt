@@ -23,6 +23,7 @@ MCP
 arcsecond
 arcseconds
 nano-arcsecond
+unvalidated
 [Gg]eocentric
 [Hh]eliocentric
 [Ee]cliptic
@@ -206,3 +207,9 @@ sidecar
 bit-stability
 bit-identical
 [Cc]anonicaliz[a-z]*
+[Ss]ubpaths?
+Kundli
+[Ll]erps?
+Heindel
+[Gg]ridlines?
+[Pp]olylines?

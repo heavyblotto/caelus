@@ -36,11 +36,45 @@ design's job is hierarchy and legibility, not persuasion.
 Every page follows the same skeleton: eyebrow → `h1` → lead of at most two
 sentences → sections → `PageClose`. Prose pages use the narrow `container`
 (760px); tool and docs pages use `container-wide` (1100px), with hero copy
-capped to a readable measure by `.page-hero p`.
+capped to a readable measure by `.page-hero p`. The playground uses
+`container-workspace` (`--maxw-workspace`) so the working figure can stay large.
 
 Section headings: sentence-case `h2` in prose flow; the monospace uppercase
 group label (`.feature-group__label`) for grouped card sections. Don't mix the
 two on one page for peer sections.
+
+## Workspace grammar
+
+The playground chart workspace is still ephemengine.com. It does not invent a
+second palette, typeface, or product chrome. Tokens stay `--bg` through `--warm`,
+Inter + JetBrains Mono, `.control` / `.field` / `.btn` / `.seg` / `.tabs__tab` /
+`.card`. Peach blossom (`--warm`) is only the living layer: today-strip markers,
+the provenance stamp, the reading panel, out-of-bounds.
+
+Once the workspace is the object of the page, eyebrow → h1 → sections is the
+hero only. After that, a `.workspace` column: document bar, provenance stamp,
+today strip, figure | rail, scrubber full width. The rest of the site is
+unchanged.
+
+Playground width is `--maxw-workspace` (about 1360px), playground-only. The
+figure column is ~420–480px (`.workspace__figure`). Advanced adds rail density;
+it does not shrink the wheel.
+
+New widgets reuse the existing vocabulary:
+
+- `.workspace`: the grid, not a page template
+- `.today-strip` / `.provenance-stamp` / `.scrubber` (range input as `.control`)
+- `.rail` is `.tabs__tab` or `.seg`, not a second tab language
+- Dasha / ZR timelines are compact stacked lists
+- Counterfactual diff uses `--good` / `--bad` (`.diff-gain`, `.diff-loss`)
+- Constraint editor is labelled `.field`s
+
+Do not add a third accent, a playground-only typeface, glass, gradients,
+decorative motion, a Vedic colorway, emoji as UI, or an icon font. Casual and
+Advanced share the same chrome; Advanced shows more rail items. Kundli,
+tri-wheel, ephemeris graph, and Sky Viewfinder consume `--wheel-*` and
+`--accent`. Tradition changes the figure, not the chrome. Honor
+`prefers-reduced-motion`: jump, don't play.
 
 ## Tokens
 

@@ -1,0 +1,161 @@
+{
+ "name": "dasha-antars-rahu",
+ "outFile": "b4-dasha-antars-rahu.json",
+ "setId": "house-b4-dasha-antars-rahu",
+ "family": "timelord-dasha",
+ "cells": [
+  {
+   "id": "timelord:dasha:antar:rahu:ketu",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "antar",
+    "lord": "ketu",
+    "under": "rahu"
+   },
+   "atomIds": [
+    "dasha:antar:",
+    "dasha:maha:"
+   ],
+   "title": "Ketu antardasha in the Rahu mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:antar:rahu:venus",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "antar",
+    "lord": "venus",
+    "under": "rahu"
+   },
+   "atomIds": [
+    "dasha:antar:",
+    "dasha:maha:"
+   ],
+   "title": "Venus antardasha in the Rahu mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:antar:rahu:sun",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "antar",
+    "lord": "sun",
+    "under": "rahu"
+   },
+   "atomIds": [
+    "dasha:antar:",
+    "dasha:maha:"
+   ],
+   "title": "Sun antardasha in the Rahu mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:antar:rahu:moon",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "antar",
+    "lord": "moon",
+    "under": "rahu"
+   },
+   "atomIds": [
+    "dasha:antar:",
+    "dasha:maha:"
+   ],
+   "title": "Moon antardasha in the Rahu mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:antar:rahu:mars",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "antar",
+    "lord": "mars",
+    "under": "rahu"
+   },
+   "atomIds": [
+    "dasha:antar:",
+    "dasha:maha:"
+   ],
+   "title": "Mars antardasha in the Rahu mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:antar:rahu:rahu",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "antar",
+    "lord": "rahu",
+    "under": "rahu"
+   },
+   "atomIds": [
+    "dasha:antar:",
+    "dasha:maha:"
+   ],
+   "title": "Rahu antardasha in the Rahu mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:antar:rahu:jupiter",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "antar",
+    "lord": "jupiter",
+    "under": "rahu"
+   },
+   "atomIds": [
+    "dasha:antar:",
+    "dasha:maha:"
+   ],
+   "title": "Jupiter antardasha in the Rahu mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:antar:rahu:saturn",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "antar",
+    "lord": "saturn",
+    "under": "rahu"
+   },
+   "atomIds": [
+    "dasha:antar:",
+    "dasha:maha:"
+   ],
+   "title": "Saturn antardasha in the Rahu mahadasha",
+   "bindable": true
+  },
+  {
+   "id": "timelord:dasha:antar:rahu:mercury",
+   "family": "timelord-dasha",
+   "when": {
+    "kind": "timelord",
+    "system": "dasha",
+    "level": "antar",
+    "lord": "mercury",
+    "under": "rahu"
+   },
+   "atomIds": [
+    "dasha:antar:",
+    "dasha:maha:"
+   ],
+   "title": "Mercury antardasha in the Rahu mahadasha",
+   "bindable": true
+  }
+ ]
+}

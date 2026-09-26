@@ -1,0 +1,176 @@
+{
+ "name": "composite-venus",
+ "outFile": "b3-composite-venus.json",
+ "setId": "house-b3-composite-venus",
+ "family": "composite-placement",
+ "cells": [
+  {
+   "id": "composite:venus:sign:aries",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "venus",
+    "sign": "Aries"
+   },
+   "atomIds": [
+    "composite:venus"
+   ],
+   "title": "Composite Venus in Aries",
+   "bindable": true
+  },
+  {
+   "id": "composite:venus:sign:taurus",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "venus",
+    "sign": "Taurus"
+   },
+   "atomIds": [
+    "composite:venus"
+   ],
+   "title": "Composite Venus in Taurus",
+   "bindable": true
+  },
+  {
+   "id": "composite:venus:sign:gemini",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "venus",
+    "sign": "Gemini"
+   },
+   "atomIds": [
+    "composite:venus"
+   ],
+   "title": "Composite Venus in Gemini",
+   "bindable": true
+  },
+  {
+   "id": "composite:venus:sign:cancer",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "venus",
+    "sign": "Cancer"
+   },
+   "atomIds": [
+    "composite:venus"
+   ],
+   "title": "Composite Venus in Cancer",
+   "bindable": true
+  },
+  {
+   "id": "composite:venus:sign:leo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "venus",
+    "sign": "Leo"
+   },
+   "atomIds": [
+    "composite:venus"
+   ],
+   "title": "Composite Venus in Leo",
+   "bindable": true
+  },
+  {
+   "id": "composite:venus:sign:virgo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "venus",
+    "sign": "Virgo"
+   },
+   "atomIds": [
+    "composite:venus"
+   ],
+   "title": "Composite Venus in Virgo",
+   "bindable": true
+  },
+  {
+   "id": "composite:venus:sign:libra",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "venus",
+    "sign": "Libra"
+   },
+   "atomIds": [
+    "composite:venus"
+   ],
+   "title": "Composite Venus in Libra",
+   "bindable": true
+  },
+  {
+   "id": "composite:venus:sign:scorpio",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "venus",
+    "sign": "Scorpio"
+   },
+   "atomIds": [
+    "composite:venus"
+   ],
+   "title": "Composite Venus in Scorpio",
+   "bindable": true
+  },
+  {
+   "id": "composite:venus:sign:sagittarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "venus",
+    "sign": "Sagittarius"
+   },
+   "atomIds": [
+    "composite:venus"
+   ],
+   "title": "Composite Venus in Sagittarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:venus:sign:capricorn",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "venus",
+    "sign": "Capricorn"
+   },
+   "atomIds": [
+    "composite:venus"
+   ],
+   "title": "Composite Venus in Capricorn",
+   "bindable": true
+  },
+  {
+   "id": "composite:venus:sign:aquarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "venus",
+    "sign": "Aquarius"
+   },
+   "atomIds": [
+    "composite:venus"
+   ],
+   "title": "Composite Venus in Aquarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:venus:sign:pisces",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "venus",
+    "sign": "Pisces"
+   },
+   "atomIds": [
+    "composite:venus"
+   ],
+   "title": "Composite Venus in Pisces",
+   "bindable": true
+  }
+ ]
+}

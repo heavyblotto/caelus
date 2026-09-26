@@ -1,0 +1,233 @@
+{
+ "name": "composite-aspects-jupiter-2",
+ "outFile": "b3-composite-aspects-jupiter-2.json",
+ "setId": "house-b3-composite-aspects-jupiter-2",
+ "family": "composite-aspect",
+ "cells": [
+  {
+   "id": "composite:aspect:jupiter:conjunction:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "jupiter",
+    "b": "pluto",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:jupiter~pluto:conjunction"
+   ],
+   "title": "Composite Jupiter conjunct composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:jupiter:sextile:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "jupiter",
+    "b": "pluto",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:jupiter~pluto:sextile"
+   ],
+   "title": "Composite Jupiter sextile composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:jupiter:square:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "jupiter",
+    "b": "pluto",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:jupiter~pluto:square"
+   ],
+   "title": "Composite Jupiter square composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:jupiter:trine:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "jupiter",
+    "b": "pluto",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:jupiter~pluto:trine"
+   ],
+   "title": "Composite Jupiter trine composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:jupiter:opposition:pluto",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "jupiter",
+    "b": "pluto",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:jupiter~pluto:opposition"
+   ],
+   "title": "Composite Jupiter opposite composite Pluto",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:jupiter:conjunction:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "jupiter",
+    "b": "chiron",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:jupiter~chiron:conjunction"
+   ],
+   "title": "Composite Jupiter conjunct composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:jupiter:sextile:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "jupiter",
+    "b": "chiron",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:jupiter~chiron:sextile"
+   ],
+   "title": "Composite Jupiter sextile composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:jupiter:square:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "jupiter",
+    "b": "chiron",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:jupiter~chiron:square"
+   ],
+   "title": "Composite Jupiter square composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:jupiter:trine:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "jupiter",
+    "b": "chiron",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:jupiter~chiron:trine"
+   ],
+   "title": "Composite Jupiter trine composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:jupiter:opposition:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "jupiter",
+    "b": "chiron",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:jupiter~chiron:opposition"
+   ],
+   "title": "Composite Jupiter opposite composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:jupiter:conjunction:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "jupiter",
+    "b": "true_node",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:jupiter~true_node:conjunction"
+   ],
+   "title": "Composite Jupiter conjunct composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:jupiter:sextile:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "jupiter",
+    "b": "true_node",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:jupiter~true_node:sextile"
+   ],
+   "title": "Composite Jupiter sextile composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:jupiter:square:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "jupiter",
+    "b": "true_node",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:jupiter~true_node:square"
+   ],
+   "title": "Composite Jupiter square composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:jupiter:trine:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "jupiter",
+    "b": "true_node",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:jupiter~true_node:trine"
+   ],
+   "title": "Composite Jupiter trine composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:jupiter:opposition:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "jupiter",
+    "b": "true_node",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:jupiter~true_node:opposition"
+   ],
+   "title": "Composite Jupiter opposite composite North Node",
+   "bindable": true
+  }
+ ]
+}

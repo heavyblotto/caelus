@@ -4,7 +4,7 @@
  * Glyphs sit at the real apparent longitudes for "now" in UT. Decoration that
  * is actual engine output, not stock art.
  */
-import { Engine, BODIES, SIGNS, fmtLon, type Body } from "caelus";
+import { Engine, BODIES, SIGNS, fmtLon, type Body, type Chart } from "caelus";
 import { embeddedData } from "caelus/data-embedded";
 import { GLYPHS } from "caelus-wheel";
 
@@ -36,10 +36,11 @@ function place(lons: Array<{ body: Body; lon: number }>): Placed[] {
   return out;
 }
 
-export default function SkyRibbon() {
+export default function SkyRibbon({
+  chart: given, stamp: givenStamp,
+}: { chart?: Chart; stamp?: string } = {}) {
   const now = new Date();
-  const engine = new Engine(embeddedData);
-  const chart = engine.chart(
+  const chart = given ?? new Engine(embeddedData).chart(
     now.getUTCFullYear(), now.getUTCMonth() + 1, now.getUTCDate(),
     now.getUTCHours(), now.getUTCMinutes(), 0, 0, 0, "whole_sign",
   );
@@ -47,7 +48,10 @@ export default function SkyRibbon() {
     const p = chart.bodies[body];
     return p ? [{ body, lon: p.lon }] : []; // skip a body outside its fitted range
   }));
-  const stamp = now.toISOString().slice(0, 16).replace("T", " ");
+  const sunLon = chart.bodies.sun ? fmtLon(chart.bodies.sun.lon) : "";
+  const moonLon = chart.bodies.moon ? fmtLon(chart.bodies.moon.lon) : "";
+  const stamp = givenStamp
+    ?? `sky now · ${now.toISOString().slice(0, 16).replace("T", " ")} UT · sun ${sunLon} · moon ${moonLon}`;
 
   return (
     <figure className="sky-ribbon reveal" aria-label="The current sky, computed by the engine">
@@ -93,7 +97,7 @@ export default function SkyRibbon() {
         ))}
       </svg>
       <figcaption className="eyebrow sky-ribbon__cap">
-        sky now · {stamp} UT · sun {fmtLon(chart.bodies.sun.lon)} · moon {fmtLon(chart.bodies.moon.lon)}
+        {stamp}
       </figcaption>
     </figure>
   );

@@ -1,0 +1,158 @@
+{
+ "name": "composite-aspects-sun-4",
+ "outFile": "b3-composite-aspects-sun-4.json",
+ "setId": "house-b3-composite-aspects-sun-4",
+ "family": "composite-aspect",
+ "cells": [
+  {
+   "id": "composite:aspect:sun:conjunction:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "chiron",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:sun~chiron:conjunction"
+   ],
+   "title": "Composite Sun conjunct composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:sextile:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "chiron",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:sun~chiron:sextile"
+   ],
+   "title": "Composite Sun sextile composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:square:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "chiron",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:sun~chiron:square"
+   ],
+   "title": "Composite Sun square composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:trine:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "chiron",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:sun~chiron:trine"
+   ],
+   "title": "Composite Sun trine composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:opposition:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "chiron",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:sun~chiron:opposition"
+   ],
+   "title": "Composite Sun opposite composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:conjunction:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "true_node",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:sun~true_node:conjunction"
+   ],
+   "title": "Composite Sun conjunct composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:sextile:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "true_node",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:sun~true_node:sextile"
+   ],
+   "title": "Composite Sun sextile composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:square:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "true_node",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:sun~true_node:square"
+   ],
+   "title": "Composite Sun square composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:trine:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "true_node",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:sun~true_node:trine"
+   ],
+   "title": "Composite Sun trine composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:sun:opposition:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "sun",
+    "b": "true_node",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:sun~true_node:opposition"
+   ],
+   "title": "Composite Sun opposite composite North Node",
+   "bindable": true
+  }
+ ]
+}

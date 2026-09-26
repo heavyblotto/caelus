@@ -16,7 +16,7 @@ import { loadNodeData } from "../src/node-loader.js";
 import { extinctionMag } from "../src/pheno.js";
 import {
   resolveLens, skyPlacer, twilightStage, limitingMag, skyView,
-  skyBrightness, horizonAltAt,
+  skyBrightness, horizonAltAt, radialScale, skyProjector,
   SkyLens, SkyPlacement, SkyBody, SkyOffFrameBody, SkyOccludedBody,
 } from "../src/skyview.js";
 
@@ -78,6 +78,23 @@ function compute(spec: any): any {
       const placer = skyPlacer(spec.aim[0], spec.aim[1], lens, spec.width,
         spec.height, { refraction: spec.refraction });
       return spec.points.map(([az, alt]: number[]) => mapPlace(placer(az, alt)));
+    }
+    case "radial":
+      return spec.shapes.map((shape: number) => {
+        const fn = radialScale(shape);
+        return spec.thetas.map((thDeg: number) =>
+          pix(fn((thDeg * Math.PI) / 180)));
+      });
+    case "project": {
+      const proj = skyProjector(spec.aim[0], spec.aim[1],
+        { shape: spec.shape, hfovDeg: spec.hfov_deg });
+      return spec.points.map(([az, alt]: number[]) => {
+        const p = proj.place(az, alt);
+        return {
+          xn: pix(p.xn), yn: pix(p.yn), theta_deg: p.thetaDeg,
+          hemisphere: p.hemisphere, behind: p.behind,
+        };
+      });
     }
     case "twilight": {
       const rows: unknown[] = [];

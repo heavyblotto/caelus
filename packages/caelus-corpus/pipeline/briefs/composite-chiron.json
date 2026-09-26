@@ -1,0 +1,176 @@
+{
+ "name": "composite-chiron",
+ "outFile": "b3-composite-chiron.json",
+ "setId": "house-b3-composite-chiron",
+ "family": "composite-placement",
+ "cells": [
+  {
+   "id": "composite:chiron:sign:aries",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "chiron",
+    "sign": "Aries"
+   },
+   "atomIds": [
+    "composite:chiron"
+   ],
+   "title": "Composite Chiron in Aries",
+   "bindable": true
+  },
+  {
+   "id": "composite:chiron:sign:taurus",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "chiron",
+    "sign": "Taurus"
+   },
+   "atomIds": [
+    "composite:chiron"
+   ],
+   "title": "Composite Chiron in Taurus",
+   "bindable": true
+  },
+  {
+   "id": "composite:chiron:sign:gemini",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "chiron",
+    "sign": "Gemini"
+   },
+   "atomIds": [
+    "composite:chiron"
+   ],
+   "title": "Composite Chiron in Gemini",
+   "bindable": true
+  },
+  {
+   "id": "composite:chiron:sign:cancer",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "chiron",
+    "sign": "Cancer"
+   },
+   "atomIds": [
+    "composite:chiron"
+   ],
+   "title": "Composite Chiron in Cancer",
+   "bindable": true
+  },
+  {
+   "id": "composite:chiron:sign:leo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "chiron",
+    "sign": "Leo"
+   },
+   "atomIds": [
+    "composite:chiron"
+   ],
+   "title": "Composite Chiron in Leo",
+   "bindable": true
+  },
+  {
+   "id": "composite:chiron:sign:virgo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "chiron",
+    "sign": "Virgo"
+   },
+   "atomIds": [
+    "composite:chiron"
+   ],
+   "title": "Composite Chiron in Virgo",
+   "bindable": true
+  },
+  {
+   "id": "composite:chiron:sign:libra",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "chiron",
+    "sign": "Libra"
+   },
+   "atomIds": [
+    "composite:chiron"
+   ],
+   "title": "Composite Chiron in Libra",
+   "bindable": true
+  },
+  {
+   "id": "composite:chiron:sign:scorpio",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "chiron",
+    "sign": "Scorpio"
+   },
+   "atomIds": [
+    "composite:chiron"
+   ],
+   "title": "Composite Chiron in Scorpio",
+   "bindable": true
+  },
+  {
+   "id": "composite:chiron:sign:sagittarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "chiron",
+    "sign": "Sagittarius"
+   },
+   "atomIds": [
+    "composite:chiron"
+   ],
+   "title": "Composite Chiron in Sagittarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:chiron:sign:capricorn",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "chiron",
+    "sign": "Capricorn"
+   },
+   "atomIds": [
+    "composite:chiron"
+   ],
+   "title": "Composite Chiron in Capricorn",
+   "bindable": true
+  },
+  {
+   "id": "composite:chiron:sign:aquarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "chiron",
+    "sign": "Aquarius"
+   },
+   "atomIds": [
+    "composite:chiron"
+   ],
+   "title": "Composite Chiron in Aquarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:chiron:sign:pisces",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "chiron",
+    "sign": "Pisces"
+   },
+   "atomIds": [
+    "composite:chiron"
+   ],
+   "title": "Composite Chiron in Pisces",
+   "bindable": true
+  }
+ ]
+}

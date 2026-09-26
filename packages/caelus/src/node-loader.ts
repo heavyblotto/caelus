@@ -76,6 +76,28 @@ export function loadNodeData(
   if (existsSync(join(dir, "earth_cheb.json"))) {
     data.earthPack = j("earth_cheb.json");
   }
+  // Era slabs (deep-time R1): `{body}_cheb.{era}.json` beside the default
+  // packs — e.g. `jupiter_cheb.classical.json` (3000 BCE–1000 CE, adjoining
+  // the headline tier). Loaded when present; at compute time the slab whose
+  // span covers the instant wins, the default pack first. No slab on disk,
+  // no behaviour change.
+  const ERA_SLABS = ["classical"];
+  for (const era of ERA_SLABS) {
+    for (const b of ["mercury", "venus", "mars", "jupiter", "saturn",
+      "uranus", "neptune", "pluto", "ceres", "pallas", "juno", "vesta",
+      "pholus"]) {
+      const p = join(dir, `${b}_cheb.${era}.json`);
+      if (existsSync(p)) {
+        ((data.eraPacks ??= {})[b] ??= []).push(j(`${b}_cheb.${era}.json`));
+      }
+    }
+    if (existsSync(join(dir, `earth_cheb.${era}.json`))) {
+      (data.earthEraPacks ??= []).push(j(`earth_cheb.${era}.json`));
+    }
+    if (existsSync(join(dir, `moon_cheb.${era}.json`))) {
+      (data.moonEraPacks ??= []).push(j(`moon_cheb.${era}.json`));
+    }
+  }
   if (moonTier !== "none") {
     // The npm package ships only the embedded tier (1920-2080); the full
     // tier (1000-3000, ~16 MB, same precision) lives in the repo. Fall back

@@ -1,0 +1,176 @@
+{
+  "name": "composite-houses-venus",
+  "outFile": "b3-composite-houses-venus.json",
+  "setId": "house-b3-composite-houses-venus",
+  "family": "composite-house",
+  "cells": [
+    {
+      "id": "composite:venus:house:1",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "venus",
+        "house": 1
+      },
+      "atomIds": [
+        "composite:venus"
+      ],
+      "title": "Composite Venus in the 1st house",
+      "bindable": true
+    },
+    {
+      "id": "composite:venus:house:2",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "venus",
+        "house": 2
+      },
+      "atomIds": [
+        "composite:venus"
+      ],
+      "title": "Composite Venus in the 2nd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:venus:house:3",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "venus",
+        "house": 3
+      },
+      "atomIds": [
+        "composite:venus"
+      ],
+      "title": "Composite Venus in the 3rd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:venus:house:4",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "venus",
+        "house": 4
+      },
+      "atomIds": [
+        "composite:venus"
+      ],
+      "title": "Composite Venus in the 4th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:venus:house:5",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "venus",
+        "house": 5
+      },
+      "atomIds": [
+        "composite:venus"
+      ],
+      "title": "Composite Venus in the 5th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:venus:house:6",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "venus",
+        "house": 6
+      },
+      "atomIds": [
+        "composite:venus"
+      ],
+      "title": "Composite Venus in the 6th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:venus:house:7",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "venus",
+        "house": 7
+      },
+      "atomIds": [
+        "composite:venus"
+      ],
+      "title": "Composite Venus in the 7th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:venus:house:8",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "venus",
+        "house": 8
+      },
+      "atomIds": [
+        "composite:venus"
+      ],
+      "title": "Composite Venus in the 8th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:venus:house:9",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "venus",
+        "house": 9
+      },
+      "atomIds": [
+        "composite:venus"
+      ],
+      "title": "Composite Venus in the 9th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:venus:house:10",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "venus",
+        "house": 10
+      },
+      "atomIds": [
+        "composite:venus"
+      ],
+      "title": "Composite Venus in the 10th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:venus:house:11",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "venus",
+        "house": 11
+      },
+      "atomIds": [
+        "composite:venus"
+      ],
+      "title": "Composite Venus in the 11th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:venus:house:12",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "venus",
+        "house": 12
+      },
+      "atomIds": [
+        "composite:venus"
+      ],
+      "title": "Composite Venus in the 12th house",
+      "bindable": true
+    }
+  ]
+}

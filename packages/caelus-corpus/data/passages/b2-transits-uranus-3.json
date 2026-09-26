@@ -1,0 +1,212 @@
+[
+ {
+  "id": "transit:uranus:conjunction:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "saturn",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:uranus~natal_saturn:conjunction"
+  ],
+  "text": "Once in a lifetime, if that, Uranus arrives at the degree your natal Saturn holds, and it aims at the most settled thing in your chart. Saturn is where you keep structure: your duties, your rules, your long commitments, the arrangements you built so life would hold still. The conjunction fuses the awakener with the keeper of order, and for a year or more the question under everything is which of your structures are alive and which are just old. While the transit applies, the first sign is usually restlessness in exactly the places where you have been most responsible. An obligation you carried without complaint starts to chafe. A routine that once felt like discipline starts to feel like a cage. Nothing has broken yet; the floor is just humming. Around the exact pass, something usually gives. A role ends, an authority loses its hold on you, a limit you treated as permanent turns out to be movable. This can arrive as an outside event or as a decision you suddenly find yourself able to make. Because Uranus retrogrades, there are often three exact passes in all. The first opens the crack and shows you which structure is in question. The middle pass, with the planet moving backward, is the second look: you test whether the old arrangement can be renovated or whether it has to go. The final pass tends to settle it, and by then the answer usually feels obvious rather than dramatic. The danger of this transit sits at the two extremes. Defending every rule because it is a rule makes the year brittle, and brittle things snap in worse ways later. Throwing out everything at once feels like freedom for about a month, then leaves you without a floor. The work in between is selective demolition. Some of your commitments were freely chosen and still fit; the shaking proves it, and they come through stronger. Others were inherited, or adopted out of fear, and those are the ones that rattle loudest. In practice this often plays out through work and long responsibilities: a career structure gets reorganized, a duty gets renegotiated, a plan you had set for decades takes a sharp turn. In relationships it can loosen agreements that had hardened into silence, which is uncomfortable and usually healthier. As the transit separates, rebuilding starts. What you construct in the settling year tends to be lighter than what stood before: fewer rules, better chosen, held because you mean them. The lasting change is inward too: security and freedom stop being opponents, and the structures worth keeping turn out to be the ones that can move."
+ },
+ {
+  "id": "transit:uranus:sextile:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "saturn",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:uranus~natal_saturn:sextile"
+  ],
+  "text": "A sextile from Uranus to your natal Saturn is change on good terms with order, which is not a common alliance. Saturn holds your commitments, your work habits, the frames your life runs inside. Uranus wants those frames refreshed. In the sextile it does not shake them; it points at the stiff spots and offers a better design. Over the extended stretch this transit stays in range, often revisited by retrograde passes, openings keep appearing to modernize what you have built. A new method lands just as the old one becomes tedious. A rule you enforce out of habit turns out to have a workaround nobody minds. A responsibility can be restructured so it costs less and yields more. Uranus supplies the current here, and at this angle the current is mild, a year-long trickle of better ideas rather than a jolt. It can be declined without incident, so the main way to waste the period is to be too settled to notice it. While the aspect is applying, you may simply feel more open to adjusting things you usually defend. Ideas about doing it differently stop sounding like threats and start sounding interesting. Near the exact pass the openings get concrete: a specific proposal, a specific tool, a specific chance to reorganize. If Uranus retrogrades back over the degree, the chance tends to return in revised form, which is useful if you hesitated the first time. The later passes are good for finishing what the first one started. What makes this transit valuable is that changes made under it tend to hold. Uranus alone produces experiments that burn out; Saturn alone produces order that slowly fossilizes. Working together at a friendly angle, they produce reform: improvements that get properly installed. At work this can be the season you finally fix the process everyone complains about. At home it can be a quiet renegotiation of who does what, done without a fight because the timing was right. In your own habits it favors swapping a discipline that no longer serves for one that fits who you have become. Nothing here forces growth, and that is the point worth respecting. The period rewards initiative and punishes nothing. If you let it pass untouched, life continues as before, minus one easy upgrade. If you take it, you get the rare experience of changing something fundamental without breaking anything. As the transit separates, the new arrangements settle in and stop feeling new. That quiet ending is the sign it worked."
+ },
+ {
+  "id": "transit:uranus:square:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "saturn",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:uranus~natal_saturn:square"
+  ],
+  "text": "Somewhere in your life, order has hardened past usefulness, and Uranus square your natal Saturn spends its long visit finding the spot. Saturn is your structure: the duties you keep, the rules you live by, the security you have paid for in patience. The square puts a restless current through all of it. For a year or more, often with three exact passes, you live in the tension between what is stable and what is merely stuck. For the first months nothing happens, and everything chafes. You feel confined by arrangements you chose, impatient with authorities you normally respect, including your own inner one. Sleep can turn light and nerves can run close to the surface, because this transit strains the part of you that holds things together. Sooner or later the friction picks a stage, usually near an exact pass. A schedule collapses, a rule gets challenged, a commitment demands renegotiation, or you finally snap at a restriction you have tolerated for years. The square forces a choice the gentler aspects would only have suggested: adapt the structure or watch it strain. Two failure modes wait at the edges. One is to clamp down, defending every arrangement precisely because it is under pressure; rigidity here tends to convert small disruptions into large ones. The other is to torch things wholesale, mistaking the discomfort of pressure for proof that everything must go. Most of what you have built is fine. Usually one or two load-bearing pieces are outdated, and the disruptions cluster around exactly those. If Uranus retrogrades over the degree, the middle pass reopens whatever the first pass exposed, this time with less shock and more information. The final pass tends to ask for a decision rather than a reaction. By then you generally know which duty needs restructuring, which limit was actually protecting you, and which one was just old fear wearing a badge. In work this can look like friction with institutions or a role that no longer fits your competence. At home it can be the creak of long-standing agreements that were never revisited. In your body it often registers as tension that eases the moment you make the overdue change. As the square separates, the pressure drops and what remains is a structure with some give in it. The lesson that stays is blunt: security that cannot flex is not really security, and what bends with you now will still be standing at the next shake."
+ },
+ {
+  "id": "transit:uranus:trine:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "saturn",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:uranus~natal_saturn:trine"
+  ],
+  "text": "Change usually costs you something in stability, and stability usually costs you some freshness. During Uranus trine your natal Saturn, for the better part of a year and sometimes longer, the exchange rate improves: you can update the structure of your life without paying the usual toll. Saturn holds your commitments, your work, your rules and long plans. The trine sends Uranus's current through them at an easy angle, so instead of shaking the building it improves the wiring. In the applying phase you may notice that reforms you once postponed now look straightforward. Resistance, in yourself and in others, is unusually low. Near the exact pass, chances to reorganize tend to arrive on their own: a role shifts in your favor, a better method appears, a responsibility can be rearranged with everyone's consent. Because Uranus can cross the degree up to three times, the season often works in installments. The first pass introduces the improvement, the second refines it, the third makes it permanent. Changes made under this transit have a distinctive quality: they last. Uranus alone tends to produce bold experiments that fade; under the trine, Saturn signs off on the experiment and files the paperwork. This is a strong period for restructuring work you will still want in ten years, for putting a long ambition on modern footing, for renegotiating a duty so it matches your actual capacities. It also favors quieter reforms: a habit replaced, a schedule rebuilt around who you are now rather than who you were when you set it. Comfort is the only hazard on the list. Trines do not push, so nothing bad happens if you spend the whole transit coasting; you simply return the gift unopened. A little initiative converts it into years of benefit. It helps to ask, while the window is open, which structure in your life you would redesign if redesign were cheap, because right now it is. Dealings with authority tend to run smooth under this aspect: older and younger, traditional and experimental, meet you halfway, and you may find yourself the translator between the two, trusted by both. As the trine separates, the new arrangements stop feeling like changes and start feeling like the way things are. What you gain is quiet proof that your security can evolve, and that freedom taken in measured amounts strengthens what you have built rather than threatening it."
+ },
+ {
+  "id": "transit:uranus:opposition:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "saturn",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:uranus~natal_saturn:opposition"
+  ],
+  "text": "Uranus opposite your natal Saturn stages a confrontation, and oppositions like to use other people as the stage. On one side stands everything Saturn means in your chart: your obligations, your rules, your record, the security you have built by enduring. On the other side is an insistent demand for change that seems to come from outside. For a year or more, life keeps arranging meetings between the two. While the aspect applies, the meetings are small: a colleague pushes against your process, an institution changes terms on you, a younger voice questions an arrangement you consider settled. You may feel unusually defensive without being sure why. Around the exact pass the confrontation tends to sharpen into a real standoff. Something or someone disrupts a structure you rely on, or you find yourself cast as the disruptor against somebody else's order. Either way the question is the same: what here deserves to stand, and what is standing only from habit? The trap in this transit is polarization. Cast the other side as pure recklessness, or as pure dead weight, and you learn nothing and lose ground anyway. The truth is that both ends are yours. The security being challenged is yours, and so is the restlessness doing the challenging; the outside players are carrying pieces of it for you. Uranus usually crosses the degree three times, so the standoff rarely resolves in one scene. The first pass states the conflict. The retrograde pass gives a second look, often quieter, where positions soften and real terms emerge. The final pass tends to close the negotiation, and by then it is often clear the two sides wanted compatible things: a structure that still stands, with room in it to breathe. In practice, watch the places where your life touches institutions: employers, landlords, licensing bodies, family hierarchies. Agreements there may need revisiting, and rushing or stonewalling both cost more than patient revision. In close relationships the transit can surface a freedom-versus-commitment argument that was running silently for years; said out loud, it is usually solvable. As the opposition separates, the pressure to pick a side fades, and what remains is a more honest settlement between your need for order and your need for room. An opposition resolves only when you can hold both ends at once, and a year of practicing that is worth the friction it cost."
+ },
+ {
+  "id": "transit:uranus:conjunction:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "uranus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:uranus~natal_uranus:conjunction"
+  ],
+  "text": "Uranus takes about eighty-four years to circle the zodiac, so its return to the place it held at your birth is a once-in-a-lifetime event, arriving for those who reach it in the middle of the ninth decade. This is the completion of your Uranus cycle: every awakening, rebellion, reinvention, and sudden turn of your life belonged to the circuit that closes now, and a new circuit opens. Practically, this is a long visit: the degree can stay in play for more than a year, touched exactly as many as three times. The first often stirs a restlessness that surprises you at this age: an impatience with routines built for an earlier self, a hunger to say true things plainly, a lightened grip on other people's expectations. The retrograde pass tends to bring review, and the review runs deep, since the material is a whole life. You may find yourself re-evaluating old rebellions, seeing which ones were really yours and which were just noise, and forgiving both. The final pass settles a kind of freedom that younger people rarely have: freedom with nothing left to prove. What Uranus asks for here is individuality in its finished form. Whatever role, family position, or reputation has been standing in for you, the return invites you to step out from behind it. Many people at this transit become more direct, funnier, less manageable, and noticeably more themselves, sometimes to the alarm of relatives who preferred the quieter version. That alarm is not your problem. Within reason, this is the season for saying what you actually think and choosing what you actually enjoy. Changes under this transit are real, not just symbolic: living arrangements shift, long friendships renew or complete, and interests from decades ago can come back with their original electricity, as if they had been waiting. Surprises still happen, because it is still a Uranus year, and steadiness in the basics, rest, routine, trusted people, makes the surprises easier to ride. You grow through this period the way you have grown through the whole cycle, by letting the true version of you replace the convenient one. Done at this age, with this much material to draw on, it is less a rebellion than a homecoming: the person who arrived eighty-four years ago gets the last word."
+ },
+ {
+  "id": "transit:uranus:sextile:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "uranus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:uranus~natal_uranus:sextile"
+  ],
+  "text": "Twice in its long cycle, Uranus forms a sextile to the spot it occupied when you were born: once in your early teens as it pulls away, and once around age seventy as it comes home. Both visits carry the same offer at different altitudes: a low-pressure chance to become more distinctly yourself. The sextile does not force anything. Over the year or so it stays in range, counting its retrograde returns, it simply makes individuality easier. Doors that lead away from the standard script stand slightly open, and walking through them costs less than usual. In the teenage version, the transit accompanies the first real experiments in identity: friends found outside the family orbit, interests nobody assigned, the first opinions that are genuinely yours rather than inherited. It tends to feel like appetite more than crisis. In the later version, the offer comes back with better judgment attached. Roles that organized your middle decades have loosened, and the sextile makes it natural to try what they crowded out: a study taken up for pure interest, a community chosen instead of given, a franker voice, a freer schedule. In either season, the applying phase feels like curiosity gathering. Near the exact pass, a specific opening usually shows itself, and its signature is ease: the unconventional option that would normally cost a fight simply does not. If Uranus retrogrades over the degree, the opening tends to come around again, so a missed first chance is rarely the last one. The separating phase is for keeping what you tried. Sextiles ask for initiative, and this one can simply be declined; life goes on unchanged, and only later registers a faint sense of a road not taken. Accepting rarely requires anything dramatic. One honest experiment, one interest pursued past the point of politeness, one connection with people who see the version of you still forming: any of these collects the offer. What builds over the transit is trust in your own difference. What is distinct in you starts to look like a resource rather than a complication, and this aspect makes that lesson unusually cheap. Few transits give so much room for so little pain."
+ },
+ {
+  "id": "transit:uranus:square:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "uranus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:uranus~natal_uranus:square"
+  ],
+  "text": "Uranus squares its own birth position in your chart twice: on the way out around age twenty-one, and on the way back in the early sixties. Both are friction points between the life you have been living and the person trying to live it, and both shade a year or more, often with three exact passes. The first square lands at the threshold of adulthood. The structures of upbringing, family expectations, school tracks, the identity assigned to you by your history, suddenly feel like clothes a size too small. The restlessness has a job: it pries you loose so you can start building on your own authority. Mistakes are part of the method. Breaks made in this season can be overdone, and some bridges burnt now get rebuilt later at full price, but the underlying push is sound: your life has to become yours. The second square reverses the direction. Now the structures under pressure are ones you built yourself: the career shape, the daily architecture, the identity of your working decades. As the question of retirement approaches, the transit asks what you intend to be when the scaffolding comes down. People at this pass often make surprising moves that in hindsight look exact: leaving a role at its peak, starting a study or venture that puzzles their peers, relocating toward a life that fits the next twenty years instead of the last twenty. At either age, the applying phase builds an itch that is easy to misread as dissatisfaction with other people. The exact pass tends to force a real decision. The retrograde return revisits it, letting a rushed choice be revised or a delayed one ripen. The final pass usually confirms the new direction, and the nervous static drops noticeably once it does. The risk profile is the same at both ends: too much rupture, or too little. Demolishing everything misreads the message; the square targets specific outgrown structures, not your whole life. Refusing all change just stores the pressure, and stored Uranian pressure tends to discharge later, less conveniently. Growth here means cooperating with your own next stage: making the break that is actually asked for, cleanly, and keeping what still fits. Done that way, the square leaves you with a life one honest size larger."
+ },
+ {
+  "id": "transit:uranus:trine:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "uranus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:uranus~natal_uranus:trine"
+  ],
+  "text": "Uranus trine your natal Uranus arrives twice, in the years approaching thirty on the waxing side and in the mid fifties on the waning side, and both visits are seasons when your individuality and your circumstances stop arguing. For a year or more, being yourself works. The friction that usually accompanies your more original moves drops away, and life cooperates with your experiments instead of taxing them. The first trine runs not long before Saturn's first return, and it acts like a clearing of the runway. You have enough adult experience to know what is genuinely yours, and the trine makes it easy to claim: the work that actually fits, the crowd that actually gets you, the place, style, or craft that feels chosen rather than defaulted into. Changes made now tend to feel natural rather than rebellious, and other people, oddly, tend to approve. In the mid fifties the trine returns with mature material. The urgencies of midlife have settled, and the transit brings a fresh current through what remains: renewed appetite for learning, easy connection with younger people and newer ideas, the pleasant discovery that you can still surprise yourself. It is one of the friendliest passages of later working life, good for reinventing a role instead of leaving it, and for letting long-deferred interests move up the queue. At either age, the applying months bring a loosening, a sense of more room. Near the exact pass, openings matched to your actual nature tend to surface with little effort. The retrograde returns extend the window rather than complicating it; what the first pass offers, the later passes help you keep. Trines do not knock loudly, and this one will not chase you. A year of ease can slide by as merely a good year, its openings unexplored, and no penalty follows except the missed distance. A little deliberate reach, a yes to the interesting option, more of your actual taste and thought shown in public, converts ease into growth. What the trine teaches is that you can update yourself without a crisis, which is rare enough to be worth doing on purpose. The self you consolidate now becomes the base your next hard transit will test, so it pays to build it honestly while building is cheap."
+ },
+ {
+  "id": "transit:uranus:opposition:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "uranus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:uranus~natal_uranus:opposition"
+  ],
+  "text": "Uranus opposite its own natal place is the famous midlife transit, arriving once, somewhere around the early forties depending on your generation. It stands at the halfway mark of the planet's eighty-four-year circuit, and it behaves like a halfway mark: everything unlived from the first half applies for a place in the second. For a year or more, often through three exact passes, you live with an urgency that is easy to feel and hard to name. Its common first symptom is a question with teeth: is this the life I meant? Roads not taken start reporting in. The self you set aside at twenty for practical reasons wants a hearing. Work that made sense as a plan can feel airless as a daily fact, and steady arrangements can suddenly read as cages, even the good ones. In the applying phase this is mostly weather: restlessness, irritability, a strange appetite for risk. Close to an exact pass, the restlessness goes looking for an outlet it can point to. Some people change course sharply; others watch a disruption arrive from outside that does the changing for them. The transit's reputation for wreckage comes from its failure mode, not its purpose. The failure mode is literalism: treating the hunger for the unlived life as an instruction to demolish the lived one. Marriages, careers, and savings have been fed to that misreading. The purpose underneath is correction. At the cycle's midpoint you get one loud chance to compare the life you have with the person you actually are, and to close the gap deliberately rather than by explosion. The retrograde passes exist for exactly this. The first pass states the discontent at full volume. The second, moving backward, lets you sort it: which longings are structural and which are just noise, which changes need making and which need only air. The third pass tends to ratify a decision that by then feels less like rebellion and more like accuracy. It helps to give the urgency real outlets before it chooses its own: the postponed work, the abandoned art, the honest conversations, the body that wants using. Much of what this transit demands can be granted inside the life you already have, and the parts that cannot will still be true a year from now, when your judgment is steadier. As the opposition separates, the noise drops and something valuable remains: a second half consciously chosen. The skill the period asks of you is taking the unlived life seriously without letting it take you hostage. Handled that way, midlife is not a breakdown but a course correction made while there is still plenty of road."
+ },
+ {
+  "id": "transit:uranus:conjunction:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "neptune",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:uranus~natal_neptune:conjunction"
+  ],
+  "text": "Uranus comes to your natal Neptune once in a long lifetime, if it comes at all, and when it does it turns the lights on in the dreaming part of you. Neptune is where you idealize, imagine, long, believe, and occasionally fog things over so the longing can survive contact with facts. The conjunction runs an electric current through all of it for a year and sometimes longer, counting retrograde returns. The signature experience is sudden clarity in exactly the places you were softest. An ideal you have carried for decades comes into focus, and either lights up as truer than you dared treat it, or dissolves as the comfortable fiction it was. Both events feel like waking: one into inspiration, one into plain air where a dream used to be. Neither is a loss, though the second can grieve like one for a while. Inspiration itself tends to arrive in bolts. Images, ideas, and creative or spiritual openings can come faster than you can use them, and stranger than your usual taste. Sleep and dreams may get loud. Intuition sharpens, but so does static, so the discipline of the period is telling signal from noise: writing things down, letting them cool, keeping some ordinary structure under your feet while the weather is this interesting. Because natal Neptune moves so slowly, everyone born within a few years of you receives this transit near the same age, and the awakening has a shared flavor. You may watch your whole cohort revising the same inherited dreams at once, and that shared conversation can be part of the gift. Uranus usually crosses the degree up to three times. The first pass tends to deliver the jolt: the insight, the disenchantment, the new fascination. The retrograde pass is for sorting what the jolt revealed, separating the genuinely awakened from the merely excited. The final pass integrates, and what survives all three tends to be reliable: an ideal you can actually live by, an inspiration with enough spine to become work. The risk of the period is ungrounded flight, chasing every revelation, remaking your beliefs weekly, mistaking intensity for truth. The steadying question is simple: does this insight still stand in the morning? As the transit separates, the current quiets and you keep what it lit. The real gift of the season is ideals tested by lightning: the ones that hold their shape afterward are the ones you can build on."
+ },
+ {
+  "id": "transit:uranus:sextile:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "neptune",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:uranus~natal_neptune:sextile"
+  ],
+  "text": "During Uranus sextile your natal Neptune, the inventive and the imaginative sides of you get a long season of easy conversation. Neptune holds your dreams, your compassion, your feeling for what lies beyond the practical; Uranus brings fresh current and better questions. At the sextile's friendly angle, the meeting produces openings rather than upheavals, and the season, with its retrograde returns, can stretch across a year or more. The openings tend to be gentle and specific. A creative practice you shelved becomes interesting again through some new tool or angle. A spiritual or philosophical question reopens because you meet a teacher, a book, or a stranger at the right moment. Music, images, or ideas from outside your usual orbit reach you and actually land. Compassion finds practical outlets: a cause or a person to help in a way that suits your real skills rather than your guilt. Intuition also sharpens under this transit, in a usable, low-drama way. Hunches arrive with a little more signal than usual, especially about directions and people, and checking them against facts tends to confirm more than it debunks. It is a good period for any work that pairs vision with technique: art, design, research at the speculative end, anything that must be dreamed before it can be built. In the applying months the mood is curiosity: the far-fetched starts to look worth an evening. Near the exact pass, one or two concrete invitations usually surface, and their mark is that they cost little to accept. If Uranus retrogrades across the degree, the invitation circles back, so hesitation is not fatal here. The separating phase favors weaving what you found into ordinary life so it survives the season. Uranus sets the pace here, brisk even at a friendly angle, and a year of small openings can pass unnoticed; nothing bad follows, you just keep the imagination you had instead of the one on offer. A small yes is enough to collect it: the odd lecture attended, the old sketchbook reopened, the idea followed one step past reasonable. Inspiration taken in small honest amounts has a cumulative effect, and by the end of the season your inner life is quietly wider than it was."
+ },
+ {
+  "id": "transit:uranus:square:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "neptune",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:uranus~natal_neptune:square"
+  ],
+  "text": "Uranus square your natal Neptune is a long unsettling of the part of you that dreams and believes. Neptune holds your ideals, your faith in whatever you have faith in, your favorite escapes, and the soft focus that makes some of life bearable. The square sends jolts through that fog for a long stretch, a year and sometimes more, and jolts through fog make strange weather. The common experience is restlessness about meaning. Beliefs that quietly organized your life, about what matters, what you are owed, what you are waiting for, start to feel unstable, not because anyone argued you out of them but because the current under them changed. Disenchantment can arrive abruptly: a cause shows its seams, a guide proves ordinary, a fantasy you were saving for later stops working when you look straight at it. There can also be odd states: vivid dreams, jittery intuition, enthusiasms that flare for a week and vanish. In the applying phase this mostly registers as a vague electric unease that is hard to attribute. Around the exact pass it tends to pick a target, and the target is usually an illusion that was costing you something. The retrograde passes then do the real work: the second look at what got punctured, the sorting of babies from bathwater. The final pass usually leaves the question settled enough to live with. The square's two failure modes mirror each other. One is cynicism, deciding that since one dream was false, dreaming itself is for fools; that overcorrects and leaves you dry. The other is doubling down, chasing newer and stranger certainties to replace the punctured one at speed; the transit tends to puncture those too. The workable middle is honest revision: let the false thing go, grieve it if it needs grieving, and keep faith itself, aimed better. Grounding helps more than analysis while this is active. Ordinary structure, sleep, work you can touch, people who tell you the truth kindly: these keep the interesting weather from becoming disorientation. Choices that hinge on belief, large commitments to causes, teachers, or visions, benefit from cooling time, since what glows under this square can read differently a few months later. As the transit separates, the static fades and your ideals come back lighter and fewer. What this square leaves, when it has finished, is knowledge of which of your dreams can survive being seen clearly, and the discovery that those are enough."
+ },
+ {
+  "id": "transit:uranus:trine:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "neptune",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:uranus~natal_neptune:trine"
+  ],
+  "text": "Uranus trine your natal Neptune opens an easy channel between insight and imagination, and leaves it open for a year, sometimes longer. Neptune is your capacity for vision, sympathy, and faith; Uranus is the flash that shows you something new. At the trine, the flash illuminates the vision instead of startling it, and the result is one of the gentler gifts an outer planet offers: inspiration you can actually use. During this period the far side of your mind becomes unusually reachable. Creative ideas arrive with less forcing. Spiritual or philosophical interests that had gone flat regain dimension, often through an unexpected door: a science that turns out to be beautiful, a technology that serves an old longing, a tradition encountered in a form that finally makes sense to you. Your sympathies widen too. People unlike you become interesting rather than tiring, and helping, where you help, feels less like duty and more like circulation. Intuition runs clear under this transit. The hunches that surface, about people, timing, and direction, carry more signal than usual, and because the aspect is easy, they come without the static that makes this planetary pairing confusing in its harder forms. It is a fine season for any work that needs both wings and structure: composing, designing, writing, research at the imaginative edge, or quietly rethinking what your life is for, without the crisis that usually forces such questions. The applying months feel like a gradual lifting of haze. Near the exact pass, some encounter or idea often crystallizes the season's theme. The retrograde returns are friendly here: they bring the theme back for deepening, so what began as a mood can end as a practice. By the separating phase, the task is retention, building a container, a habit, a project, a commitment, that keeps the inflow after the tide goes out. The only cost of this transit is the one trines always risk: it asks nothing, so it can pass as pleasant background while you attend to louder things. Even modest attention, an hour protected for the inspired work, a yes to the unusual invitation, repays out of proportion. The quiet growth is learning to trust the subtler forms of intelligence in you, and to accept that vision does not always arrive through breakdown. Sometimes it simply arrives."
+ },
+ {
+  "id": "transit:uranus:opposition:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "neptune",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:uranus~natal_neptune:opposition"
+  ],
+  "text": "Uranus opposite your natal Neptune puts your dreams in confrontation with the times, and the confrontation lasts a year or more. Neptune in your chart is the reservoir of ideals, longings, and imaginative loyalties you have carried since youth; because Neptune moves so slowly, your whole age group carries kindred versions of it. Now Uranus, from the far side of the sky, faces that reservoir and asks whether its contents still hold in the world as it has become. Oppositions tend to work through externals, so the challenge usually wears a face or an event. A movement you believed in takes a turn you cannot follow. A newer generation dismisses, cheerfully, something you hold sacred. A cultural or technological shift makes one of your long-standing dreams look suddenly dated, or suddenly possible in a form you never pictured. You may also meet the opposition in a person: someone electric and disruptive who challenges your assumptions, or someone dreamy and evasive who shows you your own fog from the outside. In the applying phase the mood is often a low-grade disquiet about meaning, a sense that the ground under your ideals is shifting somewhere out of sight. The exact pass tends to make it specific and personal. The retrograde returns, up to three passes in all, give the argument its rounds: first the challenge, then the reconsideration, then a settlement. The settlement is the point. This transit does not come to take your ideals away; it comes to renegotiate their terms with reality. Some of what you believed was scaffolding borrowed from your era, and it can come down without loss. Some of it is genuinely yours, and facing the challenge shows you which, because what is yours survives contact and gets clearer. The failure modes are the usual pair for oppositions: total surrender, adopting whatever is newest because it is loudest, or total defense, sealing your inner world against a decade that has things to teach you. Between them lies the useful stance: curious, unhurried, willing to test cherished things without abandoning them at the first hard question. As the transit separates, the argument quiets, and you keep a faith that has been out in the weather: smaller in its claims, stronger in its fiber. Growth comes from letting the present interrogate your dreams, and from finding that the best of them answer well."
+ }
+]

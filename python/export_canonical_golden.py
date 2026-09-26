@@ -31,6 +31,12 @@ CHARTS = [
     # Edge of the validated band: exercises identical warnings both sides.
     {"id": "edge-1852", "jd": [1852, 2, 2, 2, 2, 2], "lat": 48.85,
      "lon": 2.35, "hs": "porphyry", "zodiac": "tropical"},
+    # A pre-telescopic chart where every default body is packed: sigma(deltaT)
+    # at 1620 is 17 s, over the display threshold, so this pins the epochSigma
+    # block field for field across both languages. (Earlier dates wait on the
+    # classical era pack — the small-body packs begin at 1600.)
+    {"id": "prague-1620", "jd": [1620, 3, 21, 12, 0, 0], "lat": 50.08,
+     "lon": 14.44, "hs": "whole_sign", "zodiac": "tropical"},
 ]
 
 
@@ -88,6 +94,14 @@ def main():
             if spec["id"] == "tampa-1990":
                 out["cases"].append({
                     "id": f"chart-structure-{grid}", "type": "chart",
+                    "spec": {**spec, "grid": grid},
+                    "result": cc,
+                })
+            if spec["id"] == "prague-1620":
+                # The epoch-sigma block, pinned field for field (the block is
+                # present here and absent at every modern case).
+                out["cases"].append({
+                    "id": f"chart-structure-prague-1620-{grid}", "type": "chart",
                     "spec": {**spec, "grid": grid},
                     "result": cc,
                 })

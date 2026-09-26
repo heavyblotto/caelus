@@ -1,10 +1,16 @@
 #!/usr/bin/env npx tsx
-/** Planet-in-sign delineations from Alan Leo, *Astrology for All* (1910) -- the
- *  Sun and Moon through the signs. Selector: `placement{ body, sign }`. */
+/**
+ * Planet-in-sign delineations from Alan Leo, *Astrology for All* (1910) -- the
+ * Sun and Moon through the signs. Selector: `placement{ body, sign }`.
+ * Restore-only: combo running heads end the cell; OCR substitutions go through
+ * restore, not a rewrite.
+ */
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 import { extractSigns } from "../lib/signs.js";
+import { isShippable } from "../../src/quality.js";
+import { isShippable } from "../../src/quality.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PKG_ROOT = path.resolve(__dirname, "../..");
@@ -15,7 +21,7 @@ if (!fs.existsSync(SRC)) { console.error(`missing ${SRC} — run npm run fetch`)
 const lines = fs.readFileSync(SRC, "utf8").split(/\r?\n/);
 const records = extractSigns(lines, {
   idPrefix: "alan-leo-signs", author: "Alan Leo", work: "Astrology for All",
-});
+}).filter((r) => isShippable(r.text));
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
 fs.writeFileSync(OUT, JSON.stringify(records, null, 2) + "\n");
 console.log(`wrote ${records.length} planet-in-sign passages → ${OUT}`);

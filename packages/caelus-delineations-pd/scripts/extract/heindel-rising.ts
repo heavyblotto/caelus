@@ -8,7 +8,8 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
-import { denoise, excerpt } from "../lib/denoise.js";
+import { denoise, excerpt, isSectionEnd } from "../lib/denoise.js";
+import { restore } from "../lib/restore.js";
 import { SIGN_CANON } from "../lib/astro.js";
 import type { PassageRecord } from "../../src/types.js";
 
@@ -18,11 +19,14 @@ const SRC = path.join(PKG_ROOT, "sources/text/heindel-message-of-the-stars.txt")
 const OUT = path.join(PKG_ROOT, "data/passages/heindel-rising.json");
 
 const signs = Object.keys(SIGN_CANON).join("|");
-const HEADER = new RegExp(`^\\s*(${signs}),\\s+the\\s+[A-Za-z]`, "i");
+const HEADER = new RegExp(`^\\s*(${signs}),\\s+the\\b`, "i");
 const DIVIDER = /^[A-Z][A-Z .,'-]{14,}$/;
 
 if (!fs.existsSync(SRC)) { console.error(`missing ${SRC} — run npm run fetch`); process.exit(1); }
-const lines = fs.readFileSync(SRC, "utf8").split(/\r?\n/);
+const all = fs.readFileSync(SRC, "utf8").split(/\r?\n/);
+const start = all.findIndex((l) => /INFLUENCE OF THE TWELVE SIGNS/i.test(l));
+if (start < 0) { console.error("rising-sign chapter not found"); process.exit(1); }
+const lines = all.slice(start);
 
 // First occurrence of each sign's "Sign, the Symbol" header, in file order.
 const heads: { idx: number; sign: string }[] = [];
@@ -41,12 +45,10 @@ const records: PassageRecord[] = [];
 heads.forEach((head, h) => {
   // End at the next sign header, else the next section divider, else a cap.
   let end = h + 1 < heads.length ? heads[h + 1].idx : lines.length;
-  if (h + 1 >= heads.length) {
-    for (let j = head.idx + 1; j < Math.min(lines.length, head.idx + 140); j++) {
-      if (DIVIDER.test(lines[j].trim())) { end = j; break; }
-    }
+  for (let j = head.idx + 1; j < end; j++) {
+    if (isSectionEnd(lines[j]) || DIVIDER.test(lines[j].trim())) { end = j; break; }
   }
-  const text = excerpt(denoise(lines.slice(head.idx + 1, end)));
+  const text = restore(excerpt(denoise(lines.slice(head.idx + 1, end).filter((l) => !/^[A-Z][A-Z ]{2,}$/.test(l.trim())))));
   if (text.length < 80) return;
   records.push({
     id: `heindel-rising:asc-in-${head.sign.toLowerCase()}`,

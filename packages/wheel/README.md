@@ -39,6 +39,34 @@ when absent. An MCP client can pipe a tool response straight in.
 Orientation is the Western convention: ASC at 9 o'clock, longitudes
 counterclockwise.
 
+## MultiWheel: stacked chart rings
+
+Any chart in any ring: synastry bi-wheels, natal + progressed + transit
+tri-wheels, up to four rings around one zodiac. Ring 0 (innermost) orients
+the wheel and provides the house cusps; inter-chart aspects draw as lines
+in the core.
+
+```tsx
+import { MultiWheel } from "caelus-wheel";
+
+<MultiWheel
+  rings={[
+    { chart: natal, label: "natal" },
+    { chart: transits, label: "transits", color: "#dd6ba1" },
+  ]}
+  contacts={[
+    { a: { ring: 0, body: "moon" }, b: { ring: 1, body: "saturn" },
+      aspect: "opposition", orb: 1.2 },
+  ]}
+  size={520}
+/>
+```
+
+Degree labels draw at one or two rings and drop at three or more, where
+the bands get thin; glyph size scales with the ring count. `showAspects`
+adds ring 0's own aspect lines under the contacts, and `showHouses={false}`
+removes the cusp spokes.
+
 ## Notes
 
 - `mean_node` is hidden by default (it sits ~1° from the true node and

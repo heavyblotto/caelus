@@ -1,0 +1,176 @@
+{
+ "name": "composite-mercury",
+ "outFile": "b3-composite-mercury.json",
+ "setId": "house-b3-composite-mercury",
+ "family": "composite-placement",
+ "cells": [
+  {
+   "id": "composite:mercury:sign:aries",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mercury",
+    "sign": "Aries"
+   },
+   "atomIds": [
+    "composite:mercury"
+   ],
+   "title": "Composite Mercury in Aries",
+   "bindable": true
+  },
+  {
+   "id": "composite:mercury:sign:taurus",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mercury",
+    "sign": "Taurus"
+   },
+   "atomIds": [
+    "composite:mercury"
+   ],
+   "title": "Composite Mercury in Taurus",
+   "bindable": true
+  },
+  {
+   "id": "composite:mercury:sign:gemini",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mercury",
+    "sign": "Gemini"
+   },
+   "atomIds": [
+    "composite:mercury"
+   ],
+   "title": "Composite Mercury in Gemini",
+   "bindable": true
+  },
+  {
+   "id": "composite:mercury:sign:cancer",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mercury",
+    "sign": "Cancer"
+   },
+   "atomIds": [
+    "composite:mercury"
+   ],
+   "title": "Composite Mercury in Cancer",
+   "bindable": true
+  },
+  {
+   "id": "composite:mercury:sign:leo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mercury",
+    "sign": "Leo"
+   },
+   "atomIds": [
+    "composite:mercury"
+   ],
+   "title": "Composite Mercury in Leo",
+   "bindable": true
+  },
+  {
+   "id": "composite:mercury:sign:virgo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mercury",
+    "sign": "Virgo"
+   },
+   "atomIds": [
+    "composite:mercury"
+   ],
+   "title": "Composite Mercury in Virgo",
+   "bindable": true
+  },
+  {
+   "id": "composite:mercury:sign:libra",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mercury",
+    "sign": "Libra"
+   },
+   "atomIds": [
+    "composite:mercury"
+   ],
+   "title": "Composite Mercury in Libra",
+   "bindable": true
+  },
+  {
+   "id": "composite:mercury:sign:scorpio",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mercury",
+    "sign": "Scorpio"
+   },
+   "atomIds": [
+    "composite:mercury"
+   ],
+   "title": "Composite Mercury in Scorpio",
+   "bindable": true
+  },
+  {
+   "id": "composite:mercury:sign:sagittarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mercury",
+    "sign": "Sagittarius"
+   },
+   "atomIds": [
+    "composite:mercury"
+   ],
+   "title": "Composite Mercury in Sagittarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:mercury:sign:capricorn",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mercury",
+    "sign": "Capricorn"
+   },
+   "atomIds": [
+    "composite:mercury"
+   ],
+   "title": "Composite Mercury in Capricorn",
+   "bindable": true
+  },
+  {
+   "id": "composite:mercury:sign:aquarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mercury",
+    "sign": "Aquarius"
+   },
+   "atomIds": [
+    "composite:mercury"
+   ],
+   "title": "Composite Mercury in Aquarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:mercury:sign:pisces",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mercury",
+    "sign": "Pisces"
+   },
+   "atomIds": [
+    "composite:mercury"
+   ],
+   "title": "Composite Mercury in Pisces",
+   "bindable": true
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+# Narrative slop that the generic AI-tell rules miss. Every pattern here was
+# observed in this repo's own docs and called out in review: software
+# performing cognition ("the projection learns", "docs stop drifting"),
+# score-settling about who noticed what ("nobody noticed, because nothing
+# looked"), the reveal construction ("what actually bounds X is Y"), the
+# vice-antithesis flex ("omitted, not estimated"), and banner slogans.
+# State what changed, with numbers, and stop. See docs/editorial-voice.md
+# ("Don't posture") and docs/ai-slop-style-sheet.md.
+#
+# NOTE: Vale concatenates `raw` entries into one expression, so these live
+# under `tokens`, which are alternated.
+extends: existence
+message: "Narrative slop: '%s'. State what changed and stop (docs/editorial-voice.md 'Don't posture'; docs/ai-slop-style-sheet.md)."
+level: error
+nonword: true
+tokens:
+  # Score-settling: claims about who noticed or checked what.
+  - '\b[Nn]obody\s+(?:had\s+)?(?:noticed|checked|looked|verified|measured|tested)\b'
+  - '\b[Nn]o[\s-]one\s+(?:had\s+)?(?:noticed|checked|looked|verified|measured|tested)\b'
+  - '\bnothing\s+(?:looked|checked|noticed|watched|verified)\b'
+  # The reveal construction: "what actually bounds an ancient chart is ...".
+  - '\b[Ww]hat\s+(?:actually|really)\b[^.!?]{0,50}\b(?:is|was|are|were)\b'
+  # Retrospective self-congratulation.
+  - '\b[Ll]ook\s+what\s+(?:i|we)\b'
+  - '\b[Ii]t\s+took\b[^.!?]{0,50}\bto\s+(?:notice|realize|realise|see)\b'
+  # Anthropomorphism: software and documents do not learn, notice, or decide.
+  - '\b(?:projection|engine|suite|corpus|package|changelog|docs|documentation|site|tier|pipeline|harness|guard|lint)\s+(?:learns?|learned|remembers?|forgot|forgets?|notices?|noticed|believes?|thinks?|thought|wants?|wanted|decides?|decided|knows?|knew|hopes?|dreams?)\b'
+  - '\b(?:stop|stops|stopped)\s+drifting\b'
+  - '\bdrift(?:ing|s|ed)?\s+from\s+the\s+(?:engine|source|code)\b'
+  # The vice-antithesis flex: ", not X" where X is a fault nobody proposed
+  # (same list as web.AntithesisFlex, applied to Markdown).
+  - ',\s+not\s+(?:asserted|assumed|guessed|claimed|memory|marketing|vibes|estimated|promised)\b'
+  # Banner slogans observed in the wild.
+  - '\bit\s+computes;\s*you\s+interpret\b'

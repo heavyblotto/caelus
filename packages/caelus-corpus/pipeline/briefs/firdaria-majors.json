@@ -1,0 +1,143 @@
+{
+ "name": "firdaria-majors",
+ "outFile": "b4-firdaria-majors.json",
+ "setId": "house-b4-firdaria-majors",
+ "family": "timelord-firdaria",
+ "cells": [
+  {
+   "id": "timelord:firdaria:major:sun",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "major",
+    "lord": "sun"
+   },
+   "atomIds": [
+    "firdaria:major:"
+   ],
+   "title": "The Sun firdaria (major period)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:firdaria:major:venus",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "major",
+    "lord": "venus"
+   },
+   "atomIds": [
+    "firdaria:major:"
+   ],
+   "title": "The Venus firdaria (major period)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:firdaria:major:mercury",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "major",
+    "lord": "mercury"
+   },
+   "atomIds": [
+    "firdaria:major:"
+   ],
+   "title": "The Mercury firdaria (major period)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:firdaria:major:moon",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "major",
+    "lord": "moon"
+   },
+   "atomIds": [
+    "firdaria:major:"
+   ],
+   "title": "The Moon firdaria (major period)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:firdaria:major:saturn",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "major",
+    "lord": "saturn"
+   },
+   "atomIds": [
+    "firdaria:major:"
+   ],
+   "title": "The Saturn firdaria (major period)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:firdaria:major:jupiter",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "major",
+    "lord": "jupiter"
+   },
+   "atomIds": [
+    "firdaria:major:"
+   ],
+   "title": "The Jupiter firdaria (major period)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:firdaria:major:mars",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "major",
+    "lord": "mars"
+   },
+   "atomIds": [
+    "firdaria:major:"
+   ],
+   "title": "The Mars firdaria (major period)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:firdaria:major:north_node",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "major",
+    "lord": "north_node"
+   },
+   "atomIds": [
+    "firdaria:major:"
+   ],
+   "title": "The North Node firdaria (major period)",
+   "bindable": true
+  },
+  {
+   "id": "timelord:firdaria:major:south_node",
+   "family": "timelord-firdaria",
+   "when": {
+    "kind": "timelord",
+    "system": "firdaria",
+    "level": "major",
+    "lord": "south_node"
+   },
+   "atomIds": [
+    "firdaria:major:"
+   ],
+   "title": "The South Node firdaria (major period)",
+   "bindable": true
+  }
+ ]
+}

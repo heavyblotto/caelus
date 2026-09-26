@@ -16,14 +16,16 @@ const ITEMS: QA[] = [
     q: "Is Caelus free to use in commercial projects?",
     a: (
       <>
-        Yes. All four packages are{" "}
+        Yes. The published packages (`caelus`, `caelus-mcp`, `caelus-birth`,
+        `caelus-wheel`, and `caelus-delineations-pd`) are{" "}
         <A href={`${SITE.repo}/blob/main/LICENSE`}>MIT licensed</A>, with no Swiss
-        Ephemeris dependency and no AGPL obligations, so you can ship it in
-        closed-source and commercial apps.
+        Ephemeris dependency and no AGPL obligations, so you can ship them in
+        closed-source and commercial apps. The four lockstep packages version
+        together; `caelus-delineations-pd` ships on its own semver.
       </>
     ),
     text:
-      "Yes. All four packages are MIT licensed, with no Swiss Ephemeris dependency and no AGPL obligations, so you can ship it in closed-source and commercial apps.",
+      "Yes. The published packages (caelus, caelus-mcp, caelus-birth, caelus-wheel, and caelus-delineations-pd) are MIT licensed, with no Swiss Ephemeris dependency and no AGPL obligations, so you can ship them in closed-source and commercial apps. The four lockstep packages version together; caelus-delineations-pd ships on its own semver.",
   },
   {
     q: "How accurate is it?",

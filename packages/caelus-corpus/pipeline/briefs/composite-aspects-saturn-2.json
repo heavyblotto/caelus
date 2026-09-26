@@ -1,0 +1,158 @@
+{
+ "name": "composite-aspects-saturn-2",
+ "outFile": "b3-composite-aspects-saturn-2.json",
+ "setId": "house-b3-composite-aspects-saturn-2",
+ "family": "composite-aspect",
+ "cells": [
+  {
+   "id": "composite:aspect:saturn:conjunction:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "saturn",
+    "b": "chiron",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:saturn~chiron:conjunction"
+   ],
+   "title": "Composite Saturn conjunct composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:saturn:sextile:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "saturn",
+    "b": "chiron",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:saturn~chiron:sextile"
+   ],
+   "title": "Composite Saturn sextile composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:saturn:square:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "saturn",
+    "b": "chiron",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:saturn~chiron:square"
+   ],
+   "title": "Composite Saturn square composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:saturn:trine:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "saturn",
+    "b": "chiron",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:saturn~chiron:trine"
+   ],
+   "title": "Composite Saturn trine composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:saturn:opposition:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "saturn",
+    "b": "chiron",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:saturn~chiron:opposition"
+   ],
+   "title": "Composite Saturn opposite composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:saturn:conjunction:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "saturn",
+    "b": "true_node",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:saturn~true_node:conjunction"
+   ],
+   "title": "Composite Saturn conjunct composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:saturn:sextile:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "saturn",
+    "b": "true_node",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:saturn~true_node:sextile"
+   ],
+   "title": "Composite Saturn sextile composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:saturn:square:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "saturn",
+    "b": "true_node",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:saturn~true_node:square"
+   ],
+   "title": "Composite Saturn square composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:saturn:trine:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "saturn",
+    "b": "true_node",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:saturn~true_node:trine"
+   ],
+   "title": "Composite Saturn trine composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:saturn:opposition:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "saturn",
+    "b": "true_node",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:saturn~true_node:opposition"
+   ],
+   "title": "Composite Saturn opposite composite North Node",
+   "bindable": true
+  }
+ ]
+}

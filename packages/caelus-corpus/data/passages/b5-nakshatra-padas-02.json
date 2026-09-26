@@ -1,0 +1,114 @@
+[
+  {
+    "id": "vedic:moon:nakshatra:mrigashira:pada:1",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Mrigashira", "pada": 1 },
+    "atomIds": ["nakshatra:moon:Mrigashira"],
+    "text": "You rarely keep a discovery to yourself for a full day. The first quarter of Mrigashira makes the mansion's search a public act: you track down the album, the trailhead, the little restaurant, and then you bring people to it. A find without witnesses feels only half found to you. Leo is the sign this quarter draws from the navamsa, the ninth-part chart the tradition sets beneath every mansion. The deer here has a mane. You present what you love with warmth and a bit of ceremony. Your enthusiasm gives other people permission to care openly about things, and whole rooms organize around your recommendations. The same fire can turn a taste into a badge, though, so that someone shrugging at your favorite film lands like a small insult, and you may quietly drop a genuine interest the season it stops drawing an audience. The search was never for them. Keeping one pursuit entirely offstage, a book nobody knows you are reading, a skill practiced unannounced, restores the private half of the pleasure, and the public half warms up on its own."
+  },
+  {
+    "id": "vedic:moon:nakshatra:mrigashira:pada:2",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Mrigashira", "pada": 2 },
+    "atomIds": ["nakshatra:moon:Mrigashira"],
+    "text": "Mrigashira's second quarter belongs to Virgo in the navamsa, the chart within the chart that assigns each quarter its sign. Here the mansion's seeking becomes sifting. Soma, the nectar that presides over this mansion, was in the old rite something pressed, strained, and clarified, and yours is the quarter that does the straining. You compare editions, read the reviews under the reviews, and can say exactly why one version of an ordinary thing is right while six others are not. Research fits you, and so do editing, curating, and quality work of any kind; friends borrow your judgment before they spend money. The fine mesh catches the joy along with the flaws, though. When every meal gets graded, appetite thins, and company can start performing for your standards instead of relaxing at your table. Your best evenings are the ungraded ones, where something second-rate gets savored on purpose and nobody at the table is being marked."
+  },
+  {
+    "id": "vedic:moon:nakshatra:mrigashira:pada:3",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Mrigashira", "pada": 3 },
+    "atomIds": ["nakshatra:moon:Mrigashira"],
+    "text": "Half of your best discoveries carry someone else's fingerprints. In Mrigashira's third quarter the search wants company: the trail is better with two on it, and what you find often matters less to you than who you found it with. This quarter's navamsa sign is Libra, the sign of the pair. You seek in twos. You trade recommendations the way others trade favors, you fall hardest for people who show you worlds you had not noticed, and your taste genuinely improves through conversation, sharpened against another mind. Work built on paired judgment suits you: design with a client, scouting with a partner, any craft where two sets of eyes beat one. Put a deer's caution and a set of scales in one head, though, and choosing slows; you can compare two good options until both wilt, and you sometimes hold your own verdict back until the room has spoken. Now and then, buy the ticket before you consult anyone. A choice made alone and enjoyed alone, even a small one, reminds you that your taste was never on loan, and that it is the very thing your companions come to you for."
+  },
+  {
+    "id": "vedic:moon:nakshatra:mrigashira:pada:4",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Mrigashira", "pada": 4 },
+    "atomIds": ["nakshatra:moon:Mrigashira"],
+    "text": "Scorpio ends Mrigashira's run through the navamsa, and the deer of this last quarter has learned to track at night. What draws you is not the visible trail but the gap in it: the unsaid thing at dinner, the number missing from the story, the door in a person that everyone else politely walks past. Where the rest of this mansion browses, you investigate. You read people in layers, keep what you learn, and rarely show how much you have gathered, which makes you a natural researcher, analyst, or the friend consulted when something does not add up. Depth repays you; a subject or a person, once truly opened, can hold your attention for years, and in the deep places your loyalty is absolute. The startled-deer nerve that runs through the whole mansion turns inward here and becomes vigilance. Silence can read to you as concealment, a changed tone as a warning, and you may test people quietly, laying small traps for a betrayal that was never coming, all while keeping your own trail brushed clean. That asymmetry, more than your intensity, is what wears on the people who love you. Let one person watch you search: the half-formed hunch, the fear underneath the digging, the file before it is airtight. The hunches sharpen once they are spoken, and the person trusted with them tends to stay."
+  },
+  {
+    "id": "vedic:moon:nakshatra:ardra:pada:1",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Ardra", "pada": 1 },
+    "atomIds": ["nakshatra:moon:Ardra"],
+    "text": "After every storm, you come back with a theory. Ardra's first quarter cannot leave wreckage uninterpreted: something in you insists the upheaval meant something, and more often than not you find the meaning. In the navamsa this quarter falls to Sagittarius, the archer's sign, a fitting seat for Rudra, the mansion's storm god, who in the oldest hymns carries a bow. Your arrows are conclusions. Fired out of chaos, they land surprisingly true, and the lesson you pull from a bad year often becomes the thing you are later sought out to teach. Trouble makes you philosophical rather than bitter, which is rare, and your working faith that weather means something has kept whole rooms from despair. The same reflex can start explaining a grief before it has been fully felt, yours or anyone's, and a person mid-catastrophe does not always want the moral of their story delivered while it is still raining. Sit in the downpour with them first; the meaning keeps. Interpretations ripen when they wait, and the ones you deliver a month late, once the ground has dried, are the ones people quote back to you for years."
+  },
+  {
+    "id": "vedic:moon:nakshatra:ardra:pada:2",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Ardra", "pada": 2 },
+    "atomIds": ["nakshatra:moon:Ardra"],
+    "text": "Ardra's second quarter answers to Capricorn in the navamsa, and it meets the mansion's weather with architecture. You are the one with the generator, the backup file, the drill rehearsed before anyone smelled smoke. Storms taught you early, and what you built from them was procedure: in a crisis you turn quiet, competent, almost restful, and people twice your age hand you the keys. The bracing can outlive the storm it was built for. You sometimes greet good news with a stress test, and an unplanned afternoon can feel riskier to you than an actual emergency, which is worth noticing on the days when nothing at all is wrong. What you raise between storms, slowly and to code, is usually the structure a whole family or workplace ends up sheltering in."
+  },
+  {
+    "id": "vedic:moon:nakshatra:ardra:pada:3",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Ardra", "pada": 3 },
+    "atomIds": ["nakshatra:moon:Ardra"],
+    "text": "You study breakdowns the way other people study successes. In Ardra's third quarter the storm-sense pulls up to survey height: not this squall but the pattern of squalls, the fault in the grid, the reason the same argument keeps erupting in different households. Aquarius, this quarter's sign in the navamsa, is a cool place to watch weather from. You can write the honest post-mortem, name the system failure without hunting for a villain, and design the fix that spares people you may never meet. Rudra, the god who presides over this mansion, was worshipped from outside the village walls, and something of that position is yours: the clear view costs a little belonging, and colleagues who rely on your analysis can still forget to ask you to dinner. The altitude is also a habit, and at home it shows as narrating a conflict from the ceiling while the person in front of you just wanted you in the room. Come down for the small weather. The rare gift remains: when everything fails at once, you are the one who can already see how it goes back together."
+  },
+  {
+    "id": "vedic:moon:nakshatra:ardra:pada:4",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Ardra", "pada": 4 },
+    "atomIds": ["nakshatra:moon:Ardra"],
+    "text": "Ardra ends not in thunder but in the long soft rain after it. In this fourth quarter the mansion's storms lose their edges and gain reach: you feel weather that is not yours, picking a coworker's dread or a stranger's grief out of the air like a change in pressure. The quarter's ninth-division sign is Pisces, water without a container. Among Ardra's four faces, yours is the one that consoles. You do not analyze the flood or engineer against it; you sit in it with people, and your presence during someone's worst week has a quality survivors mention years later. Music, images, and dreams carry your turbulence where words cannot, and some of this mansion's finest artists are born on this shore. The openness runs both directions. Saturated, you can lose track of which sadness in you belongs to whom, and the pull toward fog, a screen, a long sleep, an unplanned vanishing, gets strongest exactly when you have absorbed the most. Plain instruments help more than noble ones: a walk that wrings you out, a friend assigned to ask whose feeling this is, a day with the intake closed. The teardrop this mansion wears as its emblem is, in your quarter, finally allowed to fall, and the crying you permit yourself spares you most of the flooding you feared."
+  },
+  {
+    "id": "vedic:moon:nakshatra:punarvasu:pada:1",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Punarvasu", "pada": 1 },
+    "atomIds": ["nakshatra:moon:Punarvasu"],
+    "text": "Aries opens Punarvasu in the navamsa, and it makes your comebacks fast. Barely down, you are already up: the failed venture has a successor by Friday, the ended relationship becomes a new city, and the mansion's returning light moves through you at a sprint. There is real courage in this. People who watched you take the hit are startled by the speed of the restart, and your refusal to stay flattened gives stalled friends a push no advice could manage. The quiver this mansion carries refills fastest in your quarter, sometimes too fast: an arrow re-nocked before the last flight is understood tends to repeat its arc, and a quick comeback can be a way of outrunning whatever the setback had to say. The comebacks that come out different are usually the ones that waited a week, honestly down, notes taken, changes named."
+  },
+  {
+    "id": "vedic:moon:nakshatra:punarvasu:pada:2",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Punarvasu", "pada": 2 },
+    "atomIds": ["nakshatra:moon:Punarvasu"],
+    "text": "Your comebacks arrive carrying luggage. Every return from a setback brings salvage with it: a skill saved from the failed job, furniture from the old life that turns out to fit the new one, a friendship carried intact across three cities. Taurus is the ninth-harmonic sign beneath this second quarter of Punarvasu. The mansion's returns land on ground here rather than in air. Your recoveries run slower than this mansion's reputation suggests, and they hold: you rebuild the way orchards regrow, a season at a time, and what stands after your third restart is usually better stocked and warmer than what stood after the first. Money and comfort tend to consolidate across your life rather than reset with each chapter. All that salvage has weight, though. A person who keeps everything eventually lives in an archive, and you can stay years in an outgrown situation because leaving would mean dismantling what you so carefully rebuilt. A lease outlived by two winters, a role kept past its point: those are the places to spend some of the courage your comebacks have already proven you have."
+  },
+  {
+    "id": "vedic:moon:nakshatra:punarvasu:pada:3",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Punarvasu", "pada": 3 },
+    "atomIds": ["nakshatra:moon:Punarvasu"],
+    "text": "The third quarter of Punarvasu runs on Gemini in the navamsa, and here the mansion's returns happen mid-sentence. You resume a friendship after six silent years as if it had been paused at a comma, and you circle back to the abandoned manuscript, the dropped language, the half-learned instrument, picking each one up warm. Aditi, the mansion's patron, mothered a whole crowd of gods, and your inner life keeps her plural style: many children, many threads, none ever quite disowned. Versatility is the visible gift. The subtler one is that people feel un-abandonable around you, because your door has demonstrably reopened before. The threads do tangle. Six revivals running at once means none of them finishes, and a talent for picking things back up can quietly excuse the habit of putting them down. One resumed thread carried all the way to its end does more for you than three fresh revivals, and every finish makes the next one easier to believe in."
+  },
+  {
+    "id": "vedic:moon:nakshatra:punarvasu:pada:4",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Punarvasu", "pada": 4 },
+    "atomIds": ["nakshatra:moon:Punarvasu"],
+    "text": "People come back to you. Friends resurface after years away, wanderers of every kind circle home to your kitchen, lapsed correspondents write to your address first. Punarvasu's fourth quarter sits in Cancer in the sidereal sky and in Cancer again in the navamsa, a doubling the tradition calls vargottama, the same sign held in both the birth chart and its ninth division. Read that as consistency rather than force: one register runs unbroken from your depths to your doorstep, so what you feel is what you say, and how your home looks is usually how your heart is doing. Nobody meets two versions of you. In a mansion of leavings and returnings, that steadiness is rare currency, and it is why the returns aim themselves at you. Cancer is the Moon's own sign, and the tending runs deep: soup in the freezer, a bed made up for arrivals nobody scheduled, the shape of each person's absence remembered as clearly as their visits. Memory works as the household's second pantry here, stocked with birthdays, recipes, and the exact way each guest likes to be welcomed back. There is a tide in all this water, even so. Your moods swell and drain with the fullness of the house, an empty week can feel like a verdict on you, and waiting for returns can quietly replace going anywhere yourself. You are allowed to be the traveler sometimes. The household holds without you better than you fear, and being missed for a while teaches you, from the far side of it, what your steadiness has been worth to everyone else."
+  },
+  {
+    "id": "vedic:moon:nakshatra:pushya:pada:1",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Pushya", "pada": 1 },
+    "atomIds": ["nakshatra:moon:Pushya"],
+    "text": "Somebody ends up at the head of the table, and in Pushya's first quarter it is usually you. The mansion's nourishing instinct arrives here with presence: you provide in the open, host rather than cater, and your care carries a certain ceremony that leaves people feeling not just fed but honored. Leo is this quarter's share of the navamsa, and it suits Brihaspati, the mansion's deity, who fed the gods counsel while standing beside the throne. Advice is one of your food groups. You mentor by instinct, back people in public, lend your name as readily as your means, and institutions tend to move you toward the posts where generosity needs authority behind it. The ceremony can stiffen. Help that must be visibly yours gets harder for proud people to accept, and a protege's independence can land on you like ingratitude when it is actually your success. On the evenings you hand someone else the carving knife, watch the room: it stays your table anyway, and the meal tastes better for the looser grip."
+  },
+  {
+    "id": "vedic:moon:nakshatra:pushya:pada:2",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Pushya", "pada": 2 },
+    "atomIds": ["nakshatra:moon:Pushya"],
+    "text": "Pushya's second quarter is a Virgo one in the navamsa, and the mansion's care turns exact there. You nourish on schedule: refills tracked, lunches packed right, the aging parent's pillbox sorted a month ahead. Nothing about your tending is vague, which is why nurses, bookkeepers, dietitians, and quiet fixers of every kind cluster in this quarter, and why households run on you without quite noticing they do. Precision has a drift in it, though: feeding people can slide toward correcting them, until an improved recipe starts to sound like a judgment on the cook, and your worry hums at a frequency the whole house learns to hear. Some meals can simply be served, without commentary. The daily steadiness is the rarer gift, and the people you keep going in small ways know it better than they say."
+  },
+  {
+    "id": "vedic:moon:nakshatra:pushya:pada:3",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Pushya", "pada": 3 },
+    "atomIds": ["nakshatra:moon:Pushya"],
+    "text": "At your table, the portions come out even. Pushya's third quarter cares about fairness the way the rest of the mansion cares about fullness. Everyone gets fed, yes, but everyone also gets considered: the quiet cousin drawn out, the credit split, seconds offered around before anyone takes thirds. This is the quarter's Libra inheritance in the navamsa: the mansion's nourisher turned diplomat. You nourish best in partnership: co-hosting, co-parenting, running a team beside a counterpart whose strengths you frame rather than crowd. You can also feed both sides of a quarrel without joining either, which is why difficult holidays get routed through your house. The evenhandedness can quietly overdraw you. Keeping every relationship balanced may mean deferring your own appetite indefinitely, agreeing at dinner and aching at midnight. A peace kept too beautifully is sometimes a conflict postponed with good lighting. An uneven word, honestly placed, is also a form of care; the friend who needs the hard thing is not served by one more smooth evening. Let the scales tip openly once in a while, toward your own need or toward a necessary argument, and notice that the table survives it. What you are building over the years is not the perfect dinner anyway. It is a circle of people who trust that at your table, sooner or later, everyone genuinely gets their share."
+  },
+  {
+    "id": "vedic:moon:nakshatra:pushya:pada:4",
+    "family": "nakshatra-pada",
+    "when": { "kind": "nakshatra", "body": "moon", "name": "Pushya", "pada": 4 },
+    "atomIds": ["nakshatra:moon:Pushya"],
+    "text": "The last quarter of Pushya carries Scorpio in the navamsa, and the mansion's milk runs into deep water there. Your nourishment is for the hard cases: the relapse, the shameful secret, the grief long past its socially acceptable date. Where most caretakers need signs of improvement to keep going, you can tend a situation that may never get better and not flinch, which is why the worst weeks of other people's lives so often have you standing in them. Brihaspati, the priest of this mansion, was master of the potent word, and you hold confidences with that same ritual seriousness; what is told to you stays told to you. You protect the way others feed, instinctively and in quantity, and guarding can tighten into possession: secrets kept so well that you end up keeping the people too, holding them close after they are ready to walk. Loosening the grip at the right hour is part of the feeding. The ones you set down tend to walk back in on their own feet, grown."
+  }
+]

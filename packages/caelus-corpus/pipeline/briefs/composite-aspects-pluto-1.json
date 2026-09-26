@@ -1,0 +1,158 @@
+{
+ "name": "composite-aspects-pluto-1",
+ "outFile": "b3-composite-aspects-pluto-1.json",
+ "setId": "house-b3-composite-aspects-pluto-1",
+ "family": "composite-aspect",
+ "cells": [
+  {
+   "id": "composite:aspect:pluto:conjunction:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "pluto",
+    "b": "chiron",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:pluto~chiron:conjunction"
+   ],
+   "title": "Composite Pluto conjunct composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:pluto:sextile:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "pluto",
+    "b": "chiron",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:pluto~chiron:sextile"
+   ],
+   "title": "Composite Pluto sextile composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:pluto:square:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "pluto",
+    "b": "chiron",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:pluto~chiron:square"
+   ],
+   "title": "Composite Pluto square composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:pluto:trine:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "pluto",
+    "b": "chiron",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:pluto~chiron:trine"
+   ],
+   "title": "Composite Pluto trine composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:pluto:opposition:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "pluto",
+    "b": "chiron",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:pluto~chiron:opposition"
+   ],
+   "title": "Composite Pluto opposite composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:pluto:conjunction:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "pluto",
+    "b": "true_node",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:pluto~true_node:conjunction"
+   ],
+   "title": "Composite Pluto conjunct composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:pluto:sextile:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "pluto",
+    "b": "true_node",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:pluto~true_node:sextile"
+   ],
+   "title": "Composite Pluto sextile composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:pluto:square:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "pluto",
+    "b": "true_node",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:pluto~true_node:square"
+   ],
+   "title": "Composite Pluto square composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:pluto:trine:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "pluto",
+    "b": "true_node",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:pluto~true_node:trine"
+   ],
+   "title": "Composite Pluto trine composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:pluto:opposition:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "pluto",
+    "b": "true_node",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:pluto~true_node:opposition"
+   ],
+   "title": "Composite Pluto opposite composite North Node",
+   "bindable": true
+  }
+ ]
+}

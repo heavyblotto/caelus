@@ -1,0 +1,176 @@
+{
+  "name": "composite-houses-neptune",
+  "outFile": "b3-composite-houses-neptune.json",
+  "setId": "house-b3-composite-houses-neptune",
+  "family": "composite-house",
+  "cells": [
+    {
+      "id": "composite:neptune:house:1",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "neptune",
+        "house": 1
+      },
+      "atomIds": [
+        "composite:neptune"
+      ],
+      "title": "Composite Neptune in the 1st house",
+      "bindable": true
+    },
+    {
+      "id": "composite:neptune:house:2",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "neptune",
+        "house": 2
+      },
+      "atomIds": [
+        "composite:neptune"
+      ],
+      "title": "Composite Neptune in the 2nd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:neptune:house:3",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "neptune",
+        "house": 3
+      },
+      "atomIds": [
+        "composite:neptune"
+      ],
+      "title": "Composite Neptune in the 3rd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:neptune:house:4",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "neptune",
+        "house": 4
+      },
+      "atomIds": [
+        "composite:neptune"
+      ],
+      "title": "Composite Neptune in the 4th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:neptune:house:5",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "neptune",
+        "house": 5
+      },
+      "atomIds": [
+        "composite:neptune"
+      ],
+      "title": "Composite Neptune in the 5th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:neptune:house:6",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "neptune",
+        "house": 6
+      },
+      "atomIds": [
+        "composite:neptune"
+      ],
+      "title": "Composite Neptune in the 6th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:neptune:house:7",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "neptune",
+        "house": 7
+      },
+      "atomIds": [
+        "composite:neptune"
+      ],
+      "title": "Composite Neptune in the 7th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:neptune:house:8",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "neptune",
+        "house": 8
+      },
+      "atomIds": [
+        "composite:neptune"
+      ],
+      "title": "Composite Neptune in the 8th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:neptune:house:9",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "neptune",
+        "house": 9
+      },
+      "atomIds": [
+        "composite:neptune"
+      ],
+      "title": "Composite Neptune in the 9th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:neptune:house:10",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "neptune",
+        "house": 10
+      },
+      "atomIds": [
+        "composite:neptune"
+      ],
+      "title": "Composite Neptune in the 10th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:neptune:house:11",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "neptune",
+        "house": 11
+      },
+      "atomIds": [
+        "composite:neptune"
+      ],
+      "title": "Composite Neptune in the 11th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:neptune:house:12",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "neptune",
+        "house": 12
+      },
+      "atomIds": [
+        "composite:neptune"
+      ],
+      "title": "Composite Neptune in the 12th house",
+      "bindable": true
+    }
+  ]
+}

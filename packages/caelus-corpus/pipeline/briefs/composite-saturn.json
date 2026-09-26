@@ -1,0 +1,176 @@
+{
+ "name": "composite-saturn",
+ "outFile": "b3-composite-saturn.json",
+ "setId": "house-b3-composite-saturn",
+ "family": "composite-placement",
+ "cells": [
+  {
+   "id": "composite:saturn:sign:aries",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "saturn",
+    "sign": "Aries"
+   },
+   "atomIds": [
+    "composite:saturn"
+   ],
+   "title": "Composite Saturn in Aries",
+   "bindable": true
+  },
+  {
+   "id": "composite:saturn:sign:taurus",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "saturn",
+    "sign": "Taurus"
+   },
+   "atomIds": [
+    "composite:saturn"
+   ],
+   "title": "Composite Saturn in Taurus",
+   "bindable": true
+  },
+  {
+   "id": "composite:saturn:sign:gemini",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "saturn",
+    "sign": "Gemini"
+   },
+   "atomIds": [
+    "composite:saturn"
+   ],
+   "title": "Composite Saturn in Gemini",
+   "bindable": true
+  },
+  {
+   "id": "composite:saturn:sign:cancer",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "saturn",
+    "sign": "Cancer"
+   },
+   "atomIds": [
+    "composite:saturn"
+   ],
+   "title": "Composite Saturn in Cancer",
+   "bindable": true
+  },
+  {
+   "id": "composite:saturn:sign:leo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "saturn",
+    "sign": "Leo"
+   },
+   "atomIds": [
+    "composite:saturn"
+   ],
+   "title": "Composite Saturn in Leo",
+   "bindable": true
+  },
+  {
+   "id": "composite:saturn:sign:virgo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "saturn",
+    "sign": "Virgo"
+   },
+   "atomIds": [
+    "composite:saturn"
+   ],
+   "title": "Composite Saturn in Virgo",
+   "bindable": true
+  },
+  {
+   "id": "composite:saturn:sign:libra",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "saturn",
+    "sign": "Libra"
+   },
+   "atomIds": [
+    "composite:saturn"
+   ],
+   "title": "Composite Saturn in Libra",
+   "bindable": true
+  },
+  {
+   "id": "composite:saturn:sign:scorpio",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "saturn",
+    "sign": "Scorpio"
+   },
+   "atomIds": [
+    "composite:saturn"
+   ],
+   "title": "Composite Saturn in Scorpio",
+   "bindable": true
+  },
+  {
+   "id": "composite:saturn:sign:sagittarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "saturn",
+    "sign": "Sagittarius"
+   },
+   "atomIds": [
+    "composite:saturn"
+   ],
+   "title": "Composite Saturn in Sagittarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:saturn:sign:capricorn",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "saturn",
+    "sign": "Capricorn"
+   },
+   "atomIds": [
+    "composite:saturn"
+   ],
+   "title": "Composite Saturn in Capricorn",
+   "bindable": true
+  },
+  {
+   "id": "composite:saturn:sign:aquarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "saturn",
+    "sign": "Aquarius"
+   },
+   "atomIds": [
+    "composite:saturn"
+   ],
+   "title": "Composite Saturn in Aquarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:saturn:sign:pisces",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "saturn",
+    "sign": "Pisces"
+   },
+   "atomIds": [
+    "composite:saturn"
+   ],
+   "title": "Composite Saturn in Pisces",
+   "bindable": true
+  }
+ ]
+}

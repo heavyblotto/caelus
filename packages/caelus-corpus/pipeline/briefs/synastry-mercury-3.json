@@ -1,0 +1,248 @@
+{
+ "name": "synastry-mercury-3",
+ "outFile": "b3-synastry-mercury-3.json",
+ "setId": "house-b3-synastry-mercury-3",
+ "family": "synastry-aspect",
+ "cells": [
+  {
+   "id": "synastry:mercury:conjunction:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mercury",
+    "b": "saturn",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:mercury~b_saturn:conjunction"
+   ],
+   "title": "Your Mercury conjunct their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mercury:sextile:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mercury",
+    "b": "saturn",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:mercury~b_saturn:sextile"
+   ],
+   "title": "Your Mercury sextile their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mercury:square:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mercury",
+    "b": "saturn",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:mercury~b_saturn:square"
+   ],
+   "title": "Your Mercury square their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mercury:trine:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mercury",
+    "b": "saturn",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:mercury~b_saturn:trine"
+   ],
+   "title": "Your Mercury trine their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mercury:opposition:saturn",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mercury",
+    "b": "saturn",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:mercury~b_saturn:opposition"
+   ],
+   "title": "Your Mercury opposite their Saturn",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mercury:conjunction:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mercury",
+    "b": "uranus",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:mercury~b_uranus:conjunction"
+   ],
+   "title": "Your Mercury conjunct their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mercury:sextile:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mercury",
+    "b": "uranus",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:mercury~b_uranus:sextile"
+   ],
+   "title": "Your Mercury sextile their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mercury:square:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mercury",
+    "b": "uranus",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:mercury~b_uranus:square"
+   ],
+   "title": "Your Mercury square their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mercury:trine:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mercury",
+    "b": "uranus",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:mercury~b_uranus:trine"
+   ],
+   "title": "Your Mercury trine their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mercury:opposition:uranus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mercury",
+    "b": "uranus",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:mercury~b_uranus:opposition"
+   ],
+   "title": "Your Mercury opposite their Uranus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mercury:conjunction:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mercury",
+    "b": "neptune",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:mercury~b_neptune:conjunction"
+   ],
+   "title": "Your Mercury conjunct their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mercury:sextile:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mercury",
+    "b": "neptune",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:mercury~b_neptune:sextile"
+   ],
+   "title": "Your Mercury sextile their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mercury:square:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mercury",
+    "b": "neptune",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:mercury~b_neptune:square"
+   ],
+   "title": "Your Mercury square their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mercury:trine:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mercury",
+    "b": "neptune",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:mercury~b_neptune:trine"
+   ],
+   "title": "Your Mercury trine their Neptune",
+   "bindable": true
+  },
+  {
+   "id": "synastry:mercury:opposition:neptune",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "mercury",
+    "b": "neptune",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:mercury~b_neptune:opposition"
+   ],
+   "title": "Your Mercury opposite their Neptune",
+   "bindable": true
+  }
+ ]
+}

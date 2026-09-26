@@ -1,0 +1,11 @@
+# Vale concatenates every entry under `raw` into ONE expression, so this rule
+# keeps a single alternation. Go's RE2 engine has no lookahead or lookbehind,
+# so sentence position is expressed with `scope: sentence` plus anchors rather
+# than a lookbehind on the preceding full stop.
+extends: existence
+message: "'%s' reads as a clipped note rather than a sentence. Give it a subject and a finite verb (docs/editorial-voice.md, 'Write sentences')."
+level: error
+scope: sentence
+nonword: true
+raw:
+  - '^(?:Fix|Cause|Symptom|Result|Reason|Upshot|Takeaway|Bug|Detail)s?:\s|^(?:Two|Three|Four|Multi|Single|Dual)-(?:stage|part|step|phase|tier|layer) [A-Za-z]+\.?$'

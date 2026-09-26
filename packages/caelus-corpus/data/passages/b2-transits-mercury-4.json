@@ -1,0 +1,142 @@
+[
+ {
+  "id": "transit:mercury:conjunction:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mercury",
+   "natal": "pluto",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:mercury~natal_pluto:conjunction"
+  ],
+  "text": "For a few days, sometimes stretching toward two weeks, your thinking runs deeper than usual. Transiting Mercury conjunct your natal Pluto fuses the mind's daily traffic with your capacity for depth, and small talk stops satisfying you. You want the real story: what someone actually meant, what a number is hiding, why a plan keeps failing in the same place. While the aspect applies, this shows up as a pull toward one question you cannot put down. Research goes well now, and so does any work that rewards concentration, whether that means editing a draft hard, tracing a payment, or reading a contract line by line. The deepest hours sit right at the crossing, when a conversation can suddenly go all the way down, and something unsaid for months may finally get said. Secrets tend to surface under this transit, yours or someone else's, and your own words carry unusual weight. Persuasion comes easily, which is worth watching, because the line between convincing a person and pressuring them gets thin when your mind is this focused. The shadow side is obsession. A stray remark can lodge in your head and replay for days, and suspicion can dress itself up as insight. If you catch yourself building a case against someone out of small clues, check the evidence the way a researcher would, not the way a prosecutor would. In love and family life the same intensity can turn a practical talk into an interrogation without your noticing, so it helps to say plainly what you are trying to find out. As Mercury separates, the pressure eases and you keep the findings without the fixation. Because Mercury retrogrades regularly, this transit sometimes arrives as three passes spread over several weeks. The first contact opens the inquiry, often through a conversation or a piece of information that will not leave you alone. The retrograde revisit is the second look, when you go back over what you learned and find the detail you missed the first time. The final direct pass tends to close the file: you say the thing plainly, send the message, or accept the answer you found. Even a single quick pass leaves something behind, usually a truth you now understand more precisely than you did. The trick of this transit is to let your mind go as deep as it wants while keeping your grip loose, so insight stays insight instead of hardening into fixation."
+ },
+ {
+  "id": "transit:mercury:sextile:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mercury",
+   "natal": "pluto",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:mercury~natal_pluto:sextile"
+  ],
+  "text": "Somewhere in this week's ordinary traffic of messages, meetings, and errands, a door to something deeper stands slightly open. Transiting Mercury sextile your natal Pluto forces nothing; it offers. The offer is depth on easy terms: a conversation that could go further than usual, a question you could actually get to the bottom of, a piece of reading that would repay an hour of real attention. While the aspect builds, your curiosity sharpens. Topics you normally skim begin to look interesting underneath, and you find yourself asking the second question instead of accepting the first answer. This is a good stretch for patient thinking: following a problem back to where it started, comparing versions of a story, sorting out what you actually believe about a decision you have been circling. At work it favors research, audits, strategy, and any negotiation where knowing the background is the advantage, because you see leverage without needing to use it harshly. Around the exact contact the offer is strongest. Someone may confide in you, since you come across as a person who can hold what they say, and you notice what people leave out as much as what they include. In close relationships this can be the natural moment for a talk you have been meaning to have, not because tension demands it but because honesty comes cheaper than usual. In your inner life, a motive you had not examined may quietly show itself, not as a crisis, just as a clear view of why you do a thing you do. This aspect repays participation. If you let these days pass as ordinary days, they will behave like ordinary days, and nothing is lost. If you pick one thing worth understanding and give it genuine attention, the transit pays you in insight that outlasts it. As Mercury moves on, the pull toward depth fades, but whatever you saw clearly stays seen. Mercury's retrograde habit means this contact sometimes repeats, up to three touches across a stretch of weeks. When that happens, the first touch tends to raise the interesting question, the middle one invites a closer reading of what you found, and the last one is when understanding settles and you can state your conclusion in one plain sentence. Taken up even once, this transit strengthens a quiet skill: treating your attention as an instrument that can go deep on purpose, not only when a crisis forces it."
+ },
+ {
+  "id": "transit:mercury:square:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mercury",
+   "natal": "pluto",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:mercury~natal_pluto:square"
+  ],
+  "text": "For a few days your mind works under pressure, and the question the sky is asking is what it does when pushed. Transiting Mercury square your natal Pluto tends to arrive as friction around information: a conversation that turns into a contest, a fact someone withholds, a question you are told not to ask, a thought you cannot stop thinking. As the square applies, you may feel the mental temperature rise. Small exchanges pick up an edge. You read between the lines, sometimes accurately, sometimes not, and other people seem to be doing the same to you. The peak often brings the confrontation itself. Someone may try to control a narrative you are part of, or you may realize you have been trying to control one, and the conversation that follows is rarely comfortable. Words spoken now go deep, both the true ones and the unfair ones. The useful work of this transit is separating what is real from what is compulsive. A worry that loops without producing a next step is usually the transit talking, not the facts. Writing the fear down and reading it back a day later strips it of half its charge. So does asking directly for the information you suspect is being kept from you, since squares respond better to plain questions than to detective work. In work settings this pressure can surface as a struggle over a decision, credit, or access to information. At home it can surface as an old argument that turns out to be about who gets to define what happened. Either way, the square forces something half-buried into speech, and that is the point of it. Once Mercury pulls away, the intensity drops quickly, and you can see which of the week's dark readings were perception and which were mood. When Mercury's retrograde brings this square back for a second and third pass over several weeks, treat the sequence as one argument in three acts: the first pass states the conflict, the revisit brings cooler heads and fuller facts, and the final pass is where a real settlement becomes possible because both sides have said the unsaid part. You grow through this one by learning that your mind's force is real and needs aim, and that the hardest sentence to say under pressure, the honest one without the barb in it, is usually the one that ends the fight."
+ },
+ {
+  "id": "transit:mercury:trine:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mercury",
+   "natal": "pluto",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:mercury~natal_pluto:trine"
+  ],
+  "text": "Attention gets penetrating for a few days. While transiting Mercury holds a trine to your natal Pluto, ordinary thinking runs several layers deeper than it usually bothers to go, and the surface of things stops being the end of the story. Situations you have been reading politely start reading honestly: you notice who benefits, what is going unsaid, which detail everyone is stepping around. None of it arrives as suspicion. That is this trine's signature. The depth comes without the darkness, so you can know uncomfortable things calmly and say them without starting a war. Other people feel the change before you do. Conversations keep dropping below their stated agenda, and you may find yourself confided in by people who had no plan to confide, simply because something in your listening says the information will be handled and not used. Handle it and do not use it, and the week leaves your standing higher with everyone who tested it. The working uses are specific. Stalled research moves, because you can hold a tangle of facts long enough to find the one that organizes the rest. A hard letter gets written in language that is true and still kind. If you have been circling a private decision, the kind that requires admitting something to yourself first, these days lower the cost of the admission. Mercury crosses quickly; the sharpest stretch is a day or two inside a window of several. Nothing marks it from outside, and a routine week will bury it without a trace, so the difference between using this transit and missing it is usually a single deliberate act: one question pursued past its comfortable answer. When a retrograde period stretches the contact into three passes over a few weeks, the sequence favors slow excavation. What the first pass uncovers, the second corroborates or corrects, and by the third you know which of your depth readings were sight and which were mood. Trust the ones that survived. The residue of these visits is a particular kind of confidence, quieter than cleverness. You learn that you can look directly at how things actually work, in a family, an office, or your own motives, without the looking damaging you, and each round makes the next look less forbidding. People who do this transit's work a few times stop needing situations to be simpler than they are. That tolerance for the real, more than any secret uncovered, is what Pluto trades for your attention."
+ },
+ {
+  "id": "transit:mercury:opposition:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mercury",
+   "natal": "pluto",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:mercury~natal_pluto:opposition"
+  ],
+  "text": "The depth arrives wearing someone else's face. Transiting Mercury opposite your natal Pluto tends to stage its business between you and another person: a colleague who questions your version of events, a partner who wants a fuller answer than you gave, a stranger whose offhand comment lands with strange force. As the opposition builds, exchanges pick up an undertow. You may feel probed, or you may notice yourself probing, testing what the other person really means. Both of you can sense that more is at stake than the topic itself. The exact pass is the confrontation point. Something concealed between you and another person tends to come into the open here: an unspoken resentment, a hidden arrangement, an old suspicion. It often surfaces through a talk neither of you quite planned to have. This aspect confronts, but it also mirrors. The manipulation you think you see across the table may be real, or it may be your own wish to control the exchange, reflected back. The most reliable move under this transit is to say out loud what you want from the conversation, because stated intentions drain the games that thrive on ambiguity. In negotiations, keep your attention on interests rather than positions; the other side's pressure usually points straight at what they fear losing. In close relationships, let the hard talk happen rather than managing it away, since what surfaces now was already shaping things from underneath. When Mercury separates, the atmosphere lightens fast, and you can judge what was revealed on its merits. Because Mercury retrogrades, this opposition sometimes returns twice more over a matter of weeks. A standoff from the first encounter often softens by the later ones. The revisit lets both sides reread the exchange, and the final pass often brings a genuine understanding, or a clean admission that none is coming, which is its own kind of resolution. What this transit builds in you, a few days at a time, is the ability to hold your ground in a charged conversation without needing to win. You also learn to hear the truth in an opponent's words even while you check their aim."
+ },
+ {
+  "id": "transit:mercury:conjunction:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mercury",
+   "natal": "chiron",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:mercury~natal_chiron:conjunction"
+  ],
+  "text": "For a stretch of days, words find the tender place. Transiting Mercury conjunct your natal Chiron brings the thinking, talking part of life into contact with your oldest hurt, the one that never quite finished healing, and the meeting can go two ways, often both in the same week. On one side, conversations brush the sore spot. A comment that would slide off anyone else lands on you with surprising sting, or a topic you usually route around comes up and your voice tightens. While the aspect is applying you may feel this as a vague dread of certain conversations without knowing why. On the other side, this is the transit of naming. Language reaches the wound now, which means the wound can finally be described, and pain that has been described accurately loses some of its power to run you from the dark. The exact pass is the strongest moment for that work: writing about what happened, saying the sentence out loud to someone safe, or simply admitting to yourself, in words, what a particular ache is actually about. Old memories may resurface as if asking to be reread with adult eyes. There is also a giving side. Because you know this territory from inside, your words can steady someone else who is hurting, and people sometimes seek you out this week for exactly that. Teaching, counseling, and honest listening all draw on the same channel the transit opens. As Mercury moves past, the sensitivity fades and daily conversation goes back to its usual weight, but a wound that got named stays named. Mercury's retrogrades mean this contact sometimes comes three times across a run of weeks, and the rhythm can be kind: the first pass touches the sore place, the revisit gives you a second chance at a conversation that went badly or stopped short, and the final pass often brings the settled version, where you can speak about the old hurt as something you carry rather than something that carries you. You grow with this transit the way skin grows over a cut, gradually and from the edges in, each pass adding a little more vocabulary for the thing that once had no words at all."
+ },
+ {
+  "id": "transit:mercury:sextile:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mercury",
+   "natal": "chiron",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:mercury~natal_chiron:sextile"
+  ],
+  "text": "For a few days, you can think about the tender place without falling into it. Transiting Mercury sextile your natal Chiron opens a working distance between your mind and your oldest hurt: close enough to examine, far enough not to flood. The tone of the window is curiosity rather than catharsis. Questions about your own history that usually feel dangerous become merely interesting, and merely interesting is a powerful state to hold them in. This is the pass for the fact-finding side of healing, the side nobody romanticizes. You can ask a relative what actually happened that year and hear the answer as information. You can reread old messages, check a memory against a sibling's version, look up the record, and stay level while you do it. Understanding how the old injury operates, what sets it off, what it costs, which situations wake it, is different work from feeling it, and this transit favors the understanding. Conversations under the angle stay usefully cool. A session with a counselor or a clear-eyed friend runs efficiently now, more like consulting than confessing, and you leave with something you can apply: a pattern spotted, a connection made, an adjustment worth trying. If you sit on the other side of such a talk this week, your questions do more good than your sympathy, because a person helped to see their own pattern keeps the seeing. The mechanics are light. Mercury applies quickly, holds the angle for a day or two, and moves on; the whole visit fits inside a week, and nothing about it insists. Skipped, it costs nothing visible. In retrograde seasons the contact can repeat twice more over several weeks, which suits this kind of inquiry unusually well, since the second look at a family fact or an old pattern is so often where the accurate picture forms. What builds over many small passes is a changed relationship between your intelligence and your injury. Most people keep the two apart, guarding the hurt from examination as if study would reopen it. Rounds of this transit teach the opposite lesson: the sore place bears looking at, in modest doses, with a clear head, and every session of calm attention leaves it slightly smaller and considerably better mapped. A wound you understand still aches on occasion. But it stops steering you, because you can see its hands, and the seeing was assembled a few quiet days at a time, in exactly windows like this one."
+ },
+ {
+  "id": "transit:mercury:square:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mercury",
+   "natal": "chiron",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:mercury~natal_chiron:square"
+  ],
+  "text": "Certain words hit harder than they should right now, and the extra force is coming from inside. Transiting Mercury square your natal Chiron sets everyday communication at a difficult angle to your oldest sore spot, and the friction shows up fast: a bit of criticism at work stings out of proportion, a joke lands wrong, a message reads colder than its writer meant. As the square applies you may find yourself bracing in conversations, hearing tones nobody intended. The signature of this transit is the sudden sting followed by an old, familiar feeling, of being dismissed, or slow, or unheard, or too much, whatever shape your particular wound takes. The square also runs outward. Under this pressure your own words can come out with more edge than you intend, and you may wound someone in exactly the spot where you are wounded, which is worth knowing before you hit send. The exact pass tends to bring the sharpest exchange, and with it the transit's actual work. The sting is a flare over the sore place, and it shows you precisely where the unhealed thing sits. What feels like proof that the old story is true, that you are not smart enough, not wanted in the room, not worth hearing, is better read as the old story being touched, which is different. One practical habit fits these few days well: when a remark burns, wait before replying, and ask whether you are answering this person or someone from long ago. As Mercury pulls away, proportion returns, and remarks resume their actual size. If the retrograde cycle brings this square back over a stretch of weeks, the reruns are not punishment. The second pass often replays the sore conversation with a chance to handle it differently, and the third tends to arrive quieter, because the spot it presses has already been seen and named. This transit is brief, a matter of days per pass, but it is a precise teacher. Each round shows you the gap between what was said and what you heard, and every time you catch that gap in real time, the wound loses a little of its authority over your ears."
+ },
+ {
+  "id": "transit:mercury:trine:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mercury",
+   "natal": "chiron",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:mercury~natal_chiron:trine"
+  ],
+  "text": "There are days when the hardest subjects can be handled like ordinary ones, and this transit brings a few of them. Transiting Mercury trine your natal Chiron eases the connection between language and your old hurt, so the things that usually catch in your throat come out level and clear. You can mention the difficult chapter of your history without your pulse rising. You can ask for what you need without the request feeling like an exposure. While the trine builds, you may simply notice that certain conversations feel lighter than you expected, and around the exact pass the ease is at its fullest. This is a good window for the talk you have been postponing because it touches the tender place: clearing up an old misunderstanding with a relative, telling a partner what a certain kind of comment does to you, or giving a counselor the whole story instead of the edited one. The same fluency serves others. People with their own bruises tend to find you now, and what you say to them lands gently, because it comes from the healed part of your experience rather than the raw part. Mentoring, writing that draws on hard experience, and any work where your past difficulty becomes useful to someone else all flow well under this sky. Like every trine, it asks nothing. The days will pass smoothly whether or not you use them, and the only cost of ignoring the window is the conversation that stays unhad. When Mercury retrogrades across this point, the trine can repeat over several weeks, and the encore has a shape worth using: the first pass makes the saying easy, the return lets you deepen or correct what was said, and the final pass fixes the new frankness in place, so the subject stays speakable after the transit ends. That is the quiet legacy of this one. Each time it comes around and you say one true sentence about the old wound in a steady voice, the range of things you can talk about grows, and a person whose hurt has become discussable is already most of the way to a person whose hurt has become wisdom."
+ },
+ {
+  "id": "transit:mercury:opposition:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mercury",
+   "natal": "chiron",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:mercury~natal_chiron:opposition"
+  ],
+  "text": "Someone across from you has a way of finding the sore spot this week. Transiting Mercury opposite your natal Chiron plays out through other people's words: a question that presses where it hurts, feedback that reads as a verdict on you, a discussion in which you feel suddenly younger and smaller than you are. The opposition builds slowly enough to watch. As it applies, you may notice a defensiveness gathering ahead of certain conversations, a sense of needing armor without a visible threat. Near the exact pass the charged exchange usually happens, and it is worth being precise about what is going on. The other person is rarely aiming at your wound. More often they are walking through the room where it lives, and their ordinary words take on weight your history gives them. Sometimes the mirror faces the other way. You are the one whose innocent remark lands on someone's hidden bruise, and the size of their reaction puzzles you. Either direction, the transit turns conversation into a map of tender places, yours and theirs. The skill it rewards is staying in dialogue while stung: asking what the other person meant before deciding what they meant, saying that a comment hurt rather than retaliating or withdrawing, letting someone explain. Handled that way, an exchange that begins as an accidental injury can end as the most honest talk you have had with that person in months. When Mercury separates, the air clears quickly, and apologies made now tend to be accepted. Because of Mercury's retrograde habit, this opposition sometimes returns twice more across a span of weeks, and relationships often use the reruns well. The first encounter exposes the sensitivity. The second gives both people a chance to talk about it on purpose instead of stumbling into it, and the last folds the new care into how you speak to each other. Over time this transit teaches a double literacy. You learn to hear when your wound is coloring what someone said, and to sense when your own words are near someone else's hidden bruise. A person who can do both is safe to talk to, in a way that people notice and remember."
+ }
+]

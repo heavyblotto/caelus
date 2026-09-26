@@ -231,6 +231,61 @@ def place(aim_az_deg, aim_alt_deg, lens, width, height, az_deg, alt_true_deg,
             "delta_deg": delta_deg, "side": side}
 
 
+def sky_camera(aim_az_deg, aim_alt_deg):
+    """Mirror of skyCamera: the orthonormal camera basis as a dict of
+    forward/right/up lists (local horizontal frame: x east, y north, z up)."""
+    F, right, up = _camera_basis(aim_az_deg, aim_alt_deg)
+    return {"forward": list(F), "right": list(right), "up": list(up)}
+
+
+def radial_scale(shape):
+    """Mirror of radialScale: the one-parameter azimuthal family r(theta).
+    shape -1 gnomonic, -0.5 stereographic, 0 equidistant, +0.5 equal-area,
+    +1 orthographic. Negative side diverges at theta = k pi/2 (returns
+    math.inf); positive side folds past it."""
+    if not (-1 <= shape <= 1):
+        raise ValueError(f"radial_scale shape {shape} out of range [-1, 1]")
+    if shape == 0:
+        return lambda t: t
+    if shape < 0:
+        k = -1.0 / shape
+        limit = k * math.pi / 2
+        return lambda t: math.inf if t >= limit else k * math.tan(t / k)
+    k = 1.0 / shape
+    return lambda t: k * math.sin(t / k)
+
+
+def sky_project(aim_az_deg, aim_alt_deg, az_deg, alt_deg,
+                shape=0.0, hfov_deg=180.0):
+    """Mirror of skyProjector().place: refraction-free vector-mode
+    projection to normalized coordinates (magnitude 1 at hfov/2 from the
+    aim, +x right, +y up, no aspect). Where TS yields signed Infinity
+    (gnomonic-side horizon) xn/yn are None here."""
+    radial = radial_scale(shape)
+    F, right, up = _camera_basis(aim_az_deg, aim_alt_deg)
+    r_edge = radial((hfov_deg * DEG) / 2)
+    if not math.isfinite(r_edge) or r_edge <= 0:
+        raise ValueError(
+            f"sky_project: hfov_deg {hfov_deg} is outside the projectable "
+            f"range for shape {shape}")
+    V = dir_from_az_alt(az_deg, alt_deg)
+    f = _dot(V, F)
+    rr = _dot(V, right)
+    uu = _dot(V, up)
+    theta = math.acos(_clamp1(f))
+    theta_deg = theta / DEG
+    hemisphere = "near" if theta_deg <= 90 else "far"
+    r = radial(theta)
+    if not math.isfinite(r):
+        return {"xn": None, "yn": None, "theta_deg": theta_deg,
+                "hemisphere": hemisphere, "behind": True}
+    psi = math.atan2(uu, rr)
+    return {"xn": (r * math.cos(psi)) / r_edge,
+            "yn": (r * math.sin(psi)) / r_edge,
+            "theta_deg": theta_deg, "hemisphere": hemisphere,
+            "behind": False}
+
+
 # --------------------------------------------------------------- sky state
 
 def twilight_stage(sun_alt_deg):

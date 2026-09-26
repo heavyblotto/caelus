@@ -1,0 +1,113 @@
+{
+ "name": "profection-year-lords",
+ "outFile": "b4-profection-year-lords.json",
+ "setId": "house-b4-profection-year-lords",
+ "family": "timelord-profection",
+ "cells": [
+  {
+   "id": "timelord:profection:year:lord:sun",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "year",
+    "lord": "sun"
+   },
+   "atomIds": [
+    "profection:year:"
+   ],
+   "title": "Sun as lord of the year",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:year:lord:moon",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "year",
+    "lord": "moon"
+   },
+   "atomIds": [
+    "profection:year:"
+   ],
+   "title": "Moon as lord of the year",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:year:lord:mercury",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "year",
+    "lord": "mercury"
+   },
+   "atomIds": [
+    "profection:year:"
+   ],
+   "title": "Mercury as lord of the year",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:year:lord:venus",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "year",
+    "lord": "venus"
+   },
+   "atomIds": [
+    "profection:year:"
+   ],
+   "title": "Venus as lord of the year",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:year:lord:mars",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "year",
+    "lord": "mars"
+   },
+   "atomIds": [
+    "profection:year:"
+   ],
+   "title": "Mars as lord of the year",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:year:lord:jupiter",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "year",
+    "lord": "jupiter"
+   },
+   "atomIds": [
+    "profection:year:"
+   ],
+   "title": "Jupiter as lord of the year",
+   "bindable": true
+  },
+  {
+   "id": "timelord:profection:year:lord:saturn",
+   "family": "timelord-profection",
+   "when": {
+    "kind": "timelord",
+    "system": "profection",
+    "level": "year",
+    "lord": "saturn"
+   },
+   "atomIds": [
+    "profection:year:"
+   ],
+   "title": "Saturn as lord of the year",
+   "bindable": true
+  }
+ ]
+}

@@ -1,0 +1,158 @@
+{
+ "name": "transits-node-mercury-venus",
+ "outFile": "b2-transits-node-mercury-venus.json",
+ "setId": "house-b2-transits-node-mercury-venus",
+ "family": "transit-aspect",
+ "cells": [
+  {
+   "id": "transit:mercury:conjunction:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mercury",
+    "natal": "true_node",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:mercury~natal_true_node:conjunction"
+   ],
+   "title": "Transiting Mercury conjunct your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:sextile:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mercury",
+    "natal": "true_node",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:mercury~natal_true_node:sextile"
+   ],
+   "title": "Transiting Mercury sextile your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:square:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mercury",
+    "natal": "true_node",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:mercury~natal_true_node:square"
+   ],
+   "title": "Transiting Mercury square your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:trine:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mercury",
+    "natal": "true_node",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:mercury~natal_true_node:trine"
+   ],
+   "title": "Transiting Mercury trine your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:opposition:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "mercury",
+    "natal": "true_node",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:mercury~natal_true_node:opposition"
+   ],
+   "title": "Transiting Mercury opposite your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:conjunction:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "true_node",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:venus~natal_true_node:conjunction"
+   ],
+   "title": "Transiting Venus conjunct your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:sextile:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "true_node",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:venus~natal_true_node:sextile"
+   ],
+   "title": "Transiting Venus sextile your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:square:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "true_node",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:venus~natal_true_node:square"
+   ],
+   "title": "Transiting Venus square your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:trine:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "true_node",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:venus~natal_true_node:trine"
+   ],
+   "title": "Transiting Venus trine your natal North Node",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:opposition:true_node",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "true_node",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:venus~natal_true_node:opposition"
+   ],
+   "title": "Transiting Venus opposite your natal North Node",
+   "bindable": true
+  }
+ ]
+}

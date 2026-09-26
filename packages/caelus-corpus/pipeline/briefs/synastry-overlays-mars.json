@@ -1,0 +1,200 @@
+{
+ "name": "synastry-overlays-mars",
+ "outFile": "b3-synastry-overlays-mars.json",
+ "setId": "house-b3-synastry-overlays-mars",
+ "family": "synastry-overlay",
+ "cells": [
+  {
+   "id": "synastry:overlay:mars:house:1",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "mars",
+    "partner": "a",
+    "house": 1
+   },
+   "atomIds": [
+    "synastry:overlay:a:mars:house:1"
+   ],
+   "title": "Your Mars in their 1st house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:mars:house:2",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "mars",
+    "partner": "a",
+    "house": 2
+   },
+   "atomIds": [
+    "synastry:overlay:a:mars:house:2"
+   ],
+   "title": "Your Mars in their 2nd house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:mars:house:3",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "mars",
+    "partner": "a",
+    "house": 3
+   },
+   "atomIds": [
+    "synastry:overlay:a:mars:house:3"
+   ],
+   "title": "Your Mars in their 3rd house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:mars:house:4",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "mars",
+    "partner": "a",
+    "house": 4
+   },
+   "atomIds": [
+    "synastry:overlay:a:mars:house:4"
+   ],
+   "title": "Your Mars in their 4th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:mars:house:5",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "mars",
+    "partner": "a",
+    "house": 5
+   },
+   "atomIds": [
+    "synastry:overlay:a:mars:house:5"
+   ],
+   "title": "Your Mars in their 5th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:mars:house:6",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "mars",
+    "partner": "a",
+    "house": 6
+   },
+   "atomIds": [
+    "synastry:overlay:a:mars:house:6"
+   ],
+   "title": "Your Mars in their 6th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:mars:house:7",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "mars",
+    "partner": "a",
+    "house": 7
+   },
+   "atomIds": [
+    "synastry:overlay:a:mars:house:7"
+   ],
+   "title": "Your Mars in their 7th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:mars:house:8",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "mars",
+    "partner": "a",
+    "house": 8
+   },
+   "atomIds": [
+    "synastry:overlay:a:mars:house:8"
+   ],
+   "title": "Your Mars in their 8th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:mars:house:9",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "mars",
+    "partner": "a",
+    "house": 9
+   },
+   "atomIds": [
+    "synastry:overlay:a:mars:house:9"
+   ],
+   "title": "Your Mars in their 9th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:mars:house:10",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "mars",
+    "partner": "a",
+    "house": 10
+   },
+   "atomIds": [
+    "synastry:overlay:a:mars:house:10"
+   ],
+   "title": "Your Mars in their 10th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:mars:house:11",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "mars",
+    "partner": "a",
+    "house": 11
+   },
+   "atomIds": [
+    "synastry:overlay:a:mars:house:11"
+   ],
+   "title": "Your Mars in their 11th house",
+   "bindable": true
+  },
+  {
+   "id": "synastry:overlay:mars:house:12",
+   "family": "synastry-overlay",
+   "when": {
+    "kind": "synastry",
+    "mode": "overlay",
+    "body": "mars",
+    "partner": "a",
+    "house": 12
+   },
+   "atomIds": [
+    "synastry:overlay:a:mars:house:12"
+   ],
+   "title": "Your Mars in their 12th house",
+   "bindable": true
+  }
+ ]
+}

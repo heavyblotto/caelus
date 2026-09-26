@@ -58,6 +58,22 @@ export function jdYear(jd: number): number {
   return 2000 + (jd - 2451545.0) / 365.25;
 }
 
+/** The sky's rotation rate: rotation-anchored quantities (angles, houses,
+ *  rise and set) move 0.25 deg per minute of clock error. The chart warnings
+ *  and the canonical epoch-sigma block both derive from this. */
+export const ANGLE_SIGMA_DEG_PER_SECOND = 0.25 / 60;
+
+/** The Moon's mean rate: ~0.55 arcsec per second of clock error, so a
+ *  UT-tagged instant's Moon carries sigma(deltaT) at this rate. The slow
+ *  bodies carry none -- planet-to-planet geometry lives in uniform time. */
+export const MOON_SIGMA_DEG_PER_SECOND = 0.55 / 3600;
+
+/** The threshold at which the epoch's clock-error uncertainty becomes
+ *  visible at the app's display scale: 10 s of sigma is ~2.5 arcmin of
+ *  angle smear, the point a reading would show. Below it, canonical output
+ *  carries no epoch-sigma block, so modern charts' digests are unchanged. */
+export const EPOCH_SIGMA_DISPLAY_SECONDS = 10;
+
 /** A pack's fitted span in calendar years (`jd0 + segments * seg_days`). */
 export function packSpan(pack: ChebData): BodySpan {
   return {
@@ -78,13 +94,31 @@ export function validatedSpanFor(body: string, data: EngineData): BodySpan | nul
   // EngineData field, not a chebPacks entry) with no measured span yet --
   // validate_swiss.py measures it against SE_INTP_APOG where pyswisseph
   // exists, and degree-scale differences are expected by construction.
-  if (VSOP_BODIES.has(body) || body === "moon") return HEADLINE;
-  if (body === "pluto") {
-    return data.chebPacks?.pluto ? MEASURED.pluto_pack : MEASURED.pluto_meeus;
+  let span: BodySpan | null;
+  if (VSOP_BODIES.has(body) || body === "moon") span = HEADLINE;
+  else if (body === "pluto") {
+    span = data.chebPacks?.pluto ? MEASURED.pluto_pack : MEASURED.pluto_meeus;
+  } else if (body === "chiron" || body in (data.chebPacks ?? {})) {
+    span = HEADLINE;
+  } else if (body in (data.keplerPack?.bodies ?? {})) span = MEASURED.uranian;
+  else span = null;
+
+  // Era slabs extend the validated span (deep-time R1): a slab's span is
+  // measured against its source at pack build, and the classical slab
+  // adjoins the headline's earlier edge. The Moon's slabs live in their own
+  // field beside its tiered packs; the Sun's geocentric position derives
+  // from Earth's heliocentric one, so Earth's era slabs are the Sun's.
+  const eras = body === "moon" ? data.moonEraPacks
+    : body === "sun" ? data.earthEraPacks
+    : data.eraPacks?.[body];
+  if (eras?.length) {
+    const from = Math.min(...eras.map((s) => packSpan(s).from));
+    const to = Math.max(...eras.map((s) => packSpan(s).to));
+    span = span
+      ? { from: Math.min(span.from, from), to: Math.max(span.to, to) }
+      : { from, to };
   }
-  if (body === "chiron" || body in (data.chebPacks ?? {})) return HEADLINE;
-  if (body in (data.keplerPack?.bodies ?? {})) return MEASURED.uranian;
-  return null;
+  return span;
 }
 
 /**

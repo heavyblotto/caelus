@@ -1,0 +1,176 @@
+{
+  "name": "composite-houses-jupiter",
+  "outFile": "b3-composite-houses-jupiter.json",
+  "setId": "house-b3-composite-houses-jupiter",
+  "family": "composite-house",
+  "cells": [
+    {
+      "id": "composite:jupiter:house:1",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "jupiter",
+        "house": 1
+      },
+      "atomIds": [
+        "composite:jupiter"
+      ],
+      "title": "Composite Jupiter in the 1st house",
+      "bindable": true
+    },
+    {
+      "id": "composite:jupiter:house:2",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "jupiter",
+        "house": 2
+      },
+      "atomIds": [
+        "composite:jupiter"
+      ],
+      "title": "Composite Jupiter in the 2nd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:jupiter:house:3",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "jupiter",
+        "house": 3
+      },
+      "atomIds": [
+        "composite:jupiter"
+      ],
+      "title": "Composite Jupiter in the 3rd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:jupiter:house:4",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "jupiter",
+        "house": 4
+      },
+      "atomIds": [
+        "composite:jupiter"
+      ],
+      "title": "Composite Jupiter in the 4th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:jupiter:house:5",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "jupiter",
+        "house": 5
+      },
+      "atomIds": [
+        "composite:jupiter"
+      ],
+      "title": "Composite Jupiter in the 5th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:jupiter:house:6",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "jupiter",
+        "house": 6
+      },
+      "atomIds": [
+        "composite:jupiter"
+      ],
+      "title": "Composite Jupiter in the 6th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:jupiter:house:7",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "jupiter",
+        "house": 7
+      },
+      "atomIds": [
+        "composite:jupiter"
+      ],
+      "title": "Composite Jupiter in the 7th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:jupiter:house:8",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "jupiter",
+        "house": 8
+      },
+      "atomIds": [
+        "composite:jupiter"
+      ],
+      "title": "Composite Jupiter in the 8th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:jupiter:house:9",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "jupiter",
+        "house": 9
+      },
+      "atomIds": [
+        "composite:jupiter"
+      ],
+      "title": "Composite Jupiter in the 9th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:jupiter:house:10",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "jupiter",
+        "house": 10
+      },
+      "atomIds": [
+        "composite:jupiter"
+      ],
+      "title": "Composite Jupiter in the 10th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:jupiter:house:11",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "jupiter",
+        "house": 11
+      },
+      "atomIds": [
+        "composite:jupiter"
+      ],
+      "title": "Composite Jupiter in the 11th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:jupiter:house:12",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "jupiter",
+        "house": 12
+      },
+      "atomIds": [
+        "composite:jupiter"
+      ],
+      "title": "Composite Jupiter in the 12th house",
+      "bindable": true
+    }
+  ]
+}

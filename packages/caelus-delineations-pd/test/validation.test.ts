@@ -15,6 +15,7 @@ import { interpret, SIGNS } from "caelus";
 import type { FactAtom, InterpretationContext } from "caelus";
 import {
   sources, publicDomainSources, passages, selectorFromSpec, corpusManifest,
+  scorePassage, isShippable,
 } from "../src/index.js";
 import type { CorpusRights, SelectorSpec } from "../src/index.js";
 
@@ -67,6 +68,16 @@ for (const p of passages) {
   if (sign !== undefined) {
     check(SIGN_SET.has(sign), `${p.id}: sign "${sign}" matches an engine SIGNS value`);
   }
+}
+
+// 2b. Quoted English is restored, not OCR salad or the next chapter.
+console.log("passage text quality");
+for (const p of passages) {
+  const q = scorePassage(p.text);
+  check(
+    isShippable(p.text),
+    `${p.id}: unrestored OCR or furniture (score=${q.score.toFixed(2)} [${q.flags.join(", ")}]) ${q.excerpt}`,
+  );
 }
 
 // 3. The compiler handles every SelectorSpec kind — all seventeen FactKinds.
@@ -376,9 +387,17 @@ console.log("public-domain filter");
 const pdRuleIds = new Set(publicDomainSources.flatMap((s) => s.rules.map((r) => r.id)));
 const gratisIds = new Set(passages.filter((p) => p.rights === "gratis-not-pd").map((p) => p.id));
 const pdIds = new Set(passages.filter((p) => p.rights !== "gratis-not-pd").map((p) => p.id));
-check(gratisIds.size > 0, "corpus has at least one gratis-not-pd passage to exclude");
-check([...gratisIds].every((id) => !pdRuleIds.has(id)), "publicDomainSources excludes every gratis-not-pd rule");
-check([...pdIds].every((id) => pdRuleIds.has(id)), "publicDomainSources keeps every public-domain rule");
+check(pdIds.size > 0, "corpus has public-domain passages");
+if (gratisIds.size === 0) {
+  check(
+    pdRuleIds.size === pdIds.size,
+    "no gratis-not-pd cells ship; publicDomainSources is the full corpus",
+  );
+} else {
+  check(gratisIds.size > 0, "corpus has at least one gratis-not-pd passage to exclude");
+  check([...gratisIds].every((id) => !pdRuleIds.has(id)), "publicDomainSources excludes every gratis-not-pd rule");
+  check([...pdIds].every((id) => pdRuleIds.has(id)), "publicDomainSources keeps every public-domain rule");
+}
 
 // 7. Corpus manifest audit: rights vocabulary + local-text integrity.
 console.log("manifest integrity");

@@ -1,0 +1,162 @@
+{
+  "observer": {
+    "lat": 40.7128,
+    "lonEast": -74.006,
+    "altM": 30
+  },
+  "plates": [
+    {
+      "id": "golden-e",
+      "src": "/home/sky-plates/golden-e.webp",
+      "lighting": "golden",
+      "aimBucket": "E",
+      "promptFile": "prompts/golden-e.txt",
+      "jdUt": 2461212.8924270887,
+      "aimAz": 90
+    },
+    {
+      "id": "civil-e",
+      "src": "/home/sky-plates/civil-e.webp",
+      "lighting": "civil",
+      "aimBucket": "E",
+      "promptFile": "prompts/civil-e.txt",
+      "jdUt": 2461212.8785381997,
+      "aimAz": 90
+    },
+    {
+      "id": "morning-e",
+      "src": "/home/sky-plates/morning-e.webp",
+      "lighting": "morning",
+      "aimBucket": "E",
+      "promptFile": "prompts/morning-e.txt",
+      "jdUt": 2461212.9549270887,
+      "aimAz": 90
+    },
+    {
+      "id": "midday-s",
+      "src": "/home/sky-plates/midday-s.webp",
+      "lighting": "midday",
+      "aimBucket": "S",
+      "promptFile": "prompts/midday-s.txt",
+      "jdUt": 2461213.2068655267,
+      "aimAz": 180
+    },
+    {
+      "id": "midday-s-winter",
+      "src": "/home/sky-plates/midday-s-winter.webp",
+      "lighting": "morning",
+      "aimBucket": "S",
+      "promptFile": "prompts/midday-s-winter.txt",
+      "jdUt": 2461396.2042984124,
+      "aimAz": 180
+    },
+    {
+      "id": "day-s",
+      "src": "/home/sky-plates/day-s.webp",
+      "lighting": "midday",
+      "aimBucket": "S",
+      "promptFile": "prompts/day-s.txt",
+      "jdUt": 2461268.3333333335,
+      "aimAz": 180
+    },
+    {
+      "id": "day-w",
+      "src": "/home/sky-plates/day-w.webp",
+      "lighting": "midday",
+      "aimBucket": "W",
+      "promptFile": "prompts/day-w.txt",
+      "jdUt": 2461268.3333333335,
+      "aimAz": 270
+    },
+    {
+      "id": "golden-w",
+      "src": "/home/sky-plates/golden-w.webp",
+      "lighting": "golden",
+      "aimBucket": "W",
+      "promptFile": "prompts/golden-w.txt",
+      "jdUt": 2461212.5211512046,
+      "aimAz": 270
+    },
+    {
+      "id": "civil-w",
+      "src": "/home/sky-plates/civil-w.webp",
+      "lighting": "civil",
+      "aimBucket": "W",
+      "promptFile": "prompts/civil-w.txt",
+      "jdUt": 2461212.5385123156,
+      "aimAz": 270
+    },
+    {
+      "id": "night-s",
+      "src": "/home/sky-plates/night-s.webp",
+      "lighting": "night",
+      "aimBucket": "S",
+      "promptFile": "prompts/night-s.txt",
+      "jdUt": 2461056.5370727405,
+      "aimAz": 180
+    },
+    {
+      "id": "night-e",
+      "src": "/home/sky-plates/night-e.webp",
+      "lighting": "night",
+      "aimBucket": "E",
+      "promptFile": "prompts/night-e.txt",
+      "jdUt": 2461056.5370727405,
+      "aimAz": 90
+    },
+    {
+      "id": "night-w",
+      "src": "/home/sky-plates/night-w.webp",
+      "lighting": "night",
+      "aimBucket": "W",
+      "promptFile": "prompts/night-w.txt",
+      "jdUt": 2461056.5370727405,
+      "aimAz": 270
+    },
+    {
+      "id": "night-n",
+      "src": "/home/sky-plates/night-n.webp",
+      "lighting": "night",
+      "aimBucket": "N",
+      "promptFile": "prompts/night-n.txt",
+      "jdUt": 2461056.5370727405,
+      "aimAz": 0
+    },
+    {
+      "id": "moonlit-s",
+      "src": "/home/sky-plates/moonlit-s.webp",
+      "lighting": "moonlit",
+      "aimBucket": "S",
+      "promptFile": "prompts/moonlit-s.txt",
+      "jdUt": 2461281.607245976,
+      "aimAz": 180
+    },
+    {
+      "id": "moonlit-e",
+      "src": "/home/sky-plates/moonlit-e.webp",
+      "lighting": "moonlit",
+      "aimBucket": "E",
+      "promptFile": "prompts/moonlit-e.txt",
+      "jdUt": 2461281.607245976,
+      "aimAz": 90
+    },
+    {
+      "id": "moonlit-w",
+      "src": "/home/sky-plates/moonlit-w.webp",
+      "lighting": "moonlit",
+      "aimBucket": "W",
+      "promptFile": "prompts/moonlit-w.txt",
+      "jdUt": 2461281.607245976,
+      "aimAz": 270
+    },
+    {
+      "id": "overcast-s",
+      "src": "/home/sky-plates/overcast-s.webp",
+      "lighting": "overcast",
+      "aimBucket": "S",
+      "promptFile": "prompts/overcast-s.txt",
+      "jdUt": 2461213.2068655267,
+      "aimAz": 180
+    }
+  ]
+}

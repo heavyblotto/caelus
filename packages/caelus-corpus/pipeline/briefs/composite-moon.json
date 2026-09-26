@@ -1,0 +1,176 @@
+{
+ "name": "composite-moon",
+ "outFile": "b3-composite-moon.json",
+ "setId": "house-b3-composite-moon",
+ "family": "composite-placement",
+ "cells": [
+  {
+   "id": "composite:moon:sign:aries",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "moon",
+    "sign": "Aries"
+   },
+   "atomIds": [
+    "composite:moon"
+   ],
+   "title": "Composite Moon in Aries",
+   "bindable": true
+  },
+  {
+   "id": "composite:moon:sign:taurus",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "moon",
+    "sign": "Taurus"
+   },
+   "atomIds": [
+    "composite:moon"
+   ],
+   "title": "Composite Moon in Taurus",
+   "bindable": true
+  },
+  {
+   "id": "composite:moon:sign:gemini",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "moon",
+    "sign": "Gemini"
+   },
+   "atomIds": [
+    "composite:moon"
+   ],
+   "title": "Composite Moon in Gemini",
+   "bindable": true
+  },
+  {
+   "id": "composite:moon:sign:cancer",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "moon",
+    "sign": "Cancer"
+   },
+   "atomIds": [
+    "composite:moon"
+   ],
+   "title": "Composite Moon in Cancer",
+   "bindable": true
+  },
+  {
+   "id": "composite:moon:sign:leo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "moon",
+    "sign": "Leo"
+   },
+   "atomIds": [
+    "composite:moon"
+   ],
+   "title": "Composite Moon in Leo",
+   "bindable": true
+  },
+  {
+   "id": "composite:moon:sign:virgo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "moon",
+    "sign": "Virgo"
+   },
+   "atomIds": [
+    "composite:moon"
+   ],
+   "title": "Composite Moon in Virgo",
+   "bindable": true
+  },
+  {
+   "id": "composite:moon:sign:libra",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "moon",
+    "sign": "Libra"
+   },
+   "atomIds": [
+    "composite:moon"
+   ],
+   "title": "Composite Moon in Libra",
+   "bindable": true
+  },
+  {
+   "id": "composite:moon:sign:scorpio",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "moon",
+    "sign": "Scorpio"
+   },
+   "atomIds": [
+    "composite:moon"
+   ],
+   "title": "Composite Moon in Scorpio",
+   "bindable": true
+  },
+  {
+   "id": "composite:moon:sign:sagittarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "moon",
+    "sign": "Sagittarius"
+   },
+   "atomIds": [
+    "composite:moon"
+   ],
+   "title": "Composite Moon in Sagittarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:moon:sign:capricorn",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "moon",
+    "sign": "Capricorn"
+   },
+   "atomIds": [
+    "composite:moon"
+   ],
+   "title": "Composite Moon in Capricorn",
+   "bindable": true
+  },
+  {
+   "id": "composite:moon:sign:aquarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "moon",
+    "sign": "Aquarius"
+   },
+   "atomIds": [
+    "composite:moon"
+   ],
+   "title": "Composite Moon in Aquarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:moon:sign:pisces",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "moon",
+    "sign": "Pisces"
+   },
+   "atomIds": [
+    "composite:moon"
+   ],
+   "title": "Composite Moon in Pisces",
+   "bindable": true
+  }
+ ]
+}

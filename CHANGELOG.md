@@ -7,6 +7,96 @@ semver (currently 0.1.x). Numbers quoted here are as measured at release time;
 current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
+## v0.25.0 — Era packs to 3000 BCE, 27 fact kinds, MultiWheel
+
+*2026-09-26*
+
+### Engine (`caelus`)
+
+- **Era packs.** `loadNodeData` loads Chebyshev slabs
+  `{body}_cheb.classical.json` (JPL Horizons / DE441) covering 3000 BCE to
+  1000 CE for the Sun (via Earth's slab), the Moon, Mercury, Venus, Mars,
+  Jupiter, and Saturn. Each slab ends at its modern pack's first instant.
+  `engineCapabilities` reports the chained span, −2998 to 3000. Bodies
+  without a classical pack are omitted and listed in `chart.unavailable`.
+  The seven slabs ship in the npm tarball (`check-tarball` gates them), so
+  the tarball grows to about 130 MB unpacked, 55 MB packed.
+- **`interpretationContext` grows to 27 fact kinds.** New atoms:
+  `angleContact`, `transitHouse`, `station`, `return`, `lunation`,
+  `solarPhase`, `compositeAspect`, `degree`, with matching selectors
+  (`hasDegree` included). Node aspects and the node as a transit target
+  now project; peregrine is marked on placement atoms. `enrichContextOptions`
+  projects transit houses, stations, returns, and lunations by default.
+- **Draconic.** `draconicLongitude` / `draconicChart` re-zero the zodiac at
+  the Moon's ascending node (true node by default).
+- **`VERSION`.** Runtime string constant, asserted equal to `package.json`.
+- **Vector-mode sky projection.** `skyCamera`, `radialScale`, and
+  `skyProjector` (plus `dirFromAzAlt`) for consumers that draw rather than
+  place pixels. Python mirrors (`sky_camera`, `radial_scale`, `sky_project`);
+  the skyview golden pins the pair.
+- **`sceneNote`.** Optional extra SCENE line on `skyView` (place, weather,
+  foreground). It lands in `prompt` and `renderPlan.background.prompt`;
+  placements do not change.
+
+### Corpus (`caelus-corpus`, unpublished)
+
+Original essays written against the engine's fact atoms, lazy-loaded in the
+Playground Reading tab (`natal` / `conditions` / `degrees` / `transits` /
+`timing` / `relationship` subpaths). **`caelus-delineations-pd`** remains the
+published npm corpus.
+
+### Delineations (`caelus-delineations-pd` 0.1.6)
+
+The `caelus` peer range widens to `>=0.24.0 <0.26` so the corpus installs
+beside 0.25.0. Extractors now repair OCR damage and section bleed instead
+of quoting into the next chapter, and validation fails when an OCR token
+survives into a passage. Alan Leo's *Key* is quarantined and Heindel is re-sourced from the
+Rosicrucian Fellowship HTML. 372 passages ship.
+
+### Wheel (`caelus-wheel`)
+
+- **`MultiWheel`**: a rings API, up to four charts. Kundli and the
+  Playground `BiWheel` stay.
+- **EphemerisGraph** accepts `band` / `marks` / `cursor` / `accent`.
+  Gridline, band, mark, and cursor coordinates round to 0.1, as the
+  polylines already did, so the SVG is byte-identical on arm64 and x86-64.
+- **`PLATE_TOKENS`**, **`PLATE_THEME`**, **`PLATE_BODY_INKS`**: an optional
+  ink palette for widget figures.
+
+### Playground widgets (`caelus-widgets`)
+
+Interactive figures mounted in the Workspace playground (no Encyclopedia
+chrome): house comparator, sky→wheel derivation, sect flip, retrograde
+scrub, and aspect dial. Figures accept an optional `theme` so the
+playground can pass `WHEEL_THEME`. `DerivationFigure` accepts `openingAim`
+for a scenic VIEW pre-roll before SKY, and `overlays` to name bodies from
+t = 0 then light the great cross (ecliptic × horizon), then figures,
+signs, and houses. With overlays the camera keeps tilting from SPHERE
+through the fold, then flattens slowly onto the page as each mark lerps
+onto the natal wheel. `PlateConsole`
+accepts `snapOnRelease={false}` for a free-stop scrub; a drag that
+leaves the rule keeps the pointer and does not start a text selection.
+More than six stations stack on two rows so the labels do not collide.
+Overlay glyphs take a hairline halo (and follow `theme` when one is
+passed) so counters stay open in dark mode.
+
+### Site (`apps/web`)
+
+- Playground Reading tab (the natal report, and the compare reading when a
+  partner is present) lazy-loads the B5 conditions and B6 degree batches
+  via `caelus-corpus/conditions` and `caelus-corpus/degrees`, alongside
+  natal, transits, and timing.
+- Home page: below the proof cards, a live New York event sky (read-only
+  stamp), a pre-generated plate composited with `skyProjector`, a derivation
+  morph that folds into a large chart: named bodies at VIEW, then the
+  ecliptic and horizon as the great cross on the still photograph, then
+  constellation, zodiac, and house overlays, a continuous tilt through
+  SPHERE, a slow flatten that carries each mark onto the natal wheel.
+  The plate stays under the figure through WHEEL. The natal wheel under
+  the stage stays put after the fold. Transport (previous, play, pause,
+  next) sits at the left of the scrub, on the rule. Then the ecliptic
+  strip and a Compute-a-chart sample synced to the same instant.
+
 ## v0.24.1 — Ship the complete tarball (wide planet packs restored)
 
 *2026-08-15*
@@ -75,14 +165,14 @@ basis (sun 0.03″, the majors 0.02–0.12″, Pluto 0.015″, the small bodies
 - **Fitted vs validated.** `engineCapabilities` reports each pack's real
   fitted span separately from the validated span. The majors, Pluto and the
   Moon validate 1000–3000; the small bodies 1600–2484 (the widest window
-  Horizons serves them). A body outside its pack lands in `Chart.unavailable`
-  rather than silently serving a fallback the engine has not validated.
+  Horizons serves them). A body outside its pack lands in `Chart.unavailable`;
+  the unvalidated fallback is not served.
 - **Aberration latitude term.** Annual aberration now corrects ecliptic
   latitude as well as longitude (Meeus eq. 23.3), fixing a large error for
   high-inclination bodies: Pallas read 13.3″ off against JPL in latitude
   alone, Pluto ~4.6″. Every packed body now measures under 1″ in the core
   band.
-- **Honest ancient dates.** `Chart.warnings` states the delta-T split per
+- **Delta-T warnings for ancient dates.** `Chart.warnings` states the delta-T split per
   chart: at 1000 CE sigma is ~76 s, smearing the angles ~0.32° and the Moon
   ~0.7′ while the slow bodies hold. "Validated to 1000–3000" is a TT position
   claim; the input clock is fuzzier than the engine for ancient dates.

@@ -1,0 +1,248 @@
+{
+ "name": "synastry-pluto-1",
+ "outFile": "b3-synastry-pluto-1.json",
+ "setId": "house-b3-synastry-pluto-1",
+ "family": "synastry-aspect",
+ "cells": [
+  {
+   "id": "synastry:pluto:conjunction:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "pluto",
+    "b": "sun",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:pluto~b_sun:conjunction"
+   ],
+   "title": "Your Pluto conjunct their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:pluto:sextile:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "pluto",
+    "b": "sun",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:pluto~b_sun:sextile"
+   ],
+   "title": "Your Pluto sextile their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:pluto:square:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "pluto",
+    "b": "sun",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:pluto~b_sun:square"
+   ],
+   "title": "Your Pluto square their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:pluto:trine:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "pluto",
+    "b": "sun",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:pluto~b_sun:trine"
+   ],
+   "title": "Your Pluto trine their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:pluto:opposition:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "pluto",
+    "b": "sun",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:pluto~b_sun:opposition"
+   ],
+   "title": "Your Pluto opposite their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:pluto:conjunction:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "pluto",
+    "b": "moon",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:pluto~b_moon:conjunction"
+   ],
+   "title": "Your Pluto conjunct their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:pluto:sextile:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "pluto",
+    "b": "moon",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:pluto~b_moon:sextile"
+   ],
+   "title": "Your Pluto sextile their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:pluto:square:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "pluto",
+    "b": "moon",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:pluto~b_moon:square"
+   ],
+   "title": "Your Pluto square their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:pluto:trine:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "pluto",
+    "b": "moon",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:pluto~b_moon:trine"
+   ],
+   "title": "Your Pluto trine their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:pluto:opposition:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "pluto",
+    "b": "moon",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:pluto~b_moon:opposition"
+   ],
+   "title": "Your Pluto opposite their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:pluto:conjunction:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "pluto",
+    "b": "mercury",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:pluto~b_mercury:conjunction"
+   ],
+   "title": "Your Pluto conjunct their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:pluto:sextile:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "pluto",
+    "b": "mercury",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:pluto~b_mercury:sextile"
+   ],
+   "title": "Your Pluto sextile their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:pluto:square:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "pluto",
+    "b": "mercury",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:pluto~b_mercury:square"
+   ],
+   "title": "Your Pluto square their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:pluto:trine:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "pluto",
+    "b": "mercury",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:pluto~b_mercury:trine"
+   ],
+   "title": "Your Pluto trine their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:pluto:opposition:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "pluto",
+    "b": "mercury",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:pluto~b_mercury:opposition"
+   ],
+   "title": "Your Pluto opposite their Mercury",
+   "bindable": true
+  }
+ ]
+}

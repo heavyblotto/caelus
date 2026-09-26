@@ -56,6 +56,18 @@ export interface EngineData {
    *  every other body, amplified by 1/distance -- which is why packing it
    *  lifts the whole chart at once (range-expansion.md Tier C). */
   earthPack?: ChebData;
+  /** Era slabs (deep-time expansion, caelus-deep-time-requirements.md R1):
+   *  same ChebData format as the default packs, adjoined earlier in time.
+   *  File naming: `{body}_cheb.{era}.json` beside `{body}_cheb.json`, e.g.
+   *  `jupiter_cheb.classical.json`. A body resolves at an instant from the
+   *  slab whose span covers it; the default pack is just the slab with no
+   *  era in its name. Nothing here changes behaviour where no slab exists. */
+  eraPacks?: Record<string, ChebData[]>;
+  /** Earth's era slabs, same format and resolution rule as eraPacks. */
+  earthEraPacks?: ChebData[];
+  /** The Moon's era slabs, same format; moonPackAt picks the covering slab
+   *  (the modern tier first, then these). */
+  moonEraPacks?: ChebData[];
   /** Hamburg-school (Uranian) constant-element orbits; see fit_uranian.py. */
   keplerPack?: KeplerPack;
   /** Fixed-star catalog (HYG-derived; ICRS J2000 + proper motions). */
@@ -184,8 +196,21 @@ export function jdTT(jdUt: number): number {
 export function earthHeliocentric(
   data: EngineData, jde: number,
 ): [number, number, number] {
-  const pack = data.earthPack;
-  if (!pack) return vsopHeliocentric(data.vsop.earth, jde);
+  const modern = data.earthPack;
+  const eras = data.earthEraPacks ?? [];
+  if (!modern && eras.length === 0) return vsopHeliocentric(data.vsop.earth, jde);
+  // The covering slab wins: the default pack first, then the era slabs
+  // (deep-time R1). None covering means the same RangeError the single-pack
+  // path always threw, so chartAt marks the body unavailable as before.
+  let pack = modern;
+  for (const slab of [modern, ...eras]) {
+    if (!slab) continue;
+    const end = slab.jd0 + slab.segments.length * slab.seg_days;
+    if (slab.jd0 <= jde && jde <= end) { pack = slab; break; }
+  }
+  if (!pack) {
+    throw new RangeError(`jd ${jde} outside fitted range (no era slab covers it)`);
+  }
   const [x, y, z] = new ChebSeries(pack).xyz(jde);
   let L = mod(Math.atan2(y, x), TWO_PI);
   let B = Math.atan2(z, Math.hypot(x, y));

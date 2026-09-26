@@ -1,0 +1,233 @@
+{
+ "name": "composite-aspects-mercury-1",
+ "outFile": "b3-composite-aspects-mercury-1.json",
+ "setId": "house-b3-composite-aspects-mercury-1",
+ "family": "composite-aspect",
+ "cells": [
+  {
+   "id": "composite:aspect:mercury:conjunction:venus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mercury",
+    "b": "venus",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:mercury~venus:conjunction"
+   ],
+   "title": "Composite Mercury conjunct composite Venus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mercury:sextile:venus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mercury",
+    "b": "venus",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:mercury~venus:sextile"
+   ],
+   "title": "Composite Mercury sextile composite Venus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mercury:square:venus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mercury",
+    "b": "venus",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:mercury~venus:square"
+   ],
+   "title": "Composite Mercury square composite Venus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mercury:trine:venus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mercury",
+    "b": "venus",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:mercury~venus:trine"
+   ],
+   "title": "Composite Mercury trine composite Venus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mercury:opposition:venus",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mercury",
+    "b": "venus",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:mercury~venus:opposition"
+   ],
+   "title": "Composite Mercury opposite composite Venus",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mercury:conjunction:mars",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mercury",
+    "b": "mars",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:mercury~mars:conjunction"
+   ],
+   "title": "Composite Mercury conjunct composite Mars",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mercury:sextile:mars",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mercury",
+    "b": "mars",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:mercury~mars:sextile"
+   ],
+   "title": "Composite Mercury sextile composite Mars",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mercury:square:mars",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mercury",
+    "b": "mars",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:mercury~mars:square"
+   ],
+   "title": "Composite Mercury square composite Mars",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mercury:trine:mars",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mercury",
+    "b": "mars",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:mercury~mars:trine"
+   ],
+   "title": "Composite Mercury trine composite Mars",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mercury:opposition:mars",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mercury",
+    "b": "mars",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:mercury~mars:opposition"
+   ],
+   "title": "Composite Mercury opposite composite Mars",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mercury:conjunction:jupiter",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mercury",
+    "b": "jupiter",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:mercury~jupiter:conjunction"
+   ],
+   "title": "Composite Mercury conjunct composite Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mercury:sextile:jupiter",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mercury",
+    "b": "jupiter",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:mercury~jupiter:sextile"
+   ],
+   "title": "Composite Mercury sextile composite Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mercury:square:jupiter",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mercury",
+    "b": "jupiter",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:mercury~jupiter:square"
+   ],
+   "title": "Composite Mercury square composite Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mercury:trine:jupiter",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mercury",
+    "b": "jupiter",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:mercury~jupiter:trine"
+   ],
+   "title": "Composite Mercury trine composite Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:mercury:opposition:jupiter",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "mercury",
+    "b": "jupiter",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:mercury~jupiter:opposition"
+   ],
+   "title": "Composite Mercury opposite composite Jupiter",
+   "bindable": true
+  }
+ ]
+}

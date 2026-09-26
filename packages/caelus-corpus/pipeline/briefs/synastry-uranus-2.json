@@ -1,0 +1,248 @@
+{
+ "name": "synastry-uranus-2",
+ "outFile": "b3-synastry-uranus-2.json",
+ "setId": "house-b3-synastry-uranus-2",
+ "family": "synastry-aspect",
+ "cells": [
+  {
+   "id": "synastry:uranus:conjunction:venus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "uranus",
+    "b": "venus",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:uranus~b_venus:conjunction"
+   ],
+   "title": "Your Uranus conjunct their Venus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:uranus:sextile:venus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "uranus",
+    "b": "venus",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:uranus~b_venus:sextile"
+   ],
+   "title": "Your Uranus sextile their Venus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:uranus:square:venus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "uranus",
+    "b": "venus",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:uranus~b_venus:square"
+   ],
+   "title": "Your Uranus square their Venus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:uranus:trine:venus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "uranus",
+    "b": "venus",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:uranus~b_venus:trine"
+   ],
+   "title": "Your Uranus trine their Venus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:uranus:opposition:venus",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "uranus",
+    "b": "venus",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:uranus~b_venus:opposition"
+   ],
+   "title": "Your Uranus opposite their Venus",
+   "bindable": true
+  },
+  {
+   "id": "synastry:uranus:conjunction:mars",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "uranus",
+    "b": "mars",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:uranus~b_mars:conjunction"
+   ],
+   "title": "Your Uranus conjunct their Mars",
+   "bindable": true
+  },
+  {
+   "id": "synastry:uranus:sextile:mars",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "uranus",
+    "b": "mars",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:uranus~b_mars:sextile"
+   ],
+   "title": "Your Uranus sextile their Mars",
+   "bindable": true
+  },
+  {
+   "id": "synastry:uranus:square:mars",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "uranus",
+    "b": "mars",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:uranus~b_mars:square"
+   ],
+   "title": "Your Uranus square their Mars",
+   "bindable": true
+  },
+  {
+   "id": "synastry:uranus:trine:mars",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "uranus",
+    "b": "mars",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:uranus~b_mars:trine"
+   ],
+   "title": "Your Uranus trine their Mars",
+   "bindable": true
+  },
+  {
+   "id": "synastry:uranus:opposition:mars",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "uranus",
+    "b": "mars",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:uranus~b_mars:opposition"
+   ],
+   "title": "Your Uranus opposite their Mars",
+   "bindable": true
+  },
+  {
+   "id": "synastry:uranus:conjunction:jupiter",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "uranus",
+    "b": "jupiter",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:uranus~b_jupiter:conjunction"
+   ],
+   "title": "Your Uranus conjunct their Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "synastry:uranus:sextile:jupiter",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "uranus",
+    "b": "jupiter",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:uranus~b_jupiter:sextile"
+   ],
+   "title": "Your Uranus sextile their Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "synastry:uranus:square:jupiter",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "uranus",
+    "b": "jupiter",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:uranus~b_jupiter:square"
+   ],
+   "title": "Your Uranus square their Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "synastry:uranus:trine:jupiter",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "uranus",
+    "b": "jupiter",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:uranus~b_jupiter:trine"
+   ],
+   "title": "Your Uranus trine their Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "synastry:uranus:opposition:jupiter",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "uranus",
+    "b": "jupiter",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:uranus~b_jupiter:opposition"
+   ],
+   "title": "Your Uranus opposite their Jupiter",
+   "bindable": true
+  }
+ ]
+}

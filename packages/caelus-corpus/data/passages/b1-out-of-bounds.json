@@ -1,0 +1,110 @@
+[
+  {
+    "id": "natal:moon:oob",
+    "family": "out-of-bounds",
+    "when": {
+      "kind": "outOfBounds",
+      "body": "moon"
+    },
+    "atomIds": [
+      "oob:moon"
+    ],
+    "text": "Your Moon sits out of bounds, past the farthest point the Sun ever reaches in the sky. Astrologers read this as a Moon that answers to no one: your feelings, needs, and instincts run outside the common script. Somewhere early on, the standard emotional playbook did not quite fit you. What comforted other children may have left you cold, and what you actually needed may have puzzled the people raising you. So you improvised, and you have been improvising since. The result is an inner life that is genuinely your own invention: original, vivid, and hard for others to predict. You feel things at a scale most people keep dialed down, and you are capable of emotional honesty that startles a room, because you never fully absorbed the rules about what one is supposed to feel. The cost is a recurring sense of being a foreigner in ordinary emotional life, watching others follow customs you were never issued. Moods can also run further than expected, in both directions, before something in you turns them around. Home, family, and belonging tend to take unconventional shapes for you, less because you reject the usual forms than because they were never quite built to your measurements. Your growth comes from trusting the instrument rather than correcting it. When you stop measuring your feelings against a standard that was never yours, their strangeness turns out to be range, and the people who love you get someone no template could have produced."
+  },
+  {
+    "id": "natal:mercury:oob",
+    "family": "out-of-bounds",
+    "when": {
+      "kind": "outOfBounds",
+      "body": "mercury"
+    },
+    "atomIds": [
+      "oob:mercury"
+    ],
+    "text": "Mercury in your chart travels out of bounds, beyond the Sun's own limit of declination, and astrologers take that literally: this is a mind off the supervised path. You do not think in the standard sequence. Ideas arrive from angles nobody else was facing, and your reasoning often skips steps that turn out, on inspection, not to have been needed. Formal schooling may have fit you badly, not because you lacked ability but because your ability refused the format. Left to follow your own curiosity, you learn fast and strangely, connecting fields that are not supposed to touch. Your speech carries the same signature. You say the unsayable thing, ask the question everyone was avoiding, or frame a problem in words so fresh that the problem itself changes shape. This can make you the most original voice in a room and also the most unsettling one, since people who think in straight lines cannot always tell whether you are brilliant or simply lost. Sometimes neither can you, and part of your work is building your own tests for your own ideas, because outside opinion will run hot and cold without much signal in it. Writing, invention, and any craft that rewards an unrepeatable point of view give this Mercury a place to be useful rather than merely odd. Over time you learn to translate: to carry your findings back across the border and put them in words the mainland can use. That translation, not conformity, is how a mind like yours gets heard."
+  },
+  {
+    "id": "natal:venus:oob",
+    "family": "out-of-bounds",
+    "when": {
+      "kind": "outOfBounds",
+      "body": "venus"
+    },
+    "atomIds": [
+      "oob:venus"
+    ],
+    "text": "With Venus out of bounds, the part of you that loves and the part of you that finds things beautiful both operate outside the ordinary rules. Astrologers read a planet past the Sun's declination limit as unsupervised, and here that means your heart never signed the standard contract. You are drawn to people, art, and pleasures that the approved list does not cover, and approval itself has remarkably little effect on your taste. When you love someone, the question of whether you are supposed to barely registers. This gives your affections a rare purity: they are chosen by you, not assigned by your surroundings, and the people you care for can feel the difference. Your sense of beauty works the same way. You find elegance where others see nothing, and your style, whatever form it takes, tends to be unmistakably yours. The unfenced quality has costs. Desire without a boundary line can overshoot, in romance, in spending, in appetite for the lovely and the sweet, and relationships built to your own specifications can be hard to explain to families and friends who wanted something recognizable. You may spend years feeling that your way of loving is somehow incorrect before it occurs to you that it is simply original. The turn comes when you start setting your own terms consciously instead of just falling outside everyone else's. A love life and an aesthetic authored on purpose, rather than by default, is this placement grown up, and it is worth the trouble it took."
+  },
+  {
+    "id": "natal:mars:oob",
+    "family": "out-of-bounds",
+    "when": {
+      "kind": "outOfBounds",
+      "body": "mars"
+    },
+    "atomIds": [
+      "oob:mars"
+    ],
+    "text": "Mars out of bounds is an engine running past its rated limit. The planet of drive, anger, and nerve sits beyond the Sun's farthest declination, and astrologers read that as a will operating outside normal supervision. Whatever most people have in the tank, you seem to have more: more stamina, more daring, more willingness to attempt the thing that sensible people have already ruled out. When you commit to an effort, you do not pace yourself by the usual gauges, and you routinely pass the point where others stop, sometimes because you did not notice the point was there. This is the signature of extraordinary athletes, competitors, and people who build things nobody thought buildable. It is also the signature of burnout and of fights that went one sentence too far. Your anger, like your energy, does not come with a factory governor. It can run hotter and longer than the situation called for, and learning your own early warnings is work this placement assigns you personally, since external limits have never really held you. Physical outlets matter more for you than for most people; drive at this voltage turns corrosive when it has nowhere to go. The deeper task is authorship. Rules imposed from outside will always feel optional to you, so the limits that actually protect you have to be ones you wrote and believe in. Once your force answers to your own considered judgment, its size stops being a hazard and becomes what it always wanted to be, which is capacity."
+  },
+  {
+    "id": "natal:jupiter:oob",
+    "family": "out-of-bounds",
+    "when": {
+      "kind": "outOfBounds",
+      "body": "jupiter"
+    },
+    "atomIds": [
+      "oob:jupiter"
+    ],
+    "text": "Jupiter rarely leaves the Sun's declination range, so a chart with Jupiter out of bounds carries an uncommon mark. Astrologers read an out-of-bounds planet as one working outside the ordinary rules, and Jupiter is already the planet of growth, faith, and appetite for more. Set loose, it does not double-check its own optimism. You tend to think in larger units than the people around you: bigger plans, longer odds, wider horizons, a confidence that the world will meet you halfway if you just keep moving toward it. Often it does, and your life may collect stories of luck that were really the compound interest of sheer willingness. Your generosity runs on the same open throttle. You give, promise, and encourage on a scale that can genuinely change what other people believe is possible for them. The exposure is obvious once named: a faith with no upper bound will sometimes write checks the facts cannot cash. Overcommitment, overspending, and promises made in full sincerity and forgotten in full sincerity are the recurring taxes here. You are not careless so much as unfenced, and the difference matters, because the fix is not to shrink. It is to aim. When your outsized hope gets attached to a few chosen things rather than everything at once, the same abundance that used to scatter starts to accumulate, and people discover that your big talk was actually a forecast."
+  },
+  {
+    "id": "natal:saturn:oob",
+    "family": "out-of-bounds",
+    "when": {
+      "kind": "outOfBounds",
+      "body": "saturn"
+    },
+    "atomIds": [
+      "oob:saturn"
+    ],
+    "text": "Saturn out of bounds is a quiet paradox: the planet of rules, limits, and authority positioned where, astrologers say, the ordinary rules do not reach. In practice this tends to mean your relationship with structure is self-invented. You take duty and discipline seriously, often more seriously than the people around you, but you take them on your own terms. Authority as such has never impressed you much; you look past the title to ask whether the standard actually holds, and when it does not, you feel little obligation to pretend. So you end up writing your own code. The work ethic is real, the sense of responsibility is real, but the framework they run inside was drafted by you, sometimes in open disagreement with how your family, employer, or culture said things must be done. This can make your career path unconventional, with authority earned in odd ways or exercised outside the usual ladders. It can also leave you carrying weight alone, since a private rulebook has no colleagues. The risk on one side is rigidity nobody can appeal, because the judge and the law are both you. The risk on the other is a stretch of years with no structure at all, after the borrowed kind is rejected and before your own is built. The reward for finishing that construction is considerable. Standards you authored and tested yourself do not crack under pressure the way inherited ones do, and people eventually treat you as the authority you never asked permission to become."
+  },
+  {
+    "id": "natal:uranus:oob",
+    "family": "out-of-bounds",
+    "when": {
+      "kind": "outOfBounds",
+      "body": "uranus"
+    },
+    "atomIds": [
+      "oob:uranus"
+    ],
+    "text": "Uranus in your chart sits out of bounds, past the Sun's own declination limit. Astrologers read that position as a planet freed from ordinary supervision, and Uranus was already the least supervised planet in the system: the breaker of patterns, the voice for the exception. Doubled like this, the theme is independence without apology. Because Uranus moves slowly, this condition belongs to a whole stretch of birth years rather than to you alone, so it works as an undercurrent more than a headline. Where you feel it personally is in your reflex toward the unconventional answer. When a situation offers the standard option and the strange one, something in you has usually inspected the strange one first. You are quick to spot which customs are load-bearing and which are just habit wearing a uniform, and you have limited patience for the second kind. Around you, this can register as a low background hum of disruption: things do not stay settled, assumptions get questioned, and rooms you spend time in tend to loosen up or fall apart. The cost is contrariness for its own sake, rebellion as a posture rather than a purpose. The gift is genuine freedom of mind. Your growth lies in choosing your departures deliberately, so that breaking a pattern is something you do for a reason, and the reason is one you could explain to someone you respect."
+  },
+  {
+    "id": "natal:neptune:oob",
+    "family": "out-of-bounds",
+    "when": {
+      "kind": "outOfBounds",
+      "body": "neptune"
+    },
+    "atomIds": [
+      "oob:neptune"
+    ],
+    "text": "Your Neptune lies out of bounds, beyond the band of sky the Sun ever crosses. The tradition around this is modern and thin, so honesty means saying less rather than more. Astrologers read an out-of-bounds planet as one that escapes the usual containment, and Neptune's business is imagination, longing, and the softening of hard edges. Set loose, that current runs wider. Neptune moves slowly, so this condition colors years of births at a time. It works in you as background weather rather than a personal trait, but the weather is real. Your imagination ignores the usual property lines between what is and what could be. Your sympathy can extend to people and causes that practical minds wrote off long ago. At its best this shows up as vision, artistry, or a spiritual openness that refuses the packaged versions on offer. At its worst it is fog with no shoreline: ideals that never get checked against evidence, escapes that run longer than planned, boundaries that were never drawn at all. You may find you need more deliberate anchoring than other people do, some steady practice that returns you to the measurable world. With that anchor in place, the wide-open quality stops being a leak and becomes a reach. You can then bring back, from the unbounded places, something the bounded world can actually use."
+  },
+  {
+    "id": "natal:pluto:oob",
+    "family": "out-of-bounds",
+    "when": {
+      "kind": "outOfBounds",
+      "body": "pluto"
+    },
+    "atomIds": [
+      "oob:pluto"
+    ],
+    "text": "Pluto in your chart is out of bounds, traveling beyond the Sun's maximum declination. Pluto's tilted orbit takes it there for long stretches, so whole generations share the condition, and the honest reading keeps that scale in mind: this is a deep current, not a personality trait. What the modern tradition suggests is simple enough. An out-of-bounds planet works outside ordinary limits, and Pluto is the planet of intensity, power, and transformation. Placed past the boundary, those themes lose their normal ceiling. In your life this may surface as an instinct for the bottom of things. Surface answers do not satisfy you for long; when something matters, you keep pressing until you reach whatever is actually underneath, in yourself or in a situation, and you can tolerate depths of feeling and crisis that send most people back up for air. Endings and rebuildings may arrive in your story at an unusual magnitude, and your relationship with power, having it, fearing it, refusing it, tends to be worked out firsthand rather than inherited. The hazard is extremity treated as proof of seriousness, or control pursued past the point where anything is left to control. The strength is a capacity for renewal that ordinary limits would have capped. You grow by letting the intensity serve transformation rather than possession: what you can release and rebuild, at this depth, is more than most people ever get to touch."
+  }
+]

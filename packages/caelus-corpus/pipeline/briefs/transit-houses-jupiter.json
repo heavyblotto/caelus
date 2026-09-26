@@ -1,0 +1,176 @@
+{
+ "name": "transit-houses-jupiter",
+ "outFile": "b2-transit-houses-jupiter.json",
+ "setId": "house-b2-transit-houses-jupiter",
+ "family": "transit-house",
+ "cells": [
+  {
+   "id": "transit:jupiter:house:1",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "jupiter",
+    "house": 1
+   },
+   "atomIds": [
+    "transitHouse:jupiter:1"
+   ],
+   "title": "Jupiter moving through your 1st house",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:house:2",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "jupiter",
+    "house": 2
+   },
+   "atomIds": [
+    "transitHouse:jupiter:2"
+   ],
+   "title": "Jupiter moving through your 2nd house",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:house:3",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "jupiter",
+    "house": 3
+   },
+   "atomIds": [
+    "transitHouse:jupiter:3"
+   ],
+   "title": "Jupiter moving through your 3rd house",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:house:4",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "jupiter",
+    "house": 4
+   },
+   "atomIds": [
+    "transitHouse:jupiter:4"
+   ],
+   "title": "Jupiter moving through your 4th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:house:5",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "jupiter",
+    "house": 5
+   },
+   "atomIds": [
+    "transitHouse:jupiter:5"
+   ],
+   "title": "Jupiter moving through your 5th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:house:6",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "jupiter",
+    "house": 6
+   },
+   "atomIds": [
+    "transitHouse:jupiter:6"
+   ],
+   "title": "Jupiter moving through your 6th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:house:7",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "jupiter",
+    "house": 7
+   },
+   "atomIds": [
+    "transitHouse:jupiter:7"
+   ],
+   "title": "Jupiter moving through your 7th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:house:8",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "jupiter",
+    "house": 8
+   },
+   "atomIds": [
+    "transitHouse:jupiter:8"
+   ],
+   "title": "Jupiter moving through your 8th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:house:9",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "jupiter",
+    "house": 9
+   },
+   "atomIds": [
+    "transitHouse:jupiter:9"
+   ],
+   "title": "Jupiter moving through your 9th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:house:10",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "jupiter",
+    "house": 10
+   },
+   "atomIds": [
+    "transitHouse:jupiter:10"
+   ],
+   "title": "Jupiter moving through your 10th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:house:11",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "jupiter",
+    "house": 11
+   },
+   "atomIds": [
+    "transitHouse:jupiter:11"
+   ],
+   "title": "Jupiter moving through your 11th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:house:12",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "jupiter",
+    "house": 12
+   },
+   "atomIds": [
+    "transitHouse:jupiter:12"
+   ],
+   "title": "Jupiter moving through your 12th house",
+   "bindable": true
+  }
+ ]
+}

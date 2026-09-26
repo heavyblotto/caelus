@@ -1,0 +1,212 @@
+[
+ {
+  "id": "transit:sun:conjunction:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "saturn",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:sun~natal_saturn:conjunction"
+  ],
+  "text": "Every year the Sun crosses your natal Saturn, and for a couple of days the lights come on in the room where you keep your obligations. This is a sober little season. Your energy may dip, your mood may flatten, and the things you have been postponing suddenly look larger than they are. The conjunction fuses the day's vitality with your sense of duty, so whatever you do now, you tend to do with the handbrake slightly on. While the aspect is still approaching, you often feel the weight before you can name it: a vague heaviness, a sense of being behind, a wish to cancel plans and catch up on something serious. At the exact pass the theme peaks, and reality usually gets specific. A bill, a deadline, a conversation with someone in charge, or a plain look in the mirror tells you where the structure of your life is solid and where it sags. As the Sun separates, the pressure lifts quickly, and what remains is useful information. Treat these days as an annual inspection rather than a verdict. Nothing about this pass is long enough to change your life by itself; it lasts days, not months, and it will come again next year at roughly the same point in your calendar. Its value lies in the clarity of the snapshot. Work done now tends to be careful and durable, so it is a natural moment for finishing, filing, repairing, and honoring promises. Company can feel like effort, and you may prefer your own quiet, which is fine for a day or two. The risk is taking the temporary flatness as the truth about your whole life. Discouragement under this transit exaggerates; the picture is accurate about your structures and unfair about your worth. If you can hold that distinction, the conjunction becomes one of the more honest days of your year. You see what you have actually built, you feel the cost of what you have avoided, and you get a clean, unglamorous sense of the next brick to lay. People who use this pass well tend to leave it with one small commitment made soberly, and that commitment often outlives the mood that produced it."
+ },
+ {
+  "id": "transit:sun:sextile:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "saturn",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:sun~natal_saturn:sextile"
+  ],
+  "text": "Twice a year the Sun slips into sextile with your natal Saturn, and for a few days your will takes kindly to harness. Nothing announces it. The days simply run smoother for practical work: your attention holds, tedious tasks feel less tedious, and the long view comes into focus without strain. A sextile is an offer, not a push, so this period gives you nothing unless you pick up the tools. While the aspect builds, you may notice a mild appetite for order, a wish to sort the drawer, settle the account, answer the message that has waited a week. The best footing comes at the exact aspect, a fine window for the modest, structural moves that future months lean on: committing to a plan, asking a steadier or more experienced person for advice, starting the routine you have been meaning to start. As the Sun moves on, the window closes gently, and whatever you set in motion keeps running. The Sun travels fast, so this is a matter of days, part of its ordinary yearly round, and it will come back. That is the right way to size it: not a life chapter, just a recurring patch of good working weather. Used year after year, though, these small patches add up to something real, the way regular maintenance quietly outperforms occasional heroics. In daily life the tone is composed and slightly conservative. You are more willing to be patient, more able to say no without drama, more comfortable with tasks that pay off later rather than now. Elders, bosses, and institutions tend to be easier to deal with, and a request made in this window often lands better because you present it calmly. Relationships benefit from the same steadiness; this is a good moment for the unexciting conversations about logistics or shared plans that keep a household running. The only way to waste the transit is to drift through it, since nothing will force your hand. If you meet it with even an hour of deliberate effort, it repays you out of proportion to the size of the gesture, and it teaches, in miniature, Saturn's favorite lesson: small, steady, chosen work is the cheapest form of self-respect."
+ },
+ {
+  "id": "transit:sun:square:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "saturn",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:sun~natal_saturn:square"
+  ],
+  "text": "Friction is the signature of these few days. With the Sun square your natal Saturn, your forward motion and your sense of limits are at cross purposes, and the week has a way of saying no. Plans slow. Approvals stall. Someone with authority, or simply someone older and more tired than you, points out the flaw in your idea. Your own body may join in, offering less energy exactly when you want more. A square forces a question the softer aspects only raise, and this one asks whether your current push respects the structure it is pushing against. While the aspect applies, frustration tends to build in small increments: little delays, small criticisms, a growing suspicion that everything is harder than it should be. At the exact contact the wall feels most solid. This is often when the discouraging conversation happens or the obstacle takes its clearest shape. As the Sun pulls away, the mood lightens fast, and what looked like a verdict turns back into a detail you can fix. Keep the sizing honest: this is a quick transit, gone in days, returning on the Sun's ordinary yearly lap. It cannot wreck anything durable. What it can do is show you, briefly and vividly, where your ambitions and your foundations disagree. The feeling of being blocked is real, but it is a reading of the moment, not of your prospects. Decisions made from inside the flatness tend to be too pessimistic, so heavy conclusions are usually worth postponing until the aspect has passed and your energy returns. Meanwhile the period rewards humble work. Chip at the obstacle rather than charging it. Fix the small thing the critic was right about, even if the tone stung. Give the authority figure the paperwork they asked for. These unglamorous moves often dissolve the resistance faster than argument does. There is also a private gain on offer. A day or two of honest resistance shows you how you respond to being told no: whether you collapse, whether you bristle, whether you can hear the useful part of a criticism and drop the rest. Practicing that under a small, short transit builds a skill you will want under the long ones, and it turns an irritating week into a rehearsal that quietly pays."
+ },
+ {
+  "id": "transit:sun:trine:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "saturn",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:sun~natal_saturn:trine"
+  ],
+  "text": "Some days hold together better than others, and these are a few of them. The Sun in trine to your natal Saturn eases the usual argument between what you want to do and what you ought to do; for once the two point the same way. Your energy is steady rather than high, your judgment runs a little cooler than usual, and work that needs patience seems to organize itself. A trine does not create anything; it removes friction from what is already there. So the character of these days depends on what you bring to them. Brought nothing, they pass as pleasant, mildly productive, and forgettable. Brought a task that matters, they become one of the better working windows of your season. As the aspect approaches you may notice a settling, a sense of being on schedule with your own life. Around the exact pass, concentration peaks and responsibilities feel lighter to carry, which makes it a natural time to finish something, commit to something, or put a plan in writing. As the contact fades, the calm lingers a little, like a room that has just been cleaned. The Sun moves quickly, so the whole visit lasts a matter of days and comes back with every yearly round. That rhythm suggests its best use: maintenance. This is the recurring appointment in which your life gets a tune-up, obligations get squared, and the people who rely on you get to see you at your most dependable. Dealings with employers, officials, landlords, and anyone else who holds a stamp tend to go smoothly now, partly because you come across as someone who has thought things through. In close relationships the gift is quieter: you are easier to lean on, and the steady presence you offer these few days is often remembered longer than grander gestures. The subtle risk of a trine is drift, mistaking comfort for completion. If you decide on one concrete thing to build or repair while the weather is this good, the transit leaves a mark that outlasts it, and each annual return finds you standing on slightly firmer ground than the year before."
+ },
+ {
+  "id": "transit:sun:opposition:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "saturn",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:sun~natal_saturn:opposition"
+  ],
+  "text": "Once a year the Sun swings opposite your natal Saturn, and for a few days the no comes from the other side of the table. An opposition works through other people and outer circumstances, so the limits you meet now tend to wear faces: a supervisor who wants more, a partner who wants less, an institution whose rules do not bend, an older person whose disapproval lands harder than it should. Your vitality often dips at the same time, which makes every demand feel heavier. The theme of these days is the standoff between what you are trying to shine at and what your commitments require, and the opposition insists you look at both at once. While the aspect builds, obligations seem to gather; you may feel watched, graded, or subtly outnumbered. At the peak the confrontation usually becomes specific, an actual conversation, refusal, or reckoning, and the temptation is to read it as rejection. As the Sun moves past, distance returns, and with it the useful version of the experience: perspective. Seen from a few days later, the person who blocked you often turns out to have been describing a real constraint, clumsily. It helps to remember the scale. This is a brief pass, an annual visitation rather than an era, and by design it sits opposite the yearly moment when the Sun joins your Saturn. Think of it as the far turn of that cycle, the point where you view your duties from across the field instead of from inside them. Nothing about it requires immediate surrender or immediate rebellion; mostly it requires accurate listening. The period favors patience over performance. Meetings where you absorb criticism without collapsing or counterattacking tend to raise your standing later. Promises kept quietly now are worth more than promises made loudly. If loneliness shows up, and under this aspect it sometimes does, treat it as passing weather, not as a fact about your life; connection usually returns with your energy. What the transit builds, used well, is a kind of composure: the ability to face an unimpressed audience, take what is true, leave what is not, and stay yourself throughout. That skill, renewed in this small annual test, is one of the sturdier things a person can own."
+ },
+ {
+  "id": "transit:sun:conjunction:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "uranus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:sun~natal_uranus:conjunction"
+  ],
+  "text": "Expect the script to wobble. For a couple of days each year the Sun lights up your natal Uranus, and whatever in you is restless, inventive, or plain contrary gets the microphone. The conjunction fuses your will with your appetite for freedom, so routine chafes, surprises multiply, and ideas arrive faster than usual, some of them genuinely good. Life may cooperate by producing the unexpected on its own: sudden news, a plan overturned, an odd encounter that opens a door you did not know was there. While the aspect approaches, the first sign is usually a mood, an itch to change something, cancel something, or say the thing you normally hold back. The static builds to its crest at the crossing itself, which is when the impulsive move happens, the lightning insight lands, or the day simply refuses to go as scheduled. As the Sun separates, the charge drains quickly, and you get to sort what the burst left behind: which impulse was a real signal and which was just electricity. The Sun does not linger, so the whole event is brief and comes around annually, a scheduled bolt rather than a long storm. That brevity is worth respecting in both directions. The transit is too short to justify demolishing anything large, and too honest to ignore, because what excites you during these days is information about what your ordinary routine is suppressing. The period favors experiments that fit inside a week: a different route, a first draft, an overdue conversation, a tool you have never tried. It is less kind to fixed schedules and fragile machinery; allow slack where you can. Around other people you may be more blunt or more electric than usual, which refreshes some rooms and rattles others. The growth this small transit offers is calibration. Each year it shows you the gap between the life you have arranged and the aliveness you actually want, and the size of that gap is worth noticing. When the gap is small, the days pass as pleasant sparkle. When it is large, the jolt is proportionally rude. Either way you come out with better data, and sometimes with one small liberation, chosen on purpose, that makes the next year roomier."
+ },
+ {
+  "id": "transit:sun:sextile:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "uranus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:sun~natal_uranus:sextile"
+  ],
+  "text": "Novelty knocks politely during this transit. The Sun in sextile to your natal Uranus opens a brief, friendly channel between your daily will and your taste for the new, and it asks nothing; it only offers. Ideas come a little quicker. Chance encounters run a little stranger and a little luckier. The alternative you keep meaning to explore, the class, the tool, the person outside your usual circle, drifts within reach. Nothing here disrupts. A sextile has no force behind it, so the days pass unremarkably unless you reach back. As the aspect builds you may notice mild restlessness of the pleasant kind, curiosity without an object yet. The exact pass is the bright spot, the natural moment to try the experiment while it costs nothing: send the odd question, test the workaround, take the invitation you would usually decline. As the contact fades, whatever you touched keeps its momentum or quietly returns to the shelf. The Sun makes this angle in passing, a few days at most, and the offer renews with its yearly circuit, so missing one window is no tragedy. Still, the windows are worth using, because this is change at its cheapest. The same adjustment that would cost drama under a hard aspect costs almost nothing now: no resistance, no rupture, just a small step sideways into a slightly fresher arrangement. Friendship is the classic terrain for this aspect. Groups, networks, and acquaintances turn generative; someone on the edge of your life may hand you exactly the idea or contact you need, casually, in passing. Work benefits from the same looseness, especially problems that have resisted the direct approach and want a lateral one. The long game is what these little passes add up to. A person who takes one small voluntary risk each time this weather returns stays flexible without ever needing a crisis to force the issue. That is the quiet promise of the aspect: you get to update your life in small annual installments, on your own terms, while the price is low."
+ },
+ {
+  "id": "transit:sun:square:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "uranus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:sun~natal_uranus:square"
+  ],
+  "text": "Something in you wants to kick the fence this week. The Sun square your natal Uranus sets your immediate aims against your need for independence, and the result is static: impatience, abrupt moods, a low tolerance for being told what to do. The outer world often mirrors the mood. Schedules break, technology misbehaves, other people change their minds at the worst moment, and small disruptions arrive stacked. A square forces what a softer contact would only suggest, so the pressure has a point: somewhere your routine has grown too tight, and these days show you exactly where, by making the tight spot unbearable. While the aspect applies, the tension is mostly internal, an itch, a shortening fuse, a fantasy of dramatic exit. Near the exact pass it tends to discharge, through an outburst, an upset, or a genuine surprise from outside. Once the Sun moves on, the air clears fast, and the week's debris sorts itself into two piles: accidents to repair and signals to keep. Sizing matters more here than with almost any other aspect. This is a days-long annual pass, quick by nature, and its urgency is chemical rather than strategic. The impulse to walk out, cut someone off, or blow up something large feels compelling precisely while the aspect is exact, and usually looks different the following week. Rushing, especially around vehicles, tools, and hot-tempered conversations, is where the period does its cheapest damage, so a slower hand serves you. But suppressing everything is its own mistake. The restlessness is carrying information, and if the same complaint surfaces every time this square comes around, it has stopped being a mood and started being a message. The skill the transit builds is separating voltage from verdict. You learn to let the energy move, take the note, and defer the demolition, keeping the freedom impulse alive without letting it drive. People who manage that get the best of both: a routine that gets regularly stress-tested and revised, and a temper that stays theirs. The years do the rest, because a fence kicked a little, annually, on purpose, rarely needs to be torn down all at once."
+ },
+ {
+  "id": "transit:sun:trine:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "uranus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:sun~natal_uranus:trine"
+  ],
+  "text": "Change comes easily for a few days, which is rarer than it sounds. With the Sun trine your natal Uranus, the fresh option and the comfortable one stop fighting; you can try something new without breaking anything to do it. The mood is alert and slightly lucky. Plans bend agreeably, oddities entertain instead of annoy, and your timing improves, that knack of being in the right place just as the interesting thing happens. Because a trine removes resistance rather than adding force, the days will happily pass as mere pleasantness if you let them. The way to collect on the aspect is to point it at something. As it approaches, notice what suddenly seems possible that seemed stuck last week; that shift in perception is the transit arriving. The exact pass is the sweet spot for launches, first attempts, and conversations that reframe a problem, since your originality peaks while the risk stays low. As the contact loosens, novelty settles into your routine so smoothly you may forget it was ever new, which is this aspect's signature: change without whiplash. Like every angle the Sun makes, this one lasts days and returns with the yearly round, less a chapter than a recurring gift. Its favorite terrain is anywhere your life has quietly ossified. The workaround you improvise now often becomes the permanent method. The stranger you fall into conversation with often stays in your orbit. Even your own company improves; you are more interesting to yourself, less bound to the usual script, more willing to follow a thought to an unfamiliar conclusion. Nothing about the period demands courage, which is exactly its value as practice. You get to rehearse flexibility while flexibility is free, so that when some later, harder transit demands real adaptation, the motion is familiar. A person who spends each of these annual windows trying one thing sideways builds, over the years, a life that updates itself, and they usually cannot point to a single dramatic moment when it happened. It happened on days like these."
+ },
+ {
+  "id": "transit:sun:opposition:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "uranus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:sun~natal_uranus:opposition"
+  ],
+  "text": "This time the lightning comes from across the table. The Sun opposite your natal Uranus stages a brief confrontation between your plans and someone else's unpredictability, and for a few days the people around you seem to have signed nothing and promised less. A partner reverses a decision. A colleague improvises. A friend cancels, or appears out of nowhere with a proposal that scrambles your week. An opposition externalizes, so the restlessness that a conjunction would put inside you now walks in wearing someone else's coat, and your job is to meet it without either capitulating or clamping down. While the aspect builds, you may sense wobble in your arrangements, small signs that others are drifting off script. The exact pass is when the surprise usually lands, and with it the standoff: their freedom versus your agenda, their sudden truth versus your settled plan. As the Sun separates, positions soften and the episode shrinks to its real size, which is usually smaller than it felt. Remember the tempo. This is a quick annual pass, days long, and most of what it disrupts is schedule rather than substance. Its deeper use is diagnostic. The people who jolt you during this window are often expressing something you have been ignoring, either in them or in yourself; a partner's bid for space, read calmly, can be the first honest data you have received in months. Rigidity is the expensive response. Meeting each swerve with an ultimatum turns a passing aspect into a lasting grievance, while a bit of improvisation usually gets everyone through with relationships intact and sometimes refreshed. There is also the humbling possibility that the erratic party, seen from the other side, is you, since oppositions blur ownership; if several people this week seem to find you sudden, that is worth a look. What the transit teaches, in small annual doses, is how to share a life with other free agents: how to hold your course loosely, absorb a surprise without treating it as betrayal, and distinguish the disruptions that ask for firmness from the ones that ask for room. Every year you get a short rehearsal, and rehearsal, over time, is how composure gets built."
+ },
+ {
+  "id": "transit:sun:conjunction:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "neptune",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:sun~natal_neptune:conjunction"
+  ],
+  "text": "The edges of things soften when the Sun reaches your natal Neptune, and for a couple of days each year you run on different fuel. Willpower thins. Focus drifts. The to-do list keeps sliding off the desk of your attention, while imagination, sympathy, and longing all run unusually high. The conjunction fuses your basic drive with the part of you that dissolves boundaries, which is why these days can feel simultaneously inspired and useless: wonderful for music, prayer, daydreams, and compassion, unhelpful for contracts, confrontations, and anything requiring hard edges. As the aspect approaches, you may notice sleep deepening, dreams getting louder, and ordinary ambitions losing a little of their grip. Around the exact pass, the fog and the glow both peak. Moods arrive without labels, other people's feelings soak through as if the wall between you were thinner, and the world can seem either enchanted or vaguely disappointing, sometimes within the hour. As the Sun moves on, outlines return quickly, and things postponed during the blur turn out to have kept. It helps to plan around the tide rather than argue with it. This is a brief, annual visitation, and little is lost by letting the sharp-edged tasks wait a day or two while it passes. The period repays receptivity: art lands deeper now, kindness comes easier, and time near water, music, or quiet has an outsized restorative effect. The classic risks are small but real. Glamour is persuasive during these days, and people, offers, and self-assessments can look shinier than they are; enthusiasms conceived at the peak deserve a sober second read after the aspect separates. Escapist pulls also strengthen, and whatever your preferred exit is, it will advertise. None of that makes the transit an enemy. Once a year, briefly, the boundary between you and everything else gets thin, and something in you that spends the other days striving gets to rest and simply receive. People who give the tide that much, without handing it the car keys, tend to come back mildly renewed, carrying an image, an idea, or a softness that the sharp-edged months ahead turn out to need."
+ },
+ {
+  "id": "transit:sun:sextile:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "neptune",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:sun~natal_neptune:sextile"
+  ],
+  "text": "A gentler current runs under these few days. The Sun in sextile to your natal Neptune opens a quiet channel between your practical will and your imagination, and what flows through is subtle: a better ear for other people, a lighter grip on your agenda, an inclination toward beauty, rest, and meaning that daily life usually crowds out. The sextile only offers. Ignore it and the days pass as ordinary, perhaps slightly dreamy. Accept it and small, humane openings appear. As the aspect builds, you may catch yourself lingering, over music, over a memory, over someone's actual face instead of your idea of them. Near the exact pass the receptive mood peaks, and it favors particular kinds of work: creative drafts, acts of care, apologies, any task where feeling and craft cooperate. Helping someone quietly, with no audience, tends to land especially well now, for them and for you. As the contact fades, you return to full speed with, often, one soft thing worth keeping: an image, an insight, a reconciliation begun. The tempo is the Sun's, quick and yearly, so this is not a season of transformation; it is a recurring afternoon of good light. Its scale is exactly its charm. Nothing must be decided, nothing is at stake, and so the qualities this aspect sponsors, empathy, patience, imagination, get to stretch without pressure. Relationships benefit most. Listening improves, judgments loosen, and conversations that needed tenderness find it available. Inner life benefits too; if you keep any reflective practice, these days deepen it, and if you keep none, this is a painless time to sit still for ten minutes and see what surfaces. The long value is cumulative. A person who honors this small annual softening, even minimally, keeps the imaginative and compassionate rooms of their life aired out, so those rooms never fall entirely dark. That is modest, and it is the point: the sextile teaches that gentleness, taken regularly in small doses, is a form of maintenance too."
+ },
+ {
+  "id": "transit:sun:square:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "neptune",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:sun~natal_neptune:square"
+  ],
+  "text": "For a couple of days the picture blurs. The Sun square your natal Neptune sets your drive against a fog bank, and the classic result is a short stretch in which effort and outcome stop matching: energy leaks away without explanation, plans go vague at the edges, communications tangle, and your confidence in your own direction wavers. A square forces the issue where a softer contact would murmur, so the confusion is not decorative. It presses on whichever part of your life currently runs on an illusion, a flattering self-image, an oversold plan, a hope doing the work of a fact, and for a few days that part stops holding weight. While the aspect applies, the first symptom is usually dilution: you feel slightly absent from your own efforts, and motivation thins. Around the exact contact, discouragement or disorientation peaks. Misunderstandings are likeliest here, and so are the small deceptions, including the ones you practice on yourself. As the Sun moves past, clarity returns with almost comic speed, and the problem that looked existential resumes its actual size. That rebound is the key fact about this transit. It is brief, it recurs annually, and the despair it can generate is weather, not evidence about your life. Conclusions reached inside the fog are unreliable in both directions, so major verdicts about your worth, your work, or your relationships deserve a delay of a few days, after which most of them dissolve unassisted. In the meantime the period rewards modest hygiene: double-checking facts before repeating them, saying the explicit sentence instead of assuming you were understood, keeping promises small. Tiredness is legitimate now; rest repays more than pushing does. There is also a quieter opportunity inside the smudge. What blurs first under this square is usually what was painted on rather than built in, and noticing which certainty went soft tells you something true about where your confidence needs deeper footings. Handled that way, the transit becomes an annual humility check, small and passing, that leaves your self-knowledge slightly more waterproof each time, and costs you nothing but a couple of unfocused days."
+ },
+ {
+  "id": "transit:sun:trine:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "neptune",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:sun~natal_neptune:trine"
+  ],
+  "text": "Rest arrives disguised as ordinary days. When the Sun trines your natal Neptune, the usual tension between doing and dreaming relaxes, and for a little while the two cooperate: work goes gently, imagination feeds practical life instead of distracting from it, and the world seems inclined to be kind. Your sensitivity rises without the static that harder Neptune contacts bring, so you can feel more, sense more, and give more without being swamped. As the aspect forms, the first sign is often atmospheric, a softness in the day, an unhurried quality, a wish to make something or to be near beauty. At the exact pass, inspiration peaks quietly. Creative work started or continued now tends to have unusual ease, and conversations reach depths that surprise both parties without effort or cost. Compassion is cheap in the best sense; helping feels natural rather than dutiful. As the trine loosens, the glow fades gradually, often leaving one durable trace, a page, a resolution, a repaired feeling between you and someone else. The Sun keeps its own schedule, so this lasts a matter of days and returns each year like a favorite mild season. Nothing about it demands to be used, and that is part of its instruction. Some transits ask you to act; this one asks you to receive well, which many capable people find genuinely difficult. If your habit is to earn every good thing, a few days in which ease simply happens can be quietly corrective. The period favors art, music, water, sleep, generosity, and unstructured time, and it favors the parts of love that have no agenda. It is unremarkable for ambition, and pushing hard now mostly wastes the weather. The growth on offer is a widened sense of what counts as productive. A person who lets this annual softness actually reach them, rather than working through it on principle, tends to return to their striving slightly changed: less brittle, easier to be around, and carrying a reminder that the receptive days are not stolen from a life, they are part of what a life is for."
+ },
+ {
+  "id": "transit:sun:opposition:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "sun",
+   "natal": "neptune",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:sun~natal_neptune:opposition"
+  ],
+  "text": "Across the table sits something you cannot quite bring into focus. The Sun opposite your natal Neptune plays out, for a few days, in the space between you and other people, and its medium is mist: signals get misread, motives look murkier than they are, someone seems to promise what they never quite said, and you may feel subtly drained by company that usually feeds you. An opposition confronts through others, so the vagueness that a conjunction would put inside you now hovers in your relationships instead. Idealization is the classic move here. At this aspect's peak, people can look like saviors, disappointments, or mysteries, and all three readings are usually projections wearing borrowed faces. While the Sun applies, you may notice conversations going slippery, plans staying strangely unconfirmed, or a growing wish that someone would just be clear. Around the exact pass, the confusion or the disillusion tends to crest; a gap opens between who you thought someone was and what is actually in front of you. As the aspect separates, the mist thins fast, and most of the week's mysteries turn back into ordinary human muddle. Scale is your friend. This is a short annual pass, and it reveals more than it wrecks; the relationships it strains for a day or two are rarely the durable ones. Its real work is instruction in discernment. The period teaches you to ask the clarifying question instead of filling silence with hope, to notice when your generosity has quietly become self-abandonment, and to let people be foggy without concluding they are false. Compassion still lands well, and this can be a tender window with anyone genuinely struggling, provided you keep your own outline while you help. Firm commitments, however, prefer sharper light; anything signed or sworn at the peak deserves a calm reread once the air clears. What accumulates from these small yearly visitations, taken attentively, is a rare pairing: softer eyes and better vision. You learn to love people as they are, not as the mist paints them, and each year the gap between the two gets a little easier to see and a little easier to forgive."
+ }
+]

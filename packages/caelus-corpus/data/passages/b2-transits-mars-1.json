@@ -1,0 +1,212 @@
+[
+ {
+  "id": "transit:mars:conjunction:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "sun",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:mars~natal_sun:conjunction"
+  ],
+  "text": "Every two years or so, Mars catches up with your Sun and hands you a fresh tank of fuel. The conjunction fuses drive with identity, and for a week or two your will, your body, and your ambition all point the same direction. As the conjunction applies, you feel it as restlessness: projects you have postponed start to nag, and sitting still gets harder by the day. The days when Mars sits right on your Sun are the hottest of the visit: you want to begin something, and beginnings made now tend to carry real momentum, because they come from you rather than from pressure outside. As Mars separates, the urgency cools into steadier effort, and the smartest use of the tail end is to give your new push a routine it can live in. The risks of the period are the risks of heat. You have a shorter fuse than usual, and other people may read your directness as aggression when you only meant speed. Impatience can tip into quarrels that spend the very fuel you need, and a body running this hot is easier to strain, so effort wants an outlet more than it wants a fight. Anything physical helps: hard work, exercise, a task with sweat in it. In love and at home, say what you want plainly instead of letting the charge build into snappishness. At work, volunteer for the thing that needs a driver; you are briefly the most decisive person in the room, and it shows. In some rounds Mars stations retrograde near this point, and the quick visit stretches into months, with the conjunction landing up to three times. When that happens, the first pass starts the engine, the middle pass makes you question whether the goal is really yours, and the last pass lets you commit with fewer illusions. That longer version is rarer, but it turns the transit from a sprint into a training season. Either way, what this period teaches shows up in what you choose to start. Watch which project you reach for when the fuel arrives; it tells you what you actually want, more honestly than any list of goals. The pass ends, the heat fades, and the two-year round begins again, but a start made in these days can keep moving long after Mars has gone."
+ },
+ {
+  "id": "transit:mars:sextile:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "sun",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:mars~natal_sun:sextile"
+  ],
+  "text": "A door opens during this transit, and Mars is the one holding it. The sextile does not push; it offers. For a week or two you have more drive available than usual, and circumstances tend to cooperate with it: an ally shows up, a task you dreaded turns out lighter, an opening appears at exactly your size. Nothing here forces you to move, which is the whole character of the period. If you let it pass, it passes quietly, and you never learn what it carried. As the aspect applies you may notice appetite returning, for work, for movement, for saying yes. The exact pass is the best footing: confidence and stamina line up and effort feels like it counts double. As Mars separates the extra push drains slowly, so anything you started keeps some of its momentum. The wise use of the window is a real move on something you already care about: ask for the thing, start the thing, have the conversation that requires nerve. Your body tends to feel willing too; this is a good stretch for exercise or any work with effort in it, since the fuel wants somewhere to go. In dealings with others you come across as confident rather than pushy, which makes it one of the easier times to lead. The offer repeats: Mars comes back around on a roughly two-year lap, so this exact invitation returns, and you can compare who you are at each visit by what you do with it. Once in a while a visit coincides with a Mars retrograde, and the sextile forms up to three times over an extended stretch. Then the first touch shows you the opening, the second lets you reconsider your angle, and the third is where the actual move gets made with better aim. Most rounds are simpler than that: one clean pass, one clean chance. What this transit builds in you, if you use it, is trust in your own initiative. Opportunities taken under a sextile teach you that action works, that asking works, and that the world is less resistant than you assume on an ordinary day. That lesson outlasts the transit. The door does not stay open, but having walked through it once, you start looking for handles everywhere."
+ },
+ {
+  "id": "transit:mars:square:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "sun",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:mars~natal_sun:square"
+  ],
+  "text": "Something pushes back during this transit, and the pushing is the point. Mars square your Sun sets your will against resistance: a person who will not budge, a plan that hits a wall, a rule that suddenly has teeth. For a week or two, doing what you want costs more than it usually does, and the friction is not subtle. As the square applies, irritation builds ahead of any visible cause; you may find yourself spoiling for an argument before one exists. Around the exact pass the collision tends to arrive, often through someone with authority or simply someone as stubborn as you are today. In the separating days the charge drains and you can see the fight more clearly, including your own share of it. The classic mistakes of the period are worth naming: forcing an issue just to feel forceful, taking a bystander's head off because the real obstacle would not move, and rushing a physical task, since haste under this transit is how things get dropped, strained, and dented. The classic gains are just as real. A square makes you prove that you mean it, and effort spent against resistance builds strength the easy days never ask for. Hard exercise, hard labor, and finishing a task that fights back all use the heat well. If a conflict does surface, notice what it is actually about; Mars squares have a way of dragging a real grievance into the open under cover of a small one. Mars returns to this angle roughly every two years, so you get practiced at the shape of it. Some rounds run long: when Mars turns retrograde in this zone, the square can land up to three times across a stretch of months, and the same standoff comes back for a second and third round. The repeats are not punishment. The middle pass usually shows you what the first fight missed, and the final one lets you settle the matter instead of winning it. What grows out of this transit is a more honest relationship with your own force. You learn where your will is strong, where it is merely loud, and how to spend anger on the obstacle instead of the room. People who handle their squares well come out of them harder to rattle, and the calm shows long after the week is over."
+ },
+ {
+  "id": "transit:mars:trine:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "sun",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:mars~natal_sun:trine"
+  ],
+  "text": "For a week or two, effort stops arguing with you. Mars trine your Sun lines up your drive with your sense of who you are, and the friction that usually lives between wanting and doing goes quiet. Work moves. Your body cooperates. Decisions that normally take three sittings take one. As the trine applies you feel the current picking up, a background sense that today is a good day to push. The exact pass is the deep water: you can carry more than usual without strain, and people respond to your lead without needing to be pushed. As it separates, the flow eases off gently, which makes the last days good for consolidating whatever you advanced. Ease invites coasting, though, and it is entirely possible to spend this transit comfortable and produce nothing you will remember. The tradition's advice is simple: give the fuel a job. Push the project that matters, have the strenuous week, take on the physical challenge you have been circling, because effort spent now returns more than it costs. This is also a forgiving window for asserting yourself with people who usually bristle; the same firmness that starts fights under harder transits reads as healthy confidence under this one. Expect the visit to run its week or two and then hand you back to ordinary conditions, with the trine returning on Mars's two-year round like a recurring stretch of good weather. Occasionally Mars slows and reverses nearby, and one visit becomes three passes spread over months. In that longer version, treat the first pass as the push, the second as the review of what the push disturbed, and the third as the finishing coat. Most visits are single and brief, which is exactly why they reward readiness: knowing your own good weather when it arrives is a skill, and this transit gives you regular practice. The growth here is quieter than with the hard aspects, but it is real. You get to feel what your will is like when nothing is fighting it. That felt sense becomes a reference point. Later, under rougher skies, you can remember what clean effort feels like and steer back toward it, and that memory is the part of this transit you keep."
+ },
+ {
+  "id": "transit:mars:opposition:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "sun",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:mars~natal_sun:opposition"
+  ],
+  "text": "Mars stands across the sky from your Sun during this transit, and the people in your life can seem to be standing with it. The opposition confronts: for a week or two, your aims meet open resistance from others, and what you want gets tested against what they want. This is the far point of a round that began about a year earlier when Mars crossed your Sun, so what surfaces now often has a history; a push you started back then meets its answering push. Tension gathers in your dealings as Mars closes the angle, and you may sense certain conversations circling a collision. The disagreement tends to come into the open in the days Mars stands directly across from your Sun, sometimes through a person who genuinely opposes you, sometimes through one who merely carries the role for a day. As Mars pulls off the angle, the standoff loosens, and whatever was said can be worked with. Two readings of the same events are available all week. In one, you are being obstructed and must defend yourself. In the other, you are being shown exactly where your will ends and someone else's begins, which is information you cannot get any other way. Both are sometimes true. The workable stance is firmness without escalation: hold your position, state it plainly, and resist the pull to make the other person lose. Watch for projection too, since oppositions are famous for it; the aggression you keep meeting may include a share you exported. Physically the period runs hot and tires you if you spend it braced, so movement and rest both earn their keep. Mars offers this confrontation roughly every two years, and now and then a retrograde stretches the visit into months, with the opposition striking up to three times. When that happens the dispute unfolds in acts: first the clash, then the reconsideration, then a final meeting where a real settlement is possible because both sides have thought. The single quick pass is more common, and even it leaves a residue worth keeping. Every clean opposition teaches you the difference between an enemy and an opponent, and how few of the people across the table are actually the first kind. Learning to be contested without feeling erased is slow work, and this transit is one of its regular classrooms."
+ },
+ {
+  "id": "transit:mars:conjunction:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "moon",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:mars~natal_moon:conjunction"
+  ],
+  "text": "Your feelings pick up heat when Mars crosses your Moon. The conjunction fuses drive with emotion, and for a week or two the two are not separable: what you feel, you feel urgently, and what you want, you want now. Moods that usually drift in the background become demands. Irritation arrives fast and shows. So do desire, appetite, protectiveness, and the sudden courage to say a true thing that has been sitting unsaid. The temperature climbs as Mars bears down, and small frictions start to sting more than they should. The days he sits on your Moon are the boil: tempers snap at home, old grievances find their voice, and honest feeling gets acted on instead of postponed. As Mars moves off, the heat drains and you can survey what got said and done. Home and family carry most of the weather, because the Moon lives there; the people closest to you are the likeliest to meet your edge, and the ones least deserving of it. The useful discipline is aim. Anger under this transit is fuel, and fuel does not care what it burns, so pointing it matters: at the overdue conversation, at the neglected household task, at physical effort that empties the tank on purpose. Feelings acted on cleanly now tend to clear the air for months. Feelings vented sideways leave marks. Your body sits close to your mood all week; eat and sleep like someone who is running hot, because you are. This visit comes around on Mars's roughly two-year lap, and if Mars happens to station and turn retrograde near your Moon, the single pass becomes a months-long season with up to three exact hits. In that rarer case, the first pass raises the feeling, the second shows where it actually comes from, and the third lets you respond to the source rather than the symptom. What you can take from any version of this transit is a working answer to a hard question: what does my anger protect? Mars on the Moon puts a torch behind your needs, and the things that flare are the things that matter. Read the flare-ups as a map of what you love, and the week pays for its own turbulence."
+ },
+ {
+  "id": "transit:mars:sextile:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "moon",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:mars~natal_moon:sextile"
+  ],
+  "text": "There is an offer on the table during this transit: act on a feeling instead of sitting with it. Mars sextile your Moon puts a modest, friendly charge under your emotional life for a week or two. Needs that usually murmur become easy to name. The conversation about what is bothering you, the one that always seems too heavy to start, nearly starts itself. Domestic projects that have waited for a burst of will suddenly have one. As the sextile applies, you notice the willingness first: a readiness to speak up, tidy up, reach out. Around the exact pass the footing is best, and moves made then tend to land softly; frankness reads as warmth rather than attack, and effort around the home or family gets met halfway. As Mars separates, the charge fades without drama, and whatever you failed to use simply goes unused. That is the sextile's whole nature. It offers and never insists, so the difference between a forgettable week and a genuinely clearing one is a decision you make. The tradition points this fuel at the near world: mend the small rift, cook the meal, move the furniture, take the walk with the person you have been missing. Feelings and action cooperate now, so acts of care come easier than speeches about care, and one honest errand can do the work of a long talk. Your own body benefits too, since the Moon's territory includes daily rhythm; movement, food, and sleep respond quickly to a little deliberate attention this week. The visit is brief and returns on Mars's roughly two-year round, a recurring appointment for tending what you live inside. Every so often the appointment runs long, when a Mars retrograde carries the sextile back over your Moon for a second and third touch across a stretch of months. Use the repeats as drafts: the first pass surfaces the impulse, the second refines it, the last one acts with better timing. If the period grows anything durable in you, it is the habit of small brave maintenance. Most emotional trouble is deferred maintenance, and a sextile like this one shows you how cheaply it can be paid down when mood and muscle agree. Take the offer once and you begin noticing how often it comes."
+ },
+ {
+  "id": "transit:mars:square:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "moon",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:mars~natal_moon:square"
+  ],
+  "text": "Small things get under your skin during this pass, and they do not stay small. Mars square your Moon forces feeling and drive against each other for a week or two: what you want to do grates against what you need, and the friction leaks out as irritability, touchiness, and a temper on a short lead. You may feel crowded for no clear reason as Mars moves into the square, snapping at interruptions you would normally absorb. The friction usually lands on a target near the middle of the pass, most often at home or among the people who see you daily, and often over something too minor to be the real subject. In the separating days the charge fades, apologies get easier, and the actual grievance, the one hiding under the trigger, becomes visible if you look. That look is the work of the transit. A Mars-Moon square rarely invents anger; it pressurizes anger already stored, some of it old, some of it fair. The outbursts of this week are messages from your needs, delivered badly. Treating them as information rather than as shameful weather changes what the period does to you. Practicalities help more than philosophy while it lasts. Physical effort drains the tank honestly: hard exercise, rough chores, anything with strain in it. Hunger, short sleep, and crowding all lower your flash point, so managing the basics is not trivial; some days it is the whole game. When a quarrel does start, keep it about the thing it is about, and let other people have their own bad week without taking it as a verdict on you. The square returns on Mars's roughly two-year circuit, and certain rounds stretch out: a Mars retrograde can drag the aspect back and forth across your Moon for months, three exact hits in all. The repeats reward patience, because the second pass tends to reveal what the first eruption was protecting, and the third offers a calmer settlement. Handled over time, this recurring transit teaches emotional honesty under pressure, which is a different skill from emotional honesty at leisure. You learn to say that you are angry before the anger says it for you. That single sentence, delivered early, spares more damage than any amount of composure delivered late."
+ },
+ {
+  "id": "transit:mars:trine:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "moon",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:mars~natal_moon:trine"
+  ],
+  "text": "What you want and what you need stop pulling in different directions during this transit. Mars trine your Moon eases the oldest argument in anyone's inner life, and for a week or two, action and feeling run in the same channel. Assertion comes without aggression: you can say what you need in a level voice and actually be heard. As the trine applies, you may simply notice that you feel sturdier, less defended, quicker to act on small wants instead of deferring them. The exact pass is the heart of the window, a stretch where emotional courage is cheap: the honest talk, the overdue request, the boundary drawn without heat, all cost less than they normally do. As Mars separates, the ease tapers off, leaving whatever you built with it. The Moon's territory gets the best of the weather. Home responds to effort spent on it, family friction settles with less work, and caretaking feels less like depletion than usual. Your body tends to be a good partner too; appetite, sleep, and stamina cooperate, and movement lifts your mood faster than on an ordinary week. The trine's only trap is passivity. Nothing about it forces action, and comfortable weeks slide by unused, so spend this one on purpose. It is the natural window for the conversation that would be a fight under a harder sky, and for tending the people and rooms you actually live with. The window recurs on Mars's roughly two-year lap, and once in a while it lingers, when Mars stations nearby and retraces the trine up to three times over some months. The long version is a slow braid of one theme: the first pass opens the ease, the second deepens it, the third folds it into habit. Either way, what this transit leaves behind is a bodily memory of integration, of wanting and needing moving as one motion instead of a tug-of-war. Once you have felt anger and tenderness working as allies, defending what you love without damaging it, you carry the pattern with you. Later, in rougher weather, you will know the difference between force that protects and force that merely discharges, because for a week or two you lived it, and lived experience argues better than any resolution."
+ },
+ {
+  "id": "transit:mars:opposition:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "moon",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:mars~natal_moon:opposition"
+  ],
+  "text": "Someone close seems determined to get a rise out of you during this transit, and sometimes they succeed. Mars opposite your Moon stages a confrontation between your inner life and other people's demands. For a week or two, the friction in your relationships lands directly on your feelings: requests feel like impositions, criticism feels like attack, and your own irritation keeps arriving through other people's behavior. The atmosphere tightens as Mars comes to stand against your Moon; you may notice yourself bracing around particular people before anything has happened. The tension usually speaks while he holds the opposition, often in a domestic or intimate setting, and often through a partner, family member, or housemate who suddenly seems angrier than the situation warrants. Once Mars moves past full span, both sides cool, and the exchange can be reread with fairer eyes. Oppositions traffic in mirrors, and this one especially. The anger you keep meeting may be genuinely theirs. It may also be partly yours, exported because it felt unsafe to hold, and returning through the nearest available face. Untangling those shares is the real work of the week, and it cannot be done mid-quarrel, only in the quieter hours between. The workable stance is to defend your needs without attacking theirs, and to accept that two people can both be right about being tired. Hunger and lost sleep shorten everyone's fuse, so tending the basics protects the household as much as it protects you. When the charge gets too high, distance is honorable; a walk taken at the right minute has ended more of these standoffs than any winning argument. The confrontation comes back on Mars's roughly two-year round, and on the occasional round Mars reverses nearby, stretching the visit into months and striking the opposition up to three times. Those repeats often follow a recognizable arc: the first pass has the fight, the second has the understanding, the third has the repair. What the transit builds, taken over years of returns, is the capacity to stay connected while contested. You learn that closeness includes collision, that anger inside a bond is not the end of the bond, and that the person across the table is usually not your enemy, just another human having a hot week of their own."
+ },
+ {
+  "id": "transit:mars:conjunction:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "mercury",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:mars~natal_mercury:conjunction"
+  ],
+  "text": "Your mind shifts into a higher gear when Mars reaches your Mercury. Thought and drive fuse for a week or two: ideas arrive with force, words come out pointed, and decisions that have idled for months suddenly demand resolution. This is a strong transit for any work that runs on mental push. Arguments get won, plans get cut to their essentials, hard problems yield to sheer persistence, and your speech carries an edge of command that people notice. As the conjunction applies, the acceleration builds; you may catch your thoughts racing at night or your patience for slow talkers thinning. The exact pass is the sharpest stretch, when the tongue is fastest and least guarded. As Mars separates, the pace eases and you get to review what you said at speed. The risks are the mirror of the gifts. Sharp becomes cutting without much warning, and this transit is famous for the sarcastic remark that costs a week of repair. Fast becomes hasty: conclusions reached now feel certain because they arrived with force, not because they are complete. Signing, sending, and declaring all benefit from one extra read. In traffic and around tools, the same mental speed shows up as physical impatience, which is worth respecting. Pointed well, though, this is one of the best working windows Mars offers. Draft the argument, make the pitch, hold the negotiation, do the thinking that requires aggression toward a problem. Mental effort empties the tank the way exercise does under other transits, and the fatigue at the end of a well-used day is clean. The visit returns on a roughly two-year cycle, and there are rounds when Mars reverses over your Mercury and the quick pass becomes a months-long season with up to three exact hits. Then the sequence matters. On the first pass the idea or the argument erupts; on the retrograde pass you rethink it with the heat turned down; on the last pass you state the final version with both speed and judgment. Over many returns, this transit trains the difference between a quick mind and a weaponized one. You learn to keep the blade for the problem and the courtesy for the person, and that separation, once learned, makes your sharpness something people seek out rather than brace against."
+ },
+ {
+  "id": "transit:mars:sextile:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "mercury",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:mars~natal_mercury:sextile"
+  ],
+  "text": "An idea you have been sitting on gets its opening during this transit. Mars sextile your Mercury adds drive to thought without adding friction, and for a week or two the words you need and the nerve to say them show up together. Pitches land. Requests get made. The message that has lived in your drafts finally goes out. The itch to speak and organize builds as Mars comes into range: lists get made, calls get scheduled, opinions firm up. Delivery is at its best in the days the sextile is exact; you argue without heat and persuade without pushing, which is a rarer combination than it sounds. As Mars moves past, the momentum hands off to follow-through, and notes taken this week keep working after the charge is gone. Like every sextile, this one only offers. Nothing will force the conversation or write the page for you, and the week can pass as pleasant background noise if you let it. Choosing to use it is most of the transit. The tradition's short list of good uses: negotiate the thing, pitch the plan, write the hard letter, learn the skill with the steep front step, and clear the backlog of small decisions that has been taxing you quietly. Mental work has stamina behind it now, so a long session that would normally scatter your attention holds together. Errands and logistics run well too; this is a good week for the practical maze of calls, forms, and fixes. The opening recurs on Mars's roughly two-year lap. Should Mars station and back up nearby, the sextile repeats up to three times across an extended stretch, and the repeats improve the product: the first pass drafts, the second edits, the third publishes, in whatever form those verbs take in your life. What builds over years of using this window is a small but load-bearing confidence, the knowledge that saying the thing works better than rehearsing it. People who take their sextiles learn that most doors are lighter than they look, and that the difference between the talkers and the doers is often just timing. For a week or two, the timing is yours, and each time you use it the asking gets easier to begin."
+ },
+ {
+  "id": "transit:mars:square:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "mercury",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:mars~natal_mercury:square"
+  ],
+  "text": "Words come out faster than judgment during this pass. Mars square your Mercury forces speech and thought into a hotter register for a week or two: opinions harden, patience for disagreement thins, and conversations that should be exchanges keep turning into contests. As the square applies, you may notice a rising urge to correct people and a growing conviction that everyone is missing the point. Near the exact pass the collision usually happens out loud: a debate that gets personal, a message answered too fast, a sarcastic line that finds a softer target than intended. While Mars separates, the temperature drops and the repair work begins, which is easier when less got broken. The pressure of this transit is real, and it is not all loss. A square makes you defend your thinking, and ideas that survive this week's arguments come out stronger and clearer than they went in. The trouble lies only in the aim and the speed. Hasty conclusions feel certain now because urgency imitates clarity; decisions with long consequences deserve a cooling-off period this week, and so do send buttons. Mechanical haste rides along with mental haste, so rushing through traffic, tools, and stairs collects its usual tax. What uses the heat well: hard mental labor with a deadline, advocacy for something that genuinely needs a fighter, and the focused dismantling of a problem rather than a person. If you must argue, try arguing the strongest version of the other side's case; the discipline burns the same fuel and leaves you smarter. The square returns roughly every two years as Mars makes its round, and certain passes triple, when a retrograde walks the aspect back and forth across your Mercury for months. The long form has its own logic: the first pass picks the fight, the second reveals what you actually believe, the third states it without the spikes. Over the years, this recurring visitor teaches a costly and valuable lesson about the difference between being sharp and being right. The tongue is a tool that cuts both ways all week, and everything depends on which way you hold it. Learning to hold it well, and occasionally to hold it still, is the growth this transit keeps offering."
+ },
+ {
+  "id": "transit:mars:trine:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "mercury",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:mars~natal_mercury:trine"
+  ],
+  "text": "Thinking and doing stop being separate steps during this transit. Mars trine your Mercury lets decision flow into action without the usual gap where hesitation lives. For a week or two, your mind is quick without being harsh, and your words carry conviction without picking fights. As the trine applies, mental fuel gathers: plans start finishing themselves in your head, and problems you had shelved look suddenly tractable. The exact pass is the clearest stretch, prime hours for the demanding intellectual work in your life, whatever form that takes. Long focus holds. Arguments stay reasonable and still get won. Explanations land on the first try, which anyone who teaches, sells, writes, or parents will recognize as a minor miracle. As Mars separates, the current slows gently, and the work done at the peak keeps its quality. The only way to waste a trine is to leave it idle, since ease never insists on itself. So point it at the thick of your mental backlog: the analysis, the plan, the difficult letter, the decision made of many small decisions. This is also a strong week for speaking up in rooms where you usually stay quiet, because assertive and reasonable are cooperating in your voice, and that combination gets listened to. Practical movement runs clean as well; errands, repairs, and negotiations tend to conclude rather than continue. Expect the window to run a week or two and return on Mars's roughly two-year circuit. Rarely, a visit overlaps a Mars retrograde and the trine forms three times over a months-long stretch, which suits any project with stages: think it through on the first pass, stress-test it on the second, ship it on the third. Whatever the version, the transit leaves you a template. This is what your mind feels like when drive supports it instead of shoving it: fast but not rushed, firm but not hot. Knowing that state from the inside makes it easier to find again in ordinary weeks, and easier to notice when its opposite, the hot hasty state, is running the show. A trine teaches by demonstration, and here the demonstration is you, for about two weeks, working the way you always suspected you could."
+ },
+ {
+  "id": "transit:mars:opposition:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "mars",
+   "natal": "mercury",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:mars~natal_mercury:opposition"
+  ],
+  "text": "Expect to be argued with. Mars opposite your Mercury puts your reasoning in front of people who push against it, and for a week or two, conversation keeps sliding toward contest. Colleagues challenge the plan. Friends play devil's advocate with unusual commitment. Strangers seem oddly eager to correct you. As the opposition applies, you can feel debates gathering; positions harden around you before anyone has said much. At the exact pass the disagreement tends to arrive in the open, often through one particular person who seems to have taken up the role of your opposition for the season. In the separating days, the arguing spends itself, and what remains is whatever each side actually learned. It helps to know what an opposition is for. The resistance you meet this week is not noise; it is a free audit of your thinking, conducted rudely. Where your case is strong, the pushback sharpens it. Where your case is thin, the pushback finds the thin spot faster than a friendly reader ever would, and that stings precisely because it is useful. The failure mode is treating every challenge as an attack and defending positions you no longer believe just to avoid losing. The better stance is to fight fair and update fast: hold your ground where you have ground, and concede in plain words where you do not, which disarms an opponent more thoroughly than victory. Watch the impulse to get the last word, especially in writing, where the last word has a long shelf life. Negotiations begun this week run hot but honest, and a deal that survives them is usually sound. Mars brings this confrontation back on its roughly two-year lap, and some rounds it lingers: a retrograde can carry the opposition across your Mercury up to three times over several months, turning one debate into a serialized one. Use the structure. The first pass states the disagreement, the second pass does the real thinking, the third pass finds the sentence both sides can sign. Practiced over returns, this transit builds something rare: a mind that can be opposed without panicking. You learn that your ideas are not your skin, that being wrong in public costs less than staying wrong in private, and that the person across the argument is often doing you a service neither of you would call by that name."
+ }
+]

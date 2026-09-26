@@ -6,7 +6,7 @@ measurement does) and the Morrison & Stephenson (2004) delta-T uncertainty,
 consumed by chart warnings so both engines emit identical validity
 statements (the canonical digest pins them equal cross-language).
 """
-from .core import delta_t_sigma  # re-export site for symmetry with ranges.ts
+from .core import delta_t_sigma, _moon_era_slabs  # re-export site for symmetry with ranges.ts
 
 HEADLINE = {"from": 1000, "to": 3000}  # mirror of ranges.ts; see its comment
 
@@ -30,6 +30,21 @@ def jd_year(jd):
     return 2000 + (jd - 2451545.0) / 365.25
 
 
+# Mirror of ranges.ts: the two clock-error rates and the display threshold
+# behind the canonical epoch-sigma block.
+ANGLE_SIGMA_DEG_PER_SECOND = 0.25 / 60   # sky rotation: 0.25 deg per minute
+MOON_SIGMA_DEG_PER_SECOND = 0.55 / 3600  # Moon longitude: ~0.55 arcsec per second
+EPOCH_SIGMA_DISPLAY_SECONDS = 10         # below this, canonical output carries no block
+
+
+def pack_span(pack):
+    """A pack's fitted span in calendar years (mirror of packSpan in
+    ranges.ts)."""
+    import math
+    return {"from": math.ceil(jd_year(pack.jd0)),
+            "to": math.floor(jd_year(pack.jd1))}
+
+
 def validated_span_for(body, engine):
     """Measured validated span for a body under this engine's data, or None
     for analytic points with no stated bound (mirrors validatedSpanFor;
@@ -37,15 +52,28 @@ def validated_span_for(body, engine):
     the SE measurement)."""
     from .chart import ASTEROIDS, URANIANS
     if body in VSOP_BODIES or body == "moon":
-        return HEADLINE
-    if body == "pluto":
-        return MEASURED["pluto_pack"] if engine._has_pluto_pack() \
+        span = HEADLINE
+    elif body == "pluto":
+        span = MEASURED["pluto_pack"] if engine._has_pluto_pack() \
             else MEASURED["pluto_meeus"]
-    if body == "chiron" or body in ASTEROIDS:
-        return MEASURED["small_bodies"]
-    if body in URANIANS:
-        return MEASURED["uranian"]
-    return None
+    elif body == "chiron" or body in ASTEROIDS:
+        span = MEASURED["small_bodies"]
+    elif body in URANIANS:
+        span = MEASURED["uranian"]
+    else:
+        span = None
+    # Era slabs extend the validated span (deep-time R1): a slab's span is
+    # measured against its source at pack build, and the classical slab
+    # adjoins the headline's earlier edge. The Moon's slabs live in their own
+    # loader beside its tiered packs.
+    slabs = (_moon_era_slabs() if body == "moon"
+             else engine._era_slabs(body))
+    if slabs:
+        frm = min(pack_span(s)["from"] for s in slabs)
+        to = max(pack_span(s)["to"] for s in slabs)
+        span = ({"from": min(span["from"], frm), "to": max(span["to"], to)}
+                if span else {"from": frm, "to": to})
+    return span
 
 
 def _fmt(x):

@@ -1,0 +1,212 @@
+[
+ {
+  "id": "transit:uranus:conjunction:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "sun",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:uranus~natal_sun:conjunction"
+  ],
+  "text": "Uranus reaches your Sun at most once in a lifetime, and many people never live this transit at all. If it is yours, expect the better part of a year, sometimes more, in which the question of who you really are stops being theoretical. Uranus wakes whatever it touches, and the Sun is your center: your vitality, your direction, the self you recognize in the mirror. Under this conjunction, the parts of your life that were built for an older version of you begin to feel like a costume. Restlessness arrives first. During the applying months you may not know what you want, only that the current arrangement chafes; sleep, routine, and patience all run a little ragged, and you may feel more awake than you have in years without knowing what to do with it. Around the exact crossing the change tends to become real, sometimes as an outside event, a role ending or a structure breaking, and just as often as a decision you make yourself with surprising speed. People around you may say you are not acting like yourself. Usually the reverse is true: you are acting like yourself for the first time in a long while, and the shock is discovering how much of the old presentation was performance. Uranus rarely crosses a degree just once; its yearly backstep can carry it over your Sun again and then again, so the awakening runs in chapters. First the surprise is sprung or the hunger named. Then the new direction gets tested rather than celebrated, and some first drafts get revised. Last comes the settling of what stays. Work, love, home, none of these is off limits, yet only what was already stale is truly at risk; whatever fits the emerging you usually survives and becomes more honest. The hazard of the period is overcorrection, burning something sound for the thrill of the match. The opportunity is authenticity with a long shelf life. If you give the restlessness a worthy outlet, a real change you choose on purpose, you rarely need the reckless version of this transit. As the conjunction separates, the voltage drops and ordinary life resumes, but you do not go back. You have seen yourself without the packaging. People who cross this threshold tend to describe it the same way afterward: disorienting in the middle, and one of the truest things that ever happened to them once the dust settled. Growth here is not gradual. It is the sudden recovery of a self you had quietly agreed to postpone, and learning, in the months that follow, how to live as that person in public."
+ },
+ {
+  "id": "transit:uranus:sextile:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "sun",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:uranus~natal_sun:sextile"
+  ],
+  "text": "A quiet invitation to reinvent yourself runs through this whole period. Uranus in sextile to your Sun forces nothing; it opens side doors. For a year or so, often with several exact touches, chances to update your life keep appearing at the edges of routine: an unusual person who becomes a real friend, a tool or method that changes how you work, a project slightly outside your lane that turns out to suit you better than the lane did. Uranus gives this offer a long runway, the better part of a year, and the length is the trap: what can be done anytime tends to be done never. Nothing breaks if you ignore it. You simply stay the same, and the season passes without a mark. While the aspect is building, watch what keeps catching your attention, especially interests you shelved years ago as impractical. Curiosity is the signal here, and it is more reliable now than usual. Near each exact contact, experiments started on a whim tend to catch traction; saying yes to something mildly out of character costs little in this climate and can pay for years. As each pass fades, whatever you actually tried keeps developing on its own, while whatever you only considered slips back into the wallpaper. Thanks to its retrograde loop, Uranus usually completes as many as three exact contacts across the stretch. Read the repeats as the same invitation re-sent. The first pass introduces a possibility, the second lets you refine or reconsider it, and the third either folds it into ordinary life or lets it go cleanly. In practical terms this is one of the friendliest windows you get for voluntary change: modernizing your work, widening your circle, claiming a little more room to be odd in the ways you actually are. Your confidence tends to rise through this period, not from any triumph but from small proofs that acting like yourself works. Freedom grows here by degrees rather than by rupture, which suits people who dislike drama and quietly frustrates people who wait for a push. No push is coming. Everything available now is opt-in, and that is the character of the whole transit: by the end of it you can be measurably freer, more current, and more visibly yourself, simply because you kept saying yes in small ways while the door stood open. The growth it leaves behind is undramatic and durable, a self updated on schedule instead of by crisis, and a standing habit of treating the new as an ally rather than a threat."
+ },
+ {
+  "id": "transit:uranus:square:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "sun",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:uranus~natal_sun:square"
+  ],
+  "text": "Somewhere in your life a structure has gone stale, and this transit exists to make that impossible to ignore. Uranus square your Sun is a forcing aspect: for a year or more, events and moods conspire to shake whatever arrangement you have been calling stable. The square does not ask whether you want change. It only asks where the change will come from, you or circumstance, and it rewards the first answer far more kindly than the second. Restlessness is the early symptom. On the way in, commitments that once felt chosen begin to feel imposed, and small irritations start standing in for a larger truth you have not said out loud. Around the exact hits, disruption tends to turn concrete. Plans jump the rails, an authority pushes back, a role you have outgrown demands more loyalty just as you have less to give. Sudden exits and burned bridges are the folklore of this square, and some of that folklore is earned, but rupture is not the actual assignment. The assignment is honest renovation. What is genuinely alive in your life can be kept and updated; what you keep only from habit or fear is what the pressure keeps finding. Because of the retrograde cycle, the square usually forms, breaks, and reforms, with up to three exact hits across the stretch. The first tends to expose the problem, often abruptly. The second, with Uranus moving backward, is quieter and more reflective: you get to ask what you actually want rather than what you suddenly cannot stand. The third asks for a decision that can hold. In between, two classic mistakes compete for you: clamping down harder to prove nothing needs to change, and torching something sound to feel free for a weekend. Freedom bought that way has to be bought again. The workable path is deliberate: choose your own changes, early and on purpose, and the transit tends to spend its charge there instead of striking your commitments at random. Expect your relationship to authority, your own included, to be part of the story; obedience for its own sake does not survive this period, and neither does rebellion for its own sake. Once the last pass separates, the pressure lifts with surprising speed, and what remains is a life with fewer dead branches. Most people look back on this square without nostalgia but with real respect, because the changes it forced were the ones they had been postponing, and the self on the far side moves lighter, tells fewer polite lies, and knows the difference between stability and stagnation."
+ },
+ {
+  "id": "transit:uranus:trine:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "sun",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:uranus~natal_sun:trine"
+  ],
+  "text": "For a while, change is on your side. Uranus trine your Sun opens a long stretch, commonly a year or more, in which the new does not threaten you; it feeds you. Where the harder Uranus transits break things open, the trine simply leaves the gate unlocked. Your individuality gets room without anyone needing to be defied. Experiments that would normally meet resistance slide through, and people who might have objected somehow do not. Life starts sending you the interesting kind of stranger, the odd opportunity, the idea that arrives ahead of its time and happens to fit yours. Early in the transit, as the aspect approaches, you may notice mostly a mood: more optimism about the future, more appetite for novelty, a sense that the future is something you get to design rather than something that happens to you. The exact passes are the natural launch windows. Whatever you begin near them, a change of direction, a piece of original work, a modernization of how you live or earn, tends to develop with unusually little friction. Uranus generally touches the exact degree up to three times before moving on, and each return is another window rather than a test: the middle pass is a good place to adjust course, and the last one tends to lock in whatever you built. As the transit finally fades, the changes you made keep running; the ones you only daydreamed about go back in the drawer. That is the one real risk of this period. Trines do not insist. The same ease that makes change painless also makes it optional, and it is entirely possible to surf a year of good luck and emerge with nothing but pleasant memories. The people who profit from this transit treat it as capital and spend it: they take the promotion shaped like a risk, ship the strange project, move toward the life that fits instead of the life that photographs well. In love and friendship the period favors honesty about who you are; connections made now tend to be with people who like the unedited version, which quietly raises your standard for everyone else. What this transit leaves behind, if you use it, is not just a set of changes but a changed relationship with change itself. You learn that you can steer while moving fast, and that lesson keeps paying long after Uranus has gone on to bother someone else's chart."
+ },
+ {
+  "id": "transit:uranus:opposition:sun",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "sun",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:uranus~natal_sun:opposition"
+  ],
+  "text": "During this transit, disruption tends to wear other people's faces. Uranus opposing your Sun sets up a confrontation that lasts a year or more: on one side, the identity you have built and the commitments that come with it; on the other, a rising demand for freedom that seems, at first, to belong to everyone but you. A partner grows restless. A colleague turns unpredictable. Someone you counted on announces a change that rearranges your plans without your vote. Oppositions work through relationship, and this one has a well-earned reputation for projection: whatever appetite for change you have been suppressing has a way of showing up in the people across from you, acting it out at full volume. In the applying months, the tension usually reads as friction you cannot quite name; agreements feel thinner, and you may catch yourself provoking or being provoked over trivia that stands in for something larger. Near the exact oppositions the standoff sharpens, often through an event: an ultimatum, a departure, a demand for renegotiation that can no longer be postponed. It rarely stops at one round. Uranus can retrograde back across the point, making as many as three exact oppositions across the stretch, and the reprises matter. The first bout states the conflict. The second, usually with the pressure reversed, lets you see your own share in it, which is the least comfortable and most useful part. By the third, everyone usually knows what they are agreeing to. The central question of the period is not who is right but how much freedom the arrangement can hold, yours as well as theirs. Relationships with slack in them tend to come through renewed, sometimes dramatically improved, because honesty replaces routine. Bonds that only worked while nobody changed are the ones at real risk, and even there, what breaks was usually already broken in private. It helps to claim your own restlessness early, out loud, rather than leasing it to whoever behaves worst. A person who owns their need for change can bargain; a person who denies it can only react. As the final opposition separates, the drama drains out and the survivors of the period, both people and plans, tend to be sturdier and more honestly chosen than what you started with. What you keep from this transit is a cleaner contract with the people in your life and with yourself: closeness that no longer requires anyone to stay frozen, and a working knowledge of the difference between being needed and being held."
+ },
+ {
+  "id": "transit:uranus:conjunction:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "moon",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:uranus~natal_moon:conjunction"
+  ],
+  "text": "This is a once-in-a-lifetime visitation, when it comes at all, and it runs on new current. Uranus conjunct your Moon electrifies the inner life for a year or more: moods arrive suddenly, peak sharply, and vanish without the usual fade; needs you have carried quietly for years start announcing themselves out loud. The Moon is your habit body, your home, your sense of safety, and Uranus is allergic to the automatic, so the collision plays out in the most domestic parts of life. Living arrangements come up for review. Households change shape, moves become thinkable, and family roles you have played since childhood suddenly feel like clothes borrowed from someone smaller. Sleep and appetite may turn irregular while the conjunction applies; the body notices excitement before the mind admits it, and early on this transit often registers as pure restlessness at home, a wish to rearrange rooms or lives without a stated reason. Around the exact crossing, feelings that were penned up tend to jump the fence. People are sometimes startled by what they say in this period, and more startled to find they meant it. Relationships with family, and with anyone who mothers or manages you, are especially live: the caretaking bargains that kept the peace get renegotiated, sometimes abruptly. Uranus can make up to three exact crossings here as it loops retrograde. The first usually delivers the jolt, an event or an outburst that shows you what you actually feel. The second is the reckoning, a slower pass in which you sort real needs from old reflexes. The third settles the new emotional weather into something livable. Through the middle of all this, the practical advice of the tradition is simple: postpone what can be postponed, because feelings under this transit are honest but not necessarily durable, and the want of a lightning week is not always the want of a life. Not everything shakes loose. Emotional bonds with genuine give in them usually come through refreshed, closer for the honesty. What tends not to survive is comfort that was really just anesthesia. As the conjunction separates, the volatility subsides, but your relationship with your own feelings stays changed. You know more about what you need and are less embarrassed to say so. Many people date their emotional adulthood from this transit: the season when the inner life stopped running on inherited settings and started running on their own, and home, wherever and whatever it turned out to be, became a choice instead of a default."
+ },
+ {
+  "id": "transit:uranus:sextile:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "moon",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:uranus~natal_moon:sextile"
+  ],
+  "text": "Something in your inner life is ready for fresh air, and this transit props the window open. Uranus sextile your Moon is a gentle awakener: across a year or so it loosens emotional habits without breaking anything, and it does its work by invitation only. Expect small, well-timed chances to feel differently. A new acquaintance turns into the kind of friend you can actually talk to. A change at home that you have idly considered, different space, different rhythm, different company, suddenly looks easy to try. Feelings that usually take you days to identify start arriving pre-labeled, and honesty about them costs less than it normally does. The opening stays available for months at a stretch, which rewards the mildly adventurous and passes politely over everyone else. Nothing goes wrong if you decline; the rut simply remains a rut, now with better lighting. While the aspect builds, you may notice your tastes drifting: different food, different music, curiosity about people outside your usual circle. That drift is the transit talking. The exact contacts are the natural moments to act on it, to try the arrangement, host the stranger, say the true thing a little sooner than you normally would. Whatever you take up near those windows tends to stick with unusual ease. Since Uranus loops backward once a year, this sextile commonly repeats, three touches in all being typical, and the encores behave like a patient friend re-extending an offer. What you passed on in the first window returns in the second with less novelty and more clarity, and by the last touch it either belongs to your life or stops asking. Family relationships often benefit quietly here: a conversation that has been impossible for years finds an opening, not because anyone changed completely but because you are less defended and more curious than usual. Your intuition also runs well in this period, quick and matter-of-fact, worth trusting on small bets. There is no crisis anywhere in this transit, which is precisely its value. It lets you renovate your emotional life at low cost, one voluntary experiment at a time, so that the harder transits, whenever they come, find less dead wood to burn. What you keep afterward is subtle but real: a home that fits better, a slightly wider heart, and proof from experience that your feelings can change without anything terrible happening, which may be the most useful thing the Moon ever learns."
+ },
+ {
+  "id": "transit:uranus:square:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "moon",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:uranus~natal_moon:square"
+  ],
+  "text": "For a stretch of many months, your feelings refuse to run on schedule. Uranus square your Moon is the transit of emotional weather nobody forecast: moods that spike out of nowhere, sudden claustrophobia inside arrangements you chose, an itch to bolt from the very comforts you built. The square applies pressure where you feel safest, home, family, the daily rituals that hold your life together, because that is where the stale parts hide. Early on, while the aspect is still approaching, the signs are physical as much as emotional: broken sleep, restlessness in the evenings, irritation with sounds and routines you never noticed before. You may blame the people around you first. Some of that blame will even be fair, since households tend to act up under this transit, plans change, someone needs something suddenly, domestic logistics develop a mind of their own. But the deeper source is internal: a set of emotional habits that no longer fit the person operating them. Near the exact squares, the tension likes to discharge through incident, a blowup, an abrupt exit, a decision about home or family made at high speed. Feelings in those windows are genuine, and they are also volatile, which is an awkward combination; the classic error of this transit is signing a lease, in the broad sense, during a lightning storm. The retrograde loop tends to deal this square out in three hands. The first hit exposes what is intolerable. The second, quieter, lets you ask what you actually need rather than what you suddenly hate. The third is where sustainable changes get made, and by then they are usually smaller and better aimed than the ones the first hit demanded. Underneath the noise, the question of the whole period is real: which of your comforts are nourishment, and which are just sedation? Security built on truth survives this square easily. Security built on not looking directly at your own life is what gets shaken, and the shaking, in hindsight, tends to look like mercy. When the final pass separates, the static clears fast. Most people land in a home life that is somewhat rearranged and noticeably more honest, with needs stated instead of managed. And you come out knowing something durable about yourself: that your stability was never really in the furniture or the routine, but in your ability to stay on your own side while everything else moved."
+ },
+ {
+  "id": "transit:uranus:trine:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "moon",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:uranus~natal_moon:trine"
+  ],
+  "text": "A long, light current of change moves through your private life during this transit, and for once it asks nothing in return. Uranus trine your Moon spends a year or so making the unfamiliar feel comfortable: new people are easy to warm to, changes at home feel like play rather than upheaval, and feelings that usually arrive tangled show up simple and clean. The trine works by ease. Where a hard Moon transit shakes your security to test it, this one demonstrates, gently and repeatedly, that your security was never as fragile as you treated it. Emotional risks pay off in this climate. Saying what you feel a beat earlier than usual, letting someone see the unpolished version of you, trying out a different rhythm of living, all of it lands softly. Friendships started now have a distinct flavor, more candid and less scripted than your usual pattern, and family ties often ease as well; old grievances lose voltage not through confrontation but through a shared sense that everyone has better things to do. In the applying phase the transit mostly feels like appetite: for novelty at home, for different company, for a life with more air in it. The exact passes, and Uranus typically makes up to three as it swings back and forth, are the moments when appetite most easily becomes action. Changes made in those windows, to your household, your habits, your circle, tend to settle in without the adjustment pain change usually charges. Between passes, what you began keeps ripening on its own. The only failure mode of this transit is drift: because nothing demands anything, it is possible to spend the whole period pleasantly distracted, sampling novelty like a buffet and keeping none of it. The tradition's advice is to pick something. One real change, chosen and carried through while the current is with you, outlasts a year of interesting evenings. Intuition deserves mention too: under this trine it tends to run quick and unusually accurate about people, worth listening to when it flags a newcomer as kin. As the aspect finally separates, life keeps most of what you gave it. You come away with a freer emotional style, a home shaped more by preference than by precedent, and, most usefully, a nervous system that has learned by pleasant experience that change and safety can be the same event, a lesson the Moon rarely gets to learn this cheaply."
+ },
+ {
+  "id": "transit:uranus:opposition:moon",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "moon",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:uranus~natal_moon:opposition"
+  ],
+  "text": "The people closest to you seem to have changed the rules, and that is the signature of this transit. Uranus opposing your Moon plays out through relationship for a year or more. A partner needs more space. A family member upends an arrangement everyone relied on. Someone you live with or lean on turns suddenly hard to predict. Oppositions externalize, so the disruption tends to arrive from outside, and the emotional question they carry is pointed: how much freedom can closeness survive? At first nothing is wrong that you could put in a sentence. A household or a bond feels subtly off its rhythm, conversations end somewhere strange, and a low hum of instability runs under ordinary days. Near the exact oppositions it gets concrete. Demands surface, distances open, living situations and caretaking arrangements come up for sudden renegotiation, and feelings on both sides run hot and fast. Before you blame the other person for all the turbulence, it is worth asking the projection question, because this transit thrives on it. Some of the restlessness rattling your relationships is usually your own, disowned and delivered back to you by whoever is acting it out. Owning your share changes the period completely. It turns ultimatums into negotiations. Uranus doubles back on itself, so this opposition usually returns to exactness twice more before it is done. The opening round breaks the old equilibrium. The second, often with roles curiously reversed, shows each side the other's case from inside, which is uncomfortable and clarifying in equal measure. The final round writes the new terms, and by then both people usually know whether the bond can hold two moving targets. Some cannot, and the endings of this transit, for all their static, tend to release people who had been holding each other still for years. The bonds that come through do so transformed: roomier, more honest about needs, less dependent on either person staying frozen in an old role. Underneath the interpersonal drama, your own needs are the real subject. This period teaches, sometimes roughly, that being close and being free are not opposites but skills, and that a need unspoken tends to get spoken for you, at a worse moment, by somebody else. When the last opposition separates and the weather calms, what remains is usually smaller in number and better in kind: fewer arrangements, truer ones, and a self that can now say need and no in the same conversation without the roof coming off."
+ },
+ {
+  "id": "transit:uranus:conjunction:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "mercury",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:uranus~natal_mercury:conjunction"
+  ],
+  "text": "Your mind speeds up, and it stays fast for a long time. Uranus conjunct your Mercury, a transit that comes once in a lifetime if it comes at all, plugs your thinking directly into the mains for a year or more. Ideas arrive whole, in bunches, at inconvenient hours. Problems you have circled for years crack open in a sentence. Interests you had no idea you owned walk in and take a chair. It is the closest most people get to borrowed genius, and it has a cost: the same current that lights the ideas also runs through your nerves. Expect a busy head, shortened patience with slow talk, a tongue that gets ahead of tact, and stretches where sleep loses an argument with one more thought. While the conjunction is applying, the quickening is mostly pleasant, curiosity everywhere and boredom nowhere. Around the exact crossing the output peaks, and so does the turbulence: sudden news, decisive conversations, ideas so persuasive in the moment that they demand to be acted on tonight. Some of them deserve it. Some are sparks with no log to catch, and in the moment the two are indistinguishable, which is why the oldest advice for this transit is to write everything down and let it age a little before it spends your money or your words. The crossing itself usually happens more than once, since the planet loops backward and forward over the degree. The first pass floods you with material. The second, the retrograde return, is the editor: revisiting the flood, you find which insights still stand up sober. The third pass integrates the keepers into how you actually think and speak. The changes reach practical life quickly, how you work with information, the tools you use, the people you talk with, what you study; expect at least one of these to be genuinely different by the end. Conversation itself changes register, blunter and more original, which refreshes some relationships and startles others. Through it all, the nervous system deserves respect: movement, quiet, and unplugged hours are not indulgences this year, they are maintenance for the equipment doing all this thinking. When the conjunction finally separates, the pace eases but the mind does not revert. You keep the wider frame, the faster pattern recognition, the permission to think thoughts nobody assigned you. Most people finish this transit with a small pile of abandoned sparks, one or two ideas that changed their direction, and a lasting taste for their own intelligence."
+ },
+ {
+  "id": "transit:uranus:sextile:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "mercury",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:uranus~natal_mercury:sextile"
+  ],
+  "text": "New ideas find you easily during this transit, and they arrive at a pace you can actually use. Uranus sextile your Mercury is a long, mild quickening of the mind. For a year or so, learning speeds up, conversation improves, and the future feels interesting rather than threatening. The sextile brings opportunity without pressure. Expect a steady drip of openings aimed at your curiosity: a subject that suddenly makes sense from a new angle, a tool that halves a tedious task, a person whose way of thinking rearranges yours over one talk. None of it announces itself as important. The invitations of this period look like stray links, side interests, and chance meetings, and every one can be declined. That is the catch: a mind on autopilot can coast through the whole transit and register nothing but a vaguely interesting year. While the aspect builds, notice where your attention keeps wandering, especially toward fields you once dismissed as not for you. That pull is worth following now, because comprehension comes cheap in this climate; things that would normally take you a season to learn take weeks. The exact contacts are the natural moments to commit, to enroll, start the project, open the conversation, and what begins near them tends to run on rails. Because Uranus retrogrades, the sextile usually perfects more than once, often three times across the stretch, and the repeats behave like a course offered again each term. Missing the first window costs little; the material returns, familiar now, and by the final pass you either own it or have honestly outgrown the interest. Writers, students, teachers, and anyone who trades in words or ideas tends to remember this transit fondly, but its benefits are not professional only. Your everyday thinking loosens. Opinions you have restated for years become inspectable again, and changing your mind starts to feel like a capability instead of a defeat. Conversations with unlikely people go somewhere; younger or odder voices turn out to carry exactly the information you needed. There is no drama anywhere in this aspect, and no wreckage to clean up afterward. What it offers is compound interest on curiosity: each small yes makes the next one easier, and by the time the transit fades you are measurably quicker, better connected, and stocked with ideas that will still be feeding you years from now. The growth is quiet, cumulative, and entirely yours, because every piece of it was freely chosen."
+ },
+ {
+  "id": "transit:uranus:square:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "mercury",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:uranus~natal_mercury:square"
+  ],
+  "text": "Your settled opinions are about to meet turbulence. Uranus square your Mercury spends a year or more disrupting the mental machinery you rely on: plans change without notice, information arrives that contradicts what you were sure of, conversations veer, and the general noise level of life rises until concentration becomes a discipline instead of a default. Nothing about it is optional. Its business is with every idea you hold mainly because you have always held it, and it tests them the blunt way, through interruption, contradiction, and surprise. In the applying months the effect is mostly friction: a mind that races at night and stalls at the desk, irritability with slow processes and slower people, small communication mishaps that multiply, messages misread, wires crossed, schedules scrambled by events nobody predicted. Around the exact squares the voltage peaks. Startling news is typical, and so are arguments that arrive out of proportion to their triggers, because under this aspect a debate about logistics is rarely about logistics. Words fly early and land hard; the classic casualties of the period are things said and sent at speed, and the classic regret is not pausing one breath before the send. Decisions made at the peak share the same risk. The thinking of those windows is genuinely original and genuinely unstable, a mix that rewards drafting and punishes signing. Retrograde motion usually gives this square three rounds. The first hit knocks a certainty loose. The second, quieter pass is where the real work happens: with the shock spent, you can examine what fell and decide what was actually load-bearing. By the third hit, a revised view is usually ready, and it holds, because it was rebuilt under pressure instead of inherited. Nerves are part of the story throughout; a mind this stimulated lives in a body, and the body will bill you for every skipped rest. Movement and short silences do more for clear thought this year than another hour of pushing. For all its static, the square leaves a valuable residue. Mental flexibility, once forced, tends to stay. People tend to come out of this transit less certain and more accurate, quicker to say I was wrong and faster to update, with opinions that have survived actual weather. The stale certainty it took from you was costing more than it looked, and the mind you keep afterward is the rarer kind: one that can change without breaking."
+ },
+ {
+  "id": "transit:uranus:trine:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "mercury",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:uranus~natal_mercury:trine"
+  ],
+  "text": "For a year or so, your mind and the future are on speaking terms. Uranus trine your Mercury brings a long stretch of frictionless mental weather: thinking runs quicker than usual, original angles appear without being forced, and complicated things consent to be understood. Where the harder contacts between these two bodies overload the circuits, the trine simply raises the bandwidth. Insight under this aspect has a distinct texture, sudden but calm; answers tend to arrive complete, the way a name you have been reaching for finally surfaces, and they hold up under checking. This is one of the tradition's favorite periods for any work that lives in the head: study, writing, design, strategy, anything requiring both rigor and a fresh eye. Material that resisted you before turns cooperative. Skills come in at a discount. Conversations do real work, and the transit has a talent for introductions, putting you next to exactly the person whose thinking completes a gap in yours. In the applying phase, the shift usually registers as appetite: more reading, more questions, a pull toward subjects and tools ahead of your current reach. The exact passes are the harvest windows, the natural time to produce, publish, present, or commit to a course of learning, and Uranus typically grants up to three of them as it swings retrograde and back. Work begun in the first window can be refined in the second and completed in the third, a rhythm that suits long projects unusually well. Between passes, momentum carries; ideas planted near an exact contact keep growing while you attend to other things. The trine's only weakness is its own smoothness. Because nothing resists you, nothing forces follow-through either, and the period can dissolve into a hundred bright beginnings if nothing is chosen. One or two projects, given the year, will outvalue twenty inspirations given a weekend each. It is also worth saying plainly: ideas conceived now are often ahead of their audience. If something you make lands flat, the fault may be timing rather than quality; shelve it rather than shred it, because this transit's rejects have a habit of being adopted later. When the aspect finally fades, the pace settles but the upgrades remain: a faster working mind, a set of tools and contacts you did not have before, and the quiet confidence of someone whose best thinking has been tested at speed and found sound."
+ },
+ {
+  "id": "transit:uranus:opposition:mercury",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "mercury",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:uranus~natal_mercury:opposition"
+  ],
+  "text": "Every certainty now attracts its equal and opposite, usually with a person attached. Uranus opposing your Mercury runs a year or more of intellectual confrontation: your views, plans, and assumptions keep meeting challengers, contrarians, surprise announcements, and information from left field, almost always delivered through somebody else. The opposition externalizes, so the disruption rarely feels like your own mind changing; it feels like the world talking back. Colleagues push against ideas that sailed through last year. A conversation you expected to be routine turns into a referendum. News arrives sideways and forces a re-plan. In the applying months this reads as static on the line, more misunderstandings than usual, more meetings that end somewhere unexpected, a growing sense that you and the people around you are working from different maps. Near the exact oppositions the debate comes to a head, often through one voice that seems purpose-built to contradict you. How you handle that voice decides the value of the whole transit. Treated as an enemy, it produces a year of exhausting argument in which both sides leave smarter-sounding and no smarter. Treated as information, it becomes the best editor your thinking has had in years, because it attacks exactly the joints where your reasoning was soft. The revealing question, whenever the friction spikes, is what half-doubt of your own the other side is voicing; oppositions have a way of hiring outsiders to say what you have declined to think. Expect up to three exact rounds as Uranus loops across the point. The first collision states the disagreement in its crudest form. The second pass, calmer, is for actually listening, and positions genuinely move here, sometimes on both sides at once. By the third, a synthesis is usually available that neither side could have drafted alone. Practical life needs margin throughout: plans built with no slack tend to be the ones this transit selects for demonstration, and anything important that can be confirmed twice should be. Words, too, carry farther than intended in this climate, worth remembering in the heated windows. What survives the period is the point of it. Ideas that endure a year of live opposition come out load-tested, and the ones that fall were going to fall eventually, at higher cost. You can finish with fewer opinions and better ones, a genuine tolerance for being contradicted, and, not rarely, an unlikely ally: the very person who argued with you most turning out to be the one who took you seriously."
+ }
+]

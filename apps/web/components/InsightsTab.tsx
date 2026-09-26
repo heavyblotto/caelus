@@ -25,6 +25,7 @@ export interface InsightsData {
   lots: ChartLots;
   profection: Profection;
   sect: string;
+  almuten?: { planet: string; score: number };
 }
 
 const heading: React.CSSProperties = {
@@ -113,6 +114,15 @@ export default function InsightsTab({
       <div>
         <div className="dim small" style={heading}>Dignity ({insights.sect} chart)</div>
         <table className="mono" style={{ fontSize: "0.82rem" }}>
+          <thead>
+            <tr>
+              <th className="mute" style={cell} />
+              <th className="mute" style={cell}>score</th>
+              <th className="mute" style={cell} />
+              <th className="mute" style={cell}>term</th>
+              <th className="mute" style={cell}>face</th>
+            </tr>
+          </thead>
           <tbody>
             {insights.dignities.map((d) => (
               <tr key={d.planet}>
@@ -121,10 +131,17 @@ export default function InsightsTab({
                   {d.total > 0 ? "+" : ""}{d.total}
                 </td>
                 <td className="mute" style={cell}>{dignityLabel(d)}</td>
+                <td className="mute" style={cell}>{d.term_ruler}</td>
+                <td className="mute" style={cell}>{d.face_ruler}</td>
               </tr>
             ))}
           </tbody>
         </table>
+        {insights.almuten && (
+          <p className="dim small" style={{ margin: "0.4rem 0 0" }}>
+            Almuten of the Ascendant: {insights.almuten.planet} ({insights.almuten.score}).
+          </p>
+        )}
       </div>
 
       {/* Hermetic lots */}
@@ -152,7 +169,6 @@ export default function InsightsTab({
         </p>
         <p className="dim small" style={{ margin: "0.2rem 0 0" }}>
           Month {insights.profection.month}: {insights.profection.monthly.lord} ({insights.profection.monthly.sign}).
-          Also firdaria, zodiacal releasing, and primary directions.
         </p>
       </div>
     </div>

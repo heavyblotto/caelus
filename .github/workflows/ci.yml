@@ -10,6 +10,7 @@ jobs:
       - uses: actions/setup-node@v5
         with: { node-version: 22, cache: npm }
       - run: npm ci
+      - run: npm run check:versions
       - run: npm run build -w caelus
       # The conformance suite is the contract: golden checks ported
       # from the Python reference. A red suite blocks merge. It also emits
@@ -21,6 +22,8 @@ jobs:
       - run: node packages/caelus/dist/test/derived-golden.test.js
       # interpolated lunar apogee: TS pack evaluation must match the Python reference
       - run: node packages/caelus/dist/test/intp-apog-golden.test.js
+      # draconic (nodal) chart transform: TS port must match the Python reference
+      - run: node packages/caelus/dist/test/draconic-golden.test.js
       # turbo tier: the TS evaluator must reproduce the Python evaluator on the pack
       - run: node packages/caelus/dist/test/turbo-golden.test.js
       # electional primitives: TS port must match the Python reference
@@ -80,6 +83,8 @@ jobs:
       # canonical mode (integer output + digests): TS must EQUAL the Python
       # reference -- the one tolerance-free golden; every comparison is ===
       - run: node packages/caelus/dist/test/canonical-golden.test.js
+      # era slabs (classical 3000 BCE–1000 CE): chained pack resolution
+      - run: node packages/caelus/dist/test/era-packs.test.js
       # every test/*.test.* file in the repo must be wired into this workflow;
       # four golden suites once sat dormant for ~11 releases because this list
       # is maintained by hand. The gate makes silent omission impossible.
@@ -87,6 +92,13 @@ jobs:
       # interpretation corpus: compiled rules must bind to legal atoms only
       - run: npm run build -w caelus-delineations-pd
       - run: npm run test -w caelus-delineations-pd
+      - run: npm run build -w caelus-corpus
+      - run: npm run test -w caelus-corpus
+      # build order follows the imports: birth -> wheel -> widgets
+      - run: npm run build -w caelus-birth
+      - run: npm run build -w caelus-wheel
+      - run: npm run build -w caelus-widgets
+      - run: npm run test -w caelus-widgets
       - run: npm run build -w caelus-mcp
       - run: npm run facts:sync
       - run: node packages/caelus-mcp/smoke.mjs
@@ -99,10 +111,8 @@ jobs:
       # No model calls, no API keys in CI; live runs are opt-in via EVAL_MODEL.
       - run: node packages/caelus-mcp/eval/run.mjs
       # timezone resolution: tzdb golden cases + 200-case round-trip property
-      - run: npm run build -w caelus-birth
       - run: node packages/birth/dist/test/golden.test.js
       # chart wheel: SSR render of real charts + collision-fan unit checks
-      - run: npm run build -w caelus-wheel
       - run: node packages/wheel/dist/test/render.test.js
       # 3D chart sphere: SSR render + latitude-matters check
       - run: node packages/wheel/dist/test/sphere.test.js
@@ -110,8 +120,12 @@ jobs:
       - run: node packages/wheel/dist/test/astromap.test.js
       # graphic ephemeris: SSR render of the time-series line graph
       - run: node packages/wheel/dist/test/ephemerisgraph.test.js
+      # MultiWheel rings API: bi/tri/synastry wheels from one component
+      - run: node packages/wheel/dist/test/multiwheel.test.js
       # cross-package journey: local time -> chart -> SVG wheel, end to end
       - run: node packages/wheel/dist/test/integration.test.js
+      # apps/web library units (timeline lanes, root-found transit spans)
+      - run: node scripts/test-web-libs.mjs
       # per-entrypoint bundle sizes (esbuild): informational, prints the table
       # the data-tiers doc quotes. Per-target try/catch keeps it non-blocking.
       - run: npm run bundle-sizes
@@ -130,11 +144,27 @@ jobs:
       - run: npm run smoke:web
       # llms.txt must track package versions and stay in sync with the site
       - run: node scripts/check-llms.mjs
+      # the docs must describe the fact kinds and selectors the engine ships:
+      # the hand-written `kind` unions drifted for two releases unnoticed
+      - run: node scripts/check-docs.mjs
+      - run: node scripts/check-mcp-surface.mjs
       # prose numeric claims must match the generated stats + accuracy table
       - run: npm run lint:claims
       # em-dash gate: no `—` or &mdash; in rendered site prose (pure node, so it
       # gates every PR here, not only in the Vale-dependent prose job below).
       - run: npm run lint:emdash
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Python self-checks
+        run: |
+          set -euo pipefail
+          for f in python/test_*.py; do python3 "$f"; done
 
   prose:
     runs-on: ubuntu-latest

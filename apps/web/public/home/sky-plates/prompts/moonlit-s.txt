@@ -1,0 +1,7 @@
+PHOTOREALISTIC SKY PLATE, shot on a full-frame camera (atmosphere and horizon only, no celestial bodies):
+
+- Frame 1536x1024px, wide lens (24mm, 73.74 deg horizontal field), rectilinear projection. Looking S (azimuth 180 deg) at altitude 8 deg.
+- Keep the horizon level and straight at y=656 (64% down the frame).
+- Deep night: the Sun is 30.1 deg below the horizon, no twilight. Moonlight casts a soft, neutral blue-grey wash, brighter near the Moon. You choose exact colors.
+- Foreground: New York City looking south from midtown along the downtown harbor axis, Lower Manhattan towers. No Sun, Moon, planets, or stars.
+- Render ONLY the sky gradient, clouds, atmosphere, and any horizon or foreground. Do NOT draw the Sun, Moon, planets, stars, the Milky Way, or any point of light: those are composited separately. Keep the sky clean and even, with no baked-in glare where bright bodies will sit.

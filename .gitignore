@@ -71,4 +71,7 @@ python/moon_horizons_cache.json
 python/*_horizons_cache_[0-9]*.json
 # In-progress download checkpoints (HorizonsCache resume support). Pure scratch.
 python/*.part
+
+# npm pack dry-run tarballs from release prep; `npm publish` packs fresh.
+packages/*/caelus-*.tgz
 .vercel

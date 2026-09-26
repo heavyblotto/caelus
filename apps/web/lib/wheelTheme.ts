@@ -30,6 +30,7 @@ export const WHEEL_PLANET_COLORS: Record<string, string> = {
 };
 
 export const WHEEL_THEME: Partial<WheelTheme> = {
+  background: "transparent",
   ring: "var(--wheel-ring)",
   axis: "var(--accent)",
   signText: "var(--wheel-sign)",

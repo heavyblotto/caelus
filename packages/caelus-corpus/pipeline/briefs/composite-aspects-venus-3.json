@@ -1,0 +1,158 @@
+{
+ "name": "composite-aspects-venus-3",
+ "outFile": "b3-composite-aspects-venus-3.json",
+ "setId": "house-b3-composite-aspects-venus-3",
+ "family": "composite-aspect",
+ "cells": [
+  {
+   "id": "composite:aspect:venus:conjunction:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "chiron",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:venus~chiron:conjunction"
+   ],
+   "title": "Composite Venus conjunct composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:sextile:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "chiron",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:venus~chiron:sextile"
+   ],
+   "title": "Composite Venus sextile composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:square:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "chiron",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:venus~chiron:square"
+   ],
+   "title": "Composite Venus square composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:trine:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "chiron",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:venus~chiron:trine"
+   ],
+   "title": "Composite Venus trine composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:opposition:chiron",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "chiron",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:venus~chiron:opposition"
+   ],
+   "title": "Composite Venus opposite composite Chiron",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:conjunction:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "true_node",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "composite:venus~true_node:conjunction"
+   ],
+   "title": "Composite Venus conjunct composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:sextile:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "true_node",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "composite:venus~true_node:sextile"
+   ],
+   "title": "Composite Venus sextile composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:square:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "true_node",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "composite:venus~true_node:square"
+   ],
+   "title": "Composite Venus square composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:trine:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "true_node",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "composite:venus~true_node:trine"
+   ],
+   "title": "Composite Venus trine composite North Node",
+   "bindable": true
+  },
+  {
+   "id": "composite:aspect:venus:opposition:true_node",
+   "family": "composite-aspect",
+   "when": {
+    "kind": "compositeAspect",
+    "a": "venus",
+    "b": "true_node",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "composite:venus~true_node:opposition"
+   ],
+   "title": "Composite Venus opposite composite North Node",
+   "bindable": true
+  }
+ ]
+}

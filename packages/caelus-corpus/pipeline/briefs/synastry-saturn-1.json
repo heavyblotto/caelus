@@ -1,0 +1,248 @@
+{
+ "name": "synastry-saturn-1",
+ "outFile": "b3-synastry-saturn-1.json",
+ "setId": "house-b3-synastry-saturn-1",
+ "family": "synastry-aspect",
+ "cells": [
+  {
+   "id": "synastry:saturn:conjunction:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "sun",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:saturn~b_sun:conjunction"
+   ],
+   "title": "Your Saturn conjunct their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:sextile:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "sun",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:saturn~b_sun:sextile"
+   ],
+   "title": "Your Saturn sextile their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:square:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "sun",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:saturn~b_sun:square"
+   ],
+   "title": "Your Saturn square their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:trine:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "sun",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:saturn~b_sun:trine"
+   ],
+   "title": "Your Saturn trine their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:opposition:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "sun",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:saturn~b_sun:opposition"
+   ],
+   "title": "Your Saturn opposite their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:conjunction:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "moon",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:saturn~b_moon:conjunction"
+   ],
+   "title": "Your Saturn conjunct their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:sextile:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "moon",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:saturn~b_moon:sextile"
+   ],
+   "title": "Your Saturn sextile their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:square:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "moon",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:saturn~b_moon:square"
+   ],
+   "title": "Your Saturn square their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:trine:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "moon",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:saturn~b_moon:trine"
+   ],
+   "title": "Your Saturn trine their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:opposition:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "moon",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:saturn~b_moon:opposition"
+   ],
+   "title": "Your Saturn opposite their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:conjunction:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "mercury",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:saturn~b_mercury:conjunction"
+   ],
+   "title": "Your Saturn conjunct their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:sextile:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "mercury",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:saturn~b_mercury:sextile"
+   ],
+   "title": "Your Saturn sextile their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:square:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "mercury",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:saturn~b_mercury:square"
+   ],
+   "title": "Your Saturn square their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:trine:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "mercury",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:saturn~b_mercury:trine"
+   ],
+   "title": "Your Saturn trine their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:saturn:opposition:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "saturn",
+    "b": "mercury",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:saturn~b_mercury:opposition"
+   ],
+   "title": "Your Saturn opposite their Mercury",
+   "bindable": true
+  }
+ ]
+}

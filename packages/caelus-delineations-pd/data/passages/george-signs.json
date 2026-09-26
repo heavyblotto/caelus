@@ -20,26 +20,6 @@
     "embed": true
   },
   {
-    "id": "george-signs:jupiter-in-capricorn",
-    "when": {
-      "kind": "placement",
-      "body": "jupiter",
-      "sign": "Capricorn"
-    },
-    "atomIds": [
-      "placement:jupiter"
-    ],
-    "text": "The nature is constructive, capable, creative with organizing ability. Ig ambitious and attains some degree of popularity, power, credit and esteem. Tends to economy,' f^ugsjity and the acquirement of practical education, talcing part in the advancement of scientific, philosophic or spiritual knowledge, industria? or political economics. It inclines to general success in occupation, especially where the r^Ltive is in authority over others, or engaged in some public or governmental career. The tendency is to gain through commercial or foreign affairs, and if other testimonies in the chart concur, gain through money or legacy from, father or superiors. It is said to indicate a long journey or voyage and* that the marriage is affected by the parents, also that the native is concerned wiA th^ sorrows ana* misfortunes of friends. If afflicted, it manifests as parsimony or inactivity;",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Jupiter in Capricorn"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
     "id": "george-signs:jupiter-in-gemini",
     "when": {
       "kind": "placement",
@@ -49,32 +29,12 @@
     "atomIds": [
       "placement:jupiter"
     ],
-    "text": "Gives a nature which expresses sympathy, charity, benevolence and humanitcfrian tendencies. The disposition is friendly, courteous, truthful and trustworthy. Fond of novelty, traveling and mental recreation. The GENETHLIACAL ASTROLOGY tendency is to intellectual development. f The mind is lofty and aspiring, and although at times there seems to be Restlessness and feelings *of uncertainty or changeability, yet there is good comparison^ or mathematical faculty; also ability for literature, occult investigation, psychic unfoldment and proph^cy.c It indicates the possibility of an attraction to a relative or some one closely associated, and two marriages. There may b { e some difficulty in marriage through relatives, wrings or travel.\" It inclines to success in literature, bt efits through inventions, with large corporations, mail order business and publishing.",
+    "text": "Gives a nature which expresses sympathy, charity, benevolence and humanitarian tendencies. The disposition is friendly, courteous, truthful and trustworthy. Fond of novelty, traveling and mental recreation. The",
     "tradition": "modern",
     "source": {
       "author": "Llewellyn George",
       "work": "A to Z Horoscope Maker and Delineator",
       "locus": "Jupiter in Gemini"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:jupiter-in-leo",
-    "when": {
-      "kind": "placement",
-      "body": "jupiter",
-      "sign": "Leo"
-    },
-    "atomIds": [
-      "placement:jupiter"
-    ],
-    "text": "Klakes t the native good-natured, noble and loftyminded, magnanimous, loyal, courteous, generous, compassionate,* benevolent and prudent. This location* strengthens the 'constitution,* increases the vitality and favors h^rth of children. The love nature is deep, sincere and c honest; the subject is endowed with wisdom, •good judgmentaiul will power, capable of holding positions of triisf and responsibility. Enjoys prestige, honors, grandeur and great undertakings. The Tnind is intuitive, diplomatic artd inclined to higher sciences, philosophy, fine arts, religion and culture generally. Favors government £rtiplby and positions of prominence. Gain through judicious investment and speculations. Benefit through long journeys especially in connection with sports, education or diplomatic affairs.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Jupiter in Leo"
     },
     "rights": "gratis-not-pd",
     "embed": true
@@ -95,26 +55,6 @@
       "author": "Llewellyn George",
       "work": "A to Z Horoscope Maker and Delineator",
       "locus": "Jupiter in Pisces"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:jupiter-in-sagittarius",
-    "when": {
-      "kind": "placement",
-      "body": "jupiter",
-      "sign": "Sagittarius"
-    },
-    "atomIds": [
-      "placement:jupiter"
-    ],
-    "text": "The mjkd is broad, just, liberal, merciful) compassionate, Humanitarian, sincere, prophetic and philosophical. 1 Jupiter in •Sagittarius tends to good fortune and general success* The native is usually successful in his enterprises, often receives hcfoors and is a leader among his aasociajtes. It is favorable for matters connected with sports, horses, shipping, literature, and learned, scientific, philosophic or religious bodies. If ofher testimonies in the chart concur, it tends to gain through speculation, marriage, legacy and voyages. If afflicted, troublesome social affairs, difficulty through sports and loss by speculation or gambling.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Jupiter in Sagittarius"
     },
     "rights": "gratis-not-pd",
     "embed": true
@@ -160,66 +100,6 @@
     "embed": true
   },
   {
-    "id": "george-signs:jupiter-in-virgo",
-    "when": {
-      "kind": "placement",
-      "body": "jupiter",
-      "sign": "Virgo"
-    },
-    "atomIds": [
-      "placement:jupiter"
-    ],
-    "text": "This increases the mental inclination in all directions toward an intellectual or even somewhat materialistic view of things. The nature is cautious, not easily imposed upon, discreet, prudent and discriminative* and therefore the native has ability for practical scientific and philosophical investigation and study, the mind being analytical, critical, and matter-of-fact, possessed ot wisdom, knowledge, honesty and ability for the study of natural laws. Careful in choice of acquaintances, friendships among occult students. Rises above\" his sphere in life, has foreign associations and travel due to business. Marriage is irksome way peculiar and possibly to a social inferior. If well aspected^or unafflicted, success in business or professional pursuits; gain by employees, literature, investment, commercial and speculative dealings. It tends to the occupations oj Virgo and Sagittarius.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Jupiter in Virgo"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:mars-in-aquarius",
-    "when": {
-      "kind": "placement",
-      "body": "mars",
-      "sign": "Aquarius"
-    },
-    "atomIds": [
-      "placement:mars"
-    ],
-    "text": "As a speaker he is a ready debater, forcible and convincing; he sums up facts and argument? clearly and often arrives at conclusions quickly. He is intellectual, prudent, quick-witted and scientific. There is some impulsiveness in manner an£ speech and a i times he 'is ra9h, head-stroiig and abrupt. The native is humanitarian^and interested in reforms for public good. He is, fond of literature and philosophy, occult studies ind science generally. Mars in Aquarius makes one ambitious, enterprising and independerrt. His opinions may be fixed and not readi^ changed by others; when he makes a change ft is usually a complete «one and undergone quite suddenly or # abruptly. The native is original and unique in many things, inventive and fond of machinery, electrical and aerial matters. This is a good location of Mars for medicine or surgery, hospital, philanthropic or welfare work.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Mars in Aquarius"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:mars-in-aries",
-    "when": {
-      "kind": "placement",
-      "body": "mars",
-      "sign": "Aries"
-    },
-    "atomIds": [
-      "placement:mars"
-    ],
-    "text": "Gives f^rce, positivity, self-assurance f# combativeness, activity, industry, ente/pris^ originality # and meohanicsrt ability. The native is enthusiastic, electric and inspiring. # Philosophic «and idealistic in spirit and so frank and free that'fye usually m^ets wth poor success in concealing anything. Very independent and often acfs hastily and forcefully on impulse. Possesses a keeh sense of enjoyment, a love for sport, pleasure and adventure. Has a strong dislike for all 4 bonds, limitations and restrictions, preferring to be free to explore and pioneer into all new lines of thought and activity. # Self-interest is strong and the native will usually push his affairs forward with very little outside#, encouragement, sometimes without any, and in the face of discouragement.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Mars in Aries"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
     "id": "george-signs:mars-in-cancer",
     "when": {
       "kind": "placement",
@@ -240,26 +120,6 @@
     "embed": true
   },
   {
-    "id": "george-signs:mars-in-gemini",
-    "when": {
-      "kind": "placement",
-      "body": "mars",
-      "sign": "Gemini"
-    },
-    "atomIds": [
-      "placement:mars"
-    ],
-    "text": "Sharpens the insight and perception, giving acute, keen, quick intellect; mentally combative and forceful, plain spoken; desire for educational attainments; active and nimtfie. il If Mars is well aspected the rfative can write or speak well and is fond of reading, lectures, travel, science, law or chemistry. Possessed a mind that is ^mechanical, inventive, and ingenious. In manner is practical, apt, quick to make deductions and to arrive at conclusions.* If Mars is afflicted, often disagreeable and forceful jin speech, satirical, fault-finding and critical. Trouble through neighbors, relatives and inferiors, alsq, through waitings, letters, education and traveling; difficulty, estrangement«or separation from brothers or sisters. The mind is restless, indecisive and lacking in concentration. Pains in th£ lungs arfd injuries to hands, arms, shoulders and collar bofte.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Mars in Gemini"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
     "id": "george-signs:mars-in-leo",
     "when": {
       "kind": "placement",
@@ -269,7 +129,7 @@
     "atomIds": [
       "placement:mars"
     ],
-    "text": "He is active, industrious and capable of rising to positions of responsibility, trust, authority, management and cotftrol. During good “directions” to Mars, sucjess and # good fortune through pablic appointments, goveriynent affairs, gain by speculation, investment, keen judgment in stock exchange matters, insurance and industrial coacerns, and through those in high rank. Sociable, fond of company, friendship and esteem; warm-hearted, ardent m affection, Jove and pleasure; often hasty and impulsive in love and sometimes too unrestrained in tM emotions and passiops.,At times very forceful, positive, militant, ’aggressive or defiant in manner,. strong in argument and likely to arouse opposition and open enmity; but veiy magnanimous, generous, philosophical, reasonable;",
+    "text": "He is active, industrious and capable of rising to positions of responsibility, trust, authority, management and cotftrol. During good “directions” to Mars, sucjess and # good fortune through pablic appointments, goveriynent affairs, gain by speculation, investment, keen judgment in stock exchange matters, insurance and industrial coacerns, and through those in high rank. Sociable, fond of company, friendship and esteem; warm-hearted, ardent m affection, Jove and pleasure; often hasty and impulsive in love and sometimes too unrestrained in tM emotions and passiops.,At times very forceful, positive, militant, ’aggressive or defiant in manner,. strong in argument and likely to arouse opposition and open enmity; but veiy magnanimous, generous, philosophical, reasonable; enthusiastic, broad, liberal, possessing a keen sense of",
     "tradition": "modern",
     "source": {
       "author": "Llewellyn George",
@@ -289,32 +149,12 @@
     "atomIds": [
       "placement:mars"
     ],
-    "text": "Here Mars is in his detriment. The peace-loving, passive Libra, sign of unity and dealings with others, would be disturbed by the aggressive, positive Mars, indicating ardent, rash, impulsive love affairs, difficulty in marriage, strife in pannership and open enmities. If the nature of each planet and sign is well learned there will be little difficulty in reading a horoscope. “Every new discovery In physics, chemistry, metaphysics or astronomy, simply further astr loglses scientific thought”j*-From “Ho# Planets Affect You.” GENETHLIACAL ASTROLOGY MOON Her Influence In the Twelve Zodiacal Signs The Moon Rules the Sign Cancer People ruled by the Moon are usually sensitive, emotional and domesticated, possessing a love for home and kindred. They usually are posted regarding the family tree, are very patriotic and have a good memory for r events in history.",
+    "text": "Here Mars is in his detriment. The peace-loving, passive Libra, sign of unity and dealings with others, would be disturbed by the aggressive, positive Mars, indicating ardent, rash, impulsive love affairs, difficulty in marriage, strife in pannership and open enmities. If the nature of each planet and sign is well learned there will be little difficulty in reading a horoscope. “Every new discovery In physics, chemistry, metaphysics or astronomy, simply further astr loglses scientific thought”j*-From “Ho# Planets Affect You.”",
     "tradition": "modern",
     "source": {
       "author": "Llewellyn George",
       "work": "A to Z Horoscope Maker and Delineator",
       "locus": "Mars in Libra"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:mars-in-scorpio",
-    "when": {
-      "kind": "placement",
-      "body": "mars",
-      "sign": "Scorpio"
-    },
-    "atomIds": [
-      "placement:mars"
-    ],
-    "text": "This gives a prpctical nature with the capacity to work hard and accomplish much. There is good executive power, mechanical and inventive ability. In character the native is firm, positive, determined and forceful, with matter-of-fact manner and a seemingly cold^or unconscious disregard for the feelings of others. Somewhat selfish, rash, revengeful and passionate. Thp mind is acute, sharp, keen and diplomatic, native is quick and capable in government office, in secret missions and work of a peculiar nature in connection with the regulai employment or with confederates or associates. This location is ftivorable for a chemist, surgeon, assayer or any other profession or occupation which involves the use of liquids aad tools. The nat;",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Mars in Scorpio"
     },
     "rights": "gratis-not-pd",
     "embed": true
@@ -329,32 +169,12 @@
     "atomIds": [
       "placement:mars"
     ],
-    "text": "Gives practical qualities, quiet ambition, quick wit and foresight, good executive power, ability to organize and direct: a good manager capable of carrying plans and ideas into practical materialization. Not usually deterred, nonplussed or thwartecf by obstacles, and works determinedly tfnd persistently whert self-interests are concerned, gaining the desired ond through tact, diplomacy and sheer strength of # internal force or confidence. This location of Mars indicates good earning powers,.free expenditures and pleasure as wejl as gain through thp occupation. If«Mars is unafflicted the native usually handles much money and gains by legacy* Bufrif \"Mars is afflicted the native will be liable to loss of money, property and \"slumps in finances. The temper, during the period of GENETHLIACAL ASTROLOGY j*.",
+    "text": "Gives practical qualities, quiet ambition, quick wit and foresight, good executive power, ability to organize and direct: a good manager capable of carrying plans and ideas into practical materialization. Not usually deterred, nonplussed or thwartecf by obstacles, and works determinedly tfnd persistently whert self-interests are concerned, gaining the desired ond through tact, diplomacy and sheer strength of # internal force or confidence. This location of Mars indicates good earning powers,.free expenditures and pleasure as wejl as gain through thp occupation. If«Mars is unafflicted the native usually handles much money and gains by legacy* Bufrif \"Mars is afflicted the native will be liable to loss of money, property and \"slumps in finances. The temper, during the period of",
     "tradition": "modern",
     "source": {
       "author": "Llewellyn George",
       "work": "A to Z Horoscope Maker and Delineator",
       "locus": "Mars in Taurus"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:mars-in-virgo",
-    "when": {
-      "kind": "placement",
-      "body": "mars",
-      "sign": "Virgo"
-    },
-    "atomIds": [
-      "placement:mars"
-    ],
-    "text": "Makes the native quite original and interested in bold and scientific enterprises in which he ‘is usually successful* yet he has nlany struggles of a peculiar nature as this location of Mars puts difficulties in the way of the ambitions and desires for jjower and fame, helping to bring reversal, downfall, obstacles and continual annoyance or opposition. It favors profit through trading in common things and foreign produce, and general business enterprises. The native is a good worker in employ, but usually follows his own vPill quietly, being mentally very active, quick-witted, shrewd and somewhat acquisitive; tactful and discriminative; possesses rese^e force and energy.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Mars in Virgo"
     },
     "rights": "gratis-not-pd",
     "embed": true
@@ -389,32 +209,12 @@
     "atomIds": [
       "placement:mercury"
     ],
-    "text": "Diplomatic, tactful, discreet,, faithful and goodnatured. The intellect is clear ana reasonable with, retentive powers.* Readily adapt themselves to surround, ing conditions and capable of changing their opinions quickly; sociable disposition. Fond of pleasure, picnics ajid fanyly reunions. Very impressionable and sensitive* Easily influenced ■by jcindness and encouraged by approbation. GENETHLIACAL ASTROLOGY The 1 mind is somewhat restless anti requires an abundance of material for reflection. Usually spiritually inclined and interested in psychic Investigation. Appreciation for the poetry of motiop or of rhyme and music; liking for journeys water and public entertainment. Mercury irf'Leo* $ a Denotes an ambitious, confident, persistent, determined, lofty mind, fiery, quick-tempered. Kind-hearted and sympathetic; dignified and aspiring; intuitive intellect and high, noMe ideals;",
+    "text": "Diplomatic, tactful, discreet,, faithful and goodnatured. The intellect is clear ana reasonable with, retentive powers.* Readily adapt themselves to surround, ing conditions and capable of changing their opinions quickly; sociable disposition. Fond of pleasure, picnics ajid fanyly reunions. Very impressionable and sensitive* Easily influenced ■by jcindness and encouraged by approbation.",
     "tradition": "modern",
     "source": {
       "author": "Llewellyn George",
       "work": "A to Z Horoscope Maker and Delineator",
       "locus": "Mercury in Cancer"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:mercury-in-capricorn",
-    "when": {
-      "kind": "placement",
-      "body": "mercury",
-      "sign": "Capricorn"
-    },
-    "atomIds": [
-      "placement:mercury"
-    ],
-    "text": "Acute, sharp,.penetrating, tactful, curious, diplomatic and critical. Somewhat suspicions, ^peevish, fickle, discontented or restless. Caneful, economical ant^ pain- ’ staking, especially towards perfecting the intellect. ConGENBTHLIACAL ASTROLOGY stantly busy about something. Interest and ability for literature, science, chemistry, philosophy aqd* the occult. Influenced only through kindness. Serious, thoughtful contemplative and practical nature. Observant, discriminating; organizing ability.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Mercury in Capricorn"
     },
     "rights": "gratis-not-pd",
     "embed": true
@@ -435,26 +235,6 @@
       "author": "Llewellyn George",
       "work": "A to Z Horoscope Maker and Delineator",
       "locus": "Mercury in Gemini"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:mercury-in-pisces",
-    "when": {
-      "kind": "placement",
-      "body": "mercury",
-      "sign": "Pisces"
-    },
-    "atomIds": [
-      "placement:mercury"
-    ],
-    "text": "Possess an understanding not acquired from books; know things in a peculiar manner; rarely at a loss to e^lain any condition and are often called \"walking encyclopedias.\" The min<f is imaginative, irripressional and quickly adapted to thei requirements of the moment; possess great absorptive capacity and the power to memorize. Tends to psychic or mediumistic qualities but attended with some danger or inconvenience through pver-receptivity in* nature. Fond of pleasure, recreation and traveling, especially on the water. Numerous abilities, often change employment, good judge of hubian nature.' Analytical, diplomatic,* caufious, just, good-humored, versatile, ingenious and dexterous. Interest in hygiene, prophylactics, nursing, dealing, hospitals. PART HI, DELINEATIONS FOR AQROSCpPCS 273 • VfNUS. Her influenee in the Twelve Zodiacal Signs Venus rules •twoVsigns: Taurus and Libra.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Mercury in Pisces"
     },
     "rights": "gratis-not-pd",
     "embed": true
@@ -520,146 +300,6 @@
     "embed": true
   },
   {
-    "id": "george-signs:mercury-in-virgo",
-    "when": {
-      "kind": "placement",
-      "body": "mercury",
-      "sign": "Virgo"
-    },
-    "atomIds": [
-      "placement:mercury"
-    ],
-    "text": "Good intellect: comprehensive, cautious, prudent, discriminative, practical, versatile, inventive, intuitive, perceptive and possesses ability for •study and memorizing. Power of persuasion; a good scholar or linguist’; fluency as a writer, well informed, capable in detail, sequence and expression; innate love for mystery or for occult investigation. Quiet *or somewhat serious nature but at times critical and skeptical; must see, ktfow atid understand thoroughly before convinced. Taste for mathematics or literature f capable of undertakings that require ability, planping and dexterity? Interest in hygiene, prophylactics, pursing, healing of chemistry. Mercury in Lfora A refined, good and broa^l mind; quiet, just, tender, dispassionate disposition; fond of comparison, capable * of judgment \"and reason.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Mercury in Virgo"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:moon-in-aquarius",
-    "when": {
-      "kind": "placement",
-      "body": "moon",
-      "sign": "Aquarius"
-    },
-    "atomIds": [
-      "placement:moon"
-    ],
-    "text": "Active, intuitional, agreeable, friendly and courteous disposition..The ^native is sociabU? and sympathetic in manner; broad, humane, independent an<j somewhat unconventional. Gives liking for the strange and curious with an inclination for subjects that are unusual, original or eccentric; inventive ability. It tends to political, educational' and scientific work, interest in • astrology, occult matters generally, secret societies, etc. It gives a good faculty for image-making; mental sensitiveness; sorrow and changes occasioned by friends. Troubles through women and liability to sorrow and wandering life, if badly aspected.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Moon in Aquarius"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:moon-in-cancer",
-    "when": {
-      "kind": "placement",
-      "body": "moon",
-      "sign": "Cancer"
-    },
-    "atomIds": [
-      "placement:moon"
-    ],
-    "text": "This indicates one whose desire is to work along lines of least resistance; friendly, sociable and domestic in manner and usually much attached to his own; feeling and emotion are active and^ usually for good. Somewhat changeable, influenced greatly by the surroundings and is sensitive to.outride influences; in«other words, senses conditions psychically (consciously or unconsciously). The native is kind and agreeable to all, sympathetic and humane. Sometimes allows imposi^on without an act of resentment; sometimes is elected to posts of honor. Good, conscientious, sensitive, superior nature; hard struggles, great obstacles, voyages. Loves traveling, also home; attraction to the mother. It favors dealing with the public in liquids, chemistry, catering, shipping and a residence near the water. Fond of the occult, antique and curious things.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Moon in Cancer"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:moon-in-capricorn",
-    "when": {
-      "kind": "placement",
-      "body": "moon",
-      "sign": "Capricorn"
-    },
-    "atomIds": [
-      "placement:moon"
-    ],
-    "text": "Tends to bring one before the public in some manner, but whether beneficially or otherwise depends upon the other indications in the chart. * If the Moon is well aspected at* birth, especially by the Sun, mjy attract attention as a prominent ai)d re-, spectable person. Jf the environment has been good it may manifest as rulership, generalship and administrative ability. PART III, DELINEATIONS FOR HOROSCOPES jflg If the mental rulers (*) were afflicted and the early training negfected it gives a vague, indeterminate* mind, lack of creative energy although ^ambitious; misfortune through women and lax control of the appetites. Usually has enemies whotherMnerited or not, and some drawback or difficulty attached to the occupation or reputation of the native. If the aspects in the chart are generally good it indicates honors and prominence;",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Moon in Capricorn"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:moon-in-gemini",
-    "when": {
-      "kind": "placement",
-      "body": "moon",
-      "sign": "Gemini"
-    },
-    "atomIds": [
-      "placement:moon"
-    ],
-    "text": "‘This location of the Moon gives 'the subject an agreeable, warm-hearted, sympathetic, humane, progressive and 'ingenfeus nature, with the capacity' of being very ' reserved in some ma^tefe, sufch as personal or domestic matters^ but fluent concerning local or national affairs.' Strengthens and enlivens «the intellect, inclines to literature and gains pleasure fjom books or scientific pursuits. Gives an active Body and a versatile, ieceptive mind, responsive to new ideas ^ind capable of following artistic, literary, or professional \"occupations. Dislikes quarreling and warfare. Subject to many changes and some journeys. Through lack of caution, discretion or prutience apt to be drawn into embarassing or difficult positions.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Moon in Gemini"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:moon-in-leo",
-    "when": {
-      "kind": "placement",
-      "body": "moon",
-      "sign": "Leo"
-    },
-    "atomIds": [
-      "placement:moon"
-    ],
-    "text": "This 'makes one ambitious, self-confitlelit, self-reliant, loyal, honorable, generous* in money matters^# highmiftded, magnanimous, candid # and warm-hearted; a persevering, lively and penetrating mind; organising 262 <•, GENETHLIACAL ASTROLOGY • ability; generally a leader among bis associates; popular with 'the opposite sex; sincere love; fond of home and honor; particular in dress and very Orderly in conduct. It favors intuition and genius ^nd jjives a free-hearted nature with a love for pleasure, music, art, sports. This location of the Moon has a tendency to uplift the native, mentally and socially, and place him in positions of trust, respect and responsibility or in control or ' management of enterprises.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Moon in Leo"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:moon-in-pisces",
-    "when": {
-      "kind": "placement",
-      "body": "moon",
-      "sign": "Pisces"
-    },
-    "atomIds": [
-      "placement:moon"
-    ],
-    "text": "Kind, benevolent,, quiet, retiring, sympathq)ic, fond of luxury? comfort, diversity, ehange, beauty and harmony. Meets with many misfortupes and bbstades which tend * Sun. lloon. Mercury and rulers of third and ninth cuapj. 286 *. GgygTHLIACAL ASTROLOGY^ - to make the native ^eel irresolute, inert, ^downhearted and eisily discouraged at timps. It gives a taste for reading and keen perception of refinance, having a powerful and fruitful imagination. As speaker, writer or composer he is copious, flueAt, earnest and very correct in details. Inconstancy is indicated in the love affairs; generally has a hard time saving money. If the # Sun also is in a f watery sign or a watery sign ascending the native is likely to grow corpulent. With the Moon in this location, the native is often very receptive, mediumistic or inspirational and responsive to psychic conditions generally.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Moon in Pisces"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
     "id": "george-signs:moon-in-sagittarius",
     "when": {
       "kind": "placement",
@@ -675,26 +315,6 @@
       "author": "Llewellyn George",
       "work": "A to Z Horoscope Maker and Delineator",
       "locus": "Moon in Sagittarius"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:moon-in-scorpio",
-    "when": {
-      "kind": "placement",
-      "body": "moon",
-      "sign": "Scorpio"
-    },
-    "atomIds": [
-      "placement:moon"
-    ],
-    "text": "Inclines to vigorous activity. The native has enterprise, will, determination, practical ability; is firm and self-confident enough to push forward and gain success in undertakings and take care of his own; somewhat abrupt and impulsive. It gives a fondness for* pleasure, comfort and desire to satisfy the tastes. The nature is energetic, forceful, independent, masterful, aggressive, courageous and positite; will not tolerati imposition, nor be swerved from his purpose by opj>osition, yet will often sacrifice a great deal in return for kindness ^sometimes quick-tempered. It inclines to interest in tlje occult or tnysterious in nature, and, if there are any conforming aspects, wifl advocate and assist in* Carrying out revolutionary changes, employing sarcasm or satire. Taken alone the locatton signifies.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Moon in Scorpio"
     },
     "rights": "gratis-not-pd",
     "embed": true
@@ -740,26 +360,6 @@
     "embed": true
   },
   {
-    "id": "george-signs:neptune-in-aries",
-    "when": {
-      "kind": "placement",
-      "body": "neptune",
-      "sign": "Aries"
-    },
-    "atomIds": [
-      "placement:neptune"
-    ],
-    "text": "It intensifies the feelings, ^emotions and senses, softening or elevating the disposition through sympathy, benevolence, spirit perception or^inner 'understanding. If give£ a love of traveling, also some mystical experiences and original ideas with regard to religious or spiritual matters, and naturopathic methods. It confers vivid impulses toward the correction of human ills or conditions, the reform of existing institutions and an incentive toward a national, political or public career. If afflicted, it gives peculiar feelings, aversions, premonitions and usually inclines to some habit for the gratification of the senses, such as smoking, or excessive use of stifhulants. Nepfune in Taurus If well aspected, it assists other testimonies in the chart fo% financial gain, especially through speculation, business and secret pr private organizations.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Neptune in Aries"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
     "id": "george-signs:neptune-in-cancer",
     "when": {
       "kind": "placement",
@@ -795,26 +395,6 @@
       "author": "Llewellyn George",
       "work": "A to Z Horoscope Maker and Delineator",
       "locus": "Neptune in Capricorn"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:neptune-in-gemini",
-    "when": {
-      "kind": "placement",
-      "body": "neptune",
-      "sign": "Gemini"
-    },
-    "atomIds": [
-      "placement:neptune"
-    ],
-    "text": "Well aspepted, increases the mental sensitivity, giving imagination, impressions, musical taste, prophetic and symbolic dreams. It gives great linguistic or tonversational capacity and an interest in the drama, poetry, philosophy and occultism. It tends to sympathy and geniality. • Favorable for quick perception, science, mathematics, invention or anything requiring mechanical ingenuity or fine handiwork. If afflicted, it inclines to excessive geniality arid, romantic friendships, mental restlessness or diffusion, livelihood «f complications or misunderstanding with brethren, cousins or neighbors, afid ^difficulty or anxiety through too great mental receptivity. Deception in promises or agreements; misunderstanding of reports or rumors. GENETHLIACAL ASTROLOGY",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Neptune in Gemini"
     },
     "rights": "gratis-not-pd",
     "embed": true
@@ -869,7 +449,7 @@
     "atomIds": [
       "placement:neptune"
     ],
-    "text": "Well aspected, it lendg dignity to the nature and gives ability for quiet, serious, profound thought and contemplation. • It # is good for the inspirational faculty and intensifies* the mediumistic and psychical qualities, usually conferring some occult ability and fondness for thennvestigation of mysticism and the recondite sciences. The; native is usually broad-minded, sympathetic,, domestic and charitable. Benefits -through help and charity both.given and received. It gives a love for travel especially by water, and gain through occupations connected with shipping, etc. If afflicted, the native is likely to suffer in heafth from psychic conditions and ’meet* with losses arid ill luck through thwarted schemes and often by sinaccountjble circumstances., “They fought from heaven;",
+    "text": "Well aspected, it lendg dignity to the nature and gives ability for quiet, serious, profound thought and contemplation. • It # is good for the inspirational faculty and intensifies* the mediumistic and psychical qualities, usually conferring some occult ability and fondness for thennvestigation of mysticism and the recondite sciences. The; native is usually broad-minded, sympathetic,, domestic and charitable. Benefits -through help and charity both.given and received. It gives a love for travel especially by water, and gain through occupations connected with shipping, etc. If afflicted, the native is likely to suffer in heafth from psychic conditions and ’meet* with losses arid ill luck through thwarted schemes and often by sinaccountjble circumstances., “They fought from heaven; the stars In theJr course^ fought against Sisera.”— Judges V-20",
     "tradition": "modern",
     "source": {
       "author": "Llewellyn George",
@@ -895,26 +475,6 @@
       "author": "Llewellyn George",
       "work": "A to Z Horoscope Maker and Delineator",
       "locus": "Neptune in Sagittarius"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:neptune-in-scorpio",
-    "when": {
-      "kind": "placement",
-      "body": "neptune",
-      "sign": "Scorpio"
-    },
-    "atomIds": [
-      "placement:neptune"
-    ],
-    "text": "Well aspected, intensifies the feeling and enibtions ^nd gives greater scope to the inventive ability; adds a GENETHLIACAL ASTKOLOGY r love for secret arts such as chemistry apd also for the recondite sciences. To the nature it lends persistence, reserve, secrecy <ind quick Jtemper. It < also tends to practical mediumistic or occult experiences and assists any other testimonies in the chart fer gain by legacy. ' • ri ' If afflicted, likely to lead to f too great a love for sensation, luxury or beverages, and may often be given to slander or rebuke and loss of legacy through treacheiy.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Neptune in Scorpio"
     },
     "rights": "gratis-not-pd",
     "embed": true
@@ -980,66 +540,6 @@
     "embed": true
   },
   {
-    "id": "george-signs:saturn-in-capricorn",
-    "when": {
-      "kind": "placement",
-      "body": "saturn",
-      "sign": "Capricorn"
-    },
-    "atomIds": [
-      "placement:saturn"
-    ],
-    "text": "Makes the native melancholic, serious, ^apprehensive, cautious, suspicious, discontented and acquisitive; deep thinker, good reasoner and grave or reserved in demeanor. Ambitious, very anxious to rise in life, ancf through tact, diplomacy or persistenfce generally suc r # ceeds. Liable to inferior attachments, unreliable’ friendslyps, sorrow through marriage and domestic affairs; chronic ailments and possibility of some. mental affliction through worry, dissatisfaction, restricted pleasure ind recreation, or repression. Success followed by failures. GENETHLIACAL ASTROLOGY",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Saturn in Capricorn"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:saturn-in-gemini",
-    "when": {
-      "kind": "placement",
-      "body": "saturn",
-      "sign": "Gemini"
-    },
-    "atomIds": [
-      "placement:saturn"
-    ],
-    "text": "Ability for scientific occupation in connection with literature, mathematics, etc. Adaptable and resourceful. Trouble and sorrow through relatives. Unfortunate legal affairs. Liable to fa^lse accusation, restraint or limitation through some of the kindred or.* neighbors. Interest in current and advanced thought; ability for profound intellectual attainments.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Saturn in Gemini"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:saturn-in-leo",
-    "when": {
-      "kind": "placement",
-      "body": "saturn",
-      "sign": "Leo"
-    },
-    "atomIds": [
-      "placement:saturn"
-    ],
-    "text": "Generous but quick-tempered, cabtious yet bold in ’spirit, determined, ambitious and strong-willed. ^SpiritGENETHLIACAL ASTROLOGY ual tendencies. Troubles and secret enmity through inferiors. At times receptive to psychic conditions, consciously or unconsciously, which affect the health. Danger through accidents and 1 overwork or over-exertion. Sorrows through love affairs ^and children.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Saturn in Leo"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
     "id": "george-signs:saturn-in-libra",
     "when": {
       "kind": "placement",
@@ -1095,26 +595,6 @@
       "author": "Llewellyn George",
       "work": "A to Z Horoscope Maker and Delineator",
       "locus": "Saturn in Sagittarius"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:saturn-in-scorpio",
-    "when": {
-      "kind": "placement",
-      "body": "saturn",
-      "sign": "Scorpio"
-    },
-    "atomIds": [
-      "placement:saturn"
-    ],
-    "text": "Sudde.1 resolutions, violent temper, passionate, selfwilled, acquisitive, jealous, independent, resourceful and cautious; shrewd *mind rather than profoundly intellectual. Sorrow » through love affairs;* secret alliances, intrigues or domestic difficulties. Psychic ability and fondness for occult investigations, chemistry or geology. Success through pefsist^nce and cleverness after many difficulties, obstacles\" and trials especially if necessary attention is given to development along the higher lines.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Saturn in Scorpio"
     },
     "rights": "gratis-not-pd",
     "embed": true
@@ -1189,52 +669,12 @@
     "atomIds": [
       "placement:uranus"
     ],
-    "text": "This location of Uwnus gives? love for indgpendenc$ and freedom* positiveness, force and impulse. It increases th€ mental vigor,^ producing activity, energy, y ■ • in the hook. “Pnw*rfi*i Planets,” a chapter Is devofed to explaining the difference between “Signs and Constellations.” GENETHLIACAL ASTROLOGY resource,’ originative and inventive ability. Fond of machinery, electrical devices, and possesses mechanical ingenuity. Likes travel and often changes the residence. At times is abrupt, brusque, blunt or radical in manner, disregarding tact and self-control; often impulsive in speech without intending to be f «o. - ^Disputes and estrangements are frequent. Interest in children from a mental or intellectual standpoint. r",
+    "text": "This location of Uwnus gives? love for indgpendenc$ and freedom* positiveness, force and impulse. It increases th€ mental vigor,^ producing activity, energy, y ■ • in the hook. “Pnw*rfi*i Planets,” a chapter Is devofed to explaining the difference between “Signs and Constellations.”",
     "tradition": "modern",
     "source": {
       "author": "Llewellyn George",
       "work": "A to Z Horoscope Maker and Delineator",
       "locus": "Uranus in Aries"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:uranus-in-capricorn",
-    "when": {
-      "kind": "placement",
-      "body": "uranus",
-      "sign": "Capricorn"
-    },
-    "atomIds": [
-      "placement:uranus"
-    ],
-    "text": "It disturbs the seriousness, -r GENETHLIACAL ASTROLOGY reserve and conservatism of the sign Capricorn; assists in intensifying the ambition, perseverance/ executive ability and independence. It tends toward bold enterprise and radical departures fr6m established systems or accustomed methods, initiating innovations of progressive nature. Foresight, intuition,' business “hunches\" and the faculty of prevision often assist the native to anticipate public trends, conditions or needs. Unique or original undertakings, and progressive or equitable attitude toward patrons or employee^. It is a good location for success in governmental or public occupations; or tfiose connected with special lines like electricity, manufacturing, machinery, radio and transportation; also municipal offices, positions of power, authority or responsibility.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Uranus in Capricorn"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:uranus-in-gemini",
-    "when": {
-      "kind": "placement",
-      "body": "uranus",
-      "sign": "Gemini"
-    },
-    "atomIds": [
-      "placement:uranus"
-    ],
-    "text": "Endows the native with versatility, and indicates some eccentricity in friendship and in expression. It increases 'the mental power through originality, intuition and ingenuity. The native loves science and invention, feels favorable toward new ideas, reforms and out-of-the-ordinary subjects. It iS a favorable location for the study of electricity, aerodynamics, astrology, metaphysics, mesmerism, etc. Liking for travel aqd friends among litefary and scientific people. Telepathic or clairvoyant faculty. If Uran&s is afflicted: Liable to estrangement from, brethren, cousins, ^neighbors, <and some trouble in education, examinations/ letters find journeys; unfavorable criticism^ ► Uranus in Cancer Gives niediumisPic abifity, the feelings •and emotions being sensitive and^asity touched; at times this makes the native eccentric, cranky, restless, impatient, peculiar or radical.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Uranus in Gemini"
     },
     "rights": "gratis-not-pd",
     "embed": true
@@ -1300,26 +740,6 @@
     "embed": true
   },
   {
-    "id": "george-signs:uranus-in-sagittarius",
-    "when": {
-      "kind": "placement",
-      "body": "uranus",
-      "sign": "Sagittarius"
-    },
-    "atomIds": [
-      "placement:uranus"
-    ],
-    "text": "This location of Uranus increases the imagination and inventiveness; it favors dreams, visions, intuition, premonition and traveling. • • The native.loves science in general and takes an interest in afl passing events of a scientific nature, especially inventions connected with locomotion add all means of travel. Uranus here assists other influences that may be present in the chart to develop th* higher side of the mind in almost any line where wide cultivation and higher education or understanding give scope. The native is progressive, daring, adventuresome, generous and extremely fond of liberty of action and speech; enthusiastic in bejiefs and undertakings whichf are not always orthodox or altd^eth^r free from risk* or danger.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Uranus in Sagittarius"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
     "id": "george-signs:uranus-in-taurus",
     "when": {
       "kind": "placement",
@@ -1349,32 +769,12 @@
     "atomIds": [
       "placement:uranus"
     ],
-    "text": "Mind is subtle, independent and originals The native is quiet, eccentric, stubborn, fond of curiosities GENETHLIACAL ASTROLOGY and science generally, especially the occult in which he meets with great success. It makes a good mechanic or teacher and gives success in employment of others, especially in, connection witlf electricity, electronics, dietetics, chemistry, metaphysics, or science. It increases the intellectual ability and the desire for healthful comforts, also to make the most of the productive capacity in manufacturing and other enterprises in which the native is likely to have interest. If well aspected it denotes gain through public occupations associated t with the government or municipality. If afflicted, it indicates many difficulties, disappointed ambitions, trouble through employees, or through employment, and restrictions connected with the occupation.",
+    "text": "Mind is subtle, independent and originals The native is quiet, eccentric, stubborn, fond of curiosities",
     "tradition": "modern",
     "source": {
       "author": "Llewellyn George",
       "work": "A to Z Horoscope Maker and Delineator",
       "locus": "Uranus in Virgo"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:venus-in-aquarius",
-    "when": {
-      "kind": "placement",
-      "body": "venus",
-      "sign": "Aquarius"
-    },
-    "atomIds": [
-      "placement:venus"
-    ],
-    "text": "This location of Venus gives fondness fey pleasure Und social life.’ The nati\\te makes fp^nds easily and readily forms acquaintances with • strangers. Friends among inferiors and also with those of weafth and refinement. GENETHLIACAL ASTROLOGY The nature is intuitive, philosophical, generous, reserved in opinions and, sincere in convictions; liking and ability for fine arts and all cultured and intellectual pursuits. Fond of, romance and pleasure, friends among the opposite sex, faithful and earnest in affection, secret alliances, remarkable or strange, duddfcn and unexpected experiences or events in love, union with one of Uranian nature; possibly marriage in middle life or later years, and to one of different age. * Indicates gain financially through friends, societies and public enterprisers.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Venus in Aquarius"
     },
     "rights": "gratis-not-pd",
     "embed": true
@@ -1400,26 +800,6 @@
     "embed": true
   },
   {
-    "id": "george-signs:venus-in-leo",
-    "when": {
-      "kind": "placement",
-      "body": "venus",
-      "sign": "Leo"
-    },
-    "atomIds": [
-      "placement:venus"
-    ],
-    "text": "Earnest, sincere and ardent in affection. The native is attracted' to the opposite sex, fond of % social display, pleasure, friends, entertainment and amusements of ajl sorts. There may be real talent for something signified by Venus: music, poetry, singing, * actiqg, art, etc. Gain Jhrough young people, superiors, those of good positioirand social s^andiqg. If other testimonies in the chart warrant, 'the native wjll gain by judicious investment t speculation, inheritanc and by occupations connected with pleasure.. PART III, DELINEATIONS FOR HQUOSCOPJBg 277 Venus jn Virgo* a n",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Venus in Leo"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
     "id": "george-signs:venus-in-libra",
     "when": {
       "kind": "placement",
@@ -1435,46 +815,6 @@
       "author": "Llewellyn George",
       "work": "A to Z Horoscope Maker and Delineator",
       "locus": "Venus in Libra"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:venus-in-pisces",
-    "when": {
-      "kind": "placement",
-      "body": "venus",
-      "sign": "Pisces"
-    },
-    "atomIds": [
-      "placement:venus"
-    ],
-    "text": "The native is compassionate, sensitive, psychic, mediumistic, emotional, idealistic and inspirational. f Fond of ail things beautiful: poetry, musi.c, painting and fine arts generally. Cheerful, genial, hospitable, fond of society and friendly intercourse; desirous of peace, ease, comfort and luxury; at times indolent. Money is gained through friends, charity, gifts, Venusian occupations^ or through obscure, subordinate or plebian pursuit. Tljere.is apt to be more than one murriage and the native may be careless or fickle in matters t of affection. Attraction to an mferijor; secret alliance. «If Venus is much afflicted here thje native may have a haul time gaining money, or if he possesses it will lose heavily through frapd, deception and unccrup-* ulous methods and maybe by^his own Action. Difficulty, detriment and loss through intrigue; obstacles, delays and trouble in marriage..",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Venus in Pisces"
-    },
-    "rights": "gratis-not-pd",
-    "embed": true
-  },
-  {
-    "id": "george-signs:venus-in-scorpio",
-    "when": {
-      "kind": "placement",
-      "body": "venus",
-      "sign": "Scorpio"
-    },
-    "atomIds": [
-      "placement:venus"
-    ],
-    "text": "Money may be earned* through the watery. GENETHLIACAL ASTROLOGY elements, catering to the tastes or by 'matters connected with\" the dead and* if other testimonies in the chart warrant, gain by gifts, legacy? partnership or marriage, but there wifi be some delay or trouble in connection with them. This location of Venus increases the passions and emotions and gives a love of sensation, luxury and pleasure; ardent in love, demonstrative in affection. It attracts to the opposite sex and brings trouble, disappointment, delay or loss in courtship or marriage, sorrow through disagreement or jealousy, attacks upon the honor, death of partner. Trouble or failure in social affairs; friends with mystical or occult tendencies, also friendships with some of doubtful repute. If Venus is much afflicted, liable to death by poison or by suicide due to unhappy alliances.",
-    "tradition": "modern",
-    "source": {
-      "author": "Llewellyn George",
-      "work": "A to Z Horoscope Maker and Delineator",
-      "locus": "Venus in Scorpio"
     },
     "rights": "gratis-not-pd",
     "embed": true

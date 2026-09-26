@@ -75,7 +75,7 @@ Bodies register through `Engine.registerSource` (heliocentric xyz at TT Julian
 Day, same contract as Chiron). Render attrs register through
 `Engine.registerRender` and flow into SkyView.
 
-The synthetic `observer` does **not** apply on the real engine path — that is
+The synthetic `observer` does not apply on the real engine path — that is
 Earth's sky. Use `syntheticPositions` for a self-contained fictional world.
 
 ## SkyView wiring

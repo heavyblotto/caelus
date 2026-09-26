@@ -8,6 +8,18 @@ import { DARK_THEME, type WheelTheme } from "./index.js";
 
 export interface SeriesPoint { jd: number; value: number }
 
+/** A vertical tick at a moment in time (a station, an ingress). */
+export interface EphemerisMark {
+  jd: number;
+  /** Small mono label drawn inside the plot's top edge ("SR"). */
+  label?: string;
+  /** Draw in the accent color instead of the label ink. */
+  accent?: boolean;
+}
+
+/** A shaded time interval (a retrograde loop, a void-of-course span). */
+export interface EphemerisBand { from: number; to: number }
+
 export interface EphemerisGraphProps {
   series: Record<string, SeriesPoint[]>;
   width?: number;
@@ -22,6 +34,14 @@ export interface EphemerisGraphProps {
   gridStep?: number;
   colors?: Record<string, string>;
   theme?: Partial<WheelTheme>;
+  /** Shaded interval over the plot, drawn under the lines. */
+  band?: EphemerisBand;
+  /** Vertical ticks at moments in time, drawn over the lines. */
+  marks?: EphemerisMark[];
+  /** A vertical line at this jd — the scrub cursor. */
+  cursor?: number;
+  /** Cursor and accented-mark color; defaults to the theme's axis ink. */
+  accent?: string;
 }
 
 const DEFAULT_COLORS: Record<string, string> = {
@@ -33,9 +53,10 @@ const PALETTE = ["#8a7fd4", "#c0564f", "#4f8fc0", "#4fb09a", "#c08a4f", "#a05a8a
 
 export function EphemerisGraph({
   series, width = 720, height = 360, yMin, yMax, wrap, gridStep,
-  colors, theme,
+  colors, theme, band, marks, cursor, accent,
 }: EphemerisGraphProps) {
   const th: WheelTheme = { ...DARK_THEME, ...theme };
+  const ac = accent ?? th.axis;
   const bodies = Object.keys(series).filter((b) => series[b]?.length);
   const all = bodies.flatMap((b) => series[b]);
   const jds = all.map((p) => p.jd);
@@ -56,6 +77,9 @@ export function EphemerisGraph({
   const pw = width - m.l - m.r, ph = height - m.t - m.b;
   const px = (jd: number): number => m.l + ((jd - j0) / (j1 - j0 || 1)) * pw;
   const py = (v: number): number => m.t + (1 - (v - lo) / span) * ph;
+  // Emitted coordinates are rounded to 0.1 so the SVG is byte-identical
+  // across CPUs (arm64 and x86-64 differ in the last bits of the math).
+  const r1 = (n: number): number => Math.round(n * 10) / 10;
 
   const step = gridStep ?? (wrap ? wrap / 6 : span / 6);
   const gridVals: number[] = [];
@@ -87,9 +111,9 @@ export function EphemerisGraph({
       <g fontFamily={th.fontFamily} fontSize={10} fill={th.labelText}>
         {gridVals.map((v) => (
           <g key={v}>
-            <line x1={m.l} y1={py(v)} x2={m.l + pw} y2={py(v)}
+            <line x1={m.l} y1={r1(py(v))} x2={m.l + pw} y2={r1(py(v))}
               stroke={th.ring} strokeWidth={0.5} opacity={0.5} />
-            <text x={m.l - 4} y={py(v)} textAnchor="end" dominantBaseline="central">
+            <text x={m.l - 4} y={r1(py(v))} textAnchor="end" dominantBaseline="central">
               {Math.round(v)}
             </text>
           </g>
@@ -97,6 +121,18 @@ export function EphemerisGraph({
       </g>
       <rect x={m.l} y={m.t} width={pw} height={ph} fill="none"
         stroke={th.ring} strokeWidth={1} />
+      {/* shaded interval, under the lines */}
+      {band && (
+        <rect
+          x={r1(Math.max(m.l, px(Math.max(band.from, j0))))}
+          y={m.t}
+          width={r1(Math.min(m.l + pw, px(Math.min(band.to, j1)))
+            - Math.max(m.l, px(Math.max(band.from, j0))))}
+          height={ph}
+          fill={th.ring}
+          opacity={0.35}
+        />
+      )}
       {/* per-body lines + legend */}
       {bodies.map((b, i) => {
         const col = colorOf(b, i);
@@ -110,6 +146,29 @@ export function EphemerisGraph({
           </g>
         );
       })}
+      {/* moment ticks, over the lines */}
+      {marks?.map((mk) => {
+        const x = r1(px(mk.jd));
+        if (x < m.l - 0.5 || x > m.l + pw + 0.5) return null;
+        const col = mk.accent ? ac : th.labelText;
+        return (
+          <g key={`${mk.jd}-${mk.label ?? ""}`} stroke={col} fill={col}>
+            <line x1={x} y1={m.t} x2={x} y2={m.t + ph}
+              strokeWidth={mk.accent ? 1 : 0.75}
+              strokeDasharray={mk.accent ? undefined : "2 3"} opacity={0.8} />
+            {mk.label && (
+              <text x={x} y={m.t + 8} fontSize={9} textAnchor="middle"
+                stroke="none" fontFamily={th.fontFamily}
+                dominantBaseline="central">{mk.label}</text>
+            )}
+          </g>
+        );
+      })}
+      {/* the scrub cursor */}
+      {cursor !== undefined && cursor >= j0 && cursor <= j1 && (
+        <line x1={r1(px(cursor))} y1={m.t} x2={r1(px(cursor))} y2={m.t + ph}
+          stroke={ac} strokeWidth={1.5} />
+      )}
     </svg>
   );
 }

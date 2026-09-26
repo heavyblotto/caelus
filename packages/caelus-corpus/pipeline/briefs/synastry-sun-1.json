@@ -1,0 +1,248 @@
+{
+ "name": "synastry-sun-1",
+ "outFile": "b3-synastry-sun-1.json",
+ "setId": "house-b3-synastry-sun-1",
+ "family": "synastry-aspect",
+ "cells": [
+  {
+   "id": "synastry:sun:conjunction:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "sun",
+    "b": "sun",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:sun~b_sun:conjunction"
+   ],
+   "title": "Your Sun conjunct their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:sun:sextile:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "sun",
+    "b": "sun",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:sun~b_sun:sextile"
+   ],
+   "title": "Your Sun sextile their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:sun:square:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "sun",
+    "b": "sun",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:sun~b_sun:square"
+   ],
+   "title": "Your Sun square their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:sun:trine:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "sun",
+    "b": "sun",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:sun~b_sun:trine"
+   ],
+   "title": "Your Sun trine their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:sun:opposition:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "sun",
+    "b": "sun",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:sun~b_sun:opposition"
+   ],
+   "title": "Your Sun opposite their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:sun:conjunction:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "sun",
+    "b": "moon",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:sun~b_moon:conjunction"
+   ],
+   "title": "Your Sun conjunct their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:sun:sextile:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "sun",
+    "b": "moon",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:sun~b_moon:sextile"
+   ],
+   "title": "Your Sun sextile their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:sun:square:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "sun",
+    "b": "moon",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:sun~b_moon:square"
+   ],
+   "title": "Your Sun square their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:sun:trine:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "sun",
+    "b": "moon",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:sun~b_moon:trine"
+   ],
+   "title": "Your Sun trine their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:sun:opposition:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "sun",
+    "b": "moon",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:sun~b_moon:opposition"
+   ],
+   "title": "Your Sun opposite their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:sun:conjunction:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "sun",
+    "b": "mercury",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:sun~b_mercury:conjunction"
+   ],
+   "title": "Your Sun conjunct their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:sun:sextile:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "sun",
+    "b": "mercury",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:sun~b_mercury:sextile"
+   ],
+   "title": "Your Sun sextile their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:sun:square:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "sun",
+    "b": "mercury",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:sun~b_mercury:square"
+   ],
+   "title": "Your Sun square their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:sun:trine:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "sun",
+    "b": "mercury",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:sun~b_mercury:trine"
+   ],
+   "title": "Your Sun trine their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:sun:opposition:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "sun",
+    "b": "mercury",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:sun~b_mercury:opposition"
+   ],
+   "title": "Your Sun opposite their Mercury",
+   "bindable": true
+  }
+ ]
+}

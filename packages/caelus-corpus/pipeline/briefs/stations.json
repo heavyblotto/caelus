@@ -1,0 +1,260 @@
+{
+ "name": "stations",
+ "outFile": "b2-stations.json",
+ "setId": "house-b2-stations",
+ "family": "transit-station",
+ "cells": [
+  {
+   "id": "transit:mercury:station:retrograde",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "mercury",
+    "direction": "retrograde"
+   },
+   "atomIds": [
+    "station:mercury:retrograde"
+   ],
+   "title": "Mercury stations retrograde",
+   "bindable": true
+  },
+  {
+   "id": "transit:mercury:station:direct",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "mercury",
+    "direction": "direct"
+   },
+   "atomIds": [
+    "station:mercury:direct"
+   ],
+   "title": "Mercury stations direct",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:station:retrograde",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "venus",
+    "direction": "retrograde"
+   },
+   "atomIds": [
+    "station:venus:retrograde"
+   ],
+   "title": "Venus stations retrograde",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:station:direct",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "venus",
+    "direction": "direct"
+   },
+   "atomIds": [
+    "station:venus:direct"
+   ],
+   "title": "Venus stations direct",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:station:retrograde",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "mars",
+    "direction": "retrograde"
+   },
+   "atomIds": [
+    "station:mars:retrograde"
+   ],
+   "title": "Mars stations retrograde",
+   "bindable": true
+  },
+  {
+   "id": "transit:mars:station:direct",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "mars",
+    "direction": "direct"
+   },
+   "atomIds": [
+    "station:mars:direct"
+   ],
+   "title": "Mars stations direct",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:station:retrograde",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "jupiter",
+    "direction": "retrograde"
+   },
+   "atomIds": [
+    "station:jupiter:retrograde"
+   ],
+   "title": "Jupiter stations retrograde",
+   "bindable": true
+  },
+  {
+   "id": "transit:jupiter:station:direct",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "jupiter",
+    "direction": "direct"
+   },
+   "atomIds": [
+    "station:jupiter:direct"
+   ],
+   "title": "Jupiter stations direct",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:station:retrograde",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "saturn",
+    "direction": "retrograde"
+   },
+   "atomIds": [
+    "station:saturn:retrograde"
+   ],
+   "title": "Saturn stations retrograde",
+   "bindable": true
+  },
+  {
+   "id": "transit:saturn:station:direct",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "saturn",
+    "direction": "direct"
+   },
+   "atomIds": [
+    "station:saturn:direct"
+   ],
+   "title": "Saturn stations direct",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:station:retrograde",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "uranus",
+    "direction": "retrograde"
+   },
+   "atomIds": [
+    "station:uranus:retrograde"
+   ],
+   "title": "Uranus stations retrograde",
+   "bindable": true
+  },
+  {
+   "id": "transit:uranus:station:direct",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "uranus",
+    "direction": "direct"
+   },
+   "atomIds": [
+    "station:uranus:direct"
+   ],
+   "title": "Uranus stations direct",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:station:retrograde",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "neptune",
+    "direction": "retrograde"
+   },
+   "atomIds": [
+    "station:neptune:retrograde"
+   ],
+   "title": "Neptune stations retrograde",
+   "bindable": true
+  },
+  {
+   "id": "transit:neptune:station:direct",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "neptune",
+    "direction": "direct"
+   },
+   "atomIds": [
+    "station:neptune:direct"
+   ],
+   "title": "Neptune stations direct",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:station:retrograde",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "pluto",
+    "direction": "retrograde"
+   },
+   "atomIds": [
+    "station:pluto:retrograde"
+   ],
+   "title": "Pluto stations retrograde",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:station:direct",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "pluto",
+    "direction": "direct"
+   },
+   "atomIds": [
+    "station:pluto:direct"
+   ],
+   "title": "Pluto stations direct",
+   "bindable": true
+  },
+  {
+   "id": "transit:chiron:station:retrograde",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "chiron",
+    "direction": "retrograde"
+   },
+   "atomIds": [
+    "station:chiron:retrograde"
+   ],
+   "title": "Chiron stations retrograde",
+   "bindable": true
+  },
+  {
+   "id": "transit:chiron:station:direct",
+   "family": "transit-station",
+   "when": {
+    "kind": "station",
+    "body": "chiron",
+    "direction": "direct"
+   },
+   "atomIds": [
+    "station:chiron:direct"
+   ],
+   "title": "Chiron stations direct",
+   "bindable": true
+  }
+ ]
+}

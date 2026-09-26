@@ -39,12 +39,17 @@ const VERSION: string = (caelusPkg as { version: string }).version;
 const ACCURACY = { swiss: accuracySwiss, jpl: null };
 
 const TOOLS = [
-  "natal_chart", "current_sky", "transits", "synastry",
+  "natal_chart", "current_sky", "sky_view", "sky_view_sequence",
+  "synthetic_validate", "synthetic_positions", "synthetic_sky_view",
+  "transits", "synastry",
   "find_aspect_dates", "rectification_grid", "sky_events",
   "planetary_hours", "void_of_course",
   "returns", "progressions", "composite", "dignities", "lots",
   "profections", "firdaria", "releasing", "directions",
   "nakshatras", "dasha", "vargas", "yogas",
+  "aspect_patterns", "parans", "chart_signature", "chart_facts",
+  "counterfactual_chart", "similar_skies", "electional_search",
+  "cosmic_weather",
 ] as const;
 
 const CORS: Record<string, string> = {
@@ -77,7 +82,7 @@ export function GET(): Response {
       stateless: true,
       tools: TOOLS,
       resources: ["caelus://glossary", "caelus://accuracy", "ui://widget/chart.html"],
-      prompts: ["rectification_session"],
+      prompts: ["rectification_session", "natal_reading"],
       hint: "POST MCP JSON-RPC 2.0 requests (initialize, tools/list, tools/call) to this URL.",
       docs: "https://www.ephemengine.com/docs/mcp",
     },

@@ -1,0 +1,233 @@
+{
+ "name": "transits-moon-1",
+ "outFile": "b2-transits-moon-1.json",
+ "setId": "house-b2-transits-moon-1",
+ "family": "transit-aspect",
+ "cells": [
+  {
+   "id": "transit:moon:conjunction:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "moon",
+    "natal": "sun",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:moon~natal_sun:conjunction"
+   ],
+   "title": "Transiting Moon conjunct your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:sextile:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "moon",
+    "natal": "sun",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:moon~natal_sun:sextile"
+   ],
+   "title": "Transiting Moon sextile your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:square:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "moon",
+    "natal": "sun",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:moon~natal_sun:square"
+   ],
+   "title": "Transiting Moon square your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:trine:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "moon",
+    "natal": "sun",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:moon~natal_sun:trine"
+   ],
+   "title": "Transiting Moon trine your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:opposition:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "moon",
+    "natal": "sun",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:moon~natal_sun:opposition"
+   ],
+   "title": "Transiting Moon opposite your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:conjunction:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "moon",
+    "natal": "moon",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:moon~natal_moon:conjunction"
+   ],
+   "title": "Transiting Moon conjunct your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:sextile:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "moon",
+    "natal": "moon",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:moon~natal_moon:sextile"
+   ],
+   "title": "Transiting Moon sextile your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:square:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "moon",
+    "natal": "moon",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:moon~natal_moon:square"
+   ],
+   "title": "Transiting Moon square your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:trine:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "moon",
+    "natal": "moon",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:moon~natal_moon:trine"
+   ],
+   "title": "Transiting Moon trine your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:opposition:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "moon",
+    "natal": "moon",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:moon~natal_moon:opposition"
+   ],
+   "title": "Transiting Moon opposite your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:conjunction:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "moon",
+    "natal": "mercury",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:moon~natal_mercury:conjunction"
+   ],
+   "title": "Transiting Moon conjunct your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:sextile:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "moon",
+    "natal": "mercury",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:moon~natal_mercury:sextile"
+   ],
+   "title": "Transiting Moon sextile your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:square:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "moon",
+    "natal": "mercury",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:moon~natal_mercury:square"
+   ],
+   "title": "Transiting Moon square your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:trine:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "moon",
+    "natal": "mercury",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:moon~natal_mercury:trine"
+   ],
+   "title": "Transiting Moon trine your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:moon:opposition:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "moon",
+    "natal": "mercury",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:moon~natal_mercury:opposition"
+   ],
+   "title": "Transiting Moon opposite your natal Mercury",
+   "bindable": true
+  }
+ ]
+}

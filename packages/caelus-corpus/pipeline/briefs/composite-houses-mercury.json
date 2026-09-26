@@ -1,0 +1,176 @@
+{
+  "name": "composite-houses-mercury",
+  "outFile": "b3-composite-houses-mercury.json",
+  "setId": "house-b3-composite-houses-mercury",
+  "family": "composite-house",
+  "cells": [
+    {
+      "id": "composite:mercury:house:1",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mercury",
+        "house": 1
+      },
+      "atomIds": [
+        "composite:mercury"
+      ],
+      "title": "Composite Mercury in the 1st house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mercury:house:2",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mercury",
+        "house": 2
+      },
+      "atomIds": [
+        "composite:mercury"
+      ],
+      "title": "Composite Mercury in the 2nd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mercury:house:3",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mercury",
+        "house": 3
+      },
+      "atomIds": [
+        "composite:mercury"
+      ],
+      "title": "Composite Mercury in the 3rd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mercury:house:4",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mercury",
+        "house": 4
+      },
+      "atomIds": [
+        "composite:mercury"
+      ],
+      "title": "Composite Mercury in the 4th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mercury:house:5",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mercury",
+        "house": 5
+      },
+      "atomIds": [
+        "composite:mercury"
+      ],
+      "title": "Composite Mercury in the 5th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mercury:house:6",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mercury",
+        "house": 6
+      },
+      "atomIds": [
+        "composite:mercury"
+      ],
+      "title": "Composite Mercury in the 6th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mercury:house:7",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mercury",
+        "house": 7
+      },
+      "atomIds": [
+        "composite:mercury"
+      ],
+      "title": "Composite Mercury in the 7th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mercury:house:8",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mercury",
+        "house": 8
+      },
+      "atomIds": [
+        "composite:mercury"
+      ],
+      "title": "Composite Mercury in the 8th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mercury:house:9",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mercury",
+        "house": 9
+      },
+      "atomIds": [
+        "composite:mercury"
+      ],
+      "title": "Composite Mercury in the 9th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mercury:house:10",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mercury",
+        "house": 10
+      },
+      "atomIds": [
+        "composite:mercury"
+      ],
+      "title": "Composite Mercury in the 10th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mercury:house:11",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mercury",
+        "house": 11
+      },
+      "atomIds": [
+        "composite:mercury"
+      ],
+      "title": "Composite Mercury in the 11th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:mercury:house:12",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "mercury",
+        "house": 12
+      },
+      "atomIds": [
+        "composite:mercury"
+      ],
+      "title": "Composite Mercury in the 12th house",
+      "bindable": true
+    }
+  ]
+}

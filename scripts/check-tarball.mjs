@@ -27,6 +27,16 @@ const REQUIRED = [
   "data/venus_cheb.json",
   "data/jupiter_cheb.json",
   "data/earth_cheb.json",
+  // Classical era slabs (fit_classical.py, 3000 BCE-1000 CE, DE441). The
+  // loader chains them before the modern packs; missing, charts before
+  // 1000 CE silently drop to "unavailable".
+  "data/earth_cheb.classical.json",
+  "data/moon_cheb.classical.json",
+  "data/mercury_cheb.classical.json",
+  "data/venus_cheb.classical.json",
+  "data/mars_cheb.classical.json",
+  "data/jupiter_cheb.classical.json",
+  "data/saturn_cheb.classical.json",
   "data/uranian_kepler.json",
   "data/turbo.json",        // sample turbo pack so the turbo tier works out of the box
   "data/chiron_cheb.json",

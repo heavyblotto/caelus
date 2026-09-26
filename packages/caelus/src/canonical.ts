@@ -42,6 +42,10 @@
  * Mirrors python/astroengine/canonical.py; pinned by canonical-golden.
  */
 import type { Chart, ChartWarning, Aspect } from "./chart.js";
+import {
+  ANGLE_SIGMA_DEG_PER_SECOND, MOON_SIGMA_DEG_PER_SECOND,
+  EPOCH_SIGMA_DISPLAY_SECONDS, deltaTSigma, jdYear,
+} from "./ranges.js";
 import { SIGNS, DEFAULT_ORBS, ASPECTS, NOT_ASPECTABLE, dignities } from "./chart.js";
 import { angularSeparation3d } from "./spherical.js";
 
@@ -292,6 +296,24 @@ export interface CanonicalChart {
   cusps: Array<number | [number, number, number]>;
   aspects: CanonicalAspect[];
   warnings: Array<Record<string, unknown>>;
+  /** The epoch's clock-error uncertainty as data, present only where it is
+   *  visible at the app's display scale (sigma(deltaT) >= 10 s, the same
+   *  threshold the delta_t_uncertain warning uses, so modern charts carry
+   *  no block and keep their digests). The values are sigmas, ungraded; the
+   *  app's damping display consumes them and applies its own grades.
+   *  Rotation-anchored quantities (angles, houses, rise and set) move at the
+   *  sky's rate, the Moon's longitude at its own; TT planet-to-planet
+   *  geometry carries no sigma. Additive under the format-version rules;
+   *  digests incorporate the block as any field. */
+  epochSigma?: {
+    /** sigma(deltaT) in whole seconds (Morrison & Stephenson 2004 table). */
+    sigmaSeconds: number;
+    /** Sigma of rotation-anchored quantities, in grid units. */
+    angleSigma: number | [number, number, number];
+    /** Sigma of the Moon's longitude for a UT-tagged instant, in grid
+     *  units. */
+    moonLongitudeSigma: number | [number, number, number];
+  };
 }
 
 const UNIT_NAMES: Record<CanonicalGrid, string> = {
@@ -461,6 +483,19 @@ function buildCanonical(state: QuantState, grid: CanonicalGrid, opts: CanonicalO
     }
   }
 
+  // R3's epoch-certainty block: the chart's clock-error uncertainty as
+  // canonical data, present only where it crosses the display threshold, so
+  // modern charts carry no block and keep their digests.
+  const jdUt = 2451545.0 + state.timeMs / 86_400_000;
+  const sigmaSeconds = roundHalfUp(deltaTSigma(jdYear(jdUt)));
+  const epochSigma = sigmaSeconds >= EPOCH_SIGMA_DISPLAY_SECONDS
+    ? {
+        sigmaSeconds,
+        angleSigma: render(grid, qSigned(grid, sigmaSeconds * ANGLE_SIGMA_DEG_PER_SECOND)),
+        moonLongitudeSigma: render(grid, qSigned(grid, sigmaSeconds * MOON_SIGMA_DEG_PER_SECOND)),
+      }
+    : undefined;
+
   return {
     format: "caelus-canonical",
     version: 1,
@@ -485,6 +520,9 @@ function buildCanonical(state: QuantState, grid: CanonicalGrid, opts: CanonicalO
     cusps: cuspsQ.map((c) => render(grid, c)),
     aspects,
     warnings: state.warnings,
+    // Omitted entirely when absent (never an undefined key), so the payload's
+    // key set matches the Python mirror and the pinned golden structure.
+    ...(epochSigma !== undefined ? { epochSigma } : {}),
   };
 }
 

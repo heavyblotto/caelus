@@ -1,0 +1,233 @@
+{
+ "name": "transits-venus-1",
+ "outFile": "b2-transits-venus-1.json",
+ "setId": "house-b2-transits-venus-1",
+ "family": "transit-aspect",
+ "cells": [
+  {
+   "id": "transit:venus:conjunction:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "sun",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:venus~natal_sun:conjunction"
+   ],
+   "title": "Transiting Venus conjunct your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:sextile:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "sun",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:venus~natal_sun:sextile"
+   ],
+   "title": "Transiting Venus sextile your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:square:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "sun",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:venus~natal_sun:square"
+   ],
+   "title": "Transiting Venus square your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:trine:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "sun",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:venus~natal_sun:trine"
+   ],
+   "title": "Transiting Venus trine your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:opposition:sun",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "sun",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:venus~natal_sun:opposition"
+   ],
+   "title": "Transiting Venus opposite your natal Sun",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:conjunction:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "moon",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:venus~natal_moon:conjunction"
+   ],
+   "title": "Transiting Venus conjunct your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:sextile:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "moon",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:venus~natal_moon:sextile"
+   ],
+   "title": "Transiting Venus sextile your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:square:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "moon",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:venus~natal_moon:square"
+   ],
+   "title": "Transiting Venus square your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:trine:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "moon",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:venus~natal_moon:trine"
+   ],
+   "title": "Transiting Venus trine your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:opposition:moon",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "moon",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:venus~natal_moon:opposition"
+   ],
+   "title": "Transiting Venus opposite your natal Moon",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:conjunction:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "mercury",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:venus~natal_mercury:conjunction"
+   ],
+   "title": "Transiting Venus conjunct your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:sextile:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "mercury",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:venus~natal_mercury:sextile"
+   ],
+   "title": "Transiting Venus sextile your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:square:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "mercury",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:venus~natal_mercury:square"
+   ],
+   "title": "Transiting Venus square your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:trine:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "mercury",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:venus~natal_mercury:trine"
+   ],
+   "title": "Transiting Venus trine your natal Mercury",
+   "bindable": true
+  },
+  {
+   "id": "transit:venus:opposition:mercury",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "venus",
+    "natal": "mercury",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:venus~natal_mercury:opposition"
+   ],
+   "title": "Transiting Venus opposite your natal Mercury",
+   "bindable": true
+  }
+ ]
+}

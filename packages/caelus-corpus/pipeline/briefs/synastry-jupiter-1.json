@@ -1,0 +1,248 @@
+{
+ "name": "synastry-jupiter-1",
+ "outFile": "b3-synastry-jupiter-1.json",
+ "setId": "house-b3-synastry-jupiter-1",
+ "family": "synastry-aspect",
+ "cells": [
+  {
+   "id": "synastry:jupiter:conjunction:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "sun",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_sun:conjunction"
+   ],
+   "title": "Your Jupiter conjunct their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:sextile:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "sun",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_sun:sextile"
+   ],
+   "title": "Your Jupiter sextile their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:square:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "sun",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_sun:square"
+   ],
+   "title": "Your Jupiter square their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:trine:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "sun",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_sun:trine"
+   ],
+   "title": "Your Jupiter trine their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:opposition:sun",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "sun",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_sun:opposition"
+   ],
+   "title": "Your Jupiter opposite their Sun",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:conjunction:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "moon",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_moon:conjunction"
+   ],
+   "title": "Your Jupiter conjunct their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:sextile:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "moon",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_moon:sextile"
+   ],
+   "title": "Your Jupiter sextile their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:square:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "moon",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_moon:square"
+   ],
+   "title": "Your Jupiter square their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:trine:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "moon",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_moon:trine"
+   ],
+   "title": "Your Jupiter trine their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:opposition:moon",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "moon",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_moon:opposition"
+   ],
+   "title": "Your Jupiter opposite their Moon",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:conjunction:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "mercury",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_mercury:conjunction"
+   ],
+   "title": "Your Jupiter conjunct their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:sextile:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "mercury",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_mercury:sextile"
+   ],
+   "title": "Your Jupiter sextile their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:square:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "mercury",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_mercury:square"
+   ],
+   "title": "Your Jupiter square their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:trine:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "mercury",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_mercury:trine"
+   ],
+   "title": "Your Jupiter trine their Mercury",
+   "bindable": true
+  },
+  {
+   "id": "synastry:jupiter:opposition:mercury",
+   "family": "synastry-aspect",
+   "when": {
+    "kind": "synastry",
+    "mode": "aspect",
+    "a": "jupiter",
+    "b": "mercury",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "synastry:jupiter~b_mercury:opposition"
+   ],
+   "title": "Your Jupiter opposite their Mercury",
+   "bindable": true
+  }
+ ]
+}

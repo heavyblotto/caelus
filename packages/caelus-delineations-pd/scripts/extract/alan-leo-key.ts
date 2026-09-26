@@ -1,6 +1,11 @@
 #!/usr/bin/env npx tsx
-/** Planet-in-house delineations from Alan Leo, *The Key to Your Own Nativity*
- *  (1910). Selector: `placement{ body, house }`. */
+/**
+ * Planet-in-house delineations from Alan Leo, *The Key to Your Own Nativity*
+ * (1910). Selector: `placement{ body, house }`.
+ *
+ * Quarantined: the DLI `_djvu.txt` is unrestorable OCR. This script is kept
+ * for provenance; it is not in `npm run extract` and the JSON is not shipped.
+ */
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";

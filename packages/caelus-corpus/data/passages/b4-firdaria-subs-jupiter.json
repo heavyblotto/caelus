@@ -1,0 +1,114 @@
+[
+ {
+  "id": "timelord:firdaria:sub:jupiter:sun",
+  "family": "timelord-firdaria",
+  "when": {
+   "kind": "timelord",
+   "system": "firdaria",
+   "level": "sub",
+   "lord": "sun",
+   "under": "jupiter"
+  },
+  "atomIds": [
+   "firdaria:sub:",
+   "firdaria:major:"
+  ],
+  "text": "This is the Sun's run inside Jupiter's long season of growth, and the widening tends to become personal. A firdaria chapter is subdivided, one planet at a time, so a stretch like this colors the larger theme rather than replacing it. Where the larger chapter opens doors in general, this stretch is inclined to put your name on one of them. You may be asked to lead something you were merely part of, to speak where you used to listen, or to take credit you would rather spread around. Teaching, in the broad sense, suits this run. People look to you for the thing you know. Recognition often comes from the direction of the bigger world: study, travel, something published, a room you had not stood in before. The pairing carries a warm confidence, which is both its use and its risk. Confidence gets you through the door. It can also talk you into a role that fits your pride better than your life. The real test here is whether the growth still looks like you once you are standing inside it, so watch how you feel about the parts nobody applauds. The run leaves behind, at best, a plainer sense of your own standing. Not larger, exactly. Clearer, and yours to answer for."
+ },
+ {
+  "id": "timelord:firdaria:sub:jupiter:venus",
+  "family": "timelord-firdaria",
+  "when": {
+   "kind": "timelord",
+   "system": "firdaria",
+   "level": "sub",
+   "lord": "venus",
+   "under": "jupiter"
+  },
+  "atomIds": [
+   "firdaria:sub:",
+   "firdaria:major:"
+  ],
+  "text": "Venus governs a run inside Jupiter's twelve-year chapter, and the mood lifts. Under this pairing the growth theme runs through affection, taste, and enjoyment. People are usually how it arrives. Someone met through study, travel, shared belief, or work that took you somewhere new can matter out of all proportion to how casually it began. Bonds you already have tend to loosen and stretch in a good way: more room in them, more generosity, fewer conditions. Your taste is likely to widen in the same stretch, toward music, food, places, and company you had not thought were for you. Money often loosens too, in one direction or the other, which is worth noticing rather than moralizing about. Hospitality is the keynote. Giving comes easily here, and easy giving builds real goodwill, though it also builds promises made because the evening was pleasant. Comfort is the hazard, not scandal. A run this agreeable can quietly persuade you that pleasure is the point of the whole chapter. Enjoy it, and keep one honest question nearby: is this widening you, or only cushioning you? Handled well, you finish the run with broader affections and your standards still intact."
+ },
+ {
+  "id": "timelord:firdaria:sub:jupiter:mercury",
+  "family": "timelord-firdaria",
+  "when": {
+   "kind": "timelord",
+   "system": "firdaria",
+   "level": "sub",
+   "lord": "mercury",
+   "under": "jupiter"
+  },
+  "atomIds": [
+   "firdaria:sub:",
+   "firdaria:major:"
+  ],
+  "text": "Somewhere in Jupiter's long chapter, the big ideas have to be written down, costed, and said out loud to people who will ask questions. That is generally the work of the Mercury sub-period, which brings the detail work of growth. Study gets concrete: a course, a syllabus, a language, a manual, the actual hours rather than the plan to begin. Paperwork multiplies. Applications, contracts, itineraries, and correspondence fill more of the run than you expect, and they matter more than they look, since the wider openings of the chapter tend to arrive through them. Talking sits at the center. You may be explaining what you believe to skeptics, pitching, teaching, drafting, or simply carrying more conversations than usual. Travel in this stretch runs frequent and short rather than grand. The strain is scatter. Jupiter wants more, Mercury will cheerfully start all of it, and the run can spread you across a dozen half-finished things and call that progress. Choosing two and finishing them is worth more here than any fresh idea. When it goes well, you gain the skill to carry the chapter's vision at working scale: you can say plainly what you mean by it, and handle the small print that makes the large thing possible."
+ },
+ {
+  "id": "timelord:firdaria:sub:jupiter:moon",
+  "family": "timelord-firdaria",
+  "when": {
+   "kind": "timelord",
+   "system": "firdaria",
+   "level": "sub",
+   "lord": "moon",
+   "under": "jupiter"
+  },
+  "atomIds": [
+   "firdaria:sub:",
+   "firdaria:major:"
+  ],
+  "text": "Growth looks tidier from outside than it feels from within. The Moon's run inside the Jupiter chapter is where the widening gets felt rather than chased, and under it the theme goes domestic and tidal. Home and family often move to the front. A larger life can mean an actual move, a household changing shape, or relatives and old friends drawn back in by whatever you have been building. Some people find that the chapter's expansion reaches them through their people rather than their work. Feeling runs close to the surface here. Enthusiasm comes in waves, so does doubt, and plans that seemed settled ask to be felt out again before you commit to them. That is not backsliding. It is the part of growing where you check whether the bigger life is one you actually want to wake up in. Care flows more freely in this run as well, both given and received, and ordinary comfort matters in a way no ambition replaces. Rest is not a detour from the chapter. What this stretch tends to leave you with is a private answer to a public question: whether the room you are making for yourself feels like home, and what it would take for it to."
+ },
+ {
+  "id": "timelord:firdaria:sub:jupiter:saturn",
+  "family": "timelord-firdaria",
+  "when": {
+   "kind": "timelord",
+   "system": "firdaria",
+   "level": "sub",
+   "lord": "saturn",
+   "under": "jupiter"
+  },
+  "atomIds": [
+   "firdaria:sub:",
+   "firdaria:major:"
+  ],
+  "text": "Every expanding chapter gets audited, and Saturn's run inside the Jupiter period is usually where that happens. It brings weight, form, and consequence to a season otherwise built on opening doors. Commitments come due. The things you said yes to earlier now want hours, money, and follow-through, and this is the run that shows which of them were real. Progress slows and thickens. Approvals take longer, requirements appear, and someone senior may want proof instead of enthusiasm. That is inconvenient and also useful, since a growth chapter with no resistance in it builds nothing that stands. Some pruning usually follows. Plans that were only ever appealing tend to fall away here, and the loss generally stings less later than it does at the time. Work, study, or a large undertaking gets its structure in this stretch: the schedule, the qualification, the terms, the dull parts that make the ambitious parts possible. Discouragement is the risk. Set against the chapter's usual optimism, this run can feel like the wind dropped. It has not. The season simply asked you for something load-bearing, and what survives this stretch is what the rest of the chapter can safely stand on."
+ },
+ {
+  "id": "timelord:firdaria:sub:jupiter:jupiter",
+  "family": "timelord-firdaria",
+  "when": {
+   "kind": "timelord",
+   "system": "firdaria",
+   "level": "sub",
+   "lord": "jupiter",
+   "under": "jupiter"
+  },
+  "atomIds": [
+   "firdaria:sub:",
+   "firdaria:major:"
+  ],
+  "text": "The first stretch of Jupiter's chapter is Jupiter's own. That is how firdaria works: a period hands its opening run back to the lord that governs it, so the theme arrives with nothing else in the mix. Whatever this twelve-year season turns out to be about tends to show its first shape here, and it often shows it as an opening: an invitation, an acceptance, a move, a teacher, a door you had not thought to knock on. Appetite for more comes with it. You want scope, and the wanting itself is information about the chapter ahead. Belief tends to move early in this run too. Many people find their sense of what life is for shifting in this stretch, sometimes through a person, sometimes through going somewhere or reading something at the right moment. Take that shift seriously without carving it in stone. The obvious hazard is that everything looks possible at once. A run this open makes it easy to say yes broadly and sort out the wreckage later, and a fair amount of the chapter's remaining work goes on exactly that sorting. Fewer and better yeses here tend to save years of it. Treat this as the overture rather than the summary. What it offers, at best, is a direction worth twelve years of your life: no promise about how it turns out, just a clear sense of which way you are facing."
+ },
+ {
+  "id": "timelord:firdaria:sub:jupiter:mars",
+  "family": "timelord-firdaria",
+  "when": {
+   "kind": "timelord",
+   "system": "firdaria",
+   "level": "sub",
+   "lord": "mars",
+   "under": "jupiter"
+  },
+  "atomIds": [
+   "firdaria:sub:",
+   "firdaria:major:"
+  ],
+  "text": "Openings do nothing on their own. Someone has to walk through them, and that is what Mars is for. Its sub-period inside the Jupiter chapter turns the theme toward push, and raises the temperature of a season that otherwise drifts toward the pleasant. Effort gets results here. A project that had been waiting for the right moment tends to move, applications go out, cases get argued, and the stretch often carries more travel, physical work, and open ambition than the ones on either side of it. Competition sharpens as well. You may be up against other people for the same opening, and a contest handled straight will show you what you can actually do. Friction is the cost. Confidence plus heat makes a run in which disagreements come to a head, especially with people who think you are reaching too far, or not far enough. Say the difficult thing about the real issue and the heat works for you. Overreach is the other risk, since a wide chapter can talk you into a fight or a commitment bigger than your strength, so pick your ground. You are likelier to end this run with proof than with optimism: something the chapter opened up, now built, plus a clear sense of what it cost you to build it."
+ }
+]

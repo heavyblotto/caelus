@@ -1,0 +1,212 @@
+[
+ {
+  "id": "transit:jupiter:conjunction:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "saturn",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_saturn:conjunction"
+  ],
+  "text": "Growth has come to inspect the foundations. Roughly once every twelve years, transiting Jupiter reaches the place your natal Saturn holds, and the part of your life built on duty, discipline, and long practice gets a visit from the planet of more. The classic feeling is pressure at the seams. Commitments that fit fine last year suddenly feel a size too small, and structures you built for safety begin to look like they could carry something bigger. This is one of the better periods for deliberate, structural change. Jupiter alone can be careless and Saturn alone can be grim, but fused in a conjunction they favor growth that holds: a larger role built on proven skill, a plan that finally leaves the drawer, a responsibility accepted because you are ready rather than because you could not refuse. While the transit is applying, you mostly notice restlessness, a low itch to renegotiate the rules you live by. Around the exact pass the question turns concrete, often as an offer, a review, or a decision about where the next stretch of effort goes. As Jupiter separates, the mood eases and whatever you chose begins to set, so the weeks after the peak reward follow-through rather than new bets. Because Jupiter can retrograde, it may cross this point up to three times over several months. The first pass raises the question, the return pass lets you test your answer at a smaller scale, and the final pass tends to settle matters with better information than you had at the start. Two failure modes are worth watching. One is refusing the growth, guarding the current arrangement so tightly that the period ends with nothing widened. The other is resenting the structure, reading every obligation as a cage and pulling at commitments that are actually load-bearing. The useful stance sits between them: ask of each duty whether it still earns its keep, and ask of each opportunity whether it can be built on rather than merely enjoyed. Work is the most common stage for all this, but the same logic reaches marriages, family roles, and the routines that keep you well, anywhere your life runs on standing agreements. From outside, the period can look surprisingly quiet, less a windfall than an enlargement of what you are trusted to carry. What you build or renegotiate now tends to have a long tail. The last time Jupiter stood here was about twelve years back; if something grew for you then, it has been carrying you since. The structure you adjust during these weeks will quietly do the same for the next round."
+ },
+ {
+  "id": "transit:jupiter:sextile:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "saturn",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_saturn:sextile"
+  ],
+  "text": "This is a builder's window, modest and genuinely useful. For a few weeks, transiting Jupiter sits at an easy angle to your natal Saturn, and the planet of growth is on friendly terms with the part of you that plans, saves, and finishes what it starts. A sextile forces nothing. It works like a standing offer: chances to consolidate, to put a plan on firmer footing, to grow something at a pace you can actually sustain. You may notice that practical matters cooperate a little more than usual. A senior person is receptive. Paperwork that normally stalls moves along. The dull, necessary task you have been circling suddenly looks doable, and doing it opens a door you did not expect. Opportunity under this transit tends to arrive dressed as work, which is exactly why people miss it; the shiny kind of luck lives elsewhere, and what is on offer here is traction. While the aspect is applying, ideas about order and improvement surface on their own, and the exact pass is the natural moment to commit to one of them. As Jupiter pulls away, the momentum fades without drama, and an offer left unanswered simply expires. If Jupiter happens to be in a retrograde loop, the sextile can repeat two more times across a few months, and the repeats are kind: what you start on the first pass gets refined on the second and locked in on the third. The pairing rewards a specific kind of ambition, the patient kind. Enlarging a duty you already do well, formalizing an arrangement that has stayed informal, asking for the increase your record supports, all of these ride the current. Pure speculation does not, because this transit has little to give any bet that skips the groundwork. In relationships the tone is steadying rather than romantic. Conversations about the practical shape of a shared life, money, schedules, who does what, tend to go better now than they usually do, and agreements reached in this spirit last. Inwardly the period often feels composed, with optimism that has a floor under it, and that mood itself is worth using: hard decisions weighed now get weighed fairly. Because nothing dramatic marks these weeks, their value usually shows up later, when you find that something arranged during them is quietly holding weight. The growth available here is the kind you barely notice happening and are very glad, a year on, to have banked."
+ },
+ {
+  "id": "transit:jupiter:square:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "saturn",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_saturn:square"
+  ],
+  "text": "The part of you that wants more and the part of you that keeps things safe are pulling against each other, and for a while neither will yield quietly. Transiting Jupiter square your natal Saturn is a classic tension between expansion and structure. Twice in each of Jupiter's twelve-year rounds this angle forms, and each time it asks the same blunt question: is this arrangement too small, or is that ambition too big? While the square is applying, the tension usually shows up as irritation. Rules you accepted for years start to chafe, routines feel like drag, and other people's freedom is suddenly hard to watch. Near the exact pass the conflict tends to take a concrete shape, an opportunity that would strain an existing commitment, or a duty that stands squarely in the way of an opening. As the aspect separates, the pressure drops, and you get to live with whatever you decided under it. Because Jupiter can station and retrograde, the square may return up to three times across a stretch of months. Treat the first pass as the argument, the second as the cross-examination, and the last as the ruling, and try not to force a final answer at the first peak. The risk here runs in two directions at once. Under enough restlessness you can talk yourself into tearing up something sound, a stable job, a workable agreement, simply because it is unglamorous. Under enough caution you can decline a real chance and call the refusal prudence. Neither response uses the transit well. The discontent this square generates is diagnostic: it points at the places where your life has stopped growing, without telling you the remedy. Testing beats demolition. Push on a limit and see whether it flexes. Ask for more room inside the structure before concluding the structure has to go. Commitments that survive honest pressure are worth their weight, and the ones that crack were already due for rebuilding. Money and career feel this transit most often, since that is where growth and security collide, but the same push and drag can surface at home, in a partnership, or in obligations to family. Physically the period can feel like driving with one foot on each pedal, so give the restlessness somewhere cheap to spend itself. When the square has fully separated, what remains is usually clarity you did not have before, a more accurate map of which limits in your life are walls and which are load-bearing beams. That map is the payoff, and it makes the expansion that eventually comes a great deal sounder."
+ },
+ {
+  "id": "transit:jupiter:trine:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "saturn",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_saturn:trine"
+  ],
+  "text": "Luck and patience are on speaking terms for a change. With transiting Jupiter trine your natal Saturn, the urge to grow and the instinct to build stop competing and start collaborating, and for a few weeks your life gets unusually good weather for steady progress. This is not the transit of the windfall. It is the transit of the plan that works: the application that lands, the negotiation that concludes sensibly, the long project that turns a corner because you kept showing up. Effort put in now tends to be recognized, often by people with real authority, and the recognition tends to be proportionate, earned rather than inflated. Your judgment settles as Jupiter drifts into range. Decisions that seemed murky acquire an obvious shape, and it becomes easier to tell the difference between a sound risk and a dressed-up gamble. The exact pass is the natural peak for acting on that clarity, whether that means signing, committing, launching, or asking. As Jupiter separates, nothing collapses; the aspect simply stops assisting, and progress returns to its normal price. Should Jupiter retrograde over the degree, the trine can come back twice more within a span of months, giving a project three distinct pushes: a start, a revision, and a consolidation. The quiet nature of this transit is its one real hazard. Because the ease feels ordinary, it is possible to spend the whole period coasting and only realize afterward that the door was open. A trine hands you nothing; it lowers the friction on what you attempt. So attempt something. This is among the better stretches for the moves that need both nerve and patience, restructuring finances, formalizing a partnership, taking on a bigger role, setting a course you intend to hold for years. Elders, mentors, and institutions are more receptive to you than usual, and your own tolerance for slow work is higher. Relationships benefit from the same steadiness. Conversations about the future feel less loaded, and commitments discussed now rest on realism rather than hope. Even your body tends to appreciate the mood, since moderation comes more naturally than it usually does. When the period closes, its results rarely announce themselves. They sit in the structure of your life, a little sturdier and a little roomier than before, and they keep paying rent long after you have forgotten which weeks built them."
+ },
+ {
+  "id": "transit:jupiter:opposition:saturn",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "saturn",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_saturn:opposition"
+  ],
+  "text": "For a few weeks the case for growing and the case for holding steady face each other across your life, at full size. You stand between them. Transiting Jupiter opposite your natal Saturn arrives once in each of Jupiter's twelve-year circuits, near the middle of the cycle that began at their last conjunction. It stages the freedom-versus-duty question as openly as it can be staged. Oppositions like to work through other people, so the debate often arrives wearing a face. Someone urges you to expand, take the leap, say yes. Someone else, a boss, a partner, an institution, or your own ingrained caution, counsels holding the line. It is tempting to pick a side and be done. The transit rewards something harder: holding both. The wish for more is real information, and so is the worth of what you have already built. A decision that honors only one of them tends to need repairing later. The two pulls build slowly while Jupiter closes on the far point of its cycle. Often this shows up as mounting impatience with your duties alongside a growing sense of what those duties protect. At the exact pass the tension usually comes out into the open: a confrontation, an offer with a deadline, a fork that will not stay abstract. During the separation the heat fades. A workable middle course tends to appear, sometimes embarrassingly obvious in hindsight. If Jupiter's retrograde brings the opposition back, the whole negotiation can replay up to three times over some months. Each replay is calmer than the last. Positions that seemed impossible to reconcile at first often meet in the middle by the third. Practically, this period favors rebalancing over rupture. Contracts, workloads, budgets, and shared duties benefit from a fresh talk now, precisely because both sides of every question are so visible. Beware the seesaw moves: promising big to escape a limit, or clamping down hard to silence a longing. Both buy short relief at long cost. The people who weather this transit best treat it as a mid-cycle review. Six years or so of growth lie behind them and a comparable stretch ahead. There are a few weeks in which to ask honestly what should be enlarged, what should be kept up, and what should be set down. Answer that with any care and the opposition leaves you better balanced than it found you, with commitments you have chosen rather than merely inherited."
+ },
+ {
+  "id": "transit:jupiter:conjunction:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "uranus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_uranus:conjunction"
+  ],
+  "text": "Once in roughly twelve years, transiting Jupiter reaches your natal Uranus, and the ceiling lifts. This conjunction joins the planet of growth to the part of you that refuses to be standardized, the streak of independence, invention, and sudden knowing that is yours alone. When Jupiter amplifies it, life gets interesting fast. The signature events of this period are openings that arrive out of sequence: the chance encounter that turns into an offer, the fringe interest that abruptly becomes relevant, the idea that shows up whole in the middle of an ordinary afternoon. Alongside the luck runs a strong itch for freedom. Arrangements that merely bored you before can feel intolerable now, and the urge to overturn them can be intense. While the conjunction is applying, that restlessness builds and your appetite for novelty sharpens; near the exact pass, the break tends to actually arrive, whether as an external event or as a decision that seems to make itself. In the separating weeks the voltage drops, and the work becomes integration, sorting which of the period's discoveries belong in your life permanently. Jupiter's retrograde can bring it back across this point up to three times in a span of months, which is a gift with this pairing: the first pass delivers the flash, the second pass supplies the second thoughts, and the final pass lets you commit with your eyes open. The hazard is overthrow for its own sake. Under this much electricity, stable things look gray, and people have quit jobs, cities, and marriages at this transit only to discover that what they wanted changed was something smaller and closer in. Where you can, make your experiments reversible: sample the new field before renouncing the old one, take the trip before relocating, test the idea before betting the savings on it. The freedom this conjunction offers is real and worth taking. It simply does not require wreckage to prove itself. Friends and groups often carry the transit's luck, and the people who enter your life during these weeks tend to be unusual and catalytic. Expect your own tastes to surprise you too. Something you dismissed for years may suddenly compel you, and that reversal is not fickleness; it is the point. Every twelve years this transit updates your sense of what your life could include. Let it, and the version of you that walks out of the period has more room than the one that walked in."
+ },
+ {
+  "id": "transit:jupiter:sextile:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "uranus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_uranus:sextile"
+  ],
+  "text": "Chance is favoring the curious right now. Transiting Jupiter in sextile to your natal Uranus is a light, bright transit, a few weeks in which the new and the untried keep drifting within reach and asking only for a yes. Nothing here upends anything. The sextile works by invitation: an unfamiliar name in your inbox, a tool or method you had not considered, a gathering slightly outside your usual circle, a small experiment that costs little to run. Each one is easy to decline, and most people decline them without noticing, which is why this period passes many lives untouched. Used deliberately, it is one of the pleasanter windows Jupiter offers. Your mind runs quicker and more laterally than usual, your tolerance for the unconventional rises, and problems that resisted the standard approach often give way to an odd one. Curiosity builds on its own as Jupiter eases toward the angle; you may find yourself reading outside your lane or striking up conversations you normally would not. The invitations cluster while the sextile is exact, and the days after belong to following up on whichever one you accepted, because the door does not stay propped open long. A single pass runs a week or two, but if Jupiter's retrograde loop crosses this angle the sextile can repeat, up to three visits spread over months, and later visits tend to develop what the first one introduced. Friendship and association carry much of the luck. New acquaintances made now skew original and useful, and existing friends may be the ones holding the interesting door. Technology, travel, study, and any field where fresh thinking is an asset all respond well to attention during these weeks. The transit also gives a gentle push toward personal freedom, not the dramatic kind, just enough slack to vary a routine, break a minor habit, or admit an interest you had been sitting on. There is no real downside beyond the missed chance. The one discipline the period asks is responsiveness, since sextile luck rewards the person who answers the message, attends the thing, and tries the experiment while the angle still holds. Growth here is incremental and a little sideways: not a new life, but a new input, and some of what enters casually now proves, much later, to have been the start of something with a long future."
+ },
+ {
+  "id": "transit:jupiter:square:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "uranus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_uranus:square"
+  ],
+  "text": "Patience gets scarce under this transit. Transiting Jupiter square your natal Uranus winds up the spring between your urge to grow and your streak of rebellion, and for a few weeks the combined pressure wants out, now, through whatever wall is nearest. The mood is unmistakable once it sets in: sudden contempt for routine, a hunger for something to change, and a conviction, arriving at odd moments, that you could just leave, quit, buy, launch, or declare, and deal with the consequences later. Sometimes events cooperate by supplying the disruption themselves, a plan overturned, a schedule blown up, an unexpected offer with a fuse on it, and you are forced to improvise whether you wanted stimulation or not. While the square is applying, the static accumulates quietly, often as a growing carelessness about things you normally tend. Around the exact pass, impulses peak and surprises tend to land, and this is precisely when your judgment about scale is least reliable. In the separating days the current eases and you can see what the surge was actually about. Since Jupiter can retrograde, the square may strike up to three times across several months, so a decision dodged at the first pass usually gets another hearing, a fact worth remembering when something demands to be settled instantly. The restlessness itself is not the enemy. It is information with the volume turned too high, pointing at genuine staleness somewhere in your arrangements, a role outgrown, a routine ossified, an independence quietly bargained away. The failure mode is dosage: answering a specific confinement with a general explosion, gambling a stable whole to escape one stale part. The transit is well used by giving the voltage a target. Change the thing that is actually dead. Take the risk that is sized to the problem. Let the wild idea have a pilot run before it has your savings. Physically, the period can feel jumpy, sleep may run shallow, and machines and plans both seem more prone to glitch, so leave margin where you can. People around you may act erratically too, since your impatience has a way of finding company. When the square lets go, most of what it demanded so urgently turns out to have been negotiable. What remains is the one genuine discovery underneath the noise, the change you actually needed, and having found it under pressure, you get to make it at leisure."
+ },
+ {
+  "id": "transit:jupiter:trine:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "uranus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_uranus:trine"
+  ],
+  "text": "Doors you never knocked on have a way of opening by themselves. Transiting Jupiter trine your natal Uranus is the friendliest form of the growth-meets-lightning pairing: a stretch of weeks in which the new arrives without breaking anything, and luck runs specifically toward the original, the untried, and the free. Under this trine, fortunate surprise is the theme: plans that improve through accidents, the detour that turns out better than the route, the person who meets you at the wrong event at the right time. Your own thinking participates too, because ideas connect faster than usual and solutions come from angles you do not normally check. It is an excellent period for innovation of any scale, modernizing how you work, adopting the tool you had resisted, floating the proposal that always seemed a little too clever, since audiences are unusually receptive to fresh material now. Freedom expands gently here. Where the harder Jupiter-Uranus contacts make you want to smash the routine, the trine just loosens it, and you may find you can claim more room inside your existing life without anyone objecting, including you. While the aspect is applying, expect a rising taste for experiment; the exact pass tends to concentrate the happy accidents, and the separating days are for building something durable out of whichever one mattered. A single pass lasts a week or two. If Jupiter is retrograding in the neighborhood, the trine can return, up to three contacts across some months, and later contacts often mature what the first one merely revealed. The only way to waste this transit is to keep everything exactly as it was. A trine exerts no pressure, so if you decline every oddity and hold every routine, the weeks pass pleasantly and leave nothing. A small policy fixes that: for the duration, say yes to the interesting thing when the cost of yes is low. Accept the invitation, read the strange book, talk to the stranger, prototype the idea. Groups and networks are lucky terrain, and technology tends to cooperate more than it obstructs. Travel taken now tends to be memorable in good ways. None of this asks you to gamble; the trine's whole character is liberation without breakage. What stays with you afterward is usually one new element, a person, a method, an interest, a taste of independence, that entered easily during these weeks and then quietly refuses to leave, because it fits the person you were becoming anyway."
+ },
+ {
+  "id": "transit:jupiter:opposition:uranus",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "uranus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_uranus:opposition"
+  ],
+  "text": "The invitation to change everything tends to arrive from outside during this period. Transiting Jupiter opposite your natal Uranus puts the planet of enlargement face to face with your most independent, unpredictable side. Because oppositions work through others, the disruption usually wears a face or a letterhead. It may be the person who urges you to drop everything, the offer that would move your whole life, or the partner who announces their own upheaval and hands you the fallout. For a few weeks the air around you carries a promise of freedom. The question is how much of it to believe. Some of it is real. This transit does open exits and enlarge options. People have found genuine new directions under it. But opposition luck arrives at full size. What looks like the chance of a decade at the exact pass often turns out, on a closer look, to be a good chance of ordinary size. While the aspect is applying, expect mounting restlessness that seems to come from events rather than from you: delays that infuriate, freedoms other people flaunt. Near the peak, events tend to force a real decision. The pull to answer with something total, walk out, sign on, overturn, is strongest exactly when perspective is shortest. The separating weeks restore proportion, sometimes with relief, sometimes with mild embarrassment. A retrograde loop can grant this opposition second and third hearings across a span of months. This is worth building into your choices. An offer that cannot survive until the next pass was probably not the freedom it claimed to be. The ones that return with their appeal intact deserve real weight. The productive use of the period is selective revolt. Somewhere in your life a structure has genuinely gone stale. The outside provocations, whatever their own merits, are pointing at it. Update that part on purpose and the pressure drops. Defend everything blindly and the period feels like a siege. Abandon everything and you spend the next year rebuilding what still worked. Relationships feel this transit keenly, since closeness and freedom sit on opposite ends of its seesaw. The honest talk about room to breathe beats both the dramatic exit and the gritted teeth. When the dust settles, you usually keep one real change and decline the rest. That one change is often the part of you that had been waiting years for an excuse."
+ },
+ {
+  "id": "transit:jupiter:conjunction:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "neptune",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_neptune:conjunction"
+  ],
+  "text": "Your sense of the possible is expanding faster than your sense of the practical. Roughly once every twelve years, transiting Jupiter reaches your natal Neptune and enlarges the most imaginative, idealistic, and porous part of you. The result is a period of swelling vision: faith comes easily, compassion widens, beauty affects you more than usual, and life seems to hint at meanings just past the edge of language. For anyone who paints, writes, prays, meditates, or dreams for a living or for love, these weeks can be among the richest a Jupiter cycle offers. The same tide that lifts the imagination, though, also lifts the fog. Under this conjunction, plans acquire a shimmer that is not always earned. Schemes look grander than their foundations, people look nobler than their records, and your own generosity can outrun your resources without sending a notice. The transit does not make you foolish; it makes you hopeful, and hope this size needs a floor under it. While the conjunction is applying, the longing builds, often as a diffuse sense that ordinary life is too small and something larger is calling. The exact pass is the peak of the vision, the stretch when inspiration is strongest and judgment about worldly detail is weakest. As Jupiter separates, the sorting begins: some of what glowed proves real, some evaporates, and telling them apart is the actual work of the period. In a retrograde year Jupiter revisits this degree twice more across several months, which suits the material well. The first pass brings the dream, the second brings the doubts, and the third lets you keep what survived both. A few habits protect the gold here. Feed the vision honestly, through art, retreat, service, study, time near water or music or whatever dissolves you a little, because starved idealism goes looking for shortcuts. Binding commitments made where the facts are thin, especially financial ones, tend to age poorly here, not because the period is unlucky but because your appetite for believing is temporarily larger than your appetite for verifying. And write things down, since insights from these weeks have a way of dissolving like dreams do. What this transit ultimately renews is your reservoir of meaning, the private sense of what your life is for. Twelve years of ordinary living drains that reservoir. These weeks refill it, and the refilling is worth some fog."
+ },
+ {
+  "id": "transit:jupiter:sextile:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "neptune",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_neptune:sextile"
+  ],
+  "text": "Imagination is easier to reach than usual, and kindness circulates with less friction. Transiting Jupiter sextile your natal Neptune is one of the gentlest transits in the catalog. For a few weeks the door between ordinary life and the inner world stands slightly ajar, and good things drift through in both directions. You are unlikely to notice a single dramatic moment. The sextile works quietly. A daydream turns out to contain a usable idea. A pull toward music or water or an old creative practice returns. An impulse of sympathy leads somewhere unexpected, or a conversation goes one level deeper than either of you planned. Charitable impulses run strong, and helping tends to cost less and give back more than it usually does. If you make anything, this is working weather. Inspiration under a sextile does not flood. It seeps, arriving as small steady trickles that reward showing up at the page, the instrument, or the workbench. Spiritual and reflective practices deepen with unusual ease as well. Even people with no such habits often notice vivid dreams, or their attention snagging on beauty they would normally walk past. While the aspect applies, openness builds. The exact pass is the soft peak, the best days for creative sessions, retreats, deep talks, and generous gestures. In the separating days the door swings slowly shut, and whatever you carried through it is yours to keep. One pass runs a week or two, but a Jupiter retrograde can bring as many as three passes across a few months. Each is a fresh chance at the same quiet opening, and the later ones favor deepening whatever the first began. There is no sharp edge to warn about here, only the usual sextile condition. It must be accepted to do anything. These weeks pass unseen through a life that keeps every hour booked. Leave some slack, an unplanned evening, a walk without a destination, an hour with no screen, and the transit has room to work. The gains are real but soft-bodied: a restored sense that life means something, a piece of work with unusual feeling in it, a connection touched by genuine compassion. None of it will show up in any ledger, and a year from now you may count these among the weeks that quietly went right."
+ },
+ {
+  "id": "transit:jupiter:square:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "neptune",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_neptune:square"
+  ],
+  "text": "Hope is running ahead of evidence right now, and the gap is where this transit lives. Transiting Jupiter square your natal Neptune inflates the dreaming, longing, boundary-blurring side of you until it presses against practical reality, and for a few weeks the pressure produces a characteristic weather: grand moods, vague plans, promising mirages, and a persistent sense that somewhere else, or someone else, or some other life, would finally be enough. The classic hazards are well documented. Overcommitting to schemes whose numbers were never checked. Promising more than you can deliver, sincerely, because in the moment you believed it. Idealizing a person or a cause and outsourcing your judgment to the glow. Escaping, through fantasy, scrolling, spending, substances, or sheer drift, from duties that remain exactly where you left them. The period is not a bad one. It is a foggy one, and fog calls for instruments. While the square is applying, the yearning builds and discontent with the ordinary sharpens; near the exact pass, the mirage is at its most convincing and the urge to act on it peaks; as the aspect separates, humidity drops and you can finally see what was solid. Jupiter's retrograde can repeat the square up to three times over a span of months, and the repetition is protective if you let it be: a vision still standing at the third pass has earned attention that no first-pass shimmer deserves. The working rules are simple. What can wait is usually better for waiting, and signatures or investments resting on someone's beautiful story, including your own, are this weather's classic regrets. Check claims against sources, ask the boring questions, and let a skeptical friend read the plan. Keep the machinery of daily life running even when it feels gray and pointless, because under this square it will feel that way and the feeling is weather, not truth. Then treat the longing itself with respect. A square is pressure toward growth, and this one points at a real hunger, for meaning, for beauty, for something worthy of devotion, that your current arrangements are not feeding. The scheme of the week is usually the wrong answer to that hunger, but the hunger is the right question. Feed it directly, through creative work, service, practice, or honest reflection, and the transit converts from a season of mirages into the moment you noticed what was actually missing. That noticing lasts long after the fog burns off."
+ },
+ {
+  "id": "transit:jupiter:trine:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "neptune",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_neptune:trine"
+  ],
+  "text": "Some transits sharpen ambition; this one softens the need for it. Transiting Jupiter trine your natal Neptune brings a stretch of weeks in which meaning, imagination, and generosity flow with unusual ease. The ordinary pressure to strive relaxes its grip. The mood is a kind of quiet abundance. You feel less driven to prove, more inclined to enjoy, quicker to forgive, and readier to believe that things will work out. Under this particular sky that belief does less damage than usual, since the trine tends to deliver small mercies on schedule. Compassion is the transit's clearest channel. Sympathy comes easily, giving feels natural rather than dutiful, and relationships benefit from a gentleness that does not have to be forced. Old resentments loosen. This is one of the better periods for repairing a strained bond, precisely because your need to win the old argument has gone slack. Creative and spiritual life runs deep and smooth. Artists find the well full, and practices like meditation or prayer, if you keep them, drop into depth with little effort. Even without formal practice, expect vivid dreams, a heightened response to music and nature, and moments of unforced contentment that arrive without occasion. While the trine is applying, the softening comes on slowly. The exact pass is the still center, ideal for rest, retreat, creation, and making peace. The separating weeks return you to ordinary striving gently, with something restored. Each individual pass runs a week or two. Jupiter's retrograde can extend the season to three passes across some months, each one another lowering of the bucket into the same well. The transit asks little and forces nothing, and its only real cost is ambition deferred. This is not the window for hard bargaining or bold expansion, because your appetite for conflict is low and your urge to give the benefit of the doubt is high. Schedule the fights for later. What belongs in these weeks is everything that requires an open heart and an unhurried mind. The practical payoff arrives afterward and is easy to credit to something else. People rested in spirit make better decisions for months. The sense of proportion this period restores, about what matters, what can wait, and what was never worth the worry, quietly upgrades everything you do once the pace picks back up."
+ },
+ {
+  "id": "transit:jupiter:opposition:neptune",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "jupiter",
+   "natal": "neptune",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:jupiter~natal_neptune:opposition"
+  ],
+  "text": "Something across the table is shimmering, and this period asks how much of the shimmer to trust. Transiting Jupiter opposite your natal Neptune arrives once per twelve-year Jupiter round. Because oppositions project their theme outward, the enlargement of dreams tends to reach you through other people and outside offers. It may be the venture that promises everything, the teacher with the answers, the cause that would give life meaning, or the person onto whom you find yourself draping an entire imagined future. The glow out there is partly real and partly yours. Your own idealism has been blown up to full size and placed at a distance. There it is easy to mistake for a quality of whatever it happens to be lighting. That mistake is the transit's signature risk. Its costs range from mild letdown to signed paperwork. So the period's work is telling the real from the merely glittering, without sliding into cynicism. Some of what shines now genuinely deserves your faith. Openness to enchantment rises as Jupiter swings out toward full distance, a hunger for inspiration that makes every promising surface more promising. Around the exact pass, the pitch usually arrives in concrete form. The pull to commit, to a plan, a person, a belief, peaks exactly when your fact-checking is weakest. The separating weeks bring the tide back down, and whatever was standing on rock is still there. A retrograde season restages the whole opposition twice more over several months, and that structure is your friend. A first-pass marvel that has dissolved by the second pass has saved you the tuition. The rare offer or ally that keeps its substance through all three deserves serious weight. Useful habits for the stretch are ordinary ones. Check before you commit. Keep decisions with long tails out of the peak weeks where you can. Notice when a picture of the future contains no numbers, names, or dates. Watch for the opposite trap as well: refusing all wonder in advance and armoring yourself past the reach of anything meaningful. The clean path between gullibility and armor is curiosity with a notebook. When the period closes, you will likely have declined some beautiful vapor and kept one real source of inspiration. You will also know your own longings better, since they spent these weeks on display in front of you, at full size, wearing someone else's face."
+ }
+]

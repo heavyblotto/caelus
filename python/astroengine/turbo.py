@@ -13,8 +13,11 @@ longitude unwrapped relative to the segment centre, so a segment that straddles
 0/360 has no jump.
 
 Segment lengths must resolve the ~13.7-day semi-monthly nutation term (shared
-by every body), so even the slow planets use ~24-day segments. At degree 12
-that reproduces the planets to <0.01" and the Moon to ~0.03".
+by every body), and the fast movers need segments short enough to hold their
+curvature (the Moon near perigee is the binding case). The fitter measures
+each body against the engine on a fixed grid and tightens until the target
+holds; the measured numbers travel in the pack's own `fit` record. As of the
+2026-08 refit against the current engine: planets <=0.013", Moon 0.063".
 
 The fit is pure Python (Chebyshev-Gauss-Lobatto interpolation, no numpy), so
 the pack is reproducible anywhere the engine runs.
@@ -103,3 +106,19 @@ class Turbo:
         i = min(int((jd - self.jd0) / seg), len(b["segments"]) - 1)
         x = 2.0 * (jd - (self.jd0 + i * seg)) / seg - 1.0
         return _clenshaw(b["segments"][i], x) % 360.0
+
+
+def measure(engine, pack, body, samples=4000):
+    """Worst-case deviation (arcsec) between a turbo pack body and the engine
+    over a dense uniform grid of the pack's span. Deterministic: the grid is
+    fixed, so the number is reproducible and belongs in the pack's own
+    fit record. The fit is interpolation, so its error peaks between the
+    nodes; uniform sampling finds it."""
+    tb = Turbo(pack)
+    worst = 0.0
+    for i in range(samples):
+        jd = tb.jd0 + (tb.jd1 - tb.jd0) * (i + 0.5) / samples
+        d = engine.longitude(body, jd) - tb.longitude(body, jd)
+        d = abs(((d + 180.0) % 360.0) - 180.0)
+        worst = max(worst, d)
+    return worst * 3600.0

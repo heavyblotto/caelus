@@ -1,0 +1,146 @@
+[
+ {
+  "id": "timelord:dasha:antar:mercury:ketu",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "ketu",
+   "under": "mercury"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "Not every stretch of a busy chapter stays busy. A major planetary period in the Vedic system runs through nine shorter ones, a lord to each, and the name for one of those is antardasha. Mercury's seventeen years are the loud ones, full of talk, trade, study, and errands. Ketu's turn inside them lowers the volume. Ketu is the Moon's south node, an eclipse point the tradition ties to letting go rather than gathering. Under it, interest tends to drain out of things you were carrying mostly from habit. A project you meant to finish stops feeling urgent, a group chat goes unanswered for a week, and a field you were once hungry for starts to look like someone else's subject. Work often narrows and deepens at the same time. Solitary tasks suit you better now: research, repair, editing, anything done with the door closed. You may be less visible for a while, and less bothered by that than you expected. Old material has a way of returning. A half-written thing, a language you dropped, a person you used to write to, a question you shelved: this run tends to hand them back for finishing or for a clean goodbye. The obvious risk is letting the quiet go too far, since business and friendships both need answering. Kept in proportion, the stretch clears your desk. When Mercury's noise comes back, you know which parts of it you actually want."
+ },
+ {
+  "id": "timelord:dasha:antar:mercury:venus",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "venus",
+   "under": "mercury"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "Deals go smoother here, and so does the talking that leads to them. Inside a long planetary chapter the Vedic tradition runs a series of shorter turns, each called an antardasha, and Venus has this one. Mercury's chapter is already about skill, dealing, and words, and the Venus turn puts charm and taste into all three. Your work tends to attract people. Clients, collaborators, and editors keep coming back because the process itself is pleasant, and an agreement that stalled for months may close over one good lunch. Contracts, partnerships, and anything that needs both sides to feel well treated go better now than they did. Craft turns toward beauty. Whatever you make, the look and the sound and the finish of it start to matter more, and the skills the eye and ear judge get their season: design, arrangement, styling, the sentence that reads well aloud. An instrument, a language, or a craft taken up for no reason but pleasure fits the run. Money often follows the pleasant part of the work. Earning tends to come from what people like about you rather than from grinding, and spending on comfort rises to match. Flattery is the trouble here, running in both directions. A sentence picked to keep everyone comfortable can quietly stop being accurate, and an arrangement that feels lovely may read differently later. Deliver the unwelcome news early and kindly, and this run leaves you with work you enjoyed and people who want more of it."
+ },
+ {
+  "id": "timelord:dasha:antar:mercury:sun",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "sun",
+   "under": "mercury"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "Somewhere in this run you stop being anonymous about what you know. In this system a long period never runs as one piece: it passes lord by lord through shorter stretches, and a stretch of that kind is an antardasha. Mercury's seventeen years are the years of skill and communication, and the Sun's turn inside them asks who is doing the talking. Credit becomes a live question. Work you did quietly gets noticed, or fails to, and you learn how much that actually matters to you. Many people take a title in this stretch, or teach, or present, or put something out with a byline on it. Anyone official starts to matter more: managers, examiners, licensing offices, whoever holds the stamp that turns competence into a credential. The pairing tests you in a useful way. Mercury is fluent in every position. The Sun cares which one is yours, and subjects you cannot say anything of your own about tend to fall away. Trust in your own judgment usually grows, and the sharp edge of that deserves attention, since applause for a quick answer is pleasant enough to become the reason you speak. Vitality asks for a vote too. A mind running at this speed is still housed in a body, and the body keeps the schedule honest. What the run leaves behind is a public version of your skill, one piece of it out in the open that you would gladly defend a second time."
+ },
+ {
+  "id": "timelord:dasha:antar:mercury:moon",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "moon",
+   "under": "mercury"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "Thinking gets weather in this stretch. Each major planetary period in the Vedic scheme is divided into antardashas, the shorter stretches its nine lords take one after another, and the Moon's turn brings feeling into a chapter otherwise built out of Mercury's dry cleverness. Seventeen years of skill, talk, and business have a tidal patch in them, and this is it. Your interests follow your mood now. Some days the work runs beautifully and some days the same task will not start, which is maddening if you were counting on steady output. Learn your own hours and the run gets much easier. What you produce tends to warm up. Writing, teaching, and selling all get more personal, and people answer the person rather than the argument. Work pitched at readers, customers, or any general audience tends to land, since this tradition puts the common public under the Moon. Family talk increases. Parents, siblings, and the people who function as family come forward, sometimes as care that takes real time, sometimes as the honest exchange you both postponed. Home and routine may shift: a move, a different desk, new hours, a change in who is around you. Memory turns into usable material, and old impressions come back with surprising detail. Nerves are where the cost shows, because input plus feeling is tiring and sleep pays for both. Rested, you come out of this run with competence people trust rather than merely admire."
+ },
+ {
+  "id": "timelord:dasha:antar:mercury:mars",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "mars",
+   "under": "mercury"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "The pace picks up and the tone sharpens. In Vedic timing a major period never arrives all at once. It comes in antardashas, shorter runs held by one lord after another, and Mars takes its turn inside Mercury's long chapter of skill and communication. Mind plus heat makes for a fast, argumentative, effective stretch. Work moves in sprints. Deadlines that would have flattened you get met, technical problems give way to sheer attack, and you may take something demanding just to find out whether you can do it. Debate suits you now. You are quicker in an exchange and less willing to let a weak claim stand, which wins some arguments and starts others. Friction is part of the deal here. Contracts get contested, a negotiation turns into a fight, or a long-running disagreement with a colleague or a sibling finally gets said out loud. Said cleanly, that clears years of buildup. Said while angry, it buys a repair job neither of you wanted, and the difference is usually one draft and one night. Speed brings its own mistakes, so checking twice earns its keep in this run: the message already sent, the figure nobody verified, the trip taken in too much of a hurry. Impatience with slower people is common and rarely helps. What you build here is nerve. You learn that you can think under pressure and say the hard thing without coming apart, and that steadiness stays with you well past the run itself."
+ },
+ {
+  "id": "timelord:dasha:antar:mercury:rahu",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "rahu",
+   "under": "mercury"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "Scale enters the picture. Rahu is the Moon's north node, an eclipse point the tradition reads as appetite and reach, and it takes a turn as antardasha, the Vedic word for a shorter period held inside a larger one. Here the chapter is Mercury's, seventeen years of skill, trade, and talk. Put hunger together with cleverness and you get one of the more electric runs in the whole stretch. Ambition attaches itself to your abilities. What you know starts looking like something to build with rather than something to enjoy, and the audience you aim at grows. Unfamiliar industries, foreign markets, new tools, strangers on the other side of the world: the run favors whatever your background never handed you. Many people learn something now that nobody around them knows, and trade on exactly that gap. The wanting comes with no natural stop, and that is the part to watch. Projects multiply, promises outrun the calendar, and the story you tell about the work can get ahead of the work. Shortcuts look reasonable in this light, and information moves fast enough that a rumor can pass for research. Slow checking is worth what it costs, and so is anyone willing to ask what the numbers actually say. Met with some honesty about what you can actually deliver, the run widens your reach for good. You end it known to people you had no ordinary way of meeting, carrying skills nobody expected of you."
+ },
+ {
+  "id": "timelord:dasha:antar:mercury:jupiter",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "jupiter",
+   "under": "mercury"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "Questions about what it is all for start pressing on a chapter that has mostly been about how. A major Vedic period is spent nine ways, one shorter period per lord, each called an antardasha. Jupiter's turn inside Mercury's seventeen years of skill and communication adds meaning to method. The mind wants somewhere worth going. Study tends to go up a level. Casual reading turns into a real course of it, a teacher shows up who is worth the trouble, or you go back for a qualification you had been talking about for years. Philosophy, law, religion, the wide frameworks: whatever holds your particular subject together becomes as interesting as the subject. It goes the other direction as well. People come to you to learn, and explaining what you know improves it. Publishing, lecturing, advising, and long-form work all suit this run, and backing often arrives from people with the standing to give it. Opportunity widens here, which is where the trouble hides. Jupiter says yes easily and Mercury talks fast, and between them you can promise five things and deliver three. Conviction can also set into an opinion that stops taking questions, which is a strange end for a mind this quick. Kept in proportion, this is one of the kinder stretches in the chapter. It turns a pile of separate skills into something you can actually say, and gives your cleverness a subject worth spending itself on."
+ },
+ {
+  "id": "timelord:dasha:antar:mercury:saturn",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "saturn",
+   "under": "mercury"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "Things slow down, and nothing is broken. Vedic timing hands each of the nine lords a share of a major period, and a share like that is called an antardasha. Saturn's, inside Mercury's quick chapter, works like a brake. There is less talk and heavier work. Replies take longer to come back. An approval sits on someone's desk, a project drags past its date, and effort that used to produce fast results now produces slow ones. That lag is the shape of the run, not a verdict on your ability. What the stretch is good for is depth. Long work fits it: the book rather than the post, the qualification rather than the weekend workshop, the skill drilled long after the novelty wore off. Editing, accounts, structure, and anything that rewards patience with detail go well. Older colleagues and formal institutions feature more, and their standards, tiring as they are, tend to be worth meeting. The mood is the real risk. A slow patch invites you to conclude that you are not as capable as you thought, which is the least reliable thought on offer here. Solitude makes it louder, so ordinary company matters more than it seems to. Worked through, this becomes the run that made your competence solid. What you put together in it is still standing when the fast stretches come around again."
+ },
+ {
+  "id": "timelord:dasha:antar:mercury:mercury",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "mercury",
+   "under": "mercury"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "A major Vedic chapter always starts with its own lord in charge, so this one is Mercury over Mercury. The shorter periods inside a chapter are called antardashas, and this opening one states the theme of the seventeen years with nothing else mixed into it. The mind accelerates and the days fill. Questions start following you around, and answering one tends to produce three more. Some people find a single subject and go at it hard; others want to know how everything works and read in ten directions at once. Both are the same appetite. Business gets busy in the small way rather than the grand way. Messages, forms, quotes, bookings, short journeys, a change to the daily route: the little machinery of a life all comes due together, and there is real satisfaction in handling it well. Dexterity improves with use, whether the tool is a keyboard, an instrument, or your own sentences. Talk is central. You meet more people than usual, and one conversation leads to work that no plan of yours would have produced. Thinness is the cost. Attention spreads so wide that little of it finishes, and a head this full sleeps badly. Whatever you take up seriously now tends to set the direction of the years that follow, so the choice deserves a little deliberation. Give one subject real depth, let the others stay hobbies, and Mercury on Mercury shows you what your mind can do when it is fully awake."
+ }
+]

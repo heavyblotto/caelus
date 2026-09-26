@@ -1,0 +1,176 @@
+{
+  "name": "composite-houses-chiron",
+  "outFile": "b3-composite-houses-chiron.json",
+  "setId": "house-b3-composite-houses-chiron",
+  "family": "composite-house",
+  "cells": [
+    {
+      "id": "composite:chiron:house:1",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "chiron",
+        "house": 1
+      },
+      "atomIds": [
+        "composite:chiron"
+      ],
+      "title": "Composite Chiron in the 1st house",
+      "bindable": true
+    },
+    {
+      "id": "composite:chiron:house:2",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "chiron",
+        "house": 2
+      },
+      "atomIds": [
+        "composite:chiron"
+      ],
+      "title": "Composite Chiron in the 2nd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:chiron:house:3",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "chiron",
+        "house": 3
+      },
+      "atomIds": [
+        "composite:chiron"
+      ],
+      "title": "Composite Chiron in the 3rd house",
+      "bindable": true
+    },
+    {
+      "id": "composite:chiron:house:4",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "chiron",
+        "house": 4
+      },
+      "atomIds": [
+        "composite:chiron"
+      ],
+      "title": "Composite Chiron in the 4th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:chiron:house:5",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "chiron",
+        "house": 5
+      },
+      "atomIds": [
+        "composite:chiron"
+      ],
+      "title": "Composite Chiron in the 5th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:chiron:house:6",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "chiron",
+        "house": 6
+      },
+      "atomIds": [
+        "composite:chiron"
+      ],
+      "title": "Composite Chiron in the 6th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:chiron:house:7",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "chiron",
+        "house": 7
+      },
+      "atomIds": [
+        "composite:chiron"
+      ],
+      "title": "Composite Chiron in the 7th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:chiron:house:8",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "chiron",
+        "house": 8
+      },
+      "atomIds": [
+        "composite:chiron"
+      ],
+      "title": "Composite Chiron in the 8th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:chiron:house:9",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "chiron",
+        "house": 9
+      },
+      "atomIds": [
+        "composite:chiron"
+      ],
+      "title": "Composite Chiron in the 9th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:chiron:house:10",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "chiron",
+        "house": 10
+      },
+      "atomIds": [
+        "composite:chiron"
+      ],
+      "title": "Composite Chiron in the 10th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:chiron:house:11",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "chiron",
+        "house": 11
+      },
+      "atomIds": [
+        "composite:chiron"
+      ],
+      "title": "Composite Chiron in the 11th house",
+      "bindable": true
+    },
+    {
+      "id": "composite:chiron:house:12",
+      "family": "composite-house",
+      "when": {
+        "kind": "composite",
+        "body": "chiron",
+        "house": 12
+      },
+      "atomIds": [
+        "composite:chiron"
+      ],
+      "title": "Composite Chiron in the 12th house",
+      "bindable": true
+    }
+  ]
+}

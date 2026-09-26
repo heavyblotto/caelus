@@ -1,0 +1,93 @@
+[
+  {
+    "id": "natal:jupiter:dignity:exaltation",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "jupiter", "dignity": "exaltation" },
+    "atomIds": ["placement:jupiter"],
+    "text": "Your Jupiter sits in its exaltation, the placement the tradition assigns to Cancer, and it behaves like an honored guest: welcomed, generous, on its best behavior. Growth and care run through the same channel in you. Your confidence feeds on belonging, and your generosity has a nourishing quality; you do not just give people things, you make them feel provided for. Hospitality is one of your quiet talents. A table you set, a team you welcome someone onto, a home you open: these are where your luck tends to gather, because people remember being taken in and return the favor at the right moments. Your optimism is felt rather than argued. You believe things will work out because you have felt held before, and that conviction steadies others when reasons run out. The excess to watch is over-provision. An exalted Jupiter can give too much, promise comfort it cannot always deliver, and feed people past the point of appetite, including yourself. Abundance here wants a container. When you let care choose its recipients instead of pouring toward anyone in reach, your generosity stops leaking and starts compounding. Over time you become the person whose faith has a hearth to it: not loud, not theoretical, just a standing warmth that convinces people, by experience rather than persuasion, that there is enough."
+  },
+  {
+    "id": "natal:jupiter:dignity:detriment",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "jupiter", "dignity": "detriment" },
+    "atomIds": ["placement:jupiter"],
+    "text": "Jupiter in detriment, which the tradition locates in Gemini and Virgo, puts your planet of the big picture to work in the style of small pieces. Detriment is not damage; it means the planet operates like a visitor abroad, doing its job in a foreign idiom. In you, faith does not arrive whole. It gets assembled from details, tested against facts, and revised when new information comes in. You may distrust grand philosophies on principle, or hold several partial ones at once, which makes you a poor congregant and an excellent auditor of other people's certainty. Your generosity is practical and specific: information, introductions, small useful help, rather than sweeping gestures. The friction shows up as scatter or shrinkage. Opportunities multiply faster than you can commit to them, or the critical eye trims every hope down to a manageable disappointment before it has a chance to grow. Promises can slip through the cracks of your many projects. The compensating gift is honesty about scale. Because belief costs you effort, the beliefs you do build are load-bearing; nobody argued you into them and nobody can argue you out. Your growth runs toward synthesis: letting the details you have gathered add up to a worldview you actually stand on. When they do, you carry a rarer kind of faith, one that survived its own fact-checking."
+  },
+  {
+    "id": "natal:jupiter:dignity:fall",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "jupiter", "dignity": "fall" },
+    "atomIds": ["placement:jupiter"],
+    "text": "With Jupiter in fall, the position tradition gives to Capricorn, the planet of expansion works uphill. Fall does not mean broken; it means the planet's native style is underpowered here, and its strengths develop by compensation. Optimism is not your default setting. You tend to ration hope, budget enthusiasm, and treat luck as something other people rely on. Where a comfortable Jupiter says yes first and checks later, yours checks first, sometimes so thoroughly that the yes never gets said. This can read as pessimism, and in lean seasons it can feel like it too. The compensation is real, though. Growth you achieve is earned growth, built on ground you tested yourself, and it does not evaporate when conditions change. Your confidence, once it finally arrives, is the durable kind, because it was never borrowed from a mood. People learn to trust your version of encouragement precisely because you do not hand it out freely. The pattern to watch is preemptive self-denial: turning down opportunities before anyone else can, calling your caution realism when it is actually fear with a spreadsheet. You grow by letting a little unearned hope through the gate now and then. Each time a risk you almost refused turns out well, your faith gains a fact to stand on, and slowly you build what this placement was after all along: optimism with foundations."
+  },
+  {
+    "id": "natal:jupiter:dignity:peregrine",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "jupiter", "dignity": "peregrine" },
+    "atomIds": ["placement:jupiter"],
+    "text": "A peregrine Jupiter holds no essential dignity: your planet of belief travels through the chart without a fixed address. Peregrine means wandering, and that is roughly how meaning works for you. You do not inherit a worldview so much as collect one, picking up pieces of philosophy from books, teachers, cultures, and hard experience, keeping what proves out and leaving the rest at the border. This makes your faith unusually portable. You can find something to hope for in almost any situation, because your optimism was never tied to one doctrine staying true. The cost is drift. Without an anchor, enthusiasm can follow whatever is nearest and loudest, and you may notice your convictions quietly reshaping themselves to match your current company. Big questions can stay open for years, not from depth but from postponement. The growth here is deliberate settlement. At some point the traveler chooses a home, not because the road ran out but because building requires staying. When you commit to the few beliefs your own experience has actually verified, the borrowed maps become a map you drew, and your generosity and confidence finally have somewhere to live."
+  },
+  {
+    "id": "natal:saturn:dignity:domicile",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "saturn", "dignity": "domicile" },
+    "atomIds": ["placement:saturn"],
+    "text": "Saturn stands in its own sign in your chart, at home in the territory the tradition names Capricorn and Aquarius. A planet in domicile does not have to translate itself; it speaks its native language, and for Saturn that language is structure. Discipline is not something you impose on yourself from outside. It is closer to a preference, the way some people prefer quiet. You understand instinctively that time is a material, that limits are information, and that most worthwhile things are built slowly by someone willing to be bored. Responsibility tends to find you early, and you tend to carry it well; people sense that your word has load-bearing strength. Authority sits naturally on you, often before you feel ready for it. The risk of a planet this comfortable is that its virtue goes unquestioned. Work can quietly annex the rest of your life. Standards can harden into rigidity, prudence into a reflexive no, and self-reliance into a wall that keeps out help you actually need. Because structure comes easily to you, you may undervalue what it costs others, and grade them against a scale they never agreed to. Your growth is learning what all this architecture is for. Walls exist to make rooms, and rooms exist to be lived in. When your discipline starts serving your life instead of replacing it, you become what a strong Saturn promises: not the strictest person in the room, but the most trustworthy."
+  },
+  {
+    "id": "natal:saturn:dignity:exaltation",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "saturn", "dignity": "exaltation" },
+    "atomIds": ["placement:saturn"],
+    "text": "An exalted Saturn, placed by tradition in Libra, is the disciplinarian received as an honored guest, and honor is exactly its theme in your life. Saturn's business is limits, duty, and time; exaltation gives that business a courtroom rather than a prison. Your sense of obligation runs through fairness. You keep your word because a broken promise offends something structural in you, and you expect agreements to bind both sides equally. This makes you a natural judge in the informal sense: the friend asked to settle disputes, the colleague trusted to divide credit honestly, the person in the family who remembers what was actually said. Commitment does not frighten you the way it frightens some people; you grasp that a good contract, in love or work, creates freedom rather than ending it. Your judgment matures unusually well, and decisions you weigh carefully tend to hold up for years. The strain shows when fairness becomes bookkeeping. You can keep such precise accounts of who owes what that warmth waits on the ledger balancing, and you may delay choices for a long time in search of a perfectly just option that does not exist. You grow by letting mercy have a seat at your table. Justice weighed with some kindness in the scale is still justice, and yours becomes the kind people seek out rather than merely accept."
+  },
+  {
+    "id": "natal:saturn:dignity:detriment",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "saturn", "dignity": "detriment" },
+    "atomIds": ["placement:saturn"],
+    "text": "Saturn in detriment, traditionally the condition of Cancer and Leo, puts your planet of walls and rules in territory that runs on feeling and heart. Detriment means a foreign style, not a failure: this Saturn does its work in a language it did not grow up speaking. Duty and emotion arrive tangled for you. You may feel responsible for other people's feelings, or manage your own by structuring them: scheduling grief, rationing joy, holding warmth back until it is deserved. Where care should flow, a wall can appear; where a boundary is needed, guilt shows up instead and volunteers you. Authority can be an awkward costume, worn either too heavily or apologized for. The compensating strengths are considerable once you notice them. Few people understand better than you that love involves maintenance: showing up, keeping promises, doing the unglamorous work that keeps a family or a friendship standing. You take emotional commitments seriously in a world that often does not. Your task is integration rather than repair. The wall learns to become a door, something that opens and closes on purpose. Discipline learns to hold feelings without crushing them, the way a riverbank holds a river. When that happens, you offer people a rare combination, structure that is warm and warmth that is reliable, and the responsibility you once carried as a weight starts to function as a gift."
+  },
+  {
+    "id": "natal:saturn:dignity:fall",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "saturn", "dignity": "fall" },
+    "atomIds": ["placement:saturn"],
+    "text": "With Saturn in fall, the state the tradition ties to Aries, your planet of patience is posted to the front lines. Fall means underpowered in its own style: Saturn wants to wait, test, and build, and in you it is wired into a system that wants to move now. The result is a lifelong negotiation between the brake and the accelerator. Sometimes you slam the brake at the worst moment, freezing just when boldness was called for, then criticizing yourself for hesitating. Other times the accelerator wins and you commit impulsively to obligations a slower hand would have declined. Discipline tends to arrive in bursts: fierce regimes adopted overnight and abandoned by the second week. Strength here is built by compensation, and the compensation is genuine. Because restraint does not come naturally, every ounce of it you develop is self-made and battle-tested, and by midlife your feel for when to act can be sharper than that of people who were born cautious. You know both speeds from the inside. Your growth is rhythm rather than restraint: learning that patience is not the opposite of courage but its timing. When you can hold your fire without losing it, you become quietly formidable, someone who moves seldom, moves fast, and rarely wastes the motion."
+  },
+  {
+    "id": "natal:saturn:dignity:peregrine",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "saturn", "dignity": "peregrine" },
+    "atomIds": ["placement:saturn"],
+    "text": "A peregrine Saturn carries no essential dignity, which means your planet of rules operates without a rulebook of its own. Structure, for you, is situational. You did not inherit a ready-made sense of how discipline works; you improvise it, borrowing methods from bosses, mentors, and systems you pass through, keeping whichever ones survive contact with your actual life. This gives you a flexibility that rigid people lack. You can adapt to a new regime, a new culture, a new set of expectations, without feeling that your spine has been removed. The drawback is inconsistency. Your standards can vary by context, strict here and slack there, and authority may feel like a role you are performing rather than something you own. Deadlines and duties sometimes need external scaffolding, a partner who checks in, a commitment made in public, because the internal enforcer keeps changing shifts. What this placement asks of you is authorship. Somewhere in all the borrowed methods is a set of rules that fits you, and you find it by testing rather than by inheritance. Once you have written your own code and kept it through a hard season, it holds better than any inherited one, because you know exactly why every line is there."
+  },
+  {
+    "id": "natal:uranus:dignity:domicile",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "uranus", "dignity": "domicile" },
+    "atomIds": ["placement:uranus"],
+    "text": "Uranus counts as being in domicile here, at home in Aquarius by modern reckoning. Honesty requires a note. Uranus was found in 1781, long after the dignity system was settled, so this rulership is a modern habit rather than classical doctrine. And since Uranus stays years in a sign, it colors a generation more than a single life. Read it lightly. What it suggests is that the Uranian themes in your chart, independence, originality, the itch to question defaults, come out fluently rather than harshly. Your unconventional streak tends to be constructive: you break patterns in order to build better ones, and your differences read to others as vision more than rebellion. The thing to watch is detachment worn as a badge, being contrary because it is comfortable. You grow by putting your originality in service of something shared, which is where an at-home Uranus does its best work."
+  },
+  {
+    "id": "natal:uranus:dignity:exaltation",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "uranus", "dignity": "exaltation" },
+    "atomIds": ["placement:uranus"],
+    "text": "Your chart shows Uranus in exaltation, a status some modern astrologers give it in Scorpio. Take the label with appropriate lightness: Uranus is a modern discovery, its dignities are later conventions with no classical pedigree, and even among recent writers this exaltation is not unanimous. Because Uranus also spends years in one sign, it says more about your generation than about you alone. Where it touches you personally, the suggestion is that your instinct for change runs deep rather than loud. You are drawn to transformation at the root: overhauling rather than redecorating, questioning the foundations other people paper over. Sudden insight tends to strike you in exactly the places others avoid looking, and you are less afraid of endings than most. The care to take is with intensity for its own sake, upheaval as a habit. Your independence matures as you learn to choose which foundations genuinely need breaking and which merely bore you."
+  },
+  {
+    "id": "natal:uranus:dignity:detriment",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "uranus", "dignity": "detriment" },
+    "atomIds": ["placement:uranus"],
+    "text": "Uranus in detriment, set in Leo by the modern scheme that mirrors its Aquarius rulership, deserves a disclaimer first. The outer planets got their dignities by convention after they were discovered, not from classical sources. A condition that lasts years also marks an age group more than one person. Even so, the image is a useful one for you: the planet of the crowd and the far view working in the sign of the personal heart. In your life the friction may show up as a tug between standing apart and being seen, between wanting your independence respected and wanting it applauded. Rebellion can get tangled with pride, so that being different quietly turns into a performance of being different. The strength on the other side is creative courage: you can give abstract ideals a face and a voice that people actually follow. You grow by letting your individuality serve the group it once defined itself against."
+  },
+  {
+    "id": "natal:uranus:dignity:fall",
+    "family": "dignity",
+    "when": { "kind": "placement", "body": "uranus", "dignity": "fall" },
+    "atomIds": ["placement:uranus"],
+    "text": "A Uranus in fall, which modern convention locates in Taurus, comes with a caveat worth stating plainly. Dignities for the outer planets are twentieth-century labels, not classical teaching. Uranus also moves so slowly that this condition belongs to everyone born across several years, not to you in particular. As a symbol, though, it earns its keep: the planet of sudden change slowed by the sign of stability. In your own life this can feel like change on a delay. You may resist disruption until pressure builds, and then it arrives all at once, in your money, your habits, your sense of what is solid. The compensating gift is that the changes you do make tend to stick, because you only adopt what you have tested against real ground. You grow by loosening your grip a little before life does it for you, letting small revolutions stand in for large ones."
+  }
+]

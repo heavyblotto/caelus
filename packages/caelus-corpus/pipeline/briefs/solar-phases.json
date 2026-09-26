@@ -1,0 +1,218 @@
+{
+ "name": "solar-phases",
+ "outFile": "b4-solar-phases.json",
+ "setId": "house-b4-solar-phases",
+ "family": "solar-phase",
+ "cells": [
+  {
+   "id": "condition:mercury:cazimi",
+   "family": "solar-phase",
+   "when": {
+    "kind": "solarPhase",
+    "body": "mercury",
+    "phase": "cazimi"
+   },
+   "atomIds": [
+    "solarPhase:mercury:cazimi"
+   ],
+   "title": "Mercury cazimi (in the heart of the Sun)",
+   "bindable": true
+  },
+  {
+   "id": "condition:mercury:combust",
+   "family": "solar-phase",
+   "when": {
+    "kind": "solarPhase",
+    "body": "mercury",
+    "phase": "combust"
+   },
+   "atomIds": [
+    "solarPhase:mercury:combust"
+   ],
+   "title": "Mercury combust",
+   "bindable": true
+  },
+  {
+   "id": "condition:mercury:under_beams",
+   "family": "solar-phase",
+   "when": {
+    "kind": "solarPhase",
+    "body": "mercury",
+    "phase": "under_beams"
+   },
+   "atomIds": [
+    "solarPhase:mercury:under_beams"
+   ],
+   "title": "Mercury under the Sun's beams",
+   "bindable": true
+  },
+  {
+   "id": "condition:venus:cazimi",
+   "family": "solar-phase",
+   "when": {
+    "kind": "solarPhase",
+    "body": "venus",
+    "phase": "cazimi"
+   },
+   "atomIds": [
+    "solarPhase:venus:cazimi"
+   ],
+   "title": "Venus cazimi (in the heart of the Sun)",
+   "bindable": true
+  },
+  {
+   "id": "condition:venus:combust",
+   "family": "solar-phase",
+   "when": {
+    "kind": "solarPhase",
+    "body": "venus",
+    "phase": "combust"
+   },
+   "atomIds": [
+    "solarPhase:venus:combust"
+   ],
+   "title": "Venus combust",
+   "bindable": true
+  },
+  {
+   "id": "condition:venus:under_beams",
+   "family": "solar-phase",
+   "when": {
+    "kind": "solarPhase",
+    "body": "venus",
+    "phase": "under_beams"
+   },
+   "atomIds": [
+    "solarPhase:venus:under_beams"
+   ],
+   "title": "Venus under the Sun's beams",
+   "bindable": true
+  },
+  {
+   "id": "condition:mars:cazimi",
+   "family": "solar-phase",
+   "when": {
+    "kind": "solarPhase",
+    "body": "mars",
+    "phase": "cazimi"
+   },
+   "atomIds": [
+    "solarPhase:mars:cazimi"
+   ],
+   "title": "Mars cazimi (in the heart of the Sun)",
+   "bindable": true
+  },
+  {
+   "id": "condition:mars:combust",
+   "family": "solar-phase",
+   "when": {
+    "kind": "solarPhase",
+    "body": "mars",
+    "phase": "combust"
+   },
+   "atomIds": [
+    "solarPhase:mars:combust"
+   ],
+   "title": "Mars combust",
+   "bindable": true
+  },
+  {
+   "id": "condition:mars:under_beams",
+   "family": "solar-phase",
+   "when": {
+    "kind": "solarPhase",
+    "body": "mars",
+    "phase": "under_beams"
+   },
+   "atomIds": [
+    "solarPhase:mars:under_beams"
+   ],
+   "title": "Mars under the Sun's beams",
+   "bindable": true
+  },
+  {
+   "id": "condition:jupiter:cazimi",
+   "family": "solar-phase",
+   "when": {
+    "kind": "solarPhase",
+    "body": "jupiter",
+    "phase": "cazimi"
+   },
+   "atomIds": [
+    "solarPhase:jupiter:cazimi"
+   ],
+   "title": "Jupiter cazimi (in the heart of the Sun)",
+   "bindable": true
+  },
+  {
+   "id": "condition:jupiter:combust",
+   "family": "solar-phase",
+   "when": {
+    "kind": "solarPhase",
+    "body": "jupiter",
+    "phase": "combust"
+   },
+   "atomIds": [
+    "solarPhase:jupiter:combust"
+   ],
+   "title": "Jupiter combust",
+   "bindable": true
+  },
+  {
+   "id": "condition:jupiter:under_beams",
+   "family": "solar-phase",
+   "when": {
+    "kind": "solarPhase",
+    "body": "jupiter",
+    "phase": "under_beams"
+   },
+   "atomIds": [
+    "solarPhase:jupiter:under_beams"
+   ],
+   "title": "Jupiter under the Sun's beams",
+   "bindable": true
+  },
+  {
+   "id": "condition:saturn:cazimi",
+   "family": "solar-phase",
+   "when": {
+    "kind": "solarPhase",
+    "body": "saturn",
+    "phase": "cazimi"
+   },
+   "atomIds": [
+    "solarPhase:saturn:cazimi"
+   ],
+   "title": "Saturn cazimi (in the heart of the Sun)",
+   "bindable": true
+  },
+  {
+   "id": "condition:saturn:combust",
+   "family": "solar-phase",
+   "when": {
+    "kind": "solarPhase",
+    "body": "saturn",
+    "phase": "combust"
+   },
+   "atomIds": [
+    "solarPhase:saturn:combust"
+   ],
+   "title": "Saturn combust",
+   "bindable": true
+  },
+  {
+   "id": "condition:saturn:under_beams",
+   "family": "solar-phase",
+   "when": {
+    "kind": "solarPhase",
+    "body": "saturn",
+    "phase": "under_beams"
+   },
+   "atomIds": [
+    "solarPhase:saturn:under_beams"
+   ],
+   "title": "Saturn under the Sun's beams",
+   "bindable": true
+  }
+ ]
+}

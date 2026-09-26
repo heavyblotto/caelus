@@ -18,6 +18,11 @@ import math
 from .chart import SIGNS, DEFAULT_ORBS, ASPECTS, NOT_ASPECTABLE
 from .derived import dignities
 from .spherical import angular_separation_3d
+from .ranges import (
+    jd_year, delta_t_sigma,
+    ANGLE_SIGMA_DEG_PER_SECOND, MOON_SIGMA_DEG_PER_SECOND,
+    EPOCH_SIGMA_DISPLAY_SECONDS,
+)
 
 # ------------------------------------------------------------------ rounding
 
@@ -260,7 +265,20 @@ def _build_canonical(state, grid, orbs=None, aspects=None,
                         "strengthPerMille": _strength_per_mille(orb_units, limit_units),
                     })
 
-    return {
+    # Mirror of canonical.ts: the epoch-certainty block appears only where
+    # the clock-error uncertainty crosses the display threshold, so modern
+    # charts carry no block and keep their digests.
+    jd_ut = 2451545.0 + state["timeMs"] / 86_400_000
+    sigma_seconds = round_half_up(delta_t_sigma(jd_year(jd_ut)))
+    epoch_sigma = None
+    if sigma_seconds >= EPOCH_SIGMA_DISPLAY_SECONDS:
+        epoch_sigma = {
+            "sigmaSeconds": sigma_seconds,
+            "angleSigma": _render(grid, _q_signed(grid, sigma_seconds * ANGLE_SIGMA_DEG_PER_SECOND)),
+            "moonLongitudeSigma": _render(grid, _q_signed(grid, sigma_seconds * MOON_SIGMA_DEG_PER_SECOND)),
+        }
+
+    out = {
         "format": "caelus-canonical",
         "version": 1,
         "grid": grid,
@@ -285,6 +303,9 @@ def _build_canonical(state, grid, orbs=None, aspects=None,
         "aspects": out_aspects,
         "warnings": state["warnings"],
     }
+    if epoch_sigma is not None:
+        out["epochSigma"] = epoch_sigma
+    return out
 
 
 def canonical_chart(chart, grid="arcsec", orbs=None, aspects=None,

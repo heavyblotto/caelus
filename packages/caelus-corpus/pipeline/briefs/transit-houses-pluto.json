@@ -1,0 +1,176 @@
+{
+ "name": "transit-houses-pluto",
+ "outFile": "b2-transit-houses-pluto.json",
+ "setId": "house-b2-transit-houses-pluto",
+ "family": "transit-house",
+ "cells": [
+  {
+   "id": "transit:pluto:house:1",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "pluto",
+    "house": 1
+   },
+   "atomIds": [
+    "transitHouse:pluto:1"
+   ],
+   "title": "Pluto moving through your 1st house",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:house:2",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "pluto",
+    "house": 2
+   },
+   "atomIds": [
+    "transitHouse:pluto:2"
+   ],
+   "title": "Pluto moving through your 2nd house",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:house:3",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "pluto",
+    "house": 3
+   },
+   "atomIds": [
+    "transitHouse:pluto:3"
+   ],
+   "title": "Pluto moving through your 3rd house",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:house:4",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "pluto",
+    "house": 4
+   },
+   "atomIds": [
+    "transitHouse:pluto:4"
+   ],
+   "title": "Pluto moving through your 4th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:house:5",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "pluto",
+    "house": 5
+   },
+   "atomIds": [
+    "transitHouse:pluto:5"
+   ],
+   "title": "Pluto moving through your 5th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:house:6",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "pluto",
+    "house": 6
+   },
+   "atomIds": [
+    "transitHouse:pluto:6"
+   ],
+   "title": "Pluto moving through your 6th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:house:7",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "pluto",
+    "house": 7
+   },
+   "atomIds": [
+    "transitHouse:pluto:7"
+   ],
+   "title": "Pluto moving through your 7th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:house:8",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "pluto",
+    "house": 8
+   },
+   "atomIds": [
+    "transitHouse:pluto:8"
+   ],
+   "title": "Pluto moving through your 8th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:house:9",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "pluto",
+    "house": 9
+   },
+   "atomIds": [
+    "transitHouse:pluto:9"
+   ],
+   "title": "Pluto moving through your 9th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:house:10",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "pluto",
+    "house": 10
+   },
+   "atomIds": [
+    "transitHouse:pluto:10"
+   ],
+   "title": "Pluto moving through your 10th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:house:11",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "pluto",
+    "house": 11
+   },
+   "atomIds": [
+    "transitHouse:pluto:11"
+   ],
+   "title": "Pluto moving through your 11th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:house:12",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "pluto",
+    "house": 12
+   },
+   "atomIds": [
+    "transitHouse:pluto:12"
+   ],
+   "title": "Pluto moving through your 12th house",
+   "bindable": true
+  }
+ ]
+}

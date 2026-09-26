@@ -1,0 +1,227 @@
+[
+ {
+  "id": "synastry:sun:conjunction:sun",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "sun",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "synastry:sun~b_sun:conjunction"
+  ],
+  "text": "Your birthdays land close together, often inside the same two or three weeks, and that shared stretch of the year is doing more work in this connection than either of you notices. With your Sun on theirs, the two of you run the same basic engine. What counts as obvious to you is obvious to them. The way you go about being a person, the kind of attention you want, the sort of effort that feels worth making: none of it needs translating between you. That is the great relief of this contact. Most people you meet require some explaining. This one does not. You tend to feel recognized here before you have done anything to earn it. They read your motive correctly on the first pass, because it is their motive too. In a working pair this makes for fast agreement and very little wasted talk. In a friendship it produces a peculiar ease, the sense of having known each other longer than you have. Whatever the shape of the bond, you get taken at face value, and that is not the usual experience. The cost is contrast. You are standing in the same light, and a shared light casts a shared shadow. The things you cannot see about yourself are exactly the things they cannot see about themselves, so neither of you can correct the other. Your habits reinforce instead of balancing. If you both push too hard, nobody in the room is holding the brake. If you both retreat under pressure, the whole thing quietly stalls and neither of you names it. Then there is the room itself. Two Suns in the same place want the same kind of notice, and you may find yourselves circling the same ground: the same role, the same audience, the same subject you both consider yours. Neither of you is likely to call it rivalry, and the word would be too grand for what it is. It shows up as a mild irritation when they get credit for the thing you were about to say, or as your own surprise at how much you wanted to be the one who was right. Two people running the same engine make that heat the way two lamps in one corner make glare, and it tells you nothing about how much you like each other. What you tend to give them is confirmation. You make their way of being feel normal, and people rarely get that from anyone. What you tend to take is the same thing back, which can steady you or can close into a loop, depending on how much air the two of you let in from outside. The useful work is deliberate difference. Let them have the parts of the shared ground they care about most, and take yours somewhere they are not standing. The recognition survives all of that, and the competition stops eating it."
+ },
+ {
+  "id": "synastry:sun:sextile:sun",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "sun",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "synastry:sun~b_sun:sextile"
+  ],
+  "text": "Roughly two months of the year sit between your birthdays, and that gap turns out to be a workable distance. You are not the same kind of person, but your kinds get along. When they describe what they are trying to do with their life, it sounds sensible to you, even when it is nothing you would want for yourself. They extend you the same courtesy. Neither of you has to defend your basic setup to the other. A sextile between two Suns is an offer rather than a pull. Nothing here forces contact. What it gives is a low-cost path: it is easy to encourage them, easy to be encouraged, easy to lend a hand without it turning into a negotiation about who owes what. You will notice that introductions go well. You can put them in front of your people and expect it to be fine, and that confidence is not automatic in most pairs. What you bring them is a different angle on a familiar ambition. You are close enough in temperament that your read of their situation lands, and far enough apart that it is actually new information. They can hear something from you about their direction that they would refuse from someone more invested in the outcome. What you get back is a version of yourself in a slightly different key: recognizable, not identical, which is the useful kind of mirror. The catch is that this aspect waits to be used. It never demands anything. Two Suns at this angle can circle each other for years in the pleasant middle distance, friendly and unbothered and not much involved, and nothing will go wrong to force the issue. The connection simply stays smaller than it could be. Whatever it becomes, it becomes because one of you kept picking up the phone, proposing the trip, starting the project, asking the second question. There is also a mild vanity risk. Because agreement is cheap here, you can end up trading approval instead of information. They say your plan sounds good, you say theirs does, and neither of you has looked hard at either plan. The contact supplies no friction, so any real testing has to be chosen on purpose. Spent rather than admired, this angle gives you something plain: someone whose life you can follow with interest, who is glad when things go well for you and not competitive when they do. First impressions undersell that, because there is nothing in it to notice."
+ },
+ {
+  "id": "synastry:sun:square:sun",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "sun",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "synastry:sun~b_sun:square"
+  ],
+  "text": "You each want to be a certain kind of person, and the two versions do not sit comfortably in one room. Your Sun squares theirs, setting your core drive at an angle to their own, so the same situation calls for different behavior from each of you and both of you are certain. The disagreement is rarely about facts. It is about what a person ought to do, what counts as effort, what is worth wanting in the first place. On your side this arrives as scrutiny. In their company, choices you make without thinking suddenly seem to need reasons. Criticism is rarely what is actually happening. Their existence does it: someone is standing right there getting through life a different way, apparently fine, and that alone puts a question under your defaults. When you are secure, you find this bracing. When you are not, you find it insulting, and the argument you pick will be about something small. From your side you do the same to them, though it lands differently, because the roles are not interchangeable. You do not defer, and they notice. You hold your ground on the thing they assumed everybody agreed about, and that is where their temper or their stubbornness tends to surface. Squares are not empty conflict. This one produces motion. Pairs with a hard contact between their Suns often get things done that neither would have started alone, because the friction keeps the matter alive. You cannot let it drop. You will think about what they said three days later and revise something. Over years that adds up to a serious amount of development, and it looks nothing like harmony while it is happening. The failure mode is the loop: the same fight, rehearsed, two fixed positions and no new material. That happens when you defend the position instead of the need underneath it. Often the underlying wants are compatible and only the styles collide, and nobody checks, because checking feels like losing. Timing plays a part too. The two of you run on different rhythms, and this contact often shows up as chronic mismatched pacing: you are ready when they are not, they push just after you committed to waiting. From either chair that can look like bad faith, and it usually is not. What the square asks of you is a willingness to be sharpened rather than agreed with. If you can say plainly that you do it differently, without needing them to concede that your way is better, most of the heat becomes usable. They stop being the obstacle and become the reason you know exactly what you think."
+ },
+ {
+  "id": "synastry:sun:trine:sun",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "sun",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "synastry:sun~b_sun:trine"
+  ],
+  "text": "Some people take effort to be around. They do not. Your Sun trines theirs, which puts the two of you in temperaments that run on the same fuel, and the practical result is that you understand what they are doing before they explain it. Their reasons make sense to you. Yours make sense to them. Whole categories of misunderstanding that eat other relationships never come up. You are likely to feel more like yourself in their company, not less. Some connections ask you to file down an edge; this one leaves you intact. You can be as ambitious, as lazy, as dramatic or as private as you actually are, and they read it correctly instead of taking it personally. In a working pair this shows up as unusual trust about method: you do not need to watch how they do it. In a family bond it can be the quiet fact under a lifetime of getting along, the thing you only notice when you compare it to how everyone else in the family manages. Without meaning to, you hand them permission. Your example makes their instincts look reasonable, and people relax around that. What you get is the same, plus a certain amount of shelter. When your confidence is low, this is a person whose regard does not require you to perform. Nothing here pushes, and the absence of pushing is the whole trouble with an angle this easy. Ease turns into inertia so gradually that neither of you clocks it, and you can spend years in a thoroughly pleasant connection where nothing is raised, nothing is tested, and nothing much changes, because no discomfort ever forces the conversation. The bond coasts on how good the fit is. A milder version of the same trap is mutual flattery. Because you find each other easy to admire, you drift into agreeing about yourselves. Their high opinion of your judgment is not independent evidence, since their judgment works the way yours does. Both of you can be wrong in precisely the same direction and feel confirmed. None of that makes the ease less real. It means the depth here has to be chosen rather than delivered. Ask the harder question deliberately. Bring them the thing you would normally save for someone who challenges you, and let them handle it, because they can. Given something to actually do, this angle takes strain without much complaint. Whether it is ever given anything is the part the geometry leaves to you."
+ },
+ {
+  "id": "synastry:sun:opposition:sun",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "sun",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "synastry:sun~b_sun:opposition"
+  ],
+  "text": "Half a year separates your birthdays, and you tend to meet each other across a gap that wide in almost everything else. Your Sun opposes theirs, so the qualities you built a life around are the ones they left out of theirs, and the reverse holds just as firmly. Each of you is a fairly complete answer to a question the other never asked. The first effect is fascination. Oppositions capture attention before they invite judgment. What they are, you visibly are not, and there is something magnetic about watching a person handle life with the equipment you skipped. If you are the one who plans, they will be the one who improvises, or something with that shape. Early on this reads as refreshing. Later it reads as the reason nothing gets scheduled. The second effect is that you learn your own outline. Facing someone at this angle shows you where you actually end. Traits you took for simply how people are turn out to be your particular choice, because a working counterexample is sitting across from you. That is uncomfortable and valuable in roughly equal measure, and most of the value arrives late. What you supply, from your side, is the missing half of their picture, whether or not they asked for it. You find yourself arguing for the consideration they systematically skip, and doing it more insistently than you would with anyone else, because their omission is so plain to you. What you get in return is the same service, delivered with the same certainty, aimed at whatever you skip. The strain is real. This contact can settle into a standoff where each of you plays your side harder in reaction to the other, until you are both caricatures. You get more rigid because they are so loose; they get looser because you are so rigid. Nobody chose that, and it can take years to see the mechanism. More common than the standoff is the division of labor. The two of you split the work of being a whole person and then specialize further. It is efficient and comfortable, and it slowly costs each of you the capacity you handed over. Notice which of your own abilities have gone quiet since this person arrived. What the opposition offers, if you let it, is completion without merger. You are not required to become more like them, and nothing here needs a winner. It only asks you to grant that their answer is a real answer, arrived at honestly, by someone standing where you have never stood. Hold that, and the pull stops working like a tug of war and starts working like a pair of eyes: two views, slightly apart, which is what depth requires."
+ },
+ {
+  "id": "synastry:sun:conjunction:moon",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "moon",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "synastry:sun~b_moon:conjunction"
+  ],
+  "text": "You are, to them, weather. Your Sun sits on their Moon, which means the way you naturally shine falls directly on the part of them that feels rather than reasons. When you walk in cheerful, their mood lifts before they have decided anything about it. When you are off, they register it early and physically, often before you have said a word. You have more effect on their inner state than your behavior would predict, and neither of you switched that on. For them, being around you mixes comfort with exposure. You confirm something in their gut. You feel like a place they already know. That is why this contact turns up so often in long bonds of every kind, including the ones nobody chose, like siblings and in-laws and colleagues who ended up close. They tend to look after you unprompted, and they anticipate what you need, sometimes accurately enough to unsettle you. Your side of it is different. What you get is the experience of being felt rather than assessed. They do not require an argument for who you are; they respond to it. For someone whose identity usually has to be presented and defended, that is a considerable relief, and it can quietly become the reason you keep going back. Two problems come with the arrangement. The first is that your ordinary self-expression carries more weight here than you intend it to. A dismissive remark you would forget by lunchtime can sit in them for days, because it did not land on their opinion, it landed on their nervous system. You are not responsible for their reactions, but you are the one holding the loud instrument in this particular room, and it helps to know that. The second is the pull toward roles. This contact makes it easy for you to become the one who leads and them the one who accommodates, and it can happen without either of you agreeing to it. Their instinct is to make space for your light. Your instinct is to fill the room. That works until they have gone without something for a long time and cannot say when it started. Worth practicing, then: asking. Their needs get expressed here by adjustment rather than by statement, so one direct question does more than a hundred sensitive guesses. And on your side, letting them see you unlit, tired and unimpressive, is not a failure of the contact. It is what keeps them from relating to a performance instead of a person."
+ },
+ {
+  "id": "synastry:sun:sextile:moon",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "moon",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "synastry:sun~b_moon:sextile"
+  ],
+  "text": "There is a mild, dependable warmth in this contact that neither of you has to maintain. Your Sun sextiles their Moon, so who you are sits easily with what they need. You do not have to soften yourself to be comfortable company for them, and they do not have to brace when you arrive. Their instincts read you as safe, a judgment made long before any conscious opinion forms. In practice this looks small and adds up. They remember what you like. You notice when they have gone quiet. Practical care moves back and forth without ceremony: a lift, a meal, a message at the right hour. Nothing here is dramatic, and the drama is exactly what is missing, which is why both of you are likely to undervalue it while it is going on. What you provide is steadiness they can feel. Your ordinary way of going about things gives their moods something to sit against. Around you their reactions get less extreme, not because you manage them, but because your presence reads as reliable to a part of them that is always scanning. What you get is care that arrives without conditions attached. They are attentive to you in ways they may not extend elsewhere, and they do it without keeping score. Because it is a sextile, none of this insists on happening. The connection can stay dormant indefinitely. Plenty of pairs with this contact remain pleasant acquaintances for years, each vaguely aware the other is good company, with nothing built on the fact. The aspect supplies conditions and no momentum whatsoever. Somebody has to make the invitation, and it will usually feel like no particular occasion, which is why it often does not get made. One soft edge deserves naming. Ease of this kind can make honesty look optional. Since you rarely upset them and they rarely trouble you, a difficult subject can go unmentioned for a very long time, and you will both call that harmony. It is closer to unused capacity. This bond can carry a real conversation; it simply never demands one. What it can do, once used, is stay cheap to run. Being together asks nothing of either of you and leaves both of you slightly better off, every time, without anyone arranging it. That is a different resource from intensity, and it is the one this contact actually supplies."
+ },
+ {
+  "id": "synastry:sun:square:moon",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "moon",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "synastry:sun~b_moon:square"
+  ],
+  "text": "The friction here is not about ideas. It is about what makes a person feel safe. Your Sun squares their Moon, so the way you naturally take up space runs across the grain of their instincts. You are being ordinary and they are getting unsettled, which is hard for either of you to argue with, since nobody is doing anything on purpose. From their side, your confidence can read as pressure and your directness as disregard. When you are most yourself, brightest and most certain, they are most likely to go quiet or tense up. They may not be able to explain it, because the reaction is not an opinion. It arrives as a mood, and moods do not present arguments. From your side, their reactions look like weather that keeps interrupting you. Just as you get momentum, something is wrong, you did not see it coming, and it does not seem proportionate. Two errors are common here. The first is pushing harder, on the theory that more warmth or more clarity will fix it, which usually makes it worse. The second is treating their sensitivity as a tactic, which it is not, though it can certainly be used as one. Underneath, this is a mismatch between what you need in order to shine and what they need in order to settle. Both requirements are legitimate. Both are old, formed long before either of you turned up in the other's life. Living rooms, holidays, and shared schedules are where it shows: your ideal evening leaves them depleted, their idea of comfort leaves you restless, and the negotiation gets treated as a question of character when it is only a question of logistics. What the square gives, and it does give, is attention to the thing most pairs skip. You cannot be lazy about the difference between being liked and being understood. This contact forces both of you to say out loud what you actually need, because guessing produces nothing but more friction. Pairs who do that work end up unusually clear with each other, and the clarity holds under strain. There is real traction as well. Their instinct catches what your certainty misses, and your momentum moves them out of positions their comfort would have kept them in for years. Neither of you asked for that service. It happens regardless. The workable version of this contact is not one where the friction disappears. It is one where you both stop reading the friction as evidence about the other person's character, and start treating it as information about tempo, timing, and what each of you requires to be all right in a room."
+ },
+ {
+  "id": "synastry:sun:trine:moon",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "moon",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "synastry:sun~b_moon:trine"
+  ],
+  "text": "Some people have to be studied before you can be good to them. Not this one. Your Sun trines their Moon, and the effect is that your natural way of being lands as reassurance without any adjustment on your part. You do not have to be careful. What you are is already close enough to what they need. They tend to trust you early and stay trusting, and the reason is more physical than reasoned. You do not put their guard up. Around you they eat better, sleep better, say more. In any shared household or shared office, this is the person who relaxes when you show up and gets quietly worse when you have been away too long, whether or not either of you has words for it. Your return is being received without effort. They find your ambitions sympathetic instead of threatening, your moods tolerable instead of expensive, and they extend the benefit of the doubt automatically. If you have spent time with people who required constant management, you will notice the difference here as a lightness, and you may mistake it for the connection being unserious. It is not. It is just cheap to run. The risk with any easy contact is that it gets spent without being fed. Because they accommodate you readily, you can go a long time without asking what they want, and they may not volunteer it, since nothing is wrong. Years of that produce a slow, unglamorous kind of neglect that neither person can point to a cause for. Nothing broke. It simply never got attended to. A second, smaller thing: this contact encourages both of you toward comfort as a default. They make your life pleasant, you make theirs feel secure, and the two of you can settle into a routine well below what either is capable of. No conflict shows up to interrupt it. What deepens this is using it deliberately. Bring them the thing you are actually worried about, not the edited version. They can take it, and the contact means it will not cost you standing in their eyes. Give them the same access in return, and ask directly rather than waiting for a signal, since the signals here are subtle by nature. The ease is a starting position, not an achievement."
+ },
+ {
+  "id": "synastry:sun:opposition:moon",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "moon",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "synastry:sun~b_moon:opposition"
+  ],
+  "text": "You stand where they cannot see themselves. Your Sun opposes their Moon, putting your outward, deliberate self directly across from their private, reactive one, and the two keep meeting at full distance. What you do openly, they do inwardly. What you decide, they feel. Nearly every exchange between you crosses that line. Each of you feels the pull differently. To them you often look like the answer: the person who acts on what they only sense, who says the thing they have been carrying wordlessly. To you they often look like ballast, the one who registers the cost of your plans before the plans have run. Both readings are accurate and both are partial, and the trouble usually starts when either of you assumes the other's response was chosen. You may notice that your straightforwardness has an outsized effect on them. A decision you consider settled and unemotional can arrive in them as something to absorb, and absorbing it takes longer than deciding it did. That lag is where most of the difficulty lives. You have moved on, they are still processing, you read the delay as resistance, they read your speed as indifference. What you get from this contact is a running readout of everything your certainty leaves out. They will register the discomfort in a room you thought was fine, the strain in a schedule you thought was manageable, the thing that has been off for a month. You can dismiss that or you can use it, and both are common. In the other direction you supply shape. Your clarity gives their feelings something to organize around, and in a household or a family that can be genuinely stabilizing. It can also tip into them living through your direction rather than their own, especially if accommodating is already their habit. The polarity hardens if nobody watches it. You become the one always out front, they become the one always managing the aftermath, and each role deepens because the other keeps holding the opposite end. The arrangement was never agreed to. It accumulated. Oppositions do their best work when the distance is respected rather than closed. You do not need to become more sensitive, and they do not need to become more decisive, for this to function. What helps is treating their reaction as information about the situation rather than a verdict on you, and saying your intentions out loud early enough that they have time to catch up. The gap between you is the whole mechanism. It is also why each of you sees something the other genuinely cannot."
+ },
+ {
+  "id": "synastry:sun:conjunction:mercury",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "mercury",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "synastry:sun~b_mercury:conjunction"
+  ],
+  "text": "They talk about you, and they talk to you, more than they do with most people, and it is not entirely a choice. Your Sun sits on their Mercury, so their thinking and speaking apparatus points straight at the thing you most fundamentally are. You are an interesting subject to them. Your decisions get analyzed, your phrasing gets remembered, your reasoning comes back to you with the edges tidied. For you this is unusual and can be very good. Most people have to describe themselves and hope it landed. Here someone else does the describing, often better than you would. They can put your intentions into words, explain you to a third party, and hand you back a version of your own thinking that is clearer than the one you had. If you have work that needs an advocate, an editor, or simply a person who understands what you meant, this contact supplies one. It also puts a certain power in their sentences. Because their words are aimed at your identity rather than your opinions, an offhand summary of you sticks. A joke about how you always do a particular thing can become a fact about you that you carry for a decade. They are unlikely to know they did that. Commentary feels light from the inside and lands heavy on your side of it. The reverse effect is that you can crowd their thinking. Your presence gives their mind a subject, and a mind under strong influence stops wandering. They may find themselves arguing your position in rooms you are not in, or noticing that they have not had an idea lately that was not about your situation. If they think by talking, you will hear this happening. If not, it goes on quietly. The texture of the contact is a great deal of conversation. Long ones, circular ones, ones that start as logistics and end somewhere else entirely. You will explain yourself here more thoroughly than you do anywhere. That is worth having, and it carries a cost: not everything about a person survives being put into words, and you may start trimming the parts of your life that are hard to narrate, because the narration is so available. What makes this age well is a bit of deliberate silence. Let some of what you are stay undescribed. Ask what they think about, not only what they think about you. The contact is built for understanding, and understanding is more than accurate description."
+ },
+ {
+  "id": "synastry:sun:sextile:mercury",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "mercury",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "synastry:sun~b_mercury:sextile"
+  ],
+  "text": "Talk between the two of you takes care of itself. Your Sun sextiles their Mercury, so their way of thinking has easy access to what you are about. They pick up your point quickly, ask the question that moves it forward, and rarely misread your tone. You do not have to over-explain yourself to be understood by them, and that alone changes how much you are willing to say. What they do for you is a kind of light editing. When you are working something out, they can offer the word you were reaching for or the distinction you were missing, and they manage it without taking over. Their input feels like help rather than correction, which is a fine line and mostly a matter of angle. Given a plan of yours, they find the useful gap in it and mention it in a way you can actually hear. What you do for them is give their thinking a direction to run in. Their mind is quick and, left alone, not always pointed at anything. Your purposes give it something worth working on, and they often find that their better ideas arrive in your vicinity. That is not flattery on their part. It is what happens when a mind with range meets a clear aim. Sextiles do not force themselves. This contact will not create the friendship, the collaboration, or the habit of talking. It only makes those things easy once they exist. Two people with this aspect can share a workplace for years, exchange nothing but pleasantries, and never find out. The whole thing sits there available and unclaimed until somebody starts an actual conversation. One limit is worth knowing. Because you understand each other so readily, you may skip the slow explanation a difficult subject requires. Quick comprehension is not the same as deep comprehension, and this contact is very good at the first. When something genuinely matters, the fluency can carry you past the point where you should have stopped and checked. Used properly, this is the person you call to think out loud with when a decision has gone foggy. Not the one who tells you what to do. The one who asks the three questions that make the answer obvious, and then lets you have it as your own."
+ },
+ {
+  "id": "synastry:sun:square:mercury",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "mercury",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "synastry:sun~b_mercury:square"
+  ],
+  "text": "Their way of framing things keeps cutting across your sense of yourself. Your Sun squares their Mercury, so the thinking they do and the person you are meet at an awkward angle. They analyze; you feel analyzed. They raise a point; you hear a challenge to your judgment. Often they meant neither, and sometimes they meant exactly that, and telling the two apart is most of the work in this contact. The mechanism is simple enough. Their mind approaches a subject from a direction that is not yours, and their habit is to say so. To them that is just talking. To you it arrives at the level where you keep your identity, so a technical objection about a plan can feel like a claim about your competence. You will notice you get defensive here faster than you do with people whose objections are actually harsher. Arguing with you costs them more than it should. You take positions personally, so a discussion that was going to be about the merits turns into a question of whether you are being doubted. They may find themselves choosing words with unusual care around you, or dropping a point they still think is right. Some go quiet. Some get sharper, which does not help. A tempo problem sits underneath as well. Your certainty tends to arrive whole. Their thinking arrives in pieces and gets revised as it goes. When they change their view mid-conversation, you can read it as unreliability. When you state a conclusion, they can read it as a refusal to think. Neither of you is wrong about what you saw. Precision is what you get out of the friction. This person will not let a vague statement of yours pass, and uncomfortable as that is, anything of yours that survives a conversation with them is in decent shape. If you are building an argument, a case, or a piece of work, their objections are the cheapest test you will ever get. The trick is separating the objection from the tone it came wrapped in. One small habit unlocks the contact. When something they say lands badly, ask what they actually meant before answering what you heard. Their phrasing is not the message; they are quick and not always careful, and the sting is usually incidental. On their side, they learn that with you it pays to say the intent before the critique. Handled that way, the friction becomes a genuine editorial relationship. Handled badly, it turns into a decade of small corrections and small retaliations, each of you convinced the other started it."
+ },
+ {
+  "id": "synastry:sun:trine:mercury",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "mercury",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "synastry:sun~b_mercury:trine"
+  ],
+  "text": "Explaining yourself to them takes about half the effort it takes with anyone else. Your Sun trines their Mercury, and the two functions run on the same current: their thinking moves in the direction your character already points. They finish your sentence and get it right. They summarize your position back to you and you find nothing to correct. The steady benefit is that you get articulated. Whatever you are, they can put language to it, accurately and without much strain. In practical terms that makes them useful to have nearby when something of yours needs to be pitched, written, taught, or explained to somebody unsympathetic. They are not translating you. They are thinking along the same line from a slightly different seat. You pay them back in focus. Their mind moves quickly and can spread thin. Your presence gives it coherence, so around you their scattered interests organize themselves into a subject. People with this contact often notice that their clearest thinking of the year happened in a conversation with the other one. Every trine has the same weakness, and here it is agreement. You understand each other so smoothly that neither of you tests the other's reasoning. They will follow your logic to the end without stopping, because it makes sense at every step, and it makes sense at every step partly because it is the kind of sense their mind is built for. Two people can be confidently and identically wrong this way, and never notice until the outside world says so. A related habit deserves watching. Because they express your position better than you do, you can start outsourcing it. You let them explain, let them write the message, let them do the talking in the meeting. That is efficient right up to the day you need to speak for yourself and find the muscle has gone soft. Keeping this honest means occasionally taking the other side on purpose, and running the important decisions past somebody who thinks nothing like either of you. Otherwise what you have here is comfortable and worth using: a person who understands what you are saying, and, more unusually, what you were trying to say."
+ },
+ {
+  "id": "synastry:sun:opposition:mercury",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "mercury",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "synastry:sun~b_mercury:opposition"
+  ],
+  "text": "Whatever position you take, they will find the other one. Your Sun opposes their Mercury, so their thinking sits directly across from your identity and tends to arrive as counterweight. It is not contrariness exactly. Their mind genuinely occupies the ground you are not standing on, and from where they sit the fastest route to a full picture is to supply the part you left out. Conversation with them can feel like debate when nobody intended one. You state something you consider settled and they produce the exception. You explain your reasoning and they restate it in terms you would not have chosen, then ask whether that is what you meant. On a good day this is the most useful thing anybody does for you. On a bad day it is exhausting, and you will want, briefly, to be agreed with by somebody who understands you. What you learn here is your own shape. Being faced consistently with the alternative view teaches you which of your positions you actually hold and which ones you inherited and never examined. Very few people will do that for you, because most of them either agree with you or dislike you. This one does neither. They are interested, and they are across the table. From their side, you are the fixed object their thinking orbits. Your certainty gives them something solid to push against, and pushing is how they think. If you take the pushing as hostility they lose the use of it, and the conversation flattens into politeness, which serves neither of you. The failure mode has two versions. In the first, you stop bringing them anything unfinished, because you cannot face the cross-examination, and the connection loses its best feature. In the second, every exchange becomes a contest of framing, where the point is no longer the subject but who gets to define it. Both are avoidable and both are common. Oppositions are made of distance, and distance is what makes perspective possible. This person sees your intentions from the outside, which is the one angle unavailable to you. Their account of your motives will sometimes be wrong and sometimes be more accurate than your own, and you will not always be able to tell which in the moment. Sitting with that, rather than settling it immediately, is where the value of this contact actually lives."
+ }
+]

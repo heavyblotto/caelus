@@ -1,0 +1,176 @@
+{
+ "name": "composite-true-node",
+ "outFile": "b3-composite-true-node.json",
+ "setId": "house-b3-composite-true-node",
+ "family": "composite-placement",
+ "cells": [
+  {
+   "id": "composite:true_node:sign:aries",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "true_node",
+    "sign": "Aries"
+   },
+   "atomIds": [
+    "composite:true_node"
+   ],
+   "title": "Composite North Node in Aries",
+   "bindable": true
+  },
+  {
+   "id": "composite:true_node:sign:taurus",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "true_node",
+    "sign": "Taurus"
+   },
+   "atomIds": [
+    "composite:true_node"
+   ],
+   "title": "Composite North Node in Taurus",
+   "bindable": true
+  },
+  {
+   "id": "composite:true_node:sign:gemini",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "true_node",
+    "sign": "Gemini"
+   },
+   "atomIds": [
+    "composite:true_node"
+   ],
+   "title": "Composite North Node in Gemini",
+   "bindable": true
+  },
+  {
+   "id": "composite:true_node:sign:cancer",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "true_node",
+    "sign": "Cancer"
+   },
+   "atomIds": [
+    "composite:true_node"
+   ],
+   "title": "Composite North Node in Cancer",
+   "bindable": true
+  },
+  {
+   "id": "composite:true_node:sign:leo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "true_node",
+    "sign": "Leo"
+   },
+   "atomIds": [
+    "composite:true_node"
+   ],
+   "title": "Composite North Node in Leo",
+   "bindable": true
+  },
+  {
+   "id": "composite:true_node:sign:virgo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "true_node",
+    "sign": "Virgo"
+   },
+   "atomIds": [
+    "composite:true_node"
+   ],
+   "title": "Composite North Node in Virgo",
+   "bindable": true
+  },
+  {
+   "id": "composite:true_node:sign:libra",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "true_node",
+    "sign": "Libra"
+   },
+   "atomIds": [
+    "composite:true_node"
+   ],
+   "title": "Composite North Node in Libra",
+   "bindable": true
+  },
+  {
+   "id": "composite:true_node:sign:scorpio",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "true_node",
+    "sign": "Scorpio"
+   },
+   "atomIds": [
+    "composite:true_node"
+   ],
+   "title": "Composite North Node in Scorpio",
+   "bindable": true
+  },
+  {
+   "id": "composite:true_node:sign:sagittarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "true_node",
+    "sign": "Sagittarius"
+   },
+   "atomIds": [
+    "composite:true_node"
+   ],
+   "title": "Composite North Node in Sagittarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:true_node:sign:capricorn",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "true_node",
+    "sign": "Capricorn"
+   },
+   "atomIds": [
+    "composite:true_node"
+   ],
+   "title": "Composite North Node in Capricorn",
+   "bindable": true
+  },
+  {
+   "id": "composite:true_node:sign:aquarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "true_node",
+    "sign": "Aquarius"
+   },
+   "atomIds": [
+    "composite:true_node"
+   ],
+   "title": "Composite North Node in Aquarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:true_node:sign:pisces",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "true_node",
+    "sign": "Pisces"
+   },
+   "atomIds": [
+    "composite:true_node"
+   ],
+   "title": "Composite North Node in Pisces",
+   "bindable": true
+  }
+ ]
+}

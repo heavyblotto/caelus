@@ -16,6 +16,8 @@ interface FetchSpec {
   stripGutenberg?: boolean;
   stripArchive?: boolean;
   sacredTextsIndex?: string;
+  /** Consecutive HTML parts: pattern uses %d or %02d. */
+  htmlSequence?: { pattern: string; from: number; to: number };
 }
 
 interface SourceEntry {
@@ -133,6 +135,24 @@ async function fetchText(url: string): Promise<string> {
   return res.text();
 }
 
+async function fetchHtmlSequence(pattern: string, from: number, to: number): Promise<string> {
+  const parts: string[] = [];
+  for (let n = from; n <= to; n++) {
+    const url = pattern.includes("%02d")
+      ? pattern.replace("%02d", String(n).padStart(2, "0"))
+      : pattern.replace("%d", String(n));
+    process.stdout.write(`${n} `);
+    const html = await fetchText(url);
+    parts.push(stripHtml(html));
+  }
+  return parts.join("\n\n---\n\n");
+}
+
+function looksLikeDjvuScan(text: string): boolean {
+  const head = text.slice(0, 800);
+  return /Digitized by/i.test(head) || (/  {2,}[A-Za-z]/.test(head.slice(0, 200)) && head.includes("  "));
+}
+
 async function fetchSacredTextsCorpus(indexUrl: string): Promise<string> {
   const indexHtml = await fetchText(indexUrl);
   const base = indexUrl.replace(/[^/]+$/, "");
@@ -161,19 +181,30 @@ async function main(): Promise<void> {
 
     if (fs.existsSync(outPath) && fs.statSync(outPath).size > 5000) {
       const existing = fs.readFileSync(outPath, "utf8");
-      if (!validateContent(existing, requireAstrology)) {
+      const wantHtml = !!entry.fetch.htmlSequence;
+      const alreadyHtml = /Rosicrucian Fellowship|moseng\d+/i.test(existing.slice(0, 8000));
+      const skip = !validateContent(existing, requireAstrology)
+        && !(wantHtml && !alreadyHtml);
+      if (skip) {
         console.log(`skip ${entry.id} (exists, valid)`);
         ok++;
         continue;
       }
-      console.log(`re-fetch ${entry.id} (vendored copy is corrupt)`);
+      if (wantHtml && !alreadyHtml) {
+        console.log(`re-fetch ${entry.id} (replacing scan with HTML)`);
+      } else {
+        console.log(`re-fetch ${entry.id} (vendored copy is corrupt)`);
+      }
     }
 
     process.stdout.write(`fetch ${entry.id}... `);
     let lastErr: Error | undefined;
     try {
       let text: string;
-      if (entry.fetch.sacredTextsIndex) {
+      if (entry.fetch.htmlSequence) {
+        const seq = entry.fetch.htmlSequence;
+        text = await fetchHtmlSequence(seq.pattern, seq.from, seq.to);
+      } else if (entry.fetch.sacredTextsIndex) {
         text = await fetchSacredTextsCorpus(entry.fetch.sacredTextsIndex);
       } else {
         const urls = entry.fetch.urls ?? (entry.fetch.url ? [entry.fetch.url] : []);

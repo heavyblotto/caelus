@@ -1,0 +1,146 @@
+[
+ {
+  "id": "timelord:dasha:antar:ketu:ketu",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "ketu",
+   "under": "ketu"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "A chapter opens by repeating itself. In Vedic timing each major period, a mahadasha, breaks into sub-periods called antardashas, one for every one of the nine lords in turn, and the first always belongs to the lord of the chapter. So Ketu, the Moon's south node, begins its seven years with a stretch of itself, the theme at full strength with nothing mixed into it. Interest tends to drain early. Plans that looked settled a year ago stop holding your attention, and the change is rarely loud. You simply stop feeding them. Some people mark this opening with a departure: leaving a role, closing a long involvement, moving somewhere with less noise in it. Others alter nothing on the surface and feel the whole shift inside. Attention turns backward and inward at the same time. Old work resurfaces, along with old questions, familiar faces, and practices you set down years ago. None of it arrives to be judged. It arrives to be finished or let go. Detachment is the risk here as much as the gift. The same cooling that frees you from what you had outgrown can cool you toward people who still need you, and that difference is worth checking honestly rather than assuming. This opening stretch is for emptying, not for achieving. Given room, it clears floor space. The rest of the chapter works better because of what you put down now."
+ },
+ {
+  "id": "timelord:dasha:antar:ketu:venus",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "venus",
+   "under": "ketu"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "Something soft moves through a spare season. Ketu is the Moon's south node, the lord of release and interiority, and its seven-year chapter now gives a share of itself to Venus. A share like that is called an antardasha, a sub-period inside the major one, and this is the warmest room in the chapter. Comfort becomes available again, on unusual terms. You may want less and enjoy it more: one good meal, one piece of music, a few hours with someone whose company asks nothing of you. Taste tends to simplify rather than widen. People often clear out possessions in this stretch and keep the three they actually love. Affection takes on a particular quality too. It runs real but lightly held. You can care for someone without needing to own how it turns out, which some partners experience as generous and others read as distance. Old connections may circle back now, sometimes to finish something, sometimes just to be kind about it. Partings that come here tend to be quiet rather than bitter. Two risks deserve plain naming, as tendencies and not as forecasts. Pleasure can be used as a way of not feeling the chapter, and vagueness can be left to do the work of an honest conversation. Beauty is a genuine road through this stretch. Art, music, gardens, and devotion carry more weight now than acquiring does, and what you make or tend here tends to outlast the season that produced it."
+ },
+ {
+  "id": "timelord:dasha:antar:ketu:sun",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "sun",
+   "under": "ketu"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "A chapter built on stepping back belongs, for a stretch, to the planet of standing out. Vedic timing splits every major period into sub-periods called antardashas, and the Sun takes one of them inside the years ruled by Ketu, the Moon's south node and the lord of release. The pairing is honest about a strange feeling: being good at something and uninterested in the credit. You may do strong work now and find the applause oddly thin, or find that you no longer angle for it. Some people are promoted in this stretch and feel very little. Others walk away from a visible role and feel a relief they did not expect. Figures of authority often feature. Elders, bosses, mentors, and the institutions you once measured yourself against can move offstage, change shape, or simply matter less. What that leaves is the question this sub-period keeps asking: who are you with no title attached and nobody watching? Vitality wants attention as well. The Sun governs energy in this tradition, and a releasing chapter can leave you running lower than usual, so rest counts as upkeep rather than indulgence. The trap is reading quiet as decline. A season out of sight is not the end of your standing. What tends to grow instead is a self that does not need an audience to be sure of itself, which is sturdier than the version that did."
+ },
+ {
+  "id": "timelord:dasha:antar:ketu:moon",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "moon",
+   "under": "ketu"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "Feeling rises through a period that has been running dry. The Moon holds an antardasha, one of the nine turns the larger chapter divides into, inside the seven years of Ketu, the Moon's own south node and the lord of what falls away. The two are close relatives, and the mixture is tender. Memory gets loud. Early rooms, old neighborhoods, people from the beginning of your life, and the smell of one particular season can arrive unannounced and outweigh the present for a while. Some of that may be grief doing its housekeeping. Some of it is affection with nowhere left to go. Home may change, or may simply feel different from inside. Many people want fewer rooms, fewer guests, and more silence in the evenings. A parent or early caretaker tends to enter the story now, through closeness, through the care you give or receive, or through seeing more clearly what you inherited from them. Your inner weather runs changeable and thin-skinned. You register other people quickly and tire of them quickly too, which makes solitude look appealing and makes it easy to take too much of it. Sleep and dreams get busy in this stretch. Give them the attention you would give a letter. None of this is a verdict on your happiness. Moods here move like tides and move on. What can grow is a quieter kind of belonging, one that leans less on where you live and more on being at ease in your own company."
+ },
+ {
+  "id": "timelord:dasha:antar:ketu:mars",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "mars",
+   "under": "ketu"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "Something in you wants to move again. Mars takes a turn as sub-lord inside the chapter of Ketu, the Moon's south node, a stretch of seven years given to release and the unfinished past. A turn like this is called an antardasha, the shorter run one lord takes inside the long chapter, and it carries more friction than the stretches on either side. Drive comes back, and the chapter gives it nowhere obvious to go. That gap usually shows up as impatience: with slow people, with your own drift, with a situation you have privately already left. Frustration is the plain headline here, and it is generally pointing at something true. Aimed well, the heat is useful. This is a strong stretch for a decisive cut, whether that is a resignation, a clear-out, a conversation you have circled for months, or physical training taken up because your body is tired of waiting. Ketu favors endings and Mars can deliver them cleanly. Aimed badly, it burns what you might have wanted to keep. Quarrels started now can outlive whatever caused them, and haste is the standing temptation. Sharp words land harder on someone who can already tell you have one foot out the door. Your body carries the strain, so pace matters more than it usually does, and working through exhaustion is a poor trade in this combination. What remains afterward tends to be a shorter list and a steadier nerve. You learn what you would still fight for, which is worth knowing before the chapter closes."
+ },
+ {
+  "id": "timelord:dasha:antar:ketu:rahu",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "rahu",
+   "under": "ketu"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "The two nodes trade places for a while. Rahu and Ketu are the Moon's north and south nodes, the points where eclipses form, and Vedic timing gives each of them periods of their own. Here Rahu, the hungry one, holds an antardasha, a period of its own, inside Ketu's chapter of release. Appetite wakes up in a season built for letting go. The pull runs two ways, and this is a tendency rather than a fate. Something unfamiliar starts to look interesting: a place, a field, a crowd, a technology, a version of you with none of your history attached. Meanwhile the chapter keeps thinning your attachments, so a new enthusiasm can burn bright and then go quietly out. Restlessness is common in this stretch, and so is the urge to make a large move for reasons you cannot fully explain. Some of those moves are the seed of whatever comes next. Others are the last flare of an appetite that has already done its job. Time usually tells them apart, and slowing a decision by a few weeks costs almost nothing. Unusual company can turn up too, along with chances that do not arrive by your normal routes. Taken as a scouting trip rather than a settlement, this works in your favor. You get a look at what may want you next while you are still light enough to consider it honestly."
+ },
+ {
+  "id": "timelord:dasha:antar:ketu:jupiter",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "jupiter",
+   "under": "ketu"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "These two lords understand each other. The chapter belongs to Ketu, the Moon's south node, the lord the tradition ties to letting go, and Jupiter now takes a stretch of it as antardasha, the lesser period one lord holds inside the greater. Both lean toward meaning rather than accumulation, and their combination makes one of the more settled stretches in the chapter. Questions of belief come forward. Study, philosophy, and practice tend to matter more than career moves now, and many people take up something contemplative in this run or return to a tradition they walked away from long ago. Teachers show up when you are ready to use one, and they may hold no official position at all. Understanding often arrives about what the chapter has been removing. Departures that made no sense a year ago begin to fit a shape. That is not a consolation prize. It is the particular work of this pairing: making sense in place of making progress. Giving gets easier too. You may hand things on, teach without charging for it, or support someone without keeping score, and none of it registers as sacrifice. The risk is retreat dressed up as wisdom. Belief can be used to duck an ordinary problem, and detachment can become a reason not to show up for people who are counting on you. Watch for that gently. What grows here is a perspective nobody had to talk you into, and it tends to hold long after the chapter ends."
+ },
+ {
+  "id": "timelord:dasha:antar:ketu:saturn",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "saturn",
+   "under": "ketu"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "Saturn and Ketu keep similar hours. Saturn holds a sub-period, called an antardasha, inside the chapter belonging to Ketu, the Moon's south node, whose seven years tilt toward release and interiority. Both take life seriously, and this is the plainest weather the chapter offers. Things tend to wind down here rather than break. A long commitment may reach its natural end, an obligation you have carried for years can come off the list, or a structure you built without much joy gets quietly dismantled. The endings are often procedural: forms, a final month, a handover, a key returned. Work turns solitary. You may find yourself doing the necessary and unglamorous part alone, with little company and less applause, and doing it well regardless. Discipline is a real ally in this stretch, because the chapter supplies almost no momentum of its own. Tiredness deserves naming. The combination can feel heavy and older than your years, with little appetite for company, and that is the season rather than your permanent setting. Treating rest as part of the job goes further here than pushing does. You also notice how long things take, and how much time has already gone by. That awareness sharpens your choices instead of souring them. Whatever is still standing when the run closes tends to be small and honestly held. There is no mystery about why it stayed, since you watched the rest go."
+ },
+ {
+  "id": "timelord:dasha:antar:ketu:mercury",
+  "family": "timelord-dasha",
+  "when": {
+   "kind": "timelord",
+   "system": "dasha",
+   "level": "antar",
+   "lord": "mercury",
+   "under": "ketu"
+  },
+  "atomIds": [
+   "dasha:antar:",
+   "dasha:maha:"
+  ],
+  "text": "The mind gets the last word in this chapter. Mercury's antardasha, its turn at running a stretch of the major period, is the closing run of Ketu's seven years, and Ketu, the Moon's south node, has spent them loosening your grip. So this run tends to go to sorting rather than starting. Papers, files, accounts, and unfinished drafts surface now. So do conversations that close something: a message finally answered, an explanation offered years late, a version of events corrected for the record. Language does the tidying the chapter has been asking for all along. Thinking turns fine-grained. Subjects that reward patience and pattern rather than speed can absorb you completely, and some people read more deeply here than at any other point in the chapter. Routine paperwork gets slippery in the same stretch. Details you would normally catch can slide by while your attention sits somewhere further down, which is worth a second pass rather than worry. Nervous restlessness is common too. The mind circles the past, drafting arguments that have no audience left. Writing the circling thought down, or saying it once to a friend, ends the loop faster than another lap around it. Something long is finishing and something else is close behind it. What you carry forward from these years fits in a small bag, and this is the stretch in which you decide what goes in."
+ }
+]

@@ -1,0 +1,142 @@
+[
+ {
+  "id": "transit:saturn:conjunction:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "saturn",
+   "natal": "pluto",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:saturn~natal_pluto:conjunction"
+  ],
+  "text": "Transiting Saturn has caught up with your natal Pluto, and the months around this meeting ask for consolidation. Pluto in your chart marks where your deepest drive lives: the will to survive, to matter, to keep hold of your own life. Saturn is the tester. When it arrives here, it presses on that will and asks what it is actually built on. Anything hollow in the way you hold control, a role kept out of fear, an alliance kept for leverage, a habit of gripping, starts to feel heavier than it is worth. This is slow work. A Saturn pass colors months, and with retrogrades counted it can visit this degree three times before it is done. The first pass, while the conjunction is still applying, tends to bring the pressure into focus: something you have managed by force stops responding to force. Around the exact pass the theme peaks, and you may feel squeezed between what you want to keep and what it costs to keep it. If Saturn then backs over the degree in retrograde, the same question returns for a second look, usually quieter and more honest. The final pass tends to settle it: you let the structure go, or you rebuild it on ground that holds. The feeling of this transit is often one of reduction. Resources, energy, and patience can run lean, and ambition turns serious. What survives the squeeze is what you actually need, and there is real power in finding that out. The risk is meeting the pressure with obsession: doubling down, controlling harder, treating every setback as an enemy. That tends to make the months grind. The useful posture is closer to an engineer's: find the load-bearing parts of your life and strengthen them, and let the decorative parts fall away without a fight. Work is a common arena, since Saturn loves career questions, but the same stripping-down can visit a marriage, a family role, or a private belief about what keeps you safe. Because this conjunction comes around only about once in twenty-nine years, it tends to mark a chapter you can name decades later: the year the old grip broke and a sturdier one formed. As the conjunction separates, the heaviness lifts gradually rather than all at once. You come out of it with less to carry and more that is truly yours. The growth here is quiet. You learn the difference between power that depends on holding on and power that survives letting go, and you keep the second kind."
+ },
+ {
+  "id": "transit:saturn:sextile:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "saturn",
+   "natal": "pluto",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:saturn~natal_pluto:sextile"
+  ],
+  "text": "An opening, not an upheaval: that is the tone when transiting Saturn forms a sextile to your natal Pluto. For a few months the digging gets easier, and material that normally resists daylight consents to be worked. Pluto marks the place in your chart where your intensity and your buried drives live. Saturn brings patience, method, and the willingness to work. While the two are in this easy contact, the heavy lifting of inner change gets a set of stairs instead of a cliff. The catch with any sextile is that it does not force anything. If you ignore these months, they pass as ordinary time. If you use them, you can quietly restructure something that has run you from below: an old resentment, a pattern of control, a debt, a dependency, a long-avoided conversation about power in a relationship. Progress comes in increments, and the increments hold. Saturn's tempo sets the frame. The influence colors a few months, and since Saturn can retrograde back over the aspect, you may get as many as three passes across an extended stretch. The applying phase often shows you the door: a chance to take on a serious project, a therapy or training that goes deeper than usual, a role that asks for real discipline. The exact pass is the natural time to commit. If retrograde passes follow, they are review sessions, letting you refine what the first pass started, and the last contact tends to lock the gain in place. In outer life this transit favors work that requires both authority and depth: managing resources, reorganizing something old and tangled, taking responsibility for a situation others avoid. You may find people in power easier to deal with than usual, not because they soften but because you read the structure clearly and ask for the right things. In inner life it favors endurance over catharsis. Nothing needs to explode; things need to be worked, steadily, until they move. Saturn's harder angles to your Pluto keep a roughly seven-year beat, and this sextile is the easy interval between them in a long cycle of building and testing. The gains you bank now, habits of self-command, structures that channel your intensity instead of bottling it, become the ground the harder beats of that cycle stand on. Growth under this transit rarely announces itself. You notice it afterward, when something that used to control you sits in your hand as a tool."
+ },
+ {
+  "id": "transit:saturn:square:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "saturn",
+   "natal": "pluto",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:saturn~natal_pluto:square"
+  ],
+  "text": "Saturn squaring your natal Pluto is a collision between the life you have built and the forces underneath it, and no part of the collision is up for negotiation. For a few months, and often across up to three exact passes as Saturn retrogrades, you can feel blocked precisely where you are most determined. Doors that should open stay shut. Authority, in the form of a boss, an institution, a rule, or plain circumstance, seems to stand exactly where you want to push. Pluto in your chart is your deep reserve of will, the part of you that does not accept defeat. Saturn's square puts a wall in front of that will, and the friction between them is the transit. While the square is applying, the pressure usually builds as a mood before it becomes an event: a growing sense that something has to give, an urge to force outcomes, a suspicion that others are working against you. Around the exact pass the standoff tends to surface in concrete form, a power struggle at work, a fight over money or territory, a limit you cannot argue with. Retrograde re-hits replay the confrontation with better information, and the final pass usually decides what stands. The temptation is to meet the wall with everything you have. Sometimes persistence is exactly right. But this square has a way of punishing brute force and rewarding strategy, and part of its teaching is telling those apart. Ask what you are actually fighting for. Some of the ambition under strain here is truly yours and worth the grind. Some of it is old compulsion, a need to win that costs more than winning returns. The wall breaks the second kind, and painful as that is, it leaves you lighter. Watch your methods during these months. Under this kind of pressure, corners you would never normally cut can start to look reasonable, and ruthlessness can dress up as realism. The lasting wins from this period are the clean ones. Squares from Saturn come in a waxing and waning rhythm, roughly every seven years, so this test is not a stranger; it is a recurring audit of how you use power. Handled well, it leaves you with fewer battles and stronger ground: ambitions pruned to the ones that matter, methods you can defend, and a will that no longer needs an enemy to feel real. When the square separates and the pressure eases, what you kept is what you can actually hold."
+ },
+ {
+  "id": "transit:saturn:trine:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "saturn",
+   "natal": "pluto",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:saturn~natal_pluto:trine"
+  ],
+  "text": "There are periods when depth and discipline pull in the same direction, and transiting Saturn trine your natal Pluto is one of them. The trine eases what these two planets do together. Saturn contributes structure, patience, and the long view; your Pluto contributes intensity and the power to transform what it touches. In easy aspect, they make you unusually capable of sustained, serious change: the kind that takes months and actually lasts. Nothing about this transit is loud. You are more likely to notice a steadiness, an appetite for hard work, and a tolerance for tasks other people find grim. Clearing an estate, restructuring a business, ending a long habit, digging through old family material, renovating something down to the studs: work with this shape goes well now, in the literal and the inner sense. Your concentration deepens, and you can face facts about yourself without flinching, because for once the facing feels productive rather than punishing. The transit shades several months, and Saturn's retrogrades can bring the trine exact up to three times. The applying phase tends to hand you the project, sometimes as an opportunity, sometimes as a task nobody else will take. Effort converts most cleanly into result around the exact pass. Return passes are consolidation: the second look that catches what the first missed, the final contact that leaves the new arrangement standing on its own. Saturn will not announce any of this. At the trine it simply keeps conditions favorable and lets you decide, which is how the whole period can slip by unspent; ease can read as nothing happening. But Saturn to Pluto in any aspect is about the marriage of power and form, and the trine is the one aspect of the family where that marriage is offered without a fight. Whatever you build or dismantle under it tends to stay built or stay gone. People may lean on you during these months. Trines like this one often make you the steady hand in someone else's crisis, the person trusted with what is heavy. That trust is real information about who you are becoming. Saturn's cycle alternates pressure and support at your Pluto, its hard angles arriving on a roughly seven-year beat. This is a support season. Use it to do voluntarily what the harder beats would otherwise demand, and the next test finds much less to test. The quiet legacy of this transit is authority of a specific kind: not a title, but the earned confidence of someone who has taken apart something difficult, on purpose, and rebuilt it better."
+ },
+ {
+  "id": "transit:saturn:opposition:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "saturn",
+   "natal": "pluto",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:saturn~natal_pluto:opposition"
+  ],
+  "text": "When transiting Saturn moves into opposition with your natal Pluto, the deep-running side of you meets its match in the outside world. Because Saturn is the body in motion, the challenge arrives on Saturn's terms: formal, institutional, patient enough to outwait you. Somewhere in these months a figure of authority, a rival, a partner, or a system seems to hold the exact power you want, or to block the exact power you have. The standoff can feel personal. Often it is really a mirror: the immovable force across the table has a way of resembling your own buried will, met from the outside. Pluto in your chart is your reserve of intensity, survival instinct, and the drive to control what matters to you. Saturn opposing it from the moving sky puts weight on the other end of the beam. Demands land on you. Limits are enforced by someone with standing to enforce them. Resentment can build quietly, and so can the urge to win at any price. The transit colors a good part of a year when retrogrades are counted, since Saturn may make the opposition exact as many as three times. While the aspect applies, the tension usually grows as atmosphere: strained dealings, tightening scrutiny, a sense of being cornered. The exact pass tends to bring the open test, the negotiation, showdown, or reckoning where the real stakes get named. Retrograde returns reopen the table with positions clarified, and the last pass generally fixes the settlement. What this period asks of you is a distinction: which battles defend something essential, and which merely defend pride or old fear. Total victory is rarely on offer under an opposition. Durable terms are. The people who come through this kind of standoff well are usually the ones who conceded the inessential early and held one line completely. Watch for the temptation to go underground, to comply on the surface while working an angle. It fits the mood of the transit and it almost always costs more later. Straight dealing is slower and holds. This opposition is the far point of a long cycle; Saturn's hard contacts with your Pluto return in roughly seven-year beats, and the opposition is the one where inner drive and outer structure face each other at full distance. As it separates, the pressure decays into clarity. You know what you actually control, what you never did, and what you no longer want. That knowledge reads as loss for a moment and as freedom for years."
+ },
+ {
+  "id": "transit:saturn:conjunction:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "saturn",
+   "natal": "chiron",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:saturn~natal_chiron:conjunction"
+  ],
+  "text": "Saturn crossing your natal Chiron brings your oldest sore spot under formal review. Chiron in your chart marks a wound that never quite generalizes: a place where you feel set apart, behind, or somehow disqualified, whatever the evidence says. Saturn is the planet of tests, structures, and time. When it arrives at this point, life has a way of pressing on the tender place through practical channels: a responsibility that lands exactly where you feel least adequate, an evaluation that touches the old story, a duty of care for someone whose pain echoes yours. This is a months-long weather system, not a single event, and Saturn's retrograde loops can bring it back over the degree up to three times. The applying approach often stirs the old ache before anything happens, a low hum of not-good-enough that seems to come from nowhere. Around the exact pass, the outer test usually arrives and the feeling gets a face. Return passes revisit the material with more perspective, and the final contact tends to leave something settled that was never settled before. The hard version of this transit is bracing: guarding the sore spot, overworking to prove it is not there, or accepting a harsh verdict as if it were fact. The workable version is different. Saturn responds to honest structure, and wounds respond to being tended rather than defended. Naming the limit out loud, asking for the help you usually refuse, building a routine that supports the weak place instead of hiding it: moves like these convert the pressure into something load-bearing. There is often a mentor thread in this period, running in either direction. You may find that an older or more seasoned figure takes your pain seriously in a way that changes it. Just as often you become that figure for someone else, and discover that your handicap, worked with over years, has quietly become expertise. The conjunction of Saturn with your Chiron comes around roughly every twenty-nine years, so it tends to open a long chapter in how you carry this wound, moving it from concealment toward competence. As the transit separates, the heaviness thins, and what remains is often surprisingly solid: a realism about your own soft places that no longer costs you confidence. You grow through this period not by finally becoming flawless but by giving the flaw a place in the structure, where it stops leaking and starts teaching."
+ },
+ {
+  "id": "transit:saturn:sextile:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "saturn",
+   "natal": "chiron",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:saturn~natal_chiron:sextile"
+  ],
+  "text": "A quiet door opens when transiting Saturn sextiles your natal Chiron. Sextiles invite rather than insist, and what this one holds out is a workable form for an old hurt. Chiron in your chart names the place where you feel chronically unsure of your standing, the wound that lectures you no matter how much you learn. Saturn brings scaffolding: routine, craft, patient effort, the respect of doing a thing properly. For a few months these two cooperate, and the sore spot becomes unusually easy to work with, if you choose to work. Chances tend to arrive dressed in ordinary clothes. A course or apprenticeship in territory you once wrote yourself out of. A senior person who offers steady, unglamorous guidance. A commitment, a schedule, a practice, that would give your healing some bones. Younger or struggling people may seek you out, sensing that you know this terrain from the inside. None of it will feel dramatic, and none of it is required; a sextile ignored simply expires. Taken up, it compounds. Saturn's rhythm gives you room. The influence shades a season, and if Saturn retrogrades across the point, the aspect can perfect up to three times over an extended stretch. The applying months are when the offer usually shows itself; the exact pass is the natural moment to say yes and set terms. Any return passes work like scheduled check-ins, letting you adjust the structure so it fits the wound instead of chafing it, and the final pass leaves the practice standing on its own. The deeper opportunity here is a change of posture. Old pain tends to be managed either by avoidance or by white-knuckled compensation. Saturn suggests a third way: treat the tender place as a legitimate part of the work, budget for it, build around it, and let competence grow where shame used to live. Handled this way, the period leaves durable assets, a skill, a relationship with a mentor or student, a routine of care that survives busy weeks. Saturn will aspect your Chiron again as its long cycle turns, and some of those contacts press much harder than this one. What you build during the sextile is exactly what those harder passes will lean on. The growth is undramatic and real: the wound stops being a secret you manage and becomes a subject you know, and knowing it, you get to be gentler with everyone, including yourself."
+ },
+ {
+  "id": "transit:saturn:square:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "saturn",
+   "natal": "chiron",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:saturn~natal_chiron:square"
+  ],
+  "text": "Transiting Saturn square your natal Chiron puts pressure directly on the place you most want left alone, and it applies that pressure without asking. For a stretch of months, obligations, judgments, and hard realities seem aimed at your least defended spot, the old wound Chiron marks in your chart, the theme of feeling lacking or set apart that never fully resolves. A demand at work lands where you doubt yourself most. A critic, a form, an exam, a gatekeeper, touches the exact nerve. Even neutral events can read as verdicts while this aspect is in force, so it helps to know the schedule. As the square applies, sensitivity rises first: you may catch yourself rehearsing defenses before anyone has attacked. The exact pass tends to bring the concrete test, the moment the old story and the present demand collide. Because Saturn retrogrades, the square can repeat up to three times across the better part of a year, and the re-hits are not punishment; they are second and third drafts. Each return usually finds you less raw and more precise about what is actually being asked. The trap in this transit is taking the pressure as proof. The old wound loves evidence, and Saturn's tests can look like confirmation that you really are behind, unqualified, too much, or not enough. Read closely, the test is usually about structure, not worth: a skill that needs building, a boundary that needs stating, support that needs to be arranged instead of forgone. Grief can surface too, for the years the wound has cost you, and letting that grief have its hour is part of the work, not a detour from it. What helps is Saturn's own currency: small, honest, repeatable effort. Do the remedial thing you have avoided because it embarrasses you. Say the limitation plainly to someone safe and watch it shrink to actual size. Ask for the explanation you have been faking your way past for years. Every such act converts shame into procedure, and procedure is something you can improve. This square belongs to a long cycle; Saturn's hard aspects to your Chiron recur in roughly seven-year beats, and each one retests what the last taught. People who have been through several describe the same movement: the sore spot never vanishes, but it stops steering. When this square separates, you keep whatever you faced squarely. The confidence that comes out of these months is the specific, unglamorous kind, built from having stood at the weak point under load and held."
+ },
+ {
+  "id": "transit:saturn:trine:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "saturn",
+   "natal": "chiron",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:saturn~natal_chiron:trine"
+  ],
+  "text": "Some healing only happens on a schedule, and transiting Saturn trine your natal Chiron provides one. The trine eases the relation between time and the old wound. Chiron in your chart marks a hurt that has resisted every quick fix, the place where you quietly assume you are the exception to your own competence. Saturn, moving in harmony with it, brings the conditions that stubborn wounds actually respond to: steadiness, structure, low drama, and enough months for slow change to take. Under this influence, work on the tender place goes forward without the usual tax. Therapy, physical rehabilitation, remedial study, repairing a strained family tie, or simply practicing the thing you were shamed out of: efforts like these find traction now. Progress arrives in increments so ordinary you may not notice them until you look back and find the flinch has faded. Authority figures tend to be kind in this period, or at least fair, and fairness itself can be medicine where the old story expected judgment. The transit colors a season or more, and Saturn's retrogrades can make the trine exact as many as three times. On the approach, the theme often appears as readiness: a sense that material you have long avoided is finally approachable. The exact pass is prime working time, when routines set now tend to hold. The return passes deepen rather than repeat, letting the repair reach layers the first pass could not, and the closing contact usually leaves a practice or relationship in place that keeps working after the sky moves on. There is frequently a teaching current here. What you have survived, and slowly learned to manage, becomes usable by others under this aspect, and passing it on turns out to heal the giver as much as the receiver. If someone offers you the role of guide, mentor, or steady elder during these months, the offer is probably accurate. Because the trine pressures nothing, its gifts can be left on the table. The only real mistake available is assuming that ease means the wound is gone and the work is unnecessary. It means the work is cheap. Saturn returns to aspect your Chiron across its long cycle, and the harder contacts test exactly what the easy ones build. Whatever you make routine now, care that happens on schedule instead of in crisis, becomes permanent equipment. You grow here by learning that tending a wound is a craft, and that you are, by now, genuinely good at it."
+ },
+ {
+  "id": "transit:saturn:opposition:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "saturn",
+   "natal": "chiron",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:saturn~natal_chiron:opposition"
+  ],
+  "text": "With transiting Saturn opposite your natal Chiron, the old wound gets an outside examiner. Oppositions confront across a distance, and this one tends to arrange the confrontation through other people: an authority whose standards land on your sorest point, a partner whose needs press where you feel least equipped, an institution whose rules seem designed to expose the thing you have always worked around. Chiron marks the hurt in your chart that never quite closed; Saturn, standing across from it in the sky, embodies the world's demands at their most impersonal. The meeting can feel like being graded on your weakest subject. The arc of these months matters. While the opposition applies, the tension usually builds relationally: growing self-consciousness around certain people, a sense of being measured, old defenses warming up. Near the exact pass, the confrontation tends to become explicit, a review, an ultimatum, a conflict in which your vulnerability and someone else's authority face each other directly. Saturn's retrograde motion can bring the aspect back to exact up to three times over an extended stretch, and each return typically lowers the temperature: the second encounter is clearer than the first, and the last one is often almost businesslike. Projection is the trap to watch. Under this aspect it is easy to cast the other party as the wound's author, the cold judge, the withholder, the one who makes you feel small, when they are mostly a screen for a verdict you passed on yourself years ago. It is equally easy to flip the casting and play the flawless stoic while someone else carries all the need. The work is to take the mirror seriously: what the confrontation shows you about your own unhealed place is the usable part. Handled honestly, these months renegotiate something old. You state the limit you used to hide. You ask for terms that account for your tender spot instead of pretending it away. Some relationships deepen under that honesty; a few end, and the endings tend to be the ones that ran on concealment. The far point of a long cycle sits here: the hard angles Saturn makes to your Chiron arrive about seven years apart, and the opposition is where inner hurt and outer demand see each other whole. As it separates, most people report an odd relief. The wound, once inspected in the open, turns out to be smaller than its shadow, and the respect you negotiated while it was visible stays negotiated. You come away more durable in the exact place you were sure you were fragile."
+ }
+]

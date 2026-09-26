@@ -9,6 +9,7 @@ match the TS engine.
 Usage: python3 export_skyview_golden.py
 """
 import json
+import math
 import os
 import sys
 
@@ -56,6 +57,17 @@ BCTXS = [
     {"sunAltDeg": 30.0, "sunAzDeg": 180.0, "moonAltDeg": 25.0,
      "moonAzDeg": 300.0, "moonIllum": 0.1, "bortle": 6},
 ]
+
+# The radial family across its landmarks (gnomonic, stereographic,
+# equidistant, equal-area, orthographic) plus near-zero shapes pinning the
+# continuity of the two branches, over thetas that cross the gnomonic-side
+# horizon (Infinity in TS, null here) and the orthographic fold.
+RADIAL_SHAPES = [-1.0, -0.5, -0.25, -0.01, 0.0, 0.01, 0.25, 0.5, 1.0]
+RADIAL_THETAS = [0.0, 15.0, 30.0, 45.0, 60.0, 89.0, 90.0, 120.0, 150.0, 180.0]
+
+# Vector-mode grid: the placer grid plus below-horizon and far-hemisphere
+# directions (the exterior view sees the whole sphere).
+PGRID = GRID + [[90.0, -40.0], [0.0, -60.0], [270.0, -89.0], [180.0, -10.0]]
 
 # An unsorted skyline with a wrap-around segment (350 -> 20 across north).
 SKYLINE = [
@@ -127,6 +139,25 @@ CASES = (
          "aim": {"azimuth": 202.5, "altitude": 55},
          "lens": "normal", "image": {"width": 1024, "height": 683},
          "bortle": 4},
+        # the radial family, function-level
+        {"id": "radial-family", "type": "radial",
+         "shapes": RADIAL_SHAPES, "thetas": RADIAL_THETAS},
+        # vector-mode projection at the family's landmarks: gnomonic with a
+        # narrow frame (behind-horizon points), equidistant and orthographic
+        # full-sphere, a mid-pullback shape with hfov past 180, and the
+        # zenith basis fallback
+        {"id": "project-gnomonic", "type": "project", "aim": [270.0, 5.0],
+         "shape": -1.0, "hfov_deg": 40.0, "points": PGRID},
+        {"id": "project-stereographic", "type": "project", "aim": [180.0, 30.0],
+         "shape": -0.5, "hfov_deg": 150.0, "points": PGRID},
+        {"id": "project-equidistant", "type": "project", "aim": [270.0, 5.0],
+         "shape": 0.0, "hfov_deg": 180.0, "points": PGRID},
+        {"id": "project-mid-pullback", "type": "project", "aim": [270.0, 30.0],
+         "shape": 0.55, "hfov_deg": 200.0, "points": PGRID},
+        {"id": "project-orthographic", "type": "project", "aim": [270.0, 5.0],
+         "shape": 1.0, "hfov_deg": 180.0, "points": PGRID},
+        {"id": "project-zenith", "type": "project", "aim": [0.0, 90.0],
+         "shape": 0.5, "hfov_deg": 180.0, "points": ZGRID},
         # sky-brightness gradient: every ctx x every direction
         {"id": "brightness-grid", "type": "brightness",
          "points": BGRID, "ctxs": BCTXS},
@@ -160,6 +191,19 @@ def compute(spec, eng):
         return [SV.place(spec["aim"][0], spec["aim"][1], lens,
                          spec["width"], spec["height"], az, alt,
                          refraction=spec["refraction"])
+                for az, alt in spec["points"]]
+    if t == "radial":
+        rows = []
+        for shape in spec["shapes"]:
+            fn = SV.radial_scale(shape)
+            rows.append([
+                v if math.isfinite(v) else None
+                for v in (fn(math.radians(th)) for th in spec["thetas"])
+            ])
+        return rows
+    if t == "project":
+        return [SV.sky_project(spec["aim"][0], spec["aim"][1], az, alt,
+                               shape=spec["shape"], hfov_deg=spec["hfov_deg"])
                 for az, alt in spec["points"]]
     if t == "twilight":
         rows = []

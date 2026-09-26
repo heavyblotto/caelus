@@ -1,0 +1,176 @@
+{
+ "name": "transit-houses-sun",
+ "outFile": "b2-transit-houses-sun.json",
+ "setId": "house-b2-transit-houses-sun",
+ "family": "transit-house",
+ "cells": [
+  {
+   "id": "transit:sun:house:1",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "sun",
+    "house": 1
+   },
+   "atomIds": [
+    "transitHouse:sun:1"
+   ],
+   "title": "Sun moving through your 1st house",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:house:2",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "sun",
+    "house": 2
+   },
+   "atomIds": [
+    "transitHouse:sun:2"
+   ],
+   "title": "Sun moving through your 2nd house",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:house:3",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "sun",
+    "house": 3
+   },
+   "atomIds": [
+    "transitHouse:sun:3"
+   ],
+   "title": "Sun moving through your 3rd house",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:house:4",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "sun",
+    "house": 4
+   },
+   "atomIds": [
+    "transitHouse:sun:4"
+   ],
+   "title": "Sun moving through your 4th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:house:5",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "sun",
+    "house": 5
+   },
+   "atomIds": [
+    "transitHouse:sun:5"
+   ],
+   "title": "Sun moving through your 5th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:house:6",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "sun",
+    "house": 6
+   },
+   "atomIds": [
+    "transitHouse:sun:6"
+   ],
+   "title": "Sun moving through your 6th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:house:7",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "sun",
+    "house": 7
+   },
+   "atomIds": [
+    "transitHouse:sun:7"
+   ],
+   "title": "Sun moving through your 7th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:house:8",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "sun",
+    "house": 8
+   },
+   "atomIds": [
+    "transitHouse:sun:8"
+   ],
+   "title": "Sun moving through your 8th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:house:9",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "sun",
+    "house": 9
+   },
+   "atomIds": [
+    "transitHouse:sun:9"
+   ],
+   "title": "Sun moving through your 9th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:house:10",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "sun",
+    "house": 10
+   },
+   "atomIds": [
+    "transitHouse:sun:10"
+   ],
+   "title": "Sun moving through your 10th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:house:11",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "sun",
+    "house": 11
+   },
+   "atomIds": [
+    "transitHouse:sun:11"
+   ],
+   "title": "Sun moving through your 11th house",
+   "bindable": true
+  },
+  {
+   "id": "transit:sun:house:12",
+   "family": "transit-house",
+   "when": {
+    "kind": "transitHouse",
+    "body": "sun",
+    "house": 12
+   },
+   "atomIds": [
+    "transitHouse:sun:12"
+   ],
+   "title": "Sun moving through your 12th house",
+   "bindable": true
+  }
+ ]
+}

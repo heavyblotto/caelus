@@ -1,0 +1,176 @@
+{
+ "name": "composite-jupiter",
+ "outFile": "b3-composite-jupiter.json",
+ "setId": "house-b3-composite-jupiter",
+ "family": "composite-placement",
+ "cells": [
+  {
+   "id": "composite:jupiter:sign:aries",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "jupiter",
+    "sign": "Aries"
+   },
+   "atomIds": [
+    "composite:jupiter"
+   ],
+   "title": "Composite Jupiter in Aries",
+   "bindable": true
+  },
+  {
+   "id": "composite:jupiter:sign:taurus",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "jupiter",
+    "sign": "Taurus"
+   },
+   "atomIds": [
+    "composite:jupiter"
+   ],
+   "title": "Composite Jupiter in Taurus",
+   "bindable": true
+  },
+  {
+   "id": "composite:jupiter:sign:gemini",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "jupiter",
+    "sign": "Gemini"
+   },
+   "atomIds": [
+    "composite:jupiter"
+   ],
+   "title": "Composite Jupiter in Gemini",
+   "bindable": true
+  },
+  {
+   "id": "composite:jupiter:sign:cancer",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "jupiter",
+    "sign": "Cancer"
+   },
+   "atomIds": [
+    "composite:jupiter"
+   ],
+   "title": "Composite Jupiter in Cancer",
+   "bindable": true
+  },
+  {
+   "id": "composite:jupiter:sign:leo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "jupiter",
+    "sign": "Leo"
+   },
+   "atomIds": [
+    "composite:jupiter"
+   ],
+   "title": "Composite Jupiter in Leo",
+   "bindable": true
+  },
+  {
+   "id": "composite:jupiter:sign:virgo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "jupiter",
+    "sign": "Virgo"
+   },
+   "atomIds": [
+    "composite:jupiter"
+   ],
+   "title": "Composite Jupiter in Virgo",
+   "bindable": true
+  },
+  {
+   "id": "composite:jupiter:sign:libra",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "jupiter",
+    "sign": "Libra"
+   },
+   "atomIds": [
+    "composite:jupiter"
+   ],
+   "title": "Composite Jupiter in Libra",
+   "bindable": true
+  },
+  {
+   "id": "composite:jupiter:sign:scorpio",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "jupiter",
+    "sign": "Scorpio"
+   },
+   "atomIds": [
+    "composite:jupiter"
+   ],
+   "title": "Composite Jupiter in Scorpio",
+   "bindable": true
+  },
+  {
+   "id": "composite:jupiter:sign:sagittarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "jupiter",
+    "sign": "Sagittarius"
+   },
+   "atomIds": [
+    "composite:jupiter"
+   ],
+   "title": "Composite Jupiter in Sagittarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:jupiter:sign:capricorn",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "jupiter",
+    "sign": "Capricorn"
+   },
+   "atomIds": [
+    "composite:jupiter"
+   ],
+   "title": "Composite Jupiter in Capricorn",
+   "bindable": true
+  },
+  {
+   "id": "composite:jupiter:sign:aquarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "jupiter",
+    "sign": "Aquarius"
+   },
+   "atomIds": [
+    "composite:jupiter"
+   ],
+   "title": "Composite Jupiter in Aquarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:jupiter:sign:pisces",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "jupiter",
+    "sign": "Pisces"
+   },
+   "atomIds": [
+    "composite:jupiter"
+   ],
+   "title": "Composite Jupiter in Pisces",
+   "bindable": true
+  }
+ ]
+}

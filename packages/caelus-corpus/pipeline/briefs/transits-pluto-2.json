@@ -1,0 +1,233 @@
+{
+ "name": "transits-pluto-2",
+ "outFile": "b2-transits-pluto-2.json",
+ "setId": "house-b2-transits-pluto-2",
+ "family": "transit-aspect",
+ "cells": [
+  {
+   "id": "transit:pluto:conjunction:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "venus",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:pluto~natal_venus:conjunction"
+   ],
+   "title": "Transiting Pluto conjunct your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:sextile:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "venus",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:pluto~natal_venus:sextile"
+   ],
+   "title": "Transiting Pluto sextile your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:square:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "venus",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:pluto~natal_venus:square"
+   ],
+   "title": "Transiting Pluto square your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:trine:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "venus",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:pluto~natal_venus:trine"
+   ],
+   "title": "Transiting Pluto trine your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:opposition:venus",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "venus",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:pluto~natal_venus:opposition"
+   ],
+   "title": "Transiting Pluto opposite your natal Venus",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:conjunction:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "mars",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:pluto~natal_mars:conjunction"
+   ],
+   "title": "Transiting Pluto conjunct your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:sextile:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "mars",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:pluto~natal_mars:sextile"
+   ],
+   "title": "Transiting Pluto sextile your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:square:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "mars",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:pluto~natal_mars:square"
+   ],
+   "title": "Transiting Pluto square your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:trine:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "mars",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:pluto~natal_mars:trine"
+   ],
+   "title": "Transiting Pluto trine your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:opposition:mars",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "mars",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:pluto~natal_mars:opposition"
+   ],
+   "title": "Transiting Pluto opposite your natal Mars",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:conjunction:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "jupiter",
+    "aspect": "conjunction"
+   },
+   "atomIds": [
+    "transit:pluto~natal_jupiter:conjunction"
+   ],
+   "title": "Transiting Pluto conjunct your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:sextile:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "jupiter",
+    "aspect": "sextile"
+   },
+   "atomIds": [
+    "transit:pluto~natal_jupiter:sextile"
+   ],
+   "title": "Transiting Pluto sextile your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:square:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "jupiter",
+    "aspect": "square"
+   },
+   "atomIds": [
+    "transit:pluto~natal_jupiter:square"
+   ],
+   "title": "Transiting Pluto square your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:trine:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "jupiter",
+    "aspect": "trine"
+   },
+   "atomIds": [
+    "transit:pluto~natal_jupiter:trine"
+   ],
+   "title": "Transiting Pluto trine your natal Jupiter",
+   "bindable": true
+  },
+  {
+   "id": "transit:pluto:opposition:jupiter",
+   "family": "transit-aspect",
+   "when": {
+    "kind": "transit",
+    "transit": "pluto",
+    "natal": "jupiter",
+    "aspect": "opposition"
+   },
+   "atomIds": [
+    "transit:pluto~natal_jupiter:opposition"
+   ],
+   "title": "Transiting Pluto opposite your natal Jupiter",
+   "bindable": true
+  }
+ ]
+}

@@ -159,7 +159,26 @@ for (const claim of registry.claims) {
     continue;
   }
   const value = renderValue(claim, raw);
-  const expected = claim.render.map((r) => r.replaceAll("{value}", String(value)));
+  const NUMBER_WORDS = {
+    7: "seven",
+    12: "twelve",
+    13: "thirteen",
+    29: "twenty-nine",
+    31: "thirty-one",
+    35: "thirty-five",
+  };
+  const word = typeof value === "number" || /^\d+$/.test(String(value))
+    ? NUMBER_WORDS[Number(value)]
+    : undefined;
+  const expected = [
+    ...claim.render.map((r) => r.replaceAll("{value}", String(value))),
+    ...(word
+      ? claim.render.flatMap((r) => {
+        const lower = r.replaceAll("{value}", word);
+        return [lower, lower.charAt(0).toUpperCase() + lower.slice(1)];
+      })
+      : []),
+  ];
   // A claim with a numeric "tolerance" (in source units) accepts any rendered
   // number within that distance of the raw measurement. Bundle gzip sizes need
   // it: CI pins Node 22 while laptops run newer majors, and zlib's gzip output

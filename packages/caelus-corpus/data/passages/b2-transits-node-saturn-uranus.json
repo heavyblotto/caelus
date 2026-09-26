@@ -1,0 +1,142 @@
+[
+ {
+  "id": "transit:saturn:conjunction:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "saturn",
+   "natal": "true_node",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:saturn~natal_true_node:conjunction"
+  ],
+  "text": "The North Node is a crossing rather than a body: the degree where the Moon's orbit cuts upward through the ecliptic. Present-day astrology takes it as the direction your chart leans toward, the unfamiliar territory where you grow. When Saturn arrives there, that direction quits being an idea and acquires a schedule. For several months, life asks whether you are willing to take your own future seriously. While the conjunction is applying, the question builds as a kind of pressure. Drifting stops working. Options you have kept open for years begin to feel less like freedom and more like unfinished business. Around the exact pass, the pressure tends to condense into something concrete: a responsibility accepted, a course begun, a role taken on that points where you have been meaning to go. Older or more established people often figure in this. A mentor, an employer, or an institution takes your future seriously and expects you to do the same. What Saturn asks in exchange is structure. The growth this point describes becomes a set of duties, a slower and more deliberate pace than inspiration would prefer. That can feel heavy, especially if you had imagined the new territory as open road. It is still the new territory; it has simply acquired working hours. Because Saturn retrogrades, it usually crosses this point three times over most of a year. The middle pass tests whatever you committed to on the first: doubts surface, the workload shows its true size, and you find out whether you chose this or merely agreed to it. The final pass settles the matter and tends to leave something standing, a habit, a credential, a position, a promise you intend to keep. In love and family the same tone shows up as definition: relationships that support where you are going tend to formalize, and ones that quietly pull you backward become harder to ignore. None of this needs to be dramatic. Much of it looks from outside like ordinary adulthood, done on purpose. Saturn returns to aspect this point roughly every seven years within its twenty-nine year round, so this conjunction opens a chapter rather than closing one; the structure you build now is what those later passes will inspect. You grow through this period by treating your direction as an obligation to yourself, kept the way you would keep a promise to someone you respect. What you formalize under this transit has a long shelf life."
+ },
+ {
+  "id": "transit:saturn:sextile:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "saturn",
+   "natal": "true_node",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:saturn~natal_true_node:sextile"
+  ],
+  "text": "Some transits arrive as events. A Saturn sextile to your North Node arrives as an option, and it is easy to miss if you are not paying attention. The North Node marks the kind of experience your chart is hungry for, the unfamiliar ground where you develop rather than repeat. Saturn, moving sixty degrees from it for a few months, offers the tools for building there: steadier discipline than usual, useful limits, and often practical help from people who have already done what you are trying to do. Nothing about this period forces you, which is both its nature and its risk. While the aspect applies you may notice that work feels less like a grind, that plans hold their shape, and that an older or more experienced person is willing to teach you something you actually need. The exact pass is not dramatic; it is simply the stretch when effort in the right direction gets unusual traction. As Saturn separates, whatever you started keeps its momentum, and whatever you only thought about goes back on the shelf. Because Saturn retrogrades, it may make this sextile up to three times across most of a year. Treat the first pass as the invitation, the second as the chance to revise what you began, and the third as the deadline that closes the window kindly. The themes are ordinary on purpose. A qualification pursued, a saving habit begun, a duty accepted because it builds toward something you want, an apprenticeship allowed to become real: none of it makes headlines, and all of it compounds. In relationships, the season favors the steady kind of support, people who show up on time and mean what they say, and you may find you value that more than usual right now. It is also a good stretch for repairing your relationship with authority itself, if that has been strained, because the demands made of you during this period tend to be fair ones. Saturn will square and oppose this point in later years, and those harder passes go better for people who used a stretch like this one to lay foundation. The growth here is modest and durable. You learn that your direction is not a mood but something you can work on in ordinary weeks, and that patient effort now is a quiet gift to your future self."
+ },
+ {
+  "id": "transit:saturn:square:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "saturn",
+   "natal": "true_node",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:saturn~natal_true_node:square"
+  ],
+  "text": "A square to your North Node is also a square to your South Node, so for a few months Saturn stands at a right angle to the entire axis running from your practiced past to your intended future. This is a checkpoint transit, and it forces a question the easier passes let you postpone: is the life you are actually building the one you mean to build? While the square applies, friction gathers in practical form. Obligations multiply, timing tightens, and some duty, deadline, or authority seems to stand directly across your path. It is tempting to read the obstacle as a verdict on the path itself. Usually it is not. Saturn squares work like load tests: the pressure reveals which parts of your plan are structural and which are decoration. Around the exact pass the choice tends to sharpen. Something has to be cut, funded, scheduled, or declined, and the decision quietly declares your direction, whichever way you make it. The pull runs both ways. The South Node side of the axis argues for the familiar: the competence you already have, the role people already know you in, the path of least explanation. The North Node side asks for effort in territory where you are not yet good. Under a Saturn square, the familiar usually looks more responsible than it is, because it is easier to justify to others. Watch for that. Saturn's retrogrades tend to return this square two or three times inside a year, and the repeats are not punishment; they are drafts. The first pass poses the problem, the return lets you revise your answer with better information, and the last pass closes the file. This square also belongs to a rhythm. Saturn aspects this axis about every seven years, so what you decide now is one move in a longer game, not a final answer. In work this period often looks like a hard negotiation between security and growth; at home it can look like duties that compete with your own development for the same hours. You grow here by refusing the false choice between being responsible and becoming someone. The discipline this transit builds, saying no with a straight face and carrying real weight in a chosen direction, is exactly the discipline the next stretch of your path requires."
+ },
+ {
+  "id": "transit:saturn:trine:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "saturn",
+   "natal": "true_node",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:saturn~natal_true_node:trine"
+  ],
+  "text": "This is one of the quiet good stretches, and its gift is traction. Saturn moves in trine to your North Node for a few months, and the effort you put toward your own growth meets less resistance than usual. The Node is not a body; it is where the Moon's orbit breaks north across the ecliptic, and it stands for the experience your chart is reaching toward, the ground you have not mastered yet. A trine from Saturn does not push you onto that ground. It makes the footing solid once you step there. While the aspect applies you may notice work in the right direction simply going better: plans hold, routines stick, and people in authority are inclined to say yes to reasonable requests. The exact pass rarely announces itself with an event. More often it is the season in which a slow project reaches a stable stage, or a discipline you adopted stops costing willpower and starts running on its own. As Saturn separates, gains made honestly tend to stay made. Because Saturn stations and retrogrades, the trine can repeat, two or three passes falling inside a year, which turns this from a moment into a building season: begin on the first pass, refine on the second, consolidate on the third. The risk in a trine is only ever comfort. Ease invites coasting, and a whole year can pass in vague good order with nothing to show for it. The tradition's advice here is old and plain: harmonious Saturn periods reward deliberate use, because the same effort spent under a harder aspect would buy half as much. So this is a natural season for the unglamorous middle steps, the certification, the steady saving, the practice hours, the patient repair of a relationship that supports where you are going. Elders and experienced hands are good company now; what they offer is less inspiration than method, and method is what this period converts into progress. Nothing about the stretch photographs well, and years later it can turn out to be the one that made the later leaps possible. Saturn will be back in aspect to this point in roughly seven years, from a harder angle, and it will find whatever you built now. Growth in this season is mostly a matter of respecting your own momentum: keep the promises to yourself small, keep them daily, and let the compounding do the rest."
+ },
+ {
+  "id": "transit:saturn:opposition:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "saturn",
+   "natal": "true_node",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:saturn~natal_true_node:opposition"
+  ],
+  "text": "Saturn opposing your North Node sits right on your South Node, home of the familiar: the skills, habits, and roles you can perform without thinking. So this transit confronts you with your own past, in Saturn's manner, which is to weigh it. For several months, the well-worn side of your life demands attention. Old commitments come due. People and places you thought you were finished with reappear needing something, or you find yourself back in a role you outgrew because it still, technically, works. None of this is a detour from your development; it is part of it. Read the South Node as inherited pattern or as plain accumulated habit; either way Saturn's job here is an audit of what you carry. While the opposition applies, the pull backward is strongest, and it usually wears responsible clothing: duty, loyalty, the sense that the old arrangement deserves one more year. Around the exact pass, the accounting sharpens. You see what the familiar actually costs, and what it genuinely still provides, and the two are rarely what you assumed. The settling phase is for the sorting: what from your history is load-bearing and comes with you, what is finished and can be honorably closed. Retrograde re-hits are common, so the review may run in two or three rounds across most of a year; a matter you thought settled on the first pass can return for a final signature on the last. This period can feel like moving against a current, because effort flows so naturally toward what you already know how to do. Competence is seductive, and Saturn on the South Node makes the old competence very available just when your growth lies elsewhere. The corrective is not to burn the past down. It is to pay what you owe it, keep what still serves, and decline to reinvest in it out of habit alone. Handled that way, the transit lightens you: debts cleared, obligations resolved, an inheritance of skill claimed consciously instead of carried unconsciously. Saturn touches this axis about every seven years, and the oppositions are the passes that face you squarely toward what you keep repeating. The growth is in closing accounts with your own history so cleanly that the unfamiliar territory ahead can finally have your full attention."
+ },
+ {
+  "id": "transit:uranus:conjunction:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "true_node",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:uranus~natal_true_node:conjunction"
+  ],
+  "text": "Uranus takes eighty-four years to circle the chart, so it crosses your North Node once in most lives, and the crossing tends to be memorable. The Node is the direction of growth your chart points toward, territory that is unfamiliar on purpose. Uranus is the planet of the unexpected. Put them together and the path you were inching along gets rerouted, fast, and usually from outside. The classic shape of this transit is the encounter: a person, a group, an opportunity, or an event arrives without warning and bends your course toward ground you would not have chosen on your own schedule. During the applying stretch, restlessness comes first. Plans that looked sensible a year ago start to feel like someone else's, and you may find yourself drawn to people unlike your usual company. Near the exact pass, the change tends to happen quickly: a door opens, a structure breaks, an invitation appears with a short deadline. Choices made in this window have a strange quality; they look impulsive from outside and feel obvious from inside. Because Uranus retrogrades, it usually recrosses the point two or three times across a year or more. The first pass breaks the pattern, the retrograde pass lets you test whether the new direction is real or just novel, and the final pass integrates what survives. Not everything will. Uranus overshoots, and part of this transit's work is finding out which changes were the path and which were only the explosion that cleared it. Freedom is the live issue throughout. Arrangements that fit the person you were, jobs, alliances, routines, self-descriptions, feel suddenly tight, and other people may experience your growth as unreliability for a while. That tension is real, and it deserves honest handling rather than abrupt exits where you can manage it. What this period asks of you is availability: a willingness to say yes to the unfamiliar while it is offering, because this particular offer does not repeat on any schedule you can plan around. Years later, people often describe a transit like this as the point where their life forked, and the fork rarely resembles the future they had been preparing for. The way to grow through it is to let the surprise reorganize you instead of merely disrupting you, and to keep what the lightning showed you after the weather has passed."
+ },
+ {
+  "id": "transit:uranus:sextile:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "true_node",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:uranus~natal_true_node:sextile"
+  ],
+  "text": "Uranus moves so slowly that it spends around a year, counting its retrograde swings, within sextile range of your North Node, and the period has a schedule worth knowing in advance. This is a visit, not a trait, and visits end. The Node marks the direction your chart wants your life to grow, the territory where you are still green. Uranus, for this one stretch, keeps supplying material from outside your routine that happens to point that way. Early in the applying phase the signs are small: a subject starts snagging your attention for no obvious reason, an acquaintance from an unfamiliar world becomes oddly relevant, a method you had ignored keeps reappearing. Nothing insists. Sextiles from Uranus work like weather that favors a certain crop; whether anything grows depends on what you plant. The first exact pass usually brings the most legible event, often through the lateral people in your life rather than the central ones. A peer mentions an opening. A group you joined casually turns out to matter. Someone two circles out from your daily company hands you a thread. Pull it a little. The commitment can stay small, an evening a week, a trial run, a conversation continued, because the retrograde pass exists precisely to let you test what the first pass introduced. When Uranus backs over the degree, the shiny new thing loses its novelty and shows you its weekday face, and that is information you cannot get any other way. What still interests you at that point is probably real. The final pass tends to settle matters quietly: the experiment either folds into your life or closes without grief. Two mistakes fit this transit. One is sealing the year shut with busyness, so the whole visit passes and nothing touched you; Uranus sends no reminders, and this angle will not repeat for years. The other is oversteering, treating a season of interesting openings as a mandate to overturn settled things. The sextile asks for neither. It asks for margin: a little unclaimed time, a little unspent curiosity, a willingness to follow one odd thread while it is live. Years later the stretch tends to look like a turning you almost missed noticing at the time, the point where a stranger, a skill, or an idea entered casually and stayed. You grow through this transit by keeping the door of an ordinary year propped slightly open, and by letting one uninvited thing all the way in."
+ },
+ {
+  "id": "transit:uranus:square:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "true_node",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:uranus~natal_true_node:square"
+  ],
+  "text": "Restlessness about your own direction is the signature of this period. Transiting Uranus squares your North Node, and since a square to one node is a square to both, the pressure lands on the whole axis: the familiar life behind you and the growth ahead of you are shaken together. Over a year and sometimes more, counting the retrograde returns, events seem designed to interrupt your course. Plans are disrupted from outside, or you become the disruptor yourself, suddenly unwilling to keep walking a road you chose in good faith. The square's question is honest even when its methods are not gentle: is this direction still yours, or are you following it because you once announced it? While the aspect applies, the tension usually builds as irritation with your own arrangements. Commitments feel tight. Detours look magnetic. Near the exact passes, something typically breaks the routine open, a sudden change of circumstances, an offer from an unexpected quarter, a rebellion you did not plan to stage. The temptation then runs in two opposite directions, and both are cheap. One is to clamp down and defend the existing plan unchanged, treating every disruption as noise. The other is to torch the plan entirely because novelty feels like progress. The work of this transit is the third option: let the interruptions audit your direction, and change exactly what fails the audit. Uranus usually squares the point two or three times across the stretch, and the rounds have distinct jobs. The first destabilizes; the middle one, often retrograde, shows you which of the changes you actually miss when they stall; the last sets the revised course. Relationships and alliances feel the turbulence too. People invested in your old direction may resist the new one, and their resistance tells you something, though not always what they intend it to. Since Uranus takes eighty-four years to go around, this particular test of your path comes rarely, and it tends to mark a genuine correction rather than a passing mood. Growing through it means staying loyal to the destination while the route is rewritten, and telling apart the restlessness that means the life no longer fits from the restlessness that only means a slow week."
+ },
+ {
+  "id": "transit:uranus:trine:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "true_node",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:uranus~natal_true_node:trine"
+  ],
+  "text": "Change and growth pull the same way for once. With transiting Uranus trine your North Node, a long window opens, a year or more with its retrograde returns, in which novelty keeps cooperating with the growth your chart has in mind. The North Node stands for territory that suits you precisely because it is unfamiliar, the kind of experience you grow through rather than merely get through. Uranus brings the current: fresh people, new methods, sudden openings, a general loosening of circumstances that makes reinvention possible. Under the trine, that current runs with you, not across you. Progress during this period tends to come in jumps rather than increments. You may go months at a steady pace and then cover a year's distance in a few weeks because the right door opened at the right time. The applying phase often feels like rising curiosity: fields, scenes, and tools you had no name for start appearing at the edges of your life. Around the exact passes, the openings cluster, and it becomes strangely easy to do things that used to require nerve, approaching the person, trying the unfamiliar role, leaving the safe version of a plan for the live one. The retrograde return is not a setback here; it is the second lap, the chance to deepen an experiment the first pass only sketched. The final pass tends to fold the successful experiments into ordinary life, which is the real prize. Trines ask little, and that is their known weakness. With no crisis attached, this transit is easy to spend on interesting distractions, and the difference between a stimulating year and a directional one is mostly selection: backing the novelties that point where you mean to go, and letting the rest stay entertainment. Given the length of Uranus's round, a trine to this point comes only a few times in a life, each in a very different season of it, so it deserves your notice while it lasts. In work this often marks the low-resistance moment to modernize what you do. In your wider life, it can be the season when your circle refreshes and the newcomers happen to be the ones who move you forward. You grow through it by experimenting on purpose, with your own direction as the filter, and letting luck do what luck was already doing."
+ },
+ {
+  "id": "transit:uranus:opposition:true_node",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "true_node",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:uranus~natal_true_node:opposition"
+  ],
+  "text": "The point opposite your North Node is your South Node, the well-worn ground: the skills, stories, and settings you default to without noticing. Transiting Uranus opposing your North Node is therefore sitting right on that familiar point, and its work is to shake what you stopped seeing. Over a year or more, with retrograde re-hits, the past becomes unstable in surprising ways. A role you could always fall back on stops being available. A place, group, or routine that defined normal changes shape or dissolves. Sometimes the past itself makes contact: people and situations from your history resurface abruptly, altered, asking to be dealt with on new terms. Uranus liberates whatever it touches, and here it touches your habits. While the opposition applies, expect the comfortable parts of life to feel oddly provisional, as if the furniture had wheels. Near the exact passes, the disruption tends to be concrete, an ending, an upheaval in the old order, a support that turns out to have been optional all along. This can be disorienting, because what breaks is rarely something you would have chosen to lose; it is something you leaned on. The gift is on the other side of the axis. Every habit this transit dissolves releases attention, and the attention flows forward, toward the unfamiliar ground your chart has been leaning toward all along. People often make their most genuine departures under this transit, not because the new called loudly but because the old finally let go. The re-hits give the process its rhythm: the first pass loosens the ground, the retrograde pass lets you sort what you actually want to rebuild from what you kept out of momentum, and the last pass leaves the past lighter than it was. Because of Uranus's slow cycle, this confrontation comes once in most lifetimes; it is a genuine turning of the page rather than a recurring chore. The way through is to cooperate with the sorting: grieve what was real, drop what was only familiar, and resist the urge to rebuild the old structure exactly as it stood just to feel steady again. The discovery on the far side is how much of your security was habit, and how capable you turn out to be on ground where nothing is automatic yet."
+ }
+]

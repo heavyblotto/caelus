@@ -34,8 +34,8 @@ export default function Validation() {
 
       <H2>Reference vs Swiss Ephemeris 2.10</H2>
       <P>
-        The Python reference was compared against Swiss Ephemeris at hundreds
-        of random instants across 1000–3000. The quantity compared is
+        The Python reference was compared against Swiss Ephemeris 2.10 at
+        hundreds of random instants across 1850–2150. The quantity compared is
         apparent geocentric ecliptic longitude at the true equinox of date, for
         every body, together with the angles and cusps at six latitudes that
         include polar Iceland. The table gives the maximum and root-mean-square
@@ -97,7 +97,7 @@ export default function Validation() {
         and the coordinates you used.
       </P>
       <P dim>
-        The validated range runs from 1000 to 3000 for the planets, Pluto, and
+        The validated range runs 1000–3000 for the planets, Pluto, and
         the Moon, all checked against JPL Horizons. The small bodies span 1600
         to 2484, which is the widest window Horizons serves for them, and the
         hosted edge API covers a narrower window still because of its embedded

@@ -1,0 +1,227 @@
+[
+ {
+  "id": "synastry:sun:conjunction:venus",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "venus",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "synastry:sun~b_venus:conjunction"
+  ],
+  "text": "Their sense of what is lovely settles right on top of who you are. Your Sun and their Venus occupy the same stretch of the zodiac, so the part of you that wants to be recognized and the part of them that decides what is worth wanting have nowhere to stand apart. To them you are not merely acceptable. You come close to their working definition of appealing, and that registers before either of you has decided anything about it. The first effect on your side is ease of reception. Liking you is not a conclusion they have to reach; it is where they start. The way you take up a room, the things you are proud of, the tone you use when you are being most yourself, all of it tends to land as charm rather than as effort. Anyone who has spent years being slightly too much for the rooms they were in finds this restful, because for once the default reaction is pleasure. What they receive is different and worth knowing. Your presence gives their taste something solid to attach to. They enjoy you the way people enjoy a well made thing: noticing details, taking pleasure in your company without needing a reason, speaking well of you when you are not there to hear it. That can shade into treating you as an ornament of their life rather than a separate person with a hard week and unfinished business. The drift runs the other way too. Being admired at this range is pleasant enough that you may start supplying the version of yourself that draws the admiration. It happens in small steps. You tell the story that goes over well, you leave out what does not fit the picture, and after a while the fondness is landing on an exhibit. Nothing looks wrong between you, and yet you are less known than you appear to be. Money, taste, and comfort tend to enter early with this contact. You may find yourself spending on them, or letting them cover things for you, and it feels natural rather than transactional. None of that is a problem in itself. It is only that warmth this easy smooths over questions before anyone thinks to ask them, and money is where the unasked question tends to sit. The real use of the aspect is confidence with a witness. When somebody whose taste you respect finds you genuinely likeable, you stop auditioning for a while, and that rest changes how much you are willing to attempt. The work is handing over the whole self, including the parts nobody would call decorative, and finding out whether the liking holds. Often it does. Either way you learn something accurate about both of you."
+ },
+ {
+  "id": "synastry:sun:sextile:venus",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "venus",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "synastry:sun~b_venus:sextile"
+  ],
+  "text": "Some contacts arrive whether anyone wants them or not. This one waits to be picked up. Their Venus sits at a friendly angle to your Sun, near enough to be available and far enough that neither of you is forced into anything, so the good feeling between you shows up mostly when one of you reaches for it. The reach is usually small. You mention what you are working on and they say something appreciative and specific, the kind of remark that proves they were listening. They plan an evening and think of you while planning it. You walk into a conversation slightly tense and come out lighter without being able to name what changed. Nothing dramatic occurs, which is exactly why this angle is easy to miss. What flows toward you is a mild, dependable liking with no conditions attached. Your ordinary manner suits their taste, so you spend less energy managing impressions in their company than you do elsewhere. That counts most in the situations that usually cost you something: a room full of strangers, a project where you feel underqualified, a stretch of months when you are not sure you are any good at what you do. Steady goodwill nearby is worth more than it sounds. They get a kind of borrowed clarity from you. Being near a person who knows what they are about tends to firm up their own preferences, and they often make decisions more easily around you, especially decisions about what they like and whose company they want. Your sense of purpose gives their taste a shape to work against. The limitation of a sextile is that it never insists. Years can pass in which this contact does nothing except keep the air pleasant. You stay on good terms, exchange the occasional kindness, and never discover what the connection can do under load, because neither of you asks it to carry weight. If that happens, nothing breaks. The link simply stays smaller than its potential. It answers when it is asked. A direct request instead of a hint, an invitation into the work rather than a report about it afterwards, an accepted favor instead of the reflex insistence that you are fine: each of these tends to be met, and each one makes the next exchange come more readily. The aspect rewards specificity, since vague warmth is its resting state and vague warmth is where it stalls. Whatever the two of you make of this angle gets made deliberately, one small reach at a time, and you will be able to name every one of them."
+ },
+ {
+  "id": "synastry:sun:square:venus",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "venus",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "synastry:sun~b_venus:square"
+  ],
+  "text": "Friction here has an odd texture, because nobody is being unkind. Your Sun and their Venus stand at ninety degrees, the angle of two things that will not simply blend, and yet the surface between you often stays gentle. There is no villain in this contact. There is a persistent sense that your way of being fully yourself and their sense of what is agreeable keep pulling in different directions. On your side it can feel like being edited. What you experience as ordinary self-assertion, saying the blunt thing, taking the space you need, showing plain pride in your work, may register with them as too loud or simply not to their taste. They respond by smoothing: changing the subject, softening your words when they repeat them to a third person, offering a nicer way to phrase it. None of that is hostile. It is a taste reacting to a texture. Spend long enough beside it, though, and you can start to feel that your character is being treated as a style problem with a solution. The mirror complaint belongs to you. Their preferences may quietly fail to confirm you. What they find charming is not what you are proudest of, and the way they show affection may not read as recognition at all. You can leave a perfectly pleasant afternoon with the itch of not having been seen, then find the itch impossible to justify, since they were nothing but nice the whole time. Money and pleasure are the usual arenas. How an unplanned evening gets spent, what counts as a treat, which invitations are worth accepting, how much comfort is enough: these small votes keep landing differently, and each one carries more weight than its size suggests, because each is a small statement about what life is for. A square supplies energy, not only annoyance. This one pushes both of you into being specific. You end up saying out loud what you actually need in order to feel respected, which most people never manage to state. They end up naming what they enjoy instead of assuming it is obvious to everyone. Two things that normally stay vague, your terms for recognition and their terms for pleasure, get put into words because the friction will not let them stay unspoken. Plenty of long alliances run on exactly this grind, and plenty of short ones do too, and the angle by itself does not say which of those you are in. What the square can produce, worked rather than absorbed, is accuracy: two people who have stopped guessing at each other's terms and have started asking."
+ },
+ {
+  "id": "synastry:sun:trine:venus",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "venus",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "synastry:sun~b_venus:trine"
+  ],
+  "text": "Nothing needs arranging for this one to work. Their Venus trines your Sun, the easiest angle in the set, and the effect is simple to state: they like who you are, and liking you costs them nothing. You are not a project to them, and you never became one. The daily version is unremarkable and pleasant. Talk runs without effort. Disagreement does not turn cold, because the affection underneath is not on the table during the argument. You can be tired in their company without apologizing for it, and silences do not need filling. Encouragement tends to arrive before you have worked out how to ask for it, which spares you the small humiliation of asking. They get something too, though it takes a while to see. Your clarity about who you are gives their taste a fixed point. People with a strong sense of what pleases them still need something worth pleasing, and your presence supplies it, so they often feel more at home in their own preferences when you are around. They enjoy their life a little more in your vicinity, and that is not flattery, it is how the angle works. None of this warmth ever corrects you. Nothing in this contact obliges either of you to change, and comfortable company can continue for years without a single hard true sentence passing between you. The trine will not raise the difficult subject on your behalf. It has no appetite for difficulty at all, and if the two of you are avoiding something, this angle is perfectly content to help you avoid it for another decade. That is the honest limit of easy warmth: it is a resource rather than an engine. Its value is restorative. Somewhere in most lives there needs to be a place where simply existing is not a negotiation, where you are not being assessed, improved, or handled. Being enjoyed by somebody, steadily and without conditions, tends to make a person braver in the parts of life that have nothing to do with them. People who have that behind them attempt more, recover faster, and waste less energy checking how they are coming across. If there is work in this aspect, it is the work of not taking the warmth as proof that everything else is fine. Being liked and being understood are different achievements, and the trine hands you only one of them for free."
+ },
+ {
+  "id": "synastry:sun:opposition:venus",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "venus",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "synastry:sun~b_venus:opposition"
+  ],
+  "text": "Across the whole width of the chart, what they find valuable faces what you are. Their Venus opposes your Sun, and oppositions work by pulling two things into a straight line where each has to look at the other. The pull is usually strong and rarely comfortable for long. There is real attraction in it, and there is also a gap that does not close, because the attraction depends on the gap. You tend to represent something they want and do not have. That is flattering for about a month. After that you notice its weight, since being wanted for what you are is close to being wanted as a possession, and the line between admiration and acquisition can get thin from where you stand. They may talk about you rather than to you. They may know your best qualities better than they know your ordinary Tuesday. Their side of the exchange sits opposite yours in an equally specific way. What they value pulls toward comfort, harmony, and keeping the peace between people, while your Sun pulls toward getting somewhere and being counted for it. So the recurring argument, whatever it is nominally about, is really about whether the effort is worth the cost to the atmosphere. They think you push when you could enjoy. You think they settle when there is still ground to cover. Both charges are fair, which is why the argument keeps returning. Practical life shows it plainly. How much of a free weekend goes to work. Whether a good enough result is worth chasing further. What money is for, saved or spent or turned into something pleasant. In each case the two of you occupy the ends of a real scale, and neither end is wrong. Confrontation is only half of what this angle does. The thing you underuse is standing right in front of you, held by someone who will not stop demonstrating it, and the reverse is true for them. You can borrow their instinct for when to stop and take pleasure in what is already built. They can borrow your willingness to want something loudly and go get it. The borrowing is not automatic and it is not comfortable, since each of you tends to see the other's position first as a criticism. What tends to happen with this angle over time, if the two of you keep talking, is that the extremes soften slightly without either of you converting. The exchange is the whole mechanism here. Nobody's end of the line was ever meant to win it."
+ },
+ {
+  "id": "synastry:sun:conjunction:mars",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "mars",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "synastry:sun~b_mars:conjunction"
+  ],
+  "text": "Heat enters the room when this contact is live, and both of you can feel it before either of you names it. Their Mars sits on your Sun, which means their drive, their appetite, and their way of fighting land directly on the spot where your sense of self lives. Nothing between the two of them acts as a buffer. What that gives you is fuel. Their momentum is contagious, and around them you tend to move: the thing you had been circling for a month gets started, the phone call you were putting off gets made. Some people spend their whole lives waiting for permission to act; this contact is closer to a shove than a permission, and if you have been stalled, the shove is welcome. Your energy runs higher in their company, and so does your pace, sometimes to the point where you notice the tiredness only after they have gone. The same closeness makes ordinary friction personal. When they push, they are pushing at your identity, not at a topic, so a remark they consider routine can arrive in you as an insult. Arguments heat faster here than either of you intends, and they can start from nothing: a tone, an interruption, an assumption about who gets to decide. That is not a sign of bad faith on either side. It is what happens when one person's assertion is aimed, geometrically speaking, at another person's center. What you supply to them is a target worth spending effort on. Their Mars gets purpose from your presence, and they often do their most focused work near you, or for you, or in competition with you. That competition is worth watching. It can stay playful for years and then turn serious in one afternoon, usually when something scarce shows up: attention, credit, a role only one of you can hold. Whatever kind of connection this is, the contact tends to have a physical character. Pace, appetite, and the tempo of the day get involved. Things feel urgent in each other's company that feel ordinary elsewhere, and impulsive decisions come more easily than they should. Anger, when it does arrive, tends to burn hot and clear rather than curdle, which many people find easier to live with than the alternative. The skill this asks for is aim. Energy of this kind does not go nowhere; it goes somewhere, and it goes there fast. Pointed at a shared task it produces an unusual amount of work in a short time. Pointed at each other with no task in sight, it produces a rivalry neither of you ever agreed to enter. The difference lies almost entirely in whether there is something for the two of you to push against besides each other."
+ },
+ {
+  "id": "synastry:sun:sextile:mars",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "mars",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "synastry:sun~b_mars:sextile"
+  ],
+  "text": "Call them when something has to get finished and you will see this angle at work. Their Mars sextiles your Sun, which puts their capacity for action at an easy reach from your sense of purpose. It is available rather than imposed. They do not drag you anywhere, and you do not have to brace against them, but when the two of you decide to move on something the machinery engages without any grinding. In practice they tend to be the one who starts. They name a date, book the thing, make the first call, say the sentence that turns a maybe into a plan. Your part is to give the effort a direction worth taking, since their push works better when it is pointed at a purpose it did not have to invent. That division falls into place quickly and usually without discussion, which is why people in this pairing often say they work well together long before they can explain why. Competition between you stays light. You can push each other in a game, an argument, or a stretch of hard work without either of you needing to win, because the sextile does not put your identity on the line the way a harder angle would. Their bluntness rarely wounds you. Your certainty rarely reads to them as arrogance. That tolerance is easy to take for granted until you compare it to a connection where every strong statement has to be defused first. What flows back to them from your side is confidence in the value of what they are doing. Physical energy without a reason tends to leak away, and your clarity about what matters gives their effort a shape. They often report feeling more effective around you, and they are not imagining it. The offer expires quietly if it is never taken. Sextiles do not force themselves on anyone, so this one can sit unused through years of friendly contact, while both of you handle your hard tasks alone and never think to ask the other. Nothing goes wrong; you simply each carry your own weight up the stairs while a second pair of hands stands in the hallway. What activates it is the concrete ask, the shared deadline, the project with a real edge to it. Physical exertion often does it faster than conversation: something with a start, a finish, and a bit of strain in between. The angle grows more responsive every time it is used, and less so every year it is not."
+ },
+ {
+  "id": "synastry:sun:square:mars",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "mars",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "synastry:sun~b_mars:square"
+  ],
+  "text": "Provocation is the plain word for what happens between you. Their Mars squares your Sun, so their way of wanting things and their way of fighting for them arrive at an angle you cannot easily absorb. The result is a low, steady irritation punctuated by sharp flare-ups, and the flare-ups tend to come out of nowhere for at least one of you. From where you sit, their method can look crude. They move before the case is made, take what they want without the preliminaries you consider basic courtesy, and treat your hesitation as an invitation to press harder. When they are impatient with you it does not feel like impatience with a situation. It feels aimed, because the angle puts their assertion square against the part of you that most needs to be respected. Their view is worth stating too, since you are not a bystander in this. Your straightforward occupation of the center, your assumption that your read on things is the working read, can register with them as an obstacle. Some people meet an obstacle and go around. Their Mars goes through, and often does it just to watch the obstacle move. So a contest starts that neither of you declared, and it can run for years underneath perfectly civil conversation, surfacing as score-keeping, one-upmanship, or a strange competitiveness about things neither of you cares about. Anger moves faster here than intention does. You can find yourself several sentences into a fight you did not choose to have, and afterwards neither of you can reconstruct the moment it turned. The heat is real and it arrives fast. What that tells you is how the exchange between you is shaped, not how much of it there will be. Working partnerships full of this friction are common, and so are working partnerships with none of it. The traction in it is genuine. Being pushed at this angle forces you to defend your position with reasons rather than assumption, and most people never learn to do that unless somebody makes them. You find out precisely where your pride sits, because somebody keeps standing on it. Under pressure the pairing often performs unusually well: deadlines, emergencies, and hard physical work suit it, since the same energy that goes into friction goes into effort when there is something urgent to aim at. What the square asks of you is that you stop treating every push as an attack on your worth. Some of it is simply how they move through the world, and it would happen to whoever stood there. Some of it is aimed. Telling the two apart is most of the skill this contact requires."
+ },
+ {
+  "id": "synastry:sun:trine:mars",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "mars",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "synastry:sun~b_mars:trine"
+  ],
+  "text": "Their effort tends to run in the direction you were already heading. Their Mars trines your Sun, and the practical meaning of that angle is a near absence of translation cost. What they do supports what you are trying to be, usually without anyone stopping to negotiate the terms. You rarely experience their force as a threat, and they rarely experience your certainty as something to overturn. Work is where it shows first. Tasks get divided without argument, and each of you ends up doing roughly what you are better at, which is rarer than it sounds. When they act on your behalf it does not feel like an imposition or a favor with a bill attached. When you set a direction they follow it without the small resentment that most people carry about being led. Even disagreements about method stay technical rather than personal, since neither of you reads the other's push as a challenge to standing. You also borrow courage from them. Their nerve is easy for you to draw on, and around them the risky version of a plan starts to look reasonable rather than reckless. That is the good half of the aspect and it is not trivial. Plenty of people never attempt the thing they wanted because nobody stood nearby looking unbothered by the size of it. The other half is the standing problem with easy angles: they encourage delegation of the wrong kind. You can let them supply the initiative for so long that you stop noticing you have not started anything on your own in a year. They can spend their energy on your purposes and never ask what they were going to do with it. Neither of you will feel this as a loss while it is happening, because the arrangement is comfortable and it works. Comfort is exactly what makes it hard to see. Strain is the other thing this angle hides. This pairing makes hard effort look easy, so neither of you learns much about how the other behaves when things go badly, until things go badly. Nothing in a trine tests anything. It simply keeps the gears turning smoothly, and smooth gears tell you nothing about the load the machine can take. Where this angle earns its keep is in sustained work: long projects, endurance, the unglamorous middle stretch of anything worth doing. Two people who can act together for months without friction accumulating are unusual. That is a fact about capacity rather than a promise about the connection, and what gets built with the capacity is a separate question entirely."
+ },
+ {
+  "id": "synastry:sun:opposition:mars",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "mars",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "synastry:sun~b_mars:opposition"
+  ],
+  "text": "You meet this one face on, with the table between you. Their Mars opposes your Sun, so their drive comes at you from the far end of the chart, direct and unmistakable. Nothing about it is subtle. When the two of you disagree, the disagreement goes straight to a test of will, skipping the intermediate stages where most people negotiate. It rarely takes long for each of you to decide that the other is the one refusing to yield. The dynamic sets up quickly. They push; you hold your ground, since holding your ground is what a Sun does when something comes at it. They read your steadiness as obstruction and push harder. You read their pressure as a challenge to your right to decide anything, and dig in further. Neither reading is paranoid. Both are what the geometry produces, and the loop can run for years on subjects that turn out, on inspection, to be nearly arbitrary. What makes the angle more than a nuisance is that oppositions complete as often as they confront. Their willingness to force an issue supplies something you tend not to do on your own. Your Sun wants to be, and being does not always translate into moving; their Mars is nothing but movement, and it is standing in front of you demonstrating the method. From their direction you provide the wall worth pushing against, which is the thing raw drive most needs and most rarely finds. Energy without resistance dissipates. You give it a shape by refusing to move on demand. In a shared undertaking this can be formidable. Rivalry between you, when it is aimed outward rather than at each other, raises the performance of both, and the pace you keep together is faster than either would keep alone. Competitive pairs of this kind show up everywhere in working life: two people who bring out each other's best partly by being unable to relax around each other. The contest has no off position. Small domestic questions can carry the same charge as important ones, because the charge is in the angle rather than in the topic. Fatigue is the real risk here, more than damage. Nobody sustains a standing confrontation indefinitely without needing periods where nothing is at stake. Whether you want a person like this nearby is answered by the rest of what the two of you are to each other, not by the angle, which only decides how loud the disagreements are. What you can learn from it, if you stay curious rather than defensive, is a very exact map of your own outline. Nothing shows you your edges like something pressing steadily against them."
+ },
+ {
+  "id": "synastry:sun:conjunction:jupiter",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "jupiter",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "synastry:sun~b_jupiter:conjunction"
+  ],
+  "text": "Being believed in is the plainest description of how this feels. Their Jupiter sits on your Sun, and Jupiter enlarges whatever it touches, so what it touches here is your sense of who you are. In their eyes you are a somewhat larger figure than you are in your own, and they say so, often, without being asked and without appearing to think it is a remarkable claim. The practical consequences show up fast. They take your side. They introduce you to people using a description of you that makes you slightly uncomfortable and slightly taller. They back plans you have not finished thinking through, and their backing is not only moral: opportunities tend to arrive through them, or through someone they told about you. If you have spent your life carefully underselling yourself, this contact is a strange and useful correction. You are also, from their side, something worth being generous toward. Their optimism is not free-floating when you are around; it has a specific person to spend itself on, and spending it makes them feel purposeful and expansive. That is why the generosity rarely feels calculated. They are not investing in you. They are enjoying the fact that there is something to be enthusiastic about. Jupiter overshoots, which is the caution built into every version of this contact. Their estimate of you may run ahead of the evidence, and because it is a warm estimate it is hard to refuse. You can end up committing to the scale of the picture they painted rather than the scale of what you can actually deliver, and then working nights to close the gap. Their promises can be equally large and equally sincere, and sincerity is not the same as follow-through. Some of what they offer will not arrive, and they will be genuinely surprised when you mention it. Correction is the other thing missing. Somebody who thinks well of you at this range tends to agree with you more than is good for you. If you bring them a bad plan, you may not hear that it is a bad plan, because their instinct is to see the possibility in it. Nobody plays devil's advocate less reliably than a person who is delighted by you. The value on offer is real, and it is mostly a matter of scale. Left alone, most people set their self-estimate a little low and stay there. Contact like this lifts the ceiling and keeps it lifted for as long as the connection is active, which is often long enough for you to build something under it that holds the height on its own."
+ },
+ {
+  "id": "synastry:sun:sextile:jupiter",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "jupiter",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "synastry:sun~b_jupiter:sextile"
+  ],
+  "text": "Mention what you are working on and watch what they do with it. Their Jupiter sextiles your Sun, which puts their sense of possibility one easy step away from your sense of yourself. The step has to be taken, and taking it is usually as small as saying the thing out loud. Then their instinct goes to work: they widen the frame, name a version twice the size of yours, and remember somebody you should probably talk to. Scope is the thing that comes back, and it comes back larger than you sent it. You describe a plan bounded by what seems reasonable, and they treat the boundary as arbitrary, not to argue but because that is genuinely how the world looks from where they stand. Some of what they suggest is impractical. Some of it is not, and the second kind is why this contact matters. It costs you very little to hear a bigger version and decide afterwards which parts to keep. There is also a quieter effect on your confidence. Their good opinion is easy and unforced, and easy good opinion from someone with wide horizons tends to settle a person's doubts about whether their aims are respectable. You are less likely to apologize for your ambitions in their company. Introductions, invitations, and the odd useful piece of information tend to travel along this line as well, usually because you mentioned something in passing and they thought of a name. What they get is a reason to be useful, which people of this cast enjoy more than they let on. Enthusiasm with nowhere to go turns into restlessness or lecture. Your concrete purposes give theirs a landing place, and helping you get somewhere reinforces their own sense that things generally work out. Unused, it just sits there. The contact stays in the background as an agreeable mood, the sense that this is a person who wishes you well, while neither of you converts the goodwill into anything specific. That is not a failure, only an unclaimed asset. Nobody suffers from a sextile they never use; they simply never find out what was in it. Keeping this one active is a matter of telling them what you are actually up to, in enough detail to be useful, before it is finished and safe to report. What you get in exchange is a standing correction against thinking too small, which is a more common problem than its opposite."
+ },
+ {
+  "id": "synastry:sun:square:jupiter",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "jupiter",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "synastry:sun~b_jupiter:square"
+  ],
+  "text": "Too much, in one direction or another, is the recurring shape of this contact. Their Jupiter squares your Sun, so their appetite for scale and their convictions about how life should be lived press against your identity at an angle that does not accommodate. The strain is rarely cold. It comes wrapped in encouragement, which is part of what makes it hard to name. They think you should be doing more. They may say it kindly, or as a joke, or as advice you did not request, and underneath the phrasing is a settled belief that your version of your life is smaller than it needs to be. When you explain your reasons, their certainty tends to roll straight over them, not out of contempt but because they are quite sure that reservations of that kind are the thing standing between most people and a better situation. Being talked past by an optimist is a specific frustration. Nobody has insulted you and yet your judgment has been set aside. In the other direction, you can look narrow to them, and you may hear about it. Your care about the particulars, your unwillingness to promise what you cannot deliver, your sense that a thing done properly takes the time it takes: from their vantage that reads as brakes. Meanwhile their scale can make you feel small in a way that has nothing to do with what you have achieved. Standing beside somebody whose confidence never needs evidence is uncomfortable for anyone who prefers to earn their claims. Excess is the practical hazard. Plans grow in the telling when the two of you talk. Commitments get made in a warm hour and inspected in a cold one. Their generosity may extend to things you did not ask for and would rather not owe, and refusing it can seem ungrateful when the offer was sincere. The traction is real on both sides. Their pressure stretches a self-estimate that, like most people's, is probably set below your actual range, and being pushed past your comfortable ceiling by somebody who assumes you can reach it is how a fair number of people end up doing more than they planned. Your specificity gives their enthusiasm something firm to run into, which it needs, since unopposed optimism produces a great deal of talk and not much finished work. Neither of you converts the other. What tends to happen instead is that each of you gets slightly harder to dismiss, and the arguments get better."
+ },
+ {
+  "id": "synastry:sun:trine:jupiter",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "jupiter",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "synastry:sun~b_jupiter:trine"
+  ],
+  "text": "Life feels roomier when they are in it. Their Jupiter trines your Sun, and the effect is less a series of events than a change of air pressure: possibilities look nearer, obstacles look more like details, and your own aims stop seeming presumptuous. None of this requires either of you to try. It is simply what happens when a generous view of the world sits at an easy angle to somebody's sense of self. They think well of you as a matter of course. Not because you performed well, and not as a favor, but because their default reading of you is a good one and nothing has changed it. That kind of steady regard is unusual enough that people who receive it often do not notice at first, then find they have started telling this person about ideas they have told nobody else. It is much easier to say an ambitious thing out loud to someone who will not laugh at the size of it. Doors follow. Recommendations, introductions, and the assumption of your competence when you are not in the room tend to come from this direction, and the help rarely arrives with a debt attached. What they take from the exchange is the satisfaction of a view confirmed. You give their optimism a case study, and a person who believes that things generally work out likes having evidence nearby. The problem with an angle this comfortable is that nothing in it ever says no. Confidence can inflate without anything to test it, and plans can grow without meeting the resistance that would tell you which parts were solid. If you are already inclined to overcommit, this contact does not correct you; it agrees with you warmly and helps you book the venue. The two of you can also settle into a pleasant mutual approval that mistakes agreement for perspective. Ease of this kind is a resource with a specific use. It makes attempting things cheaper, and most people attempt too little rather than too much, so on balance it usually helps. What it does not do is supply judgment about which attempts are worth making. That has to come from somewhere else, and the trine will never point out its absence, because as far as it is concerned everything is going well."
+ },
+ {
+  "id": "synastry:sun:opposition:jupiter",
+  "family": "synastry-aspect",
+  "when": {
+   "kind": "synastry",
+   "mode": "aspect",
+   "a": "sun",
+   "b": "jupiter",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "synastry:sun~b_jupiter:opposition"
+  ],
+  "text": "They stand at the far end of the question, holding the larger frame. Their Jupiter opposes your Sun, which sets your particular self against their sense of what is possible, and puts the two in a straight line where each has to keep looking at the other. They are forever pointing at the horizon. You are forever standing in a specific place, being a specific person, with specific work in front of you that will not do itself. Their pull is toward meaning and expansion: another idea about what the point is, another country, another way the whole thing could be arranged. Some of what arrives from that direction is genuinely enlarging. Some of it is a suggestion made by somebody who will not be doing the packing. Because they are usually sincere and often persuasive, the difference is not obvious in the moment, and you may find yourself agreeing to a frame you would not have chosen and noticing later that the details were left to you. There is often a note of teaching in how they address you. It may be gentle, it may be affectionate, and it can still land as a lesson you did not enroll in. Few things provoke a Sun faster than being treated as somebody's improvement project, so your resistance here can become a matter of pride rather than judgment, and you may find yourself defending a smaller position than you actually hold simply because they pushed on the large one. From their side, you can appear stubbornly literal, too attached to what is in front of you to see where it might lead. The completion in an opposition is not a theory. What you underuse is standing in your line of sight, in a person who will not stop demonstrating it, and the reverse holds for them: your ability to be a definite somebody in a definite place is exactly what their sense of possibility lacks. Without a center, expansion is only drift. Without expansion, a center is only a spot. The argument the two of you keep having, about how much is enough and what the point of it all is, is not a dispute either party can win. It is the mechanism by which two incomplete positions get less incomplete. That process has no natural end point. What the angle offers is not a settlement but a standing refusal to let you decide the question of scope by yourself."
+ }
+]

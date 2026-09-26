@@ -72,6 +72,8 @@
   /* geometry */
   --maxw: 760px;
   --maxw-wide: 1100px;
+  /* Playground chart workspace only. The rest of the site stays on --maxw-wide. */
+  --maxw-workspace: 1360px;
   --radius: 8px;
   --radius-sm: 4px;
   --gutter: 1.25rem;
@@ -144,6 +146,13 @@ body::before {
 .container-wide {
   width: 100%;
   max-width: var(--maxw-wide);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.container-workspace {
+  width: 100%;
+  max-width: var(--maxw-workspace);
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
@@ -401,6 +410,114 @@ th {
   margin: 0;
   text-align: center;
 }
+
+.home-sky {
+  margin: 2rem 0 0.5rem;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.home-sky__stamp {
+  margin: 0 0 0.75rem;
+}
+.home-sky__stage {
+  position: relative;
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--surface-2), var(--bg));
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+}
+.home-sky__plate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.home-sky__morph {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  transition: opacity 80ms linear, transform 80ms linear;
+}
+.home-sky__morph svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.home-sky__morph > div {
+  width: 100%;
+  height: 100%;
+}
+.home-sky__controls {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin-top: 0.2rem;
+}
+.home-sky__transport {
+  flex-shrink: 0;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 0.12rem;
+  font-family: var(--mono, ui-monospace, "SF Mono", Menlo, Consolas, monospace);
+  color: var(--text-mute);
+}
+.home-sky__transport button {
+  background: none;
+  border: none;
+  padding: 0 0.18em;
+  min-width: 1.35em;
+  height: 1.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--text-mute);
+  cursor: pointer;
+}
+.home-sky__skip {
+  letter-spacing: -0.14em;
+}
+.home-sky__transport button[aria-pressed="true"] {
+  color: var(--accent);
+}
+.home-sky__transport button:disabled {
+  opacity: 0.32;
+  cursor: default;
+}
+.home-sky__pause {
+  display: block;
+  width: 0.58em;
+  height: 0.72em;
+  margin: 0 auto;
+  border-left: 0.18em solid currentColor;
+  border-right: 0.18em solid currentColor;
+  box-sizing: border-box;
+}
+.home-sky__console {
+  flex: 1;
+  min-width: 0;
+}
+.home-sky__chart {
+  margin: 1.5rem auto 0;
+  max-width: 40rem;
+  text-align: center;
+}
+
 @media (max-width: 760px) {
   .home-compute {
     grid-template-columns: 1fr;
@@ -432,6 +549,111 @@ th {
 
 .skynow-data {
   min-width: 0;
+}
+
+/* ---- playground workspace (layout, not a second brand) ---- */
+.workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.workspace__chrome {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.75rem 1rem;
+}
+
+.workspace__body {
+  display: grid;
+  grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.workspace__figure {
+  max-width: 480px;
+}
+
+.workspace__figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.workspace__rail {
+  min-width: 0;
+}
+
+.workspace__panel {
+  max-height: 32rem;
+  overflow-y: auto;
+  padding-right: 0.35rem;
+}
+
+.provenance-stamp {
+  margin: 0;
+  font-size: var(--fs-small);
+  color: var(--warm);
+}
+
+.today-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.85rem;
+  padding: 0.55rem 0.7rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+}
+
+.today-strip__item {
+  color: var(--text-dim);
+}
+
+.today-strip__item strong {
+  color: var(--warm);
+  font-weight: 600;
+}
+
+.scrubber {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.scrubber .control[type="range"] {
+  flex: 1 1 12rem;
+  min-width: 8rem;
+}
+
+.diff-gain {
+  color: var(--good);
+}
+
+.diff-loss {
+  color: var(--bad);
+}
+
+.rising-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+@media (max-width: 860px) {
+  .workspace__body {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .workspace__figure {
+    max-width: 22rem;
+    margin: 0 auto;
+  }
 }
 
 /* Facts tab: long atom ids and descriptions wrap inside the data panel */
@@ -669,6 +891,10 @@ button.control:hover {
 
 /* ---- example chart cards (playground "Charts worth reading") ----
    A preview wheel is a thumbnail beside its caption, not a hero figure. */
+.example-card-grid {
+  margin-top: 1rem;
+}
+
 .example-card {
   display: flex;
   gap: 1rem;

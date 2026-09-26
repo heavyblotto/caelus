@@ -14,14 +14,16 @@ export interface SynContact { aBody: string; bBody: string; aspect: string; orb:
  * inner chart's Ascendant (9 o'clock, counterclockwise), matching ChartWheel.
  */
 export default function BiWheel({
-  inner, outer, contacts, size = 360, innerLabel = "A", outerLabel = "B",
+  inner, outer, mid, contacts, size = 360, innerLabel = "A", outerLabel = "B", midLabel = "mid",
 }: {
   inner: Chart;
   outer: Chart;
+  mid?: Chart;
   contacts: SynContact[];
   size?: number;
   innerLabel?: string;
   outerLabel?: string;
+  midLabel?: string;
 }) {
   const c = size / 2;
   const R = (size / 2) * 0.9;
@@ -49,6 +51,7 @@ export default function BiWheel({
 
   const el: React.ReactElement[] = [];
   el.push(ring(1.0, "r-out", 1.5), ring(0.86, "r-zod"), ring(0.58, "r-asp"));
+  if (mid) el.push(ring(0.74, "r-mid"));
 
   // zodiac signs
   for (let s = 0; s < 12; s++) {
@@ -82,12 +85,15 @@ export default function BiWheel({
       el.push(glyphEl(p.lon, glyphR, GLYPHS[b] ?? b.slice(0, 2), size * 0.045, fill, `${prefix}g-${b}`));
     }
   };
-  planets(inner, 0.68, [0.58, 0.62], "var(--text)", "in-");
+  planets(inner, 0.66, [0.58, 0.62], "var(--text)", "in-");
+  if (mid) planets(mid, 0.76, [0.73, 0.75], "var(--text-dim)", "mid-");
   planets(outer, 0.80, [0.84, 0.86], "var(--accent)", "out-");
 
   return (
     <svg width={size} height={size} viewBox={`${-pad} ${-pad} ${size + 2 * pad} ${size + 2 * pad}`}
-      role="img" aria-label={`synastry bi-wheel: ${innerLabel} inner, ${outerLabel} outer`}
+      role="img" aria-label={mid
+        ? `tri-wheel: ${innerLabel} inner, ${midLabel} middle, ${outerLabel} outer`
+        : `synastry bi-wheel: ${innerLabel} inner, ${outerLabel} outer`}
       style={{ display: "block" }}>
       {el}
     </svg>

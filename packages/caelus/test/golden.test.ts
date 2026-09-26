@@ -10,25 +10,31 @@ import { fileURLToPath } from "node:url";
 import {
   julianDay, deltaT, jdTT, nutation, meanObliquity, DEG, mod, ayanamsa,
 } from "../src/core.js";
-import { Engine, BODIES, Body, DEFAULT_ORBS, ASPECTS, SIGNS, NOT_ASPECTABLE } from "../src/chart.js";
+import { Engine, BODIES, Body, DEFAULT_ORBS, ASPECTS, SIGNS, NOT_ASPECTABLE, findAspects } from "../src/chart.js";
 import { aspectPhase } from "../src/electional.js";
-import { declinationAspects, outOfBounds } from "../src/derived.js";
+import { compositeLongitudes, declinationAspects, outOfBounds, returns } from "../src/derived.js";
+import { dignityScore } from "../src/dignity-score.js";
 import { engineCapabilities } from "../src/capabilities.js";
 import { deltaTSigma } from "../src/ranges.js";
 import { interpretationContext } from "../src/interpretation.js";
 import {
-  transitAspects, synastryAspects, synastryOverlays, compositePlacements,
+  transitAspects, transitHouses, synastryAspects, synastryOverlays,
+  compositePlacements, compositeAspects, compositeFrame, activeReturns, activeLunations,
 } from "../src/relational.js";
+import { enrichContextOptions, enrichSynastryOptions } from "../src/interpretation-enrich.js";
 import { profectionAt } from "../src/profections.js";
 import { zrAt } from "../src/releasing.js";
 import { firdariaAt } from "../src/firdaria.js";
 import { vimshottariAt } from "../src/vedic.js";
 import { yogasAt } from "../src/yogas.js";
 import {
-  interpret, hasPlacement, hasAspect, hasPattern, hasStar, hasLot, hasParallel,
+  interpret, hasPlacement, hasAspect, hasPattern, hasStar, hasLot, hasDegree, hasParallel,
+  hasAngleContact,
   matchAll, matchNone,
-  hasDispositor, hasReception, hasTransit, hasTimelord, hasDignityFine, hasSynastry,
+  hasDispositor, hasReception, hasTransit, hasTransitHouse, hasStation,
+  hasTimelord, hasDignityFine, hasSynastry,
   hasComposite, hasNakshatra, hasVarga, hasYoga, reconcile,
+  hasReturn, hasLunation, hasSolarPhase, hasCompositeAspect,
 } from "../src/interpret.js";
 import { chartBrief, auditCitations, BRIEF_INSTRUCTIONS } from "../src/brief.js";
 import {
@@ -479,19 +485,23 @@ for (const g of G.houses) {
     console.error(`FAIL in-range unavailable: ${JSON.stringify(inRange.unavailable)}`);
   }
 
-  // The wide packs make 1700 fully in-range now (validated 1000-3000), so the
-  // "past the packs" probe moved to 900 CE. There every packed body -- the
-  // majors, Pluto and the small bodies -- is outside its fitted span and lands
-  // in `unavailable` (the engine will not compute a body past its validated
-  // span rather than silently serve the unvalidated fallback). What still
-  // computes is the analytic-and-fallback remainder: the Moon and the nodes.
+  // The classical era packs make 900 CE computable for the tradition's seven:
+  // the Sun (via the earth slab), Moon, Mercury, Venus, Mars, Jupiter and
+  // Saturn resolve through chained era-slab resolution (their slabs adjoin the
+  // modern packs at the shared 1000-CE boundary). What still lands in
+  // `unavailable` is the modern remainder -- Uranus, Neptune, Pluto and the
+  // small bodies have no classical pack, and the engine will not compute a
+  // body past its validated span rather than silently serve the unvalidated
+  // fallback.
   const pre1850 = eng.chart(900, 3, 21, 12, 0, 0, 51.5, -0.12, "placidus");
   if (
-    !("moon" in pre1850.bodies) ||                 // the Meeus fallback still runs
-    !pre1850.unavailable.includes("sun") ||        // sun IS outside its span
-    !(pre1850.unavailable.includes("mars")) ||
+    !("sun" in pre1850.bodies) ||                  // the earth slab carries it
+    !("moon" in pre1850.bodies) ||                 // the classical moon slab
+    !("mars" in pre1850.bodies) ||                 // the classical mars slab
+    !("saturn" in pre1850.bodies) ||               // the classical saturn slab
+    !pre1850.unavailable.includes("uranus") ||     // no classical pack
     !(pre1850.unavailable.includes("pluto")) ||
-    !pre1850.warnings.some((w) => w.kind === "outside_validated_range")
+    !(pre1850.unavailable.includes("chiron"))
   ) {
     failures++;
     console.error(
@@ -525,14 +535,15 @@ for (const g of G.houses) {
     const rangeWarn = pre1700.warnings.filter((w) => w.kind === "outside_validated_range");
     const dtWarn = pre1700.warnings.find((w) => w.kind === "delta_t_uncertain");
     const warnedBodies = new Set(rangeWarn.map((w) => (w as { body: string }).body));
-    // 900 < 1000 (the validated floor): the packed majors are absent (see
-    // above), so the one computed body past its span is the Moon on its Meeus
-    // fallback -- and it is warned. The analytic nodes carry no stated bound
-    // (never warned). Delta-T sigma is well past 5 s.
-    if (!warnedBodies.has("moon") || warnedBodies.has("mean_node")
+    // At 900 CE the classical seven compute INSIDE their validated span now --
+    // the era slabs adjoin the headline's earlier edge (the Sun inherits the
+    // earth slab's span), so no computed body warns. The analytic nodes carry
+    // no stated bound (never warned). What still states itself is delta-T:
+    // sigma is well past 5 s this deep.
+    if (warnedBodies.size !== 0 || warnedBodies.has("mean_node")
       || !dtWarn || (dtWarn as { sigmaSeconds: number }).sigmaSeconds < 5) {
       failures++;
-      console.error(`FAIL 1650 warnings: ${JSON.stringify(pre1700.warnings)}`);
+      console.error(`FAIL 900 warnings: ${JSON.stringify(pre1700.warnings)}`);
     }
   }
   // Annual aberration must be applied to LATITUDE as well as longitude
@@ -591,14 +602,18 @@ for (const g of G.houses) {
     ids.size !== ctx.atoms.length // unique ids
     || !sorted // descending salience
     || by("placement").length !== Object.keys(c.bodies).length
-    || by("aspect").length !== c.aspects.length
+    // aspect atoms: the chart's own list plus the projection's node aspects
+    // (counted exactly by the node-aspect block below)
+    || by("aspect").length < c.aspects.length
     || by("angle").length !== 4
   ) {
     failures++;
     console.error(`FAIL interp shape: atoms=${ctx.atoms.length} placements=${by("placement").length}/${Object.keys(c.bodies).length} aspects=${by("aspect").length}/${c.aspects.length} unique=${ids.size === ctx.atoms.length} sorted=${sorted}`);
   }
-  // every aspect atom maps to a chart aspect; strength = 1 - |orb|/limit in [0,1]
+  // every non-node aspect atom maps to a chart aspect; strength = 1 - |orb|/limit
+  // in [0,1] (node atoms are pinned by their own recompute block below)
   for (const a of by("aspect") as Array<{ a: string; b: string; aspect: string; orb: number; strength: number; phase: string }>) {
+    if (a.a.endsWith("_node") || a.b.endsWith("_node")) continue;
     const match = c.aspects.find((x) => x.a === a.a && x.b === a.b && x.aspect === a.aspect);
     const want = Math.max(0, 1 - Math.abs(a.orb) / DEFAULT_ORBS[a.aspect]);
     if (!match || Math.abs(match.orb - a.orb) > 1e-9 || Math.abs(a.strength - want) > 1e-9
@@ -646,6 +661,156 @@ for (const g of G.houses) {
     }
   }
 
+  // Planet-on-angle contacts: the projection's angleContact atoms must agree
+  // with separations recomputed from the chart's own angles at the default 8°
+  // orb; mean_node sits out; the angleOrb option tightens the set; the
+  // selector resolves against the projected atoms.
+  {
+    const points: Array<[string, number]> = [
+      ["asc", c.angles.asc], ["dsc", mod(c.angles.asc + 180, 360)],
+      ["mc", c.angles.mc], ["ic", mod(c.angles.mc + 180, 360)],
+    ];
+    const wantOrb = new Map<string, number>();
+    for (const [body, p] of Object.entries(c.bodies)) {
+      if (!p || body === "mean_node") continue;
+      for (const [angle, lon] of points) {
+        const orb = Math.abs(mod(p.lon - lon + 180, 360) - 180);
+        if (orb <= 8) wantOrb.set(`${body}:${angle}`, orb);
+      }
+    }
+    const got = by("angleContact") as Array<{ body: string; angle: string; orb: number }>;
+    const bad = got.filter((a) => {
+      const want = wantOrb.get(`${a.body}:${a.angle}`);
+      return want === undefined || Math.abs(want - a.orb) > 1e-9;
+    });
+    if (got.length !== wantOrb.size || bad.length) {
+      failures++;
+      console.error(`FAIL interp angleContact: want ${[...wantOrb.keys()].join(",")} got ${got.map((a) => `${a.body}:${a.angle}`).join(",")}`);
+    }
+    if (got.length > 0) {
+      const a0 = got[0];
+      if (!hasAngleContact({ body: a0.body, angle: a0.angle })(ctx).matched) {
+        failures++;
+        console.error(`FAIL hasAngleContact does not match projected ${a0.body}:${a0.angle}`);
+      }
+    }
+    const tight = interpretationContext(c, { angleOrb: 1 })
+      .atoms.filter((a) => a.kind === "angleContact") as Array<{ body: string; angle: string; orb: number }>;
+    if (tight.some((a) => a.orb > 1) || tight.length > got.length) {
+      failures++;
+      console.error(`FAIL interp angleContact orb option: ${tight.length}/${got.length}`);
+    }
+  }
+
+  // Degree atoms: one per placed body (mean node sits out when the true node
+  // is present) plus the ASC and MC, with the ordinal degree and face index
+  // recomputed from the chart's own longitudes -- degree n spans [n-1°, n°)
+  // of the sign, so 14.5° Aries is the 15th degree; face = 1-3 by ten-degree
+  // band. The selector resolves against the projected atoms.
+  {
+    const wantPoints = new Map<string, number>();
+    for (const [body, p] of Object.entries(c.bodies)) {
+      if (!p || (body === "mean_node" && c.bodies.true_node)) continue;
+      wantPoints.set(body, p.lon);
+    }
+    wantPoints.set("asc", c.angles.asc);
+    wantPoints.set("mc", c.angles.mc);
+    const got = by("degree") as Array<{ point: string; sign: string; degree: number; face: number; id: string }>;
+    let bad = got.length !== wantPoints.size;
+    for (const a of got) {
+      const lon = wantPoints.get(a.point);
+      if (lon === undefined) { bad = true; break; }
+      const signDeg = mod(lon, 30);
+      const degree = Math.min(Math.floor(signDeg) + 1, 30);
+      const face = Math.min(Math.floor(signDeg / 10) + 1, 3);
+      if (a.degree !== degree || a.face !== face
+        || a.id !== `degree:${a.point}:${a.sign.toLowerCase()}:${degree}`) { bad = true; break; }
+    }
+    if (bad) {
+      failures++;
+      console.error(`FAIL interp degree: want ${wantPoints.size} points, got ${got.map((a) => a.id).join(",")}`);
+    }
+    const d0 = got.find((a) => a.point === "sun")!;
+    if (!hasDegree({ point: "sun", sign: d0.sign, degree: d0.degree })(ctx).matched
+      || !hasDegree({ sign: d0.sign, face: d0.face })(ctx).matched
+      || hasDegree({ point: "sun", degree: d0.degree === 1 ? 2 : d0.degree - 1 })(ctx).matched) {
+      failures++;
+      console.error(`FAIL hasDegree does not resolve ${d0.id}`);
+    }
+  }
+
+  // Node aspects: the projection's node aspect atoms must agree with
+  // separations recomputed from the chart's own longitudes (true node vs
+  // every aspectable body, default orbs); only the true node projects when
+  // both nodes are present; the engine boundary is unchanged (findAspects
+  // still excludes nodes); the selector resolves against the projected atoms.
+  {
+    const np = c.bodies.true_node!;
+    const wantOrb = new Map<string, number>();
+    for (const [body, p] of Object.entries(c.bodies)) {
+      if (!p || NOT_ASPECTABLE.has(body)) continue;
+      const sep = Math.abs(mod(np.lon - p.lon + 180, 360) - 180);
+      for (const [asp, angle] of Object.entries(ASPECTS)) {
+        const orb = Math.abs(sep - angle);
+        if (orb <= DEFAULT_ORBS[asp]) {
+          const [x, y] = ["true_node", body].sort();
+          wantOrb.set(`aspect:${x}~${y}:${asp}`, Math.round(orb * 100) / 100);
+        }
+      }
+    }
+    const got = (by("aspect") as Array<{ id: string; a: string; b: string; orb: number; phase: string; strength: number; aspect: string }>)
+      .filter((a) => a.a === "true_node" || a.b === "true_node" || a.a === "mean_node" || a.b === "mean_node");
+    const bad = got.filter((a) => {
+      const want = wantOrb.get(a.id);
+      return want === undefined || Math.abs(want - a.orb) > 1e-9
+        || Math.abs(a.strength - Math.max(0, 1 - a.orb / DEFAULT_ORBS[a.aspect])) > 1e-9
+        || !["applying", "separating", "exact"].includes(a.phase);
+    });
+    if (got.length !== wantOrb.size || bad.length
+      || c.aspects.some((a) => a.a.endsWith("_node") || a.b.endsWith("_node"))) {
+      failures++;
+      console.error(`FAIL interp node aspects: want ${[...wantOrb.keys()].join(",")} got ${got.map((a) => a.id).join(",")}`);
+    }
+    if (got.length > 0) {
+      const a0 = got[0];
+      if (!hasAspect({ between: [a0.a, a0.b] as [string, string], aspect: a0.aspect })(ctx).matched) {
+        failures++;
+        console.error(`FAIL hasAspect does not match projected node aspect ${a0.id}`);
+      }
+    }
+  }
+
+  // Peregrine: a placement atom's dignities carry "peregrine" exactly when
+  // the pinned five-fold score (dignity-golden) reports it for a classical
+  // planet in this chart's sect; never for the outers or points; and the
+  // Chart's own sign-level dignities list stays free of it.
+  {
+    const CLASSICAL7 = ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn"];
+    const sect = c.bodies.sun!.house >= 7 ? "day" : "night";
+    const got = by("placement") as Array<{ body: string; dignities: string[] }>;
+    let peregrines = 0;
+    for (const a of got) {
+      const p = c.bodies[a.body as Body]!;
+      const want = CLASSICAL7.includes(a.body)
+        && dignityScore(a.body, p.lon, sect as "day" | "night").peregrine;
+      if (want) peregrines++;
+      if (a.dignities.includes("peregrine") !== want || p.dignities.includes("peregrine")) {
+        failures++;
+        console.error(`FAIL interp peregrine ${a.body}: atom=${a.dignities} chart=${p.dignities}`);
+      }
+    }
+    if (peregrines > 0) {
+      const body = got.find((a) => a.dignities.includes("peregrine"))!.body;
+      if (!hasPlacement({ body, dignity: "peregrine" })(ctx).matched) {
+        failures++;
+        console.error(`FAIL hasPlacement peregrine does not match ${body}`);
+      }
+    } else {
+      failures++;
+      console.error("FAIL interp peregrine: 1990-06-10 chart should hold at least one peregrine classical planet");
+    }
+  }
+
   // Capabilities: every body the engine reports is classified, and the Node
   // tier (this test's data dir) reports the pack-backed sources and spans.
   {
@@ -670,14 +835,23 @@ for (const g of G.houses) {
       failures++;
       console.error(`FAIL capabilities pluto: ${JSON.stringify(pluto)} tier=${caps.plutoTier}`);
     }
-    // The wide Moon pack is fitted 1000-3000 (fit_moon.py); `validated` stays
-    // at the measured 1850-2150 until a wider measurement says otherwise --
-    // the same fitted/validated split the Pluto pack makes visible above.
+    // The Moon's spans chain its classical era slab onto the wide modern pack:
+    // fitted and validated both run from the classical era start (~2999 BCE,
+    // reported as -2998 by the year conversion) through 3000.
     if (caps.moonTier !== "chebyshev" || moon?.source !== "moon_chebyshev"
-      || !moon.fitted || Math.abs(moon.fitted.from - 1000) > 2
-      || Math.abs(moon.fitted.to - 3000) > 2) {
+      || !moon.fitted || Math.abs(moon.fitted.from - -2998) > 2
+      || Math.abs(moon.fitted.to - 3000) > 2
+      || !moon.validated || Math.abs(moon.validated.from - -2998) > 2
+      || Math.abs(moon.validated.to - 3000) > 2) {
       failures++;
       console.error(`FAIL capabilities moon: ${JSON.stringify(moon)} tier=${caps.moonTier}`);
+    }
+    // The Sun inherits the earth slab's era extension the same way.
+    const sunCap = byBody.get("sun");
+    if (!sunCap?.validated || Math.abs(sunCap.validated.from - -2998) > 2
+      || Math.abs(sunCap.validated.to - 3000) > 2) {
+      failures++;
+      console.error(`FAIL capabilities sun era span: ${JSON.stringify(sunCap)}`);
     }
     if (ceres?.source !== "chebyshev_pack" || !ceres.fitted) {
       failures++;
@@ -751,6 +925,45 @@ for (const g of G.houses) {
     const transitJd = julianDay(2025, 6, 10, 12, 0, 0);
     const natalB = eng.chartAt(julianDay(1992, 3, 15, 8, 0, 0), 40.71, -74.0, "placidus");
     const transits = transitAspects(natal, eng, transitJd, { maxOrb: 3 });
+    // Node-target hits: transitAspects admits one natal node as a target;
+    // the hits must agree with separations recomputed from the transiting
+    // ephemeris positions against the natal node's own longitude, and they
+    // project as citable transit atoms the selector can match.
+    {
+      const nodeLon = natal.bodies.true_node!.lon;
+      const want = new Map<string, number>();
+      for (const tb of BODIES) {
+        if (NOT_ASPECTABLE.has(tb)) continue;
+        const tp = eng.position(tb, transitJd, { zodiac: natal.zodiac });
+        const sep = Math.abs(mod(tp.lon - nodeLon + 180, 360) - 180);
+        for (const [asp, angle] of Object.entries(ASPECTS)) {
+          const orb = Math.abs(sep - angle);
+          if (orb <= Math.min(3, DEFAULT_ORBS[asp])) {
+            want.set(`${tb}:${asp}`, Math.round(orb * 100) / 100);
+          }
+        }
+      }
+      const got = transits.filter((t) => t.natal === "true_node");
+      const bad = got.filter((t) => {
+        const w0 = want.get(`${t.transit}:${t.aspect}`);
+        return w0 === undefined || Math.abs(w0 - t.orb) > 1e-9;
+      });
+      const meanHits = transits.filter((t) => t.natal === "mean_node");
+      if (got.length !== want.size || bad.length || meanHits.length) {
+        failures++;
+        console.error(`FAIL transit node targets: want ${[...want.keys()].join(",")} got ${got.map((t) => `${t.transit}:${t.aspect}`).join(",")} mean=${meanHits.length}`);
+      }
+      if (got.length > 0) {
+        const nctx = interpretationContext(natal, { transits });
+        const t0 = got[0];
+        const id = `transit:${t0.transit}~natal_true_node:${t0.aspect}`;
+        if (!nctx.atoms.some((a) => a.id === id)
+          || !hasTransit({ natal: "true_node", transit: t0.transit })(nctx).matched) {
+          failures++;
+          console.error(`FAIL transit node atom/selector: ${id}`);
+        }
+      }
+    }
     const prof = profectionAt(eng, natal.jdUt, transitJd, 27.95, -82.46);
     const zr = zrAt(eng, natal.jdUt, transitJd, 27.95, -82.46);
     const fir = firdariaAt(eng, natal.jdUt, transitJd, 27.95, -82.46);
@@ -808,6 +1021,386 @@ for (const g of G.houses) {
       failures++;
       console.error(`FAIL relational atoms: unique=${ids.size === rctx.atoms.length} transits=${transits.length} audit=${audit.ok}`);
     }
+  }
+
+  // Transit houses and stations: the projection's transitHouse atoms must
+  // agree with each aspectable transiting body's natal-house position
+  // recomputed from its longitude against the natal cusps; station atoms
+  // must agree with stations() over the enrich window; both selectors
+  // resolve against the projected atoms.
+  {
+    const natal = eng.chartAt(julianDay(1990, 6, 10, 14, 30, 0), 27.95, -82.46, "placidus");
+    const transitJd = julianDay(2025, 6, 10, 12, 0, 0);
+    const enr = enrichContextOptions(eng, natal, { jd: transitJd, lat: 27.95, lonEast: -82.46 },
+      { timelords: false, vedic: false, stationWindowDays: 30 });
+    const thCtx = interpretationContext(natal, enr);
+
+    const wantHouses = new Map<string, number>();
+    for (const th of transitHouses(natal, eng, transitJd)) {
+      // recompute the house from the longitude against the natal cusps
+      let h = 12;
+      for (let i = 0; i < 12; i++) {
+        if (mod(th.lon - natal.cusps[i], 360)
+          < mod(natal.cusps[(i + 1) % 12] - natal.cusps[i], 360)) { h = i + 1; break; }
+      }
+      if (h !== th.house) {
+        failures++;
+        console.error(`FAIL transitHouses ${th.body}: recomputed ${h} != ${th.house}`);
+      }
+      wantHouses.set(th.body, th.house);
+    }
+    const gotTh = thCtx.atoms.filter((a) => a.kind === "transitHouse") as Array<{ body: string; house: number }>;
+    if (
+      gotTh.length !== wantHouses.size
+      || gotTh.some((a) => wantHouses.get(a.body) !== a.house)
+    ) {
+      failures++;
+      console.error(`FAIL interp transitHouse: want ${wantHouses.size} got ${gotTh.length}`);
+    }
+    if (gotTh.length > 0
+      && !hasTransitHouse({ body: gotTh[0].body, house: gotTh[0].house })(thCtx).matched) {
+      failures++;
+      console.error("FAIL hasTransitHouse does not match projected atom");
+    }
+
+    const wantStations: Array<{ body: string; direction: string; jd: number }> = [];
+    for (const body of ["mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto", "chiron"] as const) {
+      for (const [jd, direction] of stations(eng, body, transitJd - 30, transitJd + 30)) {
+        wantStations.push({ body, direction, jd });
+      }
+    }
+    const gotSt = thCtx.atoms.filter((a) => a.kind === "station") as Array<{ body: string; direction: string; daysFromExact: number }>;
+    const stKey = (b: string, d: string) => `${b}:${d}`;
+    const wantKeys = new Set(wantStations.map((s) => stKey(s.body, s.direction)));
+    if (
+      gotSt.length !== wantStations.length
+      || gotSt.some((a) => !wantKeys.has(stKey(a.body, a.direction)))
+      || gotSt.some((a) => Math.abs(a.daysFromExact) > 30 + 1e-9)
+      || wantStations.length === 0 // the 60-day window over 9 bodies must catch some
+    ) {
+      failures++;
+      console.error(`FAIL interp station: want ${wantStations.length} got ${gotSt.length}`);
+    }
+    for (const s of wantStations) {
+      const atom = gotSt.find((a) => a.body === s.body && a.direction === s.direction);
+      if (!atom || Math.abs((s.jd - transitJd) - atom.daysFromExact) > 1e-9) {
+        failures++;
+        console.error(`FAIL station ${s.body} ${s.direction}: daysFromExact mismatch`);
+      }
+    }
+    if (gotSt.length > 0
+      && !hasStation({ body: gotSt[0].body, direction: gotSt[0].direction as "retrograde" | "direct" })(thCtx).matched) {
+      failures++;
+      console.error("FAIL hasStation does not match projected atom");
+    }
+  }
+
+  // B4 projection surface: planetary returns, lunations, solar phase, and
+  // the timelord house/under fields, each recomputed from pinned primitives.
+  {
+    const natal = eng.chartAt(julianDay(1990, 6, 10, 14, 30, 0), 27.95, -82.46, "placidus");
+    const RETURN_SET = ["sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn", "uranus", "chiron", "true_node"];
+
+    // A return in progress at the root-found first Saturn return instant.
+    const [srJd] = returns(eng, "saturn", natal.jdUt,
+      natal.jdUt + 28 * 365.25, natal.jdUt + 31 * 365.25);
+    if (!srJd) {
+      failures++;
+      console.error("FAIL activeReturns: no Saturn return found in the 28-31y window");
+    } else {
+      const hits = activeReturns(natal, eng, srJd);
+      const sat = hits.find((h) => h.body === "saturn");
+      if (!sat || sat.nth !== 1 || sat.orb > 0.05) {
+        failures++;
+        console.error(`FAIL activeReturns saturn: ${JSON.stringify(sat)}`);
+      }
+      // agreement with a direct separation recompute over the whole set
+      for (const body of RETURN_SET) {
+        const np = natal.bodies[body as Body];
+        if (!np) continue;
+        const tp = eng.position(body as Body, srJd, { zodiac: natal.zodiac });
+        const orb = Math.abs(mod(tp.lon - np.lon + 180, 360) - 180);
+        const hit0 = hits.find((h) => h.body === body);
+        if ((orb <= 3) !== !!hit0
+          || (hit0 && Math.abs(hit0.orb - Math.round(orb * 100) / 100) > 1e-9)) {
+          failures++;
+          console.error(`FAIL activeReturns recompute ${body}: orb=${orb} hit=${JSON.stringify(hit0)}`);
+        }
+      }
+      // the projection + the selector, including the nth filters
+      const rctx = interpretationContext(natal, { returns: hits });
+      if (!rctx.atoms.some((a) => a.id === "return:saturn:1")
+        || !hasReturn({ body: "saturn", nth: 1 })(rctx).matched
+        || !hasReturn({ body: "saturn", minNth: 1 })(rctx).matched
+        || hasReturn({ body: "saturn", minNth: 2 })(rctx).matched) {
+        failures++;
+        console.error("FAIL return atom/selector");
+      }
+      // a newborn chart reports nothing (nth >= 1)
+      if (activeReturns(natal, eng, natal.jdUt).length !== 0) {
+        failures++;
+        console.error("FAIL activeReturns: nonempty at birth");
+      }
+    }
+
+    // Lunations: 2025-03-14 was a total lunar eclipse (a Full Moon),
+    // 2025-03-29 a partial solar eclipse (a New Moon), 2025-06-11 a plain
+    // Full Moon. Each hit's timing, house, sign, and onNatal recompute from
+    // lunarPhases and the natal chart's own cusps and longitudes.
+    const checkLunation = (jd: number, phase: "new" | "full", eclipse: "solar" | "lunar" | null): void => {
+      const hits = activeLunations(natal, eng, jd);
+      const h0 = hits.find((h) => h.phase === phase);
+      if (!h0 || h0.eclipse !== eclipse) {
+        failures++;
+        console.error(`FAIL activeLunations at ${jd}: want ${phase}/${eclipse} got ${JSON.stringify(hits)}`);
+        return;
+      }
+      const syz = lunarPhases(eng, jd - 3, jd + 3).filter(([, n]) => n === phase);
+      const sjd = syz[0]?.[0];
+      const lon = eng.longitude("moon", sjd!, { zodiac: natal.zodiac });
+      let house = 12;
+      for (let i = 0; i < 12; i++) {
+        if (mod(lon - natal.cusps[i], 360)
+          < mod(natal.cusps[(i + 1) % 12] - natal.cusps[i], 360)) { house = i + 1; break; }
+      }
+      const onNatal = Object.entries(natal.bodies)
+        .filter(([b, p]) => p && !NOT_ASPECTABLE.has(b)
+          && Math.abs(mod(lon - p.lon + 180, 360) - 180) <= 3)
+        .map(([b]) => b).sort();
+      if (h0.house !== house || h0.sign !== SIGNS[Math.floor(mod(lon, 360) / 30)]
+        || h0.onNatal.join() !== onNatal.join()
+        || Math.abs(h0.daysFromExact - (sjd! - jd)) > 1e-6) {
+        failures++;
+        console.error(`FAIL lunation recompute: ${JSON.stringify(h0)} vs house=${house} onNatal=${onNatal}`);
+      }
+      const lctx = interpretationContext(natal, {
+        lunations: hits.map(({ phase: p, eclipse: e, house: ho, sign, daysFromExact, onNatal: on }) =>
+          ({ phase: p, eclipse: e, house: ho, sign, daysFromExact, onNatal: on })),
+      });
+      if (!hasLunation({ phase, house })(lctx).matched
+        || !hasLunation({ eclipse: eclipse !== null })(lctx).matched
+        || (eclipse !== null && !hasLunation({ eclipseKind: eclipse })(lctx).matched)) {
+        failures++;
+        console.error(`FAIL lunation atom/selector at ${jd}`);
+      }
+    };
+    checkLunation(julianDay(2025, 3, 14, 0, 0, 0), "full", "lunar");
+    checkLunation(julianDay(2025, 3, 29, 6, 0, 0), "new", "solar");
+    checkLunation(julianDay(2025, 6, 10, 12, 0, 0), "full", null);
+
+    // Solar phase: the projection's atoms must match the ladder recomputed
+    // from the chart's own longitudes at the pinned electional thresholds
+    // (cazimi 17', combust 8.5°, under beams 15°); classical five only.
+    {
+      const scan = [natal, eng.chartAt(julianDay(2025, 6, 10, 12, 0, 0), 27.95, -82.46, "placidus")];
+      let seen = 0;
+      for (const c2 of scan) {
+        const ctx2 = interpretationContext(c2);
+        const got = ctx2.atoms.filter((a) => a.kind === "solarPhase") as Array<{ body: string; phase: string; elongation: number }>;
+        const want = new Map<string, string>();
+        for (const body of ["mercury", "venus", "mars", "jupiter", "saturn"]) {
+          const p = c2.bodies[body as Body];
+          if (!p) continue;
+          const e = Math.abs(mod(p.lon - c2.bodies.sun!.lon + 180, 360) - 180);
+          const ph = e <= 0.2833 ? "cazimi" : e <= 8.5 ? "combust" : e <= 15.0 ? "under_beams" : null;
+          if (ph) want.set(body, ph);
+        }
+        seen += want.size;
+        if (got.length !== want.size || got.some((a) => want.get(a.body) !== a.phase)) {
+          failures++;
+          console.error(`FAIL interp solarPhase: want ${JSON.stringify([...want])} got ${got.map((g) => `${g.body}:${g.phase}`).join(",")}`);
+        }
+        if (got.length > 0
+          && !hasSolarPhase({ body: got[0].body, phase: got[0].phase as "combust" })(ctx2).matched) {
+          failures++;
+          console.error("FAIL hasSolarPhase does not match projected atom");
+        }
+      }
+      if (seen === 0) {
+        failures++;
+        console.error("FAIL interp solarPhase: neither scan chart holds a solar-phase body (pick better dates)");
+      }
+    }
+
+    // Timelord house/under: the profection atoms carry the profected houses,
+    // the firdaria sub its major, the dasha antar its maha; the extended
+    // hasTimelord filters resolve; enrich carries returns + lunations too.
+    {
+      const transitJd = julianDay(2025, 6, 10, 12, 0, 0);
+      const enr = enrichContextOptions(eng, natal, { jd: transitJd, lat: 27.95, lonEast: -82.46 },
+        { transits: false, transitHouses: false, stations: false, vedic: false });
+      const tctx = interpretationContext(natal, enr);
+      const prof = profectionAt(eng, natal.jdUt, transitJd, 27.95, -82.46);
+      const fir = firdariaAt(eng, natal.jdUt, transitJd, 27.95, -82.46);
+      const dasha = vimshottariAt(eng, natal.jdUt, transitJd, "sidereal:lahiri");
+      const tl = tctx.atoms.filter((a) => a.kind === "timelord") as Array<{ system: string; level: string; lord: string; house?: number; under?: string }>;
+      const year = tl.find((a) => a.system === "profection" && a.level === "year");
+      const month = tl.find((a) => a.system === "profection" && a.level === "month");
+      const sub = tl.find((a) => a.system === "firdaria" && a.level === "sub");
+      const antar = tl.find((a) => a.system === "dasha" && a.level === "antar");
+      if (year?.house !== prof.annual.house || month?.house !== prof.monthly.house
+        || (fir.sub != null && sub?.under !== fir.major)
+        || (dasha.antar != null && antar?.under !== dasha.maha)) {
+        failures++;
+        console.error(`FAIL timelord house/under: year=${JSON.stringify(year)} sub=${JSON.stringify(sub)} antar=${JSON.stringify(antar)}`);
+      }
+      if (!hasTimelord({ system: "profection", level: "year", house: prof.annual.house })(tctx).matched
+        || (dasha.antar != null && !hasTimelord({ system: "dasha", level: "antar", lord: dasha.antar, under: dasha.maha ?? undefined })(tctx).matched)
+        || hasTimelord({ system: "profection", level: "year", house: (prof.annual.house % 12) + 1 })(tctx).matched) {
+        failures++;
+        console.error("FAIL hasTimelord house/under filters");
+      }
+      if (!enr.returns || !enr.lunations) {
+        failures++;
+        console.error("FAIL enrichContextOptions: returns/lunations missing");
+      }
+    }
+  }
+
+  // B3 projection surface: aspects inside the composite chart. The composite
+  // longitudes are already pinned by derived-golden; what is new here is the
+  // aspect set over them, so every hit recomputes from those longitudes by
+  // brute force -- same aspect table and orb policy as findAspects, and no
+  // phase, because a midpoint composite is a static figure.
+  {
+    const natalA = eng.chartAt(julianDay(1990, 6, 10, 14, 30, 0), 27.95, -82.46, "placidus");
+    const natalB = eng.chartAt(julianDay(1986, 2, 3, 6, 15, 0), 40.71, -74.01, "placidus");
+    const bodySet = BODIES as unknown as Body[];
+    const hits = compositeAspects(eng, natalA.jdUt, natalB.jdUt, bodySet);
+    const lons = compositeLongitudes(eng, natalA.jdUt, natalB.jdUt, bodySet, "tropical");
+    const names = bodySet.filter((b) => !NOT_ASPECTABLE.has(b) || b === "true_node");
+    const want: string[] = [];
+    for (let i = 0; i < names.length; i++) {
+      for (let j = i + 1; j < names.length; j++) {
+        const sep = Math.abs(mod(lons[names[i]] - lons[names[j]] + 180, 360) - 180);
+        for (const [asp, angle] of Object.entries(ASPECTS)) {
+          const limit = DEFAULT_ORBS[asp];
+          if (limit === undefined) continue;
+          const orb = Math.abs(sep - (angle as number));
+          if (orb <= limit) want.push(`${names[i]}~${names[j]}:${asp}`);
+        }
+      }
+    }
+    const got = hits.map((h) => `${h.a}~${h.b}:${h.aspect}`);
+    if (want.sort().join("|") !== [...got].sort().join("|")) {
+      failures++;
+      console.error(`FAIL compositeAspects set: want ${want.length} got ${got.length}`);
+    }
+    checks++;
+    // orb and strength reproduce from the composite longitudes alone
+    for (const h of hits) {
+      const sep = Math.abs(mod(lons[h.a as Body] - lons[h.b as Body] + 180, 360) - 180);
+      const orb = Math.round(Math.abs(sep - (ASPECTS as Record<string, number>)[h.aspect]) * 100) / 100;
+      const strength = Math.max(0, 1 - orb / DEFAULT_ORBS[h.aspect]);
+      if (Math.abs(h.orb - orb) > 1e-9 || Math.abs(h.strength - strength) > 1e-9) {
+        failures++;
+        console.error(`FAIL compositeAspects recompute ${h.a}~${h.b}:${h.aspect}: ${JSON.stringify(h)}`);
+      }
+      checks++;
+    }
+    // a chart composited with itself is that chart's own aspect geometry:
+    // every midpoint collapses onto the body, so the separations match the
+    // natal ones and the aspect set is the natal set (phase aside).
+    const selfHits = compositeAspects(eng, natalA.jdUt, natalA.jdUt, bodySet);
+    const natalSet = new Set(findAspects(natalA.bodies as unknown as Record<string, import("../src/chart.js").Position>).map((a) => `${a.a}~${a.b}:${a.aspect}`));
+    const selfSet = new Set(selfHits
+      .filter((h) => !NOT_ASPECTABLE.has(h.a) && !NOT_ASPECTABLE.has(h.b))
+      .map((h) => `${h.a}~${h.b}:${h.aspect}`));
+    if (natalSet.size !== selfSet.size || [...natalSet].some((k) => !selfSet.has(k))) {
+      failures++;
+      console.error(`FAIL compositeAspects self-composite: natal ${natalSet.size} vs self ${selfSet.size}`);
+    }
+    checks++;
+    // the projection and the selector
+    const cctx = interpretationContext(natalA, {
+      composite: compositePlacements(eng, natalA.jdUt, natalB.jdUt),
+      compositeAspects: hits,
+    });
+    const first = hits[0];
+    if (first) {
+      const id = `composite:${first.a}~${first.b}:${first.aspect}`;
+      if (!cctx.atoms.some((a) => a.id === id && a.kind === "compositeAspect")
+        || !hasCompositeAspect({ a: first.a, b: first.b, aspect: first.aspect })(cctx).matched
+        || !hasCompositeAspect({ between: [first.b, first.a] as [string, string], aspect: first.aspect })(cctx).matched
+        || hasCompositeAspect({ a: first.a, b: first.b, aspect: first.aspect, minStrength: 1.01 })(cctx).matched) {
+        failures++;
+        console.error("FAIL compositeAspect atom/selector");
+      }
+      checks++;
+    }
+    // The composite frame: midpoint angles, equal houses from the composite
+    // Ascendant. A convention, not a cast chart, so what is checked is that
+    // it is exactly the convention it claims -- and the honest consequence
+    // that the composite MC need not land on the tenth cusp.
+    const frame = compositeFrame(natalA, natalB)!;
+    const midASC = mod(natalA.angles.asc
+      + (mod(natalB.angles.asc - natalA.angles.asc + 180, 360) - 180) / 2, 360);
+    const midMC = mod(natalA.angles.mc
+      + (mod(natalB.angles.mc - natalA.angles.mc + 180, 360) - 180) / 2, 360);
+    if (Math.abs(mod(frame.asc - midASC + 180, 360) - 180) > 1e-9
+      || Math.abs(mod(frame.mc - midMC + 180, 360) - 180) > 1e-9) {
+      failures++;
+      console.error(`FAIL compositeFrame angles: ${frame.asc} ${frame.mc}`);
+    }
+    checks++;
+    if (frame.cusps.length !== 12
+      || frame.cusps.some((c, i) => Math.abs(mod(c - mod(frame.asc + i * 30, 360) + 180, 360) - 180) > 1e-9)) {
+      failures++;
+      console.error("FAIL compositeFrame cusps are not equal from the Ascendant");
+    }
+    checks++;
+    // every placement's house recomputes from those cusps by the same rule
+    // the engine uses for a natal chart
+    const housed = compositePlacements(
+      eng, natalA.jdUt, natalB.jdUt, bodySet, "tropical", frame,
+    );
+    for (const p of housed) {
+      let want = 12;
+      for (let i = 0; i < 12; i++) {
+        if (mod(p.lon - frame.cusps[i], 360) < mod(frame.cusps[(i + 1) % 12] - frame.cusps[i], 360)) {
+          want = i + 1;
+          break;
+        }
+      }
+      if (p.house !== want) {
+        failures++;
+        console.error(`FAIL composite house ${p.body}: got ${p.house} want ${want}`);
+      }
+      checks++;
+    }
+    // without a frame there are no houses at all, rather than invented ones
+    if (compositePlacements(eng, natalA.jdUt, natalB.jdUt, bodySet)
+      .some((p) => p.house !== undefined)) {
+      failures++;
+      console.error("FAIL composite placements invent houses without a frame");
+    }
+    checks++;
+    // the frame and the house filter reach the projection
+    const hctx = interpretationContext(natalA, { composite: housed });
+    const sunHouse = housed.find((p) => p.body === "sun")!.house!;
+    if (!hasComposite({ body: "sun", house: sunHouse })(hctx).matched
+      || hasComposite({ body: "sun", house: (sunHouse % 12) + 1 })(hctx).matched) {
+      failures++;
+      console.error("FAIL hasComposite house filter");
+    }
+    checks++;
+    // and a houseless composite never matches a house filter
+    const noHouse = interpretationContext(natalA, {
+      composite: compositePlacements(eng, natalA.jdUt, natalB.jdUt, bodySet),
+    });
+    if (hasComposite({ body: "sun", house: sunHouse })(noHouse).matched) {
+      failures++;
+      console.error("FAIL hasComposite matches a house on a houseless composite");
+    }
+    checks++;
+
+    // the two-chart enricher supplies them alongside placements and synastry
+    const enrRel = enrichSynastryOptions(eng, natalA, natalB);
+    if (!enrRel.compositeAspects?.length || !enrRel.composite?.length) {
+      failures++;
+      console.error("FAIL enrichSynastryOptions: composite aspects missing");
+    }
+    checks++;
   }
 
   // Matching + resolver: a developer's rule corpus over the projection, with

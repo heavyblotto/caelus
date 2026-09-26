@@ -1,0 +1,176 @@
+{
+ "name": "composite-mars",
+ "outFile": "b3-composite-mars.json",
+ "setId": "house-b3-composite-mars",
+ "family": "composite-placement",
+ "cells": [
+  {
+   "id": "composite:mars:sign:aries",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mars",
+    "sign": "Aries"
+   },
+   "atomIds": [
+    "composite:mars"
+   ],
+   "title": "Composite Mars in Aries",
+   "bindable": true
+  },
+  {
+   "id": "composite:mars:sign:taurus",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mars",
+    "sign": "Taurus"
+   },
+   "atomIds": [
+    "composite:mars"
+   ],
+   "title": "Composite Mars in Taurus",
+   "bindable": true
+  },
+  {
+   "id": "composite:mars:sign:gemini",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mars",
+    "sign": "Gemini"
+   },
+   "atomIds": [
+    "composite:mars"
+   ],
+   "title": "Composite Mars in Gemini",
+   "bindable": true
+  },
+  {
+   "id": "composite:mars:sign:cancer",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mars",
+    "sign": "Cancer"
+   },
+   "atomIds": [
+    "composite:mars"
+   ],
+   "title": "Composite Mars in Cancer",
+   "bindable": true
+  },
+  {
+   "id": "composite:mars:sign:leo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mars",
+    "sign": "Leo"
+   },
+   "atomIds": [
+    "composite:mars"
+   ],
+   "title": "Composite Mars in Leo",
+   "bindable": true
+  },
+  {
+   "id": "composite:mars:sign:virgo",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mars",
+    "sign": "Virgo"
+   },
+   "atomIds": [
+    "composite:mars"
+   ],
+   "title": "Composite Mars in Virgo",
+   "bindable": true
+  },
+  {
+   "id": "composite:mars:sign:libra",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mars",
+    "sign": "Libra"
+   },
+   "atomIds": [
+    "composite:mars"
+   ],
+   "title": "Composite Mars in Libra",
+   "bindable": true
+  },
+  {
+   "id": "composite:mars:sign:scorpio",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mars",
+    "sign": "Scorpio"
+   },
+   "atomIds": [
+    "composite:mars"
+   ],
+   "title": "Composite Mars in Scorpio",
+   "bindable": true
+  },
+  {
+   "id": "composite:mars:sign:sagittarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mars",
+    "sign": "Sagittarius"
+   },
+   "atomIds": [
+    "composite:mars"
+   ],
+   "title": "Composite Mars in Sagittarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:mars:sign:capricorn",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mars",
+    "sign": "Capricorn"
+   },
+   "atomIds": [
+    "composite:mars"
+   ],
+   "title": "Composite Mars in Capricorn",
+   "bindable": true
+  },
+  {
+   "id": "composite:mars:sign:aquarius",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mars",
+    "sign": "Aquarius"
+   },
+   "atomIds": [
+    "composite:mars"
+   ],
+   "title": "Composite Mars in Aquarius",
+   "bindable": true
+  },
+  {
+   "id": "composite:mars:sign:pisces",
+   "family": "composite-placement",
+   "when": {
+    "kind": "composite",
+    "body": "mars",
+    "sign": "Pisces"
+   },
+   "atomIds": [
+    "composite:mars"
+   ],
+   "title": "Composite Mars in Pisces",
+   "bindable": true
+  }
+ ]
+}

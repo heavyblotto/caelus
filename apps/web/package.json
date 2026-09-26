@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node ../../scripts/ensure-conformance-stats.mjs && node ../../scripts/ensure-delineations-pd.mjs && next dev",
+    "dev": "node ../../scripts/ensure-conformance-stats.mjs && node ../../scripts/ensure-delineations-pd.mjs && node ../../scripts/ensure-corpus.mjs && node ../../scripts/ensure-widgets.mjs && next dev",
     "dev:clean": "rm -rf .next && next dev",
-    "build": "node ../../scripts/ensure-delineations-pd.mjs && node ../../scripts/build-chart-widget.mjs && next build",
+    "build": "node ../../scripts/ensure-delineations-pd.mjs && node ../../scripts/ensure-corpus.mjs && node ../../scripts/ensure-widgets.mjs && node ../../scripts/build-chart-widget.mjs && next build",
     "start": "next start",
     "vercel-build": "cd ../.. && npm run build"
   },
@@ -16,9 +16,11 @@
     "@next/mdx": "^16.2.9",
     "caelus": "*",
     "caelus-birth": "*",
+    "caelus-corpus": "*",
     "caelus-delineations-pd": "*",
     "caelus-mcp": "*",
     "caelus-wheel": "*",
+    "caelus-widgets": "*",
     "next": "^15.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

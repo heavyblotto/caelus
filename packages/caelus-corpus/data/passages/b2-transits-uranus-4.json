@@ -1,0 +1,142 @@
+[
+ {
+  "id": "transit:uranus:conjunction:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "pluto",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:uranus~natal_pluto:conjunction"
+  ],
+  "text": "Transiting Uranus comes to your natal Pluto once in a lifetime at the very most, and many people never live it at all. If this transit is yours, expect a long season, a year or more, in which the deepest layer of your life comes up for renovation. Pluto marks the place where you hold on hardest: buried drives, old survival strategies, your private relationship to power and control. Uranus is the breaker of seals. When the two meet, material you thought was settled gets lit up and shaken loose, sometimes overnight. The period often announces itself through events. A structure collapses, a long compulsion abruptly loses its grip, a truth you had managed not to look at becomes impossible to avoid. Underneath the surprises, something purposeful is going on. Whatever in you has been running on automatic, gripping money or intimacy or influence out of an old fear, is being exposed so it can be released. While the conjunction is applying, the pressure tends to build as a deep restlessness, an urge to tear something down before you can even name it. The exact pass is the peak, and because Uranus stations and retrogrades, it may cross this degree as many as three times across the stretch. The first crossing usually springs the surprise. The middle one gives you a second look at what surfaced, once the shock has faded and you can judge what actually deserves to survive. The last tends to close the case, and by then the new arrangement often feels less like loss and more like relief. As the transit separates, the noise dies down, but nothing quietly reverts. Your part in all this is mostly a choice of posture. Fighting the change turns the season into a power struggle, control tightening on one side while events grow more forceful on the other, until something gives. Cooperating means letting the outdated thing die on purpose: ending the arrangement you have outgrown, naming the compulsion out loud, handing back power you were holding by habit. People who move with this transit often describe it afterward as the year they finally got free of something that had run them for decades. You grow here by trusting that whatever breaks under this much pressure was already hollow, and that what remains standing afterward is genuinely yours."
+ },
+ {
+  "id": "transit:uranus:sextile:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "pluto",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:uranus~natal_pluto:sextile"
+  ],
+  "text": "This period offers deep change on easy terms, which is rarer than it sounds. Uranus in sextile to your natal Pluto puts the sky's chief disruptor at a friendly angle to the part of you that governs buried drives, endings, and personal power. No force is applied anywhere in it. Doors simply appear where walls were: a chance to quit a pattern that has quietly run you for years, a conversation that finally loosens an old resentment, an unexpected exit from a situation you had stopped believing you could leave. The sextile rewards participation, so this transit does little for anyone who waits for it to act on its own. Over a year or so it usually touches exact two or three times, and each touch has its own job. On the approach you tend to feel the itch before you see the door, a sense that something old is ready to go and the timing is right at last. The first exact contact makes the opening concrete, often through a specific offer, person, or ending that shows you where the work is. When Uranus loops back over the point, the return visit is for follow-through, going over the ground already opened and making the change stick, and the final contact tends to confirm what you built. Then the aspect separates and the doors quietly stop appearing. What you claimed, you keep. What you postponed tends to wait for a harder transit to raise it again. In daily life this often looks like reform rather than revolution. You might restructure how money or shared resources flow, renegotiate the balance of power in a close partnership, drop a habit with surprising ease, or step away from an environment that fed your worst patterns. None of it looks dramatic from the outside, and all of it runs deep. There is a particular pleasure available in a period like this: the discovery that you can change at the root without your life catching fire, that endings can be chosen calmly instead of endured. The renovation happens on your schedule for once, and that is precisely why it is easy to skip. You grow through this transit by treating its invitations as real and time-limited, and by spending the year clearing what you already know needs clearing, while the clearing is cheap."
+ },
+ {
+  "id": "transit:uranus:square:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "pluto",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:uranus~natal_pluto:square"
+  ],
+  "text": "Freedom and control collide during this transit, and life arranges the collision whether or not you schedule it. Uranus square your natal Pluto sets the planet of sudden change at a hard angle to the most entrenched part of you. The result is a long stretch, a year and sometimes more, of pressure between what wants to break loose and what refuses to let go. The battleground varies. For some people it is external: an institution, boss, or partner whose grip suddenly becomes intolerable, or an outside upheaval that threatens an arrangement you have depended on. For others it is internal, a compulsion or fear that fights back the moment you try to change it. Usually it is both, because Pluto's territory is where inside and outside mirror each other. The applying months tend to feel like rising static: irritability with no obvious target, a growing sense that something has to give. Around the exact passes, commonly three of them thanks to the retrograde loop, the confrontation lands in concrete form. The first pass often exposes the struggle. The second, during the backward stretch, tempts you to reassert control and shows you why that fails. The third asks for the real concession. As the square separates, the pressure lifts, and what you released stays released. The risk in all of it is fighting on the wrong side. You can spend the season defending a structure whose time is over, or forcing ruptures for their own sake and calling it liberation, and either mistake wastes the year. The work is discrimination: figuring out which attachments are load-bearing and which are just grip. Watch where your reactions are strongest, because intensity is this transit's way of marking the spot. A rage out of proportion to its trigger, an anxiety that spikes when a routine is threatened, a bargaining voice that keeps explaining why now is not the time: each points at something held too tightly. You grow through this transit by giving up voluntarily what it would otherwise take from you, and by noticing that the power you lose is usually power you were spending to keep yourself stuck. What survives this season, you can finally trust, because it has been tested at the root."
+ },
+ {
+  "id": "transit:uranus:trine:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "pluto",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:uranus~natal_pluto:trine"
+  ],
+  "text": "Change comes with the grain during this period instead of against it. Uranus trine your natal Pluto sets sudden awakening at an easy angle to your deepest reserves of will and regeneration, and for about a year the two work as partners. Transformations that would normally need a crisis to start can simply be chosen. An outgrown role can be retired without a fight. A buried ambition can surface and find, almost immediately, the circumstances it needs. Power struggles that have dragged on for years may dissolve because you stop needing your side of them. The texture of the time is traction: when you push on something stale, it moves. Because Uranus stations and loops, the trine usually comes exact more than once, sometimes three times across the whole stretch. The building phase often brings a quiet confidence first, a sense of having more leverage than usual. The exact contacts are the windows where big moves land cleanly. The interval between them, while the planet retraces its path, favors deepening whatever you began rather than starting something new. Once the last contact fades, the extra traction goes with it, and life keeps whatever shape you gave it. That points to the one caution here: Uranus at a trine whispers. The year can pass entirely unused, felt only as vague energization, because ease never forces a decision the way friction does. The people who get the most from a period like this treat it as load-bearing time and deliberately point it at the heaviest thing they want moved: a long-stuck situation, a reinvention they have deferred, an honest reckoning with how they use power. It is also a strong season for finishing what a harder transit once started. Work you began under pressure years ago, half-done endings, changes you accepted but never completed, can be carried the rest of the way now with surprisingly little resistance. Whatever you rebuild in this window tends to hold, because it is built with depth and freshness together rather than one at the expense of the other. You grow through this transit by asking one question early and often: if change were easy right now, what would you change? During these months, more than most, the answer is live, and the door is not locked."
+ },
+ {
+  "id": "transit:uranus:opposition:pluto",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "pluto",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:uranus~natal_pluto:opposition"
+  ],
+  "text": "The push toward change comes wearing a face this season, usually someone else's. Uranus opposite your natal Pluto stages a confrontation between the new and the entrenched, with you standing in the middle. Other people, institutions, or sudden events seem to carry the disruptive charge: a partner becomes unpredictable, an authority tightens its hold or loses it, an external shake-up threatens an arrangement you have long controlled or long depended on. Oppositions work through encounter, so expect the season's main lessons to come through whoever stands across from you. The trap is projection. It is easy to spend these months convinced the problem is entirely out there, the erratic other, the controlling system, while your own share of the struggle stays invisible. Pluto in your chart marks where you grip. Uranus overhead is prying at that grip through circumstance, and the honest question inside every standoff is what you are being asked to release. The transit builds slowly. In the approaching phase, key relationships and power arrangements grow tense, charged with something unspoken. The exact oppositions, and the retrograde cycle can produce as many as three, are when the standoffs become open: a rupture, an ultimatum, a revelation of who actually holds what. A middle pass frequently reruns the first confrontation with the roles clarified. The final one tends to settle terms. As the aspect separates, the field quiets, and the settlements made near the peak become the new normal. Handled badly, a period like this hardens into a war nobody wins, control against chaos, each side feeding the other until both are exhausted. Handled well, it becomes one of the great renegotiations of a lifetime: old imbalances named and corrected, dead arrangements dissolved, a partnership or career rebuilt on terms both sides can actually live with. Notice, too, when you are the disruptive one. In some standoffs this year you play Pluto, holding on; in others you play Uranus, breaking away; and recognizing which role you are in changes how the scene ends. You grow through this transit by taking back your half of the drama, seeing that the force confronting you is often a piece of your own depth you had exiled, and letting the encounter change you rather than merely deciding a winner."
+ },
+ {
+  "id": "transit:uranus:conjunction:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "chiron",
+   "aspect": "conjunction"
+  },
+  "atomIds": [
+   "transit:uranus~natal_chiron:conjunction"
+  ],
+  "text": "Uranus crosses your natal Chiron no more than once in a life, and the crossing tends to be unforgettable in a quiet way. Chiron marks an old wound: the hurt that never fully closed, the place where you learned compassion the hard way and built a life partly around not touching it. Uranus is sudden light. When it arrives here, the covering arrangements stop working, often abruptly. A situation, a person, or a plain accident of timing reopens the old story, and for a while, often a year or more, you are back in contact with something you had filed away as finished. That sounds harsher than it usually is. Uranus does not reopen the wound to hurt you; it breaks up scar tissue that had begun to limit your movement. Many people meet this transit through a surprise: an unconventional helper or method that actually works, a community of people carrying the same scar, an insight that reframes decades of pain in a single sentence. What was frozen starts to move. The crossing is rarely single. Uranus stations, backs up, and comes again, so the work tends to arrive in three visits. The first crossing typically does the opening, and it can feel destabilizing, old grief or shame arriving out of season. The retrograde crossing is gentler and more reflective, a chance to look at what surfaced without flinching. The final one tends to bring integration, the moment the old hurt takes its place as history rather than identity. In the applying months, before any of this is explicit, you may feel oddly restless around your own coping habits, as if the routines that manage the tender place have grown too tight. In the separating months afterward, the change settles, and what remains is usually a lighter relationship with your own story. A transit like this rarely erases anything. What it does is free you from organizing your life around the avoidance of one specific pain, and that release can change more than the wound itself ever did. You grow through this period by letting the unexpected in, especially where help is concerned, and by allowing your oldest sore spot to be surprised into motion after years of careful stillness."
+ },
+ {
+  "id": "transit:uranus:sextile:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "chiron",
+   "aspect": "sextile"
+  },
+  "atomIds": [
+   "transit:uranus~natal_chiron:sextile"
+  ],
+  "text": "An old hurt becomes workable during this period, in small and slightly surprising ways. Uranus sextile your natal Chiron brings the experimenter into friendly contact with the wounded healer, and the combination favors fresh angles on old pain. Nothing dramatic is required or promised. Instead, across a year or so, odd openings show up: a book or practice that approaches your tender subject from a direction you had never considered, a stranger whose frankness about their own scar loosens something in you, a group or tool that puts support within easier reach than it used to be. Sextiles are offers, and offers can be declined without penalty. The cost of declining this one is only that the wound stays exactly as it was. The rhythm of the period follows the planet's passes, and there are often two or three. As the aspect first applies, curiosity is the usual signal. You find yourself circling a subject you normally leave alone, reading about it, mentioning it almost casually. The first exact touch tends to present the concrete opening. A second touch, on the backward loop, rewards follow-through, the sessions actually attended, the conversation actually had, and the last one usually leaves a new habit or understanding in place. Once the aspect separates, the theme recedes without drama. What makes this transit valuable is precisely its low stakes. The wound is not being pressed, so your defenses stay relaxed, and work that would feel impossible under pressure becomes almost casual. Many people make more real progress in a mild season like this than in a harsh one, simply because they are not braced. The same openness runs outward too. Your particular scar gives you a way of being useful to people in pain, and this period often brings chances to mentor, support, or simply sit with someone the way you once needed someone to sit with you. Offering that turns out to be part of your own repair. You grow through this transit by saying yes to one or two of the odd doors it opens, and by letting a little novelty into the room where your oldest story lives. Small experiments now can spare you larger reckonings later, and they cost almost nothing while this window is open."
+ },
+ {
+  "id": "transit:uranus:square:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "chiron",
+   "aspect": "square"
+  },
+  "atomIds": [
+   "transit:uranus~natal_chiron:square"
+  ],
+  "text": "Events press on a tender place during this transit, and they press at an awkward angle. Uranus square your natal Chiron puts sudden change in hard aspect to your oldest wound, the hurt you have learned to live around rather than through. For a stretch that can run a year or more, disruptions in ordinary life keep finding the sore spot with uncanny accuracy. A schedule change removes the routine that kept you comfortable. A blunt remark lands exactly where you are thinnest. A separation, move, or reversal takes away one of the arrangements that quietly protected you. The square's message is uncomfortable but not cruel: your life has been organized, more than you knew, around not feeling one particular pain, and that organization has started to cost more than it protects. In the applying phase, irritability is common, a defensiveness that seems out of proportion until you trace it to its root. The exact hits are when the pokes land hardest, and the retrograde cycle often produces three of them. The first usually exposes the pattern and catches you off guard. The second tends to repeat the theme in a form you can see coming, which changes everything: forewarned, you can respond instead of flinch. By the third, many people find the old trigger has lost most of its voltage. The separating months are for rebuilding your routines with less avoidance designed into them. The temptation all year is to treat the disruptions as the problem and fight to restore the protective arrangements exactly as they were. That effort tends to fail, and its failure is the point. This period does not ask you to enjoy having the wound touched. It asks you to stop paying so much of your freedom to keep it untouched. Met that way, the square becomes strangely liberating. You end the transit sturdier, not because the hurt is gone, but because it no longer commands your itinerary, and choices you used to make automatically become choices again. You grow through this time by letting the jolts show you where you are still guarding, and by deciding, once or twice, to stay present in a moment where you would usually withdraw."
+ },
+ {
+  "id": "transit:uranus:trine:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "chiron",
+   "aspect": "trine"
+  },
+  "atomIds": [
+   "transit:uranus~natal_chiron:trine"
+  ],
+  "text": "Healing gets easier during this period, and it tends to arrive from unexpected directions. Uranus trine your natal Chiron sets the planet of sudden insight in smooth aspect to the place where you carry an old wound, and for around a year the two trade gifts: insight loosens pain, and pain, examined kindly, yields insight. Change in this area, so often effortful, starts happening almost on its own. The texture of the time is sideways progress. You rarely sit down and face the old story head-on. Instead a chance conversation reframes it. A new interest or friendship draws you into situations where the familiar fear simply does not come up, and you notice its absence like a missing weight. Some people find that a different environment or an unconventional approach quietly succeeds where years of direct effort had stalled. Because the planet's loop can bring the aspect exact two or three times, the gains come in layers. The applying months bring a soft opening, a willingness to think about the tender subject without bracing for it. Around the exact contacts, the useful accidents cluster: the right person, the odd opportunity, the understanding that arrives whole. The stretch between passes, while Uranus retraces its ground, is when new understanding settles into habit, and after the final contact the ease fades but the habits stay. Like every flowing aspect, this one can slip by unused. No crisis forces attention, so the invitation is easy to lose under daily noise. It rewards a light but deliberate hand: nudging yourself toward the conversations, places, and practices where the loosening is already underway, then letting momentum do the rest. This is also a strong period for turning your scar outward. What your own hurt taught you becomes unusually easy to share now, and supporting someone else often completes a circuit that private work alone never closed. Watch for the moment your story helps a person you barely know; it marks how far the wound has come. You grow through this transit by cooperating with the ease instead of distrusting it, and by letting an old pain become, at last, mostly a source of understanding rather than a live nerve."
+ },
+ {
+  "id": "transit:uranus:opposition:chiron",
+  "family": "transit-aspect",
+  "when": {
+   "kind": "transit",
+   "transit": "uranus",
+   "natal": "chiron",
+   "aspect": "opposition"
+  },
+  "atomIds": [
+   "transit:uranus~natal_chiron:opposition"
+  ],
+  "text": "During this transit, the old wound looks back at you from across the table. Uranus opposite your natal Chiron tends to work through other people. Someone erratic, electric, or simply different enters your orbit, or someone familiar begins acting in ways that press directly on your most tender history. Encounters carry the charge: a relationship shakes loose, an ally turns unpredictable, a stranger says the exact thing you have spent years arranging not to hear. It is tempting to read the whole season as being about them. Oppositions mirror, though, and what stands across from you during this period is usually a disowned piece of your own story: the freedom you never allowed yourself because the wound said it was unsafe, or the hurt you never admitted because you preferred being the strong one. The people who rattle you are, inconveniently, the ones showing you where the work is. The arc sharpens and then resolves. While the aspect approaches, tension gathers in close relationships, a sense of something unnamed pulling at old scar tissue. The exact oppositions, frequently three across the whole stretch since Uranus doubles back, bring the mirror moments: the confrontation, the departure, the unexpected honesty that reopens and then reframes the old pain. A return pass often replays an earlier encounter with new eyes, and the last one commonly brings a settlement, inner or outer. As the aspect separates, connections that bent without breaking tend to come back stronger, and the ones that broke usually needed to. The deeper offer here is a changed relationship with your own vulnerability. Wounds formed around other people generally mend around other people, and this transit, for all its jolts, keeps supplying the encounters. Met defensively, it becomes a year of flinches and exits, each trigger confirming that closeness is dangerous. Met openly, it becomes the year the tender place finally gets met instead of managed, sometimes by exactly the sort of person you would once have avoided. You grow through this transit by staying at the table a little longer than reflex advises, and by asking, each time someone unsettles you, what part of yourself just walked in wearing their coat."
+ }
+]
