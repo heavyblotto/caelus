@@ -556,13 +556,22 @@ th {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+  min-width: 0;
 }
 
 .workspace__chrome {
   display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.workspace__chrome-row {
+  display: flex;
   flex-wrap: wrap;
-  align-items: end;
-  gap: 0.75rem 1rem;
+  align-items: center;
+  gap: 0.55rem 0.9rem;
+  min-width: 0;
 }
 
 .workspace__body {
@@ -574,6 +583,7 @@ th {
 
 .workspace__figure {
   max-width: 480px;
+  min-width: 0;
 }
 
 .workspace__figure svg {
@@ -807,7 +817,8 @@ a.card:hover,
 /* ---- form controls ----
    The single control style for the playground's inputs, selects, and small
    action buttons. Labels sit above their control (.field) so a wrapped row of
-   controls still reads as labelled columns. */
+   controls still reads as labelled columns. Toggling Advanced must not shove
+   those columns: chrome is stacked rows, and .check sits on the input baseline. */
 .control {
   background: var(--surface-3);
   color: var(--text);
@@ -816,6 +827,8 @@ a.card:hover,
   padding: 0.35rem 0.55rem;
   font: inherit;
   font-size: 0.85rem;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .control:focus-visible {
@@ -835,13 +848,16 @@ button.control:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 0.7rem 0.8rem;
-  align-items: flex-end;
+  align-items: flex-start;
+  min-width: 0;
 }
 
 .field {
   display: flex;
   flex-direction: column;
   gap: 0.28rem;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .field__label {
@@ -855,6 +871,96 @@ button.control:hover {
 .field__row {
   display: flex;
   gap: 0.4rem;
+  min-width: 0;
+  align-items: center;
+}
+
+.field__row .control {
+  min-width: 0;
+}
+
+.field__row input.control {
+  flex: 1 1 8rem;
+}
+
+.field--place {
+  flex: 1 1 12rem;
+  max-width: min(16rem, 100%);
+}
+
+.field--datetime {
+  flex: 1 1 16rem;
+  max-width: min(22rem, 100%);
+}
+
+.field--datetime .field__row,
+.field--select .control {
+  width: 100%;
+}
+
+.field--select {
+  flex: 1 1 8rem;
+  max-width: min(12rem, 100%);
+}
+
+.field--coord .control {
+  width: 5.5rem;
+}
+
+.field--name .control {
+  width: 8rem;
+}
+
+.field--compact {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.field--compact .control {
+  width: 3.5rem;
+}
+
+.field--actions .field__row {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+input.control[type="datetime-local"],
+input.control[type="date"] {
+  min-width: 0;
+  width: 100%;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.check input {
+  accent-color: var(--accent);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.city-picker {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+.city-picker .control {
+  width: 100%;
 }
 
 /* ---- segmented control (chart view switcher) ---- */
@@ -863,6 +969,18 @@ button.control:hover {
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
   overflow: hidden;
+  max-width: 100%;
+}
+
+.seg--wrap {
+  display: flex;
+  flex-wrap: wrap;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.seg--wrap .seg__btn {
+  padding-inline: 0.55rem;
 }
 
 .seg__btn {
@@ -873,6 +991,7 @@ button.control:hover {
   border: none;
   color: var(--text-dim);
   cursor: pointer;
+  white-space: nowrap;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
@@ -1973,6 +2092,11 @@ th.cmp-me {
   gap: 0.25rem;
   border-bottom: 1px solid var(--border);
   margin-bottom: 0.9rem;
+  min-width: 0;
+}
+
+.workspace__rail .tabs__tab {
+  padding: 0.35rem 0.55rem;
 }
 
 .tabs__tab {

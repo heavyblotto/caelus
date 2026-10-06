@@ -40,7 +40,7 @@ function search(rows: Row[], query: string, limit = 8): Row[] {
 export default function CityPicker({
   onSelect,
   placeholder = "search a city…",
-  width = "13rem",
+  width,
 }: {
   onSelect: (city: City) => void;
   placeholder?: string;
@@ -87,10 +87,9 @@ export default function CityPicker({
   }
 
   return (
-    <div ref={boxRef} style={{ position: "relative", display: "inline-block" }}>
+    <div ref={boxRef} className="city-picker" style={width != null ? { width } : undefined}>
       <input
         className="control"
-        style={{ width }}
         type="text"
         value={query}
         placeholder={placeholder}
