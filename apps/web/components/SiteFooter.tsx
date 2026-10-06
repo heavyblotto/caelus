@@ -18,7 +18,7 @@ export default function SiteFooter() {
   const year = new Date().getFullYear();
   return (
     <footer className="site-footer">
-      <div className="container-wide">
+      <div className="container">
         <div className="site-footer__grid">
           <div className="site-footer__col">
             <Link href="/" className="wordmark" aria-label="Caelus home">

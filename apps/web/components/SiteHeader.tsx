@@ -14,7 +14,7 @@ export default function SiteHeader() {
 
   return (
     <header className="site-header">
-      <div className="container-wide site-header__inner">
+      <div className="container site-header__inner">
         <Link href="/" className="wordmark" aria-label="Caelus home">
           <GlyphMark />
           <span>Caelus</span>

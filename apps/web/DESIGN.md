@@ -34,10 +34,11 @@ design's job is hierarchy and legibility, not persuasion.
 ## Page grammar
 
 Every page follows the same skeleton: eyebrow → `h1` → lead of at most two
-sentences → sections → `PageClose`. Prose pages use the narrow `container`
-(760px); tool and docs pages use `container-wide` (1100px), with hero copy
-capped to a readable measure by `.page-hero p`. The playground uses
-`container-workspace` (`--maxw-workspace`) so the working figure can stay large.
+sentences → sections → `PageClose`. The site shell is one width (`--maxw`,
+1100px) for header, footer, and every page. Running copy (hero, lead, and
+direct `.page > p`) keeps a ~42rem measure. Grids, tables, and the playground
+workspace use the full shell. On small screens the header drops Install (the
+hero already has it), headings scale down, and the footer stacks.
 
 Section headings: sentence-case `h2` in prose flow; the monospace uppercase
 group label (`.feature-group__label`) for grouped card sections. Don't mix the
@@ -56,7 +57,7 @@ hero only. After that, a `.workspace` column: document bar, provenance stamp,
 today strip, figure | rail, scrubber full width. The rest of the site is
 unchanged.
 
-Playground width is `--maxw-workspace` (about 1360px), playground-only. The
+The playground uses the same `--maxw` shell as the rest of the site. The
 figure column is ~420–480px (`.workspace__figure`). Advanced adds rail density;
 it does not shrink the wheel.
 

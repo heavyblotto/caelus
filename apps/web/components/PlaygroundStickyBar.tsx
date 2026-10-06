@@ -23,7 +23,7 @@ export default function PlaygroundStickyBar() {
       aria-label="Get started"
       aria-hidden={!visible}
     >
-      <div className="container-wide sticky-cta__inner">
+      <div className="container sticky-cta__inner">
         <p className="sticky-cta__note dim small">
           Computed client-side · <code>npm install caelus</code>
         </p>
