@@ -14,7 +14,7 @@ export const metadata = pageMetadata({
 
 export default function Playground() {
   return (
-    <main className="container-workspace page page--sticky-cta">
+    <main className="container page page--sticky-cta">
       <PageHero eyebrow="Playground" title="Cast a chart">
         <Lead>
           Search a place, enter a date, and read the wheel. Transits, a cited
