@@ -512,58 +512,50 @@ export default function Workspace() {
       ) : (
         <>
           <div className="workspace__chrome">
-            {advanced && (
-              <div className="seg" role="group" aria-label="Document">
-                <button type="button" className="seg__btn" aria-pressed={docKind === "birth"} onClick={() => { setDocKind("birth"); setRail("reading"); }}>New Birth</button>
-                <button type="button" className="seg__btn" aria-pressed={docKind === "form"} onClick={() => { setDocKind("form"); setRail("compose"); }}>New Form</button>
+            <div className="workspace__chrome-row">
+              <div className="seg" role="group" aria-label="Tradition">
+                <button type="button" className="seg__btn" aria-pressed={tradition === "western"} onClick={() => switchTradition("western")}>Western</button>
+                <button type="button" className="seg__btn" aria-pressed={tradition === "vedic"} onClick={() => switchTradition("vedic")}>Vedic</button>
               </div>
-            )}
-            <div className="seg" role="group" aria-label="Tradition">
-              <button type="button" className="seg__btn" aria-pressed={tradition === "western"} onClick={() => switchTradition("western")}>Western</button>
-              <button type="button" className="seg__btn" aria-pressed={tradition === "vedic"} onClick={() => switchTradition("vedic")}>Vedic</button>
-            </div>
-            <label className="field">
-              <span className="field__label">
-                <input type="checkbox" checked={advanced} onChange={(e) => setAdvanced(e.target.checked)}
-                  style={{ accentColor: "var(--accent)", marginRight: "0.35rem" }} />
+              <label className="check">
+                <input type="checkbox" checked={advanced} onChange={(e) => setAdvanced(e.target.checked)} />
                 Advanced
-              </span>
-            </label>
-            {tradition === "vedic" && (
-              <div className="seg" role="group" aria-label="Kundli style">
-                <button type="button" className="seg__btn" aria-pressed={kundliStyle === "north"} onClick={() => setKundliStyle("north")}>North</button>
-                <button type="button" className="seg__btn" aria-pressed={kundliStyle === "south"} onClick={() => setKundliStyle("south")}>South</button>
-              </div>
-            )}
-            {advanced && docKind === "birth" && (
-              <>
-                <label className="field">
-                  <span className="field__label">
-                    <input type="checkbox" checked={topocentric} onChange={(e) => setTopocentric(e.target.checked)}
-                      style={{ accentColor: "var(--accent)", marginRight: "0.35rem" }} />
-                    topocentric
-                  </span>
-                </label>
-                <label className="field">
-                  <span className="field__label">
-                    <input type="checkbox" checked={extras} onChange={(e) => setExtras(e.target.checked)}
-                      style={{ accentColor: "var(--accent)", marginRight: "0.35rem" }} />
-                    extra bodies
-                  </span>
-                </label>
-                <label className="field">
-                  <span className="field__label">
-                    <input type="checkbox" checked={spatial} onChange={(e) => setSpatial(e.target.checked)}
-                      style={{ accentColor: "var(--accent)", marginRight: "0.35rem" }} />
-                    spatial aspects
-                  </span>
-                </label>
-                <div className="field">
-                  <span className="field__label">orb °</span>
-                  <input className="control" style={{ width: "3.5rem" }} value={orbOverride}
-                    onChange={(e) => setOrbOverride(e.target.value)} placeholder="def" aria-label="aspect orb override" />
+              </label>
+              {tradition === "vedic" && (
+                <div className="seg" role="group" aria-label="Kundli style">
+                  <button type="button" className="seg__btn" aria-pressed={kundliStyle === "north"} onClick={() => setKundliStyle("north")}>North</button>
+                  <button type="button" className="seg__btn" aria-pressed={kundliStyle === "south"} onClick={() => setKundliStyle("south")}>South</button>
                 </div>
-              </>
+              )}
+            </div>
+            {advanced && (
+              <div className="workspace__chrome-row">
+                <div className="seg" role="group" aria-label="Document">
+                  <button type="button" className="seg__btn" aria-pressed={docKind === "birth"} onClick={() => { setDocKind("birth"); setRail("reading"); }}>New Birth</button>
+                  <button type="button" className="seg__btn" aria-pressed={docKind === "form"} onClick={() => { setDocKind("form"); setRail("compose"); }}>New Form</button>
+                </div>
+                {docKind === "birth" && (
+                  <>
+                    <label className="check">
+                      <input type="checkbox" checked={topocentric} onChange={(e) => setTopocentric(e.target.checked)} />
+                      topocentric
+                    </label>
+                    <label className="check">
+                      <input type="checkbox" checked={extras} onChange={(e) => setExtras(e.target.checked)} />
+                      extra bodies
+                    </label>
+                    <label className="check">
+                      <input type="checkbox" checked={spatial} onChange={(e) => setSpatial(e.target.checked)} />
+                      spatial aspects
+                    </label>
+                    <div className="field field--compact">
+                      <span className="field__label">orb °</span>
+                      <input className="control" value={orbOverride}
+                        onChange={(e) => setOrbOverride(e.target.value)} placeholder="def" aria-label="aspect orb override" />
+                    </div>
+                  </>
+                )}
+              </div>
             )}
           </div>
 
@@ -597,14 +589,19 @@ export default function Workspace() {
           )}
           {docKind === "form" && (
             <div className="controls">
-              <div className="field">
+              <div className="field field--name">
                 <span className="field__label">name</span>
                 <input className="control" value={label} onChange={(e) => setLabel(e.target.value)} placeholder="optional" />
               </div>
-              <button type="button" className="btn btn-secondary btn-sm" onClick={share}>
-                {copied ? "Link copied ✓" : "Copy link"}
-              </button>
-              <button type="button" className="btn btn-ghost btn-sm" onClick={addToSet}>+ Add to my charts</button>
+              <div className="field field--actions">
+                <span className="field__label" aria-hidden="true">&nbsp;</span>
+                <div className="field__row">
+                  <button type="button" className="btn btn-secondary btn-sm" onClick={share}>
+                    {copied ? "Link copied ✓" : "Copy link"}
+                  </button>
+                  <button type="button" className="btn btn-ghost btn-sm" onClick={addToSet}>+ Add to my charts</button>
+                </div>
+              </div>
             </div>
           )}
 
@@ -644,7 +641,7 @@ export default function Workspace() {
             <div className="workspace__body">
               <div className="workspace__figure">
                 {docKind === "birth" && (
-                  <div className="seg" role="group" aria-label="Figure" style={{ marginBottom: "0.6rem" }}>
+                  <div className="seg seg--wrap" role="group" aria-label="Figure" style={{ marginBottom: "0.6rem" }}>
                     {figureOpts.map(([id, name]) => (
                       <button key={id} type="button" className="seg__btn" aria-pressed={figure === id} onClick={() => setFigure(id)}>
                         {name}

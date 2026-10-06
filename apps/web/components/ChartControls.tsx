@@ -58,7 +58,7 @@ export default function ChartControls({
   return (
     <>
       <div className="controls">
-        <div className="field">
+        <div className="field field--place">
           <span className="field__label">birthplace</span>
           <CityPicker
             onSelect={(c: City) => {
@@ -69,7 +69,7 @@ export default function ChartControls({
             }}
           />
         </div>
-        <div className="field">
+        <div className="field field--datetime">
           <span className="field__label">date &amp; time</span>
           <div className="field__row">
             <select
@@ -94,41 +94,36 @@ export default function ChartControls({
             />
           </div>
           {setTimeUnknown && (
-            <label className="field" style={{ marginTop: "0.35rem" }}>
-              <span className="field__label">
-                <input
-                  type="checkbox"
-                  checked={timeUnknown}
-                  onChange={(e) => setTimeUnknown(e.target.checked)}
-                  style={{ accentColor: "var(--accent)", marginRight: "0.35rem" }}
-                />
-                clock unknown
-              </span>
+            <label className="check">
+              <input
+                type="checkbox"
+                checked={timeUnknown}
+                onChange={(e) => setTimeUnknown(e.target.checked)}
+              />
+              clock unknown
             </label>
           )}
         </div>
-        <div className="field">
+        <div className="field field--coord">
           <span className="field__label">lat</span>
           <input
             className="control"
-            style={{ width: "5.5rem" }}
             value={lat}
             onChange={(e) => { setLat(e.target.value); setPlace(""); }}
             aria-label="latitude"
           />
         </div>
-        <div className="field">
+        <div className="field field--coord">
           <span className="field__label">lon</span>
           <input
             className="control"
-            style={{ width: "5.5rem" }}
             value={lon}
             onChange={(e) => { setLon(e.target.value); setPlace(""); }}
             aria-label="longitude, east positive"
           />
         </div>
         {showHouseZodiac && (
-          <div className="field">
+          <div className="field field--select">
             <span className="field__label">houses</span>
             <select className="control" value={sys} onChange={(e) => setSys(e.target.value as HouseSystem)} aria-label="house system">
               {SYSTEMS.map((s) => <option key={s}>{s}</option>)}
@@ -136,36 +131,40 @@ export default function ChartControls({
           </div>
         )}
         {showHouseZodiac && (
-          <div className="field">
+          <div className="field field--select">
             <span className="field__label">zodiac</span>
             <select className="control" value={zodiac} onChange={(e) => setZodiac(e.target.value as Zodiac)} aria-label="zodiac">
               {ZODIACS.map(([zlabel, value]) => <option key={value} value={value}>{zlabel}</option>)}
             </select>
           </div>
         )}
-        <div className="field">
+        <div className="field field--name">
           <span className="field__label">name</span>
           <input
             className="control"
-            style={{ width: "8rem" }}
             value={label}
             onChange={(e) => setLabel(e.target.value)}
             placeholder="optional"
             aria-label="chart nickname"
           />
         </div>
-        <button type="button" className="btn btn-secondary btn-sm" onClick={onShare}>
-          {copied ? "Link copied ✓" : "Copy link"}
-        </button>
-        <button
-          type="button"
-          className="btn btn-ghost btn-sm"
-          onClick={onAddToSet}
-          disabled={!hasChart}
-          title="Add this chart to a labelled set you can share as one link"
-        >
-          + Add to my charts
-        </button>
+        <div className="field field--actions">
+          <span className="field__label" aria-hidden="true">&nbsp;</span>
+          <div className="field__row">
+            <button type="button" className="btn btn-secondary btn-sm" onClick={onShare}>
+              {copied ? "Link copied ✓" : "Copy link"}
+            </button>
+            <button
+              type="button"
+              className="btn btn-ghost btn-sm"
+              onClick={onAddToSet}
+              disabled={!hasChart}
+              title="Add this chart to a labelled set you can share as one link"
+            >
+              + Add to my charts
+            </button>
+          </div>
+        </div>
       </div>
 
       {set.length > 0 && (
