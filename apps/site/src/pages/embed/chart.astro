@@ -1,0 +1,16 @@
+---
+/**
+ * /embed/chart: the standalone chart-wheel embed (apps/web/app/embed/chart).
+ * Rendered with its empty state and hydrated on load, where it reads the chart
+ * from the host or the `?c=` query. Kept out of search indexes, as in
+ * apps/web/app/embed/layout.tsx.
+ */
+import Base from "../../layouts/Base.astro";
+import EmbedChart from "@web/app/embed/chart/page";
+
+const meta = {
+  robots: { index: false, follow: false, googleBot: { index: false, follow: false } },
+};
+---
+
+<Base meta={meta}><EmbedChart client:load /></Base>

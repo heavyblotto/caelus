@@ -1,0 +1,33 @@
+/*
+ * Self-hosted Inter and JetBrains Mono (variable, via Fontsource), replacing
+ * next/font. The files are bundled and served from this origin; nothing is
+ * fetched from Google. globals.css reads --font-sans and --font-mono.
+ *
+ * The two fallback faces carry the same metric overrides next/font generated,
+ * so text does not shift when the web fonts swap in.
+ */
+@import "@fontsource-variable/inter/wght.css";
+@import "@fontsource-variable/jetbrains-mono/wght.css";
+
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  ascent-override: 90.44%;
+  descent-override: 22.52%;
+  line-gap-override: 0%;
+  size-adjust: 107.12%;
+}
+
+@font-face {
+  font-family: "JetBrains Mono Fallback";
+  src: local("Arial");
+  ascent-override: 75.79%;
+  descent-override: 22.29%;
+  line-gap-override: 0%;
+  size-adjust: 134.59%;
+}
+
+:root {
+  --font-sans: "Inter Variable", "Inter Fallback";
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono Fallback";
+}

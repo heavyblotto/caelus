@@ -1,0 +1,46 @@
+---
+/**
+ * Tabbed panels for MDX, standing in for apps/web/components/Tabs.tsx.
+ *
+ * The React version reads each <Tab>'s `label` off its children, which only
+ * works when the whole document is one React tree. Here every panel is
+ * rendered into the page and a small script builds the tab row and shows one
+ * panel at a time. Same class names, so globals.css styles it unchanged.
+ * Without JavaScript the panels simply stack, each under its label.
+ */
+---
+
+<div class="tabs" data-tabs>
+  <div class="tabs__list" role="tablist"></div>
+  <div class="tabs__panel" role="tabpanel"><slot /></div>
+</div>
+
+<script>
+  function setUp(root: HTMLElement) {
+    const list = root.querySelector<HTMLElement>(":scope > .tabs__list");
+    const panels = Array.from(root.querySelectorAll<HTMLElement>(":scope > .tabs__panel > [data-tab]"));
+    if (!list || panels.length === 0) return;
+
+    const buttons = panels.map((panel, i) => {
+      panel.querySelector(":scope > [data-tab-label]")?.remove();
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "tabs__tab";
+      button.setAttribute("role", "tab");
+      button.textContent = panel.dataset.tab ?? "";
+      button.addEventListener("click", () => select(i));
+      list.append(button);
+      return button;
+    });
+
+    function select(active: number) {
+      panels.forEach((panel, i) => {
+        panel.hidden = i !== active;
+        buttons[i].setAttribute("aria-selected", String(i === active));
+      });
+    }
+    select(0);
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-tabs]").forEach(setUp);
+</script>

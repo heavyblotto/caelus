@@ -1,0 +1,20 @@
+---
+/**
+ * /docs/<guide>: the MDX guides from apps/web (see src/lib/guides.ts). React
+ * components a guide imports render to static HTML here, with code blocks
+ * hydrating as nested islands.
+ */
+import Docs from "../../layouts/Docs.astro";
+import { guides } from "../../lib/guides";
+import { mdxComponents } from "../../lib/mdx-components";
+
+export function getStaticPaths() {
+  return [...guides.keys()].map((slug) => ({ params: { slug } }));
+}
+
+const guide = guides.get(Astro.params.slug as string);
+if (!guide) throw new Error(`No MDX guide for "${Astro.params.slug}"`);
+const { Content, metadata } = guide;
+---
+
+<Docs meta={metadata}><Content components={mdxComponents} /></Docs>

@@ -1,8 +1,13 @@
 #!/usr/bin/env node
 // Hosted GET /api/mcp must advertise the same tools, resource URIs, and
-// prompts that packages/caelus-mcp/src/server.ts registers. The GET TOOLS
+// prompts that packages/caelus-mcp/src/core.ts registers. The GET TOOLS
 // array sat at 22 names after the server grew to 35; lint:claims only
 // gated the count in prose. This script compares the two lists.
+//
+// It also keeps core.ts free of Node: the hosted endpoint runs it in a
+// Cloudflare Worker with no Node compatibility flag, so a `node:*` import, a
+// `process` read, or the caelus/node loader there would break the deploy.
+// Anything that needs the filesystem belongs in server.ts, the Node entry.
 import { readFileSync } from "node:fs";
 
 const ROOT = new URL("..", import.meta.url).pathname;
@@ -14,7 +19,7 @@ const fail = (m) => {
   bad++;
 };
 
-const server = read("packages/caelus-mcp/src/server.ts");
+const server = read("packages/caelus-mcp/src/core.ts");
 const route = read("apps/web/app/api/mcp/route.ts");
 const dataTiers = read("apps/web/app/docs/data-tiers/page.mdx");
 const chartRoute = read("apps/web/app/api/chart/route.ts");
@@ -34,7 +39,7 @@ function same(label, expected, actual) {
 }
 
 const tools = [...server.matchAll(/server\.registerTool\(\s*"([^"]+)"/g)].map((m) => m[1]);
-if (!tools.length) fail("no registerTool calls in server.ts");
+if (!tools.length) fail("no registerTool calls in core.ts");
 
 const CONST_URIS = Object.fromEntries(
   [...server.matchAll(/const\s+([A-Z_]+)\s*=\s*"([^"]+)"/g)].map((m) => [m[1], m[2]]),
@@ -43,10 +48,22 @@ const CONST_URIS = Object.fromEntries(
 const resourceUris = [...server.matchAll(
   /server\.registerResource\(\s*"[^"]+"\s*,\s*(?:"([^"]+)"|([A-Z_]+))/g,
 )].map((m) => m[1] ?? CONST_URIS[m[2]]).filter(Boolean);
-if (!resourceUris.length) fail("no registerResource URIs in server.ts");
+if (!resourceUris.length) fail("no registerResource URIs in core.ts");
 
 const prompts = [...server.matchAll(/server\.registerPrompt\(\s*"([^"]+)"/g)].map((m) => m[1]);
-if (!prompts.length) fail("no registerPrompt calls in server.ts");
+if (!prompts.length) fail("no registerPrompt calls in core.ts");
+
+// Strip comments so prose that names these APIs does not trip the check.
+const coreCode = server.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+for (const [pattern, what] of [
+  [/from\s+"node:[^"]+"/, 'a "node:*" import'],
+  [/from\s+"caelus\/node"/, 'the "caelus/node" loader'],
+  [/\bprocess\s*\./, "the `process` global"],
+  [/\b(?:require|createRequire)\s*\(/, "require()"],
+  [/\bimport\.meta\b/, "import.meta"],
+]) {
+  if (pattern.test(coreCode)) fail(`core.ts must stay free of Node, but it uses ${what}`);
+}
 
 const toolsBlock = route.match(/const TOOLS = \[([\s\S]*?)\]/);
 const routeTools = toolsBlock

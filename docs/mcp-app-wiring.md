@@ -32,7 +32,7 @@ it only **adds** a UI resource, a UI-resource reference on two tools, and the
   message, ChatGPT's `window.openai.toolOutput`, or a `?c=` fallback. Built as
   part of `npm run build -w web`. Lives in the web/UI layer (where `caelus-wheel`
   already builds), keeping the MCP server independent of the UI build.
-- **Widget resource + tool binding** (`packages/caelus-mcp/src/server.ts`,
+- **Widget resource + tool binding** (`packages/caelus-mcp/src/core.ts`,
   served by both the stdio server and the hosted `/api/mcp` mount).
 
 ## Approach
@@ -49,8 +49,10 @@ it only **adds** a UI resource, a UI-resource reference on two tools, and the
 
 ## 1. The widget resource
 
-Add near the top of `server.ts` (the base URL should come from an env var on the
-hosted mount; default to the production origin):
+The sketch below shows the original wiring. The code now lives in `core.ts`,
+which reads no environment: the origin arrives as `BuildServerOptions.embedOrigin`
+(the Node entry, `server.ts`, passes `CAELUS_EMBED_ORIGIN`) and defaults to the
+production origin.
 
 ```ts
 const EMBED_ORIGIN = process.env.CAELUS_EMBED_ORIGIN ?? "https://www.ephemengine.com";

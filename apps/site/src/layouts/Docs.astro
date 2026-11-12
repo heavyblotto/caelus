@@ -1,0 +1,31 @@
+---
+/**
+ * The /docs shell: the Astro counterpart of apps/web/app/docs/layout.tsx.
+ * Sidebar (with search) and table of contents hydrate; the breadcrumb JSON-LD
+ * and the closing call to action are static.
+ */
+import Base from "./Base.astro";
+import { Breadcrumbs, DocsFooter, Sidebar, Toc } from "../react/chrome";
+import { routePath } from "../lib/meta";
+
+interface Props {
+  meta?: object;
+}
+
+const { meta } = Astro.props;
+const pathname = routePath(Astro.url.pathname);
+---
+
+<Base meta={meta}>
+  <main class="container page">
+    <Breadcrumbs pathname={pathname} />
+    <div class="docs-shell">
+      <Sidebar client:load pathname={pathname} />
+      <article class="docs-content">
+        <slot />
+        <DocsFooter pathname={pathname} />
+      </article>
+      <Toc client:load pathname={pathname} />
+    </div>
+  </main>
+</Base>

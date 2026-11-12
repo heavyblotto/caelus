@@ -54,7 +54,7 @@
       "appearsIn": [
         "packages/caelus/README.md",
         "MCP_SPEC.md",
-        "packages/caelus-mcp/src/server.ts",
+        "packages/caelus-mcp/src/core.ts",
         "llms.txt",
         "apps/web/public/llms.txt"
       ]
@@ -199,7 +199,7 @@
         "packages/wheel/README.md",
         "packages/birth/README.md",
         "packages/caelus-mcp/server.json",
-        "packages/caelus-mcp/src/server.ts"
+        "packages/caelus-mcp/src/core.ts"
       ]
     },
     {

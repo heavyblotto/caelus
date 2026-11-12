@@ -1,0 +1,32 @@
+---
+/**
+ * /docs/api/<symbol>: one page per TypeDoc markdown file in
+ * apps/web/content/api (written by `npm run docs:api`). Mirrors
+ * apps/web/app/docs/api/[slug]/page.tsx.
+ */
+import Docs from "../../../layouts/Docs.astro";
+import ApiMarkdown from "@web/components/ApiMarkdown";
+import { Eyebrow } from "@web/components/Prose";
+import { pageMetadata } from "@web/lib/seo";
+import { apiTitle, listApiDocs, readApiDoc } from "../../../lib/api-docs";
+
+export function getStaticPaths() {
+  return listApiDocs().map((slug) => ({ params: { slug } }));
+}
+
+const slug = Astro.params.slug as string;
+const content = readApiDoc(slug);
+if (content === null) throw new Error(`No API markdown for "${slug}"`);
+
+const title = apiTitle(slug);
+const meta = pageMetadata({
+  title: `${title} · API`,
+  description: `Generated TypeScript API reference for ${title} in the caelus package.`,
+  path: `/docs/api/${slug}`,
+});
+---
+
+<Docs meta={meta}>
+  <Eyebrow><a href="/docs/api">API Reference</a> / {title}</Eyebrow>
+  <ApiMarkdown content={content} />
+</Docs>

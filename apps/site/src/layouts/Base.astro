@@ -1,0 +1,84 @@
+---
+/**
+ * Root document: the Astro counterpart of apps/web/app/layout.tsx. Same
+ * markup, the same no-flash theme script and site JSON-LD, and the header and
+ * footer components from apps/web.
+ */
+import "../styles/fonts.css";
+import "@web/app/globals.css";
+import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+import monoLatin from "@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url";
+import SiteFooter from "@web/components/SiteFooter";
+import { SITE } from "@web/lib/site";
+import { Header } from "../react/chrome";
+import { headTags, resolveTitle, routePath, type PageMeta } from "../lib/meta";
+
+interface Props {
+  /** The `metadata` export of the apps/web page being rendered. */
+  meta?: object;
+}
+
+const meta = (Astro.props.meta ?? {}) as PageMeta;
+const pathname = routePath(Astro.url.pathname);
+const tags = headTags(meta);
+
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE.url}/#organization`,
+      name: SITE.name,
+      url: SITE.url,
+      logo: `${SITE.url}/icon.svg`,
+      sameAs: [SITE.repo],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE.url}/#website`,
+      name: SITE.name,
+      url: SITE.url,
+      description: SITE.description,
+      publisher: { "@id": `${SITE.url}/#organization` },
+    },
+  ],
+};
+
+// Set the theme on <html> before first paint, from the stored choice or the OS
+// preference, so there is no flash of the wrong theme. Kept tiny and inline.
+const NO_FLASH = `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preload" href={monoLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
+    <title>{resolveTitle(meta)}</title>
+    {
+      tags.map((t) =>
+        t.tag === "link" ? (
+          <link rel={t.rel} href={t.href} />
+        ) : t.property ? (
+          <meta property={t.property} content={t.content} />
+        ) : (
+          <meta name={t.name} content={t.content} />
+        ),
+      )
+    }
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" sizes="any" />
+  </head>
+  <body>
+    <script is:inline set:html={NO_FLASH} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(siteJsonLd)} />
+    <a href="#content" class="skip-link">Skip to content</a>
+    <Header client:load pathname={pathname} />
+    <div id="content" tabindex="-1"><slot /></div>
+    <SiteFooter />
+    <script>
+      import "../islands/client";
+    </script>
+  </body>
+</html>

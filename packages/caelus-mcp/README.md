@@ -115,6 +115,31 @@ pack), Chiron ≤1″, mean node ≤1″, true node ≤1′ vs SE's built-in
 ephemeris, asteroids ≤1″ (Horizons fits), Uranians ≤2.3″. Tables:
 [ephemengine.com/validation](https://ephemengine.com/validation).
 
+## Hosting without Node
+
+`caelus-mcp/core` exports the same `buildServer()` with no Node dependency: it
+imports no `node:*` module and reads no `process` global, so it runs in an edge
+function or a Cloudflare Worker with no Node compatibility flag. The host
+passes an engine and whatever it would otherwise read from disk.
+
+```ts
+import { Engine } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+import { buildServer } from "caelus-mcp/core";
+import accuracy from "caelus/accuracy.json";
+
+const server = buildServer(new Engine(embeddedData), {
+  version: "0.25.0",
+  accuracy: { swiss: accuracy, jpl: null },
+});
+```
+
+The options are `version`, `accuracy` (the tables behind `caelus://accuracy`),
+`gazetteer` (city rows that resolve named places in `chart_facts`), and
+`embedOrigin` (where the chart widget bundle is served). The default export,
+`caelus-mcp`, is the Node entry: it wraps the same core, fills those options
+from the package's files, and builds its engine from the full data packs.
+
 ## The caelus packages
 
 - [caelus](https://www.npmjs.com/package/caelus) — the engine

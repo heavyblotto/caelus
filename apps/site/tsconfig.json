@@ -1,0 +1,19 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@web/*": ["../web/*"],
+      "next/link": ["./src/shims/next-link.tsx"],
+      "next/navigation": ["./src/shims/next-navigation.tsx"],
+      "next/dynamic": ["./src/shims/next-dynamic.tsx"],
+      "next/server": ["./src/shims/next-server.ts"],
+      "next/og": ["./src/shims/next-og.ts"]
+    }
+  },
+  "include": [".astro/types.d.ts", "src/**/*", "plugins/**/*", "astro.config.mjs"],
+  "exclude": ["dist"]
+}

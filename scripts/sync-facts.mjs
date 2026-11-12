@@ -13,7 +13,8 @@ const rel = (p) => ROOT + p;
 
 const ACCURACY_PATH = rel("packages/caelus/accuracy.json");
 const ANCHORS_PATH = rel("apps/web/lib/facts-anchors.generated.ts");
-const MCP_SERVER = rel("packages/caelus-mcp/src/server.ts");
+// The tools are registered in core.ts; server.ts is the Node entry around it.
+const MCP_SERVER = rel("packages/caelus-mcp/src/core.ts");
 const CHART_TS = rel("packages/caelus/src/chart.ts");
 const CORE_TS = rel("packages/caelus/src/core.ts");
 const WRITE = process.argv.includes("--write");
