@@ -2677,15 +2677,15 @@
     "houseSystemRequested": "whole_sign",
     "bodies": {
      "sun": {
-      "lon": 4578,
+      "lon": 4576,
       "lat": -1,
       "speed": 3560,
       "latSpeed": 0,
       "distMicroAu": 998160,
-      "ra": 4199,
-      "dec": 1824,
+      "ra": 4198,
+      "dec": 1823,
       "sign": "Aries",
-      "signDeg": 4578,
+      "signDeg": 4576,
       "house": 9,
       "retrograde": false,
       "dignities": [
@@ -2693,15 +2693,15 @@
       ]
      },
      "moon": {
-      "lon": 791102,
-      "lat": -13917,
+      "lon": 791086,
+      "lat": -13918,
       "speed": 47095,
       "latSpeed": 2632,
       "distMicroAu": 2579,
-      "ra": 777764,
-      "dec": -66342,
+      "ra": 777748,
+      "dec": -66338,
       "sign": "Scorpio",
-      "signDeg": 35102,
+      "signDeg": 35086,
       "house": 4,
       "retrograde": false,
       "dignities": [
@@ -2709,15 +2709,15 @@
       ]
      },
      "mercury": {
-      "lon": 1231125,
+      "lon": 1231123,
       "lat": -8385,
       "speed": 5872,
       "latSpeed": -32,
-      "distMicroAu": 1227602,
-      "ra": 1239436,
+      "distMicroAu": 1227599,
+      "ra": 1239434,
       "dec": -33244,
       "sign": "Pisces",
-      "signDeg": 43125,
+      "signDeg": 43123,
       "house": 8,
       "retrograde": false,
       "dignities": [
@@ -2726,15 +2726,15 @@
       ]
      },
      "venus": {
-      "lon": 93399,
+      "lon": 93398,
       "lat": -1228,
       "speed": 4413,
       "latSpeed": 159,
-      "distMicroAu": 1495608,
-      "ra": 87023,
+      "distMicroAu": 1495610,
+      "ra": 87022,
       "dec": 35008,
       "sign": "Aries",
-      "signDeg": 93399,
+      "signDeg": 93398,
       "house": 9,
       "retrograde": false,
       "dignities": [
@@ -2742,15 +2742,15 @@
       ]
      },
      "mars": {
-      "lon": 64704,
+      "lon": 64703,
       "lat": -1201,
       "speed": 2695,
       "latSpeed": 40,
-      "distMicroAu": 2371267,
-      "ra": 60111,
+      "distMicroAu": 2371266,
+      "ra": 60110,
       "dec": 24322,
       "sign": "Aries",
-      "signDeg": 64704,
+      "signDeg": 64703,
       "house": 9,
       "retrograde": false,
       "dignities": [
@@ -2762,9 +2762,9 @@
       "lat": -3808,
       "speed": 840,
       "latSpeed": 6,
-      "distMicroAu": 5892199,
+      "distMicroAu": 5892197,
       "ra": 71594,
-      "dec": 26166,
+      "dec": 26165,
       "sign": "Aries",
       "signDeg": 75952,
       "house": 9,
@@ -2776,7 +2776,7 @@
       "lat": -4085,
       "speed": 223,
       "latSpeed": 12,
-      "distMicroAu": 9194559,
+      "distMicroAu": 9194554,
       "ra": 272104,
       "dec": 78069,
       "sign": "Gemini",
@@ -2790,7 +2790,7 @@
       "lat": 2003,
       "speed": -33,
       "latSpeed": -1,
-      "distMicroAu": 18168599,
+      "distMicroAu": 18168594,
       "ra": 417836,
       "dec": 78803,
       "sign": "Cancer",
@@ -2804,7 +2804,7 @@
       "lat": 5971,
       "speed": -97,
       "latSpeed": 1,
-      "distMicroAu": 29293480,
+      "distMicroAu": 29293481,
       "ra": 685657,
       "dec": -9750,
       "sign": "Libra",
@@ -2818,7 +2818,7 @@
       "lat": -54708,
       "speed": 65,
       "latSpeed": 13,
-      "distMicroAu": 50011106,
+      "distMicroAu": 50011102,
       "ra": 155932,
       "dec": 2534,
       "sign": "Taurus",
@@ -2832,7 +2832,7 @@
       "lat": 19518,
       "speed": 220,
       "latSpeed": 6,
-      "distMicroAu": 17695432,
+      "distMicroAu": 17695434,
       "ra": 1199217,
       "dec": -19137,
       "sign": "Pisces",
@@ -2896,15 +2896,15 @@
       "a": "moon",
       "b": "mercury",
       "aspect": "trine",
-      "orb": 8023,
+      "orb": 8037,
       "phase": "applying",
-      "strengthPerMille": 682
+      "strengthPerMille": 681
      },
      {
       "a": "moon",
       "b": "pluto",
       "aspect": "opposition",
-      "orb": 4750,
+      "orb": 4766,
       "phase": "applying",
       "strengthPerMille": 835
      },
@@ -2912,15 +2912,15 @@
       "a": "moon",
       "b": "chiron",
       "aspect": "trine",
-      "orb": 23814,
+      "orb": 23798,
       "phase": "separating",
-      "strengthPerMille": 55
+      "strengthPerMille": 56
      },
      {
       "a": "mercury",
       "b": "saturn",
       "aspect": "square",
-      "orb": 16713,
+      "orb": 16715,
       "phase": "applying",
       "strengthPerMille": 337
      },
@@ -2928,7 +2928,7 @@
       "a": "mercury",
       "b": "pluto",
       "aspect": "sextile",
-      "orb": 3273,
+      "orb": 3271,
       "phase": "separating",
       "strengthPerMille": 773
      },
@@ -2944,7 +2944,7 @@
       "a": "venus",
       "b": "jupiter",
       "aspect": "conjunction",
-      "orb": 17447,
+      "orb": 17446,
       "phase": "separating",
       "strengthPerMille": 394
      },
@@ -2952,7 +2952,7 @@
       "a": "venus",
       "b": "uranus",
       "aspect": "square",
-      "orb": 6772,
+      "orb": 6771,
       "phase": "separating",
       "strengthPerMille": 731
      },
@@ -2960,7 +2960,7 @@
       "a": "mars",
       "b": "jupiter",
       "aspect": "conjunction",
-      "orb": 11248,
+      "orb": 11249,
       "phase": "applying",
       "strengthPerMille": 609
      },
@@ -2968,7 +2968,7 @@
       "a": "mars",
       "b": "saturn",
       "aspect": "sextile",
-      "orb": 4866,
+      "orb": 4865,
       "phase": "separating",
       "strengthPerMille": 662
      },
@@ -2976,7 +2976,7 @@
       "a": "mars",
       "b": "uranus",
       "aspect": "square",
-      "orb": 21923,
+      "orb": 21924,
       "phase": "applying",
       "strengthPerMille": 130
      },
@@ -2984,7 +2984,7 @@
       "a": "mars",
       "b": "neptune",
       "aspect": "opposition",
-      "orb": 26274,
+      "orb": 26273,
       "phase": "separating",
       "strengthPerMille": 88
      },
@@ -3057,15 +3057,15 @@
     "houseSystemRequested": "whole_sign",
     "bodies": {
      "sun": {
-      "lon": 4577534,
+      "lon": 4576360,
       "lat": -661,
-      "speed": 3559576,
+      "speed": 3559577,
       "latSpeed": 74,
       "distMicroAu": 998160,
-      "ra": 4198601,
-      "dec": 1823738,
+      "ra": 4197525,
+      "dec": 1823270,
       "sign": "Aries",
-      "signDeg": 4577534,
+      "signDeg": 4576360,
       "house": 9,
       "retrograde": false,
       "dignities": [
@@ -3073,15 +3073,15 @@
       ]
      },
      "moon": {
-      "lon": 791101680,
-      "lat": -13916933,
-      "speed": 47094757,
-      "latSpeed": 2631952,
+      "lon": 791086146,
+      "lat": -13917802,
+      "speed": 47095235,
+      "latSpeed": 2631735,
       "distMicroAu": 2579,
-      "ra": 777763894,
-      "dec": -66341866,
+      "ra": 777748137,
+      "dec": -66337682,
       "sign": "Scorpio",
-      "signDeg": 35101680,
+      "signDeg": 35086146,
       "house": 4,
       "retrograde": false,
       "dignities": [
@@ -3089,15 +3089,15 @@
       ]
      },
      "mercury": {
-      "lon": 1231124782,
-      "lat": -8384705,
-      "speed": 5872415,
-      "latSpeed": -32255,
-      "distMicroAu": 1227602,
-      "ra": 1239435768,
-      "dec": -33243668,
+      "lon": 1231122845,
+      "lat": -8384694,
+      "speed": 5872388,
+      "latSpeed": -32265,
+      "distMicroAu": 1227599,
+      "ra": 1239433954,
+      "dec": -33244401,
       "sign": "Pisces",
-      "signDeg": 43124782,
+      "signDeg": 43122845,
       "house": 8,
       "retrograde": false,
       "dignities": [
@@ -3106,15 +3106,15 @@
       ]
      },
      "venus": {
-      "lon": 93399294,
-      "lat": -1227841,
-      "speed": 4412820,
-      "latSpeed": 158548,
-      "distMicroAu": 1495608,
-      "ra": 87022927,
-      "dec": 35008156,
+      "lon": 93397839,
+      "lat": -1227893,
+      "speed": 4412821,
+      "latSpeed": 158547,
+      "distMicroAu": 1495610,
+      "ra": 87021571,
+      "dec": 35007578,
       "sign": "Aries",
-      "signDeg": 93399294,
+      "signDeg": 93397839,
       "house": 9,
       "retrograde": false,
       "dignities": [
@@ -3122,15 +3122,15 @@
       ]
      },
      "mars": {
-      "lon": 64703953,
-      "lat": -1201207,
-      "speed": 2695125,
+      "lon": 64703064,
+      "lat": -1201220,
+      "speed": 2695126,
       "latSpeed": 40155,
-      "distMicroAu": 2371267,
-      "ra": 60110513,
-      "dec": 24322443,
+      "distMicroAu": 2371266,
+      "ra": 60109691,
+      "dec": 24322091,
       "sign": "Aries",
-      "signDeg": 64703953,
+      "signDeg": 64703064,
       "house": 9,
       "retrograde": false,
       "dignities": [
@@ -3138,113 +3138,113 @@
       ]
      },
      "jupiter": {
-      "lon": 75952359,
-      "lat": -3808124,
+      "lon": 75952081,
+      "lat": -3808126,
       "speed": 839961,
       "latSpeed": 5631,
-      "distMicroAu": 5892199,
-      "ra": 71594062,
-      "dec": 26165587,
+      "distMicroAu": 5892197,
+      "ra": 71593804,
+      "dec": 26165482,
       "sign": "Aries",
-      "signDeg": 75952359,
+      "signDeg": 75952081,
       "house": 9,
       "retrograde": false,
       "dignities": []
      },
      "saturn": {
-      "lon": 275838116,
-      "lat": -4085273,
-      "speed": 222906,
+      "lon": 275838042,
+      "lat": -4085277,
+      "speed": 222905,
       "latSpeed": 12304,
-      "distMicroAu": 9194559,
-      "ra": 272103779,
-      "dec": 78068585,
+      "distMicroAu": 9194554,
+      "ra": 272103700,
+      "dec": 78068574,
       "sign": "Gemini",
-      "signDeg": 59838116,
+      "signDeg": 59838042,
       "house": 11,
       "retrograde": false,
       "dignities": []
      },
      "uranus": {
-      "lon": 410626728,
-      "lat": 2002614,
-      "speed": -33110,
+      "lon": 410626739,
+      "lat": 2002615,
+      "speed": -33111,
       "latSpeed": -1270,
-      "distMicroAu": 18168599,
-      "ra": 417836344,
-      "dec": 78802942,
+      "distMicroAu": 18168594,
+      "ra": 417836355,
+      "dec": 78802940,
       "sign": "Cancer",
-      "signDeg": 86626728,
+      "signDeg": 86626739,
       "house": 12,
       "retrograde": true,
       "dignities": []
      },
      "neptune": {
-      "lon": 686429793,
-      "lat": 5971092,
+      "lon": 686429825,
+      "lat": 5971091,
       "speed": -97328,
       "latSpeed": 957,
-      "distMicroAu": 29293480,
-      "ra": 685657419,
-      "dec": -9750226,
+      "distMicroAu": 29293481,
+      "ra": 685657449,
+      "dec": -9750239,
       "sign": "Libra",
-      "signDeg": 38429793,
+      "signDeg": 38429825,
       "house": 3,
       "retrograde": true,
       "dignities": []
      },
      "pluto": {
-      "lon": 147851964,
-      "lat": -54707991,
+      "lon": 147851943,
+      "lat": -54707995,
       "speed": 64664,
       "latSpeed": 13367,
-      "distMicroAu": 50011106,
-      "ra": 155932046,
-      "dec": 2533925,
+      "distMicroAu": 50011102,
+      "ra": 155932028,
+      "dec": 2533914,
       "sign": "Taurus",
-      "signDeg": 39851964,
+      "signDeg": 39851943,
       "house": 10,
       "retrograde": false,
       "dignities": []
      },
      "chiron": {
-      "lon": 1199287709,
-      "lat": 19518278,
+      "lon": 1199287636,
+      "lat": 19518276,
       "speed": 219882,
       "latSpeed": 5774,
-      "distMicroAu": 17695432,
-      "ra": 1199216955,
-      "dec": -19136743,
+      "distMicroAu": 17695434,
+      "ra": 1199216888,
+      "dec": -19136771,
       "sign": "Pisces",
-      "signDeg": 11287709,
+      "signDeg": 11287636,
       "house": 8,
       "retrograde": false,
       "dignities": []
      },
      "mean_node": {
-      "lon": 973446383,
+      "lon": 973446446,
       "lat": 0,
       "speed": -190683,
       "latSpeed": 0,
       "distMicroAu": null,
-      "ra": 973577057,
+      "ra": 973577125,
       "dec": -84557653,
       "sign": "Capricorn",
-      "signDeg": 1446383,
+      "signDeg": 1446446,
       "house": 6,
       "retrograde": true,
       "dignities": []
      },
      "true_node": {
-      "lon": 972026604,
+      "lon": 972026764,
       "lat": 0,
-      "speed": -483516,
+      "speed": -483569,
       "latSpeed": 0,
       "distMicroAu": null,
-      "ra": 972029008,
+      "ra": 972029182,
       "dec": -84559856,
       "sign": "Capricorn",
-      "signDeg": 26604,
+      "signDeg": 26764,
       "house": 6,
       "retrograde": true,
       "dignities": []
@@ -3276,15 +3276,15 @@
       "a": "moon",
       "b": "mercury",
       "aspect": "trine",
-      "orb": 8023102,
+      "orb": 8036699,
       "phase": "applying",
-      "strengthPerMille": 682
+      "strengthPerMille": 681
      },
      {
       "a": "moon",
       "b": "pluto",
       "aspect": "opposition",
-      "orb": 4750284,
+      "orb": 4765797,
       "phase": "applying",
       "strengthPerMille": 835
      },
@@ -3292,15 +3292,15 @@
       "a": "moon",
       "b": "chiron",
       "aspect": "trine",
-      "orb": 23813971,
+      "orb": 23798510,
       "phase": "separating",
-      "strengthPerMille": 55
+      "strengthPerMille": 56
      },
      {
       "a": "mercury",
       "b": "saturn",
       "aspect": "square",
-      "orb": 16713334,
+      "orb": 16715197,
       "phase": "applying",
       "strengthPerMille": 337
      },
@@ -3308,7 +3308,7 @@
       "a": "mercury",
       "b": "pluto",
       "aspect": "sextile",
-      "orb": 3272818,
+      "orb": 3270902,
       "phase": "separating",
       "strengthPerMille": 773
      },
@@ -3316,7 +3316,7 @@
       "a": "venus",
       "b": "mars",
       "aspect": "conjunction",
-      "orb": 28695341,
+      "orb": 28694775,
       "phase": "separating",
       "strengthPerMille": 4
      },
@@ -3324,7 +3324,7 @@
       "a": "venus",
       "b": "jupiter",
       "aspect": "conjunction",
-      "orb": 17446935,
+      "orb": 17445758,
       "phase": "separating",
       "strengthPerMille": 394
      },
@@ -3332,7 +3332,7 @@
       "a": "venus",
       "b": "uranus",
       "aspect": "square",
-      "orb": 6772566,
+      "orb": 6771100,
       "phase": "separating",
       "strengthPerMille": 731
      },
@@ -3340,7 +3340,7 @@
       "a": "mars",
       "b": "jupiter",
       "aspect": "conjunction",
-      "orb": 11248406,
+      "orb": 11249017,
       "phase": "applying",
       "strengthPerMille": 609
      },
@@ -3348,7 +3348,7 @@
       "a": "mars",
       "b": "saturn",
       "aspect": "sextile",
-      "orb": 4865837,
+      "orb": 4865022,
       "phase": "separating",
       "strengthPerMille": 662
      },
@@ -3356,7 +3356,7 @@
       "a": "mars",
       "b": "uranus",
       "aspect": "square",
-      "orb": 21922775,
+      "orb": 21923675,
       "phase": "applying",
       "strengthPerMille": 130
      },
@@ -3364,7 +3364,7 @@
       "a": "mars",
       "b": "neptune",
       "aspect": "opposition",
-      "orb": 26274160,
+      "orb": 26273239,
       "phase": "separating",
       "strengthPerMille": 88
      },
@@ -3372,7 +3372,7 @@
       "a": "jupiter",
       "b": "uranus",
       "aspect": "square",
-      "orb": 10674369,
+      "orb": 10674658,
       "phase": "applying",
       "strengthPerMille": 576
      },
@@ -3380,7 +3380,7 @@
       "a": "saturn",
       "b": "neptune",
       "aspect": "trine",
-      "orb": 21408323,
+      "orb": 21408217,
       "phase": "separating",
       "strengthPerMille": 150
      }
@@ -3458,7 +3458,7 @@
       "speed": 1308,
       "latSpeed": 73,
       "distMicroAu": 2579,
-      "ra": 21605,
+      "ra": 21604,
       "dec": -1843,
       "sign": "Scorpio",
       "signDeg": 975,
@@ -3473,7 +3473,7 @@
       "lat": -233,
       "speed": 163,
       "latSpeed": -1,
-      "distMicroAu": 1227602,
+      "distMicroAu": 1227599,
       "ra": 34429,
       "dec": -923,
       "sign": "Pisces",
@@ -3490,7 +3490,7 @@
       "lat": -34,
       "speed": 123,
       "latSpeed": 4,
-      "distMicroAu": 1495608,
+      "distMicroAu": 1495610,
       "ra": 2417,
       "dec": 972,
       "sign": "Aries",
@@ -3506,7 +3506,7 @@
       "lat": -33,
       "speed": 75,
       "latSpeed": 1,
-      "distMicroAu": 2371267,
+      "distMicroAu": 2371266,
       "ra": 1670,
       "dec": 676,
       "sign": "Aries",
@@ -3522,7 +3522,7 @@
       "lat": -106,
       "speed": 23,
       "latSpeed": 0,
-      "distMicroAu": 5892199,
+      "distMicroAu": 5892197,
       "ra": 1989,
       "dec": 727,
       "sign": "Aries",
@@ -3536,7 +3536,7 @@
       "lat": -113,
       "speed": 6,
       "latSpeed": 0,
-      "distMicroAu": 9194559,
+      "distMicroAu": 9194554,
       "ra": 7558,
       "dec": 2169,
       "sign": "Gemini",
@@ -3550,7 +3550,7 @@
       "lat": 56,
       "speed": -1,
       "latSpeed": 0,
-      "distMicroAu": 18168599,
+      "distMicroAu": 18168594,
       "ra": 11607,
       "dec": 2189,
       "sign": "Cancer",
@@ -3564,7 +3564,7 @@
       "lat": 166,
       "speed": -3,
       "latSpeed": 0,
-      "distMicroAu": 29293480,
+      "distMicroAu": 29293481,
       "ra": 19046,
       "dec": -271,
       "sign": "Libra",
@@ -3578,7 +3578,7 @@
       "lat": -1520,
       "speed": 2,
       "latSpeed": 0,
-      "distMicroAu": 50011106,
+      "distMicroAu": 50011102,
       "ra": 4331,
       "dec": 70,
       "sign": "Taurus",
@@ -3592,7 +3592,7 @@
       "lat": 542,
       "speed": 6,
       "latSpeed": 0,
-      "distMicroAu": 17695432,
+      "distMicroAu": 17695434,
       "ra": 33312,
       "dec": -532,
       "sign": "Pisces",
@@ -3820,7 +3820,7 @@
       "lon": [
        1,
        16,
-       18
+       16
       ],
       "lat": [
        0,
@@ -3833,18 +3833,18 @@
       "ra": [
        1,
        9,
-       59
+       58
       ],
       "dec": [
        0,
        30,
-       24
+       23
       ],
       "sign": "Aries",
       "signDeg": [
        1,
        16,
-       18
+       16
       ],
       "house": 9,
       "retrograde": false,
@@ -3855,13 +3855,13 @@
      "moon": {
       "lon": [
        219,
-       45,
-       2
+       44,
+       46
       ],
       "lat": [
        -3,
        -51,
-       -57
+       -58
       ],
       "speed": 47095,
       "latSpeed": 2632,
@@ -3869,18 +3869,18 @@
       "ra": [
        216,
        2,
-       44
+       28
       ],
       "dec": [
        -18,
        -25,
-       -42
+       -38
       ],
       "sign": "Scorpio",
       "signDeg": [
        9,
-       45,
-       2
+       44,
+       46
       ],
       "house": 4,
       "retrograde": false,
@@ -3892,7 +3892,7 @@
       "lon": [
        341,
        58,
-       45
+       43
       ],
       "lat": [
        -2,
@@ -3901,11 +3901,11 @@
       ],
       "speed": 5872,
       "latSpeed": -32,
-      "distMicroAu": 1227602,
+      "distMicroAu": 1227599,
       "ra": [
        344,
        17,
-       16
+       14
       ],
       "dec": [
        -9,
@@ -3916,7 +3916,7 @@
       "signDeg": [
        11,
        58,
-       45
+       43
       ],
       "house": 8,
       "retrograde": false,
@@ -3929,7 +3929,7 @@
       "lon": [
        25,
        56,
-       39
+       38
       ],
       "lat": [
        0,
@@ -3938,11 +3938,11 @@
       ],
       "speed": 4413,
       "latSpeed": 159,
-      "distMicroAu": 1495608,
+      "distMicroAu": 1495610,
       "ra": [
        24,
        10,
-       23
+       22
       ],
       "dec": [
        9,
@@ -3953,7 +3953,7 @@
       "signDeg": [
        25,
        56,
-       39
+       38
       ],
       "house": 9,
       "retrograde": false,
@@ -3965,7 +3965,7 @@
       "lon": [
        17,
        58,
-       24
+       23
       ],
       "lat": [
        0,
@@ -3974,11 +3974,11 @@
       ],
       "speed": 2695,
       "latSpeed": 40,
-      "distMicroAu": 2371267,
+      "distMicroAu": 2371266,
       "ra": [
        16,
        41,
-       51
+       50
       ],
       "dec": [
        6,
@@ -3989,7 +3989,7 @@
       "signDeg": [
        17,
        58,
-       24
+       23
       ],
       "house": 9,
       "retrograde": false,
@@ -4010,7 +4010,7 @@
       ],
       "speed": 840,
       "latSpeed": 6,
-      "distMicroAu": 5892199,
+      "distMicroAu": 5892197,
       "ra": [
        19,
        53,
@@ -4019,7 +4019,7 @@
       "dec": [
        7,
        16,
-       6
+       5
       ],
       "sign": "Aries",
       "signDeg": [
@@ -4044,7 +4044,7 @@
       ],
       "speed": 223,
       "latSpeed": 12,
-      "distMicroAu": 9194559,
+      "distMicroAu": 9194554,
       "ra": [
        75,
        35,
@@ -4078,7 +4078,7 @@
       ],
       "speed": -33,
       "latSpeed": -1,
-      "distMicroAu": 18168599,
+      "distMicroAu": 18168594,
       "ra": [
        116,
        3,
@@ -4112,7 +4112,7 @@
       ],
       "speed": -97,
       "latSpeed": 1,
-      "distMicroAu": 29293480,
+      "distMicroAu": 29293481,
       "ra": [
        190,
        27,
@@ -4146,7 +4146,7 @@
       ],
       "speed": 65,
       "latSpeed": 13,
-      "distMicroAu": 50011106,
+      "distMicroAu": 50011102,
       "ra": [
        43,
        18,
@@ -4180,7 +4180,7 @@
       ],
       "speed": 220,
       "latSpeed": 6,
-      "distMicroAu": 17695432,
+      "distMicroAu": 17695434,
       "ra": [
        333,
        6,
@@ -4360,15 +4360,15 @@
       "a": "moon",
       "b": "mercury",
       "aspect": "trine",
-      "orb": 8023,
+      "orb": 8037,
       "phase": "applying",
-      "strengthPerMille": 682
+      "strengthPerMille": 681
      },
      {
       "a": "moon",
       "b": "pluto",
       "aspect": "opposition",
-      "orb": 4750,
+      "orb": 4766,
       "phase": "applying",
       "strengthPerMille": 835
      },
@@ -4376,15 +4376,15 @@
       "a": "moon",
       "b": "chiron",
       "aspect": "trine",
-      "orb": 23814,
+      "orb": 23798,
       "phase": "separating",
-      "strengthPerMille": 55
+      "strengthPerMille": 56
      },
      {
       "a": "mercury",
       "b": "saturn",
       "aspect": "square",
-      "orb": 16713,
+      "orb": 16715,
       "phase": "applying",
       "strengthPerMille": 337
      },
@@ -4392,7 +4392,7 @@
       "a": "mercury",
       "b": "pluto",
       "aspect": "sextile",
-      "orb": 3273,
+      "orb": 3271,
       "phase": "separating",
       "strengthPerMille": 773
      },
@@ -4408,7 +4408,7 @@
       "a": "venus",
       "b": "jupiter",
       "aspect": "conjunction",
-      "orb": 17447,
+      "orb": 17446,
       "phase": "separating",
       "strengthPerMille": 394
      },
@@ -4416,7 +4416,7 @@
       "a": "venus",
       "b": "uranus",
       "aspect": "square",
-      "orb": 6772,
+      "orb": 6771,
       "phase": "separating",
       "strengthPerMille": 731
      },
@@ -4424,7 +4424,7 @@
       "a": "mars",
       "b": "jupiter",
       "aspect": "conjunction",
-      "orb": 11248,
+      "orb": 11249,
       "phase": "applying",
       "strengthPerMille": 609
      },
@@ -4432,7 +4432,7 @@
       "a": "mars",
       "b": "saturn",
       "aspect": "sextile",
-      "orb": 4866,
+      "orb": 4865,
       "phase": "separating",
       "strengthPerMille": 662
      },
@@ -4440,7 +4440,7 @@
       "a": "mars",
       "b": "uranus",
       "aspect": "square",
-      "orb": 21923,
+      "orb": 21924,
       "phase": "applying",
       "strengthPerMille": 130
      },
@@ -4448,7 +4448,7 @@
       "a": "mars",
       "b": "neptune",
       "aspect": "opposition",
-      "orb": 26274,
+      "orb": 26273,
       "phase": "separating",
       "strengthPerMille": 88
      },
@@ -4529,15 +4529,15 @@
     "houseSystemRequested": "whole_sign",
     "bodies": {
      "sun": {
-      "lon": 4578,
+      "lon": 4576,
       "lat": -1,
       "speed": 3560,
       "latSpeed": 0,
       "distMicroAu": 998160,
-      "ra": 4199,
-      "dec": 1824,
+      "ra": 4198,
+      "dec": 1823,
       "sign": "Aries",
-      "signDeg": 4578,
+      "signDeg": 4576,
       "house": 9,
       "retrograde": false,
       "dignities": [
@@ -4545,15 +4545,15 @@
       ]
      },
      "moon": {
-      "lon": 791103,
+      "lon": 791085,
       "lat": -13917,
       "speed": 47094,
       "latSpeed": 2631,
       "distMicroAu": 2579,
-      "ra": 777765,
-      "dec": -66342,
+      "ra": 777747,
+      "dec": -66339,
       "sign": "Scorpio",
-      "signDeg": 35103,
+      "signDeg": 35085,
       "house": 4,
       "retrograde": false,
       "dignities": [
@@ -4561,15 +4561,15 @@
       ]
      },
      "mercury": {
-      "lon": 1231125,
+      "lon": 1231123,
       "lat": -8385,
       "speed": 5872,
       "latSpeed": -32,
-      "distMicroAu": 1227602,
-      "ra": 1239436,
+      "distMicroAu": 1227599,
+      "ra": 1239434,
       "dec": -33244,
       "sign": "Pisces",
-      "signDeg": 43125,
+      "signDeg": 43123,
       "house": 8,
       "retrograde": false,
       "dignities": [
@@ -4578,15 +4578,15 @@
       ]
      },
      "venus": {
-      "lon": 93399,
+      "lon": 93398,
       "lat": -1228,
       "speed": 4413,
       "latSpeed": 159,
-      "distMicroAu": 1495608,
-      "ra": 87023,
+      "distMicroAu": 1495610,
+      "ra": 87022,
       "dec": 35008,
       "sign": "Aries",
-      "signDeg": 93399,
+      "signDeg": 93398,
       "house": 9,
       "retrograde": false,
       "dignities": [
@@ -4594,15 +4594,15 @@
       ]
      },
      "mars": {
-      "lon": 64704,
+      "lon": 64703,
       "lat": -1201,
       "speed": 2695,
       "latSpeed": 40,
-      "distMicroAu": 2371267,
-      "ra": 60111,
+      "distMicroAu": 2371266,
+      "ra": 60110,
       "dec": 24322,
       "sign": "Aries",
-      "signDeg": 64704,
+      "signDeg": 64703,
       "house": 9,
       "retrograde": false,
       "dignities": [
@@ -4614,9 +4614,9 @@
       "lat": -3808,
       "speed": 840,
       "latSpeed": 6,
-      "distMicroAu": 5892199,
+      "distMicroAu": 5892197,
       "ra": 71594,
-      "dec": 26166,
+      "dec": 26165,
       "sign": "Aries",
       "signDeg": 75952,
       "house": 9,
@@ -4628,7 +4628,7 @@
       "lat": -4085,
       "speed": 223,
       "latSpeed": 12,
-      "distMicroAu": 9194559,
+      "distMicroAu": 9194554,
       "ra": 272104,
       "dec": 78069,
       "sign": "Gemini",
@@ -4642,7 +4642,7 @@
       "lat": 2002,
       "speed": -34,
       "latSpeed": -2,
-      "distMicroAu": 18168599,
+      "distMicroAu": 18168594,
       "ra": 417836,
       "dec": 78802,
       "sign": "Cancer",
@@ -4656,7 +4656,7 @@
       "lat": 5970,
       "speed": -95,
       "latSpeed": 0,
-      "distMicroAu": 29293480,
+      "distMicroAu": 29293481,
       "ra": 685655,
       "dec": -9750,
       "sign": "Libra",
@@ -4670,7 +4670,7 @@
       "lat": -54708,
       "speed": 64,
       "latSpeed": 12,
-      "distMicroAu": 50011106,
+      "distMicroAu": 50011102,
       "ra": 155932,
       "dec": 2532,
       "sign": "Taurus",
@@ -4684,7 +4684,7 @@
       "lat": 19518,
       "speed": 220,
       "latSpeed": 6,
-      "distMicroAu": 17695432,
+      "distMicroAu": 17695434,
       "ra": 1199217,
       "dec": -19137,
       "sign": "Pisces",
@@ -4748,31 +4748,31 @@
       "a": "moon",
       "b": "mercury",
       "aspect": "trine",
-      "orb": 8022,
+      "orb": 8038,
       "phase": "applying",
-      "strengthPerMille": 682
+      "strengthPerMille": 681
      },
      {
       "a": "moon",
       "b": "pluto",
       "aspect": "opposition",
-      "orb": 4749,
+      "orb": 4767,
       "phase": "applying",
-      "strengthPerMille": 835
+      "strengthPerMille": 834
      },
      {
       "a": "moon",
       "b": "chiron",
       "aspect": "trine",
-      "orb": 23815,
+      "orb": 23797,
       "phase": "separating",
-      "strengthPerMille": 55
+      "strengthPerMille": 56
      },
      {
       "a": "mercury",
       "b": "saturn",
       "aspect": "square",
-      "orb": 16713,
+      "orb": 16715,
       "phase": "applying",
       "strengthPerMille": 337
      },
@@ -4780,7 +4780,7 @@
       "a": "mercury",
       "b": "pluto",
       "aspect": "sextile",
-      "orb": 3273,
+      "orb": 3271,
       "phase": "separating",
       "strengthPerMille": 773
      },
@@ -4796,7 +4796,7 @@
       "a": "venus",
       "b": "jupiter",
       "aspect": "conjunction",
-      "orb": 17447,
+      "orb": 17446,
       "phase": "separating",
       "strengthPerMille": 394
      },
@@ -4804,7 +4804,7 @@
       "a": "venus",
       "b": "uranus",
       "aspect": "square",
-      "orb": 6773,
+      "orb": 6772,
       "phase": "separating",
       "strengthPerMille": 731
      },
@@ -4812,7 +4812,7 @@
       "a": "mars",
       "b": "jupiter",
       "aspect": "conjunction",
-      "orb": 11248,
+      "orb": 11249,
       "phase": "applying",
       "strengthPerMille": 609
      },
@@ -4820,7 +4820,7 @@
       "a": "mars",
       "b": "saturn",
       "aspect": "sextile",
-      "orb": 4866,
+      "orb": 4865,
       "phase": "separating",
       "strengthPerMille": 662
      },
@@ -4828,7 +4828,7 @@
       "a": "mars",
       "b": "uranus",
       "aspect": "square",
-      "orb": 21922,
+      "orb": 21923,
       "phase": "applying",
       "strengthPerMille": 130
      },
@@ -4836,7 +4836,7 @@
       "a": "mars",
       "b": "neptune",
       "aspect": "opposition",
-      "orb": 26274,
+      "orb": 26273,
       "phase": "separating",
       "strengthPerMille": 88
      },
@@ -4998,16 +4998,16 @@
     "svalbard-polar/centideg": "2ae2d976d344d693e77f53e74eddba48a9039a18a6fc1d92e47d0e951c3bd5e8",
     "svalbard-polar/dms": "de499027047f16d28776efa7281f74f0c645bdd7744022e38bf2c2698f37e7d1",
     "svalbard-polar/accuracy": "0b9d5daaed2c66059fac9d1774fe7f8ba6c9e1a06c35bb70c0e744b73772c171",
-    "edge-1852/arcsec": "9efa54cfe3b480755eefac3a11c87fe088dc7c6d952d4c1288f9bc60da202cfe",
-    "edge-1852/milliarcsec": "146d207baa2f0067de80365fefdcf957bb37bf804e8949fcfc389abe8c4c3ea5",
-    "edge-1852/centideg": "347e046b77163203519c8576c834b4d19a64f4a9af020f6f1724228a888edfe9",
-    "edge-1852/dms": "69519e64ca9851ed44872f9b510539a3b72674d07fe5d800035b8418cff9d814",
-    "edge-1852/accuracy": "15baafd4b216c6bbc6388a3a6d9571b3e4c119d13236fcffac139fa42a0df7b1",
-    "prague-1620/arcsec": "91e68b347a561807b7aee533cfeb742501af296a9add3642cdf0396fd4e80fc0",
-    "prague-1620/milliarcsec": "ec3ed382e9f1eaf36df01e704b751483cea6039b11daf03999e32e54143e2d96",
-    "prague-1620/centideg": "c309af679bdcdc8356fc3fc1edb2b911f406b955d7e7b07be19a0015fb18f701",
-    "prague-1620/dms": "c223ad62a9963ab831d58cb9c683378b2971f8efc766581b1cbd58c56262e0b3",
-    "prague-1620/accuracy": "8b9b8cfedac9446d2a8da6f5ac940378e344eb71e7221c0cdd6376b1d9030a60"
+    "edge-1852/arcsec": "4af2e829126cd8ec2ec8c555752064da8580b57311d97abe48391c30c274052d",
+    "edge-1852/milliarcsec": "b2b20c9db15f8fdc2cf31a5d2e79ed49f66f998985aedf7972565565b287f210",
+    "edge-1852/centideg": "5388c56e42deacf98bc9f41ac17c9a35b15dd42f7aff30c0f3c3668fcfba7dd2",
+    "edge-1852/dms": "79749e436efe6f782fe7c758227b12b94867bcb83020d027a784fb8eafc38c39",
+    "edge-1852/accuracy": "5655865d4e291dda15ee2e4f8d75e9821066256c60a2b210bc76c59b418aa7a8",
+    "prague-1620/arcsec": "520afecea201236acc00669f39f41b628d39a62b4e0fb0b66eee66ce9e8fd36b",
+    "prague-1620/milliarcsec": "c29adfc3580ff7eaed3cc35bac341ee7863eb00445bc0437481d916e24c69f4d",
+    "prague-1620/centideg": "c53424a689158d46aa9f436cffcae1c9908ec04ffa4216c0426dd1c0951e0e1b",
+    "prague-1620/dms": "1f685b3e328f012a7854cfa91c8f4e8049bda4a2d5a128788aedfc98d1e0145b",
+    "prague-1620/accuracy": "b8fb0c932e9f015fec98ae6c3dc6f3ae4217c36ecf817773283e1b27843ce9fb"
    }
   },
   {
@@ -6103,43 +6103,43 @@
     },
     "edge-1852/arcsec": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "b78383f9505f4d9814bc1496f705f60015d90fb1772e993172fed3e37dec7439",
-     "composed": "146d207baa2f0067de80365fefdcf957bb37bf804e8949fcfc389abe8c4c3ea5"
+     "sidecar": "32151957cba3fdd0b6d2a089ec868da01eba33d13407d5141c3748116acbf197",
+     "composed": "b2b20c9db15f8fdc2cf31a5d2e79ed49f66f998985aedf7972565565b287f210"
     },
     "edge-1852/centideg": {
      "remainderGrid": "arcsec",
-     "sidecar": "aa880baa0724fd27180a702f8166984ee4c2d3e05da928af039505a05b1d48b1",
-     "composed": "9efa54cfe3b480755eefac3a11c87fe088dc7c6d952d4c1288f9bc60da202cfe"
+     "sidecar": "9218e8a91801f42349d5f2c40672663da69416097bdb7e248df5bffb53860656",
+     "composed": "4af2e829126cd8ec2ec8c555752064da8580b57311d97abe48391c30c274052d"
     },
     "edge-1852/dms": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "509c68250a7f60004250a9091d80e2e931847261a0b59561b1e75ddb863d43b7",
-     "composed": "146d207baa2f0067de80365fefdcf957bb37bf804e8949fcfc389abe8c4c3ea5"
+     "sidecar": "3508ee9b43550ee5308829bacb60a43edf22f686976b3b31886672946c977467",
+     "composed": "b2b20c9db15f8fdc2cf31a5d2e79ed49f66f998985aedf7972565565b287f210"
     },
     "edge-1852/accuracy": {
      "remainderGrid": "arcsec",
-     "sidecar": "dff48ae52bc85c618c8cf4145bce33cc79c5e4d474201cce72a6bc701a6baa0b",
-     "composed": "9efa54cfe3b480755eefac3a11c87fe088dc7c6d952d4c1288f9bc60da202cfe"
+     "sidecar": "3b6ac396b25e979d7923e979764f089510f08cb66842279c11c1989e3ac0bc11",
+     "composed": "4af2e829126cd8ec2ec8c555752064da8580b57311d97abe48391c30c274052d"
     },
     "prague-1620/arcsec": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "bc9a9dd27c9eb96dc9ee3d9ac0dd17e7dbef2643f718cdc657577d29090e7c9c",
-     "composed": "ec3ed382e9f1eaf36df01e704b751483cea6039b11daf03999e32e54143e2d96"
+     "sidecar": "c44bf5c298a2140a0e0ee6814b792d823138cef10a1204f0cf581a3eb339bc61",
+     "composed": "c29adfc3580ff7eaed3cc35bac341ee7863eb00445bc0437481d916e24c69f4d"
     },
     "prague-1620/centideg": {
      "remainderGrid": "arcsec",
-     "sidecar": "b769be7d8ad2a10e2e4c94b11fe68b7711200738f84c3de2b39896815409714a",
-     "composed": "91e68b347a561807b7aee533cfeb742501af296a9add3642cdf0396fd4e80fc0"
+     "sidecar": "44ed854af260140da360516aea191a09b58aac747922d84293265ab9c0038fbb",
+     "composed": "520afecea201236acc00669f39f41b628d39a62b4e0fb0b66eee66ce9e8fd36b"
     },
     "prague-1620/dms": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "eb46d3e7adcca0f8fe822127111aa7bdde0fb97f14abe5c638c41ba5e3c03b26",
-     "composed": "ec3ed382e9f1eaf36df01e704b751483cea6039b11daf03999e32e54143e2d96"
+     "sidecar": "60ff7ff4146c91316119cdd8a5518700da5c644746f2e2f0bc651e5bdd07e671",
+     "composed": "c29adfc3580ff7eaed3cc35bac341ee7863eb00445bc0437481d916e24c69f4d"
     },
     "prague-1620/accuracy": {
      "remainderGrid": "arcsec",
-     "sidecar": "dde088f5cb348a939584d4c1dc0ea170e2a108b4cee92dd026662a7dec5132cd",
-     "composed": "91e68b347a561807b7aee533cfeb742501af296a9add3642cdf0396fd4e80fc0"
+     "sidecar": "a000c68025cc25d60a8bc1f4c6a130b1a3e3d4e0733578755ba4f1611fa6361f",
+     "composed": "520afecea201236acc00669f39f41b628d39a62b4e0fb0b66eee66ce9e8fd36b"
     }
    }
   },

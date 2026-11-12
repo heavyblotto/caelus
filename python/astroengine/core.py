@@ -1,7 +1,7 @@
 """astroengine.core -- clean-room ephemeris engine.
 
 Pipeline (apparent geocentric ecliptic longitude, true equinox of date):
-  UT -> TT via Delta T (Espenak-Meeus 2006 polynomials)
+  UT -> TT via Delta T (IERS observations; Morrison et al. 2021 spline before 1948)
   VSOP87D heliocentric spherical of date for Earth + planet
   light-time + annual aberration: evaluate BOTH bodies at (t - tau), iterate
   VSOP dynamical -> FK5 frame correction (Meeus 32.3)
@@ -28,15 +28,46 @@ def _load(name):
 
 
 # ---------------------------------------------------------------- timescale
-def julian_day(y, mo, d, h=0.0, mi=0, s=0.0):
-    """Gregorian calendar date (UT) -> Julian Day."""
+def julian_day(y, mo, d, h=0.0, mi=0, s=0.0, calendar="gregorian"):
+    """Calendar date (UT) -> Julian Day. `calendar` is "gregorian" (the
+    default, proleptic before 1582) or "julian", the calendar historical
+    dates before 1582-10-15 are given in. Years are astronomical: year 0 is
+    1 BCE, year -99 is 100 BCE."""
     frac = (h + mi / 60.0 + s / 3600.0) / 24.0
     if mo <= 2:
         y -= 1
         mo += 12
-    a = y // 100
-    b = 2 - a + a // 4
+    if calendar == "julian":
+        b = 0
+    elif calendar == "gregorian":
+        a = y // 100
+        b = 2 - a + a // 4
+    else:
+        raise ValueError(f"unknown calendar {calendar!r}")
     return math.floor(365.25 * (y + 4716)) + math.floor(30.6001 * (mo + 1)) + d + b - 1524.5 + frac
+
+
+def calendar_date(jd, calendar="gregorian"):
+    """Julian Day -> calendar date, the inverse of julian_day (Meeus,
+    Astronomical Algorithms, ch. 7). Returns {"year", "month", "day",
+    "hour"} with `hour` a fraction of 24 and the year astronomical."""
+    z = math.floor(jd + 0.5)
+    f = jd + 0.5 - z
+    if calendar == "julian":
+        a = z
+    elif calendar == "gregorian":
+        alpha = math.floor((z - 1867216.25) / 36524.25)
+        a = z + 1 + alpha - math.floor(alpha / 4)
+    else:
+        raise ValueError(f"unknown calendar {calendar!r}")
+    b = a + 1524
+    c = math.floor((b - 122.1) / 365.25)
+    d = math.floor(365.25 * c)
+    e = math.floor((b - d) / 30.6001)
+    day = b - d - math.floor(30.6001 * e)
+    month = e - 1 if e < 14 else e - 13
+    year = c - 4716 if month > 2 else c - 4715
+    return {"year": year, "month": month, "day": day, "hour": f * 24.0}
 
 
 # Observed Delta T (IERS), 5-year steps 1955-2025. Earth's rotation sped up
@@ -72,9 +103,101 @@ def delta_t_sigma(year):
     return last_s
 
 
+# Historical Delta T: the cubic-spline fit of Morrison, Stephenson, Hohenkerk
+# & Zawilski, "Addendum 2020 to 'Measurement of the Earth's rotation: 720 BC
+# to AD 2015'" (Proc. R. Soc. A 477, 2021, doi:10.1098/rspa.2020.0776),
+# Table S15 v.2020, rows 1-35. Each row is (K_i, K_i+1, a0, a1, a2, a3):
+# with t = (Y - K_i) / (K_i+1 - K_i), DT = a0 + a1 t + a2 t^2 + a3 t^3 seconds.
+# The original analysis is Stephenson, Morrison & Hohenkerk (Proc. R. Soc. A
+# 472, 2016, doi:10.1098/rspa.2016.0404).
+_DT_SPLINE = [
+    (-720.0, -100.0, 20371.848, -9999.586, 776.247, 409.160),
+    (-100.0, 400.0, 11557.668, -5822.270, 1303.151, -503.433),
+    (400.0, 1000.0, 6535.116, -5671.519, -298.291, 1085.087),
+    (1000.0, 1150.0, 1650.393, -753.210, 184.811, -25.346),
+    (1150.0, 1300.0, 1056.647, -459.628, 108.771, -24.641),
+    (1300.0, 1500.0, 681.149, -421.345, 61.953, -29.414),
+    (1500.0, 1600.0, 292.343, -192.841, -6.572, 16.197),
+    (1600.0, 1650.0, 109.127, -78.697, 10.505, 3.018),
+    (1650.0, 1720.0, 43.952, -68.089, 38.333, -2.127),
+    (1720.0, 1800.0, 12.068, 2.507, 41.731, -37.939),
+    (1800.0, 1810.0, 18.367, -3.481, -1.126, 1.918),
+    (1810.0, 1820.0, 15.678, 0.021, 4.629, -3.812),
+    (1820.0, 1830.0, 16.516, -2.157, -6.806, 3.250),
+    (1830.0, 1840.0, 10.804, -6.018, 2.944, -0.096),
+    (1840.0, 1850.0, 7.634, -0.416, 2.658, -0.539),
+    (1850.0, 1855.0, 9.338, 1.642, 0.261, -0.883),
+    (1855.0, 1860.0, 10.357, -0.486, -2.389, 1.558),
+    (1860.0, 1865.0, 9.040, -0.591, 2.284, -2.477),
+    (1865.0, 1870.0, 8.255, -3.456, -5.148, 2.720),
+    (1870.0, 1875.0, 2.371, -5.593, 3.011, -0.914),
+    (1875.0, 1880.0, -1.126, -2.314, 0.269, -0.039),
+    (1880.0, 1885.0, -3.210, -1.893, 0.152, 0.563),
+    (1885.0, 1890.0, -4.388, 0.101, 1.842, -1.438),
+    (1890.0, 1895.0, -3.884, -0.531, -2.474, 1.871),
+    (1895.0, 1900.0, -5.017, 0.134, 3.138, -0.232),
+    (1900.0, 1905.0, -1.977, 5.715, 2.443, -1.257),
+    (1905.0, 1910.0, 4.923, 6.828, -1.329, 0.720),
+    (1910.0, 1915.0, 11.142, 6.330, 0.831, -0.825),
+    (1915.0, 1920.0, 17.479, 5.518, -1.643, 0.262),
+    (1920.0, 1925.0, 21.617, 3.020, -0.856, 0.008),
+    (1925.0, 1930.0, 23.789, 1.333, -0.831, 0.127),
+    (1930.0, 1935.0, 24.418, 0.052, -0.449, 0.142),
+    (1935.0, 1940.0, 24.164, -0.419, -0.022, 0.702),
+    (1940.0, 1945.0, 24.426, 1.645, 2.086, -1.106),
+    (1945.0, 1950.0, 27.050, 2.499, -1.232, 0.614),
+]
+
+# Where the spline hands over to the Espenak-Meeus 1941-1961 polynomial. The
+# two sources agree to 3 ms at 1948, so the join needs no blend; through the
+# 1800s they differ by 1-5 s, so an earlier join would leave a step.
+DT_SPLINE_END = 1948.0
+
+# Before the spline's first knot the same authors give a long-term parabola,
+# DT = -320 + 32.5 ((Y - 1825) / 100)^2. It sits 358 s above the spline at
+# -720, so a cubic Hermite bridge carries value and slope from the parabola at
+# DT_BRIDGE_START to the spline at -720. The bridge is this engine's choice,
+# not the authors'; sigma(DT) there is 400-900 s.
+DT_SPLINE_START = -720.0
+DT_BRIDGE_START = -1520.0
+
+
+def _dt_parabola(y):
+    u = (y - 1825.0) / 100.0
+    return -320.0 + 32.5 * u * u
+
+
+def _dt_spline(y):
+    for k0, k1, a0, a1, a2, a3 in _DT_SPLINE:
+        if y < k1:
+            t = (y - k0) / (k1 - k0)
+            return a0 + t * (a1 + t * (a2 + t * a3))
+    raise ValueError(f"year {y} is past the delta-T spline")
+
+
+def _dt_bridge(y):
+    h = DT_SPLINE_START - DT_BRIDGE_START
+    s = (y - DT_BRIDGE_START) / h
+    p0 = _dt_parabola(DT_BRIDGE_START)
+    m0 = 0.65 * ((DT_BRIDGE_START - 1825.0) / 100.0) * h
+    k0, k1, a0, a1, _a2, _a3 = _DT_SPLINE[0]
+    p1 = a0
+    m1 = a1 / (k1 - k0) * h
+    s2 = s * s
+    s3 = s2 * s
+    return ((2.0 * s3 - 3.0 * s2 + 1.0) * p0 + (s3 - 2.0 * s2 + s) * m0
+            + (3.0 * s2 - 2.0 * s3) * p1 + (s3 - s2) * m1)
+
+
 def delta_t(jd_ut):
-    """TT - UT1 in seconds. Observed values 1955-2025 (linear interpolation),
-    Espenak & Meeus (2006) polynomials before, gentle extrapolation after."""
+    """TT - UT1 in seconds.
+
+    Observed values 1955-2025 (linear interpolation) with a gentle
+    extrapolation after; the Espenak & Meeus (2006) polynomial for 1948-1955;
+    the Morrison, Stephenson, Hohenkerk & Zawilski (2021) spline from -720 to
+    1948; a Hermite bridge and then the same authors' long-term parabola
+    before -720.
+    """
     y = 2000.0 + (jd_ut - J2000) / 365.25
     if 1955 <= y <= 2025:
         for (y0, d0), (y1, d1) in zip(_DT_OBS, _DT_OBS[1:]):
@@ -83,35 +206,19 @@ def delta_t(jd_ut):
     if y > 2025:
         # ΔT is flat-to-falling (69.4 -> 69.2 s over 2020-2025; Earth's spin
         # sped up post-2016). Continue the observed slope (-0.04 s/yr) plus
-        # the long-term tidal quadratic (+32 s/cy², same coefficient as the
-        # deep-time parabola below) so it rejoins the secular rise. An
-        # 80-year ΔT forecast carries ~±37 s uncertainty (Huber 2006);
-        # anything steeper is false precision.
+        # the long-term tidal quadratic (+32 s/cy²) so it rejoins the secular
+        # rise. An 80-year ΔT forecast carries ~±37 s uncertainty (Huber
+        # 2006); anything steeper is false precision.
         t = y - 2025
         return 69.2 - 0.04 * t + 32 * (t / 100) ** 2
-    if 1961 <= y < 1986:
-        t = y - 1975
-        return 45.45 + 1.067 * t - t**2 / 260 - t**3 / 718
-    if 1941 <= y < 1961:
+    if y >= DT_SPLINE_END:
         t = y - 1950
         return 29.07 + 0.407 * t - t**2 / 233 + t**3 / 2547
-    if 1920 <= y < 1941:
-        t = y - 1920
-        return 21.20 + 0.84493 * t - 0.076100 * t**2 + 0.0020936 * t**3
-    if 1900 <= y < 1920:
-        t = y - 1900
-        return -2.79 + 1.494119 * t - 0.0598939 * t**2 + 0.0061966 * t**3 - 0.000197 * t**4
-    if 1860 <= y < 1900:
-        t = y - 1860
-        return (7.62 + 0.5737 * t - 0.251754 * t**2 + 0.01680668 * t**3
-                - 0.0004473624 * t**4 + t**5 / 233174)
-    if 1800 <= y < 1860:
-        t = y - 1800
-        return (13.72 - 0.332447 * t + 0.0068612 * t**2 + 0.0041116 * t**3 - 0.00037436 * t**4
-                + 0.0000121272 * t**5 - 0.0000001699 * t**6 + 0.000000000875 * t**7)
-    # outside fitted range: parabolic fallback
-    u = (y - 1820) / 100
-    return -20 + 32 * u * u
+    if y >= DT_SPLINE_START:
+        return _dt_spline(y)
+    if y >= DT_BRIDGE_START:
+        return _dt_bridge(y)
+    return _dt_parabola(y)
 
 
 def jd_tt(jd_ut):

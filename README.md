@@ -24,7 +24,7 @@ dependency.
 
 ## Docs
 
-- [ARCHITECTURE.md](./ARCHITECTURE.md) — layout, durability decisions, product strategy
+- [ARCHITECTURE.md](./ARCHITECTURE.md) — layout and durability decisions
 - [MCP_SPEC.md](./MCP_SPEC.md) — MCP tool contract
 - [docs/gap-analysis.md](./docs/gap-analysis.md) — Swiss Ephemeris comparison (closed at 0.5.0)
 - [docs/agents.md](./docs/agents.md) — pitfalls for coding agents building on Caelus

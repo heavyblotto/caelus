@@ -1,0 +1,153 @@
+import { pageMetadata } from "../../../lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Sky Dating",
+  description: "Go from a description of a sky to the dates it occurred: dateSky takes planets by sign, longitude, or lunar phase and returns every matching window in a date range, with the search funnel that found them.",
+  path: "/docs/sky-dating",
+});
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Sky dating
+
+A chart goes from an instant to positions. `dateSky` goes the other way: you
+describe where the planets stood, and it returns every window in a date range
+in which that description was true. This is the computation used to date a
+horoscope that records positions and no year.
+
+```ts
+import { Engine, dateSky, julianDay, calendarDate } from "caelus";
+import { loadNodeData } from "caelus/node";
+
+const engine = new Engine(loadNodeData("node_modules/caelus/data"));
+
+const { windows, funnel } = dateSky(engine, [
+  { body: "jupiter", sign: "Pisces" },
+  { body: "venus", sign: "Taurus" },
+  { body: "saturn", sign: "Cancer" },
+  { body: "mars", sign: "Gemini" },
+], julianDay(-800, 1, 1, 0, 0, 0, "julian"), julianDay(0, 1, 1, 0, 0, 0, "julian"));
+
+windows.map((w) => calendarDate(w.start, "julian"));
+```
+
+Those four signs are the positions usually quoted for the oldest surviving
+Babylonian horoscope, which A. Sachs dated to 29 April 410 BCE ("Babylonian
+Horoscopes", *Journal of Cuneiform Studies* 6, 1952). Across the 800 years
+searched, three windows match:
+
+| Window opens (Julian calendar) | Length |
+|---|---|
+| 25 June 529 BCE | 6.3 days |
+| 16 April 410 BCE | 24.5 days |
+| 23 March 173 BCE | 19.9 days |
+
+The second window contains Sachs's date. Four planets named by sign leave
+three candidates in eight centuries, and any further detail in a text, such as
+the Moon's sign or a month name, picks one. The signs on this page have not
+been checked against the printed edition of the tablet, so treat the example
+as a demonstration of the method.
+
+## Years and calendars
+
+Windows are UT Julian Days. `julianDay` takes a seventh argument, `"julian"`,
+for a date written in the Julian calendar, which is how historical dates
+before 15 October 1582 are given. `calendarDate(jd, "julian")` reads one back.
+Years are astronomical, so year `0` is 1 BCE and year `-409` is 410 BCE.
+
+## Constraints
+
+Each constraint names a quantity and the arc it must lie in.
+
+| Constraint | Meaning |
+|---|---|
+| `{ body: "saturn", sign: "Libra" }` | A body in a zodiac sign, by name or by index 0 to 11 |
+| `{ body: "mars", lon: 112.5, orb: 2 }` | A body within an orb of a longitude |
+| `{ body: "venus", from: 350, to: 15 }` | A body in the arc running forward from one longitude to another |
+| `{ elongation: ["moon", "sun"], from: 180, to: 360 }` | The Moon's longitude minus the Sun's, here a waning Moon |
+
+Add `pad` to a constraint to widen its arc by that many degrees on both sides,
+or pass `pad` in the options to widen every arc. The `zodiac` option measures
+longitudes in any zodiac the engine supports, such as
+`"sidereal:fagan_bradley"`.
+
+## When the source's signs are not the engine's
+
+The horoscope of the emperor Hadrian survives in Hephaestio of Thebes, who
+took it from Antigonus of Nicaea. It places the Sun, the Moon, and Jupiter in
+Aquarius, Saturn and Mercury in Capricorn, and Venus and Mars in Pisces.
+Neugebauer and Van Hoesen (*Greek Horoscopes*, 1959, no. L 76) date it to 24
+January 76 CE.
+
+For that morning the engine's tropical positions are the Moon at 26°
+Capricorn, Jupiter at 26.5° Capricorn, and Saturn at 29.9° Sagittarius. Each
+is a few degrees short of the sign the text names, because Greek horoscopes of
+the period measured longitude in a zodiac offset from the tropical one. A pad
+absorbs the offset:
+
+```ts
+const hadrian = dateSky(engine, [
+  { body: "sun", sign: "Aquarius" },
+  { body: "moon", sign: "Aquarius" },
+  { body: "jupiter", sign: "Aquarius" },
+  { body: "saturn", sign: "Capricorn" },
+  { body: "mercury", sign: "Capricorn" },
+  { body: "venus", sign: "Pisces" },
+  { body: "mars", sign: "Pisces" },
+], julianDay(-2990, 1, 1, 0, 0, 0, "julian"), julianDay(2990, 1, 1), { pad: 6 });
+```
+
+Across those 5,980 years, with every sign widened by 6°, four windows match.
+They open on 4 March 2485 BCE, 23 February 2248 BCE, 3 February 1394 BCE, and
+24 January 76 CE. The last runs from 00:49 UT on 24 January to 20:30 UT on 26
+January, and no other window falls within a thousand years of it. The search
+took 1.2 seconds in Node on a laptop.
+
+## The funnel
+
+`dateSky` scans the slowest body across the whole range, then scans each
+faster body only inside the windows that survive. `funnel` reports the
+constraints in scan order with what was left after each. For the Hadrian
+search:
+
+| Constraint | Windows left | Days left |
+|---|---|---|
+| Saturn in Capricorn | 432 | 269,787 |
+| Jupiter in Aquarius | 150 | 29,603 |
+| Sun in Aquarius | 134 | 4,427 |
+| Mars in Pisces | 34 | 768 |
+| Venus in Pisces | 19 | 292 |
+| Mercury in Capricorn | 11 | 121 |
+| Moon in Aquarius | 4 | 10 |
+
+The funnel shows which constraint did the work. It also shows where a search
+that returns nothing ran dry, which points at the position in a text most
+likely to be miscopied.
+
+## From an AI client
+
+The MCP server exposes the same search as the `date_sky` tool. It takes the
+constraints with `start_year` and `end_year` in astronomical years, and it
+returns each window with calendar dates already worked out: the Julian
+calendar before 15 October 1582, and an `era` label such as `410 BCE`. A local
+`caelus-mcp` loads the era packs and reaches the classical era. The hosted
+endpoint runs the embedded tier and covers 1000 to 3000, and it refuses a
+wider span with the years it does cover. Setup is in the
+[MCP guide](/docs/mcp).
+
+## Limits
+
+- The range must lie inside the data the engine was built with. Dates before
+  1000 CE are validated only with the era packs, which `loadNodeData` loads in
+  Node and the embedded browser tier does not include. `engineCapabilities`
+  reports each body's span.
+- Uranus, Neptune, and Pluto have no pack before 1000 CE, so a constraint on
+  one of them cannot be searched in the classical era.
+- Constraints are on longitude. There is no constraint yet for the Ascendant,
+  for a house, or for a retrograde flag. [`when()`](/docs/api) accepts
+  arbitrary predicates and is the better tool across years or decades; it
+  samples the whole range at one step, which is too slow across millennia.
+- A window with the Moon in it is two or three days long. ΔT is uncertain by
+  minutes in antiquity, which moves the Moon by arcminutes and shifts a
+  window's edges by a similar number of minutes. It does not move a window to
+  another date.

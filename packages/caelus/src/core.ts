@@ -80,6 +80,10 @@ export interface EngineData {
 }
 
 // ---------------------------------------------------------------- timescale
+/** The calendar a date is written in: `"gregorian"` (proleptic before 1582)
+ *  or `"julian"`, the calendar historical dates before 1582-10-15 use. */
+export type Calendar = "gregorian" | "julian";
+
 /**
  * Convert a UT calendar date and time to a Julian Day (UT) — the time
  * coordinate the engine consumes. Pass the result to {@link Engine.position},
@@ -87,8 +91,10 @@ export interface EngineData {
  * functions; {@link Engine.chart} takes the calendar fields directly instead.
  *
  * Arguments are **UT**, not local civil time — convert a local time to UT
- * first (see the `caelus-birth` package). Uses the proleptic Gregorian
- * calendar.
+ * first (see the `caelus-birth` package). The calendar defaults to the
+ * proleptic Gregorian; pass `"julian"` for a historical date given in the
+ * Julian calendar. Years are astronomical: year `0` is 1 BCE and year `-99`
+ * is 100 BCE.
  *
  * @param y Year in UT, e.g. `1990`.
  * @param mo Month, `1`–`12`.
@@ -96,24 +102,79 @@ export interface EngineData {
  * @param h Hour, `0`–`23`. Defaults to `0`.
  * @param mi Minute, `0`–`59`. Defaults to `0`.
  * @param s Second, `0`–`59`. Defaults to `0`.
+ * @param calendar The calendar the date is written in. Defaults to `"gregorian"`.
  * @returns The Julian Day in UT (a fractional day count).
  * @example
  * ```ts
  * const jd = julianDay(2025, 6, 1, 12, 0, 0); // 2025-06-01 12:00 UT
  * engine.longitude("sun", jd);
+ * julianDay(76, 1, 24, 6, 0, 0, "julian");    // 24 January 76 CE, Julian calendar
  * ```
  */
 export function julianDay(
   y: number, mo: number, d: number, h = 0, mi = 0, s = 0,
+  calendar: Calendar = "gregorian",
 ): number {
   const frac = (h + mi / 60.0 + s / 3600.0) / 24.0;
   if (mo <= 2) { y -= 1; mo += 12; }
-  const a = Math.floor(y / 100);
-  const b = 2 - a + Math.floor(a / 4);
+  let b: number;
+  if (calendar === "julian") {
+    b = 0;
+  } else if (calendar === "gregorian") {
+    const a = Math.floor(y / 100);
+    b = 2 - a + Math.floor(a / 4);
+  } else {
+    throw new RangeError(`unknown calendar ${JSON.stringify(calendar)}`);
+  }
   return (
     Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (mo + 1))
     + d + b - 1524.5 + frac
   );
+}
+
+/** A calendar date read back from a Julian Day by {@link calendarDate}. */
+export interface CalendarDate {
+  /** Astronomical year: `0` is 1 BCE. */
+  year: number;
+  month: number;
+  day: number;
+  /** Time of day in hours, `0` up to `24`. */
+  hour: number;
+}
+
+/**
+ * Convert a Julian Day to a calendar date, the inverse of {@link julianDay}
+ * (Meeus, *Astronomical Algorithms*, ch. 7).
+ *
+ * @param jd Julian Day.
+ * @param calendar The calendar to express the date in. Defaults to `"gregorian"`.
+ * @returns Year, month, day, and the time of day in hours.
+ * @example
+ * ```ts
+ * calendarDate(2451545.0);            // { year: 2000, month: 1, day: 1, hour: 12 }
+ * calendarDate(1748839.75, "julian"); // { year: 76, month: 1, day: 24, hour: 6 }
+ * ```
+ */
+export function calendarDate(jd: number, calendar: Calendar = "gregorian"): CalendarDate {
+  const z = Math.floor(jd + 0.5);
+  const f = jd + 0.5 - z;
+  let a: number;
+  if (calendar === "julian") {
+    a = z;
+  } else if (calendar === "gregorian") {
+    const alpha = Math.floor((z - 1867216.25) / 36524.25);
+    a = z + 1 + alpha - Math.floor(alpha / 4);
+  } else {
+    throw new RangeError(`unknown calendar ${JSON.stringify(calendar)}`);
+  }
+  const b = a + 1524;
+  const c = Math.floor((b - 122.1) / 365.25);
+  const d = Math.floor(365.25 * c);
+  const e = Math.floor((b - d) / 30.6001);
+  const day = b - d - Math.floor(30.6001 * e);
+  const month = e < 14 ? e - 1 : e - 13;
+  const year = month > 2 ? c - 4716 : c - 4715;
+  return { year, month, day, hour: f * 24.0 };
 }
 
 const DT_OBS: Array<[number, number]> = [
@@ -123,11 +184,104 @@ const DT_OBS: Array<[number, number]> = [
 ];
 
 /**
+ * Historical ΔT: the cubic-spline fit of Morrison, Stephenson, Hohenkerk &
+ * Zawilski, "Addendum 2020 to 'Measurement of the Earth's rotation: 720 BC to
+ * AD 2015'" (Proc. R. Soc. A 477, 2021, doi:10.1098/rspa.2020.0776), Table S15
+ * v.2020, rows 1-35. Each row is [K_i, K_i+1, a0, a1, a2, a3]: with
+ * t = (Y - K_i) / (K_i+1 - K_i), ΔT = a0 + a1 t + a2 t² + a3 t³ seconds. The
+ * original analysis is Stephenson, Morrison & Hohenkerk (Proc. R. Soc. A 472,
+ * 2016, doi:10.1098/rspa.2016.0404). Mirrors `_DT_SPLINE` in the Python
+ * reference.
+ */
+const DT_SPLINE: ReadonlyArray<readonly [number, number, number, number, number, number]> = [
+  [-720.0, -100.0, 20371.848, -9999.586, 776.247, 409.160],
+  [-100.0, 400.0, 11557.668, -5822.270, 1303.151, -503.433],
+  [400.0, 1000.0, 6535.116, -5671.519, -298.291, 1085.087],
+  [1000.0, 1150.0, 1650.393, -753.210, 184.811, -25.346],
+  [1150.0, 1300.0, 1056.647, -459.628, 108.771, -24.641],
+  [1300.0, 1500.0, 681.149, -421.345, 61.953, -29.414],
+  [1500.0, 1600.0, 292.343, -192.841, -6.572, 16.197],
+  [1600.0, 1650.0, 109.127, -78.697, 10.505, 3.018],
+  [1650.0, 1720.0, 43.952, -68.089, 38.333, -2.127],
+  [1720.0, 1800.0, 12.068, 2.507, 41.731, -37.939],
+  [1800.0, 1810.0, 18.367, -3.481, -1.126, 1.918],
+  [1810.0, 1820.0, 15.678, 0.021, 4.629, -3.812],
+  [1820.0, 1830.0, 16.516, -2.157, -6.806, 3.250],
+  [1830.0, 1840.0, 10.804, -6.018, 2.944, -0.096],
+  [1840.0, 1850.0, 7.634, -0.416, 2.658, -0.539],
+  [1850.0, 1855.0, 9.338, 1.642, 0.261, -0.883],
+  [1855.0, 1860.0, 10.357, -0.486, -2.389, 1.558],
+  [1860.0, 1865.0, 9.040, -0.591, 2.284, -2.477],
+  [1865.0, 1870.0, 8.255, -3.456, -5.148, 2.720],
+  [1870.0, 1875.0, 2.371, -5.593, 3.011, -0.914],
+  [1875.0, 1880.0, -1.126, -2.314, 0.269, -0.039],
+  [1880.0, 1885.0, -3.210, -1.893, 0.152, 0.563],
+  [1885.0, 1890.0, -4.388, 0.101, 1.842, -1.438],
+  [1890.0, 1895.0, -3.884, -0.531, -2.474, 1.871],
+  [1895.0, 1900.0, -5.017, 0.134, 3.138, -0.232],
+  [1900.0, 1905.0, -1.977, 5.715, 2.443, -1.257],
+  [1905.0, 1910.0, 4.923, 6.828, -1.329, 0.720],
+  [1910.0, 1915.0, 11.142, 6.330, 0.831, -0.825],
+  [1915.0, 1920.0, 17.479, 5.518, -1.643, 0.262],
+  [1920.0, 1925.0, 21.617, 3.020, -0.856, 0.008],
+  [1925.0, 1930.0, 23.789, 1.333, -0.831, 0.127],
+  [1930.0, 1935.0, 24.418, 0.052, -0.449, 0.142],
+  [1935.0, 1940.0, 24.164, -0.419, -0.022, 0.702],
+  [1940.0, 1945.0, 24.426, 1.645, 2.086, -1.106],
+  [1945.0, 1950.0, 27.050, 2.499, -1.232, 0.614],
+];
+
+/** Where the spline hands over to the Espenak–Meeus 1941–1961 polynomial. The
+ *  two sources agree to 3 ms at 1948, so the join needs no blend; through the
+ *  1800s they differ by 1–5 s, so an earlier join would leave a step. */
+const DT_SPLINE_END = 1948.0;
+/** The spline's first knot. */
+const DT_SPLINE_START = -720.0;
+/** Before the first knot the same authors give a long-term parabola. It sits
+ *  358 s above the spline at −720, so a cubic Hermite bridge carries value and
+ *  slope from the parabola at this year to the spline at −720. The bridge is
+ *  this engine's choice, not the authors'; sigma(ΔT) there is 400–900 s. */
+const DT_BRIDGE_START = -1520.0;
+
+function dtParabola(y: number): number {
+  const u = (y - 1825.0) / 100.0;
+  return -320.0 + 32.5 * u * u;
+}
+
+function dtSpline(y: number): number {
+  for (const [k0, k1, a0, a1, a2, a3] of DT_SPLINE) {
+    if (y < k1) {
+      const t = (y - k0) / (k1 - k0);
+      return a0 + t * (a1 + t * (a2 + t * a3));
+    }
+  }
+  throw new RangeError(`year ${y} is past the delta-T spline`);
+}
+
+function dtBridge(y: number): number {
+  const h = DT_SPLINE_START - DT_BRIDGE_START;
+  const s = (y - DT_BRIDGE_START) / h;
+  const p0 = dtParabola(DT_BRIDGE_START);
+  const m0 = 0.65 * ((DT_BRIDGE_START - 1825.0) / 100.0) * h;
+  const [k0, k1, a0, a1] = DT_SPLINE[0];
+  const p1 = a0;
+  const m1 = a1 / (k1 - k0) * h;
+  const s2 = s * s;
+  const s3 = s2 * s;
+  return (
+    (2.0 * s3 - 3.0 * s2 + 1.0) * p0 + (s3 - 2.0 * s2 + s) * m0
+    + (3.0 * s2 - 2.0 * s3) * p1 + (s3 - s2) * m1
+  );
+}
+
+/**
  * ΔT (TT − UT1) in seconds at a given instant — the gap between Terrestrial
- * Time and universal time. Observed IERS values 1955–2025, Espenak–Meeus
- * polynomials before, and a gentle extrapolation after (Earth's rotation sped
- * up post-2016). The engine applies this for you; call it directly only for
- * timescale work.
+ * Time and universal time. Observed IERS values 1955–2025 with a gentle
+ * extrapolation after (Earth's rotation sped up post-2016); the Espenak–Meeus
+ * polynomial for 1948–1955; the Morrison, Stephenson, Hohenkerk & Zawilski
+ * (2021) spline from −720 to 1948; a Hermite bridge and then the same
+ * authors' long-term parabola before −720. The engine applies this for you;
+ * call it directly only for timescale work.
  *
  * @param jdUt Julian Day (UT).
  * @returns ΔT in seconds.
@@ -144,40 +298,19 @@ export function deltaT(jdUt: number): number {
   if (y > 2025) {
     // ΔT is flat-to-falling (69.4 -> 69.2 s over 2020-2025; Earth's spin
     // sped up post-2016). Continue the observed slope (-0.04 s/yr) plus the
-    // long-term tidal quadratic (+32 s/cy², same coefficient as the
-    // deep-time parabola below) so it rejoins the secular rise. An 80-year
-    // ΔT forecast carries ~±37 s uncertainty (Huber 2006); anything steeper
-    // is false precision.
+    // long-term tidal quadratic (+32 s/cy²) so it rejoins the secular rise.
+    // An 80-year ΔT forecast carries ~±37 s uncertainty (Huber 2006);
+    // anything steeper is false precision.
     const dy = y - 2025;
     return 69.2 - 0.04 * dy + 32 * (dy / 100) ** 2;
   }
-  let t: number;
-  if (y >= 1941 && y < 1955) {
-    t = y - 1950;
+  if (y >= DT_SPLINE_END) {
+    const t = y - 1950;
     return 29.07 + 0.407 * t - (t * t) / 233 + t ** 3 / 2547;
   }
-  if (y >= 1920 && y < 1941) {
-    t = y - 1920;
-    return 21.2 + 0.84493 * t - 0.0761 * t * t + 0.0020936 * t ** 3;
-  }
-  if (y >= 1900 && y < 1920) {
-    t = y - 1900;
-    return -2.79 + 1.494119 * t - 0.0598939 * t * t + 0.0061966 * t ** 3
-      - 0.000197 * t ** 4;
-  }
-  if (y >= 1860 && y < 1900) {
-    t = y - 1860;
-    return 7.62 + 0.5737 * t - 0.251754 * t * t + 0.01680668 * t ** 3
-      - 0.0004473624 * t ** 4 + t ** 5 / 233174;
-  }
-  if (y >= 1800 && y < 1860) {
-    t = y - 1800;
-    return 13.72 - 0.332447 * t + 0.0068612 * t * t + 0.0041116 * t ** 3
-      - 0.00037436 * t ** 4 + 0.0000121272 * t ** 5
-      - 0.0000001699 * t ** 6 + 0.000000000875 * t ** 7;
-  }
-  const u = (y - 1820) / 100;
-  return -20 + 32 * u * u;
+  if (y >= DT_SPLINE_START) return dtSpline(y);
+  if (y >= DT_BRIDGE_START) return dtBridge(y);
+  return dtParabola(y);
 }
 
 export function jdTT(jdUt: number): number {
