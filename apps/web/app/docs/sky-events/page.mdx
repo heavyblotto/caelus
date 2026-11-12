@@ -1,0 +1,101 @@
+import { pageMetadata } from "../../../lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Rise, Set, and Sky Events",
+  description: "Find when a body rises, culminates, and sets at a place, and when the Moon changes phase, a planet stations, or a body crosses a longitude.",
+  path: "/docs/sky-events",
+});
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Rise, set, and sky events
+
+A chart answers where the bodies are at an instant. The functions on this
+page answer when something happens: a body crosses the horizon or the
+meridian, the Moon reaches a phase, a planet turns, or a body reaches a
+longitude. Each returns Julian Days in UT.
+
+```ts
+import {
+  Engine, julianDay, riseSet, lunarPhases, stations, crossings,
+} from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);
+```
+
+## Rise, set, and culmination
+
+`riseSet` finds the next event of one kind after a start time, for a body at
+a place. The kind is `"rise"`, `"set"`, `"mtransit"` (upper culmination), or
+`"itransit"` (lower culmination).
+
+```ts
+const day = julianDay(2025, 6, 21);
+riseSet(engine, "sun", day, 51.5, -0.13, "rise");      // London
+```
+
+| Event, London, 21 June 2025 | UT |
+|---|---|
+| Sun rises | 03:43:16 |
+| Sun culminates | 12:02:22 |
+| Sun sets | 20:21:27 |
+| Moon rises | 00:34:46 |
+
+Longitude is east-positive. Rise and set are for the upper limb with standard
+refraction; pass `{ discCenter: true }` for the centre of the disc, and
+`altM`, `pressure`, or `tempC` to change the horizon model.
+
+The function returns `null` when the event does not happen within the search
+window, which is the normal case inside the polar circles. The Sun does not
+rise in Tromsø on 21 June because it does not set.
+
+## Lunar phases
+
+`lunarPhases` lists the four principal phases between two instants.
+
+```ts
+lunarPhases(engine, julianDay(2025, 6, 1), julianDay(2025, 7, 1));
+// [[jd, "first_quarter"], [jd, "full"], [jd, "last_quarter"], [jd, "new"]]
+```
+
+For June 2025 those are the first quarter on the 3rd at 03:41 UT, the full
+Moon on the 11th at 07:43, the last quarter on the 18th at 19:19, and the new
+Moon on the 25th at 10:31.
+
+## Stations
+
+`stations` returns the instants a planet's motion in longitude reverses, with
+the direction it turns to.
+
+```ts
+stations(engine, "mercury", julianDay(2025, 1, 1), julianDay(2026, 1, 1));
+```
+
+| Mercury, 2025 | Turns |
+|---|---|
+| 15 March, 06:46 UT | retrograde |
+| 7 April, 11:08 UT | direct |
+| 18 July, 04:44 UT | retrograde |
+| 11 August, 07:29 UT | direct |
+| 9 November, 19:00 UT | retrograde |
+| 29 November, 17:39 UT | direct |
+
+A planet barely moves near a station, so the instant is poorly determined.
+Two ephemerides that agree on the position to an arcsecond can differ on the
+station by a minute.
+
+## Crossings
+
+`crossings` returns every instant a body's longitude reaches a given degree.
+A retrograde planet can cross the same degree three times, and all three are
+returned.
+
+```ts
+crossings(engine, "sun", 0, julianDay(2025, 1, 1), julianDay(2026, 1, 1));
+// one instant: 2025-03-20 09:01:30 UT, the March equinox
+```
+
+For conditions that hold over a span of time, such as a planet being in a
+sign or within orb of an aspect, use [`when()`](/docs/time-queries). To go
+from a whole described sky to its dates, use [`dateSky`](/docs/sky-dating).

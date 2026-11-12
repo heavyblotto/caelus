@@ -1,0 +1,114 @@
+import { pageMetadata } from "../../../lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Eclipses",
+  description: "Search solar and lunar eclipses, find where a solar eclipse is central and how wide its path is, and get contact times and magnitude for one place.",
+  path: "/docs/eclipses",
+});
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Eclipses
+
+The engine answers three questions about an eclipse: when it happens, where on
+Earth it is seen, and what one observer sees. The search needs no extra data.
+It runs on the embedded tier from the same Sun and Moon positions as a chart.
+
+```ts
+import {
+  Engine, julianDay, solarEclipses, solarEclipseWhere, solarEclipseLimits,
+  solarEclipseLocal, lunarEclipses, lunarEclipseLocal,
+} from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);
+```
+
+## When
+
+`solarEclipses` and `lunarEclipses` return every eclipse between two Julian
+Days, in time order.
+
+```ts
+solarEclipses(engine, julianDay(2024, 1, 1), julianDay(2027, 1, 1));
+```
+
+| Greatest eclipse (UT) | Type | Gamma |
+|---|---|---|
+| 2024-04-08 18:17:23 | total | 0.3433 |
+| 2024-10-02 18:45:00 | annular | 0.3506 |
+| 2025-03-29 10:47:39 | partial | 1.0413 |
+| 2025-09-21 19:41:49 | partial | 1.0650 |
+| 2026-02-17 12:12:00 | annular | 0.9743 |
+| 2026-08-12 17:45:46 | total | 0.8978 |
+
+Each solar eclipse carries `tMax`, `type` (`total`, `annular`, `hybrid`, or
+`partial`), `gamma`, and the `begin` and `end` of the eclipse anywhere on
+Earth. Gamma is how far the Moon's shadow axis passes from the centre of the
+Earth, in Earth radii; above about 1 the axis misses and the eclipse is
+partial everywhere.
+
+A lunar eclipse carries `tMax`, `type` (`total`, `partial`, or `penumbral`),
+its umbral and penumbral magnitudes, and the begin and end of each phase it
+reaches. The total lunar eclipse of 14 March 2025 has a `tMax` of 06:58:41 UT
+and an umbral magnitude of 1.178, with totality from 06:25:58 to 07:31:21.
+
+## Where
+
+For a solar eclipse, `solarEclipseWhere` gives the point on the ground under
+the shadow axis at an instant, and `solarEclipseLimits` adds the northern and
+southern edges of the central path and its width.
+
+```ts
+const [eclipse] = solarEclipses(engine, julianDay(2024, 4, 1), julianDay(2024, 5, 1));
+
+solarEclipseWhere(engine, eclipse.tMax);
+// { lat: 25.30, lonEast: -104.17 }   in Mexico, near Torreón
+
+solarEclipseLimits(engine, eclipse.tMax).widthKm;
+// 198.98
+```
+
+Both take any instant during the eclipse, so sampling from `begin` to `end`
+traces the whole path. They return `null` when no central eclipse exists at
+that instant.
+
+## What one observer sees
+
+`solarEclipseLocal` takes a place and returns the local type, the magnitude,
+the obscuration, and the four contact times.
+
+```ts
+solarEclipseLocal(engine, eclipse.tMax, 32.78, -96.80);   // Dallas
+```
+
+| Field | Dallas | New York |
+|---|---|---|
+| `type` | total | partial |
+| `magnitude` | 1.056 | 0.910 |
+| `obscuration` | 1.000 | 0.898 |
+| `c1`, partial begins | 17:23:24 UT | |
+| `c2`, totality begins | 18:40:45 UT | |
+| `maxTime` | 18:42:43 UT | 19:25:40 UT |
+| `c3`, totality ends | 18:44:41 UT | |
+| `c4`, partial ends | 20:02:45 UT | |
+
+Totality in Dallas lasts 236 seconds. `type` is `"none"` and the times are
+`null` where no part of the Sun is covered.
+
+A lunar eclipse happens at the same instant for everyone, so the local
+question is only whether the Moon is up. `lunarEclipseLocal` returns its
+altitude and a `visible` flag. At greatest eclipse on 14 March 2025 the Moon
+is 44° above the horizon in New York and 5° below it in London.
+
+## Accuracy
+
+Times of greatest eclipse agree with Swiss Ephemeris to within 9 seconds, and
+every eclipse type from 1990 to 2030 matched (92 lunar and 89 solar). Contact
+times are typically within 15 seconds and can be minutes apart for a grazing
+eclipse. The validator holds the point under the shadow axis to 10 km. The
+figures are on [Validation](/validation).
+
+That is enough to say whether a place sees totality and for how long to
+within a few seconds. It is not a substitute for a published eclipse path map
+at the edge of the path, where a kilometre decides the answer.

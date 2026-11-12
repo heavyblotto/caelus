@@ -1,0 +1,99 @@
+import { pageMetadata } from "../../../lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Time Queries",
+  description: "Ask when a configuration is true: when() takes predicates such as a planet in a sign, an aspect within orb, or a retrograde, combined with and, or, and not, and returns the intervals in which they hold.",
+  path: "/docs/time-queries",
+});
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Time queries
+
+`when()` answers the question "when is this true?" over a range of time. You
+describe a condition with predicates, and it returns the intervals in which
+the condition holds, as pairs of UT Julian Days.
+
+```ts
+import {
+  Engine, julianDay, when, allOf, anyOf, notOf,
+  inSign, aspect, retrograde, notRetrograde,
+} from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);
+
+when(
+  engine,
+  allOf(inSign("jupiter", "Cancer"), retrograde("mercury")),
+  julianDay(2025, 1, 1), julianDay(2027, 1, 1),
+);
+```
+
+Jupiter is in Cancer and Mercury is retrograde in four intervals over those
+two years:
+
+| From | To |
+|---|---|
+| 18 July 2025 | 11 August 2025 |
+| 9 November 2025 | 29 November 2025 |
+| 26 February 2026 | 20 March 2026 |
+| 29 June 2026 | 30 June 2026 |
+
+The last one is a day long because Jupiter leaves Cancer on 30 June 2026,
+just after Mercury turns.
+
+## Predicates
+
+| Predicate | True while |
+|---|---|
+| `inSign(body, sign)` | The body is in the sign, by name or index 0 to 11 |
+| `aspect(body, kind, target, orb)` | The body is within `orb` degrees of the aspect to `target` |
+| `retrograde(body)` | The body's motion in longitude is retrograde |
+| `notRetrograde(body)` | It is direct |
+
+The `target` of an aspect is another body or a fixed longitude in degrees, so
+the same predicate covers a transit to a natal position. The aspect kinds are
+conjunction, semisextile, sextile, square, trine, quincunx, and opposition,
+and `orb` defaults to 1°.
+
+```ts
+// Mars within 1° of Saturn, 2024 to 2030
+when(engine, aspect("mars", "conjunction", "saturn", 1),
+  julianDay(2024, 1, 1), julianDay(2030, 1, 1));
+// three intervals: 9 to 12 April 2024, 18 to 21 April 2026, 29 April to 2 May 2028
+```
+
+## Combining
+
+`allOf`, `anyOf`, and `notOf` combine predicates and nest to any depth.
+
+```ts
+when(
+  engine,
+  allOf(
+    aspect("venus", "trine", "jupiter", 2),
+    notRetrograde("venus"),
+    notOf(inSign("moon", "Scorpio")),
+  ),
+  julianDay(2026, 1, 1), julianDay(2026, 7, 1),
+);
+// one interval: 21 February 2026 07:14 UT to 24 February 2026 08:58 UT
+```
+
+## How it searches
+
+Each predicate is a continuous margin that is positive while the condition
+holds. `allOf` takes the smallest margin of its parts, `anyOf` the largest,
+and `notOf` negates, so any query reduces to one function of time. `when()`
+samples that function across the range and bisects each sign change.
+
+The step is one day, or three hours when the Moon or a lunar node is
+involved. Pass `{ step }` to change it. A condition that becomes true and
+false again inside one step is missed, so use a smaller step for narrow orbs
+on fast bodies. `maxIntervals` caps the result at 500 by default.
+
+Because it samples the whole range at one step, `when()` suits years and
+decades. To search several thousand years for a described sky, use
+[`dateSky`](/docs/sky-dating), which takes only position constraints and
+prunes from the slowest body to the fastest.
