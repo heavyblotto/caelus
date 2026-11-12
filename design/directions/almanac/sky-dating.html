@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sky dating · Caelus (direction: Almanac)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<script>(function(){var d=document.documentElement,h=location.hash.slice(1);if(h==="dark"||h==="light"){d.dataset.theme=h;return}try{var s=localStorage.getItem("caelus-dir-theme");if(s)d.dataset.theme=s}catch(e){}})();</script>
+<style>
+:root{color-scheme:light;--paper:#f6f1e7;--paper2:#eee7d8;--ink:#1c1915;--ink2:#4b453c;--ink3:#7d7567;--hair:rgba(28,25,21,.24);--rubric:#a32f4d;--rubric-soft:rgba(163,47,77,.1);}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--paper:#14110e;--paper2:#1d1915;--ink:#ece5d7;--ink2:#bdb4a4;--ink3:#8a8273;--hair:rgba(236,229,215,.22);--rubric:#e88ca7;--rubric-soft:rgba(232,140,167,.12);}}
+:root[data-theme="dark"]{color-scheme:dark;--paper:#14110e;--paper2:#1d1915;--ink:#ece5d7;--ink2:#bdb4a4;--ink3:#8a8273;--hair:rgba(236,229,215,.22);--rubric:#e88ca7;--rubric-soft:rgba(232,140,167,.12);}
+:root{--serif:"Newsreader",Georgia,serif;--mono:"IBM Plex Mono",ui-monospace,monospace;--maxw:1200px;--gut:clamp(1rem,4vw,2.5rem)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.09rem/1.55 var(--serif);font-optical-sizing:auto;font-variant-numeric:lining-nums;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration-color:var(--rubric);text-decoration-thickness:1px;text-underline-offset:.18em}
+a:hover{color:var(--rubric)}
+h1,h2,h3,p,figure{margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
+.sc{font:500 .7rem/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
+.rub{color:var(--rubric)}
+.mono{font-family:var(--mono)}
+
+/* masthead */
+.mast{padding-top:1.1rem}
+.mast__row{display:grid;grid-template-columns:1fr auto 1fr;align-items:baseline;gap:1rem;border-top:1px solid var(--ink);padding:.55rem 0 .5rem}
+.mast__name{font:600 1.7rem/1 var(--serif);letter-spacing:.22em;text-transform:uppercase;text-decoration:none;text-align:center}
+.mast__l,.mast__r{font:400 .72rem var(--mono);letter-spacing:.06em;color:var(--ink2)}
+.mast__r{text-align:right}
+.mast__nav{display:flex;flex-wrap:wrap;gap:.3rem 1.7rem;align-items:center;border-top:3px double var(--ink);border-bottom:1px solid var(--ink);padding:.5rem 0;font-size:.98rem}
+.mast__nav a{text-decoration:none;font-style:italic}
+.mast__nav a[aria-current]{font-style:normal;font-weight:600}
+.mast__nav button{margin-left:auto;appearance:none;background:none;border:0;border-bottom:1px solid var(--rubric);color:var(--ink);font:italic 400 .95rem var(--serif);padding:0;cursor:pointer}
+@media (max-width:700px){.mast__row{grid-template-columns:1fr auto}.mast__l{display:none}.mast__name{text-align:left;font-size:1.35rem}}
+
+/* opening spread */
+.spread{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(1.5rem,4vw,3.5rem);padding:clamp(1.4rem,3vw,2.4rem) 0 2.5rem;align-items:start}
+@media (max-width:920px){.spread{grid-template-columns:minmax(0,1fr)}}
+.plate{border:1px solid var(--ink);padding:clamp(.6rem,1.5vw,1rem);position:relative}
+.plate::after{content:"";position:absolute;inset:4px;border:1px solid var(--hair);pointer-events:none}
+.plate svg{display:block;width:100%;height:auto}
+figcaption{font-size:.92rem;line-height:1.45;color:var(--ink2);margin-top:.7rem;font-style:italic}
+figcaption b{font-style:normal;font-weight:600;color:var(--ink);font-variant:small-caps;letter-spacing:.04em}
+figcaption code{font:400 .84em var(--mono);font-style:normal}
+.pl-horizon{fill:none;stroke:var(--ink);stroke-width:1.4}
+.pl-alt{fill:none;stroke:var(--hair);stroke-width:.7;stroke-dasharray:1 5}
+.pl-tick{stroke:var(--ink);stroke-width:.9}
+.pl-card{font:600 15px var(--serif);fill:var(--ink);text-anchor:middle}
+.pl-meridian{stroke:var(--hair);stroke-width:.7}
+.pl-con{fill:none;stroke:var(--ink3);stroke-width:.6;opacity:.75}
+.pl-ecl{fill:none;stroke:var(--rubric);stroke-width:1.1;stroke-dasharray:5 4}
+.pl-ecl-tick{fill:var(--rubric)}
+.pl-sign{font:400 14px var(--serif);fill:var(--rubric);text-anchor:middle}
+.pl-stars{fill:var(--ink)}
+.pl-starname{font:italic 400 10.5px var(--serif);fill:var(--ink2)}
+.pl-planet circle{fill:var(--paper);stroke:var(--rubric);stroke-width:1.3}
+.pl-planet text{font:400 11px var(--serif);fill:var(--rubric);text-anchor:middle}
+.dateline{display:flex;flex-wrap:wrap;gap:.2rem 1rem}
+.lede h1{font:500 clamp(2rem,3.4vw,2.9rem)/1.06 var(--serif);letter-spacing:-.012em;margin:.7rem 0 .9rem}
+.lede > p{color:var(--ink2);font-size:1.12rem}
+.install{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;margin-top:1.3rem;border:1px solid var(--ink);background:var(--paper2);color:var(--ink);font:500 .98rem var(--mono);padding:.75rem .95rem;cursor:pointer;text-align:left}
+.install i{font-style:normal;color:var(--ink3)}
+.install span[data-copy-label]{font:italic 400 .95rem var(--serif);color:var(--rubric)}
+.figs{width:100%;border-collapse:collapse;margin-top:1.5rem}
+.figs caption,.tbl caption{caption-side:top;text-align:left;padding-bottom:.4rem}
+.figs td{border-top:1px solid var(--hair);padding:.55rem 0;vertical-align:baseline}
+.figs tr:first-child td{border-top:1px solid var(--ink)}
+.figs tr:last-child td{border-bottom:1px solid var(--ink)}
+.figs td:first-child{font:500 1.55rem/1.1 var(--serif);white-space:nowrap;padding-right:1.1rem;font-variant-numeric:tabular-nums lining-nums}
+.figs td:first-child small{font:400 .72rem var(--mono);color:var(--ink3);margin-left:.25rem}
+.figs td:last-child{font-size:.98rem;line-height:1.35;color:var(--ink2)}
+sup{font:500 .62em var(--mono);color:var(--rubric);margin-left:.1em;line-height:0}
+.fn{font-size:.86rem;line-height:1.45;color:var(--ink2);margin-top:.7rem;padding-left:1.2rem;list-style:decimal}
+.fn li{padding-left:.2rem;margin-top:.2rem}
+.fn li::marker{font:500 .78em var(--mono);color:var(--rubric)}
+.next{display:inline-block;margin-top:1.1rem;font-style:italic}
+
+/* sections */
+.sec{border-top:1px solid var(--ink);padding:1.1rem 0 clamp(2.4rem,5vw,4rem)}
+.sec__head{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:baseline;margin-bottom:1.4rem}
+.sec__head h2{font:500 clamp(1.5rem,2.3vw,2rem)/1.12 var(--serif);letter-spacing:-.01em}
+@media (max-width:920px){.sec__head{grid-template-columns:minmax(0,1fr);gap:.3rem}}
+.cols{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:clamp(1.5rem,4vw,3.5rem)}
+.cols--even{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.cols--wide{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+@media (max-width:920px){.cols,.cols--even,.cols--wide{grid-template-columns:minmax(0,1fr)}}
+.body p{max-width:62ch;color:var(--ink)}
+.body p + p{text-indent:1.4em}
+.margin{font-size:.9rem;line-height:1.45;color:var(--ink2)}
+.margin p + p{margin-top:.7rem}
+.tbl{width:100%;border-collapse:collapse;font-size:.98rem;font-variant-numeric:tabular-nums lining-nums}
+.tbl th{font:500 .66rem/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);text-align:left;padding:.45rem .5rem .4rem 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);white-space:nowrap}
+.tbl td{padding:.34rem .5rem .34rem 0;border-bottom:1px solid var(--hair);white-space:nowrap}
+.tbl tr:last-child td{border-bottom:1px solid var(--ink)}
+.tbl .r{text-align:right;padding-right:0;padding-left:.75rem}.tbl td small{display:block;font-style:italic;color:var(--ink3);font-size:.86em}
+.tbl th.r{padding-right:0}
+.tbl .g{color:var(--rubric);width:1.5rem}
+.tbl .dim{color:var(--ink3);font-style:italic}
+.scroll{overflow-x:auto}
+.wh-ring{fill:none;stroke:var(--ink);stroke-width:1}
+.wh-ring--inner{stroke:var(--hair)}
+.wh-signdiv{stroke:var(--ink);stroke-width:.8}
+.wh-sign{font:400 17px var(--serif);fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+.wh-ticks{stroke:var(--ink);stroke-width:.6;fill:none}
+.wh-cusp{stroke:var(--hair);stroke-width:.9}
+.wh-cusp--axis{stroke:var(--ink);stroke-width:1.3}
+.wh-house{font:italic 400 11px var(--serif);fill:var(--ink3);text-anchor:middle;dominant-baseline:central}
+.wh-axis{font:500 9.5px var(--mono);fill:var(--ink);text-anchor:middle;dominant-baseline:central;letter-spacing:.1em}
+.wh-asp{stroke:var(--ink3);stroke-width:.7}
+.wh-asp--square,.wh-asp--opposition{stroke:var(--rubric)}
+.wh-asp--quincunx,.wh-asp--semisextile{stroke-dasharray:2 4}
+.wh-ptick{stroke:var(--rubric);stroke-width:1.5}
+.wh-planet{font:400 21px var(--serif);fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+.wh-deg{font:400 9.5px var(--mono);fill:var(--ink3);text-anchor:middle;dominant-baseline:central}
+.plate--wheel{max-width:470px}
+.plate--wheel svg{overflow:visible}
+
+/* timeline figure */
+.tl{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:.6rem 0 .2rem}
+.tl__row{display:grid;grid-template-columns:15.5rem minmax(0,1fr);gap:1rem;align-items:center;padding:.22rem 0}
+.tl__lab{display:flex;justify-content:space-between;gap:.8rem;font-size:.95rem;white-space:nowrap}
+.tl__lab i{color:var(--ink3);font-size:.9rem}
+.trk{display:block;width:100%;height:13px;border-bottom:1px solid var(--hair)}
+.trk path{fill:var(--ink)}
+.tl__row--hit .trk path{fill:var(--rubric)}
+.tl__row--hit .trk{height:17px}
+.tl__plot{position:relative}
+.tl__axis{position:relative;height:1.7rem}
+.tl__axis span{position:absolute;top:.4rem;transform:translateX(-50%);font:400 .68rem var(--mono);color:var(--ink3);white-space:nowrap}
+.tl--narrow .tl__axis span:nth-child(even){display:none}
+.tl__axis span:first-child{transform:none}.tl__axis span:last-child{transform:translateX(-100%)}
+.tl__axis span::before{content:"";position:absolute;left:50%;top:-.4rem;height:.32rem;border-left:1px solid var(--ink)}
+.tl__axis span:first-child::before{left:0}.tl__axis span:last-child::before{left:100%}
+.pin{position:absolute;bottom:1.7rem;height:1.5rem;border-left:1px solid var(--rubric)}
+.pin b{position:absolute;top:-1.15rem;left:-.55rem;width:1.1rem;font:600 .8rem/1 var(--serif);text-align:center;color:var(--rubric)}
+@media (max-width:760px){.pin b{top:.15rem;left:.25rem;text-align:left}.tl__row{grid-template-columns:minmax(0,1fr);gap:.1rem;padding:.35rem 0}.tl__axis span:nth-child(even){display:none}}
+
+/* contents list with leaders */
+.toc{list-style:none;margin:0;padding:0;columns:2;column-gap:clamp(1.5rem,4vw,3.5rem)}
+@media (max-width:760px){.toc{columns:1}}
+.toc li{break-inside:avoid;padding:.6rem 0;border-bottom:1px solid var(--hair)}
+.toc__line{display:flex;align-items:baseline;gap:.5rem}
+.toc__n{font:400 .72rem var(--mono);color:var(--rubric);width:1.6rem;flex:none}
+.toc__name{font-weight:600;font-size:1.12rem;text-decoration:none}
+.toc__dots{flex:1;border-bottom:1px dotted var(--ink3);transform:translateY(-.25em);min-width:1rem}
+.toc__st{font:italic 400 .92rem var(--serif);color:var(--ink2);white-space:nowrap}
+.toc__st--next{color:var(--rubric)}
+.toc p{font-size:.96rem;line-height:1.4;color:var(--ink2);padding-left:2.1rem;margin-top:.1rem}
+.colophon{border-top:3px double var(--ink);padding:1rem 0 3rem;font-size:.9rem;color:var(--ink2);display:flex;flex-wrap:wrap;gap:.4rem 2rem;justify-content:space-between}
+.colophon a{margin-right:1.1rem}
+.defs{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:.1rem 1.2rem}
+.defs dt{font:500 .86rem/1.9 var(--mono)}
+.defs dd{margin:0;color:var(--ink2);font-size:.98rem}
+@media (max-width:520px){.defs{grid-template-columns:minmax(0,1fr)}.defs dd{margin-bottom:.5rem}}
+
+/* sky dating page */
+.title{padding:clamp(1.4rem,3vw,2.4rem) 0 1.6rem;max-width:50rem}
+.title h1{font:500 clamp(2.2rem,4vw,3.3rem)/1.04 var(--serif);letter-spacing:-.015em;margin:.5rem 0 .8rem}
+.title p{font-size:1.14rem;color:var(--ink2)}
+.reader{border:1px solid var(--rubric);background:var(--rubric-soft);padding:.8rem 1rem;font-size:.96rem;line-height:1.45;margin-bottom:2rem;max-width:62rem}
+.reader b{font:500 .68rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--rubric);margin-right:.5rem}
+.reader code{font:400 .86em var(--mono)}
+.work{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:start;padding-bottom:3rem}
+@media (max-width:980px){.work{grid-template-columns:minmax(0,1fr)}}
+.step{border-top:1px solid var(--ink);padding:.9rem 0 2rem}
+.step > .sc{display:block;margin-bottom:.6rem}
+.step h2{font:500 1.45rem/1.15 var(--serif);margin-bottom:.7rem}
+.given{font-size:1.32rem;line-height:1.75;max-width:36em}
+.given select{appearance:none;-webkit-appearance:none;background:none;border:0;border-bottom:1px solid var(--rubric);border-radius:0;color:var(--rubric);font:italic 500 1em var(--serif);padding:0 .9em 0 .1em;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,var(--rubric) 50%),linear-gradient(135deg,var(--rubric) 50%,transparent 50%);background-position:calc(100% - 5px) 58%,100% 58%;background-size:5px 5px;background-repeat:no-repeat;max-width:100%}
+.given small{display:block;font-size:.92rem;line-height:1.5;color:var(--ink2);margin-top:.7rem}
+.listing{position:sticky;top:1rem}
+.listing .sc{display:flex;justify-content:space-between;gap:1rem;margin-bottom:.4rem}
+pre.code{margin:0 0 1.4rem;border:1px solid var(--ink);background:var(--paper2);padding:.9rem 1rem;font:400 .8rem/1.62 var(--mono);overflow-x:auto;color:var(--ink)}
+.codeline{display:block;border:1px solid var(--ink);background:var(--paper2);padding:.6rem .8rem;font:400 .78rem/1.5 var(--mono);overflow-x:auto;white-space:nowrap;margin-top:.9rem}
+.k{font-weight:500}.s{color:var(--rubric)}.c{color:var(--ink3);font-style:italic}.f{font-weight:500}.n{color:var(--rubric)}
+</style>
+</head>
+<body>
+<header class="mast wrap">
+  <div class="mast__row"><span class="mast__l">An ephemeris engine in TypeScript</span><a class="mast__name" href="home.html">Caelus</a><span class="mast__r">Version 0.25.0, MIT</span></div>
+  <nav class="mast__nav" aria-label="Primary"><a href="home.html#instruments" aria-current="page">Instruments</a><a href="home.html#games">Games</a><a href="#">Documentation</a><a href="home.html#accuracy">Validation</a><a href="#">Playground</a><button data-theme-toggle>Day or night</button></nav>
+</header>
+<main class="wrap">
+<div class="title">
+  <span class="sc rub">Instrument 01</span>
+  <h1>Sky dating</h1>
+  <p>Sky dating takes a partial description of a sky and lists every date that fits it. Scholars date ancient horoscopes the same way: a text that names the sign of each planet can be matched against the computed sky for every day in the supported span.</p>
+</div>
+<p class="reader"><b>Placeholder</b><code>dateSky()</code> is not in caelus 0.25.0. The windows shown here came from a daily scan that called <code>engine.position()</code> for each body on 2,190,726 days, and they have not been checked against a published corpus. The controls on this page are not wired.</p>
+
+<div class="work">
+  <div>
+    <section class="step">
+      <span class="sc">1. Given</span>
+      <form class="given" onsubmit="return false">Saturn in <select class="" aria-label="Saturn sign" name="saturn"><option>Any sign</option><option selected>Aries</option><option>Taurus</option><option>Gemini</option><option>Cancer</option><option>Leo</option><option>Virgo</option><option>Libra</option><option>Scorpio</option><option>Sagittarius</option><option>Capricorn</option><option>Aquarius</option><option>Pisces</option></select>, Jupiter in <select class="" aria-label="Jupiter sign" name="jupiter"><option>Any sign</option><option>Aries</option><option>Taurus</option><option>Gemini</option><option>Cancer</option><option selected>Leo</option><option>Virgo</option><option>Libra</option><option>Scorpio</option><option>Sagittarius</option><option>Capricorn</option><option>Aquarius</option><option>Pisces</option></select>, Mars in <select class="" aria-label="Mars sign" name="mars"><option>Any sign</option><option>Aries</option><option>Taurus</option><option>Gemini</option><option>Cancer</option><option selected>Leo</option><option>Virgo</option><option>Libra</option><option>Scorpio</option><option>Sagittarius</option><option>Capricorn</option><option>Aquarius</option><option>Pisces</option></select>, the Sun in <select class="" aria-label="Sun sign" name="sun"><option>Any sign</option><option>Aries</option><option>Taurus</option><option>Gemini</option><option>Cancer</option><option>Leo</option><option>Virgo</option><option>Libra</option><option selected>Scorpio</option><option>Sagittarius</option><option>Capricorn</option><option>Aquarius</option><option>Pisces</option></select>, Venus in <select class="" aria-label="Venus sign" name="venus"><option>Any sign</option><option>Aries</option><option>Taurus</option><option>Gemini</option><option>Cancer</option><option>Leo</option><option>Virgo</option><option selected>Libra</option><option>Scorpio</option><option>Sagittarius</option><option>Capricorn</option><option>Aquarius</option><option>Pisces</option></select>, Mercury in <select class="" aria-label="Mercury sign" name="mercury"><option>Any sign</option><option>Aries</option><option>Taurus</option><option>Gemini</option><option>Cancer</option><option>Leo</option><option>Virgo</option><option>Libra</option><option selected>Scorpio</option><option>Sagittarius</option><option>Capricorn</option><option>Aquarius</option><option>Pisces</option></select>, and the Moon in <select class="" aria-label="Moon sign" name="moon"><option>Any sign</option><option>Aries</option><option>Taurus</option><option>Gemini</option><option>Cancer</option><option>Leo</option><option>Virgo</option><option>Libra</option><option>Scorpio</option><option selected>Sagittarius</option><option>Capricorn</option><option>Aquarius</option><option>Pisces</option></select>, at <select class="" aria-label="Lunar phase" name="phase"><option selected>Any phase</option><option>New</option><option>Waxing crescent</option><option>First quarter</option><option>Waxing gibbous</option><option>Full</option><option>Waning gibbous</option><option>Last quarter</option><option>Waning crescent</option></select>.
+      <small>The zodiac is tropical and the search runs from 3000 BCE to 3000 CE. Any condition can be left open, and the lunar phase is optional.</small></form>
+    </section>
+
+    <section class="step">
+      <span class="sc">2. Where the conditions hold</span>
+      <figure><div class="tl tl--narrow"><div class="tl__row"><div class="tl__lab"><span>Saturn in Aries</span><i>405</i></div><svg class="trk" viewBox="0 0 1000 10" preserveAspectRatio="none" aria-hidden="true"><path d="M3.24 0h0.60v10h-0.60zM8.09 0h0.60v10h-0.60zM8.21 0h0.60v10h-0.60zM8.51 0h0.60v10h-0.60zM13.07 0h0.60v10h-0.60zM17.92 0h0.60v10h-0.60zM18.36 0h0.60v10h-0.60zM22.78 0h0.60v10h-0.60zM22.90 0h0.60v10h-0.60zM27.75 0h0.60v10h-0.60zM32.61 0h0.60v10h-0.60zM32.73 0h0.60v10h-0.60zM33.00 0h0.60v10h-0.60zM37.58 0h0.60v10h-0.60zM42.43 0h0.60v10h-0.60zM42.55 0h0.60v10h-0.60zM42.86 0h0.60v10h-0.60zM47.41 0h0.60v10h-0.60zM52.26 0h0.60v10h-0.60zM57.12 0h0.60v10h-0.60zM57.24 0h0.60v10h-0.60zM57.51 0h0.60v10h-0.60zM62.09 0h0.60v10h-0.60zM66.95 0h0.60v10h-0.60zM67.06 0h0.60v10h-0.60zM67.36 0h0.60v10h-0.60zM71.92 0h0.60v10h-0.60zM76.77 0h0.60v10h-0.60zM76.88 0h0.60v10h-0.60zM77.21 0h0.60v10h-0.60zM81.63 0h0.60v10h-0.60zM81.75 0h0.60v10h-0.60zM82.00 0h0.60v10h-0.60zM86.60 0h0.60v10h-0.60zM91.46 0h0.60v10h-0.60zM91.58 0h0.60v10h-0.60zM91.86 0h0.60v10h-0.60zM96.43 0h0.60v10h-0.60zM101.29 0h0.60v10h-0.60zM101.41 0h0.60v10h-0.60zM101.71 0h0.60v10h-0.60zM106.27 0h0.60v10h-0.60zM111.12 0h0.60v10h-0.60zM111.23 0h0.60v10h-0.60zM111.55 0h0.60v10h-0.60zM116.10 0h0.60v10h-0.60zM120.95 0h0.60v10h-0.60zM125.81 0h0.60v10h-0.60zM125.93 0h0.60v10h-0.60zM126.19 0h0.60v10h-0.60zM130.78 0h0.60v10h-0.60zM135.64 0h0.60v10h-0.60zM135.76 0h0.60v10h-0.60zM136.04 0h0.60v10h-0.60zM140.62 0h0.60v10h-0.60zM145.47 0h0.60v10h-0.60zM145.59 0h0.60v10h-0.60zM145.88 0h0.60v10h-0.60zM150.45 0h0.60v10h-0.60zM155.30 0h0.60v10h-0.60zM155.42 0h0.60v10h-0.60zM155.73 0h0.60v10h-0.60zM160.28 0h0.60v10h-0.60zM165.13 0h0.60v10h-0.60zM169.99 0h0.60v10h-0.60zM170.11 0h0.60v10h-0.60zM170.38 0h0.60v10h-0.60zM174.96 0h0.60v10h-0.60zM179.82 0h0.60v10h-0.60zM179.94 0h0.60v10h-0.60zM180.23 0h0.60v10h-0.60zM184.79 0h0.60v10h-0.60zM189.65 0h0.60v10h-0.60zM189.76 0h0.60v10h-0.60zM190.08 0h0.60v10h-0.60zM194.51 0h0.60v10h-0.60zM194.62 0h0.60v10h-0.60zM199.48 0h0.60v10h-0.60zM204.33 0h0.60v10h-0.60zM204.45 0h0.60v10h-0.60zM204.73 0h0.60v10h-0.60zM209.31 0h0.60v10h-0.60zM214.16 0h0.60v10h-0.60zM214.28 0h0.60v10h-0.60zM214.58 0h0.60v10h-0.60zM219.13 0h0.60v10h-0.60zM223.99 0h0.60v10h-0.60zM224.44 0h0.60v10h-0.60zM228.85 0h0.60v10h-0.60zM228.96 0h0.60v10h-0.60zM229.22 0h0.60v10h-0.60zM233.82 0h0.60v10h-0.60zM238.67 0h0.60v10h-0.60zM238.79 0h0.60v10h-0.60zM239.08 0h0.60v10h-0.60zM243.65 0h0.60v10h-0.60zM248.50 0h0.60v10h-0.60zM248.62 0h0.60v10h-0.60zM248.93 0h0.60v10h-0.60zM253.48 0h0.60v10h-0.60zM258.33 0h0.60v10h-0.60zM258.78 0h0.60v10h-0.60zM263.19 0h0.60v10h-0.60zM263.31 0h0.60v10h-0.60zM263.57 0h0.60v10h-0.60zM268.16 0h0.60v10h-0.60zM273.02 0h0.60v10h-0.60zM273.14 0h0.60v10h-0.60zM273.42 0h0.60v10h-0.60zM278.00 0h0.60v10h-0.60zM282.85 0h0.60v10h-0.60zM282.97 0h0.60v10h-0.60zM283.27 0h0.60v10h-0.60zM287.83 0h0.60v10h-0.60zM292.68 0h0.60v10h-0.60zM292.79 0h0.60v10h-0.60zM293.11 0h0.60v10h-0.60zM297.66 0h0.60v10h-0.60zM302.51 0h0.60v10h-0.60zM307.37 0h0.60v10h-0.60zM307.49 0h0.60v10h-0.60zM307.75 0h0.60v10h-0.60zM312.34 0h0.60v10h-0.60zM317.20 0h0.60v10h-0.60zM317.32 0h0.60v10h-0.60zM317.60 0h0.60v10h-0.60zM322.17 0h0.60v10h-0.60zM327.03 0h0.60v10h-0.60zM327.15 0h0.60v10h-0.60zM327.45 0h0.60v10h-0.60zM332.01 0h0.60v10h-0.60zM336.86 0h0.60v10h-0.60zM337.30 0h0.60v10h-0.60zM341.72 0h0.60v10h-0.60zM341.84 0h0.60v10h-0.60zM342.09 0h0.60v10h-0.60zM346.69 0h0.60v10h-0.60zM351.54 0h0.60v10h-0.60zM351.66 0h0.60v10h-0.60zM351.95 0h0.60v10h-0.60zM356.52 0h0.60v10h-0.60zM361.37 0h0.60v10h-0.60zM361.49 0h0.60v10h-0.60zM361.80 0h0.60v10h-0.60zM366.23 0h0.60v10h-0.60zM366.35 0h0.60v10h-0.60zM371.20 0h0.60v10h-0.60zM376.05 0h0.60v10h-0.60zM376.17 0h0.60v10h-0.60zM376.45 0h0.60v10h-0.60zM381.03 0h0.60v10h-0.60zM385.88 0h0.60v10h-0.60zM386.00 0h0.60v10h-0.60zM386.30 0h0.60v10h-0.60zM390.86 0h0.60v10h-0.60zM395.71 0h0.60v10h-0.60zM396.15 0h0.60v10h-0.60zM400.57 0h0.60v10h-0.60zM400.69 0h0.60v10h-0.60zM405.54 0h0.60v10h-0.60zM410.40 0h0.60v10h-0.60zM410.52 0h0.60v10h-0.60zM410.80 0h0.60v10h-0.60zM415.37 0h0.60v10h-0.60zM420.23 0h0.60v10h-0.60zM420.35 0h0.60v10h-0.60zM420.64 0h0.60v10h-0.60zM425.20 0h0.60v10h-0.60zM430.06 0h0.60v10h-0.60zM430.17 0h0.60v10h-0.60zM430.49 0h0.60v10h-0.60zM434.92 0h0.60v10h-0.60zM435.03 0h0.60v10h-0.60zM439.89 0h0.60v10h-0.60zM440.35 0h0.60v10h-0.60zM444.75 0h0.60v10h-0.60zM444.87 0h0.60v10h-0.60zM445.13 0h0.60v10h-0.60zM449.72 0h0.60v10h-0.60zM454.58 0h0.60v10h-0.60zM454.70 0h0.60v10h-0.60zM454.98 0h0.60v10h-0.60zM459.55 0h0.60v10h-0.60zM464.41 0h0.60v10h-0.60zM464.53 0h0.60v10h-0.60zM464.83 0h0.60v10h-0.60zM469.38 0h0.60v10h-0.60zM474.24 0h0.60v10h-0.60zM474.67 0h0.60v10h-0.60zM479.10 0h0.60v10h-0.60zM479.21 0h0.60v10h-0.60zM484.07 0h0.60v10h-0.60zM488.92 0h0.60v10h-0.60zM489.04 0h0.60v10h-0.60zM489.32 0h0.60v10h-0.60zM493.90 0h0.60v10h-0.60zM498.75 0h0.60v10h-0.60zM498.87 0h0.60v10h-0.60zM499.17 0h0.60v10h-0.60zM503.73 0h0.60v10h-0.60zM508.58 0h0.60v10h-0.60zM509.02 0h0.60v10h-0.60zM513.44 0h0.60v10h-0.60zM513.56 0h0.60v10h-0.60zM513.81 0h0.60v10h-0.60zM518.41 0h0.60v10h-0.60zM523.26 0h0.60v10h-0.60zM523.38 0h0.60v10h-0.60zM523.67 0h0.60v10h-0.60zM528.24 0h0.60v10h-0.60zM533.09 0h0.60v10h-0.60zM533.52 0h0.60v10h-0.60zM537.95 0h0.60v10h-0.60zM538.07 0h0.60v10h-0.60zM542.92 0h0.60v10h-0.60zM547.77 0h0.60v10h-0.60zM547.89 0h0.60v10h-0.60zM548.17 0h0.60v10h-0.60zM552.75 0h0.60v10h-0.60zM557.60 0h0.60v10h-0.60zM557.72 0h0.60v10h-0.60zM558.02 0h0.60v10h-0.60zM562.58 0h0.60v10h-0.60zM567.43 0h0.60v10h-0.60zM567.87 0h0.60v10h-0.60zM572.29 0h0.60v10h-0.60zM572.41 0h0.60v10h-0.60zM577.26 0h0.60v10h-0.60zM582.12 0h0.60v10h-0.60zM582.24 0h0.60v10h-0.60zM582.51 0h0.60v10h-0.60zM587.10 0h0.60v10h-0.60zM591.95 0h0.60v10h-0.60zM592.07 0h0.60v10h-0.60zM592.36 0h0.60v10h-0.60zM596.93 0h0.60v10h-0.60zM601.78 0h0.60v10h-0.60zM601.89 0h0.60v10h-0.60zM602.21 0h0.60v10h-0.60zM606.64 0h0.60v10h-0.60zM606.76 0h0.60v10h-0.60zM611.61 0h0.60v10h-0.60zM612.06 0h0.60v10h-0.60zM616.47 0h0.60v10h-0.60zM616.59 0h0.60v10h-0.60zM621.44 0h0.60v10h-0.60zM626.30 0h0.60v10h-0.60zM626.42 0h0.60v10h-0.60zM626.70 0h0.60v10h-0.60zM631.27 0h0.60v10h-0.60zM636.13 0h0.60v10h-0.60zM636.24 0h0.60v10h-0.60zM636.55 0h0.60v10h-0.60zM640.99 0h0.60v10h-0.60zM641.11 0h0.60v10h-0.60zM645.96 0h0.60v10h-0.60zM646.40 0h0.60v10h-0.60zM650.81 0h0.60v10h-0.60zM650.93 0h0.60v10h-0.60zM655.79 0h0.60v10h-0.60zM660.64 0h0.60v10h-0.60zM660.76 0h0.60v10h-0.60zM661.05 0h0.60v10h-0.60zM665.62 0h0.60v10h-0.60zM670.47 0h0.60v10h-0.60zM670.90 0h0.60v10h-0.60zM675.33 0h0.60v10h-0.60zM675.45 0h0.60v10h-0.60zM680.30 0h0.60v10h-0.60zM685.15 0h0.60v10h-0.60zM685.27 0h0.60v10h-0.60zM685.55 0h0.60v10h-0.60zM690.13 0h0.60v10h-0.60zM694.98 0h0.60v10h-0.60zM695.10 0h0.60v10h-0.60zM695.40 0h0.60v10h-0.60zM699.84 0h0.60v10h-0.60zM699.96 0h0.60v10h-0.60zM704.81 0h0.60v10h-0.60zM705.25 0h0.60v10h-0.60zM709.66 0h0.60v10h-0.60zM709.79 0h0.60v10h-0.60zM714.64 0h0.60v10h-0.60zM719.49 0h0.60v10h-0.60zM719.61 0h0.60v10h-0.60zM719.90 0h0.60v10h-0.60zM724.47 0h0.60v10h-0.60zM729.32 0h0.60v10h-0.60zM729.43 0h0.60v10h-0.60zM729.75 0h0.60v10h-0.60zM734.18 0h0.60v10h-0.60zM734.30 0h0.60v10h-0.60zM739.15 0h0.60v10h-0.60zM739.59 0h0.60v10h-0.60zM744.01 0h0.60v10h-0.60zM744.13 0h0.60v10h-0.60zM748.99 0h0.60v10h-0.60zM753.84 0h0.60v10h-0.60zM753.96 0h0.60v10h-0.60zM754.24 0h0.60v10h-0.60zM758.82 0h0.60v10h-0.60zM763.67 0h0.60v10h-0.60zM763.79 0h0.60v10h-0.60zM764.08 0h0.60v10h-0.60zM768.53 0h0.60v10h-0.60zM768.65 0h0.60v10h-0.60zM773.50 0h0.60v10h-0.60zM773.93 0h0.60v10h-0.60zM778.36 0h0.60v10h-0.60zM778.48 0h0.60v10h-0.60zM783.33 0h0.60v10h-0.60zM783.78 0h0.60v10h-0.60zM788.19 0h0.60v10h-0.60zM788.31 0h0.60v10h-0.60zM788.57 0h0.60v10h-0.60zM793.16 0h0.60v10h-0.60zM798.02 0h0.60v10h-0.60zM798.13 0h0.60v10h-0.60zM798.43 0h0.60v10h-0.60zM802.88 0h0.60v10h-0.60zM802.99 0h0.60v10h-0.60zM807.85 0h0.60v10h-0.60zM808.28 0h0.60v10h-0.60zM812.70 0h0.60v10h-0.60zM812.82 0h0.60v10h-0.60zM817.67 0h0.60v10h-0.60zM818.13 0h0.60v10h-0.60zM822.53 0h0.60v10h-0.60zM822.65 0h0.60v10h-0.60zM822.93 0h0.60v10h-0.60zM827.50 0h0.60v10h-0.60zM832.35 0h0.60v10h-0.60zM832.78 0h0.60v10h-0.60zM837.21 0h0.60v10h-0.60zM837.33 0h0.60v10h-0.60zM842.18 0h0.60v10h-0.60zM842.63 0h0.60v10h-0.60zM847.04 0h0.60v10h-0.60zM847.16 0h0.60v10h-0.60zM847.42 0h0.60v10h-0.60zM852.01 0h0.60v10h-0.60zM856.87 0h0.60v10h-0.60zM856.98 0h0.60v10h-0.60zM857.28 0h0.60v10h-0.60zM861.72 0h0.60v10h-0.60zM861.84 0h0.60v10h-0.60zM866.70 0h0.60v10h-0.60zM867.13 0h0.60v10h-0.60zM871.55 0h0.60v10h-0.60zM871.67 0h0.60v10h-0.60zM876.53 0h0.60v10h-0.60zM876.98 0h0.60v10h-0.60zM881.38 0h0.60v10h-0.60zM881.50 0h0.60v10h-0.60zM881.78 0h0.60v10h-0.60zM886.36 0h0.60v10h-0.60zM891.21 0h0.60v10h-0.60zM891.32 0h0.60v10h-0.60zM891.63 0h0.60v10h-0.60zM896.07 0h0.60v10h-0.60zM896.19 0h0.60v10h-0.60zM901.04 0h0.60v10h-0.60zM901.47 0h0.60v10h-0.60zM905.90 0h0.60v10h-0.60zM906.02 0h0.60v10h-0.60zM910.87 0h0.60v10h-0.60zM911.32 0h0.60v10h-0.60zM915.73 0h0.60v10h-0.60zM915.85 0h0.60v10h-0.60zM916.11 0h0.60v10h-0.60zM920.70 0h0.60v10h-0.60zM925.56 0h0.60v10h-0.60zM925.67 0h0.60v10h-0.60zM925.97 0h0.60v10h-0.60zM930.42 0h0.60v10h-0.60zM930.53 0h0.60v10h-0.60zM935.39 0h0.60v10h-0.60zM935.81 0h0.60v10h-0.60zM940.24 0h0.60v10h-0.60zM940.36 0h0.60v10h-0.60zM945.22 0h0.60v10h-0.60zM945.66 0h0.60v10h-0.60zM950.07 0h0.60v10h-0.60zM950.19 0h0.60v10h-0.60zM955.05 0h0.60v10h-0.60zM959.90 0h0.60v10h-0.60zM960.01 0h0.60v10h-0.60zM960.31 0h0.60v10h-0.60zM964.76 0h0.60v10h-0.60zM964.88 0h0.60v10h-0.60zM969.73 0h0.60v10h-0.60zM970.16 0h0.60v10h-0.60zM974.58 0h0.60v10h-0.60zM974.70 0h0.60v10h-0.60zM979.56 0h0.60v10h-0.60zM980.02 0h0.60v10h-0.60zM984.41 0h0.60v10h-0.60zM984.53 0h0.60v10h-0.60zM984.81 0h0.60v10h-0.60zM989.27 0h0.60v10h-0.60zM989.39 0h0.60v10h-0.60zM994.24 0h0.60v10h-0.60zM994.67 0h0.60v10h-0.60zM999.09 0h0.60v10h-0.60zM999.22 0h0.60v10h-0.60z"/></svg></div><div class="tl__row"><div class="tl__lab"><span>and Jupiter in Leo</span><i>107</i></div><svg class="trk" viewBox="0 0 1000 10" preserveAspectRatio="none" aria-hidden="true"><path d="M3.26 0h0.60v10h-0.60zM3.41 0h0.60v10h-0.60zM13.11 0h0.60v10h-0.60zM22.97 0h0.60v10h-0.60zM32.82 0h0.60v10h-0.60zM42.67 0h0.60v10h-0.60zM42.78 0h0.60v10h-0.60zM42.90 0h0.60v10h-0.60zM125.81 0h0.60v10h-0.60zM125.93 0h0.60v10h-0.60zM135.66 0h0.60v10h-0.60zM135.76 0h0.60v10h-0.60zM145.51 0h0.60v10h-0.60zM145.59 0h0.60v10h-0.60zM155.36 0h0.60v10h-0.60zM155.42 0h0.60v10h-0.60zM155.47 0h0.60v10h-0.60zM165.22 0h0.60v10h-0.60zM165.33 0h0.60v10h-0.60zM165.43 0h0.60v10h-0.60zM175.18 0h0.60v10h-0.60zM185.03 0h0.60v10h-0.60zM194.88 0h0.60v10h-0.60zM248.50 0h0.60v10h-0.60zM258.33 0h0.60v10h-0.60zM268.16 0h0.60v10h-0.60zM278.02 0h0.60v10h-0.60zM278.16 0h0.60v10h-0.60zM287.88 0h0.60v10h-0.60zM297.73 0h0.60v10h-0.60zM307.58 0h0.60v10h-0.60zM307.75 0h0.60v10h-0.60zM317.43 0h0.60v10h-0.60zM317.54 0h0.60v10h-0.60zM317.60 0h0.60v10h-0.60zM317.66 0h0.60v10h-0.60zM327.45 0h0.60v10h-0.60zM337.30 0h0.60v10h-0.60zM400.57 0h0.60v10h-0.60zM400.69 0h0.60v10h-0.60zM410.42 0h0.60v10h-0.60zM410.52 0h0.60v10h-0.60zM420.27 0h0.60v10h-0.60zM420.35 0h0.60v10h-0.60zM430.12 0h0.60v10h-0.60zM430.17 0h0.60v10h-0.60zM430.23 0h0.60v10h-0.60zM430.38 0h0.60v10h-0.60zM440.09 0h0.60v10h-0.60zM440.18 0h0.60v10h-0.60zM449.94 0h0.60v10h-0.60zM459.79 0h0.60v10h-0.60zM469.64 0h0.60v10h-0.60zM523.26 0h0.60v10h-0.60zM533.09 0h0.60v10h-0.60zM542.92 0h0.60v10h-0.60zM552.78 0h0.60v10h-0.60zM552.91 0h0.60v10h-0.60zM562.64 0h0.60v10h-0.60zM572.49 0h0.60v10h-0.60zM582.34 0h0.60v10h-0.60zM582.51 0h0.60v10h-0.60zM592.20 0h0.60v10h-0.60zM592.30 0h0.60v10h-0.60zM592.36 0h0.60v10h-0.60zM592.41 0h0.60v10h-0.60zM602.21 0h0.60v10h-0.60zM612.06 0h0.60v10h-0.60zM675.33 0h0.60v10h-0.60zM675.45 0h0.60v10h-0.60zM685.18 0h0.60v10h-0.60zM685.27 0h0.60v10h-0.60zM695.03 0h0.60v10h-0.60zM695.10 0h0.60v10h-0.60zM704.88 0h0.60v10h-0.60zM704.99 0h0.60v10h-0.60zM705.14 0h0.60v10h-0.60zM714.85 0h0.60v10h-0.60zM724.70 0h0.60v10h-0.60zM734.55 0h0.60v10h-0.60zM744.41 0h0.60v10h-0.60zM788.19 0h0.60v10h-0.60zM798.02 0h0.60v10h-0.60zM807.85 0h0.60v10h-0.60zM817.67 0h0.60v10h-0.60zM827.54 0h0.60v10h-0.60zM827.67 0h0.60v10h-0.60zM837.39 0h0.60v10h-0.60zM847.25 0h0.60v10h-0.60zM847.42 0h0.60v10h-0.60zM857.10 0h0.60v10h-0.60zM857.20 0h0.60v10h-0.60zM867.13 0h0.60v10h-0.60zM867.16 0h0.60v10h-0.60zM876.98 0h0.60v10h-0.60zM930.42 0h0.60v10h-0.60zM940.24 0h0.60v10h-0.60zM950.09 0h0.60v10h-0.60zM950.20 0h0.60v10h-0.60zM959.94 0h0.60v10h-0.60zM960.01 0h0.60v10h-0.60zM969.79 0h0.60v10h-0.60zM979.65 0h0.60v10h-0.60zM979.75 0h0.60v10h-0.60zM979.89 0h0.60v10h-0.60zM989.61 0h0.60v10h-0.60zM999.46 0h0.60v10h-0.60z"/></svg></div><div class="tl__row"><div class="tl__lab"><span>and Mars in Leo</span><i>34</i></div><svg class="trk" viewBox="0 0 1000 10" preserveAspectRatio="none" aria-hidden="true"><path d="M13.13 0h0.60v10h-0.60zM32.84 0h0.60v10h-0.60zM155.50 0h0.60v10h-0.60zM175.21 0h0.60v10h-0.60zM258.36 0h0.60v10h-0.60zM278.07 0h0.60v10h-0.60zM297.87 0h0.60v10h-0.60zM307.58 0h0.60v10h-0.60zM400.72 0h0.60v10h-0.60zM410.42 0h0.60v10h-0.60zM420.44 0h0.60v10h-0.60zM430.13 0h0.60v10h-0.60zM440.16 0h0.60v10h-0.60zM440.23 0h0.60v10h-0.60zM449.94 0h0.60v10h-0.60zM469.64 0h0.60v10h-0.60zM552.79 0h0.60v10h-0.60zM562.81 0h0.60v10h-0.60zM572.50 0h0.60v10h-0.60zM582.52 0h0.60v10h-0.60zM592.30 0h0.60v10h-0.60zM675.36 0h0.60v10h-0.60zM695.15 0h0.60v10h-0.60zM714.87 0h0.60v10h-0.60zM734.59 0h0.60v10h-0.60zM798.02 0h0.60v10h-0.60zM817.73 0h0.60v10h-0.60zM837.44 0h0.60v10h-0.60zM837.50 0h0.60v10h-0.60zM940.29 0h0.60v10h-0.60zM950.09 0h0.60v10h-0.60zM960.09 0h0.60v10h-0.60zM969.79 0h0.60v10h-0.60zM979.80 0h0.60v10h-0.60z"/></svg></div><div class="tl__row"><div class="tl__lab"><span>and Sun in Scorpio</span><i>7</i></div><svg class="trk" viewBox="0 0 1000 10" preserveAspectRatio="none" aria-hidden="true"><path d="M32.40 0h1.50v10h-1.50zM174.78 0h1.50v10h-1.50zM429.70 0h1.50v10h-1.50zM439.71 0h1.50v10h-1.50zM469.21 0h1.50v10h-1.50zM734.14 0h1.50v10h-1.50zM837.00 0h1.50v10h-1.50z"/></svg></div><div class="tl__row"><div class="tl__lab"><span>and Venus in Libra</span><i>3</i></div><svg class="trk" viewBox="0 0 1000 10" preserveAspectRatio="none" aria-hidden="true"><path d="M32.40 0h1.50v10h-1.50zM734.14 0h1.50v10h-1.50zM837.00 0h1.50v10h-1.50z"/></svg></div><div class="tl__row"><div class="tl__lab"><span>and Mercury in Scorpio</span><i>3</i></div><svg class="trk" viewBox="0 0 1000 10" preserveAspectRatio="none" aria-hidden="true"><path d="M32.40 0h1.50v10h-1.50zM734.14 0h1.50v10h-1.50zM837.00 0h1.50v10h-1.50z"/></svg></div><div class="tl__row tl__row--hit"><div class="tl__lab"><span>and Moon in Sagittarius</span><i>3</i></div><svg class="trk" viewBox="0 0 1000 10" preserveAspectRatio="none" aria-hidden="true"><path d="M32.40 0h1.50v10h-1.50zM734.14 0h1.50v10h-1.50zM837.01 0h1.50v10h-1.50z"/></svg></div><div class="tl__row"><div></div><div class="tl__plot"><div class="pin" style="left:3.31%"><b>1</b></div><div class="pin" style="left:73.49%"><b>2</b></div><div class="pin" style="left:83.78%"><b>3</b></div><div class="tl__axis"><span style="left:0.00%">3000 BCE</span><span style="left:16.65%">2000 BCE</span><span style="left:33.33%">1000 BCE</span><span style="left:50.00%">1 CE</span><span style="left:66.66%">1000</span><span style="left:83.33%">2000</span><span style="left:100.00%">3000 CE</span></div></div></div></div><figcaption><b>Figure 1.</b> Each row adds one condition to the rows above it, and the figure at the right of each label counts the windows that remain. The numbered marks are the windows that satisfy every condition.</figcaption></figure>
+    </section>
+
+    <section class="step">
+      <span class="sc">3. Result</span>
+      <h2>3 windows fit</h2>
+      <div class="scroll" data-scroll><table class="tbl">
+        <thead><tr><th>No.</th><th>Window</th><th class="r" title="Saturn">♄ Ari</th><th class="r" title="Jupiter">♃ Leo</th><th class="r" title="Mars">♂︎ Leo</th><th class="r" title="Sun">☉ Sco</th><th class="r" title="Venus">♀︎ Lib</th><th class="r" title="Mercury">☿ Sco</th><th class="r" title="Moon">☽ Sag</th></tr></thead>
+        <tbody><tr><td class="g">1</td><td><strong>15 Nov 2801 BCE</strong><small>Julian calendar, 1 day</small></td><td class="r">12°45′</td><td class="r">10°35′</td><td class="r">2°15′</td><td class="r">2°36′</td><td class="r">8°28′</td><td class="r">1°05′</td><td class="r">22°31′</td></tr><tr><td class="g">2</td><td><strong>8 to 9 Nov 1409 CE</strong><small>Julian calendar, 2 days</small></td><td class="r">21°50′</td><td class="r">11°54′</td><td class="r">2°35′</td><td class="r">24°50′</td><td class="r">8°18′</td><td class="r">16°23′</td><td class="r">8°52′</td></tr><tr><td class="g">3</td><td><strong>10 to 12 Nov 2026 CE</strong><small>Gregorian calendar, 3 days</small></td><td class="r">8°45′</td><td class="r">25°22′</td><td class="r">23°15′</td><td class="r">18°06′</td><td class="r">23°07′</td><td class="r">6°00′</td><td class="r">1°44′</td></tr></tbody>
+      </table></div>
+      <p class="margin" style="margin-top:.7rem">Positions are for 12:00 UT on the first day of each window. Dates before 15 October 1582 are given in the Julian calendar. The placeholder scan samples each day at 12:00 UT, so a Moon that changes sign during a day can add or drop a day at the edge of a window.</p>
+    </section>
+
+    <section class="step">
+      <span class="sc">4. Method</span>
+      <div class="cols cols--even">
+        <div class="body"><p>The search prunes intervals from the slowest body to the fastest. Saturn's sign windows are found first, each is intersected with Jupiter's, and so on down to the Moon, so the fast bodies are only evaluated inside the few windows the slow ones leave open.</p><p>The classical packs carry the Sun, the Moon, Mercury, Venus, Mars, Jupiter, and Saturn back to 3000 BCE. Uranus, Neptune, and Pluto have no classical pack, so they cannot constrain a date before 1000 CE.</p></div>
+        <figure><table class="tbl"><thead><tr><th>Condition</th><th class="r">Windows</th><th class="r">Days</th></tr></thead><tbody><tr><td>Saturn in Aries</td><td class="r">405</td><td class="r">167,834</td></tr><tr><td>and Jupiter in Leo</td><td class="r">107</td><td class="r">15,764</td></tr><tr><td>and Mars in Leo</td><td class="r">34</td><td class="r">1,504</td></tr><tr><td>and Sun in Scorpio</td><td class="r">7</td><td class="r">123</td></tr><tr><td>and Venus in Libra</td><td class="r">3</td><td class="r">63</td></tr><tr><td>and Mercury in Scorpio</td><td class="r">3</td><td class="r">61</td></tr><tr><td>and Moon in Sagittarius</td><td class="r">3</td><td class="r">6</td></tr></tbody></table>
+        <figcaption><b>Table 1.</b> Windows and days that survive each added condition, out of 2,190,726 days scanned.</figcaption></figure>
+      </div>
+    </section>
+  </div>
+
+  <aside class="listing">
+    <div class="sc"><span>Listing 1. The call</span><span class="rub">Proposed API</span></div>
+    <pre class="code"><code><span class="k">import</span> { Engine } <span class="k">from</span> <span class="s">"caelus"</span>;
+<span class="k">import</span> { loadNodeData } <span class="k">from</span> <span class="s">"caelus/node"</span>;
+
+<span class="c">// The classical packs reach back to 3000 BCE.</span>
+<span class="k">const</span> engine = <span class="k">new</span> <span class="f">Engine</span>(
+  <span class="f">loadNodeData</span>(<span class="s">"./data"</span>, <span class="s">"embedded"</span>, <span class="s">"full"</span>),
+);
+
+<span class="k">const</span> windows = engine.<span class="f">dateSky</span>({
+  from: <span class="n">-2998</span>,
+  to: <span class="n">3000</span>,
+  zodiac: <span class="s">"tropical"</span>,
+  bodies: {
+    saturn: <span class="s">"Aries"</span>,
+    jupiter: <span class="s">"Leo"</span>,
+    mars: <span class="s">"Leo"</span>,
+    sun: <span class="s">"Scorpio"</span>,
+    venus: <span class="s">"Libra"</span>,
+    mercury: <span class="s">"Scorpio"</span>,
+    moon: <span class="s">"Sagittarius"</span>,
+  },
+});
+
+console.<span class="f">log</span>(windows.length); <span class="c">// 3</span></code></pre>
+    <div class="sc"><span>Listing 2. What it returns</span><span class="rub">Proposed shape</span></div>
+    <pre class="code"><code>[
+  { start: <span class="s">"-2800-11-15"</span>, days: <span class="n">1</span>,
+    calendar: <span class="s">"julian"</span> },
+  { start: <span class="s">"1409-11-08"</span>, days: <span class="n">2</span>,
+    calendar: <span class="s">"julian"</span> },
+  { start: <span class="s">"2026-11-10"</span>, days: <span class="n">3</span>,
+    calendar: <span class="s">"gregorian"</span> },
+]</code></pre>
+  </aside>
+</div>
+</main>
+<footer class="wrap"><div class="colophon"><div><a href="#">Documentation</a><a href="#">Validation</a><a href="#">Provenance</a><a href="#">Build Notes</a><a href="#">GitHub</a></div><div>Caelus 0.25.0, MIT licence. Set in Newsreader and IBM Plex Mono. Design direction mockup: Almanac.</div></div></footer>
+<script>document.querySelectorAll("[data-theme-toggle]").forEach(function(b){b.addEventListener("click",function(){var d=document.documentElement,cur=d.dataset.theme||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"),next=cur==="dark"?"light":"dark";d.dataset.theme=next;try{localStorage.setItem("caelus-dir-theme",next)}catch(e){}})});document.querySelectorAll("[data-copy]").forEach(function(b){b.addEventListener("click",function(){if(navigator.clipboard)navigator.clipboard.writeText(b.dataset.copy);var t=b.querySelector("[data-copy-label]");if(t){t.textContent="Copied";setTimeout(function(){t.textContent="Copy"},1200)}})});</script>
+</body></html>
