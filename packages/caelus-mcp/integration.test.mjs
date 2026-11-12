@@ -83,7 +83,22 @@ const call = async (name, args) => {
 
 // --------------------------------------------------------- schema validation
 // Every golden case: response must validate against the tool's output schema.
+// Hosted mode only: cases the embedded tier cannot serve (a date_sky search
+// before 1000 CE needs the era packs). The endpoint must refuse them with the
+// same message the embedded-tier reference gives; they have no payload to
+// validate or compare.
+const tierLimited = new Set();
 for (const c of GOLDEN_CASES) {
+  if (reference) {
+    const res = await raw(c.tool, c.args);
+    if (res.isError) {
+      const ref = await reference.callTool({ name: c.tool, arguments: c.args });
+      assert(ref.isError === true && ref.content[0].text === res.content[0].text,
+        `tier limit ${c.id} (${c.tool}): hosted error matches the embedded-tier reference: ${res.content[0].text}`);
+      tierLimited.add(c.id);
+      continue;
+    }
+  }
   const payload = await call(c.tool, c.args);
   const schema = OUTPUT_SCHEMAS[c.tool];
   const parsed = schema.safeParse(payload);
@@ -123,6 +138,7 @@ const expectedPayload = async (c) => {
   return JSON.parse(res.content[0].text);
 };
 for (const c of GOLDEN_CASES) {
+  if (tierLimited.has(c.id)) continue;
   const payload = await call(c.tool, c.args);
   const expected = await expectedPayload(c);
   const ok = deepEq(payload, expected);

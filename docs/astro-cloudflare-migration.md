@@ -1,7 +1,9 @@
 # Astro on Cloudflare: migration report
 
-Date: 2026-11-11. Branch: `claude/cool-golick-8ae836`. Nothing is deployed, no
-Cloudflare resource exists, and `apps/web` is untouched and still builds.
+Date: 2026-11-11. Branch: `claude/cool-golick-8ae836`, with local `dev` merged
+at `7a7b1bf` (sky dating, the `date_sky` tool, the Workbench design rules).
+Nothing is deployed, no Cloudflare resource exists, and `apps/web` is untouched
+by this work and still builds.
 
 `apps/site` is an Astro 7 app that serves every URL the Next.js app serves and
 runs on Cloudflare Workers: static pages from the assets directory, and one
@@ -30,7 +32,7 @@ bit-stable output. A client that hashes or diffs raw `/api/chart` responses
 would still see a change at cutover. If that matters, the options are to
 serve `/api/chart` from a Node host, or to give the engine its own
 deterministic transcendentals. Neither is done here. The MCP endpoint rounds
-to 0.01 degrees and matched exactly on all 104 integration checks.
+to 0.01 degrees and matched exactly on all 107 hosted integration checks.
 
 ## How it is built
 
@@ -58,16 +60,51 @@ source, at the cost of a custom hydration path that a new contributor has to
 learn. After cutover, pages can be converted to native Astro one at a time and
 the bridge removed when the last one is done.
 
+## Copied versus imported
+
+Nothing under `apps/web/components`, `apps/web/app`, or `apps/web/lib` was
+copied. `apps/web/app/globals.css` is imported by `src/layouts/Base.astro`, so
+a restyle done there, or in whatever replaces it, reaches the Astro build with
+no second edit.
+
+Three pieces are site-local replacements, each because the original depends on
+Next:
+
+| Site file | Replaces | Why |
+|-----------|----------|-----|
+| `src/components/Tabs.astro`, `Tab.astro` | `components/Tabs.tsx` | The React version reads labels off its children, which needs the whole document to be one React tree. Same class names, so the same CSS applies. |
+| `src/layouts/Base.astro`, `Docs.astro` | `app/layout.tsx`, `app/docs/layout.tsx` | A layout is written for Next or for Astro, not both. Same markup and class names. |
+| `src/components/MdxLink.astro`, `src/lib/mdx-components.ts` | `mdx-components.tsx` | Next and Astro each wire the MDX component map their own way. |
+
+Four small modules restate logic that could not be imported as it stands:
+`src/lib/api-docs.ts` (the original finds its files from an `apps/web` working
+directory), `src/pages/sitemap.xml.ts` (same reason; it reads the route list
+from the original's source), `src/pages/robots.txt.ts`, and
+`src/pages/docs/api/[slug].astro`. `src/styles/fonts.css` is new and replaces
+`next/font`. The only style rules in `apps/site` are those font faces; every
+other rule comes from `globals.css`.
+
+So a restyle that changes markup, not only CSS, has four site-local files to
+touch: the two layouts and the two tab components.
+
+## Pending from dev
+
+`/instruments/sky-dating` is not in this build. It is due on `dev` as a React
+widget from `packages/widgets`, styled by a scoped `workbench.css`. It will
+mount here as a client-only island inside a `.wb` wrapper, with the stylesheet
+imported from `apps/web` like `globals.css`. The Workbench restyle of the rest
+of the site is out of scope for this branch.
+
 ## What is ported
 
 | Route | Status |
 |-------|--------|
 | `/`, `/playground`, `/features`, `/validation`, `/methods`, `/provenance`, `/notes`, `/how-it-was-built`, `/changelog`, `/privacy` | Static. Rendered from the same page components. |
-| `/docs`, the 18 MDX guides, `/docs/visualizations` | Static. MDX is compiled by Astro's MDX integration from the files in `apps/web/app/docs`. |
-| `/docs/api`, `/docs/api/[slug]` (597 pages) | Static, from the TypeDoc markdown in `apps/web/content/api`. |
+| `/docs`, the 19 MDX guides, `/docs/visualizations` | Static. MDX is compiled by Astro's MDX integration from the files in `apps/web/app/docs`. |
+| `/docs/api`, `/docs/api/[slug]` (607 pages) | Static, from the TypeDoc markdown in `apps/web/content/api`. |
 | `/embed/chart` | Static shell, hydrated on load. |
 | `/api/chart` | Worker. See the note on float output above. |
-| `/api/mcp` | Worker. Stateless, JSON responses, 35 tools. |
+| `/api/mcp` | Worker. Stateless, JSON responses, 36 tools. |
 | `robots.txt`, `sitemap.xml`, `/icon.svg`, `/opengraph-image` | Static files written at build time. The Open Graph PNG is byte-identical to Next's. |
 | `/about`, `/favicon.ico` | 307 redirects, via `_redirects`. |
 | Unknown paths | 404 with the existing not-found page. |
@@ -117,25 +154,29 @@ All of this ran against `wrangler dev` serving the built output.
 | Check | Result |
 |-------|--------|
 | `npm run build -w site` | Builds cleanly. `astro check` reports 0 errors. |
-| `node scripts/smoke-site.mjs --against <next>` | 633 URLs crawled on each build. Every URL that is 200 on Next is 200 on Astro with the same content type, and both redirects match. |
+| `node scripts/smoke-site.mjs --against <next>` | 644 URLs crawled on each build. Every URL that is 200 on Next is 200 on Astro with the same content type, both redirects match, and the two sitemaps list the same 639 URLs. |
 | `/api/chart` and `/api/mcp` GET, 12 samples | 6 byte-identical (every 400 response, including two dates outside 1920 to 2080, and the MCP description). 6 chart responses equal in structure with numbers within 1.1e-12. |
-| `CAELUS_MCP_URL=<worker>/api/mcp node packages/caelus-mcp/integration.test.mjs` | 104 checks, 0 failures. The same command against the Next route also passes. |
+| `CAELUS_MCP_URL=<worker>/api/mcp node packages/caelus-mcp/integration.test.mjs` | 107 checks, 0 failures. The same command against the Next route also passes. |
 | `npm test`, which includes `test:mcp` | Passes. |
 | `node scripts/smoke-live.mjs <worker>` | Passes. |
 | `lint:claims`, `lint:emdash`, `check:docs`, `lint:prose`, `check-llms`, `check-mcp-surface`, `check:versions`, `check-tarball` | All pass. |
-| Page content, 35 pages | Visible text is identical to Next on every page except `/docs/mcp`. On 33 of them the headings, links, element counts, and CSS classes were also compared and match, apart from one React-generated id per page. |
+| Page content, 36 pages | Visible text is identical to Next on every page except `/docs/mcp`. On 34 of them the headings, links, element counts, and CSS classes were also compared and match, apart from one React-generated id per page. |
 | `<head>` tags, 11 pages | Identical to Next, apart from the image URL's cache key. |
 
 `integration.test.mjs` gained a hosted mode, selected by `CAELUS_MCP_URL`. The
 committed goldens were minted on the full data tier and the hosted endpoint
 serves the embedded tier, so in hosted mode the test builds the same server
 core in process on the embedded tier and requires the endpoint's payloads to
-equal it. Without the variable the test runs as before.
+equal it. A golden case the embedded tier cannot serve, such as a `date_sky`
+search before 1000 CE, must be refused with the same message the reference
+gives. Without the variable the test runs as before, with 108 checks.
 
 ## Measurements
 
 One machine, Apple silicon, Node 25.8.1. Build times cover the app's own build
 script, with workspace packages, API markdown, and search index already built.
+These were taken before `dev` was merged, at `bb1164a`. The merge adds one
+guide and ten API pages and was not re-measured.
 
 | | Next (`apps/web`) | Astro (`apps/site`) |
 |---|---|---|
@@ -192,7 +233,7 @@ because there is no serialized component payload.
   was toggled by script, and no narrow viewport was checked.
 - Clipboard writes. The install and copy buttons hydrate and respond, but the
   test browser refused clipboard access to an unfocused page.
-- The 597 API pages were compared by status and content type. Three were
+- The 607 API pages were compared by status and content type. Three were
   compared by text and structure.
 - Hot reload in `astro dev`. The dev server answered every route over HTTP.
 
@@ -228,7 +269,8 @@ Steps 1 to 6 and 9 to 11 need the owner. Steps 7 and 8 are repo edits.
 10. Remove the domain from the Vercel project, then pause or delete the
     project.
 11. Add a changelog entry for the `caelus-mcp/core` export. `CHANGELOG.md` was
-    off limits for this branch.
+    off limits for this branch; the merge from `dev` brought its entries in
+    unchanged.
 
 ## Gates wired to `apps/web`
 

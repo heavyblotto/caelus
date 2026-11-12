@@ -8,45 +8,27 @@
  */
 import type { APIRoute } from "astro";
 import { execFileSync } from "node:child_process";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { SITE } from "@web/lib/site";
 import { listApiDocs } from "../lib/api-docs";
 import { WEB_ROOT } from "../lib/paths";
 
-const ROUTES = [
-  "",
-  "/playground",
-  "/features",
-  "/validation",
-  "/provenance",
-  "/methods",
-  "/how-it-was-built",
-  "/notes",
-  "/changelog",
-  "/privacy",
-  "/docs",
-  "/docs/quickstart",
-  "/docs/charts",
-  "/docs/cookbook",
-  "/docs/architecture",
-  "/docs/houses-and-zodiacs",
-  "/docs/derived",
-  "/docs/hellenistic",
-  "/docs/vedic",
-  "/docs/data-tiers",
-  "/docs/recipes",
-  "/docs/electional",
-  "/docs/visualizations",
-  "/docs/interpretation",
-  "/docs/provenance",
-  "/docs/corpus",
-  "/docs/mcp",
-  "/docs/canonical",
-  "/docs/synthetic",
-  "/docs/edge-cases",
-  "/docs/api",
-];
+/**
+ * The hand-kept route list lives in apps/web/app/sitemap.ts. It is read from
+ * that file's source so a guide added there appears in both sitemaps; the
+ * module itself cannot be imported, because it resolves paths and runs git
+ * from an apps/web working directory. At cutover the list moves here.
+ */
+function webRoutes(): string[] {
+  const source = readFileSync(join(WEB_ROOT, "app", "sitemap.ts"), "utf8");
+  const block = source.match(/const routes = \[([\s\S]*?)\.\.\.listApiDocs/);
+  const routes = block ? [...block[1].matchAll(/"([^"]*)"/g)].map((m) => m[1]) : [];
+  if (routes.length < 10 || routes[0] !== "") {
+    throw new Error("Could not read the route list from apps/web/app/sitemap.ts");
+  }
+  return routes;
+}
 
 function git(args: string[]): string {
   try {
@@ -78,7 +60,7 @@ export const GET: APIRoute = () => {
   };
 
   const entries = [
-    ...ROUTES.map((path) => ({ path, lastModified: gitDate(sourceFor(path)) })),
+    ...webRoutes().map((path) => ({ path, lastModified: gitDate(sourceFor(path)) })),
     // The API pages are generated at build time and never committed, so their
     // date is the build date (as it is on the Next deployment).
     ...listApiDocs().map((slug) => ({ path: `/docs/api/${slug}`, lastModified: buildDate })),

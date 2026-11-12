@@ -15,8 +15,9 @@
  *   - an unknown path returns 404 with the not-found page
  *
  * With --against <url> it also crawls a running Next build and requires
- * parity: every URL that returns 200 there returns 200 here, and every
- * redirect there redirects to the same place here. That is the check to run
+ * parity: every URL that returns 200 there returns 200 here, every redirect
+ * there redirects to the same place here, both sitemaps list the same URLs,
+ * and the API responses match. That is the check to run
  * before cutting over.
  *
  * Usage:
@@ -369,6 +370,21 @@ async function compareApi(referenceBase, base) {
   }
 }
 
+/** Both builds must list the same URLs in sitemap.xml. */
+async function compareSitemaps(referenceBase, base) {
+  const [ref, got] = await Promise.all(
+    [referenceBase, base].map(async (b) => {
+      const xml = await (await fetch(b + "/sitemap.xml", { signal: AbortSignal.timeout(20000) })).text();
+      return new Set([...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]));
+    }),
+  );
+  const missing = [...ref].filter((u) => !got.has(u));
+  const extra = [...got].filter((u) => !ref.has(u));
+  if (missing.length) fail(`sitemap parity: ${missing.length} URL(s) only in the reference sitemap: ${missing.slice(0, 5).join(", ")}`);
+  if (extra.length) fail(`sitemap parity: ${extra.length} URL(s) only in this sitemap: ${extra.slice(0, 5).join(", ")}`);
+  if (!missing.length && !extra.length) ok(`sitemap parity: the same ${got.size} URLs in both sitemaps`);
+}
+
 async function checkExternal(externalLinks) {
   const jobs = [...new Map([...externalLinks].map(([url, source]) => [url.split("#")[0], [url, source]])).values()];
   console.log(`  checking ${jobs.length} external targets`);
@@ -431,6 +447,7 @@ try {
       }
     }
     compare(reference.pages, site.pages);
+    await compareSitemaps(againstBase, base);
     await compareApi(againstBase, base);
   }
 
