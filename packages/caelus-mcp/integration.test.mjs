@@ -10,6 +10,18 @@
  * against the in-process oracle; this suite checks payload *shape* and frozen
  * *format* so the two drift sources are independently gated.
  *
+ * Hosted mode: set CAELUS_MCP_URL to a Streamable HTTP endpoint (the
+ * Cloudflare Worker under `wrangler dev`, or the deployed /api/mcp) and the
+ * same matrix runs over HTTP instead of stdio:
+ *
+ *   CAELUS_MCP_URL=http://127.0.0.1:8787/api/mcp node packages/caelus-mcp/integration.test.mjs
+ *
+ * The committed goldens were minted on the stdio server's full data tier,
+ * and the hosted endpoint serves the embedded tier, so in hosted mode the
+ * reference payloads come from the same server core built in this process on
+ * the embedded tier. Equality then says the hosted runtime and transport
+ * return exactly what the code returns under Node.
+ *
  * Emits {suite, checks, failures} to CAELUS_STATS_OUT when set.
  */
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
@@ -31,8 +43,34 @@ function assert(cond, msg) {
 const goldenPath = fileURLToPath(new URL("./test/golden-mcp.json", import.meta.url));
 const golden = JSON.parse(readFileSync(goldenPath, "utf8"));
 
-const serverPath = fileURLToPath(new URL("./dist/src/server.js", import.meta.url));
-const transport = new StdioClientTransport({ command: "node", args: [serverPath] });
+const HOSTED_URL = process.env.CAELUS_MCP_URL;
+
+/** Connect a client to a core server built in this process on the embedded tier. */
+async function embeddedReferenceClient() {
+  const [{ InMemoryTransport }, { Engine }, { embeddedData }, { buildServer }] = await Promise.all([
+    import("@modelcontextprotocol/sdk/inMemory.js"),
+    import("caelus"),
+    import("caelus/data-embedded"),
+    import("./dist/src/core.js"),
+  ]);
+  const [clientSide, serverSide] = InMemoryTransport.createLinkedPair();
+  await buildServer(new Engine(embeddedData)).connect(serverSide);
+  const reference = new Client({ name: "integration-reference", version: "0.0.1" });
+  await reference.connect(clientSide);
+  return reference;
+}
+
+let transport;
+let reference = null; // hosted mode only: the in-process embedded-tier server
+if (HOSTED_URL) {
+  const { StreamableHTTPClientTransport } = await import("@modelcontextprotocol/sdk/client/streamableHttp.js");
+  transport = new StreamableHTTPClientTransport(new URL(HOSTED_URL));
+  reference = await embeddedReferenceClient();
+  console.log(`hosted mode: ${HOSTED_URL} (reference: in-process core on the embedded tier)`);
+} else {
+  const serverPath = fileURLToPath(new URL("./dist/src/server.js", import.meta.url));
+  transport = new StdioClientTransport({ command: "node", args: [serverPath] });
+}
 const client = new Client({ name: "integration", version: "0.0.1" });
 await client.connect(transport);
 
@@ -57,7 +95,7 @@ for (const c of GOLDEN_CASES) {
 // them. Checking the tier first means a tier change reports itself by name
 // instead of surfacing as a wall of unexplained value diffs -- which is how
 // the precise-Moon switch sat red through a whole release cycle.
-const goldenEngine = golden[ENGINE_KEY];
+const goldenEngine = reference ? await engineFingerprint(reference) : golden[ENGINE_KEY];
 const liveEngine = await engineFingerprint(client);
 if (!goldenEngine) {
   assert(false, `${ENGINE_KEY} missing from the golden file -- re-mint with: ${REMINT}`);
@@ -78,21 +116,28 @@ if (!goldenEngine) {
 // rounding changes, fallback-string drift the engine oracle can't see).
 const deepEq = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const MAX_SHOWN = 4;
+const expectedPayload = async (c) => {
+  if (!reference) return golden[c.id].payload;
+  const res = await reference.callTool({ name: c.tool, arguments: c.args });
+  if (res.isError) throw new Error(`reference ${c.id}: ${res.content[0].text}`);
+  return JSON.parse(res.content[0].text);
+};
 for (const c of GOLDEN_CASES) {
   const payload = await call(c.tool, c.args);
-  const ok = deepEq(payload, golden[c.id].payload);
+  const expected = await expectedPayload(c);
+  const ok = deepEq(payload, expected);
   assert(ok, `golden format ${c.id} (${c.tool})`);
   // A bare pass/fail told a reader nothing about what moved, so every red run
   // needed a bespoke diff script before it could be judged. Print the paths.
   if (!ok) {
-    const diffs = diffPaths(payload, golden[c.id].payload, c.id);
+    const diffs = diffPaths(payload, expected, c.id);
     for (const d of diffs.slice(0, MAX_SHOWN)) {
       console.error(`  ${d.path}: got ${JSON.stringify(d.actual)} | golden ${JSON.stringify(d.expected)}`);
     }
     if (diffs.length > MAX_SHOWN) console.error(`  ... and ${diffs.length - MAX_SHOWN} more leaf diffs`);
   }
 }
-if (failures) console.error(`\nIf these changes are intended, re-mint and review the diff: ${REMINT}`);
+if (failures && !reference) console.error(`\nIf these changes are intended, re-mint and review the diff: ${REMINT}`);
 
 // --------------------------------------------------------- edge-case behavior
 {
@@ -186,6 +231,7 @@ if (failures) console.error(`\nIf these changes are intended, re-mint and review
 }
 
 await client.close();
+if (reference) await reference.close();
 console.log(`\n${checks} checks, ${failures} failures`);
 
 if (process.env.CAELUS_STATS_OUT) {
