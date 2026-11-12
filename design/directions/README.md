@@ -2,8 +2,8 @@
 
 **Decision, 2026-11-11: the owner chose Workbench.** Planetarium and Almanac
 stay here as the record of what was considered. The rules at the end of this
-file are the proposed replacement for `apps/web/DESIGN.md`; they have not been
-applied to the site yet.
+file were adopted into `apps/web/DESIGN.md` the same day, which is now the
+copy to maintain. The site itself has not been restyled yet.
 
 Exploration only. Nothing here is wired into `apps/web` or any package, and
 nothing depends on Next.js or Astro. Each direction is two self-contained HTML
