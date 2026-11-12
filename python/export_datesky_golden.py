@@ -37,6 +37,8 @@ CASES = [
      {"pad": 6.0}),
     ("babylon-410bce", BABYLON, (-499, 1, 1, "julian"), (-299, 1, 1, "julian"), {}),
     ("babylon-800-years", BABYLON, (-800, 1, 1, "julian"), (0, 1, 1, "julian"), {}),
+    ("babylon-stages", BABYLON, (-499, 1, 1, "julian"), (-299, 1, 1, "julian"),
+     {"keep_stages": True}),
     ("outer-pair-modern",
      [{"body": "saturn", "sign": "Capricorn"}, {"body": "jupiter", "sign": 9}],
      (1700, 1, 1, "gregorian"), (2100, 1, 1, "gregorian"), {}),

@@ -34,6 +34,7 @@ for (const c of G.cases as any[]) {
   const o = c.options ?? {};
   const got = dateSky(eng, c.constraints as SkyConstraint[], c.jd0, c.jd1, {
     zodiac: o.zodiac, pad: o.pad, maxWindows: o.max_windows,
+    keepStages: o.keep_stages,
   });
   const want = c.result;
   ok(got.truncated === want.truncated, `${c.id}: truncated`);
@@ -56,6 +57,15 @@ for (const c of G.cases as any[]) {
     ok(g.label === w.label, `${c.id} funnel ${i}: label "${g.label}" vs "${w.label}"`);
     ok(g.windows === w.windows, `${c.id} funnel ${i}: ${g.windows} windows vs ${w.windows}`);
     ok(Math.abs(g.days - w.days) <= 1e-4, `${c.id} funnel ${i}: days ${g.days} vs ${w.days}`);
+    ok((g.spans === undefined) === (w.spans === undefined), `${c.id} funnel ${i}: spans present only when asked`);
+    if (g.spans && w.spans) {
+      ok(g.spans.length === w.spans.length && g.spans.length === g.windows,
+        `${c.id} funnel ${i}: ${g.spans.length} spans vs ${w.spans.length}`);
+      for (let j = 0; j < Math.min(g.spans.length, w.spans.length); j++) {
+        ok(Math.abs(g.spans[j][0] - w.spans[j][0]) <= TOL && Math.abs(g.spans[j][1] - w.spans[j][1]) <= TOL,
+          `${c.id} funnel ${i} span ${j}`);
+      }
+    }
   }
 }
 

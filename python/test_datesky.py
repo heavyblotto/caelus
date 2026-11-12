@@ -150,6 +150,20 @@ born = julian_day(-409, 4, 29, 18, calendar="julian")
 ok(len(res["windows"]) == 1, f"Babylon: one window in 200 years ({len(res['windows'])})")
 ok(any(w["start"] <= born <= w["end"] for w in res["windows"]), "Babylon: 29 April 410 BCE")
 
+# 6b. keep_stages: each stage's spans are that stage's windows, the last
+#     stage's spans are the result, and each stage lies inside the one before.
+res = date_sky(eng, babylon, julian_day(-499, 1, 1, calendar="julian"),
+               julian_day(-299, 1, 1, calendar="julian"), keep_stages=True)
+ok(all(len(f["spans"]) == f["windows"] for f in res["funnel"]), "spans count matches windows")
+ok([tuple(sp) for sp in res["funnel"][-1]["spans"]]
+   == [(w["start"], w["end"]) for w in res["windows"]], "the last stage is the result")
+for prev, cur in zip(res["funnel"], res["funnel"][1:]):
+    ok(all(any(a <= s and e <= b for a, b in prev["spans"]) for s, e in cur["spans"]),
+       "each stage lies inside the stage before")
+ok("spans" not in date_sky(eng, babylon, julian_day(-499, 1, 1, calendar="julian"),
+                           julian_day(-299, 1, 1, calendar="julian"))["funnel"][0],
+   "no spans unless asked")
+
 # 7. Arguments.
 for bad, why in (([], "no constraints"),
                  ([{"body": "sun"}], "no arc"),

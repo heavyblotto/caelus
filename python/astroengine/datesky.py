@@ -281,7 +281,7 @@ def _arc_intervals(q, center, half, a, b, step, monotone):
 
 
 def date_sky(engine, constraints, jd_start, jd_end, zodiac="tropical",
-             pad=0.0, max_windows=1000):
+             pad=0.0, max_windows=1000, keep_stages=False):
     """Every window in [jd_start, jd_end] (UT Julian Days) in which all the
     constraints hold.
 
@@ -296,7 +296,9 @@ def date_sky(engine, constraints, jd_start, jd_end, zodiac="tropical",
 
     Returns {"windows": [{"start", "end"}], "funnel": [...], "truncated"}.
     `funnel` lists the constraints in scan order with the number of windows
-    and the total days that survive each one.
+    and the total days that survive each one. With `keep_stages`, each funnel
+    entry also carries `spans`, the [start, end] windows left after that
+    constraint, for drawing where each constraint cut.
     """
     if not constraints:
         raise ValueError("date_sky needs at least one constraint")
@@ -316,14 +318,20 @@ def date_sky(engine, constraints, jd_start, jd_end, zodiac="tropical",
             nxt.extend(_arc_intervals(q, c["center"], c["half"], a, b,
                                       c["step"], c["monotone"]))
         windows = nxt
-        funnel.append({"constraint": c["index"], "label": c["label"],
-                       "windows": len(windows),
-                       "days": sum(e - s for s, e in windows)})
+        stage = {"constraint": c["index"], "label": c["label"],
+                 "windows": len(windows),
+                 "days": sum(e - s for s, e in windows)}
+        if keep_stages:
+            stage["spans"] = [[s, e] for s, e in windows]
+        funnel.append(stage)
         if not windows:
             break
     for c in order[len(funnel):]:
-        funnel.append({"constraint": c["index"], "label": c["label"],
-                       "windows": 0, "days": 0.0})
+        stage = {"constraint": c["index"], "label": c["label"],
+                 "windows": 0, "days": 0.0}
+        if keep_stages:
+            stage["spans"] = []
+        funnel.append(stage)
 
     truncated = len(windows) > max_windows
     return {

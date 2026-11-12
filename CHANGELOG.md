@@ -22,6 +22,9 @@ current figures live in `packages/caelus/accuracy.json` and on
   seven-body description searched across 5,980 years takes 1.2 s in Node.
   `pad` widens arcs for a source whose sign boundaries are not the engine's,
   and `zodiac` selects a sidereal zodiac.
+- **`keepStages`.** With this option each funnel stage also carries `spans`,
+  the windows left after that constraint, so a caller can draw where each
+  constraint cut (`keep_stages` in the reference).
 - **Checked four ways.** `python/test_datesky.py` compares `date_sky` with
   `when()` on short ranges, which is an independent search at one fine step;
   builds arcs that a body touches only around a retrograde station, which a
@@ -79,6 +82,21 @@ current figures live in `packages/caelus/accuracy.json` and on
   newer reconstruction differs from the 2004 one by 189 s at 1300, where that
   table states a sigma of 25 s, so the sigma table needs re-deriving from the
   2016 error estimates before the two can be quoted together.
+
+### Site
+
+- **Sky Dating instrument** at `/instruments/sky-dating`. The form takes a
+  sign for each of the seven classical bodies, a lunar phase, a pad, a zodiac,
+  and a span of years, and the page draws the search as stacked tracks, one
+  per constraint, with the matching windows in a table and the call that
+  produced them beside it. It runs in the browser on the embedded tier, which
+  finds the same windows as the full packs for both historical presets with
+  edges within 12 minutes. The logic is `caelus-widgets/sky-dating` and the
+  component is `caelus-widgets/sky-dating-widget`.
+- **Workbench, scoped.** `app/workbench.css` carries the Workbench grammar
+  chosen in `apps/web/DESIGN.md` under a `.wb` root class, and the instrument
+  page is the first to use it. The rest of the site keeps its current look
+  until the site-wide restyle.
 
 ### MCP (`caelus-mcp`)
 

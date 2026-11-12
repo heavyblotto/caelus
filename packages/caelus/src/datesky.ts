@@ -63,6 +63,9 @@ export interface DateSkyOptions {
   pad?: number;
   /** Most windows to return. Defaults to 1000. */
   maxWindows?: number;
+  /** Keep the windows left after each constraint, as `spans` on each funnel
+   *  stage, for drawing where each constraint cut. Defaults to `false`. */
+  keepStages?: boolean;
 }
 
 /** A span of time, as UT Julian Days, in which every constraint holds. */
@@ -81,6 +84,9 @@ export interface SkyFunnelStage {
   windows: number;
   /** Total length of those windows, in days. */
   days: number;
+  /** The windows left after this constraint as `[start, end]` UT Julian
+   *  Days. Present only with the `keepStages` option. */
+  spans?: Array<[number, number]>;
 }
 
 /** What {@link dateSky} returns. */
@@ -448,13 +454,19 @@ export function dateSky(
     windows = next;
     let days = 0;
     for (const [s, e] of windows) days += e - s;
-    funnel.push({
+    const stage: SkyFunnelStage = {
       constraint: c.index, label: c.label, windows: windows.length, days,
-    });
+    };
+    if (opts.keepStages) stage.spans = windows.map(([s, e]) => [s, e]);
+    funnel.push(stage);
     if (windows.length === 0) break;
   }
   for (const c of order.slice(funnel.length)) {
-    funnel.push({ constraint: c.index, label: c.label, windows: 0, days: 0 });
+    const stage: SkyFunnelStage = {
+      constraint: c.index, label: c.label, windows: 0, days: 0,
+    };
+    if (opts.keepStages) stage.spans = [];
+    funnel.push(stage);
   }
 
   return {
