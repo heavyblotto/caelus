@@ -83,28 +83,27 @@ Next:
 | Site file | Replaces | Why |
 |-----------|----------|-----|
 | `src/components/Tabs.astro`, `Tab.astro` | `components/Tabs.tsx` | The React version reads labels off its children, which needs the whole document to be one React tree. Same class names, so the same CSS applies. |
-| `src/layouts/Base.astro`, `Docs.astro`, `Instrument.astro` | `app/layout.tsx`, `app/docs/layout.tsx`, `app/instruments/layout.tsx` | A layout is written for Next or for Astro, not both. Same markup and class names. |
+| `src/layouts/Base.astro`, `Docs.astro`, `Instrument.astro` | `app/layout.tsx`, `app/docs/layout.tsx` | A layout is written for Next or for Astro, not both. Same markup and class names. `Instrument.astro` is a pass-through to `Base.astro` since the site-wide restyle. |
 | `src/components/MdxLink.astro`, `src/lib/mdx-components.ts` | `mdx-components.tsx` | Next and Astro each wire the MDX component map their own way. |
 
 Four small modules restate logic that could not be imported as it stands:
 `src/lib/api-docs.ts` (the original finds its files from an `apps/web` working
 directory), `src/pages/sitemap.xml.ts` (same reason; it reads the route list
 from the original's source), `src/pages/robots.txt.ts`, and
-`src/pages/docs/api/[slug].astro`. `src/styles/fonts.css` and
-`src/styles/fonts-workbench.css` are new and replace `next/font`. The only
-style rules in `apps/site` are those font faces; every other rule comes from
-`globals.css` or `workbench.css`.
+`src/pages/docs/api/[slug].astro`. `src/styles/fonts.css` is new and replaces
+`next/font`. The only style rules in `apps/site` are those font faces; every
+other rule comes from `globals.css`.
 
 So a restyle that changes markup, not only CSS, has five site-local files to
 touch: the three layouts and the two tab components.
 
 ## The Sky Dating instrument
 
-`/instruments/sky-dating` is the first page in the Workbench grammar. Here it
-renders the page component from `apps/web` inside `src/layouts/Instrument.astro`,
-which supplies the `.wb` wrapper, imports `apps/web/app/workbench.css`, and
-self-hosts Barlow 400 and 500 and Barlow Condensed 600 as `--font-bench` and
-`--font-cond`. Only instrument pages load those faces and that stylesheet.
+`/instruments/sky-dating` was the first page in the Workbench grammar, ahead of
+the site-wide restyle. Here it renders the page component from `apps/web`
+inside `src/layouts/Instrument.astro`. Since the restyle, the Workbench rules
+live unscoped in `globals.css` and the root document self-hosts Barlow and
+Barlow Condensed for every page, so that layout adds nothing of its own.
 
 The widget is prerendered with its default form, as Next prerenders it, and
 then hydrated as a nested island, where it builds `new Engine(embeddedData)`
@@ -165,8 +164,8 @@ gains one.
 and the `Search` component work unchanged, so keeping them cost nothing.
 Pagefind would have meant a new index format and a rewritten search dialog.
 
-**Fonts.** Inter and JetBrains Mono are self-hosted from Fontsource packages,
-as variable fonts with the same fallback metrics `next/font` generated.
+**Fonts.** Barlow, Barlow Condensed, and JetBrains Mono are self-hosted from
+Fontsource packages, with the same fallback metrics `next/font` generated.
 
 **Open Graph image.** `@vercel/og` renders it at build time, pinned to 0.7.2,
 the release Next 15 bundles. It is an image library with no tie to Vercel

@@ -6,7 +6,8 @@
  */
 import "../styles/fonts.css";
 import "@web/app/globals.css";
-import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+import barlow400 from "@fontsource/barlow/files/barlow-latin-400-normal.woff2?url";
+import condensed600 from "@fontsource/barlow-condensed/files/barlow-condensed-latin-600-normal.woff2?url";
 import monoLatin from "@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url";
 import SiteFooter from "@web/components/SiteFooter";
 import { SITE } from "@web/lib/site";
@@ -55,7 +56,8 @@ const NO_FLASH = `(function(){try{var t=localStorage.getItem('theme');if(t!=='li
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preload" href={monoLatin} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={barlow400} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={condensed600} as="font" type="font/woff2" crossorigin />
     <slot name="head" />
     <title>{resolveTitle(meta)}</title>
     {

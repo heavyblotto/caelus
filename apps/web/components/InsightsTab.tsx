@@ -53,7 +53,7 @@ export default function InsightsTab({
           return (
             <div key={e} style={{ display: "flex", alignItems: "center", gap: "0.5rem", margin: "0.15rem 0" }}>
               <span className="mute" style={{ width: "3.4rem" }}>{e}</span>
-              <div style={{ flex: 1, background: "var(--surface-2)", borderRadius: 2, height: "0.6rem", overflow: "hidden" }}>
+              <div style={{ flex: 1, background: "var(--surface-2)", height: "0.6rem", overflow: "hidden" }}>
                 <div style={{ width: `${(n / total) * 100}%`, background: "var(--accent)", height: "100%" }} />
               </div>
               <span className="mute" style={{ width: "1.2rem", textAlign: "right" }}>{n}</span>
@@ -88,8 +88,7 @@ export default function InsightsTab({
                     style={{
                       textAlign: "left", font: "inherit", fontSize: "0.82rem", cursor: "pointer",
                       background: active ? "var(--surface-2)" : "transparent",
-                      border: "1px solid", borderColor: active ? "var(--accent)" : "transparent",
-                      borderRadius: "var(--radius-sm)", padding: "0.2rem 0.45rem", color: "var(--text)",
+                      border: "1px solid", borderColor: active ? "var(--accent)" : "transparent", padding: "0.2rem 0.45rem", color: "var(--text)",
                     }}
                   >
                     {PATTERN_LABEL[p.kind] ?? p.kind}{" "}

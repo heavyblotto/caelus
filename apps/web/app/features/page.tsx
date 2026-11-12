@@ -160,7 +160,7 @@ function ComparisonTable({ caption, rows }: { caption: string; rows: Row[] }) {
 
 export default function Features() {
   return (
-    <main className="container page">
+    <main className="container page page--bench">
       <PageHero eyebrow="Validated · MIT · zero dependencies" title="Features" cta="compact">
         <P>
           This page lists what the engine computes. The counts below are read

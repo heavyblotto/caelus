@@ -8,7 +8,7 @@ import { ChartWheel } from "caelus-wheel";
 import { deriveScene } from "caelus-widgets/derivation";
 import CodeBlock from "../CodeBlock";
 import SkyRibbon from "../SkyRibbon";
-import { A, H2, P } from "../Prose";
+import { A } from "../Prose";
 import { WHEEL_THEME } from "../../lib/wheelTheme";
 import { SITE } from "../../lib/site";
 import { NYC, formatNycStamp, type NycCivil } from "../../lib/nycNow";
@@ -75,44 +75,65 @@ chart.bodies.saturn.retrograde; // ${satRx}`;
 
   return (
     <>
-      <HomeSkyStage
-        scene={scene}
-        openingAim={aim}
-        plate={plate}
-        t={t}
-        onScrub={setT}
-        size={FIGURE}
-        theme={WHEEL_THEME}
-        stamp={stamp}
-      />
+      <section className="tile home-sky-tile" aria-label="The sky over New York now">
+        <div className="tile__h">
+          <b>SKY</b>
+          <span>Computed in this browser</span>
+          <i><span className="led led--live" aria-hidden />{stamp}</i>
+        </div>
+        <HomeSkyStage
+          scene={scene}
+          openingAim={aim}
+          plate={plate}
+          t={t}
+          onScrub={setT}
+          size={FIGURE}
+          theme={WHEEL_THEME}
+        />
+      </section>
 
-      <figure className="home-sky__chart">
+      <section className="tile s12" aria-label="The ecliptic at this instant">
+        <div className="tile__h">
+          <b>NOW</b>
+          <span>The ecliptic at this instant</span>
+        </div>
+        <SkyRibbon chart={chart} stamp={ribbonStamp} />
+      </section>
+
+      <div className="band">
+        <h2>Compute a chart</h2>
+      </div>
+      <section className="tile s4 half">
+        <div className="tile__h">
+          <b>CHART</b>
+          <span>Placidus, tropical</span>
+        </div>
         <div className="chart-fluid">
           <ChartWheel chart={chart} size={FIGURE} theme={WHEEL_THEME} />
         </div>
-        <figcaption className="dim small" style={{ marginTop: "0.5rem" }}>
-          The event chart for this instant, Placidus houses, tropical zodiac.
-        </figcaption>
-      </figure>
-
-      <div style={{ margin: "1.5rem 0 0.5rem" }}>
-        <SkyRibbon chart={chart} stamp={ribbonStamp} />
-      </div>
-
-      <H2>Compute a chart</H2>
-      <P>
-        You pass a date, a UT time, a latitude, and a longitude, and the engine
-        returns a chart object your app, API, or AI tool can read. The sample
-        below is the New York instant drawn above.
-      </P>
-      <CodeBlock lang="bash" code="npm install caelus" />
-      <CodeBlock lang="typescript" label="chart.ts" code={sample} />
-      <P dim>
-        Full walkthrough in the <A href="/docs/quickstart">Quickstart</A>, or try it live in the{" "}
-        <A href="/playground">Playground</A>. For a complete app, the{" "}
-        <A href={SITE.starter}>caelus-starter</A> template is a Next.js project with a
-        birth form, timezone handling, and a chart wheel, deployable to Vercel in one click.
-      </P>
+        <p className="note">The event chart for this instant.</p>
+      </section>
+      <section className="tile s8">
+        <div className="tile__h">
+          <b>TS</b>
+          <span>The call</span>
+        </div>
+        <div className="tile__b">
+          <p>
+            You pass a date, a UT time, a latitude, and a longitude, and the engine
+            returns a chart object your app, API, or AI tool can read. The sample
+            below is the New York instant drawn above.
+          </p>
+          <CodeBlock lang="bash" code="npm install caelus" />
+          <CodeBlock lang="typescript" label="chart.ts" code={sample} />
+          <p>
+            Full walkthrough in the <A href="/docs/quickstart">Quickstart</A>, or try it live in the{" "}
+            <A href="/playground">Playground</A>. For a complete app, the{" "}
+            <A href={SITE.starter}>caelus-starter</A> template is a Next.js project with a
+            birth form, timezone handling, and a chart wheel, deployable to Vercel in one click.
+          </p>
+        </div>
+      </section>
     </>
   );
 }

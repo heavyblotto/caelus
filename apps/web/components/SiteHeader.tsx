@@ -2,24 +2,26 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import GlyphMark from "./GlyphMark";
-import InstallButton from "./InstallButton";
 import ThemeToggle from "./ThemeToggle";
-import { NAV, SITE } from "../lib/site";
+import { NAV, SITE, formatGoldenChecks } from "../lib/site";
 
+/**
+ * The status bar, the only site chrome (apps/web/DESIGN.md): wordmark,
+ * primary navigation, check count, version, licence, theme. On small screens
+ * the navigation moves to a second row and the optional cells drop out.
+ */
 export default function SiteHeader() {
   const pathname = usePathname();
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header className="site-header">
-      <div className="container site-header__inner">
-        <Link href="/" className="wordmark" aria-label="Caelus home">
-          <GlyphMark />
-          <span>Caelus</span>
+    <header className="bar">
+      <div className="bar__in">
+        <Link href="/" className="bar__cell bar__mark" aria-label="Caelus home">
+          Caelus
         </Link>
-        <nav className="site-nav" aria-label="Primary">
+        <nav className="bar__nav" aria-label="Primary">
           {NAV.map((item) => (
             <Link
               key={item.href}
@@ -29,21 +31,27 @@ export default function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <span className="site-nav__sep" aria-hidden />
-          <InstallButton label="install" className="btn-sm site-nav__install" />
-          <a
-            href={SITE.repo}
-            className="site-nav__hide-sm"
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub
-          </a>
-          <span className="tag site-nav__hide-sm" aria-label="current version">
-            v{SITE.version}
-          </span>
-          <ThemeToggle />
         </nav>
+        <span className="bar__sp" aria-hidden />
+        <Link href="/validation" className="bar__cell bar__opt">
+          <span className="led led--ok" aria-hidden />
+          {formatGoldenChecks()} checks
+        </Link>
+        <a href={SITE.repo} className="bar__cell bar__opt" target="_blank" rel="noreferrer">
+          GitHub
+        </a>
+        <span className="bar__cell" aria-label="current version">
+          v{SITE.version}
+        </span>
+        <a
+          href={`${SITE.repo}/blob/main/LICENSE`}
+          className="bar__cell bar__opt"
+          target="_blank"
+          rel="noreferrer"
+        >
+          MIT
+        </a>
+        <ThemeToggle />
       </div>
     </header>
   );

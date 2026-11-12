@@ -174,7 +174,7 @@ function SkyViewBody({ result, onCopy, copied }: {
       <svg
         viewBox={`0 0 ${W} ${H}`}
         preserveAspectRatio="xMidYMid meet"
-        style={{ width: "100%", maxWidth: 420, height: "auto", border: "1px solid var(--border-strong)", borderRadius: "var(--radius-sm)", background: "linear-gradient(#10101e, #1a1322)", display: "block" }}
+        style={{ width: "100%", maxWidth: 420, height: "auto", border: "1px solid var(--border-strong)", background: "linear-gradient(#10101e, #1a1322)", display: "block" }}
         role="img"
         aria-label="sky frame preview"
       >

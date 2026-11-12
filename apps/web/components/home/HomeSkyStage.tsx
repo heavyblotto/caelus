@@ -29,7 +29,7 @@ function stepStation(t: number, dir: -1 | 1): number {
 }
 
 export default function HomeSkyStage({
-  scene, openingAim, plate, t, onScrub, size = 560, theme, stamp,
+  scene, openingAim, plate, t, onScrub, size = 560, theme,
 }: {
   scene: DerivationScene;
   openingAim: { az: number; alt: number };
@@ -38,7 +38,6 @@ export default function HomeSkyStage({
   onScrub: (t: number) => void;
   size?: number;
   theme?: Partial<WheelTheme>;
-  stamp: string;
 }) {
   const raf = useRef<number | null>(null);
   const [playing, setPlaying] = useState(false);
@@ -90,7 +89,6 @@ export default function HomeSkyStage({
 
   return (
     <div className="home-sky">
-      <p className="eyebrow home-sky__stamp">{stamp}</p>
       <div className="home-sky__stage">
         {plate && (
           <img

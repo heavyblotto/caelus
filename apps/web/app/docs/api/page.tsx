@@ -149,7 +149,6 @@ export default function ApiIndex() {
                   style={{
                     background: "var(--surface-2)",
                     border: "1px solid var(--border)",
-                    borderRadius: "var(--radius-sm)",
                     padding: "0.15rem 0.5rem",
                   }}
                 >

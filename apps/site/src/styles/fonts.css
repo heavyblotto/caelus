@@ -1,21 +1,34 @@
 /*
- * Self-hosted Inter and JetBrains Mono (variable, via Fontsource), replacing
- * next/font. The files are bundled and served from this origin; nothing is
- * fetched from Google. globals.css reads --font-sans and --font-mono.
+ * Self-hosted faces (via Fontsource), replacing next/font: Barlow for prose,
+ * Barlow Condensed for titles, JetBrains Mono for data, labels, and code.
+ * The files are bundled and served from this origin; nothing is fetched from
+ * Google. globals.css reads --font-sans, --font-cond, and --font-mono.
  *
- * The two fallback faces carry the same metric overrides next/font generated,
+ * The fallback faces carry the same metric overrides next/font generated,
  * so text does not shift when the web fonts swap in.
  */
-@import "@fontsource-variable/inter/wght.css";
+@import "@fontsource/barlow/latin-400.css";
+@import "@fontsource/barlow/latin-500.css";
+@import "@fontsource/barlow/latin-600.css";
+@import "@fontsource/barlow-condensed/latin-600.css";
 @import "@fontsource-variable/jetbrains-mono/wght.css";
 
 @font-face {
-  font-family: "Inter Fallback";
+  font-family: "Barlow Fallback";
   src: local("Arial");
-  ascent-override: 90.44%;
-  descent-override: 22.52%;
+  ascent-override: 103.43%;
+  descent-override: 20.69%;
   line-gap-override: 0%;
-  size-adjust: 107.12%;
+  size-adjust: 96.68%;
+}
+
+@font-face {
+  font-family: "Barlow Condensed Fallback";
+  src: local("Arial");
+  ascent-override: 130.73%;
+  descent-override: 26.15%;
+  line-gap-override: 0%;
+  size-adjust: 76.49%;
 }
 
 @font-face {
@@ -28,6 +41,7 @@
 }
 
 :root {
-  --font-sans: "Inter Variable", "Inter Fallback";
+  --font-sans: "Barlow", "Barlow Fallback";
+  --font-cond: "Barlow Condensed", "Barlow Condensed Fallback";
   --font-mono: "JetBrains Mono Variable", "JetBrains Mono Fallback";
 }
