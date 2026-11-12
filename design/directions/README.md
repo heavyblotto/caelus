@@ -1,5 +1,10 @@
 # Three visual directions for ephemengine.com
 
+**Decision, 2026-11-11: the owner chose Workbench.** Planetarium and Almanac
+stay here as the record of what was considered. The rules at the end of this
+file are the proposed replacement for `apps/web/DESIGN.md`; they have not been
+applied to the site yet.
+
 Exploration only. Nothing here is wired into `apps/web` or any package, and
 nothing depends on Next.js or Astro. Each direction is two self-contained HTML
 files (inline CSS, no build step, no external scripts, fonts from Google
