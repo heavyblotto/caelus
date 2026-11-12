@@ -3033,6 +3033,252 @@
       "moon_void_of_course": false
     }
   },
+  "date-sky-babylon-410bce": {
+    "tool": "date_sky",
+    "args": {
+      "constraints": [
+        {
+          "body": "jupiter",
+          "sign": "Pisces"
+        },
+        {
+          "body": "venus",
+          "sign": "Taurus"
+        },
+        {
+          "body": "saturn",
+          "sign": "Cancer"
+        },
+        {
+          "body": "mars",
+          "sign": "Gemini"
+        }
+      ],
+      "start_year": -499,
+      "end_year": -300
+    },
+    "payload": {
+      "searched": {
+        "start_year": -499,
+        "end_year": -300,
+        "zodiac": "tropical",
+        "pad": 0
+      },
+      "windows": [
+        {
+          "start": {
+            "jd": 1571776.18719,
+            "calendar": "julian",
+            "year": -409,
+            "era": "410 BCE",
+            "month": 4,
+            "day": 16,
+            "ut": "16:30"
+          },
+          "end": {
+            "jd": 1571800.67679,
+            "calendar": "julian",
+            "year": -409,
+            "era": "410 BCE",
+            "month": 5,
+            "day": 11,
+            "ut": "04:15"
+          },
+          "days": 24.49
+        }
+      ],
+      "truncated": false,
+      "funnel": [
+        {
+          "constraint": 2,
+          "label": "saturn in Cancer",
+          "windows": 14,
+          "days": 5884.97
+        },
+        {
+          "constraint": 0,
+          "label": "jupiter in Pisces",
+          "windows": 7,
+          "days": 885.71
+        },
+        {
+          "constraint": 3,
+          "label": "mars in Gemini",
+          "windows": 1,
+          "days": 49.55
+        },
+        {
+          "constraint": 1,
+          "label": "venus in Taurus",
+          "windows": 1,
+          "days": 24.49
+        }
+      ]
+    }
+  },
+  "date-sky-waning-scorpio-moon": {
+    "tool": "date_sky",
+    "args": {
+      "constraints": [
+        {
+          "elongation": [
+            "moon",
+            "sun"
+          ],
+          "from": 180,
+          "to": 360
+        },
+        {
+          "body": "moon",
+          "sign": "Scorpio"
+        },
+        {
+          "body": "mars",
+          "lon": 112.5,
+          "orb": 10
+        }
+      ],
+      "start_year": 2020,
+      "end_year": 2026,
+      "limit": 5
+    },
+    "payload": {
+      "searched": {
+        "start_year": 2020,
+        "end_year": 2026,
+        "zodiac": "tropical",
+        "pad": 0
+      },
+      "windows": [
+        {
+          "start": {
+            "jd": 2460070.23197,
+            "calendar": "gregorian",
+            "year": 2023,
+            "era": "2023 CE",
+            "month": 5,
+            "day": 5,
+            "ut": "17:34"
+          },
+          "end": {
+            "jd": 2460071.33601,
+            "calendar": "gregorian",
+            "year": 2023,
+            "era": "2023 CE",
+            "month": 5,
+            "day": 6,
+            "ut": "20:04"
+          },
+          "days": 1.1
+        },
+        {
+          "start": {
+            "jd": 2460615.22872,
+            "calendar": "gregorian",
+            "year": 2024,
+            "era": "2024 CE",
+            "month": 10,
+            "day": 31,
+            "ut": "17:29"
+          },
+          "end": {
+            "jd": 2460616.03276,
+            "calendar": "gregorian",
+            "year": 2024,
+            "era": "2024 CE",
+            "month": 11,
+            "day": 1,
+            "ut": "12:47"
+          },
+          "days": 0.8
+        },
+        {
+          "start": {
+            "jd": 2460697.18068,
+            "calendar": "gregorian",
+            "year": 2025,
+            "era": "2025 CE",
+            "month": 1,
+            "day": 21,
+            "ut": "16:20"
+          },
+          "end": {
+            "jd": 2460699.68664,
+            "calendar": "gregorian",
+            "year": 2025,
+            "era": "2025 CE",
+            "month": 1,
+            "day": 24,
+            "ut": "04:29"
+          },
+          "days": 2.51
+        },
+        {
+          "start": {
+            "jd": 2460724.51308,
+            "calendar": "gregorian",
+            "year": 2025,
+            "era": "2025 CE",
+            "month": 2,
+            "day": 18,
+            "ut": "00:19"
+          },
+          "end": {
+            "jd": 2460727.03792,
+            "calendar": "gregorian",
+            "year": 2025,
+            "era": "2025 CE",
+            "month": 2,
+            "day": 20,
+            "ut": "12:55"
+          },
+          "days": 2.52
+        },
+        {
+          "start": {
+            "jd": 2460751.8128,
+            "calendar": "gregorian",
+            "year": 2025,
+            "era": "2025 CE",
+            "month": 3,
+            "day": 17,
+            "ut": "07:30"
+          },
+          "end": {
+            "jd": 2460754.34514,
+            "calendar": "gregorian",
+            "year": 2025,
+            "era": "2025 CE",
+            "month": 3,
+            "day": 19,
+            "ut": "20:17"
+          },
+          "days": 2.53
+        }
+      ],
+      "truncated": true,
+      "funnel": [
+        {
+          "constraint": 2,
+          "label": "mars at 112.5 within 10",
+          "windows": 5,
+          "days": 262.97
+        },
+        {
+          "constraint": 1,
+          "label": "moon in Scorpio",
+          "windows": 9,
+          "days": 21.72
+        },
+        {
+          "constraint": 0,
+          "label": "moon-sun from 180 to 0",
+          "windows": 6,
+          "days": 12
+        }
+      ]
+    }
+  },
   "natal-polar-svalbard": {
     "tool": "natal_chart",
     "args": {

@@ -112,6 +112,16 @@ export const GOLDEN_CASES = [
             wanted: [{ a: "moon", b: "venus", aspect: "trine" }], step_hours: 12, limit: 3 } },
   { id: "cosmic-weather-2026", tool: "cosmic_weather",
     args: { date: "2026-06-10T00:00:00Z" } },
+  { id: "date-sky-babylon-410bce", tool: "date_sky",
+    args: { constraints: [
+      { body: "jupiter", sign: "Pisces" }, { body: "venus", sign: "Taurus" },
+      { body: "saturn", sign: "Cancer" }, { body: "mars", sign: "Gemini" },
+    ], start_year: -499, end_year: -300 } },
+  { id: "date-sky-waning-scorpio-moon", tool: "date_sky",
+    args: { constraints: [
+      { elongation: ["moon", "sun"], from: 180, to: 360 },
+      { body: "moon", sign: "Scorpio" }, { body: "mars", lon: 112.5, orb: 10 },
+    ], start_year: 2020, end_year: 2026, limit: 5 } },
 
   // --- edge cases (format must stay stable across these too) ---
   { id: "natal-polar-svalbard", tool: "natal_chart",

@@ -49,7 +49,7 @@ const TOOLS = [
   "nakshatras", "dasha", "vargas", "yogas",
   "aspect_patterns", "parans", "chart_signature", "chart_facts",
   "counterfactual_chart", "similar_skies", "electional_search",
-  "cosmic_weather",
+  "cosmic_weather", "date_sky",
 ] as const;
 
 const CORS: Record<string, string> = {

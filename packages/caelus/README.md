@@ -13,8 +13,8 @@ image-prompt frames, and synthetic ephemeris for imaginary bodies. MIT, no Swiss
    true node ≤ 1′ vs SE's built-in ephemeris (≤ 1″ vs JPL DE431)
    (vs full DE431 files, 1850–2149), angles and Placidus cusps ≤ 3.2″ — all
    invisible at the arcminute display precision chart software uses.
-2. TypeScript port verified against Python golden fixtures: **3,440 checks,
-   0 failures, worst deviation 0.61 nano-arcseconds.** The two implementations
+2. TypeScript port verified against Python golden fixtures: **3,459 checks,
+   0 failures, worst deviation 0.41 nano-arcseconds.** The two implementations
    are numerically identical.
 
 Regenerate fixtures any time from the Python side; any future TS change must
@@ -105,4 +105,4 @@ test/golden.test.ts  conformance suite vs Python fixtures
 - caelus — this package
 - [caelus-birth](https://www.npmjs.com/package/caelus-birth) — local birth time + place → UT (charts take UT; use this)
 - [caelus-wheel](https://www.npmjs.com/package/caelus-wheel) — React SVG chart wheel
-- [caelus-mcp](https://www.npmjs.com/package/caelus-mcp) — MCP server, thirty-five chart tools over stdio
+- [caelus-mcp](https://www.npmjs.com/package/caelus-mcp) — MCP server, thirty-six chart tools over stdio

@@ -3,7 +3,7 @@
  * caelus-mcp -- MCP server for Caelus astrology computation.
  *
  * Design (per 2026 MCP practice): one bounded context (chart computation),
- * a small curated tool surface (35 chart tools, not API wrappers),
+ * a small curated tool surface (36 chart tools, not API wrappers),
  * and token-frugal outputs (positions to 0.01 deg, terse keys, no prose --
  * the model does the interpreting, the server does the math).
  *
@@ -46,7 +46,9 @@ import {
   registerSyntheticSystem, engineCapabilities,
   canonicalChart, canonicalDigest, canonicalTimeMs, quantizeUnit,
   canonicalChartWithRemainders,
+  dateSky, calendarDate, validatedSpanFor,
   type SyntheticSystem, type CanonicalGrid, type RemainderGrid,
+  type SkyConstraint,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -711,6 +713,27 @@ export const cosmicWeatherOut = z.object({
   stationing: z.array(z.object({ body: z.string(), utc: z.string(), direction: z.enum(["retrograde", "direct"]) })),
   moon_void_of_course: z.boolean(),
 });
+const skyStamp = z.object({
+  jd: z.number(),
+  calendar: z.enum(["julian", "gregorian"]),
+  year: z.number().int(),
+  era: z.string(),
+  month: z.number().int(),
+  day: z.number().int(),
+  ut: z.string(),
+});
+export const dateSkyOut = z.object({
+  searched: z.object({
+    start_year: z.number().int(), end_year: z.number().int(),
+    zodiac: z.string(), pad: z.number(),
+  }),
+  windows: z.array(z.object({ start: skyStamp, end: skyStamp, days: z.number() })),
+  truncated: z.boolean(),
+  funnel: z.array(z.object({
+    constraint: z.number().int(), label: z.string(),
+    windows: z.number().int(), days: z.number(),
+  })),
+});
 const syntheticRenderIn = z.object({
   sizeDeg: z.number().optional(),
   magnitude: z.number().optional(),
@@ -879,6 +902,7 @@ export const OUTPUT_SCHEMAS = {
   similar_skies: similarSkiesOut,
   electional_search: electionalOut,
   cosmic_weather: cosmicWeatherOut,
+  date_sky: dateSkyOut,
 } as const;
 
 // ---------------------------------------------------------------- server
@@ -2178,6 +2202,93 @@ export function buildServer(
       patterns: detectPatternsIn(bodies),
       stationing,
       moon_void_of_course: voidOfCourse(engine, jd, zodiac).isVoid,
+    });
+  });
+
+  server.registerTool("date_sky", {
+    description:
+      "Date a described sky: find every window in a span of years in which a set of planetary positions held at once. The inverse of a chart, and the computation used to date a horoscope that records positions and no year. Each constraint puts a body in a zodiac sign, within an orb of a longitude, or in a from/to arc, or puts the elongation between two bodies in an arc (moon minus sun from 180 to 360 is a waning Moon). Returns the matching windows with calendar dates (Julian calendar before 15 October 1582) and a funnel showing how many windows survived each constraint, slowest body first. Years are astronomical: 0 is 1 BCE and -409 is 410 BCE. The searchable span depends on the server's data: a local stdio server with era packs covers about 3000 BCE to 3000 CE for the Sun, Moon, and Mercury through Saturn; a hosted server on the embedded tier covers 1000 to 3000.",
+    inputSchema: {
+      constraints: z.array(z.object({
+        body: z.string().optional().describe("body whose longitude is constrained, snake_case (sun, moon, mercury ... saturn)"),
+        elongation: z.array(z.string()).length(2).optional()
+          .describe("two bodies [a, b]: constrains longitude of a minus longitude of b, instead of 'body'"),
+        sign: z.union([z.string(), z.number().int()]).optional()
+          .describe("zodiac sign by name (e.g. 'Libra') or index 0-11"),
+        lon: z.number().optional().describe("centre longitude in degrees, used with 'orb'"),
+        orb: z.number().positive().optional().describe("degrees either side of 'lon' (default 1)"),
+        from: z.number().optional().describe("arc start in degrees, used with 'to'"),
+        to: z.number().optional().describe("arc end in degrees, going forward from 'from'"),
+        pad: z.number().nonnegative().optional().describe("degrees to widen this arc on both sides"),
+      })).min(1).describe("what the sky looked like; every constraint must hold at once"),
+      start_year: z.number().int().describe("first year to search, astronomical (negative for BCE: -409 is 410 BCE)"),
+      end_year: z.number().int().describe("last year to search, inclusive"),
+      zodiac: zodiacSchema,
+      pad: z.number().nonnegative().default(0)
+        .describe("degrees to widen every arc; use a few degrees when the source's zodiac is not the tropical one"),
+      limit: z.number().int().positive().max(200).default(20).describe("max windows to return (default 20)"),
+    },
+  }, async ({ constraints, start_year, end_year, zodiac, pad, limit }) => {
+    if (end_year < start_year) throw new Error("date_sky: end_year is before start_year");
+    // The search is only meaningful inside each body's validated span, which
+    // depends on the data this server was built with.
+    const named = new Set<string>();
+    for (const c of constraints) {
+      if (c.body) named.add(c.body);
+      for (const b of c.elongation ?? []) named.add(b);
+    }
+    const known = new Set<string>(engine.bodies());
+    let lo = -Infinity;
+    let hi = Infinity;
+    for (const b of named) {
+      if (!known.has(b)) throw new Error(`date_sky: unknown body "${b}"`);
+      const span = validatedSpanFor(b, engine.data);
+      if (span) {
+        lo = Math.max(lo, span.from);
+        hi = Math.min(hi, span.to - 1);
+      }
+    }
+    if (start_year < lo || end_year > hi) {
+      throw new Error(
+        `date_sky: this server's data covers years ${lo} to ${hi} for the bodies named; `
+        + `asked for ${start_year} to ${end_year}. A local caelus-mcp with the era packs `
+        + "reaches about 3000 BCE for the Sun, Moon, and Mercury through Saturn.",
+      );
+    }
+    const jdOfYear = (y: number): number =>
+      julianDay(y, 1, 1, 0, 0, 0, y < 1583 ? "julian" : "gregorian");
+    const res = dateSky(
+      engine, constraints as unknown as SkyConstraint[],
+      jdOfYear(start_year), jdOfYear(end_year + 1),
+      { zodiac, pad, maxWindows: limit },
+    );
+    const GREGORIAN_START_JD = 2299160.5; // 15 October 1582
+    const pad2 = (n: number) => String(n).padStart(2, "0");
+    const stamp = (jd: number) => {
+      const calendar = jd < GREGORIAN_START_JD ? "julian" as const : "gregorian" as const;
+      // add half a minute and floor, so the stamp rounds to the nearest
+      // minute and 23:59.7 rolls into the next day instead of printing 24:00
+      const d = calendarDate(jd + 0.5 / 1440, calendar);
+      const minutes = Math.min(1439, Math.floor(d.hour * 60));
+      return {
+        jd: Math.round(jd * 1e5) / 1e5,
+        calendar,
+        year: d.year,
+        era: d.year > 0 ? `${d.year} CE` : `${1 - d.year} BCE`,
+        month: d.month,
+        day: d.day,
+        ut: `${pad2(Math.floor(minutes / 60))}:${pad2(minutes % 60)}`,
+      };
+    };
+    return text({
+      searched: { start_year, end_year, zodiac, pad },
+      windows: res.windows.map((w) => ({
+        start: stamp(w.start), end: stamp(w.end), days: r2(w.end - w.start),
+      })),
+      truncated: res.truncated,
+      funnel: res.funnel.map((f) => ({
+        constraint: f.constraint, label: f.label, windows: f.windows, days: r2(f.days),
+      })),
     });
   });
 
