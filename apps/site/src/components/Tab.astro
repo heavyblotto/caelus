@@ -1,0 +1,12 @@
+---
+/** One panel of <Tabs>. See Tabs.astro. */
+interface Props {
+  label: string;
+}
+const { label } = Astro.props;
+---
+
+<div data-tab={label}>
+  <p class="dim small" data-tab-label>{label}</p>
+  <slot />
+</div>

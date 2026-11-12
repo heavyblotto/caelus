@@ -1,0 +1,17 @@
+---
+/**
+ * Link renderer for MDX, matching the `a` mapping in
+ * apps/web/mdx-components.tsx: internal links stay plain, external http links
+ * open in a new tab.
+ */
+const { href, ...rest } = Astro.props;
+const url = href ?? "#";
+---
+
+{
+  url.startsWith("/") ? (
+    <a href={url}><slot /></a>
+  ) : (
+    <a href={url} target={url.startsWith("http") ? "_blank" : undefined} rel="noreferrer" {...rest}><slot /></a>
+  )
+}

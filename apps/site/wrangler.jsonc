@@ -1,0 +1,20 @@
+{
+  // Cloudflare Workers config for the Astro build of ephemengine.com.
+  // Static pages are served straight from the assets directory and never
+  // invoke the Worker; only /api/chart, /api/mcp, and unmatched paths (the
+  // 404 page) run code. No KV, D1, R2, or Images bindings are used.
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "ephemengine",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-11-01",
+  // No nodejs_compat: the Worker bundle imports no node:* modules. The MCP
+  // endpoint uses the node-free caelus-mcp/core entry.
+  "compatibility_flags": [],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist/client",
+    // /features is served from features.html; /features/ redirects to it.
+    "html_handling": "auto-trailing-slash"
+  },
+  "observability": { "enabled": true }
+}
