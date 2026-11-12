@@ -1,0 +1,105 @@
+import { pageMetadata } from "../../../lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Uncertain Times",
+  description: "Find which facts of a chart survive an uncertain time: chartStability takes a window around the stated instant and reports, fact by fact, what holds across it and when each change happens.",
+  path: "/docs/uncertain-time",
+});
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Uncertain times
+
+A chart is computed for one instant, and the instant is often not known that
+well. A birth certificate rounds to the quarter hour, a biography gives a date
+and no time, and an ancient observation carries a clock error of minutes.
+`chartStability` takes a window of time around the stated instant and reports
+which of the chart's facts hold across all of it.
+
+```ts
+import { Engine, chartStability, julianDay } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);
+
+// Born 10 June 1990 in Tampa, "about 2:30 in the afternoon" (18:30 UT).
+const jd = julianDay(1990, 6, 10, 18, 30);
+const { facts, summary } = chartStability(engine, jd, {
+  lat: 27.95, lonEast: -82.46,
+  halfWidthSeconds: 900,
+});
+
+summary;                          // { facts: 61, stable: 60 }
+facts.filter((f) => !f.stable);   // the true node's house, and nothing else
+```
+
+With the time good to fifteen minutes either way, 60 of the chart's 61 facts
+are settled. The one that is not is the house of the true node, which moves
+from the fifth to the fourth at 18:43 UT.
+
+## What a fact is
+
+A fact is one discrete statement the chart makes. `chartStability` checks six
+kinds:
+
+| Kind | Subject | Value |
+|---|---|---|
+| `angle_sign` | `asc` or `mc` | The sign on the angle |
+| `sect` | `chart` | `"day"` or `"night"` |
+| `sign` | A body | The body's sign |
+| `house` | A body | The body's house, 1 to 12 |
+| `retrograde` | A planet | `true` or `false` |
+| `aspect` | A pair, `"sun-moon"` | The aspect the pair is in, or `null` |
+
+Each fact comes back with its `value` at the stated instant, a `stable` flag,
+the `share` of the window in which it has that value, and `segments`: the
+window cut into runs of one value. A boundary between two segments is an
+instant at which the fact changes, found to about a second.
+
+## A date with no time
+
+Pass a half-width of twelve hours and the window is the whole day.
+
+```ts
+const day = chartStability(engine, jd, {
+  lat: 27.95, lonEast: -82.46, halfWidthSeconds: 43200,
+});
+```
+
+For the same birth, 42 of 64 facts hold all day. Every body keeps its sign,
+every planet keeps its direction, and 20 of the 26 aspects that occur stay in
+orb. Both angles, the sect, and all thirteen house placements change, which is
+the usual reason a chart without a birth time is read without houses. The call
+takes 1.6 seconds in Node.
+
+Leave out `lat` and `lonEast` and the angles, houses, and sect are not
+computed at all. The result then covers signs, directions, and aspects.
+
+## Ancient dates
+
+With no `halfWidthSeconds`, the window is the one-sigma uncertainty of ΔT at
+the chart's epoch. That is under a second for a modern chart, so every fact is
+stable. For a chart in 100 CE it is 240 seconds, enough to move the Ascendant
+by a degree, and `chartStability` then reports which facts that clock error
+can change. The same uncertainty appears as the `delta_t_uncertain` warning on
+a chart and as the `epochSigma` block in canonical output.
+
+## Options
+
+| Option | Default | Meaning |
+|---|---|---|
+| `lat`, `lonEast` | none | The place. Both or neither. |
+| `halfWidthSeconds` | sigma of ΔT | Half the window |
+| `houseSystem` | `"placidus"` | As for `chartAt` |
+| `zodiac` | `"tropical"` | As for `chartAt` |
+| `orbs` | the default orbs | Per-aspect orb overrides |
+| `stepSeconds` | `120` | Sampling step before bisection |
+
+## Limits
+
+- The scan samples every two minutes. A fact that changes and changes back
+  inside one step is missed, which can happen to a body sitting on a house
+  cusp in a quadrant system near the polar circles.
+- The window is a time window. Uncertainty in the place is not modelled.
+- An aspect is treated as present or absent at the engine's orbs. A pair that
+  stays in orb while the aspect tightens is stable.

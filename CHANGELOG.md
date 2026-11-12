@@ -11,6 +11,17 @@ current figures live in `packages/caelus/accuracy.json` and on
 
 ### Engine (`caelus`)
 
+- **Chart stability.** `chartStability(engine, jdUt, opts)` takes a window of
+  time around a chart's stated instant and reports which of its facts hold
+  across the window: the sign on each angle, the sect, and each body's sign,
+  house, direction, and aspects. Each fact carries its value at the stated
+  instant, the share of the window in which it holds, and the instants at
+  which it changes, bisected to about a second. With no window given, the
+  half-width is the one-sigma uncertainty of ΔT at the epoch. For a birth
+  known to fifteen minutes either way, 60 of 61 facts are stable in the
+  worked example; for the same date with no time, 42 of 64 are. The
+  TypeScript port matches the reference fact for fact in
+  `stability-golden.test.ts` (8 cases).
 - **Sky dating.** `dateSky(engine, constraints, jdStart, jdEnd)` goes from a
   description of a sky to the dates it occurred. A constraint puts a body in
   a sign, within an orb of a longitude, or in a `from`/`to` arc, or puts the

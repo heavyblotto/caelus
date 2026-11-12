@@ -89,7 +89,7 @@ range that reaches 3000 BCE. The reference-first rule is unchanged.
 | # | Milestone | Status |
 |---|---|---|
 | 1 | **ΔT before 1948** from the Morrison, Stephenson, Hohenkerk and Zawilski spline, with its own check | Done, unreleased |
-| 2 | **Uncertainty as an output**: a sigma on each position, and for a chart with an uncertain time, which facts hold and when each would flip | Planned |
+| 2 | **Uncertainty as an output**: for a chart with an uncertain time, which facts hold and when each would flip (`chartStability`); a sigma on each position | `chartStability` done, unreleased; position sigma, MCP tool, and wheel display planned |
 | 3 | **Sky dating**: `dateSky`, from a description of a sky to its dates | Engine, `date_sky` MCP tool, and the site instrument done, unreleased |
 | 4 | **Binary packs**: quantized coefficient packs, era packs out of the main tarball, classical slabs for Uranus, Neptune and Pluto, then slabs earlier than 3000 BCE | Planned |
 | 5 | **Heliacal risings and settings**, and first visibility of the lunar crescent | Planned |

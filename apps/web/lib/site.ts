@@ -80,6 +80,7 @@ export const DOCS_NAV: DocsGroup[] = [
       { href: "/docs/visualizations", label: "Visualizations" },
       { href: "/docs/synthetic", label: "Synthetic Ephemeris" },
       { href: "/docs/sky-dating", label: "Sky Dating" },
+      { href: "/docs/uncertain-time", label: "Uncertain Times" },
       { href: "/docs/canonical", label: "Canonical Mode" },
       { href: "/docs/interpretation", label: "Interpretation Layer" },
       { href: "/docs/provenance", label: "Chart Provenance" },

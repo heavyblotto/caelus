@@ -42,6 +42,7 @@ const GROUPS: Array<{ label: string; cards: Card[] }> = [
       ["/docs/provenance", "Chart Provenance", "Declare what a chart is and how time and place are known: realms, anchors, routing to ephemeris or compiler, and honest interpretation framing."],
       ["/docs/synthetic", "Synthetic Ephemeris", "Imaginary bodies that move: periodic and Kepler tiers, Engine registration, SkyView render attrs, and MCP tools for fictional skies."],
       ["/docs/sky-dating", "Sky Dating", "From a description of a sky to its dates: planets by sign, longitude, or lunar phase in, every matching window across a date range out."],
+      ["/docs/uncertain-time", "Uncertain Times", "Which facts of a chart survive a rounded birth time, a date with no time, or an ancient clock error: every fact with the instants it changes."],
       ["/docs/canonical", "Canonical Mode", "Integer, hashable, precision-honest output: quantized grids, content-addressable digests, and remainder sets."],
     ],
   },

@@ -88,6 +88,9 @@ jobs:
       # sky dating (dateSky): windows and search funnel pinned to the Python
       # reference, plus the Julian-calendar helpers
       - run: node packages/caelus/dist/test/datesky-golden.test.js
+      # chart stability: which facts survive an uncertain time, pinned to the
+      # Python reference fact for fact
+      - run: node packages/caelus/dist/test/stability-golden.test.js
       # every test/*.test.* file in the repo must be wired into this workflow;
       # four golden suites once sat dormant for ~11 releases because this list
       # is maintained by hand. The gate makes silent omission impossible.
