@@ -41,6 +41,7 @@ const GROUPS: Array<{ label: string; cards: Card[] }> = [
       ["/docs/corpus", "Building a Corpus", "Consume and construct interpretation corpora: PassageRecords, extractors, validation, and the public-domain delineations package."],
       ["/docs/provenance", "Chart Provenance", "Declare what a chart is and how time and place are known: realms, anchors, routing to ephemeris or compiler, and honest interpretation framing."],
       ["/docs/synthetic", "Synthetic Ephemeris", "Imaginary bodies that move: periodic and Kepler tiers, Engine registration, SkyView render attrs, and MCP tools for fictional skies."],
+      ["/docs/sky-dating", "Sky Dating", "From a description of a sky to its dates: planets by sign, longitude, or lunar phase in, every matching window across a date range out."],
       ["/docs/canonical", "Canonical Mode", "Integer, hashable, precision-honest output: quantized grids, content-addressable digests, and remainder sets."],
     ],
   },

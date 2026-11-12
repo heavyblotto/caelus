@@ -213,3 +213,7 @@ Kundli
 Heindel
 [Gg]ridlines?
 [Pp]olylines?
+Hohenkerk
+Zawilski
+Neugebauer
+Hoesen

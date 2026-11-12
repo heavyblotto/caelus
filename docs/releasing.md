@@ -72,7 +72,7 @@ Re-check before tagging: `npm view caelus` should still 404.
    The wrapper snapshots the scored run into
    `eval/baselines/<date>-<model>.{json,md}`; any tool the report shows
    being systematically mis-picked gets a description-tuning follow-up.
-4. Commit, then tag and push:
+6. Commit, then tag and push:
    ```
    git tag v0.1.0 && git push origin v0.1.0
    ```
@@ -81,7 +81,7 @@ Re-check before tagging: `npm view caelus` should still 404.
    (Actions → release → Run workflow) and push the tag afterward from a
    local clone. The published versions come from package.json /
    pyproject.toml either way.
-5. The release workflow runs the version gate and the critical verification
+7. The release workflow runs the version gate and the critical verification
    chain (every `caelus` golden, `check-test-wiring`, MCP smoke / verify /
    integration / eval, birth tzdb suite, every wheel suite, `check-docs`,
    `check-mcp-surface`, llms.txt sync, tarball, claims, docs API, search

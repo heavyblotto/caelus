@@ -114,3 +114,7 @@ sidecar
 bit-stability
 bit-identical
 [Cc]anonicaliz[a-z]*
+Hohenkerk
+Zawilski
+Neugebauer
+Hoesen

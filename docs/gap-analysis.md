@@ -19,7 +19,8 @@ tiers reach practical parity.
 
 Sun through Pluto, Chiron, both lunar nodes: apparent geocentric ecliptic
 positions with light time, aberration, FK5, IAU 1980 nutation. Speeds and
-retrograde flags. ΔT from IERS 1955–2025 plus Espenak–Meeus polynomials.
+retrograde flags. ΔT from IERS 1955–2025, with the Morrison et al. (2021)
+spline before 1948.
 Placidus, Porphyry, Equal, and Whole Sign houses with an explicit polar
 fallback. Major aspects and transit search. Validated at ≤1″ vs Swiss
 Ephemeris 2.10 for Sun–Saturn and ≤2.5″ for the precise Moon tier;
@@ -129,6 +130,11 @@ planets fall out of the same machinery. Largest single feature by effort,
 2–3 weeks.
 
 ## Out of scope
+
+> **Status, 2026-11.** Two entries below are no longer non-goals. Heliacal
+> phenomena and a range earlier than 3000 BCE are now on the roadmap
+> (`ROADMAP.md`, milestones 4 and 5). The list is kept as the record of the
+> earlier decision.
 
 These conflict with embedded-JSON data and the edge runtime story, and are
 recorded as non-goals:

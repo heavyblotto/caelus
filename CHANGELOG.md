@@ -7,6 +7,89 @@ semver (currently 0.1.x). Numbers quoted here are as measured at release time;
 current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
+## Unreleased
+
+### Engine (`caelus`)
+
+- **Sky dating.** `dateSky(engine, constraints, jdStart, jdEnd)` goes from a
+  description of a sky to the dates it occurred. A constraint puts a body in
+  a sign, within an orb of a longitude, or in a `from`/`to` arc, or puts the
+  elongation between two bodies in an arc (a waning Moon is the Moon minus
+  the Sun between 180° and 360°). The function returns every window in the
+  range in which all constraints hold, and a `funnel` listing how many
+  windows and days survived each constraint. It scans the slowest body across
+  the whole range and each faster body only inside the surviving windows. A
+  seven-body description searched across 5,980 years takes 1.2 s in Node.
+  `pad` widens arcs for a source whose sign boundaries are not the engine's,
+  and `zodiac` selects a sidereal zodiac.
+- **Checked four ways.** `python/test_datesky.py` compares `date_sky` with
+  `when()` on short ranges, which is an independent search at one fine step;
+  builds arcs that a body touches only around a retrograde station, which a
+  fixed-step scan misses in two of six cases; recovers random instants from
+  their seven signs; and dates two historical horoscopes. From the signs
+  usually quoted for it, the horoscope of Hadrian resolves to four windows in
+  5,980 years, one of them 24 to 26 January 76 CE, the date Neugebauer and
+  Van Hoesen give. The TypeScript port reproduces the Python windows exactly
+  in `datesky-golden.test.ts` (16 cases).
+- **Julian calendar.** `julianDay` takes a seventh argument, `"julian"`, and
+  the new `calendarDate(jd, calendar)` converts a Julian Day back to a date.
+  Historical dates before 15 October 1582 can now be entered and read in the
+  calendar they were recorded in.
+- **ΔT before 1948 follows the Morrison, Stephenson, Hohenkerk and Zawilski
+  spline.** `deltaT` used the Espenak–Meeus polynomials back to 1800 and a
+  single parabola, `-20 + 32u²`, for every earlier year. The two branches
+  disagreed by 32.4 s at 1800, and at 1000 CE the parabola sat 481 s from the
+  published reconstruction, which is 4.4′ of lunar longitude for an instant
+  given in UT. `deltaT` now evaluates Table S15 (v. 2020) of the authors' 2021
+  addendum ([doi:10.1098/rspa.2020.0776](https://doi.org/10.1098/rspa.2020.0776))
+  from −720 to 1948. The Espenak–Meeus polynomial covers 1948 to 1955, and
+  the IERS observations after 1955 are unchanged. The join sits at 1948
+  because the two sources agree there to 3 ms; through the 1800s they differ
+  by 1 to 5 s, so an earlier join would have kept a step.
+- **Before −720** the engine uses the same authors' long-term parabola,
+  `-320 + 32.5 ((Y − 1825) / 100)²`. That parabola is 358 s above the spline
+  at the first knot, so a cubic Hermite bridge from −1520 to −720 carries
+  value and slope between them. The bridge is this engine's construction and
+  is not part of the published table.
+- **What moves.** Positions computed from TT do not change. An instant given
+  in UT before 1948 now maps to a different TT, so UT-tagged charts shift by
+  the Moon's rate of 0.55″ per second of ΔT:
+
+  | Years | Largest ΔT change | Moon |
+  |---|---|---|
+  | 1948 and later | 0 s | 0″ |
+  | 1900 to 1948 | 1.1 s | 0.6″ |
+  | 1800 to 1900 | 4.7 s | 2.6″ |
+  | 1000 to 1800 | 481 s (at 1000) | 4.4′ |
+  | 3000 BCE | 1018 s | 9.3′ |
+
+  Canonical digests of UT-tagged charts before 1948 change with the
+  positions. The canonical format version stays at 1, and charts from 1948
+  on are bit-identical to 0.25.0.
+- **Validation.** `validate_swiss.py` and `validate_horizons.py` convert UT to
+  TT with the engine's own `jd_tt` before they compare, so both sides of each
+  comparison share one ΔT and the published accuracy figures, which are TT
+  comparisons, are unaffected. The new `python/test_delta_t.py` checks ΔT
+  itself: each spline row must meet the next within the table's rounding
+  (worst case 0.001 s), `deltaT` must return the published value at every
+  knot, and the model must be continuous where its branches meet. It runs in
+  the Python CI job and needs no network. The golden suite gains 19 ΔT rows
+  between 3000 BCE and 1954.
+- **Open.** `deltaTSigma` still follows Morrison & Stephenson (2004). The
+  newer reconstruction differs from the 2004 one by 189 s at 1300, where that
+  table states a sigma of 25 s, so the sigma table needs re-deriving from the
+  2016 error estimates before the two can be quoted together.
+
+### MCP (`caelus-mcp`)
+
+- **`date_sky`** exposes sky dating, which brings the server to 36 tools. It
+  takes the constraints and a span of astronomical years, and it returns each
+  window with its calendar date (Julian before 15 October 1582), an era label
+  such as `410 BCE`, and the search funnel. It refuses a span outside the
+  validated range of the bodies named and states the years the server's data
+  covers. `verify_tools` pins it to the engine, and two frozen payloads hold
+  the format.
+
 ## v0.25.0 — Era packs to 3000 BCE, 27 fact kinds, MultiWheel
 
 *2026-09-26*

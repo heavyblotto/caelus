@@ -1,0 +1,1168 @@
+{
+ "basis": "Python reference astroengine.datesky (embedded VSOP, full moon, era packs)",
+ "cases": [
+  {
+   "id": "hadrian-tropical-pad6",
+   "constraints": [
+    {
+     "body": "sun",
+     "sign": "Aquarius"
+    },
+    {
+     "body": "moon",
+     "sign": "Aquarius"
+    },
+    {
+     "body": "jupiter",
+     "sign": "Aquarius"
+    },
+    {
+     "body": "saturn",
+     "sign": "Capricorn"
+    },
+    {
+     "body": "mercury",
+     "sign": "Capricorn"
+    },
+    {
+     "body": "venus",
+     "sign": "Pisces"
+    },
+    {
+     "body": "mars",
+     "sign": "Pisces"
+    }
+   ],
+   "jd0": 1648007.5,
+   "jd1": 1867157.5,
+   "options": {
+    "pad": 6.0
+   },
+   "result": {
+    "windows": [
+     {
+      "start": 1748839.534150273,
+      "end": 1748842.3527445341
+     }
+    ],
+    "funnel": [
+     {
+      "constraint": 3,
+      "label": "saturn in Capricorn pad 6",
+      "windows": 45,
+      "days": 27223.159436646383
+     },
+     {
+      "constraint": 2,
+      "label": "jupiter in Aquarius pad 6",
+      "windows": 15,
+      "days": 3532.7440346851945
+     },
+     {
+      "constraint": 0,
+      "label": "sun in Aquarius pad 6",
+      "windows": 16,
+      "days": 553.3336009224877
+     },
+     {
+      "constraint": 6,
+      "label": "mars in Pisces pad 6",
+      "windows": 5,
+      "days": 143.92151258094236
+     },
+     {
+      "constraint": 5,
+      "label": "venus in Pisces pad 6",
+      "windows": 2,
+      "days": 52.562576711177826
+     },
+     {
+      "constraint": 4,
+      "label": "mercury in Capricorn pad 6",
+      "windows": 2,
+      "days": 32.63349487702362
+     },
+     {
+      "constraint": 1,
+      "label": "moon in Aquarius pad 6",
+      "windows": 1,
+      "days": 2.818594261072576
+     }
+    ],
+    "truncated": false
+   }
+  },
+  {
+   "id": "hadrian-fagan-bradley-pad4",
+   "constraints": [
+    {
+     "body": "sun",
+     "sign": "Aquarius"
+    },
+    {
+     "body": "moon",
+     "sign": "Aquarius"
+    },
+    {
+     "body": "jupiter",
+     "sign": "Aquarius"
+    },
+    {
+     "body": "saturn",
+     "sign": "Capricorn"
+    },
+    {
+     "body": "mercury",
+     "sign": "Capricorn"
+    },
+    {
+     "body": "venus",
+     "sign": "Pisces"
+    },
+    {
+     "body": "mars",
+     "sign": "Pisces"
+    }
+   ],
+   "jd0": 1648007.5,
+   "jd1": 1867157.5,
+   "options": {
+    "zodiac": "sidereal:fagan_bradley",
+    "pad": 4.0
+   },
+   "result": {
+    "windows": [
+     {
+      "start": 1748839.5330188288,
+      "end": 1748842.0762402187
+     }
+    ],
+    "funnel": [
+     {
+      "constraint": 3,
+      "label": "saturn in Capricorn pad 4",
+      "windows": 45,
+      "days": 24585.129332549404
+     },
+     {
+      "constraint": 2,
+      "label": "jupiter in Aquarius pad 4",
+      "windows": 14,
+      "days": 3132.6751358977053
+     },
+     {
+      "constraint": 0,
+      "label": "sun in Aquarius pad 4",
+      "windows": 15,
+      "days": 447.48888226412237
+     },
+     {
+      "constraint": 6,
+      "label": "mars in Pisces pad 4",
+      "windows": 4,
+      "days": 113.99224252905697
+     },
+     {
+      "constraint": 5,
+      "label": "venus in Pisces pad 4",
+      "windows": 2,
+      "days": 45.800837432034314
+     },
+     {
+      "constraint": 4,
+      "label": "mercury in Capricorn pad 4",
+      "windows": 2,
+      "days": 25.82756384345703
+     },
+     {
+      "constraint": 1,
+      "label": "moon in Aquarius pad 4",
+      "windows": 1,
+      "days": 2.543221389874816
+     }
+    ],
+    "truncated": false
+   }
+  },
+  {
+   "id": "hadrian-six-millennia",
+   "constraints": [
+    {
+     "body": "sun",
+     "sign": "Aquarius"
+    },
+    {
+     "body": "moon",
+     "sign": "Aquarius"
+    },
+    {
+     "body": "jupiter",
+     "sign": "Aquarius"
+    },
+    {
+     "body": "saturn",
+     "sign": "Capricorn"
+    },
+    {
+     "body": "mercury",
+     "sign": "Capricorn"
+    },
+    {
+     "body": "venus",
+     "sign": "Pisces"
+    },
+    {
+     "body": "mars",
+     "sign": "Pisces"
+    }
+   ],
+   "jd0": 628960.5,
+   "jd1": 2813135.5,
+   "options": {
+    "pad": 6.0
+   },
+   "result": {
+    "windows": [
+     {
+      "start": 813839.8296233332,
+      "end": 813841.1557265365
+     },
+     {
+      "start": 900395.1737434003,
+      "end": 900398.4171943476
+     },
+     {
+      "start": 1212298.0153016225,
+      "end": 1212300.9169747573
+     },
+     {
+      "start": 1748839.534150273,
+      "end": 1748842.3527445341
+     }
+    ],
+    "funnel": [
+     {
+      "constraint": 3,
+      "label": "saturn in Capricorn pad 6",
+      "windows": 432,
+      "days": 269786.54369181045
+     },
+     {
+      "constraint": 2,
+      "label": "jupiter in Aquarius pad 6",
+      "windows": 150,
+      "days": 29602.504700755468
+     },
+     {
+      "constraint": 0,
+      "label": "sun in Aquarius pad 6",
+      "windows": 134,
+      "days": 4427.1959640390705
+     },
+     {
+      "constraint": 6,
+      "label": "mars in Pisces pad 6",
+      "windows": 34,
+      "days": 768.4107748238603
+     },
+     {
+      "constraint": 5,
+      "label": "venus in Pisces pad 6",
+      "windows": 19,
+      "days": 291.8615612896392
+     },
+     {
+      "constraint": 4,
+      "label": "mercury in Capricorn pad 6",
+      "windows": 11,
+      "days": 120.48720310942736
+     },
+     {
+      "constraint": 1,
+      "label": "moon in Aquarius pad 6",
+      "windows": 4,
+      "days": 10.289821546641178
+     }
+    ],
+    "truncated": false
+   }
+  },
+  {
+   "id": "babylon-410bce",
+   "constraints": [
+    {
+     "body": "jupiter",
+     "sign": "Pisces"
+    },
+    {
+     "body": "venus",
+     "sign": "Taurus"
+    },
+    {
+     "body": "saturn",
+     "sign": "Cancer"
+    },
+    {
+     "body": "mars",
+     "sign": "Gemini"
+    }
+   ],
+   "jd0": 1538798.5,
+   "jd1": 1611848.5,
+   "options": {},
+   "result": {
+    "windows": [
+     {
+      "start": 1571776.1871914961,
+      "end": 1571800.6767882686
+     }
+    ],
+    "funnel": [
+     {
+      "constraint": 2,
+      "label": "saturn in Cancer",
+      "windows": 14,
+      "days": 5884.973791700788
+     },
+     {
+      "constraint": 0,
+      "label": "jupiter in Pisces",
+      "windows": 7,
+      "days": 885.7114784941077
+     },
+     {
+      "constraint": 3,
+      "label": "mars in Gemini",
+      "windows": 1,
+      "days": 49.548205096274614
+     },
+     {
+      "constraint": 1,
+      "label": "venus in Taurus",
+      "windows": 1,
+      "days": 24.489596772473305
+     }
+    ],
+    "truncated": false
+   }
+  },
+  {
+   "id": "babylon-800-years",
+   "constraints": [
+    {
+     "body": "jupiter",
+     "sign": "Pisces"
+    },
+    {
+     "body": "venus",
+     "sign": "Taurus"
+    },
+    {
+     "body": "saturn",
+     "sign": "Cancer"
+    },
+    {
+     "body": "mars",
+     "sign": "Gemini"
+    }
+   ],
+   "jd0": 1428857.5,
+   "jd1": 1721057.5,
+   "options": {},
+   "result": {
+    "windows": [
+     {
+      "start": 1528382.485417291,
+      "end": 1528388.806449397
+     },
+     {
+      "start": 1571776.1871914957,
+      "end": 1571800.676788269
+     },
+     {
+      "start": 1658316.78633584,
+      "end": 1658336.6467170347
+     }
+    ],
+    "funnel": [
+     {
+      "constraint": 2,
+      "label": "saturn in Cancer",
+      "windows": 56,
+      "days": 22618.074960391037
+     },
+     {
+      "constraint": 0,
+      "label": "jupiter in Pisces",
+      "windows": 14,
+      "days": 1976.4383457954973
+     },
+     {
+      "constraint": 3,
+      "label": "mars in Gemini",
+      "windows": 4,
+      "days": 183.50126963667572
+     },
+     {
+      "constraint": 1,
+      "label": "venus in Taurus",
+      "windows": 3,
+      "days": 50.6710100742057
+     }
+    ],
+    "truncated": false
+   }
+  },
+  {
+   "id": "outer-pair-modern",
+   "constraints": [
+    {
+     "body": "saturn",
+     "sign": "Capricorn"
+    },
+    {
+     "body": "jupiter",
+     "sign": 9
+    }
+   ],
+   "jd0": 2341972.5,
+   "jd1": 2488069.5,
+   "options": {},
+   "result": {
+    "windows": [
+     {
+      "start": 2350714.012167861,
+      "end": 2350791.0835905205
+     },
+     {
+      "start": 2372249.3760174583,
+      "end": 2372387.2072968455
+     },
+     {
+      "start": 2372467.832670849,
+      "end": 2372619.807967403
+     },
+     {
+      "start": 2393822.4861716237,
+      "end": 2394205.6506728455
+     },
+     {
+      "start": 2415403.8559506824,
+      "end": 2415787.312402536
+     },
+     {
+      "start": 2436995.048415957,
+      "end": 2437095.5784174176
+     },
+     {
+      "start": 2437233.625276614,
+      "end": 2437373.83399136
+     },
+     {
+      "start": 2437523.871135365,
+      "end": 2437607.617034291
+     },
+     {
+      "start": 2458820.264117034,
+      "end": 2458930.66560189
+     },
+     {
+      "start": 2459032.4839922995,
+      "end": 2459200.711135727
+     },
+     {
+      "start": 2480401.3303391226,
+      "end": 2480458.226457478
+     },
+     {
+      "start": 2480613.0175441154,
+      "end": 2480730.0973658846
+     }
+    ],
+    "funnel": [
+     {
+      "constraint": 0,
+      "label": "saturn in Capricorn",
+      "windows": 27,
+      "days": 12831.491126306355
+     },
+     {
+      "constraint": 1,
+      "label": "jupiter in Capricorn",
+      "windows": 12,
+      "days": 1910.5881352163851
+     }
+    ],
+    "truncated": false
+   }
+  },
+  {
+   "id": "longitude-orb",
+   "constraints": [
+    {
+     "body": "mars",
+     "lon": 112.5,
+     "orb": 2.0
+    },
+    {
+     "body": "sun",
+     "sign": "Leo"
+    }
+   ],
+   "jd0": 2447892.5,
+   "jd1": 2462502.5,
+   "options": {},
+   "result": {
+    "windows": [
+     {
+      "start": 2451031.678861317,
+      "end": 2451037.8104170943
+     },
+     {
+      "start": 2451748.0296678934,
+      "end": 2451749.0900969114
+     },
+     {
+      "start": 2456517.8919344214,
+      "end": 2456524.0470611346
+     },
+     {
+      "start": 2457228.901085462,
+      "end": 2457235.0190064246
+     },
+     {
+      "start": 2462004.2873338116,
+      "end": 2462006.0840012925
+     }
+    ],
+    "funnel": [
+     {
+      "constraint": 0,
+      "label": "mars at 112.5 within 2",
+      "windows": 25,
+      "days": 191.43135453853756
+     },
+     {
+      "constraint": 1,
+      "label": "sun in Leo",
+      "windows": 5,
+      "days": 21.261699951719493
+     }
+    ],
+    "truncated": false
+   }
+  },
+  {
+   "id": "arc-wraps-aries-point",
+   "constraints": [
+    {
+     "body": "venus",
+     "from": 350,
+     "to": 15
+    },
+    {
+     "body": "mercury",
+     "from": 340,
+     "to": 5
+    }
+   ],
+   "jd0": 2451544.5,
+   "jd1": 2455927.5,
+   "options": {},
+   "result": {
+    "windows": [
+     {
+      "start": 2451633.175829015,
+      "end": 2451650.7238810537
+     },
+     {
+      "start": 2451993.2289851205,
+      "end": 2452008.6172192385
+     },
+     {
+      "start": 2452351.7972951904,
+      "end": 2452353.644117472
+     },
+     {
+      "start": 2453464.192245356,
+      "end": 2453464.255902405
+     },
+     {
+      "start": 2454144.7513952353,
+      "end": 2454147.3061705604
+     },
+     {
+      "start": 2454554.636209989,
+      "end": 2454561.9521470023
+     },
+     {
+      "start": 2454905.349858079,
+      "end": 2454918.8796958067
+     },
+     {
+      "start": 2455262.7115737107,
+      "end": 2455275.0978900907
+     }
+    ],
+    "funnel": [
+     {
+      "constraint": 0,
+      "label": "venus from 350 to 15",
+      "windows": 14,
+      "days": 407.447159901727
+     },
+     {
+      "constraint": 1,
+      "label": "mercury from 340 to 5",
+      "windows": 8,
+      "days": 70.6336319334805
+     }
+    ],
+    "truncated": false
+   }
+  },
+  {
+   "id": "waning-moon-in-sign",
+   "constraints": [
+    {
+     "elongation": [
+      "moon",
+      "sun"
+     ],
+     "from": 180,
+     "to": 360
+    },
+    {
+     "body": "moon",
+     "sign": "Scorpio"
+    }
+   ],
+   "jd0": 2460310.5,
+   "jd1": 2461041.5,
+   "options": {},
+   "result": {
+    "windows": [
+     {
+      "start": 2460315.027404124,
+      "end": 2460317.380858329
+     },
+     {
+      "start": 2460342.358920072,
+      "end": 2460344.7694459697
+     },
+     {
+      "start": 2460369.6313641164,
+      "end": 2460372.0806794493
+     },
+     {
+      "start": 2460396.876876116,
+      "end": 2460399.327603779
+     },
+     {
+      "start": 2460424.492348917,
+      "end": 2460426.5673341444
+     },
+     {
+      "start": 2460615.2287205225,
+      "end": 2460616.0327594904
+     },
+     {
+      "start": 2460642.514298181,
+      "end": 2460644.9950595973
+     },
+     {
+      "start": 2460669.8377079125,
+      "end": 2460672.323906877
+     },
+     {
+      "start": 2460697.180684563,
+      "end": 2460699.686644024
+     },
+     {
+      "start": 2460724.513082441,
+      "end": 2460727.0379158184
+     },
+     {
+      "start": 2460751.812798205,
+      "end": 2460754.3451356515
+     },
+     {
+      "start": 2460779.0792019134,
+      "end": 2460781.609201922
+     },
+     {
+      "start": 2460808.2055364987,
+      "end": 2460808.8574416116
+     },
+     {
+      "start": 2460997.405786233,
+      "end": 2460999.782859018
+     },
+     {
+      "start": 2461024.660572769,
+      "end": 2461027.1934276894
+     }
+    ],
+    "funnel": [
+     {
+      "constraint": 1,
+      "label": "moon in Scorpio",
+      "windows": 27,
+      "days": 67.13137470651418
+     },
+     {
+      "constraint": 0,
+      "label": "moon-sun from 180 to 0",
+      "windows": 15,
+      "days": 33.164970787242055
+     }
+    ],
+    "truncated": false
+   }
+  },
+  {
+   "id": "per-constraint-pad",
+   "constraints": [
+    {
+     "body": "jupiter",
+     "sign": "Taurus",
+     "pad": 3.0
+    },
+    {
+     "body": "mars",
+     "sign": "Leo"
+    }
+   ],
+   "jd0": 2433282.5,
+   "jd1": 2469807.5,
+   "options": {},
+   "result": {
+    "windows": [
+     {
+      "start": 2438653.7236724524,
+      "end": 2438705.6386402273
+     },
+     {
+      "start": 2442914.965529043,
+      "end": 2442966.4770210134
+     },
+     {
+      "start": 2446985.49585482,
+      "end": 2447030.327321483
+     },
+     {
+      "start": 2455823.577058508,
+      "end": 2455876.6771807834
+     },
+     {
+      "start": 2460085.146842583,
+      "end": 2460135.9862271817
+     },
+     {
+      "start": 2468926.7912441073,
+      "end": 2468973.7699755467
+     }
+    ],
+    "funnel": [
+     {
+      "constraint": 0,
+      "label": "jupiter in Taurus pad 3",
+      "windows": 13,
+      "days": 3599.5755952103063
+     },
+     {
+      "constraint": 1,
+      "label": "mars in Leo",
+      "windows": 6,
+      "days": 299.1761647211388
+     }
+    ],
+    "truncated": false
+   }
+  },
+  {
+   "id": "truncated",
+   "constraints": [
+    {
+     "body": "moon",
+     "sign": "Aries"
+    }
+   ],
+   "jd0": 2458849.5,
+   "jd1": 2459580.5,
+   "options": {
+    "max_windows": 6
+   },
+   "result": {
+    "windows": [
+     {
+      "start": 2458850.6669576513,
+      "end": 2458853.1771705514
+     },
+     {
+      "start": 2458877.993453648,
+      "end": 2458880.5193085894
+     },
+     {
+      "start": 2458905.282778713,
+      "end": 2458907.8122843467
+     },
+     {
+      "start": 2458932.5403338457,
+      "end": 2458935.067128497
+     },
+     {
+      "start": 2458959.7919050287,
+      "end": 2458962.316639521
+     },
+     {
+      "start": 2458987.0664216587,
+      "end": 2458989.590603454
+     }
+    ],
+    "funnel": [
+     {
+      "constraint": 0,
+      "label": "moon in Aries",
+      "windows": 27,
+      "days": 67.15573774743825
+     }
+    ],
+    "truncated": true
+   }
+  },
+  {
+   "id": "no-match",
+   "constraints": [
+    {
+     "body": "sun",
+     "sign": "Aries"
+    },
+    {
+     "body": "mercury",
+     "sign": "Libra"
+    }
+   ],
+   "jd0": 2451544.5,
+   "jd1": 2455197.5,
+   "options": {},
+   "result": {
+    "windows": [],
+    "funnel": [
+     {
+      "constraint": 0,
+      "label": "sun in Aries",
+      "windows": 10,
+      "days": 304.6014734292403
+     },
+     {
+      "constraint": 1,
+      "label": "mercury in Libra",
+      "windows": 0,
+      "days": 0
+     }
+    ],
+    "truncated": false
+   }
+  },
+  {
+   "id": "true-node",
+   "constraints": [
+    {
+     "body": "true_node",
+     "sign": "Aries"
+    },
+    {
+     "body": "saturn",
+     "sign": "Pisces"
+    }
+   ],
+   "jd0": 2415020.5,
+   "jd1": 2488069.5,
+   "options": {},
+   "result": {
+    "windows": [
+     {
+      "start": 2460143.332246543,
+      "end": 2460687.4590393286
+     }
+    ],
+    "funnel": [
+     {
+      "constraint": 1,
+      "label": "saturn in Pisces",
+      "windows": 14,
+      "days": 6446.7381116282195
+     },
+     {
+      "constraint": 0,
+      "label": "true_node in Aries",
+      "windows": 1,
+      "days": 544.1267927857116
+     }
+    ],
+    "truncated": false
+   }
+  },
+  {
+   "id": "station-touch-mercury",
+   "constraints": [
+    {
+     "body": "mercury",
+     "from": 21.484465933185266,
+     "to": 41.49446593318527
+    }
+   ],
+   "jd0": 2450860.320954889,
+   "jd1": 2450940.320954889,
+   "options": {},
+   "result": {
+    "windows": [
+     {
+      "start": 2450899.921556958,
+      "end": 2450900.7213721927
+     }
+    ],
+    "funnel": [
+     {
+      "constraint": 0,
+      "label": "mercury from 21.484465933185266 to 41.49446593318527",
+      "windows": 1,
+      "days": 0.7998152347281575
+     }
+    ],
+    "truncated": false
+   }
+  },
+  {
+   "id": "station-touch-mars",
+   "constraints": [
+    {
+     "body": "mars",
+     "from": 222.19814441505298,
+     "to": 242.20314441505298
+    }
+   ],
+   "jd0": 2451216.06995501,
+   "jd1": 2451296.06995501,
+   "options": {},
+   "result": {
+    "windows": [
+     {
+      "start": 2451255.1668513305,
+      "end": 2451256.971032106
+     }
+    ],
+    "funnel": [
+     {
+      "constraint": 0,
+      "label": "mars from 222.19814441505298 to 242.20314441505298",
+      "windows": 1,
+      "days": 1.8041807753033936
+     }
+    ],
+    "truncated": false
+   }
+  },
+  {
+   "id": "station-touch-saturn",
+   "constraints": [
+    {
+     "body": "saturn",
+     "from": 33.626325603944956,
+     "to": 53.62832560394496
+    }
+   ],
+   "jd0": 2451001.297894815,
+   "jd1": 2451081.297894815,
+   "options": {},
+   "result": {
+    "windows": [
+     {
+      "start": 2451039.783533368,
+      "end": 2451042.8097598194
+     }
+    ],
+    "funnel": [
+     {
+      "constraint": 0,
+      "label": "saturn from 33.626325603944956 to 53.62832560394496",
+      "windows": 1,
+      "days": 3.0262264516204596
+     }
+    ],
+    "truncated": false
+   }
+  }
+ ],
+ "calendar": [
+  {
+   "year": -4712,
+   "month": 1,
+   "day": 1,
+   "hour": 12.0,
+   "calendar": "julian",
+   "jd": 0.0,
+   "back": {
+    "year": -4712,
+    "month": 1,
+    "day": 1,
+    "hour": 12.0
+   }
+  },
+  {
+   "year": -2999,
+   "month": 3,
+   "day": 1,
+   "hour": 0.0,
+   "calendar": "julian",
+   "jd": 625732.5,
+   "back": {
+    "year": -2999,
+    "month": 3,
+    "day": 1,
+    "hour": 0.0
+   }
+  },
+  {
+   "year": -409,
+   "month": 4,
+   "day": 29,
+   "hour": 18.0,
+   "calendar": "julian",
+   "jd": 1571789.25,
+   "back": {
+    "year": -409,
+    "month": 4,
+    "day": 29,
+    "hour": 18.0
+   }
+  },
+  {
+   "year": -409,
+   "month": 4,
+   "day": 29,
+   "hour": 18.0,
+   "calendar": "gregorian",
+   "jd": 1571794.25,
+   "back": {
+    "year": -409,
+    "month": 4,
+    "day": 29,
+    "hour": 18.0
+   }
+  },
+  {
+   "year": 0,
+   "month": 2,
+   "day": 29,
+   "hour": 6.5,
+   "calendar": "julian",
+   "jd": 1721116.7708333333,
+   "back": {
+    "year": 0,
+    "month": 2,
+    "day": 29,
+    "hour": 6.499999998137355
+   }
+  },
+  {
+   "year": 76,
+   "month": 1,
+   "day": 24,
+   "hour": 6.0,
+   "calendar": "julian",
+   "jd": 1748839.75,
+   "back": {
+    "year": 76,
+    "month": 1,
+    "day": 24,
+    "hour": 6.0
+   }
+  },
+  {
+   "year": 1582,
+   "month": 10,
+   "day": 4,
+   "hour": 23.0,
+   "calendar": "julian",
+   "jd": 2299160.4583333335,
+   "back": {
+    "year": 1582,
+    "month": 10,
+    "day": 4,
+    "hour": 23.00000000372529
+   }
+  },
+  {
+   "year": 1582,
+   "month": 10,
+   "day": 15,
+   "hour": 0.0,
+   "calendar": "gregorian",
+   "jd": 2299160.5,
+   "back": {
+    "year": 1582,
+    "month": 10,
+    "day": 15,
+    "hour": 0.0
+   }
+  },
+  {
+   "year": 1600,
+   "month": 2,
+   "day": 29,
+   "hour": 12.0,
+   "calendar": "gregorian",
+   "jd": 2305507.0,
+   "back": {
+    "year": 1600,
+    "month": 2,
+    "day": 29,
+    "hour": 12.0
+   }
+  },
+  {
+   "year": 1900,
+   "month": 3,
+   "day": 1,
+   "hour": 0.0,
+   "calendar": "gregorian",
+   "jd": 2415079.5,
+   "back": {
+    "year": 1900,
+    "month": 3,
+    "day": 1,
+    "hour": 0.0
+   }
+  },
+  {
+   "year": 2000,
+   "month": 1,
+   "day": 1,
+   "hour": 12.0,
+   "calendar": "gregorian",
+   "jd": 2451545.0,
+   "back": {
+    "year": 2000,
+    "month": 1,
+    "day": 1,
+    "hour": 12.0
+   }
+  },
+  {
+   "year": 2999,
+   "month": 12,
+   "day": 31,
+   "hour": 23.75,
+   "calendar": "gregorian",
+   "jd": 2816787.4895833335,
+   "back": {
+    "year": 2999,
+    "month": 12,
+    "day": 31,
+    "hour": 23.75000000372529
+   }
+  }
+ ]
+}

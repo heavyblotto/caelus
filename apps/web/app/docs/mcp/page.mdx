@@ -14,7 +14,7 @@ export const metadata = pageMetadata({
 computed by the engine on each call, never recalled from training data, so every
 answer is deterministic.
 
-There are two ways to connect, with the same thirty-five tools either way:
+There are two ways to connect, with the same thirty-six tools either way:
 
 - **Hosted (Streamable HTTP)**: point your client at
   `https://www.ephemengine.com/api/mcp`. Nothing to install.
@@ -196,7 +196,7 @@ Any stdio MCP client takes the same command and arguments:
 
 ## Verify the tools appeared
 
-After the client reloads, it should list **thirty-five** tools. Ask it to enumerate
+After the client reloads, it should list **thirty-six** tools. Ask it to enumerate
 them, or check the client's MCP panel:
 
 **Charts and readings**
@@ -220,6 +220,7 @@ them, or check the client's MCP panel:
 - `electional_search`: rank moments in a window for a set of wanted aspects, optionally avoiding a void-of-course Moon
 - `cosmic_weather`: the day's active configurations, stations, and void-of-course Moon, with no birth chart needed
 - `similar_skies`: when the sky most resembled a reference moment, by cosine similarity over a window
+- `date_sky`: every window in a span of years in which a described sky held, from planets by sign, longitude, or lunar phase; the tool that dates a horoscope with no year
 
 **Hellenistic time-lords**
 
@@ -262,7 +263,7 @@ them, or check the client's MCP panel:
 (cazimi, combust, under the beams) and each aspect as applying or separating,
 with a normalized strength.
 
-If you see all thirty-five, the server is wired correctly. The server also exposes three
+If you see all thirty-six, the server is wired correctly. The server also exposes three
 **resources**: `caelus://glossary` (aspect angles and orbs, signs, bodies,
 house systems, essential dignities), `caelus://accuracy` (the validation
 table), and `ui://widget/chart.html` (an embeddable chart widget), plus two

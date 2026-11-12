@@ -93,6 +93,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/docs/mcp",
     "/docs/canonical",
     "/docs/synthetic",
+    "/docs/sky-dating",
     "/docs/edge-cases",
     "/docs/api",
     ...listApiDocs().map((s) => `/docs/api/${s}`),

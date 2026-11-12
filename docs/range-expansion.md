@@ -399,3 +399,12 @@ claims are per-body and TT-honest rather than one headline number
   accuracy) remains a non-goal: arcsecond is already below astrological
   resolution, and for ancient dates the uncertainty in delta T dominates any
   position-theory error, so the input time is fuzzier than the engine.
+- **Delta T model, 2026-11.** `deltaT` follows the Morrison, Stephenson,
+  Hohenkerk and Zawilski (2021) spline from -720 to 1948, replacing the single
+  parabola that covered every year before 1800. The parabola was 481 s from
+  the published value at 1000 CE and left a 32.4 s step at 1800. The measured
+  figures in this document compare positions in TT and did not depend on
+  delta T, so they stand; what changed is the TT an instant given in UT maps
+  to. `python/test_delta_t.py` checks the model against the published table.
+  `deltaTSigma` still follows Morrison & Stephenson (2004) and has not been
+  re-derived for the newer reconstruction.

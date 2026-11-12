@@ -325,3 +325,29 @@ bound) and a frozen `golden-mcp` payload holds the format.
 Co-angular pairs as `{a, a_angle, b, b_angle, utc, gap_min}`, ordered by
 (a, b, time); `a_angle`/`b_angle` are `rise | mtransit | set | itransit`.
 Date defaults to now; bodies default to the seven classical planets.
+
+## Sky dating (roadmap milestone 3, unreleased)
+`date_sky` exposes the engine's `dateSky`: the inverse of a chart. The caller
+describes a sky and a span of years, and the tool returns every window in
+which the description held. The engine function is new in this release and is
+pinned by `datesky-golden`; `verify_tools` pins the tool to it (window edges,
+calendar stamps, funnel order, and the refusals), and two frozen `golden-mcp`
+payloads hold the format. Thirty-six tools total.
+
+### date_sky(constraints, start_year, end_year, zodiac?, pad?, limit?)
+Each constraint names `body`, or `elongation: [a, b]` for the longitude of
+`a` minus that of `b`, and one arc: `sign` (name or index 0-11), `lon` with
+`orb`, or `from` with `to`. `pad` widens arcs, per constraint or for all of
+them. Years are astronomical (`-409` is 410 BCE) and both ends are inclusive.
+
+Returns `{searched, windows, truncated, funnel}`. A window is
+`{start, end, days}`, and each end is
+`{jd, calendar, year, era, month, day, ut}`: the Julian calendar before 15
+October 1582 and the Gregorian after, with `era` as text (`"410 BCE"`) and
+`ut` to the minute. `funnel` lists the constraints in scan order, slowest
+body first, with the windows and days that survived each.
+
+The tool refuses a span outside the validated range of the bodies named, and
+the error states the years this server's data covers. A stdio server with the
+era packs reaches about 3000 BCE for the Sun, the Moon, and Mercury through
+Saturn. The hosted endpoint runs the embedded tier and covers 1000 to 3000.

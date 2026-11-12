@@ -71,13 +71,40 @@ MCP App widget wiring (0.14), enriched chart bodies (0.15), chart synthesis
 cited interpretation corpus with star/lot atoms (0.19), diachronic and
 relational atoms (0.20), embedded fixed stars (0.20.1), per-body wheel
 colors (0.21), Sky View (0.22), and the synthetic ephemeris (0.23). The MCP
-server now exposes thirty-five chart tools.
+server now exposes thirty-six chart tools.
 
 The `ephemengine.com` site ships its full shape: landing page, browser
 playground, validation and provenance tables, build notes, a methods page
 (how the engine is built and how each result is checked), a docs hub with
 guides, a generated TypeScript API reference, a changelog page, persistent
 header and footer, and SEO (sitemap, OpenGraph).
+
+## Next: deep time and measured uncertainty (after 0.25)
+
+Every phase under "Planned" below has shipped. The direction from here was set
+in November 2026. It leans on two things the engine already has that other
+MIT-licensed engines do not: numbers that are measured and attributed, and a
+range that reaches 3000 BCE. The reference-first rule is unchanged.
+
+| # | Milestone | Status |
+|---|---|---|
+| 1 | **ΔT before 1948** from the Morrison, Stephenson, Hohenkerk and Zawilski spline, with its own check | Done, unreleased |
+| 2 | **Uncertainty as an output**: a sigma on each position, and for a chart with an uncertain time, which facts hold and when each would flip | Planned |
+| 3 | **Sky dating**: `dateSky`, from a description of a sky to its dates | Engine and `date_sky` MCP tool done, unreleased; site page planned |
+| 4 | **Binary packs**: quantized coefficient packs, era packs out of the main tarball, classical slabs for Uranus, Neptune and Pluto, then slabs earlier than 3000 BCE | Planned |
+| 5 | **Heliacal risings and settings**, and first visibility of the lunar crescent | Planned |
+| 6 | **Mint-on-demand bodies**: a dispatchable workflow that fits any numbered asteroid from Horizons and publishes a pack with its measured error | Planned |
+| 7 | **Conformance kit, then a Rust port** graded against it | Planned |
+
+Milestones 4 and 5 reverse two entries in the non-goals list of
+`docs/gap-analysis.md` (the range beyond 3000 BCE, and heliacal phenomena).
+Milestone 5 depends on 1 to 3, 6 depends on 4, and 7 waits for 4 so that the
+port implements the pack format once.
+
+Open items carried by milestone 1: `deltaTSigma` still follows Morrison &
+Stephenson (2004) and needs re-deriving from the 2016 error estimates, and the
+UT path has no external oracle yet, because the Swiss Ephemeris and Horizons
+validators compare in TT.
 
 ## Planned
 
@@ -305,7 +332,7 @@ body-to-body aspects, optional void-Moon penalty), **`cosmic_weather`** (the
 mundane sky: active configurations, stationing planets, void Moon), and
 **parans** (co-angular bodies) — reference-first engine math with the
 `parans-golden` pin, and the `parans` MCP tool (engine-oracle checks + a
-frozen golden payload). The MCP server is at thirty-five tools; transit
+frozen golden payload). The MCP server is at thirty-six tools; transit
 density remains a possible later count.
 
 Direction refined after a second external pass (Grok, 2026-06-14). Its strongest

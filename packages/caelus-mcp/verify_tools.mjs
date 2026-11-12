@@ -28,7 +28,7 @@ import {
   detectPatterns, detectPatternsIn, chartSignature, parans,
   chartFeatures, configurationFit,
   dignityScore, voidOfCourse,
-  synastryAspects,
+  synastryAspects, dateSky,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -672,6 +672,59 @@ const assertExactHits = (hits, body, targetLonAt, angle, label, tolDeg = 0.02) =
   assert(JSON.stringify(res.patterns) === JSON.stringify(detectPatternsIn(bodies)), "cosmic_weather: patterns match engine");
   assert(res.patterns.every((p) => p.kind !== "stellium_house"), "cosmic_weather: no house-based patterns in a mundane snapshot");
   assert(res.moon_void_of_course === voidOfCourse(eng, jdFromIso(date)).isVoid, "cosmic_weather: void Moon flag matches engine");
+}
+
+// ---------------------------------------------------------------- date_sky
+{
+  // Four planets by sign, the positions usually quoted for the oldest
+  // Babylonian horoscope; one window in these 200 years, in 410 BCE.
+  const cons = [
+    { body: "jupiter", sign: "Pisces" }, { body: "venus", sign: "Taurus" },
+    { body: "saturn", sign: "Cancer" }, { body: "mars", sign: "Gemini" },
+  ];
+  const res = await call("date_sky", { constraints: cons, start_year: -499, end_year: -300 });
+  assert(res.windows.length === 1 && res.truncated === false, "date_sky: one window in 499-301 BCE");
+  const w = res.windows[0];
+  assert(w.start.calendar === "julian" && w.start.year === -409 && w.start.era === "410 BCE"
+    && w.start.month === 4 && w.start.day === 16, `date_sky: window opens 16 April 410 BCE (${JSON.stringify(w.start)})`);
+  assert(/^\d\d:\d\d$/.test(w.start.ut) && /^\d\d:\d\d$/.test(w.end.ut), "date_sky: UT stamps are HH:MM");
+  // the payload is the engine's dateSky over the same range
+  const direct = dateSky(eng, cons,
+    julianDay(-499, 1, 1, 0, 0, 0, "julian"), julianDay(-299, 1, 1, 0, 0, 0, "julian"));
+  assert(direct.windows.length === 1
+    && Math.abs(direct.windows[0].start - w.start.jd) < 1e-4
+    && Math.abs(direct.windows[0].end - w.end.jd) < 1e-4, "date_sky: window edges match the engine");
+  assert(Math.abs(w.days - r2(direct.windows[0].end - direct.windows[0].start)) < 1e-9, "date_sky: days is the window length");
+  // every constraint holds in the middle of the window
+  const mid = (w.start.jd + w.end.jd) / 2;
+  for (const c of cons) {
+    assert(SIGNS[Math.floor(eng.longitude(c.body, mid) / 30)] === c.sign, `date_sky: ${c.body} is in ${c.sign} mid-window`);
+  }
+  // the funnel is in scan order, slowest first, and never widens
+  assert(res.funnel.length === 4 && res.funnel[0].label === "saturn in Cancer", "date_sky: Saturn is scanned first");
+  assert(res.funnel.every((f, i) => i === 0 || f.days <= res.funnel[i - 1].days), "date_sky: the funnel never widens");
+  assert(res.funnel[3].windows === 1, "date_sky: the last stage is the result");
+
+  // a modern search stamps Gregorian dates
+  const modern = await call("date_sky", {
+    constraints: [{ body: "saturn", sign: "Capricorn" }, { body: "jupiter", sign: "Capricorn" }],
+    start_year: 2019, end_year: 2021,
+  });
+  assert(modern.windows.length >= 1 && modern.windows[0].start.calendar === "gregorian"
+    && modern.windows[0].start.year === 2019 && modern.windows[0].start.month === 12
+    && modern.windows[0].start.era === "2019 CE", `date_sky: Jupiter joins Saturn in Capricorn in December 2019 (${JSON.stringify(modern.windows[0]?.start)})`);
+
+  // limit truncates and says so
+  const many = await call("date_sky", { constraints: [{ body: "moon", sign: 0 }], start_year: 2020, end_year: 2021, limit: 3 });
+  assert(many.windows.length === 3 && many.truncated === true, "date_sky: limit truncates and reports it");
+
+  // refusals: a span outside the data, an unknown body, a malformed constraint
+  const tooEarly = await client.callTool({ name: "date_sky", arguments: { constraints: cons, start_year: -5000, end_year: -4000 } });
+  assert(tooEarly.isError === true && /covers years/.test(tooEarly.content[0].text), "date_sky: a span outside the data is refused with the covered years");
+  const unknown = await client.callTool({ name: "date_sky", arguments: { constraints: [{ body: "vulcan_prime", sign: "Leo" }], start_year: 2000, end_year: 2001 } });
+  assert(unknown.isError === true, "date_sky: unknown body rejected");
+  const noArc = await client.callTool({ name: "date_sky", arguments: { constraints: [{ body: "sun" }], start_year: 2000, end_year: 2001 } });
+  assert(noArc.isError === true, "date_sky: a constraint with no arc is rejected");
 }
 
 // ------------------------------------------------- chart_facts exotic anchors
