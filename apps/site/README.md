@@ -30,8 +30,8 @@ shows up in both builds. What lives here is the Astro shell around them.
   component and its `metadata` export from `apps/web/app` and renders them in a
   layout. `docs/[slug].astro` does the same for the MDX guides, and
   `docs/api/[slug].astro` for the TypeDoc markdown.
-- `src/layouts` holds the document shell and the docs shell, the counterparts of
-  the two Next layouts. `src/lib/meta.ts` turns a page's `metadata` into the
+- `src/layouts` holds the document shell, the docs shell, and the instrument
+  shell, the counterparts of the three Next layouts. `src/lib/meta.ts` turns a page's `metadata` into the
   `<head>` tags Next emitted.
 - `src/shims` stands in for the five `next/*` modules the sources import:
   `next/link`, `next/navigation`, `next/dynamic`, `next/server`, and `next/og`.

@@ -18,4 +18,5 @@ export const registry: Record<string, Loader> = {
   SynastryPanel: () => import("@web/components/PlaygroundPanels").then((m) => m.SynastryPanel),
   PlaygroundExamples: () => import("@web/components/PlaygroundPanels").then((m) => m.PlaygroundExamples),
   PlaygroundStickyBar: () => import("@web/components/PlaygroundStickyBar").then((m) => m.default),
+  SkyDating: () => import("@web/app/instruments/sky-dating/SkyDatingIsland").then((m) => m.default),
 };

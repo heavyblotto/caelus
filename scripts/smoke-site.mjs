@@ -313,10 +313,12 @@ function compare(reference, candidate) {
  * friends round the last bit differently, and a chart computed on Cloudflare
  * differs from one computed on Node in the 14th significant digit of a few
  * values. (The engine's canonical output mode exists for callers who need
- * bit-stable results across runtimes.) Numbers are therefore compared within
- * NUMERIC_TOLERANCE, which is twelve orders of magnitude tighter than the
- * engine's validated accuracy, and the script reports how many responses were
- * byte-identical and the largest difference it saw.
+ * bit-stable results across runtimes; the difference is documented for callers
+ * in the Edge Cases guide.) Numbers are therefore compared within
+ * NUMERIC_TOLERANCE, 1e-9 degrees, which is five orders of magnitude tighter
+ * than the one-arcsecond level the engine is validated to, and the script
+ * reports how many responses were byte-identical and the largest difference
+ * it saw.
  *
  * Samples: the flagship chart, both edges of the embedded 1920-2080 tier, a
  * polar latitude, defaulted coordinates, an ignored extra parameter, every

@@ -76,6 +76,7 @@ export default defineConfig({
           "components/PlaygroundPanels.tsx": "src/islands/web/PlaygroundPanels.tsx",
           "components/PlaygroundStickyBar.tsx": "src/islands/web/PlaygroundStickyBar.tsx",
           "components/home/HomeLiveIsland.tsx": "src/islands/web/HomeLiveIsland.tsx",
+          "app/instruments/sky-dating/SkyDatingIsland.tsx": "src/islands/web/SkyDatingIsland.tsx",
           // Reads apps/web/content/api relative to process.cwd() in apps/web.
           "lib/api-docs.ts": { to: "src/lib/api-docs.ts", always: true },
         },
