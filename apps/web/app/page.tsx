@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import PageClose from "../components/PageClose";
-import PageHero from "../components/PageHero";
+import Cta from "../components/Cta";
 import FAQ from "../components/FAQ";
-import { A, Lead, P, H2 } from "../components/Prose";
+import { A } from "../components/Prose";
 import HomeLiveIsland from "../components/home/HomeLiveIsland";
 import {
   FACTS,
@@ -35,14 +35,15 @@ const PACKAGES: Array<[keyof typeof NPM, string, string]> = [
   ["delineationsPd", "caelus-delineations-pd", "Public-domain delineations and correspondence data for the interpretation layer, versioned on its own semver."],
 ];
 
-// Credibility numbers surfaced above the fold. Each links to its proof.
-const PROOF: Array<{ num: string; label: string; href: string }> = [
-  { num: formatWorstNano(), label: "Nano-arcsec worst deviation", href: "/validation" },
-  { num: formatGoldenChecks(), label: "Golden checks in CI", href: "/validation" },
-  { num: String(FACTS.mcpTools), label: "MCP tools for AI clients", href: "/docs/mcp" },
-  { num: "~153 KB", label: "Engine + data, gzipped", href: "/docs/data-tiers" },
-  { num: "0", label: "Runtime dependencies", href: NPM.caelus },
-  { num: "MIT", label: "Licensed, no AGPL", href: `${SITE.repo}/blob/main/LICENSE` },
+// Credibility numbers on the first screen. Each links to its proof and names
+// the page or file that carries it.
+const PROOF: Array<{ num: string; label: string; href: string; src: string }> = [
+  { num: formatWorstNano(), label: "Nano-arcsec worst deviation", href: "/validation", src: "Validation" },
+  { num: formatGoldenChecks(), label: "Golden checks in CI", href: "/validation", src: "Validation" },
+  { num: String(FACTS.mcpTools), label: "MCP tools for AI clients", href: "/docs/mcp", src: "MCP setup" },
+  { num: "~153 KB", label: "Engine + data, gzipped", href: "/docs/data-tiers", src: "Data tiers" },
+  { num: "0", label: "Runtime dependencies", href: NPM.caelus, src: "npm" },
+  { num: "MIT", label: "Licensed, no AGPL", href: `${SITE.repo}/blob/main/LICENSE`, src: "LICENSE" },
 ];
 
 // What the engine computes, as titled entries a reader can scan. Each links to
@@ -112,78 +113,113 @@ const jsonLd = {
   keywords: "ephemeris, astrology, natal chart, MCP, TypeScript",
 };
 
+/**
+ * Home orients and routes. It opens on the computed New York sky, with the
+ * claim, the install command, and the proof figures beside it on the first
+ * screen (apps/web/DESIGN.md, principle 2).
+ */
 export default function Home() {
   return (
-    <main className="container page">
+    <main className="container">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <PageHero
-        eyebrow="TypeScript · browser, edge, Node, and MCP"
-        title={SITE.tagline.replace(/\.$/, "")}
-        cta="hero"
-        after={
-          <div className="feature-stats" style={{ marginBottom: "0.5rem" }}>
-            {PROOF.map((s) =>
-              s.href.startsWith("/") ? (
-                <Link key={s.label} href={s.href} className="card stat">
-                  <span className="stat__num">{s.num}</span>
-                  <span className="stat__label">{s.label}</span>
-                </Link>
-              ) : (
-                <a key={s.label} href={s.href} className="card stat" target="_blank" rel="noreferrer">
-                  <span className="stat__num">{s.num}</span>
-                  <span className="stat__label">{s.label}</span>
-                </a>
-              ),
-            )}
+      <div className="bench home">
+        <section className="tile claim" aria-labelledby="home-title">
+          <div className="tile__h">
+            <b>WHAT</b>
+            <span>Caelus {SITE.version}</span>
           </div>
-        }
-      >
-        <Lead>{SITE.description}</Lead>
-      </PageHero>
+          <div className="tile__b">
+            <div className="lab">TypeScript · browser, edge, Node, and MCP</div>
+            <h1 id="home-title">{SITE.tagline.replace(/\.$/, "")}</h1>
+            <p>{SITE.description}</p>
+            <Cta variant="hero" />
+          </div>
+        </section>
 
-      <HomeLiveIsland civil={nycCivilNow()} />
+        <section className="tile proof-tile" aria-label="Proof figures">
+          <div className="tile__h">
+            <b>PROOF</b>
+            <span>Measured, with source</span>
+          </div>
+          <div className="proof">
+            {PROOF.map((s) => {
+              const body = (
+                <>
+                  <span className="lab">{s.label}</span>
+                  <b>{s.num}</b>
+                  <em>src: {s.src}</em>
+                </>
+              );
+              return s.href.startsWith("/") ? (
+                <Link key={s.label} href={s.href}>{body}</Link>
+              ) : (
+                <a key={s.label} href={s.href} target="_blank" rel="noreferrer">{body}</a>
+              );
+            })}
+          </div>
+        </section>
 
-      <H2>What it computes</H2>
-      <ul className="capability-grid">
+        <HomeLiveIsland civil={nycCivilNow()} />
+
+        <div className="band">
+          <h2>What it computes</h2>
+        </div>
         {CAPABILITIES.map((c) => (
-          <li key={c.title}>
-            <Link href={c.href} className="capability-grid__title">{c.title}</Link>
-            <p className="capability-grid__desc">{c.desc}</p>
-          </li>
+          <Link key={c.title} href={c.href} className="tile s3">
+            <div className="tile__b">
+              <h3>{c.title}</h3>
+              <p>{c.desc}</p>
+            </div>
+          </Link>
         ))}
-      </ul>
-      <P dim>
-        The full capability list, along with a comparison against the other
-        engines, is on <A href="/features">Features</A>.
-      </P>
+        <section className="tile s6">
+          <div className="tile__b">
+            <p>
+              The full capability list, along with a comparison against the
+              other engines, is on <A href="/features">Features</A>.
+            </p>
+          </div>
+        </section>
 
-      <H2>The packages</H2>
-      <div className="grid grid-2">
-        {PACKAGES.map(([key, name, desc]) => (
-          <a key={name} href={NPM[key]} className="card card-interactive">
-            <code style={{ color: "var(--accent)" }}>{name}</code>
-            <p className="dim small" style={{ margin: "0.5rem 0 0" }}>{desc}</p>
+        <div className="band">
+          <h2>The packages</h2>
+        </div>
+        {PACKAGES.map(([key, name, desc], i) => (
+          <a key={name} href={NPM[key]} className={`tile ${i === 0 ? "s8" : "s4"}`}>
+            <div className="tile__h">
+              <b>npm</b>
+              <span>{name}</span>
+            </div>
+            <div className="tile__b">
+              <p>{desc}</p>
+            </div>
           </a>
         ))}
+
+        <div className="band">
+          <h2>How it is checked</h2>
+        </div>
+        <section className="tile s12">
+          <div className="tile__b">
+            <p>
+              CI checks the engine in two stages. A Python reference engine is first
+              calibrated against Swiss Ephemeris, and the TypeScript port is then
+              replayed against {formatGoldenChecks()} golden checks derived from it.
+              The worst deviation recorded across that suite is{" "}
+              {formatWorstNanoProse()}, which sits far below any astronomically
+              relevant scale, so a porting bug fails the build instead of reaching a
+              release. The tables and the methodology behind them are on{" "}
+              <A href="/validation">Validation</A>, and the bugs this suite has
+              caught are written up in the <A href="/notes">Build Notes</A>.
+            </p>
+          </div>
+        </section>
+
+        <FAQ />
+
+        <PageClose />
       </div>
-
-      <H2>How it is checked</H2>
-      <P>
-        CI checks the engine in two stages. A Python reference engine is first
-        calibrated against Swiss Ephemeris, and the TypeScript port is then
-        replayed against {formatGoldenChecks()} golden checks derived from it.
-        The worst deviation recorded across that suite is{" "}
-        {formatWorstNanoProse()}, which sits far below any astronomically
-        relevant scale, so a porting bug fails the build instead of reaching a
-        release. The tables and the methodology behind them are on{" "}
-        <A href="/validation">Validation</A>, and the bugs this suite has
-        caught are written up in the <A href="/notes">Build Notes</A>.
-      </P>
-
-      <FAQ />
-
-      <PageClose />
     </main>
   );
 }

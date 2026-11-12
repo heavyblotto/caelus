@@ -9,8 +9,9 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { nycCivilNow, type NycCivil } from "@web/lib/nycNow";
+import HomeSkyLoading from "@web/components/home/HomeSkyLoading";
 
-const loading = () => <p className="dim small">computing the New York sky…</p>;
+const loading = () => <HomeSkyLoading />;
 
 const HomeLive = dynamic(() => import("@web/components/home/HomeLive"), { ssr: false, loading });
 

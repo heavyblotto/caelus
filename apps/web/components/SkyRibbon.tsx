@@ -54,7 +54,7 @@ export default function SkyRibbon({
     ?? `sky now · ${now.toISOString().slice(0, 16).replace("T", " ")} UT · sun ${sunLon} · moon ${moonLon}`;
 
   return (
-    <figure className="sky-ribbon reveal" aria-label="The current sky, computed by the engine">
+    <figure className="sky-ribbon" aria-label="The current sky, computed by the engine">
       <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
         <defs>
           <linearGradient id="ecliptic" x1="0" x2="1" y1="0" y2="0">

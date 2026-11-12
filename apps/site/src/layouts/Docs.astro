@@ -17,7 +17,7 @@ const pathname = routePath(Astro.url.pathname);
 ---
 
 <Base meta={meta}>
-  <main class="container page">
+  <main class="container page page--docs">
     <Breadcrumbs pathname={pathname} />
     <div class="docs-shell">
       <Sidebar client:load pathname={pathname} />

@@ -1,25 +1,15 @@
 ---
 /**
- * Shell for the instrument pages: the Astro counterpart of
- * apps/web/app/instruments/layout.tsx. These pages follow the Workbench
- * grammar ahead of the site-wide restyle, inside the scoped `.wb` root, with
- * the stylesheet imported from apps/web and the Barlow faces self-hosted.
+ * Shell for the instrument pages: the Astro counterpart of the Next route
+ * group under apps/web/app/instruments. The whole site follows the Workbench
+ * grammar now, so an instrument needs nothing beyond the root document; the
+ * layout stays so the instrument pages keep one place to grow from.
  */
 import Base from "./Base.astro";
-import "@web/app/workbench.css";
-import "../styles/fonts-workbench.css";
-import barlow400 from "@fontsource/barlow/files/barlow-latin-400-normal.woff2?url";
-import barlow500 from "@fontsource/barlow/files/barlow-latin-500-normal.woff2?url";
-import condensed600 from "@fontsource/barlow-condensed/files/barlow-condensed-latin-600-normal.woff2?url";
 
 interface Props {
   meta?: object;
 }
 ---
 
-<Base meta={Astro.props.meta}>
-  <Fragment slot="head">
-    {[barlow400, barlow500, condensed600].map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
-  </Fragment>
-  <div class="wb"><slot /></div>
-</Base>
+<Base meta={Astro.props.meta}><slot /></Base>

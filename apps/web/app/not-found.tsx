@@ -13,7 +13,7 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <main className="container page" style={{ textAlign: "center" }}>
+    <main className="container page page--center">
       <div style={{ color: "var(--accent)", display: "flex", justifyContent: "center", marginBottom: "1.25rem" }}>
         <CaelusMark size={148} title="Caelus, holding the veil of the sky" />
       </div>

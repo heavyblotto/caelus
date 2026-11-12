@@ -5,7 +5,7 @@ import DocsBreadcrumbs from "../../components/DocsBreadcrumbs";
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="container page">
+    <main className="container page page--docs">
       <DocsBreadcrumbs />
       <div className="docs-shell">
         <DocsSidebar />

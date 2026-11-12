@@ -149,20 +149,24 @@ const faqJsonLd = {
 
 export default function FAQ() {
   return (
-    <section aria-labelledby="faq-heading" style={{ marginTop: "2.5rem" }}>
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <h2 id="faq-heading">Frequently asked questions</h2>
-      <div className="faq">
-        {ITEMS.map(({ q, a }) => (
-          <details key={q}>
-            <summary>{q}</summary>
-            <div>{a}</div>
-          </details>
-        ))}
+      <div className="band">
+        <h2 id="faq-heading">Frequently asked questions</h2>
       </div>
-    </section>
+      <section className="tile s12" aria-labelledby="faq-heading">
+        <div className="faq">
+          {ITEMS.map(({ q, a }) => (
+            <details key={q}>
+              <summary>{q}</summary>
+              <div>{a}</div>
+            </details>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

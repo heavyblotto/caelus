@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Barlow, Barlow_Condensed, JetBrains_Mono } from "next/font/google";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
 import { SITE } from "../lib/site";
 import "./globals.css";
 
-const sans = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
+// Workbench type (apps/web/DESIGN.md): Barlow for prose, Barlow Condensed for
+// titles, JetBrains Mono for data, labels, and code.
+const sans = Barlow({
+  subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-sans", display: "swap",
+});
+const cond = Barlow_Condensed({
+  subsets: ["latin"], weight: ["600"], variable: "--font-cond", display: "swap",
+});
 const mono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
   variable: "--font-mono",
   display: "swap",
 });
@@ -61,7 +68,7 @@ const NO_FLASH = `(function(){try{var t=localStorage.getItem('theme');if(t!=='li
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${sans.variable} ${cond.variable} ${mono.variable}`} suppressHydrationWarning>
       <body>
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH }} />
         <script

@@ -6,12 +6,13 @@ that show a computed result, its source, and the call that produced it. The
 voice is factual and evidence-forward (`docs/editorial-voice.md`); the
 design's job is hierarchy and legibility, not persuasion.
 
-**Status.** The owner chose this direction on 2026-11-11. The reference
-mockups are `design/directions/workbench/home.html` and
-`design/directions/workbench/sky-dating.html`, and they follow every rule
-below. The live site does not yet: `app/globals.css` still carries the
-previous look. The "Migration" section at the end lists what has to change,
-and until that work lands these rules describe the target, not the site.
+**Status.** The owner chose this direction on 2026-11-11, and the site was
+restyled to it in one change the same day. `app/globals.css` carries the
+rules below unscoped, and both builds (Next in `apps/web`, Astro in
+`apps/site`) render from it. The reference mockups are
+`design/directions/workbench/home.html` and
+`design/directions/workbench/sky-dating.html`. The "Migration" section at the
+end records what was removed and what is left.
 
 ## Principles
 
@@ -53,13 +54,18 @@ and until that work lands these rules describe the target, not the site.
 - **Band.** A full-width heading row with at most one sentence. Bands separate
   groups of tiles and are the only section headings on a bench page.
 - **Status bar.** The only site chrome: wordmark, primary navigation, check
-  count, version, licence, theme. On small screens it drops the navigation
-  links before it wraps.
+  count, version, licence, theme. Below 900px the navigation moves to a
+  second row of the bar, and below 640px the check count, GitHub, and licence
+  cells drop out.
 - **No sideways scroll.** A table or code block wider than its tile scrolls
   inside the tile.
 - **Long-form pages.** Docs, Notes, and other reading pages keep a single
-  column of about 42rem inside one full-width tile. They use sentence-case
-  `h2` headings in the prose flow.
+  column of about 42rem inside one full-width tile (`.page`). They use
+  sentence-case `h2` headings in the prose flow. A page opens with its title
+  tile (`PageHero`: label and title at the left, lead and actions at the
+  right) and closes with the install band (`PageClose`). Features and the
+  Playground add `.page--bench`, which turns their section headings into
+  bands.
 
 ## Instrument grammar
 
@@ -81,7 +87,8 @@ chrome, and Advanced shows more tiles.
 
 The existing vocabulary carries over and is restyled, not replaced:
 
-- `.card` becomes the tile.
+- `.card` is a tile outside the bench grid; `.grid`, `.feature-grid`, and
+  `.feature-stats` lay cards out with shared 1px rules.
 - `.control` and `.field` become the input rows.
 - `.btn` keeps its variants; the primary action is the violet fill.
 - `.tabs__tab` and `.seg` remain the only tab and switcher styles.
@@ -147,20 +154,34 @@ Wheels, the kundli, the ephemeris graph, and the sky plots consume the
 
 ## Migration
 
-What `app/globals.css` and the layout do today that these rules remove,
-counted on 2026-11-11:
+The restyle landed as one change. What the old stylesheet and layout carried,
+and what `app/globals.css` holds after it, counted on 2026-11-11:
 
-- 10 gradient declarations, including the fixed star-field wash on
-  `body::before`.
-- 4 `backdrop-filter` declarations (the header, the search panel, and one
-  overlay).
-- 3 `box-shadow` declarations.
-- 23 `border-radius` declarations and the `--radius` tokens.
-- 2 `@keyframes` (`reveal-up`, `drift`) and the animations that use them.
-- Inter as `--font-sans`, loaded in `app/layout.tsx`.
-- The night-purple surface and text tokens, which the table above replaces.
-- The page skeleton of eyebrow, `h1`, lead, sections, and `PageClose`, and
-  the 1100px `--maxw` shell, which the bench and the status bar replace.
+| Removed | Before | After |
+|---------|--------|-------|
+| Gradient declarations, including the star-field wash | 10 | 0 |
+| `backdrop-filter` declarations | 4 | 0 |
+| `box-shadow` declarations | 3 | 0 |
+| `border-radius` declarations | 23 | 3, all `border-radius: 0` resets on native controls |
+| `@keyframes` and the animations that used them | 2 | 0 |
+| `transition` declarations | 14 | 0, apart from the reduced-motion override |
+| Inter as `--font-sans` | loaded | replaced by Barlow, with Barlow Condensed as `--font-cond` |
 
-The restyle should land as one change so the site never sits half in each
-grammar.
+The night-purple tokens are gone; the older token names (`--surface`,
+`--border`, `--text-dim`, and the rest) remain as aliases of the Workbench
+tokens so component rules and inline styles read one palette. The header and
+footer are the status bar and a row of footer tiles. `workbench.css` and its
+`.wb` scope are gone, and the instrument's rules sit in `globals.css` under
+the class names `packages/widgets` emits.
+
+Still to do, none of it blocking:
+
+- Some components carry inline style objects for spacing and colour
+  (`RailPanels.tsx`, the playground tabs). They read the aliased tokens, so
+  they render correctly, but they are not the mechanism this file asks for.
+- The Playground is restyled, not restructured: its parts sit between rules
+  as tiles, without tile headers or IDs. Giving it the full instrument
+  grammar means changing `Workspace.tsx`.
+- The guides under `app/docs` open with an inline-styled label `div` above
+  their title. It renders as the label does elsewhere.
+- The alias token names can be renamed away file by file.

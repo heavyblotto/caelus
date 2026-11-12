@@ -10,14 +10,20 @@ type PageHeroProps = {
   after?: ReactNode;
 };
 
+/** The title tile of a page: label and title at the left, lead and actions
+ *  at the right (apps/web/DESIGN.md). */
 export default function PageHero({ eyebrow, title, children, cta, after }: PageHeroProps) {
   return (
     <header className="page-hero">
-      <Eyebrow>{eyebrow}</Eyebrow>
-      <h1>{title}</h1>
-      {children}
-      {cta ? <Cta variant={cta} /> : null}
-      {after}
+      <div className="page-hero__title">
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <h1>{title}</h1>
+      </div>
+      <div className="page-hero__body">
+        {children}
+        {cta ? <Cta variant={cta} /> : null}
+      </div>
+      {after ? <div className="page-hero__after">{after}</div> : null}
     </header>
   );
 }

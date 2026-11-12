@@ -31,17 +31,10 @@ export const Pre = ({ children }: { children: React.ReactNode }) => <pre>{childr
 
 /** Eyebrow label above a heading, set in mono. */
 export const Eyebrow = ({ children }: { children: React.ReactNode }) => (
-  <div className="eyebrow" style={{ marginBottom: "0.6rem" }}>
-    {children}
-  </div>
+  <div className="eyebrow">{children}</div>
 );
 
 /** A bordered aside for caveats and tips. */
 export const Note = ({ children }: { children: React.ReactNode }) => (
-  <aside
-    className="card small"
-    style={{ borderLeft: "2px solid var(--accent)", margin: "1.2rem 0", color: "var(--text-dim)" }}
-  >
-    {children}
-  </aside>
+  <aside className="card small aside-note">{children}</aside>
 );
