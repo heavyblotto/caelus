@@ -1,7 +1,8 @@
 # Astro on Cloudflare: migration report
 
 Date: 2026-11-11. Branch: `claude/cool-golick-8ae836`, with local `dev` merged
-at `7a7b1bf` (sky dating, the `date_sky` tool, the Workbench design rules).
+through `5a75642` (sky dating, the `date_sky` tool, the Workbench design rules,
+and the Sky Dating instrument).
 Nothing is deployed, no Cloudflare resource exists, and `apps/web` is untouched
 by this work and still builds.
 
@@ -11,12 +12,19 @@ Worker for `/api/chart`, `/api/mcp`, and the 404 page. It was built and served
 locally in workerd, the runtime Cloudflare deploys to, and compared against the
 Next build route by route.
 
-## What needs a decision first
+## The float difference in `/api/chart`: accepted
+
+Decision, 2026-11-11: the difference described here is accepted. Raw float
+output was never promised to be bit-stable across runtimes, and canonical mode
+is the documented answer for a caller who hashes or diffs. The Edge Cases
+guide (`/docs/edge-cases`, "Float output across runtimes") now states the
+measured difference for callers.
 
 `/api/chart` does not return the same bytes on Cloudflare as it does today.
 The JSON has the same keys, strings, and order, and every number agrees to
-within 1.1e-12, but the last one or two digits of a few values differ. In the
-flagship query, 16 values differ, by at most 5e-14 degrees.
+within 1.1e-12, but the last one or two digits of a few values differ. Across
+six sample charts, between 7 and 19 of roughly 160 numbers per response
+differ. In the flagship query, 16 of 180 differ, by at most 5e-14 degrees.
 
 The port is not the cause. The Worker bundle, run under Node, produces output
 byte-identical to the Next route, and to production for the one query fetched
@@ -26,12 +34,14 @@ each, 17 returned different bits somewhere, among them `sin`, `cos`, `atan2`,
 `exp`, and `log`. On the evidence of that one production query, Vercel's
 runtime currently agrees with Node.
 
-The engine's validated accuracy is about twelve orders of magnitude coarser
-than this difference, and canonical mode exists for callers who need
+The largest difference, 1.1e-12 degrees, is about four billionths of an
+arcsecond, more than eight orders of magnitude below the one-arcsecond level
+the planets are validated to. An earlier draft of this report said twelve
+orders, which overstated it. Canonical mode exists for callers who need
 bit-stable output. A client that hashes or diffs raw `/api/chart` responses
-would still see a change at cutover. If that matters, the options are to
-serve `/api/chart` from a Node host, or to give the engine its own
-deterministic transcendentals. Neither is done here. The MCP endpoint rounds
+will see a change at cutover. The alternatives, serving `/api/chart` from a
+Node host or giving the engine its own deterministic transcendentals, were
+not taken. The MCP endpoint rounds
 to 0.01 degrees and matched exactly on all 107 hosted integration checks.
 
 ## How it is built
@@ -73,27 +83,41 @@ Next:
 | Site file | Replaces | Why |
 |-----------|----------|-----|
 | `src/components/Tabs.astro`, `Tab.astro` | `components/Tabs.tsx` | The React version reads labels off its children, which needs the whole document to be one React tree. Same class names, so the same CSS applies. |
-| `src/layouts/Base.astro`, `Docs.astro` | `app/layout.tsx`, `app/docs/layout.tsx` | A layout is written for Next or for Astro, not both. Same markup and class names. |
+| `src/layouts/Base.astro`, `Docs.astro`, `Instrument.astro` | `app/layout.tsx`, `app/docs/layout.tsx`, `app/instruments/layout.tsx` | A layout is written for Next or for Astro, not both. Same markup and class names. |
 | `src/components/MdxLink.astro`, `src/lib/mdx-components.ts` | `mdx-components.tsx` | Next and Astro each wire the MDX component map their own way. |
 
 Four small modules restate logic that could not be imported as it stands:
 `src/lib/api-docs.ts` (the original finds its files from an `apps/web` working
 directory), `src/pages/sitemap.xml.ts` (same reason; it reads the route list
 from the original's source), `src/pages/robots.txt.ts`, and
-`src/pages/docs/api/[slug].astro`. `src/styles/fonts.css` is new and replaces
-`next/font`. The only style rules in `apps/site` are those font faces; every
-other rule comes from `globals.css`.
+`src/pages/docs/api/[slug].astro`. `src/styles/fonts.css` and
+`src/styles/fonts-workbench.css` are new and replace `next/font`. The only
+style rules in `apps/site` are those font faces; every other rule comes from
+`globals.css` or `workbench.css`.
 
-So a restyle that changes markup, not only CSS, has four site-local files to
-touch: the two layouts and the two tab components.
+So a restyle that changes markup, not only CSS, has five site-local files to
+touch: the three layouts and the two tab components.
 
-## Pending from dev
+## The Sky Dating instrument
 
-`/instruments/sky-dating` is not in this build. It is due on `dev` as a React
-widget from `packages/widgets`, styled by a scoped `workbench.css`. It will
-mount here as a client-only island inside a `.wb` wrapper, with the stylesheet
-imported from `apps/web` like `globals.css`. The Workbench restyle of the rest
-of the site is out of scope for this branch.
+`/instruments/sky-dating` is the first page in the Workbench grammar. Here it
+renders the page component from `apps/web` inside `src/layouts/Instrument.astro`,
+which supplies the `.wb` wrapper, imports `apps/web/app/workbench.css`, and
+self-hosts Barlow 400 and 500 and Barlow Condensed 600 as `--font-bench` and
+`--font-cond`. Only instrument pages load those faces and that stylesheet.
+
+The widget is prerendered with its default form, as Next prerenders it, and
+then hydrated as a nested island, where it builds `new Engine(embeddedData)`
+and runs the search in the browser. Prerendering keeps the page's HTML
+identical to Next's; a purely client-rendered island would have shipped an
+empty shell. Served by `wrangler dev`, the default search shows "3 windows
+fit" for the Babylonian preset with nothing in the console, and the page does
+not scroll sideways at 1440 px or 375 px. The results table is wider than a
+375 px screen and scrolls inside its own container, as it does on Next. The
+header link and the sitemap entry come from `apps/web/lib/site.ts` and
+`apps/web/app/sitemap.ts` with no edit here.
+
+The Workbench restyle of the rest of the site is out of scope for this branch.
 
 ## What is ported
 
@@ -103,7 +127,8 @@ of the site is out of scope for this branch.
 | `/docs`, the 19 MDX guides, `/docs/visualizations` | Static. MDX is compiled by Astro's MDX integration from the files in `apps/web/app/docs`. |
 | `/docs/api`, `/docs/api/[slug]` (607 pages) | Static, from the TypeDoc markdown in `apps/web/content/api`. |
 | `/embed/chart` | Static shell, hydrated on load. |
-| `/api/chart` | Worker. See the note on float output above. |
+| `/instruments/sky-dating` | Static, with the widget hydrated in the browser. |
+| `/api/chart` | Worker. See the section on the float difference above. |
 | `/api/mcp` | Worker. Stateless, JSON responses, 36 tools. |
 | `robots.txt`, `sitemap.xml`, `/icon.svg`, `/opengraph-image` | Static files written at build time. The Open Graph PNG is byte-identical to Next's. |
 | `/about`, `/favicon.ico` | 307 redirects, via `_redirects`. |
@@ -154,13 +179,13 @@ All of this ran against `wrangler dev` serving the built output.
 | Check | Result |
 |-------|--------|
 | `npm run build -w site` | Builds cleanly. `astro check` reports 0 errors. |
-| `node scripts/smoke-site.mjs --against <next>` | 644 URLs crawled on each build. Every URL that is 200 on Next is 200 on Astro with the same content type, both redirects match, and the two sitemaps list the same 639 URLs. |
+| `node scripts/smoke-site.mjs --against <next>` | 645 URLs crawled on each build. Every URL that is 200 on Next is 200 on Astro with the same content type, both redirects match, and the two sitemaps list the same 640 URLs. |
 | `/api/chart` and `/api/mcp` GET, 12 samples | 6 byte-identical (every 400 response, including two dates outside 1920 to 2080, and the MCP description). 6 chart responses equal in structure with numbers within 1.1e-12. |
 | `CAELUS_MCP_URL=<worker>/api/mcp node packages/caelus-mcp/integration.test.mjs` | 107 checks, 0 failures. The same command against the Next route also passes. |
 | `npm test`, which includes `test:mcp` | Passes. |
 | `node scripts/smoke-live.mjs <worker>` | Passes. |
 | `lint:claims`, `lint:emdash`, `check:docs`, `lint:prose`, `check-llms`, `check-mcp-surface`, `check:versions`, `check-tarball` | All pass. |
-| Page content, 36 pages | Visible text is identical to Next on every page except `/docs/mcp`. On 34 of them the headings, links, element counts, and CSS classes were also compared and match, apart from one React-generated id per page. |
+| Page content, 37 pages | Visible text is identical to Next on every page except `/docs/mcp`. On 35 of them the headings, links, element counts, and CSS classes were also compared and match, apart from one React-generated id per page. |
 | `<head>` tags, 11 pages | Identical to Next, apart from the image URL's cache key. |
 
 `integration.test.mjs` gained a hosted mode, selected by `CAELUS_MCP_URL`. The
@@ -175,8 +200,8 @@ gives. Without the variable the test runs as before, with 108 checks.
 
 One machine, Apple silicon, Node 25.8.1. Build times cover the app's own build
 script, with workspace packages, API markdown, and search index already built.
-These were taken before `dev` was merged, at `bb1164a`. The merge adds one
-guide and ten API pages and was not re-measured.
+These were taken before `dev` was merged, at `bb1164a`. The merges add one
+guide, the instrument page, and ten API pages, and were not re-measured.
 
 | | Next (`apps/web`) | Astro (`apps/site`) |
 |---|---|---|
@@ -229,8 +254,9 @@ because there is no serialized component payload.
 - Whether Cloudflare's build clones full git history. With a shallow clone,
   older pages get the build date as their sitemap `lastmod`.
 - Pixel-level visual parity. Parity rests on the text and structure diffs
-  above, plus screenshots of four pages in the light theme. The dark theme
-  was toggled by script, and no narrow viewport was checked.
+  above, plus screenshots of five pages in the light theme. The dark theme
+  was toggled by script. Only the instrument page was checked at 375 px,
+  where its rendering matched Next's.
 - Clipboard writes. The install and copy buttons hydrate and respond, but the
   test browser refused clipboard access to an unfocused page.
 - The 607 API pages were compared by status and content type. Three were
@@ -239,9 +265,10 @@ because there is no serialized component payload.
 
 ## Cutover checklist
 
-Steps 1 to 6 and 9 to 11 need the owner. Steps 7 and 8 are repo edits.
+Steps 2 to 6 and 9 to 11 need the owner. Steps 7 and 8 are repo edits.
 
-1. Decide whether the float change in `/api/chart` is acceptable.
+1. Done: the float change in `/api/chart` is accepted and documented in the
+   Edge Cases guide.
 2. Create or choose the Cloudflare account, and enable Workers Paid.
 3. Move the `ephemengine.com` zone to Cloudflare DNS. A Worker custom domain
    requires the zone to be on Cloudflare. Keep the records pointing at Vercel

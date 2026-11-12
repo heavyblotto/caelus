@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Edge Cases & Stability",
-  description: "Supported date range, polar house fallback, civil-time hazards, the east-positive longitude convention, circumpolar rise/set, missing data packs, and the versioning contract.",
+  description: "Supported date range, polar house fallback, civil-time hazards, the east-positive longitude convention, circumpolar rise/set, missing data packs, float output across runtimes, and the versioning contract.",
   path: "/docs/edge-cases",
 });
 
@@ -105,6 +105,31 @@ single date.
 in an extended pack (an asteroid, a Uranian point, a fixed star) is simply
 unavailable, while core bodies keep working at embedded precision. Check
 [Data Tiers](/docs/data-tiers) for which capabilities need which pack.
+
+## Float output across runtimes
+
+The engine's floating-point output is not bit-identical across JavaScript
+runtimes. The language standard does not fix how `Math.sin`, `Math.atan2`,
+`Math.exp`, and the other transcendental functions round, and runtimes ship
+different math libraries. Node and workerd, the Cloudflare Workers runtime,
+both run V8, and of 22 `Math` functions probed with 20,000 inputs each, 17
+returned different bits for at least one input.
+
+The effect on a chart stays in the last one or two digits of a double. Six
+sample charts were computed under both runtimes. In each response, between 7
+and 19 of roughly 160 numbers differed, and the keys, strings, and ordering
+were identical. The largest difference was 1.1e-12 degrees, about four
+billionths of an arcsecond, which is more than eight orders of magnitude below
+the one-arcsecond level the planets are validated to. In the chart for
+1990-06-10 14:30 UT at Tampa the largest difference was 5e-14 degrees.
+
+Raw float output should not be hashed, diffed byte for byte, or used as a
+cache key when the values can come from more than one runtime, or from one
+host across a runtime upgrade. Compare with a tolerance, or use
+[Canonical Mode](/docs/canonical), which quantizes to integers on a declared
+grid and is bit-stable across machines, browsers, and languages. The hosted
+`/api/chart` endpoint returns raw floats, so its last digits depend on the
+runtime that serves it.
 
 ## Versioning &amp; stability
 
