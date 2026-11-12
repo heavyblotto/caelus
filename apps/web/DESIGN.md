@@ -1,99 +1,166 @@
 # ephemengine.com design notes
 
-Principles for the site's visual design and layout, written down so pages stay
-consistent as they change. The voice is factual and evidence-forward; the
+Rules for the site's visual design and layout. The direction is **Workbench**:
+the site is a bench of instruments, and every page is a grid of labelled tiles
+that show a computed result, its source, and the call that produced it. The
+voice is factual and evidence-forward (`docs/editorial-voice.md`); the
 design's job is hierarchy and legibility, not persuasion.
+
+**Status.** The owner chose this direction on 2026-11-11. The reference
+mockups are `design/directions/workbench/home.html` and
+`design/directions/workbench/sky-dating.html`, and they follow every rule
+below. The live site does not yet: `app/globals.css` still carries the
+previous look. The "Migration" section at the end lists what has to change,
+and until that work lands these rules describe the target, not the site.
 
 ## Principles
 
 1. **One page, one job.** Nothing appears on a page before that job is served.
    - Home orients and routes: what this is, proof it is real, where to go.
-   - Playground demonstrates: the working engine, in the browser, immediately.
-   - Features inventories: everything it computes, and how it compares.
-   - Docs teach; Validation / Methods / Provenance / Notes prove.
-2. **Show, then tell.** The code sample, the live wheel, and the computed sky
-   are the strongest material on the site; they lead, and prose follows. An
-   explanation that precedes the thing it explains becomes a wall of text.
-3. **One vocabulary.** A single style each for form controls (`.control`,
-   labelled with `.field`), small action buttons (`.btn` variants), data tabs
-   (`.tabs__tab` underline), view switchers (`.seg`), cards (`.card`), and
-   section labels. New UI reuses these classes; inline style objects are not
-   the mechanism for anything a second component might want.
-4. **Scan first, read second.** Capability lists are titled grid entries
-   (`.capability-grid`): the title carries the scan, one line carries the
-   detail, the link carries the depth. Prose paragraphs are for reasoning,
-   not for enumerations.
-5. **Figures are sized to their information.** A preview wheel is a thumbnail
-   beside its caption (`.example-card`); the working wheel in the playground
-   is large because it is the object of study. Every figure has a caption
-   saying what computed it.
-6. **Evidence over adjectives.** Numbers link to their proof (stats link to
-   Validation, counts are read from the engine at build time). No marketing
-   language; the facts are the pitch.
+   - An instrument answers one question from a small input.
+   - Playground demonstrates the working engine in the browser.
+   - Features inventories; Docs teach; Validation, Methods, Provenance, and
+     Notes prove.
+2. **Open on a computed thing.** The first tile on every page is output from
+   the engine (a sky, a chart, a timeline, a table), stamped with the instant,
+   the place, and the engine version. On Home the claim and the install
+   command sit in the tile beside it, on the first screen.
+3. **Every number carries its unit and its source.** A figure is shown with a
+   unit and a label, and it links to the page or file that produced it.
+   Counts are read from the engine at build time (`lib/facts.ts`). A number
+   with no source does not ship.
+4. **The call sits beside the result.** An instrument page has three parts:
+   the input, the output, and the code that produced the output. A reader can
+   copy the call and get the same answer.
+5. **State the status.** Each tile header says what the thing is: live, next,
+   planned, or placeholder. Placeholder data is labelled inside the tile that
+   shows it, every time.
+6. **Scan first, read second.** Tile headers, labels, and table cells carry
+   the scan and may be fragments. Tile bodies are full sentences. Prose
+   paragraphs are for reasoning, not for enumerations.
+7. **Figures are sized to their information.** A preview is a thumbnail in a
+   narrow tile; the working figure on an instrument page is large because it
+   is the object of study. Every figure says what computed it.
 
-## Page grammar
+## Layout
 
-Every page follows the same skeleton: eyebrow → `h1` → lead of at most two
-sentences → sections → `PageClose`. The site shell is one width (`--maxw`,
-1100px) for header, footer, and every page. Running copy (hero, lead, and
-direct `.page > p`) keeps a ~42rem measure. Grids, tables, and the playground
-workspace use the full shell. On small screens the header drops Install (the
-hero already has it), headings scale down, and the footer stacks.
+- **Bench.** The page is a 12-column grid whose gaps are 1px rules. Tiles span
+  3, 4, 5, 6, 7, 8, or 12 columns. At 1100px tiles go to half or full width,
+  and at 640px every tile is full width.
+- **Tile.** A header strip (ID, title, and an optional source or status at the
+  right) over a body. A new widget is a new tile, not a new page template and
+  not a second kind of card.
+- **Band.** A full-width heading row with at most one sentence. Bands separate
+  groups of tiles and are the only section headings on a bench page.
+- **Status bar.** The only site chrome: wordmark, primary navigation, check
+  count, version, licence, theme. On small screens it drops the navigation
+  links before it wraps.
+- **No sideways scroll.** A table or code block wider than its tile scrolls
+  inside the tile.
+- **Long-form pages.** Docs, Notes, and other reading pages keep a single
+  column of about 42rem inside one full-width tile. They use sentence-case
+  `h2` headings in the prose flow.
 
-Section headings: sentence-case `h2` in prose flow; the monospace uppercase
-group label (`.feature-group__label`) for grouped card sections. Don't mix the
-two on one page for peer sections.
+## Instrument grammar
 
-## Workspace grammar
+An instrument page is a title tile, then three columns that stack on small
+screens:
 
-The playground chart workspace is still ephemengine.com. It does not invent a
-second palette, typeface, or product chrome. Tokens stay `--bg` through `--warm`,
-Inter + JetBrains Mono, `.control` / `.field` / `.btn` / `.seg` / `.tabs__tab` /
-`.card`. Peach blossom (`--warm`) is only the living layer: today-strip markers,
-the provenance stamp, the reading panel, out-of-bounds.
+- **Input.** One row per constraint or parameter: glyph, label, control.
+  Fixed parameters (zodiac, span) are shown as read-only rows so the reader
+  can see every input the call receives.
+- **Output.** The count or headline result first, then the figure, then the
+  table of results, then a table showing how the result was reached.
+- **Code.** The call, then the shape it returns. Proposed or unreleased API
+  is marked in the tile header.
 
-Once the workspace is the object of the page, eyebrow → h1 → sections is the
-hero only. After that, a `.workspace` column: document bar, provenance stamp,
-today strip, figure | rail, scrubber full width. The rest of the site is
-unchanged.
+Method and limits follow as three short prose tiles. The Playground follows
+the same grammar: its document bar, provenance stamp, today strip, figure,
+rail, and scrubber are tiles on the bench. Casual and Advanced share the
+chrome, and Advanced shows more tiles.
 
-The playground uses the same `--maxw` shell as the rest of the site. The
-figure column is ~420–480px (`.workspace__figure`). Advanced adds rail density;
-it does not shrink the wheel.
+The existing vocabulary carries over and is restyled, not replaced:
 
-New widgets reuse the existing vocabulary:
+- `.card` becomes the tile.
+- `.control` and `.field` become the input rows.
+- `.btn` keeps its variants; the primary action is the violet fill.
+- `.tabs__tab` and `.seg` remain the only tab and switcher styles.
+- `.capability-grid` entries become narrow tiles.
+- Timelines (dashas, zodiacal releasing, sky dating) are stacked tracks with
+  the label and count at the left of each track.
+- Counterfactual diffs use `--good` and `--bad`.
 
-- `.workspace`: the grid, not a page template
-- `.today-strip` / `.provenance-stamp` / `.scrubber` (range input as `.control`)
-- `.rail` is `.tabs__tab` or `.seg`, not a second tab language
-- Dasha / ZR timelines are compact stacked lists
-- Counterfactual diff uses `--good` / `--bad` (`.diff-gain`, `.diff-loss`)
-- Constraint editor is labelled `.field`s
+New UI reuses these classes. Inline style objects are not the mechanism for
+anything a second component might want.
 
-Do not add a third accent, a playground-only typeface, glass, gradients,
-decorative motion, a Vedic colorway, emoji as UI, or an icon font. Casual and
-Advanced share the same chrome; Advanced shows more rail items. Kundli,
-tri-wheel, ephemeris graph, and Sky Viewfinder consume `--wheel-*` and
-`--accent`. Tradition changes the figure, not the chrome. Honor
-`prefers-reduced-motion`: jump, don't play.
+## Type
 
-## Tokens
+Three faces with fixed roles, and no others.
 
-Everything derives from the variables at the top of `globals.css`: surfaces,
-text tiers (`--text` → `--text-faint`), one accent family, the type scale,
-and the two radii. A new color or font size should be a new token or, more
-likely, an existing one.
+- **JetBrains Mono**: data, labels, tile headers, table cells, code.
+- **Barlow Condensed**, capitals, weight 600: page titles, band headings, and
+  tile titles. Keep these under about six words.
+- **Barlow**: running prose.
 
-Two accents, two meanings. The purple (`--accent`) is structural: navigation,
-links, selected states, the geometry. Peach blossom (`--peach-blossom`, with
-`--warm` as its semantic alias) is the single warm counterpoint. The hue is
-the extra-spectral one: the old name for the color on the line of purples
-that closes the spectrum into a wheel, matched by no wavelength and existing
-only in perception, a fitting companion to charts that are themselves
-constructed readings of the sky. It sits between red and the site's violet,
-so the two accents are neighbors on the wheel rather than rivals. Reserved
-for
-the living layer: markers of the actual sky (the ribbon's planet dots, the
-logo's sun) and the interpretation surfaces (reading panels, "read this
-chart", civil-time and out-of-bounds notices). Don't use it for chrome, and
-don't add a third accent.
+## Colour and tokens
+
+Everything derives from the variables at the top of `globals.css`. Dark and
+light are the same tokens with different values, and every page works in
+both. A new colour or size should be an existing token or, rarely, a new one.
+
+| Token | Dark | Light | Use |
+|-------|------|-------|-----|
+| `--bg` | `#08090b` | `#deded9` | page ground, bands, code wells |
+| `--panel` | `#0f1114` | `#fbfbf9` | tile surface |
+| `--panel2` | `#15181c` | `#f0f0ec` | hover, shaded regions of a plot |
+| `--line` | `#272b33` | `#c9c9c2` | the 1px grid rule |
+| `--line2` | `#3d434e` | `#9d9d95` | stronger rules, figure outlines |
+| `--text` | `#e7e9ec` | `#15171a` | primary text |
+| `--dim` | `#a0a7b1` | `#4d5259` | prose and secondary text |
+| `--faint` | `#6d7480` | `#7b8088` | labels and captions |
+| `--accent` | `#a596ff` | `#4a3ecf` | structural violet |
+| `--warm` | `#f283b3` | `#bf2f78` | peach blossom, the living layer |
+| `--ok` | `#8fd694` | `#28773a` | check status |
+
+Two accents, two meanings. Violet (`--accent`) is structural: navigation,
+links, selected states, primary actions, chart geometry. Peach blossom
+(`--warm`) is the single warm counterpoint, reserved for the living layer:
+markers of the computed sky, matches in a result, interpretation surfaces,
+and placeholder notices. Green and red are reserved for check status and
+diffs. Do not use peach for chrome, and do not add a third accent or a
+per-tradition colourway. Tradition changes the figure, not the chrome.
+Wheels, the kundli, the ephemeris graph, and the sky plots consume the
+`--wheel-*` tokens and `--accent`.
+
+## What is not used
+
+- No gradients, no blur or glass, no shadows, no background wash, and no
+  rounded corners. Depth comes from the 1px rule and two surface tones. Data
+  marks such as a planet dot are exempt because they are figures, not chrome.
+- No decorative motion. A control may change state, and a figure may play
+  when the visitor starts it. Honor `prefers-reduced-motion`: jump, don't
+  play.
+- No emoji as UI and no icon font. Instrument icons are single-weight line
+  SVG in the accent colour.
+- No statistic that is not in the facts files, and no adjective standing in
+  for a number.
+
+## Migration
+
+What `app/globals.css` and the layout do today that these rules remove,
+counted on 2026-11-11:
+
+- 10 gradient declarations, including the fixed star-field wash on
+  `body::before`.
+- 4 `backdrop-filter` declarations (the header, the search panel, and one
+  overlay).
+- 3 `box-shadow` declarations.
+- 23 `border-radius` declarations and the `--radius` tokens.
+- 2 `@keyframes` (`reveal-up`, `drift`) and the animations that use them.
+- Inter as `--font-sans`, loaded in `app/layout.tsx`.
+- The night-purple surface and text tokens, which the table above replaces.
+- The page skeleton of eyebrow, `h1`, lead, sections, and `PageClose`, and
+  the 1100px `--maxw` shell, which the bench and the status bar replace.
+
+The restyle should land as one change so the site never sits half in each
+grammar.
