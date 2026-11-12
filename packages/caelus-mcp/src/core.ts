@@ -3,7 +3,7 @@
  * dependency on Node.
  *
  * Design (per 2026 MCP practice): one bounded context (chart computation),
- * a small curated tool surface (36 chart tools, not API wrappers),
+ * a small curated tool surface (37 chart tools, not API wrappers),
  * and token-frugal outputs (positions to 0.01 deg, terse keys, no prose --
  * the model does the interpreting, the server does the math).
  *
@@ -47,7 +47,7 @@ import {
   registerSyntheticSystem, engineCapabilities,
   canonicalChart, canonicalDigest, canonicalTimeMs, quantizeUnit,
   canonicalChartWithRemainders,
-  dateSky, calendarDate, validatedSpanFor,
+  dateSky, calendarDate, validatedSpanFor, chartStability,
   type SyntheticSystem, type CanonicalGrid, type RemainderGrid,
   type SkyConstraint,
 } from "caelus";
@@ -678,6 +678,20 @@ const skyStamp = z.object({
   day: z.number().int(),
   ut: z.string(),
 });
+const stabilityValue = z.union([z.string(), z.number(), z.boolean(), z.null()]);
+export const chartStabilityOut = z.object({
+  utc: z.string(),
+  window: z.object({ from_utc: z.string(), to_utc: z.string(), half_width_seconds: z.number() }),
+  summary: z.object({
+    facts: z.number().int(), stable: z.number().int(),
+    by_kind: z.record(z.object({ facts: z.number().int(), stable: z.number().int() })),
+  }),
+  unstable: z.array(z.object({
+    kind: z.string(), subject: z.string(), value: stabilityValue, share: z.number(),
+    changes: z.array(z.object({ utc: z.string(), from: stabilityValue, to: stabilityValue })),
+  })),
+  stable: z.array(z.object({ kind: z.string(), subject: z.string(), value: stabilityValue })),
+});
 export const dateSkyOut = z.object({
   searched: z.object({
     start_year: z.number().int(), end_year: z.number().int(),
@@ -859,6 +873,7 @@ export const OUTPUT_SCHEMAS = {
   electional_search: electionalOut,
   cosmic_weather: cosmicWeatherOut,
   date_sky: dateSkyOut,
+  chart_stability: chartStabilityOut,
 } as const;
 
 // ---------------------------------------------------------------- server
@@ -2256,6 +2271,52 @@ export function buildServer(
       truncated: res.truncated,
       funnel: res.funnel.map((f) => ({
         constraint: f.constraint, label: f.label, windows: f.windows, days: r2(f.days),
+      })),
+    });
+  });
+
+  server.registerTool("chart_stability", {
+    description:
+      "What a chart still says when its time is uncertain. Given a date and time, an uncertainty in minutes, and optionally a place, reports which facts hold across the whole window (each body's sign, house, and direction, the signs on the Ascendant and Midheaven, day or night sect, and the aspects between bodies) and, for each fact that does not, the instants at which it changes. Use it when a birth time is rounded or approximate (15 for a quarter hour either way), or unknown (720 with the date at 12:00, which covers the whole day). Without lat and lon the angles, houses, and sect are left out. With no uncertainty given, the window is the clock error of the epoch (delta T), which only matters for dates centuries in the past.",
+    inputSchema: {
+      date: z.string().describe("UTC ISO date-time at the centre of the window"),
+      lat: latSchema.optional(),
+      lon: lonSchema.optional(),
+      uncertainty_minutes: z.number().min(0).max(720).optional()
+        .describe("how far the true time may be from the stated one, either way, in minutes (max 720)"),
+      house_system: houseSys, zodiac: zodiacSchema,
+    },
+  }, async ({ date, lat, lon, uncertainty_minutes, house_system, zodiac }) => {
+    if ((lat === undefined) !== (lon === undefined)) {
+      throw new Error("chart_stability: give both lat and lon, or neither");
+    }
+    const res = chartStability(engine, jdFromIso(date), {
+      lat, lonEast: lon,
+      halfWidthSeconds: uncertainty_minutes === undefined ? undefined : uncertainty_minutes * 60,
+      houseSystem: normalizeHouseSystem(house_system), zodiac,
+    });
+    const byKind: Record<string, { facts: number; stable: number }> = {};
+    for (const f of res.facts) {
+      const k = (byKind[f.kind] ??= { facts: 0, stable: 0 });
+      k.facts++;
+      if (f.stable) k.stable++;
+    }
+    return text({
+      utc: date,
+      window: {
+        from_utc: isoFromJd(res.from), to_utc: isoFromJd(res.to),
+        half_width_seconds: Math.round(res.halfWidthSeconds * 100) / 100,
+      },
+      summary: { ...res.summary, by_kind: byKind },
+      unstable: res.facts.filter((f) => !f.stable).map((f) => ({
+        kind: f.kind, subject: f.subject, value: f.value,
+        share: Math.round(f.share * 1000) / 1000,
+        changes: f.segments.slice(1).map((s, i) => ({
+          utc: isoFromJd(s.from), from: f.segments[i].value, to: s.value,
+        })),
+      })),
+      stable: res.facts.filter((f) => f.stable).map((f) => ({
+        kind: f.kind, subject: f.subject, value: f.value,
       })),
     });
   });

@@ -28,7 +28,7 @@ import {
   detectPatterns, detectPatternsIn, chartSignature, parans,
   chartFeatures, configurationFit,
   dignityScore, voidOfCourse,
-  synastryAspects, dateSky,
+  synastryAspects, dateSky, chartStability,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -725,6 +725,55 @@ const assertExactHits = (hits, body, targetLonAt, angle, label, tolDeg = 0.02) =
   assert(unknown.isError === true, "date_sky: unknown body rejected");
   const noArc = await client.callTool({ name: "date_sky", arguments: { constraints: [{ body: "sun" }], start_year: 2000, end_year: 2001 } });
   assert(noArc.isError === true, "date_sky: a constraint with no arc is rejected");
+}
+
+// ---------------------------------------------------------------- chart_stability
+{
+  const iso = "1990-06-10T18:30:00Z";
+  const jd = jdFromIso(iso);
+  const res = await call("chart_stability", { date: iso, lat: 27.95, lon: -82.46, uncertainty_minutes: 15 });
+  const direct = chartStability(eng, jd, { lat: 27.95, lonEast: -82.46, halfWidthSeconds: 900 });
+  assert(res.summary.facts === direct.summary.facts && res.summary.stable === direct.summary.stable,
+    `chart_stability: summary matches the engine (${JSON.stringify(res.summary)})`);
+  assert(res.window.half_width_seconds === 900 && res.window.from_utc === "1990-06-10T18:15:00Z"
+    && res.window.to_utc === "1990-06-10T18:45:00Z", `chart_stability: window is the stated time plus and minus 15 minutes (${JSON.stringify(res.window)})`);
+  assert(res.stable.length + res.unstable.length === res.summary.facts, "chart_stability: every fact is listed once");
+  const kinds = Object.values(res.summary.by_kind);
+  assert(kinds.reduce((n, k) => n + k.facts, 0) === res.summary.facts
+    && kinds.reduce((n, k) => n + k.stable, 0) === res.summary.stable, "chart_stability: by_kind adds up");
+  // each unstable fact's changes are the engine's segment boundaries
+  for (const u of res.unstable) {
+    const f = direct.facts.find((x) => x.kind === u.kind && x.subject === u.subject);
+    assert(f && !f.stable && u.changes.length === f.segments.length - 1, `chart_stability: ${u.kind} ${u.subject} has the engine's changes`);
+    assert(u.value === f.value, `chart_stability: ${u.kind} ${u.subject} value at the stated instant`);
+    u.changes.forEach((c, i) => {
+      assert(c.from === f.segments[i].value && c.to === f.segments[i + 1].value,
+        `chart_stability: ${u.kind} ${u.subject} change ${i} goes ${c.from} to ${c.to}`);
+      assert(Math.abs(jdFromIso(c.utc) - f.segments[i + 1].from) < 1.5 / 86400, `chart_stability: ${u.kind} ${u.subject} change ${i} instant`);
+    });
+  }
+  // a stable fact is the engine's value
+  const sunSign = res.stable.find((x) => x.kind === "sign" && x.subject === "sun");
+  assert(sunSign && sunSign.value === SIGNS[Math.floor(eng.longitude("sun", jd) / 30)], "chart_stability: the Sun's sign is the engine's");
+
+  // a date with no time: the angles and every house change, the signs do not
+  const day = await call("chart_stability", { date: "1990-06-10T12:00:00Z", lat: 27.95, lon: -82.46, uncertainty_minutes: 720 });
+  assert(day.summary.by_kind.angle_sign.stable === 0 && day.summary.by_kind.house.stable === 0, "chart_stability: no angle or house survives a whole day");
+  assert(day.summary.by_kind.sign.stable >= day.summary.by_kind.sign.facts - 1, "chart_stability: at most the Moon changes sign in a day");
+
+  // no place: no angles, houses, or sect
+  const bare = await call("chart_stability", { date: iso, uncertainty_minutes: 60 });
+  assert(!("angle_sign" in bare.summary.by_kind) && !("house" in bare.summary.by_kind) && !("sect" in bare.summary.by_kind),
+    "chart_stability: without a place there are no angles, houses, or sect");
+
+  // default window is the delta-T sigma: under a second for a modern date
+  const modern = await call("chart_stability", { date: iso, lat: 27.95, lon: -82.46 });
+  assert(modern.window.half_width_seconds < 1, `chart_stability: modern default window is under a second (${modern.window.half_width_seconds})`);
+
+  const half = await client.callTool({ name: "chart_stability", arguments: { date: iso, lat: 27.95 } });
+  assert(half.isError === true, "chart_stability: lat without lon is rejected");
+  const tooWide = await client.callTool({ name: "chart_stability", arguments: { date: iso, uncertainty_minutes: 2000 } });
+  assert(tooWide.isError === true, "chart_stability: more than 720 minutes is rejected");
 }
 
 // ------------------------------------------------- chart_facts exotic anchors

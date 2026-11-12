@@ -351,3 +351,24 @@ The tool refuses a span outside the validated range of the bodies named, and
 the error states the years this server's data covers. A stdio server with the
 era packs reaches about 3000 BCE for the Sun, the Moon, and Mercury through
 Saturn. The hosted endpoint runs the embedded tier and covers 1000 to 3000.
+
+## Uncertain times (roadmap milestone 2, unreleased)
+`chart_stability` exposes the engine's `chartStability`. The caller gives a
+stated time, how far the true time may be from it, and optionally a place,
+and the tool reports which of the chart's facts hold across that window. The
+engine function is pinned by `stability-golden`; `verify_tools` pins the tool
+to it (summary, window, each change and its instant, and the refusals), and
+two frozen `golden-mcp` payloads hold the format. Thirty-seven tools total.
+
+### chart_stability(date, lat?, lon?, uncertainty_minutes?, house_system?, zodiac?)
+`uncertainty_minutes` is the half-width of the window, at most 720. Left out,
+the window is the one-sigma uncertainty of delta T at the epoch. `lat` and
+`lon` go together; without them the angles, houses, and sect are not computed.
+
+Returns `{utc, window, summary, unstable, stable}`. `window` is
+`{from_utc, to_utc, half_width_seconds}`. `summary` is `{facts, stable}` plus
+`by_kind`, the same two counts per kind (`angle_sign`, `sect`, `sign`,
+`house`, `retrograde`, `aspect`). Each entry of `unstable` is
+`{kind, subject, value, share, changes}`: `value` is the fact at the stated
+time, `share` the fraction of the window in which it holds, and `changes` a
+list of `{utc, from, to}`. Each entry of `stable` is `{kind, subject, value}`.

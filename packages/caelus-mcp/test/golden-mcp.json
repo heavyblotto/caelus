@@ -3116,6 +3116,658 @@
       ]
     }
   },
+  "chart-stability-quarter-hour": {
+    "tool": "chart_stability",
+    "args": {
+      "date": "1990-06-10T18:30:00Z",
+      "lat": 27.95,
+      "lon": -82.46,
+      "uncertainty_minutes": 15
+    },
+    "payload": {
+      "utc": "1990-06-10T18:30:00Z",
+      "window": {
+        "from_utc": "1990-06-10T18:15:00Z",
+        "to_utc": "1990-06-10T18:45:00Z",
+        "half_width_seconds": 900
+      },
+      "summary": {
+        "facts": 61,
+        "stable": 60,
+        "by_kind": {
+          "angle_sign": {
+            "facts": 2,
+            "stable": 2
+          },
+          "sect": {
+            "facts": 1,
+            "stable": 1
+          },
+          "sign": {
+            "facts": 13,
+            "stable": 13
+          },
+          "house": {
+            "facts": 13,
+            "stable": 12
+          },
+          "retrograde": {
+            "facts": 9,
+            "stable": 9
+          },
+          "aspect": {
+            "facts": 23,
+            "stable": 23
+          }
+        }
+      },
+      "unstable": [
+        {
+          "kind": "house",
+          "subject": "true_node",
+          "value": 5,
+          "share": 0.938,
+          "changes": [
+            {
+              "utc": "1990-06-10T18:43:08Z",
+              "from": 5,
+              "to": 4
+            }
+          ]
+        }
+      ],
+      "stable": [
+        {
+          "kind": "angle_sign",
+          "subject": "asc",
+          "value": "Libra"
+        },
+        {
+          "kind": "angle_sign",
+          "subject": "mc",
+          "value": "Cancer"
+        },
+        {
+          "kind": "sect",
+          "subject": "chart",
+          "value": "day"
+        },
+        {
+          "kind": "sign",
+          "subject": "sun",
+          "value": "Gemini"
+        },
+        {
+          "kind": "sign",
+          "subject": "moon",
+          "value": "Capricorn"
+        },
+        {
+          "kind": "sign",
+          "subject": "mercury",
+          "value": "Taurus"
+        },
+        {
+          "kind": "sign",
+          "subject": "venus",
+          "value": "Taurus"
+        },
+        {
+          "kind": "sign",
+          "subject": "mars",
+          "value": "Aries"
+        },
+        {
+          "kind": "sign",
+          "subject": "jupiter",
+          "value": "Cancer"
+        },
+        {
+          "kind": "sign",
+          "subject": "saturn",
+          "value": "Capricorn"
+        },
+        {
+          "kind": "sign",
+          "subject": "uranus",
+          "value": "Capricorn"
+        },
+        {
+          "kind": "sign",
+          "subject": "neptune",
+          "value": "Capricorn"
+        },
+        {
+          "kind": "sign",
+          "subject": "pluto",
+          "value": "Scorpio"
+        },
+        {
+          "kind": "sign",
+          "subject": "chiron",
+          "value": "Cancer"
+        },
+        {
+          "kind": "sign",
+          "subject": "mean_node",
+          "value": "Aquarius"
+        },
+        {
+          "kind": "sign",
+          "subject": "true_node",
+          "value": "Aquarius"
+        },
+        {
+          "kind": "house",
+          "subject": "sun",
+          "value": 9
+        },
+        {
+          "kind": "house",
+          "subject": "moon",
+          "value": 4
+        },
+        {
+          "kind": "house",
+          "subject": "mercury",
+          "value": 8
+        },
+        {
+          "kind": "house",
+          "subject": "venus",
+          "value": 8
+        },
+        {
+          "kind": "house",
+          "subject": "mars",
+          "value": 7
+        },
+        {
+          "kind": "house",
+          "subject": "jupiter",
+          "value": 10
+        },
+        {
+          "kind": "house",
+          "subject": "saturn",
+          "value": 4
+        },
+        {
+          "kind": "house",
+          "subject": "uranus",
+          "value": 4
+        },
+        {
+          "kind": "house",
+          "subject": "neptune",
+          "value": 4
+        },
+        {
+          "kind": "house",
+          "subject": "pluto",
+          "value": 2
+        },
+        {
+          "kind": "house",
+          "subject": "chiron",
+          "value": 10
+        },
+        {
+          "kind": "house",
+          "subject": "mean_node",
+          "value": 5
+        },
+        {
+          "kind": "retrograde",
+          "subject": "mercury",
+          "value": false
+        },
+        {
+          "kind": "retrograde",
+          "subject": "venus",
+          "value": false
+        },
+        {
+          "kind": "retrograde",
+          "subject": "mars",
+          "value": false
+        },
+        {
+          "kind": "retrograde",
+          "subject": "jupiter",
+          "value": false
+        },
+        {
+          "kind": "retrograde",
+          "subject": "saturn",
+          "value": true
+        },
+        {
+          "kind": "retrograde",
+          "subject": "uranus",
+          "value": true
+        },
+        {
+          "kind": "retrograde",
+          "subject": "neptune",
+          "value": true
+        },
+        {
+          "kind": "retrograde",
+          "subject": "pluto",
+          "value": true
+        },
+        {
+          "kind": "retrograde",
+          "subject": "chiron",
+          "value": false
+        },
+        {
+          "kind": "aspect",
+          "subject": "moon-venus",
+          "value": "trine"
+        },
+        {
+          "kind": "aspect",
+          "subject": "moon-jupiter",
+          "value": "opposition"
+        },
+        {
+          "kind": "aspect",
+          "subject": "moon-uranus",
+          "value": "conjunction"
+        },
+        {
+          "kind": "aspect",
+          "subject": "moon-neptune",
+          "value": "conjunction"
+        },
+        {
+          "kind": "aspect",
+          "subject": "moon-pluto",
+          "value": "sextile"
+        },
+        {
+          "kind": "aspect",
+          "subject": "moon-chiron",
+          "value": "opposition"
+        },
+        {
+          "kind": "aspect",
+          "subject": "mercury-saturn",
+          "value": "trine"
+        },
+        {
+          "kind": "aspect",
+          "subject": "venus-jupiter",
+          "value": "sextile"
+        },
+        {
+          "kind": "aspect",
+          "subject": "venus-uranus",
+          "value": "trine"
+        },
+        {
+          "kind": "aspect",
+          "subject": "venus-neptune",
+          "value": "trine"
+        },
+        {
+          "kind": "aspect",
+          "subject": "venus-pluto",
+          "value": "opposition"
+        },
+        {
+          "kind": "aspect",
+          "subject": "venus-chiron",
+          "value": "sextile"
+        },
+        {
+          "kind": "aspect",
+          "subject": "mars-uranus",
+          "value": "square"
+        },
+        {
+          "kind": "aspect",
+          "subject": "mars-neptune",
+          "value": "square"
+        },
+        {
+          "kind": "aspect",
+          "subject": "jupiter-uranus",
+          "value": "opposition"
+        },
+        {
+          "kind": "aspect",
+          "subject": "jupiter-neptune",
+          "value": "opposition"
+        },
+        {
+          "kind": "aspect",
+          "subject": "jupiter-pluto",
+          "value": "trine"
+        },
+        {
+          "kind": "aspect",
+          "subject": "jupiter-chiron",
+          "value": "conjunction"
+        },
+        {
+          "kind": "aspect",
+          "subject": "uranus-neptune",
+          "value": "conjunction"
+        },
+        {
+          "kind": "aspect",
+          "subject": "uranus-chiron",
+          "value": "opposition"
+        },
+        {
+          "kind": "aspect",
+          "subject": "neptune-pluto",
+          "value": "sextile"
+        },
+        {
+          "kind": "aspect",
+          "subject": "neptune-chiron",
+          "value": "opposition"
+        },
+        {
+          "kind": "aspect",
+          "subject": "pluto-chiron",
+          "value": "trine"
+        }
+      ]
+    }
+  },
+  "chart-stability-no-place": {
+    "tool": "chart_stability",
+    "args": {
+      "date": "1990-06-10T18:30:00Z",
+      "uncertainty_minutes": 120
+    },
+    "payload": {
+      "utc": "1990-06-10T18:30:00Z",
+      "window": {
+        "from_utc": "1990-06-10T16:30:00Z",
+        "to_utc": "1990-06-10T20:30:00Z",
+        "half_width_seconds": 7200
+      },
+      "summary": {
+        "facts": 47,
+        "stable": 45,
+        "by_kind": {
+          "sign": {
+            "facts": 13,
+            "stable": 13
+          },
+          "retrograde": {
+            "facts": 9,
+            "stable": 9
+          },
+          "aspect": {
+            "facts": 25,
+            "stable": 23
+          }
+        }
+      },
+      "unstable": [
+        {
+          "kind": "aspect",
+          "subject": "moon-mars",
+          "value": null,
+          "share": 0.859,
+          "changes": [
+            {
+              "utc": "1990-06-10T17:03:51Z",
+              "from": "square",
+              "to": null
+            }
+          ]
+        },
+        {
+          "kind": "aspect",
+          "subject": "moon-saturn",
+          "value": null,
+          "share": 0.98,
+          "changes": [
+            {
+              "utc": "1990-06-10T20:25:10Z",
+              "from": null,
+              "to": "conjunction"
+            }
+          ]
+        }
+      ],
+      "stable": [
+        {
+          "kind": "sign",
+          "subject": "sun",
+          "value": "Gemini"
+        },
+        {
+          "kind": "sign",
+          "subject": "moon",
+          "value": "Capricorn"
+        },
+        {
+          "kind": "sign",
+          "subject": "mercury",
+          "value": "Taurus"
+        },
+        {
+          "kind": "sign",
+          "subject": "venus",
+          "value": "Taurus"
+        },
+        {
+          "kind": "sign",
+          "subject": "mars",
+          "value": "Aries"
+        },
+        {
+          "kind": "sign",
+          "subject": "jupiter",
+          "value": "Cancer"
+        },
+        {
+          "kind": "sign",
+          "subject": "saturn",
+          "value": "Capricorn"
+        },
+        {
+          "kind": "sign",
+          "subject": "uranus",
+          "value": "Capricorn"
+        },
+        {
+          "kind": "sign",
+          "subject": "neptune",
+          "value": "Capricorn"
+        },
+        {
+          "kind": "sign",
+          "subject": "pluto",
+          "value": "Scorpio"
+        },
+        {
+          "kind": "sign",
+          "subject": "chiron",
+          "value": "Cancer"
+        },
+        {
+          "kind": "sign",
+          "subject": "mean_node",
+          "value": "Aquarius"
+        },
+        {
+          "kind": "sign",
+          "subject": "true_node",
+          "value": "Aquarius"
+        },
+        {
+          "kind": "retrograde",
+          "subject": "mercury",
+          "value": false
+        },
+        {
+          "kind": "retrograde",
+          "subject": "venus",
+          "value": false
+        },
+        {
+          "kind": "retrograde",
+          "subject": "mars",
+          "value": false
+        },
+        {
+          "kind": "retrograde",
+          "subject": "jupiter",
+          "value": false
+        },
+        {
+          "kind": "retrograde",
+          "subject": "saturn",
+          "value": true
+        },
+        {
+          "kind": "retrograde",
+          "subject": "uranus",
+          "value": true
+        },
+        {
+          "kind": "retrograde",
+          "subject": "neptune",
+          "value": true
+        },
+        {
+          "kind": "retrograde",
+          "subject": "pluto",
+          "value": true
+        },
+        {
+          "kind": "retrograde",
+          "subject": "chiron",
+          "value": false
+        },
+        {
+          "kind": "aspect",
+          "subject": "moon-venus",
+          "value": "trine"
+        },
+        {
+          "kind": "aspect",
+          "subject": "moon-jupiter",
+          "value": "opposition"
+        },
+        {
+          "kind": "aspect",
+          "subject": "moon-uranus",
+          "value": "conjunction"
+        },
+        {
+          "kind": "aspect",
+          "subject": "moon-neptune",
+          "value": "conjunction"
+        },
+        {
+          "kind": "aspect",
+          "subject": "moon-pluto",
+          "value": "sextile"
+        },
+        {
+          "kind": "aspect",
+          "subject": "moon-chiron",
+          "value": "opposition"
+        },
+        {
+          "kind": "aspect",
+          "subject": "mercury-saturn",
+          "value": "trine"
+        },
+        {
+          "kind": "aspect",
+          "subject": "venus-jupiter",
+          "value": "sextile"
+        },
+        {
+          "kind": "aspect",
+          "subject": "venus-uranus",
+          "value": "trine"
+        },
+        {
+          "kind": "aspect",
+          "subject": "venus-neptune",
+          "value": "trine"
+        },
+        {
+          "kind": "aspect",
+          "subject": "venus-pluto",
+          "value": "opposition"
+        },
+        {
+          "kind": "aspect",
+          "subject": "venus-chiron",
+          "value": "sextile"
+        },
+        {
+          "kind": "aspect",
+          "subject": "mars-uranus",
+          "value": "square"
+        },
+        {
+          "kind": "aspect",
+          "subject": "mars-neptune",
+          "value": "square"
+        },
+        {
+          "kind": "aspect",
+          "subject": "jupiter-uranus",
+          "value": "opposition"
+        },
+        {
+          "kind": "aspect",
+          "subject": "jupiter-neptune",
+          "value": "opposition"
+        },
+        {
+          "kind": "aspect",
+          "subject": "jupiter-pluto",
+          "value": "trine"
+        },
+        {
+          "kind": "aspect",
+          "subject": "jupiter-chiron",
+          "value": "conjunction"
+        },
+        {
+          "kind": "aspect",
+          "subject": "uranus-neptune",
+          "value": "conjunction"
+        },
+        {
+          "kind": "aspect",
+          "subject": "uranus-chiron",
+          "value": "opposition"
+        },
+        {
+          "kind": "aspect",
+          "subject": "neptune-pluto",
+          "value": "sextile"
+        },
+        {
+          "kind": "aspect",
+          "subject": "neptune-chiron",
+          "value": "opposition"
+        },
+        {
+          "kind": "aspect",
+          "subject": "pluto-chiron",
+          "value": "trine"
+        }
+      ]
+    }
+  },
   "date-sky-waning-scorpio-moon": {
     "tool": "date_sky",
     "args": {

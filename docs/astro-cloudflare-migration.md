@@ -129,7 +129,7 @@ The Workbench restyle of the rest of the site is out of scope for this branch.
 | `/embed/chart` | Static shell, hydrated on load. |
 | `/instruments/sky-dating` | Static, with the widget hydrated in the browser. |
 | `/api/chart` | Worker. See the section on the float difference above. |
-| `/api/mcp` | Worker. Stateless, JSON responses, 36 tools. |
+| `/api/mcp` | Worker. Stateless, JSON responses, 37 tools. |
 | `robots.txt`, `sitemap.xml`, `/icon.svg`, `/opengraph-image` | Static files written at build time. The Open Graph PNG is byte-identical to Next's. |
 | `/about`, `/favicon.ico` | 307 redirects, via `_redirects`. |
 | Unknown paths | 404 with the existing not-found page. |

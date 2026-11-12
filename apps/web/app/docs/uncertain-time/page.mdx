@@ -84,6 +84,13 @@ by a degree, and `chartStability` then reports which facts that clock error
 can change. The same uncertainty appears as the `delta_t_uncertain` warning on
 a chart and as the `epochSigma` block in canonical output.
 
+## From an AI client
+
+The MCP server exposes this as the `chart_stability` tool. It takes the stated
+time, `uncertainty_minutes`, and an optional place, and it returns the stable
+facts as a list and each unstable fact with the times it changes. Setup is in
+the [MCP guide](/docs/mcp).
+
 ## Options
 
 | Option | Default | Meaning |

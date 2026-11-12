@@ -117,6 +117,10 @@ export const GOLDEN_CASES = [
       { body: "jupiter", sign: "Pisces" }, { body: "venus", sign: "Taurus" },
       { body: "saturn", sign: "Cancer" }, { body: "mars", sign: "Gemini" },
     ], start_year: -499, end_year: -300 } },
+  { id: "chart-stability-quarter-hour", tool: "chart_stability",
+    args: { date: "1990-06-10T18:30:00Z", lat: 27.95, lon: -82.46, uncertainty_minutes: 15 } },
+  { id: "chart-stability-no-place", tool: "chart_stability",
+    args: { date: "1990-06-10T18:30:00Z", uncertainty_minutes: 120 } },
   { id: "date-sky-waning-scorpio-moon", tool: "date_sky",
     args: { constraints: [
       { elongation: ["moon", "sun"], from: 180, to: 360 },

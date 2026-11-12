@@ -111,6 +111,11 @@ current figures live in `packages/caelus/accuracy.json` and on
 
 ### MCP (`caelus-mcp`)
 
+- **`chart_stability`** exposes chart stability, which brings the server to
+  37 tools. It takes a stated time, an uncertainty in minutes (at most 720),
+  and an optional place, and it returns the stable facts as a list and each
+  unstable fact with the times it changes. `verify_tools` pins it to the
+  engine, and two frozen payloads hold the format.
 - **`date_sky`** exposes sky dating, which brings the server to 36 tools. It
   takes the constraints and a span of astronomical years, and it returns each
   window with its calendar date (Julian before 15 October 1582), an era label
