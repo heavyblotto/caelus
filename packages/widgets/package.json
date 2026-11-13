@@ -8,7 +8,7 @@
   "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "node dist/test/plate.test.js && node dist/test/derivation.test.js && node dist/test/wheel-anatomy.test.js && node dist/test/house-comparator.test.js && node dist/test/zodiac-drift.test.js && node dist/test/aspect-dial.test.js && node dist/test/retrograde-scrub.test.js && node dist/test/sect-flip.test.js && node dist/test/sky-dating.test.js && node dist/test/harness.test.js"
+    "test": "node dist/test/plate.test.js && node dist/test/derivation.test.js && node dist/test/wheel-anatomy.test.js && node dist/test/house-comparator.test.js && node dist/test/zodiac-drift.test.js && node dist/test/aspect-dial.test.js && node dist/test/retrograde-scrub.test.js && node dist/test/sect-flip.test.js && node dist/test/sky-dating.test.js && node dist/test/chart-stability.test.js && node dist/test/harness.test.js"
   },
   "license": "MIT",
   "peerDependencies": {
@@ -106,6 +106,14 @@
     "./sky-dating-widget": {
       "types": "./dist/src/sky-dating-widget.d.ts",
       "default": "./dist/src/sky-dating-widget.js"
+    },
+    "./chart-stability": {
+      "types": "./dist/src/chart-stability.d.ts",
+      "default": "./dist/src/chart-stability.js"
+    },
+    "./chart-stability-widget": {
+      "types": "./dist/src/chart-stability-widget.d.ts",
+      "default": "./dist/src/chart-stability-widget.js"
     },
     "./package.json": "./package.json"
   }

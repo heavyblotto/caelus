@@ -15,7 +15,11 @@
  * station. `snapOnRelease={false}` leaves the index where it dropped.
  * Pointer-down cancels the browser's selection gesture and listens on
  * `document`, so a path that leaves the 1px rule keeps scrubbing.
- * More than six stations stack on two rows so labels do not collide.
+ * More than six stations stack on two rows. Within a row a label sits
+ * under its tick, and where the rail is too narrow for that it is pushed
+ * right until it clears the label before it, so labels do not collide at
+ * any width. The push is plain CSS (`max()`), so it needs no measuring and
+ * the render stays the same on the server and in the browser.
  */
 import type { PointerEvent, ReactElement } from "react";
 import { PLATE_TOKENS } from "caelus-wheel";
@@ -45,6 +49,33 @@ export interface PlateConsoleProps {
 }
 
 const clamp01 = (x: number): number => Math.max(0, Math.min(1, x));
+
+// A station label is 10px mono with 0.06em tracking: about 6.8px a character
+// in the faces the stack can resolve to. GAP is the least space between two
+// labels on one row.
+const LABEL_CH = 6.8;
+const LABEL_GAP = 8;
+
+/**
+ * The CSS `left` of each station label. A label wants to be centred under
+ * its tick. Its left edge is the larger of that position and the right edge
+ * of the label before it on the same row, plus a gap. Since that edge is
+ * itself such a maximum, the value is one `max()` over a term per earlier
+ * label on the row. A station at the end of the rail is anchored to the
+ * right edge and takes no part in the chain.
+ */
+export function labelLefts(stations: ConsoleStation[], rowOf: (i: number) => number): string[] {
+  const rows = new Map<number, Array<{ pct: number; px: number }>>();
+  return stations.map((s, i) => {
+    if (s.t >= 1) return "100%";
+    const w = s.label.length * LABEL_CH;
+    const natural = s.t <= 0 ? { pct: 0, px: 0 } : { pct: s.t * 100, px: -w / 2 };
+    const terms = [natural, ...(rows.get(rowOf(i)) ?? [])];
+    rows.set(rowOf(i), terms.map((t) => ({ pct: t.pct, px: t.px + w + LABEL_GAP })));
+    const css = terms.map((t) => `calc(${Number(t.pct.toFixed(3))}% + ${Number(t.px.toFixed(1))}px)`);
+    return css.length === 1 ? css[0] : `max(${css.join(", ")})`;
+  });
+}
 
 export function PlateConsole({
   t, stations, datum, onScrub, snapOnRelease = true,
@@ -100,6 +131,8 @@ export function PlateConsole({
       }
     : { style: {} };
   const twoRow = (stations?.length ?? 0) > 6;
+  const rowOf = (i: number): number => (twoRow && i % 2 === 1 ? 1 : 0);
+  const lefts = stations ? labelLefts(stations, rowOf) : [];
 
   return (
     <div style={{
@@ -183,12 +216,9 @@ export function PlateConsole({
                 : {})}
               style={{
                 position: "absolute",
-                left: `${s.t * 100}%`,
-                top: twoRow && i % 2 === 1 ? "16px" : "0",
-                transform:
-                  s.t <= 0 ? "none"
-                    : s.t >= 1 ? "translateX(-100%)"
-                      : "translateX(-50%)",
+                left: lefts[i],
+                top: rowOf(i) === 1 ? "16px" : "0",
+                transform: s.t >= 1 ? "translateX(-100%)" : "none",
                 fontSize: "10px",
                 letterSpacing: "0.06em",
                 textTransform: "uppercase",

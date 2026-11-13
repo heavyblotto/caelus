@@ -36,12 +36,15 @@ Counts in `apps/web/app/globals.css`, before and after:
 | `@keyframes` | 2 | 0 |
 | `transition` | 14 | 0, apart from the reduced-motion override |
 
-## Known rough edges
+## Rough edges, and what became of them
 
-- The station labels under the home sky's scrubber overlap at phone width.
-  They are drawn by `PlateConsole` in `packages/widgets`, which this change
-  did not touch.
+- The station labels under the home sky's scrubber overlapped at phone
+  width. Fixed afterwards in `packages/widgets/src/console.tsx`: a label is
+  pushed right until it clears the one before it on its row.
+- The Playground's parts had no tile headers. Added afterwards (DOC, NOW,
+  FIG, RAIL, TIME), as markup only.
 - The ecliptic ribbon on the home page is small at phone width, as it was
-  before.
-- The Playground's parts sit between rules as tiles but have no tile headers
-  or IDs. Adding them means changing `Workspace.tsx`.
+  before the restyle.
+
+The screenshots here predate those two fixes and the Instruments item in the
+navigation.

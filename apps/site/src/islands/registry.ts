@@ -19,4 +19,5 @@ export const registry: Record<string, Loader> = {
   PlaygroundExamples: () => import("@web/components/PlaygroundPanels").then((m) => m.PlaygroundExamples),
   PlaygroundStickyBar: () => import("@web/components/PlaygroundStickyBar").then((m) => m.default),
   SkyDating: () => import("@web/app/instruments/sky-dating/SkyDatingIsland").then((m) => m.default),
+  ChartStability: () => import("@web/app/instruments/uncertain-time/ChartStabilityIsland").then((m) => m.default),
 };

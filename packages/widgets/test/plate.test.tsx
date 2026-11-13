@@ -9,7 +9,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { VERSION } from "caelus";
 import { PLATE_TOKENS } from "caelus-wheel";
 import { PlateFrame } from "../src/frame.js";
-import { PlateConsole, type ConsoleStation } from "../src/console.js";
+import { labelLefts, PlateConsole, type ConsoleStation } from "../src/console.js";
 import type { WidgetSpec } from "../src/spec.js";
 import type { PlateRecord } from "../src/registry.js";
 
@@ -94,6 +94,29 @@ const STATIONS: ConsoleStation[] = [
   );
   assert(crowded.includes("height:32px"), "console: crowded stations use two rows");
   assert(crowded.includes("top:16px"), "console: odd stations sit on the second row");
+  // Labels on a row cannot collide at any rail width: each left edge is the
+  // larger of its place under the tick and the edge of the label before it.
+  const lefts = labelLefts([
+    { id: "a", label: "VIEW", t: 0 },
+    { id: "b", label: "HORIZON", t: 0.08 },
+    { id: "c", label: "ZODIAC", t: 0.16 },
+    { id: "d", label: "WHEEL", t: 1 },
+  ], () => 0);
+  assert(lefts[0] === "calc(0% + 0px)", `console: the first label starts at the rail's left edge (${lefts[0]})`);
+  assert(lefts[1] === "max(calc(8% + -23.8px), calc(0% + 35.2px))", `console: the second clears the first (${lefts[1]})`);
+  assert(lefts[2] === "max(calc(16% + -20.4px), calc(8% + 31.8px), calc(0% + 90.8px))", `console: the third clears both (${lefts[2]})`);
+  assert(lefts[3] === "100%", "console: a station at the end is anchored to the right edge");
+  // evaluate the CSS for a few rail widths and check nothing overlaps
+  const px = (css: string, rail: number): number => Math.max(...[...css.matchAll(/calc\(([\d.]+)% \+ (-?[\d.]+)px\)/g)]
+    .map((m) => (Number(m[1]) / 100) * rail + Number(m[2])));
+  for (const rail of [180, 235, 340, 815]) {
+    const edges = lefts.slice(0, 3).map((css) => px(css, rail));
+    const widths = [4, 7, 6].map((n) => n * 6.8);
+    assert(edges[1] >= edges[0] + widths[0] + 8 - 1e-9 && edges[2] >= edges[1] + widths[1] + 8 - 1e-9,
+      `console: labels clear each other on a ${rail}px rail`);
+  }
+  assert(Math.abs(px(lefts[2], 815) - (0.16 * 815 - 20.4)) < 1e-9, "console: on a wide rail a label sits centred under its tick");
+  assert(crowded.includes("max(calc("), "console: the rendered labels carry the push");
 }
 
 // ---------------------------------------------------------------- types

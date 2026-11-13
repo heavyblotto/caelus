@@ -512,6 +512,7 @@ export default function Workspace() {
       ) : (
         <>
           <div className="workspace__chrome">
+            <div className="tile__h"><b>DOC</b><span>The chart</span></div>
             <div className="workspace__chrome-row">
               <div className="seg" role="group" aria-label="Tradition">
                 <button type="button" className="seg__btn" aria-pressed={tradition === "western"} onClick={() => switchTradition("western")}>Western</button>
@@ -620,6 +621,7 @@ export default function Workspace() {
           )}
           {error && <p style={{ color: "var(--bad)", margin: 0 }}>{error}</p>}
 
+          {today && <div className="tile__h"><b>NOW</b><span>Today against this chart</span></div>}
           {today && (
             <div className="today-strip" aria-label="Today">
               <span className="today-strip__item">Moon <strong>{fmtLon(today.moon)}</strong></span>
@@ -640,6 +642,7 @@ export default function Workspace() {
           {(chart || formWheel) && (
             <div className="workspace__body">
               <div className="workspace__figure">
+                <div className="tile__h"><b>FIG</b><span>Figure</span></div>
                 {docKind === "birth" && (
                   <div className="seg seg--wrap" role="group" aria-label="Figure" style={{ marginBottom: "0.6rem" }}>
                     {figureOpts.map(([id, name]) => (
@@ -712,6 +715,7 @@ export default function Workspace() {
                 )}
               </div>
               <div className="workspace__rail">
+                <div className="tile__h"><b>RAIL</b><span>Technique</span></div>
                 <div className="tabs__list" role="tablist" aria-label="Technique" style={{ marginBottom: "0.8rem" }}>
                   {rails.map((id) => (
                     <button key={id} type="button" role="tab" className="tabs__tab" aria-selected={rail === id} onClick={() => setRail(id)}>
@@ -781,6 +785,9 @@ export default function Workspace() {
             </div>
           )}
 
+          {docKind === "birth" && natalJd != null && (
+            <div className="tile__h"><b>TIME</b><span>Timing target</span></div>
+          )}
           {docKind === "birth" && natalJd != null && (
             <div className="scrubber">
               <span className="field__label">target date</span>

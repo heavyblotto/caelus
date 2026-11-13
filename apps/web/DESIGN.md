@@ -179,9 +179,9 @@ Still to do, none of it blocking:
 - Some components carry inline style objects for spacing and colour
   (`RailPanels.tsx`, the playground tabs). They read the aliased tokens, so
   they render correctly, but they are not the mechanism this file asks for.
-- The Playground is restyled, not restructured: its parts sit between rules
-  as tiles, without tile headers or IDs. Giving it the full instrument
-  grammar means changing `Workspace.tsx`.
+- The Playground's parts have tile headers with IDs (DOC, NOW, FIG, RAIL,
+  TIME) and sit between rules, but it is still one component with its own
+  layout classes, not tiles on the bench grid.
 - The guides under `app/docs` open with an inline-styled label `div` above
   their title. It renders as the label does elsewhere.
 - The alias token names can be renamed away file by file.
