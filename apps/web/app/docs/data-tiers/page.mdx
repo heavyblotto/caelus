@@ -88,7 +88,8 @@ Node tier when you need extended bodies, event search, or the wide range.
   code={`import { Engine } from "caelus";
 import { loadNodeData } from "caelus/node";
 
-const engine = new Engine(loadNodeData());
+// The directory that holds the packs: the data folder of the installed package.
+const engine = new Engine(loadNodeData("node_modules/caelus/data"));
 const star = engine.fixedStar("Aldebaran", jd);`}
 />
 

@@ -1,24 +1,37 @@
 # Astro on Cloudflare: migration report
 
-Date: 2026-11-11. Branch: `claude/cool-golick-8ae836`, with local `dev` merged
-through `5a75642` (sky dating, the `date_sky` tool, the Workbench design rules,
-and the Sky Dating instrument).
-Nothing is deployed, no Cloudflare resource exists, and `apps/web` is untouched
-by this work and still builds.
+Date: 2026-11-12. State: local `dev` at `6800f23` plus the CI job and two
+guides added with this revision. Nothing is deployed, no Cloudflare resource
+exists, and the Next.js app in `apps/web` still builds and still serves
+production from Vercel.
 
 `apps/site` is an Astro 7 app that serves every URL the Next.js app serves and
 runs on Cloudflare Workers: static pages from the assets directory, and one
-Worker for `/api/chart`, `/api/mcp`, and the 404 page. It was built and served
+Worker for `/api/chart`, `/api/mcp`, and the 404 page. It is built and served
 locally in workerd, the runtime Cloudflare deploys to, and compared against the
 Next build route by route.
+
+Where things stand:
+
+- The port is complete. Every route matches the Next build under local
+  workerd, including the Sky Dating instrument and the 25 MDX guides.
+- The site-wide Workbench restyle is merged. It was done once, in
+  `apps/web`, and reached the Astro build through the shared stylesheet and
+  five site-local files.
+- The one open decision, the float difference in `/api/chart`, is made:
+  accepted, and documented for callers.
+- CI builds and crawls the Astro site in its own job, so `dev` cannot drift
+  from a working Astro build unnoticed. That job has not run on GitHub yet.
+- What remains is the cutover itself. The steps only the owner can do are the
+  last section of this report.
 
 ## The float difference in `/api/chart`: accepted
 
 Decision, 2026-11-11: the difference described here is accepted. Raw float
 output was never promised to be bit-stable across runtimes, and canonical mode
 is the documented answer for a caller who hashes or diffs. The Edge Cases
-guide (`/docs/edge-cases`, "Float output across runtimes") now states the
-measured difference for callers.
+guide (`/docs/edge-cases`, "Float output across runtimes") states the measured
+difference for callers.
 
 `/api/chart` does not return the same bytes on Cloudflare as it does today.
 The JSON has the same keys, strings, and order, and every number agrees to
@@ -36,13 +49,11 @@ runtime currently agrees with Node.
 
 The largest difference, 1.1e-12 degrees, is about four billionths of an
 arcsecond, more than eight orders of magnitude below the one-arcsecond level
-the planets are validated to. An earlier draft of this report said twelve
-orders, which overstated it. Canonical mode exists for callers who need
-bit-stable output. A client that hashes or diffs raw `/api/chart` responses
-will see a change at cutover. The alternatives, serving `/api/chart` from a
-Node host or giving the engine its own deterministic transcendentals, were
-not taken. The MCP endpoint rounds
-to 0.01 degrees and matched exactly on all 107 hosted integration checks.
+the planets are validated to. A client that hashes or diffs raw `/api/chart`
+responses will see a change at cutover. The alternatives, serving
+`/api/chart` from a Node host or giving the engine its own deterministic
+transcendentals, were not taken. The MCP endpoint rounds to 0.01 degrees and
+matches the in-process reference exactly on all 111 hosted integration checks.
 
 ## How it is built
 
@@ -58,10 +69,10 @@ parts worth knowing:
   `next/server`, and `next/og`.
 - The header, docs sidebar, and table of contents are Astro islands. Client
   components nested inside server-rendered React trees (the install button,
-  code-block copy, the playground, the home page's live sky) hydrate through a
-  small island registry. A Vite plugin wires this at the import edge, and
-  fails the build if a server component imports a client component that has no
-  island registered.
+  code-block copy, the playground, the home page's live sky, the Sky Dating
+  widget) hydrate through a small island registry. A Vite plugin wires this at
+  the import edge, and fails the build if a server component imports a client
+  component that has no island registered.
 - The two API endpoints call the existing route handlers in
   `apps/web/app/api` unchanged.
 
@@ -70,12 +81,18 @@ source, at the cost of a custom hydration path that a new contributor has to
 learn. After cutover, pages can be converted to native Astro one at a time and
 the bridge removed when the last one is done.
 
+A new guide needs no work in `apps/site`. The two added with this revision,
+`/docs/astrocartography` and `/docs/deep-time`, were written as MDX files in
+`apps/web/app/docs` and registered in `lib/site.ts`, `app/sitemap.ts`, and the
+docs hub. The Astro build picked up the pages, the sidebar entries, the
+sitemap entries, and the search index from those sources.
+
 ## Copied versus imported
 
-Nothing under `apps/web/components`, `apps/web/app`, or `apps/web/lib` was
-copied. `apps/web/app/globals.css` is imported by `src/layouts/Base.astro`, so
-a restyle done there, or in whatever replaces it, reaches the Astro build with
-no second edit.
+Nothing under `apps/web/components`, `apps/web/app`, or `apps/web/lib` is
+copied. `apps/web/app/globals.css` is imported by `src/layouts/Base.astro`, and
+it is the only stylesheet: the Workbench restyle folded the scoped
+`workbench.css` into it.
 
 Three pieces are site-local replacements, each because the original depends on
 Next:
@@ -83,82 +100,60 @@ Next:
 | Site file | Replaces | Why |
 |-----------|----------|-----|
 | `src/components/Tabs.astro`, `Tab.astro` | `components/Tabs.tsx` | The React version reads labels off its children, which needs the whole document to be one React tree. Same class names, so the same CSS applies. |
-| `src/layouts/Base.astro`, `Docs.astro`, `Instrument.astro` | `app/layout.tsx`, `app/docs/layout.tsx` | A layout is written for Next or for Astro, not both. Same markup and class names. `Instrument.astro` is a pass-through to `Base.astro` since the site-wide restyle. |
+| `src/layouts/Base.astro`, `Docs.astro`, `Instrument.astro` | `app/layout.tsx`, `app/docs/layout.tsx` | A layout is written for Next or for Astro, not both. Same markup and class names. `Instrument.astro` is a pass-through to `Base.astro` since the restyle. |
 | `src/components/MdxLink.astro`, `src/lib/mdx-components.ts` | `mdx-components.tsx` | Next and Astro each wire the MDX component map their own way. |
 
 Four small modules restate logic that could not be imported as it stands:
 `src/lib/api-docs.ts` (the original finds its files from an `apps/web` working
 directory), `src/pages/sitemap.xml.ts` (same reason; it reads the route list
 from the original's source), `src/pages/robots.txt.ts`, and
-`src/pages/docs/api/[slug].astro`. `src/styles/fonts.css` is new and replaces
-`next/font`. The only style rules in `apps/site` are those font faces; every
-other rule comes from `globals.css`.
+`src/pages/docs/api/[slug].astro`. `src/styles/fonts.css` replaces `next/font`
+and holds the only style rules in `apps/site`: the self-hosted faces for
+Barlow, Barlow Condensed, and JetBrains Mono.
 
-So a restyle that changes markup, not only CSS, has five site-local files to
-touch: the three layouts and the two tab components.
-
-## The Sky Dating instrument
-
-`/instruments/sky-dating` was the first page in the Workbench grammar, ahead of
-the site-wide restyle. Here it renders the page component from `apps/web`
-inside `src/layouts/Instrument.astro`. Since the restyle, the Workbench rules
-live unscoped in `globals.css` and the root document self-hosts Barlow and
-Barlow Condensed for every page, so that layout adds nothing of its own.
-
-The widget is prerendered with its default form, as Next prerenders it, and
-then hydrated as a nested island, where it builds `new Engine(embeddedData)`
-and runs the search in the browser. Prerendering keeps the page's HTML
-identical to Next's; a purely client-rendered island would have shipped an
-empty shell. Served by `wrangler dev`, the default search shows "3 windows
-fit" for the Babylonian preset with nothing in the console, and the page does
-not scroll sideways at 1440 px or 375 px. The results table is wider than a
-375 px screen and scrolls inside its own container, as it does on Next. The
-header link and the sitemap entry come from `apps/web/lib/site.ts` and
-`apps/web/app/sitemap.ts` with no edit here.
-
-The Workbench restyle of the rest of the site is out of scope for this branch.
+The restyle confirmed the split. It changed `globals.css` and the components
+in `apps/web`, and in `apps/site` it touched the three layouts, `fonts.css`,
+and one island.
 
 ## What is ported
 
 | Route | Status |
 |-------|--------|
 | `/`, `/playground`, `/features`, `/validation`, `/methods`, `/provenance`, `/notes`, `/how-it-was-built`, `/changelog`, `/privacy` | Static. Rendered from the same page components. |
-| `/docs`, the 19 MDX guides, `/docs/visualizations` | Static. MDX is compiled by Astro's MDX integration from the files in `apps/web/app/docs`. |
-| `/docs/api`, `/docs/api/[slug]` (607 pages) | Static, from the TypeDoc markdown in `apps/web/content/api`. |
+| `/docs`, the 25 MDX guides, `/docs/visualizations` | Static. MDX is compiled by Astro's MDX integration from the files in `apps/web/app/docs`. |
+| `/docs/api`, `/docs/api/[slug]` (615 pages) | Static, from the TypeDoc markdown in `apps/web/content/api`. |
 | `/embed/chart` | Static shell, hydrated on load. |
-| `/instruments/sky-dating` | Static, with the widget hydrated in the browser. |
+| `/instruments/sky-dating` | Static, with the widget prerendered and then hydrated in the browser. |
 | `/api/chart` | Worker. See the section on the float difference above. |
 | `/api/mcp` | Worker. Stateless, JSON responses, 37 tools. |
-| `robots.txt`, `sitemap.xml`, `/icon.svg`, `/opengraph-image` | Static files written at build time. The Open Graph PNG is byte-identical to Next's. |
+| `robots.txt`, `sitemap.xml`, `/icon.svg`, `/opengraph-image` | Static files written at build time. |
 | `/about`, `/favicon.ico` | 307 redirects, via `_redirects`. |
 | Unknown paths | 404 with the existing not-found page. |
 
 The home page is static. The New York clock is read in the browser when the
 island mounts, so the page no longer needs a server render per request.
 
+The Sky Dating widget is prerendered with its default form, as Next
+prerenders it, so the page's HTML is the same in both builds. In the browser
+it builds `new Engine(embeddedData)` and runs the search there.
+
 The playground keeps the lazy data packs from `lib/loadExtraData.ts`. They
 build as separate chunks that load on demand, and the largest static asset is
 2.6 MB against Cloudflare's 25 MiB limit. No era or wide pack is shipped. The
 Worker uses `caelus/data-embedded` only.
 
-Not ported: nothing that `apps/web` serves is missing. Not done, by
-instruction: no deploy, no Cloudflare resources, no DNS change, no push, no
-pull request, no redesign.
+Nothing that `apps/web` serves is missing.
 
 ## Choices the brief asked about
 
 **MCP: refactor, not `nodejs_compat`.** `packages/caelus-mcp/src/server.ts`
 was split in two. `core.ts` registers every tool, resource, and prompt and
-imports no `node:*` module. `server.ts` is now the Node entry: it reads the
+imports no `node:*` module. `server.ts` is the Node entry: it reads the
 version, accuracy tables, gazetteer, and data packs from disk, passes them to
-the core as options, and runs stdio. The refactor was small because the disk
-reads were already isolated in four helpers: `core.ts` differs from the old
-`server.ts` by 134 removed and 67 added lines out of 2,341, and the new
-`server.ts` is 144 lines. The
-package gains a `caelus-mcp/core` export, and `caelus-mcp` behaves as before.
-The Worker's `wrangler.jsonc` sets no compatibility flags, and the built
-bundle contains no `node:` import. `check-mcp-surface` now fails if `core.ts`
-gains one.
+the core as options, and runs stdio. The package gains a `caelus-mcp/core`
+export, and `caelus-mcp` behaves as before. The Worker's `wrangler.jsonc` sets
+no compatibility flags, and the built bundle contains no `node:` import.
+`check-mcp-surface` fails if `core.ts` gains one.
 
 **Search: kept `search-index.json`.** The existing index, its build script,
 and the `Search` component work unchanged, so keeping them cost nothing.
@@ -171,58 +166,105 @@ Fontsource packages, with the same fallback metrics `next/font` generated.
 the release Next 15 bundles. It is an image library with no tie to Vercel
 hosting. Version 1.0.3 fails to load under Node as an ES module.
 
+## CI
+
+`.github/workflows/ci.yml` has a `site` job beside `conformance`, `python`,
+and `prose`. It checks out the repo, installs with `npm ci` on Node 22, runs
+`npm run build:site`, and runs `npm run smoke:site`. It needs no Cloudflare
+account and no secret, and it deploys nothing.
+
+`build:site` builds the workspace packages, runs the golden suite for the
+stats the site quotes, generates the API markdown and the search index, and
+runs `astro build`. `smoke:site` serves `apps/site/dist` with `wrangler dev`,
+which runs the Worker and the static assets in workerd on the runner, and
+crawls it: every page 200, no dead in-site link, both redirects, the 404
+page, `/api/chart`, and an MCP `tools/list` round trip.
+
+On this machine `build:site` takes 14 seconds and `smoke:site` 2.4 seconds,
+with dependencies already installed. A hosted runner is slower and also pays
+for `npm ci`, which was not timed.
+
+The job has not run on GitHub. These are the places it could behave
+differently there:
+
+- **Node version.** Astro 7 requires Node 22.23.4 or later. The job asks for
+  `22`, which resolves to the newest 22.x. Every local build used Node 25.8.1,
+  the only version on this machine.
+- **Platform binaries.** The lockfile was written on macOS. It does list the
+  Linux builds of workerd, the Astro compiler, Rolldown, Lightning CSS, and
+  the Markdown parser, so `npm ci` should install them, but that install has
+  not been run on Linux.
+- **`wrangler dev` on a runner.** It starts without a login here, with
+  telemetry off and `CI=1` set by the smoke script. Whether it prints a prompt
+  or reaches for the network on a fresh runner is unconfirmed.
+- **Shallow clone.** The checkout fetches one commit, so the sitemap's
+  `lastmod` dates fall back to the build date and the build logs a warning.
+  The crawl does not check those dates.
+
+The `conformance` job still builds and crawls the Next app. Both run until
+cutover.
+
 ## Verification
 
-All of this ran against `wrangler dev` serving the built output.
+All of this ran against `wrangler dev` serving the built output, at the state
+named at the top.
 
 | Check | Result |
 |-------|--------|
-| `npm run build -w site` | Builds cleanly. `astro check` reports 0 errors. |
-| `node scripts/smoke-site.mjs --against <next>` | 645 URLs crawled on each build. Every URL that is 200 on Next is 200 on Astro with the same content type, both redirects match, and the two sitemaps list the same 640 URLs. |
+| `npm run build:site`, then `npm run smoke:site` | Pass. `astro check` reports 0 errors. |
+| `npm run test:web` | Passes: the Next build, then its crawl of 665 routes. |
+| `node scripts/smoke-site.mjs --against <next>` | 659 URLs crawled on each build. Every URL that is 200 on Next is 200 on Astro with the same content type, both redirects match, and the two sitemaps list the same 654 URLs. |
 | `/api/chart` and `/api/mcp` GET, 12 samples | 6 byte-identical (every 400 response, including two dates outside 1920 to 2080, and the MCP description). 6 chart responses equal in structure with numbers within 1.1e-12. |
-| `CAELUS_MCP_URL=<worker>/api/mcp node packages/caelus-mcp/integration.test.mjs` | 107 checks, 0 failures. The same command against the Next route also passes. |
-| `npm test`, which includes `test:mcp` | Passes. |
+| `CAELUS_MCP_URL=<worker>/api/mcp node packages/caelus-mcp/integration.test.mjs` | 111 checks, 0 failures. Without the variable the stdio run passes 112. |
 | `node scripts/smoke-live.mjs <worker>` | Passes. |
-| `lint:claims`, `lint:emdash`, `check:docs`, `lint:prose`, `check-llms`, `check-mcp-surface`, `check:versions`, `check-tarball` | All pass. |
-| Page content, 37 pages | Visible text is identical to Next on every page except `/docs/mcp`. On 35 of them the headings, links, element counts, and CSS classes were also compared and match, apart from one React-generated id per page. |
-| `<head>` tags, 11 pages | Identical to Next, apart from the image URL's cache key. |
+| `lint:claims`, `lint:emdash`, `lint:prose`, `check-docs`, `check-llms`, `check-mcp-surface` | All pass. |
+| Page content, 43 pages | Visible text is identical to Next on every page except `/docs/mcp`. Headings, links, element counts, and CSS classes also match on those 42, apart from one React-generated id per page. |
 
-`integration.test.mjs` gained a hosted mode, selected by `CAELUS_MCP_URL`. The
+`integration.test.mjs` has a hosted mode, selected by `CAELUS_MCP_URL`. The
 committed goldens were minted on the full data tier and the hosted endpoint
 serves the embedded tier, so in hosted mode the test builds the same server
 core in process on the embedded tier and requires the endpoint's payloads to
 equal it. A golden case the embedded tier cannot serve, such as a `date_sky`
 search before 1000 CE, must be refused with the same message the reference
-gives. Without the variable the test runs as before, with 108 checks.
+gives.
+
+The 43 pages are the eleven top-level pages, the instrument, the docs hub,
+`/docs/visualizations`, the API index, three API symbol pages, and all 25
+guides.
 
 ## Measurements
 
-One machine, Apple silicon, Node 25.8.1. Build times cover the app's own build
-script, with workspace packages, API markdown, and search index already built.
-These were taken before `dev` was merged, at `bb1164a`. The merges add one
-guide, the instrument page, and ten API pages, and were not re-measured.
+One machine, Apple silicon, Node 25.8.1, at the state named at the top. Build
+times cover the app's own build script, with workspace packages, API markdown,
+and search index already built.
 
 | | Next (`apps/web`) | Astro (`apps/site`) |
 |---|---|---|
-| Build, cold | 21.0 s | 5.6 s |
-| Build, warm | 18.0 s | 5.2 s |
-| Build output | 56.1 MB in 2,188 files, plus 2.0 MB `public` | 33.0 MB in 790 files, `public` included |
-| Static files to serve | 13.9 MB in `.next/static` | 27.4 MB in 745 files, of which 12.2 MB is HTML |
-| Server code | 41.5 MB in `.next/server` | 2.1 MB of Worker JS, 555 KB gzipped, plus 3.2 MB of source maps |
+| Build, cold | 21.6 s | 5.5 s |
+| Build, warm | 17.4 s | 5.0 s |
+| Build output | 57.7 MB in 2,304 files, plus 2.0 MB `public` | 32.9 MB in 798 files, `public` included |
+| Static files to serve | 13.9 MB in `.next/static` | 27.6 MB in 774 files, of which 12.4 MB is HTML |
+| Server code | 43.1 MB in `.next/server` | 2.1 MB of Worker JS, 566 KB gzipped, plus 3.2 MB of source maps |
 
-Client JavaScript, measured in a browser after load and a scroll to the bottom
+Client JavaScript the browser fetched, after load and a scroll to the bottom
 of the page, gzip:
 
 | Page | Next | Astro |
 |------|------|-------|
-| `/` | 361 KB (1,025 KB raw, 29 files) | 308 KB (823 KB raw, 26 files) |
-| `/playground` | 2,169 KB (6,616 KB raw) | 2,116 KB (6,400 KB raw) |
-| `/docs/quickstart` | 118 KB (386 KB raw) | 72 KB (218 KB raw) |
+| `/` | 373 KB (1,061 KB raw, 29 files) | 309 KB (825 KB raw, 27 files) |
+| `/playground` | 2,179 KB (6,644 KB raw) | 2,117 KB (6,401 KB raw) |
+| `/docs/quickstart` | 287 KB (825 KB raw, 17 files) | 72 KB (218 KB raw, 13 files) |
 
 The home page and playground are dominated by the engine, its data, and the
 corpus, which both builds ship. The saving there is Next's client runtime,
-about 50 KB. A prose page drops by about 40 percent, and its HTML is smaller
-because there is no serialized component payload.
+about 60 KB.
+
+The docs figure for Next includes its prefetch of linked routes: once the
+header is on screen, Next fetches the code for the pages it links to. The
+page's own code is 114 KB (376 KB raw, 9 files). The same measurement gave
+118 KB before the Sky Dating link joined the header, and Next's build report
+puts that route's own code at 174 KB, which accounts for the jump. The Astro
+build does not prefetch, so a prose page costs 72 KB however it is counted.
 
 ## Other differences from the Next deployment
 
@@ -231,6 +273,7 @@ because there is no serialized component payload.
   interaction are the same, and the page is searchable in full.
 - Interactive pieces inside page bodies hydrate when they scroll near the
   viewport, not all at load.
+- Linked routes are not prefetched, so a first click loads its page fresh.
 - A trailing slash redirects with 307, where Next used 308. `/features.html`
   redirects to `/features`, where Next returned 404. These come from
   Cloudflare's asset handling as `wrangler dev` reproduces it.
@@ -244,65 +287,34 @@ because there is no serialized component payload.
 
 - Nothing ran on Cloudflare's network. `_headers`, `_redirects`, clean-URL
   handling, and the 404 path were checked in local workerd only.
+- The Cloudflare build and deploy settings in the cutover steps. They follow
+  the adapter's documentation and have not been exercised.
+- The `site` CI job on a GitHub runner, as described under CI.
 - CPU time as Cloudflare bills it. Locally a chart takes about 5 ms of wall
   time, `tools/list` about 22 ms, and a 34-year `find_aspect_dates` about
   0.7 s. The free plan allows 10 ms of CPU per request, so the MCP endpoint
   will need the paid plan, whose default is 30 s.
-- A build under Node 22. This machine has Node 25.8.1 only. Astro 7 requires
-  22.23.4 or later, and the repo pins Node 22 without a minor version.
+- A build under Node 22.
 - Whether Cloudflare's build clones full git history. With a shallow clone,
   older pages get the build date as their sitemap `lastmod`.
 - Pixel-level visual parity. Parity rests on the text and structure diffs
-  above, plus screenshots of five pages in the light theme. The dark theme
-  was toggled by script. Only the instrument page was checked at 375 px,
-  where its rendering matched Next's.
+  above and on screenshots of a handful of pages. Only the instrument page
+  was checked at 375 px, before the restyle, where its rendering matched
+  Next's. The restyled pages were not compared by eye at narrow widths.
 - Clipboard writes. The install and copy buttons hydrate and respond, but the
   test browser refused clipboard access to an unfocused page.
-- The 607 API pages were compared by status and content type. Three were
+- The 615 API pages were compared by status and content type. Three were
   compared by text and structure.
-- Hot reload in `astro dev`. The dev server answered every route over HTTP.
-
-## Cutover checklist
-
-Steps 2 to 6 and 9 to 11 need the owner. Steps 7 and 8 are repo edits.
-
-1. Done: the float change in `/api/chart` is accepted and documented in the
-   Edge Cases guide.
-2. Create or choose the Cloudflare account, and enable Workers Paid.
-3. Move the `ephemengine.com` zone to Cloudflare DNS. A Worker custom domain
-   requires the zone to be on Cloudflare. Keep the records pointing at Vercel
-   until step 9.
-4. Create the Worker from this repo. The build command is
-   `npm ci && npm run build:site` from the repo root, and the deploy command
-   is `npx wrangler deploy` from `apps/site`. The Worker needs no environment
-   variables, secrets, or bindings beyond its assets. Set the build to Node 22
-   and, if the option exists, a full clone.
-5. Check the Worker on its `workers.dev` URL before any DNS change:
-   `node scripts/smoke-live.mjs <url>`,
-   `node scripts/smoke-site.mjs --against https://www.ephemengine.com <url>`,
-   and `CAELUS_MCP_URL=<url>/api/mcp node packages/caelus-mcp/integration.test.mjs`.
-   Read the Worker's CPU time for the MCP calls in the dashboard.
-6. Add `www.ephemengine.com` as the Worker's custom domain, and a redirect
-   rule from the apex to `www`. `smoke-live.mjs` asserts that redirect.
-7. Switch the repo's build and CI to the site: the root `build`, `test:web`,
-   and `preflight` scripts, the `build -w web` and `smoke:web` steps in
-   `ci.yml` and `release.yml`, and `vercel-build` in `apps/web/package.json`.
-8. Update `live-smoke.yml` and `smoke-live.mjs`. The checks are host-neutral,
-   but their comments and failure messages name Vercel, its WAF, and its
-   deploy delay.
-9. Change the `www` record to the Worker. Run the daily live smoke by hand
-   and watch it for a few days.
-10. Remove the domain from the Vercel project, then pause or delete the
-    project.
-11. Add a changelog entry for the `caelus-mcp/core` export. `CHANGELOG.md` was
-    off limits for this branch; the merge from `dev` brought its entries in
-    unchanged.
+- Hot reload in `astro dev`. The dev server answered every route over HTTP
+  when last tried, before the restyle.
+- The Open Graph image was byte-identical to Next's before the restyle. It
+  was not compared again.
 
 ## Gates wired to `apps/web`
 
-None of these changed, and none has to change on cutover day if `apps/web`
-stays as the source directory that `apps/site` builds from. They need
-repointing only when the sources move into `apps/site`:
+None of these has to change on cutover day if `apps/web` stays as the source
+directory that `apps/site` builds from. They need repointing only when the
+sources move into `apps/site`:
 
 - Prose: `check-em-dashes.mjs`, `extract-web-prose.mjs`, `lint-prose.sh`.
 - Claims: `claims-registry.json` (34 paths), `sync-facts.mjs` (the generated
@@ -314,9 +326,9 @@ repointing only when the sources move into `apps/site`:
 - Tests: `test-web-libs.mjs`. `smoke-web.mjs` is replaced by
   `smoke-site.mjs`.
 
-Three gates were repointed now, because the MCP tools moved files:
-`sync-facts.mjs`, `check-mcp-surface.mjs`, and `claims-registry.json` read
-`core.ts` where they read `server.ts`.
+Three gates already read `core.ts` where they read `server.ts`, because the
+MCP tools moved files: `sync-facts.mjs`, `check-mcp-surface.mjs`, and
+`claims-registry.json`.
 
 ## Noticed, not changed
 
@@ -324,8 +336,66 @@ Three gates were repointed now, because the MCP tools moved files:
   Every page built with `pageMetadata()` replaces the root Open Graph object
   and loses the image. The Astro build reproduces this.
 - The hosted MCP endpoint resolves no named places, because the gazetteer is
-  read from disk and the hosted bundle has none. The core now accepts the rows
-  as an option, so the Worker could bundle them (811 KB).
-- `npm install` for the new workspace moved 32 existing lockfile entries by a
-  patch version, among them `sharp`, `nanoid`, and `yaml`.
-- CI does not build `apps/site` yet.
+  read from disk and the hosted bundle has none. The core accepts the rows as
+  an option, so the Worker could bundle them (811 KB).
+- `apps/web/tsconfig.json` type-checks both `.next/types` and
+  `.next-ci/types`. Generated types left in one directory by an older build
+  fail the other's type check when a route has since been removed, which is
+  how `npm run test:web` failed here once. Deleting the stale directory fixes
+  it. A clean checkout never has one.
+- `CHANGELOG.md` has no entry for the `caelus-mcp/core` export. The file was
+  off limits for this work.
+
+## Changes to the repo at cutover
+
+These are edits a session can make on request. They belong in the same change
+as the DNS switch, not before it, because they stop the Next build.
+
+- Point the root `build`, `test:web`, and `preflight` scripts at the site, and
+  drop `vercel-build` from `apps/web/package.json`.
+- Remove the Next build and `smoke:web` steps from the `conformance` job and
+  from `release.yml`. The `site` job already covers the Astro build.
+- Update `live-smoke.yml` and `smoke-live.mjs`. The checks are host-neutral,
+  but their comments and failure messages name Vercel, its WAF, and its
+  deploy delay.
+- Add the changelog entry for `caelus-mcp/core`.
+
+## Cutover: the steps only the owner can do
+
+In order. Production stays on Vercel until step 8.
+
+1. Create or choose the Cloudflare account, and turn on the Workers Paid
+   plan. The MCP endpoint needs more CPU time per request than the free plan
+   allows.
+2. Add `ephemengine.com` to that account as a zone, copy the existing DNS
+   records into it so they still point at Vercel, and change the nameservers
+   at the registrar to Cloudflare's. A Worker can take a custom domain only on
+   a zone Cloudflare serves. Wait until the zone shows as active.
+3. Create the Worker and connect it to the GitHub repository. Set the build
+   command to `npm ci && npm run build:site` at the repo root, the deploy
+   command to `npx wrangler deploy` in `apps/site`, the production branch to
+   `main`, and the Node version to 22. It needs no environment variables,
+   secrets, or bindings. Choose a full clone if the build settings offer one.
+4. Let the first build deploy to the Worker's `workers.dev` address. Nothing
+   public points at it yet.
+5. Check that address, or ask a session to run these against it:
+   `node scripts/smoke-live.mjs <url>`,
+   `node scripts/smoke-site.mjs --against https://www.ephemengine.com <url>`,
+   and
+   `CAELUS_MCP_URL=<url>/api/mcp node packages/caelus-mcp/integration.test.mjs`.
+6. In the Cloudflare dashboard, read the Worker's CPU time for the MCP calls
+   those checks made, and confirm it sits inside the plan's limit.
+7. Say when to cut over, so the changes in the previous section can be merged
+   to `main` with step 8.
+8. Add `www.ephemengine.com` to the Worker as a custom domain, which takes the
+   place of the `www` record that points at Vercel, and add a redirect rule
+   that sends the apex, `ephemengine.com`, to `www`. This is the switch.
+9. Run the `live-smoke` workflow by hand from the Actions tab, and load the
+   site, the playground, and the Sky Dating instrument in a browser.
+10. Reconnect one MCP client to the hosted endpoint and call a tool, since
+    that endpoint has outside users.
+11. Leave the Vercel project in place for a few days while the daily
+    `live-smoke` run stays green. To roll back in that time, remove the custom
+    domain from the Worker and restore the `www` record to Vercel.
+12. Remove the domain from the Vercel project, then delete or pause the
+    project.
