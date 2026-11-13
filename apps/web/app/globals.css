@@ -2557,6 +2557,168 @@ pre.code{margin:0;background:var(--bg);padding:.8rem;font:400 .76rem/1.62 var(--
   pointer-events: none;
 }
 
+/* Eclipses across a span (the eclipses instrument): one mark per eclipse,
+   placed by date. A filled mark is total, a hollow one annular or hybrid, a
+   half-height one partial, and a rule penumbral. A mark the chosen place
+   sees takes the living-layer colour. */
+.etrk {
+  position: relative;
+  height: 22px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+
+.emark {
+  position: absolute;
+  top: 3px;
+  width: 7px;
+  height: 14px;
+  margin-left: -3.5px;
+  padding: 0;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent);
+  cursor: pointer;
+}
+
+button.emark:hover,
+.emark--picked {
+  outline: 1px solid var(--text);
+  outline-offset: 1px;
+}
+
+.emark--annular,
+.emark--hybrid {
+  background: transparent;
+}
+
+.emark--partial {
+  top: 10px;
+  height: 7px;
+}
+
+.emark--penumbral {
+  top: 16px;
+  height: 1px;
+  border-width: 1px 0 0;
+  background: transparent;
+}
+
+.emark--seen {
+  border-color: var(--warm);
+  color: var(--warm);
+}
+
+.emark--seen:not(.emark--annular):not(.emark--hybrid):not(.emark--penumbral) {
+  background: var(--warm);
+}
+
+.ekey {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1.1rem;
+}
+
+.ekey span {
+  position: relative;
+  padding-left: 0.9rem;
+}
+
+.ekey .emark {
+  left: 3.5px;
+  top: 2px;
+  cursor: default;
+}
+
+.ekey .emark--partial {
+  top: 9px;
+}
+
+.ekey .emark--penumbral {
+  top: 15px;
+}
+
+.tl__axis--years span:nth-child(even) {
+  display: block;
+}
+
+@media (max-width: 760px) {
+  .tl__axis--years span:nth-child(even) {
+    display: none;
+  }
+}
+
+/* The central path of a solar eclipse, as a plain latitude and longitude
+   plot. */
+.pathplot {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 0.6rem 0.8rem 0.2rem;
+}
+
+.pp-frame {
+  fill: var(--bg);
+  stroke: var(--line2);
+  stroke-width: 1;
+}
+
+.pp-grid {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.pp-lab {
+  font: 400 10px var(--mono);
+  fill: var(--faint);
+}
+
+.pp-band {
+  fill: var(--accent-soft);
+  stroke: none;
+}
+
+.pp-limit {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+}
+
+.pp-center {
+  fill: none;
+  stroke: var(--warm);
+  stroke-width: 1.5;
+}
+
+.pp-max {
+  fill: var(--warm);
+}
+
+.pp-place {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.rd button {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--accent);
+  cursor: pointer;
+  text-align: left;
+}
+
+.rd button:hover {
+  color: var(--text);
+}
+
+.rd tr.picked td {
+  background: var(--panel2);
+}
+
 .tl--facts .tl__axis span:nth-child(even) {
   display: block;
 }

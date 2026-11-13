@@ -16,6 +16,8 @@ import {
 } from "../../lib/facts";
 import { WHEEL_THEME, WHEEL_LINE_COLORS } from "../../lib/wheelTheme";
 import { pageMetadata } from "../../lib/seo";
+import { INSTRUMENTS } from "../../lib/instruments";
+import { SITE } from "../../lib/site";
 
 const MCP_TOOLS_PROSE = formatMcpToolsProse();
 
@@ -49,9 +51,12 @@ const STATS: Stat[] = [
   { num: "0", label: "Runtime dependencies", href: "/docs/data-tiers" },
 ];
 
-function Feature({ title, children }: { title: string; children: ReactNode }) {
+/** One capability. `unreleased` marks what is in the repository after the
+ *  published version and not in an npm package yet. */
+function Feature({ title, unreleased, children }: { title: string; unreleased?: boolean; children: ReactNode }) {
   return (
     <div className="card feature-card">
+      {unreleased ? <div className="lab">Unreleased</div> : null}
       <h3>{title}</h3>
       <p>{children}</p>
     </div>
@@ -89,7 +94,7 @@ const PLATFORM_ROWS: Row[] = [
   { label: "Language", cells: ["TypeScript", "C", "Python", "Python", "JavaScript", "TS / multi"] },
   { label: "Runs in the browser", cells: ["yes", "no", "no", "no", "yes", "yes"] },
   { label: "Ships without ephemeris files\u00b2", cells: ["yes", "no", "no", "no", "yes", "yes"] },
-  { label: "Independent of Swiss Ephemeris", cells: ["yes", "—", "no", "no", "yes", "yes"] },
+  { label: "Independent of Swiss Ephemeris\u2074", cells: ["yes", "—", "optional backend", "no", "yes", "yes"] },
   { label: "MCP server for AI clients\u00b3", cells: ["yes", "no", "no", "no", "no", "no"] },
 ];
 
@@ -97,12 +102,14 @@ const CAPABILITY_ROWS: Row[] = [
   { label: "Positions & aspects", cells: ["yes", "yes", "yes", "yes", "yes", "positions only"] },
   { label: "House systems", cells: ["12", "many", "several", "several", "7", "—"] },
   { label: "Sidereal zodiacs", cells: ["7 ayanamsas", "yes", "yes", "yes", "yes", "—"] },
-  { label: "Eclipses, rise/set, stations", cells: ["yes", "yes", "—", "—", "—", "yes"] },
+  { label: "Eclipses, rise/set, stations", cells: ["yes", "yes", "yes", "—", "—", "yes"] },
   { label: "Derived charts (returns, progressions)", cells: ["yes", "—", "yes", "yes", "—", "—"] },
-  { label: "Hellenistic time-lords (lots, profections, releasing)", cells: ["yes", "—", "—", "—", "—", "—"] },
+  { label: "Hellenistic time-lords (lots, profections, releasing)", cells: ["yes", "—", "yes", "—", "—", "—"] },
   { label: "Vedic / Jyotish (dashas, vargas, yogas)", cells: ["yes", "—", "—", "—", "—", "—"] },
   { label: "Pattern detection (T-square, grand trine, yod)", cells: ["yes", "—", "—", "—", "—", "—"] },
-  { label: "Accuracy published & CI-pinned", cells: ["yes", "reference", "via Swiss Eph", "via Swiss Eph", "—", "yes"] },
+  { label: "Sky dating: the dates a described sky occurred\u2075", cells: ["yes", "—", "—", "—", "—", "—"] },
+  { label: "Which chart facts hold across an uncertain time\u2075", cells: ["yes", "—", "—", "—", "—", "—"] },
+  { label: "Accuracy published & CI-pinned", cells: ["yes", "reference", "depends on backend", "via Swiss Eph", "—", "yes"] },
 ];
 
 function Cmp({ v, me }: { v: string; me: boolean }) {
@@ -180,6 +187,11 @@ export default function Features() {
           </Link>
         ))}
       </div>
+
+      <P dim>
+        An entry marked Unreleased is in the repository and not yet in the
+        published {SITE.version} packages.
+      </P>
 
       <Group
         label="Chart and positions"
@@ -312,6 +324,37 @@ export default function Features() {
           best fit falls short. Both are pure and pinned to the Python
           reference. See <A href="/docs/recipes">Recipes</A>.
         </Feature>
+        <Feature title="Sky dating" unreleased>
+          <code>dateSky</code> goes from a description of a sky to the dates on
+          which it occurred. A constraint puts a body in a sign, within an orb
+          of a longitude, or in an arc, or puts the elongation between two
+          bodies in an arc. The function returns every window in the range in
+          which all the constraints hold, with a funnel that lists how many
+          windows and days survived each one. The{" "}
+          <A href="/instruments/sky-dating">Sky Dating instrument</A> runs it in
+          the browser. See <A href="/docs/sky-dating">Sky Dating</A>.
+        </Feature>
+        <Feature title="Uncertain times" unreleased>
+          <code>chartStability</code> takes a window of time around a
+          chart&apos;s stated instant and reports which of its facts hold across
+          the window: the sign on each angle, the sect, and each body&apos;s
+          sign, house, direction, and aspects. Each fact carries the share of
+          the window in which it holds and the instants at which it changes,
+          bisected to about a second. The{" "}
+          <A href="/instruments/uncertain-time">Uncertain Time instrument</A>{" "}
+          runs it in the browser. See{" "}
+          <A href="/docs/uncertain-time">Uncertain Times</A>.
+        </Feature>
+        <Feature title="Historical dates" unreleased>
+          <code>julianDay</code> takes a calendar argument and{" "}
+          <code>calendarDate</code> converts a Julian Day back to a date, so a
+          date before 15 October 1582 can be entered and read in the Julian
+          calendar it was recorded in. For an instant given in UT before 1948,
+          ΔT follows the Morrison, Stephenson, Hohenkerk and Zawilski spline
+          from the year −720, where it used a single parabola before 1800.
+          See{" "}
+          <A href="/docs/deep-time">Deep Time</A>.
+        </Feature>
         <Feature title="Patterns and chart signature">
           <code>detectPatterns</code> enumerates the classical configurations as
           structured objects: T-squares, grand trines, grand crosses, yods,
@@ -380,6 +423,18 @@ export default function Features() {
           ecliptic, sign, house, and constellation overlays. Every view renders
           to SSR-safe SVG with no runtime dependencies. See <A href="/docs/visualizations">Visualizations</A>.
         </Feature>
+        <Feature title="Instruments">
+          {INSTRUMENTS.length} single-purpose pages run the engine in the
+          browser on the embedded data tier and show the call beside the
+          result:{" "}
+          {INSTRUMENTS.map((inst, i) => (
+            <span key={inst.id}>
+              {i > 0 ? (i === INSTRUMENTS.length - 1 ? ", and " : ", ") : ""}
+              <A href={inst.href}>{inst.title}</A>
+            </span>
+          ))}
+          . The index is on <A href="/instruments">Instruments</A>.
+        </Feature>
         <Feature title="Packages">
           Four npm packages: <code>caelus</code> (the engine, zero runtime
           dependencies), <code>caelus-birth</code> (timezone and local-time
@@ -392,6 +447,8 @@ export default function Features() {
           The MCP server exposes {MCP_TOOLS_PROSE} chart tools over stdio and
           Streamable HTTP at <A href="/api/mcp">/api/mcp</A>; a REST endpoint
           answers at <A href="/api/chart?lat=27.94&lon=-82.46">/api/chart</A>.
+          Two of the tools, <code>date_sky</code> and{" "}
+          <code>chart_stability</code>, are unreleased.
           The engine does no file or network I/O, ships an embedded data tier
           and a Node loader, and runs in the browser, on edge runtimes, and in
           Node. See <A href="/docs/mcp">MCP Setup</A> and{" "}
@@ -429,12 +486,22 @@ export default function Features() {
             <li>
               <sup>2</sup> Swiss Ephemeris uses <code>.se1</code> data files for
               full precision (a built-in mode runs without them at lower
-              precision); Kerykeion and Immanuel build on it.
+              precision). Immanuel builds on it. Kerykeion&apos;s default tier
+              uses JPL DE440s.
             </li>
             <li>
               <sup>3</sup> <code>caelus-mcp</code> exposes {MCP_TOOLS_PROSE} tools over
               the Model Context Protocol. Kerykeion serializes charts to XML for
               LLM prompts but ships no MCP server.
+            </li>
+            <li>
+              <sup>4</sup> Kerykeion 6.1 uses libephemeris as its default
+              backend and offers Swiss Ephemeris as an optional one.
+            </li>
+            <li>
+              <sup>5</sup> Unreleased in Caelus. The other columns were checked
+              against each project&apos;s README or programmer&apos;s
+              documentation on 12 November 2026.
             </li>
           </ol>
           <P dim>
