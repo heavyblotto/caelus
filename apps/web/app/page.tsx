@@ -16,6 +16,7 @@ import {
   formatWorstNanoProse,
 } from "../lib/facts";
 import { NPM, SITE } from "../lib/site";
+import { INSTRUMENTS } from "../lib/instruments";
 import { pageMetadata } from "../lib/seo";
 import { nycCivilNow } from "../lib/nycNow";
 
@@ -48,7 +49,8 @@ const PROOF: Array<{ num: string; label: string; href: string; src: string }> = 
 
 // What the engine computes, as titled entries a reader can scan. Each links to
 // the doc page that covers it; the one-liner carries the specifics.
-const CAPABILITIES: Array<{ title: string; href: string; desc: ReactNode }> = [
+// `unreleased` marks what is in the repository after the published version.
+const CAPABILITIES: Array<{ title: string; href: string; desc: ReactNode; unreleased?: boolean }> = [
   {
     title: "Charts",
     href: "/docs/charts",
@@ -58,6 +60,18 @@ const CAPABILITIES: Array<{ title: string; href: string; desc: ReactNode }> = [
     title: "Events",
     href: "/features",
     desc: <>Rise, set, and transit; stations; lunar phases; solar and lunar eclipses with local circumstances.</>,
+  },
+  {
+    title: "Sky dating",
+    href: "/docs/sky-dating",
+    desc: <>From a description of a sky, such as the sign of each planet, to every date on which it occurred.</>,
+    unreleased: true,
+  },
+  {
+    title: "Uncertain times",
+    href: "/docs/uncertain-time",
+    desc: <>Which facts of a chart hold across an uncertain time, and the instants at which the others change.</>,
+    unreleased: true,
   },
   {
     title: "Derived charts",
@@ -168,19 +182,40 @@ export default function Home() {
         {CAPABILITIES.map((c) => (
           <Link key={c.title} href={c.href} className="tile s3">
             <div className="tile__b">
+              {c.unreleased ? <div className="lab">Unreleased</div> : null}
               <h3>{c.title}</h3>
               <p>{c.desc}</p>
             </div>
           </Link>
         ))}
-        <section className="tile s6">
+        <section className="tile s12">
           <div className="tile__b">
             <p>
               The full capability list, along with a comparison against the
-              other engines, is on <A href="/features">Features</A>.
+              other engines, is on <A href="/features">Features</A>. An entry
+              marked Unreleased is in the repository and not yet in the
+              published {SITE.version} packages.
             </p>
           </div>
         </section>
+
+        <div className="band">
+          <h2>Instruments</h2>
+          <p>Each one answers one question in your browser and shows the call that produced the result.</p>
+        </div>
+        {INSTRUMENTS.map((inst) => (
+          <Link key={inst.id} href={inst.href} className="tile s4">
+            <div className="tile__h">
+              <b>{inst.id}</b>
+              <span>Instrument</span>
+              <i><span className="led led--live" aria-hidden />{inst.status}</i>
+            </div>
+            <div className="tile__b">
+              <h3>{inst.title}</h3>
+              <p>{inst.line}</p>
+            </div>
+          </Link>
+        ))}
 
         <div className="band">
           <h2>The packages</h2>

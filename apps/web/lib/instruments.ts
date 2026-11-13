@@ -26,4 +26,11 @@ export const INSTRUMENTS: Instrument[] = [
     line: "Give a stated time and how far off it could be, and see which facts of the chart hold and when the others change.",
     status: "live",
   },
+  {
+    id: "I-03",
+    href: "/instruments/eclipses",
+    title: "Eclipses",
+    line: "List the solar and lunar eclipses in a span of years, with what one place sees of each and the central path of a solar eclipse.",
+    status: "live",
+  },
 ];

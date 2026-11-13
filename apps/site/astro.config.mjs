@@ -81,6 +81,7 @@ export default defineConfig({
           "components/home/HomeLiveIsland.tsx": "src/islands/web/HomeLiveIsland.tsx",
           "app/instruments/sky-dating/SkyDatingIsland.tsx": "src/islands/web/SkyDatingIsland.tsx",
           "app/instruments/uncertain-time/ChartStabilityIsland.tsx": "src/islands/web/ChartStabilityIsland.tsx",
+          "app/instruments/eclipses/EclipsesIsland.tsx": "src/islands/web/EclipsesIsland.tsx",
           // Reads apps/web/content/api relative to process.cwd() in apps/web.
           "lib/api-docs.ts": { to: "src/lib/api-docs.ts", always: true },
         },
