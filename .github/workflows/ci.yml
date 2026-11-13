@@ -160,6 +160,27 @@ jobs:
       # gates every PR here, not only in the Vale-dependent prose job below).
       - run: npm run lint:emdash
 
+  # The Astro build of the site (apps/site), which replaces the Next build at
+  # cutover. Its own job, so a red run says "site" and not "conformance", and so
+  # a change to apps/web that the Astro build cannot render is caught on dev.
+  # Needs no Cloudflare account or secret: `wrangler dev` runs the Worker and
+  # the static assets in workerd on the runner. Nothing here deploys.
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      # Astro 7 needs Node 22.23.4 or later; `22` resolves to the newest 22.x.
+      - uses: actions/setup-node@v5
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      # workspace packages, golden stats (lib/facts.ts reads them), the API
+      # markdown, the search index, then `astro build`
+      - run: npm run build:site
+      # serve apps/site/dist with wrangler dev and crawl it: every page 200, no
+      # dead in-site link, the two redirects, the 404 page, /api/chart, and an
+      # MCP tools/list round trip
+      - run: npm run smoke:site
+
   python:
     runs-on: ubuntu-latest
     steps:
