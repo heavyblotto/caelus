@@ -1,10 +1,13 @@
 import createMDX from "@next/mdx";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
+import { remarkRunnable } from "./lib/runnable-mdx.mjs";
 
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [remarkGfm],
+    // remarkRunnable turns a fence flagged `run` into <CodeBlock run … />, the
+    // in-browser runnable example (lib/runnable-core.mjs).
+    remarkPlugins: [remarkGfm, remarkRunnable],
     rehypePlugins: [rehypeSlug],
   },
 });

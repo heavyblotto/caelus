@@ -6,6 +6,7 @@ import { satteri } from "@astrojs/markdown-satteri";
 import { appendFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import webBridge from "./plugins/web-bridge.mjs";
+import { satteriRunnable } from "../web/lib/runnable-mdx.mjs";
 
 const SITE_ROOT = fileURLToPath(new URL("./", import.meta.url));
 const WEB_ROOT = fileURLToPath(new URL("../web/", import.meta.url));
@@ -56,7 +57,9 @@ export default defineConfig({
   // own), and straight quotes left as typed.
   markdown: {
     syntaxHighlight: false,
-    processor: satteri({ features: { smartPunctuation: false } }),
+    // satteriRunnable turns a fence flagged `run` into <CodeBlock run … />,
+    // the same transform apps/web applies with its remark plugin.
+    processor: satteri({ features: { smartPunctuation: false }, mdastPlugins: [satteriRunnable] }),
   },
   integrations: [react(), mdx(), staticHeaders()],
   redirects: {

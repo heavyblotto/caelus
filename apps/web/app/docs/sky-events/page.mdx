@@ -15,13 +15,16 @@ page answer when something happens: a body crosses the horizon or the
 meridian, the Moon reaches a phase, a planet turns, or a body reaches a
 longitude. Each returns Julian Days in UT.
 
-```ts
+```ts run
 import {
   Engine, julianDay, riseSet, lunarPhases, stations, crossings,
 } from "caelus";
 import { embeddedData } from "caelus/data-embedded";
 
 const engine = new Engine(embeddedData);
+
+// Reads a Julian Day as a UTC timestamp.
+const utc = (jd) => new Date((jd - 2440587.5) * 86400000).toISOString();
 ```
 
 ## Rise, set, and culmination
@@ -30,9 +33,9 @@ const engine = new Engine(embeddedData);
 a place. The kind is `"rise"`, `"set"`, `"mtransit"` (upper culmination), or
 `"itransit"` (lower culmination).
 
-```ts
+```ts run
 const day = julianDay(2025, 6, 21);
-riseSet(engine, "sun", day, 51.5, -0.13, "rise");      // London
+utc(riseSet(engine, "sun", day, 51.5, -0.13, "rise"));      // London
 ```
 
 | Event, London, 21 June 2025 | UT |
@@ -54,9 +57,9 @@ rise in Tromsø on 21 June because it does not set.
 
 `lunarPhases` lists the four principal phases between two instants.
 
-```ts
-lunarPhases(engine, julianDay(2025, 6, 1), julianDay(2025, 7, 1));
-// [[jd, "first_quarter"], [jd, "full"], [jd, "last_quarter"], [jd, "new"]]
+```ts run
+lunarPhases(engine, julianDay(2025, 6, 1), julianDay(2025, 7, 1))
+  .map(([jd, phase]) => [utc(jd), phase]);
 ```
 
 For June 2025 those are the first quarter on the 3rd at 03:41 UT, the full
@@ -68,8 +71,9 @@ Moon on the 25th at 10:31.
 `stations` returns the instants a planet's motion in longitude reverses, with
 the direction it turns to.
 
-```ts
-stations(engine, "mercury", julianDay(2025, 1, 1), julianDay(2026, 1, 1));
+```ts run
+stations(engine, "mercury", julianDay(2025, 1, 1), julianDay(2026, 1, 1))
+  .map(([jd, turns]) => [utc(jd), turns]);
 ```
 
 | Mercury, 2025 | Turns |
@@ -91,8 +95,8 @@ station by a minute.
 A retrograde planet can cross the same degree three times, and all three are
 returned.
 
-```ts
-crossings(engine, "sun", 0, julianDay(2025, 1, 1), julianDay(2026, 1, 1));
+```ts run
+crossings(engine, "sun", 0, julianDay(2025, 1, 1), julianDay(2026, 1, 1)).map(utc);
 // one instant: 2025-03-20 09:01:30 UT, the March equinox
 ```
 

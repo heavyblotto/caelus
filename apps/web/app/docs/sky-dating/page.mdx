@@ -127,6 +127,38 @@ The funnel shows which constraint did the work. It also shows where a search
 that returns nothing ran dry, which points at the position in a text most
 likely to be miscopied.
 
+## In the browser
+
+The embedded tier covers 1000 to 3000, so a search inside that span needs no
+data files and runs where the page is. This one asks when the seven classical
+bodies were all in Aquarius, between 1800 and 2200:
+
+```ts run
+import { Engine, dateSky, julianDay, calendarDate } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);
+
+const { windows } = dateSky(engine, [
+  { body: "sun", sign: "Aquarius" },
+  { body: "moon", sign: "Aquarius" },
+  { body: "mercury", sign: "Aquarius" },
+  { body: "venus", sign: "Aquarius" },
+  { body: "mars", sign: "Aquarius" },
+  { body: "jupiter", sign: "Aquarius" },
+  { body: "saturn", sign: "Aquarius" },
+], julianDay(1800, 1, 1), julianDay(2200, 1, 1));
+
+windows.map((w) => [calendarDate(w.start), calendarDate(w.end)]);
+```
+
+One window matches. It opens at 22:56 UT on 3 February 1962 and closes at
+22:52 UT on 5 February, and `calendarDate` gives each hour as a decimal. The
+Moon crosses a sign in a little over two days, which sets the length. The
+search takes half a second in Node on a laptop. The
+[Sky Dating instrument](/instruments/sky-dating) runs the same function behind
+a form.
+
 ## From an AI client
 
 The MCP server exposes the same search as the `date_sky` tool. It takes the

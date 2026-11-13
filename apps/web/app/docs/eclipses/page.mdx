@@ -14,7 +14,7 @@ The engine answers three questions about an eclipse: when it happens, where on
 Earth it is seen, and what one observer sees. The search needs no extra data.
 It runs on the embedded tier from the same Sun and Moon positions as a chart.
 
-```ts
+```ts run
 import {
   Engine, julianDay, solarEclipses, solarEclipseWhere, solarEclipseLimits,
   solarEclipseLocal, lunarEclipses, lunarEclipseLocal,
@@ -22,6 +22,9 @@ import {
 import { embeddedData } from "caelus/data-embedded";
 
 const engine = new Engine(embeddedData);
+
+// Reads a Julian Day as a UTC timestamp.
+const utc = (jd) => new Date((jd - 2440587.5) * 86400000).toISOString();
 ```
 
 ## When
@@ -29,8 +32,9 @@ const engine = new Engine(embeddedData);
 `solarEclipses` and `lunarEclipses` return every eclipse between two Julian
 Days, in time order.
 
-```ts
-solarEclipses(engine, julianDay(2024, 1, 1), julianDay(2027, 1, 1));
+```ts run
+solarEclipses(engine, julianDay(2024, 1, 1), julianDay(2027, 1, 1))
+  .map((e) => [utc(e.tMax), e.type, e.gamma]);
 ```
 
 | Greatest eclipse (UT) | Type | Gamma |
@@ -59,12 +63,14 @@ For a solar eclipse, `solarEclipseWhere` gives the point on the ground under
 the shadow axis at an instant, and `solarEclipseLimits` adds the northern and
 southern edges of the central path and its width.
 
-```ts
+```ts run
 const [eclipse] = solarEclipses(engine, julianDay(2024, 4, 1), julianDay(2024, 5, 1));
 
 solarEclipseWhere(engine, eclipse.tMax);
 // { lat: 25.30, lonEast: -104.17 }   in Mexico, near Torreón
+```
 
+```ts run
 solarEclipseLimits(engine, eclipse.tMax).widthKm;
 // 198.98
 ```
@@ -78,7 +84,7 @@ that instant.
 `solarEclipseLocal` takes a place and returns the local type, the magnitude,
 the obscuration, and the four contact times.
 
-```ts
+```ts run
 solarEclipseLocal(engine, eclipse.tMax, 32.78, -96.80);   // Dallas
 ```
 
