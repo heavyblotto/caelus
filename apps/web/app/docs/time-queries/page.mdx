@@ -14,7 +14,7 @@ export const metadata = pageMetadata({
 describe a condition with predicates, and it returns the intervals in which
 the condition holds, as pairs of UT Julian Days.
 
-```ts
+```ts run
 import {
   Engine, julianDay, when, allOf, anyOf, notOf,
   inSign, aspect, retrograde, notRetrograde,
@@ -23,11 +23,14 @@ import { embeddedData } from "caelus/data-embedded";
 
 const engine = new Engine(embeddedData);
 
+// Reads an interval of Julian Days as two UTC timestamps.
+const utc = ([from, to]) => [from, to].map((jd) => new Date((jd - 2440587.5) * 86400000).toISOString());
+
 when(
   engine,
   allOf(inSign("jupiter", "Cancer"), retrograde("mercury")),
   julianDay(2025, 1, 1), julianDay(2027, 1, 1),
-);
+).map(utc);
 ```
 
 Jupiter is in Cancer and Mercury is retrograde in four intervals over those
@@ -57,10 +60,10 @@ the same predicate covers a transit to a natal position. The aspect kinds are
 conjunction, semisextile, sextile, square, trine, quincunx, and opposition,
 and `orb` defaults to 1°.
 
-```ts
+```ts run
 // Mars within 1° of Saturn, 2024 to 2030
 when(engine, aspect("mars", "conjunction", "saturn", 1),
-  julianDay(2024, 1, 1), julianDay(2030, 1, 1));
+  julianDay(2024, 1, 1), julianDay(2030, 1, 1)).map(utc);
 // three intervals: 9 to 12 April 2024, 18 to 21 April 2026, 29 April to 2 May 2028
 ```
 
@@ -68,7 +71,7 @@ when(engine, aspect("mars", "conjunction", "saturn", 1),
 
 `allOf`, `anyOf`, and `notOf` combine predicates and nest to any depth.
 
-```ts
+```ts run
 when(
   engine,
   allOf(
@@ -77,7 +80,7 @@ when(
     notOf(inSign("moon", "Scorpio")),
   ),
   julianDay(2026, 1, 1), julianDay(2026, 7, 1),
-);
+).map(utc);
 // one interval: 21 February 2026 07:14 UT to 24 February 2026 08:58 UT
 ```
 

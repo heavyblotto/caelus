@@ -19,7 +19,7 @@ which of the chart's facts hold across all of it.
 The [Uncertain Time instrument](/instruments/uncertain-time) runs the same
 scan in the browser, with a track for each fact that changes.
 
-```ts
+```ts run
 import { Engine, chartStability, julianDay } from "caelus";
 import { embeddedData } from "caelus/data-embedded";
 
@@ -63,10 +63,12 @@ instant at which the fact changes, found to about a second.
 
 Pass a half-width of twelve hours and the window is the whole day.
 
-```ts
+```ts run
 const day = chartStability(engine, jd, {
   lat: 27.95, lonEast: -82.46, halfWidthSeconds: 43200,
 });
+
+day.summary;   // { facts: 64, stable: 42 }
 ```
 
 For the same birth, 42 of 64 facts hold all day. Every body keeps its sign,

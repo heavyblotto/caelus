@@ -132,6 +132,10 @@ jobs:
       - run: node packages/wheel/dist/test/integration.test.js
       # apps/web library units (timeline lanes, root-found transit spans)
       - run: node scripts/test-web-libs.mjs
+      # runnable docs examples: every code block a guide flags `run` executes
+      # against the built engine through the same import rewriting the
+      # browser uses, so an example cannot rot while the site still builds
+      - run: npm run test:docs-examples
       # per-entrypoint bundle sizes (esbuild): informational, prints the table
       # the data-tiers doc quotes. Per-target try/catch keeps it non-blocking.
       - run: npm run bundle-sizes

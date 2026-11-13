@@ -23,6 +23,7 @@ Pass the engine its dataset explicitly. The embedded dataset is bundled with the
 package and needs no files on disk.
 
 <CodeBlock
+  run
   lang="typescript"
   label="chart.ts"
   code={`import { Engine, fmtLon } from "caelus";
@@ -37,6 +38,10 @@ fmtLon(chart.bodies.sun.lon);   // "19°27' Gemini"
 chart.bodies.saturn.retrograde; // true
 chart.angles.asc;               // ascendant longitude, degrees`}
 />
+
+Run executes the block in this page, on the embedded dataset, and shows the
+value of its last line. The engine downloads when you first press it, and
+nothing is sent to a server.
 
 <Note>
   Times are UT. A four-hour timezone error moves the ascendant
