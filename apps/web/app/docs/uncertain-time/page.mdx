@@ -16,6 +16,9 @@ and no time, and an ancient observation carries a clock error of minutes.
 `chartStability` takes a window of time around the stated instant and reports
 which of the chart's facts hold across all of it.
 
+The [Uncertain Time instrument](/instruments/uncertain-time) runs the same
+scan in the browser, with a track for each fact that changes.
+
 ```ts
 import { Engine, chartStability, julianDay } from "caelus";
 import { embeddedData } from "caelus/data-embedded";

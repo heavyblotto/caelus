@@ -1,0 +1,12 @@
+---
+/**
+ * /instruments/uncertain-time: renders
+ * apps/web/app/instruments/uncertain-time/page.tsx. The widget is prerendered
+ * with its opening form and hydrated in the browser, where it builds the
+ * embedded-tier engine and runs the scan.
+ */
+import Instrument from "../../layouts/Instrument.astro";
+import Page, { metadata } from "@web/app/instruments/uncertain-time/page";
+---
+
+<Instrument meta={metadata}><Page /></Instrument>

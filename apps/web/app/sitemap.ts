@@ -66,7 +66,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/playground",
+    "/instruments",
     "/instruments/sky-dating",
+    "/instruments/uncertain-time",
     "/features",
     "/validation",
     "/provenance",

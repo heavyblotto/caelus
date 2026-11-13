@@ -48,7 +48,7 @@ export const NAV: NavItem[] = [
   { href: "/docs", label: "Docs" },
   { href: "/features", label: "Features" },
   { href: "/playground", label: "Playground" },
-  { href: "/instruments/sky-dating", label: "Sky Dating" },
+  { href: "/instruments", label: "Instruments" },
 ];
 
 export type FooterColumn = { title: string; links: Array<NavItem & { external?: boolean }> };
