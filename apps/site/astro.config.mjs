@@ -90,6 +90,7 @@ export default defineConfig({
           "app/instruments/sky-dating/SkyDatingIsland.tsx": "src/islands/web/SkyDatingIsland.tsx",
           "app/instruments/uncertain-time/ChartStabilityIsland.tsx": "src/islands/web/ChartStabilityIsland.tsx",
           "app/instruments/eclipses/EclipsesIsland.tsx": "src/islands/web/EclipsesIsland.tsx",
+          "app/instruments/first-visibility/FirstVisibilityIsland.tsx": "src/islands/web/FirstVisibilityIsland.tsx",
           // Reads apps/web/content/api relative to process.cwd() in apps/web.
           "lib/api-docs.ts": { to: "src/lib/api-docs.ts", always: true },
         },

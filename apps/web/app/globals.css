@@ -2729,6 +2729,145 @@ button.emark:hover,
   line-height: 1.6;
 }
 
+/* First and last visibility across a year (the first-visibility instrument):
+   one row per kind of event. A mark is the day of an event, the band behind
+   it runs from the event under a clearer sky to the event under a hazier
+   one, and the top row shades the stretches in which the body is not seen. */
+.tl--vis .tl__row {
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+}
+
+.vtrk {
+  position: relative;
+  height: 22px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+
+.vgap {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  min-width: 2px;
+  background: var(--line2);
+}
+
+.vwin {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  min-width: 3px;
+  margin-left: -1px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+}
+
+.vmark {
+  position: absolute;
+  top: 2px;
+  width: 7px;
+  height: 16px;
+  margin-left: -3.5px;
+  padding: 0;
+  border: 1px solid var(--warm);
+  background: var(--warm);
+  cursor: pointer;
+}
+
+.vmark:hover,
+.vmark--picked {
+  outline: 1px solid var(--text);
+  outline-offset: 1px;
+  z-index: 1;
+}
+
+.tl__axis--months span,
+.tl__axis--months span:first-child,
+.tl__axis--months span:last-child {
+  transform: none;
+  padding-left: 0.25rem;
+}
+
+.tl__axis--months span::before,
+.tl__axis--months span:last-child::before {
+  left: 0;
+}
+
+@media (max-width: 760px) {
+  .tl--vis .tl__row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* The twilight of one event: the margin through the morning or evening on
+   the day of the event and on the day beside it. */
+.tw-zero {
+  stroke: var(--text);
+  stroke-width: 1;
+}
+
+.tw-day {
+  fill: none;
+  stroke: var(--warm);
+  stroke-width: 1.75;
+  stroke-linejoin: round;
+}
+
+.tw-beside {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.25;
+  stroke-dasharray: 4 3;
+  stroke-linejoin: round;
+}
+
+.twkey {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1.4rem;
+}
+
+.twk {
+  display: inline-block;
+  width: 1.4rem;
+  margin-right: 0.45rem;
+  vertical-align: middle;
+  border-top: 2px solid var(--warm);
+}
+
+.twk--beside {
+  border-top: 1px dashed var(--accent);
+}
+
+/* On a phone the plot is half its drawn width, so its labels are drawn
+   larger and the in-between ticks are dropped. */
+@media (max-width: 760px) {
+  .tw-plot .pp-lab {
+    font-size: 17px;
+  }
+
+  .tw-plot .tw-minor {
+    display: none;
+  }
+}
+
+/* Yallop's q, one bar per evening. A bar that clears the B line is drawn
+   solid, and the evening of the event takes the living-layer colour. */
+.q-bar {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 1;
+}
+
+.q-bar--seen {
+  fill: var(--accent);
+}
+
+.q-bar--hit {
+  fill: var(--warm);
+  stroke: var(--warm);
+}
+
 
 /* ---- bench pages ---- */
 .bench .page-close {

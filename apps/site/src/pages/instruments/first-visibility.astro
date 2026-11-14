@@ -1,0 +1,12 @@
+---
+/**
+ * /instruments/first-visibility: renders
+ * apps/web/app/instruments/first-visibility/page.tsx. The widget is
+ * prerendered with its opening form and hydrated in the browser, where it
+ * builds the embedded-tier engine and runs the search.
+ */
+import Instrument from "../../layouts/Instrument.astro";
+import Page, { metadata } from "@web/app/instruments/first-visibility/page";
+---
+
+<Instrument meta={metadata}><Page /></Instrument>
