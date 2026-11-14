@@ -3008,16 +3008,16 @@
     "warnings": [
      {
       "kind": "delta_t_uncertain",
-      "text": "delta-T is uncertain by ~17 s at this epoch (Morrison & Stephenson 2004): the Ascendant/MC smear ~0.07 deg and the Moon ~0.16 arcmin, while the slow bodies are unaffected",
-      "sigmaSeconds": 17,
-      "angleSmearCentideg": 7,
-      "moonSmearCentiarcmin": 16
+      "text": "delta-T is uncertain by ~19 s at this epoch (Stephenson, Morrison & Hohenkerk 2016): the Ascendant/MC smear ~0.08 deg and the Moon ~0.18 arcmin, while the slow bodies are unaffected",
+      "sigmaSeconds": 19,
+      "angleSmearCentideg": 8,
+      "moonSmearCentiarcmin": 18
      }
     ],
     "epochSigma": {
-     "sigmaSeconds": 17,
-     "angleSigma": 255,
-     "moonLongitudeSigma": 9
+     "sigmaSeconds": 19,
+     "angleSigma": 285,
+     "moonLongitudeSigma": 10
     }
    }
   },
@@ -3388,16 +3388,16 @@
     "warnings": [
      {
       "kind": "delta_t_uncertain",
-      "text": "delta-T is uncertain by ~17 s at this epoch (Morrison & Stephenson 2004): the Ascendant/MC smear ~0.07 deg and the Moon ~0.16 arcmin, while the slow bodies are unaffected",
-      "sigmaSeconds": 17,
-      "angleSmearCentideg": 7,
-      "moonSmearCentiarcmin": 16
+      "text": "delta-T is uncertain by ~19 s at this epoch (Stephenson, Morrison & Hohenkerk 2016): the Ascendant/MC smear ~0.08 deg and the Moon ~0.18 arcmin, while the slow bodies are unaffected",
+      "sigmaSeconds": 19,
+      "angleSmearCentideg": 8,
+      "moonSmearCentiarcmin": 18
      }
     ],
     "epochSigma": {
-     "sigmaSeconds": 17,
-     "angleSigma": 255000,
-     "moonLongitudeSigma": 9350
+     "sigmaSeconds": 19,
+     "angleSigma": 285000,
+     "moonLongitudeSigma": 10450
     }
    }
   },
@@ -3768,15 +3768,15 @@
     "warnings": [
      {
       "kind": "delta_t_uncertain",
-      "text": "delta-T is uncertain by ~17 s at this epoch (Morrison & Stephenson 2004): the Ascendant/MC smear ~0.07 deg and the Moon ~0.16 arcmin, while the slow bodies are unaffected",
-      "sigmaSeconds": 17,
-      "angleSmearCentideg": 7,
-      "moonSmearCentiarcmin": 16
+      "text": "delta-T is uncertain by ~19 s at this epoch (Stephenson, Morrison & Hohenkerk 2016): the Ascendant/MC smear ~0.08 deg and the Moon ~0.18 arcmin, while the slow bodies are unaffected",
+      "sigmaSeconds": 19,
+      "angleSmearCentideg": 8,
+      "moonSmearCentiarcmin": 18
      }
     ],
     "epochSigma": {
-     "sigmaSeconds": 17,
-     "angleSigma": 7,
+     "sigmaSeconds": 19,
+     "angleSigma": 8,
      "moonLongitudeSigma": 0
     }
    }
@@ -4472,23 +4472,23 @@
     "warnings": [
      {
       "kind": "delta_t_uncertain",
-      "text": "delta-T is uncertain by ~17 s at this epoch (Morrison & Stephenson 2004): the Ascendant/MC smear ~0.07 deg and the Moon ~0.16 arcmin, while the slow bodies are unaffected",
-      "sigmaSeconds": 17,
-      "angleSmearCentideg": 7,
-      "moonSmearCentiarcmin": 16
+      "text": "delta-T is uncertain by ~19 s at this epoch (Stephenson, Morrison & Hohenkerk 2016): the Ascendant/MC smear ~0.08 deg and the Moon ~0.18 arcmin, while the slow bodies are unaffected",
+      "sigmaSeconds": 19,
+      "angleSmearCentideg": 8,
+      "moonSmearCentiarcmin": 18
      }
     ],
     "epochSigma": {
-     "sigmaSeconds": 17,
+     "sigmaSeconds": 19,
      "angleSigma": [
       0,
       4,
-      15
+      45
      ],
      "moonLongitudeSigma": [
       0,
       0,
-      9
+      10
      ]
     }
    }
@@ -4860,16 +4860,16 @@
     "warnings": [
      {
       "kind": "delta_t_uncertain",
-      "text": "delta-T is uncertain by ~17 s at this epoch (Morrison & Stephenson 2004): the Ascendant/MC smear ~0.07 deg and the Moon ~0.16 arcmin, while the slow bodies are unaffected",
-      "sigmaSeconds": 17,
-      "angleSmearCentideg": 7,
-      "moonSmearCentiarcmin": 16
+      "text": "delta-T is uncertain by ~19 s at this epoch (Stephenson, Morrison & Hohenkerk 2016): the Ascendant/MC smear ~0.08 deg and the Moon ~0.18 arcmin, while the slow bodies are unaffected",
+      "sigmaSeconds": 19,
+      "angleSmearCentideg": 8,
+      "moonSmearCentiarcmin": 18
      }
     ],
     "epochSigma": {
-     "sigmaSeconds": 17,
-     "angleSigma": 255,
-     "moonLongitudeSigma": 9
+     "sigmaSeconds": 19,
+     "angleSigma": 285,
+     "moonLongitudeSigma": 10
     }
    }
   },
@@ -5003,11 +5003,11 @@
     "edge-1852/centideg": "71fb90ea4a26c2d9509d7cca1cf67e19933933ec1b8e353d479228dd1b79fe0f",
     "edge-1852/dms": "ee20ef31ff67c4cba098ae2359a51c2f72c06315003e6a394eb2a24cc4cb010b",
     "edge-1852/accuracy": "1ec20ad9b7b0b7d19b8382d580e5a871dc96a94cc596295c6113ae02fdf64f4a",
-    "prague-1620/arcsec": "520afecea201236acc00669f39f41b628d39a62b4e0fb0b66eee66ce9e8fd36b",
-    "prague-1620/milliarcsec": "f5f992feb0042e5e2e564ee55094b826203681ceb94f6393d6d2a50408a88b81",
-    "prague-1620/centideg": "c53424a689158d46aa9f436cffcae1c9908ec04ffa4216c0426dd1c0951e0e1b",
-    "prague-1620/dms": "1f685b3e328f012a7854cfa91c8f4e8049bda4a2d5a128788aedfc98d1e0145b",
-    "prague-1620/accuracy": "b8fb0c932e9f015fec98ae6c3dc6f3ae4217c36ecf817773283e1b27843ce9fb"
+    "prague-1620/arcsec": "0b3fd38e77afaba73f6131a694f5a7a80cd2dcc5970b104268cced6c1bd7ae3f",
+    "prague-1620/milliarcsec": "53060ad458fdc56cfb2c0c1cb41170800a86b14a2e58667014c3570f998f716e",
+    "prague-1620/centideg": "f14c7a228324b8da9aa4624fe8c052645f998ed8c703270277fc65c956a79b18",
+    "prague-1620/dms": "5c5c21a74370fcf714561fd35d5094c73f65368d233af07f0ead11bb7c50efc0",
+    "prague-1620/accuracy": "285465721d1de137b97d8b9f576122f1ef1028791927a562c4dd93f1ac909835"
    }
   },
   {
@@ -6123,23 +6123,23 @@
     },
     "prague-1620/arcsec": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "d4113298c2f3bea0794e31fbfe4857d5a1216fb6134995eddd225c3b2c60a7c4",
-     "composed": "f5f992feb0042e5e2e564ee55094b826203681ceb94f6393d6d2a50408a88b81"
+     "sidecar": "b0a6dcecd1ca033f9cc3a88583ef1209752e8250131c6fe43a82e9394eafdf5c",
+     "composed": "53060ad458fdc56cfb2c0c1cb41170800a86b14a2e58667014c3570f998f716e"
     },
     "prague-1620/centideg": {
      "remainderGrid": "arcsec",
-     "sidecar": "d7e64de9c7d01a3f1f80c97aded93feda6190170b79406f40b1a03e6c59b12d3",
-     "composed": "520afecea201236acc00669f39f41b628d39a62b4e0fb0b66eee66ce9e8fd36b"
+     "sidecar": "f17620e047a36f9d36aee497b89cf90f2c979ec4f7332820283f928bf3138658",
+     "composed": "0b3fd38e77afaba73f6131a694f5a7a80cd2dcc5970b104268cced6c1bd7ae3f"
     },
     "prague-1620/dms": {
      "remainderGrid": "milliarcsec",
-     "sidecar": "5c082b1b747c78d62a48588067e588e3d343a622003d31acb42fb3a820bad60f",
-     "composed": "f5f992feb0042e5e2e564ee55094b826203681ceb94f6393d6d2a50408a88b81"
+     "sidecar": "6c3ef6027a01aa65cf44b4b67fdd219ea654e3391886542bc619229ad6ccda26",
+     "composed": "53060ad458fdc56cfb2c0c1cb41170800a86b14a2e58667014c3570f998f716e"
     },
     "prague-1620/accuracy": {
      "remainderGrid": "arcsec",
-     "sidecar": "3491e92e0a583bc4f0be6e03ce7b778308999287b491b595633c9c782aeacf2f",
-     "composed": "520afecea201236acc00669f39f41b628d39a62b4e0fb0b66eee66ce9e8fd36b"
+     "sidecar": "29f948cd0e12d8f7d972d2afbdd7aefdcda7d6474e04f9329d53fcb5f3b7b665",
+     "composed": "0b3fd38e77afaba73f6131a694f5a7a80cd2dcc5970b104268cced6c1bd7ae3f"
     }
    }
   },

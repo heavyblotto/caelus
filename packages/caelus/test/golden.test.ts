@@ -569,9 +569,10 @@ for (const g of G.houses) {
       );
     }
   }
-  // deltaTSigma pins to the published Morrison & Stephenson (2004) sigmas at
-  // the breakpoints (the table itself is the oracle) and interpolates between.
-  for (const [y, s] of [[0, 260], [1000, 55], [1600, 20], [500, 160], [800, 97]] as const) {
+  // deltaTSigma pins to its knots (python/test_delta_t.py derives them from
+  // the published error column and the 2020 revision) and interpolates
+  // between; before -2000 it extends at the table's slope.
+  for (const [y, s] of [[0, 129], [1000, 180], [1600, 19], [500, 40], [850, 166.5], [-720, 180], [-1000, 1440], [-3000, 3600]] as const) {
     expect(`deltaTSigma(${y})`, deltaTSigma(y), s, 1e-9);
   }
 

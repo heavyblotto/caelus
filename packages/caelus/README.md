@@ -13,7 +13,7 @@ image-prompt frames, and synthetic ephemeris for imaginary bodies. MIT, no Swiss
    true node ≤ 1′ vs SE's built-in ephemeris (≤ 1″ vs JPL DE431)
    (vs full DE431 files, 1850–2149), angles and Placidus cusps ≤ 3.2″ — all
    invisible at the arcminute display precision chart software uses.
-2. TypeScript port verified against Python golden fixtures: **3,459 checks,
+2. TypeScript port verified against Python golden fixtures: **3,462 checks,
    0 failures, worst deviation 0.41 nano-arcseconds.** The two implementations
    are numerically identical.
 

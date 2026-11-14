@@ -121,15 +121,38 @@ export function validatedSpanFor(body: string, data: EngineData): BodySpan | nul
   return span;
 }
 
+/** [year, sigma seconds]; see {@link deltaTSigma}. */
+const DT_SIGMA: ReadonlyArray<readonly [number, number]> = [
+  [-2000, 2520], [-1900, 2520], [-1800, 2160], [-1700, 2160], [-1600, 2160],
+  [-1500, 1800], [-1400, 1800], [-1300, 1800], [-1200, 1440], [-1100, 1440],
+  [-1000, 1440], [-900, 1440], [-800, 1080], [-720, 180], [-700, 170],
+  [-600, 160], [-500, 150], [-400, 134], [-300, 120], [-200, 110],
+  [-100, 100], [0, 129], [100, 155], [200, 145], [300, 114],
+  [400, 65], [500, 40], [600, 52], [700, 100], [800, 153],
+  [900, 180], [1000, 180], [1100, 153], [1200, 115], [1300, 51],
+  [1400, 15], [1500, 15], [1600, 19], [1650, 20], [1700, 5],
+  [1750, 2], [1800, 1], [1850, 0.5], [1900, 0.1], [2025, 0.05],
+];
+
 /**
  * One-sigma uncertainty of delta T (TT - UT1) in seconds at a calendar year.
  *
- * Breakpoints from Morrison & Stephenson, "Historical values of the Earth's
- * clock error deltaT and the calculation of eclipses" (J. Hist. Astron. 35,
- * 2004), Table 1's sigma column; the telescopic era tapers to the IERS
- * measured span (effectively exact), and the future grows quadratically from
- * the end of the measured tables (extrapolation, stated as such). Linear
- * interpolation between breakpoints.
+ * Before 1700 each century knot is the larger of two published numbers. The
+ * first is the standard error HM Nautical Almanac Office tabulates with
+ * Stephenson, Morrison & Hohenkerk's 2016 values (the "error" column of the
+ * delta T table for -2000 to 2016, reproduced by the IERS Earth Orientation
+ * Centre). The second is the amount by which the same authors' 2020 revision,
+ * the spline `deltaT()` evaluates, moved the value at that epoch. Between 700
+ * and 1300 the revision moved it by 100 to 180 s where the 2016 table states
+ * 15 to 30 s, so the revision sets the figure there. Before -720 the
+ * published values are themselves extrapolations and their errors are 1080 s
+ * and up.
+ *
+ * From 1700 on the knots are this engine's own, a little wider than the
+ * published errors because `deltaT()` interpolates observations at five-year
+ * steps. Earlier than -2000 the table is extended at its slope over the last
+ * thousand years (stated extrapolation), and the future grows quadratically
+ * from the end of the measured tables. Linear between knots.
  *
  * This is what bounds ancient charts: at year 150 the position theories are
  * fine but sigma(deltaT) is minutes, which smears the fast movers -- the
@@ -138,13 +161,12 @@ export function validatedSpanFor(body: string, data: EngineData): BodySpan | nul
  * report exactly that split.
  */
 export function deltaTSigma(year: number): number {
-  // [year, sigma seconds]
-  const TABLE: [number, number][] = [
-    [-1000, 640], [-500, 430], [0, 260], [500, 160], [1000, 55],
-    [1200, 30], [1400, 20], [1600, 20], [1700, 5], [1750, 2],
-    [1800, 1], [1850, 0.5], [1900, 0.1], [2025, 0.05],
-  ];
-  if (year <= TABLE[0][0]) return TABLE[0][1];
+  const TABLE = DT_SIGMA;
+  if (year < TABLE[0][0]) {
+    const [y0, s0] = TABLE[0];
+    const [y1, s1] = TABLE[10];
+    return s0 + (s0 - s1) / (y1 - y0) * (y0 - year);
+  }
   const last = TABLE[TABLE.length - 1];
   if (year > last[0]) {
     // Future extrapolation: the long-term deltaT forecasts spread by a few

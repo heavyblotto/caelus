@@ -406,5 +406,5 @@ claims are per-body and TT-honest rather than one headline number
   figures in this document compare positions in TT and did not depend on
   delta T, so they stand; what changed is the TT an instant given in UT maps
   to. `python/test_delta_t.py` checks the model against the published table.
-  `deltaTSigma` still follows Morrison & Stephenson (2004) and has not been
-  re-derived for the newer reconstruction.
+  `deltaTSigma` was re-derived in the same release from the 2016 published
+  errors and the size of the 2020 revision.

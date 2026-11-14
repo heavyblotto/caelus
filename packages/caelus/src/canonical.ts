@@ -306,7 +306,7 @@ export interface CanonicalChart {
    *  geometry carries no sigma. Additive under the format-version rules;
    *  digests incorporate the block as any field. */
   epochSigma?: {
-    /** sigma(deltaT) in whole seconds (Morrison & Stephenson 2004 table). */
+    /** sigma(deltaT) in whole seconds (see deltaTSigma). */
     sigmaSeconds: number;
     /** Sigma of rotation-anchored quantities, in grid units. */
     angleSigma: number | [number, number, number];

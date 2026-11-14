@@ -94,16 +94,28 @@ _DT_OBS = [
 def delta_t_sigma(year):
     """One-sigma uncertainty of delta T in seconds at a calendar year.
 
-    Breakpoints from Morrison & Stephenson (2004, J. Hist. Astron. 35),
-    Table 1's sigma column; telescopic era tapers to the IERS span, future
-    grows quadratically from the measured end (stated extrapolation).
+    Before 1700 each century knot is the larger of two published numbers.
+    The first is the standard error HM Nautical Almanac Office tabulates
+    with Stephenson, Morrison & Hohenkerk's 2016 values (the "error" column
+    of the delta T table for -2000 to 2016, reproduced by the IERS Earth
+    Orientation Centre). The second is the amount by which the same
+    authors' 2020 revision, the spline delta_t() evaluates, moved the value
+    at that epoch. Between 700 and 1300 the revision moved it by 100 to
+    180 s where the 2016 table states 15 to 30 s, so the revision sets the
+    figure there. Before -720 the published values are themselves
+    extrapolations and their errors are 1080 s and up.
+
+    From 1700 on the knots are this engine's own, a little wider than the
+    published errors because delta_t() interpolates observations at
+    five-year steps. Earlier than -2000 the table is extended at its slope
+    over the last thousand years (stated extrapolation), and the future
+    grows quadratically from the measured end. Linear between knots.
     Mirrors ranges.ts deltaTSigma in the TS engine.
     """
-    table = [(-1000, 640), (-500, 430), (0, 260), (500, 160), (1000, 55),
-             (1200, 30), (1400, 20), (1600, 20), (1700, 5), (1750, 2),
-             (1800, 1), (1850, 0.5), (1900, 0.1), (2025, 0.05)]
-    if year <= table[0][0]:
-        return table[0][1]
+    table = _DT_SIGMA
+    if year < table[0][0]:
+        (y0, s0), (y1, s1) = table[0], table[10]
+        return s0 + (s0 - s1) / (y1 - y0) * (y0 - year)
     last_y, last_s = table[-1]
     if year > last_y:
         t = (year - last_y) / 50
@@ -112,6 +124,20 @@ def delta_t_sigma(year):
         if year <= y1:
             return s0 + (s1 - s0) * (year - y0) / (y1 - y0)
     return last_s
+
+
+# [year, sigma seconds]; see delta_t_sigma.
+_DT_SIGMA = [
+    (-2000, 2520), (-1900, 2520), (-1800, 2160), (-1700, 2160), (-1600, 2160),
+    (-1500, 1800), (-1400, 1800), (-1300, 1800), (-1200, 1440), (-1100, 1440),
+    (-1000, 1440), (-900, 1440), (-800, 1080), (-720, 180), (-700, 170),
+    (-600, 160), (-500, 150), (-400, 134), (-300, 120), (-200, 110),
+    (-100, 100), (0, 129), (100, 155), (200, 145), (300, 114),
+    (400, 65), (500, 40), (600, 52), (700, 100), (800, 153),
+    (900, 180), (1000, 180), (1100, 153), (1200, 115), (1300, 51),
+    (1400, 15), (1500, 15), (1600, 19), (1650, 20), (1700, 5),
+    (1750, 2), (1800, 1), (1850, 0.5), (1900, 0.1), (2025, 0.05),
+]
 
 
 # Historical Delta T: the cubic-spline fit of Morrison, Stephenson, Hohenkerk

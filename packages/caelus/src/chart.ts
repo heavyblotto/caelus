@@ -1060,7 +1060,7 @@ function chartWarnings(
       angleSmearDeg,
       moonSmearArcmin,
       text: `delta-T is uncertain by ~${Math.round(sigma)} s at this epoch `
-        + `(Morrison & Stephenson 2004): the Ascendant/MC smear ~${angleSmearDeg} deg `
+        + `(Stephenson, Morrison & Hohenkerk 2016): the Ascendant/MC smear ~${angleSmearDeg} deg `
         + `and the Moon ~${moonSmearArcmin} arcmin, while the slow bodies are unaffected`,
     });
   }

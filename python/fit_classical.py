@@ -138,7 +138,7 @@ def mint_planet(name, year0_nominal):
         "true_error_basis": "max radial error vs raw Horizons samples inside the fitted span",
         "deltaT_model": "Morrison, Stephenson, Hohenkerk & Zawilski 2021 "
                         "spline (core.delta_t); sigma per ranges.ts "
-                        "deltaTSigma (Morrison & Stephenson 2004)",
+                        "deltaTSigma",
         "era": "classical",
     }
     return name, data, true_err
@@ -191,7 +191,7 @@ def mint_moon(year0_nominal):
         "true_error_basis": "max radial error vs raw Horizons samples inside the fitted span",
         "deltaT_model": "Morrison, Stephenson, Hohenkerk & Zawilski 2021 "
                         "spline (core.delta_t); sigma per ranges.ts "
-                        "deltaTSigma (Morrison & Stephenson 2004)",
+                        "deltaTSigma",
         "era": "classical",
     }
     return "moon", data, true_err

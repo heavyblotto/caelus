@@ -101,6 +101,47 @@ ok(mono, "bridge is monotone decreasing")
 for year, want in ((1955.0, 31.1), (2000.0, 63.8), (2025.0, 69.2)):
     ok(abs(at(year) - want) < 1e-9, f"DT({year}) moved off the observation")
 
+# 7. The sigma table. Before 1700 each knot must be the larger of the
+#    published standard error and the amount the 2020 revision moved the
+#    value. PUBLISHED is (year, delta T, error) from HM Nautical Almanac
+#    Office's table for Stephenson, Morrison & Hohenkerk (2016), as reproduced
+#    by the IERS Earth Orientation Centre
+#    (hpiers.obspm.fr/eop-pc/earthor/ut1lod/lod-eclipses.html), read
+#    2026-11-13.
+PUBLISHED = [
+    (-2000, 46800, 2520), (-1900, 44280, 2520), (-1800, 42120, 2160), (-1700, 39600, 2160),
+    (-1600, 37440, 2160), (-1500, 35640, 1800), (-1400, 33480, 1800), (-1300, 31680, 1800),
+    (-1200, 29520, 1440), (-1100, 27720, 1440), (-1000, 25920, 1440), (-900, 23760, 1440),
+    (-800, 21960, 1080), (-720, 20550, 180), (-700, 20170, 170), (-600, 18400, 160),
+    (-500, 16800, 150), (-400, 15340, 130), (-300, 14000, 120), (-200, 12780, 110),
+    (-100, 11640, 100), (0, 10570, 90), (100, 9560, 80), (200, 8570, 70),
+    (300, 7590, 60), (400, 6600, 50), (500, 5600, 40), (600, 4600, 40),
+    (700, 3660, 30), (800, 2790, 25), (900, 2050, 20), (1000, 1470, 15),
+    (1100, 1070, 15), (1200, 800, 15), (1300, 630, 15), (1400, 470, 15),
+    (1500, 290, 15), (1600, 90, 15), (1650, 44, 20),
+]
+from astroengine.core import delta_t_sigma
+
+for year, dt2016, err2016 in PUBLISHED:
+    moved = abs(at(float(year)) - dt2016)
+    want = max(err2016, round(moved))
+    got = delta_t_sigma(year)
+    ok(got == want, f"sigma({year}) = {got}, want max({err2016}, {moved:.1f}) = {want}")
+    ok(got >= err2016, f"sigma({year}) is at least the published error")
+ok(delta_t_sigma(1000) == 180 and delta_t_sigma(1300) == 51,
+   "the 2020 revision, not the 2016 error, sets sigma in the medieval period")
+ok(delta_t_sigma(-3000) == 3600.0 and delta_t_sigma(-2500) == 3060.0,
+   "before -2000 sigma extends at the table's slope")
+ok(all(abs(delta_t_sigma(y) - v) < 1e-12 for y, v in ((1800, 1), (1900, 0.1), (2025, 0.05))),
+   "the modern knots are unchanged")
+mono = True
+y = -3000.0
+while y < -730.0:
+    if delta_t_sigma(y + 10.0) > delta_t_sigma(y):
+        mono = False
+    y += 10.0
+ok(mono, "sigma never grows toward the present before the spline begins")
+
 if "--report" in sys.argv:
     print(f"worst knot mismatch: {worst_knot:.4f} s")
     for name, step in steps.items():

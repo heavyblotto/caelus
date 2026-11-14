@@ -2,7 +2,7 @@
 
 One source of truth for the measured per-body spans behind the headline
 ("validated, not asserted": the figures move only when the Horizons
-measurement does) and the Morrison & Stephenson (2004) delta-T uncertainty,
+measurement does) and the Stephenson, Morrison & Hohenkerk (2016) delta-T uncertainty,
 consumed by chart warnings so both engines emit identical validity
 statements (the canonical digest pins them equal cross-language).
 """
@@ -108,7 +108,7 @@ def chart_warnings(jd_ut, present_bodies, engine):
             "angleSmearDeg": angle_smear,
             "moonSmearArcmin": moon_smear,
             "text": (f"delta-T is uncertain by ~{js_round(sigma)} s at this "
-                     "epoch (Morrison & Stephenson 2004): the Ascendant/MC "
+                     "epoch (Stephenson, Morrison & Hohenkerk 2016): the Ascendant/MC "
                      f"smear ~{_fmt(angle_smear)} deg and the Moon "
                      f"~{_fmt(moon_smear)} arcmin, while the slow bodies are "
                      "unaffected"),

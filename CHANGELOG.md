@@ -108,10 +108,15 @@ current figures live in `packages/caelus/accuracy.json` and on
   knot, and the model must be continuous where its branches meet. It runs in
   the Python CI job and needs no network. The golden suite gains 19 ΔT rows
   between 3000 BCE and 1954.
-- **Open.** `deltaTSigma` still follows Morrison & Stephenson (2004). The
-  newer reconstruction differs from the 2004 one by 189 s at 1300, where that
-  table states a sigma of 25 s, so the sigma table needs re-deriving from the
-  2016 error estimates before the two can be quoted together.
+- **`deltaTSigma` re-derived.** The uncertainty table followed Morrison &
+  Stephenson (2004). Before 1700 each knot is now the larger of the standard
+  error published with the 2016 values and the amount by which the 2020
+  revision moved ΔT at that epoch. At 1000 CE sigma goes from 55 s to 180 s,
+  because the revision moved the value by 180 s where the 2016 table states
+  15. In antiquity it falls (260 s to 129 s at year 0). Before −1000 it was
+  flat at 640 s; it is now 1440 s there and 3600 s at 3000 BCE, which is 15°
+  on the angles. Chart warnings and the canonical `epochSigma` block carry the
+  new values, so digests of charts before 1700 change.
 
 ### Site
 

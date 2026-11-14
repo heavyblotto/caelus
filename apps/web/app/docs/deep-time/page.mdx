@@ -163,23 +163,28 @@ Hermite curve joins the parabola to the spline. That join is this engine's
 construction and is not part of the published table. After 2025 the value is
 an extrapolation.
 
-`deltaTSigma` returns the one-sigma uncertainty of ΔT for a year, from
-Morrison and Stephenson (2004).
+`deltaTSigma` returns the one-sigma uncertainty of ΔT for a year. Before 1700
+it is the larger of two published numbers: the standard error tabulated with
+Stephenson, Morrison, and Hohenkerk's 2016 values, and the amount by which
+the authors' 2020 revision moved the value at that epoch. Around 1000 CE the
+revision moved ΔT by 180 seconds where the 2016 table stated 15, so the
+revision sets the figure there. Before −720 the published values are
+extrapolations, and before −2000 the engine extends the table at its slope.
 
 ```ts
 deltaT(julianDay(76, 1, 1, 0, 0, 0, "julian"));   // 9647.4
-deltaTSigma(76);                                  // 244.8
+deltaTSigma(76);                                  // 148.8
 ```
 
 | Year | ΔT (s) | Sigma (s) | Angles | Moon |
 |---|---|---|---|---|
-| −2998 | 75,278 | 640 | 2.67° | 5.87′ |
-| −1000 | 25,310 | 640 | 2.67° | 5.87′ |
-| −500 | 16,939 | 430 | 1.79° | 3.94′ |
-| 0 | 10,441 | 260 | 1.08° | 2.38′ |
-| 500 | 5,586 | 160 | 0.67° | 1.47′ |
-| 1000 | 1,650 | 55 | 0.23° | 0.50′ |
-| 1600 | 109 | 20 | 0.08° | 0.18′ |
+| −2998 | 75,278 | 3,598 | 14.99° | 32.98′ |
+| −1000 | 25,310 | 1,440 | 6.00° | 13.20′ |
+| −500 | 16,939 | 150 | 0.62° | 1.38′ |
+| 0 | 10,441 | 129 | 0.54° | 1.18′ |
+| 500 | 5,586 | 40 | 0.17° | 0.37′ |
+| 1000 | 1,650 | 180 | 0.75° | 1.65′ |
+| 1600 | 109 | 19 | 0.08° | 0.17′ |
 | 1800 | 18 | 1 | 0.00° | 0.01′ |
 | 2000 | 64 | 0.06 | 0.00° | 0.00′ |
 
@@ -228,9 +233,9 @@ the unknown.
 - The accuracy table publishes arcsecond bounds for 1000 to 3000 and none yet
   for the era packs. The recorded fit errors above are the measurement that
   exists. The modern figures are on [Validation](/validation).
-- The sigma table dates from 2004 and the spline from 2021. Re-deriving sigma
-  from the newer error estimates is open work, and the table is flat at 640
-  seconds before −1000.
+- Sigma before −2000 is an extrapolation of the published table, which
+  stops there. At 3000 BCE it is an hour, which is 15° on the angles: a chart
+  that far back fixes the planets and leaves the houses open.
 - The era packs ship in the npm tarball as binary files and are about 16 MB
   of it. A browser bundle does not include them; `decodePack` reads one that
   a page fetches for itself.

@@ -90,7 +90,7 @@ ok(kinds <= {"sign", "retrograde", "aspect"} and "sign" in kinds, f"no place, no
 # 4. The default window is the delta-T sigma of the epoch.
 old = julian_day(100, 3, 1, 12, calendar="julian")
 anc = chart_stability(eng, old, 41.9, 12.5)
-ok(anc["half_width_seconds"] == delta_t_sigma(jd_year(old)) and anc["half_width_seconds"] > 200,
+ok(anc["half_width_seconds"] == delta_t_sigma(jd_year(old)) and anc["half_width_seconds"] > 100,
    f"ancient default half-width is sigma(delta T) ({anc['half_width_seconds']:.0f} s)")
 now = chart_stability(eng, JD, LAT, LON)
 ok(now["half_width_seconds"] < 1 and now["summary"]["stable"] >= now["summary"]["facts"] - 1,

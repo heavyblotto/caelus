@@ -101,10 +101,8 @@ Milestones 4 and 5 reverse two entries in the non-goals list of
 Milestone 5 depends on 1 to 3, 6 depends on 4, and 7 waits for 4 so that the
 port implements the pack format once.
 
-Open items carried by milestone 1: `deltaTSigma` still follows Morrison &
-Stephenson (2004) and needs re-deriving from the 2016 error estimates, and the
-UT path has no external oracle yet, because the Swiss Ephemeris and Horizons
-validators compare in TT.
+Open item carried by milestone 1: the UT path has no external oracle yet,
+because the Swiss Ephemeris and Horizons validators compare in TT.
 
 ## Planned
 
