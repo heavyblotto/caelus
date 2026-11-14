@@ -28,7 +28,7 @@ export default function InstrumentsPage() {
           </div>
         </div>
         {INSTRUMENTS.map((inst) => (
-          <Link key={inst.id} href={inst.href} className="tile s4">
+          <Link key={inst.id} href={inst.href} className="tile s3">
             <div className="tile__h">
               <b>{inst.id}</b>
               <span>Instrument</span>

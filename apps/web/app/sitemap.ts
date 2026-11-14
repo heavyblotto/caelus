@@ -70,6 +70,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/instruments/sky-dating",
     "/instruments/uncertain-time",
     "/instruments/eclipses",
+    "/instruments/first-visibility",
     "/features",
     "/validation",
     "/provenance",

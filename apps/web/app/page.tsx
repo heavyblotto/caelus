@@ -210,7 +210,7 @@ export default function Home() {
           <p>Interactive browser tools powered by Caelus, paired with the TypeScript call used to produce each result.</p>
         </div>
         {INSTRUMENTS.map((inst) => (
-          <Link key={inst.id} href={inst.href} className="tile s4">
+          <Link key={inst.id} href={inst.href} className="tile s3">
             <div className="tile__h">
               <b>{inst.id}</b>
               <span>Instrument</span>
