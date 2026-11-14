@@ -657,6 +657,10 @@ export interface HeliacalOptions {
   arcusVisionis?: number;
   /** Observer altitude in metres. */
   altM?: number;
+  /** Shorten the search to this many days past `jdStart`: a later event is
+   *  not returned, and the engine is not asked for positions much beyond
+   *  it. The default search runs about 830 days (45 for the Moon). */
+  span?: number;
 }
 
 /** One first or last visibility, as {@link heliacal} reports it. */
@@ -701,9 +705,39 @@ export interface HeliacalEvent {
   width?: number;
 }
 
+/**
+ * The events a target has under a method, in the order {@link heliacal}
+ * names them: stars and the outer planets have the heliacal rising and
+ * setting (and, by the arcus method, the two events at opposition), Mercury
+ * and Venus have four, and the Moon has its first and last crescent by the
+ * visibility method only.
+ *
+ * @param engine The engine whose star catalog names the stars.
+ * @param target A planet id, `"moon"`, or a catalog star name.
+ * @param method `"visibility"` (default) or `"arcus"`.
+ * @throws Error for an unknown target or method.
+ * @example
+ * ```ts
+ * heliacalKindsFor(engine, "venus");  // four kinds
+ * heliacalKindsFor(engine, "Sirius"); // ["morning_first", "evening_last"]
+ * ```
+ */
+export function heliacalKindsFor(
+  engine: Engine, target: string, method: HeliacalMethod = "visibility",
+): HeliacalKind[] {
+  if (method !== "visibility" && method !== "arcus") {
+    throw new Error(`heliacal: unknown method '${method}'`);
+  }
+  isStar(engine, target);
+  if (target === "moon") return method === "visibility" ? ["evening_first", "morning_last"] : [];
+  if (INNER.includes(target)) return ["morning_first", "evening_last", "evening_first", "morning_last"];
+  if (method === "arcus") return ["morning_first", "evening_last", "acronychal_rising", "cosmical_setting"];
+  return ["morning_first", "evening_last"];
+}
+
 function moonEvent(
   engine: Engine, kind: HeliacalKind, jdStart: number,
-  latDeg: number, lonDeg: number, altM: number,
+  latDeg: number, lonDeg: number, altM: number, span: number | undefined,
 ): HeliacalEvent | null {
   const first = kind === "evening_first";
   const half: Half = first ? "evening" : "morning";
@@ -716,12 +750,15 @@ function moonEvent(
     const c = look(day);
     return c !== null && c.q > qMin;
   };
-  for (const conj of phaseEvents(engine, "moon", false, 0.0, jdStart - 8.0, jdStart + 45.0)) {
+  const jdLast = span === undefined ? jdStart + 45.0 : jdStart + Math.min(span, 45.0);
+  const jdTo = span === undefined ? jdLast : jdLast + 8.0;
+  for (const conj of phaseEvents(engine, "moon", false, 0.0, jdStart - 8.0, jdTo)) {
     const day0 = localDay(conj, lonDeg);
     const day = walk(over(Q_VISIBLE), day0, first, 6);
     if (day === null) continue;
     const c = look(day)!;
     if (c.jd < jdStart) continue;
+    if (span !== undefined && c.jd > jdLast) return null;
     const easy = walk(over(Q_EASY), day0, first, 6);
     const easyJd = easy !== null ? look(easy)!.jd : null;
     return {
@@ -787,7 +824,9 @@ export function heliacal(
     }
   }
   const altM = opts.altM ?? 0.0;
-  if (target === "moon") return moonEvent(engine, kind, jdStart, latDeg, lonDeg, altM);
+  const span = opts.span;
+  if (span !== undefined && !(span > 0.0)) throw new Error("heliacal: span must be positive");
+  if (target === "moon") return moonEvent(engine, kind, jdStart, latDeg, lonDeg, altM, span);
   const av = opts.arcusVisionis;
   if (method === "arcus" && av === undefined) {
     throw new Error("heliacal: the arcus method needs arcusVisionis, in degrees");
@@ -815,7 +854,9 @@ export function heliacal(
     return crossings.get(day)!;
   };
 
-  for (const anchor of anchors(engine, target, star, kind, jdStart - limit - 5.0, jdStart + 830.0)) {
+  const jdLast = span === undefined ? jdStart + 830.0 : jdStart + Math.min(span, 830.0);
+  const jdTo = span === undefined ? jdLast : jdLast + limit + 5.0;
+  for (const anchor of anchors(engine, target, star, kind, jdStart - limit - 5.0, jdTo)) {
     const day0 = localDay(anchor, lonDeg);
     if (method === "arcus") {
       const holds = (day: number): boolean => {
@@ -826,6 +867,7 @@ export function heliacal(
       if (day === null) continue;
       const [tc, dep] = crossing(day)!;
       if (tc < jdStart) continue;
+      if (span !== undefined && tc > jdLast) return null;
       return {
         target, kind, method: "arcus", jd: tc, conjunction: anchor,
         arcusVisionis: av!, sunDepression: dep,
@@ -854,6 +896,7 @@ export function heliacal(
     if (day === null || hit === null) continue;
     const [margin, t] = hit;
     if (t < jdStart) continue;
+    if (span !== undefined && t > jdLast) return null;
     const clearT = runs[1][2] !== null ? runs[1][2][1] : null;
     const hazyT = runs[2][2] !== null ? runs[2][2][1] : null;
     const n = night(day);

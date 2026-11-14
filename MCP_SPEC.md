@@ -340,6 +340,14 @@ Each constraint names `body`, or `elongation: [a, b]` for the longitude of
 `orb`, or `from` with `to`. `pad` widens arcs, per constraint or for all of
 them. Years are astronomical (`-409` is 410 BCE) and both ends are inclusive.
 
+A constraint can instead be `visibility: {target, kind, lat, lon,
+extinction?, spread?, method?, arcus_visionis?, altitude_m?}`, a first or
+last visibility at a place with the fields of the `heliacal` tool, and
+`within_days` to widen the event's window on each side. It holds on the local
+days from the event's earliest date to its latest and is always taken last.
+With one present the allowed span is a year shorter at each end, and the Sun,
+the Moon, and the target count among the bodies named.
+
 Returns `{searched, windows, truncated, funnel}`. A window is
 `{start, end, days}`, and each end is
 `{jd, calendar, year, era, month, day, ut}`: the Julian calendar before 15

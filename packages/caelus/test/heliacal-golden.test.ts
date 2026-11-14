@@ -12,7 +12,7 @@ import { Engine } from "../src/chart.js";
 import { calendarDate, julianDay } from "../src/core.js";
 import { loadNodeData } from "../src/node-loader.js";
 import {
-  heliacal, localDay, lunarCrescent, visibility, HELIACAL_KINDS,
+  heliacal, heliacalKindsFor, localDay, lunarCrescent, visibility, HELIACAL_KINDS,
   type HeliacalOptions,
 } from "../src/heliacal.js";
 
@@ -73,7 +73,7 @@ for (const c of G.events as any[]) {
   const o = c.options ?? {};
   const opts: HeliacalOptions = {
     kind: o.kind, method: o.method, extinction: o.extinction, spread: o.spread,
-    arcusVisionis: o.arcus_visionis, altM: o.alt_m,
+    arcusVisionis: o.arcus_visionis, altM: o.alt_m, span: o.span,
   };
   const got = heliacal(eng, c.target, c.jd, c.lat, c.lon, opts);
   ok((got === null) === (c.result === null), `${c.id}: found in one engine and not the other`);
@@ -101,6 +101,14 @@ for (const c of G.crescents as any[]) {
   })!;
   ok(localDay(back.jd, 31.25) === localDay(ev.jd, 31.25), "the implied arcus visionis gives the same day back");
   ok(HELIACAL_KINDS.length === 6, "six kinds of event");
+  ok(heliacalKindsFor(eng, "Sirius").join() === "morning_first,evening_last", "a star has a rising and a setting");
+  ok(heliacalKindsFor(eng, "venus").length === 4 && heliacalKindsFor(eng, "moon").join() === "evening_first,morning_last",
+    "Venus has four events and the Moon two");
+  ok(heliacalKindsFor(eng, "mars", "arcus").includes("acronychal_rising") && heliacalKindsFor(eng, "moon", "arcus").length === 0,
+    "the arcus method adds the opposition events and has none for the Moon");
+  ok(heliacal(eng, "Sirius", start, 29.85, 31.25, { span: 120 }) === null
+    && heliacal(eng, "Sirius", start, 29.85, 31.25, { span: 220 })!.jd === ev.jd,
+    "span cuts the search short and does not move an event inside it");
   const moon = heliacal(eng, "moon", julianDay(2025, 3, 1), 21.42, 39.83, { kind: "evening_first" })!;
   ok(moon.method === "crescent" && (moon.zone === "A" || moon.zone === "B") && moon.q! > -0.014,
     "the new crescent is found by Yallop's test");
@@ -114,6 +122,8 @@ for (const c of G.crescents as any[]) {
   ok(throws(() => heliacal(eng, "Sirius", start, 30, 31, { kind: "acronychal_rising" })),
     "the opposition events need the arcus method");
   ok(throws(() => heliacal(eng, "Nibiru", start, 30, 31)), "an unknown target is refused");
+  ok(throws(() => heliacalKindsFor(eng, "Nibiru")), "and has no kinds");
+  ok(throws(() => heliacal(eng, "Sirius", start, 30, 31, { span: 0 })), "a span must be positive");
   ok(throws(() => visibility(eng, "moon", start, 30, 31)), "visibility refuses the Moon");
 }
 

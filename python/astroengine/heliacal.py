@@ -524,7 +524,7 @@ def crescent(engine, day, lat, lon, half="evening", alt_m=0.0):
     }
 
 
-def _moon_event(engine, kind, jd_start, lat, lon, alt_m):
+def _moon_event(engine, kind, jd_start, lat, lon, alt_m, span=None):
     first = kind == "evening_first"
     half = "evening" if first else "morning"
     cache = {}
@@ -537,7 +537,9 @@ def _moon_event(engine, kind, jd_start, lat, lon, alt_m):
     def over(q_min):
         return lambda day: (look(day) is not None) and look(day)["q"] > q_min
 
-    for conj in _phase_events(engine, "moon", False, 0.0, jd_start - 8.0, jd_start + 45.0):
+    jd_last = jd_start + 45.0 if span is None else jd_start + min(span, 45.0)
+    jd_to = jd_last if span is None else jd_last + 8.0
+    for conj in _phase_events(engine, "moon", False, 0.0, jd_start - 8.0, jd_to):
         day0 = local_day(conj, lon)
         day = _walk(over(Q_VISIBLE), day0, first, 6)
         if day is None:
@@ -545,6 +547,8 @@ def _moon_event(engine, kind, jd_start, lat, lon, alt_m):
         c = look(day)
         if c["jd"] < jd_start:
             continue
+        if span is not None and c["jd"] > jd_last:
+            return None
         easy = _walk(over(Q_EASY), day0, first, 6)
         easy_jd = look(easy)["jd"] if easy is not None else None
         return {
@@ -591,9 +595,27 @@ def _check(engine, target, kind, method):
     return kind, star
 
 
+def kinds_for(engine, target, method="visibility"):
+    """The events a target has under a method, in the order a body goes
+    through them from its conjunction: stars and the outer planets have the
+    heliacal rising and setting (and, by the arcus method, the two events at
+    opposition), Mercury and Venus have four, and the Moon has its first and
+    last crescent by the visibility method only."""
+    if method not in METHODS:
+        raise ValueError(f"heliacal: unknown method {method!r}")
+    _is_star(engine, target)
+    if target == "moon":
+        return ["evening_first", "morning_last"] if method == "visibility" else []
+    if target in INNER:
+        return ["morning_first", "evening_last", "evening_first", "morning_last"]
+    if method == "arcus":
+        return ["morning_first", "evening_last", "acronychal_rising", "cosmical_setting"]
+    return ["morning_first", "evening_last"]
+
+
 def heliacal(engine, target, jd_start, lat, lon, kind="morning_first",
              method="visibility", extinction=DEFAULT_EXTINCTION,
-             spread=DEFAULT_SPREAD, arcus_visionis=None, alt_m=0.0):
+             spread=DEFAULT_SPREAD, arcus_visionis=None, alt_m=0.0, span=None):
     """The next first or last visibility of a planet, a catalog star, or the
     Moon at or after jd_start (UT) from a place (lat, east lon in degrees).
 
@@ -602,7 +624,9 @@ def heliacal(engine, target, jd_start, lat, lon, kind="morning_first",
     acronychal_rising and cosmical_setting (arcus method only).
 
     Returns None when no event is found within the search span (about 830
-    days; 45 for the Moon). Otherwise a dict: `jd` is the instant of best
+    days; 45 for the Moon). `span` shortens the search to that many days
+    past jd_start: an event later than that is not returned, and the engine
+    is not asked for positions much beyond it. Otherwise a dict: `jd` is the instant of best
     visibility on the day of the event (for the arcus method, the instant
     the body is on the horizon), `conjunction` the conjunction or
     opposition the event belongs to. The visibility method adds the body's
@@ -611,8 +635,10 @@ def heliacal(engine, target, jd_start, lat, lon, kind="morning_first",
     `earliest` and `latest`, the same event under a sky clearer and hazier
     by `spread` (either may be None when that sky gives no event)."""
     kind, star = _check(engine, target, kind, method)
+    if span is not None and not span > 0.0:
+        raise ValueError("heliacal: span must be positive")
     if target == "moon":
-        return _moon_event(engine, kind, jd_start, lat, lon, alt_m)
+        return _moon_event(engine, kind, jd_start, lat, lon, alt_m, span)
     if method == "arcus" and arcus_visionis is None:
         raise ValueError("heliacal: the arcus method needs arcus_visionis, in degrees")
     half = _half_of(kind)
@@ -644,7 +670,9 @@ def heliacal(engine, target, jd_start, lat, lon, kind="morning_first",
             crossings[day] = night(day).horizon(rising)
         return crossings[day]
 
-    for anchor in _anchors(engine, target, star, kind, jd_start - limit - 5.0, jd_start + 830.0):
+    jd_last = jd_start + 830.0 if span is None else jd_start + min(span, 830.0)
+    jd_to = jd_last if span is None else jd_last + limit + 5.0
+    for anchor in _anchors(engine, target, star, kind, jd_start - limit - 5.0, jd_to):
         day0 = local_day(anchor, lon)
         if method == "arcus":
             def holds(day):
@@ -656,6 +684,8 @@ def heliacal(engine, target, jd_start, lat, lon, kind="morning_first",
             tc, dep = crossing(day)
             if tc < jd_start:
                 continue
+            if span is not None and tc > jd_last:
+                return None
             return {
                 "target": target, "kind": kind, "method": "arcus", "jd": tc,
                 "conjunction": anchor, "arcus_visionis": arcus_visionis,
@@ -682,6 +712,8 @@ def heliacal(engine, target, jd_start, lat, lon, kind="morning_first",
         margin, t = hit
         if t < jd_start:
             continue
+        if span is not None and t > jd_last:
+            return None
         clear, hazy = runs[1][2], runs[2][2]
         clear_t = clear[1] if clear is not None else None
         hazy_t = hazy[1] if hazy is not None else None

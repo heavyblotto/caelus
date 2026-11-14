@@ -3768,6 +3768,136 @@
       ]
     }
   },
+  "date-sky-venus-first-seen": {
+    "tool": "date_sky",
+    "args": {
+      "constraints": [
+        {
+          "body": "jupiter",
+          "sign": "Leo"
+        },
+        {
+          "visibility": {
+            "target": "venus",
+            "kind": "evening_first",
+            "lat": 32.54,
+            "lon": 44.42
+          }
+        }
+      ],
+      "start_year": -649,
+      "end_year": -600
+    },
+    "payload": {
+      "searched": {
+        "start_year": -649,
+        "end_year": -600,
+        "zodiac": "tropical",
+        "pad": 0
+      },
+      "windows": [
+        {
+          "start": {
+            "jd": 1487097.37661,
+            "calendar": "julian",
+            "year": -641,
+            "era": "642 BCE",
+            "month": 6,
+            "day": 14,
+            "ut": "21:02"
+          },
+          "end": {
+            "jd": 1487104.37661,
+            "calendar": "julian",
+            "year": -641,
+            "era": "642 BCE",
+            "month": 6,
+            "day": 21,
+            "ut": "21:02"
+          },
+          "days": 7
+        },
+        {
+          "start": {
+            "jd": 1491189.37661,
+            "calendar": "julian",
+            "year": -630,
+            "era": "631 BCE",
+            "month": 8,
+            "day": 27,
+            "ut": "21:02"
+          },
+          "end": {
+            "jd": 1491203.37661,
+            "calendar": "julian",
+            "year": -630,
+            "era": "631 BCE",
+            "month": 9,
+            "day": 10,
+            "ut": "21:02"
+          },
+          "days": 14
+        },
+        {
+          "start": {
+            "jd": 1495856.37661,
+            "calendar": "julian",
+            "year": -617,
+            "era": "618 BCE",
+            "month": 6,
+            "day": 7,
+            "ut": "21:02"
+          },
+          "end": {
+            "jd": 1495863.37661,
+            "calendar": "julian",
+            "year": -617,
+            "era": "618 BCE",
+            "month": 6,
+            "day": 14,
+            "ut": "21:02"
+          },
+          "days": 7
+        },
+        {
+          "start": {
+            "jd": 1499947.37661,
+            "calendar": "julian",
+            "year": -606,
+            "era": "607 BCE",
+            "month": 8,
+            "day": 19,
+            "ut": "21:02"
+          },
+          "end": {
+            "jd": 1499960.37661,
+            "calendar": "julian",
+            "year": -606,
+            "era": "607 BCE",
+            "month": 9,
+            "day": 1,
+            "ut": "21:02"
+          },
+          "days": 13
+        }
+      ],
+      "truncated": false,
+      "funnel": [
+        {
+          "constraint": 0,
+          "label": "jupiter in Leo",
+          "windows": 4,
+          "days": 1578.27
+        },
+        {
+          "constraint": 1,
+          "label": "venus evening_first at 32.54, 44.42",
+          "windows": 4,
+          "days": 41
+        }
+      ]
+    }
+  },
   "heliacal-sirius-139": {
     "tool": "heliacal",
     "args": {

@@ -189,5 +189,29 @@ same = HL.heliacal(eng, "Sirius", jd0, 29.85, 31.25, "heliacal_rising")
 ok(same["kind"] == "morning_first", "heliacal_rising is morning_first")
 ok(HL.heliacal(eng, "Polaris", jd0, 51.5, -0.12) is None, "a star that never sets has no heliacal rising")
 
+# 9. span and kinds_for.
+r0 = HL.heliacal(eng, "Sirius", julian_day(139, 1, 1, 0, 0, 0, "julian"), 29.85, 31.25)
+ok(HL.heliacal(eng, "Sirius", julian_day(139, 1, 1, 0, 0, 0, "julian"), 29.85, 31.25, span=120.0) is None,
+   "an event past the span is not returned")
+ok(HL.heliacal(eng, "Sirius", julian_day(139, 1, 1, 0, 0, 0, "julian"), 29.85, 31.25, span=220.0) == r0,
+   "an event inside the span is the same event")
+raises(lambda: HL.heliacal(eng, "Sirius", jd0, 30.0, 31.0, span=0.0), "a span must be positive")
+ok(HL.kinds_for(eng, "Sirius") == ["morning_first", "evening_last"], "a star has a rising and a setting")
+ok(len(HL.kinds_for(eng, "mercury")) == 4 and HL.kinds_for(eng, "moon") == ["evening_first", "morning_last"],
+   "Mercury has four events and the Moon two")
+ok("cosmical_setting" in HL.kinds_for(eng, "saturn", "arcus") and HL.kinds_for(eng, "moon", "arcus") == [],
+   "the arcus method adds the opposition events and has none for the Moon")
+for target in ("Sirius", "venus", "moon", "jupiter"):
+    for method in HL.METHODS:
+        for kind in HL.KINDS:
+            try:
+                HL._check(eng, target, kind, method)
+                allowed = True
+            except ValueError:
+                allowed = False
+            ok(allowed == (kind in HL.kinds_for(eng, target, method)),
+               f"kinds_for agrees with heliacal on {target} {kind} {method}")
+raises(lambda: HL.kinds_for(eng, "Nibiru"), "an unknown target has no kinds")
+
 print(f"{checks} checks, {fails} failures")
 sys.exit(1 if fails else 0)

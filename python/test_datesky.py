@@ -180,5 +180,90 @@ res = date_sky(eng, [{"body": "moon", "sign": 0}], jd0, jd0 + 400, max_windows=5
 ok(len(res["windows"]) == 5 and res["truncated"], "max_windows truncates and says so")
 ok(res["funnel"][0]["label"] == "moon in Aries", "a sign may be given by index")
 
+# 8. A first or last visibility as a constraint. Every window must lie on
+#    the days of one event that heliacal() finds on its own, every event in
+#    the range must have its window, and the constraint is taken last.
+from astroengine import heliacal as HL
+
+MEMPHIS = (29.85, 31.25)
+a0 = julian_day(130, 1, 1, calendar="julian")
+a1 = julian_day(145, 1, 1, calendar="julian")
+sirius = {"visibility": {"target": "Sirius", "kind": "heliacal_rising",
+                         "lat": MEMPHIS[0], "lon_east": MEMPHIS[1]}}
+res = date_sky(eng, [sirius], a0, a1)
+ok(len(res["windows"]) == 15, f"Sirius rises once a year: 15 windows in 15 years ({len(res['windows'])})")
+ok(res["funnel"][0]["label"] == "Sirius morning_first at 29.85, 31.25", "the label names the event and the place")
+t = a0
+seen = 0
+while True:
+    ev = HL.heliacal(eng, "Sirius", t, *MEMPHIS)
+    if ev is None or ev["jd"] >= a1:
+        break
+    d0 = HL.local_day(ev["earliest"], MEMPHIS[1]) - 0.5 - MEMPHIS[1] / 360.0
+    d1 = HL.local_day(ev["latest"], MEMPHIS[1]) + 0.5 - MEMPHIS[1] / 360.0
+    w = res["windows"][seen]
+    ok(abs(w["start"] - d0) < 1e-9 and abs(w["end"] - d1) < 1e-9,
+       f"window {seen} runs from the earliest local day to the end of the latest")
+    ok(w["start"] <= ev["jd"] <= w["end"], f"window {seen} holds the event's own instant")
+    seen += 1
+    t = ev["jd"] + 1.0
+ok(seen == 15, "every event in the range has its window")
+
+wide = date_sky(eng, [dict(sirius, within=3)], a0, a1)
+ok(all(abs((w2["end"] - w2["start"]) - (w1["end"] - w1["start"]) - 6.0) < 1e-9
+       for w1, w2 in zip(res["windows"], wide["windows"])), "'within' widens each window by that many days a side")
+
+# with positions: the visibility is scanned last, and the result is the
+# intersection of the two searches run apart
+both = date_sky(eng, [sirius, {"body": "moon", "sign": "Cancer"}], a0, a1)
+ok([f["constraint"] for f in both["funnel"]] == [1, 0], "a visibility constraint is taken after the positions")
+moon = date_sky(eng, [{"body": "moon", "sign": "Cancer"}], a0, a1)["windows"]
+want = []
+for w in res["windows"]:
+    for m in moon:
+        s, e = max(w["start"], m["start"]), min(w["end"], m["end"])
+        if e > s:
+            want.append((s, e))
+got = [(w["start"], w["end"]) for w in both["windows"]]
+ok(len(got) == len(want) and all(abs(g[0] - w[0]) < 1e-6 and abs(g[1] - w[1]) < 1e-6
+                                 for g, w in zip(got, want)),
+   f"the joint search is the intersection ({len(got)} vs {len(want)})")
+ok(0 < len(got) < 15, "the Moon is in Cancer at some risings and not others")
+
+# the Moon's crescent and the arcus method
+cres = date_sky(eng, [{"visibility": {"target": "moon", "kind": "evening_first",
+                                      "lat": 21.42, "lon_east": 39.83}}],
+                julian_day(2025, 1, 1), julian_day(2026, 1, 1))
+ok(12 <= len(cres["windows"]) <= 13, f"a first crescent every month ({len(cres['windows'])})")
+ok(all(0.99 < w["end"] - w["start"] < 2.01 for w in cres["windows"][1:]), "each on one evening or two")
+ok(cres["windows"][0]["start"] == julian_day(2025, 1, 1), "a window under way at the start is cut to the range")
+arc = date_sky(eng, [{"visibility": {"target": "jupiter", "kind": "acronychal_rising", "lat": 32.54,
+                                     "lon_east": 44.42, "method": "arcus", "arcus_visionis": 7.0}}],
+               julian_day(2020, 1, 1), julian_day(2024, 1, 1))
+ok(3 <= len(arc["windows"]) <= 4 and all(abs(w["end"] - w["start"] - 1.0) < 1e-9 for w in arc["windows"]),
+   "the arcus method gives one day for each opposition")
+never = date_sky(eng, [{"visibility": {"target": "Polaris", "kind": "morning_first",
+                                       "lat": 51.5, "lon_east": -0.12}}],
+                 julian_day(2020, 1, 1), julian_day(2023, 1, 1))
+ok(never["windows"] == [] and never["funnel"][0]["windows"] == 0, "a star that never sets gives no window")
+
+for bad, why in (
+        ([{"visibility": {"target": "Sirius", "kind": "morning_first", "lat": 30.0}}], "no longitude"),
+        ([{"visibility": {"target": "Sirius", "kind": "noon_first", "lat": 30.0, "lon_east": 31.0}}], "unknown kind"),
+        ([{"visibility": {"target": "Nibiru", "kind": "morning_first", "lat": 30.0, "lon_east": 31.0}}], "unknown target"),
+        ([{"visibility": {"target": "jupiter", "kind": "evening_first", "lat": 30.0, "lon_east": 31.0}}],
+         "an event the target does not have"),
+        ([{"visibility": {"target": "Sirius", "kind": "morning_first", "lat": 30.0, "lon_east": 31.0,
+                          "method": "arcus"}}], "arcus without its angle"),
+        ([{"visibility": {"target": "Sirius", "kind": "morning_first", "lat": 30.0, "lon_east": 31.0},
+           "sign": "Leo"}], "a visibility with an arc"),
+        ([{"visibility": {"target": "Sirius", "kind": "morning_first", "lat": 30.0, "lon_east": 31.0},
+           "within": -1}], "negative within")):
+    try:
+        date_sky(eng, bad, jd0, jd0 + 10)
+        ok(False, f"should reject: {why}")
+    except ValueError:
+        ok(True, why)
+
 print(f"{checks} checks, {fails} failures")
 sys.exit(1 if fails else 0)

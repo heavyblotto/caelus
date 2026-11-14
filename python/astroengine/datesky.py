@@ -17,6 +17,13 @@ The scan therefore locates each turning point that could reach an edge and
 adds it as a sample, which leaves every segment near an edge monotone, and a
 monotone segment crosses an edge at most once.
 
+A constraint can also be a first or last visibility: "Venus was first seen
+in the evening", at a named place. That is an event and not a quantity, so it
+is not scanned. It is taken last, and inside each window that survives the
+positions the events are found one after another with heliacal(); the
+constraint holds on the local days from the event's earliest date to its
+latest, the same event under a clearer and a hazier sky.
+
 when() in query.py answers the same kind of question for arbitrary predicates
 by sampling every predicate at one step across the whole range. That is
 general and is the right tool for years or decades; over millennia with the
@@ -55,6 +62,12 @@ MONOTONE = {"sun", "moon", "mean_node"}
 # of the circle for the wrap of the signed distance.
 MAX_HALF_WIDTH = 170.0
 
+# A visibility constraint looks this many days before a window for an event
+# whose own window of dates reaches into it.
+EVENT_LOOKBACK_DAYS = 45.0
+# The longest stretch one heliacal() search is asked to cover.
+_EVENT_SEARCH_DAYS = 825.0
+
 _BISECT_ITERS = 32
 _GOLDEN_ITERS = 32
 _INV_PHI = 0.6180339887498949
@@ -69,6 +82,8 @@ def _norm_constraint(c, index):
     """Normalize one constraint to (label, bodies, center, half, step,
     monotone). `bodies` is one name for a longitude, or (a, b) for the
     elongation a - b."""
+    if "visibility" in c:
+        return _norm_visibility(c, index)
     pad = float(c.get("pad", 0.0))
     if "elongation" in c:
         a, b = c["elongation"]
@@ -124,6 +139,114 @@ def _norm_constraint(c, index):
     return {"index": index, "label": label, "bodies": bodies,
             "center": center, "half": half, "step": step,
             "monotone": monotone}
+
+
+def _norm_visibility(c, index):
+    """Normalize a first-or-last-visibility constraint. It has no arc and no
+    step: step 0 sorts it after every position."""
+    from . import heliacal as HL
+    v = c["visibility"]
+    for key in ("target", "kind", "lat", "lon_east"):
+        if key not in v:
+            raise ValueError(f"constraint {index}: visibility needs {key!r}")
+    for key in ("sign", "lon", "from", "to", "orb", "body", "elongation"):
+        if key in c:
+            raise ValueError(f"constraint {index}: a visibility constraint "
+                             f"takes no {key!r}")
+    kind = HL.ALIASES.get(v["kind"], v["kind"])
+    if kind not in HL.KINDS:
+        raise ValueError(f"constraint {index}: unknown kind {v['kind']!r}")
+    method = v.get("method", "visibility")
+    if method not in HL.METHODS:
+        raise ValueError(f"constraint {index}: unknown method {method!r}")
+    if method == "arcus" and v.get("arcus_visionis") is None:
+        raise ValueError(f"constraint {index}: the arcus method needs "
+                         "'arcus_visionis'")
+    within = float(c.get("within", 0.0))
+    if within < 0.0:
+        raise ValueError(f"constraint {index}: 'within' is negative")
+    lat, lon = float(v["lat"]), float(v["lon_east"])
+    label = f"{v['target']} {kind} at {_fmt(lat)}, {_fmt(lon)}"
+    if within:
+        label += f" within {_fmt(within)} d"
+    return {"index": index, "label": label, "step": 0.0, "half": 0.0,
+            "event": {
+                "target": v["target"], "kind": kind, "lat": lat, "lon": lon,
+                "method": method, "arcus_visionis": v.get("arcus_visionis"),
+                "extinction": v.get("extinction", HL.DEFAULT_EXTINCTION),
+                "spread": v.get("spread", HL.DEFAULT_SPREAD),
+                "alt_m": v.get("alt_m", 0.0), "within": within,
+            }}
+
+
+def _event_intervals(engine, ev, jd_end):
+    """A function (a, b) -> the sub-intervals of [a, b] that fall on the
+    days of a first or last visibility. Windows arrive in time order and
+    often close together, so each event is found once and remembered."""
+    from . import heliacal as HL
+    lon = ev["lon"]
+    lookback = ev["within"] + EVENT_LOOKBACK_DAYS
+    end = jd_end + lookback
+    # Every event with jd in [cover[0], cover[1]) is in `events`, in order.
+    cover = [None, None]
+    events = []
+
+    def next_event(t):
+        """The first event at or after t, or None when there is none before
+        the end of the search."""
+        if cover[0] is None or t < cover[0] or t > cover[1]:
+            cover[0] = cover[1] = t
+            del events[:]
+        for found in events:
+            if found["jd"] >= t:
+                return found
+        while cover[1] < end:
+            span = min(end - cover[1], _EVENT_SEARCH_DAYS)
+            found = HL.heliacal(
+                engine, ev["target"], cover[1], ev["lat"], lon, kind=ev["kind"],
+                method=ev["method"], extinction=ev["extinction"],
+                spread=ev["spread"], arcus_visionis=ev["arcus_visionis"],
+                alt_m=ev["alt_m"], span=span)
+            if found is None:
+                cover[1] += span
+                continue
+            # two events of one kind are never a day apart
+            events.append(found)
+            cover[1] = found["jd"] + 1.0
+            if found["jd"] >= t:
+                return found
+        return None
+
+    def days_of(found):
+        """The local days the event may fall on, widened by `within`."""
+        lo = found.get("earliest")
+        hi = found.get("latest")
+        jd = found["jd"]
+        d0 = HL.local_day(jd if lo is None else min(lo, jd), lon)
+        d1 = HL.local_day(jd if hi is None else max(hi, jd), lon)
+        return (d0 - 0.5 - lon / 360.0 - ev["within"],
+                d1 + 0.5 - lon / 360.0 + ev["within"])
+
+    def intervals(a, b):
+        out = []
+        t = a - lookback
+        while True:
+            found = next_event(t)
+            if found is None:
+                break
+            w0, w1 = days_of(found)
+            if w0 >= b:
+                break
+            s, e = max(w0, a), min(w1, b)
+            if e > s:
+                if out and s <= out[-1][1]:
+                    out[-1] = (out[-1][0], max(out[-1][1], e))
+                else:
+                    out.append((s, e))
+            t = found["jd"] + 1.0
+        return out
+
+    return intervals
 
 
 def _fmt(x):
@@ -294,6 +417,15 @@ def date_sky(engine, constraints, jd_start, jd_end, zodiac="tropical",
     whose sign boundaries are not the engine's. The `pad` argument applies to
     every constraint that does not set its own.
 
+    A constraint can instead be a first or last visibility at a place:
+      {"visibility": {"target": "venus", "kind": "evening_first",
+                      "lat": 32.54, "lon_east": 44.42}, "within": 2}
+    It holds on the local days from the event's earliest date to its latest
+    (see heliacal), widened by "within" days on each side. The inner dict
+    also takes "extinction", "spread", "alt_m", "method", and
+    "arcus_visionis". The engine needs data for about 250 days beyond each
+    end of the range to place the events near its ends.
+
     Returns {"windows": [{"start", "end"}], "funnel": [...], "truncated"}.
     `funnel` lists the constraints in scan order with the number of windows
     and the total days that survive each one. With `keep_stages`, each funnel
@@ -304,19 +436,33 @@ def date_sky(engine, constraints, jd_start, jd_end, zodiac="tropical",
         raise ValueError("date_sky needs at least one constraint")
     if not jd_end > jd_start:
         raise ValueError("date_sky needs jd_end after jd_start")
-    norm = [_norm_constraint(c if "pad" in c else dict(c, pad=pad), i)
+    norm = [_norm_constraint(c if "pad" in c or "visibility" in c
+                             else dict(c, pad=pad), i)
             for i, c in enumerate(constraints)]
+    from . import heliacal as HL
+    for c in norm:
+        if "event" in c:
+            ev = c["event"]
+            if ev["kind"] not in HL.kinds_for(engine, ev["target"], ev["method"]):
+                raise ValueError(
+                    f"constraint {c['index']}: {ev['target']} has no "
+                    f"{ev['kind']} by the {ev['method']} method")
     # slowest first; ties go to the narrower arc, then to input order
     order = sorted(norm, key=lambda c: (-c["step"], c["half"], c["index"]))
 
     windows = [(jd_start, jd_end)]
     funnel = []
     for c in order:
-        q = _quantity(engine, c["bodies"], zodiac)
         nxt = []
-        for a, b in windows:
-            nxt.extend(_arc_intervals(q, c["center"], c["half"], a, b,
-                                      c["step"], c["monotone"]))
+        if "event" in c:
+            intervals = _event_intervals(engine, c["event"], jd_end)
+            for a, b in windows:
+                nxt.extend(intervals(a, b))
+        else:
+            q = _quantity(engine, c["bodies"], zodiac)
+            for a, b in windows:
+                nxt.extend(_arc_intervals(q, c["center"], c["half"], a, b,
+                                          c["step"], c["monotone"]))
         windows = nxt
         stage = {"constraint": c["index"], "label": c["label"],
                  "windows": len(windows),

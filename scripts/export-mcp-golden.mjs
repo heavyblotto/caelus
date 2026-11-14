@@ -121,6 +121,11 @@ export const GOLDEN_CASES = [
     args: { date: "1990-06-10T18:30:00Z", lat: 27.95, lon: -82.46, uncertainty_minutes: 15 } },
   { id: "chart-stability-no-place", tool: "chart_stability",
     args: { date: "1990-06-10T18:30:00Z", uncertainty_minutes: 120 } },
+  { id: "date-sky-venus-first-seen", tool: "date_sky",
+    args: { constraints: [
+      { body: "jupiter", sign: "Leo" },
+      { visibility: { target: "venus", kind: "evening_first", lat: 32.54, lon: 44.42 } },
+    ], start_year: -649, end_year: -600 } },
   { id: "heliacal-sirius-139", tool: "heliacal",
     args: { target: "Sirius", lat: 29.85, lon: 31.25, start_year: 139 } },
   { id: "heliacal-venus-babylon", tool: "heliacal",

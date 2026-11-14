@@ -936,6 +936,70 @@
    }
   },
   {
+   "id": "sirius-span-found",
+   "target": "Sirius",
+   "jd": 1771827.5,
+   "lat": 29.85,
+   "lon": 31.25,
+   "options": {
+    "span": 220.0
+   },
+   "result": {
+    "target": "Sirius",
+    "kind": "morning_first",
+    "method": "visibility",
+    "jd": 1772026.6070556373,
+    "conjunction": 1771989.7017237442,
+    "earliest": 1772025.6067195758,
+    "latest": 1772027.6069847,
+    "margin": 0.26197381925644514,
+    "magnitude": -1.44,
+    "altitude": 4.0335556597758195,
+    "azimuth": 110.77786027729697,
+    "sun_altitude": -5.967995077446251,
+    "arcus_visionis": 9.474560775641443,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "sirius-span-short",
+   "target": "Sirius",
+   "jd": 1771827.5,
+   "lat": 29.85,
+   "lon": 31.25,
+   "options": {
+    "span": 120.0
+   },
+   "result": null
+  },
+  {
+   "id": "venus-span-arcus",
+   "target": "venus",
+   "jd": 2458849.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {
+    "kind": "evening_last",
+    "method": "arcus",
+    "arcus_visionis": 5.5,
+    "span": 60.0
+   },
+   "result": null
+  },
+  {
+   "id": "moon-span-short",
+   "target": "moon",
+   "jd": 2460735.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {
+    "kind": "morning_last",
+    "span": 3.0
+   },
+   "result": null
+  },
+  {
    "id": "moon-ef-babylon",
    "target": "moon",
    "jd": 2460735.5,

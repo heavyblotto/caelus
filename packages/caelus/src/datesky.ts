@@ -18,6 +18,13 @@
  * edge and adds it as a sample, which leaves every segment near an edge
  * monotone, and a monotone segment crosses an edge at most once.
  *
+ * A constraint can also be a first or last visibility: "Venus was first seen
+ * in the evening", at a named place. That is an event and not a quantity, so
+ * it is not scanned. It is taken last, and inside each window that survives
+ * the positions the events are found one after another with `heliacal()`;
+ * the constraint holds on the local days from the event's earliest date to
+ * its latest, the same event under a clearer and a hazier sky.
+ *
  * `when()` in query.ts answers the same kind of question for arbitrary
  * predicates by sampling every predicate at one step across the whole range.
  * That is general and is the right tool for years or decades; over millennia
@@ -30,6 +37,10 @@
  * pin the two implementations together.
  */
 import { Engine, BodyId, SIGNS, Zodiac } from "./chart.js";
+import {
+  heliacal, heliacalKindsFor, localDay, HELIACAL_KINDS, HELIACAL_EXTINCTION,
+  HELIACAL_SPREAD, type HeliacalEvent, type HeliacalKind, type HeliacalMethod,
+} from "./heliacal.js";
 
 /** The arc a constraint puts on its quantity. */
 export type SkyArc =
@@ -47,13 +58,45 @@ export type SkyArc =
  * 0–180 is waxing and 180–360 is waning).
  */
 export type SkyConstraint =
-  ({ body: BodyId } | { elongation: [BodyId, BodyId] })
-  & SkyArc
-  & {
-    /** Degrees to widen the arc on both sides, for a source whose sign
-     *  boundaries are not the engine's. Overrides the `pad` option. */
-    pad?: number;
+  | (({ body: BodyId } | { elongation: [BodyId, BodyId] })
+    & SkyArc
+    & {
+      /** Degrees to widen the arc on both sides, for a source whose sign
+       *  boundaries are not the engine's. Overrides the `pad` option. */
+      pad?: number;
+    })
+  | {
+    /** A first or last visibility at a place, in place of a position. */
+    visibility: SkyVisibility;
+    /** Days to widen the event's window of dates on each side. */
+    within?: number;
   };
+
+/**
+ * A first or last visibility as a {@link dateSky} constraint: the event
+ * {@link heliacal} finds for `target` and `kind` at one place. The
+ * constraint holds on the local days from the event's earliest date to its
+ * latest.
+ */
+export interface SkyVisibility {
+  /** A planet id, `"moon"`, or a catalog star name. */
+  target: string;
+  kind: HeliacalKind | "heliacal_rising" | "heliacal_setting";
+  /** Observer latitude in degrees, north positive. */
+  lat: number;
+  /** Observer longitude in degrees, east positive. */
+  lonEast: number;
+  /** V-band extinction, magnitudes per air mass. Default 0.25. */
+  extinction?: number;
+  /** Half-width of the extinction range behind the window. Default 0.05. */
+  spread?: number;
+  /** Observer altitude in metres. */
+  altM?: number;
+  /** `"visibility"` (default) or `"arcus"`. */
+  method?: HeliacalMethod;
+  /** The arcus visionis in degrees; required by the arcus method. */
+  arcusVisionis?: number;
+}
 
 /** Options for {@link dateSky}. */
 export interface DateSkyOptions {
@@ -122,6 +165,12 @@ const MONOTONE = new Set<string>(["sun", "moon", "mean_node"]);
 // side of the circle for the wrap of the signed distance.
 const MAX_HALF_WIDTH = 170.0;
 
+// A visibility constraint looks this many days before a window for an event
+// whose own window of dates reaches into it.
+const EVENT_LOOKBACK_DAYS = 45.0;
+// The longest stretch one heliacal() search is asked to cover.
+const EVENT_SEARCH_DAYS = 825.0;
+
 const BISECT_ITERS = 32;
 const GOLDEN_ITERS = 32;
 const INV_PHI = 0.6180339887498949;
@@ -147,6 +196,19 @@ function fmt(x: number): string {
   return String(x);
 }
 
+interface EventSpec {
+  target: string;
+  kind: HeliacalKind;
+  lat: number;
+  lon: number;
+  method: HeliacalMethod;
+  arcusVisionis: number | undefined;
+  extinction: number;
+  spread: number;
+  altM: number;
+  within: number;
+}
+
 interface Norm {
   index: number;
   label: string;
@@ -155,6 +217,129 @@ interface Norm {
   half: number;
   step: number;
   monotone: boolean;
+  /** Set for a visibility constraint, which has no arc and no step. */
+  event?: EventSpec;
+}
+
+const KIND_ALIASES: Record<string, HeliacalKind> = {
+  heliacal_rising: "morning_first", heliacal_setting: "evening_last",
+};
+
+/** Normalize a first-or-last-visibility constraint. Step 0 sorts it after
+ *  every position. */
+function normVisibility(
+  c: { visibility: SkyVisibility; within?: number }, index: number,
+): Norm {
+  const v = c.visibility;
+  for (const key of ["target", "kind", "lat", "lonEast"] as const) {
+    if (v[key] === undefined) {
+      throw new RangeError(`constraint ${index}: visibility needs '${key}'`);
+    }
+  }
+  for (const key of ["sign", "lon", "from", "to", "orb", "body", "elongation"]) {
+    if (key in c) {
+      throw new RangeError(`constraint ${index}: a visibility constraint takes no '${key}'`);
+    }
+  }
+  const kind = KIND_ALIASES[v.kind] ?? (v.kind as HeliacalKind);
+  if (!(HELIACAL_KINDS as readonly string[]).includes(kind)) {
+    throw new RangeError(`constraint ${index}: unknown kind ${JSON.stringify(v.kind)}`);
+  }
+  const method = v.method ?? "visibility";
+  if (method !== "visibility" && method !== "arcus") {
+    throw new RangeError(`constraint ${index}: unknown method ${JSON.stringify(method)}`);
+  }
+  if (method === "arcus" && v.arcusVisionis === undefined) {
+    throw new RangeError(`constraint ${index}: the arcus method needs 'arcusVisionis'`);
+  }
+  const within = c.within ?? 0.0;
+  if (within < 0.0) throw new RangeError(`constraint ${index}: 'within' is negative`);
+  let label = `${v.target} ${kind} at ${fmt(v.lat)}, ${fmt(v.lonEast)}`;
+  if (within) label += ` within ${fmt(within)} d`;
+  return {
+    index, label, bodies: "sun", center: 0.0, half: 0.0, step: 0.0, monotone: true,
+    event: {
+      target: v.target, kind, lat: v.lat, lon: v.lonEast, method,
+      arcusVisionis: v.arcusVisionis,
+      extinction: v.extinction ?? HELIACAL_EXTINCTION,
+      spread: v.spread ?? HELIACAL_SPREAD,
+      altM: v.altM ?? 0.0, within,
+    },
+  };
+}
+
+/** A function (a, b) -> the sub-intervals of [a, b] that fall on the days of
+ *  a first or last visibility. Windows arrive in time order and often close
+ *  together, so each event is found once and remembered. */
+function eventIntervals(
+  engine: Engine, ev: EventSpec, jdEnd: number,
+): (a: number, b: number) => Array<[number, number]> {
+  const lon = ev.lon;
+  const lookback = ev.within + EVENT_LOOKBACK_DAYS;
+  const end = jdEnd + lookback;
+  // Every event with jd in [coverFrom, coverTo) is in `events`, in order.
+  let coverFrom: number | null = null;
+  let coverTo = 0;
+  let events: HeliacalEvent[] = [];
+
+  /** The first event at or after t, or null when there is none before the
+   *  end of the search. */
+  const nextEvent = (t: number): HeliacalEvent | null => {
+    if (coverFrom === null || t < coverFrom || t > coverTo) {
+      coverFrom = t;
+      coverTo = t;
+      events = [];
+    }
+    for (const found of events) {
+      if (found.jd >= t) return found;
+    }
+    while (coverTo < end) {
+      const span = Math.min(end - coverTo, EVENT_SEARCH_DAYS);
+      const found = heliacal(engine, ev.target, coverTo, ev.lat, lon, {
+        kind: ev.kind, method: ev.method, extinction: ev.extinction, spread: ev.spread,
+        arcusVisionis: ev.arcusVisionis, altM: ev.altM, span,
+      });
+      if (found === null) {
+        coverTo += span;
+        continue;
+      }
+      // two events of one kind are never a day apart
+      events.push(found);
+      coverTo = found.jd + 1.0;
+      if (found.jd >= t) return found;
+    }
+    return null;
+  };
+
+  /** The local days the event may fall on, widened by `within`. */
+  const daysOf = (found: HeliacalEvent): [number, number] => {
+    const lo = found.earliest;
+    const hi = found.latest;
+    const jd = found.jd;
+    const d0 = localDay(lo === null || lo === undefined ? jd : Math.min(lo, jd), lon);
+    const d1 = localDay(hi === null || hi === undefined ? jd : Math.max(hi, jd), lon);
+    return [d0 - 0.5 - lon / 360.0 - ev.within, d1 + 0.5 - lon / 360.0 + ev.within];
+  };
+
+  return (a: number, b: number): Array<[number, number]> => {
+    const out: Array<[number, number]> = [];
+    let t = a - lookback;
+    for (;;) {
+      const found = nextEvent(t);
+      if (found === null) break;
+      const [w0, w1] = daysOf(found);
+      if (w0 >= b) break;
+      const s = Math.max(w0, a);
+      const e = Math.min(w1, b);
+      if (e > s) {
+        const last = out[out.length - 1];
+        if (last && s <= last[1]) last[1] = Math.max(last[1], e);
+        else out.push([s, e]);
+      }
+      t = found.jd + 1.0;
+    }
+    return out;
+  };
 }
 
 function stepFor(body: string): number {
@@ -162,6 +347,7 @@ function stepFor(body: string): number {
 }
 
 function normConstraint(c: SkyConstraint, index: number, defaultPad: number): Norm {
+  if ("visibility" in c) return normVisibility(c, index);
   const pad = c.pad ?? defaultPad;
   let bodies: BodyId | [BodyId, BodyId];
   let subject: string;
@@ -433,6 +619,19 @@ export function dateSky(
   const zodiac = opts.zodiac ?? "tropical";
   const maxWindows = opts.maxWindows ?? 1000;
   const norm = constraints.map((c, i) => normConstraint(c, i, opts.pad ?? 0.0));
+  for (const c of norm) {
+    if (!c.event) continue;
+    let kinds: HeliacalKind[];
+    try {
+      kinds = heliacalKindsFor(engine, c.event.target, c.event.method);
+    } catch (e) {
+      throw new RangeError(`constraint ${c.index}: ${(e as Error).message}`);
+    }
+    if (!kinds.includes(c.event.kind)) {
+      throw new RangeError(
+        `constraint ${c.index}: ${c.event.target} has no ${c.event.kind} by the ${c.event.method} method`);
+    }
+  }
   // slowest first; ties go to the narrower arc, then to input order
   const order = [...norm].sort((x, y) =>
     (y.step - x.step) || (x.half - y.half) || (x.index - y.index));
@@ -440,15 +639,22 @@ export function dateSky(
   let windows: Array<[number, number]> = [[jdStart, jdEnd]];
   const funnel: SkyFunnelStage[] = [];
   for (const c of order) {
-    const bodies = c.bodies;
-    const q = Array.isArray(bodies)
-      ? (t: number): number =>
-        engine.longitude(bodies[0], t, { zodiac }) - engine.longitude(bodies[1], t, { zodiac })
-      : (t: number): number => engine.longitude(bodies, t, { zodiac });
     const next: Array<[number, number]> = [];
-    for (const [a, b] of windows) {
-      for (const iv of arcIntervals(q, c.center, c.half, a, b, c.step, c.monotone)) {
-        next.push(iv);
+    if (c.event) {
+      const intervals = eventIntervals(engine, c.event, jdEnd);
+      for (const [a, b] of windows) {
+        for (const iv of intervals(a, b)) next.push(iv);
+      }
+    } else {
+      const bodies = c.bodies;
+      const q = Array.isArray(bodies)
+        ? (t: number): number =>
+          engine.longitude(bodies[0], t, { zodiac }) - engine.longitude(bodies[1], t, { zodiac })
+        : (t: number): number => engine.longitude(bodies, t, { zodiac });
+      for (const [a, b] of windows) {
+        for (const iv of arcIntervals(q, c.center, c.half, a, b, c.step, c.monotone)) {
+          next.push(iv);
+        }
       }
     }
     windows = next;

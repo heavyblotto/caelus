@@ -62,6 +62,15 @@ current figures live in `packages/caelus/accuracy.json` and on
   other answer lies inside the `earliest` to `latest` window. For Sirius at
   Memphis in 139 CE the model gives 19 July, Julian calendar, against the 20
   or 21 July read from Censorinus.
+- **A first or last visibility as a sky-dating constraint.** `dateSky` takes
+  `{ visibility: { target, kind, lat, lonEast }, within }` beside its
+  position constraints. The constraint holds on the local days from the
+  event's earliest date to its latest, and it is taken after every position,
+  so the events are searched only inside the windows the positions leave.
+  "Venus first seen in the evening with Jupiter in Leo" at Babylon has four
+  dates between 651 and 601 BCE, found in half a second.
+  `heliacalKindsFor` lists the events a target has, and `heliacal` takes a
+  `span` that stops its search a given number of days past the start.
 - **Fixed: `heliocentric` and `pheno` before 1000 CE.** `heliocentric` read a
   planet's modern pack only, so it threw for any date the classical slab
   serves, and `pheno` threw with it. Both now use the slab that covers the
@@ -191,6 +200,9 @@ current figures live in `packages/caelus/accuracy.json` and on
   earliest and latest date, and the conditions at the moment of best
   visibility. `verify_tools` pins it to the engine, and four frozen payloads
   hold the format.
+- **`date_sky` takes a visibility constraint**, with the fields of the
+  `heliacal` tool and `within_days`. `verify_tools` pins its windows to the
+  engine's, and one more frozen payload holds the format.
 - **`chart_stability`** exposes chart stability, which brings the server to
   37 tools. It takes a stated time, an uncertainty in minutes (at most 720),
   and an optional place, and it returns the stable facts as a list and each

@@ -29,10 +29,26 @@ const ok = (cond: boolean, msg: string): void => {
   if (!cond) { failures++; console.error(`FAIL ${msg}`); }
 };
 
+/** The fixture writes a visibility constraint in the Python reference's
+ *  snake_case; the TypeScript API takes camelCase. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function camel(c: any): SkyConstraint {
+  if (!c.visibility) return c as SkyConstraint;
+  const v = c.visibility;
+  return {
+    visibility: {
+      target: v.target, kind: v.kind, lat: v.lat, lonEast: v.lon_east,
+      extinction: v.extinction, spread: v.spread, altM: v.alt_m,
+      method: v.method, arcusVisionis: v.arcus_visionis,
+    },
+    within: c.within,
+  };
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 for (const c of G.cases as any[]) {
   const o = c.options ?? {};
-  const got = dateSky(eng, c.constraints as SkyConstraint[], c.jd0, c.jd1, {
+  const got = dateSky(eng, (c.constraints as unknown[]).map(camel), c.jd0, c.jd1, {
     zodiac: o.zodiac, pad: o.pad, maxWindows: o.max_windows,
     keepStages: o.keep_stages,
   });

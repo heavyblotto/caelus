@@ -727,6 +727,43 @@ const assertExactHits = (hits, body, targetLonAt, angle, label, tolDeg = 0.02) =
   assert(noArc.isError === true, "date_sky: a constraint with no arc is rejected");
 }
 
+// ------------------------------------------- date_sky with a visibility
+{
+  // Sirius rising at Memphis with the Moon in Cancer, 130 to 144 CE
+  const cons = [
+    { visibility: { target: "Sirius", kind: "heliacal_rising", lat: 29.85, lon: 31.25 } },
+    { body: "moon", sign: "Cancer" },
+  ];
+  const res = await call("date_sky", { constraints: cons, start_year: 130, end_year: 144 });
+  const direct = dateSky(eng, [
+    { visibility: { target: "Sirius", kind: "heliacal_rising", lat: 29.85, lonEast: 31.25 } },
+    { body: "moon", sign: "Cancer" },
+  ], julianDay(130, 1, 1, 0, 0, 0, "julian"), julianDay(145, 1, 1, 0, 0, 0, "julian"));
+  assert(res.windows.length === direct.windows.length && res.windows.length > 0,
+    `date_sky: visibility windows match the engine (${res.windows.length} vs ${direct.windows.length})`);
+  assert(res.windows.every((w, i) => Math.abs(w.start.jd - direct.windows[i].start) < 1e-4
+    && Math.abs(w.end.jd - direct.windows[i].end) < 1e-4), "date_sky: visibility window edges match the engine");
+  assert(res.funnel[res.funnel.length - 1].label === "Sirius morning_first at 29.85, 31.25",
+    `date_sky: the visibility is taken last (${res.funnel.map((f) => f.label).join(" | ")})`);
+  assert(res.windows.every((w) => w.start.month === 7 && w.start.calendar === "julian"), "date_sky: every window is in July, Julian calendar");
+  // every window lies on the days of an event the heliacal tool reports
+  const first = res.windows[0];
+  const ev = await call("heliacal", { target: "Sirius", lat: 29.85, lon: 31.25, start_year: first.start.year, kind: "morning_first" });
+  assert(ev.events[0].earliest.jd - 1 <= first.start.jd && first.end.jd <= ev.events[0].latest.jd + 1,
+    "date_sky: the first window lies inside that year's rising window");
+  const widened = await call("date_sky", {
+    constraints: [{ ...cons[0], within_days: 5 }, cons[1]], start_year: 130, end_year: 144,
+  });
+  assert(widened.windows.length >= res.windows.length, "date_sky: within_days never loses a window");
+  const bad = async (args) => (await client.callTool({ name: "date_sky", arguments: args })).isError === true;
+  assert(await bad({ constraints: [{ visibility: { target: "jupiter", kind: "evening_first", lat: 30, lon: 31 } }], start_year: 2000, end_year: 2001 }),
+    "date_sky: an event the target does not have is rejected");
+  assert(await bad({ constraints: [{ visibility: { target: "nibiru", kind: "morning_first", lat: 30, lon: 31 } }], start_year: 2000, end_year: 2001 }),
+    "date_sky: an unknown visibility target is rejected");
+  assert(await bad({ constraints: [{ body: "sun", visibility: { target: "Sirius", kind: "morning_first", lat: 30, lon: 31 } }], start_year: 2000, end_year: 2001 }),
+    "date_sky: a visibility with a body is rejected");
+}
+
 // ---------------------------------------------------------------- chart_stability
 {
   const iso = "1990-06-10T18:30:00Z";

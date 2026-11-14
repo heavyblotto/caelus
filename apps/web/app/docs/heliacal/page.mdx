@@ -246,12 +246,25 @@ against the sky. Observed heliacal dates scatter by several days around any
 model, from weather and from the observer. Treat the window, and not the
 single date, as the answer.
 
+## As a sky-dating constraint
+
+A first or last visibility can be one of the constraints of
+[`dateSky`](/docs/sky-dating), next to planets by sign. The search then
+returns the dates on which the event fell while the positions held, which is
+how a record such as "Venus was first seen in the evening, and Jupiter was in
+Leo" is dated.
+
+`heliacalKindsFor(engine, target)` lists the events a target has, and the
+`span` option of `heliacal` stops a search a given number of days past its
+start.
+
 ## Through the MCP server
 
 The `heliacal` tool takes a target, a latitude and longitude, and a start
 year, and returns every event the target has, in date order, each with its
 window. Years are astronomical and dates before 15 October 1582 are in the
-Julian calendar, as in `date_sky`.
+Julian calendar, as in `date_sky`. `date_sky` itself accepts a `visibility`
+constraint.
 
 ## Limits
 

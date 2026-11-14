@@ -2238,7 +2238,7 @@ export function buildServer(
 
   server.registerTool("date_sky", {
     description:
-      "Date a described sky: find every window in a span of years in which a set of planetary positions held at once. The inverse of a chart, and the computation used to date a horoscope that records positions and no year. Each constraint puts a body in a zodiac sign, within an orb of a longitude, or in a from/to arc, or puts the elongation between two bodies in an arc (moon minus sun from 180 to 360 is a waning Moon). Returns the matching windows with calendar dates (Julian calendar before 15 October 1582) and a funnel showing how many windows survived each constraint, slowest body first. Years are astronomical: 0 is 1 BCE and -409 is 410 BCE. The searchable span depends on the server's data: a local stdio server with era packs covers about 3000 BCE to 3000 CE for the Sun, the Moon, and the planets through Pluto; a hosted server on the embedded tier covers 1000 to 3000.",
+      "Date a described sky: find every window in a span of years in which a set of planetary positions held at once. The inverse of a chart, and the computation used to date a horoscope that records positions and no year. Each constraint puts a body in a zodiac sign, within an orb of a longitude, or in a from/to arc, or puts the elongation between two bodies in an arc (moon minus sun from 180 to 360 is a waning Moon). A constraint can instead be a first or last visibility at a place ('visibility': Venus first seen in the evening from Babylon, the heliacal rising of Sirius at Memphis, the new crescent), which holds on the days that event could have fallen on; give it together with at least one position, because alone it is slow over centuries. Returns the matching windows with calendar dates (Julian calendar before 15 October 1582) and a funnel showing how many windows survived each constraint, slowest body first. Years are astronomical: 0 is 1 BCE and -409 is 410 BCE. The searchable span depends on the server's data: a local stdio server with era packs covers about 3000 BCE to 3000 CE for the Sun, the Moon, and the planets through Pluto; a hosted server on the embedded tier covers 1000 to 3000.",
     inputSchema: {
       constraints: z.array(z.object({
         body: z.string().optional().describe("body whose longitude is constrained, snake_case (sun, moon, mercury ... saturn)"),
@@ -2251,6 +2251,22 @@ export function buildServer(
         from: z.number().optional().describe("arc start in degrees, used with 'to'"),
         to: z.number().optional().describe("arc end in degrees, going forward from 'from'"),
         pad: z.number().nonnegative().optional().describe("degrees to widen this arc on both sides"),
+        visibility: z.object({
+          target: z.string().describe("planet in snake_case, 'moon', or a catalog star name (Sirius, Regulus ...)"),
+          kind: z.enum([
+            "morning_first", "evening_last", "evening_first", "morning_last",
+            "acronychal_rising", "cosmical_setting", "heliacal_rising", "heliacal_setting",
+          ]).describe("which event, as in the heliacal tool"),
+          lat: latSchema,
+          lon: lonSchema,
+          extinction: z.number().min(0.1).max(1).optional().describe("V-band extinction, magnitudes per air mass (default 0.25)"),
+          spread: z.number().min(0).max(0.3).optional().describe("half-width of the extinction range behind the event's window (default 0.05)"),
+          method: z.enum(["visibility", "arcus"]).optional(),
+          arcus_visionis: z.number().min(0).max(30).optional().describe("for method 'arcus', degrees"),
+          altitude_m: z.number().min(0).max(6000).optional(),
+        }).optional().describe("a first or last visibility at a place, instead of 'body' or 'elongation' and an arc"),
+        within_days: z.number().nonnegative().max(60).optional()
+          .describe("for 'visibility': days to widen the event's window on each side"),
       })).min(1).describe("what the sky looked like; every constraint must hold at once"),
       start_year: z.number().int().describe("first year to search, astronomical (negative for BCE: -409 is 410 BCE)"),
       end_year: z.number().int().describe("last year to search, inclusive"),
@@ -2264,9 +2280,19 @@ export function buildServer(
     // The search is only meaningful inside each body's validated span, which
     // depends on the data this server was built with.
     const named = new Set<string>();
+    let events = 0;
+    const stars = new Set<string>(engine.starNames());
     for (const c of constraints) {
       if (c.body) named.add(c.body);
       for (const b of c.elongation ?? []) named.add(b);
+      if (c.visibility) {
+        events++;
+        if (c.body || c.elongation) throw new Error("date_sky: a visibility constraint takes no 'body' or 'elongation'");
+        // an event search reads the Sun and Moon as well as its target
+        named.add("sun");
+        named.add("moon");
+        if (!stars.has(c.visibility.target)) named.add(c.visibility.target);
+      }
     }
     const known = new Set<string>(engine.bodies());
     let lo = -Infinity;
@@ -2279,6 +2305,12 @@ export function buildServer(
         hi = Math.min(hi, span.to - 1);
       }
     }
+    // an event near either end of the range is placed from data a few
+    // hundred days beyond it
+    if (events) {
+      lo += 1;
+      hi -= 1;
+    }
     if (start_year < lo || end_year > hi) {
       throw new Error(
         `date_sky: this server's data covers years ${lo} to ${hi} for the bodies named; `
@@ -2288,8 +2320,20 @@ export function buildServer(
     }
     const jdOfYear = (y: number): number =>
       julianDay(y, 1, 1, 0, 0, 0, y < 1583 ? "julian" : "gregorian");
+    const skyConstraints = constraints.map((c): SkyConstraint => {
+      if (!c.visibility) return c as unknown as SkyConstraint;
+      const v = c.visibility;
+      return {
+        visibility: {
+          target: v.target, kind: v.kind, lat: v.lat, lonEast: v.lon,
+          extinction: v.extinction, spread: v.spread, method: v.method,
+          arcusVisionis: v.arcus_visionis, altM: v.altitude_m,
+        },
+        within: c.within_days,
+      };
+    });
     const res = dateSky(
-      engine, constraints as unknown as SkyConstraint[],
+      engine, skyConstraints,
       jdOfYear(start_year), jdOfYear(end_year + 1),
       { zodiac, pad, maxWindows: limit },
     );

@@ -74,6 +74,44 @@ or pass `pad` in the options to widen every arc. The `zodiac` option measures
 longitudes in any zodiac the engine supports, such as
 `"sidereal:fagan_bradley"`.
 
+## A first or last visibility
+
+Ancient records often give an event and not a position: Venus was first seen
+in the evening, or Sirius rose. A constraint can be one of those events at a
+place, written as `visibility`. It takes the fields of
+[`heliacal`](/docs/heliacal): a target, a kind, and where the observer stood.
+
+```ts run
+import { Engine, dateSky, julianDay, calendarDate } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);
+
+// "Venus was first seen in the evening, and Jupiter was in Leo", at Babylon.
+const found = dateSky(engine, [
+  { body: "jupiter", sign: "Leo" },
+  { visibility: { target: "venus", kind: "evening_first", lat: 32.54, lonEast: 44.42 } },
+], julianDay(-650, 1, 1, 0, 0, 0, "julian"), julianDay(-600, 1, 1, 0, 0, 0, "julian"));
+
+found.windows.map((w) => calendarDate(w.start, "julian"));
+```
+
+Fifty years hold four dates that fit: June 642 BCE, late August 631 BCE,
+June 618 BCE, and late August 607 BCE. Each window is the run of local days
+from the event's `earliest` date to its `latest`, the same event under a
+clearer and a hazier sky, and is 7 to 14 days long for Venus. `within` widens
+it by that many days on each side, for a record that says the event was a
+few days ago.
+
+The inner object also takes `extinction`, `spread`, `altM`, `method`, and
+`arcusVisionis`, with the meanings they have in `heliacal`.
+
+A visibility is not a quantity that can be scanned, so it is always taken
+last. Inside each window the positions leave, the events are found one after
+another. With a position beside it the search above takes half a second.
+Alone it costs one event search for each occurrence in the range, about 40
+milliseconds each, so 800 years of Sirius risings take half a minute.
+
 ## When the source's signs are not the engine's
 
 The horoscope of the emperor Hadrian survives in Hephaestio of Thebes, who
@@ -205,10 +243,12 @@ wider span with the years it does cover. Setup is in the
   not include them. `engineCapabilities` reports each body's span.
 - Chiron and the asteroids have no pack before 1600, so a constraint on one
   of them cannot be searched earlier than that.
-- Constraints are on longitude. There is no constraint yet for the Ascendant,
-  for a house, or for a retrograde flag. [`when()`](/docs/api) accepts
+- Constraints are on longitude or on a first or last visibility. There is no
+  constraint yet for the Ascendant, for a house, or for a retrograde flag. [`when()`](/docs/api) accepts
   arbitrary predicates and is the better tool across years or decades; it
   samples the whole range at one step, which is too slow across millennia.
+- A visibility constraint needs data for about 250 days beyond each end of
+  the range, to place the events near its ends.
 - A window with the Moon in it is two or three days long. ΔT is uncertain by
   minutes in antiquity, which moves the Moon by arcminutes and shifts a
   window's edges by a similar number of minutes. It does not move a window to
