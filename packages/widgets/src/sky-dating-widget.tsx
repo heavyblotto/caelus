@@ -12,15 +12,22 @@
  *
  * The host passes the engine. On the site that is the embedded tier, so the
  * search runs in the visitor's browser and nothing is sent to a server.
+ *
+ * A host that publishes the binary packs can also pass `packs`. The form then
+ * offers the full packs as a second data tier: it lists the files the current
+ * search needs and their size, downloads them when the reader runs the
+ * search, and builds an engine on them. The widget stays framework-neutral:
+ * the host supplies the manifest URL and the fetch.
  */
 import type { ReactElement } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { SIGNS, VERSION, type Engine, type Zodiac } from "caelus";
+import { SIGNS, VERSION, type Engine, type PackManifest, type Zodiac } from "caelus";
 import {
-  buildConstraints, callSource, eraYear, jdOfYear, searchSky, signAbbr,
-  signDegree, signsAt, SKY_BODIES, SKY_PHASES, SKY_PRESETS, stampOf,
-  windowText,
-  type SkyBodyId, type SkyPhaseId, type SkyQuery, type SkySearch,
+  buildConstraints, callSource, eraYear, jdOfYear, megabytes, packBytes,
+  packsForQuery, PackStore, searchSky, signAbbr, signDegree, signsAt,
+  SKY_BODIES, SKY_PHASES, SKY_PRESETS, stampOf, windowText,
+  type PackLoadProgress, type PackSource, type SkyBodyId, type SkyPhaseId,
+  type SkyQuery, type SkySearch, type SkyTier,
 } from "./sky-dating.js";
 
 /** The widest span the form accepts, in astronomical years. */
@@ -39,6 +46,10 @@ export interface SkyDatingProps {
   engine: Engine;
   /** Preset to load and run on mount. Defaults to the Babylonian tablet. */
   initialPreset?: string;
+  /** Where the host publishes the binary packs. With it the form offers the
+   *  full packs as a data tier; without it the widget runs on `engine` only.
+   *  Pass the same object on every render. */
+  packs?: PackSource;
 }
 
 /** A stage label for display: the engine's label with its first letter raised. */
@@ -67,7 +78,7 @@ function Track({ spans, jd0, jd1 }: {
   );
 }
 
-export function SkyDating({ engine, initialPreset = "babylon" }: SkyDatingProps): ReactElement {
+export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatingProps): ReactElement {
   const first = SKY_PRESETS.find((p) => p.id === initialPreset) ?? SKY_PRESETS[0];
   const [query, setQuery] = useState<SkyQuery>(first.query);
   const [presetId, setPresetId] = useState<string>(first.id);
@@ -78,20 +89,62 @@ export function SkyDating({ engine, initialPreset = "babylon" }: SkyDatingProps)
   const [copied, setCopied] = useState(false);
   const runId = useRef(0);
 
+  // The data tier the form selects, and the one the shown result came from.
+  const [tier, setTier] = useState<SkyTier>("embedded");
+  const [ranTier, setRanTier] = useState<SkyTier>("embedded");
+  const [ranEngine, setRanEngine] = useState<Engine>(engine);
+  const [ranPacks, setRanPacks] = useState<{ files: number; bytes: number }>({ files: 0, bytes: 0 });
+  const [manifest, setManifest] = useState<PackManifest | null>(null);
+  const [packError, setPackError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<PackLoadProgress | null>(null);
+  const [held, setHeld] = useState(0); // bumped when a download finishes
+  const store = useMemo(() => (packs ? new PackStore(packs, engine.data) : null), [packs, engine]);
+
   const constraints = useMemo(() => buildConstraints(query), [query]);
   const spanOk = Number.isFinite(query.startYear) && Number.isFinite(query.endYear)
     && query.startYear >= SKY_SPAN.from && query.endYear <= SKY_SPAN.to
     && query.endYear >= query.startYear;
   const canRun = constraints.length > 0 && spanOk;
 
-  const run = useCallback(async (q: SkyQuery) => {
+  const run = useCallback(async (q: SkyQuery, on: SkyTier = "embedded") => {
     const id = ++runId.current;
     setRunning(true);
     setSearch(null);
     setRan(q);
     setSeconds(null);
+    setPackError(null);
+
+    // On the full tier, fetch what this query lacks before searching.
+    let searchEngine = engine;
+    let used = { files: 0, bytes: 0 };
+    if (on === "full" && store) {
+      try {
+        const list = await store.manifest();
+        const needed = packsForQuery(list, q);
+        used = { files: needed.length, bytes: packBytes(needed) };
+        searchEngine = await store.engineFor(list, needed, (p) => {
+          if (runId.current === id) setLoading(p);
+        });
+        if (runId.current === id) setManifest(list);
+      } catch (err) {
+        if (runId.current !== id) return;
+        setPackError(err instanceof Error ? err.message : String(err));
+        setLoading(null);
+        setRunning(false);
+        setRan(null);
+        return;
+      } finally {
+        setHeld((n) => n + 1);
+      }
+      if (runId.current !== id) return;
+      setLoading(null);
+    }
+
+    setRanTier(on === "full" && store ? "full" : "embedded");
+    setRanEngine(searchEngine);
+    setRanPacks(used);
     const t0 = performance.now();
-    const result = await searchSky(engine, q, {
+    const result = await searchSky(searchEngine, q, {
       onProgress: (s) => { if (runId.current === id) setSearch(s); },
       cancelled: () => runId.current !== id,
     });
@@ -99,12 +152,37 @@ export function SkyDating({ engine, initialPreset = "babylon" }: SkyDatingProps)
     setSearch(result);
     setSeconds((performance.now() - t0) / 1000);
     setRunning(false);
-  }, [engine]);
+  }, [engine, store]);
 
   const stop = useCallback(() => {
     runId.current++;
     setRunning(false);
+    setLoading(null);
   }, []);
+
+  const chooseTier = (next: SkyTier): void => {
+    setTier(next);
+    setPackError(null);
+    // Read the pack list when the reader first asks for the full tier, so the
+    // form can say what a search would download before anything is fetched.
+    if (next === "full" && store && !manifest) {
+      store.manifest().then(setManifest, (err: unknown) => {
+        setPackError(err instanceof Error ? err.message : String(err));
+      });
+    }
+  };
+
+  // What the current form would use on the full tier, and what is still to fetch.
+  const needed = useMemo(
+    () => (tier === "full" && manifest ? packsForQuery(manifest, query) : []),
+    [tier, manifest, query],
+  );
+  const toFetch = useMemo(
+    () => (store ? store.missing(needed) : []),
+    // `held` changes when a download lands, which is when `missing` changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [store, needed, held],
+  );
 
   // Open on a computed result: run the first preset once on mount.
   useEffect(() => {
@@ -142,7 +220,8 @@ export function SkyDating({ engine, initialPreset = "babylon" }: SkyDatingProps)
   const jd0 = search?.jdStart ?? jdOfYear(shown.startYear);
   const jd1 = search?.jdEnd ?? jdOfYear(shown.endYear + 1);
   const windows = search?.windows ?? [];
-  const stale = ran !== null && JSON.stringify(ran) !== JSON.stringify(query);
+  const stale = ran !== null
+    && (JSON.stringify(ran) !== JSON.stringify(query) || (!running && ranTier !== tier));
   const progress = search ? (search.jdDone - jd0) / (jd1 - jd0) : 0;
   const years = shown.endYear - shown.startYear + 1;
 
@@ -173,13 +252,16 @@ export function SkyDating({ engine, initialPreset = "babylon" }: SkyDatingProps)
         const mid = (s + e) / 2;
         return {
           start: s, end: e,
-          lons: bodies.map((b) => engine.longitude(b.id, mid, { zodiac: shown.zodiac })),
+          lons: bodies.map((b) => ranEngine.longitude(b.id, mid, { zodiac: shown.zodiac })),
         };
       }),
     };
-  }, [windows, shown, engine]);
+  }, [windows, shown, ranEngine]);
 
-  const source = useMemo(() => callSource(query), [query]);
+  const source = useMemo(
+    () => callSource(query, tier, packs?.manifestUrl),
+    [query, tier, packs],
+  );
   const copy = (): void => {
     void navigator.clipboard?.writeText(source).then(() => {
       setCopied(true);
@@ -194,7 +276,10 @@ export function SkyDating({ engine, initialPreset = "babylon" }: SkyDatingProps)
     return ["[", ...head, ...more, "]"].join("\n");
   }, [windows]);
 
-  const status = running
+  const loadFraction = loading && loading.bytesTotal > 0 ? loading.bytesDone / loading.bytesTotal : 0;
+  const status = loading
+    ? `loading packs, ${megabytes(loading.bytesDone)} of ${megabytes(loading.bytesTotal)}`
+    : running
     ? `searching, ${Math.round(progress * 100)}%`
     : seconds !== null
       ? `${years.toLocaleString("en-US")} years in ${seconds.toFixed(1)} s, in this browser`
@@ -218,7 +303,7 @@ export function SkyDating({ engine, initialPreset = "babylon" }: SkyDatingProps)
       </div>
 
       <div className="app">
-        <form className="tile" onSubmit={(e) => { e.preventDefault(); if (canRun) void run(query); }}>
+        <form className="tile" onSubmit={(e) => { e.preventDefault(); if (canRun) void run(query, tier); }}>
           <div className="tile__h"><b>IN</b><span>Constraints</span><i>{constraints.length} set</i></div>
           <div className="fld fld--opt">
             <span />
@@ -295,9 +380,39 @@ export function SkyDating({ engine, initialPreset = "babylon" }: SkyDatingProps)
               onChange={(e) => { setQuery({ ...query, endYear: Math.trunc(Number(e.target.value)) }); setPresetId("custom"); }}
             />
           </div>
+          {packs && (
+            <div className="fld fld--opt">
+              <span />
+              <label htmlFor="sd-tier">Data</label>
+              <select id="sd-tier" value={tier} onChange={(e) => chooseTier(e.target.value as SkyTier)}>
+                <option value="embedded">Embedded tier, in this page</option>
+                <option value="full">Full packs, downloaded</option>
+              </select>
+            </div>
+          )}
           {running
             ? <button className="run" type="button" onClick={stop}>Stop</button>
-            : <button className="run run--go" type="submit" disabled={!canRun}>Run search</button>}
+            : (
+              <button className="run run--go" type="submit" disabled={!canRun}>
+                {tier === "full" && toFetch.length > 0
+                  ? `Download ${megabytes(packBytes(toFetch))} and run`
+                  : "Run search"}
+              </button>
+            )}
+          {tier === "full" && (
+            <p className="note" role="status">
+              {packError
+                ? `The packs could not be loaded, so nothing was run. ${packError}`
+                : !manifest
+                  ? "Reading the list of packs."
+                  : needed.length === 0
+                    ? "Set a constraint to see which packs the search needs."
+                    : `This search uses ${needed.length} pack ${needed.length === 1 ? "file" : "files"}, ${megabytes(packBytes(needed))}. `
+                      + (toFetch.length === 0
+                        ? "All of it is already loaded."
+                        : `${megabytes(packBytes(toFetch))} is still to download, and nothing is fetched until you run the search.`)}
+            </p>
+          )}
           <p className="note">
             {spanOk
               ? `${eraYear(query.startYear)} to ${eraYear(query.endYear)}. Years are astronomical, so 0 is 1 BCE and -409 is 410 BCE.`
@@ -309,13 +424,15 @@ export function SkyDating({ engine, initialPreset = "babylon" }: SkyDatingProps)
         <div className="col">
           <section className="tile">
             <div className="tile__h"><b>OUT</b><span>Windows that fit</span><i>{status}</i></div>
-            <div className="meter"><i style={{ width: `${(running ? progress : search ? 1 : 0) * 100}%` }} /></div>
+            <div className="meter"><i style={{ width: `${(loading ? loadFraction : running ? progress : search ? 1 : 0) * 100}%` }} /></div>
             <div className="count">
               <b>{windows.length.toLocaleString("en-US")}</b>
               <span>{windows.length === 1 ? "window fits" : "windows fit"}</span>
               <i>
                 {eraYear(shown.startYear)} to {eraYear(shown.endYear)}<br />
-                {stale ? "inputs changed since this run" : `caelus ${VERSION}, embedded tier`}
+                {stale
+                  ? "inputs changed since this run"
+                  : `caelus ${VERSION}, ${ranTier === "full" ? "full packs" : "embedded tier"}`}
               </i>
             </div>
             <div className="tl tl--narrow">
@@ -352,7 +469,7 @@ export function SkyDating({ engine, initialPreset = "babylon" }: SkyDatingProps)
               <i>positions at the middle of each window</i>
             </div>
             {rows.list.length === 0
-              ? <p className="empty">{running ? "Searching." : "No window fits every constraint in this span."}</p>
+              ? <p className="empty">{loading ? "Loading packs." : running ? "Searching." : "No window fits every constraint in this span."}</p>
               : (
                 <div className="scroll">
                   <table className="rd">
@@ -444,13 +561,29 @@ export function SkyDating({ engine, initialPreset = "babylon" }: SkyDatingProps)
       <section className="tile s4 half">
         <div className="tile__h"><b>M-2</b><span>What this page computes with</span></div>
         <div className="tile__b prose">
-          <p>
-            This page runs the embedded data tier in your browser. Against the
-            full packs it stays within 0.02° after 1 CE and within 0.09° back
-            to 1000 BCE; at 3000 BCE Saturn is up to 0.7° off. For the two
-            presets it finds the same windows, with edges within 12 minutes.
-            Use the full packs in Node when an edge matters.
-          </p>
+          {ranTier === "full" ? (
+            <p>
+              The result above was computed on the full packs: the JPL
+              Horizons fits for the bodies in the search and for the Earth,
+              {" "}{ranPacks.files} files and {megabytes(ranPacks.bytes)},
+              fetched from this site. Each file was checked against its
+              SHA-256 before it was decoded. They are the packs the Node
+              loader reads, so the windows are the ones the engine's tests
+              pin.
+            </p>
+          ) : (
+            <p>
+              The result above was computed on the embedded data tier, in
+              your browser. Against the full packs it stays within 0.02° after
+              1 CE and within 0.09° back to 1000 BCE; at 3000 BCE Saturn is up
+              to 0.7° off. For the two presets it finds the same windows. Their
+              edges differ by up to about 6 minutes for the Babylonian tablet
+              and about 27 minutes for the horoscope of Hadrian.{" "}
+              {packs
+                ? "Set Data to the full packs to run the search on them here."
+                : "Use the full packs in Node when an edge matters."}
+            </p>
+          )}
         </div>
       </section>
       <section className="tile s4">

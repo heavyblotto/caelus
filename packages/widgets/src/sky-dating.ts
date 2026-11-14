@@ -7,13 +7,16 @@
  * constraints, running the search in slices so a page can draw progress,
  * stitching the slices back together, and formatting what comes out.
  *
- * Nothing here loads data. The host passes an `Engine`, so the same code
- * runs on the embedded tier in a browser and on the full packs in Node.
- * The interactive component lives in sky-dating-widget.tsx.
+ * The host passes an `Engine`, so the same code runs on the embedded tier in
+ * a browser and on the full packs in Node. A host that publishes the binary
+ * packs can also pass a {@link PackSource}; {@link PackStore} then fetches the
+ * packs one query needs, through the engine's verifying loader, and builds an
+ * engine on them. The interactive component lives in sky-dating-widget.tsx.
  */
 import {
-  calendarDate, dateSky, julianDay, SIGNS,
-  type DateSkyResult, type Engine, type SkyConstraint, type Zodiac,
+  calendarDate, dateSky, Engine, fetchPacks, julianDay, mergePacks, selectPacks, SIGNS,
+  type DateSkyResult, type EngineData, type LoadedPack, type PackManifest,
+  type PackManifestEntry, type SkyConstraint, type Zodiac,
 } from "caelus";
 
 /** The bodies the form offers, slowest first, with their glyphs. */
@@ -236,8 +239,157 @@ export function signAbbr(index: number): string {
   return SIGNS[index].slice(0, 3);
 }
 
-/** The call that reproduces a query, as source text for the code tile. */
-export function callSource(q: SkyQuery): string {
+/** Which data a search ran on: the tier bundled with the page, or the full
+ *  packs fetched for the query. */
+export type SkyTier = "embedded" | "full";
+
+/** The part of a fetch `Response` the pack store reads. */
+export interface PackResponse {
+  ok: boolean;
+  status: number;
+  json(): Promise<unknown>;
+  arrayBuffer(): Promise<ArrayBuffer>;
+  body?: ReadableStream<Uint8Array> | null;
+}
+
+/** Where a host publishes the binary packs, and how to fetch from there. */
+export interface PackSource {
+  /** URL of the manifest written by `scripts/build-pack-manifest.mjs`. Pack
+   *  files are fetched relative to it. */
+  manifestUrl: string;
+  /** The host's fetch. The widget calls it for the manifest and for the
+   *  packs a query needs, and for nothing else. */
+  fetch: (url: string) => Promise<PackResponse>;
+}
+
+/** How far a pack download has come. */
+export interface PackLoadProgress {
+  packsDone: number;
+  packsTotal: number;
+  bytesDone: number;
+  bytesTotal: number;
+}
+
+/** The bodies a query constrains. A lunar phase is an angle between the Moon
+ *  and the Sun, so it brings in both. */
+export function queryBodies(q: SkyQuery): string[] {
+  const bodies = new Set<string>();
+  for (const b of SKY_BODIES) if (q.signs[b.id] !== undefined) bodies.add(b.id);
+  if (q.phase) { bodies.add("moon"); bodies.add("sun"); }
+  return [...bodies];
+}
+
+/** The packs one query needs: its bodies, the Earth for the Sun and the
+ *  planets, and only the eras its years touch. */
+export function packsForQuery(manifest: PackManifest, q: SkyQuery): PackManifestEntry[] {
+  return selectPacks(manifest, {
+    bodies: queryBodies(q), fromYear: q.startYear, toYear: q.endYear + 1,
+  });
+}
+
+/** The total size of some packs, in bytes. */
+export function packBytes(entries: readonly PackManifestEntry[]): number {
+  return entries.reduce((sum, e) => sum + e.bytes, 0);
+}
+
+/** A byte count as megabytes: `4.2 MB`. */
+export function megabytes(bytes: number): string {
+  return `${(bytes / 1e6).toFixed(1)} MB`;
+}
+
+/**
+ * Fetches packs on demand and builds engines on them.
+ *
+ * One store serves a page. It reads the manifest once, keeps every pack it
+ * has verified and decoded, and downloads only what a query still lacks. The
+ * engine's loader checks each pack against the manifest's SHA-256 before
+ * decoding it, so a pack that was altered in transit is refused.
+ */
+export class PackStore {
+  private manifestPromise: Promise<PackManifest> | null = null;
+  private readonly loaded = new Map<string, LoadedPack>();
+  private readonly engines = new Map<string, Engine>();
+
+  constructor(private readonly source: PackSource, private readonly base: EngineData) {}
+
+  /** The manifest, fetched on first use. A failed fetch is retried next time. */
+  manifest(): Promise<PackManifest> {
+    this.manifestPromise ??= this.source.fetch(this.source.manifestUrl).then(async (res) => {
+      if (!res.ok) throw new Error(`the pack manifest returned HTTP ${res.status}`);
+      return await res.json() as PackManifest;
+    }).catch((err) => {
+      this.manifestPromise = null;
+      throw err;
+    });
+    return this.manifestPromise;
+  }
+
+  /** The entries not yet downloaded. */
+  missing(entries: readonly PackManifestEntry[]): PackManifestEntry[] {
+    return entries.filter((e) => !this.loaded.has(e.file));
+  }
+
+  /**
+   * An engine on the base data plus the given packs, downloading the ones
+   * not already held. Progress counts received bytes across the downloads.
+   */
+  async engineFor(
+    manifest: PackManifest, entries: readonly PackManifestEntry[],
+    onProgress?: (p: PackLoadProgress) => void,
+  ): Promise<Engine> {
+    const key = entries.map((e) => e.file).sort().join("|");
+    const ready = this.engines.get(key);
+    if (ready) return ready;
+
+    const todo = this.missing(entries);
+    const state: PackLoadProgress = {
+      packsDone: 0, packsTotal: todo.length, bytesDone: 0, bytesTotal: packBytes(todo),
+    };
+    const report = (): void => onProgress?.({ ...state });
+    const dir = this.source.manifestUrl.slice(0, this.source.manifestUrl.lastIndexOf("/") + 1);
+    report();
+    const fresh = await fetchPacks(manifest, todo, async (file) => {
+      const res = await this.source.fetch(dir + file);
+      if (!res.ok) throw new Error(`${file} returned HTTP ${res.status}`);
+      return readBytes(res, (n) => { state.bytesDone += n; report(); });
+    }, { onProgress: () => { state.packsDone++; report(); } });
+    for (const pack of fresh) this.loaded.set(pack.entry.file, pack);
+
+    const engine = new Engine(mergePacks(this.base, entries.map((e) => this.loaded.get(e.file)!)));
+    this.engines.set(key, engine);
+    return engine;
+  }
+}
+
+/** A response's bytes, read as a stream where the host provides one so the
+ *  caller hears about each chunk. */
+async function readBytes(res: PackResponse, onChunk: (bytes: number) => void): Promise<Uint8Array> {
+  if (!res.body) {
+    const all = new Uint8Array(await res.arrayBuffer());
+    onChunk(all.length);
+    return all;
+  }
+  const reader = res.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    chunks.push(value);
+    total += value.length;
+    onChunk(value.length);
+  }
+  const all = new Uint8Array(total);
+  let at = 0;
+  for (const c of chunks) { all.set(c, at); at += c.length; }
+  return all;
+}
+
+/**
+ * The call that reproduces a query, as source text for the code tile. On the
+ * full tier it shows the pack loader in front of the search.
+ */
+export function callSource(q: SkyQuery, tier: SkyTier = "embedded", manifestUrl = "/data/packs/manifest.json"): string {
   const lines = buildConstraints(q).map((c) => {
     if ("elongation" in c && "from" in c) {
       return `  { elongation: ["moon", "sun"], from: ${c.from}, to: ${c.to} },`;
@@ -251,11 +403,33 @@ export function callSource(q: SkyQuery): string {
   if (q.zodiac !== "tropical") opts.push(`zodiac: "${q.zodiac}"`);
   if (q.pad) opts.push(`pad: ${q.pad}`);
   const optText = opts.length ? `, { ${opts.join(", ")} }` : "";
+  const dir = manifestUrl.slice(0, manifestUrl.lastIndexOf("/") + 1);
+  const setup = tier === "full"
+    ? [
+      "import {",
+      "  Engine, dateSky, julianDay, calendarDate, loadPacks, selectPacks,",
+      "} from \"caelus\";",
+      "import { embeddedData } from \"caelus/data-embedded\";",
+      "",
+      `const base = "${dir}";`,
+      `const manifest = await (await fetch(base + "${manifestUrl.slice(dir.length)}")).json();`,
+      "const packs = selectPacks(manifest, {",
+      `  bodies: [${queryBodies(q).map((b) => `"${b}"`).join(", ")}],`,
+      `  fromYear: ${q.startYear}, toYear: ${q.endYear + 1},`,
+      "});",
+      "// each pack is checked against the manifest's SHA-256 before it is used",
+      "const data = await loadPacks(embeddedData, manifest, packs,",
+      "  async (file) => (await fetch(base + file)).arrayBuffer());",
+      "const engine = new Engine(data);",
+    ]
+    : [
+      "import { Engine, dateSky, julianDay, calendarDate } from \"caelus\";",
+      "import { embeddedData } from \"caelus/data-embedded\";",
+      "",
+      "const engine = new Engine(embeddedData);",
+    ];
   return [
-    "import { Engine, dateSky, julianDay, calendarDate } from \"caelus\";",
-    "import { embeddedData } from \"caelus/data-embedded\";",
-    "",
-    "const engine = new Engine(embeddedData);",
+    ...setup,
     "",
     "const { windows, funnel } = dateSky(engine, [",
     ...lines,

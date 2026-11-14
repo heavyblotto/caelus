@@ -13,8 +13,15 @@ const WEB_ROOT = fileURLToPath(new URL("../web/", import.meta.url));
 const shim = (name) => fileURLToPath(new URL(`./src/shims/${name}`, import.meta.url));
 
 /**
+ * Response headers for static files, appended to the `_headers` file the
+ * adapter writes.
+ *
  * The Open Graph image keeps its Next URL, /opengraph-image, which has no file
  * extension, so Cloudflare cannot infer a content type for it. Declare one.
+ *
+ * The binary packs a page fetches on demand (scripts/build-pack-manifest.mjs)
+ * are published under names that carry their content hash, so a browser may
+ * keep one for good. The manifest beside them is revalidated as usual.
  */
 function staticHeaders() {
   return {
@@ -23,7 +30,8 @@ function staticHeaders() {
       "astro:build:done": async ({ dir }) => {
         await appendFile(
           new URL("./_headers", dir),
-          "\n/opengraph-image\n  Content-Type: image/png\n  Cache-Control: public, max-age=86400\n",
+          "\n/opengraph-image\n  Content-Type: image/png\n  Cache-Control: public, max-age=86400\n"
+            + "\n/data/packs/cpk/*\n  Cache-Control: public, max-age=31536000, immutable\n",
         );
       },
     },

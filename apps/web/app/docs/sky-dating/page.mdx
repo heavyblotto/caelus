@@ -159,6 +159,33 @@ search takes half a second in Node on a laptop. The
 [Sky Dating instrument](/instruments/sky-dating) runs the same function behind
 a form.
 
+## The full packs in the instrument
+
+The instrument starts on the embedded tier. Its Data control switches to the
+full packs: it lists the files the current search needs and their size, and it
+downloads them when the search is run. Each file is checked against a SHA-256
+before it is used. [Deep Time](/docs/deep-time) describes the loader.
+
+| Preset | Files | Download | Search, full packs | Search, embedded |
+|---|---|---|---|---|
+| Babylonian tablet, 800 years | 5 | 4.2 MB | 0.1 s | 0.6 s |
+| Horoscope of Hadrian, 5,997 years | 14 | 27.2 MB | 1.1 s | 4.5 s |
+
+Both tiers find the same windows, and the edges move. For the Babylonian
+tablet the embedded tier's edges differ from the full packs' by up to about 6
+minutes. For the horoscope of Hadrian they differ by up to about 27 minutes,
+and the largest difference is at the oldest window:
+
+| Window opens, full packs | Embedded tier opens | Embedded tier closes |
+|---|---|---|
+| 4 March 2485 BCE, 07:55 UT | 13 minutes earlier | 27 minutes earlier |
+| 23 February 2248 BCE, 16:10 UT | 11 minutes earlier | 10 minutes earlier |
+| 3 February 1394 BCE, 12:22 UT | 6 minutes earlier | 6 minutes earlier |
+| 24 January 76 CE, 00:49 UT | 1 minute earlier | 1 minute earlier |
+
+The full packs are also the faster tier, because a fitted polynomial costs
+less to evaluate than the series it replaces. The times are from one laptop.
+
 ## From an AI client
 
 The MCP server exposes the same search as the `date_sky` tool. It takes the
@@ -173,9 +200,9 @@ wider span with the years it does cover. Setup is in the
 ## Limits
 
 - The range must lie inside the data the engine was built with. Dates before
-  1000 CE are validated only with the era packs, which `loadNodeData` loads in
-  Node and the embedded browser tier does not include. `engineCapabilities`
-  reports each body's span.
+  1000 CE are validated only with the era packs. `loadNodeData` loads them in
+  Node, and a browser fetches them with `loadPacks`; the embedded tier does
+  not include them. `engineCapabilities` reports each body's span.
 - Uranus, Neptune, and Pluto have no pack before 1000 CE, so a constraint on
   one of them cannot be searched in the classical era.
 - Constraints are on longitude. There is no constraint yet for the Ascendant,

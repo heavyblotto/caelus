@@ -93,6 +93,10 @@ jobs:
       - run: node packages/caelus/dist/test/stability-golden.test.js
       # binary packs (CPK1): the TS decoder returns the reference's exact doubles
       - run: node packages/caelus/dist/test/packbin-golden.test.js
+      # pack loader: the browser-safe path to the binary packs. A matching
+      # SHA-256 loads, a changed byte is refused, and the result computes the
+      # same positions as the Node loader
+      - run: node packages/caelus/dist/test/pack-loader.test.js
       # every test/*.test.* file in the repo must be wired into this workflow;
       # four golden suites once sat dormant for ~11 releases because this list
       # is maintained by hand. The gate makes silent omission impossible.

@@ -70,6 +70,84 @@ table, and they are large enough to change a canonical digest on the
 milliarcsecond grid, so digests computed from the Node data tier differ
 between 0.25 and 0.26.
 
+## Loading packs on demand
+
+A browser bundle carries the embedded tier. `pack-loader.ts` is the path from
+there to the full packs for a host with no filesystem: a browser, a
+Cloudflare Worker, or Node.
+
+`loadPacks(base, manifest, entries, fetchPack)` fetches the packs it is
+handed, checks each against the manifest, decodes it, and returns engine data
+with the packs placed over `base` in the fields `loadNodeData` uses.
+`selectPacks(manifest, { bodies, fromYear, toYear })` chooses the entries: the
+packs of the bodies named, the Earth's for the Sun and for every planet, and
+only the eras the years touch.
+
+The manifest is JSON:
+
+```json
+{
+  "format": "caelus-pack-manifest",
+  "version": 1,
+  "packs": [
+    {
+      "file": "cpk/saturn_cheb.classical.7212f6b250e7.cpk",
+      "bytes": 63658,
+      "sha256": "7212f6b250e7…",
+      "body": "saturn",
+      "era": "classical",
+      "from": -3003,
+      "to": 1000
+    }
+  ]
+}
+```
+
+`body` is a planet id, `earth`, or `moon`. `era` is `modern` for a body's
+default pack and the slab's name otherwise. `from` and `to` are the whole
+astronomical years the pack covers.
+
+The loader keeps three promises. It fetches only the entries passed to it, and
+each must be one the manifest lists, with a plain relative file name. It
+compares a fetched file's length and its SHA-256, computed with Web Crypto,
+against the manifest before decoding a byte, and rejects with
+`PackIntegrityError` on a mismatch. It has no dependency.
+
+`pack-loader.test.ts` checks that a matching pack loads, that one changed bit
+and one missing byte are each refused, that nothing outside the request is
+fetched, and that an engine on the loader's output returns the positions of
+an engine on `loadNodeData` with `===`: 28 positions at four instants from
+2500 BCE to 1990. The same call was run once inside workerd, where it
+returned the Node loader's positions and refused an altered pack.
+
+### Publishing
+
+`scripts/build-pack-manifest.mjs` reads `packages/caelus/data/*.cpk` and
+writes `apps/web/public/data/packs/`: `manifest.json`, and each pack under
+`cpk/` with the first 12 hex digits of its SHA-256 in the name. The directory
+is generated and gitignored, so the packs are in the repository once. Both
+site builds serve `apps/web/public`, and both run the script as part of their
+build.
+
+A pack's URL changes when its bytes do, so both builds serve `cpk/` with
+`Cache-Control: public, max-age=31536000, immutable`. The manifest keeps a
+plain name and is revalidated. The 17 packs and the manifest add 27.4 MB to
+each build's static output; the manifest is 4 KB.
+
+### What a page downloads
+
+Measured in the Sky Dating instrument, which loads the packs when its Data
+control is set to the full packs:
+
+| Search | Files | Download |
+|---|---|---|
+| Four planets, 800 BCE to 1 BCE | 5 | 4.2 MB |
+| Seven bodies, 2999 BCE to 2998 CE | 14 | 27.2 MB |
+
+With all 14 loaded, one Chromium tab's JavaScript heap grew from 29 MB to
+163 MB. A decoded pack is nested arrays of doubles, which is what the engine
+reads; a typed-array form would be smaller and is not built.
+
 ## Tools
 
 - `python/pack_binary.py` mints `.cpk` files from JSON packs and reports the
@@ -78,6 +156,10 @@ between 0.25 and 0.26.
 - `astroengine/packbin.py` is the reference encoder and decoder.
 - `packbin.ts` exports `decodePack`, `decodePackHeader`, and `isBinaryPack`.
   `loadNodeData` prefers `{stem}.cpk` over `{stem}.json`.
+- `pack-loader.ts` exports `loadPacks`, `fetchPacks`, `mergePacks`, and
+  `selectPacks`, the verifying loader for hosts with no filesystem.
+- `scripts/build-pack-manifest.mjs` publishes the packs and their manifest
+  for the site.
 
 The fit scripts still write JSON. After a refit, run `pack_binary.py` on the
 new JSON and commit the `.cpk`; the JSON is an intermediate and is not kept
