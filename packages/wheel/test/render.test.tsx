@@ -8,9 +8,11 @@ import { dirname, join } from "node:path";
 import { createRequire } from "node:module";
 import { Engine } from "caelus";
 import { loadNodeData } from "caelus/node";
+import { createHash } from "node:crypto";
 import {
-  ChartWheel, spreadAngles, GLYPHS, PLATE_THEME, PLATE_BODY_INKS, PLATE_TOKENS,
+  ChartWheel, MultiWheel, spreadAngles, sweptArc, GLYPHS, PLATE_THEME, PLATE_BODY_INKS, PLATE_TOKENS,
   NorthIndianKundli, SouthIndianKundli,
+  type WheelChart,
 } from "../src/index.js";
 
 let checks = 0;
@@ -199,6 +201,101 @@ assert(render(fixture, { size: 300 }).includes('width="300"'), "size: applied");
       assert(svg.includes(`data-body="${b}"`), `kundli ${label}: body ${b} present`);
     }
   }
+}
+
+// ---------------------------------------------------------------- uncertainty
+// A chart written out by hand, so these renders depend on this package
+// alone and the hashes below move only when the wheel's own output does.
+const STATIC: WheelChart = {
+  bodies: {
+    sun: { lon: 79.45 }, moon: { lon: 282.1 }, mercury: { lon: 58.2, retrograde: true },
+    venus: { lon: 41.75 }, mars: { lon: 7.9 }, jupiter: { lon: 108.33 },
+    saturn: { lon: 293.6, retrograde: true }, true_node: { lon: 310.05 }, mean_node: { lon: 311.2 },
+  },
+  angles: { asc: 185.2, mc: 96.4 },
+  cusps: [185.2, 213.9, 244.6, 276.4, 308.3, 338.1, 5.2, 33.9, 64.6, 96.4, 128.3, 158.1],
+  aspects: [
+    { a: "sun", b: "moon", aspect: "trine", orb: 2.65 },
+    { a: "mars", b: "saturn", aspect: "square", orb: 4.3 },
+    { a: "venus", b: "jupiter", aspect: "sextile", orb: 3.4 },
+  ],
+};
+const sha = (svg: string): string => createHash("sha256").update(svg).digest("hex");
+
+// With the prop left out the wheel is byte-identical to what it drew before
+// the layer existed. These hashes were taken from the code as it stood then.
+{
+  assert(sha(render(STATIC)) === "2ac12b6b295ebb1bbba0d2d40c6f4ba95c2c36fb5adddb549ae6a312be41f540",
+    "uncertainty: the default render is unchanged");
+  assert(sha(render(STATIC, { size: 360, layers: { aspects: false }, theme: { axis: "#123456" } }))
+    === "8158a732c725595ba8b69645ea051e1a6c7d21a9f72a650e816a7fda0992c9ca",
+    "uncertainty: a render with other props is unchanged");
+  assert(sha(renderToStaticMarkup(<MultiWheel rings={[{ chart: STATIC, label: "a" }, { chart: STATIC, label: "b" }]} />))
+    === "a73c423a5f2c4a6cc2901f00022f5aef65fe6fec8fc5b95b89b6bbf895291f6d",
+    "uncertainty: MultiWheel is unchanged");
+  assert(render(STATIC, { uncertainty: undefined }) === render(STATIC), "uncertainty: undefined is the same as absent");
+  assert(render(STATIC, { uncertainty: { samples: [STATIC] } }) === render(STATIC), "uncertainty: one sample is no window, so nothing draws");
+}
+
+// the swept arc
+{
+  const near = (a: number, b: number): boolean => Math.abs(a - b) < 1e-9;
+  const fwd = sweptArc([10, 12, 15]);
+  assert(near(fwd.from, 10) && near(fwd.sweep, 5) && fwd.boundaries.length === 0, "arc: forward motion inside one sign");
+  const cross = sweptArc([28.5, 29.4, 30.6]);
+  assert(near(cross.from, 28.5) && near(cross.sweep, 2.1) && cross.boundaries.join() === "30", "arc: crossing into the next sign names the boundary");
+  const back = sweptArc([31, 30.2, 29.6]);
+  assert(near(back.from, 29.6) && near(back.sweep, 1.4) && back.boundaries.join() === "30", "arc: retrograde motion runs from the lowest point reached");
+  const turn = sweptArc([14, 16, 15, 13]);
+  assert(near(turn.from, 13) && near(turn.sweep, 3), "arc: a body that turns inside the window is covered across its whole excursion");
+  const wrap = sweptArc([358, 359.5, 1]);
+  assert(near(wrap.from, 358) && near(wrap.sweep, 3) && wrap.boundaries.join() === "0", "arc: crossing 0° Aries");
+  assert(sweptArc([25, 30]).boundaries.length === 0 && sweptArc([30, 35]).boundaries.length === 0, "arc: a boundary at an end of the arc is touched, not crossed");
+  const big = sweptArc(Array.from({ length: 13 }, (_, i) => 100 + i * 20));
+  assert(near(big.from, 100) && near(big.sweep, 240) && big.boundaries.length === 8, "arc: steps add up past half a turn");
+  const round = sweptArc(Array.from({ length: 25 }, (_, i) => (200 + i * 15.04) % 360));
+  assert(round.sweep === 360 && round.boundaries.length === 12, "arc: a full turn is the whole circle and every boundary");
+  assert(sweptArc([42]).sweep === 0 && sweptArc([]).sweep === 0, "arc: one sample or none sweeps nothing");
+}
+
+// the layer on the wheel
+{
+  const at = (dAsc: number, dMoon: number, dSun: number): WheelChart => ({
+    ...STATIC,
+    bodies: { ...STATIC.bodies, moon: { lon: 282.1 + dMoon }, sun: { lon: 79.45 + dSun } },
+    angles: { asc: 185.2 + dAsc, mc: 96.4 + dAsc },
+  });
+  // a quarter of an hour either way: the Ascendant moves a few degrees
+  const short = render(STATIC, { uncertainty: { samples: [at(-4, -0.14, -0.01), STATIC, at(4, 0.14, 0.01)] } });
+  const paths = (svg: string): number => (svg.match(/<path /g) ?? []).length;
+  assert(short.startsWith("<svg") && !short.includes("NaN"), "layer: renders without NaN");
+  assert(paths(render(STATIC)) === 0 && paths(short) === 3, `layer: the Moon and the two angles get an arc, and the Sun's is too short to draw (${paths(short)})`);
+  assert(!short.includes("<rect"), "layer: no sign boundary is crossed, so no square");
+  assert((short.match(/<line/g) ?? []).length === (render(STATIC).match(/<line/g) ?? []).length, "layer: nothing else on the wheel changes");
+
+  // the Moon crosses from Capricorn into Aquarius (300°): heavier arc, one square
+  const cross = render(STATIC, { uncertainty: { samples: [at(0, 15, 0), at(0, 20, 0)] } });
+  assert((cross.match(/<rect/g) ?? []).length === 1 && cross.includes('stroke-width="3"'), "layer: a body that changes sign is drawn heavier with a square on the boundary");
+
+  // a whole day: both angles go all the way round
+  const day = render(STATIC, { uncertainty: { samples: Array.from({ length: 49 }, (_, i) => at((i - 24) * 7.52, (i - 24) * 0.27, (i - 24) * 0.02)) } });
+  const rings = (svg: string): number => (svg.match(/<circle/g) ?? []).length;
+  assert(rings(day) === rings(render(STATIC)) + 2, "layer: over a whole day each angle's arc is a full circle");
+  assert((day.match(/<rect/g) ?? []).length === 24, `layer: and carries a square on all twelve boundaries (${(day.match(/<rect/g) ?? []).length})`);
+
+  // a chart with no place has no angles to sweep
+  const bare = render(STATIC, { uncertainty: { samples: [{ bodies: at(0, -6, 0).bodies }, { bodies: at(0, 6, 0).bodies }] } });
+  assert(paths(bare) === 1 && !bare.includes("NaN"), "layer: samples without angles draw the bodies only");
+  const off = render(STATIC, { layers: { axes: false, bodies: false }, uncertainty: { samples: [at(-4, -6, 0), at(4, 6, 0)] } });
+  assert(paths(off) === 0, "layer: arcs follow the bodies and axes layers");
+  assert(render(STATIC, { uncertainty: { samples: [at(-4, -6, 0), at(4, 6, 0)], color: "#abcdef" } }).includes('stroke="#abcdef"'), "layer: the arc color can be set");
+  assert(short.includes('stroke="#8a7fd4" stroke-width="1.5"'), "layer: arcs default to the axis ink");
+
+  // a real window from the engine: a quarter hour either way on the fixture
+  const jd = fixture.jdUt;
+  const real = [-900, 0, 900].map((sec) => eng.chartAt(jd + sec / 86400, 27.95, -82.46, { houseSystem: "placidus" }));
+  const svg = render(fixture, { uncertainty: { samples: real } });
+  assert(!svg.includes("NaN") && paths(svg) >= 2, "layer: a real window renders");
 }
 
 console.log(`\n${checks} checks, ${failures} failures`);

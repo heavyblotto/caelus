@@ -134,7 +134,10 @@ links, selected states, primary actions, chart geometry. Peach blossom
 (`--warm`) is the single warm counterpoint, reserved for the living layer:
 markers of the computed sky, matches in a result, interpretation surfaces,
 and placeholder notices. Green and red are reserved for check status and
-diffs. Do not use peach for chrome, and do not add a third accent or a
+diffs. A window of uncertainty drawn on a wheel is
+structural and takes violet: the arcs are geometry of the chart over a span
+of time, the same kind of thing as the axes, and peach stays for what marks
+the stated or current moment. Do not use peach for chrome, and do not add a third accent or a
 per-tradition colourway. Tradition changes the figure, not the chrome.
 Wheels, the kundli, the ephemeris graph, and the sky plots consume the
 `--wheel-*` tokens and `--accent`.

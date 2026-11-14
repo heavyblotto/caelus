@@ -1,4 +1,5 @@
 import { pageMetadata } from "../../../lib/seo";
+import { UncertaintyWheel } from "../../../components/docs/UncertaintyWheel";
 
 export const metadata = pageMetadata({
   title: "Uncertain Times",
@@ -79,6 +80,40 @@ takes 1.6 seconds in Node.
 
 Leave out `lat` and `lonEast` and the angles, houses, and sect are not
 computed at all. The result then covers signs, directions, and aspects.
+
+## On the wheel
+
+`ChartWheel` from `caelus-wheel` can draw the window as well as the instant.
+Its `uncertainty` prop takes charts across the window in time order, and for
+each body and each angle it draws an arc over the longitudes passed through.
+
+```tsx
+import { Engine, julianDay } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+import { ChartWheel } from "caelus-wheel";
+
+const engine = new Engine(embeddedData);
+const jd = julianDay(1990, 6, 10, 18, 30);
+const at = (minutes: number) =>
+  engine.chartAt(jd + minutes / 1440, 27.95, -82.46);
+
+export default function Wheel() {
+  // an hour either way, sampled every half hour
+  const samples = [-60, -30, 0, 30, 60].map(at);
+  return <ChartWheel chart={at(0)} uncertainty={{ samples }} />;
+}
+```
+
+<UncertaintyWheel />
+
+The arcs for the bodies sit just inside the zodiac ring and the arcs for the
+Ascendant and the Midheaven near the rim, the Ascendant outermost. An arc
+that crosses a sign boundary is heavier and carries a square on the boundary.
+Two samples are enough for the bodies. The angles turn about 15° an hour, so
+a window of hours needs a sample every half hour or so, and over a whole day
+the two angle arcs close into full circles. The
+[Uncertain Time instrument](/instruments/uncertain-time) draws this wheel for
+whatever window you set.
 
 ## Ancient dates
 

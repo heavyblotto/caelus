@@ -14,6 +14,7 @@ import {
   jdOfQuery, kindLabel, mergeSegments, queryOk, returnedSource, scanStability,
   STABILITY_DEFAULT, STABILITY_PLACES, STABILITY_WINDOWS, stabilitySource,
   statedText, subjectLabel, timeText, trackLabel, valueAt, valueLabel,
+  windowInstants, windowWheel,
   type StabilityQuery,
 } from "../src/chart-stability.js";
 import { ChartStability } from "../src/chart-stability-widget.js";
@@ -199,10 +200,59 @@ function sameAsDirect(label: string, facts: StabilityFact[], direct: StabilityRe
   assert(returnedSource(null).includes("facts: 0"), "the returned shape at rest");
 }
 
+// the window on the wheel
+{
+  const q = STABILITY_DEFAULT;
+  const jd = jdOfQuery(q);
+  const counts = (["5m", "15m", "1h", "6h", "day"] as const).map((w) => windowInstants({ ...q, window: w }).length);
+  assert(counts.join() === "3,3,5,25,49", `the window is sampled at least every half hour (${counts.join()})`);
+  for (const w of ["15m", "6h", "day"] as const) {
+    const ts = windowInstants({ ...q, window: w });
+    const half = halfWidthOf({ ...q, window: w }) / 86400;
+    assert(Math.abs(ts[0] - (jd - half)) < 1e-9 && Math.abs(ts[ts.length - 1] - (jd + half)) < 1e-9
+      && Math.abs(ts[(ts.length - 1) / 2] - jd) < 1e-9, `${w}: the samples run from the start to the end through the stated instant`);
+    assert(ts.every((t, i) => i === 0 || (t - ts[i - 1]) * 86400 <= 1800 + 1e-3), `${w}: no two samples are more than half an hour apart`);
+  }
+
+  const quarter = windowWheel(eng, { ...q, window: "15m" });
+  const direct = eng.chartAt(jd, 27.95, -82.46, { houseSystem: "placidus", zodiac: "tropical" });
+  assert(quarter.placed && quarter.samples.length === 3 && quarter.chart.angles.asc === direct.angles.asc
+    && quarter.chart.bodies.moon!.lon === direct.bodies.moon!.lon, "the wheel's chart is the chart at the stated instant");
+  assert(quarter.bodiesCrossing.length === 0 && quarter.anglesCrossing.length === 0, "±15 min: nothing changes sign");
+  const hour = windowWheel(eng, q);
+  assert(hour.bodiesCrossing.length === 0 && hour.anglesCrossing.join() === "asc,mc", `±1 h: both angles change sign, as the scan finds (${hour.anglesCrossing.join()})`);
+  const day = windowWheel(eng, { ...q, window: "day" });
+  assert(day.samples.length === 49 && day.bodiesCrossing.length === 0 && day.anglesCrossing.join() === "asc,mc", "the whole day: every body keeps its sign and both angles turn");
+
+  // the lists agree with the scan: a body is flagged exactly when its sign fact is unstable
+  for (const [label, query] of [
+    ["6 h", { ...q, window: "6h" as const }],
+    ["a day on which a body changes sign", { ...q, year: 1990, month: 6, day: 12, hour: 12, minute: 0, window: "day" as const }],
+  ] as const) {
+    const w = windowWheel(eng, query);
+    const scan = await scanStability(eng, query, { yieldFn: immediate });
+    const moved = scan.facts.filter((f) => f.kind === "sign" && !f.stable && f.subject !== "mean_node").map((f) => f.subject).sort();
+    assert([...w.bodiesCrossing].sort().join() === moved.join(), `${label}: bodies flagged on the wheel are the ones whose sign the scan sees change (${w.bodiesCrossing.join() || "none"} vs ${moved.join() || "none"})`);
+    const angles = scan.facts.filter((f) => f.kind === "angle_sign" && !f.stable).map((f) => f.subject).sort();
+    assert([...w.anglesCrossing].sort().join() === angles.join(), `${label}: and the same for the angles`);
+  }
+  const mercuryDay = windowWheel(eng, { ...q, year: 1990, month: 6, day: 12, hour: 12, minute: 0, window: "day" });
+  assert(mercuryDay.bodiesCrossing.join() === "mercury", `on 12 June 1990 Mercury changes sign inside the day (${mercuryDay.bodiesCrossing.join()})`);
+  // the Moon changes sign every two or three days, so one of four days running has it
+  const moonDays = [11, 12, 13, 14].filter((day) =>
+    windowWheel(eng, { ...q, day, hour: 12, minute: 0, window: "day" }).bodiesCrossing.includes("moon"));
+  assert(moonDays.length >= 1 && moonDays.length <= 2, `the Moon changes sign on one or two of four days running (${moonDays.join()})`);
+
+  const bare = windowWheel(eng, { ...q, place: null });
+  assert(!bare.placed && bare.samples.every((x) => x.angles === undefined) && bare.anglesCrossing.length === 0, "no place: no angles in the samples");
+  assert(bare.chart.angles.asc === 0 && bare.chart.cusps.length === 12 && bare.chart.aspects.length > 0
+    && Math.abs(bare.chart.bodies.sun!.lon - direct.bodies.sun!.lon) < 1e-9, "no place: bodies and aspects only, set with 0° Aries at the left");
+}
+
 // the instrument at rest
 {
   const html = renderToStaticMarkup(<ChartStability engine={eng} />);
-  for (const id of ["IN", "OUT", "TBL", "HOLD", "TS", "RET", "M-1", "M-2", "M-3"]) {
+  for (const id of ["IN", "OUT", "WHEEL", "TBL", "HOLD", "TS", "RET", "M-1", "M-2", "M-3"]) {
     assert(html.includes(`<b>${id}</b>`), `tile ${id} renders`);
   }
   assert(html.includes("Instrument I-02") && html.includes("<h1>Uncertain time</h1>"), "title tile");
@@ -211,7 +261,14 @@ function sameAsDirect(label: string, facts: StabilityFact[], direct: StabilityRe
   assert(html.includes(">Tampa</option>") && html.includes(">No place</option>"), "preset places and a no-place option");
   assert(html.includes("halfWidthSeconds: 3600"), "the call tile shows the opening query");
   assert(!/style="[^"]*(gradient|shadow|radius)/.test(html), "no inline decoration");
+  // the wheel tile: the stated chart with the window drawn on it
+  const arcs = (h: string): number => (h.match(/<path fill="none"/g) ?? []).length;
+  assert(html.includes('aria-label="astrological chart wheel"') && arcs(html) >= 3, `the wheel draws arcs for the window (${arcs(html)})`);
+  assert(html.includes(">AC<") && html.includes("No body changes sign across this window, and the Ascendant and the Midheaven do."), "the tile says what changes sign");
+  const themed = renderToStaticMarkup(<ChartStability engine={eng} wheelTheme={{ axis: "var(--accent)" }} />);
+  assert(themed.includes('stroke="var(--accent)" stroke-width="3"'), "the arcs take the host's axis color");
   const bare = renderToStaticMarkup(<ChartStability engine={eng} initial={{ ...STABILITY_DEFAULT, place: null }} />);
+  assert(bare.includes("<b>WHEEL</b>") && !bare.includes(">AC<") && bare.includes("With no place there is no Ascendant"), "with no place the wheel has no angles and the tile says so");
   assert(!bare.includes('id="cs-lat"') && !bare.includes('id="cs-houses"'), "with no place the latitude, longitude, and house fields are not shown");
 }
 

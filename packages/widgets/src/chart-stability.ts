@@ -13,11 +13,12 @@
  * The interactive component lives in chart-stability-widget.tsx.
  */
 import {
-  BODIES, calendarDate, chartStability, julianDay, STABILITY_KINDS,
-  type Engine, type HouseSystem, type StabilityFact, type StabilityKind,
-  type StabilityOptions, type StabilityResult, type StabilitySegment,
-  type StabilityValue, type Zodiac,
+  BODIES, calendarDate, chartStability, findAspects, julianDay, STABILITY_KINDS,
+  type Engine, type HouseSystem, type Position, type StabilityFact,
+  type StabilityKind, type StabilityOptions, type StabilityResult,
+  type StabilitySegment, type StabilityValue, type Zodiac,
 } from "caelus";
+import { sweptArc, type WheelChart, type WheelUncertaintySample } from "caelus-wheel";
 
 /** How uncertain the stated time is: half the window on each side of it. */
 export const STABILITY_WINDOWS = [
@@ -255,6 +256,79 @@ export async function scanStability(
     await pause();
   }
   return acc;
+}
+
+/** The instants at which the window is sampled for the wheel: the start,
+ *  the stated instant, the end, and enough between them that no two are
+ *  more than half an hour apart. The angles turn about 15° an hour, so the
+ *  wheel's uncertainty layer can add the steps up without losing a turn. */
+export function windowInstants(q: StabilityQuery): number[] {
+  const half = halfWidthOf(q);
+  const jd = jdOfQuery(q);
+  const steps = 2 * Math.max(1, Math.ceil(half / 1800));
+  return Array.from({ length: steps + 1 }, (_, i) => jd + ((i / steps) * 2 - 1) * (half / 86400));
+}
+
+/** What the wheel tile draws: the stated chart and the window around it. */
+export interface WindowWheel {
+  /** The chart at the stated instant. */
+  chart: WheelChart;
+  /** Charts across the window in time order, for `ChartWheel`'s
+   *  `uncertainty` prop. */
+  samples: WheelUncertaintySample[];
+  /** False for a query with no place. The chart then has no angles or
+   *  houses, and it is set with 0° Aries where the Ascendant would be. */
+  placed: boolean;
+  /** The drawn bodies whose sign changes inside the window. */
+  bodiesCrossing: string[];
+  /** The angles whose sign changes inside the window. */
+  anglesCrossing: Array<"asc" | "mc">;
+}
+
+/**
+ * The stated chart and the charts across the window, ready for the wheel.
+ * With a place these are whole charts. Without one they are the bodies'
+ * positions and the aspects between them, since the angles and houses need
+ * a place.
+ */
+export function windowWheel(engine: Engine, q: StabilityQuery): WindowWheel {
+  const instants = windowInstants(q);
+  const placed = q.place !== null;
+  const at = (jd: number): WheelChart => {
+    if (q.place) {
+      return engine.chartAt(jd, q.place.lat, q.place.lonEast, {
+        houseSystem: q.houseSystem, zodiac: q.zodiac,
+      });
+    }
+    const bodies: Record<string, Position> = {};
+    for (const b of BODIES) {
+      try {
+        bodies[b] = engine.position(b, jd, { zodiac: q.zodiac });
+      } catch (e) {
+        if (!(e instanceof RangeError)) throw e;
+      }
+    }
+    return {
+      bodies, aspects: findAspects(bodies),
+      angles: { asc: 0, mc: 270 },
+      cusps: Array.from({ length: 12 }, (_, i) => i * 30),
+    };
+  };
+  const charts = instants.map(at);
+  const chart = charts[(charts.length - 1) / 2];
+  const samples: WheelUncertaintySample[] = charts.map((c) => (
+    placed ? { bodies: c.bodies, angles: c.angles } : { bodies: c.bodies }
+  ));
+  const crosses = (lons: Array<number | undefined>): boolean =>
+    lons.every((v) => v !== undefined) && sweptArc(lons as number[]).boundaries.length > 0;
+  const drawn = Object.keys(chart.bodies).filter((b) => b !== "mean_node" && chart.bodies[b] !== undefined);
+  return {
+    chart, samples, placed,
+    bodiesCrossing: drawn.filter((b) => crosses(charts.map((c) => c.bodies[b]?.lon))),
+    anglesCrossing: placed
+      ? (["asc", "mc"] as const).filter((a) => crosses(charts.map((c) => c.angles[a])))
+      : [],
+  };
 }
 
 /** One change of one fact: the instant, and the value on each side of it. */
