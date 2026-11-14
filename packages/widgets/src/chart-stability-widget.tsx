@@ -204,17 +204,17 @@ export function ChartStability({ engine, initial = STABILITY_DEFAULT, wheelTheme
         </div>
         <div>
           <p>
-            A chart is computed for one instant, and the instant is often not
-            known that well. This instrument takes a stated time and how far
-            off it could be, and reports which facts of the chart hold across
-            the whole window and when the others change.
+            Birth times are frequently approximate. Given a nominal date and
+            time along with an uncertainty margin, this tool scans the full
+            interval to show which chart placements hold steady and pinpoints
+            when cusps, signs, or aspects change.
           </p>
         </div>
       </div>
 
       <div className="app">
         <form className="tile" onSubmit={(e) => { e.preventDefault(); if (ok) void run(query); }}>
-          <div className="tile__h"><b>IN</b><span>The stated time</span><i>UT</i></div>
+          <div className="tile__h"><b>IN</b><span>Nominal chart inputs</span><i>UT</i></div>
           <div className="fld">
             <span />
             <label htmlFor="cs-date">Date</label>
@@ -296,16 +296,16 @@ export function ChartStability({ engine, initial = STABILITY_DEFAULT, wheelTheme
           <p className="note">
             {ok
               ? `${statedText(query)}. `
-              : "Enter a date, a time, and a place on the globe. "}
+              : "Enter a valid date, time, and coordinates. "}
             {query.place
-              ? "Latitude is north positive and longitude is east positive, so Tampa is -82.46."
-              : "With no place the scan leaves out the angles, the houses, and the sect."}
+              ? "Latitude is north-positive and longitude is east-positive (Tampa is -82.46)."
+              : "Without observer coordinates, angles, house placements, and sect are omitted from the scan."}
           </p>
         </form>
 
         <div className="col">
           <section className="tile">
-            <div className="tile__h"><b>OUT</b><span>Facts that hold</span><i>{status}</i></div>
+            <div className="tile__h"><b>OUT</b><span>Stable placements</span><i>{status}</i></div>
             <div className="meter"><i style={{ width: `${(running ? progress : scan ? 1 : 0) * 100}%` }} /></div>
             <div className="count">
               <b>{scan ? scan.summary.stable : 0}</b>
@@ -343,25 +343,25 @@ export function ChartStability({ engine, initial = STABILITY_DEFAULT, wheelTheme
             )}
             {unstable.length > MAX_TRACKS && (
               <p className="note">
-                Showing {MAX_TRACKS} of {unstable.length} facts that change. The figure beside each
-                label is the share of the window in which the fact has its stated value.
+                Showing {MAX_TRACKS} of {unstable.length} changing facts. The percentage
+                indicates how much of the window matches the nominal chart value.
               </p>
             )}
             {unstable.length > 0 && unstable.length <= MAX_TRACKS && (
               <p className="note">
-                One track for each fact that changes. The figure beside each label is the share
-                of the window in which the fact has its stated value, and the line down the
-                middle is the stated time.
+                Each bar shows a changing placement over the window, with the
+                nominal time marked at center and the percentage showing how
+                long the nominal value holds.
               </p>
             )}
           </section>
 
           <section className="tile">
             <div className="tile__h">
-              <b>WHEEL</b><span>The window on the chart</span>
+              <b>WHEEL</b><span>Chart over the time window</span>
               <i>{ok ? `${statedText(query)}, ${wheelWindow}` : ""}</i>
             </div>
-            {!wheel && <p className="empty">Enter a date, a time, and a place on the globe to draw the wheel.</p>}
+            {!wheel && <p className="empty">Enter a valid date, time, and coordinates to render the wheel.</p>}
             {wheel && (
               <>
                 <div className="chart-fluid">
@@ -373,8 +373,8 @@ export function ChartStability({ engine, initial = STABILITY_DEFAULT, wheelTheme
                 </div>
                 <p className="note">
                   {wheel.placed
-                    ? "The wheel is the chart at the stated time. Each arc covers where a body or an angle could be across the window: the bodies just inside the zodiac ring, and the Ascendant and the Midheaven near the rim, the Ascendant outermost. An arc that crosses into another sign is drawn heavier, with a square on the boundary. "
-                    : "With no place there is no Ascendant, Midheaven, or house to draw, so the wheel is set with 0° Aries at the left and shows the bodies and their aspects. Each arc just inside the zodiac ring covers where a body could be across the window, drawn heavier with a square where it crosses into another sign. "}
+                    ? "The wheel renders the nominal chart alongside uncertainty arcs: planetary ranges appear inside the zodiac ring, while the Ascendant (outer) and Midheaven (inner) arcs run along the rim. Heavier arcs with a square marker indicate sign crossings. "
+                    : "With no place there is no Ascendant, Midheaven, or house cusps to draw, so the wheel aligns 0° Aries at the left to show planetary positions and aspects. Arcs inside the zodiac ring show each body's range across the window, marked heavier with a square when crossing into a new sign. "}
                   {crossingText(wheel)}
                 </p>
               </>
@@ -383,11 +383,11 @@ export function ChartStability({ engine, initial = STABILITY_DEFAULT, wheelTheme
 
           <section className="tile">
             <div className="tile__h">
-              <b>TBL</b><span>Changes in time order</span>
-              <i>{changes.length} found, to about a second</i>
+              <b>TBL</b><span>Transition timeline</span>
+              <i>{changes.length} transitions (to ~1 s)</i>
             </div>
             {changes.length === 0
-              ? <p className="empty">{running || !scan ? "Scanning." : "Nothing changes inside this window."}</p>
+              ? <p className="empty">{running || !scan ? "Scanning." : "No chart facts change within this window."}</p>
               : (
                 <div className="scroll">
                   <table className="rd">
@@ -406,12 +406,12 @@ export function ChartStability({ engine, initial = STABILITY_DEFAULT, wheelTheme
                 </div>
               )}
             {changes.length > MAX_ROWS && (
-              <p className="note">Showing the first {MAX_ROWS} of {changes.length} changes.</p>
+              <p className="note">Showing the first {MAX_ROWS} of {changes.length} transitions.</p>
             )}
           </section>
 
           <section className="tile">
-            <div className="tile__h"><b>HOLD</b><span>Stable facts by kind</span><i>value at the stated time</i></div>
+            <div className="tile__h"><b>HOLD</b><span>Unchanged facts by category</span><i>nominal chart value</i></div>
             {stableGroups.length === 0
               ? <p className="empty">Scanning.</p>
               : (
@@ -444,51 +444,50 @@ export function ChartStability({ engine, initial = STABILITY_DEFAULT, wheelTheme
         <div className="col code">
           <section className="tile">
             <div className="tile__h">
-              <b>TS</b><span>The call</span>
+              <b>TS</b><span>TypeScript example</span>
               <button type="button" onClick={copy}>{copied ? "Copied" : "Copy"}</button>
             </div>
             <pre className="code">{source}</pre>
           </section>
           <section className="tile">
-            <div className="tile__h"><b>RET</b><span>What it returns</span><i>UT Julian Days</i></div>
+            <div className="tile__h"><b>RET</b><span>Return value</span><i>UT Julian Days</i></div>
             <pre className="code">{returned}</pre>
           </section>
         </div>
       </div>
 
       <section className="tile s4 half">
-        <div className="tile__h"><b>M-1</b><span>How the scan works</span></div>
+        <div className="tile__h"><b>M-1</b><span>Sampling and bisection</span></div>
         <div className="tile__b prose">
           <p>
-            The scan computes the chart every two minutes across the window.
-            Wherever a fact differs between two neighbouring samples it
-            bisects for the instant of the change, to about a second. This
-            page runs the window an hour at a time so the tracks fill in as it
-            goes.
+            The scan samples the chart every two minutes across the window.
+            Whenever a fact differs between consecutive samples, a bisection
+            step narrows the transition timestamp to roughly one second. In
+            this demo, the window runs in one-hour slices so results update
+            incrementally.
           </p>
         </div>
       </section>
       <section className="tile s4 half">
-        <div className="tile__h"><b>M-2</b><span>What a fact is</span></div>
+        <div className="tile__h"><b>M-2</b><span>Tracked fact categories</span></div>
         <div className="tile__b prose">
           <p>
-            A fact is one discrete statement the chart makes. There are six
-            kinds: the sign on the Ascendant and the Midheaven, whether the
-            chart is by day or by night, the sign of each body, its house,
-            whether a planet is retrograde, and which aspect a pair of bodies
-            is in.
+            Each tracked fact represents a discrete chart property across six
+            categories: Ascendant and Midheaven signs, chart sect (day or night),
+            each body&apos;s sign, house placement, retrograde state, and
+            pairwise aspects.
           </p>
         </div>
       </section>
       <section className="tile s4">
-        <div className="tile__h"><b>M-3</b><span>Limits</span></div>
+        <div className="tile__h"><b>M-3</b><span>Scope and limitations</span></div>
         <div className="tile__b prose">
           <p>
-            A fact that changes and changes back inside two minutes is missed.
-            The window is a window of time, so uncertainty in the place is not
-            modelled. An aspect counts as present or absent at the engine's
-            orbs, and a pair that stays in orb while the aspect tightens is
-            stable. Dates here are Gregorian.
+            Brief transitions that revert within two minutes can be missed by
+            the initial grid, and geographic coordinate uncertainty is not
+            modeled. Aspects are evaluated as binary states against standard orbs
+            (an aspect whose orb tightens without breaking remains stable).
+            All dates use the Gregorian calendar.
           </p>
         </div>
       </section>

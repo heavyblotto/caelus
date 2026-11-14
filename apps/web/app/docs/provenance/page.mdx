@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Chart Provenance",
-  description: "Declare what a chart is and how its time and place are known: realms, temporal and spatial anchors, routing to the ephemeris or the compiler, and honest framing for interpretation.",
+  description: "Classify chart epistemic status (observed, forecast, mythic, archetypal) alongside time and location certainty, routing to ephemeris or symbolic constraint solving.",
   path: "/docs/provenance",
 });
 
@@ -10,17 +10,18 @@ export const metadata = pageMetadata({
 
 # Chart provenance
 
-`chartAt(jd, lat, lon)` silently asserts a real instant at a real place. That
-is wrong for most interesting cases: a forecast, a fictional character, an
-archetype ("the chart of Aries"), a counterfactual, a birth time known only to
-the hour, or a narrative calendar (Stardate, a regnal year, a game epoch).
+Calling `chartAt(jd, lat, lon)` assumes a verified historical timestamp and
+geographic location. Many valid charts do not fit that mold: future forecasts,
+fictional characters, pure archetypes, counterfactual timelines, approximate birth
+hours, or narrative calendars such as Stardates or regnal years.
 
-The provenance layer makes a chart's grounding first-class: what it **is**
-(`Realm`), and how its time and place are **known** (`TemporalAnchor`,
-`SpatialAnchor`). It does not compute positions. It resolves anchors to a usable
-instant and place (or reports that none can be derived), routes to the right
-generator, and hands realm + certainty to the
-[interpretation layer](/docs/interpretation) so a reading stays honest.
+The provenance layer captures both what a chart represents (`Realm`) and how
+precisely its time and coordinates are known (`TemporalAnchor` and
+`SpatialAnchor`). Rather than calculating positions directly, it resolves
+anchors to concrete inputs (or explains why none can be resolved), routes
+generation to either ephemeris lookup or constraint compilation, and passes
+`realm` and `certainty` metadata into the
+[interpretation layer](/docs/interpretation).
 
 ```text
 AnchoredChart { realm, when, where?, constraints? }
@@ -29,56 +30,58 @@ AnchoredChart { realm, when, where?, constraints? }
   → interpretationContext(chart, { provenance: { realm, certainty } })
 ```
 
-## Realm: what the chart is
+## Chart realms
 
 | Realm | Meaning | Typical generator |
 |---|---|---|
 | `observed` | Verified firsthand | ephemeris |
-| `reported` | Attested second-hand (a quoted birth time) | ephemeris |
-| `planned` | A real future moment chosen deliberately | ephemeris |
-| `forecast` | A real future moment, predicted not chosen | ephemeris (often a range midpoint) |
-| `fictional` | A character or event in an invented world | ephemeris or compiler |
-| `mythic` | A deity, legend, or sacred narrative | ephemeris or compiler |
-| `counterfactual` | A real event, perturbed ("born an hour later") | ephemeris |
-| `archetypal` | A pure symbol ("the chart of Aries") | compiler (constraints) |
-| `conceptual` | An idea, organization, or abstraction | compiler (constraints) |
+| `reported` | Recorded secondhand (such as a quoted birth time) | ephemeris |
+| `planned` | Real future timestamp chosen intentionally | ephemeris |
+| `forecast` | Future moment estimated by model or range midpoint | ephemeris |
+| `fictional` | Character or event in an invented setting | ephemeris or compiler |
+| `mythic` | Deity, legend, or sacred narrative | ephemeris or compiler |
+| `counterfactual` | Perturbed real event (e.g., an hour earlier) | ephemeris |
+| `archetypal` | Purely symbolic structure (e.g., "the chart of Aries") | compiler (constraints) |
+| `conceptual` | Idea, organization, or abstract entity | compiler (constraints) |
 
-`isTimeAnchored(realm)` splits the routing: the first five expect a resolvable
-instant and go to the ephemeris; `archetypal` and `conceptual` usually have no
-instant and go to the compiler when you supply constraints. `counterfactual` is
-the bridge: a real instant, then perturbed.
+`isTimeAnchored(realm)` splits the default path: real-time realms resolve a
+timestamp and evaluate the ephemeris, while `archetypal` and `conceptual`
+realms generally pass geometric `constraints` to the compiler. `counterfactual`
+bridges both by starting from a real timestamp and perturbing it.
 
 ## Temporal and spatial anchors
 
-A **`TemporalAnchor`** is not just a tagged value. `relative` and `narrative`
-kinds make it a small constraint graph (the temporal cousin of the geometric
-compiler).
+`TemporalAnchor` models timestamps across varying levels of precision, with
+`relative` and `narrative` variants acting as lightweight constraint links:
 
 | kind | Resolves to | Certainty |
 |---|---|---|
-| `instant` | the parsed UT instant | `exact` |
-| `range` | the midpoint (+ bounds kept) | `representative` |
-| `relative` | a registry instant ± parsed offset | `approximate` |
-| `narrative` | a pluggable calendar resolver's output | `approximate` |
-| `symbolic` / `none` | null (rationale or reason kept) | `none` |
+| `instant` | Parsed UT Julian Day | `exact` |
+| `range` | Midpoint JD with outer bounds retained | `representative` |
+| `relative` | Reference registry timestamp plus parsed offset | `approximate` |
+| `narrative` | Output of a pluggable custom calendar resolver | `approximate` |
+| `symbolic` / `none` | `null` (preserving the rationale or missing reason) | `none` |
 
-Offsets accept compact units (`"3d"`, `"-2h"`, `"6mo"`) or ISO-8601 durations
-(`"P1Y2M10DT2H30M"`). Calendar units use mean lengths.
+Relative offsets accept shorthand durations (`"3d"`, `"-2h"`, `"6mo"`) or
+ISO-8601 durations (`"P1Y2M10DT2H30M"`), using mean calendar lengths for months
+and years.
 
-**`SpatialAnchor`** mirrors time: `geo`, `named`, `region`, `relative`,
-`fictional`, or `none`. `resolvePlace` uses the same `AnchorRegistry` (a
-gazetteer for `named`, stored places for `relative`). `none` place is the
-heliocentric or purely symbolic case: no houses, no angles.
+`SpatialAnchor` provides parallel coverage (`geo`, `named`, `region`, `relative`,
+`fictional`, and `none`). `resolvePlace` checks the `AnchorRegistry` gazetteer
+for `named` locations and stored coordinates for `relative` anchors. Using
+`none` produces a chart with positions only and no angles or house cusps.
 
-## The anchor registry
+## Anchor registry
 
-An **`AnchorRegistry`** holds the lookups anchors need:
+`AnchorRegistry` supplies domain lookups required by `relative`, `narrative`,
+and `named` anchors:
 
-- **`instants`**: `anchorId → UT Julian Day` for `relative` time anchors
-- **`calendars`**: calendar name → `(value → jd | null)` for `narrative` times
-- **`places` / `gazetteer`**: named and relative place resolution
+- **`instants`**: maps `anchorId` strings to UT Julian Days.
+- **`calendars`**: maps calendar names to `(value) => jd | null` resolvers.
+- **`places` / `gazetteer`**: resolves named or relative geographic coordinates.
 
-Missing lookups resolve to `null` with a note, never a guessed instant.
+If a requested entry is missing from the registry, resolution returns `null`
+with an explanatory note instead of fabricating a timestamp or coordinate:
 
 <CodeBlock
   lang="typescript"
@@ -109,18 +112,21 @@ resolveTime(
 );`}
 />
 
-## Realize: route to the right generator
+## Routing with `realize()`
 
-**`realize(engine, anchored, registry, opts)`** is where provenance meets the
-two chart generators Caelus already had:
+`realize(engine, anchored, registry, opts)` connects anchor resolution to the
+engine's two chart-generation paths:
 
-1. **Ephemeris path** (`via: "ephemeris"`): a resolvable instant runs
-   `chartAt`. The realm rides along as interpretation framing only.
-2. **Compiler path** (`via: "compiler"`): no instant, but `constraints` are
-   supplied, so `compileForm` synthesizes a symbolic configuration.
-3. **None** (`via: "none"`): neither was possible; the `note` says why.
+1. **Ephemeris (`via: "ephemeris"`)**: when a valid UT Julian Day resolves,
+   evaluates `chartAt` and attaches `realm` metadata for downstream prose.
+2. **Compiler (`via: "compiler"`)**: when no timestamp resolves and
+   `constraints` are supplied, invokes `compileForm` to synthesize matching
+   planetary positions.
+3. **Unresolved (`via: "none"`)**: when neither succeeds, returns a diagnostic
+   `note` explaining why resolution failed.
 
-A real instant always wins over constraints.
+Whenever a valid timestamp resolves alongside constraints, the ephemeris path
+takes precedence:
 
 <CodeBlock
   lang="typescript"
@@ -157,13 +163,10 @@ const outlook = realize(engine, {
 // outlook.time.certainty === "representative"`}
 />
 
-## Why interpretation cares
+## Damping and framing in interpretations
 
-The interpretation layer's accuracy loop is "novel and accurate": the model
-writes original prose and cites real facts. Provenance extends that from **"the
-facts are right"** to **"the chart's status is right."**
-
-Pass realm and certainty from `realize`'s result into the projection:
+Forward `realm` and `certainty` from `realize()` into `interpretationContext` so
+salience weights and LLM framing reflect how reliably the chart's time is known:
 
 <CodeBlock
   lang="typescript"
@@ -187,30 +190,28 @@ const brief = chartBrief(ctx, { limit: 24 });
 //   representative time → distrust Moon, angles, houses`}
 />
 
-When certainty is not `exact`, **time-sensitive atoms are damped** in salience:
-the Moon (~13°/day) and the angles (~15°/h) are multiplied by 0.7
-(`approximate`) or 0.6 (`representative`); slow planets keep full weight. An
-uncertain birth time automatically leans the reading on sign-level and slow-planet
-statements.
+Whenever `certainty` is weaker than `exact`, time-sensitive atoms (Moon
+positions moving ~13°/day and angles moving ~15°/hr) have their salience scaled
+by `0.7` (`approximate`) or `0.6` (`representative`), while slow-moving
+planets keep full weight. Readings on imprecise charts naturally emphasize
+durable sign and outer-planet placements.
 
-See the [Interpretation guide](/docs/interpretation) for atoms, selectors, the
-rule corpus, and citation auditing.
+See the [Interpretation guide](/docs/interpretation) for full details on fact
+atoms, selectors, rule corpora, and citation audits.
 
-## When to use which path
+## Choosing the right entry point
 
-- **Known instant + place** (`observed`, `reported`): plain `chartAt`, or
-  `realize` when you also want certainty on the record.
-- **Election or forecast window** (`planned`, `forecast`): `range` anchor;
-  interpret at `representative` certainty.
-- **Fiction, myth, archetype** (`fictional`, `mythic`, `archetypal`): declare
-  the realm; use constraints when there is no instant.
-- **Counterfactual** (`counterfactual`): `relative` anchor off a real event, or
-  **`counterfactual()`** / **`chartDiff()`** to perturb a resolved chart (shift
-  time, move place, splice longitudes) and report what changed. Over MCP as
-  `counterfactual_chart`.
-- **Narrative calendar** (`narrative`): plug a resolver into `AnchorRegistry.calendars`.
-- **Heliocentric / no location** (`where: { kind: "none" }`): positions only;
-  houses and angles are nominal or absent.
-
-In every case the engine ships the contract and the routing. You declare what
-the chart is, and the system frames the interpretation to match that declaration.
+- **Known timestamp and location** (`observed`, `reported`): call `chartAt`
+  directly, or `realize` to keep certainty metadata attached.
+- **Electional or forecast window** (`planned`, `forecast`): use a `range`
+  anchor and evaluate at `representative` certainty.
+- **Fiction, myth, or archetype** (`fictional`, `mythic`, `archetypal`): tag
+  the `realm` explicitly and supply `constraints` when no real timestamp exists.
+- **Counterfactual exploration** (`counterfactual`): combine a `relative`
+  time anchor with a reference event, or use `counterfactual()` and
+  `chartDiff()` (MCP: `counterfactual_chart`) to perturb time, coordinates, or
+  body longitudes and inspect resulting sign, house, and aspect changes.
+- **Narrative calendars** (`narrative`): register a custom converter in
+  `AnchorRegistry.calendars`.
+- **No geographic location** (`where: { kind: "none" }`): calculates body
+  positions without house cusps or angles.

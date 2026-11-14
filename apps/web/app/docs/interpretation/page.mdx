@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Interpretation Layer",
-  description: "Turn a validated chart into citable readings: project it into ranked fact atoms, match them with selectors, plug in a rule corpus, and hand an LLM a brief it must cite. The engine owns the facts; you own the meaning.",
+  description: "Project validated charts into ranked, citable fact atoms, match them with composable selectors, run rule corpora with conflict detection, and audit LLM citations.",
   path: "/docs/interpretation",
 });
 
@@ -10,22 +10,16 @@ export const metadata = pageMetadata({
 
 # Interpretation layer
 
-Caelus is a fact engine, and every module in it stops at validated geometry. A
-chart gives you bodies, aspects, angles, cusps, dignities, and patterns, with no
-delineation text and no account of what any of it means. That boundary is
-deliberate, because the numbers can be made correct and auditable while the
-meaning of a chart remains a matter of tradition and taste rather than
-arithmetic.
+Caelus calculates deterministic astronomical data (planetary positions,
+aspects, house cusps, dignities, and geometric patterns) without bundling
+interpretive prose. Keeping calculation separate from delineation allows the
+numerical layer to remain verifiable against reference ephemerides while
+letting applications choose any astrological tradition or writing style.
 
-That boundary does leave a gap. If you want to *generate* an interpretation,
-whether from a rule base or from an LLM writing natal prose, there is no clean
-place to attach it. The interpretation layer exists to be that attachment
-point, and it performs no interpretation of its own. What it defines is the
-contract between the facts the engine owns and the meaning you bring to them:
-
-> The engine owns the **facts**, a layer you plug in owns the **meaning**, and
-> the framework owns the **contract** between the two rather than any of the
-> content itself.
+The interpretation layer provides a structured interface between validated
+chart output and downstream interpretation logic: deterministic chart facts
+come from the engine, narrative or rule text comes from your corpus or language
+model, and citation IDs tie every claim back to verifiable chart geometry.
 
 ```text
 Engine (validated)     chart(): bodies, aspects, angles, cusps
@@ -35,29 +29,28 @@ Engine (validated)     chart(): bodies, aspects, angles, cusps
   → Output             a structured reading, or an LLM brief + citation audit
 ```
 
-Each layer is independently useful and consumes only the one below it. Use as
-much of the stack as you need: stop at the atoms and feed your own model, or run
-the whole pipeline to a reconciled, cited reading.
+Each stage can be used independently: stop after fact projection to feed your
+own pipeline, or connect the entire stack to generate citation-audited readings.
 
-## What it's for
+## Key use cases
 
-- **Ground an LLM in correct math.** The hardest part of an AI astrologer is not
-  the prose (models write fluent prose). It is that they hallucinate positions.
-  Hand the model the validated facts, each tagged with a stable id, and require
-  it to cite the id behind every claim. The chart math was never the model's to
-  invent, and `auditCitations` proves it didn't.
-- **Build a rule-based reading engine.** Express a tradition or house style as
-  selectors over the fact model ("Mars in an angular house and part of a
-  T-square") and get back ranked statements, each carrying the exact atoms that
-  justified it.
-- **Rank and reconcile.** Salience surfaces what is prominent; `reconcile`
-  groups everything said about the same placement and flags where your corpus
-  contradicts itself.
+- **Ground an LLM in verified calculations.** Language models write fluent
+  astrological prose easily, but frequently fabricate planetary placements or
+  aspects when asked to calculate charts themselves. Passing ranked fact atoms
+  tagged with stable IDs and checking output with `auditCitations` ensures
+  every interpretive claim rests on actual chart data.
+- **Evaluate a rule corpus.** Encode your house style or tradition using
+  selectors over the fact model (such as Mars in an angular house inside a
+  T-square) and retrieve ranked entries alongside the exact facts that matched.
+- **Prioritize and reconcile overlapping rules.** Salience weights surface
+  prominent placements first, while `reconcile` groups rules touching the same
+  placement and flags conflicting tags declared in your corpus.
 
-## 1. Project the chart into fact atoms
+## 1. Project a chart into fact atoms
 
-`interpretationContext(chart)` flattens a `Chart` into a flat, ranked list of
-typed **fact atoms**. An atom is the unit an interpreter reasons about and cites.
+`interpretationContext(chart)` flattens a `Chart` into a ranked array of typed
+**fact atoms**, each representing an atomic statement ready for rule matching
+or LLM citation:
 
 <CodeBlock
   lang="typescript"
@@ -75,111 +68,113 @@ ctx.atoms.slice(0, 3).forEach((a) => console.log(a.id, ":", a.text));
 // aspect:moon~neptune:conjunction : Moon conjunction Neptune (applying, orb 0.6°)`}
 />
 
-Every atom carries five common fields:
+Every atom exposes five common properties:
 
-- **`id`**: a stable, content-addressable string (`placement:mars`,
+- **`id`**: a deterministic, content-addressable identifier (`placement:mars`,
   `aspect:mars~saturn:square`, `pattern:t_square:mars-moon-saturn`,
-  `signature:element:fire`, `angle:asc`). A generated claim points at this id,
-  so it can always be traced back to the fact it rests on.
+  `signature:element:fire`, `angle:asc`). Downstream claims cite this ID to
+  establish provenance.
 - **`kind`**: `placement | aspect | pattern | signature | angle | angleContact |
   dispositor | reception | star | lot | degree | transit | transitHouse | station |
   synastry | composite | compositeAspect | timelord | dignity | nakshatra |
   varga | yoga |
   parallel | outOfBounds | return | lunation | solarPhase`.
-- **`bodies`**: the body ids involved, for filtering and cross-reference.
-- **`salience`**: a transparent, overridable prominence score (below).
-- **`text`**: a plain-language statement of the fact, with no interpretation
-  (`"Moon conjunction Neptune (applying, orb 0.6°)"`).
+- **`bodies`**: array of body IDs involved, for filtering and cross-reference.
+- **`salience`**: an overridable prominence score (detailed below).
+- **`text`**: a plain summary of the astronomical fact without interpretive
+  framing (`"Moon conjunction Neptune (applying, orb 0.6°)"`).
 
 **Reception** atoms record mutual reception by **domicile**, **exaltation**, or
-the sect's **triplicity** ruler (or a mixed pair, e.g. `domicile-exaltation`).
-Use `hasReception({ body: "venus" })` to match any involving Venus.
+sect **triplicity** (as well as mixed pairs such as `domicile-exaltation`).
+Match them with `hasReception({ body: "venus" })`.
 
-**Degree** atoms state each point's zodiacal degree ordinally, the way degree
-symbols count: a body at 14°30′ Aries occupies the *15th* degree of Aries.
-One atom per placed body plus the Ascendant and Midheaven, each also carrying
-the ten-degree face index (1-3). Match with
-`hasDegree({ sign: "Aries", degree: 15 })`.
+**Degree** atoms express each point's zodiacal position as an ordinal degree
+(a planet at 14°30′ Aries occupies the *15th* degree of Aries) alongside its
+ten-degree decan/face index (1–3). One atom is generated per body plus the
+Ascendant and Midheaven; match with `hasDegree({ sign: "Aries", degree: 15 })`.
 
-**Star** and **lot** atoms are not computed from a bare `Chart` (the star
-catalog lives in the data pack, and lots derive from the points and sect), so a
-caller supplies them through `ContextOptions`: a body's tight conjunction with a
-fixed star (`star:jupiter:Sirius`, from `Engine.starConjunctions`), and the
-Hermetic lots, the Part of Fortune and its companions (`lot:fortune`, from
-`Engine.lots`). Match them with `hasStar({ star: "Algol" })` and
+**Star** and **lot** atoms depend on catalog lookups and lot calculations that
+sit outside the base `Chart` object, so supply them through `ContextOptions`:
+tight conjunctions with fixed stars (`star:jupiter:Sirius` from
+`Engine.starConjunctions`) and Hermetic lots (`lot:fortune` from
+`Engine.lots`). Match with `hasStar({ star: "Algol" })` and
 `hasLot({ lot: "fortune" })`.
 
-**Parallel** and **out-of-bounds** atoms are declination facts, which longitude
-cannot express: two bodies can hold a parallel while unaspected
-(`parallel:mars~venus:parallel`), and a body can run beyond the obliquity band
-(`oob:moon`). Match them with `hasParallel({ between: ["mars", "venus"] })` and
-`hasOutOfBounds({ body: "moon" })`.
+**Parallel** and **out-of-bounds** atoms capture declination geometry absent
+from ecliptic longitudes: bodies forming parallels while longitudinally
+unaspected (`parallel:mars~venus:parallel`), or bodies whose declination exceeds
+the obliquity of the ecliptic (`oob:moon`). Match with
+`hasParallel({ between: ["mars", "venus"] })` and `hasOutOfBounds({ body: "moon" })`.
 
-### Diachronic and relational atoms
+### Diachronic and synastry atoms
 
-The natal projection extends via `ContextOptions` and two helpers:
+Extend a natal projection with transits, time-lords, Vedic factors, and
+synastry via `ContextOptions` and two enrichment helpers:
 
-- **`enrichContextOptions(engine, chart, target)`**: transits to natal (with
-  phase and strength), active profection / zodiacal releasing / firdaria /
-  Vimshottari dasha, Egyptian term/face/triplicity/almuten facts (always), and
-  nakshatra / D9 / yogas when the chart is sidereal.
-- **`enrichSynastryOptions(engine, chartA, chartB)`**: inter-chart aspects,
-  house overlays, composite midpoint placements, and the aspects among those
-  composite bodies (chart A is the base). Composite placements also carry a
-  **composite house** when both charts have real angles: a midpoint composite
-  has no moment and no place to cast houses from, so `compositeFrame` supplies
-  a stated convention instead (midpoint Ascendant and MC, equal houses from
-  the Ascendant, `method: "equal-from-midpoint-asc"`). Without both birth
-  times there is no frame and no house, rather than an invented one, and
-  `hasComposite({ house })` correctly matches nothing. Note the composite MC
-  does not generally land on the tenth cusp: two independently averaged angles
-  do not keep their quadrant relationship.
+- **`enrichContextOptions(engine, chart, target)`**: adds transits to natal
+  (with phase and strength), active profection, zodiacal releasing, firdaria,
+  and Vimshottari dasha periods, traditional term/face/triplicity/almuten facts,
+  and nakshatra, D9, and yoga atoms when the chart uses a sidereal zodiac.
+- **`enrichSynastryOptions(engine, chartA, chartB)`**: computes inter-chart
+  aspects, house overlays, composite midpoint placements, and internal
+  composite aspects (using chart A as the base). When both charts include
+  valid birth times and angles, composite placements carry a **composite house**
+  computed via `compositeFrame` (equal houses from the midpoint Ascendant,
+  `method: "equal-from-midpoint-asc"`). If either chart lacks birth time angles,
+  no synthetic house frame is invented and `hasComposite({ house })` matches
+  nothing. Note that the averaged midpoint Midheaven does not generally align
+  with the 10th equal-house cusp because independent angle averages do not
+  preserve quadrant geometry.
 
-Id examples: `transit:saturn~natal_moon:square`, `profection:year:scorpio:mars`,
-`zr:l1:scorpio:mars`, `dasha:maha:saturn`, `term:moon:saturn`,
-`synastry:mars~b_venus:square`, `composite:mars`, `nakshatra:moon:Ashwini`,
-`varga:d9:moon:virgo`, `yoga:Gajakesari`. Match with `hasTransit`,
-`hasTimelord`, `hasSynastry`, `hasComposite`, `hasDignityFine`, `hasNakshatra`,
-`hasVarga`, and `hasYoga`. Every id resolves in `auditCitations`.
+Representative IDs include `transit:saturn~natal_moon:square`,
+`profection:year:scorpio:mars`, `zr:l1:scorpio:mars`, `dasha:maha:saturn`,
+`term:moon:saturn`, `synastry:mars~b_venus:square`, `composite:mars`,
+`nakshatra:moon:Ashwini`, `varga:d9:moon:virgo`, and `yoga:Gajakesari`. Match
+these using `hasTransit`, `hasTimelord`, `hasSynastry`, `hasComposite`,
+`hasDignityFine`, `hasNakshatra`, `hasVarga`, and `hasYoga`. All IDs resolve
+cleanly in `auditCitations`.
 
-### Facts the chart alone does not state
+### Derived atoms beyond base Chart fields
 
-Some facts a reader takes for granted are not on a `Chart`: a planet sitting on
-the Ascendant is not an aspect, a body's nearness to the Sun is not a dignity,
-and a return is a relation between two instants. The projection computes these
-itself, so they arrive as atoms with ids like any other fact.
+Several standard interpretive factors do not live as standalone fields on
+`Chart` (a planet conjunct an angle is not listed inside planetary aspects,
+solar proximity is separate from sign dignities, and a return relates two
+timestamps). `interpretationContext` derives these automatically as typed atoms:
 
-- **`angleContact`** (`angleContact:sun:asc`): a body conjunct the ASC, DSC,
-  MC, or IC point, not the angular *house*. Orb via `angleOrb` (default 8°).
-  Match with **`hasAngleContact`**.
-- **`transitHouse`** (`transitHouse:saturn:7`): the "Saturn is crossing your
-  7th" fact, true whether or not anything is in orb. **`hasTransitHouse`**.
-- **`station`** (`station:mercury:retrograde`): a body turning near the
-  instant, inside an editorial window (default ±5 days). **`hasStation`**.
-- **`return`** (`return:saturn:1`): a body within orb of its own natal
-  longitude, numbered, so a first Saturn return is addressable apart from a
-  second. **`hasReturn`** takes `nth` or `minNth`.
-- **`lunation`** (`lunation:full:eclipse:lunar`): a New or Full Moon near the
-  instant, located in the natal houses, eclipse-flagged, listing any natal
-  bodies it falls on. **`hasLunation`** filters phase, eclipse, house, and
+- **`angleContact`** (`angleContact:sun:asc`): a planet within orb of the
+  Ascendant, Descendant, Midheaven, or IC degree (distinct from general angular
+  house occupancy; configurable via `angleOrb`, default 8°). Selector:
+  **`hasAngleContact`**.
+- **`transitHouse`** (`transitHouse:saturn:7`): identifies which natal house a
+  transiting body currently traverses, regardless of aspect orbs. Selector:
+  **`hasTransitHouse`**.
+- **`station`** (`station:mercury:retrograde`): flags planets turning retrograde
+  or direct near the chart timestamp (default ±5-day window). Selector:
+  **`hasStation`**.
+- **`return`** (`return:saturn:1`): flags planetary returns within orb and
+  tracks cycle count so a first Saturn return is distinct from a second.
+  Selector **`hasReturn`** accepts `nth` or `minNth`.
+- **`lunation`** (`lunation:full:eclipse:lunar`): captures nearby New or Full
+  Moons, eclipse status, natal house placement, and touched natal points.
+  Selector **`hasLunation`** filters by phase, eclipse flag, house, and
   `onNatal`.
-- **`solarPhase`** (`solarPhase:mercury:cazimi`): cazimi, combust, or under
-  the beams, at the pinned electional thresholds. Fires on a birth chart and on
-  the moving sky alike. **`hasSolarPhase`**.
+- **`solarPhase`** (`solarPhase:mercury:cazimi`): tags cazimi, combust, and
+  under-the-beams status using standard electional orbs across natal and
+  transit charts. Selector: **`hasSolarPhase`**.
 - **`parallel`** and **`outOfBounds`** (`parallel:mars~venus:parallel`,
-  `oob:moon`): declination facts, which longitude cannot express: two bodies
-  can hold a parallel while unaspected. **`hasParallel`**, **`hasOutOfBounds`**.
-- **`compositeAspect`** (`compositeAspect:mars~venus:square`): an aspect
-  between two *composite* placements. A composite chart is a set of midpoints,
-  so its internal geometry is a fact about the relationship itself rather than
-  about either person; `composite` atoms give the placements, this gives the
-  relations among them. **`hasCompositeAspect`**.
+  `oob:moon`): declination aspects and out-of-bounds flags. Selectors:
+  **`hasParallel`**, **`hasOutOfBounds`**.
+- **`compositeAspect`** (`compositeAspect:mars~venus:square`): aspects between
+  composite midpoint placements, capturing internal relationship geometry
+  alongside individual `composite` placements. Selector:
+  **`hasCompositeAspect`**.
 
-Three of these close gaps where the engine's own primitives deliberately look
-away: `findAspects` excludes the nodes, so the projection computes node aspects
-itself; `transitAspects` admits one natal node as a *target*; and a classical
-planet with none of the five essential dignities is marked `"peregrine"` on its
-placement atom, while `Chart.dignities` stays exactly as computed.
+To give rule authors consistent coverage, three projection behaviors diverge
+slightly from the raw calculation APIs: `interpretationContext` computes aspects
+to lunar nodes even though `findAspects` omits them, `transitAspects` accepts a
+natal lunar node as a target, and classical planets holding zero essential
+dignities receive a `"peregrine"` tag on their placement atom while
+`Chart.bodies[id].dignities` remains unmodified.
 
 <CodeBlock
   lang="typescript"
@@ -202,53 +197,52 @@ const transits = transitAspects(chart, engine, targetJd, { maxOrb: 3 });
 interpretationContext(chart, { transits });`}
 />
 
-The Playground **Reading** tab and MCP **`chart_facts`** (with optional
-`target_date`) use `enrichContextOptions` automatically. MCP **`synastry`**
-returns the same citable atoms plus a ready `brief`.
+Both the Playground **Reading** tab and the MCP **`chart_facts`** tool apply
+`enrichContextOptions` automatically when `target_date` is provided. MCP
+**`synastry`** returns matching citable atoms alongside a structured prompt
+brief.
 
-Kind-specific fields fill in the rest: placements add
-`sign`/`signDeg`/`house`/`retrograde`/`dignities`; aspects add
-`aspect`/`orb`/`phase`/`strength`; patterns add `pattern`/`apex`; signature
-facets add `facet`/`value`; dispositors add `dispositor`/`final`; stars add
-`body`/`star`/`orb`; lots add `lot`/`sign`/`house`.
+Type-specific properties attach directly to each atom: placement atoms carry
+`sign`, `signDeg`, `house`, `retrograde`, and `dignities`; aspect atoms carry
+`aspect`, `orb`, `phase`, and `strength`; pattern atoms carry `pattern` and
+`apex`; signature atoms carry `facet` and `value`; dispositor atoms carry
+`dispositor` and `final`; star atoms carry `body`, `star`, and `orb`; and lot
+atoms carry `lot`, `sign`, and `house`.
 
-Two enrichments that the bare `Chart.aspects` list omits are computed here (the
-engine now fills them onto the aspect, the projection carries them onto the atom):
+Aspect atoms also propagate two properties computed on `Chart.aspects`:
 
-- **`phase`**: applying, separating, or exact, from the two bodies' speeds.
-- **`strength`**: closeness in `[0, 1]` (1 = exact, 0 = at the orb limit),
-  normalized against the orb policy used to find the aspect.
+- **`phase`**: `applying`, `separating`, or `exact`, computed from relative speed.
+- **`strength`**: normalized proximity from `0` (at orb edge) to `1` (exact).
 
-### Salience
+### Salience scoring
 
-Salience ranks atoms so a reader leads with what is prominent, without the
-engine asserting meaning. It is a sum of explicit, documented contributions,
-all overridable through `ContextOptions.salience`:
+Salience ranks atoms so prominent factors surface first without encoding
+astrological judgments. Total salience sums explicit weights that you can
+customize via `ContextOptions.salience`:
 
 | Contribution | Applies to |
 |---|---|
 | `base` | every atom |
-| `luminary` | the Sun or Moon is involved |
-| `angular` | an angular house (1/4/7/10), or an angle atom |
-| `chartRuler` | the Ascendant ruler's placement |
+| `luminary` | Sun or Moon involvement |
+| `angular` | angular houses (1, 4, 7, 10) or angle atoms |
+| `chartRuler` | Ascendant ruler's placement |
 | `dignity` | per essential dignity held |
-| `hardAspect` | conjunction / square / opposition |
-| `pattern` | a whole configuration |
-| `dispositor` / `reception` | a dispositor link / a mutual reception |
-| `star` / `lot` | a fixed-star conjunction / a Hermetic lot |
-| `transit` / `transitHouse` / `station` | a transit-to-natal aspect / a transiting body's natal house / a station near the instant |
-| `synastry` / `composite` | an inter-chart aspect or overlay / a composite midpoint placement or composite aspect |
-| `timelord` | an active profection, ZR, firdaria, or dasha period |
-| `dignityFine` | a term, face, triplicity, or almuten fact |
-| `vedic` | a nakshatra, varga, or yoga fact |
-| `parallel` / `outOfBounds` | a declination parallel / a body beyond the obliquity |
-| `planetReturn` / `lunation` / `solarPhase` | a return in progress / a New or Full Moon near the instant (an eclipse adds it again) / a solar-condition fact |
+| `hardAspect` | conjunction, square, or opposition |
+| `pattern` | aspect configuration |
+| `dispositor` / `reception` | dispositor link / mutual reception |
+| `star` / `lot` | fixed-star conjunction / Hermetic lot |
+| `transit` / `transitHouse` / `station` | transit-to-natal aspect / transited natal house / nearby station |
+| `synastry` / `composite` | inter-chart aspect or overlay / composite placement or aspect |
+| `timelord` | active profection, ZR, firdaria, or dasha period |
+| `dignityFine` | term, face, triplicity, or almuten fact |
+| `vedic` | nakshatra, varga, or yoga fact |
+| `parallel` / `outOfBounds` | declination parallel / body outside ecliptic obliquity |
+| `planetReturn` / `lunation` / `solarPhase` | active return / nearby New or Full Moon (doubled on eclipses) / solar proximity state |
 
-Writing a **complete** `SalienceWeights` object literal requires `planetReturn`,
-`lunation`, and `solarPhase` as of 0.25.0; `Partial<>` overrides through
-`ContextOptions.salience` are unchanged.
+When supplying a full `SalienceWeights` literal rather than a `Partial<>`
+override, include `planetReturn`, `lunation`, and `solarPhase` (added in 0.25.0).
 
-No weight is magic. A caller who dislikes the defaults overrides any subset:
+Override any subset of weights through `ContextOptions.salience`:
 
 <CodeBlock
   lang="typescript"
@@ -259,18 +253,17 @@ const ctx = interpretationContext(chart, {
 });`}
 />
 
-This is framework code, not ephemeris. There is no Swiss Ephemeris oracle for
-"which facts matter," so it is unit-tested for structure (atoms tie back to the
-validated chart, ids are unique, salience is sorted) rather than pinned by a
-parity golden.
+Because prominence weights represent application preferences rather than
+astronomical constants, tests verify structural invariants (valid chart links,
+unique atom IDs, and sort order) rather than pinning salience numbers to
+external ephemerides.
 
 ## 2. Match atoms with selectors
 
-A **selector** tests the whole projection and reports the atoms that satisfied
-it. Because selectors read the atoms directly, they express the whole fact model
-(house, dignity, pattern membership, signature dominance, aspect phase and
-strength), which the geometric, time-only [`when()`](/docs/recipes) predicates
-cannot.
+A **selector** evaluates an `InterpretationContext` and returns all atoms that
+justify a match. Unlike time-search predicates in [`when()`](/docs/recipes),
+selectors can inspect houses, dignities, configuration membership, chart
+signatures, aspect phase, and normalized strength:
 
 <CodeBlock
   lang="typescript"
@@ -306,30 +299,27 @@ const m = angularMarsInTSquare(ctx);
 // m.matched === true; m.atoms holds the placement + pattern atoms (the provenance)`}
 />
 
-`matchAll` requires every selector and unions their atoms; `matchAny` requires
-one and returns those that matched; `matchNone` is an absence test (matches when
-its selector does not, and carries no atoms).
+`matchAll` requires every child selector to match and merges their supporting
+atoms; `matchAny` succeeds when any child matches and returns atoms from the
+matching branches; and `matchNone` verifies that a selector matches nothing
+(contributing zero atoms).
 
-## 3. Plug in a rule corpus
+## 3. Connect a rule corpus
 
-A **`Rule`** pairs a selector (`when`) with the `text` it licenses. An
-**`InterpretationSource`** bundles rules: a tradition, a house style, or a
-third-party corpus. `interpret(ctx, sources)` runs every rule and, for each
-match, emits a `ReadingEntry` carrying the text, the matched `atomIds` (the
-audit trail), and a salience equal to the sum of those atoms' salience times the
-rule's `weight`. Entries come back sorted by salience.
+A **`Rule`** pairs a selector (`when`) with response prose (`text`), grouped
+into an **`InterpretationSource`**. Running `interpret(ctx, sources)` evaluates
+all rules and returns sorted `ReadingEntry` records containing the text,
+matched `atomIds`, and total salience (`sum(atom.salience) * rule.weight`).
 
-The engine ships the mechanism; **the rule content is always yours.** The corpus
-below is illustrative placeholder content, not authoritative astrology.
+Note that the sample rules below are simplified placeholders illustrating the
+corpus schema rather than finished delineation copy.
 
-If you would rather not start from scratch, the companion package
-**`caelus-delineations-pd`** is a ready default and validation corpus: hundreds
-of cited delineations (planet-in-sign and house, aspects, rising signs, fixed
-stars) decomposed from public-domain texts into these selectors. Drop its
-`sources` straight into `interpret(ctx, sources)`, or import `publicDomainSources`
-for a strictly public-domain reading. See [Building a corpus](/docs/corpus) for
-how to consume it, write extractors, and validate your own passages. It is a
-separate package, never the engine.
+For a pre-built corpus, install **`caelus-delineations-pd`**, which structures
+hundreds of public-domain delineations (planet-in-sign, house placements,
+aspects, rising signs, and fixed stars) into validated selectors. Pass its
+`sources` (or strict `publicDomainSources`) directly into `interpret()`. See
+[Building a corpus](/docs/corpus) for extraction workflows, test harnesses, and
+corpus licensing.
 
 <CodeBlock
   lang="typescript"
@@ -366,13 +356,13 @@ const reading = interpret(ctx, [source]);
 reading.entries.forEach((e) => console.log(e.salience.toFixed(1), e.text, e.atomIds));`}
 />
 
-### Reconcile
+### Reconciling overlapping rules
 
-A flat ranked list scatters everything said about one placement. `reconcile`
-groups entries by the facts they share (atoms in common), drops duplicate text,
-and marks a group `contested` when a declared conflicting tag-pair both appear in
-it. Semantic contradiction is the corpus author's to *declare* (via `tags` +
-`conflicts`); the resolver does the bookkeeping, not the judgement.
+Because flat ranked lists often spread commentary about one planet across
+multiple entries, `reconcile` clusters rules sharing identical `atomIds`,
+deduplicates identical text, and flags a group as `contested` whenever
+mutually opposing tags defined by the corpus author (via `tags` and
+`conflicts`) appear together:
 
 <CodeBlock
   lang="typescript"
@@ -388,18 +378,16 @@ for (const g of groups) {
 }`}
 />
 
-## 4. Output: a reading, or an LLM brief
+## 4. Produce a rule reading or grounded LLM prompt
 
-There are two consumers of the projection.
+Consume an `InterpretationContext` in either of two ways:
 
-**A structured reading:** the ranked `interpret(...)` entries (or reconciled
-groups), with provenance, for a rule-based product. You already have it from
-step 3.
-
-**An LLM brief:** `chartBrief(ctx, opts)` renders the salience-ranked,
-id-tagged facts into a ready-to-send `prompt`. The model writes original prose
-(*novel*) and cites the `[id]` each statement rests on; `auditCitations` then
-checks those citations resolve, flagging any that invented a fact (*accurate*).
+1. **Deterministic rule reading**: pass `interpret()` or `reconcile()` groups
+   directly to your UI alongside their provenance `atomIds`.
+2. **Citation-audited LLM prompt**: pass the context to `chartBrief(ctx, opts)`
+   to format salience-ranked, bracketed `[id]` facts into a prompt. Instruct the
+   model to cite `[id]` tags behind each claim, then call `auditCitations` to
+   verify that every cited ID exists in the context:
 
 <CodeBlock
   lang="typescript"
@@ -428,19 +416,16 @@ const audit = auditCitations(modelClaims, ctx);
 // the second claim cited a fact that is not in the chart`}
 />
 
-`auditCitations` returns whether every cited id resolves (`ok`), how many claims
-were `cited` vs `uncited`, and the distinct `valid` and `unknown` ids. An
-`unknown` id is fabricated provenance: the model asserted a fact the chart never
-contained.
+`auditCitations` returns whether all references resolve (`ok`), counts of
+`cited` vs. `uncited` claims, and arrays of `valid` and `unknown` IDs. Any
+`unknown` ID flags a claim referencing a placement or aspect absent from the
+computed chart.
 
-## 5. Provenance framing
+## 5. Pass provenance for uncertain or symbolic charts
 
-Charts are not always a verified birth instant. A forecast, a mythic subject, or
-a time known only to the hour need different interpretation framing than an
-observed event. The [provenance guide](/docs/provenance) declares what a chart
-**is** (`Realm`) and how firmly its instant is known (`Certainty`).
-
-Wire it from `realize()`:
+When working with forecasts, fictional subjects, or rounded birth times, pass
+the chart's `Realm` and time `Certainty` from `realize()` into
+`interpretationContext`:
 
 <CodeBlock
   lang="typescript"
@@ -467,44 +452,36 @@ const ctx = interpretationContext(realized.chart, {
 const brief = chartBrief(ctx, { limit: 20 });`}
 />
 
-When `certainty` is not `exact`, **time-sensitive atoms are damped**: Moon and
-angle salience is scaled by 0.7 (`approximate`) or 0.6 (`representative`); slow
-planets keep full weight. `chartBrief` prepends a **realm framing** line when
-needed (a forecast reads as provisional; a mythic chart as a symbol, not a
-biography; an inexact time warns the model to distrust the Moon, angles, and
-houses).
+When `certainty` is weaker than `exact`, time-sensitive atoms (lunar positions
+and chart angles) are down-weighted (`0.7` for `approximate`, `0.6` for
+`representative`) while slower planetary placements keep full weight.
+`chartBrief` also prepends a framing notice indicating provisional forecast
+language, symbolic rather than biographical interpretation, or warning against
+relying on houses and angles for uncertain birth times. See the{" "}
+[Provenance guide](/docs/provenance) for full anchor and realm options.
 
-## Over MCP
+## Using over MCP
 
-The whole seam is wired into the [MCP server](/docs/mcp) as the `chart_facts`
-tool, for hosts where the model is already the interpreter (Claude, Cursor, and
-the rest). It returns a chart's ranked, citable atoms plus a ready `brief`, so
-the host interprets from correct math and cites the `[id]` each statement rests
-on instead of re-deriving (and hallucinating) positions. Pass structured
-`when` (instant, range, relative, narrative), an optional in-request `anchors`
-registry, `realm`, and `constraints` when the chart is not a plain birth instant.
-Optional **`target_date`** (UTC ISO) adds transits and time-lords at that
-instant; **`include_vedic`** adds nakshatra/D9/yoga when the zodiac is sidereal.
-The **`synastry`** tool returns the same atom shape for two charts (inter-chart
-aspects, overlays, composite placements) plus a `brief`.
+For LLM clients that already handle prose generation (Claude Desktop, Cursor,
+or custom agents), the [MCP server](/docs/mcp) exposes `chart_facts`. Passing
+birth data (plus optional `when` anchors, `anchors` registry, `realm`,
+`constraints`, `target_date`, or `include_vedic`) returns the ranked fact atoms
+alongside a ready-to-use `brief`, and `synastry` outputs atoms and a
+brief comparing two charts:
 
 ```text
 "Read my natal chart: born June 10 1990, 2:30pm, Tampa FL."
   → chart_facts → ranked facts + brief → the host writes prose, citing [ids]
 ```
 
-## When to use which layer
+## Choosing an entry point
 
-- **Just the atoms** (`interpretationContext`): you have your own model or
-  ranking and only need the validated facts, normalized and addressable.
-- **Selectors + a rule corpus** (`interpret` / `reconcile`): you are building a
-  deterministic, rule-based reading engine and want provenance and conflict
-  detection for free.
-- **The brief** (`chartBrief` / `auditCitations`): you are using an LLM and
-  need it grounded: novel prose, accurate facts, citations you can verify.
-- **Non-birth charts** ([provenance](/docs/provenance) + `realize`): forecasts,
-  fiction, archetypes, or inexact times. Declare the realm, route to ephemeris
-  or the compiler, and pass `certainty` so damping and framing stay honest.
-
-In every case the engine ships the contract and the math, never the meaning. The
-interpretation is yours, and it is always traceable to a validated fact.
+- **`interpretationContext` only**: use when you have your own UI or LLM
+  workflow and simply need normalized, ID-addressable chart facts.
+- **`interpret` and `reconcile`**: use when building a deterministic rule engine
+  that needs provenance links and conflict tagging.
+- **`chartBrief` and `auditCitations`**: use when sending chart data to an LLM
+  and verifying that every generated statement cites real placements.
+- **`realize` with provenance metadata**: use when handling forecasts, fiction,
+  archetypes, or approximate times so salience damping and framing match how the
+  chart was constructed.

@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "MCP Setup",
-  description: "Add the caelus chart tools to Claude Desktop, Claude Code, Cursor, VS Code, and any MCP client, with verification, troubleshooting, and version pinning.",
+  description: "Connect Caelus's thirty-seven MCP chart tools to Claude Desktop, Claude Code, Cursor, VS Code, or any MCP client via Streamable HTTP or local stdio.",
   path: "/docs/mcp",
 });
 
@@ -10,29 +10,29 @@ export const metadata = pageMetadata({
 
 # MCP Setup
 
-`caelus-mcp` exposes the engine over the Model Context Protocol. Positions are
-computed by the engine on each call, never recalled from training data, so every
-answer is deterministic.
+`caelus-mcp` exposes the calculation engine over the Model Context Protocol.
+Because AI assistants call deterministic ephemeris tools on every turn rather
+than estimating positions from memory, charts and timing windows remain exact.
 
-There are two ways to connect, with the same thirty-seven tools either way:
+You can connect to the same **thirty-seven** tools via either transport:
 
-- **Hosted (Streamable HTTP)**: point your client at
-  `https://www.ephemengine.com/api/mcp`. Nothing to install.
-- **Local (stdio)**: run `npx -y caelus-mcp`. Best for offline use, version
-  pinning, or air-gapped setups.
+- **Hosted (Streamable HTTP)**: point your MCP client at
+  `https://www.ephemengine.com/api/mcp` with no local installation.
+- **Local (stdio)**: run `npx -y caelus-mcp` locally for offline use, strict
+  version pinning, or extended pre-1000 CE data packs.
 
 ## Hosted endpoint (no install)
 
-The tools are served over MCP Streamable HTTP at
-`https://www.ephemengine.com/api/mcp`. The endpoint is stateless: each request
-is self-contained, so there is no session to manage. Positions are identical to
-the stdio server.
+All tools run statelessly over MCP Streamable HTTP at
+`https://www.ephemengine.com/api/mcp`. Every request is self-contained with zero
+session state to maintain, and planetary positions match the stdio server across
+modern dates (1000–3000 CE).
 
 <Tabs>
   <Tab label="Cursor">
 
-Add to `.cursor/mcp.json` (project) or `~/.cursor/mcp.json` (all projects), then
-reload Cursor:
+Add the entry below to `.cursor/mcp.json` (project) or `~/.cursor/mcp.json`
+(user-wide), then reload Cursor:
 
 <CodeBlock
   lang="json"
@@ -49,7 +49,7 @@ reload Cursor:
   </Tab>
   <Tab label="Claude Code">
 
-Add the remote server from the CLI:
+Register the remote MCP endpoint from the CLI:
 
 <CodeBlock
   lang="bash"
@@ -60,7 +60,8 @@ Add the remote server from the CLI:
   </Tab>
   <Tab label="VS Code">
 
-Create `.vscode/mcp.json`. VS Code uses `servers` and an explicit `type`:
+Create `.vscode/mcp.json`. VS Code uses the top-level `servers` key alongside an
+explicit `"type": "http"`:
 
 <CodeBlock
   lang="json"
@@ -78,8 +79,8 @@ Create `.vscode/mcp.json`. VS Code uses `servers` and an explicit `type`:
   </Tab>
   <Tab label="curl">
 
-The endpoint speaks JSON-RPC 2.0. A bare `tools/call` works without a prior
-handshake because the server is stateless:
+The HTTP endpoint speaks JSON-RPC 2.0 and accepts direct `tools/call` requests
+without requiring an explicit initialization handshake:
 
 <CodeBlock
   lang="bash"
@@ -92,32 +93,33 @@ handshake because the server is stateless:
                  "arguments":{"date":"1990-06-10T14:30:00Z","lat":27.95,"lon":-82.46}}}'`}
 />
 
-A plain `GET` on the endpoint returns a small descriptor (tools, resources,
-prompts) so you can confirm it is live.
+Issuing a `GET` request returns a JSON descriptor listing all available tools,
+resources, and prompts so you can verify connectivity.
 
   </Tab>
 </Tabs>
 
-## Run it locally
+## Running locally via stdio
 
-The published binary runs straight from npm, no global install:
+To run the local server straight from npm with no global install:
 
 <CodeBlock lang="bash" label="Terminal" code={`npx -y caelus-mcp`} />
 
-It waits for an MCP client to speak to it over stdio, so an empty terminal is
-expected. Wire it into a client below instead of running it by hand.
+Because `caelus-mcp` communicates over stdin/stdout JSON-RPC, running it
+directly in an interactive shell simply waits for input. Configure one of the
+clients below to spawn and manage it automatically.
 
-## Configure your client
+## Configuring local clients
 
-Every client points at the same command (`npx -y caelus-mcp`); only the config
-file and key differ.
+Every stdio client invokes `npx -y caelus-mcp` and differs only in config file
+location and schema:
 
 <Tabs>
   <Tab label="Claude Desktop">
 
-Edit `claude_desktop_config.json` (macOS:
-`~/Library/Application Support/Claude/`, Windows: `%APPDATA%\Claude\`), then fully
-quit and reopen Claude.
+Add `caelus` to `claude_desktop_config.json` (macOS:
+`~/Library/Application Support/Claude/`, Windows: `%APPDATA%\Claude\`), then
+fully quit and relaunch Claude Desktop:
 
 <CodeBlock
   lang="json"
@@ -135,15 +137,15 @@ quit and reopen Claude.
   </Tab>
   <Tab label="Claude Code">
 
-Add it from the CLI; it writes the config for you:
+Add the stdio server via the CLI:
 
 <CodeBlock lang="bash" label="Terminal" code={`claude mcp add caelus -- npx -y caelus-mcp`} />
 
   </Tab>
   <Tab label="Cursor">
 
-Create `.cursor/mcp.json` in the project (or `~/.cursor/mcp.json` for all
-projects), then reload Cursor.
+Add to `.cursor/mcp.json` in your project (or `~/.cursor/mcp.json` globally) and
+reload Cursor:
 
 <CodeBlock
   lang="json"
@@ -161,8 +163,7 @@ projects), then reload Cursor.
   </Tab>
   <Tab label="VS Code">
 
-Create `.vscode/mcp.json` in the workspace; note VS Code uses the `servers`
-key, not `mcpServers`:
+Create `.vscode/mcp.json` in the workspace using the top-level `servers` key:
 
 <CodeBlock
   lang="json"
@@ -180,7 +181,7 @@ key, not `mcpServers`:
   </Tab>
   <Tab label="Generic">
 
-Any stdio MCP client takes the same command and arguments:
+For any standard stdio MCP client:
 
 <CodeBlock
   lang="json"
@@ -194,85 +195,75 @@ Any stdio MCP client takes the same command and arguments:
   </Tab>
 </Tabs>
 
-## Verify the tools appeared
+## Available tools
 
-After the client reloads, it should list **thirty-seven** tools. Ask it to enumerate
-them, or check the client's MCP panel:
+Once connected, your MCP client should display all **thirty-seven tools** in its
+tool panel:
 
 **Charts and readings**
 
-- `natal_chart`: natal positions, houses, and aspects
-- `current_sky`: the sky at any moment, no birth data needed
-- `transits`: transits to a natal chart over a window
-- `synastry`: inter-chart aspects, house overlays, composite midpoint atoms, and the same ranked facts and brief as `chart_facts`
-- `composite`: midpoint composite and the Davison chart
-- `returns`: solar/lunar return instants plus the first return chart
-- `progressions`: secondary progressions and solar-arc directions
-- `counterfactual_chart`: a birth chart perturbed (shift time, move place, or splice body longitudes), with a legible diff of sign, house, and aspect changes vs the original
+- `natal_chart`: natal positions, house cusps, and aspects.
+- `current_sky`: planetary positions for any timestamp with optional location.
+- `transits`: transiting planets and aspects to a natal chart across a window.
+- `synastry`: inter-chart aspects, house overlays, composite atoms, and a prompt brief.
+- `composite`: midpoint composite and Davison relationship charts.
+- `returns`: solar and lunar return timestamps paired with return charts.
+- `progressions`: secondary progressions and solar-arc directions.
+- `counterfactual_chart`: perturbs a birth chart (shifting time, coordinates, or body longitudes) and diffs sign, house, and aspect changes.
 
-**Sky, events, and search**
+**Sky events, geometry, and historical search**
 
-- `sky_view`: frame the visible sky at a place and moment as a pixel-precise prompt for an AI image model (positions, sizes, magnitudes, Moon phase, twilight, deep star field, the Milky Way, and ecliptic/sign/house/constellation overlays)
-- `sky_view_sequence`: an animation timeline of Sky View frames
-- `sky_events`: rise/set, phases, stations, zodiac crossings, solar and lunar eclipses (also eclipse geography: the sub-solar point of greatest eclipse, path-of-totality width, and local circumstances for a place)
-- `parans`: co-angular bodies over the 24 hours from a date at a latitude; the fixed-star paran relationship, computed for the moving bodies
-- `find_aspect_dates`: when a wanted aspect forms, over a window
-- `electional_search`: rank moments in a window for a set of wanted aspects, optionally avoiding a void-of-course Moon
-- `cosmic_weather`: the day's active configurations, stations, and void-of-course Moon, with no birth chart needed
-- `similar_skies`: when the sky most resembled a reference moment, by cosine similarity over a window
-- `date_sky`: every window in a span of years in which a described sky held, from planets by sign, longitude, or lunar phase; the tool that dates a horoscope with no year
-- `chart_stability`: which facts of a chart hold when the time is rounded, approximate, or unknown, and the instant each of the others changes
+- `sky_view`: frames the visible sky from an observer's location as pixel coordinates and an AI image-generation prompt (including brightness, Moon phase orientation, twilight, Milky Way band, deep star field, and coordinate overlays).
+- `sky_view_sequence`: generates a frame sequence across time for sky animation.
+- `sky_events`: computes rising/setting times, lunar phases, stations, zodiac crossings, solar/lunar eclipses, central eclipse coordinates, path widths, and local contact circumstances.
+- `parans`: finds co-angular planet pairs crossing horizon or meridian lines within a 24-hour window at a given latitude.
+- `find_aspect_dates`: searches when a specified aspect reaches exactness inside a date window.
+- `electional_search`: ranks timestamps inside a window by desired aspects while optionally avoiding a void-of-course Moon.
+- `cosmic_weather`: summarizes active configurations, planetary stations, and void-of-course periods for a given date.
+- `similar_skies`: ranks timestamps within a date range by cosine similarity to a target chart.
+- `date_sky`: searches multi-year or multi-millennium spans for matching planetary positions (used for dating historical horoscopes).
+- `chart_stability`: reports which chart facts remain invariant across a time uncertainty window and when changing facts transition.
 
 **Hellenistic time-lords**
 
-- `profections`: annual and monthly profections, lord of the year
-- `firdaria`: the planetary time-lord periods
-- `releasing`: zodiacal releasing (aphesis) from the Lot of Spirit or Fortune
-- `directions`: primary directions of the planets to the angles, and optionally between the planets
-- `lots`: the seven Hermetic lots, sect-aware
+- `profections`: annual and monthly profections with lords of the year.
+- `firdaria`: Persian planetary time-lord periods.
+- `releasing`: zodiacal releasing (aphesis) from Fortune or Spirit.
+- `directions`: primary directions to chart angles and optional mundane directions between planets.
+- `lots`: the seven sect-aware Hermetic lots.
 
-**Vedic**
+**Vedic (Jyotish)**
 
-- `nakshatras`: lunar mansions, padas, and lords
-- `dasha`: Vimshottari, Yogini, or Ashtottari periods
-- `vargas`: Parashari divisional charts
-- `yogas`: Pancha Mahapurusha, raja/dhana yogas, and yogakarakas
+- `nakshatras`: lunar mansions, padas, and dasha lords.
+- `dasha`: Vimshottari, Yogini, and Ashtottari dasha timelines.
+- `vargas`: Parashari divisional charts.
+- `yogas`: Pancha Mahapurusha, raja/dhana yogas, and chart yogakarakas.
 
-**Analysis and facts**
+**Analysis, dignities, and structured facts**
 
-- `dignities`: essential dignity and sect for the seven traditional planets
-- `planetary_hours`: planetary hours for a moment and place
-- `void_of_course`: void-of-course Moon windows
-- `rectification_grid`: birth-time rectification candidates over a time grid
-- `aspect_patterns`: the classical configurations (T-squares, grand trines and crosses, yods, kites, mystic rectangles, and stelliums) as maximal structured objects
-- `chart_signature`: element, modality, quadrant, and hemisphere distributions, the dominant element, modality, and sign, and the classical chart ruler
-- `chart_facts`: the chart's validated facts as ranked, citable atoms (placements
-  through yogas, including transits and time-lords when `target_date` is set,
-  fixed-star conjunctions and the Part of Fortune), plus a ready-to-interpret
-  brief; accepts structured `when` anchors, an in-request `anchors` registry,
-  `realm`, `target_date`, `include_vedic`, and `constraints` for archetypal
-  charts (see the [Interpretation](/docs/interpretation) and
-  [Provenance](/docs/provenance) guides)
+- `dignities`: essential dignities and sect status for the seven traditional planets.
+- `planetary_hours`: active Chaldean planetary hour and daily sequence.
+- `void_of_course`: void-of-course Moon timing windows.
+- `rectification_grid`: candidate ASC/MC sweeps over a grid of birth times.
+- `aspect_patterns`: maximal classical configurations (T-squares, grand trines, grand crosses, yods, kites, mystic rectangles, and stelliums).
+- `chart_signature`: elemental, modal, quadrant, and hemisphere counts alongside dominant indicators and chart ruler.
+- `chart_facts`: projects validated chart placements into ranked, citable fact atoms and a formatted prompt brief, accepting `when` provenance anchors, an inline `anchors` registry, `realm`, `target_date`, `include_vedic`, and `constraints` (see [Interpretation](/docs/interpretation) and [Provenance](/docs/provenance)).
 
-**Synthetic bodies**
+**Synthetic worlds**
 
-- `synthetic_validate`: check an authored synthetic celestial system for ill-defined inputs (duplicate body ids, non-positive periods, out-of-range eccentricity, a dangling observer)
-- `synthetic_positions`: positions of every body in an authored synthetic system at one instant, with speed and retrograde per body
-- `synthetic_sky_view`: Sky View for a mix of real and synthetic bodies, with authored render attributes flowing into the pixel spec and prompt
+- `synthetic_validate`: checks custom synthetic orbital definitions for invalid eccentricities, duplicate IDs, non-positive periods, or missing observers.
+- `synthetic_positions`: returns longitudes, speeds, and retrograde flags for all bodies in a synthetic system.
+- `synthetic_sky_view`: frames a combined real/synthetic sky view with authored magnitudes, colors, and angular radii.
 
-`natal_chart` and `current_sky` also tag each body with its solar phase
-(cazimi, combust, under the beams) and each aspect as applying or separating,
-with a normalized strength.
+`natal_chart` and `current_sky` also annotate solar proximity (`cazimi`,
+`combust`, `under_beams`) and aspect phase (`applying`, `separating`,
+`exact`) with normalized strength.
 
-If you see all thirty-seven, the server is wired correctly. The server also exposes three
-**resources**: `caelus://glossary` (aspect angles and orbs, signs, bodies,
-house systems, essential dignities), `caelus://accuracy` (the validation
-table), and `ui://widget/chart.html` (an embeddable chart widget), plus two
-**prompts**: `rectification_session`, a guided flow around
-`rectification_grid` and `find_aspect_dates`, and `natal_reading`, a briefed
-natal reading from `chart_facts`.
+Alongside these thirty-seven tools, the server exposes three **resources**
+(`caelus://glossary`, `caelus://accuracy`, and `ui://widget/chart.html`) and
+two **prompts** (`rectification_session` and `natal_reading`).
 
-A natal-chart call returns structured positions, not prose:
+Tool responses return compact structured JSON (abbreviated below):
 
 <CodeBlock
   lang="json"
@@ -295,8 +286,8 @@ A natal-chart call returns structured positions, not prose:
 
 - "Natal chart: born June 10 1990, 2:30pm, Tampa FL."
 - "When is Saturn square my natal Moon in the next two years?"
-- "Compare my chart with my partner's." (synastry returns citable atoms + brief)
-- "Natal chart facts with transits active today." (chart_facts + target_date)
+- "Compare my chart with my partner's." (`synastry`)
+- "Natal chart facts with transits active today." (`chart_facts` with `target_date`)
 - "Next solar eclipse? Lunar eclipses in 2026?"
 - "My solar return chart for this year."
 - "Progress my chart to today: secondary positions and the solar arc."
@@ -312,21 +303,21 @@ A natal-chart call returns structured positions, not prose:
 
 ## Troubleshooting
 
-- **`npx` not found / server never starts.** GUI clients (Claude Desktop,
-  Cursor) do not inherit your shell `PATH`, so a `node`/`npx` installed via nvm
-  or Homebrew may be invisible. Use the absolute path as `command` (find it with
-  `which npx`), or install Node where the client can see it. Node 18+ is
-  required.
-- **Tools don't show up.** Most clients only read MCP config on a full restart.
-  Quit completely (not just close the window) and reopen. Confirm the JSON
-  parses (a trailing comma is the usual culprit).
-- **First call is slow.** `npx` downloads the package on first run; it is cached
-  afterward. Pinning a version (below) avoids surprise re-downloads.
+- **`npx` fails to launch from GUI apps**: Desktop apps (Claude Desktop,
+  Cursor) often omit shell `PATH` additions from `nvm` or Homebrew. Set
+  `command` to the full executable path reported by `which npx` (requires Node
+  18+).
+- **Tools do not appear**: Most clients read MCP config files only at startup.
+  Fully quit and reopen the application, and validate JSON syntax for trailing
+  commas.
+- **Cold-start delay**: Running `npx -y` without a pinned version checks npm on
+  first launch before caching. Pin a release version below to keep startup fast
+  and predictable.
 
-## Version pinning for production
+## Pinning a production version
 
-`npx -y caelus-mcp` always resolves the latest release. Pin an exact version so
-behaviour is reproducible and the four packages stay in lockstep:
+`npx -y caelus-mcp` resolves `latest` by default. Pin a matching release version
+across all packages for reproducible behavior:
 
 <CodeBlock
   lang="json"
@@ -341,6 +332,6 @@ behaviour is reproducible and the four packages stay in lockstep:
 }`}
 />
 
-Agent-oriented docs live at <a href="/llms.txt">llms.txt</a>. See
-<a href="/docs/architecture">Architecture</a> for where MCP fits in an
-end-to-end app.
+Machine-readable summary docs live at <a href="/llms.txt">llms.txt</a>. See
+<a href="/docs/architecture">Architecture</a> to integrate Caelus packages
+directly in application code.

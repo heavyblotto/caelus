@@ -22,11 +22,11 @@ export const SITE = {
   title: "Caelus · Validated astrology computation",
   tagline: "Validated astrology computation in TypeScript.",
   shortDescription:
-    "Clean-room TypeScript astrology computation: ephemeris, charts, events, timing techniques, Vedic methods, and MCP tools, validated against named references.",
+    "MIT-licensed TypeScript ephemeris and astrology library with charts, events, timing techniques, Vedic calculations, and an MCP server, verified against JPL Horizons and Swiss Ephemeris.",
   repo: "https://github.com/heavyblotto/caelus",
   starter: "https://github.com/heavyblotto/caelus-starter",
   description:
-    "Caelus is a clean-room, MIT-licensed TypeScript suite for validated astrology computation. It computes planetary positions, charts, events, hellenistic timing techniques, Vedic methods, and citable chart facts across browser, edge, Node, and MCP clients, without Swiss Ephemeris code, AGPL licensing, or ephemeris files.",
+    "Caelus is an MIT-licensed TypeScript ephemeris and astrology library verified against JPL Horizons and Swiss Ephemeris. Compute planetary positions, house cusps, events, Hellenistic timing techniques, Vedic calculations, and structured chart facts in the browser, on the edge, in Node.js, or through MCP without external ephemeris files.",
 } as const;
 
 export const NPM = {

@@ -3,7 +3,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Houses & Zodiacs",
-  description: "Twelve house systems, tropical and sidereal zodiac modes, and polar fallbacks.",
+  description: "Twelve house systems, tropical and sidereal zodiac modes, and polar latitude fallbacks.",
   path: "/docs/houses-and-zodiacs",
 });
 
@@ -13,22 +13,26 @@ export const metadata = pageMetadata({
 
 ## House systems
 
-Twelve systems are built in: `placidus`, `whole_sign`, `equal`, `porphyry`,
-`koch`, `regiomontanus`, `campanus`, `alcabitius`, `morinus`, `meridian`,
-`polich_page`, and `vehlow`. Pass the name as the last argument, or as
-`houseSystem` in the options object.
+Caelus includes twelve built-in house systems: `placidus`, `whole_sign`,
+`equal`, `porphyry`, `koch`, `regiomontanus`, `campanus`, `alcabitius`,
+`morinus`, `meridian`, `polich_page`, and `vehlow`. Specify a house system by
+passing its ID as the final argument to `engine.chart()`, or under the
+`houseSystem` key in the options object.
 
 <Note>
-  Placidus and Koch are undefined above the polar circles. The engine falls back
-  to whole-sign and reports it: <code>chart.houseSystem</code> will differ from
-  <code> chart.houseSystemRequested</code>.
+  Placidus and Koch are mathematically undefined inside the polar circles. At
+  polar latitudes where quadrant cusps break down, Caelus falls back to
+  whole-sign houses automatically and records both values:{" "}
+  <code>chart.houseSystem</code> becomes <code>&quot;whole_sign&quot;</code>{" "}
+  while <code>chart.houseSystemRequested</code> keeps your requested system.
 </Note>
 
 <CuspComparison />
 
-## Tropical and sidereal
+## Tropical and sidereal zodiacs
 
-The default zodiac is tropical. Sidereal modes subtract an ayanamsa:
+Charts default to the tropical zodiac. To compute sidereal longitudes, pass a
+named sidereal ayanamsa via `zodiac`:
 
 <CodeBlock
   lang="typescript"
@@ -38,15 +42,17 @@ The default zodiac is tropical. Sidereal modes subtract an ayanamsa:
 });`}
 />
 
-Embedded ayanamsas: `lahiri`, `fagan_bradley`, `krishnamurti`, `raman`, and
-`yukteshwar`. Two star-anchored modes (`galcent_0sag`, `true_citra`) use the
-fixed-star catalog that the embedded dataset already bundles; see
-<a href="/docs/data-tiers">Data Tiers</a>.
+Five analytical ayanamsas ship out of the box: `lahiri`, `fagan_bradley`,
+`krishnamurti`, `raman`, and `yukteshwar`. Two star-anchored modes
+(`galcent_0sag` and `true_citra`) rely on the fixed-star catalog already
+bundled in the embedded dataset; see{" "}
+<a href="/docs/data-tiers">Data Tiers</a> for details.
 
 <ZodiacComparison />
 
 ## Angles
 
-Every chart includes the ascendant and midheaven (`chart.angles.asc`,
-`chart.angles.mc`); the vertex and east point are also computed. House cusps are
-derived by closed-form angles, not iteration.
+Every calculated chart includes `chart.angles.asc` (Ascendant) and
+`chart.angles.mc` (Midheaven), alongside the vertex and east point. All
+house cusps are computed using closed-form spherical trigonometry rather than
+iterative approximation.

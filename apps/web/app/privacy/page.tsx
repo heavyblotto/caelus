@@ -22,23 +22,23 @@ export default function Privacy() {
       <H2>What stays on your device</H2>
       <P>
         The <A href="/playground">Playground</A> computes charts entirely in your
-        browser using the engine itself. The birth date, time, and place you enter
-        are never sent to a server. A share link encodes those inputs in the URL
-        fragment (the part after <code>#</code>), which browsers do not transmit;
-        it travels only if you copy the link and send it yourself.
+        browser. Birth dates, times, and coordinates never leave your device,
+        and share links store inputs inside the URL fragment (after{" "}
+        <code>#</code>), which browsers do not send to servers unless you copy
+        and share the URL yourself.
       </P>
       <P>
-        The one thing kept locally is your light or dark theme preference, stored
-        in <code>localStorage</code> so the site remembers it on your next visit.
-        Nothing else is stored, and clearing site data removes it.
+        The only persistent browser setting is your light or dark theme
+        preference in <code>localStorage</code>, which you can remove at any
+        time by clearing site data.
       </P>
 
       <H2>The hosted API</H2>
       <P>
         The optional REST and <A href="/docs/mcp">MCP</A> endpoints are stateless:
-        they receive only the parameters a request sends (such as date, latitude,
-        and longitude), compute a result, and return it. They keep no logs of birth
-        data and store nothing between requests.
+        they process the request parameters (date, latitude, longitude), return
+        the computed JSON, and do not log or persist birth data between
+        requests.
       </P>
 
       <H2>Questions</H2>

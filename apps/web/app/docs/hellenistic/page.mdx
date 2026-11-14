@@ -3,7 +3,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Hellenistic Time-Lords",
-  description: "The traditional time-lord techniques in caelus: lots (Arabic parts), profections, firdaria, zodiacal releasing, and primary directions. Deterministic arithmetic on the validated positions, each convention documented.",
+  description: "Classical Hellenistic and Persian techniques in caelus: Hermetic lots, annual and monthly profections, firdaria, zodiacal releasing, and primary directions.",
   path: "/docs/hellenistic",
 });
 
@@ -11,16 +11,14 @@ export const metadata = pageMetadata({
 
 # Hellenistic time-lords
 
-Time-lord techniques divide a life into periods, each ruled by a planet or a
-sign, and ask which lord is active at a given moment. Caelus computes the
-classical Hellenistic and Persian methods as deterministic arithmetic on the
-positions it already validates against Swiss Ephemeris, so no additional
-ephemeris data is involved and each convention it follows is documented on this
-page. The engine returns the lords and their dates, and the reading of them is
-left to you.
+Time-lord systems partition a life into consecutive periods ruled by specific
+planets or zodiac signs. Caelus computes these classical Hellenistic and
+Persian techniques using deterministic arithmetic on top of its validated
+planetary positions, returning active lords, signs, and period boundary dates
+with each underlying convention documented below.
 
-All of these take a natal Julian Day (UT). Convert a local birth time with
-`caelus-birth` first (see [Computing Charts](/docs/charts)).
+All time-lord helpers expect a UT natal Julian Day. Convert local birth times
+with `caelus-birth` first (see [Computing Charts](/docs/charts)):
 
 ```text
 import { julianDay } from "caelus";
@@ -30,8 +28,9 @@ const natal = julianDay(1990, 6, 10, 14, 30);   // UT
 ## Lots (Arabic parts)
 
 The seven Hermetic lots (Fortune, Spirit, Eros, Necessity, Courage, Victory,
-and Nemesis) are arcs cast from the Ascendant, each reversing direction between
-a day and a night chart. Fortune and Spirit are symmetric about the Ascendant.
+and Nemesis) measure ecliptic arcs cast from the Ascendant, reversing direction
+between day and night births. Fortune and Spirit mirror each other across the
+Ascendant:
 
 <CodeBlock
   lang="typescript"
@@ -47,11 +46,11 @@ l.spirit;    // Spirit is Fortune reflected across the Ascendant`}
 
 <LotsTable />
 
-## Profections
+## Annual and monthly profections
 
-The Ascendant advances one whole sign per year of life; the profected sign's
-traditional ruler is the lord of the year. The monthly profection advances one
-further sign per twelfth of the year.
+In annual profections, the Ascendant advances one whole sign per completed year
+of life, and the traditional ruler of the profected sign becomes lord of the
+year. Monthly profections advance one additional sign per twelfth of a year:
 
 <CodeBlock
   lang="typescript"
@@ -67,10 +66,10 @@ p.annual.lord;      // lord of the year`}
 
 ## Firdaria
 
-The Persian firdaria divides life into nine periods totalling seventy-five
-years (the seven planets in the firdaria order, then the two nodes), each
-planetary period split into seven sub-periods. A day chart begins with the Sun,
-a night chart with the Moon.
+The Persian firdaria divides a 75-year cycle into nine major periods (covering
+the seven traditional planets plus the two lunar nodes), each planetary period
+subdivided into seven equal sub-periods. Day charts begin the sequence with
+the Sun, whereas night charts begin with the Moon:
 
 <CodeBlock
   lang="typescript"
@@ -85,11 +84,12 @@ f.sub;     // the sub-period lord`}
 
 ## Zodiacal releasing
 
-Released from a lot, usually Spirit (career and action) or Fortune (body and
-circumstance), periods unfold sign by sign across four nested levels. Caelus
-uses the standard Valens/Schmidt convention: years of exactly 360 days, each
-level a twelfth of the one above, and the *loosing of the bond*, where a level
-that loops back to its starting sign jumps to the opposite sign instead.
+Cast from a lot (commonly Spirit for vocation and action, or Fortune for body
+and livelihood), zodiacal releasing unfolds sign by sign across four nested
+sub-period levels. Caelus follows the standard Valens/Schmidt convention:
+360-day prophetic years, 1/12 subdivisions per level, and *loosing of the bond*,
+where a sub-period sequence returning to its opening sign jumps to the
+opposite sign instead:
 
 <CodeBlock
   lang="typescript"
@@ -104,11 +104,11 @@ z.l2;   // the L2 sub-period sign`}
 
 ## Primary directions
 
-The diurnal rotation of the sphere carries a planet to an angle or to another
-planet; the arc of rotation, converted by a time key, gives the age of the
-direction. Caelus computes directions to the four angles and, with the Placidus
-semi-arc method, between planets. The key is Naibod (0.9856° per year) or
-Ptolemy (1° per year).
+Primary directions project the diurnal rotation of the celestial sphere to
+bring a significator into aspect with an angle or another planet, converting
+equatorial arc of rotation into age via a time key (`"naibod"` at 0.9856° per
+year or `"ptolemy"` at 1° per year). Caelus computes directions to the four
+angles alongside Placidus semi-arc mundane directions between planets:
 
 <CodeBlock
   lang="typescript"
@@ -122,6 +122,6 @@ mundaneDirections(engine, natal, 27.95, -82.46);`}
 
 <DirectionsTable />
 
-The full signatures are in the [API Reference](/docs/api). For the Vedic
-time-lord systems (the Vimshottari, Yogini, and Ashtottari dashas), see
+Full function signatures appear in the [API Reference](/docs/api). For Vedic
+time-lord systems (Vimshottari, Yogini, and Ashtottari dashas), see{" "}
 [Vedic &amp; Jyotish](/docs/vedic).

@@ -39,7 +39,7 @@ export function ElectionalResult() {
   const chart = sampleEngine.chartAt(best.jd, place.lat, place.lon, "placidus");
   return (
     <DocFigure
-      caption={<>The actual winner of the scan above, computed at build time: {from.zone}, {jdToMinute(best.jd)} UT, score {best.score}. A 72-sample hourly sweep of the three-day window, scored by the function above; the table lists the five best instants.</>}
+      caption={<>Top result from a 72-sample hourly sweep across the three-day window above ({from.zone}, {jdToMinute(best.jd)} UT, score {best.score}). The table lists the five highest-scoring timestamps.</>}
     >
       <div
         style={{

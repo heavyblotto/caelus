@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Eclipses",
-  description: "Search solar and lunar eclipses, find where a solar eclipse is central and how wide its path is, and get contact times and magnitude for one place.",
+  description: "Search solar and lunar eclipses, trace central shadow paths and widths, and compute local eclipse contact times and magnitudes.",
   path: "/docs/eclipses",
 });
 
@@ -10,9 +10,10 @@ export const metadata = pageMetadata({
 
 # Eclipses
 
-The engine answers three questions about an eclipse: when it happens, where on
-Earth it is seen, and what one observer sees. The search needs no extra data.
-It runs on the embedded tier from the same Sun and Moon positions as a chart.
+Caelus provides functions to answer three eclipse questions: when eclipses
+occur within a date range, where a solar eclipse path crosses Earth, and what
+a viewer at a specific location sees. Every eclipse helper runs on the embedded
+data tier using the same Sun and Moon calculations as charts.
 
 ```ts run
 import {
@@ -27,10 +28,10 @@ const engine = new Engine(embeddedData);
 const utc = (jd) => new Date((jd - 2440587.5) * 86400000).toISOString();
 ```
 
-## When
+## Finding eclipses in a date range
 
-`solarEclipses` and `lunarEclipses` return every eclipse between two Julian
-Days, in time order.
+`solarEclipses` and `lunarEclipses` return every eclipse occurring between two
+Julian Days in chronological order:
 
 ```ts run
 solarEclipses(engine, julianDay(2024, 1, 1), julianDay(2027, 1, 1))
@@ -46,22 +47,24 @@ solarEclipses(engine, julianDay(2024, 1, 1), julianDay(2027, 1, 1))
 | 2026-02-17 12:12:00 | annular | 0.9743 |
 | 2026-08-12 17:45:46 | total | 0.8978 |
 
-Each solar eclipse carries `tMax`, `type` (`total`, `annular`, `hybrid`, or
-`partial`), `gamma`, and the `begin` and `end` of the eclipse anywhere on
-Earth. Gamma is how far the Moon's shadow axis passes from the centre of the
-Earth, in Earth radii; above about 1 the axis misses and the eclipse is
-partial everywhere.
+Each solar eclipse record includes `tMax`, `type` (`total`, `annular`, `hybrid`,
+or `partial`), `gamma`, and the global `begin` and `end` timestamps. Gamma
+measures the distance from the Moon's shadow axis to Earth's center in Earth
+radii; when gamma exceeds roughly 1, the shadow axis misses Earth and the
+eclipse is partial everywhere.
 
-A lunar eclipse carries `tMax`, `type` (`total`, `partial`, or `penumbral`),
-its umbral and penumbral magnitudes, and the begin and end of each phase it
-reaches. The total lunar eclipse of 14 March 2025 has a `tMax` of 06:58:41 UT
-and an umbral magnitude of 1.178, with totality from 06:25:58 to 07:31:21.
+A lunar eclipse record provides `tMax`, `type` (`total`, `partial`, or
+`penumbral`), umbral and penumbral magnitudes, and start/end times for every
+phase reached. During the total lunar eclipse of 14 March 2025, `tMax` falls at
+06:58:41 UT with an umbral magnitude of 1.178 and totality lasting from
+06:25:58 to 07:31:21 UT.
 
-## Where
+## Locating the solar eclipse path
 
-For a solar eclipse, `solarEclipseWhere` gives the point on the ground under
-the shadow axis at an instant, and `solarEclipseLimits` adds the northern and
-southern edges of the central path and its width.
+For a solar eclipse, `solarEclipseWhere` returns the geographic coordinates
+directly beneath the shadow axis at a given timestamp, while `solarEclipseLimits`
+adds the northern and southern bounds of the central path alongside its width
+in kilometers:
 
 ```ts run
 const [eclipse] = solarEclipses(engine, julianDay(2024, 4, 1), julianDay(2024, 5, 1));
@@ -75,14 +78,14 @@ solarEclipseLimits(engine, eclipse.tMax).widthKm;
 // 198.98
 ```
 
-Both take any instant during the eclipse, so sampling from `begin` to `end`
-traces the whole path. They return `null` when no central eclipse exists at
-that instant.
+Sampling timestamps from `begin` to `end` traces the full path across Earth.
+Both functions return `null` when no central eclipse touches the surface at
+that timestamp.
 
-## What one observer sees
+## Local circumstances for an observer
 
-`solarEclipseLocal` takes a place and returns the local type, the magnitude,
-the obscuration, and the four contact times.
+Pass observer coordinates to `solarEclipseLocal` to calculate the local eclipse
+type, magnitude, solar disc obscuration, and four contact times:
 
 ```ts run
 solarEclipseLocal(engine, eclipse.tMax, 32.78, -96.80);   // Dallas
@@ -99,22 +102,24 @@ solarEclipseLocal(engine, eclipse.tMax, 32.78, -96.80);   // Dallas
 | `c3`, totality ends | 18:44:41 UT | |
 | `c4`, partial ends | 20:02:45 UT | |
 
-Totality in Dallas lasts 236 seconds. `type` is `"none"` and the times are
-`null` where no part of the Sun is covered.
+In Dallas, totality lasts 236 seconds. Outside the eclipse footprint, `type`
+is `"none"` and the contact times are `null`.
 
-A lunar eclipse happens at the same instant for everyone, so the local
-question is only whether the Moon is up. `lunarEclipseLocal` returns its
-altitude and a `visible` flag. At greatest eclipse on 14 March 2025 the Moon
-is 44° above the horizon in New York and 5° below it in London.
+Because a lunar eclipse happens simultaneously everywhere on Earth's night side,
+the local question is simply whether the Moon is above the horizon.
+`lunarEclipseLocal` returns the Moon's altitude and a `visible` boolean: at
+greatest eclipse on 14 March 2025, the Moon stands 44° above the horizon in
+New York and 5° below it in London.
 
 ## Accuracy
 
-Times of greatest eclipse agree with Swiss Ephemeris to within 9 seconds, and
-every eclipse type from 1990 to 2030 matched (92 lunar and 89 solar). Contact
-times are typically within 15 seconds and can be minutes apart for a grazing
-eclipse. The validator holds the point under the shadow axis to 10 km. The
-figures are on [Validation](/validation).
+Times of greatest eclipse match Swiss Ephemeris within 9 seconds, and all 92
+lunar eclipses and 89 solar eclipses between 1990 and 2030 classify with zero
+type mismatches. Contact times typically agree within 15 seconds (widening to
+minutes during grazing eclipses), and sub-shadow ground coordinates stay
+within 10 km. Detailed benchmarks appear on [Validation](/validation).
 
-That is enough to say whether a place sees totality and for how long to
-within a few seconds. It is not a substitute for a published eclipse path map
-at the edge of the path, where a kilometre decides the answer.
+This accuracy reliably establishes whether a city sees totality and its
+duration within a few seconds, though observers situated right on the edge of a
+path should consult an official Besselian-element map where a single kilometer
+can decide totality.

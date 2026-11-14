@@ -3,7 +3,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Derived Charts",
-  description: "Returns, secondary progressions, solar arc, composite and Davison charts, harmonics, antiscia, draconic, declination aspects, out-of-bounds, dignities, and sect, built on the validated positions.",
+  description: "Returns, secondary progressions, solar arc directions, composite and Davison charts, harmonics, antiscia, draconic, declination aspects, out-of-bounds, dignities, and sect.",
   path: "/docs/derived",
 });
 
@@ -11,16 +11,17 @@ export const metadata = pageMetadata({
 
 # Derived Charts
 
-The derived layer is the standard astrological derivations computed on top of
-the validated primitives. These are time mappings and arithmetic on apparent
-positions that are already checked against Swiss Ephemeris, so they add no new
-ephemeris. The TypeScript port is pinned to the Python reference by a
-cross-language golden, and everything here is exported from the package root.
+The derived layer computes standard secondary astrological techniques on top of
+Caelus's validated positions. Because these functions apply time mappings or
+arithmetic transforms to Swiss Ephemeris-validated coordinates, they require no
+extra ephemeris tables. All TypeScript implementations match the Python
+reference suite through cross-language golden tests and export directly from
+the `caelus` package root.
 
 <Note>
-  All of these take an <code>Engine</code> and Julian Days. Build the engine
-  once and reuse it; <code>julianDay()</code> converts a UT calendar date to a
-  JD. A natal JD plus a target JD is enough for most derivations.
+  Every derived helper accepts an <code>Engine</code> instance and UT Julian
+  Days (use <code>julianDay()</code> to convert calendar dates). Instantiate
+  <code>Engine</code> once at module scope and reuse it across calls.
 </Note>
 
 <CodeBlock
@@ -37,9 +38,10 @@ const targetJd = julianDay(2026, 6, 13, 0, 0, 0);`}
 
 ## Returns
 
-A return is when a body comes back to its natal longitude. Outer-planet
-returns can show three crossings around a retrograde loop, so the search
-returns every hit in the window.
+A return occurs when a transiting planet reaches its exact natal ecliptic
+longitude. Because outer planets can cross the same degree up to three times
+around a retrograde station, return helpers return an array of every crossing
+within the requested search window:
 
 <CodeBlock
   lang="typescript"
@@ -58,10 +60,10 @@ returns(engine, "saturn", natalJd, natalJd, natalJd + 365 * 30);`}
 
 ## Secondary progressions and solar arc
 
-Secondary progressions map one day of real motion to one year of life.
-<code>progressedJd</code> gives the JD whose real positions are the progressed
-positions; <code>solarArc</code> is the angle the progressed Sun has travelled,
-applied forward to any natal point.
+Secondary progressions map one ephemeris day of planetary motion after birth to
+one year of life (`progressedJd`), while `solarArc` measures how far the
+progressed Sun has advanced and applies that offset to any natal body via
+`directedLongitude`:
 
 <CodeBlock
   lang="typescript"
@@ -73,13 +75,13 @@ solarArc(engine, natalJd, targetJd);                      // arc in degrees
 directedLongitude(engine, "mars", natalJd, targetJd);     // solar-arc directed Mars`}
 />
 
-## Composite and Davison
+## Composite and Davison charts
 
-A composite chart takes the shorter-arc midpoint of each body's two longitudes.
-A Davison chart is a real chart at the midpoint in time and place:
-<code>davisonParams</code> returns the midpoint instant and coordinates, and you
-read real positions at them. The returned latitude and longitude are where the
-houses are cast.
+A composite chart computes the shorter-arc midpoint between each pair of natal
+longitudes. A Davison relationship chart casts an actual chart at the
+midpoint in time and geographic coordinates: `davisonParams` computes the
+midpoint timestamp, latitude, and longitude so you can look up real
+planetary positions and house cusps at that point:
 
 <CodeBlock
   lang="typescript"
@@ -101,8 +103,9 @@ engine.position("venus", midJd);   // full position at midLat/midLon`}
 
 ## Harmonics and antiscia
 
-The nth-harmonic chart multiplies each longitude by n (wrapped to 360).
-Antiscia reflect a point across the solstice or equinox axis.
+An `n`th-harmonic chart multiplies each ecliptic longitude by `n` modulo 360°.
+Antiscia mirror points symmetrically across the solstice axis (0° Cancer / 0°
+Capricorn) or the equinox axis (0° Aries / 0° Libra):
 
 <CodeBlock
   lang="typescript"
@@ -115,13 +118,14 @@ antiscion(15);        // reflection across 0° Cancer / 0° Capricorn
 contraAntiscion(15);  // reflection across 0° Aries / 0° Libra`}
 />
 
-## Draconic
+## Draconic charts
 
-The draconic chart re-zeroes the zodiac at the Moon's ascending node: each
-point's draconic longitude is its tropical longitude minus the node's, wrapped
-to 360°. Houses and angles transform the same way; declinations are unchanged.
-The default node is the true node; pass `"mean"` for the mean node. An ayanamsa
-shifts body and node alike, so it cancels in the difference.
+A draconic chart shifts zero degrees to the Moon's ascending node by
+subtracting the node's longitude from every planet, house cusp, and angle
+(modulo 360°), leaving declinations unchanged. It defaults to the true node
+(pass `"mean"` to use the mean node); because any ayanamsa shifts both bodies
+and node equally, draconic longitudes are invariant across tropical and sidereal
+zodiacs:
 
 <CodeBlock
   lang="typescript"
@@ -134,11 +138,12 @@ const d = draconicChart(engine, natalJd, undefined, "true", 27.95, -82.46);
 draconicLongitude(engine.longitude("venus", natalJd), d.node_lon);`}
 />
 
-## Declination: aspects and out of bounds
+## Declination aspects and out-of-bounds planets
 
-Parallels and contraparallels are declination aspects (same or opposite
-declination within orb). A body is out of bounds when its declination exceeds
-the obliquity of the ecliptic.
+Parallels (same declination sign) and contraparallels (opposite declination
+sign) match bodies within an angular declination orb. A body is considered
+out of bounds when its absolute declination exceeds Earth's true obliquity of
+the ecliptic:
 
 <CodeBlock
   lang="typescript"
@@ -154,11 +159,12 @@ outOfBoundsMargin(engine, "moon", natalJd);  // degrees past the obliquity`}
 
 <DeclinationTable />
 
-## Dignities and sect
+## Essential dignities and sect
 
-Essential dignities classify a body in a sign as domicile, exaltation,
-detriment, or fall. Sect is the day/night division: whether the Sun is above
-the horizon, and whether a planet is in its preferred sect.
+Essential dignities classify a planet in a sign as `domicile`, `exaltation`,
+`detriment`, or `fall`. Sect divides charts into diurnal (`"day"`, Sun above
+the horizon) and nocturnal (`"night"`) to indicate whether each planet occupies
+its preferred hemisphere and sect:
 
 <CodeBlock
   lang="typescript"
@@ -171,12 +177,12 @@ const day = isDayChart(engine, natalJd, 27.95, -82.46);
 inSect("jupiter", day);   // true when Jupiter is in sect (diurnal by day)`}
 />
 
-For the traditional five-fold scoring, `dignityScore` applies William Lilly&apos;s
-weights (rulership +5, exaltation +4, triplicity +3, term +2, face +1;
-detriment -5, fall -4) and reports the breakdown, the running `total`, and a
-`peregrine` flag. `almuten` returns the planet with the greatest positive
-dignity at a degree. The triplicity, term (Egyptian bounds), and face tables
-are each pinned to a named authority.
+For traditional five-fold essential dignity scoring, `dignityScore` applies
+William Lilly's point weights (rulership +5, exaltation +4, triplicity +3, term
++2, face +1; detriment −5, fall −4) and returns each component alongside the
+net `total` and `peregrine` flag. `almuten` identifies the highest-scoring
+planet at a given degree. All triplicity (Dorothean), term (Egyptian bounds),
+and face tables document their classical source:
 
 <CodeBlock
   lang="typescript"
@@ -189,12 +195,12 @@ dignityScore("mars", 5, "night");   // Mars at 5° Aries, night chart
 almuten(5);   // { planet: "mars", score: 8 }, strongest at that degree`}
 />
 
-## Timelines
+## Building timelines
 
-The derivations compose into timelines: the returns search is already a span,
-and the progression mappings are pure functions of a target JD, so you sample
-them on whatever cadence you need. A JD converts back to a date with the
-standard epoch offset, no helper required.
+Derived helpers compose naturally into multi-year timelines: return scans
+already return arrays across `[start, end]`, while progression helpers are pure
+functions of any target Julian Day. Convert any returned Julian Day directly to
+a UTC calendar string with the standard JavaScript epoch offset:
 
 <CodeBlock
   lang="typescript"
@@ -223,12 +229,14 @@ for (let year = 2026; year < 2038; year++) {
 
 <ReturnsTimeline />
 
-The same shape drives a transit timeline (sample `engine.longitude` over a
-range) or a directed-aspect scan (`directedLongitude` against natal points).
-For century-scale sweeps that evaluate a longitude tens of thousands of times,
-the <a href="/docs/data-tiers">turbo tier</a> finds candidate instants fast.
-For ready-made transit and event-search recipes, see <a href="/docs/recipes">Recipes</a>.
+Use the same pattern to build transit timelines (sampling `engine.longitude`
+across a range) or directed-aspect scans (`directedLongitude` compared against
+natal placements). For multi-century sweeps involving tens of thousands of
+evaluations, use the <a href="/docs/data-tiers">Turbo tier</a> to filter
+candidate dates before evaluating full charts. Ready-made transit and event
+examples appear in <a href="/docs/recipes">Recipes</a>.
 
-See the <a href="/docs/api">API Reference</a> for every signature, <a href="/docs/edge-cases">Edge Cases &amp; Stability</a>
-for range and stability notes, and the <a href="/changelog">Changelog</a> for
-what shipped in 0.7.0.
+See the <a href="/docs/api">API Reference</a> for full TypeScript signatures,
+<a href="/docs/edge-cases">Edge Cases &amp; Stability</a> for bounds and
+runtime guarantees, and the <a href="/changelog">Changelog</a> for release
+history.

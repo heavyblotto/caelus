@@ -29,11 +29,11 @@ export const metadata = pageMetadata({
 });
 
 const PACKAGES: Array<[keyof typeof NPM, string, string]> = [
-  ["caelus", "caelus", "The chart math: positions, houses, and aspects. It has no runtime dependencies and is ~153 KB gzipped with the embedded data."],
-  ["mcp", "caelus-mcp", `${formatMcpToolsTitle()} chart tools for AI agents: natal charts, transits, synastry, event search, electional, lots, time-lords, directions, and the Vedic layer (nakshatras, dashas, vargas, yogas).`],
-  ["birth", "caelus-birth", "Resolves a local birth time and place to UT, applying DST and historical timezone rules."],
-  ["wheel", "caelus-wheel", "React SVG chart wheel (SSR-safe), ChartSphere (3D), AstroMap (astrocartography), and EphemerisGraph (~2.2 KB gzipped for the flat wheel)."],
-  ["delineationsPd", "caelus-delineations-pd", "Public-domain delineations and correspondence data for the interpretation layer, versioned on its own semver."],
+  ["caelus", "caelus", "Core ephemeris and chart calculations (positions, houses, and aspects) with zero runtime dependencies (~153 KB gzipped including embedded data)."],
+  ["mcp", "caelus-mcp", `${formatMcpToolsTitle()} chart tools for AI assistants: natal charts, transits, synastry, event search, electional search, lots, time-lords, directions, and Vedic calculations.`],
+  ["birth", "caelus-birth", "Resolves local birth dates, times, and coordinates to UTC using historical timezone and daylight saving time rules."],
+  ["wheel", "caelus-wheel", "SSR-safe React SVG components: flat ChartWheel (~3 KB gzipped), 3D ChartSphere, AstroMap, and EphemerisGraph."],
+  ["delineationsPd", "caelus-delineations-pd", "Public-domain delineations and correspondence tables for the interpretation layer, versioned independently."],
 ];
 
 // Credibility numbers on the first screen. Each links to its proof and names
@@ -64,13 +64,13 @@ const CAPABILITIES: Array<{ title: string; href: string; desc: ReactNode; unrele
   {
     title: "Sky dating",
     href: "/docs/sky-dating",
-    desc: <>From a description of a sky, such as the sign of each planet, to every date on which it occurred.</>,
+    desc: <>Search historical date ranges for intervals matching planetary sign placements, aspects, or retrograde states.</>,
     unreleased: true,
   },
   {
     title: "Uncertain times",
     href: "/docs/uncertain-time",
-    desc: <>Which facts of a chart hold across an uncertain time, and the instants at which the others change.</>,
+    desc: <>Identify which chart placements remain fixed across an uncertain birth-time window and when others change.</>,
     unreleased: true,
   },
   {
@@ -86,22 +86,22 @@ const CAPABILITIES: Array<{ title: string; href: string; desc: ReactNode; unrele
   {
     title: "Vedic & Jyotish",
     href: "/docs/vedic",
-    desc: <>Nakshatras, the Vimshottari, Yogini, and Ashtottari dashas, divisional charts, and yogas.</>,
+    desc: <>Nakshatras, Vimshottari, Yogini, and Ashtottari dashas, divisional charts, and yogas.</>,
   },
   {
     title: "Interpretation layer",
     href: "/docs/interpretation",
-    desc: <>Ranked, citable fact atoms, a pluggable rule corpus, and LLM briefs with citation auditing.</>,
+    desc: <>Ranked, citable chart facts, a pluggable rule corpus, and LLM briefs with citation verification.</>,
   },
   {
     title: "Sky View",
     href: "/docs/visualizations",
-    desc: <>The visible sky from a place and moment as a pixel-precise prompt for AI image generation.</>,
+    desc: <>Generate an accurate sky description from any coordinates and timestamp as a prompt for AI image generation.</>,
   },
   {
     title: "Chart provenance",
     href: "/docs/provenance",
-    desc: <>Declare what a chart is (forecast, mythic, archetypal) and route to the ephemeris or the compiler.</>,
+    desc: <>Tag a chart&apos;s context (observed, forecast, mythic, or archetypal) and route it to the ephemeris or synthetic compiler.</>,
   },
   {
     title: "MCP server",
@@ -109,9 +109,9 @@ const CAPABILITIES: Array<{ title: string; href: string; desc: ReactNode; unrele
     desc: <><code>caelus-mcp</code> gives Claude, Cursor, and other MCP clients {formatMcpToolsProse()} chart tools.</>,
   },
   {
-    title: "In-browser computation",
+    title: "Client-side execution",
     href: "/privacy",
-    desc: <>Charts compute entirely in the browser, so an app never has to send birth data to a server.</>,
+    desc: <>Charts compute locally in the browser, so your application never needs to send birth data to a server.</>,
   },
 ];
 
@@ -191,17 +191,17 @@ export default function Home() {
         <section className="tile s12">
           <div className="tile__b">
             <p>
-              The full capability list, along with a comparison against the
-              other engines, is on <A href="/features">Features</A>. An entry
-              marked Unreleased is in the repository and not yet in the
-              published {SITE.version} packages.
+              See the full capability list and library comparison on{" "}
+              <A href="/features">Features</A>. Items marked Unreleased are
+              available on the development branch and have not yet shipped in{" "}
+              {SITE.version}.
             </p>
           </div>
         </section>
 
         <div className="band">
           <h2>Instruments</h2>
-          <p>Each one answers one question in your browser and shows the call that produced the result.</p>
+          <p>Interactive browser tools powered by Caelus, paired with the TypeScript call used to produce each result.</p>
         </div>
         {INSTRUMENTS.map((inst) => (
           <Link key={inst.id} href={inst.href} className="tile s4">
@@ -233,20 +233,19 @@ export default function Home() {
         ))}
 
         <div className="band">
-          <h2>How it is checked</h2>
+          <h2>Verification and testing</h2>
         </div>
         <section className="tile s12">
           <div className="tile__b">
             <p>
-              CI checks the engine in two stages. A Python reference engine is first
-              calibrated against Swiss Ephemeris, and the TypeScript port is then
-              replayed against {formatGoldenChecks()} golden checks derived from it.
-              The worst deviation recorded across that suite is{" "}
-              {formatWorstNanoProse()}, which sits far below any astronomically
-              relevant scale, so a porting bug fails the build instead of reaching a
-              release. The tables and the methodology behind them are on{" "}
-              <A href="/validation">Validation</A>, and the bugs this suite has
-              caught are written up in the <A href="/notes">Build Notes</A>.
+              CI verifies the engine in two stages. First, the Python reference
+              implementation is calibrated against Swiss Ephemeris. Next, the
+              TypeScript engine runs against {formatGoldenChecks()} golden test
+              cases exported from that reference. The largest deviation across the
+              suite is {formatWorstNanoProse()}, well below astronomical
+              tolerance, ensuring regressions fail the build before release. You
+              can inspect the accuracy tables on <A href="/validation">Validation</A>{" "}
+              and past bug investigations in <A href="/notes">Build Notes</A>.
             </p>
           </div>
         </section>

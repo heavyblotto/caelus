@@ -3,7 +3,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Electional Search",
-  description: "Find a good moment: thread caelus-birth, caelus, and caelus-wheel through a real electional search that scans a local window, scores each instant with the electional primitives, and renders the winning chart.",
+  description: "Build an end-to-end electional search combining timezone lookup (caelus-birth), moment ranking (rankMoments), and SVG chart rendering (caelus-wheel).",
   path: "/docs/electional",
 });
 
@@ -11,33 +11,29 @@ export const metadata = pageMetadata({
 
 # Electional search
 
-Electional work asks the opposite question from a natal chart. Instead of reading
-the sky at a fixed birth moment, you search a window for the instant that best
-fits a set of rules. This guide builds that search end to end. It threads all
-three packages and the electional search layer (`rankMoments` and the
-electional primitives) into one believable
-flow:
+Electional astrology works in the reverse direction of a natal chart: rather
+than computing positions for a fixed birth timestamp, you search across a time
+window to find the moment that best fits a set of criteria. This guide builds
+that workflow end to end across timezone conversion, candidate scoring, and SVG
+rendering:
 
 ```text
-place + local window
-    → caelus-birth    resolve the IANA zone, local window → UT (DST-safe)
-    → caelus          rankMoments scans the window, scoring each instant
-                      with the electional primitives
-    → caelus-wheel    render the winning moment's chart as an SVG wheel
+location + local time window
+    → caelus-birth    resolve the IANA zone and convert local bounds → UT (DST-safe)
+    → caelus          rankMoments scans the window with custom electional rules
+    → caelus-wheel    render the top-scoring chart as an SSR-safe SVG wheel
 ```
 
-The engine does no I/O and imposes no scoring model. The rules below are an
-example you can rewrite. `rankMoments` is plain control flow over the validated
-primitives, so the same search runs in the browser, on the server, or in a Web
-Worker.
+Because `rankMoments` takes an arbitrary user-defined scoring callback over
+pure planetary calculations with zero I/O, the identical search runs in
+browsers, server components, or Web Workers.
 
-## The scoring function
+## Defining a scoring function
 
-A score turns one instant into a number. Higher is better. This one rewards an
-applying Moon to Venus trine, the kind of benefic moment an election hunts for,
-and penalizes the classic spoilers: a void-of-course Moon and a benefic burned
-by the Sun. It nudges toward hours ruled by the benefics. Each rule is one call
-to an electional primitive.
+A scoring callback maps each candidate timestamp to a numeric score (higher
+scores rank first). The sample rule below rewards an applying Moon–Venus trine,
+penalizes a void-of-course Moon or combust Venus, and adds weight during
+benefic planetary hours using built-in helpers:
 
 <CodeBlock
   lang="typescript"
@@ -78,18 +74,19 @@ export function electionalScore(
 />
 
 `aspectBetween` returns the tightest aspect within orb (or `null`), tagged
-`applying`, `separating`, or `exact`. `solarPhase` returns `cazimi`, `combust`,
-`under_beams`, or `null`. `voidOfCourse` reports whether the Moon makes no more
-classical aspects before it leaves its sign. `planetaryHour` returns the ruler
-of the hour containing the instant at that place.
+`applying`, `separating`, or `exact`. `solarPhase` classifies solar proximity
+as `cazimi`, `combust`, `under_beams`, or `null`. `voidOfCourse` detects whether
+the Moon makes any further major aspects before changing sign, and
+`planetaryHour` returns the Chaldean ruler of the current planetary hour at the
+given coordinates.
 
-## The whole search
+## Running the search component
 
-The search itself is one component. `toUT` resolves the timezone from the
-coordinates and converts the local window bounds to UT Julian Days, so a
-daylight-saving shift inside the window is handled for you. `rankMoments`
-samples the range and keeps the best instant. The winner comes back as a UT
-Julian Day, which converts to a chart with one call.
+Inside the React component, `toUT` resolves the IANA zone from coordinates and
+converts local start/end boundaries into UT Julian Days so DST transitions are
+handled automatically. `rankMoments` evaluates candidates across the span, and
+`engine.chartAt` builds the winning chart directly from the returned Julian
+Day:
 
 <CodeBlock
   lang="tsx"
@@ -133,12 +130,12 @@ export function FindAMoment() {
 
 <ElectionalResult />
 
-## Scaling the scan
+## Scaling larger searches
 
-A three-day hourly scan is 72 samples and renders inline. For a longer window
-or a search that runs in the browser, swap `rankMoments` for `rankMomentsAsync`,
-which yields to the event loop every few hundred samples so the page stays
-responsive. The score function is identical:
+A 72-hour hourly scan evaluates synchronously in a few milliseconds. For multi-week
+client-side searches where blocking the UI thread would cause frame drops, use
+`rankMomentsAsync`, which yields back to the browser event loop after every
+batch of samples:
 
 <CodeBlock
   lang="typescript"
@@ -152,15 +149,14 @@ const best = await rankMomentsAsync(
 );`}
 />
 
-Because the engine does no I/O, the same scan and score run unchanged inside a
-Web Worker, keeping the main thread free during a long sweep.
+Because `caelus` performs no DOM or I/O calls, the same scan and scoring logic
+also run inside a Web Worker.
 
 ## Next steps
 
-See the <a href="/docs/architecture">Architecture</a> guide for the simpler
-natal version of this pipeline, <a href="/docs/recipes">Recipes</a> for the
-`when()` query language and event search, and
-<a href="/docs/edge-cases">Edge Cases &amp; Stability</a> for how DST gaps,
-polar latitudes, and circumpolar bodies surface in these results.
-[`caelus-starter`](https://github.com/heavyblotto/caelus-starter) is a
-deployable app built on the same layers.
+See <a href="/docs/architecture">Architecture</a> for the single-chart natal
+pipeline, <a href="/docs/recipes">Recipes</a> for `when()` queries and event
+searches, <a href="/docs/edge-cases">Edge Cases &amp; Stability</a> for DST and
+polar boundary rules, or clone{" "}
+<a href="https://github.com/heavyblotto/caelus-starter">caelus-starter</a> as a
+deployable Next.js starting point.

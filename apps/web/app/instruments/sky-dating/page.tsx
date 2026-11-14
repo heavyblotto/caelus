@@ -4,7 +4,7 @@ import { pageMetadata } from "../../../lib/seo";
 export const metadata = pageMetadata({
   title: "Sky Dating",
   description:
-    "Describe a sky by the sign of each planet and get every date it occurred across 6,000 years. Runs in your browser on the Caelus engine, with the search funnel and the call that produced it.",
+    "Search across 6,000 years of planetary positions to find date ranges matching sign placements, aspects, or retrograde states, complete with a filter breakdown and runnable TypeScript snippet.",
   path: "/instruments/sky-dating",
 });
 

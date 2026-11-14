@@ -4,7 +4,7 @@ import { pageMetadata } from "../../lib/seo";
 export const metadata = pageMetadata({
   title: "Methods",
   description:
-    "How the engine is built from published math and how each result is checked: reference-first ports, Swiss Ephemeris and JPL Horizons as independent yardsticks, and effects recovered by fitting.",
+    "How Caelus implements published astronomical algorithms, verifies positions against Swiss Ephemeris and JPL Horizons, and validates derived calculations with golden fixtures.",
   path: "/methods",
 });
 
@@ -14,157 +14,149 @@ export default function Methods() {
       <Eyebrow>Methods</Eyebrow>
       <h1>Methods</h1>
       <P>
-        Caelus is written from the published record, then checked against two
-        independent references before any figure is quoted. The per-body numbers
-        live on <A href="/validation">Validation</A>; the source citations live
-        on <A href="/provenance">Provenance</A>. This page covers how a model
-        gets from a paper to a tested result.
+        Caelus implements published astronomical algorithms and validates every
+        calculation against independent ephemerides. Per-body accuracy tables
+        appear on <A href="/validation">Validation</A>, and source citations are
+        listed on <A href="/provenance">Provenance</A>. This page explains the
+        development and verification workflow.
       </P>
 
-      <H2>Reference-first</H2>
+      <H2>Reference-first development</H2>
       <P>
-        Every model lands first in the Python reference. That reference emits
-        golden fixtures: position and event values at fixed instants, written to
-        JSON. The TypeScript engine is a port of the same math, and a conformance
-        suite replays the fixtures against it on every commit. The port has to
-        reproduce the reference to the last digit the fixture records, and a red
-        run blocks the merge.
+        Every mathematical model is implemented first in the Python reference
+        package, which generates JSON golden fixtures for positions and events
+        at fixed timestamps. The TypeScript engine implements the same formulas,
+        and CI replays every fixture against it on each commit. Features merge
+        only when the Python reference, golden fixtures, and TypeScript engine
+        match.
       </P>
       <P>
-        The core reads no files and makes no network calls. Coefficient tables
-        are compiled in or loaded as plain data, so the same code path runs in
-        the browser, on an edge runtime, and in Node. A model is not shipped
-        until the reference, its fixtures, and the port all agree.
+        Because the core engine performs no file or network I/O and bundles or
+        loads coefficient tables as plain data, the same implementation runs in
+        browsers, edge workers, and Node.js.
       </P>
 
-      <H2>Two independent yardsticks</H2>
+      <H2>Two independent benchmarks</H2>
       <P>
         <A href="https://www.astro.com/swisseph/swephinfo_e.htm">
           Swiss Ephemeris
         </A>{" "}
-        2.10 is the calibration oracle. It shares the apparent-place definition
-        used here, geocentric ecliptic longitude at the true equinox of date, so
-        a comparison at random instants across 1000&ndash;3000 shows whether the
-        model matches the field standard. No Swiss Ephemeris code or
-        coefficient ships in Caelus, and it is used only as a target to test
-        against.
+        2.10 is the primary calibration target because it shares the
+        apparent-place definition used here (geocentric ecliptic longitude at
+        the true equinox of date). Sampling random timestamps across
+        1000&ndash;3000 checks alignment with standard astrological software.
+        Caelus uses Swiss Ephemeris only in automated tests and ships none of
+        its code or data files.
       </P>
       <P>
-        <A href="https://ssd.jpl.nasa.gov/horizons/">JPL Horizons</A> is the
-        independent reference. Its apparent geocentric right ascension and
-        declination come from a different source and a different frame, sampled
-        at a separate set of epochs. Agreement with Swiss alone could mean two
-        implementations of the same textbook share a bias; agreement with
-        Horizons as well shows the result tracks the underlying ephemeris. The
-        Sun and inner planets sit near a tenth of an arcsecond against Horizons,
-        the Moon near two tenths, and the giant planets within a few arcseconds.
+        <A href="https://ssd.jpl.nasa.gov/horizons/">JPL Horizons</A> provides
+        an independent benchmark derived from different underlying integrations
+        and expressed in equatorial right ascension and declination. Verifying
+        against both references catches frame errors or shared textbook biases.
+        Compared with Horizons, Caelus matches within ~0.1&Prime; for the Sun
+        and inner planets, ~0.2&Prime; for the Moon, and a few arcseconds for
+        the outer planets.
       </P>
 
-      <H2>Validating the conventions</H2>
+      <H2>Validating astrological conventions</H2>
       <P>
-        The traditional techniques (the Hellenistic time-lords and the
-        Vedic dashas, vargas, and yogas) are deterministic arithmetic, but
-        many carry named convention variants where the texts disagree. Caelus
-        applies the same discipline to the conventions as to the positions:
-        rather than assert one reading, each technique is pinned to a named
-        authority (the Brihat Parashara Hora Shastra, or the JHora/PVR
-        Narasimha Rao implementation where the texts differ), and a
-        reference tier (<code>validate_jyotish</code>) replays a committed set
-        of checks, each carrying its own citation, so every convention choice
-        can be traced back to the source it came from. That tier runs no
-        external tool, which keeps the engine free of any Swiss Ephemeris
-        dependency.
+        Hellenistic timing systems and Vedic calculations are deterministic, but
+        classical texts sometimes disagree on minor conventions. Where sources
+        diverge, Caelus documents its chosen convention (such as Brihat
+        Parashara Hora Shastra or P.V.R. Narasimha Rao&apos;s JHora
+        definitions) and locks it into the <code>validate_jyotish</code> test
+        suite with source citations, keeping verification self-contained with no
+        Swiss Ephemeris dependency.
       </P>
 
       <Note>
-        Swiss Ephemeris in Moshier mode carries its own model error. Where a
-        quantity is measured against that built-in theory rather than the full
-        JPL files, the gap is reported as the theory&apos;s error, not assigned
-        to Caelus. The true node is the clear case: within 1&Prime; of JPL DE431,
-        up to about 1&prime; against the Moshier lunar theory.
+        Swiss Ephemeris in Moshier mode carries its own approximation error. When
+        a benchmark compares against that built-in lunar theory instead of JPL
+        integration files, the gap reflects the Moshier model: the
+        true lunar node agrees within 1&Prime; of JPL DE431 and up to ~1&prime;
+        against Moshier.
       </Note>
 
-      <H2>Recovering effects by fitting</H2>
+      <H2>Fitted models and empirical constants</H2>
       <P>
-        Some effects are not published as a formula you can apply directly. Where
-        that happens, the coefficient or rule is recovered by fitting to a
-        reference and then frozen as data, with the raw samples kept for
-        reproducibility.
+        Where closed-form formulas are unavailable or too large to bundle,
+        coefficients are fit directly to reference ephemerides and committed
+        alongside the raw sample data for reproducibility:
       </P>
       <ul>
         <li>
-          <strong>Minor bodies.</strong> Chiron and the asteroids are Chebyshev
-          fits of JPL Horizons samples across 1600&ndash;2484, with residuals
-          under 5&times;10&#8315;&#8310; AU. They use the same geocentric pipeline
-          as the planets.
+          <strong>Minor bodies.</strong> Chiron and the major asteroids use
+          Chebyshev polynomials fit to JPL Horizons geometric states across
+          1600&ndash;2484 (residuals under 5&times;10&#8315;&#8310; AU), passed
+          through the same geocentric reduction pipeline as the planets.
         </li>
         <li>
-          <strong>Lunar eclipse magnitude.</strong> The Danjon enlargement of
-          Earth&apos;s shadow is recovered empirically against Swiss, which
-          brings lunar magnitudes within 0.0013.
+          <strong>Lunar eclipse magnitude.</strong> Earth&apos;s atmospheric
+          shadow enlargement (Danjon effect) is fit empirically against Swiss
+          Ephemeris, matching lunar magnitudes within 0.0013.
         </li>
         <li>
-          <strong>Uranian points.</strong> The Hamburg-school bodies use
-          constant-element Kepler orbits whose elements are fit to Swiss
-          Ephemeris&apos;s built-in definitions.
+          <strong>Uranian points.</strong> Trans-Neptunian hypothetical bodies
+          use fixed orbital elements matched to the Hamburg School definitions in
+          Swiss Ephemeris.
         </li>
         <li>
           <strong>Rise, set, and Gauquelin sectors.</strong> Disc-center
-          geometry with refraction is matched to the Swiss rise and set method.
+          altitude and standard atmospheric refraction parameters match the Swiss
+          Ephemeris horizon event convention.
         </li>
       </ul>
 
-      <H2>What gets reproduced, and how it is checked</H2>
+      <H2>Summary of verification checks</H2>
       <table className="data-table table-auto" style={{ fontSize: "0.85rem" }}>
         <thead>
           <tr>
             <th>Layer</th>
-            <th>Check</th>
+            <th>Verification scope</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Planet and Moon longitudes</td>
-            <td>JPL Horizons (DE441) across 1000&ndash;3000; the 1850&ndash;2150 figures remain vs Swiss Ephemeris</td>
+            <td>JPL Horizons (DE441) across 1000&ndash;3000; 1850&ndash;2150 benchmarked against Swiss Ephemeris</td>
           </tr>
           <tr>
-            <td>House cusps, 8 added systems</td>
-            <td>exact against swe_houses_armc, polar cases included</td>
+            <td>House cusps (additional systems)</td>
+            <td>Matched against <code>swe_houses_armc</code>, including high-latitude cases</td>
           </tr>
           <tr>
             <td>Vertex and east point</td>
-            <td>exact against swe_houses_armc</td>
+            <td>Matched against <code>swe_houses_armc</code></td>
           </tr>
           <tr>
             <td>Rise, set, meridian transit</td>
-            <td>root-finds against swe_rise_trans</td>
+            <td>Root-finding matched against <code>swe_rise_trans</code></td>
           </tr>
           <tr>
             <td>Crossings and lunar phases</td>
-            <td>against swe_solcross and swe_mooncross</td>
+            <td>Matched against <code>swe_solcross</code> and <code>swe_mooncross</code></td>
           </tr>
           <tr>
-            <td>Eclipse types</td>
-            <td>exact over 1990&ndash;2030, zero mismatches</td>
+            <td>Eclipse classifications</td>
+            <td>Verified across 1990&ndash;2030 with zero type mismatches</td>
           </tr>
         </tbody>
       </table>
       <P dim>
-        Full per-body bounds, including root-mean-square figures, are on{" "}
-        <A href="/validation">Validation</A>.
+        See <A href="/validation">Validation</A> for full per-body maximum and
+        RMS error figures.
       </P>
 
-      <H2>Where the method reaches its limit</H2>
+      <H2>Numerical limits and sensitivity</H2>
       <P>
-        A few quantities are ill-conditioned, and the accuracy table reports
-        them as they are rather than smoothing them over. A planetary station
-        is a speed-zero root with a slope near 0.01&deg; per day squared, so a
-        sub-arcsecond difference in position becomes a timing difference of
-        seconds to about a minute. The osculating lunar apogee, usually sold as
-        &quot;true Lilith&quot;, amplifies the lunar theory&apos;s own error by
-        roughly a factor of 1/e, so its values disagree across every software
-        package at that scale. Where a number in the tables is large,
-        the reason it is large is given with it.
+        Some astronomical events are numerically sensitive by nature, and the
+        validation tables document their actual tolerance. Near planetary
+        stations, orbital acceleration is roughly 0.01&deg; per day squared, so a
+        sub-arcsecond longitude difference can shift a station timestamp by
+        several seconds to a minute, while the osculating lunar apogee
+        (&quot;true Lilith&quot;) amplifies underlying lunar theory errors by
+        roughly 1/e, meaning slight differences between ephemerides at that scale
+        are expected across all software packages.
       </P>
 
       <P dim>

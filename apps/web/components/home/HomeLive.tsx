@@ -92,10 +92,10 @@ chart.bodies.saturn.retrograde; // ${satRx}`;
         />
       </section>
 
-      <section className="tile s12" aria-label="The ecliptic at this instant">
+      <section className="tile s12" aria-label="Current ecliptic longitudes">
         <div className="tile__h">
           <b>NOW</b>
-          <span>The ecliptic at this instant</span>
+          <span>Current ecliptic longitudes</span>
         </div>
         <SkyRibbon chart={chart} stamp={ribbonStamp} />
       </section>
@@ -111,18 +111,18 @@ chart.bodies.saturn.retrograde; // ${satRx}`;
         <div className="chart-fluid">
           <ChartWheel chart={chart} size={FIGURE} theme={WHEEL_THEME} />
         </div>
-        <p className="note">The event chart for this instant.</p>
+        <p className="note">Current event chart for New York.</p>
       </section>
       <section className="tile s8">
         <div className="tile__h">
           <b>TS</b>
-          <span>The call</span>
+          <span>Usage example</span>
         </div>
         <div className="tile__b">
           <p>
-            You pass a date, a UT time, a latitude, and a longitude, and the engine
-            returns a chart object your app, API, or AI tool can read. The sample
-            below is the New York instant drawn above.
+            Pass a UTC date and time, latitude, longitude, and house system to
+            compute a chart object containing body longitudes, house cusps, and
+            aspects. The example below produces the New York chart shown on the left.
           </p>
           <CodeBlock lang="bash" code="npm install caelus" />
           <CodeBlock lang="typescript" label="chart.ts" code={sample} />

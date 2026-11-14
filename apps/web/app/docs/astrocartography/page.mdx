@@ -6,7 +6,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Astrocartography",
-  description: "Compute where on Earth each planet is rising, setting, or on the meridian at one instant: the astrocartography and planetLines functions, how to test a place against a line, and the AstroMap component that draws them.",
+  description: "Compute rising, setting, upper culmination, and lower culmination lines worldwide with astrocartography and planetLines, and render them with AstroMap.",
   path: "/docs/astrocartography",
 });
 
@@ -14,11 +14,11 @@ export const metadata = pageMetadata({
 
 # Astrocartography
 
-At any instant each planet is rising along one curve on the Earth, setting
-along another, and crossing the meridian along two lines of longitude.
-`astrocartography` computes those four lines for each body, and `AstroMap` in
-`caelus-wheel` draws them. The calculation needs no extra data and runs on the
-embedded tier.
+At any given timestamp, each planet is rising along one curve across Earth,
+setting along another, and crossing the upper or lower meridian along two lines
+of longitude. `astrocartography` computes all four lines for each requested
+body, and `AstroMap` in `caelus-wheel` renders them directly on the embedded
+data tier with no extra downloads.
 
 ```ts
 import { Engine, astrocartography, planetLines, julianDay, gast, DEG, riseSet } from "caelus";
@@ -29,8 +29,8 @@ const engine = new Engine(embeddedData);
 
 ## The four lines
 
-`astrocartography` takes an instant and a list of bodies and returns one entry
-per body.
+Pass a Julian Day and an array of body identifiers to `astrocartography` to
+compute the lines for each body:
 
 ```ts
 const jd = julianDay(1990, 6, 10, 14, 30);   // 10 June 1990, 14:30 UT
@@ -41,11 +41,11 @@ const lines = astrocartography(engine, jd, [
 lines.venus.mc;   // -74.98
 ```
 
-`mc` is the longitude where the body is on the upper meridian, and `ic` is the
-longitude opposite it, where the body is on the lower meridian. `asc` and
-`dsc` are the rising and setting tracks, each an array of
-`[longitude, latitude]` points with one point per degree of latitude.
-Longitudes are east-positive, from −180 to 180.
+`mc` is the longitude where the body crosses the upper meridian and `ic` is
+the opposite longitude where it crosses the lower meridian. `asc` and `dsc`
+hold the rising and setting curves as arrays of `[longitude, latitude]` pairs
+spaced at one-degree latitude intervals by default. All longitudes use
+east-positive coordinates from −180° to +180°.
 
 | Body | `mc` | `ic` | `asc` at 40°N | `dsc` at 40°N | Points per track |
 |---|---|---|---|---|---|
@@ -57,8 +57,8 @@ Longitudes are east-positive, from −180 to 180.
 | Jupiter | −10.06 | 169.94 | −120.71 | 100.59 | 135 |
 | Saturn | −180.00 | 0.00 | 108.93 | −108.93 | 137 |
 
-Saturn's meridian lines fall within a hundredth of a degree of the date line
-and of Greenwich at this instant, which is a coincidence of the moment chosen.
+At this chosen timestamp, Saturn's meridian lines align within a hundredth of
+a degree with the antimeridian and prime meridian.
 
 <div style={{ margin: "1rem 0 1.5rem", display: "flex", justifyContent: "center", overflowX: "auto" }}>
   <AstroMap
@@ -70,18 +70,20 @@ and of Greenwich at this instant, which is a coincidence of the moment chosen.
   />
 </div>
 
-The map above is the same call, drawn by `AstroMap`. The vertical lines are
-the MC and IC meridians and the curves are the rising and setting tracks.
+Rendered with `AstroMap`, vertical lines mark the MC and IC meridians while the
+curves show the rising and setting tracks.
 
-## Testing a place against a line
+## Measuring distance from a location
 
-A meridian line is a single longitude, so its distance from a place is the
-difference in longitude. Venus has its MC line at −74.98 and New York is at
-−74.01, which puts the line 0.97° to the west, or 82 km at that latitude.
+Because meridian lines lie along constant longitudes, checking how far a city
+lies from an MC or IC line is simply a difference in longitude. Venus's MC is
+at −74.98° and New York lies at −74.01°, putting the line 0.97° (about 82 km)
+west of the city.
 
-A rising or setting track has to be read at the latitude of the place. The
-default spacing of one degree is coarse for that, so pass a finer step as the
-last argument and take the point nearest the latitude.
+Rising and setting tracks curve across latitudes, so evaluating a specific city
+benefits from finer latitude spacing than the default 1° step. Pass a smaller
+step size as the sixth argument (following the south and north latitude limits)
+and match the closest latitude sample:
 
 ```ts
 const fine = astrocartography(engine, jd, ["jupiter"], -85, 85, 0.01);
@@ -90,24 +92,25 @@ const [lon] = fine.jupiter.asc.find(([, lat]) => Math.abs(lat - 61.22) < 0.005);
 lon;   // -149.97
 ```
 
-Anchorage is at 61.22°N, −149.90. Jupiter's rising line crosses that latitude
-at −149.97, which is 0.07° or 4 km west of the city, so Jupiter is on the
-eastern horizon there at this instant.
-
-The fourth and fifth arguments are the southern and northern limits of the
-tracks, −85 and 85 by default.
+Anchorage sits at 61.22° N, −149.90° E. Jupiter's rising curve crosses that
+latitude at −149.97°, just 0.07° (roughly 4 km) west of the city, putting
+Jupiter on the eastern horizon at this timestamp. The fourth and fifth
+arguments set the southern and northern latitude limits (`-85` and `85` by
+default).
 
 ## What a line marks
 
-A line marks where the body itself is on the horizon or the meridian. That is
-a statement about the body's right ascension and declination, and it differs
-from the body's zodiac degree matching the Ascendant or Midheaven whenever the
-body has ecliptic latitude.
+Astrocartography lines track where the body itself aligns with the local horizon
+or meridian in equatorial coordinates (right ascension and declination).
+Whenever a body has nonzero ecliptic latitude, this location differs slightly
+from where the body's ecliptic longitude matches the Ascendant or Midheaven
+degree.
 
-The lines are also geometric. They place the centre of the disc on the
-horizon, seen from the centre of the Earth, with no refraction. `riseSet`
-reproduces that when it is asked for the same thing, and its default answer
-shows the size of the difference.
+These curves are also purely geometric: they place the center of the body's
+disc on an unrefracted horizon as seen from Earth's center. Calling `riseSet`
+with `{ discCenter: true, pressure: 0 }` matches that exact timestamp, whereas
+default `riseSet` parameters reveal the offset caused by solar radius and
+atmospheric refraction:
 
 ```ts
 const [sunLon] = lines.sun.asc.find(([, lat]) => lat === 40);   // -148.55
@@ -119,27 +122,28 @@ riseSet(engine, "sun", jd - 0.5, 40, sunLon, "rise");
 // 300.0 s before jd
 ```
 
-With the disc centre and no atmosphere, the Sun rises at that point within a
-second of the instant the line was computed for. The visible sunrise, when the
-upper limb clears a refracted horizon, comes five minutes earlier, so at this
-instant the visible sunrise at 40°N is happening 1.25° of longitude west of
-the line.
+With disc-center geometry and zero refraction, sunrise at that point matches
+within a second. Visible sunrise (when the upper solar limb clears a refracted
+horizon) occurs 5 minutes earlier, placing observable sunrise at 40° N roughly
+1.25° west of the geometric curve.
 
 ## Where a track stops
 
-A body never rises or sets poleward of the latitude where it becomes
-circumpolar, so its tracks stop there. The Sun's declination at this instant
-is 23.02°, and its tracks run from 66°S to 66°N in 133 points. Mars is close
-to the equator and its tracks fill the whole default band, 171 points from
-85°S to 85°N. The single point where a track would touch its limiting
-latitude is left out, because the longitude there is ill-conditioned.
+Rising and setting tracks terminate poleward of the latitude where a body
+becomes circumpolar (never rising or setting). At this timestamp, the Sun's
+declination is 23.02°, bounding its curves between 66° S and 66° N (133 points).
+Mars sits close to the celestial equator, so its curves span the entire
+default range from 85° S to 85° N (171 points). The exact tangent latitude
+where a track touches its polar limit is omitted because longitude sensitivity
+becomes numerically ill-conditioned there.
 
-## Any point on the sphere
+## Custom sky coordinates and fixed stars
 
-`astrocartography` reads each body's position and calls `planetLines`, which
-takes a right ascension, a declination, and the Greenwich apparent sidereal
-time, all in degrees. Call it directly for a fixed star or any other point.
-`gast` returns radians, so divide by `DEG`.
+`astrocartography` looks up each body's equatorial coordinates and delegates to
+`planetLines`, which accepts right ascension, declination, and Greenwich
+apparent sidereal time (all in degrees). Call `planetLines` directly for fixed
+stars or arbitrary sky coordinates, dividing `gast` (returned in radians) by
+`DEG`:
 
 ```ts
 const star = engine.fixedStar("Sirius", jd);
@@ -152,11 +156,11 @@ sirius.asc.length;   // 147, from 73°S to 73°N
 planetLines(star.ra, star.dec, g, -60, 60, 5).asc.length;   // 25
 ```
 
-## Drawing the map
+## Rendering with AstroMap
 
-`AstroMap` takes the object `astrocartography` returns and renders an SVG on
-an equirectangular projection. It has no client-side code, so it renders on
-the server.
+`AstroMap` accepts the object returned by `astrocartography` and renders an
+equirectangular SVG projection. Because it uses no client-side state or
+effects, it renders cleanly in server components.
 
 ```tsx
 import { AstroMap } from "caelus-wheel";
@@ -164,29 +168,27 @@ import { AstroMap } from "caelus-wheel";
 <AstroMap lines={lines} width={680} height={340} />
 ```
 
-| Prop | Default | Meaning |
+| Prop | Default | Description |
 |---|---|---|
-| `lines` | required | The output of `astrocartography` |
-| `width`, `height` | 720, 360 | Size in pixels |
-| `show` | all four | Which lines to draw, from `"mc"`, `"ic"`, `"asc"`, `"dsc"` |
-| `colors` | built-in palette | A colour per body id |
-| `graticule` | `true` | The grid of meridians and parallels |
-| `theme` | dark | Ink overrides, as for `ChartWheel` |
-| `children` | none | SVG drawn under the lines |
+| `lines` | required | Output object from `astrocartography` |
+| `width`, `height` | `720`, `360` | SVG dimensions in pixels |
+| `show` | all four | Subset of `"mc"`, `"ic"`, `"asc"`, `"dsc"` to render |
+| `colors` | built-in palette | Color mapping keyed by body ID |
+| `graticule` | `true` | Whether to draw meridian and parallel grid lines |
+| `theme` | dark | Ink overrides matching `ChartWheel` |
+| `children` | `none` | Custom SVG elements drawn beneath the lines |
 
-The basemap is the graticule alone. The package bundles no coastline data, so
-a map of the continents is yours to supply: pass SVG paths in the same
-projection as `children` and they are drawn beneath the lines.
+By default, `AstroMap` draws only the coordinate graticule and planetary lines.
+To add coastlines or borders, pass SVG paths in the same equirectangular
+projection via `children` so they render underneath the lines.
 
 ## Accuracy
 
-The lines add geometry to positions the engine already publishes bounds for.
-Right ascension and declination hold within 2.6″ of Swiss Ephemeris from 1850
-to 2150, with the Moon the worst case, and 2.6″ of right ascension moves a
-meridian line 80 m along the equator. The figures are on
+Equatorial right ascension and declination hold within 2.6″ of Swiss Ephemeris
+from 1850 to 2150 (worst case on the Moon, where 2.6″ shifts an equatorial
+meridian line by roughly 80 m). Full error bounds are published on
 [Validation](/validation).
 
-The TypeScript functions are held to the Python reference by a golden suite
-of 392 checks at a tolerance of 1e-7 degrees. A rising or setting track is
-least certain near the latitude where it stops, where a small change in
-declination moves the line a long way.
+TypeScript geometry routines match the Python reference across 392 checks at
+a tolerance of 1e-7°. Near a rising or setting track's polar limit, small
+changes in declination shift the track's longitude substantially.

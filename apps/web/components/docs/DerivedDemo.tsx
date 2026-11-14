@@ -33,7 +33,7 @@ export function ReturnsTimeline() {
   const from = julianDay(2026, 1, 1);
   const dates = solarReturn(sampleEngine, SAMPLE_JD, from, from + 365.25 * 10).map(jdToDate);
   return (
-    <DocFigure caption={<>Ten years of solar returns from {jdToDate(from)}: the search is a span, so a timeline is one call.</>}>
+    <DocFigure caption={<>Ten years of solar returns starting from {jdToDate(from)}. Because <code>solarReturn</code> accepts a date range, you can generate an entire timeline in a single call.</>}>
       <div className="mono" style={{ fontSize: "0.82rem", display: "flex", flexWrap: "wrap", gap: "0.4rem 1.1rem" }}>
         {dates.map((d) => <span key={d} className="mute">{d}</span>)}
       </div>

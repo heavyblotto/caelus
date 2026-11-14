@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Deep Time",
-  description: "Compute before 1000 CE: the era packs and which bodies have them, what the Node loader adds to the embedded tier, Julian calendar dates, the delta-T model, and what its uncertainty does to an ancient chart.",
+  description: "Compute planetary positions back to 3000 BCE using binary era packs, Julian calendar dates, Earth-rotation offsets (ΔT), and epoch uncertainty checks.",
   path: "/docs/deep-time",
 });
 
@@ -10,10 +10,12 @@ export const metadata = pageMetadata({
 
 # Deep time
 
-The engine's default data is validated from 1000 to 3000 CE. Era packs carry
-seven bodies back to 3000 BCE, and they load in Node. A date that old also
-needs a calendar, a model of the Earth's rotation, and a way to say which
-bodies are missing. This guide covers all four.
+The bundled embedded tier is validated from 1000 to 3000 CE. To reach back
+to 3000 BCE for the seven classical bodies, load the binary era packs in
+Node.js or fetch them on demand in the browser. Historical astronomy also
+requires switching to the Julian calendar, modeling Earth's rotational drift
+(ΔT), and checking which modern outer planets are excluded before their
+ephemeris spans begin. This guide covers all four.
 
 ```ts
 import {
@@ -27,15 +29,15 @@ const engine = new Engine(loadNodeData("node_modules/caelus/data"));
 
 ## What the era packs cover
 
-An era pack is a Chebyshev fit to JPL Horizons (DE441) for one body from
-3000 BCE to 1000 CE. It sits beside the body's modern pack as
-`{body}_cheb.classical.json` and ends at the instant the modern pack begins,
-so the two read as one span. Seven bodies have one: the Sun (through the
-Earth's pack), the Moon, Mercury, Venus, Mars, Jupiter, and Saturn.
+An era pack stores a Chebyshev polynomial fit to JPL Horizons (DE441) for a
+single body from 3000 BCE to 1000 CE. Stored alongside modern data files as
+`{body}_cheb.classical.json`, each era pack joins the modern pack continuously at
+1000 CE. Seven bodies have era packs: the Sun (via the Earth pack), the Moon,
+Mercury, Venus, Mars, Jupiter, and Saturn.
 
-`engineCapabilities` reports what a given engine can compute. Each entry in
-`bodies` names the body's `source`, its `validated` span, and the `fitted`
-span of its packs, in astronomical years.
+Call `engineCapabilities` to inspect the active `source`, `validated` span, and
+`fitted` span (in astronomical years) for each body loaded into an `Engine`
+instance:
 
 ```ts
 engineCapabilities(engine).bodies.find((b) => b.body === "saturn");
@@ -52,13 +54,13 @@ engineCapabilities(engine).bodies.find((b) => b.body === "saturn");
 | Pluto | 1885 to 2099 | 1000 to 3000 |
 | Chiron | 1600 to 2484 | 1600 to 2484 |
 
-Astronomical years count a year zero, so −2998 is 2999 BCE. Jupiter and
-Saturn start a few years earlier because their packs are cut in longer
-segments, and each pack is a whole number of segments ending where the modern
-pack begins.
+Astronomical years count a year `0` (1 BCE), so `−2998` equals 2999 BCE.
+Jupiter and Saturn packs begin a few years earlier because their fits are cut
+into longer multi-year segments aligned to finish exactly where the modern pack
+starts.
 
-Each era pack records its worst error against the Horizons samples it was
-fitted from, as a distance:
+Each era pack records its maximum residual error against the JPL Horizons
+samples used to generate it:
 
 ```ts
 engine.data.eraPacks.saturn[0].provenance.true_error_au;   // 0.0000057
@@ -74,30 +76,30 @@ engine.data.eraPacks.saturn[0].provenance.true_error_au;   // 0.0000057
 | Earth (the Sun) | 5.7e-6 AU |
 | Moon | 7.9 km |
 
-## Embedded and Node
+## Embedded tier vs. Node.js loader
 
-`loadNodeData` takes the directory that holds the packs, which is the `data`
-folder of the installed `caelus` package. It loads the Horizons packs for the
-planets, the Earth, Pluto, and the Moon, the era packs beside them, and the
-asteroids, Uranian points, and star catalogs. The embedded tier in
-`caelus/data-embedded` carries compact series in their place and no era pack.
+Passing the package `data` folder to `loadNodeData` loads the modern Horizons
+packs (planets, Earth, Pluto, Moon), the pre-1000 CE era packs, and the
+asteroid, Uranian, and fixed-star catalogs. `caelus/data-embedded`
+replaces the large planetary packs with compact trigonometric series and omits
+all era packs.
 
-The embedded tier does not refuse an ancient date. It computes from its series
-and attaches an `outside_validated_range` warning for the Sun, the Moon, and
-each planet, because nothing before 1000 CE was measured for it. For 24 January 76 CE the two
-tiers disagree by 47″ on the Moon, 40″ on Saturn, 13″ on Jupiter, and 5″ or
-less on the Sun, Mercury, Venus, and Mars.
+When given a pre-1000 CE date, the embedded tier still computes coordinates
+from its compact series while attaching an `outside_validated_range` warning
+for affected bodies, because those series were never calibrated prior to
+1000 CE. On 24 January 76 CE, the two tiers differ by 47″ on the Moon, 40″ on
+Saturn, 13″ on Jupiter, and up to 5″ on the Sun, Mercury, Venus, and Mars.
 
-The hosted MCP endpoint uses the embedded tier, and a page in a browser
-starts on it. A local `caelus-mcp` uses the Node loader.
+The hosted MCP endpoint and initial browser views run on the embedded tier,
+while local `caelus-mcp` instances use the Node.js loader.
 
-## The full packs in a browser
+## Loading full packs in the browser
 
-A browser bundle carries the embedded tier. The full packs are 27.4 MB in 17
-files, too much to bundle, and a page can fetch the ones it needs.
-`loadPacks` takes a manifest of the packs a site publishes and a function
-that fetches one file, and returns engine data with those packs placed over a
-base.
+While the compact embedded tier ships inside client bundles, the full ephemeris
+packs total 27.4 MB across 17 files, which is too large for an upfront bundle.
+Browser apps can fetch only the required slices on demand via `loadPacks`,
+passing a pack manifest and a fetch callback to overlay downloaded packs onto
+`embeddedData`:
 
 ```ts
 import { Engine, loadPacks, selectPacks } from "caelus";
@@ -114,31 +116,29 @@ const data = await loadPacks(embeddedData, manifest, packs,
 const engine = new Engine(data);
 ```
 
-`selectPacks` picks what a computation needs: the packs of the bodies named,
-the Earth's for the Sun and for every planet, and only the eras the years
-touch. A planet needs the Earth because its position in the sky is the
-difference of the two; with Saturn's pack alone, the Earth would still come
-from the embedded series. The call above selects five files, 4.2 MB. All
-seven classical bodies across both eras are 14 files, 27.2 MB.
+`selectPacks` picks only the files required by your query: the requested
+planetary packs, the Earth pack (needed both for the Sun and to transform
+heliocentric planetary positions into geocentric coordinates), and the era files
+spanning the target years. The call above selects five files totaling 4.2 MB;
+loading both eras for all seven classical bodies takes 14 files totaling
+27.2 MB.
 
-The manifest lists each file's size and SHA-256. The loader checks both
-before it decodes a pack, and it rejects with a `PackIntegrityError` if one
-bit differs. It fetches only the files it is handed, and only ones the
-manifest lists.
+The manifest records every file's byte length and SHA-256 hash. Before decoding
+any buffer, `loadPacks` checks both values and throws `PackIntegrityError` on
+any mismatch. It fetches only the files passed in `packs` that appear in the
+manifest.
 
-An engine built this way gives the positions an engine on `loadNodeData`
-gives, because both decode the same files into the same fields. The loader's
-test compares 28 positions with `===`, at four instants from 2500 BCE to 1990.
-The loader runs in browsers, in Node, and in a Cloudflare Worker. It needs Web
-Crypto, which a browser provides on HTTPS and on `localhost`.
+Once decoded, the overlaid browser engine produces bitwise-identical results to
+`loadNodeData` (verified across 28 positions from 2500 BCE to 1990 CE with
+`===`). The loader works in browsers, Node.js, and Cloudflare Workers via Web
+Crypto, which browsers enable on HTTPS and `localhost`. Keep memory usage in
+mind: loading all 14 classical pack files adds roughly 135 MB to a Chromium tab.
 
-Decoded packs take memory. With all 14 files loaded, one Chromium tab held
-about 135 MB more than before.
-
-This site publishes its packs at `/data/packs/`, and the
-[Sky Dating instrument](/instruments/sky-dating) loads them when its Data
-control is set to the full packs. The format and the publishing step are in
-[`docs/binary-packs.md`](https://github.com/heavyblotto/caelus/blob/main/docs/binary-packs.md).
+This site hosts its pack files at `/data/packs/`, and the
+[Sky Dating instrument](/instruments/sky-dating) fetches them automatically when
+switched to full packs. See
+[`docs/binary-packs.md`](https://github.com/heavyblotto/caelus/blob/main/docs/binary-packs.md)
+for the binary specification and publishing workflow.
 
 ## A chart in 76 CE
 
@@ -159,19 +159,21 @@ chart.unavailable;   // ["uranus", "neptune", "pluto", "chiron"]
 | Jupiter | 26°33′ Capricorn |
 | Saturn | 29°57′ Sagittarius |
 
-The Ascendant is 20°26′ Capricorn. The date is the one the
-[Sky Dating](/docs/sky-dating) guide recovers from seven sign positions.
+The Ascendant sits at 20°26′ Capricorn, matching the 76 CE chart recovered in
+the [Sky Dating](/docs/sky-dating) guide from seven zodiac signs alone.
 
-`chart.unavailable` lists the bodies whose packs do not reach the instant.
-They are left out of `chart.bodies` instead of being computed from data that
-was never fitted there, so code that reads a body should check for it first.
-`engine.position("uranus", jd)` throws a `RangeError` for the same reason.
+Bodies whose ephemeris packs do not cover the target timestamp are listed in
+`chart.unavailable` and omitted from `chart.bodies`, ensuring uncalibrated
+extrapolations do not leak into output. Calling `engine.position("uranus", jd)`
+for the same date throws a `RangeError`, so application code handling historical
+charts should inspect `chart.unavailable` before accessing outer planets.
 
 ## Julian calendar dates
 
-Historical dates before 15 October 1582 are written in the Julian calendar.
-`julianDay` reads its date as Gregorian unless the seventh argument says
-otherwise, and `calendarDate` converts back in either calendar.
+Historical dates prior to 15 October 1582 are recorded in the Julian calendar.
+`julianDay` interprets dates as Gregorian by default unless `"julian"` is
+passed as the seventh argument, and `calendarDate` accepts the same option to
+format Julian Days in either calendar:
 
 ```ts
 julianDay(76, 1, 24, 6, 0, 0, "julian");   // 1748839.75
@@ -181,12 +183,11 @@ calendarDate(1748839.75, "julian");   // { year: 76, month: 1, day: 24, hour: 6 
 calendarDate(1748839.75);             // { year: 76, month: 1, day: 22, hour: 6 }
 ```
 
-The two calendars are two days apart in the first century and ten days apart
-at the reform: 4 October 1582 in the Julian calendar is Julian Day 2299159.5,
-and 15 October 1582 in the Gregorian is 2299160.5, the next day.
-
-Years are astronomical here too. The total solar eclipse of 28 May 585 BCE is
-in year −584:
+The calendars differ by two days in the 1st century CE and ten days at the
+1582 Gregorian reform: 4 October 1582 Julian (Julian Day 2299159.5) was
+followed immediately by 15 October 1582 Gregorian (Julian Day 2299160.5). Using
+astronomical years, the total solar eclipse of 28 May 585 BCE occurs in year
+`−584`:
 
 ```ts
 const [eclipse] = solarEclipses(engine,
@@ -196,29 +197,30 @@ eclipse.type;                           // "total"
 calendarDate(eclipse.tMax, "julian");   // 28 May, hour 14.44, which is 14:26 UT
 ```
 
-## ΔT
+## ΔT (Earth rotation offset)
 
-The packs are computed on a uniform timescale, Terrestrial Time. A date and
-clock time are in Universal Time, which follows the rotation of the Earth,
-and the rotation is slowing unevenly. ΔT is the difference between the two.
-The engine applies it to every instant, and `deltaT` returns it in seconds.
+Ephemeris packs advance in Terrestrial Time (TT), a uniform astronomical
+timescale, whereas calendar dates and civil clocks run in Universal Time (UT),
+which follows Earth's slightly irregular rotation. ΔT is the offset in seconds
+between those two timescales. Caelus applies ΔT automatically across chart and
+event functions and exposes it via `deltaT`.
 
-The model joins published sources in order. From 1955 to 2025 it uses the
-values the IERS observed, and from 1948 to 1955 the Espenak and Meeus polynomial. From −720
-to 1948 it uses the spline of Morrison, Stephenson, Hohenkerk, and Zawilski
-(2021), which is fitted to historical eclipse and occultation records. Before
-−1520 it uses the same authors' long-term parabola, and from −1520 to −720 a
-Hermite curve joins the parabola to the spline. That join is this engine's
-construction and is not part of the published table. After 2025 the value is
-an extrapolation.
+The built-in ΔT curve splices standard published datasets across time: IERS
+observations from 1955 to 2025, the Espenak and Meeus polynomial from 1948 to
+1955, the Morrison, Stephenson, Hohenkerk, and Zawilski (2021) spline fitted to
+historical eclipses and occultations from −720 to 1948, and their long-term
+parabolic fit before −1520. Between −1520 and −720, Caelus interpolates
+between the parabola and the spline using a custom Hermite transition bridge
+not found in the published tables. Values beyond 2025 are extrapolated.
 
-`deltaTSigma` returns the one-sigma uncertainty of ΔT for a year. Before 1700
-it is the larger of two published numbers: the standard error tabulated with
-Stephenson, Morrison, and Hohenkerk's 2016 values, and the amount by which
-the authors' 2020 revision moved the value at that epoch. Around 1000 CE the
-revision moved ΔT by 180 seconds where the 2016 table stated 15, so the
-revision sets the figure there. Before −720 the published values are
-extrapolations, and before −2000 the engine extends the table at its slope.
+`deltaTSigma` estimates the one-sigma uncertainty of ΔT in seconds for any
+year. Prior to 1700, it returns the larger of two published metrics: the
+standard error from Stephenson, Morrison, and Hohenkerk (2016) or the magnitude
+by which their 2020 revision moved the curve. Around 1000 CE, the 2020 revision
+shifted ΔT by 180 seconds where the 2016 table had listed 15 seconds, so
+`deltaTSigma` reports 180 seconds. Before −720 the source figures rely on
+extrapolation, and before −2000 Caelus extends the published uncertainty table
+linearly at its boundary slope.
 
 ```ts
 deltaT(julianDay(76, 1, 1, 0, 0, 0, "julian"));   // 9647.4
@@ -237,17 +239,18 @@ deltaTSigma(76);                                  // 148.8
 | 1800 | 18 | 1 | 0.00° | 0.01′ |
 | 2000 | 64 | 0.06 | 0.00° | 0.00′ |
 
-Each row is the first day of its year. The last two columns turn sigma into
-position. The Ascendant and Midheaven
-rotate 0.25° for each minute of clock error, and the Moon moves 0.55″ each
-second. In 2999 BCE the correction itself is 20.9 hours, and it is known to
-about eleven minutes.
+Each row samples January 1 of the given year and translates clock sigma into
+sky uncertainty: the Ascendant and Midheaven rotate roughly 0.25° per minute
+of clock error, while the Moon moves 0.55″ per second. By 2999 BCE, the total
+ΔT offset reaches 20.9 hours with a one-sigma uncertainty of roughly one hour
+(3,598 seconds).
 
 ## What the warning means
 
-A chart computed for an epoch where sigma is 10 seconds or more carries a
-`delta_t_uncertain` warning. That covers every year up to 1666, and it
-returns from 2137 as the extrapolation widens.
+Whenever a chart is calculated at an epoch with ΔT sigma of 10 seconds or
+more, Caelus attaches a `delta_t_uncertain` warning. That threshold applies to
+every year up to 1666 CE and resumes from 2137 CE onward as future extrapolations
+diverge.
 
 ```ts
 chart.warnings;
@@ -255,36 +258,37 @@ chart.warnings;
 //    angleSmearDeg: 1.02, moonSmearArcmin: 2.24, text: "..." }]
 ```
 
-For the 76 CE chart, the clock time maps to an instant on the uniform
-timescale that is uncertain by about four minutes. The Ascendant and
-Midheaven are good to about a degree and the Moon to about two arcminutes.
-The planets move too slowly for four minutes to show.
+In the 76 CE chart, a four-minute clock uncertainty translates to roughly 1° on
+the Ascendant and Midheaven and around two arcminutes on the Moon, while slower
+planets barely move.
 
-Whether that matters depends on the question. `chartStability` answers it
-fact by fact, and with no window given it uses the ΔT sigma of the epoch:
+To check whether that clock uncertainty alters any discrete astrological
+placements, call `chartStability`, which defaults to the epoch's ΔT sigma when
+no explicit window is supplied:
 
 ```ts
 chartStability(engine, jd, { lat: 41.9, lonEast: 12.5 }).summary;
 // { facts: 31, stable: 31 }
 ```
 
-Every fact of this chart holds across the uncertainty: each sign, house,
-aspect, and direction of motion, the sect, and the sign on each angle.
-[Uncertain Times](/docs/uncertain-time) covers the function, and
-[Sky Dating](/docs/sky-dating) covers searching for a date when the time is
-the unknown.
+In this Rome chart, all 31 chart facts (signs, houses, aspects, retrograde
+status, sect, and angle signs) hold across the uncertainty band. See
+[Uncertain Times](/docs/uncertain-time) for `chartStability` options, or
+[Sky Dating](/docs/sky-dating) when you need to recover an unknown historical
+date from planetary placements.
 
 ## Limits
 
-- Uranus, Neptune, Pluto, Chiron, and the asteroids have no era pack. With the
-  Node loader they are unavailable before 1000 CE, or before 1600 for Chiron
-  and the asteroids.
-- The accuracy table publishes arcsecond bounds for 1000 to 3000 and none yet
-  for the era packs. The recorded fit errors above are the measurement that
-  exists. The modern figures are on [Validation](/validation).
-- Sigma before −2000 is an extrapolation of the published table, which
-  stops there. At 3000 BCE it is an hour, which is 15° on the angles: a chart
-  that far back fixes the planets and leaves the houses open.
-- The era packs ship in the npm tarball as binary files and are about 16 MB
-  of it. A browser bundle does not include them. A page fetches the ones it
-  needs with `loadPacks`.
+- Outer bodies (Uranus, Neptune, Pluto, Chiron, and asteroids) lack pre-1000 CE
+  era packs, so they are unavailable before 1000 CE (and before 1600 CE for
+  Chiron and asteroids).
+- Published arcsecond validation bounds cover 1000 to 3000 CE on the
+  [Validation](/validation) page; pre-1000 CE era packs only report the
+  polynomial fit residuals tabulated above.
+- ΔT sigma estimates before −2000 extrapolate the published table linearly past
+  its lower boundary. At 3000 BCE, the one-sigma clock error reaches an hour
+  (15° in longitude on the angles), so planetary positions remain well
+  constrained while house cusps and angles cannot be determined reliably.
+- Binary era packs account for about 16 MB of the npm package tarball. Client
+  bundles exclude them by default and fetch subsets on demand with
+  `loadPacks`.

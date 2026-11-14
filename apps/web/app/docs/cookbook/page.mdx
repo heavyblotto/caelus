@@ -3,7 +3,7 @@ import { pageMetadata } from "../../../lib/seo";
 export const metadata = pageMetadata({
   title: "Common Tasks",
   description:
-    "Copy-paste recipes for the things people and agents ask for most: house placement, essential dignities, aspects, stations, ingresses, lunar phases, and a local birth time done right.",
+    "Copy-paste examples for house placements, essential dignities, aspects, stations, ingresses, lunar phases, and timezone-safe birth charts.",
   path: "/docs/cookbook",
 });
 
@@ -11,13 +11,14 @@ export const metadata = pageMetadata({
 
 # Common Tasks
 
-Short recipes for the things people, and AI agents, ask for most. Each returns
-plain structured data, positions, houses, dignities, dates, with no
-interpretation; that layer is yours. For the engine itself see{" "}
-<a href="/docs/charts">Computing Charts</a>; to drive it from a chat agent over
-MCP, jump to <a href="#for-agents-over-mcp">For agents</a> below.
+Short code examples covering common chart calculations: house placements,
+dignities, aspect patterns, planetary stations, sign ingresses, and local time
+conversion. Every function returns structured JSON with no built-in narrative
+interpretation. See <a href="/docs/charts">Computing Charts</a> for core options,
+or jump to <a href="#for-agents-over-mcp">For agents</a> to use these tools
+over MCP.
 
-Every recipe assumes an `engine`:
+All snippets below assume an initialized `Engine`:
 
 <CodeBlock
   lang="typescript"
@@ -29,14 +30,14 @@ const engine = new Engine(embeddedData);
 const jd = julianDay(2026, 6, 14); // a Julian Day (UT) to work from`}
 />
 
-Event search (stations, ingresses, rise/set) wants the fuller Node data tier;
-see <a href="/docs/data-tiers">Data Tiers</a> for loading it.
+High-precision event searches (stations, ingresses, rise/set) typically run
+best with the Node data loader; see <a href="/docs/data-tiers">Data Tiers</a>.
 
 ## Cast a natal chart
 
-`chart()` takes calendar fields in **UT** and a place. It returns the bodies
-(each enriched with its house and dignities), the angles, the twelve cusps, and
-the aspects found among the bodies.
+`engine.chart()` takes UT calendar fields and geographic coordinates, returning
+every body (annotated with its house and essential dignities), the chart angles,
+twelve house cusps, and all in-orb aspects:
 
 <CodeBlock
   lang="typescript"
@@ -50,10 +51,10 @@ chart.cusps;            // [house 1, ..., house 12], degrees
 chart.aspects.length;   // aspects within the active orbs`}
 />
 
-## Which house is a planet in?
+## Read a body's house placement
 
-Each body in a chart carries its 1-based house, so there's nothing to recompute
-from the cusps.
+Every body entry already carries its 1-based house number so you do not need to
+compare longitudes against `chart.cusps` manually:
 
 <CodeBlock
   lang="typescript"
@@ -64,11 +65,11 @@ chart.bodies.mars.house;   // e.g. 7
 chart.bodies.moon.sign;    // e.g. "Cancer"`}
 />
 
-## Essential dignities of a planet
+## Check essential dignities
 
-Each body also carries the essential dignities it holds in its sign (domicile,
-exaltation, detriment, fall). The standalone `dignities()` answers the same for
-any body-in-sign without a chart.
+Each body in a chart lists any sign-based essential dignities (`domicile`,
+`exaltation`, `detriment`, `fall`). Call the standalone `dignities()` helper to
+check any planet-and-sign pair without building a full chart:
 
 <CodeBlock
   lang="typescript"
@@ -82,12 +83,12 @@ dignities("mars", "Aries");    // ["domicile"]
 dignities("sun", "Libra");     // ["fall"]`}
 />
 
-## Score essential dignities (traditional)
+## Score traditional essential dignities
 
-For the full traditional treatment, `dignityScore()` weights all five dignities
-(Lilly: rulership 5, exaltation 4, triplicity 3, term 2, face 1; detriment -5,
-fall -4) for a planet at a longitude in a day or night chart, and `almuten()`
-finds the planet that rules a given degree most strongly.
+`dignityScore()` evaluates all five traditional dignities using Lilly's point
+weights (rulership +5, exaltation +4, triplicity +3, term +2, face +1,
+detriment −5, fall −4) for a degree and chart sect (`"day"` or `"night"`).
+`almuten()` identifies the planet holding the highest score at a given degree:
 
 <CodeBlock
   lang="typescript"
@@ -100,10 +101,11 @@ dignityScore("venus", 32, "day"); // 2 Taurus, day
 almuten(5, "day"); // ruler of 5 Aries by day -> { planet: "sun", score: 7 }`}
 />
 
-## The aspects in a chart
+## List chart aspects
 
-`chart.aspects` is the list of aspects among the bodies, each with the two
-bodies, the aspect name, and the orb from exact.
+`chart.aspects` contains all active aspects between bodies, including both body
+identifiers, the aspect type, phase (`applying`, `separating`, or `exact`),
+strength, and orb from exact:
 
 <CodeBlock
   lang="typescript"
@@ -116,11 +118,11 @@ chart.aspects;
 
 ## Detect aspect patterns
 
-`detectPatterns()` finds the classical configurations, T-squares, grand trines,
-grand crosses, yods, kites, mystic rectangles, and stelliums by sign and house,
-as structured objects. Reported patterns are maximal: a grand cross hides the
-T-squares it contains. Orbs follow the engine defaults (plus a quincunx for
-yods) and are overridable.
+`detectPatterns()` identifies classical chart configurations (T-squares, grand
+trines, grand crosses, yods, kites, mystic rectangles, and stelliums by sign and
+house). Reported patterns are maximal, so a grand cross suppresses its nested
+T-squares. Default orbs match the engine (plus quincunxes for yods) and can be
+overridden:
 
 <CodeBlock
   lang="typescript"
@@ -133,12 +135,11 @@ detectPatterns(chart);
 // [{ kind: "mystic_rectangle", bodies: ["chiron","moon","pluto","venus"], orb: 2.54 }, ...]`}
 />
 
-## Read a chart's signature
+## Compute a chart signature
 
-`chartSignature()` summarises a chart's structure as plain counts: element,
-modality, angularity, quadrant, and hemisphere distributions, plus the dominant
-element / modality / sign and the classical chart ruler. Counts only, no
-interpretation.
+`chartSignature()` aggregates element, modality, angularity, quadrant, and
+hemisphere counts alongside the dominant element, modality, and sign and the
+classical chart ruler:
 
 <CodeBlock
   lang="typescript"
@@ -153,10 +154,10 @@ sig.dominant;   // { element: "earth", modality: "cardinal", sign: "Capricorn" }
 sig.ruler;      // "sun" (ruler of the Ascendant's sign)`}
 />
 
-## When does a planet next station?
+## Find planetary stations
 
-`stations()` returns the retrograde and direct stations in a window, each as
-`[jd, direction]`.
+`stations()` returns every retrograde and direct station within a time window
+as `[jd, direction]` pairs:
 
 <CodeBlock
   lang="typescript"
@@ -167,10 +168,11 @@ stations(engine, "mercury", jd, jd + 365);
 // [[2461190.4, "retrograde"], [2461214.1, "direct"], ...]`}
 />
 
-## When does a planet change sign (ingress)?
+## Find sign ingresses
 
-A sign ingress is a longitude crossing of a sign cusp (a multiple of 30°).
-`crossings()` returns every JD a body crosses the target longitude in the window.
+Because each sign begins at a multiple of 30°, a sign ingress corresponds to a
+longitude crossing. `crossings()` returns every Julian Day inside the window when
+a body reaches the target longitude:
 
 <CodeBlock
   lang="typescript"
@@ -181,7 +183,7 @@ A sign ingress is a longitude crossing of a sign cusp (a multiple of 30°).
 const [next] = crossings(engine, "mars", 60, jd, jd + 800);`}
 />
 
-## Lunar phases in a window
+## List lunar phases
 
 <CodeBlock
   lang="typescript"
@@ -192,12 +194,12 @@ lunarPhases(engine, jd, jd + 90);
 // [[jd, "new"], [jd, "first_quarter"], [jd, "full"], ...]`}
 />
 
-## Transits to a natal chart
+## Find transits to a natal chart
 
-`when()` answers "when is this configuration true?" over a range. To find when a
-transiting planet aspects a natal point, take that point's longitude from the
-natal chart and search for the aspect. Each result is an `[jdStart, jdEnd]`
-interval, the window the aspect holds within orb.
+`when()` evaluates boolean sky predicates over a time span. To find transits
+to a natal placement, pass the natal body's longitude into `aspect()` and scan a
+window; each match returns a `[jdStart, jdEnd]` interval while the aspect holds
+within orb:
 
 <CodeBlock
   lang="typescript"
@@ -213,10 +215,10 @@ const windows = when(engine, aspect("mars", "conjunction", natal.bodies.sun.lon)
 windows[0]; // [jdStart, jdEnd] of the first pass`}
 />
 
-## Sunrise and sunset at a place
+## Find sunrise and sunset
 
-`riseSet()` returns the JD of the next event after `jdStart`, or `null` if it
-doesn't occur (e.g. polar day or night).
+`riseSet()` returns the Julian Day of the next horizon or meridian event after
+`jd`, or `null` if none occurs (such as during polar day or night):
 
 <CodeBlock
   lang="typescript"
@@ -228,11 +230,12 @@ const sunrise = riseSet(engine, "sun", jd, 27.95, -82.46, "rise");
 const sunset = riseSet(engine, "sun", jd, 27.95, -82.46, "set");`}
 />
 
-## Parans (co-angular bodies)
+## Compute parans (co-angular bodies)
 
-`parans()` finds bodies that are simultaneously on the angles (rising,
-culminating, setting, anti-culminating) over a day at a latitude, within a
-stated tolerance. Latitude only; the daily pattern is longitude-independent.
+`parans()` finds pairs of bodies that simultaneously cross the horizon or
+meridian at a given latitude within a specified time tolerance (default 30
+minutes). Because diurnal arcs depend only on declination and latitude, no
+longitude is required:
 
 <CodeBlock
   lang="typescript"
@@ -243,10 +246,11 @@ parans(engine, jd, 27.95); // 30-minute window by default
 // [{ a: "jupiter", a_angle: "rise", b: "mars", b_angle: "mtransit", gap_min: 20, ... }, ...]`}
 />
 
-## The next solar return
+## Compute a solar return chart
 
-`solarReturn()` returns the JDs in a window where the Sun returns to its natal
-longitude; pass the first into `chartAt()` for the return chart.
+`solarReturn()` finds the Julian Days within a search range when the Sun returns
+to its natal longitude. Pass the returned timestamp into `engine.chartAt()` to
+cast the return chart:
 
 <CodeBlock
   lang="typescript"
@@ -258,11 +262,12 @@ const [returnJd] = solarReturn(engine, natalJd, jd, jd + 366);
 const returnChart = engine.chartAt(returnJd, 27.95, -82.46, "placidus");`}
 />
 
-## A local birth time, done right
+## Convert local birth times safely
 
-The core takes UT. Real birth times are local wall-clock, and a naive conversion
-silently lands the chart hours off. `caelus-birth` resolves the time zone from
-the coordinates offline and applies historical daylight-saving rules.
+Because `caelus` operates in Universal Time, passing local wall-clock time
+directly introduces multi-hour errors in house cusps and angles. Use
+`caelus-birth` to resolve the IANA zone offline from latitude/longitude and
+convert historical daylight saving rules into UT:
 
 <CodeBlock
   lang="typescript"
@@ -278,12 +283,13 @@ const { chart, utc, zone } = localToChart(
 chart.angles.asc; // computed from the correct UT instant`}
 />
 
-## A Vedic snapshot: nakshatra and current dasha
+## Check Vedic nakshatra and dasha periods
 
-Caelus is sidereal-aware. Take the Moon's longitude in a sidereal zodiac, read
-its nakshatra, and find the active Vimshottari period for a date. See{" "}
-<a href="/docs/vedic">Vedic &amp; Jyotish</a> for vargas, the other dashas, and
-the yogas.
+Caelus supports sidereal zodiacs directly. Request the Moon's longitude in a
+sidereal ayanamsa (such as `"sidereal:lahiri"`), pass it to `nakshatra()`, and
+compute the active Vimshottari period with `vimshottariActive()`. See{" "}
+<a href="/docs/vedic">Vedic &amp; Jyotish</a> for divisional vargas, alternative
+dashas, and planetary yogas:
 
 <CodeBlock
   lang="typescript"
@@ -299,43 +305,27 @@ vimshottariActive(moonLon, birthJd, jd);  // { maha, antar, pratyantar } for "no
 
 ## For agents over MCP
 
-The same capabilities are exposed as MCP tools, so a chat agent can do real
-astrological work and get back structured, **interpretation-free** JSON, the
-agent supplies the meaning. Connect the server first (see{" "}
-<a href="/docs/mcp">MCP Setup</a>), then reach for:
+The same calculations are available as MCP tools returning structured,
+interpretation-free JSON so AI clients can handle reasoning and narrative
+generation cleanly. After connecting an MCP client (see{" "}
+<a href="/docs/mcp">MCP Setup</a>), key tools include:
 
-- **`natal_chart`** / **`current_sky`**: a full chart (bodies with house and
-  dignities, angles, cusps, aspects) for a moment and place.
-- **`transits`**: transiting bodies and the aspects they make to a natal chart.
-- **`find_aspect_dates`**: when a given aspect is exact across a date range.
-- **`sky_events`**: stations, ingresses, lunar phases, rise/set in a window.
-- **`synastry`** / **`composite`**: geometry between two charts.
-- **`dignities`**, **`void_of_course`**, **`planetary_hours`**, **`returns`**,
-  **`progressions`**: the classical building blocks.
-- **`aspect_patterns`** / **`chart_signature`**: the named configurations
-  (T-squares, grand trines, yods, stelliums) and a chart's element, modality,
-  and quadrant counts with its ruler.
-- **`similar_skies`**, **`electional_search`**, **`cosmic_weather`**: when the
-  sky last resembled a moment, the best window for a set of aspects, and a
-  date's active configurations and stations.
-- **`parans`**: co-angular pairs (bodies simultaneously rising, culminating,
-  setting, or anti-culminating) over a day at a latitude.
-- **`output: "canonical"`** on the chart, returns, and parans tools: integer
-  payloads on a declared grid plus a sha256 digest, stable across machines
-  and languages, hashable for caching and dedupe, with sign/house/aspects
-  re-derived from the quantized values so numbers and facts always agree.
-  Add `remainders` to also get the integer sub-quantum residues quantization
-  discarded: a digest-bound sidecar that composes back into the finer-grid
-  payload exactly, and doubles as a rounding-boundary fragility report.
+- **`natal_chart`** / **`current_sky`**: complete charts with body positions, houses, dignities, angles, cusps, and aspects.
+- **`transits`**: transiting positions and active aspects relative to a natal chart.
+- **`find_aspect_dates`**: timestamps when a specified planetary aspect reaches exactness in a date window.
+- **`sky_events`**: planetary stations, sign ingresses, lunar phases, and rise/set times.
+- **`synastry`** / **`composite`**: inter-chart aspects and midpoint/composite charts.
+- **`dignities`**, **`void_of_course`**, **`planetary_hours`**, **`returns`**, **`progressions`**: traditional Hellenistic and timing helpers.
+- **`aspect_patterns`** / **`chart_signature`**: named aspect configurations (T-squares, grand trines, yods, stelliums) and element/modality/quadrant summaries with chart ruler.
+- **`similar_skies`**, **`electional_search`**, **`cosmic_weather`**: historical sky similarity scans, electional window ranking, and daily planetary summaries.
+- **`parans`**: co-angular body pairs (simultaneously rising, culminating, setting, or anti-culminating) at a latitude.
+- **`output: "canonical"`** on chart, return, and parans tools: quantized integer payloads paired with a SHA-256 digest for deterministic cross-runtime hashing and caching, with signs, houses, and aspects derived from the quantized integers so facts stay self-consistent. Adding `remainders` returns an integer residue sidecar that reconstructs finer grid steps accurately and flags rounding-boundary sensitivity.
 
-Each tool returns numbers and structured objects, never an interpretation, so it
-composes cleanly into whatever reasoning or prose the agent is doing. The full
-list and schemas live in <a href="/docs/mcp">MCP Setup</a>.
+Full tool definitions and schemas are documented in{" "}
+<a href="/docs/mcp">MCP Setup</a>.
 
 ## See also
 
-- <a href="/docs/recipes">Recipes</a> for the advanced surface: the `when()`
-  query language, configuration matching, and rendering a chart wheel.
-- <a href="/playground">Playground</a> to run charts and wheels live in the
-  browser.
-- <a href="/docs/api">API Reference</a> for the full package surface.
+- <a href="/docs/recipes">Recipes</a>: advanced queries with `when()`, configuration matching, and wheel rendering.
+- <a href="/playground">Playground</a>: test chart calculations and interactive wheels live in your browser.
+- <a href="/docs/api">API Reference</a>: complete module and function reference.

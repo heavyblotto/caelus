@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Synthetic Ephemeris",
-  description: "Give imaginary bodies motion over time: placement, periodic, and Kepler tiers; register them on Engine for transits, returns, and SkyView; report an unsatisfiable system as unsatisfiable.",
+  description: "Model custom orbital or periodic bodies in placement, periodic, and Kepler modes, register them on Engine, and project them into Sky View frames.",
   path: "/docs/synthetic",
 });
 
@@ -10,29 +10,31 @@ export const metadata = pageMetadata({
 
 # Synthetic ephemeris
 
-`compileForm` solves for body longitudes at one instant. The synthetic module
-extends that idea: **bodies that move** from authored parameters, so transits,
-returns, retrograde arcs, and SkyView animation all work on fictional worlds.
+While `compileForm` solves planetary positions for a single static snapshot, the
+synthetic ephemeris module lets you define moving imaginary bodies with custom
+parameters so transits, returns, retrograde loops, and Sky View animations work
+out of the box on fictional worlds.
 
-Three tiers, increasing in physics:
+Three motion modes offer increasing physical realism:
 
-| Mode | What it does |
-|------|----------------|
-| `placement` | Fixed longitude — parity with `compileForm` |
-| `periodic` | Uniform motion: one full cycle every `periodDays` |
-| `kepler` | Constant orbital elements; true heliocentric xyz |
+| Mode | Behavior |
+|------|----------|
+| `placement` | Fixed longitude matching `compileForm` |
+| `periodic` | Uniform circular motion completing one orbit every `periodDays` |
+| `kepler` | Constant orbital elements with true heliocentric coordinates |
 
-## World frame vs real sky
+## World frame vs. Earth sky
 
-**World frame**: `syntheticPositions` / `syntheticEphemeris`. Optional
-`observer` on the system fixes the vantage point; outer bodies show apparent
-retrograde near opposition. Time is in abstract day units matching each body's
-`periodDays` and `epoch`.
+**World frame (`syntheticPositions` / `syntheticEphemeris`)**: evaluates bodies
+inside their own standalone coordinate frame. Setting `observer` on the system
+anchors the vantage point to a chosen body so outer objects display apparent
+retrograde motion near opposition. Time is measured in abstract days relative to
+each body's `periodDays` and `epoch`.
 
-**Real sky**: `registerSyntheticSystem(engine, sys)`. Bodies drop into a live
-`Engine` through `registerSource`; `returns`, `transits`, and `skyView` consume
-them with zero changes. Here `epoch` on each body is a **TT Julian Day**, and
-the vantage point is Earth.
+**Real Earth sky (`registerSyntheticSystem(engine, sys)`)**: mounts synthetic
+bodies onto a live `Engine` via `registerSource` so `returns`, `transits`, and
+`skyView` include them alongside real planets. In this mode, `epoch` uses a TT
+Julian Day and the observer is Earth:
 
 ```ts
 import { Engine, registerSyntheticSystem, julianDay, skyView } from "caelus";
@@ -61,14 +63,15 @@ const frame = skyView(engine, jd, {
 
 ## Validation
 
-`validateSyntheticSystem` flags duplicate ids, non-positive periods,
-out-of-range eccentricity, and observers that are not system bodies. Unsound
-systems set `impossible: true` and list `problems`; they are not silently
-computed.
+`validateSyntheticSystem` catches duplicate body IDs, non-positive orbital
+periods, out-of-range eccentricities, and `observer` references missing from
+the system. Invalid configurations return `impossible: true` alongside a
+`problems` list instead of failing silently.
 
-## MCP
+## MCP integration
 
 `caelus-mcp` exposes `synthetic_validate`, `synthetic_positions`, and
-`synthetic_sky_view`. See [MCP Setup](/docs/mcp).
+`synthetic_sky_view`. See [MCP Setup](/docs/mcp) for configuration.
 
-Full design notes live in the repo at `docs/synthetic.md`.
+Additional design notes are documented in the repository under
+`docs/synthetic.md`.

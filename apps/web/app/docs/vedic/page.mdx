@@ -3,7 +3,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Vedic & Jyotish",
-  description: "The Vedic layer in caelus: nakshatras, the Vimshottari, Yogini, and Ashtottari dashas, the Parashari vargas, and the yogas, on the validated sidereal chart, each convention pinned to a named authority.",
+  description: "Vedic calculations in caelus: nakshatras, Vimshottari, Yogini, and Ashtottari dashas, Parashari vargas, and classical yogas on validated sidereal positions.",
   path: "/docs/vedic",
 });
 
@@ -11,17 +11,15 @@ export const metadata = pageMetadata({
 
 # Vedic and Jyotish
 
-Caelus computes a full Jyotish layer on the sidereal chart: nakshatras, the
-nakshatra-based dashas, the divisional charts, and the yogas. It builds on the
-sidereal longitudes already validated against Swiss Ephemeris; the techniques
-themselves are deterministic arithmetic.
+Caelus includes a Jyotish module built directly on its validated sidereal
+longitudes, covering nakshatras, nakshatra-based dashas, divisional charts
+(vargas), and classical yogas.
 
-Several Vedic techniques carry named convention variants. Rather than assert
-one, Caelus pins each to a named authority (BPHS, or the JHora/PVR Narasimha
-Rao implementation where the texts differ) and records the citation in a
-`validate_jyotish` reference tier, the same discipline the engine uses for
-positions (see [Methods](/methods)). The default ayanamsa is Lahiri; pass any
-sidereal mode where a function takes a `zodiac`.
+Where classical Jyotish sources define multiple calculation variants, Caelus
+selects a documented standard (such as Brihat Parashara Hora Shastra or P.V.R.
+Narasimha Rao's JHora conventions) and verifies it in the `validate_jyotish`
+test suite (see [Methods](/methods)). Functions default to the Lahiri ayanamsa
+and accept any supported sidereal zodiac.
 
 ```text
 import { julianDay } from "caelus";
@@ -30,7 +28,8 @@ const natal = julianDay(1990, 6, 10, 14, 30);   // UT
 
 ## Nakshatras
 
-The 27 lunar mansions of 13°20′, each with four padas and a ruling planet.
+Divide the sidereal zodiac into the 27 lunar mansions of 13°20′ each, returning
+the nakshatra name, quarter (`pada` 1–4), and dasha ruler:
 
 <CodeBlock
   lang="typescript"
@@ -49,14 +48,15 @@ n.lord;   // the dasha lord of the nakshatra`}
 
 ## Dashas
 
-Three nakshatra-based dasha systems, each started from the Moon's birth
-nakshatra with the elapsed portion set by how far the Moon has moved through it,
-and each subdividing into proportional sub-periods.
+Three nakshatra-based dasha systems start from the Moon's birth nakshatra,
+scaling the opening period by the elapsed arc of that mansion and subdividing
+into proportional sub-periods:
 
-- **Vimshottari**: the 120-year cycle, the most widely used; gives the
-  mahadasha, antardasha, and pratyantardasha.
-- **Yogini**: the 36-year cycle of eight yoginis.
-- **Ashtottari**: the 108-year conditional dasha (JHora/PVR mapping).
+- **Vimshottari**: the standard 120-year cycle returning active mahadasha,
+  antardasha, and pratyantardasha lords.
+- **Yogini**: the 36-year cycle spanning eight yoginis.
+- **Ashtottari**: the 108-year conditional dasha using JHora/PVR nakshatra
+  assignments.
 
 <CodeBlock
   lang="typescript"
@@ -72,9 +72,10 @@ ashtottariAt(engine, natal, target);    // { maha, antar, ... }`}
 
 ## Vargas (divisional charts)
 
-The Parashari divisional charts D1 (rasi), D2 (hora), D3 (drekkana), D9
-(navamsa), D10 (dasamsa), D12 (dwadasamsa), and D30 (trimsamsa). The navamsa is
-the most consulted after the rasi.
+Compute Parashari divisional placements for D1 (rasi), D2 (hora), D3
+(drekkana), D9 (navamsa), D10 (dasamsa), D12 (dwadasamsa), and D30
+(trimsamsa), either for a single longitude (`varga`) or across every body in a
+chart (`vargaChart`):
 
 <CodeBlock
   lang="typescript"
@@ -88,11 +89,10 @@ vargaChart(engine, natal, 9);`}
 
 ## Yogas
 
-Classical combinations on the rasi chart: the five Pancha Mahapurusha yogas,
-Gajakesari, Budha-Aditya, and Chandra-Mangala by placement; Kemadruma (an
-isolated Moon, with a parameterized planet set); and a lordship-and-drishti
-layer (house lordship, graha drishti, and the association of lords) giving
-raja and dhana yogas and the chart's yogakarakas.
+Evaluate classical rasi combinations: the five Pancha Mahapurusha yogas,
+Gajakesari, Budha-Aditya, and Chandra-Mangala placement yogas; Kemadruma
+(isolated Moon, with a configurable planet list); and house-lordship and graha
+drishti combinations yielding raja yogas, dhana yogas, and chart yogakarakas:
 
 <CodeBlock
   lang="typescript"
@@ -105,5 +105,5 @@ kemadrumaAt(engine, natal, 27.95, -82.46);   // { present, planets_checked }`}
 
 <YogasList />
 
-Full signatures are in the [API Reference](/docs/api). For the Western time-lord
-techniques, see [Hellenistic Time-Lords](/docs/hellenistic).
+See the [API Reference](/docs/api) for full TypeScript signatures, or{" "}
+[Hellenistic Time-Lords](/docs/hellenistic) for Western timing systems.
