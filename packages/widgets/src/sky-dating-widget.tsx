@@ -21,13 +21,18 @@
  */
 import type { ReactElement } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { SIGNS, VERSION, type Engine, type PackManifest, type Zodiac } from "caelus";
+import {
+  heliacalKindsFor, SIGNS, VERSION,
+  type Engine, type HeliacalKind, type PackManifest, type Zodiac,
+} from "caelus";
+import { kindLabel, VISIBILITY_PLACES, VISIBILITY_TARGETS } from "./first-visibility.js";
 import {
   buildConstraints, callSource, eraYear, jdOfYear, megabytes, packBytes,
   packsForQuery, PackStore, searchSky, signAbbr, signDegree, signsAt,
-  SKY_BODIES, SKY_PHASES, SKY_PRESETS, stampOf, windowText,
+  SKY_BODIES, SKY_PHASES, SKY_PRESETS, SKY_WITHIN, stageText, stampOf,
+  visibilityIssue, windowDates,
   type PackLoadProgress, type PackSource, type SkyBodyId, type SkyPhaseId,
-  type SkyQuery, type SkySearch, type SkyTier,
+  type SkyQuery, type SkySearch, type SkyTier, type SkyVisibilityQuery,
 } from "./sky-dating.js";
 
 /** The widest span the form accepts, in astronomical years. */
@@ -52,9 +57,12 @@ export interface SkyDatingProps {
   packs?: PackSource;
 }
 
-/** A stage label for display: the engine's label with its first letter raised. */
-function stageLabel(label: string): string {
-  return label.charAt(0).toUpperCase() + label.slice(1);
+/** The place a visibility opens on when the block is switched on: Babylon. */
+const OPENING_PLACE = VISIBILITY_PLACES.find((p) => p.id === "babylon") ?? VISIBILITY_PLACES[0];
+
+function placeId(place: SkyVisibilityQuery["place"]): string {
+  const hit = VISIBILITY_PLACES.find((p) => p.lat === place.lat && p.lonEast === place.lonEast);
+  return hit ? hit.id : "custom";
 }
 
 function niceStep(range: number): number {
@@ -87,6 +95,7 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
   const [running, setRunning] = useState(false);
   const [seconds, setSeconds] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
+  const [failed, setFailed] = useState<string | null>(null);
   const runId = useRef(0);
 
   // The data tier the form selects, and the one the shown result came from.
@@ -104,7 +113,8 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
   const spanOk = Number.isFinite(query.startYear) && Number.isFinite(query.endYear)
     && query.startYear >= SKY_SPAN.from && query.endYear <= SKY_SPAN.to
     && query.endYear >= query.startYear;
-  const canRun = constraints.length > 0 && spanOk;
+  const issue = spanOk ? visibilityIssue(query) : null;
+  const canRun = constraints.length > 0 && spanOk && issue === null;
 
   const run = useCallback(async (q: SkyQuery, on: SkyTier = "embedded") => {
     const id = ++runId.current;
@@ -113,6 +123,7 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
     setRan(q);
     setSeconds(null);
     setPackError(null);
+    setFailed(null);
 
     // On the full tier, fetch what this query lacks before searching.
     let searchEngine = engine;
@@ -144,10 +155,18 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
     setRanEngine(searchEngine);
     setRanPacks(used);
     const t0 = performance.now();
-    const result = await searchSky(searchEngine, q, {
-      onProgress: (s) => { if (runId.current === id) setSearch(s); },
-      cancelled: () => runId.current !== id,
-    });
+    let result: SkySearch;
+    try {
+      result = await searchSky(searchEngine, q, {
+        onProgress: (s) => { if (runId.current === id) setSearch(s); },
+        cancelled: () => runId.current !== id,
+      });
+    } catch (err) {
+      if (runId.current !== id) return;
+      setFailed(err instanceof Error ? err.message : String(err));
+      setRunning(false);
+      return;
+    }
     if (runId.current !== id) return;
     setSearch(result);
     setSeconds((performance.now() - t0) / 1000);
@@ -200,7 +219,9 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
         startYear: SKY_SPAN.from, endYear: SKY_SPAN.to,
       });
     } else if (id === "clear") {
-      setQuery({ ...query, signs: {}, phase: null });
+      const rest = { ...query, signs: {}, phase: null };
+      delete rest.visibility;
+      setQuery(rest);
     } else {
       const p = SKY_PRESETS.find((x) => x.id === id);
       if (p) setQuery(p.query);
@@ -214,6 +235,32 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
     setQuery({ ...query, signs });
     setPresetId("custom");
   };
+
+  // The visibility block. Off is the absence of the key, so the queries of
+  // the presets that have none compare equal before and after a round trip.
+  const setVisibility = (v: SkyVisibilityQuery | undefined): void => {
+    const rest = { ...query };
+    delete rest.visibility;
+    setQuery(v ? { ...rest, visibility: v } : rest);
+    setPresetId("custom");
+  };
+  const chooseTarget = (id: string): void => {
+    if (id === "") { setVisibility(undefined); return; }
+    const kinds = heliacalKindsFor(engine, id);
+    const cur = query.visibility;
+    setVisibility({
+      target: id,
+      kind: cur && kinds.includes(cur.kind) ? cur.kind : kinds[0],
+      place: cur?.place ?? { lat: OPENING_PLACE.lat, lonEast: OPENING_PLACE.lonEast },
+      within: cur?.within ?? 0,
+    });
+  };
+  const vis = query.visibility;
+  const visKinds = useMemo(
+    () => (vis ? heliacalKindsFor(engine, vis.target) : []),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [engine, vis?.target],
+  );
 
   const preset = SKY_PRESETS.find((p) => p.id === presetId);
   const shown = ran ?? query;
@@ -297,7 +344,9 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
             Sky dating takes a partial description of a sky and lists every
             date that fits it. A horoscope that names the sign of each planet
             and gives no year can be dated this way, by matching it against
-            the computed sky across several thousand years.
+            the computed sky across several thousand years. A constraint
+            can also be an event: the first or last day a planet or a star
+            was seen from one place.
           </p>
         </div>
       </div>
@@ -344,6 +393,78 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
               {SKY_PHASES.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
             </select>
           </div>
+          <div className="fld fld--opt">
+            <span aria-hidden="true">✶</span>
+            <label htmlFor="sd-vis">Visibility</label>
+            <select id="sd-vis" value={vis?.target ?? ""} onChange={(e) => chooseTarget(e.target.value)}>
+              <option value="">No first or last visibility</option>
+              <optgroup label="Stars">
+                {VISIBILITY_TARGETS.filter((t) => t.group === "star").map((t) => <option key={t.id} value={t.id}>{t.label}</option>)}
+              </optgroup>
+              <optgroup label="Planets">
+                {VISIBILITY_TARGETS.filter((t) => t.group === "planet").map((t) => <option key={t.id} value={t.id}>{t.label}</option>)}
+              </optgroup>
+              <optgroup label="Moon">
+                {VISIBILITY_TARGETS.filter((t) => t.group === "moon").map((t) => <option key={t.id} value={t.id}>{t.label}</option>)}
+              </optgroup>
+            </select>
+          </div>
+          {vis && (
+            <>
+              <div className="fld fld--opt">
+                <span />
+                <label htmlFor="sd-vis-kind">Event</label>
+                <select
+                  id="sd-vis-kind" value={vis.kind}
+                  onChange={(e) => setVisibility({ ...vis, kind: e.target.value as HeliacalKind })}
+                >
+                  {visKinds.map((k) => <option key={k} value={k}>{kindLabel(k)}</option>)}
+                </select>
+              </div>
+              <div className="fld fld--opt">
+                <span />
+                <label htmlFor="sd-vis-place">Seen from</label>
+                <select
+                  id="sd-vis-place" value={placeId(vis.place)}
+                  onChange={(e) => {
+                    const p = VISIBILITY_PLACES.find((x) => x.id === e.target.value);
+                    if (p) setVisibility({ ...vis, place: { lat: p.lat, lonEast: p.lonEast } });
+                  }}
+                >
+                  {VISIBILITY_PLACES.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+                  {placeId(vis.place) === "custom" && <option value="custom">Your own</option>}
+                </select>
+              </div>
+              <div className="fld fld--opt fld--pair">
+                <span />
+                <label htmlFor="sd-vis-lat">Lat, lon</label>
+                <input
+                  id="sd-vis-lat" type="number" inputMode="decimal" step="any" aria-label="Latitude, north positive"
+                  min={-90} max={90} value={vis.place.lat}
+                  onChange={(e) => setVisibility({ ...vis, place: { ...vis.place, lat: Number(e.target.value) } })}
+                />
+                <input
+                  type="number" inputMode="decimal" step="any" aria-label="Longitude, east positive"
+                  min={-180} max={180} value={vis.place.lonEast}
+                  onChange={(e) => setVisibility({ ...vis, place: { ...vis.place, lonEast: Number(e.target.value) } })}
+                />
+              </div>
+              <div className="fld fld--opt">
+                <span />
+                <label htmlFor="sd-vis-within">Within</label>
+                <select
+                  id="sd-vis-within" value={vis.within}
+                  onChange={(e) => setVisibility({ ...vis, within: Number(e.target.value) })}
+                >
+                  {SKY_WITHIN.map((d) => (
+                    <option key={d} value={d}>
+                      {d === 0 ? "0 days, exact" : `${d} ${d === 1 ? "day" : "days"} each side`}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </>
+          )}
           <div className="fld fld--opt">
             <span />
             <label htmlFor="sd-pad">Widen by</label>
@@ -417,6 +538,10 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
             {spanOk
               ? `${eraYear(query.startYear)} to ${eraYear(query.endYear)}. Years are astronomical, so 0 is 1 BCE and -409 is 410 BCE.`
               : `Years must run from ${SKY_SPAN.from} to ${SKY_SPAN.to}, first before last.`}
+            {issue ? ` ${issue}` : ""}
+            {vis && !issue
+              ? " The visibility is taken last and found one event at a time, so the search is slow when the positions leave long windows. Stop ends it."
+              : ""}
             {preset ? ` ${preset.note}` : ""}
           </p>
         </form>
@@ -439,7 +564,7 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
               {(search?.stages ?? []).map((st, i, all) => (
                 <div className={`tl__row${i === all.length - 1 ? " tl__row--hit" : ""}`} key={st.constraint}>
                   <div className="tl__lab">
-                    <span>{i > 0 ? "+ " : ""}<b>{stageLabel(st.label)}</b></span>
+                    <span>{i > 0 ? "+ " : ""}<b>{stageText(st, shown)}</b></span>
                     <i>{st.spans.length.toLocaleString("en-US")}</i>
                   </div>
                   <Track spans={st.spans} jd0={jd0} jd1={jd1} />
@@ -469,7 +594,7 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
               <i>positions at the middle of each window</i>
             </div>
             {rows.list.length === 0
-              ? <p className="empty">{loading ? "Loading packs." : running ? "Searching." : "No window fits every constraint in this span."}</p>
+              ? <p className="empty">{failed ? `The search stopped: ${failed}.` : loading ? "Loading packs." : running ? "Searching." : "No window fits every constraint in this span."}</p>
               : (
                 <div className="scroll">
                   <table className="rd">
@@ -489,10 +614,11 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
                           <tr key={r.start}>
                             <td className="up">{i + 1}</td>
                             <td className="em">
-                              {windowText(r.start, r.end)}
+                              {windowDates(r.start, r.end, shown)}
                               <small>
                                 {a.calendar === "julian" ? "Julian" : "Gregorian"},{" "}
                                 {days < 1 ? `${(days * 24).toFixed(1)} hours` : `${days.toFixed(1)} days`}
+                                {shown.visibility ? ", local days" : ""}
                               </small>
                             </td>
                             <td>{a.ut}</td>
@@ -521,7 +647,7 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
                 <tbody>
                   {(search?.stages ?? []).map((st, i) => (
                     <tr key={st.constraint}>
-                      <td className="em">{i > 0 ? "+ " : ""}{stageLabel(st.label)}</td>
+                      <td className="em">{i > 0 ? "+ " : ""}{stageText(st, shown, true, VISIBILITY_PLACES)}</td>
                       <td className="r">{st.spans.length.toLocaleString("en-US")}</td>
                       <td className="r">{Math.round(st.days).toLocaleString("en-US")}</td>
                     </tr>
@@ -554,7 +680,14 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
             The search prunes from the slowest body to the fastest. It finds
             the windows in which Saturn is in its sign, looks for Jupiter only
             inside those, and continues down to the Moon. Each track above
-            is what one constraint left standing.
+            is what one constraint left standing. A first or last visibility
+            is an event and cannot be scanned, so it is taken last: inside
+            each window the positions leave, the events are found one after
+            another. The{" "}
+            <a href="/instruments/first-visibility">First Visibility instrument</a>{" "}
+            shows one such event in detail, and{" "}
+            <a href="/docs/heliacal">First and last visibility</a> describes
+            the model.
           </p>
         </div>
       </section>
@@ -576,7 +709,7 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
               The result above was computed on the embedded data tier, in
               your browser. Against the full packs it stays within 0.02° after
               1 CE and within 0.09° back to 1000 BCE; at 3000 BCE Saturn is up
-              to 0.7° off. For the two presets it finds the same windows. Their
+              to 0.7° off. For the two horoscope presets it finds the same windows. Their
               edges differ by up to about 6 minutes for the Babylonian tablet
               and about 27 minutes for the horoscope of Hadrian.{" "}
               {packs
@@ -592,9 +725,13 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
           <p>
             Dates before 15 October 1582 are in the Julian calendar. A window
             is a span of UT in which every constraint holds, so one with the
-            Moon in it is two or three days long. The preset signs are the
-            ones usually quoted for each text and have not been checked
-            against the printed editions.
+            Moon in it is two or three days long. A visibility holds on whole
+            local days at its place, from the event under a clearer sky to
+            the event under a hazier one. With a visibility set, the Window
+            column gives the days at that place, and Opens gives the same
+            instant in UT. The signs of the two horoscope
+            presets are the ones usually quoted for each text and have not
+            been checked against the printed editions.
           </p>
         </div>
       </section>

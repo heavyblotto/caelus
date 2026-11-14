@@ -15,8 +15,8 @@
  */
 import {
   calendarDate, dateSky, Engine, fetchPacks, julianDay, mergePacks, selectPacks, SIGNS,
-  type DateSkyResult, type EngineData, type LoadedPack, type PackManifest,
-  type PackManifestEntry, type SkyConstraint, type Zodiac,
+  type DateSkyResult, type EngineData, type HeliacalKind, type LoadedPack,
+  type PackManifest, type PackManifestEntry, type SkyConstraint, type Zodiac,
 } from "caelus";
 
 /** The bodies the form offers, slowest first, with their glyphs. */
@@ -46,6 +46,26 @@ export const SKY_PHASES = [
 
 export type SkyPhaseId = (typeof SKY_PHASES)[number]["id"];
 
+/** A first or last visibility as the form holds it: the event `heliacal`
+ *  finds for a target and kind at one place. */
+export interface SkyVisibilityQuery {
+  /** A planet id, `"moon"`, or a catalog star name. */
+  target: string;
+  kind: HeliacalKind;
+  /** Where the observer stood. East longitude is positive. */
+  place: { lat: number; lonEast: number };
+  /** Days to widen the event's window of dates on each side. */
+  within: number;
+}
+
+/** The "within" values the form offers, in days. */
+export const SKY_WITHIN = [0, 1, 3, 7, 14] as const;
+
+/** The longest span, in years, the form searches for a visibility with no
+ *  position beside it. Each event in the range is one `heliacal` search, so
+ *  a longer span needs a position to prune it first. */
+export const VISIBILITY_ALONE_YEARS = 100;
+
 /** What the form holds. A body with no entry is unconstrained. */
 export interface SkyQuery {
   /** Sign index 0–11 per body. */
@@ -57,6 +77,9 @@ export interface SkyQuery {
   /** Astronomical years, both inclusive: year 0 is 1 BCE. */
   startYear: number;
   endYear: number;
+  /** A first or last visibility that must fall in the window. Absent when
+   *  the form's visibility block is off. */
+  visibility?: SkyVisibilityQuery;
 }
 
 /** The first day the Gregorian calendar was in use: 15 October 1582. */
@@ -79,7 +102,59 @@ export function buildConstraints(q: SkyQuery): SkyConstraint[] {
     const p = SKY_PHASES.find((x) => x.id === q.phase)!;
     out.push({ elongation: ["moon", "sun"], from: p.from, to: p.to });
   }
+  if (q.visibility) {
+    const v = q.visibility;
+    const visibility = { target: v.target, kind: v.kind, lat: v.place.lat, lonEast: v.place.lonEast };
+    out.push(v.within > 0 ? { visibility, within: v.within } : { visibility });
+  }
   return out;
+}
+
+/** How many position constraints a query sets: signs and the phase. */
+export function positionCount(q: SkyQuery): number {
+  let n = q.phase ? 1 : 0;
+  for (const b of SKY_BODIES) if (q.signs[b.id] !== undefined) n++;
+  return n;
+}
+
+/**
+ * Why a query's visibility cannot be run, or null when it can (or when the
+ * query has none). The place must be on the globe, and a visibility with no
+ * position beside it is searched one event at a time, so its span is capped
+ * at {@link VISIBILITY_ALONE_YEARS} years.
+ */
+export function visibilityIssue(q: SkyQuery): string | null {
+  const v = q.visibility;
+  if (!v) return null;
+  const { lat, lonEast } = v.place;
+  if (!Number.isFinite(lat) || !Number.isFinite(lonEast) || Math.abs(lat) > 90 || Math.abs(lonEast) > 180) {
+    return "The place of the visibility must be on the globe.";
+  }
+  if (!(v.within >= 0)) return "The days around the visibility cannot be negative.";
+  if (positionCount(q) === 0 && q.endYear - q.startYear + 1 > VISIBILITY_ALONE_YEARS) {
+    return `A visibility with no position beside it is found one event at a time. `
+      + `Set a sign or a phase, or shorten the span to ${VISIBILITY_ALONE_YEARS} years or less.`;
+  }
+  return null;
+}
+
+const raised = (text: string): string => text.charAt(0).toUpperCase() + text.slice(1);
+
+/**
+ * A visibility as words: `Venus evening first`, or in full
+ * `Venus evening first at Babylon, within 3 days`. `places` names the
+ * places the host knows; any other is given by its coordinates.
+ */
+export function visibilityText(
+  v: SkyVisibilityQuery, full = false,
+  places: ReadonlyArray<{ label: string; lat: number; lonEast: number }> = [],
+): string {
+  const head = `${raised(v.target)} ${v.kind.replace(/_/g, " ")}`;
+  if (!full) return head;
+  const named = places.find((p) => p.lat === v.place.lat && p.lonEast === v.place.lonEast);
+  const where = named ? named.label : `${v.place.lat}, ${v.place.lonEast}`;
+  const within = v.within > 0 ? `, within ${v.within} ${v.within === 1 ? "day" : "days"}` : "";
+  return `${head} at ${where}${within}`;
 }
 
 /** The signs the seven bodies occupy at an instant, as a query's `signs`. */
@@ -101,6 +176,21 @@ export interface SkyStage {
   /** Windows left after this constraint, merged across slices. */
   spans: Array<[number, number]>;
   days: number;
+}
+
+/**
+ * A stage's label for display. A position keeps the engine's label with its
+ * first letter raised (`Saturn in Cancer`). A visibility stage is named from
+ * the query, because the engine's label (`venus evening_first at 32.54,
+ * 44.42`) is written for a log line.
+ */
+export function stageText(
+  stage: SkyStage, q: SkyQuery, full = false,
+  places: ReadonlyArray<{ label: string; lat: number; lonEast: number }> = [],
+): string {
+  const c = buildConstraints(q)[stage.constraint];
+  if (c && "visibility" in c && q.visibility) return visibilityText(q.visibility, full, places);
+  return raised(stage.label);
 }
 
 /** The state of a search, complete or partway. */
@@ -149,7 +239,10 @@ export function foldSlice(
 
 /** Options for {@link searchSky}. */
 export interface SearchSkyOptions {
-  /** Years per slice. Smaller slices report progress more often. */
+  /** Years per slice. Smaller slices report progress more often. Defaults
+   *  to 250, to 25 when the query has a visibility beside its positions, and
+   *  to 5 when the visibility stands alone, since each event found is a
+   *  search of its own and a slice cannot be interrupted. */
   sliceYears?: number;
   /** Called after every slice with the search so far. */
   onProgress?: (search: SkySearch) => void;
@@ -174,7 +267,8 @@ export async function searchSky(
     jdStart, jdEnd, jdDone: jdStart, stages: [], windows: [], done: false,
   };
   if (constraints.length === 0 || !(jdEnd > jdStart)) return { ...acc, done: true };
-  const sliceDays = (opts.sliceYears ?? 250) * 365.25;
+  const fallback = !q.visibility ? 250 : positionCount(q) > 0 ? 25 : 5;
+  const sliceDays = (opts.sliceYears ?? fallback) * 365.25;
   const pause = opts.yieldFn
     ?? (() => new Promise<void>((resolve) => setTimeout(resolve, 0)));
   for (let a = jdStart; a < jdEnd; a += sliceDays) {
@@ -225,6 +319,20 @@ export function windowText(start: number, end: number): string {
   return `${a.text} to ${b.text}`;
 }
 
+/**
+ * A window as dates for the table. A visibility holds on whole local days at
+ * its place, so with one set the dates are the days at that place: a window
+ * that opens at local midnight on the 18th is `18 to 20 Jul`, although that
+ * midnight is the evening of the 17th in UT for a place east of Greenwich.
+ * Without a visibility the dates are UT, as {@link windowText} gives them.
+ */
+export function windowDates(start: number, end: number, q: SkyQuery): string {
+  if (!q.visibility) return windowText(start, end);
+  const shift = q.visibility.place.lonEast / 360;
+  // a window that closes at local midnight ends on the day before
+  return windowText(start + shift, Math.max(start + shift, end + shift - 1 / 1440));
+}
+
 /** A longitude as degrees and minutes within its sign: `19°36′`. */
 export function signDegree(lon: number): string {
   const within = ((lon % 30) + 30) % 30;
@@ -271,11 +379,18 @@ export interface PackLoadProgress {
 }
 
 /** The bodies a query constrains. A lunar phase is an angle between the Moon
- *  and the Sun, so it brings in both. */
+ *  and the Sun, so it brings in both. A visibility brings in the Sun and its
+ *  target when that is a planet or the Moon; a star comes from the catalog
+ *  in the base data, and the moonlight term reads the Moon from whatever
+ *  tier the engine already has. */
 export function queryBodies(q: SkyQuery): string[] {
   const bodies = new Set<string>();
   for (const b of SKY_BODIES) if (q.signs[b.id] !== undefined) bodies.add(b.id);
   if (q.phase) { bodies.add("moon"); bodies.add("sun"); }
+  if (q.visibility) {
+    bodies.add("sun");
+    if (SKY_BODIES.some((b) => b.id === q.visibility!.target)) bodies.add(q.visibility.target);
+  }
   return [...bodies];
 }
 
@@ -395,6 +510,11 @@ export function callSource(q: SkyQuery, tier: SkyTier = "embedded", manifestUrl 
       return `  { elongation: ["moon", "sun"], from: ${c.from}, to: ${c.to} },`;
     }
     if ("body" in c && "sign" in c) return `  { body: "${c.body}", sign: "${c.sign}" },`;
+    if ("visibility" in c) {
+      const v = c.visibility;
+      const inner = `{ target: "${v.target}", kind: "${v.kind}", lat: ${v.lat}, lonEast: ${v.lonEast} }`;
+      return c.within ? `  { visibility: ${inner}, within: ${c.within} },` : `  { visibility: ${inner} },`;
+    }
     return "";
   });
   const jd = (y: number): string =>
@@ -450,7 +570,8 @@ export interface SkyPreset {
 
 const sign = (name: string): number => SIGNS.indexOf(name);
 
-/** The two historical horoscopes the engine's tests date, as presets. */
+/** The two historical horoscopes the engine's tests date, and the guide's
+ *  example of an event beside a position, as presets. */
 export const SKY_PRESETS: SkyPreset[] = [
   {
     id: "hadrian",
@@ -478,6 +599,21 @@ export const SKY_PRESETS: SkyPreset[] = [
         venus: sign("Taurus"),
       },
       phase: null, zodiac: "tropical", pad: 0, startYear: -800, endYear: -1,
+    },
+  },
+  {
+    id: "venus",
+    label: "Venus first seen in the evening, Jupiter in Leo",
+    note: "An example of a record that gives an event and one position: Venus "
+      + "first seen in the evening at Babylon while Jupiter was in Leo, "
+      + "searched from 650 to 600 BCE. Four dates fit.",
+    query: {
+      signs: { jupiter: sign("Leo") },
+      phase: null, zodiac: "tropical", pad: 0, startYear: -649, endYear: -599,
+      visibility: {
+        target: "venus", kind: "evening_first",
+        place: { lat: 32.54, lonEast: 44.42 }, within: 0,
+      },
     },
   },
 ];
