@@ -3,6 +3,7 @@ import { embeddedData } from "caelus/data-embedded";
 import { ChartSphere, AstroMap, EphemerisGraph } from "caelus-wheel";
 import { Eyebrow, Lead, P, H2 } from "../../../components/Prose";
 import CodeBlock from "../../../components/CodeBlock";
+import { UncertaintyWheel } from "../../../components/docs/UncertaintyWheel";
 import { WHEEL_THEME, WHEEL_LINE_COLORS } from "../../../lib/wheelTheme";
 import { pageMetadata } from "../../../lib/seo";
 
@@ -85,6 +86,21 @@ const figure: React.CSSProperties = {
   overflowX: "auto",
 };
 
+const UNCERTAINTY_CODE = `import { Engine, julianDay } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+import { ChartWheel } from "caelus-wheel";
+
+const engine = new Engine(embeddedData);
+const jd = julianDay(1990, 6, 10, 18, 30);
+const at = (minutes: number) =>
+  engine.chartAt(jd + minutes / 1440, 27.95, -82.46);
+
+export default function Wheel() {
+  // an hour either way, sampled every half hour
+  const samples = [-60, -30, 0, 30, 60].map(at);
+  return <ChartWheel chart={at(0)} uncertainty={{ samples }} />;
+}`;
+
 export default function Visualizations() {
   return (
     <>
@@ -139,6 +155,21 @@ export default function Visualizations() {
         <EphemerisGraph series={graphSeries} width={680} height={340} wrap={360} theme={WHEEL_THEME} colors={WHEEL_LINE_COLORS} />
       </div>
       <CodeBlock lang="tsx" label="EphemerisGraph.tsx" code={GRAPH_CODE} />
+
+      <H2>Uncertainty on the wheel</H2>
+      <P>
+        The flat wheel can draw a window of time as well as an instant. Pass{" "}
+        <code>uncertainty</code> with charts across the window in time order,
+        and each body gets an arc just inside the zodiac ring over the
+        longitudes it passes through, with arcs for the Ascendant and the
+        Midheaven near the rim. An arc that crosses a sign boundary is heavier
+        and carries a square on the boundary. The angles turn about 15° an
+        hour, so give a sample every half hour or so across a window of hours.
+        The <a href="/docs/uncertain-time">Uncertain Times</a> guide covers the
+        computation behind it.
+      </P>
+      <UncertaintyWheel />
+      <CodeBlock lang="tsx" label="ChartWheel.tsx" code={UNCERTAINTY_CODE} />
 
       <H2>Sky View</H2>
       <P>

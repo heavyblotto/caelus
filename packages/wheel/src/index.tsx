@@ -166,6 +166,79 @@ export interface WheelLayers {
   aspects?: boolean;
 }
 
+/** One chart from a window of time, as much of it as the uncertainty layer
+ *  reads. A caelus Chart object fits as it is. */
+export interface WheelUncertaintySample {
+  bodies: Record<string, { lon: number } | undefined>;
+  /** Leave out for a chart with no place; the angle arcs then do not draw. */
+  angles?: { asc: number; mc: number };
+}
+
+/**
+ * A window of time to draw on the wheel, for a chart whose instant is not
+ * known exactly. `samples` are charts across the window in time order, the
+ * first at its start and the last at its end.
+ *
+ * Two samples are enough when nothing turns more than half the circle
+ * between them, which holds for every body over any window up to a few
+ * days. The angles turn once a day, so for a window of hours give a sample
+ * every half hour or so; the layer adds up the steps between neighbours, and
+ * a step of 180° or more cannot be told from one the other way round.
+ */
+export interface WheelUncertainty {
+  samples: WheelUncertaintySample[];
+  /** Arc color. Defaults to the theme's `axis` color: an arc is geometry of
+   *  the chart over the window, drawn in the same ink as the angles. */
+  color?: string;
+}
+
+/** The stretch of the zodiac a point covers across a window. */
+export interface SweptArc {
+  /** Lowest longitude reached, in [0, 360). */
+  from: number;
+  /** Degrees covered going forward from `from`, capped at 360. */
+  sweep: number;
+  /** Sign boundaries inside the stretch, as longitudes (multiples of 30).
+   *  Empty when the point keeps its sign. */
+  boundaries: number[];
+}
+
+/**
+ * The arc a longitude sweeps across a run of samples in time order. Each
+ * step between neighbours is taken the short way round, and the arc runs
+ * from the lowest to the highest point reached, so a body that turns
+ * retrograde inside the window is covered across its whole excursion.
+ *
+ * @example
+ * ```ts
+ * sweptArc([28.5, 29.4, 30.6]);
+ * // { from: 28.5, sweep: 2.1, boundaries: [30] }
+ * ```
+ */
+export function sweptArc(lons: number[]): SweptArc {
+  if (lons.length === 0) return { from: 0, sweep: 0, boundaries: [] };
+  let at = 0;
+  let lo = 0;
+  let hi = 0;
+  for (let i = 1; i < lons.length; i++) {
+    at += mod(lons[i] - lons[i - 1] + 180, 360) - 180;
+    if (at < lo) lo = at;
+    if (at > hi) hi = at;
+  }
+  const sweep = Math.min(360, hi - lo);
+  const start = lons[0] + lo;
+  const boundaries: number[] = [];
+  if (sweep >= 360) {
+    for (let s = 0; s < 12; s++) boundaries.push(s * 30);
+  } else {
+    // a boundary exactly at an end of the arc is touched, not crossed
+    for (let b = Math.floor(start / 30) * 30 + 30; b < start + sweep; b += 30) {
+      boundaries.push(mod(b, 360));
+    }
+  }
+  return { from: mod(start, 360), sweep, boundaries };
+}
+
 export interface ChartWheelProps {
   /** The Chart object from caelus, or a caelus-mcp natal_chart /
    *  current_sky tool response, as-is. */
@@ -181,6 +254,17 @@ export interface ChartWheelProps {
   layers?: WheelLayers;
   theme?: Partial<WheelTheme>;
   glyphs?: Record<string, string>;
+  /**
+   * Draw a window of time on the wheel. For each body an arc just inside
+   * the zodiac ring covers the longitudes it passes through, and for the
+   * Ascendant and Midheaven an arc near the outer edge does the same (the
+   * Ascendant's is the outer of the two). An arc that crosses a sign
+   * boundary is drawn heavier and carries a square on the boundary. A
+   * planet that barely moves has an arc too short to see, which is the
+   * point: over an uncertain birth time the planets hold and the angles
+   * sweep. With this prop left out the wheel renders exactly as before.
+   */
+  uncertainty?: WheelUncertainty;
 }
 
 /**
@@ -256,6 +340,7 @@ export function ChartWheel({
   layers,
   theme,
   glyphs,
+  uncertainty,
 }: ChartWheelProps): ReactElement {
   const L: Required<WheelLayers> = {
     zodiac: true, houses: true, axes: true, bodies: true, aspects: true,
@@ -346,6 +431,46 @@ export function ChartWheel({
     for (const [lon, label] of axes) {
       el.push(line(lon, 0.50, 1.0, { stroke: T.axis, strokeWidth: 2 }, `axis-${label}`));
       el.push(text(lon, 1.045, label, size * 0.026, T.axis, `axl-${label}`));
+    }
+  }
+
+  // the uncertainty layer: where each body and angle could be across a
+  // window of time. Bodies draw just inside the zodiac ring, under their
+  // pointer ticks; the angles draw near the outer edge, Ascendant outermost.
+  if (uncertainty && uncertainty.samples.length >= 2) {
+    const ink = uncertainty.color ?? T.axis;
+    const arc = (r: number, a: SweptArc, key: string) => {
+      const crosses = a.boundaries.length > 0;
+      const width = crosses ? 3 : 1.5;
+      if (a.sweep >= 360) {
+        el.push(<circle key={key} cx={c} cy={c} r={fix(r * R)} fill="none"
+          stroke={ink} strokeWidth={width} opacity={crosses ? 1 : 0.7} />);
+      } else if (a.sweep >= 0.05) {
+        const [x1, y1] = pt(a.from, r);
+        const [x2, y2] = pt(a.from + a.sweep, r);
+        el.push(<path key={key} fill="none" stroke={ink} strokeWidth={width}
+          opacity={crosses ? 1 : 0.7}
+          d={`M${fix(x1)} ${fix(y1)}A${fix(r * R)} ${fix(r * R)} 0 ${a.sweep > 180 ? 1 : 0} 0 ${fix(x2)} ${fix(y2)}`} />);
+      }
+      // a square on each sign boundary the arc crosses
+      const h = size * 0.006;
+      a.boundaries.forEach((b, i) => {
+        const [x, y] = pt(b, r);
+        el.push(<rect key={`${key}-b${i}`} x={fix(x - h)} y={fix(y - h)}
+          width={fix(2 * h)} height={fix(2 * h)} fill={ink} />);
+      });
+    };
+    const run = uncertainty.samples;
+    if (L.bodies) {
+      for (const b of names) {
+        const lons = run.map((s) => s.bodies[b]?.lon);
+        if (lons.some((v) => v === undefined)) continue;
+        arc(0.8, sweptArc(lons as number[]), `unc-${b}`);
+      }
+    }
+    if (L.axes && run.every((s) => s.angles !== undefined)) {
+      arc(0.988, sweptArc(run.map((s) => s.angles!.asc)), "unc-asc");
+      arc(0.968, sweptArc(run.map((s) => s.angles!.mc)), "unc-mc");
     }
   }
 

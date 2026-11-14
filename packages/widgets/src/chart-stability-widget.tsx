@@ -18,11 +18,13 @@ import {
   HOUSE_SYSTEMS, STABILITY_KINDS, VERSION,
   type Engine, type HouseSystem, type StabilityFact, type Zodiac,
 } from "caelus";
+import { ChartWheel, type WheelTheme } from "caelus-wheel";
 import {
   changesOf, factLabel, halfWidthOf, kindLabel, queryOk, returnedSource,
   scanStability, STABILITY_DEFAULT, STABILITY_PLACES, STABILITY_WINDOWS,
   stabilitySource, statedText, subjectLabel, timeText, trackLabel, valueLabel,
-  type StabilityQuery, type StabilityScan, type StabilityWindowId,
+  windowWheel,
+  type StabilityQuery, type StabilityScan, type StabilityWindowId, type WindowWheel,
 } from "./chart-stability.js";
 
 const ZODIACS: Array<{ id: Zodiac; label: string }> = [
@@ -38,6 +40,29 @@ export interface ChartStabilityProps {
   /** The form's opening state, run on mount. Defaults to the Tampa birth
    *  from the guide, with the time good to an hour either way. */
   initial?: StabilityQuery;
+  /** Colors for the wheel tile. The host passes its own so the wheel
+   *  follows the page; left out, the wheel draws in its default dark inks. */
+  wheelTheme?: Partial<WheelTheme>;
+}
+
+/** A list as prose: `the Moon`, `the Moon and Mercury`, `a, b, and c`. */
+function listed(items: string[]): string {
+  if (items.length <= 1) return items.join("");
+  if (items.length === 2) return `${items[0]} and ${items[1]}`;
+  return `${items.slice(0, -1).join(", ")}, and ${items[items.length - 1]}`;
+}
+
+/** One sentence on what changes sign across the window. */
+function crossingText(w: WindowWheel): string {
+  const bodies = w.bodiesCrossing.map((b) => (b === "sun" || b === "moon" ? `the ${subjectLabel(b)}` : subjectLabel(b)));
+  const head = bodies.length === 0
+    ? "No body changes sign across this window"
+    : `${listed(bodies).replace(/^t/, "T")} ${bodies.length === 1 ? "changes" : "change"} sign across this window`;
+  if (!w.placed) return `${head}.`;
+  const angles = w.anglesCrossing.map((a) => (a === "asc" ? "the Ascendant" : "the Midheaven"));
+  if (angles.length === 0) return `${head}, and neither angle does.`;
+  if (bodies.length === 0) return `${head}, and ${listed(angles)} ${angles.length === 1 ? "does" : "do"}.`;
+  return `${head}, and so ${angles.length === 1 ? "does" : "do"} ${listed(angles)}.`;
 }
 
 const pad2 = (n: number): string => String(n).padStart(2, "0");
@@ -77,7 +102,7 @@ function FactTrack({ fact, from, to }: { fact: StabilityFact; from: number; to: 
   );
 }
 
-export function ChartStability({ engine, initial = STABILITY_DEFAULT }: ChartStabilityProps): ReactElement {
+export function ChartStability({ engine, initial = STABILITY_DEFAULT, wheelTheme }: ChartStabilityProps): ReactElement {
   const [query, setQuery] = useState<StabilityQuery>(initial);
   const [scan, setScan] = useState<StabilityScan | null>(null);
   const [ran, setRan] = useState<StabilityQuery | null>(null);
@@ -131,6 +156,11 @@ export function ChartStability({ engine, initial = STABILITY_DEFAULT }: ChartSta
     held: facts.filter((f) => f.kind === kind && f.stable),
     total: facts.filter((f) => f.kind === kind).length,
   })).filter((g) => g.total > 0), [facts]);
+
+  // The wheel follows the form as it is edited, not the last run: it is a
+  // handful of charts, cheap enough to redraw on every change.
+  const wheel = useMemo(() => (ok ? windowWheel(engine, query) : null), [engine, query, ok]);
+  const wheelWindow = STABILITY_WINDOWS.find((w) => w.id === query.window)!.label.replace("The whole day, ", "");
 
   const source = useMemo(() => stabilitySource(query), [query]);
   const returned = useMemo(() => returnedSource(scan), [scan]);
@@ -323,6 +353,31 @@ export function ChartStability({ engine, initial = STABILITY_DEFAULT }: ChartSta
                 of the window in which the fact has its stated value, and the line down the
                 middle is the stated time.
               </p>
+            )}
+          </section>
+
+          <section className="tile">
+            <div className="tile__h">
+              <b>WHEEL</b><span>The window on the chart</span>
+              <i>{ok ? `${statedText(query)}, ${wheelWindow}` : ""}</i>
+            </div>
+            {!wheel && <p className="empty">Enter a date, a time, and a place on the globe to draw the wheel.</p>}
+            {wheel && (
+              <>
+                <div className="chart-fluid">
+                  <ChartWheel
+                    chart={wheel.chart} size={460} theme={wheelTheme}
+                    layers={wheel.placed ? undefined : { houses: false, axes: false }}
+                    uncertainty={{ samples: wheel.samples }}
+                  />
+                </div>
+                <p className="note">
+                  {wheel.placed
+                    ? "The wheel is the chart at the stated time. Each arc covers where a body or an angle could be across the window: the bodies just inside the zodiac ring, and the Ascendant and the Midheaven near the rim, the Ascendant outermost. An arc that crosses into another sign is drawn heavier, with a square on the boundary. "
+                    : "With no place there is no Ascendant, Midheaven, or house to draw, so the wheel is set with 0° Aries at the left and shows the bodies and their aspects. Each arc just inside the zodiac ring covers where a body could be across the window, drawn heavier with a square where it crosses into another sign. "}
+                  {crossingText(wheel)}
+                </p>
+              </>
             )}
           </section>
 
