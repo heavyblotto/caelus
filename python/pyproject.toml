@@ -47,4 +47,4 @@ Changelog = "https://github.com/heavyblotto/caelus/blob/main/CHANGELOG.md"
 include = ["astroengine*"]
 
 [tool.setuptools.package-data]
-astroengine = ["data/*.json"]
+astroengine = ["data/*.json", "data/*.cpk"]

@@ -78,9 +78,9 @@ class Engine:
         return self._has_pack("pluto")
 
     def _has_pack(self, body):
-        """True when a `{body}_cheb.json` Chebyshev pack is on disk."""
-        import os
-        return os.path.exists(os.path.join(core.DATA, f"{body}_cheb.json"))
+        """True when a `{body}_cheb` Chebyshev pack is on disk, binary or
+        JSON."""
+        return core.pack_path(f"{body}_cheb") is not None
 
     def _era_slabs(self, body):
         """Lazy-load a body's era slabs (deep-time R1): `{body}_cheb.{era}.json`
@@ -90,8 +90,8 @@ class Engine:
             from .chebyshev import ChebSeries
             out = []
             for era in core.ERA_SLABS:
-                path = os.path.join(core.DATA, f"{body}_cheb.{era}.json")
-                if os.path.exists(path):
+                path = core.pack_path(f"{body}_cheb.{era}")
+                if path:
                     out.append(ChebSeries.load(path))
             self._era_packs[body] = out
         return self._era_packs[body]
@@ -131,8 +131,8 @@ class Engine:
                     self._packs[name] = core.KeplerOrbit(els, pack["epoch"])
             else:
                 from .chebyshev import ChebSeries
-                path = os.path.join(core.DATA, f"{body}_cheb.json")
-                if not os.path.exists(path):
+                path = core.pack_path(f"{body}_cheb")
+                if not path:
                     raise ValueError(f"no data pack for {body!r}")
                 self._packs[body] = ChebSeries.load(path)
         return self._packs[body]

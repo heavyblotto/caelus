@@ -83,8 +83,8 @@
    },
    "result": {
     "aspect": "sextile",
-    "orb": -2.9548403783657022,
-    "separation": 57.0451596216343,
+    "orb": -2.9548403895040565,
+    "separation": 57.04515961049594,
     "phase": "separating"
    }
   },
@@ -137,7 +137,7 @@
     ]
    },
    "result": {
-    "elongation": 8.479612608745015,
+    "elongation": 8.479612626206006,
     "phase": "combust"
    }
   },
@@ -156,7 +156,7 @@
     ]
    },
    "result": {
-    "elongation": 38.80310913186423,
+    "elongation": 38.80310916478848,
     "phase": null
    }
   },
@@ -175,7 +175,7 @@
     ]
    },
    "result": {
-    "elongation": 58.309258307112344,
+    "elongation": 58.3092583501039,
     "phase": null
    }
   },
@@ -194,7 +194,7 @@
     ]
    },
    "result": {
-    "elongation": 17.439311899076074,
+    "elongation": 17.439311908703758,
     "phase": null
    }
   },
@@ -266,8 +266,8 @@
     "kind": "night",
     "hour": 17,
     "day_ruler": "mercury",
-    "start": 2455392.662045022,
-    "end": 2455392.6976456456
+    "start": 2455392.6620450215,
+    "end": 2455392.697645645
    }
   },
   {
@@ -287,7 +287,7 @@
     "is_void": false,
     "sign": "Scorpio",
     "sign_exit": 2451546.397039029,
-    "next_aspect": 2451546.311164394
+    "next_aspect": 2451546.311164396
    }
   },
   {
@@ -306,8 +306,8 @@
    "result": {
     "is_void": false,
     "sign": "Leo",
-    "sign_exit": 2460391.8206293136,
-    "next_aspect": 2460390.5658361083
+    "sign_exit": 2460391.820629324,
+    "next_aspect": 2460390.5658361204
    }
   },
   {

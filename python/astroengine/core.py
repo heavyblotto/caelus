@@ -27,6 +27,17 @@ def _load(name):
         return json.load(f)
 
 
+def pack_path(stem):
+    """Path of the Chebyshev pack `stem` (e.g. "mars_cheb" or
+    "moon_cheb.classical") in the data directory, or None when it is not on
+    disk. The binary form `{stem}.cpk` wins over `{stem}.json`."""
+    for ext in (".cpk", ".json"):
+        p = os.path.join(DATA, stem + ext)
+        if os.path.exists(p):
+            return p
+    return None
+
+
 # ---------------------------------------------------------------- timescale
 def julian_day(y, mo, d, h=0.0, mi=0, s=0.0, calendar="gregorian"):
     """Calendar date (UT) -> Julian Day. `calendar` is "gregorian" (the
@@ -448,8 +459,8 @@ def _earth_cheb():
     global _EARTH_CHEB
     if _EARTH_CHEB is None:
         from .chebyshev import ChebSeries
-        p = os.path.join(DATA, "earth_cheb.json")
-        _EARTH_CHEB = ChebSeries.load(p) if os.path.exists(p) else False
+        p = pack_path("earth_cheb")
+        _EARTH_CHEB = ChebSeries.load(p) if p else False
     return _EARTH_CHEB or None
 
 
@@ -467,8 +478,8 @@ def _earth_era_slabs():
         from .chebyshev import ChebSeries
         out = []
         for era in ERA_SLABS:
-            p = os.path.join(DATA, f"earth_cheb.{era}.json")
-            if os.path.exists(p):
+            p = pack_path(f"earth_cheb.{era}")
+            if p:
                 out.append(ChebSeries.load(p))
         _EARTH_ERA = out
     return _EARTH_ERA
@@ -480,8 +491,8 @@ def _moon_cheb():
     if _MOON_CHEB is None:
         from .chebyshev import ChebSeries
         for tier in ("full", "embedded"):
-            p = os.path.join(DATA, f"moon_cheb.{tier}.json")
-            if os.path.exists(p):
+            p = pack_path(f"moon_cheb.{tier}")
+            if p:
                 _MOON_CHEB = ChebSeries.load(p)
                 break
         else:
@@ -500,8 +511,8 @@ def _moon_era_slabs():
         from .chebyshev import ChebSeries
         out = []
         for era in ERA_SLABS:
-            p = os.path.join(DATA, f"moon_cheb.{era}.json")
-            if os.path.exists(p):
+            p = pack_path(f"moon_cheb.{era}")
+            if p:
                 out.append(ChebSeries.load(p))
         _MOON_ERA = out
     return _MOON_ERA

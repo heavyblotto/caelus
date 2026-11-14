@@ -37,8 +37,9 @@ class ChebSeries:
 
     @classmethod
     def load(cls, path):
-        with open(path) as f:
-            return cls(json.load(f))
+        """A pack from disk, binary (.cpk) or JSON."""
+        from .packbin import load_pack
+        return cls(load_pack(path))
 
     def _locate(self, jd):
         if not (self.jd0 <= jd <= self.jd1):

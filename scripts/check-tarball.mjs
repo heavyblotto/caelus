@@ -14,34 +14,35 @@ const REQUIRED = [
   "data/juno_cheb.json",
   "data/vesta_cheb.json",
   "data/pholus_cheb.json",
-  "data/pluto_cheb.json",   // wide-range Pluto (1000-3000); supersedes Meeus in-range
+  "data/pluto_cheb.cpk",   // wide-range Pluto (1000-3000); supersedes Meeus in-range
   // Wide planet packs (fit_planet.py, 1000-3000, DE441 barycenters). These
   // supersede VSOP87D wherever they are present, which is the whole point:
   // Uranus and Neptune were the engine's worst bodies at the wide edges
   // (20.3" / 17.6") and read 0.145" / 0.118" through the packs.
-  "data/mars_cheb.json",
-  "data/saturn_cheb.json",
-  "data/uranus_cheb.json",
-  "data/neptune_cheb.json",
-  "data/mercury_cheb.json",
-  "data/venus_cheb.json",
-  "data/jupiter_cheb.json",
-  "data/earth_cheb.json",
+  "data/mars_cheb.cpk",
+  "data/saturn_cheb.cpk",
+  "data/uranus_cheb.cpk",
+  "data/neptune_cheb.cpk",
+  "data/mercury_cheb.cpk",
+  "data/venus_cheb.cpk",
+  "data/jupiter_cheb.cpk",
+  "data/earth_cheb.cpk",
   // Classical era slabs (fit_classical.py, 3000 BCE-1000 CE, DE441). The
   // loader chains them before the modern packs; missing, charts before
   // 1000 CE silently drop to "unavailable".
-  "data/earth_cheb.classical.json",
-  "data/moon_cheb.classical.json",
-  "data/mercury_cheb.classical.json",
-  "data/venus_cheb.classical.json",
-  "data/mars_cheb.classical.json",
-  "data/jupiter_cheb.classical.json",
-  "data/saturn_cheb.classical.json",
+  "data/earth_cheb.classical.cpk",
+  "data/moon_cheb.classical.cpk",
+  "data/mercury_cheb.classical.cpk",
+  "data/venus_cheb.classical.cpk",
+  "data/mars_cheb.classical.cpk",
+  "data/jupiter_cheb.classical.cpk",
+  "data/saturn_cheb.classical.cpk",
   "data/uranian_kepler.json",
   "data/turbo.json",        // sample turbo pack so the turbo tier works out of the box
   "data/chiron_cheb.json",
   "data/intp_apog_cheb.json", // interpolated lunar apogee (fit_intp_apog.py)
   "data/moon_cheb.embedded.json",
+  "data/moon_cheb.full.cpk",   // precise Moon, 1000-3000; binary since 0.26
   "data/fixed_stars.json",
   "data/fixed_stars_deep.json",
   "data/constellations.json",

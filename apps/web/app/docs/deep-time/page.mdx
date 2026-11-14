@@ -231,5 +231,6 @@ the unknown.
 - The sigma table dates from 2004 and the spline from 2021. Re-deriving sigma
   from the newer error estimates is open work, and the table is flat at 640
   seconds before −1000.
-- The era packs make the npm tarball about 130 MB unpacked. A browser bundle
-  does not include them.
+- The era packs ship in the npm tarball as binary files and are about 16 MB
+  of it. A browser bundle does not include them; `decodePack` reads one that
+  a page fetches for itself.

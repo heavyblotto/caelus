@@ -2,7 +2,8 @@
  *  (bundle the JSON or fetch it) -- the core never touches the filesystem. */
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import type { EngineData, VsopSeries } from "./core.js";
+import type { ChebData, EngineData, VsopSeries } from "./core.js";
+import { decodePack } from "./packbin.js";
 
 const PLANETS = ["mercury", "venus", "earth", "mars", "jupiter", "saturn",
   "uranus", "neptune"];
@@ -14,6 +15,15 @@ export function loadNodeData(
   dir: string, level: VsopLevel = "embedded", moonTier: MoonTier = "full",
 ): EngineData {
   const j = (name: string) => JSON.parse(readFileSync(join(dir, name), "utf8"));
+  // A Chebyshev pack by stem, e.g. "mars_cheb" or "moon_cheb.classical". The
+  // binary form (`{stem}.cpk`, about a fifth of the size) wins over
+  // `{stem}.json`; `hasPack` says whether either is on disk.
+  const hasPack = (stem: string): boolean =>
+    existsSync(join(dir, `${stem}.cpk`)) || existsSync(join(dir, `${stem}.json`));
+  const pack = (stem: string): ChebData => {
+    const bin = join(dir, `${stem}.cpk`);
+    return existsSync(bin) ? decodePack(readFileSync(bin)) : j(`${stem}.json`);
+  };
   const vsop: Record<string, VsopSeries> = {};
   // The npm package ships the embedded and micro VSOP tiers; full/high live
   // in the repo. Fall back per planet so "full" against the published
@@ -35,13 +45,10 @@ export function loadNodeData(
     moonMeeus: j("moon_meeus47.json"),
     pluto: j("pluto_meeus37.json"),
   };
-  const chironPath = join(dir, "chiron_cheb.json");
-  if (existsSync(chironPath)) data.chiron = j("chiron_cheb.json");
+  if (hasPack("chiron_cheb")) data.chiron = pack("chiron_cheb");
   // interpolated ("natural") lunar apogee: geocentric ecliptic-of-date pack
   // minted from the engine's own precise Moon (fit_intp_apog.py).
-  if (existsSync(join(dir, "intp_apog_cheb.json"))) {
-    data.intpApog = j("intp_apog_cheb.json");
-  }
+  if (hasPack("intp_apog_cheb")) data.intpApog = pack("intp_apog_cheb");
   if (existsSync(join(dir, "uranian_kepler.json"))) {
     data.keplerPack = j("uranian_kepler.json");
   }
@@ -64,18 +71,14 @@ export function loadNodeData(
   // (range-expansion.md). No pack, no behaviour change.
   for (const b of ["ceres", "pallas", "juno", "vesta", "pholus", "pluto",
     "mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune"]) {
-    if (existsSync(join(dir, `${b}_cheb.json`))) {
-      (data.chebPacks ??= {})[b] = j(`${b}_cheb.json`);
-    }
+    if (hasPack(`${b}_cheb`)) (data.chebPacks ??= {})[b] = pack(`${b}_cheb`);
   }
   // Earth is not a chart body but it is the observer: every geocentric
   // direction is `body - earth`, so its own VSOP error is a floor under every
   // other body, amplified by 1/distance (2763 km at 2965 = 3.8" at 1 AU,
   // 10.3" at Mars's perigee). Kept out of chebPacks because it is consumed by
   // the VSOP layer rather than as a body.
-  if (existsSync(join(dir, "earth_cheb.json"))) {
-    data.earthPack = j("earth_cheb.json");
-  }
+  if (hasPack("earth_cheb")) data.earthPack = pack("earth_cheb");
   // Era slabs (deep-time R1): `{body}_cheb.{era}.json` beside the default
   // packs — e.g. `jupiter_cheb.classical.json` (3000 BCE–1000 CE, adjoining
   // the headline tier). Loaded when present; at compute time the slab whose
@@ -86,26 +89,24 @@ export function loadNodeData(
     for (const b of ["mercury", "venus", "mars", "jupiter", "saturn",
       "uranus", "neptune", "pluto", "ceres", "pallas", "juno", "vesta",
       "pholus"]) {
-      const p = join(dir, `${b}_cheb.${era}.json`);
-      if (existsSync(p)) {
-        ((data.eraPacks ??= {})[b] ??= []).push(j(`${b}_cheb.${era}.json`));
+      if (hasPack(`${b}_cheb.${era}`)) {
+        ((data.eraPacks ??= {})[b] ??= []).push(pack(`${b}_cheb.${era}`));
       }
     }
-    if (existsSync(join(dir, `earth_cheb.${era}.json`))) {
-      (data.earthEraPacks ??= []).push(j(`earth_cheb.${era}.json`));
+    if (hasPack(`earth_cheb.${era}`)) {
+      (data.earthEraPacks ??= []).push(pack(`earth_cheb.${era}`));
     }
-    if (existsSync(join(dir, `moon_cheb.${era}.json`))) {
-      (data.moonEraPacks ??= []).push(j(`moon_cheb.${era}.json`));
+    if (hasPack(`moon_cheb.${era}`)) {
+      (data.moonEraPacks ??= []).push(pack(`moon_cheb.${era}`));
     }
   }
   if (moonTier !== "none") {
-    // The npm package ships only the embedded tier (1920-2080); the full
-    // tier (1000-3000, ~16 MB, same precision) lives in the repo. Fall back
-    // so "full" requests still get the precise Moon where it exists.
+    // The full tier (1000-3000) ships as a binary pack since 0.26. Earlier
+    // tarballs carried only the embedded tier (1920-2080), so fall back to
+    // it: a "full" request still gets the precise Moon where it exists.
     const tiers = moonTier === "full" ? ["full", "embedded"] : [moonTier];
     for (const t of tiers) {
-      const p = join(dir, `moon_cheb.${t}.json`);
-      if (existsSync(p)) { data.moonCheb = j(`moon_cheb.${t}.json`); break; }
+      if (hasPack(`moon_cheb.${t}`)) { data.moonCheb = pack(`moon_cheb.${t}`); break; }
     }
   }
   return data;

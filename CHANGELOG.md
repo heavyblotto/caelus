@@ -11,6 +11,24 @@ current figures live in `packages/caelus/accuracy.json` and on
 
 ### Engine (`caelus`)
 
+- **Binary packs.** The planet, Earth, and Moon Chebyshev packs ship in a
+  binary form, CPK1 (`docs/binary-packs.md`), in place of JSON. Each
+  coefficient is stored as an integer multiple of a power-of-two quantum set
+  below the pack's fit residual. The seventeen packs go from 137 MB to 27 MB,
+  and the npm tarball from about 55 MB packed and 130 MB unpacked to 28 MB
+  and 37 MB. `loadNodeData` prefers a `.cpk` over its `.json`, and
+  `decodePack` reads one in a browser.
+- **What the quantization moves.** The rounding adds at most 1.0% of a
+  planet pack's own fit residual and 0.07% of a Moon pack's. Against 0.25 on
+  the golden grid the planets move by at most 0.0007″, the Moon by 0.002″,
+  and the true node by 0.14″. Those shifts are enough to change a canonical
+  digest computed from the Node data tier on the fine grids. The browser's embedded tier does
+  not use these packs and is unchanged.
+- **The precise Moon for 1000 to 3000 now ships.** The full Moon tier was
+  16 MB of JSON and stayed in the repository; at 3.9 MB it is in the
+  tarball, so `loadNodeData` gives npm users the precise Moon across the
+  whole headline range, where they previously fell back to the analytic
+  series outside 1920 to 2080.
 - **Chart stability.** `chartStability(engine, jdUt, opts)` takes a window of
   time around a chart's stated instant and reports which of its facts hold
   across the window: the sign on each angle, the sect, and each body's sign,
@@ -78,8 +96,9 @@ current figures live in `packages/caelus/accuracy.json` and on
   | 3000 BCE | 1018 s | 9.3′ |
 
   Canonical digests of UT-tagged charts before 1948 change with the
-  positions. The canonical format version stays at 1, and charts from 1948
-  on are bit-identical to 0.25.0.
+  positions. The canonical format version stays at 1. The ΔT change itself
+  leaves charts from 1948 on untouched; the binary packs below move Node-tier
+  positions by under 0.001″ for the planets.
 - **Validation.** `validate_swiss.py` and `validate_horizons.py` convert UT to
   TT with the engine's own `jd_tt` before they compare, so both sides of each
   comparison share one ΔT and the published accuracy figures, which are TT

@@ -145,18 +145,18 @@ Registry: the marketplace issues live at `chatmcp/mcpso` (mcp.so) and
 
 ## What ships
 
-`caelus` ships at ~130 MB unpacked (~55 MB packed): embedded VSOP tiers, the 1920–2080
+`caelus` ships at ~37 MB unpacked (~28 MB packed): embedded VSOP tiers, the 1920–2080
 precise-Moon Chebyshev tier, nutation, fixed stars, constellation lines,
 and every fitted pack the docs advertise — Chiron, Ceres, Pallas, Juno,
 Vesta, Pholus, the wide-range Pluto pack (1700–2212, superseding the
 embedded Meeus ch.37 series), the wide planet packs, the classical era
-slabs (3000 BCE–1000 CE, ~79 MB of the total), the Uranian Kepler elements,
+slabs (3000 BCE–1000 CE, ~16 MB of the total), the Uranian Kepler elements,
 and a sample turbo pack. `scripts/check-tarball.mjs` gates CI on that list staying in
 the tarball: the asteroid and Uranian packs once sat repo-only for two
 releases while node-loader's existsSync guards silently skipped them, so
 installed consumers (including the hosted MCP server) could not compute
-advertised bodies. The full-range Moon tier (1850–2150, 3.1 MB, same
-precision) stays in the repo; `loadNodeData(dir, level, "full")` falls
-back to the embedded tier when the full file is absent. Outside
-1920–2080 the engine uses the analytic series (~10″) — documented on
-/validation.
+advertised bodies. The planet, Earth, and Moon packs ship in the binary
+CPK1 form (`docs/binary-packs.md`), which is what brought the tarball down
+from ~130 MB. The full-range Moon tier (1000–3000, 3.9 MB as binary) ships
+too since 0.26; `loadNodeData(dir, level, "full")` still falls back to the
+embedded tier when the full file is absent.
