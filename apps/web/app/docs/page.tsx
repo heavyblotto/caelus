@@ -46,6 +46,7 @@ const GROUPS: Array<{ label: string; cards: Card[] }> = [
       ["/docs/sky-events", "Rise, Set & Sky Events", "Find rise, set, and transit times, lunar phases, planetary stations, and degree crossings."],
       ["/docs/time-queries", "Time Queries", "Build declarative when() queries for signs, aspects, and retrogrades with allOf, anyOf, and notOf combinators."],
       ["/docs/sky-dating", "Sky Dating", "Find historical date windows matching planetary sign placements, longitude arcs, or aspects."],
+      ["/docs/heliacal", "First & Last Visibility", "Compute heliacal risings and settings, inner-planet apparitions, and first lunar crescents from any location with atmospheric uncertainty windows."],
       ["/docs/uncertain-time", "Uncertain Times", "Identify which chart placements stay valid across an approximate birth-time window and when others change."],
       ["/docs/deep-time", "Deep Time", "Work with historical dates before AD 1000: deep ephemeris packs, Julian calendar conversions, and ΔT uncertainty bounds."],
       ["/docs/canonical", "Canonical Mode", "Produce quantized, content-addressable JSON output with SHA-256 digests for reproducible comparisons."],

@@ -67,11 +67,26 @@ def _parse_zodiac(zodiac):
     raise ValueError(f"unknown zodiac {zodiac!r}")
 
 
+class _SlabSet:
+    """Several Chebyshev slabs of one body served as one: each instant goes
+    to the slab that covers it, the default pack first."""
+
+    def __init__(self, packs):
+        self.packs = packs
+
+    def xyz(self, jd):
+        for p in self.packs:
+            if p.jd0 <= jd <= p.jd1:
+                return p.xyz(jd)
+        return self.packs[0].xyz(jd)  # the canonical ValueError
+
+
 class Engine:
     def __init__(self, level="full"):
         self.vsop = Vsop(level)
         self._packs = {}
         self._era_packs = {}
+        self._slab_sets = {}
 
     def _has_pluto_pack(self):
         """True when a wide-range Pluto Chebyshev pack is available on disk."""
@@ -108,17 +123,28 @@ class Engine:
             if has_default:
                 pack = self._pack(body)
                 if pack.jd0 <= jde <= pack.jd1:
-                    return pack
+                    return self._slab_set(body) if slabs else pack
                 for slab in slabs:
                     if slab.jd0 <= jde <= slab.jd1:
-                        return slab
+                        return self._slab_set(body)
                 pack.xyz(jde)  # the canonical ValueError naming the fitted range
             for slab in slabs:
                 if slab.jd0 <= jde <= slab.jd1:
-                    return slab
+                    return self._slab_set(body)
             raise ValueError(
                 f"jd {jde} outside fitted range (no era slab covers it)")
         return self._pack(body)
+
+    def _slab_set(self, body):
+        """A body's default pack and era slabs as one source. The apparent
+        place of an instant is assembled from the body's position a light-time
+        earlier, and within a light-time of a slab boundary that earlier
+        instant lies in the neighbouring slab; a single slab chosen for the
+        instant itself cannot serve it."""
+        if body not in self._slab_sets:
+            packs = ([self._pack(body)] if self._has_pack(body) else []) + self._era_slabs(body)
+            self._slab_sets[body] = _SlabSet(packs)
+        return self._slab_sets[body]
 
     def _pack(self, body):
         if body not in self._packs:
@@ -261,13 +287,14 @@ class Engine:
             b = math.atan2(z, math.hypot(x, y))
             l, b = core._precess_ecliptic(l, b, core.J2000, jde)
         elif body in ASTEROIDS or body in URANIANS or body == "pluto":
-            x, y, z = self._pack(body).xyz(jde)
+            x, y, z = self._pack_at(body, jde).xyz(jde)
             r = math.sqrt(x * x + y * y + z * z)
             l = math.atan2(y, x) % (2 * math.pi)
             b = math.atan2(z, math.hypot(x, y))
             l, b = core._precess_ecliptic(l, b, core.J2000, jde)
         elif body in PLANET_PACK_BODIES and self._has_pack(body):
-            x, y, z = self._pack(body).xyz(jde)
+            # the slab covering the instant, as _ecliptic chooses it
+            x, y, z = self._pack_at(body, jde).xyz(jde)
             r = math.sqrt(x * x + y * y + z * z)
             l = math.atan2(y, x) % (2 * math.pi)
             b = math.atan2(z, math.hypot(x, y))

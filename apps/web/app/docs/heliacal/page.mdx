@@ -1,0 +1,263 @@
+import { pageMetadata } from "../../../lib/seo";
+
+export const metadata = pageMetadata({
+  title: "First & Last Visibility",
+  description: "Compute heliacal risings and settings, inner-planet apparitions, and first lunar crescents for a location across atmospheric clarity bounds.",
+  path: "/docs/heliacal",
+});
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# First and last visibility
+
+When a star or planet passes near the Sun, solar glare hides it from view for
+days or months. Its **heliacal rising** is the first morning it becomes visible
+again before sunrise, and its **heliacal setting** is the last evening it can be
+seen after sunset. Historical sources often record visibility dates rather than
+coordinates, and because those dates depend on observer latitude and sky
+clarity, `heliacal` computes them for a specific geographic location.
+
+```ts run
+import { Engine, heliacal, julianDay, calendarDate } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);
+
+// The heliacal rising of Sirius at Memphis (29.85 N, 31.25 E) in 139 CE.
+const start = julianDay(139, 1, 1, 0, 0, 0, "julian");
+const rising = heliacal(engine, "Sirius", start, 29.85, 31.25);
+
+calendarDate(rising.jd, "julian");        // 19 July 139, 02:34 UT
+calendarDate(rising.earliest, "julian");  // 18 July under a clearer sky
+calendarDate(rising.latest, "julian");    // 20 July under a hazier one
+```
+
+Writing in 238 CE, Censorinus places Sirius's heliacal rising on the Egyptian
+New Year in 139 CE (transmitted as 21 July in manuscripts and commonly emended
+to 20 July). At Memphis, the visibility model calculates 19 July nominally,
+spanning 18 to 20 July across atmospheric bounds. Latitude strongly affects the
+result: the same call yields 20 July at Alexandria and 15 July at Thebes.
+
+## Event types
+
+Select an event via `kind` (defaults to `"morning_first"`):
+
+| Kind | Definition | Supported bodies |
+|---|---|---|
+| `morning_first` | First appearance before sunrise (heliacal rising) | Planets and catalog stars |
+| `evening_last` | Last appearance after sunset (heliacal setting) | Planets and catalog stars |
+| `evening_first` | First evening appearance after inferior/new conjunction | Mercury, Venus, the Moon |
+| `morning_last` | Last morning appearance before conjunction | Mercury, Venus, the Moon |
+| `acronychal_rising` | Last evening rising after dusk near opposition | Mars through Saturn and stars (`arcus` method) |
+| `cosmical_setting` | First morning setting before dawn near opposition | Mars through Saturn and stars (`arcus` method) |
+
+The aliases `"heliacal_rising"` and `"heliacal_setting"` map to
+`"morning_first"` and `"evening_last"`. Targets may be any planet ID, `"moon"`,
+or any star returned by `engine.starNames()`. Requesting an event inapplicable
+to the target body throws an error.
+
+`heliacal` returns the next matching event on or after the search start time, or
+`null` if none occurs within roughly 830 days (such as circumpolar stars that
+never set at the observer's latitude).
+
+## Visibility scoring
+
+For each candidate dawn or dusk, the solver steps minute by minute as the body
+clears or approaches the horizon and evaluates whether the naked eye can detect
+it against the twilight sky:
+
+- **Sky brightness**: combines dark night-sky glow, twilight scattering (a
+  function of solar depression and angular separation from the Sun), and
+  scattered moonlight.
+- **Atmospheric extinction**: dims the body's apparent magnitude based on the
+  air-mass path length near the horizon.
+- **Visual threshold**: computes the faintest magnitude detectable against the
+  computed background brightness.
+
+A body registers as visible if its extinguished magnitude exceeds the visual
+threshold at any instant during the window. The underlying equations implement
+B. E. Schaefer's visibility model ("To the Visual Limits", *Sky & Telescope*,
+May 1998) and the Krisciunas and Schaefer moonlight brightness model (*PASP* 103,
+1991).
+
+Each result records the optimal viewing instant on that date alongside the
+local geometry:
+
+```ts run
+rising.margin;         // 0.26 magnitudes to spare
+rising.altitude;       // 4.0 degrees above the horizon
+rising.sunAltitude;    // -6.0: the Sun six degrees down
+rising.arcusVisionis;  // 9.5: the Sun's depression as Sirius crossed the horizon
+```
+
+Use `visibility` to evaluate those same sky brightness, limiting magnitude, and
+margin values for a single fixed timestamp:
+
+```ts run
+import { visibility } from "caelus";
+
+// Sirius from Cairo, 5 August 2025, 02:35 UT
+visibility(engine, "Sirius", julianDay(2025, 8, 5, 2, 35), 30.05, 31.25);
+```
+
+## Modeling atmospheric clarity
+
+Atmospheric transparency is parameterized by `extinction`, measured in V-band
+magnitudes lost per unit air mass. The default `0.25` reflects a clear sea-level
+sky (typical values range from `0.15` at high desert sites to `0.35` or above in
+humid or dusty air), and every returned object echoes the `extinction` setting
+used.
+
+Because ancient atmospheric conditions are unknown, every visibility call
+evaluates three extinction values: the nominal `extinction`, `extinction - spread`
+(`earliest`), and `extinction + spread` (`latest`), where `spread` defaults to
+`0.05`. For bright stars this brackets a window of two or three days; for slow,
+faint outer conjunctions of Mars the window can span three weeks.
+
+```ts run
+const hazy = heliacal(engine, "Sirius", start, 29.85, 31.25, {
+  extinction: 0.35, spread: 0.1,
+});
+
+calendarDate(hazy.jd, "julian");  // 21 July
+```
+
+Pass `altM` (observer elevation in meters) to scale down the Rayleigh scattering
+component while holding the total stated extinction constant.
+
+## Mercury and Venus apparitions
+
+Inferior planets go through four visibility events per synodic cycle. Near
+inferior conjunction, the planet transitions from evening last to morning first
+within days; near superior conjunction, the gap between morning last and evening
+first lasts several weeks.
+
+```ts run
+const babylon = [32.54, 44.42];
+const from = julianDay(2025, 1, 1);
+
+["evening_last", "morning_first", "morning_last", "evening_first"].map((kind) => {
+  const ev = heliacal(engine, "venus", from, ...babylon, { kind });
+  const d = calendarDate(ev.jd);
+  return `${kind}: ${d.year}-${d.month}-${d.day}`;
+});
+```
+
+In 2025, Venus leaves the evening sky on 18 March and reappears in the morning on
+24 March (six days later), then disappears from the morning sky on 1 December
+before returning to the evening on 12 February 2026.
+
+## Lunar crescents (Yallop's q test)
+
+Because the Moon is an extended disk rather than a point source, its first and
+last crescent sightings use B. D. Yallop's empirical criterion calibrated against
+295 historical observations (NAO Technical Note 69, 1997). Each evening or
+morning yields a `q` score computed from the Moon's relative altitude above the
+Sun and crescent width at optimal twilight:
+
+| Zone | `q` threshold | Visibility classification |
+|---|---|---|
+| A | > 0.216 | Easily visible to the naked eye |
+| B | > -0.014 | Visible under clear conditions |
+| C | > -0.160 | May require optical aid to locate |
+| D | > -0.232 | Visible with optical aid only |
+| E | > -0.293 | Not visible even with a telescope |
+| F | | Below the Danjon elongation limit |
+
+Calling `heliacal(engine, "moon", ..., { kind: "evening_first" })` returns the
+first evening reaching Zone A or B as `jd` (and `earliest`), and the first
+evening reaching Zone A as `latest`.
+
+```ts run
+const crescent = heliacal(engine, "moon", julianDay(2025, 3, 25), 21.42, 39.83, {
+  kind: "evening_first",
+});
+
+calendarDate(crescent.jd);  // 30 March 2025, 16:07 UT, at Mecca
+crescent.zone;              // "A"
+crescent.lagMinutes;        // 72: the Moon sets 72 minutes after the Sun
+```
+
+Call `lunarCrescent` to score a specific local calendar day and inspect why an
+earlier evening fell short. On 29 March 2025 in Mecca, the Moon set only seven
+minutes after sunset and scored Zone F:
+
+```ts run
+import { lunarCrescent, localDay } from "caelus";
+
+const day = localDay(julianDay(2025, 3, 29, 12), 39.83);
+lunarCrescent(engine, day, 21.42, 39.83).zone;  // "F"
+```
+
+## Geometric arcus visionis method
+
+Before physical atmospheric models existed, astronomers defined visibility
+purely geometrically using the **arcus visionis**: the Sun's depression angle
+below the horizon when the planet or star crosses the horizon. Specify
+`method: "arcus"` alongside a caller-supplied `arcusVisionis` threshold (Caelus
+requires you to supply your chosen table angle):
+
+```ts run
+const byRule = heliacal(engine, "Sirius", start, 29.85, 31.25, {
+  method: "arcus", arcusVisionis: 9,
+});
+
+calendarDate(byRule.jd, "julian");  // 19 July 139
+```
+
+Visibility results expose the implied `arcusVisionis` angle computed from the
+physical twilight solution; passing that angle back into `method: "arcus"`
+reproduces the same date.
+
+The `arcus` method also supports opposition events (`acronychal_rising` and
+`cosmical_setting`), which denote the last evening rising or first morning
+setting while the Sun lies at least `arcusVisionis` below the horizon. The
+physical visibility mode omits these two events because horizon emergence lacks
+a standardized published altitude threshold.
+
+## Comparison with Swiss Ephemeris
+
+Results were benchmarked against Swiss Ephemeris 2.10's heliacal routines
+(which implement a more detailed revision of Schaefer's equations) using matching
+catalog star magnitudes, an extinction of `0.25`, five geographic sites from
+Cape Town to London, and four epochs spanning 600 BCE to 2020 CE:
+
+| Group | Events | Same day | Within 1 day | Within 3 days | Largest difference |
+|---|---|---|---|---|---|
+| Ten bright stars | 198 | 68 | 183 | 198 | 3 days |
+| Mars, Jupiter, Saturn | 58 | 17 | 37 | 55 | 6 days |
+| Venus | 40 | 28 | 40 | 40 | 1 day |
+| Mercury | 38 | 19 | 36 | 38 | 3 days |
+| The Moon | 40 | 39 | 40 | 40 | 1 day |
+
+In 372 of 374 comparisons, Swiss Ephemeris falls inside Caelus's
+`[earliest, latest]` window. The six-day outlier is an evening setting of Mars,
+where slow motion into twilight produces a 22-day visibility window. Four
+additional weak apparitions of Mercury and Mars were omitted from the paired
+comparison because one model judged them visible while the other did not.
+Run `python/validate_heliacal.py` to reproduce these numbers.
+
+Agreement between two models confirms mathematical consistency rather than
+exact historical sky conditions. Actual sightings scatter by several days due
+to weather and observer eyesight, so downstream code should treat the full
+`[earliest, latest]` range as the operative answer.
+
+## Through the MCP server
+
+The `heliacal` MCP tool accepts a target, latitude and longitude, and start
+year, returning every chronological visibility event along with its
+uncertainty bounds. Years use astronomical numbering, and dates before
+15 October 1582 use the Julian calendar (matching `date_sky`).
+
+## Limits
+
+- Assumes unaided naked-eye observation with no optical magnification terms for
+  binoculars or telescopes.
+- Models an idealized flat horizon at the observer's elevation; local mountain
+  ridges or terrain delay actual risings until the body clears them.
+- Applies a uniform `extinction` value across all azimuths and seasons.
+- Prior to roughly 800 BCE, ΔT clock uncertainty reaches 18 minutes or more (up to
+  one hour by 3000 BCE), shifting which terrestrial longitudes witness a given
+  sunset and potentially moving marginal lunar crescent dates by a day (star
+  and planetary dates are unaffected). See [Deep Time](/docs/deep-time) for ΔT
+  uncertainty bounds.

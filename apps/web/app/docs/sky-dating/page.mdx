@@ -208,8 +208,8 @@ instructions are in the [MCP guide](/docs/mcp).
   dates are validated only when era packs are loaded via `loadNodeData` in
   Node.js or `loadPacks` in the browser; the embedded tier omits them. Use
   `engineCapabilities` to inspect per-body spans.
-- Uranus, Neptune, Pluto, Chiron, and asteroids lack pre-1000 CE era packs and
-  cannot be constrained in classical-era searches.
+- Chiron and the asteroids have no packs before 1600 CE and cannot be
+  constrained in searches earlier than that.
 - `dateSky` supports longitude and elongation constraints only; it does not
   filter by Ascendant, house placement, or retrograde state. To search
   arbitrary predicates over years or decades, use [`when()`](/docs/api), which

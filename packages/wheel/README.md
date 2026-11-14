@@ -126,4 +126,4 @@ removes the cusp spokes.
 - [caelus](https://www.npmjs.com/package/caelus): core ephemeris and chart engine
 - [caelus-birth](https://www.npmjs.com/package/caelus-birth): offline timezone and place resolution (local birth time to UT)
 - `caelus-wheel`: this package
-- [caelus-mcp](https://www.npmjs.com/package/caelus-mcp): MCP server providing thirty-seven chart tools over stdio
+- [caelus-mcp](https://www.npmjs.com/package/caelus-mcp): MCP server providing thirty-eight chart tools over stdio

@@ -28,7 +28,7 @@ import {
   detectPatterns, detectPatternsIn, chartSignature, parans,
   chartFeatures, configurationFit,
   dignityScore, voidOfCourse,
-  synastryAspects, dateSky, chartStability,
+  synastryAspects, dateSky, chartStability, heliacal, localDay, calendarDate,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -774,6 +774,87 @@ const assertExactHits = (hits, body, targetLonAt, angle, label, tolDeg = 0.02) =
   assert(half.isError === true, "chart_stability: lat without lon is rejected");
   const tooWide = await client.callTool({ name: "chart_stability", arguments: { date: iso, uncertainty_minutes: 2000 } });
   assert(tooWide.isError === true, "chart_stability: more than 720 minutes is rejected");
+}
+
+// ---------------------------------------------------------------- heliacal
+{
+  // Sirius at Memphis in 139 CE: the tool's date is the engine's.
+  const jd0 = julianDay(139, 1, 1, 0, 0, 0, "julian");
+  const res = await call("heliacal", { target: "Sirius", lat: 29.85, lon: 31.25, start_year: 139 });
+  assert(res.method === "visibility" && res.atmosphere.extinction === 0.25 && res.atmosphere.spread === 0.05,
+    "heliacal: echoes the method and the atmosphere");
+  assert(res.events.length === 2 && res.not_found.length === 0, `heliacal: a star has a rising and a setting (${res.events.length})`);
+  const rising = res.events.find((e) => e.kind === "morning_first");
+  const direct = heliacal(eng, "Sirius", jd0, 29.85, 31.25);
+  assert(Math.abs(rising.date.jd - direct.jd) < 1e-4, "heliacal: the rising instant is the engine's");
+  assert(rising.date.calendar === "julian" && rising.date.era === "139 CE" && rising.date.month === 7 && rising.date.day === 19,
+    `heliacal: Sirius rises on 19 July 139, Julian calendar (${JSON.stringify(rising.date)})`);
+  assert(rising.local_date.month === 7 && rising.local_date.day === 19, "heliacal: the local date is given");
+  assert(rising.earliest.jd <= rising.date.jd && rising.date.jd <= rising.latest.jd, "heliacal: the window brackets the date");
+  assert(rising.window_days === localDay(direct.latest, 31.25) - localDay(direct.earliest, 31.25),
+    `heliacal: window_days counts local days (${rising.window_days})`);
+  assert(rising.margin > 0 && rising.altitude > 0 && rising.sun_altitude < 0 && rising.azimuth < 180,
+    "heliacal: seen in the east with the Sun down");
+  assert(Math.abs(rising.arcus_visionis - direct.arcusVisionis) < 0.06, "heliacal: the implied arcus visionis is the engine's");
+  assert(res.events[0].date.jd <= res.events[1].date.jd, "heliacal: events are in date order");
+
+  // the implied arcus visionis, fed to the geometric method, lands on the same day
+  const arcus = await call("heliacal", {
+    target: "Sirius", lat: 29.85, lon: 31.25, start_year: 139, kind: "heliacal_rising",
+    method: "arcus", arcus_visionis: direct.arcusVisionis - 1e-6,
+  });
+  assert(arcus.events.length === 1 && arcus.events[0].kind === "morning_first" && arcus.events[0].method === "arcus"
+    && arcus.arcus_visionis !== undefined && arcus.atmosphere === undefined,
+    "heliacal: the arcus method reports its angle and no atmosphere");
+  assert(arcus.events[0].local_date.day === 19 && arcus.events[0].earliest === undefined,
+    "heliacal: the arcus method lands on the same day and has no window");
+
+  // Venus has all four; in date order from the start
+  const venus = await call("heliacal", { target: "venus", lat: 32.54, lon: 44.42, start_year: 2020 });
+  assert(venus.events.length === 4 && new Set(venus.events.map((e) => e.kind)).size === 4, "heliacal: Venus has four events");
+  for (const e of venus.events) {
+    const d = heliacal(eng, "venus", julianDay(2020, 1, 1), 32.54, 44.42, { kind: e.kind });
+    assert(Math.abs(e.date.jd - d.jd) < 1e-4, `heliacal: venus ${e.kind} is the engine's`);
+  }
+  const el = venus.events.find((e) => e.kind === "evening_last");
+  const mf = venus.events.find((e) => e.kind === "morning_first");
+  assert(mf.date.jd - el.date.jd > 0 && mf.date.jd - el.date.jd < 30, "heliacal: Venus's inferior conjunction hides it for under a month");
+
+  // outer planets gain the opposition events under the arcus method
+  const jup = await call("heliacal", { target: "jupiter", lat: 32.54, lon: 44.42, start_year: 2020, method: "arcus", arcus_visionis: 7 });
+  assert(jup.events.length === 4 && jup.events.some((e) => e.kind === "acronychal_rising")
+    && jup.events.some((e) => e.kind === "cosmical_setting"), "heliacal: the arcus method adds the opposition events");
+  assert(jup.events.every((e) => e.sun_depression >= 7), "heliacal: the Sun is at least the arcus down");
+
+  // the Moon: Yallop's test
+  const moon = await call("heliacal", { target: "moon", lat: 21.42, lon: 39.83, start_year: 2025, start_month: 3, start_day: 1 });
+  const ef = moon.events.find((e) => e.kind === "evening_first");
+  assert(moon.method === "crescent" && moon.atmosphere === undefined && moon.events.length === 2, "heliacal: the Moon has two events by the crescent test");
+  assert(ef.method === "crescent" && ef.q > -0.014 && ["A", "B"].includes(ef.zone) && ef.lag_minutes > 20,
+    `heliacal: the new crescent passes Yallop's test (${JSON.stringify(ef)})`);
+  assert(ef.date.year === 2025 && ef.date.month === 3 && ef.date.day === 1, "heliacal: the crescent of 1 March 2025 at Mecca");
+
+  // a circumpolar star has no heliacal events; they are listed, not dropped
+  const polaris = await call("heliacal", { target: "Polaris", lat: 51.5, lon: -0.12, start_year: 2020 });
+  assert(polaris.events.length === 0 && polaris.not_found.length === 2, "heliacal: a star that never sets has none");
+
+  // an ancient date and a Julian stamp
+  const old = await call("heliacal", { target: "Regulus", lat: 32.54, lon: 44.42, start_year: -599, kind: "morning_first" });
+  assert(old.events.length === 1 && old.events[0].date.calendar === "julian" && old.events[0].date.era === "600 BCE",
+    `heliacal: Regulus in 600 BCE (${JSON.stringify(old.events[0]?.date)})`);
+  assert(old.searched_from.year === -599 && old.searched_from.month === 1 && old.searched_from.day === 1, "heliacal: searched_from is the start date");
+  const cd = calendarDate(old.events[0].date.jd, "julian");
+  assert(cd.month === old.events[0].date.month && cd.day === old.events[0].date.day, "heliacal: the stamp is the Julian calendar date");
+
+  // refusals
+  const bad = async (args) => (await client.callTool({ name: "heliacal", arguments: args })).isError === true;
+  assert(await bad({ target: "vulcan_prime", lat: 30, lon: 31, start_year: 2020 }), "heliacal: unknown target rejected");
+  assert(await bad({ target: "Sirius", lat: 30, lon: 31, start_year: 2020, method: "arcus" }), "heliacal: arcus without its angle rejected");
+  assert(await bad({ target: "moon", lat: 30, lon: 31, start_year: 2020, kind: "morning_first" }), "heliacal: the Moon has no morning first");
+  assert(await bad({ target: "jupiter", lat: 30, lon: 31, start_year: 2020, kind: "evening_first" }), "heliacal: Jupiter has no evening first");
+  assert(await bad({ target: "Sirius", lat: 30, lon: 31, start_year: 2020, kind: "cosmical_setting" }), "heliacal: opposition events need the arcus method");
+  assert(await bad({ target: "Sirius", lat: 30, lon: 31, start_year: -5000 }), "heliacal: a start outside the data is rejected");
+  assert(await bad({ target: "Sirius", lat: 30, lon: 31, start_year: 2020, extinction: 3 }), "heliacal: an impossible extinction is rejected");
 }
 
 // ------------------------------------------------- chart_facts exotic anchors

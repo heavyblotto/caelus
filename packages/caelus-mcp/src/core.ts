@@ -3,7 +3,7 @@
  * dependency on Node.
  *
  * Design (per 2026 MCP practice): one bounded context (chart computation),
- * a small curated tool surface (37 chart tools, not API wrappers),
+ * a small curated tool surface (38 chart tools, not API wrappers),
  * and token-frugal outputs (positions to 0.01 deg, terse keys, no prose --
  * the model does the interpreting, the server does the math).
  *
@@ -47,9 +47,9 @@ import {
   registerSyntheticSystem, engineCapabilities,
   canonicalChart, canonicalDigest, canonicalTimeMs, quantizeUnit,
   canonicalChartWithRemainders,
-  dateSky, calendarDate, validatedSpanFor, chartStability,
+  dateSky, calendarDate, validatedSpanFor, chartStability, heliacal, localDay,
   type SyntheticSystem, type CanonicalGrid, type RemainderGrid,
-  type SkyConstraint,
+  type SkyConstraint, type HeliacalKind,
 } from "caelus";
 
 /** Ephemeral engine for synthetic registration (does not mutate the default). */
@@ -678,6 +678,53 @@ const skyStamp = z.object({
   day: z.number().int(),
   ut: z.string(),
 });
+const GREGORIAN_START_JD = 2299160.5; // 15 October 1582
+
+/** A UT instant as a calendar stamp: Julian calendar before 15 October 1582,
+ *  rounded to the nearest minute. */
+function skyStampOf(jd: number): z.infer<typeof skyStamp> {
+  const calendar = jd < GREGORIAN_START_JD ? "julian" as const : "gregorian" as const;
+  // add half a minute and floor, so the stamp rounds to the nearest minute
+  // and 23:59.7 rolls into the next day instead of printing 24:00
+  const d = calendarDate(jd + 0.5 / 1440, calendar);
+  const minutes = Math.min(1439, Math.floor(d.hour * 60));
+  const pad2 = (n: number) => String(n).padStart(2, "0");
+  return {
+    jd: Math.round(jd * 1e5) / 1e5,
+    calendar,
+    year: d.year,
+    era: d.year > 0 ? `${d.year} CE` : `${1 - d.year} BCE`,
+    month: d.month,
+    day: d.day,
+    ut: `${pad2(Math.floor(minutes / 60))}:${pad2(minutes % 60)}`,
+  };
+}
+const heliacalEventOut = z.object({
+  kind: z.string(), method: z.string(),
+  date: skyStamp,
+  local_date: z.object({ year: z.number().int(), month: z.number().int(), day: z.number().int() }),
+  earliest: skyStamp.nullable().optional(),
+  latest: skyStamp.nullable().optional(),
+  window_days: z.number().int().nullable().optional(),
+  conjunction: skyStamp,
+  margin: z.number().optional(), magnitude: z.number().optional(),
+  altitude: z.number().optional(), azimuth: z.number().optional(),
+  sun_altitude: z.number().optional(), arcus_visionis: z.number().optional(),
+  sun_depression: z.number().optional(),
+  q: z.number().optional(), zone: z.string().optional(), lag_minutes: z.number().optional(),
+  arcv: z.number().optional(), arcl: z.number().optional(), daz: z.number().optional(),
+  width: z.number().optional(),
+});
+export const heliacalOut = z.object({
+  target: z.string(),
+  place: z.object({ lat: z.number(), lon: z.number(), altitude_m: z.number() }),
+  searched_from: skyStamp,
+  method: z.string(),
+  atmosphere: z.object({ extinction: z.number(), spread: z.number() }).optional(),
+  arcus_visionis: z.number().optional(),
+  events: z.array(heliacalEventOut),
+  not_found: z.array(z.string()),
+});
 const stabilityValue = z.union([z.string(), z.number(), z.boolean(), z.null()]);
 export const chartStabilityOut = z.object({
   utc: z.string(),
@@ -874,6 +921,7 @@ export const OUTPUT_SCHEMAS = {
   cosmic_weather: cosmicWeatherOut,
   date_sky: dateSkyOut,
   chart_stability: chartStabilityOut,
+  heliacal: heliacalOut,
 } as const;
 
 // ---------------------------------------------------------------- server
@@ -2190,7 +2238,7 @@ export function buildServer(
 
   server.registerTool("date_sky", {
     description:
-      "Date a described sky: find every window in a span of years in which a set of planetary positions held at once. The inverse of a chart, and the computation used to date a horoscope that records positions and no year. Each constraint puts a body in a zodiac sign, within an orb of a longitude, or in a from/to arc, or puts the elongation between two bodies in an arc (moon minus sun from 180 to 360 is a waning Moon). Returns the matching windows with calendar dates (Julian calendar before 15 October 1582) and a funnel showing how many windows survived each constraint, slowest body first. Years are astronomical: 0 is 1 BCE and -409 is 410 BCE. The searchable span depends on the server's data: a local stdio server with era packs covers about 3000 BCE to 3000 CE for the Sun, Moon, and Mercury through Saturn; a hosted server on the embedded tier covers 1000 to 3000.",
+      "Date a described sky: find every window in a span of years in which a set of planetary positions held at once. The inverse of a chart, and the computation used to date a horoscope that records positions and no year. Each constraint puts a body in a zodiac sign, within an orb of a longitude, or in a from/to arc, or puts the elongation between two bodies in an arc (moon minus sun from 180 to 360 is a waning Moon). Returns the matching windows with calendar dates (Julian calendar before 15 October 1582) and a funnel showing how many windows survived each constraint, slowest body first. Years are astronomical: 0 is 1 BCE and -409 is 410 BCE. The searchable span depends on the server's data: a local stdio server with era packs covers about 3000 BCE to 3000 CE for the Sun, the Moon, and the planets through Pluto; a hosted server on the embedded tier covers 1000 to 3000.",
     inputSchema: {
       constraints: z.array(z.object({
         body: z.string().optional().describe("body whose longitude is constrained, snake_case (sun, moon, mercury ... saturn)"),
@@ -2235,7 +2283,7 @@ export function buildServer(
       throw new Error(
         `date_sky: this server's data covers years ${lo} to ${hi} for the bodies named; `
         + `asked for ${start_year} to ${end_year}. A local caelus-mcp with the era packs `
-        + "reaches about 3000 BCE for the Sun, Moon, and Mercury through Saturn.",
+        + "reaches about 3000 BCE for the Sun, the Moon, and the planets through Pluto.",
       );
     }
     const jdOfYear = (y: number): number =>
@@ -2245,24 +2293,7 @@ export function buildServer(
       jdOfYear(start_year), jdOfYear(end_year + 1),
       { zodiac, pad, maxWindows: limit },
     );
-    const GREGORIAN_START_JD = 2299160.5; // 15 October 1582
-    const pad2 = (n: number) => String(n).padStart(2, "0");
-    const stamp = (jd: number) => {
-      const calendar = jd < GREGORIAN_START_JD ? "julian" as const : "gregorian" as const;
-      // add half a minute and floor, so the stamp rounds to the nearest
-      // minute and 23:59.7 rolls into the next day instead of printing 24:00
-      const d = calendarDate(jd + 0.5 / 1440, calendar);
-      const minutes = Math.min(1439, Math.floor(d.hour * 60));
-      return {
-        jd: Math.round(jd * 1e5) / 1e5,
-        calendar,
-        year: d.year,
-        era: d.year > 0 ? `${d.year} CE` : `${1 - d.year} BCE`,
-        month: d.month,
-        day: d.day,
-        ut: `${pad2(Math.floor(minutes / 60))}:${pad2(minutes % 60)}`,
-      };
-    };
+    const stamp = skyStampOf;
     return text({
       searched: { start_year, end_year, zodiac, pad },
       windows: res.windows.map((w) => ({
@@ -2318,6 +2349,136 @@ export function buildServer(
       stable: res.facts.filter((f) => f.stable).map((f) => ({
         kind: f.kind, subject: f.subject, value: f.value,
       })),
+    });
+  });
+
+  server.registerTool("heliacal", {
+    description:
+      "First and last visibility of a planet, a star, or the Moon from a place: the heliacal rising (morning_first, the first morning a body is seen again before sunrise after its conjunction with the Sun), the heliacal setting (evening_last), the evening_first and morning_last of Mercury, Venus, and the Moon (evening_first for the Moon is the new crescent), and by the arcus method the acronychal_rising and cosmical_setting at opposition. These are the events ancient records report, and the dates depend on the place. The default method is a physical visibility model (sky brightness in twilight and moonlight, atmospheric extinction, the eye's threshold; Schaefer's published formulas), and the Moon's crescent uses Yallop's q test. Each event comes with an earliest and a latest date, the same event under a clearer and a hazier sky, because the haze on a given morning is not known. method 'arcus' is the classical geometric rule and needs arcus_visionis, the Sun's depression in degrees when the body is on the horizon. With no kind given, every event the target has is returned. Dates are the next occurrence at or after the start date; years are astronomical (0 is 1 BCE, -599 is 600 BCE) and the Julian calendar is used before 15 October 1582. target is a planet (mercury to saturn), 'moon', or a catalog star name such as Sirius, Regulus, Aldebaran, Spica, Antares.",
+    inputSchema: {
+      target: z.string().describe("planet in snake_case (mercury, venus, mars, jupiter, saturn), 'moon', or a star name (Sirius, Regulus, Spica ...)"),
+      lat: latSchema,
+      lon: lonSchema,
+      start_year: z.number().int().describe("year to search from, astronomical (negative for BCE: -599 is 600 BCE)"),
+      start_month: z.number().int().min(1).max(12).default(1).describe("month to search from (default 1)"),
+      start_day: z.number().int().min(1).max(31).default(1).describe("day to search from (default 1)"),
+      kind: z.enum([
+        "morning_first", "evening_last", "evening_first", "morning_last",
+        "acronychal_rising", "cosmical_setting", "heliacal_rising", "heliacal_setting",
+      ]).optional().describe("which event; omit for every event the target has"),
+      method: z.enum(["visibility", "arcus"]).default("visibility")
+        .describe("'visibility' (physical model, default) or 'arcus' (geometric, needs arcus_visionis)"),
+      arcus_visionis: z.number().min(0).max(30).optional()
+        .describe("for method 'arcus': the Sun's depression in degrees when the body is on the horizon"),
+      extinction: z.number().min(0.1).max(1).default(0.25)
+        .describe("V-band extinction, magnitudes per air mass: 0.15 a clear mountain, 0.25 a clear sea-level sky (default), 0.35 and up hazy"),
+      spread: z.number().min(0).max(0.3).default(0.05)
+        .describe("half-width of the extinction range behind 'earliest' and 'latest' (default 0.05)"),
+      altitude_m: z.number().min(0).max(6000).default(0).describe("observer height above sea level in metres"),
+    },
+  }, async ({ target, lat, lon, start_year, start_month, start_day, kind, method, arcus_visionis, extinction, spread, altitude_m }) => {
+    const moon = target === "moon";
+    const inner = target === "mercury" || target === "venus";
+    const planet = inner || ["mars", "jupiter", "saturn", "uranus", "neptune", "pluto"].includes(target);
+    if (!moon && !planet && !engine.starNames().includes(target)) {
+      throw new Error(`heliacal: unknown target "${target}"; give a planet, 'moon', or a catalog star name (see the fixed_stars tool)`);
+    }
+    if (method === "arcus" && arcus_visionis === undefined) {
+      throw new Error("heliacal: method 'arcus' needs arcus_visionis, in degrees");
+    }
+    if (method === "arcus" && moon) {
+      throw new Error("heliacal: the Moon's crescent has no arcus method; use the default method");
+    }
+    // The search runs up to about 830 days past the start and must stay
+    // inside the data this server was built with.
+    const spans = [validatedSpanFor("sun", engine.data), validatedSpanFor("moon", engine.data)];
+    if (planet) spans.push(validatedSpanFor(target, engine.data));
+    let lo = -Infinity;
+    let hi = Infinity;
+    for (const span of spans) {
+      if (span) {
+        lo = Math.max(lo, span.from + 1);
+        hi = Math.min(hi, span.to - 4);
+      }
+    }
+    if (start_year < lo || start_year > hi) {
+      throw new Error(
+        `heliacal: this server's data allows a start year from ${lo} to ${hi} for ${target}; `
+        + `asked for ${start_year}. A local caelus-mcp with the era packs reaches about 3000 BCE.`,
+      );
+    }
+    const calendar = start_year < 1583 ? "julian" as const : "gregorian" as const;
+    const jdStart = julianDay(start_year, start_month, start_day, 0, 0, 0, calendar);
+    const kinds: HeliacalKind[] = kind
+      ? [(kind === "heliacal_rising" ? "morning_first" : kind === "heliacal_setting" ? "evening_last" : kind)]
+      : moon ? ["evening_first", "morning_last"]
+        : method === "arcus"
+          ? (inner
+            ? ["morning_first", "evening_last", "evening_first", "morning_last"]
+            : ["morning_first", "evening_last", "acronychal_rising", "cosmical_setting"])
+          : (inner
+            ? ["morning_first", "evening_last", "evening_first", "morning_last"]
+            : ["morning_first", "evening_last"]);
+    const r1 = (x: number) => Math.round(x * 10) / 10;
+    const r3 = (x: number) => Math.round(x * 1000) / 1000;
+    const localDate = (jd: number) => {
+      const cal = jd < GREGORIAN_START_JD ? "julian" as const : "gregorian" as const;
+      const d = calendarDate(jd + lon / 360, cal);
+      return { year: d.year, month: d.month, day: d.day };
+    };
+    const events: z.infer<typeof heliacalEventOut>[] = [];
+    const notFound: string[] = [];
+    const found: { jd: number; row: z.infer<typeof heliacalEventOut> }[] = [];
+    for (const k of kinds) {
+      const ev = heliacal(engine, target, jdStart, lat, lon, {
+        kind: k, method, arcusVisionis: arcus_visionis, extinction, spread, altM: altitude_m,
+      });
+      if (!ev) {
+        notFound.push(k);
+        continue;
+      }
+      const row: z.infer<typeof heliacalEventOut> = {
+        kind: ev.kind, method: ev.method,
+        date: skyStampOf(ev.jd), local_date: localDate(ev.jd),
+        conjunction: skyStampOf(ev.conjunction),
+      };
+      if (ev.method !== "arcus") {
+        row.earliest = ev.earliest == null ? null : skyStampOf(ev.earliest);
+        row.latest = ev.latest == null ? null : skyStampOf(ev.latest);
+        row.window_days = ev.earliest == null || ev.latest == null
+          ? null : localDay(ev.latest, lon) - localDay(ev.earliest, lon);
+      }
+      if (ev.method === "visibility") {
+        row.margin = r2(ev.margin!);
+        row.magnitude = r2(ev.magnitude!);
+        row.altitude = r1(ev.altitude!);
+        row.azimuth = r1(ev.azimuth!);
+        row.sun_altitude = r1(ev.sunAltitude!);
+        row.arcus_visionis = r1(ev.arcusVisionis!);
+      } else if (ev.method === "arcus") {
+        row.sun_depression = r2(ev.sunDepression!);
+      } else {
+        row.q = r3(ev.q!);
+        row.zone = ev.zone;
+        row.lag_minutes = r1(ev.lagMinutes!);
+        row.arcv = r2(ev.arcv!);
+        row.arcl = r2(ev.arcl!);
+        row.daz = r2(ev.daz!);
+        row.width = r2(ev.width!);
+      }
+      found.push({ jd: ev.jd, row });
+    }
+    found.sort((a, b) => a.jd - b.jd);
+    for (const f of found) events.push(f.row);
+    return text({
+      target,
+      place: { lat, lon, altitude_m },
+      searched_from: skyStampOf(jdStart),
+      method: moon ? "crescent" : method,
+      ...(method === "visibility" && !moon ? { atmosphere: { extinction, spread } } : {}),
+      ...(method === "arcus" ? { arcus_visionis } : {}),
+      events,
+      not_found: notFound,
     });
   });
 

@@ -3860,6 +3860,48 @@
      },
      {
       "kind": "sign",
+      "subject": "uranus",
+      "value": "Gemini",
+      "stable": true,
+      "share": 1.0,
+      "segments": [
+       {
+        "value": "Gemini",
+        "from": 1757642.99820625,
+        "to": 1757643.00179375
+       }
+      ]
+     },
+     {
+      "kind": "sign",
+      "subject": "neptune",
+      "value": "Gemini",
+      "stable": true,
+      "share": 1.0,
+      "segments": [
+       {
+        "value": "Gemini",
+        "from": 1757642.99820625,
+        "to": 1757643.00179375
+       }
+      ]
+     },
+     {
+      "kind": "sign",
+      "subject": "pluto",
+      "value": "Pisces",
+      "stable": true,
+      "share": 1.0,
+      "segments": [
+       {
+        "value": "Pisces",
+        "from": 1757642.99820625,
+        "to": 1757643.00179375
+       }
+      ]
+     },
+     {
+      "kind": "sign",
       "subject": "mean_node",
       "value": "Virgo",
       "stable": true,
@@ -3991,6 +4033,48 @@
      },
      {
       "kind": "house",
+      "subject": "uranus",
+      "value": 11,
+      "stable": true,
+      "share": 1.0,
+      "segments": [
+       {
+        "value": 11,
+        "from": 1757642.99820625,
+        "to": 1757643.00179375
+       }
+      ]
+     },
+     {
+      "kind": "house",
+      "subject": "neptune",
+      "value": 12,
+      "stable": true,
+      "share": 1.0,
+      "segments": [
+       {
+        "value": 12,
+        "from": 1757642.99820625,
+        "to": 1757643.00179375
+       }
+      ]
+     },
+     {
+      "kind": "house",
+      "subject": "pluto",
+      "value": 9,
+      "stable": true,
+      "share": 1.0,
+      "segments": [
+       {
+        "value": 9,
+        "from": 1757642.99820625,
+        "to": 1757643.00179375
+       }
+      ]
+     },
+     {
+      "kind": "house",
       "subject": "mean_node",
       "value": 3,
       "stable": true,
@@ -4088,6 +4172,48 @@
       ]
      },
      {
+      "kind": "retrograde",
+      "subject": "uranus",
+      "value": false,
+      "stable": true,
+      "share": 1.0,
+      "segments": [
+       {
+        "value": false,
+        "from": 1757642.99820625,
+        "to": 1757643.00179375
+       }
+      ]
+     },
+     {
+      "kind": "retrograde",
+      "subject": "neptune",
+      "value": true,
+      "stable": true,
+      "share": 1.0,
+      "segments": [
+       {
+        "value": true,
+        "from": 1757642.99820625,
+        "to": 1757643.00179375
+       }
+      ]
+     },
+     {
+      "kind": "retrograde",
+      "subject": "pluto",
+      "value": false,
+      "stable": true,
+      "share": 1.0,
+      "segments": [
+       {
+        "value": false,
+        "from": 1757642.99820625,
+        "to": 1757643.00179375
+       }
+      ]
+     },
+     {
       "kind": "aspect",
       "subject": "sun-saturn",
       "value": "trine",
@@ -4096,6 +4222,20 @@
       "segments": [
        {
         "value": "trine",
+        "from": 1757642.99820625,
+        "to": 1757643.00179375
+       }
+      ]
+     },
+     {
+      "kind": "aspect",
+      "subject": "sun-pluto",
+      "value": "conjunction",
+      "stable": true,
+      "share": 1.0,
+      "segments": [
+       {
+        "value": "conjunction",
         "from": 1757642.99820625,
         "to": 1757643.00179375
        }
@@ -4173,6 +4313,20 @@
      },
      {
       "kind": "aspect",
+      "subject": "venus-neptune",
+      "value": "sextile",
+      "stable": true,
+      "share": 1.0,
+      "segments": [
+       {
+        "value": "sextile",
+        "from": 1757642.99820625,
+        "to": 1757643.00179375
+       }
+      ]
+     },
+     {
+      "kind": "aspect",
       "subject": "mars-jupiter",
       "value": "conjunction",
       "stable": true,
@@ -4187,8 +4341,8 @@
      }
     ],
     "summary": {
-     "facts": 33,
-     "stable": 32
+     "facts": 44,
+     "stable": 43
     }
    }
   },

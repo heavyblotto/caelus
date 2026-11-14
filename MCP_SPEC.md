@@ -349,8 +349,8 @@ body first, with the windows and days that survived each.
 
 The tool refuses a span outside the validated range of the bodies named, and
 the error states the years this server's data covers. A stdio server with the
-era packs reaches about 3000 BCE for the Sun, the Moon, and Mercury through
-Saturn. The hosted endpoint runs the embedded tier and covers 1000 to 3000.
+era packs reaches about 3000 BCE for the Sun, the Moon, and the planets
+through Pluto. The hosted endpoint runs the embedded tier and covers 1000 to 3000.
 
 ## Uncertain times (roadmap milestone 2, unreleased)
 `chart_stability` exposes the engine's `chartStability`. The caller gives a
@@ -372,3 +372,46 @@ Returns `{utc, window, summary, unstable, stable}`. `window` is
 `{kind, subject, value, share, changes}`: `value` is the fact at the stated
 time, `share` the fraction of the window in which it holds, and `changes` a
 list of `{utc, from, to}`. Each entry of `stable` is `{kind, subject, value}`.
+
+## First and last visibility (roadmap milestone 5, unreleased)
+`heliacal` exposes the engine's `heliacal`: the day a planet, a catalog star,
+or the Moon is first or last seen from one place. The engine function is
+pinned by `heliacal-golden`; `verify_tools` pins the tool to it (each event's
+instant, the window, the implied arcus visionis, the round trip through the
+arcus method, the crescent test, and the refusals), and four frozen
+`golden-mcp` payloads hold the format. Thirty-eight tools total.
+
+### heliacal(target, lat, lon, start_year, start_month?, start_day?, kind?, method?, arcus_visionis?, extinction?, spread?, altitude_m?)
+`target` is a planet in snake_case, `moon`, or a catalog star name. The
+search starts at 0h UT on the start date and returns the next occurrence of
+each event at or after it. Years are astronomical, and a start date before
+1583 is read in the Julian calendar.
+
+`kind` is one of `morning_first` (alias `heliacal_rising`), `evening_last`
+(alias `heliacal_setting`), `evening_first`, `morning_last`,
+`acronychal_rising`, `cosmical_setting`. Left out, the tool returns every
+event the target has: two for a star or an outer planet, four for Mercury and
+Venus, two for the Moon, and for an outer planet or star under the arcus
+method the two opposition events as well.
+
+`method` is `visibility` (default) or `arcus`. The visibility method takes
+`extinction` (V-band magnitudes per air mass, default 0.25) and `spread`
+(default 0.05), and computes each event at the stated extinction and at that
+value less and plus the spread. The arcus method requires `arcus_visionis` in
+degrees. The Moon always uses Yallop's crescent test and reports its method
+as `crescent`.
+
+Returns `{target, place, searched_from, method, atmosphere?, arcus_visionis?,
+events, not_found}`. `events` is in date order. Each event has `kind`,
+`method`, `date` (the calendar stamp `date_sky` uses, in UT), `local_date`
+(`{year, month, day}` in local mean time), and `conjunction` (the conjunction
+or opposition it belongs to). A visibility event adds `earliest`, `latest`,
+`window_days`, `margin`, `magnitude`, `altitude`, `azimuth`, `sun_altitude`,
+and `arcus_visionis` (the Sun's depression when the body crossed the
+horizon that day). An arcus event adds `sun_depression`. A crescent event
+adds `earliest`, `latest`, `window_days`, `q`, `zone`, `lag_minutes`, `arcv`,
+`arcl`, `daz`, and `width`. `not_found` lists the kinds with no event in the
+search span, as for a star that never sets.
+
+The tool refuses an unknown target, an event the target does not have, the
+arcus method without its angle, and a start year outside the server's data.

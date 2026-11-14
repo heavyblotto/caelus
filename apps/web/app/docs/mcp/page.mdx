@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "MCP Setup",
-  description: "Connect Caelus's thirty-seven MCP chart tools to Claude Desktop, Claude Code, Cursor, VS Code, or any MCP client via Streamable HTTP or local stdio.",
+  description: "Connect Caelus's thirty-eight MCP chart tools to Claude Desktop, Claude Code, Cursor, VS Code, or any MCP client via Streamable HTTP or local stdio.",
   path: "/docs/mcp",
 });
 
@@ -14,7 +14,7 @@ export const metadata = pageMetadata({
 Because AI assistants call deterministic ephemeris tools on every turn rather
 than estimating positions from memory, charts and timing windows remain exact.
 
-You can connect to the same **thirty-seven** tools via either transport:
+You can connect to the same **thirty-eight** tools via either transport:
 
 - **Hosted (Streamable HTTP)**: point your MCP client at
   `https://www.ephemengine.com/api/mcp` with no local installation.
@@ -197,7 +197,7 @@ For any standard stdio MCP client:
 
 ## Available tools
 
-Once connected, your MCP client should display all **thirty-seven tools** in its
+Once connected, your MCP client should display all **thirty-eight tools** in its
 tool panel:
 
 **Charts and readings**
@@ -223,6 +223,7 @@ tool panel:
 - `similar_skies`: ranks timestamps within a date range by cosine similarity to a target chart.
 - `date_sky`: searches multi-year or multi-millennium spans for matching planetary positions (used for dating historical horoscopes).
 - `chart_stability`: reports which chart facts remain invariant across a time uncertainty window and when changing facts transition.
+- `heliacal`: computes first and last visibility dates from a location for planets, catalog stars, or the Moon (heliacal risings and settings, evening and morning apparitions of Mercury and Venus, and new and old crescents), including earliest and latest dates across clear and hazy atmospheric bounds.
 
 **Hellenistic time-lords**
 
@@ -259,7 +260,7 @@ tool panel:
 `combust`, `under_beams`) and aspect phase (`applying`, `separating`,
 `exact`) with normalized strength.
 
-Alongside these thirty-seven tools, the server exposes three **resources**
+Alongside these thirty-eight tools, the server exposes three **resources**
 (`caelus://glossary`, `caelus://accuracy`, and `ui://widget/chart.html`) and
 two **prompts** (`rectification_session` and `natal_reading`).
 

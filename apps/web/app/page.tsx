@@ -74,6 +74,12 @@ const CAPABILITIES: Array<{ title: string; href: string; desc: ReactNode; unrele
     unreleased: true,
   },
   {
+    title: "First and last visibility",
+    href: "/docs/heliacal",
+    desc: <>Compute heliacal risings and settings, inner-planet apparitions, and first lunar crescents for a location across atmospheric clarity bounds.</>,
+    unreleased: true,
+  },
+  {
     title: "Derived charts",
     href: "/docs/derived",
     desc: <>Returns, progressions, solar arc, composite, Davison, harmonics, draconic, dignities, and sect.</>,

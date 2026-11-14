@@ -9,7 +9,9 @@ though the underlying series is accurate to seven or eight digits.
 
 CPK1 quantizes each coefficient as an integer multiple of a power-of-two quantum
 well below the pack's fit residual. In CPK1 format, the seventeen packs total
-27 MB on disk, with the largest single pack at 8.5 MB.
+27 MB on disk, with the largest single pack at 8.5 MB. Three additional
+classical era packs (Uranus, Neptune, and Pluto for 3000 BCE to 1000 CE) add
+0.4 MB.
 
 ## Layout
 

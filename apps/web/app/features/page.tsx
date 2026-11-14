@@ -426,9 +426,10 @@ export default function Features() {
           The MCP server provides {MCP_TOOLS_PROSE} chart tools over stdio and
           Streamable HTTP at <A href="/api/mcp">/api/mcp</A>, alongside a REST
           endpoint at <A href="/api/chart?lat=27.94&lon=-82.46">/api/chart</A>{" "}
-          (with two tools, <code>date_sky</code> and <code>chart_stability</code>,
-          still unreleased). Because the engine performs no filesystem or network
-          I/O by default, it runs consistently across browsers, edge workers, and
+          (with three tools, <code>date_sky</code>,{" "}
+          <code>chart_stability</code>, and <code>heliacal</code>, still
+          unreleased). Because the engine performs no filesystem or network I/O
+          by default, it runs consistently across browsers, edge workers, and
           Node.js. See <A href="/docs/mcp">MCP Setup</A> and{" "}
           <A href="/docs/data-tiers">Data Tiers</A>.
         </Feature>
