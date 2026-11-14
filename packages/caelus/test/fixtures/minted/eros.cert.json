@@ -1,0 +1,40 @@
+{
+ "format": "caelus-mint-certificate",
+ "version": 1,
+ "id": "eros",
+ "number": 433,
+ "name": "433 Eros (A898 PA)",
+ "source": {
+  "service": "JPL Horizons",
+  "solution": "JPL#659",
+  "frame": "heliocentric ecliptic J2000",
+  "correction": "geometric"
+ },
+ "span": {
+  "from": 1990,
+  "to": 2030,
+  "jd0": 2447892.5,
+  "jd1": 2462502.5
+ },
+ "fit": {
+  "sample_step_days": 0.25,
+  "seg_days": 366,
+  "degree": 22,
+  "node_residual_au": 7.868752538442436e-08,
+  "quantum_exponent": -36
+ },
+ "error": {
+  "max_au": 8.437116704043476e-08,
+  "target_au": 4.331232386718099e-07,
+  "epochs": 300,
+  "basis": "the published pack against JPL Horizons at epochs the fit never sampled",
+  "min_geocentric_au": 0.17867616181151147,
+  "angle_bound_arcsec": 0.09739856870663693
+ },
+ "pack": {
+  "file": "eros.cpk",
+  "bytes": 10530,
+  "sha256": "7481f479229832b8fe39fa3d685cff66ac0e6b28c7d6280d2373a7041786bd40"
+ },
+ "minted": "2026-11-13"
+}

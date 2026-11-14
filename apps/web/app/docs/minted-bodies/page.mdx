@@ -1,0 +1,117 @@
+import { pageMetadata } from "../../../lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Minted Bodies",
+  description: "Add any numbered asteroid to the engine: a pack fitted to JPL Horizons on request, published with a certificate of its measured error, and loaded with a check that the bytes are the ones that were measured.",
+  path: "/docs/minted-bodies",
+});
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Minted bodies
+
+The engine ships packs for Ceres, Pallas, Juno, Vesta, Pholus, and Chiron.
+There are several hundred thousand other numbered asteroids, and bundling
+them is not practical. A pack for any one of them can be minted on request:
+fitted to JPL Horizons, measured, and published with a certificate that
+states what was measured.
+
+## Minting
+
+`python/mint_body.py` takes the asteroid's IAU number.
+
+```bash
+python3 python/mint_body.py 433 --year0 1990 --year1 2030 --out minted/
+```
+
+It samples the body's heliocentric position from Horizons, fits a Chebyshev
+pack, and writes the pack in the [binary form](/docs/data-tiers). It then
+fetches the body's position at 300 further instants the fit never sampled and
+measures the published bytes against them. The run fails if the error is over
+its target, which is the smaller of 5e-6 AU and half an arcsecond at the
+body's closest approach to the Earth in the span.
+
+For 433 Eros over 1990 to 2030 the result is a 10.5 KB pack with an error of
+8.4e-8 AU, or 12.6 km. Eros came within 0.179 AU of the Earth in January
+2012, and at that distance the error is 0.10 arcseconds.
+
+Two files come out: `eros.cpk`, the pack, and `eros.cert.json`, the
+certificate.
+
+| Certificate field | What it states |
+|---|---|
+| `id`, `number`, `name` | The engine id, the IAU number, and the name as Horizons gives it |
+| `source.solution` | The orbit solution the samples came from, such as `JPL#659` |
+| `span` | The years the pack serves |
+| `error.max_au` | The largest distance between the pack and Horizons at the check instants |
+| `error.min_geocentric_au` | The body's closest approach to the Earth in the span |
+| `error.angle_bound_arcsec` | `max_au` seen from that closest approach: the most the pack can move a geocentric position |
+| `pack.sha256`, `pack.bytes` | The hash and length of the pack the measurement was made on |
+
+Horizons serves small bodies from 1600 to 2500, so a span cannot go outside
+those years. The default is 1800 to 2200.
+
+## Loading
+
+`loadMintedBody` fetches the certificate and the pack, checks the pack's
+length and SHA-256 against the certificate, and registers the body under the
+certificate's id. A pack that does not match is refused before it is decoded.
+
+```ts
+import { Engine, loadMintedBody, julianDay } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);
+const base = "https://raw.githubusercontent.com/heavyblotto/caelus/minted/";
+
+const cert = await loadMintedBody(engine, "eros.cert.json",
+  async (file) => (await fetch(base + file)).arrayBuffer());
+
+engine.position(cert.id, julianDay(2012, 1, 31)).lon;
+cert.error.angle_bound_arcsec;  // how far the pack can move that longitude
+```
+
+The engine does no I/O of its own. The third argument is your function for
+fetching a file that sits beside the certificate, so the same call works in a
+browser, in Node, and from a local directory. If you already hold the bytes,
+`registerMintedBody(engine, bytes, certificate)` does the check and the
+registration without the fetch.
+
+Once registered, the body answers `position`, `longitude`, and
+`heliocentric` like any other, and it throws outside the certificate's span.
+`engineCapabilities` lists it with the source `"minted"` and that span, and
+`engine.minted` holds the certificate.
+
+## What the certificate does and does not cover
+
+The certificate measures the pack: the body's heliocentric position against
+the source it was fitted to. A position in a chart also depends on the
+Earth's position and on the light-time, aberration, and nutation the engine
+applies, and those have their own error. For Eros at its closest the whole
+position, compared with the apparent place Horizons gives, differs by 0.27
+arcseconds. Most of that is the Earth: an error of a few times 1e-7 AU in
+the Earth's position is a fraction of an arcsecond at 0.18 AU and would be
+several arcseconds for an asteroid passing ten times closer.
+
+The orbit solution is the one Horizons held on the day of the mint. Orbits
+are refined as observations arrive, so a re-mint years later can differ, by
+more for a recently discovered body than for one observed since the
+nineteenth century. The certificate records the solution so the difference
+can be traced.
+
+## The workflow
+
+`.github/workflows/mint-body.yml` runs the mint on GitHub when dispatched
+with a number and a span. It loads the result back through the Python
+engine, publishes the pack and certificate on the repository's `minted`
+branch, and rewrites `index.json` there, which lists every minted body with
+its span and angle bound. The address in the example above is that branch.
+The workflow has not been run yet, so the branch does not exist until the
+first mint.
+
+## Limits
+
+- Numbered asteroids only. Comets and unnumbered objects are not minted.
+- One span per body. Minting a body again replaces its files.
+- The Python reference loads a minted body with
+  `astroengine.minted.load_minted_body`, from files on disk.

@@ -62,6 +62,18 @@ current figures live in `packages/caelus/accuracy.json` and on
   other answer lies inside the `earliest` to `latest` window. For Sirius at
   Memphis in 139 CE the model gives 19 July, Julian calendar, against the 20
   or 21 July read from Censorinus.
+- **Minted bodies.** `python/mint_body.py` makes a pack for any numbered
+  asteroid on request: it fits the body to JPL Horizons, writes the pack in
+  the binary form, and measures the published bytes against Horizons at 300
+  instants the fit never sampled. The result is published with a
+  certificate that states the span, the orbit solution, the measured error,
+  and the pack's SHA-256. `loadMintedBody` and `registerMintedBody` check a
+  pack against its certificate before decoding it and register the body on
+  an engine, where `engineCapabilities` reports it with the source
+  `"minted"`. 433 Eros for 1990 to 2030 is a 10.5 KB pack with an error of
+  12.6 km, at most 0.10 arcseconds seen from the Earth. A workflow,
+  `mint-body.yml`, runs the mint when dispatched and publishes to a `minted`
+  branch; it has not been run on GitHub yet.
 - **A first or last visibility as a sky-dating constraint.** `dateSky` takes
   `{ visibility: { target, kind, lat, lonEast }, within }` beside its
   position constraints. The constraint holds on the local days from the

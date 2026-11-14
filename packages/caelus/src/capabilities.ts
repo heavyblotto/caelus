@@ -26,6 +26,7 @@ export type BodySource =
   | "meeus_ch37"     // analytic Pluto fallback
   | "kepler_pack"    // Uranian / fictitious bodies
   | "analytic"       // nodes, Lilith points
+  | "minted"         // a pack minted on demand, with a certificate
   | "synthetic";     // runtime-registered synthetic systems
 
 export interface BodyCapability {
@@ -123,6 +124,12 @@ export function engineCapabilities(engine: Engine): EngineCapabilities {
       caps.push({ body, source: "kepler_pack", validated: MEASURED.uranian });
     } else if (ANALYTIC_BODIES.has(body)) {
       caps.push({ body, source: "analytic", validated: null });
+    } else if (engine.minted.has(body)) {
+      // Minted on demand: the certificate states the span, and its error was
+      // measured against JPL Horizons across that span when it was minted.
+      const span = engine.minted.get(body)!.span;
+      const years = { from: span.from, to: span.to };
+      caps.push({ body, source: "minted", validated: years, fitted: years });
     } else {
       // Anything else reachable through bodies() is a runtime-registered
       // synthetic system: imaginary, so no validated span by construction.

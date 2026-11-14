@@ -1,4 +1,5 @@
 /** astroengine chart -- public API: natal charts, aspects, retrogrades. */
+import type { MintCertificate } from "./minted.js";
 import {
   DEG, mod, jdTT, julianDay, EngineData, ChebSeries,
   planetApparent, sunApparent, moonApparentSeries, moonApparentPrecise,
@@ -346,6 +347,10 @@ export class Engine {
 
   private packs = new Map<string, XyzSource>();
   private runtimeSources = new Map<string, XyzSource>();
+
+  /** Certificates of the bodies registered by {@link registerMintedBody},
+   *  by body id. */
+  readonly minted = new Map<string, MintCertificate>();
   private renderAttrs = new Map<string, SyntheticRender>();
 
   constructor(data: EngineData) {

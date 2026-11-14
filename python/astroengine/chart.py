@@ -87,6 +87,9 @@ class Engine:
         self._packs = {}
         self._era_packs = {}
         self._slab_sets = {}
+        self._runtime = set()
+        # certificates of bodies registered by astroengine.minted, by id
+        self.minted = {}
 
     def _has_pluto_pack(self):
         """True when a wide-range Pluto Chebyshev pack is available on disk."""
@@ -134,6 +137,15 @@ class Engine:
             raise ValueError(
                 f"jd {jde} outside fitted range (no era slab covers it)")
         return self._pack(body)
+
+    def register_source(self, body, source):
+        """Register a heliocentric ecliptic-J2000 xyz source (anything with
+        xyz(jde) in AU, such as a ChebSeries) under a body id. The body then
+        goes through the same apparent-place pipeline as the shipped
+        asteroids. Mirrors Engine.registerSource in the TypeScript engine."""
+        self._packs[body] = source
+        self._runtime.add(body)
+        return self
 
     def _slab_set(self, body):
         """A body's default pack and era slabs as one source. The apparent
@@ -209,7 +221,7 @@ class Engine:
             r = math.sqrt(x * x + y * y + z * z)
             lon = math.atan2(y, x) % (2 * math.pi)
             return lon, math.asin(z / r), None
-        if body in ASTEROIDS or body in URANIANS:
+        if body in ASTEROIDS or body in URANIANS or body in self._runtime:
             return core.smallbody_apparent(self.vsop, self._pack(body), jde)
         if body in PLANET_PACK_BODIES and (self._has_pack(body) or self._era_slabs(body)):
             # A wide-range Chebyshev pack (fit to the Horizons/DE441 system
@@ -282,6 +294,12 @@ class Engine:
             if core._CHIRON is None:
                 core.chiron_apparent(self.vsop, jde)  # loads the fit
             x, y, z = core._CHIRON.xyz(jde)
+            r = math.sqrt(x * x + y * y + z * z)
+            l = math.atan2(y, x) % (2 * math.pi)
+            b = math.atan2(z, math.hypot(x, y))
+            l, b = core._precess_ecliptic(l, b, core.J2000, jde)
+        elif body in self._runtime:
+            x, y, z = self._packs[body].xyz(jde)
             r = math.sqrt(x * x + y * y + z * z)
             l = math.atan2(y, x) % (2 * math.pi)
             b = math.atan2(z, math.hypot(x, y))

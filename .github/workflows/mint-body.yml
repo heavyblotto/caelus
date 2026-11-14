@@ -1,0 +1,91 @@
+name: mint-body
+
+# Mint a pack for one numbered asteroid on request: fit it to JPL Horizons,
+# measure the published bytes against Horizons at epochs the fit never saw,
+# and publish the pack with its certificate on the `minted` branch. The
+# engine loads it with loadMintedBody, which refuses bytes that do not match
+# the certificate. See docs/minted-bodies.md.
+
+on:
+  workflow_dispatch:
+    inputs:
+      number:
+        description: "IAU number of the asteroid (433 is Eros)"
+        required: true
+        type: number
+      year0:
+        description: "First year of the span (1600 at the earliest)"
+        required: false
+        default: "1800"
+      year1:
+        description: "Last year of the span (2500 at the latest)"
+        required: false
+        default: "2200"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mint-body
+  cancel-in-progress: false
+
+jobs:
+  mint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      NUMBER: ${{ inputs.number }}
+      YEAR0: ${{ inputs.year0 }}
+      YEAR1: ${{ inputs.year1 }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - run: pip install -r python/requirements.txt
+      - name: Mint the pack and its certificate
+        run: |
+          set -euo pipefail
+          case "$NUMBER$YEAR0$YEAR1" in (*[!0-9]*) echo "inputs must be whole numbers"; exit 2;; esac
+          python3 python/mint_body.py "$NUMBER" --year0 "$YEAR0" --year1 "$YEAR1" --out minted-new
+      - name: Load it back through the engine
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import glob, sys
+          sys.path.insert(0, "python")
+          from astroengine import Engine
+          from astroengine.minted import load_minted_body
+          for path in glob.glob("minted-new/*.cert.json"):
+              eng = Engine("embedded")
+              cert = load_minted_body(eng, path)
+              mid = (cert["span"]["jd0"] + cert["span"]["jd1"]) / 2
+              p = eng.position(cert["id"], mid)
+              print(cert["id"], "at mid-span:", round(p["lon"], 4), "deg,", round(p["dist"], 4), "AU")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: minted-${{ inputs.number }}
+          path: minted-new/
+      - name: Publish on the minted branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin minted >/dev/null; then
+            git fetch origin minted
+            git worktree add ../minted-branch origin/minted
+            git -C ../minted-branch switch -C minted
+          else
+            git worktree add --orphan -b minted ../minted-branch
+          fi
+          cp minted-new/* ../minted-branch/
+          python3 python/mint_index.py ../minted-branch
+          cd ../minted-branch
+          git add -A
+          if git diff --cached --quiet; then
+            echo "the minted branch already holds these bytes"
+          else
+            git commit -m "Mint asteroid $NUMBER for $YEAR0 to $YEAR1"
+            git push origin minted
+          fi

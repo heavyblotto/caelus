@@ -146,7 +146,8 @@ recorded as non-goals:
   `range-expansion.md`, "Tier B") and awaits only a Horizons-connected
   mint run.
 - The numbered-asteroid corpus (hundreds of thousands of bodies). The fit
-  pipeline can mint a Chebyshev pack for any requested asteroid instead.
+  pipeline can mint a Chebyshev pack for any requested asteroid instead
+  (done: `python/mint_body.py` and `loadMintedBody`, roadmap milestone 6).
 - Planetary moons and planetocentric positions.
 - Heliacal phenomena (Schaefer visibility modeling): large effort, small
   audience.

@@ -93,7 +93,7 @@ range that reaches 3000 BCE. The reference-first rule is unchanged.
 | 3 | **Sky dating**: `dateSky`, from a description of a sky to its dates | Engine, `date_sky` MCP tool, and the site instrument done, unreleased |
 | 4 | **Binary packs**: quantized coefficient packs, loaded on demand by content hash, classical slabs for Uranus, Neptune and Pluto, then slabs earlier than 3000 BCE | Format, the packs, the browser loader, and the three outer slabs done, unreleased (tarball 55 MB to 28 MB); slabs earlier than 3000 BCE planned |
 | 5 | **Heliacal risings and settings**, and first visibility of the lunar crescent | `heliacal`, `visibility`, `lunarCrescent`, and the `heliacal` MCP tool and first visibility as a `dateSky` constraint done, unreleased; a `when()` predicate planned |
-| 6 | **Mint-on-demand bodies**: a dispatchable workflow that fits any numbered asteroid from Horizons and publishes a pack with its measured error | Planned |
+| 6 | **Mint-on-demand bodies**: a dispatchable workflow that fits any numbered asteroid from Horizons and publishes a pack with its measured error | The mint script, the certificate, the loaders in both engines, and the workflow file done, unreleased; the workflow has not run on GitHub, and an MCP tool that lists and loads minted bodies is planned |
 | 7 | **Conformance kit, then a Rust port** graded against it | Planned |
 
 Milestones 4 and 5 reverse two entries in the non-goals list of

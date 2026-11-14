@@ -48,6 +48,7 @@ const GROUPS: Array<{ label: string; cards: Card[] }> = [
       ["/docs/sky-dating", "Sky Dating", "From a description of a sky to its dates: planets by sign, longitude, or lunar phase in, every matching window across a date range out."],
       ["/docs/heliacal", "First & Last Visibility", "Heliacal risings and settings, the apparitions of Mercury and Venus, and the first lunar crescent: the day a body is first or last seen from one place."],
       ["/docs/uncertain-time", "Uncertain Times", "Which facts of a chart survive a rounded birth time, a date with no time, or an ancient clock error: every fact with the instants it changes."],
+      ["/docs/minted-bodies", "Minted Bodies", "Any numbered asteroid, fitted to JPL Horizons on request and published with a certificate of its measured error; loaded with a hash check."],
       ["/docs/deep-time", "Deep Time", "Before 1000 CE: the era packs and which bodies have them, Julian calendar dates, the ΔT model, and what its uncertainty does to a chart."],
       ["/docs/canonical", "Canonical Mode", "Integer, hashable, precision-honest output: quantized grids, content-addressable digests, and remainder sets."],
     ],
