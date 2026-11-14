@@ -88,8 +88,57 @@ each planet, because nothing before 1000 CE was measured for it. For 24 January 
 tiers disagree by 47″ on the Moon, 40″ on Saturn, 13″ on Jupiter, and 5″ or
 less on the Sun, Mercury, Venus, and Mars.
 
-The hosted MCP endpoint and anything that runs in a browser use the embedded
-tier. A local `caelus-mcp` uses the Node loader.
+The hosted MCP endpoint uses the embedded tier, and a page in a browser
+starts on it. A local `caelus-mcp` uses the Node loader.
+
+## The full packs in a browser
+
+A browser bundle carries the embedded tier. The full packs are 27.4 MB in 17
+files, too much to bundle, and a page can fetch the ones it needs.
+`loadPacks` takes a manifest of the packs a site publishes and a function
+that fetches one file, and returns engine data with those packs placed over a
+base.
+
+```ts
+import { Engine, loadPacks, selectPacks } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const base = "/data/packs/";
+const manifest = await (await fetch(base + "manifest.json")).json();
+const packs = selectPacks(manifest, {
+  bodies: ["saturn", "jupiter", "mars", "venus"], fromYear: -800, toYear: 0,
+});
+const data = await loadPacks(embeddedData, manifest, packs,
+  async (file) => (await fetch(base + file)).arrayBuffer());
+
+const engine = new Engine(data);
+```
+
+`selectPacks` picks what a computation needs: the packs of the bodies named,
+the Earth's for the Sun and for every planet, and only the eras the years
+touch. A planet needs the Earth because its position in the sky is the
+difference of the two; with Saturn's pack alone, the Earth would still come
+from the embedded series. The call above selects five files, 4.2 MB. All
+seven classical bodies across both eras are 14 files, 27.2 MB.
+
+The manifest lists each file's size and SHA-256. The loader checks both
+before it decodes a pack, and it rejects with a `PackIntegrityError` if one
+bit differs. It fetches only the files it is handed, and only ones the
+manifest lists.
+
+An engine built this way gives the positions an engine on `loadNodeData`
+gives, because both decode the same files into the same fields. The loader's
+test compares 28 positions with `===`, at four instants from 2500 BCE to 1990.
+The loader runs in browsers, in Node, and in a Cloudflare Worker. It needs Web
+Crypto, which a browser provides on HTTPS and on `localhost`.
+
+Decoded packs take memory. With all 14 files loaded, one Chromium tab held
+about 135 MB more than before.
+
+This site publishes its packs at `/data/packs/`, and the
+[Sky Dating instrument](/instruments/sky-dating) loads them when its Data
+control is set to the full packs. The format and the publishing step are in
+[`docs/binary-packs.md`](https://github.com/heavyblotto/caelus/blob/main/docs/binary-packs.md).
 
 ## A chart in 76 CE
 
@@ -237,5 +286,5 @@ the unknown.
   stops there. At 3000 BCE it is an hour, which is 15° on the angles: a chart
   that far back fixes the planets and leaves the houses open.
 - The era packs ship in the npm tarball as binary files and are about 16 MB
-  of it. A browser bundle does not include them; `decodePack` reads one that
-  a page fetches for itself.
+  of it. A browser bundle does not include them. A page fetches the ones it
+  needs with `loadPacks`.

@@ -29,6 +29,17 @@ const nextConfig = {
       { source: "/favicon.ico", destination: "/icon.svg", permanent: false },
     ];
   },
+  // The binary packs a page fetches on demand (scripts/build-pack-manifest.mjs)
+  // are published under names that carry their content hash, so a browser may
+  // keep one for good. The manifest beside them is revalidated as usual.
+  async headers() {
+    return [
+      {
+        source: "/data/packs/cpk/:file*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+    ];
+  },
 };
 
 export default withMDX(nextConfig);

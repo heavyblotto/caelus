@@ -248,6 +248,34 @@ async function checkUnlinked(base) {
     fail(`/opengraph-image -> ${err.message}`);
   }
 
+  // The binary packs a page fetches on demand: the manifest must list them,
+  // and a pack must arrive whole, matching its SHA-256, with the immutable
+  // cache policy its content-hashed name allows.
+  try {
+    const res = await get("/data/packs/manifest.json");
+    const manifest = res.status === 200 ? await res.json() : null;
+    const packs = manifest?.format === "caelus-pack-manifest" ? manifest.packs : null;
+    if (!Array.isArray(packs) || packs.length === 0) {
+      fail(`/data/packs/manifest.json -> ${res.status} (expected a pack manifest)`);
+    } else {
+      const smallest = packs.reduce((a, b) => (b.bytes < a.bytes ? b : a));
+      const file = await get(`/data/packs/${smallest.file}`);
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      const digest = new Uint8Array(await crypto.subtle.digest("SHA-256", bytes));
+      const sha256 = [...digest].map((b) => b.toString(16).padStart(2, "0")).join("");
+      const cache = file.headers.get("cache-control") ?? "";
+      if (file.status !== 200 || bytes.length !== smallest.bytes || sha256 !== smallest.sha256) {
+        fail(`/data/packs/${smallest.file} -> ${file.status}, ${bytes.length} bytes: does not match the manifest`);
+      } else if (!/immutable/.test(cache)) {
+        fail(`/data/packs/${smallest.file} is served with "${cache}" (expected an immutable policy)`);
+      } else {
+        ok(`/data/packs: manifest lists ${packs.length} packs; ${smallest.file} matches its SHA-256 and is immutable`);
+      }
+    }
+  } catch (err) {
+    fail(`/data/packs -> ${err.message}`);
+  }
+
   for (const [from, to] of [["/about", "/how-it-was-built"], ["/favicon.ico", "/icon.svg"]]) {
     const res = await get(from);
     const location = res.headers.get("location");
