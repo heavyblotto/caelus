@@ -349,8 +349,8 @@ body first, with the windows and days that survived each.
 
 The tool refuses a span outside the validated range of the bodies named, and
 the error states the years this server's data covers. A stdio server with the
-era packs reaches about 3000 BCE for the Sun, the Moon, and Mercury through
-Saturn. The hosted endpoint runs the embedded tier and covers 1000 to 3000.
+era packs reaches about 3000 BCE for the Sun, the Moon, and the planets
+through Pluto. The hosted endpoint runs the embedded tier and covers 1000 to 3000.
 
 ## Uncertain times (roadmap milestone 2, unreleased)
 `chart_stability` exposes the engine's `chartStability`. The caller gives a

@@ -75,3 +75,6 @@ python/*.part
 # npm pack dry-run tarballs from release prep; `npm publish` packs fresh.
 packages/*/caelus-*.tgz
 .vercel
+
+# Classical-era Horizons caches at any sampling step (fit_classical.py)
+python/*_horizons_cache_classical*.json

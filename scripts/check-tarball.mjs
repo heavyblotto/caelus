@@ -37,6 +37,9 @@ const REQUIRED = [
   "data/mars_cheb.classical.cpk",
   "data/jupiter_cheb.classical.cpk",
   "data/saturn_cheb.classical.cpk",
+  "data/uranus_cheb.classical.cpk",
+  "data/neptune_cheb.classical.cpk",
+  "data/pluto_cheb.classical.cpk",
   "data/uranian_kepler.json",
   "data/turbo.json",        // sample turbo pack so the turbo tier works out of the box
   "data/chiron_cheb.json",

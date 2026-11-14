@@ -2190,7 +2190,7 @@ export function buildServer(
 
   server.registerTool("date_sky", {
     description:
-      "Date a described sky: find every window in a span of years in which a set of planetary positions held at once. The inverse of a chart, and the computation used to date a horoscope that records positions and no year. Each constraint puts a body in a zodiac sign, within an orb of a longitude, or in a from/to arc, or puts the elongation between two bodies in an arc (moon minus sun from 180 to 360 is a waning Moon). Returns the matching windows with calendar dates (Julian calendar before 15 October 1582) and a funnel showing how many windows survived each constraint, slowest body first. Years are astronomical: 0 is 1 BCE and -409 is 410 BCE. The searchable span depends on the server's data: a local stdio server with era packs covers about 3000 BCE to 3000 CE for the Sun, Moon, and Mercury through Saturn; a hosted server on the embedded tier covers 1000 to 3000.",
+      "Date a described sky: find every window in a span of years in which a set of planetary positions held at once. The inverse of a chart, and the computation used to date a horoscope that records positions and no year. Each constraint puts a body in a zodiac sign, within an orb of a longitude, or in a from/to arc, or puts the elongation between two bodies in an arc (moon minus sun from 180 to 360 is a waning Moon). Returns the matching windows with calendar dates (Julian calendar before 15 October 1582) and a funnel showing how many windows survived each constraint, slowest body first. Years are astronomical: 0 is 1 BCE and -409 is 410 BCE. The searchable span depends on the server's data: a local stdio server with era packs covers about 3000 BCE to 3000 CE for the Sun, the Moon, and the planets through Pluto; a hosted server on the embedded tier covers 1000 to 3000.",
     inputSchema: {
       constraints: z.array(z.object({
         body: z.string().optional().describe("body whose longitude is constrained, snake_case (sun, moon, mercury ... saturn)"),
@@ -2235,7 +2235,7 @@ export function buildServer(
       throw new Error(
         `date_sky: this server's data covers years ${lo} to ${hi} for the bodies named; `
         + `asked for ${start_year} to ${end_year}. A local caelus-mcp with the era packs `
-        + "reaches about 3000 BCE for the Sun, Moon, and Mercury through Saturn.",
+        + "reaches about 3000 BCE for the Sun, the Moon, and the planets through Pluto.",
       );
     }
     const jdOfYear = (y: number): number =>

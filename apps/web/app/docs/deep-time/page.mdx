@@ -11,7 +11,7 @@ export const metadata = pageMetadata({
 # Deep time
 
 The engine's default data is validated from 1000 to 3000 CE. Era packs carry
-seven bodies back to 3000 BCE, and they load in Node. A date that old also
+ten bodies back to 3000 BCE, and they load in Node. A date that old also
 needs a calendar, a model of the Earth's rotation, and a way to say which
 bodies are missing. This guide covers all four.
 
@@ -30,8 +30,8 @@ const engine = new Engine(loadNodeData("node_modules/caelus/data"));
 An era pack is a Chebyshev fit to JPL Horizons (DE441) for one body from
 3000 BCE to 1000 CE. It sits beside the body's modern pack as
 `{body}_cheb.classical.json` and ends at the instant the modern pack begins,
-so the two read as one span. Seven bodies have one: the Sun (through the
-Earth's pack), the Moon, Mercury, Venus, Mars, Jupiter, and Saturn.
+so the two read as one span. Ten bodies have one: the Sun (through the
+Earth's pack), the Moon, and the planets from Mercury to Pluto.
 
 `engineCapabilities` reports what a given engine can compute. Each entry in
 `bodies` names the body's `source`, its `validated` span, and the `fitted`
@@ -48,8 +48,8 @@ engineCapabilities(engine).bodies.find((b) => b.body === "saturn");
 | Sun, Moon, Mercury, Venus, Mars | 1000 to 3000 | −2998 to 3000 |
 | Jupiter | 1000 to 3000 | −3000 to 3000 |
 | Saturn | 1000 to 3000 | −3003 to 3000 |
-| Uranus, Neptune | 1000 to 3000 | 1000 to 3000 |
-| Pluto | 1885 to 2099 | 1000 to 3000 |
+| Uranus, Neptune | 1000 to 3000 | −2999 to 3000 |
+| Pluto | 1885 to 2099 | −2999 to 3000 |
 | Chiron | 1600 to 2484 | 1600 to 2484 |
 
 Astronomical years count a year zero, so −2998 is 2999 BCE. Jupiter and
@@ -71,6 +71,7 @@ engine.data.eraPacks.saturn[0].provenance.true_error_au;   // 0.0000057
 | Mars | 2.9e-8 AU |
 | Jupiter | 2.8e-6 AU |
 | Saturn | 5.7e-6 AU |
+| Uranus, Neptune, Pluto | 8.2e-7 AU each |
 | Earth (the Sun) | 5.7e-6 AU |
 | Moon | 7.9 km |
 
@@ -146,7 +147,7 @@ control is set to the full packs. The format and the publishing step are in
 const jd = julianDay(76, 1, 24, 6, 0, 0, "julian");
 const chart = engine.chartAt(jd, 41.9, 12.5, "whole_sign");   // Rome
 
-chart.unavailable;   // ["uranus", "neptune", "pluto", "chiron"]
+chart.unavailable;   // ["chiron"]
 ```
 
 | Body | Longitude |
@@ -158,6 +159,9 @@ chart.unavailable;   // ["uranus", "neptune", "pluto", "chiron"]
 | Mars | 19°13′ Pisces |
 | Jupiter | 26°33′ Capricorn |
 | Saturn | 29°57′ Sagittarius |
+| Uranus | 23°41′ Aquarius |
+| Neptune | 2°00′ Taurus |
+| Pluto | 19°03′ Aquarius |
 
 The Ascendant is 20°26′ Capricorn. The date is the one the
 [Sky Dating](/docs/sky-dating) guide recovers from seven sign positions.
@@ -165,7 +169,7 @@ The Ascendant is 20°26′ Capricorn. The date is the one the
 `chart.unavailable` lists the bodies whose packs do not reach the instant.
 They are left out of `chart.bodies` instead of being computed from data that
 was never fitted there, so code that reads a body should check for it first.
-`engine.position("uranus", jd)` throws a `RangeError` for the same reason.
+`engine.position("chiron", jd)` throws a `RangeError` for the same reason.
 
 ## Julian calendar dates
 
@@ -276,9 +280,8 @@ the unknown.
 
 ## Limits
 
-- Uranus, Neptune, Pluto, Chiron, and the asteroids have no era pack. With the
-  Node loader they are unavailable before 1000 CE, or before 1600 for Chiron
-  and the asteroids.
+- Chiron and the asteroids have no era pack, because Horizons serves small
+  bodies only from about 1600. They are unavailable before then.
 - The accuracy table publishes arcsecond bounds for 1000 to 3000 and none yet
   for the era packs. The recorded fit errors above are the measurement that
   exists. The modern figures are on [Validation](/validation).

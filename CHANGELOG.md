@@ -18,6 +18,13 @@ current figures live in `packages/caelus/accuracy.json` and on
   and the npm tarball from about 55 MB packed and 130 MB unpacked to 28 MB
   and 37 MB. `loadNodeData` prefers a `.cpk` over its `.json`, and
   `decodePack` reads one in a browser.
+- **Uranus, Neptune, and Pluto reach 3000 BCE.** Each has a classical era
+  pack (JPL Horizons, DE441) adjoining its modern pack at
+  1000 CE, fitted to 8.2e-7 AU, the modern packs' own level, and 0.13 MB as
+  binary. A chart cast with `loadNodeData` for a date before 1000 CE now
+  carries them; `chart.unavailable` lists only Chiron and the asteroids,
+  which Horizons serves from about 1600. At 76 CE the new Uranus and Neptune
+  agree with the embedded VSOP87 series, an independent source, to 0.01°.
 - **What the quantization moves.** The rounding adds at most 1.0% of a
   planet pack's own fit residual and 0.07% of a Moon pack's. Against 0.25 on
   the golden grid the planets move by at most 0.0007″, the Moon by 0.002″,

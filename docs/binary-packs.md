@@ -9,7 +9,8 @@ digits; the series it belongs to is good to seven or eight.
 
 CPK1 stores each coefficient as an integer multiple of a quantum that sits
 well below the pack's own fit residual. The seventeen packs are 27 MB in this
-form, and the largest is 8.5 MB.
+form, and the largest is 8.5 MB. Three era packs minted since (Uranus,
+Neptune, and Pluto for 3000 BCE to 1000 CE) add 0.4 MB.
 
 ## Layout
 

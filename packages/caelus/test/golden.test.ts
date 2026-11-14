@@ -485,23 +485,23 @@ for (const g of G.houses) {
     console.error(`FAIL in-range unavailable: ${JSON.stringify(inRange.unavailable)}`);
   }
 
-  // The classical era packs make 900 CE computable for the tradition's seven:
-  // the Sun (via the earth slab), Moon, Mercury, Venus, Mars, Jupiter and
-  // Saturn resolve through chained era-slab resolution (their slabs adjoin the
-  // modern packs at the shared 1000-CE boundary). What still lands in
-  // `unavailable` is the modern remainder -- Uranus, Neptune, Pluto and the
-  // small bodies have no classical pack, and the engine will not compute a
-  // body past its validated span rather than silently serve the unvalidated
-  // fallback.
+  // The classical era packs make 900 CE computable for the Sun (via the
+  // earth slab), the Moon, and the planets from Mercury to Pluto: each
+  // resolves through chained era-slab resolution (the slabs adjoin the modern
+  // packs at the shared 1000-CE boundary). What still lands in `unavailable`
+  // is the small bodies, which Horizons serves only from about 1600 -- the
+  // engine will not compute a body past its fitted span rather than silently
+  // serve an unvalidated fallback.
   const pre1850 = eng.chart(900, 3, 21, 12, 0, 0, 51.5, -0.12, "placidus");
   if (
     !("sun" in pre1850.bodies) ||                  // the earth slab carries it
     !("moon" in pre1850.bodies) ||                 // the classical moon slab
     !("mars" in pre1850.bodies) ||                 // the classical mars slab
     !("saturn" in pre1850.bodies) ||               // the classical saturn slab
-    !pre1850.unavailable.includes("uranus") ||     // no classical pack
-    !(pre1850.unavailable.includes("pluto")) ||
-    !(pre1850.unavailable.includes("chiron"))
+    !("uranus" in pre1850.bodies) ||               // the classical uranus slab
+    !("pluto" in pre1850.bodies) ||                // the classical pluto slab
+    pre1850.unavailable.length !== 1 ||
+    !(pre1850.unavailable.includes("chiron"))      // no pack before 1600
   ) {
     failures++;
     console.error(
@@ -510,13 +510,13 @@ for (const g of G.houses) {
   }
 
   // Sparse bodies outside their fitted span are omitted and reported, never
-  // thrown. At 900 CE the Pluto pack (1000-3000) and the small-body packs
-  // (1600-2484) do not reach, so they land in `unavailable`.
+  // thrown. At 900 CE the small-body packs (1600-2484) do not reach, so
+  // Chiron lands in `unavailable`; Pluto's classical slab covers the date.
   const pre1700 = eng.chart(900, 6, 1, 12, 0, 0, 48.85, 2.35, "whole_sign");
   if (
-    "pluto" in pre1700.bodies ||
+    !("pluto" in pre1700.bodies) ||
     "chiron" in pre1700.bodies ||
-    !pre1700.unavailable.includes("pluto") ||
+    pre1700.unavailable.includes("pluto") ||
     !pre1700.unavailable.includes("chiron")
   ) {
     failures++;
@@ -825,13 +825,12 @@ for (const g of G.houses) {
     const pluto = byBody.get("pluto");
     const moon = byBody.get("moon");
     const ceres = byBody.get("ceres");
-    // The wide Pluto pack is validated over its full measured span now
-    // (1000-3000), and `fitted` reports the pack's actual geometry (1001-3000).
-    // engineCapabilities reports both, so a consumer can tell "will compute"
-    // from "has been checked".
+    // Pluto's span runs from its classical slab (3000 BCE) through the wide
+    // pack (to 3000 CE). `validated` and `fitted` both report the chained
+    // span, as they do for the other bodies with an era slab.
     if (caps.plutoTier !== "chebyshev" || pluto?.source !== "chebyshev_pack"
-      || pluto.validated?.from !== 1000 || pluto.validated?.to !== 3000
-      || !pluto.fitted || Math.abs(pluto.fitted.from - 1001) > 2
+      || pluto.validated?.from !== -2999 || pluto.validated?.to !== 3000
+      || !pluto.fitted || Math.abs(pluto.fitted.from - -2999) > 2
       || Math.abs(pluto.fitted.to - 3000) > 2) {
       failures++;
       console.error(`FAIL capabilities pluto: ${JSON.stringify(pluto)} tier=${caps.plutoTier}`);

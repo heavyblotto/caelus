@@ -2,10 +2,11 @@
 """Mint the classical era pack (deep-time R1): 3000 BCE to 1000 CE, adjoining
 the shipped 1000-3000 tier.
 
-The seven classical bodies only -- the Moon, the five visible planets, and
-Earth (the observer, not a chart body). The tradition's sky is these seven;
-the modern bodies stay uncomputed at classical dates, which is honest rather
-than a gap.
+The Moon, Earth (the observer, not a chart body), and the planets from
+Mercury to Pluto. The first mint covered the tradition's seven; Uranus,
+Neptune and Pluto were added so a chart cast for a classical date carries
+the same bodies as a modern one. Chiron and the asteroids stay out: Horizons
+serves small bodies only from about 1600.
 
 Each slab ends EXACTLY where its body's modern pack begins (the shared
 boundary instant), so the engine's covering-slab resolution hands over at
@@ -56,6 +57,17 @@ PLANETS = {
     "mars":    ("4",    1.0,   (32, 64, 128),     (12, 14, 16),     4e-6),
     "jupiter": ("5",    2.0,   (256, 512, 1024),  (10, 12, 14, 16), 5e-5),
     "saturn":  ("6",    2.0,   (512, 1024, 2048), (10, 12, 14),     8e-5),
+    # The three bodies the tradition never saw. They are minted so that a
+    # chart cast for a classical date carries the same thirteen bodies as a
+    # modern one. System barycenters, like the modern packs. They move slowly
+    # enough that a 4-day sampling step loses nothing a cubic cannot recover.
+    # The bar is 1e-6 AU, the modern packs' own, which only the four-year
+    # degree-20 fit clears: every coarser fit floors at 2e-6 to 1e-5 AU for
+    # all three bodies alike, which is the Sun's reflex motion about the
+    # barycenter (a heliocentric vector carries it) going unresolved.
+    "uranus":  ("7",    4.0,   (1461, 2922, 5844), (10, 12, 14, 16, 20), 1e-6),
+    "neptune": ("8",    4.0,   (1461, 2922, 5844), (10, 12, 14, 16, 20), 1e-6),
+    "pluto":   ("9",    4.0,   (1461, 2922, 5844), (10, 12, 14, 16, 20), 1e-6),
 }
 # The Moon: geocentric, km, scale 1000 (the shipped moon pack's own format);
 # the bar is 1 arcmin = ~112 km at mean distance.
@@ -89,7 +101,12 @@ def cache_for(name, command, center, step, jd0, jd1):
     # divide the span (jupiter/saturn at 2d) would otherwise end a day short
     # of it. Every seg length here is a multiple of its body's step, so the
     # +1 day keeps the grid aligned and guarantees a row at-or-past jd1.
-    cache.ensure(jd0, jd1, step=step, pad_days=1.0)
+    # A step longer than a day needs two things the 1-day pad does not give:
+    # the sample grid has to land exactly on jd1 (so start it a whole number
+    # of steps before), and the pad has to reach one full step past it.
+    if step > 1.0:
+        jd0 -= (step - (jd1 - jd0) % step) % step
+    cache.ensure(jd0, jd1, step=step, pad_days=max(1.0, step))
     return cache
 
 
@@ -129,7 +146,7 @@ def mint_planet(name, year0_nominal):
     seg, deg, size, data, resid, true_err = best
     data["provenance"] = {
         "source": "JPL Horizons (DE441)", "license": "public domain",
-        "body": f"{command} {name}" + (" barycenter" if command in "456" else ""),
+        "body": f"{command} {name}" + (" barycenter" if command in "456789" else ""),
         "center": "@sun", "frame": "heliocentric ecliptic J2000",
         "correction": "geometric (VEC_CORR=NONE)",
         "range": f"{year0_nominal}-1000 (adjoins the modern pack's jd0)",
@@ -206,10 +223,10 @@ def boundary_check(name, data):
     sys.path.insert(0, HERE)
     from astroengine.chebyshev import ChebSeries
     classical = ChebSeries(data)
-    modern_path = ("moon_cheb.full.json" if name == "moon"
-                   else f"{name}_cheb.json")
-    with open(os.path.join(DATA_MONOREPO, modern_path)) as f:
-        modern = ChebSeries(json.load(f))
+    # The modern packs are binary since 0.26; load whichever form is on disk.
+    from astroengine import core
+    modern = ChebSeries.load(core.pack_path(
+        "moon_cheb.full" if name == "moon" else f"{name}_cheb"))
     ca = classical.xyz(classical.jd1)
     mo = modern.xyz(modern.jd0)
     diff = math.dist(ca, mo)  # AU (planets) or km (moon; xyz() unscales)
