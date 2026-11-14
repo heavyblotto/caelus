@@ -74,6 +74,12 @@ const CAPABILITIES: Array<{ title: string; href: string; desc: ReactNode; unrele
     unreleased: true,
   },
   {
+    title: "First and last visibility",
+    href: "/docs/heliacal",
+    desc: <>Heliacal risings and settings and the first lunar crescent, from one place, with the range of dates the sky allows.</>,
+    unreleased: true,
+  },
+  {
     title: "Derived charts",
     href: "/docs/derived",
     desc: <>Returns, progressions, solar arc, composite, Davison, harmonics, draconic, dignities, and sect.</>,

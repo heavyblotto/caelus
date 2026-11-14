@@ -30,6 +30,7 @@ const PROSE_COUNT: Record<number, string> = {
   35: "thirty-five",
   36: "thirty-six",
   37: "thirty-seven",
+  38: "thirty-eight",
 };
 
 export function formatGoldenChecks(count = FACTS.goldenChecks): string {

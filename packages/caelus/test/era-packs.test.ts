@@ -183,6 +183,42 @@ const engSunControl = new Engine({
 } as EngineData);
 expectShift(engSunShifted, engSunControl, "sun", eDeep, "earth chain at depth");
 
+// --- Light-time across the boundary -------------------------------------------
+// An apparent place is assembled from the body's position a light-time
+// earlier. In the first minutes (hours, for the outer planets) after a slab
+// boundary that earlier instant lies in the neighbouring slab, so a single
+// slab picked for the instant itself cannot serve it. Every instant must be
+// served by the slab that covers it, and the position must be continuous
+// across the boundary.
+if (data.eraPacks && Object.keys(data.eraPacks).length) {
+  const eng = new Engine(data);
+  for (const body of ["mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto"] as const) {
+    if (!data.chebPacks?.[body] || !data.eraPacks[body]?.length) continue;
+    const b = new ChebSeries(data.chebPacks[body]).jd0; // TT; UT differs by minutes
+    let threw = false;
+    let worstJump = 0;
+    let prev: number | null = null;
+    for (let dt = -0.3; dt <= 0.3001; dt += 0.005) {
+      try {
+        const lon = eng.position(body, b + dt).lon;
+        if (prev !== null) worstJump = Math.max(worstJump, circDiff(lon, prev));
+        prev = lon;
+      } catch {
+        threw = true;
+      }
+    }
+    ok(!threw, `${body}: every instant within 0.3 d of the slab boundary has a position`);
+    ok(worstJump < 0.02, `${body}: longitude is continuous across the boundary (step ${worstJump.toFixed(5)} deg per 7 min)`);
+    // heliocentric positions come from the covering slab too
+    let helio = false;
+    try {
+      const h = eng.heliocentric(body, b - 200000);
+      helio = h.dist > 0.2 && h.dist < 60;
+    } catch { /* stays false */ }
+    ok(helio, `${body}: heliocentric position inside the classical slab`);
+  }
+}
+
 console.log(`era-packs: ${checks} checks, ${failures} failures`);
 if (failures > 0) process.exit(1);
 

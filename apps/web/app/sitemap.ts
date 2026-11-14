@@ -103,6 +103,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/docs/time-queries",
     "/docs/sky-dating",
     "/docs/uncertain-time",
+    "/docs/heliacal",
     "/docs/deep-time",
     "/docs/edge-cases",
     "/docs/api",

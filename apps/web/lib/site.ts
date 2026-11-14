@@ -84,6 +84,7 @@ export const DOCS_NAV: DocsGroup[] = [
       { href: "/docs/visualizations", label: "Visualizations" },
       { href: "/docs/synthetic", label: "Synthetic Ephemeris" },
       { href: "/docs/sky-dating", label: "Sky Dating" },
+      { href: "/docs/heliacal", label: "First & Last Visibility" },
       { href: "/docs/uncertain-time", label: "Uncertain Times" },
       { href: "/docs/deep-time", label: "Deep Time" },
       { href: "/docs/canonical", label: "Canonical Mode" },

@@ -14,7 +14,7 @@ export const metadata = pageMetadata({
 computed by the engine on each call, never recalled from training data, so every
 answer is deterministic.
 
-There are two ways to connect, with the same thirty-seven tools either way:
+There are two ways to connect, with the same thirty-eight tools either way:
 
 - **Hosted (Streamable HTTP)**: point your client at
   `https://www.ephemengine.com/api/mcp`. Nothing to install.
@@ -196,7 +196,7 @@ Any stdio MCP client takes the same command and arguments:
 
 ## Verify the tools appeared
 
-After the client reloads, it should list **thirty-seven** tools. Ask it to enumerate
+After the client reloads, it should list **thirty-eight** tools. Ask it to enumerate
 them, or check the client's MCP panel:
 
 **Charts and readings**
@@ -222,6 +222,7 @@ them, or check the client's MCP panel:
 - `similar_skies`: when the sky most resembled a reference moment, by cosine similarity over a window
 - `date_sky`: every window in a span of years in which a described sky held, from planets by sign, longitude, or lunar phase; the tool that dates a horoscope with no year
 - `chart_stability`: which facts of a chart hold when the time is rounded, approximate, or unknown, and the instant each of the others changes
+- `heliacal`: the day a planet, a star, or the Moon is first or last seen from a place (heliacal rising and setting, the apparitions of Mercury and Venus, the new crescent), with the earliest and latest date a clearer or hazier sky would give
 
 **Hellenistic time-lords**
 
@@ -264,7 +265,7 @@ them, or check the client's MCP panel:
 (cazimi, combust, under the beams) and each aspect as applying or separating,
 with a normalized strength.
 
-If you see all thirty-seven, the server is wired correctly. The server also exposes three
+If you see all thirty-eight, the server is wired correctly. The server also exposes three
 **resources**: `caelus://glossary` (aspect angles and orbs, signs, bodies,
 house systems, essential dignities), `caelus://accuracy` (the validation
 table), and `ui://widget/chart.html` (an embeddable chart widget), plus two

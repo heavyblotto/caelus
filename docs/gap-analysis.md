@@ -132,9 +132,9 @@ planets fall out of the same machinery. Largest single feature by effort,
 ## Out of scope
 
 > **Status, 2026-11.** Two entries below are no longer non-goals. Heliacal
-> phenomena and a range earlier than 3000 BCE are now on the roadmap
-> (`ROADMAP.md`, milestones 4 and 5). The list is kept as the record of the
-> earlier decision.
+> phenomena are implemented (`heliacal`, roadmap milestone 5), and a range
+> earlier than 3000 BCE is on the roadmap (`ROADMAP.md`, milestone 4). The
+> list is kept as the record of the earlier decision.
 
 These conflict with embedded-JSON data and the edge runtime story, and are
 recorded as non-goals:

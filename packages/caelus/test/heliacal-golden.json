@@ -1,0 +1,1338 @@
+{
+ "basis": "Python reference astroengine.heliacal (embedded VSOP, full moon, era packs)",
+ "instants": [
+  {
+   "id": "sirius-dawn",
+   "target": "Sirius",
+   "jd": 2460892.607638889,
+   "lat": 29.85,
+   "lon": 31.25,
+   "options": {},
+   "result": {
+    "target": "Sirius",
+    "jd": 2460892.607638889,
+    "altitude": 2.234566204476293,
+    "azimuth": 110.61069823344585,
+    "sun_altitude": -9.17077704919182,
+    "moon_altitude": -40.18799514748013,
+    "magnitude": -1.44,
+    "extinction": 0.25,
+    "sky_brightness": 186161.11856239766,
+    "limiting_magnitude": -1.3136442823947663,
+    "margin": 0.12635571760523368,
+    "visible": true
+   }
+  },
+  {
+   "id": "sirius-dawn-hazy",
+   "target": "Sirius",
+   "jd": 2460892.607638889,
+   "lat": 29.85,
+   "lon": 31.25,
+   "options": {
+    "extinction": 0.4
+   },
+   "result": {
+    "target": "Sirius",
+    "jd": 2460892.607638889,
+    "altitude": 2.234566204476293,
+    "azimuth": 110.61069823344585,
+    "sun_altitude": -9.17077704919182,
+    "moon_altitude": -40.18799514748013,
+    "magnitude": -1.44,
+    "extinction": 0.39999999999999997,
+    "sky_brightness": 134846.81027435153,
+    "limiting_magnitude": -4.636243628126085,
+    "margin": -3.196243628126085,
+    "visible": false
+   }
+  },
+  {
+   "id": "sirius-night",
+   "target": "Sirius",
+   "jd": 2460691.375,
+   "lat": 29.85,
+   "lon": 31.25,
+   "options": {},
+   "result": {
+    "target": "Sirius",
+    "jd": 2460691.375,
+    "altitude": 43.41582457862028,
+    "azimuth": 180.3195175002802,
+    "sun_altitude": -72.93870898418693,
+    "moon_altitude": 50.77051945351593,
+    "magnitude": -1.44,
+    "extinction": 0.25,
+    "sky_brightness": 1481.9638085912782,
+    "limiting_magnitude": 3.9371182564604554,
+    "margin": 5.377118256460456,
+    "visible": true
+   }
+  },
+  {
+   "id": "sirius-midday",
+   "target": "Sirius",
+   "jd": 2460690.9166666665,
+   "lat": 29.85,
+   "lon": 31.25,
+   "options": {},
+   "result": {
+    "target": "Sirius",
+    "jd": 2460690.9166666665,
+    "altitude": -71.1665478967165,
+    "azimuth": 49.22276044681042,
+    "sun_altitude": 39.099810223110545,
+    "moon_altitude": -36.07207954255312,
+    "magnitude": -1.44,
+    "extinction": 0.25,
+    "sky_brightness": null,
+    "limiting_magnitude": null,
+    "margin": null,
+    "visible": false
+   }
+  },
+  {
+   "id": "sirius-below",
+   "target": "Sirius",
+   "jd": 2460857.5,
+   "lat": 29.85,
+   "lon": 31.25,
+   "options": {},
+   "result": {
+    "target": "Sirius",
+    "jd": 2460857.5,
+    "altitude": -60.448987627634715,
+    "azimuth": 70.21683561774218,
+    "sun_altitude": -29.57683447387787,
+    "moon_altitude": -38.92609889924498,
+    "magnitude": -1.44,
+    "extinction": 0.25,
+    "sky_brightness": null,
+    "limiting_magnitude": null,
+    "margin": null,
+    "visible": false
+   }
+  },
+  {
+   "id": "venus-dusk",
+   "target": "venus",
+   "jd": 2458990.1875,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {},
+   "result": {
+    "target": "venus",
+    "jd": 2458990.1875,
+    "altitude": 13.129879495061944,
+    "azimuth": 293.2338288824915,
+    "sun_altitude": -6.940881041687521,
+    "moon_altitude": -29.253406869229636,
+    "magnitude": -4.403278435094096,
+    "extinction": 0.25,
+    "sky_brightness": 1896130.329242421,
+    "limiting_magnitude": 1.188687720403087,
+    "margin": 5.591966155497183,
+    "visible": true
+   }
+  },
+  {
+   "id": "mercury-dusk",
+   "target": "mercury",
+   "jd": 2458888.1319444445,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {},
+   "result": {
+    "target": "mercury",
+    "jd": 2458888.1319444445,
+    "altitude": 10.923923015307734,
+    "azimuth": 252.37794884837484,
+    "sun_altitude": -6.690616375798503,
+    "moon_altitude": 16.447126189803193,
+    "magnitude": -0.66832637447445,
+    "extinction": 0.25,
+    "sky_brightness": 3126918.1677743597,
+    "limiting_magnitude": 0.6356636665519475,
+    "margin": 1.3039900410263976,
+    "visible": true
+   }
+  },
+  {
+   "id": "jupiter-moonlit",
+   "target": "jupiter",
+   "jd": 2459064.3333333335,
+   "lat": 37.98,
+   "lon": 23.73,
+   "options": {},
+   "result": {
+    "target": "jupiter",
+    "jd": 2459064.3333333335,
+    "altitude": 27.877243019972756,
+    "azimuth": 163.2110116458203,
+    "sun_altitude": -24.146174292404602,
+    "moon_altitude": 23.824292346096637,
+    "magnitude": -2.7172211779259703,
+    "extinction": 0.25,
+    "sky_brightness": 7323.633485209393,
+    "limiting_magnitude": 3.5720678832069632,
+    "margin": 6.2892890611329335,
+    "visible": true
+   }
+  },
+  {
+   "id": "spica-full-moon",
+   "target": "Spica",
+   "jd": 2458947.375,
+   "lat": 37.98,
+   "lon": 23.73,
+   "options": {},
+   "result": {
+    "target": "Spica",
+    "jd": 2458947.375,
+    "altitude": 34.98955379420103,
+    "azimuth": 148.0425587977038,
+    "sun_altitude": -40.436987036538504,
+    "moon_altitude": 46.24618211185086,
+    "magnitude": 0.98,
+    "extinction": 0.25,
+    "sky_brightness": 8110.443312619418,
+    "limiting_magnitude": 3.6603596594590444,
+    "margin": 2.6803596594590444,
+    "visible": true
+   }
+  },
+  {
+   "id": "antares-south",
+   "target": "Antares",
+   "jd": 2459203.6041666665,
+   "lat": -33.92,
+   "lon": 18.42,
+   "options": {},
+   "result": {
+    "target": "Antares",
+    "jd": 2459203.6041666665,
+    "altitude": 5.133340047440935,
+    "azimuth": 118.73439252549899,
+    "sun_altitude": -11.428685378456764,
+    "moon_altitude": -40.11244329699422,
+    "magnitude": 1.06,
+    "extinction": 0.25,
+    "sky_brightness": 51285.18526982986,
+    "limiting_magnitude": 1.256845858398128,
+    "margin": 0.19684585839812785,
+    "visible": true
+   }
+  },
+  {
+   "id": "regulus-mountain",
+   "target": "Regulus",
+   "jd": 2459097.6805555555,
+   "lat": 51.5,
+   "lon": -0.12,
+   "options": {
+    "alt_m": 2500.0,
+    "extinction": 0.18
+   },
+   "result": {
+    "target": "Regulus",
+    "jd": 2459097.6805555555,
+    "altitude": 1.8358264423578272,
+    "azimuth": 72.71856488764212,
+    "sun_altitude": -9.70044267384067,
+    "moon_altitude": 33.20565249260016,
+    "magnitude": 1.36,
+    "extinction": 0.18,
+    "sky_brightness": 587068.5817997396,
+    "limiting_magnitude": -0.774203132787556,
+    "margin": -2.1342031327875564,
+    "visible": false
+   }
+  },
+  {
+   "id": "saturn-ancient",
+   "target": "saturn",
+   "jd": 1514072.6041666667,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {},
+   "result": {
+    "target": "saturn",
+    "jd": 1514072.6041666667,
+    "altitude": 27.001881791860292,
+    "azimuth": 131.58360253034124,
+    "sun_altitude": -1.00783742224531,
+    "moon_altitude": -8.42871255894659,
+    "magnitude": 0.9347749384522656,
+    "extinction": 0.25,
+    "sky_brightness": 86639840.64907429,
+    "limiting_magnitude": -1.537557363826218,
+    "margin": -2.4723323022784838,
+    "visible": false
+   }
+  },
+  {
+   "id": "mars-classical",
+   "target": "mars",
+   "jd": 1772070.625,
+   "lat": 29.85,
+   "lon": 31.25,
+   "options": {},
+   "result": {
+    "target": "mars",
+    "jd": 1772070.625,
+    "altitude": -70.72154896086651,
+    "azimuth": 275.08681473879966,
+    "sun_altitude": -7.003077753997835,
+    "moon_altitude": 67.78007614504646,
+    "magnitude": -0.6710792008475399,
+    "extinction": 0.25,
+    "sky_brightness": null,
+    "limiting_magnitude": null,
+    "margin": null,
+    "visible": false
+   }
+  }
+ ],
+ "events": [
+  {
+   "id": "sirius-139-rising",
+   "target": "Sirius",
+   "jd": 1771827.5,
+   "lat": 29.85,
+   "lon": 31.25,
+   "options": {},
+   "result": {
+    "target": "Sirius",
+    "kind": "morning_first",
+    "method": "visibility",
+    "jd": 1772026.6070556373,
+    "conjunction": 1771989.7017237442,
+    "earliest": 1772025.6067195758,
+    "latest": 1772027.6069847,
+    "margin": 0.26197381925644514,
+    "magnitude": -1.44,
+    "altitude": 4.0335556597758195,
+    "azimuth": 110.77786027729697,
+    "sun_altitude": -5.967995077446251,
+    "arcus_visionis": 9.474560775641443,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "sirius-139-setting",
+   "target": "Sirius",
+   "jd": 1771827.5,
+   "lat": 29.85,
+   "lon": 31.25,
+   "options": {
+    "kind": "evening_last"
+   },
+   "result": {
+    "target": "Sirius",
+    "kind": "evening_last",
+    "method": "visibility",
+    "jd": 1771960.2104262547,
+    "conjunction": 1771989.7017237442,
+    "earliest": 1771959.2104552463,
+    "latest": 1771961.2107963562,
+    "margin": 0.46285140522329815,
+    "magnitude": -1.44,
+    "altitude": 4.056855224778173,
+    "azimuth": 249.20197835822236,
+    "sun_altitude": -6.340745787712592,
+    "arcus_visionis": 10.007213995880868,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "sirius-139-hazy",
+   "target": "Sirius",
+   "jd": 1771827.5,
+   "lat": 29.85,
+   "lon": 31.25,
+   "options": {
+    "extinction": 0.35,
+    "spread": 0.1
+   },
+   "result": {
+    "target": "Sirius",
+    "kind": "morning_first",
+    "method": "visibility",
+    "jd": 1772028.6067362349,
+    "conjunction": 1771989.7017237442,
+    "earliest": 1772026.6070556373,
+    "latest": 1772030.6060591536,
+    "margin": 0.3230571592798426,
+    "magnitude": -1.44,
+    "altitude": 5.492943507074537,
+    "azimuth": 111.74840370811089,
+    "sun_altitude": -6.301874492780519,
+    "arcus_visionis": 11.174871693174447,
+    "extinction": 0.35,
+    "spread": 0.1
+   }
+  },
+  {
+   "id": "sirius-2020-alias",
+   "target": "Sirius",
+   "jd": 2458849.5,
+   "lat": 29.85,
+   "lon": 31.25,
+   "options": {
+    "kind": "heliacal_rising"
+   },
+   "result": {
+    "target": "Sirius",
+    "kind": "morning_first",
+    "method": "visibility",
+    "jd": 2459064.6181334825,
+    "conjunction": 2459036.4557845006,
+    "earliest": 2459063.6178294877,
+    "latest": 2459065.6180459606,
+    "margin": 0.06011278575912549,
+    "magnitude": -1.44,
+    "altitude": 3.8373787823405476,
+    "azimuth": 111.67302414584809,
+    "sun_altitude": -5.953611563011352,
+    "arcus_visionis": 9.45766767468085,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "regulus-600bce",
+   "target": "Regulus",
+   "jd": 1501967.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {},
+   "result": {
+    "target": "Regulus",
+    "kind": "morning_first",
+    "method": "visibility",
+    "jd": 1502131.5592538693,
+    "conjunction": 1502112.830714319,
+    "earliest": 1502130.5580106836,
+    "latest": 1502132.5601082656,
+    "margin": 0.17217255231059458,
+    "magnitude": 1.36,
+    "altitude": 6.7783112821547,
+    "azimuth": 68.13969412739807,
+    "sun_altitude": -10.3033927635522,
+    "arcus_visionis": 16.51288537796657,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "aldebaran-600bce-setting",
+   "target": "Aldebaran",
+   "jd": 1501967.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {
+    "kind": "evening_last"
+   },
+   "result": {
+    "target": "Aldebaran",
+    "kind": "evening_last",
+    "method": "visibility",
+    "jd": 1502011.171541186,
+    "conjunction": 1502028.8287666338,
+    "earliest": 1502010.1710527577,
+    "latest": 1502012.1723905508,
+    "margin": 0.15182805084750506,
+    "magnitude": 0.87,
+    "altitude": 5.82392345367691,
+    "azimuth": 275.3978514171065,
+    "sun_altitude": -9.693174383137954,
+    "arcus_visionis": 15.16802127297677,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "arcturus-london",
+   "target": "Arcturus",
+   "jd": 2458849.5,
+   "lat": 51.5,
+   "lon": -0.12,
+   "options": {},
+   "result": {
+    "target": "Arcturus",
+    "kind": "morning_first",
+    "method": "visibility",
+    "jd": 2459136.7320090644,
+    "conjunction": 2459139.938895964,
+    "earliest": 2459134.7311003543,
+    "latest": 2459137.733290159,
+    "margin": 0.3100727209624263,
+    "magnitude": -0.05,
+    "altitude": 4.689086174986357,
+    "azimuth": 64.69890065412135,
+    "sun_altitude": -8.415465390046894,
+    "arcus_visionis": 13.534857075488201,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "fomalhaut-cape",
+   "target": "Fomalhaut",
+   "jd": 2086459.5,
+   "lat": -33.92,
+   "lon": 18.42,
+   "options": {
+    "kind": "evening_last"
+   },
+   "result": {
+    "target": "Fomalhaut",
+    "kind": "evening_last",
+    "method": "visibility",
+    "jd": 2086710.2725830395,
+    "conjunction": 2086706.3266389524,
+    "earliest": 2086708.2740214788,
+    "latest": 2086713.2698918527,
+    "margin": 0.1317198946516469,
+    "magnitude": 1.17,
+    "altitude": 5.967966750497845,
+    "azimuth": 231.60190057330237,
+    "sun_altitude": -10.204098921215222,
+    "arcus_visionis": 17.039425498661362,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "antares-mountain",
+   "target": "Antares",
+   "jd": 2458849.5,
+   "lat": 37.98,
+   "lon": 23.73,
+   "options": {
+    "alt_m": 2000.0,
+    "extinction": 0.2
+   },
+   "result": {
+    "target": "Antares",
+    "kind": "morning_first",
+    "method": "visibility",
+    "jd": 2459206.699173116,
+    "conjunction": 2459185.2871069973,
+    "earliest": 2459204.6981406407,
+    "latest": 2459208.6994189275,
+    "margin": 0.15870706090018905,
+    "magnitude": 1.06,
+    "altitude": 4.645910342529153,
+    "azimuth": 128.93216398192862,
+    "sun_altitude": -9.990811189450312,
+    "arcus_visionis": 15.214648917599083,
+    "extinction": 0.2,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "polaris-never",
+   "target": "Polaris",
+   "jd": 2458849.5,
+   "lat": 51.5,
+   "lon": -0.12,
+   "options": {},
+   "result": null
+  },
+  {
+   "id": "venus-mf",
+   "target": "venus",
+   "jd": 2458849.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {},
+   "result": {
+    "target": "venus",
+    "kind": "morning_first",
+    "method": "visibility",
+    "jd": 2459012.5624267804,
+    "conjunction": 2459004.238640153,
+    "earliest": 2459011.562901888,
+    "latest": 2459012.5642962586,
+    "margin": 0.7562140245861135,
+    "magnitude": -4.010661353560073,
+    "altitude": 3.444610906970405,
+    "azimuth": 67.84483856772117,
+    "sun_altitude": -5.2869633024464715,
+    "arcus_visionis": 8.22262682356078,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "venus-el",
+   "target": "venus",
+   "jd": 2458849.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {
+    "kind": "evening_last"
+   },
+   "result": {
+    "target": "venus",
+    "kind": "evening_last",
+    "method": "visibility",
+    "jd": 2458998.1879157694,
+    "conjunction": 2459004.238640153,
+    "earliest": 2458998.1860160846,
+    "latest": 2458999.18641025,
+    "margin": 1.1066317763712403,
+    "magnitude": -4.078632739509459,
+    "altitude": 3.376310584729612,
+    "azimuth": 297.4476986606742,
+    "sun_altitude": -6.009618982937204,
+    "arcus_visionis": 9.053567815070023,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "venus-ef",
+   "target": "venus",
+   "jd": 2458849.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {
+    "kind": "evening_first"
+   },
+   "result": {
+    "target": "venus",
+    "kind": "evening_first",
+    "method": "visibility",
+    "jd": 2459334.1701981323,
+    "conjunction": 2459299.789977085,
+    "earliest": 2459331.168776782,
+    "latest": 2459337.172103746,
+    "margin": 0.1615873098636853,
+    "magnitude": -3.901212824117088,
+    "altitude": 3.200241243797409,
+    "azimuth": 288.2153581143999,
+    "sun_altitude": -5.3683622611031145,
+    "arcus_visionis": 8.285581118926139,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "venus-ml",
+   "target": "venus",
+   "jd": 2458849.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {
+    "kind": "morning_last"
+   },
+   "result": {
+    "target": "venus",
+    "kind": "morning_last",
+    "method": "visibility",
+    "jd": 2459247.6490415465,
+    "conjunction": 2459299.789977085,
+    "earliest": 2459244.6499813814,
+    "latest": 2459251.6475501857,
+    "margin": 0.13212809065562459,
+    "magnitude": -3.9003282543455198,
+    "altitude": 3.0075975318760726,
+    "azimuth": 116.7199816618619,
+    "sun_altitude": -5.142093172292016,
+    "arcus_visionis": 8.107375587090733,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "venus-600bce-ef",
+   "target": "venus",
+   "jd": 1501967.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {
+    "kind": "evening_first"
+   },
+   "result": {
+    "target": "venus",
+    "kind": "evening_first",
+    "method": "visibility",
+    "jd": 1502289.1142115905,
+    "conjunction": 1502248.442722978,
+    "earliest": 1502286.112659772,
+    "latest": 1502292.1163647221,
+    "margin": 0.1706127040844998,
+    "magnitude": -3.8982799387852354,
+    "altitude": 3.0684709057681534,
+    "azimuth": 241.9106380568625,
+    "sun_altitude": -5.415618442178162,
+    "arcus_visionis": 8.373666772671765,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "mercury-mf",
+   "target": "mercury",
+   "jd": 2458849.5,
+   "lat": 37.98,
+   "lon": 23.73,
+   "options": {},
+   "result": {
+    "target": "mercury",
+    "kind": "morning_first",
+    "method": "visibility",
+    "jd": 2459050.6041824305,
+    "conjunction": 2459031.619883786,
+    "earliest": 2459049.6022766894,
+    "latest": 2459051.6057179337,
+    "margin": 0.15672923155133756,
+    "magnitude": 0.5665606646293675,
+    "altitude": 5.627684849970486,
+    "azimuth": 68.49124030616022,
+    "sun_altitude": -9.006451296374015,
+    "arcus_visionis": 13.72830202410853,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "mercury-ef",
+   "target": "mercury",
+   "jd": 2458849.5,
+   "lat": 37.98,
+   "lon": 23.73,
+   "options": {
+    "kind": "evening_first"
+   },
+   "result": {
+    "target": "mercury",
+    "kind": "evening_first",
+    "method": "visibility",
+    "jd": 2458879.183859476,
+    "conjunction": 2458859.1384264724,
+    "earliest": 2458877.1812979877,
+    "latest": 2458880.18440969,
+    "margin": 0.4269033774625477,
+    "magnitude": -1.0720025876607098,
+    "altitude": 4.095281275225339,
+    "azimuth": 247.66134776847403,
+    "sun_altitude": -8.190456666687005,
+    "arcus_visionis": 12.242056394744312,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "mercury-ml-139",
+   "target": "mercury",
+   "jd": 1771827.5,
+   "lat": 29.85,
+   "lon": 31.25,
+   "options": {
+    "kind": "morning_last"
+   },
+   "result": {
+    "target": "mercury",
+    "kind": "morning_last",
+    "method": "visibility",
+    "jd": 1771907.642329068,
+    "conjunction": 1771935.4935956658,
+    "earliest": 1771903.645097284,
+    "latest": 1771910.639683305,
+    "margin": 0.027924550212673427,
+    "magnitude": -0.0054617803172513635,
+    "altitude": 4.576800627467593,
+    "azimuth": 106.50706006971112,
+    "sun_altitude": -8.277086211897103,
+    "arcus_visionis": 12.81805901103638,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "mars-mf",
+   "target": "mars",
+   "jd": 2458849.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {},
+   "result": {
+    "target": "mars",
+    "kind": "morning_first",
+    "method": "visibility",
+    "jd": 2459552.6237276467,
+    "conjunction": 2459495.6674386105,
+    "earliest": 2459547.6209143633,
+    "latest": 2459558.6263875077,
+    "margin": 0.019279132703628354,
+    "magnitude": 1.5914264863771221,
+    "altitude": 6.715259459871488,
+    "azimuth": 116.91293119375239,
+    "sun_altitude": -10.610502490655598,
+    "arcus_visionis": 17.501401543463622,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "jupiter-el-1000",
+   "target": "jupiter",
+   "jd": 2086459.5,
+   "lat": -33.92,
+   "lon": 18.42,
+   "options": {
+    "kind": "evening_last"
+   },
+   "result": {
+    "target": "jupiter",
+    "kind": "evening_last",
+    "method": "visibility",
+    "jd": 2086668.2749983382,
+    "conjunction": 2086686.3111026227,
+    "earliest": 2086666.276022474,
+    "latest": 2086669.2758928863,
+    "margin": 0.08170136219261659,
+    "magnitude": -1.9653763639924167,
+    "altitude": 3.805323365118727,
+    "azimuth": 246.14624540787182,
+    "sun_altitude": -6.574210433938534,
+    "arcus_visionis": 9.82641765718781,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "saturn-mf-600bce",
+   "target": "saturn",
+   "jd": 1501967.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {},
+   "result": {
+    "target": "saturn",
+    "kind": "morning_first",
+    "method": "visibility",
+    "jd": 1502309.638660328,
+    "conjunction": 1502284.381790814,
+    "earliest": 1502307.6392926231,
+    "latest": 1502312.6364131668,
+    "margin": 0.0306080334431319,
+    "magnitude": 0.8580164658275388,
+    "altitude": 5.361627252918831,
+    "azimuth": 121.60724242717582,
+    "sun_altitude": -9.575240674627683,
+    "arcus_visionis": 15.39845979698177,
+    "extinction": 0.25,
+    "spread": 0.05
+   }
+  },
+  {
+   "id": "sirius-arcus",
+   "target": "Sirius",
+   "jd": 1771827.5,
+   "lat": 29.85,
+   "lon": 31.25,
+   "options": {
+    "method": "arcus",
+    "arcus_visionis": 9.0
+   },
+   "result": {
+    "target": "Sirius",
+    "kind": "morning_first",
+    "method": "arcus",
+    "jd": 1772026.5940317842,
+    "conjunction": 1771989.7017237442,
+    "arcus_visionis": 9.0,
+    "sun_depression": 9.474560775641443
+   }
+  },
+  {
+   "id": "venus-arcus-el",
+   "target": "venus",
+   "jd": 2458849.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {
+    "kind": "evening_last",
+    "method": "arcus",
+    "arcus_visionis": 5.5
+   },
+   "result": {
+    "target": "venus",
+    "kind": "evening_last",
+    "method": "arcus",
+    "jd": 2459000.189677478,
+    "conjunction": 2459004.238640153,
+    "arcus_visionis": 5.5,
+    "sun_depression": 6.233004683386138
+   }
+  },
+  {
+   "id": "jupiter-acronychal",
+   "target": "jupiter",
+   "jd": 2458849.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {
+    "kind": "acronychal_rising",
+    "method": "arcus",
+    "arcus_visionis": 7.0
+   },
+   "result": {
+    "target": "jupiter",
+    "kind": "acronychal_rising",
+    "method": "arcus",
+    "jd": 2459035.201670035,
+    "conjunction": 2459044.8322733864,
+    "arcus_visionis": 7.0,
+    "sun_depression": 7.524376959600451
+   }
+  },
+  {
+   "id": "jupiter-cosmical",
+   "target": "jupiter",
+   "jd": 2458849.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {
+    "kind": "cosmical_setting",
+    "method": "arcus",
+    "arcus_visionis": 7.0
+   },
+   "result": {
+    "target": "jupiter",
+    "kind": "cosmical_setting",
+    "method": "arcus",
+    "jd": 2459052.5651087957,
+    "conjunction": 2459044.8322733864,
+    "arcus_visionis": 7.0,
+    "sun_depression": 7.641012007668383
+   }
+  },
+  {
+   "id": "spica-acronychal",
+   "target": "Spica",
+   "jd": 1501967.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {
+    "kind": "acronychal_rising",
+    "method": "arcus",
+    "arcus_visionis": 8.0
+   },
+   "result": {
+    "target": "Spica",
+    "kind": "acronychal_rising",
+    "method": "arcus",
+    "jd": 1501973.149601859,
+    "conjunction": 1501981.2184841018,
+    "arcus_visionis": 8.0,
+    "sun_depression": 8.081566723006077
+   }
+  },
+  {
+   "id": "moon-ef-babylon",
+   "target": "moon",
+   "jd": 2460735.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {
+    "kind": "evening_first"
+   },
+   "result": {
+    "target": "moon",
+    "kind": "evening_first",
+    "method": "crescent",
+    "jd": 2460736.1566008986,
+    "conjunction": 2460734.5311076483,
+    "earliest": 2460736.1566008986,
+    "latest": 2460736.1566008986,
+    "q": 1.7205813018346912,
+    "zone": "A",
+    "lag_minutes": 103.15034106373787,
+    "arcv": 22.12150100873115,
+    "arcl": 22.335289603449915,
+    "daz": 3.1024807545241515,
+    "width": 1.2425447521045765
+   }
+  },
+  {
+   "id": "moon-ml-babylon",
+   "target": "moon",
+   "jd": 2460735.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {
+    "kind": "morning_last"
+   },
+   "result": {
+    "target": "moon",
+    "kind": "morning_last",
+    "method": "crescent",
+    "jd": 2460762.6088083964,
+    "conjunction": 2460763.9568250515,
+    "earliest": 2460762.6088083964,
+    "latest": 2460762.6088083964,
+    "q": 0.30973283016046665,
+    "zone": "A",
+    "lag_minutes": 42.752133160829544,
+    "arcv": 9.841451462088443,
+    "arcl": 18.842165104304925,
+    "daz": -16.08761604786065,
+    "width": 0.8850294564481221
+   }
+  },
+  {
+   "id": "moon-ef-mecca",
+   "target": "moon",
+   "jd": 2460735.5,
+   "lat": 21.42,
+   "lon": 39.83,
+   "options": {
+    "kind": "evening_first"
+   },
+   "result": {
+    "target": "moon",
+    "kind": "evening_first",
+    "method": "crescent",
+    "jd": 2460736.171564787,
+    "conjunction": 2460734.5311076483,
+    "earliest": 2460736.171564787,
+    "latest": 2460736.171564787,
+    "q": 1.7702774877180825,
+    "zone": "A",
+    "lag_minutes": 94.81216996908188,
+    "arcv": 22.504458718466392,
+    "arcl": 22.542308037621694,
+    "daz": -1.3143435744919145,
+    "width": 1.2654959564333856
+   }
+  },
+  {
+   "id": "moon-ef-london",
+   "target": "moon",
+   "jd": 2460735.5,
+   "lat": 51.5,
+   "lon": -0.12,
+   "options": {
+    "kind": "evening_first"
+   },
+   "result": {
+    "target": "moon",
+    "kind": "evening_first",
+    "method": "crescent",
+    "jd": 2460736.279014119,
+    "conjunction": 2460734.5311076483,
+    "earliest": 2460736.279014119,
+    "latest": 2460736.279014119,
+    "q": 1.7499668528815193,
+    "zone": "A",
+    "lag_minutes": 136.62221610546112,
+    "arcv": 21.46906961296303,
+    "arcl": 24.029128510983607,
+    "daz": 10.856850549734048,
+    "width": 1.4352261301886517
+   }
+  },
+  {
+   "id": "moon-ef-600bce",
+   "target": "moon",
+   "jd": 1501967.5,
+   "lat": 32.54,
+   "lon": 44.42,
+   "options": {
+    "kind": "evening_first"
+   },
+   "result": {
+    "target": "moon",
+    "kind": "evening_first",
+    "method": "crescent",
+    "jd": 1501996.165020315,
+    "conjunction": 1501994.3772424352,
+    "earliest": 1501996.165020315,
+    "latest": 1501996.165020315,
+    "q": 1.4144052172742325,
+    "zone": "A",
+    "lag_minutes": 95.43864615261555,
+    "arcv": 20.44342428668696,
+    "arcl": 20.541891434033804,
+    "daz": 2.0197501466463166,
+    "width": 0.9701041392342054
+   }
+  },
+  {
+   "id": "moon-ml-cape",
+   "target": "moon",
+   "jd": 2086459.5,
+   "lat": -33.92,
+   "lon": 18.42,
+   "options": {
+    "kind": "morning_last"
+   },
+   "result": {
+    "target": "moon",
+    "kind": "morning_last",
+    "method": "crescent",
+    "jd": 2086461.703597863,
+    "conjunction": 2086463.5330559285,
+    "earliest": 2086461.703597863,
+    "latest": 2086461.703597863,
+    "q": 1.8970482968287026,
+    "zone": "A",
+    "lag_minutes": 116.41831040382385,
+    "arcv": 21.81086687221001,
+    "arcl": 25.970100256804557,
+    "daz": 14.18362207302198,
+    "width": 1.6710656986628298
+   }
+  }
+ ],
+ "crescents": [
+  {
+   "id": "mecca-evening-0",
+   "day": 2460764,
+   "lat": 21.42,
+   "lon": 39.83,
+   "half": "evening",
+   "result": {
+    "q": -0.8981219984715046,
+    "zone": "F",
+    "jd": 2460764.1513289656,
+    "lag_minutes": 7.520983815193176,
+    "arcv": 2.7070834867062104,
+    "arcl": 3.0487751232226854,
+    "daz": -1.402544501489416,
+    "width": 0.023598325365033375,
+    "sun": 2460764.1490076743,
+    "moon": 2460764.1542305797
+   }
+  },
+  {
+   "id": "mecca-evening-1",
+   "day": 2460765,
+   "lat": 21.42,
+   "lon": 39.83,
+   "half": "evening",
+   "result": {
+    "q": 0.9743871394257146,
+    "zone": "A",
+    "jd": 2460765.171490747,
+    "lag_minutes": 72.1345554292202,
+    "arcv": 17.136611169177186,
+    "arcl": 17.37882224815984,
+    "daz": -2.902273010688674,
+    "width": 0.7632018924265268,
+    "sun": 2460765.149226995,
+    "moon": 2460765.1993204365
+   }
+  },
+  {
+   "id": "mecca-evening-2",
+   "day": 2460766,
+   "lat": 21.42,
+   "lon": 39.83,
+   "half": "evening",
+   "result": {
+    "q": 3.255277673488858,
+    "zone": "A",
+    "jd": 2460766.192331368,
+    "lag_minutes": 138.94728496670723,
+    "arcv": 31.572122417733034,
+    "arcl": 31.773924522937254,
+    "daz": -3.622063480494859,
+    "width": 2.498907286887644,
+    "sun": 2460766.1494464036,
+    "moon": 2460766.2459375737
+   }
+  },
+  {
+   "id": "mecca-evening-3",
+   "day": 2460767,
+   "lat": 21.42,
+   "lon": 39.83,
+   "half": "evening",
+   "result": {
+    "q": 6.031620679064101,
+    "zone": "A",
+    "jd": 2460767.2136530033,
+    "lag_minutes": 207.31783881783485,
+    "arcv": 45.83897970507776,
+    "arcl": 45.93874564521693,
+    "daz": -3.111530756460951,
+    "width": 5.041044882263462,
+    "sun": 2460767.149666016,
+    "moon": 2460767.2936367374
+   }
+  },
+  {
+   "id": "mecca-morning-0",
+   "day": 2460760,
+   "lat": 21.42,
+   "lon": 39.83,
+   "half": "morning",
+   "result": {
+    "q": 7.779496849325054,
+    "zone": "A",
+    "jd": 2460759.5842578686,
+    "lag_minutes": 177.35551491379738,
+    "arcv": 38.49324869895361,
+    "arcl": 58.82518040438201,
+    "daz": -45.3593858214883,
+    "width": 7.6521521995711455,
+    "sun": 2460759.638997225,
+    "moon": 2460759.515833673
+   }
+  },
+  {
+   "id": "mecca-morning-1",
+   "day": 2460761,
+   "lat": 21.42,
+   "lon": 39.83,
+   "half": "morning",
+   "result": {
+    "q": 4.348947971197468,
+    "zone": "A",
+    "jd": 2460760.597446932,
+    "lag_minutes": 132.55612939596176,
+    "arcv": 29.9553056808775,
+    "arcl": 45.89013495035681,
+    "daz": -35.1734664234487,
+    "width": 4.897960960492721,
+    "sun": 2460760.6383593176,
+    "moon": 2460760.54630645
+   }
+  },
+  {
+   "id": "mecca-morning-2",
+   "day": 2460762,
+   "lat": 21.42,
+   "lon": 39.83,
+   "half": "morning",
+   "result": {
+    "q": 2.263128483402283,
+    "zone": "A",
+    "jd": 2460761.609683465,
+    "lag_minutes": 90.84470003843307,
+    "arcv": 21.38213876960575,
+    "arcl": 32.48823055543278,
+    "daz": -24.60491129658334,
+    "width": 2.5576072563945527,
+    "sun": 2460761.637721953,
+    "moon": 2460761.5746353557
+   }
+  },
+  {
+   "id": "mecca-morning-3",
+   "day": 2460763,
+   "lat": 21.42,
+   "lon": 39.83,
+   "half": "morning",
+   "result": {
+    "q": 0.5816560502315713,
+    "zone": "A",
+    "jd": 2460762.6213363255,
+    "lag_minutes": 51.02702423930168,
+    "arcv": 12.642646841940325,
+    "arcl": 18.668862256469385,
+    "daz": -13.764562036994306,
+    "width": 0.8694870107135619,
+    "sun": 2460762.637085407,
+    "moon": 2460762.6016499735
+   }
+  },
+  {
+   "id": "london-evening-0",
+   "day": 2460764,
+   "lat": 51.5,
+   "lon": -0.12,
+   "half": "evening",
+   "result": {
+    "q": -0.6781247853595402,
+    "zone": "F",
+    "jd": 2460764.2777974694,
+    "lag_minutes": 24.83199968934059,
+    "arcv": 4.692525171524897,
+    "arcl": 4.772663866596632,
+    "daz": 0.8711827604039968,
+    "width": 0.05784907823992949,
+    "sun": 2460764.270133272,
+    "moon": 2460764.287377716
+   }
+  },
+  {
+   "id": "london-evening-1",
+   "day": 2460765,
+   "lat": 51.5,
+   "lon": -0.12,
+   "half": "evening",
+   "result": {
+    "q": 1.1463923147353081,
+    "zone": "A",
+    "jd": 2460765.307333527,
+    "lag_minutes": 116.75072193145752,
+    "arcv": 17.922401337577917,
+    "arcl": 19.30196458700271,
+    "daz": 7.195666734693589,
+    "width": 0.9395267494453009,
+    "sun": 2460765.271299354,
+    "moon": 2460765.352376244
+   }
+  },
+  {
+   "id": "london-evening-2",
+   "day": 2460766,
+   "lat": 51.5,
+   "lon": -0.12,
+   "half": "evening",
+   "result": {
+    "q": 3.2904859897994485,
+    "zone": "A",
+    "jd": 2460766.3374741883,
+    "lag_minutes": 210.63067004084587,
+    "arcv": 30.4713511815156,
+    "arcl": 33.80496829256677,
+    "daz": 14.815614092064095,
+    "width": 2.8153047550509185,
+    "sun": 2460766.2724647224,
+    "moon": 2460766.418736021
+   }
+  },
+  {
+   "id": "babylon-600bce-0",
+   "day": 1501987,
+   "lat": 32.54,
+   "lon": 44.42,
+   "half": "evening",
+   "result": null
+  },
+  {
+   "id": "babylon-600bce-1",
+   "day": 1501988,
+   "lat": 32.54,
+   "lon": 44.42,
+   "half": "evening",
+   "result": null
+  },
+  {
+   "id": "babylon-600bce-2",
+   "day": 1501989,
+   "lat": 32.54,
+   "lon": 44.42,
+   "half": "evening",
+   "result": null
+  },
+  {
+   "id": "babylon-600bce-3",
+   "day": 1501990,
+   "lat": 32.54,
+   "lon": 44.42,
+   "half": "evening",
+   "result": null
+  }
+ ]
+}

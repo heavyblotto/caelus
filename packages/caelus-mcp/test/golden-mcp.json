@@ -3768,6 +3768,616 @@
       ]
     }
   },
+  "heliacal-sirius-139": {
+    "tool": "heliacal",
+    "args": {
+      "target": "Sirius",
+      "lat": 29.85,
+      "lon": 31.25,
+      "start_year": 139
+    },
+    "payload": {
+      "target": "Sirius",
+      "place": {
+        "lat": 29.85,
+        "lon": 31.25,
+        "altitude_m": 0
+      },
+      "searched_from": {
+        "jd": 1771827.5,
+        "calendar": "julian",
+        "year": 139,
+        "era": "139 CE",
+        "month": 1,
+        "day": 1,
+        "ut": "00:00"
+      },
+      "method": "visibility",
+      "atmosphere": {
+        "extinction": 0.25,
+        "spread": 0.05
+      },
+      "events": [
+        {
+          "kind": "evening_last",
+          "method": "visibility",
+          "date": {
+            "jd": 1771960.21043,
+            "calendar": "julian",
+            "year": 139,
+            "era": "139 CE",
+            "month": 5,
+            "day": 13,
+            "ut": "17:03"
+          },
+          "local_date": {
+            "year": 139,
+            "month": 5,
+            "day": 13
+          },
+          "conjunction": {
+            "jd": 1771989.70172,
+            "calendar": "julian",
+            "year": 139,
+            "era": "139 CE",
+            "month": 6,
+            "day": 12,
+            "ut": "04:50"
+          },
+          "earliest": {
+            "jd": 1771959.21046,
+            "calendar": "julian",
+            "year": 139,
+            "era": "139 CE",
+            "month": 5,
+            "day": 12,
+            "ut": "17:03"
+          },
+          "latest": {
+            "jd": 1771961.2108,
+            "calendar": "julian",
+            "year": 139,
+            "era": "139 CE",
+            "month": 5,
+            "day": 14,
+            "ut": "17:04"
+          },
+          "window_days": 2,
+          "margin": 0.46,
+          "magnitude": -1.44,
+          "altitude": 4.1,
+          "azimuth": 249.2,
+          "sun_altitude": -6.3,
+          "arcus_visionis": 10
+        },
+        {
+          "kind": "morning_first",
+          "method": "visibility",
+          "date": {
+            "jd": 1772026.60706,
+            "calendar": "julian",
+            "year": 139,
+            "era": "139 CE",
+            "month": 7,
+            "day": 19,
+            "ut": "02:34"
+          },
+          "local_date": {
+            "year": 139,
+            "month": 7,
+            "day": 19
+          },
+          "conjunction": {
+            "jd": 1771989.70172,
+            "calendar": "julian",
+            "year": 139,
+            "era": "139 CE",
+            "month": 6,
+            "day": 12,
+            "ut": "04:50"
+          },
+          "earliest": {
+            "jd": 1772025.60672,
+            "calendar": "julian",
+            "year": 139,
+            "era": "139 CE",
+            "month": 7,
+            "day": 18,
+            "ut": "02:34"
+          },
+          "latest": {
+            "jd": 1772027.60698,
+            "calendar": "julian",
+            "year": 139,
+            "era": "139 CE",
+            "month": 7,
+            "day": 20,
+            "ut": "02:34"
+          },
+          "window_days": 2,
+          "margin": 0.26,
+          "magnitude": -1.44,
+          "altitude": 4,
+          "azimuth": 110.8,
+          "sun_altitude": -6,
+          "arcus_visionis": 9.5
+        }
+      ],
+      "not_found": []
+    }
+  },
+  "heliacal-venus-babylon": {
+    "tool": "heliacal",
+    "args": {
+      "target": "venus",
+      "lat": 32.54,
+      "lon": 44.42,
+      "start_year": -599
+    },
+    "payload": {
+      "target": "venus",
+      "place": {
+        "lat": 32.54,
+        "lon": 44.42,
+        "altitude_m": 0
+      },
+      "searched_from": {
+        "jd": 1502273.5,
+        "calendar": "julian",
+        "year": -599,
+        "era": "600 BCE",
+        "month": 1,
+        "day": 1,
+        "ut": "00:00"
+      },
+      "method": "visibility",
+      "atmosphere": {
+        "extinction": 0.25,
+        "spread": 0.05
+      },
+      "events": [
+        {
+          "kind": "evening_first",
+          "method": "visibility",
+          "date": {
+            "jd": 1502289.11421,
+            "calendar": "julian",
+            "year": -599,
+            "era": "600 BCE",
+            "month": 1,
+            "day": 16,
+            "ut": "14:44"
+          },
+          "local_date": {
+            "year": -599,
+            "month": 1,
+            "day": 16
+          },
+          "conjunction": {
+            "jd": 1502248.44272,
+            "calendar": "julian",
+            "year": -600,
+            "era": "601 BCE",
+            "month": 12,
+            "day": 6,
+            "ut": "22:38"
+          },
+          "earliest": {
+            "jd": 1502286.11266,
+            "calendar": "julian",
+            "year": -599,
+            "era": "600 BCE",
+            "month": 1,
+            "day": 13,
+            "ut": "14:42"
+          },
+          "latest": {
+            "jd": 1502292.11636,
+            "calendar": "julian",
+            "year": -599,
+            "era": "600 BCE",
+            "month": 1,
+            "day": 19,
+            "ut": "14:48"
+          },
+          "window_days": 6,
+          "margin": 0.17,
+          "magnitude": -3.9,
+          "altitude": 3.1,
+          "azimuth": 241.9,
+          "sun_altitude": -5.4,
+          "arcus_visionis": 8.4
+        },
+        {
+          "kind": "evening_last",
+          "method": "visibility",
+          "date": {
+            "jd": 1502522.15569,
+            "calendar": "julian",
+            "year": -599,
+            "era": "600 BCE",
+            "month": 9,
+            "day": 6,
+            "ut": "15:44"
+          },
+          "local_date": {
+            "year": -599,
+            "month": 9,
+            "day": 6
+          },
+          "conjunction": {
+            "jd": 1502538.80182,
+            "calendar": "julian",
+            "year": -599,
+            "era": "600 BCE",
+            "month": 9,
+            "day": 23,
+            "ut": "07:15"
+          },
+          "earliest": {
+            "jd": 1502521.15687,
+            "calendar": "julian",
+            "year": -599,
+            "era": "600 BCE",
+            "month": 9,
+            "day": 5,
+            "ut": "15:46"
+          },
+          "latest": {
+            "jd": 1502523.15496,
+            "calendar": "julian",
+            "year": -599,
+            "era": "600 BCE",
+            "month": 9,
+            "day": 7,
+            "ut": "15:43"
+          },
+          "window_days": 2,
+          "margin": 0.55,
+          "magnitude": -4.66,
+          "altitude": 3.1,
+          "azimuth": 259.1,
+          "sun_altitude": -3.9,
+          "arcus_visionis": 6.7
+        },
+        {
+          "kind": "morning_first",
+          "method": "visibility",
+          "date": {
+            "jd": 1502544.60518,
+            "calendar": "julian",
+            "year": -599,
+            "era": "600 BCE",
+            "month": 9,
+            "day": 29,
+            "ut": "02:31"
+          },
+          "local_date": {
+            "year": -599,
+            "month": 9,
+            "day": 29
+          },
+          "conjunction": {
+            "jd": 1502538.80182,
+            "calendar": "julian",
+            "year": -599,
+            "era": "600 BCE",
+            "month": 9,
+            "day": 23,
+            "ut": "07:15"
+          },
+          "earliest": {
+            "jd": 1502544.60297,
+            "calendar": "julian",
+            "year": -599,
+            "era": "600 BCE",
+            "month": 9,
+            "day": 29,
+            "ut": "02:28"
+          },
+          "latest": {
+            "jd": 1502545.60324,
+            "calendar": "julian",
+            "year": -599,
+            "era": "600 BCE",
+            "month": 9,
+            "day": 30,
+            "ut": "02:29"
+          },
+          "window_days": 1,
+          "margin": 0.36,
+          "magnitude": -4.13,
+          "altitude": 3.2,
+          "azimuth": 94.7,
+          "sun_altitude": -5.1,
+          "arcus_visionis": 8
+        },
+        {
+          "kind": "morning_last",
+          "method": "visibility",
+          "date": {
+            "jd": 1502781.56785,
+            "calendar": "julian",
+            "year": -598,
+            "era": "599 BCE",
+            "month": 5,
+            "day": 24,
+            "ut": "01:38"
+          },
+          "local_date": {
+            "year": -598,
+            "month": 5,
+            "day": 24
+          },
+          "conjunction": {
+            "jd": 1502830.01402,
+            "calendar": "julian",
+            "year": -598,
+            "era": "599 BCE",
+            "month": 7,
+            "day": 11,
+            "ut": "12:20"
+          },
+          "earliest": {
+            "jd": 1502774.57196,
+            "calendar": "julian",
+            "year": -598,
+            "era": "599 BCE",
+            "month": 5,
+            "day": 17,
+            "ut": "01:44"
+          },
+          "latest": {
+            "jd": 1502788.56415,
+            "calendar": "julian",
+            "year": -598,
+            "era": "599 BCE",
+            "month": 5,
+            "day": 31,
+            "ut": "01:32"
+          },
+          "window_days": 14,
+          "margin": 0.05,
+          "magnitude": -3.88,
+          "altitude": 3.3,
+          "azimuth": 74.4,
+          "sun_altitude": -4.7,
+          "arcus_visionis": 7.6
+        }
+      ],
+      "not_found": []
+    }
+  },
+  "heliacal-new-crescent": {
+    "tool": "heliacal",
+    "args": {
+      "target": "moon",
+      "lat": 21.42,
+      "lon": 39.83,
+      "start_year": 2025,
+      "start_month": 3,
+      "kind": "evening_first"
+    },
+    "payload": {
+      "target": "moon",
+      "place": {
+        "lat": 21.42,
+        "lon": 39.83,
+        "altitude_m": 0
+      },
+      "searched_from": {
+        "jd": 2460735.5,
+        "calendar": "gregorian",
+        "year": 2025,
+        "era": "2025 CE",
+        "month": 3,
+        "day": 1,
+        "ut": "00:00"
+      },
+      "method": "crescent",
+      "events": [
+        {
+          "kind": "evening_first",
+          "method": "crescent",
+          "date": {
+            "jd": 2460736.17156,
+            "calendar": "gregorian",
+            "year": 2025,
+            "era": "2025 CE",
+            "month": 3,
+            "day": 1,
+            "ut": "16:07"
+          },
+          "local_date": {
+            "year": 2025,
+            "month": 3,
+            "day": 1
+          },
+          "conjunction": {
+            "jd": 2460734.53111,
+            "calendar": "gregorian",
+            "year": 2025,
+            "era": "2025 CE",
+            "month": 2,
+            "day": 28,
+            "ut": "00:45"
+          },
+          "earliest": {
+            "jd": 2460736.17156,
+            "calendar": "gregorian",
+            "year": 2025,
+            "era": "2025 CE",
+            "month": 3,
+            "day": 1,
+            "ut": "16:07"
+          },
+          "latest": {
+            "jd": 2460736.17156,
+            "calendar": "gregorian",
+            "year": 2025,
+            "era": "2025 CE",
+            "month": 3,
+            "day": 1,
+            "ut": "16:07"
+          },
+          "window_days": 0,
+          "q": 1.77,
+          "zone": "A",
+          "lag_minutes": 94.8,
+          "arcv": 22.5,
+          "arcl": 22.54,
+          "daz": -1.31,
+          "width": 1.27
+        }
+      ],
+      "not_found": []
+    }
+  },
+  "heliacal-jupiter-arcus": {
+    "tool": "heliacal",
+    "args": {
+      "target": "jupiter",
+      "lat": 32.54,
+      "lon": 44.42,
+      "start_year": 2020,
+      "method": "arcus",
+      "arcus_visionis": 7
+    },
+    "payload": {
+      "target": "jupiter",
+      "place": {
+        "lat": 32.54,
+        "lon": 44.42,
+        "altitude_m": 0
+      },
+      "searched_from": {
+        "jd": 2458849.5,
+        "calendar": "gregorian",
+        "year": 2020,
+        "era": "2020 CE",
+        "month": 1,
+        "day": 1,
+        "ut": "00:00"
+      },
+      "method": "arcus",
+      "arcus_visionis": 7,
+      "events": [
+        {
+          "kind": "morning_first",
+          "method": "arcus",
+          "date": {
+            "jd": 2458857.64585,
+            "calendar": "gregorian",
+            "year": 2020,
+            "era": "2020 CE",
+            "month": 1,
+            "day": 9,
+            "ut": "03:30"
+          },
+          "local_date": {
+            "year": 2020,
+            "month": 1,
+            "day": 9
+          },
+          "conjunction": {
+            "jd": 2458845.2677,
+            "calendar": "gregorian",
+            "year": 2019,
+            "era": "2019 CE",
+            "month": 12,
+            "day": 27,
+            "ut": "18:25"
+          },
+          "sun_depression": 7.57
+        },
+        {
+          "kind": "acronychal_rising",
+          "method": "arcus",
+          "date": {
+            "jd": 2459035.20167,
+            "calendar": "gregorian",
+            "year": 2020,
+            "era": "2020 CE",
+            "month": 7,
+            "day": 4,
+            "ut": "16:50"
+          },
+          "local_date": {
+            "year": 2020,
+            "month": 7,
+            "day": 4
+          },
+          "conjunction": {
+            "jd": 2459044.83227,
+            "calendar": "gregorian",
+            "year": 2020,
+            "era": "2020 CE",
+            "month": 7,
+            "day": 14,
+            "ut": "07:58"
+          },
+          "sun_depression": 7.52
+        },
+        {
+          "kind": "cosmical_setting",
+          "method": "arcus",
+          "date": {
+            "jd": 2459052.56511,
+            "calendar": "gregorian",
+            "year": 2020,
+            "era": "2020 CE",
+            "month": 7,
+            "day": 22,
+            "ut": "01:34"
+          },
+          "local_date": {
+            "year": 2020,
+            "month": 7,
+            "day": 22
+          },
+          "conjunction": {
+            "jd": 2459044.83227,
+            "calendar": "gregorian",
+            "year": 2020,
+            "era": "2020 CE",
+            "month": 7,
+            "day": 14,
+            "ut": "07:58"
+          },
+          "sun_depression": 7.64
+        },
+        {
+          "kind": "evening_last",
+          "method": "arcus",
+          "date": {
+            "jd": 2459233.12233,
+            "calendar": "gregorian",
+            "year": 2021,
+            "era": "2021 CE",
+            "month": 1,
+            "day": 18,
+            "ut": "14:56"
+          },
+          "local_date": {
+            "year": 2021,
+            "month": 1,
+            "day": 18
+          },
+          "conjunction": {
+            "jd": 2459243.56916,
+            "calendar": "gregorian",
+            "year": 2021,
+            "era": "2021 CE",
+            "month": 1,
+            "day": 29,
+            "ut": "01:40"
+          },
+          "sun_depression": 7.48
+        }
+      ],
+      "not_found": []
+    }
+  },
   "date-sky-waning-scorpio-moon": {
     "tool": "date_sky",
     "args": {

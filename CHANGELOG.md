@@ -36,6 +36,42 @@ current figures live in `packages/caelus/accuracy.json` and on
   tarball, so `loadNodeData` gives npm users the precise Moon across the
   whole headline range, where they previously fell back to the analytic
   series outside 1920 to 2080.
+- **First and last visibility.** `heliacal(engine, target, jdStart, lat, lon)`
+  finds the day a planet, a catalog star, or the Moon is first or last seen
+  from one place: the heliacal rising and setting, the evening and morning
+  apparitions of Mercury and Venus, and the new and old lunar crescent. The
+  default method is a physical model implemented from Schaefer's published
+  equations (sky brightness from twilight, moonlight, and the night sky;
+  extinction by Rayleigh scattering, ozone, and aerosol; the eye's threshold
+  against the background). The Moon uses Yallop's q test. `method: "arcus"`
+  applies the classical rule with a stated arcus visionis and adds the
+  acronychal rising and cosmical setting. This reverses a non-goal recorded
+  in `docs/gap-analysis.md`.
+- **The atmosphere is an input and the answer is a window.** Extinction is
+  one stated number, default 0.25 magnitudes per air mass, echoed in every
+  result. Each event is computed at that value and at 0.05 less and more, and
+  the result carries `earliest` and `latest` beside the nominal instant.
+  `visibility` reports the limiting magnitude and margin for one body at one
+  instant, and `lunarCrescent` scores one evening or morning.
+- **Compared with Swiss Ephemeris.** `python/validate_heliacal.py` runs 374
+  events at five sites and four epochs from 600 BCE to 2020 against
+  `swe_heliacal_ut` at the same extinction. Stars: 183 of 198 within a day,
+  all within three. Venus: 40 of 40 within a day. Mercury: 36 of 38 within a
+  day. The Moon: 39 of 40 on the same evening. Mars, Jupiter, and Saturn: 55
+  of 58 within three days, the largest difference six. In 372 of the 374 the
+  other answer lies inside the `earliest` to `latest` window. For Sirius at
+  Memphis in 139 CE the model gives 19 July, Julian calendar, against the 20
+  or 21 July read from Censorinus.
+- **Fixed: `heliocentric` and `pheno` before 1000 CE.** `heliocentric` read a
+  planet's modern pack only, so it threw for any date the classical slab
+  serves, and `pheno` threw with it. Both now use the slab that covers the
+  instant.
+- **Fixed: positions in the first hours after a slab boundary.** An apparent
+  place is built from the body's position a light-time earlier. Just after
+  1000 CE that earlier instant lies in the classical slab, and the engine
+  asked the modern pack for it and threw. Each instant is now served by the
+  slab that covers it. The gap was 6 minutes wide for Mars and over 4 hours
+  for Neptune.
 - **Chart stability.** `chartStability(engine, jdUt, opts)` takes a window of
   time around a chart's stated instant and reports which of its facts hold
   across the window: the sign on each angle, the sect, and each body's sign,
@@ -149,6 +185,12 @@ current figures live in `packages/caelus/accuracy.json` and on
 
 ### MCP (`caelus-mcp`)
 
+- **`heliacal`** exposes first and last visibility, which brings the server
+  to 38 tools. It takes a target, a place, and a start year, and returns
+  every event the target has in date order, each with its calendar date, its
+  earliest and latest date, and the conditions at the moment of best
+  visibility. `verify_tools` pins it to the engine, and four frozen payloads
+  hold the format.
 - **`chart_stability`** exposes chart stability, which brings the server to
   37 tools. It takes a stated time, an uncertainty in minutes (at most 720),
   and an optional place, and it returns the stable facts as a list and each

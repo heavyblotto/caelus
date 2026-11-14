@@ -435,18 +435,44 @@ export class Engine {
     if (raw || (eras && eras.length)) {
       if (raw) {
         const s = this.pack(body) as ChebSeries;
-        if (s.jd0 <= jde && jde <= s.jd1) return s;
+        if (s.jd0 <= jde && jde <= s.jd1) return eras && eras.length ? this.slabSet(body) : s;
         for (const slab of this.eraSeries(body)) {
-          if (slab.jd0 <= jde && jde <= slab.jd1) return slab;
+          if (slab.jd0 <= jde && jde <= slab.jd1) return this.slabSet(body);
         }
         s.xyz(jde); // the canonical RangeError naming the fitted range
       }
       for (const slab of this.eraSeries(body)) {
-        if (slab.jd0 <= jde && jde <= slab.jd1) return slab;
+        if (slab.jd0 <= jde && jde <= slab.jd1) return this.slabSet(body);
       }
       throw new RangeError(`jd ${jde} outside fitted range (no era slab covers it)`);
     }
     return this.pack(body);
+  }
+
+  private slabSets = new Map<string, XyzSource>();
+
+  /** A body's default pack and era slabs as one source. The apparent place
+   *  of an instant is assembled from the body's position a light-time
+   *  earlier, and within a light-time of a slab boundary that earlier
+   *  instant lies in the neighbouring slab; a single slab chosen for the
+   *  instant itself cannot serve it. */
+  private slabSet(body: string): XyzSource {
+    let set = this.slabSets.get(body);
+    if (!set) {
+      const packs: ChebSeries[] = this.data.chebPacks?.[body]
+        ? [this.pack(body) as ChebSeries, ...this.eraSeries(body)]
+        : this.eraSeries(body);
+      set = {
+        xyz: (jd: number): [number, number, number] => {
+          for (const p of packs) {
+            if (p.jd0 <= jd && jd <= p.jd1) return p.xyz(jd);
+          }
+          return packs[0].xyz(jd); // the canonical RangeError
+        },
+      };
+      this.slabSets.set(body, set);
+    }
+    return set;
   }
 
   private moonEraCache: ChebSeries[] | null = null;
@@ -775,7 +801,8 @@ export class Engine {
       b = Math.atan2(z, Math.hypot(x, y));
       [l, b] = precessEcliptic(l, b, J2000, jde);
     } else if (this.hasPack(body)) {
-      const [x, y, z] = this.pack(body).xyz(jde);
+      // the slab covering the instant, as ecliptic() chooses it
+      const [x, y, z] = this.packAt(body, jde).xyz(jde);
       r = Math.sqrt(x * x + y * y + z * z);
       l = mod(Math.atan2(y, x), TWO_PI);
       b = Math.atan2(z, Math.hypot(x, y));

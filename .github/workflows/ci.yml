@@ -95,6 +95,9 @@ jobs:
       - run: node packages/caelus/dist/test/packbin-golden.test.js
       # position uncertainty: the accuracy bound and the delta-T clock term
       - run: node packages/caelus/dist/test/uncertainty-golden.test.js
+      # first and last visibility: the sky model at an instant, each event
+      # search, and the crescent test, pinned to the Python reference
+      - run: node packages/caelus/dist/test/heliacal-golden.test.js
       # pack loader: the browser-safe path to the binary packs. A matching
       # SHA-256 loads, a changed byte is refused, and the result computes the
       # same positions as the Node loader
