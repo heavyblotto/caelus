@@ -33,4 +33,11 @@ export const INSTRUMENTS: Instrument[] = [
     line: "List the solar and lunar eclipses in a span of years, with what one place sees of each and the central path of a solar eclipse.",
     status: "live",
   },
+  {
+    id: "I-04",
+    href: "/instruments/first-visibility",
+    title: "First visibility",
+    line: "Find the days in a year on which a star, a planet, or the Moon is last seen and first seen again from one place.",
+    status: "live",
+  },
 ];

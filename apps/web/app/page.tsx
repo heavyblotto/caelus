@@ -210,7 +210,7 @@ export default function Home() {
           <p>Each one answers one question in your browser and shows the call that produced the result.</p>
         </div>
         {INSTRUMENTS.map((inst) => (
-          <Link key={inst.id} href={inst.href} className="tile s4">
+          <Link key={inst.id} href={inst.href} className="tile s3">
             <div className="tile__h">
               <b>{inst.id}</b>
               <span>Instrument</span>
