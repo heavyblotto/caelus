@@ -1,0 +1,1874 @@
+{
+ "basis": "Python reference astroengine.uncertainty (embedded VSOP, full moon, era packs)",
+ "cases": [
+  {
+   "id": "2000-sun",
+   "jd": 2451545.0,
+   "body": "sun",
+   "zodiac": "tropical",
+   "result": {
+    "body": "sun",
+    "speed": 1.0194330914755483,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.060000000000000005,
+    "clock_sigma_arcsec": 0.0025485827286888707
+   }
+  },
+  {
+   "id": "2000-moon",
+   "jd": 2451545.0,
+   "body": "moon",
+   "zodiac": "tropical",
+   "result": {
+    "body": "moon",
+    "speed": 12.021997404783178,
+    "model_bound_arcsec": 3,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.060000000000000005,
+    "clock_sigma_arcsec": 0.03005499351195795
+   }
+  },
+  {
+   "id": "2000-mercury",
+   "jd": 2451545.0,
+   "body": "mercury",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mercury",
+    "speed": 1.5562569105914008,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.060000000000000005,
+    "clock_sigma_arcsec": 0.0038906422764785026
+   }
+  },
+  {
+   "id": "2000-venus",
+   "jd": 2451545.0,
+   "body": "venus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "venus",
+    "speed": 1.2090398918485334,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.060000000000000005,
+    "clock_sigma_arcsec": 0.003022599729621334
+   }
+  },
+  {
+   "id": "2000-mars",
+   "jd": 2451545.0,
+   "body": "mars",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mars",
+    "speed": 0.7756748470087587,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.060000000000000005,
+    "clock_sigma_arcsec": 0.0019391871175218971
+   }
+  },
+  {
+   "id": "2000-jupiter",
+   "jd": 2451545.0,
+   "body": "jupiter",
+   "zodiac": "tropical",
+   "result": {
+    "body": "jupiter",
+    "speed": 0.04076216964131163,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.060000000000000005,
+    "clock_sigma_arcsec": 0.00010190542410327909
+   }
+  },
+  {
+   "id": "2000-saturn",
+   "jd": 2451545.0,
+   "body": "saturn",
+   "zodiac": "tropical",
+   "result": {
+    "body": "saturn",
+    "speed": -0.019944275791203836,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.060000000000000005,
+    "clock_sigma_arcsec": 4.986068947800959e-05
+   }
+  },
+  {
+   "id": "2000-uranus",
+   "jd": 2451545.0,
+   "body": "uranus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "uranus",
+    "speed": 0.05034400044519316,
+    "model_bound_arcsec": 2,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.060000000000000005,
+    "clock_sigma_arcsec": 0.0001258600011129829
+   }
+  },
+  {
+   "id": "2000-neptune",
+   "jd": 2451545.0,
+   "body": "neptune",
+   "zodiac": "tropical",
+   "result": {
+    "body": "neptune",
+    "speed": 0.03557050139374951,
+    "model_bound_arcsec": 5,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.060000000000000005,
+    "clock_sigma_arcsec": 8.892625348437377e-05
+   }
+  },
+  {
+   "id": "2000-pluto",
+   "jd": 2451545.0,
+   "body": "pluto",
+   "zodiac": "tropical",
+   "result": {
+    "body": "pluto",
+    "speed": 0.03515347981146988,
+    "model_bound_arcsec": 4,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.060000000000000005,
+    "clock_sigma_arcsec": 8.78836995286747e-05
+   }
+  },
+  {
+   "id": "2000-chiron",
+   "jd": 2451545.0,
+   "body": "chiron",
+   "zodiac": "tropical",
+   "result": {
+    "body": "chiron",
+    "speed": 0.1143066871609335,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1600,
+     "to": 2484
+    },
+    "delta_t_sigma_seconds": 0.060000000000000005,
+    "clock_sigma_arcsec": 0.0002857667179023338
+   }
+  },
+  {
+   "id": "2000-mean_node",
+   "jd": 2451545.0,
+   "body": "mean_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mean_node",
+    "speed": -0.052951721245108274,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.060000000000000005,
+    "clock_sigma_arcsec": 0.00013237930311277068
+   }
+  },
+  {
+   "id": "2000-true_node",
+   "jd": 2451545.0,
+   "body": "true_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "true_node",
+    "speed": -0.054688102688714935,
+    "model_bound_arcsec": 60,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.060000000000000005,
+    "clock_sigma_arcsec": 0.00013672025672178733
+   }
+  },
+  {
+   "id": "1955-sun",
+   "jd": 2435292.625,
+   "body": "sun",
+   "zodiac": "tropical",
+   "result": {
+    "body": "sun",
+    "speed": 0.9530383379953946,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.07779863107460643,
+    "clock_sigma_arcsec": 0.0030893782524024902
+   }
+  },
+  {
+   "id": "1955-moon",
+   "jd": 2435292.625,
+   "body": "moon",
+   "zodiac": "tropical",
+   "result": {
+    "body": "moon",
+    "speed": 11.883025241969335,
+    "model_bound_arcsec": 3,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.07779863107460643,
+    "clock_sigma_arcsec": 0.038520129035425336
+   }
+  },
+  {
+   "id": "1955-mercury",
+   "jd": 2435292.625,
+   "body": "mercury",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mercury",
+    "speed": 0.5002733925605298,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.07779863107460643,
+    "clock_sigma_arcsec": 0.0016216910460107672
+   }
+  },
+  {
+   "id": "1955-venus",
+   "jd": 2435292.625,
+   "body": "venus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "venus",
+    "speed": 1.2194838660400364,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.07779863107460643,
+    "clock_sigma_arcsec": 0.003953090641478481
+   }
+  },
+  {
+   "id": "1955-mars",
+   "jd": 2435292.625,
+   "body": "mars",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mars",
+    "speed": 0.6423350796601426,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.07779863107460643,
+    "clock_sigma_arcsec": 0.0020821995786982233
+   }
+  },
+  {
+   "id": "1955-jupiter",
+   "jd": 2435292.625,
+   "body": "jupiter",
+   "zodiac": "tropical",
+   "result": {
+    "body": "jupiter",
+    "speed": 0.21163601985495006,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.07779863107460643,
+    "clock_sigma_arcsec": 0.0006860413596163892
+   }
+  },
+  {
+   "id": "1955-saturn",
+   "jd": 2435292.625,
+   "body": "saturn",
+   "zodiac": "tropical",
+   "result": {
+    "body": "saturn",
+    "speed": -0.024214334482167033,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.07779863107460643,
+    "clock_sigma_arcsec": 7.849341979563475e-05
+   }
+  },
+  {
+   "id": "1955-uranus",
+   "jd": 2435292.625,
+   "body": "uranus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "uranus",
+    "speed": 0.059529028985707555,
+    "model_bound_arcsec": 2,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.07779863107460643,
+    "clock_sigma_arcsec": 0.0001929698735120256
+   }
+  },
+  {
+   "id": "1955-neptune",
+   "jd": 2435292.625,
+   "body": "neptune",
+   "zodiac": "tropical",
+   "result": {
+    "body": "neptune",
+    "speed": -0.0019327779648392607,
+    "model_bound_arcsec": 5,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.07779863107460643,
+    "clock_sigma_arcsec": 6.265311659819094e-06
+   }
+  },
+  {
+   "id": "1955-pluto",
+   "jd": 2435292.625,
+   "body": "pluto",
+   "zodiac": "tropical",
+   "result": {
+    "body": "pluto",
+    "speed": 0.024708105304171113,
+    "model_bound_arcsec": 4,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.07779863107460643,
+    "clock_sigma_arcsec": 8.009403204632227e-05
+   }
+  },
+  {
+   "id": "1955-chiron",
+   "jd": 2435292.625,
+   "body": "chiron",
+   "zodiac": "tropical",
+   "result": {
+    "body": "chiron",
+    "speed": -0.051080036345183544,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1600,
+     "to": 2484
+    },
+    "delta_t_sigma_seconds": 0.07779863107460643,
+    "clock_sigma_arcsec": 0.00016558153762068426
+   }
+  },
+  {
+   "id": "1955-mean_node",
+   "jd": 2435292.625,
+   "body": "mean_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mean_node",
+    "speed": -0.05292264105059985,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.07779863107460643,
+    "clock_sigma_arcsec": 0.00017155454277455998
+   }
+  },
+  {
+   "id": "1955-true_node",
+   "jd": 2435292.625,
+   "body": "true_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "true_node",
+    "speed": -0.002842700479504856,
+    "model_bound_arcsec": 60,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 0.07779863107460643,
+    "clock_sigma_arcsec": 9.21492524419188e-06
+   }
+  },
+  {
+   "id": "1620-sun",
+   "jd": 2313064.9166666665,
+   "body": "sun",
+   "zodiac": "tropical",
+   "result": {
+    "body": "sun",
+    "speed": 1.0072072945908985,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 19.41724389687428,
+    "clock_sigma_arcsec": 0.814882903907599
+   }
+  },
+  {
+   "id": "1620-moon",
+   "jd": 2313064.9166666665,
+   "body": "moon",
+   "zodiac": "tropical",
+   "result": {
+    "body": "moon",
+    "speed": 13.023635007810071,
+    "model_bound_arcsec": 3,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 19.41724389687428,
+    "clock_sigma_arcsec": 10.536795723771597
+   }
+  },
+  {
+   "id": "1620-mercury",
+   "jd": 2313064.9166666665,
+   "body": "mercury",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mercury",
+    "speed": 1.613500115851366,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 19.41724389687428,
+    "clock_sigma_arcsec": 1.3054052198800368
+   }
+  },
+  {
+   "id": "1620-venus",
+   "jd": 2313064.9166666665,
+   "body": "venus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "venus",
+    "speed": 0.6745849873170755,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 19.41724389687428,
+    "clock_sigma_arcsec": 0.5457742178293956
+   }
+  },
+  {
+   "id": "1620-mars",
+   "jd": 2313064.9166666665,
+   "body": "mars",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mars",
+    "speed": 0.5919547638884524,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 19.41724389687428,
+    "clock_sigma_arcsec": 0.47892208443077944
+   }
+  },
+  {
+   "id": "1620-jupiter",
+   "jd": 2313064.9166666665,
+   "body": "jupiter",
+   "zodiac": "tropical",
+   "result": {
+    "body": "jupiter",
+    "speed": -0.13624037981935544,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 19.41724389687428,
+    "clock_sigma_arcsec": 0.1102255284814672
+   }
+  },
+  {
+   "id": "1620-saturn",
+   "jd": 2313064.9166666665,
+   "body": "saturn",
+   "zodiac": "tropical",
+   "result": {
+    "body": "saturn",
+    "speed": -0.037728274467099254,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 19.41724389687428,
+    "clock_sigma_arcsec": 0.03052412946399503
+   }
+  },
+  {
+   "id": "1620-uranus",
+   "jd": 2313064.9166666665,
+   "body": "uranus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "uranus",
+    "speed": -0.0007191746608441463,
+    "model_bound_arcsec": 2,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 19.41724389687428,
+    "clock_sigma_arcsec": 0.0005818495747526096
+   }
+  },
+  {
+   "id": "1620-neptune",
+   "jd": 2313064.9166666665,
+   "body": "neptune",
+   "zodiac": "tropical",
+   "result": {
+    "body": "neptune",
+    "speed": 0.032230970125510794,
+    "model_bound_arcsec": 5,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 19.41724389687428,
+    "clock_sigma_arcsec": 0.02607652533166299
+   }
+  },
+  {
+   "id": "1620-pluto",
+   "jd": 2313064.9166666665,
+   "body": "pluto",
+   "zodiac": "tropical",
+   "result": {
+    "body": "pluto",
+    "speed": -0.018713387954221616,
+    "model_bound_arcsec": 4,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 19.41724389687428,
+    "clock_sigma_arcsec": 0.015140100751831264
+   }
+  },
+  {
+   "id": "1620-chiron",
+   "jd": 2313064.9166666665,
+   "body": "chiron",
+   "zodiac": "tropical",
+   "result": {
+    "body": "chiron",
+    "speed": -0.0024350128264813975,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1600,
+     "to": 2484
+    },
+    "delta_t_sigma_seconds": 19.41724389687428,
+    "clock_sigma_arcsec": 0.0019700515809919373
+   }
+  },
+  {
+   "id": "1620-mean_node",
+   "jd": 2313064.9166666665,
+   "body": "mean_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mean_node",
+    "speed": -0.05296906339026464,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 19.41724389687428,
+    "clock_sigma_arcsec": 0.04285471761824012
+   }
+  },
+  {
+   "id": "1620-true_node",
+   "jd": 2313064.9166666665,
+   "body": "true_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "true_node",
+    "speed": -0.08537134453308681,
+    "model_bound_arcsec": 60,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 19.41724389687428,
+    "clock_sigma_arcsec": 0.06906984244179297
+   }
+  },
+  {
+   "id": "1500-sidereal-sun",
+   "jd": 2269085.0,
+   "body": "sun",
+   "zodiac": "sidereal:lahiri",
+   "result": {
+    "body": "sun",
+    "speed": 0.9542580126972098,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 15.018069815195068,
+    "clock_sigma_arcsec": 0.5971297273498333
+   }
+  },
+  {
+   "id": "1500-sidereal-moon",
+   "jd": 2269085.0,
+   "body": "moon",
+   "zodiac": "sidereal:lahiri",
+   "result": {
+    "body": "moon",
+    "speed": 11.945716456906894,
+    "model_bound_arcsec": 3,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 15.018069815195068,
+    "clock_sigma_arcsec": 7.475066822598016
+   }
+  },
+  {
+   "id": "1500-sidereal-mercury",
+   "jd": 2269085.0,
+   "body": "mercury",
+   "zodiac": "sidereal:lahiri",
+   "result": {
+    "body": "mercury",
+    "speed": 0.813061261932944,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 15.018069815195068,
+    "clock_sigma_arcsec": 0.5087754498224815
+   }
+  },
+  {
+   "id": "1500-sidereal-venus",
+   "jd": 2269085.0,
+   "body": "venus",
+   "zodiac": "sidereal:lahiri",
+   "result": {
+    "body": "venus",
+    "speed": 1.1767805993863476,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 15.018069815195068,
+    "clock_sigma_arcsec": 0.7363738832813027
+   }
+  },
+  {
+   "id": "1500-sidereal-mars",
+   "jd": 2269085.0,
+   "body": "mars",
+   "zodiac": "sidereal:lahiri",
+   "result": {
+    "body": "mars",
+    "speed": 0.6194332579748334,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 15.018069815195068,
+    "clock_sigma_arcsec": 0.3876121630883244
+   }
+  },
+  {
+   "id": "1500-sidereal-jupiter",
+   "jd": 2269085.0,
+   "body": "jupiter",
+   "zodiac": "sidereal:lahiri",
+   "result": {
+    "body": "jupiter",
+    "speed": 0.11191141576409791,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 15.018069815195068,
+    "clock_sigma_arcsec": 0.07002889396093935
+   }
+  },
+  {
+   "id": "1500-sidereal-saturn",
+   "jd": 2269085.0,
+   "body": "saturn",
+   "zodiac": "sidereal:lahiri",
+   "result": {
+    "body": "saturn",
+    "speed": 0.12416817473126684,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 15.018069815195068,
+    "clock_sigma_arcsec": 0.07769859653914606
+   }
+  },
+  {
+   "id": "1500-sidereal-uranus",
+   "jd": 2269085.0,
+   "body": "uranus",
+   "zodiac": "sidereal:lahiri",
+   "result": {
+    "body": "uranus",
+    "speed": -0.005384478243740887,
+    "model_bound_arcsec": 2,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 15.018069815195068,
+    "clock_sigma_arcsec": 0.003369352924287482
+   }
+  },
+  {
+   "id": "1500-sidereal-neptune",
+   "jd": 2269085.0,
+   "body": "neptune",
+   "zodiac": "sidereal:lahiri",
+   "result": {
+    "body": "neptune",
+    "speed": -0.023369239212797766,
+    "model_bound_arcsec": 5,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 15.018069815195068,
+    "clock_sigma_arcsec": 0.014623369417741295
+   }
+  },
+  {
+   "id": "1500-sidereal-pluto",
+   "jd": 2269085.0,
+   "body": "pluto",
+   "zodiac": "sidereal:lahiri",
+   "result": {
+    "body": "pluto",
+    "speed": -0.02390628416560503,
+    "model_bound_arcsec": 4,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 15.018069815195068,
+    "clock_sigma_arcsec": 0.014959426859206194
+   }
+  },
+  {
+   "id": "1500-sidereal-chiron",
+   "jd": 2269085.0,
+   "body": "chiron",
+   "zodiac": "sidereal:lahiri",
+   "result": null
+  },
+  {
+   "id": "1500-sidereal-mean_node",
+   "jd": 2269085.0,
+   "body": "mean_node",
+   "zodiac": "sidereal:lahiri",
+   "result": {
+    "body": "mean_node",
+    "speed": -0.05299248649021138,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 15.018069815195068,
+    "clock_sigma_arcsec": 0.03316020257461566
+   }
+  },
+  {
+   "id": "1500-sidereal-true_node",
+   "jd": 2269085.0,
+   "body": "true_node",
+   "zodiac": "sidereal:lahiri",
+   "result": {
+    "body": "true_node",
+    "speed": -0.028016226770432695,
+    "model_bound_arcsec": 60,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 15.018069815195068,
+    "clock_sigma_arcsec": 0.017531235399862302
+   }
+  },
+  {
+   "id": "1000-sun",
+   "jd": 2086308.5,
+   "body": "sun",
+   "zodiac": "tropical",
+   "result": {
+    "body": "sun",
+    "speed": 1.0179274292970604,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 179.9900205338809,
+    "clock_sigma_arcsec": 7.634032454215771
+   }
+  },
+  {
+   "id": "1000-moon",
+   "jd": 2086308.5,
+   "body": "moon",
+   "zodiac": "tropical",
+   "result": {
+    "body": "moon",
+    "speed": 12.16610016532286,
+    "model_bound_arcsec": 3,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 179.9900205338809,
+    "clock_sigma_arcsec": 91.24069244057138
+   }
+  },
+  {
+   "id": "1000-mercury",
+   "jd": 2086308.5,
+   "body": "mercury",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mercury",
+    "speed": 1.6458492904798732,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 179.9900205338809,
+    "clock_sigma_arcsec": 12.343185316214404
+   }
+  },
+  {
+   "id": "1000-venus",
+   "jd": 2086308.5,
+   "body": "venus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "venus",
+    "speed": 1.2226141795672447,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 179.9900205338809,
+    "clock_sigma_arcsec": 9.169097970221763
+   }
+  },
+  {
+   "id": "1000-mars",
+   "jd": 2086308.5,
+   "body": "mars",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mars",
+    "speed": -0.38632974182041835,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 179.9900205338809,
+    "clock_sigma_arcsec": 2.8973124234627505
+   }
+  },
+  {
+   "id": "1000-jupiter",
+   "jd": 2086308.5,
+   "body": "jupiter",
+   "zodiac": "tropical",
+   "result": {
+    "body": "jupiter",
+    "speed": 0.227590913964832,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 179.9900205338809,
+    "clock_sigma_arcsec": 1.706837219910618
+   }
+  },
+  {
+   "id": "1000-saturn",
+   "jd": 2086308.5,
+   "body": "saturn",
+   "zodiac": "tropical",
+   "result": {
+    "body": "saturn",
+    "speed": -0.021148291253211937,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 179.9900205338809,
+    "clock_sigma_arcsec": 0.15860339070508794
+   }
+  },
+  {
+   "id": "1000-uranus",
+   "jd": 2086308.5,
+   "body": "uranus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "uranus",
+    "speed": 0.04347240819106446,
+    "model_bound_arcsec": 2,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 179.9900205338809,
+    "clock_sigma_arcsec": 0.3260249851236227
+   }
+  },
+  {
+   "id": "1000-neptune",
+   "jd": 2086308.5,
+   "body": "neptune",
+   "zodiac": "tropical",
+   "result": {
+    "body": "neptune",
+    "speed": 0.03592832887920849,
+    "model_bound_arcsec": 5,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 179.9900205338809,
+    "clock_sigma_arcsec": 0.26944752719653176
+   }
+  },
+  {
+   "id": "1000-pluto",
+   "jd": 2086308.5,
+   "body": "pluto",
+   "zodiac": "tropical",
+   "result": {
+    "body": "pluto",
+    "speed": 0.018650435665676923,
+    "model_bound_arcsec": 4,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 179.9900205338809,
+    "clock_sigma_arcsec": 0.1398705124346256
+   }
+  },
+  {
+   "id": "1000-chiron",
+   "jd": 2086308.5,
+   "body": "chiron",
+   "zodiac": "tropical",
+   "result": null
+  },
+  {
+   "id": "1000-mean_node",
+   "jd": 2086308.5,
+   "body": "mean_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mean_node",
+    "speed": -0.052964139122195775,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 179.9900205338809,
+    "clock_sigma_arcsec": 0.3972090203401393
+   }
+  },
+  {
+   "id": "1000-true_node",
+   "jd": 2086308.5,
+   "body": "true_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "true_node",
+    "speed": 0.001304327033494701,
+    "model_bound_arcsec": 60,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 179.9900205338809,
+    "clock_sigma_arcsec": 0.009781910397566967
+   }
+  },
+  {
+   "id": "100-sun",
+   "jd": 1757643.0,
+   "body": "sun",
+   "zodiac": "tropical",
+   "result": {
+    "body": "sun",
+    "speed": 0.9866621751027651,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 154.98001368925392,
+    "clock_sigma_arcsec": 6.371371558503983
+   }
+  },
+  {
+   "id": "100-moon",
+   "jd": 1757643.0,
+   "body": "moon",
+   "zodiac": "tropical",
+   "result": {
+    "body": "moon",
+    "speed": 11.810902564615162,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 154.98001368925392,
+    "clock_sigma_arcsec": 76.26891004777093
+   }
+  },
+  {
+   "id": "100-mercury",
+   "jd": 1757643.0,
+   "body": "mercury",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mercury",
+    "speed": 1.0327612134592528,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 154.98001368925392,
+    "clock_sigma_arcsec": 6.669056124985229
+   }
+  },
+  {
+   "id": "100-venus",
+   "jd": 1757643.0,
+   "body": "venus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "venus",
+    "speed": 0.9863971505092195,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 154.98001368925392,
+    "clock_sigma_arcsec": 6.369660162039995
+   }
+  },
+  {
+   "id": "100-mars",
+   "jd": 1757643.0,
+   "body": "mars",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mars",
+    "speed": 0.7807235823645442,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 154.98001368925392,
+    "clock_sigma_arcsec": 5.041522978432518
+   }
+  },
+  {
+   "id": "100-jupiter",
+   "jd": 1757643.0,
+   "body": "jupiter",
+   "zodiac": "tropical",
+   "result": {
+    "body": "jupiter",
+    "speed": 0.22671665150573972,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 154.98001368925392,
+    "clock_sigma_arcsec": 1.464022906414223
+   }
+  },
+  {
+   "id": "100-saturn",
+   "jd": 1757643.0,
+   "body": "saturn",
+   "zodiac": "tropical",
+   "result": {
+    "body": "saturn",
+    "speed": -0.028637021853000988,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 154.98001368925392,
+    "clock_sigma_arcsec": 0.18492358494989822
+   }
+  },
+  {
+   "id": "100-uranus",
+   "jd": 1757643.0,
+   "body": "uranus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "uranus",
+    "speed": 0.019683487213569606,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 154.98001368925392,
+    "clock_sigma_arcsec": 0.12710612990880302
+   }
+  },
+  {
+   "id": "100-neptune",
+   "jd": 1757643.0,
+   "body": "neptune",
+   "zodiac": "tropical",
+   "result": null
+  },
+  {
+   "id": "100-pluto",
+   "jd": 1757643.0,
+   "body": "pluto",
+   "zodiac": "tropical",
+   "result": null
+  },
+  {
+   "id": "100-chiron",
+   "jd": 1757643.0,
+   "body": "chiron",
+   "zodiac": "tropical",
+   "result": null
+  },
+  {
+   "id": "100-mean_node",
+   "jd": 1757643.0,
+   "body": "mean_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mean_node",
+    "speed": -0.05299347714958458,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 154.98001368925392,
+    "clock_sigma_arcsec": 0.3422054089201576
+   }
+  },
+  {
+   "id": "100-true_node",
+   "jd": 1757643.0,
+   "body": "true_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "true_node",
+    "speed": -0.02121124061432056,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 154.98001368925392,
+    "clock_sigma_arcsec": 0.1369715983655608
+   }
+  },
+  {
+   "id": "-1000-sun",
+   "jd": 1355868.0,
+   "body": "sun",
+   "zodiac": "tropical",
+   "result": {
+    "body": "sun",
+    "speed": 0.9798460975794114,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 1440.0,
+    "clock_sigma_arcsec": 58.790765854764686
+   }
+  },
+  {
+   "id": "-1000-moon",
+   "jd": 1355868.0,
+   "body": "moon",
+   "zodiac": "tropical",
+   "result": {
+    "body": "moon",
+    "speed": 11.85513755506372,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 1440.0,
+    "clock_sigma_arcsec": 711.3082533038232
+   }
+  },
+  {
+   "id": "-1000-mercury",
+   "jd": 1355868.0,
+   "body": "mercury",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mercury",
+    "speed": -0.7830547887451758,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 1440.0,
+    "clock_sigma_arcsec": 46.983287324710545
+   }
+  },
+  {
+   "id": "-1000-venus",
+   "jd": 1355868.0,
+   "body": "venus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "venus",
+    "speed": 1.1299853453599553,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 1440.0,
+    "clock_sigma_arcsec": 67.79912072159732
+   }
+  },
+  {
+   "id": "-1000-mars",
+   "jd": 1355868.0,
+   "body": "mars",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mars",
+    "speed": 0.7319459746317989,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 1440.0,
+    "clock_sigma_arcsec": 43.91675847790793
+   }
+  },
+  {
+   "id": "-1000-jupiter",
+   "jd": 1355868.0,
+   "body": "jupiter",
+   "zodiac": "tropical",
+   "result": {
+    "body": "jupiter",
+    "speed": 0.17446524915021655,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 1440.0,
+    "clock_sigma_arcsec": 10.467914949012993
+   }
+  },
+  {
+   "id": "-1000-saturn",
+   "jd": 1355868.0,
+   "body": "saturn",
+   "zodiac": "tropical",
+   "result": {
+    "body": "saturn",
+    "speed": 0.030660465484743327,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 1440.0,
+    "clock_sigma_arcsec": 1.8396279290845996
+   }
+  },
+  {
+   "id": "-1000-uranus",
+   "jd": 1355868.0,
+   "body": "uranus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "uranus",
+    "speed": 0.046761009743931936,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 1440.0,
+    "clock_sigma_arcsec": 2.805660584635916
+   }
+  },
+  {
+   "id": "-1000-neptune",
+   "jd": 1355868.0,
+   "body": "neptune",
+   "zodiac": "tropical",
+   "result": null
+  },
+  {
+   "id": "-1000-pluto",
+   "jd": 1355868.0,
+   "body": "pluto",
+   "zodiac": "tropical",
+   "result": null
+  },
+  {
+   "id": "-1000-chiron",
+   "jd": 1355868.0,
+   "body": "chiron",
+   "zodiac": "tropical",
+   "result": null
+  },
+  {
+   "id": "-1000-mean_node",
+   "jd": 1355868.0,
+   "body": "mean_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mean_node",
+    "speed": -0.05296981191099803,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 1440.0,
+    "clock_sigma_arcsec": 3.178188714659882
+   }
+  },
+  {
+   "id": "-1000-true_node",
+   "jd": 1355868.0,
+   "body": "true_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "true_node",
+    "speed": 0.023696591826137592,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 1440.0,
+    "clock_sigma_arcsec": 1.4217955095682555
+   }
+  },
+  {
+   "id": "-2900-sun",
+   "jd": 662014.5,
+   "body": "sun",
+   "zodiac": "tropical",
+   "result": {
+    "body": "sun",
+    "speed": 0.9647474489318029,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 3491.4248870636548,
+    "clock_sigma_arcsec": 140.34763553881953
+   }
+  },
+  {
+   "id": "-2900-moon",
+   "jd": 662014.5,
+   "body": "moon",
+   "zodiac": "tropical",
+   "result": {
+    "body": "moon",
+    "speed": 12.003217945939468,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 3491.4248870636548,
+    "clock_sigma_arcsec": 1746.180577554256
+   }
+  },
+  {
+   "id": "-2900-mercury",
+   "jd": 662014.5,
+   "body": "mercury",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mercury",
+    "speed": -0.206772768601013,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 3491.4248870636548,
+    "clock_sigma_arcsec": 30.080482927526294
+   }
+  },
+  {
+   "id": "-2900-venus",
+   "jd": 662014.5,
+   "body": "venus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "venus",
+    "speed": 1.2402637396262435,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 3491.4248870636548,
+    "clock_sigma_arcsec": 180.42865362723762
+   }
+  },
+  {
+   "id": "-2900-mars",
+   "jd": 662014.5,
+   "body": "mars",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mars",
+    "speed": 0.6078242449739264,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 3491.4248870636548,
+    "clock_sigma_arcsec": 88.4238623276101
+   }
+  },
+  {
+   "id": "-2900-jupiter",
+   "jd": 662014.5,
+   "body": "jupiter",
+   "zodiac": "tropical",
+   "result": {
+    "body": "jupiter",
+    "speed": 0.022547325873119917,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 3491.4248870636548,
+    "clock_sigma_arcsec": 3.28009561208938
+   }
+  },
+  {
+   "id": "-2900-saturn",
+   "jd": 662014.5,
+   "body": "saturn",
+   "zodiac": "tropical",
+   "result": {
+    "body": "saturn",
+    "speed": -0.0492626162013039,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 3491.4248870636548,
+    "clock_sigma_arcsec": 7.166530175295735
+   }
+  },
+  {
+   "id": "-2900-uranus",
+   "jd": 662014.5,
+   "body": "uranus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "uranus",
+    "speed": 0.039189388772911116,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 3491.4248870636548,
+    "clock_sigma_arcsec": 5.701116969606452
+   }
+  },
+  {
+   "id": "-2900-neptune",
+   "jd": 662014.5,
+   "body": "neptune",
+   "zodiac": "tropical",
+   "result": null
+  },
+  {
+   "id": "-2900-pluto",
+   "jd": 662014.5,
+   "body": "pluto",
+   "zodiac": "tropical",
+   "result": null
+  },
+  {
+   "id": "-2900-chiron",
+   "jd": 662014.5,
+   "body": "chiron",
+   "zodiac": "tropical",
+   "result": null
+  },
+  {
+   "id": "-2900-mean_node",
+   "jd": 662014.5,
+   "body": "mean_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mean_node",
+    "speed": -0.052949734981211805,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 3491.4248870636548,
+    "clock_sigma_arcsec": 7.702917603201161
+   }
+  },
+  {
+   "id": "-2900-true_node",
+   "jd": 662014.5,
+   "body": "true_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "true_node",
+    "speed": -0.10050104532274418,
+    "model_bound_arcsec": null,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 3491.4248870636548,
+    "clock_sigma_arcsec": 14.620493783989224
+   }
+  },
+  {
+   "id": "2900-sun",
+   "jd": 2780263.5,
+   "body": "sun",
+   "zodiac": "tropical",
+   "result": {
+    "body": "sun",
+    "speed": 1.0167970177285497,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 612.5250858111963,
+    "clock_sigma_arcsec": 25.950570022364516
+   }
+  },
+  {
+   "id": "2900-moon",
+   "jd": 2780263.5,
+   "body": "moon",
+   "zodiac": "tropical",
+   "result": {
+    "body": "moon",
+    "speed": 13.71957124859432,
+    "model_bound_arcsec": 3,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 612.5250858111963,
+    "clock_sigma_arcsec": 350.14923151408567
+   }
+  },
+  {
+   "id": "2900-mercury",
+   "jd": 2780263.5,
+   "body": "mercury",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mercury",
+    "speed": 1.2044511561905438,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 612.5250858111963,
+    "clock_sigma_arcsec": 30.739856158375307
+   }
+  },
+  {
+   "id": "2900-venus",
+   "jd": 2780263.5,
+   "body": "venus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "venus",
+    "speed": 1.1564116640088287,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 612.5250858111963,
+    "clock_sigma_arcsec": 29.513798072086505
+   }
+  },
+  {
+   "id": "2900-mars",
+   "jd": 2780263.5,
+   "body": "mars",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mars",
+    "speed": 0.5771257576627704,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 612.5250858111963,
+    "clock_sigma_arcsec": 14.729333509843338
+   }
+  },
+  {
+   "id": "2900-jupiter",
+   "jd": 2780263.5,
+   "body": "jupiter",
+   "zodiac": "tropical",
+   "result": {
+    "body": "jupiter",
+    "speed": 0.15913016433614757,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 612.5250858111963,
+    "clock_sigma_arcsec": 4.0613007318811905
+   }
+  },
+  {
+   "id": "2900-saturn",
+   "jd": 2780263.5,
+   "body": "saturn",
+   "zodiac": "tropical",
+   "result": {
+    "body": "saturn",
+    "speed": 0.11653285291549764,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 612.5250858111963,
+    "clock_sigma_arcsec": 2.9741373221620293
+   }
+  },
+  {
+   "id": "2900-uranus",
+   "jd": 2780263.5,
+   "body": "uranus",
+   "zodiac": "tropical",
+   "result": {
+    "body": "uranus",
+    "speed": 0.04475357917135625,
+    "model_bound_arcsec": 2,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 612.5250858111963,
+    "clock_sigma_arcsec": 1.1421954134288814
+   }
+  },
+  {
+   "id": "2900-neptune",
+   "jd": 2780263.5,
+   "body": "neptune",
+   "zodiac": "tropical",
+   "result": {
+    "body": "neptune",
+    "speed": -0.025156558194339596,
+    "model_bound_arcsec": 5,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 612.5250858111963,
+    "clock_sigma_arcsec": 0.6420426236125922
+   }
+  },
+  {
+   "id": "2900-pluto",
+   "jd": 2780263.5,
+   "body": "pluto",
+   "zodiac": "tropical",
+   "result": {
+    "body": "pluto",
+    "speed": -0.019566714413485897,
+    "model_bound_arcsec": 4,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 612.5250858111963,
+    "clock_sigma_arcsec": 0.4993793093818175
+   }
+  },
+  {
+   "id": "2900-chiron",
+   "jd": 2780263.5,
+   "body": "chiron",
+   "zodiac": "tropical",
+   "result": null
+  },
+  {
+   "id": "2900-mean_node",
+   "jd": 2780263.5,
+   "body": "mean_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "mean_node",
+    "speed": -0.05295305320305488,
+    "model_bound_arcsec": 1,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 612.5250858111963,
+    "clock_sigma_arcsec": 1.3514613940485847
+   }
+  },
+  {
+   "id": "2900-true_node",
+   "jd": 2780263.5,
+   "body": "true_node",
+   "zodiac": "tropical",
+   "result": {
+    "body": "true_node",
+    "speed": -0.03341104296441699,
+    "model_bound_arcsec": 60,
+    "bound_span": {
+     "from": 1000,
+     "to": 3000
+    },
+    "delta_t_sigma_seconds": 612.5250858111963,
+    "clock_sigma_arcsec": 0.8527125816175452
+   }
+  }
+ ]
+}

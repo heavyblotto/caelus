@@ -89,6 +89,41 @@ by two thirds of a degree, and `chartStability` then reports which facts that
 clock error can change. The same uncertainty appears as the `delta_t_uncertain` warning on
 a chart and as the `epochSigma` block in canonical output.
 
+## How well a position is known
+
+`positionUncertainty` answers the same question for one body's longitude. It
+returns two numbers and keeps them apart, because they are different kinds of
+number.
+
+```ts
+import { positionUncertainty, julianDay } from "caelus";
+
+positionUncertainty(engine, "moon", julianDay(1500, 6, 1, 12, 0, 0, "julian"));
+// { modelBoundArcsec: 3, deltaTSigmaSeconds: 15.0, clockSigmaArcsec: 7.5, ... }
+```
+
+`modelBoundArcsec` is the accuracy table's bound for the body: the largest
+error measured against JPL Horizons across the validated span. It is `null`
+when the instant lies outside the span the bound was measured over. The
+position is still computed there, and no bound is claimed for it.
+
+`clockSigmaArcsec` is the one-sigma effect of the ΔT uncertainty on the
+body's longitude, which is the body's speed times the clock error.
+
+| Instant | Body | Model bound | ΔT sigma | Clock term |
+|---|---|---|---|---|
+| 2000 | Moon | 3″ | 0.06 s | 0.03″ |
+| 1500 | Moon | 3″ | 15 s | 7.5″ |
+| 1500 | Saturn | 1″ | 15 s | 0.08″ |
+| 100 | Moon | none published | 155 s | 76″ |
+| 100 | Saturn | none published | 155 s | 0.19″ |
+| 1000 BCE | Moon | none published | 1,440 s | 711″ |
+| 1000 BCE | Saturn | none published | 1,440 s | 1.8″ |
+
+The Moon in 1500 is known to its 3″ model bound and smeared 7.5″ by the
+clock, so the clock already dominates. By 1000 BCE the Moon is uncertain by
+twelve minutes of arc while Saturn has moved less than two seconds.
+
 ## From an AI client
 
 The MCP server exposes this as the `chart_stability` tool. It takes the stated

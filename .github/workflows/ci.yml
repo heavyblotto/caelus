@@ -93,6 +93,8 @@ jobs:
       - run: node packages/caelus/dist/test/stability-golden.test.js
       # binary packs (CPK1): the TS decoder returns the reference's exact doubles
       - run: node packages/caelus/dist/test/packbin-golden.test.js
+      # position uncertainty: the accuracy bound and the delta-T clock term
+      - run: node packages/caelus/dist/test/uncertainty-golden.test.js
       # every test/*.test.* file in the repo must be wired into this workflow;
       # four golden suites once sat dormant for ~11 releases because this list
       # is maintained by hand. The gate makes silent omission impossible.

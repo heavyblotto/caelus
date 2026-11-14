@@ -40,6 +40,13 @@ current figures live in `packages/caelus/accuracy.json` and on
   worked example; for the same date with no time, 42 of 64 are. The
   TypeScript port matches the reference fact for fact in
   `stability-golden.test.ts` (8 cases).
+- **Position uncertainty.** `positionUncertainty(engine, body, jdUt)` returns
+  the two limits on a body's longitude and keeps them apart: the accuracy
+  table's bound on the model, which is `null` outside the span it was
+  measured over, and the one-sigma effect of the ΔT uncertainty, which is the
+  body's speed times the clock error. For the Moon in 1500 the bound is 3″
+  and the clock term 7.5″; in 1000 BCE the clock term is 711″ for the Moon
+  and 1.8″ for Saturn.
 - **Sky dating.** `dateSky(engine, constraints, jdStart, jdEnd)` goes from a
   description of a sky to the dates it occurred. A constraint puts a body in
   a sign, within an orb of a longitude, or in a `from`/`to` arc, or puts the
