@@ -32,12 +32,12 @@ Measured both in isolated steady-state (30-task local oracle, zero GPU contentio
 
 | Tool / Slice | Isolated Steady-State Median | Isolated Mean | Live Under Concurrent GPU Load Median |
 | --- | ---: | ---: | ---: |
-| `verify_observation` (authentic forward) | **1.10 ms** | 1.14 ms | n/a (see combined) |
+| `verify_observation` (authentic forward) | **1.11 ms** | 1.14 ms | n/a (see combined) |
 | `verify_observation` (spoof + counterfactual forensics) | **2.92 ms** | 2.92 ms | n/a (see combined) |
 | `verify_observation` (all 14 scenes) | **2.77 ms** | 2.61 ms | 14.33 ms |
 | `geolocate` (Path A analytical + Path B spherical grid) | **1.65 ms** | 2.30 ms | 4.90 ms |
 | `chronolocate` (6-day search window) | **19.14 ms** | 19.83 ms | 33.92 ms |
-| **All 30 Local Tool Calls Combined** | **3.43 ms** | 7.11 ms | 14.52 ms (~0.1% of 11.8 s LLM turn) |
+| **All 30 Local Tool Calls Combined** | **3.06 ms** | 7.11 ms | 14.52 ms (~0.1% of 11.8 s LLM turn) |
 
 ## Honest Error Analysis and Surprises
 

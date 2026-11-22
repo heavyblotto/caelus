@@ -10,13 +10,14 @@
   <text x="403.4" y="370" text-anchor="middle" font-size="10" fill="#777777">ISO 40.8%</text>
   <text x="485.4" y="370" text-anchor="middle" font-size="10" fill="#1b5e7a">Razor +20 pp (60.8%)</text>
 
-  <!-- Direct mark labels above top row (no separate legend box) -->
-  <text x="536" y="83" text-anchor="end" font-size="11" fill="#1b5e7a">gemma4:12b</text>
-  <line x1="538" y1="86" x2="544" y2="104" stroke="#1b5e7a" stroke-width="0.8"/>
-  <text x="572" y="83" text-anchor="start" font-size="11" fill="#9e4228">qwen3.5:9b</text>
-  <line x1="570" y1="86" x2="565" y2="104" stroke="#9e4228" stroke-width="0.8"/>
-  <text x="646" y="83" text-anchor="end" font-size="10.5" fill="#777777">offline ceiling</text>
-  <text x="660" y="83" text-anchor="start" font-size="10.5" fill="#444444">Live macro</text>
+  <!-- Direct mark labels above top row (no separate legend box, staggered y-lanes for zero overlap) -->
+  <text x="564" y="69" text-anchor="middle" font-size="11" fill="#9e4228">qwen3.5:9b</text>
+  <line x1="564" y1="73" x2="564" y2="104" stroke="#9e4228" stroke-width="0.8"/>
+  <text x="534" y="86" text-anchor="end" font-size="11" fill="#1b5e7a">gemma4:12b</text>
+  <line x1="536" y1="89" x2="544" y2="104" stroke="#1b5e7a" stroke-width="0.8"/>
+  <text x="646" y="86" text-anchor="end" font-size="10" fill="#777777">offline ceiling</text>
+  <line x1="646" y1="90" x2="646" y2="102" stroke="#999999" stroke-width="0.8"/>
+  <text x="660" y="86" text-anchor="start" font-size="10.5" fill="#444444">Live macro</text>
 
   <!-- Row 0: Treatment-Caelus-Physical (45.8 tok) -->
   <text x="224" y="109" text-anchor="end" font-size="12.5" font-weight="bold" fill="#1b5e7a">Treatment-Caelus-Physical</text>
@@ -85,5 +86,5 @@
   <text x="441.0" y="402" text-anchor="middle" font-size="11" fill="#444444">50%</text>
   <text x="543.5" y="402" text-anchor="middle" font-size="11" fill="#444444">75%</text>
   <text x="646" y="402" text-anchor="middle" font-size="11" fill="#444444">100%</text>
-  <text x="441" y="420" text-anchor="middle" font-size="11.5" fill="#444444">Mean composite task accuracy across 20 EXP-001 episodes (circles = gemma4:12b, diamonds = qwen3.5:9b, ticks = offline decoder)</text>
+  <text x="380" y="420" text-anchor="middle" font-size="11" fill="#444444">Mean accuracy across 20 EXP-001 tasks (circles = gemma4:12b, diamonds = qwen3.5:9b, ticks = offline ceiling)</text>
 </svg>
