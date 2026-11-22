@@ -178,36 +178,12 @@ export default function VizStage({
       <div className="tile__h">
         <b>FIG</b>
         <span>{stamp}</span>
-        <div className="tile__actions">
-          {chart && (
-            <span className="badge badge--muted mono num">{ms.toFixed(1)} ms</span>
-          )}
-          {docKind === "birth" && (
-            <div className="seg" role="group" aria-label="Stage layout">
-              <button
-                type="button"
-                className="seg__btn"
-                aria-pressed={!paired}
-                onClick={() => setPaired(false)}
-              >
-                Single
-              </button>
-              <button
-                type="button"
-                className="seg__btn"
-                aria-pressed={paired}
-                onClick={() => setPaired(true)}
-              >
-                Paired
-              </button>
-            </div>
-          )}
-        </div>
+        {chart && <i className="mono num">{ms.toFixed(1)} ms</i>}
       </div>
 
       <div className="tile__b stack--sm">
         {docKind === "birth" && (
-          <div className="viz-stage__toolbar">
+          <div className="viz-stage__toolbar row row--between row--wrap">
             <div className="seg seg--wrap" role="group" aria-label="Primary figure">
               {figureOpts.map(([id, name]) => (
                 <button
@@ -221,21 +197,41 @@ export default function VizStage({
                 </button>
               ))}
             </div>
-            {paired && (
-              <div className="seg" role="group" aria-label="Companion figure">
-                {COMPANION_OPTS.map((opt) => (
-                  <button
-                    key={opt.id}
-                    type="button"
-                    className="seg__btn"
-                    aria-pressed={companion === opt.id}
-                    onClick={() => setCompanion(opt.id)}
-                  >
-                    + {opt.label}
-                  </button>
-                ))}
+            <div className="row row--wrap">
+              <div className="seg" role="group" aria-label="Stage layout">
+                <button
+                  type="button"
+                  className="seg__btn"
+                  aria-pressed={!paired}
+                  onClick={() => setPaired(false)}
+                >
+                  Single
+                </button>
+                <button
+                  type="button"
+                  className="seg__btn"
+                  aria-pressed={paired}
+                  onClick={() => setPaired(true)}
+                >
+                  Paired
+                </button>
               </div>
-            )}
+              {paired && (
+                <div className="seg" role="group" aria-label="Companion figure">
+                  {COMPANION_OPTS.map((opt) => (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      className="seg__btn"
+                      aria-pressed={companion === opt.id}
+                      onClick={() => setCompanion(opt.id)}
+                    >
+                      + {opt.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         )}
 

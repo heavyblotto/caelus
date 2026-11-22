@@ -137,7 +137,24 @@ export default function WorkspaceControls({
         <div className="tile__h">
           <b>PRESET</b>
           <span>Instant charts</span>
-          <div className="tile__actions">
+          <i>{PLAYGROUND_PRESETS.length} presets</i>
+        </div>
+        <div className="tile__b tile__b--compact row row--between row--wrap">
+          <div className="preset-bar" role="group" aria-label="Instant chart presets">
+            {PLAYGROUND_PRESETS.map((p) => (
+              <button
+                key={p.id}
+                type="button"
+                className="chip preset-chip"
+                aria-pressed={activePreset === p.id}
+                title={p.summary}
+                onClick={() => onSelectPreset(p)}
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
+          <div className="row row--wrap">
             <button type="button" className="btn btn-primary btn-sm" onClick={onJumpNow}>
               Now
             </button>
@@ -162,67 +179,57 @@ export default function WorkspaceControls({
             </button>
           </div>
         </div>
-        <div className="tile__b tile__b--compact">
-          <div className="preset-bar" role="group" aria-label="Instant chart presets">
-            {PLAYGROUND_PRESETS.map((p) => (
-              <button
-                key={p.id}
-                type="button"
-                className="chip preset-chip"
-                aria-pressed={activePreset === p.id}
-                title={p.summary}
-                onClick={() => onSelectPreset(p)}
-              >
-                {p.label}
-              </button>
-            ))}
-          </div>
-        </div>
       </section>
 
       <section className="tile s12" aria-label="Chart document controls">
         <div className="tile__h">
           <b>DOC</b>
           <span>{place || label || "Chart parameters"}</span>
-          <div className="tile__actions">
-            <div className="seg" role="group" aria-label="Tradition">
-              <button
-                type="button"
-                className="seg__btn"
-                aria-pressed={tradition === "western"}
-                onClick={() => onSwitchTradition("western")}
-              >
-                Western
-              </button>
-              <button
-                type="button"
-                className="seg__btn"
-                aria-pressed={tradition === "vedic"}
-                onClick={() => onSwitchTradition("vedic")}
-              >
-                Vedic
-              </button>
-            </div>
-            {tradition === "vedic" && (
-              <div className="seg" role="group" aria-label="Kundli style">
+          <i>{tradition} · {advanced ? "advanced" : "casual"}</i>
+        </div>
+
+        <div className="tile__b stack--sm">
+          <div className="row row--between row--wrap">
+            <div className="row row--wrap">
+              <div className="seg" role="group" aria-label="Tradition">
                 <button
                   type="button"
                   className="seg__btn"
-                  aria-pressed={kundliStyle === "north"}
-                  onClick={() => setKundliStyle("north")}
+                  aria-pressed={tradition === "western"}
+                  onClick={() => onSwitchTradition("western")}
                 >
-                  North
+                  Western
                 </button>
                 <button
                   type="button"
                   className="seg__btn"
-                  aria-pressed={kundliStyle === "south"}
-                  onClick={() => setKundliStyle("south")}
+                  aria-pressed={tradition === "vedic"}
+                  onClick={() => onSwitchTradition("vedic")}
                 >
-                  South
+                  Vedic
                 </button>
               </div>
-            )}
+              {tradition === "vedic" && (
+                <div className="seg" role="group" aria-label="Kundli style">
+                  <button
+                    type="button"
+                    className="seg__btn"
+                    aria-pressed={kundliStyle === "north"}
+                    onClick={() => setKundliStyle("north")}
+                  >
+                    North
+                  </button>
+                  <button
+                    type="button"
+                    className="seg__btn"
+                    aria-pressed={kundliStyle === "south"}
+                    onClick={() => setKundliStyle("south")}
+                  >
+                    South
+                  </button>
+                </div>
+              )}
+            </div>
             <div className="seg" role="group" aria-label="Interface depth">
               <button
                 type="button"
@@ -242,9 +249,6 @@ export default function WorkspaceControls({
               </button>
             </div>
           </div>
-        </div>
-
-        <div className="tile__b stack--sm">
           {docKind === "birth" ? (
             <div className="controls">
               <div className="field field--place">
