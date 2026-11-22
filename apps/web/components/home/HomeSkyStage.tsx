@@ -124,9 +124,9 @@ function SolarAltitudeArc({ data }: { data: SolarArcData }) {
         <text x={r1(px(18))} y={H - 3} textAnchor="middle">18h</text>
         <text x={ml + pw} y={H - 3} textAnchor="end">24h UT</text>
         <text
-          x={nowX > W * 0.65 ? nowX - 6 : nowX + 6}
-          y={Math.max(mt + 6, Math.min(mt + ph - 4, nowY - 3))}
-          textAnchor={nowX > W * 0.65 ? "end" : "start"}
+          x={nowX > W * 0.62 ? nowX - 7 : nowX + 7}
+          y={nowY < mt + 14 ? nowY + 11 : nowY - 6}
+          textAnchor={nowX > W * 0.62 ? "end" : "start"}
           fill="var(--text)"
           fontWeight={600}
         >

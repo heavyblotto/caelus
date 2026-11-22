@@ -224,16 +224,41 @@ const sha = (svg: string): string => createHash("sha256").update(svg).digest("he
 
 // With the prop left out the wheel is deterministic across runs.
 {
-  assert(sha(render(STATIC)) === "cf34f2248b728aaa65d8f67cbd4c731208a7ef0f635fc8c1382407f7bdf285cc",
+  assert(sha(render(STATIC)) === "2bdb5663a1983c30e48057463ebc22d97fbdf855a600e8fc64c06c55274f74d0",
     "uncertainty: the default render is deterministic");
   assert(sha(render(STATIC, { size: 360, layers: { aspects: false }, theme: { axis: "#123456" } }))
-    === "d3fa01f78ac5fdc53df2c78c8165cc74c763da32ca2ba43195c85860d8a0037e",
+    === "8c0d5b68cba28844765399efdb9968f74bcf9e11a9874ee39a6188bf58e67e06",
     "uncertainty: a render with other props is deterministic");
   assert(sha(renderToStaticMarkup(<MultiWheel rings={[{ chart: STATIC, label: "a" }, { chart: STATIC, label: "b" }]} />))
     === "97d0e2c099e2618ee6165172ebb3e8b2543d79457efad27656bc0cc8e8a48270",
     "uncertainty: MultiWheel is deterministic");
   assert(render(STATIC, { uncertainty: undefined }) === render(STATIC), "uncertainty: undefined is the same as absent");
   assert(render(STATIC, { uncertainty: { samples: [STATIC] } }) === render(STATIC), "uncertainty: one sample is no window, so nothing draws");
+}
+
+// tight-conjunction degree label collision regression check (2024 eclipse + 1962 stellium)
+{
+  const eclipse = eng.chart(2024, 4, 8, 18, 17, 0, 23.2494, -106.4111, "placidus");
+  for (const [label, ch] of [["2024-eclipse", eclipse], ["1962-stellium", stellium]] as const) {
+    const svg = render(ch, { size: 460 });
+    const fs = 460 * 0.0185;
+    const boxes = [...svg.matchAll(/<text x="([^"]+)" y="([^"]+)" font-size="8\.51[^"]*"[^>]*>([^<]+)<\/text>/g)]
+      .map((m) => {
+        const t = m[3].replace(/&#x27;/g, "'");
+        return { x: Number(m[1]), y: Number(m[2]), w: t.length * fs * 0.74 + 3.5, h: fs * 1.25 + 2 };
+      });
+    let overlaps = 0;
+    for (let i = 0; i < boxes.length; i++) {
+      for (let j = i + 1; j < boxes.length; j++) {
+        if (Math.abs(boxes[i].x - boxes[j].x) < (boxes[i].w + boxes[j].w) / 2
+          && Math.abs(boxes[i].y - boxes[j].y) < (boxes[i].h + boxes[j].h) / 2) {
+          overlaps++;
+        }
+      }
+    }
+    assert(boxes.length === 12 && overlaps === 0,
+      `collision: ${label} degree labels stay clear (${boxes.length} labels, ${overlaps} overlaps)`);
+  }
 }
 
 // interactive selection & cross-highlighting

@@ -95,19 +95,9 @@ export default function CodeCallDrawer({
         <span>
           Reproducible call{selectedBody ? ` (${selectedBody})` : ""}
         </span>
-        <div className="tile__actions">
-          <button type="button" className="btn btn-secondary btn-sm" onClick={() => void copyActive()}>
-            Copy {lang.toUpperCase()}
-          </button>
-          {chart && (
-            <button type="button" className="btn btn-ghost btn-sm" onClick={downloadJson}>
-              Download JSON
-            </button>
-          )}
-          <button type="button" className="btn btn-ghost btn-sm" onClick={onClose} aria-label="Close code drawer">
-            Hide
-          </button>
-        </div>
+        <button type="button" onClick={onClose} aria-label="Close code drawer">
+          Hide
+        </button>
       </div>
       <div className="tile__b stack--sm">
         <div className="row row--between row--wrap">
@@ -129,10 +119,20 @@ export default function CodeCallDrawer({
               </button>
             ))}
           </div>
-          <p className="status-live dim small" role="status" aria-live="polite">
-            {statusMsg || "Runs locally with zero network I/O."}
-          </p>
+          <div className="row row--wrap">
+            <button type="button" className="btn btn-secondary btn-sm" onClick={() => void copyActive()}>
+              Copy {lang.toUpperCase()}
+            </button>
+            {chart && (
+              <button type="button" className="btn btn-ghost btn-sm" onClick={downloadJson}>
+                Download JSON
+              </button>
+            )}
+          </div>
         </div>
+        <p className="status-live dim small" role="status" aria-live="polite">
+          {statusMsg || "Runs locally with zero network I/O."}
+        </p>
         <div
           role="tabpanel"
           aria-labelledby={`${tabBaseId}-${lang}`}

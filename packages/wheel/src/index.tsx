@@ -422,8 +422,8 @@ export function ChartWheel({
   const names = (bodies ?? Object.keys(chart.bodies).filter((b) => b !== "mean_node"))
     .filter((b) => chart.bodies[b] !== undefined);
   const trueLons = names.map((b) => chart.bodies[b]!.lon);
-  // 10.5 deg min separation keeps glyphs and degree readouts crisp even in dense stelliums.
-  const dispLons = spreadAngles(trueLons, 10.5);
+  // 12 deg min separation keeps glyphs and degree readouts crisp even in exact conjunctions.
+  const dispLons = spreadAngles(trueLons, 12.0);
 
   const activeBody = hoveredBody ?? selectedBody ?? null;
   const drawnSet = new Set(names);
@@ -449,11 +449,11 @@ export function ChartWheel({
 
   // ring circles: the outer circle is the plate's frame and always
   // draws; the inner circles belong to the layer whose band they bound.
-  // House numbers sit cleanly in 0.50..0.568, keeping 0.575..0.84 clear for planets.
+  // House numbers sit cleanly in 0.50..0.556, keeping 0.562..0.84 clear for planets.
   const rings: Array<[number, string, boolean, number, string, number?]> = [
     [1.0, "outer", true, 1.5, T.ring],
     [0.84, "zodiac-in", L.zodiac, 1, T.ring],
-    [0.568, "house-in", L.houses, 0.75, ringMinor, 0.75],
+    [0.556, "house-in", L.houses, 0.75, ringMinor, 0.75],
     [0.50, "aspect", L.aspects, 1, T.ring],
   ];
   for (const [r, key, on, sw, st, op] of rings) {
@@ -492,7 +492,7 @@ export function ChartWheel({
       el.push(line(cusps[i], 0.50, 0.84,
         { stroke: ringMinor, strokeWidth: 0.75, opacity: 0.72 }, `cusp-${i}`));
       const arc = mod(cusps[(i + 1) % 12] - cusps[i], 360);
-      el.push(text(cusps[i] + arc / 2, 0.534, String(i + 1), size * 0.022, T.houseText, `hn-${i}`));
+      el.push(text(cusps[i] + arc / 2, 0.528, String(i + 1), size * 0.021, T.houseText, `hn-${i}`));
     }
   }
   if (L.axes) {
@@ -587,9 +587,11 @@ export function ChartWheel({
 
   // planets: pointer tick at true longitude, glyph at fanned angle, collision-free degree readout
   if (L.bodies) {
-    const labelFs = size * 0.020;
+    const rGlyph = 0.772;
+    const labelFs = size * 0.0185;
     const placedBoxes: Array<{ x0: number; x1: number; y0: number; y1: number }> = [];
-    const tiers = [0.646, 0.598];
+    const tiers = [0.686, 0.630, 0.576];
+    const angOffsets = [0, 4, -4, 8, -8];
     const bodyInteractive = Boolean(onSelectBody || onHoverBody);
 
     // Order by display longitude so adjacent labels stagger cleanly
@@ -597,34 +599,49 @@ export function ChartWheel({
       .map((b, i) => ({ b, i, disp: dispLons[i] }))
       .sort((u, v) => u.disp - v.disp);
 
-    const labelRadii = new Array<number>(names.length).fill(tiers[0]);
+    const labelPos = new Array<{ lon: number; r: number }>(names.length);
     for (const { b, i, disp } of drawOrder) {
       const p = chart.bodies[b]!;
       const signDeg = p.signDeg ?? mod(p.lon, 30);
       const retro = p.retrograde ?? p.rx ?? false;
       const deg = Math.floor(signDeg);
       const min = String(Math.floor(mod(signDeg, 1) * 60)).padStart(2, "0");
-      const lbl = `${deg}°${min}'${retro ? "℞" : ""}`;
-      const halfW = (lbl.length * labelFs * 0.62) / 2 + 1.5;
-      const halfH = (labelFs * 1.12) / 2 + 1;
+      const lbl = `${deg}°${min}'${retro ? " ℞" : ""}`;
+      // Generous monospace character width + breathing room prevents touching on exact conjunctions
+      const halfW = (lbl.length * labelFs * 0.74) / 2 + 3.5;
+      const halfH = (labelFs * 1.25) / 2 + 2;
 
-      let chosen = tiers[0];
-      for (const rCand of tiers) {
-        const [lx, ly] = pt(disp, rCand);
-        const box = { x0: lx - halfW, x1: lx + halfW, y0: ly - halfH, y1: ly + halfH };
-        const hits = placedBoxes.some((o) =>
-          box.x0 < o.x1 && box.x1 > o.x0 && box.y0 < o.y1 && box.y1 > o.y0);
-        if (!hits) {
-          chosen = rCand;
-          placedBoxes.push(box);
-          break;
+      let chosenLon = disp;
+      let chosenR = tiers[0];
+      let chosenBox = { x0: 0, x1: 0, y0: 0, y1: 0 };
+      let found = false;
+
+      // Try radial tiers first at zero angular offset, then small angular nudges if still crowded
+      for (const dAng of angOffsets) {
+        for (const rCand of tiers) {
+          const lonCand = disp + dAng;
+          const [lx, ly] = pt(lonCand, rCand);
+          const box = { x0: lx - halfW, x1: lx + halfW, y0: ly - halfH, y1: ly + halfH };
+          const hits = placedBoxes.some((o) =>
+            box.x0 < o.x1 && box.x1 > o.x0 && box.y0 < o.y1 && box.y1 > o.y0);
+          if (!hits) {
+            chosenLon = lonCand;
+            chosenR = rCand;
+            chosenBox = box;
+            found = true;
+            break;
+          }
         }
-        if (rCand === tiers[tiers.length - 1]) {
-          chosen = rCand;
-          placedBoxes.push(box);
-        }
+        if (found) break;
       }
-      labelRadii[i] = chosen;
+      if (!found) {
+        const [lx, ly] = pt(disp, tiers[tiers.length - 1]);
+        chosenLon = disp;
+        chosenR = tiers[tiers.length - 1];
+        chosenBox = { x0: lx - halfW, x1: lx + halfW, y0: ly - halfH, y1: ly + halfH };
+      }
+      placedBoxes.push(chosenBox);
+      labelPos[i] = { lon: chosenLon, r: chosenR };
     }
 
     names.forEach((b, i) => {
@@ -640,19 +657,19 @@ export function ChartWheel({
       const retro = p.retrograde ?? p.rx ?? false;
       const deg = Math.floor(signDeg);
       const min = String(Math.floor(mod(signDeg, 1) * 60)).padStart(2, "0");
-      const [gx, gy] = pt(disp, 0.735);
+      const [gx, gy] = pt(disp, rGlyph);
 
       const children: ReactElement[] = [
         <title key={`tt-${b}`}>
           {`${bodyTitle(b)} ${deg}°${min}' ${SIGN_NAMES[signIdx]}${retro ? " retrograde" : ""}`}
         </title>,
-        line(p.lon, 0.815, 0.84, { stroke: pColor, strokeWidth: isSelected || isHovered ? 2 : 1.3 }, `pt-${b}`),
+        line(p.lon, 0.822, 0.84, { stroke: pColor, strokeWidth: isSelected || isHovered ? 2 : 1.3 }, `pt-${b}`),
       ];
 
       // connector when the glyph was displaced off its true longitude
       if (Math.abs(mod(disp - p.lon + 180, 360) - 180) > 0.75) {
-        const [x1, y1] = pt(p.lon, 0.815);
-        const [x2, y2] = pt(disp, 0.775);
+        const [x1, y1] = pt(p.lon, 0.822);
+        const [x2, y2] = pt(disp, rGlyph + 0.032);
         children.push(
           <line key={`conn-${b}`} x1={fix(x1)} y1={fix(y1)} x2={fix(x2)} y2={fix(y2)}
             stroke={T.labelText} strokeWidth={0.6} opacity={0.55} />,
@@ -661,15 +678,15 @@ export function ChartWheel({
 
       if (isSelected || isHovered) {
         children.push(
-          <circle key={`ret-${b}`} cx={fix(gx)} cy={fix(gy)} r={fix(size * 0.036)}
+          <circle key={`ret-${b}`} cx={fix(gx)} cy={fix(gy)} r={fix(size * 0.034)}
             fill="none" stroke={T.axis} strokeWidth={isSelected ? 1.5 : 1} />,
         );
       }
 
       children.push(
-        text(disp, 0.735, G[b] ?? b.slice(0, 2).toUpperCase(),
-          size * 0.046, pColor, `pg-${b}`),
-        text(disp, labelRadii[i], `${deg}°${min}'${retro ? "℞" : ""}`,
+        text(disp, rGlyph, G[b] ?? b.slice(0, 2).toUpperCase(),
+          size * 0.044, pColor, `pg-${b}`),
+        text(labelPos[i].lon, labelPos[i].r, `${deg}°${min}'${retro ? " ℞" : ""}`,
           labelFs, T.labelText, `pl-${b}`),
       );
 

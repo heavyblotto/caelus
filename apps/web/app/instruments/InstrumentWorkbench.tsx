@@ -117,20 +117,10 @@ export default function InstrumentWorkbench({
         <div className="tile s12">
           <div className="tile__h">
             <b>{id}</b>
-            <span>Quick presets · {title}</span>
-            <div className="tile__actions">
-              <a href={`#${codeSectionId}`} className="btn btn-ghost btn-sm">
-                Code &amp; JSON &darr;
-              </a>
-              <Link href="/instruments" className="btn btn-ghost btn-sm">
-                All instruments
-              </Link>
-              <Link href="/playground" className="btn btn-secondary btn-sm">
-                Playground
-              </Link>
-            </div>
+            <span>{title} presets</span>
+            <i>client-side</i>
           </div>
-          <div className="tile__b tile__b--compact">
+          <div className="tile__b tile__b--compact row row--between row--wrap">
             <div className="preset-bar inst-presets" role="group" aria-label={`${title} presets`}>
               {presets.map((p) => (
                 <button
@@ -145,6 +135,17 @@ export default function InstrumentWorkbench({
                 </button>
               ))}
             </div>
+            <div className="row row--wrap">
+              <a href={`#${codeSectionId}`} className="btn btn-ghost btn-sm">
+                Code &amp; JSON &darr;
+              </a>
+              <Link href="/instruments" className="btn btn-ghost btn-sm">
+                All instruments
+              </Link>
+              <Link href="/playground" className="btn btn-secondary btn-sm">
+                Playground
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -155,15 +156,8 @@ export default function InstrumentWorkbench({
         <section className="tile s12 code-drawer" aria-label={`${title} reproducible API and JSON output`}>
           <div className="tile__h">
             <b>API</b>
-            <span>Reproducible call &amp; live JSON ({activePreset})</span>
-            <div className="tile__actions">
-              <button type="button" className="btn btn-secondary btn-sm" onClick={() => void copyCode()}>
-                Copy {tab.toUpperCase()}
-              </button>
-              <button type="button" className="btn btn-ghost btn-sm" onClick={downloadJson}>
-                Download JSON
-              </button>
-            </div>
+            <span>Code &amp; live JSON</span>
+            <i>{activePreset}</i>
           </div>
           <div className="tile__b stack--sm">
             <div className="row row--between row--wrap">
@@ -185,10 +179,18 @@ export default function InstrumentWorkbench({
                   </button>
                 ))}
               </div>
-              <p className="status-live dim small" role="status" aria-live="polite">
-                {status || "Computed locally from the embedded ephemeris."}
-              </p>
+              <div className="row row--wrap">
+                <button type="button" className="btn btn-secondary btn-sm" onClick={() => void copyCode()}>
+                  Copy {tab.toUpperCase()}
+                </button>
+                <button type="button" className="btn btn-ghost btn-sm" onClick={downloadJson}>
+                  Download JSON
+                </button>
+              </div>
             </div>
+            <p className="status-live dim small" role="status" aria-live="polite">
+              {status || "Computed locally from the embedded ephemeris."}
+            </p>
             <div
               role="tabpanel"
               aria-labelledby={`${tabBaseId}-${tab}`}

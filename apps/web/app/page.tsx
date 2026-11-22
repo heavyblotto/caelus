@@ -278,7 +278,7 @@ const PACKAGES: Array<{
     registry: "npm",
     name: "caelus-wheel",
     href: NPM.wheel,
-    desc: "SSR-safe React SVG visualizations: flat ChartWheel (~3.1 KB gzipped), tilted 3D ChartSphere, AstroMap, Kundli, and EphemerisGraph.",
+    desc: "SSR-safe React SVG visualizations: flat ChartWheel (~4.3 KB gzipped), tilted 3D ChartSphere, AstroMap, Kundli, and EphemerisGraph.",
   },
   {
     registry: "npm",
