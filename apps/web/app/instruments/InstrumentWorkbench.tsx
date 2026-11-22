@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from "react";
 
 export interface InstrumentPresetOption {
   id: string;
@@ -13,7 +13,8 @@ export interface InstrumentCodeBundle {
   ts: string;
   python: string;
   mcp: string;
-  json: unknown;
+  /** Value or lazy thunk evaluated only when the user opens Live JSON or downloads JSON. */
+  json: unknown | (() => unknown);
 }
 
 type CodeTab = "ts" | "python" | "mcp" | "json";
@@ -62,7 +63,16 @@ export default function InstrumentWorkbench({
   const codeSectionId = useId();
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
-  const jsonText = JSON.stringify(code.json, null, 2);
+  const resolveJsonText = () => {
+    const val = typeof code.json === "function" ? (code.json as () => unknown)() : code.json;
+    return JSON.stringify(val, null, 2);
+  };
+
+  const jsonText = useMemo(
+    () => (tab === "json" ? resolveJsonText() : ""),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [tab, code],
+  );
   const activeText =
     tab === "ts"
       ? code.ts
@@ -97,7 +107,8 @@ export default function InstrumentWorkbench({
 
   function downloadJson() {
     try {
-      const blob = new Blob([jsonText], { type: "application/json" });
+      const payload = jsonText || resolveJsonText();
+      const blob = new Blob([payload], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;

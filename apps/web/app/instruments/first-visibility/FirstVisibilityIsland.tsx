@@ -26,30 +26,6 @@ export default function FirstVisibilityIsland() {
     const p = VISIBILITY_PRESETS.find((x) => x.id === preset) ?? VISIBILITY_PRESETS[0];
     const q = p.query;
     const startJd = julianDay(q.year, 1, 1);
-    let sample: unknown = null;
-    try {
-      const ev = heliacal(engine, q.target, startJd, q.place.lat, q.place.lonEast, {
-        kind: p.pick.kind,
-        extinction: q.extinction,
-      });
-      sample = {
-        preset: p.id,
-        target: q.target,
-        year: q.year,
-        observer: q.place,
-        extinction: q.extinction,
-        event: ev
-          ? {
-              kind: ev.kind,
-              jd: Number(ev.jd.toFixed(4)),
-              sunAltitude: ev.sunAltitude != null ? Number(ev.sunAltitude.toFixed(2)) : null,
-              altitude: ev.altitude != null ? Number(ev.altitude.toFixed(2)) : null,
-            }
-          : null,
-      };
-    } catch {
-      sample = { preset: p.id, target: q.target, year: q.year, observer: q.place };
-    }
 
     return {
       ts: [
@@ -92,7 +68,31 @@ export default function FirstVisibilityIsland() {
         null,
         2,
       ),
-      json: sample,
+      json: () => {
+        try {
+          const ev = heliacal(engine, q.target, startJd, q.place.lat, q.place.lonEast, {
+            kind: p.pick.kind,
+            extinction: q.extinction,
+          });
+          return {
+            preset: p.id,
+            target: q.target,
+            year: q.year,
+            observer: q.place,
+            extinction: q.extinction,
+            event: ev
+              ? {
+                  kind: ev.kind,
+                  jd: Number(ev.jd.toFixed(4)),
+                  sunAltitude: ev.sunAltitude != null ? Number(ev.sunAltitude.toFixed(2)) : null,
+                  altitude: ev.altitude != null ? Number(ev.altitude.toFixed(2)) : null,
+                }
+              : null,
+          };
+        } catch {
+          return { preset: p.id, target: q.target, year: q.year, observer: q.place };
+        }
+      },
     };
   }, [engine, preset]);
 

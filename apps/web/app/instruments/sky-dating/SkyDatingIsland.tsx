@@ -1,9 +1,9 @@
 "use client";
 
 import { useMemo } from "react";
-import { Engine, when, allOf, inSign } from "caelus";
+import { Engine, SIGNS, dateSky } from "caelus";
 import { embeddedData } from "caelus/data-embedded";
-import { SKY_PRESETS, jdOfYear, type PackSource } from "caelus-widgets/sky-dating";
+import { SKY_PRESETS, buildConstraints, jdOfYear, type PackSource } from "caelus-widgets/sky-dating";
 import { SkyDating } from "caelus-widgets/sky-dating-widget";
 import InstrumentWorkbench, {
   useUrlPreset,
@@ -30,52 +30,35 @@ export default function SkyDatingIsland() {
   const code = useMemo<InstrumentCodeBundle>(() => {
     const p = SKY_PRESETS.find((x) => x.id === preset) ?? SKY_PRESETS[0];
     const signEntries = Object.entries(p.query.signs);
-    const tsPreds = signEntries.map(
-      ([body, signIdx]) => `  inSign("${body}", ${signIdx}, "${p.query.zodiac}")`,
-    );
     const pyPreds = signEntries.map(
-      ([body, signIdx]) => `    in_sign("${body}", ${signIdx}, "${p.query.zodiac}")`,
+      ([body, signIdx]) => `    {"body": "${body}", "sign": "${SIGNS[signIdx as number]}"},`,
     );
 
     const startJd = jdOfYear(p.query.startYear);
     const endJd = jdOfYear(p.query.endYear + 1);
-    let sampleWindows: Array<{ startJd: number; endJd: number }> = [];
-    try {
-      const preds = signEntries.map(([b, idx]) =>
-        inSign(b as Parameters<typeof inSign>[0], idx as number, p.query.zodiac),
-      );
-      if (preds.length > 0) {
-        const res = when(engine, preds.length === 1 ? preds[0] : allOf(...preds), startJd, endJd);
-        sampleWindows = res.slice(0, 10).map(([s, e]) => ({
-          startJd: Number(s.toFixed(4)),
-          endJd: Number(e.toFixed(4)),
-        }));
-      }
-    } catch {
-      sampleWindows = [];
-    }
+    const cal = p.query.startYear < 1583 ? `, 0, 0, 0, "julian"` : "";
 
     return {
       ts: [
-        `import { Engine, when, allOf, inSign, julianDay } from "caelus";`,
+        `import { Engine, dateSky, julianDay } from "caelus";`,
         `import { embeddedData } from "caelus/data-embedded";`,
         ``,
         `const engine = new Engine(embeddedData);`,
-        `const start = julianDay(${p.query.startYear}, 1, 1);`,
-        `const end = julianDay(${p.query.endYear + 1}, 1, 1);`,
-        `const windows = when(engine, allOf(`,
-        tsPreds.join(",\n"),
-        `), start, end);`,
+        `const start = julianDay(${p.query.startYear}, 1, 1${cal});`,
+        `const end = julianDay(${p.query.endYear + 1}, 1, 1${cal});`,
+        `const { windows } = dateSky(engine, [`,
+        ...signEntries.map(([body, signIdx]) => `  { body: "${body}", sign: "${SIGNS[signIdx as number]}" },`),
+        `], start, end, { zodiac: "${p.query.zodiac}" });`,
       ].join("\n"),
       python: [
         `from astroengine import Engine`,
         `from astroengine.core import julian_day`,
-        `from astroengine.query import when, all_of, in_sign`,
+        `from astroengine.datesky import date_sky`,
         ``,
         `engine = Engine()`,
-        `windows = when(engine, all_of(`,
-        pyPreds.join(",\n"),
-        `), julian_day(${p.query.startYear}, 1, 1), julian_day(${p.query.endYear + 1}, 1, 1))`,
+        `result = date_sky(engine, [`,
+        pyPreds.join("\n"),
+        `], julian_day(${p.query.startYear}, 1, 1), julian_day(${p.query.endYear + 1}, 1, 1), zodiac="${p.query.zodiac}")`,
       ].join("\n"),
       mcp: JSON.stringify(
         {
@@ -90,12 +73,30 @@ export default function SkyDatingIsland() {
         null,
         2,
       ),
-      json: {
-        preset: p.id,
-        span: [p.query.startYear, p.query.endYear],
-        zodiac: p.query.zodiac,
-        signs: p.query.signs,
-        matchesSample: sampleWindows,
+      json: () => {
+        let sampleWindows: Array<{ startJd: number; endJd: number }> = [];
+        try {
+          const constraints = buildConstraints(p.query);
+          if (constraints.length > 0) {
+            const res = dateSky(engine, constraints, startJd, endJd, {
+              zodiac: p.query.zodiac,
+              pad: p.query.pad,
+            });
+            sampleWindows = res.windows.slice(0, 10).map((w) => ({
+              startJd: Number(w.start.toFixed(4)),
+              endJd: Number(w.end.toFixed(4)),
+            }));
+          }
+        } catch {
+          sampleWindows = [];
+        }
+        return {
+          preset: p.id,
+          span: [p.query.startYear, p.query.endYear],
+          zodiac: p.query.zodiac,
+          signs: p.query.signs,
+          matchesSample: sampleWindows,
+        };
       },
     };
   }, [engine, preset]);

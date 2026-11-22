@@ -27,20 +27,6 @@ export default function EclipsesIsland() {
   const code = useMemo<InstrumentCodeBundle>(() => {
     const jd0 = julianDay(startYear, 1, 1);
     const jd1 = julianDay(endYear + 1, 1, 1);
-    let sample: unknown = null;
-    try {
-      const sol = solarEclipses(engine, jd0, jd1).slice(0, 6);
-      const lun = lunarEclipses(engine, jd0, jd1).slice(0, 6);
-      sample = {
-        span: [startYear, endYear],
-        solarCount: sol.length,
-        lunarCount: lun.length,
-        solar: sol.map((e) => ({ type: e.type, tMaxJd: Number(e.tMax.toFixed(5)), gamma: Number(e.gamma.toFixed(4)) })),
-        lunar: lun.map((e) => ({ type: e.type, tMaxJd: Number(e.tMax.toFixed(5)), magUmbral: Number(e.magUmbral.toFixed(4)) })),
-      };
-    } catch {
-      sample = { span: [startYear, endYear] };
-    }
 
     return {
       ts: [
@@ -75,7 +61,21 @@ export default function EclipsesIsland() {
         null,
         2,
       ),
-      json: sample,
+      json: () => {
+        try {
+          const sol = solarEclipses(engine, jd0, jd1).slice(0, 6);
+          const lun = lunarEclipses(engine, jd0, jd1).slice(0, 6);
+          return {
+            span: [startYear, endYear],
+            solarCount: sol.length,
+            lunarCount: lun.length,
+            solar: sol.map((e) => ({ type: e.type, tMaxJd: Number(e.tMax.toFixed(5)), gamma: Number(e.gamma.toFixed(4)) })),
+            lunar: lun.map((e) => ({ type: e.type, tMaxJd: Number(e.tMax.toFixed(5)), magUmbral: Number(e.magUmbral.toFixed(4)) })),
+          };
+        } catch {
+          return { span: [startYear, endYear] };
+        }
+      },
     };
   }, [engine, startYear, endYear]);
 

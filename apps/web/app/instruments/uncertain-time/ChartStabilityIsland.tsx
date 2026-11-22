@@ -59,29 +59,6 @@ export default function ChartStabilityIsland() {
     const halfSec = halfWidthOf(q);
     const jd = julianDay(q.year, q.month, q.day, q.hour, q.minute, 0);
     const iso = `${String(q.year).padStart(4, "0")}-${String(q.month).padStart(2, "0")}-${String(q.day).padStart(2, "0")}T${String(q.hour).padStart(2, "0")}:${String(q.minute).padStart(2, "0")}:00Z`;
-    let summary: unknown = null;
-    try {
-      const res = chartStability(engine, jd, {
-        halfWidthSeconds: halfSec,
-        lat: q.place?.lat,
-        lonEast: q.place?.lonEast,
-        houseSystem: q.houseSystem,
-        zodiac: q.zodiac,
-      });
-      summary = {
-        preset,
-        statedUtc: iso,
-        halfWidthSeconds: halfSec,
-        stableCount: res.facts.filter((f) => f.stable).length,
-        changingCount: res.facts.filter((f) => !f.stable).length,
-        changingFacts: res.facts
-          .filter((f) => !f.stable)
-          .slice(0, 12)
-          .map((f) => ({ kind: f.kind, subject: f.subject, stated: f.value, segments: f.segments.length })),
-      };
-    } catch {
-      summary = { preset, statedUtc: iso };
-    }
 
     return {
       ts: [
@@ -123,7 +100,30 @@ export default function ChartStabilityIsland() {
         null,
         2,
       ),
-      json: summary,
+      json: () => {
+        try {
+          const res = chartStability(engine, jd, {
+            halfWidthSeconds: halfSec,
+            lat: q.place?.lat,
+            lonEast: q.place?.lonEast,
+            houseSystem: q.houseSystem,
+            zodiac: q.zodiac,
+          });
+          return {
+            preset,
+            statedUtc: iso,
+            halfWidthSeconds: halfSec,
+            stableCount: res.facts.filter((f) => f.stable).length,
+            changingCount: res.facts.filter((f) => !f.stable).length,
+            changingFacts: res.facts
+              .filter((f) => !f.stable)
+              .slice(0, 12)
+              .map((f) => ({ kind: f.kind, subject: f.subject, stated: f.value, segments: f.segments.length })),
+          };
+        } catch {
+          return { preset, statedUtc: iso };
+        }
+      },
     };
   }, [engine, initial, preset]);
 
