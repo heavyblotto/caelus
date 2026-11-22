@@ -71,6 +71,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/instruments/uncertain-time",
     "/instruments/eclipses",
     "/instruments/first-visibility",
+    "/instruments/field-verifier",
     "/features",
     "/validation",
     "/provenance",

@@ -86,4 +86,22 @@ export const INSTRUMENTS: Instrument[] = [
       { id: "crescent", label: "Lunar crescent" },
     ],
   },
+  {
+    id: "I-05",
+    href: "/instruments/field-verifier",
+    title: "Field verifier",
+    line: "Verify outdoor shadows, twilight, and lunar tilt against claimed timestamps, or invert observations to matching UTC windows or Earth coordinates.",
+    status: "live",
+    category: "Observation & forensics",
+    apiCalls: ["verifyObservation()", "chronolocate()", "geolocate()"],
+    mcpTool: "verify_observation · chronolocate · geolocate",
+    spanNote: "Verify · Chronolocate · Geolocate",
+    presets: [
+      { id: "nyc-summer-authentic", label: "NYC summer authentic" },
+      { id: "tz-shift-spoof", label: "Timezone spoof (+4h)" },
+      { id: "hemisphere-moon-spoof", label: "Hemisphere Moon flip" },
+      { id: "night-shadow-impossible", label: "Night shadow impossible" },
+      { id: "sloped-alpine", label: "Sloped alpine 20 deg" },
+    ],
+  },
 ];

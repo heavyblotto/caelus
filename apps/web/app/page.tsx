@@ -494,7 +494,45 @@ export default function Home() {
             </div>
           </div>
         </section>
-        {INSTRUMENTS.map((inst) => (
+        {INSTRUMENTS.filter((inst) => inst.id === "I-05").map((inst) => (
+          <section key={inst.id} className="tile s12 tile--live">
+            <div className="tile__h">
+              <b>{inst.id}</b>
+              <span>{inst.category}</span>
+              <i><span className="led led--live" aria-hidden />{inst.status} · client-side</i>
+            </div>
+            <div className="tile__b stack">
+              <div className="row row--between row--wrap">
+                <div>
+                  <h3>{inst.title}: shadow forensics, chronolocation, and geolocation</h3>
+                  <p>
+                    {inst.line} Drop a local photo to measure pole and shadow
+                    vectors in the browser with zero server upload, inspect
+                    counterfactual diagnostics, and copy the matching API call.
+                  </p>
+                </div>
+                <div className="row row--wrap">
+                  <Link href={inst.href} className="btn btn-primary btn-sm">
+                    Open Field verifier →
+                  </Link>
+                  <Link href="/docs/observation" className="btn btn-secondary btn-sm">
+                    Observation guide
+                  </Link>
+                </div>
+              </div>
+              <div className="row row--wrap">
+                {inst.apiCalls.map((fn) => (
+                  <span key={fn} className="badge badge--accent mono">
+                    {fn}
+                  </span>
+                ))}
+                <span className="badge badge--muted mono">Zero-upload local EXIF</span>
+                <span className="badge badge--muted mono">Analemma heatmap</span>
+              </div>
+            </div>
+          </section>
+        ))}
+        {INSTRUMENTS.filter((inst) => inst.id !== "I-05").map((inst) => (
           <Link key={inst.id} href={inst.href} className="tile s3">
             <div className="tile__h">
               <b>{inst.id}</b>
