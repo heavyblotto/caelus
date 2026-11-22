@@ -423,3 +423,54 @@ search span, as for a star that never sets.
 
 The tool refuses an unknown target, an event the target does not have, the
 arcus method without its angle, and a start year outside the server's data.
+
+## Physical observation and forensics (unreleased)
+`verify_observation`, `chronolocate`, and `geolocate` expose the engine's
+observation module (`packages/caelus/src/observe.ts`, golden-pinned to
+`python/astroengine/observe.py` across 28 cases and 1,927 field checks). Each
+tool lives in `caelus-mcp/core` with no Node dependency, is pinned against the
+in-process engine in `verify_tools`, and has frozen `golden-mcp` payloads.
+Forty-one tools total.
+
+### verify_observation(date?, lat, lon, elevation_m?, slope_deg?, slope_azimuth_deg?, time_tolerance_min?, place_tolerance_deg?, bortle?, camera_aim_az_deg?, camera_aim_alt_deg?, prev_date?, deadline_date?, observed?)
+Verifies physical observations (`shadow_bearing_deg`, `shadow_length_ratio`,
+`sun_azimuth_deg`, `sun_altitude_deg`, `twilight`, `sun_visible`,
+`moon_visible`, `moon_azimuth_deg`, `moon_altitude_deg`, `moon_illum`,
+`moon_waxing`, `moon_bright_limb_deg`, `bodies_visible`, `shadow_sweep`, and
+optional `tolerances`) against a claimed UTC timestamp (`date`, defaults to
+now) and Earth coordinates. Returns `{verdict, consistency_score, checks,
+scene, diagnostics}`.
+
+When `observed` is omitted or empty, returns `verdict: "unconstrained"`,
+`consistency_score: null`, empty `checks`, `diagnostics: null`, and the full
+ground-truth `scene` (Sun, flat/sloped-ground 3D shadows, optional camera
+lighting and glare risk, Moon geometry and bright-limb angle, visible planets,
+diurnal transitions and planetary hour, and compact `chronosense` header).
+When `observed` is provided and the claim is `inconsistent` or `impossible`,
+`diagnostics` searches same-day clock/timezone shifts (`time_shift`), opposite
+latitude (`hemisphere_flip`), and seasonal date shifts (`date_shift`).
+
+### chronolocate(lat, lon, start, end, observed, elevation_m?, slope_deg?, slope_azimuth_deg?, bortle?, step_minutes?, max_windows?)
+Finds every UTC window within `[start, end]` (range at most 370 days) at a
+fixed location where all observations in `observed` hold simultaneously.
+Analytically prunes impossible days from solar and lunar declinations and
+phase, scans surviving spans with narrow-peak rescue, bisects window edges to
+the second, and refines each peak. Returns `{place, start_utc, end_utc,
+days_scanned, days_pruned, truncated, windows}` where each window carries
+`start_utc`, `end_utc`, `best_utc`, `duration_minutes`, `fit_score`, and
+`max_normalized_residual`. Refuses `end <= start`, spans over 370 days, or
+empty `observed`.
+
+### geolocate(date, observed, lat_min?, lat_max?, lon_min?, lon_max?, grid_step_deg?, max_candidates?, elevation_m?, slope_deg?, slope_azimuth_deg?, bortle?)
+Inverts physical observations at a known UTC timestamp (`date`) to feasible
+Earth coordinates or regions. On flat ground with both solar direction
+(`sun_azimuth_deg` or `shadow_bearing_deg`) and solar elevation
+(`sun_altitude_deg` or `shadow_length_ratio`), solves a closed-form spherical
+celestial navigation fix with damped Gauss-Newton refinement and Jacobian
+uncertainty (`method: "analytical"`). For all other observable combinations or
+sloped terrain, sweeps a global spherical grid with antimeridian-wrapping
+connected-component clustering and local refinement (`method: "grid"`).
+Returns `{utc, jd_ut, method, subsolar, sublunar, candidates}` where each
+candidate reports `lat`, `lon`, `fit_score`, `max_normalized_residual`,
+`radius_km`, `lat_range`, `lon_range`, and `region_kind` (`point`, `arc`, or
+`band`). Refuses empty `observed` or invalid bounds.

@@ -50,6 +50,7 @@ const TOOLS = [
   "aspect_patterns", "parans", "chart_signature", "chart_facts",
   "counterfactual_chart", "similar_skies", "electional_search",
   "cosmic_weather", "date_sky", "chart_stability", "heliacal",
+  "verify_observation", "chronolocate", "geolocate",
 ] as const;
 
 const CORS: Record<string, string> = {

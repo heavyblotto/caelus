@@ -11,6 +11,26 @@ current figures live in `packages/caelus/accuracy.json` and on
 
 ### Engine (`caelus`)
 
+- **Physical observation, verification, time search, and geolocation.**
+  `sceneGeometry`, `verifyObservation`, `chronolocate`, and `geolocate`
+  (`packages/caelus/src/observe.ts`, ported from `python/astroengine/observe.py`)
+  compute solar and lunar horizontal coordinates with barometric refraction,
+  flat and sloped-ground 3D shadow geometry and sweep rates, optional
+  camera-relative glare risk, lens-independent zenith-frame lunar bright-limb
+  orientation, naked-eye planet visibility, local diurnal transitions, and
+  compact `chronosense` headers. `verifyObservation` supports both
+  unconstrained ground-truth queries and constrained verification with
+  uncertainty widening, near-zenith and full/new Moon indeterminate handling,
+  and counterfactual forensics for clock/timezone offsets (including half-hour
+  zones), hemisphere flips, and seasonal date shifts. `chronolocate` prunes
+  impossible days analytically and bisects matching windows to sub-second
+  edges; `geolocate` uses a closed-form spherical navigation fix on flat solar
+  observations and a global antimeridian-wrapping spherical grid otherwise.
+  `observe-golden.test.ts` pins 28 cases (1,927 checks) against the Python
+  reference with a worst difference of `6.71e-7`, and `observe.test.ts` checks
+  a 120-scenario authentic/spoof benchmark (precision `1.000`, recall `1.000`,
+  `0` false-impossible verdicts on authentic scenes, `40/40` counterfactual
+  recoveries, sub-millisecond forward latency).
 - **Binary packs.** The planet, Earth, and Moon Chebyshev packs ship in a
   binary form, CPK1 (`docs/binary-packs.md`), in place of JSON. Each
   coefficient is stored as an integer multiple of a power-of-two quantum set
@@ -206,6 +226,14 @@ current figures live in `packages/caelus/accuracy.json` and on
 
 ### MCP (`caelus-mcp`)
 
+- **`verify_observation`, `chronolocate`, and `geolocate`** expose physical
+  observation verification, ground-truth scene geometry and `chronosense`,
+  multi-day time search (up to 370 days), and analytical or spherical-grid
+  geolocation, bringing the server to 41 tools. All three tools live in
+  `caelus-mcp/core` with no Node dependency, are registered on the hosted
+  `/api/mcp` endpoint, are pinned against the in-process engine in
+  `verify_tools`, and add six frozen payloads to `golden-mcp.json` plus six
+  eval fixtures in `eval/prompts.jsonl`.
 - **`heliacal`** exposes first and last visibility, which brings the server
   to 38 tools. It takes a target, a place, and a start year, and returns
   every event the target has in date order, each with its calendar date, its

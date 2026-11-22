@@ -169,6 +169,10 @@ for (const claim of registry.claims) {
     36: "thirty-six",
     37: "thirty-seven",
     38: "thirty-eight",
+    39: "thirty-nine",
+    40: "forty",
+    41: "forty-one",
+    42: "forty-two",
   };
   const word = typeof value === "number" || /^\d+$/.test(String(value))
     ? NUMBER_WORDS[Number(value)]

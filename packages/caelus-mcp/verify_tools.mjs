@@ -29,6 +29,7 @@ import {
   chartFeatures, configurationFit,
   dignityScore, voidOfCourse,
   synastryAspects, dateSky, chartStability, heliacal, localDay, calendarDate,
+  sceneGeometry, verifyObservation, chronolocate, geolocate,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -1039,6 +1040,242 @@ const assertExactHits = (hits, body, targetLonAt, angle, label, tolDeg = 0.02) =
     "remainders: returns outer digest unchanged by the sidecar");
   assert(rRem.remainders && rRem.remainders.for === rRem.chart.digest,
     "remainders: returns sidecar binds to the inner chart digest");
+}
+
+// --------------------------------------------------------- verify_observation
+{
+  // 1. Unconstrained mode: pure physical ground-truth scene + camera lighting + chronosense
+  const iso = "2026-06-21T18:00:00Z";
+  const jd = jdFromIso(iso);
+  const prevIso = "2026-06-20T22:48:00Z";
+  const deadlineIso = "2026-06-21T18:45:00Z";
+  const oracleRes = await call("verify_observation", {
+    date: iso,
+    lat: 40.7128,
+    lon: -74.006,
+    camera_aim_az_deg: 180,
+    camera_aim_alt_deg: 5,
+    prev_date: prevIso,
+    deadline_date: deadlineIso,
+  });
+  const directScene = sceneGeometry(eng, jd, 40.7128, -74.006, {
+    cameraAimAzDeg: 180,
+    cameraAimAltDeg: 5,
+    prevJdUt: jdFromIso(prevIso),
+    deadlineJdUt: jdFromIso(deadlineIso),
+  });
+  assert(oracleRes.verdict === "unconstrained" && oracleRes.consistency_score === null
+    && oracleRes.checks.length === 0 && oracleRes.diagnostics === null,
+    "verify_observation unconstrained: verdict, null score, empty checks, null diagnostics");
+  assert(Math.abs(oracleRes.scene.sun.azimuth_deg - directScene.sun.azimuthDeg) < 0.02,
+    "verify_observation unconstrained: sun azimuth matches engine");
+  assert(Math.abs(oracleRes.scene.sun.altitude_apparent_deg - directScene.sun.altitudeApparentDeg) < 0.02,
+    "verify_observation unconstrained: sun apparent altitude matches engine");
+  assert(oracleRes.scene.shadow.cast === directScene.shadow.cast
+    && Math.abs(oracleRes.scene.shadow.bearing_deg - directScene.shadow.bearingDeg) < 0.02
+    && Math.abs(oracleRes.scene.shadow.length_ratio - directScene.shadow.lengthRatio) < 0.002,
+    "verify_observation unconstrained: shadow geometry matches engine");
+  assert(oracleRes.scene.lighting !== null
+    && oracleRes.scene.lighting.glare_risk === directScene.lighting.glareRisk
+    && Math.abs(oracleRes.scene.lighting.sun_camera_angle_deg - directScene.lighting.sunCameraAngleDeg) < 0.02,
+    "verify_observation unconstrained: camera lighting matches engine");
+  assert(oracleRes.scene.moon.phase_name === directScene.moon.phaseName
+    && oracleRes.scene.moon.bright_limb_clock === directScene.moon.brightLimbClock
+    && Math.abs(oracleRes.scene.moon.illum - directScene.moon.illum) < 0.001,
+    "verify_observation unconstrained: moon geometry matches engine");
+  assert(oracleRes.scene.chronosense.night_crossed === directScene.chronosense.nightCrossed
+    && oracleRes.scene.chronosense.deadline !== null
+    && oracleRes.scene.chronosense.deadline.phase === directScene.chronosense.deadline.phase
+    && Math.abs(oracleRes.scene.chronosense.deadline.minutes_remaining - 45) < 0.05
+    && oracleRes.scene.chronosense.line === directScene.chronosense.line,
+    "verify_observation unconstrained: chronosense matches engine");
+
+  // Default-now path: omitting date computes current scene cleanly
+  const nowRes = await call("verify_observation", { lat: 40.7128, lon: -74.006 });
+  assert(nowRes.verdict === "unconstrained" && typeof nowRes.scene.utc === "string"
+    && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z @40\.71,-74\.01/.test(nowRes.scene.chronosense.line),
+    `verify_observation default-now: returns unconstrained scene with chronosense line (${nowRes.scene.chronosense.line})`);
+
+  // 2. Authentic scene verification: matches verifyObservation() check-for-check
+  const obsAuthentic = {
+    shadow_bearing_deg: 41.7537,
+    shadow_length_ratio: 0.3966,
+    sun_azimuth_deg: 221.7537,
+    sun_altitude_deg: 68.3652,
+    twilight: "day",
+    sun_visible: true,
+    moon_visible: true,
+    moon_illum: 0.4844,
+    moon_waxing: true,
+    moon_bright_limb_deg: 71.0737,
+    shadow_sweep: { dt_minutes: 30, delta_bearing_deg: 13.4597 },
+  };
+  const authRes = await call("verify_observation", {
+    date: iso, lat: 40.7128, lon: -74.006, observed: obsAuthentic,
+  });
+  const authDirect = verifyObservation(eng, { jdUt: jd, lat: 40.7128, lonEast: -74.006 }, {
+    shadowBearingDeg: 41.7537,
+    shadowLengthRatio: 0.3966,
+    sunAzimuthDeg: 221.7537,
+    sunAltitudeDeg: 68.3652,
+    twilight: "day",
+    sunVisible: true,
+    moonVisible: true,
+    moonIllum: 0.4844,
+    moonWaxing: true,
+    moonBrightLimbDeg: 71.0737,
+    shadowSweep: { dtMinutes: 30, deltaBearingDeg: 13.4597 },
+  });
+  assert(authRes.verdict === authDirect.verdict && authRes.verdict === "consistent",
+    `verify_observation authentic: verdict consistent (got ${authRes.verdict})`);
+  assert(Math.abs(authRes.consistency_score - authDirect.consistencyScore) < 0.001,
+    "verify_observation authentic: consistency score matches engine");
+  assert(authRes.checks.length === authDirect.checks.length && authRes.diagnostics === null,
+    "verify_observation authentic: check count matches engine and diagnostics null");
+  assert(authRes.checks.some((c) => c.field === "shadow_bearing_deg")
+    && authRes.checks.some((c) => c.field === "shadow_sweep"),
+    "verify_observation authentic: check fields mapped to snake_case");
+
+  // 3. Sloped ground self-shadowing
+  const slopeIso = "2026-03-21T22:00:00Z";
+  const slopeRes = await call("verify_observation", {
+    date: slopeIso, lat: 40.7128, lon: -74.006,
+    slope_deg: 25, slope_azimuth_deg: 80,
+    observed: { shadow_bearing_deg: 90, shadow_length_ratio: 1.5 },
+  });
+  assert(slopeRes.scene.shadow.self_shadowed === true && slopeRes.scene.shadow.cast === false
+    && slopeRes.verdict === "impossible",
+    "verify_observation sloped self-shadowing: flagged self_shadowed and verdict impossible");
+
+  // 4. Counterfactual diagnostics: India half-hour timezone spoof (+5.5h = +330 min)
+  const indiaIso = "2026-03-21T10:00:00Z";
+  const indiaDirect = verifyObservation(eng, {
+    jdUt: jdFromIso(indiaIso), lat: 28.6139, lonEast: 77.209,
+  }, { shadowBearingDeg: 302.108, shadowLengthRatio: 1.0137 });
+  const indiaRes = await call("verify_observation", {
+    date: indiaIso, lat: 28.6139, lon: 77.209,
+    observed: { shadow_bearing_deg: 302.108, shadow_length_ratio: 1.0137 },
+  });
+  assert(indiaRes.verdict === indiaDirect.verdict && indiaRes.diagnostics !== null,
+    "verify_observation India spoof: triggers counterfactual diagnostics");
+  assert(Math.abs(indiaRes.diagnostics.time_shift.offset_minutes - indiaDirect.diagnostics.timeShift.offsetMinutes) < 0.05
+    && Math.abs(Math.abs(indiaRes.diagnostics.time_shift.offset_minutes) - 330) < 15,
+    `verify_observation India spoof: recovers ~330 min offset (got ${indiaRes.diagnostics?.time_shift.offset_minutes})`);
+
+  // 5. Southern hemisphere reversed video shadow sweep (Sydney)
+  const sydIso = "2026-01-15T02:00:00Z";
+  const sydRes = await call("verify_observation", {
+    date: sydIso, lat: -33.8688, lon: 151.2093,
+    observed: { shadow_sweep: { dt_minutes: 30, delta_bearing_deg: 30.2364 } },
+  });
+  assert(sydRes.verdict === "inconsistent" || sydRes.verdict === "impossible",
+    `verify_observation Sydney reversed sweep: rejected (got ${sydRes.verdict})`);
+
+  // 6. Near-zenith Lahaina noon: shadow bearing indeterminate, no false failure
+  const zenRes = await call("verify_observation", {
+    date: iso, lat: 23.4373617, lon: -89.5320953,
+    observed: { shadow_bearing_deg: 237, shadow_length_ratio: 0.01 },
+  });
+  assert(zenRes.verdict === "consistent"
+    && zenRes.checks.find((c) => c.field === "shadow_bearing_deg")?.status === "indeterminate",
+    "verify_observation Lahaina zenith: bearing indeterminate and verdict consistent");
+}
+
+// --------------------------------------------------------------- chronolocate
+{
+  const start = "2026-06-06T18:00:00Z";
+  const end = "2026-07-06T18:00:00Z";
+  const res = await call("chronolocate", {
+    lat: 40.7128,
+    lon: -74.006,
+    start,
+    end,
+    observed: {
+      shadow_bearing_deg: 41.7537,
+      shadow_length_ratio: 0.3966,
+      moon_illum: 0.4844,
+      moon_waxing: true,
+    },
+  });
+  const direct = chronolocate(eng, { lat: 40.7128, lonEast: -74.006 }, {
+    shadowBearingDeg: 41.7537,
+    shadowLengthRatio: 0.3966,
+    moonIllum: 0.4844,
+    moonWaxing: true,
+  }, jdFromIso(start), jdFromIso(end));
+  assert(res.windows.length === direct.windows.length && res.windows.length >= 1,
+    `chronolocate NYC 30d: window count matches engine (${res.windows.length} vs ${direct.windows.length})`);
+  assert(res.days_scanned === direct.daysScanned && res.days_pruned === direct.daysPruned && res.days_pruned > 0,
+    `chronolocate NYC 30d: pruning counts match engine (scanned=${res.days_scanned}, pruned=${res.days_pruned})`);
+  const targetJd = jdFromIso("2026-06-21T18:00:00Z");
+  const bestDiffMin = Math.min(...res.windows.map((w) => Math.abs(jdFromIso(w.best_utc) - targetJd) * 1440));
+  assert(bestDiffMin < 1.0, `chronolocate NYC 30d: best_utc recovers ground truth within 1 min (${bestDiffMin.toFixed(3)} min)`);
+  for (let i = 0; i < direct.windows.length; i++) {
+    assert(Math.abs(jdFromIso(res.windows[i].best_utc) - direct.windows[i].bestJd) < 1.5 / 86400,
+      `chronolocate NYC 30d: window[${i}] best_utc matches engine`);
+    assert(Math.abs(res.windows[i].fit_score - direct.windows[i].fitScore) < 0.001,
+      `chronolocate NYC 30d: window[${i}] fit_score matches engine`);
+  }
+
+  // Refusals: inverted range, >370d range, empty constraints
+  const bad = async (args) => (await client.callTool({ name: "chronolocate", arguments: args })).isError === true;
+  assert(await bad({ lat: 40.7, lon: -74, start: end, end: start, observed: { twilight: "day" } }),
+    "chronolocate: end <= start rejected");
+  assert(await bad({ lat: 40.7, lon: -74, start: "2025-01-01T00:00:00Z", end: "2027-01-01T00:00:00Z", observed: { twilight: "day" } }),
+    "chronolocate: >370d range rejected");
+  assert(await bad({ lat: 40.7, lon: -74, start, end, observed: {} }),
+    "chronolocate: empty observed rejected");
+}
+
+// ------------------------------------------------------------------ geolocate
+{
+  // Path A: analytical closed-form celestial navigation fix (NYC shadow)
+  const iso = "2026-06-21T18:00:00Z";
+  const jd = jdFromIso(iso);
+  const ana = await call("geolocate", {
+    date: iso,
+    observed: { shadow_bearing_deg: 41.7537, shadow_length_ratio: 0.3966 },
+  });
+  const anaDirect = geolocate(eng, jd, { shadowBearingDeg: 41.7537, shadowLengthRatio: 0.3966 });
+  assert(ana.method === "analytical" && anaDirect.method === "analytical",
+    "geolocate analytical: method is analytical");
+  assert(ana.candidates.length === anaDirect.candidates.length && ana.candidates.length >= 1,
+    "geolocate analytical: candidate count matches engine");
+  assert(Math.abs(ana.candidates[0].lat - 40.7128) < 0.05 && Math.abs(ana.candidates[0].lon - (-74.006)) < 0.05,
+    `geolocate analytical: recovers NYC (${ana.candidates[0].lat}, ${ana.candidates[0].lon})`);
+  assert(Math.abs(ana.candidates[0].lat - anaDirect.candidates[0].lat) < 0.001
+    && Math.abs(ana.candidates[0].lon - anaDirect.candidates[0].lon) < 0.001
+    && Math.abs(ana.subsolar.lat - anaDirect.subsolar.lat) < 0.001
+    && Math.abs(ana.sublunar.lon - anaDirect.sublunar.lon) < 0.001,
+    "geolocate analytical: coordinates and subsolar/sublunar match engine");
+
+  // Path B: spherical grid with antimeridian wrap (Fiji Sun + Moon altitude)
+  const fijiIso = "2026-06-21T02:00:00Z";
+  const fijiJd = jdFromIso(fijiIso);
+  const grid = await call("geolocate", {
+    date: fijiIso,
+    observed: {
+      sun_altitude_deg: 40.5413,
+      moon_altitude_deg: 36.2613,
+      tolerances: { sun_altitude_deg: 1.5, moon_altitude_deg: 1.5 },
+    },
+  });
+  const gridDirect = geolocate(eng, fijiJd, {
+    sunAltitudeDeg: 40.5413,
+    moonAltitudeDeg: 36.2613,
+    tolerances: { sunAltitudeDeg: 1.5, moonAltitudeDeg: 1.5 },
+  });
+  assert(grid.method === "grid" && grid.candidates.length === gridDirect.candidates.length && grid.candidates.length >= 1,
+    "geolocate grid Fiji: method and candidate count match engine");
+  assert(Math.abs(grid.candidates[0].lat - gridDirect.candidates[0].lat) < 0.001
+    && Math.abs(grid.candidates[0].lon - gridDirect.candidates[0].lon) < 0.001,
+    "geolocate grid Fiji: top candidate matches engine");
+
+  // Refusals: empty observed, inverted lat bounds
+  const bad = async (args) => (await client.callTool({ name: "geolocate", arguments: args })).isError === true;
+  assert(await bad({ date: iso, observed: {} }), "geolocate: empty observed rejected");
+  assert(await bad({ date: iso, lat_min: 30, lat_max: 10, observed: { twilight: "day" } }),
+    "geolocate: lat_min >= lat_max rejected");
 }
 
 await client.close();

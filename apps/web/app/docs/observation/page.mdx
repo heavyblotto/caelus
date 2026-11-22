@@ -1,0 +1,279 @@
+import { pageMetadata } from "../../../lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Physical Observation & Forensics",
+  description: "Compute solar and lunar scene geometry, verify photo or sensor metadata against physical lighting, and invert observations to UTC timestamps or Earth coordinates.",
+  path: "/docs/observation",
+});
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Physical observation and forensics
+
+The observation module turns ephemeris coordinates into local physical geometry at
+a point on Earth: solar and lunar azimuth and apparent altitude with barometric
+refraction, flat and sloped-ground 3D shadow vectors and sweep rates, optional
+camera-relative glare angles, lens-independent lunar bright-limb orientation,
+naked-eye planet visibility, diurnal transitions, and compact context headers.
+Four functions expose this layer: `sceneGeometry` for forward scene modeling,
+`verifyObservation` for checking claimed metadata and diagnosing discrepancies,
+`chronolocate` for finding when a set of observations held at a known location,
+and `geolocate` for inverting observations at a known timestamp to Earth
+coordinates.
+
+```ts run
+import { Engine, julianDay, sceneGeometry } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);
+const jd = julianDay(2026, 6, 21, 18, 0, 0);
+
+// New York City on the June solstice afternoon, camera aimed due south.
+const scene = sceneGeometry(engine, jd, 40.7128, -74.006, {
+  cameraAimAzDeg: 180,
+  cameraAimAltDeg: 5,
+  prevJdUt: julianDay(2026, 6, 20, 22, 48, 0),
+  deadlineJdUt: julianDay(2026, 6, 21, 18, 45, 0),
+});
+
+({
+  sunAltDeg: Number(scene.sun.altitudeApparentDeg.toFixed(2)),
+  shadowBearingDeg: Number(scene.shadow.bearingDeg.toFixed(2)),
+  shadowRatio: Number(scene.shadow.lengthRatio.toFixed(3)),
+  glareRisk: scene.lighting?.glareRisk,
+  moonClock: scene.moon.brightLimbClock,
+  chronosense: scene.chronosense.line,
+});
+```
+
+## Scene geometry and chronosense
+
+`sceneGeometry(engine, jdUt, lat, lonEast, opts)` computes a complete local
+physical snapshot at a UT Julian Day and observer location (longitude is east
+positive, so the Americas are negative):
+
+- **`sun`**: compass azimuth (`0` north, `90` east, `180` south, `270` west),
+  true and refracted apparent altitude, Kasten-Young air mass, visual
+  extinction, twilight stage (`day`, `civil`, `nautical`, `astronomical`,
+  `night`), motion trend (`rising`, `culminating`, `setting`, `nadir`), angular
+  rates per minute, and apparent angular diameter.
+- **`shadow`**: 3D ray-plane intersection of a unit vertical pole onto flat
+  ground or tilted terrain (`slopeDeg`, `slopeAzimuthDeg` pointing downhill).
+  Reports `cast`, `selfShadowed` (when the Sun illuminates the back side of the
+  slope), compass bearing, total and horizontal length ratios (`L/H`), compass
+  sweep rate (`+` clockwise, `-` counterclockwise), length rate, and penumbra
+  width.
+- **`lighting`**: populated when `cameraAimAzDeg` is provided. Reports solar
+  azimuth relative to the camera axis, screen-relative shadow angle, Sun-to-lens
+  separation, and `glareRisk` (`direct`, `high`, `moderate`, `none`).
+- **`moon`**: horizontal coordinates, illuminated fraction, phase name, waxing
+  flag, elongation, visual magnitude, zenith-frame bright-limb angle
+  (`0` right, `90` up, `180` left, `270` down) and clock label, plus moonlight
+  shadow geometry when the Moon is bright and the sky is dark.
+- **`visiblePlanets`**: classical planets above the apparent horizon with
+  magnitudes and naked-eye flags evaluated against the twilight and Bortle sky
+  limit.
+- **`diurnal` and `chronosense`**: local sunrise, solar noon, and sunset Julian
+  Days, minutes to the next horizon or civil-twilight transition, planetary
+  hour, and a compact one-line `chronosense.line` header for injecting local
+  diurnal and deadline state into agent prompts. Passing `prevJdUt` sets
+  `nightCrossed` when local astronomical night elapsed between timestamps, and
+  passing `deadlineJdUt` computes minutes remaining and `applying`, `exact`, or
+  `separating` phase.
+
+## Verifying observations and counterfactual diagnostics
+
+`verifyObservation(engine, claim, observed)` checks any subset of physical
+observables against a claimed timestamp and location. When `observed` is omitted
+or empty, it returns `verdict: "unconstrained"`, `consistencyScore: null`,
+empty `checks`, and the full `scene` object so callers can use one entry point
+for both verification and ground-truth queries.
+
+When constraints are supplied, every check reports its `status` (`consistent`,
+`marginal`, `inconsistent`, `impossible`, or `indeterminate`), residual,
+tolerance, and normalized residual:
+
+- **Automatic uncertainty widening**: `timeToleranceMin` widens angle and shadow
+  tolerances using each body's local motion rate, and `placeToleranceDeg`
+  widens geometric tolerances for approximate coordinates.
+- **Degenerate geometries**: when the Sun lies above 88 degrees altitude
+  (near-zenith conditions such as Lahaina noon), shadow bearing is marked
+  `indeterminate` rather than failing. Near full or new Moon (`illum > 0.97` or
+  `< 0.03`), `moonBrightLimbDeg` and `moonWaxing` are also marked
+  `indeterminate`.
+- **Video shadow sweep**: `shadowSweep` accepts `{ dtMinutes, deltaBearingDeg }`
+  and checks signed compass rotation over a time-lapse interval, separating
+  Northern Hemisphere clockwise sweep from Southern Hemisphere counterclockwise
+  sweep and flagging reversed footage.
+- **Counterfactual forensics**: whenever a claim evaluates to `inconsistent` or
+  `impossible`, `diagnostics` searches three alternative hypotheses and
+  summarizes the best fit: a same-day clock or timezone offset (`timeShift`,
+  capturing whole-hour and half-hour offsets such as UTC+5:30), an opposite
+  latitude sign (`hemisphereFlip`), and a seasonal date offset at the same UTC
+  clock time (`dateShift`).
+
+```ts run
+import { verifyObservation } from "caelus";
+
+// Authentic June solstice scene in New York City.
+const authentic = verifyObservation(
+  engine,
+  { jdUt: jd, lat: 40.7128, lonEast: -74.006 },
+  {
+    shadowBearingDeg: 41.75,
+    shadowLengthRatio: 0.397,
+    twilight: "day",
+    moonIllum: 0.48,
+    moonWaxing: true,
+    shadowSweep: { dtMinutes: 30, deltaBearingDeg: 13.5 },
+  },
+);
+
+// Same physical photo metadata misstamped by India's UTC+5:30 offset.
+const spoofed = verifyObservation(
+  engine,
+  { jdUt: julianDay(2026, 3, 21, 10, 0, 0), lat: 28.6139, lonEast: 77.209 },
+  { shadowBearingDeg: 302.11, shadowLengthRatio: 1.014 },
+);
+
+({
+  authenticVerdict: authentic.verdict,
+  authenticScore: Number(authentic.consistencyScore.toFixed(3)),
+  spoofedVerdict: spoofed.verdict,
+  recoveredOffsetMin: Math.round(spoofed.diagnostics.timeShift.offsetMinutes),
+  summary: spoofed.diagnostics.summary,
+});
+```
+
+## Chronolocation
+
+`chronolocate(engine, place, observed, jdStart, jdEnd, opts)` searches a UTC
+time range at a fixed location and returns every contiguous window in which all
+constraints in `observed` hold simultaneously.
+
+Before scanning intra-day steps, the solver computes analytical solar and lunar
+altitude bounds and lunar illumination bounds for each day and prunes days where
+the observations cannot occur (`daysPruned` vs. `daysScanned`). Surviving spans
+are scanned on a fast per-day interpolated cache with narrow-peak rescue, window
+edges are bisected to sub-second precision, and each window's peak timestamp
+(`bestJd`) is refined by golden-section search.
+
+```ts run
+import { chronolocate, calendarDate } from "caelus";
+
+const found = chronolocate(
+  engine,
+  { lat: 40.7128, lonEast: -74.006 },
+  {
+    shadowBearingDeg: 41.75,
+    shadowLengthRatio: 0.397,
+    moonIllum: 0.484,
+    moonWaxing: true,
+  },
+  julianDay(2026, 6, 6, 18, 0, 0),
+  julianDay(2026, 7, 6, 18, 0, 0),
+);
+
+const best = found.windows[0];
+const stamp = calendarDate(best.bestJd);
+({
+  windows: found.windows.length,
+  daysPruned: found.daysPruned,
+  bestUtc: `${stamp.year}-${String(stamp.month).padStart(2, "0")}-${String(stamp.day).padStart(2, "0")} ${stamp.hour.toFixed(2)}h`,
+  durationMin: Number(best.durationMinutes.toFixed(1)),
+  fitScore: Number(best.fitScore.toFixed(3)),
+});
+```
+
+## Geolocation
+
+`geolocate(engine, jdUt, observed, opts)` solves the dual inverse problem: given
+a known UTC timestamp and physical observations, return the subsolar and
+sublunar points plus ranked feasible locations or regions on Earth.
+
+Two solver paths are selected automatically:
+
+- **Analytical fix (`method: "analytical"`)**: when terrain is flat
+  (`slopeDeg === 0`) and the input supplies both solar direction
+  (`sunAzimuthDeg` or `shadowBearingDeg`) and solar elevation
+  (`sunAltitudeDeg` or `shadowLengthRatio`), `geolocate` inverts atmospheric
+  refraction, solves the closed-form spherical celestial navigation roots,
+  refines each root with damped Gauss-Newton iterations, and computes a Jacobian
+  uncertainty `radiusKm` alongside `latRange` and `lonRange`.
+- **Global spherical grid (`method: "grid"`)**: for all other observable
+  combinations (such as Sun and Moon double altitude, shadow bearing combined
+  with lunar bright-limb tilt, twilight plus visible planets, or sloped ground),
+  equatorial coordinates and Greenwich apparent sidereal time are evaluated once
+  at `jdUt`, a global spherical grid is swept in pure trigonometry, connected
+  components are clustered across the antimeridian (`±180°` longitude), peaks
+  are refined locally, and each region is classified as `point`, `arc`, or
+  `band`.
+
+```ts run
+import { geolocate } from "caelus";
+
+// Path A: closed-form analytical fix from a flat-ground shadow.
+const fix = geolocate(engine, jd, {
+  shadowBearingDeg: 41.7537,
+  shadowLengthRatio: 0.3966,
+});
+
+// Path B: global grid search from Sun and Moon altitudes near Fiji.
+const pacific = geolocate(engine, julianDay(2026, 6, 21, 2, 0, 0), {
+  sunAltitudeDeg: 40.54,
+  moonAltitudeDeg: 36.26,
+  tolerances: { sunAltitudeDeg: 1.5, moonAltitudeDeg: 1.5 },
+});
+
+({
+  analyticalMethod: fix.method,
+  nycFix: [Number(fix.candidates[0].lat.toFixed(3)), Number(fix.candidates[0].lon.toFixed(3))],
+  nycRadiusKm: Math.round(fix.candidates[0].radiusKm),
+  gridMethod: pacific.method,
+  fijiCandidate: [Number(pacific.candidates[0].lat.toFixed(2)), Number(pacific.candidates[0].lon.toFixed(2))],
+});
+```
+
+## Through the MCP server
+
+The `caelus-mcp` server exposes three corresponding tools over both stdio and
+the hosted Streamable HTTP endpoint (`/api/mcp`):
+
+- **`verify_observation`**: accepts `date` (UTC ISO, defaults to now), `lat`,
+  `lon`, optional terrain, uncertainty, camera, and deadline fields, and an
+  optional `observed` constraint object in snake_case. Calling it without
+  `observed` returns the unconstrained ground-truth `scene` and `chronosense`
+  header.
+- **`chronolocate`**: accepts `lat`, `lon`, `start`, `end` (UTC ISO, up to 370
+  days), `observed`, and optional terrain and step parameters, returning
+  matching UTC windows with fit scores and pruning counts.
+- **`geolocate`**: accepts `date` (UTC ISO), `observed`, and optional search
+  bounds (`lat_min`, `lat_max`, `lon_min`, `lon_max`), returning `method`,
+  `subsolar` and `sublunar` coordinates, and ranked candidate regions.
+
+All three tools live inside `caelus-mcp/core` with zero Node dependencies so
+they run identically in Node, browsers, and Cloudflare Workers.
+
+## Validation and limits
+
+- **Python and TypeScript parity**: `packages/caelus/test/observe-golden.test.ts`
+  verifies 28 cases (1,927 individual field checks across mid-latitude,
+  equatorial, polar midnight sun, polar night, sloped terrain, chronolocation,
+  and analytical and grid geolocation) against `python/astroengine/observe.py`
+  with a worst numerical difference of `6.71e-7`.
+- **Empirical spoof benchmark**: `packages/caelus/test/observe.test.ts` tests
+  120 global scenarios (60 authentic scenes with realistic measurement noise and
+  60 spoofed scenes covering whole-hour and half-hour timezone shifts,
+  hemisphere flips, seasonal date shifts, impossible night shadows or lunar
+  visibility, and reversed video shadow sweeps). All 120 classify cleanly
+  (precision `1.000`, recall `1.000`, `0` false-impossible verdicts on authentic
+  scenes, and `40/40` counterfactual diagnostic recoveries).
+- **Terrain and atmosphere limits**: sloped shadows model a single planar tilt
+  at the observer rather than a digital elevation model or surrounding mountain
+  ridges. Refraction uses a standard exponential barometric pressure profile
+  from `elevationM` without local temperature inversions, which matters mainly
+  within two degrees of the horizon.
+- **Measurement uncertainty**: photograph lens distortion, non-vertical poles,
+  compass magnetic declination (all bearings in Caelus are relative to true
+  north), and cloud diffusion introduce real-world error. Supply realistic
+  per-field `tolerances` or `timeToleranceMin` when evaluating noisy imagery.

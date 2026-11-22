@@ -3,7 +3,7 @@
  * dependency on Node.
  *
  * Design (per 2026 MCP practice): one bounded context (chart computation),
- * a small curated tool surface (38 chart tools, not API wrappers),
+ * a small curated tool surface (41 chart tools, not API wrappers),
  * and token-frugal outputs (positions to 0.01 deg, terse keys, no prose --
  * the model does the interpreting, the server does the math).
  *
@@ -48,8 +48,12 @@ import {
   canonicalChart, canonicalDigest, canonicalTimeMs, quantizeUnit,
   canonicalChartWithRemainders,
   dateSky, calendarDate, validatedSpanFor, chartStability, heliacal, localDay,
+  verifyObservation, chronolocate, geolocate,
   type SyntheticSystem, type CanonicalGrid, type RemainderGrid,
   type SkyConstraint, type HeliacalKind,
+  type ObservedConstraints, type ObservationTolerances,
+  type ObservationVerification, type ChronolocateResult, type GeolocateResult,
+  type SceneGeometry,
 } from "caelus";
 
 /** Ephemeral engine for synthetic registration (does not mutate the default). */
@@ -872,6 +876,481 @@ export const skyViewOut = z.object({
   directives: z.array(z.string()),
   prompt: z.string(),
 });
+
+// ------------------------------------------------ observation / forensics I/O
+const rN = (x: number, scale: number) => {
+  const v = Math.round(x * scale) / scale;
+  return v === 0 ? 0 : v;
+};
+const r2Safe = (x: number) => rN(x, 100);
+const r3Safe = (x: number) => rN(x, 1000);
+const r4Safe = (x: number) => rN(x, 10000);
+const r5Safe = (x: number) => rN(x, 100000);
+
+const twilightObsEnum = z.enum([
+  "day", "civil", "nautical", "astronomical", "night", "daylight", "dark",
+]);
+const visibleBodyEnum = z.enum([
+  "sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune",
+]);
+const observationTolerancesIn = z.object({
+  shadow_bearing_deg: z.number().positive().optional().describe("Shadow bearing tolerance in degrees (default 10)"),
+  shadow_length_ratio: z.number().positive().optional().describe("Override total shadow length ratio tolerance"),
+  shadow_length_ratio_rel: z.number().positive().optional().describe("Relative shadow length ratio tolerance (default 0.15)"),
+  shadow_length_ratio_abs: z.number().positive().optional().describe("Absolute shadow length ratio tolerance floor (default 0.08)"),
+  sun_azimuth_deg: z.number().positive().optional().describe("Sun azimuth tolerance in degrees (default 8)"),
+  sun_altitude_deg: z.number().positive().optional().describe("Sun altitude tolerance in degrees (default 5)"),
+  moon_azimuth_deg: z.number().positive().optional().describe("Moon azimuth tolerance in degrees (default 10)"),
+  moon_altitude_deg: z.number().positive().optional().describe("Moon altitude tolerance in degrees (default 6)"),
+  moon_illum: z.number().positive().optional().describe("Moon illuminated fraction tolerance (default 0.12)"),
+  moon_bright_limb_deg: z.number().positive().optional().describe("Moon bright-limb zenith angle tolerance in degrees (default 18)"),
+  shadow_sweep_deg: z.number().positive().optional().describe("Shadow sweep angle tolerance in degrees (default 5)"),
+});
+const shadowSweepIn = z.object({
+  dt_minutes: z.number().positive().describe("Elapsed time interval in minutes (> 0)"),
+  delta_bearing_deg: z.number().describe("Signed compass change of shadow bearing over dt_minutes (+ clockwise, - counterclockwise)"),
+  tolerance_deg: z.number().positive().optional().describe("Sweep tolerance in degrees (default 5)"),
+});
+const observedConstraintsIn = z.object({
+  shadow_bearing_deg: z.number().optional().describe("Compass bearing shadow points toward, degrees clockwise from true north (0=N, 90=E, 180=S, 270=W)"),
+  shadow_length_ratio: z.number().nonnegative().optional().describe("Shadow length divided by vertical object height (L/H, >= 0)"),
+  sun_azimuth_deg: z.number().optional().describe("Observed solar compass azimuth, degrees clockwise from true north"),
+  sun_altitude_deg: z.number().min(-90).max(90).optional().describe("Observed apparent solar altitude above horizon in degrees"),
+  twilight: twilightObsEnum.optional().describe("Lighting regime: day, civil, nautical, astronomical, night, daylight (day or civil), or dark (nautical through night)"),
+  sun_visible: z.boolean().optional().describe("Whether the Sun is visible above the horizon"),
+  moon_visible: z.boolean().optional().describe("Whether the Moon is visible above the horizon"),
+  moon_azimuth_deg: z.number().optional().describe("Observed lunar compass azimuth, degrees clockwise from true north"),
+  moon_altitude_deg: z.number().min(-90).max(90).optional().describe("Observed apparent lunar altitude above horizon in degrees"),
+  moon_illum: z.number().min(0).max(1).optional().describe("Observed lunar illuminated fraction in [0, 1]"),
+  moon_waxing: z.boolean().optional().describe("Whether the Moon is waxing (true) or waning (false)"),
+  moon_bright_limb_deg: z.number().optional().describe("Zenith-frame bright-limb angle in degrees (0=right, 90=up, 180=left, 270=down)"),
+  bodies_visible: z.array(visibleBodyEnum).optional().describe("Celestial bodies reported visible in the scene"),
+  shadow_sweep: shadowSweepIn.optional().describe("Observed shadow rotation over a video or time-lapse interval"),
+  tolerances: observationTolerancesIn.optional().describe("Optional per-field measurement tolerance overrides"),
+});
+type ObservedConstraintsInput = z.infer<typeof observedConstraintsIn>;
+
+function toObservedConstraints(input?: ObservedConstraintsInput): ObservedConstraints | undefined {
+  if (!input) return undefined;
+  const out: ObservedConstraints = {};
+  if (input.shadow_bearing_deg !== undefined) out.shadowBearingDeg = input.shadow_bearing_deg;
+  if (input.shadow_length_ratio !== undefined) out.shadowLengthRatio = input.shadow_length_ratio;
+  if (input.sun_azimuth_deg !== undefined) out.sunAzimuthDeg = input.sun_azimuth_deg;
+  if (input.sun_altitude_deg !== undefined) out.sunAltitudeDeg = input.sun_altitude_deg;
+  if (input.twilight !== undefined) out.twilight = input.twilight;
+  if (input.sun_visible !== undefined) out.sunVisible = input.sun_visible;
+  if (input.moon_visible !== undefined) out.moonVisible = input.moon_visible;
+  if (input.moon_azimuth_deg !== undefined) out.moonAzimuthDeg = input.moon_azimuth_deg;
+  if (input.moon_altitude_deg !== undefined) out.moonAltitudeDeg = input.moon_altitude_deg;
+  if (input.moon_illum !== undefined) out.moonIllum = input.moon_illum;
+  if (input.moon_waxing !== undefined) out.moonWaxing = input.moon_waxing;
+  if (input.moon_bright_limb_deg !== undefined) out.moonBrightLimbDeg = input.moon_bright_limb_deg;
+  if (input.bodies_visible !== undefined) out.bodiesVisible = input.bodies_visible;
+  if (input.shadow_sweep !== undefined) {
+    out.shadowSweep = {
+      dtMinutes: input.shadow_sweep.dt_minutes,
+      deltaBearingDeg: input.shadow_sweep.delta_bearing_deg,
+      ...(input.shadow_sweep.tolerance_deg !== undefined ? { toleranceDeg: input.shadow_sweep.tolerance_deg } : {}),
+    };
+  }
+  if (input.tolerances !== undefined) {
+    const t: ObservationTolerances = {};
+    const ti = input.tolerances;
+    if (ti.shadow_bearing_deg !== undefined) t.shadowBearingDeg = ti.shadow_bearing_deg;
+    if (ti.shadow_length_ratio !== undefined) t.shadowLengthRatio = ti.shadow_length_ratio;
+    if (ti.shadow_length_ratio_rel !== undefined) t.shadowLengthRatioRel = ti.shadow_length_ratio_rel;
+    if (ti.shadow_length_ratio_abs !== undefined) t.shadowLengthRatioAbs = ti.shadow_length_ratio_abs;
+    if (ti.sun_azimuth_deg !== undefined) t.sunAzimuthDeg = ti.sun_azimuth_deg;
+    if (ti.sun_altitude_deg !== undefined) t.sunAltitudeDeg = ti.sun_altitude_deg;
+    if (ti.moon_azimuth_deg !== undefined) t.moonAzimuthDeg = ti.moon_azimuth_deg;
+    if (ti.moon_altitude_deg !== undefined) t.moonAltitudeDeg = ti.moon_altitude_deg;
+    if (ti.moon_illum !== undefined) t.moonIllum = ti.moon_illum;
+    if (ti.moon_bright_limb_deg !== undefined) t.moonBrightLimbDeg = ti.moon_bright_limb_deg;
+    if (ti.shadow_sweep_deg !== undefined) t.shadowSweepDeg = ti.shadow_sweep_deg;
+    out.tolerances = t;
+  }
+  return out;
+}
+
+const CHECK_FIELD_MAP: Record<string, string> = {
+  shadowBearingDeg: "shadow_bearing_deg",
+  shadowLengthRatio: "shadow_length_ratio",
+  sunAzimuthDeg: "sun_azimuth_deg",
+  sunAltitudeDeg: "sun_altitude_deg",
+  twilight: "twilight",
+  sunVisible: "sun_visible",
+  moonVisible: "moon_visible",
+  moonAzimuthDeg: "moon_azimuth_deg",
+  moonAltitudeDeg: "moon_altitude_deg",
+  moonIllum: "moon_illum",
+  moonWaxing: "moon_waxing",
+  moonBrightLimbDeg: "moon_bright_limb_deg",
+  shadowSweep: "shadow_sweep",
+};
+
+function checkFieldToSnake(field: string): string {
+  if (field.startsWith("bodyVisible:")) return `body_visible:${field.slice("bodyVisible:".length)}`;
+  return CHECK_FIELD_MAP[field] ?? field;
+}
+
+const observationVerdictEnum = z.enum([
+  "consistent", "marginal", "inconsistent", "impossible", "unconstrained",
+]);
+const checkStatusEnum = z.enum([
+  "consistent", "marginal", "inconsistent", "impossible", "indeterminate",
+]);
+const sceneGeometryOut = z.object({
+  utc: z.string(),
+  jd_ut: z.number(),
+  lat: z.number(),
+  lon: z.number(),
+  elevation_m: z.number(),
+  sun: z.object({
+    azimuth_deg: z.number(),
+    compass16: z.string(),
+    altitude_true_deg: z.number(),
+    altitude_apparent_deg: z.number(),
+    airmass: z.number(),
+    extinction_mag: z.number(),
+    twilight_stage: z.enum(["day", "civil", "nautical", "astronomical", "night"]),
+    is_day: z.boolean(),
+    trend: z.enum(["rising", "culminating", "setting", "nadir"]),
+    rate_alt_deg_per_min: z.number(),
+    rate_az_deg_per_min: z.number(),
+    angular_diameter_deg: z.number(),
+  }),
+  shadow: z.object({
+    cast: z.boolean(),
+    self_shadowed: z.boolean(),
+    bearing_deg: z.number().nullable(),
+    compass16: z.string().nullable(),
+    length_ratio: z.number().nullable(),
+    horizontal_length_ratio: z.number().nullable(),
+    rate_bearing_deg_per_min: z.number().nullable(),
+    rate_length_ratio_per_min: z.number().nullable(),
+    penumbra_deg: z.number().nullable(),
+    slope_deg: z.number(),
+    slope_azimuth_deg: z.number(),
+  }),
+  lighting: z.object({
+    camera_aim_az_deg: z.number(),
+    camera_aim_alt_deg: z.number(),
+    sun_relative_az_deg: z.number(),
+    shadow_screen_az_deg: z.number().nullable(),
+    sun_camera_angle_deg: z.number(),
+    glare_risk: z.enum(["direct", "high", "moderate", "none"]),
+  }).nullable(),
+  moon: z.object({
+    visible: z.boolean(),
+    azimuth_deg: z.number(),
+    compass16: z.string(),
+    altitude_true_deg: z.number(),
+    altitude_apparent_deg: z.number(),
+    illum: z.number(),
+    phase_name: z.string(),
+    waxing: z.boolean(),
+    elongation_deg: z.number(),
+    magnitude: z.number(),
+    bright_limb_zenith_deg: z.number().nullable(),
+    bright_limb_clock: z.string().nullable(),
+    shadow_cast: z.boolean(),
+    shadow_bearing_deg: z.number().nullable(),
+    shadow_length_ratio: z.number().nullable(),
+  }),
+  visible_planets: z.array(z.object({
+    id: z.string(),
+    azimuth_deg: z.number(),
+    compass16: z.string(),
+    altitude_apparent_deg: z.number(),
+    magnitude: z.number(),
+    naked_eye: z.boolean(),
+  })),
+  diurnal: z.object({
+    sunrise_utc: z.string().nullable(),
+    solar_noon_utc: z.string().nullable(),
+    sunset_utc: z.string().nullable(),
+    minutes_to_next_twilight: z.number().nullable(),
+    next_transition_kind: z.enum(["sunrise", "sunset", "civil_dawn", "civil_dusk"]).nullable(),
+    planetary_hour: z.object({
+      n: z.number().int().min(1).max(24),
+      kind: z.enum(["day", "night"]),
+      ruler: z.string(),
+      day_ruler: z.string(),
+      start_utc: z.string(),
+      end_utc: z.string(),
+    }).nullable(),
+  }),
+  chronosense: z.object({
+    moon_lon_deg: z.number(),
+    asc_deg: z.number(),
+    night_crossed: z.boolean(),
+    deadline: z.object({
+      minutes_remaining: z.number(),
+      phase: z.enum(["applying", "exact", "separating"]),
+    }).nullable(),
+    line: z.string(),
+  }),
+});
+
+export const verifyObservationOut = z.object({
+  verdict: observationVerdictEnum,
+  consistency_score: z.number().nullable(),
+  checks: z.array(z.object({
+    field: z.string(),
+    status: checkStatusEnum,
+    observed: z.union([z.number(), z.string(), z.boolean(), z.null()]),
+    expected: z.union([z.number(), z.string(), z.boolean(), z.null()]),
+    residual: z.number().nullable(),
+    tolerance: z.number().nullable(),
+    normalized_residual: z.number().nullable(),
+    note: z.string().nullable(),
+  })),
+  scene: sceneGeometryOut,
+  diagnostics: z.object({
+    time_shift: z.object({
+      utc: z.string(),
+      offset_minutes: z.number(),
+      nearest_whole_hour_offset: z.number(),
+      fit_score: z.number(),
+      verdict: observationVerdictEnum,
+    }),
+    hemisphere_flip: z.object({
+      lat: z.number(),
+      lon: z.number(),
+      fit_score: z.number(),
+      verdict: observationVerdictEnum,
+    }),
+    date_shift: z.object({
+      utc: z.string(),
+      offset_days: z.number(),
+      fit_score: z.number(),
+      verdict: observationVerdictEnum,
+    }).nullable(),
+    summary: z.string(),
+  }).nullable(),
+});
+
+export const chronolocateOut = z.object({
+  place: z.object({
+    lat: z.number(),
+    lon: z.number(),
+    elevation_m: z.number(),
+    slope_deg: z.number(),
+    slope_azimuth_deg: z.number(),
+  }),
+  start_utc: z.string(),
+  end_utc: z.string(),
+  days_scanned: z.number().int(),
+  days_pruned: z.number().int(),
+  truncated: z.boolean(),
+  windows: z.array(z.object({
+    start_utc: z.string(),
+    end_utc: z.string(),
+    best_utc: z.string(),
+    duration_minutes: z.number(),
+    fit_score: z.number(),
+    max_normalized_residual: z.number(),
+  })),
+});
+
+export const geolocateOut = z.object({
+  utc: z.string(),
+  jd_ut: z.number(),
+  method: z.enum(["analytical", "grid"]),
+  subsolar: z.object({ lat: z.number(), lon: z.number() }),
+  sublunar: z.object({ lat: z.number(), lon: z.number() }),
+  candidates: z.array(z.object({
+    lat: z.number(),
+    lon: z.number(),
+    fit_score: z.number(),
+    max_normalized_residual: z.number(),
+    radius_km: z.number(),
+    lat_range: z.tuple([z.number(), z.number()]),
+    lon_range: z.tuple([z.number(), z.number()]),
+    region_kind: z.enum(["point", "arc", "band"]),
+  })),
+});
+
+function formatScene(s: SceneGeometry): z.infer<typeof sceneGeometryOut> {
+  return {
+    utc: isoFromJd(s.jdUt),
+    jd_ut: r5Safe(s.jdUt),
+    lat: s.lat,
+    lon: s.lonEast,
+    elevation_m: s.elevationM,
+    sun: {
+      azimuth_deg: r2Safe(s.sun.azimuthDeg),
+      compass16: s.sun.compass16,
+      altitude_true_deg: r2Safe(s.sun.altitudeTrueDeg),
+      altitude_apparent_deg: r2Safe(s.sun.altitudeApparentDeg),
+      airmass: r3Safe(s.sun.airmass),
+      extinction_mag: r3Safe(s.sun.extinctionMag),
+      twilight_stage: s.sun.twilightStage,
+      is_day: s.sun.isDay,
+      trend: s.sun.trend,
+      rate_alt_deg_per_min: r4Safe(s.sun.rateAltDegPerMin),
+      rate_az_deg_per_min: r4Safe(s.sun.rateAzDegPerMin),
+      angular_diameter_deg: r3Safe(s.sun.angularDiameterDeg),
+    },
+    shadow: {
+      cast: s.shadow.cast,
+      self_shadowed: s.shadow.selfShadowed,
+      bearing_deg: s.shadow.bearingDeg === null ? null : r2Safe(s.shadow.bearingDeg),
+      compass16: s.shadow.compass16,
+      length_ratio: s.shadow.lengthRatio === null ? null : r3Safe(s.shadow.lengthRatio),
+      horizontal_length_ratio: s.shadow.horizontalLengthRatio === null ? null : r3Safe(s.shadow.horizontalLengthRatio),
+      rate_bearing_deg_per_min: s.shadow.rateBearingDegPerMin === null ? null : r4Safe(s.shadow.rateBearingDegPerMin),
+      rate_length_ratio_per_min: s.shadow.rateLengthRatioPerMin === null ? null : r4Safe(s.shadow.rateLengthRatioPerMin),
+      penumbra_deg: s.shadow.penumbraDeg === null ? null : r3Safe(s.shadow.penumbraDeg),
+      slope_deg: s.shadow.slopeDeg,
+      slope_azimuth_deg: s.shadow.slopeAzimuthDeg,
+    },
+    lighting: s.lighting === null ? null : {
+      camera_aim_az_deg: r2Safe(s.lighting.cameraAimAzDeg),
+      camera_aim_alt_deg: r2Safe(s.lighting.cameraAimAltDeg),
+      sun_relative_az_deg: r2Safe(s.lighting.sunRelativeAzDeg),
+      shadow_screen_az_deg: s.lighting.shadowScreenAzDeg === null ? null : r2Safe(s.lighting.shadowScreenAzDeg),
+      sun_camera_angle_deg: r2Safe(s.lighting.sunCameraAngleDeg),
+      glare_risk: s.lighting.glareRisk,
+    },
+    moon: {
+      visible: s.moon.visible,
+      azimuth_deg: r2Safe(s.moon.azimuthDeg),
+      compass16: s.moon.compass16,
+      altitude_true_deg: r2Safe(s.moon.altitudeTrueDeg),
+      altitude_apparent_deg: r2Safe(s.moon.altitudeApparentDeg),
+      illum: r4Safe(s.moon.illum),
+      phase_name: s.moon.phaseName,
+      waxing: s.moon.waxing,
+      elongation_deg: r2Safe(s.moon.elongationDeg),
+      magnitude: r2Safe(s.moon.magnitude),
+      bright_limb_zenith_deg: s.moon.brightLimbZenithDeg === null ? null : r2Safe(s.moon.brightLimbZenithDeg),
+      bright_limb_clock: s.moon.brightLimbClock,
+      shadow_cast: s.moon.shadowCast,
+      shadow_bearing_deg: s.moon.shadowBearingDeg === null ? null : r2Safe(s.moon.shadowBearingDeg),
+      shadow_length_ratio: s.moon.shadowLengthRatio === null ? null : r3Safe(s.moon.shadowLengthRatio),
+    },
+    visible_planets: s.visiblePlanets.map((p) => ({
+      id: p.id,
+      azimuth_deg: r2Safe(p.azimuthDeg),
+      compass16: p.compass16,
+      altitude_apparent_deg: r2Safe(p.altitudeApparentDeg),
+      magnitude: r2Safe(p.magnitude),
+      naked_eye: p.nakedEye,
+    })),
+    diurnal: {
+      sunrise_utc: s.diurnal.sunriseJd === null ? null : isoFromJd(s.diurnal.sunriseJd),
+      solar_noon_utc: s.diurnal.solarNoonJd === null ? null : isoFromJd(s.diurnal.solarNoonJd),
+      sunset_utc: s.diurnal.sunsetJd === null ? null : isoFromJd(s.diurnal.sunsetJd),
+      minutes_to_next_twilight: s.diurnal.minutesToNextTwilight === null ? null : r2Safe(s.diurnal.minutesToNextTwilight),
+      next_transition_kind: s.diurnal.nextTransitionKind,
+      planetary_hour: s.diurnal.planetaryHour === null ? null : {
+        n: s.diurnal.planetaryHour.hour,
+        kind: s.diurnal.planetaryHour.kind,
+        ruler: s.diurnal.planetaryHour.ruler,
+        day_ruler: s.diurnal.planetaryHour.dayRuler,
+        start_utc: isoFromJd(s.diurnal.planetaryHour.start),
+        end_utc: isoFromJd(s.diurnal.planetaryHour.end),
+      },
+    },
+    chronosense: {
+      moon_lon_deg: r2Safe(s.chronosense.moonLonDeg),
+      asc_deg: r2Safe(s.chronosense.ascDeg),
+      night_crossed: s.chronosense.nightCrossed,
+      deadline: s.chronosense.deadline === null ? null : {
+        minutes_remaining: r2Safe(s.chronosense.deadline.minutesRemaining),
+        phase: s.chronosense.deadline.phase,
+      },
+      line: s.chronosense.line,
+    },
+  };
+}
+
+function formatVerification(res: ObservationVerification): z.infer<typeof verifyObservationOut> {
+  return {
+    verdict: res.verdict,
+    consistency_score: res.consistencyScore === null ? null : r4Safe(res.consistencyScore),
+    checks: res.checks.map((ch) => ({
+      field: checkFieldToSnake(ch.field),
+      status: ch.status,
+      observed: typeof ch.observed === "number" ? r4Safe(ch.observed) : ch.observed,
+      expected: typeof ch.expected === "number" ? r4Safe(ch.expected) : ch.expected,
+      residual: ch.residual === null ? null : r4Safe(ch.residual),
+      tolerance: ch.tolerance === null ? null : r4Safe(ch.tolerance),
+      normalized_residual: ch.normalizedResidual === null ? null : r4Safe(ch.normalizedResidual),
+      note: ch.note,
+    })),
+    scene: formatScene(res.scene),
+    diagnostics: res.diagnostics === null ? null : {
+      time_shift: {
+        utc: isoFromJd(res.diagnostics.timeShift.jdUt),
+        offset_minutes: r2Safe(res.diagnostics.timeShift.offsetMinutes),
+        nearest_whole_hour_offset: res.diagnostics.timeShift.nearestWholeHourOffset,
+        fit_score: r4Safe(res.diagnostics.timeShift.fitScore),
+        verdict: res.diagnostics.timeShift.verdict,
+      },
+      hemisphere_flip: {
+        lat: r4Safe(res.diagnostics.hemisphereFlip.lat),
+        lon: r4Safe(res.diagnostics.hemisphereFlip.lonEast),
+        fit_score: r4Safe(res.diagnostics.hemisphereFlip.fitScore),
+        verdict: res.diagnostics.hemisphereFlip.verdict,
+      },
+      date_shift: res.diagnostics.dateShift === null ? null : {
+        utc: isoFromJd(res.diagnostics.dateShift.jdUt),
+        offset_days: res.diagnostics.dateShift.offsetDays,
+        fit_score: r4Safe(res.diagnostics.dateShift.fitScore),
+        verdict: res.diagnostics.dateShift.verdict,
+      },
+      summary: res.diagnostics.summary,
+    },
+  };
+}
+
+function formatChronolocate(res: ChronolocateResult): z.infer<typeof chronolocateOut> {
+  return {
+    place: {
+      lat: res.place.lat,
+      lon: res.place.lonEast,
+      elevation_m: res.place.elevationM,
+      slope_deg: res.place.slopeDeg,
+      slope_azimuth_deg: res.place.slopeAzimuthDeg,
+    },
+    start_utc: isoFromJd(res.jdStart),
+    end_utc: isoFromJd(res.jdEnd),
+    days_scanned: res.daysScanned,
+    days_pruned: res.daysPruned,
+    truncated: res.truncated,
+    windows: res.windows.map((w) => ({
+      start_utc: isoFromJd(w.jdStart),
+      end_utc: isoFromJd(w.jdEnd),
+      best_utc: isoFromJd(w.bestJd),
+      duration_minutes: r2Safe(w.durationMinutes),
+      fit_score: r4Safe(w.fitScore),
+      max_normalized_residual: r4Safe(w.maxNormalizedResidual),
+    })),
+  };
+}
+
+function formatGeolocate(res: GeolocateResult): z.infer<typeof geolocateOut> {
+  return {
+    utc: isoFromJd(res.jdUt),
+    jd_ut: r5Safe(res.jdUt),
+    method: res.method,
+    subsolar: { lat: r4Safe(res.subsolar.lat), lon: r4Safe(res.subsolar.lon) },
+    sublunar: { lat: r4Safe(res.sublunar.lat), lon: r4Safe(res.sublunar.lon) },
+    candidates: res.candidates.map((c) => ({
+      lat: r4Safe(c.lat),
+      lon: r4Safe(c.lon),
+      fit_score: r4Safe(c.fitScore),
+      max_normalized_residual: r4Safe(c.maxNormalizedResidual),
+      radius_km: r2Safe(c.radiusKm),
+      lat_range: [r4Safe(c.latRange[0]), r4Safe(c.latRange[1])],
+      lon_range: [r4Safe(c.lonRange[0]), r4Safe(c.lonRange[1])],
+      region_kind: c.regionKind,
+    })),
+  };
+}
+
 export const OUTPUT_SCHEMAS = {
   natal_chart: chartOut,
   current_sky: chartOut,
@@ -922,6 +1401,9 @@ export const OUTPUT_SCHEMAS = {
   date_sky: dateSkyOut,
   chart_stability: chartStabilityOut,
   heliacal: heliacalOut,
+  verify_observation: verifyObservationOut,
+  chronolocate: chronolocateOut,
+  geolocate: geolocateOut,
 } as const;
 
 // ---------------------------------------------------------------- server
@@ -2524,6 +3006,147 @@ export function buildServer(
       events,
       not_found: notFound,
     });
+  });
+
+  server.registerTool("verify_observation", {
+    description:
+      "Verify physical observations (solar shadows, Sun/Moon azimuth and altitude, twilight regime, lunar illumination, waxing/waning phase, zenith-frame bright-limb angle, naked-eye planets, or video shadow sweep) against a claimed UTC timestamp and Earth location, or omit `observed` to query the full physical ground-truth scene (Sun, flat/sloped-ground 3D shadows, optional camera lighting and glare risk, Moon geometry and moonlight shadows, visible planets, diurnal sunrise/noon/sunset/twilight transitions, and compact chronosense context header). When `observed` is supplied, returns a verdict (`consistent`, `marginal`, `inconsistent`, `impossible`), consistency score, per-constraint residuals with automatic widening for `time_tolerance_min` and `place_tolerance_deg`, indeterminate handling for near-zenith shadows and full/new Moon bright limb, and counterfactual forensics (`time_shift`, `hemisphere_flip`, `date_shift`) whenever a claim fails. When `observed` is omitted, returns `verdict: 'unconstrained'` with the full physical `scene` and `chronosense`.",
+    inputSchema: {
+      date: z.string().optional().describe("Claimed UTC ISO date-time (convert from local first); omit for now"),
+      lat: latSchema,
+      lon: lonSchema,
+      elevation_m: z.number().min(-500).max(50000).default(0)
+        .describe("Observer elevation above sea level in meters (adjusts barometric refraction and horizon dip; default 0)"),
+      slope_deg: z.number().min(0).lt(90).default(0)
+        .describe("Local terrain slope angle in degrees from horizontal (0..90; default 0 for flat ground)"),
+      slope_azimuth_deg: z.number().default(0)
+        .describe("Downhill compass azimuth of sloped terrain in degrees clockwise from true north (default 0)"),
+      time_tolerance_min: z.number().nonnegative().default(0)
+        .describe("Claimed timestamp uncertainty half-width in minutes; widens check tolerances by body motion rates (default 0)"),
+      place_tolerance_deg: z.number().nonnegative().default(0)
+        .describe("Claimed location uncertainty radius in degrees; widens geometric tolerances (default 0)"),
+      bortle: z.number().int().min(1).max(9).optional()
+        .describe("Dark-sky class 1 (pristine) to 9 (inner city) for naked-eye planet visibility thresholds"),
+      camera_aim_az_deg: z.number().optional()
+        .describe("Optional camera compass azimuth in degrees clockwise from true north; enables camera-relative lighting and glare risk"),
+      camera_aim_alt_deg: z.number().min(-90).max(90).default(0)
+        .describe("Camera pitch angle in degrees above horizon (default 0)"),
+      prev_date: z.string().optional()
+        .describe("Optional previous UTC ISO timestamp; sets chronosense.night_crossed if local astronomical night elapsed since then"),
+      deadline_date: z.string().optional()
+        .describe("Optional target deadline UTC ISO timestamp; populates chronosense.deadline with remaining minutes and phase"),
+      observed: observedConstraintsIn.optional()
+        .describe("Physical observations to verify against the claimed spacetime point. Omit for pure physical ground truth and chronosense"),
+    },
+  }, async ({
+    date, lat, lon, elevation_m, slope_deg, slope_azimuth_deg,
+    time_tolerance_min, place_tolerance_deg, bortle,
+    camera_aim_az_deg, camera_aim_alt_deg, prev_date, deadline_date, observed,
+  }) => {
+    const jdUt = jdFromIso(date ?? new Date().toISOString());
+    const prevJdUt = prev_date !== undefined ? jdFromIso(prev_date) : undefined;
+    const deadlineJdUt = deadline_date !== undefined ? jdFromIso(deadline_date) : undefined;
+    const res = verifyObservation(engine, {
+      jdUt,
+      lat,
+      lonEast: lon,
+      elevationM: elevation_m,
+      slopeDeg: slope_deg,
+      slopeAzimuthDeg: slope_azimuth_deg,
+      timeToleranceMin: time_tolerance_min,
+      placeToleranceDeg: place_tolerance_deg,
+      bortle,
+      cameraAimAzDeg: camera_aim_az_deg,
+      cameraAimAltDeg: camera_aim_alt_deg,
+      prevJdUt,
+      deadlineJdUt,
+    }, toObservedConstraints(observed));
+    return text(formatVerification(res));
+  });
+
+  server.registerTool("chronolocate", {
+    description:
+      "Find every UTC time window within a date range at a known location where a set of physical observations (shadows, solar or lunar azimuth/altitude, twilight, Moon illumination/waxing/bright-limb angle, visible planets, or shadow sweep) held simultaneously. Prunes impossible days analytically from solar and lunar declinations and phase, refines matching window edges to sub-second accuracy, and returns peak timestamps and fit scores. Use this to recover when a photo, video, or log entry was captured at a known place. Range <= 370 days.",
+    inputSchema: {
+      lat: latSchema,
+      lon: lonSchema,
+      start: z.string().describe("UTC ISO start date-time of search range (convert from local first)"),
+      end: z.string().describe("UTC ISO end date-time of search range (convert from local first); range <= 370 days"),
+      observed: observedConstraintsIn.describe("Physical observations that must hold simultaneously (at least one constraint required)"),
+      elevation_m: z.number().min(-500).max(50000).default(0)
+        .describe("Observer elevation above sea level in meters (default 0)"),
+      slope_deg: z.number().min(0).lt(90).default(0)
+        .describe("Local terrain slope angle in degrees from horizontal (0..90; default 0)"),
+      slope_azimuth_deg: z.number().default(0)
+        .describe("Downhill compass azimuth of sloped terrain in degrees clockwise from true north (default 0)"),
+      bortle: z.number().int().min(1).max(9).optional()
+        .describe("Dark-sky class 1-9 for naked-eye planet visibility thresholds"),
+      step_minutes: z.number().min(1).max(120).default(10)
+        .describe("Coarse intra-day scan step in minutes (default 10)"),
+      max_windows: z.number().int().min(1).max(200).default(64)
+        .describe("Maximum number of matching windows to return (default 64)"),
+    },
+  }, async ({
+    lat, lon, start, end, observed,
+    elevation_m, slope_deg, slope_azimuth_deg, bortle, step_minutes, max_windows,
+  }) => {
+    const jdStart = jdFromIso(start);
+    const jdEnd = jdFromIso(end);
+    if (jdEnd <= jdStart) throw new Error("chronolocate requires end > start");
+    if (jdEnd - jdStart > 370) throw new Error("Search range too large (max 370 days)");
+    const res = chronolocate(engine, {
+      lat,
+      lonEast: lon,
+      elevationM: elevation_m,
+      slopeDeg: slope_deg,
+      slopeAzimuthDeg: slope_azimuth_deg,
+      bortle,
+    }, toObservedConstraints(observed)!, jdStart, jdEnd, {
+      stepMinutes: step_minutes,
+      maxWindows: max_windows,
+    });
+    return text(formatChronolocate(res));
+  });
+
+  server.registerTool("geolocate", {
+    description:
+      "Invert physical observations at a known UTC timestamp to feasible Earth coordinates or regions. When flat ground and both solar direction (`sun_azimuth_deg` or `shadow_bearing_deg`) and solar elevation (`sun_altitude_deg` or `shadow_length_ratio`) are given, solves an analytical closed-form celestial navigation fix with damped Gauss-Newton refinement and covariance uncertainty radius (`method: 'analytical'`). For any other observable combination (Sun+Moon, bright-limb angle, twilight, visible planets, or sloped terrain), sweeps a global spherical grid with antimeridian-wrapping cluster refinement (`method: 'grid'`). Returns subsolar and sublunar ground points plus ranked candidate regions classified as `point`, `arc`, or `band`.",
+    inputSchema: {
+      date: z.string().describe("Known UTC ISO date-time of the observation (convert from local first)"),
+      observed: observedConstraintsIn.describe("Physical observations to invert to Earth coordinates (at least one constraint required)"),
+      lat_min: z.number().min(-90).max(90).default(-70).describe("Minimum search latitude in degrees (default -70)"),
+      lat_max: z.number().min(-90).max(90).default(70).describe("Maximum search latitude in degrees (default 70)"),
+      lon_min: z.number().min(-180).max(180).default(-180).describe("Minimum search longitude in degrees east (default -180)"),
+      lon_max: z.number().min(-180).max(180).default(180).describe("Maximum search longitude in degrees east (default 180)"),
+      grid_step_deg: z.number().min(1).max(15).default(4).describe("Spherical grid spacing in degrees for grid mode (default 4)"),
+      max_candidates: z.number().int().min(1).max(50).default(12).describe("Maximum candidate regions to return (default 12)"),
+      elevation_m: z.number().min(-500).max(50000).default(0)
+        .describe("Observer elevation above sea level in meters (default 0)"),
+      slope_deg: z.number().min(0).lt(90).default(0)
+        .describe("Local terrain slope angle in degrees from horizontal (0..90; default 0)"),
+      slope_azimuth_deg: z.number().default(0)
+        .describe("Downhill compass azimuth of sloped terrain in degrees clockwise from true north (default 0)"),
+      bortle: z.number().int().min(1).max(9).optional()
+        .describe("Dark-sky class 1-9 for naked-eye planet visibility thresholds"),
+    },
+  }, async ({
+    date, observed, lat_min, lat_max, lon_min, lon_max,
+    grid_step_deg, max_candidates, elevation_m, slope_deg, slope_azimuth_deg, bortle,
+  }) => {
+    const jdUt = jdFromIso(date);
+    const res = geolocate(engine, jdUt, toObservedConstraints(observed)!, {
+      latMin: lat_min,
+      latMax: lat_max,
+      lonMin: lon_min,
+      lonMax: lon_max,
+      gridStepDeg: grid_step_deg,
+      maxCandidates: max_candidates,
+      elevationM: elevation_m,
+      slopeDeg: slope_deg,
+      slopeAzimuthDeg: slope_azimuth_deg,
+      bortle,
+    });
+    return text(formatGeolocate(res));
   });
 
   // --------------------------------------------------------- resources

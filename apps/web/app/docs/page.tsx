@@ -47,6 +47,7 @@ const GROUPS: Array<{ label: string; cards: Card[] }> = [
       ["/docs/time-queries", "Time Queries", "Build declarative when() queries for signs, aspects, and retrogrades with allOf, anyOf, and notOf combinators."],
       ["/docs/sky-dating", "Sky Dating", "Find historical date windows matching planetary sign placements, longitude arcs, lunar phases, or visibility events."],
       ["/docs/heliacal", "First & Last Visibility", "Compute heliacal risings and settings, inner-planet apparitions, and first lunar crescents from any location with atmospheric uncertainty windows."],
+      ["/docs/observation", "Physical Observation", "Compute solar/lunar scene geometry and shadows, verify metadata with counterfactual diagnostics, and invert observations to timestamps or coordinates."],
       ["/docs/uncertain-time", "Uncertain Times", "Identify which chart placements stay valid across an approximate birth-time window and when others change."],
       ["/docs/minted-bodies", "Minted Bodies", "Fit any numbered asteroid to JPL Horizons on demand, publish an error certificate, and load packs with SHA-256 verification."],
       ["/docs/deep-time", "Deep Time", "Work with historical dates before AD 1000: deep ephemeris packs, Julian calendar conversions, and ΔT uncertainty bounds."],

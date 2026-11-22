@@ -9232,5 +9232,739 @@
         "mars"
       ]
     }
+  },
+  "verify-obs-oracle-nyc": {
+    "tool": "verify_observation",
+    "args": {
+      "date": "2026-06-21T18:00:00Z",
+      "lat": 40.7128,
+      "lon": -74.006,
+      "camera_aim_az_deg": 180,
+      "camera_aim_alt_deg": 5,
+      "prev_date": "2026-06-20T22:48:00Z",
+      "deadline_date": "2026-06-21T18:45:00Z"
+    },
+    "payload": {
+      "verdict": "unconstrained",
+      "consistency_score": null,
+      "checks": [],
+      "scene": {
+        "utc": "2026-06-21T18:00:00Z",
+        "jd_ut": 2461213.25,
+        "lat": 40.7128,
+        "lon": -74.006,
+        "elevation_m": 0,
+        "sun": {
+          "azimuth_deg": 221.75,
+          "compass16": "SW",
+          "altitude_true_deg": 68.36,
+          "altitude_apparent_deg": 68.37,
+          "airmass": 1.075,
+          "extinction_mag": 0.215,
+          "twilight_stage": "day",
+          "is_day": true,
+          "trend": "setting",
+          "rate_alt_deg_per_min": -0.1262,
+          "rate_az_deg_per_min": 0.5193,
+          "angular_diameter_deg": 0.525
+        },
+        "shadow": {
+          "cast": true,
+          "self_shadowed": false,
+          "bearing_deg": 41.75,
+          "compass16": "NE",
+          "length_ratio": 0.397,
+          "horizontal_length_ratio": 0.397,
+          "rate_bearing_deg_per_min": 0.5193,
+          "rate_length_ratio_per_min": 0.0025,
+          "penumbra_deg": 0.525,
+          "slope_deg": 0,
+          "slope_azimuth_deg": 0
+        },
+        "lighting": {
+          "camera_aim_az_deg": 180,
+          "camera_aim_alt_deg": 5,
+          "sun_relative_az_deg": 41.75,
+          "shadow_screen_az_deg": -138.25,
+          "sun_camera_angle_deg": 69.21,
+          "glare_risk": "none"
+        },
+        "moon": {
+          "visible": true,
+          "azimuth_deg": 103.27,
+          "compass16": "ESE",
+          "altitude_true_deg": 12.76,
+          "altitude_apparent_deg": 12.83,
+          "illum": 0.4844,
+          "phase_name": "first quarter",
+          "waxing": true,
+          "elongation_deg": 88.06,
+          "magnitude": -9.99,
+          "bright_limb_zenith_deg": 71.07,
+          "bright_limb_clock": "1 o'clock",
+          "shadow_cast": false,
+          "shadow_bearing_deg": null,
+          "shadow_length_ratio": null
+        },
+        "visible_planets": [
+          {
+            "id": "mercury",
+            "azimuth_deg": 154.12,
+            "compass16": "SSE",
+            "altitude_apparent_deg": 68.79,
+            "magnitude": 0.95,
+            "naked_eye": false
+          },
+          {
+            "id": "venus",
+            "azimuth_deg": 124.68,
+            "compass16": "SE",
+            "altitude_apparent_deg": 59.09,
+            "magnitude": -4.03,
+            "naked_eye": true
+          },
+          {
+            "id": "mars",
+            "azimuth_deg": 260.43,
+            "compass16": "W",
+            "altitude_apparent_deg": 39.65,
+            "magnitude": 1.3,
+            "naked_eye": false
+          },
+          {
+            "id": "jupiter",
+            "azimuth_deg": 143.83,
+            "compass16": "SE",
+            "altitude_apparent_deg": 66.73,
+            "magnitude": -1.83,
+            "naked_eye": false
+          },
+          {
+            "id": "saturn",
+            "azimuth_deg": 274.03,
+            "compass16": "W",
+            "altitude_apparent_deg": 0.74,
+            "magnitude": 0.76,
+            "naked_eye": false
+          }
+        ],
+        "diurnal": {
+          "sunrise_utc": "2026-06-21T09:25:05Z",
+          "solar_noon_utc": "2026-06-21T16:57:53Z",
+          "sunset_utc": "2026-06-22T00:30:40Z",
+          "minutes_to_next_twilight": 389.07,
+          "next_transition_kind": "sunset",
+          "planetary_hour": {
+            "n": 7,
+            "kind": "day",
+            "ruler": "mars",
+            "day_ruler": "sun",
+            "start_utc": "2026-06-21T16:57:52Z",
+            "end_utc": "2026-06-21T18:13:20Z"
+          }
+        },
+        "chronosense": {
+          "moon_lon_deg": 178.44,
+          "asc_deg": 192.64,
+          "night_crossed": true,
+          "deadline": {
+            "minutes_remaining": 45,
+            "phase": "applying"
+          },
+          "line": "2026-06-21T18:00Z @40.71,-74.01 | day Sun 68.4deg SW setting | shd 0.40x NE | Moon 48% wax +12.8deg | next sunset 389m | due +45m applying | +night"
+        }
+      },
+      "diagnostics": null
+    }
+  },
+  "verify-obs-authentic-nyc": {
+    "tool": "verify_observation",
+    "args": {
+      "date": "2026-06-21T18:00:00Z",
+      "lat": 40.7128,
+      "lon": -74.006,
+      "observed": {
+        "shadow_bearing_deg": 41.7537,
+        "shadow_length_ratio": 0.3966,
+        "sun_azimuth_deg": 221.7537,
+        "sun_altitude_deg": 68.3652,
+        "twilight": "day",
+        "sun_visible": true,
+        "moon_visible": true,
+        "moon_illum": 0.4844,
+        "moon_waxing": true,
+        "moon_bright_limb_deg": 71.0737,
+        "shadow_sweep": {
+          "dt_minutes": 30,
+          "delta_bearing_deg": 13.4597
+        }
+      }
+    },
+    "payload": {
+      "verdict": "consistent",
+      "consistency_score": 1,
+      "checks": [
+        {
+          "field": "shadow_bearing_deg",
+          "status": "consistent",
+          "observed": 41.7537,
+          "expected": 41.7537,
+          "residual": 0,
+          "tolerance": 10,
+          "normalized_residual": 0,
+          "note": null
+        },
+        {
+          "field": "shadow_length_ratio",
+          "status": "consistent",
+          "observed": 0.3966,
+          "expected": 0.3966,
+          "residual": 0,
+          "tolerance": 0.1395,
+          "normalized_residual": 0.0002,
+          "note": null
+        },
+        {
+          "field": "sun_azimuth_deg",
+          "status": "consistent",
+          "observed": 221.7537,
+          "expected": 221.7537,
+          "residual": 0,
+          "tolerance": 8,
+          "normalized_residual": 0,
+          "note": null
+        },
+        {
+          "field": "sun_altitude_deg",
+          "status": "consistent",
+          "observed": 68.3652,
+          "expected": 68.3652,
+          "residual": 0,
+          "tolerance": 5,
+          "normalized_residual": 0,
+          "note": null
+        },
+        {
+          "field": "twilight",
+          "status": "consistent",
+          "observed": "day",
+          "expected": "day",
+          "residual": 0,
+          "tolerance": null,
+          "normalized_residual": 0,
+          "note": null
+        },
+        {
+          "field": "sun_visible",
+          "status": "consistent",
+          "observed": true,
+          "expected": true,
+          "residual": 0,
+          "tolerance": 0.5,
+          "normalized_residual": 0,
+          "note": null
+        },
+        {
+          "field": "moon_visible",
+          "status": "consistent",
+          "observed": true,
+          "expected": true,
+          "residual": 0,
+          "tolerance": 0.5,
+          "normalized_residual": 0,
+          "note": null
+        },
+        {
+          "field": "moon_illum",
+          "status": "consistent",
+          "observed": 0.4844,
+          "expected": 0.4844,
+          "residual": 0,
+          "tolerance": 0.12,
+          "normalized_residual": 0.0004,
+          "note": null
+        },
+        {
+          "field": "moon_waxing",
+          "status": "consistent",
+          "observed": true,
+          "expected": true,
+          "residual": 0,
+          "tolerance": null,
+          "normalized_residual": 0,
+          "note": null
+        },
+        {
+          "field": "moon_bright_limb_deg",
+          "status": "consistent",
+          "observed": 71.0737,
+          "expected": 71.0737,
+          "residual": 0,
+          "tolerance": 18,
+          "normalized_residual": 0,
+          "note": null
+        },
+        {
+          "field": "shadow_sweep",
+          "status": "consistent",
+          "observed": 13.4597,
+          "expected": 13.4597,
+          "residual": 0,
+          "tolerance": 5,
+          "normalized_residual": 0,
+          "note": null
+        }
+      ],
+      "scene": {
+        "utc": "2026-06-21T18:00:00Z",
+        "jd_ut": 2461213.25,
+        "lat": 40.7128,
+        "lon": -74.006,
+        "elevation_m": 0,
+        "sun": {
+          "azimuth_deg": 221.75,
+          "compass16": "SW",
+          "altitude_true_deg": 68.36,
+          "altitude_apparent_deg": 68.37,
+          "airmass": 1.075,
+          "extinction_mag": 0.215,
+          "twilight_stage": "day",
+          "is_day": true,
+          "trend": "setting",
+          "rate_alt_deg_per_min": -0.1262,
+          "rate_az_deg_per_min": 0.5193,
+          "angular_diameter_deg": 0.525
+        },
+        "shadow": {
+          "cast": true,
+          "self_shadowed": false,
+          "bearing_deg": 41.75,
+          "compass16": "NE",
+          "length_ratio": 0.397,
+          "horizontal_length_ratio": 0.397,
+          "rate_bearing_deg_per_min": 0.5193,
+          "rate_length_ratio_per_min": 0.0025,
+          "penumbra_deg": 0.525,
+          "slope_deg": 0,
+          "slope_azimuth_deg": 0
+        },
+        "lighting": null,
+        "moon": {
+          "visible": true,
+          "azimuth_deg": 103.27,
+          "compass16": "ESE",
+          "altitude_true_deg": 12.76,
+          "altitude_apparent_deg": 12.83,
+          "illum": 0.4844,
+          "phase_name": "first quarter",
+          "waxing": true,
+          "elongation_deg": 88.06,
+          "magnitude": -9.99,
+          "bright_limb_zenith_deg": 71.07,
+          "bright_limb_clock": "1 o'clock",
+          "shadow_cast": false,
+          "shadow_bearing_deg": null,
+          "shadow_length_ratio": null
+        },
+        "visible_planets": [
+          {
+            "id": "mercury",
+            "azimuth_deg": 154.12,
+            "compass16": "SSE",
+            "altitude_apparent_deg": 68.79,
+            "magnitude": 0.95,
+            "naked_eye": false
+          },
+          {
+            "id": "venus",
+            "azimuth_deg": 124.68,
+            "compass16": "SE",
+            "altitude_apparent_deg": 59.09,
+            "magnitude": -4.03,
+            "naked_eye": true
+          },
+          {
+            "id": "mars",
+            "azimuth_deg": 260.43,
+            "compass16": "W",
+            "altitude_apparent_deg": 39.65,
+            "magnitude": 1.3,
+            "naked_eye": false
+          },
+          {
+            "id": "jupiter",
+            "azimuth_deg": 143.83,
+            "compass16": "SE",
+            "altitude_apparent_deg": 66.73,
+            "magnitude": -1.83,
+            "naked_eye": false
+          },
+          {
+            "id": "saturn",
+            "azimuth_deg": 274.03,
+            "compass16": "W",
+            "altitude_apparent_deg": 0.74,
+            "magnitude": 0.76,
+            "naked_eye": false
+          }
+        ],
+        "diurnal": {
+          "sunrise_utc": "2026-06-21T09:25:05Z",
+          "solar_noon_utc": "2026-06-21T16:57:53Z",
+          "sunset_utc": "2026-06-22T00:30:40Z",
+          "minutes_to_next_twilight": 389.07,
+          "next_transition_kind": "sunset",
+          "planetary_hour": {
+            "n": 7,
+            "kind": "day",
+            "ruler": "mars",
+            "day_ruler": "sun",
+            "start_utc": "2026-06-21T16:57:52Z",
+            "end_utc": "2026-06-21T18:13:20Z"
+          }
+        },
+        "chronosense": {
+          "moon_lon_deg": 178.44,
+          "asc_deg": 192.64,
+          "night_crossed": false,
+          "deadline": null,
+          "line": "2026-06-21T18:00Z @40.71,-74.01 | day Sun 68.4deg SW setting | shd 0.40x NE | Moon 48% wax +12.8deg | next sunset 389m"
+        }
+      },
+      "diagnostics": null
+    }
+  },
+  "verify-obs-spoof-india": {
+    "tool": "verify_observation",
+    "args": {
+      "date": "2026-03-21T10:00:00Z",
+      "lat": 28.6139,
+      "lon": 77.209,
+      "observed": {
+        "shadow_bearing_deg": 302.108,
+        "shadow_length_ratio": 1.0137
+      }
+    },
+    "payload": {
+      "verdict": "inconsistent",
+      "consistency_score": 0,
+      "checks": [
+        {
+          "field": "shadow_bearing_deg",
+          "status": "inconsistent",
+          "observed": 302.108,
+          "expected": 65.0542,
+          "residual": -122.9462,
+          "tolerance": 10,
+          "normalized_residual": 12.2946,
+          "note": null
+        },
+        {
+          "field": "shadow_length_ratio",
+          "status": "consistent",
+          "observed": 1.0137,
+          "expected": 1.2684,
+          "residual": -0.2547,
+          "tolerance": 0.2703,
+          "normalized_residual": 0.9423,
+          "note": null
+        }
+      ],
+      "scene": {
+        "utc": "2026-03-21T09:59:59Z",
+        "jd_ut": 2461120.91667,
+        "lat": 28.6139,
+        "lon": 77.209,
+        "elevation_m": 0,
+        "sun": {
+          "azimuth_deg": 245.05,
+          "compass16": "WSW",
+          "altitude_true_deg": 38.23,
+          "altitude_apparent_deg": 38.25,
+          "airmass": 1.613,
+          "extinction_mag": 0.323,
+          "twilight_stage": "day",
+          "is_day": true,
+          "trend": "setting",
+          "rate_alt_deg_per_min": -0.1989,
+          "rate_az_deg_per_min": 0.193,
+          "angular_diameter_deg": 0.535
+        },
+        "shadow": {
+          "cast": true,
+          "self_shadowed": false,
+          "bearing_deg": 65.05,
+          "compass16": "ENE",
+          "length_ratio": 1.268,
+          "horizontal_length_ratio": 1.268,
+          "rate_bearing_deg_per_min": 0.193,
+          "rate_length_ratio_per_min": 0.0091,
+          "penumbra_deg": 0.535,
+          "slope_deg": 0,
+          "slope_azimuth_deg": 0
+        },
+        "lighting": null,
+        "moon": {
+          "visible": true,
+          "azimuth_deg": 236.46,
+          "compass16": "WSW",
+          "altitude_true_deg": 69.4,
+          "altitude_apparent_deg": 69.41,
+          "illum": 0.0741,
+          "phase_name": "waxing crescent",
+          "waxing": true,
+          "elongation_deg": 31.51,
+          "magnitude": -7.02,
+          "bright_limb_zenith_deg": 282.97,
+          "bright_limb_clock": "6 o'clock",
+          "shadow_cast": false,
+          "shadow_bearing_deg": null,
+          "shadow_length_ratio": null
+        },
+        "visible_planets": [
+          {
+            "id": "mercury",
+            "azimuth_deg": 251.33,
+            "compass16": "WSW",
+            "altitude_apparent_deg": 16.68,
+            "magnitude": 0.99,
+            "naked_eye": false
+          },
+          {
+            "id": "venus",
+            "azimuth_deg": 236.3,
+            "compass16": "WSW",
+            "altitude_apparent_deg": 55.03,
+            "magnitude": -3.9,
+            "naked_eye": false
+          },
+          {
+            "id": "mars",
+            "azimuth_deg": 248,
+            "compass16": "WSW",
+            "altitude_apparent_deg": 22.46,
+            "magnitude": 1.16,
+            "naked_eye": false
+          },
+          {
+            "id": "jupiter",
+            "azimuth_deg": 81.17,
+            "compass16": "E",
+            "altitude_apparent_deg": 35.84,
+            "magnitude": -2.28,
+            "naked_eye": false
+          },
+          {
+            "id": "saturn",
+            "azimuth_deg": 241.24,
+            "compass16": "WSW",
+            "altitude_apparent_deg": 41.01,
+            "magnitude": 0.92,
+            "naked_eye": false
+          }
+        ],
+        "diurnal": {
+          "sunrise_utc": "2026-03-21T00:54:19Z",
+          "solar_noon_utc": "2026-03-21T06:58:22Z",
+          "sunset_utc": "2026-03-21T13:02:51Z",
+          "minutes_to_next_twilight": 181.66,
+          "next_transition_kind": "sunset",
+          "planetary_hour": {
+            "n": 9,
+            "kind": "day",
+            "ruler": "jupiter",
+            "day_ruler": "saturn",
+            "start_utc": "2026-03-21T09:00:00Z",
+            "end_utc": "2026-03-21T10:00:43Z"
+          }
+        },
+        "chronosense": {
+          "moon_lon_deg": 32.05,
+          "asc_deg": 141.74,
+          "night_crossed": false,
+          "deadline": null,
+          "line": "2026-03-21T10:00Z @28.61,77.21 | day Sun 38.3deg WSW setting | shd 1.27x ENE | Moon 7% wax +69.4deg | next sunset 182m"
+        }
+      },
+      "diagnostics": {
+        "time_shift": {
+          "utc": "2026-03-21T04:29:59Z",
+          "offset_minutes": -330.01,
+          "nearest_whole_hour_offset": -6,
+          "fit_score": 1,
+          "verdict": "consistent"
+        },
+        "hemisphere_flip": {
+          "lat": -28.6139,
+          "lon": 77.209,
+          "fit_score": 0,
+          "verdict": "inconsistent"
+        },
+        "date_shift": {
+          "utc": "2026-01-10T09:59:59Z",
+          "offset_days": -70,
+          "fit_score": 0,
+          "verdict": "inconsistent"
+        },
+        "summary": "Likely half-hour clock/timezone offset of -330 min (-5.5h), fit 1.00 (consistent)."
+      }
+    }
+  },
+  "chronolocate-nyc-30d": {
+    "tool": "chronolocate",
+    "args": {
+      "lat": 40.7128,
+      "lon": -74.006,
+      "start": "2026-06-06T18:00:00Z",
+      "end": "2026-07-06T18:00:00Z",
+      "observed": {
+        "shadow_bearing_deg": 41.7537,
+        "shadow_length_ratio": 0.3966,
+        "moon_illum": 0.4844,
+        "moon_waxing": true
+      }
+    },
+    "payload": {
+      "place": {
+        "lat": 40.7128,
+        "lon": -74.006,
+        "elevation_m": 0,
+        "slope_deg": 0,
+        "slope_azimuth_deg": 0
+      },
+      "start_utc": "2026-06-06T18:00:00Z",
+      "end_utc": "2026-07-06T18:00:00Z",
+      "days_scanned": 4,
+      "days_pruned": 26,
+      "truncated": false,
+      "windows": [
+        {
+          "start_utc": "2026-06-20T17:42:07Z",
+          "end_utc": "2026-06-20T18:21:10Z",
+          "best_utc": "2026-06-20T18:00:15Z",
+          "duration_minutes": 39.05,
+          "fit_score": 0.8355,
+          "max_normalized_residual": 0.8698
+        },
+        {
+          "start_utc": "2026-06-21T17:42:20Z",
+          "end_utc": "2026-06-21T18:21:23Z",
+          "best_utc": "2026-06-21T17:59:59Z",
+          "duration_minutes": 39.05,
+          "fit_score": 1,
+          "max_normalized_residual": 0.0004
+        },
+        {
+          "start_utc": "2026-06-22T17:42:34Z",
+          "end_utc": "2026-06-22T18:21:38Z",
+          "best_utc": "2026-06-22T17:59:47Z",
+          "duration_minutes": 39.06,
+          "fit_score": 0.8431,
+          "max_normalized_residual": 0.8476
+        }
+      ]
+    }
+  },
+  "geolocate-analytical-nyc": {
+    "tool": "geolocate",
+    "args": {
+      "date": "2026-06-21T18:00:00Z",
+      "observed": {
+        "shadow_bearing_deg": 41.7537,
+        "shadow_length_ratio": 0.3966
+      }
+    },
+    "payload": {
+      "utc": "2026-06-21T18:00:00Z",
+      "jd_ut": 2461213.25,
+      "method": "analytical",
+      "subsolar": {
+        "lat": 23.4374,
+        "lon": -89.5321
+      },
+      "sublunar": {
+        "lat": -1.469,
+        "lon": -2.2835
+      },
+      "candidates": [
+        {
+          "lat": 40.7115,
+          "lon": -74.0071,
+          "fit_score": 1,
+          "max_normalized_residual": 0,
+          "radius_km": 783.79,
+          "lat_range": [
+            34.3648,
+            47.0582
+          ],
+          "lon_range": [
+            -79.7589,
+            -68.2553
+          ],
+          "region_kind": "band"
+        }
+      ]
+    }
+  },
+  "geolocate-grid-fiji": {
+    "tool": "geolocate",
+    "args": {
+      "date": "2026-06-21T02:00:00Z",
+      "observed": {
+        "sun_altitude_deg": 40.5413,
+        "moon_altitude_deg": 36.2613,
+        "tolerances": {
+          "sun_altitude_deg": 1.5,
+          "moon_altitude_deg": 1.5
+        }
+      }
+    },
+    "payload": {
+      "utc": "2026-06-21T02:00:00Z",
+      "jd_ut": 2461212.58333,
+      "method": "grid",
+      "subsolar": {
+        "lat": 23.4377,
+        "lon": 150.4315
+      },
+      "sublunar": {
+        "lat": 2.603,
+        "lon": -129.2881
+      },
+      "candidates": [
+        {
+          "lat": -16.8001,
+          "lon": 179.8988,
+          "fit_score": 1,
+          "max_normalized_residual": 0.0007,
+          "radius_km": 208.49,
+          "lat_range": [
+            -18.6517,
+            -14.9251
+          ],
+          "lon_range": [
+            178.2748,
+            -178.469
+          ],
+          "region_kind": "point"
+        },
+        {
+          "lat": 51.524,
+          "lon": -155.9175,
+          "fit_score": 1,
+          "max_normalized_residual": 0.0009,
+          "radius_km": 200.67,
+          "lat_range": [
+            49.7193,
+            53.3209
+          ],
+          "lon_range": [
+            -158.4037,
+            -153.4565
+          ],
+          "region_kind": "point"
+        }
+      ]
+    }
   }
 }

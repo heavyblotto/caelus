@@ -85,6 +85,7 @@ export const DOCS_NAV: DocsGroup[] = [
       { href: "/docs/synthetic", label: "Synthetic Ephemeris" },
       { href: "/docs/sky-dating", label: "Sky Dating" },
       { href: "/docs/heliacal", label: "First & Last Visibility" },
+      { href: "/docs/observation", label: "Physical Observation" },
       { href: "/docs/uncertain-time", label: "Uncertain Times" },
       { href: "/docs/minted-bodies", label: "Minted Bodies" },
       { href: "/docs/deep-time", label: "Deep Time" },

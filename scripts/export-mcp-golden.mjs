@@ -192,6 +192,52 @@ export const GOLDEN_CASES = [
     args: { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 } },
   { id: "yogas-tampa", tool: "yogas",
     args: { date: "1990-06-10T14:30:00Z", lat: 27.95, lon: -82.46 } },
+
+  // --- physical observation, verification, chronolocation, geolocation ---
+  { id: "verify-obs-oracle-nyc", tool: "verify_observation",
+    args: {
+      date: "2026-06-21T18:00:00Z", lat: 40.7128, lon: -74.006,
+      camera_aim_az_deg: 180, camera_aim_alt_deg: 5,
+      prev_date: "2026-06-20T22:48:00Z", deadline_date: "2026-06-21T18:45:00Z",
+    } },
+  { id: "verify-obs-authentic-nyc", tool: "verify_observation",
+    args: {
+      date: "2026-06-21T18:00:00Z", lat: 40.7128, lon: -74.006,
+      observed: {
+        shadow_bearing_deg: 41.7537, shadow_length_ratio: 0.3966,
+        sun_azimuth_deg: 221.7537, sun_altitude_deg: 68.3652,
+        twilight: "day", sun_visible: true, moon_visible: true,
+        moon_illum: 0.4844, moon_waxing: true, moon_bright_limb_deg: 71.0737,
+        shadow_sweep: { dt_minutes: 30, delta_bearing_deg: 13.4597 },
+      },
+    } },
+  { id: "verify-obs-spoof-india", tool: "verify_observation",
+    args: {
+      date: "2026-03-21T10:00:00Z", lat: 28.6139, lon: 77.209,
+      observed: { shadow_bearing_deg: 302.108, shadow_length_ratio: 1.0137 },
+    } },
+  { id: "chronolocate-nyc-30d", tool: "chronolocate",
+    args: {
+      lat: 40.7128, lon: -74.006,
+      start: "2026-06-06T18:00:00Z", end: "2026-07-06T18:00:00Z",
+      observed: {
+        shadow_bearing_deg: 41.7537, shadow_length_ratio: 0.3966,
+        moon_illum: 0.4844, moon_waxing: true,
+      },
+    } },
+  { id: "geolocate-analytical-nyc", tool: "geolocate",
+    args: {
+      date: "2026-06-21T18:00:00Z",
+      observed: { shadow_bearing_deg: 41.7537, shadow_length_ratio: 0.3966 },
+    } },
+  { id: "geolocate-grid-fiji", tool: "geolocate",
+    args: {
+      date: "2026-06-21T02:00:00Z",
+      observed: {
+        sun_altitude_deg: 40.5413, moon_altitude_deg: 36.2613,
+        tolerances: { sun_altitude_deg: 1.5, moon_altitude_deg: 1.5 },
+      },
+    } },
 ];
 
 async function run() {

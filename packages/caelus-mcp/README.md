@@ -1,15 +1,15 @@
 # caelus-mcp
 
 MCP server for [Caelus](https://github.com/heavyblotto/caelus) astrology
-computation: thirty-eight chart tools over stdio. Computation only — positions, houses,
+computation: forty-one chart tools over stdio. Computation only: positions, houses,
 aspects with orbs, event search, electional, returns, progressions, composite,
 dignities, Hermetic lots, the Hellenistic time-lords (profections, firdaria,
 zodiacal releasing), primary directions, the Vedic layer (nakshatras,
 dashas, vargas, yogas), sky-view image-prompt frames (project the visible sky to
 image pixels with positions, magnitudes, Moon phase, twilight, and the Milky
-Way), and a `chart_facts` interpretation projection (ranked,
-citable fact atoms plus an LLM brief) — the model does the interpreting.
-It needs
+Way), physical observation verification, chronolocation, and geolocation, and a
+`chart_facts` interpretation projection (ranked, citable fact atoms plus an LLM
+brief), leaving interpretation to the model. It needs
 no API keys, ephemeris files, or network calls; the engine data ships inside
 the package.
 
@@ -69,6 +69,9 @@ A hosted Streamable HTTP endpoint is also live at
 | `dasha` | Vedic dasha periods from the Moon's nakshatra — Vimshottari (120y), Yogini (36y), or Ashtottari (108y): the maha → antar timeline and the lords active at a target date |
 | `vargas` | Parashari divisional charts (D1 rasi, D2, D3, D9 navamsa, D10, D12, D30): the divisional sign of each planet and the Ascendant |
 | `yogas` | Vedic yogas on the rasi chart: Pancha Mahapurusha, Gajakesari, Budha-Aditya, Chandra-Mangala, Kemadruma, plus raja/dhana yogas and yogakarakas |
+| `verify_observation` | Verify physical observations (shadows, Sun/Moon position, twilight, lunar bright-limb tilt, visible planets, or shadow sweep) against a claimed timestamp and location with counterfactual diagnostics, or omit `observed` for ground-truth scene geometry and chronosense |
+| `chronolocate` | Find every UTC window at a location within a date range (up to 370 days) where a set of physical observations held simultaneously |
+| `geolocate` | Invert physical observations at a known UTC timestamp to Earth coordinates via analytical celestial navigation or a global antimeridian-wrapping spherical grid |
 
 `natal_chart` and `current_sky` also tag each body with its solar phase
 (cazimi/combust/under-the-beams) and each aspect with applying/separating.
