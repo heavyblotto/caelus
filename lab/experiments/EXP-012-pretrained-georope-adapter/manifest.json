@@ -1,0 +1,25 @@
+{
+  "id": "EXP-012",
+  "title": "Pretrained Frozen LLM Transfer Test for Physical Slow-Clock Adapters",
+  "track": "research",
+  "status": "killed",
+  "created": "2026-11-22",
+  "hypothesis": "Injecting Caelus's python/astroengine/ physical slow clock (32-D geocentric and photoperiod torus) into a frozen pretrained 494M-param RoPE LLM (Qwen/Qwen2.5-0.5B-Instruct) via a lightweight trainable soft-token MLP adapter plus rank-8 attention LoRA (Arm3-LoRA-Caelus-GeoAdapter, 2 soft tokens/event) transfers zero-shot OOD seasonal and geographic generalization (Oslo 5.90h winter / 18.83h summer solstices, NYC-to-Tokyo travel, and post-sleep compaction) through frozen weights, beating parameter-matched UTC Fourier adapters (Arm2-LoRA-UnixFourier-Adapter) by >= +15 pp on OOD Oslo Solstice + Tokyo travel while beating zero-training FACT-002 text-prompt injection (Arm1-Frozen-Caelus-TextPrompt) and matching or beating LoRA-tuned text envelopes (Arm1b-LoRA-TextPrompt) with >= 50% fewer temporal prompt tokens.",
+  "null_baseline": "Progressive controls on the exact same frozen Qwen/Qwen2.5-0.5B-Instruct base weights: (1) Arm0-Frozen-ISO-Prompt (0 trained params, passive UTC ISO text), (2) Arm1-Frozen-Caelus-TextPrompt (0 trained params, compact FACT-002 physical-horizon text envelope; text-only steelman) plus Arm1b-LoRA-TextPrompt (rank-8 LoRA on the FACT-002 text envelope to isolate LoRA capacity), (3) Arm2-LoRA-UnixFourier-Adapter (exact 0-parameter-difference rank-8 LoRA + MLP soft-token adapter fed fixed 24h/7d/365.25d UTC Fourier features), and (4) Arm2b-LoRA-UnixFourier+LatLon-Adapter (exact 0-parameter-difference adapter fed local mean solar time UTC+lon/15, 7d, 365.25d, and observer (lat, lon) harmonics to eliminate any location information gap).",
+  "success_bar": "0-parameter difference across Arm2, Arm2b, and Arm3, 0 train/ID/OOD date overlap verified by SHA-256 across all tasks, real MPS gradient-descent convergence across all trained arms, 95% Wilson CIs reported on all splits, AND Arm3-LoRA-Caelus-GeoAdapter clears ALL Razor bars: (a) beats Arm2-LoRA-UnixFourier-Adapter by >= +15.0 pp on OOD Oslo Solstice + Tokyo travel composite accuracy and beats location-aware Arm2b-LoRA-UnixFourier+LatLon-Adapter on OOD Oslo Solstice photoperiod slices, AND (b) beats Arm1-Frozen-Caelus-TextPrompt on OOD composite accuracy AND matches (within 3.0 pp) or beats Arm1b-LoRA-TextPrompt on OOD composite accuracy while cutting temporal prompt-token overhead by >= 50%.",
+  "kill_criterion": "If frozen pretrained weights reject continuous physical-adapter injection (Arm3 fails to beat Arm2 by >= +15.0 pp on OOD Oslo Solstice + Tokyo travel, OR fails to beat location-aware Arm2b on OOD Oslo Winter/Summer solstices), OR if plain-text FACT-002 envelopes strictly dominate weight adapters on frozen LLMs (Arm3 trails Arm1-Frozen-Caelus-TextPrompt on OOD composite accuracy, OR trails Arm1b-LoRA-TextPrompt by > 3.0 pp on OOD composite accuracy despite training 1.55M adapter+LoRA parameters).",
+  "entrypoint": "experiment.py",
+  "runner": "python3",
+  "tags": [
+    "geo-rope",
+    "pretrained-llm",
+    "transfer-learning",
+    "lora",
+    "adapter",
+    "chronosense",
+    "photoperiod",
+    "pytorch",
+    "mps",
+    "research"
+  ]
+}

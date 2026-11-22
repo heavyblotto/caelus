@@ -1,0 +1,2453 @@
+{
+  "schema_version": "exp012-training-receipt-v1",
+  "id": "EXP-012",
+  "generated_at": "2026-11-22T20:18:30.736646Z",
+  "git_sha": "421f4a5",
+  "seed": 20261122,
+  "hardware": {
+    "platform": "macOS-27.3-arm64-arm-64bit",
+    "machine": "arm64",
+    "selected_device": "mps",
+    "torch_version": "2.15.0",
+    "dtype": "bfloat16_frozen_base_float32_adapters"
+  },
+  "base_model": {
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "frozen_base_params": 494032768,
+    "hidden_size": 896,
+    "num_hidden_layers": 24,
+    "num_attention_heads": 14,
+    "num_key_value_heads": 2,
+    "lora_rank": 8,
+    "lora_alpha": 16.0,
+    "lora_target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ],
+    "adapter_in_dim": 32,
+    "adapter_hidden_dim": 256,
+    "adapter_soft_tokens_per_event": 2
+  },
+  "parameter_parity": {
+    "Arm0-Frozen-ISO-Prompt": 0,
+    "Arm1-Frozen-Caelus-TextPrompt": 0,
+    "Arm1b-LoRA-TextPrompt": 1081344,
+    "Arm2-LoRA-UnixFourier-Adapter": 1552641,
+    "Arm2b-LoRA-UnixFourier+LatLon-Adapter": 1552641,
+    "Arm3-LoRA-Caelus-GeoAdapter": 1552641,
+    "arm2_arm3_param_diff": 0,
+    "arm2b_arm3_param_diff": 0,
+    "trainable_pct_of_base_arm2_arm3": 0.3143
+  },
+  "dataset_splits": {
+    "train_examples": 2400,
+    "train_by_task": {
+      "regime": 800,
+      "photo_retrieval": 800,
+      "compaction": 800
+    },
+    "eval_examples_total": 1720,
+    "eval_slice_counts": {
+      "id_regime": 200,
+      "id_photo_retrieval": 200,
+      "id_compaction": 180,
+      "ood_oslo_winter_regime": 160,
+      "ood_oslo_summer_regime": 160,
+      "ood_tokyo_travel_regime": 160,
+      "ood_oslo_winter_retrieval": 160,
+      "ood_oslo_summer_retrieval": 160,
+      "ood_tokyo_travel_retrieval": 160,
+      "ood_compaction": 180
+    },
+    "train_day_set_sha256_16": "0bc7658da33bbce0",
+    "id_day_set_sha256_16": "8f197d8a09efeb55",
+    "ood_day_set_sha256_16": "b24c4bc69a04c452",
+    "train_id_day_overlap": 0,
+    "train_ood_day_overlap": 0,
+    "example_level_train_eval_day_overlap": 0
+  },
+  "token_accounting": {
+    "per_event_clock_tokens": {
+      "iso_text": 19,
+      "caelus_fact002_text": 43,
+      "caelus_compaction_delta_extra": 11,
+      "continuous_soft_adapter": 2,
+      "adapter_vs_caelus_text_reduction_pct": 95.35
+    },
+    "mean_prompt_tokens_by_mode": {
+      "iso": {
+        "regime": 87.0,
+        "photo_retrieval": 197.0,
+        "compaction": 106.0,
+        "macro_mean": 130.0
+      },
+      "caelus_text": {
+        "regime": 164.52,
+        "photo_retrieval": 350.6,
+        "compaction": 206.12,
+        "macro_mean": 240.41
+      },
+      "unix_adapter": {
+        "regime": 71.0,
+        "photo_retrieval": 117.0,
+        "compaction": 73.0,
+        "macro_mean": 87.0
+      },
+      "unix_latlon_adapter": {
+        "regime": 71.0,
+        "photo_retrieval": 117.0,
+        "compaction": 73.0,
+        "macro_mean": 87.0
+      },
+      "caelus_adapter": {
+        "regime": 71.0,
+        "photo_retrieval": 117.0,
+        "compaction": 73.0,
+        "macro_mean": 87.0
+      }
+    }
+  },
+  "training": {
+    "Arm0-Frozen-ISO-Prompt": {
+      "lora_trainable_params": 0,
+      "adapter_trainable_params": 0,
+      "total_trainable_params": 0,
+      "wall_seconds": 0.0
+    },
+    "Arm1-Frozen-Caelus-TextPrompt": {
+      "lora_trainable_params": 0,
+      "adapter_trainable_params": 0,
+      "total_trainable_params": 0,
+      "wall_seconds": 0.0
+    },
+    "Arm1b-LoRA-TextPrompt": {
+      "lora_trainable_params": 1081344,
+      "adapter_trainable_params": 0,
+      "total_trainable_params": 1081344,
+      "epochs": 3,
+      "batch_size": 16,
+      "total_steps": 450,
+      "initial_train_loss": 1.1918,
+      "final_train_loss": 0.0001,
+      "wall_seconds": 741.19,
+      "ms_per_step": 1647.09,
+      "loss_curve": [
+        {
+          "step": 45,
+          "epoch": 0.3,
+          "mean_loss": 0.7516,
+          "mean_grad_norm": 12.407
+        },
+        {
+          "step": 90,
+          "epoch": 0.6,
+          "mean_loss": 0.3748,
+          "mean_grad_norm": 7.8061
+        },
+        {
+          "step": 135,
+          "epoch": 0.9,
+          "mean_loss": 0.2354,
+          "mean_grad_norm": 5.2257
+        },
+        {
+          "step": 180,
+          "epoch": 1.2,
+          "mean_loss": 0.1458,
+          "mean_grad_norm": 4.679
+        },
+        {
+          "step": 225,
+          "epoch": 1.5,
+          "mean_loss": 0.0714,
+          "mean_grad_norm": 5.7481
+        },
+        {
+          "step": 270,
+          "epoch": 1.8,
+          "mean_loss": 0.0372,
+          "mean_grad_norm": 3.1504
+        },
+        {
+          "step": 315,
+          "epoch": 2.1,
+          "mean_loss": 0.0165,
+          "mean_grad_norm": 1.0828
+        },
+        {
+          "step": 360,
+          "epoch": 2.4,
+          "mean_loss": 0.0039,
+          "mean_grad_norm": 0.5908
+        },
+        {
+          "step": 405,
+          "epoch": 2.7,
+          "mean_loss": 0.0004,
+          "mean_grad_norm": 0.1005
+        },
+        {
+          "step": 450,
+          "epoch": 3.0,
+          "mean_loss": 0.0001,
+          "mean_grad_norm": 0.0162
+        }
+      ]
+    },
+    "Arm2-LoRA-UnixFourier-Adapter": {
+      "lora_trainable_params": 1081344,
+      "adapter_trainable_params": 471297,
+      "total_trainable_params": 1552641,
+      "epochs": 3,
+      "batch_size": 16,
+      "total_steps": 450,
+      "initial_train_loss": 1.6759,
+      "final_train_loss": 0.1653,
+      "wall_seconds": 310.13,
+      "ms_per_step": 689.18,
+      "loss_curve": [
+        {
+          "step": 45,
+          "epoch": 0.3,
+          "mean_loss": 1.3973,
+          "mean_grad_norm": 12.4306
+        },
+        {
+          "step": 90,
+          "epoch": 0.6,
+          "mean_loss": 1.1779,
+          "mean_grad_norm": 8.8772
+        },
+        {
+          "step": 135,
+          "epoch": 0.9,
+          "mean_loss": 0.8907,
+          "mean_grad_norm": 9.2832
+        },
+        {
+          "step": 180,
+          "epoch": 1.2,
+          "mean_loss": 0.6262,
+          "mean_grad_norm": 7.6759
+        },
+        {
+          "step": 225,
+          "epoch": 1.5,
+          "mean_loss": 0.5221,
+          "mean_grad_norm": 8.1982
+        },
+        {
+          "step": 270,
+          "epoch": 1.8,
+          "mean_loss": 0.4343,
+          "mean_grad_norm": 6.2969
+        },
+        {
+          "step": 315,
+          "epoch": 2.1,
+          "mean_loss": 0.3558,
+          "mean_grad_norm": 6.8135
+        },
+        {
+          "step": 360,
+          "epoch": 2.4,
+          "mean_loss": 0.2375,
+          "mean_grad_norm": 6.0996
+        },
+        {
+          "step": 405,
+          "epoch": 2.7,
+          "mean_loss": 0.211,
+          "mean_grad_norm": 6.1713
+        },
+        {
+          "step": 450,
+          "epoch": 3.0,
+          "mean_loss": 0.1653,
+          "mean_grad_norm": 4.9304
+        }
+      ]
+    },
+    "Arm2b-LoRA-UnixFourier+LatLon-Adapter": {
+      "lora_trainable_params": 1081344,
+      "adapter_trainable_params": 471297,
+      "total_trainable_params": 1552641,
+      "epochs": 3,
+      "batch_size": 16,
+      "total_steps": 450,
+      "initial_train_loss": 1.4744,
+      "final_train_loss": 0.0811,
+      "wall_seconds": 297.4,
+      "ms_per_step": 660.88,
+      "loss_curve": [
+        {
+          "step": 45,
+          "epoch": 0.3,
+          "mean_loss": 1.1896,
+          "mean_grad_norm": 18.3821
+        },
+        {
+          "step": 90,
+          "epoch": 0.6,
+          "mean_loss": 0.6696,
+          "mean_grad_norm": 12.5562
+        },
+        {
+          "step": 135,
+          "epoch": 0.9,
+          "mean_loss": 0.3924,
+          "mean_grad_norm": 8.3078
+        },
+        {
+          "step": 180,
+          "epoch": 1.2,
+          "mean_loss": 0.2887,
+          "mean_grad_norm": 7.4575
+        },
+        {
+          "step": 225,
+          "epoch": 1.5,
+          "mean_loss": 0.3226,
+          "mean_grad_norm": 5.7951
+        },
+        {
+          "step": 270,
+          "epoch": 1.8,
+          "mean_loss": 0.2411,
+          "mean_grad_norm": 4.101
+        },
+        {
+          "step": 315,
+          "epoch": 2.1,
+          "mean_loss": 0.1824,
+          "mean_grad_norm": 2.7601
+        },
+        {
+          "step": 360,
+          "epoch": 2.4,
+          "mean_loss": 0.1408,
+          "mean_grad_norm": 3.593
+        },
+        {
+          "step": 405,
+          "epoch": 2.7,
+          "mean_loss": 0.0858,
+          "mean_grad_norm": 2.4267
+        },
+        {
+          "step": 450,
+          "epoch": 3.0,
+          "mean_loss": 0.0811,
+          "mean_grad_norm": 2.3235
+        }
+      ]
+    },
+    "Arm3-LoRA-Caelus-GeoAdapter": {
+      "lora_trainable_params": 1081344,
+      "adapter_trainable_params": 471297,
+      "total_trainable_params": 1552641,
+      "epochs": 3,
+      "batch_size": 16,
+      "total_steps": 450,
+      "initial_train_loss": 1.5658,
+      "final_train_loss": 0.0573,
+      "wall_seconds": 310.4,
+      "ms_per_step": 689.77,
+      "loss_curve": [
+        {
+          "step": 45,
+          "epoch": 0.3,
+          "mean_loss": 1.0739,
+          "mean_grad_norm": 14.8993
+        },
+        {
+          "step": 90,
+          "epoch": 0.6,
+          "mean_loss": 0.5227,
+          "mean_grad_norm": 12.2836
+        },
+        {
+          "step": 135,
+          "epoch": 0.9,
+          "mean_loss": 0.3824,
+          "mean_grad_norm": 6.9994
+        },
+        {
+          "step": 180,
+          "epoch": 1.2,
+          "mean_loss": 0.2009,
+          "mean_grad_norm": 7.3974
+        },
+        {
+          "step": 225,
+          "epoch": 1.5,
+          "mean_loss": 0.1984,
+          "mean_grad_norm": 6.3394
+        },
+        {
+          "step": 270,
+          "epoch": 1.8,
+          "mean_loss": 0.2008,
+          "mean_grad_norm": 6.3228
+        },
+        {
+          "step": 315,
+          "epoch": 2.1,
+          "mean_loss": 0.1372,
+          "mean_grad_norm": 5.2105
+        },
+        {
+          "step": 360,
+          "epoch": 2.4,
+          "mean_loss": 0.071,
+          "mean_grad_norm": 2.4632
+        },
+        {
+          "step": 405,
+          "epoch": 2.7,
+          "mean_loss": 0.0778,
+          "mean_grad_norm": 3.2079
+        },
+        {
+          "step": 450,
+          "epoch": 3.0,
+          "mean_loss": 0.0573,
+          "mean_grad_norm": 1.7747
+        }
+      ]
+    }
+  },
+  "evaluation": {
+    "Arm0-Frozen-ISO-Prompt": {
+      "slices": {
+        "id_regime": {
+          "n": 200,
+          "choice_correct": 51,
+          "choice_acc": 0.255,
+          "choice_ci95": [
+            0.1996,
+            0.3196
+          ],
+          "choice_ce": 2.3124,
+          "full_vocab_correct": 51,
+          "full_vocab_acc": 0.255,
+          "full_vocab_ci95": [
+            0.1996,
+            0.3196
+          ],
+          "full_vocab_ce": 2.3219,
+          "mean_prompt_tokens": 87.0
+        },
+        "id_photo_retrieval": {
+          "n": 200,
+          "choice_correct": 39,
+          "choice_acc": 0.195,
+          "choice_ci95": [
+            0.1461,
+            0.2554
+          ],
+          "choice_ce": 1.5389,
+          "full_vocab_correct": 39,
+          "full_vocab_acc": 0.195,
+          "full_vocab_ci95": [
+            0.1461,
+            0.2554
+          ],
+          "full_vocab_ce": 1.6462,
+          "mean_prompt_tokens": 197.0
+        },
+        "id_compaction": {
+          "n": 180,
+          "choice_correct": 60,
+          "choice_acc": 0.3333,
+          "choice_ci95": [
+            0.2686,
+            0.405
+          ],
+          "choice_ce": 1.5519,
+          "full_vocab_correct": 60,
+          "full_vocab_acc": 0.3333,
+          "full_vocab_ci95": [
+            0.2686,
+            0.405
+          ],
+          "full_vocab_ce": 1.5815,
+          "mean_prompt_tokens": 106.0,
+          "by_subtag": {
+            "fresh_long_sameday": {
+              "n": 30,
+              "choice_correct": 0,
+              "choice_acc": 0.0,
+              "choice_ci95": [
+                0.0,
+                0.1135
+              ]
+            },
+            "fresh_short": {
+              "n": 30,
+              "choice_correct": 0,
+              "choice_acc": 0.0,
+              "choice_ci95": [
+                0.0,
+                0.1135
+              ]
+            },
+            "multiday_random": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "multiday_same_clock": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "overnight_same_utc_date": {
+              "n": 2,
+              "choice_correct": 0,
+              "choice_acc": 0.0,
+              "choice_ci95": [
+                0.0,
+                0.6576
+              ]
+            },
+            "overnight_standard": {
+              "n": 58,
+              "choice_correct": 0,
+              "choice_acc": 0.0,
+              "choice_ci95": [
+                0.0,
+                0.0621
+              ]
+            }
+          }
+        },
+        "ood_oslo_winter_regime": {
+          "n": 160,
+          "choice_correct": 40,
+          "choice_acc": 0.25,
+          "choice_ci95": [
+            0.1893,
+            0.3224
+          ],
+          "choice_ce": 2.4422,
+          "full_vocab_correct": 40,
+          "full_vocab_acc": 0.25,
+          "full_vocab_ci95": [
+            0.1893,
+            0.3224
+          ],
+          "full_vocab_ce": 2.4513,
+          "mean_prompt_tokens": 87.0
+        },
+        "ood_oslo_summer_regime": {
+          "n": 160,
+          "choice_correct": 40,
+          "choice_acc": 0.25,
+          "choice_ci95": [
+            0.1893,
+            0.3224
+          ],
+          "choice_ce": 2.4035,
+          "full_vocab_correct": 40,
+          "full_vocab_acc": 0.25,
+          "full_vocab_ci95": [
+            0.1893,
+            0.3224
+          ],
+          "full_vocab_ce": 2.412,
+          "mean_prompt_tokens": 87.0
+        },
+        "ood_tokyo_travel_regime": {
+          "n": 160,
+          "choice_correct": 40,
+          "choice_acc": 0.25,
+          "choice_ci95": [
+            0.1893,
+            0.3224
+          ],
+          "choice_ce": 2.4363,
+          "full_vocab_correct": 40,
+          "full_vocab_acc": 0.25,
+          "full_vocab_ci95": [
+            0.1893,
+            0.3224
+          ],
+          "full_vocab_ce": 2.4453,
+          "mean_prompt_tokens": 87.0
+        },
+        "ood_oslo_winter_retrieval": {
+          "n": 160,
+          "choice_correct": 30,
+          "choice_acc": 0.1875,
+          "choice_ci95": [
+            0.1346,
+            0.255
+          ],
+          "choice_ce": 1.6264,
+          "full_vocab_correct": 30,
+          "full_vocab_acc": 0.1875,
+          "full_vocab_ci95": [
+            0.1346,
+            0.255
+          ],
+          "full_vocab_ce": 1.7242,
+          "mean_prompt_tokens": 197.0
+        },
+        "ood_oslo_summer_retrieval": {
+          "n": 160,
+          "choice_correct": 25,
+          "choice_acc": 0.1562,
+          "choice_ci95": [
+            0.1081,
+            0.2205
+          ],
+          "choice_ce": 1.6629,
+          "full_vocab_correct": 25,
+          "full_vocab_acc": 0.1562,
+          "full_vocab_ci95": [
+            0.1081,
+            0.2205
+          ],
+          "full_vocab_ce": 1.7638,
+          "mean_prompt_tokens": 197.0
+        },
+        "ood_tokyo_travel_retrieval": {
+          "n": 160,
+          "choice_correct": 27,
+          "choice_acc": 0.1688,
+          "choice_ci95": [
+            0.1186,
+            0.2344
+          ],
+          "choice_ce": 1.6409,
+          "full_vocab_correct": 27,
+          "full_vocab_acc": 0.1688,
+          "full_vocab_ci95": [
+            0.1186,
+            0.2344
+          ],
+          "full_vocab_ce": 1.7454,
+          "mean_prompt_tokens": 197.0
+        },
+        "ood_compaction": {
+          "n": 180,
+          "choice_correct": 58,
+          "choice_acc": 0.3222,
+          "choice_ci95": [
+            0.2583,
+            0.3936
+          ],
+          "choice_ce": 1.6073,
+          "full_vocab_correct": 59,
+          "full_vocab_acc": 0.3278,
+          "full_vocab_ci95": [
+            0.2634,
+            0.3993
+          ],
+          "full_vocab_ce": 1.6365,
+          "mean_prompt_tokens": 106.0,
+          "by_subtag": {
+            "fresh_long_sameday": {
+              "n": 30,
+              "choice_correct": 0,
+              "choice_acc": 0.0,
+              "choice_ci95": [
+                0.0,
+                0.1135
+              ]
+            },
+            "fresh_short": {
+              "n": 30,
+              "choice_correct": 0,
+              "choice_acc": 0.0,
+              "choice_ci95": [
+                0.0,
+                0.1135
+              ]
+            },
+            "multiday_random": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "multiday_same_clock": {
+              "n": 30,
+              "choice_correct": 28,
+              "choice_acc": 0.9333,
+              "choice_ci95": [
+                0.7868,
+                0.9815
+              ]
+            },
+            "overnight_same_utc_date": {
+              "n": 19,
+              "choice_correct": 0,
+              "choice_acc": 0.0,
+              "choice_ci95": [
+                0.0,
+                0.1682
+              ]
+            },
+            "overnight_standard": {
+              "n": 41,
+              "choice_correct": 0,
+              "choice_acc": 0.0,
+              "choice_ci95": [
+                0.0,
+                0.0857
+              ]
+            }
+          }
+        }
+      },
+      "summary": {
+        "id_composite_choice_acc": 0.2611,
+        "id_composite_choice_ci95": [
+          0.2247,
+          0.2958
+        ],
+        "id_composite_choice_ce": 1.8011,
+        "id_composite_full_acc": 0.2611,
+        "ood_solstice_travel_choice_acc": 0.2104,
+        "ood_solstice_travel_choice_ci95": [
+          0.1858,
+          0.2373
+        ],
+        "ood_solstice_travel_choice_ce": 2.0354,
+        "ood_solstice_travel_full_acc": 0.2104,
+        "ood_solstice_travel_full_ce": 2.0903,
+        "ood_oslo_solstices_choice_acc": 0.2109,
+        "ood_oslo_solstices_choice_ci95": [
+          0.1811,
+          0.2442
+        ],
+        "ood_tokyo_travel_choice_acc": 0.2094,
+        "ood_tokyo_travel_choice_ci95": [
+          0.1684,
+          0.2573
+        ],
+        "ood_compaction_choice_acc": 0.3222,
+        "ood_compaction_choice_ci95": [
+          0.2583,
+          0.3936
+        ],
+        "ood_compaction_choice_ce": 1.6073,
+        "ood_all_choice_acc": 0.2264,
+        "ood_all_choice_ci95": [
+          0.2047,
+          0.2533
+        ],
+        "ood_all_choice_ce": 1.9742,
+        "ood_all_full_acc": 0.2272,
+        "mean_prompt_tokens_all": 134.8,
+        "inference_ms_per_example": 8.572
+      }
+    },
+    "Arm1-Frozen-Caelus-TextPrompt": {
+      "slices": {
+        "id_regime": {
+          "n": 200,
+          "choice_correct": 93,
+          "choice_acc": 0.465,
+          "choice_ci95": [
+            0.3972,
+            0.5341
+          ],
+          "choice_ce": 1.2159,
+          "full_vocab_correct": 89,
+          "full_vocab_acc": 0.445,
+          "full_vocab_ci95": [
+            0.3778,
+            0.5143
+          ],
+          "full_vocab_ce": 1.2712,
+          "mean_prompt_tokens": 165.08
+        },
+        "id_photo_retrieval": {
+          "n": 200,
+          "choice_correct": 81,
+          "choice_acc": 0.405,
+          "choice_ci95": [
+            0.3394,
+            0.4742
+          ],
+          "choice_ce": 1.2716,
+          "full_vocab_correct": 83,
+          "full_vocab_acc": 0.415,
+          "full_vocab_ci95": [
+            0.3489,
+            0.4843
+          ],
+          "full_vocab_ce": 1.387,
+          "mean_prompt_tokens": 351.57
+        },
+        "id_compaction": {
+          "n": 180,
+          "choice_correct": 96,
+          "choice_acc": 0.5333,
+          "choice_ci95": [
+            0.4605,
+            0.6048
+          ],
+          "choice_ce": 0.769,
+          "full_vocab_correct": 86,
+          "full_vocab_acc": 0.4778,
+          "full_vocab_ci95": [
+            0.406,
+            0.5504
+          ],
+          "full_vocab_ce": 0.8041,
+          "mean_prompt_tokens": 206.16,
+          "by_subtag": {
+            "fresh_long_sameday": {
+              "n": 30,
+              "choice_correct": 1,
+              "choice_acc": 0.0333,
+              "choice_ci95": [
+                0.0059,
+                0.1667
+              ]
+            },
+            "fresh_short": {
+              "n": 30,
+              "choice_correct": 16,
+              "choice_acc": 0.5333,
+              "choice_ci95": [
+                0.3614,
+                0.6977
+              ]
+            },
+            "multiday_random": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "multiday_same_clock": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "overnight_same_utc_date": {
+              "n": 2,
+              "choice_correct": 0,
+              "choice_acc": 0.0,
+              "choice_ci95": [
+                0.0,
+                0.6576
+              ]
+            },
+            "overnight_standard": {
+              "n": 58,
+              "choice_correct": 19,
+              "choice_acc": 0.3276,
+              "choice_ci95": [
+                0.2208,
+                0.4558
+              ]
+            }
+          }
+        },
+        "ood_oslo_winter_regime": {
+          "n": 160,
+          "choice_correct": 96,
+          "choice_acc": 0.6,
+          "choice_ci95": [
+            0.5226,
+            0.6727
+          ],
+          "choice_ce": 1.1559,
+          "full_vocab_correct": 95,
+          "full_vocab_acc": 0.5938,
+          "full_vocab_ci95": [
+            0.5163,
+            0.6668
+          ],
+          "full_vocab_ce": 1.2143,
+          "mean_prompt_tokens": 164.52
+        },
+        "ood_oslo_summer_regime": {
+          "n": 160,
+          "choice_correct": 89,
+          "choice_acc": 0.5563,
+          "choice_ci95": [
+            0.4788,
+            0.631
+          ],
+          "choice_ce": 1.1954,
+          "full_vocab_correct": 89,
+          "full_vocab_acc": 0.5563,
+          "full_vocab_ci95": [
+            0.4788,
+            0.631
+          ],
+          "full_vocab_ce": 1.251,
+          "mean_prompt_tokens": 164.81
+        },
+        "ood_tokyo_travel_regime": {
+          "n": 160,
+          "choice_correct": 66,
+          "choice_acc": 0.4125,
+          "choice_ci95": [
+            0.3391,
+            0.49
+          ],
+          "choice_ce": 1.3512,
+          "full_vocab_correct": 56,
+          "full_vocab_acc": 0.35,
+          "full_vocab_ci95": [
+            0.2804,
+            0.4266
+          ],
+          "full_vocab_ce": 1.4046,
+          "mean_prompt_tokens": 165.23
+        },
+        "ood_oslo_winter_retrieval": {
+          "n": 160,
+          "choice_correct": 52,
+          "choice_acc": 0.325,
+          "choice_ci95": [
+            0.2573,
+            0.4009
+          ],
+          "choice_ce": 1.4067,
+          "full_vocab_correct": 52,
+          "full_vocab_acc": 0.325,
+          "full_vocab_ci95": [
+            0.2573,
+            0.4009
+          ],
+          "full_vocab_ce": 1.5122,
+          "mean_prompt_tokens": 350.6
+        },
+        "ood_oslo_summer_retrieval": {
+          "n": 160,
+          "choice_correct": 41,
+          "choice_acc": 0.2562,
+          "choice_ci95": [
+            0.1949,
+            0.3291
+          ],
+          "choice_ce": 1.4845,
+          "full_vocab_correct": 39,
+          "full_vocab_acc": 0.2437,
+          "full_vocab_ci95": [
+            0.1837,
+            0.3158
+          ],
+          "full_vocab_ce": 1.5989,
+          "mean_prompt_tokens": 351.07
+        },
+        "ood_tokyo_travel_retrieval": {
+          "n": 160,
+          "choice_correct": 63,
+          "choice_acc": 0.3937,
+          "choice_ci95": [
+            0.3214,
+            0.4711
+          ],
+          "choice_ce": 1.3415,
+          "full_vocab_correct": 58,
+          "full_vocab_acc": 0.3625,
+          "full_vocab_ci95": [
+            0.292,
+            0.4394
+          ],
+          "full_vocab_ce": 1.4908,
+          "mean_prompt_tokens": 352.09
+        },
+        "ood_compaction": {
+          "n": 180,
+          "choice_correct": 106,
+          "choice_acc": 0.5889,
+          "choice_ci95": [
+            0.5159,
+            0.6582
+          ],
+          "choice_ce": 0.7411,
+          "full_vocab_correct": 93,
+          "full_vocab_acc": 0.5167,
+          "full_vocab_ci95": [
+            0.4441,
+            0.5886
+          ],
+          "full_vocab_ce": 0.7768,
+          "mean_prompt_tokens": 206.12,
+          "by_subtag": {
+            "fresh_long_sameday": {
+              "n": 30,
+              "choice_correct": 1,
+              "choice_acc": 0.0333,
+              "choice_ci95": [
+                0.0059,
+                0.1667
+              ]
+            },
+            "fresh_short": {
+              "n": 30,
+              "choice_correct": 16,
+              "choice_acc": 0.5333,
+              "choice_ci95": [
+                0.3614,
+                0.6977
+              ]
+            },
+            "multiday_random": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "multiday_same_clock": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "overnight_same_utc_date": {
+              "n": 19,
+              "choice_correct": 2,
+              "choice_acc": 0.1053,
+              "choice_ci95": [
+                0.0294,
+                0.3139
+              ]
+            },
+            "overnight_standard": {
+              "n": 41,
+              "choice_correct": 27,
+              "choice_acc": 0.6585,
+              "choice_ci95": [
+                0.5055,
+                0.7844
+              ]
+            }
+          }
+        }
+      },
+      "summary": {
+        "id_composite_choice_acc": 0.4678,
+        "id_composite_choice_ci95": [
+          0.4253,
+          0.5062
+        ],
+        "id_composite_choice_ce": 1.0855,
+        "id_composite_full_acc": 0.4459,
+        "ood_solstice_travel_choice_acc": 0.4239,
+        "ood_solstice_travel_choice_ci95": [
+          0.3931,
+          0.4555
+        ],
+        "ood_solstice_travel_choice_ce": 1.3225,
+        "ood_solstice_travel_full_acc": 0.4052,
+        "ood_solstice_travel_full_ce": 1.412,
+        "ood_oslo_solstices_choice_acc": 0.4344,
+        "ood_oslo_solstices_choice_ci95": [
+          0.3965,
+          0.4731
+        ],
+        "ood_tokyo_travel_choice_acc": 0.4031,
+        "ood_tokyo_travel_choice_ci95": [
+          0.3508,
+          0.4577
+        ],
+        "ood_compaction_choice_acc": 0.5889,
+        "ood_compaction_choice_ci95": [
+          0.5159,
+          0.6582
+        ],
+        "ood_compaction_choice_ce": 0.7411,
+        "ood_all_choice_acc": 0.4475,
+        "ood_all_choice_ci95": [
+          0.4213,
+          0.479
+        ],
+        "ood_all_choice_ce": 1.2395,
+        "ood_all_full_acc": 0.4211,
+        "mean_prompt_tokens_all": 247.72,
+        "inference_ms_per_example": 14.686
+      }
+    },
+    "Arm1b-LoRA-TextPrompt": {
+      "slices": {
+        "id_regime": {
+          "n": 200,
+          "choice_correct": 200,
+          "choice_acc": 1.0,
+          "choice_ci95": [
+            0.9812,
+            1.0
+          ],
+          "choice_ce": 0.0,
+          "full_vocab_correct": 200,
+          "full_vocab_acc": 1.0,
+          "full_vocab_ci95": [
+            0.9812,
+            1.0
+          ],
+          "full_vocab_ce": 0.0,
+          "mean_prompt_tokens": 165.08
+        },
+        "id_photo_retrieval": {
+          "n": 200,
+          "choice_correct": 199,
+          "choice_acc": 0.995,
+          "choice_ci95": [
+            0.9722,
+            0.9991
+          ],
+          "choice_ce": 0.0065,
+          "full_vocab_correct": 199,
+          "full_vocab_acc": 0.995,
+          "full_vocab_ci95": [
+            0.9722,
+            0.9991
+          ],
+          "full_vocab_ce": 0.0065,
+          "mean_prompt_tokens": 351.57
+        },
+        "id_compaction": {
+          "n": 180,
+          "choice_correct": 180,
+          "choice_acc": 1.0,
+          "choice_ci95": [
+            0.9791,
+            1.0
+          ],
+          "choice_ce": 0.0,
+          "full_vocab_correct": 180,
+          "full_vocab_acc": 1.0,
+          "full_vocab_ci95": [
+            0.9791,
+            1.0
+          ],
+          "full_vocab_ce": 0.0001,
+          "mean_prompt_tokens": 206.16,
+          "by_subtag": {
+            "fresh_long_sameday": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "fresh_short": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "multiday_random": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "multiday_same_clock": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "overnight_same_utc_date": {
+              "n": 2,
+              "choice_correct": 2,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.3424,
+                1.0
+              ]
+            },
+            "overnight_standard": {
+              "n": 58,
+              "choice_correct": 58,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.9379,
+                1.0
+              ]
+            }
+          }
+        },
+        "ood_oslo_winter_regime": {
+          "n": 160,
+          "choice_correct": 160,
+          "choice_acc": 1.0,
+          "choice_ci95": [
+            0.9766,
+            1.0
+          ],
+          "choice_ce": 0.0,
+          "full_vocab_correct": 160,
+          "full_vocab_acc": 1.0,
+          "full_vocab_ci95": [
+            0.9766,
+            1.0
+          ],
+          "full_vocab_ce": 0.0001,
+          "mean_prompt_tokens": 164.52
+        },
+        "ood_oslo_summer_regime": {
+          "n": 160,
+          "choice_correct": 160,
+          "choice_acc": 1.0,
+          "choice_ci95": [
+            0.9766,
+            1.0
+          ],
+          "choice_ce": 0.0,
+          "full_vocab_correct": 160,
+          "full_vocab_acc": 1.0,
+          "full_vocab_ci95": [
+            0.9766,
+            1.0
+          ],
+          "full_vocab_ce": 0.0,
+          "mean_prompt_tokens": 164.81
+        },
+        "ood_tokyo_travel_regime": {
+          "n": 160,
+          "choice_correct": 160,
+          "choice_acc": 1.0,
+          "choice_ci95": [
+            0.9766,
+            1.0
+          ],
+          "choice_ce": 0.0,
+          "full_vocab_correct": 160,
+          "full_vocab_acc": 1.0,
+          "full_vocab_ci95": [
+            0.9766,
+            1.0
+          ],
+          "full_vocab_ce": 0.0,
+          "mean_prompt_tokens": 165.23
+        },
+        "ood_oslo_winter_retrieval": {
+          "n": 160,
+          "choice_correct": 146,
+          "choice_acc": 0.9125,
+          "choice_ci95": [
+            0.8585,
+            0.9472
+          ],
+          "choice_ce": 0.5233,
+          "full_vocab_correct": 146,
+          "full_vocab_acc": 0.9125,
+          "full_vocab_ci95": [
+            0.8585,
+            0.9472
+          ],
+          "full_vocab_ce": 0.5234,
+          "mean_prompt_tokens": 350.6
+        },
+        "ood_oslo_summer_retrieval": {
+          "n": 160,
+          "choice_correct": 146,
+          "choice_acc": 0.9125,
+          "choice_ci95": [
+            0.8585,
+            0.9472
+          ],
+          "choice_ce": 0.5098,
+          "full_vocab_correct": 146,
+          "full_vocab_acc": 0.9125,
+          "full_vocab_ci95": [
+            0.8585,
+            0.9472
+          ],
+          "full_vocab_ce": 0.5099,
+          "mean_prompt_tokens": 351.07
+        },
+        "ood_tokyo_travel_retrieval": {
+          "n": 160,
+          "choice_correct": 158,
+          "choice_acc": 0.9875,
+          "choice_ci95": [
+            0.9556,
+            0.9966
+          ],
+          "choice_ce": 0.0357,
+          "full_vocab_correct": 158,
+          "full_vocab_acc": 0.9875,
+          "full_vocab_ci95": [
+            0.9556,
+            0.9966
+          ],
+          "full_vocab_ce": 0.0358,
+          "mean_prompt_tokens": 352.09
+        },
+        "ood_compaction": {
+          "n": 180,
+          "choice_correct": 180,
+          "choice_acc": 1.0,
+          "choice_ci95": [
+            0.9791,
+            1.0
+          ],
+          "choice_ce": 0.0,
+          "full_vocab_correct": 180,
+          "full_vocab_acc": 1.0,
+          "full_vocab_ci95": [
+            0.9791,
+            1.0
+          ],
+          "full_vocab_ce": 0.0001,
+          "mean_prompt_tokens": 206.12,
+          "by_subtag": {
+            "fresh_long_sameday": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "fresh_short": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "multiday_random": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "multiday_same_clock": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "overnight_same_utc_date": {
+              "n": 19,
+              "choice_correct": 19,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8318,
+                1.0
+              ]
+            },
+            "overnight_standard": {
+              "n": 41,
+              "choice_correct": 41,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.9143,
+                1.0
+              ]
+            }
+          }
+        }
+      },
+      "summary": {
+        "id_composite_choice_acc": 0.9983,
+        "id_composite_choice_ci95": [
+          0.9903,
+          0.9997
+        ],
+        "id_composite_choice_ce": 0.0022,
+        "id_composite_full_acc": 0.9983,
+        "ood_solstice_travel_choice_acc": 0.9688,
+        "ood_solstice_travel_choice_ci95": [
+          0.9557,
+          0.978
+        ],
+        "ood_solstice_travel_choice_ce": 0.1781,
+        "ood_solstice_travel_full_acc": 0.9688,
+        "ood_solstice_travel_full_ce": 0.1782,
+        "ood_oslo_solstices_choice_acc": 0.9563,
+        "ood_oslo_solstices_choice_ci95": [
+          0.9375,
+          0.9696
+        ],
+        "ood_tokyo_travel_choice_acc": 0.9938,
+        "ood_tokyo_travel_choice_ci95": [
+          0.9775,
+          0.9983
+        ],
+        "ood_compaction_choice_acc": 1.0,
+        "ood_compaction_choice_ci95": [
+          0.9791,
+          1.0
+        ],
+        "ood_compaction_choice_ce": 0.0,
+        "ood_all_choice_acc": 0.9732,
+        "ood_all_choice_ci95": [
+          0.9627,
+          0.9815
+        ],
+        "ood_all_choice_ce": 0.1527,
+        "ood_all_full_acc": 0.9732,
+        "mean_prompt_tokens_all": 247.72,
+        "inference_ms_per_example": 23.246
+      }
+    },
+    "Arm2-LoRA-UnixFourier-Adapter": {
+      "slices": {
+        "id_regime": {
+          "n": 200,
+          "choice_correct": 178,
+          "choice_acc": 0.89,
+          "choice_ci95": [
+            0.8391,
+            0.9262
+          ],
+          "choice_ce": 0.687,
+          "full_vocab_correct": 178,
+          "full_vocab_acc": 0.89,
+          "full_vocab_ci95": [
+            0.8391,
+            0.9262
+          ],
+          "full_vocab_ce": 0.6885,
+          "mean_prompt_tokens": 71.0
+        },
+        "id_photo_retrieval": {
+          "n": 200,
+          "choice_correct": 141,
+          "choice_acc": 0.705,
+          "choice_ci95": [
+            0.6384,
+            0.7639
+          ],
+          "choice_ce": 0.9645,
+          "full_vocab_correct": 141,
+          "full_vocab_acc": 0.705,
+          "full_vocab_ci95": [
+            0.6384,
+            0.7639
+          ],
+          "full_vocab_ce": 0.965,
+          "mean_prompt_tokens": 117.0
+        },
+        "id_compaction": {
+          "n": 180,
+          "choice_correct": 161,
+          "choice_acc": 0.8944,
+          "choice_ci95": [
+            0.841,
+            0.9314
+          ],
+          "choice_ce": 0.3234,
+          "full_vocab_correct": 161,
+          "full_vocab_acc": 0.8944,
+          "full_vocab_ci95": [
+            0.841,
+            0.9314
+          ],
+          "full_vocab_ce": 0.3265,
+          "mean_prompt_tokens": 73.0,
+          "by_subtag": {
+            "fresh_long_sameday": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "fresh_short": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "multiday_random": {
+              "n": 30,
+              "choice_correct": 22,
+              "choice_acc": 0.7333,
+              "choice_ci95": [
+                0.5555,
+                0.8582
+              ]
+            },
+            "multiday_same_clock": {
+              "n": 30,
+              "choice_correct": 24,
+              "choice_acc": 0.8,
+              "choice_ci95": [
+                0.6269,
+                0.9049
+              ]
+            },
+            "overnight_same_utc_date": {
+              "n": 2,
+              "choice_correct": 2,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.3424,
+                1.0
+              ]
+            },
+            "overnight_standard": {
+              "n": 58,
+              "choice_correct": 53,
+              "choice_acc": 0.9138,
+              "choice_ci95": [
+                0.8136,
+                0.9626
+              ]
+            }
+          }
+        },
+        "ood_oslo_winter_regime": {
+          "n": 160,
+          "choice_correct": 101,
+          "choice_acc": 0.6312,
+          "choice_ci95": [
+            0.5542,
+            0.7021
+          ],
+          "choice_ce": 2.1309,
+          "full_vocab_correct": 101,
+          "full_vocab_acc": 0.6312,
+          "full_vocab_ci95": [
+            0.5542,
+            0.7021
+          ],
+          "full_vocab_ce": 2.1334,
+          "mean_prompt_tokens": 71.0
+        },
+        "ood_oslo_summer_regime": {
+          "n": 160,
+          "choice_correct": 102,
+          "choice_acc": 0.6375,
+          "choice_ci95": [
+            0.5606,
+            0.708
+          ],
+          "choice_ce": 2.3109,
+          "full_vocab_correct": 102,
+          "full_vocab_acc": 0.6375,
+          "full_vocab_ci95": [
+            0.5606,
+            0.708
+          ],
+          "full_vocab_ce": 2.3126,
+          "mean_prompt_tokens": 71.0
+        },
+        "ood_tokyo_travel_regime": {
+          "n": 160,
+          "choice_correct": 5,
+          "choice_acc": 0.0312,
+          "choice_ci95": [
+            0.0134,
+            0.0711
+          ],
+          "choice_ce": 11.4516,
+          "full_vocab_correct": 5,
+          "full_vocab_acc": 0.0312,
+          "full_vocab_ci95": [
+            0.0134,
+            0.0711
+          ],
+          "full_vocab_ce": 11.4534,
+          "mean_prompt_tokens": 71.0
+        },
+        "ood_oslo_winter_retrieval": {
+          "n": 160,
+          "choice_correct": 19,
+          "choice_acc": 0.1187,
+          "choice_ci95": [
+            0.0774,
+            0.178
+          ],
+          "choice_ce": 3.3863,
+          "full_vocab_correct": 20,
+          "full_vocab_acc": 0.125,
+          "full_vocab_ci95": [
+            0.0824,
+            0.1852
+          ],
+          "full_vocab_ce": 3.3868,
+          "mean_prompt_tokens": 117.0
+        },
+        "ood_oslo_summer_retrieval": {
+          "n": 160,
+          "choice_correct": 11,
+          "choice_acc": 0.0688,
+          "choice_ci95": [
+            0.0388,
+            0.1189
+          ],
+          "choice_ce": 4.1565,
+          "full_vocab_correct": 10,
+          "full_vocab_acc": 0.0625,
+          "full_vocab_ci95": [
+            0.0343,
+            0.1112
+          ],
+          "full_vocab_ce": 4.1569,
+          "mean_prompt_tokens": 117.0
+        },
+        "ood_tokyo_travel_retrieval": {
+          "n": 160,
+          "choice_correct": 0,
+          "choice_acc": 0.0,
+          "choice_ci95": [
+            0.0,
+            0.0234
+          ],
+          "choice_ce": 5.5319,
+          "full_vocab_correct": 0,
+          "full_vocab_acc": 0.0,
+          "full_vocab_ci95": [
+            0.0,
+            0.0234
+          ],
+          "full_vocab_ce": 5.5324,
+          "mean_prompt_tokens": 117.0
+        },
+        "ood_compaction": {
+          "n": 180,
+          "choice_correct": 98,
+          "choice_acc": 0.5444,
+          "choice_ci95": [
+            0.4715,
+            0.6155
+          ],
+          "choice_ce": 3.0024,
+          "full_vocab_correct": 97,
+          "full_vocab_acc": 0.5389,
+          "full_vocab_ci95": [
+            0.466,
+            0.6101
+          ],
+          "full_vocab_ce": 3.0072,
+          "mean_prompt_tokens": 73.0,
+          "by_subtag": {
+            "fresh_long_sameday": {
+              "n": 30,
+              "choice_correct": 18,
+              "choice_acc": 0.6,
+              "choice_ci95": [
+                0.4232,
+                0.7541
+              ]
+            },
+            "fresh_short": {
+              "n": 30,
+              "choice_correct": 12,
+              "choice_acc": 0.4,
+              "choice_ci95": [
+                0.2459,
+                0.5768
+              ]
+            },
+            "multiday_random": {
+              "n": 30,
+              "choice_correct": 20,
+              "choice_acc": 0.6667,
+              "choice_ci95": [
+                0.4878,
+                0.8077
+              ]
+            },
+            "multiday_same_clock": {
+              "n": 30,
+              "choice_correct": 18,
+              "choice_acc": 0.6,
+              "choice_ci95": [
+                0.4232,
+                0.7541
+              ]
+            },
+            "overnight_same_utc_date": {
+              "n": 19,
+              "choice_correct": 0,
+              "choice_acc": 0.0,
+              "choice_ci95": [
+                0.0,
+                0.1682
+              ]
+            },
+            "overnight_standard": {
+              "n": 41,
+              "choice_correct": 30,
+              "choice_acc": 0.7317,
+              "choice_ci95": [
+                0.5807,
+                0.8431
+              ]
+            }
+          }
+        }
+      },
+      "summary": {
+        "id_composite_choice_acc": 0.8298,
+        "id_composite_choice_ci95": [
+          0.7947,
+          0.8561
+        ],
+        "id_composite_choice_ce": 0.6583,
+        "id_composite_full_acc": 0.8298,
+        "ood_solstice_travel_choice_acc": 0.2479,
+        "ood_solstice_travel_choice_ci95": [
+          0.2216,
+          0.2762
+        ],
+        "ood_solstice_travel_choice_ce": 4.828,
+        "ood_solstice_travel_full_acc": 0.2479,
+        "ood_solstice_travel_full_ce": 4.8293,
+        "ood_oslo_solstices_choice_acc": 0.364,
+        "ood_oslo_solstices_choice_ci95": [
+          0.3277,
+          0.402
+        ],
+        "ood_tokyo_travel_choice_acc": 0.0156,
+        "ood_tokyo_travel_choice_ci95": [
+          0.0067,
+          0.036
+        ],
+        "ood_compaction_choice_acc": 0.5444,
+        "ood_compaction_choice_ci95": [
+          0.4715,
+          0.6155
+        ],
+        "ood_compaction_choice_ce": 3.0024,
+        "ood_all_choice_acc": 0.2903,
+        "ood_all_choice_ci95": [
+          0.269,
+          0.3219
+        ],
+        "ood_all_choice_ce": 4.5672,
+        "ood_all_full_acc": 0.2895,
+        "mean_prompt_tokens_all": 89.8,
+        "inference_ms_per_example": 8.943
+      }
+    },
+    "Arm2b-LoRA-UnixFourier+LatLon-Adapter": {
+      "slices": {
+        "id_regime": {
+          "n": 200,
+          "choice_correct": 176,
+          "choice_acc": 0.88,
+          "choice_ci95": [
+            0.8277,
+            0.918
+          ],
+          "choice_ce": 0.6813,
+          "full_vocab_correct": 176,
+          "full_vocab_acc": 0.88,
+          "full_vocab_ci95": [
+            0.8277,
+            0.918
+          ],
+          "full_vocab_ce": 0.6831,
+          "mean_prompt_tokens": 71.0
+        },
+        "id_photo_retrieval": {
+          "n": 200,
+          "choice_correct": 165,
+          "choice_acc": 0.825,
+          "choice_ci95": [
+            0.7664,
+            0.8714
+          ],
+          "choice_ce": 0.9265,
+          "full_vocab_correct": 165,
+          "full_vocab_acc": 0.825,
+          "full_vocab_ci95": [
+            0.7664,
+            0.8714
+          ],
+          "full_vocab_ce": 0.9269,
+          "mean_prompt_tokens": 117.0
+        },
+        "id_compaction": {
+          "n": 180,
+          "choice_correct": 168,
+          "choice_acc": 0.9333,
+          "choice_ci95": [
+            0.8871,
+            0.9615
+          ],
+          "choice_ce": 0.2661,
+          "full_vocab_correct": 168,
+          "full_vocab_acc": 0.9333,
+          "full_vocab_ci95": [
+            0.8871,
+            0.9615
+          ],
+          "full_vocab_ce": 0.2674,
+          "mean_prompt_tokens": 73.0,
+          "by_subtag": {
+            "fresh_long_sameday": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "fresh_short": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "multiday_random": {
+              "n": 30,
+              "choice_correct": 24,
+              "choice_acc": 0.8,
+              "choice_ci95": [
+                0.6269,
+                0.9049
+              ]
+            },
+            "multiday_same_clock": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "overnight_same_utc_date": {
+              "n": 2,
+              "choice_correct": 2,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.3424,
+                1.0
+              ]
+            },
+            "overnight_standard": {
+              "n": 58,
+              "choice_correct": 52,
+              "choice_acc": 0.8966,
+              "choice_ci95": [
+                0.7921,
+                0.9517
+              ]
+            }
+          }
+        },
+        "ood_oslo_winter_regime": {
+          "n": 160,
+          "choice_correct": 101,
+          "choice_acc": 0.6312,
+          "choice_ci95": [
+            0.5542,
+            0.7021
+          ],
+          "choice_ce": 2.7221,
+          "full_vocab_correct": 100,
+          "full_vocab_acc": 0.625,
+          "full_vocab_ci95": [
+            0.5479,
+            0.6963
+          ],
+          "full_vocab_ce": 2.7236,
+          "mean_prompt_tokens": 71.0
+        },
+        "ood_oslo_summer_regime": {
+          "n": 160,
+          "choice_correct": 95,
+          "choice_acc": 0.5938,
+          "choice_ci95": [
+            0.5163,
+            0.6668
+          ],
+          "choice_ce": 3.6464,
+          "full_vocab_correct": 95,
+          "full_vocab_acc": 0.5938,
+          "full_vocab_ci95": [
+            0.5163,
+            0.6668
+          ],
+          "full_vocab_ce": 3.648,
+          "mean_prompt_tokens": 71.0
+        },
+        "ood_tokyo_travel_regime": {
+          "n": 160,
+          "choice_correct": 141,
+          "choice_acc": 0.8812,
+          "choice_ci95": [
+            0.822,
+            0.9226
+          ],
+          "choice_ce": 0.3245,
+          "full_vocab_correct": 141,
+          "full_vocab_acc": 0.8812,
+          "full_vocab_ci95": [
+            0.822,
+            0.9226
+          ],
+          "full_vocab_ce": 0.3284,
+          "mean_prompt_tokens": 71.0
+        },
+        "ood_oslo_winter_retrieval": {
+          "n": 160,
+          "choice_correct": 35,
+          "choice_acc": 0.2188,
+          "choice_ci95": [
+            0.1617,
+            0.289
+          ],
+          "choice_ce": 4.9487,
+          "full_vocab_correct": 35,
+          "full_vocab_acc": 0.2188,
+          "full_vocab_ci95": [
+            0.1617,
+            0.289
+          ],
+          "full_vocab_ce": 4.949,
+          "mean_prompt_tokens": 117.0
+        },
+        "ood_oslo_summer_retrieval": {
+          "n": 160,
+          "choice_correct": 13,
+          "choice_acc": 0.0813,
+          "choice_ci95": [
+            0.0481,
+            0.134
+          ],
+          "choice_ce": 6.1884,
+          "full_vocab_correct": 13,
+          "full_vocab_acc": 0.0813,
+          "full_vocab_ci95": [
+            0.0481,
+            0.134
+          ],
+          "full_vocab_ce": 6.1889,
+          "mean_prompt_tokens": 117.0
+        },
+        "ood_tokyo_travel_retrieval": {
+          "n": 160,
+          "choice_correct": 112,
+          "choice_acc": 0.7,
+          "choice_ci95": [
+            0.625,
+            0.7656
+          ],
+          "choice_ce": 1.486,
+          "full_vocab_correct": 112,
+          "full_vocab_acc": 0.7,
+          "full_vocab_ci95": [
+            0.625,
+            0.7656
+          ],
+          "full_vocab_ce": 1.4865,
+          "mean_prompt_tokens": 117.0
+        },
+        "ood_compaction": {
+          "n": 180,
+          "choice_correct": 108,
+          "choice_acc": 0.6,
+          "choice_ci95": [
+            0.5271,
+            0.6688
+          ],
+          "choice_ce": 2.2413,
+          "full_vocab_correct": 108,
+          "full_vocab_acc": 0.6,
+          "full_vocab_ci95": [
+            0.5271,
+            0.6688
+          ],
+          "full_vocab_ce": 2.2445,
+          "mean_prompt_tokens": 73.0,
+          "by_subtag": {
+            "fresh_long_sameday": {
+              "n": 30,
+              "choice_correct": 20,
+              "choice_acc": 0.6667,
+              "choice_ci95": [
+                0.4878,
+                0.8077
+              ]
+            },
+            "fresh_short": {
+              "n": 30,
+              "choice_correct": 6,
+              "choice_acc": 0.2,
+              "choice_ci95": [
+                0.0951,
+                0.3731
+              ]
+            },
+            "multiday_random": {
+              "n": 30,
+              "choice_correct": 22,
+              "choice_acc": 0.7333,
+              "choice_ci95": [
+                0.5555,
+                0.8582
+              ]
+            },
+            "multiday_same_clock": {
+              "n": 30,
+              "choice_correct": 29,
+              "choice_acc": 0.9667,
+              "choice_ci95": [
+                0.8333,
+                0.9941
+              ]
+            },
+            "overnight_same_utc_date": {
+              "n": 19,
+              "choice_correct": 18,
+              "choice_acc": 0.9474,
+              "choice_ci95": [
+                0.7536,
+                0.9906
+              ]
+            },
+            "overnight_standard": {
+              "n": 41,
+              "choice_correct": 13,
+              "choice_acc": 0.3171,
+              "choice_ci95": [
+                0.1956,
+                0.4698
+              ]
+            }
+          }
+        }
+      },
+      "summary": {
+        "id_composite_choice_acc": 0.8794,
+        "id_composite_choice_ci95": [
+          0.8484,
+          0.9018
+        ],
+        "id_composite_choice_ce": 0.6246,
+        "id_composite_full_acc": 0.8794,
+        "ood_solstice_travel_choice_acc": 0.5177,
+        "ood_solstice_travel_choice_ci95": [
+          0.4861,
+          0.5492
+        ],
+        "ood_solstice_travel_choice_ce": 3.2193,
+        "ood_solstice_travel_full_acc": 0.5167,
+        "ood_solstice_travel_full_ce": 3.2207,
+        "ood_oslo_solstices_choice_acc": 0.3813,
+        "ood_oslo_solstices_choice_ci95": [
+          0.3444,
+          0.4195
+        ],
+        "ood_tokyo_travel_choice_acc": 0.7906,
+        "ood_tokyo_travel_choice_ci95": [
+          0.7427,
+          0.8316
+        ],
+        "ood_compaction_choice_acc": 0.6,
+        "ood_compaction_choice_ci95": [
+          0.5271,
+          0.6688
+        ],
+        "ood_compaction_choice_ce": 2.2413,
+        "ood_all_choice_acc": 0.5295,
+        "ood_all_choice_ci95": [
+          0.5017,
+          0.5595
+        ],
+        "ood_all_choice_ce": 3.0796,
+        "ood_all_full_acc": 0.5286,
+        "mean_prompt_tokens_all": 89.8,
+        "inference_ms_per_example": 9.137
+      }
+    },
+    "Arm3-LoRA-Caelus-GeoAdapter": {
+      "slices": {
+        "id_regime": {
+          "n": 200,
+          "choice_correct": 191,
+          "choice_acc": 0.955,
+          "choice_ci95": [
+            0.9167,
+            0.9761
+          ],
+          "choice_ce": 0.1262,
+          "full_vocab_correct": 191,
+          "full_vocab_acc": 0.955,
+          "full_vocab_ci95": [
+            0.9167,
+            0.9761
+          ],
+          "full_vocab_ce": 0.1267,
+          "mean_prompt_tokens": 71.0
+        },
+        "id_photo_retrieval": {
+          "n": 200,
+          "choice_correct": 190,
+          "choice_acc": 0.95,
+          "choice_ci95": [
+            0.9104,
+            0.9726
+          ],
+          "choice_ce": 0.1869,
+          "full_vocab_correct": 190,
+          "full_vocab_acc": 0.95,
+          "full_vocab_ci95": [
+            0.9104,
+            0.9726
+          ],
+          "full_vocab_ce": 0.1872,
+          "mean_prompt_tokens": 117.0
+        },
+        "id_compaction": {
+          "n": 180,
+          "choice_correct": 173,
+          "choice_acc": 0.9611,
+          "choice_ci95": [
+            0.9219,
+            0.981
+          ],
+          "choice_ce": 0.1844,
+          "full_vocab_correct": 173,
+          "full_vocab_acc": 0.9611,
+          "full_vocab_ci95": [
+            0.9219,
+            0.981
+          ],
+          "full_vocab_ce": 0.1852,
+          "mean_prompt_tokens": 73.0,
+          "by_subtag": {
+            "fresh_long_sameday": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "fresh_short": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "multiday_random": {
+              "n": 30,
+              "choice_correct": 23,
+              "choice_acc": 0.7667,
+              "choice_ci95": [
+                0.5907,
+                0.8821
+              ]
+            },
+            "multiday_same_clock": {
+              "n": 30,
+              "choice_correct": 30,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8865,
+                1.0
+              ]
+            },
+            "overnight_same_utc_date": {
+              "n": 2,
+              "choice_correct": 2,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.3424,
+                1.0
+              ]
+            },
+            "overnight_standard": {
+              "n": 58,
+              "choice_correct": 58,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.9379,
+                1.0
+              ]
+            }
+          }
+        },
+        "ood_oslo_winter_regime": {
+          "n": 160,
+          "choice_correct": 149,
+          "choice_acc": 0.9313,
+          "choice_ci95": [
+            0.8811,
+            0.9612
+          ],
+          "choice_ce": 0.2325,
+          "full_vocab_correct": 149,
+          "full_vocab_acc": 0.9313,
+          "full_vocab_ci95": [
+            0.8811,
+            0.9612
+          ],
+          "full_vocab_ce": 0.2334,
+          "mean_prompt_tokens": 71.0
+        },
+        "ood_oslo_summer_regime": {
+          "n": 160,
+          "choice_correct": 147,
+          "choice_acc": 0.9187,
+          "choice_ci95": [
+            0.866,
+            0.9519
+          ],
+          "choice_ce": 0.6425,
+          "full_vocab_correct": 147,
+          "full_vocab_acc": 0.9187,
+          "full_vocab_ci95": [
+            0.866,
+            0.9519
+          ],
+          "full_vocab_ce": 0.6434,
+          "mean_prompt_tokens": 71.0
+        },
+        "ood_tokyo_travel_regime": {
+          "n": 160,
+          "choice_correct": 150,
+          "choice_acc": 0.9375,
+          "choice_ci95": [
+            0.8888,
+            0.9657
+          ],
+          "choice_ce": 0.2288,
+          "full_vocab_correct": 150,
+          "full_vocab_acc": 0.9375,
+          "full_vocab_ci95": [
+            0.8888,
+            0.9657
+          ],
+          "full_vocab_ce": 0.2296,
+          "mean_prompt_tokens": 71.0
+        },
+        "ood_oslo_winter_retrieval": {
+          "n": 160,
+          "choice_correct": 145,
+          "choice_acc": 0.9062,
+          "choice_ci95": [
+            0.8511,
+            0.9424
+          ],
+          "choice_ce": 0.4106,
+          "full_vocab_correct": 145,
+          "full_vocab_acc": 0.9062,
+          "full_vocab_ci95": [
+            0.8511,
+            0.9424
+          ],
+          "full_vocab_ce": 0.4109,
+          "mean_prompt_tokens": 117.0
+        },
+        "ood_oslo_summer_retrieval": {
+          "n": 160,
+          "choice_correct": 122,
+          "choice_acc": 0.7625,
+          "choice_ci95": [
+            0.6909,
+            0.8218
+          ],
+          "choice_ce": 1.5625,
+          "full_vocab_correct": 122,
+          "full_vocab_acc": 0.7625,
+          "full_vocab_ci95": [
+            0.6909,
+            0.8218
+          ],
+          "full_vocab_ce": 1.5628,
+          "mean_prompt_tokens": 117.0
+        },
+        "ood_tokyo_travel_retrieval": {
+          "n": 160,
+          "choice_correct": 152,
+          "choice_acc": 0.95,
+          "choice_ci95": [
+            0.9044,
+            0.9744
+          ],
+          "choice_ce": 0.2413,
+          "full_vocab_correct": 152,
+          "full_vocab_acc": 0.95,
+          "full_vocab_ci95": [
+            0.9044,
+            0.9744
+          ],
+          "full_vocab_ce": 0.2416,
+          "mean_prompt_tokens": 117.0
+        },
+        "ood_compaction": {
+          "n": 180,
+          "choice_correct": 146,
+          "choice_acc": 0.8111,
+          "choice_ci95": [
+            0.7477,
+            0.8616
+          ],
+          "choice_ce": 0.7078,
+          "full_vocab_correct": 147,
+          "full_vocab_acc": 0.8167,
+          "full_vocab_ci95": [
+            0.7537,
+            0.8664
+          ],
+          "full_vocab_ce": 0.71,
+          "mean_prompt_tokens": 73.0,
+          "by_subtag": {
+            "fresh_long_sameday": {
+              "n": 30,
+              "choice_correct": 28,
+              "choice_acc": 0.9333,
+              "choice_ci95": [
+                0.7868,
+                0.9815
+              ]
+            },
+            "fresh_short": {
+              "n": 30,
+              "choice_correct": 18,
+              "choice_acc": 0.6,
+              "choice_ci95": [
+                0.4232,
+                0.7541
+              ]
+            },
+            "multiday_random": {
+              "n": 30,
+              "choice_correct": 19,
+              "choice_acc": 0.6333,
+              "choice_ci95": [
+                0.4551,
+                0.7813
+              ]
+            },
+            "multiday_same_clock": {
+              "n": 30,
+              "choice_correct": 25,
+              "choice_acc": 0.8333,
+              "choice_ci95": [
+                0.6644,
+                0.9266
+              ]
+            },
+            "overnight_same_utc_date": {
+              "n": 19,
+              "choice_correct": 19,
+              "choice_acc": 1.0,
+              "choice_ci95": [
+                0.8318,
+                1.0
+              ]
+            },
+            "overnight_standard": {
+              "n": 41,
+              "choice_correct": 37,
+              "choice_acc": 0.9024,
+              "choice_ci95": [
+                0.7745,
+                0.9614
+              ]
+            }
+          }
+        }
+      },
+      "summary": {
+        "id_composite_choice_acc": 0.9554,
+        "id_composite_choice_ci95": [
+          0.9351,
+          0.9692
+        ],
+        "id_composite_choice_ce": 0.1658,
+        "id_composite_full_acc": 0.9554,
+        "ood_solstice_travel_choice_acc": 0.901,
+        "ood_solstice_travel_choice_ci95": [
+          0.8805,
+          0.9184
+        ],
+        "ood_solstice_travel_choice_ce": 0.553,
+        "ood_solstice_travel_full_acc": 0.901,
+        "ood_solstice_travel_full_ce": 0.5536,
+        "ood_oslo_solstices_choice_acc": 0.8797,
+        "ood_oslo_solstices_choice_ci95": [
+          0.8522,
+          0.9027
+        ],
+        "ood_tokyo_travel_choice_acc": 0.9437,
+        "ood_tokyo_travel_choice_ci95": [
+          0.9128,
+          0.9641
+        ],
+        "ood_compaction_choice_acc": 0.8111,
+        "ood_compaction_choice_ci95": [
+          0.7477,
+          0.8616
+        ],
+        "ood_compaction_choice_ce": 0.7078,
+        "ood_all_choice_acc": 0.8882,
+        "ood_all_choice_ci95": [
+          0.8671,
+          0.9039
+        ],
+        "ood_all_choice_ce": 0.5751,
+        "ood_all_full_acc": 0.889,
+        "mean_prompt_tokens_all": 89.8,
+        "inference_ms_per_example": 9.127
+      }
+    }
+  },
+  "total_wall_seconds": 1804.71
+}
