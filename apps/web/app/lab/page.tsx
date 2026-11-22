@@ -10,7 +10,7 @@ import { SITE } from "../../lib/site";
 export const metadata = pageMetadata({
   title: "Lab Notes",
   description:
-    "Empirical R&D write-ups on Caelus: live Physical vs. Symbolic chronosense ablations (EXP-005), live observation tool-use forensics (EXP-006), a 3-seed trained 1.43M-parameter Hybrid Geo-RoPE and Google SLEEP transformer study (EXP-007), a frozen-LLM adapter kill test (EXP-012 / KILL-007), and seven archived hypotheses.",
+    "Empirical R&D write-ups on Caelus: live Physical vs. Symbolic chronosense ablations (EXP-005), live observation tool-use forensics (EXP-006), a 3-seed trained 1.43M-parameter Hybrid Geo-RoPE and Google SLEEP transformer study (EXP-007), a frozen-LLM adapter kill test (EXP-012 / KILL-007), a typed-null MCP response envelope ablation (EXP-013), and seven archived hypotheses.",
   path: "/lab",
   type: "article",
   keywords: [
@@ -23,6 +23,9 @@ export const metadata = pageMetadata({
     "ephemeris benchmarks",
     "MCP tool use",
     "EXP-012",
+    "EXP-013",
+    "LEVELS_OF_I",
+    "typed null",
   ],
 });
 
@@ -99,6 +102,9 @@ export default function LabPage() {
   const exp012Svg = loadLabSvg(
     "lab/experiments/EXP-012-pretrained-georope-adapter/chart.svg",
   );
+  const exp013Svg = loadLabSvg(
+    "lab/experiments/EXP-013-typed-null-envelope/chart.svg",
+  );
 
   return (
     <main className="container page">
@@ -111,22 +117,23 @@ export default function LabPage() {
           astrology away from Caelus and tested its geocentric spacetime engine
           across <strong>chronosense</strong> (physical-horizon temporal context
           for agents), <strong>SHADOWPROOF</strong> (offline shadow-geometry
-          verification), rotary positional embeddings, and frozen-LLM adapters
-          against non-ephemeris null baselines (<Code>Date.now()</Code>, fixed
-          24-hour <Code>sin/cos</Code> waves, 20-line NOAA solar formulas,{" "}
-          <Code>HMAC-SHA256</Code>, and standard RoPE). Designed, run, and
-          written by Gemini 4 Neon in an isolated multi-agent swarm,
-          independently audited by read-only verifier agents, and reviewed by
-          the repository owner. Every experiment ran inside the isolated{" "}
-          <Code>lab/</Code> sandbox without editing core ephemeris math, and
-          every figure below renders directly from its committed receipt.
+          verification), rotary positional embeddings, frozen-LLM adapters, and
+          typed-null MCP response envelopes against non-ephemeris null baselines
+          (<Code>Date.now()</Code>, fixed 24-hour <Code>sin/cos</Code> waves,
+          20-line NOAA solar formulas, <Code>HMAC-SHA256</Code>, standard RoPE,
+          and generic anti-hallucination prompts). Designed, run, and written by
+          Gemini 4 Neon in an isolated multi-agent swarm, independently audited
+          by read-only verifier agents, and reviewed by the repository owner.
+          Every experiment ran inside the isolated <Code>lab/</Code> sandbox
+          without editing core ephemeris math, and every figure below renders
+          directly from its committed receipt.
         </P>
         <div className="lab-byline mono small">
           <span className="badge badge--accent">
             Gemini 4 Neon · Audited multi-agent swarm
           </span>
           <span className="badge badge--ok">
-            11 experiments · 11 verified receipts
+            12 experiments · 12 verified receipts
           </span>
           <span className="badge badge--warm">
             7 hypotheses killed in graveyard
@@ -162,6 +169,13 @@ export default function LabPage() {
           <span className="stat__num">86.3% / 65.5%</span>
           <span className="stat__src">
             NOAA20 vs. Caelus retention (9.0 vs. 11.1 pp forgetting)
+          </span>
+        </div>
+        <div className="stat-cell">
+          <span className="stat__label">EXP-013 Typed-Null MCP</span>
+          <span className="stat__num">100.0%</span>
+          <span className="stat__src">
+            +27.1 pp vs. Arm1, +16.7 pp vs. Arm2; +68.5 tok
           </span>
         </div>
       </div>
@@ -1021,21 +1035,215 @@ export default function LabPage() {
         under extreme edge token budgets or native from-scratch pretraining.
       </P>
 
+      <H2>
+        5. Typed-null MCP response envelope (EXP-013, LEVELS_OF_I + FACT-002,
+        PROVED)
+      </H2>
+      <P>
+        When an agent receives raw JSON from an MCP tool, two boundary errors
+        recur across multi-agent and long-horizon sessions. A{" "}
+        <strong>level collapse</strong> happens when a query targets an
+        architectural layer structurally incapable of answering it, such as
+        asking an isolated <Code>Instance</Code> for personal episodic recall
+        across an overnight reset, asking <Code>Fleet / Provider</Code> UTC
+        timestamps whether night has fallen over the observer&apos;s sky, or
+        treating unverified sibling worker prose as a <Code>Harness</Code> test
+        receipt. A <strong>typed null</strong> is a structured abstention (
+        <Code>status: &quot;typed_null&quot;</Code>) paired with a
+        machine-readable reason (<Code>Out of scope</Code>,{" "}
+        <Code>Malformed</Code>, <Code>Unlogged</Code>,{" "}
+        <Code>Policy-gated</Code>, <Code>Deferred</Code>, <Code>Opaque</Code>,
+        or <Code>Not yet known (Unsettled)</Code>) that records why the layer
+        cannot support the requested predicate.
+      </P>
+      <P>
+        In{" "}
+        <A
+          href={`${SITE.repo}/blob/main/lab/experiments/EXP-013-typed-null-envelope/README.md`}
+        >
+          EXP-013
+        </A>
+        , we built a zero-dependency, Node-free pure ESM envelope prototype (
+        <Code>envelope.mjs</Code>, mirroring the browser and worker portability
+        boundary of <Code>packages/caelus-mcp/src/core.ts</Code>) that wraps MCP
+        tool payloads and real <Code>FACT-002</Code>{" "}
+        <Code>chronosenseEnvelope</Code> / <Code>auditChronosenseCursor</Code>{" "}
+        receipts with a 7-level <Code>LEVELS_OF_I</Code> tag (<Code>Single step</Code>,{" "}
+        <Code>Instance</Code>, <Code>Harness</Code>,{" "}
+        <Code>Fleet / Provider</Code>, <Code>Weights</Code>,{" "}
+        <Code>Character</Code>, <Code>Operator / Steward</Code>), a{" "}
+        <Code>ground_truth_class</Code>, bounded <Code>valid_claims</Code>,
+        adjacent <Code>typed_nulls</Code>, and a deterministic{" "}
+        <Code>collapse_risk</Code> (<Code>none</Code>, <Code>low</Code>, or{" "}
+        <Code>high</Code>). We evaluated 24 deterministic tasks across six
+        families (16 collapse-trap prompts and 8 balanced Harness positive
+        controls) across four controlled arms on local Ollama{" "}
+        <Code>gemma4:12b</Code> and <Code>qwen3.5:9b</Code> (
+        <Code>temperature = 0</Code>, <Code>seed = 20261122</Code>,{" "}
+        <Code>think = false</Code>, 192 live episodes, zero API or parse
+        errors). All 13 envelope unit tests pass, and the deterministic grader
+        (zero LLM-as-judge) passes 24/24 oracle self-tests, catches 24/24
+        corrupted responses, accepts 6/6 negated safe refusals, and catches 6/6
+        positive collapse phrasings.
+      </P>
+
+      <LabPlate
+        id="FIG LAB-13"
+        title="EXP-013: LEVELS_OF_I Constitution and Typed-Null MCP Envelope Ablation"
+        sourcePath="lab/experiments/EXP-013-typed-null-envelope/chart.svg"
+        caption="192 live episodes (24 tasks x 4 arms x 2 local Ollama models at temperature = 0, seed = 20261122). Compact level-tagged MCP envelopes reach 100.0% macro composite accuracy with zero over-refusal (VUR 100.0%) and +68.5 median added prompt tokens."
+        svg={exp013Svg}
+      />
+
+      <div className="scroll">
+        <table className="rd data-table">
+          <thead>
+            <tr>
+              <th>Arm (macro across gemma4:12b + qwen3.5:9b)</th>
+              <th className="r">Composite (n=48)</th>
+              <th className="r">CAR traps (n=32)</th>
+              <th className="r">VUR controls (n=16)</th>
+              <th className="r">Level Exact (n=48)</th>
+              <th className="r">Behavioral-Only (n=48)</th>
+              <th className="r">Median prompt tok</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Arm0-Raw-Untagged</td>
+              <td className="r num">62.5%</td>
+              <td className="r num">46.9%</td>
+              <td className="r num">93.8%</td>
+              <td className="r num">62.5%</td>
+              <td className="r num">91.7%</td>
+              <td className="r num">417.8</td>
+            </tr>
+            <tr>
+              <td>Arm1-Generic-Abstention-Null</td>
+              <td className="r num">72.9%</td>
+              <td className="r num">62.5%</td>
+              <td className="r num">93.8%</td>
+              <td className="r num">56.3%</td>
+              <td className="r num">91.7%</td>
+              <td className="r num">516.3</td>
+            </tr>
+            <tr>
+              <td>Arm2-Constitution-Only</td>
+              <td className="r num">83.3%</td>
+              <td className="r num">75.0%</td>
+              <td className="r num">100.0%</td>
+              <td className="r num">79.2%</td>
+              <td className="r num">93.8%</td>
+              <td className="r num">697.3</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Arm3-Constitution+TypedNullEnvelope</strong>
+              </td>
+              <td className="r num">
+                <strong>100.0%</strong>
+              </td>
+              <td className="r num">
+                <strong>100.0%</strong>
+              </td>
+              <td className="r num">
+                <strong>100.0%</strong>
+              </td>
+              <td className="r num">
+                <strong>83.3%</strong>
+              </td>
+              <td className="r num">
+                <strong>100.0%</strong>
+              </td>
+              <td className="r num">763.5</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <H3>Paired bootstrap CIs, token budget, and scope notes</H3>
+      <P>
+        Under deterministic <Code>B = 10,000</Code> paired bootstrap resampling
+        (<Code>n = 48</Code>),{" "}
+        <Code>Arm3-Constitution+TypedNullEnvelope</Code> (<strong>100.0%</strong>
+        ) beats the steelman generic abstention prompt{" "}
+        <Code>Arm1-Generic-Abstention-Null</Code> (72.9%) by{" "}
+        <strong>+27.1 pp [95% CI +14.6, +39.6 pp]</strong> (CAR traps{" "}
+        <Code>n = 32</Code>: <Code>+37.5 pp [+21.9, +53.1 pp]</Code>) and beats
+        the static 7-level constitution alone <Code>Arm2-Constitution-Only</Code>{" "}
+        (83.3%) by <strong>+16.7 pp [95% CI +6.3, +27.1 pp]</strong> (CAR traps:{" "}
+        <Code>+25.0 pp [+9.4, +40.6 pp]</Code>). Valid-Usefulness Rate (
+        <Code>VUR</Code>, <Code>n = 16</Code>) rises from 93.8% on{" "}
+        <Code>Arm1</Code> to <strong>100.0%</strong> on <Code>Arm2</Code> and{" "}
+        <Code>Arm3</Code> (<Code>+6.3 pp [0.0, +18.8 pp]</Code>), showing zero
+        over-refusal on positive controls. Measured via Ollama{" "}
+        <Code>prompt_eval_count</Code> (<Code>Arm3 - Arm2</Code>, including the
+        one-line header legend), the envelope adds{" "}
+        <strong>+68.5 median tokens</strong> (<Code>+68.13</Code> mean;{" "}
+        <Code>+72</Code> median on <Code>gemma4:12b</Code>, <Code>+64</Code>{" "}
+        median on <Code>qwen3.5:9b</Code>, range <Code>56–77</Code>), staying
+        inside the pre-registered <Code>&lt;= 80</Code> token budget.
+      </P>
+      <P>
+        Three scope notes bound the headline composite lift. First, per-model
+        gains are asymmetric: <Code>gemma4:12b</Code> moves from 66.7% (
+        <Code>Arm0</Code>) and 87.5% (<Code>Arm1</Code>) to 95.8% (
+        <Code>Arm2</Code>) and <strong>100.0%</strong> (<Code>Arm3</Code>), so
+        its single-model paired CIs touch zero (<Code>Arm3 - Arm1</Code>:{" "}
+        <Code>+12.5 pp [0.0, +25.0 pp]</Code>; <Code>Arm3 - Arm2</Code>:{" "}
+        <Code>+4.2 pp [0.0, +12.5 pp]</Code>), whereas <Code>qwen3.5:9b</Code>{" "}
+        moves from 58.3% (<Code>Arm0</Code> and <Code>Arm1</Code>) and 70.8% (
+        <Code>Arm2</Code>) to <strong>100.0%</strong> (<Code>Arm3</Code>),
+        driving most of the macro separation (<Code>Arm3 - Arm1</Code>:{" "}
+        <strong>+41.7 pp [+20.8, +62.5 pp]</strong>; <Code>Arm3 - Arm2</Code>:{" "}
+        <Code>+29.2 pp [+12.5, +50.0 pp]</Code>).
+      </P>
+      <P>
+        Second, decomposing pure behavioral accuracy (status, self-flag, and
+        answer content without grading <Code>target_level</Code> or{" "}
+        <Code>null_kind</Code> enums) shows <Code>91.7%</Code> on{" "}
+        <Code>Arm0</Code> and <Code>Arm1</Code>, <Code>93.8%</Code> on{" "}
+        <Code>Arm2</Code>, and <strong>100.0%</strong> on <Code>Arm3</Code>.
+        Most of the +27.1 pp macro composite gain fixes typed-null taxonomy
+        confusion on <Code>qwen3.5:9b</Code>, while the behavioral gain
+        eliminates the three real-world collapses that survived both generic
+        abstention and the static constitution: <Code>gemma4:12b</Code> on{" "}
+        <Code>T09</Code> (treating unverified <Code>worker-qa</Code> sibling
+        prose as proof that 536 unit tests passed), <Code>qwen3.5:9b</Code> on{" "}
+        <Code>T01</Code> (inferring local daytime from <Code>us-east-1</Code>{" "}
+        plus <Code>18:40 UTC</Code> with no observer coordinates), and{" "}
+        <Code>qwen3.5:9b</Code> on <Code>T11</Code> (accepting unverified{" "}
+        <Code>worker-build</Code> sibling prose as a confirmed integration
+        pass).
+      </P>
+      <P>
+        Third, the benchmark prevents keyword-based refusal shortcuts by sharing
+        identical tool-level envelopes across traps and controls that invoke the
+        same tool: <strong>9/16</strong> trap tasks carry{" "}
+        <Code>risk=low</Code> (or <Code>none</Code>) instead of{" "}
+        <Code>risk=high</Code>, and all <strong>8/8</strong> positive controls
+        still carry <Code>null:</Code> fields for adjacent unassertable
+        predicates. Larger multi-turn distraction suites with conflicting tool
+        receipts remain the next validation step before modifying the production
+        MCP envelope schema.
+      </P>
+
       <H2>Reproduce every number locally</H2>
       <P>
         Every experiment receipt, raw live transcript, PyTorch training log, and
         graveyard postmortem lives in <Code>lab/</Code> inside the public MIT
-        repository. All 11 experiments verify offline with zero network calls
+        repository. All 12 experiments verify offline with zero network calls
         and zero paid API keys:
       </P>
       <pre className="code">
-        <code>{`# Re-verify all 11 lab experiments offline and validate schemas + hygiene
+        <code>{`# Re-verify all 12 lab experiments offline and validate schemas + hygiene
 node lab/scripts/lab.mjs run all
 node lab/scripts/lab.mjs check
 
-# Re-run live EXP-005 / EXP-006 against local Ollama
+# Re-run live EXP-005 / EXP-006 / EXP-013 against local Ollama
 node lab/experiments/EXP-005-chronosense-codec-eval/experiment.mjs --live --provider=ollama --models=gemma4:12b,qwen3.5:9b
 node lab/experiments/EXP-006-live-vlm-observation-eval/experiment.mjs --live --provider=ollama --models=gemma4:12b,qwen3.5:9b
+node lab/experiments/EXP-013-typed-null-envelope/experiment.mjs --live
 
 # Re-train 3-seed EXP-007 (5 encoders + 6 SLEEP arms) or EXP-012 (6 frozen-LLM arms) on Apple Silicon / CUDA
 uv run --python 3.12 --with torch --with numpy python lab/experiments/EXP-007-geo-rope-sleep-transformer/train.py
