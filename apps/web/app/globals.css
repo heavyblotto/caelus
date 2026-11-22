@@ -2206,6 +2206,10 @@ input.control[type="date"] {
   min-width: 0;
 }
 
+.install-tabs > :not(.tabs__list):not(.install-cmd) {
+  padding: 0 var(--sp-3) var(--sp-2);
+}
+
 .track-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3547,8 +3551,9 @@ dialog.search-dialog::backdrop {
 
 .tile__h {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--sp-3);
+  gap: var(--sp-2) var(--sp-3);
   padding: 0.45rem var(--sp-3);
   border-bottom: 1px solid var(--line);
   font: 500 var(--fs-xs) / 1.3 var(--mono);
@@ -3556,7 +3561,7 @@ dialog.search-dialog::backdrop {
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--faint);
-  min-height: 34px;
+  min-height: 36px;
 }
 
 .tile__h b {
@@ -3577,16 +3582,19 @@ dialog.search-dialog::backdrop {
 
 .tile__actions {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--sp-2);
   margin-left: auto;
 }
 
-.tile__h button {
+/* Only bare unstyled buttons directly in .tile__h (e.g., legacy Copy links)
+   take the inline link style; never override .btn, .seg__btn, or .chip. */
+.tile__h > button:not([class]) {
   appearance: none;
   background: none;
   border: 0;
-  padding: 0;
+  padding: 0.15rem 0.35rem;
   font: inherit;
   letter-spacing: inherit;
   text-transform: inherit;
@@ -3595,12 +3603,52 @@ dialog.search-dialog::backdrop {
   margin-left: auto;
 }
 
-.tile__h .tile__actions button {
-  margin-left: 0;
+.tile__h > button:not([class]):hover {
+  color: var(--text);
 }
 
-.tile__h button:hover {
+.tile__h .seg {
+  border-color: var(--line2);
+}
+
+.tile__h .seg__btn {
+  min-height: 26px;
+  padding: 0 0.65rem;
+  font-size: var(--fs-2xs);
+}
+
+.tile__h .btn,
+.tile__actions .btn {
+  min-height: 26px;
+  padding: 0 0.6rem;
+  font-size: var(--fs-2xs);
+}
+
+.tile__actions > button:not([class]) {
+  appearance: none;
+  background: var(--panel-inset);
+  border: 1px solid var(--line2);
+  padding: 0.22rem 0.55rem;
+  min-height: 26px;
+  font: 500 var(--fs-2xs) / 1 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+  cursor: pointer;
+  transition: color var(--t-fast), border-color var(--t-fast), background-color var(--t-fast);
+}
+
+.tile__actions > button:not([class]):hover {
   color: var(--text);
+  border-color: var(--accent);
+  background: var(--panel2);
+}
+
+@media (max-width: 640px) {
+  .tile__actions {
+    margin-left: 0;
+    width: 100%;
+  }
 }
 
 .tile__b {
@@ -4003,13 +4051,30 @@ dialog.search-dialog::backdrop {
 .app {
   grid-column: span 12;
   display: grid;
-  grid-template-columns: 280px minmax(0, 1.35fr) minmax(320px, 0.95fr);
+  grid-template-columns: 256px minmax(0, 1.48fr) minmax(0, 1.02fr);
   gap: 1px;
   background: var(--line);
 }
 
 .app > * {
   min-width: 0;
+}
+
+.app .rd {
+  font-size: 0.74rem;
+}
+
+.app .rd th,
+.app .rd td {
+  padding: 0.36rem 0.42rem;
+}
+
+.app pre.code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 0.73rem;
+  line-height: 1.56;
+  padding: var(--sp-3);
 }
 
 @media (max-width: 1180px) {
