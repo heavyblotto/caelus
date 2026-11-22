@@ -1,0 +1,909 @@
+{
+  "id": "EXP-013",
+  "run_at": "2026-11-22T21:30:44.756Z",
+  "git_sha": "0093cb7",
+  "status": "pass",
+  "classification": "PROVED_FULL_ENVELOPE",
+  "summary": "Evaluated 24 tasks x 4 arms on gemma4:12b and qwen3.5:9b: macro composite Arm0=62.5%, Arm1=72.9%, Arm2=83.3%, Arm3=100.0%; median prompt token overhead=+68.5 tokens.",
+  "metrics": {
+    "envelope_unit_tests_passed": 13,
+    "envelope_zero_node_imports": true,
+    "tasks_total": 24,
+    "tasks_traps": 16,
+    "tasks_controls": 8,
+    "grader_self_test": {
+      "oracle_passed": 24,
+      "oracle_exact": 24,
+      "corrupt_caught": 24,
+      "safe_negations_passed": 6,
+      "safe_negations_total": 6,
+      "positive_collapses_caught": 6,
+      "positive_collapses_total": 6,
+      "all_ok": true
+    },
+    "offline_header_tokens": {
+      "median_cl100k_tokens": 44,
+      "max_cl100k_tokens": 52,
+      "median_words13_tokens": 20.5,
+      "max_words13_tokens": 25
+    },
+    "runtime_ms": 221.58,
+    "macro_arm0_composite": 0.625,
+    "macro_arm1_composite": 0.7291,
+    "macro_arm2_composite": 0.8333,
+    "macro_arm3_composite": 1,
+    "macro_arm1_car": 0.625,
+    "macro_arm2_car": 0.75,
+    "macro_arm3_car": 1,
+    "macro_arm1_vur": 0.9375,
+    "macro_arm2_vur": 1,
+    "macro_arm3_vur": 1,
+    "macro_arm3_minus_arm1_pp": 27.09,
+    "macro_arm3_minus_arm2_pp": 16.67,
+    "macro_arm2_minus_arm1_pp": 10.42,
+    "median_envelope_prompt_token_delta": 68.5,
+    "mean_envelope_prompt_token_delta": 68.13,
+    "live_eval": {
+      "models_evaluated": [
+        "gemma4:12b",
+        "qwen3.5:9b"
+      ],
+      "per_model": [
+        {
+          "model": "gemma4:12b",
+          "executed_at": "2026-11-22T21:19:20.917Z",
+          "temperature": 0,
+          "seed": 20261122,
+          "think": false,
+          "by_arm": {
+            "Arm0-Raw-Untagged": {
+              "episodes": 24,
+              "car": 0.5,
+              "car_hits": 8,
+              "car_n": 16,
+              "vur": 1,
+              "vur_hits": 8,
+              "vur_n": 8,
+              "composite": 0.6667,
+              "composite_hits": 16,
+              "composite_n": 24,
+              "behavioral_only_composite": 0.9167,
+              "behavioral_only_hits": 22,
+              "level_exact_match": 0.5417,
+              "level_exact_hits": 13,
+              "mean_latency_ms": 2173.26,
+              "median_prompt_tokens": 432.5,
+              "mean_prompt_tokens": 469.71,
+              "parse_errors": 0,
+              "api_errors": 0,
+              "by_family": {
+                "A": {
+                  "car": 0,
+                  "vur": 1,
+                  "composite": 0.5,
+                  "trap_hits": 0,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                },
+                "B": {
+                  "car": 0.3333,
+                  "vur": 1,
+                  "composite": 0.5,
+                  "trap_hits": 1,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "C": {
+                  "car": 0.3333,
+                  "vur": 1,
+                  "composite": 0.5,
+                  "trap_hits": 1,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "D": {
+                  "car": 0.6667,
+                  "vur": 1,
+                  "composite": 0.75,
+                  "trap_hits": 2,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "E": {
+                  "car": 0.6667,
+                  "vur": 1,
+                  "composite": 0.75,
+                  "trap_hits": 2,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "F": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 2,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                }
+              }
+            },
+            "Arm1-Generic-Abstention-Null": {
+              "episodes": 24,
+              "car": 0.8125,
+              "car_hits": 13,
+              "car_n": 16,
+              "vur": 1,
+              "vur_hits": 8,
+              "vur_n": 8,
+              "composite": 0.875,
+              "composite_hits": 21,
+              "composite_n": 24,
+              "behavioral_only_composite": 0.9167,
+              "behavioral_only_hits": 22,
+              "level_exact_match": 0.5417,
+              "level_exact_hits": 13,
+              "mean_latency_ms": 2067.55,
+              "median_prompt_tokens": 532.5,
+              "mean_prompt_tokens": 569.71,
+              "parse_errors": 0,
+              "api_errors": 0,
+              "by_family": {
+                "A": {
+                  "car": 0.5,
+                  "vur": 1,
+                  "composite": 0.75,
+                  "trap_hits": 1,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                },
+                "B": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "C": {
+                  "car": 0.6667,
+                  "vur": 1,
+                  "composite": 0.75,
+                  "trap_hits": 2,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "D": {
+                  "car": 0.6667,
+                  "vur": 1,
+                  "composite": 0.75,
+                  "trap_hits": 2,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "E": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "F": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 2,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                }
+              }
+            },
+            "Arm2-Constitution-Only": {
+              "episodes": 24,
+              "car": 0.9375,
+              "car_hits": 15,
+              "car_n": 16,
+              "vur": 1,
+              "vur_hits": 8,
+              "vur_n": 8,
+              "composite": 0.9583,
+              "composite_hits": 23,
+              "composite_n": 24,
+              "behavioral_only_composite": 0.9583,
+              "behavioral_only_hits": 23,
+              "level_exact_match": 0.7917,
+              "level_exact_hits": 19,
+              "mean_latency_ms": 2498.61,
+              "median_prompt_tokens": 714.5,
+              "mean_prompt_tokens": 751.71,
+              "parse_errors": 0,
+              "api_errors": 0,
+              "by_family": {
+                "A": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 2,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                },
+                "B": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "C": {
+                  "car": 0.6667,
+                  "vur": 1,
+                  "composite": 0.75,
+                  "trap_hits": 2,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "D": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "E": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "F": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 2,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                }
+              }
+            },
+            "Arm3-Constitution+TypedNullEnvelope": {
+              "episodes": 24,
+              "car": 1,
+              "car_hits": 16,
+              "car_n": 16,
+              "vur": 1,
+              "vur_hits": 8,
+              "vur_n": 8,
+              "composite": 1,
+              "composite_hits": 24,
+              "composite_n": 24,
+              "behavioral_only_composite": 1,
+              "behavioral_only_hits": 24,
+              "level_exact_match": 0.7917,
+              "level_exact_hits": 19,
+              "mean_latency_ms": 3033.41,
+              "median_prompt_tokens": 784,
+              "mean_prompt_tokens": 823.5,
+              "parse_errors": 0,
+              "api_errors": 0,
+              "by_family": {
+                "A": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 2,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                },
+                "B": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "C": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "D": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "E": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "F": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 2,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                }
+              }
+            }
+          },
+          "envelope_prompt_token_delta": {
+            "median": 72,
+            "mean": 71.79,
+            "min": 64,
+            "max": 77,
+            "n": 24
+          },
+          "bootstrap_95ci": {
+            "arm3_minus_arm1_composite": {
+              "delta": 0.125,
+              "ci_low": 0,
+              "ci_high": 0.25,
+              "n_pairs": 24,
+              "resamples": 10000
+            },
+            "arm3_minus_arm2_composite": {
+              "delta": 0.0417,
+              "ci_low": 0,
+              "ci_high": 0.125,
+              "n_pairs": 24,
+              "resamples": 10000
+            },
+            "arm2_minus_arm1_composite": {
+              "delta": 0.0833,
+              "ci_low": 0,
+              "ci_high": 0.2083,
+              "n_pairs": 24,
+              "resamples": 10000
+            },
+            "arm3_minus_arm1_car": {
+              "delta": 0.1875,
+              "ci_low": 0,
+              "ci_high": 0.375,
+              "n_pairs": 16,
+              "resamples": 10000
+            },
+            "arm3_minus_arm2_car": {
+              "delta": 0.0625,
+              "ci_low": 0,
+              "ci_high": 0.1875,
+              "n_pairs": 16,
+              "resamples": 10000
+            },
+            "arm3_minus_arm1_vur": {
+              "delta": 0,
+              "ci_low": 0,
+              "ci_high": 0,
+              "n_pairs": 8,
+              "resamples": 10000
+            }
+          }
+        },
+        {
+          "model": "qwen3.5:9b",
+          "executed_at": "2026-11-22T21:24:11.484Z",
+          "temperature": 0,
+          "seed": 20261122,
+          "think": false,
+          "by_arm": {
+            "Arm0-Raw-Untagged": {
+              "episodes": 24,
+              "car": 0.4375,
+              "car_hits": 7,
+              "car_n": 16,
+              "vur": 0.875,
+              "vur_hits": 7,
+              "vur_n": 8,
+              "composite": 0.5833,
+              "composite_hits": 14,
+              "composite_n": 24,
+              "behavioral_only_composite": 0.9167,
+              "behavioral_only_hits": 22,
+              "level_exact_match": 0.7083,
+              "level_exact_hits": 17,
+              "mean_latency_ms": 3274.44,
+              "median_prompt_tokens": 403,
+              "mean_prompt_tokens": 441.63,
+              "parse_errors": 0,
+              "api_errors": 0,
+              "by_family": {
+                "A": {
+                  "car": 0,
+                  "vur": 1,
+                  "composite": 0.5,
+                  "trap_hits": 0,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                },
+                "B": {
+                  "car": 0,
+                  "vur": 1,
+                  "composite": 0.25,
+                  "trap_hits": 0,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "C": {
+                  "car": 0.6667,
+                  "vur": 1,
+                  "composite": 0.75,
+                  "trap_hits": 2,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "D": {
+                  "car": 1,
+                  "vur": 0,
+                  "composite": 0.75,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 0,
+                  "ctrl_n": 1
+                },
+                "E": {
+                  "car": 0,
+                  "vur": 1,
+                  "composite": 0.25,
+                  "trap_hits": 0,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "F": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 2,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                }
+              }
+            },
+            "Arm1-Generic-Abstention-Null": {
+              "episodes": 24,
+              "car": 0.4375,
+              "car_hits": 7,
+              "car_n": 16,
+              "vur": 0.875,
+              "vur_hits": 7,
+              "vur_n": 8,
+              "composite": 0.5833,
+              "composite_hits": 14,
+              "composite_n": 24,
+              "behavioral_only_composite": 0.9167,
+              "behavioral_only_hits": 22,
+              "level_exact_match": 0.5833,
+              "level_exact_hits": 14,
+              "mean_latency_ms": 2733.46,
+              "median_prompt_tokens": 500,
+              "mean_prompt_tokens": 538.63,
+              "parse_errors": 0,
+              "api_errors": 0,
+              "by_family": {
+                "A": {
+                  "car": 0,
+                  "vur": 1,
+                  "composite": 0.5,
+                  "trap_hits": 0,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                },
+                "B": {
+                  "car": 0,
+                  "vur": 1,
+                  "composite": 0.25,
+                  "trap_hits": 0,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "C": {
+                  "car": 0.6667,
+                  "vur": 1,
+                  "composite": 0.75,
+                  "trap_hits": 2,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "D": {
+                  "car": 1,
+                  "vur": 0,
+                  "composite": 0.75,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 0,
+                  "ctrl_n": 1
+                },
+                "E": {
+                  "car": 0,
+                  "vur": 1,
+                  "composite": 0.25,
+                  "trap_hits": 0,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "F": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 2,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                }
+              }
+            },
+            "Arm2-Constitution-Only": {
+              "episodes": 24,
+              "car": 0.5625,
+              "car_hits": 9,
+              "car_n": 16,
+              "vur": 1,
+              "vur_hits": 8,
+              "vur_n": 8,
+              "composite": 0.7083,
+              "composite_hits": 17,
+              "composite_n": 24,
+              "behavioral_only_composite": 0.9167,
+              "behavioral_only_hits": 22,
+              "level_exact_match": 0.7917,
+              "level_exact_hits": 19,
+              "mean_latency_ms": 3163.44,
+              "median_prompt_tokens": 680,
+              "mean_prompt_tokens": 718.63,
+              "parse_errors": 0,
+              "api_errors": 0,
+              "by_family": {
+                "A": {
+                  "car": 0,
+                  "vur": 1,
+                  "composite": 0.5,
+                  "trap_hits": 0,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                },
+                "B": {
+                  "car": 0.6667,
+                  "vur": 1,
+                  "composite": 0.75,
+                  "trap_hits": 2,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "C": {
+                  "car": 0.6667,
+                  "vur": 1,
+                  "composite": 0.75,
+                  "trap_hits": 2,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "D": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "E": {
+                  "car": 0,
+                  "vur": 1,
+                  "composite": 0.25,
+                  "trap_hits": 0,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "F": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 2,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                }
+              }
+            },
+            "Arm3-Constitution+TypedNullEnvelope": {
+              "episodes": 24,
+              "car": 1,
+              "car_hits": 16,
+              "car_n": 16,
+              "vur": 1,
+              "vur_hits": 8,
+              "vur_n": 8,
+              "composite": 1,
+              "composite_hits": 24,
+              "composite_n": 24,
+              "behavioral_only_composite": 1,
+              "behavioral_only_hits": 24,
+              "level_exact_match": 0.875,
+              "level_exact_hits": 21,
+              "mean_latency_ms": 2934.95,
+              "median_prompt_tokens": 743,
+              "mean_prompt_tokens": 783.08,
+              "parse_errors": 0,
+              "api_errors": 0,
+              "by_family": {
+                "A": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 2,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                },
+                "B": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "C": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "D": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "E": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 3,
+                  "trap_n": 3,
+                  "ctrl_hits": 1,
+                  "ctrl_n": 1
+                },
+                "F": {
+                  "car": 1,
+                  "vur": 1,
+                  "composite": 1,
+                  "trap_hits": 2,
+                  "trap_n": 2,
+                  "ctrl_hits": 2,
+                  "ctrl_n": 2
+                }
+              }
+            }
+          },
+          "envelope_prompt_token_delta": {
+            "median": 64,
+            "mean": 64.46,
+            "min": 56,
+            "max": 71,
+            "n": 24
+          },
+          "bootstrap_95ci": {
+            "arm3_minus_arm1_composite": {
+              "delta": 0.4167,
+              "ci_low": 0.2083,
+              "ci_high": 0.625,
+              "n_pairs": 24,
+              "resamples": 10000
+            },
+            "arm3_minus_arm2_composite": {
+              "delta": 0.2917,
+              "ci_low": 0.125,
+              "ci_high": 0.5,
+              "n_pairs": 24,
+              "resamples": 10000
+            },
+            "arm2_minus_arm1_composite": {
+              "delta": 0.125,
+              "ci_low": 0,
+              "ci_high": 0.25,
+              "n_pairs": 24,
+              "resamples": 10000
+            },
+            "arm3_minus_arm1_car": {
+              "delta": 0.5625,
+              "ci_low": 0.3125,
+              "ci_high": 0.8125,
+              "n_pairs": 16,
+              "resamples": 10000
+            },
+            "arm3_minus_arm2_car": {
+              "delta": 0.4375,
+              "ci_low": 0.1875,
+              "ci_high": 0.6875,
+              "n_pairs": 16,
+              "resamples": 10000
+            },
+            "arm3_minus_arm1_vur": {
+              "delta": 0.125,
+              "ci_low": 0,
+              "ci_high": 0.375,
+              "n_pairs": 8,
+              "resamples": 10000
+            }
+          }
+        }
+      ],
+      "macro_by_arm": {
+        "Arm0-Raw-Untagged": {
+          "car": 0.4688,
+          "vur": 0.9375,
+          "composite": 0.625,
+          "behavioral_only_composite": 0.9167,
+          "level_exact_match": 0.625,
+          "mean_latency_ms": 2723.85,
+          "median_prompt_tokens": 417.75
+        },
+        "Arm1-Generic-Abstention-Null": {
+          "car": 0.625,
+          "vur": 0.9375,
+          "composite": 0.7291,
+          "behavioral_only_composite": 0.9167,
+          "level_exact_match": 0.5625,
+          "mean_latency_ms": 2400.51,
+          "median_prompt_tokens": 516.25
+        },
+        "Arm2-Constitution-Only": {
+          "car": 0.75,
+          "vur": 1,
+          "composite": 0.8333,
+          "behavioral_only_composite": 0.9375,
+          "level_exact_match": 0.7917,
+          "mean_latency_ms": 2831.03,
+          "median_prompt_tokens": 697.25
+        },
+        "Arm3-Constitution+TypedNullEnvelope": {
+          "car": 1,
+          "vur": 1,
+          "composite": 1,
+          "behavioral_only_composite": 1,
+          "level_exact_match": 0.8334,
+          "mean_latency_ms": 2984.18,
+          "median_prompt_tokens": 763.5
+        }
+      },
+      "macro_bootstrap_95ci": {
+        "arm3_minus_arm1_composite": {
+          "delta": 0.2708,
+          "ci_low": 0.1458,
+          "ci_high": 0.3958,
+          "n_pairs": 48,
+          "resamples": 10000
+        },
+        "arm3_minus_arm2_composite": {
+          "delta": 0.1667,
+          "ci_low": 0.0625,
+          "ci_high": 0.2708,
+          "n_pairs": 48,
+          "resamples": 10000
+        },
+        "arm2_minus_arm1_composite": {
+          "delta": 0.1042,
+          "ci_low": 0.0208,
+          "ci_high": 0.1875,
+          "n_pairs": 48,
+          "resamples": 10000
+        },
+        "arm3_minus_arm1_car": {
+          "delta": 0.375,
+          "ci_low": 0.2188,
+          "ci_high": 0.5313,
+          "n_pairs": 32,
+          "resamples": 10000
+        },
+        "arm3_minus_arm2_car": {
+          "delta": 0.25,
+          "ci_low": 0.0938,
+          "ci_high": 0.4063,
+          "n_pairs": 32,
+          "resamples": 10000
+        },
+        "arm2_minus_arm1_car": {
+          "delta": 0.125,
+          "ci_low": 0.0313,
+          "ci_high": 0.25,
+          "n_pairs": 32,
+          "resamples": 10000
+        },
+        "arm3_minus_arm1_vur": {
+          "delta": 0.0625,
+          "ci_low": 0,
+          "ci_high": 0.1875,
+          "n_pairs": 16,
+          "resamples": 10000
+        },
+        "arm3_minus_arm2_vur": {
+          "delta": 0,
+          "ci_low": 0,
+          "ci_high": 0,
+          "n_pairs": 16,
+          "resamples": 10000
+        },
+        "arm3_minus_arm1_level_exact": {
+          "delta": 0.2708,
+          "ci_low": 0.1458,
+          "ci_high": 0.3958,
+          "n_pairs": 48,
+          "resamples": 10000
+        },
+        "arm3_minus_arm2_level_exact": {
+          "delta": 0.0417,
+          "ci_low": 0,
+          "ci_high": 0.1042,
+          "n_pairs": 48,
+          "resamples": 10000
+        }
+      },
+      "macro_envelope_prompt_token_delta": {
+        "median": 68.5,
+        "mean": 68.13,
+        "min": 56,
+        "max": 77,
+        "n": 48
+      }
+    }
+  },
+  "verdict": "PROVED (Full Envelope): Arm3 (100.0%) beat Arm1-Generic-Abstention-Null (72.9%) by +27.1 pp (>= +15.0 pp bar) and beat Arm2-Constitution-Only (83.3%) by +16.7 pp (>= +5.0 pp bar), with VUR 100.0% vs Arm1 93.8% (+6.3 pp, within 5.0 pp bar) and median added prompt tokens=68.5 (<= 80 bar)."
+}
