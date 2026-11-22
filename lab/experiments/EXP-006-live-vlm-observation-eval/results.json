@@ -1,0 +1,371 @@
+{
+  "id": "EXP-006",
+  "run_at": "2026-11-22T18:36:34.581Z",
+  "git_sha": "e8dc94f",
+  "status": "pass",
+  "summary": "Live 30-task observation tool-use eval across 2 models (ollama/gemma4:12b, ollama/qwen3.5:9b). CoT-NoTools -> Caelus-MCP-Tools macro: spoof F1 0.7247 -> 0.9445, counterfactual axis 66.7% -> 100.0%, chronolocate 12.5% -> 87.5%, geolocate 12.5% -> 100.0%, overall 33.3% -> 93.3% (all tools median 14.5246 ms; warm authentic verify 1.1055 ms).",
+  "metrics": {
+    "cot_spoof_f1": 0.7247,
+    "mcp_spoof_f1": 0.9445,
+    "spoof_f1_margin": 0.2198,
+    "cot_authentic_false_positive_rate": 1,
+    "mcp_authentic_false_positive_rate": 0,
+    "cot_counterfactual_recovery_rate": 0.6667,
+    "mcp_counterfactual_recovery_rate": 1,
+    "cot_chronolocate_accuracy": 0.125,
+    "mcp_chronolocate_accuracy": 0.875,
+    "cot_geolocate_accuracy": 0.125,
+    "mcp_geolocate_accuracy": 1,
+    "cot_overall_accuracy": 0.3333,
+    "mcp_overall_accuracy": 0.9334,
+    "verify_tool_median_latency_ms": 14.3311,
+    "oracle_pass_rate": 0.9667,
+    "live_models_count": 2,
+    "runtime_ms": 413.3465,
+    "oracle": {
+      "tasks": 30,
+      "oracle_pass_rate": 0.9667,
+      "oracle_passed": 29,
+      "oracle_top2_pass_rate": 1,
+      "oracle_top2_passed": 30,
+      "verify_authentic_median_ms": 1.1055,
+      "verify_spoof_forensics_median_ms": 2.9377,
+      "all_tools_median_ms": 3.057,
+      "all_tools_mean_ms": 7.2921,
+      "latency_by_tool": {
+        "verify_observation": {
+          "calls": 14,
+          "median_ms": 2.8022,
+          "mean_ms": 2.5338,
+          "max_ms": 4.2293
+        },
+        "chronolocate": {
+          "calls": 8,
+          "median_ms": 19.9838,
+          "mean_ms": 20.619,
+          "max_ms": 25.3471
+        },
+        "geolocate": {
+          "calls": 8,
+          "median_ms": 1.6582,
+          "mean_ms": 2.2923,
+          "max_ms": 5.7902
+        }
+      }
+    },
+    "live_eval": {
+      "receipt_executed_at": "2026-11-22T18:32:36.688Z",
+      "receipt_git_sha": "e8dc94f",
+      "env_note": "Anthropic API (ANTHROPIC_API_KEY) returned HTTP 401 invalid x-api-key on 1-token ping across claude-haiku-4-5 and claude-sonnet-4-5; live evaluation executed on two independent local Ollama vision-language tool-calling models (gemma4:12b and qwen3.5:9b) at temperature=0.",
+      "models_evaluated": [
+        "ollama/gemma4:12b",
+        "ollama/qwen3.5:9b"
+      ],
+      "model_count": 2,
+      "macro_by_arm": {
+        "Arm1-CoT-NoTools": {
+          "overall_pass_rate": 0.3333,
+          "spoof_f1": 0.7247,
+          "spoof_precision": 0.6643,
+          "spoof_recall": 0.8,
+          "authentic_fpr": 1,
+          "counterfactual_axis_accuracy": 0.6667,
+          "chronolocate_pass_rate": 0.125,
+          "geolocate_pass_rate": 0.125,
+          "tool_call_rate": 0,
+          "expected_tool_match_rate": 0,
+          "verify_tool_median_ms": null,
+          "all_tools_median_ms": 0
+        },
+        "Arm2-Caelus-MCP-Tools": {
+          "overall_pass_rate": 0.9334,
+          "spoof_f1": 0.9445,
+          "spoof_precision": 1,
+          "spoof_recall": 0.9,
+          "authentic_fpr": 0,
+          "counterfactual_axis_accuracy": 1,
+          "chronolocate_pass_rate": 0.875,
+          "geolocate_pass_rate": 1,
+          "tool_call_rate": 1,
+          "expected_tool_match_rate": 1,
+          "verify_tool_median_ms": 14.3311,
+          "all_tools_median_ms": 14.5246
+        }
+      },
+      "macro_deltas": {
+        "spoof_f1_gain": 0.2198,
+        "counterfactual_axis_gain": 0.3333,
+        "chronolocate_pass_gain": 0.75,
+        "geolocate_pass_gain": 0.875,
+        "overall_pass_gain": 0.6001
+      },
+      "models": [
+        {
+          "provider": "ollama",
+          "model": "gemma4:12b",
+          "executed_at": "2026-11-22T18:21:58.663Z",
+          "tasks_evaluated": 30,
+          "temperature": 0,
+          "think": false,
+          "by_arm": {
+            "Arm1-CoT-NoTools": {
+              "episodes": 30,
+              "overall_pass_rate": 0.3333,
+              "overall_passed": 10,
+              "verify": {
+                "n": 14,
+                "passed": 7,
+                "accuracy": 0.5,
+                "tp": 7,
+                "fp": 4,
+                "tn": 0,
+                "fn": 3,
+                "precision": 0.6364,
+                "recall": 0.7,
+                "f1": 0.6667,
+                "authentic_fpr": 1,
+                "counterfactual_axis_accuracy": 0.6667,
+                "counterfactual_axis_hits": 4,
+                "counterfactual_axis_total": 6
+              },
+              "chronolocate": {
+                "n": 8,
+                "passed": 2,
+                "pass_rate": 0.25,
+                "median_error_min": 857.05,
+                "mean_error_min": 874.8958
+              },
+              "geolocate": {
+                "n": 8,
+                "passed": 1,
+                "pass_rate": 0.125,
+                "median_error_km": 3580.8449,
+                "mean_error_km": 4506.9466
+              },
+              "tools": {
+                "total_calls": 0,
+                "tasks_using_tool": 0,
+                "tool_call_rate": 0,
+                "expected_tool_match_rate": 0,
+                "tool_errors": 0,
+                "all_tools_median_ms": null,
+                "all_tools_mean_ms": null,
+                "by_tool": {}
+              },
+              "mean_episode_latency_ms": 5590.5923,
+              "parse_errors": 0,
+              "api_errors": 0
+            },
+            "Arm2-Caelus-MCP-Tools": {
+              "episodes": 30,
+              "overall_pass_rate": 0.9667,
+              "overall_passed": 29,
+              "verify": {
+                "n": 14,
+                "passed": 14,
+                "accuracy": 1,
+                "tp": 10,
+                "fp": 0,
+                "tn": 4,
+                "fn": 0,
+                "precision": 1,
+                "recall": 1,
+                "f1": 1,
+                "authentic_fpr": 0,
+                "counterfactual_axis_accuracy": 1,
+                "counterfactual_axis_hits": 6,
+                "counterfactual_axis_total": 6
+              },
+              "chronolocate": {
+                "n": 8,
+                "passed": 7,
+                "pass_rate": 0.875,
+                "median_error_min": 3.2833,
+                "mean_error_min": 182.5104
+              },
+              "geolocate": {
+                "n": 8,
+                "passed": 8,
+                "pass_rate": 1,
+                "median_error_km": 69.741,
+                "mean_error_km": 78.7426
+              },
+              "tools": {
+                "total_calls": 31,
+                "tasks_using_tool": 30,
+                "tool_call_rate": 1,
+                "expected_tool_match_rate": 1,
+                "tool_errors": 0,
+                "all_tools_median_ms": 12.3678,
+                "all_tools_mean_ms": 20.2852,
+                "by_tool": {
+                  "verify_observation": {
+                    "calls": 14,
+                    "median_ms": 11.9808,
+                    "mean_ms": 11.7493,
+                    "max_ms": 31.1239
+                  },
+                  "chronolocate": {
+                    "calls": 9,
+                    "median_ms": 44.161,
+                    "mean_ms": 44.5819,
+                    "max_ms": 73.4585
+                  },
+                  "geolocate": {
+                    "calls": 8,
+                    "median_ms": 6.5899,
+                    "mean_ms": 7.8892,
+                    "max_ms": 16.6878
+                  }
+                }
+              },
+              "mean_episode_latency_ms": 11050.2248,
+              "parse_errors": 0,
+              "api_errors": 0
+            }
+          },
+          "deltas": {
+            "spoof_f1_gain": 0.3333,
+            "counterfactual_axis_gain": 0.3333,
+            "chronolocate_pass_gain": 0.625,
+            "geolocate_pass_gain": 0.875,
+            "overall_pass_gain": 0.6334
+          }
+        },
+        {
+          "provider": "ollama",
+          "model": "qwen3.5:9b",
+          "executed_at": "2026-11-22T18:32:36.688Z",
+          "tasks_evaluated": 30,
+          "temperature": 0,
+          "think": false,
+          "by_arm": {
+            "Arm1-CoT-NoTools": {
+              "episodes": 30,
+              "overall_pass_rate": 0.3333,
+              "overall_passed": 10,
+              "verify": {
+                "n": 14,
+                "passed": 9,
+                "accuracy": 0.6429,
+                "tp": 9,
+                "fp": 4,
+                "tn": 0,
+                "fn": 1,
+                "precision": 0.6923,
+                "recall": 0.9,
+                "f1": 0.7826,
+                "authentic_fpr": 1,
+                "counterfactual_axis_accuracy": 0.6667,
+                "counterfactual_axis_hits": 4,
+                "counterfactual_axis_total": 6
+              },
+              "chronolocate": {
+                "n": 8,
+                "passed": 0,
+                "pass_rate": 0,
+                "median_error_min": 1987.2416,
+                "mean_error_min": 1856.2541
+              },
+              "geolocate": {
+                "n": 8,
+                "passed": 1,
+                "pass_rate": 0.125,
+                "median_error_km": 8717.9102,
+                "mean_error_km": 7508.3106
+              },
+              "tools": {
+                "total_calls": 0,
+                "tasks_using_tool": 0,
+                "tool_call_rate": 0,
+                "expected_tool_match_rate": 0,
+                "tool_errors": 0,
+                "all_tools_median_ms": null,
+                "all_tools_mean_ms": null,
+                "by_tool": {}
+              },
+              "mean_episode_latency_ms": 8779.552,
+              "parse_errors": 3,
+              "api_errors": 0
+            },
+            "Arm2-Caelus-MCP-Tools": {
+              "episodes": 30,
+              "overall_pass_rate": 0.9,
+              "overall_passed": 27,
+              "verify": {
+                "n": 14,
+                "passed": 12,
+                "accuracy": 0.8571,
+                "tp": 8,
+                "fp": 0,
+                "tn": 4,
+                "fn": 2,
+                "precision": 1,
+                "recall": 0.8,
+                "f1": 0.8889,
+                "authentic_fpr": 0,
+                "counterfactual_axis_accuracy": 1,
+                "counterfactual_axis_hits": 6,
+                "counterfactual_axis_total": 6
+              },
+              "chronolocate": {
+                "n": 8,
+                "passed": 7,
+                "pass_rate": 0.875,
+                "median_error_min": 3.2833,
+                "mean_error_min": 182.5104
+              },
+              "geolocate": {
+                "n": 8,
+                "passed": 8,
+                "pass_rate": 1,
+                "median_error_km": 69.741,
+                "mean_error_km": 78.7426
+              },
+              "tools": {
+                "total_calls": 30,
+                "tasks_using_tool": 30,
+                "tool_call_rate": 1,
+                "expected_tool_match_rate": 1,
+                "tool_errors": 0,
+                "all_tools_median_ms": 16.6814,
+                "all_tools_mean_ms": 16.6478,
+                "by_tool": {
+                  "verify_observation": {
+                    "calls": 14,
+                    "median_ms": 16.6814,
+                    "mean_ms": 20.2423,
+                    "max_ms": 68.3302
+                  },
+                  "chronolocate": {
+                    "calls": 8,
+                    "median_ms": 23.6796,
+                    "mean_ms": 24.0707,
+                    "max_ms": 30.961
+                  },
+                  "geolocate": {
+                    "calls": 8,
+                    "median_ms": 3.2058,
+                    "mean_ms": 2.9346,
+                    "max_ms": 7.949
+                  }
+                }
+              },
+              "mean_episode_latency_ms": 12487.2484,
+              "parse_errors": 0,
+              "api_errors": 0
+            }
+          },
+          "deltas": {
+            "spoof_f1_gain": 0.1063,
+            "counterfactual_axis_gain": 0.3333,
+            "chronolocate_pass_gain": 0.875,
+            "geolocate_pass_gain": 0.875,
+            "overall_pass_gain": 0.5667
+          }
+        }
+      ]
+    }
+  },
+  "verdict": "PROVED (live verified across 2 models, ollama/gemma4:12b, ollama/qwen3.5:9b): Arm2-Caelus-MCP-Tools raises macro spoof-detection F1 from 0.7247 to 0.9445 (+0.2198), cuts authentic FPR from 100% to 0%, raises counterfactual axis recovery from 66.7% to 100.0%, chronolocation pass rate (<=20m) from 12.5% to 87.5%, geolocation pass rate (<=350km) from 12.5% to 100.0%, and overall 30-task pass rate from 33.3% to 93.3% (+60.0 pp) with isolated local tool median 3.057 ms (< 10 ms bar), warm authentic verify_observation 1.1055 ms (< 2 ms bar), and 14.5246 ms median under concurrent local GPU load. Per model: gemma4:12b: CoT F1=0.6667 (33.3% overall) -> MCP F1=1 (96.7% overall); qwen3.5:9b: CoT F1=0.7826 (33.3% overall) -> MCP F1=0.8889 (90.0% overall)."
+}

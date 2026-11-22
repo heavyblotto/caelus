@@ -1,33 +1,90 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" font-family="et-book, ET-Bembo, Palatino, Georgia, serif" font-size="13">
-<rect width="760" height="460" fill="white"/>
-<text x="56" y="30" font-size="17" fill="#111">EXP-005: Chronosense Codec Recoverability (%) vs. Token Footprint (cl100k)</text>
-<text x="56" y="48" font-size="12" fill="#555">20 EXP-001 eval_suite tasks x 5 arms (offline bounded decoder; live-LLM gate pending --live)</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 430" font-family="et-book, ET-Bembo, Palatino, Georgia, serif" font-size="13">
+  <rect width="760" height="430" fill="#ffffff"/>
 
-<line x1="64.0" y1="396.0" x2="64.0" y2="82.0" stroke="#333" stroke-width="1"/>
-<line x1="64.0" y1="396.0" x2="710.0" y2="396.0" stroke="#333" stroke-width="1"/>
-<text x="56.0" y="86.0" text-anchor="end" font-size="11" fill="#555">100%</text>
-<text x="56.0" y="400.0" text-anchor="end" font-size="11" fill="#555">0%</text>
-<text x="64.0" y="414.0" text-anchor="middle" font-size="11" fill="#555">0 tok</text>
-<text x="710.0" y="414.0" text-anchor="middle" font-size="11" fill="#555">45.75 tok</text>
-<text x="387.0" y="434.0" text-anchor="middle" font-size="12" fill="#444">Mean system header length (cl100k-approx tokens)</text>
-<circle cx="64.0" cy="396.0" r="3.2" fill="#222"/>
-<line x1="64.0" y1="400.0" x2="64.0" y2="405.0" stroke="#666" stroke-width="0.8"/>
-<line x1="55.0" y1="396.0" x2="60.0" y2="396.0" stroke="#666" stroke-width="0.8"/>
-<text x="74.0" y="388.0" text-anchor="start" font-size="11.5" fill="#222">Baseline-None (0% recovery)</text>
-<circle cx="275.8" cy="341.1" r="3.2" fill="#222"/>
-<line x1="275.8" y1="400.0" x2="275.8" y2="405.0" stroke="#666" stroke-width="0.8"/>
-<line x1="55.0" y1="341.1" x2="60.0" y2="341.1" stroke="#666" stroke-width="0.8"/>
-<text x="285.8" y="345.1" text-anchor="start" font-size="11.5" fill="#222">Control-ISO (17.5%)</text>
-<circle cx="431.1" cy="220.7" r="3.2" fill="#222"/>
-<line x1="431.1" y1="400.0" x2="431.1" y2="405.0" stroke="#666" stroke-width="0.8"/>
-<line x1="55.0" y1="220.7" x2="60.0" y2="220.7" stroke="#666" stroke-width="0.8"/>
-<text x="441.1" y="224.7" text-anchor="start" font-size="11.5" fill="#222">Control-Synthetic (55.8%)</text>
-<circle cx="582.9" cy="85.9" r="3.2" fill="#8c3b2b"/>
-<line x1="582.9" y1="400.0" x2="582.9" y2="405.0" stroke="#666" stroke-width="0.8"/>
-<line x1="55.0" y1="85.9" x2="60.0" y2="85.9" stroke="#666" stroke-width="0.8"/>
-<text x="572.9" y="103.9" text-anchor="end" font-size="11.5" fill="#8c3b2b">Arm4b-Symbolic (98.8%; 85% 5-class twilight; 50% on +/-1 sign slip)</text>
-<circle cx="710.0" cy="82.0" r="4.2" fill="#1b5e7a"/>
-<line x1="710.0" y1="400.0" x2="710.0" y2="405.0" stroke="#666" stroke-width="0.8"/>
-<line x1="55.0" y1="82.0" x2="60.0" y2="82.0" stroke="#666" stroke-width="0.8"/>
-<text x="700.0" y="72.0" text-anchor="end" font-size="11.5" fill="#1b5e7a">Treatment-Physical (100.0%; 100% 5-class twilight; 0 hops)</text>
+  <text x="32" y="30" font-size="16.5" fill="#111111">EXP-005: Live 5-Arm Chronosense Codec Showdown (20 Tasks x 2 Models)</text>
+  <text x="32" y="49" font-size="11.5" fill="#555555">Composite accuracy (%) across compaction stale-tool and high-latitude photoperiod slices (temperature = 0)</text>
+
+  <!-- Subtle Razor +20 pp threshold reference over Control-ISO macro (40.8% + 20 pp = 60.8% -> x = 485.4) -->
+  <line x1="403.4" y1="92" x2="403.4" y2="356" stroke="#dddddd" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="485.4" y1="92" x2="485.4" y2="356" stroke="#c8d6dc" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="403.4" y="370" text-anchor="middle" font-size="10" fill="#777777">ISO 40.8%</text>
+  <text x="485.4" y="370" text-anchor="middle" font-size="10" fill="#1b5e7a">Razor +20 pp (60.8%)</text>
+
+  <!-- Direct mark labels above top row (no separate legend box, staggered y-lanes for zero overlap) -->
+  <text x="564" y="69" text-anchor="middle" font-size="11" fill="#9e4228">qwen3.5:9b</text>
+  <line x1="564" y1="73" x2="564" y2="104" stroke="#9e4228" stroke-width="0.8"/>
+  <text x="534" y="86" text-anchor="end" font-size="11" fill="#1b5e7a">gemma4:12b</text>
+  <line x1="536" y1="89" x2="544" y2="104" stroke="#1b5e7a" stroke-width="0.8"/>
+  <text x="646" y="86" text-anchor="end" font-size="10" fill="#777777">offline ceiling</text>
+  <line x1="646" y1="90" x2="646" y2="102" stroke="#999999" stroke-width="0.8"/>
+  <text x="660" y="86" text-anchor="start" font-size="10.5" fill="#444444">Live macro</text>
+
+  <!-- Row 0: Treatment-Caelus-Physical (45.8 tok) -->
+  <text x="224" y="109" text-anchor="end" font-size="12.5" font-weight="bold" fill="#1b5e7a">Treatment-Caelus-Physical</text>
+  <text x="224" y="123" text-anchor="end" font-size="10.5" fill="#666666">45.8 tok, 0 hops, 5-class twilight</text>
+  <line x1="236" y1="112" x2="646" y2="112" stroke="#efefef" stroke-width="1"/>
+  <line x1="545.2" y1="112" x2="564.0" y2="112" stroke="#555555" stroke-width="1.8"/>
+  <line x1="646.0" y1="104" x2="646.0" y2="120" stroke="#999999" stroke-width="1.2"/>
+  <circle cx="545.2" cy="112" r="4.8" fill="#1b5e7a"/>
+  <polygon points="564.0,106.5 569.5,112 564.0,117.5 558.5,112" fill="#9e4228"/>
+  <text x="660" y="116" text-anchor="start" font-size="12.5" font-weight="bold" fill="#1b5e7a">77.7%</text>
+  <text x="660" y="129" text-anchor="start" font-size="10" fill="#1b5e7a">+36.9 pp vs ISO</text>
+
+  <!-- Row 1: Arm4b-Caelus-Symbolic (36.8 tok) -->
+  <text x="224" y="165" text-anchor="end" font-size="12.5" fill="#222222">Arm4b-Caelus-Symbolic</text>
+  <text x="224" y="179" text-anchor="end" font-size="10.5" fill="#666666">36.8 tok, 2 zodiac hops, binary Day/Night</text>
+  <line x1="236" y1="168" x2="646" y2="168" stroke="#efefef" stroke-width="1"/>
+  <line x1="495.7" y1="168" x2="497.4" y2="168" stroke="#555555" stroke-width="1.8"/>
+  <line x1="640.9" y1="160" x2="640.9" y2="176" stroke="#999999" stroke-width="1.2"/>
+  <circle cx="497.4" cy="168" r="4.5" fill="#1b5e7a"/>
+  <polygon points="495.7,162.8 500.9,168 495.7,173.2 490.5,168" fill="#9e4228"/>
+  <text x="660" y="172" text-anchor="start" font-size="12" fill="#222222">63.5%</text>
+  <text x="660" y="185" text-anchor="start" font-size="10" fill="#666666">-14.2 pp vs Phys</text>
+
+  <!-- Row 2: Control-Synthetic (26.0 tok) -->
+  <text x="224" y="221" text-anchor="end" font-size="12.5" fill="#222222">Control-Synthetic</text>
+  <text x="224" y="235" text-anchor="end" font-size="10.5" fill="#666666">26.0 tok, elapsed + fixed 24h sin/cos</text>
+  <line x1="236" y1="224" x2="646" y2="224" stroke="#efefef" stroke-width="1"/>
+  <line x1="415.4" y1="224" x2="427.3" y2="224" stroke="#555555" stroke-width="1.8"/>
+  <line x1="464.9" y1="216" x2="464.9" y2="232" stroke="#999999" stroke-width="1.2"/>
+  <circle cx="427.3" cy="224" r="4.5" fill="#1b5e7a"/>
+  <polygon points="415.4,218.8 420.6,224 415.4,229.2 410.2,224" fill="#9e4228"/>
+  <text x="660" y="228" text-anchor="start" font-size="12" fill="#222222">45.2%</text>
+  <text x="660" y="241" text-anchor="start" font-size="10" fill="#666666">-32.5 pp vs Phys</text>
+
+  <!-- Row 3: Control-ISO (15.0 tok) -->
+  <text x="224" y="277" text-anchor="end" font-size="12.5" fill="#222222">Control-ISO</text>
+  <text x="224" y="291" text-anchor="end" font-size="10.5" fill="#666666">15.0 tok, passive UTC ISO-8601</text>
+  <line x1="236" y1="280" x2="646" y2="280" stroke="#efefef" stroke-width="1"/>
+  <line x1="394.9" y1="280" x2="412.0" y2="280" stroke="#555555" stroke-width="1.8"/>
+  <line x1="307.8" y1="272" x2="307.8" y2="288" stroke="#999999" stroke-width="1.2"/>
+  <circle cx="394.9" cy="280" r="4.5" fill="#1b5e7a"/>
+  <polygon points="412.0,274.8 417.2,280 412.0,285.2 406.8,280" fill="#9e4228"/>
+  <text x="660" y="284" text-anchor="start" font-size="12" fill="#222222">40.8%</text>
+  <text x="660" y="297" text-anchor="start" font-size="10" fill="#666666">baseline control</text>
+
+  <!-- Row 4: Baseline-None (0 tok) -->
+  <text x="224" y="333" text-anchor="end" font-size="12.5" fill="#222222">Baseline-None</text>
+  <text x="224" y="347" text-anchor="end" font-size="10.5" fill="#666666">0.0 tok, no temporal header</text>
+  <line x1="236" y1="336" x2="646" y2="336" stroke="#efefef" stroke-width="1"/>
+  <line x1="353.9" y1="336" x2="369.3" y2="336" stroke="#555555" stroke-width="1.8"/>
+  <line x1="236.0" y1="328" x2="236.0" y2="344" stroke="#999999" stroke-width="1.2"/>
+  <circle cx="353.9" cy="336" r="4.5" fill="#1b5e7a"/>
+  <polygon points="369.3,330.8 374.5,336 369.3,341.2 364.1,336" fill="#9e4228"/>
+  <text x="660" y="340" text-anchor="start" font-size="12" fill="#222222">30.6%</text>
+  <text x="660" y="353" text-anchor="start" font-size="10" fill="#666666">-47.1 pp vs Phys</text>
+
+  <!-- Range-frame horizontal axis (0% to 100%) -->
+  <line x1="236" y1="384" x2="646" y2="384" stroke="#333333" stroke-width="1"/>
+  <line x1="236" y1="384" x2="236" y2="389" stroke="#333333" stroke-width="1"/>
+  <line x1="338.5" y1="384" x2="338.5" y2="389" stroke="#333333" stroke-width="1"/>
+  <line x1="441.0" y1="384" x2="441.0" y2="389" stroke="#333333" stroke-width="1"/>
+  <line x1="543.5" y1="384" x2="543.5" y2="389" stroke="#333333" stroke-width="1"/>
+  <line x1="646" y1="384" x2="646" y2="389" stroke="#333333" stroke-width="1"/>
+  <text x="236" y="402" text-anchor="middle" font-size="11" fill="#444444">0%</text>
+  <text x="338.5" y="402" text-anchor="middle" font-size="11" fill="#444444">25%</text>
+  <text x="441.0" y="402" text-anchor="middle" font-size="11" fill="#444444">50%</text>
+  <text x="543.5" y="402" text-anchor="middle" font-size="11" fill="#444444">75%</text>
+  <text x="646" y="402" text-anchor="middle" font-size="11" fill="#444444">100%</text>
+  <text x="380" y="420" text-anchor="middle" font-size="11" fill="#444444">Mean accuracy across 20 EXP-001 tasks (circles = gemma4:12b, diamonds = qwen3.5:9b, ticks = offline ceiling)</text>
 </svg>

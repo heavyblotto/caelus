@@ -15,21 +15,21 @@
  *   - Runs a bounded zero-ephemeris codec decoder audit measuring exact
  *     field-level information recoverability, token cost, zodiac-conversion
  *     arithmetic hops, and symbolic sign-slip sensitivity across all 20 tasks.
- *   - Runs deterministic grader and write-back cursor audit verification across
- *     clean, drifted, and hallucinated synthetic responses (0% scorer error).
- *   - Records status="inconclusive" because live transformer weights have not
- *     been queried yet, keeping FACT-002 honestly gated.
+ *   - Runs deterministic grader self-tests (oracle pass + corrupt catch).
+ *   - If live_receipt.json exists alongside this script, deterministically
+ *     re-grades every raw recorded live-LLM output without network I/O and
+ *     computes the verified Razor verdict.
  *
- * Optional live-LLM mode (explicit CLI opt-in only):
+ * Live-LLM mode (explicit CLI opt-in only):
  *   node lab/experiments/EXP-005-chronosense-codec-eval/experiment.mjs \
- *     --live --provider=gemini --model=gemini-2.5-flash
- *   Supported providers: gemini (GEMINI_API_KEY), openai (OPENAI_API_KEY),
- *   anthropic (ANTHROPIC_API_KEY).
+ *     --live --provider=ollama --models=gemma4:12b,qwen3.5:9b
+ *   Supported providers: ollama (http://127.0.0.1:11434), anthropic
+ *   (ANTHROPIC_API_KEY), gemini (GEMINI_API_KEY), openai (OPENAI_API_KEY).
  */
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { execSync } from "node:child_process";
 import { performance } from "node:perf_hooks";
 
@@ -37,8 +37,6 @@ import { loadNodeData } from "../../../packages/caelus/dist/src/node-loader.js";
 import {
   Engine,
   sceneGeometry,
-  canonicalChart,
-  chartDigest,
 } from "../../../packages/caelus/dist/src/index.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -48,8 +46,9 @@ const EVAL_SUITE_PATH = resolve(
   REPO_ROOT,
   "lab/experiments/EXP-001-chronosense-ablation/eval_suite.jsonl",
 );
+const LIVE_RECEIPT_PATH = resolve(__dirname, "live_receipt.json");
 
-const ARMS = [
+export const ARMS = [
   "Baseline-None",
   "Control-ISO",
   "Control-Synthetic",
@@ -61,6 +60,25 @@ const SIGN_ABBREV = [
   "Ari", "Tau", "Gem", "Can", "Leo", "Vir",
   "Lib", "Sco", "Sag", "Cap", "Aqu", "Pis",
 ];
+
+const HIGH_LAT_CITIES = new Set(["oslo", "tromso"]);
+
+/**
+ * Symmetric, arm-specific header legends mirroring production middleware
+ * documentation. Every arm receives an exact specification of its own header
+ * syntax, including explicit sign-to-degree offsets for Arm4b-Caelus-Symbolic
+ * and sin24/cos24 conventions for Control-Synthetic.
+ */
+const ARM_LEGENDS = {
+  "Baseline-None": "No temporal context header is injected.",
+  "Control-ISO": "Header format: `[time] <UTC ISO-8601 timestamp>`.",
+  "Control-Synthetic":
+    "Header format: `[clock] elapsed=<seconds since episode start> sin24=<sin(2*pi*local_mean_hour/24)> cos24=<cos(2*pi*local_mean_hour/24)> due=<signed minutes to deadline>` (cos24=-1 is local mean noon, +1 is local mean midnight; positive due is applying/upcoming, negative is separating/past, |due|<=2 is exact).",
+  "Treatment-Caelus-Physical":
+    "Header format: `<UTC> <twilight: day|civil|nautical|astronomical|night> sun:<alt><dir>/<trend> <next_event>:<min>m due:<signed_min>m/<phase> [+night present iff local solar midnight passed since prior turn] m:<moon_ecliptic_lon_deg> a:<asc_deg> #<canonical_digest8>`.",
+  "Arm4b-Caelus-Symbolic":
+    "Header format: `[caelus-sym] <Day|Night> <planetary_hour|polar> | Sun <deg><Sign> | Moon <deg><Sign> | Asc <deg><Sign> due=<signed_min>m/<phase> [+night present iff local solar midnight passed since prior turn] | d=<canonical_digest8>` (ecliptic zodiac 0..360 deg in twelve 30-deg signs: Ari=0, Tau=30, Gem=60, Can=90, Leo=120, Vir=150, Lib=180, Sco=210, Sag=240, Cap=270, Aqu=300, Pis=330).",
+};
 
 function getGitSha() {
   try {
@@ -86,29 +104,48 @@ function whitespaceTokens(text) {
 }
 
 function angDist(a, b) {
-  const d = Math.abs(((a - b + 540) % 360) - 180);
-  return d;
+  return Math.abs(((a - b + 540) % 360) - 180);
 }
 
 function round4(x) {
+  if (x === null || x === undefined || !Number.isFinite(x)) return null;
   return Number(x.toFixed(4));
 }
 
 function parseCliArgs(argv) {
-  const opts = { live: false, provider: "gemini", model: null, limit: null };
+  const opts = {
+    live: false,
+    provider: "ollama",
+    models: [],
+    limit: null,
+    ollamaUrl: process.env.OLLAMA_BASE_URL ?? "http://127.0.0.1:11434",
+    think: false,
+    numPredict: 512,
+    append: false,
+    envNote: null,
+  };
   for (const arg of argv) {
     if (arg === "--live") opts.live = true;
+    else if (arg === "--append") opts.append = true;
+    else if (arg === "--think") opts.think = true;
     else if (arg.startsWith("--provider=")) opts.provider = arg.slice(11);
-    else if (arg.startsWith("--model=")) opts.model = arg.slice(8);
-    else if (arg.startsWith("--limit=")) opts.limit = Number(arg.slice(8));
+    else if (arg.startsWith("--model=")) opts.models = [arg.slice(8)];
+    else if (arg.startsWith("--models=")) {
+      opts.models = arg.slice(9).split(",").map((s) => s.trim()).filter(Boolean);
+    } else if (arg.startsWith("--limit=")) opts.limit = Number(arg.slice(8));
+    else if (arg.startsWith("--ollama-url=")) opts.ollamaUrl = arg.slice(13);
+    else if (arg.startsWith("--num-predict=")) opts.numPredict = Number(arg.slice(14));
+    else if (arg.startsWith("--env-note=")) opts.envNote = arg.slice(11);
+  }
+  if (opts.live && opts.models.length === 0) {
+    if (opts.provider === "ollama") opts.models = ["gemma4:12b", "qwen3.5:9b"];
+    else if (opts.provider === "anthropic") opts.models = ["claude-haiku-4-5"];
+    else if (opts.provider === "gemini") opts.models = ["gemini-2.5-flash"];
+    else if (opts.provider === "openai") opts.models = ["gpt-4o-mini"];
   }
   return opts;
 }
 
-/**
- * Parse the two cached tool readings from the compaction_stale_tool prompt.
- * Returns [{ id: "Tool-A", moonDeg: 85.8 }, { id: "Tool-B", moonDeg: 101.0 }].
- */
 function parseToolCandidates(userPrompt) {
   const re = /\[(Tool-[AB])\] recorded at local (\d\d:\d\d) \(moon=([0-9.]+)deg\)/g;
   const out = [];
@@ -123,8 +160,7 @@ function parseToolCandidates(userPrompt) {
  * Bounded zero-ephemeris codec decoder.
  * Reads ONLY the arm's system_header (plus user_prompt tool lines) without
  * invoking any astronomical ephemeris or lookup table outside static zodiac
- * sign indices (optional zodiacSignSlip simulates a +/-1 sign recall error
- * when an LLM mentally converts zodiac shorthand into ecliptic degrees).
+ * sign indices.
  */
 function decodeArmHeader(armName, header, userPrompt, opts = {}) {
   const zodiacSignSlip = opts.zodiacSignSlip ?? 0;
@@ -140,17 +176,12 @@ function decodeArmHeader(armName, header, userPrompt, opts = {}) {
   };
 
   if (!header) return decoded;
-
   const tools = parseToolCandidates(userPrompt);
 
   if (armName === "Control-ISO") {
-    // Passive UTC ISO timestamp cannot determine local solar midnight crossing
-    // without previous turn timestamp or local longitude, nor local twilight,
-    // nor Moon longitude, nor physical sunset deadline.
     const isoMatch = header.match(/(\d{4}-\d{2}-\d{2})T(\d{2}):(\d{2})/);
     if (isoMatch) {
       const utcHour = Number(isoMatch[2]) + Number(isoMatch[3]) / 60;
-      // Naive UTC heuristic without coordinates: assume daytime 06..18 UTC
       decoded.is_day = utcHour >= 6 && utcHour < 18;
       decoded.twilight_stage = decoded.is_day ? "day" : "night";
     }
@@ -163,14 +194,10 @@ function decodeArmHeader(armName, header, userPrompt, opts = {}) {
     const cosM = header.match(/cos24=([+-]?[0-9.]+)/);
     const dueM = header.match(/due=([+-]?\d+)m/);
     if (elapsedM) {
-      const elapsedSec = Number(elapsedM[1]);
-      // Without previous turn phase, elapsed > 12h hints night may have passed
-      decoded.night_crossed = elapsedSec >= 43200;
+      decoded.night_crossed = Number(elapsedM[1]) >= 43200;
     }
     if (sinM && cosM) {
-      // Fixed 24h wave: cos24 < 0 corresponds to fixed 06:00..18:00 mean solar
-      const cos24 = Number(cosM[1]);
-      decoded.is_day = cos24 < 0;
+      decoded.is_day = Number(cosM[1]) < 0;
       decoded.twilight_stage = decoded.is_day ? "day" : "night";
       decoded.conversion_hops += 1;
     }
@@ -213,7 +240,6 @@ function decodeArmHeader(armName, header, userPrompt, opts = {}) {
     const sectM = header.match(/\[caelus-sym\]\s+(Day|Night)\s+/);
     if (sectM) {
       decoded.is_day = sectM[1] === "Day";
-      // Symbolic arm collapses civil/nautical/astronomical/night into binary Night.
       decoded.twilight_stage = decoded.is_day ? "day" : "night";
     }
     decoded.night_crossed = /\s\+night(?:\s|$)/.test(header);
@@ -227,7 +253,6 @@ function decodeArmHeader(armName, header, userPrompt, opts = {}) {
       const degInSign = Number(moonSymM[1]);
       const signIdx = SIGN_ABBREV.indexOf(moonSymM[2]);
       if (signIdx >= 0) {
-        // Requires zodiac sign lookup + 30-deg multiplication + addition (2 hops)
         const effectiveSign = (signIdx + zodiacSignSlip + 12) % 12;
         const moonApprox = effectiveSign * 30 + degInSign + 0.5;
         decoded.conversion_hops += 2;
@@ -245,9 +270,8 @@ function decodeArmHeader(armName, header, userPrompt, opts = {}) {
 }
 
 /**
- * Deterministic response grader shared by offline dry-run and --live LLM mode.
- * Grades a structured JSON response against the task ground_truth and
- * archetype-specific scoring rubric.
+ * Deterministic response grader shared by offline dry-run, --live execution,
+ * and zero-network live_receipt.json re-verification.
  */
 export function gradeResponse(task, responseObj) {
   const gt = task.ground_truth;
@@ -259,18 +283,34 @@ export function gradeResponse(task, responseObj) {
       typeof responseObj?.night_crossed === "boolean" &&
       responseObj.night_crossed === gt.night_crossed;
     checks.fresh_tool_id = responseObj?.fresh_tool_id === gt.fresh_tool_id;
-    checks.digest_match =
-      typeof responseObj?.canonical_digest8 === "string" &&
-      responseObj.canonical_digest8.toLowerCase() === gt.canonical_digest8;
+    const rawDigest =
+      typeof responseObj?.canonical_digest8 === "string"
+        ? responseObj.canonical_digest8.trim().replace(/^#|^d=/i, "").toLowerCase()
+        : null;
+    checks.digest_match = rawDigest === gt.canonical_digest8;
   } else {
     checks.is_day =
       typeof responseObj?.is_day === "boolean" && responseObj.is_day === gt.is_day;
-    checks.twilight_stage = responseObj?.twilight_stage === gt.twilight_stage;
-    checks.deadline_phase = responseObj?.deadline_phase === gt.deadline_phase;
+    const stage =
+      typeof responseObj?.twilight_stage === "string"
+        ? responseObj.twilight_stage.trim().toLowerCase()
+        : null;
+    checks.twilight_stage = stage === gt.twilight_stage;
+    const phase =
+      typeof responseObj?.deadline_phase === "string"
+        ? responseObj.deadline_phase.trim().toLowerCase()
+        : null;
+    checks.deadline_phase = phase === gt.deadline_phase;
+    const mins =
+      typeof responseObj?.deadline_minutes_remaining === "number"
+        ? responseObj.deadline_minutes_remaining
+        : typeof responseObj?.deadline_minutes_remaining === "string" &&
+            responseObj.deadline_minutes_remaining.trim() !== ""
+          ? Number(responseObj.deadline_minutes_remaining)
+          : NaN;
     checks.deadline_minutes_within_15m =
-      typeof responseObj?.deadline_minutes_remaining === "number" &&
-      Number.isFinite(responseObj.deadline_minutes_remaining) &&
-      Math.abs(responseObj.deadline_minutes_remaining - gt.deadline_minutes_remaining) <= 15;
+      Number.isFinite(mins) &&
+      Math.abs(mins - gt.deadline_minutes_remaining) <= 15;
   }
 
   const keys = Object.keys(checks);
@@ -292,22 +332,95 @@ function buildLivePrompt(task, armName) {
   const arm = task.arms[armName];
   const schemaHint =
     task.archetype === "compaction_stale_tool"
-      ? `Return strict JSON only: {"night_crossed": boolean, "fresh_tool_id": "Tool-A"|"Tool-B", "canonical_digest8": string|null}`
-      : `Return strict JSON only: {"is_day": boolean, "twilight_stage": "day"|"civil"|"nautical"|"astronomical"|"night", "deadline_phase": "applying"|"exact"|"separating", "deadline_minutes_remaining": number}`;
+      ? `Return strict JSON only: {"reasoning": "1-2 concise sentences", "night_crossed": boolean, "fresh_tool_id": "Tool-A"|"Tool-B", "canonical_digest8": string|null} (put the 8-hex-char digest without # or d= prefix, or null if absent).`
+      : `Return strict JSON only: {"reasoning": "1-2 concise sentences", "is_day": boolean, "twilight_stage": "day"|"civil"|"nautical"|"astronomical"|"night", "deadline_phase": "applying"|"exact"|"separating", "deadline_minutes_remaining": number}`;
   const systemPrompt = [
     "You are an autonomous agent executing a long-horizon task with strict temporal grounding.",
-    arm.system_header ? `Context header:\n${arm.system_header}` : "No temporal header is provided.",
+    ARM_LEGENDS[armName],
+    arm.system_header ? `Context header:\n${arm.system_header}` : "Context header: (none)",
     schemaHint,
   ].join("\n\n");
   return { systemPrompt, userPrompt: arm.user_prompt };
 }
 
-async function callLiveLlm(provider, model, systemPrompt, userPrompt) {
+function extractJsonObject(rawText) {
+  if (!rawText || typeof rawText !== "string") return null;
+  const trimmed = rawText.trim();
+  try {
+    return JSON.parse(trimmed);
+  } catch {
+    // Fall back to balanced brace substring
+  }
+  const m = trimmed.match(/\{[\s\S]*\}/);
+  if (!m) return null;
+  try {
+    return JSON.parse(m[0]);
+  } catch {
+    return null;
+  }
+}
+
+async function callLiveLlm(provider, model, systemPrompt, userPrompt, opts) {
+  const t0 = performance.now();
+  if (provider === "ollama") {
+    const res = await fetch(`${opts.ollamaUrl}/api/chat`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        model,
+        stream: false,
+        think: opts.think,
+        format: "json",
+        options: {
+          temperature: 0,
+          num_predict: opts.numPredict,
+        },
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt },
+        ],
+      }),
+    });
+    if (!res.ok) throw new Error(`Ollama HTTP ${res.status}: ${await res.text()}`);
+    const data = await res.json();
+    const raw = data?.message?.content ?? "";
+    return {
+      raw,
+      parsed: extractJsonObject(raw),
+      latencyMs: round4(performance.now() - t0),
+    };
+  }
+  if (provider === "anthropic") {
+    const key = process.env.ANTHROPIC_API_KEY;
+    if (!key) throw new Error("ANTHROPIC_API_KEY is not set");
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-api-key": key,
+        "anthropic-version": "2023-06-01",
+      },
+      body: JSON.stringify({
+        model,
+        max_tokens: opts.numPredict,
+        temperature: 0,
+        system: systemPrompt,
+        messages: [{ role: "user", content: userPrompt }],
+      }),
+    });
+    if (!res.ok) throw new Error(`Anthropic HTTP ${res.status}: ${await res.text()}`);
+    const data = await res.json();
+    const raw = data?.content?.[0]?.text ?? "";
+    return {
+      raw,
+      parsed: extractJsonObject(raw),
+      latencyMs: round4(performance.now() - t0),
+    };
+  }
   if (provider === "gemini") {
     const key = process.env.GEMINI_API_KEY;
     if (!key) throw new Error("GEMINI_API_KEY is not set");
-    const m = model ?? "gemini-2.5-flash";
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(m)}:generateContent?key=${encodeURIComponent(key)}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`;
     const res = await fetch(url, {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -322,13 +435,16 @@ async function callLiveLlm(provider, model, systemPrompt, userPrompt) {
     });
     if (!res.ok) throw new Error(`Gemini HTTP ${res.status}: ${await res.text()}`);
     const data = await res.json();
-    const txt = data?.candidates?.[0]?.content?.parts?.[0]?.text ?? "{}";
-    return JSON.parse(txt);
+    const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
+    return {
+      raw,
+      parsed: extractJsonObject(raw),
+      latencyMs: round4(performance.now() - t0),
+    };
   }
   if (provider === "openai") {
     const key = process.env.OPENAI_API_KEY;
     if (!key) throw new Error("OPENAI_API_KEY is not set");
-    const m = model ?? "gpt-4o-mini";
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -336,7 +452,7 @@ async function callLiveLlm(provider, model, systemPrompt, userPrompt) {
         authorization: `Bearer ${key}`,
       },
       body: JSON.stringify({
-        model: m,
+        model,
         temperature: 0,
         response_format: { type: "json_object" },
         messages: [
@@ -347,34 +463,185 @@ async function callLiveLlm(provider, model, systemPrompt, userPrompt) {
     });
     if (!res.ok) throw new Error(`OpenAI HTTP ${res.status}: ${await res.text()}`);
     const data = await res.json();
-    return JSON.parse(data?.choices?.[0]?.message?.content ?? "{}");
-  }
-  if (provider === "anthropic") {
-    const key = process.env.ANTHROPIC_API_KEY;
-    if (!key) throw new Error("ANTHROPIC_API_KEY is not set");
-    const m = model ?? "claude-3-5-haiku-latest";
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "x-api-key": key,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: m,
-        max_tokens: 256,
-        temperature: 0,
-        system: systemPrompt,
-        messages: [{ role: "user", content: userPrompt }],
-      }),
-    });
-    if (!res.ok) throw new Error(`Anthropic HTTP ${res.status}: ${await res.text()}`);
-    const data = await res.json();
-    const txt = data?.content?.[0]?.text ?? "{}";
-    const jsonMatch = txt.match(/\{[\s\S]*\}/);
-    return JSON.parse(jsonMatch ? jsonMatch[0] : "{}");
+    const raw = data?.choices?.[0]?.message?.content ?? "";
+    return {
+      raw,
+      parsed: extractJsonObject(raw),
+      latencyMs: round4(performance.now() - t0),
+    };
   }
   throw new Error(`Unsupported provider: ${provider}`);
+}
+
+/**
+ * Deterministically re-grade all recorded episodes in live_receipt.json
+ * against eval_suite.jsonl ground truth. Zero network I/O.
+ */
+function summarizeLiveReceipt(receipt, allTasks) {
+  const taskById = new Map(allTasks.map((t) => [t.id, t]));
+  const modelSummaries = [];
+
+  for (const run of receipt.runs ?? []) {
+    const byArm = {};
+    for (const armName of ARMS) {
+      const eps = (run.episodes ?? []).filter((e) => e.arm === armName);
+      let scoreSum = 0;
+      let exactSum = 0;
+      let compScore = 0;
+      let compN = 0;
+      let photoScore = 0;
+      let photoN = 0;
+      let hiLatPhotoScore = 0;
+      let hiLatPhotoN = 0;
+      let hiLatAllScore = 0;
+      let hiLatAllN = 0;
+      let latSum = 0;
+      let parseErrors = 0;
+      let apiErrors = 0;
+      const fieldHits = {};
+      const fieldTotals = {};
+
+      for (const ep of eps) {
+        const task = taskById.get(ep.task_id);
+        if (!task) continue;
+        latSum += ep.latency_ms ?? 0;
+        if (ep.api_error) {
+          apiErrors++;
+          continue;
+        }
+        if (!ep.parsed || typeof ep.parsed !== "object") {
+          parseErrors++;
+        }
+        const g = gradeResponse(task, ep.parsed);
+        scoreSum += g.score;
+        if (g.all_correct) exactSum++;
+
+        const isHiLat = HIGH_LAT_CITIES.has(task.city_id);
+        if (isHiLat) {
+          hiLatAllScore += g.score;
+          hiLatAllN++;
+        }
+        if (task.archetype === "compaction_stale_tool") {
+          compScore += g.score;
+          compN++;
+        } else {
+          photoScore += g.score;
+          photoN++;
+          if (isHiLat) {
+            hiLatPhotoScore += g.score;
+            hiLatPhotoN++;
+          }
+        }
+        for (const [k, ok] of Object.entries(g.checks)) {
+          fieldTotals[k] = (fieldTotals[k] ?? 0) + 1;
+          if (ok) fieldHits[k] = (fieldHits[k] ?? 0) + 1;
+        }
+      }
+
+      const n = Math.max(1, eps.length);
+      const fieldAcc = {};
+      for (const k of Object.keys(fieldTotals)) {
+        fieldAcc[k] = round4((fieldHits[k] ?? 0) / fieldTotals[k]);
+      }
+
+      byArm[armName] = {
+        episodes: eps.length,
+        mean_score: round4(scoreSum / n),
+        exact_task_rate: round4(exactSum / n),
+        compaction_score: round4(compScore / Math.max(1, compN)),
+        photoperiod_score: round4(photoScore / Math.max(1, photoN)),
+        high_lat_photoperiod_score: round4(hiLatPhotoScore / Math.max(1, hiLatPhotoN)),
+        high_lat_all_score: round4(hiLatAllScore / Math.max(1, hiLatAllN)),
+        mean_latency_ms: round4(latSum / n),
+        parse_errors: parseErrors,
+        api_errors: apiErrors,
+        field_accuracy: fieldAcc,
+      };
+    }
+
+    const p = byArm["Treatment-Caelus-Physical"];
+    const sym = byArm["Arm4b-Caelus-Symbolic"];
+    const syn = byArm["Control-Synthetic"];
+    const iso = byArm["Control-ISO"];
+    const none = byArm["Baseline-None"];
+
+    const keySlicePhys = round4((p.compaction_score + p.high_lat_photoperiod_score) / 2);
+    const keySliceSyn = round4((syn.compaction_score + syn.high_lat_photoperiod_score) / 2);
+    const keySliceSym = round4((sym.compaction_score + sym.high_lat_photoperiod_score) / 2);
+
+    modelSummaries.push({
+      provider: run.provider,
+      model: run.model,
+      executed_at: run.executed_at,
+      tasks_evaluated: run.tasks_evaluated,
+      temperature: run.temperature,
+      think: run.think,
+      by_arm: byArm,
+      deltas: {
+        physical_minus_iso: round4(p.mean_score - iso.mean_score),
+        physical_minus_synthetic: round4(p.mean_score - syn.mean_score),
+        physical_minus_symbolic: round4(p.mean_score - sym.mean_score),
+        physical_minus_none: round4(p.mean_score - none.mean_score),
+        compaction_physical_minus_synthetic: round4(p.compaction_score - syn.compaction_score),
+        compaction_physical_minus_symbolic: round4(p.compaction_score - sym.compaction_score),
+        high_lat_photo_physical_minus_synthetic: round4(
+          p.high_lat_photoperiod_score - syn.high_lat_photoperiod_score,
+        ),
+        high_lat_photo_physical_minus_symbolic: round4(
+          p.high_lat_photoperiod_score - sym.high_lat_photoperiod_score,
+        ),
+        key_slice_physical: keySlicePhys,
+        key_slice_synthetic: keySliceSyn,
+        key_slice_symbolic: keySliceSym,
+      },
+    });
+  }
+
+  // Macro mean across all evaluated models
+  const macroByArm = {};
+  for (const armName of ARMS) {
+    const k = Math.max(1, modelSummaries.length);
+    const avg = (fn) => round4(modelSummaries.reduce((acc, m) => acc + fn(m.by_arm[armName]), 0) / k);
+    macroByArm[armName] = {
+      mean_score: avg((a) => a.mean_score),
+      exact_task_rate: avg((a) => a.exact_task_rate),
+      compaction_score: avg((a) => a.compaction_score),
+      photoperiod_score: avg((a) => a.photoperiod_score),
+      high_lat_photoperiod_score: avg((a) => a.high_lat_photoperiod_score),
+      high_lat_all_score: avg((a) => a.high_lat_all_score),
+      mean_latency_ms: avg((a) => a.mean_latency_ms),
+    };
+  }
+
+  const mp = macroByArm["Treatment-Caelus-Physical"];
+  const msym = macroByArm["Arm4b-Caelus-Symbolic"];
+  const msyn = macroByArm["Control-Synthetic"];
+  const miso = macroByArm["Control-ISO"];
+  const mnone = macroByArm["Baseline-None"];
+
+  return {
+    receipt_executed_at: receipt.executed_at,
+    receipt_git_sha: receipt.git_sha,
+    env_note: receipt.env_note ?? null,
+    models_evaluated: modelSummaries.map((m) => `${m.provider}/${m.model}`),
+    model_count: modelSummaries.length,
+    macro_by_arm: macroByArm,
+    macro_deltas: {
+      physical_minus_iso: round4(mp.mean_score - miso.mean_score),
+      physical_minus_synthetic: round4(mp.mean_score - msyn.mean_score),
+      physical_minus_symbolic: round4(mp.mean_score - msym.mean_score),
+      physical_minus_none: round4(mp.mean_score - mnone.mean_score),
+      compaction_physical_minus_synthetic: round4(mp.compaction_score - msyn.compaction_score),
+      compaction_physical_minus_symbolic: round4(mp.compaction_score - msym.compaction_score),
+      high_lat_photo_physical_minus_synthetic: round4(
+        mp.high_lat_photoperiod_score - msyn.high_lat_photoperiod_score,
+      ),
+      high_lat_photo_physical_minus_symbolic: round4(
+        mp.high_lat_photoperiod_score - msym.high_lat_photoperiod_score,
+      ),
+    },
+    models: modelSummaries,
+  };
 }
 
 async function main() {
@@ -560,38 +827,106 @@ async function main() {
     }
   }
 
-  // Step 5: Optional live-LLM execution (--live)
-  let liveSummary = null;
+  // Step 5: Optional live-LLM execution (--live), writing live_receipt.json
+  let liveReceipt = null;
   if (cli.live) {
-    const liveByArm = {};
-    for (const armName of ARMS) {
-      let scoreSum = 0;
-      let exactSum = 0;
-      let errors = 0;
-      for (const task of tasks) {
-        const { systemPrompt, userPrompt } = buildLivePrompt(task, armName);
-        try {
-          const resp = await callLiveLlm(cli.provider, cli.model, systemPrompt, userPrompt);
-          const g = gradeResponse(task, resp);
-          scoreSum += g.score;
-          if (g.all_correct) exactSum++;
-        } catch {
-          errors++;
+    const existingRuns =
+      cli.append && existsSync(LIVE_RECEIPT_PATH)
+        ? (JSON.parse(readFileSync(LIVE_RECEIPT_PATH, "utf8")).runs ?? [])
+        : [];
+    const newRuns = [];
+    for (const model of cli.models) {
+      const mStart = performance.now();
+      const episodes = [];
+      console.log(
+        `[EXP-005 --live] Running ${cli.provider}/${model} across ${tasks.length} tasks x ${ARMS.length} arms (${tasks.length * ARMS.length} calls)...`,
+      );
+      for (const armName of ARMS) {
+        let armScoreSum = 0;
+        for (const task of tasks) {
+          const { systemPrompt, userPrompt } = buildLivePrompt(task, armName);
+          let raw = "";
+          let parsed = null;
+          let latencyMs = 0;
+          let apiError = null;
+          try {
+            const resp = await callLiveLlm(
+              cli.provider,
+              model,
+              systemPrompt,
+              userPrompt,
+              cli,
+            );
+            raw = resp.raw;
+            parsed = resp.parsed;
+            latencyMs = resp.latencyMs;
+          } catch (err) {
+            apiError = String(err?.message ?? err);
+          }
+          const graded = gradeResponse(task, parsed);
+          armScoreSum += graded.score;
+          episodes.push({
+            task_id: task.id,
+            city_id: task.city_id,
+            season: task.season,
+            archetype: task.archetype,
+            arm: armName,
+            latency_ms: latencyMs,
+            raw_content: raw,
+            parsed,
+            checks: graded.checks,
+            score: round4(graded.score),
+            all_correct: graded.all_correct,
+            api_error: apiError,
+          });
         }
+        console.log(
+          `  [${model}] ${armName.padEnd(26)} mean_score=${((armScoreSum / tasks.length) * 100).toFixed(1)}%`,
+        );
       }
-      liveByArm[armName] = {
-        mean_score: round4(scoreSum / tasks.length),
-        exact_task_rate: round4(exactSum / tasks.length),
-        api_errors: errors,
-      };
+      newRuns.push({
+        provider: cli.provider,
+        model,
+        executed_at: new Date().toISOString(),
+        tasks_evaluated: tasks.length,
+        temperature: 0,
+        think: cli.think,
+        num_predict: cli.numPredict,
+        runtime_ms: round4(performance.now() - mStart),
+        episodes,
+      });
     }
-    liveSummary = {
-      provider: cli.provider,
-      model: cli.model ?? "default",
-      tasks_evaluated: tasks.length,
-      by_arm: liveByArm,
+
+    const mergedRuns = [
+      ...existingRuns.filter(
+        (r) => !newRuns.some((nr) => nr.provider === r.provider && nr.model === r.model),
+      ),
+      ...newRuns,
+    ];
+    liveReceipt = {
+      experiment_id: "EXP-005",
+      executed_at: new Date().toISOString(),
+      git_sha: getGitSha(),
+      env_note: cli.envNote,
+      arms: ARMS,
+      arm_legends: ARM_LEGENDS,
+      runs: mergedRuns,
     };
+    writeFileSync(
+      LIVE_RECEIPT_PATH,
+      (JSON.stringify(liveReceipt, null, 2) + "\n").replace(/\u2014/g, "\\u2014"),
+      "utf8",
+    );
+    console.log(`Wrote ${LIVE_RECEIPT_PATH} (${mergedRuns.length} live model run(s)).`);
+  } else if (existsSync(LIVE_RECEIPT_PATH)) {
+    // Zero-network deterministic re-verification of recorded live receipts
+    liveReceipt = JSON.parse(readFileSync(LIVE_RECEIPT_PATH, "utf8"));
   }
+
+  const liveSummary =
+    liveReceipt && Array.isArray(liveReceipt.runs) && liveReceipt.runs.length > 0
+      ? summarizeLiveReceipt(liveReceipt, allTasks)
+      : null;
 
   const elapsedMs = round4(performance.now() - t0);
   const phys = offlineByArm["Treatment-Caelus-Physical"];
@@ -610,32 +945,111 @@ async function main() {
 
   let status = "inconclusive";
   let verdict =
-    `INCONCLUSIVE (offline dry-run complete; live-LLM gate pending): Ground-truth parity (${gtVerifiedCount}/${tasks.length}), scorer self-tests (${scorerOraclePassed}/${tasks.length} oracle, ${scorerCorruptCaught}/${tasks.length} corrupt caught), and bounded codec audit pass cleanly. Treatment-Caelus-Physical recovers ${(phys.mean_score * 100).toFixed(1)}% of task observables (${(all20TwilightPhysAcc * 100).toFixed(0)}% 5-class twilight across all 20 tasks, ${phys.mean_cl100k_tokens} tokens, 0 conversion hops) vs Arm4b-Caelus-Symbolic ${(sym.mean_score * 100).toFixed(1)}% (${(all20TwilightSymAcc * 100).toFixed(0)}% 5-class twilight across all 20 tasks because ${nonBinaryTwilightTasks} civil/nautical/astronomical twilight tasks collapse to binary Night, ${sym.mean_cl100k_tokens} tokens, 2 zodiac-to-degree hops, drops to ${(symbolicSignSlipFreshAcc * 100).toFixed(0)}% fresh-tool acc under symmetric +/-1 sign slip), Control-Synthetic ${(synth.mean_score * 100).toFixed(1)}%, Control-ISO ${(iso.mean_score * 100).toFixed(1)}%, and Baseline-None ${(none.mean_score * 100).toFixed(1)}%. Run with --live and an API key to clear the FACT-002 live-LLM gate.`;
+    `INCONCLUSIVE (offline dry-run complete; live-LLM gate pending): Ground-truth parity (${gtVerifiedCount}/${tasks.length}), scorer self-tests pass cleanly. Run with --live to evaluate live models.`;
 
-  if (liveSummary) {
-    const lp = liveSummary.by_arm["Treatment-Caelus-Physical"].mean_score;
-    const ls = liveSummary.by_arm["Control-Synthetic"].mean_score;
-    const li = liveSummary.by_arm["Control-ISO"].mean_score;
-    const lsym = liveSummary.by_arm["Arm4b-Caelus-Symbolic"].mean_score;
-    if (lp - li >= 0.2 && lp > ls + 0.05 && lp >= lsym) {
-      status = "pass";
-      verdict = `PASS (live ${liveSummary.provider}/${liveSummary.model}): Physical (${lp}) beats ISO (${li}) by +${round4(lp - li)}, beats Synthetic (${ls}), and beats/matches Symbolic (${lsym}).`;
-    } else if (ls >= lp - 0.05) {
-      status = "fail";
-      verdict = `FAIL (live ${liveSummary.provider}/${liveSummary.model}): Control-Synthetic (${ls}) tied or beat Treatment-Caelus-Physical (${lp}) within 5 pp.`;
-    }
-  } else if (!offlineAuditClean) {
+  if (!offlineAuditClean) {
     status = "fail";
     verdict = "FAIL: Offline ground-truth verification or codec audit failed.";
+  } else if (liveSummary) {
+    const mp = liveSummary.macro_by_arm["Treatment-Caelus-Physical"];
+    const msym = liveSummary.macro_by_arm["Arm4b-Caelus-Symbolic"];
+    const msyn = liveSummary.macro_by_arm["Control-Synthetic"];
+    const miso = liveSummary.macro_by_arm["Control-ISO"];
+    const mnone = liveSummary.macro_by_arm["Baseline-None"];
+    const md = liveSummary.macro_deltas;
+
+    const allModelsBeatIso20pp = liveSummary.models.every(
+      (m) => m.deltas.physical_minus_iso >= 0.2,
+    );
+    const allModelsBeatSynth5pp = liveSummary.models.every(
+      (m) => m.deltas.physical_minus_synthetic > 0.05,
+    );
+    const allModelsBeatOrTieSymbolic = liveSummary.models.every(
+      (m) => m.deltas.physical_minus_symbolic >= 0,
+    );
+    const allModelsBeatSymbolicOnSlices = liveSummary.models.every(
+      (m) =>
+        m.by_arm["Treatment-Caelus-Physical"].compaction_score >=
+          m.by_arm["Arm4b-Caelus-Symbolic"].compaction_score &&
+        m.by_arm["Treatment-Caelus-Physical"].high_lat_photoperiod_score >=
+          m.by_arm["Arm4b-Caelus-Symbolic"].high_lat_photoperiod_score,
+    );
+    const synthKillsOnKeySlices = liveSummary.models.every(
+      (m) => m.deltas.key_slice_synthetic >= m.deltas.key_slice_physical - 0.05,
+    );
+
+    const perModelLine = liveSummary.models
+      .map(
+        (m) =>
+          `${m.model}: Phys ${(m.by_arm["Treatment-Caelus-Physical"].mean_score * 100).toFixed(1)}% vs Sym ${(m.by_arm["Arm4b-Caelus-Symbolic"].mean_score * 100).toFixed(1)}% vs Synth ${(m.by_arm["Control-Synthetic"].mean_score * 100).toFixed(1)}% vs ISO ${(m.by_arm["Control-ISO"].mean_score * 100).toFixed(1)}% vs None ${(m.by_arm["Baseline-None"].mean_score * 100).toFixed(1)}%`,
+      )
+      .join("; ");
+
+    if (
+      md.physical_minus_iso >= 0.2 &&
+      md.physical_minus_synthetic > 0.05 &&
+      md.physical_minus_symbolic > 0 &&
+      allModelsBeatIso20pp &&
+      allModelsBeatSynth5pp &&
+      allModelsBeatOrTieSymbolic &&
+      !synthKillsOnKeySlices
+    ) {
+      status = "pass";
+      verdict =
+        `PROVED (live verified across ${liveSummary.model_count} models, ${liveSummary.models_evaluated.join(", ")}): ` +
+        `Macro score Treatment-Caelus-Physical ${(mp.mean_score * 100).toFixed(1)}% beats Control-ISO ${(miso.mean_score * 100).toFixed(1)}% by +${(md.physical_minus_iso * 100).toFixed(1)} pp (>= 20 pp bar), ` +
+        `beats Control-Synthetic ${(msyn.mean_score * 100).toFixed(1)}% by +${(md.physical_minus_synthetic * 100).toFixed(1)} pp (compaction +${(md.compaction_physical_minus_synthetic * 100).toFixed(1)} pp, high-lat photoperiod +${(md.high_lat_photo_physical_minus_synthetic * 100).toFixed(1)} pp), ` +
+        `and beats Arm4b-Caelus-Symbolic ${(msym.mean_score * 100).toFixed(1)}% by +${(md.physical_minus_symbolic * 100).toFixed(1)} pp (compaction +${(md.compaction_physical_minus_symbolic * 100).toFixed(1)} pp, high-lat photoperiod +${(md.high_lat_photo_physical_minus_symbolic * 100).toFixed(1)} pp; slices_monotone=${allModelsBeatSymbolicOnSlices}) ` +
+        `and Baseline-None ${(mnone.mean_score * 100).toFixed(1)}% at ${phys.mean_cl100k_tokens} cl100k tokens/turn. ` +
+        `Per model: ${perModelLine}.`;
+    } else if (synthKillsOnKeySlices || md.physical_minus_synthetic <= 0.05 || md.physical_minus_symbolic < 0) {
+      status = "fail";
+      verdict =
+        `KILLED (live verified across ${liveSummary.model_count} models): ` +
+        `Treatment-Caelus-Physical (${(mp.mean_score * 100).toFixed(1)}%) failed to clear the Razor margin over Control-Synthetic (${(msyn.mean_score * 100).toFixed(1)}%) or Arm4b-Caelus-Symbolic (${(msym.mean_score * 100).toFixed(1)}%). Per model: ${perModelLine}.`;
+    } else {
+      status = "inconclusive";
+      verdict =
+        `INCONCLUSIVE (mixed across ${liveSummary.model_count} models): Macro Physical ${(mp.mean_score * 100).toFixed(1)}% vs Sym ${(msym.mean_score * 100).toFixed(1)}% vs Synth ${(msyn.mean_score * 100).toFixed(1)}% vs ISO ${(miso.mean_score * 100).toFixed(1)}%. Per model: ${perModelLine}.`;
+    }
   }
+
+  const summary = liveSummary
+    ? `Live-LLM 5-arm codec showdown verified over ${tasks.length} EXP-001 tasks x ${liveSummary.model_count} live models (${liveSummary.models_evaluated.join(", ")}) plus offline codec audit (GT parity=${gtVerifiedCount}/${tasks.length}). Live macro score: Physical=${(liveSummary.macro_by_arm["Treatment-Caelus-Physical"].mean_score * 100).toFixed(1)}% vs Symbolic=${(liveSummary.macro_by_arm["Arm4b-Caelus-Symbolic"].mean_score * 100).toFixed(1)}% vs Synthetic=${(liveSummary.macro_by_arm["Control-Synthetic"].mean_score * 100).toFixed(1)}% vs ISO=${(liveSummary.macro_by_arm["Control-ISO"].mean_score * 100).toFixed(1)}% vs None=${(liveSummary.macro_by_arm["Baseline-None"].mean_score * 100).toFixed(1)}% (Physical - ISO = +${(liveSummary.macro_deltas.physical_minus_iso * 100).toFixed(1)} pp, Physical - Synthetic = +${(liveSummary.macro_deltas.physical_minus_synthetic * 100).toFixed(1)} pp, Physical - Symbolic = +${(liveSummary.macro_deltas.physical_minus_symbolic * 100).toFixed(1)} pp at ${phys.mean_cl100k_tokens} cl100k tok/turn).`
+    : `Offline codec audit + scorer verification over ${tasks.length} EXP-001 eval_suite tasks x 5 arms (GT parity=${gtVerifiedCount}/${tasks.length}, max sunAlt diff=${round4(maxSunAltDiffDeg)} deg). Live-LLM inference PENDING --live.`;
 
   const results = {
     id: "EXP-005",
     run_at: new Date().toISOString(),
     git_sha: getGitSha(),
     status,
-    summary: `Offline codec audit + scorer verification over ${tasks.length} EXP-001 eval_suite tasks x 5 arms (GT parity=${gtVerifiedCount}/${tasks.length}, max sunAlt diff=${round4(maxSunAltDiffDeg)} deg). Bounded-decoder score: Physical=${(phys.mean_score * 100).toFixed(1)}% (${phys.mean_cl100k_tokens} tok, ${(all20TwilightPhysAcc * 100).toFixed(0)}% 5-class twilight), Symbolic=${(sym.mean_score * 100).toFixed(1)}% (${sym.mean_cl100k_tokens} tok, ${(all20TwilightSymAcc * 100).toFixed(0)}% 5-class twilight, 2 conversion hops, ${(symbolicSignSlipFreshAcc * 100).toFixed(0)}% on +/-1 sign slip), Synthetic=${(synth.mean_score * 100).toFixed(1)}%, ISO=${(iso.mean_score * 100).toFixed(1)}%, None=${(none.mean_score * 100).toFixed(1)}%. Live-LLM inference (${cli.live ? "EXECUTED" : "PENDING --live"}) remains the FACT-002 gate.`,
+    summary,
     metrics: {
+      live_physical_accuracy: liveSummary
+        ? liveSummary.macro_by_arm["Treatment-Caelus-Physical"].mean_score
+        : null,
+      live_symbolic_accuracy: liveSummary
+        ? liveSummary.macro_by_arm["Arm4b-Caelus-Symbolic"].mean_score
+        : null,
+      live_synthetic_accuracy: liveSummary
+        ? liveSummary.macro_by_arm["Control-Synthetic"].mean_score
+        : null,
+      live_iso_accuracy: liveSummary
+        ? liveSummary.macro_by_arm["Control-ISO"].mean_score
+        : null,
+      live_none_accuracy: liveSummary
+        ? liveSummary.macro_by_arm["Baseline-None"].mean_score
+        : null,
+      live_margin_physical_vs_iso: liveSummary
+        ? liveSummary.macro_deltas.physical_minus_iso
+        : null,
+      live_margin_physical_vs_synthetic: liveSummary
+        ? liveSummary.macro_deltas.physical_minus_synthetic
+        : null,
+      live_margin_physical_vs_symbolic: liveSummary
+        ? liveSummary.macro_deltas.physical_minus_symbolic
+        : null,
+      live_models_count: liveSummary ? liveSummary.model_count : 0,
       physical_codec_score: phys.mean_score,
       symbolic_codec_score: sym.mean_score,
       synthetic_codec_score: synth.mean_score,
@@ -650,7 +1064,7 @@ async function main() {
       ground_truth_parity_rate: round4(gtVerifiedCount / tasks.length),
       scorer_oracle_pass_rate: round4(scorerOraclePassed / tasks.length),
       scorer_corrupt_catch_rate: round4(scorerCorruptCaught / tasks.length),
-      live_llm_executed: cli.live,
+      live_llm_verified: Boolean(liveSummary),
       runtime_ms: elapsedMs,
       offline_codec_by_arm: offlineByArm,
       live_eval: liveSummary,
@@ -664,7 +1078,12 @@ async function main() {
   console.log(results.summary);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+if (
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(resolve(process.argv[1])).href
+) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
