@@ -78,3 +78,11 @@ packages/*/caelus-*.tgz
 
 # Classical-era Horizons caches at any sampling step (fit_classical.py)
 python/*_horizons_cache_classical*.json
+
+# Local assistant/IDE memory, linked worktrees, and scratch research notes
+openmemory.md
+.cursor/rules/openmemory.mdc
+.claude/worktrees/
+.worktrees/
+reports/
+research_notes/
