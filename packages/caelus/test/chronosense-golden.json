@@ -1,0 +1,874 @@
+{
+ "basis": "Python reference astroengine.chronosense (embedded VSOP, full moon)",
+ "cases": [
+  {
+   "id": "env-nyc-autumn-applying",
+   "type": "envelope",
+   "spec": {
+    "jd_ut": 2461367.1041666665,
+    "lat": 40.7128,
+    "lon_east": -74.006,
+    "options": {
+     "turn": 14,
+     "prev_jd_ut": 2461366.5124999997,
+     "deadline_jd_ut": 2461367.1333333333,
+     "deadline_label": "noon_cutoff",
+     "genesis_digest": "0123456789abcdef"
+    }
+   },
+   "result": {
+    "clock_id": "66426f6e",
+    "chart_digest": "66426f6eaf8b1c2f6402f34be0f744dddd08d3d8a0f2dc726f8114f1dbc2c519",
+    "genesis_digest": "0123456789abcdef",
+    "turn": 14,
+    "jd_ut": 2461367.1041666665,
+    "utc_iso": "2026-11-22T14:30Z",
+    "lat": 40.7128,
+    "lon_east": -74.006,
+    "elevation_m": 0.0,
+    "sun_alt_deg": 21.81300317963086,
+    "sun_trend": "rising",
+    "twilight": "daylight",
+    "day_slot": 4,
+    "is_day": true,
+    "night_crossed": true,
+    "horizon_event": "sunset",
+    "horizon_eta_min": 421.45184464752674,
+    "deadline_label": "noon_cutoff",
+    "deadline_eta_min": 42.000000178813934,
+    "deadline_state": "applying",
+    "moon_lon_deg": 32.59169796101644,
+    "moon_illum_pct": 94.14904743004303,
+    "moon_waxing": true,
+    "dt_prev_min": 852.0000001788139,
+    "wavefront_quadrant": "initiate",
+    "header": "[CAELUS-CHRONO clock=66426f6e turn=14 utc=2026-11-22T14:30Z sun_alt=+21.8deg(rising) sky=daylight slot=4/12 night_crossed=true next_sky=sunset(in_421m) deadline=noon_cutoff(applying_42m) dt_prev=+852m]"
+   }
+  },
+  {
+   "id": "env-oslo-winter-solstice-noon",
+   "type": "envelope",
+   "spec": {
+    "jd_ut": 2461395.972222222,
+    "lat": 59.9139,
+    "lon_east": 10.7522,
+    "options": {
+     "turn": 3,
+     "prev_jd_ut": 2461395.2916666665,
+     "deadline_jd_ut": 2461396.097222222,
+     "deadline_label": "sunset_cutoff"
+    }
+   },
+   "result": {
+    "clock_id": "be0e4edf",
+    "chart_digest": "be0e4edffc8a4380e3c324b66a1056ac0bf7fe8cd00d781b1925faaad16d0b08",
+    "genesis_digest": null,
+    "turn": 3,
+    "jd_ut": 2461395.972222222,
+    "utc_iso": "2026-12-21T11:20Z",
+    "lat": 59.9139,
+    "lon_east": 10.7522,
+    "elevation_m": 0.0,
+    "sun_alt_deg": 6.770045333231566,
+    "sun_trend": "culminating",
+    "twilight": "daylight",
+    "day_slot": 7,
+    "is_day": true,
+    "night_crossed": true,
+    "horizon_event": "sunset",
+    "horizon_eta_min": 168.60692761838436,
+    "deadline_label": "sunset_cutoff",
+    "deadline_eta_min": 180.0,
+    "deadline_state": "applying",
+    "moon_lon_deg": 53.1515468807316,
+    "moon_illum_pct": 90.10567553985986,
+    "moon_waxing": true,
+    "dt_prev_min": 979.9999999254942,
+    "wavefront_quadrant": "execute",
+    "header": "[CAELUS-CHRONO clock=be0e4edf turn=3 utc=2026-12-21T11:20Z sun_alt=+6.8deg(culminating) sky=daylight slot=7/12 night_crossed=true next_sky=sunset(in_169m) deadline=sunset_cutoff(applying_180m) dt_prev=+980m]"
+   }
+  },
+  {
+   "id": "env-oslo-summer-midnight-twilight",
+   "type": "envelope",
+   "spec": {
+    "jd_ut": 2461213.4375,
+    "lat": 59.9139,
+    "lon_east": 10.7522,
+    "options": {
+     "turn": 5,
+     "prev_jd_ut": 2461213.3333333335
+    }
+   },
+   "result": {
+    "clock_id": "9306c973",
+    "chart_digest": "9306c973b8030ae07c34f897d1b43515db7aa26a6294d1e72322ad1ce3533a9e",
+    "genesis_digest": null,
+    "turn": 5,
+    "jd_ut": 2461213.4375,
+    "utc_iso": "2026-06-21T22:30Z",
+    "lat": 59.9139,
+    "lon_east": 10.7522,
+    "elevation_m": 0.0,
+    "sun_alt_deg": -6.0480008835372265,
+    "sun_trend": "setting",
+    "twilight": "nautical",
+    "day_slot": 5,
+    "is_day": false,
+    "night_crossed": false,
+    "horizon_event": "civil_dawn",
+    "horizon_eta_min": 99.75754983723164,
+    "deadline_label": null,
+    "deadline_eta_min": null,
+    "deadline_state": "none",
+    "moon_lon_deg": 180.84446066970355,
+    "moon_illum_pct": 50.3754905564963,
+    "moon_waxing": true,
+    "dt_prev_min": 149.99999977648258,
+    "wavefront_quadrant": "consolidate",
+    "header": "[CAELUS-CHRONO clock=9306c973 turn=5 utc=2026-06-21T22:30Z sun_alt=-6.0deg(setting) sky=nautical slot=5/12 night_crossed=false next_sky=civil_dawn(in_100m) dt_prev=+150m]"
+   }
+  },
+  {
+   "id": "env-tromso-polar-day-noon",
+   "type": "envelope",
+   "spec": {
+    "jd_ut": 2461213.0,
+    "lat": 69.6492,
+    "lon_east": 18.9553,
+    "options": {
+     "turn": 1
+    }
+   },
+   "result": {
+    "clock_id": "90059ed8",
+    "chart_digest": "90059ed8759c33b6001f90af517a58ff1d56ac5bf505bdadaf77f59ef46dc2c1",
+    "genesis_digest": null,
+    "turn": 1,
+    "jd_ut": 2461213.0,
+    "utc_iso": "2026-06-21T12:00Z",
+    "lat": 69.6492,
+    "lon_east": 18.9553,
+    "elevation_m": 0.0,
+    "sun_alt_deg": 42.511914468406665,
+    "sun_trend": "setting",
+    "twilight": "daylight",
+    "day_slot": "polar_day",
+    "is_day": true,
+    "night_crossed": false,
+    "horizon_event": null,
+    "horizon_eta_min": null,
+    "deadline_label": null,
+    "deadline_eta_min": null,
+    "deadline_state": "none",
+    "moon_lon_deg": 175.21702732515465,
+    "moon_illum_pct": 45.83546915644124,
+    "moon_waxing": true,
+    "dt_prev_min": null,
+    "wavefront_quadrant": "execute",
+    "header": "[CAELUS-CHRONO clock=90059ed8 turn=1 utc=2026-06-21T12:00Z sun_alt=+42.5deg(setting) sky=daylight slot=polar_day night_crossed=false next_sky=polar]"
+   }
+  },
+  {
+   "id": "env-tromso-polar-day-nadir",
+   "type": "envelope",
+   "spec": {
+    "jd_ut": 2461213.4583333335,
+    "lat": 69.6492,
+    "lon_east": 18.9553,
+    "options": {
+     "turn": 2
+    }
+   },
+   "result": {
+    "clock_id": "53109b9e",
+    "chart_digest": "53109b9e82eb62ccb759aab8d73e4303aabe0bf89b426d10b2b8c9be2c7f8428",
+    "genesis_digest": null,
+    "turn": 2,
+    "jd_ut": 2461213.4583333335,
+    "utc_iso": "2026-06-21T23:00Z",
+    "lat": 69.6492,
+    "lon_east": 18.9553,
+    "elevation_m": 0.0,
+    "sun_alt_deg": 3.338767477898041,
+    "sun_trend": "culminating",
+    "twilight": "daylight",
+    "day_slot": "polar_day",
+    "is_day": true,
+    "night_crossed": false,
+    "horizon_event": null,
+    "horizon_eta_min": null,
+    "deadline_label": null,
+    "deadline_eta_min": null,
+    "deadline_state": "none",
+    "moon_lon_deg": 181.1107427963439,
+    "moon_illum_pct": 50.590331876459175,
+    "moon_waxing": true,
+    "dt_prev_min": null,
+    "wavefront_quadrant": "consolidate",
+    "header": "[CAELUS-CHRONO clock=53109b9e turn=2 utc=2026-06-21T23:00Z sun_alt=+3.3deg(culminating) sky=daylight slot=polar_day night_crossed=false next_sky=polar]"
+   }
+  },
+  {
+   "id": "env-tromso-polar-night-civil",
+   "type": "envelope",
+   "spec": {
+    "jd_ut": 2461395.9583333335,
+    "lat": 69.6492,
+    "lon_east": 18.9553,
+    "options": {
+     "turn": 2,
+     "prev_jd_ut": 2461395.3333333335
+    }
+   },
+   "result": {
+    "clock_id": "8b1b27c0",
+    "chart_digest": "8b1b27c0436485303887ab997f5714af8c09ea9fccdf14de084bf085b1d76123",
+    "genesis_digest": null,
+    "turn": 2,
+    "jd_ut": 2461395.9583333335,
+    "utc_iso": "2026-12-21T11:00Z",
+    "lat": 69.6492,
+    "lon_east": 18.9553,
+    "elevation_m": 0.0,
+    "sun_alt_deg": -3.1410168091255968,
+    "sun_trend": "setting",
+    "twilight": "civil",
+    "day_slot": "polar_night",
+    "is_day": false,
+    "night_crossed": true,
+    "horizon_event": "civil_dusk",
+    "horizon_eta_min": 113.221405595541,
+    "deadline_label": null,
+    "deadline_eta_min": null,
+    "deadline_state": "none",
+    "moon_lon_deg": 52.947604505421396,
+    "moon_illum_pct": 90.0078256920648,
+    "moon_waxing": true,
+    "dt_prev_min": 900.0,
+    "wavefront_quadrant": "review",
+    "header": "[CAELUS-CHRONO clock=8b1b27c0 turn=2 utc=2026-12-21T11:00Z sun_alt=-3.1deg(setting) sky=civil slot=polar_night night_crossed=true next_sky=civil_dusk(in_113m) dt_prev=+900m]"
+   }
+  },
+  {
+   "id": "env-tokyo-equinox-due-utc-trap",
+   "type": "envelope",
+   "spec": {
+    "jd_ut": 2461120.5416666665,
+    "lat": 35.6762,
+    "lon_east": 139.6503,
+    "options": {
+     "turn": 7,
+     "prev_jd_ut": 2461120.4583333335,
+     "deadline_jd_ut": 2461120.5418749996,
+     "deadline_label": "market_open"
+    }
+   },
+   "result": {
+    "clock_id": "1fb14f25",
+    "chart_digest": "1fb14f2567f28640c06c73d89fb7b5a946a30011bec322e03c2c295696f229f5",
+    "genesis_digest": null,
+    "turn": 7,
+    "jd_ut": 2461120.5416666665,
+    "utc_iso": "2026-03-21T01:00Z",
+    "lat": 35.6762,
+    "lon_east": 139.6503,
+    "elevation_m": 0.0,
+    "sun_alt_deg": 46.43574295380192,
+    "sun_trend": "rising",
+    "twilight": "daylight",
+    "day_slot": 5,
+    "is_day": true,
+    "night_crossed": false,
+    "horizon_event": "sunset",
+    "horizon_eta_min": 472.21283599734306,
+    "deadline_label": "market_open",
+    "deadline_eta_min": 0.2999997138977051,
+    "deadline_state": "due",
+    "moon_lon_deg": 26.644398730265873,
+    "moon_illum_pct": 5.2725146890007455,
+    "moon_waxing": true,
+    "dt_prev_min": 119.99999955296516,
+    "wavefront_quadrant": "execute",
+    "header": "[CAELUS-CHRONO clock=1fb14f25 turn=7 utc=2026-03-21T01:00Z sun_alt=+46.4deg(rising) sky=daylight slot=5/12 night_crossed=false next_sky=sunset(in_472m) deadline=market_open(due) dt_prev=+120m]"
+   }
+  },
+  {
+   "id": "env-sydney-summer-overdue-elevated",
+   "type": "envelope",
+   "spec": {
+    "jd_ut": 2461055.6666666665,
+    "lat": -33.8688,
+    "lon_east": 151.2093,
+    "options": {
+     "turn": 9,
+     "elevation_m": 58.0,
+     "deadline_jd_ut": 2461055.6527777775,
+     "deadline_label": "deploy"
+    }
+   },
+   "result": {
+    "clock_id": "24cbbae2",
+    "chart_digest": "24cbbae2e17acc0443af3a898381083aefe045dec021b29e87d5e9e1e50bf709",
+    "genesis_digest": null,
+    "turn": 9,
+    "jd_ut": 2461055.6666666665,
+    "utc_iso": "2026-01-15T04:00Z",
+    "lat": -33.8688,
+    "lon_east": 151.2093,
+    "elevation_m": 58.0,
+    "sun_alt_deg": 61.53045489713298,
+    "sun_trend": "setting",
+    "twilight": "daylight",
+    "day_slot": 8,
+    "is_day": true,
+    "night_crossed": false,
+    "horizon_event": "sunset",
+    "horizon_eta_min": 307.5195027887821,
+    "deadline_label": "deploy",
+    "deadline_eta_min": -20.000000149011612,
+    "deadline_state": "overdue",
+    "moon_lon_deg": 254.08601380266077,
+    "moon_illum_pct": 12.426937348399125,
+    "moon_waxing": false,
+    "dt_prev_min": null,
+    "wavefront_quadrant": "execute",
+    "header": "[CAELUS-CHRONO clock=24cbbae2 turn=9 utc=2026-01-15T04:00Z sun_alt=+61.5deg(setting) sky=daylight slot=8/12 night_crossed=false next_sky=sunset(in_308m) deadline=deploy(overdue_20m)]"
+   }
+  },
+  {
+   "id": "audit-clean-pass",
+   "type": "audit",
+   "spec": {
+    "envelope_id": "env-nyc-autumn-applying",
+    "cursor": {
+     "clock_id": "66426f6e",
+     "turn": 14,
+     "night_crossed_ack": true,
+     "deadline_eta_min": 42.4,
+     "cited_facts": {
+      "sun_alt_deg": 21.8,
+      "moon_illum_pct": 94.1,
+      "horizon_eta_min": 421.5,
+      "twilight": "daylight",
+      "wavefront_quadrant": "initiate"
+     }
+    },
+    "options": {}
+   },
+   "result": {
+    "ok": true,
+    "drift_flags": [],
+    "corrective_prompt": null
+   }
+  },
+  {
+   "id": "audit-stale-clock-and-turn",
+   "type": "audit",
+   "spec": {
+    "envelope_id": "env-nyc-autumn-applying",
+    "cursor": {
+     "clock_id": "deadbeef",
+     "turn": 13,
+     "night_crossed_ack": true,
+     "deadline_eta_min": 42.0
+    },
+    "options": {}
+   },
+   "result": {
+    "ok": false,
+    "drift_flags": [
+     "clock_id_mismatch",
+     "turn_mismatch"
+    ],
+    "corrective_prompt": "Chronosense audit rejected cursor (clock_id_mismatch, turn_mismatch). Sync cursor to clock_id=66426f6e turn=14. Authoritative header: [CAELUS-CHRONO clock=66426f6e turn=14 utc=2026-11-22T14:30Z sun_alt=+21.8deg(rising) sky=daylight slot=4/12 night_crossed=true next_sky=sunset(in_421m) deadline=noon_cutoff(applying_42m) dt_prev=+852m]"
+   }
+  },
+  {
+   "id": "audit-night-crossed-unacked",
+   "type": "audit",
+   "spec": {
+    "envelope_id": "env-oslo-winter-solstice-noon",
+    "cursor": {
+     "clock_id": "be0e4edf",
+     "turn": 3,
+     "night_crossed_ack": false,
+     "deadline_eta_min": 180.0
+    },
+    "options": {}
+   },
+   "result": {
+    "ok": false,
+    "drift_flags": [
+     "night_crossed_unacked"
+    ],
+    "corrective_prompt": "Chronosense audit rejected cursor (night_crossed_unacked). Local solar midnight was crossed since the previous turn; set night_crossed_ack=true and re-verify prior-day cached outputs. Authoritative header: [CAELUS-CHRONO clock=be0e4edf turn=3 utc=2026-12-21T11:20Z sun_alt=+6.8deg(culminating) sky=daylight slot=7/12 night_crossed=true next_sky=sunset(in_169m) deadline=sunset_cutoff(applying_180m) dt_prev=+980m]"
+   }
+  },
+  {
+   "id": "audit-deadline-drift",
+   "type": "audit",
+   "spec": {
+    "envelope_id": "env-nyc-autumn-applying",
+    "cursor": {
+     "clock_id": "66426f6e",
+     "turn": 14,
+     "night_crossed_ack": true,
+     "deadline_eta_min": 10.0
+    },
+    "options": {}
+   },
+   "result": {
+    "ok": false,
+    "drift_flags": [
+     "deadline_drift"
+    ],
+    "corrective_prompt": "Chronosense audit rejected cursor (deadline_drift). Update deadline_eta_min to 42.0 (applying). Authoritative header: [CAELUS-CHRONO clock=66426f6e turn=14 utc=2026-11-22T14:30Z sun_alt=+21.8deg(rising) sky=daylight slot=4/12 night_crossed=true next_sky=sunset(in_421m) deadline=noon_cutoff(applying_42m) dt_prev=+852m]"
+   }
+  },
+  {
+   "id": "audit-cited-facts-mismatch-and-unknown",
+   "type": "audit",
+   "spec": {
+    "envelope_id": "env-nyc-autumn-applying",
+    "cursor": {
+     "clock_id": "66426f6e",
+     "turn": 14,
+     "night_crossed_ack": true,
+     "deadline_eta_min": 42.0,
+     "cited_facts": {
+      "sun_alt_deg": 24.81,
+      "twilight": "night",
+      "astro_sign": "Aries"
+     }
+    },
+    "options": {}
+   },
+   "result": {
+    "ok": false,
+    "drift_flags": [
+     "unknown_fact:astro_sign",
+     "fact_mismatch:sun_alt_deg",
+     "fact_mismatch:twilight"
+    ],
+    "corrective_prompt": "Chronosense audit rejected cursor (unknown_fact:astro_sign, fact_mismatch:sun_alt_deg, fact_mismatch:twilight). Re-read cited_facts from the authoritative header: [CAELUS-CHRONO clock=66426f6e turn=14 utc=2026-11-22T14:30Z sun_alt=+21.8deg(rising) sky=daylight slot=4/12 night_crossed=true next_sky=sunset(in_421m) deadline=noon_cutoff(applying_42m) dt_prev=+852m]"
+   }
+  },
+  {
+   "id": "audit-polar-hallucinated-horizon-and-deadline",
+   "type": "audit",
+   "spec": {
+    "envelope_id": "env-tromso-polar-day-noon",
+    "cursor": {
+     "clock_id": "90059ed8",
+     "turn": 1,
+     "deadline_eta_min": 30.0,
+     "cited_facts": {
+      "horizon_eta_min": 60.0
+     }
+    },
+    "options": {}
+   },
+   "result": {
+    "ok": false,
+    "drift_flags": [
+     "deadline_drift",
+     "fact_mismatch:horizon_eta_min"
+    ],
+    "corrective_prompt": "Chronosense audit rejected cursor (deadline_drift, fact_mismatch:horizon_eta_min). Clear deadline_eta_min (no active deadline). Re-read cited_facts from the authoritative header: [CAELUS-CHRONO clock=90059ed8 turn=1 utc=2026-06-21T12:00Z sun_alt=+42.5deg(setting) sky=daylight slot=polar_day night_crossed=false next_sky=polar]"
+   }
+  },
+  {
+   "id": "phase-oslo-winter-vs-equinox",
+   "type": "phase",
+   "spec": {
+    "a": {
+     "jd_ut": 2461395.972222222,
+     "lat": 59.9139,
+     "lon_east": 10.7522
+    },
+    "b": {
+     "jd_ut": 2461305.965277778,
+     "lat": 59.9139,
+     "lon_east": 10.7522
+    }
+   },
+   "result": {
+    "vector_a": [
+     -0.03522675226109475,
+     0.798604350981894,
+     0.11490067701966752,
+     -0.3747097998647942,
+     0.449651759837753,
+     0.001380869798772983,
+     -0.04803655852332947,
+     0.03587365828252568,
+     -0.00027881465972454957,
+     -0.03996807283433509
+    ],
+    "vector_b": [
+     -0.0032117468219660292,
+     0.7853368397783113,
+     0.21807558748804648,
+     -0.3681297221244414,
+     0.4417556665493297,
+     9.37673016936908e-46,
+     -0.037538435959838495,
+     0.04538903864218118,
+     -0.039265512203146086,
+     0.00036085939251870184
+    ],
+    "stratum_a": "day:dec_sol:lon3",
+    "stratum_b": "day:sep_eq:lon3",
+    "cosine_similarity": 0.9923496297543503
+   }
+  },
+  {
+   "id": "phase-oslo-winter-day-vs-night",
+   "type": "phase",
+   "spec": {
+    "a": {
+     "jd_ut": 2461395.972222222,
+     "lat": 59.9139,
+     "lon_east": 10.7522
+    },
+    "b": {
+     "jd_ut": 2461396.472222222,
+     "lat": 59.9139,
+     "lon_east": 10.7522
+    }
+   },
+   "result": {
+    "vector_a": [
+     -0.03522675226109475,
+     0.798604350981894,
+     0.11490067701966752,
+     -0.3747097998647942,
+     0.449651759837753,
+     0.001380869798772983,
+     -0.04803655852332947,
+     0.03587365828252568,
+     -0.00027881465972454957,
+     -0.03996807283433509
+    ],
+    "vector_b": [
+     0.010699308018638849,
+     -0.7847981479375359,
+     -0.22068591847511287,
+     0.3679083175489362,
+     -0.44148998105872345,
+     1.4233206952119154e-139,
+     -0.05100486439975097,
+     0.02938759906284028,
+     7.498616247720742e-05,
+     -0.03924348223044302
+    ],
+    "stratum_a": "day:dec_sol:lon3",
+    "stratum_b": "night:dec_sol:lon3",
+    "cosine_similarity": -0.9837798735819746
+   }
+  },
+  {
+   "id": "phase-nyc-vs-tokyo-travel",
+   "type": "phase",
+   "spec": {
+    "a": {
+     "jd_ut": 2461306.201388889,
+     "lat": 40.7128,
+     "lon_east": -74.006
+    },
+    "b": {
+     "jd_ut": 2461305.607638889,
+     "lat": 35.6762,
+     "lon_east": 139.6503
+    }
+   },
+   "result": {
+    "vector_a": [
+     -0.005615700657414803,
+     0.7848610028421067,
+     0.22063090510905234,
+     -0.36791301226232337,
+     0.44149561471478804,
+     3.155017158385305e-119,
+     -0.039590989143013594,
+     0.04356339270799916,
+     -0.0392435324309338,
+     0.00020245254437751243
+    ],
+    "vector_b": [
+     -0.003446883891494267,
+     0.7848616966727113,
+     0.2206958697476504,
+     -0.36790746819895004,
+     0.44148896183874003,
+     1.1141916329916036e-145,
+     -0.03424069282373923,
+     0.04788200211935905,
+     -0.03923887312889268,
+     0.0006002044284953791
+    ],
+    "stratum_a": "day:sep_eq:lon1",
+    "stratum_b": "day:sep_eq:lon5",
+    "cosine_similarity": 0.9999739288258654
+   }
+  },
+  {
+   "id": "phase-tromso-polar-day-vs-night",
+   "type": "phase",
+   "spec": {
+    "a": {
+     "jd_ut": 2461213.0,
+     "lat": 69.6492,
+     "lon_east": 18.9553
+    },
+    "b": {
+     "jd_ut": 2461395.9583333335,
+     "lat": 69.6492,
+     "lon_east": 18.9553
+    }
+   },
+   "result": {
+    "vector_a": [
+     -0.24910980939473737,
+     0.7443461743808715,
+     0.22039071799752538,
+     -0.3679334948632861,
+     0.4415201938359433,
+     1.3631848043129006e-88,
+     0.005051713332728329,
+     0.05865220918641613,
+     -0.0001019979776106618,
+     0.03924610690938486
+    ],
+    "vector_b": [
+     -0.06209781644187679,
+     0.7986745577058578,
+     -0.0576630128666973,
+     -0.3755085968830057,
+     -0.4506103162596068,
+     0.07528154427914246,
+     -0.048020905376089405,
+     0.0361076768705297,
+     -0.0002892958355986421,
+     -0.04005320558648517
+    ],
+    "stratum_a": "day:jun_sol:lon3",
+    "stratum_b": "twilight:dec_sol:lon3",
+    "cosine_similarity": 0.5367630745249061
+   }
+  },
+  {
+   "id": "select-dominant-daytime-compaction",
+   "type": "stratified_select",
+   "spec": {
+    "entries": [
+     {
+      "id": "day-00",
+      "stratum": "day:jun_sol:lon3",
+      "score": 100.0
+     },
+     {
+      "id": "day-01",
+      "stratum": "day:jun_sol:lon3",
+      "score": 101.0
+     },
+     {
+      "id": "day-02",
+      "stratum": "day:jun_sol:lon3",
+      "score": 102.0
+     },
+     {
+      "id": "day-03",
+      "stratum": "day:jun_sol:lon3",
+      "score": 103.0
+     },
+     {
+      "id": "day-04",
+      "stratum": "day:jun_sol:lon3",
+      "score": 104.0
+     },
+     {
+      "id": "day-05",
+      "stratum": "day:jun_sol:lon3",
+      "score": 105.0
+     },
+     {
+      "id": "day-06",
+      "stratum": "day:jun_sol:lon3",
+      "score": 106.0
+     },
+     {
+      "id": "day-07",
+      "stratum": "day:jun_sol:lon3",
+      "score": 107.0
+     },
+     {
+      "id": "day-08",
+      "stratum": "day:jun_sol:lon3",
+      "score": 108.0
+     },
+     {
+      "id": "day-09",
+      "stratum": "day:jun_sol:lon3",
+      "score": 109.0
+     },
+     {
+      "id": "day-10",
+      "stratum": "day:jun_sol:lon3",
+      "score": 110.0
+     },
+     {
+      "id": "day-11",
+      "stratum": "day:jun_sol:lon3",
+      "score": 111.0
+     },
+     {
+      "id": "twi-00",
+      "stratum": "twilight:jun_sol:lon3",
+      "score": 10.0
+     },
+     {
+      "id": "twi-01",
+      "stratum": "twilight:jun_sol:lon3",
+      "score": 15.0
+     },
+     {
+      "id": "ngt-00",
+      "stratum": "night:jun_sol:lon3",
+      "score": 20.0
+     },
+     {
+      "id": "ngt-01",
+      "stratum": "night:jun_sol:lon3",
+      "score": 25.0
+     },
+     {
+      "id": "tok-00",
+      "stratum": "day:jun_sol:lon5",
+      "score": 30.0
+     },
+     {
+      "id": "tok-01",
+      "stratum": "day:jun_sol:lon5",
+      "score": 35.0
+     }
+    ],
+    "budget": 8
+   },
+   "result": [
+    {
+     "id": "day-11",
+     "stratum": "day:jun_sol:lon3",
+     "score": 111.0
+    },
+    {
+     "id": "tok-01",
+     "stratum": "day:jun_sol:lon5",
+     "score": 35.0
+    },
+    {
+     "id": "ngt-01",
+     "stratum": "night:jun_sol:lon3",
+     "score": 25.0
+    },
+    {
+     "id": "twi-01",
+     "stratum": "twilight:jun_sol:lon3",
+     "score": 15.0
+    },
+    {
+     "id": "day-10",
+     "stratum": "day:jun_sol:lon3",
+     "score": 110.0
+    },
+    {
+     "id": "tok-00",
+     "stratum": "day:jun_sol:lon5",
+     "score": 30.0
+    },
+    {
+     "id": "ngt-00",
+     "stratum": "night:jun_sol:lon3",
+     "score": 20.0
+    },
+    {
+     "id": "twi-00",
+     "stratum": "twilight:jun_sol:lon3",
+     "score": 10.0
+    }
+   ]
+  },
+  {
+   "id": "select-recency-and-remainder-fill",
+   "type": "stratified_select",
+   "spec": {
+    "entries": [
+     {
+      "id": "oslo-1",
+      "stratum": "day:dec_sol:lon3",
+      "recency": 10
+     },
+     {
+      "id": "oslo-2",
+      "stratum": "day:dec_sol:lon3",
+      "recency": 50
+     },
+     {
+      "id": "oslo-3",
+      "stratum": "day:dec_sol:lon3",
+      "recency": 30
+     },
+     {
+      "id": "oslo-4",
+      "stratum": "day:dec_sol:lon3",
+      "recency": 50
+     },
+     {
+      "id": "oslo-5",
+      "stratum": "day:dec_sol:lon3",
+      "recency": 20
+     },
+     {
+      "id": "night-1",
+      "stratum": "night:dec_sol:lon3",
+      "recency": 40
+     },
+     {
+      "id": "tokyo-1",
+      "stratum": "day:dec_sol:lon5",
+      "recency": 45
+     }
+    ],
+    "budget": 5
+   },
+   "result": [
+    {
+     "id": "oslo-2",
+     "stratum": "day:dec_sol:lon3",
+     "recency": 50
+    },
+    {
+     "id": "tokyo-1",
+     "stratum": "day:dec_sol:lon5",
+     "recency": 45
+    },
+    {
+     "id": "night-1",
+     "stratum": "night:dec_sol:lon3",
+     "recency": 40
+    },
+    {
+     "id": "oslo-4",
+     "stratum": "day:dec_sol:lon3",
+     "recency": 50
+    },
+    {
+     "id": "oslo-3",
+     "stratum": "day:dec_sol:lon3",
+     "recency": 30
+    }
+   ]
+  }
+ ]
+}
