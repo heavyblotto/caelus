@@ -4607,6 +4607,384 @@ button.emark:hover,
   stroke: var(--warm);
 }
 
+/* ---- field-verifier (I-05 SHADOWPROOF) ---- */
+.fv-modes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  border-bottom: 1px solid var(--line);
+  background: var(--panel-inset);
+}
+
+.fv-obs-group {
+  border-top: 1px solid var(--line);
+}
+
+.fv-obs-group__h {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--panel2);
+  border-bottom: 1px solid var(--line);
+  font: 500 var(--fs-2xs) / 1.2 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.fv-verdict {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--line);
+  border-left: 3px solid var(--line2);
+  background: var(--panel2);
+}
+
+.fv-verdict--consistent {
+  border-left-color: var(--ok);
+  background: var(--ok-soft);
+}
+
+.fv-verdict--marginal {
+  border-left-color: var(--warm);
+  background: var(--warm-soft);
+}
+
+.fv-verdict--inconsistent,
+.fv-verdict--impossible {
+  border-left-color: var(--bad);
+  background: var(--bad-soft);
+}
+
+.fv-verdict--unconstrained {
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.fv-verdict__score {
+  font: 600 1.45rem / 1 var(--mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+
+.fv-verdict__line {
+  flex: 1 1 16rem;
+  min-width: 0;
+  font: 400 var(--fs-xs) / 1.5 var(--mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--dim);
+  overflow-wrap: anywhere;
+}
+
+/* photo shadow canvas & local-only dropzone */
+.fv-canvas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+  min-width: 0;
+}
+
+.fv-dropzone {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px dashed var(--line2);
+  background: var(--panel-inset);
+  color: var(--dim);
+  font: 400 var(--fs-xs) / 1.45 var(--mono);
+  transition: border-color var(--t-fast), background-color var(--t-fast), color var(--t-fast);
+}
+
+.fv-dropzone:hover,
+.fv-dropzone:focus-within,
+.fv-dropzone--drag {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+.fv-dropzone input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fv-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  min-height: 14rem;
+  max-height: 26rem;
+  background: var(--panel-inset);
+  border: 1px solid var(--line2);
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+}
+
+.fv-stage__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.fv-stage__svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.fv-stage__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--panel-inset);
+  border: 1px solid var(--line);
+  font: 500 var(--fs-xs) / 1.35 var(--mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--dim);
+}
+
+.fv-stage__controls input[type="range"] {
+  accent-color: var(--accent);
+  min-width: 7rem;
+  flex: 1 1 8rem;
+  max-width: 14rem;
+}
+
+.fv-handle {
+  cursor: grab;
+  stroke-width: 2;
+  transition: stroke-width var(--t-fast);
+}
+
+.fv-handle:active {
+  cursor: grabbing;
+}
+
+.fv-handle:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+.fv-handle--pole {
+  fill: var(--panel);
+  stroke: var(--accent);
+}
+
+.fv-handle--shadow {
+  fill: var(--panel);
+  stroke: var(--warm);
+}
+
+/* inline SVG figures: compass dial, analemma heatmap, timeline, global fix map */
+.fv-dial {
+  display: block;
+  width: 100%;
+  max-width: 24rem;
+  height: auto;
+  margin: 0 auto;
+  padding: var(--sp-2);
+}
+
+.fv-heatmap,
+.fv-timeline,
+.fv-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--panel-inset);
+  border-bottom: 1px solid var(--line);
+  padding: var(--sp-2) var(--sp-3);
+}
+
+.fv-dial text,
+.fv-heatmap text,
+.fv-timeline text,
+.fv-map text {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* inline residual bars in verification breakdown table */
+.fv-resbar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-width: 5.5rem;
+}
+
+.fv-resbar__track {
+  position: relative;
+  flex: 1 1 4.5rem;
+  height: 8px;
+  background: var(--panel-inset);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.fv-resbar__fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: var(--accent);
+}
+
+.fv-resbar__fill--ok {
+  background: var(--ok);
+}
+
+.fv-resbar__fill--warn {
+  background: var(--warm);
+}
+
+.fv-resbar__fill--bad {
+  background: var(--bad);
+}
+
+.fv-resbar__mark {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  width: 1px;
+  background: var(--text);
+  pointer-events: none;
+}
+
+/* counterfactual diagnostics card */
+.fv-cf-card {
+  border-top: 1px solid var(--line);
+  border-left: 3px solid var(--warm);
+  background: var(--panel2);
+  padding: var(--sp-3) var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  min-width: 0;
+}
+
+.fv-cf-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.fv-cf-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--panel);
+  font: 400 var(--fs-xs) / 1.45 var(--mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--dim);
+  min-width: 0;
+}
+
+.fv-cf-apply {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--ctrl-h-sm);
+  padding: 0 0.65rem;
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font: 500 var(--fs-2xs) / 1 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+}
+
+.fv-cf-apply:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.fv-cf-apply:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* featured instrument card layout and badge wrapping on narrow screens */
+.inst-card--featured .tile__b {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: var(--sp-4) var(--sp-6);
+  align-items: start;
+}
+
+.inst-card--featured .tile__b > * + * {
+  margin-top: 0;
+}
+
+.inst-meta .badge {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+  .inst-card--featured .tile__b {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-3);
+  }
+}
+
+@media (max-width: 640px) {
+  .fv-stage {
+    aspect-ratio: 4 / 3;
+    min-height: 12rem;
+  }
+
+  .fv-verdict,
+  .fv-cf-card {
+    padding: var(--sp-3);
+  }
+
+  .fv-cf-row {
+    align-items: flex-start;
+  }
+
+  .fv-cf-apply {
+    width: 100%;
+  }
+}
+
 /* ---- bench pages ---- */
 .bench .page-close {
   grid-column: span 12;
@@ -4884,6 +5262,7 @@ a.tile:hover h3 {
   .chip,
   .preset-chip,
   .tabs__tab,
+  .fv-cf-apply,
   .scrubber-steps button,
   .scrubber__steps button,
   .home-sky__transport button {
@@ -4901,6 +5280,10 @@ a.tile:hover h3 {
   .chip,
   .preset-chip,
   .viz-stage,
+  .fv-stage,
+  .fv-dropzone,
+  .fv-cf-card,
+  .fv-cf-apply,
   dialog.search-dialog {
     border: 1px solid CanvasText;
   }

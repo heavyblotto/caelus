@@ -22,4 +22,5 @@ export const registry: Record<string, Loader> = {
   ChartStability: () => import("@web/app/instruments/uncertain-time/ChartStabilityIsland").then((m) => m.default),
   Eclipses: () => import("@web/app/instruments/eclipses/EclipsesIsland").then((m) => m.default),
   FirstVisibility: () => import("@web/app/instruments/first-visibility/FirstVisibilityIsland").then((m) => m.default),
+  FieldVerifier: () => import("@web/app/instruments/field-verifier/FieldVerifierIsland").then((m) => m.default),
 };

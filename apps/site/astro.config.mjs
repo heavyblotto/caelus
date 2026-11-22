@@ -91,6 +91,7 @@ export default defineConfig({
           "app/instruments/uncertain-time/ChartStabilityIsland.tsx": "src/islands/web/ChartStabilityIsland.tsx",
           "app/instruments/eclipses/EclipsesIsland.tsx": "src/islands/web/EclipsesIsland.tsx",
           "app/instruments/first-visibility/FirstVisibilityIsland.tsx": "src/islands/web/FirstVisibilityIsland.tsx",
+          "app/instruments/field-verifier/FieldVerifierIsland.tsx": "src/islands/web/FieldVerifierIsland.tsx",
           // Reads apps/web/content/api relative to process.cwd() in apps/web.
           "lib/api-docs.ts": { to: "src/lib/api-docs.ts", always: true },
         },

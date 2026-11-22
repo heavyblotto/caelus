@@ -1,0 +1,12 @@
+---
+/**
+ * /instruments/field-verifier: renders
+ * apps/web/app/instruments/field-verifier/page.tsx. The widget prerenders its
+ * opening state and hydrates in the browser, where it builds the embedded-tier
+ * engine and runs verification, chronolocation, and geolocation locally.
+ */
+import Instrument from "../../layouts/Instrument.astro";
+import Page, { metadata } from "@web/app/instruments/field-verifier/page";
+---
+
+<Instrument meta={metadata}><Page /></Instrument>
