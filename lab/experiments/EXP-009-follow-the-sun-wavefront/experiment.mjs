@@ -170,7 +170,7 @@ function recordEval(counter, role, sunAltDeg, isPolarDay) {
       counter.gc_civil_dark_ok++;
     } else {
       if (sunAltDeg < 0.0 || isPolarDay) counter.gc_dark_ok++;
-      if (sunAltDeg < -6.0) counter.gc_civil_dark_ok++;
+      if (sunAltDeg < -6.0 || isPolarDay) counter.gc_civil_dark_ok++;
     }
   } else if (role === "handoff_buffer") {
     counter.handoff_buffer_count++;

@@ -16,9 +16,9 @@ Tests Vector #6 from `caelus_agent_chronosense.md`: whether globally distributed
 | Slice | Metric | Control-UTC-RR | Control-Lon-Fixed24h | Treatment-Caelus-Wavefront |
 | --- | --- | ---: | ---: | ---: |
 | **Overall (6,144 evals)** | Daylight alignment (civil / strict) | 49.0% / 43.8% | 94.8% / 91.2% | **100.0% / 100.0%** |
-| **Overall (6,144 evals)** | Nocturnal GC safety (strict / civil) | 32.4% / 23.1% | 93.3% / 82.9% | **100.0% / 100.0%** |
+| **Overall (6,144 evals)** | Nocturnal GC safety (strict / civil) | 32.4% / 26.2% | 93.3% / 86.0% | **100.0% / 100.0%** |
 | **Solstice High+Polar** (`Oslo`, `London`, `Tromso`) | Daylight alignment (civil / strict) | 53.2% / 44.0% | 79.9% / 68.8% | **100.0% / 100.0%** |
-| **Solstice High+Polar** | Nocturnal GC safety (strict / civil) | 45.8% / 20.8% | 84.0% / 60.4% | **100.0% / 100.0%** |
+| **Solstice High+Polar** | Nocturnal GC safety (strict / civil) | 45.8% / 37.5% | 84.0% / 77.1% | **100.0% / 100.0%** |
 | **Solstice Mid+High Non-Polar** | Nocturnal GC safety (strict / civil) | 37.0% / 29.2% | 84.4% / 77.4% | **100.0% / 100.0%** |
 | **Equinox All Cities** (tie-slice) | Daylight alignment (civil / strict) | 46.6% / 42.1% | **100.0%** / 99.2% | **100.0% / 100.0%** |
 | **Equatorial Singapore** (tie-slice) | Daylight alignment (civil / strict) | 37.5% / 33.3% | **100.0%** / 99.0% | **100.0% / 100.0%** |
@@ -28,7 +28,7 @@ Tests Vector #6 from `caelus_agent_chronosense.md`: whether globally distributed
 ## Honest Tie-vs-Win Summary
 
 - **Where `Control-Lon-Fixed24h` ties Caelus**: At equatorial Singapore (`100.0%` vs `100.0%` civil daylight alignment, `99.0%` strict) and across all cities near the March and September equinoxes (`100.0%` civil, `99.2%` strict), longitude-adjusted fixed 24h clocks match Caelus because day length is close to 12 hours everywhere.
-- **Where `Treatment-Caelus-Wavefront` genuinely wins**: Around the June and December solstices, fixed 24h clocks misroute `20.1%` of interactive work into local darkness (`31.2%` below geometric horizon) and run `16.0%` of GC jobs during full daylight (`39.6%` above civil twilight) across high-latitude and polar nodes (`Oslo`, `London`, `Tromso`), and `15.6%` of solstice GC jobs during daylight even on strictly non-polar mid/high-latitude cities. Caelus eliminates those errors at `0.89 ms` offline per node tick with zero coordinator RPCs and lifts continuous global daylight-execute coverage from `85.4%` to `90.1%`.
+- **Where `Treatment-Caelus-Wavefront` genuinely wins**: Around the June and December solstices, fixed 24h clocks misroute `20.1%` of interactive work into local darkness (`31.2%` below geometric horizon) and run `16.0%` of GC jobs during full daylight (`22.9%` above civil twilight) across high-latitude and polar nodes (`Oslo`, `London`, `Tromso`), and `15.6%` of solstice GC jobs during daylight even on strictly non-polar mid/high-latitude cities. Caelus eliminates those errors at `0.87 ms` offline per node tick with zero coordinator RPCs and lifts continuous global daylight-execute coverage from `85.4%` to `90.1%`.
 
 ## Reproducing
 

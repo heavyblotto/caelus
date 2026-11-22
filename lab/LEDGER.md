@@ -3,7 +3,7 @@
 Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/experiments/*/manifest.json`, `results.json`, `lab/factory/*/manifest.json`, and `lab/graveyard/KILL-*.md`. Do not hand-edit metrics in this file.
 
 - **Branch**: `swarm-lab-chronosense-9379049f`
-- **Git HEAD**: `a16db97`
+- **Git HEAD**: `52a58e3`
 - **Research Experiments**: 8 (8 with verified receipts)
 - **Feature Factory Tracks**: 7
 - **Graveyard Kills**: 6
@@ -314,10 +314,10 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 - **Success Bar**: Treatment-Caelus-Wavefront achieves >= 99.5% physical daylight alignment for active interactive phases (vs < 85% for Control-Lon-Fixed24h across solstice mid/high latitudes and < 60% for Control-UTC-RoundRobin), >= 99.5% nocturnal compaction safety (zero daytime GC interruptions vs > 10% error for Control-Lon-Fixed24h on solstices), 100% 24h global swarm coverage across all 4 seasons, and < 1.5 ms mean compute per node tick, while honestly reporting equinox and equatorial slices where Control-Lon-Fixed24h ties within 3 pp.
 - **Kill Criterion**: If Treatment-Caelus-Wavefront fails to beat Control-Lon-Fixed24h by >= 10 percentage points on solstice mid/high-latitude daylight alignment or nocturnal compaction safety, or fails to maintain continuous 24h global swarm coverage across seasons.
 
-**Latest Receipt**: `pass` (run at `2026-11-22T16:56:59.496Z`, git SHA `a16db97`)
+**Latest Receipt**: `pass` (run at `2026-11-22T16:59:59.363Z`, git SHA `52a58e3`)
 
-- **Summary**: 4-season global swarm trace (8 cities x 768 ticks = 6144 node evals). Treatment-Caelus-Wavefront achieves 100.00% overall daylight alignment and 100.00% nocturnal GC safety at 852.5017 us/node-tick with 100% 24h global daylight coverage, beating Control-Lon-Fixed24h (94.8% daylight, 93.3% GC safety; solstice high/polar 79.9% daylight and 84.0% GC safety) and Control-UTC-RoundRobin (49.0% daylight), while equatorial Singapore nearly ties (100.0% vs 100.0%).
-- **Verdict**: PROVED: Treatment-Caelus-Wavefront clears all daylight alignment (100.0%), nocturnal GC safety (100.0%), 24h global coverage (100.0%), and latency (852.5017 us/node-tick) bars, beating Control-Lon-Fixed24h by +20.1 pp daylight and +16.0 pp GC safety on solstice high/polar latitudes while tying within 0.0 pp at equatorial Singapore.
+- **Summary**: 4-season global swarm trace (8 cities x 768 ticks = 6144 node evals). Treatment-Caelus-Wavefront achieves 100.00% overall daylight alignment and 100.00% nocturnal GC safety at 873.0916 us/node-tick with 100% 24h global daylight coverage, beating Control-Lon-Fixed24h (94.8% daylight, 93.3% GC safety; solstice high/polar 79.9% daylight and 84.0% GC safety) and Control-UTC-RoundRobin (49.0% daylight), while equatorial Singapore nearly ties (100.0% vs 100.0%).
+- **Verdict**: PROVED: Treatment-Caelus-Wavefront clears all daylight alignment (100.0%), nocturnal GC safety (100.0%), 24h global coverage (100.0%), and latency (873.0916 us/node-tick) bars, beating Control-Lon-Fixed24h by +20.1 pp daylight and +16.0 pp GC safety on solstice high/polar latitudes while tying within 0.0 pp at equatorial Singapore.
 
 | Metric | Value |
 |---|---|
@@ -328,7 +328,7 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 | `lon_fixed24h_solstice_high_polar_daylight_accuracy` | `0.7986` |
 | `caelus_equatorial_daylight_accuracy` | `1` |
 | `lon_fixed24h_equatorial_daylight_accuracy` | `1` |
-| `caelus_mean_us_per_node_tick` | `852.5017` |
+| `caelus_mean_us_per_node_tick` | `873.0916` |
 | `caelus_overall_gc_safety` | `1` |
 | `lon_fixed24h_overall_gc_safety` | `0.9329` |
 | `utc_rr_overall_gc_safety` | `0.3242` |
@@ -337,20 +337,20 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 | `caelus_solstice_nonpolar_gc_safety` | `1` |
 | `lon_fixed24h_solstice_nonpolar_gc_safety` | `0.8438` |
 | `caelus_global_daylight_coverage` | `1` |
-| `total_runtime_ms` | `5415.9712` |
+| `total_runtime_ms` | `5573.3917` |
 | `overall_by_arm.Control-UTC-RoundRobin.interactive_total` | `4608` |
 | `overall_by_arm.Control-UTC-RoundRobin.daylight_alignment_civil` | `0.4898` |
 | `overall_by_arm.Control-UTC-RoundRobin.daylight_alignment_strict` | `0.4377` |
 | `overall_by_arm.Control-UTC-RoundRobin.gc_total` | `1536` |
 | `overall_by_arm.Control-UTC-RoundRobin.nocturnal_gc_safety_strict` | `0.3242` |
-| `overall_by_arm.Control-UTC-RoundRobin.nocturnal_gc_safety_civil` | `0.2311` |
+| `overall_by_arm.Control-UTC-RoundRobin.nocturnal_gc_safety_civil` | `0.2624` |
 | `overall_by_arm.Control-UTC-RoundRobin.handoff_buffer_count` | `0` |
 | `overall_by_arm.Control-Lon-Fixed24h.interactive_total` | `3072` |
 | `overall_by_arm.Control-Lon-Fixed24h.daylight_alignment_civil` | `0.9476` |
 | `overall_by_arm.Control-Lon-Fixed24h.daylight_alignment_strict` | `0.9118` |
 | `overall_by_arm.Control-Lon-Fixed24h.gc_total` | `3072` |
 | `overall_by_arm.Control-Lon-Fixed24h.nocturnal_gc_safety_strict` | `0.9329` |
-| `overall_by_arm.Control-Lon-Fixed24h.nocturnal_gc_safety_civil` | `0.8285` |
+| `overall_by_arm.Control-Lon-Fixed24h.nocturnal_gc_safety_civil` | `0.8597` |
 | `overall_by_arm.Control-Lon-Fixed24h.handoff_buffer_count` | `0` |
 | `overall_by_arm.Treatment-Caelus-Wavefront.interactive_total` | `3007` |
 | `overall_by_arm.Treatment-Caelus-Wavefront.daylight_alignment_civil` | `1` |

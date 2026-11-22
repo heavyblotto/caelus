@@ -13,8 +13,8 @@
  *   4. Arm4-Analytic-RiseSet-Jump: direct sceneGeometry.diurnal.minutesToNextTwilight
  *      sleep-to-boundary scheduling (no finite-difference chart sweeps)
  *
- * Evaluated across 20 deterministic 72-hour episodes (5 latitudes x 4 seasons,
- * 1,440 simulated hours total).
+ * Evaluated across 20 deterministic 24-hour episodes (5 latitudes x 4 seasons,
+ * 480 simulated hours total).
  */
 
 import { writeFileSync } from "node:fs";
