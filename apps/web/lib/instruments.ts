@@ -98,7 +98,7 @@ export const INSTRUMENTS: Instrument[] = [
     spanNote: "Verify · Chronolocate · Geolocate",
     presets: [
       { id: "nyc-summer-authentic", label: "NYC summer authentic" },
-      { id: "tz-shift-spoof", label: "Timezone spoof (+4h)" },
+      { id: "tz-shift-spoof", label: "Timezone spoof (-4h)" },
       { id: "hemisphere-moon-spoof", label: "Hemisphere Moon flip" },
       { id: "night-shadow-impossible", label: "Night shadow impossible" },
       { id: "sloped-alpine", label: "Sloped alpine 20 deg" },

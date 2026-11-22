@@ -4609,14 +4609,22 @@ button.emark:hover,
 
 /* ---- field-verifier (I-05 SHADOWPROOF) ---- */
 .fv-modes {
+  grid-column: span 12;
+  width: 100%;
+}
+
+.fv-modes > .tile__b {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--sp-2) var(--sp-3);
   padding: var(--sp-2) var(--sp-3);
-  border-bottom: 1px solid var(--line);
   background: var(--panel-inset);
+}
+
+.tile.fv-modes > .tile__b > * + * {
+  margin-top: 0;
 }
 
 .fv-obs-group {
