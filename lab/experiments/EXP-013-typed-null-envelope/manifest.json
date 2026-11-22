@@ -1,0 +1,20 @@
+{
+  "id": "EXP-013",
+  "title": "Typed-Null & Level-Tagged MCP Response Envelope (LEVELS_OF_I + FACT-002)",
+  "track": "research",
+  "status": "proved",
+  "created": "2026-11-22",
+  "hypothesis": "Wrapping MCP tool responses (including FACT-002 chronosenseTick and auditChronosenseCursor receipts) in a compact, deterministic LEVELS_OF_I level-tagged envelope with explicit ground_truth_class, valid_claims, typed_nulls, and collapse_risk raises cross-level collapse avoidance (CAR) and composite accuracy on local 9B-12B LLMs (gemma4:12b, qwen3.5:9b, temperature=0) beyond both a strong generic anti-hallucination prompt (Arm1) and a static LEVELS_OF_I constitution alone (Arm2), without degrading valid Harness usefulness (VUR) or exceeding 80 median added prompt tokens.",
+  "null_baseline": "Arm1-Generic-Abstention-Null (steelman truthfulness and anti-hallucination system prompt over raw untagged tool JSON) and Arm2-Constitution-Only (full static 7-level LEVELS_OF_I constitution over raw untagged tool JSON, isolating per-tool envelope lift).",
+  "success_bar": "PROVED (Full Envelope): Arm3-Constitution+TypedNullEnvelope beats Arm1-Generic-Abstention-Null by >= +15.0 pp macro composite accuracy AND beats Arm2-Constitution-Only by >= +5.0 pp macro composite accuracy across 24 tasks (16 trap prompts, 8 valid controls) x 2 models, with <= 5.0 pp VUR drop vs Arm1 and <= 80 median added prompt tokens.",
+  "kill_criterion": "KILLED if Arm1-Generic-Abstention-Null comes within 10.0 pp of Arm3 composite accuracy, or if Arm3 VUR drops > 5.0 pp vs Arm1, or if median envelope token overhead exceeds 80 tokens. PARTIAL / NARROWED (Constitution Only, Per-Tool Envelope Killed) if Arm2 beats Arm1 by >= +15.0 pp but Arm3 - Arm2 < +5.0 pp.",
+  "entrypoint": "experiment.mjs",
+  "tags": [
+    "chronosense",
+    "mcp",
+    "ontology",
+    "typed-null",
+    "live-llm",
+    "ablation"
+  ]
+}
