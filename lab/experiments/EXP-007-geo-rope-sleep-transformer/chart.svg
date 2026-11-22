@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 505" font-family="et-book, ET-Bembo, Palatino, Georgia, serif" font-size="12">
+  <rect width="1000" height="505" fill="white"/>
+  <text x="32" y="28" font-size="16" fill="#111">EXP-007: Trained Tiny-Transformer Hybrid Geo-RoPE and Google SLEEP Consolidation</text>
+  <text x="32" y="46" font-size="11.5" fill="#666666">1.43M-param parameter-matched causal transformers trained on Apple M5 Pro (MPS) with python/astroengine/ physics</text>
+  <text x="32" y="76" font-size="13" fill="#111">Panel A: Part A Trained RoPE Models (4 Held-Out Tasks)</text>
+  <text x="154.0" y="434.0" text-anchor="middle" font-size="10.5" fill="#666666">0%</text>
+  <line x1="286.0" y1="88.0" x2="286.0" y2="418.0" stroke="#e6e6e6" stroke-width="0.8"/>
+  <text x="286.0" y="434.0" text-anchor="middle" font-size="10.5" fill="#666666">50%</text>
+  <line x1="418.0" y1="88.0" x2="418.0" y2="418.0" stroke="#e6e6e6" stroke-width="0.8"/>
+  <text x="418.0" y="434.0" text-anchor="middle" font-size="10.5" fill="#666666">100%</text>
+  <line x1="154.0" y1="418.0" x2="418.0" y2="418.0" stroke="#444444" stroke-width="0.9"/>
+  <line x1="154.0" y1="88.0" x2="154.0" y2="418.0" stroke="#444444" stroke-width="0.9"/>
+  <text x="146.0" y="125.6" text-anchor="end" font-size="11.5" fill="#111">T1: Intra-Turn 2s</text>
+  <text x="146.0" y="138.6" text-anchor="end" font-size="9.5" fill="#666666">Fast token tracking</text>
+  <rect x="154.0" y="111.8" width="201.5" height="7.5" fill="#164e7a"/>
+  <text x="360.0" y="118.8" font-size="9.5" fill="#164e7a">76.3%</text>
+  <rect x="154.0" y="123.8" width="216.1" height="7.5" fill="#b86b14"/>
+  <text x="374.6" y="130.8" font-size="9.5" fill="#b86b14">81.9%</text>
+  <rect x="154.0" y="135.8" width="202.3" height="7.5" fill="#7a7a7a"/>
+  <text x="360.8" y="142.8" font-size="9.5" fill="#7a7a7a">76.6%</text>
+  <text x="146.0" y="188.8" text-anchor="end" font-size="11.5" fill="#111">T2: Post-Sleep Reset</text>
+  <text x="146.0" y="201.8" text-anchor="end" font-size="9.5" fill="#666666">Tie vs Std collapse</text>
+  <rect x="154.0" y="175.1" width="264.0" height="7.5" fill="#164e7a"/>
+  <text x="422.5" y="182.0" font-size="9.5" fill="#164e7a">100.0%</text>
+  <rect x="154.0" y="187.1" width="264.0" height="7.5" fill="#b86b14"/>
+  <text x="422.5" y="194.0" font-size="9.5" fill="#b86b14">100.0%</text>
+  <rect x="154.0" y="199.1" width="89.3" height="7.5" fill="#7a7a7a"/>
+  <text x="247.8" y="206.0" font-size="9.5" fill="#7a7a7a">33.8%</text>
+  <text x="146.0" y="252.0" text-anchor="end" font-size="11.5" fill="#111">T3-ID: Spr/Aut Ctrl</text>
+  <text x="146.0" y="265.0" text-anchor="end" font-size="9.5" fill="#666666">In-dist control</text>
+  <rect x="154.0" y="238.2" width="233.0" height="7.5" fill="#164e7a"/>
+  <text x="391.5" y="245.2" font-size="9.5" fill="#164e7a">88.2%</text>
+  <rect x="154.0" y="250.2" width="194.7" height="7.5" fill="#b86b14"/>
+  <text x="353.2" y="257.2" font-size="9.5" fill="#b86b14">73.8%</text>
+  <rect x="154.0" y="262.2" width="68.6" height="7.5" fill="#7a7a7a"/>
+  <text x="227.1" y="269.2" font-size="9.5" fill="#7a7a7a">26.0%</text>
+  <text x="146.0" y="315.2" text-anchor="end" font-size="11.5" fill="#111">T3-OOD: Solst+Tokyo</text>
+  <text x="146.0" y="328.2" text-anchor="end" font-size="9.5" fill="#666666">OOD photoperiod</text>
+  <rect x="154.0" y="301.5" width="228.6" height="7.5" fill="#164e7a"/>
+  <text x="387.1" y="308.4" font-size="9.5" fill="#164e7a">86.6%</text>
+  <rect x="154.0" y="313.5" width="96.8" height="7.5" fill="#b86b14"/>
+  <text x="255.3" y="320.4" font-size="9.5" fill="#b86b14">36.7%</text>
+  <rect x="154.0" y="325.5" width="63.6" height="7.5" fill="#7a7a7a"/>
+  <text x="222.1" y="332.4" font-size="9.5" fill="#7a7a7a">24.1%</text>
+  <text x="146.0" y="378.4" text-anchor="end" font-size="11.5" fill="#111">T4-OOD: Multi-Week</text>
+  <text x="146.0" y="391.4" text-anchor="end" font-size="9.5" fill="#666666">30d tie + 52w wrap</text>
+  <rect x="154.0" y="364.7" width="263.7" height="7.5" fill="#164e7a"/>
+  <text x="422.2" y="371.6" font-size="9.5" fill="#164e7a">99.9%</text>
+  <rect x="154.0" y="376.7" width="249.9" height="7.5" fill="#b86b14"/>
+  <text x="408.4" y="383.6" font-size="9.5" fill="#b86b14">94.7%</text>
+  <rect x="154.0" y="388.7" width="61.0" height="7.5" fill="#7a7a7a"/>
+  <text x="219.5" y="395.6" font-size="9.5" fill="#7a7a7a">23.1%</text>
+  <text x="32" y="458" font-size="10.5" fill="#164e7a">■ Hybrid-Dual-Geo-RoPE</text>
+  <text x="194" y="458" font-size="10.5" fill="#b86b14">■ Hybrid-Unix-Fourier</text>
+  <text x="346" y="458" font-size="10.5" fill="#7a7a7a">■ Standard-RoPE</text>
+  <text x="516" y="76" font-size="13" fill="#111">Panel B: Google SLEEP 5-Cycle Mean Retention (C1..Ct)</text>
+  <text x="548.0" y="391.5" text-anchor="end" font-size="10.5" fill="#666666">0%</text>
+  <line x1="554.0" y1="242.0" x2="822.0" y2="242.0" stroke="#e6e6e6" stroke-width="0.8"/>
+  <text x="548.0" y="245.5" text-anchor="end" font-size="10.5" fill="#666666">50%</text>
+  <line x1="554.0" y1="96.0" x2="822.0" y2="96.0" stroke="#e6e6e6" stroke-width="0.8"/>
+  <text x="548.0" y="99.5" text-anchor="end" font-size="10.5" fill="#666666">100%</text>
+  <line x1="554.0" y1="388.0" x2="822.0" y2="388.0" stroke="#444444" stroke-width="0.9"/>
+  <line x1="554.0" y1="96.0" x2="554.0" y2="388.0" stroke="#444444" stroke-width="0.9"/>
+  <line x1="554.0" y1="388.0" x2="554.0" y2="392.0" stroke="#444444" stroke-width="0.8"/>
+  <text x="554.0" y="405.0" text-anchor="middle" font-size="10" fill="#666666">C1 Day</text>
+  <line x1="621.0" y1="388.0" x2="621.0" y2="392.0" stroke="#444444" stroke-width="0.8"/>
+  <text x="621.0" y="405.0" text-anchor="middle" font-size="10" fill="#666666">C2 Dusk</text>
+  <line x1="688.0" y1="388.0" x2="688.0" y2="392.0" stroke="#444444" stroke-width="0.8"/>
+  <text x="688.0" y="405.0" text-anchor="middle" font-size="10" fill="#666666">C3 Noct</text>
+  <line x1="755.0" y1="388.0" x2="755.0" y2="392.0" stroke="#444444" stroke-width="0.8"/>
+  <text x="755.0" y="405.0" text-anchor="middle" font-size="10" fill="#666666">C4 Wint</text>
+  <line x1="822.0" y1="388.0" x2="822.0" y2="392.0" stroke="#444444" stroke-width="0.8"/>
+  <text x="822.0" y="405.0" text-anchor="middle" font-size="10" fill="#666666">C5 Tok</text>
+  <polyline points="554.0,210.4 621.0,137.4 688.0,104.1 755.0,177.5 822.0,150.0" fill="none" stroke="#164e7a" stroke-width="2.2"/>
+  <circle cx="554.0" cy="210.4" r="3.0" fill="#164e7a"/>
+  <circle cx="621.0" cy="137.4" r="3.0" fill="#164e7a"/>
+  <circle cx="688.0" cy="104.1" r="3.0" fill="#164e7a"/>
+  <circle cx="755.0" cy="177.5" r="3.0" fill="#164e7a"/>
+  <circle cx="822.0" cy="150.0" r="3.0" fill="#164e7a"/>
+  <polyline points="554.0,142.2 621.0,102.1 688.0,199.8 755.0,242.0 822.0,271.2" fill="none" stroke="#b86b14" stroke-width="1.8" stroke-dasharray="5,3"/>
+  <circle cx="554.0" cy="142.2" r="3.0" fill="#b86b14"/>
+  <circle cx="621.0" cy="102.1" r="3.0" fill="#b86b14"/>
+  <circle cx="688.0" cy="199.8" r="3.0" fill="#b86b14"/>
+  <circle cx="755.0" cy="242.0" r="3.0" fill="#b86b14"/>
+  <circle cx="822.0" cy="271.2" r="3.0" fill="#b86b14"/>
+  <polyline points="554.0,105.7 621.0,242.0 688.0,290.7 755.0,315.0 822.0,329.6" fill="none" stroke="#7a7a7a" stroke-width="1.6" stroke-dasharray="2,2"/>
+  <circle cx="554.0" cy="105.7" r="3.0" fill="#7a7a7a"/>
+  <circle cx="621.0" cy="242.0" r="3.0" fill="#7a7a7a"/>
+  <circle cx="688.0" cy="290.7" r="3.0" fill="#7a7a7a"/>
+  <circle cx="755.0" cy="315.0" r="3.0" fill="#7a7a7a"/>
+  <circle cx="822.0" cy="329.6" r="3.0" fill="#7a7a7a"/>
+  <text x="830.0" y="149.0" font-size="10.5" fill="#164e7a">SLEEP-Caelus 81.5%</text>
+  <text x="830.0" y="161.0" font-size="9.5" fill="#666666">(forgetting -5.4 pp)</text>
+  <text x="830.0" y="270.2" font-size="10.5" fill="#b86b14">SLEEP-24h-LRU 40.0%</text>
+  <text x="830.0" y="282.2" font-size="9.5" fill="#666666">(forgetting -74.0 pp)</text>
+  <text x="830.0" y="328.6" font-size="10.5" fill="#7a7a7a">Naive-Online-FT 20.0%</text>
+  <text x="830.0" y="340.6" font-size="9.5" fill="#666666">(forgetting -99.2 pp)</text>
+  <text x="516" y="434" font-size="10.5" fill="#444444">Sleep-gate nocturnal safety: Caelus 100.0% vs Fixed-24h 70.5% (0% Tokyo)</text>
+  <text x="516" y="458" font-size="10.5" fill="#666666">Recency-only C4+C5 trade-off: Caelus 66.7% vs LRU 100.0% vs Naive 50.0%</text>
+  <text x="32" y="490" font-size="9.5" fill="#666666">Source: lab/experiments/EXP-007-geo-rope-sleep-transformer/training_receipt.json (seed=20261122, 0 train/OOD date overlap)</text>
+</svg>
