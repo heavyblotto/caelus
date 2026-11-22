@@ -1,0 +1,975 @@
+{
+  "id": "EXP-012",
+  "run_at": "2026-11-22T20:23:30.738578Z",
+  "git_sha": "421f4a5",
+  "status": "fail",
+  "summary": "6-arm transfer test on frozen Qwen/Qwen2.5-0.5B-Instruct (494,032,768 frozen params, Apple MPS, 0 train/eval overlap, 1,720 held-out prompts). Continuous physical injection transfers strongly through frozen weights: Arm3-LoRA-Caelus-GeoAdapter reaches 90.1% OOD Solstice+Travel (95% CI 88.0-91.8%), beating parameter-matched Arm2-LoRA-UnixFourier by +65.3 pp (24.8%), beating location-aware Arm2b-LoRA-UnixFourier+LatLon by +49.8 pp on Oslo Solstices (88.0% vs 38.1%), and beating zero-shot Arm1-Frozen-Caelus-TextPrompt by +47.7 pp (42.4%) while cutting clock tokens by 95.3% and running 2.55x faster. HOWEVER, plain-text Arm1b-LoRA-TextPrompt (471K fewer params) strictly dominates accuracy across every split: 96.9% OOD Solstice+Travel (+6.8 pp over Arm3), 100.0% OOD Compaction (+18.9 pp), and 97.3% OOD All (+8.5 pp), triggering the pre-registered -3.0 pp kill bar.",
+  "metrics": {
+    "frozen_base_params": 494032768,
+    "arm1b_trainable_params": 1081344,
+    "arm2_arm2b_arm3_trainable_params": 1552641,
+    "arm0_ood_solstice_travel_acc": 0.2104,
+    "arm1_ood_solstice_travel_acc": 0.4239,
+    "arm1b_ood_solstice_travel_acc": 0.9688,
+    "arm2_ood_solstice_travel_acc": 0.2479,
+    "arm2b_ood_solstice_travel_acc": 0.5177,
+    "arm3_ood_solstice_travel_acc": 0.901,
+    "arm3_minus_arm2_ood_solstice_travel": 0.6531,
+    "arm3_minus_arm2b_ood_oslo_solstices": 0.4984,
+    "arm3_minus_arm1_ood_solstice_travel": 0.4771,
+    "arm3_minus_arm1b_ood_solstice_travel": -0.0678,
+    "arm1b_ood_all_acc": 0.9732,
+    "arm3_ood_all_acc": 0.8882,
+    "arm3_minus_arm1b_ood_all": -0.085,
+    "arm1b_ood_compaction_acc": 1.0,
+    "arm3_ood_compaction_acc": 0.8111,
+    "arm1b_ood_all_ce": 0.1527,
+    "arm3_ood_all_ce": 0.5751,
+    "arm2b_ood_all_ce": 3.0796,
+    "arm2_ood_all_ce": 4.5672,
+    "per_event_clock_token_reduction_pct": 95.35,
+    "arm3_vs_arm1b_inference_speedup": 2.55,
+    "summary_by_arm": {
+      "Arm0-Frozen-ISO-Prompt": {
+        "id_composite_choice_acc": 0.2611,
+        "id_composite_choice_ci95": [
+          0.2247,
+          0.2958
+        ],
+        "id_composite_choice_ce": 1.8011,
+        "id_composite_full_acc": 0.2611,
+        "ood_solstice_travel_choice_acc": 0.2104,
+        "ood_solstice_travel_choice_ci95": [
+          0.1858,
+          0.2373
+        ],
+        "ood_solstice_travel_choice_ce": 2.0354,
+        "ood_solstice_travel_full_acc": 0.2104,
+        "ood_solstice_travel_full_ce": 2.0903,
+        "ood_oslo_solstices_choice_acc": 0.2109,
+        "ood_oslo_solstices_choice_ci95": [
+          0.1811,
+          0.2442
+        ],
+        "ood_tokyo_travel_choice_acc": 0.2094,
+        "ood_tokyo_travel_choice_ci95": [
+          0.1684,
+          0.2573
+        ],
+        "ood_compaction_choice_acc": 0.3222,
+        "ood_compaction_choice_ci95": [
+          0.2583,
+          0.3936
+        ],
+        "ood_compaction_choice_ce": 1.6073,
+        "ood_all_choice_acc": 0.2264,
+        "ood_all_choice_ci95": [
+          0.2047,
+          0.2533
+        ],
+        "ood_all_choice_ce": 1.9742,
+        "ood_all_full_acc": 0.2272,
+        "mean_prompt_tokens_all": 134.8,
+        "inference_ms_per_example": 8.572
+      },
+      "Arm1-Frozen-Caelus-TextPrompt": {
+        "id_composite_choice_acc": 0.4678,
+        "id_composite_choice_ci95": [
+          0.4253,
+          0.5062
+        ],
+        "id_composite_choice_ce": 1.0855,
+        "id_composite_full_acc": 0.4459,
+        "ood_solstice_travel_choice_acc": 0.4239,
+        "ood_solstice_travel_choice_ci95": [
+          0.3931,
+          0.4555
+        ],
+        "ood_solstice_travel_choice_ce": 1.3225,
+        "ood_solstice_travel_full_acc": 0.4052,
+        "ood_solstice_travel_full_ce": 1.412,
+        "ood_oslo_solstices_choice_acc": 0.4344,
+        "ood_oslo_solstices_choice_ci95": [
+          0.3965,
+          0.4731
+        ],
+        "ood_tokyo_travel_choice_acc": 0.4031,
+        "ood_tokyo_travel_choice_ci95": [
+          0.3508,
+          0.4577
+        ],
+        "ood_compaction_choice_acc": 0.5889,
+        "ood_compaction_choice_ci95": [
+          0.5159,
+          0.6582
+        ],
+        "ood_compaction_choice_ce": 0.7411,
+        "ood_all_choice_acc": 0.4475,
+        "ood_all_choice_ci95": [
+          0.4213,
+          0.479
+        ],
+        "ood_all_choice_ce": 1.2395,
+        "ood_all_full_acc": 0.4211,
+        "mean_prompt_tokens_all": 247.72,
+        "inference_ms_per_example": 14.686
+      },
+      "Arm1b-LoRA-TextPrompt": {
+        "id_composite_choice_acc": 0.9983,
+        "id_composite_choice_ci95": [
+          0.9903,
+          0.9997
+        ],
+        "id_composite_choice_ce": 0.0022,
+        "id_composite_full_acc": 0.9983,
+        "ood_solstice_travel_choice_acc": 0.9688,
+        "ood_solstice_travel_choice_ci95": [
+          0.9557,
+          0.978
+        ],
+        "ood_solstice_travel_choice_ce": 0.1781,
+        "ood_solstice_travel_full_acc": 0.9688,
+        "ood_solstice_travel_full_ce": 0.1782,
+        "ood_oslo_solstices_choice_acc": 0.9563,
+        "ood_oslo_solstices_choice_ci95": [
+          0.9375,
+          0.9696
+        ],
+        "ood_tokyo_travel_choice_acc": 0.9938,
+        "ood_tokyo_travel_choice_ci95": [
+          0.9775,
+          0.9983
+        ],
+        "ood_compaction_choice_acc": 1.0,
+        "ood_compaction_choice_ci95": [
+          0.9791,
+          1.0
+        ],
+        "ood_compaction_choice_ce": 0.0,
+        "ood_all_choice_acc": 0.9732,
+        "ood_all_choice_ci95": [
+          0.9627,
+          0.9815
+        ],
+        "ood_all_choice_ce": 0.1527,
+        "ood_all_full_acc": 0.9732,
+        "mean_prompt_tokens_all": 247.72,
+        "inference_ms_per_example": 23.246
+      },
+      "Arm2-LoRA-UnixFourier-Adapter": {
+        "id_composite_choice_acc": 0.8298,
+        "id_composite_choice_ci95": [
+          0.7947,
+          0.8561
+        ],
+        "id_composite_choice_ce": 0.6583,
+        "id_composite_full_acc": 0.8298,
+        "ood_solstice_travel_choice_acc": 0.2479,
+        "ood_solstice_travel_choice_ci95": [
+          0.2216,
+          0.2762
+        ],
+        "ood_solstice_travel_choice_ce": 4.828,
+        "ood_solstice_travel_full_acc": 0.2479,
+        "ood_solstice_travel_full_ce": 4.8293,
+        "ood_oslo_solstices_choice_acc": 0.364,
+        "ood_oslo_solstices_choice_ci95": [
+          0.3277,
+          0.402
+        ],
+        "ood_tokyo_travel_choice_acc": 0.0156,
+        "ood_tokyo_travel_choice_ci95": [
+          0.0067,
+          0.036
+        ],
+        "ood_compaction_choice_acc": 0.5444,
+        "ood_compaction_choice_ci95": [
+          0.4715,
+          0.6155
+        ],
+        "ood_compaction_choice_ce": 3.0024,
+        "ood_all_choice_acc": 0.2903,
+        "ood_all_choice_ci95": [
+          0.269,
+          0.3219
+        ],
+        "ood_all_choice_ce": 4.5672,
+        "ood_all_full_acc": 0.2895,
+        "mean_prompt_tokens_all": 89.8,
+        "inference_ms_per_example": 8.943
+      },
+      "Arm2b-LoRA-UnixFourier+LatLon-Adapter": {
+        "id_composite_choice_acc": 0.8794,
+        "id_composite_choice_ci95": [
+          0.8484,
+          0.9018
+        ],
+        "id_composite_choice_ce": 0.6246,
+        "id_composite_full_acc": 0.8794,
+        "ood_solstice_travel_choice_acc": 0.5177,
+        "ood_solstice_travel_choice_ci95": [
+          0.4861,
+          0.5492
+        ],
+        "ood_solstice_travel_choice_ce": 3.2193,
+        "ood_solstice_travel_full_acc": 0.5167,
+        "ood_solstice_travel_full_ce": 3.2207,
+        "ood_oslo_solstices_choice_acc": 0.3813,
+        "ood_oslo_solstices_choice_ci95": [
+          0.3444,
+          0.4195
+        ],
+        "ood_tokyo_travel_choice_acc": 0.7906,
+        "ood_tokyo_travel_choice_ci95": [
+          0.7427,
+          0.8316
+        ],
+        "ood_compaction_choice_acc": 0.6,
+        "ood_compaction_choice_ci95": [
+          0.5271,
+          0.6688
+        ],
+        "ood_compaction_choice_ce": 2.2413,
+        "ood_all_choice_acc": 0.5295,
+        "ood_all_choice_ci95": [
+          0.5017,
+          0.5595
+        ],
+        "ood_all_choice_ce": 3.0796,
+        "ood_all_full_acc": 0.5286,
+        "mean_prompt_tokens_all": 89.8,
+        "inference_ms_per_example": 9.137
+      },
+      "Arm3-LoRA-Caelus-GeoAdapter": {
+        "id_composite_choice_acc": 0.9554,
+        "id_composite_choice_ci95": [
+          0.9351,
+          0.9692
+        ],
+        "id_composite_choice_ce": 0.1658,
+        "id_composite_full_acc": 0.9554,
+        "ood_solstice_travel_choice_acc": 0.901,
+        "ood_solstice_travel_choice_ci95": [
+          0.8805,
+          0.9184
+        ],
+        "ood_solstice_travel_choice_ce": 0.553,
+        "ood_solstice_travel_full_acc": 0.901,
+        "ood_solstice_travel_full_ce": 0.5536,
+        "ood_oslo_solstices_choice_acc": 0.8797,
+        "ood_oslo_solstices_choice_ci95": [
+          0.8522,
+          0.9027
+        ],
+        "ood_tokyo_travel_choice_acc": 0.9437,
+        "ood_tokyo_travel_choice_ci95": [
+          0.9128,
+          0.9641
+        ],
+        "ood_compaction_choice_acc": 0.8111,
+        "ood_compaction_choice_ci95": [
+          0.7477,
+          0.8616
+        ],
+        "ood_compaction_choice_ce": 0.7078,
+        "ood_all_choice_acc": 0.8882,
+        "ood_all_choice_ci95": [
+          0.8671,
+          0.9039
+        ],
+        "ood_all_choice_ce": 0.5751,
+        "ood_all_full_acc": 0.889,
+        "mean_prompt_tokens_all": 89.8,
+        "inference_ms_per_example": 9.127
+      }
+    },
+    "slices_by_arm": {
+      "Arm0-Frozen-ISO-Prompt": {
+        "id_regime": {
+          "n": 200,
+          "choice_acc": 0.255,
+          "choice_ci95": [
+            0.1996,
+            0.3196
+          ],
+          "choice_ce": 2.3124,
+          "full_vocab_acc": 0.255
+        },
+        "id_photo_retrieval": {
+          "n": 200,
+          "choice_acc": 0.195,
+          "choice_ci95": [
+            0.1461,
+            0.2554
+          ],
+          "choice_ce": 1.5389,
+          "full_vocab_acc": 0.195
+        },
+        "id_compaction": {
+          "n": 180,
+          "choice_acc": 0.3333,
+          "choice_ci95": [
+            0.2686,
+            0.405
+          ],
+          "choice_ce": 1.5519,
+          "full_vocab_acc": 0.3333
+        },
+        "ood_oslo_winter_regime": {
+          "n": 160,
+          "choice_acc": 0.25,
+          "choice_ci95": [
+            0.1893,
+            0.3224
+          ],
+          "choice_ce": 2.4422,
+          "full_vocab_acc": 0.25
+        },
+        "ood_oslo_summer_regime": {
+          "n": 160,
+          "choice_acc": 0.25,
+          "choice_ci95": [
+            0.1893,
+            0.3224
+          ],
+          "choice_ce": 2.4035,
+          "full_vocab_acc": 0.25
+        },
+        "ood_tokyo_travel_regime": {
+          "n": 160,
+          "choice_acc": 0.25,
+          "choice_ci95": [
+            0.1893,
+            0.3224
+          ],
+          "choice_ce": 2.4363,
+          "full_vocab_acc": 0.25
+        },
+        "ood_oslo_winter_retrieval": {
+          "n": 160,
+          "choice_acc": 0.1875,
+          "choice_ci95": [
+            0.1346,
+            0.255
+          ],
+          "choice_ce": 1.6264,
+          "full_vocab_acc": 0.1875
+        },
+        "ood_oslo_summer_retrieval": {
+          "n": 160,
+          "choice_acc": 0.1562,
+          "choice_ci95": [
+            0.1081,
+            0.2205
+          ],
+          "choice_ce": 1.6629,
+          "full_vocab_acc": 0.1562
+        },
+        "ood_tokyo_travel_retrieval": {
+          "n": 160,
+          "choice_acc": 0.1688,
+          "choice_ci95": [
+            0.1186,
+            0.2344
+          ],
+          "choice_ce": 1.6409,
+          "full_vocab_acc": 0.1688
+        },
+        "ood_compaction": {
+          "n": 180,
+          "choice_acc": 0.3222,
+          "choice_ci95": [
+            0.2583,
+            0.3936
+          ],
+          "choice_ce": 1.6073,
+          "full_vocab_acc": 0.3278
+        }
+      },
+      "Arm1-Frozen-Caelus-TextPrompt": {
+        "id_regime": {
+          "n": 200,
+          "choice_acc": 0.465,
+          "choice_ci95": [
+            0.3972,
+            0.5341
+          ],
+          "choice_ce": 1.2159,
+          "full_vocab_acc": 0.445
+        },
+        "id_photo_retrieval": {
+          "n": 200,
+          "choice_acc": 0.405,
+          "choice_ci95": [
+            0.3394,
+            0.4742
+          ],
+          "choice_ce": 1.2716,
+          "full_vocab_acc": 0.415
+        },
+        "id_compaction": {
+          "n": 180,
+          "choice_acc": 0.5333,
+          "choice_ci95": [
+            0.4605,
+            0.6048
+          ],
+          "choice_ce": 0.769,
+          "full_vocab_acc": 0.4778
+        },
+        "ood_oslo_winter_regime": {
+          "n": 160,
+          "choice_acc": 0.6,
+          "choice_ci95": [
+            0.5226,
+            0.6727
+          ],
+          "choice_ce": 1.1559,
+          "full_vocab_acc": 0.5938
+        },
+        "ood_oslo_summer_regime": {
+          "n": 160,
+          "choice_acc": 0.5563,
+          "choice_ci95": [
+            0.4788,
+            0.631
+          ],
+          "choice_ce": 1.1954,
+          "full_vocab_acc": 0.5563
+        },
+        "ood_tokyo_travel_regime": {
+          "n": 160,
+          "choice_acc": 0.4125,
+          "choice_ci95": [
+            0.3391,
+            0.49
+          ],
+          "choice_ce": 1.3512,
+          "full_vocab_acc": 0.35
+        },
+        "ood_oslo_winter_retrieval": {
+          "n": 160,
+          "choice_acc": 0.325,
+          "choice_ci95": [
+            0.2573,
+            0.4009
+          ],
+          "choice_ce": 1.4067,
+          "full_vocab_acc": 0.325
+        },
+        "ood_oslo_summer_retrieval": {
+          "n": 160,
+          "choice_acc": 0.2562,
+          "choice_ci95": [
+            0.1949,
+            0.3291
+          ],
+          "choice_ce": 1.4845,
+          "full_vocab_acc": 0.2437
+        },
+        "ood_tokyo_travel_retrieval": {
+          "n": 160,
+          "choice_acc": 0.3937,
+          "choice_ci95": [
+            0.3214,
+            0.4711
+          ],
+          "choice_ce": 1.3415,
+          "full_vocab_acc": 0.3625
+        },
+        "ood_compaction": {
+          "n": 180,
+          "choice_acc": 0.5889,
+          "choice_ci95": [
+            0.5159,
+            0.6582
+          ],
+          "choice_ce": 0.7411,
+          "full_vocab_acc": 0.5167
+        }
+      },
+      "Arm1b-LoRA-TextPrompt": {
+        "id_regime": {
+          "n": 200,
+          "choice_acc": 1.0,
+          "choice_ci95": [
+            0.9812,
+            1.0
+          ],
+          "choice_ce": 0.0,
+          "full_vocab_acc": 1.0
+        },
+        "id_photo_retrieval": {
+          "n": 200,
+          "choice_acc": 0.995,
+          "choice_ci95": [
+            0.9722,
+            0.9991
+          ],
+          "choice_ce": 0.0065,
+          "full_vocab_acc": 0.995
+        },
+        "id_compaction": {
+          "n": 180,
+          "choice_acc": 1.0,
+          "choice_ci95": [
+            0.9791,
+            1.0
+          ],
+          "choice_ce": 0.0,
+          "full_vocab_acc": 1.0
+        },
+        "ood_oslo_winter_regime": {
+          "n": 160,
+          "choice_acc": 1.0,
+          "choice_ci95": [
+            0.9766,
+            1.0
+          ],
+          "choice_ce": 0.0,
+          "full_vocab_acc": 1.0
+        },
+        "ood_oslo_summer_regime": {
+          "n": 160,
+          "choice_acc": 1.0,
+          "choice_ci95": [
+            0.9766,
+            1.0
+          ],
+          "choice_ce": 0.0,
+          "full_vocab_acc": 1.0
+        },
+        "ood_tokyo_travel_regime": {
+          "n": 160,
+          "choice_acc": 1.0,
+          "choice_ci95": [
+            0.9766,
+            1.0
+          ],
+          "choice_ce": 0.0,
+          "full_vocab_acc": 1.0
+        },
+        "ood_oslo_winter_retrieval": {
+          "n": 160,
+          "choice_acc": 0.9125,
+          "choice_ci95": [
+            0.8585,
+            0.9472
+          ],
+          "choice_ce": 0.5233,
+          "full_vocab_acc": 0.9125
+        },
+        "ood_oslo_summer_retrieval": {
+          "n": 160,
+          "choice_acc": 0.9125,
+          "choice_ci95": [
+            0.8585,
+            0.9472
+          ],
+          "choice_ce": 0.5098,
+          "full_vocab_acc": 0.9125
+        },
+        "ood_tokyo_travel_retrieval": {
+          "n": 160,
+          "choice_acc": 0.9875,
+          "choice_ci95": [
+            0.9556,
+            0.9966
+          ],
+          "choice_ce": 0.0357,
+          "full_vocab_acc": 0.9875
+        },
+        "ood_compaction": {
+          "n": 180,
+          "choice_acc": 1.0,
+          "choice_ci95": [
+            0.9791,
+            1.0
+          ],
+          "choice_ce": 0.0,
+          "full_vocab_acc": 1.0
+        }
+      },
+      "Arm2-LoRA-UnixFourier-Adapter": {
+        "id_regime": {
+          "n": 200,
+          "choice_acc": 0.89,
+          "choice_ci95": [
+            0.8391,
+            0.9262
+          ],
+          "choice_ce": 0.687,
+          "full_vocab_acc": 0.89
+        },
+        "id_photo_retrieval": {
+          "n": 200,
+          "choice_acc": 0.705,
+          "choice_ci95": [
+            0.6384,
+            0.7639
+          ],
+          "choice_ce": 0.9645,
+          "full_vocab_acc": 0.705
+        },
+        "id_compaction": {
+          "n": 180,
+          "choice_acc": 0.8944,
+          "choice_ci95": [
+            0.841,
+            0.9314
+          ],
+          "choice_ce": 0.3234,
+          "full_vocab_acc": 0.8944
+        },
+        "ood_oslo_winter_regime": {
+          "n": 160,
+          "choice_acc": 0.6312,
+          "choice_ci95": [
+            0.5542,
+            0.7021
+          ],
+          "choice_ce": 2.1309,
+          "full_vocab_acc": 0.6312
+        },
+        "ood_oslo_summer_regime": {
+          "n": 160,
+          "choice_acc": 0.6375,
+          "choice_ci95": [
+            0.5606,
+            0.708
+          ],
+          "choice_ce": 2.3109,
+          "full_vocab_acc": 0.6375
+        },
+        "ood_tokyo_travel_regime": {
+          "n": 160,
+          "choice_acc": 0.0312,
+          "choice_ci95": [
+            0.0134,
+            0.0711
+          ],
+          "choice_ce": 11.4516,
+          "full_vocab_acc": 0.0312
+        },
+        "ood_oslo_winter_retrieval": {
+          "n": 160,
+          "choice_acc": 0.1187,
+          "choice_ci95": [
+            0.0774,
+            0.178
+          ],
+          "choice_ce": 3.3863,
+          "full_vocab_acc": 0.125
+        },
+        "ood_oslo_summer_retrieval": {
+          "n": 160,
+          "choice_acc": 0.0688,
+          "choice_ci95": [
+            0.0388,
+            0.1189
+          ],
+          "choice_ce": 4.1565,
+          "full_vocab_acc": 0.0625
+        },
+        "ood_tokyo_travel_retrieval": {
+          "n": 160,
+          "choice_acc": 0.0,
+          "choice_ci95": [
+            0.0,
+            0.0234
+          ],
+          "choice_ce": 5.5319,
+          "full_vocab_acc": 0.0
+        },
+        "ood_compaction": {
+          "n": 180,
+          "choice_acc": 0.5444,
+          "choice_ci95": [
+            0.4715,
+            0.6155
+          ],
+          "choice_ce": 3.0024,
+          "full_vocab_acc": 0.5389
+        }
+      },
+      "Arm2b-LoRA-UnixFourier+LatLon-Adapter": {
+        "id_regime": {
+          "n": 200,
+          "choice_acc": 0.88,
+          "choice_ci95": [
+            0.8277,
+            0.918
+          ],
+          "choice_ce": 0.6813,
+          "full_vocab_acc": 0.88
+        },
+        "id_photo_retrieval": {
+          "n": 200,
+          "choice_acc": 0.825,
+          "choice_ci95": [
+            0.7664,
+            0.8714
+          ],
+          "choice_ce": 0.9265,
+          "full_vocab_acc": 0.825
+        },
+        "id_compaction": {
+          "n": 180,
+          "choice_acc": 0.9333,
+          "choice_ci95": [
+            0.8871,
+            0.9615
+          ],
+          "choice_ce": 0.2661,
+          "full_vocab_acc": 0.9333
+        },
+        "ood_oslo_winter_regime": {
+          "n": 160,
+          "choice_acc": 0.6312,
+          "choice_ci95": [
+            0.5542,
+            0.7021
+          ],
+          "choice_ce": 2.7221,
+          "full_vocab_acc": 0.625
+        },
+        "ood_oslo_summer_regime": {
+          "n": 160,
+          "choice_acc": 0.5938,
+          "choice_ci95": [
+            0.5163,
+            0.6668
+          ],
+          "choice_ce": 3.6464,
+          "full_vocab_acc": 0.5938
+        },
+        "ood_tokyo_travel_regime": {
+          "n": 160,
+          "choice_acc": 0.8812,
+          "choice_ci95": [
+            0.822,
+            0.9226
+          ],
+          "choice_ce": 0.3245,
+          "full_vocab_acc": 0.8812
+        },
+        "ood_oslo_winter_retrieval": {
+          "n": 160,
+          "choice_acc": 0.2188,
+          "choice_ci95": [
+            0.1617,
+            0.289
+          ],
+          "choice_ce": 4.9487,
+          "full_vocab_acc": 0.2188
+        },
+        "ood_oslo_summer_retrieval": {
+          "n": 160,
+          "choice_acc": 0.0813,
+          "choice_ci95": [
+            0.0481,
+            0.134
+          ],
+          "choice_ce": 6.1884,
+          "full_vocab_acc": 0.0813
+        },
+        "ood_tokyo_travel_retrieval": {
+          "n": 160,
+          "choice_acc": 0.7,
+          "choice_ci95": [
+            0.625,
+            0.7656
+          ],
+          "choice_ce": 1.486,
+          "full_vocab_acc": 0.7
+        },
+        "ood_compaction": {
+          "n": 180,
+          "choice_acc": 0.6,
+          "choice_ci95": [
+            0.5271,
+            0.6688
+          ],
+          "choice_ce": 2.2413,
+          "full_vocab_acc": 0.6
+        }
+      },
+      "Arm3-LoRA-Caelus-GeoAdapter": {
+        "id_regime": {
+          "n": 200,
+          "choice_acc": 0.955,
+          "choice_ci95": [
+            0.9167,
+            0.9761
+          ],
+          "choice_ce": 0.1262,
+          "full_vocab_acc": 0.955
+        },
+        "id_photo_retrieval": {
+          "n": 200,
+          "choice_acc": 0.95,
+          "choice_ci95": [
+            0.9104,
+            0.9726
+          ],
+          "choice_ce": 0.1869,
+          "full_vocab_acc": 0.95
+        },
+        "id_compaction": {
+          "n": 180,
+          "choice_acc": 0.9611,
+          "choice_ci95": [
+            0.9219,
+            0.981
+          ],
+          "choice_ce": 0.1844,
+          "full_vocab_acc": 0.9611
+        },
+        "ood_oslo_winter_regime": {
+          "n": 160,
+          "choice_acc": 0.9313,
+          "choice_ci95": [
+            0.8811,
+            0.9612
+          ],
+          "choice_ce": 0.2325,
+          "full_vocab_acc": 0.9313
+        },
+        "ood_oslo_summer_regime": {
+          "n": 160,
+          "choice_acc": 0.9187,
+          "choice_ci95": [
+            0.866,
+            0.9519
+          ],
+          "choice_ce": 0.6425,
+          "full_vocab_acc": 0.9187
+        },
+        "ood_tokyo_travel_regime": {
+          "n": 160,
+          "choice_acc": 0.9375,
+          "choice_ci95": [
+            0.8888,
+            0.9657
+          ],
+          "choice_ce": 0.2288,
+          "full_vocab_acc": 0.9375
+        },
+        "ood_oslo_winter_retrieval": {
+          "n": 160,
+          "choice_acc": 0.9062,
+          "choice_ci95": [
+            0.8511,
+            0.9424
+          ],
+          "choice_ce": 0.4106,
+          "full_vocab_acc": 0.9062
+        },
+        "ood_oslo_summer_retrieval": {
+          "n": 160,
+          "choice_acc": 0.7625,
+          "choice_ci95": [
+            0.6909,
+            0.8218
+          ],
+          "choice_ce": 1.5625,
+          "full_vocab_acc": 0.7625
+        },
+        "ood_tokyo_travel_retrieval": {
+          "n": 160,
+          "choice_acc": 0.95,
+          "choice_ci95": [
+            0.9044,
+            0.9744
+          ],
+          "choice_ce": 0.2413,
+          "full_vocab_acc": 0.95
+        },
+        "ood_compaction": {
+          "n": 180,
+          "choice_acc": 0.8111,
+          "choice_ci95": [
+            0.7477,
+            0.8616
+          ],
+          "choice_ce": 0.7078,
+          "full_vocab_acc": 0.8167
+        }
+      }
+    },
+    "token_accounting": {
+      "per_event_clock_tokens": {
+        "iso_text": 19,
+        "caelus_fact002_text": 43,
+        "caelus_compaction_delta_extra": 11,
+        "continuous_soft_adapter": 2,
+        "adapter_vs_caelus_text_reduction_pct": 95.35
+      },
+      "mean_prompt_tokens_by_mode": {
+        "iso": {
+          "regime": 87.0,
+          "photo_retrieval": 197.0,
+          "compaction": 106.0,
+          "macro_mean": 130.0
+        },
+        "caelus_text": {
+          "regime": 164.52,
+          "photo_retrieval": 350.6,
+          "compaction": 206.12,
+          "macro_mean": 240.41
+        },
+        "unix_adapter": {
+          "regime": 71.0,
+          "photo_retrieval": 117.0,
+          "compaction": 73.0,
+          "macro_mean": 87.0
+        },
+        "unix_latlon_adapter": {
+          "regime": 71.0,
+          "photo_retrieval": 117.0,
+          "compaction": 73.0,
+          "macro_mean": 87.0
+        },
+        "caelus_adapter": {
+          "regime": 71.0,
+          "photo_retrieval": 117.0,
+          "compaction": 73.0,
+          "macro_mean": 87.0
+        }
+      }
+    },
+    "ephemeris_live_crosscheck": {
+      "oslo_spring_daylight_h": 12.3,
+      "oslo_autumn_daylight_h": 12.26,
+      "oslo_winter_solstice_daylight_h": 5.9,
+      "oslo_summer_solstice_daylight_h": 18.83,
+      "nyc_to_tokyo_20261123_0130z_sun_alt_deg": {
+        "NYC": -44.54,
+        "Tokyo": 32.4
+      },
+      "feature_32d_l2_norm_error": 0.0,
+      "recomputed_train_day_sha256_16": "0bc7658da33bbce0",
+      "recomputed_id_day_sha256_16": "8f197d8a09efeb55",
+      "recomputed_ood_day_sha256_16": "b24c4bc69a04c452"
+    },
+    "verification_checks": {
+      "real_frozen_pretrained_lm": true,
+      "exact_adapter_3way_param_parity": true,
+      "all_trained_arms_converged": true,
+      "zero_train_id_ood_leakage": true,
+      "wilson_ci95_recomputed_exact": true
+    },
+    "razor_checks": {
+      "exact_3way_adapter_param_parity": true,
+      "zero_train_id_ood_leakage": true,
+      "all_trained_arms_converged": true,
+      "bar_a1_arm3_beats_arm2_ood_st_ge_15pp": true,
+      "bar_a2_arm3_beats_location_aware_arm2b_oslo_solstices": true,
+      "bar_b1_arm3_beats_frozen_arm1_ood_st": true,
+      "bar_b2_arm3_cuts_clock_tokens_ge_50pct": true,
+      "bar_b3_arm3_within_3pp_of_arm1b_ood_st": false,
+      "bar_b4_arm3_within_3pp_of_arm1b_ood_all": false
+    }
+  },
+  "verdict": "KILLED: Passed 7/9 Razor checks; failed pre-registered text-steelman accuracy parity bars (Arm3 trails Arm1b-LoRA-TextPrompt by -6.8 pp on OOD Solstice+Travel and -8.5 pp on OOD All, exceeding the -3.0 pp kill threshold). Although continuous physical slow-clock adapters clearly transfer through frozen 494M weights (+65.3 pp vs Arm2 UTC-Fourier; +49.8 pp vs location-aware Arm2b on Oslo Solstices; 2.55x faster MPS inference with 95.3% fewer clock tokens), FACT-002 plain-text physical envelopes strictly win on accuracy and simplicity for frozen pretrained LLMs. Ship FACT-002 text envelopes, not continuous weight adapters, for frozen LLMs."
+}
