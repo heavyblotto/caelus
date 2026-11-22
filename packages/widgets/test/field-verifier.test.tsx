@@ -487,6 +487,11 @@ function buildSyntheticExifJpeg(opts: {
 // -------------------------------------------------- 7. SSR Render via react-dom/server
 {
   const htmlVerify = renderToStaticMarkup(<FieldVerifier engine={eng} />);
+  const htmlVerifyAgain = renderToStaticMarkup(<FieldVerifier engine={eng} />);
+  assert(htmlVerify === htmlVerifyAgain, "SSR markup is byte-for-byte deterministic (no hydration #418 timing drift)");
+  assert(!htmlVerify.includes("ms in browser") && htmlVerify.includes("embedded ephemeris"), "SSR renders deterministic ephemeris label before client mount");
+  assert(htmlVerify.includes("telemetry__item") && htmlVerify.includes("fv-verdict fv-verdict--consistent"), "SSR emits .telemetry__item spans and semantic .fv-verdict--consistent class");
+  assert(htmlVerify.includes("Shadow L/H (pred violet, obs peach)"), "SSR emits unclipped ratio bar header");
   assert(htmlVerify.includes("Instrument I-05") && htmlVerify.includes("<h1>Field verifier</h1>"), "SSR renders Instrument I-05 header and H1");
   for (const id of ["MODE", "IN", "CAL", "OUT", "CHK", "TS", "RET", "M-1", "M-2", "M-3"]) {
     assert(htmlVerify.includes(`<b>${id}</b>`), `Verify SSR renders tile ${id}`);

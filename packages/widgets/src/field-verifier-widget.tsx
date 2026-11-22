@@ -147,10 +147,10 @@ function parseOptionalNumber(raw: string): number | undefined {
 
 function CompassDialFigure({ geom }: { geom: CompassDialGeometry }): ReactElement {
   const { size, cx, cy, radius, sun, predictedShadow, observedShadow, moon, ratioBar } = geom;
-  const barW = 240;
-  const barH = 56;
-  const bx0 = 24;
-  const bx1 = 224;
+  const barW = 264;
+  const barH = 58;
+  const bx0 = 18;
+  const bx1 = 246;
   const bSpan = bx1 - bx0;
   const xRatio = (v: number): number => r1(bx0 + (Math.min(v, ratioBar.domainMax) / ratioBar.domainMax) * bSpan);
 
@@ -273,8 +273,8 @@ function CompassDialFigure({ geom }: { geom: CompassDialGeometry }): ReactElemen
           role="img"
           aria-label={`Shadow length ratio comparison on 0 to ${ratioBar.domainMax} scale.`}
         >
-          <text x={bx0} y={11} fill="var(--faint)" fontSize={9} fontFamily="var(--mono)">
-            Shadow ratio L/H (predicted violet, observed peach)
+          <text x={bx0} y={11} fill="var(--faint)" fontSize={8.5} fontFamily="var(--mono)">
+            Shadow L/H (pred violet, obs peach)
           </text>
           {/* Range-frame horizontal baseline */}
           <line x1={bx0} y1={30} x2={bx1} y2={30} stroke="var(--line2)" strokeWidth={1} />
@@ -671,6 +671,12 @@ export function FieldVerifier({
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const [copied, setCopied] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Mark client mount so live performance.now() timing never causes SSR hydration mismatch (#418)
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Revoke local object URL on unmount or swap (zero leaks, zero uploads)
   useEffect(() => {
@@ -971,9 +977,17 @@ export function FieldVerifier({
             ))}
           </div>
           <div className="telemetry">
-            <span>{obsCount} {obsCount === 1 ? "constraint" : "constraints"} active</span>
-            <span>{result ? `${result.elapsedMs.toFixed(1)} ms in browser` : "check inputs"}</span>
-            <span className="badge badge--ok">100% local, never uploaded</span>
+            <span className="telemetry__item">{obsCount} {obsCount === 1 ? "constraint" : "constraints"} active</span>
+            <span className="telemetry__item">
+              {!result
+                ? "check inputs"
+                : mounted
+                  ? `${result.elapsedMs.toFixed(1)} ms in browser`
+                  : "embedded ephemeris"}
+            </span>
+            <span className="telemetry__item">
+              <span className="badge badge--ok">100% local, never uploaded</span>
+            </span>
           </div>
         </div>
       </div>
@@ -1409,10 +1423,10 @@ export function FieldVerifier({
                     }}
                   />
                   <div className="telemetry">
-                    <span>Measured L/H = {liveRatio.toFixed(3)}</span>
-                    <span>Bearing = {r1(liveBearing)}°</span>
+                    <span className="telemetry__item">Measured L/H = {liveRatio.toFixed(3)}</span>
+                    <span className="telemetry__item">Bearing = {r1(liveBearing)}°</span>
                     {exifInfo?.lat != null && exifInfo?.lonEast != null && (
-                      <span>EXIF GPS {exifInfo.lat.toFixed(3)}, {exifInfo.lonEast.toFixed(3)}</span>
+                      <span className="telemetry__item">EXIF GPS {exifInfo.lat.toFixed(3)}, {exifInfo.lonEast.toFixed(3)}</span>
                     )}
                   </div>
                 </div>
@@ -1429,7 +1443,7 @@ export function FieldVerifier({
                   <p className="empty">{validation.issue ?? "Enter a valid timestamp and coordinates to verify."}</p>
                 ) : (
                   <>
-                    <div className="fv-verdict">
+                    <div className={`fv-verdict fv-verdict--${verify.verdict}`}>
                       <span className={verdictBadgeClass(verify.verdict)} data-verdict={verify.verdict}>
                         {verify.verdict}
                       </span>
@@ -1442,13 +1456,13 @@ export function FieldVerifier({
                     {dialGeom && <CompassDialFigure geom={dialGeom} />}
 
                     <div className="telemetry">
-                      <span>Sun az {verify.scene.sun.azimuthDeg.toFixed(1)}° / alt {verify.scene.sun.altitudeApparentDeg.toFixed(1)}°</span>
-                      <span>
+                      <span className="telemetry__item">Sun az {verify.scene.sun.azimuthDeg.toFixed(1)}° / alt {verify.scene.sun.altitudeApparentDeg.toFixed(1)}°</span>
+                      <span className="telemetry__item">
                         Predicted shadow {verify.scene.shadow.cast && verify.scene.shadow.bearingDeg !== null
                           ? `${verify.scene.shadow.bearingDeg.toFixed(1)}° (L/H ${verify.scene.shadow.lengthRatio?.toFixed(3) ?? "grazing"})`
                           : verify.scene.shadow.selfShadowed ? "self-shadowed slope" : "none (Sun below horizon)"}
                       </span>
-                      <span>
+                      <span className="telemetry__item">
                         Moon {verify.scene.moon.visible
                           ? `alt ${verify.scene.moon.altitudeApparentDeg.toFixed(1)}°, ${Math.round(verify.scene.moon.illum * 100)}% lit, limb ${verify.scene.moon.brightLimbZenithDeg?.toFixed(1) ?? "n/a"}°`
                           : "below horizon"}
