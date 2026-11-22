@@ -1,7 +1,7 @@
 {
   "id": "EXP-013",
-  "run_at": "2026-11-22T21:26:26.679Z",
-  "git_sha": "0ee232d",
+  "run_at": "2026-11-22T21:30:44.756Z",
+  "git_sha": "0093cb7",
   "status": "pass",
   "classification": "PROVED_FULL_ENVELOPE",
   "summary": "Evaluated 24 tasks x 4 arms on gemma4:12b and qwen3.5:9b: macro composite Arm0=62.5%, Arm1=72.9%, Arm2=83.3%, Arm3=100.0%; median prompt token overhead=+68.5 tokens.",
@@ -27,7 +27,7 @@
       "median_words13_tokens": 20.5,
       "max_words13_tokens": 25
     },
-    "runtime_ms": 208.36,
+    "runtime_ms": 221.58,
     "macro_arm0_composite": 0.625,
     "macro_arm1_composite": 0.7291,
     "macro_arm2_composite": 0.8333,

@@ -953,7 +953,7 @@ function escXml(s) {
 }
 
 function renderTufteChartSvg(liveSummary) {
-  const W = 1120;
+  const W = 1220;
   const H = 560;
   const COL_BG = "#ffffff";
   const COL_INK = "#1a1a1a";
@@ -1058,32 +1058,37 @@ function renderTufteChartSvg(liveSummary) {
     );
   }
 
-  // Third panel: Macro paired deltas with 95% bootstrap CIs (10,000 resamples)
-  const rx = 764;
-  const rw = 324;
-  const ciMin = -0.30;
+  // Third panel: Macro paired deltas with 95% bootstrap CIs (dedicated label, plot, and value columns)
+  const labelRightX = 870;
+  const plotLeftX = 884;
+  const plotRightX = 1054;
+  const valLeftX = 1066;
+  const ciMin = -0.05;
   const ciMax = 0.60;
-  const mapX = (v) => rx + 10 + ((Math.max(ciMin, Math.min(ciMax, v)) - ciMin) / (ciMax - ciMin)) * (rw - 20);
+  const mapX = (v) =>
+    plotLeftX + ((Math.max(ciMin, Math.min(ciMax, v)) - ciMin) / (ciMax - ciMin)) * (plotRightX - plotLeftX);
   const zeroX = mapX(0);
+  const plotBottomY = 446;
 
   lines.push(
-    `  <text x="${rx}" y="${panelTop - 12}" font-size="13.5" font-weight="bold">Macro Paired Deltas (95% CI)</text>`,
-    `  <line x1="${zeroX.toFixed(1)}" y1="${panelTop}" x2="${zeroX.toFixed(1)}" y2="${panelTop + 260}" stroke="${COL_INK}" stroke-width="0.9" stroke-dasharray="3,2"/>`,
+    `  <text x="748" y="${panelTop - 12}" font-size="13.5" font-weight="bold">Macro Paired Deltas, 95% CI (pp)</text>`,
+    `  <line x1="${zeroX.toFixed(1)}" y1="${panelTop}" x2="${zeroX.toFixed(1)}" y2="${plotBottomY}" stroke="${COL_INK}" stroke-width="0.9" stroke-dasharray="3,2"/>`,
+    `  <line x1="${mapX(0.30).toFixed(1)}" y1="${panelTop}" x2="${mapX(0.30).toFixed(1)}" y2="${plotBottomY}" stroke="${COL_RULE}" stroke-width="0.7" stroke-dasharray="2,3"/>`,
   );
 
   const mb = liveSummary.macro_bootstrap_95ci;
   const deltaRows = [
-    { label: "Arm3 - Arm1 (Composite)", ci: mb.arm3_minus_arm1_composite, col: COL_COMP },
-    { label: "Arm3 - Arm2 (Composite)", ci: mb.arm3_minus_arm2_composite, col: COL_COMP },
-    { label: "Arm2 - Arm1 (Composite)", ci: mb.arm2_minus_arm1_composite, col: COL_COMP },
-    { label: "Arm3 - Arm1 (CAR Traps)", ci: mb.arm3_minus_arm1_car, col: COL_CAR },
-    { label: "Arm3 - Arm2 (CAR Traps)", ci: mb.arm3_minus_arm2_car, col: COL_CAR },
-    { label: "Arm3 - Arm1 (VUR Ctrls)", ci: mb.arm3_minus_arm1_vur, col: COL_VUR },
+    { label: "Arm3 - Arm1 Comp", ci: mb.arm3_minus_arm1_composite, col: COL_COMP },
+    { label: "Arm3 - Arm2 Comp", ci: mb.arm3_minus_arm2_composite, col: COL_COMP },
+    { label: "Arm2 - Arm1 Comp", ci: mb.arm2_minus_arm1_composite, col: COL_COMP },
+    { label: "Arm3 - Arm1 CAR", ci: mb.arm3_minus_arm1_car, col: COL_CAR },
+    { label: "Arm3 - Arm2 CAR", ci: mb.arm3_minus_arm2_car, col: COL_CAR },
+    { label: "Arm3 - Arm1 VUR", ci: mb.arm3_minus_arm1_vur, col: COL_VUR },
   ];
 
   for (let i = 0; i < deltaRows.length; i++) {
     const row = deltaRows[i];
-    const cy = panelTop + 22 + i * 40;
+    const cy = panelTop + 34 + i * 54;
     const d = row.ci.delta ?? 0;
     const lo = row.ci.ci_low ?? d;
     const hi = row.ci.ci_high ?? d;
@@ -1091,22 +1096,21 @@ function renderTufteChartSvg(liveSummary) {
     const xHi = mapX(hi);
     const xPt = mapX(d);
     const fmtPp = (v) => `${v >= 0 ? "+" : ""}${(v * 100).toFixed(1)}`;
-    const txt = `${fmtPp(d)} pp [${fmtPp(lo)}, ${fmtPp(hi)}]`;
+    const txt = `${fmtPp(d)} [${fmtPp(lo)}, ${fmtPp(hi)}]`;
 
     lines.push(
-      `  <text x="${rx}" y="${cy - 8}" font-size="10.5">${escXml(row.label)}</text>`,
-      `  <text x="${rx + rw}" y="${cy - 8}" font-size="10" text-anchor="end" class="mono">${escXml(txt)}</text>`,
-      `  <line x1="${xLo.toFixed(1)}" y1="${cy + 6}" x2="${xHi.toFixed(1)}" y2="${cy + 6}" stroke="${row.col}" stroke-width="2.2"/>`,
-      `  <line x1="${xLo.toFixed(1)}" y1="${cy + 2}" x2="${xLo.toFixed(1)}" y2="${cy + 10}" stroke="${row.col}" stroke-width="1.3"/>`,
-      `  <line x1="${xHi.toFixed(1)}" y1="${cy + 2}" x2="${xHi.toFixed(1)}" y2="${cy + 10}" stroke="${row.col}" stroke-width="1.3"/>`,
-      `  <circle cx="${xPt.toFixed(1)}" cy="${cy + 6}" r="3.8" fill="${row.col}"/>`,
+      `  <text x="${labelRightX}" y="${cy + 4}" font-size="11" text-anchor="end">${escXml(row.label)}</text>`,
+      `  <line x1="${xLo.toFixed(1)}" y1="${cy}" x2="${xHi.toFixed(1)}" y2="${cy}" stroke="${row.col}" stroke-width="2.2"/>`,
+      `  <line x1="${xLo.toFixed(1)}" y1="${cy - 4}" x2="${xLo.toFixed(1)}" y2="${cy + 4}" stroke="${row.col}" stroke-width="1.3"/>`,
+      `  <line x1="${xHi.toFixed(1)}" y1="${cy - 4}" x2="${xHi.toFixed(1)}" y2="${cy + 4}" stroke="${row.col}" stroke-width="1.3"/>`,
+      `  <circle cx="${xPt.toFixed(1)}" cy="${cy}" r="3.8" fill="${row.col}"/>`,
+      `  <text x="${valLeftX}" y="${cy + 4}" font-size="10" class="mono">${escXml(txt)}</text>`,
     );
   }
 
-  const ciAxisY = panelTop + 268;
+  const ciAxisY = panelTop + 4 * armSpacing - 6;
   lines.push(
-    `  <line x1="${mapX(ciMin).toFixed(1)}" y1="${ciAxisY}" x2="${mapX(ciMax).toFixed(1)}" y2="${ciAxisY}" stroke="${COL_INK}" stroke-width="0.9"/>`,
-    `  <text x="${mapX(-0.30).toFixed(1)}" y="${ciAxisY + 14}" font-size="10" text-anchor="middle" class="muted">-30pp</text>`,
+    `  <line x1="${zeroX.toFixed(1)}" y1="${ciAxisY}" x2="${mapX(0.60).toFixed(1)}" y2="${ciAxisY}" stroke="${COL_INK}" stroke-width="0.9"/>`,
     `  <text x="${zeroX.toFixed(1)}" y="${ciAxisY + 14}" font-size="10" text-anchor="middle" class="muted">0</text>`,
     `  <text x="${mapX(0.30).toFixed(1)}" y="${ciAxisY + 14}" font-size="10" text-anchor="middle" class="muted">+30pp</text>`,
     `  <text x="${mapX(0.60).toFixed(1)}" y="${ciAxisY + 14}" font-size="10" text-anchor="middle" class="muted">+60pp</text>`,
