@@ -8,7 +8,7 @@ import { pageMetadata } from "../../lib/seo";
 export const metadata = pageMetadata({
   title: "Playground",
   description:
-    "Cast a natal chart: wheel, transits, a cited corpus reading, Vedic kundli, timing, and maps. Enter a place and a date.",
+    "Calculate a natal chart, transits, cited delineations, Vedic kundli, timing periods, and astrocartography maps directly in your browser.",
   path: "/playground",
 });
 
@@ -17,8 +17,9 @@ export default function Playground() {
     <main className="container page page--bench page--sticky-cta">
       <PageHero eyebrow="Playground" title="Cast a chart">
         <Lead>
-          Search a place, enter a date, and read the wheel. Transits, a cited
-          corpus reading, and the rest of the chart follow.
+          Search for a city, enter a date and time, and inspect the wheel,
+          transits, cited delineations, Vedic charts, and maps directly in your
+          browser.
         </Lead>
       </PageHero>
 
@@ -26,7 +27,8 @@ export default function Playground() {
 
       <H2>Example charts</H2>
       <P>
-        Click one to load it. The last has no birth time.
+        Select an example below to load it into the playground (the last preset
+        demonstrates an untimed chart).
       </P>
       <PlaygroundExamples />
 

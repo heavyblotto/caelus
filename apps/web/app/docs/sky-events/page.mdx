@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Rise, Set, and Sky Events",
-  description: "Find when a body rises, culminates, and sets at a place, and when the Moon changes phase, a planet stations, or a body crosses a longitude.",
+  description: "Compute rising, setting, and meridian transit times for a location, alongside lunar phases, planetary stations, and longitude crossings.",
   path: "/docs/sky-events",
 });
 
@@ -10,10 +10,10 @@ export const metadata = pageMetadata({
 
 # Rise, set, and sky events
 
-A chart answers where the bodies are at an instant. The functions on this
-page answer when something happens: a body crosses the horizon or the
-meridian, the Moon reaches a phase, a planet turns, or a body reaches a
-longitude. Each returns Julian Days in UT.
+While chart functions calculate planetary positions for a known timestamp,
+event functions solve for when specific sky events occur: rising, setting,
+meridian culmination, principal lunar phases, planetary stations, and
+longitude crossings. All returned timestamps are UT Julian Days.
 
 ```ts run
 import {
@@ -29,9 +29,9 @@ const utc = (jd) => new Date((jd - 2440587.5) * 86400000).toISOString();
 
 ## Rise, set, and culmination
 
-`riseSet` finds the next event of one kind after a start time, for a body at
-a place. The kind is `"rise"`, `"set"`, `"mtransit"` (upper culmination), or
-`"itransit"` (lower culmination).
+`riseSet` locates the next horizon or meridian crossing after a start timestamp
+for a given body and observer location, accepting `"rise"`, `"set"`,
+`"mtransit"` (upper culmination), or `"itransit"` (lower culmination):
 
 ```ts run
 const day = julianDay(2025, 6, 21);
@@ -45,31 +45,35 @@ utc(riseSet(engine, "sun", day, 51.5, -0.13, "rise"));      // London
 | Sun sets | 20:21:27 |
 | Moon rises | 00:34:46 |
 
-Longitude is east-positive. Rise and set are for the upper limb with standard
-refraction; pass `{ discCenter: true }` for the centre of the disc, and
-`altM`, `pressure`, or `tempC` to change the horizon model.
+Longitudes are east-positive. By default, rising and setting track the upper
+limb under standard atmospheric refraction; pass `{ discCenter: true }` to
+solve for the disc center, or pass `altM`, `pressure`, and `tempC` to adjust
+elevation and atmospheric conditions.
 
-The function returns `null` when the event does not happen within the search
-window, which is the normal case inside the polar circles. The Sun does not
-rise in Tromsø on 21 June because it does not set.
+When the requested event does not occur within the search window, `riseSet`
+returns `null`. Inside polar circles, that is expected behavior during the
+midnight sun or polar night (in Tromsø on 21 June, the Sun neither rises nor
+sets).
 
 ## Lunar phases
 
-`lunarPhases` lists the four principal phases between two instants.
+`lunarPhases` returns the timestamps and names of all four principal lunar
+phases falling between two Julian Days:
 
 ```ts run
 lunarPhases(engine, julianDay(2025, 6, 1), julianDay(2025, 7, 1))
   .map(([jd, phase]) => [utc(jd), phase]);
 ```
 
-For June 2025 those are the first quarter on the 3rd at 03:41 UT, the full
-Moon on the 11th at 07:43, the last quarter on the 18th at 19:19, and the new
-Moon on the 25th at 10:31.
+In June 2025, those phases occur on 3 June at 03:41 UT (first quarter), 11 June
+at 07:43 UT (full Moon), 18 June at 19:19 UT (last quarter), and 25 June at
+10:31 UT (new Moon).
 
 ## Stations
 
-`stations` returns the instants a planet's motion in longitude reverses, with
-the direction it turns to.
+`stations` finds every timestamp in a range where a planet reverses its
+longitudinal direction of motion, paired with whether it turns `"retrograde"`
+or `"direct"`:
 
 ```ts run
 stations(engine, "mercury", julianDay(2025, 1, 1), julianDay(2026, 1, 1))
@@ -85,21 +89,22 @@ stations(engine, "mercury", julianDay(2025, 1, 1), julianDay(2026, 1, 1))
 | 9 November, 19:00 UT | retrograde |
 | 29 November, 17:39 UT | direct |
 
-A planet barely moves near a station, so the instant is poorly determined.
-Two ephemerides that agree on the position to an arcsecond can differ on the
-station by a minute.
+Because apparent velocity drops near zero around a station, small numerical
+differences amplify timing variance: two ephemerides matching to within an
+arcsecond can differ by around a minute on the exact station timestamp.
 
 ## Crossings
 
-`crossings` returns every instant a body's longitude reaches a given degree.
-A retrograde planet can cross the same degree three times, and all three are
-returned.
+`crossings` returns every timestamp when a body's longitude hits a target
+degree. Because retrograde motion can bring a planet across the same degree
+three times, all crossings in the interval are returned in chronological order:
 
 ```ts run
 crossings(engine, "sun", 0, julianDay(2025, 1, 1), julianDay(2026, 1, 1)).map(utc);
 // one instant: 2025-03-20 09:01:30 UT, the March equinox
 ```
 
-For conditions that hold over a span of time, such as a planet being in a
-sign or within orb of an aspect, use [`when()`](/docs/time-queries). To go
-from a whole described sky to its dates, use [`dateSky`](/docs/sky-dating).
+To search for conditions that remain true across intervals of time (such as
+aspects within orb or planets occupying a sign), use [`when()`](/docs/time-queries).
+To work backward from a full planetary configuration to candidate historical
+dates, use [`dateSky`](/docs/sky-dating).

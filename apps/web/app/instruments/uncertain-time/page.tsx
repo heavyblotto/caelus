@@ -4,7 +4,7 @@ import { pageMetadata } from "../../../lib/seo";
 export const metadata = pageMetadata({
   title: "Uncertain Time",
   description:
-    "Give a chart's stated time and how far off it could be, and see which of its facts hold across the whole window and when the others change. Runs in your browser on the Caelus engine, with the call that produced it.",
+    "Test a birth-time uncertainty window in your browser to see which chart placements remain unchanged and pinpoint when cusps, signs, or aspects shift.",
   path: "/instruments/uncertain-time",
 });
 

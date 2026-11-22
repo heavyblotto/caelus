@@ -341,12 +341,11 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
         </div>
         <div>
           <p>
-            Sky dating takes a partial description of a sky and lists every
-            date that fits it. A horoscope that names the sign of each planet
-            and gives no year can be dated this way, by matching it against
-            the computed sky across several thousand years. A constraint
-            can also be an event: the first or last day a planet or a star
-            was seen from one place.
+            Search historical dates for intervals matching a partial sky
+            description. For example, you can date an undated horoscope or
+            literary passage by matching planetary signs, lunar phases, or
+            first and last visibility events from a specific location across up
+            to 6,000 years.
           </p>
         </div>
       </div>
@@ -523,24 +522,24 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
           {tier === "full" && (
             <p className="note" role="status">
               {packError
-                ? `The packs could not be loaded, so nothing was run. ${packError}`
+                ? `Could not load ephemeris packs, so the search did not run. ${packError}`
                 : !manifest
-                  ? "Reading the list of packs."
+                  ? "Loading pack manifest..."
                   : needed.length === 0
-                    ? "Set a constraint to see which packs the search needs."
-                    : `This search uses ${needed.length} pack ${needed.length === 1 ? "file" : "files"}, ${megabytes(packBytes(needed))}. `
+                    ? "Select at least one constraint to calculate which ephemeris packs are required."
+                    : `This query uses ${needed.length} ephemeris ${needed.length === 1 ? "pack" : "packs"} (${megabytes(packBytes(needed))}). `
                       + (toFetch.length === 0
-                        ? "All of it is already loaded."
-                        : `${megabytes(packBytes(toFetch))} is still to download, and nothing is fetched until you run the search.`)}
+                        ? "All required packs are already cached locally."
+                        : `${megabytes(packBytes(toFetch))} will download when you run the search.`)}
             </p>
           )}
           <p className="note">
             {spanOk
-              ? `${eraYear(query.startYear)} to ${eraYear(query.endYear)}. Years are astronomical, so 0 is 1 BCE and -409 is 410 BCE.`
-              : `Years must run from ${SKY_SPAN.from} to ${SKY_SPAN.to}, first before last.`}
+              ? `Span: ${eraYear(query.startYear)} to ${eraYear(query.endYear)}. Years use astronomical numbering (0 = 1 BCE, -409 = 410 BCE).`
+              : `Enter a range between ${SKY_SPAN.from} and ${SKY_SPAN.to} with start year first.`}
             {issue ? ` ${issue}` : ""}
             {vis && !issue
-              ? " The visibility is taken last and found one event at a time, so the search is slow when the positions leave long windows. Stop ends it."
+              ? " Visibility constraints run last and locate events sequentially, so broad positional windows take longer to scan. Use Stop to cancel a running query."
               : ""}
             {preset ? ` ${preset.note}` : ""}
           </p>
@@ -640,7 +639,7 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
           </section>
 
           <section className="tile">
-            <div className="tile__h"><b>CUT</b><span>What each constraint leaves</span><i>slowest body first</i></div>
+            <div className="tile__h"><b>CUT</b><span>Filter funnel by constraint</span><i>slowest body first</i></div>
             <div className="scroll">
               <table className="rd">
                 <thead><tr><th>Constraint</th><th className="r">Windows</th><th className="r">Days</th></tr></thead>
@@ -661,77 +660,79 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
         <div className="col code">
           <section className="tile">
             <div className="tile__h">
-              <b>TS</b><span>The call</span>
+              <b>TS</b><span>TypeScript example</span>
               <button type="button" onClick={copy}>{copied ? "Copied" : "Copy"}</button>
             </div>
             <pre className="code">{source}</pre>
           </section>
           <section className="tile">
-            <div className="tile__h"><b>RET</b><span>What it returns</span><i>UT Julian Days</i></div>
+            <div className="tile__h"><b>RET</b><span>Return value</span><i>UT Julian Days</i></div>
             <pre className="code">{returned}</pre>
           </section>
         </div>
       </div>
 
       <section className="tile s4 half">
-        <div className="tile__h"><b>M-1</b><span>How the search works</span></div>
+        <div className="tile__h"><b>M-1</b><span>Search order and pruning</span></div>
         <div className="tile__b prose">
           <p>
-            The search prunes from the slowest body to the fastest. It finds
-            the windows in which Saturn is in its sign, looks for Jupiter only
-            inside those, and continues down to the Moon. Each track above
-            is what one constraint left standing. A first or last visibility
-            is an event and cannot be scanned, so it is taken last: inside
-            each window the positions leave, the events are found one after
-            another. The{" "}
+            The solver evaluates constraints from the slowest-moving body to
+            the fastest. It first identifies windows where Saturn occupies its
+            target sign, searches only those intervals for Jupiter, and
+            continues down to the Moon. Each row in the funnel shows the
+            candidates remaining after applying that filter. Because first and
+            last visibility constraints are discrete events rather than
+            continuous curves, they run last inside each surviving window. Use
+            the{" "}
             <a href="/instruments/first-visibility">First Visibility instrument</a>{" "}
-            shows one such event in detail, and{" "}
-            <a href="/docs/heliacal">First and last visibility</a> describes
-            the model.
+            to inspect individual events in detail, or read{" "}
+            <a href="/docs/heliacal">First and last visibility</a> for the
+            underlying atmospheric model.
           </p>
         </div>
       </section>
       <section className="tile s4 half">
-        <div className="tile__h"><b>M-2</b><span>What this page computes with</span></div>
+        <div className="tile__h"><b>M-2</b><span>Ephemeris tier</span></div>
         <div className="tile__b prose">
           {ranTier === "full" ? (
             <p>
-              The result above was computed on the full packs: the JPL
-              Horizons fits for the bodies in the search and for the Earth,
-              {" "}{ranPacks.files} files and {megabytes(ranPacks.bytes)},
-              fetched from this site. Each file was checked against its
-              SHA-256 before it was decoded. They are the packs the Node
-              loader reads, so the windows are the ones the engine's tests
-              pin.
+              These results use the full ephemeris packs (JPL Horizons fits for
+              each constrained planet plus Earth), totaling {ranPacks.files}{" "}
+              {ranPacks.files === 1 ? "file" : "files"} ({megabytes(ranPacks.bytes)}).
+              Every downloaded pack is verified against its manifest SHA-256
+              checksum before decoding, matching the Node.js loader used by the
+              test suite.
             </p>
           ) : (
             <p>
-              The result above was computed on the embedded data tier, in
-              your browser. Against the full packs it stays within 0.02° after
-              1 CE and within 0.09° back to 1000 BCE; at 3000 BCE Saturn is up
-              to 0.7° off. For the two horoscope presets it finds the same windows. Their
-              edges differ by up to about 6 minutes for the Babylonian tablet
-              and about 27 minutes for the horoscope of Hadrian.{" "}
+              These results run client-side on the bundled embedded tier. It
+              agrees with the full ephemeris packs within 0.02° after 1 CE and
+              within 0.09° back to 1000 BCE (at 3000 BCE Saturn differs by up to
+              0.7°). For both horoscope presets, this finds the exact same date
+              windows, with boundary edges shifted by about 6 minutes for the
+              Babylonian tablet and 27 minutes for Hadrian&apos;s horoscope.{" "}
               {packs
-                ? "Set Data to the full packs to run the search on them here."
-                : "Use the full packs in Node when an edge matters."}
+                ? "Switch Data to Full packs to download exact JPL fits in the browser."
+                : "Use the full Node packs when exact boundary timestamps are critical."}
             </p>
           )}
         </div>
       </section>
       <section className="tile s4">
-        <div className="tile__h"><b>M-3</b><span>Calendar and limits</span></div>
+        <div className="tile__h"><b>M-3</b><span>Calendars and scope</span></div>
         <div className="tile__b prose">
           <p>
-            Dates before 15 October 1582 are in the Julian calendar. A window
-            is a span of UT in which every constraint holds, so one with the
-            Moon in it is two or three days long. A visibility holds on whole
-            local days at its place, from the event under a clearer sky to
-            the event under a hazier one. With a visibility set, the Window
-            column gives the days at that place, and Opens gives the same
-            instant in UT. The signs of the two horoscope
-            presets are the ones usually quoted for each text and have not
-            been checked against the printed editions.
+            Dates before October 15, 1582 use the Julian calendar. Each output
+            window marks a continuous interval of Universal Time during which
+            all constraints hold simultaneously, so queries including the Moon
+            typically span two or three days. Visibility constraints span whole
+            local calendar days at the observer&apos;s location, running from
+            the clearer-sky earliest date through the hazier-sky latest date.
+            When a visibility constraint is active, the Window column displays
+            local calendar days at that location while Opens shows the
+            corresponding Universal Time. Signs for the two horoscope presets
+            reflect standard secondary translations rather than newly verified
+            critical editions.
           </p>
         </div>
       </section>

@@ -286,10 +286,10 @@ export function FirstVisibility({ engine, initialPreset = "sirius" }: FirstVisib
         </div>
         <div>
           <p>
-            A star or planet near the Sun is lost in the glare for days or
-            months. This instrument finds the days in one year on which a
-            body is last seen and first seen again from one place, and shows
-            why each day is the one.
+            When a star or planet passes near the Sun, solar glare hides it for
+            days or months. Select a body, location, and year to compute every
+            first and last visibility event across the year and inspect the
+            twilight margin or crescent score behind each date.
           </p>
         </div>
       </div>
@@ -371,12 +371,12 @@ export function FirstVisibility({ engine, initialPreset = "sirius" }: FirstVisib
             : <button className="run run--go" type="submit" disabled={!ok}>Find the days</button>}
           <p className="note">
             {ok
-              ? `${eraYear(query.year)}${query.year < 1583 ? ", in the Julian calendar" : ""}. `
-              : `The year runs from ${VISIBILITY_SPAN.from} to ${VISIBILITY_SPAN.to}, and the place must be on the globe. `}
-            Years are astronomical, so 0 is 1 BCE. Longitude is east positive.{" "}
+              ? `${eraYear(query.year)}${query.year < 1583 ? " (Julian calendar)" : ""}. `
+              : `Enter a year between ${VISIBILITY_SPAN.from} and ${VISIBILITY_SPAN.to} and valid geographic coordinates. `}
+            Years use astronomical numbering (year 0 is 1 BCE), with east longitude positive.{" "}
             {query.target === "moon"
-              ? "The Moon's crescent is tested by Yallop's q, which takes no extinction."
-              : "Extinction is the loss in magnitudes through one thickness of air: 0.25 for a clear sky at sea level, about 0.15 at a high desert site, and 0.35 or more in haze."}
+              ? "Lunar crescents are evaluated with Yallop's q test, which takes no extinction parameter."
+              : "Extinction is V-band magnitude loss per unit air mass: 0.25 for a clear sea-level sky, around 0.15 at high desert sites, and 0.35 or higher in haze."}
             {preset ? ` ${preset.note}` : ""}
           </p>
         </form>
@@ -440,16 +440,14 @@ export function FirstVisibility({ engine, initialPreset = "sirius" }: FirstVisib
               </div>
             </div>
             <p className="note">
-              {failed ? `The search stopped: ${failed}. ` : ""}
+              {failed ? `Search stopped: ${failed}. ` : ""}
               {search && events.length === 0 && !running && !failed
-                ? `${name} has no first or last visibility from ${where} in this year. A body that never sets there, or never rises, has none. `
+                ? `${name} has no first or last visibility events from ${where} in this year (circumpolar or never-rising bodies have none). `
                 : ""}
               {always
-                ? `From ${where} the return to the morning sky comes before the last evening, so ${name} is seen at one end of the night or the other all year and no stretch is shaded. `
+                ? `From ${where}, morning reappearance occurs before evening disappearance, so ${name} remains visible in either the morning or evening sky all year with no invisibility gap. `
                 : ""}
-              Each mark is the day of an event, and the band behind it runs from the
-              same event under a clearer sky to the event under a hazier one. The top
-              row shades the stretches in which the body is not seen at all.
+              Each marker shows a nominal event date, while the shaded band behind it spans the earliest (clearer sky) to latest (hazier sky) dates. The top row highlights intervals when the body is lost in solar glare.
             </p>
           </section>
 
@@ -469,13 +467,12 @@ export function FirstVisibility({ engine, initialPreset = "sirius" }: FirstVisib
                       <span><i className="twk twk--beside" />the day {curve.besideIs}, best margin {curve.bestBeside === null ? "none" : signed(curve.bestBeside, 2)}</span>
                     </p>
                     <p className="note">
-                      The curve is how many magnitudes {name} has to spare over the faintest
-                      point the eye can pick out where it stands, sampled every two minutes.
-                      Above zero it can be seen. On the day {curve.besideIs} the curve stays
-                      below the line, which is what makes {shortDate(picked.jd)} the{" "}
-                      {isFirst(picked.kind) ? "first" : "last"} {isMorning(picked.kind) ? "morning" : "evening"}.
-                      The square is the moment of best visibility, and the lower axis gives
-                      the Sun&apos;s altitude at each time.
+                      The curve plots how many magnitudes {name} sits above the naked-eye
+                      detection threshold across twilight, sampled every two minutes. Values
+                      above zero indicate visibility. On the day {curve.besideIs}, the curve
+                      remains below zero throughout twilight, making {shortDate(picked.jd)} the{" "}
+                      {isFirst(picked.kind) ? "first" : "last"} visible {isMorning(picked.kind) ? "morning" : "evening"}.
+                      The square marks peak visibility, and the bottom axis shows solar altitude.
                     </p>
                   </>
                 )}
@@ -494,17 +491,16 @@ export function FirstVisibility({ engine, initialPreset = "sirius" }: FirstVisib
                   <>
                     <CrescentPlot days={crescent} ev={picked} />
                     <p className="note">
-                      Each bar is Yallop&apos;s q for one {picked.kind === "evening_first" ? "evening" : "morning"}{" "}
-                      around the new Moon. Above the B line (−0.014) the crescent is visible
-                      to the naked eye under perfect conditions, and above the A line (0.216)
-                      easily. The event is the {picked.kind === "evening_first" ? "first evening" : "last morning"}{" "}
-                      above the B line: {dateText(picked.jd)}, zone {picked.zone}, with the Moon{" "}
+                      Each bar shows Yallop&apos;s q score for one {picked.kind === "evening_first" ? "evening" : "morning"}{" "}
+                      around conjunction. Scores above the B threshold (−0.014) are visible to
+                      the unaided eye under clear conditions, and scores above the A threshold
+                      (0.216) are easily visible. The selected event is the{" "}
+                      {picked.kind === "evening_first" ? "first evening" : "last morning"} clearing
+                      the B line: {dateText(picked.jd)} (zone {picked.zone}), with the Moon{" "}
                       {picked.kind === "evening_first" ? "setting" : "rising"}{" "}
                       {Math.round(picked.lagMinutes ?? 0)} minutes {picked.kind === "evening_first" ? "after" : "before"} the Sun.
-                      The three fainter lines are the thresholds of zones C, D, and E.
-                      A bar that reaches the top is cut there and its label gives the full
-                      value. Where the label reads none, the Moon is on the wrong side of
-                      the Sun and there is no crescent to test.
+                      Fainter lines mark zones C, D, and E; bars labeled &ldquo;none&rdquo; indicate
+                      the Moon set before (or rose after) the Sun.
                     </p>
                   </>
                 )}
@@ -556,8 +552,8 @@ export function FirstVisibility({ engine, initialPreset = "sirius" }: FirstVisib
               )}
             <p className="note">
               {moon
-                ? "q is Yallop's score for the evening or morning and the zone is its reading. Lag is the time between sunset and moonset, or moonrise and sunrise. \"Easily by\" is the first evening in zone A."
-                : "Alt is the body's altitude and Sun the Sun's at the moment of best visibility. Margin is the magnitudes to spare. Arcus is the Sun's depression as the body crossed the horizon that day, the arcus visionis the event implies."}
+                ? "q is Yallop's empirical visibility score and Zone is its classification. Lag is minutes between sunset and moonset (or moonrise and sunrise). \"Easily by\" shows the first date reaching zone A."
+                : "Alt and Sun give the body and solar altitudes at peak visibility. Margin is magnitudes above the visual threshold. Arcus is the implied arcus visionis (solar depression when the body crossed the horizon)."}
             </p>
           </section>
         </div>
@@ -578,30 +574,29 @@ export function FirstVisibility({ engine, initialPreset = "sirius" }: FirstVisib
       </div>
 
       <section className="tile s4 half">
-        <div className="tile__h"><b>M-1</b><span>How a day is decided</span></div>
+        <div className="tile__h"><b>M-1</b><span>Visibility model</span></div>
         <div className="tile__b prose">
           <p>
-            For each morning or evening the model follows the body up from
-            the horizon and asks, every two minutes, whether the eye could
-            pick it out. The sky&apos;s brightness there is the sum of the
-            night sky, twilight, and moonlight; the air dims the body along
-            its own path; and the eye has a threshold against that
-            background. The formulas are the ones B. E. Schaefer published
-            for the purpose. The Moon&apos;s crescent uses Yallop&apos;s q
-            test instead.
+            For each dawn or dusk, the solver steps every two minutes as the
+            body clears or approaches the horizon and compares its extinguished
+            magnitude against the naked-eye contrast threshold. Background sky
+            brightness combines night-sky glow, twilight scattering, and
+            moonlight using B. E. Schaefer&apos;s published equations. Lunar
+            crescents use B. D. Yallop&apos;s empirical q criterion instead.
           </p>
         </div>
       </section>
       <section className="tile s4 half">
-        <div className="tile__h"><b>M-2</b><span>The window</span></div>
+        <div className="tile__h"><b>M-2</b><span>Atmospheric window</span></div>
         <div className="tile__b prose">
           <p>
-            Nobody knows the haze on a morning three thousand years ago, so
-            each event is computed three times: at the stated extinction, and
-            at that value less and plus 0.05. The window runs from the event
-            under the clearer sky to the event under the hazier one. For a
-            bright star it is two or three days, and for Mars it can be three
-            weeks. Treat the window, and not the single date, as the answer.
+            Because local atmospheric haze on a historical date cannot be known
+            exactly, each event is solved at the selected extinction and at
+            ±0.05 magnitudes per air mass. The resulting window spans the
+            clearer-sky and hazier-sky dates (typically two to three days for
+            bright stars, and up to three weeks for slow Mars conjunctions).
+            Downstream analysis should use the full window rather than a single
+            nominal date.
           </p>
         </div>
       </section>
@@ -609,13 +604,12 @@ export function FirstVisibility({ engine, initialPreset = "sirius" }: FirstVisib
         <div className="tile__h"><b>M-3</b><span>Limits</span></div>
         <div className="tile__b prose">
           <p>
-            The model is for the naked eye, over a flat horizon at the
-            observer&apos;s height, with one extinction for the whole sky and
-            the whole season. Observed dates scatter by several days around
-            any model, from weather and from the observer. Before about 800
-            BCE the uncertainty in the clock correction can move a marginal
-            crescent date by a day. Dates before 15 October 1582 are in the
-            Julian calendar.
+            Calculations assume unaided naked-eye vision over a flat horizon at
+            the observer&apos;s elevation with uniform seasonal extinction.
+            Real-world sightings vary by several days with weather and observer
+            acuity. Before roughly 800 BCE, ΔT clock uncertainty can shift a
+            marginal lunar crescent date by one day. Dates prior to 15 October
+            1582 use the Julian calendar.
           </p>
         </div>
       </section>

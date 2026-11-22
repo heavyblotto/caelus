@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Architecture",
-  description: "How the four packages compose end to end: place and local time through caelus-birth, caelus, caelus-wheel, and optional caelus-mcp.",
+  description: "How the Caelus packages layer together: timezone lookup in caelus-birth, calculations in caelus, SVG rendering in caelus-wheel, and optional caelus-mcp tools.",
   path: "/docs/architecture",
 });
 
@@ -10,26 +10,28 @@ export const metadata = pageMetadata({
 
 # Architecture
 
-The packages are layers, not alternatives. A real app threads a birth event
-through all of them; each does one job and hands a plain object to the next.
+The Caelus packages form a layered pipeline rather than competing options. A
+typical application passes birth data sequentially through the packages, with
+each step handing plain structured objects to the next:
 
 ```text
-place + local time
+location + local time
     → caelus-birth    resolve IANA zone from coordinates, local → UT (DST-safe)
-    → caelus          positions, houses, aspects from the UT instant
+    → caelus          positions, houses, aspects from the UT timestamp
     → caelus-wheel    SSR-safe SVG wheel from the chart object
-    → caelus-mcp      (optional) the same engine, exposed as AI tools
+    → caelus-mcp      (optional) expose the engine as MCP tools for AI clients
 ```
 
-Only `caelus-birth` carries runtime dependencies (timezone data); the core
-engine stays zero-dependency and I/O-free, and the wheel renders to a string.
-That split is why the same chart code runs in the browser, on edge, in Node,
-and behind MCP.
+Only `caelus-birth` bundles external data (offline timezone boundaries and tzdb
+rules). Because `caelus` stays I/O-free with zero runtime dependencies and
+`caelus-wheel` outputs plain SVG markup, the same calculation and rendering code
+runs in browsers, edge workers, Node.js servers, and MCP hosts.
 
-## One component, end to end
+## End-to-end example component
 
-This is the whole pipeline in a single server component, birth input to
-rendered wheel, with the timezone resolved for you:
+Here is the complete pipeline inside a single React server component, taking
+local wall-clock birth details and rendering an SVG wheel with timezone
+resolution built in:
 
 <CodeBlock
   lang="tsx"
@@ -61,31 +63,31 @@ export function NatalWheel() {
 }`}
 />
 
-`localToChart` resolves the IANA zone from the coordinates, converts the local
-time to UT, and runs `engine.chart`, returning the chart plus a `status`
-(`ok`, `ambiguous`, or `nonexistent`) so DST edge cases surface instead of
-silently producing a wrong chart. See
-<a href="/docs/edge-cases">Edge Cases &amp; Stability</a> for those cases.
+`localToChart` resolves the IANA timezone from latitude and longitude, converts
+local time to UT, and runs `engine.chart`. It also returns a `status` flag
+(`ok`, `ambiguous`, or `nonexistent`) so daylight saving ambiguities surface
+explicitly rather than producing silent chart errors. See{" "}
+<a href="/docs/edge-cases">Edge Cases &amp; Stability</a> for details on DST
+handling.
 
-## Where each package fits
+## Package responsibilities
 
-| Layer | Package | Input → output | Runtime deps |
+| Layer | Package | Input and output | Runtime deps |
 | --- | --- | --- | :---: |
-| Time & place | `caelus-birth` | local time + coords → UT + zone + status | tz data |
-| Engine | `caelus` | UT instant + location → chart object | none |
-| Render | `caelus-wheel` | chart object → SVG string | none |
-| Agents | `caelus-mcp` | MCP tool call → chart payload | MCP SDK |
+| Time & location | `caelus-birth` | local time + coordinates to UT + zone + status | tz data |
+| Core engine | `caelus` | UT timestamp + coordinates to `Chart` object | none |
+| Rendering | `caelus-wheel` | `Chart` object to SVG markup | none |
+| AI tools | `caelus-mcp` | MCP tool call to structured chart payload | MCP SDK |
 
-## Start from the template
+## Starter template
 
-[`caelus-starter`](https://github.com/heavyblotto/caelus-starter) is this exact
-pipeline as a deployable Next.js app: a birth form, `caelus-birth` timezone
-handling, a server-rendered `caelus-wheel`, and an optional reading route. Clone
-it rather than wiring the layers from scratch.
+[`caelus-starter`](https://github.com/heavyblotto/caelus-starter) packages this
+exact architecture as a deployable Next.js application complete with a birth
+form, `caelus-birth` timezone handling, server-rendered `caelus-wheel` SVGs, and
+an optional reading endpoint.
 
-See the <a href="/docs/quickstart">Quickstart</a> for the engine alone, the
-<a href="/docs/mcp">MCP Setup</a> for the agent layer, and
-<a href="/docs/recipes">Recipes</a> for queries and event search.
-<a href="/docs/electional">Electional Search</a> threads this same pipeline
-through a richer use case: scanning a window for the best moment, not just
-rendering one fixed instant.
+Next steps: read the <a href="/docs/quickstart">Quickstart</a> to get started
+with the core engine, <a href="/docs/mcp">MCP Setup</a> for AI tool integration,
+<a href="/docs/recipes">Recipes</a> for query and event patterns, or{" "}
+<a href="/docs/electional">Electional Search</a> to see how the pipeline scales
+across multi-day search windows.

@@ -1,16 +1,17 @@
 # Binary packs (CPK1)
 
-A Chebyshev pack is the engine's largest kind of data: a body's heliocentric
-(or, for the Moon, geocentric) position as piecewise polynomials, a few
-thousand to a few tens of thousands of segments each. As JSON, the seventeen
-planet, Earth, and Moon packs were 137 MB, and most of those bytes were
-decimal digits the fits cannot justify. A coefficient was printed to 16
-digits; the series it belongs to is good to seven or eight.
+Chebyshev packs account for most of the ephemeris data volume: each pack stores
+piecewise polynomial coefficients for a body's heliocentric position (or
+geocentric position for the Moon) across thousands to tens of thousands of time
+segments. Stored as JSON, the seventeen planet, Earth, and Moon packs totaled
+137 MB, largely because coefficients were serialized to 16 decimal digits even
+though the underlying series is accurate to seven or eight digits.
 
-CPK1 stores each coefficient as an integer multiple of a quantum that sits
-well below the pack's own fit residual. The seventeen packs are 27 MB in this
-form, and the largest is 8.5 MB. Three era packs minted since (Uranus,
-Neptune, and Pluto for 3000 BCE to 1000 CE) add 0.4 MB.
+CPK1 quantizes each coefficient as an integer multiple of a power-of-two quantum
+well below the pack's fit residual. In CPK1 format, the seventeen packs total
+27 MB on disk, with the largest single pack at 8.5 MB. Three additional
+classical era packs (Uranus, Neptune, and Pluto for 3000 BCE to 1000 CE) add
+0.4 MB.
 
 ## Layout
 
@@ -73,16 +74,18 @@ between 0.25 and 0.26.
 
 ## Loading packs on demand
 
-A browser bundle carries the embedded tier. `pack-loader.ts` is the path from
-there to the full packs for a host with no filesystem: a browser, a
-Cloudflare Worker, or Node.
+Browser and worker bundles include the embedded data tier by default.
+`pack-loader.ts` loads full binary packs on demand for environments without
+local filesystem access (browsers, Cloudflare Workers, or sandboxed Node).
 
-`loadPacks(base, manifest, entries, fetchPack)` fetches the packs it is
-handed, checks each against the manifest, decodes it, and returns engine data
-with the packs placed over `base` in the fields `loadNodeData` uses.
-`selectPacks(manifest, { bodies, fromYear, toYear })` chooses the entries: the
-packs of the bodies named, the Earth's for the Sun and for every planet, and
-only the eras the years touch.
+`loadPacks(base, manifest, entries, fetchPack)` downloads the requested pack
+files, verifies each file's size and SHA-256 digest against the manifest,
+decodes them, and merges them into a copy of `base` matching the structure
+returned by `loadNodeData`.
+`selectPacks(manifest, { bodies, fromYear, toYear })` selects only the packs
+needed for a query: the packs for the requested bodies, the corresponding Earth
+packs (needed for geocentric positions of the Sun and planets), and only the
+eras intersecting `[fromYear, toYear]`.
 
 The manifest is JSON:
 
@@ -108,18 +111,17 @@ The manifest is JSON:
 default pack and the slab's name otherwise. `from` and `to` are the whole
 astronomical years the pack covers.
 
-The loader keeps three promises. It fetches only the entries passed to it, and
-each must be one the manifest lists, with a plain relative file name. It
-compares a fetched file's length and its SHA-256, computed with Web Crypto,
-against the manifest before decoding a byte, and rejects with
-`PackIntegrityError` on a mismatch. It has no dependency.
+The loader enforces three guarantees. It fetches only the entries explicitly
+requested, and every entry must appear in the manifest with a plain relative
+filename. Before decoding any data, it verifies both byte length and Web Crypto
+SHA-256 checksum against the manifest and throws `PackIntegrityError` on any
+mismatch. It has zero external dependencies.
 
-`pack-loader.test.ts` checks that a matching pack loads, that one changed bit
-and one missing byte are each refused, that nothing outside the request is
-fetched, and that an engine on the loader's output returns the positions of
-an engine on `loadNodeData` with `===`: 28 positions at four instants from
-2500 BCE to 1990. The same call was run once inside workerd, where it
-returned the Node loader's positions and refused an altered pack.
+`pack-loader.test.ts` verifies that valid packs load cleanly, that single-bit
+mutations or truncated responses are rejected, that unrequested packs are never
+fetched, and that an engine initialized with loaded packs matches `loadNodeData`
+positions strictly (`===`) across 28 positions from 2500 BCE to 1990 CE. The same
+verification passed inside Cloudflare `workerd`.
 
 ### Publishing
 

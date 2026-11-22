@@ -576,9 +576,9 @@ export const SKY_PRESETS: SkyPreset[] = [
   {
     id: "hadrian",
     label: "Horoscope of Hadrian",
-    note: "The signs usually quoted from Hephaestio of Thebes. Neugebauer and "
-      + "Van Hoesen date it to 24 January 76 CE. The text's zodiac ran a few "
-      + "degrees ahead of the tropical one, so each sign is widened by 6°.",
+    note: "Planetary signs recorded by Hephaestio of Thebes and dated by Neugebauer "
+      + "and Van Hoesen to January 24, 76 CE. Because the ancient zodiac was offset "
+      + "a few degrees relative to tropical longitudes, each sign is padded by 6°.",
     query: {
       signs: {
         saturn: sign("Capricorn"), jupiter: sign("Aquarius"), mars: sign("Pisces"),
@@ -591,8 +591,8 @@ export const SKY_PRESETS: SkyPreset[] = [
   {
     id: "babylon",
     label: "Babylonian tablet, four planets",
-    note: "The four signs usually quoted for the oldest surviving Babylonian "
-      + "horoscope, which A. Sachs dated to 29 April 410 BCE.",
+    note: "The four planetary signs quoted from the oldest surviving Babylonian "
+      + "horoscope tablet, dated by A. Sachs to April 29, 410 BCE.",
     query: {
       signs: {
         saturn: sign("Cancer"), jupiter: sign("Pisces"), mars: sign("Gemini"),

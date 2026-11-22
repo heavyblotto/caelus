@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Edge Cases & Stability",
-  description: "Supported date range, polar house fallback, civil-time hazards, the east-positive longitude convention, circumpolar rise/set, missing data packs, float output across runtimes, and the versioning contract.",
+  description: "Supported date ranges, polar house fallbacks, daylight saving hazards, east-positive coordinates, missing data packs, cross-runtime float differences, and semver guarantees.",
   path: "/docs/edge-cases",
 });
 
@@ -10,18 +10,16 @@ export const metadata = pageMetadata({
 
 # Edge Cases & Stability
 
-What the engine does at the boundaries, and what stays compatible as the
-packages move toward 1.0. Read this before wiring Caelus into anything that
-serves real users.
+Review these boundary behaviors and compatibility commitments before shipping
+Caelus in a production application.
 
 ## Supported date range
 
-Positions are validated for **1000–3000** for the planets, Pluto, and the Moon
-(every body carries a Chebyshev pack fit to JPL Horizons across the span). The
-small bodies (asteroids + Chiron) are fitted for **1600–2484**, the widest
-window Horizons serves for them. The hosted edge endpoint ships only the
-embedded Moon tier, so it serves a narrower window and returns `400` outside
-it:
+Planetary, lunar, and Pluto positions are validated across **1000–3000** using
+Chebyshev packs fitted to JPL Horizons. Small bodies (asteroids and Chiron)
+span **1600–2484**, matching the widest interval Horizons provides. Because the
+hosted edge endpoint bundles only the compact Moon tier, it accepts a narrower
+window and returns HTTP `400` outside it:
 
 <CodeBlock
   lang="json"
@@ -29,38 +27,41 @@ it:
   code={`{ "error": "date out of this endpoint's embedded tier (1920-2080); the engine validates 1000-3000" }`}
 />
 
-`chart()` does **not** throw for an out-of-range date: a body outside its
-pack's fitted span is omitted from `chart.bodies` and listed in
-`chart.unavailable`, with a per-chart warning. (`position()` on a single body
-out of range does throw a `RangeError`.) Do not read a body without checking
-`unavailable`, but also do not treat a far date as an error on its own,
-since a year outside the range usually means a parsing or timezone bug
-upstream.
+`chart()` does not throw when a timestamp falls outside a body's fitted span:
+excluded bodies are omitted from `chart.bodies`, recorded in
+`chart.unavailable`, and accompanied by a chart warning. (`position()` on a
+single out-of-range body does throw `RangeError`.) Always check
+`chart.unavailable` before indexing a body, and treat out-of-range warnings on
+modern dates as a likely sign of an upstream date-parsing or timezone bug.
 
-## Longitude is east-positive
+## East-positive longitude convention
 
-Caelus uses the **east-positive** convention: New York is `-74.0`, Tokyo is
-`+139.7`. Many older astrology libraries are west-positive, so a sign flip here
-silently lands the chart on the wrong side of the planet. The REST endpoint
-rejects anything outside `[-180, 180]` and states the convention in the error.
+Caelus follows the standard geographic convention of **east-positive**
+longitudes: New York is `-74.0`, and Tokyo is `+139.7`. Many older astrology
+libraries expect west-positive longitudes, so passing an unflipped sign silently
+places the chart on the opposite side of Earth. The REST endpoint rejects
+values outside `[-180, 180]` and documents the convention in its error message.
 
-## Local time vs UTC
+## Local time vs. UTC
 
-The engine takes **UT calendar components** and does no timezone arithmetic.
-You resolve local civil time to UTC yourself, or let
-[`caelus-birth`](/docs/quickstart) do it from a place and an IANA zone. Two civil
-times need a deliberate choice the engine cannot make for you:
+The core engine expects **UT calendar components** and performs no timezone
+conversion. Convert civil times yourself or use [`caelus-birth`](/docs/quickstart)
+to resolve an IANA timezone from geographic coordinates. Watch out for two
+daylight saving transitions that require explicit handling:
 
-- **Nonexistent times** (spring-forward gap, e.g. 02:30 on a DST start date)
-  have no UTC instant: reject them or snap to the gap edge.
-- **Ambiguous times** (fall-back overlap) map to two instants: pick the offset
-  explicitly rather than trusting a default.
+- **Nonexistent times** (spring-forward gaps, such as 02:30 AM on a DST start
+  morning) never occurred on the clock: reject them or snap to the transition
+  boundary.
+- **Ambiguous times** (fall-back overlaps) map to two distinct UT timestamps:
+  prompt the user to pick the earlier or later offset rather than silently
+  guessing.
 
 ## Polar house fallback
 
-Placidus and Koch are undefined above the polar circles (|lat| ≳ 66°, or where
-the MC degree is circumpolar). Rather than throw, `chart()` falls back to
-whole-sign and tells you, so you never get silently wrong cusps:
+Placidus and Koch houses are mathematically undefined inside the polar circles
+(`|lat| ≳ 66°`, or wherever the Midheaven's degree never rises or sets). Instead
+of throwing an error or returning corrupted cusps, `chart()` falls back to
+whole-sign houses and records what happened:
 
 <CodeBlock
   lang="typescript"
@@ -71,14 +72,15 @@ chart.houseSystem;          // "whole_sign" — Placidus undefined this far nort
 chart.houseSystemRequested; // "placidus"`}
 />
 
-Compare `houseSystem` against `houseSystemRequested` to detect the fallback.
-The quadrant-independent systems (Porphyry, Equal, Whole Sign) never fall back.
+Compare `chart.houseSystem` with `chart.houseSystemRequested` to detect when a
+fallback occurred. Non-quadrant systems (`porphyry`, `equal`, and `whole_sign`)
+never fall back.
 
-## Circumpolar rise/set
+## Circumpolar rise and set
 
-During polar day or polar night a body never crosses the horizon, so
-`riseSet` returns `null` for that window. The same `null` means "no event
-before the search horizon," so always branch on it:
+During polar day or polar night, a celestial body may never cross the local
+horizon, causing `riseSet` to return `null`. Because `null` also signals that no
+event occurred within the search window, always guard against it:
 
 <CodeBlock
   lang="typescript"
@@ -91,65 +93,65 @@ if (t === null) {
 
 ## Event-search windows
 
-Event search is bounded by an explicit `[start, end]` and by each body's
-fitted range (1000–3000 for the planets, Pluto, and the Moon; 1600–2484 for
-the small bodies). An empty result means "nothing in this window," not
-"never"; widen the window and retry. Outer-planet returns and crossings can yield
-multiple hits around a retrograde loop, so the search returns an array, not a
-single date.
+Event searches operate inside an explicit `[start, end]` range and respect each
+body's fitted span (1000–3000 for planets, Pluto, and the Moon; 1600–2484 for
+asteroids and Chiron). An empty array simply means zero matches inside that
+interval, so widen your bounds if needed. Because retrograde loops can produce
+multiple exact crossings or returns in quick succession, search functions
+return arrays of timestamps rather than single dates.
 
 ## Missing data packs
 
-`loadNodeData` degrades gracefully: if an extended pack is absent it falls back
-**per body** to the embedded tier instead of throwing. A body that exists only
-in an extended pack (an asteroid, a Uranian point, a fixed star) is simply
-unavailable, while core bodies keep working at embedded precision. Check
-[Data Tiers](/docs/data-tiers) for which capabilities need which pack.
+When optional data files are absent on disk, `loadNodeData` degrades **per
+body** to the embedded dataset instead of failing. Bodies defined exclusively
+in external packs (asteroids, Uranian points, and deep-field stars) become
+unavailable, while core planets continue computing at embedded precision. See
+[Data Tiers](/docs/data-tiers) for details on pack coverage.
 
-## Float output across runtimes
+## Floating-point output across runtimes
 
-The engine's floating-point output is not bit-identical across JavaScript
-runtimes. The language standard does not fix how `Math.sin`, `Math.atan2`,
-`Math.exp`, and the other transcendental functions round, and runtimes ship
-different math libraries. Node and workerd, the Cloudflare Workers runtime,
-both run V8, and of 22 `Math` functions probed with 20,000 inputs each, 17
-returned different bits for at least one input.
+Raw floating-point results from JavaScript runtimes are not bitwise identical.
+The ECMAScript specification leaves rounding behavior for transcendental
+functions (`Math.sin`, `Math.atan2`, `Math.exp`, and others) to the host runtime,
+and engines ship slightly different math libraries. Even between Node.js and
+workerd (Cloudflare Workers), both based on V8, 17 of 22 tested `Math` functions
+produced different lowest-order bits across 20,000 test inputs.
 
-The effect on a chart stays in the last one or two digits of a double. Six
-sample charts were computed under both runtimes. In each response, between 7
-and 19 of roughly 160 numbers differed, and the keys, strings, and ordering
-were identical. The largest difference was 1.1e-12 degrees, about four
-billionths of an arcsecond, which is more than eight orders of magnitude below
-the one-arcsecond level the planets are validated to. In the chart for
-1990-06-10 14:30 UT at Tampa the largest difference was 5e-14 degrees.
+In practice, these rounding differences stay tiny. Across six benchmark charts
+compared between Node.js and workerd, between 7 and 19 of roughly 160 numeric
+fields differed in their final 1–2 mantissa bits while all keys, strings, and
+arrays stayed identical. The maximum difference observed was 1.1e-12 degrees
+(roughly four billionths of an arcsecond), more than eight orders of magnitude below the
+engine's one-arcsecond validation floor. On the 1990-06-10 14:30 UT Tampa chart,
+the largest discrepancy was 5e-14 degrees.
 
-Raw float output should not be hashed, diffed byte for byte, or used as a
-cache key when the values can come from more than one runtime, or from one
-host across a runtime upgrade. Compare with a tolerance, or use
-[Canonical Mode](/docs/canonical), which quantizes to integers on a declared
-grid and is bit-stable across machines, browsers, and languages. The hosted
-`/api/chart` endpoint returns raw floats, so its last digits depend on the
-runtime that serves it.
+Because low-order bits vary across runtimes, avoid hashing raw float
+responses, diffing them byte-for-byte, or using them directly as cross-runtime
+cache keys. Compare values with a small numeric tolerance, or enable
+[Canonical Mode](/docs/canonical), which quantizes positions onto an integer
+grid so payloads and digests stay bitwise identical across runtimes and
+languages. (Note that `/api/chart` returns raw floating-point JSON dependent on
+the worker runtime.)
 
-## Versioning &amp; stability
+## Versioning and API stability
 
-All four packages (`caelus`, `caelus-mcp`, `caelus-birth`, `caelus-wheel`)
-ship in **lockstep** at one version. Upgrade them together and pin exact
-versions in production; mixing majors across the set is unsupported.
+All four core packages (`caelus`, `caelus-mcp`, `caelus-birth`, `caelus-wheel`)
+publish in **lockstep** at matching version numbers. Keep them pinned together
+and avoid mixing minor versions across packages.
 
-While the suite is pre-1.0 it follows **semver-zero**: a minor bump (`0.x.0`)
-may carry a breaking change, a patch (`0.x.y`) will not. We aim to keep these
-stable through 1.0:
+Pre-1.0 releases follow **semver-zero** conventions: minor bumps (`0.x.0`) may
+introduce breaking changes, while patch bumps (`0.x.y`) stay backwards
+compatible. These interfaces are intended to remain stable through 1.0:
 
-- The core read paths: `new Engine(data)`, `chart()`, `chartAt()`, `position()`,
-  `longitude()`, `when()`, the event-search entry points, and `julianDay()`.
-- The two data suppliers, `embeddedData` and `loadNodeData()`.
-- Result shapes (the chart object, `Position`): changes are additive.
+- Core calculation APIs: `new Engine(data)`, `chart()`, `chartAt()`,
+  `position()`, `longitude()`, `when()`, event-search functions, and
+  `julianDay()`.
+- Standard data loaders: `embeddedData` and `loadNodeData()`.
+- Primary result shapes (`Chart`, `Position`): future additions will be purely
+  additive.
 
-Expect these to still move before 1.0: the derived-charts surface (0.7.0), the
-turbo tier (0.8.0), the MCP tool, resource, and prompt schemas, and any
-low-level helper not re-exported from the package root. Treat unexported
-internals as unstable.
+Surfaces still iterating before 1.0 include derived charts (0.7.0), the turbo
+tier (0.8.0), MCP tool/resource schemas, and unexported internal helpers.
 
-See the [API Reference](/docs/api) for every signature and the
-[Changelog](/changelog) for what shipped per release.
+See the [API Reference](/docs/api) for full TypeScript signatures and the
+[Changelog](/changelog) for per-release notes.

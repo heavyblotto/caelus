@@ -4,7 +4,7 @@ import { pageMetadata } from "../../../lib/seo";
 export const metadata = pageMetadata({
   title: "Eclipses",
   description:
-    "List the solar and lunar eclipses in a span of years, see what one place sees of each, and draw the central path of a solar eclipse. Runs in your browser on the Caelus engine, with the calls that produced it.",
+    "Browse solar and lunar eclipses over a multi-year span, check local visibility from any coordinates, and map central eclipse paths in your browser.",
   path: "/instruments/eclipses",
 });
 

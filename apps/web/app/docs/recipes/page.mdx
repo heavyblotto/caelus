@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Recipes",
-  description: "The when() query language, event search, and rendering a chart wheel.",
+  description: "Querying time windows with when(), searching sky events, matching configurations, synthesizing geometric forms, and rendering chart wheels.",
   path: "/docs/recipes",
 });
 
@@ -10,11 +10,11 @@ export const metadata = pageMetadata({
 
 # Recipes
 
-## Query the sky with when()
+## Query time intervals with `when()`
 
-The engine answers "where is the body?"; `when()` answers "when is the
-configuration true?" over a time range. Predicates combine with `allOf`,
-`anyOf`, and `notOf`.
+Use `when()` to find every interval in a date range during which a compound
+condition holds true. Combine individual sky predicates using `allOf`, `anyOf`,
+and `notOf`:
 
 <CodeBlock
   lang="typescript"
@@ -35,10 +35,10 @@ const intervals = when(
 );`}
 />
 
-## Event search
+## Search sky events
 
-With the Node data tier, search rise/set, lunar phases, stations, and zodiac
-crossings:
+With the Node data loader (or the embedded tier for lunar/solar basics), search
+horizon events, lunar phases, planetary stations, and zodiac crossings:
 
 <CodeBlock
   lang="typescript"
@@ -50,10 +50,11 @@ lunarPhases(engine, jd, jd + 90);   // [[jd, "full"], ...]
 stations(engine, "mercury", jd, jd + 365);`}
 />
 
-## Match a configuration
+## Score similar sky configurations
 
-A chart reduces to a feature vector, so you can score how closely the sky at any
-instant resembles a target form, and search a range for the best match.
+Convert any timestamp's planetary state into a feature vector with
+`chartFeatures`, then rank dates in another interval by angular similarity
+using `searchConfigurations`:
 
 <CodeBlock
   lang="typescript"
@@ -72,11 +73,12 @@ const matches = searchConfigurations(engine, target, {
 });`}
 />
 
-## Compile a form from constraints
+## Synthesize planetary positions from constraints
 
-The compiler inverts (time, place) -> chart: give it geometric constraints and
-it finds the body longitudes that best satisfy them, flagging a form as
-impossible when even the best fit falls short.
+`compileForm` solves the inverse problem: pass geometric constraints on aspects,
+signs, and degrees and get synthetic planetary longitudes that minimize
+constraint residual, flagging `impossible` when the best solution still violates
+a requirement:
 
 <CodeBlock
   lang="typescript"
@@ -96,7 +98,8 @@ form.impossible;  // true when the worst constraint cannot be met`}
 
 ## Render a chart wheel
 
-`caelus-wheel` takes the chart object (or an MCP payload) and renders SSR-safe SVG.
+Pass any `Chart` object (or canonical JSON payload) to `ChartWheel` in
+`caelus-wheel` to render an SSR-compatible SVG diagram:
 
 <CodeBlock
   lang="tsx"
@@ -106,5 +109,5 @@ form.impossible;  // true when the worst constraint cannot be met`}
 <ChartWheel chart={chart} size={520} showAspects />;`}
 />
 
-See the <a href="/playground">Playground</a> for live wheels and the
-<a href="/docs/api"> API Reference</a> for the full surface.
+Try wheels interactively in the <a href="/playground">Playground</a> or browse
+full signatures in the <a href="/docs/api">API Reference</a>.

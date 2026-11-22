@@ -3,7 +3,7 @@ import { UncertaintyWheel } from "../../../components/docs/UncertaintyWheel";
 
 export const metadata = pageMetadata({
   title: "Uncertain Times",
-  description: "Find which facts of a chart survive an uncertain time: chartStability takes a window around the stated instant and reports, fact by fact, what holds across it and when each change happens.",
+  description: "Determine which chart placements and aspects remain valid when a birth or event time is uncertain using chartStability.",
   path: "/docs/uncertain-time",
 });
 
@@ -11,14 +11,16 @@ export const metadata = pageMetadata({
 
 # Uncertain times
 
-A chart is computed for one instant, and the instant is often not known that
-well. A birth certificate rounds to the quarter hour, a biography gives a date
-and no time, and an ancient observation carries a clock error of minutes.
-`chartStability` takes a window of time around the stated instant and reports
-which of the chart's facts hold across all of it.
+A chart is calculated for a single timestamp, yet birth records and historical
+sources rarely pin down the exact minute. Birth certificates often round to
+the quarter hour, biographies may record a date with no time, and ancient
+observations carry clock errors of several minutes. The `chartStability`
+function scans a time window around your target timestamp and reports which
+chart facts hold across the entire window and when any changing facts shift.
 
 The [Uncertain Time instrument](/instruments/uncertain-time) runs the same
-scan in the browser, with a track for each fact that changes.
+scan interactively in your browser, plotting a timeline track for every fact
+that changes.
 
 ```ts run
 import { Engine, chartStability, julianDay } from "caelus";
@@ -37,32 +39,34 @@ summary;                          // { facts: 61, stable: 60 }
 facts.filter((f) => !f.stable);   // the true node's house, and nothing else
 ```
 
-With the time good to fifteen minutes either way, 60 of the chart's 61 facts
-are settled. The one that is not is the house of the true node, which moves
-from the fifth to the fourth at 18:43 UT.
+With a 15-minute window on either side of the nominal time, 60 of the chart's
+61 facts stay fixed. Only the house placement of the true lunar node changes,
+shifting from the fifth house to the fourth at 18:43 UT.
 
-## What a fact is
+## Supported chart facts
 
-A fact is one discrete statement the chart makes. `chartStability` checks six
-kinds:
+In `chartStability`, a fact is a single discrete statement derived from a chart.
+The function tracks six kinds:
 
 | Kind | Subject | Value |
 |---|---|---|
-| `angle_sign` | `asc` or `mc` | The sign on the angle |
+| `angle_sign` | `asc` or `mc` | The angle's zodiac sign |
 | `sect` | `chart` | `"day"` or `"night"` |
-| `sign` | A body | The body's sign |
-| `house` | A body | The body's house, 1 to 12 |
+| `sign` | A planet or point | The body's zodiac sign |
+| `house` | A planet or point | The body's house number, 1 to 12 |
 | `retrograde` | A planet | `true` or `false` |
-| `aspect` | A pair, `"sun-moon"` | The aspect the pair is in, or `null` |
+| `aspect` | A pair, `"sun-moon"` | The active aspect name, or `null` |
 
-Each fact comes back with its `value` at the stated instant, a `stable` flag,
-the `share` of the window in which it has that value, and `segments`: the
-window cut into runs of one value. A boundary between two segments is an
-instant at which the fact changes, found to about a second.
+Each returned fact includes its `value` at the nominal timestamp, a `stable`
+flag, the `share` of the window during which that value holds, and `segments`,
+which splits the window into contiguous intervals of each value. Every boundary
+between segments marks a transition timestamp resolved to roughly one-second
+precision.
 
-## A date with no time
+## Scanning an entire day without a birth time
 
-Pass a half-width of twelve hours and the window is the whole day.
+Pass a half-width of twelve hours (`43200` seconds) to test the full calendar
+day when only a date is known:
 
 ```ts run
 const day = chartStability(engine, jd, {
@@ -72,20 +76,23 @@ const day = chartStability(engine, jd, {
 day.summary;   // { facts: 64, stable: 42 }
 ```
 
-For the same birth, 42 of 64 facts hold all day. Every body keeps its sign,
-every planet keeps its direction, and 20 of the 26 aspects that occur stay in
-orb. Both angles, the sect, and all thirteen house placements change, which is
-the usual reason a chart without a birth time is read without houses. The call
-takes 1.6 seconds in Node.
+Across the full 24-hour span for this same chart, 42 of 64 facts remain
+constant: every body stays in the same sign, every planet keeps the same motion
+direction, and 20 of the 26 active aspects remain within orb. Both angles, the
+chart sect, and all thirteen house placements change over the day, which is
+why charts without a birth time are typically read without house cusps. This
+full-day scan takes roughly 1.6 seconds in Node.js.
 
-Leave out `lat` and `lonEast` and the angles, houses, and sect are not
-computed at all. The result then covers signs, directions, and aspects.
+If you omit `lat` and `lonEast`, `chartStability` skips location-dependent
+calculations (angles, houses, and sect) and evaluates only signs, retrograde
+states, and aspects.
 
-## On the wheel
+## Visualizing uncertainty on the chart wheel
 
-`ChartWheel` from `caelus-wheel` can draw the window as well as the instant.
-Its `uncertainty` prop takes charts across the window in time order, and for
-each body and each angle it draws an arc over the longitudes passed through.
+`ChartWheel` in `caelus-wheel` can display the uncertainty range directly on
+a chart diagram. Its `uncertainty` prop accepts an array of charts sampled
+across the time window in chronological order and draws an arc showing how far
+each body and angle travels.
 
 ```tsx
 import { Engine, julianDay } from "caelus";
@@ -106,29 +113,31 @@ export default function Wheel() {
 
 <UncertaintyWheel />
 
-The arcs for the bodies sit just inside the zodiac ring and the arcs for the
-Ascendant and the Midheaven near the rim, the Ascendant outermost. An arc
-that crosses a sign boundary is heavier and carries a square on the boundary.
-Two samples are enough for the bodies. The angles turn about 15° an hour, so
-a window of hours needs a sample every half hour or so, and over a whole day
-the two angle arcs close into full circles. The
-[Uncertain Time instrument](/instruments/uncertain-time) draws this wheel for
-whatever window you set.
+Planetary range arcs appear just inside the zodiac ring, while Ascendant and
+Midheaven arcs sit near the outer rim (with the Ascendant outermost). Arcs that
+cross a sign boundary render thicker and display a square marker at the
+boundary. Two boundary samples are usually enough for planets, whereas the
+angles rotate roughly 15° per hour and require samples every 30 minutes across
+multi-hour windows (closing into complete circles over a 24-hour day). The
+[Uncertain Time instrument](/instruments/uncertain-time) draws these arcs for
+any window you configure.
 
-## Ancient dates
+## Ancient dates and ΔT uncertainty
 
-With no `halfWidthSeconds`, the window is the one-sigma uncertainty of ΔT at
-the chart's epoch. That is under a second for a modern chart, so every fact is
-stable. For a chart in 100 CE it is 155 seconds, enough to move the Ascendant
-by two thirds of a degree, and `chartStability` then reports which facts that
-clock error can change. The same uncertainty appears as the `delta_t_uncertain` warning on
-a chart and as the `epochSigma` block in canonical output.
+When you omit `halfWidthSeconds`, `chartStability` defaults to a window radius
+equal to the one-sigma uncertainty of ΔT at the chart's epoch. For modern
+dates, that uncertainty is under a second, so all facts stay stable by
+default. For a chart in 100 CE, ΔT uncertainty reaches 155 seconds, enough to
+shift the Ascendant by two-thirds of a degree, and `chartStability` reports
+which facts that clock margin puts at risk. The same uncertainty triggers the
+`delta_t_uncertain` warning on standard charts and appears in the `epochSigma`
+block of canonical output.
 
-## How well a position is known
+## Position uncertainty for a single body
 
-`positionUncertainty` answers the same question for one body's longitude. It
-returns two numbers and keeps them apart, because they are different kinds of
-number.
+To measure longitude uncertainty for an individual body rather than discrete
+chart facts, call `positionUncertainty`. It returns ephemeris model error and
+clock-induced error as separate numbers so they stay distinguishable:
 
 ```ts
 import { positionUncertainty, julianDay } from "caelus";
@@ -137,15 +146,14 @@ positionUncertainty(engine, "moon", julianDay(1500, 6, 1, 12, 0, 0, "julian"));
 // { modelBoundArcsec: 3, deltaTSigmaSeconds: 15.0, clockSigmaArcsec: 7.5, ... }
 ```
 
-`modelBoundArcsec` is the accuracy table's bound for the body: the largest
-error measured against JPL Horizons across the validated span. It is `null`
-when the instant lies outside the span the bound was measured over. The
-position is still computed there, and no bound is claimed for it.
+`modelBoundArcsec` is the body's worst-case error measured against JPL Horizons
+across the validated date range, or `null` when the timestamp falls outside
+that range (positions are still calculated outside the span, without a
+published accuracy guarantee). `clockSigmaArcsec` measures the one-sigma spread
+caused by ΔT uncertainty, equal to the body's angular speed multiplied by
+`deltaTSigmaSeconds`.
 
-`clockSigmaArcsec` is the one-sigma effect of the ΔT uncertainty on the
-body's longitude, which is the body's speed times the clock error.
-
-| Instant | Body | Model bound | ΔT sigma | Clock term |
+| Timestamp | Body | Model bound | ΔT sigma | Clock uncertainty |
 |---|---|---|---|---|
 | 2000 | Moon | 3″ | 0.06 s | 0.03″ |
 | 1500 | Moon | 3″ | 15 s | 7.5″ |
@@ -155,33 +163,35 @@ body's longitude, which is the body's speed times the clock error.
 | 1000 BCE | Moon | none published | 1,440 s | 711″ |
 | 1000 BCE | Saturn | none published | 1,440 s | 1.8″ |
 
-The Moon in 1500 is known to its 3″ model bound and smeared 7.5″ by the
-clock, so the clock already dominates. By 1000 BCE the Moon is uncertain by
-twelve minutes of arc while Saturn has moved less than two seconds.
+In 1500 CE, the Moon's 3″ ephemeris model bound is already smaller than the
+7.5″ spread caused by clock uncertainty. By 1000 BCE, the Moon's position
+varies by nearly twelve arcminutes while Saturn shifts by less than two
+arcseconds.
 
-## From an AI client
+## MCP integration
 
-The MCP server exposes this as the `chart_stability` tool. It takes the stated
-time, `uncertainty_minutes`, and an optional place, and it returns the stable
-facts as a list and each unstable fact with the times it changes. Setup is in
-the [MCP guide](/docs/mcp).
+AI clients can run this same scan via the `chart_stability` tool. It accepts a
+timestamp, `uncertainty_minutes`, and optional coordinates, returning the list
+of stable facts alongside transition timestamps for any unstable ones. Setup
+instructions are in the [MCP guide](/docs/mcp).
 
 ## Options
 
-| Option | Default | Meaning |
+| Option | Default | Description |
 |---|---|---|
-| `lat`, `lonEast` | none | The place. Both or neither. |
-| `halfWidthSeconds` | sigma of ΔT | Half the window |
-| `houseSystem` | `"placidus"` | As for `chartAt` |
-| `zodiac` | `"tropical"` | As for `chartAt` |
-| `orbs` | the default orbs | Per-aspect orb overrides |
-| `stepSeconds` | `120` | Sampling step before bisection |
+| `lat`, `lonEast` | `none` | Observer coordinates in degrees (supply both or omit both). |
+| `halfWidthSeconds` | ΔT one-sigma | Half-width of the time window in seconds. |
+| `houseSystem` | `"placidus"` | House system identifier, as in `chartAt`. |
+| `zodiac` | `"tropical"` | Zodiac reference frame, as in `chartAt`. |
+| `orbs` | default orbs | Optional per-aspect orb overrides. |
+| `stepSeconds` | `120` | Initial sampling step in seconds before boundary bisection. |
 
 ## Limits
 
-- The scan samples every two minutes. A fact that changes and changes back
-  inside one step is missed, which can happen to a body sitting on a house
-  cusp in a quadrant system near the polar circles.
-- The window is a time window. Uncertainty in the place is not modelled.
-- An aspect is treated as present or absent at the engine's orbs. A pair that
-  stays in orb while the aspect tightens is stable.
+- Because the scan samples every two minutes by default, a fact that flips and
+  reverts within a single step can be missed (most likely when a body sits right
+  on a quadrant house cusp at high latitudes).
+- Time windows do not account for uncertainty in geographic coordinates.
+- Aspects are tracked as binary states (in orb or out of orb); an aspect whose
+  exactness tightens or loosens while remaining within orb is reported as
+  stable.

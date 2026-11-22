@@ -5,7 +5,7 @@ import { pageMetadata } from "../../lib/seo";
 export const metadata = pageMetadata({
   title: "Instruments",
   description:
-    "Single-purpose pages built on the Caelus engine. Each takes a small input, computes in your browser, and shows the call that produced the result.",
+    "Interactive browser tools built on Caelus. Enter inputs, run calculations locally, and view the TypeScript API call behind each result.",
   path: "/instruments",
 });
 
@@ -20,10 +20,10 @@ export default function InstrumentsPage() {
           </div>
           <div>
             <p>
-              An instrument answers one question from a small input. It
-              computes in your browser on the embedded data tier, and it shows
-              the call that produced the result so you can run the same thing
-              in your own code.
+              Each interactive instrument answers a focused astronomical or
+              astrological question directly in your browser using the embedded
+              ephemeris tier, and displays the TypeScript code so you can run
+              the same calculation in your own app.
             </p>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { pageMetadata } from "../../../lib/seo";
 export const metadata = pageMetadata({
   title: "First visibility",
   description:
-    "Find the days in a year on which a star, a planet, or the Moon is last seen and first seen again from one place: heliacal risings and settings and the first lunar crescent. Runs in your browser on the Caelus engine, with the call that produced it.",
+    "Find the dates in a year when a star, planet, or the Moon disappears into solar glare and reappears from a given location, including heliacal risings, settings, and the first lunar crescent.",
   path: "/instruments/first-visibility",
 });
 

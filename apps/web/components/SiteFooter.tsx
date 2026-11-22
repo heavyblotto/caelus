@@ -23,7 +23,7 @@ export default function SiteFooter() {
             Caelus
           </Link>
           <p className="site-footer__claim dim small">
-            {SITE.tagline} Clean-room, MIT, no ephemeris files.
+            {SITE.tagline} MIT-licensed with embedded ephemeris data.
           </p>
           {/* The sky god from the 404, small: a signature, not a mascot. */}
           <div className="site-footer__mark" aria-hidden>

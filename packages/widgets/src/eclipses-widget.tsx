@@ -174,17 +174,17 @@ export function Eclipses({ engine, year }: EclipsesProps): ReactElement {
         </div>
         <div>
           <p>
-            This instrument lists the solar and lunar eclipses in a span of
-            years and says what one place sees of each. For a solar eclipse
-            it also draws the central path, where the eclipse is total or
-            annular.
+            Browse solar and lunar eclipses over a range of years and inspect
+            local visibility, magnitude, and contact times for any coordinates.
+            Selecting a central solar eclipse plots its path of totality or
+            annularity across Earth.
           </p>
         </div>
       </div>
 
       <div className="app">
         <form className="tile" onSubmit={(e) => { e.preventDefault(); if (ok) void run(query); }}>
-          <div className="tile__h"><b>IN</b><span>Span and place</span></div>
+          <div className="tile__h"><b>IN</b><span>Date range and observer coordinates</span></div>
           <div className="fld fld--pair">
             <span />
             <label htmlFor="ec-from">Years</label>
@@ -238,10 +238,10 @@ export function Eclipses({ engine, year }: EclipsesProps): ReactElement {
             : <button className="run run--go" type="submit" disabled={!ok}>Find eclipses</button>}
           <p className="note">
             {ok
-              ? `${eraYear(query.startYear)} to ${eraYear(query.endYear)}. `
-              : `Years run from ${ECLIPSE_SPAN.from} to ${ECLIPSE_SPAN.to}, first before last, at most ${ECLIPSE_SPAN.maxYears} at a time. `}
-            Years are astronomical, so 0 is 1 BCE. Latitude is north positive
-            and longitude is east positive, so Madrid is -3.7.
+              ? `Span: ${eraYear(query.startYear)} to ${eraYear(query.endYear)}. `
+              : `Enter a range between ${ECLIPSE_SPAN.from} and ${ECLIPSE_SPAN.to} covering at most ${ECLIPSE_SPAN.maxYears} years. `}
+            Years use astronomical numbering (0 = 1 BCE). Latitude is north-positive
+            and longitude is east-positive (Madrid is -3.7).
           </p>
         </form>
 
@@ -292,7 +292,7 @@ export function Eclipses({ engine, year }: EclipsesProps): ReactElement {
 
           <section className="tile">
             <div className="tile__h">
-              <b>TBL</b><span>Greatest eclipse, and what {where} sees</span>
+              <b>TBL</b><span>Eclipses and local visibility at {where}</span>
               <i>times in UT</i>
             </div>
             {rows.length === 0
@@ -380,14 +380,14 @@ export function Eclipses({ engine, year }: EclipsesProps): ReactElement {
                   )}
                 </svg>
                 <p className="note">
-                  The path runs from {clockText(trace.points[0].jd)} to{" "}
+                  Central path spans {clockText(trace.points[0].jd)} to{" "}
                   {clockText(trace.points[trace.points.length - 1].jd)} UT.
                   {trace.widthAtMaxKm !== null
-                    ? ` At greatest eclipse (the square) it is ${Math.round(trace.widthAtMaxKm)} km wide.`
+                    ? ` At greatest eclipse (square marker), path width is ${Math.round(trace.widthAtMaxKm)} km.`
                     : " The square marks greatest eclipse."}
-                  {plot.place ? ` The cross is ${where}.` : ` ${where} is outside this plot.`}{" "}
-                  The band is the area between the two limits of the path. This is a
-                  plain latitude and longitude plot with no coastlines.
+                  {plot.place ? ` The cross marks ${where}.` : ` ${where} lies outside this plot region.`}{" "}
+                  The shaded band indicates the northern and southern limits on a
+                  simple latitude/longitude grid without coastlines.
                 </p>
               </>
             )}
@@ -397,28 +397,28 @@ export function Eclipses({ engine, year }: EclipsesProps): ReactElement {
         <div className="col code">
           <section className="tile">
             <div className="tile__h">
-              <b>TS</b><span>The calls</span>
+              <b>TS</b><span>TypeScript example</span>
               <button type="button" onClick={copy}>{copied ? "Copied" : "Copy"}</button>
             </div>
             <pre className="code">{source}</pre>
           </section>
           <section className="tile">
-            <div className="tile__h"><b>RET</b><span>What they return</span><i>UT Julian Days</i></div>
+            <div className="tile__h"><b>RET</b><span>Return value</span><i>UT Julian Days</i></div>
             <pre className="code">{returned}</pre>
           </section>
         </div>
       </div>
 
       <section className="tile s4 half">
-        <div className="tile__h"><b>M-1</b><span>How the search works</span></div>
+        <div className="tile__h"><b>M-1</b><span>Catalog and visibility scan</span></div>
         <div className="tile__b prose">
           <p>
-            The engine finds every new and full Moon in the span and tests
-            each for an eclipse, from the same Sun and Moon positions a chart
-            uses. This page runs the span two years at a time. For each solar
-            eclipse it then asks for the local circumstances at your place,
-            and it checks that the Sun is above the horizon there before
-            calling the eclipse seen.
+            The search locates every new and full Moon across the date range
+            and evaluates eclipse geometry using the same solar and lunar
+            ephemerides as the chart API, running in two-year increments. For
+            each solar eclipse, local circumstances are calculated at the
+            selected coordinates and filtered by solar altitude to verify that
+            the event occurs above the horizon.
           </p>
         </div>
       </section>
@@ -426,25 +426,24 @@ export function Eclipses({ engine, year }: EclipsesProps): ReactElement {
         <div className="tile__h"><b>M-2</b><span>Accuracy</span></div>
         <div className="tile__b prose">
           <p>
-            Times of greatest eclipse agree with Swiss Ephemeris to within 9
-            seconds, and every eclipse type from 1990 to 2030 matched (92
-            lunar and 89 solar). Contact times are typically within 15
-            seconds and can be minutes apart for a grazing eclipse. The
-            validator holds the point under the shadow axis to 10 km.
+            Greatest eclipse times agree with Swiss Ephemeris within 9 seconds,
+            matching every eclipse classification from 1990 to 2030 (92 lunar
+            and 89 solar). Contact times are typically accurate within 15
+            seconds (wider for grazing paths), and central shadow coordinates
+            stay within 10 km.
           </p>
         </div>
       </section>
       <section className="tile s4">
-        <div className="tile__h"><b>M-3</b><span>Limits</span></div>
+        <div className="tile__h"><b>M-3</b><span>Limitations</span></div>
         <div className="tile__b prose">
           <p>
-            That is enough to say whether a place sees totality and for how
-            long to within a few seconds. It is not a substitute for a
-            published eclipse path map at the edge of the path, where a
-            kilometre decides the answer. The accuracy figures were measured
-            for 1990 to 2030; an eclipse centuries away also carries the
-            uncertainty of the Earth's rotation. Dates before 15 October 1582
-            are in the Julian calendar.
+            These bounds reliably determine local visibility and approximate
+            totality duration, though near the edge of a central track (where a
+            single kilometer can decide totality) consult dedicated Besselian
+            maps. Historical eclipses centuries in the past or future also carry
+            ΔT clock uncertainty, and dates prior to October 15, 1582 use the
+            Julian calendar.
           </p>
         </div>
       </section>

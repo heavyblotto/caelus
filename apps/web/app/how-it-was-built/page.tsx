@@ -5,7 +5,7 @@ import { pageMetadata } from "../../lib/seo";
 export const metadata = pageMetadata({
   title: "How this was built",
   description:
-    "Caelus was written almost entirely by AI coding agents, under human direction, with a validation harness as the backstop. How the process kept an AI-built engine trustworthy.",
+    "How Caelus was built using AI coding agents under human review, backed by a Python reference implementation and automated ephemeris benchmarks.",
   path: "/how-it-was-built",
 });
 
@@ -15,68 +15,57 @@ export default function HowItWasBuilt() {
       <Eyebrow>Process</Eyebrow>
       <h1>How this was built</h1>
       <P>
-        Caelus was written almost entirely by AI coding agents. The Python
-        reference, the TypeScript port, the tests, the website, and most of
-        this prose came from agents working under human direction. That is
-        worth stating openly, because the claim it invites is one this project
-        has to answer: every number the engine produces is checked against two
-        independent references, and a golden suite fails the build as soon as
-        the code drifts away from them. An engine written by machines earns
-        trust the same way any other does, through the checks it has to pass.
+        Most of Caelus (the Python reference engine, TypeScript library, tests,
+        documentation, and website) was implemented with AI coding agents under
+        human direction and review. Because astronomical computation demands
+        strict numerical correctness, every calculation is checked against
+        independent ephemerides, and CI fails the build if the TypeScript code
+        diverges from the Python reference.
       </P>
 
-      <H2>Reference-first, checked to the last digit</H2>
+      <H2>Reference-first verification</H2>
       <P>
-        Every model landed in the Python reference first. That reference writes
-        golden fixtures: positions and events at fixed instants, stored as JSON.
-        The TypeScript engine is a port of the same math, and a conformance suite
-        replays the fixtures against it on every commit, to the last digit the
-        fixture records. A model is not shipped until the reference, its
-        fixtures, and the port all agree. This is also what lets an agent work
-        quickly, because a red suite identifies the exact moment a port stopped
-        matching its reference.
+        Each astronomical model is built in the Python reference first and
+        verified against published benchmarks. That reference exports JSON
+        golden fixtures for planetary positions and events at fixed timestamps,
+        which CI replays against the TypeScript engine on every commit. Matching
+        the reference down to IEEE floating-point precision ensures ports cannot
+        introduce silent rounding or sign errors.
       </P>
 
-      <H2>Two oracles, not the author&apos;s word</H2>
+      <H2>Independent ephemeris benchmarks</H2>
       <P>
-        Swiss Ephemeris 2.10 is the same-frame oracle over the modern era; JPL
-        Horizons (DE441) is the independent reference, and the sole oracle over
-        the 1000&ndash;3000 span where the built-in Swiss theories drift. The
-        per-body bounds are published on <A href="/validation">Validation</A>,
-        and the methodology behind them on <A href="/methods">Methods</A>. For
-        an engine written by a machine, the evidence has to come from the
-        oracles rather than from the author, which is the standard a
-        human-written engine should be held to as well.
+        Swiss Ephemeris 2.10 verifies modern-era apparent ecliptic coordinates,
+        while JPL Horizons (DE441) provides an independent equatorial benchmark
+        spanning AD 1000&ndash;3000. All per-body maximum and RMS errors are
+        measured directly from those comparisons and published on{" "}
+        <A href="/validation">Validation</A>, with full details on{" "}
+        <A href="/methods">Methods</A>.
       </P>
 
-      <H2>Direction stayed human</H2>
+      <H2>Human review and scope control</H2>
       <P>
-        The agents wrote the code, and a person chose what shipped. Work lands
-        on a development branch and is promoted to the main branch by hand, so
-        someone signs off before anything reaches users. Dead ends were
-        reverted rather than shipped. When a heavier lunar data pack broke the
-        browser bundle and lost accuracy against the reference, the work went
-        back to the existing fit, which was already sitting at the reference
-        floor. What the agents supplied was speed, and the judgment about what
-        was correct and what belonged in the project stayed with a person.
+        While agents wrote most of the code and tests, architectural decisions,
+        benchmark targets, and release merges stayed under human review. Approaches
+        that regressed accuracy or bloated the browser bundle were reverted. For
+        example, an experimental lunar data pack increased bundle size while
+        degrading reference accuracy, so it was dropped in favor of the
+        existing DE423 Chebyshev fit.
       </P>
 
-      <H2>The prose has the same gate</H2>
+      <H2>Documentation and claim checks</H2>
       <P>
-        Prose written by an agent has its own tells, so the repository runs a
-        prose linter against the site copy and the docs. Its rule set covers
-        the em-dash used as a connective, the three-verb drumroll, the
-        manufactured conclusion, the closing pleasantry, and the clipped
-        verbless fragment that agents reach for when they are trying to sound
-        authoritative. A violation fails continuous integration the way a
-        failing test does, and this page is checked by the same gate as the
-        rest of the site.
+        Automated checks also cover the documentation: CI runs a claims registry
+        linter that cross-checks bundle sizes, supported counts, and accuracy
+        figures against generated build artifacts, executes runnable MDX code
+        examples against the compiled library, and runs Vale prose checks across
+        docs and website copy.
       </P>
 
       <Note>
-        None of this removes the human. It moves the human from typing to
-        directing and reviewing, and it leans on a test harness and two ephemeris
-        oracles to catch what review alone would miss.
+        Human ownership shifts from writing boilerplate by hand to designing the
+        interfaces, auditing edge cases, and relying on strict automated
+        benchmarks to catch subtle regressions.
       </Note>
 
       <H2>Why the name Caelus?</H2>
@@ -84,18 +73,17 @@ export default function HowItWasBuilt() {
         <figure style={{ margin: 0, flex: "none", textAlign: "center", color: "var(--accent)" }}>
           <CaelusMark size={132} />
           <figcaption className="dim small" style={{ marginTop: "0.4rem", maxWidth: 150 }}>
-            An original drawing, after the Carnuntum altar.
+            An original drawing based on the Carnuntum altar.
           </figcaption>
         </figure>
         <div style={{ flex: "1 1 18rem" }}>
           <P>
-            Caelus is the Roman god of the sky, the personification of the heavens.
-            Roman art shows him as a bearded figure holding his cloak in a
-            billowing arch above his head, a gesture called <em>velificatio</em>{" "}
-            that signals the vault of the firmament. The face here is drawn from one
-            such figure on a third-century altar from Carnuntum, where Caelus
-            kneels beneath the four seasons and their winds. The name suited an
-            engine whose whole task is to compute the positions on that vault.
+            Caelus is the Roman god of the sky, representing the vault of the
+            heavens. Roman reliefs depict him holding his cloak in an arch above
+            his head, a gesture known as <em>velificatio</em>. The emblem above
+            is drawn from a third-century altar at Carnuntum showing Caelus
+            beneath the four seasons, fitting for a library dedicated to
+            computing positions on the celestial sphere.
           </P>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { pageMetadata } from "../../lib/seo";
 export const metadata = pageMetadata({
   title: "Provenance",
   description:
-    "Where every coefficient in Caelus comes from, why Swiss Ephemeris is used as a test oracle rather than a dependency, and how the engine compares with the other libraries in the field.",
+    "Sources for Caelus's ephemeris coefficients, how the MIT license avoids Swiss Ephemeris AGPL obligations, and how Caelus compares to other JavaScript and Python libraries.",
   path: "/provenance",
 });
 
@@ -62,8 +62,8 @@ export default function Provenance() {
         terms. Most commercial astrology APIs do not say what engine they run.
       </P>
       <P>
-        Caelus is written from the published record. Coefficients trace to
-        public literature or public-domain ephemerides:
+        Caelus is implemented from published astronomical literature and
+        public-domain NASA/JPL ephemerides:
       </P>
       <table className="data-table table-auto" style={{ fontSize: "0.85rem" }}>
         <tbody>
@@ -79,9 +79,10 @@ export default function Provenance() {
 
       <H2>Other engines</H2>
       <P>
-        The table below places Caelus among the engines it is most often
-        compared with. The figures were checked between February and June 2026,
-        and sizes are gzipped wherever the project publishes them that way.
+        The table below compares Caelus with the most common TypeScript,
+        JavaScript, and Python ephemeris libraries. Specifications were reviewed
+        between February and June 2026, using published gzipped bundle sizes
+        where available.
       </P>
       <div className="table-scroll">
         <table className="data-table table-auto" style={{ fontSize: "0.85rem" }}>
@@ -101,41 +102,39 @@ export default function Provenance() {
         </table>
       </div>
       <P dim>
-        celestine (MIT, January 2026) is the closest project in the list, since
-        it also computes houses, Chiron, and the nodes without shipping data
-        files. As of its v0.2.1 the differences are that Caelus publishes
-        per-body deltas against its oracles (<A href="/validation">Validation</A>)
-        and ships an MCP server and an edge API, and that Caelus covers{" "}
-        {formatHouseSystemsProse()} house systems against celestine&apos;s seven.
+        Among MIT-licensed JavaScript libraries, celestine (v0.2.1, January
+        2026) is the closest match because it also calculates houses, Chiron,
+        and lunar nodes without external data files. Caelus differs by
+        publishing full per-body error tables on <A href="/validation">Validation</A>,
+        providing an MCP server and edge API, and supporting{" "}
+        {formatHouseSystemsProse()} house systems compared to celestine&apos;s seven.
       </P>
 
-      <H2>Swiss Ephemeris as oracle</H2>
+      <H2>Swiss Ephemeris as a test benchmark</H2>
       <P>
-        During development, Caelus positions were compared against Swiss
-        Ephemeris 2.10 at random instants across 1000–3000, but no Swiss
-        Ephemeris code or coefficient ships in the package. An early Chiron fit
-        sampled its asteroid file offline, and the released fit is built from
-        JPL Horizons instead. The two Chiron integrations agree to 0.85″ in the
-        worst case across 1900–2099.
+        During development and CI, Caelus longitudes are compared against Swiss
+        Ephemeris 2.10 across 1000–3000, but no Swiss Ephemeris code or
+        coefficients are included in the distributed packages. While an early
+        prototype sampled Chiron from the Swiss asteroid file, the released fit
+        comes directly from JPL Horizons; the two integrations agree within
+        0.85″ in the worst case across 1900–2099.
       </P>
       <H2>License</H2>
       <P>
-        Caelus is MIT licensed, so it can ship in closed source, SaaS, mobile,
-        or edge bundles without AGPL obligations and without deploying
-        ephemeris files. The engine and its embedded data come to ~153 KB
-        gzipped, which is small enough to compute a full chart in the browser,
-        and the same code runs on the edge API and in the{" "}
+        Caelus is MIT licensed, so you can ship it in commercial SaaS, mobile,
+        browser, and edge applications without AGPL obligations or external
+        ephemeris files. The engine plus embedded ephemeris data measures ~153 KB
+        gzipped and powers client-side charts, the edge API, and the{" "}
         <A href="https://www.npmjs.com/package/caelus-mcp">MCP Server</A>.
       </P>
       <P>
-        Because the engine runs in the browser, an app can compute a chart on
-        the user&apos;s own device and never send their birth time or place to
-        a server. The <A href={SITE.starter}>caelus-starter</A> template is
-        built this way, which removes a good deal of privacy and GDPR overhead,
-        since there is no birth data to store, transfer, or lose. The same
-        arrangement is harder to reach on a Swiss Ephemeris stack, where the
-        AGPL license applies once results are served over a network and full
-        accuracy depends on ephemeris files too large to ship to a browser.
+        Because the entire library runs in the browser, applications can compute
+        charts locally on the user&apos;s device without transmitting birth times
+        or coordinates to a server. The <A href={SITE.starter}>caelus-starter</A>{" "}
+        template uses this architecture to reduce backend storage and GDPR
+        compliance scope, whereas stacks built on Swiss Ephemeris require AGPL
+        disclosure or commercial licensing once results are served over a
+        network and rely on large ephemeris files on disk.
       </P>
       <P dim>
         <A href="/validation">Validation tables →</A>

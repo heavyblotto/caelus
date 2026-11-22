@@ -11,7 +11,7 @@ const SYSTEMS: HouseSystem[] = ["placidus", "koch", "whole_sign", "equal"];
 export function CuspComparison() {
   const charts = SYSTEMS.map((s) => ({ system: s, chart: sampleEngine.chartAt(SAMPLE_JD, lat, lon, s) }));
   return (
-    <DocFigure caption={<>The same instant, four house systems. The Ascendant and Midheaven are identical across all of them (they are astronomical, not a division rule); the intermediate cusps are where the systems disagree.</>}>
+    <DocFigure caption={<>Four house systems compared for the same date and coordinates. The Ascendant and Midheaven remain identical across every system because they come from the horizon and meridian, while the intermediate cusps differ by division method.</>}>
       <table className="mono" style={{ fontSize: "0.78rem", width: "auto" }}>
         <thead>
           <tr style={{ color: "var(--text-mute)" }}>
@@ -45,7 +45,7 @@ const ZBODIES: BodyId[] = ["sun", "moon", "mercury", "venus", "mars"];
 /** The same bodies in the tropical zodiac and three sidereal ayanamsas. */
 export function ZodiacComparison() {
   return (
-    <DocFigure caption={<>The same positions, tropical and three sidereal ayanamsas. Each sidereal mode subtracts its ayanamsa, shifting every longitude back by ~24°.</>}>
+    <DocFigure caption={<>Planetary longitudes compared between tropical and three sidereal ayanamsas. Each sidereal mode subtracts its ayanamsa offset, shifting every longitude back by roughly 24°.</>}>
       <table className="mono" style={{ fontSize: "0.8rem", width: "auto" }}>
         <thead>
           <tr style={{ color: "var(--text-mute)" }}>

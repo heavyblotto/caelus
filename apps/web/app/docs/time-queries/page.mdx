@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Time Queries",
-  description: "Ask when a configuration is true: when() takes predicates such as a planet in a sign, an aspect within orb, or a retrograde, combined with and, or, and not, and returns the intervals in which they hold.",
+  description: "Search a date range for intervals matching compound astrological conditions using when() and composable boolean predicates.",
   path: "/docs/time-queries",
 });
 
@@ -10,9 +10,9 @@ export const metadata = pageMetadata({
 
 # Time queries
 
-`when()` answers the question "when is this true?" over a range of time. You
-describe a condition with predicates, and it returns the intervals in which
-the condition holds, as pairs of UT Julian Days.
+`when()` searches a date range and returns every interval during which a
+compound sky condition remains true, formatted as `[startJd, endJd]` pairs in
+UT Julian Days.
 
 ```ts run
 import {
@@ -33,8 +33,8 @@ when(
 ).map(utc);
 ```
 
-Jupiter is in Cancer and Mercury is retrograde in four intervals over those
-two years:
+Over those two years, Jupiter occupies Cancer while Mercury is retrograde across
+four separate intervals:
 
 | From | To |
 |---|---|
@@ -43,22 +43,22 @@ two years:
 | 26 February 2026 | 20 March 2026 |
 | 29 June 2026 | 30 June 2026 |
 
-The last one is a day long because Jupiter leaves Cancer on 30 June 2026,
-just after Mercury turns.
+The final interval lasts only a single day because Jupiter exits Cancer on
+30 June 2026 shortly after Mercury turns retrograde.
 
 ## Predicates
 
-| Predicate | True while |
+| Predicate | Matches while |
 |---|---|
-| `inSign(body, sign)` | The body is in the sign, by name or index 0 to 11 |
-| `aspect(body, kind, target, orb)` | The body is within `orb` degrees of the aspect to `target` |
-| `retrograde(body)` | The body's motion in longitude is retrograde |
-| `notRetrograde(body)` | It is direct |
+| `inSign(body, sign)` | The body is inside the sign (name or index 0–11) |
+| `aspect(body, kind, target, orb)` | The body is within `orb` degrees of `aspect` to `target` |
+| `retrograde(body)` | The body's longitudinal motion is retrograde |
+| `notRetrograde(body)` | The body's longitudinal motion is direct |
 
-The `target` of an aspect is another body or a fixed longitude in degrees, so
-the same predicate covers a transit to a natal position. The aspect kinds are
-conjunction, semisextile, sextile, square, trine, quincunx, and opposition,
-and `orb` defaults to 1°.
+In `aspect()`, `target` accepts either another body ID or a fixed ecliptic
+longitude in degrees, supporting both sky-to-sky aspects and transits to natal
+points. Supported aspects are `conjunction`, `semisextile`, `sextile`, `square`,
+`trine`, `quincunx`, and `opposition`, with `orb` defaulting to 1°.
 
 ```ts run
 // Mars within 1° of Saturn, 2024 to 2030
@@ -67,9 +67,9 @@ when(engine, aspect("mars", "conjunction", "saturn", 1),
 // three intervals: 9 to 12 April 2024, 18 to 21 April 2026, 29 April to 2 May 2028
 ```
 
-## Combining
+## Combining predicates
 
-`allOf`, `anyOf`, and `notOf` combine predicates and nest to any depth.
+Compose and nest predicates to any depth with `allOf`, `anyOf`, and `notOf`:
 
 ```ts run
 when(
@@ -84,19 +84,22 @@ when(
 // one interval: 21 February 2026 07:14 UT to 24 February 2026 08:58 UT
 ```
 
-## How it searches
+## Search mechanics and limits
 
-Each predicate is a continuous margin that is positive while the condition
-holds. `allOf` takes the smallest margin of its parts, `anyOf` the largest,
-and `notOf` negates, so any query reduces to one function of time. `when()`
-samples that function across the range and bisects each sign change.
+Internally, every predicate evaluates as a continuous signed margin that stays
+positive while satisfied. `allOf` takes the minimum of its parts, `anyOf`
+takes the maximum, and `notOf` negates the margin, reducing any nested query
+to a single function of time. `when()` samples this function across the date
+range and applies bisection wherever the sign crosses zero.
 
-The step is one day, or three hours when the Moon or a lunar node is
-involved. Pass `{ step }` to change it. A condition that becomes true and
-false again inside one step is missed, so use a smaller step for narrow orbs
-on fast bodies. `maxIntervals` caps the result at 500 by default.
+By default, `when()` steps by one day, tightening to three hours whenever the
+Moon or a lunar node appears in the query; pass `{ step }` in options to set a
+custom interval in days. Very short intervals that begin and end inside a
+single step can be skipped unless you specify a smaller step (important when
+testing tight orbs with fast planets). Returned intervals default to a cap of
+500 via `maxIntervals`.
 
-Because it samples the whole range at one step, `when()` suits years and
-decades. To search several thousand years for a described sky, use
-[`dateSky`](/docs/sky-dating), which takes only position constraints and
-prunes from the slowest body to the fastest.
+Because `when()` evaluates the entire range at uniform time steps, it works
+best over spans of months, years, or decades. To search across millennia based
+on planetary positions, use [`dateSky`](/docs/sky-dating), which prunes candidate
+windows from the slowest planet to the fastest.

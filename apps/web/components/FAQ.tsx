@@ -16,124 +16,130 @@ const ITEMS: QA[] = [
     q: "Is Caelus free to use in commercial projects?",
     a: (
       <>
-        Yes. The published packages (`caelus`, `caelus-mcp`, `caelus-birth`,
-        `caelus-wheel`, and `caelus-delineations-pd`) are{" "}
-        <A href={`${SITE.repo}/blob/main/LICENSE`}>MIT licensed</A>, with no Swiss
-        Ephemeris dependency and no AGPL obligations, so you can ship them in
-        closed-source and commercial apps. The four lockstep packages version
-        together; `caelus-delineations-pd` ships on its own semver.
+        Yes. All published packages (<code>caelus</code>, <code>caelus-mcp</code>,{" "}
+        <code>caelus-birth</code>, <code>caelus-wheel</code>, and{" "}
+        <code>caelus-delineations-pd</code>) are{" "}
+        <A href={`${SITE.repo}/blob/main/LICENSE`}>MIT licensed</A> with no Swiss
+        Ephemeris dependency and no AGPL restrictions, so you can ship them in
+        commercial or closed-source products. The four core packages share lockstep
+        versions, while <code>caelus-delineations-pd</code> follows its own semver.
       </>
     ),
     text:
-      "Yes. The published packages (caelus, caelus-mcp, caelus-birth, caelus-wheel, and caelus-delineations-pd) are MIT licensed, with no Swiss Ephemeris dependency and no AGPL obligations, so you can ship them in closed-source and commercial apps. The four lockstep packages version together; caelus-delineations-pd ships on its own semver.",
+      "Yes. All published packages (caelus, caelus-mcp, caelus-birth, caelus-wheel, and caelus-delineations-pd) are MIT licensed with no Swiss Ephemeris dependency and no AGPL restrictions, so you can ship them in commercial or closed-source products. The four core packages share lockstep versions, while caelus-delineations-pd follows its own semver.",
   },
   {
     q: "How accurate is it?",
     a: (
       <>
-        Every body's deviation from a reference ephemeris is measured and
-        published, then replayed against thousands of golden checks in CI. The
-        full tables are on the <A href="/validation">Validation</A> page.
+        Every planetary position is benchmarked against JPL Horizons and Swiss
+        Ephemeris, and verified in CI against thousands of golden test cases. You
+        can inspect the full accuracy tables and methodology on the{" "}
+        <A href="/validation">Validation</A> page.
       </>
     ),
     text:
-      "Every body's deviation from a reference ephemeris is measured and published, then replayed against thousands of golden checks in CI. The full tables are on the Validation page.",
+      "Every planetary position is benchmarked against JPL Horizons and Swiss Ephemeris, and verified in CI against thousands of golden test cases. You can inspect the full accuracy tables and methodology on the Validation page.",
   },
   {
     q: "Do I need Swiss Ephemeris or ephemeris files?",
     a: (
       <>
-        No. The planetary data is embedded in the package, so there are no files
-        to download or deploy. See <A href="/docs/data-tiers">Data Tiers</A> for
-        what ships in the bundle.
+        No. Ephemeris coefficients are bundled directly in the package, so there are
+        no separate binary files to download or configure at runtime. See{" "}
+        <A href="/docs/data-tiers">Data Tiers</A> for bundle details and extended
+        date-range packs.
       </>
     ),
     text:
-      "No. The planetary data is embedded in the package, so there are no files to download or deploy.",
+      "No. Ephemeris coefficients are bundled directly in the package, so there are no separate binary files to download or configure at runtime.",
   },
   {
     q: "What date range does it cover?",
     a: (
       <>
-        The planets, Pluto, and the Moon are validated for the years
-        1000&ndash;3000, and the small bodies (asteroids and Chiron) for
-        1600&ndash;2484. A body outside its fitted range is omitted from the
-        chart and listed under its <code>unavailable</code> field rather than
-        guessed. See <A href="/docs/edge-cases">Edge Cases</A>.
+        The standard ephemeris tier validates the Sun, Moon, major planets, and
+        Pluto across AD 1000&ndash;3000, and major asteroids plus Chiron across
+        1600&ndash;2484. If you query a body outside its valid range, Caelus omits it
+        from <code>bodies</code> and records the reason in{" "}
+        <code>unavailable</code> instead of extrapolating unreliable coordinates. See{" "}
+        <A href="/docs/edge-cases">Edge Cases</A> or{" "}
+        <A href="/docs/deep-time">Deep Time</A> for the 3000 BC&ndash;AD 3000 pack.
       </>
     ),
     text:
-      "The planets, Pluto, and the Moon are validated for the years 1000-3000, and the small bodies (asteroids and Chiron) for 1600-2484. A body outside its fitted range is omitted from the chart and listed under its unavailable field rather than guessed.",
+      "The standard ephemeris tier validates the Sun, Moon, major planets, and Pluto across AD 1000-3000, and major asteroids plus Chiron across 1600-2484. If you query a body outside its valid range, Caelus omits it from bodies and records the reason in unavailable instead of extrapolating unreliable coordinates.",
   },
   {
     q: "Does it support Vedic astrology, or only Western?",
     a: (
       <>
-        Both. Alongside the Western chart it computes nakshatras, the Vimshottari,
-        Yogini, and Ashtottari dashas, the divisional charts (vargas), and the
-        yogas. See <A href="/docs/vedic">Vedic &amp; Jyotish</A>.
+        It supports both. Alongside Western tropical charts, Caelus calculates
+        nakshatras, Vimshottari, Yogini, and Ashtottari dashas, divisional charts
+        (vargas), Ashtakavarga, and classical yogas. See{" "}
+        <A href="/docs/vedic">Vedic &amp; Jyotish</A>.
       </>
     ),
     text:
-      "Both. Alongside the Western chart it computes nakshatras, the Vimshottari, Yogini, and Ashtottari dashas, the divisional charts (vargas), and the yogas.",
+      "It supports both. Alongside Western tropical charts, Caelus calculates nakshatras, Vimshottari, Yogini, and Ashtottari dashas, divisional charts (vargas), Ashtakavarga, and classical yogas.",
   },
   {
     q: "Can charts be computed without sending birth data to a server?",
     a: (
       <>
-        Yes. The engine does no I/O and runs in the browser, so an app can compute
-        a chart entirely on the client and never transmit birth data. Try the{" "}
-        <A href="/playground">Playground</A>; details on{" "}
+        Yes. The engine has zero network or filesystem dependencies, so your app can
+        calculate charts entirely client-side without transmitting birth details to a
+        backend. You can test client-side execution in the{" "}
+        <A href="/playground">Playground</A> or read more on{" "}
         <A href="/privacy">Privacy</A>.
       </>
     ),
     text:
-      "Yes. The engine does no I/O and runs in the browser, so an app can compute a chart entirely on the client and never transmit birth data.",
+      "Yes. The engine has zero network or filesystem dependencies, so your app can calculate charts entirely client-side without transmitting birth details to a backend.",
   },
   {
     q: "Can I use it with AI assistants like Claude or Cursor?",
     a: (
       <>
-        Yes. <code>caelus-mcp</code> exposes {MCP_TOOLS_PROSE} chart tools over the Model
-        Context Protocol, available hosted or as a local stdio server. See{" "}
-        <A href="/docs/mcp">MCP Setup</A>.
+        Yes. The <code>caelus-mcp</code> package provides {MCP_TOOLS_PROSE} chart
+        tools over the Model Context Protocol, available both as a hosted endpoint
+        and as a local stdio server. See <A href="/docs/mcp">MCP Setup</A>.
       </>
     ),
     text:
-      `Yes. The caelus-mcp package exposes ${MCP_TOOLS_PROSE} chart tools over the Model Context Protocol, available hosted or as a local stdio server.`,
+      `Yes. The caelus-mcp package provides ${MCP_TOOLS_PROSE} chart tools over the Model Context Protocol, available both as a hosted endpoint and as a local stdio server.`,
   },
   {
     q: "Does it interpret a chart, or just compute it?",
     a: (
       <>
-        The engine computes, and the interpretation is left to you. It stops at
-        validated geometry and ships no delineation text of its own. For
-        generated readings there is an{" "}
-        <A href="/docs/interpretation">interpretation layer</A>, which projects
-        a chart into ranked, citable fact atoms that a rule corpus or an LLM can
-        consume, and audits the citations afterwards so a generated reading
-        stays tied to the chart it came from.
+        By default, Caelus computes astronomical positions, houses, and aspects
+        without embedding opinionated delineation text. When you need structured
+        interpretations, the optional{" "}
+        <A href="/docs/interpretation">interpretation layer</A> extracts typed chart
+        facts that you can match against a rule corpus or pass to an LLM with
+        citation auditing so generated readings trace back to verified placements.
       </>
     ),
     text:
-      "The engine computes, and the interpretation is left to you. It stops at validated geometry and ships no delineation text of its own. For generated readings there is an interpretation layer, which projects a chart into ranked, citable fact atoms that a rule corpus or an LLM can consume, and audits the citations afterwards so a generated reading stays tied to the chart it came from.",
+      "By default, Caelus computes astronomical positions, houses, and aspects without embedding opinionated delineation text. When you need structured interpretations, the optional interpretation layer extracts typed chart facts that you can match against a rule corpus or pass to an LLM with citation auditing so generated readings trace back to verified placements.",
   },
   {
     q: "Can it chart a forecast, a fictional character, or an archetype?",
     a: (
       <>
-        Yes. The{" "}
-        <A href="/docs/provenance">provenance layer</A> declares what the chart
-        is (<code>Realm</code>) and how its time and place are known.{" "}
-        <code>realize()</code> routes to the ephemeris or the geometric compiler,
-        and passes certainty into the{" "}
-        <A href="/docs/interpretation">interpretation layer</A> so a forecast
-        reads as provisional and an inexact birth time down-weights the Moon
-        and angles.
+        Yes. Through the <A href="/docs/provenance">provenance layer</A>, you can
+        declare a chart&rsquo;s context (<code>Realm</code>) along with the precision
+        of its date, time, and location. Calling <code>realize()</code> routes the
+        request to either the ephemeris or the synthetic chart compiler and forwards
+        those precision flags to the{" "}
+        <A href="/docs/interpretation">interpretation layer</A>, ensuring forecasts
+        are appropriately qualified and uncertain birth times down-weight angles and
+        the Moon.
       </>
     ),
     text:
-      "Yes. The provenance layer declares what the chart is (Realm) and how its time and place are known. realize() routes to the ephemeris or the geometric compiler, and passes certainty into the interpretation layer so a forecast reads as provisional and an inexact birth time down-weights the Moon and angles.",
+      "Yes. Through the provenance layer, you can declare a chart's context (Realm) along with the precision of its date, time, and location. Calling realize() routes the request to either the ephemeris or the synthetic chart compiler and forwards those precision flags to the interpretation layer, ensuring forecasts are appropriately qualified and uncertain birth times down-weight angles and the Moon.",
   },
 ];
 

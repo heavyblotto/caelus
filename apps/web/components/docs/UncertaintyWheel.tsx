@@ -20,11 +20,11 @@ export function UncertaintyWheel() {
       center
       caption={
         <>
-          The chart for 18:30 UT with an hour of uncertainty either way. The
-          Ascendant sweeps 27° and the Midheaven 28°, and each crosses a sign
-          boundary, so their arcs near the rim are heavy and carry a square.
-          The Moon moves 1°, which shows as a short arc under its tick. No
-          planet moves more than 0.13°, so their arcs are too short to see.
+          The sample chart for 18:30 UT with a &plusmn;1 hour birth-time window.
+          The Ascendant moves 27° and the Midheaven moves 28°, and both cross a
+          sign boundary, so their arcs along the outer rim are drawn heavier with a
+          square marker at the cusp. The Moon moves 1°, visible as a short arc
+          beneath its tick mark, while the remaining planets move by at most 0.13°.
         </>
       }
     >

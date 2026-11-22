@@ -20,7 +20,7 @@ const TIERS: ReadonlyArray<{
 }> = [
   {
     title: "Recommended",
-    blurb: "The surface most applications build against. Start here.",
+    blurb: "Primary APIs for building standard astrological applications.",
     refs: [
       ["Engine", "Class.Engine"],
       ["julianDay", "Function.julianDay"],
@@ -65,7 +65,7 @@ const TIERS: ReadonlyArray<{
   {
     title: "Internal / unstable",
     blurb:
-      "The engine's own astronomy machinery: series evaluators, apparent-position builders, and raw constants. Exported for inspection and tests; not a stable contract. Prefer the Engine over calling these directly.",
+      "Low-level astronomical routines (series evaluators, apparent-position builders, and physical constants) exported for tests and inspection rather than direct application use.",
     refs: [
       ["vsopHeliocentric", "Function.vsopHeliocentric"],
       ["moonGeometric", "Function.moonGeometric"],
@@ -162,9 +162,9 @@ export default function ApiIndex() {
 
       <h2>The Engine</h2>
       <P dim>
-        Construct one <Link href="/docs/api/Class.Engine">Engine</Link> from a
-        data pack, then call these methods, the surface most code uses. Every
-        method links straight to its signature and parameters.
+        Instantiate <Link href="/docs/api/Class.Engine">Engine</Link> once with
+        your dataset, then call these methods to compute charts, positions,
+        fixed stars, or synthetic systems.
       </P>
       <div className="card" style={{ marginTop: "1rem", marginBottom: "2rem" }}>
         {ENGINE_METHODS.map((g) => (

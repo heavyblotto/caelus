@@ -10,7 +10,7 @@ import { pageMetadata } from "../../../lib/seo";
 export const metadata = pageMetadata({
   title: "Visualizations",
   description:
-    "The chart beyond the flat wheel: a 3D celestial sphere, an astrocartography world map, and a graphic ephemeris. Each is SSR-safe SVG fed by the caelus engine, rendered live on this page.",
+    "SVG diagram components beyond the flat wheel: a 3D celestial sphere, astrocartography world map, graphic ephemeris, uncertainty arcs, and Sky View camera projections.",
   path: "/docs/visualizations",
 });
 
@@ -107,21 +107,23 @@ export default function Visualizations() {
       <Eyebrow>Guides</Eyebrow>
       <h1>Visualizations</h1>
       <Lead>
-        The same chart object renders as more than a flat wheel. The engine feeds
-        three dependency-free SVG views: a 3D celestial sphere, an
-        astrocartography world map, and a graphic ephemeris. Every view below is
-        server-rendered on this page from the embedded engine.
+        Beyond the traditional flat chart wheel, <code>caelus-wheel</code>{" "}
+        provides three dependency-free SVG visualizations driven by engine
+        outputs: a 3D celestial sphere, an astrocartography world map, and a
+        graphic ephemeris. Every diagram below is server-rendered directly from
+        the embedded dataset.
       </Lead>
 
       <H2>3D chart sphere</H2>
       <P>
-        A flat wheel places every planet on the ecliptic. The sphere keeps each
-        body at its true ecliptic latitude, so the Moon rides above the ecliptic
-        and Pluto swings well off it. The ecliptic and equator draw as
-        great-circle rings, solid on the near hemisphere and faded on the far
-        one. The matching 3D aspect angle in the engine is{" "}
-        <code>angularSeparation3d</code>, which accounts for latitude rather than
-        longitude alone.
+        While a flat wheel projects every planet onto the ecliptic circle,{" "}
+        <code>ChartSphere</code> preserves each body&rsquo;s true ecliptic
+        latitude, showing where the Moon or Pluto rises above or dips below the
+        ecliptic plane. Great-circle rings mark the ecliptic and celestial
+        equator (solid in the foreground hemisphere, faded on the far side). To
+        compute full 3D angular separation rather than ecliptic-longitude
+        differences alone, call <code>angularSeparation3d</code> in{" "}
+        <code>caelus</code>.
       </P>
       <div style={figure}>
         <ChartSphere chart={sphereChart} size={360} tilt={64} theme={WHEEL_THEME} />
@@ -130,12 +132,12 @@ export default function Visualizations() {
 
       <H2>Astrocartography map</H2>
       <P>
-        For one instant, each planet sits on an angle along a curve across the
-        Earth. <code>astrocartography</code> returns those lines from each body's
-        right ascension and declination and the moment's sidereal time:
-        the MC and IC meridians and the curved ASC and DSC rising and setting
-        tracks. <code>AstroMap</code> draws them on an equirectangular graticule;
-        layer your own coastline paths under the lines as children.
+        Using each planet&rsquo;s right ascension, declination, and Greenwich
+        sidereal time at a given timestamp, <code>astrocartography</code>{" "}
+        computes four lines worldwide: straight MC and IC meridians alongside
+        curved rising (ASC) and setting (DSC) tracks. <code>AstroMap</code>{" "}
+        draws them over an equirectangular coordinate graticule, accepting custom
+        continent or border SVG paths as <code>children</code>.
       </P>
       <div style={figure}>
         <AstroMap lines={mapLines} width={680} height={340} theme={WHEEL_THEME} colors={WHEEL_LINE_COLORS} />
@@ -144,12 +146,11 @@ export default function Visualizations() {
 
       <H2>Graphic ephemeris</H2>
       <P>
-        A graphic ephemeris plots one value per body over time.{" "}
         <code>ephemeris</code> samples longitude, latitude, declination, right
-        ascension, or speed across a range, and <code>EphemerisGraph</code> draws
-        the series, splitting each line where longitude wraps from 360 back to 0.
-        Below: the longitude of Mars, Jupiter, and Saturn over two years at weekly
-        steps.
+        ascension, or speed over time, and <code>EphemerisGraph</code> plots the
+        resulting curves while splitting segments cleanly whenever wrapped
+        longitudes roll past 360&deg; back to 0&deg;. Below is a two-year plot
+        of Mars, Jupiter, and Saturn sampled at weekly intervals.
       </P>
       <div style={figure}>
         <EphemerisGraph series={graphSeries} width={680} height={340} wrap={360} theme={WHEEL_THEME} colors={WHEEL_LINE_COLORS} />
@@ -158,48 +159,46 @@ export default function Visualizations() {
 
       <H2>Uncertainty on the wheel</H2>
       <P>
-        The flat wheel can draw a window of time as well as an instant. Pass{" "}
-        <code>uncertainty</code> with charts across the window in time order,
-        and each body gets an arc just inside the zodiac ring over the
-        longitudes it passes through, with arcs for the Ascendant and the
-        Midheaven near the rim. An arc that crosses a sign boundary is heavier
-        and carries a square on the boundary. The angles turn about 15° an
-        hour, so give a sample every half hour or so across a window of hours.
-        The <a href="/docs/uncertain-time">Uncertain Times</a> guide covers the
-        computation behind it.
+        Pass an ordered array of sampled charts via the <code>uncertainty</code>{" "}
+        prop on <code>ChartWheel</code> to display travel arcs across an
+        uncertain time window. Body arcs render just inside the zodiac ring while
+        Ascendant and Midheaven arcs follow the outer rim, thickening with a
+        square cusp marker whenever a range crosses a sign boundary. Because
+        angles move roughly 15&deg; per hour, sample every 30 minutes across
+        multi-hour spans. See the{" "}
+        <a href="/docs/uncertain-time">Uncertain Times</a> guide for details.
       </P>
       <UncertaintyWheel />
       <CodeBlock lang="tsx" label="ChartWheel.tsx" code={UNCERTAINTY_CODE} />
 
       <H2>Sky View</H2>
       <P>
-        Sky View frames the visible sky from a place and moment, then writes a
-        prompt for an AI image model. Give it a compass aim (azimuth and
-        altitude), a lens preset, and an image size; it returns each in-frame
-        body at exact pixels, its apparent size and a brightness cue from
-        magnitude, the Moon&rsquo;s phase and which way the crescent points, the
-        twilight stage and limiting magnitude, the horizon row, the Milky Way
-        band, and a deep field of naked-eye stars. Caelus computes the geometry
-        and photometry; it does not render the image.
+        Sky View projects the observable night or twilight sky from a
+        specific location, timestamp, compass aim (azimuth and altitude), and
+        camera lens preset, generating exact pixel coordinates and a structured
+        prompt for image-generation models. Output covers in-frame planets (with
+        apparent size and magnitude cues), lunar phase and crescent tilt angle,
+        twilight sky brightness and limiting magnitude, the local horizon, the
+        Milky Way band, and naked-eye field stars, leaving pixel synthesis to
+        your chosen image model.
       </P>
       <P>
-        Reference frames project on request: the ecliptic, the zodiac signs, the
-        house cusps and angles, and the constellation figures, each as exact
-        pixels. <code>skyViewSequence</code> steps the same frame through time
-        for an animation, returning the celestial pole and the sky&rsquo;s
-        rotation per frame. Try it on the{" "}
-        <a href="/playground">playground</a> Sky View tab, with a play control
-        and overlay toggles.
+        Optional coordinate overlays project the ecliptic, zodiac signs, house
+        cusps, angles, and constellation stick figures at matching pixel
+        coordinates. <code>skyViewSequence</code> steps the camera across time
+        for time-lapse sequences, reporting celestial pole position and frame
+        rotation per step. Explore interactive overlays and animation controls on
+        the <a href="/playground">playground</a> Sky View tab.
       </P>
 
       <H2>Next steps</H2>
       <P>
-        These render the same engine output as the flat <code>ChartWheel</code>{" "}
-        in the <a href="/docs/architecture">Architecture</a> guide. See{" "}
-        <a href="/docs/recipes">Recipes</a> for event search and the{" "}
-        <code>when()</code> query language, and{" "}
-        <a href="/docs/electional">Electional Search</a> for scanning a window for
-        the best moment.
+        Every component above consumes standard outputs from{" "}
+        <code>caelus</code> alongside the flat <code>ChartWheel</code> in{" "}
+        <a href="/docs/architecture">Architecture</a>. Continue to{" "}
+        <a href="/docs/recipes">Recipes</a> for <code>when()</code> time queries
+        and event searches, or <a href="/docs/electional">Electional Search</a>{" "}
+        for multi-day window ranking.
       </P>
     </>
   );
