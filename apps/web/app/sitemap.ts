@@ -77,6 +77,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/provenance",
     "/methods",
     "/how-it-was-built",
+    "/lab",
     "/notes",
     "/changelog",
     "/privacy",

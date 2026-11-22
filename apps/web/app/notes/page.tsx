@@ -97,6 +97,7 @@ export default function Notes() {
       </P>
 
       <div className="row row--wrap">
+        <Link href="/lab" className="btn btn-sm btn-primary">Lab Notes →</Link>
         <Link href="/playground" className="btn btn-sm btn-secondary">Open Playground →</Link>
         <Link href="/validation" className="btn btn-sm btn-ghost">Validation</Link>
         <Link href="/provenance" className="btn btn-sm btn-ghost">Provenance</Link>

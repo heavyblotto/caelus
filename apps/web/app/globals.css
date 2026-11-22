@@ -5317,6 +5317,39 @@ a.tile:hover h3 {
   }
 }
 
+/* ---- lab notes (/lab) ---- */
+.lab-byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.lab-summary-grid {
+  margin: var(--sp-5) 0 var(--sp-6);
+  border: 1px solid var(--line);
+}
+
+.lab-plate {
+  margin: var(--sp-5) 0;
+  border: 1px solid var(--line2);
+  background: var(--panel);
+}
+
+.lab-plate__canvas {
+  background: #ffffff;
+  padding: var(--sp-2);
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+}
+
+.lab-plate__canvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
 /* ---- reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   *,

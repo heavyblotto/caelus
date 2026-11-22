@@ -49,6 +49,7 @@ export const NAV: NavItem[] = [
   { href: "/features", label: "Features" },
   { href: "/playground", label: "Playground" },
   { href: "/instruments", label: "Instruments" },
+  { href: "/lab", label: "Lab" },
 ];
 
 export type FooterColumn = { title: string; links: Array<NavItem & { external?: boolean }> };
@@ -135,6 +136,7 @@ export const FOOTER: FooterColumn[] = [
     title: "Evidence",
     links: [
       { href: "/validation", label: "Validation" },
+      { href: "/lab", label: "Lab Notes" },
       { href: "/provenance", label: "Provenance" },
       { href: "/notes", label: "Build Notes" },
       { href: "/methods", label: "Methods" },
