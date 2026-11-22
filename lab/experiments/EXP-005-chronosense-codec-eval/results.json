@@ -1,7 +1,7 @@
 {
   "id": "EXP-005",
-  "run_at": "2026-11-22T18:36:34.011Z",
-  "git_sha": "e8dc94f",
+  "run_at": "2026-11-22T18:57:31.607Z",
+  "git_sha": "eb846ea",
   "status": "pass",
   "summary": "Live-LLM 5-arm codec showdown verified over 20 EXP-001 tasks x 2 live models (ollama/gemma4:12b, ollama/qwen3.5:9b) plus offline codec audit (GT parity=20/20). Live macro score: Physical=77.7% vs Symbolic=63.5% vs Synthetic=45.2% vs ISO=40.8% vs None=30.6% (Physical - ISO = +36.9 pp, Physical - Synthetic = +32.5 pp, Physical - Symbolic = +14.2 pp at 45.75 cl100k tok/turn).",
   "metrics": {
@@ -29,7 +29,7 @@
     "scorer_oracle_pass_rate": 1,
     "scorer_corrupt_catch_rate": 1,
     "live_llm_verified": true,
-    "runtime_ms": 160.1802,
+    "runtime_ms": 159.6577,
     "offline_codec_by_arm": {
       "Baseline-None": {
         "mean_score": 0,

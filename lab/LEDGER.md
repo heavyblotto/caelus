@@ -2,9 +2,9 @@
 
 Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/experiments/*/manifest.json`, `results.json`, `lab/factory/*/manifest.json`, and `lab/graveyard/KILL-*.md`. Do not hand-edit metrics in this file.
 
-- **Branch**: `swarm-lab-chronosense-9379049f`
-- **Git HEAD**: `52a58e3`
-- **Research Experiments**: 8 (8 with verified receipts)
+- **Branch**: `dev`
+- **Git HEAD**: `eb846ea`
+- **Research Experiments**: 10 (10 with verified receipts)
 - **Feature Factory Tracks**: 7
 - **Graveyard Kills**: 6
 
@@ -16,7 +16,9 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 | `EXP-002` | Dyadic Circadian and Phase-Resonant Episodic Memory Benchmark (3-Arm Ablation) | `proved` | `pass` (2026-11-22) | compacted4x_arm3_top1=0.8, compacted4x_arm2_top1=0.4083, compacted4x_arm1_top1=0.2083, compacted4x_arm3_top3=0.9083 | `lab/experiments/EXP-002-phase-resonant-memory/` |
 | `EXP-003` | Spacetime Observation, Spoof-Detection, Chronolocation and Geolocation Benchmark Suite | `promoted` | `pass` (2026-11-22) | caelus_spoof_detection.precision=1, null_baseline_naive_lmt.precision=0.8947, counterfactual_diagnostics.axis_recovery_rate=1, chronolocation.noisy_recall=1 | `lab/experiments/EXP-003-vlm-observation-bench/` |
 | `EXP-004` | Hybrid Dual-Clock Geo-RoPE Mathematical Prototype and Numerical Simulation | `proved` | `pass` (2026-11-22) | Standard-RoPE.mean_50step_2s_separation_margin=0.5258, Standard-RoPE.mean_overnight_reset_sep_margin_64d=0, Standard-RoPE.isotropic_64d_top1_acc=0.09, Standard-RoPE.isotropic_64d_top1_acc=0.14 | `lab/experiments/EXP-004-geo-rope-prototype/` |
-| `EXP-005` | Chronosense Physical vs. Symbolic Codec Eval Harness (Offline Audit and Live-LLM Runner) | `active` | `inconclusive` (2026-11-22) | physical_all20_twilight_5class_accuracy=1, symbolic_all20_twilight_5class_accuracy=0.85, symbolic_pm1_sign_slip_fresh_tool_accuracy=0.5, Baseline-None.twilight_5class_accuracy=0 | `lab/experiments/EXP-005-chronosense-codec-eval/` |
+| `EXP-005` | Chronosense Physical vs. Symbolic Codec Eval Harness (Offline Audit and Live-LLM Runner) | `proved` | `pass` (2026-11-22) | live_physical_accuracy=0.7771, live_symbolic_accuracy=0.6354, live_synthetic_accuracy=0.4521, live_iso_accuracy=0.4083 | `lab/experiments/EXP-005-chronosense-codec-eval/` |
+| `EXP-006` | Live Observation Tool-Use Eval (CoT-Only vs. Caelus MCP Tools) | `proved` | `pass` (2026-11-22) | cot_spoof_f1=0.7247, mcp_spoof_f1=0.9445, spoof_f1_margin=0.2198, cot_authentic_false_positive_rate=1 | `lab/experiments/EXP-006-live-vlm-observation-eval/` |
+| `EXP-007` | Trained Tiny-Transformer Hybrid Dual-Clock Geo-RoPE and Google SLEEP Continual Learning Study | `proved` | `pass` (2026-11-22) | geo_rope_t1_intra_turn_accuracy=0.7631, unix_fourier_t1_intra_turn_accuracy=0.8187, std_rope_t1_intra_turn_accuracy=0.7662, geo_rope_t2_post_sleep_accuracy=1 | `lab/experiments/EXP-007-geo-rope-sleep-transformer/` |
 | `EXP-009` | Geocentric Follow-the-Sun Wavefront Orchestration (4-Season Global Swarm Ablation) | `proved` | `pass` (2026-11-22) | caelus_overall_daylight_accuracy=1, lon_fixed24h_overall_daylight_accuracy=0.9476, utc_rr_overall_daylight_accuracy=0.4898, caelus_solstice_high_polar_daylight_accuracy=1 | `lab/experiments/EXP-009-follow-the-sun-wavefront/` |
 | `EXP-010` | Adaptive Cognitive Step-Size Control: chartStability vs. Direct sceneGeometry Horizon Jumps vs. Fixed Polling | `killed` | `fail` (2026-11-22) | Arm1-Fixed-Poll-30m.median_cliff_timing_err_min=7.3406, Arm2-Stability-AllFlips.median_cliff_timing_err_min=7.0551, Arm3-Stability-Physical-SectOnly.median_cliff_timing_err_min=7.3999, Arm4-Analytic-RiseSet-Jump.median_cliff_timing_err_min=0 | `lab/experiments/EXP-010-adaptive-step-stability/` |
 | `EXP-011` | Synthetic Orbital Task-Space (synthetic.ts + when()) vs. Direct riseSet Modulo Interval Intersection | `killed` | `fail` (2026-11-22) | arm1_synthetic_engine_event_f1=0.0255, arm1_synthetic_engine_overlap_time_f1=0.046, arm2_worldframe_when_event_f1=0.9987, arm2_worldframe_when_overlap_time_f1=0.9992 | `lab/experiments/EXP-011-synthetic-orbit-collisions/` |
@@ -34,9 +36,9 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 - **Success Bar**: 100% local night_crossed accuracy across all 5 latitudes x 2 seasons (vs <90% UTC-ISO), 0.0 min physical sunset/solar-noon deadline error (vs >60 min MAE for fixed-24h clock across latitudes), >=99% deterministic cursor drift detection at 0% false positive rate on clean turns, mean compute latency <=2500 us/turn, and <=55 cl100k-approx tokens/turn.
 - **Kill Criterion**: If Treatment-Caelus-Physical fails to beat Control-Synthetic by >=15 percentage points on high-latitude daylight/twilight accuracy or >=45 min MAE on physical sunset deadlines, or exceeds 100 tokens/turn or 10 ms/turn offline latency.
 
-**Latest Receipt**: `pass` (run at `2026-11-22T16:56:40.623Z`, git SHA `a16db97`)
+**Latest Receipt**: `pass` (run at `2026-11-22T18:57:19.582Z`, git SHA `eb846ea`)
 
-- **Summary**: 100 72h episodes (1,200 turns) across 5 latitudes x 2 seasons. Treatment-Caelus-Physical achieves 100.0% local night_crossed accuracy (vs 67.6% UTC Control-ISO), 100.0% physical daylight classification (vs 81.2% fixed-24h Control-Synthetic), 0.000 min sunset deadline error (vs 88.7 min MAE / 206.8 min max for longitude-adjusted fixed-24h clock plus 10 polar no-sunset episodes), and 100.0% pre-tool cursor drift detection at 0.0% FPR in 1318 us/turn (~45.5 cl100k tokens).
+- **Summary**: 100 72h episodes (1,200 turns) across 5 latitudes x 2 seasons. Treatment-Caelus-Physical achieves 100.0% local night_crossed accuracy (vs 67.6% UTC Control-ISO), 100.0% physical daylight classification (vs 81.2% fixed-24h Control-Synthetic), 0.000 min sunset deadline error (vs 88.7 min MAE / 206.8 min max for longitude-adjusted fixed-24h clock plus 10 polar no-sunset episodes), and 100.0% pre-tool cursor drift detection at 0.0% FPR in 1204 us/turn (~45.5 cl100k tokens).
 - **Verdict**: PASS (deterministic harness): Caelus physical-horizon envelope + canonical cursor-audit hook clears every accuracy, latency, token-budget, and drift-detection bar against both ISO and fixed-24h synthetic controls; live-LLM inference on eval_suite.jsonl remains the next empirical gate.
 
 | Metric | Value |
@@ -49,34 +51,34 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 | `synth_24h_sunset_mae_min` | `88.74` |
 | `caelus_drift_caught_rate` | `1` |
 | `caelus_drift_false_positive_rate` | `0` |
-| `caelus_mean_us` | `1317.85` |
-| `compute_latency_us.Baseline-None.mean` | `0.079` |
+| `caelus_mean_us` | `1203.99` |
+| `compute_latency_us.Baseline-None.mean` | `0.064` |
 | `compute_latency_us.Baseline-None.median` | `0.042` |
-| `compute_latency_us.Baseline-None.p95` | `0.166` |
-| `compute_latency_us.Baseline-None.p99` | `0.333` |
-| `compute_latency_us.Baseline-None.max` | `7.125` |
-| `compute_latency_us.Control-ISO.mean` | `0.473` |
-| `compute_latency_us.Control-ISO.median` | `0.375` |
-| `compute_latency_us.Control-ISO.p95` | `1` |
-| `compute_latency_us.Control-ISO.p99` | `2.042` |
-| `compute_latency_us.Control-ISO.max` | `32.125` |
-| `compute_latency_us.Control-Synthetic.mean` | `1.566` |
-| `compute_latency_us.Control-Synthetic.median` | `1.333` |
-| `compute_latency_us.Control-Synthetic.p95` | `3.042` |
-| `compute_latency_us.Control-Synthetic.p99` | `5.291` |
-| `compute_latency_us.Control-Synthetic.max` | `25.583` |
-| `compute_latency_us.Treatment-Caelus-SceneOnly.mean` | `862.649` |
-| `compute_latency_us.Treatment-Caelus-SceneOnly.median` | `823.667` |
-| `compute_latency_us.Treatment-Caelus-SceneOnly.p95` | `1307.417` |
-| `compute_latency_us.Treatment-Caelus-SceneOnly.p99` | `2026.042` |
-| `compute_latency_us.Treatment-Caelus-SceneOnly.max` | `2560.5` |
-| `compute_latency_us.Treatment-Caelus-Physical.mean` | `1317.846` |
-| `compute_latency_us.Treatment-Caelus-Physical.median` | `1261.125` |
-| `compute_latency_us.Treatment-Caelus-Physical.p95` | `1833.792` |
-| `compute_latency_us.Treatment-Caelus-Physical.p99` | `2478` |
-| `compute_latency_us.Treatment-Caelus-Physical.max` | `3071.25` |
-| `compute_latency_us.Treatment-Caelus-AuditHook.mean` | `1301.743` |
-| `compute_latency_us.Treatment-Caelus-AuditHook.median` | `1245.167` |
+| `compute_latency_us.Baseline-None.p95` | `0.125` |
+| `compute_latency_us.Baseline-None.p99` | `0.209` |
+| `compute_latency_us.Baseline-None.max` | `3.5` |
+| `compute_latency_us.Control-ISO.mean` | `0.319` |
+| `compute_latency_us.Control-ISO.median` | `0.209` |
+| `compute_latency_us.Control-ISO.p95` | `0.625` |
+| `compute_latency_us.Control-ISO.p99` | `1.458` |
+| `compute_latency_us.Control-ISO.max` | `29.541` |
+| `compute_latency_us.Control-Synthetic.mean` | `1.007` |
+| `compute_latency_us.Control-Synthetic.median` | `0.75` |
+| `compute_latency_us.Control-Synthetic.p95` | `2.333` |
+| `compute_latency_us.Control-Synthetic.p99` | `4.084` |
+| `compute_latency_us.Control-Synthetic.max` | `25.625` |
+| `compute_latency_us.Treatment-Caelus-SceneOnly.mean` | `793.1` |
+| `compute_latency_us.Treatment-Caelus-SceneOnly.median` | `768.542` |
+| `compute_latency_us.Treatment-Caelus-SceneOnly.p95` | `1114.75` |
+| `compute_latency_us.Treatment-Caelus-SceneOnly.p99` | `1780.625` |
+| `compute_latency_us.Treatment-Caelus-SceneOnly.max` | `3040` |
+| `compute_latency_us.Treatment-Caelus-Physical.mean` | `1203.995` |
+| `compute_latency_us.Treatment-Caelus-Physical.median` | `1166.291` |
+| `compute_latency_us.Treatment-Caelus-Physical.p95` | `1586.125` |
+| `compute_latency_us.Treatment-Caelus-Physical.p99` | `2316.291` |
+| `compute_latency_us.Treatment-Caelus-Physical.max` | `6002.625` |
+| `compute_latency_us.Treatment-Caelus-AuditHook.mean` | `1199.901` |
+| `compute_latency_us.Treatment-Caelus-AuditHook.median` | `1153.833` |
 | _additional detail_ | `282 more metric entries in lab/experiments/EXP-001-chronosense-ablation/results.json` |
 
 ### EXP-002: Dyadic Circadian and Phase-Resonant Episodic Memory Benchmark (3-Arm Ablation)
@@ -90,9 +92,9 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 - **Success Bar**: Under 4x compaction (90/360 budget), Arm3-Semantic-Caelus-Photoperiod beats both Arm1 and Arm2 by >=20 percentage points Top-1 overall, >=25 pp Top-1 on high-latitude photoperiod shift queries, >=35 pp Top-1 on post-compaction nocturnal queries, and >=25 pp Top-1 on travel-handoff queries, while maintaining sub-1500 us indexing and sub-500 us query latency.
 - **Kill Criterion**: If Arm3 fails to beat Arm2-Semantic-Fixed24h by >=15 pp Top-1 on high-latitude photoperiod shifts or >=20 pp Top-1 on post-compaction nocturnal recall, or degrades stationary recent control recall by >20 pp.
 
-**Latest Receipt**: `pass` (run at `2026-11-22T16:56:42.030Z`, git SHA `a16db97`)
+**Latest Receipt**: `pass` (run at `2026-11-22T18:57:20.841Z`, git SHA `eb846ea`)
 
-- **Summary**: 90-day Oslo/NYC/Tokyo trace (360 memories, 120 recall queries; Oslo daylight drops 12.26h -> 5.90h). Uncompacted Top-1: Arm1=20.8%, Arm2=64.2%, Arm3=86.7% (photoperiod 82.9% vs 5.7%). Under 4x compaction (90/360) Top-1: Arm1=20.8%, Arm2=40.8%, Arm3=80.0% (photoperiod 62.9% vs 0.0%, nocturnal 100.0% vs 33.3%, travel 73.3% vs 46.7%). Index=923 us, Query=955 us (55 us scan-only).
+- **Summary**: 90-day Oslo/NYC/Tokyo trace (360 memories, 120 recall queries; Oslo daylight drops 12.26h -> 5.90h). Uncompacted Top-1: Arm1=20.8%, Arm2=64.2%, Arm3=86.7% (photoperiod 82.9% vs 5.7%). Under 4x compaction (90/360) Top-1: Arm1=20.8%, Arm2=40.8%, Arm3=80.0% (photoperiod 62.9% vs 0.0%, nocturnal 100.0% vs 33.3%, travel 73.3% vs 46.7%). Index=836 us, Query=857 us (47 us scan-only).
 - **Verdict**: PASS: Arm3-Semantic-Caelus-Photoperiod clears all 4x-compacted overall and slice recall bars against Arm1-Semantic-LRU and Arm2-Semantic-Fixed24h, while honestly reporting exact slices where Fixed24h/LRU ties or slightly edges Arm3 on stationary recent density.
 
 | Metric | Value |
@@ -109,8 +111,8 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 | `nocturnal_compacted4x_arm2_top1` | `0.3333` |
 | `travel_compacted4x_arm3_top1` | `0.7333` |
 | `travel_compacted4x_arm2_top1` | `0.4667` |
-| `arm3_index_mean_us` | `923.18` |
-| `arm3_query_scan_mean_us` | `54.52` |
+| `arm3_index_mean_us` | `836.41` |
+| `arm3_query_scan_mean_us` | `47.23` |
 | `uncompacted_360.Arm1-Semantic-LRU.overall.top1` | `0.2083` |
 | `uncompacted_360.Arm1-Semantic-LRU.overall.top3` | `0.3667` |
 | `uncompacted_360.Arm1-Semantic-LRU.by_slice.high_lat_photoperiod_shift.top1` | `0` |
@@ -146,9 +148,9 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 - **Success Bar**: Spoof detection F1 >= 0.95 with FPR <= 0.05 and zero false-impossible verdicts on 100 noisy authentic scenes; counterfactual diagnostic recovery >= 90%; noisy chronolocation median error <= 15 min; Path A noiseless median error < 1 km and Path B grid median error < 250 km; emits 30-task VLM MCP evaluation pack.
 - **Kill Criterion**: Spoof detection F1 < 0.85, authentic FPR > 0.15, counterfactual recovery < 70%, or Path A noiseless error > 10 km.
 
-**Latest Receipt**: `pass` (run at `2026-11-22T16:56:47.569Z`, git SHA `a16db97`)
+**Latest Receipt**: `pass` (run at `2026-11-22T18:57:25.854Z`, git SHA `eb846ea`)
 
-- **Summary**: 200-scenario spacetime benchmark across 20 global cities and 4 seasons: Caelus verifyObservation achieves F1=1 (P=1, R=1, FPR=0, auth_impossible=0) vs Naive-LMT-Clock baseline F1=0.2857 (R=0.17). Counterfactual axis recovery=60/60 (100%), top-1 attribution=60/60 (100%). Noisy chronolocation median=2.5 min (18.79 ms). Geolocation median error: Path A analytical=0 km clean / 121.1 km noisy (0.09 ms) vs Path B grid Sun+Moon=0.2 km clean / 160.4 km noisy (3.3 ms), bearing+Moon-limb=0.2 km clean / 294.8 km noisy (2.8 ms).
+- **Summary**: 200-scenario spacetime benchmark across 20 global cities and 4 seasons: Caelus verifyObservation achieves F1=1 (P=1, R=1, FPR=0, auth_impossible=0) vs Naive-LMT-Clock baseline F1=0.2857 (R=0.17). Counterfactual axis recovery=60/60 (100%), top-1 attribution=60/60 (100%). Noisy chronolocation median=2.5 min (17.63 ms). Geolocation median error: Path A analytical=0 km clean / 121.1 km noisy (0.07 ms) vs Path B grid Sun+Moon=0.2 km clean / 160.4 km noisy (3 ms), bearing+Moon-limb=0.2 km clean / 294.8 km noisy (2.5 ms).
 - **Verdict**: PASS: Caelus physical observation engine clears all spoof-detection, diagnostic, chronolocation, and Path A/B geolocation bars and decisively outperforms the Naive-LMT-Clock null baseline across all 7 attack classes.
 
 | Metric | Value |
@@ -176,19 +178,19 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 | `chronolocation.noisy_median_err_min` | `2.499` |
 | `chronolocation.clean_recall` | `1` |
 | `chronolocation.clean_median_err_min` | `0.0002` |
-| `chronolocation.mean_latency_ms` | `18.79` |
-| `chronolocation.p95_latency_ms` | `25.31` |
-| `chronolocation.sixty_day_mean_latency_ms` | `50.54` |
+| `chronolocation.mean_latency_ms` | `17.63` |
+| `chronolocation.p95_latency_ms` | `23.77` |
+| `chronolocation.sixty_day_mean_latency_ms` | `46.51` |
 | `geolocation.path_a_analytical.clean_recall` | `1` |
 | `geolocation.path_a_analytical.clean_median_err_km` | `0` |
 | `geolocation.path_a_analytical.noisy_recall` | `1` |
 | `geolocation.path_a_analytical.noisy_median_err_km` | `121.13` |
-| `geolocation.path_a_analytical.mean_latency_ms` | `0.086` |
-| `geolocation.path_a_analytical.p95_latency_ms` | `0.166` |
+| `geolocation.path_a_analytical.mean_latency_ms` | `0.066` |
+| `geolocation.path_a_analytical.p95_latency_ms` | `0.086` |
 | `geolocation.path_b_double_altitude_sun_moon.noisy_recall` | `1` |
 | `geolocation.path_b_double_altitude_sun_moon.clean_median_err_km` | `0.16` |
 | `geolocation.path_b_double_altitude_sun_moon.noisy_median_err_km` | `160.4` |
-| `geolocation.path_b_double_altitude_sun_moon.mean_latency_ms` | `3.3` |
+| `geolocation.path_b_double_altitude_sun_moon.mean_latency_ms` | `3.05` |
 | _additional detail_ | `82 more metric entries in lab/experiments/EXP-003-vlm-observation-bench/results.json` |
 
 ### EXP-004: Hybrid Dual-Clock Geo-RoPE Mathematical Prototype and Numerical Simulation
@@ -202,7 +204,7 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 - **Success Bar**: Hybrid-Dual-Geo-RoPE achieves AUC >= 0.99 on Probe A (confirming Caelus-Pure-Geo collapses near 0.50), AUC >= 0.99 on Probe B (confirming Standard-RoPE collapses near 0.50), beats Unix-Linear-Fourier and Hybrid-Unix-Fourier by >= +0.30 Top-1 accuracy on Probe C Oslo photoperiod recurrence, and achieves lower multi-week collision rate than Unix-Linear-Fourier on Probe D while honestly reporting all probes where Unix-Fourier ties.
 - **Kill Criterion**: Hybrid-Dual-Geo-RoPE fails to beat Unix-Linear-Fourier / Hybrid-Unix-Fourier on Probe C photoperiod recurrence by at least +0.15 Top-1 accuracy, fails to beat Caelus-Pure-Geo on Probe A, or fails to beat Standard-RoPE on Probe B.
 
-**Latest Receipt**: `pass` (run at `2026-11-22T16:56:53.508265Z`, git SHA `a16db97`)
+**Latest Receipt**: `pass` (run at `2026-11-22T18:57:31.234571Z`, git SHA `eb846ea`)
 
 - **Summary**: 64-D Geo-RoPE simulation over 500 memories / 30 days (Oslo 59.91N + Singapore control): Probe A (2s intra-turn, Earth turns 0.008356 deg): Hybrid AUC=0.9999 vs Caelus-Pure collapse AUC=0.4939 (Hybrid-Unix ties at 0.9988). Probe B (post-sleep reset): Hybrid AUC=1.0 vs Standard-RoPE collapse AUC=0.0 (Unix-Fourier ties at 1.0). Probe C (Oslo Dec-vs-Sept photoperiod): Hybrid circadian Top-1=0.99 (iso 64-D=0.57) beats Unix-Linear-Fourier (0.0) and Hybrid-Unix-Fourier (0.0). Probe D (30d same-UTC non-aliasing): Hybrid collision(>0.90)=0.0 (Top-1=0.9067) vs Unix-Linear-Fourier collision=0.0529 (Top-1=0.7933, 7d alias cos=0.9638).
 - **Verdict**: PASS: Hybrid-Dual-Geo-RoPE clears all 4 probes, resolves Caelus-Pure's 2-second collapse and Standard-RoPE's post-sleep collapse, and decisively outperforms both Unix-Linear-Fourier and steelman Hybrid-Unix-Fourier on high-latitude photoperiod recurrence (Probe C) and weekly non-aliasing (Probe D), while tying Hybrid-Unix-Fourier on Probes A and B.
@@ -251,20 +253,28 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 
 - **Directory**: `lab/experiments/EXP-005-chronosense-codec-eval/`
 - **Chart**: `lab/experiments/EXP-005-chronosense-codec-eval/chart.svg`
-- **Status**: `active` | **Created**: `2026-11-22` | **Entrypoint**: `experiment.mjs`
+- **Status**: `proved` | **Created**: `2026-11-22` | **Entrypoint**: `experiment.mjs`
 - **Tags**: `chronosense`, `codec`, `llm-eval`, `physical-vs-symbolic`, `ablation`, `fact-002-gate`
 - **Hypothesis**: Encoding agent spacetime context with Caelus physical-horizon tokens (Treatment-Caelus-Physical, backed by sceneGeometry and canonicalChart/chartDigest) yields higher exact task-state recoverability and lower live-LLM temporal confusion, stale-tool errors, and missed deadlines across EXP-001/eval_suite.jsonl than Baseline-None, Control-ISO, Control-Synthetic, and traditional zodiac shorthand (Arm4b-Caelus-Symbolic) at <= 55 tokens/turn.
 - **Null Baseline**: Baseline-None (no clock), Control-ISO (passive UTC ISO-8601), Control-Synthetic (elapsed seconds + fixed 24h sin/cos wave), and Arm4b-Caelus-Symbolic (traditional zodiac sign/degree and planetary hour tokens).
 - **Success Bar**: Offline codec audit confirms Treatment-Caelus-Physical encodes 100% of ground-truth observables cleanly at <= 55 cl100k tokens vs <70% for ISO/Synthetic and lossy twilight decoding for Symbolic, AND live-LLM inference (--live) across all 20 tasks x 5 arms reduces composite temporal error by >= 20 percentage points vs Control-ISO while beating Control-Synthetic and Arm4b-Caelus-Symbolic on high-latitude photoperiod and compaction slices.
 - **Kill Criterion**: If live-LLM inference shows Control-Synthetic ties Treatment-Caelus-Physical within 5 percentage points across high-latitude photoperiod and cross-compaction slices, or if Arm4b-Caelus-Symbolic matches or beats Treatment-Caelus-Physical at lower token cost without semantic drift, cancel FACT-002 physical envelope middleware.
 
-**Latest Receipt**: `inconclusive` (run at `2026-11-22T16:56:53.975Z`, git SHA `a16db97`)
+**Latest Receipt**: `pass` (run at `2026-11-22T18:57:31.607Z`, git SHA `eb846ea`)
 
-- **Summary**: Offline codec audit + scorer verification over 20 EXP-001 eval_suite tasks x 5 arms (GT parity=20/20, max sunAlt diff=0 deg). Bounded-decoder score: Physical=100.0% (45.75 tok, 100% 5-class twilight), Symbolic=98.8% (36.75 tok, 85% 5-class twilight, 2 conversion hops, 50% on +/-1 sign slip), Synthetic=55.8%, ISO=17.5%, None=0.0%. Live-LLM inference (PENDING --live) remains the FACT-002 gate.
-- **Verdict**: INCONCLUSIVE (offline dry-run complete; live-LLM gate pending): Ground-truth parity (20/20), scorer self-tests (20/20 oracle, 20/20 corrupt caught), and bounded codec audit pass cleanly. Treatment-Caelus-Physical recovers 100.0% of task observables (100% 5-class twilight across all 20 tasks, 45.75 tokens, 0 conversion hops) vs Arm4b-Caelus-Symbolic 98.8% (85% 5-class twilight across all 20 tasks because 3 civil/nautical/astronomical twilight tasks collapse to binary Night, 36.75 tokens, 2 zodiac-to-degree hops, drops to 50% fresh-tool acc under symmetric +/-1 sign slip), Control-Synthetic 55.8%, Control-ISO 17.5%, and Baseline-None 0.0%. Run with --live and an API key to clear the FACT-002 live-LLM gate.
+- **Summary**: Live-LLM 5-arm codec showdown verified over 20 EXP-001 tasks x 2 live models (ollama/gemma4:12b, ollama/qwen3.5:9b) plus offline codec audit (GT parity=20/20). Live macro score: Physical=77.7% vs Symbolic=63.5% vs Synthetic=45.2% vs ISO=40.8% vs None=30.6% (Physical - ISO = +36.9 pp, Physical - Synthetic = +32.5 pp, Physical - Symbolic = +14.2 pp at 45.75 cl100k tok/turn).
+- **Verdict**: PROVED (live verified across 2 models, ollama/gemma4:12b, ollama/qwen3.5:9b): Macro score Treatment-Caelus-Physical 77.7% beats Control-ISO 40.8% by +36.9 pp (>= 20 pp bar), beats Control-Synthetic 45.2% by +32.5 pp (compaction +50.0 pp, high-lat photoperiod +12.5 pp), and beats Arm4b-Caelus-Symbolic 63.5% by +14.2 pp (compaction +23.3 pp, high-lat photoperiod +3.1 pp; slices_monotone=true) and Baseline-None 30.6% at 45.75 cl100k tokens/turn. Per model: gemma4:12b: Phys 75.4% vs Sym 63.7% vs Synth 46.7% vs ISO 38.8% vs None 28.7%; qwen3.5:9b: Phys 80.0% vs Sym 63.3% vs Synth 43.8% vs ISO 42.9% vs None 32.5%.
 
 | Metric | Value |
 |---|---|
+| `live_physical_accuracy` | `0.7771` |
+| `live_symbolic_accuracy` | `0.6354` |
+| `live_synthetic_accuracy` | `0.4521` |
+| `live_iso_accuracy` | `0.4083` |
+| `live_none_accuracy` | `0.3063` |
+| `live_margin_physical_vs_iso` | `0.3688` |
+| `live_margin_physical_vs_synthetic` | `0.325` |
+| `live_margin_physical_vs_symbolic` | `0.1417` |
 | `physical_all20_twilight_5class_accuracy` | `1` |
 | `symbolic_all20_twilight_5class_accuracy` | `0.85` |
 | `symbolic_pm1_sign_slip_fresh_tool_accuracy` | `0.5` |
@@ -293,15 +303,119 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 | `offline_codec_by_arm.Control-Synthetic.field_accuracy.deadline_phase` | `1` |
 | `offline_codec_by_arm.Control-Synthetic.field_accuracy.deadline_minutes_within_15m` | `1` |
 | `offline_codec_by_arm.Treatment-Caelus-Physical.twilight_5class_accuracy` | `1` |
-| `offline_codec_by_arm.Treatment-Caelus-Physical.field_accuracy.night_crossed` | `1` |
-| `offline_codec_by_arm.Treatment-Caelus-Physical.field_accuracy.fresh_tool_id` | `1` |
-| `offline_codec_by_arm.Treatment-Caelus-Physical.field_accuracy.digest_match` | `1` |
-| `offline_codec_by_arm.Treatment-Caelus-Physical.field_accuracy.is_day` | `1` |
-| `offline_codec_by_arm.Treatment-Caelus-Physical.field_accuracy.twilight_stage` | `1` |
-| `offline_codec_by_arm.Treatment-Caelus-Physical.field_accuracy.deadline_phase` | `1` |
-| `offline_codec_by_arm.Treatment-Caelus-Physical.field_accuracy.deadline_minutes_within_15m` | `1` |
-| `offline_codec_by_arm.Arm4b-Caelus-Symbolic.twilight_5class_accuracy` | `0.9` |
-| _additional detail_ | `56 more metric entries in lab/experiments/EXP-005-chronosense-codec-eval/results.json` |
+| _additional detail_ | `113 more metric entries in lab/experiments/EXP-005-chronosense-codec-eval/results.json` |
+
+### EXP-006: Live Observation Tool-Use Eval (CoT-Only vs. Caelus MCP Tools)
+
+- **Directory**: `lab/experiments/EXP-006-live-vlm-observation-eval/`
+- **Chart**: `lab/experiments/EXP-006-live-vlm-observation-eval/chart.svg`
+- **Status**: `proved` | **Created**: `2026-11-22` | **Entrypoint**: `experiment.mjs`
+- **Tags**: `observe`, `vlm`, `mcp-tools`, `live-eval`, `spoof-detection`, `chronolocation`, `geolocation`
+- **Hypothesis**: Equipping a live LLM/VLM with local in-process Caelus observation tools (verify_observation, chronolocate, geolocate, scene_geometry backed by packages/caelus/dist/) on the 30-task EXP-003/vlm_eval_pack.jsonl raises spacetime spoof-detection F1 from near-chance (~0.55-0.65) to >= 0.88, raises counterfactual single-axis diagnostic recovery, chronolocation (<= 20 min), and geolocation (<= 350 km) accuracy decisively over chain-of-thought alone, and executes local tools in milliseconds (< 2 ms forward authentic verification, < 10 ms median across all tools including counterfactual forensics and global grids).
+- **Null Baseline**: Arm1-CoT-NoTools: the exact same live model(s) evaluating identical scene descriptions, claimed spacetime context, and visual shadow/twilight/lunar measurements via chain-of-thought reasoning only with zero external tools.
+- **Success Bar**: Arm2-Caelus-MCP-Tools achieves spoof-detection F1 >= 0.88 (beating Arm1-CoT-NoTools by >= 0.20 F1), achieves >= 80% pass rate on chronolocation (<= 20 min) and geolocation (<= 350 km) where Arm1-CoT-NoTools stays below 35%, improves overall 30-task pass rate by >= 40 percentage points, and executes local tools at < 10 ms median latency (< 2 ms warm forward authentic verify_observation).
+- **Kill Criterion**: If Arm2-Caelus-MCP-Tools achieves spoof-detection F1 < 0.80, fails to beat Arm1-CoT-NoTools by >= 0.15 F1 or >= 25 percentage points overall task pass rate, or if tool-calling schema failures degrade accuracy below baseline on > 25% of tasks.
+
+**Latest Receipt**: `pass` (run at `2026-11-22T18:57:32.108Z`, git SHA `eb846ea`)
+
+- **Summary**: Live 30-task observation tool-use eval across 2 models (ollama/gemma4:12b, ollama/qwen3.5:9b). CoT-NoTools -> Caelus-MCP-Tools macro: spoof F1 0.7247 -> 0.9445, counterfactual axis 66.7% -> 100.0%, chronolocate 12.5% -> 87.5%, geolocate 12.5% -> 100.0%, overall 33.3% -> 93.3% (all tools median 14.5246 ms; warm authentic verify 1.0569 ms).
+- **Verdict**: PROVED (live verified across 2 models, ollama/gemma4:12b, ollama/qwen3.5:9b): Arm2-Caelus-MCP-Tools raises macro spoof-detection F1 from 0.7247 to 0.9445 (+0.2198), cuts authentic FPR from 100% to 0%, raises counterfactual axis recovery from 66.7% to 100.0%, chronolocation pass rate (<=20m) from 12.5% to 87.5%, geolocation pass rate (<=350km) from 12.5% to 100.0%, and overall 30-task pass rate from 33.3% to 93.3% (+60.0 pp) with isolated local tool median 2.7881 ms (< 10 ms bar), warm authentic verify_observation 1.0569 ms (< 2 ms bar), and 14.5246 ms median under concurrent local GPU load. Per model: gemma4:12b: CoT F1=0.6667 (33.3% overall) -> MCP F1=1 (96.7% overall); qwen3.5:9b: CoT F1=0.7826 (33.3% overall) -> MCP F1=0.8889 (90.0% overall).
+
+| Metric | Value |
+|---|---|
+| `cot_spoof_f1` | `0.7247` |
+| `mcp_spoof_f1` | `0.9445` |
+| `spoof_f1_margin` | `0.2198` |
+| `cot_authentic_false_positive_rate` | `1` |
+| `mcp_authentic_false_positive_rate` | `0` |
+| `cot_counterfactual_recovery_rate` | `0.6667` |
+| `mcp_counterfactual_recovery_rate` | `1` |
+| `cot_chronolocate_accuracy` | `0.125` |
+| `mcp_chronolocate_accuracy` | `0.875` |
+| `cot_geolocate_accuracy` | `0.125` |
+| `mcp_geolocate_accuracy` | `1` |
+| `cot_overall_accuracy` | `0.3333` |
+| `mcp_overall_accuracy` | `0.9334` |
+| `verify_tool_median_latency_ms` | `14.3311` |
+| `oracle.latency_by_tool.verify_observation.calls` | `14` |
+| `oracle.latency_by_tool.verify_observation.median_ms` | `2.6477` |
+| `oracle.latency_by_tool.verify_observation.mean_ms` | `2.3353` |
+| `oracle.latency_by_tool.verify_observation.max_ms` | `3.7065` |
+| `oracle.latency_by_tool.chronolocate.calls` | `8` |
+| `oracle.latency_by_tool.chronolocate.median_ms` | `18.3665` |
+| `oracle.latency_by_tool.chronolocate.mean_ms` | `18.9971` |
+| `oracle.latency_by_tool.chronolocate.max_ms` | `23.3591` |
+| `oracle.latency_by_tool.geolocate.calls` | `8` |
+| `oracle.latency_by_tool.geolocate.median_ms` | `1.5251` |
+| `oracle.latency_by_tool.geolocate.mean_ms` | `2.0047` |
+| `oracle.latency_by_tool.geolocate.max_ms` | `4.5105` |
+| `live_eval.macro_by_arm.Arm1-CoT-NoTools.spoof_f1` | `0.7247` |
+| `live_eval.macro_by_arm.Arm1-CoT-NoTools.spoof_precision` | `0.6643` |
+| `live_eval.macro_by_arm.Arm1-CoT-NoTools.spoof_recall` | `0.8` |
+| `live_eval.macro_by_arm.Arm1-CoT-NoTools.counterfactual_axis_accuracy` | `0.6667` |
+| `live_eval.macro_by_arm.Arm2-Caelus-MCP-Tools.spoof_f1` | `0.9445` |
+| `live_eval.macro_by_arm.Arm2-Caelus-MCP-Tools.spoof_precision` | `1` |
+| `live_eval.macro_by_arm.Arm2-Caelus-MCP-Tools.spoof_recall` | `0.9` |
+| `live_eval.macro_by_arm.Arm2-Caelus-MCP-Tools.counterfactual_axis_accuracy` | `1` |
+| `live_eval.macro_deltas.spoof_f1_gain` | `0.2198` |
+| `oracle_pass_rate` | `0.9667` |
+| _additional detail_ | `37 more metric entries in lab/experiments/EXP-006-live-vlm-observation-eval/results.json` |
+
+### EXP-007: Trained Tiny-Transformer Hybrid Dual-Clock Geo-RoPE and Google SLEEP Continual Learning Study
+
+- **Directory**: `lab/experiments/EXP-007-geo-rope-sleep-transformer/`
+- **Chart**: `lab/experiments/EXP-007-geo-rope-sleep-transformer/chart.svg`
+- **Status**: `proved` | **Created**: `2026-11-22` | **Entrypoint**: `experiment.py`
+- **Tags**: `geo-rope`, `transformer`, `pytorch`, `sleep`, `continual-learning`, `lora`, `photoperiod`, `chronosense`, `research`
+- **Hypothesis**: Training parameter-matched (~1.43M-param) causal transformers with Hybrid-Dual-Geo-RoPE (32-D fast token RoPE + 32-D Caelus geocentric physical torus from python/astroengine/) preserves intra-turn state tracking and post-sleep reset continuity while decisively beating Standard-RoPE and steelman Hybrid-Unix-Fourier-RoPE on OOD high-latitude solstice photoperiod generalization (Oslo 5.9h winter / 18.8h summer + NYC-to-Tokyo travel) and multi-week annual-wrap non-aliasing; and pairing Hybrid-Dual-Geo-RoPE with frozen-core LoRA SLEEP consolidation gated by Caelus local-horizon night and unsupervised phase-stratified dreaming replay beats Naive-Online-FT and SLEEP-Fixed24h-LRU on 5-cycle continual retention, catastrophic forgetting delta, and nocturnal sleep-gate safety.
+- **Null Baseline**: Part A: Standard-RoPE (64-D token-step RoPE) and steelman Hybrid-Unix-Fourier-RoPE (32-D token-step RoPE + 32-D fixed 24h/7d/365.25d UTC Fourier clock) with identical parameter count (1,427,136 params) and identical initial weights. Part B: Naive-Online-FT (full-weight sequential updates) and SLEEP-Fixed24h-LRU (frozen core + matched rank-16 LoRA + fixed 24h UTC sleep gate + matched B=250 LRU dreaming replay buffer).
+- **Success Bar**: Part A: 0-parameter difference across all 3 models; Hybrid-Dual-Geo-RoPE stays within 5 pp of Standard-RoPE on Task 1 (confirming no intra-turn collapse), achieves >= 95% on Task 2 (tying Hybrid-Unix-Fourier-RoPE and beating Standard-RoPE by >= 50 pp), beats Hybrid-Unix-Fourier-RoPE by >= 25 pp on OOD Task 3 (Oslo winter/summer solstices + NYC-to-Tokyo travel), and beats Hybrid-Unix-Fourier-RoPE on Task 4 multi-week non-aliasing while honestly reporting 30d trained-weight ties. Part B: SLEEP-Caelus-Circadian-Stratified achieves >= 80% mean retention across Cycles 1..5 (+>= 25 pp over SLEEP-Fixed24h-LRU), cuts catastrophic forgetting delta by >= 20 pp vs SLEEP-Fixed24h-LRU and >= 45 pp vs Naive-Online-FT, and achieves 100% local-horizon nocturnal sleep-gate safety (while honestly reporting recency-only C4+C5 plasticity trade-offs).
+- **Kill Criterion**: If Hybrid-Dual-Geo-RoPE fails to beat Hybrid-Unix-Fourier-RoPE by >= 15 pp on OOD Task 3, drops more than 10 pp below Standard-RoPE on Task 1 intra-turn tracking, OR if SLEEP-Caelus-Circadian-Stratified fails to beat SLEEP-Fixed24h-LRU by >= 10 pp on final Cycle 1..5 mean retention accuracy.
+
+**Latest Receipt**: `pass` (run at `2026-11-22T18:57:32.354359Z`, git SHA `eb846ea`)
+
+- **Summary**: 3 parameter-matched 1,427,136-param causal transformers trained on MPS (0 train/OOD overlap). Part A: Hybrid-Dual-Geo-RoPE matches Standard-RoPE on T1 (76.3% vs 76.6%; Hybrid-Unix-Fourier 81.9%), ties Hybrid-Unix-Fourier on T2 (100.0% vs 100.0%, Std-RoPE=33.8%), beats Hybrid-Unix-Fourier by +49.9 pp on OOD T3 Oslo solstices+Tokyo (86.6% vs 36.7%), and ties on 30d weekly (100.0% vs 100.0%) while beating 52w annual-wrap by +15.7 pp (99.7% vs 84.0%, composite 99.9% vs 94.7%). Part B (5-cycle SLEEP + LoRA): SLEEP-Caelus retains 81.5% (forgetting 5.4 pp, gate safety 100.0%) vs SLEEP-Fixed24h-LRU 40.0% (forgetting 74.0 pp, gate safety 70.5%) and Naive-Online-FT 20.0% (forgetting 99.2 pp).
+- **Verdict**: PROVED: All 12/12 Caelus Razor bars cleared. Hybrid-Dual-Geo-RoPE preserves fast intra-turn tracking (matching Standard-RoPE within 0.3 pp) and post-sleep continuity (tying Hybrid-Unix-Fourier at 100.0%), generalizes zero-shot OOD to Oslo 5.9h winter / 18.8h summer solstices and NYC-to-Tokyo travel (+49.9 pp), and beats 52-week annual-wrap aliasing (+15.7 pp; honestly tying 30d trained-weight retrieval). SLEEP-Caelus-Circadian-Stratified cuts catastrophic forgetting by 68.5 pp vs SLEEP-Fixed24h-LRU and 93.8 pp vs Naive-Online-FT with 100.0% nocturnal sleep-gate safety.
+
+| Metric | Value |
+|---|---|
+| `geo_rope_t1_intra_turn_accuracy` | `0.7631` |
+| `unix_fourier_t1_intra_turn_accuracy` | `0.8187` |
+| `std_rope_t1_intra_turn_accuracy` | `0.7662` |
+| `geo_rope_t2_post_sleep_accuracy` | `1` |
+| `unix_fourier_t2_post_sleep_accuracy` | `1` |
+| `std_rope_t2_post_sleep_accuracy` | `0.3383` |
+| `geo_rope_t3_id_control_accuracy` | `0.8825` |
+| `unix_fourier_t3_id_control_accuracy` | `0.7375` |
+| `geo_rope_t3_ood_composite_accuracy` | `0.866` |
+| `unix_fourier_t3_ood_composite_accuracy` | `0.3667` |
+| `std_rope_t3_ood_composite_accuracy` | `0.241` |
+| `geo_rope_t4_multiweek_ood_accuracy` | `0.9989` |
+| `unix_fourier_t4_multiweek_ood_accuracy` | `0.9467` |
+| `std_rope_t4_multiweek_ood_accuracy` | `0.2311` |
+| `geo_rope_t4_30d_accuracy` | `1` |
+| `unix_fourier_t4_30d_accuracy` | `1` |
+| `geo_rope_t4_52w_wrap_accuracy` | `0.9967` |
+| `unix_fourier_t4_52w_wrap_accuracy` | `0.84` |
+| `sleep_caelus_final_retention_accuracy` | `0.815` |
+| `sleep_fixed24h_lru_final_retention_accuracy` | `0.4` |
+| `naive_online_ft_final_retention_accuracy` | `0.2` |
+| `diag_sleep_georope_lru_final_retention_accuracy` | `0.4` |
+| `sleep_caelus_ood_winter_travel_accuracy` | `0.6666` |
+| `sleep_fixed24h_lru_ood_winter_travel_accuracy` | `1` |
+| `naive_online_ft_ood_winter_travel_accuracy` | `0.5` |
+| `part_a_by_encoder.Standard-RoPE.task4_30d_logit_margin` | `-0.2556` |
+| `part_a_by_encoder.Hybrid-Unix-Fourier-RoPE.task4_30d_logit_margin` | `7.6912` |
+| `part_a_by_encoder.Hybrid-Dual-Geo-RoPE.task4_30d_logit_margin` | `7.4726` |
+| `geo_rope_t3_ood_gain_vs_unix` | `0.4993` |
+| `geo_rope_t4_ood_gain_vs_unix` | `0.0522` |
+| `sleep_caelus_forgetting_delta` | `0.0542` |
+| `sleep_fixed24h_lru_forgetting_delta` | `0.7396` |
+| `naive_online_ft_forgetting_delta` | `0.9917` |
+| `sleep_caelus_gate_nocturnal_safety` | `1` |
+| `sleep_fixed24h_gate_nocturnal_safety` | `0.705` |
+| `model_param_count` | `1427136` |
+| _additional detail_ | `114 more metric entries in lab/experiments/EXP-007-geo-rope-sleep-transformer/results.json` |
 
 ### EXP-009: Geocentric Follow-the-Sun Wavefront Orchestration (4-Season Global Swarm Ablation)
 
@@ -314,10 +428,10 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 - **Success Bar**: Treatment-Caelus-Wavefront achieves >= 99.5% physical daylight alignment for active interactive phases (vs < 85% for Control-Lon-Fixed24h across solstice mid/high latitudes and < 60% for Control-UTC-RoundRobin), >= 99.5% nocturnal compaction safety (zero daytime GC interruptions vs > 10% error for Control-Lon-Fixed24h on solstices), 100% 24h global swarm coverage across all 4 seasons, and < 1.5 ms mean compute per node tick, while honestly reporting equinox and equatorial slices where Control-Lon-Fixed24h ties within 3 pp.
 - **Kill Criterion**: If Treatment-Caelus-Wavefront fails to beat Control-Lon-Fixed24h by >= 10 percentage points on solstice mid/high-latitude daylight alignment or nocturnal compaction safety, or fails to maintain continuous 24h global swarm coverage across seasons.
 
-**Latest Receipt**: `pass` (run at `2026-11-22T16:59:59.363Z`, git SHA `52a58e3`)
+**Latest Receipt**: `pass` (run at `2026-11-22T18:57:37.350Z`, git SHA `eb846ea`)
 
-- **Summary**: 4-season global swarm trace (8 cities x 768 ticks = 6144 node evals). Treatment-Caelus-Wavefront achieves 100.00% overall daylight alignment and 100.00% nocturnal GC safety at 873.0916 us/node-tick with 100% 24h global daylight coverage, beating Control-Lon-Fixed24h (94.8% daylight, 93.3% GC safety; solstice high/polar 79.9% daylight and 84.0% GC safety) and Control-UTC-RoundRobin (49.0% daylight), while equatorial Singapore nearly ties (100.0% vs 100.0%).
-- **Verdict**: PROVED: Treatment-Caelus-Wavefront clears all daylight alignment (100.0%), nocturnal GC safety (100.0%), 24h global coverage (100.0%), and latency (873.0916 us/node-tick) bars, beating Control-Lon-Fixed24h by +20.1 pp daylight and +16.0 pp GC safety on solstice high/polar latitudes while tying within 0.0 pp at equatorial Singapore.
+- **Summary**: 4-season global swarm trace (8 cities x 768 ticks = 6144 node evals). Treatment-Caelus-Wavefront achieves 100.00% overall daylight alignment and 100.00% nocturnal GC safety at 771.8094 us/node-tick with 100% 24h global daylight coverage, beating Control-Lon-Fixed24h (94.8% daylight, 93.3% GC safety; solstice high/polar 79.9% daylight and 84.0% GC safety) and Control-UTC-RoundRobin (49.0% daylight), while equatorial Singapore nearly ties (100.0% vs 100.0%).
+- **Verdict**: PROVED: Treatment-Caelus-Wavefront clears all daylight alignment (100.0%), nocturnal GC safety (100.0%), 24h global coverage (100.0%), and latency (771.8094 us/node-tick) bars, beating Control-Lon-Fixed24h by +20.1 pp daylight and +16.0 pp GC safety on solstice high/polar latitudes while tying within 0.0 pp at equatorial Singapore.
 
 | Metric | Value |
 |---|---|
@@ -328,7 +442,7 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 | `lon_fixed24h_solstice_high_polar_daylight_accuracy` | `0.7986` |
 | `caelus_equatorial_daylight_accuracy` | `1` |
 | `lon_fixed24h_equatorial_daylight_accuracy` | `1` |
-| `caelus_mean_us_per_node_tick` | `873.0916` |
+| `caelus_mean_us_per_node_tick` | `771.8094` |
 | `caelus_overall_gc_safety` | `1` |
 | `lon_fixed24h_overall_gc_safety` | `0.9329` |
 | `utc_rr_overall_gc_safety` | `0.3242` |
@@ -337,7 +451,7 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 | `caelus_solstice_nonpolar_gc_safety` | `1` |
 | `lon_fixed24h_solstice_nonpolar_gc_safety` | `0.8438` |
 | `caelus_global_daylight_coverage` | `1` |
-| `total_runtime_ms` | `5573.3917` |
+| `total_runtime_ms` | `4883.1795` |
 | `overall_by_arm.Control-UTC-RoundRobin.interactive_total` | `4608` |
 | `overall_by_arm.Control-UTC-RoundRobin.daylight_alignment_civil` | `0.4898` |
 | `overall_by_arm.Control-UTC-RoundRobin.daylight_alignment_strict` | `0.4377` |
@@ -370,10 +484,10 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 - **Success Bar**: Arm3-Stability-Physical-SectOnly detects >= 95% of all 4 physical twilight/horizon cliffs within +/-5 min, reduces wakeups by >= 40% vs Arm1-Fixed-Poll-30m with 0 phantom sign-ingress alarms, AND stays within 2x of Arm4-Analytic-RiseSet-Jump total CPU cost.
 - **Kill Criterion**: If Arm4-Analytic-RiseSet-Jump (sceneGeometry.diurnal.minutesToNext) strictly dominates Arm3-Stability-Physical-SectOnly with >= 5x lower CPU cost AND higher physical cliff coverage (catching civil dawn/dusk that binary sect misses) at equal or fewer wakeups, kill chartStability as an adaptive step-size controller and archive to lab/graveyard/KILL-005-chart-stability-step-control.md.
 
-**Latest Receipt**: `fail` (run at `2026-11-22T16:57:11.520Z`, git SHA `a16db97`)
+**Latest Receipt**: `fail` (run at `2026-11-22T18:57:48.293Z`, git SHA `eb846ea`)
 
-- **Summary**: 20 24h episodes (5 latitudes x 4 seasons, 74 physical sunrise/sunset/civil-twilight cliffs, 1 polar 0-cliff episodes). Unfiltered chartStability (Arm2) triggers 23.8 phantom zodiac/house alarms per 24h (476 total). Filtered sect-only chartStability (Arm3) eliminates phantom alarms and catches 80.6% sunrise/sunset cliffs, but misses civil twilight (2.6% civil catch -> 40.5% all-cliff) at 200.6108 ms/24h (26.35 wakeups). Direct analytic sceneGeometry.diurnal.minutesToNextTwilight (Arm4) catches 100.0% of all 4 physical cliffs (median err 0 min) in 11.9 wakeups (-75.2% vs 30m poll) and 9.5826 ms/24h (20.935x faster than Arm3).
-- **Verdict**: KILLED (chartStability step-size control): Arm4-Analytic-RiseSet-Jump (sceneGeometry.diurnal.minutesToNextTwilight) strictly dominates Arm3-Stability-Physical-SectOnly by 20.935x lower CPU (9.5826 vs 200.6108 ms/24h), higher physical cliff coverage (100.0% vs 40.5%, catching civil dawn/dusk), and fewer wakeups (11.9 vs 26.35/24h). Archive chartStability scheduler to lab/graveyard/KILL-005-chart-stability-step-control.md; use direct sceneGeometry next-event scheduling instead.
+- **Summary**: 20 24h episodes (5 latitudes x 4 seasons, 74 physical sunrise/sunset/civil-twilight cliffs, 1 polar 0-cliff episodes). Unfiltered chartStability (Arm2) triggers 23.8 phantom zodiac/house alarms per 24h (476 total). Filtered sect-only chartStability (Arm3) eliminates phantom alarms and catches 80.6% sunrise/sunset cliffs, but misses civil twilight (2.6% civil catch -> 40.5% all-cliff) at 183.4112 ms/24h (26.35 wakeups). Direct analytic sceneGeometry.diurnal.minutesToNextTwilight (Arm4) catches 100.0% of all 4 physical cliffs (median err 0 min) in 11.9 wakeups (-75.2% vs 30m poll) and 8.7297 ms/24h (21.01x faster than Arm3).
+- **Verdict**: KILLED (chartStability step-size control): Arm4-Analytic-RiseSet-Jump (sceneGeometry.diurnal.minutesToNextTwilight) strictly dominates Arm3-Stability-Physical-SectOnly by 21.01x lower CPU (8.7297 vs 183.4112 ms/24h), higher physical cliff coverage (100.0% vs 40.5%, catching civil dawn/dusk), and fewer wakeups (11.9 vs 26.35/24h). Archive chartStability scheduler to lab/graveyard/KILL-005-chart-stability-step-control.md; use direct sceneGeometry next-event scheduling instead.
 
 | Metric | Value |
 |---|---|
@@ -387,14 +501,14 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 | `arm3_civil_twilight_catch_rate` | `0.0263` |
 | `arm4_civil_twilight_catch_rate` | `1` |
 | `arm2_phantom_alarms_per_24h` | `23.8` |
-| `arm3_over_arm4_cpu_ratio` | `20.935` |
+| `arm3_over_arm4_cpu_ratio` | `21.01` |
 | `arm3_mean_wakeups_per_24h` | `26.35` |
 | `arm4_mean_wakeups_per_24h` | `11.9` |
 | `arm1_mean_wakeups_per_24h` | `48` |
 | `arm4_wakeup_savings_vs_poll` | `0.7521` |
-| `arm3_mean_cpu_ms_per_24h` | `200.6108` |
-| `arm4_mean_cpu_ms_per_24h` | `9.5826` |
-| `total_runtime_ms` | `11918.3959` |
+| `arm3_mean_cpu_ms_per_24h` | `183.4112` |
+| `arm4_mean_cpu_ms_per_24h` | `8.7297` |
+| `total_runtime_ms` | `10850.1691` |
 | `by_arm.Arm1-Fixed-Poll-30m.mean_wakeups_per_24h` | `48` |
 | `by_arm.Arm1-Fixed-Poll-30m.total_wakeups_20ep` | `960` |
 | `by_arm.Arm1-Fixed-Poll-30m.horizon_cliff_catch_rate` | `0.4722` |
@@ -402,9 +516,9 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 | `by_arm.Arm1-Fixed-Poll-30m.all_physical_cliff_catch_rate` | `0.4189` |
 | `by_arm.Arm1-Fixed-Poll-30m.phantom_sign_house_alarms_total` | `0` |
 | `by_arm.Arm1-Fixed-Poll-30m.phantom_alarms_per_24h` | `0` |
-| `by_arm.Arm1-Fixed-Poll-30m.total_cpu_ms_20ep` | `804.6764` |
-| `by_arm.Arm1-Fixed-Poll-30m.mean_cpu_ms_per_24h` | `40.2338` |
-| `by_arm.Arm1-Fixed-Poll-30m.mean_ms_per_wakeup` | `0.8382` |
+| `by_arm.Arm1-Fixed-Poll-30m.total_cpu_ms_20ep` | `736.1803` |
+| `by_arm.Arm1-Fixed-Poll-30m.mean_cpu_ms_per_24h` | `36.809` |
+| `by_arm.Arm1-Fixed-Poll-30m.mean_ms_per_wakeup` | `0.7669` |
 | `by_arm.Arm2-Stability-AllFlips.mean_wakeups_per_24h` | `38.6` |
 | `by_arm.Arm2-Stability-AllFlips.total_wakeups_20ep` | `772` |
 | `by_arm.Arm2-Stability-AllFlips.horizon_cliff_catch_rate` | `0.8056` |
@@ -412,7 +526,7 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 | `by_arm.Arm2-Stability-AllFlips.all_physical_cliff_catch_rate` | `0.4324` |
 | `by_arm.Arm2-Stability-AllFlips.phantom_sign_house_alarms_total` | `476` |
 | `by_arm.Arm2-Stability-AllFlips.phantom_alarms_per_24h` | `23.8` |
-| `by_arm.Arm2-Stability-AllFlips.total_cpu_ms_20ep` | `6468.5056` |
+| `by_arm.Arm2-Stability-AllFlips.total_cpu_ms_20ep` | `5891.5149` |
 | _additional detail_ | `22 more metric entries in lab/experiments/EXP-010-adaptive-step-stability/results.json` |
 
 ### EXP-011: Synthetic Orbital Task-Space (synthetic.ts + when()) vs. Direct riseSet Modulo Interval Intersection
@@ -426,10 +540,10 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 - **Success Bar**: Arm1-Synthetic-Engine-When achieves collision F1 >= 0.99 and median boundary error <= 1.0 min across all 3 task periods (0.25d, 1.0d, 14.0d) and 5 latitudes, within <= 3x the runtime latency of Arm3-Direct-RiseSet-Modulo.
 - **Kill Criterion**: If Arm1-Synthetic-Engine-When suffers F1 < 0.90 or median boundary error > 15 min due to heliocentric Kepler a = periodDays^(2/3) Earth-parallax distortion, OR if even parallax-free Arm2-WorldFrame-Synthetic-When offers zero accuracy gain over Arm3-Direct-RiseSet-Modulo while running >= 5x slower, kill synthetic orbital task-space injection for agent deadline scheduling and archive to lab/graveyard/KILL-006-synthetic-orbit-task-space.md.
 
-**Latest Receipt**: `fail` (run at `2026-11-22T16:57:19.881Z`, git SHA `a16db97`)
+**Latest Receipt**: `fail` (run at `2026-11-22T18:57:55.939Z`, git SHA `eb846ea`)
 
-- **Summary**: 30-scenario (5 cities x 2 seasons x 3 task rhythms over 28d) deadline-vs-night collision benchmark. Arm1-Synthetic-Engine-When (registerSyntheticSystem + when()) fails catastrophically: event F1=0.0255 (overlap time F1=0.046), because synthetic.ts places periodic bodies heliocentrically at Kepler a=P^(2/3) AU (0.25d CI cadence sits at 0.397 AU inside Earth's orbit, max elongation 23.0354 deg, never completing a geocentric cycle; 1.0d standup hits a 1.0 AU co-orbital singularity; 14d sprint suffers +/-10.5208 deg = 589.1654 min annual parallax error). Even parallax-free Arm2-WorldFrame-Synthetic-When (event F1=0.9987, 2259.656 ms) runs 3.029x slower than Arm3-Direct-RiseSet-Modulo (F1=1, 746.009 ms) with zero accuracy gain.
-- **Verdict**: KILLED (synthetic.ts orbital task-space for agent scheduling): Arm1-Synthetic-Engine-When hits F1=0.0255 (overlap F1=0.046) due to Kepler a=P^(2/3) Earth-parallax distortion, and parallax-free Arm2-WorldFrame-Synthetic-When offers zero accuracy gain over Arm3-Direct-RiseSet-Modulo while running 3.029x slower (2259.656 ms vs 746.009 ms). Archive to lab/graveyard/KILL-006-synthetic-orbit-task-space.md; use direct riseSet('sun') + modular interval arithmetic instead.
+- **Summary**: 30-scenario (5 cities x 2 seasons x 3 task rhythms over 28d) deadline-vs-night collision benchmark. Arm1-Synthetic-Engine-When (registerSyntheticSystem + when()) fails catastrophically: event F1=0.0255 (overlap time F1=0.046), because synthetic.ts places periodic bodies heliocentrically at Kepler a=P^(2/3) AU (0.25d CI cadence sits at 0.397 AU inside Earth's orbit, max elongation 23.0354 deg, never completing a geocentric cycle; 1.0d standup hits a 1.0 AU co-orbital singularity; 14d sprint suffers +/-10.5208 deg = 589.1654 min annual parallax error). Even parallax-free Arm2-WorldFrame-Synthetic-When (event F1=0.9987, 2074.5296 ms) runs 3.0224x slower than Arm3-Direct-RiseSet-Modulo (F1=1, 686.3751 ms) with zero accuracy gain.
+- **Verdict**: KILLED (synthetic.ts orbital task-space for agent scheduling): Arm1-Synthetic-Engine-When hits F1=0.0255 (overlap F1=0.046) due to Kepler a=P^(2/3) Earth-parallax distortion, and parallax-free Arm2-WorldFrame-Synthetic-When offers zero accuracy gain over Arm3-Direct-RiseSet-Modulo while running 3.0224x slower (2074.5296 ms vs 686.3751 ms). Archive to lab/graveyard/KILL-006-synthetic-orbit-task-space.md; use direct riseSet('sun') + modular interval arithmetic instead.
 
 | Metric | Value |
 |---|---|
@@ -475,8 +589,8 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 
 | ID | Title | Status | Stage | Dependencies | Spec |
 |---|---|---|---|---|---|
-| `FACT-001` | Instrument I-05: Field Verifier and Chronolocator | `queued` | `stage-0-spec` | feat/observe-and-release-rollup preflight green; EXP-003 scenario presets | `lab/factory/FACT-001-observe-instrument/SPEC.md`, `lab/factory/FACT-001-observe-instrument/tufte-notes.md` |
-| `FACT-002` | Chronosense Read-Write Middleware and Citation Auditor | `queued` | `stage-0-gated` | EXP-001 deterministic harness pass; EXP-005 live-LLM ablation beating Control-Synthetic | `lab/factory/FACT-002-chronosense-middleware/SPEC.md` |
+| `FACT-001` | Instrument I-05: Field Verifier and Chronolocator | `shipped` | `stage-4-verified` | feat/observe-and-release-rollup preflight green; EXP-003 scenario presets | `lab/factory/FACT-001-observe-instrument/SPEC.md`, `lab/factory/FACT-001-observe-instrument/tufte-notes.md` |
+| `FACT-002` | Chronosense Read-Write Middleware and Citation Auditor | `queued` | `stage-0-spec` | EXP-001 deterministic harness pass; EXP-005 live-LLM ablation beating Control-Synthetic | `lab/factory/FACT-002-chronosense-middleware/SPEC.md` |
 | `FACT-003` | Roadmap Milestones 5 and 6 Closure: when() Heliacal Predicate and minted_bodies MCP Tool | `queued` | `stage-0-spec` | ROADMAP.md Milestone 4 CPK1 packs (done); ROADMAP.md Milestone 5 heliacal core (done); ROADMAP.md Milestone 6 mint script and loaders (done) | `lab/factory/FACT-003-roadmap-m5-m6-closure/SPEC.md` |
 | `FACT-004` | Portable Conformance Kit and Clean-Room Rust Engine Port | `queued` | `stage-0-spec` | ROADMAP.md Milestone 4 CPK1 pack format frozen; ROADMAP.md Milestone 7 planning alignment | `lab/factory/FACT-004-conformance-rust/SPEC.md` |
 | `FACT-005` | Portable Versioned JSON Envelopes Across Engine, MCP, Instruments, and Lab | `queued` | `stage-0-spec` | Mined prior art: feature/caelus-free commit 99a4085 (docs/product/proposal.md); packages/caelus/src/canonical.ts chartDigest | `lab/factory/FACT-005-portable-envelopes/SPEC.md` |

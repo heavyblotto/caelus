@@ -1,7 +1,7 @@
 {
   "id": "EXP-004",
-  "run_at": "2026-11-22T16:56:53.508265Z",
-  "git_sha": "a16db97",
+  "run_at": "2026-11-22T18:57:31.234571Z",
+  "git_sha": "eb846ea",
   "status": "pass",
   "summary": "64-D Geo-RoPE simulation over 500 memories / 30 days (Oslo 59.91N + Singapore control): Probe A (2s intra-turn, Earth turns 0.008356 deg): Hybrid AUC=0.9999 vs Caelus-Pure collapse AUC=0.4939 (Hybrid-Unix ties at 0.9988). Probe B (post-sleep reset): Hybrid AUC=1.0 vs Standard-RoPE collapse AUC=0.0 (Unix-Fourier ties at 1.0). Probe C (Oslo Dec-vs-Sept photoperiod): Hybrid circadian Top-1=0.99 (iso 64-D=0.57) beats Unix-Linear-Fourier (0.0) and Hybrid-Unix-Fourier (0.0). Probe D (30d same-UTC non-aliasing): Hybrid collision(>0.90)=0.0 (Top-1=0.9067) vs Unix-Linear-Fourier collision=0.0529 (Top-1=0.7933, 7d alias cos=0.9638).",
   "metrics": {
@@ -10,9 +10,9 @@
     "dormancy_gap_days": 10,
     "embedding_dim": 64,
     "rotary_planes": 32,
-    "stream_phase_extraction_ms": 673.06,
-    "per_memory_phase_ms": 1.346,
-    "total_runtime_ms": 5839.21,
+    "stream_phase_extraction_ms": 634.09,
+    "per_memory_phase_ms": 1.268,
+    "total_runtime_ms": 5304.6,
     "sanity_checks": {
       "max_norm_preservation_err": 0.0,
       "max_parity_sun_alt_diff_deg": 0.0,

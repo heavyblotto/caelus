@@ -1,7 +1,7 @@
 {
   "id": "EXP-007",
-  "run_at": "2026-11-22T18:53:00.187453Z",
-  "git_sha": "e8dc94f",
+  "run_at": "2026-11-22T18:57:32.354359Z",
+  "git_sha": "eb846ea",
   "status": "pass",
   "summary": "3 parameter-matched 1,427,136-param causal transformers trained on MPS (0 train/OOD overlap). Part A: Hybrid-Dual-Geo-RoPE matches Standard-RoPE on T1 (76.3% vs 76.6%; Hybrid-Unix-Fourier 81.9%), ties Hybrid-Unix-Fourier on T2 (100.0% vs 100.0%, Std-RoPE=33.8%), beats Hybrid-Unix-Fourier by +49.9 pp on OOD T3 Oslo solstices+Tokyo (86.6% vs 36.7%), and ties on 30d weekly (100.0% vs 100.0%) while beating 52w annual-wrap by +15.7 pp (99.7% vs 84.0%, composite 99.9% vs 94.7%). Part B (5-cycle SLEEP + LoRA): SLEEP-Caelus retains 81.5% (forgetting 5.4 pp, gate safety 100.0%) vs SLEEP-Fixed24h-LRU 40.0% (forgetting 74.0 pp, gate safety 70.5%) and Naive-Online-FT 20.0% (forgetting 99.2 pp).",
   "metrics": {

@@ -1,9 +1,9 @@
 {
   "id": "EXP-002",
-  "run_at": "2026-11-22T16:56:42.030Z",
-  "git_sha": "a16db97",
+  "run_at": "2026-11-22T18:57:20.841Z",
+  "git_sha": "eb846ea",
   "status": "pass",
-  "summary": "90-day Oslo/NYC/Tokyo trace (360 memories, 120 recall queries; Oslo daylight drops 12.26h -> 5.90h). Uncompacted Top-1: Arm1=20.8%, Arm2=64.2%, Arm3=86.7% (photoperiod 82.9% vs 5.7%). Under 4x compaction (90/360) Top-1: Arm1=20.8%, Arm2=40.8%, Arm3=80.0% (photoperiod 62.9% vs 0.0%, nocturnal 100.0% vs 33.3%, travel 73.3% vs 46.7%). Index=923 us, Query=955 us (55 us scan-only).",
+  "summary": "90-day Oslo/NYC/Tokyo trace (360 memories, 120 recall queries; Oslo daylight drops 12.26h -> 5.90h). Uncompacted Top-1: Arm1=20.8%, Arm2=64.2%, Arm3=86.7% (photoperiod 82.9% vs 5.7%). Under 4x compaction (90/360) Top-1: Arm1=20.8%, Arm2=40.8%, Arm3=80.0% (photoperiod 62.9% vs 0.0%, nocturnal 100.0% vs 33.3%, travel 73.3% vs 46.7%). Index=836 us, Query=857 us (47 us scan-only).",
   "metrics": {
     "compacted4x_arm3_top1": 0.8,
     "compacted4x_arm2_top1": 0.4083,
@@ -17,8 +17,8 @@
     "nocturnal_compacted4x_arm2_top1": 0.3333,
     "travel_compacted4x_arm3_top1": 0.7333,
     "travel_compacted4x_arm2_top1": 0.4667,
-    "arm3_index_mean_us": 923.18,
-    "arm3_query_scan_mean_us": 54.52,
+    "arm3_index_mean_us": 836.41,
+    "arm3_query_scan_mean_us": 47.23,
     "trace": {
       "days": 90,
       "memories_total": 360,
@@ -386,55 +386,55 @@
     "latency_us": {
       "index_per_memory": {
         "Arm1-Semantic-LRU": {
-          "mean": 0.28,
-          "median": 0.08,
-          "p95": 1.04,
-          "p99": 2.92,
-          "max": 5.5
+          "mean": 0.14,
+          "median": 0.04,
+          "p95": 0.63,
+          "p99": 1.04,
+          "max": 3.79
         },
         "Arm2-Semantic-Fixed24h": {
-          "mean": 0.96,
-          "median": 0.75,
-          "p95": 1.96,
-          "p99": 5.54,
-          "max": 21.46
+          "mean": 0.6,
+          "median": 0.38,
+          "p95": 1.21,
+          "p99": 5.67,
+          "max": 16.29
         },
         "Arm3-Semantic-Caelus-Photoperiod": {
-          "mean": 923.18,
-          "median": 900.13,
-          "p95": 1301.71,
-          "p99": 1522.17,
-          "max": 1654.33
+          "mean": 836.41,
+          "median": 817.25,
+          "p95": 1073.96,
+          "p99": 1182.67,
+          "max": 1260.42
         }
       },
       "query_over_360_memories": {
         "Arm1-Semantic-LRU": {
-          "mean": 62.43,
-          "median": 58.71,
-          "p95": 97.42,
-          "p99": 160.37,
-          "max": 169.58
+          "mean": 57.32,
+          "median": 56.87,
+          "p95": 66.87,
+          "p99": 98.58,
+          "max": 153.46
         },
         "Arm2-Semantic-Fixed24h": {
-          "mean": 53.82,
-          "median": 46.71,
-          "p95": 98.29,
-          "p99": 124.13,
-          "max": 142.83
+          "mean": 58.21,
+          "median": 62.25,
+          "p95": 69.21,
+          "p99": 80.5,
+          "max": 89.33
         },
         "Arm3-Semantic-Caelus-Photoperiod-EndToEnd": {
-          "mean": 955.27,
-          "median": 893.04,
-          "p95": 1422.92,
-          "p99": 1628.21,
-          "max": 1651.17
+          "mean": 856.71,
+          "median": 857.67,
+          "p95": 1043.63,
+          "p99": 1103.71,
+          "max": 1267.04
         },
         "Arm3-Semantic-Caelus-Photoperiod-ScanOnly": {
-          "mean": 54.52,
-          "median": 48.25,
-          "p95": 78.71,
-          "p99": 185.42,
-          "max": 204.83
+          "mean": 47.23,
+          "median": 44.04,
+          "p95": 70.88,
+          "p99": 73.92,
+          "max": 77.92
         }
       }
     },

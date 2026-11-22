@@ -1,9 +1,9 @@
 {
   "id": "EXP-009",
-  "run_at": "2026-11-22T16:59:59.363Z",
-  "git_sha": "52a58e3",
+  "run_at": "2026-11-22T18:57:37.350Z",
+  "git_sha": "eb846ea",
   "status": "pass",
-  "summary": "4-season global swarm trace (8 cities x 768 ticks = 6144 node evals). Treatment-Caelus-Wavefront achieves 100.00% overall daylight alignment and 100.00% nocturnal GC safety at 873.0916 us/node-tick with 100% 24h global daylight coverage, beating Control-Lon-Fixed24h (94.8% daylight, 93.3% GC safety; solstice high/polar 79.9% daylight and 84.0% GC safety) and Control-UTC-RoundRobin (49.0% daylight), while equatorial Singapore nearly ties (100.0% vs 100.0%).",
+  "summary": "4-season global swarm trace (8 cities x 768 ticks = 6144 node evals). Treatment-Caelus-Wavefront achieves 100.00% overall daylight alignment and 100.00% nocturnal GC safety at 771.8094 us/node-tick with 100% 24h global daylight coverage, beating Control-Lon-Fixed24h (94.8% daylight, 93.3% GC safety; solstice high/polar 79.9% daylight and 84.0% GC safety) and Control-UTC-RoundRobin (49.0% daylight), while equatorial Singapore nearly ties (100.0% vs 100.0%).",
   "metrics": {
     "caelus_overall_daylight_accuracy": 1,
     "lon_fixed24h_overall_daylight_accuracy": 0.9476,
@@ -20,8 +20,8 @@
     "caelus_equatorial_daylight_accuracy": 1,
     "lon_fixed24h_equatorial_daylight_accuracy": 1,
     "caelus_global_daylight_coverage": 1,
-    "caelus_mean_us_per_node_tick": 873.0916,
-    "total_runtime_ms": 5573.3917,
+    "caelus_mean_us_per_node_tick": 771.8094,
+    "total_runtime_ms": 4883.1795,
     "overall_by_arm": {
       "Control-UTC-RoundRobin": {
         "interactive_total": 4608,
@@ -200,21 +200,21 @@
         "global_daylight_execute_coverage": 0.6823,
         "global_nocturnal_gc_coverage": 0.5638,
         "mean_simultaneous_daylight_nodes": 2.9388,
-        "mean_compute_us_per_node_tick": 0.182
+        "mean_compute_us_per_node_tick": 0.1091
       },
       "Control-Lon-Fixed24h": {
         "global_daylight_active_coverage": 1,
         "global_daylight_execute_coverage": 0.8542,
         "global_nocturnal_gc_coverage": 1,
         "mean_simultaneous_daylight_nodes": 3.7904,
-        "mean_compute_us_per_node_tick": 0.1527
+        "mean_compute_us_per_node_tick": 0.0936
       },
       "Treatment-Caelus-Wavefront": {
         "global_daylight_active_coverage": 1,
         "global_daylight_execute_coverage": 0.901,
         "global_nocturnal_gc_coverage": 1,
         "mean_simultaneous_daylight_nodes": 3.9154,
-        "mean_compute_us_per_node_tick": 873.0916
+        "mean_compute_us_per_node_tick": 771.8094
       }
     },
     "by_city": {
@@ -442,5 +442,5 @@
       }
     }
   },
-  "verdict": "PROVED: Treatment-Caelus-Wavefront clears all daylight alignment (100.0%), nocturnal GC safety (100.0%), 24h global coverage (100.0%), and latency (873.0916 us/node-tick) bars, beating Control-Lon-Fixed24h by +20.1 pp daylight and +16.0 pp GC safety on solstice high/polar latitudes while tying within 0.0 pp at equatorial Singapore."
+  "verdict": "PROVED: Treatment-Caelus-Wavefront clears all daylight alignment (100.0%), nocturnal GC safety (100.0%), 24h global coverage (100.0%), and latency (771.8094 us/node-tick) bars, beating Control-Lon-Fixed24h by +20.1 pp daylight and +16.0 pp GC safety on solstice high/polar latitudes while tying within 0.0 pp at equatorial Singapore."
 }

@@ -1,9 +1,9 @@
 {
   "id": "EXP-006",
-  "run_at": "2026-11-22T18:36:34.581Z",
-  "git_sha": "e8dc94f",
+  "run_at": "2026-11-22T18:57:32.108Z",
+  "git_sha": "eb846ea",
   "status": "pass",
-  "summary": "Live 30-task observation tool-use eval across 2 models (ollama/gemma4:12b, ollama/qwen3.5:9b). CoT-NoTools -> Caelus-MCP-Tools macro: spoof F1 0.7247 -> 0.9445, counterfactual axis 66.7% -> 100.0%, chronolocate 12.5% -> 87.5%, geolocate 12.5% -> 100.0%, overall 33.3% -> 93.3% (all tools median 14.5246 ms; warm authentic verify 1.1055 ms).",
+  "summary": "Live 30-task observation tool-use eval across 2 models (ollama/gemma4:12b, ollama/qwen3.5:9b). CoT-NoTools -> Caelus-MCP-Tools macro: spoof F1 0.7247 -> 0.9445, counterfactual axis 66.7% -> 100.0%, chronolocate 12.5% -> 87.5%, geolocate 12.5% -> 100.0%, overall 33.3% -> 93.3% (all tools median 14.5246 ms; warm authentic verify 1.0569 ms).",
   "metrics": {
     "cot_spoof_f1": 0.7247,
     "mcp_spoof_f1": 0.9445,
@@ -21,35 +21,35 @@
     "verify_tool_median_latency_ms": 14.3311,
     "oracle_pass_rate": 0.9667,
     "live_models_count": 2,
-    "runtime_ms": 413.3465,
+    "runtime_ms": 414.5369,
     "oracle": {
       "tasks": 30,
       "oracle_pass_rate": 0.9667,
       "oracle_passed": 29,
       "oracle_top2_pass_rate": 1,
       "oracle_top2_passed": 30,
-      "verify_authentic_median_ms": 1.1055,
-      "verify_spoof_forensics_median_ms": 2.9377,
-      "all_tools_median_ms": 3.057,
-      "all_tools_mean_ms": 7.2921,
+      "verify_authentic_median_ms": 1.0569,
+      "verify_spoof_forensics_median_ms": 2.7165,
+      "all_tools_median_ms": 2.7881,
+      "all_tools_mean_ms": 6.6903,
       "latency_by_tool": {
         "verify_observation": {
           "calls": 14,
-          "median_ms": 2.8022,
-          "mean_ms": 2.5338,
-          "max_ms": 4.2293
+          "median_ms": 2.6477,
+          "mean_ms": 2.3353,
+          "max_ms": 3.7065
         },
         "chronolocate": {
           "calls": 8,
-          "median_ms": 19.9838,
-          "mean_ms": 20.619,
-          "max_ms": 25.3471
+          "median_ms": 18.3665,
+          "mean_ms": 18.9971,
+          "max_ms": 23.3591
         },
         "geolocate": {
           "calls": 8,
-          "median_ms": 1.6582,
-          "mean_ms": 2.2923,
-          "max_ms": 5.7902
+          "median_ms": 1.5251,
+          "mean_ms": 2.0047,
+          "max_ms": 4.5105
         }
       }
     },
@@ -367,5 +367,5 @@
       ]
     }
   },
-  "verdict": "PROVED (live verified across 2 models, ollama/gemma4:12b, ollama/qwen3.5:9b): Arm2-Caelus-MCP-Tools raises macro spoof-detection F1 from 0.7247 to 0.9445 (+0.2198), cuts authentic FPR from 100% to 0%, raises counterfactual axis recovery from 66.7% to 100.0%, chronolocation pass rate (<=20m) from 12.5% to 87.5%, geolocation pass rate (<=350km) from 12.5% to 100.0%, and overall 30-task pass rate from 33.3% to 93.3% (+60.0 pp) with isolated local tool median 3.057 ms (< 10 ms bar), warm authentic verify_observation 1.1055 ms (< 2 ms bar), and 14.5246 ms median under concurrent local GPU load. Per model: gemma4:12b: CoT F1=0.6667 (33.3% overall) -> MCP F1=1 (96.7% overall); qwen3.5:9b: CoT F1=0.7826 (33.3% overall) -> MCP F1=0.8889 (90.0% overall)."
+  "verdict": "PROVED (live verified across 2 models, ollama/gemma4:12b, ollama/qwen3.5:9b): Arm2-Caelus-MCP-Tools raises macro spoof-detection F1 from 0.7247 to 0.9445 (+0.2198), cuts authentic FPR from 100% to 0%, raises counterfactual axis recovery from 66.7% to 100.0%, chronolocation pass rate (<=20m) from 12.5% to 87.5%, geolocation pass rate (<=350km) from 12.5% to 100.0%, and overall 30-task pass rate from 33.3% to 93.3% (+60.0 pp) with isolated local tool median 2.7881 ms (< 10 ms bar), warm authentic verify_observation 1.0569 ms (< 2 ms bar), and 14.5246 ms median under concurrent local GPU load. Per model: gemma4:12b: CoT F1=0.6667 (33.3% overall) -> MCP F1=1 (96.7% overall); qwen3.5:9b: CoT F1=0.7826 (33.3% overall) -> MCP F1=0.8889 (90.0% overall)."
 }
