@@ -132,7 +132,7 @@ import { buildServer } from "caelus-mcp/core";
 import accuracy from "caelus/accuracy.json";
 
 const server = buildServer(new Engine(embeddedData), {
-  version: "0.25.0",
+  version: "0.26.0",
   accuracy: { swiss: accuracy, jpl: null },
 });
 ```

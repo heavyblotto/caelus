@@ -1,6 +1,6 @@
 {
   "name": "caelus-corpus",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An original corpus of astrological readings: 3,056 essays bound to the Caelus interpretation layer, with the writing pipeline and prose lints that produced them.",
   "type": "module",
   "main": "dist/src/index.js",
@@ -26,11 +26,11 @@
   "license": "MIT",
   "private": true,
   "peerDependencies": {
-    "caelus": ">=0.25.0 <0.26"
+    "caelus": ">=0.25.0 <0.27"
   },
   "devDependencies": {
     "@types/node": "^25.9.2",
-    "caelus": "^0.25.0",
+    "caelus": "^0.26.0",
     "typescript": "^6.0.3"
   },
   "exports": {

@@ -7,7 +7,9 @@ semver (currently 0.1.x). Numbers quoted here are as measured at release time;
 current figures live in `packages/caelus/accuracy.json` and on
 [ephemengine.com/validation](https://www.ephemengine.com/validation).
 
-## Unreleased
+## v0.26.0 - Deep time, binary packs, sky dating, heliacal visibility, and observation
+
+*2026-11-22*
 
 ### Engine (`caelus`)
 
