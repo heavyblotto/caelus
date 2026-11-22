@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" font-family="et-book, ET-Bembo, Palatino, Georgia, serif" font-size="13">
+<rect width="760" height="460" fill="white"/>
+<text x="56" y="30" font-size="17" fill="#111">EXP-005: Chronosense Codec Recoverability (%) vs. Token Footprint (cl100k)</text>
+<text x="56" y="48" font-size="12" fill="#555">20 EXP-001 eval_suite tasks x 5 arms (offline bounded decoder; live-LLM gate pending --live)</text>
+
+<line x1="64.0" y1="396.0" x2="64.0" y2="82.0" stroke="#333" stroke-width="1"/>
+<line x1="64.0" y1="396.0" x2="710.0" y2="396.0" stroke="#333" stroke-width="1"/>
+<text x="56.0" y="86.0" text-anchor="end" font-size="11" fill="#555">100%</text>
+<text x="56.0" y="400.0" text-anchor="end" font-size="11" fill="#555">0%</text>
+<text x="64.0" y="414.0" text-anchor="middle" font-size="11" fill="#555">0 tok</text>
+<text x="710.0" y="414.0" text-anchor="middle" font-size="11" fill="#555">45.75 tok</text>
+<text x="387.0" y="434.0" text-anchor="middle" font-size="12" fill="#444">Mean system header length (cl100k-approx tokens)</text>
+<circle cx="64.0" cy="396.0" r="3.2" fill="#222"/>
+<line x1="64.0" y1="400.0" x2="64.0" y2="405.0" stroke="#666" stroke-width="0.8"/>
+<line x1="55.0" y1="396.0" x2="60.0" y2="396.0" stroke="#666" stroke-width="0.8"/>
+<text x="74.0" y="388.0" text-anchor="start" font-size="11.5" fill="#222">Baseline-None (0% recovery)</text>
+<circle cx="275.8" cy="341.1" r="3.2" fill="#222"/>
+<line x1="275.8" y1="400.0" x2="275.8" y2="405.0" stroke="#666" stroke-width="0.8"/>
+<line x1="55.0" y1="341.1" x2="60.0" y2="341.1" stroke="#666" stroke-width="0.8"/>
+<text x="285.8" y="345.1" text-anchor="start" font-size="11.5" fill="#222">Control-ISO (17.5%)</text>
+<circle cx="431.1" cy="220.7" r="3.2" fill="#222"/>
+<line x1="431.1" y1="400.0" x2="431.1" y2="405.0" stroke="#666" stroke-width="0.8"/>
+<line x1="55.0" y1="220.7" x2="60.0" y2="220.7" stroke="#666" stroke-width="0.8"/>
+<text x="441.1" y="224.7" text-anchor="start" font-size="11.5" fill="#222">Control-Synthetic (55.8%)</text>
+<circle cx="582.9" cy="85.9" r="3.2" fill="#8c3b2b"/>
+<line x1="582.9" y1="400.0" x2="582.9" y2="405.0" stroke="#666" stroke-width="0.8"/>
+<line x1="55.0" y1="85.9" x2="60.0" y2="85.9" stroke="#666" stroke-width="0.8"/>
+<text x="572.9" y="103.9" text-anchor="end" font-size="11.5" fill="#8c3b2b">Arm4b-Symbolic (98.8%; 85% 5-class twilight; 50% on +/-1 sign slip)</text>
+<circle cx="710.0" cy="82.0" r="4.2" fill="#1b5e7a"/>
+<line x1="710.0" y1="400.0" x2="710.0" y2="405.0" stroke="#666" stroke-width="0.8"/>
+<line x1="55.0" y1="82.0" x2="60.0" y2="82.0" stroke="#666" stroke-width="0.8"/>
+<text x="700.0" y="72.0" text-anchor="end" font-size="11.5" fill="#1b5e7a">Treatment-Physical (100.0%; 100% 5-class twilight; 0 hops)</text>
+</svg>

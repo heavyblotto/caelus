@@ -1,0 +1,20 @@
+{
+  "id": "EXP-011",
+  "title": "Synthetic Orbital Task-Space (synthetic.ts + when()) vs. Direct riseSet Modulo Interval Intersection",
+  "track": "research",
+  "status": "killed",
+  "created": "2026-11-22",
+  "hypothesis": "Registering internal agent task rhythms (6h CI cadence, 24h daily standup, 14d sprint release) as virtual periodic bodies via registerSyntheticSystem inside the real Earth-sky Engine and solving collisions against local human night via when() matches or outperforms direct riseSet + modulo interval arithmetic on collision F1, boundary accuracy, and compute latency.",
+  "null_baseline": "Arm3-Direct-RiseSet-Modulo (daily riseSet('sun') sunset-to-sunrise intervals intersected analytically with closed-form modular task windows) plus Arm2-WorldFrame-Synthetic-When (syntheticEphemeris world-frame longitudes without Earth parallax inside when()).",
+  "success_bar": "Arm1-Synthetic-Engine-When achieves collision F1 >= 0.99 and median boundary error <= 1.0 min across all 3 task periods (0.25d, 1.0d, 14.0d) and 5 latitudes, within <= 3x the runtime latency of Arm3-Direct-RiseSet-Modulo.",
+  "kill_criterion": "If Arm1-Synthetic-Engine-When suffers F1 < 0.90 or median boundary error > 15 min due to heliocentric Kepler a = periodDays^(2/3) Earth-parallax distortion, OR if even parallax-free Arm2-WorldFrame-Synthetic-When offers zero accuracy gain over Arm3-Direct-RiseSet-Modulo while running >= 5x slower, kill synthetic orbital task-space injection for agent deadline scheduling and archive to lab/graveyard/KILL-006-synthetic-orbit-task-space.md.",
+  "entrypoint": "experiment.mjs",
+  "runner": "node",
+  "tags": [
+    "chronosense",
+    "synthetic",
+    "when-query",
+    "deadlines",
+    "ablation"
+  ]
+}

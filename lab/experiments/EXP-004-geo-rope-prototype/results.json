@@ -1,18 +1,18 @@
 {
   "id": "EXP-004",
-  "run_at": "2026-11-22T15:10:47.511633Z",
-  "git_sha": "c5d89ab",
+  "run_at": "2026-11-22T16:56:53.508265Z",
+  "git_sha": "a16db97",
   "status": "pass",
-  "summary": "64-D Geo-RoPE simulation over 500 memories / 30 days (Oslo 59.91N + Singapore control): Probe A (2s intra-turn, Earth turns 0.008356 deg): Hybrid AUC=0.9999 vs Caelus-Pure collapse AUC=0.4939 (Hybrid-Unix ties at 0.9988). Probe B (post-sleep reset): Hybrid AUC=1.0 vs Standard-RoPE collapse AUC=0.0 (Unix-Fourier ties at 1.0). Probe C (Oslo Dec-vs-Sept photoperiod): Hybrid circadian Top-1=0.99 (iso 64-D=0.58) beats Unix-Linear-Fourier (0.0) and Hybrid-Unix-Fourier (0.0). Probe D (30d same-UTC non-aliasing): Hybrid collision(>0.90)=0.0 (Top-1=0.9067) vs Unix-Linear-Fourier collision=0.0529 (Top-1=0.7933, 7d alias cos=0.9638).",
+  "summary": "64-D Geo-RoPE simulation over 500 memories / 30 days (Oslo 59.91N + Singapore control): Probe A (2s intra-turn, Earth turns 0.008356 deg): Hybrid AUC=0.9999 vs Caelus-Pure collapse AUC=0.4939 (Hybrid-Unix ties at 0.9988). Probe B (post-sleep reset): Hybrid AUC=1.0 vs Standard-RoPE collapse AUC=0.0 (Unix-Fourier ties at 1.0). Probe C (Oslo Dec-vs-Sept photoperiod): Hybrid circadian Top-1=0.99 (iso 64-D=0.57) beats Unix-Linear-Fourier (0.0) and Hybrid-Unix-Fourier (0.0). Probe D (30d same-UTC non-aliasing): Hybrid collision(>0.90)=0.0 (Top-1=0.9067) vs Unix-Linear-Fourier collision=0.0529 (Top-1=0.7933, 7d alias cos=0.9638).",
   "metrics": {
     "stream_memories": 500,
     "stream_days": 30,
     "dormancy_gap_days": 10,
     "embedding_dim": 64,
     "rotary_planes": 32,
-    "stream_phase_extraction_ms": 672.57,
-    "per_memory_phase_ms": 1.345,
-    "total_runtime_ms": 5872.83,
+    "stream_phase_extraction_ms": 673.06,
+    "per_memory_phase_ms": 1.346,
+    "total_runtime_ms": 5839.21,
     "sanity_checks": {
       "max_norm_preservation_err": 0.0,
       "max_parity_sun_alt_diff_deg": 0.0,
@@ -110,7 +110,7 @@
       "lon": 10.7522,
       "queries_evaluated": 100,
       "mean_seasonal_utc_shift_hours": 3.12,
-      "mean_distractor_sun_alt_error_deg": 21.81,
+      "mean_distractor_sun_alt_error_deg": 21.73,
       "encoders": {
         "Standard-RoPE": {
           "isotropic_64d_top1_acc": 0.09,
@@ -133,24 +133,24 @@
           "circadian_head_margin_vs_same_utc": -1.0672
         },
         "Caelus-Pure-Geo": {
-          "isotropic_64d_top1_acc": 0.6,
+          "isotropic_64d_top1_acc": 0.59,
           "isotropic_64d_vs_same_utc_win_rate": 0.98,
           "isotropic_64d_auc": 0.8875,
-          "isotropic_64d_margin_vs_same_utc": 0.2739,
+          "isotropic_64d_margin_vs_same_utc": 0.274,
           "circadian_head_top1_acc": 1.0,
           "circadian_head_vs_same_utc_win_rate": 1.0,
           "circadian_head_auc": 0.9994,
-          "circadian_head_margin_vs_same_utc": 0.6719
+          "circadian_head_margin_vs_same_utc": 0.672
         },
         "Hybrid-Dual-Geo-RoPE": {
-          "isotropic_64d_top1_acc": 0.58,
+          "isotropic_64d_top1_acc": 0.57,
           "isotropic_64d_vs_same_utc_win_rate": 0.92,
-          "isotropic_64d_auc": 0.817,
+          "isotropic_64d_auc": 0.8169,
           "isotropic_64d_margin_vs_same_utc": 0.1422,
           "circadian_head_top1_acc": 0.99,
           "circadian_head_vs_same_utc_win_rate": 1.0,
           "circadian_head_auc": 0.997,
-          "circadian_head_margin_vs_same_utc": 0.6853
+          "circadian_head_margin_vs_same_utc": 0.6854
         },
         "Hybrid-Unix-Fourier": {
           "isotropic_64d_top1_acc": 0.0,
@@ -170,7 +170,7 @@
       "lon": 103.8198,
       "queries_evaluated": 100,
       "mean_seasonal_utc_shift_hours": 0.09,
-      "mean_distractor_sun_alt_error_deg": 1.45,
+      "mean_distractor_sun_alt_error_deg": 1.37,
       "encoders": {
         "Standard-RoPE": {
           "isotropic_64d_top1_acc": 0.14,
@@ -195,12 +195,12 @@
         "Caelus-Pure-Geo": {
           "isotropic_64d_top1_acc": 0.18,
           "isotropic_64d_vs_same_utc_win_rate": 0.22,
-          "isotropic_64d_auc": 0.8521,
-          "isotropic_64d_margin_vs_same_utc": -0.0635,
+          "isotropic_64d_auc": 0.852,
+          "isotropic_64d_margin_vs_same_utc": -0.0634,
           "circadian_head_top1_acc": 0.64,
           "circadian_head_vs_same_utc_win_rate": 0.64,
-          "circadian_head_auc": 0.9486,
-          "circadian_head_margin_vs_same_utc": 0.0018
+          "circadian_head_auc": 0.9492,
+          "circadian_head_margin_vs_same_utc": 0.002
         },
         "Hybrid-Dual-Geo-RoPE": {
           "isotropic_64d_top1_acc": 0.23,
@@ -209,8 +209,8 @@
           "isotropic_64d_margin_vs_same_utc": -0.0358,
           "circadian_head_top1_acc": 0.54,
           "circadian_head_vs_same_utc_win_rate": 0.54,
-          "circadian_head_auc": 0.9485,
-          "circadian_head_margin_vs_same_utc": 0.0033
+          "circadian_head_auc": 0.9487,
+          "circadian_head_margin_vs_same_utc": 0.0034
         },
         "Hybrid-Unix-Fourier": {
           "isotropic_64d_top1_acc": 0.55,
@@ -359,7 +359,7 @@
     "honest_tie_vs_win_analysis": {
       "probe_a_intra_turn": "Hybrid-Dual-Geo-RoPE (AUC=0.9999, Top-1=1.0) beats Caelus-Pure-Geo (AUC=0.4939, margin=0.0) and pure Unix-Linear-Fourier (AUC=0.4922), confirming 2-second astronomical collapse (Earth turns 0.008356 deg in 2s). Steelman Hybrid-Unix-Fourier TIES Hybrid-Dual-Geo-RoPE (AUC=0.9988) because both share the 32-D fast token clock.",
       "probe_b_post_sleep": "Hybrid-Dual-Geo-RoPE (AUC=1.0, Top-1=1.0) beats Standard-RoPE (AUC=0.0, overnight margin=0.0). Unix-Linear-Fourier (AUC=1.0) and Hybrid-Unix-Fourier (AUC=1.0) TIE Hybrid-Dual-Geo-RoPE on elapsed-sleep separation because raw UTC 24h phase rotates ~142 deg across a 9.5h sleep.",
-      "probe_c_photoperiod_oslo": "Hybrid-Dual-Geo-RoPE WINS decisively on Oslo Dec-vs-Sept photoperiod recurrence: circadian-head Top-1=0.99 (vs-same-UTC win rate=1.0, AUC=0.997) and isotropic 64-D Top-1=0.58 (win rate=0.92), whereas BOTH Unix-Linear-Fourier (circadian Top-1=0.0, win rate=0.0) and Hybrid-Unix-Fourier (circadian Top-1=0.0, win rate=0.0) systematically pick the wrong same-UTC afternoon/night distractor (mean solar altitude error 21.81 deg). At equatorial Singapore (mean seasonal shift 0.09h), Unix-Linear-Fourier and Hybrid nearly TIE, confirming the gain is genuinely driven by latitude-dependent solar declination physics.",
+      "probe_c_photoperiod_oslo": "Hybrid-Dual-Geo-RoPE WINS decisively on Oslo Dec-vs-Sept photoperiod recurrence: circadian-head Top-1=0.99 (vs-same-UTC win rate=1.0, AUC=0.997) and isotropic 64-D Top-1=0.57 (win rate=0.92), whereas BOTH Unix-Linear-Fourier (circadian Top-1=0.0, win rate=0.0) and Hybrid-Unix-Fourier (circadian Top-1=0.0, win rate=0.0) systematically pick the wrong same-UTC afternoon/night distractor (mean solar altitude error 21.73 deg). At equatorial Singapore (mean seasonal shift 0.09h), Unix-Linear-Fourier and Hybrid nearly TIE, confirming the gain is genuinely driven by latitude-dependent solar declination physics.",
       "probe_d_multiweek_aliasing": "Hybrid-Dual-Geo-RoPE achieves collision_rate(>0.90)=0.0 (collision >0.95=0.0, exact-day Top-1=0.9067) with zero weekly aliasing (7d cos=0.7084, 14d=0.6309, 28d=0.7486), whereas Unix-Linear-Fourier (collision >0.90=0.0529, exact-day Top-1=0.7933) and Hybrid-Unix-Fourier (collision >0.90=0.0529, exact-day Top-1=0.6467) alias sharply at 7d/14d/21d/28d multiples (7d cos=0.9638). Caveat: at 1d lag and 29d lag (near the 29.53d synodic month), Unix-Linear-Fourier's 7d cycle gives wider 1d/29d separation (Unix 1d cos=0.6358, 29d cos=0.4083 vs Hybrid 1d cos=0.8662, 29d cos=0.6356), while Hybrid's incommensurate sidereal Moon (27.32d) + GAST + Sun longitude still prevent collision (29d cos=0.6356 < 0.90)."
     }
   },

@@ -2,7 +2,7 @@
   "id": "EXP-001",
   "title": "Chronosense 4-Arm Ablation: Physical-Horizon Envelope, Read-Write Cursor, and Drift Audit",
   "track": "research",
-  "status": "active",
+  "status": "proved",
   "created": "2026-11-22",
   "hypothesis": "Injecting a compact (~40-token) Caelus physical-horizon envelope backed by sceneGeometry and canonicalChart/chartDigest outperforms no-clock, passive UTC ISO, and fixed-24h synthetic sinusoid controls on cross-compaction local night_crossed disambiguation, high-latitude solar-horizon deadline accuracy, daylight/twilight regime accuracy, and deterministic pre-tool cursor drift detection at sub-2ms offline compute cost.",
   "null_baseline": "Passive UTC ISO-8601 timestamp (Control-ISO) and elapsed-seconds plus fixed 24h sin/cos clock wave (Control-Synthetic).",

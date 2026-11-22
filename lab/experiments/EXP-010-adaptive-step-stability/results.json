@@ -1,0 +1,78 @@
+{
+  "id": "EXP-010",
+  "run_at": "2026-11-22T16:57:11.520Z",
+  "git_sha": "a16db97",
+  "status": "fail",
+  "summary": "20 24h episodes (5 latitudes x 4 seasons, 74 physical sunrise/sunset/civil-twilight cliffs, 1 polar 0-cliff episodes). Unfiltered chartStability (Arm2) triggers 23.8 phantom zodiac/house alarms per 24h (476 total). Filtered sect-only chartStability (Arm3) eliminates phantom alarms and catches 80.6% sunrise/sunset cliffs, but misses civil twilight (2.6% civil catch -> 40.5% all-cliff) at 200.6108 ms/24h (26.35 wakeups). Direct analytic sceneGeometry.diurnal.minutesToNextTwilight (Arm4) catches 100.0% of all 4 physical cliffs (median err 0 min) in 11.9 wakeups (-75.2% vs 30m poll) and 9.5826 ms/24h (20.935x faster than Arm3).",
+  "metrics": {
+    "arm3_all_cliff_catch_rate": 0.4054,
+    "arm4_all_cliff_catch_rate": 1,
+    "arm1_all_cliff_catch_rate": 0.4189,
+    "arm3_civil_twilight_catch_rate": 0.0263,
+    "arm4_civil_twilight_catch_rate": 1,
+    "arm2_phantom_alarms_per_24h": 23.8,
+    "arm3_over_arm4_cpu_ratio": 20.935,
+    "arm3_mean_wakeups_per_24h": 26.35,
+    "arm4_mean_wakeups_per_24h": 11.9,
+    "arm1_mean_wakeups_per_24h": 48,
+    "arm4_wakeup_savings_vs_poll": 0.7521,
+    "arm3_mean_cpu_ms_per_24h": 200.6108,
+    "arm4_mean_cpu_ms_per_24h": 9.5826,
+    "total_runtime_ms": 11918.3959,
+    "by_arm": {
+      "Arm1-Fixed-Poll-30m": {
+        "mean_wakeups_per_24h": 48,
+        "total_wakeups_20ep": 960,
+        "horizon_cliff_catch_rate": 0.4722,
+        "civil_twilight_catch_rate": 0.3684,
+        "all_physical_cliff_catch_rate": 0.4189,
+        "median_cliff_timing_err_min": 7.3406,
+        "phantom_sign_house_alarms_total": 0,
+        "phantom_alarms_per_24h": 0,
+        "total_cpu_ms_20ep": 804.6764,
+        "mean_cpu_ms_per_24h": 40.2338,
+        "mean_ms_per_wakeup": 0.8382
+      },
+      "Arm2-Stability-AllFlips": {
+        "mean_wakeups_per_24h": 38.6,
+        "total_wakeups_20ep": 772,
+        "horizon_cliff_catch_rate": 0.8056,
+        "civil_twilight_catch_rate": 0.0789,
+        "all_physical_cliff_catch_rate": 0.4324,
+        "median_cliff_timing_err_min": 7.0551,
+        "phantom_sign_house_alarms_total": 476,
+        "phantom_alarms_per_24h": 23.8,
+        "total_cpu_ms_20ep": 6468.5056,
+        "mean_cpu_ms_per_24h": 323.4253,
+        "mean_ms_per_wakeup": 8.3789
+      },
+      "Arm3-Stability-Physical-SectOnly": {
+        "mean_wakeups_per_24h": 26.35,
+        "total_wakeups_20ep": 527,
+        "horizon_cliff_catch_rate": 0.8056,
+        "civil_twilight_catch_rate": 0.0263,
+        "all_physical_cliff_catch_rate": 0.4054,
+        "median_cliff_timing_err_min": 7.3999,
+        "phantom_sign_house_alarms_total": 0,
+        "phantom_alarms_per_24h": 0,
+        "total_cpu_ms_20ep": 4012.2153,
+        "mean_cpu_ms_per_24h": 200.6108,
+        "mean_ms_per_wakeup": 7.6133
+      },
+      "Arm4-Analytic-RiseSet-Jump": {
+        "mean_wakeups_per_24h": 11.9,
+        "total_wakeups_20ep": 238,
+        "horizon_cliff_catch_rate": 1,
+        "civil_twilight_catch_rate": 1,
+        "all_physical_cliff_catch_rate": 1,
+        "median_cliff_timing_err_min": 0,
+        "phantom_sign_house_alarms_total": 0,
+        "phantom_alarms_per_24h": 0,
+        "total_cpu_ms_20ep": 191.6511,
+        "mean_cpu_ms_per_24h": 9.5826,
+        "mean_ms_per_wakeup": 0.8053
+      }
+    }
+  },
+  "verdict": "KILLED (chartStability step-size control): Arm4-Analytic-RiseSet-Jump (sceneGeometry.diurnal.minutesToNextTwilight) strictly dominates Arm3-Stability-Physical-SectOnly by 20.935x lower CPU (9.5826 vs 200.6108 ms/24h), higher physical cliff coverage (100.0% vs 40.5%, catching civil dawn/dusk), and fewer wakeups (11.9 vs 26.35/24h). Archive chartStability scheduler to lab/graveyard/KILL-005-chart-stability-step-control.md; use direct sceneGeometry next-event scheduling instead."
+}

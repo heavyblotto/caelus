@@ -4,29 +4,34 @@ Ranked queue of active experiments, follow-up R&D programs, and Feature Factory
 candidates. Live measured metrics and verdicts are compiled automatically into
 `lab/LEDGER.md` via `node lab/scripts/lab.mjs ledger`.
 
-## 1. Active R&D Lab Experiments
+## 1. Completed and Active R&D Lab Experiments
 
-These four foundational benchmarks establish empirical ground truth for Caelus's
-agent-native capabilities directly against `packages/caelus/dist/` and
-`python/astroengine/`.
+These eight benchmarks establish empirical ground truth for Caelus's
+agent-native Chronosense capabilities directly against `packages/caelus/dist/`
+and `python/astroengine/`.
 
-| Rank | ID | Directory | Core Question | Null Baseline | Next Step |
-|---|---|---|---|---|---|
-| 1 | `EXP-003` | `lab/experiments/EXP-003-vlm-observation-bench/` | Does `observe.ts` achieve high spoof-detection F1, diagnostic recovery, chronolocation, and geolocation across 200 noisy global scenarios, plus produce a 30-task VLM eval pack? | Chance / unassisted VLM geometric estimation | Run VLM tool-use eval (`EXP-006`) and feed presets into `FACT-001` |
-| 2 | `EXP-001` | `lab/experiments/EXP-001-chronosense-ablation/` | Does a ~40-token physical-horizon `sceneGeometry` read-write cursor beat passive ISO and synthetic 24h clocks on cross-latitude `night_crossed`, physical deadline accuracy, and cursor-drift catching? | `Baseline-None`, `Control-ISO`, `Control-Synthetic` (`sin/cos 24h`) | Run live-LLM eval over emitted `eval_suite.jsonl` (`EXP-005`) to unlock `FACT-002` |
-| 3 | `EXP-002` | `lab/experiments/EXP-002-phase-resonant-memory/` | Does trimmed physical photoperiod phase indexing + phase-stratified compaction beat LRU and fixed 24h hour cosine on 90-day multi-latitude/travel memory recall? | `Arm1-Semantic-LRU`, `Arm2-Semantic-Fixed24h` | Inspect exact slice win/tie breakdown; gate memory plugin on high-latitude/compaction win |
-| 4 | `EXP-004` | `lab/experiments/EXP-004-geo-rope-prototype/` | Does Hybrid Dual-Clock Geo-RoPE (32D step RoPE + 32D Caelus physical torus) preserve intra-turn ordering, post-compaction elapsed time, high-latitude photoperiod recurrence, and multi-week uniqueness? | `Standard-RoPE`, `Unix-Linear-Fourier`, `Caelus-Pure-Geo` | If numerical probes pass, graduate to trained tiny-transformer study (`EXP-007`) |
+| Rank | ID | Status | Directory | Core Question | Null Baseline | Next Step |
+|---|---|---|---|---|---|---|
+| 1 | `EXP-003` | `promoted` | `lab/experiments/EXP-003-vlm-observation-bench/` | Does `observe.ts` achieve high spoof-detection F1, diagnostic recovery, chronolocation, and geolocation across 200 noisy global scenarios, plus produce a 30-task VLM eval pack? | `Naive-LMT-Clock` metadata heuristic | Promoted into `FACT-001`; run VLM tool-use eval (`EXP-006`) |
+| 2 | `EXP-001` | `proved` | `lab/experiments/EXP-001-chronosense-ablation/` | Does a ~45-token physical-horizon `sceneGeometry` read-write cursor beat passive ISO and synthetic 24h clocks on cross-latitude `night_crossed`, physical deadline accuracy, and cursor-drift catching? | `Baseline-None`, `Control-ISO`, `Control-Synthetic` (`sin/cos 24h`) | Deterministic harness proved; run `EXP-005 --live` to unlock `FACT-002` |
+| 3 | `EXP-002` | `proved` | `lab/experiments/EXP-002-phase-resonant-memory/` | Does trimmed physical photoperiod phase indexing + phase-stratified compaction beat LRU and fixed 24h hour cosine on 90-day multi-latitude/travel memory recall? | `Arm1-Semantic-LRU`, `Arm2-Semantic-Fixed24h` | Proved (+39.2 pp compacted Top-1 overall, +62.9 pp photoperiod); optional adapter in `FACT-002` |
+| 4 | `EXP-004` | `proved` | `lab/experiments/EXP-004-geo-rope-prototype/` | Does Hybrid Dual-Clock Geo-RoPE (32D step RoPE + 32D Caelus physical torus) preserve intra-turn ordering, post-compaction elapsed time, high-latitude photoperiod recurrence, and multi-week uniqueness? | `Standard-RoPE`, `Unix-Linear-Fourier`, `Caelus-Pure-Geo`, `Hybrid-Unix-Fourier` | Numerical probes proved; graduate to trained tiny-transformer study (`EXP-007`) |
+| 5 | `EXP-005` | `active` | `lab/experiments/EXP-005-chronosense-codec-eval/` | Does `Treatment-Caelus-Physical` outperform `Control-ISO`, `Control-Synthetic`, and `Arm4b-Caelus-Symbolic` on `EXP-001/eval_suite.jsonl`? | `Baseline-None`, `Control-ISO`, `Control-Synthetic`, `Arm4b-Caelus-Symbolic` | Offline codec audit & scorer verified (100% Physical vs 98.8% Symbolic / 85% 5-class twilight); run `--live` with API key to clear `FACT-002` hard gate |
+| 6 | `EXP-009` | `proved` | `lab/experiments/EXP-009-follow-the-sun-wavefront/` | Does zero-RPC offline solar-horizon quadrant routing (`sceneGeometry`) beat UTC round-robin and longitude-fixed-24h clocks across 8 global cities and 4 seasons? | `Control-UTC-RoundRobin`, `Control-Lon-Fixed24h` | Proved (100% daylight & GC safety, +20.1 pp solstice high/polar daylight, 887 us/tick); candidate zero-RPC helper for swarm orchestration |
+| 7 | `EXP-010` | `killed` | `lab/experiments/EXP-010-adaptive-step-stability/` | Does `chartStability` (sect-only) beat fixed polling and direct `sceneGeometry.diurnal.minutesToNextTwilight` as an adaptive sleep-step controller? | `Arm1-Fixed-Poll-30m`, `Arm2-Stability-AllFlips`, `Arm4-Analytic-RiseSet-Jump` | Killed (`KILL-005`): `sceneGeometry.diurnal.minutesToNextTwilight` dominates by 20.9x CPU, 100% vs 40.5% cliff catch, and -54.8% wakeups |
+| 8 | `EXP-011` | `killed` | `lab/experiments/EXP-011-synthetic-orbit-collisions/` | Does registering agent task rhythms as virtual `periodic` bodies in `synthetic.ts` + `when()` beat direct `riseSet` + modulo interval intersection? | `Arm3-Direct-RiseSet-Modulo`, `Arm2-WorldFrame-Synthetic-When` | Killed (`KILL-006`): Kepler `a=P^(2/3)` Earth parallax collapses `Arm1` to F1=0.0255; direct `riseSet` + modulo achieves F1=1.0000 and runs 3.11x faster than parallax-free `when()` |
 
 ## 2. Queued R&D Lab Programs (Next Tranche)
 
 Use `node lab/scripts/lab.mjs new exp <slug>` when picking up any item below.
+(`EXP-005` is now active in `lab/experiments/EXP-005-chronosense-codec-eval/`;
+`EXP-006`, `EXP-007`, and `EXP-008` remain reserved below.)
 
 | Rank | Proposed ID | Program | Hypothesis | Null Baseline | Promotion Target |
 |---|---|---|---|---|---|
-| 5 | `EXP-005` | Live-LLM Chronosense Physical vs. Symbolic Codec Eval | Running live LLM inference over `EXP-001/eval_suite.jsonl` reduces temporal confusion, redundant tool loops, and missed deadlines by >=20% vs `Control-ISO` and beats `Control-Synthetic` on cross-latitude/compaction episodes; tests Arm 4a (physical horizon) vs Arm 4b (traditional zodiac tokens). | `Control-ISO` and `Control-Synthetic` on identical model and prompt budget | Unlocks `FACT-002` if physical arm clears bar |
-| 6 | `EXP-006` | Live-VLM Observation Tool-Use Eval | Equipping a vision model with Caelus MCP tools (`verify_observation`, `chronolocate`, `geolocate`) on `EXP-003/vlm_eval_pack.jsonl` raises spacetime spoof-detection F1 from near-chance (~0.55-0.65) to >=0.88 at <2 ms local tool latency. | Same VLM without Caelus MCP tools (chain-of-thought only) | Validates agent-native positioning on `ephemengine.com` docs |
-| 7 | `EXP-007` | Trained Tiny-Transformer Hybrid Geo-RoPE Forward-Pass Study | Extending `EXP-004` into a small trained autoregressive transformer on synthetic multi-day state-tracking streams recovers Turney-style long-horizon tracking across context resets while preserving circadian/photoperiod generalization across seasonal shifts. | Standard RoPE and Unix-Linear-Fourier RoPE with identical parameter count | Research paper / open-source reference module |
-| 8 | `EXP-008` | Delta-T UT External Oracle Validation (`ROADMAP.md` M1 open item) | Cross-check Caelus's UT-to-TT path and historical Delta-T spline before 1948 against independent historical eclipse timing catalogs (Stephenson, Morrison, Hohenkerk 2016 eclipse contact times) where Horizons/Swiss validate only in TT. | Extrapolated polynomial Delta-T | Closes `ROADMAP.md` Milestone 1 open item |
+| 1 | `EXP-006` | Live-VLM Observation Tool-Use Eval | Equipping a vision model with Caelus MCP tools (`verify_observation`, `chronolocate`, `geolocate`) on `EXP-003/vlm_eval_pack.jsonl` raises spacetime spoof-detection F1 from near-chance (~0.55-0.65) to >=0.88 at <2 ms local tool latency. | Same VLM without Caelus MCP tools (chain-of-thought only) | Validates agent-native positioning on `ephemengine.com` docs |
+| 2 | `EXP-007` | Trained Tiny-Transformer Hybrid Geo-RoPE Forward-Pass Study | Extending `EXP-004` into a small trained autoregressive transformer on synthetic multi-day state-tracking streams recovers Turney-style long-horizon tracking across context resets while preserving circadian/photoperiod generalization across seasonal shifts. | Standard RoPE and Unix-Linear-Fourier RoPE with identical parameter count | Research paper / open-source reference module |
+| 3 | `EXP-008` | Delta-T UT External Oracle Validation (`ROADMAP.md` M1 open item) | Cross-check Caelus's UT-to-TT path and historical Delta-T spline before 1948 against independent historical eclipse timing catalogs (Stephenson, Morrison, Hohenkerk 2016 eclipse contact times) where Horizons/Swiss validate only in TT. | Extrapolated polynomial Delta-T | Closes `ROADMAP.md` Milestone 1 open item |
 
 ## 3. Feature Factory Queue (`lab/factory/`)
 
@@ -66,4 +71,6 @@ Do not re-queue without meeting the documented revival criteria:
 - **Synastry Swarm Routing and Tie-Breaking**: killed in `lab/graveyard/KILL-002-synastry-swarm-routing.md`.
 - **Retrograde Duty Cycles and Zodiacal Releasing Daemon Maintenance**: killed in `lab/graveyard/KILL-003-retrograde-zr-maintenance.md`.
 - **Void-of-Course Execution Freezes and Parans Latitude Sharding**: killed in `lab/graveyard/KILL-004-voc-freezes-and-parans-sharding.md`.
+- **Adaptive Cognitive Step-Size via `chartStability`**: killed in `lab/graveyard/KILL-005-chart-stability-step-control.md` (dominated 20.9x by direct `sceneGeometry.diurnal.minutesToNextTwilight`).
+- **Synthetic Orbital Task-Space (`synthetic.ts` + `when()`) for Agent Deadline Scheduling**: killed in `lab/graveyard/KILL-006-synthetic-orbit-task-space.md` (Earth-parallax failure F1=0.0255; direct `riseSet` + modulo reaches F1=1.0000 and runs 3.11x faster).
 - **Interpretive flavor tags, symbolic tarot/archetype correspondences, or subjective intensity scores**: permanently out of scope for Caelus core per `ROADMAP.md`.

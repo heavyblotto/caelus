@@ -1,0 +1,21 @@
+{
+  "id": "EXP-009",
+  "title": "Geocentric Follow-the-Sun Wavefront Orchestration (4-Season Global Swarm Ablation)",
+  "track": "research",
+  "status": "proved",
+  "created": "2026-11-22",
+  "hypothesis": "Zero-RPC offline solar-horizon quadrant routing via Caelus sceneGeometry (initiate/execute/review_ship/handoff_buffer/subterranean_gc) across an 8-city global human-tethered swarm outperforms static UTC round-robin and zero-RPC longitude-derived fixed-24h local solar clocks on physical daylight alignment, nocturnal compaction safety, and solstice photoperiod adaptation at < 1.5 ms per node tick.",
+  "null_baseline": "Control-UTC-RoundRobin (static 6-hour UTC rotation) and Control-Lon-Fixed24h (zero-RPC LMT = UTC + lon/15 fixed 24h quadrants: 06-10 initiate, 10-14 execute, 14-18 review_ship, 18-06 subterranean_gc, ignoring latitude, solar declination, Equation of Time, and polar day/night).",
+  "success_bar": "Treatment-Caelus-Wavefront achieves >= 99.5% physical daylight alignment for active interactive phases (vs < 85% for Control-Lon-Fixed24h across solstice mid/high latitudes and < 60% for Control-UTC-RoundRobin), >= 99.5% nocturnal compaction safety (zero daytime GC interruptions vs > 10% error for Control-Lon-Fixed24h on solstices), 100% 24h global swarm coverage across all 4 seasons, and < 1.5 ms mean compute per node tick, while honestly reporting equinox and equatorial slices where Control-Lon-Fixed24h ties within 3 pp.",
+  "kill_criterion": "If Treatment-Caelus-Wavefront fails to beat Control-Lon-Fixed24h by >= 10 percentage points on solstice mid/high-latitude daylight alignment or nocturnal compaction safety, or fails to maintain continuous 24h global swarm coverage across seasons.",
+  "entrypoint": "experiment.mjs",
+  "runner": "node",
+  "tags": [
+    "chronosense",
+    "follow-the-sun",
+    "wavefront",
+    "swarm",
+    "photoperiod",
+    "ablation"
+  ]
+}
