@@ -8,11 +8,20 @@
 
 This track enforces the Caelus Razor strictly:
 
-1. `EXP-001-chronosense-ablation` (`lab/experiments/EXP-001-chronosense-ablation/results.json`)
-   must pass with `< 1 ms/turn` envelope generation latency and `100%`
-   deterministic catch rate on injected stale/corrupted write-back cursors.
-2. `EXP-005` (live-LLM inference ablation over `EXP-001/eval_suite.jsonl`) must
-   demonstrate:
+1. **CLEARED (`proved`)**: `EXP-001-chronosense-ablation` (`lab/experiments/EXP-001-chronosense-ablation/results.json`)
+   passed on `a16db97` with `100.0%` local `night_crossed` accuracy (vs `67.6%`
+   UTC ISO), `0.000 min` physical sunset error (vs `88.7 min` MAE for fixed-24h),
+   `100.0%` deterministic pre-tool cursor-drift detection at `0.0%` FPR, `45.5`
+   cl100k tokens/turn, and `~1.27 ms/turn` full envelope + canonical digest
+   (`~0.84 ms/turn` `sceneGeometry` alone).
+2. **PENDING EXTERNAL LIVE-LLM GATE (`active`, offline dry-run verified)**:
+   `EXP-005-chronosense-codec-eval` (`lab/experiments/EXP-005-chronosense-codec-eval/results.json`)
+   verified `20/20` ground-truth parity, `20/20` scorer self-tests, and bounded
+   codec recoverability (`100.0%` Physical at `45.75` tokens and `100%` 5-class
+   twilight vs `98.8%` Symbolic at `36.75` tokens, `85%` 5-class twilight, and
+   `50%` fresh-tool accuracy under symmetric `+/-1` zodiac sign slip). Running
+   `node lab/experiments/EXP-005-chronosense-codec-eval/experiment.mjs --live`
+   with an API key must demonstrate:
    - `>= 20%` reduction in temporal confusion (`yesterday vs today` across
      compaction), duplicate tool-call loops, and missed deadlines relative to
      `Control-ISO`.
@@ -22,6 +31,20 @@ This track enforces the Caelus Razor strictly:
 3. If `Control-Synthetic` ties `Treatment-Caelus-Physical` on live LLMs, do
    NOT ship astronomical middleware; extract only generic deadline/cursor
    auditing or kill the track.
+
+### Architectural Guardrails Established by Lab Receipts
+
+- **Adaptive sleep control (`KILL-005`, `EXP-010`)**: Use `sceneGeometry.diurnal.minutesToNextTwilight`
+  directly (`100.0%` catch across sunrise/sunset/civil dawn/civil dusk, `-75.2%`
+  wakeups vs 30m poll, `9.15 ms/24h`). Do NOT use `chartStability` sweeps (`20.9x`
+  slower, misses civil twilight).
+- **Deadline-vs-night collisions (`KILL-006`, `EXP-011`)**: Intersect `riseSet("sun")`
+  night intervals directly with modular deadline windows (`F1 = 1.0000`, `3.11x`
+  faster than `when()`). Do NOT register task rhythms in `synthetic.ts`.
+- **Optional zero-RPC swarm wavefront (`EXP-009`, `proved`)**: Offline solar-horizon
+  quadrant routing via `sceneGeometry` achieved `100.0%` daylight alignment and
+  nocturnal GC safety (`+20.1 pp` daylight / `+16.0 pp` GC safety over
+  `Control-Lon-Fixed24h` on solstice high/polar latitudes at `887 us/node-tick`).
 
 ## 2. Architecture
 

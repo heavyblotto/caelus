@@ -2,7 +2,7 @@
   "id": "EXP-004",
   "title": "Hybrid Dual-Clock Geo-RoPE Mathematical Prototype and Numerical Simulation",
   "track": "research",
-  "status": "active",
+  "status": "proved",
   "created": "2026-11-22",
   "hypothesis": "Nesting a 32-D fast token/step RoPE clock inside a 32-D Caelus geocentric physical torus (GAST/ASC, solar altitude, planetary-hour photoperiod phase, Moon longitude, Sun-Moon elongation, solar seasonal longitude) preserves 100% intra-turn token ordering where Caelus-Pure-Geo collapses, preserves post-sleep/post-compaction elapsed ordering where Standard-RoPE collapses, beats fixed-period Unix-Linear-Fourier on high-latitude seasonal photoperiod recurrence (Oslo Dec vs Sept), and eliminates 7d/14d/21d/28d weekly aliasing across 30-day same-clock memory streams.",
   "null_baseline": "Standard-RoPE (token index only), Unix-Linear-Fourier (synthetic fixed-period 24h/7d/365.25d UTC sinusoids), and steelman Hybrid-Unix-Fourier (32-D fast token RoPE + 32-D fixed-period 24h/7d/365.25d UTC sinusoids).",

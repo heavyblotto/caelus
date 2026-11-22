@@ -2,7 +2,7 @@
   "id": "EXP-002",
   "title": "Dyadic Circadian and Phase-Resonant Episodic Memory Benchmark (3-Arm Ablation)",
   "track": "research",
-  "status": "active",
+  "status": "proved",
   "created": "2026-11-22",
   "hypothesis": "Indexing episodic memories with a trimmed Caelus physical phase vector (solar altitude/trend, diurnal sect, photoperiod-warped planetary-hour arc, lunar elongation, solar seasonal longitude via sceneGeometry and pheno) paired with phase-stratified compaction (retaining diurnal, photoperiod, and counterfactual travel-relocation strata) significantly improves Top-1 and Top-3 recall over Semantic-LRU and Semantic-Fixed24h on high-latitude seasonal photoperiod shifts, post-compaction nocturnal queries, and NYC-to-Tokyo travel handoffs.",
   "null_baseline": "Arm1-Semantic-LRU (semantic cosine + exponential recency decay, LRU eviction) and Arm2-Semantic-Fixed24h (semantic cosine + fixed 24h sin/cos local clock, LRU eviction; plus oracle-TZ diagnostic Arm2b-LocalCivil24h).",

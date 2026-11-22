@@ -1,0 +1,21 @@
+{
+  "id": "EXP-005",
+  "title": "Chronosense Physical vs. Symbolic Codec Eval Harness (Offline Audit and Live-LLM Runner)",
+  "track": "research",
+  "status": "active",
+  "created": "2026-11-22",
+  "hypothesis": "Encoding agent spacetime context with Caelus physical-horizon tokens (Treatment-Caelus-Physical, backed by sceneGeometry and canonicalChart/chartDigest) yields higher exact task-state recoverability and lower live-LLM temporal confusion, stale-tool errors, and missed deadlines across EXP-001/eval_suite.jsonl than Baseline-None, Control-ISO, Control-Synthetic, and traditional zodiac shorthand (Arm4b-Caelus-Symbolic) at <= 55 tokens/turn.",
+  "null_baseline": "Baseline-None (no clock), Control-ISO (passive UTC ISO-8601), Control-Synthetic (elapsed seconds + fixed 24h sin/cos wave), and Arm4b-Caelus-Symbolic (traditional zodiac sign/degree and planetary hour tokens).",
+  "success_bar": "Offline codec audit confirms Treatment-Caelus-Physical encodes 100% of ground-truth observables cleanly at <= 55 cl100k tokens vs <70% for ISO/Synthetic and lossy twilight decoding for Symbolic, AND live-LLM inference (--live) across all 20 tasks x 5 arms reduces composite temporal error by >= 20 percentage points vs Control-ISO while beating Control-Synthetic and Arm4b-Caelus-Symbolic on high-latitude photoperiod and compaction slices.",
+  "kill_criterion": "If live-LLM inference shows Control-Synthetic ties Treatment-Caelus-Physical within 5 percentage points across high-latitude photoperiod and cross-compaction slices, or if Arm4b-Caelus-Symbolic matches or beats Treatment-Caelus-Physical at lower token cost without semantic drift, cancel FACT-002 physical envelope middleware.",
+  "entrypoint": "experiment.mjs",
+  "runner": "node",
+  "tags": [
+    "chronosense",
+    "codec",
+    "llm-eval",
+    "physical-vs-symbolic",
+    "ablation",
+    "fact-002-gate"
+  ]
+}

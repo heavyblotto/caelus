@@ -1,0 +1,20 @@
+{
+  "id": "EXP-010",
+  "title": "Adaptive Cognitive Step-Size Control: chartStability vs. Direct sceneGeometry Horizon Jumps vs. Fixed Polling",
+  "track": "research",
+  "status": "killed",
+  "created": "2026-11-22",
+  "hypothesis": "Using chartStability filtered to physical sect flips provides accurate, low-overhead adaptive step-size control around circadian regime cliffs (sunrise, sunset, civil dawn, civil dusk) that beats both fixed-interval polling and direct analytic sceneGeometry.diurnal.minutesToNext jump scheduling.",
+  "null_baseline": "Arm1-Fixed-Poll-30m (constant 30-min polling), Arm2-Stability-AllFlips (unfiltered chartStability reacting to angle/sign/house/aspect flips), and Arm4-Analytic-RiseSet-Jump (direct next-boundary sleep via sceneGeometry.diurnal.minutesToNext without finite-difference chart sweeps).",
+  "success_bar": "Arm3-Stability-Physical-SectOnly detects >= 95% of all 4 physical twilight/horizon cliffs within +/-5 min, reduces wakeups by >= 40% vs Arm1-Fixed-Poll-30m with 0 phantom sign-ingress alarms, AND stays within 2x of Arm4-Analytic-RiseSet-Jump total CPU cost.",
+  "kill_criterion": "If Arm4-Analytic-RiseSet-Jump (sceneGeometry.diurnal.minutesToNext) strictly dominates Arm3-Stability-Physical-SectOnly with >= 5x lower CPU cost AND higher physical cliff coverage (catching civil dawn/dusk that binary sect misses) at equal or fewer wakeups, kill chartStability as an adaptive step-size controller and archive to lab/graveyard/KILL-005-chart-stability-step-control.md.",
+  "entrypoint": "experiment.mjs",
+  "runner": "node",
+  "tags": [
+    "chronosense",
+    "stability",
+    "adaptive-step",
+    "phantom-cliffs",
+    "ablation"
+  ]
+}

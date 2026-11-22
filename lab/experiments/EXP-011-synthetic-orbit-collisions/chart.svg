@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" font-family="et-book, ET-Bembo, Palatino, Georgia, serif" font-size="13">
+<rect width="760" height="460" fill="white"/>
+<text x="56" y="30" font-size="17" fill="#111">EXP-011 (KILLED): Deadline-Night Collision Event F1 and Runtime (ms) Across 30 Scenarios</text>
+<text x="56" y="48" font-size="12" fill="#555">5 cities x 2 seasons x 3 task rhythms (0.25d, 1d, 14d; 787 collisions): Earth parallax destroys Arm1; direct riseSet beats Arm2 by 3.11x</text>
+
+<text x="215.0" y="88" font-size="12" fill="#333">Collision Event F1 (0.0 to 1.0)</text>
+<text x="505.0" y="88" font-size="12" fill="#333">Total Solve Runtime (ms)</text>
+<line x1="215.0" y1="98" x2="215.0" y2="328.0" stroke="#333" stroke-width="1"/>
+<line x1="505.0" y1="98" x2="505.0" y2="328.0" stroke="#333" stroke-width="1"/>
+<text x="205.0" y="131.0" text-anchor="end" font-size="12" fill="#222">Arm3: Direct riseSet + modulo</text>
+<text x="205.0" y="147.0" text-anchor="end" font-size="10.5" fill="#666">787/787 TP, 0 FP, 0.00 min err</text>
+<rect x="215.0" y="118.0" width="225.0" height="20" fill="#1b5e7a"/>
+<line x1="271.2" y1="118.0" x2="271.2" y2="138.0" stroke="white" stroke-width="1"/>
+<line x1="327.5" y1="118.0" x2="327.5" y2="138.0" stroke="white" stroke-width="1"/>
+<line x1="383.8" y1="118.0" x2="383.8" y2="138.0" stroke="white" stroke-width="1"/>
+<text x="446.0" y="132.0" font-size="11.5" fill="#1b5e7a">1.0000</text>
+<rect x="505.0" y="118.0" width="65.9" height="20" fill="#1b5e7a"/>
+<text x="576.9" y="132.0" font-size="11.5" fill="#1b5e7a">712 ms</text>
+<text x="205.0" y="219.0" text-anchor="end" font-size="12" fill="#222">Arm2: WorldFrame + when()</text>
+<text x="205.0" y="235.0" text-anchor="end" font-size="10.5" fill="#666">785/787 TP, 0 FP, 3.11x slower</text>
+<rect x="215.0" y="206.0" width="224.7" height="20" fill="#555"/>
+<line x1="271.2" y1="206.0" x2="271.2" y2="226.0" stroke="white" stroke-width="1"/>
+<line x1="327.5" y1="206.0" x2="327.5" y2="226.0" stroke="white" stroke-width="1"/>
+<line x1="383.8" y1="206.0" x2="383.8" y2="226.0" stroke="white" stroke-width="1"/>
+<text x="445.7" y="220.0" font-size="11.5" fill="#555">0.9987</text>
+<rect x="505.0" y="206.0" width="205.0" height="20" fill="#555"/>
+<text x="704.0" y="220.0" text-anchor="end" font-size="11" fill="white">2214 ms</text>
+<text x="205.0" y="307.0" text-anchor="end" font-size="12" fill="#222">Arm1: registerSynthetic + when()</text>
+<text x="205.0" y="323.0" text-anchor="end" font-size="10.5" fill="#666">12/787 TP, 143 FP (Kepler a=P^2/3 parallax)</text>
+<rect x="215.0" y="294.0" width="5.7" height="20" fill="#8c3b2b"/>
+<text x="226.7" y="308.0" font-size="11.5" fill="#8c3b2b">0.0255</text>
+<rect x="505.0" y="294.0" width="187.7" height="20" fill="#8c3b2b"/>
+<text x="686.7" y="308.0" text-anchor="end" font-size="11" fill="white">2027 ms</text>
+<text x="215.0" y="410" font-size="11" fill="#555">0.00</text>
+<text x="440.0" y="410" text-anchor="end" font-size="11" fill="#555">1.00</text>
+<text x="505.0" y="410" font-size="11" fill="#555">0 ms</text>
+<text x="710.0" y="410" text-anchor="end" font-size="11" fill="#555">2214 ms</text>
+</svg>

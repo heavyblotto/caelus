@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" font-family="et-book, ET-Bembo, Palatino, Georgia, serif" font-size="13">
+<rect width="760" height="460" fill="white"/>
+<text x="56" y="30" font-size="17" fill="#111">EXP-009: Fixed-24h Wavefront Misrouting Error (%) vs. Absolute Latitude (deg)</text>
+<text x="56" y="48" font-size="12" fill="#555">8 global cities x 4 seasons (n=6,144 node evals): Caelus holds 0.0% error at all latitudes (baseline floor)</text>
+<line x1="64.0" y1="396.0" x2="64.0" y2="82.0" stroke="#333" stroke-width="1"/>
+<line x1="64.0" y1="396.0" x2="700.0" y2="396.0" stroke="#333" stroke-width="1"/>
+<text x="56.0" y="86.0" text-anchor="end" font-size="11" fill="#555">27.3%</text>
+<text x="56.0" y="400.0" text-anchor="end" font-size="11" fill="#555">0%</text>
+<text x="64.0" y="414.0" text-anchor="middle" font-size="11" fill="#555">1.4 deg</text>
+<text x="700.0" y="414.0" text-anchor="middle" font-size="11" fill="#555">69.6 deg</text>
+<text x="382.0" y="434.0" text-anchor="middle" font-size="12" fill="#444">Absolute latitude (degrees)</text>
+<polyline fill="none" stroke="#8c3b2b" stroke-width="1.6" points="64.0,324.2 366.8,270.4 383.6,252.4 403.2,255.4 430.5,234.5 531.1,180.7 609.3,82.0 700.0,279.3"/>
+<polyline fill="none" stroke="#333" stroke-width="1.4" stroke-dasharray="4,3" points="64.0,396.0 366.8,360.2 383.6,369.1 403.2,360.2 430.5,360.2 531.1,336.2 609.3,300.3 700.0,204.5"/>
+<line x1="64.0" y1="396.0" x2="700.0" y2="396.0" stroke="#1b5e7a" stroke-width="2.2"/>
+<circle cx="64.0" cy="324.2" r="3.0" fill="#8c3b2b"/>
+<circle cx="64.0" cy="396.0" r="2.6" fill="#333"/>
+<line x1="64.0" y1="400.0" x2="64.0" y2="405.0" stroke="#666" stroke-width="0.8"/>
+<circle cx="366.8" cy="270.4" r="3.0" fill="#8c3b2b"/>
+<circle cx="366.8" cy="360.2" r="2.6" fill="#333"/>
+<line x1="366.8" y1="400.0" x2="366.8" y2="405.0" stroke="#666" stroke-width="0.8"/>
+<circle cx="383.6" cy="252.4" r="3.0" fill="#8c3b2b"/>
+<circle cx="383.6" cy="369.1" r="2.6" fill="#333"/>
+<line x1="383.6" y1="400.0" x2="383.6" y2="405.0" stroke="#666" stroke-width="0.8"/>
+<circle cx="403.2" cy="255.4" r="3.0" fill="#8c3b2b"/>
+<circle cx="403.2" cy="360.2" r="2.6" fill="#333"/>
+<line x1="403.2" y1="400.0" x2="403.2" y2="405.0" stroke="#666" stroke-width="0.8"/>
+<circle cx="430.5" cy="234.5" r="3.0" fill="#8c3b2b"/>
+<circle cx="430.5" cy="360.2" r="2.6" fill="#333"/>
+<line x1="430.5" y1="400.0" x2="430.5" y2="405.0" stroke="#666" stroke-width="0.8"/>
+<circle cx="531.1" cy="180.7" r="3.0" fill="#8c3b2b"/>
+<circle cx="531.1" cy="336.2" r="2.6" fill="#333"/>
+<line x1="531.1" y1="400.0" x2="531.1" y2="405.0" stroke="#666" stroke-width="0.8"/>
+<circle cx="609.3" cy="82.0" r="3.0" fill="#8c3b2b"/>
+<circle cx="609.3" cy="300.3" r="2.6" fill="#333"/>
+<line x1="609.3" y1="400.0" x2="609.3" y2="405.0" stroke="#666" stroke-width="0.8"/>
+<circle cx="700.0" cy="279.3" r="3.0" fill="#8c3b2b"/>
+<circle cx="700.0" cy="204.5" r="2.6" fill="#333"/>
+<line x1="700.0" y1="400.0" x2="700.0" y2="405.0" stroke="#666" stroke-width="0.8"/>
+<text x="601.3" y="72.0" text-anchor="end" font-size="11.5" fill="#8c3b2b">Fixed-24h GC civil error (peaks Oslo 27.3%)</text>
+<text x="692.0" y="194.5" text-anchor="end" font-size="11.5" fill="#333">Fixed-24h daylight error (Tromso 16.7%, Oslo 8.3%)</text>
+<text x="403.1" y="386.0" text-anchor="middle" font-size="11.5" fill="#1b5e7a">Treatment-Caelus-Wavefront (0.0% daylight and GC error across all 8 cities)</text>
+<text x="72.0" y="318.2" text-anchor="start" font-size="11" fill="#555">Singapore tie (0.0% daylight err)</text>
+</svg>

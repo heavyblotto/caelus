@@ -1,0 +1,124 @@
+{
+  "id": "EXP-005",
+  "run_at": "2026-11-22T16:56:53.975Z",
+  "git_sha": "a16db97",
+  "status": "inconclusive",
+  "summary": "Offline codec audit + scorer verification over 20 EXP-001 eval_suite tasks x 5 arms (GT parity=20/20, max sunAlt diff=0 deg). Bounded-decoder score: Physical=100.0% (45.75 tok, 100% 5-class twilight), Symbolic=98.8% (36.75 tok, 85% 5-class twilight, 2 conversion hops, 50% on +/-1 sign slip), Synthetic=55.8%, ISO=17.5%, None=0.0%. Live-LLM inference (PENDING --live) remains the FACT-002 gate.",
+  "metrics": {
+    "physical_codec_score": 1,
+    "symbolic_codec_score": 0.9875,
+    "synthetic_codec_score": 0.5583,
+    "iso_codec_score": 0.175,
+    "none_codec_score": 0,
+    "physical_all20_twilight_5class_accuracy": 1,
+    "symbolic_all20_twilight_5class_accuracy": 0.85,
+    "non_binary_twilight_tasks_count": 3,
+    "physical_mean_cl100k_tokens": 45.75,
+    "symbolic_mean_cl100k_tokens": 36.75,
+    "symbolic_pm1_sign_slip_fresh_tool_accuracy": 0.5,
+    "ground_truth_parity_rate": 1,
+    "scorer_oracle_pass_rate": 1,
+    "scorer_corrupt_catch_rate": 1,
+    "live_llm_executed": false,
+    "runtime_ms": 199.3035,
+    "offline_codec_by_arm": {
+      "Baseline-None": {
+        "mean_score": 0,
+        "exact_task_rate": 0,
+        "compaction_score": 0,
+        "photoperiod_score": 0,
+        "twilight_5class_accuracy": 0,
+        "mean_cl100k_tokens": 0,
+        "mean_whitespace_tokens": 0,
+        "mean_conversion_hops": 0,
+        "field_accuracy": {
+          "night_crossed": 0,
+          "fresh_tool_id": 0,
+          "digest_match": 0,
+          "is_day": 0,
+          "twilight_stage": 0,
+          "deadline_phase": 0,
+          "deadline_minutes_within_15m": 0
+        }
+      },
+      "Control-ISO": {
+        "mean_score": 0.175,
+        "exact_task_rate": 0,
+        "compaction_score": 0,
+        "photoperiod_score": 0.35,
+        "twilight_5class_accuracy": 0.7,
+        "mean_cl100k_tokens": 15,
+        "mean_whitespace_tokens": 2,
+        "mean_conversion_hops": 0,
+        "field_accuracy": {
+          "night_crossed": 0,
+          "fresh_tool_id": 0,
+          "digest_match": 0,
+          "is_day": 0.7,
+          "twilight_stage": 0.7,
+          "deadline_phase": 0,
+          "deadline_minutes_within_15m": 0
+        }
+      },
+      "Control-Synthetic": {
+        "mean_score": 0.5583,
+        "exact_task_rate": 0.45,
+        "compaction_score": 0.1667,
+        "photoperiod_score": 0.95,
+        "twilight_5class_accuracy": 0.9,
+        "mean_cl100k_tokens": 26,
+        "mean_whitespace_tokens": 5,
+        "mean_conversion_hops": 1,
+        "field_accuracy": {
+          "night_crossed": 0.5,
+          "fresh_tool_id": 0,
+          "digest_match": 0,
+          "is_day": 0.9,
+          "twilight_stage": 0.9,
+          "deadline_phase": 1,
+          "deadline_minutes_within_15m": 1
+        }
+      },
+      "Treatment-Caelus-Physical": {
+        "mean_score": 1,
+        "exact_task_rate": 1,
+        "compaction_score": 1,
+        "photoperiod_score": 1,
+        "twilight_5class_accuracy": 1,
+        "mean_cl100k_tokens": 45.75,
+        "mean_whitespace_tokens": 8.5,
+        "mean_conversion_hops": 0,
+        "field_accuracy": {
+          "night_crossed": 1,
+          "fresh_tool_id": 1,
+          "digest_match": 1,
+          "is_day": 1,
+          "twilight_stage": 1,
+          "deadline_phase": 1,
+          "deadline_minutes_within_15m": 1
+        }
+      },
+      "Arm4b-Caelus-Symbolic": {
+        "mean_score": 0.9875,
+        "exact_task_rate": 0.95,
+        "compaction_score": 1,
+        "photoperiod_score": 0.975,
+        "twilight_5class_accuracy": 0.9,
+        "mean_cl100k_tokens": 36.75,
+        "mean_whitespace_tokens": 15.5,
+        "mean_conversion_hops": 1,
+        "field_accuracy": {
+          "night_crossed": 1,
+          "fresh_tool_id": 1,
+          "digest_match": 1,
+          "is_day": 1,
+          "twilight_stage": 0.9,
+          "deadline_phase": 1,
+          "deadline_minutes_within_15m": 1
+        }
+      }
+    },
+    "live_eval": null
+  },
+  "verdict": "INCONCLUSIVE (offline dry-run complete; live-LLM gate pending): Ground-truth parity (20/20), scorer self-tests (20/20 oracle, 20/20 corrupt caught), and bounded codec audit pass cleanly. Treatment-Caelus-Physical recovers 100.0% of task observables (100% 5-class twilight across all 20 tasks, 45.75 tokens, 0 conversion hops) vs Arm4b-Caelus-Symbolic 98.8% (85% 5-class twilight across all 20 tasks because 3 civil/nautical/astronomical twilight tasks collapse to binary Night, 36.75 tokens, 2 zodiac-to-degree hops, drops to 50% fresh-tool acc under symmetric +/-1 sign slip), Control-Synthetic 55.8%, Control-ISO 17.5%, and Baseline-None 0.0%. Run with --live and an API key to clear the FACT-002 live-LLM gate."
+}

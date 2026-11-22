@@ -1,9 +1,9 @@
 {
   "id": "EXP-001",
-  "run_at": "2026-11-22T15:12:07.220Z",
-  "git_sha": "c5d89ab",
+  "run_at": "2026-11-22T16:56:40.623Z",
+  "git_sha": "a16db97",
   "status": "pass",
-  "summary": "100 72h episodes (1,200 turns) across 5 latitudes x 2 seasons. Treatment-Caelus-Physical achieves 100.0% local night_crossed accuracy (vs 67.6% UTC Control-ISO), 100.0% physical daylight classification (vs 81.2% fixed-24h Control-Synthetic), 0.000 min sunset deadline error (vs 88.7 min MAE / 206.8 min max for longitude-adjusted fixed-24h clock plus 10 polar no-sunset episodes), and 100.0% pre-tool cursor drift detection at 0.0% FPR in 1274 us/turn (~45.5 cl100k tokens).",
+  "summary": "100 72h episodes (1,200 turns) across 5 latitudes x 2 seasons. Treatment-Caelus-Physical achieves 100.0% local night_crossed accuracy (vs 67.6% UTC Control-ISO), 100.0% physical daylight classification (vs 81.2% fixed-24h Control-Synthetic), 0.000 min sunset deadline error (vs 88.7 min MAE / 206.8 min max for longitude-adjusted fixed-24h clock plus 10 polar no-sunset episodes), and 100.0% pre-tool cursor drift detection at 0.0% FPR in 1318 us/turn (~45.5 cl100k tokens).",
   "metrics": {
     "caelus_night_crossed_accuracy": 1,
     "iso_utc_night_crossed_accuracy": 0.6764,
@@ -13,8 +13,8 @@
     "synth_24h_sunset_mae_min": 88.74,
     "caelus_drift_caught_rate": 1,
     "caelus_drift_false_positive_rate": 0,
-    "caelus_mean_us": 1273.73,
-    "caelus_cl100k_tokens": 45.52,
+    "caelus_mean_us": 1317.85,
+    "caelus_cl100k_tokens": 45.51,
     "episodes": 100,
     "turns_total": 1200,
     "compaction_boundaries": 200,
@@ -32,53 +32,53 @@
         "Baseline-None": 0,
         "Control-ISO": 16,
         "Control-Synthetic": 24.541,
-        "Treatment-Caelus-Physical": 45.517,
+        "Treatment-Caelus-Physical": 45.514,
         "Treatment-Caelus-FullSceneLine": 56.54,
         "Arm4b-Caelus-Symbolic": 36.39
       }
     },
     "compute_latency_us": {
       "Baseline-None": {
-        "mean": 0.072,
+        "mean": 0.079,
         "median": 0.042,
-        "p95": 0.125,
-        "p99": 0.25,
-        "max": 1.417
+        "p95": 0.166,
+        "p99": 0.333,
+        "max": 7.125
       },
       "Control-ISO": {
-        "mean": 0.437,
-        "median": 0.333,
-        "p95": 0.833,
-        "p99": 1.75,
-        "max": 41.792
+        "mean": 0.473,
+        "median": 0.375,
+        "p95": 1,
+        "p99": 2.042,
+        "max": 32.125
       },
       "Control-Synthetic": {
-        "mean": 1.453,
-        "median": 1.167,
-        "p95": 2.666,
-        "p99": 4.083,
-        "max": 53.709
+        "mean": 1.566,
+        "median": 1.333,
+        "p95": 3.042,
+        "p99": 5.291,
+        "max": 25.583
       },
       "Treatment-Caelus-SceneOnly": {
-        "mean": 839.805,
-        "median": 809.709,
-        "p95": 1167.083,
-        "p99": 2111.625,
-        "max": 3073.208
+        "mean": 862.649,
+        "median": 823.667,
+        "p95": 1307.417,
+        "p99": 2026.042,
+        "max": 2560.5
       },
       "Treatment-Caelus-Physical": {
-        "mean": 1273.728,
-        "median": 1233.375,
-        "p95": 1669.834,
-        "p99": 2545.458,
-        "max": 3654.375
+        "mean": 1317.846,
+        "median": 1261.125,
+        "p95": 1833.792,
+        "p99": 2478,
+        "max": 3071.25
       },
       "Treatment-Caelus-AuditHook": {
-        "mean": 1261.702,
-        "median": 1218.875,
-        "p95": 1671.791,
-        "p99": 2442.917,
-        "max": 3248.083
+        "mean": 1301.743,
+        "median": 1245.167,
+        "p95": 1799.75,
+        "p99": 2384.292,
+        "max": 3117.333
       }
     },
     "night_crossed_accuracy": {
@@ -216,8 +216,8 @@
           "mean": 459.687,
           "median": 414.478,
           "p95": 1050.063,
-          "p99": 1050.707,
-          "max": 1050.707
+          "p99": 1050.706,
+          "max": 1050.706
         },
         "Control-Synthetic-Civil": {
           "mean": 127.146,
@@ -245,7 +245,7 @@
         "oslo_june": {
           "non_polar_episodes": 5,
           "polar_fallbacks": 0,
-          "civil_24h_mae_min": 283.237,
+          "civil_24h_mae_min": 283.238,
           "lon_mean_24h_mae_min": 206.246
         },
         "oslo_dec": {
@@ -269,7 +269,7 @@
         "singapore_june": {
           "non_polar_episodes": 5,
           "polar_fallbacks": 0,
-          "civil_24h_mae_min": 72.399,
+          "civil_24h_mae_min": 72.4,
           "lon_mean_24h_mae_min": 7.679
         },
         "singapore_dec": {
@@ -281,7 +281,7 @@
         "sydney_june": {
           "non_polar_episodes": 5,
           "polar_fallbacks": 0,
-          "civil_24h_mae_min": 66.209,
+          "civil_24h_mae_min": 66.208,
           "lon_mean_24h_mae_min": 61.371
         },
         "sydney_dec": {
@@ -308,7 +308,7 @@
         "Control-ISO-UTC": {
           "mean": 287.069,
           "median": 297.01,
-          "p95": 606.982,
+          "p95": 606.981,
           "p99": 608.95,
           "max": 608.95
         },
@@ -342,7 +342,7 @@
         },
         "oslo_dec": {
           "episodes": 5,
-          "civil_24h_mae_min": 15.141,
+          "civil_24h_mae_min": 15.142,
           "lon_mean_24h_mae_min": 1.862
         },
         "nyc_june": {
@@ -353,7 +353,7 @@
         "nyc_dec": {
           "episodes": 5,
           "civil_24h_mae_min": 5.414,
-          "lon_mean_24h_mae_min": 1.694
+          "lon_mean_24h_mae_min": 1.693
         },
         "singapore_june": {
           "episodes": 5,
@@ -367,7 +367,7 @@
         },
         "sydney_june": {
           "episodes": 5,
-          "civil_24h_mae_min": 2.986,
+          "civil_24h_mae_min": 2.985,
           "lon_mean_24h_mae_min": 1.852
         },
         "sydney_dec": {
@@ -487,7 +487,7 @@
     "epistemic_boundaries": {
       "proven_by_deterministic_harness": [
         "Exact token footprint: 45.5 cl100k-approx tokens (8.3 whitespace tokens) for the compact physical-horizon envelope + canonical digest cursor; 56.5 cl100k-approx tokens for the full sceneGeometry.chronosense.line (including shadow/Moon visual fields).",
-        "Real offline compute latency: 840 us mean for sceneGeometry alone, 1274 us mean with canonicalChart/chartDigest.",
+        "Real offline compute latency: 863 us mean for sceneGeometry alone, 1318 us mean with canonicalChart/chartDigest.",
         "100.0% local solar-midnight night_crossed disambiguation across 5 latitudes x 2 seasons where UTC-date Control-ISO drops to 67.6% overall (54.5% on compaction boundaries).",
         "0.000 min physical sunset and solar-noon deadline error vs 88.7 min MAE (max 206.8 min in Oslo June) for longitude-adjusted fixed-24h clock (127.1 min MAE / max 283.8 min for civil 24h clock) plus 10 polar Tromso episodes with no physical sunset.",
         "100.0% deterministic pre-tool detection of all 5 injected write-back cursor corruption modes at 0.0% FPR, whereas ISO/Synthetic cursors catch only stale timestamp replays (20.0% overall) and cannot audit physical horizon/twilight/ephemeris integrity."

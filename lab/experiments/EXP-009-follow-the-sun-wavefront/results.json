@@ -1,0 +1,446 @@
+{
+  "id": "EXP-009",
+  "run_at": "2026-11-22T16:59:59.363Z",
+  "git_sha": "52a58e3",
+  "status": "pass",
+  "summary": "4-season global swarm trace (8 cities x 768 ticks = 6144 node evals). Treatment-Caelus-Wavefront achieves 100.00% overall daylight alignment and 100.00% nocturnal GC safety at 873.0916 us/node-tick with 100% 24h global daylight coverage, beating Control-Lon-Fixed24h (94.8% daylight, 93.3% GC safety; solstice high/polar 79.9% daylight and 84.0% GC safety) and Control-UTC-RoundRobin (49.0% daylight), while equatorial Singapore nearly ties (100.0% vs 100.0%).",
+  "metrics": {
+    "caelus_overall_daylight_accuracy": 1,
+    "lon_fixed24h_overall_daylight_accuracy": 0.9476,
+    "utc_rr_overall_daylight_accuracy": 0.4898,
+    "caelus_overall_gc_safety": 1,
+    "lon_fixed24h_overall_gc_safety": 0.9329,
+    "utc_rr_overall_gc_safety": 0.3242,
+    "caelus_solstice_high_polar_daylight_accuracy": 1,
+    "lon_fixed24h_solstice_high_polar_daylight_accuracy": 0.7986,
+    "caelus_solstice_high_polar_gc_safety": 1,
+    "lon_fixed24h_solstice_high_polar_gc_safety": 0.8403,
+    "caelus_solstice_nonpolar_gc_safety": 1,
+    "lon_fixed24h_solstice_nonpolar_gc_safety": 0.8438,
+    "caelus_equatorial_daylight_accuracy": 1,
+    "lon_fixed24h_equatorial_daylight_accuracy": 1,
+    "caelus_global_daylight_coverage": 1,
+    "caelus_mean_us_per_node_tick": 873.0916,
+    "total_runtime_ms": 5573.3917,
+    "overall_by_arm": {
+      "Control-UTC-RoundRobin": {
+        "interactive_total": 4608,
+        "daylight_alignment_civil": 0.4898,
+        "daylight_alignment_strict": 0.4377,
+        "gc_total": 1536,
+        "nocturnal_gc_safety_strict": 0.3242,
+        "nocturnal_gc_safety_civil": 0.2624,
+        "handoff_buffer_count": 0
+      },
+      "Control-Lon-Fixed24h": {
+        "interactive_total": 3072,
+        "daylight_alignment_civil": 0.9476,
+        "daylight_alignment_strict": 0.9118,
+        "gc_total": 3072,
+        "nocturnal_gc_safety_strict": 0.9329,
+        "nocturnal_gc_safety_civil": 0.8597,
+        "handoff_buffer_count": 0
+      },
+      "Treatment-Caelus-Wavefront": {
+        "interactive_total": 3007,
+        "daylight_alignment_civil": 1,
+        "daylight_alignment_strict": 1,
+        "gc_total": 2802,
+        "nocturnal_gc_safety_strict": 1,
+        "nocturnal_gc_safety_civil": 1,
+        "handoff_buffer_count": 335
+      }
+    },
+    "slices_by_arm": {
+      "Control-UTC-RoundRobin": {
+        "equatorial_singapore": {
+          "interactive_total": 576,
+          "daylight_alignment_civil": 0.375,
+          "daylight_alignment_strict": 0.3333,
+          "gc_total": 192,
+          "nocturnal_gc_safety_strict": 0,
+          "nocturnal_gc_safety_civil": 0,
+          "handoff_buffer_count": 0
+        },
+        "equinox_all": {
+          "interactive_total": 2304,
+          "daylight_alignment_civil": 0.4661,
+          "daylight_alignment_strict": 0.421,
+          "gc_total": 768,
+          "nocturnal_gc_safety_strict": 0.2461,
+          "nocturnal_gc_safety_civil": 0.1914,
+          "handoff_buffer_count": 0
+        },
+        "solstice_mid_high_nonpolar": {
+          "interactive_total": 1728,
+          "daylight_alignment_civil": 0.5249,
+          "daylight_alignment_strict": 0.467,
+          "gc_total": 576,
+          "nocturnal_gc_safety_strict": 0.3698,
+          "nocturnal_gc_safety_civil": 0.2917,
+          "handoff_buffer_count": 0
+        },
+        "solstice_high_and_polar": {
+          "interactive_total": 864,
+          "daylight_alignment_civil": 0.5324,
+          "daylight_alignment_strict": 0.4398,
+          "gc_total": 288,
+          "nocturnal_gc_safety_strict": 0.4583,
+          "nocturnal_gc_safety_civil": 0.375,
+          "handoff_buffer_count": 0
+        },
+        "polar_tromso": {
+          "interactive_total": 576,
+          "daylight_alignment_civil": 0.526,
+          "daylight_alignment_strict": 0.4462,
+          "gc_total": 192,
+          "nocturnal_gc_safety_strict": 0.5677,
+          "nocturnal_gc_safety_civil": 0.4583,
+          "handoff_buffer_count": 0
+        }
+      },
+      "Control-Lon-Fixed24h": {
+        "equatorial_singapore": {
+          "interactive_total": 384,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 0.9896,
+          "gc_total": 384,
+          "nocturnal_gc_safety_strict": 0.9896,
+          "nocturnal_gc_safety_civil": 0.9375,
+          "handoff_buffer_count": 0
+        },
+        "equinox_all": {
+          "interactive_total": 1536,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 0.9915,
+          "gc_total": 1536,
+          "nocturnal_gc_safety_strict": 0.9831,
+          "nocturnal_gc_safety_civil": 0.8965,
+          "handoff_buffer_count": 0
+        },
+        "solstice_mid_high_nonpolar": {
+          "interactive_total": 1152,
+          "daylight_alignment_civil": 0.9158,
+          "daylight_alignment_strict": 0.8594,
+          "gc_total": 1152,
+          "nocturnal_gc_safety_strict": 0.8438,
+          "nocturnal_gc_safety_civil": 0.7743,
+          "handoff_buffer_count": 0
+        },
+        "solstice_high_and_polar": {
+          "interactive_total": 576,
+          "daylight_alignment_civil": 0.7986,
+          "daylight_alignment_strict": 0.6875,
+          "gc_total": 576,
+          "nocturnal_gc_safety_strict": 0.8403,
+          "nocturnal_gc_safety_civil": 0.7708,
+          "handoff_buffer_count": 0
+        },
+        "polar_tromso": {
+          "interactive_total": 384,
+          "daylight_alignment_civil": 0.8333,
+          "daylight_alignment_strict": 0.75,
+          "gc_total": 384,
+          "nocturnal_gc_safety_strict": 0.9896,
+          "nocturnal_gc_safety_civil": 0.8984,
+          "handoff_buffer_count": 0
+        }
+      },
+      "Treatment-Caelus-Wavefront": {
+        "equatorial_singapore": {
+          "interactive_total": 384,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 1,
+          "gc_total": 360,
+          "nocturnal_gc_safety_strict": 1,
+          "nocturnal_gc_safety_civil": 1,
+          "handoff_buffer_count": 24
+        },
+        "equinox_all": {
+          "interactive_total": 1549,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 1,
+          "gc_total": 1377,
+          "nocturnal_gc_safety_strict": 1,
+          "nocturnal_gc_safety_civil": 1,
+          "handoff_buffer_count": 146
+        },
+        "solstice_mid_high_nonpolar": {
+          "interactive_total": 1170,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 1,
+          "gc_total": 989,
+          "nocturnal_gc_safety_strict": 1,
+          "nocturnal_gc_safety_civil": 1,
+          "handoff_buffer_count": 145
+        },
+        "solstice_high_and_polar": {
+          "interactive_total": 488,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 1,
+          "gc_total": 560,
+          "nocturnal_gc_safety_strict": 1,
+          "nocturnal_gc_safety_civil": 1,
+          "handoff_buffer_count": 104
+        },
+        "polar_tromso": {
+          "interactive_total": 292,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 1,
+          "gc_total": 409,
+          "nocturnal_gc_safety_strict": 1,
+          "nocturnal_gc_safety_civil": 1,
+          "handoff_buffer_count": 67
+        }
+      }
+    },
+    "coverage_by_arm": {
+      "Control-UTC-RoundRobin": {
+        "global_daylight_active_coverage": 1,
+        "global_daylight_execute_coverage": 0.6823,
+        "global_nocturnal_gc_coverage": 0.5638,
+        "mean_simultaneous_daylight_nodes": 2.9388,
+        "mean_compute_us_per_node_tick": 0.182
+      },
+      "Control-Lon-Fixed24h": {
+        "global_daylight_active_coverage": 1,
+        "global_daylight_execute_coverage": 0.8542,
+        "global_nocturnal_gc_coverage": 1,
+        "mean_simultaneous_daylight_nodes": 3.7904,
+        "mean_compute_us_per_node_tick": 0.1527
+      },
+      "Treatment-Caelus-Wavefront": {
+        "global_daylight_active_coverage": 1,
+        "global_daylight_execute_coverage": 0.901,
+        "global_nocturnal_gc_coverage": 1,
+        "mean_simultaneous_daylight_nodes": 3.9154,
+        "mean_compute_us_per_node_tick": 873.0916
+      }
+    },
+    "by_city": {
+      "Control-UTC-RoundRobin": {
+        "tokyo": {
+          "interactive_total": 576,
+          "daylight_alignment_civil": 0.533,
+          "daylight_alignment_strict": 0.4983,
+          "gc_total": 192,
+          "nocturnal_gc_safety_strict": 0.4792,
+          "nocturnal_gc_safety_civil": 0.3958,
+          "handoff_buffer_count": 0
+        },
+        "singapore": {
+          "interactive_total": 576,
+          "daylight_alignment_civil": 0.375,
+          "daylight_alignment_strict": 0.3333,
+          "gc_total": 192,
+          "nocturnal_gc_safety_strict": 0,
+          "nocturnal_gc_safety_civil": 0,
+          "handoff_buffer_count": 0
+        },
+        "oslo": {
+          "interactive_total": 576,
+          "daylight_alignment_civil": 0.4809,
+          "daylight_alignment_strict": 0.3872,
+          "gc_total": 192,
+          "nocturnal_gc_safety_strict": 0.1042,
+          "nocturnal_gc_safety_civil": 0.0625,
+          "handoff_buffer_count": 0
+        },
+        "london": {
+          "interactive_total": 576,
+          "daylight_alignment_civil": 0.4375,
+          "daylight_alignment_strict": 0.3628,
+          "gc_total": 192,
+          "nocturnal_gc_safety_strict": 0.0833,
+          "nocturnal_gc_safety_civil": 0.0417,
+          "handoff_buffer_count": 0
+        },
+        "new_york": {
+          "interactive_total": 576,
+          "daylight_alignment_civil": 0.434,
+          "daylight_alignment_strict": 0.3941,
+          "gc_total": 192,
+          "nocturnal_gc_safety_strict": 0.151,
+          "nocturnal_gc_safety_civil": 0.0833,
+          "handoff_buffer_count": 0
+        },
+        "san_francisco": {
+          "interactive_total": 576,
+          "daylight_alignment_civil": 0.5625,
+          "daylight_alignment_strict": 0.5382,
+          "gc_total": 192,
+          "nocturnal_gc_safety_strict": 0.5833,
+          "nocturnal_gc_safety_civil": 0.5052,
+          "handoff_buffer_count": 0
+        },
+        "sydney": {
+          "interactive_total": 576,
+          "daylight_alignment_civil": 0.5694,
+          "daylight_alignment_strict": 0.5417,
+          "gc_total": 192,
+          "nocturnal_gc_safety_strict": 0.625,
+          "nocturnal_gc_safety_civil": 0.5521,
+          "handoff_buffer_count": 0
+        },
+        "tromso": {
+          "interactive_total": 576,
+          "daylight_alignment_civil": 0.526,
+          "daylight_alignment_strict": 0.4462,
+          "gc_total": 192,
+          "nocturnal_gc_safety_strict": 0.5677,
+          "nocturnal_gc_safety_civil": 0.4583,
+          "handoff_buffer_count": 0
+        }
+      },
+      "Control-Lon-Fixed24h": {
+        "tokyo": {
+          "interactive_total": 384,
+          "daylight_alignment_civil": 0.9766,
+          "daylight_alignment_strict": 0.9557,
+          "gc_total": 384,
+          "nocturnal_gc_safety_strict": 0.9479,
+          "nocturnal_gc_safety_civil": 0.875,
+          "handoff_buffer_count": 0
+        },
+        "singapore": {
+          "interactive_total": 384,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 0.9896,
+          "gc_total": 384,
+          "nocturnal_gc_safety_strict": 0.9896,
+          "nocturnal_gc_safety_civil": 0.9375,
+          "handoff_buffer_count": 0
+        },
+        "oslo": {
+          "interactive_total": 384,
+          "daylight_alignment_civil": 0.9167,
+          "daylight_alignment_strict": 0.875,
+          "gc_total": 384,
+          "nocturnal_gc_safety_strict": 0.8464,
+          "nocturnal_gc_safety_civil": 0.7266,
+          "handoff_buffer_count": 0
+        },
+        "london": {
+          "interactive_total": 384,
+          "daylight_alignment_civil": 0.9479,
+          "daylight_alignment_strict": 0.8958,
+          "gc_total": 384,
+          "nocturnal_gc_safety_strict": 0.8932,
+          "nocturnal_gc_safety_civil": 0.8125,
+          "handoff_buffer_count": 0
+        },
+        "new_york": {
+          "interactive_total": 384,
+          "daylight_alignment_civil": 0.9688,
+          "daylight_alignment_strict": 0.9427,
+          "gc_total": 384,
+          "nocturnal_gc_safety_strict": 0.9271,
+          "nocturnal_gc_safety_civil": 0.8594,
+          "handoff_buffer_count": 0
+        },
+        "san_francisco": {
+          "interactive_total": 384,
+          "daylight_alignment_civil": 0.9688,
+          "daylight_alignment_strict": 0.9479,
+          "gc_total": 384,
+          "nocturnal_gc_safety_strict": 0.9323,
+          "nocturnal_gc_safety_civil": 0.8776,
+          "handoff_buffer_count": 0
+        },
+        "sydney": {
+          "interactive_total": 384,
+          "daylight_alignment_civil": 0.9688,
+          "daylight_alignment_strict": 0.9375,
+          "gc_total": 384,
+          "nocturnal_gc_safety_strict": 0.9375,
+          "nocturnal_gc_safety_civil": 0.8906,
+          "handoff_buffer_count": 0
+        },
+        "tromso": {
+          "interactive_total": 384,
+          "daylight_alignment_civil": 0.8333,
+          "daylight_alignment_strict": 0.75,
+          "gc_total": 384,
+          "nocturnal_gc_safety_strict": 0.9896,
+          "nocturnal_gc_safety_civil": 0.8984,
+          "handoff_buffer_count": 0
+        }
+      },
+      "Treatment-Caelus-Wavefront": {
+        "tokyo": {
+          "interactive_total": 387,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 1,
+          "gc_total": 345,
+          "nocturnal_gc_safety_strict": 1,
+          "nocturnal_gc_safety_civil": 1,
+          "handoff_buffer_count": 36
+        },
+        "singapore": {
+          "interactive_total": 384,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 1,
+          "gc_total": 360,
+          "nocturnal_gc_safety_strict": 1,
+          "nocturnal_gc_safety_civil": 1,
+          "handoff_buffer_count": 24
+        },
+        "oslo": {
+          "interactive_total": 395,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 1,
+          "gc_total": 311,
+          "nocturnal_gc_safety_strict": 1,
+          "nocturnal_gc_safety_civil": 1,
+          "handoff_buffer_count": 62
+        },
+        "london": {
+          "interactive_total": 385,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 1,
+          "gc_total": 332,
+          "nocturnal_gc_safety_strict": 1,
+          "nocturnal_gc_safety_civil": 1,
+          "handoff_buffer_count": 51
+        },
+        "new_york": {
+          "interactive_total": 390,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 1,
+          "gc_total": 342,
+          "nocturnal_gc_safety_strict": 1,
+          "nocturnal_gc_safety_civil": 1,
+          "handoff_buffer_count": 36
+        },
+        "san_francisco": {
+          "interactive_total": 390,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 1,
+          "gc_total": 349,
+          "nocturnal_gc_safety_strict": 1,
+          "nocturnal_gc_safety_civil": 1,
+          "handoff_buffer_count": 29
+        },
+        "sydney": {
+          "interactive_total": 384,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 1,
+          "gc_total": 354,
+          "nocturnal_gc_safety_strict": 1,
+          "nocturnal_gc_safety_civil": 1,
+          "handoff_buffer_count": 30
+        },
+        "tromso": {
+          "interactive_total": 292,
+          "daylight_alignment_civil": 1,
+          "daylight_alignment_strict": 1,
+          "gc_total": 409,
+          "nocturnal_gc_safety_strict": 1,
+          "nocturnal_gc_safety_civil": 1,
+          "handoff_buffer_count": 67
+        }
+      }
+    }
+  },
+  "verdict": "PROVED: Treatment-Caelus-Wavefront clears all daylight alignment (100.0%), nocturnal GC safety (100.0%), 24h global coverage (100.0%), and latency (873.0916 us/node-tick) bars, beating Control-Lon-Fixed24h by +20.1 pp daylight and +16.0 pp GC safety on solstice high/polar latitudes while tying within 0.0 pp at equatorial Singapore."
+}
