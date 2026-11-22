@@ -384,7 +384,7 @@ export function FirstVisibility({ engine, initialPreset = "sirius" }: FirstVisib
         <div className="col">
           <section className="tile">
             <div className="tile__h"><b>OUT</b><span>First and last visibility</span><i>{status}</i></div>
-            <div className="meter"><i style={{ width: `${(running ? (search?.progress ?? 0) : search ? 1 : 0) * 100}%` }} /></div>
+            <div className="meter"><i style={{ width: `${(running ? (search?.progress ?? 0) : 0) * 100}%` }} /></div>
             <div className="count">
               <b>{events.length}</b>
               <span>{events.length === 1 ? "event" : "events"}</span>

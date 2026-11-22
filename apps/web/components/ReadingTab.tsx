@@ -14,7 +14,7 @@ const MAX_PER_GROUP = 3;
 const MAX_TEXT = 260;
 
 const truncate = (s: string) =>
-  s.length <= MAX_TEXT ? s : `${s.slice(0, s.lastIndexOf(" ", MAX_TEXT)).trim()}…`;
+  s.length <= MAX_TEXT ? s : `${s.slice(0, s.lastIndexOf(" ", MAX_TEXT)).trim()}...`;
 
 /** The corpus family a rule came from, carried as a `family:<name>` tag. */
 function familyOf(tags: string[] | undefined): string | null {
@@ -32,21 +32,12 @@ export interface ReadingTabProps {
   lots: { lot: string; sign: string; signDeg: number; house: number }[];
   /** When set, project synastry/composite atoms against this partner chart. */
   partner?: { chart: Chart; label?: string };
+  /** Optional focused body from figure selection; bubbles matching essays to the top. */
+  selectedBody?: string | null;
 }
 
-/**
- * The interpretation layer, live in the browser: project the chart into fact
- * atoms (natal, transits, time-lords, synastry/composite when paired, finer
- * dignities, and sidereal structure when applicable), run the Caelus corpus
- * over them, and show the reconciled, cited reading.
- *
- * The corpus batches load on demand (one chunk per batch via the package's
- * subpath exports); natal, conditions, and degrees are the natal report.
- * The relationship batch loads only when a partner chart is present.
- * Everything stays in the browser.
- */
 export default function ReadingTab({
-  chart, engine, lat, lonEast, zodiac, stars, lots, partner,
+  chart, engine, lat, lonEast, zodiac, stars, lots, partner, selectedBody,
 }: ReadingTabProps) {
   const withPartner = Boolean(partner);
   const [sources, setSources] = useState<InterpretationSource[] | null>(null);
@@ -82,9 +73,11 @@ export default function ReadingTab({
       now.getUTCFullYear(), now.getUTCMonth() + 1, now.getUTCDate(),
       now.getUTCHours(), now.getUTCMinutes(),
     );
+    const isLiveNow = Math.abs(targetJd - chart.jdUt) < 0.25;
     const ctx = interpretationContext(chart, {
-      stars, lots,
-      ...enrichContextOptions(engine, chart, { jd: targetJd, lat, lonEast, zodiac }),
+      stars,
+      lots,
+      ...(isLiveNow ? {} : enrichContextOptions(engine, chart, { jd: targetJd, lat, lonEast, zodiac })),
       ...(partner ? enrichSynastryOptions(engine, chart, partner.chart) : {}),
     });
     const reading = interpret(ctx, sources);
@@ -102,11 +95,7 @@ export default function ReadingTab({
   }, [sources, chart, engine, lat, lonEast, zodiac, stars, lots, partner]);
 
   if (!computed) {
-    return (
-      <p className="dim small" style={{ marginTop: 0 }}>
-        Loading the corpus…
-      </p>
-    );
+    return <p className="dim small">Loading the corpus...</p>;
   }
 
   const { groups, atomById, statements, notes, enriched } = computed;
@@ -122,73 +111,78 @@ export default function ReadingTab({
 
   if (!groups.length) {
     return (
-      <p className="dim small" style={{ marginTop: 0 }}>
+      <p className="dim small">
         No corpus essay matched this chart&rsquo;s facts.
       </p>
     );
   }
 
+  const orderedGroups = selectedBody
+    ? [...groups].sort((a, b) => {
+        const aHit = a.atomIds.some((id) => id.includes(selectedBody)) ? 0 : 1;
+        const bHit = b.atomIds.some((id) => id.includes(selectedBody)) ? 0 : 1;
+        return aHit - bHit;
+      })
+    : groups;
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem", fontSize: "0.85rem" }}>
-      <p className="dim small" style={{ margin: 0 }}>
-        <strong style={{ color: "var(--text)" }}>{statements}</strong> essays from the Caelus
-        corpus, each citing the validated facts it rests on.
-        {partner ? (
-          <> Includes synastry/composite atoms plus transits and time-lords active{" "}
-            <strong style={{ color: "var(--text)" }}>now</strong>.</>
+    <div className="workspace__panel rail-stack">
+      <p className="dim small">
+        <strong>{statements}</strong> essays from the Caelus corpus, each citing the validated facts it rests on.
+        {selectedBody ? (
+          <> Showing <span className="badge badge--accent mono">{selectedBody}</span> matches first.</>
+        ) : partner ? (
+          <> Includes synastry/composite atoms plus active transits and time-lords.</>
         ) : enriched ? (
-          <> Includes transits and time-lords active <strong style={{ color: "var(--text)" }}>now</strong>.</>
+          <> Includes transits and time-lords active now.</>
         ) : null}
       </p>
 
-      {groups.slice(0, MAX_GROUPS).map((g, gi) => {
+      {orderedGroups.slice(0, MAX_GROUPS).map((g, gi) => {
         const fact = factOf(g);
         const extra = g.entries.length - MAX_PER_GROUP;
+        const matchesBody = Boolean(selectedBody && g.atomIds.some((id) => id.includes(selectedBody)));
         return (
-          <div key={gi} style={{ borderLeft: "2px solid var(--border-strong)", paddingLeft: "0.8rem" }}>
+          <article
+            key={gi}
+            className="reading-group"
+            data-selected={matchesBody ? "true" : undefined}
+          >
             {fact && (
-              <div className="mono" style={{ color: "var(--accent)", fontSize: "0.78rem", marginBottom: "0.3rem" }}>
+              <div className="reading-group__fact mono">
                 {fact.text} <span className="mute">[{fact.id}]</span>
               </div>
             )}
             {g.entries.slice(0, MAX_PER_GROUP).map((e, ei) => {
               const family = familyOf(e.tags);
               return (
-                <div key={ei} style={{ margin: ei ? "0.55rem 0 0" : 0 }}>
-                  <span style={{ color: "var(--text)" }}>{truncate(e.text)}</span>
-                  <div className="mono mute" style={{ fontSize: "0.66rem", marginTop: "0.15rem" }}>
-                    {family && (
-                      <span style={{ fontStyle: "italic", marginRight: "0.6rem" }}>{family}</span>
-                    )}
+                <div key={ei} className="reading-group__entry">
+                  <span>{truncate(e.text)}</span>
+                  <div className="reading-meta mono mute">
+                    {family && <span className="reading-meta__family">{family}</span>}
                     {e.atomIds.map((id) => (
-                      <span key={id} style={{ marginRight: "0.5rem", whiteSpace: "nowrap" }}>[{id}]</span>
+                      <span key={id} className="reading-meta__atom">[{id}]</span>
                     ))}
                   </div>
                 </div>
               );
             })}
             {extra > 0 && (
-              <p className="dim small" style={{ margin: "0.35rem 0 0" }}>
-                + {extra} more said about this fact.
-              </p>
+              <p className="dim small">+ {extra} more said about this fact.</p>
             )}
-          </div>
+          </article>
         );
       })}
 
-      {groups.length > MAX_GROUPS && (
-        <p className="dim small" style={{ margin: 0 }}>
-          + {groups.length - MAX_GROUPS} more facts with delineations.
-        </p>
+      {orderedGroups.length > MAX_GROUPS && (
+        <p className="dim small">+ {orderedGroups.length - MAX_GROUPS} more facts with delineations.</p>
       )}
 
       {notes.map((n) => (
-        <p key={n.id} className="dim small" style={{ margin: 0 }}>
-          {n.note}
-        </p>
+        <p key={n.id} className="dim small">{n.note}</p>
       ))}
 
-      <p className="dim small" style={{ margin: 0 }}>
+      <p className="dim small">
         The Caelus corpus: original essays written against the engine&rsquo;s fact atoms
         (natal, conditions, degree, transit, and time-lord ids), all{" "}
         <code>auditCitations</code>-checkable. See the{" "}

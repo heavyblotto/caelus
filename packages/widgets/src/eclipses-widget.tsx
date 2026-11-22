@@ -248,7 +248,7 @@ export function Eclipses({ engine, year }: EclipsesProps): ReactElement {
         <div className="col">
           <section className="tile">
             <div className="tile__h"><b>OUT</b><span>Eclipses in the span</span><i>{status}</i></div>
-            <div className="meter"><i style={{ width: `${(running ? progress : search ? 1 : 0) * 100}%` }} /></div>
+            <div className="meter"><i style={{ width: `${(running ? progress : 0) * 100}%` }} /></div>
             <div className="count">
               <b>{rows.length}</b>
               <span>{rows.length === 1 ? "eclipse" : "eclipses"}</span>

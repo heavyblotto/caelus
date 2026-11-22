@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { A, H2, P, Code } from "../../components/Prose";
 import PageClose from "../../components/PageClose";
 import PageHero from "../../components/PageHero";
@@ -6,7 +7,8 @@ import { pageMetadata } from "../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Build Notes",
-  description: "Postmortems on four bugs the validation suite caught: ΔT extrapolation, a node frame error, a double-counted Chiron light-time, and the geometry of the aspect search.",
+  description:
+    "Postmortems on four bugs the validation suite caught: ΔT extrapolation, a node frame error, a double-counted Chiron light-time, and the geometry of the aspect search.",
   path: "/notes",
   type: "article",
 });
@@ -14,7 +16,7 @@ export const metadata = pageMetadata({
 export default function Notes() {
   return (
     <main className="container page">
-      <PageHero eyebrow="Build Notes" title="Build Notes">
+      <PageHero eyebrow="Build Notes · Defect Postmortems" title="Build Notes">
         <P>
           Implementing VSOP87 takes only a few hundred lines of code and matched
           reference ephemerides immediately. The subtle bugs surfaced later in
@@ -93,11 +95,15 @@ export default function Notes() {
         See <A href="/how-it-was-built">How this was built</A> for more on the
         development workflow and validation safeguards.
       </P>
-      <P dim>
-        Playground: <A href="/playground">/playground</A>.{" "}
-        <A href="/provenance">Provenance</A> · <A href="/validation">Validation</A> ·{" "}
-        <A href="https://github.com/heavyblotto/caelus">GitHub</A>.
-      </P>
+
+      <div className="row row--wrap">
+        <Link href="/playground" className="btn btn-sm btn-secondary">Open Playground →</Link>
+        <Link href="/validation" className="btn btn-sm btn-ghost">Validation</Link>
+        <Link href="/provenance" className="btn btn-sm btn-ghost">Provenance</Link>
+        <a href="https://github.com/heavyblotto/caelus" target="_blank" rel="noreferrer" className="btn btn-sm btn-ghost">
+          GitHub ↗
+        </a>
+      </div>
 
       <PageClose
         title="Try the engine"

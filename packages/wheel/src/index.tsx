@@ -34,21 +34,28 @@ export interface WheelChart {
 export interface WheelTheme {
   background: string;
   ring: string;
+  /** Optional subtler structural ink for minor ticks and intermediate house cusps. */
+  ringMinor?: string;
   axis: string;
   signText: string;
   planetText: string;
-  /** Optional per-body glyph color, keyed by body name ("sun","moon","mars",…).
+  /** Optional per-body glyph color, keyed by body name ("sun","moon","mars",...).
    *  Falls back to planetText for any body not listed. */
   planetColors?: Record<string, string>;
   labelText: string;
   houseText: string;
   aspectColors: Record<string, string>;
+  /** Optional reference-circle inks for 3D / dome / horizon views. */
+  horizon?: string;
+  ecliptic?: string;
+  meridian?: string;
   fontFamily: string;
 }
 
 export const DARK_THEME: WheelTheme = {
   background: "transparent",
   ring: "#3a3a44",
+  ringMinor: "#2b2d36",
   axis: "#8a7fd4",
   signText: "#9a93c4",
   planetText: "#e8e6f0",
@@ -61,6 +68,9 @@ export const DARK_THEME: WheelTheme = {
     trine: "#4f8fc0",
     sextile: "#4fb09a",
   },
+  horizon: "#a0a7b1",
+  ecliptic: "#f283b3",
+  meridian: "#8a7fd4",
   fontFamily: "ui-monospace, 'SF Mono', Menlo, Consolas, monospace",
 };
 
@@ -239,6 +249,13 @@ export function sweptArc(lons: number[]): SweptArc {
   return { from: mod(start, 360), sweep, boundaries };
 }
 
+const SIGN_NAMES = [
+  "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
+  "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces",
+];
+const bodyTitle = (b: string): string =>
+  b.replace(/_/g, " ").replace(/^./, (c) => c.toUpperCase());
+
 export interface ChartWheelProps {
   /** The Chart object from caelus, or a caelus-mcp natal_chart /
    *  current_sky tool response, as-is. */
@@ -265,6 +282,20 @@ export interface ChartWheelProps {
    * sweep. With this prop left out the wheel renders exactly as before.
    */
   uncertainty?: WheelUncertainty;
+  /** Currently selected body id for linked cross-highlighting. */
+  selectedBody?: string | null;
+  /** Currently hovered body id for linked cross-highlighting. */
+  hoveredBody?: string | null;
+  /** Called when a body is clicked or activated by keyboard. */
+  onSelectBody?: (body: string | null) => void;
+  /** Called when pointer/focus enters or leaves a body. */
+  onHoverBody?: (body: string | null) => void;
+  /** Currently selected aspect pair for highlighting. */
+  selectedAspect?: { a: string; b: string; aspect?: string } | null;
+  /** Called when an aspect chord is clicked. */
+  onSelectAspect?: (aspect: WheelAspect | null) => void;
+  /** Called when pointer enters or leaves an aspect chord. */
+  onHoverAspect?: (aspect: WheelAspect | null) => void;
 }
 
 /**
@@ -341,6 +372,13 @@ export function ChartWheel({
   theme,
   glyphs,
   uncertainty,
+  selectedBody,
+  hoveredBody,
+  onSelectBody,
+  onHoverBody,
+  selectedAspect,
+  onSelectAspect,
+  onHoverAspect,
 }: ChartWheelProps): ReactElement {
   const L: Required<WheelLayers> = {
     zodiac: true, houses: true, axes: true, bodies: true, aspects: true,
@@ -349,6 +387,7 @@ export function ChartWheel({
   const T: WheelTheme = { ...DARK_THEME, ...theme,
     aspectColors: { ...DARK_THEME.aspectColors, ...(theme?.aspectColors ?? {}) },
     planetColors: { ...(DARK_THEME.planetColors ?? {}), ...(theme?.planetColors ?? {}) } };
+  const ringMinor = T.ringMinor ?? T.ring;
   const G = { ...GLYPHS, ...glyphs };
   const asc = chart.angles.asc;
   const c = size / 2;
@@ -383,34 +422,62 @@ export function ChartWheel({
   const names = (bodies ?? Object.keys(chart.bodies).filter((b) => b !== "mean_node"))
     .filter((b) => chart.bodies[b] !== undefined);
   const trueLons = names.map((b) => chart.bodies[b]!.lon);
-  const dispLons = spreadAngles(trueLons, 6.5);
+  // 10.5 deg min separation keeps glyphs and degree readouts crisp even in dense stelliums.
+  const dispLons = spreadAngles(trueLons, 10.5);
+
+  const activeBody = hoveredBody ?? selectedBody ?? null;
+  const drawnSet = new Set(names);
+  const wantAspects = new Set(aspectTypes);
+  const visibleAspects = (showAspects && L.aspects)
+    ? chart.aspects.filter((a) => wantAspects.has(a.aspect) && drawnSet.has(a.a) && drawnSet.has(a.b))
+    : [];
+
+  const connectedBodies = new Set<string>();
+  if (activeBody) {
+    connectedBodies.add(activeBody);
+    for (const a of visibleAspects) {
+      if (a.a === activeBody) connectedBodies.add(a.b);
+      if (a.b === activeBody) connectedBodies.add(a.a);
+    }
+  } else if (selectedAspect) {
+    connectedBodies.add(selectedAspect.a);
+    connectedBodies.add(selectedAspect.b);
+  }
+  const hasFocus = activeBody !== null || selectedAspect != null;
 
   const el: ReactElement[] = [];
 
   // ring circles: the outer circle is the plate's frame and always
-  // draws; the inner circles belong to the layer whose band they bound
-  const rings: Array<[number, string, boolean]> = [
-    [1.0, "outer", true],
-    [0.84, "zodiac-in", L.zodiac],
-    [0.70, "house-in", L.houses],
-    [0.50, "aspect", L.aspects],
+  // draws; the inner circles belong to the layer whose band they bound.
+  // House numbers sit cleanly in 0.50..0.568, keeping 0.575..0.84 clear for planets.
+  const rings: Array<[number, string, boolean, number, string, number?]> = [
+    [1.0, "outer", true, 1.5, T.ring],
+    [0.84, "zodiac-in", L.zodiac, 1, T.ring],
+    [0.568, "house-in", L.houses, 0.75, ringMinor, 0.75],
+    [0.50, "aspect", L.aspects, 1, T.ring],
   ];
-  for (const [r, key, on] of rings) {
+  for (const [r, key, on, sw, st, op] of rings) {
     if (!on) continue;
     el.push(<circle key={`ring-${key}`} cx={c} cy={c} r={fix(r * R)}
-      fill="none" stroke={T.ring} strokeWidth={r === 1.0 ? 1.5 : 1} />);
+      fill="none" stroke={st} strokeWidth={sw} opacity={op} />);
   }
 
-  // zodiac: sign boundaries, glyphs, ticks
+  // zodiac: sign boundaries, glyphs, crisp 1/5/10 deg tick hierarchy
   if (L.zodiac) {
     for (let s = 0; s < 12; s++) {
       el.push(line(s * 30, 0.84, 1.0, { stroke: T.ring, strokeWidth: 1 }, `sb-${s}`));
-      el.push(text(s * 30 + 15, 0.92, SIGN_GLYPHS[s], size * 0.045, T.signText, `sg-${s}`));
+      el.push(text(s * 30 + 15, 0.92, SIGN_GLYPHS[s], size * 0.044, T.signText, `sg-${s}`));
     }
     for (let d = 0; d < 360; d++) {
-      const len = d % 10 === 0 ? 0.035 : d % 5 === 0 ? 0.028 : 0.016;
+      const is10 = d % 10 === 0;
+      const is5 = d % 5 === 0;
+      const len = is10 ? 0.036 : is5 ? 0.025 : 0.015;
       el.push(line(d, 0.84, 0.84 + len,
-        { stroke: T.ring, strokeWidth: d % 5 === 0 ? 1 : 0.5 }, `tick-${d}`));
+        {
+          stroke: is5 ? T.ring : ringMinor,
+          strokeWidth: is10 ? 1 : is5 ? 0.75 : 0.5,
+          opacity: is10 ? 0.9 : is5 ? 0.7 : 0.45,
+        }, `tick-${d}`));
     }
   }
 
@@ -422,15 +489,16 @@ export function ChartWheel({
   ];
   if (L.houses) {
     for (let i = 0; i < 12; i++) {
-      el.push(line(cusps[i], 0.50, 0.84, { stroke: T.ring, strokeWidth: 1 }, `cusp-${i}`));
+      el.push(line(cusps[i], 0.50, 0.84,
+        { stroke: ringMinor, strokeWidth: 0.75, opacity: 0.72 }, `cusp-${i}`));
       const arc = mod(cusps[(i + 1) % 12] - cusps[i], 360);
-      el.push(text(cusps[i] + arc / 2, 0.77, String(i + 1), size * 0.026, T.houseText, `hn-${i}`));
+      el.push(text(cusps[i] + arc / 2, 0.534, String(i + 1), size * 0.022, T.houseText, `hn-${i}`));
     }
   }
   if (L.axes) {
     for (const [lon, label] of axes) {
-      el.push(line(lon, 0.50, 1.0, { stroke: T.axis, strokeWidth: 2 }, `axis-${label}`));
-      el.push(text(lon, 1.045, label, size * 0.026, T.axis, `axl-${label}`));
+      el.push(line(lon, 0.50, 1.0, { stroke: T.axis, strokeWidth: 1.75 }, `axis-${label}`));
+      el.push(text(lon, 1.048, label, size * 0.026, T.axis, `axl-${label}`, { fontWeight: 600 }));
     }
   }
 
@@ -465,7 +533,7 @@ export function ChartWheel({
       for (const b of names) {
         const lons = run.map((s) => s.bodies[b]?.lon);
         if (lons.some((v) => v === undefined)) continue;
-        arc(0.8, sweptArc(lons as number[]), `unc-${b}`);
+        arc(0.805, sweptArc(lons as number[]), `unc-${b}`);
       }
     }
     if (L.axes && run.every((s) => s.angles !== undefined)) {
@@ -475,45 +543,169 @@ export function ChartWheel({
   }
 
   // aspect lines (under the planet layer)
-  if (showAspects && L.aspects) {
-    const want = new Set(aspectTypes);
-    const drawn = new Set(names);
-    for (const a of chart.aspects) {
-      if (!want.has(a.aspect) || !drawn.has(a.a) || !drawn.has(a.b)) continue;
+  if (visibleAspects.length > 0) {
+    const aspectInteractive = Boolean(onSelectAspect || onHoverAspect);
+    for (const a of visibleAspects) {
       const [x1, y1] = pt(chart.bodies[a.a]!.lon, 0.50);
       const [x2, y2] = pt(chart.bodies[a.b]!.lon, 0.50);
       const tightness = Math.max(0, 1 - a.orb / (MAX_ORB[a.aspect] ?? 8));
-      el.push(<line key={`asp-${a.a}-${a.aspect}-${a.b}`}
-        x1={fix(x1)} y1={fix(y1)} x2={fix(x2)} y2={fix(y2)}
-        stroke={T.aspectColors[a.aspect] ?? T.ring}
-        strokeWidth={1 + tightness}
-        strokeDasharray={HARD_ASPECTS.has(a.aspect) ? undefined : "4 3"}
-        opacity={fix(0.25 + 0.65 * tightness)} />);
+      const matchesBody = activeBody !== null && (a.a === activeBody || a.b === activeBody);
+      const matchesSelectedAspect = selectedAspect != null
+        && ((a.a === selectedAspect.a && a.b === selectedAspect.b)
+          || (a.a === selectedAspect.b && a.b === selectedAspect.a))
+        && (!selectedAspect.aspect || selectedAspect.aspect === a.aspect);
+      const highlighted = matchesBody || matchesSelectedAspect;
+      const dimmed = hasFocus && !highlighted;
+      const baseOp = 0.28 + 0.62 * tightness;
+      const op = highlighted ? Math.min(1, 0.7 + 0.3 * tightness) : dimmed ? 0.12 : baseOp;
+      const sw = highlighted ? 1.45 + tightness : dimmed ? 0.75 : 1 + tightness;
+      const handlers = aspectInteractive
+        ? {
+            style: { cursor: onSelectAspect ? "pointer" : undefined },
+            onClick: onSelectAspect ? () => onSelectAspect(a) : undefined,
+            onMouseEnter: onHoverAspect ? () => onHoverAspect(a) : undefined,
+            onMouseLeave: onHoverAspect ? () => onHoverAspect(null) : undefined,
+          }
+        : {};
+      el.push(
+        <line key={`asp-${a.a}-${a.aspect}-${a.b}`}
+          data-aspect={a.aspect} data-a={a.a} data-b={a.b}
+          data-selected={matchesSelectedAspect ? "true" : undefined}
+          data-highlighted={highlighted ? "true" : undefined}
+          data-dimmed={dimmed ? "true" : undefined}
+          x1={fix(x1)} y1={fix(y1)} x2={fix(x2)} y2={fix(y2)}
+          stroke={T.aspectColors[a.aspect] ?? T.ring}
+          strokeWidth={fix(sw)}
+          strokeDasharray={HARD_ASPECTS.has(a.aspect) ? undefined : "4 3"}
+          opacity={fix(op)}
+          {...handlers}>
+          <title>{`${bodyTitle(a.a)} ${a.aspect} ${bodyTitle(a.b)} (orb ${a.orb.toFixed(2)}°)`}</title>
+        </line>,
+      );
     }
   }
 
-  // planets: pointer tick at true longitude, glyph + label at fanned angle
-  if (L.bodies) names.forEach((b, i) => {
-    const p = chart.bodies[b]!;
-    const disp = dispLons[i];
-    const pColor = T.planetColors?.[b] ?? T.planetText;
-    el.push(line(p.lon, 0.815, 0.84, { stroke: pColor, strokeWidth: 1.2 }, `pt-${b}`));
-    // connector when the glyph was displaced off its true longitude
-    if (Math.abs(mod(disp - p.lon + 180, 360) - 180) > 0.75) {
-      const [x1, y1] = pt(p.lon, 0.815);
-      const [x2, y2] = pt(disp, 0.71);
-      el.push(<line key={`conn-${b}`} x1={fix(x1)} y1={fix(y1)} x2={fix(x2)} y2={fix(y2)}
-        stroke={T.labelText} strokeWidth={0.5} opacity={0.5} />);
+  // planets: pointer tick at true longitude, glyph at fanned angle, collision-free degree readout
+  if (L.bodies) {
+    const labelFs = size * 0.020;
+    const placedBoxes: Array<{ x0: number; x1: number; y0: number; y1: number }> = [];
+    const tiers = [0.646, 0.598];
+    const bodyInteractive = Boolean(onSelectBody || onHoverBody);
+
+    // Order by display longitude so adjacent labels stagger cleanly
+    const drawOrder = names
+      .map((b, i) => ({ b, i, disp: dispLons[i] }))
+      .sort((u, v) => u.disp - v.disp);
+
+    const labelRadii = new Array<number>(names.length).fill(tiers[0]);
+    for (const { b, i, disp } of drawOrder) {
+      const p = chart.bodies[b]!;
+      const signDeg = p.signDeg ?? mod(p.lon, 30);
+      const retro = p.retrograde ?? p.rx ?? false;
+      const deg = Math.floor(signDeg);
+      const min = String(Math.floor(mod(signDeg, 1) * 60)).padStart(2, "0");
+      const lbl = `${deg}°${min}'${retro ? "℞" : ""}`;
+      const halfW = (lbl.length * labelFs * 0.62) / 2 + 1.5;
+      const halfH = (labelFs * 1.12) / 2 + 1;
+
+      let chosen = tiers[0];
+      for (const rCand of tiers) {
+        const [lx, ly] = pt(disp, rCand);
+        const box = { x0: lx - halfW, x1: lx + halfW, y0: ly - halfH, y1: ly + halfH };
+        const hits = placedBoxes.some((o) =>
+          box.x0 < o.x1 && box.x1 > o.x0 && box.y0 < o.y1 && box.y1 > o.y0);
+        if (!hits) {
+          chosen = rCand;
+          placedBoxes.push(box);
+          break;
+        }
+        if (rCand === tiers[tiers.length - 1]) {
+          chosen = rCand;
+          placedBoxes.push(box);
+        }
+      }
+      labelRadii[i] = chosen;
     }
-    el.push(text(disp, 0.655, G[b] ?? b.slice(0, 2).toUpperCase(),
-      size * 0.05, pColor, `pg-${b}`));
-    const signDeg = p.signDeg ?? mod(p.lon, 30);
-    const retro = p.retrograde ?? p.rx ?? false;
-    const deg = Math.floor(signDeg);
-    const min = String(Math.floor(mod(signDeg, 1) * 60)).padStart(2, "0");
-    el.push(text(disp, 0.585, `${deg}°${min}'${retro ? "℞" : ""}`,
-      size * 0.024, T.labelText, `pl-${b}`));
-  });
+
+    names.forEach((b, i) => {
+      const p = chart.bodies[b]!;
+      const disp = dispLons[i];
+      const pColor = T.planetColors?.[b] ?? T.planetText;
+      const isSelected = selectedBody === b;
+      const isHovered = hoveredBody === b;
+      const isHighlighted = isSelected || isHovered || (hasFocus && connectedBodies.has(b));
+      const isDimmed = hasFocus && !isHighlighted;
+      const signIdx = Math.floor(mod(p.lon, 360) / 30) % 12;
+      const signDeg = p.signDeg ?? mod(p.lon, 30);
+      const retro = p.retrograde ?? p.rx ?? false;
+      const deg = Math.floor(signDeg);
+      const min = String(Math.floor(mod(signDeg, 1) * 60)).padStart(2, "0");
+      const [gx, gy] = pt(disp, 0.735);
+
+      const children: ReactElement[] = [
+        <title key={`tt-${b}`}>
+          {`${bodyTitle(b)} ${deg}°${min}' ${SIGN_NAMES[signIdx]}${retro ? " retrograde" : ""}`}
+        </title>,
+        line(p.lon, 0.815, 0.84, { stroke: pColor, strokeWidth: isSelected || isHovered ? 2 : 1.3 }, `pt-${b}`),
+      ];
+
+      // connector when the glyph was displaced off its true longitude
+      if (Math.abs(mod(disp - p.lon + 180, 360) - 180) > 0.75) {
+        const [x1, y1] = pt(p.lon, 0.815);
+        const [x2, y2] = pt(disp, 0.775);
+        children.push(
+          <line key={`conn-${b}`} x1={fix(x1)} y1={fix(y1)} x2={fix(x2)} y2={fix(y2)}
+            stroke={T.labelText} strokeWidth={0.6} opacity={0.55} />,
+        );
+      }
+
+      if (isSelected || isHovered) {
+        children.push(
+          <circle key={`ret-${b}`} cx={fix(gx)} cy={fix(gy)} r={fix(size * 0.036)}
+            fill="none" stroke={T.axis} strokeWidth={isSelected ? 1.5 : 1} />,
+        );
+      }
+
+      children.push(
+        text(disp, 0.735, G[b] ?? b.slice(0, 2).toUpperCase(),
+          size * 0.046, pColor, `pg-${b}`),
+        text(disp, labelRadii[i], `${deg}°${min}'${retro ? "℞" : ""}`,
+          labelFs, T.labelText, `pl-${b}`),
+      );
+
+      const groupProps = bodyInteractive
+        ? {
+            role: onSelectBody ? ("button" as const) : undefined,
+            tabIndex: onSelectBody ? 0 : undefined,
+            style: { cursor: onSelectBody ? "pointer" : undefined },
+            onClick: onSelectBody ? () => onSelectBody(selectedBody === b ? null : b) : undefined,
+            onMouseEnter: onHoverBody ? () => onHoverBody(b) : undefined,
+            onMouseLeave: onHoverBody ? () => onHoverBody(null) : undefined,
+            onFocus: onHoverBody ? () => onHoverBody(b) : undefined,
+            onBlur: onHoverBody ? () => onHoverBody(null) : undefined,
+            onKeyDown: onSelectBody
+              ? (e: { key: string; preventDefault: () => void }) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onSelectBody(selectedBody === b ? null : b);
+                  }
+                }
+              : undefined,
+          }
+        : {};
+
+      el.push(
+        <g key={`body-${b}`} data-body={b}
+          data-selected={isSelected ? "true" : undefined}
+          data-highlighted={isHighlighted ? "true" : undefined}
+          data-dimmed={isDimmed ? "true" : undefined}
+          opacity={isDimmed ? 0.35 : 1}
+          {...groupProps}>
+          {children}
+        </g>,
+      );
+    });
+  }
 
   return (
     <svg width={size} height={size}

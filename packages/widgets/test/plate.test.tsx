@@ -117,6 +117,17 @@ const STATIONS: ConsoleStation[] = [
   }
   assert(Math.abs(px(lefts[2], 815) - (0.16 * 815 - 20.4)) < 1e-9, "console: on a wide rail a label sits centred under its tick");
   assert(crowded.includes("max(calc("), "console: the rendered labels carry the push");
+  const themed = renderToStaticMarkup(
+    <PlateConsole
+      t={0.5}
+      stations={STATIONS}
+      onScrub={() => {}}
+      tokens={{ rule: "var(--line2)", mutedInk: "var(--dim)", ink: "var(--text)", accent: "var(--warm)" }}
+    />,
+  );
+  assert(themed.includes("var(--warm)") && themed.includes("var(--dim)") && themed.includes("var(--text)"),
+    "console: custom Workbench theme tokens override paper defaults");
+  assert(themed.includes('tabindex="0"'), "console: hydrated slider is keyboard focusable");
 }
 
 // ---------------------------------------------------------------- types

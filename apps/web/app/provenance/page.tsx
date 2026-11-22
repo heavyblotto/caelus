@@ -1,4 +1,7 @@
-import { A, Eyebrow, H2, P } from "../../components/Prose";
+import Link from "next/link";
+import { A, H2, P } from "../../components/Prose";
+import PageClose from "../../components/PageClose";
+import PageHero from "../../components/PageHero";
 import { SITE, formatHouseSystemsProse } from "../../lib/site";
 import { pageMetadata } from "../../lib/seo";
 
@@ -34,19 +37,27 @@ const SOURCES: Array<[string, string, React.ReactNode]> = [
   ["Planets", "VSOP87D analytical theory", "Bretagnon & Francou, 1988, Bureau des Longitudes"],
   ["Moon", "Chebyshev fit of JPL DE423 (2010)", "NASA JPL (public domain); differs from DE440 by <0.1″ here; re-fit planned"],
   ["Moon (embedded)", "ELP2000-82 abridged series", "Chapront-Touzé & Chapront, as published in Meeus ch. 47"],
-  ["Pluto", "Published periodic series", "Meeus, Astronomical Algorithms, ch. 37"],
+  ["Pluto", "Published periodic series and Horizons barycenter pack", "Meeus, Astronomical Algorithms, ch. 37; JPL Horizons DE441 pack"],
   ["Chiron", "Chebyshev fit of JPL Horizons", "NASA JPL small-body system (public domain); raw Horizons samples committed in-repo"],
   ["Nutation", "IAU 1980 theory, 63-term abridged table", "Meeus ch. 22; terms ≥ 0.0003″ of the 106-term series"],
-  ["Precession", "IAU 1976 / Meeus formulations", "Lieske et al."],
-  ["ΔT", "IERS observed values; near-flat then slow tidal rise afterward", <>International Earth Rotation Service; see <A href="/notes">Build Notes</A></>],
+  ["Precession", "IAU 1976 / Vondrák 2011 formulations", "Lieske et al.; Vondrák, Capitaine & Wallace (2011)"],
+  ["ΔT", "IERS observed values; spline and tidal forecast", <>International Earth Rotation Service; see <A href="/notes">Build Notes</A></>],
   ["Houses", "Spherical trigonometry from first principles", "semi-arc definitions, closed-form angles"],
 ];
 
 export default function Provenance() {
   return (
     <main className="container page">
-      <Eyebrow>Provenance</Eyebrow>
-      <h1>Sources</h1>
+      <PageHero eyebrow="Provenance · Ephemeris Sources & MIT License" title="Sources and licensing">
+        <P>
+          Caelus is implemented from published astronomical literature and
+          public-domain NASA/JPL ephemerides under the MIT license, with no
+          Swiss Ephemeris code, no AGPL copyleft obligations, and no external
+          ephemeris files required at runtime.
+        </P>
+      </PageHero>
+
+      <H2>Why independent sources matter</H2>
       <P>
         Most astrology software computes positions with{" "}
         <A href="https://www.astro.com/swisseph/swephinfo_e.htm">Swiss Ephemeris</A>.
@@ -61,21 +72,28 @@ export default function Provenance() {
         libraries (kerykeion, immanuel, flatlib) sit on it and inherit those
         terms. Most commercial astrology APIs do not say what engine they run.
       </P>
+
+      <H2>Astronomical sources</H2>
       <P>
-        Caelus is implemented from published astronomical literature and
-        public-domain NASA/JPL ephemerides:
+        Every coefficient table and reduction formula in Caelus traces directly
+        to published astronomical literature or public-domain NASA/JPL data:
       </P>
-      <table className="data-table table-auto" style={{ fontSize: "0.85rem" }}>
-        <tbody>
-          {SOURCES.map(([what, src, cite], i) => (
-            <tr key={i}>
-              <td>{what}</td>
-              <td>{src}</td>
-              <td className="dim">{cite}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="table-scroll" tabIndex={0}>
+        <table className="data-table table-auto">
+          <thead>
+            <tr><th>Component</th><th>Model</th><th>Reference</th></tr>
+          </thead>
+          <tbody>
+            {SOURCES.map(([what, src, cite], i) => (
+              <tr key={i}>
+                <td>{what}</td>
+                <td>{src}</td>
+                <td className="dim">{cite}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <H2>Other engines</H2>
       <P>
@@ -84,8 +102,8 @@ export default function Provenance() {
         between February and June 2026, using published gzipped bundle sizes
         where available.
       </P>
-      <div className="table-scroll">
-        <table className="data-table table-auto" style={{ fontSize: "0.85rem" }}>
+      <div className="table-scroll" tabIndex={0}>
+        <table className="data-table table-auto">
           <thead>
             <tr><th>Engine</th><th>License</th><th>Accuracy</th><th>Coverage and runtime</th></tr>
           </thead>
@@ -119,7 +137,8 @@ export default function Provenance() {
         comes directly from JPL Horizons; the two integrations agree within
         0.85″ in the worst case across 1900–2099.
       </P>
-      <H2>License</H2>
+
+      <H2>License and client-side privacy</H2>
       <P>
         Caelus is MIT licensed, so you can ship it in commercial SaaS, mobile,
         browser, and edge applications without AGPL obligations or external
@@ -136,9 +155,17 @@ export default function Provenance() {
         disclosure or commercial licensing once results are served over a
         network and rely on large ephemeris files on disk.
       </P>
-      <P dim>
-        <A href="/validation">Validation tables →</A>
-      </P>
+      <div className="row row--wrap">
+        <Link href="/validation" className="btn btn-sm btn-secondary">Validation tables →</Link>
+        <Link href="/methods" className="btn btn-sm btn-ghost">Methods</Link>
+        <Link href="/docs/data-tiers" className="btn btn-sm btn-ghost">Data Tiers</Link>
+      </div>
+
+      <PageClose
+        title="Build without AGPL restrictions"
+        secondaryHref="/docs/quickstart"
+        secondaryLabel="Quickstart →"
+      />
     </main>
   );
 }

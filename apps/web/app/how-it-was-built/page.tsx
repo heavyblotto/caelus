@@ -1,5 +1,8 @@
-import { A, Eyebrow, H2, P, Note } from "../../components/Prose";
+import Link from "next/link";
+import { A, H2, P, Note } from "../../components/Prose";
 import CaelusMark from "../../components/CaelusMark";
+import PageClose from "../../components/PageClose";
+import PageHero from "../../components/PageHero";
 import { pageMetadata } from "../../lib/seo";
 
 export const metadata = pageMetadata({
@@ -12,16 +15,16 @@ export const metadata = pageMetadata({
 export default function HowItWasBuilt() {
   return (
     <main className="container page">
-      <Eyebrow>Process</Eyebrow>
-      <h1>How this was built</h1>
-      <P>
-        Most of Caelus (the Python reference engine, TypeScript library, tests,
-        documentation, and website) was implemented with AI coding agents under
-        human direction and review. Because astronomical computation demands
-        strict numerical correctness, every calculation is checked against
-        independent ephemerides, and CI fails the build if the TypeScript code
-        diverges from the Python reference.
-      </P>
+      <PageHero eyebrow="Process · Engineering Workflow" title="How this was built">
+        <P>
+          Most of Caelus (the Python reference engine, TypeScript library, tests,
+          documentation, and website) was implemented with AI coding agents
+          under human direction and review. Because astronomical computation
+          demands strict numerical correctness, every calculation is checked
+          against independent ephemerides, and CI fails the build if the
+          TypeScript code diverges from the Python reference.
+        </P>
+      </PageHero>
 
       <H2>Reference-first verification</H2>
       <P>
@@ -69,10 +72,12 @@ export default function HowItWasBuilt() {
       </Note>
 
       <H2>Why the name Caelus?</H2>
-      <div style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start", flexWrap: "wrap", margin: "1rem 0" }}>
-        <figure style={{ margin: 0, flex: "none", textAlign: "center", color: "var(--accent)" }}>
-          <CaelusMark size={132} />
-          <figcaption className="dim small" style={{ marginTop: "0.4rem", maxWidth: 150 }}>
+      <div className="row row--wrap">
+        <figure className="card">
+          <div style={{ color: "var(--accent)", textAlign: "center" }}>
+            <CaelusMark size={132} />
+          </div>
+          <figcaption className="dim small">
             An original drawing based on the Carnuntum altar.
           </figcaption>
         </figure>
@@ -88,12 +93,20 @@ export default function HowItWasBuilt() {
         </div>
       </div>
 
-      <P dim>
-        <A href="/validation">Validation tables &rarr;</A>{" "}
-        <A href="/methods">Methods &rarr;</A>{" "}
-        <A href="/notes">Build Notes &rarr;</A>{" "}
-        <A href="https://github.com/heavyblotto/caelus">Source &rarr;</A>
-      </P>
+      <div className="row row--wrap">
+        <Link href="/validation" className="btn btn-sm btn-secondary">Validation tables →</Link>
+        <Link href="/methods" className="btn btn-sm btn-ghost">Methods</Link>
+        <Link href="/notes" className="btn btn-sm btn-ghost">Build Notes</Link>
+        <a href="https://github.com/heavyblotto/caelus" target="_blank" rel="noreferrer" className="btn btn-sm btn-ghost">
+          Source ↗
+        </a>
+      </div>
+
+      <PageClose
+        title="Inspect the source and tests"
+        secondaryHref="/validation"
+        secondaryLabel="Validation →"
+      />
     </main>
   );
 }

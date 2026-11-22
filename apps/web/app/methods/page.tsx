@@ -1,4 +1,7 @@
-import { A, Eyebrow, H2, P, Note } from "../../components/Prose";
+import Link from "next/link";
+import { A, H2, P, Note } from "../../components/Prose";
+import PageClose from "../../components/PageClose";
+import PageHero from "../../components/PageHero";
 import { pageMetadata } from "../../lib/seo";
 
 export const metadata = pageMetadata({
@@ -11,15 +14,15 @@ export const metadata = pageMetadata({
 export default function Methods() {
   return (
     <main className="container page">
-      <Eyebrow>Methods</Eyebrow>
-      <h1>Methods</h1>
-      <P>
-        Caelus implements published astronomical algorithms and validates every
-        calculation against independent ephemerides. Per-body accuracy tables
-        appear on <A href="/validation">Validation</A>, and source citations are
-        listed on <A href="/provenance">Provenance</A>. This page explains the
-        development and verification workflow.
-      </P>
+      <PageHero eyebrow="Methods · Verification Workflow" title="Methods">
+        <P>
+          Caelus implements published astronomical algorithms and validates
+          every calculation against independent ephemerides. Per-body accuracy
+          tables appear on <A href="/validation">Validation</A>, and source
+          citations are listed on <A href="/provenance">Provenance</A>. This
+          page documents the development and verification pipeline.
+        </P>
+      </PageHero>
 
       <H2>Reference-first development</H2>
       <P>
@@ -108,40 +111,42 @@ export default function Methods() {
       </ul>
 
       <H2>Summary of verification checks</H2>
-      <table className="data-table table-auto" style={{ fontSize: "0.85rem" }}>
-        <thead>
-          <tr>
-            <th>Layer</th>
-            <th>Verification scope</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Planet and Moon longitudes</td>
-            <td>JPL Horizons (DE441) across 1000&ndash;3000; 1850&ndash;2150 benchmarked against Swiss Ephemeris</td>
-          </tr>
-          <tr>
-            <td>House cusps (additional systems)</td>
-            <td>Matched against <code>swe_houses_armc</code>, including high-latitude cases</td>
-          </tr>
-          <tr>
-            <td>Vertex and east point</td>
-            <td>Matched against <code>swe_houses_armc</code></td>
-          </tr>
-          <tr>
-            <td>Rise, set, meridian transit</td>
-            <td>Root-finding matched against <code>swe_rise_trans</code></td>
-          </tr>
-          <tr>
-            <td>Crossings and lunar phases</td>
-            <td>Matched against <code>swe_solcross</code> and <code>swe_mooncross</code></td>
-          </tr>
-          <tr>
-            <td>Eclipse classifications</td>
-            <td>Verified across 1990&ndash;2030 with zero type mismatches</td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="table-scroll" tabIndex={0}>
+        <table className="data-table table-auto">
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>Verification scope</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Planet and Moon longitudes</td>
+              <td>JPL Horizons (DE441) across 1000&ndash;3000; 1850&ndash;2150 benchmarked against Swiss Ephemeris</td>
+            </tr>
+            <tr>
+              <td>House cusps (additional systems)</td>
+              <td>Matched against <code>swe_houses_armc</code>, including high-latitude cases</td>
+            </tr>
+            <tr>
+              <td>Vertex and east point</td>
+              <td>Matched against <code>swe_houses_armc</code></td>
+            </tr>
+            <tr>
+              <td>Rise, set, meridian transit</td>
+              <td>Root-finding matched against <code>swe_rise_trans</code></td>
+            </tr>
+            <tr>
+              <td>Crossings and lunar phases</td>
+              <td>Matched against <code>swe_solcross</code> and <code>swe_mooncross</code></td>
+            </tr>
+            <tr>
+              <td>Eclipse classifications</td>
+              <td>Verified across 1990&ndash;2030 with zero type mismatches</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <P dim>
         See <A href="/validation">Validation</A> for full per-body maximum and
         RMS error figures.
@@ -159,11 +164,17 @@ export default function Methods() {
         are expected across all software packages.
       </P>
 
-      <P dim>
-        <A href="/validation">Validation tables &rarr;</A>{" "}
-        <A href="/provenance">Sources &rarr;</A>{" "}
-        <A href="/notes">Build Notes &rarr;</A>
-      </P>
+      <div className="row row--wrap">
+        <Link href="/validation" className="btn btn-sm btn-secondary">Validation tables →</Link>
+        <Link href="/provenance" className="btn btn-sm btn-ghost">Provenance</Link>
+        <Link href="/notes" className="btn btn-sm btn-ghost">Build Notes</Link>
+      </div>
+
+      <PageClose
+        title="Inspect the accuracy tables"
+        secondaryHref="/validation"
+        secondaryLabel="Validation →"
+      />
     </main>
   );
 }

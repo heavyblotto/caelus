@@ -1,18 +1,12 @@
 import type { WheelTheme } from "caelus-wheel";
 
 /**
- * The caelus-wheel renderers ship a fixed dark palette. On the site we instead
- * feed them the live design tokens as CSS-variable strings, so every SVG colour
- * resolves against the page's current `data-theme` and tracks the light/dark
- * toggle with no JS, no flash, and no hydration mismatch (the values are literal
- * strings on both server and client). Planet glyphs map to --text and the axes
- * to --accent so they stay legible on either surface; the structural inks have
- * their own --wheel-* tokens tuned per mode.
- */
-/**
- * Per-body glyph and position-tick tints for ChartWheel. Matches the AstroMap /
- * EphemerisGraph palette; moon and saturn use mode-aware tokens so they stay
- * legible on light surfaces.
+ * The caelus-wheel renderers ship a fixed dark palette for standalone embeds.
+ * On the site we feed them live OKLCH design tokens as CSS-variable strings,
+ * so every SVG colour resolves against the page's active `data-theme` and
+ * tracks the dark/light toggle with zero JS, zero flash, and zero hydration
+ * mismatch. Every planet, aspect, ring, and reference-circle token carries a
+ * tuned dark and light OKLCH twin in `apps/web/app/globals.css`.
  */
 export const WHEEL_PLANET_COLORS: Record<string, string> = {
   sun: "var(--wheel-planet-sun)",
@@ -32,23 +26,44 @@ export const WHEEL_PLANET_COLORS: Record<string, string> = {
 export const WHEEL_THEME: Partial<WheelTheme> = {
   background: "transparent",
   ring: "var(--wheel-ring)",
+  ringMinor: "var(--wheel-ring-minor, var(--wheel-ring))",
   axis: "var(--accent)",
   signText: "var(--wheel-sign)",
   planetText: "var(--text)",
   planetColors: WHEEL_PLANET_COLORS,
   labelText: "var(--wheel-label)",
   houseText: "var(--wheel-house)",
-  // Only conjunction is theme-sensitive (a near-neutral); the coloured aspects
-  // read on both surfaces and inherit the renderer's defaults via deep-merge.
-  aspectColors: { conjunction: "var(--wheel-conj)" },
+  aspectColors: {
+    conjunction: "var(--wheel-aspect-conj, var(--wheel-conj))",
+    sextile: "var(--wheel-aspect-sextile, #4fb09a)",
+    square: "var(--wheel-aspect-square, #c0564f)",
+    trine: "var(--wheel-aspect-trine, #4f8fc0)",
+    opposition: "var(--wheel-aspect-opposition, #c0564f)",
+  },
+  horizon: "var(--wheel-horizon, var(--dim))",
+  ecliptic: "var(--wheel-ecliptic, var(--warm))",
+  meridian: "var(--wheel-meridian, var(--accent))",
+  fontFamily: "var(--mono, ui-monospace, 'SF Mono', Menlo, Consolas, monospace)",
 };
 
 /**
- * AstroMap / EphemerisGraph draw each body in a distinct hue. Two of them
- * (moon, saturn) are pale greys that vanish on a light surface, so override just
- * those with mode-aware tokens; every other body colour reads on both.
+ * Per-body line inks for AstroMap and EphemerisGraph. Every body maps to its
+ * mode-aware OKLCH `--wheel-planet-*` token so curves and meridians maintain
+ * strong contrast on both obsidian dark and vellum light surfaces.
  */
 export const WHEEL_LINE_COLORS: Record<string, string> = {
-  moon: "var(--wheel-line-moon)",
-  saturn: "var(--wheel-line-saturn)",
+  ...WHEEL_PLANET_COLORS,
+  moon: "var(--wheel-line-moon, var(--wheel-planet-moon))",
+  saturn: "var(--wheel-line-saturn, var(--wheel-planet-saturn))",
 };
+
+/**
+ * Workbench-aware tokens for PlateConsole on the live site (high-contrast
+ * dark/light parity instead of cream-paper ink defaults).
+ */
+export const WORKBENCH_CONSOLE_TOKENS = {
+  rule: "var(--line2)",
+  mutedInk: "var(--dim)",
+  ink: "var(--text)",
+  accent: "var(--warm)",
+} as const;

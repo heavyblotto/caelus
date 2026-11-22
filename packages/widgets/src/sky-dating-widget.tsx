@@ -79,9 +79,22 @@ function Track({ spans, jd0, jd1 }: {
   const k = w / (jd1 - jd0);
   return (
     <svg className="trk" viewBox={`0 0 ${w} 16`} preserveAspectRatio="none" aria-hidden="true">
-      {spans.map(([s, e], i) => (
-        <rect key={i} x={(s - jd0) * k} y={0} width={Math.max(1.2, (e - s) * k)} height={16} />
-      ))}
+      {spans.map(([s, e], i) => {
+        const x = (s - jd0) * k;
+        const width = (e - s) * k;
+        // Separate sub-pixel hits from true-duration intervals so a 2.5-day match
+        // never masquerades as a multi-year filled rectangle (Tufte B1).
+        if (width < 2) {
+          const cx = x + width / 2;
+          return (
+            <g key={i} data-point-hit="true">
+              <line x1={cx} y1={2} x2={cx} y2={16} stroke="currentColor" strokeWidth={1.2} />
+              <polygon points={`${cx},0 ${cx + 2.4},3 ${cx},6 ${cx - 2.4},3`} />
+            </g>
+          );
+        }
+        return <rect key={i} x={x} y={0} width={width} height={16} />;
+      })}
     </svg>
   );
 }
@@ -273,23 +286,44 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
   const years = shown.endYear - shown.startYear + 1;
 
   const ticks = useMemo(() => {
-    // Round numbers in the era the reader sees: 400 BCE is astronomical
-    // year -399, so BCE ticks sit one year off the multiples.
+    // Anchor exact range-frame endpoints (Tufte B2) alongside round interior ticks.
     const step = niceStep(shown.endYear - shown.startYear);
-    const out: Array<{ year: number; pct: number }> = [];
+    const interior: Array<{ year: number; pct: number }> = [];
+    const seen = new Set<number>([shown.startYear, shown.endYear]);
     const add = (y: number): void => {
-      if (y >= shown.startYear && y <= shown.endYear) {
-        out.push({ year: y, pct: ((jdOfYear(y) - jd0) / (jd1 - jd0)) * 100 });
-      }
+      if (y <= shown.startYear || y >= shown.endYear || seen.has(y)) return;
+      const pct = ((jdOfYear(y) - jd0) / (jd1 - jd0)) * 100;
+      if (pct < 9 || pct > 91) return; // keep clear of range-frame endpoints
+      seen.add(y);
+      interior.push({ year: y, pct });
     };
     for (let n = Math.ceil((1 - shown.endYear) / step) * step; 1 - n >= shown.startYear; n += step) {
       if (n >= step) add(1 - n);
     }
     for (let y = step; y <= shown.endYear; y += step) add(y);
-    // mark the turn of the era when the span crosses it
     if (shown.startYear < -step / 2 && shown.endYear > step / 2) add(1);
+    const out: Array<{ year: number; pct: number }> = [
+      { year: shown.startYear, pct: 0 },
+      ...interior,
+    ];
+    if (shown.endYear > shown.startYear) {
+      out.push({ year: shown.endYear, pct: 100 });
+    }
     return out.sort((a, b) => a.year - b.year);
   }, [shown.startYear, shown.endYear, jd0, jd1]);
+
+  // Greedy horizontal deconfliction for numbered match pins (Tufte B4)
+  const placedPins = useMemo(() => {
+    if (running || windows.length > MAX_PINS) return [];
+    const minGapPct = 3.8;
+    let lastPct = -Infinity;
+    return windows.map(([s], i) => {
+      const rawPct = ((s - jd0) / (jd1 - jd0)) * 100;
+      const pct = Math.min(98, Math.max(rawPct, lastPct + minGapPct));
+      lastPct = pct;
+      return { key: s, num: i + 1, pct };
+    });
+  }, [running, windows, jd0, jd1]);
 
   const rows = useMemo(() => {
     const bodies = SKY_BODIES.filter((b) => shown.signs[b.id] !== undefined);
@@ -548,7 +582,7 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
         <div className="col">
           <section className="tile">
             <div className="tile__h"><b>OUT</b><span>Windows that fit</span><i>{status}</i></div>
-            <div className="meter"><i style={{ width: `${(loading ? loadFraction : running ? progress : search ? 1 : 0) * 100}%` }} /></div>
+            <div className="meter"><i style={{ width: `${(loading ? loadFraction : running ? progress : 0) * 100}%` }} /></div>
             <div className="count">
               <b>{windows.length.toLocaleString("en-US")}</b>
               <span>{windows.length === 1 ? "window fits" : "windows fit"}</span>
@@ -572,9 +606,9 @@ export function SkyDating({ engine, initialPreset = "babylon", packs }: SkyDatin
               <div className="tl__row">
                 <div />
                 <div className="tl__plot">
-                  {!running && windows.length <= MAX_PINS && windows.map(([s], i) => (
-                    <div className="pin" key={s} style={{ left: `${((s - jd0) / (jd1 - jd0)) * 100}%` }}>
-                      <b>{i + 1}</b>
+                  {placedPins.map((p) => (
+                    <div className="pin" key={p.key} style={{ left: `${p.pct}%` }}>
+                      <b>{p.num}</b>
                     </div>
                   ))}
                   <div className="tl__axis">

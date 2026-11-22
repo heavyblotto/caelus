@@ -1,5 +1,5 @@
 /**
- * MultiWheel — concentric chart rings around one zodiac.
+ * MultiWheel -- concentric chart rings around one zodiac.
  *
  * Any chart in any ring: natal + partner (bi-wheel), natal + progressed +
  * transits (tri-wheel), up to four rings. Ring 0 is the innermost chart and
@@ -18,12 +18,18 @@ import {
 
 const SIGN_GLYPHS = ["♈", "♉", "♊", "♋", "♌", "♍",
   "♎", "♏", "♐", "♑", "♒", "♓"];
+const SIGN_NAMES = [
+  "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
+  "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces",
+];
 const HARD_ASPECTS = new Set(["conjunction", "square", "opposition"]);
 const MAX_ORB: Record<string, number> = {
   conjunction: 8, sextile: 4, square: 7, trine: 7, opposition: 8,
 };
 
 const mod = (a: number, n: number) => ((a % n) + n) % n;
+const bodyTitle = (b: string): string =>
+  b.replace(/_/g, " ").replace(/^./, (c) => c.toUpperCase());
 
 export interface WheelRing {
   /** The caelus Chart (or MCP payload) this ring draws. Ring 0's angles and
@@ -62,6 +68,14 @@ export interface MultiWheelProps {
   showHouses?: boolean;
   theme?: Partial<WheelTheme>;
   glyphs?: Record<string, string>;
+  /** Currently selected body id for linked cross-highlighting. */
+  selectedBody?: string | null;
+  /** Currently hovered body id for linked cross-highlighting. */
+  hoveredBody?: string | null;
+  /** Called when a body is clicked or activated by keyboard. */
+  onSelectBody?: (body: string | null) => void;
+  /** Called when pointer/focus enters or leaves a body. */
+  onHoverBody?: (body: string | null) => void;
 }
 
 export function MultiWheel({
@@ -73,10 +87,15 @@ export function MultiWheel({
   showHouses = true,
   theme,
   glyphs,
+  selectedBody,
+  hoveredBody,
+  onSelectBody,
+  onHoverBody,
 }: MultiWheelProps): ReactElement {
   const T: WheelTheme = { ...DARK_THEME, ...theme,
     aspectColors: { ...DARK_THEME.aspectColors, ...(theme?.aspectColors ?? {}) },
     planetColors: { ...(DARK_THEME.planetColors ?? {}), ...(theme?.planetColors ?? {}) } };
+  const ringMinor = T.ringMinor ?? T.ring;
   const G = { ...GLYPHS, ...glyphs };
   const n = rings.length;
   const base = rings[0]?.chart;
@@ -107,6 +126,24 @@ export function MultiWheel({
     );
   };
 
+  const activeBody = hoveredBody ?? selectedBody ?? null;
+  const hasFocus = activeBody !== null;
+  const interactive = Boolean(onSelectBody || onHoverBody);
+  const connected = new Set<string>();
+  if (activeBody) {
+    connected.add(activeBody);
+    for (const k of contacts) {
+      if (k.a.body === activeBody) connected.add(k.b.body);
+      if (k.b.body === activeBody) connected.add(k.a.body);
+    }
+    if (base && showAspects) {
+      for (const a of base.aspects) {
+        if (a.a === activeBody) connected.add(a.b);
+        if (a.b === activeBody) connected.add(a.a);
+      }
+    }
+  }
+
   const el: ReactElement[] = [];
 
   // frame: zodiac band and aspect core, as in ChartWheel
@@ -119,11 +156,13 @@ export function MultiWheel({
   }
   for (let s = 0; s < 12; s++) {
     el.push(line(s * 30, ZODIAC_IN, 1.0, { stroke: T.ring, strokeWidth: 1 }, `sb-${s}`));
-    el.push(text(s * 30 + 15, 0.92, SIGN_GLYPHS[s], size * 0.045, T.signText, `sg-${s}`));
+    el.push(text(s * 30 + 15, 0.92, SIGN_GLYPHS[s], size * 0.044, T.signText, `sg-${s}`));
   }
   for (let d = 0; d < 360; d += 5) {
-    el.push(line(d, ZODIAC_IN, ZODIAC_IN + (d % 10 === 0 ? 0.03 : 0.02),
-      { stroke: T.ring, strokeWidth: d % 10 === 0 ? 1 : 0.5 }, `tick-${d}`));
+    const is10 = d % 10 === 0;
+    el.push(line(d, ZODIAC_IN, ZODIAC_IN + (is10 ? 0.032 : 0.02),
+      { stroke: is10 ? T.ring : ringMinor, strokeWidth: is10 ? 1 : 0.5, opacity: is10 ? 0.85 : 0.6 },
+      `tick-${d}`));
   }
 
   // ring bands between the core and the zodiac
@@ -138,10 +177,10 @@ export function MultiWheel({
     const cusps = base.cusps;
     for (let i = 0; i < 12; i++) {
       el.push(line(cusps[i], CORE, ZODIAC_IN,
-        { stroke: T.ring, strokeWidth: 1, opacity: 0.55 }, `cusp-${i}`));
+        { stroke: ringMinor, strokeWidth: 0.75, opacity: 0.55 }, `cusp-${i}`));
       const arc = mod(cusps[(i + 1) % 12] - cusps[i], 360);
       el.push(text(cusps[i] + arc / 2, 0.455, String(i + 1),
-        size * 0.024, T.houseText, `hn-${i}`));
+        size * 0.023, T.houseText, `hn-${i}`));
     }
   }
   if (base) {
@@ -150,8 +189,8 @@ export function MultiWheel({
       [mod(asc + 180, 360), "DC"], [mod(base.angles.mc + 180, 360), "IC"],
     ];
     for (const [lon, label] of axes) {
-      el.push(line(lon, CORE, 1.0, { stroke: T.axis, strokeWidth: 2 }, `axis-${label}`));
-      el.push(text(lon, 1.045, label, size * 0.026, T.axis, `axl-${label}`));
+      el.push(line(lon, CORE, 1.0, { stroke: T.axis, strokeWidth: 1.75 }, `axis-${label}`));
+      el.push(text(lon, 1.048, label, size * 0.026, T.axis, `axl-${label}`, { fontWeight: 600 }));
     }
   }
 
@@ -165,12 +204,14 @@ export function MultiWheel({
       const [x1, y1] = pt(pa.lon, CORE);
       const [x2, y2] = pt(pb.lon, CORE);
       const tightness = Math.max(0, 1 - a.orb / (MAX_ORB[a.aspect] ?? 8));
+      const highlighted = activeBody !== null && (a.a === activeBody || a.b === activeBody);
+      const dimmed = hasFocus && !highlighted;
       el.push(<line key={`asp-${a.a}-${a.aspect}-${a.b}`}
         x1={fix(x1)} y1={fix(y1)} x2={fix(x2)} y2={fix(y2)}
         stroke={T.aspectColors[a.aspect] ?? T.ring}
-        strokeWidth={1 + tightness}
+        strokeWidth={fix(highlighted ? 1.45 + tightness : 1 + tightness)}
         strokeDasharray={HARD_ASPECTS.has(a.aspect) ? undefined : "4 3"}
-        opacity={fix(0.25 + 0.65 * tightness)} />);
+        opacity={fix(highlighted ? 0.9 : dimmed ? 0.12 : 0.25 + 0.65 * tightness)} />);
     }
   }
 
@@ -182,54 +223,99 @@ export function MultiWheel({
     const [x1, y1] = pt(pa.lon, CORE);
     const [x2, y2] = pt(pb.lon, CORE);
     const tightness = Math.max(0, 1 - k.orb / (MAX_ORB[k.aspect] ?? 8));
-    el.push(<line key={`c-${k.a.ring}.${k.a.body}-${k.aspect}-${k.b.ring}.${k.b.body}`}
-      x1={fix(x1)} y1={fix(y1)} x2={fix(x2)} y2={fix(y2)}
-      stroke={T.aspectColors[k.aspect] ?? T.ring}
-      strokeWidth={1 + tightness}
-      strokeDasharray={HARD_ASPECTS.has(k.aspect) ? undefined : "4 3"}
-      opacity={fix(0.3 + 0.6 * tightness)} />);
+    const highlighted = activeBody !== null && (k.a.body === activeBody || k.b.body === activeBody);
+    const dimmed = hasFocus && !highlighted;
+    el.push(
+      <line key={`c-${k.a.ring}.${k.a.body}-${k.aspect}-${k.b.ring}.${k.b.body}`}
+        x1={fix(x1)} y1={fix(y1)} x2={fix(x2)} y2={fix(y2)}
+        stroke={T.aspectColors[k.aspect] ?? T.ring}
+        strokeWidth={fix(highlighted ? 1.5 + tightness : 1 + tightness)}
+        strokeDasharray={HARD_ASPECTS.has(k.aspect) ? undefined : "4 3"}
+        opacity={fix(highlighted ? 0.95 : dimmed ? 0.12 : 0.3 + 0.6 * tightness)}>
+        <title>{`${bodyTitle(k.a.body)} ${k.aspect} ${bodyTitle(k.b.body)} (orb ${k.orb.toFixed(2)}°)`}</title>
+      </line>,
+    );
   }
 
   // bodies, ring by ring: pointer tick at the band's outer edge on the true
-  // longitude, glyph at a fanned angle, degree label when the band is tall
-  // enough (one or two rings)
-  const glyphSize = size * Math.max(0.032, 0.05 - 0.006 * (n - 1));
+  // longitude, glyph at a fanned angle, degree label when the band is tall enough
+  const glyphSize = size * Math.max(0.032, 0.048 - 0.006 * (n - 1));
   rings.forEach((ring, i) => {
     const rIn = CORE + i * h;
     const rOut = rIn + h;
     const showLabel = n <= 2;
-    const glyphR = rIn + h * (showLabel ? 0.62 : 0.52);
+    const glyphR = rIn + h * (showLabel ? 0.64 : 0.52);
     const names = (ring.bodies ?? Object.keys(ring.chart.bodies).filter((b) => b !== "mean_node"))
       .filter((b) => ring.chart.bodies[b] !== undefined);
     const trueLons = names.map((b) => ring.chart.bodies[b]!.lon);
-    // min separation so glyphs at this radius cannot overlap
-    const minSep = (1.2 * glyphSize * 180) / (Math.PI * glyphR * R);
+    const minSep = Math.max(showLabel ? 9.5 : 6.5, (1.25 * glyphSize * 180) / (Math.PI * glyphR * R));
     const dispLons = spreadAngles(trueLons, minSep);
-    const ringColor = ring.color
-      ?? (i === 0 ? undefined : T.axis);
+    const ringColor = ring.color ?? (i === 0 ? undefined : T.axis);
 
     names.forEach((b, j) => {
       const p = ring.chart.bodies[b]!;
       const disp = dispLons[j];
       const pColor = ringColor ?? T.planetColors?.[b] ?? T.planetText;
-      el.push(line(p.lon, rOut - 0.025, rOut,
-        { stroke: pColor, strokeWidth: 1.2 }, `r${i}-pt-${b}`));
+      const isSelected = selectedBody === b;
+      const isHovered = hoveredBody === b;
+      const isHighlighted = isSelected || isHovered || (hasFocus && connected.has(b));
+      const isDimmed = hasFocus && !isHighlighted;
+      const signIdx = Math.floor(mod(p.lon, 360) / 30) % 12;
+      const signDeg = p.signDeg ?? mod(p.lon, 30);
+      const retro = p.retrograde ?? p.rx ?? false;
+      const deg = Math.floor(signDeg);
+      const min = String(Math.floor(mod(signDeg, 1) * 60)).padStart(2, "0");
+      const [gx, gy] = pt(disp, glyphR);
+
+      const children: ReactElement[] = [
+        <title key={`r${i}-tt-${b}`}>
+          {`${ring.label ? `${ring.label}: ` : ""}${bodyTitle(b)} ${deg}°${min}' ${SIGN_NAMES[signIdx]}${retro ? " retrograde" : ""}`}
+        </title>,
+        line(p.lon, rOut - 0.025, rOut, { stroke: pColor, strokeWidth: 1.2 }, `r${i}-pt-${b}`),
+      ];
       if (Math.abs(mod(disp - p.lon + 180, 360) - 180) > 0.75) {
         const [x1, y1] = pt(p.lon, rOut - 0.025);
         const [x2, y2] = pt(disp, glyphR + h * 0.18);
-        el.push(<line key={`r${i}-conn-${b}`} x1={fix(x1)} y1={fix(y1)}
+        children.push(<line key={`r${i}-conn-${b}`} x1={fix(x1)} y1={fix(y1)}
           x2={fix(x2)} y2={fix(y2)} stroke={T.labelText} strokeWidth={0.5} opacity={0.5} />);
       }
-      el.push(text(disp, glyphR, G[b] ?? b.slice(0, 2).toUpperCase(),
-        glyphSize, pColor, `r${i}-pg-${b}`));
-      if (showLabel) {
-        const signDeg = p.signDeg ?? mod(p.lon, 30);
-        const retro = p.retrograde ?? p.rx ?? false;
-        const deg = Math.floor(signDeg);
-        const min = String(Math.floor(mod(signDeg, 1) * 60)).padStart(2, "0");
-        el.push(text(disp, rIn + h * 0.24, `${deg}°${min}'${retro ? "℞" : ""}`,
-          size * 0.022, T.labelText, `r${i}-pl-${b}`));
+      if (isSelected || isHovered) {
+        children.push(
+          <circle key={`r${i}-ret-${b}`} cx={fix(gx)} cy={fix(gy)} r={fix(glyphSize * 0.78)}
+            fill="none" stroke={T.axis} strokeWidth={1.25} />,
+        );
       }
+      children.push(
+        text(disp, glyphR, G[b] ?? b.slice(0, 2).toUpperCase(), glyphSize, pColor, `r${i}-pg-${b}`),
+      );
+      if (showLabel) {
+        children.push(
+          text(disp, rIn + h * 0.24, `${deg}°${min}'${retro ? "℞" : ""}`,
+            size * 0.020, T.labelText, `r${i}-pl-${b}`),
+        );
+      }
+
+      const handlers = interactive
+        ? {
+            role: onSelectBody ? ("button" as const) : undefined,
+            tabIndex: onSelectBody ? 0 : undefined,
+            style: { cursor: onSelectBody ? "pointer" : undefined },
+            onClick: onSelectBody ? () => onSelectBody(selectedBody === b ? null : b) : undefined,
+            onMouseEnter: onHoverBody ? () => onHoverBody(b) : undefined,
+            onMouseLeave: onHoverBody ? () => onHoverBody(null) : undefined,
+          }
+        : {};
+
+      el.push(
+        <g key={`r${i}-body-${b}`} data-body={b} data-ring={i}
+          data-selected={isSelected ? "true" : undefined}
+          data-highlighted={isHighlighted ? "true" : undefined}
+          data-dimmed={isDimmed ? "true" : undefined}
+          opacity={isDimmed ? 0.3 : 1}
+          {...handlers}>
+          {children}
+        </g>,
+      );
     });
   });
 

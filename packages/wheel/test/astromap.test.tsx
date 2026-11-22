@@ -1,7 +1,7 @@
 /**
  * AstroMap render checks: real astrocartography lines from the engine through
- * renderToStaticMarkup (SSR safe, no DOM). Verifies the meridians, the
- * rising/setting tracks, and the body labels reach the SVG.
+ * renderToStaticMarkup (SSR safe, no DOM). Verifies meridians, rising/setting
+ * tracks, coordinate anchors, observer pin, mixed-case labels, and selection.
  */
 import { renderToStaticMarkup } from "react-dom/server";
 import { dirname, join } from "node:path";
@@ -25,18 +25,28 @@ const jd = julianDay(1990, 6, 10, 18, 30, 0);
 const lines = astrocartography(eng, jd, ["sun", "moon", "mars"], -80, 80, 10);
 
 const svg = renderToStaticMarkup(
-  <AstroMap lines={lines} width={720} height={360} />,
+  <AstroMap lines={lines} width={720} height={360}
+    observer={{ lat: 40.71, lonEast: -74.01, label: "New York" }} />,
 );
 assert(svg.startsWith("<svg") && svg.includes("</svg>"), "renders an <svg> root");
-assert(svg.includes("sun MC") && svg.includes("moon MC"), "MC body labels are drawn");
+assert(svg.includes("Sun MC") && svg.includes("Moon MC"), "mixed-case MC body labels are drawn");
+assert(svg.includes("0° Eq") && svg.includes("60°W"), "equirectangular coordinate anchors drawn");
+assert(svg.includes('data-observer="true"') && svg.includes("New York"), "observer crosshair and label rendered");
 assert((svg.match(/<path /g) ?? []).length >= 3, "rising/setting tracks are present");
 assert((svg.match(/<line /g) ?? []).length >= 6, "meridians and graticule are present");
 assert(svg.length > 2000, `SVG has real content (length ${svg.length})`);
 
-// MC meridian x-position reflects the body's MC longitude (in the map, not at 0).
 const sunMcX = ((lines.sun.mc + 180) / 360) * 720;
 assert(svg.includes(`x1="${sunMcX.toFixed(0)}`) || sunMcX > 0,
   "the Sun MC meridian is placed by its longitude");
+
+const sel = renderToStaticMarkup(
+  <AstroMap lines={lines} width={720} height={360} selectedBody="sun" />,
+);
+assert(sel.includes('data-body="sun" data-selected="true" data-highlighted="true"'),
+  "selectedBody highlights sun tracks");
+assert(sel.includes('data-body="mars" data-dimmed="true"'),
+  "unselected body tracks dim");
 
 console.log(`\n${checks} checks, ${failures} failures`);
 process.exit(failures ? 1 : 0);

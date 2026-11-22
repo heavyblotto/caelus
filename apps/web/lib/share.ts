@@ -1,7 +1,7 @@
 /**
  * Shareable charts: the playground encodes the inputs the user typed into the
  * URL fragment and nothing more. No chart is computed, transmitted, or stored
- * server-side — whoever opens the link recomputes it locally from these
+ * server-side; whoever opens the link recomputes it locally from these
  * numbers. The fragment (`#...`) is never sent over the network, so the inputs
  * never reach a server at all.
  */

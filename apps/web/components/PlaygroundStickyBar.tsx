@@ -9,7 +9,7 @@ export default function PlaygroundStickyBar() {
 
   useEffect(() => {
     const onScroll = () => {
-      setVisible(window.scrollY > 480);
+      setVisible(window.scrollY > 560);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -25,12 +25,15 @@ export default function PlaygroundStickyBar() {
     >
       <div className="container sticky-cta__inner">
         <p className="sticky-cta__note dim small">
-          Computed client-side · <code>npm install caelus</code>
+          Computed locally in browser · <code>npm install caelus</code>
         </p>
         <div className="sticky-cta__actions">
           <InstallButton label="install" className="btn-sm" />
+          <Link href="/instruments" className="btn btn-ghost btn-sm">
+            Instruments
+          </Link>
           <Link href="/docs/quickstart" className="btn btn-secondary btn-sm">
-            Quickstart →
+            Quickstart &rarr;
           </Link>
         </div>
       </div>

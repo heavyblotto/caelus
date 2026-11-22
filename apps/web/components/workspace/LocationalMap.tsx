@@ -2,18 +2,33 @@
 
 import { useMemo, useState } from "react";
 import { astrocartography, angularity, fmtLon, type Engine } from "caelus";
-import { AstroMap, type AngleKind } from "caelus-wheel";
+import type { AngleKind } from "caelus-wheel";
 import CityPicker, { type City } from "../CityPicker";
 import { WHEEL_THEME, WHEEL_LINE_COLORS } from "../../lib/wheelTheme";
 import { MAP_ANGLES, MAP_BODIES, type MapAngle } from "./util";
+import { InteractiveAstroMap } from "./VizBridge";
 
 export default function LocationalMap({
-  engine, natalJd, lat, lon, onRelocate,
+  engine,
+  natalJd,
+  lat,
+  lon,
+  place,
+  selectedBody,
+  hoveredBody,
+  onSelectBody,
+  onHoverBody,
+  onRelocate,
 }: {
   engine: Engine;
   natalJd: number;
   lat: number;
   lon: number;
+  place?: string;
+  selectedBody?: string | null;
+  hoveredBody?: string | null;
+  onSelectBody?: (body: string | null) => void;
+  onHoverBody?: (body: string | null) => void;
   onRelocate: (lat: number, lon: number, place?: string) => void;
 }) {
   const [show, setShow] = useState<MapAngle[]>([...MAP_ANGLES]);
@@ -57,33 +72,40 @@ export default function LocationalMap({
   if (!lines) return <p className="dim small">Could not draw this map.</p>;
 
   return (
-    <div>
-      <div className="seg" role="group" aria-label="Angle lines" style={{ marginBottom: "0.5rem" }}>
-        {MAP_ANGLES.map((a) => (
-          <button key={a} type="button" className="seg__btn" aria-pressed={show.includes(a)} onClick={() => toggle(a)}>
-            {a.toUpperCase()}
-          </button>
-        ))}
+    <div className="stack--sm">
+      <div className="row row--between row--wrap">
+        <div className="seg" role="group" aria-label="Angle lines">
+          {MAP_ANGLES.map((a) => (
+            <button key={a} type="button" className="seg__btn" aria-pressed={show.includes(a)} onClick={() => toggle(a)}>
+              {a.toUpperCase()}
+            </button>
+          ))}
+        </div>
+        <div className="field field--place">
+          <span className="field__label">relocate to</span>
+          <CityPicker onSelect={onCity} placeholder="search city..." />
+        </div>
       </div>
-      <div className="field" style={{ marginBottom: "0.5rem" }}>
-        <span className="field__label">relocate to</span>
-        <CityPicker onSelect={onCity} placeholder="city…" width="12rem" />
-      </div>
-      <div onClick={onClick} style={{ cursor: "crosshair" }} role="presentation">
-        <AstroMap
+      <div className="locational-map__canvas" onClick={onClick} role="presentation">
+        <InteractiveAstroMap
           lines={lines}
           width={720}
           height={360}
           show={show as AngleKind[]}
           theme={WHEEL_THEME}
           colors={WHEEL_LINE_COLORS}
+          observer={{ lat, lonEast: lon, label: place || undefined }}
+          selectedBody={selectedBody}
+          hoveredBody={hoveredBody}
+          onSelectBody={onSelectBody}
+          onHoverBody={onHoverBody}
         />
       </div>
-      <p className="dim small" style={{ margin: "0.4rem 0 0" }}>
+      <p className="dim small">
         Click the map or pick a city to recast houses and angles at that place.
         {relocated && (
           <>
-            {" "}ASC {fmtLon(relocated.asc)} · MC {fmtLon(relocated.mc)}
+            {" "}ASC <span className="mono">{fmtLon(relocated.asc)}</span> · MC <span className="mono">{fmtLon(relocated.mc)}</span>
             {relocated.angular.length ? ` · angular ${relocated.angular.join(", ")}` : ""}.
           </>
         )}

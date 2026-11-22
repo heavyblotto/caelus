@@ -35,6 +35,13 @@ export interface ConsoleStation {
   t: number;
 }
 
+export interface ConsoleTokens {
+  rule?: string;
+  mutedInk?: string;
+  ink?: string;
+  accent?: string;
+}
+
 export interface PlateConsoleProps {
   /** Current scrub position in [0, 1]. */
   t: number;
@@ -46,6 +53,8 @@ export interface PlateConsoleProps {
   /** Snap to the nearest station on pointer-up. Default true. Station
    *  labels still jump when clicked. */
   snapOnRelease?: boolean;
+  /** Optional colour token overrides (defaults to PLATE_TOKENS for cream paper). */
+  tokens?: ConsoleTokens;
 }
 
 const clamp01 = (x: number): number => Math.max(0, Math.min(1, x));
@@ -78,9 +87,19 @@ export function labelLefts(stations: ConsoleStation[], rowOf: (i: number) => num
 }
 
 export function PlateConsole({
-  t, stations, datum, onScrub, snapOnRelease = true,
+  t, stations, datum, onScrub, snapOnRelease = true, tokens,
 }: PlateConsoleProps): ReactElement {
+  const tok = {
+    rule: tokens?.rule ?? PLATE_TOKENS.rule,
+    mutedInk: tokens?.mutedInk ?? PLATE_TOKENS.mutedInk,
+    ink: tokens?.ink ?? PLATE_TOKENS.ink,
+    accent: tokens?.accent ?? PLATE_TOKENS.accent,
+  };
   const pos = clamp01(t);
+  const nearestIdx = stations?.length
+    ? stations.reduce((best, s, idx) =>
+        Math.abs(s.t - pos) < Math.abs(stations[best].t - pos) ? idx : best, 0)
+    : -1;
   const snap = (x: number): number => {
     if (!stations?.length) return x;
     let best = stations[0].t;
@@ -91,6 +110,22 @@ export function PlateConsole({
   };
   const rail = onScrub
     ? {
+        tabIndex: 0,
+        onKeyDown: (e: { key: string; preventDefault: () => void }) => {
+          if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            onScrub(clamp01(pos - 0.05));
+          } else if (e.key === "ArrowRight") {
+            e.preventDefault();
+            onScrub(clamp01(pos + 0.05));
+          } else if (e.key === "Home") {
+            e.preventDefault();
+            onScrub(0);
+          } else if (e.key === "End") {
+            e.preventDefault();
+            onScrub(1);
+          }
+        },
         onPointerDown: (e: PointerEvent<HTMLDivElement>) => {
           // Cancel the browser's selection gesture. Capture alone is not
           // enough: a path that leaves the 1px rule otherwise starts
@@ -166,12 +201,12 @@ export function PlateConsole({
             right: 0,
             top: "21px",
             height: "1px",
-            background: PLATE_TOKENS.rule,
+            background: tok.rule,
             pointerEvents: "none",
           }}
         />
         {/* station ticks */}
-        {stations?.map((s) => (
+        {stations?.map((s, idx) => (
           <div
             key={s.id}
             style={{
@@ -180,12 +215,12 @@ export function PlateConsole({
               top: "18px",
               width: "1px",
               height: "7px",
-              background: PLATE_TOKENS.mutedInk,
+              background: idx === nearestIdx ? tok.ink : tok.mutedInk,
               pointerEvents: "none",
             }}
           />
         ))}
-        {/* the index: oxblood, the one interaction accent */}
+        {/* the index: single interaction accent */}
         <div
           style={{
             position: "absolute",
@@ -194,43 +229,47 @@ export function PlateConsole({
             width: "2px",
             height: "15px",
             marginLeft: "-1px",
-            background: PLATE_TOKENS.accent,
+            background: tok.accent,
             pointerEvents: "none",
           }}
         />
       </div>
       {stations && (
         <div style={{ position: "relative", height: twoRow ? "32px" : "16px" }}>
-          {stations.map((s, i) => (
-            <span
-              key={s.id}
-              {...(onScrub
-                ? {
-                    onPointerDown: (e: PointerEvent<HTMLSpanElement>) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      onScrub(s.t);
-                    },
-                    role: "button" as const,
-                  }
-                : {})}
-              style={{
-                position: "absolute",
-                left: lefts[i],
-                top: rowOf(i) === 1 ? "16px" : "0",
-                transform: s.t >= 1 ? "translateX(-100%)" : "none",
-                fontSize: "10px",
-                letterSpacing: "0.06em",
-                textTransform: "uppercase",
-                whiteSpace: "nowrap",
-                color: PLATE_TOKENS.mutedInk,
-                cursor: onScrub ? "pointer" : "default",
-                userSelect: "none",
-              }}
-            >
-              {s.label}
-            </span>
-          ))}
+          {stations.map((s, i) => {
+            const active = i === nearestIdx;
+            return (
+              <span
+                key={s.id}
+                {...(onScrub
+                  ? {
+                      onPointerDown: (e: PointerEvent<HTMLSpanElement>) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        onScrub(s.t);
+                      },
+                      role: "button" as const,
+                    }
+                  : {})}
+                style={{
+                  position: "absolute",
+                  left: lefts[i],
+                  top: rowOf(i) === 1 ? "16px" : "0",
+                  transform: s.t >= 1 ? "translateX(-100%)" : "none",
+                  fontSize: "10px",
+                  fontWeight: active ? 600 : 400,
+                  letterSpacing: "0.06em",
+                  textTransform: "uppercase",
+                  whiteSpace: "nowrap",
+                  color: active ? tok.ink : tok.mutedInk,
+                  cursor: onScrub ? "pointer" : "default",
+                  userSelect: "none",
+                }}
+              >
+                {s.label}
+              </span>
+            );
+          })}
         </div>
       )}
       {datum && (
@@ -238,7 +277,7 @@ export function PlateConsole({
           style={{
             marginTop: "4px",
             fontSize: "11px",
-            color: PLATE_TOKENS.mutedInk,
+            color: tok.mutedInk,
           }}
         >
           {datum}

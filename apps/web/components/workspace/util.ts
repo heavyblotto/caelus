@@ -8,8 +8,9 @@ import type { BirthShare, FormShare, KundliStyle, Tradition } from "../../lib/sh
 export type DocKind = "birth" | "form";
 export type ProgressMethod = "secondary" | "solar-arc";
 export type FigureView =
-  | "natal" | "sphere" | "map" | "transits" | "tri" | "harmonic" | "antiscia" | "heliocentric"
+  | "natal" | "sphere" | "map" | "ephemeris" | "transits" | "tri" | "harmonic" | "antiscia" | "heliocentric"
   | "houses" | "derive" | "sect" | "retrograde" | "dial";
+export type CompanionView = "sphere" | "sky" | "map" | "ephemeris";
 export type RailId =
   | "reading" | "placements" | "aspects" | "timing" | "compare"
   | "compose" | "sky" | "rectify" | "vedic" | "json"
@@ -33,6 +34,43 @@ export function jdFromIso(iso: string): number {
 
 export function jdToUtc(jd: number): string {
   return isoFromJd(jd).replace("T", " ");
+}
+
+/** Human-readable signed offset between two Julian Days (e.g. "+12d 4h", "-3h", "exact"). */
+export function formatDeltaJd(deltaDays: number): string {
+  const totalMin = Math.round(deltaDays * 1440);
+  if (Math.abs(totalMin) < 1) return "exact";
+  const sign = totalMin > 0 ? "+" : "-";
+  const absMin = Math.abs(totalMin);
+  const days = Math.floor(absMin / 1440);
+  const hours = Math.floor((absMin % 1440) / 60);
+  const mins = absMin % 60;
+  if (days >= 365) {
+    const yrs = (absMin / (365.25 * 1440)).toFixed(1);
+    return `${sign}${yrs}y`;
+  }
+  if (days > 0) return hours > 0 ? `${sign}${days}d ${hours}h` : `${sign}${days}d`;
+  if (hours > 0) return mins > 0 ? `${sign}${hours}h ${mins}m` : `${sign}${hours}h`;
+  return `${sign}${mins}m`;
+}
+
+/** Twilight regime label from topocentric solar altitude in degrees. */
+export function twilightRegime(sunAltDeg: number): string {
+  if (sunAltDeg >= 0) return "daylight";
+  if (sunAltDeg >= -6) return "civil twilight";
+  if (sunAltDeg >= -12) return "nautical twilight";
+  if (sunAltDeg >= -18) return "astronomical twilight";
+  return "night";
+}
+
+/** Motion regime label from daily ecliptic speed in degrees/day. */
+export function speedRegime(speedDegPerDay: number | undefined, retrograde?: boolean): string {
+  if (speedDegPerDay == null || !Number.isFinite(speedDegPerDay)) {
+    return retrograde ? "retrograde" : "direct";
+  }
+  const abs = Math.abs(speedDegPerDay);
+  if (abs < 0.02) return "stationary";
+  return speedDegPerDay < 0 || retrograde ? "retrograde" : "direct";
 }
 
 export const DEFAULT_FORM: Constraint[] = [
