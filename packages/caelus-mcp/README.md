@@ -1,13 +1,14 @@
 # caelus-mcp
 
 MCP server for [Caelus](https://github.com/heavyblotto/caelus) astrology
-computation: forty-one chart tools over stdio. Computation only: positions, houses,
+computation: forty-three chart tools over stdio. Computation only: positions, houses,
 aspects with orbs, event search, electional, returns, progressions, composite,
 dignities, Hermetic lots, the Hellenistic time-lords (profections, firdaria,
 zodiacal releasing), primary directions, the Vedic layer (nakshatras,
 dashas, vargas, yogas), sky-view image-prompt frames (project the visible sky to
 image pixels with positions, magnitudes, Moon phase, twilight, and the Milky
-Way), physical observation verification, chronolocation, and geolocation, and a
+Way), physical observation verification, chronolocation, geolocation,
+chronosense agent middleware and cursor auditing, and a
 `chart_facts` interpretation projection (ranked, citable fact atoms plus an LLM
 brief), leaving interpretation to the model. It needs
 no API keys, ephemeris files, or network calls; the engine data ships inside
@@ -72,6 +73,8 @@ A hosted Streamable HTTP endpoint is also live at
 | `verify_observation` | Verify physical observations (shadows, Sun/Moon position, twilight, lunar bright-limb tilt, visible planets, or shadow sweep) against a claimed timestamp and location with counterfactual diagnostics, or omit `observed` for ground-truth scene geometry and chronosense |
 | `chronolocate` | Find every UTC window at a location within a date range (up to 370 days) where a set of physical observations held simultaneously |
 | `geolocate` | Invert physical observations at a known UTC timestamp to Earth coordinates via analytical celestial navigation or a global antimeridian-wrapping spherical grid |
+| `chronosense_tick` | Compute a physical-horizon chronosense envelope, compact `[CAELUS-CHRONO ...]` header, 10-D `photoperiodVector`, and `phaseStratumKey` for an agent turn |
+| `audit_chronosense_cursor` | Deterministically audit an agent write-back cursor (`clock_id`, `turn`, `night_crossed_ack`, `deadline_eta_min`, `cited_facts`) against the authoritative envelope |
 
 `natal_chart` and `current_sky` also tag each body with its solar phase
 (cazimi/combust/under-the-beams) and each aspect with applying/separating.

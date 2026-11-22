@@ -33,6 +33,7 @@ const PROSE_COUNT = {
   40: "forty",
   41: "forty-one",
   42: "forty-two",
+  43: "forty-three",
 };
 
 function formatGoldenChecks(n) {

@@ -221,6 +221,12 @@ if (failures && !reference) console.error(`\nIf these changes are intended, re-m
     start: "2026-01-01T00:00:00Z", end: "2027-01-01T00:00:00Z",
   });
   assert(noTarget.isError === true, "guard: find_aspect_dates missing target rejected");
+
+  const badChronoLat = await raw("chronosense_tick", { date: "2026-11-22T14:30:00Z", lat: 120, lon: 0 });
+  assert(badChronoLat.isError === true, "guard: chronosense_tick lat 120 rejected");
+
+  const badAuditCtx = await raw("audit_chronosense_cursor", { cursor: { clock_id: "deadbeef", turn: 1 } });
+  assert(badAuditCtx.isError === true, "guard: audit_chronosense_cursor missing envelope and coords rejected");
 }
 
 // --------------------------------------------------------- chart widget (MCP Apps)

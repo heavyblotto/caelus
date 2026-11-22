@@ -51,6 +51,7 @@ const TOOLS = [
   "counterfactual_chart", "similar_skies", "electional_search",
   "cosmic_weather", "date_sky", "chart_stability", "heliacal",
   "verify_observation", "chronolocate", "geolocate",
+  "chronosense_tick", "audit_chronosense_cursor",
 ] as const;
 
 const CORS: Record<string, string> = {
@@ -83,7 +84,10 @@ export function GET(): Response {
       stateless: true,
       tools: TOOLS,
       resources: ["caelus://glossary", "caelus://accuracy", "ui://widget/chart.html"],
-      prompts: ["rectification_session", "natal_reading"],
+      prompts: [
+        "rectification_session", "natal_reading",
+        "chronosense_agent_header", "forensic_observation_loop",
+      ],
       hint: "POST MCP JSON-RPC 2.0 requests (initialize, tools/list, tools/call) to this URL.",
       docs: "https://www.ephemengine.com/docs/mcp",
     },

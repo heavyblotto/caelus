@@ -3,7 +3,7 @@
  * dependency on Node.
  *
  * Design (per 2026 MCP practice): one bounded context (chart computation),
- * a small curated tool surface (41 chart tools, not API wrappers),
+ * a small curated tool surface (43 chart tools, not API wrappers),
  * and token-frugal outputs (positions to 0.01 deg, terse keys, no prose --
  * the model does the interpreting, the server does the math).
  *
@@ -48,12 +48,13 @@ import {
   canonicalChart, canonicalDigest, canonicalTimeMs, quantizeUnit,
   canonicalChartWithRemainders,
   dateSky, calendarDate, validatedSpanFor, chartStability, heliacal, localDay,
-  verifyObservation, chronolocate, geolocate,
+  sceneGeometry, verifyObservation, chronolocate, geolocate,
+  chronosenseEnvelope, auditChronosenseCursor, photoperiodVector, phaseStratumKey,
   type SyntheticSystem, type CanonicalGrid, type RemainderGrid,
   type SkyConstraint, type HeliacalKind,
   type ObservedConstraints, type ObservationTolerances,
   type ObservationVerification, type ChronolocateResult, type GeolocateResult,
-  type SceneGeometry,
+  type SceneGeometry, type ChronosenseEnvelope, type ChronosenseCursor,
 } from "caelus";
 
 /** Ephemeral engine for synthetic registration (does not mutate the default). */
@@ -1351,6 +1352,147 @@ function formatGeolocate(res: GeolocateResult): z.infer<typeof geolocateOut> {
   };
 }
 
+// ------------------------------------------------ chronosense middleware I/O
+const r6Safe = (x: number) => rN(x, 1000000);
+
+const chronosenseTwilightEnum = z.enum([
+  "daylight", "civil", "nautical", "astronomical", "night",
+]);
+const chronosenseSunTrendEnum = z.enum(["rising", "culminating", "setting"]);
+const chronosenseDaySlotSchema = z.union([
+  z.number().int().min(1).max(12),
+  z.enum(["polar_day", "polar_night"]),
+]);
+const chronosenseDeadlineStateEnum = z.enum(["none", "applying", "due", "overdue"]);
+const wavefrontQuadrantEnum = z.enum(["initiate", "execute", "review", "consolidate"]);
+const twilightTransitionEnum = z.enum(["sunrise", "sunset", "civil_dawn", "civil_dusk"]);
+const chronosenseFactValueIn = z.union([z.number(), z.string(), z.boolean(), z.null()]);
+
+export const chronosenseEnvelopeOut = z.object({
+  clockId: z.string(),
+  chartDigest: z.string(),
+  genesisDigest: z.string().nullable(),
+  turn: z.number().int().min(1),
+  jdUt: z.number(),
+  utcIso: z.string(),
+  lat: z.number(),
+  lonEast: z.number(),
+  elevationM: z.number(),
+  sunAltDeg: z.number(),
+  sunTrend: chronosenseSunTrendEnum,
+  twilight: chronosenseTwilightEnum,
+  daySlot: chronosenseDaySlotSchema,
+  isDay: z.boolean(),
+  nightCrossed: z.boolean(),
+  horizonEvent: twilightTransitionEnum.nullable(),
+  horizonEtaMin: z.number().nullable(),
+  deadlineLabel: z.string().nullable(),
+  deadlineEtaMin: z.number().nullable(),
+  deadlineState: chronosenseDeadlineStateEnum,
+  moonLonDeg: z.number(),
+  moonIllumPct: z.number(),
+  moonWaxing: z.boolean(),
+  dtPrevMin: z.number().nullable(),
+  wavefrontQuadrant: wavefrontQuadrantEnum,
+  header: z.string(),
+});
+
+export const chronosenseTickOut = z.object({
+  envelope: chronosenseEnvelopeOut,
+  header: z.string(),
+  photoperiodVector: z.array(z.number()).length(10),
+  phaseStratumKey: z.string(),
+});
+
+export const auditChronosenseCursorOut = z.object({
+  ok: z.boolean(),
+  driftFlags: z.array(z.string()),
+  correctivePrompt: z.string().nullable(),
+});
+
+const chronosenseCursorIn = z.object({
+  clockId: z.string().nullable().optional().describe("8-character hex clock id from [CAELUS-CHRONO clock=...]"),
+  clock_id: z.string().nullable().optional().describe("Snake-case alias for clockId"),
+  turn: z.number().int().nullable().optional().describe("Monotonic turn counter matching the authoritative header"),
+  nightCrossedAck: z.boolean().nullable().optional().describe("Must be true whenever night_crossed=true in the envelope"),
+  night_crossed_ack: z.boolean().nullable().optional().describe("Snake-case alias for nightCrossedAck"),
+  deadlineEtaMin: z.number().nullable().optional().describe("Signed minutes remaining to active deadline, or null when no deadline is active"),
+  deadline_eta_min: z.number().nullable().optional().describe("Snake-case alias for deadlineEtaMin"),
+  citedFacts: z.record(z.string(), chronosenseFactValueIn).nullable().optional().describe("Optional map of cited envelope fact keys to claimed values"),
+  cited_facts: z.record(z.string(), chronosenseFactValueIn).nullable().optional().describe("Snake-case alias for citedFacts"),
+}).describe("Agent write-back cursor (accepts camelCase or snake_case keys)");
+
+function formatChronosenseEnvelope(env: ChronosenseEnvelope): z.infer<typeof chronosenseEnvelopeOut> {
+  return {
+    clockId: env.clockId,
+    chartDigest: env.chartDigest,
+    genesisDigest: env.genesisDigest,
+    turn: env.turn,
+    jdUt: r6Safe(env.jdUt),
+    utcIso: env.utcIso,
+    lat: env.lat,
+    lonEast: env.lonEast,
+    elevationM: env.elevationM,
+    sunAltDeg: r4Safe(env.sunAltDeg),
+    sunTrend: env.sunTrend,
+    twilight: env.twilight,
+    daySlot: env.daySlot,
+    isDay: env.isDay,
+    nightCrossed: env.nightCrossed,
+    horizonEvent: env.horizonEvent,
+    horizonEtaMin: env.horizonEtaMin === null ? null : r4Safe(env.horizonEtaMin),
+    deadlineLabel: env.deadlineLabel,
+    deadlineEtaMin: env.deadlineEtaMin === null ? null : r4Safe(env.deadlineEtaMin),
+    deadlineState: env.deadlineState,
+    moonLonDeg: r4Safe(env.moonLonDeg),
+    moonIllumPct: r4Safe(env.moonIllumPct),
+    moonWaxing: env.moonWaxing,
+    dtPrevMin: env.dtPrevMin === null ? null : r4Safe(env.dtPrevMin),
+    wavefrontQuadrant: env.wavefrontQuadrant,
+    header: env.header,
+  };
+}
+
+function normalizeEnvelopeInput(raw: Record<string, unknown>): ChronosenseEnvelope {
+  const pick = (camel: string, snake?: string) =>
+    raw[camel] !== undefined ? raw[camel] : (snake !== undefined ? raw[snake] : undefined);
+  const clockId = pick("clockId", "clock_id");
+  const turn = pick("turn");
+  const header = pick("header");
+  if (typeof clockId !== "string" || typeof turn !== "number" || !Number.isInteger(turn) || turn < 1 || typeof header !== "string") {
+    throw new Error("audit_chronosense_cursor: invalid envelope object (requires clockId, integer turn >= 1, and header)");
+  }
+  const deadlineState = (pick("deadlineState", "deadline_state") ?? "none") as ChronosenseEnvelope["deadlineState"];
+  return {
+    clockId,
+    chartDigest: String(pick("chartDigest", "chart_digest") ?? clockId),
+    genesisDigest: (pick("genesisDigest", "genesis_digest") as string | null | undefined) ?? null,
+    turn,
+    jdUt: Number(pick("jdUt", "jd_ut") ?? 0),
+    utcIso: String(pick("utcIso", "utc_iso") ?? ""),
+    lat: Number(pick("lat") ?? 0),
+    lonEast: Number(pick("lonEast", "lon_east") ?? pick("lon") ?? 0),
+    elevationM: Number(pick("elevationM", "elevation_m") ?? 0),
+    sunAltDeg: Number(pick("sunAltDeg", "sun_alt_deg") ?? 0),
+    sunTrend: (pick("sunTrend", "sun_trend") ?? "rising") as ChronosenseEnvelope["sunTrend"],
+    twilight: (pick("twilight") ?? "daylight") as ChronosenseEnvelope["twilight"],
+    daySlot: (pick("daySlot", "day_slot") ?? 1) as ChronosenseEnvelope["daySlot"],
+    isDay: Boolean(pick("isDay", "is_day") ?? false),
+    nightCrossed: Boolean(pick("nightCrossed", "night_crossed") ?? false),
+    horizonEvent: (pick("horizonEvent", "horizon_event") as ChronosenseEnvelope["horizonEvent"] | undefined) ?? null,
+    horizonEtaMin: (pick("horizonEtaMin", "horizon_eta_min") as number | null | undefined) ?? null,
+    deadlineLabel: (pick("deadlineLabel", "deadline_label") as string | null | undefined) ?? null,
+    deadlineEtaMin: (pick("deadlineEtaMin", "deadline_eta_min") as number | null | undefined) ?? null,
+    deadlineState,
+    moonLonDeg: Number(pick("moonLonDeg", "moon_lon_deg") ?? 0),
+    moonIllumPct: Number(pick("moonIllumPct", "moon_illum_pct") ?? 0),
+    moonWaxing: Boolean(pick("moonWaxing", "moon_waxing") ?? false),
+    dtPrevMin: (pick("dtPrevMin", "dt_prev_min") as number | null | undefined) ?? null,
+    wavefrontQuadrant: (pick("wavefrontQuadrant", "wavefront_quadrant") ?? "execute") as ChronosenseEnvelope["wavefrontQuadrant"],
+    header,
+  };
+}
+
 export const OUTPUT_SCHEMAS = {
   natal_chart: chartOut,
   current_sky: chartOut,
@@ -1404,6 +1546,8 @@ export const OUTPUT_SCHEMAS = {
   verify_observation: verifyObservationOut,
   chronolocate: chronolocateOut,
   geolocate: geolocateOut,
+  chronosense_tick: chronosenseTickOut,
+  audit_chronosense_cursor: auditChronosenseCursorOut,
 } as const;
 
 // ---------------------------------------------------------------- server
@@ -3149,6 +3293,106 @@ export function buildServer(
     return text(formatGeolocate(res));
   });
 
+  server.registerTool("chronosense_tick", {
+    description:
+      "Compute a deterministic physical-horizon chronosense envelope for an agent turn at a UTC timestamp and Earth location, along with its compact plain-text header (`[CAELUS-CHRONO ...]`, zero astrological vocabulary), 10-D L2-normalized `photoperiodVector`, and unsupervised `phaseStratumKey` (`<horizon>:<season>:lon<0..5>`). Computes an 8-character canonical chart digest (`clockId`), explicit local solar-midnight `nightCrossed` flag, photoperiod-warped `daySlot` (`1..12` or `polar_day`/`polar_night`), separated horizon and deadline countdowns, and follow-the-sun `wavefrontQuadrant`. Pass the returned `envelope` directly to `audit_chronosense_cursor` to verify an agent's write-back cursor.",
+    inputSchema: {
+      date: z.string().optional().describe("UTC ISO date-time for the current turn (convert from local first); omit for now"),
+      lat: latSchema,
+      lon: lonSchema,
+      turn: z.number().int().min(1).default(1).describe("Monotonic agent turn counter (>= 1, default 1)"),
+      prev_date: z.string().optional().describe("Optional previous turn UTC ISO timestamp (computes nightCrossed and dtPrevMin)"),
+      deadline_date: z.string().optional().describe("Optional active task deadline UTC ISO timestamp"),
+      deadline_label: z.string().optional().describe("Optional short label for the active deadline (default 'deadline')"),
+      elevation_m: z.number().min(-500).max(50000).default(0)
+        .describe("Observer elevation above sea level in meters (default 0)"),
+      genesis_digest: z.string().optional().describe("Optional session genesis chart digest"),
+    },
+  }, async ({
+    date, lat, lon, turn, prev_date, deadline_date, deadline_label, elevation_m, genesis_digest,
+  }) => {
+    const jdUt = jdFromIso(date ?? new Date().toISOString());
+    const prevJdUt = prev_date !== undefined ? jdFromIso(prev_date) : null;
+    const deadlineJdUt = deadline_date !== undefined ? jdFromIso(deadline_date) : null;
+    const env = chronosenseEnvelope(engine, jdUt, lat, lon, {
+      turn,
+      prevJdUt,
+      deadlineJdUt,
+      deadlineLabel: deadline_label,
+      elevationM: elevation_m,
+      genesisDigest: genesis_digest ?? null,
+    });
+    const scene = sceneGeometry(engine, jdUt, lat, lon, {
+      elevationM: elevation_m,
+      prevJdUt: prevJdUt ?? undefined,
+      deadlineJdUt: deadlineJdUt ?? undefined,
+    });
+    const vec = photoperiodVector(scene).map(r6Safe);
+    const stratum = phaseStratumKey(scene, lon);
+    return text({
+      envelope: formatChronosenseEnvelope(env),
+      header: env.header,
+      photoperiodVector: vec,
+      phaseStratumKey: stratum,
+    });
+  });
+
+  server.registerTool("audit_chronosense_cursor", {
+    description:
+      "Deterministically audit an agent's pre-tool write-back cursor and cited physical facts against the authoritative chronosense envelope. Accepts either an `envelope` object from `chronosense_tick` or recomputes the envelope directly from `{ date, lat, lon, turn, prev_date, deadline_date, deadline_label }`. Verifies `clockId` digest match, monotonic `turn`, explicit `nightCrossedAck` when local solar midnight elapsed, active `deadlineEtaMin` within `deadline_tolerance_min`, and optional `citedFacts` provenance within `fact_tolerance`. Returns `{ ok, driftFlags, correctivePrompt }`.",
+    inputSchema: {
+      cursor: chronosenseCursorIn,
+      envelope: z.record(z.string(), z.unknown()).optional()
+        .describe("Authoritative envelope object from chronosense_tick (camelCase or snake_case). Omit to recompute from date, lat, and lon."),
+      date: z.string().optional().describe("UTC ISO date-time (required with lat and lon when envelope is omitted)"),
+      lat: latSchema.optional(),
+      lon: lonSchema.optional(),
+      turn: z.number().int().min(1).default(1).describe("Monotonic agent turn counter when recomputing envelope (default 1)"),
+      prev_date: z.string().optional().describe("Optional previous turn UTC ISO timestamp when recomputing envelope"),
+      deadline_date: z.string().optional().describe("Optional active task deadline UTC ISO timestamp when recomputing envelope"),
+      deadline_label: z.string().optional().describe("Optional deadline label when recomputing envelope (default 'deadline')"),
+      elevation_m: z.number().min(-500).max(50000).default(0)
+        .describe("Observer elevation above sea level in meters when recomputing envelope (default 0)"),
+      genesis_digest: z.string().optional().describe("Optional session genesis chart digest when recomputing envelope"),
+      deadline_tolerance_min: z.number().nonnegative().default(5)
+        .describe("Allowed drift in minutes for deadline_eta_min (default 5)"),
+      fact_tolerance: z.number().nonnegative().default(0.5)
+        .describe("Allowed numeric tolerance for cited_facts provenance checks (default 0.5)"),
+    },
+  }, async ({
+    cursor, envelope, date, lat, lon, turn, prev_date, deadline_date,
+    deadline_label, elevation_m, genesis_digest, deadline_tolerance_min, fact_tolerance,
+  }) => {
+    let env: ChronosenseEnvelope;
+    if (envelope !== undefined) {
+      env = normalizeEnvelopeInput(envelope);
+    } else {
+      if (date === undefined || lat === undefined || lon === undefined) {
+        throw new Error("audit_chronosense_cursor requires either envelope or date, lat, and lon");
+      }
+      const jdUt = jdFromIso(date);
+      const prevJdUt = prev_date !== undefined ? jdFromIso(prev_date) : null;
+      const deadlineJdUt = deadline_date !== undefined ? jdFromIso(deadline_date) : null;
+      env = chronosenseEnvelope(engine, jdUt, lat, lon, {
+        turn,
+        prevJdUt,
+        deadlineJdUt,
+        deadlineLabel: deadline_label,
+        elevationM: elevation_m,
+        genesisDigest: genesis_digest ?? null,
+      });
+    }
+    const res = auditChronosenseCursor(env, cursor as ChronosenseCursor, {
+      deadlineToleranceMin: deadline_tolerance_min,
+      factTolerance: fact_tolerance,
+    });
+    return text({
+      ok: res.ok,
+      driftFlags: res.driftFlags,
+      correctivePrompt: res.correctivePrompt,
+    });
+  });
+
   // --------------------------------------------------------- resources
   // Chart wheel widget (MCP Apps / Apps SDK). The CSP allowlists the embed
   // origin only for loading the widget script (resourceDomains) — no
@@ -3265,6 +3509,78 @@ export function buildServer(
             + `3. Every interpretive statement must cite the atom id(s) it rests on, e.g. [placement:sun] or [aspect:mars~saturn:square]. A statement you cannot tie to an atom does not go in the reading.\n`
             + `4. If a fact seems missing (a lot, a fixed star, a transit), call the matching tool (lots, natal_chart, transits) rather than guessing.\n`
             + `State the zodiac and house system used, and keep computation and meaning separate: the tools own the numbers, you own the prose.`,
+        },
+      }],
+    }),
+  );
+
+  server.registerPrompt(
+    "chronosense_agent_header",
+    {
+      title: "Chronosense agent system header",
+      description: "Ready-to-inject system-prompt snippet instructing an agent how to read [CAELUS-CHRONO ...] headers and emit a verified write-back cursor before mutating tools.",
+      argsSchema: {
+        role: z.string().optional().describe("Optional agent role or task domain (e.g. 'ops assistant', 'research agent')"),
+        deadline_label: z.string().optional().describe("Optional active deadline label to track across turns"),
+        require_cited_facts: z.string().optional().describe("Set to 'true' to require cited_facts provenance on every turn"),
+      },
+    },
+    ({ role, deadline_label, require_cited_facts }) => {
+      const citeClause = require_cited_facts === "true"
+        ? "4. Include a `cited_facts` object mapping every physical or temporal claim you quote (such as `sun_alt_deg`, `twilight`, `horizon_eta_min`, `deadline_eta_min`, or `wavefront_quadrant`) to its authoritative header value.\n"
+        : "4. Whenever you quote a physical sky or timing figure (such as `sun_alt_deg`, `twilight`, `horizon_eta_min`, or `deadline_eta_min`), include it in `cited_facts` so the auditor verifies provenance.\n";
+      return {
+        messages: [{
+          role: "user",
+          content: {
+            type: "text",
+            text:
+              `System-prompt snippet for a chronosense-grounded agent` + (role ? ` (${role})` : "") + `:\n\n`
+              + `Every turn begins with an authoritative physical-horizon header computed by Caelus:\n`
+              + `[CAELUS-CHRONO clock=<8-hex> turn=<N> utc=<ISO> sun_alt=<deg>(rising|culminating|setting) sky=<daylight|civil|nautical|astronomical|night> slot=<1..12/12|polar_day|polar_night> night_crossed=<true|false> next_sky=<event>(in_<M>m) deadline=<label>(applying_<M>m|due|overdue_<M>m) dt_prev=<+M>m]\n\n`
+              + `Rules before calling any mutating tool or finalizing a turn:\n`
+              + `1. Read \`clock\`, \`turn\`, \`night_crossed\`, \`next_sky\`, and \`deadline\` only from the latest \`[CAELUS-CHRONO ...]\` header. Never reuse stale headers copied from compacted history.\n`
+              + `2. Keep \`next_sky\` (horizon transition ETA) separate from \`deadline\` (task deadline ETA)` + (deadline_label ? ` for \`${deadline_label}\`` : "") + `.\n`
+              + `3. Emit a JSON write-back cursor and validate it with \`audit_chronosense_cursor\` before running mutating tools:\n`
+              + `   {"clock_id":"<clock>","turn":<N>,"night_crossed_ack":<true if night_crossed=true>,"deadline_eta_min":<signed minutes or null>,"cited_facts":{...}}\n`
+              + citeClause
+              + `5. When \`night_crossed=true\`, set \`night_crossed_ack: true\` and re-verify any prior-day cached tool outputs before acting on them.\n`
+              + `6. If \`audit_chronosense_cursor\` returns \`ok: false\`, follow \`correctivePrompt\` immediately and re-audit before proceeding.`,
+          },
+        }],
+      };
+    },
+  );
+
+  server.registerPrompt(
+    "forensic_observation_loop",
+    {
+      title: "Forensic observation verification loop",
+      description: "Structured 3-step verification workflow (verify_observation -> chronolocate -> geolocate) for auditing claimed photo, video, or sensor metadata.",
+      argsSchema: {
+        claimed_date: z.string().optional().describe("Claimed UTC ISO timestamp of the photo or observation"),
+        claimed_lat: z.string().optional().describe("Claimed latitude, north positive"),
+        claimed_lon: z.string().optional().describe("Claimed longitude, east positive"),
+        observations: z.string().describe("Observed physical cues (shadow bearing/length ratio, twilight, Moon phase/tilt, visible planets, or video shadow sweep)"),
+        search_window: z.string().optional().describe("Optional UTC ISO date range for chronolocation (e.g. '2026-06-01T00:00:00Z to 2026-07-01T00:00:00Z')"),
+      },
+    },
+    ({ claimed_date, claimed_lat, claimed_lon, observations, search_window }) => ({
+      messages: [{
+        role: "user",
+        content: {
+          type: "text",
+          text:
+            `Run a 3-step physical forensics audit using Caelus observation tools. Compute all solar, lunar, and shadow geometry through tools rather than estimating from memory.\n\n`
+            + (claimed_date ? `Claimed UTC timestamp: ${claimed_date}\n` : "Claimed UTC timestamp: unknown\n")
+            + (claimed_lat && claimed_lon ? `Claimed coordinates: lat ${claimed_lat}, lon ${claimed_lon}\n` : "Claimed coordinates: unknown\n")
+            + (search_window ? `Search window: ${search_window}\n` : "")
+            + `Observed physical cues: ${observations}\n\n`
+            + `Procedure:\n`
+            + `1. Verify claim (\`verify_observation\`): when claimed timestamp and coordinates are supplied, call \`verify_observation\` with all measured observables in \`observed\` (plus realistic \`time_tolerance_min\`, \`place_tolerance_deg\`, or terrain \`slope_deg\` when applicable). Report the verdict (\`consistent\`, \`marginal\`, \`inconsistent\`, \`impossible\`), per-constraint residuals, and any counterfactual \`diagnostics\` (\`time_shift\`, \`hemisphere_flip\`, \`date_shift\`).\n`
+            + `2. Chronolocate (\`chronolocate\`): when the claimed timestamp is missing, rejected, or shows a clock or seasonal shift while the location is trusted, call \`chronolocate\` over the candidate UTC range (<= 370 days) to recover every physically feasible UTC window and peak timestamp.\n`
+            + `3. Geolocate (\`geolocate\`): when the claimed location is missing, rejected, or shows a hemisphere flip while the UTC timestamp is trusted, call \`geolocate\` at the known UTC instant to recover the analytical celestial-navigation fix or global grid candidate regions (\`point\`, \`arc\`, or \`band\`).\n`
+            + `Summarize the physical evidence, cite exact residuals and recovered UTC windows or coordinates, and state remaining physical ambiguities clearly.`,
         },
       }],
     }),

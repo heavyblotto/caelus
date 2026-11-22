@@ -252,7 +252,57 @@ the hosted Streamable HTTP endpoint (`/api/mcp`):
   `subsolar` and `sublunar` coordinates, and ranked candidate regions.
 
 All three tools live inside `caelus-mcp/core` with zero Node dependencies so
-they run identically in Node, browsers, and Cloudflare Workers.
+they run identically in Node, browsers, and Cloudflare Workers. For structured
+agent workflows, `caelus-mcp` also provides the `forensic_observation_loop`
+prompt, which sequences `verify_observation`, `chronolocate`, and `geolocate`
+into a single 3-step audit loop.
+
+## Zero-React embeddable SDK (`caelus-widgets/field-verifier`)
+
+Applications that want to run client-side JPEG EXIF extraction, synchronous
+verification, analemma heatmaps, or deterministic SVG figures without React can
+import `caelus-widgets/field-verifier` directly. The module contains zero React
+or Node dependencies and runs identically in browsers and Node.js:
+
+- **`parseJpegExif(input)`**: parses a JPEG `ArrayBuffer` or `Uint8Array` in
+  pure TypeScript (APP1 EXIF header) and extracts `utc`, `utcVerified`, `lat`,
+  `lonEast`, `make`, `model`, and `orientation` without uploading image bytes.
+- **`runFieldVerifier(engine, query)`**: runs `verify`, `chronolocate`, or
+  `geolocate` synchronously from a unified `FieldVerifierQuery` (validate inputs
+  first with `fieldVerifierQueryOk(query)` or start from `FIELD_VERIFIER_PRESETS`).
+- **`computeAnalemmaHeatmap(engine, place, observed, year)`**: builds a
+  12-month by 24-hour UTC solar feasibility grid using 12 mid-month solar
+  evaluations rotated by Greenwich apparent sidereal time.
+- **`compassDialGeometry(scene, observed)`**: returns deterministic 0.1-rounded
+  SVG coordinates for the compass shadow dial, observed tolerance wedge, and
+  shadow-ratio bar.
+- **`fixMapGeometry(result, width, height)`**: builds an equirectangular global
+  fix plot from a `GeolocateResult` with true spherical equal-distance contours
+  and antimeridian splitting across `±180°` longitude.
+
+```ts
+import { Engine } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+import {
+  FIELD_VERIFIER_PRESETS,
+  compassDialGeometry,
+  computeAnalemmaHeatmap,
+  fixMapGeometry,
+  parseJpegExif,
+  runFieldVerifier,
+} from "caelus-widgets/field-verifier";
+
+const engine = new Engine(embeddedData);
+const exif = parseJpegExif(jpegBytes); // null if non-JPEG or no EXIF
+
+const preset = FIELD_VERIFIER_PRESETS[0];
+const verifyResult = runFieldVerifier(engine, preset.query);
+const dialSvg = compassDialGeometry(verifyResult.verify!.scene, preset.query.observed);
+const heatmap = computeAnalemmaHeatmap(engine, preset.query.place, preset.query.observed, 2026);
+
+const geoResult = runFieldVerifier(engine, { ...preset.query, mode: "geolocate" });
+const mapSvg = fixMapGeometry(geoResult.geolocate!, 640, 310);
+```
 
 ## Validation and limits
 

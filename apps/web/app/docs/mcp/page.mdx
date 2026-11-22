@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "MCP Setup",
-  description: "Connect Caelus's forty-one MCP chart tools to Claude Desktop, Claude Code, Cursor, VS Code, or any MCP client via Streamable HTTP or local stdio.",
+  description: "Connect Caelus's forty-three MCP chart tools to Claude Desktop, Claude Code, Cursor, VS Code, or any MCP client via Streamable HTTP or local stdio.",
   path: "/docs/mcp",
 });
 
@@ -14,7 +14,7 @@ export const metadata = pageMetadata({
 Because AI assistants call deterministic ephemeris tools on every turn rather
 than estimating positions from memory, charts and timing windows remain exact.
 
-You can connect to the same **forty-one** tools via either transport:
+You can connect to the same **forty-three** tools via either transport:
 
 - **Hosted (Streamable HTTP)**: point your MCP client at
   `https://www.ephemengine.com/api/mcp` with no local installation.
@@ -197,7 +197,7 @@ For any standard stdio MCP client:
 
 ## Available tools
 
-Once connected, your MCP client should display all **forty-one tools** in its
+Once connected, your MCP client should display all **forty-three tools** in its
 tool panel:
 
 **Charts and readings**
@@ -250,11 +250,13 @@ tool panel:
 - `chart_signature`: elemental, modal, quadrant, and hemisphere counts alongside dominant indicators and chart ruler.
 - `chart_facts`: projects validated chart placements into ranked, citable fact atoms and a formatted prompt brief, accepting `when` provenance anchors, an inline `anchors` registry, `realm`, `target_date`, `include_vedic`, and `constraints` (see [Interpretation](/docs/interpretation) and [Provenance](/docs/provenance)).
 
-**Physical observation, forensics, and geolocation**
+**Physical observation, forensics, and chronosense**
 
 - `verify_observation`: verifies physical observations (shadows, solar or lunar azimuth and altitude, twilight, lunar phase and bright-limb angle, visible planets, or video shadow sweep) against a claimed UTC timestamp and location with counterfactual forensics for timezone shifts, hemisphere flips, and seasonal date shifts; omit `observed` to query full ground-truth scene geometry, diurnal timing, and a compact chronosense header (see [Physical Observation](/docs/observation)).
 - `chronolocate`: scans up to 370 days at a fixed location and returns every UTC window where a set of physical observations held simultaneously, with analytic day pruning and sub-second boundary refinement.
 - `geolocate`: inverts physical observations at a known UTC timestamp to Earth coordinates via closed-form spherical celestial navigation (`analytical`) or a global antimeridian-wrapping spherical grid (`grid`), returning subsolar/sublunar points and ranked `point`, `arc`, or `band` regions.
+- `chronosense_tick`: computes a deterministic physical-horizon turn envelope, 8-character canonical `clockId`, compact `[CAELUS-CHRONO ...]` header, 10-D `photoperiodVector`, and `phaseStratumKey` for long-running agents (see [Chronosense Middleware](/docs/chronosense)).
+- `audit_chronosense_cursor`: audits an agent write-back cursor (`clock_id`, `turn`, `night_crossed_ack`, `deadline_eta_min`, and `cited_facts`) against a supplied or recomputed envelope and returns deterministic `driftFlags` and a `correctivePrompt`.
 
 **Synthetic worlds**
 
@@ -266,9 +268,10 @@ tool panel:
 `combust`, `under_beams`) and aspect phase (`applying`, `separating`,
 `exact`) with normalized strength.
 
-Alongside these forty-one tools, the server exposes three **resources**
+Alongside these forty-three tools, the server exposes three **resources**
 (`caelus://glossary`, `caelus://accuracy`, and `ui://widget/chart.html`) and
-two **prompts** (`rectification_session` and `natal_reading`).
+four **prompts** (`rectification_session`, `natal_reading`,
+`chronosense_agent_header`, and `forensic_observation_loop`).
 
 Tool responses return compact structured JSON (abbreviated below):
 

@@ -184,6 +184,12 @@ by default for fictional skies.
   ranked fact atoms in, prose out, every claim citing the atom ids it rests
   on. The interpretation seam it needed (`chart_facts` + the brief contract)
   shipped in 0.18.0; the prompt closes the loop.
+- `chronosense_agent_header` (shipped): ready-to-inject system-prompt snippet
+  instructing an agent how to read `[CAELUS-CHRONO ...]` headers and emit a
+  verified write-back cursor before mutating tools.
+- `forensic_observation_loop` (shipped): structured 3-step verification prompt
+  sequencing `verify_observation`, `chronolocate`, and `geolocate` for physical
+  observation forensics.
 
 ## Transports & deployment
 - **stdio** (shipped): `npx caelus-mcp` for Claude Desktop / local agents.
@@ -474,3 +480,33 @@ Returns `{utc, jd_ut, method, subsolar, sublunar, candidates}` where each
 candidate reports `lat`, `lon`, `fit_score`, `max_normalized_residual`,
 `radius_km`, `lat_range`, `lon_range`, and `region_kind` (`point`, `arc`, or
 `band`). Refuses empty `observed` or invalid bounds.
+
+## Chronosense middleware and cursor auditing (FACT-002, unreleased)
+`chronosense_tick` and `audit_chronosense_cursor` expose the engine's
+chronosense middleware (`packages/caelus/src/chronosense.ts`, golden-pinned to
+`python/astroengine/chronosense.py`). Both tools live in `caelus-mcp/core` with
+no Node dependency, are pinned against the in-process engine in `verify_tools`,
+and have frozen `golden-mcp` payloads. Forty-three tools total.
+
+### chronosense_tick(date?, lat, lon, turn?, prev_date?, deadline_date?, deadline_label?, elevation_m?, genesis_digest?)
+Computes a deterministic physical-horizon chronosense envelope for an agent turn
+at `(date, lat, lon)` (`date` defaults to now, `turn` defaults to `1`). Returns
+`{envelope, header, photoperiodVector, phaseStratumKey}` where `envelope` holds
+the 8-character canonical chart digest (`clockId`), full `chartDigest`, explicit
+local solar-midnight `nightCrossed`, photoperiod-warped `daySlot` (`1..12`,
+`polar_day`, or `polar_night`), separated horizon (`horizonEvent`,
+`horizonEtaMin`) and deadline (`deadlineLabel`, `deadlineEtaMin`,
+`deadlineState`) countdowns, lunar phase metadata, follow-the-sun
+`wavefrontQuadrant`, and compact plain-text `header` (`[CAELUS-CHRONO ...]`,
+zero astrological vocabulary). `photoperiodVector` is the 10-D L2-normalized
+physical phase descriptor and `phaseStratumKey` is `<horizon>:<season>:lon<0..5>`.
+
+### audit_chronosense_cursor(cursor, envelope?, date?, lat?, lon?, turn?, prev_date?, deadline_date?, deadline_label?, elevation_m?, genesis_digest?, deadline_tolerance_min?, fact_tolerance?)
+Audits an agent write-back `cursor` (camelCase or snake_case keys: `clock_id`,
+`turn`, `night_crossed_ack`, `deadline_eta_min`, `cited_facts`) against either a
+supplied `envelope` object from `chronosense_tick` or a freshly recomputed
+envelope from `(date, lat, lon, ...)`. Verifies digest match, turn monotonicity,
+explicit midnight crossing acknowledgment, deadline drift within
+`deadline_tolerance_min` (default `5`), and optional `cited_facts` provenance
+within `fact_tolerance` (default `0.5`). Returns `{ok, driftFlags,
+correctivePrompt}`. Refuses calls that omit both `envelope` and `(date, lat, lon)`.

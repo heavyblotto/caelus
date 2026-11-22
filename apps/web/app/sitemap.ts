@@ -108,6 +108,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/docs/uncertain-time",
     "/docs/heliacal",
     "/docs/observation",
+    "/docs/chronosense",
     "/docs/minted-bodies",
     "/docs/deep-time",
     "/docs/edge-cases",

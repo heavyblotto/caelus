@@ -9966,5 +9966,146 @@
         }
       ]
     }
+  },
+  "chronosense-tick-nyc": {
+    "tool": "chronosense_tick",
+    "args": {
+      "date": "2026-11-22T14:30:00Z",
+      "lat": 40.7128,
+      "lon": -74.006,
+      "turn": 14,
+      "prev_date": "2026-11-21T23:00:00Z",
+      "deadline_date": "2026-11-22T15:15:00Z",
+      "deadline_label": "ship_pr"
+    },
+    "payload": {
+      "envelope": {
+        "clockId": "66426f6e",
+        "chartDigest": "66426f6eaf8b1c2f6402f34be0f744dddd08d3d8a0f2dc726f8114f1dbc2c519",
+        "genesisDigest": null,
+        "turn": 14,
+        "jdUt": 2461367.104167,
+        "utcIso": "2026-11-22T14:30Z",
+        "lat": 40.7128,
+        "lonEast": -74.006,
+        "elevationM": 0,
+        "sunAltDeg": 21.813,
+        "sunTrend": "rising",
+        "twilight": "daylight",
+        "daySlot": 4,
+        "isDay": true,
+        "nightCrossed": true,
+        "horizonEvent": "sunset",
+        "horizonEtaMin": 421.4518,
+        "deadlineLabel": "ship_pr",
+        "deadlineEtaMin": 45,
+        "deadlineState": "applying",
+        "moonLonDeg": 32.5917,
+        "moonIllumPct": 94.149,
+        "moonWaxing": true,
+        "dtPrevMin": 930,
+        "wavefrontQuadrant": "initiate",
+        "header": "[CAELUS-CHRONO clock=66426f6e turn=14 utc=2026-11-22T14:30Z sun_alt=+21.8deg(rising) sky=daylight slot=4/12 night_crossed=true next_sky=sunset(in_421m) deadline=ship_pr(applying_45m) dt_prev=+930m]"
+      },
+      "header": "[CAELUS-CHRONO clock=66426f6e turn=14 utc=2026-11-22T14:30Z sun_alt=+21.8deg(rising) sky=daylight slot=4/12 night_crossed=true next_sky=sunset(in_421m) deadline=ship_pr(applying_45m) dt_prev=+930m]",
+      "photoperiodVector": [
+        0.514457,
+        0.595282,
+        0.209912,
+        0.368804,
+        0.442565,
+        0,
+        -0.052071,
+        0.02776,
+        -0.01949,
+        -0.034172
+      ],
+      "phaseStratumKey": "day:dec_sol:lon1"
+    }
+  },
+  "chronosense-tick-svalbard-polar": {
+    "tool": "chronosense_tick",
+    "args": {
+      "date": "2026-12-21T12:00:00Z",
+      "lat": 78.2232,
+      "lon": 15.6267,
+      "turn": 2
+    },
+    "payload": {
+      "envelope": {
+        "clockId": "21f7f4de",
+        "chartDigest": "21f7f4de7ee087c4b302041fc0780a8f4a93832dd36d8c0f692102b879f127fe",
+        "genesisDigest": null,
+        "turn": 2,
+        "jdUt": 2461396,
+        "utcIso": "2026-12-21T12:00Z",
+        "lat": 78.2232,
+        "lonEast": 15.6267,
+        "elevationM": 0,
+        "sunAltDeg": -12.0907,
+        "sunTrend": "setting",
+        "twilight": "astronomical",
+        "daySlot": "polar_night",
+        "isDay": false,
+        "nightCrossed": false,
+        "horizonEvent": null,
+        "horizonEtaMin": null,
+        "deadlineLabel": null,
+        "deadlineEtaMin": null,
+        "deadlineState": "none",
+        "moonLonDeg": 53.5597,
+        "moonIllumPct": 90.3002,
+        "moonWaxing": true,
+        "dtPrevMin": null,
+        "wavefrontQuadrant": "consolidate",
+        "header": "[CAELUS-CHRONO clock=21f7f4de turn=2 utc=2026-12-21T12:00Z sun_alt=-12.1deg(setting) sky=astronomical slot=polar_night night_crossed=false next_sky=polar]"
+      },
+      "header": "[CAELUS-CHRONO clock=21f7f4de turn=2 utc=2026-12-21T12:00Z sun_alt=-12.1deg(setting) sky=astronomical slot=polar_night night_crossed=false next_sky=polar]",
+      "photoperiodVector": [
+        -0.220103,
+        0.761761,
+        -0.170546,
+        -0.371682,
+        -0.446019,
+        0,
+        -0.047881,
+        0.035271,
+        -0.000257,
+        -0.039645
+      ],
+      "phaseStratumKey": "night:dec_sol:lon3"
+    }
+  },
+  "audit-chronosense-cursor-drift": {
+    "tool": "audit_chronosense_cursor",
+    "args": {
+      "date": "2026-11-22T14:30:00Z",
+      "lat": 40.7128,
+      "lon": -74.006,
+      "turn": 14,
+      "prev_date": "2026-11-21T23:00:00Z",
+      "deadline_date": "2026-11-22T15:15:00Z",
+      "deadline_label": "ship_pr",
+      "cursor": {
+        "clock_id": "00000000",
+        "turn": 13,
+        "night_crossed_ack": false,
+        "deadline_eta_min": 10,
+        "cited_facts": {
+          "sun_alt_deg": -40
+        }
+      }
+    },
+    "payload": {
+      "ok": false,
+      "driftFlags": [
+        "clock_id_mismatch",
+        "turn_mismatch",
+        "night_crossed_unacked",
+        "deadline_drift",
+        "fact_mismatch:sun_alt_deg"
+      ],
+      "correctivePrompt": "Chronosense audit rejected cursor (clock_id_mismatch, turn_mismatch, night_crossed_unacked, deadline_drift, fact_mismatch:sun_alt_deg). Sync cursor to clock_id=66426f6e turn=14. Local solar midnight was crossed since the previous turn; set night_crossed_ack=true and re-verify prior-day cached outputs. Update deadline_eta_min to 45.0 (applying). Re-read cited_facts from the authoritative header: [CAELUS-CHRONO clock=66426f6e turn=14 utc=2026-11-22T14:30Z sun_alt=+21.8deg(rising) sky=daylight slot=4/12 night_crossed=true next_sky=sunset(in_421m) deadline=ship_pr(applying_45m) dt_prev=+930m]"
+    }
   }
 }

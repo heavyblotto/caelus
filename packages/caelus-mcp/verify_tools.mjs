@@ -30,6 +30,7 @@ import {
   dignityScore, voidOfCourse,
   synastryAspects, dateSky, chartStability, heliacal, localDay, calendarDate,
   sceneGeometry, verifyObservation, chronolocate, geolocate,
+  chronosenseEnvelope, auditChronosenseCursor, photoperiodVector, phaseStratumKey,
 } from "caelus";
 import { loadNodeData } from "caelus/node";
 
@@ -1276,6 +1277,183 @@ const assertExactHits = (hits, body, targetLonAt, angle, label, tolDeg = 0.02) =
   assert(await bad({ date: iso, observed: {} }), "geolocate: empty observed rejected");
   assert(await bad({ date: iso, lat_min: 30, lat_max: 10, observed: { twilight: "day" } }),
     "geolocate: lat_min >= lat_max rejected");
+}
+
+// ------------------------------------------------------------ chronosense_tick
+{
+  const iso = "2026-11-22T14:30:00Z";
+  const prevIso = "2026-11-21T23:00:00Z";
+  const deadlineIso = "2026-11-22T15:15:00Z";
+  const tick = await call("chronosense_tick", {
+    date: iso,
+    lat: 40.7128,
+    lon: -74.006,
+    turn: 14,
+    prev_date: prevIso,
+    deadline_date: deadlineIso,
+    deadline_label: "ship_pr",
+  });
+  const jd = jdFromIso(iso);
+  const prevJd = jdFromIso(prevIso);
+  const deadlineJd = jdFromIso(deadlineIso);
+  const directEnv = chronosenseEnvelope(eng, jd, 40.7128, -74.006, {
+    turn: 14,
+    prevJdUt: prevJd,
+    deadlineJdUt: deadlineJd,
+    deadlineLabel: "ship_pr",
+  });
+  const directScene = sceneGeometry(eng, jd, 40.7128, -74.006, {
+    prevJdUt: prevJd,
+    deadlineJdUt: deadlineJd,
+  });
+  const directVec = photoperiodVector(directScene);
+  const directStratum = phaseStratumKey(directScene, -74.006);
+
+  assert(tick.envelope.clockId === directEnv.clockId && tick.envelope.chartDigest === directEnv.chartDigest,
+    "chronosense_tick NYC: clockId and chartDigest match engine");
+  assert(tick.header === directEnv.header && tick.envelope.header === directEnv.header,
+    "chronosense_tick NYC: header matches engine");
+  assert(tick.envelope.turn === 14 && tick.envelope.nightCrossed === true,
+    "chronosense_tick NYC: turn=14 and nightCrossed=true across local solar midnight");
+  assert(tick.envelope.deadlineLabel === "ship_pr" && tick.envelope.deadlineState === "applying"
+    && Math.abs(tick.envelope.deadlineEtaMin - 45) < 0.01,
+    "chronosense_tick NYC: deadline metadata matches engine");
+  assert(tick.envelope.wavefrontQuadrant === directEnv.wavefrontQuadrant
+    && tick.envelope.twilight === directEnv.twilight
+    && tick.envelope.daySlot === directEnv.daySlot,
+    "chronosense_tick NYC: wavefrontQuadrant, twilight, and daySlot match engine");
+  assert(Math.abs(tick.envelope.sunAltDeg - directEnv.sunAltDeg) < 1e-3
+    && Math.abs(tick.envelope.moonIllumPct - directEnv.moonIllumPct) < 1e-3,
+    "chronosense_tick NYC: sunAltDeg and moonIllumPct match engine");
+  assert(tick.photoperiodVector.length === 10
+    && tick.photoperiodVector.every((v, i) => Math.abs(v - directVec[i]) < 1e-5),
+    "chronosense_tick NYC: 10-D photoperiodVector matches engine");
+  assert(tick.phaseStratumKey === directStratum,
+    `chronosense_tick NYC: phaseStratumKey matches engine (${tick.phaseStratumKey} vs ${directStratum})`);
+
+  // Polar night regime (Svalbard in December)
+  const polar = await call("chronosense_tick", {
+    date: "2026-12-21T12:00:00Z", lat: 78.2232, lon: 15.6267, turn: 2,
+  });
+  assert(polar.envelope.daySlot === "polar_night" && polar.envelope.horizonEvent === null
+    && polar.header.includes("next_sky=polar"),
+    "chronosense_tick Svalbard polar night: safe polar fallback");
+}
+
+// --------------------------------------------------- audit_chronosense_cursor
+{
+  const iso = "2026-11-22T14:30:00Z";
+  const prevIso = "2026-11-21T23:00:00Z";
+  const deadlineIso = "2026-11-22T15:15:00Z";
+  const tick = await call("chronosense_tick", {
+    date: iso,
+    lat: 40.7128,
+    lon: -74.006,
+    turn: 14,
+    prev_date: prevIso,
+    deadline_date: deadlineIso,
+    deadline_label: "ship_pr",
+  });
+
+  // 1. Clean cursor audited against passed envelope object
+  const validCursor = {
+    clock_id: tick.envelope.clockId,
+    turn: 14,
+    night_crossed_ack: true,
+    deadline_eta_min: 45,
+    cited_facts: {
+      sun_alt_deg: tick.envelope.sunAltDeg,
+      twilight: tick.envelope.twilight,
+    },
+  };
+  const passRes = await call("audit_chronosense_cursor", {
+    envelope: tick.envelope,
+    cursor: validCursor,
+  });
+  assert(passRes.ok === true && passRes.driftFlags.length === 0 && passRes.correctivePrompt === null,
+    "audit_chronosense_cursor: valid cursor against envelope passes");
+
+  // 2. Recompute mode (no envelope passed): clean cursor passes
+  const passRecompute = await call("audit_chronosense_cursor", {
+    date: iso,
+    lat: 40.7128,
+    lon: -74.006,
+    turn: 14,
+    prev_date: prevIso,
+    deadline_date: deadlineIso,
+    deadline_label: "ship_pr",
+    cursor: validCursor,
+  });
+  assert(passRecompute.ok === true && passRecompute.driftFlags.length === 0,
+    "audit_chronosense_cursor: valid cursor in recompute mode passes");
+
+  // 3. Multi-drift rejection matches engine auditChronosenseCursor exactly
+  const badCursor = {
+    clock_id: "00000000",
+    turn: 13,
+    night_crossed_ack: false,
+    deadline_eta_min: 10,
+    cited_facts: { sun_alt_deg: -40, hallucinated_key: 1 },
+  };
+  const failRes = await call("audit_chronosense_cursor", {
+    date: iso,
+    lat: 40.7128,
+    lon: -74.006,
+    turn: 14,
+    prev_date: prevIso,
+    deadline_date: deadlineIso,
+    deadline_label: "ship_pr",
+    cursor: badCursor,
+  });
+  const directEnv = chronosenseEnvelope(eng, jdFromIso(iso), 40.7128, -74.006, {
+    turn: 14,
+    prevJdUt: jdFromIso(prevIso),
+    deadlineJdUt: jdFromIso(deadlineIso),
+    deadlineLabel: "ship_pr",
+  });
+  const directFail = auditChronosenseCursor(directEnv, badCursor);
+  assert(failRes.ok === false && JSON.stringify(failRes.driftFlags) === JSON.stringify(directFail.driftFlags),
+    `audit_chronosense_cursor: driftFlags match engine (${JSON.stringify(failRes.driftFlags)})`);
+  assert(failRes.correctivePrompt === directFail.correctivePrompt && typeof failRes.correctivePrompt === "string",
+    "audit_chronosense_cursor: correctivePrompt matches engine");
+
+  // 4. Refusal when neither envelope nor date/lat/lon is given
+  const missingCtx = await client.callTool({
+    name: "audit_chronosense_cursor",
+    arguments: { cursor: validCursor },
+  });
+  assert(missingCtx.isError === true, "audit_chronosense_cursor: missing envelope and date/lat/lon rejected");
+}
+
+// ------------------------------------------------------------------- prompts
+{
+  const list = await client.listPrompts();
+  const names = new Set(list.prompts.map((p) => p.name));
+  for (const name of ["rectification_session", "natal_reading", "chronosense_agent_header", "forensic_observation_loop"]) {
+    assert(names.has(name), `prompts: ${name} listed`);
+  }
+  const chronoP = await client.getPrompt({
+    name: "chronosense_agent_header",
+    arguments: { role: "release engineer", deadline_label: "deploy", require_cited_facts: "true" },
+  });
+  const chronoText = chronoP.messages[0].content.text;
+  assert(chronoText.includes("[CAELUS-CHRONO") && chronoText.includes("audit_chronosense_cursor")
+    && chronoText.includes("deploy") && chronoText.includes("cited_facts"),
+    "prompts: chronosense_agent_header renders cursor & header instructions");
+
+  const forenP = await client.getPrompt({
+    name: "forensic_observation_loop",
+    arguments: {
+      claimed_date: "2026-07-04T19:30:00Z",
+      claimed_lat: "40.7128",
+      claimed_lon: "-74.006",
+      observations: "shadow bearing 71.8 deg, ratio 0.73",
+    },
+  });
+  const forenText = forenP.messages[0].content.text;
+  assert(forenText.includes("verify_observation") && forenText.includes("chronolocate")
+    && forenText.includes("geolocate"),
+    "prompts: forensic_observation_loop includes 3-step verification workflow");
 }
 
 await client.close();

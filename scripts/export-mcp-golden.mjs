@@ -238,6 +238,28 @@ export const GOLDEN_CASES = [
         tolerances: { sun_altitude_deg: 1.5, moon_altitude_deg: 1.5 },
       },
     } },
+
+  // --- chronosense read-write middleware and cursor auditor (FACT-002) ---
+  { id: "chronosense-tick-nyc", tool: "chronosense_tick",
+    args: {
+      date: "2026-11-22T14:30:00Z", lat: 40.7128, lon: -74.006,
+      turn: 14, prev_date: "2026-11-21T23:00:00Z",
+      deadline_date: "2026-11-22T15:15:00Z", deadline_label: "ship_pr",
+    } },
+  { id: "chronosense-tick-svalbard-polar", tool: "chronosense_tick",
+    args: {
+      date: "2026-12-21T12:00:00Z", lat: 78.2232, lon: 15.6267, turn: 2,
+    } },
+  { id: "audit-chronosense-cursor-drift", tool: "audit_chronosense_cursor",
+    args: {
+      date: "2026-11-22T14:30:00Z", lat: 40.7128, lon: -74.006,
+      turn: 14, prev_date: "2026-11-21T23:00:00Z",
+      deadline_date: "2026-11-22T15:15:00Z", deadline_label: "ship_pr",
+      cursor: {
+        clock_id: "00000000", turn: 13, night_crossed_ack: false,
+        deadline_eta_min: 10, cited_facts: { sun_alt_deg: -40 },
+      },
+    } },
 ];
 
 async function run() {

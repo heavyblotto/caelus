@@ -1,0 +1,370 @@
+import { pageMetadata } from "../../../lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Chronosense Middleware",
+  description: "Add deterministic physical-horizon headers, pre-tool write-back cursor auditing, 10-D photoperiod vectors, and phase-stratified memory compaction to LLM agents.",
+  path: "/docs/chronosense",
+});
+
+<div className="eyebrow" style={{ marginBottom: "0.6rem" }}>Guides</div>
+
+# Chronosense middleware and citation auditor
+
+Long-running AI agents lose track of elapsed time across context compaction,
+timezone boundaries, and overnight pauses. Chronosense solves this problem with
+four pure, zero-dependency functions built on Caelus ephemeris physics:
+
+1. `chronosenseEnvelope`: computes a deterministic physical-horizon envelope, an
+   8-character canonical chart digest (`clockId`), an explicit local
+   solar-midnight `nightCrossed` flag, a photoperiod-warped `daySlot`, separated
+   horizon and deadline countdowns, a follow-the-sun `wavefrontQuadrant`, and a
+   compact plain-text header containing zero astrological vocabulary.
+2. `auditChronosenseCursor`: verifies an agent's pre-tool write-back cursor and
+   optional `citedFacts` map against the authoritative envelope, returning
+   deterministic drift flags and a corrective prompt when any field disagrees.
+3. `photoperiodVector`, `phaseStratumKey`, and `phaseCosineSimilarity`: encode a
+   `SceneGeometry` snapshot as a 10-D L2-normalized physical phase vector and an
+   unsupervised `<horizon>:<season>:lon<0..5>` stratum key for circadian-aware
+   episodic memory retrieval.
+4. `stratifiedSelect`: compacts episodic memory round-robin across distinct
+   physical strata up to a fixed `budget` so dominant daytime streams do not
+   evict nocturnal, seasonal, or cross-longitude records.
+
+All four primitives run without network calls or Node APIs in browsers, edge
+workers, Node.js, Python (`astroengine.chronosense`), and `caelus-mcp`.
+
+## Computing a turn envelope
+
+Call `chronosenseEnvelope(engine, jdUt, lat, lonEast, opts)` at the start of
+each agent turn. Passing `prevJdUt` detects whether local solar midnight elapsed
+since the previous turn (`nightCrossed`) and computes `dtPrevMin`. Passing
+`deadlineJdUt` and `deadlineLabel` formats the task countdown separately from
+the next physical horizon transition (`next_sky`) so adjacent minute counters do
+not collide in prompt attention.
+
+```ts run
+import { Engine, julianDay, chronosenseEnvelope } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);
+const nowJd = julianDay(2026, 11, 22, 14, 30, 0);
+const prevJd = julianDay(2026, 11, 21, 23, 0, 0);
+const deadlineJd = julianDay(2026, 11, 22, 15, 15, 0);
+
+const env = chronosenseEnvelope(engine, nowJd, 40.7128, -74.006, {
+  turn: 14,
+  prevJdUt: prevJd,
+  deadlineJdUt: deadlineJd,
+  deadlineLabel: "ship_pr",
+});
+
+({
+  clockId: env.clockId,
+  twilight: env.twilight,
+  daySlot: env.daySlot,
+  nightCrossed: env.nightCrossed,
+  wavefrontQuadrant: env.wavefrontQuadrant,
+  horizonEvent: env.horizonEvent,
+  deadlineState: env.deadlineState,
+  header: env.header,
+});
+```
+
+Key envelope fields include:
+
+- **`clockId` and `chartDigest`**: the 8-character prefix and full SHA-256
+  digest from `canonicalDigest(canonicalChart(engine.chartAt(jdUt, lat, lonEast)))`.
+  Binding each turn to a content hash detects stale headers copied across
+  compaction boundaries.
+- **`twilight` and `daySlot`**: five physical sky classes (`daylight`, `civil`,
+  `nautical`, `astronomical`, `night`) and a photoperiod-warped slot in `1..12`
+  (or `"polar_day"` and `"polar_night"` when the Sun does not cross the horizon).
+- **`nightCrossed`**: `true` when local solar midnight elapsed between `prevJdUt`
+  and `jdUt`, printed explicitly as `night_crossed=true` or `night_crossed=false`
+  in `header`.
+- **`horizonEvent` and `horizonEtaMin`**: next physical horizon or civil
+  twilight event (`sunrise`, `sunset`, `civil_dawn`, `civil_dusk`, or `null` in
+  polar regimes) and exact minutes remaining from `sceneGeometry.diurnal`.
+- **`deadlineState` and `deadlineEtaMin`**: `"none"`, `"applying"` (`> 1` min
+  remaining), `"due"` (within `1` min), or `"overdue"` (`< -1` min).
+- **`wavefrontQuadrant`**: offline follow-the-sun routing tag (`initiate`,
+  `execute`, `review`, `consolidate`) derived solely from local solar elevation
+  and diurnal progression.
+
+## Auditing write-back cursors before mutating tools
+
+Before dispatching a side-effecting tool call or finalizing a response, require
+the agent to echo a JSON write-back cursor and pass it to
+`auditChronosenseCursor(envelope, cursor, opts)`. The auditor accepts either
+camelCase (`clockId`, `nightCrossedAck`, `deadlineEtaMin`, `citedFacts`) or
+snake_case (`clock_id`, `night_crossed_ack`, `deadline_eta_min`, `cited_facts`)
+cursor keys.
+
+```ts run
+import { auditChronosenseCursor } from "caelus";
+
+// A valid cursor matching the current turn envelope passes with zero flags.
+const cleanAudit = auditChronosenseCursor(env, {
+  clockId: env.clockId,
+  turn: 14,
+  nightCrossedAck: true,
+  deadlineEtaMin: 45,
+  citedFacts: {
+    sun_alt_deg: env.sunAltDeg,
+    twilight: env.twilight,
+  },
+});
+
+// A stale compacted cursor with unacknowledged midnight crossing and hallucinated
+// solar altitude is rejected with deterministic flags and a corrective prompt.
+const staleAudit = auditChronosenseCursor(env, {
+  clock_id: "00000000",
+  turn: 13,
+  night_crossed_ack: false,
+  deadline_eta_min: 10,
+  cited_facts: {
+    sun_alt_deg: -42.0,
+    invented_metric: 99,
+  },
+});
+
+({
+  cleanOk: cleanAudit.ok,
+  staleOk: staleAudit.ok,
+  driftFlags: staleAudit.driftFlags,
+  correctivePrompt: staleAudit.correctivePrompt,
+});
+```
+
+`auditChronosenseCursor` checks five deterministic invariants:
+
+1. **Digest match (`clock_id_mismatch`)**: `cursor.clockId` must equal
+   `envelope.clockId`.
+2. **Turn monotonicity (`turn_mismatch`)**: `cursor.turn` must be an integer
+   equal to `envelope.turn`.
+3. **Midnight acknowledgment (`night_crossed_unacked`)**: whenever
+   `envelope.nightCrossed` is `true`, `cursor.nightCrossedAck` must be `true`.
+4. **Deadline drift (`deadline_drift`)**: when a deadline is active,
+   `|cursor.deadlineEtaMin - envelope.deadlineEtaMin|` must stay within
+   `deadlineToleranceMin` (default `5` minutes). When no deadline is active,
+   `cursor.deadlineEtaMin` must be omitted or `null`.
+5. **Fact provenance (`fact_mismatch:<key>`, `unknown_fact:<key>`)**: every key
+   in `cursor.citedFacts` is checked against the authoritative envelope within
+   `factTolerance` (default `0.5`, using circular wrapping for `moon_lon_deg`).
+
+## Photoperiod vectors and stratified compaction
+
+Episodic memory stores that compact strictly by recency or semantic similarity
+evict rare nocturnal, solstice, or travel memories during long daytime runs.
+`photoperiodVector(scene)` maps a `SceneGeometry` snapshot into a 10-D
+L2-normalized phase descriptor that compares circadian, twilight, lunar, and
+seasonal phase via `phaseCosineSimilarity(a, b)`. `phaseStratumKey(scene, lonEast)`
+assigns an unsupervised `<horizon>:<season>:lon<0..5>` bucket key, and
+`stratifiedSelect(entries, budget)` sweeps round-robin across distinct strata
+ordered by peak score so every physical regime retains representation.
+
+```ts run
+import {
+  sceneGeometry,
+  photoperiodVector,
+  phaseStratumKey,
+  phaseCosineSimilarity,
+  stratifiedSelect,
+} from "caelus";
+
+const nycDay = sceneGeometry(engine, julianDay(2026, 6, 21, 18, 0, 0), 40.7128, -74.006);
+const nycNight = sceneGeometry(engine, julianDay(2026, 6, 21, 5, 0, 0), 40.7128, -74.006);
+const reykjavikSummer = sceneGeometry(engine, julianDay(2026, 6, 21, 13, 0, 0), 64.1466, -21.9426);
+
+const vecDay = photoperiodVector(nycDay);
+const vecNight = photoperiodVector(nycNight);
+const vecNorth = photoperiodVector(reykjavikSummer);
+
+const compacted = stratifiedSelect(
+  [
+    { id: "day-1", stratum: phaseStratumKey(nycDay), score: 0.95 },
+    { id: "day-2", stratum: phaseStratumKey(nycDay), score: 0.91 },
+    { id: "day-3", stratum: phaseStratumKey(nycDay), score: 0.88 },
+    { id: "night-1", stratum: phaseStratumKey(nycNight), score: 0.72 },
+    { id: "north-1", stratum: phaseStratumKey(reykjavikSummer), score: 0.65 },
+  ],
+  3,
+);
+
+({
+  dayStratum: phaseStratumKey(nycDay),
+  nightStratum: phaseStratumKey(nycNight),
+  northStratum: phaseStratumKey(reykjavikSummer),
+  dayVsNightCos: Number(phaseCosineSimilarity(vecDay, vecNight).toFixed(3)),
+  dayVsNorthCos: Number(phaseCosineSimilarity(vecDay, vecNorth).toFixed(3)),
+  retainedIds: compacted.map((entry) => entry.id),
+});
+```
+
+## Copy-pasteable agent loop and system prompt
+
+Inject the header template into your system prompt (or fetch it directly from
+the `chronosense_agent_header` MCP prompt), prepend `envelope.header` to each
+user turn, and gate mutating tool calls with `auditChronosenseCursor`:
+
+```text
+Every turn starts with an authoritative physical-horizon header:
+[CAELUS-CHRONO clock=<8-hex> turn=<N> utc=<ISO> sun_alt=<deg>(rising|culminating|setting) sky=<daylight|civil|nautical|astronomical|night> slot=<1..12/12|polar_day|polar_night> night_crossed=<true|false> next_sky=<event>(in_<M>m) deadline=<label>(applying_<M>m|due|overdue_<M>m) dt_prev=<+M>m]
+
+Before calling any mutating tool or finalizing your reply:
+1. Read clock, turn, night_crossed, next_sky, and deadline only from the latest header.
+2. Keep next_sky (horizon transition) separate from deadline (task deadline).
+3. Emit a JSON cursor: {"clock_id","turn","night_crossed_ack","deadline_eta_min","cited_facts"}.
+4. If night_crossed=true, set night_crossed_ack=true and re-verify prior-day cached outputs.
+5. If audit_chronosense_cursor returns ok=false, apply correctivePrompt and retry.
+```
+
+In application middleware, wrap tool execution in a single deterministic gate:
+
+```ts
+import { Engine, julianDay, chronosenseEnvelope, auditChronosenseCursor } from "caelus";
+import { embeddedData } from "caelus/data-embedded";
+
+const engine = new Engine(embeddedData);
+
+function dateToJdUt(d: Date): number {
+  return julianDay(
+    d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate(),
+    d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(),
+  );
+}
+
+// 1. Pre-turn read hook: inject env.header into the model context.
+const env = chronosenseEnvelope(engine, dateToJdUt(new Date()), 40.7128, -74.006, {
+  turn: session.turn,
+  prevJdUt: session.prevJdUt,
+  deadlineJdUt: session.deadlineJdUt,
+  deadlineLabel: "release_cut",
+});
+
+// 2. Pre-tool write-back gate: block side effects until the cursor passes.
+const verdict = auditChronosenseCursor(env, modelOutput.cursor);
+if (!verdict.ok) {
+  return { retryWithPrompt: verdict.correctivePrompt, driftFlags: verdict.driftFlags };
+}
+```
+
+## Python reference (`astroengine.chronosense`)
+
+The Python package exposes identical algorithms with snake_case keys and is
+pinned to the TypeScript module by `packages/caelus/test/chronosense-golden.test.ts`:
+
+```python
+from astroengine import Engine, julian_day
+from astroengine.chronosense import (
+    audit_chronosense_cursor,
+    chronosense_envelope,
+    phase_stratum_key,
+    photoperiod_vector,
+    stratified_select,
+)
+from astroengine.observe import scene_geometry
+
+engine = Engine()
+now_jd = julian_day(2026, 11, 22, 14, 30, 0)
+prev_jd = julian_day(2026, 11, 21, 23, 0, 0)
+deadline_jd = julian_day(2026, 11, 22, 15, 15, 0)
+
+env = chronosense_envelope(
+    engine,
+    now_jd,
+    40.7128,
+    -74.006,
+    turn=14,
+    prev_jd_ut=prev_jd,
+    deadline_jd_ut=deadline_jd,
+    deadline_label="ship_pr",
+)
+audit = audit_chronosense_cursor(
+    env,
+    {
+        "clock_id": env["clock_id"],
+        "turn": 14,
+        "night_crossed_ack": True,
+        "deadline_eta_min": 45.0,
+        "cited_facts": {"sun_alt_deg": env["sun_alt_deg"]},
+    },
+)
+
+scene = scene_geometry(engine, now_jd, 40.7128, -74.006)
+vec = photoperiod_vector(scene)
+stratum = phase_stratum_key(scene, -74.006)
+kept = stratified_select([{"id": "t14", "stratum": stratum, "score": 0.9}], budget=1)
+```
+
+## Through the MCP server
+
+`caelus-mcp` exposes two Node-free tools and one prompt over both stdio and the
+hosted Streamable HTTP endpoint (`/api/mcp`):
+
+- **`chronosense_tick`**: accepts `date` (optional UTC ISO, defaults to now),
+  `lat`, `lon`, `turn`, `prev_date`, `deadline_date`, `deadline_label`,
+  `elevation_m`, and `genesis_digest`. Returns `{ envelope, header, photoperiodVector, phaseStratumKey }`.
+- **`audit_chronosense_cursor`**: accepts `cursor` plus either the `envelope`
+  object from `chronosense_tick` or recompute parameters (`date`, `lat`, `lon`,
+  `turn`, `prev_date`, `deadline_date`, `deadline_label`), along with optional
+  `deadline_tolerance_min` and `fact_tolerance`. Returns `{ ok, driftFlags, correctivePrompt }`.
+- **`chronosense_agent_header` prompt**: generates the ready-to-inject system
+  prompt template for reading `[CAELUS-CHRONO ...]` headers and emitting cursors.
+
+```json
+{
+  "tool": "chronosense_tick",
+  "arguments": {
+    "date": "2026-11-22T14:30:00Z",
+    "lat": 40.7128,
+    "lon": -74.006,
+    "turn": 14,
+    "prev_date": "2026-11-21T23:00:00Z",
+    "deadline_date": "2026-11-22T15:15:00Z",
+    "deadline_label": "ship_pr"
+  }
+}
+```
+
+```json
+{
+  "tool": "audit_chronosense_cursor",
+  "arguments": {
+    "date": "2026-11-22T14:30:00Z",
+    "lat": 40.7128,
+    "lon": -74.006,
+    "turn": 14,
+    "prev_date": "2026-11-21T23:00:00Z",
+    "deadline_date": "2026-11-22T15:15:00Z",
+    "deadline_label": "ship_pr",
+    "cursor": {
+      "clock_id": "a1b2c3d4",
+      "turn": 14,
+      "night_crossed_ack": true,
+      "deadline_eta_min": 45
+    }
+  }
+}
+```
+
+## Architectural guardrails and limits
+
+- **Adaptive wakeup scheduling (`KILL-005`)**: compute sleep intervals directly
+  from `sceneGeometry.diurnal.minutesToNextTwilight` (exposed as
+  `envelope.horizonEtaMin`). Do not run `chartStability` sweeps for agent sleep
+  scheduling, because stability sweeps are an order of magnitude slower and miss
+  civil twilight transitions.
+- **Deadline and night-window collisions (`KILL-006`)**: when checking whether
+  recurring deadlines fall inside local night, intersect `riseSet("sun")` night
+  intervals directly with modular deadline windows instead of registering task
+  cadences in `synthetic.ts`.
+- **Plain physical vocabulary**: keep `[CAELUS-CHRONO ...]` headers free of
+  astrological terminology. In live codec ablations (`EXP-005`), plain physical
+  horizon tokens outperformed zodiacal encodings across compaction and twilight
+  classification tasks.
+- **Polar latitudes**: above the Arctic and Antarctic circles during continuous
+  midnight sun or polar night, `daySlot` reports `"polar_day"` or
+  `"polar_night"`, `horizonEvent` and `horizonEtaMin` are `null`, the header
+  emits `next_sky=polar`, and `photoperiodVector` falls back smoothly to the
+  solar-noon hour angle.

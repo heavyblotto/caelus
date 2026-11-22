@@ -77,6 +77,11 @@ const TASK_TRACKS: TaskTrack[] = [
         desc: "Compute solar and lunar scene geometry and shadows, verify metadata, chronolocate, and geolocate.",
       },
       {
+        href: "/docs/chronosense",
+        title: "Chronosense Middleware",
+        desc: "Emit physical-horizon agent headers, audit write-back cursors, and compact memory across physical strata.",
+      },
+      {
         href: "/docs/interpretation",
         title: "Interpretation Layer",
         desc: "Project charts into ranked, citable facts and audit LLM-generated briefs against computed IDs.",
