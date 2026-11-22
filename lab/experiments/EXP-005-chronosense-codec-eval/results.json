@@ -1,35 +1,79 @@
 {
   "id": "EXP-005",
-  "run_at": "2026-11-22T18:57:31.607Z",
-  "git_sha": "eb846ea",
+  "run_at": "2026-11-22T21:06:00.231Z",
+  "git_sha": "0ee232d",
   "status": "pass",
-  "summary": "Live-LLM 5-arm codec showdown verified over 20 EXP-001 tasks x 2 live models (ollama/gemma4:12b, ollama/qwen3.5:9b) plus offline codec audit (GT parity=20/20). Live macro score: Physical=77.7% vs Symbolic=63.5% vs Synthetic=45.2% vs ISO=40.8% vs None=30.6% (Physical - ISO = +36.9 pp, Physical - Synthetic = +32.5 pp, Physical - Symbolic = +14.2 pp at 45.75 cl100k tok/turn).",
+  "summary": "Live-LLM 5-arm codec showdown verified over 20 EXP-001 tasks x 2 live models (ollama/gemma4:12b, ollama/qwen3.5:9b) plus offline codec + 20-line NOAA baseline audit (GT parity=20/20). Live macro score: Physical=77.7% [95% CI 71.0-83.5%] vs Symbolic=63.5% vs Synthetic=45.2% vs ISO=40.8% vs None=30.6% (paired Physical-Symbolic +14.2 pp [95% CI +5.6, +22.5 pp], p=0.0004, 19W/17T/4L; offline NOAA-20line=66.7% overall, 100.0% photoperiod tie vs 33.3% compaction; 45.75 cl100k tok/turn).",
   "metrics": {
     "live_physical_accuracy": 0.7771,
+    "live_physical_ci95_episode": [
+      0.7104,
+      0.8354
+    ],
     "live_symbolic_accuracy": 0.6354,
+    "live_symbolic_ci95_episode": [
+      0.5583,
+      0.7063
+    ],
     "live_synthetic_accuracy": 0.4521,
     "live_iso_accuracy": 0.4083,
     "live_none_accuracy": 0.3063,
     "live_margin_physical_vs_iso": 0.3688,
     "live_margin_physical_vs_synthetic": 0.325,
     "live_margin_physical_vs_symbolic": 0.1417,
+    "live_paired_physical_vs_symbolic_ci95_n40": [
+      0.0563,
+      0.225
+    ],
+    "live_paired_physical_vs_symbolic_p_n40": 0.0004,
+    "live_paired_physical_vs_symbolic_ci95_n20_cluster": [
+      0.0562,
+      0.2271
+    ],
+    "live_paired_physical_vs_symbolic_p_n20_cluster": 0.0008,
     "live_models_count": 2,
     "physical_codec_score": 1,
     "symbolic_codec_score": 0.9875,
     "synthetic_codec_score": 0.5583,
     "iso_codec_score": 0.175,
     "none_codec_score": 0,
+    "noaa20_offline_codec_score": 0.6667,
+    "noaa20_offline_photoperiod_score": 1,
+    "noaa20_offline_compaction_score": 0.3333,
     "physical_all20_twilight_5class_accuracy": 1,
     "symbolic_all20_twilight_5class_accuracy": 0.85,
     "non_binary_twilight_tasks_count": 3,
     "physical_mean_cl100k_tokens": 45.75,
     "symbolic_mean_cl100k_tokens": 36.75,
+    "synthetic_mean_cl100k_tokens": 26,
+    "iso_mean_cl100k_tokens": 15,
+    "none_mean_cl100k_tokens": 0,
+    "noaa20_mean_cl100k_tokens": 23,
     "symbolic_pm1_sign_slip_fresh_tool_accuracy": 0.5,
     "ground_truth_parity_rate": 1,
     "scorer_oracle_pass_rate": 1,
     "scorer_corrupt_catch_rate": 1,
     "live_llm_verified": true,
-    "runtime_ms": 159.6577,
+    "runtime_ms": 301.1423,
+    "scoring_rubric": {
+      "name": "equal_weighted_check_composite_accuracy",
+      "task_score_formula": "s_i = passed_checks_i / total_checks_i in [0, 1]",
+      "compaction_stale_tool_checks": [
+        "night_crossed (exact boolean match)",
+        "fresh_tool_id (exact Tool-A | Tool-B match)",
+        "digest_match (exact lowercase 8-hex-char canonical_digest8 match, stripping # or d=)"
+      ],
+      "photoperiod_deadline_regime_checks": [
+        "is_day (exact boolean match)",
+        "twilight_stage (exact 5-class match: day | civil | nautical | astronomical | night)",
+        "deadline_phase (exact applying | exact | separating match)",
+        "deadline_minutes_within_15m (|pred_min - gt_min| <= 15)"
+      ],
+      "model_composite_formula": "model_score = (1 / 20) * sum_{i=1..20} s_i",
+      "macro_composite_formula": "macro_score = (1 / M) * sum_{m=1..M} model_score_m (M = 2 models; identical to pooled mean over 40 task-model episodes)",
+      "exact_task_rate_formula": "fraction of episodes with passed_checks_i === total_checks_i (s_i === 1.0)",
+      "token_counting_method": "approxCl100kTokens regex /[A-Za-z]+|\\d+|[^\\sA-Za-z\\d]/g over system_header"
+    },
     "offline_codec_by_arm": {
       "Baseline-None": {
         "mean_score": 0,
@@ -127,6 +171,64 @@
         }
       }
     },
+    "control_noaa_20line": {
+      "arm_name": "Control-NOAA-20line",
+      "formula": "20-line Spencer (1971) / NOAA solar declination + equation-of-time (zero Moon, zero refraction, zero canonical digest)",
+      "mean_score": 0.6667,
+      "exact_task_rate": 0.5,
+      "compaction_score": 0.3333,
+      "photoperiod_score": 1,
+      "twilight_5class_all20_accuracy": 1,
+      "mean_cl100k_tokens": 23,
+      "mean_whitespace_tokens": 4.5,
+      "field_accuracy": {
+        "night_crossed": 1,
+        "fresh_tool_id": 0,
+        "digest_match": 0,
+        "is_day": 1,
+        "twilight_stage": 1,
+        "deadline_phase": 1,
+        "deadline_minutes_within_15m": 1
+      },
+      "vs_caelus_scene_geometry": {
+        "solar_alt_mae_all_deg": 0.0542,
+        "solar_alt_max_err_all_deg": 0.2025,
+        "solar_alt_mae_midlat_deg": 0.0441,
+        "solar_alt_mae_highlat_deg": 0.0693,
+        "deadline_timing_mae_midlat_min": 0.2909,
+        "deadline_timing_max_midlat_min": 0.4998,
+        "deadline_timing_mae_highlat_min": 0.3752,
+        "deadline_timing_max_highlat_min": 0.605,
+        "polar_undefined_sunset_tasks": 2,
+        "horizon_refraction_probes": [
+          {
+            "label": "Oslo winter sunset grazing",
+            "noaa_geom_alt_deg": -0.7852,
+            "caelus_apparent_alt_deg": -0.8282,
+            "abs_diff_deg": 0.0431
+          },
+          {
+            "label": "Tromso June low midnight sun",
+            "noaa_geom_alt_deg": 3.0136,
+            "caelus_apparent_alt_deg": 3.2638,
+            "abs_diff_deg": 0.2502
+          },
+          {
+            "label": "NYC equinox sunset",
+            "noaa_geom_alt_deg": 0.7105,
+            "caelus_apparent_alt_deg": 1.4684,
+            "abs_diff_deg": 0.7579
+          }
+        ]
+      },
+      "where_noaa20_ties_caelus": "On basic mid-latitude solar daylight, twilight class, solar noon, and sunset timing, the 20-line NOAA formula matches Caelus sceneGeometry within ~1-2 minutes and achieves 100% on the 10-task photoperiod-deadline slice offline.",
+      "where_caelus_adds_value": [
+        "Polar and low-elevation refraction: unrefracted NOAA-20line misses ~0.55-0.60 deg atmospheric refraction near the horizon and produces undefined sunrise/sunset roots during polar midnight sun / polar night (Tromso).",
+        "Lunar compaction separation: NOAA-20line has zero Moon ephemeris, scoring 0/10 (0.0%) on same-clock-time cross-day stale-tool separation (fresh_tool_id) vs 10/10 (100%) for Caelus.",
+        "Canonical provenance & digest auditing: NOAA-20line emits no canonical chart digest (0/10 on digest_match) and cannot power EXP-003/EXP-006 sloped-ground 3D shadows or lunar bright-limb tilt.",
+        "Unified zero-dependency cross-runtime packaging: Caelus packages solar, lunar, horizon, shadow, and MCP audit primitives in one tested zero-dep TypeScript/Python library rather than ad-hoc per-task trig snippets."
+      ]
+    },
     "live_eval": {
       "receipt_executed_at": "2026-11-22T18:12:24.240Z",
       "receipt_git_sha": "e8dc94f",
@@ -139,6 +241,14 @@
       "macro_by_arm": {
         "Baseline-None": {
           "mean_score": 0.3063,
+          "ci95_episode_bootstrap": [
+            0.2333,
+            0.3771
+          ],
+          "ci95_task_cluster_bootstrap": [
+            0.2229,
+            0.3875
+          ],
           "exact_task_rate": 0,
           "compaction_score": 0.3,
           "photoperiod_score": 0.3125,
@@ -148,6 +258,14 @@
         },
         "Control-ISO": {
           "mean_score": 0.4083,
+          "ci95_episode_bootstrap": [
+            0.3354,
+            0.4792
+          ],
+          "ci95_task_cluster_bootstrap": [
+            0.325,
+            0.4958
+          ],
           "exact_task_rate": 0,
           "compaction_score": 0.3166,
           "photoperiod_score": 0.5,
@@ -157,6 +275,14 @@
         },
         "Control-Synthetic": {
           "mean_score": 0.4521,
+          "ci95_episode_bootstrap": [
+            0.3479,
+            0.5563
+          ],
+          "ci95_task_cluster_bootstrap": [
+            0.3375,
+            0.5646
+          ],
           "exact_task_rate": 0.15,
           "compaction_score": 0.2666,
           "photoperiod_score": 0.6375,
@@ -166,6 +292,14 @@
         },
         "Treatment-Caelus-Physical": {
           "mean_score": 0.7771,
+          "ci95_episode_bootstrap": [
+            0.7104,
+            0.8354
+          ],
+          "ci95_task_cluster_bootstrap": [
+            0.7083,
+            0.8375
+          ],
           "exact_task_rate": 0.325,
           "compaction_score": 0.7667,
           "photoperiod_score": 0.7875,
@@ -175,12 +309,268 @@
         },
         "Arm4b-Caelus-Symbolic": {
           "mean_score": 0.6354,
+          "ci95_episode_bootstrap": [
+            0.5583,
+            0.7063
+          ],
+          "ci95_task_cluster_bootstrap": [
+            0.5667,
+            0.7042
+          ],
           "exact_task_rate": 0.125,
           "compaction_score": 0.5333,
           "photoperiod_score": 0.7375,
           "high_lat_photoperiod_score": 0.6875,
           "high_lat_all_score": 0.5938,
           "mean_latency_ms": 5196.468
+        }
+      },
+      "bootstrap_10000": {
+        "seed": 20261122,
+        "resamples": 10000,
+        "episode_level_n40": {
+          "by_arm": {
+            "Baseline-None": {
+              "n": 40,
+              "resamples": 10000,
+              "mean": 0.3062,
+              "se": 0.0361,
+              "ci95": [
+                0.2333,
+                0.3771
+              ]
+            },
+            "Control-ISO": {
+              "n": 40,
+              "resamples": 10000,
+              "mean": 0.4083,
+              "se": 0.0371,
+              "ci95": [
+                0.3354,
+                0.4792
+              ]
+            },
+            "Control-Synthetic": {
+              "n": 40,
+              "resamples": 10000,
+              "mean": 0.4521,
+              "se": 0.0531,
+              "ci95": [
+                0.3479,
+                0.5563
+              ]
+            },
+            "Treatment-Caelus-Physical": {
+              "n": 40,
+              "resamples": 10000,
+              "mean": 0.7771,
+              "se": 0.0321,
+              "ci95": [
+                0.7104,
+                0.8354
+              ]
+            },
+            "Arm4b-Caelus-Symbolic": {
+              "n": 40,
+              "resamples": 10000,
+              "mean": 0.6354,
+              "se": 0.0377,
+              "ci95": [
+                0.5583,
+                0.7063
+              ]
+            }
+          },
+          "paired_deltas": {
+            "physical_vs_symbolic": {
+              "n_pairs": 40,
+              "resamples": 10000,
+              "mean_diff": 0.1417,
+              "ci95": [
+                0.0563,
+                0.225
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_one_sided_le_zero": 0.0002,
+              "bootstrap_p_two_sided": 0.0004,
+              "exact_sign_test_p_two_sided": 0.002599,
+              "wins": 19,
+              "ties": 17,
+              "losses": 4
+            },
+            "physical_vs_synthetic": {
+              "n_pairs": 40,
+              "resamples": 10000,
+              "mean_diff": 0.325,
+              "ci95": [
+                0.2083,
+                0.4437
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_one_sided_le_zero": 0,
+              "bootstrap_p_two_sided": 0,
+              "exact_sign_test_p_two_sided": 0.000821,
+              "wins": 27,
+              "ties": 6,
+              "losses": 7
+            },
+            "physical_vs_iso": {
+              "n_pairs": 40,
+              "resamples": 10000,
+              "mean_diff": 0.3688,
+              "ci95": [
+                0.2854,
+                0.4562
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_one_sided_le_zero": 0,
+              "bootstrap_p_two_sided": 0,
+              "exact_sign_test_p_two_sided": 0,
+              "wins": 32,
+              "ties": 8,
+              "losses": 0
+            },
+            "physical_vs_none": {
+              "n_pairs": 40,
+              "resamples": 10000,
+              "mean_diff": 0.4708,
+              "ci95": [
+                0.3833,
+                0.5604
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_one_sided_le_zero": 0,
+              "bootstrap_p_two_sided": 0,
+              "exact_sign_test_p_two_sided": 0,
+              "wins": 35,
+              "ties": 5,
+              "losses": 0
+            }
+          },
+          "physical_vs_symbolic_marginal_cis_overlap": false,
+          "physical_vs_symbolic_paired_ci_excludes_zero": true
+        },
+        "task_cluster_n20": {
+          "by_arm": {
+            "Baseline-None": {
+              "n": 20,
+              "resamples": 10000,
+              "mean": 0.3062,
+              "se": 0.042,
+              "ci95": [
+                0.2229,
+                0.3875
+              ]
+            },
+            "Control-ISO": {
+              "n": 20,
+              "resamples": 10000,
+              "mean": 0.4083,
+              "se": 0.0436,
+              "ci95": [
+                0.325,
+                0.4958
+              ]
+            },
+            "Control-Synthetic": {
+              "n": 20,
+              "resamples": 10000,
+              "mean": 0.4521,
+              "se": 0.0583,
+              "ci95": [
+                0.3375,
+                0.5646
+              ]
+            },
+            "Treatment-Caelus-Physical": {
+              "n": 20,
+              "resamples": 10000,
+              "mean": 0.7771,
+              "se": 0.0333,
+              "ci95": [
+                0.7083,
+                0.8375
+              ]
+            },
+            "Arm4b-Caelus-Symbolic": {
+              "n": 20,
+              "resamples": 10000,
+              "mean": 0.6354,
+              "se": 0.0352,
+              "ci95": [
+                0.5667,
+                0.7042
+              ]
+            }
+          },
+          "paired_deltas": {
+            "physical_vs_symbolic": {
+              "n_pairs": 20,
+              "resamples": 10000,
+              "mean_diff": 0.1417,
+              "ci95": [
+                0.0562,
+                0.2271
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_one_sided_le_zero": 0.0004,
+              "bootstrap_p_two_sided": 0.0008,
+              "exact_sign_test_p_two_sided": 0.035156,
+              "wins": 12,
+              "ties": 5,
+              "losses": 3
+            },
+            "physical_vs_synthetic": {
+              "n_pairs": 20,
+              "resamples": 10000,
+              "mean_diff": 0.325,
+              "ci95": [
+                0.1979,
+                0.4479
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_one_sided_le_zero": 0,
+              "bootstrap_p_two_sided": 0,
+              "exact_sign_test_p_two_sided": 0.007538,
+              "wins": 15,
+              "ties": 2,
+              "losses": 3
+            },
+            "physical_vs_iso": {
+              "n_pairs": 20,
+              "resamples": 10000,
+              "mean_diff": 0.3688,
+              "ci95": [
+                0.2729,
+                0.4646
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_one_sided_le_zero": 0,
+              "bootstrap_p_two_sided": 0,
+              "exact_sign_test_p_two_sided": 0.000004,
+              "wins": 19,
+              "ties": 1,
+              "losses": 0
+            },
+            "physical_vs_none": {
+              "n_pairs": 20,
+              "resamples": 10000,
+              "mean_diff": 0.4708,
+              "ci95": [
+                0.3667,
+                0.5771
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_one_sided_le_zero": 0,
+              "bootstrap_p_two_sided": 0,
+              "exact_sign_test_p_two_sided": 0.000004,
+              "wins": 19,
+              "ties": 1,
+              "losses": 0
+            }
+          },
+          "physical_vs_symbolic_marginal_cis_overlap": false,
+          "physical_vs_symbolic_paired_ci_excludes_zero": true
         }
       },
       "macro_deltas": {
@@ -205,6 +595,10 @@
             "Baseline-None": {
               "episodes": 20,
               "mean_score": 0.2875,
+              "ci95_bootstrap": [
+                0.1833,
+                0.3958
+              ],
               "exact_task_rate": 0,
               "compaction_score": 0.2,
               "photoperiod_score": 0.375,
@@ -226,6 +620,10 @@
             "Control-ISO": {
               "episodes": 20,
               "mean_score": 0.3875,
+              "ci95_bootstrap": [
+                0.2667,
+                0.5083
+              ],
               "exact_task_rate": 0,
               "compaction_score": 0.2,
               "photoperiod_score": 0.575,
@@ -247,6 +645,10 @@
             "Control-Synthetic": {
               "episodes": 20,
               "mean_score": 0.4667,
+              "ci95_bootstrap": [
+                0.3042,
+                0.6333
+              ],
               "exact_task_rate": 0.2,
               "compaction_score": 0.1333,
               "photoperiod_score": 0.8,
@@ -268,6 +670,10 @@
             "Treatment-Caelus-Physical": {
               "episodes": 20,
               "mean_score": 0.7542,
+              "ci95_bootstrap": [
+                0.6542,
+                0.8375
+              ],
               "exact_task_rate": 0.25,
               "compaction_score": 0.7333,
               "photoperiod_score": 0.775,
@@ -289,6 +695,10 @@
             "Arm4b-Caelus-Symbolic": {
               "episodes": 20,
               "mean_score": 0.6375,
+              "ci95_bootstrap": [
+                0.5625,
+                0.7083
+              ],
               "exact_task_rate": 0.05,
               "compaction_score": 0.6,
               "photoperiod_score": 0.675,
@@ -306,6 +716,56 @@
                 "deadline_phase": 0.8,
                 "deadline_minutes_within_15m": 0
               }
+            }
+          },
+          "paired_bootstrap_10000": {
+            "physical_vs_symbolic": {
+              "n_pairs": 20,
+              "resamples": 10000,
+              "mean_diff": 0.1167,
+              "ci95": [
+                -0.0125,
+                0.2417
+              ],
+              "ci95_excludes_zero": false,
+              "bootstrap_p_one_sided_le_zero": 0.038,
+              "bootstrap_p_two_sided": 0.076,
+              "exact_sign_test_p_two_sided": 0.06543,
+              "wins": 9,
+              "ties": 9,
+              "losses": 2
+            },
+            "physical_vs_synthetic": {
+              "n_pairs": 20,
+              "resamples": 10000,
+              "mean_diff": 0.2875,
+              "ci95": [
+                0.1125,
+                0.4667
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_one_sided_le_zero": 0.0003,
+              "bootstrap_p_two_sided": 0.0006,
+              "exact_sign_test_p_two_sided": 0.118469,
+              "wins": 11,
+              "ties": 5,
+              "losses": 4
+            },
+            "physical_vs_iso": {
+              "n_pairs": 20,
+              "resamples": 10000,
+              "mean_diff": 0.3667,
+              "ci95": [
+                0.2125,
+                0.5292
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_one_sided_le_zero": 0,
+              "bootstrap_p_two_sided": 0,
+              "exact_sign_test_p_two_sided": 0.000244,
+              "wins": 13,
+              "ties": 7,
+              "losses": 0
             }
           },
           "deltas": {
@@ -333,6 +793,10 @@
             "Baseline-None": {
               "episodes": 20,
               "mean_score": 0.325,
+              "ci95_bootstrap": [
+                0.2333,
+                0.4167
+              ],
               "exact_task_rate": 0,
               "compaction_score": 0.4,
               "photoperiod_score": 0.25,
@@ -354,6 +818,10 @@
             "Control-ISO": {
               "episodes": 20,
               "mean_score": 0.4292,
+              "ci95_bootstrap": [
+                0.3541,
+                0.5042
+              ],
               "exact_task_rate": 0,
               "compaction_score": 0.4333,
               "photoperiod_score": 0.425,
@@ -375,6 +843,10 @@
             "Control-Synthetic": {
               "episodes": 20,
               "mean_score": 0.4375,
+              "ci95_bootstrap": [
+                0.3083,
+                0.5625
+              ],
               "exact_task_rate": 0.1,
               "compaction_score": 0.4,
               "photoperiod_score": 0.475,
@@ -396,6 +868,10 @@
             "Treatment-Caelus-Physical": {
               "episodes": 20,
               "mean_score": 0.8,
+              "ci95_bootstrap": [
+                0.7125,
+                0.8792
+              ],
               "exact_task_rate": 0.4,
               "compaction_score": 0.8,
               "photoperiod_score": 0.8,
@@ -417,6 +893,10 @@
             "Arm4b-Caelus-Symbolic": {
               "episodes": 20,
               "mean_score": 0.6333,
+              "ci95_bootstrap": [
+                0.5,
+                0.7583
+              ],
               "exact_task_rate": 0.2,
               "compaction_score": 0.4667,
               "photoperiod_score": 0.8,
@@ -434,6 +914,56 @@
                 "deadline_phase": 0.9,
                 "deadline_minutes_within_15m": 0.5
               }
+            }
+          },
+          "paired_bootstrap_10000": {
+            "physical_vs_symbolic": {
+              "n_pairs": 20,
+              "resamples": 10000,
+              "mean_diff": 0.1667,
+              "ci95": [
+                0.0625,
+                0.2792
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_one_sided_le_zero": 0.0003,
+              "bootstrap_p_two_sided": 0.0006,
+              "exact_sign_test_p_two_sided": 0.038574,
+              "wins": 10,
+              "ties": 8,
+              "losses": 2
+            },
+            "physical_vs_synthetic": {
+              "n_pairs": 20,
+              "resamples": 10000,
+              "mean_diff": 0.3625,
+              "ci95": [
+                0.2125,
+                0.5083
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_one_sided_le_zero": 0,
+              "bootstrap_p_two_sided": 0,
+              "exact_sign_test_p_two_sided": 0.004425,
+              "wins": 16,
+              "ties": 1,
+              "losses": 3
+            },
+            "physical_vs_iso": {
+              "n_pairs": 20,
+              "resamples": 10000,
+              "mean_diff": 0.3708,
+              "ci95": [
+                0.3042,
+                0.4375
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_one_sided_le_zero": 0,
+              "bootstrap_p_two_sided": 0,
+              "exact_sign_test_p_two_sided": 0.000004,
+              "wins": 19,
+              "ties": 1,
+              "losses": 0
             }
           },
           "deltas": {

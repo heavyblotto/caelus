@@ -1,9 +1,9 @@
 {
   "id": "EXP-010",
-  "run_at": "2026-11-22T18:57:48.293Z",
-  "git_sha": "eb846ea",
+  "run_at": "2026-11-22T21:06:22.093Z",
+  "git_sha": "0ee232d",
   "status": "fail",
-  "summary": "20 24h episodes (5 latitudes x 4 seasons, 74 physical sunrise/sunset/civil-twilight cliffs, 1 polar 0-cliff episodes). Unfiltered chartStability (Arm2) triggers 23.8 phantom zodiac/house alarms per 24h (476 total). Filtered sect-only chartStability (Arm3) eliminates phantom alarms and catches 80.6% sunrise/sunset cliffs, but misses civil twilight (2.6% civil catch -> 40.5% all-cliff) at 183.4112 ms/24h (26.35 wakeups). Direct analytic sceneGeometry.diurnal.minutesToNextTwilight (Arm4) catches 100.0% of all 4 physical cliffs (median err 0 min) in 11.9 wakeups (-75.2% vs 30m poll) and 8.7297 ms/24h (21.01x faster than Arm3).",
+  "summary": "20 24h episodes (5 latitudes x 4 seasons, 74 physical sunrise/sunset/civil-twilight cliffs, 1 polar 0-cliff episodes). Unfiltered chartStability (Arm2) triggers 23.8 phantom zodiac/house alarms per 24h (476 total). Filtered sect-only chartStability (Arm3) eliminates phantom alarms and catches 80.6% sunrise/sunset cliffs, but misses civil twilight (2.6% civil catch -> 40.5% all-cliff) at 238.1572 ms/24h (26.35 wakeups). Direct analytic sceneGeometry.diurnal.minutesToNextTwilight (Arm4) catches 100.0% of all 4 physical cliffs (median err 0 min) in 11.9 wakeups (-75.2% vs 30m poll) and 11.1821 ms/24h (21.2981x faster than Arm3).",
   "metrics": {
     "arm3_all_cliff_catch_rate": 0.4054,
     "arm4_all_cliff_catch_rate": 1,
@@ -11,14 +11,14 @@
     "arm3_civil_twilight_catch_rate": 0.0263,
     "arm4_civil_twilight_catch_rate": 1,
     "arm2_phantom_alarms_per_24h": 23.8,
-    "arm3_over_arm4_cpu_ratio": 21.01,
+    "arm3_over_arm4_cpu_ratio": 21.2981,
     "arm3_mean_wakeups_per_24h": 26.35,
     "arm4_mean_wakeups_per_24h": 11.9,
     "arm1_mean_wakeups_per_24h": 48,
     "arm4_wakeup_savings_vs_poll": 0.7521,
-    "arm3_mean_cpu_ms_per_24h": 183.4112,
-    "arm4_mean_cpu_ms_per_24h": 8.7297,
-    "total_runtime_ms": 10850.1691,
+    "arm3_mean_cpu_ms_per_24h": 238.1572,
+    "arm4_mean_cpu_ms_per_24h": 11.1821,
+    "total_runtime_ms": 14140.6978,
     "by_arm": {
       "Arm1-Fixed-Poll-30m": {
         "mean_wakeups_per_24h": 48,
@@ -29,9 +29,9 @@
         "median_cliff_timing_err_min": 7.3406,
         "phantom_sign_house_alarms_total": 0,
         "phantom_alarms_per_24h": 0,
-        "total_cpu_ms_20ep": 736.1803,
-        "mean_cpu_ms_per_24h": 36.809,
-        "mean_ms_per_wakeup": 0.7669
+        "total_cpu_ms_20ep": 963.3291,
+        "mean_cpu_ms_per_24h": 48.1665,
+        "mean_ms_per_wakeup": 1.0035
       },
       "Arm2-Stability-AllFlips": {
         "mean_wakeups_per_24h": 38.6,
@@ -42,9 +42,9 @@
         "median_cliff_timing_err_min": 7.0551,
         "phantom_sign_house_alarms_total": 476,
         "phantom_alarms_per_24h": 23.8,
-        "total_cpu_ms_20ep": 5891.5149,
-        "mean_cpu_ms_per_24h": 294.5757,
-        "mean_ms_per_wakeup": 7.6315
+        "total_cpu_ms_20ep": 7678.3294,
+        "mean_cpu_ms_per_24h": 383.9165,
+        "mean_ms_per_wakeup": 9.946
       },
       "Arm3-Stability-Physical-SectOnly": {
         "mean_wakeups_per_24h": 26.35,
@@ -55,9 +55,9 @@
         "median_cliff_timing_err_min": 7.3999,
         "phantom_sign_house_alarms_total": 0,
         "phantom_alarms_per_24h": 0,
-        "total_cpu_ms_20ep": 3668.2235,
-        "mean_cpu_ms_per_24h": 183.4112,
-        "mean_ms_per_wakeup": 6.9606
+        "total_cpu_ms_20ep": 4763.1437,
+        "mean_cpu_ms_per_24h": 238.1572,
+        "mean_ms_per_wakeup": 9.0382
       },
       "Arm4-Analytic-RiseSet-Jump": {
         "mean_wakeups_per_24h": 11.9,
@@ -68,11 +68,11 @@
         "median_cliff_timing_err_min": 0,
         "phantom_sign_house_alarms_total": 0,
         "phantom_alarms_per_24h": 0,
-        "total_cpu_ms_20ep": 174.5941,
-        "mean_cpu_ms_per_24h": 8.7297,
-        "mean_ms_per_wakeup": 0.7336
+        "total_cpu_ms_20ep": 223.642,
+        "mean_cpu_ms_per_24h": 11.1821,
+        "mean_ms_per_wakeup": 0.9397
       }
     }
   },
-  "verdict": "KILLED (chartStability step-size control): Arm4-Analytic-RiseSet-Jump (sceneGeometry.diurnal.minutesToNextTwilight) strictly dominates Arm3-Stability-Physical-SectOnly by 21.01x lower CPU (8.7297 vs 183.4112 ms/24h), higher physical cliff coverage (100.0% vs 40.5%, catching civil dawn/dusk), and fewer wakeups (11.9 vs 26.35/24h). Archive chartStability scheduler to lab/graveyard/KILL-005-chart-stability-step-control.md; use direct sceneGeometry next-event scheduling instead."
+  "verdict": "KILLED (chartStability step-size control): Arm4-Analytic-RiseSet-Jump (sceneGeometry.diurnal.minutesToNextTwilight) strictly dominates Arm3-Stability-Physical-SectOnly by 21.2981x lower CPU (11.1821 vs 238.1572 ms/24h), higher physical cliff coverage (100.0% vs 40.5%, catching civil dawn/dusk), and fewer wakeups (11.9 vs 26.35/24h). Archive chartStability scheduler to lab/graveyard/KILL-005-chart-stability-step-control.md; use direct sceneGeometry next-event scheduling instead."
 }

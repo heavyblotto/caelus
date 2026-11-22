@@ -6,10 +6,25 @@ Run via:
 
 Strictly self-contained inside lab/experiments/EXP-007-geo-rope-sleep-transformer/.
 Generates all ephemeris phases directly from Caelus's zero-dep python/astroengine/ reference engine,
-trains 3 parameter-matched (~1.64M-param) autoregressive causal transformers (Part A),
-runs a 5-cycle sequential Wake -> Sleep continual consolidation benchmark on actual trained weights
-and low-rank LoRA adapters (Part B), and emits:
-  - training_receipt.json (compact reproducible provenance, loss curves, split SHA-256 hashes, metrics)
+trains 5 parameter-matched (1,427,136-param) autoregressive causal transformers (Part A) across
+3 independent seeds (20261122, 20261123, 20261124):
+  1. Standard-RoPE
+  2. Hybrid-Unix-Fourier-RoPE
+  3. Hybrid-Unix-Fourier+LatLon        (location-aware control eliminating the location information gap)
+  4. Hybrid-NOAA20-RoPE                (20-line Spencer/NOAA solar-only baseline, zero Moon/ephemeris)
+  5. Hybrid-Dual-Geo-RoPE              (Caelus python/astroengine/ physical torus)
+
+Runs a 5-cycle sequential Wake -> Sleep continual consolidation benchmark on actual trained weights
+and matched rank-16 LoRA adapters (Part B) across 6 arms x 3 seeds:
+  1. Naive-Online-FT
+  2. SLEEP-Fixed24h-LRU
+  3. Diag-SLEEP-GeoRoPE-LRU
+  4. SLEEP-Reservoir-Random            (Vitter's Algorithm R uniform reservoir sampling, B = 250)
+  5. SLEEP-NOAA20-Stratified           (20-line NOAA solar horizon + season + lon stratification, B = 250)
+  6. SLEEP-Caelus-Circadian-Stratified (Caelus astroengine horizon + season + lon stratification, B = 250)
+
+Emits:
+  - training_receipt.json (compact reproducible provenance, multi-seed mean +/- std, loss curves, split SHA-256 hashes)
 """
 
 from __future__ import annotations
@@ -45,13 +60,14 @@ from astroengine.pheno import az_alt, refract_true_to_apparent
 
 # ----------------------------------------------------------------- Constants
 
-SEED = 20261122
+SEEDS = [20261122, 20261123, 20261124]
+PRIMARY_SEED = SEEDS[0]
 TWO_PI = 2.0 * math.pi
 SEC_PER_DAY = 86400.0
 DT_MIN = 1.0 / 1440.0
 JD_EPOCH = julian_day(2026, 9, 22, 0, 0, 0)
 
-# Note: During NYC -> Tokyo travel, the agent carries its home profile token (LOC_NYC = 54)
+# During NYC -> Tokyo travel, the agent carries its home profile token (LOC_NYC = 54)
 # while physical coordinates relocate to Tokyo (35.68N, 139.65E), avoiding untrained token IDs
 # and modeling real home-timezone travel drift.
 CITIES = {
@@ -118,7 +134,18 @@ MODEL_CFG = {
 ENCODER_NAMES = [
     "Standard-RoPE",
     "Hybrid-Unix-Fourier-RoPE",
+    "Hybrid-Unix-Fourier+LatLon",
+    "Hybrid-NOAA20-RoPE",
     "Hybrid-Dual-Geo-RoPE",
+]
+
+PART_B_ARM_NAMES = [
+    "Naive-Online-FT",
+    "SLEEP-Fixed24h-LRU",
+    "Diag-SLEEP-GeoRoPE-LRU",
+    "SLEEP-Reservoir-Random",
+    "SLEEP-NOAA20-Stratified",
+    "SLEEP-Caelus-Circadian-Stratified",
 ]
 
 
@@ -143,10 +170,59 @@ def get_git_sha() -> str:
         return "unknown"
 
 
+def mean_std(vals: Sequence[float]) -> Tuple[float, float]:
+    arr = np.asarray(vals, dtype=np.float64)
+    m = float(np.mean(arr))
+    s = float(np.std(arr, ddof=1)) if len(arr) > 1 else 0.0
+    return round(m, 4), round(s, 4)
+
+
+# ----------------------------------------------- 20-Line NOAA Solar Formula
+
+def noaa20_solar(jd_ut: float, lat: float, lon: float) -> Dict[str, float]:
+    """20-line Spencer (1971) / NOAA solar declination + equation-of-time formula (zero Moon, zero refraction, zero ephemeris)."""
+    unix_sec = (jd_ut - 2440587.5) * SEC_PER_DAY
+    dt = datetime.datetime.fromtimestamp(unix_sec, tz=datetime.timezone.utc)
+    doy = dt.timetuple().tm_yday - 1
+    utc_hr = dt.hour + dt.minute / 60.0 + dt.second / 3600.0
+    gamma = (TWO_PI / 365.0) * (doy + (utc_hr - 12.0) / 24.0)
+    eqtime = 229.18 * (0.000075 + 0.001868 * math.cos(gamma) - 0.032077 * math.sin(gamma)
+                       - 0.014615 * math.cos(2.0 * gamma) - 0.040849 * math.sin(2.0 * gamma))
+    decl = (0.006918 - 0.399912 * math.cos(gamma) + 0.070257 * math.sin(gamma)
+            - 0.006758 * math.cos(2.0 * gamma) + 0.000907 * math.sin(2.0 * gamma)
+            - 0.002697 * math.cos(3.0 * gamma) + 0.00148 * math.sin(3.0 * gamma))
+    lat_r = lat * DEG
+    tst = (utc_hr * 60.0 + eqtime + 4.0 * lon) % 1440.0
+    ha = (tst / 4.0 - 180.0) * DEG
+    sin_alt = max(-1.0, min(1.0, math.sin(lat_r) * math.sin(decl) + math.cos(lat_r) * math.cos(decl) * math.cos(ha)))
+    alt_deg = math.degrees(math.asin(sin_alt))
+    sin_p = max(-1.0, min(1.0, math.sin(lat_r) * math.sin(decl) + math.cos(lat_r) * math.cos(decl) * math.cos(ha + 0.25 * DEG)))
+    rate_alt = math.degrees(math.asin(sin_p)) - alt_deg
+    cos_ha0 = (math.cos(90.833 * DEG) - math.sin(lat_r) * math.sin(decl)) / max(1e-9, math.cos(lat_r) * math.cos(decl))
+    if -1.0 <= cos_ha0 <= 1.0:
+        ha0_deg = math.degrees(math.acos(cos_ha0))
+        sr_tst, ss_tst = 720.0 - 4.0 * ha0_deg, 720.0 + 4.0 * ha0_deg
+        if sr_tst <= tst < ss_tst:
+            ph_rad = math.pi * (tst - sr_tst) / max(1e-6, ss_tst - sr_tst)
+        else:
+            ph_rad = math.pi + math.pi * (((tst - ss_tst) % 1440.0) / max(1e-6, 1440.0 - (ss_tst - sr_tst)))
+    else:
+        ph_rad = (TWO_PI * (tst / 1440.0)) % TWO_PI
+    approx_sun_lon = ((doy + utc_hr / 24.0 - 79.5) * 360.0 / 365.25) % 360.0
+    return {
+        "sun_alt_deg": alt_deg,
+        "sun_alt_rate": rate_alt,
+        "sun_alt_phase": 2.0 * alt_deg * DEG,
+        "sun_trend_phase": math.atan2(rate_alt, 0.15),
+        "ph_rad": ph_rad,
+        "approx_sun_lon": approx_sun_lon,
+    }
+
+
 # ----------------------------------------------- Caelus Ephemeris Extractor
 
 class CaelusPhaseExtractor:
-    """Computes real geocentric phases directly from python/astroengine/."""
+    """Computes real geocentric phases directly from python/astroengine/ plus cached 20-line NOAA solar baseline."""
 
     def __init__(self, engine: Engine):
         self.engine = engine
@@ -219,6 +295,7 @@ class CaelusPhaseExtractor:
         else:
             ph_rad = (TWO_PI * ((jd_ut + lon / 360.0) % 1.0)) % TWO_PI
 
+        noaa = noaa20_solar(jd_ut, lat, lon)
         out = {
             "gast_rad": g_rad,
             "asc_rad": asc_rad,
@@ -233,6 +310,11 @@ class CaelusPhaseExtractor:
             "sun_lon_deg": sun_lon_deg,
             "lat": lat,
             "lon": lon,
+            "noaa_sun_alt_deg": noaa["sun_alt_deg"],
+            "noaa_sun_alt_phase": noaa["sun_alt_phase"],
+            "noaa_sun_trend_phase": noaa["sun_trend_phase"],
+            "noaa_ph_rad": noaa["ph_rad"],
+            "noaa_approx_sun_lon": noaa["approx_sun_lon"],
         }
         self._point_cache[q_key] = out
         return out
@@ -256,8 +338,8 @@ FREQS_32 = np.array([10000.0 ** (-2.0 * p / 64.0) for p in range(PLANES)], dtype
 FREQS_16 = np.array([10000.0 ** (-2.0 * p / 32.0) for p in range(HALF_PLANES)], dtype=np.float32)
 
 
-def compute_thetas_all(m: int, jd_ut: float, phys: Dict[str, float]) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """Return (theta_std, theta_unix, theta_geo) each of shape (32,) float32."""
+def compute_thetas_all(m: int, jd_ut: float, phys: Dict[str, float]) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """Return 5 rotary phase vectors each of shape (32,) float32."""
     th_std = (m * FREQS_32).astype(np.float32)
     fast_16 = (m * FREQS_16).astype(np.float32)
 
@@ -265,6 +347,13 @@ def compute_thetas_all(m: int, jd_ut: float, phys: Dict[str, float]) -> Tuple[np
     p24 = TWO_PI * t_sec / SEC_PER_DAY
     p7d = TWO_PI * t_sec / (7.0 * SEC_PER_DAY)
     p365 = TWO_PI * t_sec / (365.25 * SEC_PER_DAY)
+    lat = phys["lat"]
+    lon = phys["lon"]
+    p_lmt = TWO_PI * ((jd_ut - JD_EPOCH + lon / 360.0) % 1.0)
+    lat_r = lat * DEG
+    lon_r = lon * DEG
+
+    # 1. Hybrid-Unix-Fourier-RoPE (pure UTC 24h / 7d / 365.25d)
     utc_16 = np.array([
         p24, p24, 2.0 * p24, 2.0 * p24, 3.0 * p24, 4.0 * p24,
         p7d, 2.0 * p7d, 4.0 * p7d, 8.0 * p7d, p7d, 2.0 * p7d,
@@ -272,6 +361,30 @@ def compute_thetas_all(m: int, jd_ut: float, phys: Dict[str, float]) -> Tuple[np
     ], dtype=np.float32)
     th_unix = np.concatenate([fast_16, utc_16])
 
+    # 2. Hybrid-Unix-Fourier+LatLon (location-aware control matching EXP-012 Arm2b: LMT + UTC + 7d + 365.25d + lat/lon)
+    latlon_16 = np.array([
+        p_lmt, 2.0 * p_lmt, 3.0 * p_lmt, 4.0 * p_lmt,
+        p24, 2.0 * p24,
+        p7d, 2.0 * p7d, 4.0 * p7d,
+        p365, 2.0 * p365, 4.0 * p365, 8.0 * p365,
+        lat_r, 2.0 * lat_r, lon_r,
+    ], dtype=np.float32)
+    th_latlon = np.concatenate([fast_16, latlon_16])
+
+    # 3. Hybrid-NOAA20-RoPE (20-line NOAA solar altitude + trend + photoperiod arc + rational 7d/365.25d; ZERO Moon/ephemeris)
+    sa_n = phys["noaa_sun_alt_phase"]
+    st_n = phys["noaa_sun_trend_phase"]
+    ph_n = phys["noaa_ph_rad"]
+    noaa_16 = np.array([
+        p_lmt, p24,
+        sa_n, 2.0 * sa_n, st_n,
+        ph_n, 2.0 * ph_n, 3.0 * ph_n,
+        p7d, 2.0 * p7d, 4.0 * p7d, 8.0 * p7d,
+        p365, 2.0 * p365, 4.0 * p365, 8.0 * p365,
+    ], dtype=np.float32)
+    th_noaa = np.concatenate([fast_16, noaa_16])
+
+    # 4. Hybrid-Dual-Geo-RoPE (Caelus python/astroengine/ physical torus with lunar incommensurate frequencies)
     g = phys["gast_rad"]
     asc = phys["asc_rad"]
     sa = phys["sun_alt_phase"]
@@ -289,7 +402,7 @@ def compute_thetas_all(m: int, jd_ut: float, phys: Dict[str, float]) -> Tuple[np
         sl, 4.0 * sl,
     ], dtype=np.float32)
     th_geo = np.concatenate([fast_16, geo_16])
-    return th_std, th_unix, th_geo
+    return th_std, th_unix, th_latlon, th_noaa, th_geo
 
 
 def build_sequence_tensors(
@@ -306,15 +419,19 @@ def build_sequence_tensors(
     labels = np.full(MAX_SEQ_LEN, -100, dtype=np.int64)
     th_std = np.zeros((MAX_SEQ_LEN, PLANES), dtype=np.float32)
     th_unix = np.zeros((MAX_SEQ_LEN, PLANES), dtype=np.float32)
+    th_latlon = np.zeros((MAX_SEQ_LEN, PLANES), dtype=np.float32)
+    th_noaa = np.zeros((MAX_SEQ_LEN, PLANES), dtype=np.float32)
     th_geo = np.zeros((MAX_SEQ_LEN, PLANES), dtype=np.float32)
 
     for i in range(seq_len):
         ids[i] = tokens[i]
         if i == 0:
             continue
-        s, u, g = compute_thetas_all(m_steps[i], jds[i], phys_list[i])
+        s, u, ll, noaa, g = compute_thetas_all(m_steps[i], jds[i], phys_list[i])
         th_std[i] = s
         th_unix[i] = u
+        th_latlon[i] = ll
+        th_noaa[i] = noaa
         th_geo[i] = g
 
     for pos, tok in target_positions:
@@ -327,6 +444,8 @@ def build_sequence_tensors(
         "thetas": {
             "Standard-RoPE": th_std,
             "Hybrid-Unix-Fourier-RoPE": th_unix,
+            "Hybrid-Unix-Fourier+LatLon": th_latlon,
+            "Hybrid-NOAA20-RoPE": th_noaa,
             "Hybrid-Dual-Geo-RoPE": th_geo,
         },
         "target_positions": target_positions,
@@ -385,12 +504,6 @@ def gen_task1_examples(
     base_pool: List[Tuple[str, float, Dict[str, float]]],
     n_examples: int,
 ) -> List[Dict]:
-    """Task 1: Intra-turn Turney register state tracking inside a 2.0-second burst.
-
-    4 rounds of 2 register writes (R_k, V_v over R0..R3, V0..V7 with guaranteed
-    overwrites) + 1 query (Q_REG, R_q -> V_latest) inside 2.0 seconds
-    (dt = 0.07s/token, Earth rotates 0.008 deg).
-    """
     out = []
     for _ in range(n_examples):
         city, jd0, _ = rng.choice(base_pool)
@@ -416,7 +529,6 @@ def gen_task1_examples(
             m += 1
             return pos
 
-        # 4 rounds x (2 writes x 2 tokens + 3 query tokens) = 28 tokens + BOS = 29 <= 36
         for _ in range(4):
             last_overwritten = None
             for _ in range(2):
@@ -449,7 +561,6 @@ def gen_task2_examples(
     evening_pool: List[Tuple[str, float, Dict[str, float]]],
     n_examples: int,
 ) -> List[Dict]:
-    """Task 2: Post-sleep / context-reset continuity (m resets to 0 after 5m vs 14h sleep vs 3-10d)."""
     out = []
     gap_modes = ["fresh_5m", "sleep_14h", "dormancy_multi_day"]
     for idx in range(n_examples):
@@ -503,7 +614,6 @@ def gen_task3a_examples(
     n_examples: int,
     split_tag: str,
 ) -> List[Dict]:
-    """Task 3A: Physical daylight/twilight/deadline regime prediction."""
     cities = list(pools_by_city.keys())
     out = []
     for idx in range(n_examples):
@@ -539,7 +649,6 @@ def gen_task3b_examples(
     adversarial_same_utc: bool,
     split_tag: str,
 ) -> List[Dict]:
-    """Task 3B: Photoperiod-matched memory retrieval (4 historical memories + 1 query)."""
     bank_lat, bank_lon = CITIES[bank_city]["lat"], CITIES[bank_city]["lon"]
     out = []
     attempts = 0
@@ -619,7 +728,6 @@ def gen_task4_examples(
     day_offsets: Sequence[int],
     split_tag: str,
 ) -> List[Dict]:
-    """Task 4: Multi-week same-UTC memory streams (0d/7d/14d/21d/28d, plus 52-week wrap stress)."""
     lat, lon = CITIES["Oslo"]["lat"], CITIES["Oslo"]["lon"]
     n_slots = len(day_offsets)
     out = []
@@ -728,6 +836,7 @@ class CausalSelfAttention(nn.Module):
         assert d_model % n_heads == 0
         self.n_heads = n_heads
         self.head_dim = d_model // n_heads
+        self.dropout_p = dropout
         self.q_proj = nn.Linear(d_model, d_model, bias=False)
         self.k_proj = nn.Linear(d_model, d_model, bias=False)
         self.v_proj = nn.Linear(d_model, d_model, bias=False)
@@ -742,11 +851,13 @@ class CausalSelfAttention(nn.Module):
 
         q, k = apply_rotary_emb(q, k, thetas)
 
-        att = (q @ k.transpose(-2, -1)) / math.sqrt(self.head_dim)
-        causal_mask = torch.triu(torch.ones(T, T, device=x.device, dtype=torch.bool), diagonal=1)
-        att = att.masked_fill(causal_mask, float("-inf"))
-        w = self.drop(F.softmax(att, dim=-1))
-        y = (w @ v).transpose(1, 2).contiguous().view(B, T, C)
+        y = F.scaled_dot_product_attention(
+            q, k, v,
+            attn_mask=None,
+            dropout_p=self.dropout_p if self.training else 0.0,
+            is_causal=True,
+        )
+        y = y.transpose(1, 2).contiguous().view(B, T, C)
         return self.drop(self.o_proj(y))
 
 
@@ -794,7 +905,6 @@ class TinyCausalTransformer(nn.Module):
 
 
 def attach_sleep_lora(model: TinyCausalTransformer, rank: int = 16, alpha: float = 16.0) -> Tuple[int, int]:
-    """Freeze all pretrained core weights and attach rank-r LoRA blocks across all layers + lm_head."""
     for p in model.parameters():
         p.requires_grad = False
 
@@ -826,12 +936,12 @@ def select_best_device() -> Tuple[torch.device, Dict[str, float]]:
 
     for dev_name in candidates:
         dev = torch.device(dev_name)
-        set_all_seeds(SEED)
+        set_all_seeds(PRIMARY_SEED)
         m = TinyCausalTransformer(MODEL_CFG).to(dev)
-        ids = torch.randint(0, VOCAB_SIZE, (128, MAX_SEQ_LEN), device=dev)
-        thetas = torch.randn(128, MAX_SEQ_LEN, PLANES, device=dev)
-        labels = torch.full((128, MAX_SEQ_LEN), -100, dtype=torch.long, device=dev)
-        labels[:, -2] = torch.randint(0, VOCAB_SIZE, (128,), device=dev)
+        ids = torch.randint(0, VOCAB_SIZE, (192, MAX_SEQ_LEN), device=dev)
+        thetas = torch.randn(192, MAX_SEQ_LEN, PLANES, device=dev)
+        labels = torch.full((192, MAX_SEQ_LEN), -100, dtype=torch.long, device=dev)
+        labels[:, -2] = torch.randint(0, VOCAB_SIZE, (192,), device=dev)
         opt = torch.optim.AdamW(m.parameters(), lr=1e-3)
 
         for _ in range(3):
@@ -889,7 +999,6 @@ def eval_dataset(
         preds = logits.argmax(dim=-1)
         correct = (preds == labels) & mask
 
-        # Logit margin (true class logit minus highest competing logit)
         if mask.any():
             m_logits = logits[mask]
             m_labels = labels[mask]
@@ -915,27 +1024,29 @@ def eval_dataset(
 
 
 def train_part_a_model(
+    seed: int,
     enc_name: str,
     init_state: Dict,
     train_ds: Dict,
     val_ds: Dict,
     device: torch.device,
-    epochs: int = 20,
-    batch_size: int = 128,
-    lr: float = 1.4e-3,
+    epochs: int = 28,
+    batch_size: int = 192,
+    lr: float = 2.1e-3,
 ) -> Tuple[TinyCausalTransformer, Dict]:
-    set_all_seeds(SEED + ENCODER_NAMES.index(enc_name) * 17)
+    set_all_seeds(seed + ENCODER_NAMES.index(enc_name) * 17)
     model = TinyCausalTransformer(MODEL_CFG).to(device)
     model.load_state_dict(copy.deepcopy(init_state))
 
     n_train = train_ds["ids"].shape[0]
-    ids_cpu = train_ds["ids"]
-    labels_cpu = train_ds["labels"]
-    thetas_cpu = train_ds["thetas"][enc_name]
+    # Stage full training tensors directly on device once (~60 MB) for fast MPS throughput
+    ids_dev = train_ds["ids"].to(device)
+    labels_dev = train_ds["labels"].to(device)
+    thetas_dev = train_ds["thetas"][enc_name].to(device)
 
     opt = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=0.02)
     total_steps = epochs * ((n_train + batch_size - 1) // batch_size)
-    warmup = min(120, total_steps // 10)
+    warmup = min(100, total_steps // 10)
 
     def lr_lambda(step: int) -> float:
         if step < warmup:
@@ -952,7 +1063,7 @@ def train_part_a_model(
 
     for ep in range(1, epochs + 1):
         model.train()
-        perm = torch.randperm(n_train)
+        perm = torch.randperm(n_train, device=device)
         ep_loss_sum = 0.0
         ep_tok_sum = 0
         ep_gnorm = 0.0
@@ -960,9 +1071,9 @@ def train_part_a_model(
 
         for start in range(0, n_train, batch_size):
             idx = perm[start:start + batch_size]
-            ids = ids_cpu[idx].to(device)
-            labels = labels_cpu[idx].to(device)
-            thetas = thetas_cpu[idx].to(device)
+            ids = ids_dev[idx]
+            labels = labels_dev[idx]
+            thetas = thetas_dev[idx]
 
             opt.zero_grad(set_to_none=True)
             logits = model(ids, thetas)
@@ -985,7 +1096,7 @@ def train_part_a_model(
             "train_loss": ep_loss,
             "mean_grad_norm": round(ep_gnorm / max(1, n_batches), 4),
         })
-        if ep in (1, 5, 10, 15, epochs):
+        if ep in (1, 7, 14, 21, epochs):
             val_m = eval_dataset(model, val_ds, enc_name, device)
             val_curve.append({"epoch": ep, "val_loss": val_m["loss"], "val_token_acc": val_m["token_acc"]})
 
@@ -993,10 +1104,12 @@ def train_part_a_model(
         torch.mps.synchronize()
     wall_s = round(time.perf_counter() - t0, 2)
 
+    del ids_dev, labels_dev, thetas_dev
     return model, {
         "encoder": enc_name,
         "param_count": count_params(model),
         "epochs": epochs,
+        "batch_size": batch_size,
         "optimizer_steps": step,
         "wall_time_sec": wall_s,
         "initial_train_loss": loss_curve[0]["train_loss"],
@@ -1009,41 +1122,38 @@ def train_part_a_model(
 # ----------------------------------------- Part B: Google SLEEP Continual Study
 
 def phase_stratum_key(phys: Dict[str, float]) -> Tuple[int, int, int]:
-    """Unsupervised EXP-002 physical phase stratum key (zero task labels!).
-
-    Partitions episodes purely by Caelus astronomical observables:
-      - horizon_state: 0=night(<-6 deg), 1=twilight([-6, +6] deg), 2=day(>+6 deg)
-      - seasonal_quadrant: 4 astronomical seasons centered on equinoxes/solstices
-      - observer_lon_bin: 60-deg horizon longitude sector (0..5)
-    """
+    """Unsupervised Caelus physical phase stratum key (zero task labels)."""
     alt = phys["sun_alt_deg"]
-    if alt < -6.0:
-        d_bin = 0
-    elif alt <= 6.0:
-        d_bin = 1
-    else:
-        d_bin = 2
+    d_bin = 0 if alt < -6.0 else (1 if alt <= 6.0 else 2)
     s_bin = int(((phys["sun_lon_deg"] + 45.0) % 360.0) // 90.0) % 4
+    lon_bin = int(((phys["lon"] + 180.0) % 360.0) // 60.0) % 6
+    return (d_bin, s_bin, lon_bin)
+
+
+def noaa_phase_stratum_key(phys: Dict[str, float]) -> Tuple[int, int, int]:
+    """Unsupervised 20-line NOAA solar-only phase stratum key (zero Moon/ephemeris, zero labels)."""
+    alt = phys["noaa_sun_alt_deg"]
+    d_bin = 0 if alt < -6.0 else (1 if alt <= 6.0 else 2)
+    s_bin = int(((phys["noaa_approx_sun_lon"] + 45.0) % 360.0) // 90.0) % 4
     lon_bin = int(((phys["lon"] + 180.0) % 360.0) // 60.0) % 6
     return (d_bin, s_bin, lon_bin)
 
 
 def compact_lru_buffer(buffer: List[Dict], new_items: List[Dict], capacity: int) -> List[Dict]:
     combined = buffer + new_items
-    if len(combined) <= capacity:
-        return combined
-    return combined[-capacity:]
+    return combined if len(combined) <= capacity else combined[-capacity:]
 
 
-def compact_caelus_stratified_buffer(buffer: List[Dict], new_items: List[Dict], capacity: int) -> List[Dict]:
-    """Unsupervised phase-stratified dreaming replay compaction (EXP-002 principle, zero labels)."""
+def compact_stratified_buffer(
+    buffer: List[Dict], new_items: List[Dict], capacity: int, stratum_field: str
+) -> List[Dict]:
     combined = buffer + new_items
     if len(combined) <= capacity:
         return combined
 
     strata: Dict[Tuple[int, int, int], List[Dict]] = {}
     for item in reversed(combined):
-        k = item["meta"]["phase_stratum"]
+        k = item["meta"][stratum_field]
         strata.setdefault(k, []).append(item)
 
     selected: List[Dict] = []
@@ -1057,6 +1167,26 @@ def compact_caelus_stratified_buffer(buffer: List[Dict], new_items: List[Dict], 
     return selected
 
 
+def update_reservoir_vitter_r(
+    buffer: List[Dict],
+    new_items: List[Dict],
+    capacity: int,
+    n_seen: int,
+    res_rng: random.Random,
+) -> Tuple[List[Dict], int]:
+    """Exact Vitter's Algorithm R uniform reservoir sampling across the cumulative wake stream."""
+    buf = list(buffer)
+    for item in new_items:
+        n_seen += 1
+        if len(buf) < capacity:
+            buf.append(item)
+        else:
+            j = res_rng.randint(0, n_seen - 1)
+            if j < capacity:
+                buf[j] = item
+    return buf, n_seen
+
+
 def build_part_b_cycles(
     rng: random.Random,
     extractor: CaelusPhaseExtractor,
@@ -1066,14 +1196,14 @@ def build_part_b_cycles(
     def policy_action(cycle_id: int, evt: int, reg_val: int) -> int:
         parity = reg_val % 2
         if cycle_id == 1:
-            return ACT_BASE + ((evt + parity) % 4)          # ACT_0..3
+            return ACT_BASE + ((evt + parity) % 4)
         if cycle_id == 2:
-            return ACT_BASE + 4 + ((evt + parity) % 3)      # ACT_4..6
+            return ACT_BASE + 4 + ((evt + parity) % 3)
         if cycle_id == 3:
-            return ACT_BASE + 7 + ((evt + parity) % 3)      # ACT_7..9
+            return ACT_BASE + 7 + ((evt + parity) % 3)
         if cycle_id == 4:
-            return ACT_BASE + 10 + ((evt + parity) % 3)     # ACT_10..12
-        return ACT_BASE + 13 + ((evt + parity) % 3)         # ACT_13..15
+            return ACT_BASE + 10 + ((evt + parity) % 3)
+        return ACT_BASE + 13 + ((evt + parity) % 3)
 
     specs = [
         {
@@ -1110,7 +1240,6 @@ def build_part_b_cycles(
             "city": "Oslo",
             "wake_start": (2026, 12, 11), "wake_days": 10,
             "eval_start": (2026, 12, 22), "eval_days": 6,
-            # 12:30 - 15:30 UTC in Oslo Winter (overlaps C1 Oslo Autumn afternoon UTC!)
             "filter": lambda jd, p: (12.5 <= (((jd - math.floor(jd + 0.5) + 0.5) % 1.0) * 24.0) <= 15.5),
         },
         {
@@ -1120,7 +1249,6 @@ def build_part_b_cycles(
             "city": "Tokyo",
             "wake_start": (2026, 11, 22), "wake_days": 10,
             "eval_start": (2026, 12, 3), "eval_days": 6,
-            # Tokyo local daytime (~00:00-06:30 UTC, overlaps C3 Oslo UTC night!)
             "filter": lambda jd, p: p["sun_alt_deg"] >= 8.0,
         },
     ]
@@ -1150,6 +1278,8 @@ def build_part_b_cycles(
         jd_gate0 = julian_day(sp["wake_start"][0], sp["wake_start"][1], sp["wake_start"][2], 0, 0, 0)
         fixed_triggers = 0
         fixed_safe_night = 0
+        noaa_triggers = 0
+        noaa_safe_night = 0
         caelus_triggers = 0
         caelus_safe_night = 0
         for d in range(5):
@@ -1161,6 +1291,10 @@ def build_part_b_cycles(
                     fixed_triggers += 1
                     if is_true_night:
                         fixed_safe_night += 1
+                if p_h["noaa_sun_alt_deg"] < -6.0:
+                    noaa_triggers += 1
+                    if is_true_night:
+                        noaa_safe_night += 1
                 if is_true_night:
                     caelus_triggers += 1
                     caelus_safe_night += 1
@@ -1170,6 +1304,7 @@ def build_part_b_cycles(
             "name": sp["short"],
             "city": city,
             "fixed24h_utc_gate_nocturnal_safety": round(fixed_safe_night / max(1, fixed_triggers), 4),
+            "noaa20_horizon_gate_nocturnal_safety": round(noaa_safe_night / max(1, noaa_triggers), 4),
             "caelus_horizon_gate_nocturnal_safety": round(caelus_safe_night / max(1, caelus_triggers), 4),
             "fixed24h_daytime_interruptions_pct": round(1.0 - fixed_safe_night / max(1, fixed_triggers), 4),
         })
@@ -1202,6 +1337,7 @@ def build_part_b_cycles(
                     "city": city,
                     "jd": jd,
                     "phase_stratum": phase_stratum_key(phys),
+                    "noaa_stratum": noaa_phase_stratum_key(phys),
                 }
                 eps.append(ex)
             return eps
@@ -1221,16 +1357,16 @@ def build_part_b_cycles(
             "eval_ds": stack_examples(eval_eps),
         })
 
-    overall_fixed_safety = round(float(np.mean([g["fixed24h_utc_gate_nocturnal_safety"] for g in gate_audit])), 4)
-    overall_caelus_safety = round(float(np.mean([g["caelus_horizon_gate_nocturnal_safety"] for g in gate_audit])), 4)
     return cycles, {
         "by_cycle": gate_audit,
-        "overall_fixed24h_nocturnal_safety": overall_fixed_safety,
-        "overall_caelus_nocturnal_safety": overall_caelus_safety,
+        "overall_fixed24h_nocturnal_safety": round(float(np.mean([g["fixed24h_utc_gate_nocturnal_safety"] for g in gate_audit])), 4),
+        "overall_noaa20_nocturnal_safety": round(float(np.mean([g["noaa20_horizon_gate_nocturnal_safety"] for g in gate_audit])), 4),
+        "overall_caelus_nocturnal_safety": round(float(np.mean([g["caelus_horizon_gate_nocturnal_safety"] for g in gate_audit])), 4),
     }
 
 
 def run_part_b_arm(
+    seed: int,
     arm_name: str,
     base_model: TinyCausalTransformer,
     enc_name: str,
@@ -1246,7 +1382,8 @@ def run_part_b_arm(
     sleep_steps: int = 300,
     batch_size: int = 32,
 ) -> Dict:
-    set_all_seeds(SEED + 999)
+    set_all_seeds(seed + 999)
+    res_rng = random.Random(seed + 4242)
     model = copy.deepcopy(base_model).to(device)
 
     if use_sleep_lora:
@@ -1266,6 +1403,7 @@ def run_part_b_arm(
     pre_t2 = eval_dataset(model, part_a_task2_ds, enc_name, device)["seq_exact_acc"]
 
     replay_buffer: List[Dict] = []
+    n_stream_seen = 0
     acc_matrix: List[Dict[str, float]] = []
     buffer_composition: List[Dict[str, int]] = []
     cycle_losses: List[Dict[str, float]] = []
@@ -1275,36 +1413,46 @@ def run_part_b_arm(
         trainable = [p for p in model.parameters() if p.requires_grad]
         wake_opt = torch.optim.AdamW(trainable, lr=wake_lr, weight_decay=0.01)
         wake_ds = stack_examples(cyc["wake_eps"])
-        n_w = wake_ds["ids"].shape[0]
+        w_ids = wake_ds["ids"].to(device)
+        w_labels = wake_ds["labels"].to(device)
+        w_thetas = wake_ds["thetas"][enc_name].to(device)
+        n_w = w_ids.shape[0]
 
-        # 1. WAKE PHASE: online exposure to current cycle's wake stream
+        # 1. WAKE PHASE
         model.train()
         wake_loss_start = None
         wake_loss_end = None
         n_w_steps = wake_steps if use_sleep_lora else 100
-        for step in range(n_w_steps):
-            idx = torch.randint(0, n_w, (batch_size,))
-            ids = wake_ds["ids"][idx].to(device)
-            labels = wake_ds["labels"][idx].to(device)
-            thetas = wake_ds["thetas"][enc_name][idx].to(device)
-
+        for _ in range(n_w_steps):
+            idx = torch.randint(0, n_w, (batch_size,), device=device)
             wake_opt.zero_grad(set_to_none=True)
-            logits = model(ids, thetas)
-            loss = F.cross_entropy(logits.view(-1, VOCAB_SIZE), labels.view(-1), ignore_index=-100)
+            logits = model(w_ids[idx], w_thetas[idx])
+            loss = F.cross_entropy(logits.view(-1, VOCAB_SIZE), w_labels[idx].view(-1), ignore_index=-100)
             loss.backward()
             torch.nn.utils.clip_grad_norm_(trainable, 1.0)
             wake_opt.step()
+            lv = float(loss.item())
             if wake_loss_start is None:
-                wake_loss_start = float(loss.item())
-            wake_loss_end = float(loss.item())
+                wake_loss_start = lv
+            wake_loss_end = lv
 
         # 2. OFFLINE SLEEP CONSOLIDATION ("DREAMING" REHEARSAL)
         sleep_loss_end = wake_loss_end
         if use_sleep_lora and buffer_mode != "none":
             if buffer_mode == "lru":
                 replay_buffer = compact_lru_buffer(replay_buffer, cyc["buffer_ingest"], buffer_capacity)
+            elif buffer_mode == "reservoir":
+                replay_buffer, n_stream_seen = update_reservoir_vitter_r(
+                    replay_buffer, cyc["buffer_ingest"], buffer_capacity, n_stream_seen, res_rng
+                )
+            elif buffer_mode == "noaa_stratified":
+                replay_buffer = compact_stratified_buffer(
+                    replay_buffer, cyc["buffer_ingest"], buffer_capacity, stratum_field="noaa_stratum"
+                )
             elif buffer_mode == "caelus_stratified":
-                replay_buffer = compact_caelus_stratified_buffer(replay_buffer, cyc["buffer_ingest"], buffer_capacity)
+                replay_buffer = compact_stratified_buffer(
+                    replay_buffer, cyc["buffer_ingest"], buffer_capacity, stratum_field="phase_stratum"
+                )
             else:
                 raise ValueError(buffer_mode)
 
@@ -1314,26 +1462,22 @@ def run_part_b_arm(
             buffer_composition.append(comp)
 
             dream_ds = stack_examples(replay_buffer)
-            n_d = dream_ds["ids"].shape[0]
+            d_ids = dream_ds["ids"].to(device)
+            d_labels = dream_ds["labels"].to(device)
+            d_thetas = dream_ds["thetas"][enc_name].to(device)
+            n_d = d_ids.shape[0]
             sleep_opt = torch.optim.AdamW(trainable, lr=sleep_lr, weight_decay=0.01)
             sleep_sched = torch.optim.lr_scheduler.CosineAnnealingLR(sleep_opt, T_max=sleep_steps, eta_min=1e-4)
 
             model.train()
-            for step in range(sleep_steps):
-                # Dreaming rehearsal sampled directly from the consolidated replay buffer
-                # (which already ingested the current cycle's wake stream)
-                d_idx = torch.randint(0, n_d, (batch_size,))
-                ids = dream_ds["ids"][d_idx].to(device)
-                labels = dream_ds["labels"][d_idx].to(device)
-                thetas = dream_ds["thetas"][enc_name][d_idx].to(device)
-
-                # Mild dreaming perturbation on rotary phases (sigma = 0.008 rad ~ 0.45 deg)
-                thetas_dream = thetas + torch.randn_like(thetas) * 0.008
+            for _ in range(sleep_steps):
+                d_idx = torch.randint(0, n_d, (batch_size,), device=device)
+                thetas_dream = d_thetas[d_idx] + torch.randn((batch_size, MAX_SEQ_LEN, PLANES), device=device) * 0.008
                 thetas_dream[:, 0, :] = 0.0
 
                 sleep_opt.zero_grad(set_to_none=True)
-                logits = model(ids, thetas_dream)
-                loss = F.cross_entropy(logits.view(-1, VOCAB_SIZE), labels.view(-1), ignore_index=-100)
+                logits = model(d_ids[d_idx], thetas_dream)
+                loss = F.cross_entropy(logits.view(-1, VOCAB_SIZE), d_labels[d_idx].view(-1), ignore_index=-100)
                 loss.backward()
                 torch.nn.utils.clip_grad_norm_(trainable, 1.0)
                 sleep_opt.step()
@@ -1368,6 +1512,7 @@ def run_part_b_arm(
     mean_final_retention = round(float(np.mean(final_c1_c5)), 4)
     ood_winter_travel_acc = round(0.5 * (final_row["C4"] + final_row["C5"]), 4)
 
+    # Forgetting delta = mean over cycles c in {1..4} of max(0, peak_acc_c - final_acc_c)
     forgetting_deltas = []
     for k in range(1, 5):
         peak_k = max(row[f"C{k}"] for row in acc_matrix if f"C{k}" in row)
@@ -1403,18 +1548,367 @@ def run_part_b_arm(
     }
 
 
+# ----------------------------------------- Single-Seed Pipeline & Aggregation
+
+def run_single_seed(
+    seed: int,
+    device: torch.device,
+    extractor: CaelusPhaseExtractor,
+    pools: Dict,
+) -> Dict:
+    t_seed = time.perf_counter()
+    set_all_seeds(seed)
+    rng = random.Random(seed)
+    print(f"\n=== EXP-007 Seed {seed} ===")
+
+    tr_t1 = gen_task1_examples(rng, extractor, pools["train_base_pts"], 5000)
+    tr_t2 = gen_task2_examples(rng, extractor, pools["train_eve_pts"], 2000)
+    tr_t3a = gen_task3a_examples(rng, {"Oslo": pools["oslo_tr_pool"], "NYC": pools["nyc_tr_pool"]}, 2000, "train")
+    tr_t3b = (
+        gen_task3b_examples(rng, extractor, "Oslo", pools["oslo_spr_tr"], "Oslo", pools["oslo_spr_tr"], 600, False, "train_same")
+        + gen_task3b_examples(rng, extractor, "NYC", pools["nyc_aut_tr"], "NYC", pools["nyc_aut_tr"], 600, False, "train_same")
+        + gen_task3b_examples(rng, extractor, "Oslo", pools["oslo_aut_tr"], "NYC", pools["nyc_aut_tr"], 600, True, "train_cross")
+        + gen_task3b_examples(rng, extractor, "NYC", pools["nyc_spr_tr"], "Oslo", pools["oslo_spr_tr"], 600, True, "train_cross")
+    )
+    tr_t4 = gen_task4_examples(rng, extractor, pools["t4_train_jds"], 2000, jitter_min_max=60.0, day_offsets=[0, 7, 14, 21, 28], split_tag="train")
+
+    train_all = tr_t1 + tr_t2 + tr_t3a + tr_t3b + tr_t4
+    rng.shuffle(train_all)
+    train_ds = stack_examples(train_all)
+
+    te_t1 = gen_task1_examples(rng, extractor, pools["id_base_pts"], 400)
+    te_t2_id = gen_task2_examples(rng, extractor, pools["id_eve_pts"], 300)
+    te_t2_ood = gen_task2_examples(rng, extractor, pools["ood_eve_pts"], 300)
+    te_t3a_id = gen_task3a_examples(rng, {"Oslo": pools["oslo_id_pool"], "NYC": pools["nyc_id_pool"]}, 400, "id_spring_autumn")
+
+    te_t3a_win = gen_task3a_examples(rng, {"Oslo": pools["oslo_win_ood"]}, 240, "ood_oslo_winter")
+    te_t3a_sum = gen_task3a_examples(rng, {"Oslo": pools["oslo_sum_ood"]}, 240, "ood_oslo_summer")
+    te_t3a_tok = gen_task3a_examples(rng, {"Tokyo": pools["tokyo_ood"]}, 240, "ood_tokyo_travel")
+
+    te_t3b_id = gen_task3b_examples(rng, extractor, "Oslo", pools["oslo_id_pool"], "Oslo", pools["oslo_id_pool"], 200, False, "id_same")
+    te_t3b_win = gen_task3b_examples(rng, extractor, "Oslo", pools["oslo_win_ood"], "Oslo", pools["oslo_aut_tr"], 240, True, "ood_oslo_winter")
+    te_t3b_sum = gen_task3b_examples(rng, extractor, "Oslo", pools["oslo_sum_ood"], "Oslo", pools["oslo_aut_tr"], 240, True, "ood_oslo_summer")
+    te_t3b_tok = gen_task3b_examples(rng, extractor, "Tokyo", pools["tokyo_ood"], "NYC", pools["nyc_aut_tr"], 240, True, "ood_nyc_to_tokyo")
+
+    te_t4_exact = gen_task4_examples(rng, extractor, pools["t4_ood_jds"], 300, jitter_min_max=0.0, day_offsets=[0, 7, 14, 21, 28], split_tag="ood_exact_utc")
+    te_t4_jitter = gen_task4_examples(rng, extractor, pools["t4_ood_jds"], 300, jitter_min_max=90.0, day_offsets=[0, 7, 14, 21, 28], split_tag="ood_jitter_90m")
+    te_t4_wrap52w = gen_task4_examples(rng, extractor, pools["t4_ood_jds"], 300, jitter_min_max=30.0, day_offsets=[0, 7, 14, 21, 364], split_tag="ood_52w_annual_wrap")
+    te_t4_id = gen_task4_examples(rng, extractor, pools["t4_id_jds"], 300, jitter_min_max=60.0, day_offsets=[0, 7, 14, 21, 28], split_tag="id_jitter_60m")
+
+    val_ds = stack_examples(te_t1[:100] + te_t2_id[:100] + te_t3a_id[:100] + te_t3b_id[:100] + te_t4_id[:100])
+    eval_suites = {
+        "task1_intra_turn": stack_examples(te_t1),
+        "task2_post_sleep_id": stack_examples(te_t2_id),
+        "task2_post_sleep_ood": stack_examples(te_t2_ood),
+        "task2_post_sleep_all": stack_examples(te_t2_id + te_t2_ood),
+        "task3a_id_spring_autumn": stack_examples(te_t3a_id),
+        "task3b_id_same_season": stack_examples(te_t3b_id),
+        "task3a_ood_oslo_winter": stack_examples(te_t3a_win),
+        "task3a_ood_oslo_summer": stack_examples(te_t3a_sum),
+        "task3a_ood_tokyo_travel": stack_examples(te_t3a_tok),
+        "task3b_ood_oslo_winter": stack_examples(te_t3b_win),
+        "task3b_ood_oslo_summer": stack_examples(te_t3b_sum),
+        "task3b_ood_nyc_to_tokyo": stack_examples(te_t3b_tok),
+        "task4_ood_exact_utc": stack_examples(te_t4_exact),
+        "task4_ood_jitter_90m": stack_examples(te_t4_jitter),
+        "task4_ood_52w_annual_wrap": stack_examples(te_t4_wrap52w),
+        "task4_id_jitter_60m": stack_examples(te_t4_id),
+    }
+
+    set_all_seeds(seed)
+    shared_init_model = TinyCausalTransformer(MODEL_CFG)
+    shared_init_state = copy.deepcopy(shared_init_model.state_dict())
+
+    trained_models: Dict[str, TinyCausalTransformer] = {}
+    part_a_training: Dict[str, Dict] = {}
+    part_a_eval: Dict[str, Dict[str, Dict]] = {}
+
+    for enc_name in ENCODER_NAMES:
+        model, train_log = train_part_a_model(
+            seed, enc_name, shared_init_state, train_ds, val_ds, device, epochs=28, batch_size=192, lr=2.1e-3
+        )
+        trained_models[enc_name] = model
+        part_a_training[enc_name] = train_log
+        part_a_eval[enc_name] = {}
+        for s_name, s_ds in eval_suites.items():
+            part_a_eval[enc_name][s_name] = eval_dataset(model, s_ds, enc_name, device)
+
+        ev = part_a_eval[enc_name]
+        t1 = ev["task1_intra_turn"]["token_acc"]
+        t1_seq = ev["task1_intra_turn"]["seq_exact_acc"]
+        t2 = ev["task2_post_sleep_all"]["seq_exact_acc"]
+        t3_oslo = round(float(np.mean([
+            ev["task3a_ood_oslo_winter"]["seq_exact_acc"],
+            ev["task3a_ood_oslo_summer"]["seq_exact_acc"],
+            ev["task3b_ood_oslo_winter"]["seq_exact_acc"],
+            ev["task3b_ood_oslo_summer"]["seq_exact_acc"],
+        ])), 4)
+        t3_tokyo = round(float(np.mean([
+            ev["task3a_ood_tokyo_travel"]["seq_exact_acc"],
+            ev["task3b_ood_nyc_to_tokyo"]["seq_exact_acc"],
+        ])), 4)
+        t3_ood = round(float(np.mean([
+            ev["task3a_ood_oslo_winter"]["seq_exact_acc"],
+            ev["task3a_ood_oslo_summer"]["seq_exact_acc"],
+            ev["task3a_ood_tokyo_travel"]["seq_exact_acc"],
+            ev["task3b_ood_oslo_winter"]["seq_exact_acc"],
+            ev["task3b_ood_oslo_summer"]["seq_exact_acc"],
+            ev["task3b_ood_nyc_to_tokyo"]["seq_exact_acc"],
+        ])), 4)
+        t3_id = round(0.5 * (
+            ev["task3a_id_spring_autumn"]["seq_exact_acc"]
+            + ev["task3b_id_same_season"]["seq_exact_acc"]
+        ), 4)
+        t4_30d = round(0.5 * (
+            ev["task4_ood_exact_utc"]["seq_exact_acc"]
+            + ev["task4_ood_jitter_90m"]["seq_exact_acc"]
+        ), 4)
+        t4_wrap = ev["task4_ood_52w_annual_wrap"]["seq_exact_acc"]
+        t4_composite = round(float(np.mean([
+            ev["task4_ood_exact_utc"]["seq_exact_acc"],
+            ev["task4_ood_jitter_90m"]["seq_exact_acc"],
+            t4_wrap,
+        ])), 4)
+
+        ev["summary"] = {
+            "task1_intra_turn_acc": t1,
+            "task1_intra_turn_seq3_exact": t1_seq,
+            "task2_post_sleep_acc": t2,
+            "task3_id_control_acc": t3_id,
+            "task3_ood_oslo_solstices_acc": t3_oslo,
+            "task3_ood_tokyo_travel_acc": t3_tokyo,
+            "task3_ood_composite_acc": t3_ood,
+            "task3a_ood_regime_acc": round(float(np.mean([
+                ev["task3a_ood_oslo_winter"]["seq_exact_acc"],
+                ev["task3a_ood_oslo_summer"]["seq_exact_acc"],
+                ev["task3a_ood_tokyo_travel"]["seq_exact_acc"],
+            ])), 4),
+            "task3b_ood_retrieval_acc": round(float(np.mean([
+                ev["task3b_ood_oslo_winter"]["seq_exact_acc"],
+                ev["task3b_ood_oslo_summer"]["seq_exact_acc"],
+                ev["task3b_ood_nyc_to_tokyo"]["seq_exact_acc"],
+            ])), 4),
+            "task4_multiweek_30d_acc": t4_30d,
+            "task4_52w_annual_wrap_acc": t4_wrap,
+            "task4_multiweek_ood_acc": t4_composite,
+            "task4_ood_exact_utc_acc": ev["task4_ood_exact_utc"]["seq_exact_acc"],
+            "task4_ood_jitter_90m_acc": ev["task4_ood_jitter_90m"]["seq_exact_acc"],
+            "task4_30d_logit_margin": round(0.5 * (
+                ev["task4_ood_exact_utc"]["mean_logit_margin"]
+                + ev["task4_ood_jitter_90m"]["mean_logit_margin"]
+            ), 4),
+        }
+        print(
+            f"  [PartA s={seed}] {enc_name:28s} | loss {train_log['initial_train_loss']:.3f}->{train_log['final_train_loss']:.3f} "
+            f"| T1={t1:.3f} T2={t2:.3f} T3-ID={t3_id:.3f} T3-OOD={t3_ood:.3f} (Oslo={t3_oslo:.3f} Tok={t3_tokyo:.3f}) "
+            f"T4-30d={t4_30d:.3f} T4-52w={t4_wrap:.3f} ({train_log['wall_time_sec']}s)"
+        )
+
+    # Part B: 6 continual learning arms
+    cycles, gate_audit = build_part_b_cycles(rng, extractor)
+    arm_configs = [
+        ("Naive-Online-FT", "Hybrid-Dual-Geo-RoPE", False, "none"),
+        ("SLEEP-Fixed24h-LRU", "Hybrid-Unix-Fourier-RoPE", True, "lru"),
+        ("Diag-SLEEP-GeoRoPE-LRU", "Hybrid-Dual-Geo-RoPE", True, "lru"),
+        ("SLEEP-Reservoir-Random", "Hybrid-Dual-Geo-RoPE", True, "reservoir"),
+        ("SLEEP-NOAA20-Stratified", "Hybrid-NOAA20-RoPE", True, "noaa_stratified"),
+        ("SLEEP-Caelus-Circadian-Stratified", "Hybrid-Dual-Geo-RoPE", True, "caelus_stratified"),
+    ]
+    part_b_arms: Dict[str, Dict] = {}
+    for arm_name, enc_name, use_lora, buf_mode in arm_configs:
+        res = run_part_b_arm(
+            seed=seed,
+            arm_name=arm_name,
+            base_model=trained_models[enc_name],
+            enc_name=enc_name,
+            cycles=cycles,
+            part_a_task1_ds=eval_suites["task1_intra_turn"],
+            part_a_task2_ds=eval_suites["task2_post_sleep_all"],
+            device=device,
+            use_sleep_lora=use_lora,
+            buffer_mode=buf_mode,
+            buffer_capacity=250,
+        )
+        part_b_arms[arm_name] = res
+        print(
+            f"  [PartB s={seed}] {arm_name:34s} | Final={res['final_mean_retention_c1_c5']:.3f} "
+            f"| Forget={res['catastrophic_forgetting_delta_c1_c4']:.3f} | W+T={res['ood_winter_travel_acc']:.3f} "
+            f"| Buf5={res['buffer_composition_after_cycle'][-1]} ({res['wall_time_sec']}s)"
+        )
+
+    return {
+        "seed": seed,
+        "wall_time_sec": round(time.perf_counter() - t_seed, 2),
+        "n_train_examples": len(train_all),
+        "n_eval_examples_total": sum(d["ids"].shape[0] for d in eval_suites.values()),
+        "part_a_training": part_a_training,
+        "part_a_eval": part_a_eval,
+        "part_b_sleep": {
+            "cycles": [
+                {"cycle_id": c["cycle_id"], "name": c["name"], "short": c["short"], "city": c["city"]}
+                for c in cycles
+            ],
+            "sleep_gate_audit": gate_audit,
+            "arms": part_b_arms,
+        },
+    }
+
+
+def aggregate_multi_seed(seed_runs: List[Dict]) -> Tuple[Dict, Dict, Dict]:
+    """Aggregate Part A training, Part A eval, and Part B sleep metrics (mean +/- sample std ddof=1)."""
+    # Part A training aggregation
+    agg_part_a_training: Dict[str, Dict] = {}
+    for enc in ENCODER_NAMES:
+        init_m, init_s = mean_std([r["part_a_training"][enc]["initial_train_loss"] for r in seed_runs])
+        fin_m, fin_s = mean_std([r["part_a_training"][enc]["final_train_loss"] for r in seed_runs])
+        wt_m, wt_s = mean_std([r["part_a_training"][enc]["wall_time_sec"] for r in seed_runs])
+        r0 = seed_runs[0]["part_a_training"][enc]
+        agg_part_a_training[enc] = {
+            "encoder": enc,
+            "param_count": r0["param_count"],
+            "epochs": r0["epochs"],
+            "batch_size": r0["batch_size"],
+            "optimizer_steps": r0["optimizer_steps"],
+            "wall_time_sec_mean": wt_m,
+            "wall_time_sec_std": wt_s,
+            "initial_train_loss": init_m,
+            "initial_train_loss_std": init_s,
+            "final_train_loss": fin_m,
+            "final_train_loss_std": fin_s,
+            "per_seed_final_train_loss": {str(r["seed"]): r["part_a_training"][enc]["final_train_loss"] for r in seed_runs},
+            "loss_curve": r0["loss_curve"],
+            "val_curve": r0["val_curve"],
+        }
+
+    # Part A eval aggregation
+    slice_names = [k for k in seed_runs[0]["part_a_eval"][ENCODER_NAMES[0]].keys() if k != "summary"]
+    summary_keys = list(seed_runs[0]["part_a_eval"][ENCODER_NAMES[0]]["summary"].keys())
+    agg_part_a_eval: Dict[str, Dict] = {}
+    for enc in ENCODER_NAMES:
+        agg_part_a_eval[enc] = {}
+        for s_name in slice_names:
+            tok_m, tok_s = mean_std([r["part_a_eval"][enc][s_name]["token_acc"] for r in seed_runs])
+            seq_m, seq_s = mean_std([r["part_a_eval"][enc][s_name]["seq_exact_acc"] for r in seed_runs])
+            loss_m, loss_s = mean_std([r["part_a_eval"][enc][s_name]["loss"] for r in seed_runs])
+            marg_m, marg_s = mean_std([r["part_a_eval"][enc][s_name]["mean_logit_margin"] for r in seed_runs])
+            agg_part_a_eval[enc][s_name] = {
+                "token_acc": tok_m,
+                "token_acc_std": tok_s,
+                "seq_exact_acc": seq_m,
+                "seq_exact_acc_std": seq_s,
+                "loss": loss_m,
+                "loss_std": loss_s,
+                "mean_logit_margin": marg_m,
+                "mean_logit_margin_std": marg_s,
+                "n_examples": seed_runs[0]["part_a_eval"][enc][s_name]["n_examples"],
+            }
+        summ_mean = {}
+        summ_std = {}
+        for sk in summary_keys:
+            m, s = mean_std([r["part_a_eval"][enc]["summary"][sk] for r in seed_runs])
+            summ_mean[sk] = m
+            summ_std[sk] = s
+        agg_part_a_eval[enc]["summary"] = summ_mean
+        agg_part_a_eval[enc]["summary_std"] = summ_std
+        agg_part_a_eval[enc]["per_seed_summary"] = {
+            str(r["seed"]): r["part_a_eval"][enc]["summary"] for r in seed_runs
+        }
+
+    # Part B aggregation
+    agg_part_b_arms: Dict[str, Dict] = {}
+    for arm_name in PART_B_ARM_NAMES:
+        a0 = seed_runs[0]["part_b_sleep"]["arms"][arm_name]
+        ret_m, ret_s = mean_std([r["part_b_sleep"]["arms"][arm_name]["final_mean_retention_c1_c5"] for r in seed_runs])
+        fgt_m, fgt_s = mean_std([r["part_b_sleep"]["arms"][arm_name]["catastrophic_forgetting_delta_c1_c4"] for r in seed_runs])
+        wt_m, wt_s = mean_std([r["part_b_sleep"]["arms"][arm_name]["ood_winter_travel_acc"] for r in seed_runs])
+        wall_m, wall_s = mean_std([r["part_b_sleep"]["arms"][arm_name]["wall_time_sec"] for r in seed_runs])
+
+        final_cycle_accs = {}
+        final_cycle_accs_std = {}
+        for k in range(1, 6):
+            ck = f"C{k}"
+            cm, cs = mean_std([r["part_b_sleep"]["arms"][arm_name]["final_cycle_accs"][ck] for r in seed_runs])
+            final_cycle_accs[ck] = cm
+            final_cycle_accs_std[ck] = cs
+
+        acc_matrix = []
+        for c_idx in range(5):
+            row: Dict[str, float] = {"after_cycle": c_idx + 1}
+            for k in range(1, c_idx + 2):
+                ck = f"C{k}"
+                cm, cs = mean_std([r["part_b_sleep"]["arms"][arm_name]["acc_matrix"][c_idx][ck] for r in seed_runs])
+                row[ck] = cm
+                row[f"{ck}_std"] = cs
+            mm, ms = mean_std([r["part_b_sleep"]["arms"][arm_name]["acc_matrix"][c_idx]["mean_seen_acc"] for r in seed_runs])
+            row["mean_seen_acc"] = mm
+            row["mean_seen_acc_std"] = ms
+            acc_matrix.append(row)
+
+        buf_comp = []
+        for c_idx in range(5):
+            comp_row = {}
+            for k in range(1, 6):
+                ck = f"C{k}"
+                comp_row[ck] = round(float(np.mean([
+                    r["part_b_sleep"]["arms"][arm_name]["buffer_composition_after_cycle"][c_idx][ck]
+                    for r in seed_runs
+                ])), 1)
+            buf_comp.append(comp_row)
+
+        base_skill = {}
+        for bk in ("pre_task1_acc", "post_task1_acc", "pre_task2_acc", "post_task2_acc"):
+            bm, bs = mean_std([r["part_b_sleep"]["arms"][arm_name]["base_skill_retention"][bk] for r in seed_runs])
+            base_skill[bk] = bm
+            base_skill[f"{bk}_std"] = bs
+
+        agg_part_b_arms[arm_name] = {
+            "arm": arm_name,
+            "backbone_encoder": a0["backbone_encoder"],
+            "use_sleep_lora": a0["use_sleep_lora"],
+            "buffer_mode": a0["buffer_mode"],
+            "buffer_capacity": a0["buffer_capacity"],
+            "frozen_core_params": a0["frozen_core_params"],
+            "trainable_params": a0["trainable_params"],
+            "wall_time_sec_mean": wall_m,
+            "wall_time_sec_std": wall_s,
+            "acc_matrix": acc_matrix,
+            "cycle_losses": a0["cycle_losses"],
+            "buffer_composition_after_cycle": buf_comp,
+            "final_cycle_accs": final_cycle_accs,
+            "final_cycle_accs_std": final_cycle_accs_std,
+            "final_mean_retention_c1_c5": ret_m,
+            "final_mean_retention_c1_c5_std": ret_s,
+            "catastrophic_forgetting_delta_c1_c4": fgt_m,
+            "catastrophic_forgetting_delta_c1_c4_std": fgt_s,
+            "ood_winter_travel_acc": wt_m,
+            "ood_winter_travel_acc_std": wt_s,
+            "base_skill_retention": base_skill,
+            "per_seed": {
+                str(r["seed"]): {
+                    "final_mean_retention_c1_c5": r["part_b_sleep"]["arms"][arm_name]["final_mean_retention_c1_c5"],
+                    "catastrophic_forgetting_delta_c1_c4": r["part_b_sleep"]["arms"][arm_name]["catastrophic_forgetting_delta_c1_c4"],
+                    "ood_winter_travel_acc": r["part_b_sleep"]["arms"][arm_name]["ood_winter_travel_acc"],
+                    "final_cycle_accs": r["part_b_sleep"]["arms"][arm_name]["final_cycle_accs"],
+                    "final_buffer_composition": r["part_b_sleep"]["arms"][arm_name]["buffer_composition_after_cycle"][-1],
+                }
+                for r in seed_runs
+            },
+        }
+
+    return agg_part_a_training, agg_part_a_eval, agg_part_b_arms
+
+
 # ----------------------------------------- Main Orchestration
 
 def main() -> None:
     t_total = time.perf_counter()
-    set_all_seeds(SEED)
-    rng = random.Random(SEED)
+    set_all_seeds(PRIMARY_SEED)
 
-    print("EXP-007: Benchmarking Apple M5 Pro CPU vs MPS on TinyCausalTransformer...")
+    print("EXP-007 (Steelman 3-Seed): Benchmarking Apple M5 Pro CPU vs MPS on TinyCausalTransformer...")
     device, dev_timings = select_best_device()
-    print(f"  Device benchmark (ms/step): {dev_timings} -> selected: {device}")
+    print(f"  Device benchmark (ms/step, bs=192, SDPA): {dev_timings} -> selected: {device}")
 
-    print("EXP-007: Generating ephemeris pools directly from python/astroengine/...")
+    print("EXP-007: Building shared ephemeris pools directly from python/astroengine/...")
     t_eph = time.perf_counter()
     eng = Engine()
     extractor = CaelusPhaseExtractor(eng)
@@ -1433,9 +1927,9 @@ def main() -> None:
     oslo_sum_ood, oslo_sum_all = build_regime_pools(extractor, "Oslo", (2026, 6, 10), 21, step_minutes=15)
     tokyo_ood, tokyo_all = build_regime_pools(extractor, "Tokyo", (2026, 9, 15), 30, step_minutes=15)
 
-    def merge_pools(*pools: Dict[int, List]) -> Dict[int, List]:
+    def merge_pools(*ps: Dict[int, List]) -> Dict[int, List]:
         out = {r: [] for r in REGIME_TOKENS}
-        for p in pools:
+        for p in ps:
             for r in REGIME_TOKENS:
                 out[r].extend(p[r])
         return out
@@ -1464,79 +1958,24 @@ def main() -> None:
     assert len(train_days_set & id_days_set) == 0, "Leakage between train and ID!"
     assert len(train_days_set & ood_days_set) == 0, "Leakage between train and OOD!"
 
-    train_eve_pts = [("Oslo", j, p) for j, p in oslo_tr_pool[TOK_REG_DUSK]] + [("NYC", j, p) for j, p in nyc_tr_pool[TOK_REG_DUSK]]
-    id_eve_pts = [("Oslo", j, p) for j, p in oslo_id_pool[TOK_REG_DUSK]] + [("NYC", j, p) for j, p in nyc_id_pool[TOK_REG_DUSK]]
-    ood_eve_pts = (
-        [("Oslo", j, p) for j, p in oslo_win_ood[TOK_REG_DUSK] + oslo_sum_ood[TOK_REG_DUSK]]
-        + [("Tokyo", j, p) for j, p in tokyo_ood[TOK_REG_DUSK]]
-    )
-
-    t4_train_jds = (
-        [julian_day(2026, 3, 1, 0, 0, 0) + d for d in range(30)]
-        + [julian_day(2026, 9, 1, 0, 0, 0) + d for d in range(30)]
-    )
-    t4_id_jds = [julian_day(2026, 4, 10, 0, 0, 0) + d for d in range(15)] + [julian_day(2026, 10, 10, 0, 0, 0) + d for d in range(15)]
-    t4_ood_jds = [julian_day(2026, 6, 1, 0, 0, 0) + d for d in range(20)] + [julian_day(2026, 12, 1, 0, 0, 0) + d for d in range(20)]
-
+    pools = {
+        "oslo_spr_tr": oslo_spr_tr, "oslo_aut_tr": oslo_aut_tr,
+        "nyc_spr_tr": nyc_spr_tr, "nyc_aut_tr": nyc_aut_tr,
+        "oslo_tr_pool": oslo_tr_pool, "nyc_tr_pool": nyc_tr_pool,
+        "oslo_id_pool": oslo_id_pool, "nyc_id_pool": nyc_id_pool,
+        "oslo_win_ood": oslo_win_ood, "oslo_sum_ood": oslo_sum_ood, "tokyo_ood": tokyo_ood,
+        "train_base_pts": train_base_pts, "id_base_pts": id_base_pts, "ood_base_pts": ood_base_pts,
+        "train_eve_pts": [("Oslo", j, p) for j, p in oslo_tr_pool[TOK_REG_DUSK]] + [("NYC", j, p) for j, p in nyc_tr_pool[TOK_REG_DUSK]],
+        "id_eve_pts": [("Oslo", j, p) for j, p in oslo_id_pool[TOK_REG_DUSK]] + [("NYC", j, p) for j, p in nyc_id_pool[TOK_REG_DUSK]],
+        "ood_eve_pts": [("Oslo", j, p) for j, p in oslo_win_ood[TOK_REG_DUSK] + oslo_sum_ood[TOK_REG_DUSK]] + [("Tokyo", j, p) for j, p in tokyo_ood[TOK_REG_DUSK]],
+        "t4_train_jds": [julian_day(2026, 3, 1, 0, 0, 0) + d for d in range(30)] + [julian_day(2026, 9, 1, 0, 0, 0) + d for d in range(30)],
+        "t4_id_jds": [julian_day(2026, 4, 10, 0, 0, 0) + d for d in range(15)] + [julian_day(2026, 10, 10, 0, 0, 0) + d for d in range(15)],
+        "t4_ood_jds": [julian_day(2026, 6, 1, 0, 0, 0) + d for d in range(20)] + [julian_day(2026, 12, 1, 0, 0, 0) + d for d in range(20)],
+    }
     print(f"  Ephemeris pools built in {time.perf_counter() - t_eph:.2f}s (0 train/ID/OOD date overlap verified).")
 
-    t_gen = time.perf_counter()
-    tr_t1 = gen_task1_examples(rng, extractor, train_base_pts, 5000)
-    tr_t2 = gen_task2_examples(rng, extractor, train_eve_pts, 2000)
-    tr_t3a = gen_task3a_examples(rng, {"Oslo": oslo_tr_pool, "NYC": nyc_tr_pool}, 2000, "train")
-    tr_t3b = (
-        gen_task3b_examples(rng, extractor, "Oslo", oslo_spr_tr, "Oslo", oslo_spr_tr, 600, False, "train_same")
-        + gen_task3b_examples(rng, extractor, "NYC", nyc_aut_tr, "NYC", nyc_aut_tr, 600, False, "train_same")
-        + gen_task3b_examples(rng, extractor, "Oslo", oslo_aut_tr, "NYC", nyc_aut_tr, 600, True, "train_cross")
-        + gen_task3b_examples(rng, extractor, "NYC", nyc_spr_tr, "Oslo", oslo_spr_tr, 600, True, "train_cross")
-    )
-    tr_t4 = gen_task4_examples(rng, extractor, t4_train_jds, 2000, jitter_min_max=60.0, day_offsets=[0, 7, 14, 21, 28], split_tag="train")
-
-    train_all = tr_t1 + tr_t2 + tr_t3a + tr_t3b + tr_t4
-    rng.shuffle(train_all)
-    train_ds = stack_examples(train_all)
-
-    te_t1 = gen_task1_examples(rng, extractor, id_base_pts, 400)
-    te_t2_id = gen_task2_examples(rng, extractor, id_eve_pts, 300)
-    te_t2_ood = gen_task2_examples(rng, extractor, ood_eve_pts, 300)
-    te_t3a_id = gen_task3a_examples(rng, {"Oslo": oslo_id_pool, "NYC": nyc_id_pool}, 400, "id_spring_autumn")
-
-    te_t3a_win = gen_task3a_examples(rng, {"Oslo": oslo_win_ood}, 240, "ood_oslo_winter")
-    te_t3a_sum = gen_task3a_examples(rng, {"Oslo": oslo_sum_ood}, 240, "ood_oslo_summer")
-    te_t3a_tok = gen_task3a_examples(rng, {"Tokyo": tokyo_ood}, 240, "ood_tokyo_travel")
-
-    te_t3b_id = gen_task3b_examples(rng, extractor, "Oslo", oslo_id_pool, "Oslo", oslo_id_pool, 200, False, "id_same")
-    te_t3b_win = gen_task3b_examples(rng, extractor, "Oslo", oslo_win_ood, "Oslo", oslo_aut_tr, 240, True, "ood_oslo_winter")
-    te_t3b_sum = gen_task3b_examples(rng, extractor, "Oslo", oslo_sum_ood, "Oslo", oslo_aut_tr, 240, True, "ood_oslo_summer")
-    te_t3b_tok = gen_task3b_examples(rng, extractor, "Tokyo", tokyo_ood, "NYC", nyc_aut_tr, 240, True, "ood_nyc_to_tokyo")
-
-    # Task 4: Standard 30-day (0d/7d/14d/21d/28d) + 52-week annual-wrap (0d/7d/14d/21d/364d) stress test
-    te_t4_exact = gen_task4_examples(rng, extractor, t4_ood_jds, 300, jitter_min_max=0.0, day_offsets=[0, 7, 14, 21, 28], split_tag="ood_exact_utc")
-    te_t4_jitter = gen_task4_examples(rng, extractor, t4_ood_jds, 300, jitter_min_max=90.0, day_offsets=[0, 7, 14, 21, 28], split_tag="ood_jitter_90m")
-    te_t4_wrap52w = gen_task4_examples(rng, extractor, t4_ood_jds, 300, jitter_min_max=30.0, day_offsets=[0, 7, 14, 21, 364], split_tag="ood_52w_annual_wrap")
-    te_t4_id = gen_task4_examples(rng, extractor, t4_id_jds, 300, jitter_min_max=60.0, day_offsets=[0, 7, 14, 21, 28], split_tag="id_jitter_60m")
-
-    val_ds = stack_examples(te_t1[:100] + te_t2_id[:100] + te_t3a_id[:100] + te_t3b_id[:100] + te_t4_id[:100])
-
-    eval_suites = {
-        "task1_intra_turn": stack_examples(te_t1),
-        "task2_post_sleep_id": stack_examples(te_t2_id),
-        "task2_post_sleep_ood": stack_examples(te_t2_ood),
-        "task2_post_sleep_all": stack_examples(te_t2_id + te_t2_ood),
-        "task3a_id_spring_autumn": stack_examples(te_t3a_id),
-        "task3b_id_same_season": stack_examples(te_t3b_id),
-        "task3a_ood_oslo_winter": stack_examples(te_t3a_win),
-        "task3a_ood_oslo_summer": stack_examples(te_t3a_sum),
-        "task3a_ood_tokyo_travel": stack_examples(te_t3a_tok),
-        "task3b_ood_oslo_winter": stack_examples(te_t3b_win),
-        "task3b_ood_oslo_summer": stack_examples(te_t3b_sum),
-        "task3b_ood_nyc_to_tokyo": stack_examples(te_t3b_tok),
-        "task4_ood_exact_utc": stack_examples(te_t4_exact),
-        "task4_ood_jitter_90m": stack_examples(te_t4_jitter),
-        "task4_ood_52w_annual_wrap": stack_examples(te_t4_wrap52w),
-        "task4_id_jitter_60m": stack_examples(te_t4_id),
-    }
-    print(f"  Generated {len(train_all)} train + {sum(d['ids'].shape[0] for d in eval_suites.values())} eval examples in {time.perf_counter() - t_gen:.2f}s.")
+    seed_runs = [run_single_seed(s, device, extractor, pools) for s in SEEDS]
+    agg_part_a_training, agg_part_a_eval, agg_part_b_arms = aggregate_multi_seed(seed_runs)
 
     split_hashes = {
         "train_day_set_sha256_16": hash_jds([(c, float(d)) for c, d in train_days_set]),
@@ -1544,155 +1983,23 @@ def main() -> None:
         "ood_day_set_sha256_16": hash_jds([(c, float(d)) for c, d in ood_days_set]),
         "train_id_day_overlap": len(train_days_set & id_days_set),
         "train_ood_day_overlap": len(train_days_set & ood_days_set),
-        "n_train_examples": len(train_all),
-        "n_eval_examples_total": sum(d["ids"].shape[0] for d in eval_suites.values()),
+        "n_train_examples_per_seed": seed_runs[0]["n_train_examples"],
+        "n_eval_examples_per_seed": seed_runs[0]["n_eval_examples_total"],
+        "n_seeds": len(SEEDS),
     }
 
-    set_all_seeds(SEED)
-    shared_init_model = TinyCausalTransformer(MODEL_CFG)
-    shared_init_state = copy.deepcopy(shared_init_model.state_dict())
-    base_param_count = count_params(shared_init_model)
-    print(f"EXP-007 Part A: Training 3 parameter-matched models ({base_param_count:,} params each) on {device}...")
-
-    trained_models: Dict[str, TinyCausalTransformer] = {}
-    part_a_training: Dict[str, Dict] = {}
-    part_a_eval: Dict[str, Dict[str, Dict]] = {}
-
-    for enc_name in ENCODER_NAMES:
-        print(f"  Training {enc_name}...")
-        model, train_log = train_part_a_model(
-            enc_name, shared_init_state, train_ds, val_ds, device, epochs=28, batch_size=128, lr=1.8e-3
-        )
-        trained_models[enc_name] = model
-        part_a_training[enc_name] = train_log
-        part_a_eval[enc_name] = {}
-        for s_name, s_ds in eval_suites.items():
-            part_a_eval[enc_name][s_name] = eval_dataset(model, s_ds, enc_name, device)
-
-        t1 = part_a_eval[enc_name]["task1_intra_turn"]["token_acc"]
-        t1_seq = part_a_eval[enc_name]["task1_intra_turn"]["seq_exact_acc"]
-        t2 = part_a_eval[enc_name]["task2_post_sleep_all"]["seq_exact_acc"]
-        t3_ood = round(float(np.mean([
-            part_a_eval[enc_name]["task3a_ood_oslo_winter"]["seq_exact_acc"],
-            part_a_eval[enc_name]["task3a_ood_oslo_summer"]["seq_exact_acc"],
-            part_a_eval[enc_name]["task3a_ood_tokyo_travel"]["seq_exact_acc"],
-            part_a_eval[enc_name]["task3b_ood_oslo_winter"]["seq_exact_acc"],
-            part_a_eval[enc_name]["task3b_ood_oslo_summer"]["seq_exact_acc"],
-            part_a_eval[enc_name]["task3b_ood_nyc_to_tokyo"]["seq_exact_acc"],
-        ])), 4)
-        t3_id = round(0.5 * (
-            part_a_eval[enc_name]["task3a_id_spring_autumn"]["seq_exact_acc"]
-            + part_a_eval[enc_name]["task3b_id_same_season"]["seq_exact_acc"]
-        ), 4)
-        t4_30d = round(0.5 * (
-            part_a_eval[enc_name]["task4_ood_exact_utc"]["seq_exact_acc"]
-            + part_a_eval[enc_name]["task4_ood_jitter_90m"]["seq_exact_acc"]
-        ), 4)
-        t4_wrap = part_a_eval[enc_name]["task4_ood_52w_annual_wrap"]["seq_exact_acc"]
-        t4_composite = round(float(np.mean([
-            part_a_eval[enc_name]["task4_ood_exact_utc"]["seq_exact_acc"],
-            part_a_eval[enc_name]["task4_ood_jitter_90m"]["seq_exact_acc"],
-            t4_wrap,
-        ])), 4)
-
-        part_a_eval[enc_name]["summary"] = {
-            "task1_intra_turn_acc": t1,
-            "task1_intra_turn_seq3_exact": t1_seq,
-            "task2_post_sleep_acc": t2,
-            "task3_id_control_acc": t3_id,
-            "task3_ood_composite_acc": t3_ood,
-            "task3a_ood_regime_acc": round(float(np.mean([
-                part_a_eval[enc_name]["task3a_ood_oslo_winter"]["seq_exact_acc"],
-                part_a_eval[enc_name]["task3a_ood_oslo_summer"]["seq_exact_acc"],
-                part_a_eval[enc_name]["task3a_ood_tokyo_travel"]["seq_exact_acc"],
-            ])), 4),
-            "task3b_ood_retrieval_acc": round(float(np.mean([
-                part_a_eval[enc_name]["task3b_ood_oslo_winter"]["seq_exact_acc"],
-                part_a_eval[enc_name]["task3b_ood_oslo_summer"]["seq_exact_acc"],
-                part_a_eval[enc_name]["task3b_ood_nyc_to_tokyo"]["seq_exact_acc"],
-            ])), 4),
-            "task4_multiweek_30d_acc": t4_30d,
-            "task4_52w_annual_wrap_acc": t4_wrap,
-            "task4_multiweek_ood_acc": t4_composite,
-            "task4_ood_exact_utc_acc": part_a_eval[enc_name]["task4_ood_exact_utc"]["seq_exact_acc"],
-            "task4_ood_jitter_90m_acc": part_a_eval[enc_name]["task4_ood_jitter_90m"]["seq_exact_acc"],
-            "task4_30d_logit_margin": round(0.5 * (
-                part_a_eval[enc_name]["task4_ood_exact_utc"]["mean_logit_margin"]
-                + part_a_eval[enc_name]["task4_ood_jitter_90m"]["mean_logit_margin"]
-            ), 4),
-        }
-        print(
-            f"    {enc_name:26s} | loss {train_log['initial_train_loss']:.3f}->{train_log['final_train_loss']:.3f} "
-            f"| T1={t1:.3f} T2={t2:.3f} T3-ID={t3_id:.3f} T3-OOD={t3_ood:.3f} T4-30d={t4_30d:.3f} T4-52w={t4_wrap:.3f} ({train_log['wall_time_sec']}s)"
-        )
-
-    # --------------------------------- Part B: Google Research SLEEP Continual Learning
-    print("EXP-007 Part B: Running 5-cycle Google SLEEP continual consolidation on trained weights + LoRA...")
-    cycles, gate_audit = build_part_b_cycles(rng, extractor)
-
-    part_b_arms = {}
-    part_b_arms["Naive-Online-FT"] = run_part_b_arm(
-        arm_name="Naive-Online-FT",
-        base_model=trained_models["Hybrid-Dual-Geo-RoPE"],
-        enc_name="Hybrid-Dual-Geo-RoPE",
-        cycles=cycles,
-        part_a_task1_ds=eval_suites["task1_intra_turn"],
-        part_a_task2_ds=eval_suites["task2_post_sleep_all"],
-        device=device,
-        use_sleep_lora=False,
-        buffer_mode="none",
-    )
-    part_b_arms["SLEEP-Fixed24h-LRU"] = run_part_b_arm(
-        arm_name="SLEEP-Fixed24h-LRU",
-        base_model=trained_models["Hybrid-Unix-Fourier-RoPE"],
-        enc_name="Hybrid-Unix-Fourier-RoPE",
-        cycles=cycles,
-        part_a_task1_ds=eval_suites["task1_intra_turn"],
-        part_a_task2_ds=eval_suites["task2_post_sleep_all"],
-        device=device,
-        use_sleep_lora=True,
-        buffer_mode="lru",
-        buffer_capacity=250,
-    )
-    part_b_arms["SLEEP-Caelus-Circadian-Stratified"] = run_part_b_arm(
-        arm_name="SLEEP-Caelus-Circadian-Stratified",
-        base_model=trained_models["Hybrid-Dual-Geo-RoPE"],
-        enc_name="Hybrid-Dual-Geo-RoPE",
-        cycles=cycles,
-        part_a_task1_ds=eval_suites["task1_intra_turn"],
-        part_a_task2_ds=eval_suites["task2_post_sleep_all"],
-        device=device,
-        use_sleep_lora=True,
-        buffer_mode="caelus_stratified",
-        buffer_capacity=250,
-    )
-    part_b_arms["Diag-SLEEP-GeoRoPE-LRU"] = run_part_b_arm(
-        arm_name="Diag-SLEEP-GeoRoPE-LRU",
-        base_model=trained_models["Hybrid-Dual-Geo-RoPE"],
-        enc_name="Hybrid-Dual-Geo-RoPE",
-        cycles=cycles,
-        part_a_task1_ds=eval_suites["task1_intra_turn"],
-        part_a_task2_ds=eval_suites["task2_post_sleep_all"],
-        device=device,
-        use_sleep_lora=True,
-        buffer_mode="lru",
-        buffer_capacity=250,
-    )
-
-    for k, res in part_b_arms.items():
-        print(
-            f"    {k:34s} | Final C1..5={res['final_mean_retention_c1_c5']:.3f} "
-            f"| ForgetDelta={res['catastrophic_forgetting_delta_c1_c4']:.3f} "
-            f"| OOD Wint+Tok={res['ood_winter_travel_acc']:.3f} "
-            f"| C1..5={res['final_cycle_accs']}"
-        )
+    param_counts = {enc: agg_part_a_training[enc]["param_count"] for enc in ENCODER_NAMES}
+    lora_arms = [a for a in PART_B_ARM_NAMES if a != "Naive-Online-FT"]
+    lora_trainable_set = {agg_part_b_arms[a]["trainable_params"] for a in lora_arms}
 
     receipt = {
-        "schema_version": "exp007-training-receipt-v1",
+        "schema_version": "exp007-training-receipt-v2",
         "id": "EXP-007",
         "trained_at": datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
         "git_sha": get_git_sha(),
-        "seed": SEED,
+        "seed": PRIMARY_SEED,
+        "seeds": SEEDS,
+        "std_convention": "sample_std_ddof1_across_3_seeds",
         "hardware": {
             "platform": platform.platform(),
             "machine": platform.machine(),
@@ -1704,37 +2011,26 @@ def main() -> None:
         },
         "model_config": MODEL_CFG,
         "parameter_parity": {
-            "Standard-RoPE": part_a_training["Standard-RoPE"]["param_count"],
-            "Hybrid-Unix-Fourier-RoPE": part_a_training["Hybrid-Unix-Fourier-RoPE"]["param_count"],
-            "Hybrid-Dual-Geo-RoPE": part_a_training["Hybrid-Dual-Geo-RoPE"]["param_count"],
-            "exact_parity": (
-                part_a_training["Standard-RoPE"]["param_count"]
-                == part_a_training["Hybrid-Unix-Fourier-RoPE"]["param_count"]
-                == part_a_training["Hybrid-Dual-Geo-RoPE"]["param_count"]
-            ),
-            "sleep_lora_frozen_core_params": part_b_arms["SLEEP-Caelus-Circadian-Stratified"]["frozen_core_params"],
-            "sleep_lora_trainable_params": part_b_arms["SLEEP-Caelus-Circadian-Stratified"]["trainable_params"],
-            "sleep_lora_parity": (
-                part_b_arms["SLEEP-Fixed24h-LRU"]["trainable_params"]
-                == part_b_arms["SLEEP-Caelus-Circadian-Stratified"]["trainable_params"]
-            ),
+            **param_counts,
+            "exact_parity": len(set(param_counts.values())) == 1,
+            "sleep_lora_frozen_core_params": agg_part_b_arms["SLEEP-Caelus-Circadian-Stratified"]["frozen_core_params"],
+            "sleep_lora_trainable_params": agg_part_b_arms["SLEEP-Caelus-Circadian-Stratified"]["trainable_params"],
+            "sleep_lora_parity": len(lora_trainable_set) == 1,
         },
         "dataset_splits": split_hashes,
-        "part_a_training": part_a_training,
-        "part_a_eval": part_a_eval,
+        "part_a_training": agg_part_a_training,
+        "part_a_eval": agg_part_a_eval,
         "part_b_sleep": {
-            "cycles": [
-                {"cycle_id": c["cycle_id"], "name": c["name"], "short": c["short"], "city": c["city"]}
-                for c in cycles
-            ],
-            "sleep_gate_audit": gate_audit,
-            "arms": part_b_arms,
+            "forgetting_delta_definition": "mean over cycles c in {1, 2, 3, 4} of max(0, max_{t >= c} acc(t, c) - acc(5, c))",
+            "cycles": seed_runs[0]["part_b_sleep"]["cycles"],
+            "sleep_gate_audit": seed_runs[0]["part_b_sleep"]["sleep_gate_audit"],
+            "arms": agg_part_b_arms,
         },
     }
 
     receipt_path = HERE / "training_receipt.json"
     receipt_path.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
-    print(f"Saved {receipt_path} ({receipt_path.stat().st_size / 1024:.1f} KB) in {receipt['hardware']['total_wall_time_sec']}s.")
+    print(f"\nSaved {receipt_path} ({receipt_path.stat().st_size / 1024:.1f} KB) in {receipt['hardware']['total_wall_time_sec']}s.")
 
 
 if __name__ == "__main__":

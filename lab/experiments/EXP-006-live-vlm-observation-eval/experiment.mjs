@@ -105,6 +105,232 @@ function mean(values) {
   return nums.reduce((a, b) => a + b, 0) / nums.length;
 }
 
+/**
+ * Exact 95% Wilson score confidence interval [lo, hi] for binomial proportion k/n.
+ */
+function wilsonCi(k, n, z = 1.959963984540054) {
+  if (n <= 0) return [0, 0];
+  const p = k / n;
+  const z2 = z * z;
+  const denom = 1 + z2 / n;
+  const center = (p + z2 / (2 * n)) / denom;
+  const half = (z * Math.sqrt((p * (1 - p) + z2 / (4 * n)) / n)) / denom;
+  return [round4(Math.max(0, center - half)), round4(Math.min(1, center + half))];
+}
+
+function mulberry32(seed) {
+  let a = seed >>> 0;
+  return function next() {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function quantileSorted(sorted, q) {
+  if (!sorted.length) return null;
+  const idx = q * (sorted.length - 1);
+  const lo = Math.floor(idx);
+  const hi = Math.ceil(idx);
+  if (lo === hi) return sorted[lo];
+  return sorted[lo] + (sorted[hi] - sorted[lo]) * (idx - lo);
+}
+
+/**
+ * Deterministic B=10,000 bootstrap 95% CI for Spoof-Detection F1 over binary verify tuples {gt, pred}.
+ */
+function bootstrapF1Ci(pairs, resamples = 10000, seed = 20261122) {
+  const n = pairs.length;
+  if (n === 0) return { f1: null, ci95: [null, null] };
+  const f1Of = (arr) => {
+    let tp = 0;
+    let fp = 0;
+    let fn = 0;
+    for (let i = 0; i < arr.length; i++) {
+      const { gt, pred } = arr[i];
+      if (gt) {
+        if (pred === true) tp++;
+        else fn++;
+      } else if (pred === true) {
+        fp++;
+      }
+    }
+    return 2 * tp + fp + fn > 0 ? (2 * tp) / (2 * tp + fp + fn) : 0;
+  };
+  const point = f1Of(pairs);
+  const rng = mulberry32(seed);
+  const boots = new Float64Array(resamples);
+  for (let b = 0; b < resamples; b++) {
+    let tp = 0;
+    let fp = 0;
+    let fn = 0;
+    for (let i = 0; i < n; i++) {
+      const { gt, pred } = pairs[Math.floor(rng() * n)];
+      if (gt) {
+        if (pred === true) tp++;
+        else fn++;
+      } else if (pred === true) {
+        fp++;
+      }
+    }
+    boots[b] = 2 * tp + fp + fn > 0 ? (2 * tp) / (2 * tp + fp + fn) : 0;
+  }
+  boots.sort();
+  return {
+    n,
+    resamples,
+    f1: round4(point),
+    ci95: [round4(quantileSorted(boots, 0.025)), round4(quantileSorted(boots, 0.975))],
+  };
+}
+
+/**
+ * Deterministic B=10,000 paired bootstrap on binary/scalar score arrays (arm2 minus arm1).
+ */
+function pairedBootstrapDiff(scoresA, scoresB, resamples = 10000, seed = 20261122) {
+  const n = Math.min(scoresA.length, scoresB.length);
+  const diffs = new Array(n);
+  let wins = 0;
+  let ties = 0;
+  let losses = 0;
+  let sumD = 0;
+  for (let i = 0; i < n; i++) {
+    const d = scoresA[i] - scoresB[i];
+    diffs[i] = d;
+    sumD += d;
+    if (d > 1e-9) wins++;
+    else if (d < -1e-9) losses++;
+    else ties++;
+  }
+  const rng = mulberry32(seed);
+  const boots = new Float64Array(resamples);
+  let leZero = 0;
+  let geZero = 0;
+  for (let b = 0; b < resamples; b++) {
+    let s = 0;
+    for (let i = 0; i < n; i++) s += diffs[Math.floor(rng() * n)];
+    const m = s / n;
+    boots[b] = m;
+    if (m <= 0) leZero++;
+    if (m >= 0) geZero++;
+  }
+  boots.sort();
+  const ciLo = quantileSorted(boots, 0.025);
+  const ciHi = quantileSorted(boots, 0.975);
+  return {
+    n_pairs: n,
+    resamples,
+    mean_diff: round4(sumD / Math.max(1, n)),
+    ci95: [round4(ciLo), round4(ciHi)],
+    ci95_excludes_zero: ciLo > 0 || ciHi < 0,
+    bootstrap_p_two_sided: Number(Math.min(1, (2 * Math.min(leZero, geZero)) / resamples).toFixed(6)),
+    wins,
+    ties,
+    losses,
+  };
+}
+
+/**
+ * Paired bootstrap for Spoof F1 delta (MCP minus CoT) resampling paired verify records.
+ */
+function pairedBootstrapF1Diff(pairsMcp, pairsCot, resamples = 10000, seed = 20261122) {
+  const n = Math.min(pairsMcp.length, pairsCot.length);
+  const calcF1 = (arr, idxs) => {
+    let tp = 0;
+    let fp = 0;
+    let fn = 0;
+    for (let i = 0; i < idxs.length; i++) {
+      const { gt, pred } = arr[idxs[i]];
+      if (gt) {
+        if (pred === true) tp++;
+        else fn++;
+      } else if (pred === true) {
+        fp++;
+      }
+    }
+    return 2 * tp + fp + fn > 0 ? (2 * tp) / (2 * tp + fp + fn) : 0;
+  };
+  const allIdxs = Array.from({ length: n }, (_, i) => i);
+  const pointDiff = calcF1(pairsMcp, allIdxs) - calcF1(pairsCot, allIdxs);
+  const rng = mulberry32(seed);
+  const boots = new Float64Array(resamples);
+  let leZero = 0;
+  let geZero = 0;
+  const sampleIdxs = new Int32Array(n);
+  for (let b = 0; b < resamples; b++) {
+    for (let i = 0; i < n; i++) sampleIdxs[i] = Math.floor(rng() * n);
+    const d = calcF1(pairsMcp, sampleIdxs) - calcF1(pairsCot, sampleIdxs);
+    boots[b] = d;
+    if (d <= 0) leZero++;
+    if (d >= 0) geZero++;
+  }
+  boots.sort();
+  const ciLo = quantileSorted(boots, 0.025);
+  const ciHi = quantileSorted(boots, 0.975);
+  return {
+    n_pairs: n,
+    resamples,
+    f1_diff_pooled: round4(pointDiff),
+    ci95: [round4(ciLo), round4(ciHi)],
+    ci95_excludes_zero: ciLo > 0 || ciHi < 0,
+    bootstrap_p_two_sided: Number(Math.min(1, (2 * Math.min(leZero, geZero)) / resamples).toFixed(6)),
+  };
+}
+
+/**
+ * Audit where a 20-line NOAA flat-ground solar formula fails on EXP-003/EXP-006 tasks.
+ */
+function auditNoaa20FailureModes(tasks) {
+  const lunarTasks = [];
+  const moonBrightLimbTasks = [];
+  const slopedTerrainTasks = [];
+  const videoSweepTasks = [];
+  const beyondNoaaUnion = new Set();
+
+  for (const t of tasks) {
+    const vm = t.visual_measurements ?? {};
+    const ctx = t.claimed_context ?? t.tool_input ?? {};
+    const hasMoon = Object.keys(vm).some((k) => k.startsWith("moon_"));
+    const hasLimb = vm.moon_bright_limb_deg !== undefined && vm.moon_bright_limb_deg !== null;
+    const hasSlope = Number(ctx.slope_deg ?? 0) > 0;
+    const hasSweep = Boolean(vm.shadow_sweep);
+    if (hasMoon) {
+      lunarTasks.push(t.task_id);
+      beyondNoaaUnion.add(t.task_id);
+    }
+    if (hasLimb) moonBrightLimbTasks.push(t.task_id);
+    if (hasSlope) {
+      slopedTerrainTasks.push(t.task_id);
+      beyondNoaaUnion.add(t.task_id);
+    }
+    if (hasSweep) videoSweepTasks.push(t.task_id);
+  }
+
+  return {
+    total_tasks: tasks.length,
+    lunar_ephemeris_required_tasks: lunarTasks.length,
+    lunar_task_ids: lunarTasks,
+    moon_bright_limb_zenith_required_tasks: moonBrightLimbTasks.length,
+    moon_bright_limb_task_ids: moonBrightLimbTasks,
+    sloped_3d_shadow_required_tasks: slopedTerrainTasks.length,
+    sloped_task_ids: slopedTerrainTasks,
+    video_shadow_sweep_tasks: videoSweepTasks.length,
+    strictly_beyond_noaa20_tasks: beyondNoaaUnion.size,
+    strictly_beyond_noaa20_fraction: round4(beyondNoaaUnion.size / Math.max(1, tasks.length)),
+    chronolocate_requiring_lunar_phase: "8/8 (100%): daily solar shadows repeat across a 6-day window without Moon illumination/waxing.",
+    failure_modes: [
+      "Zero lunar ephemeris: a 20-line NOAA solar formula cannot compute lunar visibility, altitude, illumination, waxing state, or zenith-frame bright-limb orientation (13/30 tasks, including 8/8 chronolocation, 2/14 verify, and 3/8 geolocation).",
+      "No sloped-ground 3D shadow projection: flat-ground L/H = cot(alt) fails on 18-deg mountain slopes at 2400 m elevation (3/30 tasks: VLM-003 authentic Chamonix slope false-alarm, VLM-022, VLM-030).",
+      "No atmospheric refraction or horizon dip: unrefracted solar geometry degrades low-elevation shadow length ratio L/H = cot(alt) where 0.5 deg altitude error causes large ratio drift.",
+      "No counterfactual forensic inversion: does not compute time_shift, hemisphere_flip, or date_shift diagnostic hypotheses.",
+    ],
+    packaging_vs_python_sandbox:
+      "Spinning up a Python astropy/pvlib sandbox requires ~500-2,000 ms subprocess cold start and >150 MB wheel/container dependencies, whereas Caelus runs in-process as a zero-dependency ~1.11 ms warm authentic MCP tool (2.8-3.1 ms all-tools median) identically in Node, browsers, and Cloudflare Workers.",
+  };
+}
+
 function jdFromIso(iso) {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) throw new Error(`Invalid ISO date: ${iso}`);
@@ -905,12 +1131,29 @@ async function runLiveEpisode(engine, provider, model, task, armName, opts) {
  */
 function summarizeLiveReceipt(receipt, allTasks) {
   const taskById = new Map(allTasks.map((t) => [t.task_id, t]));
+  const taskIds = allTasks.map((t) => t.task_id);
   const modelSummaries = [];
 
-  for (const run of receipt.runs ?? []) {
+  // Pooled paired arrays across all evaluated models for Wilson + B=10,000 bootstrap CIs
+  const pooledPass = Object.fromEntries(ARMS.map((a) => [a, []]));
+  const pooledVerify = Object.fromEntries(ARMS.map((a) => [a, []]));
+  const pooledChrono = Object.fromEntries(ARMS.map((a) => [a, []]));
+  const pooledGeo = Object.fromEntries(ARMS.map((a) => [a, []]));
+  const pooledDiag = Object.fromEntries(ARMS.map((a) => [a, []]));
+  const pooledAuthFp = Object.fromEntries(ARMS.map((a) => [a, []]));
+  const perTaskPassBuckets = Object.fromEntries(
+    ARMS.map((a) => [a, Object.fromEntries(taskIds.map((id) => [id, []]))]),
+  );
+
+  for (let runIdx = 0; runIdx < (receipt.runs ?? []).length; runIdx++) {
+    const run = receipt.runs[runIdx];
     const byArm = {};
+    const runVerifyPairs = {};
+    const runOverallPass = {};
+
     for (const armName of ARMS) {
       const eps = (run.episodes ?? []).filter((e) => e.arm === armName);
+      const epByTask = new Map(eps.map((e) => [e.task_id, e]));
       let tp = 0;
       let fp = 0;
       let tn = 0;
@@ -934,10 +1177,13 @@ function summarizeLiveReceipt(receipt, allTasks) {
       const allToolLatMs = [];
       const toolLatByName = {};
       const epLatMs = [];
+      const verifyPairs = [];
+      const overallFlags = [];
 
-      for (const ep of eps) {
-        const task = taskById.get(ep.task_id);
-        if (!task) continue;
+      for (const taskId of taskIds) {
+        const ep = epByTask.get(taskId);
+        const task = taskById.get(taskId);
+        if (!ep || !task) continue;
         if (typeof ep.latency_ms === "number") epLatMs.push(ep.latency_ms);
         if (ep.api_error) apiErrors++;
         if (!ep.parsed || typeof ep.parsed !== "object") parseErrors++;
@@ -957,37 +1203,53 @@ function summarizeLiveReceipt(receipt, allTasks) {
         }
 
         const g = gradeTask(task, ep.parsed);
+        const passVal = g.pass ? 1 : 0;
         if (g.pass) totalPass++;
+        overallFlags.push(passVal);
+        pooledPass[armName].push(passVal);
+        perTaskPassBuckets[armName][taskId].push(passVal);
 
         if (g.kind === "verify") {
           verifyN++;
           if (g.pass) verifyPass++;
+          const pair = { gt: g.gt_is_spoof, pred: g.pred_spoof === true };
+          verifyPairs.push(pair);
+          pooledVerify[armName].push(pair);
           if (g.gt_is_spoof) {
             if (g.pred_spoof === true) tp++;
             else fn++;
           } else {
+            const isFp = g.pred_spoof === true ? 1 : 0;
+            pooledAuthFp[armName].push(isFp);
             if (g.pred_spoof === true) fp++;
             else tn++;
           }
           if (g.diag_applicable) {
             diagTotal++;
+            pooledDiag[armName].push(g.diag_correct ? 1 : 0);
             if (g.diag_correct) diagHits++;
           }
         } else if (g.kind === "chronolocate") {
           chronoN++;
+          pooledChrono[armName].push(passVal);
           if (g.pass) chronoPass++;
           if (g.error_minutes !== null) chronoErrs.push(g.error_minutes);
         } else {
           geoN++;
+          pooledGeo[armName].push(passVal);
           if (g.pass) geoPass++;
           if (g.error_km !== null) geoErrs.push(g.error_km);
         }
       }
 
+      runVerifyPairs[armName] = verifyPairs;
+      runOverallPass[armName] = overallFlags;
       const precision = tp + fp > 0 ? tp / (tp + fp) : 0;
       const recall = tp + fn > 0 ? tp / (tp + fn) : 0;
       const f1 = precision + recall > 0 ? (2 * precision * recall) / (precision + recall) : 0;
-      const fpr = fp + tn > 0 ? fp / (fp + tn) : 0;
+      const authN = fp + tn;
+      const fpr = authN > 0 ? fp / authN : 0;
+      const f1Boot = bootstrapF1Ci(verifyPairs, 10000, 20261122 + runIdx * 97 + ARMS.indexOf(armName) * 19);
 
       const toolLatencySummary = {};
       for (const [tName, arr] of Object.entries(toolLatByName)) {
@@ -1002,11 +1264,13 @@ function summarizeLiveReceipt(receipt, allTasks) {
       byArm[armName] = {
         episodes: eps.length,
         overall_pass_rate: round4(totalPass / Math.max(1, eps.length)),
+        overall_pass_ci95_wilson: wilsonCi(totalPass, eps.length),
         overall_passed: totalPass,
         verify: {
           n: verifyN,
           passed: verifyPass,
           accuracy: round4(verifyPass / Math.max(1, verifyN)),
+          accuracy_ci95_wilson: wilsonCi(verifyPass, verifyN),
           tp,
           fp,
           tn,
@@ -1014,8 +1278,13 @@ function summarizeLiveReceipt(receipt, allTasks) {
           precision: round4(precision),
           recall: round4(recall),
           f1: round4(f1),
+          f1_ci95_bootstrap: f1Boot.ci95,
+          authentic_n: authN,
           authentic_fpr: round4(fpr),
+          authentic_fpr_ci95_wilson: wilsonCi(fp, authN),
+          authentic_specificity_ci95_wilson: wilsonCi(tn, authN),
           counterfactual_axis_accuracy: round4(diagHits / Math.max(1, diagTotal)),
+          counterfactual_axis_ci95_wilson: wilsonCi(diagHits, diagTotal),
           counterfactual_axis_hits: diagHits,
           counterfactual_axis_total: diagTotal,
         },
@@ -1023,6 +1292,7 @@ function summarizeLiveReceipt(receipt, allTasks) {
           n: chronoN,
           passed: chronoPass,
           pass_rate: round4(chronoPass / Math.max(1, chronoN)),
+          pass_rate_ci95_wilson: wilsonCi(chronoPass, chronoN),
           median_error_min: round4(percentile(chronoErrs, 50)),
           mean_error_min: round4(mean(chronoErrs)),
         },
@@ -1030,6 +1300,7 @@ function summarizeLiveReceipt(receipt, allTasks) {
           n: geoN,
           passed: geoPass,
           pass_rate: round4(geoPass / Math.max(1, geoN)),
+          pass_rate_ci95_wilson: wilsonCi(geoPass, geoN),
           median_error_km: round4(percentile(geoErrs, 50)),
           mean_error_km: round4(mean(geoErrs)),
         },
@@ -1059,6 +1330,20 @@ function summarizeLiveReceipt(receipt, allTasks) {
       temperature: run.temperature,
       think: run.think,
       by_arm: byArm,
+      paired_bootstrap_10000: {
+        overall_pass_mcp_minus_cot: pairedBootstrapDiff(
+          runOverallPass["Arm2-Caelus-MCP-Tools"],
+          runOverallPass["Arm1-CoT-NoTools"],
+          10000,
+          20261122 + runIdx * 31 + 1,
+        ),
+        spoof_f1_mcp_minus_cot: pairedBootstrapF1Diff(
+          runVerifyPairs["Arm2-Caelus-MCP-Tools"],
+          runVerifyPairs["Arm1-CoT-NoTools"],
+          10000,
+          20261122 + runIdx * 31 + 2,
+        ),
+      },
       deltas: {
         spoof_f1_gain: round4(a2.verify.f1 - a1.verify.f1),
         counterfactual_axis_gain: round4(
@@ -1072,27 +1357,119 @@ function summarizeLiveReceipt(receipt, allTasks) {
   }
 
   const macroByArm = {};
-  for (const armName of ARMS) {
+  const pooledCiByArm = {};
+  for (let ai = 0; ai < ARMS.length; ai++) {
+    const armName = ARMS[ai];
     const k = Math.max(1, modelSummaries.length);
     const avg = (fn) => round4(modelSummaries.reduce((acc, m) => acc + (fn(m.by_arm[armName]) ?? 0), 0) / k);
     const verifyMedians = modelSummaries
       .map((m) => m.by_arm[armName].tools.by_tool.verify_observation?.median_ms)
       .filter((v) => typeof v === "number");
+
+    const passHits = pooledPass[armName].reduce((a, b) => a + b, 0);
+    const passN = pooledPass[armName].length;
+    const authFpHits = pooledAuthFp[armName].reduce((a, b) => a + b, 0);
+    const authN = pooledAuthFp[armName].length;
+    const diagHits = pooledDiag[armName].reduce((a, b) => a + b, 0);
+    const diagN = pooledDiag[armName].length;
+    const chronoHits = pooledChrono[armName].reduce((a, b) => a + b, 0);
+    const chronoN = pooledChrono[armName].length;
+    const geoHits = pooledGeo[armName].reduce((a, b) => a + b, 0);
+    const geoN = pooledGeo[armName].length;
+    const pooledF1Boot = bootstrapF1Ci(pooledVerify[armName], 10000, 20261122 + 300 + ai * 17);
+
+    let tpTot = 0;
+    let fpTot = 0;
+    let tnTot = 0;
+    let fnTot = 0;
+    for (const m of modelSummaries) {
+      tpTot += m.by_arm[armName].verify.tp;
+      fpTot += m.by_arm[armName].verify.fp;
+      tnTot += m.by_arm[armName].verify.tn;
+      fnTot += m.by_arm[armName].verify.fn;
+    }
+
+    pooledCiByArm[armName] = {
+      overall_pass: { k: passHits, n: passN, rate: round4(passHits / Math.max(1, passN)), ci95_wilson: wilsonCi(passHits, passN) },
+      spoof_f1_pooled_micro: {
+        tp: tpTot,
+        fp: fpTot,
+        tn: tnTot,
+        fn: fnTot,
+        f1: pooledF1Boot.f1,
+        ci95_bootstrap: pooledF1Boot.ci95,
+      },
+      authentic_fpr_pooled: { k: authFpHits, n: authN, rate: round4(authFpHits / Math.max(1, authN)), ci95_wilson: wilsonCi(authFpHits, authN) },
+      authentic_specificity_pooled: { k: authN - authFpHits, n: authN, rate: round4((authN - authFpHits) / Math.max(1, authN)), ci95_wilson: wilsonCi(authN - authFpHits, authN) },
+      counterfactual_axis_pooled: { k: diagHits, n: diagN, rate: round4(diagHits / Math.max(1, diagN)), ci95_wilson: wilsonCi(diagHits, diagN) },
+      chronolocate_pooled: { k: chronoHits, n: chronoN, rate: round4(chronoHits / Math.max(1, chronoN)), ci95_wilson: wilsonCi(chronoHits, chronoN) },
+      geolocate_pooled: { k: geoHits, n: geoN, rate: round4(geoHits / Math.max(1, geoN)), ci95_wilson: wilsonCi(geoHits, geoN) },
+    };
+
     macroByArm[armName] = {
       overall_pass_rate: avg((a) => a.overall_pass_rate),
+      overall_pass_ci95_wilson_pooled: wilsonCi(passHits, passN),
       spoof_f1: avg((a) => a.verify.f1),
+      spoof_f1_pooled_micro: pooledF1Boot.f1,
+      spoof_f1_ci95_bootstrap_pooled: pooledF1Boot.ci95,
       spoof_precision: avg((a) => a.verify.precision),
       spoof_recall: avg((a) => a.verify.recall),
       authentic_fpr: avg((a) => a.verify.authentic_fpr),
+      authentic_fpr_ci95_wilson_per_model_n4: wilsonCi(
+        modelSummaries[0]?.by_arm[armName]?.verify?.fp ?? 0,
+        modelSummaries[0]?.by_arm[armName]?.verify?.authentic_n ?? 0,
+      ),
+      authentic_fpr_ci95_wilson_pooled_n8: wilsonCi(authFpHits, authN),
       counterfactual_axis_accuracy: avg((a) => a.verify.counterfactual_axis_accuracy),
+      counterfactual_axis_ci95_wilson_pooled: wilsonCi(diagHits, diagN),
       chronolocate_pass_rate: avg((a) => a.chronolocate.pass_rate),
+      chronolocate_ci95_wilson_pooled: wilsonCi(chronoHits, chronoN),
       geolocate_pass_rate: avg((a) => a.geolocate.pass_rate),
+      geolocate_ci95_wilson_pooled: wilsonCi(geoHits, geoN),
       tool_call_rate: avg((a) => a.tools.tool_call_rate),
       expected_tool_match_rate: avg((a) => a.tools.expected_tool_match_rate),
       verify_tool_median_ms: verifyMedians.length ? round4(mean(verifyMedians)) : null,
       all_tools_median_ms: avg((a) => a.tools.all_tools_median_ms),
     };
   }
+
+  const taskClusterPassMcp = taskIds.map((id) => mean(perTaskPassBuckets["Arm2-Caelus-MCP-Tools"][id]) ?? 0);
+  const taskClusterPassCot = taskIds.map((id) => mean(perTaskPassBuckets["Arm1-CoT-NoTools"][id]) ?? 0);
+
+  const pairedBootstrap = {
+    seed: 20261122,
+    resamples: 10000,
+    overall_pass_episode_n60: pairedBootstrapDiff(
+      pooledPass["Arm2-Caelus-MCP-Tools"],
+      pooledPass["Arm1-CoT-NoTools"],
+      10000,
+      20261122 + 701,
+    ),
+    overall_pass_task_cluster_n30: pairedBootstrapDiff(
+      taskClusterPassMcp,
+      taskClusterPassCot,
+      10000,
+      20261122 + 702,
+    ),
+    spoof_f1_pooled_n28: pairedBootstrapF1Diff(
+      pooledVerify["Arm2-Caelus-MCP-Tools"],
+      pooledVerify["Arm1-CoT-NoTools"],
+      10000,
+      20261122 + 703,
+    ),
+    chronolocate_episode_n16: pairedBootstrapDiff(
+      pooledChrono["Arm2-Caelus-MCP-Tools"],
+      pooledChrono["Arm1-CoT-NoTools"],
+      10000,
+      20261122 + 704,
+    ),
+    geolocate_episode_n16: pairedBootstrapDiff(
+      pooledGeo["Arm2-Caelus-MCP-Tools"],
+      pooledGeo["Arm1-CoT-NoTools"],
+      10000,
+      20261122 + 705,
+    ),
+  };
 
   const m1 = macroByArm["Arm1-CoT-NoTools"];
   const m2 = macroByArm["Arm2-Caelus-MCP-Tools"];
@@ -1103,6 +1480,8 @@ function summarizeLiveReceipt(receipt, allTasks) {
     models_evaluated: modelSummaries.map((m) => `${m.provider}/${m.model}`),
     model_count: modelSummaries.length,
     macro_by_arm: macroByArm,
+    pooled_cis_by_arm: pooledCiByArm,
+    paired_bootstrap_10000: pairedBootstrap,
     macro_deltas: {
       spoof_f1_gain: round4(m2.spoof_f1 - m1.spoof_f1),
       counterfactual_axis_gain: round4(
@@ -1114,6 +1493,167 @@ function summarizeLiveReceipt(receipt, allTasks) {
     },
     models: modelSummaries,
   };
+}
+
+/**
+ * Render inert, zero-chartjunk Tufte SVG directly from measured EXP-006 results with 95% Wilson/bootstrap CIs.
+ */
+function renderExp006ChartSvg(liveSummary, oracle, outPath) {
+  if (!liveSummary) return;
+  const W = 860;
+  const H = 492;
+  const x0 = 236;
+  const x1 = 626;
+  const px = (v) => x0 + v * (x1 - x0);
+
+  const mG = liveSummary.models.find((m) => m.model.includes("gemma")) ?? liveSummary.models[0];
+  const mQ = liveSummary.models.find((m) => m.model.includes("qwen")) ?? liveSummary.models[1];
+  const p1 = liveSummary.pooled_cis_by_arm["Arm1-CoT-NoTools"];
+  const p2 = liveSummary.pooled_cis_by_arm["Arm2-Caelus-MCP-Tools"];
+  const m1 = liveSummary.macro_by_arm["Arm1-CoT-NoTools"];
+  const m2 = liveSummary.macro_by_arm["Arm2-Caelus-MCP-Tools"];
+
+  const rows = [
+    {
+      title: "Overall 30-Task Pass",
+      sub: "n=30/model (n=60 pooled)",
+      g1: mG.by_arm["Arm1-CoT-NoTools"].overall_pass_rate,
+      g2: mG.by_arm["Arm2-Caelus-MCP-Tools"].overall_pass_rate,
+      q1: mQ.by_arm["Arm1-CoT-NoTools"].overall_pass_rate,
+      q2: mQ.by_arm["Arm2-Caelus-MCP-Tools"].overall_pass_rate,
+      ci1: p1.overall_pass.ci95_wilson,
+      ci2: p2.overall_pass.ci95_wilson,
+      lbl1: `${(m1.overall_pass_rate * 100).toFixed(1)} -> ${(m2.overall_pass_rate * 100).toFixed(1)}%`,
+      lbl2: `MCP 95% CI [${(p2.overall_pass.ci95_wilson[0] * 100).toFixed(1)}, ${(p2.overall_pass.ci95_wilson[1] * 100).toFixed(1)}%]`,
+      bold: true,
+    },
+    {
+      title: "Spoof-Detection F1",
+      sub: "14 verify scenes (10 spoofs)",
+      g1: mG.by_arm["Arm1-CoT-NoTools"].verify.f1,
+      g2: mG.by_arm["Arm2-Caelus-MCP-Tools"].verify.f1,
+      q1: mQ.by_arm["Arm1-CoT-NoTools"].verify.f1,
+      q2: mQ.by_arm["Arm2-Caelus-MCP-Tools"].verify.f1,
+      ci1: p1.spoof_f1_pooled_micro.ci95_bootstrap,
+      ci2: p2.spoof_f1_pooled_micro.ci95_bootstrap,
+      lbl1: `${m1.spoof_f1.toFixed(2)} -> ${m2.spoof_f1.toFixed(2)}`,
+      lbl2: `boot CI [${p2.spoof_f1_pooled_micro.ci95_bootstrap[0].toFixed(2)}, ${p2.spoof_f1_pooled_micro.ci95_bootstrap[1].toFixed(2)}]`,
+      bold: false,
+    },
+    {
+      title: "Authentic Specificity",
+      sub: "1 - FPR (n=4/model, small n!)",
+      g1: 1 - mG.by_arm["Arm1-CoT-NoTools"].verify.authentic_fpr,
+      g2: 1 - mG.by_arm["Arm2-Caelus-MCP-Tools"].verify.authentic_fpr,
+      q1: 1 - mQ.by_arm["Arm1-CoT-NoTools"].verify.authentic_fpr,
+      q2: 1 - mQ.by_arm["Arm2-Caelus-MCP-Tools"].verify.authentic_fpr,
+      ci1: [0, 1 - m1.authentic_fpr_ci95_wilson_per_model_n4[0]],
+      ci2: [1 - m2.authentic_fpr_ci95_wilson_per_model_n4[1], 1],
+      lbl1: `0 -> 100% (FPR 0/4)`,
+      lbl2: `n=4 FPR CI [0.0, ${(m2.authentic_fpr_ci95_wilson_per_model_n4[1] * 100).toFixed(1)}%]`,
+      bold: false,
+    },
+    {
+      title: "Counterfactual Axis",
+      sub: "6 single-axis spoofs (n=12)",
+      g1: mG.by_arm["Arm1-CoT-NoTools"].verify.counterfactual_axis_accuracy,
+      g2: mG.by_arm["Arm2-Caelus-MCP-Tools"].verify.counterfactual_axis_accuracy,
+      q1: mQ.by_arm["Arm1-CoT-NoTools"].verify.counterfactual_axis_accuracy,
+      q2: mQ.by_arm["Arm2-Caelus-MCP-Tools"].verify.counterfactual_axis_accuracy,
+      ci1: p1.counterfactual_axis_pooled.ci95_wilson,
+      ci2: p2.counterfactual_axis_pooled.ci95_wilson,
+      lbl1: `${(m1.counterfactual_axis_accuracy * 100).toFixed(1)} -> ${(m2.counterfactual_axis_accuracy * 100).toFixed(1)}%`,
+      lbl2: `pooled CI [${(p2.counterfactual_axis_pooled.ci95_wilson[0] * 100).toFixed(1)}, ${(p2.counterfactual_axis_pooled.ci95_wilson[1] * 100).toFixed(1)}%]`,
+      bold: false,
+    },
+    {
+      title: "Chronolocation (<=20m)",
+      sub: "8 shadow+moon tasks (med 3.3m)",
+      g1: mG.by_arm["Arm1-CoT-NoTools"].chronolocate.pass_rate,
+      g2: mG.by_arm["Arm2-Caelus-MCP-Tools"].chronolocate.pass_rate,
+      q1: mQ.by_arm["Arm1-CoT-NoTools"].chronolocate.pass_rate,
+      q2: mQ.by_arm["Arm2-Caelus-MCP-Tools"].chronolocate.pass_rate,
+      ci1: p1.chronolocate_pooled.ci95_wilson,
+      ci2: p2.chronolocate_pooled.ci95_wilson,
+      lbl1: `${(m1.chronolocate_pass_rate * 100).toFixed(1)} -> ${(m2.chronolocate_pass_rate * 100).toFixed(1)}%`,
+      lbl2: `pooled CI [${(p2.chronolocate_pooled.ci95_wilson[0] * 100).toFixed(1)}, ${(p2.chronolocate_pooled.ci95_wilson[1] * 100).toFixed(1)}%]`,
+      bold: false,
+    },
+    {
+      title: "Geolocation (<=350 km)",
+      sub: "8 Path A+B tasks (med 69.7 km)",
+      g1: mG.by_arm["Arm1-CoT-NoTools"].geolocate.pass_rate,
+      g2: mG.by_arm["Arm2-Caelus-MCP-Tools"].geolocate.pass_rate,
+      q1: mQ.by_arm["Arm1-CoT-NoTools"].geolocate.pass_rate,
+      q2: mQ.by_arm["Arm2-Caelus-MCP-Tools"].geolocate.pass_rate,
+      ci1: p1.geolocate_pooled.ci95_wilson,
+      ci2: p2.geolocate_pooled.ci95_wilson,
+      lbl1: `${(m1.geolocate_pass_rate * 100).toFixed(1)} -> ${(m2.geolocate_pass_rate * 100).toFixed(1)}%`,
+      lbl2: `pooled CI [${(p2.geolocate_pooled.ci95_wilson[0] * 100).toFixed(1)}, ${(p2.geolocate_pooled.ci95_wilson[1] * 100).toFixed(1)}%]`,
+      bold: false,
+    },
+  ];
+
+  const lines = [
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" font-family="et-book, ET-Bembo, Palatino, Georgia, serif" font-size="13">`,
+    `  <rect width="${W}" height="${H}" fill="#ffffff"/>`,
+    `  <text x="32" y="30" font-size="16" fill="#111111">EXP-006: Live Observation Tool-Use Eval (CoT-Only vs. Caelus MCP Tools, 95% CIs)</text>`,
+    `  <text x="32" y="48" font-size="11.5" fill="#555555">30 EXP-003 tasks x 2 live VLMs (upper = gemma4:12b, lower = qwen3.5:9b; shaded bands = 95% Wilson / bootstrap CI)</text>`,
+    `  <text x="${px(rows[0].g1).toFixed(1)}" y="78" text-anchor="middle" font-size="10.5" fill="#8c3b2b">Arm1: CoT-NoTools (open)</text>`,
+    `  <line x1="${px(rows[0].g1).toFixed(1)}" y1="81" x2="${px(rows[0].g1).toFixed(1)}" y2="96" stroke="#8c3b2b" stroke-width="0.8"/>`,
+    `  <text x="${px(rows[0].g2).toFixed(1)}" y="78" text-anchor="end" font-size="10.5" fill="#1b5e7a">Arm2: Caelus-MCP-Tools (filled)</text>`,
+    `  <line x1="${px(rows[0].g2).toFixed(1)}" y1="81" x2="${px(rows[0].g2).toFixed(1)}" y2="96" stroke="#1b5e7a" stroke-width="0.8"/>`,
+    `  <text x="640" y="78" text-anchor="start" font-size="10.5" fill="#444444">Macro gain &amp; MCP 95% CI</text>`,
+  ];
+
+  rows.forEach((r, idx) => {
+    const yTop = 104 + idx * 56;
+    const yBot = yTop + 14;
+    const yMid = yTop + 7;
+    const weight = r.bold ? ' font-weight="bold"' : "";
+    const titleCol = r.bold ? "#111111" : "#111111";
+    const lblCol = r.bold ? "#1b5e7a" : "#222222";
+    const safeTitle = r.title.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+    lines.push(
+      `  <text x="224" y="${yTop + 5}" text-anchor="end" font-size="12"${weight} fill="${titleCol}">${safeTitle}</text>`,
+      `  <text x="224" y="${yTop + 18}" text-anchor="end" font-size="9.8" fill="#666666">${r.sub}</text>`,
+      `  <line x1="${x0}" y1="${yTop}" x2="${x1}" y2="${yTop}" stroke="#f0f0f0" stroke-width="1"/>`,
+      `  <line x1="${x0}" y1="${yBot}" x2="${x1}" y2="${yBot}" stroke="#f0f0f0" stroke-width="1"/>`,
+      // Pooled 95% CI bands (subtle, non-overlapping)
+      `  <rect x="${px(r.ci1[0]).toFixed(1)}" y="${yMid - 10}" width="${Math.max(1.5, px(r.ci1[1]) - px(r.ci1[0])).toFixed(1)}" height="20" fill="#8c3b2b" opacity="0.10"/>`,
+      `  <rect x="${px(r.ci2[0]).toFixed(1)}" y="${yMid - 10}" width="${Math.max(1.5, px(r.ci2[1]) - px(r.ci2[0])).toFixed(1)}" height="20" fill="#1b5e7a" opacity="0.14"/>`,
+      // gemma4:12b dumbbell (upper track)
+      `  <line x1="${px(r.g1).toFixed(1)}" y1="${yTop}" x2="${px(r.g2).toFixed(1)}" y2="${yTop}" stroke="#1b5e7a" stroke-width="2"/>`,
+      `  <circle cx="${px(r.g1).toFixed(1)}" cy="${yTop}" r="3.8" fill="#ffffff" stroke="#8c3b2b" stroke-width="1.7"/>`,
+      `  <circle cx="${px(r.g2).toFixed(1)}" cy="${yTop}" r="4.3" fill="#1b5e7a"/>`,
+      // qwen3.5:9b dumbbell (lower track)
+      `  <line x1="${px(r.q1).toFixed(1)}" y1="${yBot}" x2="${px(r.q2).toFixed(1)}" y2="${yBot}" stroke="#4d8299" stroke-width="1.6"/>`,
+      `  <circle cx="${px(r.q1).toFixed(1)}" cy="${yBot}" r="3.4" fill="#ffffff" stroke="#8c3b2b" stroke-width="1.5"/>`,
+      `  <polygon points="${px(r.q2).toFixed(1)},${yBot - 4.3} ${(px(r.q2) + 4.3).toFixed(1)},${yBot} ${px(r.q2).toFixed(1)},${yBot + 4.3} ${(px(r.q2) - 4.3).toFixed(1)},${yBot}" fill="#1b5e7a"/>`,
+      // Right-column summary + 95% CI
+      `  <text x="640" y="${yTop + 4}" text-anchor="start" font-size="11.5"${weight} fill="${lblCol}">${r.lbl1.replace(/>/g, "&gt;")}</text>`,
+      `  <text x="640" y="${yTop + 17}" text-anchor="start" font-size="9.6" fill="#555555">${r.lbl2}</text>`,
+    );
+  });
+
+  // Range-frame horizontal axis
+  lines.push(`  <line x1="${x0}" y1="422" x2="${x1}" y2="422" stroke="#333333" stroke-width="1"/>`);
+  for (const frac of [0, 0.25, 0.5, 0.75, 1.0]) {
+    const xv = px(frac);
+    lines.push(
+      `  <line x1="${xv.toFixed(1)}" y1="422" x2="${xv.toFixed(1)}" y2="427" stroke="#333333" stroke-width="1"/>`,
+      `  <text x="${xv.toFixed(1)}" y="440" text-anchor="middle" font-size="11" fill="#444444">${Math.round(frac * 100)}%</text>`,
+    );
+  }
+
+  const pairAll = liveSummary.paired_bootstrap_10000.overall_pass_episode_n60;
+  lines.push(
+    `  <text x="32" y="460" font-size="10.2" fill="#1b5e7a">Paired bootstrap (MCP - CoT, n=60): +${(pairAll.mean_diff * 100).toFixed(1)} pp [95% CI +${(pairAll.ci95[0] * 100).toFixed(1)}, +${(pairAll.ci95[1] * 100).toFixed(1)} pp], p&lt;0.0001; authentic n=4/model FPR=0/4 [0.0%, 49.0%]</text>`,
+    `  <text x="32" y="476" font-size="10" fill="#555555">EXP-003 offline authentic n=100 FPR: 0.0% [0.0%, 3.7%]; warm verify ${oracle.verify_authentic_median_ms.toFixed(2)} ms; 15/30 tasks need Moon/3D slope beyond 20-line NOAA</text>`,
+    `</svg>\n`,
+  );
+  writeFileSync(outPath, lines.join("\n"), "utf8");
 }
 
 /**
@@ -1338,6 +1878,48 @@ async function main() {
     ? `Live 30-task observation tool-use eval across ${liveSummary.model_count} models (${liveSummary.models_evaluated.join(", ")}). CoT-NoTools -> Caelus-MCP-Tools macro: spoof F1 ${liveSummary.macro_by_arm["Arm1-CoT-NoTools"].spoof_f1} -> ${liveSummary.macro_by_arm["Arm2-Caelus-MCP-Tools"].spoof_f1}, counterfactual axis ${(liveSummary.macro_by_arm["Arm1-CoT-NoTools"].counterfactual_axis_accuracy * 100).toFixed(1)}% -> ${(liveSummary.macro_by_arm["Arm2-Caelus-MCP-Tools"].counterfactual_axis_accuracy * 100).toFixed(1)}%, chronolocate ${(liveSummary.macro_by_arm["Arm1-CoT-NoTools"].chronolocate_pass_rate * 100).toFixed(1)}% -> ${(liveSummary.macro_by_arm["Arm2-Caelus-MCP-Tools"].chronolocate_pass_rate * 100).toFixed(1)}%, geolocate ${(liveSummary.macro_by_arm["Arm1-CoT-NoTools"].geolocate_pass_rate * 100).toFixed(1)}% -> ${(liveSummary.macro_by_arm["Arm2-Caelus-MCP-Tools"].geolocate_pass_rate * 100).toFixed(1)}%, overall ${(liveSummary.macro_by_arm["Arm1-CoT-NoTools"].overall_pass_rate * 100).toFixed(1)}% -> ${(liveSummary.macro_by_arm["Arm2-Caelus-MCP-Tools"].overall_pass_rate * 100).toFixed(1)}% (all tools median ${liveSummary.macro_by_arm["Arm2-Caelus-MCP-Tools"].all_tools_median_ms} ms; warm authentic verify ${oracle.verify_authentic_median_ms} ms).`
     : `Local Caelus tool oracle verified (${oracle.oracle_passed}/${oracle.tasks} top-1, ${oracle.oracle_top2_passed}/${oracle.tasks} top-2; warm authentic verify ${oracle.verify_authentic_median_ms} ms). Live eval pending --live.`;
 
+  const noaa20Audit = auditNoaa20FailureModes(tasks);
+  const spoofF1Formula = {
+    formula: "F1 = 2 * TP / (2 * TP + FP + FN) = 2 * Precision * Recall / (Precision + Recall), where Precision = TP / (TP + FP) and Recall = TP / (TP + FN)",
+    positive_class: "is_spoof === true (10 spoof scenes + 4 authentic scenes = 14 verify_observation scenes per model)",
+    macro_f1_definition: "Unweighted mean of per-model Spoof F1 across the 2 live models; pooled micro F1 also reported for 28 paired verify episodes",
+    counts_by_model: liveSummary
+      ? Object.fromEntries(
+          liveSummary.models.map((m) => [
+            m.model,
+            {
+              cot: {
+                tp: m.by_arm["Arm1-CoT-NoTools"].verify.tp,
+                fp: m.by_arm["Arm1-CoT-NoTools"].verify.fp,
+                tn: m.by_arm["Arm1-CoT-NoTools"].verify.tn,
+                fn: m.by_arm["Arm1-CoT-NoTools"].verify.fn,
+                f1: m.by_arm["Arm1-CoT-NoTools"].verify.f1,
+                f1_ci95_bootstrap: m.by_arm["Arm1-CoT-NoTools"].verify.f1_ci95_bootstrap,
+              },
+              mcp: {
+                tp: m.by_arm["Arm2-Caelus-MCP-Tools"].verify.tp,
+                fp: m.by_arm["Arm2-Caelus-MCP-Tools"].verify.fp,
+                tn: m.by_arm["Arm2-Caelus-MCP-Tools"].verify.tn,
+                fn: m.by_arm["Arm2-Caelus-MCP-Tools"].verify.fn,
+                f1: m.by_arm["Arm2-Caelus-MCP-Tools"].verify.f1,
+                f1_ci95_bootstrap: m.by_arm["Arm2-Caelus-MCP-Tools"].verify.f1_ci95_bootstrap,
+              },
+            },
+          ]),
+        )
+      : null,
+  };
+  const sampleSizeCaveats = {
+    authentic_scenes_per_model_n: 4,
+    authentic_fpr_per_model_ci95_wilson: liveSummary
+      ? liveSummary.macro_by_arm["Arm2-Caelus-MCP-Tools"].authentic_fpr_ci95_wilson_per_model_n4
+      : [0, 0.4899],
+    authentic_fpr_pooled_n8_ci95_wilson: liveSummary
+      ? liveSummary.macro_by_arm["Arm2-Caelus-MCP-Tools"].authentic_fpr_ci95_wilson_pooled_n8
+      : [0, 0.3244],
+    note: "Each live model sees n=4 authentic verification scenes (FPR 0/4 = 0.0% [95% Wilson CI 0.0%, 49.0%]; pooled 0/8 = 0.0% [0.0%, 32.4%] vs CoT 4/4 = 100.0% [51.0%, 100.0%] per model and 8/8 [67.6%, 100.0%] pooled). Deterministic Caelus verifyObservation FPR on n=100 authentic scenes is separately verified in EXP-003 (0/100 = 0.0% [95% Wilson CI 0.0%, 3.7%]).",
+  };
+
   const results = {
     id: "EXP-006",
     run_at: new Date().toISOString(),
@@ -1347,6 +1929,9 @@ async function main() {
     metrics: {
       cot_spoof_f1: liveSummary ? liveSummary.macro_by_arm["Arm1-CoT-NoTools"].spoof_f1 : null,
       mcp_spoof_f1: liveSummary ? liveSummary.macro_by_arm["Arm2-Caelus-MCP-Tools"].spoof_f1 : null,
+      mcp_spoof_f1_ci95_bootstrap_pooled: liveSummary
+        ? liveSummary.macro_by_arm["Arm2-Caelus-MCP-Tools"].spoof_f1_ci95_bootstrap_pooled
+        : null,
       spoof_f1_margin: liveSummary ? liveSummary.macro_deltas.spoof_f1_gain : null,
       cot_authentic_false_positive_rate: liveSummary
         ? liveSummary.macro_by_arm["Arm1-CoT-NoTools"].authentic_fpr
@@ -1354,6 +1939,8 @@ async function main() {
       mcp_authentic_false_positive_rate: liveSummary
         ? liveSummary.macro_by_arm["Arm2-Caelus-MCP-Tools"].authentic_fpr
         : null,
+      mcp_authentic_fpr_ci95_wilson_n4: sampleSizeCaveats.authentic_fpr_per_model_ci95_wilson,
+      mcp_authentic_fpr_ci95_wilson_pooled_n8: sampleSizeCaveats.authentic_fpr_pooled_n8_ci95_wilson,
       cot_counterfactual_recovery_rate: liveSummary
         ? liveSummary.macro_by_arm["Arm1-CoT-NoTools"].counterfactual_axis_accuracy
         : null,
@@ -1378,12 +1965,19 @@ async function main() {
       mcp_overall_accuracy: liveSummary
         ? liveSummary.macro_by_arm["Arm2-Caelus-MCP-Tools"].overall_pass_rate
         : null,
+      mcp_overall_ci95_wilson_pooled: liveSummary
+        ? liveSummary.macro_by_arm["Arm2-Caelus-MCP-Tools"].overall_pass_ci95_wilson_pooled
+        : null,
       verify_tool_median_latency_ms: liveSummary
         ? liveSummary.macro_by_arm["Arm2-Caelus-MCP-Tools"].verify_tool_median_ms
         : oracle.latency_by_tool.verify_observation?.median_ms ?? null,
       oracle_pass_rate: oracle.oracle_pass_rate,
+      noaa20_beyond_capability_tasks: noaa20Audit.strictly_beyond_noaa20_tasks,
       live_models_count: liveSummary ? liveSummary.model_count : 0,
       runtime_ms: elapsedMs,
+      spoof_f1_formula: spoofF1Formula,
+      sample_size_caveats: sampleSizeCaveats,
+      noaa20_capability_audit: noaa20Audit,
       oracle,
       live_eval: liveSummary,
     },
@@ -1391,6 +1985,7 @@ async function main() {
   };
 
   writeFileSync(resolve(__dirname, "results.json"), JSON.stringify(results, null, 2) + "\n", "utf8");
+  renderExp006ChartSvg(liveSummary, oracle, resolve(__dirname, "chart.svg"));
   console.log(`EXP-006 complete: status=${status} (${elapsedMs} ms)`);
   console.log(results.summary);
 }

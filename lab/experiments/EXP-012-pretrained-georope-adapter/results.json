@@ -1,7 +1,7 @@
 {
   "id": "EXP-012",
-  "run_at": "2026-11-22T20:23:30.738578Z",
-  "git_sha": "421f4a5",
+  "run_at": "2026-11-22T21:06:32.238168Z",
+  "git_sha": "0ee232d",
   "status": "fail",
   "summary": "6-arm transfer test on frozen Qwen/Qwen2.5-0.5B-Instruct (494,032,768 frozen params, Apple MPS, 0 train/eval overlap, 1,720 held-out prompts). Continuous physical injection transfers strongly through frozen weights: Arm3-LoRA-Caelus-GeoAdapter reaches 90.1% OOD Solstice+Travel (95% CI 88.0-91.8%), beating parameter-matched Arm2-LoRA-UnixFourier by +65.3 pp (24.8%), beating location-aware Arm2b-LoRA-UnixFourier+LatLon by +49.8 pp on Oslo Solstices (88.0% vs 38.1%), and beating zero-shot Arm1-Frozen-Caelus-TextPrompt by +47.7 pp (42.4%) while cutting clock tokens by 95.3% and running 2.55x faster. HOWEVER, plain-text Arm1b-LoRA-TextPrompt (471K fewer params) strictly dominates accuracy across every split: 96.9% OOD Solstice+Travel (+6.8 pp over Arm3), 100.0% OOD Compaction (+18.9 pp), and 97.3% OOD All (+8.5 pp), triggering the pre-registered -3.0 pp kill bar.",
   "metrics": {
