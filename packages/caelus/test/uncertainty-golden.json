@@ -8,14 +8,14 @@
    "zodiac": "tropical",
    "result": {
     "body": "sun",
-    "speed": 1.0194330914755483,
+    "speed": 1.019433091473502,
     "model_bound_arcsec": 1,
     "bound_span": {
      "from": 1000,
      "to": 3000
     },
     "delta_t_sigma_seconds": 0.060000000000000005,
-    "clock_sigma_arcsec": 0.0025485827286888707
+    "clock_sigma_arcsec": 0.0025485827286837546
    }
   },
   {
@@ -229,14 +229,14 @@
    "zodiac": "tropical",
    "result": {
     "body": "sun",
-    "speed": 0.9530383379953946,
+    "speed": 0.953038337990165,
     "model_bound_arcsec": 1,
     "bound_span": {
      "from": 1000,
      "to": 3000
     },
     "delta_t_sigma_seconds": 0.07779863107460643,
-    "clock_sigma_arcsec": 0.0030893782524024902
+    "clock_sigma_arcsec": 0.003089378252385538
    }
   },
   {
@@ -450,14 +450,14 @@
    "zodiac": "tropical",
    "result": {
     "body": "sun",
-    "speed": 1.0072072945908985,
+    "speed": 1.007207294584532,
     "model_bound_arcsec": 1,
     "bound_span": {
      "from": 1000,
      "to": 3000
     },
     "delta_t_sigma_seconds": 19.41724389687428,
-    "clock_sigma_arcsec": 0.814882903907599
+    "clock_sigma_arcsec": 0.8148829039024483
    }
   },
   {
@@ -671,14 +671,14 @@
    "zodiac": "sidereal:lahiri",
    "result": {
     "body": "sun",
-    "speed": 0.9542580126972098,
+    "speed": 0.9542580126942539,
     "model_bound_arcsec": 1,
     "bound_span": {
      "from": 1000,
      "to": 3000
     },
     "delta_t_sigma_seconds": 15.018069815195068,
-    "clock_sigma_arcsec": 0.5971297273498333
+    "clock_sigma_arcsec": 0.5971297273479835
    }
   },
   {
@@ -882,14 +882,14 @@
    "zodiac": "tropical",
    "result": {
     "body": "sun",
-    "speed": 1.0179274292970604,
+    "speed": 1.0179274292945593,
     "model_bound_arcsec": 1,
     "bound_span": {
      "from": 1000,
      "to": 3000
     },
     "delta_t_sigma_seconds": 179.9900205338809,
-    "clock_sigma_arcsec": 7.634032454215771
+    "clock_sigma_arcsec": 7.634032454197013
    }
   },
   {
@@ -1093,14 +1093,14 @@
    "zodiac": "tropical",
    "result": {
     "body": "sun",
-    "speed": 0.9866621751027651,
+    "speed": 0.9866621751084494,
     "model_bound_arcsec": null,
     "bound_span": {
      "from": 1000,
      "to": 3000
     },
     "delta_t_sigma_seconds": 154.98001368925392,
-    "clock_sigma_arcsec": 6.371371558503983
+    "clock_sigma_arcsec": 6.37137155854069
    }
   },
   {
@@ -1304,14 +1304,14 @@
    "zodiac": "tropical",
    "result": {
     "body": "sun",
-    "speed": 0.9798460975794114,
+    "speed": 0.9798460975734997,
     "model_bound_arcsec": null,
     "bound_span": {
      "from": 1000,
      "to": 3000
     },
     "delta_t_sigma_seconds": 1440.0,
-    "clock_sigma_arcsec": 58.790765854764686
+    "clock_sigma_arcsec": 58.79076585440998
    }
   },
   {
@@ -1515,14 +1515,14 @@
    "zodiac": "tropical",
    "result": {
     "body": "sun",
-    "speed": 0.9647474489318029,
+    "speed": 0.9647474489338492,
     "model_bound_arcsec": null,
     "bound_span": {
      "from": 1000,
      "to": 3000
     },
     "delta_t_sigma_seconds": 3491.4248870636548,
-    "clock_sigma_arcsec": 140.34763553881953
+    "clock_sigma_arcsec": 140.34763553911725
    }
   },
   {
@@ -1726,14 +1726,14 @@
    "zodiac": "tropical",
    "result": {
     "body": "sun",
-    "speed": 1.0167970177285497,
+    "speed": 1.0167970177344614,
     "model_bound_arcsec": 1,
     "bound_span": {
      "from": 1000,
      "to": 3000
     },
     "delta_t_sigma_seconds": 612.5250858111963,
-    "clock_sigma_arcsec": 25.950570022364516
+    "clock_sigma_arcsec": 25.950570022515393
    }
   },
   {

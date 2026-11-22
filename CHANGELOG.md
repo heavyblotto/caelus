@@ -11,6 +11,17 @@ current figures live in `packages/caelus/accuracy.json` and on
 
 ### Engine (`caelus`)
 
+- **FK5 frame fix applies only to VSOP87D, not Horizons `earthPack` (#20).**
+  `sunApparent`/`sun_apparent` and mixed-tier `planetApparent`/`planet_apparent`
+  now apply `fk5Correction` (Meeus eq. 32.3, `-0.09033"` equinox shift) only
+  when Earth or a planet comes from VSOP87D, skipping it when Earth uses a
+  Horizons DE441 `earthPack` or `earthEraPacks` slab (already in ICRF / ecliptic
+  J2000). Browser `embeddedData` (no `earthPack`) is unchanged; on `loadNodeData`
+  and Python `"full"` tiers, Sun accuracy against Horizons improves across every
+  band (`0.246"` to `0.227"` over 1900-2099, `0.420"` to `0.346"` over
+  1850-2150) and mean longitude difference vs. Swiss Ephemeris over 1900-2099
+  drops from `0.0975"` to `0.0249"`. Affected Sun-dependent golden fixtures and
+  MCP goldens are regenerated.
 - **Physical observation, verification, time search, and geolocation.**
   `sceneGeometry`, `verifyObservation`, `chronolocate`, and `geolocate`
   (`packages/caelus/src/observe.ts`, ported from `python/astroengine/observe.py`)

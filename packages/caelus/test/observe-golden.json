@@ -21,28 +21,28 @@
     "lon_east": -74.006,
     "elevation_m": 0.0,
     "sun": {
-     "azimuth_deg": 221.7537354066489,
+     "azimuth_deg": 221.75369464428886,
      "compass16": "SW",
-     "altitude_true_deg": 68.35859764413092,
-     "altitude_apparent_deg": 68.36519944551127,
-     "airmass": 1.0752802876716847,
-     "extinction_mag": 0.21505605753433696,
+     "altitude_true_deg": 68.35862049121879,
+     "altitude_apparent_deg": 68.36522228489422,
+     "airmass": 1.075280117997439,
+     "extinction_mag": 0.2150560235994878,
      "twilight_stage": "day",
      "is_day": true,
      "trend": "setting",
-     "rate_alt_deg_per_min": -0.12617054556455543,
-     "rate_az_deg_per_min": 0.519292977665387,
+     "rate_alt_deg_per_min": -0.12617044496861496,
+     "rate_az_deg_per_min": 0.5192936181728385,
      "angular_diameter_deg": 0.5246281557782901
     },
     "shadow": {
      "cast": true,
      "self_shadowed": false,
-     "bearing_deg": 41.7537354066489,
+     "bearing_deg": 41.753694644288885,
      "compass16": "NE",
-     "length_ratio": 0.39663077508463596,
-     "horizontal_length_ratio": 0.3966307750846359,
-     "rate_bearing_deg_per_min": 0.519292977665387,
-     "rate_length_ratio_per_min": 0.0025485155937568435,
+     "length_ratio": 0.3966303137526022,
+     "horizontal_length_ratio": 0.39663031375260216,
+     "rate_bearing_deg_per_min": 0.5192936181728385,
+     "rate_length_ratio_per_min": 0.0025485127559524527,
      "penumbra_deg": 0.5246281557782901,
      "slope_deg": 0.0,
      "slope_azimuth_deg": 0.0
@@ -50,9 +50,9 @@
     "lighting": {
      "camera_aim_az_deg": 180.0,
      "camera_aim_alt_deg": 5.0,
-     "sun_relative_az_deg": 41.7537354066489,
-     "shadow_screen_az_deg": -138.2462645933511,
-     "sun_camera_angle_deg": 69.20554298600486,
+     "sun_relative_az_deg": 41.753694644288856,
+     "shadow_screen_az_deg": -138.24630535571112,
+     "sun_camera_angle_deg": 69.20554841363831,
      "glare_risk": "none"
     },
     "moon": {
@@ -61,12 +61,12 @@
      "compass16": "ESE",
      "altitude_true_deg": 12.763077156980579,
      "altitude_apparent_deg": 12.833754164995385,
-     "illum": 0.48435786753942545,
+     "illum": 0.4843576526085459,
      "phase_name": "first quarter",
      "waxing": true,
-     "elongation_deg": 88.06127888716976,
-     "magnitude": -9.994310743838312,
-     "bright_limb_zenith_deg": 71.07373017878005,
+     "elongation_deg": 88.06125424780873,
+     "magnitude": -9.994309798227375,
+     "bright_limb_zenith_deg": 71.07374205496855,
      "bright_limb_clock": "1 o'clock",
      "shadow_cast": false,
      "shadow_bearing_deg": null,
@@ -115,18 +115,18 @@
      }
     ],
     "diurnal": {
-     "sunrise_jd": 2461212.892427046,
-     "solar_noon_jd": 2461213.2068654243,
-     "sunset_jd": 2461213.5212988127,
-     "minutes_to_next_twilight": 389.0728611499071,
+     "sunrise_jd": 2461212.8924270878,
+     "solar_noon_jd": 2461213.2068655007,
+     "sunset_jd": 2461213.5212989226,
+     "minutes_to_next_twilight": 389.0730180591345,
      "next_transition_kind": "sunset",
      "planetary_hour": {
       "ruler": "mars",
       "kind": "day",
       "hour": 7,
       "day_ruler": "sun",
-      "start": 2461213.2068629293,
-      "end": 2461213.2592689097
+      "start": 2461213.206863005,
+      "end": 2461213.2592689916
      }
     },
     "chronosense": {
@@ -156,28 +156,28 @@
     "lon_east": 151.2093,
     "elevation_m": 0.0,
     "sun": {
-     "azimuth_deg": 4.658060321061868,
+     "azimuth_deg": 4.658186640191957,
      "compass16": "N",
-     "altitude_true_deg": 77.23934375334957,
-     "altitude_apparent_deg": 77.24310067567173,
-     "airmass": 1.0249267722268467,
-     "extinction_mag": 0.20498535444536936,
+     "altitude_true_deg": 77.23935142788052,
+     "altitude_apparent_deg": 77.2431083478487,
+     "airmass": 1.0249267412238163,
+     "extinction_mag": 0.20498534824476328,
      "twilight_stage": "day",
      "is_day": true,
      "trend": "rising",
-     "rate_alt_deg_per_min": 0.01672380391531192,
-     "rate_az_deg_per_min": -1.0525558913099928,
+     "rate_alt_deg_per_min": 0.01672425981985981,
+     "rate_az_deg_per_min": -1.052556296126653,
      "angular_diameter_deg": 0.5419804472733796
     },
     "shadow": {
      "cast": true,
      "self_shadowed": false,
-     "bearing_deg": 184.65806032106187,
+     "bearing_deg": 184.65818664019196,
      "compass16": "S",
-     "length_ratio": 0.22640348307447475,
-     "horizontal_length_ratio": 0.2264034830744748,
-     "rate_bearing_deg_per_min": -1.0525558913099928,
-     "rate_length_ratio_per_min": -0.0003068470625406324,
+     "length_ratio": 0.22640334230596845,
+     "horizontal_length_ratio": 0.22640334230596848,
+     "rate_bearing_deg_per_min": -1.052556296126653,
+     "rate_length_ratio_per_min": -0.00030685540883650456,
      "penumbra_deg": 0.5419804472733796,
      "slope_deg": 0.0,
      "slope_azimuth_deg": 0.0
@@ -189,12 +189,12 @@
      "compass16": "W",
      "altitude_true_deg": 51.23046547952905,
      "altitude_apparent_deg": 51.24383734592691,
-     "illum": 0.1295190756069764,
+     "illum": 0.12951921037542768,
      "phase_name": "waning crescent",
      "waxing": false,
-     "elongation_deg": 42.08078072042808,
-     "magnitude": -7.61548850060901,
-     "bright_limb_zenith_deg": 70.93064705152791,
+     "elongation_deg": 42.080803670206265,
+     "magnitude": -7.615490061593224,
+     "bright_limb_zenith_deg": 70.93067335234619,
      "bright_limb_clock": "1 o'clock",
      "shadow_cast": false,
      "shadow_bearing_deg": null,
@@ -235,18 +235,18 @@
      }
     ],
     "diurnal": {
-     "sunrise_jd": 2461055.291322125,
-     "solar_noon_jd": 2461055.586395192,
-     "sunset_jd": 2461055.881224243,
-     "minutes_to_next_twilight": 427.54419207572937,
+     "sunrise_jd": 2461055.2913221847,
+     "solar_noon_jd": 2461055.586395273,
+     "sunset_jd": 2461055.8812243454,
+     "minutes_to_next_twilight": 427.54434026777744,
      "next_transition_kind": "sunset",
      "planetary_hour": {
       "ruler": "sun",
       "kind": "day",
       "hour": 6,
       "day_ruler": "mercury",
-      "start": 2461055.537114674,
-      "end": 2461055.586273184
+      "start": 2461055.5371147515,
+      "end": 2461055.586273265
      }
     },
     "chronosense": {
@@ -275,17 +275,17 @@
     "lon_east": -0.12,
     "elevation_m": 0.0,
     "sun": {
-     "azimuth_deg": 321.62717658545336,
+     "azimuth_deg": 321.6271470400583,
      "compass16": "NW",
-     "altitude_true_deg": -31.61086682542428,
-     "altitude_apparent_deg": -31.61086682542428,
+     "altitude_true_deg": -31.61085619780117,
+     "altitude_apparent_deg": -31.61085619780117,
      "airmass": 37.91960837783625,
      "extinction_mag": 7.58392167556725,
      "twilight_stage": "night",
      "is_day": false,
      "trend": "setting",
-     "rate_alt_deg_per_min": -0.09637702261832715,
-     "rate_az_deg_per_min": 0.2709260978112411,
+     "rate_alt_deg_per_min": -0.09637708548685708,
+     "rate_az_deg_per_min": 0.2709260361107795,
      "angular_diameter_deg": 0.5352345385395958
     },
     "shadow": {
@@ -308,12 +308,12 @@
      "compass16": "SSW",
      "altitude_true_deg": 58.47409269893812,
      "altitude_apparent_deg": 58.484307720084495,
-     "illum": 0.8374593278595093,
+     "illum": 0.8374591752022655,
      "phase_name": "waxing gibbous",
      "waxing": true,
-     "elongation_deg": 132.33340414970746,
-     "magnitude": -11.36470996022099,
-     "bright_limb_zenith_deg": 7.4170894215668,
+     "elongation_deg": 132.33338039937493,
+     "magnitude": -11.364709303052571,
+     "bright_limb_zenith_deg": 7.417071173174789,
      "bright_limb_clock": "3 o'clock",
      "shadow_cast": true,
      "shadow_bearing_deg": 21.030025117962282,
@@ -330,18 +330,18 @@
      }
     ],
     "diurnal": {
-     "sunrise_jd": 2460389.7516091857,
-     "solar_noon_jd": 2460390.005407705,
-     "sunset_jd": 2460390.2599073565,
-     "minutes_to_next_twilight": 446.6911666095257,
+     "sunrise_jd": 2460389.751609262,
+     "solar_noon_jd": 2460390.0054077804,
+     "sunset_jd": 2460390.259907432,
+     "minutes_to_next_twilight": 446.6912752389908,
      "next_transition_kind": "civil_dawn",
      "planetary_hour": {
       "ruler": "moon",
       "kind": "night",
       "hour": 16,
       "day_ruler": "mercury",
-      "start": 2460390.3824368017,
-      "end": 2460390.4232799504
+      "start": 2460390.382436877,
+      "end": 2460390.423280026
      }
     },
     "chronosense": {
@@ -371,28 +371,28 @@
     "lon_east": -74.006,
     "elevation_m": 0.0,
     "sun": {
-     "azimuth_deg": 259.96185838497416,
+     "azimuth_deg": 259.96183993454895,
      "compass16": "W",
-     "altitude_true_deg": 12.22362950043943,
-     "altitude_apparent_deg": 12.297286592833496,
-     "airmass": 4.601938671322909,
-     "extinction_mag": 0.9203877342645819,
+     "altitude_true_deg": 12.223649967850964,
+     "altitude_apparent_deg": 12.297306942782178,
+     "airmass": 4.6019314877211475,
+     "extinction_mag": 0.9203862975442295,
      "twilight_stage": "day",
      "is_day": true,
      "trend": "setting",
-     "rate_alt_deg_per_min": -0.18645197586322482,
-     "rate_az_deg_per_min": 0.17046783006401256,
+     "rate_alt_deg_per_min": -0.1864519651705887,
+     "rate_az_deg_per_min": 0.1704678555704504,
      "angular_diameter_deg": 0.5351284773153957
     },
     "shadow": {
      "cast": true,
      "self_shadowed": false,
-     "bearing_deg": 79.96185838497416,
+     "bearing_deg": 79.96183993454895,
      "compass16": "E",
-     "length_ratio": 2.130483755298102,
-     "horizontal_length_ratio": 2.0578893122765582,
-     "rate_bearing_deg_per_min": 0.17046783006401256,
-     "rate_length_ratio_per_min": 0.014943302291180335,
+     "length_ratio": 2.13048212433892,
+     "horizontal_length_ratio": 2.057887736920497,
+     "rate_bearing_deg_per_min": 0.1704678555704504,
+     "rate_length_ratio_per_min": 0.014943279880423956,
      "penumbra_deg": 0.5351284773153957,
      "slope_deg": 15.0,
      "slope_azimuth_deg": 260.0
@@ -404,12 +404,12 @@
      "compass16": "WSW",
      "altitude_true_deg": 49.47628870297376,
      "altitude_apparent_deg": 49.490518660295095,
-     "illum": 0.10768800739958362,
+     "illum": 0.10768787995296586,
      "phase_name": "waxing crescent",
      "waxing": true,
-     "elongation_deg": 38.226609898974544,
-     "magnitude": -7.529977594959638,
-     "bright_limb_zenith_deg": 286.543241051962,
+     "elongation_deg": 38.226586388084655,
+     "magnitude": -7.529975910457631,
+     "bright_limb_zenith_deg": 286.5432186988434,
      "bright_limb_clock": "5 o'clock",
      "shadow_cast": false,
      "shadow_bearing_deg": null,
@@ -442,18 +442,18 @@
      }
     ],
     "diurnal": {
-     "sunrise_jd": 2461120.9567210106,
-     "solar_noon_jd": 2461121.2104877885,
-     "sunset_jd": 2461121.4647342665,
-     "minutes_to_next_twilight": 67.8392618894577,
+     "sunrise_jd": 2461120.956721086,
+     "solar_noon_jd": 2461121.210487865,
+     "sunset_jd": 2461121.464734342,
+     "minutes_to_next_twilight": 67.83937186002731,
      "next_transition_kind": "sunset",
      "planetary_hour": {
       "ruler": "sun",
       "kind": "day",
       "hour": 11,
       "day_ruler": "saturn",
-      "start": 2461121.3800653904,
-      "end": 2461121.422399828
+      "start": 2461121.380065466,
+      "end": 2461121.4223999036
      }
     },
     "chronosense": {
@@ -483,17 +483,17 @@
     "lon_east": -74.006,
     "elevation_m": 0.0,
     "sun": {
-     "azimuth_deg": 259.96185838497416,
+     "azimuth_deg": 259.96183993454895,
      "compass16": "W",
-     "altitude_true_deg": 12.22362950043943,
-     "altitude_apparent_deg": 12.297286592833496,
-     "airmass": 4.601938671322909,
-     "extinction_mag": 0.9203877342645819,
+     "altitude_true_deg": 12.223649967850964,
+     "altitude_apparent_deg": 12.297306942782178,
+     "airmass": 4.6019314877211475,
+     "extinction_mag": 0.9203862975442295,
      "twilight_stage": "day",
      "is_day": true,
      "trend": "setting",
-     "rate_alt_deg_per_min": -0.18645197586322482,
-     "rate_az_deg_per_min": 0.17046783006401256,
+     "rate_alt_deg_per_min": -0.1864519651705887,
+     "rate_az_deg_per_min": 0.1704678555704504,
      "angular_diameter_deg": 0.5351284773153957
     },
     "shadow": {
@@ -516,12 +516,12 @@
      "compass16": "WSW",
      "altitude_true_deg": 49.47628870297376,
      "altitude_apparent_deg": 49.490518660295095,
-     "illum": 0.10768800739958362,
+     "illum": 0.10768787995296586,
      "phase_name": "waxing crescent",
      "waxing": true,
-     "elongation_deg": 38.226609898974544,
-     "magnitude": -7.529977594959638,
-     "bright_limb_zenith_deg": 286.543241051962,
+     "elongation_deg": 38.226586388084655,
+     "magnitude": -7.529975910457631,
+     "bright_limb_zenith_deg": 286.5432186988434,
      "bright_limb_clock": "5 o'clock",
      "shadow_cast": false,
      "shadow_bearing_deg": null,
@@ -554,18 +554,18 @@
      }
     ],
     "diurnal": {
-     "sunrise_jd": 2461120.9567210106,
-     "solar_noon_jd": 2461121.2104877885,
-     "sunset_jd": 2461121.4647342665,
-     "minutes_to_next_twilight": 67.8392618894577,
+     "sunrise_jd": 2461120.956721086,
+     "solar_noon_jd": 2461121.210487865,
+     "sunset_jd": 2461121.464734342,
+     "minutes_to_next_twilight": 67.83937186002731,
      "next_transition_kind": "sunset",
      "planetary_hour": {
       "ruler": "sun",
       "kind": "day",
       "hour": 11,
       "day_ruler": "saturn",
-      "start": 2461121.3800653904,
-      "end": 2461121.422399828
+      "start": 2461121.380065466,
+      "end": 2461121.4223999036
      }
     },
     "chronosense": {
@@ -596,28 +596,28 @@
     "lon_east": -104.9903,
     "elevation_m": 1609.0,
     "sun": {
-     "azimuth_deg": 90.9801611179075,
+     "azimuth_deg": 90.98014357486241,
      "compass16": "E",
-     "altitude_true_deg": 1.7580063503696817,
-     "altitude_apparent_deg": 2.0013004973400164,
-     "airmass": 19.42632759149748,
-     "extinction_mag": 3.885265518299496,
+     "altitude_true_deg": 1.7579854195511895,
+     "altitude_apparent_deg": 2.001280790994382,
+     "airmass": 19.42643238054839,
+     "extinction_mag": 3.8852864761096786,
      "twilight_stage": "day",
      "is_day": true,
      "trend": "rising",
-     "rate_alt_deg_per_min": 0.1924272271679921,
-     "rate_az_deg_per_min": 0.1597468950423604,
+     "rate_alt_deg_per_min": 0.1924272282899202,
+     "rate_az_deg_per_min": 0.15974689197548742,
      "angular_diameter_deg": 0.5351825721733978
     },
     "shadow": {
      "cast": true,
      "self_shadowed": false,
-     "bearing_deg": 270.9801611179075,
+     "bearing_deg": 270.9801435748624,
      "compass16": "W",
-     "length_ratio": 28.617629567995586,
-     "horizontal_length_ratio": 28.617629567995582,
-     "rate_bearing_deg_per_min": 0.1597468950423604,
-     "rate_length_ratio_per_min": -2.753855674839525,
+     "length_ratio": 28.617911591317917,
+     "horizontal_length_ratio": 28.617911591317913,
+     "rate_bearing_deg_per_min": 0.15974689197548742,
+     "rate_length_ratio_per_min": -2.753909902805749,
      "penumbra_deg": 0.5351825721733978,
      "slope_deg": 0.0,
      "slope_azimuth_deg": 0.0
@@ -629,12 +629,12 @@
      "compass16": "ENE",
      "altitude_true_deg": -8.79676374958427,
      "altitude_apparent_deg": -8.79676374958427,
-     "illum": 0.08260218383908957,
+     "illum": 0.08260207124040514,
      "phase_name": "waxing crescent",
      "waxing": true,
-     "elongation_deg": 33.32768503438781,
-     "magnitude": -7.165583769733944,
-     "bright_limb_zenith_deg": 16.968047333970723,
+     "elongation_deg": 33.32766164671835,
+     "magnitude": -7.165581979114519,
+     "bright_limb_zenith_deg": 16.96802168537938,
      "bright_limb_clock": "2 o'clock",
      "shadow_cast": false,
      "shadow_bearing_deg": null,
@@ -659,18 +659,18 @@
      }
     ],
     "diurnal": {
-     "sunrise_jd": 2461121.0431133015,
-     "solar_noon_jd": 2461121.2965375492,
-     "sunset_jd": 2461121.5504245404,
-     "minutes_to_next_twilight": 716.168829202652,
+     "sunrise_jd": 2461121.043113378,
+     "solar_noon_jd": 2461121.2965376247,
+     "sunset_jd": 2461121.550424617,
+     "minutes_to_next_twilight": 716.1689391732216,
      "next_transition_kind": "sunset",
      "planetary_hour": {
       "ruler": "saturn",
       "kind": "day",
       "hour": 1,
       "day_ruler": "saturn",
-      "start": 2461121.04276238,
-      "end": 2461121.08509686
+      "start": 2461121.0427624555,
+      "end": 2461121.0850969357
      }
     },
     "chronosense": {
@@ -700,28 +700,28 @@
     "lon_east": 15.6,
     "elevation_m": 0.0,
     "sun": {
-     "azimuth_deg": 0.11310609432064211,
+     "azimuth_deg": 0.11308042255015494,
      "compass16": "N",
-     "altitude_true_deg": 11.636655680155402,
-     "altitude_apparent_deg": 11.713830109555447,
-     "airmass": 4.817576812071331,
-     "extinction_mag": 0.9635153624142663,
+     "altitude_true_deg": 11.636666477138283,
+     "altitude_apparent_deg": 11.713840838984686,
+     "airmass": 4.817572660564237,
+     "extinction_mag": 0.9635145321128475,
      "twilight_stage": "day",
      "is_day": true,
      "trend": "culminating",
-     "rate_alt_deg_per_min": 9.797360249663711e-05,
-     "rate_az_deg_per_min": 0.23415307816014774,
+     "rate_alt_deg_per_min": 9.795069887719166e-05,
+     "rate_az_deg_per_min": 0.23415306805429736,
      "angular_diameter_deg": 0.524621982190686
     },
     "shadow": {
      "cast": true,
      "self_shadowed": false,
-     "bearing_deg": 180.11310609432064,
+     "bearing_deg": 180.11308042255015,
      "compass16": "S",
-     "length_ratio": 4.822954410185424,
-     "horizontal_length_ratio": 4.822954410185424,
-     "rate_bearing_deg_per_min": 0.23415307816014774,
-     "rate_length_ratio_per_min": -4.148519732311444e-05,
+     "length_ratio": 4.822949867001589,
+     "horizontal_length_ratio": 4.822949867001589,
+     "rate_bearing_deg_per_min": 0.23415306805429736,
+     "rate_length_ratio_per_min": -4.147542427029521e-05,
      "penumbra_deg": 0.524621982190686,
      "slope_deg": 0.0,
      "slope_azimuth_deg": 0.0
@@ -733,12 +733,12 @@
      "compass16": "W",
      "altitude_true_deg": -2.8134230766463326,
      "altitude_apparent_deg": -2.8134230766463326,
-     "illum": 0.5059035333693774,
+     "illum": 0.5059033187645917,
      "phase_name": "first quarter",
      "waxing": true,
-     "elongation_deg": 90.53003873101811,
-     "magnitude": -10.081295595676435,
-     "bright_limb_zenith_deg": 11.62480570427537,
+     "elongation_deg": 90.5300141366645,
+     "magnitude": -10.08129467580284,
+     "bright_limb_zenith_deg": 11.624817701435152,
      "bright_limb_clock": "3 o'clock",
      "shadow_cast": false,
      "shadow_bearing_deg": null,
@@ -788,7 +788,7 @@
     ],
     "diurnal": {
      "sunrise_jd": null,
-     "solar_noon_jd": 2461213.958073441,
+     "solar_noon_jd": 2461213.9580735173,
      "sunset_jd": null,
      "minutes_to_next_twilight": null,
      "next_transition_kind": null,
@@ -818,17 +818,17 @@
     "lon_east": 15.6,
     "elevation_m": 0.0,
     "sun": {
-     "azimuth_deg": 181.02018358858484,
+     "azimuth_deg": 181.02015796125946,
      "compass16": "S",
-     "altitude_true_deg": -11.638735905037136,
-     "altitude_apparent_deg": -11.638735905037136,
+     "altitude_true_deg": -11.638746611260304,
+     "altitude_apparent_deg": -11.638746611260304,
      "airmass": 37.91960837783625,
      "extinction_mag": 7.58392167556725,
      "twilight_stage": "nautical",
      "is_day": false,
      "trend": "nadir",
-     "rate_alt_deg_per_min": -0.0009121492656598562,
-     "rate_az_deg_per_min": 0.23410767210855,
+     "rate_alt_deg_per_min": -0.0009121264121931816,
+     "rate_az_deg_per_min": 0.23410766201271827,
      "angular_diameter_deg": 0.541936932836386
     },
     "shadow": {
@@ -851,12 +851,12 @@
      "compass16": "NE",
      "altitude_true_deg": 14.4138692430436,
      "altitude_apparent_deg": 14.476669968738387,
-     "illum": 0.900078378246673,
+     "illum": 0.900078256920648,
      "phase_name": "waxing gibbous",
      "waxing": true,
-     "elongation_deg": 143.0599395809321,
-     "magnitude": -11.902152799782982,
-     "bright_limb_zenith_deg": 359.7259821892704,
+     "elongation_deg": 143.05991635534983,
+     "magnitude": -11.902152178546688,
+     "bright_limb_zenith_deg": 359.7259583520057,
      "bright_limb_clock": "3 o'clock",
      "shadow_cast": true,
      "shadow_bearing_deg": 218.8695966424829,
@@ -882,7 +882,7 @@
     ],
     "diurnal": {
      "sunrise_jd": null,
-     "solar_noon_jd": 2461395.9553071177,
+     "solar_noon_jd": 2461395.955307193,
      "sunset_jd": null,
      "minutes_to_next_twilight": null,
      "next_transition_kind": null,
@@ -918,28 +918,28 @@
      "lon_east": -74.006,
      "elevation_m": 0.0,
      "sun": {
-      "azimuth_deg": 221.7537354066489,
+      "azimuth_deg": 221.75369464428886,
       "compass16": "SW",
-      "altitude_true_deg": 68.35859764413092,
-      "altitude_apparent_deg": 68.36519944551127,
-      "airmass": 1.0752802876716847,
-      "extinction_mag": 0.21505605753433696,
+      "altitude_true_deg": 68.35862049121879,
+      "altitude_apparent_deg": 68.36522228489422,
+      "airmass": 1.075280117997439,
+      "extinction_mag": 0.2150560235994878,
       "twilight_stage": "day",
       "is_day": true,
       "trend": "setting",
-      "rate_alt_deg_per_min": -0.12617054556455543,
-      "rate_az_deg_per_min": 0.519292977665387,
+      "rate_alt_deg_per_min": -0.12617044496861496,
+      "rate_az_deg_per_min": 0.5192936181728385,
       "angular_diameter_deg": 0.5246281557782901
      },
      "shadow": {
       "cast": true,
       "self_shadowed": false,
-      "bearing_deg": 41.7537354066489,
+      "bearing_deg": 41.753694644288885,
       "compass16": "NE",
-      "length_ratio": 0.39663077508463596,
-      "horizontal_length_ratio": 0.3966307750846359,
-      "rate_bearing_deg_per_min": 0.519292977665387,
-      "rate_length_ratio_per_min": 0.0025485155937568435,
+      "length_ratio": 0.3966303137526022,
+      "horizontal_length_ratio": 0.39663031375260216,
+      "rate_bearing_deg_per_min": 0.5192936181728385,
+      "rate_length_ratio_per_min": 0.0025485127559524527,
       "penumbra_deg": 0.5246281557782901,
       "slope_deg": 0.0,
       "slope_azimuth_deg": 0.0
@@ -951,12 +951,12 @@
       "compass16": "ESE",
       "altitude_true_deg": 12.763077156980579,
       "altitude_apparent_deg": 12.833754164995385,
-      "illum": 0.48435786753942545,
+      "illum": 0.4843576526085459,
       "phase_name": "first quarter",
       "waxing": true,
-      "elongation_deg": 88.06127888716976,
-      "magnitude": -9.994310743838312,
-      "bright_limb_zenith_deg": 71.07373017878005,
+      "elongation_deg": 88.06125424780873,
+      "magnitude": -9.994309798227375,
+      "bright_limb_zenith_deg": 71.07374205496855,
       "bright_limb_clock": "1 o'clock",
       "shadow_cast": false,
       "shadow_bearing_deg": null,
@@ -1005,18 +1005,18 @@
       }
      ],
      "diurnal": {
-      "sunrise_jd": 2461212.892427046,
-      "solar_noon_jd": 2461213.2068654243,
-      "sunset_jd": 2461213.5212988127,
-      "minutes_to_next_twilight": 389.0728611499071,
+      "sunrise_jd": 2461212.8924270878,
+      "solar_noon_jd": 2461213.2068655007,
+      "sunset_jd": 2461213.5212989226,
+      "minutes_to_next_twilight": 389.0730180591345,
       "next_transition_kind": "sunset",
       "planetary_hour": {
        "ruler": "mars",
        "kind": "day",
        "hour": 7,
        "day_ruler": "sun",
-       "start": 2461213.2068629293,
-       "end": 2461213.2592689097
+       "start": 2461213.206863005,
+       "end": 2461213.2592689916
       }
      },
      "chronosense": {
@@ -1052,52 +1052,52 @@
      "moon_bright_limb_deg": 71.0737,
      "shadow_sweep": {
       "dt_minutes": 30.0,
-      "delta_bearing_deg": 13.4597
+      "delta_bearing_deg": 13.4598
      }
     }
    },
    "result": {
     "verdict": "consistent",
-    "consistency_score": 0.9999999760351245,
+    "consistency_score": 0.9999999758508767,
     "checks": [
      {
       "field": "shadow_bearing_deg",
       "status": "consistent",
       "observed": 41.7537,
-      "expected": 41.7537354066489,
-      "residual": -3.540664889101208e-05,
+      "expected": 41.753694644288885,
+      "residual": 5.35571112436628e-06,
       "tolerance": 10.0,
-      "normalized_residual": 3.5406648891012084e-06,
+      "normalized_residual": 5.35571112436628e-07,
       "note": null
      },
      {
       "field": "shadow_length_ratio",
       "status": "consistent",
       "observed": 0.3966,
-      "expected": 0.39663077508463596,
-      "residual": -3.07750846359478e-05,
-      "tolerance": 0.13949461626269538,
-      "normalized_residual": 0.00022061844005500798,
+      "expected": 0.3966303137526022,
+      "residual": -3.031375260220681e-05,
+      "tolerance": 0.13949454706289033,
+      "normalized_residual": 0.00021731138055554262,
       "note": null
      },
      {
       "field": "sun_azimuth_deg",
       "status": "consistent",
       "observed": 221.7537,
-      "expected": 221.7537354066489,
-      "residual": -3.540664889101208e-05,
+      "expected": 221.75369464428886,
+      "residual": 5.35571115278799e-06,
       "tolerance": 8.0,
-      "normalized_residual": 4.42583111137651e-06,
+      "normalized_residual": 6.694638940984987e-07,
       "note": null
      },
      {
       "field": "sun_altitude_deg",
       "status": "consistent",
       "observed": 68.3652,
-      "expected": 68.36519944551127,
-      "residual": 5.544887358155393e-07,
+      "expected": 68.36522228489422,
+      "residual": -2.228489421440827e-05,
       "tolerance": 5.0,
-      "normalized_residual": 1.1089774716310785e-07,
+      "normalized_residual": 4.456978842881654e-06,
       "note": null
      },
      {
@@ -1134,10 +1134,10 @@
       "field": "moon_illum",
       "status": "consistent",
       "observed": 0.4844,
-      "expected": 0.48435786753942545,
-      "residual": 4.2132460574551e-05,
+      "expected": 0.4843576526085459,
+      "residual": 4.23473914540895e-05,
       "tolerance": 0.12,
-      "normalized_residual": 0.00035110383812125834,
+      "normalized_residual": 0.0003528949287840792,
       "note": null
      },
      {
@@ -1154,20 +1154,20 @@
       "field": "moon_bright_limb_deg",
       "status": "consistent",
       "observed": 71.0737,
-      "expected": 71.07373017878005,
-      "residual": -3.017878003674923e-05,
+      "expected": 71.07374205496855,
+      "residual": -4.2054968560023553e-05,
       "tolerance": 18.0,
-      "normalized_residual": 1.6765988909305129e-06,
+      "normalized_residual": 2.3363871422235307e-06,
       "note": null
      },
      {
       "field": "shadow_sweep",
       "status": "consistent",
-      "observed": 13.4597,
-      "expected": 13.459736073878645,
-      "residual": -3.6073878645126456e-05,
+      "observed": 13.4598,
+      "expected": 13.459751380127528,
+      "residual": 4.861987247117838e-05,
       "tolerance": 5.0,
-      "normalized_residual": 7.214775729025291e-06,
+      "normalized_residual": 9.723974494235677e-06,
       "note": null
      }
     ],
@@ -1177,28 +1177,28 @@
      "lon_east": -74.006,
      "elevation_m": 0.0,
      "sun": {
-      "azimuth_deg": 221.7537354066489,
+      "azimuth_deg": 221.75369464428886,
       "compass16": "SW",
-      "altitude_true_deg": 68.35859764413092,
-      "altitude_apparent_deg": 68.36519944551127,
-      "airmass": 1.0752802876716847,
-      "extinction_mag": 0.21505605753433696,
+      "altitude_true_deg": 68.35862049121879,
+      "altitude_apparent_deg": 68.36522228489422,
+      "airmass": 1.075280117997439,
+      "extinction_mag": 0.2150560235994878,
       "twilight_stage": "day",
       "is_day": true,
       "trend": "setting",
-      "rate_alt_deg_per_min": -0.12617054556455543,
-      "rate_az_deg_per_min": 0.519292977665387,
+      "rate_alt_deg_per_min": -0.12617044496861496,
+      "rate_az_deg_per_min": 0.5192936181728385,
       "angular_diameter_deg": 0.5246281557782901
      },
      "shadow": {
       "cast": true,
       "self_shadowed": false,
-      "bearing_deg": 41.7537354066489,
+      "bearing_deg": 41.753694644288885,
       "compass16": "NE",
-      "length_ratio": 0.39663077508463596,
-      "horizontal_length_ratio": 0.3966307750846359,
-      "rate_bearing_deg_per_min": 0.519292977665387,
-      "rate_length_ratio_per_min": 0.0025485155937568435,
+      "length_ratio": 0.3966303137526022,
+      "horizontal_length_ratio": 0.39663031375260216,
+      "rate_bearing_deg_per_min": 0.5192936181728385,
+      "rate_length_ratio_per_min": 0.0025485127559524527,
       "penumbra_deg": 0.5246281557782901,
       "slope_deg": 0.0,
       "slope_azimuth_deg": 0.0
@@ -1210,12 +1210,12 @@
       "compass16": "ESE",
       "altitude_true_deg": 12.763077156980579,
       "altitude_apparent_deg": 12.833754164995385,
-      "illum": 0.48435786753942545,
+      "illum": 0.4843576526085459,
       "phase_name": "first quarter",
       "waxing": true,
-      "elongation_deg": 88.06127888716976,
-      "magnitude": -9.994310743838312,
-      "bright_limb_zenith_deg": 71.07373017878005,
+      "elongation_deg": 88.06125424780873,
+      "magnitude": -9.994309798227375,
+      "bright_limb_zenith_deg": 71.07374205496855,
       "bright_limb_clock": "1 o'clock",
       "shadow_cast": false,
       "shadow_bearing_deg": null,
@@ -1264,18 +1264,18 @@
       }
      ],
      "diurnal": {
-      "sunrise_jd": 2461212.892427046,
-      "solar_noon_jd": 2461213.2068654243,
-      "sunset_jd": 2461213.5212988127,
-      "minutes_to_next_twilight": 389.0728611499071,
+      "sunrise_jd": 2461212.8924270878,
+      "solar_noon_jd": 2461213.2068655007,
+      "sunset_jd": 2461213.5212989226,
+      "minutes_to_next_twilight": 389.0730180591345,
       "next_transition_kind": "sunset",
       "planetary_hour": {
        "ruler": "mars",
        "kind": "day",
        "hour": 7,
        "day_ruler": "sun",
-       "start": 2461213.2068629293,
-       "end": 2461213.2592689097
+       "start": 2461213.206863005,
+       "end": 2461213.2592689916
       }
      },
      "chronosense": {
@@ -1306,26 +1306,26 @@
    },
    "result": {
     "verdict": "consistent",
-    "consistency_score": 0.8624226677088644,
+    "consistency_score": 0.8624233035236687,
     "checks": [
      {
       "field": "shadow_bearing_deg",
       "status": "consistent",
       "observed": 41.7537,
-      "expected": 57.09613766840994,
-      "residual": -15.342437668409929,
-      "tolerance": 24.708896918376126,
-      "normalized_residual": 0.6209276650063518,
+      "expected": 57.09611407049897,
+      "residual": -15.342414070498961,
+      "tolerance": 24.708911102767956,
+      "normalized_residual": 0.6209263535203,
       "note": null
      },
      {
       "field": "shadow_length_ratio",
       "status": "consistent",
       "observed": 0.3966,
-      "expected": 0.5026873597986661,
-      "residual": -0.10608735979866607,
-      "tolerance": 0.2945205091675652,
-      "normalized_residual": 0.3602036411607195,
+      "expected": 0.5026868087581461,
+      "residual": -0.10608680875814608,
+      "tolerance": 0.29452032787791893,
+      "normalized_residual": 0.3602019919050203,
       "note": null
      }
     ],
@@ -1335,28 +1335,28 @@
      "lon_east": -74.006,
      "elevation_m": 0.0,
      "sun": {
-      "azimuth_deg": 237.0961376684099,
+      "azimuth_deg": 237.09611407049897,
       "compass16": "WSW",
-      "altitude_true_deg": 63.303529469317766,
-      "altitude_apparent_deg": 63.31190178136519,
-      "airmass": 1.1186240664665374,
-      "extinction_mag": 0.2237248132933075,
+      "altitude_true_deg": 63.303554682024746,
+      "altitude_apparent_deg": 63.311926984877346,
+      "airmass": 1.118623819612471,
+      "extinction_mag": 0.22372476392249419,
       "twilight_stage": "day",
       "is_day": true,
       "trend": "setting",
-      "rate_alt_deg_per_min": -0.1590738934109872,
-      "rate_az_deg_per_min": 0.36772242295940316,
+      "rate_alt_deg_per_min": -0.15907385097848703,
+      "rate_az_deg_per_min": 0.3677227775691989,
       "angular_diameter_deg": 0.5246274304650409
      },
      "shadow": {
       "cast": true,
       "self_shadowed": false,
-      "bearing_deg": 57.09613766840994,
+      "bearing_deg": 57.09611407049897,
       "compass16": "ENE",
-      "length_ratio": 0.5026873597986661,
-      "horizontal_length_ratio": 0.5026873597986661,
-      "rate_bearing_deg_per_min": 0.36772242295940316,
-      "rate_length_ratio_per_min": 0.0034779351299441333,
+      "length_ratio": 0.5026868087581461,
+      "horizontal_length_ratio": 0.5026868087581461,
+      "rate_bearing_deg_per_min": 0.3677227775691989,
+      "rate_length_ratio_per_min": 0.003477932664104926,
       "penumbra_deg": 0.5246274304650409,
       "slope_deg": 0.0,
       "slope_azimuth_deg": 0.0
@@ -1368,12 +1368,12 @@
       "compass16": "ESE",
       "altitude_true_deg": 18.840547744448756,
       "altitude_apparent_deg": 18.888481668536,
-      "illum": 0.486878111185994,
+      "illum": 0.48687789627243855,
       "phase_name": "first quarter",
       "waxing": true,
-      "elongation_deg": 88.35012454329494,
-      "magnitude": -10.004606869883778,
-      "bright_limb_zenith_deg": 69.15388847873136,
+      "elongation_deg": 88.35009990917878,
+      "magnitude": -10.004605927355922,
+      "bright_limb_zenith_deg": 69.15390036796379,
       "bright_limb_clock": "1 o'clock",
       "shadow_cast": false,
       "shadow_bearing_deg": null,
@@ -1414,18 +1414,18 @@
       }
      ],
      "diurnal": {
-      "sunrise_jd": 2461212.892427046,
-      "solar_noon_jd": 2461213.2068654243,
-      "sunset_jd": 2461213.5212988127,
-      "minutes_to_next_twilight": 354.0728612244129,
+      "sunrise_jd": 2461212.8924270878,
+      "solar_noon_jd": 2461213.2068655007,
+      "sunset_jd": 2461213.5212989226,
+      "minutes_to_next_twilight": 354.0730181336403,
       "next_transition_kind": "sunset",
       "planetary_hour": {
        "ruler": "sun",
        "kind": "day",
        "hour": 8,
        "day_ruler": "sun",
-       "start": 2461213.2592689097,
-       "end": 2461213.31167489
+       "start": 2461213.2592689916,
+       "end": 2461213.3116749777
       }
      },
      "chronosense": {
@@ -1445,8 +1445,8 @@
    "spec": {
     "claim": {
      "jd_ut": 2461213.25,
-     "lat": 23.437361745918384,
-     "lon_east": -89.53209533832508
+     "lat": 23.437372554096573,
+     "lon_east": -89.5320679562004
     },
     "observed": {
      "shadow_bearing_deg": 237.0,
@@ -1480,8 +1480,8 @@
     ],
     "scene": {
      "jd_ut": 2461213.25,
-     "lat": 23.437361745918384,
-     "lon_east": -89.53209533832508,
+     "lat": 23.437372554096573,
+     "lon_east": -89.5320679562004,
      "elevation_m": 0.0,
      "sun": {
       "azimuth_deg": 180.0,
@@ -1494,7 +1494,7 @@
       "is_day": true,
       "trend": "culminating",
       "rate_alt_deg_per_min": -1.7362040694024472e-09,
-      "rate_az_deg_per_min": -89.95028959891809,
+      "rate_az_deg_per_min": -89.95028957729795,
       "angular_diameter_deg": 0.5246281557782901
      },
      "shadow": {
@@ -1504,7 +1504,7 @@
       "compass16": "N",
       "length_ratio": 5.528462945827472e-07,
       "horizontal_length_ratio": 5.528462945827472e-07,
-      "rate_bearing_deg_per_min": -89.95028959891809,
+      "rate_bearing_deg_per_min": -89.95028957729795,
       "rate_length_ratio_per_min": 3.03024774976061e-11,
       "penumbra_deg": 0.5246281557782901,
       "slope_deg": 0.0,
@@ -1513,15 +1513,15 @@
      "lighting": null,
      "moon": {
       "visible": true,
-      "azimuth_deg": 92.44335869049684,
+      "azimuth_deg": 92.44336998341817,
       "compass16": "E",
-      "altitude_true_deg": 1.9387211128302262,
-      "altitude_apparent_deg": 2.2208024207640085,
-      "illum": 0.48435786753942545,
+      "altitude_true_deg": 1.9387457521912472,
+      "altitude_apparent_deg": 2.2208254358866806,
+      "illum": 0.4843576526085459,
       "phase_name": "first quarter",
       "waxing": true,
-      "elongation_deg": 88.06127888716976,
-      "magnitude": -9.994310743838312,
+      "elongation_deg": 88.06125424780873,
+      "magnitude": -9.994309798227375,
       "bright_limb_zenith_deg": 90.0,
       "bright_limb_clock": "12 o'clock",
       "shadow_cast": false,
@@ -1531,50 +1531,50 @@
      "visible_planets": [
       {
        "id": "mercury",
-       "azimuth_deg": 90.57086235403246,
+       "azimuth_deg": 90.5708987136155,
        "compass16": "E",
-       "altitude_apparent_deg": 66.53756385215378,
+       "altitude_apparent_deg": 66.53758885753317,
        "magnitude": 0.9464004430157837,
        "naked_eye": false
       },
       {
        "id": "venus",
-       "azimuth_deg": 87.03799723047432,
+       "azimuth_deg": 87.03801973155734,
        "compass16": "E",
-       "altitude_apparent_deg": 50.734536004320375,
+       "altitude_apparent_deg": 50.73456163981374,
        "magnitude": -4.025683817942822,
        "naked_eye": true
       },
       {
        "id": "mars",
-       "azimuth_deg": 269.4635601955049,
+       "azimuth_deg": 269.463556236003,
        "compass16": "W",
-       "altitude_apparent_deg": 54.56399033967258,
+       "altitude_apparent_deg": 54.56396512764505,
        "magnitude": 1.297620993094772,
        "naked_eye": false
       },
       {
        "id": "jupiter",
-       "azimuth_deg": 89.2445053892095,
+       "azimuth_deg": 89.24453612698353,
        "compass16": "E",
-       "altitude_apparent_deg": 62.18157657648443,
+       "altitude_apparent_deg": 62.181601830382455,
        "magnitude": -1.8257209362518783,
        "naked_eye": false
       },
       {
        "id": "saturn",
-       "azimuth_deg": 267.7583440702374,
+       "azimuth_deg": 267.75835263511584,
        "compass16": "W",
-       "altitude_apparent_deg": 13.398536211157632,
+       "altitude_apparent_deg": 13.39851081030429,
        "magnitude": 0.7637604436175193,
        "naked_eye": false
       }
      ],
      "diurnal": {
-      "sunrise_jd": 2461212.9671080513,
+      "sunrise_jd": 2461212.9671080196,
       "solar_noon_jd": 2461213.25,
-      "sunset_jd": 2461213.5328895254,
-      "minutes_to_next_twilight": 406.12028293311596,
+      "sunset_jd": 2461213.532889557,
+      "minutes_to_next_twilight": 406.1203298717737,
       "next_transition_kind": "sunset",
       "planetary_hour": {
        "ruler": "mars",
@@ -1582,12 +1582,12 @@
        "hour": 7,
        "day_ruler": "sun",
        "start": 2461213.2499987883,
-       "end": 2461213.2971472447
+       "end": 2461213.29714725
       }
      },
      "chronosense": {
       "moon_lon_deg": 178.44113436896518,
-      "asc_deg": 180.38138460062106,
+      "asc_deg": 180.38140969230025,
       "night_crossed": false,
       "deadline": null,
       "line": "2026-06-21T18:00Z @23.44,-89.53 | day Sun 90.0deg S culminating | shd 0.00x N | Moon 48% wax +2.2deg | next sunset 406m"
@@ -1601,9 +1601,9 @@
    "type": "verify",
    "spec": {
     "claim": {
-     "jd_ut": 2461221.497707286,
+     "jd_ut": 2461221.497709575,
      "lat": 0.0,
-     "lon_east": 1.7255893535716211
+     "lon_east": 1.7247934285379074
     },
     "observed": {
      "moon_bright_limb_deg": 123.0,
@@ -1639,7 +1639,7 @@
       "field": "moon_bright_limb_deg",
       "status": "indeterminate",
       "observed": 123.0,
-      "expected": 266.93923406955497,
+      "expected": 266.93922213986286,
       "residual": null,
       "tolerance": 18.0,
       "normalized_residual": null,
@@ -1647,23 +1647,23 @@
      }
     ],
     "scene": {
-     "jd_ut": 2461221.497707286,
+     "jd_ut": 2461221.497709575,
      "lat": 0.0,
-     "lon_east": 1.7255893535716211,
+     "lon_east": 1.7247934285379074,
      "elevation_m": 0.0,
      "sun": {
       "azimuth_deg": 0.0,
       "compass16": "N",
-      "altitude_true_deg": -66.81884563845048,
-      "altitude_apparent_deg": -66.81884563845048,
+      "altitude_true_deg": -66.81883508839275,
+      "altitude_apparent_deg": -66.81883508839275,
       "airmass": 37.91960837783625,
       "extinction_mag": 7.58392167556725,
       "twilight_stage": "night",
       "is_day": false,
       "trend": "nadir",
-      "rate_alt_deg_per_min": -4.106908043866042e-05,
-      "rate_az_deg_per_min": 0.5837218603500958,
-      "angular_diameter_deg": 0.5244540942395625
+      "rate_alt_deg_per_min": -4.10691139123287e-05,
+      "rate_az_deg_per_min": 0.5837215626708598,
+      "angular_diameter_deg": 0.5244540942092962
      },
      "shadow": {
       "cast": false,
@@ -1681,43 +1681,43 @@
      "lighting": null,
      "moon": {
       "visible": true,
-      "azimuth_deg": 179.45021672550718,
+      "azimuth_deg": 179.45021667878132,
       "compass16": "S",
-      "altitude_true_deg": 62.769122703649124,
-      "altitude_apparent_deg": 62.77769082107376,
-      "illum": 0.9987540638668642,
+      "altitude_true_deg": 62.76912590892464,
+      "altitude_apparent_deg": 62.77769402516934,
+      "illum": 0.9987540722972286,
       "phase_name": "full moon",
       "waxing": false,
-      "elongation_deg": 175.94355520464126,
-      "magnitude": -12.46172118918376,
-      "bright_limb_zenith_deg": 266.93923406955497,
+      "elongation_deg": 175.94356893391915,
+      "magnitude": -12.461721559290496,
+      "bright_limb_zenith_deg": 266.93922213986286,
       "bright_limb_clock": "6 o'clock",
       "shadow_cast": true,
-      "shadow_bearing_deg": 359.4502167255072,
-      "shadow_length_ratio": 0.5144225003697495
+      "shadow_bearing_deg": 359.4502166787813,
+      "shadow_length_ratio": 0.5144224296490625
      },
      "visible_planets": [],
      "diurnal": {
-      "sunrise_jd": 2461221.745264503,
-      "solar_noon_jd": 2461221.997775495,
-      "sunset_jd": 2461222.250285716,
-      "minutes_to_next_twilight": 333.9317788928747,
+      "sunrise_jd": 2461221.7452667924,
+      "solar_noon_jd": 2461221.9977777842,
+      "sunset_jd": 2461222.250288005,
+      "minutes_to_next_twilight": 333.93177688121796,
       "next_transition_kind": "civil_dawn",
       "planetary_hour": {
        "ruler": "mars",
        "kind": "night",
        "hour": 18,
        "day_ruler": "moon",
-       "start": 2461221.4564479757,
-       "end": 2461221.4977074796
+       "start": 2461221.456450265,
+       "end": 2461221.497709769
       }
      },
      "chronosense": {
-      "moon_lon_deg": 278.24735373563414,
-      "asc_deg": 9.769812094640592,
+      "moon_lon_deg": 278.2473810076447,
+      "asc_deg": 9.769845121302946,
       "night_crossed": false,
       "deadline": null,
-      "line": "2026-06-29T23:57Z @0.00,1.73 | night Sun -66.8deg N nadir | shd none | Moon 100% wan +62.8deg | next civil_dawn 334m"
+      "line": "2026-06-29T23:57Z @0.00,1.72 | night Sun -66.8deg N nadir | shd none | Moon 100% wan +62.8deg | next civil_dawn 334m"
      }
     },
     "diagnostics": null
@@ -1728,7 +1728,7 @@
    "type": "verify",
    "spec": {
     "claim": {
-     "jd_ut": 2461213.706941081,
+     "jd_ut": 2461213.7069411576,
      "lat": 40.7128,
      "lon_east": -74.006
     },
@@ -1739,7 +1739,7 @@
    },
    "result": {
     "verdict": "impossible",
-    "consistency_score": 3.1941890532872494e-15,
+    "consistency_score": 3.194245462523026e-15,
     "checks": [
      {
       "field": "shadow_bearing_deg",
@@ -1748,7 +1748,7 @@
       "expected": null,
       "residual": null,
       "tolerance": 10.0,
-      "normalized_residual": 8.170366351239798,
+      "normalized_residual": 8.170364189794288,
       "note": "Sun is below horizon; no solar shadow can be cast"
      },
      {
@@ -1758,28 +1758,28 @@
       "expected": null,
       "residual": null,
       "tolerance": 0.26,
-      "normalized_residual": 8.170366351239798,
+      "normalized_residual": 8.170364189794288,
       "note": "Sun is below horizon; no solar shadow can be cast"
      }
     ],
     "scene": {
-     "jd_ut": 2461213.706941081,
+     "jd_ut": 2461213.7069411576,
      "lat": 40.7128,
      "lon_east": -74.006,
      "elevation_m": 0.0,
      "sun": {
-      "azimuth_deg": 1.0031251918007911e-07,
+      "azimuth_deg": 1.6930331980802293e-07,
       "compass16": "N",
-      "altitude_true_deg": -25.85183175619899,
-      "altitude_apparent_deg": -25.85183175619899,
+      "altitude_true_deg": -25.851820948971444,
+      "altitude_apparent_deg": -25.851820948971444,
       "airmass": 37.91960837783625,
       "extinction_mag": 7.58392167556725,
       "twilight_stage": "night",
       "is_day": false,
       "trend": "nadir",
-      "rate_alt_deg_per_min": -4.122543591833505e-06,
-      "rate_az_deg_per_min": 0.25484562258077403,
-      "angular_diameter_deg": 0.5246147403936771
+      "rate_alt_deg_per_min": -4.122317134758191e-06,
+      "rate_az_deg_per_min": 0.2548455783928887,
+      "angular_diameter_deg": 0.5246147403914729
      },
      "shadow": {
       "cast": false,
@@ -1797,16 +1797,16 @@
      "lighting": null,
      "moon": {
       "visible": false,
-      "azimuth_deg": 265.54320953766097,
+      "azimuth_deg": 265.5432265799411,
       "compass16": "W",
-      "altitude_true_deg": -1.266340466015555,
-      "altitude_apparent_deg": -1.266340466015555,
-      "illum": 0.5314162742745315,
+      "altitude_true_deg": -1.266360942675609,
+      "altitude_apparent_deg": -1.266360942675609,
+      "illum": 0.5314160683756892,
       "phase_name": "first quarter",
       "waxing": true,
-      "elongation_deg": 93.45571166037867,
-      "magnitude": -10.181531750257967,
-      "bright_limb_zenith_deg": 334.0057284129165,
+      "elongation_deg": 93.45568801543251,
+      "magnitude": -10.181530889355136,
+      "bright_limb_zenith_deg": 334.0057389369106,
       "bright_limb_clock": "4 o'clock",
       "shadow_cast": false,
       "shadow_bearing_deg": null,
@@ -1814,23 +1814,23 @@
      },
      "visible_planets": [],
      "diurnal": {
-      "sunrise_jd": 2461213.8925902117,
-      "solar_noon_jd": 2461214.20701652,
-      "sunset_jd": 2461214.5214243056,
-      "minutes_to_next_twilight": 233.82148705422878,
+      "sunrise_jd": 2461213.8925902545,
+      "solar_noon_jd": 2461214.2070165966,
+      "sunset_jd": 2461214.5214244165,
+      "minutes_to_next_twilight": 233.82143072783947,
       "next_transition_kind": "civil_dawn",
       "planetary_hour": {
        "ruler": "moon",
        "kind": "night",
        "hour": 18,
        "day_ruler": "sun",
-       "start": 2461213.6760035623,
-       "end": 2461213.706944512
+       "start": 2461213.6760036442,
+       "end": 2461213.7069445886
       }
      },
      "chronosense": {
-      "moon_lon_deg": 184.27708293904502,
-      "asc_deg": 1.5487493352696087,
+      "moon_lon_deg": 184.2770839085662,
+      "asc_deg": 1.5487972489866522,
       "night_crossed": false,
       "deadline": null,
       "line": "2026-06-22T04:58Z @40.71,-74.01 | night Sun -25.9deg N nadir | shd none | Moon 53% wax -1.3deg | next civil_dawn 234m"
@@ -1838,22 +1838,22 @@
     },
     "diagnostics": {
      "time_shift": {
-      "jd_ut": 2461213.3084127596,
+      "jd_ut": 2461213.308412836,
       "offset_minutes": -573.8807831704617,
       "nearest_whole_hour_offset": -10,
-      "fit_score": 0.0273172647042241,
+      "fit_score": 0.027317160439550132,
       "verdict": "inconsistent"
      },
      "hemisphere_flip": {
       "lat": -40.7128,
       "lon_east": -74.006,
-      "fit_score": 1.4451623162411878e-67,
+      "fit_score": 1.445107514539394e-67,
       "verdict": "impossible"
      },
      "date_shift": {
-      "jd_ut": 2461212.706941081,
+      "jd_ut": 2461212.7069411576,
       "offset_days": -1,
-      "fit_score": 3.207321869033908e-15,
+      "fit_score": 3.20737851067681e-15,
       "verdict": "impossible"
      },
      "summary": "No single-axis time, hemisphere, or seasonal shift resolves all observation conflicts."
@@ -1878,16 +1878,16 @@
    },
    "result": {
     "verdict": "impossible",
-    "consistency_score": 1.722121675134829e-32,
+    "consistency_score": 1.7219669945312074e-32,
     "checks": [
      {
       "field": "shadow_sweep",
       "status": "impossible",
       "observed": 30.2364,
-      "expected": -30.236389712855384,
-      "residual": 60.47278971285539,
+      "expected": -30.236426846827044,
+      "residual": 60.47282684682705,
       "tolerance": 5.0,
-      "normalized_residual": 12.094557942571077,
+      "normalized_residual": 12.094565369365409,
       "note": "shadow swept opposite to physical solar rotation (reversed video or wrong hemisphere)"
      }
     ],
@@ -1897,28 +1897,28 @@
      "lon_east": 151.2093,
      "elevation_m": 0.0,
      "sun": {
-      "azimuth_deg": 4.658060321061868,
+      "azimuth_deg": 4.658186640191957,
       "compass16": "N",
-      "altitude_true_deg": 77.23934375334957,
-      "altitude_apparent_deg": 77.24310067567173,
-      "airmass": 1.0249267722268467,
-      "extinction_mag": 0.20498535444536936,
+      "altitude_true_deg": 77.23935142788052,
+      "altitude_apparent_deg": 77.2431083478487,
+      "airmass": 1.0249267412238163,
+      "extinction_mag": 0.20498534824476328,
       "twilight_stage": "day",
       "is_day": true,
       "trend": "rising",
-      "rate_alt_deg_per_min": 0.01672380391531192,
-      "rate_az_deg_per_min": -1.0525558913099928,
+      "rate_alt_deg_per_min": 0.01672425981985981,
+      "rate_az_deg_per_min": -1.052556296126653,
       "angular_diameter_deg": 0.5419804472733796
      },
      "shadow": {
       "cast": true,
       "self_shadowed": false,
-      "bearing_deg": 184.65806032106187,
+      "bearing_deg": 184.65818664019196,
       "compass16": "S",
-      "length_ratio": 0.22640348307447475,
-      "horizontal_length_ratio": 0.2264034830744748,
-      "rate_bearing_deg_per_min": -1.0525558913099928,
-      "rate_length_ratio_per_min": -0.0003068470625406324,
+      "length_ratio": 0.22640334230596845,
+      "horizontal_length_ratio": 0.22640334230596848,
+      "rate_bearing_deg_per_min": -1.052556296126653,
+      "rate_length_ratio_per_min": -0.00030685540883650456,
       "penumbra_deg": 0.5419804472733796,
       "slope_deg": 0.0,
       "slope_azimuth_deg": 0.0
@@ -1930,12 +1930,12 @@
       "compass16": "W",
       "altitude_true_deg": 51.23046547952905,
       "altitude_apparent_deg": 51.24383734592691,
-      "illum": 0.1295190756069764,
+      "illum": 0.12951921037542768,
       "phase_name": "waning crescent",
       "waxing": false,
-      "elongation_deg": 42.08078072042808,
-      "magnitude": -7.61548850060901,
-      "bright_limb_zenith_deg": 70.93064705152791,
+      "elongation_deg": 42.080803670206265,
+      "magnitude": -7.615490061593224,
+      "bright_limb_zenith_deg": 70.93067335234619,
       "bright_limb_clock": "1 o'clock",
       "shadow_cast": false,
       "shadow_bearing_deg": null,
@@ -1976,18 +1976,18 @@
       }
      ],
      "diurnal": {
-      "sunrise_jd": 2461055.291322125,
-      "solar_noon_jd": 2461055.586395192,
-      "sunset_jd": 2461055.881224243,
-      "minutes_to_next_twilight": 427.54419207572937,
+      "sunrise_jd": 2461055.2913221847,
+      "solar_noon_jd": 2461055.586395273,
+      "sunset_jd": 2461055.8812243454,
+      "minutes_to_next_twilight": 427.54434026777744,
       "next_transition_kind": "sunset",
       "planetary_hour": {
        "ruler": "sun",
        "kind": "day",
        "hour": 6,
        "day_ruler": "mercury",
-       "start": 2461055.537114674,
-       "end": 2461055.586273184
+       "start": 2461055.5371147515,
+       "end": 2461055.586273265
       }
      },
      "chronosense": {
@@ -2003,13 +2003,13 @@
       "jd_ut": 2461055.292302346,
       "offset_minutes": -419.0846221894026,
       "nearest_whole_hour_offset": -7,
-      "fit_score": 0.007859820094370595,
+      "fit_score": 0.007859742124301168,
       "verdict": "impossible"
      },
      "hemisphere_flip": {
       "lat": 33.8688,
       "lon_east": 151.2093,
-      "fit_score": 7.947725604446911e-05,
+      "fit_score": 7.947717178938123e-05,
       "verdict": "inconsistent"
      },
      "date_shift": null,
@@ -2027,32 +2027,32 @@
      "lon_east": 77.209
     },
     "observed": {
-     "shadow_bearing_deg": 302.108,
+     "shadow_bearing_deg": 302.1079,
      "shadow_length_ratio": 1.0137
     }
    },
    "result": {
     "verdict": "inconsistent",
-    "consistency_score": 3.9561014956078194e-22,
+    "consistency_score": 3.9558557672147074e-22,
     "checks": [
      {
       "field": "shadow_bearing_deg",
       "status": "inconsistent",
-      "observed": 302.108,
-      "expected": 65.05416878092069,
-      "residual": -122.94616878092069,
+      "observed": 302.1079,
+      "expected": 65.05414780789795,
+      "residual": -122.94624780789798,
       "tolerance": 10.0,
-      "normalized_residual": 12.294616878092068,
+      "normalized_residual": 12.294624780789798,
       "note": null
      },
      {
       "field": "shadow_length_ratio",
       "status": "consistent",
       "observed": 1.0137,
-      "expected": 1.2683642108631972,
-      "residual": -0.2546642108631971,
-      "tolerance": 0.27025463162947955,
-      "normalized_residual": 0.9423121051717739,
+      "expected": 1.2683632195808243,
+      "residual": -0.2546632195808243,
+      "tolerance": 0.2702544829371236,
+      "normalized_residual": 0.9423089556670675,
       "note": null
      }
     ],
@@ -2062,28 +2062,28 @@
      "lon_east": 77.209,
      "elevation_m": 0.0,
      "sun": {
-      "azimuth_deg": 245.0541687809207,
+      "azimuth_deg": 245.05414780789795,
       "compass16": "WSW",
-      "altitude_true_deg": 38.23175775945488,
-      "altitude_apparent_deg": 38.25284933386856,
-      "airmass": 1.6125015733094181,
-      "extinction_mag": 0.32250031466188367,
+      "altitude_true_deg": 38.23177954732068,
+      "altitude_apparent_deg": 38.252871105357656,
+      "airmass": 1.612500799565714,
+      "extinction_mag": 0.3225001599131428,
       "twilight_stage": "day",
       "is_day": true,
       "trend": "setting",
-      "rate_alt_deg_per_min": -0.19886613036156575,
-      "rate_az_deg_per_min": 0.1929685061165003,
+      "rate_alt_deg_per_min": -0.1988660963912814,
+      "rate_az_deg_per_min": 0.1929686207696193,
       "angular_diameter_deg": 0.5352026708665099
      },
      "shadow": {
       "cast": true,
       "self_shadowed": false,
-      "bearing_deg": 65.05416878092069,
+      "bearing_deg": 65.05414780789795,
       "compass16": "ENE",
-      "length_ratio": 1.2683642108631972,
-      "horizontal_length_ratio": 1.2683642108631972,
-      "rate_bearing_deg_per_min": 0.1929685061165003,
-      "rate_length_ratio_per_min": 0.009054621104665256,
+      "length_ratio": 1.2683632195808243,
+      "horizontal_length_ratio": 1.2683632195808243,
+      "rate_bearing_deg_per_min": 0.1929686207696193,
+      "rate_length_ratio_per_min": 0.009054610830065325,
       "penumbra_deg": 0.5352026708665099,
       "slope_deg": 0.0,
       "slope_azimuth_deg": 0.0
@@ -2095,12 +2095,12 @@
       "compass16": "WSW",
       "altitude_true_deg": 69.40040783703974,
       "altitude_apparent_deg": 69.40666074644082,
-      "illum": 0.07406416012686406,
+      "illum": 0.07406405325270599,
       "phase_name": "waxing crescent",
       "waxing": true,
-      "elongation_deg": 31.510172074285993,
-      "magnitude": -7.023924523831807,
-      "bright_limb_zenith_deg": 282.9724994705041,
+      "elongation_deg": 31.510148740363533,
+      "magnitude": -7.023922692773349,
+      "bright_limb_zenith_deg": 282.9724723004747,
       "bright_limb_clock": "6 o'clock",
       "shadow_cast": false,
       "shadow_bearing_deg": null,
@@ -2149,18 +2149,18 @@
       }
      ],
      "diurnal": {
-      "sunrise_jd": 2461120.5377205266,
-      "solar_noon_jd": 2461120.790532561,
-      "sunset_jd": 2461121.043647431,
-      "minutes_to_next_twilight": 181.66287437081337,
+      "sunrise_jd": 2461120.537720602,
+      "solar_noon_jd": 2461120.7905326374,
+      "sunset_jd": 2461121.043647507,
+      "minutes_to_next_twilight": 181.66298434138298,
       "next_transition_kind": "sunset",
       "planetary_hour": {
        "ruler": "jupiter",
        "kind": "day",
        "hour": 9,
        "day_ruler": "saturn",
-       "start": 2461120.8750051293,
-       "end": 2461120.9171657045
+       "start": 2461120.8750052056,
+       "end": 2461120.917165781
       }
      },
      "chronosense": {
@@ -2176,19 +2176,19 @@
       "jd_ut": 2461120.687494968,
       "offset_minutes": -330.0072457641363,
       "nearest_whole_hour_offset": -6,
-      "fit_score": 0.9999999706777108,
+      "fit_score": 0.9999999705729127,
       "verdict": "consistent"
      },
      "hemisphere_flip": {
       "lat": -28.6139,
       "lon_east": 77.209,
-      "fit_score": 2.803503376927557e-43,
+      "fit_score": 2.803123300460582e-43,
       "verdict": "inconsistent"
      },
      "date_shift": {
       "jd_ut": 2461050.9166666665,
       "offset_days": -70,
-      "fit_score": 1.2247591015413313e-16,
+      "fit_score": 1.2247023718158133e-16,
       "verdict": "inconsistent"
      },
      "summary": "Likely half-hour clock/timezone offset of -330 min (-5.5h), fit 1.00 (consistent)."
@@ -2205,32 +2205,32 @@
      "lon_east": 151.2093
     },
     "observed": {
-     "shadow_bearing_deg": 184.6581,
+     "shadow_bearing_deg": 184.6582,
      "shadow_length_ratio": 0.2264
     }
    },
    "result": {
     "verdict": "inconsistent",
-    "consistency_score": 9.031487639547277e-45,
+    "consistency_score": 9.032838271236256e-45,
     "checks": [
      {
       "field": "shadow_bearing_deg",
       "status": "inconsistent",
-      "observed": 184.6581,
-      "expected": 358.7456386797518,
-      "residual": -174.0875386797518,
+      "observed": 184.6582,
+      "expected": 358.7456056313316,
+      "residual": -174.08740563133162,
       "tolerance": 10.0,
-      "normalized_residual": 17.40875386797518,
+      "normalized_residual": 17.40874056313316,
       "note": null
      },
      {
       "field": "shadow_length_ratio",
       "status": "inconsistent",
       "observed": 0.2264,
-      "expected": 1.4281713309171238,
-      "residual": -1.2017713309171238,
-      "tolerance": 0.29422569963756856,
-      "normalized_residual": 4.084521958474338,
+      "expected": 1.4281718716492156,
+      "residual": -1.2017718716492156,
+      "tolerance": 0.2942257807473823,
+      "normalized_residual": 4.084522670299372,
       "note": null
      }
     ],
@@ -2240,28 +2240,28 @@
      "lon_east": 151.2093,
      "elevation_m": 0.0,
      "sun": {
-      "azimuth_deg": 178.74563867975175,
+      "azimuth_deg": 178.7456056313316,
       "compass16": "S",
-      "altitude_true_deg": 34.97583233293528,
-      "altitude_apparent_deg": 34.9995603503141,
-      "airmass": 1.7399557537925936,
-      "extinction_mag": 0.3479911507585187,
+      "altitude_true_deg": 34.975822131596985,
+      "altitude_apparent_deg": 34.999550157883775,
+      "airmass": 1.7399561935327172,
+      "extinction_mag": 0.34799123870654347,
       "twilight_stage": "day",
       "is_day": true,
       "trend": "culminating",
-      "rate_alt_deg_per_min": 0.004670049738173532,
-      "rate_az_deg_per_min": 0.2844315299072093,
+      "rate_alt_deg_per_min": 0.004670169472046126,
+      "rate_az_deg_per_min": 0.284431472932539,
       "angular_diameter_deg": 0.5419804472733796
      },
      "shadow": {
       "cast": true,
       "self_shadowed": false,
-      "bearing_deg": 358.7456386797518,
+      "bearing_deg": 358.7456056313316,
       "compass16": "N",
-      "length_ratio": 1.4281713309171238,
-      "horizontal_length_ratio": 1.4281713309171238,
-      "rate_bearing_deg_per_min": 0.2844315299072093,
-      "rate_length_ratio_per_min": -0.00024775691778794294,
+      "length_ratio": 1.4281718716492156,
+      "horizontal_length_ratio": 1.4281718716492153,
+      "rate_bearing_deg_per_min": 0.284431472932539,
+      "rate_length_ratio_per_min": -0.00024776339583952594,
       "penumbra_deg": 0.5419804472733796,
       "slope_deg": 0.0,
       "slope_azimuth_deg": 0.0
@@ -2273,12 +2273,12 @@
       "compass16": "SW",
       "altitude_true_deg": 15.424535108583123,
       "altitude_apparent_deg": 15.483265015890083,
-      "illum": 0.1295190756069764,
+      "illum": 0.12951921037542768,
       "phase_name": "waning crescent",
       "waxing": false,
-      "elongation_deg": 42.08078072042808,
-      "magnitude": -7.61548850060901,
-      "bright_limb_zenith_deg": 144.42678244000757,
+      "elongation_deg": 42.080803670206265,
+      "magnitude": -7.615490061593224,
+      "bright_limb_zenith_deg": 144.42680874082586,
       "bright_limb_clock": "10 o'clock",
       "shadow_cast": false,
       "shadow_bearing_deg": null,
@@ -2319,18 +2319,18 @@
       }
      ],
      "diurnal": {
-      "sunrise_jd": 2461055.3751519825,
-      "solar_noon_jd": 2461055.586395192,
-      "sunset_jd": 2461055.7978073684,
-      "minutes_to_next_twilight": 307.43480801582336,
+      "sunrise_jd": 2461055.375152085,
+      "solar_noon_jd": 2461055.586395273,
+      "sunset_jd": 2461055.797807429,
+      "minutes_to_next_twilight": 307.4348945170641,
       "next_transition_kind": "sunset",
       "planetary_hour": {
        "ruler": "sun",
        "kind": "day",
        "hour": 6,
        "day_ruler": "mercury",
-       "start": 2461055.5512583936,
-       "end": 2461055.586479676
+       "start": 2461055.5512584783,
+       "end": 2461055.586479757
       }
      },
      "chronosense": {
@@ -2346,19 +2346,19 @@
       "jd_ut": 2461055.3761203317,
       "offset_minutes": -298.3867225795984,
       "nearest_whole_hour_offset": -5,
-      "fit_score": 0.007856698279245462,
+      "fit_score": 0.00785656284760818,
       "verdict": "impossible"
      },
      "hemisphere_flip": {
       "lat": -33.8688,
       "lon_east": 151.2093,
-      "fit_score": 0.999999999693646,
+      "fit_score": 0.9999999997201328,
       "verdict": "consistent"
      },
      "date_shift": {
       "jd_ut": 2460880.5833333335,
       "offset_days": -175,
-      "fit_score": 2.6160329146695665e-43,
+      "fit_score": 2.616669341374335e-43,
       "verdict": "inconsistent"
      },
      "summary": "Likely hemisphere sign flip: lat -33.87 fits at score 1.00 (consistent)."
@@ -2375,43 +2375,43 @@
      "lon_east": -74.006
     },
     "observed": {
-     "sun_altitude_deg": 72.7241,
+     "sun_altitude_deg": 72.7242,
      "shadow_length_ratio": 0.311,
-     "shadow_bearing_deg": 1.6321
+     "shadow_bearing_deg": 1.632
     }
    },
    "result": {
     "verdict": "inconsistent",
-    "consistency_score": 6.381779156633793e-12,
+    "consistency_score": 6.381070726318956e-12,
     "checks": [
      {
       "field": "shadow_bearing_deg",
       "status": "consistent",
-      "observed": 1.6321,
-      "expected": 1.4496430513220275,
-      "residual": 0.1824569486779808,
+      "observed": 1.632,
+      "expected": 1.4496149208213183,
+      "residual": 0.18238507917868674,
       "tolerance": 10.0,
-      "normalized_residual": 0.01824569486779808,
+      "normalized_residual": 0.018238507917868674,
       "note": null
      },
      {
       "field": "shadow_length_ratio",
       "status": "inconsistent",
       "observed": 0.311,
-      "expected": 2.0622149636679814,
-      "residual": -1.7512149636679815,
-      "tolerance": 0.3893322445501972,
-      "normalized_residual": 4.497996218348657,
+      "expected": 2.062215904955008,
+      "residual": -1.751215904955008,
+      "tolerance": 0.3893323857432512,
+      "normalized_residual": 4.497997004826265,
       "note": null
      },
      {
       "field": "sun_altitude_deg",
       "status": "inconsistent",
-      "observed": 72.7241,
-      "expected": 25.86946556795694,
-      "residual": 46.85463443204307,
+      "observed": 72.7242,
+      "expected": 25.869455300582022,
+      "residual": 46.85474469941798,
       "tolerance": 5.0,
-      "normalized_residual": 9.370926886408615,
+      "normalized_residual": 9.370948939883595,
       "note": null
      }
     ],
@@ -2421,28 +2421,28 @@
      "lon_east": -74.006,
      "elevation_m": 0.0,
      "sun": {
-      "azimuth_deg": 181.449643051322,
+      "azimuth_deg": 181.44961492082132,
       "compass16": "S",
-      "altitude_true_deg": 25.835359802731773,
-      "altitude_apparent_deg": 25.86946556795694,
-      "airmass": 2.28274969236724,
-      "extinction_mag": 0.456549938473448,
+      "altitude_true_deg": 25.83534952005893,
+      "altitude_apparent_deg": 25.869455300582022,
+      "airmass": 2.2827505278067273,
+      "extinction_mag": 0.45655010556134545,
       "twilight_stage": "day",
       "is_day": true,
       "trend": "culminating",
-      "rate_alt_deg_per_min": -0.0047918199844598774,
-      "rate_az_deg_per_min": 0.2546993253655785,
+      "rate_alt_deg_per_min": -0.004791727009060054,
+      "rate_az_deg_per_min": 0.2546992844876286,
       "angular_diameter_deg": 0.5419177272915218
      },
      "shadow": {
       "cast": true,
       "self_shadowed": false,
-      "bearing_deg": 1.4496430513220275,
+      "bearing_deg": 1.4496149208213183,
       "compass16": "N",
-      "length_ratio": 2.0622149636679814,
-      "horizontal_length_ratio": 2.0622149636679814,
-      "rate_bearing_deg_per_min": 0.2546993253655785,
-      "rate_length_ratio_per_min": 0.0004393018031507735,
+      "length_ratio": 2.062215904955008,
+      "horizontal_length_ratio": 2.0622159049550075,
+      "rate_bearing_deg_per_min": 0.2546992844876286,
+      "rate_length_ratio_per_min": 0.0004392936040838618,
       "penumbra_deg": 0.5419177272915218,
       "slope_deg": 0.0,
       "slope_azimuth_deg": 0.0
@@ -2454,12 +2454,12 @@
       "compass16": "SSE",
       "altitude_true_deg": 20.84217301921529,
       "altitude_apparent_deg": 20.8852921027211,
-      "illum": 0.026328699980047998,
+      "illum": 0.026328624732858852,
       "phase_name": "new moon",
       "waxing": true,
-      "elongation_deg": 18.62649752221836,
-      "magnitude": -5.763765421429374,
-      "bright_limb_zenith_deg": 19.29394475635684,
+      "elongation_deg": 18.626470664245378,
+      "magnitude": -5.7637629124534016,
+      "bright_limb_zenith_deg": 19.293928968680568,
       "bright_limb_clock": "2 o'clock",
       "shadow_cast": false,
       "shadow_bearing_deg": null,
@@ -2500,18 +2500,18 @@
       }
      ],
      "diurnal": {
-      "sunrise_jd": 2461031.011610982,
-      "solar_noon_jd": 2461031.204381736,
-      "sunset_jd": 2461031.3971532527,
-      "minutes_to_next_twilight": 270.2740466594696,
+      "sunrise_jd": 2461031.01161109,
+      "solar_noon_jd": 2461031.2043818124,
+      "sunset_jd": 2461031.3971532965,
+      "minutes_to_next_twilight": 270.27410835027695,
       "next_transition_kind": "sunset",
       "planetary_hour": {
        "ruler": "mars",
        "kind": "day",
        "hour": 7,
        "day_ruler": "sun",
-       "start": 2461031.2043821174,
-       "end": 2461031.23651064
+       "start": 2461031.2043821933,
+       "end": 2461031.2365107103
       }
      },
      "chronosense": {
@@ -2527,19 +2527,19 @@
       "jd_ut": 2461031.2050127406,
       "offset_minutes": -4.781653806567192,
       "nearest_whole_hour_offset": 0,
-      "fit_score": 6.4593109036119164e-12,
+      "fit_score": 6.458592307934873e-12,
       "verdict": "inconsistent"
      },
      "hemisphere_flip": {
       "lat": -40.7128,
       "lon_east": -74.006,
-      "fit_score": 8.804177331373732e-36,
+      "fit_score": 8.802691537729768e-36,
       "verdict": "inconsistent"
      },
      "date_shift": {
       "jd_ut": 2461213.2083333335,
       "offset_days": 182,
-      "fit_score": 0.9999999998220661,
+      "fit_score": 0.9999999998391994,
       "verdict": "consistent"
      },
      "summary": "Likely seasonal/date shift of +182 days, fit 1.00 (consistent)."
@@ -2578,28 +2578,28 @@
     "days_pruned": 26,
     "windows": [
      {
-      "jd_start": 2461212.2375899376,
-      "jd_end": 2461212.2647074834,
+      "jd_start": 2461212.2375899972,
+      "jd_end": 2461212.264707531,
       "best_jd": 2461212.250176252,
-      "duration_minutes": 39.04926583170891,
-      "fit_score": 0.8355038107710739,
-      "max_normalized_residual": 0.869752252109815
+      "duration_minutes": 39.04924839735031,
+      "fit_score": 0.8355032233497794,
+      "max_normalized_residual": 0.8697540080191126
      },
      {
-      "jd_start": 2461213.237740632,
-      "jd_end": 2461213.264857812,
+      "jd_start": 2461213.2377406918,
+      "jd_end": 2461213.2648578594,
       "best_jd": 2461213.2499992605,
-      "duration_minutes": 39.04873877763748,
-      "fit_score": 0.9999999668402747,
-      "max_normalized_residual": 0.0003517430026638476
+      "duration_minutes": 39.048721343278885,
+      "fit_score": 0.9999999666173551,
+      "max_normalized_residual": 0.00035353409333083174
      },
      {
-      "jd_start": 2461214.237900691,
-      "jd_end": 2461214.265025217,
+      "jd_start": 2461214.2379007516,
+      "jd_end": 2461214.2650252646,
       "best_jd": 2461214.2498567067,
-      "duration_minutes": 39.05931740999222,
-      "fit_score": 0.8430797715287206,
-      "max_normalized_residual": 0.8476431542747053
+      "duration_minutes": 39.059298634529114,
+      "fit_score": 0.843080347803998,
+      "max_normalized_residual": 0.8476414057002728
      }
     ],
     "truncated": false
@@ -2634,10 +2634,10 @@
     "days_pruned": 0,
     "windows": [
      {
-      "jd_start": 2461120.3381227646,
-      "jd_end": 2461120.6714667184,
-      "best_jd": 2461120.5047947415,
-      "duration_minutes": 480.0152935087681,
+      "jd_start": 2461120.338122841,
+      "jd_end": 2461120.671466793,
+      "best_jd": 2461120.504794817,
+      "duration_minutes": 480.01529082655907,
       "fit_score": 1.0,
       "max_normalized_residual": 0.0
      }
@@ -2711,12 +2711,12 @@
     "days_pruned": 0,
     "windows": [
      {
-      "jd_start": 2461213.248675287,
-      "jd_end": 2461213.2513502636,
-      "best_jd": 2461213.250012775,
-      "duration_minutes": 3.8519666343927383,
-      "fit_score": 0.9999540429797281,
-      "max_normalized_residual": 0.009587291205349402
+      "jd_start": 2461213.2486753417,
+      "jd_end": 2461213.251350318,
+      "best_jd": 2461213.25001283,
+      "duration_minutes": 3.8519659638404846,
+      "fit_score": 0.9999540398041536,
+      "max_normalized_residual": 0.00958762244235345
      }
     ],
     "truncated": false
@@ -2737,8 +2737,8 @@
     "jd_ut": 2461213.25,
     "method": "analytical",
     "subsolar": {
-     "lat": 23.437361745918384,
-     "lon": -89.53209533832508
+     "lat": 23.437372554096573,
+     "lon": -89.5320679562004
     },
     "sublunar": {
      "lat": -1.4689972497191386,
@@ -2746,18 +2746,18 @@
     },
     "candidates": [
      {
-      "lat": 40.71148652377544,
-      "lon": -74.00707821816658,
+      "lat": 40.71149774123762,
+      "lon": -74.00704953443767,
       "fit_score": 1.0,
       "max_normalized_residual": 2.5977897556012395e-11,
-      "radius_km": 783.7921494942991,
+      "radius_km": 783.7921584566324,
       "lat_range": [
-       34.364766102755965,
-       47.05820694479492
+       34.364777129095444,
+       47.0582183533798
       ],
       "lon_range": [
-       -79.75888475273473,
-       -68.25527168359844
+       -79.75885657577166,
+       -68.25524249310368
       ],
       "region_kind": "band"
      }
@@ -2770,7 +2770,7 @@
    "spec": {
     "jd_ut": 2461055.5833333335,
     "observed": {
-     "sun_azimuth_deg": 4.6581,
+     "sun_azimuth_deg": 4.6582,
      "sun_altitude_deg": 77.2431,
      "tolerances": {
       "sun_azimuth_deg": 1.0,
@@ -2783,8 +2783,8 @@
     "jd_ut": 2461055.5833333335,
     "method": "analytical",
     "subsolar": {
-     "lat": -21.1453515618237,
-     "lon": 152.3112966031223
+     "lat": -21.14536123347155,
+     "lon": 152.31132584540126
     },
     "sublunar": {
      "lat": -27.44458209641995,
@@ -2792,18 +2792,18 @@
     },
     "candidates": [
      {
-      "lat": -33.86880004042309,
-      "lon": 151.20929057495198,
+      "lat": -33.868808116646946,
+      "lon": 151.20929613666385,
       "fit_score": 1.0,
-      "max_normalized_residual": 1.2880718713859096e-10,
-      "radius_km": 55.61830166453887,
+      "max_normalized_residual": 1.2889245226688217e-10,
+      "radius_km": 55.61830182125222,
       "lat_range": [
-       -34.36799246714385,
-       -33.36960761370233
+       -34.368000502149584,
+       -33.36961573114431
       ],
       "lon_range": [
-       150.96941279964005,
-       151.4491683502639
+       150.96941821560904,
+       151.44917405771866
       ],
       "region_kind": "point"
      }
@@ -2832,8 +2832,8 @@
     "jd_ut": 2461213.25,
     "method": "analytical",
     "subsolar": {
-     "lat": 23.437361745918384,
-     "lon": -89.53209533832508
+     "lat": 23.437372554096573,
+     "lon": -89.5320679562004
     },
     "sublunar": {
      "lat": -1.4689972497191386,
@@ -2841,34 +2841,34 @@
     },
     "candidates": [
      {
-      "lat": 14.741734468587435,
-      "lon": -15.229815096217067,
+      "lat": 14.741774415728973,
+      "lon": -15.229771042383106,
       "fit_score": 1.0,
-      "max_normalized_residual": 1.7053025658242404e-13,
-      "radius_km": 420.4175510569286,
+      "max_normalized_residual": 1.1368683772161603e-13,
+      "radius_km": 420.4180154537375,
       "lat_range": [
-       11.263113282066644,
-       18.220355655108225
+       11.263149578449985,
+       18.220399253007958
       ],
       "lon_range": [
-       -17.061241779229135,
-       -13.398388413204998
+       -17.06119977213808,
+       -13.398342312628131
       ],
       "region_kind": "arc"
      },
      {
-      "lat": 78.67957018002244,
-      "lon": 16.165624419567365,
+      "lat": 78.67953023288095,
+      "lon": 16.165635129982775,
       "fit_score": 1.0,
-      "max_normalized_residual": 4.263256414560601e-13,
-      "radius_km": 412.2848475254204,
+      "max_normalized_residual": 4.192202140984591e-13,
+      "radius_km": 412.28527797361306,
       "lat_range": [
-       74.98380632633024,
-       82.37533403371464
+       74.98376261750154,
+       82.37529784826036
       ],
       "lon_range": [
-       14.334197736381896,
-       17.997051102752835
+       14.334206401632315,
+       17.997063858333235
       ],
       "region_kind": "arc"
      }
@@ -2894,8 +2894,8 @@
     "jd_ut": 2461212.5833333335,
     "method": "grid",
     "subsolar": {
-     "lat": 23.437688289489074,
-     "lon": 150.43150597711366
+     "lat": 23.437699097058676,
+     "lon": 150.4315333025271
     },
     "sublunar": {
      "lat": 2.6030230301534165,
@@ -2905,7 +2905,7 @@
      {
       "lat": -16.800097093359376,
       "lon": 179.89883090063972,
-      "fit_score": 0.9999997968894596,
+      "fit_score": 0.9999997962419562,
       "max_normalized_residual": 0.0007364552294433224,
       "radius_km": 208.49048745854762,
       "lat_range": [
@@ -2921,7 +2921,7 @@
      {
       "lat": 51.5239927171875,
       "lon": -155.91753198160433,
-      "fit_score": 0.9999997280055861,
+      "fit_score": 0.9999997294270465,
       "max_normalized_residual": 0.000895411053993674,
       "radius_km": 200.67209417885206,
       "lat_range": [
@@ -2953,8 +2953,8 @@
     "jd_ut": 2461213.25,
     "method": "grid",
     "subsolar": {
-     "lat": 23.437361745918384,
-     "lon": -89.53209533832508
+     "lat": 23.437372554096573,
+     "lon": -89.5320679562004
     },
     "sublunar": {
      "lat": -1.4689972497191386,
@@ -2964,8 +2964,8 @@
      {
       "lat": 40.71362071710937,
       "lon": -74.00531948501501,
-      "fit_score": 0.9999999993120167,
-      "max_normalized_residual": 5.057138197154624e-05,
+      "fit_score": 0.9999999993345742,
+      "max_normalized_residual": 4.991159372183221e-05,
       "radius_km": 1808.2932470653695,
       "lat_range": [
        30.0,
@@ -2998,8 +2998,8 @@
     "jd_ut": 2461213.25,
     "method": "grid",
     "subsolar": {
-     "lat": 23.437361745918384,
-     "lon": -89.53209533832508
+     "lat": 23.437372554096573,
+     "lon": -89.5320679562004
     },
     "sublunar": {
      "lat": -1.4689972497191386,
@@ -3009,8 +3009,8 @@
      {
       "lat": 70.0,
       "lon": -89.5344295461029,
-      "fit_score": 0.9999998233044296,
-      "max_normalized_residual": 0.0007373457304709063,
+      "fit_score": 0.9999998191345187,
+      "max_normalized_residual": 0.0007459954580397721,
       "radius_km": 2670.0123992100944,
       "lat_range": [
        46.0,

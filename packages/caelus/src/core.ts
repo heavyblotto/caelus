@@ -555,12 +555,21 @@ function eclJ2000ToEclDate(
   ];
 }
 
+function earthUsesPack(data: EngineData): boolean {
+  return Boolean(data.earthPack || (data.earthEraPacks && data.earthEraPacks.length > 0));
+}
+
 // ---------------------------------------------------------------- planets
 function geoVector(
   data: EngineData, name: string, jde: number,
 ): [number, number, number] {
   const [L0, B0, R0] = earthHeliocentric(data, jde);
-  const [L, B, R] = vsopHeliocentric(data.vsop[name], jde);
+  let [L, B, R] = vsopHeliocentric(data.vsop[name], jde);
+  if (earthUsesPack(data)) {
+    // Earth pack is already in ICRF / J2000 ecliptic; convert only the
+    // VSOP87D planet from its dynamical ecliptic to FK5 before differencing.
+    [L, B] = fk5Correction(L, B, jde);
+  }
   return [
     R * Math.cos(B) * Math.cos(L) - R0 * Math.cos(B0) * Math.cos(L0),
     R * Math.cos(B) * Math.sin(L) - R0 * Math.cos(B0) * Math.sin(L0),
@@ -581,7 +590,9 @@ export function planetApparent(
   }
   let lon = mod(Math.atan2(y, x), TWO_PI);
   let lat = Math.atan2(z, Math.sqrt(x * x + y * y));
-  [lon, lat] = fk5Correction(lon, lat, jde);
+  if (!earthUsesPack(data)) {
+    [lon, lat] = fk5Correction(lon, lat, jde);
+  }
   lon = mod(lon + nutation(data, jde)[0], TWO_PI);
   return [lon, lat, delta];
 }
@@ -592,7 +603,11 @@ export function sunApparent(
   const [L0, B0, R0] = earthHeliocentric(data, jde);
   let lon = mod(L0 + Math.PI, TWO_PI);
   let lat = -B0;
-  [lon, lat] = fk5Correction(lon, lat, jde);
+  // Meeus 32.3 bridges VSOP87D's dynamical ecliptic to FK5; Horizons DE441
+  // earthPack / earthEraPacks are already in ICRF / J2000 ecliptic.
+  if (!earthUsesPack(data)) {
+    [lon, lat] = fk5Correction(lon, lat, jde);
+  }
   lon -= (20.4898 * ARCSEC) / R0;
   lon = mod(lon + nutation(data, jde)[0], TWO_PI);
   return [lon, lat, R0];

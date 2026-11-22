@@ -4,7 +4,7 @@
     "1850-2150": {
       "epochs": 18,
       "bodies": {
-        "sun": 0.42,
+        "sun": 0.346,
         "moon": 2.206,
         "mercury": 0.351,
         "venus": 0.361,
@@ -25,7 +25,7 @@
     "1900-2099": {
       "epochs": 25,
       "bodies": {
-        "sun": 0.246,
+        "sun": 0.227,
         "moon": 1.94,
         "mercury": 0.228,
         "venus": 0.246,
@@ -46,7 +46,7 @@
     "1800-2200 edges": {
       "epochs": 19,
       "bodies": {
-        "sun": 0.587,
+        "sun": 0.527,
         "moon": 0.868,
         "mercury": 0.514,
         "venus": 0.516,
@@ -61,7 +61,7 @@
     "1000-3000 wide": {
       "epochs": 40,
       "bodies": {
-        "sun": 3.455,
+        "sun": 3.365,
         "moon": 3.679,
         "mercury": 3.325,
         "venus": 3.323,

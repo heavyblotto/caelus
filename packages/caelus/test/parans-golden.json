@@ -73,7 +73,7 @@
      "b": "sun",
      "b_angle": "set",
      "jd": 2448053.295619,
-     "gap_min": 19.963
+     "gap_min": 19.9629
     },
     {
      "a": "moon",
@@ -132,8 +132,8 @@
      "a_angle": "rise",
      "b": "sun",
      "b_angle": "rise",
-     "jd": 2461119.745723,
-     "gap_min": 18.1746
+     "jd": 2461119.745724,
+     "gap_min": 18.1747
     },
     {
      "a": "moon",
@@ -149,7 +149,7 @@
      "b": "sun",
      "b_angle": "rise",
      "jd": 2461119.756619,
-     "gap_min": 13.2059
+     "gap_min": 13.2058
     },
     {
      "a": "moon",
@@ -165,7 +165,7 @@
      "b": "sun",
      "b_angle": "mtransit",
      "jd": 2461120.011701,
-     "gap_min": 18.8282
+     "gap_min": 18.8281
     },
     {
      "a": "saturn",
@@ -173,7 +173,7 @@
      "b": "sun",
      "b_angle": "set",
      "jd": 2461120.264039,
-     "gap_min": 14.5354
+     "gap_min": 14.5353
     },
     {
      "a": "saturn",
@@ -232,8 +232,8 @@
      "a_angle": "rise",
      "b": "sun",
      "b_angle": "rise",
-     "jd": 2451544.737077,
-     "gap_min": 36.3462
+     "jd": 2451544.737078,
+     "gap_min": 36.3463
     },
     {
      "a": "mercury",
@@ -241,7 +241,7 @@
      "b": "sun",
      "b_angle": "mtransit",
      "jd": 2451544.989475,
-     "gap_min": 36.8835
+     "gap_min": 36.8836
     },
     {
      "a": "mercury",
@@ -249,7 +249,7 @@
      "b": "sun",
      "b_angle": "set",
      "jd": 2451545.241874,
-     "gap_min": 37.4168
+     "gap_min": 37.4169
     },
     {
      "a": "moon",
@@ -365,7 +365,7 @@
      "body": "sun",
      "body_angle": "rise",
      "jd": 2448052.707568,
-     "gap_min": 8.3915
+     "gap_min": 8.3916
     },
     {
      "star": "Sirius",
@@ -437,7 +437,7 @@
      "body": "sun",
      "body_angle": "set",
      "jd": 2448053.28855,
-     "gap_min": 0.3964
+     "gap_min": 0.3965
     },
     {
      "star": "Spica",
@@ -505,7 +505,7 @@
      "body": "sun",
      "body_angle": "itransit",
      "jd": 2461119.509275,
-     "gap_min": 11.5486
+     "gap_min": 11.5485
     },
     {
      "star": "Algol",

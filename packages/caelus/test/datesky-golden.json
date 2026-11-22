@@ -62,25 +62,25 @@
       "constraint": 0,
       "label": "sun in Aquarius pad 6",
       "windows": 16,
-      "days": 553.3335969843902
+      "days": 553.3335649096407
      },
      {
       "constraint": 6,
       "label": "mars in Pisces pad 6",
       "windows": 5,
-      "days": 143.92151303775609
+      "days": 143.9214617558755
      },
      {
       "constraint": 5,
       "label": "venus in Pisces pad 6",
       "windows": 2,
-      "days": 52.562578844837844
+      "days": 52.56257834658027
      },
      {
       "constraint": 4,
       "label": "mercury in Capricorn pad 6",
       "windows": 2,
-      "days": 32.63349472475238
+      "days": 32.63351954217069
      },
      {
       "constraint": 1,
@@ -154,25 +154,25 @@
       "constraint": 0,
       "label": "sun in Aquarius pad 4",
       "windows": 15,
-      "days": 447.4888780377805
+      "days": 447.4888968458399
      },
      {
       "constraint": 6,
       "label": "mars in Pisces pad 4",
       "windows": 4,
-      "days": 113.99224337888882
+      "days": 113.99219223577529
      },
      {
       "constraint": 5,
       "label": "venus in Pisces pad 4",
       "windows": 2,
-      "days": 45.80083955056034
+      "days": 45.80083905090578
      },
      {
       "constraint": 4,
       "label": "mercury in Capricorn pad 4",
       "windows": 2,
-      "days": 25.827563676051795
+      "days": 25.827588494401425
      },
      {
       "constraint": 1,
@@ -257,25 +257,25 @@
       "constraint": 0,
       "label": "sun in Aquarius pad 6",
       "windows": 134,
-      "days": 4427.195962040918
+      "days": 4427.196086525684
      },
      {
       "constraint": 6,
       "label": "mars in Pisces pad 6",
       "windows": 34,
-      "days": 768.4107742161723
+      "days": 768.4105883872835
      },
      {
       "constraint": 5,
       "label": "venus in Pisces pad 6",
       "windows": 19,
-      "days": 291.861563948798
+      "days": 291.8615098866867
      },
      {
       "constraint": 4,
       "label": "mercury in Capricorn pad 6",
       "windows": 11,
-      "days": 120.48720158205833
+      "days": 120.48730086011346
      },
      {
       "constraint": 1,
@@ -680,7 +680,7 @@
       "end": 2451037.810417099
      },
      {
-      "start": 2451748.029667943,
+      "start": 2451748.029641659,
       "end": 2451749.0900969664
      },
      {
@@ -693,7 +693,7 @@
      },
      {
       "start": 2462004.2873338396,
-      "end": 2462006.084001295
+      "end": 2462006.0839752643
      }
     ],
     "funnel": [
@@ -707,7 +707,7 @@
       "constraint": 1,
       "label": "sun in Leo",
       "windows": 5,
-      "days": 21.26170002715662
+      "days": 21.26170028047636
      }
     ],
     "truncated": false
@@ -820,12 +820,12 @@
       "end": 2460399.3276037565
      },
      {
-      "start": 2460424.4923489206,
+      "start": 2460424.4923511576,
       "end": 2460426.5673341546
      },
      {
       "start": 2460615.2287205234,
-      "end": 2460616.0327594895
+      "end": 2460616.032761777
      },
      {
       "start": 2460642.5142981587,
@@ -852,12 +852,12 @@
       "end": 2460781.6092019295
      },
      {
-      "start": 2460808.2055365033,
+      "start": 2460808.2055387935,
       "end": 2460808.8574416097
      },
      {
       "start": 2460997.405786248,
-      "end": 2460999.7828590414
+      "end": 2460999.782861354
      },
      {
       "start": 2461024.660572774,
@@ -875,7 +875,7 @@
       "constraint": 0,
       "label": "moon-sun from 180 to 0",
       "windows": 15,
-      "days": 33.1649707807228
+      "days": 33.16497085336596
      }
     ],
     "truncated": false
@@ -1014,7 +1014,7 @@
       "constraint": 0,
       "label": "sun in Aries",
       "windows": 10,
-      "days": 304.6014735586941
+      "days": 304.60146916052327
      },
      {
       "constraint": 1,
@@ -1667,7 +1667,7 @@
       "constraint": 1,
       "label": "sun in Pisces",
       "windows": 6,
-      "days": 179.71860333858058
+      "days": 179.71860106941313
      },
      {
       "constraint": 0,

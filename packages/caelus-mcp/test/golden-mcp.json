@@ -493,7 +493,7 @@
       "end": "2026-12-31T00:00:00Z",
       "events": [
         {
-          "t": "2026-02-17T12:11:55Z",
+          "t": "2026-02-17T12:11:56Z",
           "kind": "solar_eclipse",
           "detail": "annular, gamma 0.97, greatest at 64.7°S 86.7°E, path 443 km wide"
         },
@@ -3946,7 +3946,7 @@
             "day": 13
           },
           "conjunction": {
-            "jd": 1771989.70172,
+            "jd": 1771989.7017,
             "calendar": "julian",
             "year": 139,
             "era": "139 CE",
@@ -3998,7 +3998,7 @@
             "day": 19
           },
           "conjunction": {
-            "jd": 1771989.70172,
+            "jd": 1771989.7017,
             "calendar": "julian",
             "year": 139,
             "era": "139 CE",
@@ -4084,7 +4084,7 @@
             "day": 16
           },
           "conjunction": {
-            "jd": 1502248.44272,
+            "jd": 1502248.44283,
             "calendar": "julian",
             "year": -600,
             "era": "601 BCE",
@@ -4136,7 +4136,7 @@
             "day": 6
           },
           "conjunction": {
-            "jd": 1502538.80182,
+            "jd": 1502538.8018,
             "calendar": "julian",
             "year": -599,
             "era": "600 BCE",
@@ -4188,7 +4188,7 @@
             "day": 29
           },
           "conjunction": {
-            "jd": 1502538.80182,
+            "jd": 1502538.8018,
             "calendar": "julian",
             "year": -599,
             "era": "600 BCE",
@@ -4240,7 +4240,7 @@
             "day": 24
           },
           "conjunction": {
-            "jd": 1502830.01402,
+            "jd": 1502830.01411,
             "calendar": "julian",
             "year": -598,
             "era": "599 BCE",
@@ -4410,7 +4410,7 @@
             "day": 9
           },
           "conjunction": {
-            "jd": 2458845.2677,
+            "jd": 2458845.26767,
             "calendar": "gregorian",
             "year": 2019,
             "era": "2019 CE",
@@ -4438,7 +4438,7 @@
             "day": 4
           },
           "conjunction": {
-            "jd": 2459044.83227,
+            "jd": 2459044.83225,
             "calendar": "gregorian",
             "year": 2020,
             "era": "2020 CE",
@@ -4466,7 +4466,7 @@
             "day": 22
           },
           "conjunction": {
-            "jd": 2459044.83227,
+            "jd": 2459044.83225,
             "calendar": "gregorian",
             "year": 2020,
             "era": "2020 CE",
@@ -4494,7 +4494,7 @@
             "day": 18
           },
           "conjunction": {
-            "jd": 2459243.56916,
+            "jd": 2459243.56913,
             "calendar": "gregorian",
             "year": 2021,
             "era": "2021 CE",
@@ -7307,7 +7307,7 @@
           "angle": "MC",
           "arc": 44.8,
           "years": 45.45,
-          "date": "2035-11-23T04:53:38Z"
+          "date": "2035-11-23T05:07:44Z"
         },
         {
           "body": "mars",
@@ -7373,7 +7373,7 @@
           "angle": "MC",
           "arc": 44.8,
           "years": 45.45,
-          "date": "2035-11-23T04:53:38Z"
+          "date": "2035-11-23T05:07:44Z"
         }
       ],
       "mundane": [
@@ -7396,14 +7396,14 @@
           "significator": "mercury",
           "arc": 21.56,
           "years": 21.88,
-          "date": "2012-04-26T09:04:59Z"
+          "date": "2012-04-26T09:18:15Z"
         },
         {
           "promissor": "jupiter",
           "significator": "sun",
           "arc": 27.66,
           "years": 28.06,
-          "date": "2018-07-04T00:53:06Z"
+          "date": "2018-07-04T00:40:36Z"
         },
         {
           "promissor": "venus",
@@ -7424,7 +7424,7 @@
           "significator": "venus",
           "arc": 36.9,
           "years": 37.43,
-          "date": "2027-11-15T14:22:40Z"
+          "date": "2027-11-15T14:36:29Z"
         },
         {
           "promissor": "mars",
@@ -9508,8 +9508,8 @@
           "field": "shadow_sweep",
           "status": "consistent",
           "observed": 13.4597,
-          "expected": 13.4597,
-          "residual": 0,
+          "expected": 13.4598,
+          "residual": -0.0001,
           "tolerance": 5,
           "normalized_residual": 0,
           "note": null
@@ -9653,8 +9653,8 @@
           "field": "shadow_bearing_deg",
           "status": "inconsistent",
           "observed": 302.108,
-          "expected": 65.0542,
-          "residual": -122.9462,
+          "expected": 65.0541,
+          "residual": -122.9461,
           "tolerance": 10,
           "normalized_residual": 12.2946,
           "note": null
@@ -9889,7 +9889,7 @@
       "candidates": [
         {
           "lat": 40.7115,
-          "lon": -74.0071,
+          "lon": -74.007,
           "fit_score": 1,
           "max_normalized_residual": 0,
           "radius_km": 783.79,
@@ -9899,7 +9899,7 @@
           ],
           "lon_range": [
             -79.7589,
-            -68.2553
+            -68.2552
           ],
           "region_kind": "band"
         }

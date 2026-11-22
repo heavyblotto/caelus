@@ -135,8 +135,9 @@ def mint(name, year0, year1, step_override=None):
         suffix = f"_{round(step * 1440)}m"
     cache_path = os.path.join(
         HERE, f"{name}_horizons_cache_{year0}_{year1}{suffix}.json")
+    kind = "center" if command in ("199", "299", "399") else "barycenter"
     cache = HorizonsCache(cache_path, command=command,
-                          label=f"{command} {name} barycenter")
+                          label=f"{command} {name} {kind}")
     cache.ensure(jd0, jd1, step=step, pad_days=max(segs))
 
     test = _independent_epochs(cache, jd0, jd1)
@@ -164,7 +165,7 @@ def mint(name, year0, year1, step_override=None):
     seg, deg, size, data, resid, true_err = best
     data["provenance"] = {
         "source": "JPL Horizons",
-        "body": f"{command} {name} barycenter",
+        "body": f"{command} {name}" + (" barycenter" if command in "456789" else ""),
         "center": "@sun",
         "frame": "heliocentric ecliptic J2000",
         "correction": "geometric (VEC_CORR=NONE)",

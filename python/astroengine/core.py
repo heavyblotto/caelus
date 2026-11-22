@@ -375,11 +375,20 @@ def _fk5_correction(L, B, jde):
     return L + dL, B + dB
 
 
+def _earth_uses_pack():
+    """True when Earth routes through a Horizons DE441 Chebyshev pack."""
+    return _earth_cheb() is not None or bool(_earth_era_slabs())
+
+
 # ---------------------------------------------------------------- planets
 def _geo_vector(vsop, name, jde):
     """Geocentric rectangular ecliptic-of-date vector planet minus earth."""
     L0, B0, R0 = vsop.heliocentric("earth", jde)
     L, B, R = vsop.heliocentric(name, jde)
+    if _earth_uses_pack():
+        # Earth pack is already in ICRF / J2000 ecliptic; convert only the
+        # VSOP87D planet from its dynamical ecliptic to FK5 before differencing.
+        L, B = _fk5_correction(L, B, jde)
     x = R * math.cos(B) * math.cos(L) - R0 * math.cos(B0) * math.cos(L0)
     y = R * math.cos(B) * math.sin(L) - R0 * math.cos(B0) * math.sin(L0)
     z = R * math.sin(B) - R0 * math.sin(B0)
@@ -399,7 +408,8 @@ def planet_apparent(vsop, name, jde):
         delta = math.sqrt(x * x + y * y + z * z)
     lon = math.atan2(y, x) % (2 * math.pi)
     lat = math.atan2(z, math.sqrt(x * x + y * y))
-    lon, lat = _fk5_correction(lon, lat, jde)
+    if not _earth_uses_pack():
+        lon, lat = _fk5_correction(lon, lat, jde)
     lon = (lon + nutation(jde)[0]) % (2 * math.pi)
     return lon, lat, delta
 
@@ -409,7 +419,10 @@ def sun_apparent(vsop, jde):
     L0, B0, R0 = vsop.heliocentric("earth", jde)
     lon = (L0 + math.pi) % (2 * math.pi)
     lat = -B0
-    lon, lat = _fk5_correction(lon, lat, jde)
+    # Meeus 32.3 bridges VSOP87D's dynamical ecliptic to FK5; Horizons DE441
+    # earth_cheb packs are already in ICRF / J2000 ecliptic.
+    if not _earth_uses_pack():
+        lon, lat = _fk5_correction(lon, lat, jde)
     lon -= 20.4898 * ARCSEC / R0          # annual aberration
     lon = (lon + nutation(jde)[0]) % (2 * math.pi)
     return lon, lat, R0
