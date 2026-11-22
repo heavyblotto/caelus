@@ -1,23 +1,23 @@
 {
   "id": "EXP-011",
-  "run_at": "2026-11-22T18:57:55.939Z",
-  "git_sha": "eb846ea",
+  "run_at": "2026-11-22T21:06:31.731Z",
+  "git_sha": "0ee232d",
   "status": "fail",
-  "summary": "30-scenario (5 cities x 2 seasons x 3 task rhythms over 28d) deadline-vs-night collision benchmark. Arm1-Synthetic-Engine-When (registerSyntheticSystem + when()) fails catastrophically: event F1=0.0255 (overlap time F1=0.046), because synthetic.ts places periodic bodies heliocentrically at Kepler a=P^(2/3) AU (0.25d CI cadence sits at 0.397 AU inside Earth's orbit, max elongation 23.0354 deg, never completing a geocentric cycle; 1.0d standup hits a 1.0 AU co-orbital singularity; 14d sprint suffers +/-10.5208 deg = 589.1654 min annual parallax error). Even parallax-free Arm2-WorldFrame-Synthetic-When (event F1=0.9987, 2074.5296 ms) runs 3.0224x slower than Arm3-Direct-RiseSet-Modulo (F1=1, 686.3751 ms) with zero accuracy gain.",
+  "summary": "30-scenario (5 cities x 2 seasons x 3 task rhythms over 28d) deadline-vs-night collision benchmark. Arm1-Synthetic-Engine-When (registerSyntheticSystem + when()) fails catastrophically: event F1=0.0255 (overlap time F1=0.046), because synthetic.ts places periodic bodies heliocentrically at Kepler a=P^(2/3) AU (0.25d CI cadence sits at 0.397 AU inside Earth's orbit, max elongation 23.0354 deg, never completing a geocentric cycle; 1.0d standup hits a 1.0 AU co-orbital singularity; 14d sprint suffers +/-10.5208 deg = 589.1654 min annual parallax error). Even parallax-free Arm2-WorldFrame-Synthetic-When (event F1=0.9987, 2587.1402 ms) runs 3.0742x slower than Arm3-Direct-RiseSet-Modulo (F1=1, 841.5682 ms) with zero accuracy gain.",
   "metrics": {
     "arm1_synthetic_engine_event_f1": 0.0255,
     "arm1_synthetic_engine_overlap_time_f1": 0.046,
     "arm2_worldframe_when_event_f1": 0.9987,
     "arm2_worldframe_when_overlap_time_f1": 0.9992,
     "arm3_direct_riseset_event_f1": 1,
-    "arm1_over_arm3_cpu_ratio": 2.7803,
-    "arm2_over_arm3_cpu_ratio": 3.0224,
-    "arm1_total_cpu_ms": 1908.3458,
-    "arm2_total_cpu_ms": 2074.5296,
-    "arm3_total_cpu_ms": 686.3751,
+    "arm1_over_arm3_cpu_ratio": 2.8102,
+    "arm2_over_arm3_cpu_ratio": 3.0742,
+    "arm1_total_cpu_ms": 2365.0079,
+    "arm2_total_cpu_ms": 2587.1402,
+    "arm3_total_cpu_ms": 841.5682,
     "ci_0p25d_max_geocentric_err_deg": 179.8004,
     "sprint_14d_parallax_err_min": 589.1654,
-    "total_runtime_ms": 7557.4932,
+    "total_runtime_ms": 9479.5144,
     "parallax_diagnostics": {
       "ci_cadence": {
         "period_days": 0.25,
@@ -54,7 +54,7 @@
         "event_f1": 0.0255,
         "overlap_time_f1": 0.046,
         "median_boundary_err_min": 236.5489,
-        "total_cpu_ms": 1908.3458,
+        "total_cpu_ms": 2365.0079,
         "by_task": {
           "ci_cadence": {
             "tp": 0,
@@ -65,7 +65,7 @@
             "event_f1": 0,
             "overlap_time_f1": 0,
             "median_boundary_err_min": 0,
-            "total_cpu_ms": 991.3153
+            "total_cpu_ms": 1238.3176
           },
           "daily_standup": {
             "tp": 0,
@@ -76,7 +76,7 @@
             "event_f1": 0,
             "overlap_time_f1": 0,
             "median_boundary_err_min": 0,
-            "total_cpu_ms": 651.2115
+            "total_cpu_ms": 800.9703
           },
           "sprint_release": {
             "tp": 12,
@@ -87,7 +87,7 @@
             "event_f1": 0.6154,
             "overlap_time_f1": 0.2532,
             "median_boundary_err_min": 236.5489,
-            "total_cpu_ms": 265.819
+            "total_cpu_ms": 325.72
           }
         }
       },
@@ -100,7 +100,7 @@
         "event_f1": 0.9987,
         "overlap_time_f1": 0.9992,
         "median_boundary_err_min": 0.0002,
-        "total_cpu_ms": 2074.5296,
+        "total_cpu_ms": 2587.1402,
         "by_task": {
           "ci_cadence": {
             "tp": 592,
@@ -111,7 +111,7 @@
             "event_f1": 1,
             "overlap_time_f1": 1,
             "median_boundary_err_min": 0.0002,
-            "total_cpu_ms": 1307.021
+            "total_cpu_ms": 1639.3403
           },
           "daily_standup": {
             "tp": 173,
@@ -122,7 +122,7 @@
             "event_f1": 1,
             "overlap_time_f1": 1,
             "median_boundary_err_min": 0.0003,
-            "total_cpu_ms": 554.373
+            "total_cpu_ms": 679.4833
           },
           "sprint_release": {
             "tp": 20,
@@ -133,7 +133,7 @@
             "event_f1": 0.9524,
             "overlap_time_f1": 0.9937,
             "median_boundary_err_min": 0.0003,
-            "total_cpu_ms": 213.1356
+            "total_cpu_ms": 268.3165
           }
         }
       },
@@ -146,7 +146,7 @@
         "event_f1": 1,
         "overlap_time_f1": 1,
         "median_boundary_err_min": 0,
-        "total_cpu_ms": 686.3751,
+        "total_cpu_ms": 841.5682,
         "by_task": {
           "ci_cadence": {
             "tp": 592,
@@ -157,7 +157,7 @@
             "event_f1": 1,
             "overlap_time_f1": 1,
             "median_boundary_err_min": 0,
-            "total_cpu_ms": 228.8686
+            "total_cpu_ms": 280.6391
           },
           "daily_standup": {
             "tp": 173,
@@ -168,7 +168,7 @@
             "event_f1": 1,
             "overlap_time_f1": 0.9999,
             "median_boundary_err_min": 0,
-            "total_cpu_ms": 228.7556
+            "total_cpu_ms": 280.4673
           },
           "sprint_release": {
             "tp": 22,
@@ -179,11 +179,11 @@
             "event_f1": 1,
             "overlap_time_f1": 0.9999,
             "median_boundary_err_min": 0,
-            "total_cpu_ms": 228.7509
+            "total_cpu_ms": 280.4619
           }
         }
       }
     }
   },
-  "verdict": "KILLED (synthetic.ts orbital task-space for agent scheduling): Arm1-Synthetic-Engine-When hits F1=0.0255 (overlap F1=0.046) due to Kepler a=P^(2/3) Earth-parallax distortion, and parallax-free Arm2-WorldFrame-Synthetic-When offers zero accuracy gain over Arm3-Direct-RiseSet-Modulo while running 3.0224x slower (2074.5296 ms vs 686.3751 ms). Archive to lab/graveyard/KILL-006-synthetic-orbit-task-space.md; use direct riseSet('sun') + modular interval arithmetic instead."
+  "verdict": "KILLED (synthetic.ts orbital task-space for agent scheduling): Arm1-Synthetic-Engine-When hits F1=0.0255 (overlap F1=0.046) due to Kepler a=P^(2/3) Earth-parallax distortion, and parallax-free Arm2-WorldFrame-Synthetic-When offers zero accuracy gain over Arm3-Direct-RiseSet-Modulo while running 3.0742x slower (2587.1402 ms vs 841.5682 ms). Archive to lab/graveyard/KILL-006-synthetic-orbit-task-space.md; use direct riseSet('sun') + modular interval arithmetic instead."
 }

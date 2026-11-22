@@ -1,9 +1,9 @@
 {
   "id": "EXP-003",
-  "run_at": "2026-11-22T18:57:25.854Z",
-  "git_sha": "eb846ea",
+  "run_at": "2026-11-22T21:05:52.221Z",
+  "git_sha": "0ee232d",
   "status": "pass",
-  "summary": "200-scenario spacetime benchmark across 20 global cities and 4 seasons: Caelus verifyObservation achieves F1=1 (P=1, R=1, FPR=0, auth_impossible=0) vs Naive-LMT-Clock baseline F1=0.2857 (R=0.17). Counterfactual axis recovery=60/60 (100%), top-1 attribution=60/60 (100%). Noisy chronolocation median=2.5 min (17.63 ms). Geolocation median error: Path A analytical=0 km clean / 121.1 km noisy (0.07 ms) vs Path B grid Sun+Moon=0.2 km clean / 160.4 km noisy (3 ms), bearing+Moon-limb=0.2 km clean / 294.8 km noisy (2.5 ms).",
+  "summary": "200-scenario spacetime benchmark across 20 global cities and 4 seasons: Caelus verifyObservation achieves F1=1 (P=1, R=1, FPR=0, auth_impossible=0) vs Naive-LMT-Clock baseline F1=0.2857 (R=0.17). Counterfactual axis recovery=60/60 (100%), top-1 attribution=60/60 (100%). Noisy chronolocation median=2.5 min (21.43 ms). Geolocation median error: Path A analytical=0 km clean / 121.1 km noisy (0.1 ms) vs Path B grid Sun+Moon=0.2 km clean / 160.4 km noisy (4.3 ms), bearing+Moon-limb=0.2 km clean / 294.8 km noisy (4.4 ms).",
   "metrics": {
     "scenarios_total": 200,
     "cities_count": 20,
@@ -122,10 +122,10 @@
       "noisy_p90_err_min": 6.066,
       "clean_recall": 1,
       "clean_median_err_min": 0.0002,
-      "mean_latency_ms": 17.63,
-      "p95_latency_ms": 23.77,
+      "mean_latency_ms": 21.43,
+      "p95_latency_ms": 28.23,
       "sixty_day_pruning_rate": 0.8267,
-      "sixty_day_mean_latency_ms": 46.51
+      "sixty_day_mean_latency_ms": 64.5
     },
     "geolocation": {
       "path_a_analytical": {
@@ -135,8 +135,8 @@
         "noisy_recall": 1,
         "noisy_median_err_km": 121.13,
         "noisy_p90_err_km": 189.34,
-        "mean_latency_ms": 0.066,
-        "p95_latency_ms": 0.086
+        "mean_latency_ms": 0.1,
+        "p95_latency_ms": 0.135
       },
       "path_b_double_altitude_sun_moon": {
         "cases": 12,
@@ -144,8 +144,8 @@
         "clean_median_err_km": 0.16,
         "noisy_median_err_km": 160.4,
         "noisy_p90_err_km": 316.43,
-        "mean_latency_ms": 3.05,
-        "p95_latency_ms": 4.57
+        "mean_latency_ms": 4.31,
+        "p95_latency_ms": 8.15
       },
       "path_b_bearing_plus_moon_limb": {
         "cases": 12,
@@ -153,20 +153,20 @@
         "clean_median_err_km": 0.16,
         "noisy_median_err_km": 294.77,
         "noisy_p90_err_km": 535.84,
-        "mean_latency_ms": 2.49,
-        "p95_latency_ms": 4.34
+        "mean_latency_ms": 4.4,
+        "p95_latency_ms": 9.14
       },
       "path_b_sloped_mountain": {
         "cases": 4,
         "clean_median_err_km": 0.19,
-        "mean_latency_ms": 2.7
+        "mean_latency_ms": 6.49
       }
     },
     "forward_latency_ms": {
-      "scene_geometry_mean": 0.758,
-      "scene_geometry_p95": 0.86,
-      "verify_observation_mean": 0.777,
-      "verify_observation_p95": 0.894
+      "scene_geometry_mean": 1.034,
+      "scene_geometry_p95": 1.614,
+      "verify_observation_mean": 1.064,
+      "verify_observation_p95": 1.563
     },
     "noise_stress_sensitivity": [
       {

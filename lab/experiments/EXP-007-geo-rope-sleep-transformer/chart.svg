@@ -1,101 +1,279 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 505" font-family="et-book, ET-Bembo, Palatino, Georgia, serif" font-size="12">
-  <rect width="1000" height="505" fill="white"/>
-  <text x="32" y="28" font-size="16" fill="#111">EXP-007: Trained Tiny-Transformer Hybrid Geo-RoPE and Google SLEEP Consolidation</text>
-  <text x="32" y="46" font-size="11.5" fill="#666666">1.43M-param parameter-matched causal transformers trained on Apple M5 Pro (MPS) with python/astroengine/ physics</text>
-  <text x="32" y="76" font-size="13" fill="#111">Panel A: Part A Trained RoPE Models (4 Held-Out Tasks)</text>
-  <text x="154.0" y="434.0" text-anchor="middle" font-size="10.5" fill="#666666">0%</text>
-  <line x1="286.0" y1="88.0" x2="286.0" y2="418.0" stroke="#e6e6e6" stroke-width="0.8"/>
-  <text x="286.0" y="434.0" text-anchor="middle" font-size="10.5" fill="#666666">50%</text>
-  <line x1="418.0" y1="88.0" x2="418.0" y2="418.0" stroke="#e6e6e6" stroke-width="0.8"/>
-  <text x="418.0" y="434.0" text-anchor="middle" font-size="10.5" fill="#666666">100%</text>
-  <line x1="154.0" y1="418.0" x2="418.0" y2="418.0" stroke="#444444" stroke-width="0.9"/>
-  <line x1="154.0" y1="88.0" x2="154.0" y2="418.0" stroke="#444444" stroke-width="0.9"/>
-  <text x="146.0" y="125.6" text-anchor="end" font-size="11.5" fill="#111">T1: Intra-Turn 2s</text>
-  <text x="146.0" y="138.6" text-anchor="end" font-size="9.5" fill="#666666">Fast token tracking</text>
-  <rect x="154.0" y="111.8" width="201.5" height="7.5" fill="#164e7a"/>
-  <text x="360.0" y="118.8" font-size="9.5" fill="#164e7a">76.3%</text>
-  <rect x="154.0" y="123.8" width="216.1" height="7.5" fill="#b86b14"/>
-  <text x="374.6" y="130.8" font-size="9.5" fill="#b86b14">81.9%</text>
-  <rect x="154.0" y="135.8" width="202.3" height="7.5" fill="#7a7a7a"/>
-  <text x="360.8" y="142.8" font-size="9.5" fill="#7a7a7a">76.6%</text>
-  <text x="146.0" y="188.8" text-anchor="end" font-size="11.5" fill="#111">T2: Post-Sleep Reset</text>
-  <text x="146.0" y="201.8" text-anchor="end" font-size="9.5" fill="#666666">Tie vs Std collapse</text>
-  <rect x="154.0" y="175.1" width="264.0" height="7.5" fill="#164e7a"/>
-  <text x="422.5" y="182.0" font-size="9.5" fill="#164e7a">100.0%</text>
-  <rect x="154.0" y="187.1" width="264.0" height="7.5" fill="#b86b14"/>
-  <text x="422.5" y="194.0" font-size="9.5" fill="#b86b14">100.0%</text>
-  <rect x="154.0" y="199.1" width="89.3" height="7.5" fill="#7a7a7a"/>
-  <text x="247.8" y="206.0" font-size="9.5" fill="#7a7a7a">33.8%</text>
-  <text x="146.0" y="252.0" text-anchor="end" font-size="11.5" fill="#111">T3-ID: Spr/Aut Ctrl</text>
-  <text x="146.0" y="265.0" text-anchor="end" font-size="9.5" fill="#666666">In-dist control</text>
-  <rect x="154.0" y="238.2" width="233.0" height="7.5" fill="#164e7a"/>
-  <text x="391.5" y="245.2" font-size="9.5" fill="#164e7a">88.2%</text>
-  <rect x="154.0" y="250.2" width="194.7" height="7.5" fill="#b86b14"/>
-  <text x="353.2" y="257.2" font-size="9.5" fill="#b86b14">73.8%</text>
-  <rect x="154.0" y="262.2" width="68.6" height="7.5" fill="#7a7a7a"/>
-  <text x="227.1" y="269.2" font-size="9.5" fill="#7a7a7a">26.0%</text>
-  <text x="146.0" y="315.2" text-anchor="end" font-size="11.5" fill="#111">T3-OOD: Solst+Tokyo</text>
-  <text x="146.0" y="328.2" text-anchor="end" font-size="9.5" fill="#666666">OOD photoperiod</text>
-  <rect x="154.0" y="301.5" width="228.6" height="7.5" fill="#164e7a"/>
-  <text x="387.1" y="308.4" font-size="9.5" fill="#164e7a">86.6%</text>
-  <rect x="154.0" y="313.5" width="96.8" height="7.5" fill="#b86b14"/>
-  <text x="255.3" y="320.4" font-size="9.5" fill="#b86b14">36.7%</text>
-  <rect x="154.0" y="325.5" width="63.6" height="7.5" fill="#7a7a7a"/>
-  <text x="222.1" y="332.4" font-size="9.5" fill="#7a7a7a">24.1%</text>
-  <text x="146.0" y="378.4" text-anchor="end" font-size="11.5" fill="#111">T4-OOD: Multi-Week</text>
-  <text x="146.0" y="391.4" text-anchor="end" font-size="9.5" fill="#666666">30d tie + 52w wrap</text>
-  <rect x="154.0" y="364.7" width="263.7" height="7.5" fill="#164e7a"/>
-  <text x="422.2" y="371.6" font-size="9.5" fill="#164e7a">99.9%</text>
-  <rect x="154.0" y="376.7" width="249.9" height="7.5" fill="#b86b14"/>
-  <text x="408.4" y="383.6" font-size="9.5" fill="#b86b14">94.7%</text>
-  <rect x="154.0" y="388.7" width="61.0" height="7.5" fill="#7a7a7a"/>
-  <text x="219.5" y="395.6" font-size="9.5" fill="#7a7a7a">23.1%</text>
-  <text x="32" y="458" font-size="10.5" fill="#164e7a">■ Hybrid-Dual-Geo-RoPE</text>
-  <text x="194" y="458" font-size="10.5" fill="#b86b14">■ Hybrid-Unix-Fourier</text>
-  <text x="346" y="458" font-size="10.5" fill="#7a7a7a">■ Standard-RoPE</text>
-  <text x="516" y="76" font-size="13" fill="#111">Panel B: Google SLEEP 5-Cycle Mean Retention (C1..Ct)</text>
-  <text x="548.0" y="391.5" text-anchor="end" font-size="10.5" fill="#666666">0%</text>
-  <line x1="554.0" y1="242.0" x2="822.0" y2="242.0" stroke="#e6e6e6" stroke-width="0.8"/>
-  <text x="548.0" y="245.5" text-anchor="end" font-size="10.5" fill="#666666">50%</text>
-  <line x1="554.0" y1="96.0" x2="822.0" y2="96.0" stroke="#e6e6e6" stroke-width="0.8"/>
-  <text x="548.0" y="99.5" text-anchor="end" font-size="10.5" fill="#666666">100%</text>
-  <line x1="554.0" y1="388.0" x2="822.0" y2="388.0" stroke="#444444" stroke-width="0.9"/>
-  <line x1="554.0" y1="96.0" x2="554.0" y2="388.0" stroke="#444444" stroke-width="0.9"/>
-  <line x1="554.0" y1="388.0" x2="554.0" y2="392.0" stroke="#444444" stroke-width="0.8"/>
-  <text x="554.0" y="405.0" text-anchor="middle" font-size="10" fill="#666666">C1 Day</text>
-  <line x1="621.0" y1="388.0" x2="621.0" y2="392.0" stroke="#444444" stroke-width="0.8"/>
-  <text x="621.0" y="405.0" text-anchor="middle" font-size="10" fill="#666666">C2 Dusk</text>
-  <line x1="688.0" y1="388.0" x2="688.0" y2="392.0" stroke="#444444" stroke-width="0.8"/>
-  <text x="688.0" y="405.0" text-anchor="middle" font-size="10" fill="#666666">C3 Noct</text>
-  <line x1="755.0" y1="388.0" x2="755.0" y2="392.0" stroke="#444444" stroke-width="0.8"/>
-  <text x="755.0" y="405.0" text-anchor="middle" font-size="10" fill="#666666">C4 Wint</text>
-  <line x1="822.0" y1="388.0" x2="822.0" y2="392.0" stroke="#444444" stroke-width="0.8"/>
-  <text x="822.0" y="405.0" text-anchor="middle" font-size="10" fill="#666666">C5 Tok</text>
-  <polyline points="554.0,210.4 621.0,137.4 688.0,104.1 755.0,177.5 822.0,150.0" fill="none" stroke="#164e7a" stroke-width="2.2"/>
-  <circle cx="554.0" cy="210.4" r="3.0" fill="#164e7a"/>
-  <circle cx="621.0" cy="137.4" r="3.0" fill="#164e7a"/>
-  <circle cx="688.0" cy="104.1" r="3.0" fill="#164e7a"/>
-  <circle cx="755.0" cy="177.5" r="3.0" fill="#164e7a"/>
-  <circle cx="822.0" cy="150.0" r="3.0" fill="#164e7a"/>
-  <polyline points="554.0,142.2 621.0,102.1 688.0,199.8 755.0,242.0 822.0,271.2" fill="none" stroke="#b86b14" stroke-width="1.8" stroke-dasharray="5,3"/>
-  <circle cx="554.0" cy="142.2" r="3.0" fill="#b86b14"/>
-  <circle cx="621.0" cy="102.1" r="3.0" fill="#b86b14"/>
-  <circle cx="688.0" cy="199.8" r="3.0" fill="#b86b14"/>
-  <circle cx="755.0" cy="242.0" r="3.0" fill="#b86b14"/>
-  <circle cx="822.0" cy="271.2" r="3.0" fill="#b86b14"/>
-  <polyline points="554.0,105.7 621.0,242.0 688.0,290.7 755.0,315.0 822.0,329.6" fill="none" stroke="#7a7a7a" stroke-width="1.6" stroke-dasharray="2,2"/>
-  <circle cx="554.0" cy="105.7" r="3.0" fill="#7a7a7a"/>
-  <circle cx="621.0" cy="242.0" r="3.0" fill="#7a7a7a"/>
-  <circle cx="688.0" cy="290.7" r="3.0" fill="#7a7a7a"/>
-  <circle cx="755.0" cy="315.0" r="3.0" fill="#7a7a7a"/>
-  <circle cx="822.0" cy="329.6" r="3.0" fill="#7a7a7a"/>
-  <text x="830.0" y="149.0" font-size="10.5" fill="#164e7a">SLEEP-Caelus 81.5%</text>
-  <text x="830.0" y="161.0" font-size="9.5" fill="#666666">(forgetting -5.4 pp)</text>
-  <text x="830.0" y="270.2" font-size="10.5" fill="#b86b14">SLEEP-24h-LRU 40.0%</text>
-  <text x="830.0" y="282.2" font-size="9.5" fill="#666666">(forgetting -74.0 pp)</text>
-  <text x="830.0" y="328.6" font-size="10.5" fill="#7a7a7a">Naive-Online-FT 20.0%</text>
-  <text x="830.0" y="340.6" font-size="9.5" fill="#666666">(forgetting -99.2 pp)</text>
-  <text x="516" y="434" font-size="10.5" fill="#444444">Sleep-gate nocturnal safety: Caelus 100.0% vs Fixed-24h 70.5% (0% Tokyo)</text>
-  <text x="516" y="458" font-size="10.5" fill="#666666">Recency-only C4+C5 trade-off: Caelus 66.7% vs LRU 100.0% vs Naive 50.0%</text>
-  <text x="32" y="490" font-size="9.5" fill="#666666">Source: lab/experiments/EXP-007-geo-rope-sleep-transformer/training_receipt.json (seed=20261122, 0 train/OOD date overlap)</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 610" font-family="et-book, ET-Bembo, Palatino, Georgia, serif" font-size="12">
+  <rect width="1140" height="610" fill="white"/>
+  <text x="32" y="28" font-size="16" fill="#111">EXP-007: Trained Tiny-Transformer Hybrid Geo-RoPE &amp; Google SLEEP (3-Seed Mean +/- Std)</text>
+  <text x="32" y="46" font-size="11.5" fill="#666666">5 parameter-matched 1.43M-param causal transformers x 3 seeds on Apple M5 Pro (MPS); whiskers = +/-1 sample std</text>
+  <text x="32" y="74" font-size="13" fill="#111">Panel A: 5 evaluation slices across 4 task families (T3 split ID / OOD)</text>
+  <text x="32" y="89" font-size="10.2" fill="#666666">Mean accuracy across seeds 20261122, 20261123, 20261124 (error bars = +/-1 std, ddof=1)</text>
+  <text x="158.0" y="515.0" text-anchor="middle" font-size="10.5" fill="#666666">0%</text>
+  <line x1="301.0" y1="98.0" x2="301.0" y2="500.0" stroke="#e8e8e8" stroke-width="0.8"/>
+  <text x="301.0" y="515.0" text-anchor="middle" font-size="10.5" fill="#666666">50%</text>
+  <line x1="444.0" y1="98.0" x2="444.0" y2="500.0" stroke="#e8e8e8" stroke-width="0.8"/>
+  <text x="444.0" y="515.0" text-anchor="middle" font-size="10.5" fill="#666666">100%</text>
+  <line x1="158.0" y1="500.0" x2="444.0" y2="500.0" stroke="#444444" stroke-width="0.9"/>
+  <line x1="158.0" y1="98.0" x2="158.0" y2="500.0" stroke="#444444" stroke-width="0.9"/>
+  <text x="150.0" y="141.0" text-anchor="end" font-size="11.5" fill="#111">T1: Intra-Turn 2s</text>
+  <text x="150.0" y="154.0" text-anchor="end" font-size="9.5" fill="#666666">Fast token tracking</text>
+  <rect x="158.0" y="115.6" width="235.9" height="6.8" fill="#164e7a"/>
+  <line x1="359.2" y1="119.0" x2="428.7" y2="119.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="359.2" y1="116.4" x2="359.2" y2="121.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="428.7" y1="116.4" x2="428.7" y2="121.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="433.2" y="122.0" font-size="9.0" fill="#164e7a">82.5%</text>
+  <rect x="158.0" y="127.6" width="226.5" height="6.8" fill="#1f7a72"/>
+  <line x1="372.1" y1="131.0" x2="396.9" y2="131.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="372.1" y1="128.4" x2="372.1" y2="133.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="396.9" y1="128.4" x2="396.9" y2="133.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="401.4" y="134.0" font-size="9.0" fill="#1f7a72">79.2%</text>
+  <rect x="158.0" y="139.6" width="221.8" height="6.8" fill="#6b4c8a"/>
+  <line x1="374.7" y1="143.0" x2="385.0" y2="143.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="374.7" y1="140.4" x2="374.7" y2="145.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="385.0" y1="140.4" x2="385.0" y2="145.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="389.5" y="146.0" font-size="9.0" fill="#6b4c8a">77.6%</text>
+  <rect x="158.0" y="151.6" width="240.5" height="6.8" fill="#b86b14"/>
+  <line x1="378.9" y1="155.0" x2="418.2" y2="155.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="378.9" y1="152.4" x2="378.9" y2="157.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="418.2" y1="152.4" x2="418.2" y2="157.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="422.7" y="158.0" font-size="9.0" fill="#b86b14">84.1%</text>
+  <rect x="158.0" y="163.6" width="232.5" height="6.8" fill="#7a7a7a"/>
+  <line x1="381.7" y1="167.0" x2="399.2" y2="167.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="381.7" y1="164.4" x2="381.7" y2="169.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="399.2" y1="164.4" x2="399.2" y2="169.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="403.7" y="170.0" font-size="9.0" fill="#7a7a7a">81.3%</text>
+  <text x="150.0" y="219.0" text-anchor="end" font-size="11.5" fill="#111">T2: Post-Sleep Reset</text>
+  <text x="150.0" y="232.0" text-anchor="end" font-size="9.5" fill="#666666">Tie vs Std collapse</text>
+  <rect x="158.0" y="193.6" width="286.0" height="6.8" fill="#164e7a"/>
+  <text x="448.5" y="200.0" font-size="9.0" fill="#164e7a">100.0%</text>
+  <rect x="158.0" y="205.6" width="286.0" height="6.8" fill="#1f7a72"/>
+  <text x="448.5" y="212.0" font-size="9.0" fill="#1f7a72">100.0%</text>
+  <rect x="158.0" y="217.6" width="286.0" height="6.8" fill="#6b4c8a"/>
+  <text x="448.5" y="224.0" font-size="9.0" fill="#6b4c8a">100.0%</text>
+  <rect x="158.0" y="229.6" width="285.5" height="6.8" fill="#b86b14"/>
+  <line x1="442.7" y1="233.0" x2="444.0" y2="233.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="442.7" y1="230.4" x2="442.7" y2="235.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="444.0" y1="230.4" x2="444.0" y2="235.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="448.5" y="236.0" font-size="9.0" fill="#b86b14">99.8%</text>
+  <rect x="158.0" y="241.6" width="95.5" height="6.8" fill="#7a7a7a"/>
+  <line x1="250.4" y1="245.0" x2="256.6" y2="245.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="250.4" y1="242.4" x2="250.4" y2="247.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="256.6" y1="242.4" x2="256.6" y2="247.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="261.1" y="248.0" font-size="9.0" fill="#7a7a7a">33.4%</text>
+  <text x="150.0" y="297.0" text-anchor="end" font-size="11.5" fill="#111">T3-ID: Spr/Aut Ctrl</text>
+  <text x="150.0" y="310.0" text-anchor="end" font-size="9.5" fill="#666666">In-dist control</text>
+  <rect x="158.0" y="271.6" width="253.6" height="6.8" fill="#164e7a"/>
+  <line x1="401.8" y1="275.0" x2="421.3" y2="275.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="401.8" y1="272.4" x2="401.8" y2="277.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="421.3" y1="272.4" x2="421.3" y2="277.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="425.8" y="278.0" font-size="9.0" fill="#164e7a">88.7%</text>
+  <rect x="158.0" y="283.6" width="251.7" height="6.8" fill="#1f7a72"/>
+  <line x1="406.0" y1="287.0" x2="413.3" y2="287.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="406.0" y1="284.4" x2="406.0" y2="289.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="413.3" y1="284.4" x2="413.3" y2="289.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="417.8" y="290.0" font-size="9.0" fill="#1f7a72">88.0%</text>
+  <rect x="158.0" y="295.6" width="228.3" height="6.8" fill="#6b4c8a"/>
+  <line x1="375.9" y1="299.0" x2="396.7" y2="299.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="375.9" y1="296.4" x2="375.9" y2="301.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="396.7" y1="296.4" x2="396.7" y2="301.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="401.2" y="302.0" font-size="9.0" fill="#6b4c8a">79.8%</text>
+  <rect x="158.0" y="307.6" width="202.7" height="6.8" fill="#b86b14"/>
+  <line x1="353.5" y1="311.0" x2="367.8" y2="311.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="353.5" y1="308.4" x2="353.5" y2="313.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="367.8" y1="308.4" x2="367.8" y2="313.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="372.3" y="314.0" font-size="9.0" fill="#b86b14">70.9%</text>
+  <rect x="158.0" y="319.6" width="72.9" height="6.8" fill="#7a7a7a"/>
+  <line x1="224.8" y1="323.0" x2="237.1" y2="323.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="224.8" y1="320.4" x2="224.8" y2="325.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="237.1" y1="320.4" x2="237.1" y2="325.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="241.6" y="326.0" font-size="9.0" fill="#7a7a7a">25.5%</text>
+  <text x="150.0" y="375.0" text-anchor="end" font-size="11.5" fill="#111">T3-OOD: Solst+Tokyo</text>
+  <text x="150.0" y="388.0" text-anchor="end" font-size="9.5" fill="#666666">OOD photoperiod</text>
+  <rect x="158.0" y="349.6" width="247.3" height="6.8" fill="#164e7a"/>
+  <line x1="403.5" y1="353.0" x2="407.1" y2="353.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="403.5" y1="350.4" x2="403.5" y2="355.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="407.1" y1="350.4" x2="407.1" y2="355.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="411.6" y="356.0" font-size="9.0" fill="#164e7a">86.5%</text>
+  <rect x="158.0" y="361.6" width="237.1" height="6.8" fill="#1f7a72"/>
+  <line x1="391.1" y1="365.0" x2="399.1" y2="365.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="391.1" y1="362.4" x2="391.1" y2="367.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="399.1" y1="362.4" x2="399.1" y2="367.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="403.6" y="368.0" font-size="9.0" fill="#1f7a72">82.9%</text>
+  <rect x="158.0" y="373.6" width="153.5" height="6.8" fill="#6b4c8a"/>
+  <line x1="304.8" y1="377.0" x2="318.2" y2="377.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="304.8" y1="374.4" x2="304.8" y2="379.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="318.2" y1="374.4" x2="318.2" y2="379.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="322.7" y="380.0" font-size="9.0" fill="#6b4c8a">53.7%</text>
+  <rect x="158.0" y="385.6" width="105.8" height="6.8" fill="#b86b14"/>
+  <line x1="244.7" y1="389.0" x2="283.0" y2="389.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="244.7" y1="386.4" x2="244.7" y2="391.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="283.0" y1="386.4" x2="283.0" y2="391.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="287.5" y="392.0" font-size="9.0" fill="#b86b14">37.0%</text>
+  <rect x="158.0" y="397.6" width="72.6" height="6.8" fill="#7a7a7a"/>
+  <line x1="226.7" y1="401.0" x2="234.6" y2="401.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="226.7" y1="398.4" x2="226.7" y2="403.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="234.6" y1="398.4" x2="234.6" y2="403.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="239.1" y="404.0" font-size="9.0" fill="#7a7a7a">25.4%</text>
+  <text x="150.0" y="453.0" text-anchor="end" font-size="11.5" fill="#111">T4-OOD: Multi-Week</text>
+  <text x="150.0" y="466.0" text-anchor="end" font-size="9.5" fill="#666666">30d + 52w wrap</text>
+  <rect x="158.0" y="427.6" width="284.5" height="6.8" fill="#164e7a"/>
+  <line x1="441.3" y1="431.0" x2="443.7" y2="431.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="441.3" y1="428.4" x2="441.3" y2="433.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="443.7" y1="428.4" x2="443.7" y2="433.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="448.2" y="434.0" font-size="9.0" fill="#164e7a">99.5%</text>
+  <rect x="158.0" y="439.6" width="266.9" height="6.8" fill="#1f7a72"/>
+  <line x1="422.6" y1="443.0" x2="427.2" y2="443.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="422.6" y1="440.4" x2="422.6" y2="445.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="427.2" y1="440.4" x2="427.2" y2="445.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="431.7" y="446.0" font-size="9.0" fill="#1f7a72">93.3%</text>
+  <rect x="158.0" y="451.6" width="269.9" height="6.8" fill="#6b4c8a"/>
+  <line x1="424.2" y1="455.0" x2="431.6" y2="455.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="424.2" y1="452.4" x2="424.2" y2="457.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="431.6" y1="452.4" x2="431.6" y2="457.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="436.1" y="458.0" font-size="9.0" fill="#6b4c8a">94.4%</text>
+  <rect x="158.0" y="463.6" width="268.1" height="6.8" fill="#b86b14"/>
+  <line x1="424.7" y1="467.0" x2="427.5" y2="467.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="424.7" y1="464.4" x2="424.7" y2="469.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="427.5" y1="464.4" x2="427.5" y2="469.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="432.0" y="470.0" font-size="9.0" fill="#b86b14">93.7%</text>
+  <rect x="158.0" y="475.6" width="58.1" height="6.8" fill="#7a7a7a"/>
+  <line x1="214.6" y1="479.0" x2="217.5" y2="479.0" stroke="#111111" stroke-width="1.1"/>
+  <line x1="214.6" y1="476.4" x2="214.6" y2="481.6" stroke="#111111" stroke-width="1.0"/>
+  <line x1="217.5" y1="476.4" x2="217.5" y2="481.6" stroke="#111111" stroke-width="1.0"/>
+  <text x="222.0" y="482.0" font-size="9.0" fill="#7a7a7a">20.3%</text>
+  <text x="32" y="538" font-size="10.2" fill="#164e7a">■ Hybrid-Dual-Geo-RoPE</text>
+  <text x="192" y="538" font-size="10.2" fill="#1f7a72">■ Hybrid-NOAA20-RoPE</text>
+  <text x="348" y="538" font-size="10.2" fill="#6b4c8a">■ Unix-Fourier+LatLon</text>
+  <text x="32" y="555" font-size="10.2" fill="#b86b14">■ Hybrid-Unix-Fourier</text>
+  <text x="192" y="555" font-size="10.2" fill="#7a7a7a">■ Standard-RoPE</text>
+  <text x="32" y="574" font-size="9.8" fill="#666666">T4b 52w annual-wrap: Geo 98.4% vs NOAA20 80.0% vs Unix+LatLon 83.1%</text>
+  <text x="556" y="74" font-size="13" fill="#111">Panel B: Google SLEEP 5-Cycle Mean Retention (C1..Ct)</text>
+  <text x="556" y="89" font-size="10.2" fill="#666666">Matched rank-16 LoRA (193,536 params), B=250 replay buffer, 3 seeds</text>
+  <text x="588.0" y="447.5" text-anchor="end" font-size="10.5" fill="#666666">0%</text>
+  <line x1="594.0" y1="274.0" x2="882.0" y2="274.0" stroke="#e8e8e8" stroke-width="0.8"/>
+  <text x="588.0" y="277.5" text-anchor="end" font-size="10.5" fill="#666666">50%</text>
+  <line x1="594.0" y1="104.0" x2="882.0" y2="104.0" stroke="#e8e8e8" stroke-width="0.8"/>
+  <text x="588.0" y="107.5" text-anchor="end" font-size="10.5" fill="#666666">100%</text>
+  <line x1="594.0" y1="444.0" x2="882.0" y2="444.0" stroke="#444444" stroke-width="0.9"/>
+  <line x1="594.0" y1="104.0" x2="594.0" y2="444.0" stroke="#444444" stroke-width="0.9"/>
+  <line x1="594.0" y1="444.0" x2="594.0" y2="448.0" stroke="#444444" stroke-width="0.8"/>
+  <text x="594.0" y="461.0" text-anchor="middle" font-size="10" fill="#666666">C1 Day</text>
+  <line x1="666.0" y1="444.0" x2="666.0" y2="448.0" stroke="#444444" stroke-width="0.8"/>
+  <text x="666.0" y="461.0" text-anchor="middle" font-size="10" fill="#666666">C2 Dusk</text>
+  <line x1="738.0" y1="444.0" x2="738.0" y2="448.0" stroke="#444444" stroke-width="0.8"/>
+  <text x="738.0" y="461.0" text-anchor="middle" font-size="10" fill="#666666">C3 Noct</text>
+  <line x1="810.0" y1="444.0" x2="810.0" y2="448.0" stroke="#444444" stroke-width="0.8"/>
+  <text x="810.0" y="461.0" text-anchor="middle" font-size="10" fill="#666666">C4 Wint</text>
+  <line x1="882.0" y1="444.0" x2="882.0" y2="448.0" stroke="#444444" stroke-width="0.8"/>
+  <text x="882.0" y="461.0" text-anchor="middle" font-size="10" fill="#666666">C5 Tok</text>
+  <polyline points="594.0,250.4 666.0,243.8 738.0,237.2 810.0,266.9 882.0,221.1" fill="none" stroke="#164e7a" stroke-width="2.2"/>
+  <line x1="592.0" y1="222.0" x2="592.0" y2="278.8" stroke="#164e7a" stroke-width="1.0" opacity="0.75"/>
+  <line x1="589.6" y1="222.0" x2="594.4" y2="222.0" stroke="#164e7a" stroke-width="0.9" opacity="0.75"/>
+  <line x1="589.6" y1="278.8" x2="594.4" y2="278.8" stroke="#164e7a" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="594.0" cy="250.4" r="2.8" fill="#164e7a"/>
+  <line x1="664.0" y1="215.1" x2="664.0" y2="272.4" stroke="#164e7a" stroke-width="1.0" opacity="0.75"/>
+  <line x1="661.6" y1="215.1" x2="666.4" y2="215.1" stroke="#164e7a" stroke-width="0.9" opacity="0.75"/>
+  <line x1="661.6" y1="272.4" x2="666.4" y2="272.4" stroke="#164e7a" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="666.0" cy="243.8" r="2.8" fill="#164e7a"/>
+  <line x1="736.0" y1="216.3" x2="736.0" y2="258.1" stroke="#164e7a" stroke-width="1.0" opacity="0.75"/>
+  <line x1="733.6" y1="216.3" x2="738.4" y2="216.3" stroke="#164e7a" stroke-width="0.9" opacity="0.75"/>
+  <line x1="733.6" y1="258.1" x2="738.4" y2="258.1" stroke="#164e7a" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="738.0" cy="237.2" r="2.8" fill="#164e7a"/>
+  <line x1="808.0" y1="244.1" x2="808.0" y2="289.7" stroke="#164e7a" stroke-width="1.0" opacity="0.75"/>
+  <line x1="805.6" y1="244.1" x2="810.4" y2="244.1" stroke="#164e7a" stroke-width="0.9" opacity="0.75"/>
+  <line x1="805.6" y1="289.7" x2="810.4" y2="289.7" stroke="#164e7a" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="810.0" cy="266.9" r="2.8" fill="#164e7a"/>
+  <line x1="880.0" y1="176.7" x2="880.0" y2="265.5" stroke="#164e7a" stroke-width="1.0" opacity="0.75"/>
+  <line x1="877.6" y1="176.7" x2="882.4" y2="176.7" stroke="#164e7a" stroke-width="0.9" opacity="0.75"/>
+  <line x1="877.6" y1="265.5" x2="882.4" y2="265.5" stroke="#164e7a" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="882.0" cy="221.1" r="2.8" fill="#164e7a"/>
+  <polyline points="594.0,179.5 666.0,143.7 738.0,126.0 810.0,146.5 882.0,150.4" fill="none" stroke="#1f7a72" stroke-width="1.8" stroke-dasharray="6,2"/>
+  <line x1="594.0" y1="133.7" x2="594.0" y2="225.3" stroke="#1f7a72" stroke-width="1.0" opacity="0.75"/>
+  <line x1="591.6" y1="133.7" x2="596.4" y2="133.7" stroke="#1f7a72" stroke-width="0.9" opacity="0.75"/>
+  <line x1="591.6" y1="225.3" x2="596.4" y2="225.3" stroke="#1f7a72" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="594.0" cy="179.5" r="2.8" fill="#1f7a72"/>
+  <line x1="666.0" y1="104.0" x2="666.0" y2="188.3" stroke="#1f7a72" stroke-width="1.0" opacity="0.75"/>
+  <line x1="663.6" y1="104.0" x2="668.4" y2="104.0" stroke="#1f7a72" stroke-width="0.9" opacity="0.75"/>
+  <line x1="663.6" y1="188.3" x2="668.4" y2="188.3" stroke="#1f7a72" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="666.0" cy="143.7" r="2.8" fill="#1f7a72"/>
+  <line x1="738.0" y1="117.5" x2="738.0" y2="134.6" stroke="#1f7a72" stroke-width="1.0" opacity="0.75"/>
+  <line x1="735.6" y1="117.5" x2="740.4" y2="117.5" stroke="#1f7a72" stroke-width="0.9" opacity="0.75"/>
+  <line x1="735.6" y1="134.6" x2="740.4" y2="134.6" stroke="#1f7a72" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="738.0" cy="126.0" r="2.8" fill="#1f7a72"/>
+  <line x1="810.0" y1="138.1" x2="810.0" y2="154.9" stroke="#1f7a72" stroke-width="1.0" opacity="0.75"/>
+  <line x1="807.6" y1="138.1" x2="812.4" y2="138.1" stroke="#1f7a72" stroke-width="0.9" opacity="0.75"/>
+  <line x1="807.6" y1="154.9" x2="812.4" y2="154.9" stroke="#1f7a72" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="810.0" cy="146.5" r="2.8" fill="#1f7a72"/>
+  <line x1="882.0" y1="123.7" x2="882.0" y2="177.2" stroke="#1f7a72" stroke-width="1.0" opacity="0.75"/>
+  <line x1="879.6" y1="123.7" x2="884.4" y2="123.7" stroke="#1f7a72" stroke-width="0.9" opacity="0.75"/>
+  <line x1="879.6" y1="177.2" x2="884.4" y2="177.2" stroke="#1f7a72" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="882.0" cy="150.4" r="2.8" fill="#1f7a72"/>
+  <polyline points="594.0,250.4 666.0,243.8 738.0,228.7 810.0,224.9 882.0,211.5" fill="none" stroke="#6b4c8a" stroke-width="1.8" stroke-dasharray="3,2"/>
+  <line x1="596.0" y1="222.0" x2="596.0" y2="278.8" stroke="#6b4c8a" stroke-width="1.0" opacity="0.75"/>
+  <line x1="593.6" y1="222.0" x2="598.4" y2="222.0" stroke="#6b4c8a" stroke-width="0.9" opacity="0.75"/>
+  <line x1="593.6" y1="278.8" x2="598.4" y2="278.8" stroke="#6b4c8a" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="594.0" cy="250.4" r="2.8" fill="#6b4c8a"/>
+  <line x1="668.0" y1="215.1" x2="668.0" y2="272.4" stroke="#6b4c8a" stroke-width="1.0" opacity="0.75"/>
+  <line x1="665.6" y1="215.1" x2="670.4" y2="215.1" stroke="#6b4c8a" stroke-width="0.9" opacity="0.75"/>
+  <line x1="665.6" y1="272.4" x2="670.4" y2="272.4" stroke="#6b4c8a" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="666.0" cy="243.8" r="2.8" fill="#6b4c8a"/>
+  <line x1="740.0" y1="164.5" x2="740.0" y2="292.9" stroke="#6b4c8a" stroke-width="1.0" opacity="0.75"/>
+  <line x1="737.6" y1="164.5" x2="742.4" y2="164.5" stroke="#6b4c8a" stroke-width="0.9" opacity="0.75"/>
+  <line x1="737.6" y1="292.9" x2="742.4" y2="292.9" stroke="#6b4c8a" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="738.0" cy="228.7" r="2.8" fill="#6b4c8a"/>
+  <line x1="812.0" y1="182.9" x2="812.0" y2="266.8" stroke="#6b4c8a" stroke-width="1.0" opacity="0.75"/>
+  <line x1="809.6" y1="182.9" x2="814.4" y2="182.9" stroke="#6b4c8a" stroke-width="0.9" opacity="0.75"/>
+  <line x1="809.6" y1="266.8" x2="814.4" y2="266.8" stroke="#6b4c8a" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="810.0" cy="224.9" r="2.8" fill="#6b4c8a"/>
+  <line x1="884.0" y1="126.4" x2="884.0" y2="296.5" stroke="#6b4c8a" stroke-width="1.0" opacity="0.75"/>
+  <line x1="881.6" y1="126.4" x2="886.4" y2="126.4" stroke="#6b4c8a" stroke-width="0.9" opacity="0.75"/>
+  <line x1="881.6" y1="296.5" x2="886.4" y2="296.5" stroke="#6b4c8a" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="882.0" cy="211.5" r="2.8" fill="#6b4c8a"/>
+  <polyline points="594.0,226.8 666.0,206.9 738.0,251.3 810.0,272.1 882.0,303.5" fill="none" stroke="#b86b14" stroke-width="1.7" stroke-dasharray="5,3"/>
+  <line x1="593.0" y1="166.9" x2="593.0" y2="286.6" stroke="#b86b14" stroke-width="1.0" opacity="0.75"/>
+  <line x1="590.6" y1="166.9" x2="595.4" y2="166.9" stroke="#b86b14" stroke-width="0.9" opacity="0.75"/>
+  <line x1="590.6" y1="286.6" x2="595.4" y2="286.6" stroke="#b86b14" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="594.0" cy="226.8" r="2.8" fill="#b86b14"/>
+  <line x1="665.0" y1="140.3" x2="665.0" y2="273.6" stroke="#b86b14" stroke-width="1.0" opacity="0.75"/>
+  <line x1="662.6" y1="140.3" x2="667.4" y2="140.3" stroke="#b86b14" stroke-width="0.9" opacity="0.75"/>
+  <line x1="662.6" y1="273.6" x2="667.4" y2="273.6" stroke="#b86b14" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="666.0" cy="206.9" r="2.8" fill="#b86b14"/>
+  <line x1="737.0" y1="227.6" x2="737.0" y2="275.1" stroke="#b86b14" stroke-width="1.0" opacity="0.75"/>
+  <line x1="734.6" y1="227.6" x2="739.4" y2="227.6" stroke="#b86b14" stroke-width="0.9" opacity="0.75"/>
+  <line x1="734.6" y1="275.1" x2="739.4" y2="275.1" stroke="#b86b14" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="738.0" cy="251.3" r="2.8" fill="#b86b14"/>
+  <line x1="809.0" y1="268.8" x2="809.0" y2="275.4" stroke="#b86b14" stroke-width="1.0" opacity="0.75"/>
+  <line x1="806.6" y1="268.8" x2="811.4" y2="268.8" stroke="#b86b14" stroke-width="0.9" opacity="0.75"/>
+  <line x1="806.6" y1="275.4" x2="811.4" y2="275.4" stroke="#b86b14" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="810.0" cy="272.1" r="2.8" fill="#b86b14"/>
+  <line x1="881.0" y1="295.6" x2="881.0" y2="311.3" stroke="#b86b14" stroke-width="1.0" opacity="0.75"/>
+  <line x1="878.6" y1="295.6" x2="883.4" y2="295.6" stroke="#b86b14" stroke-width="0.9" opacity="0.75"/>
+  <line x1="878.6" y1="311.3" x2="883.4" y2="311.3" stroke="#b86b14" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="882.0" cy="303.5" r="2.8" fill="#b86b14"/>
+  <polyline points="594.0,211.7 666.0,282.0 738.0,332.5 810.0,359.2 882.0,376.0" fill="none" stroke="#7a7a7a" stroke-width="1.6" stroke-dasharray="2,2"/>
+  <line x1="595.0" y1="174.5" x2="595.0" y2="248.8" stroke="#7a7a7a" stroke-width="1.0" opacity="0.75"/>
+  <line x1="592.6" y1="174.5" x2="597.4" y2="174.5" stroke="#7a7a7a" stroke-width="0.9" opacity="0.75"/>
+  <line x1="592.6" y1="248.8" x2="597.4" y2="248.8" stroke="#7a7a7a" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="594.0" cy="211.7" r="2.8" fill="#7a7a7a"/>
+  <line x1="667.0" y1="268.1" x2="667.0" y2="295.9" stroke="#7a7a7a" stroke-width="1.0" opacity="0.75"/>
+  <line x1="664.6" y1="268.1" x2="669.4" y2="268.1" stroke="#7a7a7a" stroke-width="0.9" opacity="0.75"/>
+  <line x1="664.6" y1="295.9" x2="669.4" y2="295.9" stroke="#7a7a7a" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="666.0" cy="282.0" r="2.8" fill="#7a7a7a"/>
+  <line x1="739.0" y1="329.3" x2="739.0" y2="335.8" stroke="#7a7a7a" stroke-width="1.0" opacity="0.75"/>
+  <line x1="736.6" y1="329.3" x2="741.4" y2="329.3" stroke="#7a7a7a" stroke-width="0.9" opacity="0.75"/>
+  <line x1="736.6" y1="335.8" x2="741.4" y2="335.8" stroke="#7a7a7a" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="738.0" cy="332.5" r="2.8" fill="#7a7a7a"/>
+  <circle cx="810.0" cy="359.2" r="2.8" fill="#7a7a7a"/>
+  <circle cx="882.0" cy="376.0" r="2.8" fill="#7a7a7a"/>
+  <text x="898.0" y="149.4" font-size="10.2" fill="#1f7a72">SLEEP-NOAA20 86.3% +/- 7.9</text>
+  <text x="898.0" y="160.9" font-size="9.2" fill="#666666">(forgetting 9.0 pp)</text>
+  <text x="898.0" y="210.5" font-size="10.2" fill="#6b4c8a">SLEEP-Reservoir 68.4% +/- 25.0</text>
+  <text x="898.0" y="222.0" font-size="9.2" fill="#666666">(forgetting 9.6 pp)</text>
+  <line x1="885.0" y1="221.1" x2="896.0" y2="244.5" stroke="#164e7a" stroke-width="0.7" opacity="0.7"/>
+  <text x="898.0" y="243.5" font-size="10.2" fill="#164e7a">SLEEP-Caelus 65.5% +/- 13.1</text>
+  <text x="898.0" y="255.0" font-size="9.2" fill="#666666">(forgetting 11.1 pp)</text>
+  <text x="898.0" y="302.5" font-size="10.2" fill="#b86b14">SLEEP-24h-LRU 41.3% +/- 2.3</text>
+  <text x="898.0" y="314.0" font-size="9.2" fill="#666666">(forgetting 62.1 pp)</text>
+  <text x="898.0" y="375.0" font-size="10.2" fill="#7a7a7a">Naive-Online-FT 20.0% +/- 0.0</text>
+  <text x="898.0" y="386.5" font-size="9.2" fill="#666666">(forgetting 90.4 pp)</text>
+  <text x="556" y="492" font-size="10.2" fill="#444444">Nocturnal gate safety: Caelus 100.0% vs NOAA20 100.0% vs Fixed-24h 70.5% (0% Tokyo)</text>
+  <text x="556" y="510" font-size="10.0" fill="#666666">Causal check Diag-SLEEP-GeoRoPE-LRU: 37.3% retention (56.6 pp forgetting)</text>
+  <text x="556" y="528" font-size="9.6" fill="#666666">Forgetting delta = mean over c in 1..4 of max(0, peak_acc_c - final_acc_c)</text>
+  <text x="32" y="596" font-size="9.5" fill="#666666">Source: lab/experiments/EXP-007-geo-rope-sleep-transformer/training_receipt.json (3 seeds, 0 train/OOD date overlap)</text>
 </svg>

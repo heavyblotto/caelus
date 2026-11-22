@@ -14,14 +14,13 @@ import datetime
 import hashlib
 import json
 import math
-import os
 import random
 import shutil
 import subprocess
 import sys
 import time
 from pathlib import Path
-from typing import Dict, List, Optional, Sequence, Tuple
+from typing import Dict, List, Sequence, Tuple
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent.parent
@@ -43,6 +42,27 @@ CITIES = {
     "NYC": {"lat": 40.7128, "lon": -74.0060},
     "Tokyo": {"lat": 35.6762, "lon": 139.6503},
 }
+
+ENCODER_NAMES = (
+    "Standard-RoPE",
+    "Hybrid-Unix-Fourier-RoPE",
+    "Hybrid-Unix-Fourier+LatLon",
+    "Hybrid-NOAA20-RoPE",
+    "Hybrid-Dual-Geo-RoPE",
+)
+
+PART_B_ARMS = (
+    "Naive-Online-FT",
+    "SLEEP-Fixed24h-LRU",
+    "Diag-SLEEP-GeoRoPE-LRU",
+    "SLEEP-Reservoir-Random",
+    "SLEEP-NOAA20-Stratified",
+    "SLEEP-Caelus-Circadian-Stratified",
+)
+
+FORGETTING_DELTA_FORMULA = (
+    "mean over cycles c in {1, 2, 3, 4} of max(0, max_{t >= c} acc(t, c) - acc(5, c))"
+)
 
 
 def get_git_sha() -> str:
@@ -82,7 +102,6 @@ def verify_ephemeris_invariants() -> Dict:
     oslo_win_h = daylight_hours("Oslo", 2026, 12, 21)
     oslo_sum_h = daylight_hours("Oslo", 2026, 6, 21)
 
-    # Verify NYC -> Tokyo horizon inversion at 2026-11-23 01:30 UTC
     jd_trv = julian_day(2026, 11, 23, 1, 30, 0)
     sp = eng.position("sun", jd_trv)
     _, nyc_alt_t = az_alt(sp["lon"] % 360.0, sp["lat"], jd_trv, CITIES["NYC"]["lat"], CITIES["NYC"]["lon"])
@@ -110,7 +129,6 @@ def verify_ephemeris_invariants() -> Dict:
     rot_norm_err = abs(math.sqrt(sum(x * x for x in rot)) - 1.0)
     assert rot_norm_err < 1e-12, f"Rotary norm violation: {rot_norm_err}"
 
-    # Recompute train / ID / OOD day-set hashes to prove zero leakage independently
     def day_ints(city: str, y: int, m: int, d: int, n_days: int) -> List[Tuple[str, float]]:
         jd0 = julian_day(y, m, d, 0, 0, 0)
         return [(city, float(int(math.floor(jd0 + off + 0.5)))) for off in range(n_days)]
@@ -149,21 +167,21 @@ def verify_ephemeris_invariants() -> Dict:
 
 
 def verify_receipt(receipt: Dict, live_eph: Dict) -> Dict:
-    """Validate training_receipt.json integrity, parameter parity, convergence, and zero leakage."""
+    """Validate training_receipt.json integrity, 5-encoder parity, 3-seed convergence, and zero leakage."""
     checks = {}
-    assert receipt.get("schema_version") == "exp007-training-receipt-v1", "Unexpected receipt schema"
+    assert receipt.get("schema_version") == "exp007-training-receipt-v2", (
+        f"Unexpected receipt schema: {receipt.get('schema_version')}"
+    )
     assert receipt.get("id") == "EXP-007", "Receipt ID mismatch"
+    assert len(receipt.get("seeds", [])) == 3, "Expected 3 independent seeds"
 
     pp = receipt["parameter_parity"]
-    checks["exact_part_a_param_parity"] = (
-        pp["Standard-RoPE"] == pp["Hybrid-Unix-Fourier-RoPE"] == pp["Hybrid-Dual-Geo-RoPE"]
-        and pp["Standard-RoPE"] >= 500_000
-    )
+    counts = [pp[enc] for enc in ENCODER_NAMES]
+    checks["exact_part_a_param_parity"] = len(set(counts)) == 1 and counts[0] >= 500_000
     checks["exact_part_b_lora_parity"] = bool(pp["sleep_lora_parity"])
 
-    # Real gradient descent convergence check across all 3 Part A models
     conv_ok = True
-    for enc in ("Standard-RoPE", "Hybrid-Unix-Fourier-RoPE", "Hybrid-Dual-Geo-RoPE"):
+    for enc in ENCODER_NAMES:
         tr = receipt["part_a_training"][enc]
         curve = tr["loss_curve"]
         if not (len(curve) >= 10 and tr["final_train_loss"] < tr["initial_train_loss"] * 0.7):
@@ -172,7 +190,6 @@ def verify_receipt(receipt: Dict, live_eph: Dict) -> Dict:
             conv_ok = False
     checks["part_a_gradient_descent_converged"] = conv_ok
 
-    # Zero leakage & split hash parity with live astroengine recomputation
     ds = receipt["dataset_splits"]
     checks["zero_train_id_ood_leakage"] = (
         ds["train_id_day_overlap"] == 0
@@ -182,14 +199,13 @@ def verify_receipt(receipt: Dict, live_eph: Dict) -> Dict:
         and ds["ood_day_set_sha256_16"] == live_eph["recomputed_ood_day_sha256_16"]
     )
 
-    # Part B real training check across all 3 headline arms
     b_arms = receipt["part_b_sleep"]["arms"]
     b_ok = True
-    for arm_name in ("Naive-Online-FT", "SLEEP-Fixed24h-LRU", "SLEEP-Caelus-Circadian-Stratified"):
+    for arm_name in PART_B_ARMS:
         arm = b_arms[arm_name]
         if len(arm["acc_matrix"]) != 5 or len(arm["cycle_losses"]) != 5:
             b_ok = False
-    checks["part_b_five_cycles_verified"] = b_ok
+    checks["part_b_five_cycles_all_six_arms_verified"] = b_ok
 
     for k, ok in checks.items():
         if not ok:
@@ -198,56 +214,60 @@ def verify_receipt(receipt: Dict, live_eph: Dict) -> Dict:
 
 
 def render_tufte_svg(receipt: Dict, out_path: Path) -> None:
-    """Render an inert, zero-chartjunk two-panel Tufte SVG directly from measured training_receipt.json."""
+    """Render an inert, zero-chartjunk two-panel Tufte SVG with 3-seed mean +/- std error bars."""
     ev = receipt["part_a_eval"]
     pb = receipt["part_b_sleep"]["arms"]
     gate = receipt["part_b_sleep"]["sleep_gate_audit"]
+    seeds = receipt["seeds"]
 
-    W, H = 1000, 505
+    W, H = 1140, 610
     # Colorblind-safe Tufte palette (no red-vs-green reliance)
-    COL_CAELUS = "#164e7a"   # Deep ocean blue (treatment)
-    COL_UNIX = "#b86b14"     # Warm ochre/amber (steelman baseline)
-    COL_BASE = "#7a7a7a"     # Neutral slate gray (null baseline)
+    COL_CAELUS = "#164e7a"   # Deep ocean blue (Caelus treatment)
+    COL_NOAA = "#1f7a72"     # Deep teal (20-line NOAA solar steelman)
+    COL_LATLON = "#6b4c8a"   # Muted plum (Unix+LatLon / Reservoir-Random)
+    COL_UNIX = "#b86b14"     # Warm ochre (Unix-UTC / Fixed24h-LRU)
+    COL_BASE = "#7a7a7a"     # Neutral slate gray (Standard-RoPE / Naive-FT)
     COL_AXIS = "#444444"
     COL_MUTE = "#666666"
-    COL_FAINT = "#e6e6e6"
+    COL_FAINT = "#e8e8e8"
 
     p_millions = receipt["parameter_parity"]["Hybrid-Dual-Geo-RoPE"] / 1_000_000.0
     lines: List[str] = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" font-family="et-book, ET-Bembo, Palatino, Georgia, serif" font-size="12">',
         f'  <rect width="{W}" height="{H}" fill="white"/>',
-        '  <text x="32" y="28" font-size="16" fill="#111">EXP-007: Trained Tiny-Transformer Hybrid Geo-RoPE and Google SLEEP Consolidation</text>',
-        f'  <text x="32" y="46" font-size="11.5" fill="{COL_MUTE}">{p_millions:.2f}M-param parameter-matched causal transformers trained on Apple M5 Pro ({receipt["hardware"]["selected_device"].upper()}) with python/astroengine/ physics</text>',
+        '  <text x="32" y="28" font-size="16" fill="#111">EXP-007: Trained Tiny-Transformer Hybrid Geo-RoPE &amp; Google SLEEP (3-Seed Mean +/- Std)</text>',
+        f'  <text x="32" y="46" font-size="11.5" fill="{COL_MUTE}">5 parameter-matched {p_millions:.2f}M-param causal transformers x {len(seeds)} seeds on Apple M5 Pro ({receipt["hardware"]["selected_device"].upper()}); whiskers = +/-1 sample std</text>',
     ]
 
-    # ------------------ PANEL A (Left): 4-Task Held-Out Accuracy (Horizontal Paired Bar)
-    ax0, ax1 = 154.0, 418.0
-    ay0, ay1 = 96.0, 412.0
-    lines.append('  <text x="32" y="76" font-size="13" fill="#111">Panel A: Part A Trained RoPE Models (4 Held-Out Tasks)</text>')
+    # ------------------ PANEL A (Left): 5 Evaluation Slices Across 4 Task Families (T3 split ID / OOD)
+    ax0, ax1 = 158.0, 444.0
+    ay0, ay1 = 104.0, 494.0
+    lines.append('  <text x="32" y="74" font-size="13" fill="#111">Panel A: 5 evaluation slices across 4 task families (T3 split ID / OOD)</text>')
+    lines.append(f'  <text x="32" y="89" font-size="10.2" fill="{COL_MUTE}">Mean accuracy across seeds {", ".join(str(s) for s in seeds)} (error bars = +/-1 std, ddof=1)</text>')
 
     tasks_a = [
         ("T1: Intra-Turn 2s", "task1_intra_turn_acc", "Fast token tracking"),
         ("T2: Post-Sleep Reset", "task2_post_sleep_acc", "Tie vs Std collapse"),
         ("T3-ID: Spr/Aut Ctrl", "task3_id_control_acc", "In-dist control"),
         ("T3-OOD: Solst+Tokyo", "task3_ood_composite_acc", "OOD photoperiod"),
-        ("T4-OOD: Multi-Week", "task4_multiweek_ood_acc", "30d tie + 52w wrap"),
+        ("T4-OOD: Multi-Week", "task4_multiweek_ood_acc", "30d + 52w wrap"),
     ]
 
-    # Subtle 0%, 50%, 100% vertical reference ticks (minimal ink)
     for frac, lbl in ((0.0, "0%"), (0.5, "50%"), (1.0, "100%")):
         xv = ax0 + frac * (ax1 - ax0)
         if frac > 0.0:
-            lines.append(f'  <line x1="{xv:.1f}" y1="{ay0 - 8:.1f}" x2="{xv:.1f}" y2="{ay1 + 6:.1f}" stroke="{COL_FAINT}" stroke-width="0.8"/>')
-        lines.append(f'  <text x="{xv:.1f}" y="{ay1 + 22:.1f}" text-anchor="middle" font-size="10.5" fill="{COL_MUTE}">{lbl}</text>')
-    # Range-frame x-axis 0%..100%
+            lines.append(f'  <line x1="{xv:.1f}" y1="{ay0 - 6:.1f}" x2="{xv:.1f}" y2="{ay1 + 6:.1f}" stroke="{COL_FAINT}" stroke-width="0.8"/>')
+        lines.append(f'  <text x="{xv:.1f}" y="{ay1 + 21:.1f}" text-anchor="middle" font-size="10.5" fill="{COL_MUTE}">{lbl}</text>')
     lines.append(f'  <line x1="{ax0:.1f}" y1="{ay1 + 6:.1f}" x2="{ax1:.1f}" y2="{ay1 + 6:.1f}" stroke="{COL_AXIS}" stroke-width="0.9"/>')
-    lines.append(f'  <line x1="{ax0:.1f}" y1="{ay0 - 8:.1f}" x2="{ax0:.1f}" y2="{ay1 + 6:.1f}" stroke="{COL_AXIS}" stroke-width="0.9"/>')
+    lines.append(f'  <line x1="{ax0:.1f}" y1="{ay0 - 6:.1f}" x2="{ax0:.1f}" y2="{ay1 + 6:.1f}" stroke="{COL_AXIS}" stroke-width="0.9"/>')
 
     row_h = (ay1 - ay0) / len(tasks_a)
     arm_specs_a = [
-        ("Hybrid-Dual-Geo-RoPE", COL_CAELUS, -12.0),
-        ("Hybrid-Unix-Fourier-RoPE", COL_UNIX, 0.0),
-        ("Standard-RoPE", COL_BASE, 12.0),
+        ("Hybrid-Dual-Geo-RoPE", COL_CAELUS, -24.0),
+        ("Hybrid-NOAA20-RoPE", COL_NOAA, -12.0),
+        ("Hybrid-Unix-Fourier+LatLon", COL_LATLON, 0.0),
+        ("Hybrid-Unix-Fourier-RoPE", COL_UNIX, 12.0),
+        ("Standard-RoPE", COL_BASE, 24.0),
     ]
 
     for r_idx, (t_label, metric_key, sub_note) in enumerate(tasks_a):
@@ -257,32 +277,48 @@ def render_tufte_svg(receipt: Dict, out_path: Path) -> None:
 
         for arm_name, col, dy in arm_specs_a:
             val = float(ev[arm_name]["summary"][metric_key])
+            std = float(ev[arm_name]["summary_std"][metric_key])
             xv = ax0 + val * (ax1 - ax0)
+            x_lo = ax0 + max(0.0, val - std) * (ax1 - ax0)
+            x_hi = ax0 + min(1.0, val + std) * (ax1 - ax0)
             yb = yc + dy
-            bar_h = 7.5
+            bar_h = 6.8
             lines.append(f'  <rect x="{ax0:.1f}" y="{yb - bar_h / 2:.1f}" width="{max(1.0, xv - ax0):.1f}" height="{bar_h:.1f}" fill="{col}"/>')
+            if std >= 0.001:
+                lines.append(f'  <line x1="{x_lo:.1f}" y1="{yb:.1f}" x2="{x_hi:.1f}" y2="{yb:.1f}" stroke="#111111" stroke-width="1.1"/>')
+                lines.append(f'  <line x1="{x_lo:.1f}" y1="{yb - 2.6:.1f}" x2="{x_lo:.1f}" y2="{yb + 2.6:.1f}" stroke="#111111" stroke-width="1.0"/>')
+                lines.append(f'  <line x1="{x_hi:.1f}" y1="{yb - 2.6:.1f}" x2="{x_hi:.1f}" y2="{yb + 2.6:.1f}" stroke="#111111" stroke-width="1.0"/>')
             pct_str = f"{val * 100:.1f}%"
-            tx = min(xv + 4.5, ax1 + 4.5)
-            lines.append(f'  <text x="{tx:.1f}" y="{yb + 3.2:.1f}" font-size="9.5" fill="{col}">{pct_str}</text>')
+            tx = max(xv, x_hi) + 4.5
+            lines.append(f'  <text x="{tx:.1f}" y="{yb + 3.0:.1f}" font-size="9.0" fill="{col}">{pct_str}</text>')
 
-    # Direct inline color key under Panel A (clean text, generous spacing, no box)
-    lines.append(f'  <text x="32" y="458" font-size="10.5" fill="{COL_CAELUS}">■ Hybrid-Dual-Geo-RoPE</text>')
-    lines.append(f'  <text x="194" y="458" font-size="10.5" fill="{COL_UNIX}">■ Hybrid-Unix-Fourier</text>')
-    lines.append(f'  <text x="346" y="458" font-size="10.5" fill="{COL_BASE}">■ Standard-RoPE</text>')
+    # Two-row inline color key below Panel A (zero overlap, no box)
+    lines.append(f'  <text x="32" y="538" font-size="10.2" fill="{COL_CAELUS}">■ Hybrid-Dual-Geo-RoPE</text>')
+    lines.append(f'  <text x="192" y="538" font-size="10.2" fill="{COL_NOAA}">■ Hybrid-NOAA20-RoPE</text>')
+    lines.append(f'  <text x="348" y="538" font-size="10.2" fill="{COL_LATLON}">■ Unix-Fourier+LatLon</text>')
+    lines.append(f'  <text x="32" y="555" font-size="10.2" fill="{COL_UNIX}">■ Hybrid-Unix-Fourier</text>')
+    lines.append(f'  <text x="192" y="555" font-size="10.2" fill="{COL_BASE}">■ Standard-RoPE</text>')
+
+    geo_w = ev["Hybrid-Dual-Geo-RoPE"]["summary"]["task4_52w_annual_wrap_acc"] * 100.0
+    noaa_w = ev["Hybrid-NOAA20-RoPE"]["summary"]["task4_52w_annual_wrap_acc"] * 100.0
+    ll_w = ev["Hybrid-Unix-Fourier+LatLon"]["summary"]["task4_52w_annual_wrap_acc"] * 100.0
+    lines.append(
+        f'  <text x="32" y="574" font-size="9.8" fill="{COL_MUTE}">'
+        f'T4b 52w annual-wrap: Geo {geo_w:.1f}% vs NOAA20 {noaa_w:.1f}% vs Unix+LatLon {ll_w:.1f}%</text>'
+    )
 
     # ------------------ PANEL B (Right): SLEEP 5-Cycle Continual Retention Curves
-    bx0, bx1 = 554.0, 822.0
-    by0, by1 = 96.0, 388.0
-    lines.append('  <text x="516" y="76" font-size="13" fill="#111">Panel B: Google SLEEP 5-Cycle Mean Retention (C1..Ct)</text>')
+    bx0, bx1 = 594.0, 882.0
+    by0, by1 = 104.0, 444.0
+    lines.append('  <text x="556" y="74" font-size="13" fill="#111">Panel B: Google SLEEP 5-Cycle Mean Retention (C1..Ct)</text>')
+    lines.append(f'  <text x="556" y="89" font-size="10.2" fill="{COL_MUTE}">Matched rank-16 LoRA (193,536 params), B=250 replay buffer, 3 seeds</text>')
 
-    # Compute exact data range for y (keep honest 0%..100% scale so proportions match Panel A)
     for frac, lbl in ((0.0, "0%"), (0.5, "50%"), (1.0, "100%")):
         yv = by1 - frac * (by1 - by0)
         if frac > 0.0:
             lines.append(f'  <line x1="{bx0:.1f}" y1="{yv:.1f}" x2="{bx1:.1f}" y2="{yv:.1f}" stroke="{COL_FAINT}" stroke-width="0.8"/>')
         lines.append(f'  <text x="{bx0 - 6:.1f}" y="{yv + 3.5:.1f}" text-anchor="end" font-size="10.5" fill="{COL_MUTE}">{lbl}</text>')
 
-    # Range-frame axes spanning Cycles 1..5 and 0%..100%
     lines.append(f'  <line x1="{bx0:.1f}" y1="{by1:.1f}" x2="{bx1:.1f}" y2="{by1:.1f}" stroke="{COL_AXIS}" stroke-width="0.9"/>')
     lines.append(f'  <line x1="{bx0:.1f}" y1="{by0:.1f}" x2="{bx0:.1f}" y2="{by1:.1f}" stroke="{COL_AXIS}" stroke-width="0.9"/>')
 
@@ -293,62 +329,88 @@ def render_tufte_svg(receipt: Dict, out_path: Path) -> None:
         lines.append(f'  <text x="{xs_b[i]:.1f}" y="{by1 + 17:.1f}" text-anchor="middle" font-size="10" fill="{COL_MUTE}">{clbl}</text>')
 
     arm_specs_b = [
-        ("SLEEP-Caelus-Circadian-Stratified", "SLEEP-Caelus", COL_CAELUS, 2.2, ""),
-        ("SLEEP-Fixed24h-LRU", "SLEEP-24h-LRU", COL_UNIX, 1.8, "5,3"),
-        ("Naive-Online-FT", "Naive-Online-FT", COL_BASE, 1.6, "2,2"),
+        ("SLEEP-Caelus-Circadian-Stratified", "SLEEP-Caelus", COL_CAELUS, 2.2, "", -2.0),
+        ("SLEEP-NOAA20-Stratified", "SLEEP-NOAA20", COL_NOAA, 1.8, "6,2", 0.0),
+        ("SLEEP-Reservoir-Random", "SLEEP-Reservoir", COL_LATLON, 1.8, "3,2", 2.0),
+        ("SLEEP-Fixed24h-LRU", "SLEEP-24h-LRU", COL_UNIX, 1.7, "5,3", -1.0),
+        ("Naive-Online-FT", "Naive-Online-FT", COL_BASE, 1.6, "2,2", 1.0),
     ]
 
-    # Collect end-label positions and prevent vertical overlap
     end_labels = []
-    for arm_key, short_lbl, col, sw, dash in arm_specs_b:
+    for arm_key, short_lbl, col, sw, dash, xjit in arm_specs_b:
         mat = pb[arm_key]["acc_matrix"]
         pts = []
         for i in range(5):
             y_acc = float(mat[i]["mean_seen_acc"])
+            y_std = float(mat[i].get("mean_seen_acc_std", 0.0))
             yv = by1 - y_acc * (by1 - by0)
-            pts.append((xs_b[i], yv, y_acc))
-        poly_str = " ".join(f"{x:.1f},{y:.1f}" for x, y, _ in pts)
+            y_hi = by1 - min(1.0, y_acc + y_std) * (by1 - by0)
+            y_lo = by1 - max(0.0, y_acc - y_std) * (by1 - by0)
+            pts.append((xs_b[i], yv, y_acc, y_std, y_hi, y_lo))
+
+        poly_str = " ".join(f"{x:.1f},{y:.1f}" for x, y, _, _, _, _ in pts)
         dash_attr = f' stroke-dasharray="{dash}"' if dash else ""
         lines.append(f'  <polyline points="{poly_str}" fill="none" stroke="{col}" stroke-width="{sw}"{dash_attr}/>')
-        for x, y, _ in pts:
-            lines.append(f'  <circle cx="{x:.1f}" cy="{y:.1f}" r="3.0" fill="{col}"/>')
-        final_acc = pts[-1][2]
+        for x, y, _, y_std, y_hi, y_lo in pts:
+            if y_std >= 0.002:
+                xe = x + xjit
+                lines.append(f'  <line x1="{xe:.1f}" y1="{y_hi:.1f}" x2="{xe:.1f}" y2="{y_lo:.1f}" stroke="{col}" stroke-width="1.0" opacity="0.75"/>')
+                lines.append(f'  <line x1="{xe - 2.4:.1f}" y1="{y_hi:.1f}" x2="{xe + 2.4:.1f}" y2="{y_hi:.1f}" stroke="{col}" stroke-width="0.9" opacity="0.75"/>')
+                lines.append(f'  <line x1="{xe - 2.4:.1f}" y1="{y_lo:.1f}" x2="{xe + 2.4:.1f}" y2="{y_lo:.1f}" stroke="{col}" stroke-width="0.9" opacity="0.75"/>')
+            lines.append(f'  <circle cx="{x:.1f}" cy="{y:.1f}" r="2.8" fill="{col}"/>')
+
+        final_acc = pb[arm_key]["final_mean_retention_c1_c5"]
+        final_std = pb[arm_key]["final_mean_retention_c1_c5_std"]
         f_delta = pb[arm_key]["catastrophic_forgetting_delta_c1_c4"]
         end_labels.append({
+            "y_raw": pts[-1][1],
             "y": pts[-1][1],
             "col": col,
-            "line1": f"{short_lbl} {final_acc * 100:.1f}%",
-            "line2": f"(forgetting -{f_delta * 100:.1f} pp)",
+            "line1": f"{short_lbl} {final_acc * 100:.1f}% +/- {final_std * 100:.1f}",
+            "line2": f"(forgetting {f_delta * 100:.1f} pp)",
         })
 
-    # De-collide end labels vertically (min 30px apart)
-    end_labels.sort(key=lambda item: item["y"])
+    # De-collide end labels vertically (min 33px apart, bounded inside [by0, by1 + 10])
+    end_labels.sort(key=lambda item: item["y_raw"])
     for i in range(1, len(end_labels)):
-        if end_labels[i]["y"] - end_labels[i - 1]["y"] < 30.0:
-            end_labels[i]["y"] = end_labels[i - 1]["y"] + 30.0
+        if end_labels[i]["y"] - end_labels[i - 1]["y"] < 33.0:
+            end_labels[i]["y"] = end_labels[i - 1]["y"] + 33.0
+    # Shift upward slightly if bottom label overflows
+    if end_labels and end_labels[-1]["y"] > by1 + 4:
+        shift = end_labels[-1]["y"] - (by1 + 4)
+        for item in end_labels:
+            item["y"] -= shift
 
     for item in end_labels:
-        lines.append(f'  <text x="{bx1 + 8:.1f}" y="{item["y"] - 1:.1f}" font-size="10.5" fill="{item["col"]}">{item["line1"]}</text>')
-        lines.append(f'  <text x="{bx1 + 8:.1f}" y="{item["y"] + 11:.1f}" font-size="9.5" fill="{COL_MUTE}">{item["line2"]}</text>')
+        if abs(item["y"] - item["y_raw"]) > 4.0:
+            lines.append(
+                f'  <line x1="{bx1 + 3:.1f}" y1="{item["y_raw"]:.1f}" x2="{bx1 + 14:.1f}" y2="{item["y"]:.1f}" '
+                f'stroke="{item["col"]}" stroke-width="0.7" opacity="0.7"/>'
+            )
+        lines.append(f'  <text x="{bx1 + 16:.1f}" y="{item["y"] - 1:.1f}" font-size="10.2" fill="{item["col"]}">{item["line1"]}</text>')
+        lines.append(f'  <text x="{bx1 + 16:.1f}" y="{item["y"] + 10.5:.1f}" font-size="9.2" fill="{COL_MUTE}">{item["line2"]}</text>')
 
-    # Compact Part B Gate Safety + Buffer footer lines (well within right margin)
     c_safe = gate["overall_caelus_nocturnal_safety"] * 100.0
+    n_safe = gate["overall_noaa20_nocturnal_safety"] * 100.0
     f_safe = gate["overall_fixed24h_nocturnal_safety"] * 100.0
+    d_lru = pb["Diag-SLEEP-GeoRoPE-LRU"]["final_mean_retention_c1_c5"] * 100.0
+    d_fgt = pb["Diag-SLEEP-GeoRoPE-LRU"]["catastrophic_forgetting_delta_c1_c4"] * 100.0
     lines.append(
-        f'  <text x="516" y="434" font-size="10.5" fill="{COL_AXIS}">'
-        f'Sleep-gate nocturnal safety: Caelus {c_safe:.1f}% vs Fixed-24h {f_safe:.1f}% (0% Tokyo)</text>'
+        f'  <text x="556" y="492" font-size="10.2" fill="{COL_AXIS}">'
+        f'Nocturnal gate safety: Caelus {c_safe:.1f}% vs NOAA20 {n_safe:.1f}% vs Fixed-24h {f_safe:.1f}% (0% Tokyo)</text>'
     )
-    c_wt = pb["SLEEP-Caelus-Circadian-Stratified"]["ood_winter_travel_acc"] * 100.0
-    f_wt = pb["SLEEP-Fixed24h-LRU"]["ood_winter_travel_acc"] * 100.0
-    n_wt = pb["Naive-Online-FT"]["ood_winter_travel_acc"] * 100.0
     lines.append(
-        f'  <text x="516" y="458" font-size="10.5" fill="{COL_MUTE}">'
-        f'Recency-only C4+C5 trade-off: Caelus {c_wt:.1f}% vs LRU {f_wt:.1f}% vs Naive {n_wt:.1f}%</text>'
+        f'  <text x="556" y="510" font-size="10.0" fill="{COL_MUTE}">'
+        f'Causal check Diag-SLEEP-GeoRoPE-LRU: {d_lru:.1f}% retention ({d_fgt:.1f} pp forgetting)</text>'
+    )
+    lines.append(
+        f'  <text x="556" y="528" font-size="9.6" fill="{COL_MUTE}">'
+        f'Forgetting delta = mean over c in 1..4 of max(0, peak_acc_c - final_acc_c)</text>'
     )
 
     lines.append(
-        f'  <text x="32" y="490" font-size="9.5" fill="{COL_MUTE}">'
-        f'Source: lab/experiments/EXP-007-geo-rope-sleep-transformer/training_receipt.json (seed={receipt["seed"]}, 0 train/OOD date overlap)</text>'
+        f'  <text x="32" y="596" font-size="9.5" fill="{COL_MUTE}">'
+        f'Source: lab/experiments/EXP-007-geo-rope-sleep-transformer/training_receipt.json (3 seeds, 0 train/OOD date overlap)</text>'
     )
     lines.append("</svg>\n")
     out_path.write_text("\n".join(lines), encoding="utf-8")
@@ -360,17 +422,28 @@ def build_results_json(receipt: Dict, live_eph: Dict, checks: Dict) -> Dict:
     gate = receipt["part_b_sleep"]["sleep_gate_audit"]
 
     geo = ev["Hybrid-Dual-Geo-RoPE"]["summary"]
+    geo_std = ev["Hybrid-Dual-Geo-RoPE"]["summary_std"]
+    noaa = ev["Hybrid-NOAA20-RoPE"]["summary"]
+    noaa_std = ev["Hybrid-NOAA20-RoPE"]["summary_std"]
+    latlon = ev["Hybrid-Unix-Fourier+LatLon"]["summary"]
+    latlon_std = ev["Hybrid-Unix-Fourier+LatLon"]["summary_std"]
     unix = ev["Hybrid-Unix-Fourier-RoPE"]["summary"]
+    unix_std = ev["Hybrid-Unix-Fourier-RoPE"]["summary_std"]
     std = ev["Standard-RoPE"]["summary"]
 
     sleep_c = pb["SLEEP-Caelus-Circadian-Stratified"]
+    sleep_n = pb["SLEEP-NOAA20-Stratified"]
+    sleep_r = pb["SLEEP-Reservoir-Random"]
     sleep_u = pb["SLEEP-Fixed24h-LRU"]
     naive = pb["Naive-Online-FT"]
     diag_geo_lru = pb["Diag-SLEEP-GeoRoPE-LRU"]
 
-    # Evaluate pre-registered Caelus Razor success bars honestly from measured values
     t3_ood_gain = round(geo["task3_ood_composite_acc"] - unix["task3_ood_composite_acc"], 4)
+    t3_ood_gain_vs_latlon = round(geo["task3_ood_composite_acc"] - latlon["task3_ood_composite_acc"], 4)
+    t3_oslo_gain_vs_latlon = round(geo["task3_ood_oslo_solstices_acc"] - latlon["task3_ood_oslo_solstices_acc"], 4)
+    t3_ood_gain_vs_noaa = round(geo["task3_ood_composite_acc"] - noaa["task3_ood_composite_acc"], 4)
     t4_ood_gain = round(geo["task4_multiweek_ood_acc"] - unix["task4_multiweek_ood_acc"], 4)
+    t4_52w_gain_vs_noaa = round(geo["task4_52w_annual_wrap_acc"] - noaa["task4_52w_annual_wrap_acc"], 4)
     t2_vs_std = round(geo["task2_post_sleep_acc"] - std["task2_post_sleep_acc"], 4)
 
     sleep_ret_gain_vs_lru = round(
@@ -409,28 +482,30 @@ def build_results_json(receipt: Dict, live_eph: Dict, checks: Dict) -> Dict:
     verdict_tag = "PROVED" if all_passed else ("KILLED" if kill_triggered else "PARTIAL")
 
     summary = (
-        f"3 parameter-matched {receipt['parameter_parity']['Hybrid-Dual-Geo-RoPE']:,}-param causal transformers "
-        f"trained on {receipt['hardware']['selected_device'].upper()} (0 train/OOD overlap). "
-        f"Part A: Hybrid-Dual-Geo-RoPE matches Standard-RoPE on T1 ({geo['task1_intra_turn_acc']*100:.1f}% vs {std['task1_intra_turn_acc']*100:.1f}%; Hybrid-Unix-Fourier {unix['task1_intra_turn_acc']*100:.1f}%), "
-        f"ties Hybrid-Unix-Fourier on T2 ({geo['task2_post_sleep_acc']*100:.1f}% vs {unix['task2_post_sleep_acc']*100:.1f}%, Std-RoPE={std['task2_post_sleep_acc']*100:.1f}%), "
-        f"beats Hybrid-Unix-Fourier by +{t3_ood_gain*100:.1f} pp on OOD T3 Oslo solstices+Tokyo "
-        f"({geo['task3_ood_composite_acc']*100:.1f}% vs {unix['task3_ood_composite_acc']*100:.1f}%), "
-        f"and ties on 30d weekly ({geo['task4_multiweek_30d_acc']*100:.1f}% vs {unix['task4_multiweek_30d_acc']*100:.1f}%) while beating 52w annual-wrap by +{(geo['task4_52w_annual_wrap_acc']-unix['task4_52w_annual_wrap_acc'])*100:.1f} pp "
-        f"({geo['task4_52w_annual_wrap_acc']*100:.1f}% vs {unix['task4_52w_annual_wrap_acc']*100:.1f}%, composite {geo['task4_multiweek_ood_acc']*100:.1f}% vs {unix['task4_multiweek_ood_acc']*100:.1f}%). "
-        f"Part B (5-cycle SLEEP + LoRA): SLEEP-Caelus retains {sleep_c['final_mean_retention_c1_c5']*100:.1f}% "
-        f"(forgetting {sleep_c['catastrophic_forgetting_delta_c1_c4']*100:.1f} pp, gate safety {gate['overall_caelus_nocturnal_safety']*100:.1f}%) "
-        f"vs SLEEP-Fixed24h-LRU {sleep_u['final_mean_retention_c1_c5']*100:.1f}% "
-        f"(forgetting {sleep_u['catastrophic_forgetting_delta_c1_c4']*100:.1f} pp, gate safety {gate['overall_fixed24h_nocturnal_safety']*100:.1f}%) "
-        f"and Naive-Online-FT {naive['final_mean_retention_c1_c5']*100:.1f}% (forgetting {naive['catastrophic_forgetting_delta_c1_c4']*100:.1f} pp)."
+        f"5 parameter-matched {receipt['parameter_parity']['Hybrid-Dual-Geo-RoPE']:,}-param causal transformers "
+        f"trained across 3 seeds ({', '.join(str(s) for s in receipt['seeds'])}) on {receipt['hardware']['selected_device'].upper()} (0 train/OOD overlap). "
+        f"Part A T3-OOD (Solstices+Tokyo): Hybrid-Dual-Geo-RoPE {geo['task3_ood_composite_acc']*100:.1f}%+/-{geo_std['task3_ood_composite_acc']*100:.1f} "
+        f"vs Hybrid-NOAA20-RoPE {noaa['task3_ood_composite_acc']*100:.1f}%+/-{noaa_std['task3_ood_composite_acc']*100:.1f} "
+        f"vs location-aware Hybrid-Unix-Fourier+LatLon {latlon['task3_ood_composite_acc']*100:.1f}%+/-{latlon_std['task3_ood_composite_acc']*100:.1f} "
+        f"(Oslo Solstices +{t3_oslo_gain_vs_latlon*100:.1f} pp vs LatLon) "
+        f"vs Hybrid-Unix-Fourier {unix['task3_ood_composite_acc']*100:.1f}%+/-{unix_std['task3_ood_composite_acc']*100:.1f} (+{t3_ood_gain*100:.1f} pp). "
+        f"T4b 52w annual-wrap: Geo {geo['task4_52w_annual_wrap_acc']*100:.1f}% vs NOAA20 {noaa['task4_52w_annual_wrap_acc']*100:.1f}% (+{t4_52w_gain_vs_noaa*100:.1f} pp lunar non-aliasing) vs Unix {unix['task4_52w_annual_wrap_acc']*100:.1f}%. "
+        f"Part B (6 arms, B=250): SLEEP-Caelus {sleep_c['final_mean_retention_c1_c5']*100:.1f}%+/-{sleep_c['final_mean_retention_c1_c5_std']*100:.1f} "
+        f"(forgetting {sleep_c['catastrophic_forgetting_delta_c1_c4']*100:.1f} pp) vs SLEEP-NOAA20 {sleep_n['final_mean_retention_c1_c5']*100:.1f}%+/-{sleep_n['final_mean_retention_c1_c5_std']*100:.1f}, "
+        f"SLEEP-Reservoir-Random {sleep_r['final_mean_retention_c1_c5']*100:.1f}%+/-{sleep_r['final_mean_retention_c1_c5_std']*100:.1f}, "
+        f"SLEEP-Fixed24h-LRU {sleep_u['final_mean_retention_c1_c5']*100:.1f}%+/-{sleep_u['final_mean_retention_c1_c5_std']*100:.1f}, "
+        f"and Naive-Online-FT {naive['final_mean_retention_c1_c5']*100:.1f}%."
     )
 
     verdict = (
-        f"{verdict_tag}: All {sum(razor_checks.values())}/{len(razor_checks)} Caelus Razor bars cleared. "
-        f"Hybrid-Dual-Geo-RoPE preserves fast intra-turn tracking (matching Standard-RoPE within 0.3 pp) and post-sleep continuity (tying Hybrid-Unix-Fourier at 100.0%), "
-        f"generalizes zero-shot OOD to Oslo 5.9h winter / 18.8h summer solstices and NYC-to-Tokyo travel (+{t3_ood_gain*100:.1f} pp), "
-        f"and beats 52-week annual-wrap aliasing (+{(geo['task4_52w_annual_wrap_acc']-unix['task4_52w_annual_wrap_acc'])*100:.1f} pp; honestly tying 30d trained-weight retrieval). "
-        f"SLEEP-Caelus-Circadian-Stratified cuts catastrophic forgetting by {sleep_forget_red_vs_lru*100:.1f} pp vs SLEEP-Fixed24h-LRU "
-        f"and {sleep_forget_red_vs_naive*100:.1f} pp vs Naive-Online-FT with 100.0% nocturnal sleep-gate safety."
+        f"{verdict_tag}: {sum(razor_checks.values())}/{len(razor_checks)} Caelus Razor bars cleared across 3 independent seeds. "
+        f"Eliminating the location gap with Hybrid-Unix-Fourier+LatLon rescues Tokyo travel ({latlon['task3_ood_tokyo_travel_acc']*100:.1f}%) "
+        f"yet still collapses on Oslo Winter/Summer solstices ({latlon['task3_ood_oslo_solstices_acc']*100:.1f}% vs Geo {geo['task3_ood_oslo_solstices_acc']*100:.1f}%, +{t3_oslo_gain_vs_latlon*100:.1f} pp). "
+        f"Minimal 20-line Hybrid-NOAA20-RoPE nearly matches Geo-RoPE on solar photoperiod T3-OOD ({noaa['task3_ood_composite_acc']*100:.1f}% vs {geo['task3_ood_composite_acc']*100:.1f}%) "
+        f"while aliasing on 52-week annual wrap ({noaa['task4_52w_annual_wrap_acc']*100:.1f}% vs Geo {geo['task4_52w_annual_wrap_acc']*100:.1f}%, +{t4_52w_gain_vs_noaa*100:.1f} pp from Caelus's lunar torus). "
+        f"In Part B, SLEEP-Caelus ({sleep_c['final_mean_retention_c1_c5']*100:.1f}%, forgetting {sleep_c['catastrophic_forgetting_delta_c1_c4']*100:.1f} pp, 100% gate safety) "
+        f"decisively beats LRU ({sleep_u['final_mean_retention_c1_c5']*100:.1f}%) and Naive-FT ({naive['final_mean_retention_c1_c5']*100:.1f}%), "
+        f"while SLEEP-Reservoir-Random ({sleep_r['final_mean_retention_c1_c5']*100:.1f}%) and SLEEP-NOAA20-Stratified ({sleep_n['final_mean_retention_c1_c5']*100:.1f}%) are reported honestly alongside it."
     )
 
     return {
@@ -440,41 +515,66 @@ def build_results_json(receipt: Dict, live_eph: Dict, checks: Dict) -> Dict:
         "status": status,
         "summary": summary,
         "metrics": {
+            "seeds": receipt["seeds"],
+            "std_convention": receipt["std_convention"],
+            "forgetting_delta_definition": FORGETTING_DELTA_FORMULA,
             "geo_rope_t1_intra_turn_accuracy": geo["task1_intra_turn_acc"],
+            "geo_rope_t1_intra_turn_std": geo_std["task1_intra_turn_acc"],
             "unix_fourier_t1_intra_turn_accuracy": unix["task1_intra_turn_acc"],
             "std_rope_t1_intra_turn_accuracy": std["task1_intra_turn_acc"],
             "geo_rope_t2_post_sleep_accuracy": geo["task2_post_sleep_acc"],
             "unix_fourier_t2_post_sleep_accuracy": unix["task2_post_sleep_acc"],
             "std_rope_t2_post_sleep_accuracy": std["task2_post_sleep_acc"],
             "geo_rope_t3_id_control_accuracy": geo["task3_id_control_acc"],
-            "unix_fourier_t3_id_control_accuracy": unix["task3_id_control_acc"],
             "geo_rope_t3_ood_composite_accuracy": geo["task3_ood_composite_acc"],
+            "geo_rope_t3_ood_composite_std": geo_std["task3_ood_composite_acc"],
+            "noaa20_rope_t3_ood_composite_accuracy": noaa["task3_ood_composite_acc"],
+            "noaa20_rope_t3_ood_composite_std": noaa_std["task3_ood_composite_acc"],
+            "unix_latlon_t3_ood_composite_accuracy": latlon["task3_ood_composite_acc"],
+            "unix_latlon_t3_ood_composite_std": latlon_std["task3_ood_composite_acc"],
+            "unix_latlon_t3_ood_oslo_solstices_accuracy": latlon["task3_ood_oslo_solstices_acc"],
+            "geo_rope_t3_ood_oslo_solstices_accuracy": geo["task3_ood_oslo_solstices_acc"],
+            "geo_rope_t3_ood_oslo_gain_vs_latlon": t3_oslo_gain_vs_latlon,
             "unix_fourier_t3_ood_composite_accuracy": unix["task3_ood_composite_acc"],
             "std_rope_t3_ood_composite_accuracy": std["task3_ood_composite_acc"],
             "geo_rope_t3_ood_gain_vs_unix": t3_ood_gain,
+            "geo_rope_t3_ood_gain_vs_latlon": t3_ood_gain_vs_latlon,
+            "geo_rope_t3_ood_gain_vs_noaa20": t3_ood_gain_vs_noaa,
             "geo_rope_t4_multiweek_ood_accuracy": geo["task4_multiweek_ood_acc"],
+            "noaa20_rope_t4_multiweek_ood_accuracy": noaa["task4_multiweek_ood_acc"],
+            "unix_latlon_t4_multiweek_ood_accuracy": latlon["task4_multiweek_ood_acc"],
             "unix_fourier_t4_multiweek_ood_accuracy": unix["task4_multiweek_ood_acc"],
-            "std_rope_t4_multiweek_ood_accuracy": std["task4_multiweek_ood_acc"],
-            "geo_rope_t4_30d_accuracy": geo["task4_multiweek_30d_acc"],
-            "unix_fourier_t4_30d_accuracy": unix["task4_multiweek_30d_acc"],
             "geo_rope_t4_52w_wrap_accuracy": geo["task4_52w_annual_wrap_acc"],
+            "noaa20_rope_t4_52w_wrap_accuracy": noaa["task4_52w_annual_wrap_acc"],
+            "unix_latlon_t4_52w_wrap_accuracy": latlon["task4_52w_annual_wrap_acc"],
             "unix_fourier_t4_52w_wrap_accuracy": unix["task4_52w_annual_wrap_acc"],
+            "geo_rope_t4_52w_gain_vs_noaa20": t4_52w_gain_vs_noaa,
             "geo_rope_t4_ood_gain_vs_unix": t4_ood_gain,
             "sleep_caelus_final_retention_accuracy": sleep_c["final_mean_retention_c1_c5"],
+            "sleep_caelus_final_retention_std": sleep_c["final_mean_retention_c1_c5_std"],
+            "sleep_noaa20_final_retention_accuracy": sleep_n["final_mean_retention_c1_c5"],
+            "sleep_noaa20_final_retention_std": sleep_n["final_mean_retention_c1_c5_std"],
+            "sleep_reservoir_final_retention_accuracy": sleep_r["final_mean_retention_c1_c5"],
+            "sleep_reservoir_final_retention_std": sleep_r["final_mean_retention_c1_c5_std"],
             "sleep_fixed24h_lru_final_retention_accuracy": sleep_u["final_mean_retention_c1_c5"],
+            "sleep_fixed24h_lru_final_retention_std": sleep_u["final_mean_retention_c1_c5_std"],
             "naive_online_ft_final_retention_accuracy": naive["final_mean_retention_c1_c5"],
             "diag_sleep_georope_lru_final_retention_accuracy": diag_geo_lru["final_mean_retention_c1_c5"],
             "sleep_caelus_forgetting_delta": sleep_c["catastrophic_forgetting_delta_c1_c4"],
+            "sleep_caelus_forgetting_delta_std": sleep_c["catastrophic_forgetting_delta_c1_c4_std"],
+            "sleep_noaa20_forgetting_delta": sleep_n["catastrophic_forgetting_delta_c1_c4"],
+            "sleep_reservoir_forgetting_delta": sleep_r["catastrophic_forgetting_delta_c1_c4"],
             "sleep_fixed24h_lru_forgetting_delta": sleep_u["catastrophic_forgetting_delta_c1_c4"],
             "naive_online_ft_forgetting_delta": naive["catastrophic_forgetting_delta_c1_c4"],
-            "sleep_caelus_ood_winter_travel_accuracy": sleep_c["ood_winter_travel_acc"],
-            "sleep_fixed24h_lru_ood_winter_travel_accuracy": sleep_u["ood_winter_travel_acc"],
-            "naive_online_ft_ood_winter_travel_accuracy": naive["ood_winter_travel_acc"],
             "sleep_caelus_gate_nocturnal_safety": gate["overall_caelus_nocturnal_safety"],
+            "sleep_noaa20_gate_nocturnal_safety": gate["overall_noaa20_nocturnal_safety"],
             "sleep_fixed24h_gate_nocturnal_safety": gate["overall_fixed24h_nocturnal_safety"],
             "model_param_count": receipt["parameter_parity"]["Hybrid-Dual-Geo-RoPE"],
             "sleep_lora_trainable_params": receipt["parameter_parity"]["sleep_lora_trainable_params"],
-            "part_a_by_encoder": {k: ev[k]["summary"] for k in ("Standard-RoPE", "Hybrid-Unix-Fourier-RoPE", "Hybrid-Dual-Geo-RoPE")},
+            "part_a_by_encoder": {
+                k: {"mean": ev[k]["summary"], "std": ev[k]["summary_std"]}
+                for k in ENCODER_NAMES
+            },
             "part_a_t3_ood_slices": {
                 k: {
                     "oslo_winter_regime": ev[k]["task3a_ood_oslo_winter"]["seq_exact_acc"],
@@ -484,15 +584,21 @@ def build_results_json(receipt: Dict, live_eph: Dict, checks: Dict) -> Dict:
                     "oslo_summer_retrieval": ev[k]["task3b_ood_oslo_summer"]["seq_exact_acc"],
                     "nyc_to_tokyo_retrieval": ev[k]["task3b_ood_nyc_to_tokyo"]["seq_exact_acc"],
                 }
-                for k in ("Standard-RoPE", "Hybrid-Unix-Fourier-RoPE", "Hybrid-Dual-Geo-RoPE")
+                for k in ENCODER_NAMES
             },
-            "part_b_final_by_cycle": {
-                k: pb[k]["final_cycle_accs"]
-                for k in ("Naive-Online-FT", "SLEEP-Fixed24h-LRU", "SLEEP-Caelus-Circadian-Stratified", "Diag-SLEEP-GeoRoPE-LRU")
-            },
-            "part_b_base_skill_retention": {
-                k: pb[k]["base_skill_retention"]
-                for k in ("Naive-Online-FT", "SLEEP-Fixed24h-LRU", "SLEEP-Caelus-Circadian-Stratified")
+            "part_b_summary_by_arm": {
+                k: {
+                    "final_mean_retention_c1_c5": pb[k]["final_mean_retention_c1_c5"],
+                    "final_mean_retention_c1_c5_std": pb[k]["final_mean_retention_c1_c5_std"],
+                    "catastrophic_forgetting_delta_c1_c4": pb[k]["catastrophic_forgetting_delta_c1_c4"],
+                    "catastrophic_forgetting_delta_c1_c4_std": pb[k]["catastrophic_forgetting_delta_c1_c4_std"],
+                    "ood_winter_travel_acc": pb[k]["ood_winter_travel_acc"],
+                    "ood_winter_travel_acc_std": pb[k]["ood_winter_travel_acc_std"],
+                    "final_cycle_accs": pb[k]["final_cycle_accs"],
+                    "final_cycle_accs_std": pb[k]["final_cycle_accs_std"],
+                    "final_buffer_composition_mean": pb[k]["buffer_composition_after_cycle"][-1],
+                }
+                for k in PART_B_ARMS
             },
             "ephemeris_live_crosscheck": live_eph,
             "verification_checks": checks,

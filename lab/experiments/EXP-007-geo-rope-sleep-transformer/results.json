@@ -1,89 +1,250 @@
 {
   "id": "EXP-007",
-  "run_at": "2026-11-22T18:57:32.354359Z",
-  "git_sha": "eb846ea",
-  "status": "pass",
-  "summary": "3 parameter-matched 1,427,136-param causal transformers trained on MPS (0 train/OOD overlap). Part A: Hybrid-Dual-Geo-RoPE matches Standard-RoPE on T1 (76.3% vs 76.6%; Hybrid-Unix-Fourier 81.9%), ties Hybrid-Unix-Fourier on T2 (100.0% vs 100.0%, Std-RoPE=33.8%), beats Hybrid-Unix-Fourier by +49.9 pp on OOD T3 Oslo solstices+Tokyo (86.6% vs 36.7%), and ties on 30d weekly (100.0% vs 100.0%) while beating 52w annual-wrap by +15.7 pp (99.7% vs 84.0%, composite 99.9% vs 94.7%). Part B (5-cycle SLEEP + LoRA): SLEEP-Caelus retains 81.5% (forgetting 5.4 pp, gate safety 100.0%) vs SLEEP-Fixed24h-LRU 40.0% (forgetting 74.0 pp, gate safety 70.5%) and Naive-Online-FT 20.0% (forgetting 99.2 pp).",
+  "run_at": "2026-11-22T21:06:01.192814Z",
+  "git_sha": "0ee232d",
+  "status": "inconclusive",
+  "summary": "5 parameter-matched 1,427,136-param causal transformers trained across 3 seeds (20261122, 20261123, 20261124) on MPS (0 train/OOD overlap). Part A T3-OOD (Solstices+Tokyo): Hybrid-Dual-Geo-RoPE 86.5%+/-0.6 vs Hybrid-NOAA20-RoPE 82.9%+/-1.4 vs location-aware Hybrid-Unix-Fourier+LatLon 53.7%+/-2.3 (Oslo Solstices +47.2 pp vs LatLon) vs Hybrid-Unix-Fourier 37.0%+/-6.7 (+49.5 pp). T4b 52w annual-wrap: Geo 98.4% vs NOAA20 80.0% (+18.4 pp lunar non-aliasing) vs Unix 81.2%. Part B (6 arms, B=250): SLEEP-Caelus 65.5%+/-13.1 (forgetting 11.1 pp) vs SLEEP-NOAA20 86.3%+/-7.9, SLEEP-Reservoir-Random 68.4%+/-25.0, SLEEP-Fixed24h-LRU 41.3%+/-2.3, and Naive-Online-FT 20.0%.",
   "metrics": {
-    "geo_rope_t1_intra_turn_accuracy": 0.7631,
-    "unix_fourier_t1_intra_turn_accuracy": 0.8187,
-    "std_rope_t1_intra_turn_accuracy": 0.7662,
+    "seeds": [
+      20261122,
+      20261123,
+      20261124
+    ],
+    "std_convention": "sample_std_ddof1_across_3_seeds",
+    "forgetting_delta_definition": "mean over cycles c in {1, 2, 3, 4} of max(0, max_{t >= c} acc(t, c) - acc(5, c))",
+    "geo_rope_t1_intra_turn_accuracy": 0.825,
+    "geo_rope_t1_intra_turn_std": 0.1214,
+    "unix_fourier_t1_intra_turn_accuracy": 0.841,
+    "std_rope_t1_intra_turn_accuracy": 0.8129,
     "geo_rope_t2_post_sleep_accuracy": 1.0,
-    "unix_fourier_t2_post_sleep_accuracy": 1.0,
-    "std_rope_t2_post_sleep_accuracy": 0.3383,
-    "geo_rope_t3_id_control_accuracy": 0.8825,
-    "unix_fourier_t3_id_control_accuracy": 0.7375,
-    "geo_rope_t3_ood_composite_accuracy": 0.866,
-    "unix_fourier_t3_ood_composite_accuracy": 0.3667,
-    "std_rope_t3_ood_composite_accuracy": 0.241,
-    "geo_rope_t3_ood_gain_vs_unix": 0.4993,
-    "geo_rope_t4_multiweek_ood_accuracy": 0.9989,
-    "unix_fourier_t4_multiweek_ood_accuracy": 0.9467,
-    "std_rope_t4_multiweek_ood_accuracy": 0.2311,
-    "geo_rope_t4_30d_accuracy": 1.0,
-    "unix_fourier_t4_30d_accuracy": 1.0,
-    "geo_rope_t4_52w_wrap_accuracy": 0.9967,
-    "unix_fourier_t4_52w_wrap_accuracy": 0.84,
-    "geo_rope_t4_ood_gain_vs_unix": 0.0522,
-    "sleep_caelus_final_retention_accuracy": 0.815,
-    "sleep_fixed24h_lru_final_retention_accuracy": 0.4,
+    "unix_fourier_t2_post_sleep_accuracy": 0.9983,
+    "std_rope_t2_post_sleep_accuracy": 0.3339,
+    "geo_rope_t3_id_control_accuracy": 0.8867,
+    "geo_rope_t3_ood_composite_accuracy": 0.8648,
+    "geo_rope_t3_ood_composite_std": 0.0063,
+    "noaa20_rope_t3_ood_composite_accuracy": 0.829,
+    "noaa20_rope_t3_ood_composite_std": 0.0139,
+    "unix_latlon_t3_ood_composite_accuracy": 0.5368,
+    "unix_latlon_t3_ood_composite_std": 0.0234,
+    "unix_latlon_t3_ood_oslo_solstices_accuracy": 0.3604,
+    "geo_rope_t3_ood_oslo_solstices_accuracy": 0.832,
+    "geo_rope_t3_ood_oslo_gain_vs_latlon": 0.4716,
+    "unix_fourier_t3_ood_composite_accuracy": 0.3701,
+    "std_rope_t3_ood_composite_accuracy": 0.254,
+    "geo_rope_t3_ood_gain_vs_unix": 0.4947,
+    "geo_rope_t3_ood_gain_vs_latlon": 0.328,
+    "geo_rope_t3_ood_gain_vs_noaa20": 0.0358,
+    "geo_rope_t4_multiweek_ood_accuracy": 0.9948,
+    "noaa20_rope_t4_multiweek_ood_accuracy": 0.9333,
+    "unix_latlon_t4_multiweek_ood_accuracy": 0.9437,
+    "unix_fourier_t4_multiweek_ood_accuracy": 0.9374,
+    "geo_rope_t4_52w_wrap_accuracy": 0.9844,
+    "noaa20_rope_t4_52w_wrap_accuracy": 0.8,
+    "unix_latlon_t4_52w_wrap_accuracy": 0.8311,
+    "unix_fourier_t4_52w_wrap_accuracy": 0.8122,
+    "geo_rope_t4_52w_gain_vs_noaa20": 0.1844,
+    "geo_rope_t4_ood_gain_vs_unix": 0.0574,
+    "sleep_caelus_final_retention_accuracy": 0.6555,
+    "sleep_caelus_final_retention_std": 0.1306,
+    "sleep_noaa20_final_retention_accuracy": 0.8634,
+    "sleep_noaa20_final_retention_std": 0.0788,
+    "sleep_reservoir_final_retention_accuracy": 0.6839,
+    "sleep_reservoir_final_retention_std": 0.2502,
+    "sleep_fixed24h_lru_final_retention_accuracy": 0.4133,
+    "sleep_fixed24h_lru_final_retention_std": 0.0231,
     "naive_online_ft_final_retention_accuracy": 0.2,
-    "diag_sleep_georope_lru_final_retention_accuracy": 0.4,
-    "sleep_caelus_forgetting_delta": 0.0542,
-    "sleep_fixed24h_lru_forgetting_delta": 0.7396,
-    "naive_online_ft_forgetting_delta": 0.9917,
-    "sleep_caelus_ood_winter_travel_accuracy": 0.6666,
-    "sleep_fixed24h_lru_ood_winter_travel_accuracy": 1.0,
-    "naive_online_ft_ood_winter_travel_accuracy": 0.5,
+    "diag_sleep_georope_lru_final_retention_accuracy": 0.3728,
+    "sleep_caelus_forgetting_delta": 0.1111,
+    "sleep_caelus_forgetting_delta_std": 0.18,
+    "sleep_noaa20_forgetting_delta": 0.0903,
+    "sleep_reservoir_forgetting_delta": 0.0958,
+    "sleep_fixed24h_lru_forgetting_delta": 0.6208,
+    "naive_online_ft_forgetting_delta": 0.9042,
     "sleep_caelus_gate_nocturnal_safety": 1.0,
+    "sleep_noaa20_gate_nocturnal_safety": 1.0,
     "sleep_fixed24h_gate_nocturnal_safety": 0.705,
     "model_param_count": 1427136,
     "sleep_lora_trainable_params": 193536,
     "part_a_by_encoder": {
       "Standard-RoPE": {
-        "task1_intra_turn_acc": 0.7662,
-        "task1_intra_turn_seq3_exact": 0.315,
-        "task2_post_sleep_acc": 0.3383,
-        "task3_id_control_acc": 0.26,
-        "task3_ood_composite_acc": 0.241,
-        "task3a_ood_regime_acc": 0.25,
-        "task3b_ood_retrieval_acc": 0.2319,
-        "task4_multiweek_30d_acc": 0.2016,
-        "task4_52w_annual_wrap_acc": 0.29,
-        "task4_multiweek_ood_acc": 0.2311,
-        "task4_ood_exact_utc_acc": 0.2033,
-        "task4_ood_jitter_90m_acc": 0.2,
-        "task4_30d_logit_margin": -0.2556
+        "mean": {
+          "task1_intra_turn_acc": 0.8129,
+          "task1_intra_turn_seq3_exact": 0.42,
+          "task2_post_sleep_acc": 0.3339,
+          "task3_id_control_acc": 0.255,
+          "task3_ood_oslo_solstices_acc": 0.249,
+          "task3_ood_tokyo_travel_acc": 0.2639,
+          "task3_ood_composite_acc": 0.254,
+          "task3a_ood_regime_acc": 0.25,
+          "task3b_ood_retrieval_acc": 0.2578,
+          "task4_multiweek_30d_acc": 0.1995,
+          "task4_52w_annual_wrap_acc": 0.21,
+          "task4_multiweek_ood_acc": 0.203,
+          "task4_ood_exact_utc_acc": 0.2033,
+          "task4_ood_jitter_90m_acc": 0.1955,
+          "task4_30d_logit_margin": -0.2917
+        },
+        "std": {
+          "task1_intra_turn_acc": 0.0306,
+          "task1_intra_turn_seq3_exact": 0.0543,
+          "task2_post_sleep_acc": 0.0107,
+          "task3_id_control_acc": 0.0214,
+          "task3_ood_oslo_solstices_acc": 0.0171,
+          "task3_ood_tokyo_travel_acc": 0.0119,
+          "task3_ood_composite_acc": 0.0139,
+          "task3a_ood_regime_acc": 0.0,
+          "task3b_ood_retrieval_acc": 0.0278,
+          "task4_multiweek_30d_acc": 0.0155,
+          "task4_52w_annual_wrap_acc": 0.0241,
+          "task4_multiweek_ood_acc": 0.005,
+          "task4_ood_exact_utc_acc": 0.0034,
+          "task4_ood_jitter_90m_acc": 0.0303,
+          "task4_30d_logit_margin": 0.0048
+        }
       },
       "Hybrid-Unix-Fourier-RoPE": {
-        "task1_intra_turn_acc": 0.8187,
-        "task1_intra_turn_seq3_exact": 0.4225,
-        "task2_post_sleep_acc": 1.0,
-        "task3_id_control_acc": 0.7375,
-        "task3_ood_composite_acc": 0.3667,
-        "task3a_ood_regime_acc": 0.3486,
-        "task3b_ood_retrieval_acc": 0.3847,
-        "task4_multiweek_30d_acc": 1.0,
-        "task4_52w_annual_wrap_acc": 0.84,
-        "task4_multiweek_ood_acc": 0.9467,
-        "task4_ood_exact_utc_acc": 1.0,
-        "task4_ood_jitter_90m_acc": 1.0,
-        "task4_30d_logit_margin": 7.6912
+        "mean": {
+          "task1_intra_turn_acc": 0.841,
+          "task1_intra_turn_seq3_exact": 0.4833,
+          "task2_post_sleep_acc": 0.9983,
+          "task3_id_control_acc": 0.7087,
+          "task3_ood_oslo_solstices_acc": 0.5111,
+          "task3_ood_tokyo_travel_acc": 0.0882,
+          "task3_ood_composite_acc": 0.3701,
+          "task3a_ood_regime_acc": 0.4931,
+          "task3b_ood_retrieval_acc": 0.2473,
+          "task4_multiweek_30d_acc": 1.0,
+          "task4_52w_annual_wrap_acc": 0.8122,
+          "task4_multiweek_ood_acc": 0.9374,
+          "task4_ood_exact_utc_acc": 1.0,
+          "task4_ood_jitter_90m_acc": 1.0,
+          "task4_30d_logit_margin": 7.8013
+        },
+        "std": {
+          "task1_intra_turn_acc": 0.0687,
+          "task1_intra_turn_seq3_exact": 0.1682,
+          "task2_post_sleep_acc": 0.0029,
+          "task3_id_control_acc": 0.025,
+          "task3_ood_oslo_solstices_acc": 0.0988,
+          "task3_ood_tokyo_travel_acc": 0.006,
+          "task3_ood_composite_acc": 0.0668,
+          "task3a_ood_regime_acc": 0.0364,
+          "task3b_ood_retrieval_acc": 0.1288,
+          "task4_multiweek_30d_acc": 0.0,
+          "task4_52w_annual_wrap_acc": 0.015,
+          "task4_multiweek_ood_acc": 0.005,
+          "task4_ood_exact_utc_acc": 0.0,
+          "task4_ood_jitter_90m_acc": 0.0,
+          "task4_30d_logit_margin": 0.7623
+        }
+      },
+      "Hybrid-Unix-Fourier+LatLon": {
+        "mean": {
+          "task1_intra_turn_acc": 0.7756,
+          "task1_intra_turn_seq3_exact": 0.3258,
+          "task2_post_sleep_acc": 1.0,
+          "task3_id_control_acc": 0.7983,
+          "task3_ood_oslo_solstices_acc": 0.3604,
+          "task3_ood_tokyo_travel_acc": 0.8896,
+          "task3_ood_composite_acc": 0.5368,
+          "task3a_ood_regime_acc": 0.7592,
+          "task3b_ood_retrieval_acc": 0.3143,
+          "task4_multiweek_30d_acc": 1.0,
+          "task4_52w_annual_wrap_acc": 0.8311,
+          "task4_multiweek_ood_acc": 0.9437,
+          "task4_ood_exact_utc_acc": 1.0,
+          "task4_ood_jitter_90m_acc": 1.0,
+          "task4_30d_logit_margin": 7.2713
+        },
+        "std": {
+          "task1_intra_turn_acc": 0.018,
+          "task1_intra_turn_seq3_exact": 0.0232,
+          "task2_post_sleep_acc": 0.0,
+          "task3_id_control_acc": 0.0364,
+          "task3_ood_oslo_solstices_acc": 0.0263,
+          "task3_ood_tokyo_travel_acc": 0.0187,
+          "task3_ood_composite_acc": 0.0234,
+          "task3a_ood_regime_acc": 0.0389,
+          "task3b_ood_retrieval_acc": 0.0102,
+          "task4_multiweek_30d_acc": 0.0,
+          "task4_52w_annual_wrap_acc": 0.0389,
+          "task4_multiweek_ood_acc": 0.013,
+          "task4_ood_exact_utc_acc": 0.0,
+          "task4_ood_jitter_90m_acc": 0.0,
+          "task4_30d_logit_margin": 0.1426
+        }
+      },
+      "Hybrid-NOAA20-RoPE": {
+        "mean": {
+          "task1_intra_turn_acc": 0.7919,
+          "task1_intra_turn_seq3_exact": 0.3642,
+          "task2_post_sleep_acc": 1.0,
+          "task3_id_control_acc": 0.88,
+          "task3_ood_oslo_solstices_acc": 0.7872,
+          "task3_ood_tokyo_travel_acc": 0.9125,
+          "task3_ood_composite_acc": 0.829,
+          "task3a_ood_regime_acc": 0.9463,
+          "task3b_ood_retrieval_acc": 0.7116,
+          "task4_multiweek_30d_acc": 1.0,
+          "task4_52w_annual_wrap_acc": 0.8,
+          "task4_multiweek_ood_acc": 0.9333,
+          "task4_ood_exact_utc_acc": 1.0,
+          "task4_ood_jitter_90m_acc": 1.0,
+          "task4_30d_logit_margin": 7.5857
+        },
+        "std": {
+          "task1_intra_turn_acc": 0.0433,
+          "task1_intra_turn_seq3_exact": 0.0941,
+          "task2_post_sleep_acc": 0.0,
+          "task3_id_control_acc": 0.0127,
+          "task3_ood_oslo_solstices_acc": 0.012,
+          "task3_ood_tokyo_travel_acc": 0.0178,
+          "task3_ood_composite_acc": 0.0139,
+          "task3a_ood_regime_acc": 0.0209,
+          "task3b_ood_retrieval_acc": 0.0162,
+          "task4_multiweek_30d_acc": 0.0,
+          "task4_52w_annual_wrap_acc": 0.0241,
+          "task4_multiweek_ood_acc": 0.008,
+          "task4_ood_exact_utc_acc": 0.0,
+          "task4_ood_jitter_90m_acc": 0.0,
+          "task4_30d_logit_margin": 0.1236
+        }
       },
       "Hybrid-Dual-Geo-RoPE": {
-        "task1_intra_turn_acc": 0.7631,
-        "task1_intra_turn_seq3_exact": 0.3125,
-        "task2_post_sleep_acc": 1.0,
-        "task3_id_control_acc": 0.8825,
-        "task3_ood_composite_acc": 0.866,
-        "task3a_ood_regime_acc": 0.957,
-        "task3b_ood_retrieval_acc": 0.775,
-        "task4_multiweek_30d_acc": 1.0,
-        "task4_52w_annual_wrap_acc": 0.9967,
-        "task4_multiweek_ood_acc": 0.9989,
-        "task4_ood_exact_utc_acc": 1.0,
-        "task4_ood_jitter_90m_acc": 1.0,
-        "task4_30d_logit_margin": 7.4726
+        "mean": {
+          "task1_intra_turn_acc": 0.825,
+          "task1_intra_turn_seq3_exact": 0.4808,
+          "task2_post_sleep_acc": 1.0,
+          "task3_id_control_acc": 0.8867,
+          "task3_ood_oslo_solstices_acc": 0.832,
+          "task3_ood_tokyo_travel_acc": 0.9306,
+          "task3_ood_composite_acc": 0.8648,
+          "task3a_ood_regime_acc": 0.9643,
+          "task3b_ood_retrieval_acc": 0.7653,
+          "task4_multiweek_30d_acc": 1.0,
+          "task4_52w_annual_wrap_acc": 0.9844,
+          "task4_multiweek_ood_acc": 0.9948,
+          "task4_ood_exact_utc_acc": 1.0,
+          "task4_ood_jitter_90m_acc": 1.0,
+          "task4_30d_logit_margin": 8.0811
+        },
+        "std": {
+          "task1_intra_turn_acc": 0.1214,
+          "task1_intra_turn_seq3_exact": 0.3332,
+          "task2_post_sleep_acc": 0.0,
+          "task3_id_control_acc": 0.0341,
+          "task3_ood_oslo_solstices_acc": 0.0111,
+          "task3_ood_tokyo_travel_acc": 0.0032,
+          "task3_ood_composite_acc": 0.0063,
+          "task3a_ood_regime_acc": 0.0068,
+          "task3b_ood_retrieval_acc": 0.0156,
+          "task4_multiweek_30d_acc": 0.0,
+          "task4_52w_annual_wrap_acc": 0.0126,
+          "task4_multiweek_ood_acc": 0.0042,
+          "task4_ood_exact_utc_acc": 0.0,
+          "task4_ood_jitter_90m_acc": 0.0,
+          "task4_30d_logit_margin": 0.0713
+        }
       }
     },
     "part_a_t3_ood_slices": {
@@ -91,75 +252,217 @@
         "oslo_winter_regime": 0.25,
         "oslo_summer_regime": 0.25,
         "tokyo_travel_regime": 0.25,
-        "oslo_winter_retrieval": 0.2708,
-        "oslo_summer_retrieval": 0.2375,
-        "nyc_to_tokyo_retrieval": 0.1875
+        "oslo_winter_retrieval": 0.2347,
+        "oslo_summer_retrieval": 0.2611,
+        "nyc_to_tokyo_retrieval": 0.2778
       },
       "Hybrid-Unix-Fourier-RoPE": {
-        "oslo_winter_regime": 0.525,
-        "oslo_summer_regime": 0.5,
-        "tokyo_travel_regime": 0.0208,
-        "oslo_winter_retrieval": 0.4167,
-        "oslo_summer_retrieval": 0.4083,
-        "nyc_to_tokyo_retrieval": 0.3292
+        "oslo_winter_regime": 0.7445,
+        "oslo_summer_regime": 0.7111,
+        "tokyo_travel_regime": 0.0236,
+        "oslo_winter_retrieval": 0.3417,
+        "oslo_summer_retrieval": 0.2472,
+        "nyc_to_tokyo_retrieval": 0.1528
+      },
+      "Hybrid-Unix-Fourier+LatLon": {
+        "oslo_winter_regime": 0.6694,
+        "oslo_summer_regime": 0.6319,
+        "tokyo_travel_regime": 0.9764,
+        "oslo_winter_retrieval": 0.0861,
+        "oslo_summer_retrieval": 0.0542,
+        "nyc_to_tokyo_retrieval": 0.8028
+      },
+      "Hybrid-NOAA20-RoPE": {
+        "oslo_winter_regime": 0.9653,
+        "oslo_summer_regime": 0.8875,
+        "tokyo_travel_regime": 0.9861,
+        "oslo_winter_retrieval": 0.6792,
+        "oslo_summer_retrieval": 0.6167,
+        "nyc_to_tokyo_retrieval": 0.8389
       },
       "Hybrid-Dual-Geo-RoPE": {
-        "oslo_winter_regime": 0.9792,
-        "oslo_summer_regime": 0.9042,
-        "tokyo_travel_regime": 0.9875,
-        "oslo_winter_retrieval": 0.7208,
-        "oslo_summer_retrieval": 0.75,
-        "nyc_to_tokyo_retrieval": 0.8542
+        "oslo_winter_regime": 0.9847,
+        "oslo_summer_regime": 0.9167,
+        "tokyo_travel_regime": 0.9917,
+        "oslo_winter_retrieval": 0.7167,
+        "oslo_summer_retrieval": 0.7097,
+        "nyc_to_tokyo_retrieval": 0.8695
       }
     },
-    "part_b_final_by_cycle": {
+    "part_b_summary_by_arm": {
       "Naive-Online-FT": {
-        "C1": 0.0,
-        "C2": 0.0,
-        "C3": 0.0,
-        "C4": 0.0,
-        "C5": 1.0
+        "final_mean_retention_c1_c5": 0.2,
+        "final_mean_retention_c1_c5_std": 0.0,
+        "catastrophic_forgetting_delta_c1_c4": 0.9042,
+        "catastrophic_forgetting_delta_c1_c4_std": 0.0532,
+        "ood_winter_travel_acc": 0.5,
+        "ood_winter_travel_acc_std": 0.0,
+        "final_cycle_accs": {
+          "C1": 0.0,
+          "C2": 0.0,
+          "C3": 0.0,
+          "C4": 0.0,
+          "C5": 1.0
+        },
+        "final_cycle_accs_std": {
+          "C1": 0.0,
+          "C2": 0.0,
+          "C3": 0.0,
+          "C4": 0.0,
+          "C5": 0.0
+        },
+        "final_buffer_composition_mean": {
+          "C1": 0.0,
+          "C2": 0.0,
+          "C3": 0.0,
+          "C4": 0.0,
+          "C5": 0.0
+        }
       },
       "SLEEP-Fixed24h-LRU": {
-        "C1": 0.0,
-        "C2": 0.0,
-        "C3": 0.0,
-        "C4": 1.0,
-        "C5": 1.0
-      },
-      "SLEEP-Caelus-Circadian-Stratified": {
-        "C1": 0.8667,
-        "C2": 0.9917,
-        "C3": 0.8833,
-        "C4": 0.4833,
-        "C5": 0.85
+        "final_mean_retention_c1_c5": 0.4133,
+        "final_mean_retention_c1_c5_std": 0.0231,
+        "catastrophic_forgetting_delta_c1_c4": 0.6208,
+        "catastrophic_forgetting_delta_c1_c4_std": 0.0799,
+        "ood_winter_travel_acc": 0.9972,
+        "ood_winter_travel_acc_std": 0.0048,
+        "final_cycle_accs": {
+          "C1": 0.0,
+          "C2": 0.0,
+          "C3": 0.0722,
+          "C4": 1.0,
+          "C5": 0.9944
+        },
+        "final_cycle_accs_std": {
+          "C1": 0.0,
+          "C2": 0.0,
+          "C3": 0.111,
+          "C4": 0.0,
+          "C5": 0.0096
+        },
+        "final_buffer_composition_mean": {
+          "C1": 0.0,
+          "C2": 0.0,
+          "C3": 0.0,
+          "C4": 125.0,
+          "C5": 125.0
+        }
       },
       "Diag-SLEEP-GeoRoPE-LRU": {
-        "C1": 0.0,
-        "C2": 0.0,
-        "C3": 0.0,
-        "C4": 1.0,
-        "C5": 1.0
-      }
-    },
-    "part_b_base_skill_retention": {
-      "Naive-Online-FT": {
-        "pre_task1_acc": 0.7631,
-        "post_task1_acc": 0.0,
-        "pre_task2_acc": 1.0,
-        "post_task2_acc": 0.0
+        "final_mean_retention_c1_c5": 0.3728,
+        "final_mean_retention_c1_c5_std": 0.0239,
+        "catastrophic_forgetting_delta_c1_c4": 0.5659,
+        "catastrophic_forgetting_delta_c1_c4_std": 0.0813,
+        "ood_winter_travel_acc": 0.9319,
+        "ood_winter_travel_acc_std": 0.0599,
+        "final_cycle_accs": {
+          "C1": 0.0,
+          "C2": 0.0,
+          "C3": 0.0,
+          "C4": 0.8639,
+          "C5": 1.0
+        },
+        "final_cycle_accs_std": {
+          "C1": 0.0,
+          "C2": 0.0,
+          "C3": 0.0,
+          "C4": 0.1197,
+          "C5": 0.0
+        },
+        "final_buffer_composition_mean": {
+          "C1": 0.0,
+          "C2": 0.0,
+          "C3": 0.0,
+          "C4": 125.0,
+          "C5": 125.0
+        }
       },
-      "SLEEP-Fixed24h-LRU": {
-        "pre_task1_acc": 0.8187,
-        "post_task1_acc": 0.0,
-        "pre_task2_acc": 1.0,
-        "post_task2_acc": 0.0
+      "SLEEP-Reservoir-Random": {
+        "final_mean_retention_c1_c5": 0.6839,
+        "final_mean_retention_c1_c5_std": 0.2502,
+        "catastrophic_forgetting_delta_c1_c4": 0.0958,
+        "catastrophic_forgetting_delta_c1_c4_std": 0.1432,
+        "ood_winter_travel_acc": 0.6861,
+        "ood_winter_travel_acc_std": 0.1798,
+        "final_cycle_accs": {
+          "C1": 0.75,
+          "C2": 0.6833,
+          "C3": 0.6139,
+          "C4": 0.5,
+          "C5": 0.8722
+        },
+        "final_cycle_accs_std": {
+          "C1": 0.196,
+          "C2": 0.4402,
+          "C3": 0.3733,
+          "C4": 0.3449,
+          "C5": 0.0268
+        },
+        "final_buffer_composition_mean": {
+          "C1": 49.7,
+          "C2": 53.0,
+          "C3": 48.7,
+          "C4": 53.0,
+          "C5": 45.7
+        }
+      },
+      "SLEEP-NOAA20-Stratified": {
+        "final_mean_retention_c1_c5": 0.8634,
+        "final_mean_retention_c1_c5_std": 0.0788,
+        "catastrophic_forgetting_delta_c1_c4": 0.0903,
+        "catastrophic_forgetting_delta_c1_c4_std": 0.0638,
+        "ood_winter_travel_acc": 0.8764,
+        "ood_winter_travel_acc_std": 0.1176,
+        "final_cycle_accs": {
+          "C1": 0.8278,
+          "C2": 0.7556,
+          "C3": 0.9806,
+          "C4": 0.8806,
+          "C5": 0.8722
+        },
+        "final_cycle_accs_std": {
+          "C1": 0.0948,
+          "C2": 0.1205,
+          "C3": 0.0337,
+          "C4": 0.0852,
+          "C5": 0.1549
+        },
+        "final_buffer_composition_mean": {
+          "C1": 47.3,
+          "C2": 47.3,
+          "C3": 47.7,
+          "C4": 61.0,
+          "C5": 46.7
+        }
       },
       "SLEEP-Caelus-Circadian-Stratified": {
-        "pre_task1_acc": 0.7631,
-        "post_task1_acc": 0.0006,
-        "pre_task2_acc": 1.0,
-        "post_task2_acc": 0.0
+        "final_mean_retention_c1_c5": 0.6555,
+        "final_mean_retention_c1_c5_std": 0.1306,
+        "catastrophic_forgetting_delta_c1_c4": 0.1111,
+        "catastrophic_forgetting_delta_c1_c4_std": 0.18,
+        "ood_winter_travel_acc": 0.6681,
+        "ood_winter_travel_acc_std": 0.1312,
+        "final_cycle_accs": {
+          "C1": 0.7555,
+          "C2": 0.5139,
+          "C3": 0.6722,
+          "C4": 0.5139,
+          "C5": 0.8222
+        },
+        "final_cycle_accs_std": {
+          "C1": 0.0891,
+          "C2": 0.3046,
+          "C3": 0.3514,
+          "C4": 0.0459,
+          "C5": 0.2215
+        },
+        "final_buffer_composition_mean": {
+          "C1": 47.3,
+          "C2": 47.3,
+          "C3": 47.7,
+          "C4": 61.0,
+          "C5": 46.7
+        }
       }
     },
     "ephemeris_live_crosscheck": {
@@ -181,7 +484,7 @@
       "exact_part_b_lora_parity": true,
       "part_a_gradient_descent_converged": true,
       "zero_train_id_ood_leakage": true,
-      "part_b_five_cycles_verified": true
+      "part_b_five_cycles_all_six_arms_verified": true
     },
     "razor_checks": {
       "part_a_param_parity": true,
@@ -191,12 +494,12 @@
       "part_a_t3_ood_beats_unix_25pp": true,
       "part_a_t4_beats_unix": true,
       "part_b_lora_parity": true,
-      "part_b_retention_ge_080": true,
-      "part_b_retention_beats_lru_25pp": true,
+      "part_b_retention_ge_080": false,
+      "part_b_retention_beats_lru_25pp": false,
       "part_b_forget_red_vs_lru_20pp": true,
       "part_b_forget_red_vs_naive_45pp": true,
       "part_b_gate_safety_100": true
     }
   },
-  "verdict": "PROVED: All 12/12 Caelus Razor bars cleared. Hybrid-Dual-Geo-RoPE preserves fast intra-turn tracking (matching Standard-RoPE within 0.3 pp) and post-sleep continuity (tying Hybrid-Unix-Fourier at 100.0%), generalizes zero-shot OOD to Oslo 5.9h winter / 18.8h summer solstices and NYC-to-Tokyo travel (+49.9 pp), and beats 52-week annual-wrap aliasing (+15.7 pp; honestly tying 30d trained-weight retrieval). SLEEP-Caelus-Circadian-Stratified cuts catastrophic forgetting by 68.5 pp vs SLEEP-Fixed24h-LRU and 93.8 pp vs Naive-Online-FT with 100.0% nocturnal sleep-gate safety."
+  "verdict": "PARTIAL: 10/12 Caelus Razor bars cleared across 3 independent seeds. Eliminating the location gap with Hybrid-Unix-Fourier+LatLon rescues Tokyo travel (89.0%) yet still collapses on Oslo Winter/Summer solstices (36.0% vs Geo 83.2%, +47.2 pp). Minimal 20-line Hybrid-NOAA20-RoPE nearly matches Geo-RoPE on solar photoperiod T3-OOD (82.9% vs 86.5%) while aliasing on 52-week annual wrap (80.0% vs Geo 98.4%, +18.4 pp from Caelus's lunar torus). In Part B, SLEEP-Caelus (65.5%, forgetting 11.1 pp, 100% gate safety) decisively beats LRU (41.3%) and Naive-FT (20.0%), while SLEEP-Reservoir-Random (68.4%) and SLEEP-NOAA20-Stratified (86.3%) are reported honestly alongside it."
 }

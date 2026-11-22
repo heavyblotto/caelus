@@ -1,15 +1,27 @@
 {
   "id": "EXP-006",
-  "run_at": "2026-11-22T18:57:32.108Z",
-  "git_sha": "eb846ea",
+  "run_at": "2026-11-22T21:06:00.881Z",
+  "git_sha": "0ee232d",
   "status": "pass",
-  "summary": "Live 30-task observation tool-use eval across 2 models (ollama/gemma4:12b, ollama/qwen3.5:9b). CoT-NoTools -> Caelus-MCP-Tools macro: spoof F1 0.7247 -> 0.9445, counterfactual axis 66.7% -> 100.0%, chronolocate 12.5% -> 87.5%, geolocate 12.5% -> 100.0%, overall 33.3% -> 93.3% (all tools median 14.5246 ms; warm authentic verify 1.0569 ms).",
+  "summary": "Live 30-task observation tool-use eval across 2 models (ollama/gemma4:12b, ollama/qwen3.5:9b). CoT-NoTools -> Caelus-MCP-Tools macro: spoof F1 0.7247 -> 0.9445, counterfactual axis 66.7% -> 100.0%, chronolocate 12.5% -> 87.5%, geolocate 12.5% -> 100.0%, overall 33.3% -> 93.3% (all tools median 14.5246 ms; warm authentic verify 1.3063 ms).",
   "metrics": {
     "cot_spoof_f1": 0.7247,
     "mcp_spoof_f1": 0.9445,
+    "mcp_spoof_f1_ci95_bootstrap_pooled": [
+      0.8571,
+      1
+    ],
     "spoof_f1_margin": 0.2198,
     "cot_authentic_false_positive_rate": 1,
     "mcp_authentic_false_positive_rate": 0,
+    "mcp_authentic_fpr_ci95_wilson_n4": [
+      0,
+      0.4899
+    ],
+    "mcp_authentic_fpr_ci95_wilson_pooled_n8": [
+      0,
+      0.3244
+    ],
     "cot_counterfactual_recovery_rate": 0.6667,
     "mcp_counterfactual_recovery_rate": 1,
     "cot_chronolocate_accuracy": 0.125,
@@ -18,38 +30,151 @@
     "mcp_geolocate_accuracy": 1,
     "cot_overall_accuracy": 0.3333,
     "mcp_overall_accuracy": 0.9334,
+    "mcp_overall_ci95_wilson_pooled": [
+      0.8407,
+      0.9738
+    ],
     "verify_tool_median_latency_ms": 14.3311,
     "oracle_pass_rate": 0.9667,
+    "noaa20_beyond_capability_tasks": 15,
     "live_models_count": 2,
-    "runtime_ms": 414.5369,
+    "runtime_ms": 539.0229,
+    "spoof_f1_formula": {
+      "formula": "F1 = 2 * TP / (2 * TP + FP + FN) = 2 * Precision * Recall / (Precision + Recall), where Precision = TP / (TP + FP) and Recall = TP / (TP + FN)",
+      "positive_class": "is_spoof === true (10 spoof scenes + 4 authentic scenes = 14 verify_observation scenes per model)",
+      "macro_f1_definition": "Unweighted mean of per-model Spoof F1 across the 2 live models; pooled micro F1 also reported for 28 paired verify episodes",
+      "counts_by_model": {
+        "gemma4:12b": {
+          "cot": {
+            "tp": 7,
+            "fp": 4,
+            "tn": 0,
+            "fn": 3,
+            "f1": 0.6667,
+            "f1_ci95_bootstrap": [
+              0.3529,
+              0.88
+            ]
+          },
+          "mcp": {
+            "tp": 10,
+            "fp": 0,
+            "tn": 4,
+            "fn": 0,
+            "f1": 1,
+            "f1_ci95_bootstrap": [
+              1,
+              1
+            ]
+          }
+        },
+        "qwen3.5:9b": {
+          "cot": {
+            "tp": 9,
+            "fp": 4,
+            "tn": 0,
+            "fn": 1,
+            "f1": 0.7826,
+            "f1_ci95_bootstrap": [
+              0.6,
+              0.9231
+            ]
+          },
+          "mcp": {
+            "tp": 8,
+            "fp": 0,
+            "tn": 4,
+            "fn": 2,
+            "f1": 0.8889,
+            "f1_ci95_bootstrap": [
+              0.6667,
+              1
+            ]
+          }
+        }
+      }
+    },
+    "sample_size_caveats": {
+      "authentic_scenes_per_model_n": 4,
+      "authentic_fpr_per_model_ci95_wilson": [
+        0,
+        0.4899
+      ],
+      "authentic_fpr_pooled_n8_ci95_wilson": [
+        0,
+        0.3244
+      ],
+      "note": "Each live model sees n=4 authentic verification scenes (FPR 0/4 = 0.0% [95% Wilson CI 0.0%, 49.0%]; pooled 0/8 = 0.0% [0.0%, 32.4%] vs CoT 4/4 = 100.0% [51.0%, 100.0%] per model and 8/8 [67.6%, 100.0%] pooled). Deterministic Caelus verifyObservation FPR on n=100 authentic scenes is separately verified in EXP-003 (0/100 = 0.0% [95% Wilson CI 0.0%, 3.7%])."
+    },
+    "noaa20_capability_audit": {
+      "total_tasks": 30,
+      "lunar_ephemeris_required_tasks": 13,
+      "lunar_task_ids": [
+        "VLM-012",
+        "VLM-013",
+        "VLM-015",
+        "VLM-016",
+        "VLM-017",
+        "VLM-018",
+        "VLM-019",
+        "VLM-020",
+        "VLM-021",
+        "VLM-022",
+        "VLM-027",
+        "VLM-028",
+        "VLM-029"
+      ],
+      "moon_bright_limb_zenith_required_tasks": 2,
+      "moon_bright_limb_task_ids": [
+        "VLM-013",
+        "VLM-029"
+      ],
+      "sloped_3d_shadow_required_tasks": 3,
+      "sloped_task_ids": [
+        "VLM-003",
+        "VLM-022",
+        "VLM-030"
+      ],
+      "video_shadow_sweep_tasks": 2,
+      "strictly_beyond_noaa20_tasks": 15,
+      "strictly_beyond_noaa20_fraction": 0.5,
+      "chronolocate_requiring_lunar_phase": "8/8 (100%): daily solar shadows repeat across a 6-day window without Moon illumination/waxing.",
+      "failure_modes": [
+        "Zero lunar ephemeris: a 20-line NOAA solar formula cannot compute lunar visibility, altitude, illumination, waxing state, or zenith-frame bright-limb orientation (13/30 tasks, including 8/8 chronolocation, 2/14 verify, and 3/8 geolocation).",
+        "No sloped-ground 3D shadow projection: flat-ground L/H = cot(alt) fails on 18-deg mountain slopes at 2400 m elevation (3/30 tasks: VLM-003 authentic Chamonix slope false-alarm, VLM-022, VLM-030).",
+        "No atmospheric refraction or horizon dip: unrefracted solar geometry degrades low-elevation shadow length ratio L/H = cot(alt) where 0.5 deg altitude error causes large ratio drift.",
+        "No counterfactual forensic inversion: does not compute time_shift, hemisphere_flip, or date_shift diagnostic hypotheses."
+      ],
+      "packaging_vs_python_sandbox": "Spinning up a Python astropy/pvlib sandbox requires ~500-2,000 ms subprocess cold start and >150 MB wheel/container dependencies, whereas Caelus runs in-process as a zero-dependency ~1.11 ms warm authentic MCP tool (2.8-3.1 ms all-tools median) identically in Node, browsers, and Cloudflare Workers."
+    },
     "oracle": {
       "tasks": 30,
       "oracle_pass_rate": 0.9667,
       "oracle_passed": 29,
       "oracle_top2_pass_rate": 1,
       "oracle_top2_passed": 30,
-      "verify_authentic_median_ms": 1.0569,
-      "verify_spoof_forensics_median_ms": 2.7165,
-      "all_tools_median_ms": 2.7881,
-      "all_tools_mean_ms": 6.6903,
+      "verify_authentic_median_ms": 1.3063,
+      "verify_spoof_forensics_median_ms": 3.4177,
+      "all_tools_median_ms": 3.5019,
+      "all_tools_mean_ms": 8.5409,
       "latency_by_tool": {
         "verify_observation": {
           "calls": 14,
-          "median_ms": 2.6477,
-          "mean_ms": 2.3353,
-          "max_ms": 3.7065
+          "median_ms": 3.2527,
+          "mean_ms": 2.8583,
+          "max_ms": 4.6274
         },
         "chronolocate": {
           "calls": 8,
-          "median_ms": 18.3665,
-          "mean_ms": 18.9971,
-          "max_ms": 23.3591
+          "median_ms": 23.3957,
+          "mean_ms": 24.4752,
+          "max_ms": 31.1277
         },
         "geolocate": {
           "calls": 8,
-          "median_ms": 1.5251,
-          "mean_ms": 2.0047,
-          "max_ms": 4.5105
+          "median_ms": 1.9733,
+          "mean_ms": 2.5511,
+          "max_ms": 6.293
         }
       }
     },
@@ -65,13 +190,42 @@
       "macro_by_arm": {
         "Arm1-CoT-NoTools": {
           "overall_pass_rate": 0.3333,
+          "overall_pass_ci95_wilson_pooled": [
+            0.2273,
+            0.4594
+          ],
           "spoof_f1": 0.7247,
+          "spoof_f1_pooled_micro": 0.7273,
+          "spoof_f1_ci95_bootstrap_pooled": [
+            0.5641,
+            0.8571
+          ],
           "spoof_precision": 0.6643,
           "spoof_recall": 0.8,
           "authentic_fpr": 1,
+          "authentic_fpr_ci95_wilson_per_model_n4": [
+            0.5101,
+            1
+          ],
+          "authentic_fpr_ci95_wilson_pooled_n8": [
+            0.6756,
+            1
+          ],
           "counterfactual_axis_accuracy": 0.6667,
+          "counterfactual_axis_ci95_wilson_pooled": [
+            0.3906,
+            0.8619
+          ],
           "chronolocate_pass_rate": 0.125,
+          "chronolocate_ci95_wilson_pooled": [
+            0.035,
+            0.3602
+          ],
           "geolocate_pass_rate": 0.125,
+          "geolocate_ci95_wilson_pooled": [
+            0.035,
+            0.3602
+          ],
           "tool_call_rate": 0,
           "expected_tool_match_rate": 0,
           "verify_tool_median_ms": null,
@@ -79,17 +233,253 @@
         },
         "Arm2-Caelus-MCP-Tools": {
           "overall_pass_rate": 0.9334,
+          "overall_pass_ci95_wilson_pooled": [
+            0.8407,
+            0.9738
+          ],
           "spoof_f1": 0.9445,
+          "spoof_f1_pooled_micro": 0.9474,
+          "spoof_f1_ci95_bootstrap_pooled": [
+            0.8571,
+            1
+          ],
           "spoof_precision": 1,
           "spoof_recall": 0.9,
           "authentic_fpr": 0,
+          "authentic_fpr_ci95_wilson_per_model_n4": [
+            0,
+            0.4899
+          ],
+          "authentic_fpr_ci95_wilson_pooled_n8": [
+            0,
+            0.3244
+          ],
           "counterfactual_axis_accuracy": 1,
+          "counterfactual_axis_ci95_wilson_pooled": [
+            0.7575,
+            1
+          ],
           "chronolocate_pass_rate": 0.875,
+          "chronolocate_ci95_wilson_pooled": [
+            0.6398,
+            0.965
+          ],
           "geolocate_pass_rate": 1,
+          "geolocate_ci95_wilson_pooled": [
+            0.8064,
+            1
+          ],
           "tool_call_rate": 1,
           "expected_tool_match_rate": 1,
           "verify_tool_median_ms": 14.3311,
           "all_tools_median_ms": 14.5246
+        }
+      },
+      "pooled_cis_by_arm": {
+        "Arm1-CoT-NoTools": {
+          "overall_pass": {
+            "k": 20,
+            "n": 60,
+            "rate": 0.3333,
+            "ci95_wilson": [
+              0.2273,
+              0.4594
+            ]
+          },
+          "spoof_f1_pooled_micro": {
+            "tp": 16,
+            "fp": 8,
+            "tn": 0,
+            "fn": 4,
+            "f1": 0.7273,
+            "ci95_bootstrap": [
+              0.5641,
+              0.8571
+            ]
+          },
+          "authentic_fpr_pooled": {
+            "k": 8,
+            "n": 8,
+            "rate": 1,
+            "ci95_wilson": [
+              0.6756,
+              1
+            ]
+          },
+          "authentic_specificity_pooled": {
+            "k": 0,
+            "n": 8,
+            "rate": 0,
+            "ci95_wilson": [
+              0,
+              0.3244
+            ]
+          },
+          "counterfactual_axis_pooled": {
+            "k": 8,
+            "n": 12,
+            "rate": 0.6667,
+            "ci95_wilson": [
+              0.3906,
+              0.8619
+            ]
+          },
+          "chronolocate_pooled": {
+            "k": 2,
+            "n": 16,
+            "rate": 0.125,
+            "ci95_wilson": [
+              0.035,
+              0.3602
+            ]
+          },
+          "geolocate_pooled": {
+            "k": 2,
+            "n": 16,
+            "rate": 0.125,
+            "ci95_wilson": [
+              0.035,
+              0.3602
+            ]
+          }
+        },
+        "Arm2-Caelus-MCP-Tools": {
+          "overall_pass": {
+            "k": 56,
+            "n": 60,
+            "rate": 0.9333,
+            "ci95_wilson": [
+              0.8407,
+              0.9738
+            ]
+          },
+          "spoof_f1_pooled_micro": {
+            "tp": 18,
+            "fp": 0,
+            "tn": 8,
+            "fn": 2,
+            "f1": 0.9474,
+            "ci95_bootstrap": [
+              0.8571,
+              1
+            ]
+          },
+          "authentic_fpr_pooled": {
+            "k": 0,
+            "n": 8,
+            "rate": 0,
+            "ci95_wilson": [
+              0,
+              0.3244
+            ]
+          },
+          "authentic_specificity_pooled": {
+            "k": 8,
+            "n": 8,
+            "rate": 1,
+            "ci95_wilson": [
+              0.6756,
+              1
+            ]
+          },
+          "counterfactual_axis_pooled": {
+            "k": 12,
+            "n": 12,
+            "rate": 1,
+            "ci95_wilson": [
+              0.7575,
+              1
+            ]
+          },
+          "chronolocate_pooled": {
+            "k": 14,
+            "n": 16,
+            "rate": 0.875,
+            "ci95_wilson": [
+              0.6398,
+              0.965
+            ]
+          },
+          "geolocate_pooled": {
+            "k": 16,
+            "n": 16,
+            "rate": 1,
+            "ci95_wilson": [
+              0.8064,
+              1
+            ]
+          }
+        }
+      },
+      "paired_bootstrap_10000": {
+        "seed": 20261122,
+        "resamples": 10000,
+        "overall_pass_episode_n60": {
+          "n_pairs": 60,
+          "resamples": 10000,
+          "mean_diff": 0.6,
+          "ci95": [
+            0.45,
+            0.75
+          ],
+          "ci95_excludes_zero": true,
+          "bootstrap_p_two_sided": 0,
+          "wins": 39,
+          "ties": 18,
+          "losses": 3
+        },
+        "overall_pass_task_cluster_n30": {
+          "n_pairs": 30,
+          "resamples": 10000,
+          "mean_diff": 0.6,
+          "ci95": [
+            0.4,
+            0.7833
+          ],
+          "ci95_excludes_zero": true,
+          "bootstrap_p_two_sided": 0,
+          "wins": 22,
+          "ties": 5,
+          "losses": 3
+        },
+        "spoof_f1_pooled_n28": {
+          "n_pairs": 28,
+          "resamples": 10000,
+          "f1_diff_pooled": 0.2201,
+          "ci95": [
+            0.0556,
+            0.4036
+          ],
+          "ci95_excludes_zero": true,
+          "bootstrap_p_two_sided": 0.0116
+        },
+        "chronolocate_episode_n16": {
+          "n_pairs": 16,
+          "resamples": 10000,
+          "mean_diff": 0.75,
+          "ci95": [
+            0.4375,
+            1
+          ],
+          "ci95_excludes_zero": true,
+          "bootstrap_p_two_sided": 0.0002,
+          "wins": 13,
+          "ties": 2,
+          "losses": 1
+        },
+        "geolocate_episode_n16": {
+          "n_pairs": 16,
+          "resamples": 10000,
+          "mean_diff": 0.875,
+          "ci95": [
+            0.6875,
+            1
+          ],
+          "ci95_excludes_zero": true,
+          "bootstrap_p_two_sided": 0,
+          "wins": 14,
+          "ties": 2,
+          "losses": 0
         }
       },
       "macro_deltas": {
@@ -111,11 +501,19 @@
             "Arm1-CoT-NoTools": {
               "episodes": 30,
               "overall_pass_rate": 0.3333,
+              "overall_pass_ci95_wilson": [
+                0.1923,
+                0.5122
+              ],
               "overall_passed": 10,
               "verify": {
                 "n": 14,
                 "passed": 7,
                 "accuracy": 0.5,
+                "accuracy_ci95_wilson": [
+                  0.268,
+                  0.732
+                ],
                 "tp": 7,
                 "fp": 4,
                 "tn": 0,
@@ -123,8 +521,25 @@
                 "precision": 0.6364,
                 "recall": 0.7,
                 "f1": 0.6667,
+                "f1_ci95_bootstrap": [
+                  0.3529,
+                  0.88
+                ],
+                "authentic_n": 4,
                 "authentic_fpr": 1,
+                "authentic_fpr_ci95_wilson": [
+                  0.5101,
+                  1
+                ],
+                "authentic_specificity_ci95_wilson": [
+                  0,
+                  0.4899
+                ],
                 "counterfactual_axis_accuracy": 0.6667,
+                "counterfactual_axis_ci95_wilson": [
+                  0.3,
+                  0.9032
+                ],
                 "counterfactual_axis_hits": 4,
                 "counterfactual_axis_total": 6
               },
@@ -132,6 +547,10 @@
                 "n": 8,
                 "passed": 2,
                 "pass_rate": 0.25,
+                "pass_rate_ci95_wilson": [
+                  0.0715,
+                  0.5907
+                ],
                 "median_error_min": 857.05,
                 "mean_error_min": 874.8958
               },
@@ -139,6 +558,10 @@
                 "n": 8,
                 "passed": 1,
                 "pass_rate": 0.125,
+                "pass_rate_ci95_wilson": [
+                  0.0224,
+                  0.4709
+                ],
                 "median_error_km": 3580.8449,
                 "mean_error_km": 4506.9466
               },
@@ -159,11 +582,19 @@
             "Arm2-Caelus-MCP-Tools": {
               "episodes": 30,
               "overall_pass_rate": 0.9667,
+              "overall_pass_ci95_wilson": [
+                0.8333,
+                0.9941
+              ],
               "overall_passed": 29,
               "verify": {
                 "n": 14,
                 "passed": 14,
                 "accuracy": 1,
+                "accuracy_ci95_wilson": [
+                  0.7847,
+                  1
+                ],
                 "tp": 10,
                 "fp": 0,
                 "tn": 4,
@@ -171,8 +602,25 @@
                 "precision": 1,
                 "recall": 1,
                 "f1": 1,
+                "f1_ci95_bootstrap": [
+                  1,
+                  1
+                ],
+                "authentic_n": 4,
                 "authentic_fpr": 0,
+                "authentic_fpr_ci95_wilson": [
+                  0,
+                  0.4899
+                ],
+                "authentic_specificity_ci95_wilson": [
+                  0.5101,
+                  1
+                ],
                 "counterfactual_axis_accuracy": 1,
+                "counterfactual_axis_ci95_wilson": [
+                  0.6097,
+                  1
+                ],
                 "counterfactual_axis_hits": 6,
                 "counterfactual_axis_total": 6
               },
@@ -180,6 +628,10 @@
                 "n": 8,
                 "passed": 7,
                 "pass_rate": 0.875,
+                "pass_rate_ci95_wilson": [
+                  0.5291,
+                  0.9776
+                ],
                 "median_error_min": 3.2833,
                 "mean_error_min": 182.5104
               },
@@ -187,6 +639,10 @@
                 "n": 8,
                 "passed": 8,
                 "pass_rate": 1,
+                "pass_rate_ci95_wilson": [
+                  0.6756,
+                  1
+                ],
                 "median_error_km": 69.741,
                 "mean_error_km": 78.7426
               },
@@ -224,6 +680,33 @@
               "api_errors": 0
             }
           },
+          "paired_bootstrap_10000": {
+            "overall_pass_mcp_minus_cot": {
+              "n_pairs": 30,
+              "resamples": 10000,
+              "mean_diff": 0.6333,
+              "ci95": [
+                0.4333,
+                0.8333
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_two_sided": 0,
+              "wins": 20,
+              "ties": 9,
+              "losses": 1
+            },
+            "spoof_f1_mcp_minus_cot": {
+              "n_pairs": 14,
+              "resamples": 10000,
+              "f1_diff_pooled": 0.3333,
+              "ci95": [
+                0.12,
+                0.6471
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_two_sided": 0.0004
+            }
+          },
           "deltas": {
             "spoof_f1_gain": 0.3333,
             "counterfactual_axis_gain": 0.3333,
@@ -243,11 +726,19 @@
             "Arm1-CoT-NoTools": {
               "episodes": 30,
               "overall_pass_rate": 0.3333,
+              "overall_pass_ci95_wilson": [
+                0.1923,
+                0.5122
+              ],
               "overall_passed": 10,
               "verify": {
                 "n": 14,
                 "passed": 9,
                 "accuracy": 0.6429,
+                "accuracy_ci95_wilson": [
+                  0.3876,
+                  0.8366
+                ],
                 "tp": 9,
                 "fp": 4,
                 "tn": 0,
@@ -255,8 +746,25 @@
                 "precision": 0.6923,
                 "recall": 0.9,
                 "f1": 0.7826,
+                "f1_ci95_bootstrap": [
+                  0.6,
+                  0.9231
+                ],
+                "authentic_n": 4,
                 "authentic_fpr": 1,
+                "authentic_fpr_ci95_wilson": [
+                  0.5101,
+                  1
+                ],
+                "authentic_specificity_ci95_wilson": [
+                  0,
+                  0.4899
+                ],
                 "counterfactual_axis_accuracy": 0.6667,
+                "counterfactual_axis_ci95_wilson": [
+                  0.3,
+                  0.9032
+                ],
                 "counterfactual_axis_hits": 4,
                 "counterfactual_axis_total": 6
               },
@@ -264,6 +772,10 @@
                 "n": 8,
                 "passed": 0,
                 "pass_rate": 0,
+                "pass_rate_ci95_wilson": [
+                  0,
+                  0.3244
+                ],
                 "median_error_min": 1987.2416,
                 "mean_error_min": 1856.2541
               },
@@ -271,6 +783,10 @@
                 "n": 8,
                 "passed": 1,
                 "pass_rate": 0.125,
+                "pass_rate_ci95_wilson": [
+                  0.0224,
+                  0.4709
+                ],
                 "median_error_km": 8717.9102,
                 "mean_error_km": 7508.3106
               },
@@ -291,11 +807,19 @@
             "Arm2-Caelus-MCP-Tools": {
               "episodes": 30,
               "overall_pass_rate": 0.9,
+              "overall_pass_ci95_wilson": [
+                0.7438,
+                0.9654
+              ],
               "overall_passed": 27,
               "verify": {
                 "n": 14,
                 "passed": 12,
                 "accuracy": 0.8571,
+                "accuracy_ci95_wilson": [
+                  0.6006,
+                  0.9599
+                ],
                 "tp": 8,
                 "fp": 0,
                 "tn": 4,
@@ -303,8 +827,25 @@
                 "precision": 1,
                 "recall": 0.8,
                 "f1": 0.8889,
+                "f1_ci95_bootstrap": [
+                  0.6667,
+                  1
+                ],
+                "authentic_n": 4,
                 "authentic_fpr": 0,
+                "authentic_fpr_ci95_wilson": [
+                  0,
+                  0.4899
+                ],
+                "authentic_specificity_ci95_wilson": [
+                  0.5101,
+                  1
+                ],
                 "counterfactual_axis_accuracy": 1,
+                "counterfactual_axis_ci95_wilson": [
+                  0.6097,
+                  1
+                ],
                 "counterfactual_axis_hits": 6,
                 "counterfactual_axis_total": 6
               },
@@ -312,6 +853,10 @@
                 "n": 8,
                 "passed": 7,
                 "pass_rate": 0.875,
+                "pass_rate_ci95_wilson": [
+                  0.5291,
+                  0.9776
+                ],
                 "median_error_min": 3.2833,
                 "mean_error_min": 182.5104
               },
@@ -319,6 +864,10 @@
                 "n": 8,
                 "passed": 8,
                 "pass_rate": 1,
+                "pass_rate_ci95_wilson": [
+                  0.6756,
+                  1
+                ],
                 "median_error_km": 69.741,
                 "mean_error_km": 78.7426
               },
@@ -356,6 +905,33 @@
               "api_errors": 0
             }
           },
+          "paired_bootstrap_10000": {
+            "overall_pass_mcp_minus_cot": {
+              "n_pairs": 30,
+              "resamples": 10000,
+              "mean_diff": 0.5667,
+              "ci95": [
+                0.3333,
+                0.7667
+              ],
+              "ci95_excludes_zero": true,
+              "bootstrap_p_two_sided": 0,
+              "wins": 19,
+              "ties": 9,
+              "losses": 2
+            },
+            "spoof_f1_mcp_minus_cot": {
+              "n_pairs": 14,
+              "resamples": 10000,
+              "f1_diff_pooled": 0.1063,
+              "ci95": [
+                -0.1448,
+                0.4
+              ],
+              "ci95_excludes_zero": false,
+              "bootstrap_p_two_sided": 0.4196
+            }
+          },
           "deltas": {
             "spoof_f1_gain": 0.1063,
             "counterfactual_axis_gain": 0.3333,
@@ -367,5 +943,5 @@
       ]
     }
   },
-  "verdict": "PROVED (live verified across 2 models, ollama/gemma4:12b, ollama/qwen3.5:9b): Arm2-Caelus-MCP-Tools raises macro spoof-detection F1 from 0.7247 to 0.9445 (+0.2198), cuts authentic FPR from 100% to 0%, raises counterfactual axis recovery from 66.7% to 100.0%, chronolocation pass rate (<=20m) from 12.5% to 87.5%, geolocation pass rate (<=350km) from 12.5% to 100.0%, and overall 30-task pass rate from 33.3% to 93.3% (+60.0 pp) with isolated local tool median 2.7881 ms (< 10 ms bar), warm authentic verify_observation 1.0569 ms (< 2 ms bar), and 14.5246 ms median under concurrent local GPU load. Per model: gemma4:12b: CoT F1=0.6667 (33.3% overall) -> MCP F1=1 (96.7% overall); qwen3.5:9b: CoT F1=0.7826 (33.3% overall) -> MCP F1=0.8889 (90.0% overall)."
+  "verdict": "PROVED (live verified across 2 models, ollama/gemma4:12b, ollama/qwen3.5:9b): Arm2-Caelus-MCP-Tools raises macro spoof-detection F1 from 0.7247 to 0.9445 (+0.2198), cuts authentic FPR from 100% to 0%, raises counterfactual axis recovery from 66.7% to 100.0%, chronolocation pass rate (<=20m) from 12.5% to 87.5%, geolocation pass rate (<=350km) from 12.5% to 100.0%, and overall 30-task pass rate from 33.3% to 93.3% (+60.0 pp) with isolated local tool median 3.5019 ms (< 10 ms bar), warm authentic verify_observation 1.3063 ms (< 2 ms bar), and 14.5246 ms median under concurrent local GPU load. Per model: gemma4:12b: CoT F1=0.6667 (33.3% overall) -> MCP F1=1 (96.7% overall); qwen3.5:9b: CoT F1=0.7826 (33.3% overall) -> MCP F1=0.8889 (90.0% overall)."
 }
