@@ -32,7 +32,7 @@ const PACKAGES: Array<[keyof typeof NPM, string, string]> = [
   ["caelus", "caelus", "Core ephemeris and chart calculations (positions, houses, and aspects) with zero runtime dependencies (~153 KB gzipped including embedded data)."],
   ["mcp", "caelus-mcp", `${formatMcpToolsTitle()} chart tools for AI assistants: natal charts, transits, synastry, event search, electional search, lots, time-lords, directions, and Vedic calculations.`],
   ["birth", "caelus-birth", "Resolves local birth dates, times, and coordinates to UTC using historical timezone and daylight saving time rules."],
-  ["wheel", "caelus-wheel", "SSR-safe React SVG components: flat ChartWheel (~2.2 KB gzipped), 3D ChartSphere, AstroMap, and EphemerisGraph."],
+  ["wheel", "caelus-wheel", "SSR-safe React SVG components: flat ChartWheel (~3.1 KB gzipped), 3D ChartSphere, AstroMap, and EphemerisGraph."],
   ["delineationsPd", "caelus-delineations-pd", "Public-domain delineations and correspondence tables for the interpretation layer, versioned independently."],
 ];
 

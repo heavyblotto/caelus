@@ -52,8 +52,15 @@ const accuracy = JSON.parse(readFileSync(rel("packages/caelus/accuracy.json"), "
 const BUNDLES_PATH = rel("bundle-sizes.json");
 let bundlesCache;
 function loadBundles() {
-  // bundle-sizes.json is a generated artifact (gitignored, like the golden
-  // stats). Regenerate when absent; needs the workspaces built + esbuild.
+  // Prefer a freshly measured file over an existing one (just like loadStats):
+  // bundle-sizes.json is gitignored, so a stale local file can hide drift until
+  // a clean CI checkout runs. Fall back to an existing file only if unbuilt.
+  const CAELUS_DIST = rel("packages/caelus/dist/src/index.js");
+  const WHEEL_DIST = rel("packages/wheel/dist/src/index.js");
+  if (existsSync(CAELUS_DIST) && existsSync(WHEEL_DIST)) {
+    execFileSync("node", [rel("scripts/bundle-sizes.mjs")], { stdio: "ignore" });
+    return JSON.parse(readFileSync(BUNDLES_PATH, "utf8"));
+  }
   if (existsSync(BUNDLES_PATH)) return JSON.parse(readFileSync(BUNDLES_PATH, "utf8"));
   execFileSync("node", [rel("scripts/bundle-sizes.mjs")], { stdio: "ignore" });
   return JSON.parse(readFileSync(BUNDLES_PATH, "utf8"));

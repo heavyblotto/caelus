@@ -173,7 +173,7 @@
       "render": [
         "~{value} KB"
       ],
-      "competing": "~[3-9](\\.\\d)? KB\\b",
+      "competing": "~[1-9](\\.\\d)? KB\\b",
       "appearsIn": [
         "apps/web/app/page.tsx"
       ]
