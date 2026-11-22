@@ -1,0 +1,509 @@
+{
+  "id": "EXP-001",
+  "run_at": "2026-11-22T15:12:07.220Z",
+  "git_sha": "c5d89ab",
+  "status": "pass",
+  "summary": "100 72h episodes (1,200 turns) across 5 latitudes x 2 seasons. Treatment-Caelus-Physical achieves 100.0% local night_crossed accuracy (vs 67.6% UTC Control-ISO), 100.0% physical daylight classification (vs 81.2% fixed-24h Control-Synthetic), 0.000 min sunset deadline error (vs 88.7 min MAE / 206.8 min max for longitude-adjusted fixed-24h clock plus 10 polar no-sunset episodes), and 100.0% pre-tool cursor drift detection at 0.0% FPR in 1274 us/turn (~45.5 cl100k tokens).",
+  "metrics": {
+    "caelus_night_crossed_accuracy": 1,
+    "iso_utc_night_crossed_accuracy": 0.6764,
+    "caelus_daylight_accuracy": 1,
+    "synth_24h_daylight_accuracy": 0.8117,
+    "caelus_sunset_mae_min": 0,
+    "synth_24h_sunset_mae_min": 88.74,
+    "caelus_drift_caught_rate": 1,
+    "caelus_drift_false_positive_rate": 0,
+    "caelus_mean_us": 1273.73,
+    "caelus_cl100k_tokens": 45.52,
+    "episodes": 100,
+    "turns_total": 1200,
+    "compaction_boundaries": 200,
+    "eval_suite_prompts_emitted": 20,
+    "token_footprint": {
+      "whitespace_mean": {
+        "Baseline-None": 0,
+        "Control-ISO": 2,
+        "Control-Synthetic": 5,
+        "Treatment-Caelus-Physical": 8.25,
+        "Treatment-Caelus-FullSceneLine": 24.794,
+        "Arm4b-Caelus-Symbolic": 15.4
+      },
+      "cl100k_approx_mean": {
+        "Baseline-None": 0,
+        "Control-ISO": 16,
+        "Control-Synthetic": 24.541,
+        "Treatment-Caelus-Physical": 45.517,
+        "Treatment-Caelus-FullSceneLine": 56.54,
+        "Arm4b-Caelus-Symbolic": 36.39
+      }
+    },
+    "compute_latency_us": {
+      "Baseline-None": {
+        "mean": 0.072,
+        "median": 0.042,
+        "p95": 0.125,
+        "p99": 0.25,
+        "max": 1.417
+      },
+      "Control-ISO": {
+        "mean": 0.437,
+        "median": 0.333,
+        "p95": 0.833,
+        "p99": 1.75,
+        "max": 41.792
+      },
+      "Control-Synthetic": {
+        "mean": 1.453,
+        "median": 1.167,
+        "p95": 2.666,
+        "p99": 4.083,
+        "max": 53.709
+      },
+      "Treatment-Caelus-SceneOnly": {
+        "mean": 839.805,
+        "median": 809.709,
+        "p95": 1167.083,
+        "p99": 2111.625,
+        "max": 3073.208
+      },
+      "Treatment-Caelus-Physical": {
+        "mean": 1273.728,
+        "median": 1233.375,
+        "p95": 1669.834,
+        "p99": 2545.458,
+        "max": 3654.375
+      },
+      "Treatment-Caelus-AuditHook": {
+        "mean": 1261.702,
+        "median": 1218.875,
+        "p95": 1671.791,
+        "p99": 2442.917,
+        "max": 3248.083
+      }
+    },
+    "night_crossed_accuracy": {
+      "all_transitions_n": 1100,
+      "all_transitions_positive_rate": 0.2727,
+      "all_transitions": {
+        "Baseline-None": 0.7273,
+        "Control-ISO": 0.6764,
+        "Control-Synthetic-Civil": 0.9255,
+        "Control-Synthetic-LonMean": 0.9909,
+        "Treatment-Caelus-Physical": 1
+      },
+      "compaction_boundaries_n": 200,
+      "compaction_boundaries": {
+        "Baseline-None": 0.675,
+        "Control-ISO": 0.545,
+        "Control-Synthetic-Civil": 0.915,
+        "Control-Synthetic-LonMean": 0.985,
+        "Treatment-Caelus-Physical": 1
+      },
+      "by_city": {
+        "oslo": {
+          "Baseline-None": 0.7273,
+          "Control-ISO": 0.8818,
+          "Control-Synthetic-Civil": 0.9182,
+          "Control-Synthetic-LonMean": 0.9909,
+          "Treatment-Caelus-Physical": 1
+        },
+        "nyc": {
+          "Baseline-None": 0.7273,
+          "Control-ISO": 0.5364,
+          "Control-Synthetic-Civil": 0.9,
+          "Control-Synthetic-LonMean": 1,
+          "Treatment-Caelus-Physical": 1
+        },
+        "singapore": {
+          "Baseline-None": 0.7273,
+          "Control-ISO": 0.5273,
+          "Control-Synthetic-Civil": 0.9455,
+          "Control-Synthetic-LonMean": 0.9909,
+          "Treatment-Caelus-Physical": 1
+        },
+        "sydney": {
+          "Baseline-None": 0.7273,
+          "Control-ISO": 0.5455,
+          "Control-Synthetic-Civil": 0.9545,
+          "Control-Synthetic-LonMean": 1,
+          "Treatment-Caelus-Physical": 1
+        },
+        "tromso": {
+          "Baseline-None": 0.7273,
+          "Control-ISO": 0.8909,
+          "Control-Synthetic-Civil": 0.9091,
+          "Control-Synthetic-LonMean": 0.9727,
+          "Treatment-Caelus-Physical": 1
+        }
+      }
+    },
+    "daylight_regime_accuracy": {
+      "overall": {
+        "Baseline-None": 0.4942,
+        "Control-ISO-UTC": 0.4758,
+        "Control-Synthetic-Civil": 0.7908,
+        "Control-Synthetic-LonMean": 0.8117,
+        "Treatment-Caelus-Physical": 1
+      },
+      "by_city_season": {
+        "oslo_june": {
+          "turns": 120,
+          "Control-Synthetic-Civil": 0.725,
+          "Control-Synthetic-LonMean": 0.7417,
+          "Treatment-Caelus-Physical": 1
+        },
+        "oslo_dec": {
+          "turns": 120,
+          "Control-Synthetic-Civil": 0.775,
+          "Control-Synthetic-LonMean": 0.7583,
+          "Treatment-Caelus-Physical": 1
+        },
+        "nyc_june": {
+          "turns": 120,
+          "Control-Synthetic-Civil": 0.8583,
+          "Control-Synthetic-LonMean": 0.875,
+          "Treatment-Caelus-Physical": 1
+        },
+        "nyc_dec": {
+          "turns": 120,
+          "Control-Synthetic-Civil": 0.8833,
+          "Control-Synthetic-LonMean": 0.9,
+          "Treatment-Caelus-Physical": 1
+        },
+        "singapore_june": {
+          "turns": 120,
+          "Control-Synthetic-Civil": 0.9333,
+          "Control-Synthetic-LonMean": 1,
+          "Treatment-Caelus-Physical": 1
+        },
+        "singapore_dec": {
+          "turns": 120,
+          "Control-Synthetic-Civil": 0.9583,
+          "Control-Synthetic-LonMean": 1,
+          "Treatment-Caelus-Physical": 1
+        },
+        "sydney_june": {
+          "turns": 120,
+          "Control-Synthetic-Civil": 0.925,
+          "Control-Synthetic-LonMean": 0.925,
+          "Treatment-Caelus-Physical": 1
+        },
+        "sydney_dec": {
+          "turns": 120,
+          "Control-Synthetic-Civil": 0.9,
+          "Control-Synthetic-LonMean": 0.95,
+          "Treatment-Caelus-Physical": 1
+        },
+        "tromso_june": {
+          "turns": 120,
+          "Control-Synthetic-Civil": 0.425,
+          "Control-Synthetic-LonMean": 0.45,
+          "Treatment-Caelus-Physical": 1
+        },
+        "tromso_dec": {
+          "turns": 120,
+          "Control-Synthetic-Civil": 0.525,
+          "Control-Synthetic-LonMean": 0.5167,
+          "Treatment-Caelus-Physical": 1
+        }
+      }
+    },
+    "deadline_accuracy": {
+      "sunset_non_polar_episodes": 40,
+      "polar_no_sunset_episodes": 10,
+      "sunset_error_min": {
+        "Control-ISO-UTC": {
+          "mean": 459.687,
+          "median": 414.478,
+          "p95": 1050.063,
+          "p99": 1050.707,
+          "max": 1050.707
+        },
+        "Control-Synthetic-Civil": {
+          "mean": 127.146,
+          "median": 122.533,
+          "p95": 283.795,
+          "p99": 283.821,
+          "max": 283.821
+        },
+        "Control-Synthetic-LonMean": {
+          "mean": 88.74,
+          "median": 81.985,
+          "p95": 206.804,
+          "p99": 206.83,
+          "max": 206.83
+        },
+        "Treatment-Caelus-Physical": {
+          "mean": 0,
+          "median": 0,
+          "p95": 0,
+          "p99": 0,
+          "max": 0
+        }
+      },
+      "sunset_mae_by_city_season": {
+        "oslo_june": {
+          "non_polar_episodes": 5,
+          "polar_fallbacks": 0,
+          "civil_24h_mae_min": 283.237,
+          "lon_mean_24h_mae_min": 206.246
+        },
+        "oslo_dec": {
+          "non_polar_episodes": 5,
+          "polar_fallbacks": 0,
+          "civil_24h_mae_min": 167.884,
+          "lon_mean_24h_mae_min": 184.875
+        },
+        "nyc_june": {
+          "non_polar_episodes": 5,
+          "polar_fallbacks": 0,
+          "civil_24h_mae_min": 150.361,
+          "lon_mean_24h_mae_min": 94.337
+        },
+        "nyc_dec": {
+          "non_polar_episodes": 5,
+          "polar_fallbacks": 0,
+          "civil_24h_mae_min": 88.176,
+          "lon_mean_24h_mae_min": 84.2
+        },
+        "singapore_june": {
+          "non_polar_episodes": 5,
+          "polar_fallbacks": 0,
+          "civil_24h_mae_min": 72.399,
+          "lon_mean_24h_mae_min": 7.679
+        },
+        "singapore_dec": {
+          "non_polar_episodes": 5,
+          "polar_fallbacks": 0,
+          "civil_24h_mae_min": 63.842,
+          "lon_mean_24h_mae_min": 1.321
+        },
+        "sydney_june": {
+          "non_polar_episodes": 5,
+          "polar_fallbacks": 0,
+          "civil_24h_mae_min": 66.209,
+          "lon_mean_24h_mae_min": 61.371
+        },
+        "sydney_dec": {
+          "non_polar_episodes": 5,
+          "polar_fallbacks": 0,
+          "civil_24h_mae_min": 125.056,
+          "lon_mean_24h_mae_min": 69.893
+        },
+        "tromso_june": {
+          "non_polar_episodes": 0,
+          "polar_fallbacks": 5,
+          "civil_24h_mae_min": null,
+          "lon_mean_24h_mae_min": null
+        },
+        "tromso_dec": {
+          "non_polar_episodes": 0,
+          "polar_fallbacks": 5,
+          "civil_24h_mae_min": null,
+          "lon_mean_24h_mae_min": null
+        }
+      },
+      "solar_noon_episodes": 50,
+      "solar_noon_error_min": {
+        "Control-ISO-UTC": {
+          "mean": 287.069,
+          "median": 297.01,
+          "p95": 606.982,
+          "p99": 608.95,
+          "max": 608.95
+        },
+        "Control-Synthetic-Civil": {
+          "mean": 40.636,
+          "median": 51.05,
+          "p95": 78.802,
+          "p99": 79.664,
+          "max": 79.664
+        },
+        "Control-Synthetic-LonMean": {
+          "mean": 1.905,
+          "median": 1.951,
+          "p95": 3.559,
+          "p99": 4.113,
+          "max": 4.113
+        },
+        "Treatment-Caelus-Physical": {
+          "mean": 0,
+          "median": 0,
+          "p95": 0,
+          "p99": 0,
+          "max": 0
+        }
+      },
+      "solar_noon_mae_by_city_season": {
+        "oslo_june": {
+          "episodes": 5,
+          "civil_24h_mae_min": 78.842,
+          "lon_mean_24h_mae_min": 1.851
+        },
+        "oslo_dec": {
+          "episodes": 5,
+          "civil_24h_mae_min": 15.141,
+          "lon_mean_24h_mae_min": 1.862
+        },
+        "nyc_june": {
+          "episodes": 5,
+          "civil_24h_mae_min": 58.054,
+          "lon_mean_24h_mae_min": 2.03
+        },
+        "nyc_dec": {
+          "episodes": 5,
+          "civil_24h_mae_min": 5.414,
+          "lon_mean_24h_mae_min": 1.694
+        },
+        "singapore_june": {
+          "episodes": 5,
+          "civil_24h_mae_min": 66.559,
+          "lon_mean_24h_mae_min": 1.838
+        },
+        "singapore_dec": {
+          "episodes": 5,
+          "civil_24h_mae_min": 62.743,
+          "lon_mean_24h_mae_min": 1.978
+        },
+        "sydney_june": {
+          "episodes": 5,
+          "civil_24h_mae_min": 2.986,
+          "lon_mean_24h_mae_min": 1.852
+        },
+        "sydney_dec": {
+          "episodes": 5,
+          "civil_24h_mae_min": 53.022,
+          "lon_mean_24h_mae_min": 2.141
+        },
+        "tromso_june": {
+          "episodes": 5,
+          "civil_24h_mae_min": 46.111,
+          "lon_mean_24h_mae_min": 1.932
+        },
+        "tromso_dec": {
+          "episodes": 5,
+          "civil_24h_mae_min": 17.485,
+          "lon_mean_24h_mae_min": 1.869
+        }
+      },
+      "monotonicity_rate": {
+        "Baseline-None": 0,
+        "Control-ISO": 1,
+        "Control-Synthetic": 1,
+        "Treatment-Caelus-Physical": 1
+      },
+      "phase_agreement_accuracy": {
+        "Baseline-None": 0,
+        "Control-ISO-UTC": 0.9333,
+        "Control-Synthetic-Civil": 0.9858,
+        "Control-Synthetic-LonMean": 0.9892,
+        "Treatment-Caelus-Physical": 1
+      }
+    },
+    "stale_tool_trap_24h": {
+      "traps_total": 200,
+      "condition_a_wallclock_or_periodic_only_catch_rate": {
+        "Baseline-None": 0,
+        "Control-ISO-NaiveHHMM": 0,
+        "Control-Synthetic-PeriodicOnly": 0,
+        "Treatment-Caelus-Physical": 1
+      },
+      "condition_b_intact_scalar_timestamp_catch_rate": {
+        "Baseline-None": 0,
+        "Control-ISO-FullDate": 1,
+        "Control-Synthetic-ElapsedScalar": 1,
+        "Treatment-Caelus-Physical": 1
+      },
+      "moon_24h_shift_deg": {
+        "mean": 13.737,
+        "median": 13.773,
+        "p95": 15.274,
+        "p99": 15.293,
+        "max": 15.294
+      },
+      "asc_24h_shift_deg": {
+        "mean": 1.331,
+        "median": 0.4,
+        "p95": 0.841,
+        "p99": 3.092,
+        "max": 179.998
+      },
+      "synthetic_24h_periodic_cosine_similarity": {
+        "mean": 1,
+        "median": 1,
+        "p95": 1,
+        "p99": 1,
+        "max": 1
+      }
+    },
+    "cursor_drift_audit": {
+      "clean_turns": 900,
+      "corrupted_turns": 300,
+      "true_positive_rate": {
+        "Baseline-None": 0,
+        "Control-ISO": 0.2,
+        "Control-Synthetic": 0.2,
+        "Treatment-Caelus-Physical": 1
+      },
+      "false_positive_rate": {
+        "Baseline-None": 0,
+        "Control-ISO": 0,
+        "Control-Synthetic": 0,
+        "Treatment-Caelus-Physical": 0
+      },
+      "tpr_by_corruption_mode": {
+        "stale_compaction_replay": {
+          "Baseline-None": 0,
+          "Control-ISO": 1,
+          "Control-Synthetic": 1,
+          "Treatment-Caelus-Physical": 1
+        },
+        "night_crossed_or_deadline_flip": {
+          "Baseline-None": 0,
+          "Control-ISO": 0,
+          "Control-Synthetic": 0,
+          "Treatment-Caelus-Physical": 1
+        },
+        "ephemeris_angle_drift": {
+          "Baseline-None": 0,
+          "Control-ISO": 0,
+          "Control-Synthetic": 0,
+          "Treatment-Caelus-Physical": 1
+        },
+        "digest_tamper": {
+          "Baseline-None": 0,
+          "Control-ISO": 0,
+          "Control-Synthetic": 0,
+          "Treatment-Caelus-Physical": 1
+        },
+        "twilight_day_night_flip": {
+          "Baseline-None": 0,
+          "Control-ISO": 0,
+          "Control-Synthetic": 0,
+          "Treatment-Caelus-Physical": 1
+        }
+      }
+    },
+    "epistemic_boundaries": {
+      "proven_by_deterministic_harness": [
+        "Exact token footprint: 45.5 cl100k-approx tokens (8.3 whitespace tokens) for the compact physical-horizon envelope + canonical digest cursor; 56.5 cl100k-approx tokens for the full sceneGeometry.chronosense.line (including shadow/Moon visual fields).",
+        "Real offline compute latency: 840 us mean for sceneGeometry alone, 1274 us mean with canonicalChart/chartDigest.",
+        "100.0% local solar-midnight night_crossed disambiguation across 5 latitudes x 2 seasons where UTC-date Control-ISO drops to 67.6% overall (54.5% on compaction boundaries).",
+        "0.000 min physical sunset and solar-noon deadline error vs 88.7 min MAE (max 206.8 min in Oslo June) for longitude-adjusted fixed-24h clock (127.1 min MAE / max 283.8 min for civil 24h clock) plus 10 polar Tromso episodes with no physical sunset.",
+        "100.0% deterministic pre-tool detection of all 5 injected write-back cursor corruption modes at 0.0% FPR, whereas ISO/Synthetic cursors catch only stale timestamp replays (20.0% overall) and cannot audit physical horizon/twilight/ephemeris integrity."
+      ],
+      "where_controls_tie_caelus": [
+        "Condition B stale-tool traps with intact scalar ISO dates or monotonic elapsed counters: Control-ISO and Control-Synthetic tie Caelus at 100%.",
+        "Deadline strict monotonicity once a fixed target timestamp is chosen: Control-ISO and Control-Synthetic tie Caelus at 100% (though their sunset target time itself is wrong by hours at high latitude).",
+        "Equatorial Singapore daylight classification: fixed longitude-mean 24h wave ties Caelus at 100% because equatorial photoperiod varies by <10 min year-round (note civil clock still drifts ~65 min in Singapore due to UTC+8 vs 103.8E meridian).",
+        "Control-Synthetic longitude-mean solar midnight matches Caelus night_crossed on 99.1% of transitions, diverging only within Equation of Time bounds near local solar midnight."
+      ],
+      "requires_live_llm_inference": [
+        "Whether real transformer attention actually attends to the ~46-token physical envelope better than a passive UTC ISO string across 100k+ token sessions.",
+        "End-to-end LLM A/B comparison of Treatment-Caelus-Physical vs Arm4b-Caelus-Symbolic using the emitted 20-prompt eval_suite.jsonl.",
+        "Real model write-back cursor hallucination base rates across frontier vs small models before hook rejection."
+      ]
+    }
+  },
+  "verdict": "PASS (deterministic harness): Caelus physical-horizon envelope + canonical cursor-audit hook clears every accuracy, latency, token-budget, and drift-detection bar against both ISO and fixed-24h synthetic controls; live-LLM inference on eval_suite.jsonl remains the next empirical gate."
+}

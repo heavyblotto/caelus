@@ -1,0 +1,25 @@
+{
+  "id": "FACT-005",
+  "title": "Portable Versioned JSON Envelopes Across Engine, MCP, Instruments, and Lab",
+  "track": "factory",
+  "status": "queued",
+  "stage": "stage-0-spec",
+  "created": "2026-11-22",
+  "hypothesis": "Standardizing one self-contained, versioned JSON envelope (kind, engine version, chart digest, payload) across charts, observations, MCP responses, browser instruments, and lab receipts eliminates format drift between files, share links, and API calls while preserving deterministic provenance.",
+  "null_baseline": "Ad-hoc per-feature JSON shapes, separate URL share encodings, and unversioned tool exports.",
+  "success_bar": "All primary artifact kinds (chart, observation, chronolocation, geolocation, sky_dating, stability) serialize and round-trip deterministically with identical digest across Python, TypeScript, browser share links, and MCP outputs, with zero runtime dependencies.",
+  "kill_criterion": "If envelope wrapping breaks backwards compatibility on existing MCP OUTPUT_SCHEMAS or inflates URL share links past safe browser limits without measurable interoperability gain, keep it opt-in only.",
+  "entrypoint": null,
+  "dependencies": [
+    "Mined prior art: feature/caelus-free commit 99a4085 (docs/product/proposal.md)",
+    "packages/caelus/src/canonical.ts chartDigest"
+  ],
+  "tags": [
+    "portable-objects",
+    "provenance",
+    "schema",
+    "mcp",
+    "instruments",
+    "mined"
+  ]
+}

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" font-family="et-book, ET-Bembo, Palatino, Georgia, serif" font-size="13">
+<rect width="760" height="460" fill="white"/>
+<text x="56" y="28" font-size="17">EXP-001: Fixed-24h Daylight Error (%) vs. Absolute Latitude (deg)</text>
+<text x="56" y="46" font-size="12" fill="#666">10 city-seasons (June, Dec; n=1,200 turns): LonMean 24h rises 0% to 55%; Caelus holds 0% error everywhere</text>
+<line x1="56.0" y1="404.0" x2="56.0" y2="56.0" stroke="#333" stroke-width="1"/>
+<line x1="56.0" y1="404.0" x2="724.0" y2="404.0" stroke="#333" stroke-width="1"/>
+<text x="48.0" y="60.0" text-anchor="end" font-size="11" fill="#666">55</text>
+<text x="48.0" y="408.0" text-anchor="end" font-size="11" fill="#666">0</text>
+<text x="56.0" y="420.0" text-anchor="middle" font-size="11" fill="#666">1.35</text>
+<text x="724.0" y="420.0" text-anchor="middle" font-size="11" fill="#666">69.65</text>
+<circle cx="628.7" cy="240.6" r="2.5" fill="#222"/>
+<circle cx="628.7" cy="251.1" r="2.5" fill="#222"/>
+<circle cx="441.0" cy="324.9" r="2.5" fill="#222"/>
+<circle cx="441.0" cy="340.7" r="2.5" fill="#222"/>
+<circle cx="56.0" cy="404.0" r="2.5" fill="#222"/>
+<circle cx="56.0" cy="404.0" r="2.5" fill="#222"/>
+<circle cx="374.1" cy="356.5" r="2.5" fill="#222"/>
+<circle cx="374.1" cy="372.4" r="2.5" fill="#222"/>
+<circle cx="724.0" cy="56.0" r="2.5" fill="#222"/>
+<circle cx="724.0" cy="98.2" r="2.5" fill="#222"/>
+<line x1="56.0" y1="408.0" x2="56.0" y2="414.0" stroke="#666" stroke-width="0.8"/>
+<line x1="374.1" y1="408.0" x2="374.1" y2="414.0" stroke="#666" stroke-width="0.8"/>
+<line x1="441.0" y1="408.0" x2="441.0" y2="414.0" stroke="#666" stroke-width="0.8"/>
+<line x1="628.7" y1="408.0" x2="628.7" y2="414.0" stroke="#666" stroke-width="0.8"/>
+<line x1="724.0" y1="408.0" x2="724.0" y2="414.0" stroke="#666" stroke-width="0.8"/>
+<line x1="46.0" y1="404.0" x2="52.0" y2="404.0" stroke="#666" stroke-width="0.8"/>
+<line x1="46.0" y1="372.4" x2="52.0" y2="372.4" stroke="#666" stroke-width="0.8"/>
+<line x1="46.0" y1="356.5" x2="52.0" y2="356.5" stroke="#666" stroke-width="0.8"/>
+<line x1="46.0" y1="340.7" x2="52.0" y2="340.7" stroke="#666" stroke-width="0.8"/>
+<line x1="46.0" y1="324.9" x2="52.0" y2="324.9" stroke="#666" stroke-width="0.8"/>
+<line x1="46.0" y1="251.1" x2="52.0" y2="251.1" stroke="#666" stroke-width="0.8"/>
+<line x1="46.0" y1="240.6" x2="52.0" y2="240.6" stroke="#666" stroke-width="0.8"/>
+<line x1="46.0" y1="98.2" x2="52.0" y2="98.2" stroke="#666" stroke-width="0.8"/>
+<line x1="46.0" y1="56.0" x2="52.0" y2="56.0" stroke="#666" stroke-width="0.8"/>
+</svg>

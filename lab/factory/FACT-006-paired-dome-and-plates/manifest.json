@@ -1,0 +1,27 @@
+{
+  "id": "FACT-006",
+  "title": "Paired View (Wheel + 3D Dome/Sphere), Reader-Chart Binding, and OKLCH Theme Completeness",
+  "track": "factory",
+  "status": "queued",
+  "stage": "stage-0-spec",
+  "created": "2026-11-22",
+  "hypothesis": "Pairing 2D projection views (ChartWheel or shadow compass) with an interactive 3D sphere/sky-dome with shared selection and flattening animation, alongside client-only reader-chart binding and derived OKLCH light-theme ink tokens, makes 3D astronomical projection legible while eliminating dark-only ink regressions.",
+  "null_baseline": "Disconnected 2D-only SVG plates with hand-guessed light-theme color overrides and per-page re-entry of observer/birth coordinates.",
+  "success_bar": "Paired 2D/3D component renders SSR-safe SVGs with shared selection and flatten transition in caelus-wheel and caelus-widgets; OKLCH light/dark token pairs pass WCAG AA contrast; live browser check confirms non-zero rendered SVG nodes across all instruments.",
+  "kill_criterion": "If animated 3D flattening adds runtime dependencies, breaks SSR safety in caelus-wheel, or exceeds bundle-size budgets, keep static dual projection without animation.",
+  "entrypoint": null,
+  "dependencies": [
+    "Mined prior art: feature/caelus-free commits ae35c25, 378a3c6, 88163ce, ae015d9, caelus-free-audit.md",
+    "Mined prior art: archive/feature/house-corpus reader-chart.ts, ds-01-disposition.md",
+    "FACT-001 Instrument I-05 baseline"
+  ],
+  "tags": [
+    "visualization",
+    "wheel",
+    "planetarium",
+    "widgets",
+    "tufte",
+    "oklch",
+    "mined"
+  ]
+}

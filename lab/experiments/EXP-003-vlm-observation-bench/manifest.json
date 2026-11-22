@@ -1,0 +1,21 @@
+{
+  "id": "EXP-003",
+  "title": "Spacetime Observation, Spoof-Detection, Chronolocation and Geolocation Benchmark Suite",
+  "track": "research",
+  "status": "active",
+  "created": "2026-11-22",
+  "hypothesis": "Caelus physical ephemeris verification (sceneGeometry, verifyObservation, chronolocate, geolocate) detects spacetime spoofs across 7 adversarial attack classes with F1 >= 0.95 and FPR <= 0.05 under realistic VLM measurement noise (+/-3 deg shadow bearing, +/-6% shadow ratio, +/-8 deg Moon bright limb), recovers single-axis spoof causes via counterfactual diagnostics >= 90%, chronolocates noisy shadows within median <= 15 min, and geolocates via analytical Path A and spherical-grid Path B far beyond metadata-only heuristics.",
+  "null_baseline": "Naive local-mean-time (LMT = UTC + lon/15) day/night metadata heuristic with no astronomical ephemeris, shadow azimuth/altitude geometry, lunar phase/limb physics, or shadow sweep handedness.",
+  "success_bar": "Spoof detection F1 >= 0.95 with FPR <= 0.05 and zero false-impossible verdicts on 100 noisy authentic scenes; counterfactual diagnostic recovery >= 90%; noisy chronolocation median error <= 15 min; Path A noiseless median error < 1 km and Path B grid median error < 250 km; emits 30-task VLM MCP evaluation pack.",
+  "kill_criterion": "Spoof detection F1 < 0.85, authentic FPR > 0.15, counterfactual recovery < 70%, or Path A noiseless error > 10 km.",
+  "entrypoint": "experiment.mjs",
+  "tags": [
+    "observe",
+    "vlm",
+    "spoof-detection",
+    "chronolocation",
+    "geolocation",
+    "benchmark",
+    "mcp-eval"
+  ]
+}

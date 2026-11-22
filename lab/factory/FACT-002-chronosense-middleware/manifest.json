@@ -1,0 +1,24 @@
+{
+  "id": "FACT-002",
+  "title": "Chronosense Read-Write Middleware and Citation Auditor",
+  "track": "factory",
+  "status": "queued",
+  "stage": "stage-0-gated",
+  "created": "2026-11-22",
+  "hypothesis": "A zero-retraining, <1 ms/turn read-write Chronosense middleware backed by sceneGeometry and canonicalChart digest auditing reduces long-horizon temporal confusion, redundant tool loops, and missed deadlines in live LLM agents relative to passive ISO timestamps and synthetic 24h clocks.",
+  "null_baseline": "Passive ISO-8601 UTC prompt injection (Control-ISO) and read-write elapsed-seconds + sin/cos(2*pi*t/86400) cursor (Control-Synthetic).",
+  "success_bar": "Hard promotion gate: (1) EXP-001 deterministic harness passes with <1 ms/turn compute and 100% cursor-drift detection, AND (2) EXP-005 live-LLM eval shows >=20% error reduction vs Control-ISO and statistically meaningful margin over Control-Synthetic on cross-latitude/compaction/deadline episodes.",
+  "kill_criterion": "If EXP-005 live-LLM eval shows Control-Synthetic ties Treatment-Caelus-Physical across all episode slices (including high-latitude photoperiod and cross-compaction), cancel FACT-002 and archive the middleware rationale to lab/graveyard/.",
+  "entrypoint": null,
+  "dependencies": [
+    "EXP-001 deterministic harness pass",
+    "EXP-005 live-LLM ablation beating Control-Synthetic"
+  ],
+  "tags": [
+    "chronosense",
+    "middleware",
+    "agents",
+    "mcp",
+    "gated"
+  ]
+}

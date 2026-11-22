@@ -1,0 +1,25 @@
+{
+  "id": "FACT-004",
+  "title": "Portable Conformance Kit and Clean-Room Rust Engine Port",
+  "track": "factory",
+  "status": "queued",
+  "stage": "stage-0-spec",
+  "created": "2026-11-22",
+  "hypothesis": "Packaging Caelus's CPK1 binary packs and golden test fixtures into a standalone language-agnostic Conformance Kit enables a clean-room zero-dependency Rust engine port (caelus-rs) that achieves bit-exact CPK1 decoding and <=1e-6 parity against the Python reference with native throughput.",
+  "null_baseline": "TypeScript-only golden test runner tightly coupled to Node ESM and packages/caelus/test/.",
+  "success_bar": "Standalone Conformance Kit grades both TypeScript and Rust engines with 100% pass across all core ephemeris, house, aspect, event, and observe vectors; Rust CPK1 decoder produces bit-identical f64 coefficients to Python and TypeScript without runtime powf drift.",
+  "kill_criterion": "Do not start Rust porting until the CPK1 binary pack format (Milestone 4) and conformance manifest schema are frozen and passing 100% on both Python and TypeScript.",
+  "entrypoint": null,
+  "dependencies": [
+    "ROADMAP.md Milestone 4 CPK1 pack format frozen",
+    "ROADMAP.md Milestone 7 planning alignment"
+  ],
+  "tags": [
+    "roadmap",
+    "milestone-7",
+    "conformance",
+    "rust",
+    "cpk1",
+    "long-term"
+  ]
+}

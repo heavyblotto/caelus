@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 447" font-family="et-book, ET-Bembo, Palatino, Georgia, serif" font-size="12">
+<rect width="860" height="447" fill="white"/>
+<text x="32" y="28" font-size="17">EXP-004: 30-Day Same-UTC Cosine Similarity by Lag (Days 1 to 29)</text>
+<text x="32" y="46" font-size="12" fill="#666">Oslo 14:00 UTC, m=0 (435 pairs): Hybrid/Caelus avoid 7d aliasing (0.708 vs 0.964 Unix Fourier; RoPE=1.0)</text>
+<text x="68.0" y="78.0" font-size="12" fill="#222">Hybrid-Dual-Geo-RoPE</text>
+<line x1="68.0" y1="206.5" x2="68.0" y2="86.0" stroke="#444" stroke-width="0.8"/>
+<line x1="68.0" y1="206.5" x2="281.3" y2="206.5" stroke="#444" stroke-width="0.8"/>
+<polyline points="68.0,113.3 113.7,145.4 167.0,161.1 220.4,172.5 273.7,137.1 281.3,160.1" fill="none" stroke="#222" stroke-width="1.1"/>
+<text x="64.0" y="89.0" text-anchor="end" font-size="10" fill="#666">1</text>
+<text x="64.0" y="209.5" text-anchor="end" font-size="10" fill="#666">0.408</text>
+<text x="68.0" y="218.5" text-anchor="middle" font-size="10" fill="#666">1</text>
+<text x="281.3" y="218.5" text-anchor="middle" font-size="10" fill="#666">29</text>
+<text x="333.3" y="78.0" font-size="12" fill="#222">Caelus-Pure-Geo</text>
+<line x1="333.3" y1="206.5" x2="333.3" y2="86.0" stroke="#444" stroke-width="0.8"/>
+<line x1="333.3" y1="206.5" x2="546.7" y2="206.5" stroke="#444" stroke-width="0.8"/>
+<polyline points="333.3,113.3 379.0,145.4 432.4,161.1 485.7,172.5 539.0,137.1 546.7,160.1" fill="none" stroke="#222" stroke-width="1.1"/>
+<text x="598.7" y="78.0" font-size="12" fill="#222">Unix-Linear-Fourier</text>
+<line x1="598.7" y1="206.5" x2="598.7" y2="86.0" stroke="#444" stroke-width="0.8"/>
+<line x1="598.7" y1="206.5" x2="812.0" y2="206.5" stroke="#444" stroke-width="0.8"/>
+<polyline points="598.7,160.1 644.4,93.3 697.7,110.4 751.0,126.1 804.4,132.4 812.0,206.5" fill="none" stroke="#222" stroke-width="1.1"/>
+<text x="68.0" y="260.5" font-size="12" fill="#222">Hybrid-Unix-Fourier</text>
+<line x1="68.0" y1="389.0" x2="68.0" y2="268.5" stroke="#444" stroke-width="0.8"/>
+<line x1="68.0" y1="389.0" x2="281.3" y2="389.0" stroke="#444" stroke-width="0.8"/>
+<polyline points="68.0,338.3 113.7,275.8 167.0,292.9 220.4,308.6 273.7,314.9 281.3,384.7" fill="none" stroke="#222" stroke-width="1.1"/>
+<text x="333.3" y="260.5" font-size="12" fill="#222">Standard-RoPE</text>
+<line x1="333.3" y1="389.0" x2="333.3" y2="268.5" stroke="#444" stroke-width="0.8"/>
+<line x1="333.3" y1="389.0" x2="546.7" y2="389.0" stroke="#444" stroke-width="0.8"/>
+<polyline points="333.3,268.5 379.0,268.5 432.4,268.5 485.7,268.5 539.0,268.5 546.7,268.5" fill="none" stroke="#222" stroke-width="1.1"/>
+</svg>

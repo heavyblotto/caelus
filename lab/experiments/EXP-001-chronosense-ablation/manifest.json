@@ -1,0 +1,14 @@
+{
+  "id": "EXP-001",
+  "title": "Chronosense 4-Arm Ablation: Physical-Horizon Envelope, Read-Write Cursor, and Drift Audit",
+  "track": "research",
+  "status": "active",
+  "created": "2026-11-22",
+  "hypothesis": "Injecting a compact (~40-token) Caelus physical-horizon envelope backed by sceneGeometry and canonicalChart/chartDigest outperforms no-clock, passive UTC ISO, and fixed-24h synthetic sinusoid controls on cross-compaction local night_crossed disambiguation, high-latitude solar-horizon deadline accuracy, daylight/twilight regime accuracy, and deterministic pre-tool cursor drift detection at sub-2ms offline compute cost.",
+  "null_baseline": "Passive UTC ISO-8601 timestamp (Control-ISO) and elapsed-seconds plus fixed 24h sin/cos clock wave (Control-Synthetic).",
+  "success_bar": "100% local night_crossed accuracy across all 5 latitudes x 2 seasons (vs <90% UTC-ISO), 0.0 min physical sunset/solar-noon deadline error (vs >60 min MAE for fixed-24h clock across latitudes), >=99% deterministic cursor drift detection at 0% false positive rate on clean turns, mean compute latency <=2500 us/turn, and <=55 cl100k-approx tokens/turn.",
+  "kill_criterion": "If Treatment-Caelus-Physical fails to beat Control-Synthetic by >=15 percentage points on high-latitude daylight/twilight accuracy or >=45 min MAE on physical sunset deadlines, or exceeds 100 tokens/turn or 10 ms/turn offline latency.",
+  "entrypoint": "experiment.mjs",
+  "runner": "node",
+  "tags": ["chronosense", "ablation", "observe", "canonical", "cursor-audit", "photoperiod"]
+}

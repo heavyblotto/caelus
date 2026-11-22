@@ -1,0 +1,21 @@
+{
+  "id": "EXP-004",
+  "title": "Hybrid Dual-Clock Geo-RoPE Mathematical Prototype and Numerical Simulation",
+  "track": "research",
+  "status": "active",
+  "created": "2026-11-22",
+  "hypothesis": "Nesting a 32-D fast token/step RoPE clock inside a 32-D Caelus geocentric physical torus (GAST/ASC, solar altitude, planetary-hour photoperiod phase, Moon longitude, Sun-Moon elongation, solar seasonal longitude) preserves 100% intra-turn token ordering where Caelus-Pure-Geo collapses, preserves post-sleep/post-compaction elapsed ordering where Standard-RoPE collapses, beats fixed-period Unix-Linear-Fourier on high-latitude seasonal photoperiod recurrence (Oslo Dec vs Sept), and eliminates 7d/14d/21d/28d weekly aliasing across 30-day same-clock memory streams.",
+  "null_baseline": "Standard-RoPE (token index only), Unix-Linear-Fourier (synthetic fixed-period 24h/7d/365.25d UTC sinusoids), and steelman Hybrid-Unix-Fourier (32-D fast token RoPE + 32-D fixed-period 24h/7d/365.25d UTC sinusoids).",
+  "success_bar": "Hybrid-Dual-Geo-RoPE achieves AUC >= 0.99 on Probe A (confirming Caelus-Pure-Geo collapses near 0.50), AUC >= 0.99 on Probe B (confirming Standard-RoPE collapses near 0.50), beats Unix-Linear-Fourier and Hybrid-Unix-Fourier by >= +0.30 Top-1 accuracy on Probe C Oslo photoperiod recurrence, and achieves lower multi-week collision rate than Unix-Linear-Fourier on Probe D while honestly reporting all probes where Unix-Fourier ties.",
+  "kill_criterion": "Hybrid-Dual-Geo-RoPE fails to beat Unix-Linear-Fourier / Hybrid-Unix-Fourier on Probe C photoperiod recurrence by at least +0.15 Top-1 accuracy, fails to beat Caelus-Pure-Geo on Probe A, or fails to beat Standard-RoPE on Probe B.",
+  "entrypoint": "experiment.py",
+  "tags": [
+    "geo-rope",
+    "chronosense",
+    "rotary-embeddings",
+    "attention",
+    "photoperiod",
+    "python",
+    "research"
+  ]
+}

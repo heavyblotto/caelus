@@ -1,0 +1,367 @@
+{
+  "id": "EXP-004",
+  "run_at": "2026-11-22T15:10:47.511633Z",
+  "git_sha": "c5d89ab",
+  "status": "pass",
+  "summary": "64-D Geo-RoPE simulation over 500 memories / 30 days (Oslo 59.91N + Singapore control): Probe A (2s intra-turn, Earth turns 0.008356 deg): Hybrid AUC=0.9999 vs Caelus-Pure collapse AUC=0.4939 (Hybrid-Unix ties at 0.9988). Probe B (post-sleep reset): Hybrid AUC=1.0 vs Standard-RoPE collapse AUC=0.0 (Unix-Fourier ties at 1.0). Probe C (Oslo Dec-vs-Sept photoperiod): Hybrid circadian Top-1=0.99 (iso 64-D=0.58) beats Unix-Linear-Fourier (0.0) and Hybrid-Unix-Fourier (0.0). Probe D (30d same-UTC non-aliasing): Hybrid collision(>0.90)=0.0 (Top-1=0.9067) vs Unix-Linear-Fourier collision=0.0529 (Top-1=0.7933, 7d alias cos=0.9638).",
+  "metrics": {
+    "stream_memories": 500,
+    "stream_days": 30,
+    "dormancy_gap_days": 10,
+    "embedding_dim": 64,
+    "rotary_planes": 32,
+    "stream_phase_extraction_ms": 672.57,
+    "per_memory_phase_ms": 1.345,
+    "total_runtime_ms": 5872.83,
+    "sanity_checks": {
+      "max_norm_preservation_err": 0.0,
+      "max_parity_sun_alt_diff_deg": 0.0,
+      "max_parity_asc_diff_deg": 0.0,
+      "max_parity_moon_lon_diff_deg": 0.0
+    },
+    "probe_a_intra_turn": {
+      "description": "Intra-turn ordering: 50 steps inside a 2.0-second turn (dt=2.0s)",
+      "measured_earth_rotation_2s_deg": 0.008356,
+      "measured_dt_sec": 2.0,
+      "trials_per_encoder": 200,
+      "encoders": {
+        "Standard-RoPE": {
+          "mean_50step_2s_separation_margin": 0.525786,
+          "retrieval_top1_acc": 1.0,
+          "retrieval_auc": 1.0,
+          "mean_pos_minus_neg_dot": 0.454302
+        },
+        "Unix-Linear-Fourier": {
+          "mean_50step_2s_separation_margin": 0.0,
+          "retrieval_top1_acc": 0.495,
+          "retrieval_auc": 0.4922,
+          "mean_pos_minus_neg_dot": -0.000305
+        },
+        "Caelus-Pure-Geo": {
+          "mean_50step_2s_separation_margin": 0.0,
+          "retrieval_top1_acc": 0.485,
+          "retrieval_auc": 0.4939,
+          "mean_pos_minus_neg_dot": -0.000382
+        },
+        "Hybrid-Dual-Geo-RoPE": {
+          "mean_50step_2s_separation_margin": 0.313234,
+          "retrieval_top1_acc": 1.0,
+          "retrieval_auc": 0.9999,
+          "mean_pos_minus_neg_dot": 0.268153
+        },
+        "Hybrid-Unix-Fourier": {
+          "mean_50step_2s_separation_margin": 0.317635,
+          "retrieval_top1_acc": 1.0,
+          "retrieval_auc": 0.9988,
+          "mean_pos_minus_neg_dot": 0.274938
+        }
+      }
+    },
+    "probe_b_post_sleep": {
+      "description": "Post-sleep (9.5h) and post-dormancy (10.4d) ordering after token index m resets to 0",
+      "sleep_transitions": 18,
+      "dormancy_transitions": 1,
+      "encoders": {
+        "Standard-RoPE": {
+          "mean_overnight_reset_sep_margin_64d": 0.0,
+          "mean_10d_dormancy_reset_sep_margin_64d": 0.0,
+          "fresh_vs_stale_top1_acc": 0.0,
+          "fresh_vs_stale_auc": 0.0,
+          "overnight_causal_order_acc": 0.0,
+          "mean_causal_order_sin_dot": 0.0
+        },
+        "Unix-Linear-Fourier": {
+          "mean_overnight_reset_sep_margin_64d": 0.7653,
+          "mean_10d_dormancy_reset_sep_margin_64d": 0.7507,
+          "fresh_vs_stale_top1_acc": 1.0,
+          "fresh_vs_stale_auc": 1.0,
+          "overnight_causal_order_acc": 1.0,
+          "mean_causal_order_sin_dot": 0.6088
+        },
+        "Caelus-Pure-Geo": {
+          "mean_overnight_reset_sep_margin_64d": 0.5973,
+          "mean_10d_dormancy_reset_sep_margin_64d": 1.1183,
+          "fresh_vs_stale_top1_acc": 1.0,
+          "fresh_vs_stale_auc": 1.0,
+          "overnight_causal_order_acc": 1.0,
+          "mean_causal_order_sin_dot": 0.6434
+        },
+        "Hybrid-Dual-Geo-RoPE": {
+          "mean_overnight_reset_sep_margin_64d": 0.2962,
+          "mean_10d_dormancy_reset_sep_margin_64d": 0.5625,
+          "fresh_vs_stale_top1_acc": 1.0,
+          "fresh_vs_stale_auc": 1.0,
+          "overnight_causal_order_acc": 1.0,
+          "mean_causal_order_sin_dot": 0.645
+        },
+        "Hybrid-Unix-Fourier": {
+          "mean_overnight_reset_sep_margin_64d": 0.3375,
+          "mean_10d_dormancy_reset_sep_margin_64d": 0.3818,
+          "fresh_vs_stale_top1_acc": 1.0,
+          "fresh_vs_stale_auc": 1.0,
+          "overnight_causal_order_acc": 1.0,
+          "mean_causal_order_sin_dot": 0.6088
+        }
+      }
+    },
+    "probe_c_photoperiod_oslo": {
+      "city": "Oslo",
+      "lat": 59.9139,
+      "lon": 10.7522,
+      "queries_evaluated": 100,
+      "mean_seasonal_utc_shift_hours": 3.12,
+      "mean_distractor_sun_alt_error_deg": 21.81,
+      "encoders": {
+        "Standard-RoPE": {
+          "isotropic_64d_top1_acc": 0.09,
+          "isotropic_64d_vs_same_utc_win_rate": 0.49,
+          "isotropic_64d_auc": 0.4827,
+          "isotropic_64d_margin_vs_same_utc": 0.0008,
+          "circadian_head_top1_acc": 0.09,
+          "circadian_head_vs_same_utc_win_rate": 0.49,
+          "circadian_head_auc": 0.4827,
+          "circadian_head_margin_vs_same_utc": 0.0008
+        },
+        "Unix-Linear-Fourier": {
+          "isotropic_64d_top1_acc": 0.0,
+          "isotropic_64d_vs_same_utc_win_rate": 0.0,
+          "isotropic_64d_auc": 0.3915,
+          "isotropic_64d_margin_vs_same_utc": -0.406,
+          "circadian_head_top1_acc": 0.0,
+          "circadian_head_vs_same_utc_win_rate": 0.0,
+          "circadian_head_auc": 0.4098,
+          "circadian_head_margin_vs_same_utc": -1.0672
+        },
+        "Caelus-Pure-Geo": {
+          "isotropic_64d_top1_acc": 0.6,
+          "isotropic_64d_vs_same_utc_win_rate": 0.98,
+          "isotropic_64d_auc": 0.8875,
+          "isotropic_64d_margin_vs_same_utc": 0.2739,
+          "circadian_head_top1_acc": 1.0,
+          "circadian_head_vs_same_utc_win_rate": 1.0,
+          "circadian_head_auc": 0.9994,
+          "circadian_head_margin_vs_same_utc": 0.6719
+        },
+        "Hybrid-Dual-Geo-RoPE": {
+          "isotropic_64d_top1_acc": 0.58,
+          "isotropic_64d_vs_same_utc_win_rate": 0.92,
+          "isotropic_64d_auc": 0.817,
+          "isotropic_64d_margin_vs_same_utc": 0.1422,
+          "circadian_head_top1_acc": 0.99,
+          "circadian_head_vs_same_utc_win_rate": 1.0,
+          "circadian_head_auc": 0.997,
+          "circadian_head_margin_vs_same_utc": 0.6853
+        },
+        "Hybrid-Unix-Fourier": {
+          "isotropic_64d_top1_acc": 0.0,
+          "isotropic_64d_vs_same_utc_win_rate": 0.0,
+          "isotropic_64d_auc": 0.4032,
+          "isotropic_64d_margin_vs_same_utc": -0.2091,
+          "circadian_head_top1_acc": 0.0,
+          "circadian_head_vs_same_utc_win_rate": 0.0,
+          "circadian_head_auc": 0.4331,
+          "circadian_head_margin_vs_same_utc": -1.0277
+        }
+      }
+    },
+    "probe_c_photoperiod_singapore_control": {
+      "city": "Singapore",
+      "lat": 1.3521,
+      "lon": 103.8198,
+      "queries_evaluated": 100,
+      "mean_seasonal_utc_shift_hours": 0.09,
+      "mean_distractor_sun_alt_error_deg": 1.45,
+      "encoders": {
+        "Standard-RoPE": {
+          "isotropic_64d_top1_acc": 0.14,
+          "isotropic_64d_vs_same_utc_win_rate": 0.53,
+          "isotropic_64d_auc": 0.517,
+          "isotropic_64d_margin_vs_same_utc": 0.0018,
+          "circadian_head_top1_acc": 0.14,
+          "circadian_head_vs_same_utc_win_rate": 0.53,
+          "circadian_head_auc": 0.517,
+          "circadian_head_margin_vs_same_utc": 0.0018
+        },
+        "Unix-Linear-Fourier": {
+          "isotropic_64d_top1_acc": 0.66,
+          "isotropic_64d_vs_same_utc_win_rate": 0.67,
+          "isotropic_64d_auc": 0.899,
+          "isotropic_64d_margin_vs_same_utc": 0.039,
+          "circadian_head_top1_acc": 0.48,
+          "circadian_head_vs_same_utc_win_rate": 0.48,
+          "circadian_head_auc": 0.9414,
+          "circadian_head_margin_vs_same_utc": -0.0005
+        },
+        "Caelus-Pure-Geo": {
+          "isotropic_64d_top1_acc": 0.18,
+          "isotropic_64d_vs_same_utc_win_rate": 0.22,
+          "isotropic_64d_auc": 0.8521,
+          "isotropic_64d_margin_vs_same_utc": -0.0635,
+          "circadian_head_top1_acc": 0.64,
+          "circadian_head_vs_same_utc_win_rate": 0.64,
+          "circadian_head_auc": 0.9486,
+          "circadian_head_margin_vs_same_utc": 0.0018
+        },
+        "Hybrid-Dual-Geo-RoPE": {
+          "isotropic_64d_top1_acc": 0.23,
+          "isotropic_64d_vs_same_utc_win_rate": 0.31,
+          "isotropic_64d_auc": 0.7982,
+          "isotropic_64d_margin_vs_same_utc": -0.0358,
+          "circadian_head_top1_acc": 0.54,
+          "circadian_head_vs_same_utc_win_rate": 0.54,
+          "circadian_head_auc": 0.9485,
+          "circadian_head_margin_vs_same_utc": 0.0033
+        },
+        "Hybrid-Unix-Fourier": {
+          "isotropic_64d_top1_acc": 0.55,
+          "isotropic_64d_vs_same_utc_win_rate": 0.63,
+          "isotropic_64d_auc": 0.8549,
+          "isotropic_64d_margin_vs_same_utc": 0.0284,
+          "circadian_head_top1_acc": 0.37,
+          "circadian_head_vs_same_utc_win_rate": 0.37,
+          "circadian_head_auc": 0.93,
+          "circadian_head_margin_vs_same_utc": -0.0104
+        }
+      }
+    },
+    "probe_d_multiweek_aliasing": {
+      "description": "30-day same-UTC-hour (14:00 UTC, m=0) non-aliasing separation in Oslo",
+      "days": 30,
+      "distinct_pairs": 435,
+      "encoders": {
+        "Standard-RoPE": {
+          "pairs_evaluated": 435,
+          "collision_rate_gt_0p90": 1.0,
+          "collision_rate_gt_0p95": 1.0,
+          "max_off_diagonal_cos": 1.0,
+          "mean_separation_1_minus_cos": 0.0,
+          "exact_day_top1_acc": 0.04,
+          "exact_day_auc": 0.4665,
+          "lag_mean_cos": {
+            "1d": 1.0,
+            "7d": 1.0,
+            "14d": 1.0,
+            "21d": 1.0,
+            "28d": 1.0,
+            "29d": 1.0
+          },
+          "lag_separation_1_minus_cos": {
+            "1d": 0.0,
+            "7d": 0.0,
+            "14d": 0.0,
+            "21d": 0.0,
+            "28d": 0.0,
+            "29d": 0.0
+          }
+        },
+        "Unix-Linear-Fourier": {
+          "pairs_evaluated": 435,
+          "collision_rate_gt_0p90": 0.0529,
+          "collision_rate_gt_0p95": 0.0529,
+          "max_off_diagonal_cos": 0.9638,
+          "mean_separation_1_minus_cos": 0.4668,
+          "exact_day_top1_acc": 0.7933,
+          "exact_day_auc": 0.9918,
+          "lag_mean_cos": {
+            "1d": 0.6358,
+            "7d": 0.9638,
+            "14d": 0.88,
+            "21d": 0.8027,
+            "28d": 0.772,
+            "29d": 0.4083
+          },
+          "lag_separation_1_minus_cos": {
+            "1d": 0.3642,
+            "7d": 0.0362,
+            "14d": 0.12,
+            "21d": 0.1973,
+            "28d": 0.228,
+            "29d": 0.5917
+          }
+        },
+        "Caelus-Pure-Geo": {
+          "pairs_evaluated": 435,
+          "collision_rate_gt_0p90": 0.0,
+          "collision_rate_gt_0p95": 0.0,
+          "max_off_diagonal_cos": 0.8872,
+          "mean_separation_1_minus_cos": 0.4194,
+          "exact_day_top1_acc": 0.9867,
+          "exact_day_auc": 0.9996,
+          "lag_mean_cos": {
+            "1d": 0.8662,
+            "7d": 0.7084,
+            "14d": 0.6309,
+            "21d": 0.5746,
+            "28d": 0.7486,
+            "29d": 0.6356
+          },
+          "lag_separation_1_minus_cos": {
+            "1d": 0.1338,
+            "7d": 0.2916,
+            "14d": 0.3691,
+            "21d": 0.4254,
+            "28d": 0.2514,
+            "29d": 0.3644
+          }
+        },
+        "Hybrid-Dual-Geo-RoPE": {
+          "pairs_evaluated": 435,
+          "collision_rate_gt_0p90": 0.0,
+          "collision_rate_gt_0p95": 0.0,
+          "max_off_diagonal_cos": 0.8872,
+          "mean_separation_1_minus_cos": 0.4194,
+          "exact_day_top1_acc": 0.9067,
+          "exact_day_auc": 0.9935,
+          "lag_mean_cos": {
+            "1d": 0.8662,
+            "7d": 0.7084,
+            "14d": 0.6309,
+            "21d": 0.5746,
+            "28d": 0.7486,
+            "29d": 0.6356
+          },
+          "lag_separation_1_minus_cos": {
+            "1d": 0.1338,
+            "7d": 0.2916,
+            "14d": 0.3691,
+            "21d": 0.4254,
+            "28d": 0.2514,
+            "29d": 0.3644
+          }
+        },
+        "Hybrid-Unix-Fourier": {
+          "pairs_evaluated": 435,
+          "collision_rate_gt_0p90": 0.0529,
+          "collision_rate_gt_0p95": 0.0529,
+          "max_off_diagonal_cos": 0.9638,
+          "mean_separation_1_minus_cos": 0.4667,
+          "exact_day_top1_acc": 0.6467,
+          "exact_day_auc": 0.9814,
+          "lag_mean_cos": {
+            "1d": 0.657,
+            "7d": 0.9638,
+            "14d": 0.88,
+            "21d": 0.8027,
+            "28d": 0.772,
+            "29d": 0.4295
+          },
+          "lag_separation_1_minus_cos": {
+            "1d": 0.343,
+            "7d": 0.0362,
+            "14d": 0.12,
+            "21d": 0.1973,
+            "28d": 0.228,
+            "29d": 0.5705
+          }
+        }
+      }
+    },
+    "honest_tie_vs_win_analysis": {
+      "probe_a_intra_turn": "Hybrid-Dual-Geo-RoPE (AUC=0.9999, Top-1=1.0) beats Caelus-Pure-Geo (AUC=0.4939, margin=0.0) and pure Unix-Linear-Fourier (AUC=0.4922), confirming 2-second astronomical collapse (Earth turns 0.008356 deg in 2s). Steelman Hybrid-Unix-Fourier TIES Hybrid-Dual-Geo-RoPE (AUC=0.9988) because both share the 32-D fast token clock.",
+      "probe_b_post_sleep": "Hybrid-Dual-Geo-RoPE (AUC=1.0, Top-1=1.0) beats Standard-RoPE (AUC=0.0, overnight margin=0.0). Unix-Linear-Fourier (AUC=1.0) and Hybrid-Unix-Fourier (AUC=1.0) TIE Hybrid-Dual-Geo-RoPE on elapsed-sleep separation because raw UTC 24h phase rotates ~142 deg across a 9.5h sleep.",
+      "probe_c_photoperiod_oslo": "Hybrid-Dual-Geo-RoPE WINS decisively on Oslo Dec-vs-Sept photoperiod recurrence: circadian-head Top-1=0.99 (vs-same-UTC win rate=1.0, AUC=0.997) and isotropic 64-D Top-1=0.58 (win rate=0.92), whereas BOTH Unix-Linear-Fourier (circadian Top-1=0.0, win rate=0.0) and Hybrid-Unix-Fourier (circadian Top-1=0.0, win rate=0.0) systematically pick the wrong same-UTC afternoon/night distractor (mean solar altitude error 21.81 deg). At equatorial Singapore (mean seasonal shift 0.09h), Unix-Linear-Fourier and Hybrid nearly TIE, confirming the gain is genuinely driven by latitude-dependent solar declination physics.",
+      "probe_d_multiweek_aliasing": "Hybrid-Dual-Geo-RoPE achieves collision_rate(>0.90)=0.0 (collision >0.95=0.0, exact-day Top-1=0.9067) with zero weekly aliasing (7d cos=0.7084, 14d=0.6309, 28d=0.7486), whereas Unix-Linear-Fourier (collision >0.90=0.0529, exact-day Top-1=0.7933) and Hybrid-Unix-Fourier (collision >0.90=0.0529, exact-day Top-1=0.6467) alias sharply at 7d/14d/21d/28d multiples (7d cos=0.9638). Caveat: at 1d lag and 29d lag (near the 29.53d synodic month), Unix-Linear-Fourier's 7d cycle gives wider 1d/29d separation (Unix 1d cos=0.6358, 29d cos=0.4083 vs Hybrid 1d cos=0.8662, 29d cos=0.6356), while Hybrid's incommensurate sidereal Moon (27.32d) + GAST + Sun longitude still prevent collision (29d cos=0.6356 < 0.90)."
+    }
+  },
+  "verdict": "PASS: Hybrid-Dual-Geo-RoPE clears all 4 probes, resolves Caelus-Pure's 2-second collapse and Standard-RoPE's post-sleep collapse, and decisively outperforms both Unix-Linear-Fourier and steelman Hybrid-Unix-Fourier on high-latitude photoperiod recurrence (Probe C) and weekly non-aliasing (Probe D), while tying Hybrid-Unix-Fourier on Probes A and B."
+}

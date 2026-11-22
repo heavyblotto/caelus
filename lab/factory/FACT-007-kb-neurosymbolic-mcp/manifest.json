@@ -1,0 +1,25 @@
+{
+  "id": "FACT-007",
+  "title": "Structured Knowledge Graph (caelus-kb) for Neuro-Symbolic MCP Discovery",
+  "track": "factory",
+  "status": "queued",
+  "stage": "stage-0-gated",
+  "created": "2026-11-22",
+  "hypothesis": "Exposing a lightweight, prose-free typed concept graph (nodes, edges, computedBy MCP links, parseAtomId/parseCellId, Wikidata sameAs) as an optional MCP resource or helper improves multi-step MCP tool routing and citation fact resolution for AI agents.",
+  "null_baseline": "Flat MCP tool descriptions + glossary resource (caelus://glossary) with standard LLM tool selection.",
+  "success_bar": "Hard promotion gate: an R&D Lab ablation demonstrates >=15% higher multi-step tool-routing or citation-resolution accuracy over flat tool schemas on a 50-query benchmark, with zero drift against core.ts tools and zero interpretive prose inside core.",
+  "kill_criterion": "If flat MCP tool schemas + caelus://glossary tie or beat graph-assisted routing in the R&D ablation, keep caelus-kb strictly as an external companion package and do not expand caelus-mcp surface area.",
+  "entrypoint": null,
+  "dependencies": [
+    "Mined prior art: archive/feature/house-corpus packages/kb (604 nodes, 578 edges, drift.test.ts)",
+    "R&D ablation experiment beating flat MCP tool list"
+  ],
+  "tags": [
+    "knowledge-graph",
+    "mcp",
+    "neuro-symbolic",
+    "citations",
+    "gated",
+    "mined"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "FACT-003",
+  "title": "Roadmap Milestones 5 and 6 Closure: when() Heliacal Predicate and minted_bodies MCP Tool",
+  "track": "factory",
+  "status": "queued",
+  "stage": "stage-0-spec",
+  "created": "2026-11-22",
+  "hypothesis": "Closing the two remaining planned gaps in ROADMAP.md Milestones 5 and 6 (composable heliacal visibility predicates inside when() and a Node-free minted_bodies MCP tool backed by a verified GitHub Actions mint run) completes both milestones end-to-end across Python, TypeScript, MCP, and docs.",
+  "null_baseline": "Calling heliacal() imperatively outside when() without boolean composition, and manually downloading .cpk packs outside MCP.",
+  "success_bar": "Python and TypeScript heliacal predicates match within 1e-6 across golden fixtures and compose cleanly with allOf/anyOf/not; minted_bodies MCP tool stays 100% Node-free (check:mcp-surface passes), verifies SHA-256 certificates before decoding, and full npm run preflight passes.",
+  "kill_criterion": "If heliacal twilight evaluation inside when() coarse scan exceeds 50 ms/year on embedded tier without an adaptive step size, refactor sampling before promoting past Stage 2.",
+  "entrypoint": null,
+  "dependencies": [
+    "ROADMAP.md Milestone 4 CPK1 packs (done)",
+    "ROADMAP.md Milestone 5 heliacal core (done)",
+    "ROADMAP.md Milestone 6 mint script and loaders (done)"
+  ],
+  "tags": [
+    "roadmap",
+    "milestone-5",
+    "milestone-6",
+    "when",
+    "heliacal",
+    "minted",
+    "mcp"
+  ]
+}

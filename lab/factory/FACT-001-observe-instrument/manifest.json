@@ -1,0 +1,25 @@
+{
+  "id": "FACT-001",
+  "title": "Instrument I-05: Field Verifier and Chronolocator",
+  "track": "factory",
+  "status": "queued",
+  "stage": "stage-0-spec",
+  "created": "2026-11-22",
+  "hypothesis": "Surfacing observe.ts (sceneGeometry, verifyObservation, chronolocate, geolocate) as interactive browser Instrument I-05 on ephemengine.com lets users and developers verify shadow/sky claims, chronolocate scenes, and run celestial fixes locally in-browser with copyable TypeScript calls.",
+  "null_baseline": "Static documentation examples and CLI-only MCP calls without interactive visual shadow/horizon/globe feedback.",
+  "success_bar": "All 3 modes (Verify, Chronolocate, Geolocate) render deterministically in-browser on embeddedData at <50 ms per interaction, match Workbench grammar (I-01..I-04), pass widget unit tests, Next web build/smoke, Astro site build/smoke, and full npm run preflight.",
+  "kill_criterion": "Bundle size exceeds Workbench instrument budget or browser embedded-tier accuracy diverges from observe-golden.json tolerances.",
+  "entrypoint": null,
+  "dependencies": [
+    "feat/observe-and-release-rollup preflight green",
+    "EXP-003 scenario presets"
+  ],
+  "tags": [
+    "instrument",
+    "widgets",
+    "observe",
+    "workbench",
+    "web",
+    "site"
+  ]
+}
