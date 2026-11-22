@@ -15,7 +15,7 @@ import { ASPECT_GLYPH, aspectColor, crossAspect, ASPECTABLE_ORDER as GRID } from
 
 const ReadingTab = dynamic(() => import("./ReadingTab"), {
   ssr: false,
-  loading: () => <p className="dim small" style={{ marginTop: 0 }}>reading the charts…</p>,
+  loading: () => <p className="dim small">Reading the charts...</p>,
 });
 
 const engine = new Engine(embeddedData);
@@ -57,35 +57,47 @@ function personChart(p: Person): { chart: Chart; jd: number; zone: string } | nu
   }
 }
 
-const cell: React.CSSProperties = { padding: "0.15rem 0.7rem 0.15rem 0" };
-
 function PersonInputs({ p, legend, onChange }: { p: Person; legend: string; onChange: (p: Person) => void }) {
+  const [datePart, timePart] = (p.iso || "1990-06-10T12:00").split("T");
   return (
     <div className="controls">
-      <div className="field">
+      <div className="field field--compact">
         <span className="field__label">{legend} · name</span>
         <input
           className="control"
-          style={{ width: "4rem" }}
           value={p.name}
           onChange={(e) => onChange({ ...p, name: e.target.value })}
           aria-label={`${legend} name`}
         />
       </div>
-      <div className="field">
+      <div className="field field--place">
         <span className="field__label">birthplace</span>
         <CityPicker
-          width="11rem"
+          placeholder={p.place || "search city..."}
           onSelect={(c: City) => onChange({ ...p, lat: String(c.lat), lon: String(c.lon), place: `${c.name}, ${c.country}` })}
         />
       </div>
-      <div className="field">
-        <span className="field__label">local birth time</span>
+      <div className="field field--date">
+        <span className="field__label">local date</span>
         <input
           className="control"
-          type="datetime-local"
-          value={p.iso}
-          onChange={(e) => onChange({ ...p, iso: e.target.value })}
+          type="date"
+          value={datePart ?? ""}
+          onChange={(e) => {
+            if (e.target.value) onChange({ ...p, iso: `${e.target.value}T${timePart || "12:00"}` });
+          }}
+          aria-label={`${legend} local birth date`}
+        />
+      </div>
+      <div className="field field--time">
+        <span className="field__label">local time</span>
+        <input
+          className="control"
+          type="time"
+          value={timePart ?? "12:00"}
+          onChange={(e) => {
+            if (e.target.value && datePart) onChange({ ...p, iso: `${datePart}T${e.target.value}` });
+          }}
           aria-label={`${legend} local birth time`}
         />
       </div>
@@ -143,126 +155,154 @@ export default function SynastryPanel() {
   const bPlanets = b ? GRID.filter((g) => b.chart.bodies[g]) : [];
   const contacts: SynContact[] = [];
   if (a && b) {
-    for (const ap of aPlanets) for (const bp of bPlanets) {
-      const asp = crossAspect(a.chart.bodies[ap]!.lon, b.chart.bodies[bp]!.lon);
-      if (asp) contacts.push({ aBody: ap, bBody: bp, aspect: asp.aspect, orb: asp.orb });
+    for (const ap of aPlanets) {
+      for (const bp of bPlanets) {
+        const asp = crossAspect(a.chart.bodies[ap]!.lon, b.chart.bodies[bp]!.lon);
+        if (asp) contacts.push({ aBody: ap, bBody: bp, aspect: asp.aspect, orb: asp.orb });
+      }
     }
   }
 
   return (
-    <div className="card" style={{ padding: "1.2rem" }}>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.7rem 2rem", alignItems: "flex-end" }}>
-        <PersonInputs p={people[0]} legend="Person A" onChange={set(0)} />
-        <PersonInputs p={people[1]} legend="Person B" onChange={set(1)} />
-        <button type="button" className="btn btn-secondary btn-sm" onClick={share}>
-          {copied ? "Link copied ✓" : "Copy share link"}
-        </button>
-      </div>
-
-      {!a || !b ? (
-        <p className="dim small" style={{ marginTop: "1rem" }}>Enter two valid births to compare.</p>
-      ) : (
-        <>
-          <p className="dim small" style={{ margin: "0.8rem 0 0" }}>
-            {people[0].name || "A"} ({a.zone}) and {people[1].name || "B"} ({b.zone}), computed client-side.
-          </p>
-
-          <figure className="chart-fluid" style={{ margin: "1rem auto 0", maxWidth: "24rem", textAlign: "center" }}>
-            <BiWheel
-              inner={a.chart}
-              outer={b.chart}
-              contacts={contacts}
-              size={420}
-              innerLabel={people[0].name || "A"}
-              outerLabel={people[1].name || "B"}
-            />
-            <figcaption className="dim small" style={{ marginTop: "0.3rem" }}>
-              {people[0].name || "A"} inner · {people[1].name || "B"} outer · the inter-chart aspect web
-            </figcaption>
-          </figure>
-
-          {/* Synastry cross-aspect grid: A's planets (rows) to B's planets (columns) */}
-          <h3 style={{ marginTop: "1.6rem", marginBottom: "0.3rem" }}>Synastry</h3>
-          <p className="dim small" style={{ margin: "0 0 0.6rem" }}>
-            Inter-chart aspects: a row is {people[0].name || "A"}&rsquo;s planet, a column is {people[1].name || "B"}&rsquo;s.
-          </p>
-          <div style={{ overflowX: "auto" }}>
-            <table className="mono table-auto" style={{ borderCollapse: "collapse", fontSize: "0.95rem" }}>
-              <thead>
-                <tr>
-                  <td style={{ ...cell, color: "var(--text-mute)" }} />
-                  {bPlanets.map((bp) => (
-                    <th key={bp} style={{ width: "1.5rem", textAlign: "center", color: "var(--text-mute)", fontWeight: 400 }}>
-                      {GLYPHS[bp] ?? bp.slice(0, 2)}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {aPlanets.map((ap) => (
-                  <tr key={ap}>
-                    <th style={{ ...cell, textAlign: "left", color: "var(--text-mute)", fontWeight: 400 }}>
-                      {GLYPHS[ap] ?? ap.slice(0, 2)}
-                    </th>
-                    {bPlanets.map((bp) => {
-                      const asp = crossAspect(a.chart.bodies[ap]!.lon, b.chart.bodies[bp]!.lon);
-                      return (
-                        <td
-                          key={bp}
-                          title={asp ? `${ap} ${asp.aspect} ${bp} · orb ${asp.orb}°` : `${ap} / ${bp}`}
-                          style={{
-                            width: "1.5rem", height: "1.5rem", textAlign: "center",
-                            border: "1px solid var(--border)", color: aspectColor(asp?.aspect),
-                          }}
-                        >
-                          {asp ? ASPECT_GLYPH[asp.aspect] ?? "" : ""}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+    <div className="bench">
+      <section className="tile s12" aria-label="Synastry birth inputs">
+        <div className="tile__h">
+          <b>PAIR</b>
+          <span>Two births</span>
+          <div className="tile__actions">
+            <button type="button" className="btn btn-secondary btn-sm" onClick={share}>
+              {copied ? "Link copied" : "Copy share link"}
+            </button>
           </div>
-
-          {/* Composite (midpoint) chart positions */}
-          {composite && (
-            <>
-              <h3 style={{ marginTop: "1.6rem", marginBottom: "0.3rem" }}>Composite</h3>
-              <p className="dim small" style={{ margin: "0 0 0.6rem" }}>
-                The midpoint chart: each body at the circular midpoint of the two.
-              </p>
-              <table className="mono" style={{ fontSize: "0.82rem" }}>
-                <tbody>
-                  {GRID.filter((g) => composite[g] !== undefined).map((g) => (
-                    <tr key={g}>
-                      <td className="mute" style={cell}>{GLYPHS[g] ? `${GLYPHS[g]} ` : ""}{g}</td>
-                      <td style={cell}>{fmtLon(composite[g])}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </>
+        </div>
+        <div className="tile__b stack">
+          <PersonInputs p={people[0]} legend="Person A" onChange={set(0)} />
+          <PersonInputs p={people[1]} legend="Person B" onChange={set(1)} />
+          {(!a || !b) ? (
+            <p className="dim small">Enter two valid births to compare.</p>
+          ) : (
+            <p className="dim small">
+              {people[0].name || "A"} ({a.zone}) and {people[1].name || "B"} ({b.zone}), computed client-side.
+            </p>
           )}
+        </div>
+      </section>
+
+      {a && b && (
+        <>
+          <section className="tile s6" aria-label="Synastry bi-wheel">
+            <div className="tile__h">
+              <b>FIG</b>
+              <span>Bi-wheel</span>
+              <i>{contacts.length} contacts</i>
+            </div>
+            <div className="tile__b stack--sm">
+              <figure className="chart-fluid">
+                <BiWheel
+                  inner={a.chart}
+                  outer={b.chart}
+                  contacts={contacts}
+                  size={420}
+                  innerLabel={people[0].name || "A"}
+                  outerLabel={people[1].name || "B"}
+                />
+                <figcaption className="dim small">
+                  {people[0].name || "A"} inner · {people[1].name || "B"} outer · inter-chart aspect web
+                </figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section className="tile s6" aria-label="Synastry grid and composite">
+            <div className="tile__h">
+              <b>GRID</b>
+              <span>Inter-chart aspects &amp; composite</span>
+            </div>
+            <div className="tile__b stack">
+              <div className="stack--sm">
+                <p className="dim small">
+                  Rows are {people[0].name || "A"}&rsquo;s planets; columns are {people[1].name || "B"}&rsquo;s.
+                </p>
+                <div className="table-scroll" tabIndex={0} role="region" aria-label="Synastry cross-aspect grid">
+                  <table className="mono data-table synastry-grid">
+                    <thead>
+                      <tr>
+                        <th scope="col" aria-label="Body" />
+                        {bPlanets.map((bp) => (
+                          <th key={bp} scope="col" className="mute">
+                            {GLYPHS[bp] ?? bp.slice(0, 2)}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {aPlanets.map((ap) => (
+                        <tr key={ap}>
+                          <th scope="row" className="mute">
+                            {GLYPHS[ap] ?? ap.slice(0, 2)}
+                          </th>
+                          {bPlanets.map((bp) => {
+                            const asp = crossAspect(a.chart.bodies[ap]!.lon, b.chart.bodies[bp]!.lon);
+                            return (
+                              <td
+                                key={bp}
+                                title={asp ? `${ap} ${asp.aspect} ${bp} · orb ${asp.orb}°` : `${ap} / ${bp}`}
+                                data-aspect={asp?.aspect}
+                                style={asp ? { color: aspectColor(asp.aspect) } : undefined}
+                              >
+                                {asp ? ASPECT_GLYPH[asp.aspect] ?? "" : ""}
+                              </td>
+                            );
+                          })}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {composite && (
+                <div className="stack--sm">
+                  <h3>Composite midpoints</h3>
+                  <div className="table-scroll" tabIndex={0} role="region" aria-label="Composite midpoint longitudes">
+                    <table className="mono data-table">
+                      <thead>
+                        <tr><th scope="col">Body</th><th scope="col">Midpoint</th></tr>
+                      </thead>
+                      <tbody>
+                        {GRID.filter((g) => composite[g] !== undefined).map((g) => (
+                          <tr key={g}>
+                            <th scope="row" className="mute">{GLYPHS[g] ? `${GLYPHS[g]} ` : ""}{g}</th>
+                            <td className="num">{fmtLon(composite[g])}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
 
           {readingInputs && (
-            <section aria-label="Reading" className="reading-panel">
-              <div className="reading-panel__head">
-                <span className="eyebrow" style={{ margin: 0 }}>Reading</span>
-                <span className="dim small">
-                  {people[0].name || "A"}&rsquo;s chart as the base; synastry and composite facts are citable atoms
-                </span>
+            <section className="tile s12" aria-label="Synastry reading">
+              <div className="tile__h">
+                <b>READ</b>
+                <span>Cited relationship reading</span>
+                <i>{people[0].name || "A"} + {people[1].name || "B"}</i>
               </div>
-              <ReadingTab
-                chart={a.chart}
-                engine={engine}
-                lat={Number(people[0].lat)}
-                lonEast={Number(people[0].lon)}
-                zodiac="tropical"
-                stars={readingInputs.stars}
-                lots={readingInputs.lots}
-                partner={{ chart: b.chart, label: people[0].name || "A" }}
-              />
+              <div className="tile__b">
+                <ReadingTab
+                  chart={a.chart}
+                  engine={engine}
+                  lat={Number(people[0].lat)}
+                  lonEast={Number(people[0].lon)}
+                  zodiac="tropical"
+                  stars={readingInputs.stars}
+                  lots={readingInputs.lots}
+                  partner={{ chart: b.chart, label: people[0].name || "A" }}
+                />
+              </div>
             </section>
           )}
         </>

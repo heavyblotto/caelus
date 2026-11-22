@@ -24,8 +24,8 @@ export default function RetrogradeSlot({
   }, [engine, params, body]);
 
   return (
-    <div>
-      <div className="field" style={{ marginBottom: "0.5rem" }}>
+    <div className="stack--sm">
+      <div className="field field--select">
         <span className="field__label">body</span>
         <select
           className="control"
@@ -41,7 +41,7 @@ export default function RetrogradeSlot({
       {scene ? (
         <RetrogradeScrub scene={scene} size={460} theme={WHEEL_THEME} />
       ) : (
-        <p className="dim small" style={{ marginTop: 0 }}>
+        <p className="dim small">
           No {body} retrograde loop in the scan window around this instant.
         </p>
       )}

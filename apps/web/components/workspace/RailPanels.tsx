@@ -20,17 +20,17 @@ import {
   planetaryHour, registerSyntheticSystem, DEFAULT_ORBS, findAspects,
   type BodyId, type Chart, type Constraint, type Engine, type HouseSystem, type Zodiac,
 } from "caelus";
-import { GLYPHS, ChartWheel, EphemerisGraph, Kundli, type WheelChart } from "caelus-wheel";
+import { GLYPHS, ChartWheel, Kundli, type WheelChart } from "caelus-wheel";
 import BiWheel, { type SynContact } from "../BiWheel";
 import DeclinationTab from "../DeclinationTab";
 import StarsTab from "../StarsTab";
 import InsightsTab from "../InsightsTab";
 import { WHEEL_THEME, WHEEL_LINE_COLORS } from "../../lib/wheelTheme";
-import { cell } from "../../lib/chart-display";
 import {
   isoFromJd, jdFromIso, jdToUtc, CLASSICAL, HELIO_BODIES, PHENO_BODIES,
   extraBodyIds, hoursOfDay, type ProgressMethod,
 } from "./util";
+import { InteractiveEphemerisGraph } from "./VizBridge";
 import type { BirthShare, Share } from "../../lib/share";
 
 const PHASE_LABEL: Record<string, string> = {
@@ -41,11 +41,14 @@ type PlaceView = "longitudes" | "declinations" | "stars" | "lots" | "gauquelin" 
 
 export function PlacementsPanel({
   chart, engine, lat, lon, zodiac, advanced, extras,
-  focus, onToggle, withAspectsOf,
+  focus, selectedBody, hoveredBody, onHoverBody, onToggle, withAspectsOf,
 }: {
   chart: Chart; engine: Engine; lat: number; lon: number; zodiac: Zodiac;
   advanced: boolean; extras: boolean;
   focus: { key: string; bodies: string[] } | null;
+  selectedBody?: string | null;
+  hoveredBody?: string | null;
+  onHoverBody?: (body: string | null) => void;
   onToggle: (key: string, bodies: string[]) => void;
   withAspectsOf: (b: string) => string[];
 }) {
@@ -146,117 +149,158 @@ export function PlacementsPanel({
     : (["longitudes", "declinations", "stars"] as const);
 
   return (
-    <div className="workspace__panel">
-      <div className="seg" role="group" aria-label="Placement view" style={{ marginBottom: "0.7rem" }}>
+    <div className="workspace__panel rail-stack">
+      <div className="seg seg--wrap" role="group" aria-label="Placement view">
         {tabs.map((v) => (
           <button key={v} type="button" className="seg__btn" aria-pressed={view === v} onClick={() => setView(v)}>
             {v.charAt(0).toUpperCase() + v.slice(1)}
           </button>
         ))}
       </div>
+
       {view === "longitudes" && (
-        <>
-          <table className="mono" style={{ fontSize: "0.82rem" }}>
-            <tbody>
-              {ids.map((b) => {
-                const p = chart.bodies[b];
-                const active = focus?.key === `b-${b}`;
-                return (
-                  <tr key={b}
-                    onClick={p ? () => onToggle(`b-${b}`, withAspectsOf(b)) : undefined}
-                    style={p ? { cursor: "pointer", background: active ? "var(--surface-2)" : undefined } : undefined}>
-                    <td className="mute" style={cell}>{GLYPHS[b] ? `${GLYPHS[b]} ` : ""}{b}</td>
-                    {p ? (
-                      <>
-                        <td style={cell}>{fmtLon(p.lon)}{p.retrograde ? " ℞" : ""}</td>
-                        <td className="mute" style={cell}>h{p.house} {angularity(p.house)}</td>
-                      </>
-                    ) : (
-                      <td className="mute" style={cell} colSpan={2}>n/a</td>
-                    )}
-                  </tr>
-                );
-              })}
-              <tr><td className="mute" style={cell}>ASC</td><td style={cell}>{fmtLon(chart.angles.asc)}</td><td /></tr>
-              <tr><td className="mute" style={cell}>MC</td><td style={cell}>{fmtLon(chart.angles.mc)}</td><td /></tr>
-              <tr><td className="mute" style={cell}>Vertex</td><td style={cell}>{fmtLon(chart.angles.vertex)}</td><td /></tr>
-              <tr><td className="mute" style={cell}>East Point</td><td style={cell}>{fmtLon(chart.angles.eastPoint)}</td><td /></tr>
-            </tbody>
-          </table>
-          <p className="dim small" style={{ margin: "0.5rem 0 0" }}>Click a planet to isolate it and its aspects on the figure.</p>
-        </>
+        <div className="stack--sm">
+          <div className="table-scroll" tabIndex={0} role="region" aria-label="Planetary longitudes">
+            <table className="mono data-table data-table--interactive">
+              <thead>
+                <tr>
+                  <th scope="col">Body</th>
+                  <th scope="col">Position</th>
+                  <th scope="col">House</th>
+                  <th scope="col">Speed</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ids.map((b) => {
+                  const p = chart.bodies[b];
+                  const isSelected = selectedBody === b || focus?.key === `b-${b}`;
+                  const isHovered = hoveredBody === b;
+                  return (
+                    <tr
+                      key={b}
+                      data-selected={isSelected ? "true" : undefined}
+                      data-hovered={isHovered ? "true" : undefined}
+                      data-highlighted={isHovered ? "true" : undefined}
+                      onClick={p ? () => onToggle(`b-${b}`, withAspectsOf(b)) : undefined}
+                      onMouseEnter={p && onHoverBody ? () => onHoverBody(b) : undefined}
+                      onMouseLeave={p && onHoverBody ? () => onHoverBody(null) : undefined}
+                    >
+                      <th scope="row" className="mute">
+                        {GLYPHS[b] ? `${GLYPHS[b]} ` : ""}{b}
+                      </th>
+                      {p ? (
+                        <>
+                          <td className="num">{fmtLon(p.lon)}{p.retrograde ? " ℞" : ""}</td>
+                          <td className="mute num">h{p.house} {angularity(p.house)}</td>
+                          <td className="mute num">
+                            {p.speed != null ? `${p.speed >= 0 ? "+" : ""}${p.speed.toFixed(2)}°` : "-"}
+                          </td>
+                        </>
+                      ) : (
+                        <td className="mute" colSpan={3}>n/a</td>
+                      )}
+                    </tr>
+                  );
+                })}
+                <tr><th scope="row" className="mute">ASC</th><td className="num">{fmtLon(chart.angles.asc)}</td><td className="mute">h1 angular</td><td className="mute">-</td></tr>
+                <tr><th scope="row" className="mute">MC</th><td className="num">{fmtLon(chart.angles.mc)}</td><td className="mute">h10 angular</td><td className="mute">-</td></tr>
+                <tr><th scope="row" className="mute">Vertex</th><td className="num">{fmtLon(chart.angles.vertex)}</td><td className="mute">-</td><td className="mute">-</td></tr>
+                <tr><th scope="row" className="mute">East Point</th><td className="num">{fmtLon(chart.angles.eastPoint)}</td><td className="mute">-</td><td className="mute">-</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="dim small">Click or hover a row to cross-highlight that body and its aspects on the figure.</p>
+        </div>
       )}
+
       {view === "declinations" && decl && <DeclinationTab decl={decl} />}
       {view === "stars" && stars && <StarsTab stars={stars} />}
+
       {view === "lots" && lotTable && (
-        <table className="mono" style={{ fontSize: "0.82rem" }}>
-          <tbody>
-            {HERMETIC_LOTS.map((k) => (
-              <tr key={k}>
-                <td className="mute" style={cell}>{k}</td>
-                <td style={cell}>{fmtLon(Number(lotTable[k]))}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-      {view === "gauquelin" && gaq && (
-        <table className="mono" style={{ fontSize: "0.82rem" }}>
-          <tbody>
-            {gaq.map((r) => (
-              <tr key={r.body}>
-                <td className="mute" style={cell}>{r.body}</td>
-                <td style={cell}>{r.sector == null ? "—" : r.sector.toFixed(1)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-      {view === "phenomena" && phenoRows && (
-        <table className="mono" style={{ fontSize: "0.82rem" }}>
-          <thead>
-            <tr className="mute">
-              <td style={cell} /><td style={cell}>az</td><td style={cell}>alt</td>
-              <td style={cell}>elong</td><td style={cell}>phase</td><td style={cell}>mag</td>
-            </tr>
-          </thead>
-          <tbody>
-            {phenoRows.map((r) => (
-              <tr key={r.body}>
-                <td className="mute" style={cell}>{r.body}</td>
-                <td style={cell}>{r.az.toFixed(1)}°</td>
-                <td style={cell}>{r.alt.toFixed(1)}°</td>
-                <td style={cell}>{r.ph.elongation.toFixed(1)}°</td>
-                <td style={cell}>{r.ph.phase.toFixed(2)}</td>
-                <td style={cell}>{r.ph.magnitude.toFixed(1)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-      {view === "heliocentric" && helioRows && (
-        <table className="mono" style={{ fontSize: "0.82rem" }}>
-          <thead>
-            <tr className="mute">
-              <td style={cell} /><td style={cell}>lon</td><td style={cell}>lat</td><td style={cell}>AU</td>
-            </tr>
-          </thead>
-          <tbody>
-            {helioRows.map((r) => (
-              <tr key={r.body}>
-                <td className="mute" style={cell}>{r.body}</td>
-                <td style={cell}>{fmtLon(r.lon)}</td>
-                <td style={cell}>{r.lat.toFixed(2)}°</td>
-                <td style={cell}>{r.dist.toFixed(3)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-      {insights && (
-        <div style={{ marginTop: "1rem" }}>
-          <InsightsTab insights={insights} focus={focus} onToggle={onToggle} />
+        <div className="table-scroll" tabIndex={0} role="region" aria-label="Hermetic lots">
+          <table className="mono data-table">
+            <thead>
+              <tr><th scope="col">Lot</th><th scope="col">Position</th></tr>
+            </thead>
+            <tbody>
+              {HERMETIC_LOTS.map((k) => (
+                <tr key={k}>
+                  <th scope="row" className="mute">{k}</th>
+                  <td className="num">{fmtLon(Number(lotTable[k]))}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
+      )}
+
+      {view === "gauquelin" && gaq && (
+        <div className="table-scroll" tabIndex={0} role="region" aria-label="Gauquelin sectors">
+          <table className="mono data-table">
+            <thead>
+              <tr><th scope="col">Body</th><th scope="col">Sector</th></tr>
+            </thead>
+            <tbody>
+              {gaq.map((r) => (
+                <tr key={r.body}>
+                  <th scope="row" className="mute">{r.body}</th>
+                  <td className="num">{r.sector == null ? "-" : r.sector.toFixed(1)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {view === "phenomena" && phenoRows && (
+        <div className="table-scroll" tabIndex={0} role="region" aria-label="Local sky phenomena">
+          <table className="mono data-table">
+            <thead>
+              <tr>
+                <th scope="col">Body</th><th scope="col">Az</th><th scope="col">Alt</th>
+                <th scope="col">Elong</th><th scope="col">Phase</th><th scope="col">Mag</th>
+              </tr>
+            </thead>
+            <tbody>
+              {phenoRows.map((r) => (
+                <tr key={r.body}>
+                  <th scope="row" className="mute">{r.body}</th>
+                  <td className="num">{r.az.toFixed(1)}°</td>
+                  <td className="num">{r.alt.toFixed(1)}°</td>
+                  <td className="num">{r.ph.elongation.toFixed(1)}°</td>
+                  <td className="num">{r.ph.phase.toFixed(2)}</td>
+                  <td className="num">{r.ph.magnitude.toFixed(1)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {view === "heliocentric" && helioRows && (
+        <div className="table-scroll" tabIndex={0} role="region" aria-label="Heliocentric positions">
+          <table className="mono data-table">
+            <thead>
+              <tr>
+                <th scope="col">Body</th><th scope="col">Lon</th><th scope="col">Lat</th><th scope="col">AU</th>
+              </tr>
+            </thead>
+            <tbody>
+              {helioRows.map((r) => (
+                <tr key={r.body}>
+                  <th scope="row" className="mute">{r.body}</th>
+                  <td className="num">{fmtLon(r.lon)}</td>
+                  <td className="num">{r.lat.toFixed(2)}°</td>
+                  <td className="num">{r.dist.toFixed(3)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {insights && (
+        <InsightsTab insights={insights} focus={focus} onToggle={onToggle} />
       )}
     </div>
   );
@@ -291,49 +335,89 @@ export function VedicPanel({
   const kema = kemadruma(signs);
   const vargas = advanced
     ? VARGA_DIVISIONS.map((n) => ({ n, chart: vargaChart(engine, natalJd, n, undefined, sidZ) }))
-    : [{ n: 1 as const, chart: vargaChart(engine, natalJd, 1, undefined, sidZ) },
-       { n: 9 as const, chart: vargaChart(engine, natalJd, 9, undefined, sidZ) }];
+    : [
+        { n: 1 as const, chart: vargaChart(engine, natalJd, 1, undefined, sidZ) },
+        { n: 9 as const, chart: vargaChart(engine, natalJd, 9, undefined, sidZ) },
+      ];
 
   return (
-    <div className="workspace__panel">
-      <p className="dim small" style={{ marginTop: 0 }}>
-        Moon in {moonNak.name} pada {moonNak.pada}, lord {moonNak.lord}.
-        {dasha && <> Vimshottari now: <strong>{dasha.maha}</strong>{dasha.antar && <> › {dasha.antar}</>}{dasha.pratyantar && <> › {dasha.pratyantar}</>}.</>}
-      </p>
-      {yoginiNow && <p className="dim small">Yogini: {yoginiNow.maha}{yoginiNow.antar && <> › {yoginiNow.antar}</>}</p>}
-      {ashtNow && <p className="dim small">Ashtottari: {ashtNow.maha}{ashtNow.antar && <> › {ashtNow.antar}</>}</p>}
+    <div className="workspace__panel rail-stack">
+      <div className="telemetry">
+        <div className="telemetry__item">
+          <span className="telemetry__label">Moon Nakshatra</span>
+          <span className="telemetry__val mono">{moonNak.name} p{moonNak.pada} ({moonNak.lord})</span>
+        </div>
+        {dasha && (
+          <div className="telemetry__item">
+            <span className="telemetry__label">Vimshottari</span>
+            <span className="telemetry__val mono">
+              {dasha.maha}{dasha.antar ? ` > ${dasha.antar}` : ""}{dasha.pratyantar ? ` > ${dasha.pratyantar}` : ""}
+            </span>
+          </div>
+        )}
+        {yoginiNow && (
+          <div className="telemetry__item">
+            <span className="telemetry__label">Yogini</span>
+            <span className="telemetry__val mono">
+              {yoginiNow.maha}{yoginiNow.antar ? ` > ${yoginiNow.antar}` : ""}
+            </span>
+          </div>
+        )}
+        {ashtNow && (
+          <div className="telemetry__item">
+            <span className="telemetry__label">Ashtottari</span>
+            <span className="telemetry__val mono">
+              {ashtNow.maha}{ashtNow.antar ? ` > ${ashtNow.antar}` : ""}
+            </span>
+          </div>
+        )}
+      </div>
+
       {d9 && (
-        <div style={{ margin: "0.7rem 0", maxWidth: 280 }}>
+        <div className="stack--sm">
           <p className="dim small">Navamsa (D9)</p>
-          <Kundli chart={d9} layout="north" size={280} theme={WHEEL_THEME} />
+          <div className="chart-fluid">
+            <Kundli chart={d9} layout="north" size={280} theme={WHEEL_THEME} />
+          </div>
         </div>
       )}
-      <p className="dim small">{yogas.length ? yogas.map((y) => y.yoga).join(", ") : "No listed yogas in this D1."}</p>
-      <p className="dim small">
-        Raja: {raja.length ? raja.map((y) => y.lords.join("–")).join(", ") : "none"}.
-        {" "}Dhana: {dhana.length ? dhana.map((y) => y.lords.join("–")).join(", ") : "none"}.
-        {" "}Kemadruma: {kema.present ? "present" : "absent"}.
-      </p>
-      <table className="mono" style={{ fontSize: "0.82rem" }}>
-        <thead>
-          <tr className="mute"><td style={cell} /><td style={cell}>nakshatra</td>{vargas.map((v) => <td key={v.n} style={cell}>D{v.n}</td>)}</tr>
-        </thead>
-        <tbody>
-          {BODIES.filter((b) => chart.bodies[b] && b !== "mean_node").map((b) => {
-            const lon = engine.longitude(b as BodyId, natalJd, { zodiac: sidZ });
-            const nak = nakshatra(lon);
-            return (
-              <tr key={b}>
-                <td className="mute" style={cell}>{GLYPHS[b] ? `${GLYPHS[b]} ` : ""}{b}</td>
-                <td style={cell}>{nak.name} p{nak.pada}</td>
-                {vargas.map((v) => (
-                  <td key={v.n} className="mute" style={cell}>{v.chart[b]?.sign ?? varga(lon, v.n).sign}</td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+
+      <div className="stack--sm">
+        <p className="dim small">{yogas.length ? yogas.map((y) => y.yoga).join(", ") : "No listed yogas in this D1."}</p>
+        <p className="dim small">
+          Raja: {raja.length ? raja.map((y) => y.lords.join("-")).join(", ") : "none"}.{" "}
+          Dhana: {dhana.length ? dhana.map((y) => y.lords.join("-")).join(", ") : "none"}.{" "}
+          Kemadruma: {kema.present ? "present" : "absent"}.
+        </p>
+      </div>
+
+      <div className="table-scroll" tabIndex={0} role="region" aria-label="Vedic nakshatras and vargas">
+        <table className="mono data-table">
+          <thead>
+            <tr>
+              <th scope="col">Body</th>
+              <th scope="col">Nakshatra</th>
+              {vargas.map((v) => <th scope="col" key={v.n}>D{v.n}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {BODIES.filter((b) => chart.bodies[b] && b !== "mean_node").map((b) => {
+              const bLon = engine.longitude(b as BodyId, natalJd, { zodiac: sidZ });
+              const nak = nakshatra(bLon);
+              return (
+                <tr key={b}>
+                  <th scope="row" className="mute">{GLYPHS[b] ? `${GLYPHS[b]} ` : ""}{b}</th>
+                  <td>{nak.name} p{nak.pada}</td>
+                  {vargas.map((v) => (
+                    <td key={v.n} className="mute">{v.chart[b]?.sign ?? varga(bLon, v.n).sign}</td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
       {advanced && vm && (
         <DashaTree title="Vimshottari" periods={vm.dashas.map((d) => ({ lord: d.lord, start: d.start, end: d.end, sub: d.sub }))} />
       )}
@@ -370,14 +454,14 @@ function DashaTree({ title, periods }: {
   periods: Array<{ lord: string; start: number; end: number; sub: Array<{ lord: string; start: number; end: number }> }>;
 }) {
   return (
-    <div style={{ marginTop: "0.8rem" }}>
-      <div className="dim small" style={{ textTransform: "uppercase", letterSpacing: "0.05em" }}>{title}</div>
-      <ul className="mono" style={{ fontSize: "0.78rem", paddingLeft: "1.1rem", margin: "0.3rem 0 0" }}>
+    <div className="stack--sm">
+      <div className="field__label">{title}</div>
+      <ul className="mono rail-list">
         {periods.slice(0, 12).map((d, i) => (
           <li key={i}>
-            {d.lord} · {jdToUtc(d.start)} – {jdToUtc(d.end)}
+            {d.lord} · {jdToUtc(d.start)} to {jdToUtc(d.end)}
             {d.sub?.length ? (
-              <ul>
+              <ul className="rail-list">
                 {d.sub.slice(0, 3).map((s, j) => (
                   <li key={j}>{s.lord} · {jdToUtc(s.start)}</li>
                 ))}
@@ -497,59 +581,66 @@ export function TimingPanel({
   }, [advanced, engine, targetJd, lat, lon]);
 
   return (
-    <div className="workspace__panel">
-      <div className="seg" role="group" aria-label="Progression method" style={{ marginBottom: "0.6rem" }}>
+    <div className="workspace__panel rail-stack">
+      <div className="seg" role="group" aria-label="Progression method">
         {(["secondary", "solar-arc"] as const).map((m) => (
           <button key={m} type="button" className="seg__btn" aria-pressed={method === m} onClick={() => setMethod(m)}>
             {m === "secondary" ? "Secondary" : "Solar arc"}
           </button>
         ))}
       </div>
-      <p className="dim small" style={{ marginTop: 0 }}>
-        Secondary progressions follow the day-for-a-year key. Solar arc adds the progressed Sun's motion to every natal longitude.
+      <p className="dim small">
+        Secondary progressions follow the day-for-a-year key. Solar arc adds the progressed Sun&rsquo;s motion to every natal longitude.
       </p>
-      <p className="dim small">Transits at the scrubber date:</p>
-      <ul className="mono" style={{ fontSize: "0.82rem", paddingLeft: "1.1rem" }}>
-        {hits.map((h, i) => (
-          <li key={i}>{h.transit} {h.aspect} natal {h.natal} <span className="mute">(orb {h.orb}° {h.phase})</span></li>
-        ))}
-      </ul>
-      <div className="controls" style={{ marginTop: "0.6rem" }}>
-        <div className="field">
-          <span className="field__label">returns of</span>
-          <select className="control" value={retBody} onChange={(e) => setRetBody(e.target.value as BodyId)}>
-            {BODIES.filter((b) => b !== "mean_node").map((b) => <option key={b}>{b}</option>)}
-          </select>
-        </div>
-        <div className="field">
-          <span className="field__label">return lat</span>
-          <input className="control" style={{ width: "5.5rem" }} value={retLat} onChange={(e) => setRetLat(e.target.value)} />
-        </div>
-        <div className="field">
-          <span className="field__label">return lon</span>
-          <input className="control" style={{ width: "5.5rem" }} value={retLon} onChange={(e) => setRetLon(e.target.value)} />
-        </div>
+
+      <div className="stack--sm">
+        <div className="field__label">Transits at scrubber date</div>
+        <ul className="mono rail-list">
+          {hits.map((h, i) => (
+            <li key={i}>{h.transit} {h.aspect} natal {h.natal} <span className="mute">(orb {h.orb}° {h.phase})</span></li>
+          ))}
+        </ul>
       </div>
-      <ul className="mono" style={{ fontSize: "0.82rem", paddingLeft: "1.1rem" }}>
-        {ret.map((jd) => {
-          let stamp = "";
-          try {
-            const c = engine.chartAt(jd, retPlace.lat, retPlace.lon, { houseSystem: sys, zodiac });
-            stamp = ` · ASC ${fmtLon(c.angles.asc)}`;
-          } catch { /* skip */ }
-          return (
-            <li key={jd}>
-              <button type="button" className="btn btn-ghost btn-sm" onClick={() => onSetTarget(isoFromJd(jd))}>
-                {jdToUtc(jd)} UT
-              </button>
-              {stamp}
-            </li>
-          );
-        })}
-      </ul>
+
+      <div className="stack--sm">
+        <div className="controls">
+          <div className="field field--select">
+            <span className="field__label">returns of</span>
+            <select className="control" value={retBody} onChange={(e) => setRetBody(e.target.value as BodyId)}>
+              {BODIES.filter((b) => b !== "mean_node").map((b) => <option key={b}>{b}</option>)}
+            </select>
+          </div>
+          <div className="field field--coord">
+            <span className="field__label">return lat</span>
+            <input className="control mono" value={retLat} onChange={(e) => setRetLat(e.target.value)} />
+          </div>
+          <div className="field field--coord">
+            <span className="field__label">return lon</span>
+            <input className="control mono" value={retLon} onChange={(e) => setRetLon(e.target.value)} />
+          </div>
+        </div>
+        <ul className="mono rail-list">
+          {ret.map((jd) => {
+            let stamp = "";
+            try {
+              const c = engine.chartAt(jd, retPlace.lat, retPlace.lon, { houseSystem: sys, zodiac });
+              stamp = ` · ASC ${fmtLon(c.angles.asc)}`;
+            } catch { /* skip */ }
+            return (
+              <li key={jd}>
+                <button type="button" className="btn btn-ghost btn-sm mono" onClick={() => onSetTarget(isoFromJd(jd))}>
+                  {jdToUtc(jd)} UT
+                </button>
+                {stamp}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
       {lords && (
-        <div style={{ marginTop: "0.8rem" }}>
-          <div className="seg" role="group" aria-label="Zodiacal releasing lot" style={{ marginBottom: "0.4rem" }}>
+        <div className="stack--sm">
+          <div className="seg" role="group" aria-label="Zodiacal releasing lot">
             {(["spirit", "fortune"] as const).map((lot) => (
               <button key={lot} type="button" className="seg__btn" aria-pressed={zrLot === lot} onClick={() => setZrLot(lot)}>
                 ZR {lot}
@@ -557,12 +648,12 @@ export function TimingPanel({
             ))}
           </div>
           <p className="dim small">
-            Profection: annual {lords.prof.annual.sign} · month {lords.prof.monthly.sign}.
-            Firdaria: {lords.fir.major}{lords.fir.sub && <> › {lords.fir.sub}</>}.
-            ZR {lords.zr.lot}: {lords.zr.l1}{lords.zr.l2 && <> › {lords.zr.l2}</>}{lords.zr.l3 && <> › {lords.zr.l3}</>}{lords.zr.l4 && <> › {lords.zr.l4}</>}.
+            Profection: annual {lords.prof.annual.sign} · month {lords.prof.monthly.sign}.{" "}
+            Firdaria: {lords.fir.major}{lords.fir.sub ? ` > ${lords.fir.sub}` : ""}.{" "}
+            ZR {lords.zr.lot}: {lords.zr.l1}{lords.zr.l2 ? ` > ${lords.zr.l2}` : ""}{lords.zr.l3 ? ` > ${lords.zr.l3}` : ""}{lords.zr.l4 ? ` > ${lords.zr.l4}` : ""}.
           </p>
           {lords.timeline.length > 0 && (
-            <ul className="mono" style={{ fontSize: "0.78rem", paddingLeft: "1.1rem" }}>
+            <ul className="mono rail-list">
               {lords.timeline.map((p, i) => (
                 <li key={i}>
                   L{p.level} {p.sign} {p.lord}{p.lb ? " · loosing the bond" : ""} · {jdToUtc(p.start)}
@@ -570,24 +661,21 @@ export function TimingPanel({
               ))}
             </ul>
           )}
-          <div className="controls" style={{ marginTop: "0.5rem" }}>
-            <div className="field">
+          <div className="controls">
+            <div className="field field--select">
               <span className="field__label">direction key</span>
               <select className="control" value={dirKey} onChange={(e) => setDirKey(e.target.value as "naibod" | "ptolemy")}>
                 <option value="naibod">Naibod</option>
                 <option value="ptolemy">Ptolemy</option>
               </select>
             </div>
-            <label className="field">
-              <span className="field__label">
-                <input type="checkbox" checked={showMundane} onChange={(e) => setShowMundane(e.target.checked)}
-                  style={{ accentColor: "var(--accent)", marginRight: "0.35rem" }} />
-                mundane
-              </span>
+            <label className="check">
+              <input type="checkbox" checked={showMundane} onChange={(e) => setShowMundane(e.target.checked)} />
+              mundane
             </label>
           </div>
           <p className="dim small">Primary directions ({dirKey}, years):</p>
-          <ul className="mono" style={{ fontSize: "0.78rem", paddingLeft: "1.1rem" }}>
+          <ul className="mono rail-list">
             {lords.pd.map((d, i) => (
               <li key={i}>{d.body} to {d.angle} · {d.years.toFixed(1)}y · {jdToUtc(d.jd)}</li>
             ))}
@@ -595,19 +683,20 @@ export function TimingPanel({
           {showMundane && lords.mund.length > 0 && (
             <>
               <p className="dim small">Mundane directions:</p>
-              <ul className="mono" style={{ fontSize: "0.78rem", paddingLeft: "1.1rem" }}>
+              <ul className="mono rail-list">
                 {lords.mund.map((d, i) => (
-                  <li key={i}>{d.promissor} → {d.significator} · {d.years.toFixed(1)}y · {jdToUtc(d.jd)}</li>
+                  <li key={i}>{d.promissor} to {d.significator} · {d.years.toFixed(1)}y · {jdToUtc(d.jd)}</li>
                 ))}
               </ul>
             </>
           )}
         </div>
       )}
+
       {advanced && (
-        <>
-          <div className="controls" style={{ marginTop: "0.7rem" }}>
-            <div className="field">
+        <div className="stack--sm">
+          <div className="controls">
+            <div className="field field--select">
               <span className="field__label">when</span>
               <select className="control" value={whenKind} onChange={(e) => setWhenKind(e.target.value as typeof whenKind)}>
                 <option value="aspect">aspect</option>
@@ -615,7 +704,7 @@ export function TimingPanel({
                 <option value="retrograde">retrograde</option>
               </select>
             </div>
-            <div className="field">
+            <div className="field field--select">
               <span className="field__label">body</span>
               <select className="control" value={whenBody} onChange={(e) => setWhenBody(e.target.value as BodyId)}>
                 {BODIES.slice(0, 10).map((b) => <option key={b}>{b}</option>)}
@@ -623,13 +712,13 @@ export function TimingPanel({
             </div>
             {whenKind === "aspect" && (
               <>
-                <div className="field">
+                <div className="field field--select">
                   <span className="field__label">aspect</span>
                   <select className="control" value={whenAsp} onChange={(e) => setWhenAsp(e.target.value)}>
                     {["conjunction", "sextile", "square", "trine", "opposition"].map((a) => <option key={a}>{a}</option>)}
                   </select>
                 </div>
-                <div className="field">
+                <div className="field field--select">
                   <span className="field__label">to</span>
                   <select className="control" value={whenOther} onChange={(e) => setWhenOther(e.target.value as BodyId)}>
                     {BODIES.slice(0, 10).map((b) => <option key={b}>{b}</option>)}
@@ -638,38 +727,39 @@ export function TimingPanel({
               </>
             )}
             {whenKind === "sign" && (
-              <div className="field">
+              <div className="field field--select">
                 <span className="field__label">sign</span>
                 <select className="control" value={whenSign} onChange={(e) => setWhenSign(e.target.value)}>
                   {SIGNS.map((s) => <option key={s}>{s}</option>)}
                 </select>
               </div>
             )}
-            <div className="field">
+            <div className="field field--select">
               <span className="field__label">combine</span>
               <select className="control" value={combo} onChange={(e) => setCombo(e.target.value as typeof combo)}>
                 <option value="none">single</option>
-                <option value="all">all of (and not retrograde)</option>
+                <option value="all">all of (not retrograde)</option>
                 <option value="any">any of (or in sign)</option>
                 <option value="not">not</option>
               </select>
             </div>
           </div>
           {finder && (
-            <ul className="mono" style={{ fontSize: "0.78rem", paddingLeft: "1.1rem" }}>
+            <ul className="mono rail-list">
               {finder.map(([a, b], i) => (
-                <li key={i}>{jdToUtc(a)} → {jdToUtc(b)}</li>
+                <li key={i}>{jdToUtc(a)} to {jdToUtc(b)}</li>
               ))}
             </ul>
           )}
-          <div className="controls" style={{ marginTop: "0.6rem" }}>
-            <div className="field">
+
+          <div className="controls">
+            <div className="field field--select">
               <span className="field__label">transit</span>
               <select className="control" value={crossBody} onChange={(e) => setCrossBody(e.target.value as BodyId)}>
                 {BODIES.slice(0, 10).map((b) => <option key={b}>{b}</option>)}
               </select>
             </div>
-            <div className="field">
+            <div className="field field--select">
               <span className="field__label">to natal</span>
               <select className="control" value={crossNatal} onChange={(e) => setCrossNatal(e.target.value as BodyId)}>
                 {BODIES.slice(0, 10).map((b) => <option key={b}>{b}</option>)}
@@ -677,7 +767,7 @@ export function TimingPanel({
             </div>
           </div>
           {exact && (
-            <ul className="mono" style={{ fontSize: "0.78rem", paddingLeft: "1.1rem" }}>
+            <ul className="mono rail-list">
               {exact.crosses.map((jd) => (
                 <li key={jd}>{crossBody} crosses natal {crossNatal} · {jdToUtc(jd)} UT</li>
               ))}
@@ -686,16 +776,27 @@ export function TimingPanel({
               ))}
             </ul>
           )}
+
           {eph && (
-            <div style={{ marginTop: "0.8rem" }}>
-              <p className="dim small">Graphic ephemeris, ±60 days from the scrubber (longitude).</p>
-              <EphemerisGraph series={eph} width={480} height={220} wrap={360} theme={WHEEL_THEME} colors={WHEEL_LINE_COLORS} />
+            <div className="stack--sm">
+              <p className="dim small">Graphic ephemeris, +/-60 days from the scrubber (longitude).</p>
+              <InteractiveEphemerisGraph
+                series={eph}
+                width={480}
+                height={220}
+                wrap={360}
+                xLabels
+                yUnit="°"
+                theme={WHEEL_THEME}
+                colors={WHEEL_LINE_COLORS}
+              />
             </div>
           )}
+
           {sky && (
-            <div style={{ marginTop: "0.8rem" }}>
+            <div className="stack--sm">
               <p className="dim small">Rise, set, and meridian at the birthplace:</p>
-              <ul className="mono" style={{ fontSize: "0.78rem", paddingLeft: "1.1rem" }}>
+              <ul className="mono rail-list">
                 {sky.sunRise && <li>Sun rise {jdToUtc(sky.sunRise)} UT</li>}
                 {sky.sunMer && <li>Sun meridian {jdToUtc(sky.sunMer)} UT</li>}
                 {sky.sunSet && <li>Sun set {jdToUtc(sky.sunSet)} UT</li>}
@@ -703,7 +804,7 @@ export function TimingPanel({
                 {sky.moonSet && <li>Moon set {jdToUtc(sky.moonSet)} UT</li>}
               </ul>
               <p className="dim small">Sky events near the scrubber date:</p>
-              <ul className="mono" style={{ fontSize: "0.78rem", paddingLeft: "1.1rem" }}>
+              <ul className="mono rail-list">
                 {sky.phases.map(([jd, name], i) => (
                   <li key={`p${i}`}>{PHASE_LABEL[name] ?? name} · {jdToUtc(jd)} UT</li>
                 ))}
@@ -727,7 +828,7 @@ export function TimingPanel({
               </ul>
             </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );
@@ -784,12 +885,12 @@ export function ComposePanel({
   const remove = (i: number) => setConstraints(constraints.filter((_, j) => j !== i));
 
   return (
-    <div className="workspace__panel">
-      {formName && <p className="dim small" style={{ marginTop: 0 }}>{formName}</p>}
-      <p className="dim small" style={{ marginTop: 0 }}>
+    <div className="workspace__panel rail-stack">
+      {formName && <p className="dim small">{formName}</p>}
+      <p className="dim small">
         A form has no instant and no houses. Residual says how far the longitudes sit from the constraints.
       </p>
-      <ul className="mono" style={{ fontSize: "0.82rem", paddingLeft: "1.1rem" }}>
+      <ul className="mono rail-list">
         {constraints.map((c, i) => (
           <li key={i}>
             {c.kind === "sign" && `${c.body} in ${SIGNS[c.sign]}`}
@@ -803,7 +904,7 @@ export function ComposePanel({
           </li>
         ))}
       </ul>
-      <div className="controls">
+      <div className="row row--wrap">
         <button type="button" className="btn btn-secondary btn-sm" onClick={() => add({ kind: "sign", body: "sun", sign: 0 })}>Add sign</button>
         <button type="button" className="btn btn-secondary btn-sm" onClick={() => add({ kind: "aspect", a: "venus", b: "mars", angle: 120 })}>Add aspect</button>
         <button type="button" className="btn btn-secondary btn-sm" onClick={() => add({ kind: "degree", body: "moon", degree: 15 })}>Add degree</button>
@@ -812,58 +913,65 @@ export function ComposePanel({
         <button type="button" className="btn btn-secondary btn-sm" onClick={() => add({ kind: "separation3d", a: "sun", b: "moon", angle: 90 })}>Add 3d separation</button>
       </div>
       <p className="dim small">
-        Residual {compiled.residual.toFixed(2)}° · max constraint {compiled.maxConstraintLoss.toFixed(2)}°
+        Residual <span className="mono">{compiled.residual.toFixed(2)}°</span> · max constraint <span className="mono">{compiled.maxConstraintLoss.toFixed(2)}°</span>
         {compiled.impossible ? " · geometrically impossible" : ""}.
       </p>
-      <table className="mono" style={{ fontSize: "0.82rem" }}>
-        <tbody>
-          {Object.entries(compiled.longitudes).map(([b, lon]) => (
-            <tr key={b}><td className="mute" style={cell}>{b}</td><td style={cell}>{fmtLon(lon)}</td></tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="table-scroll" tabIndex={0} role="region" aria-label="Compiled form longitudes">
+        <table className="mono data-table">
+          <thead>
+            <tr><th scope="col">Body</th><th scope="col">Longitude</th></tr>
+          </thead>
+          <tbody>
+            {Object.entries(compiled.longitudes).map(([b, bLon]) => (
+              <tr key={b}><th scope="row" className="mute">{b}</th><td className="num">{fmtLon(bLon)}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
       {similar && similar.length > 0 && (
-        <>
+        <div className="stack--sm">
           <p className="dim small">Similar skies (feature match, two years after the birth, 10-day step):</p>
-          <ul className="mono" style={{ fontSize: "0.78rem", paddingLeft: "1.1rem" }}>
+          <ul className="mono rail-list">
             {similar.map((m) => (
               <li key={m.jd}>{jdToUtc(m.jd)} UT · similarity {m.score.toFixed(3)}</li>
             ))}
           </ul>
-        </>
+        </div>
       )}
+
       {natal && natalJd != null && (
-        <>
-          <p className="dim small" style={{ marginTop: "0.8rem" }}>What if: shift the hour, the place, or a longitude.</p>
+        <div className="stack--sm">
+          <p className="dim small">What if: shift the hour, the place, or a longitude.</p>
           <div className="controls">
-            <div className="field">
+            <div className="field field--compact">
               <span className="field__label">hours</span>
-              <input className="control" style={{ width: "5rem" }} value={shiftH} onChange={(e) => setShiftH(e.target.value)} />
+              <input className="control mono" value={shiftH} onChange={(e) => setShiftH(e.target.value)} />
             </div>
-            <div className="field">
+            <div className="field field--coord">
               <span className="field__label">place lat</span>
-              <input className="control" style={{ width: "5.5rem" }} value={cfLat} onChange={(e) => setCfLat(e.target.value)} />
+              <input className="control mono" value={cfLat} onChange={(e) => setCfLat(e.target.value)} />
             </div>
-            <div className="field">
+            <div className="field field--coord">
               <span className="field__label">place lon</span>
-              <input className="control" style={{ width: "5.5rem" }} value={cfLon} onChange={(e) => setCfLon(e.target.value)} />
+              <input className="control mono" value={cfLon} onChange={(e) => setCfLon(e.target.value)} />
             </div>
-            <div className="field">
+            <div className="field field--select">
               <span className="field__label">move</span>
               <select className="control" value={moveBody} onChange={(e) => setMoveBody(e.target.value as BodyId)}>
                 {BODIES.slice(0, 10).map((b) => <option key={b}>{b}</option>)}
               </select>
             </div>
-            <div className="field">
+            <div className="field field--compact">
               <span className="field__label">to lon</span>
-              <input className="control" style={{ width: "5rem" }} value={moveLon} onChange={(e) => setMoveLon(e.target.value)} placeholder="deg" />
+              <input className="control mono" value={moveLon} onChange={(e) => setMoveLon(e.target.value)} placeholder="deg" />
             </div>
           </div>
           {diff && (
-            <ul style={{ fontSize: "0.82rem", paddingLeft: "1.1rem" }}>
+            <ul className="rail-list">
               {diff.bodies.map((b) => (
                 <li key={b.body} className={b.houseTo !== b.houseFrom ? "diff-loss" : undefined}>
-                  {b.body}: {b.signFrom} h{b.houseFrom} → {b.signTo} h{b.houseTo}
+                  {b.body}: {b.signFrom} h{b.houseFrom} to {b.signTo} h{b.houseTo}
                 </li>
               ))}
               {diff.aspectsGained.map((a, i) => (
@@ -873,14 +981,14 @@ export function ComposePanel({
                 <li key={`l${i}`} className="diff-loss">lost {a.a} {a.aspect} {a.b}</li>
               ))}
               {diff.angles.map((a, i) => (
-                <li key={`a${i}`}>{a.angle}: {a.from} → {a.to}</li>
+                <li key={`a${i}`}>{a.angle}: {a.from} to {a.to}</li>
               ))}
               {diff.bodies.length + diff.aspectsGained.length + diff.aspectsLost.length + diff.angles.length === 0 && (
                 <li className="dim">No sign, house, or aspect change.</li>
               )}
             </ul>
           )}
-        </>
+        </div>
       )}
     </div>
   );
@@ -905,26 +1013,28 @@ export function RectifyPanel({
 }) {
   const shown = knownRising === "" ? windows : windows.filter((w) => w.sign === knownRising);
   return (
-    <div className="workspace__panel">
-      <p className="dim small" style={{ marginTop: 0 }}>
+    <div className="workspace__panel rail-stack">
+      <p className="dim small">
         Time unknown. Each chip is a rising-sign window for this date and place.
       </p>
       {advanced && (
         <div className="controls">
-          <div className="field">
+          <div className="field field--compact">
             <span className="field__label">step (min)</span>
-            <input className="control" style={{ width: "4rem" }} type="number" value={stepMin}
+            <input className="control mono" type="number" value={stepMin}
               onChange={(e) => setStepMin(Number(e.target.value) || 20)} />
           </div>
           <div className="field">
             <span className="field__label">UTC hours</span>
-            <input className="control" style={{ width: "3.5rem" }} type="number" value={win0} onChange={(e) => setWin0(Number(e.target.value))} />
-            <span className="mute">–</span>
-            <input className="control" style={{ width: "3.5rem" }} type="number" value={win1} onChange={(e) => setWin1(Number(e.target.value))} />
+            <div className="field__row">
+              <input className="control mono" type="number" value={win0} onChange={(e) => setWin0(Number(e.target.value))} aria-label="Start UTC hour" />
+              <span className="mute">to</span>
+              <input className="control mono" type="number" value={win1} onChange={(e) => setWin1(Number(e.target.value))} aria-label="End UTC hour" />
+            </div>
           </div>
         </div>
       )}
-      <div className="field">
+      <div className="field field--select">
         <span className="field__label">known rising (optional)</span>
         <select className="control" value={knownRising === "" ? "" : String(knownRising)}
           onChange={(e) => setKnownRising(e.target.value === "" ? "" : Number(e.target.value))}>
@@ -932,30 +1042,31 @@ export function RectifyPanel({
           {SIGNS.map((s, i) => <option key={s} value={i}>{s}</option>)}
         </select>
       </div>
-      <div className="rising-chips" style={{ marginTop: "0.5rem" }}>
+      <div className="rising-chips">
         {shown.map((w) => (
           <button key={w.sign + String(w.startJd)} type="button"
-            className="btn btn-secondary btn-sm"
+            className="btn btn-secondary btn-sm mono"
             aria-pressed={previewSign === w.sign}
             onClick={() => onPreview(w)}>
-            {w.signName} · {jdToUtc(w.startJd).slice(11, 16)}–{jdToUtc(w.endJd).slice(11, 16)}
+            {w.signName} · {jdToUtc(w.startJd).slice(11, 16)}-{jdToUtc(w.endJd).slice(11, 16)}
           </button>
         ))}
       </div>
       {previewSign != null && shown.find((w) => w.sign === previewSign) && (
-        <p className="dim small">
-          ASC {fmtLon(shown.find((w) => w.sign === previewSign)!.ascMid)} · MC {fmtLon(shown.find((w) => w.sign === previewSign)!.mcMid)} at window midpoint.
-          {" "}
-          <button type="button" className="btn btn-sm" onClick={() => onApply(shown.find((w) => w.sign === previewSign)!)}>
+        <div className="row row--between row--wrap callout callout--accent">
+          <span className="mono small">
+            ASC {fmtLon(shown.find((w) => w.sign === previewSign)!.ascMid)} · MC {fmtLon(shown.find((w) => w.sign === previewSign)!.mcMid)}
+          </span>
+          <button type="button" className="btn btn-primary btn-sm" onClick={() => onApply(shown.find((w) => w.sign === previewSign)!)}>
             Apply this time
           </button>
-        </p>
+        </div>
       )}
       {advanced && (
-        <>
+        <div className="stack--sm">
           <p className="dim small">Dated events (optional). Hits to the candidate ASC/MC are listed; pick the window yourself.</p>
           <button type="button" className="btn btn-ghost btn-sm" onClick={() => setEvents([...events, { date: "2010-01-01", note: "" }])}>
-            Add event
+            + Add event
           </button>
           {events.map((ev, i) => (
             <div key={i} className="controls">
@@ -968,7 +1079,7 @@ export function RectifyPanel({
           {previewSign != null && events.length > 0 && (
             <EventHits engine={engine} windows={shown.filter((w) => w.sign === previewSign)} events={events} lat={lat} lon={lon} zodiac={zodiac} />
           )}
-        </>
+        </div>
       )}
     </div>
   );
@@ -984,7 +1095,7 @@ function EventHits({
   if (!w) return null;
   const natal = engine.chartAt(w.midJd, lat, lon, { houseSystem: "whole_sign", zodiac });
   return (
-    <ul className="mono" style={{ fontSize: "0.78rem", paddingLeft: "1.1rem" }}>
+    <ul className="mono rail-list">
       {events.map((ev, i) => {
         const jd = jdFromIso(ev.date + "T12:00");
         const hits = transitAspects(natal, engine, jd, { zodiac, maxOrb: 2 }).slice(0, 8);
@@ -999,7 +1110,7 @@ function EventHits({
 }
 
 export function ComparePanel({
-  engine, natal, set, loadShare, advanced, lat, lon, sys, zodiac,
+  engine, natal, set, loadShare, advanced, lat, lon, zodiac,
 }: {
   engine: Engine; natal: Chart; set: Share[]; loadShare: (s: Share) => void;
   advanced: boolean; lat: number; lon: number; sys: string; zodiac: Zodiac;
@@ -1047,11 +1158,15 @@ export function ComparePanel({
   const contacts: SynContact[] = inter.map((h) => ({ aBody: h.a, bBody: h.b, aspect: h.aspect, orb: h.orb }));
 
   if (births.length < 1) {
-    return <p className="dim small">Add a second birth to My charts, then compare.</p>;
+    return (
+      <div className="workspace__panel rail-stack">
+        <p className="dim small">Save a second birth with + Save chart (or pick the Synastry Pair preset) to compare.</p>
+      </div>
+    );
   }
   return (
-    <div className="workspace__panel">
-      <div className="field">
+    <div className="workspace__panel rail-stack">
+      <div className="field field--select">
         <span className="field__label">other chart</span>
         <select className="control" value={String(idx)} onChange={(e) => setIdx(Number(e.target.value))}>
           {births.map((s, i) => <option key={i} value={i}>{s.n || `Chart ${i + 1}`}</option>)}
@@ -1061,33 +1176,41 @@ export function ComparePanel({
         {inter.slice(0, 4).map((h) => `${h.a} ${h.aspect} ${h.b}`).join(" · ") || "No tight inter-chart aspects."}
       </p>
       {advanced && bChart && (
-        <>
-          <BiWheel inner={natal} outer={bChart} contacts={contacts} size={380} innerLabel="natal" outerLabel="other" />
+        <div className="stack--sm">
+          <div className="chart-fluid">
+            <BiWheel inner={natal} outer={bChart} contacts={contacts} size={380} innerLabel="natal" outerLabel="other" />
+          </div>
           {overlays && (
-            <>
-              <p className="dim small">Natal bodies in the other chart's houses:</p>
+            <div className="stack--sm">
+              <p className="dim small">Natal bodies in the other chart&rsquo;s houses:</p>
               <p className="mono small">{Object.entries(overlays.aInB).map(([b, h]) => `${b} h${h}`).join(" · ")}</p>
               <p className="dim small">Other bodies in the natal houses:</p>
               <p className="mono small">{Object.entries(overlays.bInA).map(([b, h]) => `${b} h${h}`).join(" · ")}</p>
-            </>
+            </div>
           )}
           <p className="dim small">Inter-chart hits:</p>
-          <ul className="mono" style={{ fontSize: "0.78rem", paddingLeft: "1.1rem" }}>
+          <ul className="mono rail-list">
             {inter.map((h, i) => <li key={i}>{h.a} {h.aspect} {h.b} (orb {h.orb}°)</li>)}
           </ul>
           {composite && (
-            <>
+            <div className="stack--sm">
               <p className="dim small">Composite (midpoint longitudes and angles):</p>
-              <ChartWheel chart={composite.wheel} size={320} theme={WHEEL_THEME} />
+              <div className="chart-fluid">
+                <ChartWheel chart={composite.wheel} size={320} theme={WHEEL_THEME} />
+              </div>
               <p className="dim small">Davison {jdToUtc(composite.dJd)} UT · ASC {fmtLon(composite.dav.angles.asc)}</p>
-              <ChartWheel chart={composite.dav} size={320} theme={WHEEL_THEME} />
-            </>
+              <div className="chart-fluid">
+                <ChartWheel chart={composite.dav} size={320} theme={WHEEL_THEME} />
+              </div>
+            </div>
           )}
-        </>
+        </div>
       )}
-      <p className="dim small">
-        <button type="button" className="btn btn-ghost btn-sm" onClick={() => loadShare(other)}>Load the other birth</button>
-      </p>
+      <div>
+        <button type="button" className="btn btn-ghost btn-sm" onClick={() => loadShare(other)}>
+          Load the other birth
+        </button>
+      </div>
     </div>
   );
 }
@@ -1145,54 +1268,51 @@ export function ElectionalPanel({
   }, [engine, targetJd, zodiac, a, b, wanted, vocPenalty, lat, lon]);
 
   return (
-    <div className="workspace__panel">
-      <p className="dim small" style={{ marginTop: 0 }}>
-        Rank a week of instants for a wanted aspect. Void Moon is a penalty when checked; the Moon's house at each candidate is listed.
+    <div className="workspace__panel rail-stack">
+      <p className="dim small">
+        Rank a week of instants for a wanted aspect. Void Moon is a penalty when checked; the Moon&rsquo;s house at each candidate is listed.
       </p>
       <div className="controls">
-        <div className="field">
+        <div className="field field--select">
           <span className="field__label">wanted</span>
           <select className="control" value={a} onChange={(e) => setA(e.target.value as BodyId)}>
             {CLASSICAL.map((p) => <option key={p}>{p}</option>)}
           </select>
         </div>
-        <div className="field">
+        <div className="field field--select">
           <span className="field__label">aspect</span>
           <select className="control" value={wanted} onChange={(e) => setWanted(e.target.value)}>
             {["conjunction", "sextile", "square", "trine", "opposition"].map((x) => <option key={x}>{x}</option>)}
           </select>
         </div>
-        <div className="field">
+        <div className="field field--select">
           <span className="field__label">to</span>
           <select className="control" value={b} onChange={(e) => setB(e.target.value as BodyId)}>
             {CLASSICAL.map((p) => <option key={p}>{p}</option>)}
           </select>
         </div>
-        <label className="field">
-          <span className="field__label">
-            <input type="checkbox" checked={vocPenalty} onChange={(e) => setVocPenalty(e.target.checked)}
-              style={{ accentColor: "var(--accent)", marginRight: "0.35rem" }} />
-            VOC penalty
-          </span>
+        <label className="check">
+          <input type="checkbox" checked={vocPenalty} onChange={(e) => setVocPenalty(e.target.checked)} />
+          VOC penalty
         </label>
       </div>
       {prim && (
-        <>
+        <div className="stack--sm">
           <p className="dim small">
-            Hour: {prim.hour ? `${prim.hour.ruler} (${prim.hour.kind} ${prim.hour.hour})` : "n/a"}.
+            Hour: {prim.hour ? `${prim.hour.ruler} (${prim.hour.kind} ${prim.hour.hour})` : "n/a"}.{" "}
             Moon {prim.voc.isVoid ? "void of course" : `in ${prim.voc.sign}`}.
             {prim.phases.length ? " " + prim.phases.map((p) => `${p.body} ${p.phase}`).join(", ") + "." : ""}
           </p>
           {prim.hours.length > 0 && (
-            <ul className="mono" style={{ fontSize: "0.78rem", paddingLeft: "1.1rem", columns: 2 }}>
+            <ul className="mono rail-list rail-list--cols">
               {prim.hours.map((h) => (
                 <li key={h.hour}>{h.hour} {h.kind} {h.ruler} · {jdToUtc(h.start).slice(11, 16)}</li>
               ))}
             </ul>
           )}
-        </>
+        </div>
       )}
-      <ul className="mono" style={{ fontSize: "0.78rem", paddingLeft: "1.1rem" }}>
+      <ul className="mono rail-list">
         {ranked.map((m) => (
           <li key={m.jd}>{jdToUtc(m.jd)} UT · score {m.score.toFixed(2)}{m.ang ? ` · Moon ${m.ang}` : ""}</li>
         ))}
@@ -1210,18 +1330,18 @@ export function SyntheticPanel({
   const [period, setPeriod] = useState("365.25");
   const [msg, setMsg] = useState("");
   return (
-    <div className="workspace__panel">
-      <p className="dim small" style={{ marginTop: 0 }}>
+    <div className="workspace__panel rail-stack">
+      <p className="dim small">
         Register a periodic body. Sky View includes it once registered.
       </p>
       <div className="controls">
-        <div className="field">
+        <div className="field field--name">
           <span className="field__label">id</span>
           <input className="control" value={id} onChange={(e) => setId(e.target.value)} />
         </div>
-        <div className="field">
+        <div className="field field--coord">
           <span className="field__label">period (days)</span>
-          <input className="control" style={{ width: "6rem" }} value={period} onChange={(e) => setPeriod(e.target.value)} />
+          <input className="control mono" value={period} onChange={(e) => setPeriod(e.target.value)} />
         </div>
         <button type="button" className="btn btn-secondary btn-sm" onClick={() => {
           try {
@@ -1236,21 +1356,43 @@ export function SyntheticPanel({
           }
         }}>Register</button>
       </div>
-      {msg && <p className="dim small">{msg}</p>}
+      {msg && <p className="dim small" role="status">{msg}</p>}
     </div>
   );
 }
 
 export function JsonPanel({ chart, advanced }: { chart: Chart; advanced: boolean }) {
+  const [copied, setCopied] = useState(false);
   const digest = useMemo(() => {
     if (!advanced) return null;
     try { return chartDigest(chart); }
     catch { return null; }
   }, [chart, advanced]);
+
+  const raw = useMemo(() => JSON.stringify(chart, null, 2), [chart]);
+
   return (
-    <div className="workspace__panel">
-      {digest && <p className="mono small">digest {digest}</p>}
-      <pre style={{ fontSize: "0.72rem", margin: 0 }}>{JSON.stringify(chart, null, 2)}</pre>
+    <div className="workspace__panel rail-stack">
+      <div className="row row--between row--wrap">
+        {digest ? (
+          <span className="badge badge--muted mono">digest {digest.slice(0, 16)}</span>
+        ) : (
+          <span className="dim small">Chart JSON</span>
+        )}
+        <button
+          type="button"
+          className="btn btn-secondary btn-sm"
+          onClick={() => {
+            navigator.clipboard?.writeText(raw).then(() => {
+              setCopied(true);
+              setTimeout(() => setCopied(false), 1800);
+            }).catch(() => { /* ignore */ });
+          }}
+        >
+          {copied ? "Copied" : "Copy JSON"}
+        </button>
+      </div>
+      <pre className="code"><code>{raw}</code></pre>
     </div>
   );
 }
@@ -1260,7 +1402,7 @@ export function HarmonicNote({ n }: { n: number }) {
 }
 
 export function AntisciaNote() {
-  return <p className="dim small">Antiscia across the Cancer–Capricorn axis; contra-antiscia across Aries–Libra. The figure shows antiscion longitudes.</p>;
+  return <p className="dim small">Antiscia across the Cancer-Capricorn axis; contra-antiscia across Aries-Libra. The figure shows antiscion longitudes.</p>;
 }
 
 export function heliocentricWheel(engine: Engine, jd: number): WheelChart {
