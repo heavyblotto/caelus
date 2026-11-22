@@ -108,6 +108,9 @@ jobs:
       # physical observation: TS scene geometry, verification, chronolocation, geolocation
       - run: node packages/caelus/dist/test/observe-golden.test.js
       - run: node packages/caelus/dist/test/observe.test.js
+      # chronosense middleware: temporal envelopes, cursor auditor, phase vectors, stratified compaction
+      - run: node packages/caelus/dist/test/chronosense-golden.test.js
+      - run: node packages/caelus/dist/test/chronosense.test.js
       # issue #20 regression: fk5Correction only on VSOP87D, not Horizons earthPack
       - run: node packages/caelus/dist/test/fk5-earthpack.test.js
       # every test/*.test.* file in the repo must be wired into this workflow;
