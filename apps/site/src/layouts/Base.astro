@@ -1,8 +1,8 @@
 ---
 /**
  * Root document: the Astro counterpart of apps/web/app/layout.tsx. Same
- * markup, the same no-flash theme script and site JSON-LD, and the header and
- * footer components from apps/web.
+ * markup, the same no-flash theme + color-scheme script and site JSON-LD,
+ * and the header and footer components from apps/web.
  */
 import "../styles/fonts.css";
 import "@web/app/globals.css";
@@ -45,9 +45,9 @@ const siteJsonLd = {
   ],
 };
 
-// Set the theme on <html> before first paint, from the stored choice or the OS
-// preference, so there is no flash of the wrong theme. Kept tiny and inline.
-const NO_FLASH = `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`;
+// Apply stored theme override or OS preference before first paint so neither
+// custom properties nor native color-scheme surfaces flash on load.
+const NO_FLASH = `(function(){try{var s=localStorage.getItem('theme');var m=document.querySelector('meta[name="color-scheme"]');if(s==='light'||s==='dark'){document.documentElement.dataset.theme=s;if(m)m.content=s;}else{var os=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.dataset.theme=os;if(m)m.content='dark light';}}catch(e){document.documentElement.dataset.theme='dark';}})();`;
 ---
 
 <!doctype html>
@@ -55,6 +55,8 @@ const NO_FLASH = `(function(){try{var t=localStorage.getItem('theme');if(t!=='li
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <script is:inline set:html={NO_FLASH} />
     <link rel="preload" href={monoLatin} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={barlow400} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={condensed600} as="font" type="font/woff2" crossorigin />
@@ -74,7 +76,6 @@ const NO_FLASH = `(function(){try{var t=localStorage.getItem('theme');if(t!=='li
     <link rel="icon" href="/icon.svg" type="image/svg+xml" sizes="any" />
   </head>
   <body>
-    <script is:inline set:html={NO_FLASH} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(siteJsonLd)} />
     <a href="#content" class="skip-link">Skip to content</a>
     <Header client:load pathname={pathname} />

@@ -2,10 +2,22 @@ import Link from "next/link";
 import CaelusMark from "./CaelusMark";
 import { FOOTER, SITE } from "../lib/site";
 
-function FooterLink({ href, label, external }: { href: string; label: string; external?: boolean }) {
+function FooterLink({
+  href,
+  label,
+  external,
+}: {
+  href: string;
+  label: string;
+  external?: boolean;
+}) {
   if (external || href.startsWith("http") || href.endsWith(".txt") || href.startsWith("/api/")) {
     return (
-      <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+      <a
+        href={href}
+        target={href.startsWith("http") ? "_blank" : undefined}
+        rel="noreferrer"
+      >
         {label}
       </a>
     );
@@ -25,9 +37,8 @@ export default function SiteFooter() {
           <p className="site-footer__claim dim small">
             {SITE.tagline} MIT-licensed with embedded ephemeris data.
           </p>
-          {/* The sky god from the 404, small: a signature, not a mascot. */}
-          <div className="site-footer__mark" aria-hidden>
-            <CaelusMark size={56} title="Caelus, holding the veil of the sky" />
+          <div className="site-footer__mark" aria-hidden="true">
+            <CaelusMark size={52} title="Caelus, holding the veil of the sky" />
           </div>
         </div>
         {FOOTER.map((col) => (
@@ -47,11 +58,11 @@ export default function SiteFooter() {
         <a href={`${SITE.repo}/blob/main/LICENSE`} target="_blank" rel="noreferrer">
           MIT License
         </a>
-        <span aria-hidden>·</span>
+        <span aria-hidden="true">·</span>
         <Link href="/privacy">Privacy</Link>
-        <span aria-hidden>·</span>
-        <span>v{SITE.version}</span>
-        <span className="site-footer__year" suppressHydrationWarning>
+        <span aria-hidden="true">·</span>
+        <span className="num">v{SITE.version}</span>
+        <span className="site-footer__year num" suppressHydrationWarning>
           © {year} ephemengine
         </span>
       </div>

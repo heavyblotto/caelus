@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Barlow, Barlow_Condensed, JetBrains_Mono } from "next/font/google";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
@@ -8,10 +8,16 @@ import "./globals.css";
 // Workbench type (apps/web/DESIGN.md): Barlow for prose, Barlow Condensed for
 // titles, JetBrains Mono for data, labels, and code.
 const sans = Barlow({
-  subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-sans", display: "swap",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-sans",
+  display: "swap",
 });
 const cond = Barlow_Condensed({
-  subsets: ["latin"], weight: ["600"], variable: "--font-cond", display: "swap",
+  subsets: ["latin"],
+  weight: ["600"],
+  variable: "--font-cond",
+  display: "swap",
 });
 const mono = JetBrains_Mono({
   subsets: ["latin"],
@@ -19,6 +25,10 @@ const mono = JetBrains_Mono({
   variable: "--font-mono",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  colorScheme: "dark light",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -62,22 +72,30 @@ const siteJsonLd = {
   ],
 };
 
-// Set the theme on <html> before first paint, from the stored choice or the OS
-// preference, so there is no flash of the wrong theme. Kept tiny and inline.
-const NO_FLASH = `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`;
+// Apply stored theme override or OS preference before first paint so neither
+// custom properties nor native color-scheme surfaces flash on load.
+const NO_FLASH = `(function(){try{var s=localStorage.getItem('theme');var m=document.querySelector('meta[name="color-scheme"]');if(s==='light'||s==='dark'){document.documentElement.dataset.theme=s;if(m)m.content=s;}else{var os=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.dataset.theme=os;if(m)m.content='dark light';}}catch(e){document.documentElement.dataset.theme='dark';}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sans.variable} ${cond.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${sans.variable} ${cond.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
       <body>
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
         />
-        <a href="#content" className="skip-link">Skip to content</a>
+        <a href="#content" className="skip-link">
+          Skip to content
+        </a>
         <SiteHeader />
-        <div id="content" tabIndex={-1}>{children}</div>
+        <div id="content" tabIndex={-1}>
+          {children}
+        </div>
         <SiteFooter />
       </body>
     </html>

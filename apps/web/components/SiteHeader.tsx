@@ -6,9 +6,10 @@ import ThemeToggle from "./ThemeToggle";
 import { NAV, SITE, formatGoldenChecks } from "../lib/site";
 
 /**
- * The status bar, the only site chrome (apps/web/DESIGN.md): wordmark,
- * primary navigation, check count, version, licence, theme. On small screens
- * the navigation moves to a second row and the optional cells drop out.
+ * The status bar, the single top chrome of the Workbench shell
+ * (apps/web/DESIGN.md): wordmark, primary navigation, golden check count,
+ * GitHub link, version, MIT licence, and theme toggle. Below 900px navigation
+ * moves cleanly to a second row; below 640px optional telemetry cells drop out.
  */
 export default function SiteHeader() {
   const pathname = usePathname();
@@ -32,15 +33,20 @@ export default function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <span className="bar__sp" aria-hidden />
+        <span className="bar__sp" aria-hidden="true" />
         <Link href="/validation" className="bar__cell bar__opt">
-          <span className="led led--ok" aria-hidden />
+          <span className="led led--ok" aria-hidden="true" />
           {formatGoldenChecks()} checks
         </Link>
-        <a href={SITE.repo} className="bar__cell bar__opt" target="_blank" rel="noreferrer">
+        <a
+          href={SITE.repo}
+          className="bar__cell bar__opt"
+          target="_blank"
+          rel="noreferrer"
+        >
           GitHub
         </a>
-        <span className="bar__cell" aria-label="current version">
+        <span className="bar__cell bar__ver" aria-label="Current version">
           v{SITE.version}
         </span>
         <a
