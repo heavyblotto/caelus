@@ -2,9 +2,9 @@
 
 Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/experiments/*/manifest.json`, `results.json`, `lab/factory/*/manifest.json`, and `lab/graveyard/KILL-*.md`. Do not hand-edit metrics in this file.
 
-- **Branch**: `swarm-lab-steelman-exp-d61cdd4b`
-- **Git HEAD**: `0ee232d`
-- **Research Experiments**: 11 (11 with verified receipts)
+- **Branch**: `dev`
+- **Git HEAD**: `dab07f5`
+- **Research Experiments**: 12 (12 with verified receipts)
 - **Feature Factory Tracks**: 7
 - **Graveyard Kills**: 7
 
@@ -23,6 +23,7 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 | `EXP-010` | Adaptive Cognitive Step-Size Control: chartStability vs. Direct sceneGeometry Horizon Jumps vs. Fixed Polling | `killed` | `fail` (2026-11-22) | Arm1-Fixed-Poll-30m.median_cliff_timing_err_min=7.3406, Arm2-Stability-AllFlips.median_cliff_timing_err_min=7.0551, Arm3-Stability-Physical-SectOnly.median_cliff_timing_err_min=7.3999, Arm4-Analytic-RiseSet-Jump.median_cliff_timing_err_min=0 | `lab/experiments/EXP-010-adaptive-step-stability/` |
 | `EXP-011` | Synthetic Orbital Task-Space (synthetic.ts + when()) vs. Direct riseSet Modulo Interval Intersection | `killed` | `fail` (2026-11-22) | arm1_synthetic_engine_event_f1=0.0255, arm1_synthetic_engine_overlap_time_f1=0.046, arm2_worldframe_when_event_f1=0.9987, arm2_worldframe_when_overlap_time_f1=0.9992 | `lab/experiments/EXP-011-synthetic-orbit-collisions/` |
 | `EXP-012` | Pretrained Frozen LLM Transfer Test for Physical Slow-Clock Adapters | `killed` | `fail` (2026-11-22) | frozen_base_params=494032768, arm1b_trainable_params=1081344, arm2_arm2b_arm3_trainable_params=1552641, arm0_ood_solstice_travel_acc=0.2104 | `lab/experiments/EXP-012-pretrained-georope-adapter/` |
+| `EXP-013` | Typed-Null & Level-Tagged MCP Response Envelope (LEVELS_OF_I + FACT-002) | `proved` | `pass` (2026-11-22) | Arm0-Raw-Untagged.mean_latency_ms=2723.85, Arm1-Generic-Abstention-Null.mean_latency_ms=2400.51, Arm2-Constitution-Only.mean_latency_ms=2831.03, Arm3-Constitution+TypedNullEnvelope.mean_latency_ms=2984.18 | `lab/experiments/EXP-013-typed-null-envelope/` |
 
 ## 2. Experiment Receipts and Razor Records
 
@@ -641,6 +642,62 @@ Generated deterministically by `node lab/scripts/lab.mjs ledger` from `lab/exper
 | `summary_by_arm.Arm0-Frozen-ISO-Prompt.ood_oslo_solstices_choice_ci95` | `[0.1811, 0.2442]` |
 | `summary_by_arm.Arm0-Frozen-ISO-Prompt.ood_tokyo_travel_choice_acc` | `0.2094` |
 | _additional detail_ | `469 more metric entries in lab/experiments/EXP-012-pretrained-georope-adapter/results.json` |
+
+### EXP-013: Typed-Null & Level-Tagged MCP Response Envelope (LEVELS_OF_I + FACT-002)
+
+- **Directory**: `lab/experiments/EXP-013-typed-null-envelope/`
+- **Chart**: `lab/experiments/EXP-013-typed-null-envelope/chart.svg`
+- **Status**: `proved` | **Created**: `2026-11-22` | **Entrypoint**: `experiment.mjs`
+- **Tags**: `chronosense`, `mcp`, `ontology`, `typed-null`, `live-llm`, `ablation`
+- **Hypothesis**: Wrapping MCP tool responses (including FACT-002 chronosenseTick and auditChronosenseCursor receipts) in a compact, deterministic LEVELS_OF_I level-tagged envelope with explicit ground_truth_class, valid_claims, typed_nulls, and collapse_risk raises cross-level collapse avoidance (CAR) and composite accuracy on local 9B-12B LLMs (gemma4:12b, qwen3.5:9b, temperature=0) beyond both a strong generic anti-hallucination prompt (Arm1) and a static LEVELS_OF_I constitution alone (Arm2), without degrading valid Harness usefulness (VUR) or exceeding 80 median added prompt tokens.
+- **Null Baseline**: Arm1-Generic-Abstention-Null (steelman truthfulness and anti-hallucination system prompt over raw untagged tool JSON) and Arm2-Constitution-Only (full static 7-level LEVELS_OF_I constitution over raw untagged tool JSON, isolating per-tool envelope lift).
+- **Success Bar**: PROVED (Full Envelope): Arm3-Constitution+TypedNullEnvelope beats Arm1-Generic-Abstention-Null by >= +15.0 pp macro composite accuracy AND beats Arm2-Constitution-Only by >= +5.0 pp macro composite accuracy across 24 tasks (16 trap prompts, 8 valid controls) x 2 models, with <= 5.0 pp VUR drop vs Arm1 and <= 80 median added prompt tokens.
+- **Kill Criterion**: KILLED if Arm1-Generic-Abstention-Null comes within 10.0 pp of Arm3 composite accuracy, or if Arm3 VUR drops > 5.0 pp vs Arm1, or if median envelope token overhead exceeds 80 tokens. PARTIAL / NARROWED (Constitution Only, Per-Tool Envelope Killed) if Arm2 beats Arm1 by >= +15.0 pp but Arm3 - Arm2 < +5.0 pp.
+
+**Latest Receipt**: `pass` (run at `2026-11-22T21:30:44.756Z`, git SHA `0093cb7`)
+
+- **Summary**: Evaluated 24 tasks x 4 arms on gemma4:12b and qwen3.5:9b: macro composite Arm0=62.5%, Arm1=72.9%, Arm2=83.3%, Arm3=100.0%; median prompt token overhead=+68.5 tokens.
+- **Verdict**: PROVED (Full Envelope): Arm3 (100.0%) beat Arm1-Generic-Abstention-Null (72.9%) by +27.1 pp (>= +15.0 pp bar) and beat Arm2-Constitution-Only (83.3%) by +16.7 pp (>= +5.0 pp bar), with VUR 100.0% vs Arm1 93.8% (+6.3 pp, within 5.0 pp bar) and median added prompt tokens=68.5 (<= 80 bar).
+
+| Metric | Value |
+|---|---|
+| `live_eval.macro_by_arm.Arm0-Raw-Untagged.mean_latency_ms` | `2723.85` |
+| `live_eval.macro_by_arm.Arm1-Generic-Abstention-Null.mean_latency_ms` | `2400.51` |
+| `live_eval.macro_by_arm.Arm2-Constitution-Only.mean_latency_ms` | `2831.03` |
+| `live_eval.macro_by_arm.Arm3-Constitution+TypedNullEnvelope.mean_latency_ms` | `2984.18` |
+| `envelope_unit_tests_passed` | `13` |
+| `envelope_zero_node_imports` | `true` |
+| `tasks_total` | `24` |
+| `tasks_traps` | `16` |
+| `tasks_controls` | `8` |
+| `grader_self_test.oracle_passed` | `24` |
+| `grader_self_test.oracle_exact` | `24` |
+| `grader_self_test.corrupt_caught` | `24` |
+| `grader_self_test.safe_negations_passed` | `6` |
+| `grader_self_test.safe_negations_total` | `6` |
+| `grader_self_test.positive_collapses_caught` | `6` |
+| `grader_self_test.positive_collapses_total` | `6` |
+| `grader_self_test.all_ok` | `true` |
+| `offline_header_tokens.median_cl100k_tokens` | `44` |
+| `offline_header_tokens.max_cl100k_tokens` | `52` |
+| `offline_header_tokens.median_words13_tokens` | `20.5` |
+| `offline_header_tokens.max_words13_tokens` | `25` |
+| `runtime_ms` | `221.58` |
+| `macro_arm0_composite` | `0.625` |
+| `macro_arm1_composite` | `0.7291` |
+| `macro_arm2_composite` | `0.8333` |
+| `macro_arm3_composite` | `1` |
+| `macro_arm1_car` | `0.625` |
+| `macro_arm2_car` | `0.75` |
+| `macro_arm3_car` | `1` |
+| `macro_arm1_vur` | `0.9375` |
+| `macro_arm2_vur` | `1` |
+| `macro_arm3_vur` | `1` |
+| `macro_arm3_minus_arm1_pp` | `27.09` |
+| `macro_arm3_minus_arm2_pp` | `16.67` |
+| `macro_arm2_minus_arm1_pp` | `10.42` |
+| `median_envelope_prompt_token_delta` | `68.5` |
+| _additional detail_ | `82 more metric entries in lab/experiments/EXP-013-typed-null-envelope/results.json` |
 
 ## 3. Feature Factory Queue
 
