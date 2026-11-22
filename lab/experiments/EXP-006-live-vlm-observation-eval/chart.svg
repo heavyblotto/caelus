@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" font-family="et-book, ET-Bembo, Palatino, Georgia, serif" font-size="13">
+  <rect width="760" height="440" fill="#ffffff"/>
+
+  <text x="32" y="30" font-size="16.5" fill="#111111">EXP-006: Live Observation Tool-Use Eval (CoT-Only vs. Caelus MCP Tools)</text>
+  <text x="32" y="49" font-size="11.5" fill="#555555">30 EXP-003 tasks x 2 live VLMs (upper track = gemma4:12b, lower track = qwen3.5:9b; temperature = 0)</text>
+
+  <!-- Direct mark labels above Row 0 (no separate legend box) -->
+  <text x="368.7" y="81" text-anchor="middle" font-size="11" fill="#8c3b2b">Arm1: CoT-NoTools (open)</text>
+  <line x1="368.7" y1="84" x2="368.7" y2="98" stroke="#8c3b2b" stroke-width="0.8"/>
+  <text x="628.3" y="81" text-anchor="end" font-size="11" fill="#1b5e7a">Arm2: Caelus-MCP-Tools (filled)</text>
+  <line x1="628.3" y1="84" x2="628.3" y2="98" stroke="#1b5e7a" stroke-width="0.8"/>
+  <text x="656" y="81" text-anchor="start" font-size="10.5" fill="#444444">Macro gain</text>
+
+  <!-- Row 0: Overall 30-Task Pass -->
+  <text x="220" y="109" text-anchor="end" font-size="12.5" font-weight="bold" fill="#111111">Overall 30-Task Pass</text>
+  <text x="220" y="123" text-anchor="end" font-size="10" fill="#666666">gemma4:12b / qwen3.5:9b</text>
+  <line x1="232" y1="104" x2="642" y2="104" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="232" y1="118" x2="642" y2="118" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="368.7" y1="104" x2="628.3" y2="104" stroke="#1b5e7a" stroke-width="2"/>
+  <circle cx="368.7" cy="104" r="4" fill="#ffffff" stroke="#8c3b2b" stroke-width="1.8"/>
+  <circle cx="628.3" cy="104" r="4.5" fill="#1b5e7a"/>
+  <line x1="368.7" y1="118" x2="601.0" y2="118" stroke="#4d8299" stroke-width="1.6"/>
+  <circle cx="368.7" cy="118" r="3.6" fill="#ffffff" stroke="#8c3b2b" stroke-width="1.6"/>
+  <polygon points="601.0,113.5 605.5,118 601.0,122.5 596.5,118" fill="#1b5e7a"/>
+  <text x="656" y="110" text-anchor="start" font-size="12" font-weight="bold" fill="#1b5e7a">33 -> 93.3%</text>
+  <text x="656" y="123" text-anchor="start" font-size="10" fill="#1b5e7a">+60.0 pp</text>
+
+  <!-- Row 1: Spoof-Detection F1 -->
+  <text x="220" y="161" text-anchor="end" font-size="12.5" fill="#111111">Spoof-Detection F1</text>
+  <text x="220" y="175" text-anchor="end" font-size="10" fill="#666666">14 verify scenes (10 spoofs)</text>
+  <line x1="232" y1="156" x2="642" y2="156" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="232" y1="170" x2="642" y2="170" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="505.3" y1="156" x2="642.0" y2="156" stroke="#1b5e7a" stroke-width="2"/>
+  <circle cx="505.3" cy="156" r="4" fill="#ffffff" stroke="#8c3b2b" stroke-width="1.8"/>
+  <circle cx="642.0" cy="156" r="4.5" fill="#1b5e7a"/>
+  <line x1="552.9" y1="170" x2="596.5" y2="170" stroke="#4d8299" stroke-width="1.6"/>
+  <circle cx="552.9" cy="170" r="3.6" fill="#ffffff" stroke="#8c3b2b" stroke-width="1.6"/>
+  <polygon points="596.5,165.5 601.0,170 596.5,174.5 592.0,170" fill="#1b5e7a"/>
+  <text x="656" y="162" text-anchor="start" font-size="12" fill="#222222">0.72 -> 0.94</text>
+  <text x="656" y="175" text-anchor="start" font-size="10" fill="#555555">+0.22 F1</text>
+
+  <!-- Row 2: Authentic Specificity (1 - FPR) -->
+  <text x="220" y="213" text-anchor="end" font-size="12.5" fill="#111111">Authentic Specificity</text>
+  <text x="220" y="227" text-anchor="end" font-size="10" fill="#666666">1 - FPR (4 authentic scenes)</text>
+  <line x1="232" y1="208" x2="642" y2="208" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="232" y1="222" x2="642" y2="222" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="232.0" y1="208" x2="642.0" y2="208" stroke="#1b5e7a" stroke-width="2"/>
+  <circle cx="232.0" cy="208" r="4" fill="#ffffff" stroke="#8c3b2b" stroke-width="1.8"/>
+  <circle cx="642.0" cy="208" r="4.5" fill="#1b5e7a"/>
+  <line x1="232.0" y1="222" x2="642.0" y2="222" stroke="#4d8299" stroke-width="1.6"/>
+  <circle cx="232.0" cy="222" r="3.6" fill="#ffffff" stroke="#8c3b2b" stroke-width="1.6"/>
+  <polygon points="642.0,217.5 646.5,222 642.0,226.5 637.5,222" fill="#1b5e7a"/>
+  <text x="656" y="214" text-anchor="start" font-size="12" fill="#222222">0 -> 100%</text>
+  <text x="656" y="227" text-anchor="start" font-size="10" fill="#555555">FPR 100 -> 0%</text>
+
+  <!-- Row 3: Counterfactual Axis Recovery -->
+  <text x="220" y="265" text-anchor="end" font-size="12.5" fill="#111111">Counterfactual Axis</text>
+  <text x="220" y="279" text-anchor="end" font-size="10" fill="#666666">6 single-axis spoofs</text>
+  <line x1="232" y1="260" x2="642" y2="260" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="232" y1="274" x2="642" y2="274" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="505.3" y1="260" x2="642.0" y2="260" stroke="#1b5e7a" stroke-width="2"/>
+  <circle cx="505.3" cy="260" r="4" fill="#ffffff" stroke="#8c3b2b" stroke-width="1.8"/>
+  <circle cx="642.0" cy="260" r="4.5" fill="#1b5e7a"/>
+  <line x1="505.3" y1="274" x2="642.0" y2="274" stroke="#4d8299" stroke-width="1.6"/>
+  <circle cx="505.3" cy="274" r="3.6" fill="#ffffff" stroke="#8c3b2b" stroke-width="1.6"/>
+  <polygon points="642.0,269.5 646.5,274 642.0,278.5 637.5,274" fill="#1b5e7a"/>
+  <text x="656" y="266" text-anchor="start" font-size="12" fill="#222222">67 -> 100%</text>
+  <text x="656" y="279" text-anchor="start" font-size="10" fill="#555555">+33.3 pp</text>
+
+  <!-- Row 4: Chronolocation (<= 20 min) -->
+  <text x="220" y="317" text-anchor="end" font-size="12.5" fill="#111111">Chronolocation (&lt;=20m)</text>
+  <text x="220" y="331" text-anchor="end" font-size="10" fill="#666666">8 shadow+moon tasks (med 3.3m)</text>
+  <line x1="232" y1="312" x2="642" y2="312" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="232" y1="326" x2="642" y2="326" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="334.5" y1="312" x2="590.8" y2="312" stroke="#1b5e7a" stroke-width="2"/>
+  <circle cx="334.5" cy="312" r="4" fill="#ffffff" stroke="#8c3b2b" stroke-width="1.8"/>
+  <circle cx="590.8" cy="312" r="4.5" fill="#1b5e7a"/>
+  <line x1="232.0" y1="326" x2="590.8" y2="326" stroke="#4d8299" stroke-width="1.6"/>
+  <circle cx="232.0" cy="326" r="3.6" fill="#ffffff" stroke="#8c3b2b" stroke-width="1.6"/>
+  <polygon points="590.8,321.5 595.3,326 590.8,330.5 586.3,326" fill="#1b5e7a"/>
+  <text x="656" y="318" text-anchor="start" font-size="12" fill="#222222">12.5 -> 87.5%</text>
+  <text x="656" y="331" text-anchor="start" font-size="10" fill="#555555">+75.0 pp</text>
+
+  <!-- Row 5: Geolocation (<= 350 km) -->
+  <text x="220" y="369" text-anchor="end" font-size="12.5" fill="#111111">Geolocation (&lt;=350 km)</text>
+  <text x="220" y="383" text-anchor="end" font-size="10" fill="#666666">8 Path A+B tasks (med 69.7 km)</text>
+  <line x1="232" y1="364" x2="642" y2="364" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="232" y1="378" x2="642" y2="378" stroke="#f0f0f0" stroke-width="1"/>
+  <line x1="283.3" y1="364" x2="642.0" y2="364" stroke="#1b5e7a" stroke-width="2"/>
+  <circle cx="283.3" cy="364" r="4" fill="#ffffff" stroke="#8c3b2b" stroke-width="1.8"/>
+  <circle cx="642.0" cy="364" r="4.5" fill="#1b5e7a"/>
+  <line x1="283.3" y1="378" x2="642.0" y2="378" stroke="#4d8299" stroke-width="1.6"/>
+  <circle cx="283.3" cy="378" r="3.6" fill="#ffffff" stroke="#8c3b2b" stroke-width="1.6"/>
+  <polygon points="642.0,373.5 646.5,378 642.0,382.5 637.5,378" fill="#1b5e7a"/>
+  <text x="656" y="370" text-anchor="start" font-size="12" fill="#222222">12.5 -> 100%</text>
+  <text x="656" y="383" text-anchor="start" font-size="10" fill="#555555">+87.5 pp</text>
+
+  <!-- Range-frame horizontal axis (0% to 100%) -->
+  <line x1="232" y1="398" x2="642" y2="398" stroke="#333333" stroke-width="1"/>
+  <line x1="232" y1="398" x2="232" y2="403" stroke="#333333" stroke-width="1"/>
+  <line x1="334.5" y1="398" x2="334.5" y2="403" stroke="#333333" stroke-width="1"/>
+  <line x1="437.0" y1="398" x2="437.0" y2="403" stroke="#333333" stroke-width="1"/>
+  <line x1="539.5" y1="398" x2="539.5" y2="403" stroke="#333333" stroke-width="1"/>
+  <line x1="642" y1="398" x2="642" y2="403" stroke="#333333" stroke-width="1"/>
+  <text x="232" y="416" text-anchor="middle" font-size="11" fill="#444444">0%</text>
+  <text x="334.5" y="416" text-anchor="middle" font-size="11" fill="#444444">25%</text>
+  <text x="437.0" y="416" text-anchor="middle" font-size="11" fill="#444444">50%</text>
+  <text x="539.5" y="416" text-anchor="middle" font-size="11" fill="#444444">75%</text>
+  <text x="642" y="416" text-anchor="middle" font-size="11" fill="#444444">100%</text>
+  <text x="437" y="433" text-anchor="middle" font-size="11" fill="#444444">Accuracy / F1 score (%) on EXP-003 vlm_eval_pack.jsonl (isolated local tool median 3.47 ms; warm authentic verify 1.10 ms)</text>
+</svg>

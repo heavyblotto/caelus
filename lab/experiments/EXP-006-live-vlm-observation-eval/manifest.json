@@ -1,0 +1,22 @@
+{
+  "id": "EXP-006",
+  "title": "Live Observation Tool-Use Eval (CoT-Only vs. Caelus MCP Tools)",
+  "track": "research",
+  "status": "proved",
+  "created": "2026-11-22",
+  "hypothesis": "Equipping a live LLM/VLM with local in-process Caelus observation tools (verify_observation, chronolocate, geolocate, scene_geometry backed by packages/caelus/dist/) on the 30-task EXP-003/vlm_eval_pack.jsonl raises spacetime spoof-detection F1 from near-chance (~0.55-0.65) to >= 0.88, raises counterfactual single-axis diagnostic recovery, chronolocation (<= 20 min), and geolocation (<= 350 km) accuracy decisively over chain-of-thought alone, and executes local tools in milliseconds (< 2 ms forward authentic verification, < 10 ms median across all tools including counterfactual forensics and global grids).",
+  "null_baseline": "Arm1-CoT-NoTools: the exact same live model(s) evaluating identical scene descriptions, claimed spacetime context, and visual shadow/twilight/lunar measurements via chain-of-thought reasoning only with zero external tools.",
+  "success_bar": "Arm2-Caelus-MCP-Tools achieves spoof-detection F1 >= 0.88 (beating Arm1-CoT-NoTools by >= 0.20 F1), achieves >= 80% pass rate on chronolocation (<= 20 min) and geolocation (<= 350 km) where Arm1-CoT-NoTools stays below 35%, improves overall 30-task pass rate by >= 40 percentage points, and executes local tools at < 10 ms median latency (< 2 ms warm forward authentic verify_observation).",
+  "kill_criterion": "If Arm2-Caelus-MCP-Tools achieves spoof-detection F1 < 0.80, fails to beat Arm1-CoT-NoTools by >= 0.15 F1 or >= 25 percentage points overall task pass rate, or if tool-calling schema failures degrade accuracy below baseline on > 25% of tasks.",
+  "entrypoint": "experiment.mjs",
+  "runner": "node",
+  "tags": [
+    "observe",
+    "vlm",
+    "mcp-tools",
+    "live-eval",
+    "spoof-detection",
+    "chronolocation",
+    "geolocation"
+  ]
+}

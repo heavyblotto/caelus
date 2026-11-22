@@ -1,10 +1,19 @@
 {
   "id": "EXP-005",
-  "run_at": "2026-11-22T16:56:53.975Z",
-  "git_sha": "a16db97",
-  "status": "inconclusive",
-  "summary": "Offline codec audit + scorer verification over 20 EXP-001 eval_suite tasks x 5 arms (GT parity=20/20, max sunAlt diff=0 deg). Bounded-decoder score: Physical=100.0% (45.75 tok, 100% 5-class twilight), Symbolic=98.8% (36.75 tok, 85% 5-class twilight, 2 conversion hops, 50% on +/-1 sign slip), Synthetic=55.8%, ISO=17.5%, None=0.0%. Live-LLM inference (PENDING --live) remains the FACT-002 gate.",
+  "run_at": "2026-11-22T18:36:34.011Z",
+  "git_sha": "e8dc94f",
+  "status": "pass",
+  "summary": "Live-LLM 5-arm codec showdown verified over 20 EXP-001 tasks x 2 live models (ollama/gemma4:12b, ollama/qwen3.5:9b) plus offline codec audit (GT parity=20/20). Live macro score: Physical=77.7% vs Symbolic=63.5% vs Synthetic=45.2% vs ISO=40.8% vs None=30.6% (Physical - ISO = +36.9 pp, Physical - Synthetic = +32.5 pp, Physical - Symbolic = +14.2 pp at 45.75 cl100k tok/turn).",
   "metrics": {
+    "live_physical_accuracy": 0.7771,
+    "live_symbolic_accuracy": 0.6354,
+    "live_synthetic_accuracy": 0.4521,
+    "live_iso_accuracy": 0.4083,
+    "live_none_accuracy": 0.3063,
+    "live_margin_physical_vs_iso": 0.3688,
+    "live_margin_physical_vs_synthetic": 0.325,
+    "live_margin_physical_vs_symbolic": 0.1417,
+    "live_models_count": 2,
     "physical_codec_score": 1,
     "symbolic_codec_score": 0.9875,
     "synthetic_codec_score": 0.5583,
@@ -19,8 +28,8 @@
     "ground_truth_parity_rate": 1,
     "scorer_oracle_pass_rate": 1,
     "scorer_corrupt_catch_rate": 1,
-    "live_llm_executed": false,
-    "runtime_ms": 199.3035,
+    "live_llm_verified": true,
+    "runtime_ms": 160.1802,
     "offline_codec_by_arm": {
       "Baseline-None": {
         "mean_score": 0,
@@ -118,7 +127,331 @@
         }
       }
     },
-    "live_eval": null
+    "live_eval": {
+      "receipt_executed_at": "2026-11-22T18:12:24.240Z",
+      "receipt_git_sha": "e8dc94f",
+      "env_note": "Anthropic API (ANTHROPIC_API_KEY) returned HTTP 401 invalid x-api-key on 1-token ping across claude-haiku-4-5 and claude-sonnet-4-5; live evaluation executed on two independent local Ollama models (gemma4:12b and qwen3.5:9b) at temperature=0.",
+      "models_evaluated": [
+        "ollama/gemma4:12b",
+        "ollama/qwen3.5:9b"
+      ],
+      "model_count": 2,
+      "macro_by_arm": {
+        "Baseline-None": {
+          "mean_score": 0.3063,
+          "exact_task_rate": 0,
+          "compaction_score": 0.3,
+          "photoperiod_score": 0.3125,
+          "high_lat_photoperiod_score": 0.3125,
+          "high_lat_all_score": 0.3229,
+          "mean_latency_ms": 3226.0552
+        },
+        "Control-ISO": {
+          "mean_score": 0.4083,
+          "exact_task_rate": 0,
+          "compaction_score": 0.3166,
+          "photoperiod_score": 0.5,
+          "high_lat_photoperiod_score": 0.5625,
+          "high_lat_all_score": 0.4271,
+          "mean_latency_ms": 3820.6698
+        },
+        "Control-Synthetic": {
+          "mean_score": 0.4521,
+          "exact_task_rate": 0.15,
+          "compaction_score": 0.2666,
+          "photoperiod_score": 0.6375,
+          "high_lat_photoperiod_score": 0.5938,
+          "high_lat_all_score": 0.4636,
+          "mean_latency_ms": 4150.4736
+        },
+        "Treatment-Caelus-Physical": {
+          "mean_score": 0.7771,
+          "exact_task_rate": 0.325,
+          "compaction_score": 0.7667,
+          "photoperiod_score": 0.7875,
+          "high_lat_photoperiod_score": 0.7188,
+          "high_lat_all_score": 0.7344,
+          "mean_latency_ms": 4622.8887
+        },
+        "Arm4b-Caelus-Symbolic": {
+          "mean_score": 0.6354,
+          "exact_task_rate": 0.125,
+          "compaction_score": 0.5333,
+          "photoperiod_score": 0.7375,
+          "high_lat_photoperiod_score": 0.6875,
+          "high_lat_all_score": 0.5938,
+          "mean_latency_ms": 5196.468
+        }
+      },
+      "macro_deltas": {
+        "physical_minus_iso": 0.3688,
+        "physical_minus_synthetic": 0.325,
+        "physical_minus_symbolic": 0.1417,
+        "physical_minus_none": 0.4708,
+        "compaction_physical_minus_synthetic": 0.5001,
+        "compaction_physical_minus_symbolic": 0.2334,
+        "high_lat_photo_physical_minus_synthetic": 0.125,
+        "high_lat_photo_physical_minus_symbolic": 0.0313
+      },
+      "models": [
+        {
+          "provider": "ollama",
+          "model": "gemma4:12b",
+          "executed_at": "2026-11-22T18:04:18.268Z",
+          "tasks_evaluated": 20,
+          "temperature": 0,
+          "think": false,
+          "by_arm": {
+            "Baseline-None": {
+              "episodes": 20,
+              "mean_score": 0.2875,
+              "exact_task_rate": 0,
+              "compaction_score": 0.2,
+              "photoperiod_score": 0.375,
+              "high_lat_photoperiod_score": 0.4375,
+              "high_lat_all_score": 0.3438,
+              "mean_latency_ms": 2068.8489,
+              "parse_errors": 0,
+              "api_errors": 0,
+              "field_accuracy": {
+                "night_crossed": 0.6,
+                "fresh_tool_id": 0,
+                "digest_match": 0,
+                "is_day": 0.6,
+                "twilight_stage": 0.6,
+                "deadline_phase": 0.3,
+                "deadline_minutes_within_15m": 0
+              }
+            },
+            "Control-ISO": {
+              "episodes": 20,
+              "mean_score": 0.3875,
+              "exact_task_rate": 0,
+              "compaction_score": 0.2,
+              "photoperiod_score": 0.575,
+              "high_lat_photoperiod_score": 0.6875,
+              "high_lat_all_score": 0.4271,
+              "mean_latency_ms": 2765.114,
+              "parse_errors": 0,
+              "api_errors": 0,
+              "field_accuracy": {
+                "night_crossed": 0.5,
+                "fresh_tool_id": 0.1,
+                "digest_match": 0,
+                "is_day": 1,
+                "twilight_stage": 0.8,
+                "deadline_phase": 0.5,
+                "deadline_minutes_within_15m": 0
+              }
+            },
+            "Control-Synthetic": {
+              "episodes": 20,
+              "mean_score": 0.4667,
+              "exact_task_rate": 0.2,
+              "compaction_score": 0.1333,
+              "photoperiod_score": 0.8,
+              "high_lat_photoperiod_score": 0.8125,
+              "high_lat_all_score": 0.5313,
+              "mean_latency_ms": 2908.8381,
+              "parse_errors": 0,
+              "api_errors": 0,
+              "field_accuracy": {
+                "night_crossed": 0.4,
+                "fresh_tool_id": 0,
+                "digest_match": 0,
+                "is_day": 0.8,
+                "twilight_stage": 0.8,
+                "deadline_phase": 1,
+                "deadline_minutes_within_15m": 0.6
+              }
+            },
+            "Treatment-Caelus-Physical": {
+              "episodes": 20,
+              "mean_score": 0.7542,
+              "exact_task_rate": 0.25,
+              "compaction_score": 0.7333,
+              "photoperiod_score": 0.775,
+              "high_lat_photoperiod_score": 0.75,
+              "high_lat_all_score": 0.7083,
+              "mean_latency_ms": 4807.8816,
+              "parse_errors": 0,
+              "api_errors": 0,
+              "field_accuracy": {
+                "night_crossed": 0.6,
+                "fresh_tool_id": 0.7,
+                "digest_match": 0.9,
+                "is_day": 1,
+                "twilight_stage": 1,
+                "deadline_phase": 1,
+                "deadline_minutes_within_15m": 0.1
+              }
+            },
+            "Arm4b-Caelus-Symbolic": {
+              "episodes": 20,
+              "mean_score": 0.6375,
+              "exact_task_rate": 0.05,
+              "compaction_score": 0.6,
+              "photoperiod_score": 0.675,
+              "high_lat_photoperiod_score": 0.6875,
+              "high_lat_all_score": 0.5938,
+              "mean_latency_ms": 5185.0024,
+              "parse_errors": 0,
+              "api_errors": 0,
+              "field_accuracy": {
+                "night_crossed": 0.2,
+                "fresh_tool_id": 0.6,
+                "digest_match": 1,
+                "is_day": 1,
+                "twilight_stage": 0.9,
+                "deadline_phase": 0.8,
+                "deadline_minutes_within_15m": 0
+              }
+            }
+          },
+          "deltas": {
+            "physical_minus_iso": 0.3667,
+            "physical_minus_synthetic": 0.2875,
+            "physical_minus_symbolic": 0.1167,
+            "physical_minus_none": 0.4667,
+            "compaction_physical_minus_synthetic": 0.6,
+            "compaction_physical_minus_symbolic": 0.1333,
+            "high_lat_photo_physical_minus_synthetic": -0.0625,
+            "high_lat_photo_physical_minus_symbolic": 0.0625,
+            "key_slice_physical": 0.7416,
+            "key_slice_synthetic": 0.4729,
+            "key_slice_symbolic": 0.6438
+          }
+        },
+        {
+          "provider": "ollama",
+          "model": "qwen3.5:9b",
+          "executed_at": "2026-11-22T18:12:24.239Z",
+          "tasks_evaluated": 20,
+          "temperature": 0,
+          "think": false,
+          "by_arm": {
+            "Baseline-None": {
+              "episodes": 20,
+              "mean_score": 0.325,
+              "exact_task_rate": 0,
+              "compaction_score": 0.4,
+              "photoperiod_score": 0.25,
+              "high_lat_photoperiod_score": 0.1875,
+              "high_lat_all_score": 0.3021,
+              "mean_latency_ms": 4383.2616,
+              "parse_errors": 0,
+              "api_errors": 0,
+              "field_accuracy": {
+                "night_crossed": 0.4,
+                "fresh_tool_id": 0.8,
+                "digest_match": 0,
+                "is_day": 0.4,
+                "twilight_stage": 0.1,
+                "deadline_phase": 0.5,
+                "deadline_minutes_within_15m": 0
+              }
+            },
+            "Control-ISO": {
+              "episodes": 20,
+              "mean_score": 0.4292,
+              "exact_task_rate": 0,
+              "compaction_score": 0.4333,
+              "photoperiod_score": 0.425,
+              "high_lat_photoperiod_score": 0.4375,
+              "high_lat_all_score": 0.4271,
+              "mean_latency_ms": 4876.2255,
+              "parse_errors": 1,
+              "api_errors": 0,
+              "field_accuracy": {
+                "night_crossed": 0.4,
+                "fresh_tool_id": 0.9,
+                "digest_match": 0,
+                "is_day": 0.8,
+                "twilight_stage": 0.6,
+                "deadline_phase": 0.3,
+                "deadline_minutes_within_15m": 0
+              }
+            },
+            "Control-Synthetic": {
+              "episodes": 20,
+              "mean_score": 0.4375,
+              "exact_task_rate": 0.1,
+              "compaction_score": 0.4,
+              "photoperiod_score": 0.475,
+              "high_lat_photoperiod_score": 0.375,
+              "high_lat_all_score": 0.3958,
+              "mean_latency_ms": 5392.109,
+              "parse_errors": 1,
+              "api_errors": 0,
+              "field_accuracy": {
+                "night_crossed": 0.5,
+                "fresh_tool_id": 0.7,
+                "digest_match": 0,
+                "is_day": 0.7,
+                "twilight_stage": 0.6,
+                "deadline_phase": 0.3,
+                "deadline_minutes_within_15m": 0.3
+              }
+            },
+            "Treatment-Caelus-Physical": {
+              "episodes": 20,
+              "mean_score": 0.8,
+              "exact_task_rate": 0.4,
+              "compaction_score": 0.8,
+              "photoperiod_score": 0.8,
+              "high_lat_photoperiod_score": 0.6875,
+              "high_lat_all_score": 0.7604,
+              "mean_latency_ms": 4437.8958,
+              "parse_errors": 0,
+              "api_errors": 0,
+              "field_accuracy": {
+                "night_crossed": 0.5,
+                "fresh_tool_id": 0.9,
+                "digest_match": 1,
+                "is_day": 1,
+                "twilight_stage": 0.9,
+                "deadline_phase": 0.8,
+                "deadline_minutes_within_15m": 0.5
+              }
+            },
+            "Arm4b-Caelus-Symbolic": {
+              "episodes": 20,
+              "mean_score": 0.6333,
+              "exact_task_rate": 0.2,
+              "compaction_score": 0.4667,
+              "photoperiod_score": 0.8,
+              "high_lat_photoperiod_score": 0.6875,
+              "high_lat_all_score": 0.5938,
+              "mean_latency_ms": 5207.9335,
+              "parse_errors": 1,
+              "api_errors": 0,
+              "field_accuracy": {
+                "night_crossed": 0.5,
+                "fresh_tool_id": 0.7,
+                "digest_match": 0.2,
+                "is_day": 1,
+                "twilight_stage": 0.8,
+                "deadline_phase": 0.9,
+                "deadline_minutes_within_15m": 0.5
+              }
+            }
+          },
+          "deltas": {
+            "physical_minus_iso": 0.3708,
+            "physical_minus_synthetic": 0.3625,
+            "physical_minus_symbolic": 0.1667,
+            "physical_minus_none": 0.475,
+            "compaction_physical_minus_synthetic": 0.4,
+            "compaction_physical_minus_symbolic": 0.3333,
+            "high_lat_photo_physical_minus_synthetic": 0.3125,
+            "high_lat_photo_physical_minus_symbolic": 0,
+            "key_slice_physical": 0.7438,
+            "key_slice_synthetic": 0.3875,
+            "key_slice_symbolic": 0.5771
+          }
+        }
+      ]
+    }
   },
-  "verdict": "INCONCLUSIVE (offline dry-run complete; live-LLM gate pending): Ground-truth parity (20/20), scorer self-tests (20/20 oracle, 20/20 corrupt caught), and bounded codec audit pass cleanly. Treatment-Caelus-Physical recovers 100.0% of task observables (100% 5-class twilight across all 20 tasks, 45.75 tokens, 0 conversion hops) vs Arm4b-Caelus-Symbolic 98.8% (85% 5-class twilight across all 20 tasks because 3 civil/nautical/astronomical twilight tasks collapse to binary Night, 36.75 tokens, 2 zodiac-to-degree hops, drops to 50% fresh-tool acc under symmetric +/-1 sign slip), Control-Synthetic 55.8%, Control-ISO 17.5%, and Baseline-None 0.0%. Run with --live and an API key to clear the FACT-002 live-LLM gate."
+  "verdict": "PROVED (live verified across 2 models, ollama/gemma4:12b, ollama/qwen3.5:9b): Macro score Treatment-Caelus-Physical 77.7% beats Control-ISO 40.8% by +36.9 pp (>= 20 pp bar), beats Control-Synthetic 45.2% by +32.5 pp (compaction +50.0 pp, high-lat photoperiod +12.5 pp), and beats Arm4b-Caelus-Symbolic 63.5% by +14.2 pp (compaction +23.3 pp, high-lat photoperiod +3.1 pp; slices_monotone=true) and Baseline-None 30.6% at 45.75 cl100k tokens/turn. Per model: gemma4:12b: Phys 75.4% vs Sym 63.7% vs Synth 46.7% vs ISO 38.8% vs None 28.7%; qwen3.5:9b: Phys 80.0% vs Sym 63.3% vs Synth 43.8% vs ISO 42.9% vs None 32.5%."
 }

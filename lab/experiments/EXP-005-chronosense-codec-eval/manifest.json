@@ -2,7 +2,7 @@
   "id": "EXP-005",
   "title": "Chronosense Physical vs. Symbolic Codec Eval Harness (Offline Audit and Live-LLM Runner)",
   "track": "research",
-  "status": "active",
+  "status": "proved",
   "created": "2026-11-22",
   "hypothesis": "Encoding agent spacetime context with Caelus physical-horizon tokens (Treatment-Caelus-Physical, backed by sceneGeometry and canonicalChart/chartDigest) yields higher exact task-state recoverability and lower live-LLM temporal confusion, stale-tool errors, and missed deadlines across EXP-001/eval_suite.jsonl than Baseline-None, Control-ISO, Control-Synthetic, and traditional zodiac shorthand (Arm4b-Caelus-Symbolic) at <= 55 tokens/turn.",
   "null_baseline": "Baseline-None (no clock), Control-ISO (passive UTC ISO-8601), Control-Synthetic (elapsed seconds + fixed 24h sin/cos wave), and Arm4b-Caelus-Symbolic (traditional zodiac sign/degree and planetary hour tokens).",
