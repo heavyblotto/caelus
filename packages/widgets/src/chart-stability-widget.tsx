@@ -306,7 +306,7 @@ export function ChartStability({ engine, initial = STABILITY_DEFAULT, wheelTheme
         <div className="col">
           <section className="tile">
             <div className="tile__h"><b>OUT</b><span>Stable placements</span><i>{status}</i></div>
-            <div className="meter"><i style={{ width: `${(running ? progress : scan ? 1 : 0) * 100}%` }} /></div>
+            <div className="meter"><i style={{ width: `${(running ? progress : 0) * 100}%` }} /></div>
             <div className="count">
               <b>{scan ? scan.summary.stable : 0}</b>
               <span>of {scan ? scan.summary.facts : 0} facts hold</span>

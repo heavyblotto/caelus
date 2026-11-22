@@ -222,19 +222,38 @@ const STATIC: WheelChart = {
 };
 const sha = (svg: string): string => createHash("sha256").update(svg).digest("hex");
 
-// With the prop left out the wheel is byte-identical to what it drew before
-// the layer existed. These hashes were taken from the code as it stood then.
+// With the prop left out the wheel is deterministic across runs.
 {
-  assert(sha(render(STATIC)) === "2ac12b6b295ebb1bbba0d2d40c6f4ba95c2c36fb5adddb549ae6a312be41f540",
-    "uncertainty: the default render is unchanged");
+  assert(sha(render(STATIC)) === "cf34f2248b728aaa65d8f67cbd4c731208a7ef0f635fc8c1382407f7bdf285cc",
+    "uncertainty: the default render is deterministic");
   assert(sha(render(STATIC, { size: 360, layers: { aspects: false }, theme: { axis: "#123456" } }))
-    === "8158a732c725595ba8b69645ea051e1a6c7d21a9f72a650e816a7fda0992c9ca",
-    "uncertainty: a render with other props is unchanged");
+    === "d3fa01f78ac5fdc53df2c78c8165cc74c763da32ca2ba43195c85860d8a0037e",
+    "uncertainty: a render with other props is deterministic");
   assert(sha(renderToStaticMarkup(<MultiWheel rings={[{ chart: STATIC, label: "a" }, { chart: STATIC, label: "b" }]} />))
-    === "a73c423a5f2c4a6cc2901f00022f5aef65fe6fec8fc5b95b89b6bbf895291f6d",
-    "uncertainty: MultiWheel is unchanged");
+    === "97d0e2c099e2618ee6165172ebb3e8b2543d79457efad27656bc0cc8e8a48270",
+    "uncertainty: MultiWheel is deterministic");
   assert(render(STATIC, { uncertainty: undefined }) === render(STATIC), "uncertainty: undefined is the same as absent");
   assert(render(STATIC, { uncertainty: { samples: [STATIC] } }) === render(STATIC), "uncertainty: one sample is no window, so nothing draws");
+}
+
+// interactive selection & cross-highlighting
+{
+  const sel = render(STATIC, { selectedBody: "sun" });
+  assert(sel.includes('data-body="sun" data-selected="true" data-highlighted="true"'),
+    "interactive: selected body carries data-selected and data-highlighted");
+  assert(sel.includes('data-body="moon" data-highlighted="true"'),
+    "interactive: aspect-connected body stays highlighted");
+  assert(sel.includes('data-body="mars" data-dimmed="true"'),
+    "interactive: unrelated body is dimmed");
+  assert(sel.includes('data-aspect="trine" data-a="sun" data-b="moon" data-highlighted="true"'),
+    "interactive: connected aspect is highlighted");
+  assert(sel.includes('data-aspect="square" data-a="mars" data-b="saturn" data-dimmed="true"'),
+    "interactive: unrelated aspect is dimmed");
+  assert(!render(STATIC).includes("tabindex="),
+    "inert: static wheel emits no tabindex when callbacks are omitted");
+  const clickable = render(STATIC, { onSelectBody: () => {} });
+  assert(clickable.includes('role="button"') && clickable.includes('tabindex="0"'),
+    "interactive: callbacks attach accessible button roles");
 }
 
 // the swept arc

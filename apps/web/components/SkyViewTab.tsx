@@ -1,22 +1,44 @@
 import { useEffect, useMemo, useState } from "react";
 import { Engine, skyView, type SkyViewResult } from "caelus";
-import { cell } from "../lib/chart-display";
+import { WHEEL_PLANET_COLORS } from "../lib/wheelTheme";
 
 const LENSES = ["ultrawide", "wide", "standard", "normal", "portrait", "telephoto", "supertele"];
+const AIM_PRESETS = [
+  { id: "N", label: "N", alt: "15" },
+  { id: "E", label: "E", alt: "15" },
+  { id: "S", label: "S", alt: "25" },
+  { id: "W", label: "W", alt: "10" },
+  { id: "S", label: "Zenith", alt: "80" },
+] as const;
 
-const BODY_COLOR: Record<string, string> = {
-  sun: "#ffd27f", moon: "#ece8f2", mercury: "#c9c4d4", venus: "#ffffff",
-  mars: "#e08a8a", jupiter: "#efe0b4", saturn: "#e3d3a6",
-};
 function colorOf(id: string): string {
-  if (id.startsWith("star:")) return "#cfe0ff";
-  return BODY_COLOR[id] ?? "var(--accent)";
+  if (id.startsWith("star:")) return "var(--dim)";
+  return WHEEL_PLANET_COLORS[id] ?? "var(--accent)";
 }
 
-export default function SkyViewTab({ engine, jdUt, lat, lonEast, extraBodies }: {
-  engine: Engine; jdUt: number; lat: number; lonEast: number;
+export interface SkyViewTabProps {
+  engine: Engine;
+  jdUt: number;
+  lat: number;
+  lonEast: number;
   extraBodies?: string[];
-}) {
+  selectedBody?: string | null;
+  hoveredBody?: string | null;
+  onSelectBody?: (body: string | null) => void;
+  onHoverBody?: (body: string | null) => void;
+}
+
+export default function SkyViewTab({
+  engine,
+  jdUt,
+  lat,
+  lonEast,
+  extraBodies,
+  selectedBody,
+  hoveredBody,
+  onSelectBody,
+  onHoverBody,
+}: SkyViewTabProps) {
   const [azimuth, setAzimuth] = useState("W");
   const [altitude, setAltitude] = useState("5");
   const [lens, setLens] = useState("normal");
@@ -26,14 +48,14 @@ export default function SkyViewTab({ engine, jdUt, lat, lonEast, extraBodies }: 
   const [offsetMin, setOffsetMin] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [ov, setOv] = useState({ ecliptic: false, signs: false, houses: false, constellations: false });
+  const [ov, setOv] = useState({ ecliptic: true, signs: false, houses: false, constellations: true });
   const anyOverlay = ov.ecliptic || ov.signs || ov.houses || ov.constellations;
 
   // Animation: advance the instant a step per tick and re-render. Each frame is
   // a fresh exact skyView, so stars rotate about the pole, the Moon drifts, and
-  // twilight evolves -- a live preview of a sky-view sequence.
-  const OFFSET_MAX = 600; // minutes
-  const STEP = 8;         // minutes per tick
+  // twilight evolves.
+  const OFFSET_MAX = 600;
+  const STEP = 8;
   const reduceMotion = typeof window !== "undefined"
     && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   useEffect(() => {
@@ -72,16 +94,33 @@ export default function SkyViewTab({ engine, jdUt, lat, lonEast, extraBodies }: 
   };
 
   return (
-    <div>
-      <div className="controls" style={{ marginBottom: "0.8rem" }}>
+    <div className="stack">
+      <div className="preset-bar" role="group" aria-label="Quick sky aim">
+        {AIM_PRESETS.map((p) => {
+          const active = azimuth.toUpperCase() === p.id && altitude === p.alt;
+          return (
+            <button
+              key={p.label}
+              type="button"
+              className="chip"
+              aria-pressed={active}
+              onClick={() => { setAzimuth(p.id); setAltitude(p.alt); }}
+            >
+              {p.label}
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="controls">
         <label className="field">
           <span className="field__label">aim</span>
-          <input className="control" style={{ width: "4.5rem" }} value={azimuth}
+          <input className="control" value={azimuth}
             onChange={(e) => setAzimuth(e.target.value)} aria-label="aim azimuth (compass or degrees)" />
         </label>
         <label className="field">
           <span className="field__label">altitude°</span>
-          <input className="control" style={{ width: "4rem" }} value={altitude} type="number"
+          <input className="control" value={altitude} type="number"
             onChange={(e) => setAltitude(e.target.value)} aria-label="aim altitude in degrees" />
         </label>
         <label className="field">
@@ -92,12 +131,12 @@ export default function SkyViewTab({ engine, jdUt, lat, lonEast, extraBodies }: 
         </label>
         <label className="field">
           <span className="field__label">width</span>
-          <input className="control" style={{ width: "4.5rem" }} value={w} type="number"
+          <input className="control" value={w} type="number"
             onChange={(e) => setW(e.target.value)} aria-label="image width in pixels" />
         </label>
         <label className="field">
           <span className="field__label">height</span>
-          <input className="control" style={{ width: "4.5rem" }} value={h} type="number"
+          <input className="control" value={h} type="number"
             onChange={(e) => setH(e.target.value)} aria-label="image height in pixels" />
         </label>
         <label className="field">
@@ -115,175 +154,293 @@ export default function SkyViewTab({ engine, jdUt, lat, lonEast, extraBodies }: 
         </label>
       </div>
 
-      <div className="scrubber" style={{ marginBottom: "0.8rem" }}>
+      <div className="scrubber-bar">
         {!reduceMotion && (
-          <button type="button" className="control mono" style={{ minWidth: "4.2rem" }}
+          <button type="button" className="btn btn-sm btn-ghost mono"
             onClick={() => setPlaying((p) => !p)} aria-label={playing ? "pause animation" : "play animation"}>
-            {playing ? "pause" : "play"}
+            {playing ? "Pause" : "Play"}
           </button>
         )}
-        <input type="range" className="control" min={-120} max={OFFSET_MAX} step={1} value={offsetMin}
+        <input type="range" className="control scrubber__track" min={-120} max={OFFSET_MAX} step={1} value={offsetMin}
           onChange={(e) => { setPlaying(false); setOffsetMin(Number(e.target.value)); }}
           aria-label="time offset in minutes" />
-        <span className="mono small mute" style={{ minWidth: "5.5rem", textAlign: "right" }}>
+        <span className="mono small mute num">
           {offsetMin >= 0 ? "+" : ""}{(offsetMin / 60).toFixed(1)} h
         </span>
         {offsetMin !== 0 && (
           <button type="button" className="btn btn-ghost btn-sm"
-            onClick={() => { setPlaying(false); setOffsetMin(0); }} aria-label="reset time">reset</button>
+            onClick={() => { setPlaying(false); setOffsetMin(0); }} aria-label="reset time">Reset</button>
         )}
       </div>
 
-      <div style={{ display: "flex", gap: "0.9rem", flexWrap: "wrap", marginBottom: "0.8rem", fontSize: "0.78rem" }}>
-        <span className="mute">overlays:</span>
+      <div className="row row--wrap viz-toolbar">
+        <span className="mono small mute">Overlays:</span>
         {(["ecliptic", "signs", "houses", "constellations"] as const).map((k) => (
-          <label key={k} style={{ display: "flex", gap: "0.3rem", alignItems: "center", cursor: "pointer" }}>
-            <input type="checkbox" checked={ov[k]} style={{ accentColor: "var(--accent)" }}
+          <label key={k} className="row small">
+            <input type="checkbox" checked={ov[k]}
               onChange={(e) => setOv((s) => ({ ...s, [k]: e.target.checked }))} />
-            {k}
+            <span>{k}</span>
           </label>
         ))}
       </div>
 
       {"error" in result ? (
-        <p className="small" style={{ color: "var(--bad)" }}>{result.error}</p>
+        <p className="small badge badge--bad">{result.error}</p>
       ) : (
-        <SkyViewBody result={result} onCopy={copy} copied={copied} />
+        <SkyViewBody
+          result={result}
+          onCopy={copy}
+          copied={copied}
+          selectedBody={selectedBody}
+          hoveredBody={hoveredBody}
+          onSelectBody={onSelectBody}
+          onHoverBody={onHoverBody}
+        />
       )}
 
-      <p className="dim small" style={{ marginTop: "0.8rem" }}>
-        Caelus places the bodies and describes the sky; it does not render the image. Aim takes a
+      <p className="dim small">
+        Caelus places the bodies and describes the sky; it does not render pixels. Aim takes a
         compass point (W, WNW) or degrees from true north; the prompt is built for an image model.
-        Press play (or scrub) to step time forward and watch the sky rotate, the Moon drift, and
-        twilight evolve. Each frame is a fresh exact computation.
+        Press Play or scrub time forward to watch the sky rotate, the Moon drift, and twilight
+        evolve from fresh exact computations.
       </p>
     </div>
   );
 }
 
-function SkyViewBody({ result, onCopy, copied }: {
-  result: SkyViewResult; onCopy: (t: string) => void; copied: boolean;
+function SkyViewBody({
+  result,
+  onCopy,
+  copied,
+  selectedBody,
+  hoveredBody,
+  onSelectBody,
+  onHoverBody,
+}: {
+  result: SkyViewResult;
+  onCopy: (t: string) => void;
+  copied: boolean;
+  selectedBody?: string | null;
+  hoveredBody?: string | null;
+  onSelectBody?: (body: string | null) => void;
+  onHoverBody?: (body: string | null) => void;
 }) {
   const { sky, lens, image, bodies, offFrame, milkyWay, overlays, aim, prompt } = result;
   const W = image.width;
   const H = image.height;
   const dotR = Math.max(H * 0.014, 4);
+  const activeBody = hoveredBody ?? selectedBody ?? null;
+  const interactive = Boolean(onSelectBody || onHoverBody);
 
   return (
-    <>
-      <svg
-        viewBox={`0 0 ${W} ${H}`}
-        preserveAspectRatio="xMidYMid meet"
-        style={{ width: "100%", maxWidth: 420, height: "auto", border: "1px solid var(--border-strong)", background: "linear-gradient(#10101e, #1a1322)", display: "block" }}
-        role="img"
-        aria-label="sky frame preview"
-      >
-        {milkyWay.visible && milkyWay.inFrame && milkyWay.entry && milkyWay.exit && (
-          <line x1={milkyWay.entry.x} y1={milkyWay.entry.y} x2={milkyWay.exit.x} y2={milkyWay.exit.y}
-            stroke="#b9c4ff" strokeOpacity={0.18} strokeWidth={H * 0.12} strokeLinecap="round" />
-        )}
-        {milkyWay.visible && milkyWay.galacticCenter?.inFrame && (
-          <circle cx={milkyWay.galacticCenter.x} cy={milkyWay.galacticCenter.y} r={H * 0.09}
-            fill="#cdd6ff" opacity={0.16} />
-        )}
-        {sky.horizonY !== null && sky.horizonY >= 0 && sky.horizonY <= H && (
-          <line x1={0} y1={sky.horizonY} x2={W} y2={sky.horizonY} stroke="var(--text-mute)" strokeWidth={H * 0.003} strokeDasharray={`${H * 0.02} ${H * 0.02}`} />
-        )}
-        {overlays && (
-          <g>
-            {(overlays.constellations?.lines ?? []).map((ln, i) => (
-              <polyline key={`c${i}`} points={ln.points.map((p) => `${p.x},${p.y}`).join(" ")}
-                fill="none" stroke="#7da7d9" strokeOpacity={0.5} strokeWidth={H * 0.0025} />
-            ))}
-            {(overlays.ecliptic ?? []).map((ln, i) => (
-              <polyline key={`e${i}`} points={ln.points.map((p) => `${p.x},${p.y}`).join(" ")}
-                fill="none" stroke="#e8c66a" strokeOpacity={0.75} strokeWidth={H * 0.004}
-                strokeDasharray={`${H * 0.02} ${H * 0.012}`} />
-            ))}
-            {(overlays.constellations?.labels ?? []).map((m, i) => (
-              <text key={`cl${i}`} x={m.x} y={m.y} fill="#7da7d9" opacity={0.8} textAnchor="middle"
-                fontSize={H * 0.026} fontFamily="monospace">{m.text}</text>
-            ))}
-            {(overlays.signs ?? []).map((m, i) => (
-              <text key={`s${i}`} x={m.x} y={m.y} fill="#9fdc9f" textAnchor="middle"
-                fontSize={H * 0.034} fontFamily="monospace">{m.text}</text>
-            ))}
-            {(overlays.houses ?? []).map((m, i) => (
-              <text key={`h${i}`} x={m.x} y={m.y} fill="var(--accent)" textAnchor="middle"
-                fontSize={H * 0.03} fontFamily="monospace">{m.text}</text>
-            ))}
+    <div className="stack">
+      <div className="viz-stage viz-stage--wide">
+        <svg
+          viewBox={`0 0 ${W} ${H}`}
+          preserveAspectRatio="xMidYMid meet"
+          role="img"
+          aria-label={`Sky frame aimed ${aim.compass} at altitude ${aim.altitudeDeg} degrees`}
+        >
+          <rect x={0} y={0} width={W} height={H} fill="var(--panel-inset, var(--bg))" />
+          {/* subtle framing reticle hairlines at edges */}
+          <g stroke="var(--line)" strokeWidth={H * 0.002} opacity={0.7}>
+            <line x1={W / 2} y1={0} x2={W / 2} y2={H * 0.03} />
+            <line x1={W / 2} y1={H * 0.97} x2={W / 2} y2={H} />
+            <line x1={0} y1={H / 2} x2={W * 0.02} y2={H / 2} />
+            <line x1={W * 0.98} y1={H / 2} x2={W} y2={H / 2} />
           </g>
-        )}
-        {bodies.map((b) => {
-          const r = b.id === "sun" || b.id === "moon"
-            ? Math.max(b.sizePx / 2, dotR) : b.sizePx > 0 ? Math.max(b.sizePx / 2, dotR * 0.7) : dotR * 0.6;
-          return (
-            <g key={b.id}>
-              <circle cx={b.x} cy={b.y} r={r} fill={colorOf(b.id)} opacity={b.nakedEye ? 0.95 : 0.45} />
-              {!b.id.startsWith("star:") && (
-                <text x={b.x + r + H * 0.01} y={b.y + H * 0.012} fill="var(--text-dim)" fontSize={H * 0.03} fontFamily="monospace">{b.name}</text>
-              )}
+
+          {milkyWay.visible && milkyWay.inFrame && milkyWay.entry && milkyWay.exit && (
+            <line x1={milkyWay.entry.x} y1={milkyWay.entry.y} x2={milkyWay.exit.x} y2={milkyWay.exit.y}
+              stroke="var(--accent)" strokeOpacity={0.14} strokeWidth={H * 0.12} strokeLinecap="round" />
+          )}
+          {milkyWay.visible && milkyWay.galacticCenter?.inFrame && (
+            <circle cx={milkyWay.galacticCenter.x} cy={milkyWay.galacticCenter.y} r={H * 0.09}
+              fill="var(--accent)" opacity={0.14} />
+          )}
+          {sky.horizonY !== null && sky.horizonY >= 0 && sky.horizonY <= H && (
+            <g>
+              <line x1={0} y1={sky.horizonY} x2={W} y2={sky.horizonY}
+                stroke="var(--wheel-horizon, var(--dim))" strokeWidth={H * 0.003}
+                strokeDasharray={`${H * 0.018} ${H * 0.014}`} />
+              <text x={W * 0.018} y={Math.max(H * 0.04, sky.horizonY - H * 0.015)}
+                fill="var(--wheel-horizon, var(--dim))" fontSize={H * 0.025} fontFamily="var(--mono, monospace)">
+                Horizon 0°
+              </text>
             </g>
-          );
-        })}
-      </svg>
-      <p className="mono small" style={{ margin: "0.4rem 0 0" }}>
-        {sky.twilight} twilight · Sun {sky.sunAltitudeDeg}° alt / {sky.sunAzimuthDeg}° az ·
-        limiting mag {sky.limitingMag} · Moon {sky.moonIllum !== null ? `${Math.round(sky.moonIllum * 100)}% lit` : "n/a"}
-        {sky.moonAltitudeDeg !== null ? ` at ${sky.moonAltitudeDeg}°` : ""} ·
-        {" "}{lens.name} {lens.hfovDeg}°×{lens.vfovDeg}° {lens.projection}
-        {result.starfield.count > 0 ? ` · ${result.starfield.count} stars${result.starfield.complete ? " (complete field)" : ""}` : ""}
-      </p>
-      <p className="dim small" style={{ margin: "0.3rem 0 0.8rem" }}>
-        Frame aimed {aim.compass} ({aim.azimuthDeg}°) at altitude {aim.altitudeDeg}°. Sizes are to scale within the frame.
-      </p>
+          )}
+          {overlays && (
+            <g>
+              {(overlays.constellations?.lines ?? []).map((ln, i) => (
+                <polyline key={`c${i}`} points={ln.points.map((p) => `${p.x},${p.y}`).join(" ")}
+                  fill="none" stroke="var(--wheel-meridian, var(--accent))" strokeOpacity={0.45} strokeWidth={H * 0.0025} />
+              ))}
+              {(overlays.ecliptic ?? []).map((ln, i) => (
+                <polyline key={`e${i}`} points={ln.points.map((p) => `${p.x},${p.y}`).join(" ")}
+                  fill="none" stroke="var(--wheel-ecliptic, var(--warm))" strokeOpacity={0.85} strokeWidth={H * 0.0038}
+                  strokeDasharray={`${H * 0.018} ${H * 0.012}`} />
+              ))}
+              {(overlays.constellations?.labels ?? []).map((m, i) => (
+                <text key={`cl${i}`} x={m.x} y={m.y} fill="var(--dim)" opacity={0.85} textAnchor="middle"
+                  fontSize={H * 0.024} fontFamily="var(--mono, monospace)">{m.text}</text>
+              ))}
+              {(overlays.signs ?? []).map((m, i) => (
+                <text key={`s${i}`} x={m.x} y={m.y} fill="var(--wheel-sign, var(--dim))" textAnchor="middle"
+                  fontSize={H * 0.032} fontFamily="var(--mono, monospace)">{m.text}</text>
+              ))}
+              {(overlays.houses ?? []).map((m, i) => (
+                <text key={`h${i}`} x={m.x} y={m.y} fill="var(--accent)" textAnchor="middle"
+                  fontSize={H * 0.028} fontFamily="var(--mono, monospace)">{m.text}</text>
+              ))}
+            </g>
+          )}
+          {bodies.map((b) => {
+            const isStar = b.id.startsWith("star:");
+            const r = b.id === "sun" || b.id === "moon"
+              ? Math.max(b.sizePx / 2, dotR) : b.sizePx > 0 ? Math.max(b.sizePx / 2, dotR * 0.7) : dotR * 0.6;
+            const isSelected = selectedBody === b.id;
+            const isHighlighted = activeBody === b.id;
+            const isDimmed = !isStar && activeBody !== null && !isHighlighted;
+            const handlers = !isStar && interactive
+              ? {
+                  style: { cursor: onSelectBody ? "pointer" : undefined },
+                  onClick: onSelectBody ? () => onSelectBody(selectedBody === b.id ? null : b.id) : undefined,
+                  onMouseEnter: onHoverBody ? () => onHoverBody(b.id) : undefined,
+                  onMouseLeave: onHoverBody ? () => onHoverBody(null) : undefined,
+                }
+              : {};
+            return (
+              <g key={b.id}
+                data-body={!isStar ? b.id : undefined}
+                data-selected={isSelected ? "true" : undefined}
+                data-highlighted={isHighlighted ? "true" : undefined}
+                data-dimmed={isDimmed ? "true" : undefined}
+                opacity={isDimmed ? 0.3 : 1}
+                {...handlers}>
+                <title>{`${b.name} · (${b.x}, ${b.y})${b.magnitude !== null ? ` · mag ${b.magnitude}` : ""}`}</title>
+                {isHighlighted && (
+                  <circle cx={b.x} cy={b.y} r={r + H * 0.022} fill="none" stroke="var(--accent)" strokeWidth={H * 0.0035} />
+                )}
+                <circle cx={b.x} cy={b.y} r={r} fill={colorOf(b.id)} opacity={b.nakedEye ? 0.96 : 0.5} />
+                {!isStar && (
+                  <text x={b.x + r + H * 0.012} y={b.y + H * 0.01} fill="var(--text)"
+                    fontSize={H * 0.029} fontFamily="var(--mono, monospace)">
+                    {b.name}
+                  </text>
+                )}
+              </g>
+            );
+          })}
+          {/* Direct aim readout in upper-left corner */}
+          <text x={W * 0.018} y={H * 0.048} fill="var(--dim)" fontSize={H * 0.025} fontFamily="var(--mono, monospace)">
+            {`${aim.compass} (${aim.azimuthDeg}°) · alt ${aim.altitudeDeg}° · ${lens.hfovDeg}°×${lens.vfovDeg}°`}
+          </text>
+        </svg>
+      </div>
+
+      <div className="telemetry">
+        <div className="telemetry__item">
+          <span className="telemetry__label">Twilight</span>
+          <span className="telemetry__val">{sky.twilight}</span>
+        </div>
+        <div className="telemetry__item">
+          <span className="telemetry__label">Sun</span>
+          <span className="telemetry__val">{sky.sunAltitudeDeg}° alt / {sky.sunAzimuthDeg}° az</span>
+        </div>
+        <div className="telemetry__item">
+          <span className="telemetry__label">Limiting mag</span>
+          <span className="telemetry__val">{sky.limitingMag}</span>
+        </div>
+        <div className="telemetry__item">
+          <span className="telemetry__label">Moon</span>
+          <span className="telemetry__val">
+            {sky.moonIllum !== null ? `${Math.round(sky.moonIllum * 100)}% lit` : "n/a"}
+            {sky.moonAltitudeDeg !== null ? ` · ${sky.moonAltitudeDeg}°` : ""}
+          </span>
+        </div>
+        {result.starfield.count > 0 && (
+          <div className="telemetry__item">
+            <span className="telemetry__label">Stars</span>
+            <span className="telemetry__val">
+              {result.starfield.count}{result.starfield.complete ? " complete" : ""}
+            </span>
+          </div>
+        )}
+      </div>
 
       {bodies.length > 0 && (
-        <table className="mono" style={{ fontSize: "0.8rem" }}>
-          <tbody>
-            {bodies.map((b) => (
-              <tr key={b.id} style={{ opacity: b.nakedEye ? 1 : 0.6 }}>
-                <td style={cell}>{b.name}</td>
-                <td className="mute" style={cell}>({b.x},{b.y})</td>
-                <td className="mute" style={cell}>{b.sizePx > 0 ? `${b.sizePx}px` : "point"}</td>
-                <td className="mute" style={cell}>{b.magnitude !== null ? `m${b.magnitude}` : ""}</td>
-                <td className="mute" style={cell}>
-                  {b.phaseName ? `${b.phaseName}, limb ${b.brightLimbClock}` : b.note ?? ""}
-                </td>
+        <div className="table-scroll" tabIndex={0}>
+          <table className="data-table data-table--interactive mono">
+            <thead>
+              <tr>
+                <th>Body</th>
+                <th>Pixel (x, y)</th>
+                <th>Angular size</th>
+                <th>Mag</th>
+                <th>Phase / note</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {bodies.map((b) => {
+                const isStar = b.id.startsWith("star:");
+                const isSelected = !isStar && selectedBody === b.id;
+                const isHighlighted = !isStar && hoveredBody === b.id;
+                return (
+                  <tr
+                    key={b.id}
+                    data-selected={isSelected ? "true" : undefined}
+                    data-highlighted={isHighlighted ? "true" : undefined}
+                    onClick={!isStar && onSelectBody ? () => onSelectBody(selectedBody === b.id ? null : b.id) : undefined}
+                    onMouseEnter={!isStar && onHoverBody ? () => onHoverBody(b.id) : undefined}
+                    onMouseLeave={!isStar && onHoverBody ? () => onHoverBody(null) : undefined}
+                  >
+                    <td>{b.name}</td>
+                    <td className="mute">({b.x}, {b.y})</td>
+                    <td className="mute">{b.sizePx > 0 ? `${b.sizePx}px` : "point"}</td>
+                    <td className="mute">{b.magnitude !== null ? `m${b.magnitude}` : ""}</td>
+                    <td className="mute">
+                      {b.phaseName ? `${b.phaseName}, limb ${b.brightLimbClock}` : b.note ?? ""}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       )}
-      {bodies.length === 0 && <p className="dim small">No bodies in this frame. Try a wider lens or a different aim.</p>}
+      {bodies.length === 0 && (
+        <p className="dim small">No bodies in this frame. Try a wider lens or a different aim.</p>
+      )}
 
       {offFrame.length > 0 && (
-        <p className="dim small" style={{ marginTop: "0.5rem" }}>
+        <p className="dim small">
           Just out of frame: {offFrame.map((o) => `${o.name} (${o.side}, ${o.deltaDeg}°)`).join(", ")}
         </p>
       )}
 
-      <p className="dim small" style={{ marginTop: "0.4rem" }}>
-        Milky Way: {milkyWay.note}.
-      </p>
+      <p className="dim small">Milky Way: {milkyWay.note}.</p>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", flexWrap: "wrap", margin: "0.9rem 0 0.3rem" }}>
-        <strong className="small">Image prompt</strong>
-        <button type="button" className="control mono" style={{ fontSize: "0.75rem" }} onClick={() => onCopy(prompt)}>
-          {copied ? "copied" : "copy"}
-        </button>
-        <button type="button" className="control mono" style={{ fontSize: "0.75rem" }}
-          onClick={() => onCopy(JSON.stringify(result.renderPlan, null, 2))}
-          title="A machine-readable hybrid-render contract: a body-free background-plate prompt plus the computed layers to composite locally">
-          copy render plan (JSON)
-        </button>
+      <div className="row row--wrap row--between">
+        <strong className="small mono">Image prompt &amp; render plan</strong>
+        <div className="row">
+          <button type="button" className="btn btn-sm btn-ghost mono" onClick={() => onCopy(prompt)}>
+            {copied ? "Copied" : "Copy prompt"}
+          </button>
+          <button
+            type="button"
+            className="btn btn-sm btn-ghost mono"
+            onClick={() => onCopy(JSON.stringify(result.renderPlan, null, 2))}
+            title="A machine-readable hybrid-render contract: a body-free background-plate prompt plus the computed layers to composite locally"
+          >
+            Copy render plan (JSON)
+          </button>
+        </div>
       </div>
-      <p className="dim small" style={{ margin: "0 0 0.3rem" }}>
+      <p className="dim small">
         The render plan separates a body-free background plate (for an image model) from the computed
-        layers (bodies, stars, Milky Way, overlays) to composite locally, for accurate stills and
-        animation.
+        layers (bodies, stars, Milky Way, overlays) to composite locally.
       </p>
-      <pre style={{ fontSize: "0.72rem", maxHeight: "20rem", margin: 0, whiteSpace: "pre-wrap" }}>{prompt}</pre>
-    </>
+      <pre className="codeblock">{prompt}</pre>
+    </div>
   );
 }
