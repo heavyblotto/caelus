@@ -13,18 +13,18 @@ import {
   formatHouseSystemsProse,
   formatMcpToolsProse,
   formatSiderealProse,
+  formatWorstNano,
 } from "../../lib/facts";
 import { WHEEL_THEME, WHEEL_LINE_COLORS } from "../../lib/wheelTheme";
 import { pageMetadata } from "../../lib/seo";
 import { INSTRUMENTS } from "../../lib/instruments";
-import { SITE } from "../../lib/site";
 
 const MCP_TOOLS_PROSE = formatMcpToolsProse();
 
 export const metadata = pageMetadata({
   title: "Features",
   description:
-    "Full capability overview for Caelus: planetary bodies, 12 house systems, sidereal ayanamsas, events, derived charts, Hellenistic time-lords, Vedic methods, query search, MCP tools, and a library comparison.",
+    "Full capability matrix for Caelus: planetary positions, 12 house systems, 7 sidereal ayanamsas, eclipses, physical observation forensics, Hellenistic and Vedic timing, query search, MCP tools, and a library comparison.",
   path: "/features",
 });
 
@@ -40,32 +40,65 @@ const graphSeries = ephemeris(engine, GRAPH_BODIES, {
   value: "longitude",
 });
 
-type Stat = { num: string; label: string; href: string };
+type Stat = { num: string; label: string; src: string; href: string };
 
 const STATS: Stat[] = [
-  { num: String(FACTS.defaultBodies), label: "Bodies in the default chart", href: "/validation" },
-  { num: String(FACTS.houseSystems), label: "House systems", href: "/docs/houses-and-zodiacs" },
-  { num: String(FACTS.zodiacModes), label: `Zodiacs (tropical + ${formatSiderealProse()} sidereal)`, href: "/docs/houses-and-zodiacs" },
-  { num: String(FACTS.mcpTools), label: "MCP tools for AI clients", href: "/docs/mcp" },
-  { num: formatGoldenChecks(), label: "Golden checks in CI", href: "/validation" },
-  { num: "0", label: "Runtime dependencies", href: "/docs/data-tiers" },
+  { num: String(FACTS.defaultBodies), label: "Bodies in default chart", src: "accuracy.json", href: "/validation" },
+  { num: String(FACTS.houseSystems), label: "House systems", src: "Houses guide", href: "/docs/houses-and-zodiacs" },
+  { num: String(FACTS.zodiacModes), label: `Zodiacs (tropical + ${formatSiderealProse()} sidereal)`, src: "Houses guide", href: "/docs/houses-and-zodiacs" },
+  { num: String(FACTS.mcpTools), label: "MCP tools for AI clients", src: "caelus-mcp", href: "/docs/mcp" },
+  { num: formatGoldenChecks(), label: "Golden checks in CI", src: `${formatWorstNano()} nas max`, href: "/validation" },
+  { num: "0", label: "Runtime dependencies", src: "MIT licensed", href: "/docs/data-tiers" },
 ];
 
-/** One capability. `unreleased` marks what is in the repository after the
- *  published version and not in an npm package yet. */
-function Feature({ title, unreleased, children }: { title: string; unreleased?: boolean; children: ReactNode }) {
+const JUMP_LINKS: Array<{ href: string; label: string }> = [
+  { href: "#positions", label: "Positions & Houses" },
+  { href: "#techniques", label: "Timing & Traditions" },
+  { href: "#search", label: "Search & Forensics" },
+  { href: "#delivery", label: "Visuals, MCP & Packages" },
+  { href: "#compare", label: "Library Comparison" },
+];
+
+function Feature({
+  title,
+  tag,
+  href,
+  hrefLabel,
+  children,
+}: {
+  title: string;
+  tag?: string;
+  href?: string;
+  hrefLabel?: string;
+  children: ReactNode;
+}) {
   return (
     <div className="card feature-card">
-      {unreleased ? <div className="lab">Unreleased</div> : null}
+      {tag ? <div className="lab">{tag}</div> : null}
       <h3>{title}</h3>
       <p>{children}</p>
+      {href && hrefLabel ? (
+        <p className="small">
+          <A href={href}>{hrefLabel} →</A>
+        </p>
+      ) : null}
     </div>
   );
 }
 
-function Group({ label, lead, children }: { label: string; lead?: ReactNode; children: ReactNode }) {
+function Group({
+  id,
+  label,
+  lead,
+  children,
+}: {
+  id: string;
+  label: string;
+  lead?: ReactNode;
+  children: ReactNode;
+}) {
   return (
-    <section className="feature-group">
+    <section id={id} className="feature-group">
       <h2 className="feature-group__label">{label}</h2>
       {lead}
       <div className="feature-grid">{children}</div>
@@ -76,7 +109,7 @@ function Group({ label, lead, children }: { label: string; lead?: ReactNode; chi
 // ---- comparison data ---------------------------------------------------------
 // Subjects are developer-facing engines and libraries. Facts are taken from each
 // project's own docs and license (linked under the tables). A check marks the
-// developer-friendly answer; "–" means the capability is not built in.
+// developer-friendly answer; "–" means the capability is outside scope.
 
 const TOOLS = [
   "Caelus",
@@ -91,7 +124,7 @@ type Row = { label: string; cells: string[] };
 
 const PLATFORM_ROWS: Row[] = [
   { label: "License\u00b9", cells: ["MIT", "AGPL / paid", "AGPL", "AGPL", "Unlicense", "MIT"] },
-  { label: "Language", cells: ["TypeScript", "C", "Python", "Python", "JavaScript", "TS / multi"] },
+  { label: "Languages", cells: ["TS + Python", "C", "Python", "Python", "JavaScript", "TS / multi"] },
   { label: "Runs in the browser", cells: ["yes", "no", "no", "no", "yes", "yes"] },
   { label: "Ships without ephemeris files\u00b2", cells: ["yes", "no", "no", "no", "yes", "yes"] },
   { label: "Independent of Swiss Ephemeris\u2074", cells: ["yes", "—", "optional backend", "no", "yes", "yes"] },
@@ -103,12 +136,14 @@ const CAPABILITY_ROWS: Row[] = [
   { label: "House systems", cells: ["12", "many", "several", "several", "7", "—"] },
   { label: "Sidereal zodiacs", cells: ["7 ayanamsas", "yes", "yes", "yes", "yes", "—"] },
   { label: "Eclipses, rise/set, stations", cells: ["yes", "yes", "yes", "—", "—", "yes"] },
+  { label: "Physical shadow & observation forensics", cells: ["yes", "—", "—", "—", "—", "—"] },
   { label: "Derived charts (returns, progressions)", cells: ["yes", "—", "yes", "yes", "—", "—"] },
   { label: "Hellenistic time-lords (lots, profections, releasing)", cells: ["yes", "—", "yes", "—", "—", "—"] },
   { label: "Vedic / Jyotish (dashas, vargas, yogas)", cells: ["yes", "—", "—", "—", "—", "—"] },
   { label: "Pattern detection (T-square, grand trine, yod)", cells: ["yes", "—", "—", "—", "—", "—"] },
-  { label: "Sky dating: finding dates matching sky constraints\u2075", cells: ["yes", "—", "—", "—", "—", "—"] },
-  { label: "Uncertain birth-time stability analysis\u2075", cells: ["yes", "—", "—", "—", "—", "—"] },
+  { label: "Sky dating & inverse search", cells: ["yes", "—", "—", "—", "—", "—"] },
+  { label: "Uncertain birth-time stability analysis", cells: ["yes", "—", "—", "—", "—", "—"] },
+  { label: "Canonical SHA-256 chart digests", cells: ["yes", "—", "—", "—", "—", "—"] },
   { label: "Accuracy published & CI-pinned", cells: ["yes", "reference", "depends on backend", "via Swiss Eph", "—", "yes"] },
 ];
 
@@ -137,7 +172,7 @@ function ComparisonTable({ caption, rows }: { caption: string; rows: Row[] }) {
   return (
     <div className="cmp-block">
       <p className="cmp-caption">{caption}</p>
-      <div className="table-scroll">
+      <div className="table-scroll" tabIndex={0}>
         <table className="cmp-table">
           <thead>
             <tr>
@@ -168,32 +203,42 @@ function ComparisonTable({ caption, rows }: { caption: string; rows: Row[] }) {
 export default function Features() {
   return (
     <main className="container page page--bench">
-      <PageHero eyebrow="Validated · MIT · zero dependencies" title="Features" cta="compact">
+      <PageHero
+        eyebrow="Validated · MIT · TypeScript, Python & MCP"
+        title="Features"
+        cta="compact"
+        after={
+          <nav className="preset-bar" aria-label="Feature sections">
+            {JUMP_LINKS.map((j) => (
+              <a key={j.href} href={j.href} className="chip">
+                {j.label}
+              </a>
+            ))}
+          </nav>
+        }
+      >
         <P>
-          This page lists the astronomical and astrological calculations built
-          into Caelus. Package counts below are generated from build artifacts
-          so documentation stays synchronized with releases. Planetary positions
-          are verified against Swiss Ephemeris and JPL Horizons using the
-          process documented in <A href="/methods">Methods</A>, and per-body error
-          bounds are published on <A href="/validation">Validation</A>.
+          This page inventories every astronomical, astrological, and physical
+          observation module built into Caelus. Package counts are read from
+          build artifacts so documentation stays synchronized with releases.
+          Planetary positions are verified against Swiss Ephemeris and JPL
+          Horizons using the workflow in <A href="/methods">Methods</A>, with
+          per-body bounds published on <A href="/validation">Validation</A>.
         </P>
       </PageHero>
 
       <div className="feature-stats">
         {STATS.map((s) => (
           <Link key={s.label} href={s.href} className="card stat">
-            <span className="stat__num">{s.num}</span>
+            <span className="stat__num num">{s.num}</span>
             <span className="stat__label">{s.label}</span>
+            <span className="lab">{s.src}</span>
           </Link>
         ))}
       </div>
 
-      <P dim>
-        Items marked Unreleased are available on the development branch and have
-        not yet shipped in {SITE.version}.
-      </P>
-
       <Group
+        id="positions"
         label="Chart and positions"
         lead={
           <figure className="feature-figure">
@@ -207,81 +252,74 @@ export default function Features() {
           </figure>
         }
       >
-        <Feature title="Bodies">
+        <Feature title="Bodies and fixed stars" tag="≤ 1″ Sun–Saturn" href="/docs/charts" hrefLabel="Computing Charts">
           {formatCountProse(FACTS.defaultBodies).charAt(0).toUpperCase()}
           {formatCountProse(FACTS.defaultBodies).slice(1)} in the default chart: Sun, Moon, Mercury, Venus, Mars,
           Jupiter, Saturn, Uranus, Neptune, Pluto, Chiron, and the mean and true
           lunar node. On request: mean and true Lilith (lunar apogee), five
           asteroids (Ceres, Pallas, Juno, Vesta, Pholus), the Uranian/Hamburg
-          points, and a 319-star fixed catalog.
+          points, minted asteroid packs, and a 319-star fixed catalog.
         </Feature>
-        <Feature title="Houses, angles, and zodiacs">
+        <Feature title="Houses, angles, and zodiacs" tag="12 systems · 7 ayanamsas" href="/docs/houses-and-zodiacs" hrefLabel="Houses & Zodiacs">
           {formatHouseSystemsProse().charAt(0).toUpperCase()}
           {formatHouseSystemsProse().slice(1)} house systems: Placidus, Koch, Porphyry, Equal, Whole-sign,
           Regiomontanus, Campanus, Alcabitius, Morinus, Meridian, Polich-Page,
-          and Vehlow, with a whole-sign fallback above the polar circles.
-          Angles: Ascendant, Midheaven, vertex, and east point. Zodiac: tropical
-          and {formatSiderealProse()} sidereal ayanamsas (Lahiri, Fagan/Bradley, Krishnamurti,
-          Raman, Yukteshwar, Galactic Center, and Spica). See{" "}
-          <A href="/docs/houses-and-zodiacs">Houses &amp; Zodiacs</A>.
+          and Vehlow, with an explicit whole-sign fallback above the polar
+          circles. Angles include Ascendant, Midheaven, vertex, and east point.
+          Zodiac modes cover tropical and {formatSiderealProse()} sidereal
+          ayanamsas (Lahiri, Fagan/Bradley, Krishnamurti, Raman, Yukteshwar,
+          Galactic Center, and Spica).
         </Feature>
-        <Feature title="Aspects and frames">
-          Major aspects (conjunction, sextile, square, trine, opposition) with
-          configurable orbs. Apparent geocentric or topocentric positions, in
+        <Feature title="Aspects and coordinate frames" tag="Apparent · Topocentric" href="/docs/charts" hrefLabel="Chart structure">
+          Major and minor aspects with configurable orbs plus 3D great-circle
+          angular separations. Apparent geocentric or topocentric positions in
           ecliptic longitude and latitude or right ascension and declination,
-          with light-time, annual aberration, IAU 1980 nutation, and Vondrák
-          2011 precession.
+          including light-time, annual aberration, IAU 1980 nutation, and
+          Vondrák 2011 precession.
         </Feature>
-        <Feature title="Events">
+        <Feature title="Events and eclipses" tag="≤ 0.5 s rise/set" href="/docs/eclipses" hrefLabel="Eclipses & Events">
           Rise, set, and meridian transit; longitude crossings; lunar phases;
-          stations; Gauquelin sectors; parans (co-angular bodies, two on the
-          rising, setting, or meridian axis at once); and solar and lunar
-          eclipses, with types, times, and geography: the sub-solar point of
-          greatest eclipse, the path of totality (north and south limits and
-          width), and local circumstances (magnitude, obscuration, and contact
-          times) for any observer. Timing bounds are on{" "}
-          <A href="/validation">Validation</A>.
+          planetary stations; Gauquelin sectors; parans (co-angular bodies); and
+          solar and lunar eclipses with greatest-eclipse coordinates, central
+          totality paths, and local magnitude, obscuration, and contact times.
         </Feature>
       </Group>
 
-      <Group label="Techniques">
-        <Feature title="Derived charts">
-          Solar and lunar returns, secondary progressions, solar arc
-          directions, composite and Davison charts, harmonics, antiscia and
-          contra-antiscia, declination aspects and parallels, out-of-bounds
-          status, essential dignities (qualitative and William Lilly&apos;s
-          weighted five-fold score with degree almuten), and sect. See{" "}
-          <A href="/docs/derived">Derived Charts</A>.
+      <Group id="techniques" label="Timing and traditions">
+        <Feature title="Derived charts and dignities" tag="Returns · Progressions" href="/docs/derived" hrefLabel="Derived Charts">
+          Solar and lunar returns, secondary progressions, solar arc directions,
+          composite and Davison charts, harmonics, draconic transforms, antiscia
+          and contra-antiscia, declination parallels, out-of-bounds status,
+          essential dignities (qualitative and Lilly&apos;s five-fold weighted
+          score with degree almuten), and sect.
         </Feature>
-        <Feature title="Hellenistic time-lords">
+        <Feature title="Hellenistic time-lords" tag="Traditional" href="/docs/hellenistic" hrefLabel="Hellenistic Time-Lords">
           Traditional timing methods calculated deterministically from validated
           positions: the seven sect-aware Hermetic lots (Fortune, Spirit, and
-          five others), annual and monthly profections with the lord of the year,
-          firdaria (the 75-year Persian planetary periods), zodiacal releasing
-          across four levels including loosing of the bond, and primary
-          directions using either the Ptolemy or Naibod time key. See{" "}
-          <A href="/docs/hellenistic">Hellenistic Time-Lords</A>.
+          five others), annual and monthly profections with lord of the year,
+          75-year firdaria periods, four-level zodiacal releasing with loosing
+          of the bond, and primary directions using Ptolemy or Naibod keys.
         </Feature>
-        <Feature title="Vedic and Jyotish">
+        <Feature title="Vedic and Jyotish" tag="Sidereal" href="/docs/vedic" hrefLabel="Vedic & Jyotish">
           Sidereal calculations built on top of the engine: nakshatras with padas
           and ruling lords; Vimshottari (120-year), Yogini (36-year), and
           Ashtottari (108-year) dashas with sub-periods; Parashari divisional
-          charts (vargas) D1, D2, D3, D9, D10, D12, and D30; and classical
-          yogas including Pancha Mahapurusha, Gajakesari, Budha-Aditya,
-          Chandra-Mangala, Kemadruma, raja/dhana combinations, and yogakarakas.
-          Where classical authorities differ on conventions, Caelus documents its
-          chosen rule and tests it against the reference implementation. See{" "}
-          <A href="/docs/vedic">Vedic &amp; Jyotish</A>.
+          charts (vargas) D1, D2, D3, D9, D10, D12, and D30; Ashtakavarga; and
+          classical yogas tested against documented authority conventions.
         </Feature>
-        <Feature title="Electional">
+        <Feature title="Electional and patterns" tag="Configuration search" href="/docs/electional" hrefLabel="Electional Search">
           Applying and separating aspects, solar phase (cazimi, combust, under
-          the beams), planetary hours, void-of-course Moon periods, and angular
-          house placements. Each metric matches the Python reference suite.
+          the beams), planetary hours, void-of-course Moon windows, and angular
+          house placements. <code>detectPatterns</code> finds T-squares, grand
+          trines, grand crosses, yods, kites, mystic rectangles, and stelliums,
+          while <code>chartSignature</code> summarizes element and modality
+          distributions.
         </Feature>
       </Group>
 
       <Group
-        label="Computation and search"
+        id="search"
+        label="Search, forensics, and reproducibility"
         lead={
           <figure className="feature-figure feature-figure--wide">
             <EphemerisGraph
@@ -294,164 +332,136 @@ export default function Features() {
             />
             <figcaption>
               A graphic ephemeris plotting the longitudes of Mars, Jupiter, and
-              Saturn over two years. The query engine and turbo tier scan curves
-              like these to find intervals where target conditions hold.
+              Saturn over two years. The query engine and Chebyshev turbo tier
+              scan trajectories like these to bisect exact entry and exit windows.
             </figcaption>
           </figure>
         }
       >
-        <Feature title="Query, turbo, and search">
-          A declarative <code>when()</code> query API locates time intervals
-          where celestial conditions hold. Combine predicates with{" "}
-          <code>allOf</code>, <code>anyOf</code>, and <code>notOf</code>, and
-          let the solver locate exact entry and exit boundaries by bisection.
-          For multi-decade bulk scans, the turbo tier evaluates segmented
-          Chebyshev polynomials fit to the engine, while <code>rankMoments</code>{" "}
-          (including a non-blocking browser variant) scores and ranks timestamps
-          within a search window. See <A href="/docs/recipes">Recipes</A>.
+        <Feature title="Physical observation and forensics" tag="Scene · Verify · Locate" href="/docs/observation" hrefLabel="Physical Observation">
+          <code>sceneGeometry</code> computes refracted Sun and Moon altitude
+          and azimuth, flat or sloped-ground 3D shadow vectors, camera glare
+          angles, zenith-frame lunar bright-limb tilt, and compact diurnal{" "}
+          <code>chronosense</code> headers. <code>verifyObservation</code> checks
+          claimed timestamps and coordinates with counterfactual diagnostics,
+          while <code>chronolocate</code> and <code>geolocate</code> invert
+          physical cues back to UTC windows or Earth coordinates.
         </Feature>
-        <Feature title="Matching and synthesis">
-          Reduce any chart to a weighted unit-circle feature vector so
-          configurations can be compared by cosine similarity, and use{" "}
-          <code>searchConfigurations</code> to rank a date range by similarity
-          to a target chart. Working in reverse, <code>compileForm</code> takes
-          weighted placement constraints, solves for the longitudes that best
-          satisfy them, reports the residual error, and flags impossible inputs.
-          See <A href="/docs/recipes">Recipes</A>.
+        <Feature title="Query, turbo, and search" tag="Declarative when()" href="/docs/time-queries" hrefLabel="Time Queries">
+          A declarative <code>when()</code> API locates time intervals where
+          celestial predicates hold using <code>allOf</code>, <code>anyOf</code>,
+          and <code>notOf</code> combinators with bisected boundaries. For
+          multi-decade scans, the turbo tier evaluates segmented Chebyshev
+          polynomials, while <code>rankMoments</code> scores candidate windows
+          and <code>compileForm</code> solves weighted placement constraints.
         </Feature>
-        <Feature title="Sky dating" unreleased>
+        <Feature title="Sky dating" tag="Instrument I-01" href="/instruments/sky-dating" hrefLabel="Open Sky Dating">
           <code>dateSky</code> searches a date range for intervals matching a set
-          of planetary constraints (sign placements, longitude orbs, arcs, or
-          inter-body elongations) and returns every matching window alongside a
-          funnel showing how many candidates survived each filter. Try it in the{" "}
-          <A href="/instruments/sky-dating">Sky Dating instrument</A> or read{" "}
-          <A href="/docs/sky-dating">Sky Dating</A>.
+          of planetary constraints (sign placements, longitude orbs, arcs, lunar
+          phases, or visibility rules) and returns every matching window
+          alongside a filter funnel showing which constraints narrowed the
+          candidates.
         </Feature>
-        <Feature title="Uncertain times" unreleased>
-          <code>chartStability</code> evaluates a birth-time window around a
-          nominal chart and reports which facts remain unchanged across the full
-          range (angle signs, sect, planet signs, houses, directions, and
-          aspects), along with stability percentages and transition timestamps
-          resolved to roughly one second. Try it in the{" "}
-          <A href="/instruments/uncertain-time">Uncertain Time instrument</A> or
-          read <A href="/docs/uncertain-time">Uncertain Times</A>.
+        <Feature title="Uncertain times" tag="Instrument I-02" href="/instruments/uncertain-time" hrefLabel="Open Uncertain Time">
+          <code>chartStability</code> sweeps a birth-time window around a nominal
+          chart and reports which placements stay invariant across the full range
+          (angle signs, sect, planet signs, houses, directions, and aspects),
+          along with stability percentages and transition timestamps resolved to
+          roughly one second.
         </Feature>
-        <Feature title="Historical dates" unreleased>
-          <code>julianDay</code> accepts a calendar parameter and{" "}
-          <code>calendarDate</code> converts Julian Days back to calendar dates,
-          supporting historical dates prior to October 15, 1582 in the Julian
-          calendar. For UT inputs before 1948, ΔT follows the Morrison,
-          Stephenson, Hohenkerk, and Zawilski spline back to 720 BC. See{" "}
-          <A href="/docs/deep-time">Deep Time</A>.
+        <Feature title="First and last visibility" tag="Instrument I-04" href="/instruments/first-visibility" hrefLabel="Open First Visibility">
+          Compute heliacal risings and settings, inner-planet apparitions, and
+          first lunar crescents for any observer coordinates across atmospheric
+          clarity bounds, returning visibility windows rather than single
+          overconfident dates.
         </Feature>
-        <Feature title="Patterns and chart signature">
-          <code>detectPatterns</code> identifies classical chart configurations
-          (T-squares, grand trines, grand crosses, yods, kites, mystic
-          rectangles, and sign or house stelliums), deduplicating subsets such
-          as T-squares inside a grand cross. <code>chartSignature</code>{" "}
-          summarizes element, modality, quadrant, and hemisphere counts along
-          with the dominant element, sign, and chart ruler. See{" "}
-          <A href="/docs/cookbook">Common Tasks</A>.
+        <Feature title="Historical deep time" tag="3000 BC – AD 3000" href="/docs/deep-time" hrefLabel="Deep Time">
+          <code>julianDay</code> and <code>calendarDate</code> support Julian
+          calendar dates prior to October 15, 1582. For UT inputs before 1948,
+          ΔT follows the Morrison, Stephenson, Hohenkerk, and Zawilski spline
+          back to 720 BC, with explicit uncertainty bounds propagated alongside
+          ephemeris errors.
         </Feature>
-        <Feature title="Interpretation layer">
-          While the core engine handles astronomical calculations only, the
-          interpretation layer builds structured readings on top of them.{" "}
-          <code>interpretationContext</code> projects a chart into ranked,
-          citable facts (natal placements, dispositors, receptions, fixed stars,
-          lots, transits, time-lords, synastry links, dignities, and Vedic
-          factors), and <code>chartBrief</code> feeds only cited facts to an LLM
-          with <code>auditCitations</code> checking that generated claims match
-          source IDs. See <A href="/docs/interpretation">Interpretation</A>.
+        <Feature title="Interpretation and provenance" tag="Citable facts" href="/docs/interpretation" hrefLabel="Interpretation Layer">
+          <code>interpretationContext</code> projects charts into ranked,
+          citable fact atoms, and <code>auditCitations</code> verifies that LLM
+          briefs reference only computed IDs. <code>Realm</code>,{" "}
+          <code>TemporalAnchor</code>, and <code>SpatialAnchor</code> track
+          whether a chart is observed, forecast, mythic, or synthetic.
         </Feature>
-        <Feature title="Chart provenance">
-          Not every chart comes from a recorded birth time. <code>Realm</code>{" "}
-          labels the chart&apos;s category (observed, forecast, mythic, or
-          archetypal), while <code>TemporalAnchor</code> and{" "}
-          <code>SpatialAnchor</code> capture how accurately the time and
-          location are known. Passing them to <code>realize()</code> routes to
-          either the ephemeris or synthetic compiler and weights angles and the
-          Moon proportionally in downstream interpretations. See{" "}
-          <A href="/docs/provenance">Provenance</A>.
+        <Feature title="Canonical mode and synthetic orbits" tag="SHA-256 · Kepler" href="/docs/canonical" hrefLabel="Canonical Mode">
+          <code>canonicalChart</code> and <code>chartDigest</code> emit
+          quantized, content-addressable JSON with SHA-256 hashes and boundary
+          flip warnings. For worldbuilding or custom rhythms,{" "}
+          <code>synthetic.ts</code> registers authored periodic or 3D Keplerian
+          bodies straight into the real sky engine, and minted CPK1 packs add
+          any numbered JPL asteroid with SHA-256 verification.
         </Feature>
       </Group>
 
       <Group
-        label="Output and delivery"
+        id="delivery"
+        label="Visualization, MCP, and delivery"
         lead={
           <figure className="feature-figure">
             <div className="chart-fluid">
               <ChartSphere chart={sphereChart} size={320} tilt={64} theme={WHEEL_THEME} />
             </div>
             <figcaption>
-              The same chart rendered as a tilted 3D celestial sphere showing each
-              planet at its ecliptic latitude. Every wheel, sphere, map, and
-              ephemeris plot renders as SSR-safe SVG. See{" "}
+              A tilted 3D celestial sphere showing each body at its ecliptic
+              latitude. Wheels, spheres, kundlis, maps, and ephemeris plots all
+              render as SSR-safe SVG. See{" "}
               <A href="/docs/visualizations">Visualizations</A>.
             </figcaption>
           </figure>
         }
       >
-        <Feature title="Visualization">
-          Render charts as a traditional 2D wheel, a tilted 3D celestial sphere
-          accounting for ecliptic latitude, an astrocartography world map of
-          angle lines, or a graphic ephemeris plot. Sky View generates an accurate
-          description of the visible sky for a given location and timestamp (including
-          body positions, magnitudes, Moon phase, twilight state, Milky Way, and
-          constellation overlays) for AI image generation. All graphics output
-          clean, SSR-safe SVG with zero runtime dependencies. See{" "}
-          <A href="/docs/visualizations">Visualizations</A>.
+        <Feature title="SSR-safe SVG visualizations" tag="caelus-wheel" href="/docs/visualizations" hrefLabel="Visualizations">
+          Render charts as a traditional 2D wheel, a tilted 3D celestial sphere,
+          North or South Indian kundlis, an astrocartography world map of angle
+          lines, or a graphic ephemeris plot. Sky View emits structured sky
+          coordinates and image-generation prompts including magnitudes, Moon
+          phase, twilight, and Milky Way geometry.
         </Feature>
-        <Feature title="Instruments">
-          {INSTRUMENTS.length} focused browser tools run directly on Caelus with
-          embedded ephemeris data and show the TypeScript API call used for each
-          result:{" "}
+        <Feature title="Interactive instruments" tag={`${INSTRUMENTS.length} live tools`} href="/instruments" hrefLabel="Browse Instruments">
+          {INSTRUMENTS.length} focused browser tools run directly on embedded
+          ephemeris data and show the TypeScript call used for each result:{" "}
           {INSTRUMENTS.map((inst, i) => (
             <span key={inst.id}>
               {i > 0 ? (i === INSTRUMENTS.length - 1 ? ", and " : ", ") : ""}
               <A href={inst.href}>{inst.title}</A>
             </span>
           ))}
-          . Browse them on <A href="/instruments">Instruments</A>.
+          .
         </Feature>
-        <Feature title="Packages">
-          Four core npm packages: <code>caelus</code> (ephemeris and chart math
-          with zero runtime dependencies), <code>caelus-birth</code> (timezone
-          and local-time conversion), <code>caelus-wheel</code> (SSR-safe SVG
-          visualizations), and <code>caelus-mcp</code> (the MCP server), plus
-          the Python reference implementation{" "}
+        <Feature title="MCP and edge APIs" tag={`${FACTS.mcpTools} MCP tools`} href="/docs/mcp" hrefLabel="MCP Setup">
+          <code>caelus-mcp</code> exposes {MCP_TOOLS_PROSE} chart and physical
+          observation tools over stdio and Streamable HTTP at{" "}
+          <A href="/api/mcp">/api/mcp</A>, alongside a REST endpoint at{" "}
+          <A href="/api/chart?lat=27.94&lon=-82.46">/api/chart</A>. Because the
+          engine performs no filesystem or network I/O by default, it runs
+          identically in browsers, edge workers, and Node.js.
+        </Feature>
+        <Feature title="Packages, range, and license" tag="MIT · AD 1000–3000" href="/provenance" hrefLabel="Provenance">
+          Five npm packages (<code>caelus</code>, <code>caelus-birth</code>,{" "}
+          <code>caelus-wheel</code>, <code>caelus-mcp</code>,{" "}
+          <code>caelus-delineations-pd</code>) plus{" "}
           <A href="https://pypi.org/project/caelus-engine/">caelus-engine</A> on
-          PyPI.
-        </Feature>
-        <Feature title="Integration">
-          The MCP server provides {MCP_TOOLS_PROSE} chart tools over stdio and
-          Streamable HTTP at <A href="/api/mcp">/api/mcp</A>, alongside a REST
-          endpoint at <A href="/api/chart?lat=27.94&lon=-82.46">/api/chart</A>{" "}
-          (with three tools, <code>date_sky</code>,{" "}
-          <code>chart_stability</code>, and <code>heliacal</code>, still
-          unreleased). Because the engine performs no filesystem or network I/O
-          by default, it runs consistently across browsers, edge workers, and
-          Node.js. See <A href="/docs/mcp">MCP Setup</A> and{" "}
-          <A href="/docs/data-tiers">Data Tiers</A>.
-        </Feature>
-        <Feature title="Range and license">
-          Supports AD 1000&ndash;3000 for the Sun, Moon, major planets, and
-          Pluto (verified against JPL Horizons), and 1600&ndash;2484 for major
-          asteroids and Chiron, with an optional pack extending planets to 3000
-          BC&ndash;AD 3000. MIT licensed with no AGPL dependencies or external
-          data files required. See <A href="/provenance">Provenance</A>.
+          PyPI. Validated AD 1000&ndash;3000 for the Sun, Moon, major planets,
+          and Pluto against JPL Horizons, and 1600&ndash;2484 for asteroids and
+          Chiron, under the MIT license with no AGPL restrictions.
         </Feature>
       </Group>
 
-      <section className="feature-group">
+      <section id="compare" className="feature-group">
         <h2 className="feature-group__label">How it compares</h2>
         <P>
           The comparison below covers developer-facing ephemeris and astrology
-          libraries using information from each project&apos;s documentation and
-          license. Swiss Ephemeris and Astronomy Engine provide planetary
-          positions and astronomical events without built-in astrological house,
-          zodiac, or timing calculations. A checkmark indicates built-in
-          support, while a dash means the capability is outside that
-          library&apos;s scope.
+          libraries using facts from each project&apos;s documentation and
+          license. Swiss Ephemeris and Astronomy Engine compute planetary
+          positions and astronomical events without built-in house, zodiac, or
+          timing calculations. A checkmark indicates built-in support, while a
+          dash marks capabilities outside that library&apos;s scope.
         </P>
       </section>
 
@@ -466,23 +476,18 @@ export default function Features() {
             </li>
             <li>
               <sup>2</sup> Swiss Ephemeris uses <code>.se1</code> data files for
-              full precision (a built-in mode runs without them at lower
+              full precision (a built-in Moshier mode runs without them at lower
               precision). Immanuel builds on it. Kerykeion&apos;s default tier
               uses JPL DE440s.
             </li>
             <li>
               <sup>3</sup> <code>caelus-mcp</code> exposes {MCP_TOOLS_PROSE} tools over
               the Model Context Protocol. Kerykeion serializes charts to XML for
-              LLM prompts but ships no MCP server.
+              LLM prompts without shipping an MCP server.
             </li>
             <li>
               <sup>4</sup> Kerykeion 6.1 uses libephemeris as its default
               backend and offers Swiss Ephemeris as an optional one.
-            </li>
-            <li>
-              <sup>5</sup> Unreleased in Caelus. The other columns were checked
-              against each project&apos;s README or programmer&apos;s
-              documentation on 12 November 2026.
             </li>
           </ol>
           <P dim>
